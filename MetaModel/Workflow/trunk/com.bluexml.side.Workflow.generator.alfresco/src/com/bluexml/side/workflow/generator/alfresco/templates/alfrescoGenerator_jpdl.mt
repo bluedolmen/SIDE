@@ -84,7 +84,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 	  		<%}%>
 	  	</task>
 
-	  	<%for (transition.sort("condition")){%>
+	  	<%for (transition.sort("condition").nReverse()){%>
 	  	
 	  	<transition name="<%name%>" to="<%to.name%>">
 	  		<%for (action) {%>
@@ -156,7 +156,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 	  		<%}%>
 	  	</task>
 
-	  	<%for (transition.sort("condition")){%>
+	  	<%for (transition.sort("condition").nReverse()){%>
 	  	
 	  	<transition name="<%name%>" to="<%to.name%>">
 	  		<%for (action) {%>
@@ -222,7 +222,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 	  			<%}%>	  		
 	  		<%}%>
 
-	  	<%for (transition.sort("condition")){%>
+	  	<%for (transition.sort("condition").nReverse()){%>
 	  	
 	  	<transition name="<%name%>" to="<%to.name%>">
 	  		<%for (action) {%>
@@ -250,7 +250,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 
 <%for (join){%>
 	<join name="<%name%>">
-		<%for (transition.sort("condition")){%>
+		<%for (transition.sort("condition").nReverse()){%>
 	  	
 		<transition name="<%name%>" to="<%to.name%>">
 	  		<%for (action) {%>
@@ -277,7 +277,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 
 <%for (fork){%>
 	<fork name="<%name%>">
-		<%for (transition.sort("condition")){%>
+		<%for (transition.sort("condition").nReverse()){%>
 	  	
 		<transition name="<%to.name%>" to="<%to.name%>">
 	  		<%for (action) {%>
@@ -305,7 +305,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 
 <%for (decision){%>
 	<decision name="<%name%>">
-		<%for (transition.sort("condition")){%>
+		<%for (transition.sort("condition").nReverse()){%>
 	  	
 		<transition name="<%to.name%>" to="<%to.name%>">
 	  		<%for (action) {%>
@@ -338,7 +338,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 		<variable name="<%name%>" access="<%access%>" mapped-name="<%mappedName%>" />
 		<%}%>
 		
-		<%for (transition.sort("condition")){%>
+		<%for (transition.sort("condition").nReverse()){%>
 	  	
 		<transition name="<%to.name%>" to="<%to.name%>">
 	  		<%for (action) {%>
