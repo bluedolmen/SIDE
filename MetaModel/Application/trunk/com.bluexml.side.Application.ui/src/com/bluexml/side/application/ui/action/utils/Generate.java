@@ -1,6 +1,7 @@
 package com.bluexml.side.application.ui.action.utils;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -79,8 +80,10 @@ public class Generate extends WorkspaceJob {
 		this.configuration = configuration;
 		this.models = models;
 		setProperty(IProgressConstants.KEEPONE_PROPERTY, Boolean.TRUE);
-//		Image img = SWTResourceManager.getImage("/com.bluexml.side.Application.ui/icon/side_16.gif");
-//		setProperty(IProgressConstants.ICON_PROPERTY, ImageDescriptor.createFromImage(img));
+		Bundle plugin = Platform.getBundle(Activator.PLUGIN_ID);
+		URL imgPath = plugin.getResource("/icon/side_16.gif");
+		ImageDescriptor imgDesc = ImageDescriptor.createFromURL(imgPath);
+		setProperty(IProgressConstants.ICON_PROPERTY, imgDesc);
 
 	}
 
