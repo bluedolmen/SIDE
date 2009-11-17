@@ -158,7 +158,7 @@
     </eOperations>
     <eOperations name="getAllSourceAssociationEnds" upperBound="-1" eType="#//AssociationEnd">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )"/>
+        <details key="body" value="AssociationEnd.allInstances() -> select (ae | ae.linkedClass.oclIsTypeOf(Clazz) and ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass.oclAsType(Clazz)) )"/>
         <details key="description" value="returns association ends where this clazz is source including inherited associations (association ends cannot link to aspects)"/>
       </eAnnotations>
     </eOperations>

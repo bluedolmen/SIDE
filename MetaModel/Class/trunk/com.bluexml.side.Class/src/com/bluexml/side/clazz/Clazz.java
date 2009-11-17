@@ -284,7 +284,7 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )' description='returns association ends where this clazz is source including inherited associations (association ends cannot link to aspects)'"
+	 *        annotation="http://www.bluexml.com/OCL body='AssociationEnd.allInstances() -> select (ae | ae.linkedClass.oclIsTypeOf(Clazz) and ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass.oclAsType(Clazz)) )' description='returns association ends where this clazz is source including inherited associations (association ends cannot link to aspects)'"
 	 * @generated
 	 */
 	EList<AssociationEnd> getAllSourceAssociationEnds();

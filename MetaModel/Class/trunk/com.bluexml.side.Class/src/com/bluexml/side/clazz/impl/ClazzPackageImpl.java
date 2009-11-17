@@ -1071,7 +1071,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (clazzEClass.getEOperations().get(15), 
 		   source, 
 		   new String[] {
-			 "body", "AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )",
+			 "body", "AssociationEnd.allInstances() -> select (ae | ae.linkedClass.oclIsTypeOf(Clazz) and ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass.oclAsType(Clazz)) )",
 			 "description", "returns association ends where this clazz is source including inherited associations (association ends cannot link to aspects)"
 		   });		
 		addAnnotation
