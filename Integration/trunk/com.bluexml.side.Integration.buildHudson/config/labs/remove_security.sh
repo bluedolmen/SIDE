@@ -56,6 +56,7 @@ for f in `find $SOURCE_PATH -type f -name "*.java"`; do
 	# delete line having the pattern 'com.bluexml.side.Util.security'
 	perl -ni -e 'print unless /com.bluexml.side.Util.security/' $f
 	perl -ni -e 'print unless /com.bluexml.side.util.security./' $f
+	perl -ni -e 'print unless /SidePreferences.getKeys/' $f
 	
 	
 	if grep -n "public boolean check" $f
