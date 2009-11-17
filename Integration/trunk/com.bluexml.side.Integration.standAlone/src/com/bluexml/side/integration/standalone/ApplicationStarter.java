@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
@@ -146,21 +147,25 @@ public class ApplicationStarter implements IApplication {
 			gen.setHeadless(true);
 			gen.setUser(false);
 			gen.setSystem(true);
-			gen.schedule();
-			gen.join();
-			System.out.println("ploufe");
+			// don't use job scheduler, but invoke the main method 
+			gen.run_(new NullProgressMonitor());
+			
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("### Generate Done");
+		
 	}
 
 	private int securityServices() {
+		System.out.println("args[0] :"+arguments[0]);
 		if (arguments[0].toString().contains("getHostID")) {
 			System.out.println("hostID :" + SystemInfoGetter.getHostWithHash());
 		} else if (arguments[0].toString().contains("setLicense")) {
+			System.out.println("previous license :" + SidePreferences.getKey());
 			SidePreferences.setKey(arguments[1].toString());
 			System.out.println("license recorded :" + SidePreferences.getKey());
 		} else if (arguments[0].toString().contains("getLicense")) {
