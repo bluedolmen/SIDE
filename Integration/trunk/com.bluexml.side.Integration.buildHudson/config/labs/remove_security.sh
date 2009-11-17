@@ -32,10 +32,10 @@ fi
 cd $BUILD_PATH
 # remove projects not to integrate in labs release
 # rm -rf $SOURCE_PATH/S-IDE/Integration
-for f in `ls $SOURCE_PATH/S-IDE/Integration/trunk | grep -v -e 'com.bluexml.side.Integration.eclipse.branding'`
-do
-     rm -rf $SOURCE_PATH/S-IDE/Integration/trunk/$f
-done
+#for f in `ls $SOURCE_PATH/S-IDE/Integration/trunk | grep -v -e 'com.bluexml.side.Integration.eclipse.branding'`
+#do
+#     rm -rf $SOURCE_PATH/S-IDE/Integration/trunk/$f
+#done
 rm -rf $SOURCE_PATH/S-IDE/Util/trunk/com.bluexml.side.Util.security
 rm -rf $SOURCE_PATH/S-IDE/Experimental
 
@@ -114,6 +114,6 @@ echo "SIDE-Labs instead of SIDE-Alfresco and Build_SIDE_Labs instead of Build_SI
 cd $BUILD_PATH
 perl -p -i -e 's/SIDE-Alfresco/SIDE-Labs/g' build.properties
 perl -p -i -e 's/Build_SIDE/Build_SIDE_Labs/g' build.properties
-perl -p -i -e 's/projectExcluded=(.*)$/projectExcluded=Util&com.bluexml.side.Util.security,Integration&com.bluexml.side.Integration.standAlone.metamodel.documentation,Integration&com.bluexml.side.Integration.standAlone,Integration&com.bluexml.side.Integration.eclipse.branding/g' build.properties
+perl -p -i -e 's/projectExcluded=(.*)$/projectExcluded=Util&com.bluexml.side.Util.security,Integration&com.bluexml.side.Integration.standAlone.metamodel.documentation,Integration&com.bluexml.side.Integration.standAlone/g' build.properties
 
 echo "Build & Source updating performed for Labs"
