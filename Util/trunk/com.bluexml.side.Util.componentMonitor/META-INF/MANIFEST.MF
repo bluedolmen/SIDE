@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Application Component Monitor
 Bundle-SymbolicName: com.bluexml.side.Util.componentMonitor;singleton:=true
-Bundle-Version: 1.0.23.v11320-20091117
+Bundle-Version: 1.0.24.v11350-20091117
 Bundle-Activator: com.bluexml.side.util.componentmonitor.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
