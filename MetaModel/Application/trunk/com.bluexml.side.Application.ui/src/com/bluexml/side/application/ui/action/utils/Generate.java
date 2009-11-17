@@ -32,19 +32,22 @@ import com.bluexml.side.application.ui.action.MustBeStopped;
 import com.bluexml.side.util.componentmonitor.AbstractMonitor;
 import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.componentmonitor.Monitor;
+import com.bluexml.side.util.componentmonitor.MonitorListener;
 import com.bluexml.side.util.componentmonitor.guiAdapter.IProgressMonitorAdapter;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.dependencies.ModuleConstraint;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
+import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 import com.bluexml.side.util.feedback.FeedbackActivator;
 import com.bluexml.side.util.feedback.management.FeedbackManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class Generate extends Job {
-	ComponentMonitor componentMonitor;
+	final ComponentMonitor componentMonitor;
 	Configuration configuration;
 	List<Model> models;
 	boolean headless = false;
@@ -52,7 +55,7 @@ public class Generate extends Job {
 	private static int NB_DEPLOY_STEP = 4;
 	private static int NB_GENERAL_STEP = 2;
 
-	private Monitor generalMonitor;
+	final private Monitor generalMonitor;
 	private String logPath;
 
 	private String genPath;
@@ -123,12 +126,24 @@ public class Generate extends Job {
 	 * @throws IllegalAccessException
 	 * @throws IOException
 	 */
-	@Override
-	protected IStatus run(IProgressMonitor monitor) {
+	
+	public IStatus run_(IProgressMonitor monitor) {
 		try {
 			// bind generalMonitor with given monitor from ProgressManager
 			generalMonitor.setParent(new IProgressMonitorAdapter(monitor));
+			componentMonitor.addMonitorListener(new MonitorListener() {
 
+				public void skipTasks(int skippedTask) {
+				}
+
+				public void isCanceled() {
+				}
+
+				public void addText(String txt, LogEntryType type) {
+					String subTask = "" + generalMonitor.getCurrentTask() + " :" + componentMonitor.getCurrentTask();
+					generalMonitor.getParent().subTask(subTask);
+				}
+			});
 			feedbackManager = new FeedbackManager();
 
 			// First we seek the generator parameters, and separate fields
@@ -208,26 +223,20 @@ public class Generate extends Job {
 
 				try {
 					generate(configuration, modelsInfo, configurationParameters, generationParameters);
-				} catch (ClassNotFoundException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					return new Status(Status.ERROR, Activator.PLUGIN_ID, e.getMessage(), e);
 				}
 			} else {
 				generalMonitor.addErrorText(Activator.Messages.getString("Generate_0")); //$NON-NLS-1$
 			}
 
-			monitor.done();
 		} catch (MustBeStopped e1) {
 			generalMonitor.addErrorText(e1.getLocalizedMessage());
 			return Status.CANCEL_STATUS;
 		}
-
+		monitor.done();
 		return Status.OK_STATUS;
 	}
 
@@ -471,6 +480,8 @@ public class Generate extends Job {
 						}
 					} else {
 						this.componentMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.44", elem.getId()), null, null); //$NON-NLS-1$ //$NON-NLS-2$
+						error = true;
+						System.out.println("\nlicense :" + SidePreferences.getKey());
 						this.componentMonitor.skipTasks(NB_GENERATION_STEP);
 					}
 				} else {
@@ -714,6 +725,11 @@ public class Generate extends Job {
 		if (generalMonitor.isCanceled()) {
 			throw new MustBeStopped();
 		}
+	}
+
+	@Override
+	protected IStatus run(IProgressMonitor monitor) {
+		return run_(monitor);
 	}
 
 }
