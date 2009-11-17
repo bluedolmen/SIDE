@@ -9,12 +9,12 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.action.Action;
 import org.eclipse.ui.progress.IProgressConstants;
@@ -44,9 +44,8 @@ import com.bluexml.side.util.feedback.FeedbackActivator;
 import com.bluexml.side.util.feedback.management.FeedbackManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.libs.IFileHelper;
-import com.bluexml.side.util.security.preferences.SidePreferences;
 
-public class Generate extends Job {
+public class Generate extends WorkspaceJob {
 	final ComponentMonitor componentMonitor;
 	Configuration configuration;
 	List<Model> models;
@@ -76,8 +75,9 @@ public class Generate extends Job {
 		this.componentMonitor = componentMonitor;
 		this.configuration = configuration;
 		this.models = models;
-		setProperty(IProgressConstants.KEEP_PROPERTY, Boolean.TRUE);
-		setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
+		setProperty(IProgressConstants.KEEPONE_PROPERTY, Boolean.TRUE);
+		//setProperty(IProgressConstants.ICON_PROPERTY, null);
+
 	}
 
 	protected Action getReservationCompletedAction() {
@@ -237,6 +237,7 @@ public class Generate extends Job {
 			return Status.CANCEL_STATUS;
 		}
 		monitor.done();
+		setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
 		return Status.OK_STATUS;
 	}
 
@@ -481,7 +482,6 @@ public class Generate extends Job {
 					} else {
 						this.componentMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.44", elem.getId()), null, null); //$NON-NLS-1$ //$NON-NLS-2$
 						error = true;
-						System.out.println("\nlicense :" + SidePreferences.getKey());
 						this.componentMonitor.skipTasks(NB_GENERATION_STEP);
 					}
 				} else {
@@ -727,8 +727,13 @@ public class Generate extends Job {
 		}
 	}
 
+//	@Override
+//	protected IStatus run(IProgressMonitor monitor) {
+//		return run_(monitor);
+//	}
+
 	@Override
-	protected IStatus run(IProgressMonitor monitor) {
+	public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 		return run_(monitor);
 	}
 
