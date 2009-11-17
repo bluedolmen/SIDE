@@ -1111,7 +1111,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (associationEClass, 
 		   source, 
 		   new String[] {
-			 "reflexiveAssociationMustHaveRole", "( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))",
+			 "reflexiveAssociationMustHaveRole", "if (self.firstEnd.oclIsTypeOf(Clazz) and self.secondEnd.oclIsTypeOf(Clazz)) then\n( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))\nelse\ntrue\nendif",
 			 "MinAndMaxTarget", "( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )",
 			 "MinAndMaxSource", "( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",

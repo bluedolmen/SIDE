@@ -8,7 +8,7 @@
   <foreignModel>Class.ecore</foreignModel>
   <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
   <genPackages prefix="Clazz" basePackage="com.bluexml.side" disposableProviderFactory="true"
-      ecorePackage="Class.ecore#/">
+      fileExtensions="dt" ecorePackage="Class.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Class.ecore#//AssociationType">
       <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AssociationType/Direct"/>
       <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AssociationType/Aggregation"/>

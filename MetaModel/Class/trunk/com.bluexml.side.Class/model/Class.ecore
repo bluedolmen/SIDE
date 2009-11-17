@@ -210,7 +210,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//TitledNamedClassModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="reflexiveAssociationMustHaveRole" value="( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name &lt;> '' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name &lt;> '' ))"/>
+      <details key="reflexiveAssociationMustHaveRole" value="if (self.firstEnd.oclIsTypeOf(Clazz) and self.secondEnd.oclIsTypeOf(Clazz)) then&#xA;( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name &lt;> '' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name &lt;> '' ))&#xA;else&#xA;true&#xA;endif"/>
       <details key="MinAndMaxTarget" value="( self.secondEnd.cardMax &lt;> '-1' ) implies ( self.secondEnd.cardMin &lt;= self.secondEnd.cardMax )"/>
       <details key="MinAndMaxSource" value="( self.firstEnd.cardMax &lt;> '-1' ) implies ( self.firstEnd.cardMin &lt;= self.firstEnd.cardMax )"/>
       <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
