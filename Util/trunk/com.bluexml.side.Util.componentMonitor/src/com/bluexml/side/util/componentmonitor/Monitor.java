@@ -25,6 +25,7 @@ public class Monitor extends AbstractMonitor {
 
 	public void beginTask(String name, int totalWork) {
 		beginTask(name);
+		currentTask= name;
 		progressBar.setMaximum(totalWork);
 		if (parent !=null) {
 			parent.beginTask(name, totalWork);
@@ -35,6 +36,7 @@ public class Monitor extends AbstractMonitor {
 		if (name != null) {
 			addText(name);
 			progressBarlabel.setText(name);
+			currentTask = name;
 		}
 		currentOpenTask++;
 		if (parent !=null) {

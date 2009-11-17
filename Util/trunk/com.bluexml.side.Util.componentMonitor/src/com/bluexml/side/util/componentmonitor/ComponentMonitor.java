@@ -65,6 +65,7 @@ public class ComponentMonitor extends AbstractMonitor implements CoreInterface {
 
 	public void beginTask(String name, int totalWork) {
 		beginTask(name);
+		currentTask = name;
 		// progressBar.setMaximum(totalWork);
 	}
 

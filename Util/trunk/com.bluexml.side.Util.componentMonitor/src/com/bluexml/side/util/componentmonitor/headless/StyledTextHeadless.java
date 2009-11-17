@@ -11,6 +11,7 @@ public class StyledTextHeadless implements StyledTextInterface {
 	int currentTopIndex;
 
 	public void append(String text) {
+		System.out.print(text);
 		this.text += linesep + text;
 	}
 

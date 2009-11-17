@@ -2,7 +2,9 @@ package com.bluexml.side.util.componentmonitor;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
@@ -22,6 +24,7 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 	int someOfincrementedStep = 0;
 	int currentOpenTask = 0;
 	boolean nbTaskInitialised = false;
+	String currentTask = "";
 	protected AbstractMonitor parent;
 	protected StyledTextInterface styletext;
 	protected ProgressBarInterface progressBar;
@@ -31,6 +34,11 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 	protected DateFormat timestampFormat = new SimpleDateFormat("HH:mm:ss");
 	protected LogHelper consoleLog;
 
+	protected List<MonitorListener> listeners = new ArrayList<MonitorListener>();
+
+	public void addMonitorListener(MonitorListener listener) {
+		listeners.add(listener);
+	}
 
 	public LogHelper getConsoleLog() {
 		return consoleLog;
@@ -68,6 +76,9 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 	}
 
 	private void addText(final String text, final LogEntryType type) {
+		for (MonitorListener monitorListener : listeners) {
+			monitorListener.addText(text, type);
+		}
 		Display currentDisp = UIUtils.getDisplay();
 		currentDisp.syncExec(new Runnable() {
 			public void run() {
@@ -118,6 +129,13 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 	// st += "======================================" + "\n";
 	// return st;
 	// }
+
+	/**
+	 * @return the currentTask
+	 */
+	public String getCurrentTask() {
+		return currentTask;
+	}
 
 	public void setMaxTaskNb(int nb) {
 		progressBar.setMaximum(nb);
