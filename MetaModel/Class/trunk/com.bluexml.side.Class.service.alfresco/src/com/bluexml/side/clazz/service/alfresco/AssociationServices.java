@@ -46,7 +46,7 @@ public class AssociationServices {
 	}
 
 	/**
-	 * Private methode returning the top-package of a class
+	 * Private method returning the top-package of a class
 	 */
 	private static EObject getTopPackage(EObject o) {
 		if (o.eContainer() == null) {
