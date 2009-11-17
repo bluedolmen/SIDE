@@ -15,7 +15,7 @@
       <options key="doc.gen.screenshoot"/>
     </generatorConfigurations>
     <parameters key="generation.options.documentation" value="false"/>
-    <parameters key="generation.option.Skip.Validation" value="true"/>
+    <parameters key="generation.option.Skip.Validation" value="false"/>
     <parameters key="generation.options.clean" value="true"/>
     <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Alfresco/3.x_Labs_and_Entreprise/S-IDE_Alfresco_Share_View_Generator/TCVAL_1_generation_of_simple_view/log"/>
     <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Alfresco/3.x_Labs_and_Entreprise/S-IDE_Alfresco_Share_View_Generator/TCVAL_1_generation_of_simple_view/target"/>
