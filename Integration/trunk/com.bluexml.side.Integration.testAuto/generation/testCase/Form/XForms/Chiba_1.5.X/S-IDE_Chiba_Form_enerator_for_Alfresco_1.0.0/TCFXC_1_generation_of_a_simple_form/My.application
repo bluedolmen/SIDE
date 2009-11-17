@@ -15,7 +15,7 @@
       <options key="doc.gen.screenshoot"/>
     </generatorConfigurations>
     <parameters key="generation.options.documentation" value="false"/>
-    <parameters key="generation.option.Skip.Validation" value="true"/>
+    <parameters key="generation.option.Skip.Validation" value="false"/>
     <parameters key="generation.options.clean" value="true"/>
     <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Form/XForms/Chiba_1.5.X/S-IDE_Chiba_Form_enerator_for_Alfresco_1.0.0/TCFXC_1_generation_of_a_simple_form/log"/>
     <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Form/XForms/Chiba_1.5.X/S-IDE_Chiba_Form_enerator_for_Alfresco_1.0.0/TCFXC_1_generation_of_a_simple_form/target"/>
