@@ -16,24 +16,33 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+import org.eclipse.swt.widgets.Display;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
+import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.Model;
+import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.Generate;
-import com.bluexml.side.util.componentmonitor.headless.FormTextHeadless;
+import com.bluexml.side.util.componentmonitor.ComponentMonitor;
+import com.bluexml.side.util.componentmonitor.Monitor;
+import com.bluexml.side.util.componentmonitor.headLessinterface.LabelInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.ProgressBarInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterface;
 import com.bluexml.side.util.componentmonitor.headless.LabelHeadLess;
 import com.bluexml.side.util.componentmonitor.headless.StyledTextHeadless;
 import com.bluexml.side.util.componentmonitor.headless.progressBarHeadLess;
+import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 import com.bluexml.side.util.libs.SystemInfoGetter;
 import com.bluexml.side.util.security.preferences.SidePreferences;
 
@@ -42,24 +51,25 @@ public class ApplicationStarter implements IApplication {
 	static final String MODELS_KEY = "models";
 
 	protected String[] arguments;
-	
+
 	/**
-	 * application.args[0] :
-	 * getHostID  : return the hostID
-	 * getLicense : return the recorded license
-	 * setLicense : record a new license (must be generated using the HostID)
-	 * $FilePath  : launch generation process from .application model (or many application files if $FilePath is a directory)
-	 * application.args[1] : the configuration name to use for launch generation process 
+	 * application.args[0] : getHostID : return the hostID getLicense : return
+	 * the recorded license setLicense : record a new license (must be generated
+	 * using the HostID) $FilePath : launch generation process from .application
+	 * model (or many application files if $FilePath is a directory)
+	 * application.args[1] : the configuration name to use for launch generation
+	 * process
 	 */
 	public Object start(IApplicationContext context) throws Exception {
 
 		arguments = (String[]) context.getArguments().get("application.args");
-		
+
 		if (securityServices() == 0) {
 			return EXIT_OK;
 		}
-		
+
 		System.out.println("Start !!!!!!!!!!");
+		long time1 = System.currentTimeMillis();
 		if (!arguments[0].toString().contains(".application")) {
 			File root = new File(arguments[0]);
 			String[] extensions = { "application" };
@@ -72,14 +82,8 @@ public class ApplicationStarter implements IApplication {
 					System.out.println("File = " + file.getAbsolutePath());
 					File fileAP = new File(file.getAbsolutePath());
 					System.out.println("file.exists(): " + fileAP.exists());
-					long time1 = System.currentTimeMillis();
-					Generate gen = new Generate();
-					Map<String, Object> conf = loadConfiguration(fileAP, arguments[1]);
-					System.out.println("created, let's run");
-					gen.run((Configuration) conf.get(CONFIGURATION_KEY), (List<Model>) conf.get(MODELS_KEY), new progressBarHeadLess(), new LabelHeadLess(), new progressBarHeadLess(),
-							new LabelHeadLess(), new StyledTextHeadless(), new FormTextHeadless());
-					long time2 = System.currentTimeMillis() - time1;
-					System.out.println("Time " + Long.toString(time2 / 1000));
+
+					generate(fileAP);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -91,43 +95,80 @@ public class ApplicationStarter implements IApplication {
 			// File file = new
 			// File("workspaceStandAlone/StandAlone/models/My.application");
 
-			File file = new File(arguments[0]);
+			
 			// System.out.println("file.exists(): " + file.exists());
-			long time1 = System.currentTimeMillis();
-			Generate gen = new Generate();
-			Map<String, Object> conf = loadConfiguration(file, arguments[1]);
-
-			gen.run((Configuration) conf.get(CONFIGURATION_KEY), (List<Model>) conf.get(MODELS_KEY), new progressBarHeadLess(), new LabelHeadLess(), new progressBarHeadLess(), new LabelHeadLess(),
-					new StyledTextHeadless(), new FormTextHeadless());
-			long time2 = System.currentTimeMillis() - time1;
-			System.out.println("Time " + Long.toString(time2 / 1000));
+			Display.getDefault().asyncExec(new Runnable() {
+				
+				public void run() {
+					File file = new File(arguments[0]);
+					generate(file);
+					
+				}
+			});
+			
 		}
-
+		
+		Job.getJobManager().join(Generate.class, null);
+		
 		System.out.println("End Generation");
-
+		long time2 = System.currentTimeMillis() - time1;
+		System.out.println("Time " + Long.toString(time2 / 1000));
 		// System.out.println("END !!!!!!!!!!");
 
 		return EXIT_OK;
 	}
 
+	private void generate(File fileAP) {
+		Map<String, Object> conf = loadConfiguration(fileAP, arguments[1]);
+		Configuration configuration = (Configuration) conf.get(CONFIGURATION_KEY);
+
+		// instantiate general monitor
+		ProgressBarInterface progressBar = new progressBarHeadLess();
+		LabelInterface label = new LabelHeadLess();
+		ProgressBarInterface progressBar2 = new progressBarHeadLess();
+		LabelInterface label2 = new LabelHeadLess();
+		StyledTextInterface styletext = new StyledTextHeadless();
+
+		String fileName = "general_" + Generate.class.getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+		String otherLogPath = ""; //$NON-NLS-1$
+		for (ConfigurationParameters p : configuration.getParameters()) {
+			if (p.getKey().equals(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral())) {
+				otherLogPath = p.getValue();
+				break;
+			}
+		}
+		Monitor generalMonitor = new Monitor(styletext, progressBar, label, otherLogPath, configuration.getName(), fileName);
+
+		ComponentMonitor componentMonitor = new ComponentMonitor(styletext, progressBar2, null, label2, generalMonitor, null, LogType.GENERATION, generalMonitor.getConsoleLog(), fileName);
+		try {
+			Generate gen = new Generate(configuration, (List<Model>) conf.get(MODELS_KEY), generalMonitor, componentMonitor);
+			System.out.println("created, let's run");
+			gen.setHeadless(true);
+			gen.setUser(false);
+			gen.setSystem(true);
+			gen.schedule();
+			gen.join();
+			System.out.println("ploufe");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("### Generate Done");
+	}
+
 	private int securityServices() {
 		if (arguments[0].toString().contains("getHostID")) {
-			System.out.println("hostID :"+SystemInfoGetter.getHostWithHash());
+			System.out.println("hostID :" + SystemInfoGetter.getHostWithHash());
 		} else if (arguments[0].toString().contains("setLicense")) {
 			SidePreferences.setKey(arguments[1].toString());
-			System.out.println("license recorded :"+SidePreferences.getKey());
+			System.out.println("license recorded :" + SidePreferences.getKey());
 		} else if (arguments[0].toString().contains("getLicense")) {
-			System.out.println("recorded license :"+SidePreferences.getKey());
-		}
-		else {
+			System.out.println("recorded license :" + SidePreferences.getKey());
+		} else {
 			return -1;
 		}
 		return 0;
-	}
-
-	public void stop() {
-		// nothing to do
-
 	}
 
 	protected Map<String, Object> loadConfiguration(File filePath, String name) {
@@ -153,7 +194,8 @@ public class ApplicationStarter implements IApplication {
 			IPath location = Path.fromOSString(filePath.getAbsolutePath());
 			System.out.println("location: " + location);
 			file = workspace.getRoot().getFileForLocation(location);
-			if (file == null) file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath()));
+			if (file == null)
+				file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath()));
 			System.out.println("file: " + file);
 
 		} catch (Exception e1) {
@@ -163,8 +205,10 @@ public class ApplicationStarter implements IApplication {
 		System.out.println("getWorkspace: " + ResourcesPlugin.getWorkspace());
 		System.out.println("getRoot: " + ResourcesPlugin.getWorkspace().getRoot().exists() + " -> " + ResourcesPlugin.getWorkspace().getRoot());
 		System.out.println("getPath: " + ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath())));
-		if (file == null) file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath()));
-		if (file == null) System.out.println("\tfile is null ");
+		if (file == null)
+			file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath()));
+		if (file == null)
+			System.out.println("\tfile is null ");
 
 		System.out.println("\tfile.exists(): " + file.exists());
 
@@ -232,7 +276,11 @@ public class ApplicationStarter implements IApplication {
 			System.out.println("Exception  " + e1.getMessage());
 			e1.printStackTrace();
 		}
-		System.out.println("### Generate Done");
 		return extractedConfiguration;
+	}
+
+	public void stop() {
+		// TODO Auto-generated method stub
+		System.out.println("Application Stop.");
 	}
 }
