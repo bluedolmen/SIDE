@@ -98,7 +98,7 @@ public class URLFieldImpl extends CharFieldImpl implements URLField {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.URL_FIELD__VERIFY_EXISTS:
-				return isVerify_exists() ? Boolean.TRUE : Boolean.FALSE;
+				return isVerify_exists();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,7 +112,7 @@ public class URLFieldImpl extends CharFieldImpl implements URLField {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.URL_FIELD__VERIFY_EXISTS:
-				setVerify_exists(((Boolean)newValue).booleanValue());
+				setVerify_exists((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

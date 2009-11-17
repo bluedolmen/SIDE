@@ -225,13 +225,13 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.CHOICE_FIELD__MIN_BOUND:
-				return new Integer(getMin_bound());
+				return getMin_bound();
 			case FormPackage.CHOICE_FIELD__MAX_BOUND:
-				return new Integer(getMax_bound());
+				return getMax_bound();
 			case FormPackage.CHOICE_FIELD__WIDGET:
 				return getWidget();
 			case FormPackage.CHOICE_FIELD__MULTIPLE:
-				return isMultiple() ? Boolean.TRUE : Boolean.FALSE;
+				return isMultiple();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -246,16 +246,16 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.CHOICE_FIELD__MIN_BOUND:
-				setMin_bound(((Integer)newValue).intValue());
+				setMin_bound((Integer)newValue);
 				return;
 			case FormPackage.CHOICE_FIELD__MAX_BOUND:
-				setMax_bound(((Integer)newValue).intValue());
+				setMax_bound((Integer)newValue);
 				return;
 			case FormPackage.CHOICE_FIELD__WIDGET:
 				setWidget((ChoiceWidgetType)newValue);
 				return;
 			case FormPackage.CHOICE_FIELD__MULTIPLE:
-				setMultiple(((Boolean)newValue).booleanValue());
+				setMultiple((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

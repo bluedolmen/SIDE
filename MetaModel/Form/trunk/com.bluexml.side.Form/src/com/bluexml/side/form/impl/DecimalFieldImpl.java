@@ -228,9 +228,9 @@ public class DecimalFieldImpl extends NumericalFieldImpl implements DecimalField
 			case FormPackage.DECIMAL_FIELD__MAX_VALUE:
 				return getMax_value();
 			case FormPackage.DECIMAL_FIELD__MAX_DIGITS:
-				return new Integer(getMax_digits());
+				return getMax_digits();
 			case FormPackage.DECIMAL_FIELD__DECIMAL_PLACES:
-				return new Integer(getDecimal_places());
+				return getDecimal_places();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -250,10 +250,10 @@ public class DecimalFieldImpl extends NumericalFieldImpl implements DecimalField
 				setMax_value((String)newValue);
 				return;
 			case FormPackage.DECIMAL_FIELD__MAX_DIGITS:
-				setMax_digits(((Integer)newValue).intValue());
+				setMax_digits((Integer)newValue);
 				return;
 			case FormPackage.DECIMAL_FIELD__DECIMAL_PLACES:
-				setDecimal_places(((Integer)newValue).intValue());
+				setDecimal_places((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
