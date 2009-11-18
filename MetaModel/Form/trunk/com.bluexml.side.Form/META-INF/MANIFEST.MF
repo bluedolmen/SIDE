@@ -16,5 +16,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Class;visibility:=reexport,
  com.bluexml.side.Common;visibility:=reexport,
  com.bluexml.side.Util.metaModel.validate,
- com.bluexml.side.Workflow
+ com.bluexml.side.Workflow,
+ org.eclipse.emf.ecore.xmi
 Bundle-ActivationPolicy: lazy
