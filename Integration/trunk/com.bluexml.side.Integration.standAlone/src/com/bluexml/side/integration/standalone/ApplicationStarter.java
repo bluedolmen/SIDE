@@ -143,9 +143,10 @@ public class ApplicationStarter implements IApplication {
 	}
 
 	private int securityServices() {
-		System.out.println("args[0] :" + arguments[0]);
+		//System.out.println("args[0] :" + arguments[0]);
 		if (arguments[0].toString().contains("getHostID")) {
-			System.out.println("hostID :" + SystemInfoGetter.getHostWithHash());
+			//System.out.println("hostID :" + SystemInfoGetter.getHostWithHash());
+			System.out.println(SystemInfoGetter.getHostWithHash());
 		} else if (arguments[0].toString().contains("setLicense")) {
 			System.out.println("previous license :" + SidePreferences.getKey());
 			SidePreferences.setKey(arguments[1].toString());
