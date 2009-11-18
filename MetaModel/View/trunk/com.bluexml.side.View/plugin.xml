@@ -16,5 +16,12 @@
             genModel="model/view.genmodel"
             uri="http://www.kerblue.org/view/1.0"/>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="com.bluexml.side.view.util.ViewResourceFactory"
+            type="view">
+      </parser>
+   </extension>
 
 </plugin>
