@@ -16,5 +16,12 @@
             class="com.bluexml.side.requirements.RequirementsPackage"
             genModel="model/requirements.genmodel"/>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="com.bluexml.side.requirements.util.RequirementsResourceFactory"
+            type="requirements">
+      </parser>
+   </extension>
 
 </plugin>
