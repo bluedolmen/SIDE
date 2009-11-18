@@ -1180,13 +1180,22 @@ public interface ClazzPackage extends EPackage {
 	int ASPECT__ATTRIBUTES = ABSTRACT_CLASS__ATTRIBUTES;
 
 	/**
+	 * The feature id for the '<em><b>Generalizations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT__GENERALIZATIONS = ABSTRACT_CLASS_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Aspect</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASPECT_FEATURE_COUNT = ABSTRACT_CLASS_FEATURE_COUNT + 0;
+	int ASPECT_FEATURE_COUNT = ABSTRACT_CLASS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.ClassCommentImpl <em>Class Comment</em>}' class.
@@ -1918,6 +1927,17 @@ public interface ClazzPackage extends EPackage {
 	EClass getAspect();
 
 	/**
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.clazz.Aspect#getGeneralizations <em>Generalizations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Generalizations</em>'.
+	 * @see com.bluexml.side.clazz.Aspect#getGeneralizations()
+	 * @see #getAspect()
+	 * @generated
+	 */
+	EReference getAspect_Generalizations();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.AbstractClass <em>Abstract Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2344,6 +2364,14 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ASPECT = eINSTANCE.getAspect();
+
+		/**
+		 * The meta object literal for the '<em><b>Generalizations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASPECT__GENERALIZATIONS = eINSTANCE.getAspect_Generalizations();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.AbstractClassImpl <em>Abstract Class</em>}' class.

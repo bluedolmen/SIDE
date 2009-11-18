@@ -352,6 +352,8 @@
       </eAnnotations>
       <eParameters name="other" eType="#//Aspect"/>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generalizations" upperBound="-1"
+        eType="#//Aspect"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//TitledNamedClassModelElement ../../com.bluexml.side.Common/model/Common.ecore#//Container">
     <eAnnotations source="http://www.bluexml.com/OCL">

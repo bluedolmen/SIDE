@@ -94,6 +94,7 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//EnumerationLiteral/enum"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Aspect">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Aspect/generalizations"/>
       <genOperations ecoreOperation="Class.ecore#//Aspect/equalsForMerge">
         <genParameters ecoreParameter="Class.ecore#//Aspect/equalsForMerge/other"/>
       </genOperations>

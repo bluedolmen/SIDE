@@ -514,6 +514,15 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAspect_Generalizations() {
+		return (EReference)aspectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAbstractClass() {
 		return abstractClassEClass;
 	}
@@ -685,6 +694,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEReference(enumerationLiteralEClass, ENUMERATION_LITERAL__ENUM);
 
 		aspectEClass = createEClass(ASPECT);
+		createEReference(aspectEClass, ASPECT__GENERALIZATIONS);
 
 		abstractClassEClass = createEClass(ABSTRACT_CLASS);
 		createEReference(abstractClassEClass, ABSTRACT_CLASS__ATTRIBUTES);
@@ -862,6 +872,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEReference(getEnumerationLiteral_Enum(), this.getEnumeration(), this.getEnumeration_Literals(), "enum", null, 0, 1, EnumerationLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(aspectEClass, Aspect.class, "Aspect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAspect_Generalizations(), this.getAspect(), null, "generalizations", null, 0, -1, Aspect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(aspectEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAspect(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
