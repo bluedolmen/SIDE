@@ -16,5 +16,12 @@
        class = "com.bluexml.side.clazz.ClazzPackage"
        genModel = "model/Class.genmodel" /> 
   </extension>
+  <extension
+        point="org.eclipse.emf.ecore.extension_parser">
+     <parser
+           class="com.bluexml.side.clazz.util.ClazzResourceFactory"
+           type="dt">
+     </parser>
+  </extension>
 
 </plugin>

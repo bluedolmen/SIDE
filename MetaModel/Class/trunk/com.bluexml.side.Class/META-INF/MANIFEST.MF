@@ -16,5 +16,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl,
  org.eclipse.ocl.ecore,
  com.bluexml.side.Util.ecore,
- com.bluexml.side.Util.metaModel.validate
+ com.bluexml.side.Util.metaModel.validate,
+ org.eclipse.emf.ecore.xmi
 Bundle-ActivationPolicy: lazy
