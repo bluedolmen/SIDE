@@ -45,7 +45,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 
 <%for (startstate){%>
 	  <start-state name="<%name%>">
-	  	<task name="wfbx<%current("Process").name%>:<%name%>" swimlane="<%initiator.actorid%>">
+	  	<task name="wfbx<%current("Process").name%>:<%name%>">
 			<%for (event){%>
 			<event type="<%type%>">
 				<%for (action){%>
