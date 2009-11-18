@@ -92,6 +92,7 @@ public class ApplicationStarter implements IApplication {
 			// System.out.println("file.exists(): " + file.exists());
 
 			File file = new File(arguments[0]);
+			System.out.println("File = " + arguments[0]);
 			generate(file);
 		}
 
