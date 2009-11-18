@@ -17,14 +17,12 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
-import org.eclipse.swt.widgets.Display;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
@@ -91,26 +89,12 @@ public class ApplicationStarter implements IApplication {
 			}
 			// Start Generation
 		} else {
-			// System.out.println("Start Generation");
-
-			// File file = new
-			// File("workspaceStandAlone/StandAlone/models/My.application");
-
-			
 			// System.out.println("file.exists(): " + file.exists());
-			Display.getDefault().asyncExec(new Runnable() {
-				
-				public void run() {
-					File file = new File(arguments[0]);
-					generate(file);
-					
-				}
-			});
-			
+
+			File file = new File(arguments[0]);
+			generate(file);
 		}
-		
-		Job.getJobManager().join(Generate.class, null);
-		
+
 		System.out.println("End Generation");
 		long time2 = System.currentTimeMillis() - time1;
 		System.out.println("Time " + Long.toString(time2 / 1000));
@@ -147,21 +131,19 @@ public class ApplicationStarter implements IApplication {
 			gen.setHeadless(true);
 			gen.setUser(false);
 			gen.setSystem(true);
-			// don't use job scheduler, but invoke the main method 
+			// don't use job scheduler, but invoke the main method
 			gen.run_(new NullProgressMonitor());
-			
-			
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("### Generate Done");
-		
+
 	}
 
 	private int securityServices() {
-		System.out.println("args[0] :"+arguments[0]);
+		System.out.println("args[0] :" + arguments[0]);
 		if (arguments[0].toString().contains("getHostID")) {
 			System.out.println("hostID :" + SystemInfoGetter.getHostWithHash());
 		} else if (arguments[0].toString().contains("setLicense")) {
