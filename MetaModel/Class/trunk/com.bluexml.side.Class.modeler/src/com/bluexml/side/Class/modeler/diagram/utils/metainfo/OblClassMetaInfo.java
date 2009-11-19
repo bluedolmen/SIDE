@@ -27,30 +27,30 @@ public class OblClassMetaInfo extends OblTypeMetaInfo {
 
 	public void initAllMetaInfo() {
 		allMetaInfos = new ArrayList<Object>();
+//
+//		CommonFactory fact = CommonFactoryImpl.init();
+//		MetaInfo c;
 
-		CommonFactory fact = CommonFactoryImpl.init();
-		MetaInfo c;
-
-		c = fact.createMetaInfo();
-		c.setKey("simplifyCreation");
-		c.setValueType(boolean.class);
-		allMetaInfos.add(c);
+//		c = fact.createMetaInfo();
+//		c.setKey("simplifyCreation");
+//		c.setValueType(boolean.class);
+//		allMetaInfos.add(c);
 		
-		c = fact.createMetaInfo();
-		c.setKey("treeNode");
-		c.setValueType(boolean.class);
-		allMetaInfos.add(c);
+//		c = fact.createMetaInfo();
+//		c.setKey("treeNode");
+//		c.setValueType(boolean.class);
+//		allMetaInfos.add(c);
 
-		c = fact.createMetaInfo();
-		c.setKey("isContainer");
-		c.setValueType(boolean.class);
-		allMetaInfos.add(c);
+//		c = fact.createMetaInfo();
+//		c.setKey("isContainer");
+//		c.setValueType(boolean.class);
+//		allMetaInfos.add(c);
 
-		c = fact.createMetaInfo();
-		c.setKey("visual-component");
-		c.setValueType(VisualTypeComponent_Enum.class);
-		c.setValueSet(VisualTypeComponent_Enum.toCollection());
-		allMetaInfos.add(c);
+//		c = fact.createMetaInfo();
+//		c.setKey("visual-component");
+//		c.setValueType(VisualTypeComponent_Enum.class);
+//		c.setValueSet(VisualTypeComponent_Enum.toCollection());
+//		allMetaInfos.add(c);
 	}
 
 }

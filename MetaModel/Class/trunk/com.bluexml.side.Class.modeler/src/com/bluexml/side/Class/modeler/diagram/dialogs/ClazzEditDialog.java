@@ -57,8 +57,6 @@ import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.Stereotype;
 
-
-
 public class ClazzEditDialog extends Dialog implements IDialogConstants {
 	/** The ID of the property name */
 	public static final String CLASSE_NAME = "class name";
@@ -80,9 +78,9 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 
 	// SWT Objects
 	private Text classeNameTxt;
-	
+
 	private Text classeTitleTxt;
-	
+
 	private Text classeDescriptionTxt;
 
 	private Map data;
@@ -90,11 +88,11 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 	private Control view;
 
 	private Control layout;
-	
+
 	private Button checkIsAbstractBt;
-	
+
 	private Button checkIsDeprecatedBt;
-	
+
 	private Map drawConstraints = new HashMap();
 
 	private Text documentation;
@@ -159,12 +157,12 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 
 		createGeneralTab(tabFolder);
 		createViewTab(tabFolder);
-		createLayoutTab(tabFolder);
-		createAspectOrganizationTabItem(tabFolder);
-		createOptionsTab(tabFolder);
+//		createLayoutTab(tabFolder);
+//		createAspectOrganizationTabItem(tabFolder);
+//		createOptionsTab(tabFolder);
 		createDocumentationTab(tabFolder);
 	}
-	
+
 	private void createDocumentationTab(TabFolder parent) {
 		// Create tab item and add it composite that fills it
 		TabItem viewItem = new TabItem((TabFolder) parent, SWT.NONE);
@@ -175,11 +173,10 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		documentation = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL
-				| SWT.BORDER);
+		documentation = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
 		documentation.setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
-	
+
 	private void createOptionsTab(TabFolder parent) {
 		// Create tab item and add it composite that fills it
 		TabItem generalItem = new TabItem((TabFolder) parent, SWT.NONE);
@@ -194,11 +191,9 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 
 		for (Object obj : c) {
 			if (obj instanceof MetaInfo)
-				MetaInfoHelper.drawConstraint(composite, (MetaInfo) obj,
-						drawConstraints,classe);
+				MetaInfoHelper.drawConstraint(composite, (MetaInfo) obj, drawConstraints, classe);
 			else if (obj instanceof MetaInfoGroup)
-				MetaInfoHelper.drawConstraintGroup(composite,
-						(MetaInfoGroup) obj, drawConstraints,classe);
+				MetaInfoHelper.drawConstraintGroup(composite, (MetaInfoGroup) obj, drawConstraints, classe);
 		}
 	}
 
@@ -211,11 +206,11 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
+
 		view = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
 		view.setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
-	
+
 	private void createLayoutTab(TabFolder parent) {
 		// Create tab item and add it composite that fills it
 		TabItem layoutItem = new TabItem((TabFolder) parent, SWT.NONE);
@@ -225,7 +220,7 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
+
 		layout = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
 		layout.setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
@@ -244,26 +239,26 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 		propertyNameLbl.setText("Name : ");
 		classeNameTxt = new Text(composite, SWT.BORDER);
 		classeNameTxt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		Label classTitleLbl = new Label(composite, SWT.NONE);
 		classTitleLbl.setText("Title : ");
 		classeTitleTxt = new Text(composite, SWT.BORDER);
 		classeTitleTxt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		Label classDesriptionLbl = new Label(composite, SWT.NONE);
 		classDesriptionLbl.setText("Description : ");
 		classeDescriptionTxt = new Text(composite, SWT.BORDER);
 		classeDescriptionTxt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		Label isAbstractLbl = new Label(composite, SWT.NONE);
 		isAbstractLbl.setText("Is abstract : ");
 		checkIsAbstractBt = new Button(composite, SWT.CHECK);
-		
+
 		Label isDeprecated = new Label(composite, SWT.NONE);
 		isDeprecated.setText("Is deprecated : ");
 		checkIsDeprecatedBt = new Button(composite, SWT.CHECK);
 	}
-	
+
 	private void createAspectOrganizationTabItem(TabFolder parent) {
 		// Create tab item and add it composite that fills it
 		TabItem tabItem = new TabItem(parent, SWT.NONE);
@@ -274,21 +269,21 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 		// Add layout on composite
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
-		//Create panel table
+
+		// Create panel table
 		Composite panelTable = new Composite(composite, SWT.NONE);
-		panelTable.setLayout(new GridLayout(1,false));
+		panelTable.setLayout(new GridLayout(1, false));
 		panelTable.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
-		//Create panel button
+
+		// Create panel button
 		Composite panelButton = new Composite(composite, SWT.NONE);
-		panelButton.setLayout(new GridLayout(1,false));
+		panelButton.setLayout(new GridLayout(1, false));
 		panelButton.setLayoutData(new GridData(GridData.FILL_BOTH | GridData.HORIZONTAL_ALIGN_CENTER));
 
-		//Create Table
+		// Create Table
 		createTableViewer(panelTable);
-        
-        //Create Button UP
+
+		// Create Button UP
 		Button up = new Button(panelButton, SWT.PUSH | SWT.CENTER);
 		up.setText("Up");
 		up.addSelectionListener(new SelectionAdapter() {
@@ -296,26 +291,26 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 				int index = table.getSelectionIndex();
 				if (index > 0) {
 					TableItem itemMoved = table.getItem(index);
-					TableItem otherItem = table.getItem(index-1);
+					TableItem otherItem = table.getItem(index - 1);
 					Object objectMoved = itemMoved.getData();
 					Object otherObject = otherItem.getData();
 					itemMoved.setData(otherObject);
-					otherItem.setData(objectMoved);					
+					otherItem.setData(objectMoved);
 					itemMoved.setText(((Aspect) otherObject).getName());
 					otherItem.setText(((Aspect) objectMoved).getName());
 				}
 			}
 		});
-		
-		//Create Button DOWN
+
+		// Create Button DOWN
 		Button down = new Button(panelButton, SWT.PUSH | SWT.CENTER);
 		down.setText("Down");
 		down.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				int index = table.getSelectionIndex();
-				if (index < table.getItemCount()-1) {
+				if (index < table.getItemCount() - 1) {
 					TableItem itemMoved = table.getItem(index);
-					TableItem otherItem = table.getItem(index+1);	
+					TableItem otherItem = table.getItem(index + 1);
 					Object objectMoved = itemMoved.getData();
 					Object otherObject = otherItem.getData();
 					itemMoved.setData(otherObject);
@@ -326,34 +321,33 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 			}
 		});
 	}
-	
+
 	/**
-     * 
-     * @param composite
-     */
-    private void createTableViewer(Composite panelTable)
-    {
-    	int style = SWT.SINGLE | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.HIDE_SELECTION;
+	 * 
+	 * @param composite
+	 */
+	private void createTableViewer(Composite panelTable) {
+		int style = SWT.SINGLE | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.HIDE_SELECTION;
 		table = new Table(panelTable, style);
-        TableColumn aspectColumn = new TableColumn(table, SWT.LEFT);
-        aspectColumn.setText("Aspects");
-        aspectColumn.setWidth(350);
-        table.setHeaderVisible(true);
-        table.setLinesVisible(true);
-        GridData gridData = new GridData(GridData.FILL_BOTH);
-        gridData.grabExcessVerticalSpace = true;
-        gridData.horizontalSpan = 2;
-        table.setLayoutData(gridData);
-        
-        TableViewer tableViewer = new TableViewer(table);
+		TableColumn aspectColumn = new TableColumn(table, SWT.LEFT);
+		aspectColumn.setText("Aspects");
+		aspectColumn.setWidth(350);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		GridData gridData = new GridData(GridData.FILL_BOTH);
+		gridData.grabExcessVerticalSpace = true;
+		gridData.horizontalSpan = 2;
+		table.setLayoutData(gridData);
 
-        tableViewer.setUseHashlookup(true);
-        tableViewer.setColumnProperties(new String[] {"Aspects"});
+		TableViewer tableViewer = new TableViewer(table);
 
-        tableViewer.setContentProvider(new AspectContentProvider());
-        tableViewer.setLabelProvider(new AspectLabelProvider());
-        tableViewer.setInput(classe.getAspects());
-    }
+		tableViewer.setUseHashlookup(true);
+		tableViewer.setColumnProperties(new String[] { "Aspects" });
+
+		tableViewer.setContentProvider(new AspectContentProvider());
+		tableViewer.setLabelProvider(new AspectLabelProvider());
+		tableViewer.setInput(classe.getAspects());
+	}
 
 	/**
 	 * Initialize the content of the widgets
@@ -367,29 +361,29 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 			classeDescriptionTxt.setText(classe.getDescription());
 		checkIsAbstractBt.setSelection(classe.isAbstract());
 		checkIsDeprecatedBt.setSelection(classe.isDeprecated());
-		
-		//Layout & View
+
+		// Layout & View
 		for (Object o : classe.getComments()) {
 			Comment c = (Comment) o;
-			if (isStereotyped(c,"view")) {
+			if (isStereotyped(c, "view")) {
 				((Text) view).setText(c.getValue());
 			}
-			if (isStereotyped(c,"layout")) {
+			if (isStereotyped(c, "layout")) {
 				((Text) layout).setText(c.getValue());
 			}
 		}
-		
-		//MetaInfo
+
+		// MetaInfo
 		MetaInfoHelper.loadData(classe, drawConstraints);
-		
-		//Doc
+
+		// Doc
 		if (classe.getDocumentation() != null)
 			documentation.setText(classe.getDocumentation());
 	}
 
 	private boolean isStereotyped(Comment c, String stereotype) {
 		boolean result = false;
-		
+
 		for (Object obj : c.getStereotypes()) {
 			if (obj instanceof Stereotype) {
 				Stereotype s = (Stereotype) obj;
@@ -413,25 +407,25 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 			data.put(CLASSE_TITLE, classeTitleTxt.getText());
 			data.put(CLASSE_DESCRIPTION, classeDescriptionTxt.getText());
 			data.put(CLASSE_VIEW, ((Text) view).getText());
-			data.put(CLASSE_LAYOUT, ((Text) layout).getText());
-			ConstraintsDataStructure dataConstraints = MetaInfoHelper.getDataStructure(drawConstraints);
-			data.put(CLASSE_METAINFO, dataConstraints);
+			
+//			data.put(CLASSE_LAYOUT, ((Text) layout).getText());
+//			ConstraintsDataStructure dataConstraints = MetaInfoHelper.getDataStructure(drawConstraints);
+//			data.put(CLASSE_METAINFO, dataConstraints);
 			data.put(CLASSE_ISABSTRACT, checkIsAbstractBt.getSelection());
 			data.put(CLASSE_DOCUMENTATION, documentation.getText());
 			data.put(CLASSE_ISDEPRECATED, checkIsDeprecatedBt.getSelection());
-			
-			//Refresh order aspects
-			classe.getAspects().clear();
-			for (TableItem ti : table.getItems())
-				classe.getAspects().add((Aspect) ti.getData());
+
+			// Refresh order aspects
+//			classe.getAspects().clear();
+//			for (TableItem ti : table.getItems()) {
+//				classe.getAspects().add((Aspect) ti.getData());
+//			}
 			super.okPressed();
 		} catch (Exception e) {
 			// TODO change this with a validation listener that disable the ok
 			// button until the widgets are valid
 			ClazzPlugin.log("Required fields", IStatus.WARNING);
-			MessageDialog
-					.openWarning(getShell(), "Required parameters",
-							"Some parameters are not set.\nPlease, fill those fields before validating.");
+			MessageDialog.openWarning(getShell(), "Required parameters", "Some parameters are not set.\nPlease, fill those fields before validating.");
 		}
 	}
 
@@ -444,61 +438,59 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 		return data;
 	}
 
-	class AspectContentProvider implements IStructuredContentProvider
-    {
-        /**
-         * 
-         * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
-         */
-        public Object[] getElements(Object inputElement)
-        {
-        	return classe.getAspects().toArray();
-        }
-        /**
-         * 
-         * @see org.eclipse.jface.viewers.IContentProvider#dispose()
-         */
-        public void dispose()
-        {
-            //nothing to do
-        }
-        /**
-         * 
-         * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer, java.lang.Object, java.lang.Object)
-         */
-        public void inputChanged(Viewer viewer, Object oldInput, Object newInput)
-        {
-            //nothing to do
-        }
-    }
-	
-	class AspectLabelProvider extends LabelProvider implements ITableLabelProvider
-    {
-        /**
-         * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
-         */
-        public Image getColumnImage(Object element, int columnIndex)
-        {
-            return null;
-        }
-        /**
-         * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object, int)
-         */
-        public String getColumnText(Object element, int columnIndex)
-        {
-            String result = "";
-            switch (columnIndex)
-            {
-                case 0:
-                	if (element instanceof Aspect) {
-						Aspect aspect = (Aspect) element;
-						result = aspect.getName();
-					}
-                    break;
-                default:
-                    break;
-            }
-            return result;
-        }
-    }
+	class AspectContentProvider implements IStructuredContentProvider {
+		/**
+		 * 
+		 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
+		 */
+		public Object[] getElements(Object inputElement) {
+			return classe.getAspects().toArray();
+		}
+
+		/**
+		 * 
+		 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
+		 */
+		public void dispose() {
+			// nothing to do
+		}
+
+		/**
+		 * 
+		 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
+		 *      java.lang.Object, java.lang.Object)
+		 */
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			// nothing to do
+		}
+	}
+
+	class AspectLabelProvider extends LabelProvider implements ITableLabelProvider {
+		/**
+		 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object,
+		 *      int)
+		 */
+		public Image getColumnImage(Object element, int columnIndex) {
+			return null;
+		}
+
+		/**
+		 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object,
+		 *      int)
+		 */
+		public String getColumnText(Object element, int columnIndex) {
+			String result = "";
+			switch (columnIndex) {
+			case 0:
+				if (element instanceof Aspect) {
+					Aspect aspect = (Aspect) element;
+					result = aspect.getName();
+				}
+				break;
+			default:
+				break;
+			}
+			return result;
+		}
+	}
 }

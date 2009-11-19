@@ -17,7 +17,6 @@ package com.bluexml.side.Class.modeler.diagram.utils.metainfo;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.bluexml.side.Class.modeler.diagram.utils.metainfo.value.booleanWithParameter;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
@@ -66,7 +65,6 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void initAllMetaInfo() {
 		allMetaInfos = new ArrayList<Object>();
 
@@ -84,49 +82,49 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
 
-		cg = fact.createMetaInfoGroup();
-		cg.setName("htmlarea");
-		allMetaInfos.add(cg);
-
-		c = fact.createMetaInfo();
-		c.setConstraintType(DataType.STRING);
-		c.setKey("rte-rows");
-		c.setValueType(int.class);
-		cg.getChildren().add(c);
-
-		c = fact.createMetaInfo();
-		c.setConstraintType(DataType.STRING);
-		c.setKey("rte-cols");
-		c.setValueType(int.class);
-		cg.getChildren().add(c);
-
-		c = fact.createMetaInfo();
-		c.setConstraintType(DataType.STRING);
-		c.setKey("rte-width");
-		c.setValueType(int.class);
-		cg.getChildren().add(c);
-
-		c = fact.createMetaInfo();
-		c.setConstraintType(DataType.STRING);
-		c.setKey("rte-height");
-		c.setValueType(int.class);
-		cg.getChildren().add(c);
-
-		cg = fact.createMetaInfoGroup();
-		cg.setName("textarea");
-		allMetaInfos.add(cg);
-
-		c = fact.createMetaInfo();
-		c.setConstraintType(DataType.STRING);
-		c.setKey("textarea-rows");
-		c.setValueType(int.class);
-		cg.getChildren().add(c);
-
-		c = fact.createMetaInfo();
-		c.setConstraintType(DataType.STRING);
-		c.setKey("textarea-cols");
-		c.setValueType(int.class);
-		cg.getChildren().add(c);
+//		cg = fact.createMetaInfoGroup();
+//		cg.setName("htmlarea");
+//		allMetaInfos.add(cg);
+//
+//		c = fact.createMetaInfo();
+//		c.setConstraintType(DataType.STRING);
+//		c.setKey("rte-rows");
+//		c.setValueType(int.class);
+//		cg.getChildren().add(c);
+//
+//		c = fact.createMetaInfo();
+//		c.setConstraintType(DataType.STRING);
+//		c.setKey("rte-cols");
+//		c.setValueType(int.class);
+//		cg.getChildren().add(c);
+//
+//		c = fact.createMetaInfo();
+//		c.setConstraintType(DataType.STRING);
+//		c.setKey("rte-width");
+//		c.setValueType(int.class);
+//		cg.getChildren().add(c);
+//
+//		c = fact.createMetaInfo();
+//		c.setConstraintType(DataType.STRING);
+//		c.setKey("rte-height");
+//		c.setValueType(int.class);
+//		cg.getChildren().add(c);
+//
+//		cg = fact.createMetaInfoGroup();
+//		cg.setName("textarea");
+		//allMetaInfos.add(cg);
+//
+//		c = fact.createMetaInfo();
+//		c.setConstraintType(DataType.STRING);
+//		c.setKey("textarea-rows");
+//		c.setValueType(int.class);
+//		cg.getChildren().add(c);
+//
+//		c = fact.createMetaInfo();
+//		c.setConstraintType(DataType.STRING);
+//		c.setKey("textarea-cols");
+//		c.setValueType(int.class);
+//		cg.getChildren().add(c);
 
 		cg = fact.createMetaInfoGroup();
 		cg.setName("length");
@@ -181,11 +179,11 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		 * Common
 		 */
 
-		c = fact.createMetaInfo();
-		c.setConstraintType(DataType.OBJECT);
-		c.setKey("size");
-		c.setValueType(int.class);
-		allMetaInfos.add(c);
+//		c = fact.createMetaInfo();
+//		c.setConstraintType(DataType.OBJECT);
+//		c.setKey("size");
+//		c.setValueType(int.class);
+//		allMetaInfos.add(c);
 
 		c = fact.createMetaInfo();
 		c.setConstraintType(DataType.OBJECT);
@@ -205,17 +203,17 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
 
-		c = fact.createMetaInfo();
-		c.setConstraintType(DataType.OBJECT);
-		c.setKey("treeNodeName");
-		c.setValueType(boolean.class);
-		allMetaInfos.add(c);
-
-		c = fact.createMetaInfo();
-		c.setConstraintType(DataType.OBJECT);
-		c.setKey("tree");
-		c.setValueType(booleanWithParameter.class);
-		allMetaInfos.add(c);
+//		c = fact.createMetaInfo();
+//		c.setConstraintType(DataType.OBJECT);
+//		c.setKey("treeNodeName");
+//		c.setValueType(boolean.class);
+//		allMetaInfos.add(c);
+//
+//		c = fact.createMetaInfo();
+//		c.setConstraintType(DataType.OBJECT);
+//		c.setKey("tree");
+//		c.setValueType(booleanWithParameter.class);
+//		allMetaInfos.add(c);
 
 		c = fact.createMetaInfo();
 		c.setConstraintType(DataType.OBJECT);

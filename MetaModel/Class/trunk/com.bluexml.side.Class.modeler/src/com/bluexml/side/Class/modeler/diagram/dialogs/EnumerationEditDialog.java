@@ -47,13 +47,13 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 	public static final String ENUMERATION_NAME = "Enumeration name";
 	public static final String ENUMERATION_LITERALS = "Enumeration Literals";
 	public static final String ENUMERATION_ISDYNAMIC = "Enumeration isDynamic";
-	
+
 	private static final int MIN_DIALOG_WIDTH = 500;
 
 	private static final int MIN_DIALOG_HEIGHT = 300;
-	
+
 	private EnumerationLiteralViewer inputParameters;
-	
+
 	private Button checkIsDynamicBt;
 
 	/** Current edited property */
@@ -139,13 +139,14 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 		propertyNameLbl.setText("Name : ");
 		EnumerationNameTxt = new Text(composite, SWT.BORDER);
 		EnumerationNameTxt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
-		Label propertyIsDynamicLbl = new Label(composite, SWT.NONE);
-		propertyIsDynamicLbl.setText("Is Dynamic : ");		
-		checkIsDynamicBt = new Button(composite, SWT.CHECK);				
-		checkIsDynamicBt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+
+		// Label propertyIsDynamicLbl = new Label(composite, SWT.NONE);
+		// propertyIsDynamicLbl.setText("Is Dynamic : ");
+		// checkIsDynamicBt = new Button(composite, SWT.CHECK);
+		// checkIsDynamicBt.setLayoutData(new
+		// GridData(GridData.FILL_HORIZONTAL));
 	}
-	
+
 	private void createLiteralsTab(TabFolder parent) {
 		// Create tab item and add it composite that fills it
 		TabItem secondItem = new TabItem(parent, SWT.NONE);
@@ -156,27 +157,25 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 		// Add layout on composite
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
-		//Create panel table
+
+		// Create panel table
 		Composite panelTable = new Composite(composite, SWT.NONE);
-		panelTable.setLayout(new GridLayout(1,false));
+		panelTable.setLayout(new GridLayout(1, false));
 		panelTable.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
-		//Create panel button
+
+		// Create panel button
 		Composite panelButton = new Composite(composite, SWT.NONE);
-		panelButton.setLayout(new GridLayout(1,false));
+		panelButton.setLayout(new GridLayout(1, false));
 		panelButton.setLayoutData(new GridData(GridData.FILL_BOTH | GridData.HORIZONTAL_ALIGN_CENTER));
 
 		new Label(panelTable, SWT.NONE).setText("Value");
 
-		inputParameters = new EnumerationLiteralViewer(panelTable,
-				new EnumerationLiteralDataStructure(object));
+		inputParameters = new EnumerationLiteralViewer(panelTable, new EnumerationLiteralDataStructure(object));
 
 		Button add = new Button(panelButton, SWT.PUSH | SWT.CENTER);
 		add.setText("Add");
 
-		GridData gd = new GridData(GridData.GRAB_HORIZONTAL
-				| GridData.HORIZONTAL_ALIGN_END);
+		GridData gd = new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_END);
 		gd.widthHint = 80;
 		add.setLayoutData(gd);
 		add.addSelectionListener(new SelectionAdapter() {
@@ -187,8 +186,7 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 
 		Button delete = new Button(panelButton, SWT.PUSH | SWT.CENTER);
 		delete.setText("Delete");
-		gd = new GridData(GridData.GRAB_HORIZONTAL
-				| GridData.HORIZONTAL_ALIGN_BEGINNING);
+		gd = new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_BEGINNING);
 		gd.widthHint = 80;
 		delete.setLayoutData(gd);
 
@@ -197,8 +195,8 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 				inputParameters.removeParameter();
 			}
 		});
-		
-        //Create Button UP
+
+		// Create Button UP
 		Button up = new Button(panelButton, SWT.PUSH | SWT.CENTER);
 		up.setText("Up");
 		up.addSelectionListener(new SelectionAdapter() {
@@ -206,36 +204,36 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 				int index = inputParameters.getTable().getSelectionIndex();
 				if (index > 0) {
 					TableItem itemMoved = inputParameters.getTable().getItem(index);
-					TableItem otherItem = inputParameters.getTable().getItem(index-1);
-					inputParameters.getData().replace(index,index-1);
+					TableItem otherItem = inputParameters.getTable().getItem(index - 1);
+					inputParameters.getData().replace(index, index - 1);
 					Object objectMoved = itemMoved.getData();
 					Object otherObject = otherItem.getData();
 					itemMoved.setData(otherObject);
-					otherItem.setData(objectMoved);					
-					itemMoved.setText(((EnumerationLiteralObject)otherObject).getName());
-					otherItem.setText(((EnumerationLiteralObject)objectMoved).getName());
-					inputParameters.getTable().select(index-1);
+					otherItem.setData(objectMoved);
+					itemMoved.setText(((EnumerationLiteralObject) otherObject).getName());
+					otherItem.setText(((EnumerationLiteralObject) objectMoved).getName());
+					inputParameters.getTable().select(index - 1);
 				}
 			}
 		});
-		
-		//Create Button DOWN
+
+		// Create Button DOWN
 		Button down = new Button(panelButton, SWT.PUSH | SWT.CENTER);
 		down.setText("Down");
 		down.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				int index = inputParameters.getTable().getSelectionIndex();
-				if (index < inputParameters.getTable().getItemCount()-1) {
+				if (index < inputParameters.getTable().getItemCount() - 1) {
 					TableItem itemMoved = inputParameters.getTable().getItem(index);
-					TableItem otherItem = inputParameters.getTable().getItem(index+1);
-					inputParameters.getData().replace(index,index+1);
+					TableItem otherItem = inputParameters.getTable().getItem(index + 1);
+					inputParameters.getData().replace(index, index + 1);
 					Object objectMoved = itemMoved.getData();
 					Object otherObject = otherItem.getData();
 					itemMoved.setData(otherObject);
 					otherItem.setData(objectMoved);
-					itemMoved.setText(((EnumerationLiteralObject)otherObject).getName());
-					otherItem.setText(((EnumerationLiteralObject)objectMoved).getName());
-					inputParameters.getTable().select(index+1);
+					itemMoved.setText(((EnumerationLiteralObject) otherObject).getName());
+					otherItem.setText(((EnumerationLiteralObject) objectMoved).getName());
+					inputParameters.getTable().select(index + 1);
 				}
 			}
 		});
@@ -250,7 +248,7 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 			// Name
 			EnumerationNameTxt.setText(object.getName());
 			checkIsDynamicBt.setSelection(object.getDynamic());
-		}				
+		}
 	}
 
 	/**
@@ -263,13 +261,11 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 		try {
 			data.put(ENUMERATION_NAME, EnumerationNameTxt.getText());
 			data.put(ENUMERATION_LITERALS, inputParameters.getData());
-			data.put(ENUMERATION_ISDYNAMIC, checkIsDynamicBt.getSelection());
+//			data.put(ENUMERATION_ISDYNAMIC, checkIsDynamicBt.getSelection());
 			super.okPressed();
 		} catch (Exception e) {
 			ClazzPlugin.log("Required fields", IStatus.WARNING);
-			MessageDialog
-					.openWarning(getShell(), "Required parameters",
-							"Some parameters are not set.\nPlease, fill those fields before validating.");
+			MessageDialog.openWarning(getShell(), "Required parameters", "Some parameters are not set.\nPlease, fill those fields before validating.");
 		}
 	}
 

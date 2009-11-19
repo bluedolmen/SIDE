@@ -52,8 +52,6 @@ import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.Visibility;
 import com.bluexml.side.clazz.provider.ClazzItemProviderAdapterFactory;
 
-
-
 public class AttributeEditDialog extends Dialog implements IDialogConstants {
 	/** The ID of the property name */
 	public static final String PROPERTY_NAME = "property name";
@@ -72,7 +70,7 @@ public class AttributeEditDialog extends Dialog implements IDialogConstants {
 
 	/** The ID of the property title */
 	public static final String PROPERTY_TITLE = "property title";
-	
+
 	/** The ID of the property unique */
 	public static final String PROPERTY_UNIQUE = "property unique";
 
@@ -184,8 +182,7 @@ public class AttributeEditDialog extends Dialog implements IDialogConstants {
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		documentation = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL
-				| SWT.BORDER);
+		documentation = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
 		documentation.setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
 
@@ -202,23 +199,21 @@ public class AttributeEditDialog extends Dialog implements IDialogConstants {
 		Collection<?> c = (new OblAttributeMetaInfo()).getMetaInfo(Attribute.getTyp());
 
 		Composite panelMetaInfo = new Composite(composite, SWT.NONE);
-		panelMetaInfo.setLayout(new GridLayout(2,false));
+		panelMetaInfo.setLayout(new GridLayout(2, false));
 		panelMetaInfo.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
+
 		Composite panelMetaInfoGroup = new Composite(composite, SWT.NONE);
-		panelMetaInfoGroup.setLayout(new GridLayout(2,false));
+		panelMetaInfoGroup.setLayout(new GridLayout(2, false));
 		panelMetaInfoGroup.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
+
 		for (Object obj : c) {
 			if (obj instanceof MetaInfo)
-				MetaInfoHelper.drawConstraint(panelMetaInfo, (MetaInfo) obj,
-						drawConstraints, Attribute);
+				MetaInfoHelper.drawConstraint(panelMetaInfo, (MetaInfo) obj, drawConstraints, Attribute);
 		}
-		
+
 		for (Object obj : c) {
 			if (obj instanceof MetaInfoGroup)
-				MetaInfoHelper.drawConstraintGroup(panelMetaInfoGroup,
-						(MetaInfoGroup) obj, drawConstraints, Attribute);
+				MetaInfoHelper.drawConstraintGroup(panelMetaInfoGroup, (MetaInfoGroup) obj, drawConstraints, Attribute);
 		}
 	}
 
@@ -240,22 +235,20 @@ public class AttributeEditDialog extends Dialog implements IDialogConstants {
 		Label typeLbl = new Label(composite, SWT.NONE);
 		typeLbl.setText("Type : ");
 
-		ILabelProvider labelProvider = new AdapterFactoryLabelProvider(
-				new ClazzItemProviderAdapterFactory());
+		ILabelProvider labelProvider = new AdapterFactoryLabelProvider(new ClazzItemProviderAdapterFactory());
 
 		typeChooser = new SingleObjectChooser(composite, SWT.NONE);
 		typeChooser.setLabelProvider(labelProvider);
 		typeChooser.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		Label lbl = new Label(composite, SWT.NONE);
-		lbl.setText("Visibility : ");
+//		Label lbl = new Label(composite, SWT.NONE);
+//		lbl.setText("Visibility : ");
 
-		ILabelProvider labelProviderV = new AdapterFactoryLabelProvider(
-				new ClazzItemProviderAdapterFactory());
+//		ILabelProvider labelProviderV = new AdapterFactoryLabelProvider(new ClazzItemProviderAdapterFactory());
 
-		visibilityChooser = new SingleObjectChooser(composite, SWT.NONE);
-		visibilityChooser.setLabelProvider(labelProviderV);
-		visibilityChooser.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+//		visibilityChooser = new SingleObjectChooser(composite, SWT.NONE);
+//		visibilityChooser.setLabelProvider(labelProviderV);
+//		visibilityChooser.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Label propertyTitleLbl = new Label(composite, SWT.NONE);
 		propertyTitleLbl.setText("Title : ");
@@ -265,22 +258,20 @@ public class AttributeEditDialog extends Dialog implements IDialogConstants {
 		Label propertyDescriptionLbl = new Label(composite, SWT.NONE);
 		propertyDescriptionLbl.setText("Short description : ");
 		propertyDescriptionTxt = new Text(composite, SWT.BORDER);
-		propertyDescriptionTxt.setLayoutData(new GridData(
-				GridData.FILL_HORIZONTAL));
+		propertyDescriptionTxt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Label valueListLbl = new Label(composite, SWT.NONE);
 		valueListLbl.setText("Value List : ");
 
-		labelProvider = new AdapterFactoryLabelProvider(
-				new ClazzItemProviderAdapterFactory());
+		labelProvider = new AdapterFactoryLabelProvider(new ClazzItemProviderAdapterFactory());
 
 		valueList = new SingleObjectChooser(composite, SWT.NONE);
 		valueList.setLabelProvider(labelProvider);
 		valueList.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		Label propertyIdLbl = new Label(composite, SWT.NONE);
 		propertyIdLbl.setText("Unique : ");
-		unique = new Button(composite,SWT.CHECK);
+		unique = new Button(composite, SWT.CHECK);
 		unique.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	}
 
@@ -298,9 +289,7 @@ public class AttributeEditDialog extends Dialog implements IDialogConstants {
 		typeChooser.setSelection(Attribute.getTyp());
 
 		// Value list
-		Collection<EObject> reachableEnumeration = ItemPropertyDescriptor
-				.getReachableObjectsOfType(Attribute, ClazzPackage.eINSTANCE
-						.getEnumeration());
+		Collection<EObject> reachableEnumeration = ItemPropertyDescriptor.getReachableObjectsOfType(Attribute, ClazzPackage.eINSTANCE.getEnumeration());
 		Object[] enumArray = reachableEnumeration.toArray();
 		Object[] enumArray2 = new Object[enumArray.length + 1];
 		for (int i = 0; i < enumArray.length; ++i) {
@@ -312,14 +301,15 @@ public class AttributeEditDialog extends Dialog implements IDialogConstants {
 			valueList.setSelection("");
 		else
 			valueList.setSelection(Attribute.getValueList());
-		
+
 		// Unicity
 		unique.setSelection(Attribute.isUnique());
-		
+
 		// Visibility
-		Collection<Visibility> reachableVisibility = Visibility.VALUES;
-		visibilityChooser.setChoices(reachableVisibility.toArray());
-		visibilityChooser.setSelection(Attribute.getVisibility());
+		// bug http://bugs.bluexml.net/show_bug.cgi?id=1281
+		// Collection<Visibility> reachableVisibility = Visibility.VALUES;
+		// visibilityChooser.setChoices(reachableVisibility.toArray());
+		// visibilityChooser.setSelection(Attribute.getVisibility());
 
 		// MetaInfo
 		MetaInfoHelper.loadData(Attribute, drawConstraints);
@@ -348,7 +338,7 @@ public class AttributeEditDialog extends Dialog implements IDialogConstants {
 			data.put(PROPERTY_NAME, propertyNameTxt.getText());
 			data.put(PROPERTY_VALUELIST, valueList.getSelection());
 			data.put(PROPERTY_TYPE, typeChooser.getSelection());
-			data.put(PROPERTY_VISIBILITY, visibilityChooser.getSelection());
+			// data.put(PROPERTY_VISIBILITY, visibilityChooser.getSelection());
 			dataConstraints = MetaInfoHelper.getDataStructure(drawConstraints);
 			data.put(PROPERTY_CONSTRAINTS, dataConstraints);
 			data.put(PROPERTY_DOCUMENTATION, ((Text) documentation).getText());
@@ -358,9 +348,7 @@ public class AttributeEditDialog extends Dialog implements IDialogConstants {
 			super.okPressed();
 		} catch (Exception e) {
 			ClazzPlugin.log("Required fields", IStatus.WARNING);
-			MessageDialog
-					.openWarning(getShell(), "Required parameters",
-							"Some parameters are not set.\nPlease, fill those fields before validating.");
+			MessageDialog.openWarning(getShell(), "Required parameters", "Some parameters are not set.\nPlease, fill those fields before validating.");
 		}
 	}
 

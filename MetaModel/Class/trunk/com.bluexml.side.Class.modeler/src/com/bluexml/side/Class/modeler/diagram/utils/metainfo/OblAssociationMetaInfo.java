@@ -25,14 +25,14 @@ public class OblAssociationMetaInfo extends OblTypeMetaInfo {
 
 	public void initAllMetaInfo() {
 		allMetaInfos = new ArrayList<Object>();
+//
+//		CommonFactory fact = CommonFactoryImpl.init();
+//		MetaInfo c;
 
-		CommonFactory fact = CommonFactoryImpl.init();
-		MetaInfo c;
-
-		c = fact.createMetaInfo();
-		c.setKey("asList");
-		c.setValueType(boolean.class);
-		allMetaInfos.add(c);
+//		c = fact.createMetaInfo();
+//		c.setKey("asList");
+//		c.setValueType(boolean.class);
+//		allMetaInfos.add(c);
 	}
 
 }

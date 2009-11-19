@@ -40,15 +40,15 @@ public class AttributeUpdateCommand extends Command {
 	private String oldType;
 
 	private Visibility oldVisibility;
-	
+
 	private String oldDoc;
-	
+
 	private String oldTitle;
-	
+
 	private String oldDescription;
-	
+
 	private Enumeration oldEnumeration;
-	
+
 	private boolean oldUnique;
 
 	/** New values */
@@ -57,15 +57,15 @@ public class AttributeUpdateCommand extends Command {
 	private String typ;
 
 	private Visibility visibility;
-	
+
 	private String doc;
-	
+
 	private String title;
-	
+
 	private String description;
-	
+
 	private Enumeration enumeration;
-	
+
 	private boolean unique;
 
 	private ConstraintsDataStructure constraints;
@@ -81,12 +81,10 @@ public class AttributeUpdateCommand extends Command {
 	public AttributeUpdateCommand(Attribute prop, Map data) {
 		Attribute = prop;
 		name = (String) data.get(AttributeEditDialog.PROPERTY_NAME);
-		typ = ((DataType) data.get(AttributeEditDialog.PROPERTY_TYPE))
-				.toString();
-		visibility = Visibility.getByName(data.get(
-				AttributeEditDialog.PROPERTY_VISIBILITY).toString());
-		constraints = ((ConstraintsDataStructure) data
-				.get(AttributeEditDialog.PROPERTY_CONSTRAINTS));
+		typ = ((DataType) data.get(AttributeEditDialog.PROPERTY_TYPE)).toString();
+		// bug http://bugs.bluexml.net/show_bug.cgi?id=1281
+		// visibility = Visibility.getByName(data.get(AttributeEditDialog.PROPERTY_VISIBILITY).toString());
+		constraints = ((ConstraintsDataStructure) data.get(AttributeEditDialog.PROPERTY_CONSTRAINTS));
 		doc = (String) data.get(AttributeEditDialog.PROPERTY_DOCUMENTATION);
 		title = (String) data.get(AttributeEditDialog.PROPERTY_TITLE);
 		description = (String) data.get(AttributeEditDialog.PROPERTY_DESCRIPTION);
@@ -153,23 +151,23 @@ public class AttributeUpdateCommand extends Command {
 		Visibility tempVisibility = visibility;
 		visibility = oldVisibility;
 		oldVisibility = tempVisibility;
-		
+
 		String tempDoc = doc;
 		doc = oldDoc;
 		oldDoc = tempDoc;
-		
+
 		String tempTitle = title;
 		title = oldTitle;
 		oldTitle = tempTitle;
-		
+
 		boolean tempUnique = unique;
 		unique = oldUnique;
 		oldUnique = tempUnique;
-		
+
 		String tempDescription = description;
 		description = oldDescription;
 		oldDescription = tempDescription;
-		
+
 		Enumeration tempEnum = enumeration;
 		enumeration = oldEnumeration;
 		oldEnumeration = tempEnum;
