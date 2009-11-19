@@ -40,7 +40,6 @@ import com.bluexml.side.Workflow.modeler.diagram.figures.EndStateFigure;
 import com.bluexml.side.Workflow.modeler.diagram.policies.TransitionEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
 import com.bluexml.side.workflow.EndState;
-import com.bluexml.side.workflow.Node;
 
 /**
  * The EndState object controller

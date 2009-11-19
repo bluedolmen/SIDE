@@ -14,9 +14,11 @@
  ******************************************************************************/
 package com.bluexml.side.Workflow.modeler.diagram.edit;
 
+import org.eclipse.draw2d.ConnectionRouter;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PolylineDecoration;
+import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.ConnectionLayerEx;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -119,5 +121,10 @@ public class manageEditPart extends GraphEdgeEditPart {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
 		return null;
+	}
+	
+	@Override
+	protected ConnectionRouter getDefaultRouter(ConnectionLayerEx cLayer) {
+		return cLayer.getRectilinearRouter();
 	}
 }
