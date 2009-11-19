@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side.Integration.m2</groupId>
-	<artifactId>warPatchArchetype</artifactId>
-	<version>1.0.0</version>
-	<name>Archetype - com.bluexml.side.Integration.maven2WarPatchArchetype</name>
-	<description>this archetype can be use to create new warPatch project</description>
-	<url>http://www.bluexml.com</url>
-	<parent>
-		<groupId>org.bluexml</groupId>
-		<artifactId>superpom</artifactId>
-		<version>1.9</version>
-	</parent>
+  <artifactId>warPatchArchetype</artifactId>
+  <version>1.0.1</version>
+  <name>Archetype - com.bluexml.side.Integration.maven2WarPatchArchetype</name>
+  <description>this archetype can be use to create new warPatch project</description>
+  <url>http://www.bluexml.com</url>
+  <parent>
+    <groupId>org.bluexml</groupId>
+    <artifactId>superpom</artifactId>
+    <version>1.9</version>
+  </parent>
   <build>
     <extensions>
       <extension>
@@ -28,3 +29,4 @@
     </plugins>
   </build>
 </project>
+
