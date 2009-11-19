@@ -345,7 +345,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 			// associationName =
 			// AssociationServices.getAssociationName(association, source);
 			// }
-			associationName = FormGenerator.getAssoQualifiedName(association);
+			associationName = formGenerator.getAssoQualifiedName(association);
 
 			associationType.setAlfrescoName(associationName);
 			sourceType.getAssociation().add(associationType);

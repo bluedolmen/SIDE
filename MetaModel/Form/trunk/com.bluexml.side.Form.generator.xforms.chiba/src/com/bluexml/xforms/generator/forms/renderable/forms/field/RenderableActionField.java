@@ -46,7 +46,7 @@ public class RenderableActionField extends Renderable {
 		label = formElement.getLabel();
 		submission = new ModelElementSubmission(MsgId.INT_URL_SCHEME_WRITER + infixe + "/"
 				+ actionName, label, true, false);
-		RenderableSubmit button = new RenderableSubmit(submission, label);
+		RenderableSubmit button = new RenderableSubmit(submission, label, false);
 		add(button);
 	}
 

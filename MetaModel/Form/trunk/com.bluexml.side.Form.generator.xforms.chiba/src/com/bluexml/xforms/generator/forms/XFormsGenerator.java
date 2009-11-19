@@ -74,6 +74,14 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	public static final Namespace NAMESPACE_XHTML = Namespace.getNamespace("xhtml",
 			"http://www.w3.org/1999/xhtml");
 
+	public static final String IMG_RIGHT = "resources/images/go-next.png";
+
+	public static final String IMG_LEFT = "resources/images/go-previous.png";
+
+	public static final String IMG_DOWN = "resources/images/go-down.png";
+
+	public static final String IMG_UP = "resources/images/go-up.png";
+
 	/** The sax builder. */
 	public static SAXBuilder saxBuilder;
 
@@ -1003,4 +1011,29 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		return renderingWorkflow;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.AbstractDataGenerator#isReadOnlyMode()
+	 */
+	@Override
+	public boolean isReadOnlyMode() {
+		return readOnlyMode;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.AbstractDataGenerator#setReadOnlyMode(boolean)
+	 */
+	@Override
+	public void setReadOnlyMode(boolean onOff) {
+		this.readOnlyMode = onOff;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.AbstractDataGenerator#supportsReadOnlyMode()
+	 */
+	@Override
+	public boolean supportsReadOnlyMode() {
+		return true;
+	}
+
+	
 }

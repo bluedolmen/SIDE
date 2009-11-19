@@ -43,13 +43,10 @@ public class RenderableSMultiple extends AbstractRenderable {
 			AssociationBean associationClassBean) {
 		super(associationBean);
 
-		ModelElementBindSimple selectorBindId = selector.getBindId();
-		ModelElementBindSimple selectorBindLabel = selector.getBindLabel();
 		add(selector);
-		this.selectorBindId = selectorBindId; // #1156
 		if (associationBean.isDisabled() == false) {
 			renderableAssoSelMultActionsAddRemove = new RenderableSMultipleActionsAddRemove(
-					associationBean, selectorBindId, selectorBindLabel, selector.getBindMandatory());
+					associationBean, selector);
 			add(renderableAssoSelMultActionsAddRemove);
 		}
 		renderableAssoSelMultDisplay = new RenderableSMultipleDisplay(associationBean);
@@ -91,20 +88,6 @@ public class RenderableSMultiple extends AbstractRenderable {
 				+ MsgId.INT_INSTANCE_SIDELABEL);
 		ModelElementBindSimple bindId = new ModelElementBindSimple(dataPath
 				+ MsgId.INT_INSTANCE_SIDEID);
-		if (bean.isMandatory()) { // #978
-			bindId.setRequired(true);
-			bindLabel.setRequired(true);
-
-			// ** #1156
-			int pos = path.length() - 1;
-			String pathShortened = path.charAt(pos) == '/' ? path.substring(0, pos) : path;
-			String constraint = "instance('minstance')/" + pathShortened
-					+ "[1]/" + bindId.getNodeset() + " ne ''";
-			if (StringUtils.contains(selectorBindId.getConstraint(), constraint) == false) {
-				selectorBindId.setConstraint(constraint);
-			}
-			// ** #1156
-		}
 
 		bindRepeater.addSubBind(bindLabel);
 		bindRepeater.addSubBind(bindId);
@@ -117,6 +100,23 @@ public class RenderableSMultiple extends AbstractRenderable {
 		rendered.addModelElement(bindRepeater);
 		bindActions.setNodeset(nodeSetActions);
 		rendered.addModelElement(bindActions);
+		bindActions.setRepeaterRootBind(true); // #1241
+
+		if (getFormGenerator().isInReadOnlyMode() == false) {
+			if (bean.isMandatory()) { // #978
+				bindId.setRequired(true);
+				bindLabel.setRequired(true);
+
+				int pos = path.length() - 1;
+				String pathShortened = path.charAt(pos) == '/' ? path.substring(0, pos) : path;
+				String constraint = "instance('minstance')/" + pathShortened + "[1]/"
+						+ bindId.getNodeset() + " ne ''";
+				if (StringUtils.contains(selectorBindId.getConstraint(), constraint) == false) {
+					selectorBindId.setConstraint(constraint);
+				}
+			}
+		}
+		
 		return rendered;
 	}
 

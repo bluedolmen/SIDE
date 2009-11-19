@@ -10,7 +10,7 @@ import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
-import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
+import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
 
 /**
  * The Class RenderableSMultipleActionsOrder.
@@ -50,17 +50,19 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 	 */
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
-		RenderedInput rendered = new RenderedInput();
-		repeaterId = renderedParents.peek().getOptionalData();
-		Element xformsElement = XFormsGenerator.createElement("div",
-				XFormsGenerator.NAMESPACE_XHTML);
-		ModelElementBindSimple bindActions = XFormsGenerator.getBind(renderedParents.peek(), 2);
-		String rootPath = getRootPath(renderedParents);
-		xformsElement.addContent(getTriggerUp(bindActions, rootPath));
-		xformsElement.addContent(XFormsGenerator.createElement("br",
-				XFormsGenerator.NAMESPACE_XHTML));
-		xformsElement.addContent(getTriggerDown(bindActions, rootPath));
-		rendered.setXformsElement(xformsElement);
+		RenderedXMLElement rendered = new RenderedXMLElement();
+		if ((getFormGenerator().isInReadOnlyMode() == false) || bean.isDisabled()) { // #1238
+			repeaterId = renderedParents.peek().getOptionalData();
+			Element xformsElement = XFormsGenerator.createElement("div",
+					XFormsGenerator.NAMESPACE_XHTML);
+			ModelElementBindSimple bindActions = XFormsGenerator.getBind(renderedParents.peek(), 2);
+			String rootPath = getRootPath(renderedParents);
+			xformsElement.addContent(getTriggerUp(bindActions, rootPath));
+			xformsElement.addContent(XFormsGenerator.createElement("br",
+					XFormsGenerator.NAMESPACE_XHTML));
+			xformsElement.addContent(getTriggerDown(bindActions, rootPath));
+			rendered.setXformsElement(xformsElement);
+		}
 		return rendered;
 	}
 
@@ -75,7 +77,7 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 	 * @return the trigger up
 	 */
 	private Element getTriggerUp(ModelElementBindSimple bindActions, String rootPath) {
-		return getTriggerMove(bindActions, true, "resources/images/up.gif", rootPath);
+		return getTriggerMove(bindActions, true, XFormsGenerator.IMG_UP, rootPath);
 	}
 
 	/**
@@ -89,7 +91,7 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 	 * @return the trigger down
 	 */
 	private Element getTriggerDown(ModelElementBindSimple bindActions, String rootPath) {
-		return getTriggerMove(bindActions, false, "resources/images/down.gif", rootPath);
+		return getTriggerMove(bindActions, false, XFormsGenerator.IMG_DOWN, rootPath);
 	}
 
 	/**
@@ -119,6 +121,7 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 
 		String ifCondition = "";
+
 		ifCondition += "(index('" + repeaterId + "') > 0) and "; // #1157
 		ifCondition += "not(" + bindActions.getNodeset() + "[" + notMovableIndex + "] is "
 				+ bindActions.getNodeset() + "[index('" + repeaterId + "')])";

@@ -51,6 +51,7 @@ import com.bluexml.side.workflow.impl.WorkflowFactoryImpl;
 import com.bluexml.side.workflow.WorkflowPackage;
 import com.bluexml.xforms.generator.DataGenerator.AssociationCardinality;
 import com.bluexml.xforms.generator.DataGenerator.AssociationKind;
+import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.tools.ClasseComparator;
 import com.bluexml.xforms.generator.tools.ModelTools;
@@ -146,6 +147,14 @@ public class FormGenerator {
 
 	private boolean renderDataBeforeWorkflow;
 
+	private boolean autoSwitchToStandaloneMode;
+
+	private String readOnlySuffix;
+
+	private boolean generateReadOnlyForms;
+
+	private boolean inReadOnlyMode;
+
 	/**
 	 * The Class PackageInfo.
 	 */
@@ -238,15 +247,20 @@ public class FormGenerator {
 	 * @param asso
 	 * @return
 	 */
-	public static String getAssoQualifiedName(Association asso) {
+	public String getAssoQualifiedName(Association asso) {
 		StringBuffer res = new StringBuffer(128);
-		AssociationEnd srcEnd = asso.getFirstEnd();
-		AssociationEnd targetEnd = srcEnd.getOpposite();
+		//** #979, #1273
+		AssociationEnd srcEnd = (AssociationEnd) getRealObject(asso.getFirstEnd());
+		AssociationEnd targetEnd = (AssociationEnd) getRealObject(srcEnd.getOpposite());
+		// @Amenel: not sure whether linked classes may be proxies but getRealObject won't hurt
+		AbstractClass srcClass = (AbstractClass) getRealObject(srcEnd.getLinkedClass());
+		AbstractClass targetClass = (AbstractClass) getRealObject(targetEnd.getLinkedClass());
+		//** #979, #1273
 		// definition in Acceleo template used for writing this function
 		// <%args(0).linkedClass.getQualifiedName()%>_<%name%><%if
 		// (args(0).getOpposite().name !=
 		// ""){%>_<%args(0).getOpposite().name%><%}%>_<%args(0).getOpposite().linkedClass.getQualifiedName()%>
-		res.append(getClassQualifiedName(srcEnd.getLinkedClass()));
+		res.append(getClassQualifiedName(srcClass));
 		res.append("_");
 		res.append(asso.getName());
 		if (targetEnd.getName() != "") {
@@ -254,7 +268,7 @@ public class FormGenerator {
 			res.append(targetEnd.getName());
 		}
 		res.append("_");
-		res.append(getClassQualifiedName(targetEnd.getLinkedClass()));
+		res.append(getClassQualifiedName(targetClass));
 
 		return res.toString();
 	}
@@ -309,6 +323,11 @@ public class FormGenerator {
 		this.simplifyClasses = simplifyClasses;
 		this.setRenderDataBeforeWorkflow(renderDataBeforeWorkflow);
 		XFormsGenerator.resetKeys();
+		// be courteous to other classes
+		// ** #1222: generation of read only forms
+		com.bluexml.xforms.generator.forms.ModelElement.setFormGenerator(this);
+		Renderable.setFormGenerator(this);
+		// ** #1222
 		try {
 			classModels = new HashMap<URI, PackageInfo>();
 			formCollections = new ArrayList<FormCollection>();
@@ -402,11 +421,26 @@ public class FormGenerator {
 
 		allForms = ModelTools.getAllForms(formCollections);
 
+		// first pass: normal generation
+		setInReadOnlyMode(false);
 		for (DataGenerator dataGenerator : generators) {
 			currentGenerator = dataGenerator;
 			currentGenerator.setLogger(genLogger);
 			currentGenerator.setMonitor(monitor);
 			processGenerator();
+		}
+
+		if (isGenerateReadOnlyForms()) {
+			// second pass: generation in readOnly mode
+			setInReadOnlyMode(true);
+			for (DataGenerator dataGenerator : generators) {
+				if (dataGenerator.supportsReadOnlyMode()) {
+					currentGenerator = dataGenerator;
+					currentGenerator.setLogger(genLogger);
+					currentGenerator.setReadOnlyMode(true);
+					processGenerator();
+				}
+			}
 		}
 		logger.info("End of generation.");
 		if (monitor != null) {
@@ -519,16 +553,18 @@ public class FormGenerator {
 	private void processAssociation(Association association) {
 		logger.info("Processing Association " + ModelTools.getCompleteName(association));
 
-		AssociationEnd fEnd = association.getFirstEnd();
+		//** #979, #1273
+		AssociationEnd fEnd = (AssociationEnd) getRealObject(association.getFirstEnd());
 		Clazz fEndLinkedClass = null;
 		if (fEnd.getLinkedClass() instanceof Clazz) {
-			fEndLinkedClass = (Clazz) fEnd.getLinkedClass();
+			fEndLinkedClass = (Clazz) getRealObject(fEnd.getLinkedClass());
 		}
-		AssociationEnd sEnd = association.getSecondEnd();
+		AssociationEnd sEnd = (AssociationEnd) getRealObject(association.getSecondEnd());
 		Clazz sEndLinkedClass = null;
 		if (sEnd.getLinkedClass() instanceof Clazz) {
-			sEndLinkedClass = (Clazz) sEnd.getLinkedClass();
+			sEndLinkedClass = (Clazz) getRealObject(sEnd.getLinkedClass());
 		}
+		//** #979, #1273
 		if ((fEndLinkedClass != null) && (sEndLinkedClass != null)) {
 			boolean doublenav = sEnd.isNavigable() && fEnd.isNavigable();
 			AssociationCardinality associationType = getAssociationType(association);
@@ -775,20 +811,25 @@ public class FormGenerator {
 		AssociationInfo result = null;
 		String sourceName = ModelTools.getCompleteName(source);
 		for (Association association : allAssociations) {
-			if (association.getFirstEnd().getLinkedClass() != null
-					&& association.getSecondEnd().getLinkedClass() != null) {
+			//** #979, #1273
+			AssociationEnd firstEnd = (AssociationEnd) getRealObject(association.getFirstEnd());
+			AssociationEnd secondEnd = (AssociationEnd) getRealObject(association.getSecondEnd());
+			AbstractClass firstEndClass = (AbstractClass) getRealObject(firstEnd.getLinkedClass());
+			AbstractClass secondEndClass = (AbstractClass) getRealObject(secondEnd.getLinkedClass());
+			//** #979, #1273
+			if (firstEndClass != null && secondEndClass != null) {
 				Clazz assoSource = null;
-				if (association.getFirstEnd().getLinkedClass() instanceof Clazz) {
-					assoSource = (Clazz) association.getFirstEnd().getLinkedClass();
+				if (firstEndClass instanceof Clazz) {
+					assoSource = (Clazz) firstEndClass;
 				}
 				String assoSourceName = ModelTools.getCompleteName(assoSource);
 				Clazz assoTarget = null;
-				if (association.getSecondEnd().getLinkedClass() instanceof Clazz) {
-					assoTarget = (Clazz) association.getSecondEnd().getLinkedClass();
+				if (secondEndClass instanceof Clazz) {
+					assoTarget = (Clazz) secondEndClass;
 				}
 				String assoTargetName = ModelTools.getCompleteName(assoTarget);
-				String roleSrc = association.getFirstEnd().getName();
-				String roleTarget = association.getSecondEnd().getName();
+				String roleSrc = firstEnd.getName();
+				String roleTarget = secondEnd.getName();
 				if (assoSourceName.equals(sourceName) && elementEquals(association, modelElement)) {
 					return new AssociationInfo(association, assoSource, assoTarget, roleSrc,
 							roleTarget, false);
@@ -876,16 +917,6 @@ public class FormGenerator {
 
 		AssociationInfo associationInfo = findAssocation(real_class, modelElement);
 		if (associationInfo != null) {
-			// if (elementEquals(associationInfo.source,
-			// associationInfo.destination)) {
-			// result = AssociationServices.getName(
-			// associationInfo.realAssociation,
-			// associationInfo.source, associationInfo.reverse);
-			// } else {
-			// result = AssociationServices
-			// .getAssociationName(associationInfo.realAssociation,
-			// associationInfo.source);
-			// }
 			result = getAssoQualifiedName(associationInfo.realAssociation);
 		} else {
 			AbstractClass classe = null;
@@ -948,4 +979,64 @@ public class FormGenerator {
 	public boolean isRenderDataBeforeWorkflow() {
 		return renderDataBeforeWorkflow;
 	}
+	/**
+	 * @return the inReadOnlyMode
+	 */
+	public boolean isInReadOnlyMode() {
+		return inReadOnlyMode;
+	}
+
+	/**
+	 * @param inReadOnlyMode
+	 *            the inReadOnlyMode to set
+	 */
+	public void setInReadOnlyMode(boolean inReadOnlyMode) {
+		this.inReadOnlyMode = inReadOnlyMode;
+	}
+
+	/**
+	 * @return the generateReadOnlyForms
+	 */
+	public boolean isGenerateReadOnlyForms() {
+		return generateReadOnlyForms;
+	}
+
+	/**
+	 * @param generateReadOnlyForms
+	 *            the generateReadOnlyForms to set
+	 */
+	public void setGenerateReadOnlyForms(boolean generateReadOnlyForms) {
+		this.generateReadOnlyForms = generateReadOnlyForms;
+	}
+
+	/**
+	 * @return the readOnlySuffix
+	 */
+	public String getReadOnlySuffix() {
+		return readOnlySuffix;
+	}
+
+	/**
+	 * @param readOnlySuffix
+	 *            the readOnlySuffix to set
+	 */
+	public void setReadOnlySuffix(String readOnlySuffix) {
+		this.readOnlySuffix = readOnlySuffix;
+	}
+
+	/**
+	 * @return the autoSwitchToStandaloneMode
+	 */
+	public boolean isAutoSwitchToStandaloneMode() {
+		return autoSwitchToStandaloneMode;
+	}
+
+	/**
+	 * @param autoSwitchToStandaloneMode
+	 *            the autoSwitchToStandaloneMode to set
+	 */
+	public void setAutoSwitchToStandaloneMode(boolean autoSwitchToStandaloneMode) {
+		this.autoSwitchToStandaloneMode = autoSwitchToStandaloneMode;
+	}
+
 }

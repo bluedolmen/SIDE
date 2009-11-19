@@ -31,6 +31,9 @@ public class ModelElementSubmission extends ModelElement {
 	/** Whether XForms should validate the form before triggering the submit. */
 	private boolean validateFirst;
 
+	/** Whether this submission's button is always active, even in read-only forms. */
+	private boolean alwaysActive;
+
 	/**
 	 * Instantiates a new model element submission.
 	 * 
@@ -48,6 +51,7 @@ public class ModelElementSubmission extends ModelElement {
 		this.replaceAll = replaceAll;
 		this.optionnalNodeSet = null;
 		this.validateFirst = validateFirst;
+		this.alwaysActive = true;
 	}
 
 	/**
@@ -89,16 +93,12 @@ public class ModelElementSubmission extends ModelElement {
 				XFormsGenerator.NAMESPACE_XFORMS);
 		submission.setAttribute("action", action);
 
-		if (replaceAll) {
-			submission.setAttribute("replace", "all");
-		} else {
-			submission.setAttribute("replace", "none");
+		if ((isAlwaysActive() == false) && getFormGenerator().isInReadOnlyMode()) { // #1222
+			submission.setAttribute("readonly", "true");
 		}
-		if (validateFirst) {
-			submission.setAttribute("validate", "true");
-		} else {
-			submission.setAttribute("validate", "false");
-		}
+
+		submission.setAttribute("replace", replaceAll ? "all" : "none");
+		submission.setAttribute("validate", validateFirst ? "true" : "false");
 		if (optionnalNodeSet != null) {
 			submission.setAttribute("ref", optionnalNodeSet);
 		}
@@ -133,6 +133,21 @@ public class ModelElementSubmission extends ModelElement {
 	@Override
 	public boolean hasClone(List<ModelElement> allModelElementsClean) {
 		return false;
+	}
+
+	/**
+	 * @return the alwaysActive feature
+	 */
+	public boolean isAlwaysActive() {
+		return alwaysActive;
+	}
+
+	/**
+	 * @param alwaysActive
+	 *            the alwaysActive feature to set
+	 */
+	public void setAlwaysActive(boolean alwaysActive) {
+		this.alwaysActive = alwaysActive;
 	}
 
 }

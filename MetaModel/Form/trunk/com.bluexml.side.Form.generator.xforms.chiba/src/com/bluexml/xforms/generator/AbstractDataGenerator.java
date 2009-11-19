@@ -12,6 +12,7 @@ public abstract class AbstractDataGenerator implements DataGenerator {
 	/** The form generator. */
 	protected FormGenerator formGenerator;
 	protected Log genLogger;
+	protected boolean readOnlyMode; // #1222
 	protected CoreInterface monitor;
 
 	/*
@@ -41,6 +42,26 @@ public abstract class AbstractDataGenerator implements DataGenerator {
 	public void setMonitor(CoreInterface monitor) {
 		this.monitor = monitor;
 	}
-	
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.DataGenerator#isReadOnlyMode()
+	 */
+	public boolean isReadOnlyMode() {
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.DataGenerator#setReadOnlyMode(boolean)
+	 */
+	public void setReadOnlyMode(boolean onOff) {
+		// nothing to do
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.DataGenerator#supportsReadOnlyMode()
+	 */
+	public boolean supportsReadOnlyMode() {
+		return false;
+	}
+	
 }

@@ -55,7 +55,9 @@ public class RenderableIMultiple extends AbstractRenderable {
 		Rendered rendered = new RenderedParentGroup(renderedParents);
 		rendered.setOptionalData(XFormsGenerator.getId(bean.getName() + "Repeater"));
 		rendered.addModelElement(new ModelElementBindHolder(nodeSetItems));
-		rendered.addModelElement(new ModelElementBindSimple(nodeSetActions));
+		ModelElementBindSimple bindActions = new ModelElementBindSimple(nodeSetActions);
+		bindActions.setRepeaterRootBind(true); // #1241
+		rendered.addModelElement(bindActions);
 		return rendered;
 	}
 

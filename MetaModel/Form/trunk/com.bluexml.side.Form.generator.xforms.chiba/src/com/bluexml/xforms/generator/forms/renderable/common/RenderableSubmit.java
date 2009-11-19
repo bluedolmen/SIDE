@@ -21,6 +21,8 @@ public class RenderableSubmit extends Renderable {
 	/** The submission. */
 	private ModelElementSubmission submission;
 
+	private boolean hideIfReadOnlyMode; // #1238
+
 	/**
 	 * Instantiates a new renderable submit.
 	 * 
@@ -29,10 +31,12 @@ public class RenderableSubmit extends Renderable {
 	 * @param label
 	 *            the label
 	 */
-	public RenderableSubmit(ModelElementSubmission submission, String label) {
+	public RenderableSubmit(ModelElementSubmission submission, String label,
+			boolean hideIfReadOnlyMode) {
 		super();
 		this.submission = submission;
 		this.label = label;
+		this.hideIfReadOnlyMode = hideIfReadOnlyMode;
 	}
 
 	/*
@@ -57,6 +61,9 @@ public class RenderableSubmit extends Renderable {
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
 		RenderedInput rendered = new RenderedInput();
 
+		if (hideIfReadOnlyMode && getFormGenerator().isInReadOnlyMode()) {
+			return rendered;
+		}
 		Element submit = XFormsGenerator.createElementWithLabel("submit",
 				XFormsGenerator.NAMESPACE_XFORMS, label);
 		submission.addLinkedElement(submit);

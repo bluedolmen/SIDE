@@ -75,13 +75,15 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		ModelElementBindSimple bindId = XFormsGenerator.getBind(renderedParents.peek(), 1);
 		ModelElementBindSimple bindLabel = XFormsGenerator.getBind(renderedParents.peek(), 2);
 
-		Element xformsElement = XFormsGenerator.createElement("div",
-				XFormsGenerator.NAMESPACE_XHTML);
-		xformsElement.addContent(getTriggerSet(renderedParents, bindId, bindLabel));
-		xformsElement.addContent(XFormsGenerator.createElement("br",
-				XFormsGenerator.NAMESPACE_XHTML));
-		xformsElement.addContent(getTriggerReset(bindId, bindLabel));
-		rendered.setXformsElement(xformsElement);
+		if ((getFormGenerator().isInReadOnlyMode() == false) || bean.isDisabled()) { // #1238
+			Element xformsElement = XFormsGenerator.createElement("div",
+					XFormsGenerator.NAMESPACE_XHTML);
+			xformsElement.addContent(getTriggerSet(renderedParents, bindId, bindLabel));
+			xformsElement.addContent(XFormsGenerator.createElement("br",
+					XFormsGenerator.NAMESPACE_XHTML));
+			xformsElement.addContent(getTriggerReset(bindId, bindLabel));
+			rendered.setXformsElement(xformsElement);
+		}
 		return rendered;
 	}
 

@@ -4,12 +4,16 @@ import java.util.List;
 
 import org.jdom.Element;
 
+import com.bluexml.xforms.generator.FormGenerator;
+
 /**
  * The Class ModelElement.<br>
  * Represents an element rendered inside the model of a form
  */
 public abstract class ModelElement {
-
+	
+	private static FormGenerator formGenerator;
+	
 	/** The model element. */
 	private Element modelElement;
 
@@ -49,5 +53,20 @@ public abstract class ModelElement {
 	public boolean isInWorkflowForm() {
 		return inWorkflowForm;
 	}
+
+	/**
+	 * @return the formGenerator
+	 */
+	public static FormGenerator getFormGenerator() {
+		return formGenerator;
+	}
+
+	/**
+	 * @param formGenerator the formGenerator to set
+	 */
+	public static void setFormGenerator(FormGenerator formGenerator) {
+		ModelElement.formGenerator = formGenerator;
+	}
+
 
 }

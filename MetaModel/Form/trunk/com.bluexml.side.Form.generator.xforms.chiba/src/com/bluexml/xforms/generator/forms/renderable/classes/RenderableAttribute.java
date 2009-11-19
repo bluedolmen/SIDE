@@ -130,7 +130,8 @@ public class RenderableAttribute extends AbstractRenderableField {
 	 */
 	@Override
 	protected boolean isReadOnly() {
-		return ModelTools.isProperty(attribute, "read-only");
+		return getFormGenerator().isInReadOnlyMode()
+				|| ModelTools.isProperty(attribute, "read-only");
 	}
 
 	/*

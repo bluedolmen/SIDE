@@ -168,6 +168,9 @@ public class RenderableSelector extends AbstractRenderable {
 	 * @return the bind id
 	 */
 	public ModelElementBindSimple getBindId() {
+		if (bindId == null) {
+			initBinds();
+		}
 		return bindId;
 	}
 
@@ -177,6 +180,9 @@ public class RenderableSelector extends AbstractRenderable {
 	 * @return the bind label
 	 */
 	public ModelElementBindSimple getBindLabel() {
+		if (bindLabel == null) {
+			initBinds();
+		}
 		return bindLabel;
 	}
 
@@ -189,6 +195,13 @@ public class RenderableSelector extends AbstractRenderable {
 
 	public AbstractModelElementUpdater getModelElementUpdater() {
 		return modelElementUpdater;
+	}
+
+	/**
+	 * @return the bindMandatory
+	 */
+	public ModelElementBindSimple getBindMandatory() {
+		return bindMandatory;
 	}
 
 	/*
@@ -227,10 +240,58 @@ public class RenderableSelector extends AbstractRenderable {
 	}
 
 	/**
-	 * @return the bindMandatory
+	 * We need to add this function so that nested forms (following the additional feature of #1225)
+	 * continue to perform as needed in #978, meaning "so that mandatory selection widgets have their
+	 * alert message display when nothing is selected and that message disappears when an element is
+	 * selected". <br>
+	 * If bindId, bindLabel, etc. are created in the constructor, the same binds stand for all
+	 * versions of the form. The consequence is that any previously set constraint is accumulated
+	 * with new constraints, leading to the first version performing as expected w.r.t. #978 and the
+	 * other versions always failing to satisfy the constraint.<br>
+	 * By creating the binds here, the binds are recreated each time the form is rendered, thus
+	 * resetting the constraint.
 	 */
-	public ModelElementBindSimple getBindMandatory() {
-		return bindMandatory;
+	public void initBinds() {
+		bindId = new ModelElementBindSimple("");
+		bindLabel = new ModelElementBindSimple("");
+		bindMaxResults = new ModelElementBindSimple("");
+		bindMandatory = new ModelElementBindSimple("");
+
+		bindId.setType(new QName("string"));
+		bindLabel.setType(new QName("string"));
+		bindMaxResults.setType(new QName("string"));
+		bindMaxResults.setHidden(true);
+		bindMandatory.setType(new QName("integer"));
+		bindMandatory.setHidden(true);
+
+		bindId.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDID.getText());
+		bindLabel.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL.getText());
+		bindMaxResults.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDMAX.getText());
+		bindMandatory.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDNUMBER.getText());
+
+		if (bean.isMandatory()) { 
+			// #978
+			// setting bindId's required to true will give the visual cue (a red star under Chiba)
+			bindId.setRequired(true);
+			bindId.setAnAssociation(true);
+			// !!! the constraint will be set by the actions (RenderableSSingleActions or
+			// RenderableSMultipleActionsAddRemove) !!!
+		}
+		if (bean.isDisabled()) {
+			bindId.setReadOnly(true);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.forms.Renderable#renderEnd(com.bluexml.xforms.generator.forms.Rendered)
+	 */
+	@Override
+	public void renderEnd(Rendered rendered) {
+		super.renderEnd(rendered);
+		bindId = null;
+		bindLabel = null;
+		bindMandatory = null;
+		bindMaxResults = null;
 	}
 
 }

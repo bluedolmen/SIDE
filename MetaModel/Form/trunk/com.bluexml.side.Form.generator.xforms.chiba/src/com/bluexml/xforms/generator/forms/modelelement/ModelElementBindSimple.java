@@ -24,7 +24,7 @@ public class ModelElementBindSimple extends ModelElement {
 	protected List<Element> linkedElements = new ArrayList<Element>();
 
 	/** The constraint. */
-	protected String constraint;
+	protected String constraint =  null;
 
 	/** The length constraint. */
 	private String lengthConstraint = null;
@@ -42,6 +42,11 @@ public class ModelElementBindSimple extends ModelElement {
 	protected boolean hidden = false;
 
 	protected ModelElementBindSimple anotherMeb = null;
+
+	private boolean isRepeaterRootBind = false; // #1241
+
+	// #1223-related: do not add a constraint for widgets even if required is set to true
+	private boolean isAnAssociation;
 
 	/**
 	 * Instantiates a new model element bind simple.
@@ -76,19 +81,19 @@ public class ModelElementBindSimple extends ModelElement {
 				XFormsGenerator.NAMESPACE_XFORMS);
 		bindElement.setAttribute("nodeset", nodeset);
 		bindElement.setAttribute("id", bindId);
-		if (StringUtils.trimToNull(constraint) != null) {
-			bindElement.setAttribute("constraint", constraint);
-		}
 		if (type != null) {
 			bindElement.setAttribute("type", type.toString());
 		}
 		if (isRequired()) {
 			bindElement.setAttribute("required", "true()");
-		} else {
-			if (getLengthConstraint() != null) {
-				bindElement.setAttribute("required", "not (string-length(.) = 0 or ("
-						+ getLengthConstraint() + "))");
+			if (isAnAssociation() == false) {
+				setConstraint("(. ne '')");
 			}
+		} else {
+//			if (getLengthConstraint() != null) {
+//				bindElement.setAttribute("required", "not (string-length(.) = 0 or ("
+//						+ getLengthConstraint() + "))");
+//			}
 		}
 		if (isReadOnly()) {
 			bindElement.setAttribute("readonly", "true()");
@@ -97,6 +102,10 @@ public class ModelElementBindSimple extends ModelElement {
 			bindElement.setAttribute("relevant", "false()");
 		}
 
+		if (StringUtils.trimToNull(constraint) != null) {
+			bindElement.setAttribute("constraint", constraint);
+		}
+		
 		for (Element linkedElement : linkedElements) {
 			linkedElement.setAttribute("bind", bindId);
 		}
@@ -120,7 +129,7 @@ public class ModelElementBindSimple extends ModelElement {
 	 *            the new constraint
 	 */
 	public void setConstraint(String constraint) {
-		if (StringUtils.trimToNull(this.constraint) != null) {
+		if (this.constraint != null) {
 			this.constraint = this.constraint + " and " + constraint;
 		} else {
 			this.constraint = constraint;
@@ -183,7 +192,10 @@ public class ModelElementBindSimple extends ModelElement {
 	 * @return true, if is read only
 	 */
 	public boolean isReadOnly() {
-		return readOnly;
+		if (isRepeaterRootBind()) {
+			return false;
+		}
+		return getFormGenerator().isInReadOnlyMode() || readOnly;
 	}
 
 	/**
@@ -277,11 +289,11 @@ public class ModelElementBindSimple extends ModelElement {
 	 */
 	public void setLengthConstraint(String lengthConstraint) {
 
-		this.lengthConstraint = lengthConstraint;
+		this.lengthConstraint = "(" + lengthConstraint + ")";
 		if (isRequired()) {
-			setConstraint(lengthConstraint);
+			setConstraint(this.lengthConstraint);
 		} else {
-			setConstraint("((string-length(.) = 0) or (" + lengthConstraint + "))");
+			setConstraint("((string-length(.) = 0) or " + this.lengthConstraint + ")");
 		}
 
 	}
@@ -291,6 +303,34 @@ public class ModelElementBindSimple extends ModelElement {
 	 */
 	public String getLengthConstraint() {
 		return lengthConstraint;
+	}
+
+	/**
+	 * @return 
+	 */
+	public boolean isRepeaterRootBind() {
+		return isRepeaterRootBind;
+	}
+
+	/**
+	 * @param isRepeaterRootBind 
+	 */
+	public void setRepeaterRootBind(boolean isRepeaterRootBind) {
+		this.isRepeaterRootBind = isRepeaterRootBind;
+	}
+
+	/**
+	 * @return the isAnAssociation
+	 */
+	public boolean isAnAssociation() {
+		return isAnAssociation;
+	}
+
+	/**
+	 * @param isAnAssociation the isAnAssociation to set
+	 */
+	public void setAnAssociation(boolean isAnAssociation) {
+		this.isAnAssociation = isAnAssociation;
 	}
 
 }

@@ -4,6 +4,8 @@ import java.util.Stack;
 
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
+
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -62,26 +64,33 @@ public class RenderableSEdit extends AbstractRenderable {
 					+ ModelTools.getCompleteName(bean.getDestinationClass()));
 		}
 
-		Element trigger = XFormsGenerator.createElementWithLabel("trigger",
-				XFormsGenerator.NAMESPACE_XFORMS, MsgPool.getMsg(MsgId.CAPTION_BUTTON_EDIT));
-		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
-		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
+		if (getFormGenerator().isInReadOnlyMode() == false) { // #1238
+			Element trigger = XFormsGenerator.createElementWithLabel("trigger",
+					XFormsGenerator.NAMESPACE_XFORMS, MsgPool.getMsg(MsgId.CAPTION_BUTTON_EDIT));
+			Element action = XFormsGenerator.createElement("action",
+					XFormsGenerator.NAMESPACE_XFORMS);
+			action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
 
-		Element setvalue = XFormsGenerator.createElement("setvalue",
-				XFormsGenerator.NAMESPACE_XFORMS);
-		setvalue.setAttribute("ref", "instance('minstance')/editedid");
-		String rootPath = getRootPath(renderedParents);
-		setvalue.setAttribute("value", "instance('minstance')/" + rootPath + path
-				+ MsgId.INT_INSTANCE_SIDEID);
-		action.addContent(setvalue);
+			Element setvalue = XFormsGenerator.createElement("setvalue",
+					XFormsGenerator.NAMESPACE_XFORMS);
+			setvalue.setAttribute("ref", "instance('minstance')/editedid");
+			String rootPath = getRootPath(renderedParents);
+			String instancePathToSIDEID;
+			if (StringUtils.trimToNull(rootPath) != null) { // we are in a nxn widget
+				instancePathToSIDEID = "instance('minstance')/" + rootPath ;
+			} else { // we are in a nx1 widget
+				instancePathToSIDEID = "instance('minstance')/" + path;
+			}
+			setvalue.setAttribute("value", instancePathToSIDEID + MsgId.INT_INSTANCE_SIDEID);
+			action.addContent(setvalue);
 
-		Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
-		submission.addLinkedElement(send);
-		action.addContent(send);
+			Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
+			submission.addLinkedElement(send);
+			action.addContent(send);
 
-		trigger.addContent(action);
-		rendered.setXformsElement(trigger);
-
+			trigger.addContent(action);
+			rendered.setXformsElement(trigger);
+		}
 		rendered.addModelElement(submission);
 
 		return rendered;

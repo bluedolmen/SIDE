@@ -33,8 +33,9 @@ public class RenderableSelectorCreate extends AbstractRenderableSelectorItem {
 			RenderableSelector renderableAssociationSelectionSelector) {
 		super(associationBean, renderableAssociationSelectionSelector);
 		submissionCreate = new ModelElementSubmission("", "", true, false);
+		submissionCreate.setAlwaysActive(false); // #1222
 		RenderableSubmit createButton = new RenderableSubmit(submissionCreate, MsgPool
-				.getMsg(MsgId.CAPTION_BUTTON_CREATE));
+				.getMsg(MsgId.CAPTION_BUTTON_CREATE), true);
 		add(createButton);
 	}
 

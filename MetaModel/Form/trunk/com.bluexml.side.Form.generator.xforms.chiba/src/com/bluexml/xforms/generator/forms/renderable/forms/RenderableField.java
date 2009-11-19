@@ -83,7 +83,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 	 */
 	@Override
 	protected final boolean isReadOnly() {
-		return formElement.isDisabled();
+		return getFormGenerator().isInReadOnlyMode() || formElement.isDisabled();
 	}
 
 	/*
@@ -146,8 +146,8 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field. AbstractRenderableField
-	 * #applyConstraints(com.bluexml.xforms.generator.forms .modelelement.ModelElementBindSimple)
+	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field.AbstractRenderableField#
+	 * applyConstraints(com.bluexml.xforms.generator.forms .modelelement.ModelElementBindSimple)
 	 */
 	@Override
 	protected void applyConstraints(ModelElementBindSimple meb) {
@@ -160,7 +160,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 			int minlength = charFieldElt.getMin_length();
 			int maxlength = charFieldElt.getMax_length();
 
-			if ((minlength > 0 || maxlength > 0) && (minlength < maxlength)) {
+			if ((minlength > 0 || maxlength > 0) /* && (minlength < maxlength) */) {
 				setLength(meb, "" + minlength, "" + maxlength);
 			}
 		}
@@ -207,11 +207,9 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 			renderable = new RenderableMailInput(generationManager, parent,
 					(EmailField) formElement);
 		} else if (formElement instanceof ImageField) {
-			renderable = new RenderableFileInput(generationManager, parent,
-					formElement, true);
+			renderable = new RenderableFileInput(generationManager, parent, formElement, true);
 		} else if (formElement instanceof FileField) {
-			renderable = new RenderableFileInput(generationManager, parent,
-					formElement, false);
+			renderable = new RenderableFileInput(generationManager, parent, formElement, false);
 		} else if (formElement instanceof FloatField) {
 			renderable = new RenderableSimpleInput<FloatField>(generationManager, parent,
 					(FloatField) formElement, "float");
@@ -283,11 +281,11 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 			Element nestedElement = rendered.getXformsElement();
 			div.setAttribute("class", appearance);
 			div.addContent(nestedElement);
-			
+
 			Element divOut = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 			divOut.setAttribute("class", MsgId.INT_CSS_CLASS_BLUEXML_AUTOGEN.getText());
 			divOut.addContent(div);
-			
+
 			rendered.setXMLElement(divOut);
 		}
 	}

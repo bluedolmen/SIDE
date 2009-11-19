@@ -424,7 +424,19 @@ public interface DataGenerator {
 	void endForm(FormContainer form);
 
 	void setLogger(Log genLogger);
-	
+
 	void setMonitor(CoreInterface monitor);
+
+	/** Returns true if the generator makes a different processing when in readOnly mode. */
+	boolean supportsReadOnlyMode();
+
+	/** Puts the generator in the read-only status. */
+	void setReadOnlyMode(boolean onOff);
+
+	/**
+	 * Tells whether the generator is in read only mode. Always returns false when the mode is not
+	 * supported.
+	 */
+	boolean isReadOnlyMode();
 
 }

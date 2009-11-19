@@ -21,7 +21,7 @@ public class RenderableListCreate extends Renderable {
 		super();
 		this.renderableClassList = renderableClassList;
 		submissionCreate = new ModelElementSubmission("", "", true, false);
-		RenderableSubmit createButton = new RenderableSubmit(submissionCreate, "Créer");
+		RenderableSubmit createButton = new RenderableSubmit(submissionCreate, "Créer", true);
 		add(createButton);
 	}
 

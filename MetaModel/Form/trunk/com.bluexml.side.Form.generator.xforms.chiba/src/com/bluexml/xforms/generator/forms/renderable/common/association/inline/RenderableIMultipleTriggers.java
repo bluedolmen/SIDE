@@ -116,8 +116,11 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 		Element divButtons = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		divButtons.setAttribute("class", ModelTools.getCompleteNameJAXB(bean.getDestinationClass())
 				+ "_triggers");
-		divButtons.addContent(addButton);
-		divButtons.addContent(deleteButton);
+
+		if (getFormGenerator().isInReadOnlyMode() == false) {
+			divButtons.addContent(addButton);
+			divButtons.addContent(deleteButton);
+		}
 		input.setXformsElement(divButtons);
 		return input;
 	}

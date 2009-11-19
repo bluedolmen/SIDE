@@ -24,7 +24,8 @@ public class RenderableSubmits extends Renderable {
 	public RenderableSubmits(List<ModelElementSubmission> submissions) {
 		super();
 		for (ModelElementSubmission modelElementSubmission : submissions) {
-			add(new RenderableSubmit(modelElementSubmission, modelElementSubmission.getCaption()));
+			add(new RenderableSubmit(modelElementSubmission, modelElementSubmission.getCaption(),
+					false));
 		}
 	}
 
