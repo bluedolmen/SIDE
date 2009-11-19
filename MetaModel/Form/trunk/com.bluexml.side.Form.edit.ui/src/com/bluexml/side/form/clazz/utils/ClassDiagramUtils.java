@@ -142,7 +142,7 @@ public class ClassDiagramUtils {
 	}
 
 	/**
-	 * Transform an association into a model choice field
+	 * Transform an association into a model choice field 
 	 *
 	 * @param ass
 	 * @param useSource
