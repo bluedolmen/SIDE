@@ -42,7 +42,7 @@ import org.eclipse.emf.common.util.EList;
 public interface Attribute extends TitledNamedClassModelElement {
 	/**
 	 * Returns the value of the '<em><b>Typ</b></em>' attribute.
-	 * The default value is <code>"void"</code>.
+	 * The default value is <code>"String"</code>.
 	 * The literals are from the enumeration {@link com.bluexml.side.common.DataType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -58,7 +58,7 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * @see com.bluexml.side.common.DataType
 	 * @see #setTyp(DataType)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAttribute_Typ()
-	 * @model default="void"
+	 * @model default="String"
 	 * @generated
 	 */
 	DataType getTyp();

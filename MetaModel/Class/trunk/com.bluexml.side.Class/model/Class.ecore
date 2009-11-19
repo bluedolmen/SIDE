@@ -273,7 +273,7 @@
       <details key="documentation" value="Definition: a class property descibes a characteristic of the concerned class. For example, the property 'title' of the class 'book' gives the title of the book.&#xD;&#xA;Constraints: &#xD;&#xA;- the name of a class property must be unique between all the direct and inherited property of a class.&#xD;&#xA;- a property is associated to a single class or abstract class; a class or an abstract class may contain zero, one or several properties.&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum ../../com.bluexml.side.Common/model/Common.ecore#//DataType"
-        defaultValueLiteral="void">
+        defaultValueLiteral="String">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: the type of a class property allows to define its format; the supported property types are boolean, byte, char, double, float, int, long, short, String, Date, Object.&#xD;&#xA;"/>
       </eAnnotations>
