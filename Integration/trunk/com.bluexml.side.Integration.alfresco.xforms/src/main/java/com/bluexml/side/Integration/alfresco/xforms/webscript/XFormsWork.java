@@ -733,7 +733,8 @@ public class XFormsWork implements RunAsWork<String> {
 
 	/**
 	 * 
-	 * Collects all non empty properties BlueXML available on completed tasks of an instanceId.<br/>
+	 * Collects all non empty BlueXML properties available on completed (and in-progress) tasks of
+	 * an instanceId.<br/>
 	 * Parameters: "workflowId": the workflow instance id
 	 * 
 	 * @param wfs
@@ -744,20 +745,29 @@ public class XFormsWork implements RunAsWork<String> {
 		Map<QName, Serializable> properties = new HashMap<QName, Serializable>();
 		String workflowId = parameters.get("workflowId");
 		// build a query to get all completed tasks for the workflow instance id
-		WorkflowTaskQuery taskQuery = new WorkflowTaskQuery();
-		taskQuery.setProcessId(workflowId);
-		taskQuery.setTaskState(WorkflowTaskState.COMPLETED);
-		List<WorkflowTask> tasks = wfs.queryTasks(taskQuery);
-		// get the relevant queries
-		if (tasks != null) {
-			for (WorkflowTask task : tasks) {
-				Set<QName> qnames = task.properties.keySet();
-				for (QName qname : qnames) {
-					if (qname.getNamespaceURI().startsWith(BLUEXML_WORKFLOW_URI)) {
-						Serializable value = task.properties.get(qname);
-						if (value != null) {
-							properties.put(qname, value);
-						}
+		WorkflowTaskQuery queryCompleted = new WorkflowTaskQuery();
+		queryCompleted.setProcessId(workflowId);
+		queryCompleted.setTaskState(WorkflowTaskState.COMPLETED);
+		List<WorkflowTask> tasksComplete = wfs.queryTasks(queryCompleted);
+		// Also collect properties from in-progress forms because the workflow may be updated from
+		// another interface than our forms, for instance, through Alfresco's web client
+		WorkflowTaskQuery queryToDo = new WorkflowTaskQuery();
+		queryToDo.setProcessId(workflowId);
+		queryToDo.setTaskState(WorkflowTaskState.IN_PROGRESS);
+		List<WorkflowTask> tasksToDo = wfs.queryTasks(queryToDo);
+		// merge both lists
+		List<WorkflowTask> tasks = new ArrayList<WorkflowTask>(tasksToDo.size()
+				+ tasksComplete.size());
+		tasks.addAll(tasksComplete);
+		tasks.addAll(tasksToDo);
+		// get the relevant properties
+		for (WorkflowTask task : tasks) {
+			Set<QName> qnames = task.properties.keySet();
+			for (QName qname : qnames) {
+				if (qname.getNamespaceURI().startsWith(BLUEXML_WORKFLOW_URI)) {
+					Serializable value = task.properties.get(qname);
+					if (value != null) {
+						properties.put(qname, value);
 					}
 				}
 			}
@@ -1091,8 +1101,8 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	private LuceneSearcher getUnsecureLuceneSearcher() {
-		LuceneIndexer indexer = formsWebscript.getIndexerAndSearcherFactory()
-				.getIndexer(formsWebscript.getStoreRef());
+		LuceneIndexer indexer = formsWebscript.getIndexerAndSearcherFactory().getIndexer(
+				formsWebscript.getStoreRef());
 		LuceneConfig config = formsWebscript.getIndexerAndSearcherFactory();
 		ADMLuceneSearcherImpl searcher = ADMLuceneSearcherImpl.getSearcher(formsWebscript
 				.getStoreRef(), indexer, config);
