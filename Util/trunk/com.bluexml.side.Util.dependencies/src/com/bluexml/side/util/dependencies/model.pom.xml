@@ -56,7 +56,7 @@
 			<repositories>
 				<repository>
 					<id>releases</id>
-					<url>http://merry.bluexml.com/nexus/content/repositories/releases</url>
+					<url>http://pipin.bluexml.com/nexus/content/repositories/releases</url>
 					<releases>
 						<enabled>true</enabled>
 					</releases>
@@ -66,7 +66,7 @@
 				</repository>
 				<repository>
 					<id>snapshots</id>
-					<url>http://merry.bluexml.com/nexus/content/repositories/snapshots</url>
+					<url>http://pipin.bluexml.com/nexus/content/repositories/snapshots</url>
 					<releases>
 						<enabled>false</enabled>
 					</releases>
@@ -78,11 +78,11 @@
 			<pluginRepositories>
 				<pluginRepository>
 					<id>snapshots</id>
-					<url>http://merry.bluexml.com/nexus/content/repositories/snapshots</url>
+					<url>http://pipin.bluexml.com/nexus/content/repositories/snapshots</url>
 				</pluginRepository>
 				<pluginRepository>
 					<id>releases</id>
-					<url>http://merry.bluexml.com/nexus/content/repositories/releases</url>
+					<url>http://pipin.bluexml.com/nexus/content/repositories/releases</url>
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
