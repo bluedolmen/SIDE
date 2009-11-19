@@ -537,9 +537,8 @@ public class DataLayer implements DataLayerInterface {
 
 		if (candidate == null) {
 			return null;
-		} else {
-			return new PropertyValue(type, candidate).getValue(type);
 		}
+		return new PropertyValue(type, candidate).getValue(type);
 	}
 
 	/**
@@ -908,20 +907,19 @@ public class DataLayer implements DataLayerInterface {
 		}
 		if (StringUtils.equals(pattern, FormatPattern.NONE.get())) {
 			return nodeRef.toString();
+		}
+		Map<QName, Serializable> properties = nodeService.getProperties(nodeRef);
+		Set<QName> names = properties.keySet();
+		//
+		if (StringUtils.equals(pattern, FormatPattern.FIRST.get())) {
+			return getLabelForNodeFirst(nodeRef, properties, names);
+		} else if (StringUtils.equals(pattern, FormatPattern.ALLTEXT.get())) {
+			return getLabelForNodeAllText(nodeRef, properties, names);
+		} else if (StringUtils.equals(pattern, FormatPattern.ALL.get())) {
+			return getLabelForNodeAll(nodeRef, properties, names);
 		} else {
-			Map<QName, Serializable> properties = nodeService.getProperties(nodeRef);
-			Set<QName> names = properties.keySet();
-			//
-			if (StringUtils.equals(pattern, FormatPattern.FIRST.get())) {
-				return getLabelForNodeFirst(nodeRef, properties, names);
-			} else if (StringUtils.equals(pattern, FormatPattern.ALLTEXT.get())) {
-				return getLabelForNodeAllText(nodeRef, properties, names);
-			} else if (StringUtils.equals(pattern, FormatPattern.ALL.get())) {
-				return getLabelForNodeAll(nodeRef, properties, names);
-			} else {
-				// Interpret the format pattern
-				return getNameForNode(pattern, nodeRef);
-			}
+			// Interpret the format pattern
+			return getNameForNode(pattern, nodeRef);
 		}
 	}
 
@@ -992,7 +990,7 @@ public class DataLayer implements DataLayerInterface {
 										associationFirstPartName, nodeAssos);
 
 								if (associationName.length() > 0) {
-									List<?> assocs = (List<?>) nodeAssos.get(associationName);
+									List<?> assocs = nodeAssos.get(associationName);
 									for (Object o : assocs) {
 										if (o instanceof AssociationRef) {
 											AssociationRef ref = (AssociationRef) o;
@@ -1036,10 +1034,9 @@ public class DataLayer implements DataLayerInterface {
 
 		if (result.length() == 0) {
 			return nodeRef.getId();
-		} else {
-			// return result.substring(0, result.length() - 1);
-			return result;
 		}
+		// return result.substring(0, result.length() - 1);
+		return result;
 	}
 
 	/**
@@ -1059,7 +1056,7 @@ public class DataLayer implements DataLayerInterface {
 			QName typeQName = assocRef.getTypeQName();
 			String assocName = typeQName.toString();
 			if (typeQName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
-				List<AssociationRef> list = (List<AssociationRef>) result.get(assocName);
+				List<AssociationRef> list = result.get(assocName);
 				// create the list if this is first association with 'assocName'
 				if (list == null) {
 					list = new ArrayList<AssociationRef>();
@@ -1126,17 +1123,14 @@ public class DataLayer implements DataLayerInterface {
 		if (targetProperties.containsKey(qname)) {
 			if (targetProperties.get(qname) != null) {
 				return (String) targetProperties.get(qname);
-			} else {
-				return "";
 			}
-		} else {
-			if (dictionaryService.getType(targetType).getParentName() != null) {
-				return getPropertyValue(targetProperties, dictionaryService.getType(targetType)
-						.getParentName(), attributeName);
-			} else {
-				return "";
-			}
+			return "";
 		}
+		if (dictionaryService.getType(targetType).getParentName() != null) {
+			return getPropertyValue(targetProperties, dictionaryService.getType(targetType)
+					.getParentName(), attributeName);
+		}
+		return "";
 	}
 
 	/**
