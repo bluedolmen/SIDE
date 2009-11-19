@@ -556,12 +556,12 @@ public class FormGenerator {
 		//** #979, #1273
 		AssociationEnd fEnd = (AssociationEnd) getRealObject(association.getFirstEnd());
 		Clazz fEndLinkedClass = null;
-		if (fEnd.getLinkedClass() instanceof Clazz) {
+		if (fEnd.getLinkedClass() != null) {
 			fEndLinkedClass = (Clazz) getRealObject(fEnd.getLinkedClass());
 		}
 		AssociationEnd sEnd = (AssociationEnd) getRealObject(association.getSecondEnd());
 		Clazz sEndLinkedClass = null;
-		if (sEnd.getLinkedClass() instanceof Clazz) {
+		if (sEnd.getLinkedClass() != null) {
 			sEndLinkedClass = (Clazz) getRealObject(sEnd.getLinkedClass());
 		}
 		//** #979, #1273
