@@ -88,15 +88,15 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	    </constraint>
 		<!-- STARTMMLOOP -->
 	    <%for (getAllEnumerations()) {%>		   
-			    <constraint name="<%getFolder()%>:nomenclature:<%getQualifiedName()%>" type="LIST">
-		            <parameter name="allowedValues">
-		                <list>
-		                	<%for (literals) {%>
-		                    <value><%name%></value>
-		                    <%}%>
-		                </list>
-		            </parameter>
-		        </constraint>
+	    <constraint name="<%getFolder()%>:nomenclature:<%getQualifiedName()%>" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                	<%for (literals) {%>
+                    <value><%name%></value>
+                    <%}%>
+                </list>
+            </parameter>
+        </constraint>
         <%}%>
 		<!-- ENDMMLOOP -->
         

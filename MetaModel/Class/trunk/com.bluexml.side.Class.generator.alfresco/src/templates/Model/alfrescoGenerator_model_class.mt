@@ -79,23 +79,26 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<%if (initialValue != null){%>
 					<default><%initialValue%></default>
 					<%}%>					
-					
+					<%if (metainfo[key.equalsIgnoreCase("propertySearched")].nSize() > 0 && metainfo[key.equalsIgnoreCase("propertySearched")].nFirst().value.equalsIgnoreCase("true")){%>
 		              <index enabled="true">
 		                 <atomic>true</atomic>
 		                 <stored>false</stored>
 		                 <tokenised>true</tokenised>
-		              </index>					
+		              </index>
+		            <%}else{%>					
+					  <index enabled="false"/>
+					<%}%>
 					<constraints>
 					<%if (metainfo[key.equalsIgnoreCase("email")].nSize()>0){%>
 						<constraint ref="bxds:constraint:mail"/>
 					<%}%>
 					<%if valueList {%>
-						<%if (!valueList.dynamic){%>
+						<!--<%if (!valueList.dynamic){%>--%>
 							<constraint ref="<%getFolder()%>:nomenclature:<%valueList.getQualifiedName()%>"/>
-						<%}else{%>
-							<!--<constraint ref="<%getFolder()%>:Litteral"/>-->
+						<!--<%}else{%>
+							<!-#-<constraint ref="<%getFolder()%>:Litteral"/>-#->
 							<constraint ref="<%getFolder()%>:enumU:<%valueList.getQualifiedName()%>"/>
-						<%}%>
+						<%}%>--%>
 					<%}%>
 					<%if (metainfo[key.endsWith("-length")].nSize()>0) {%>
 		                 <constraint type="LENGTH">
