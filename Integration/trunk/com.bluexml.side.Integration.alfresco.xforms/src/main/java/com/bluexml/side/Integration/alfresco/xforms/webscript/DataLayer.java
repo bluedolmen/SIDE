@@ -134,7 +134,7 @@ public class DataLayer implements DataLayerInterface {
 
 		// build attribute values
 		Map<QName, Serializable> properties = buildAttributesMap((Map<String, Object>) entry
-				.get("attributes"), nodeTypeQName);
+				.get("attributes"), nodeTypeQName, false);
 		QName assocTypeQName = ContentModel.ASSOC_CONTAINS;
 		// create the node
 		NodeRef newNode = createNode(where, assocTypeQName, null, nodeTypeQName, nodeName,
@@ -164,7 +164,7 @@ public class DataLayer implements DataLayerInterface {
 		QName nodeTypeQName = getDataTypeQName(datatype);
 		// build the map that contains attribute values
 		Map<QName, Serializable> properties = buildAttributesMap((Map<String, Object>) entry
-				.get("attributes"), nodeTypeQName);
+				.get("attributes"), nodeTypeQName, true);
 		// update properties
 		updateProperties(nodeToUpdate, properties);
 		// delete previous associations?
@@ -428,7 +428,7 @@ public class DataLayer implements DataLayerInterface {
 	 * @throws Exception
 	 */
 	private Map<QName, Serializable> buildAttributesMap(Map<String, Object> attributesMap,
-			QName nodeTypeQName) throws Exception {
+			QName nodeTypeQName, boolean isUpdating) throws Exception {
 		final String CREATOR = ALF_CONTENT_URI + "creator";
 		final String CREATED = ALF_CONTENT_URI + "created";
 
@@ -437,13 +437,16 @@ public class DataLayer implements DataLayerInterface {
 		//
 		// build mandatory properties with default values
 		Map<QName, Serializable> mandatoryProperties = new HashMap<QName, Serializable>();
-		mandatoryProperties.put(QName.createQName(CREATOR), authenticationService
-				.getCurrentUserName());
-		mandatoryProperties.put(QName.createQName(CREATED), new Date());
-		for (QName propQName : properties.keySet()) {
-			PropertyDefinition def = properties.get(propQName);
-			if (def.isMandatory()) {
-				mandatoryProperties.put(propQName, def.getDefaultValue());
+		// #1296: if updating, the object exists and all mandatory props are set, so skip this step
+		if (!isUpdating) {
+			mandatoryProperties.put(QName.createQName(CREATOR), authenticationService
+					.getCurrentUserName());
+			mandatoryProperties.put(QName.createQName(CREATED), new Date());
+			for (QName propQName : properties.keySet()) {
+				PropertyDefinition def = properties.get(propQName);
+				if (def.isMandatory()) {
+					mandatoryProperties.put(propQName, def.getDefaultValue());
+				}
 			}
 		}
 		//
@@ -659,8 +662,7 @@ public class DataLayer implements DataLayerInterface {
 		for (Entry<QName, Serializable> entry : properties.entrySet()) {
 			QName propertyName = entry.getKey();
 			Serializable convertedValue = entry.getValue();
-			// must convert value to proper one according to properties
-			// definitions
+			// must convert value to proper one according to properties definitions
 			PropertyDefinition propertyDef = dictionaryService.getProperty(propertyName);
 			convertedValue = makePropertyValue(propertyDef, convertedValue);
 

@@ -28,7 +28,7 @@ public interface DataLayerInterface {
 	public NodeRef create(String where, Element what, String id) throws Exception;
 
 	/**
-	 * Returns the list of nodes that correspond to the query string.
+	 * Return the list of nodes that correspond to the query string.
 	 * 
 	 * @param xpath
 	 *            the Xpath expression to query
