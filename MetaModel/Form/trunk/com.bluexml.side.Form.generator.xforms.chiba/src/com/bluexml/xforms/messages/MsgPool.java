@@ -18,8 +18,10 @@ import org.apache.commons.logging.LogFactory;
  * 
  */
 public class MsgPool {
+	private static final String INVALID_MESSAGE_FILE = "INVALID MESSAGE FILE!";
+
 	/** The loaded properties. */
-	private static Properties pool;
+	private Properties pool;
 
 	/** The complete path to the message file that contains the properties. */
 	private static String messageFilePath;
@@ -32,21 +34,21 @@ public class MsgPool {
 	private static MsgPool instance = null;
 
 	private MsgPool() {
-		pool = new Properties();
 		try {
 			if (inputStream == null) {
 				File messagesFile = new File(messageFilePath);
 				inputStream = new FileInputStream(messagesFile);
 			}
+			pool = new Properties();
 			pool.load(inputStream);
 		} catch (Exception e) {
 			logger.error("Error opening the message file.");
+			throw new RuntimeException(e);
 		}
 	}
 
 	/**
-	 * Sets the stream from which to load a message file. Previously loaded messages are lost.<br/>
-	 * Used at runtime.
+	 * Sets the stream from which to load a message file. Previously loaded messages are lost.
 	 * 
 	 * @param inputStream
 	 *            the inputStream to set
@@ -57,8 +59,7 @@ public class MsgPool {
 	}
 
 	/**
-	 * Sets the path to a new message file. Previously loaded messages are lost. <br/>
-	 * Used at generation time.
+	 * Sets the path to a new message file. Previously loaded messages are lost.
 	 * 
 	 * @param path
 	 *            the complete path to the message file.
@@ -70,27 +71,26 @@ public class MsgPool {
 	}
 
 	/**
-	 * Returns the string that is associated to a key in the messages file. The string may be empty
-	 * but a null value is never returned.
+	 * Returns the string that is associated to a key in the messages file. If no message is
+	 * associated with the key, returns the message associated with the MSG_KEY_NOT_FOUND string. If
+	 * this is not defined either, returns a default string.
 	 * 
 	 * @param msgKey
 	 *            the key, either an enum from class MsgId or a String
 	 * @return the string attached to the key
 	 */
-	public static String getMsg(Object msgKey) {
+	public static String getMsg(Object msgKey, String... args) {
 		String theKey = null;
 
 		if (msgKey instanceof MsgId) {
-			MsgId theMsgId = (MsgId) msgKey;
-			theKey = theMsgId.getText();
+			theKey = ((MsgId) msgKey).getText();
 		} else if (msgKey instanceof String) {
 			theKey = (String) msgKey;
 		}
 
-		getInstance();
-		String res = MsgPool.getPool().getProperty(theKey);
+		String res = getInstance().getPool().getProperty(theKey);
 		if (res != null) {
-			return res;
+			return replaceArgs(res, args);
 		}
 		// a key may be set to an empty string in the properties file
 		if (hasProperty(theKey) == true) {
@@ -98,9 +98,20 @@ public class MsgPool {
 		}
 		logger.warn("Message not found for key: " + theKey);
 		if (StringUtils.equals(theKey, MsgId.MSG_KEY_NOT_FOUND.getText())) {
-			return MsgId.INT_MSGPOOL_NO_MESSAGE_FILE.getText();
+			return INVALID_MESSAGE_FILE;
 		}
-		return MsgPool.getMsg(MsgId.MSG_KEY_NOT_FOUND);
+		return MsgPool.getMsg(MsgId.MSG_KEY_NOT_FOUND.getText());
+	}
+
+	private static String replaceArgs(String msg, String[] args) {
+		String result = msg;
+		int idx = 0;
+		for (String arg : args) {
+			String idxStr = "{" + idx + "}";
+			result = StringUtils.replace(result, idxStr, arg);
+			idx++;
+		}
+		return result;
 	}
 
 	/**
@@ -111,8 +122,7 @@ public class MsgPool {
 	 * @return
 	 */
 	private static boolean hasProperty(String theKey) {
-		getInstance();
-		Enumeration<?> properties = MsgPool.getPool().propertyNames();
+		Enumeration<?> properties = getInstance().getPool().propertyNames();
 		while (properties.hasMoreElements()) {
 			String aKey = (String) properties.nextElement();
 			if (StringUtils.equals(theKey, aKey)) {
@@ -120,20 +130,6 @@ public class MsgPool {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * Tests the availability of a key.
-	 * 
-	 * @param theKey
-	 * @return the key value if the key is found, null otherwise
-	 */
-	public static String testMsg(Object theKey) {
-		String res = MsgPool.getMsg(theKey);
-		if (StringUtils.equals(res, MsgId.INT_MSGPOOL_NO_MESSAGE_FILE.getText())) {
-			return null;
-		}
-		return res;
 	}
 
 	public static MsgPool getInstance() {
@@ -146,8 +142,24 @@ public class MsgPool {
 	/**
 	 * @return the pool
 	 */
-	private static Properties getPool() {
+	private Properties getPool() {
 		return pool;
+	}
+
+	/**
+	 * Equivalent to getMsg, except for the return value.
+	 * 
+	 * @param msgKey
+	 * @param args
+	 * @return null if a key is not found or if the key is empty
+	 */
+	public static String testMsg(Object msgKey, String... args) { // added for #1267
+		String msg = getMsg(msgKey, args);
+		if (StringUtils.equals(msg, getMsg(MsgId.MSG_KEY_NOT_FOUND))
+				|| (StringUtils.equals(msg, INVALID_MESSAGE_FILE))) {
+			return null;
+		}
+		return StringUtils.trimToNull(msg);
 	}
 
 }

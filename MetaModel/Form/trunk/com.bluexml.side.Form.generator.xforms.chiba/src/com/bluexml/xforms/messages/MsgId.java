@@ -190,6 +190,8 @@ public enum MsgId {
 	// strings by which we accept parameters in the url
 	//
 	PARAM_SKIP_ADDITIONAL_INFO("skipAdditionalInfo"),
+	/** the name of a Java class to be called */
+	PARAM_ACTION_NAME ("actionName"),
 	/** the address (protocol, host and port) to the Alfresco server*/
 	PARAM_ALFRESCO_HOST("alfrescoHost"),
 	/** whether non BlueXML definitions should also be listed*/
