@@ -213,6 +213,7 @@ public class RenderableSelector extends AbstractRenderable {
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
 		RenderedDiv rendered = new RenderedDiv(XFormsGenerator.getId("Selector"));
+		initBinds();
 
 		if (isForWorkflow == false) {
 			if (bean.getAssociationType() == AssociationType.clazz) {
