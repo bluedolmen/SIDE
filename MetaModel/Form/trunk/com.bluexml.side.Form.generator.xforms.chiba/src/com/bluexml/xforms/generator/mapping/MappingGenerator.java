@@ -880,7 +880,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 		if (type.equalsIgnoreCase("float")) {
 			return "" + alea.nextFloat();
 		}
-		throw new RuntimeException("No dummy value available for type " + type);
+		return null;
 	}
 
 	/**
