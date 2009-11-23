@@ -93,10 +93,10 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 						<constraint ref="bxds:constraint:mail"/>
 					<%}%>
 					<%if valueList {%>
-						<!--<%if (!valueList.dynamic){%>--%>
+						<%--<%if (!valueList.dynamic){%>--%>
 							<constraint ref="<%getFolder()%>:nomenclature:<%valueList.getQualifiedName()%>"/>
-						<!--<%}else{%>
-							<!-#-<constraint ref="<%getFolder()%>:Litteral"/>-#->
+						<%--<%}else{%>
+							<!--<constraint ref="<%getFolder()%>:Litteral"/>-->
 							<constraint ref="<%getFolder()%>:enumU:<%valueList.getQualifiedName()%>"/>
 						<%}%>--%>
 					<%}%>
