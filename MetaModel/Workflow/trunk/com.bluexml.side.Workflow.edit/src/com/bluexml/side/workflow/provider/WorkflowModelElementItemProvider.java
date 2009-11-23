@@ -72,7 +72,7 @@ public class WorkflowModelElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((WorkflowModelElement)object).getDocumentation();
+		String label = crop(((WorkflowModelElement)object).getDocumentation());
 		return label == null || label.length() == 0 ?
 			getString("_UI_WorkflowModelElement_type") :
 			getString("_UI_WorkflowModelElement_type") + " " + label;

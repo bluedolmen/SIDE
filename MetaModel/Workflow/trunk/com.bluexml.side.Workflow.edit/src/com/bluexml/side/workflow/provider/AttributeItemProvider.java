@@ -70,6 +70,7 @@ public class AttributeItemProvider
 			addTypPropertyDescriptor(object);
 			addTitlePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
+			addAllowedValuesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -141,6 +142,28 @@ public class AttributeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Allowed Values feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAllowedValuesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Attribute_allowedValues_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Attribute_allowedValues_feature", "_UI_Attribute_type"),
+				 WorkflowPackage.Literals.ATTRIBUTE__ALLOWED_VALUES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Attribute.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -180,6 +203,7 @@ public class AttributeItemProvider
 			case WorkflowPackage.ATTRIBUTE__TYP:
 			case WorkflowPackage.ATTRIBUTE__TITLE:
 			case WorkflowPackage.ATTRIBUTE__NAME:
+			case WorkflowPackage.ATTRIBUTE__ALLOWED_VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
