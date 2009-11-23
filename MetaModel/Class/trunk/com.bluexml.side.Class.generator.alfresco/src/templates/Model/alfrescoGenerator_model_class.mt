@@ -78,8 +78,10 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<%}%>
 					<%if (initialValue != null){%>
 					<default><%initialValue%></default>
-					<%}%>					
-					<%if (metainfo[key.equalsIgnoreCase("propertySearched")].nSize() > 0 && metainfo[key.equalsIgnoreCase("propertySearched")].nFirst().value.equalsIgnoreCase("true")){%>
+					<%}%>
+					<%-- index if unique since we use lucene search for unicity --%>				
+					<%if (metainfo[key.equalsIgnoreCase("propertySearched")].nSize() > 0 && metainfo[key.equalsIgnoreCase("propertySearched")].nFirst().value.equalsIgnoreCase("true")
+						|| unique){%>
 		              <index enabled="true">
 		                 <atomic>true</atomic>
 		                 <stored>false</stored>
@@ -90,7 +92,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<%}%>
 					<constraints>
 					<%if (metainfo[key.equalsIgnoreCase("email")].nSize()>0){%>
-						<constraint ref="bxds:constraint:mail"/>
+						<constraint ref="<%getFolder()%>:constraint:mail"/>
 					<%}%>
 					<%if valueList {%>
 						<%--<%if (!valueList.dynamic){%>--%>

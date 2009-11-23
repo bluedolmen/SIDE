@@ -22,7 +22,9 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String GENERATOR_OPTIONS_DataGenerator = "com.bluexml.side.Class.generator.alfresco.randomDataGenerator"; //$NON-NLS-1$
 	public static String GENERATOR_OPTIONS_PORTAL_doclist = "alfrescoShare.defaultDocList"; //$NON-NLS-1$
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension"; //$NON-NLS-1$
+	public static String GENERATOR_OPTIONS_UNICITY = "alfresco.unicity"; //$NON-NLS-1$
 	public static String GENERATOR_OPTIONS_WEBSCRIPT_REPORT = "alfresco.webscript.report"; //$NON-NLS-1$
+	
 	// public static String GENERATOR_OPTIONS_DEFAULTFORMS =
 	// "class.alfrescoShare.defaultForms";
 	public static String GENERATOR_OPTIONS_SQL_EXTENSION = "com.bluexml.side.Class.generator.alfresco.sql"; //$NON-NLS-1$
@@ -122,6 +124,10 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_DataGenerator)) {
 				monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_9"), Activator.Messages.getString("ClassAlfrescoGenerator_10"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL) + "service/data/form/fillparameters"); //$NON-NLS-3$
 			}
+			if (getGeneratorOptionValue(GENERATOR_OPTIONS_UNICITY)) {
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/unicity/alfrescoGenerator_unicity.mt"); //$NON-NLS-1$
+			}
+			
 			// standard alfresco services :
 			monitor.getLog().addServiceLog("Alfresco", Activator.Messages.getString("ClassAlfrescoGenerator_4"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL)); //$NON-NLS-1$ //$NON-NLS-2$
 			monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_5"), Activator.Messages.getString("ClassAlfrescoGenerator_6"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL) + "/manager/list");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$

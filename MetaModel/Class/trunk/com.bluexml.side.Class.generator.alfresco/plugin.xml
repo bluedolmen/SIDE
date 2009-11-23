@@ -117,6 +117,18 @@
                            versionMin="1.0.0">
                      </moduleDependence>
                   </option>
+                  <option
+                        defaultOption="false"
+                        documentation="additional module to check if created/updated items already exists, in this case the update or creation is forbidden"
+                        key="alfresco.unicity"
+                        label="Content Type Unicity">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Framework.alfresco.unicity"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.x"
+                           versionMin="1.0.0">
+                     </moduleDependence>
+                  </option>
                </generatorVersion>
             </technologyVersion>
          </technology>
