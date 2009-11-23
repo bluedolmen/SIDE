@@ -115,6 +115,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Attribute/typ"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Attribute/title"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Attribute/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Attribute/allowedValues"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//TransitionTask">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TransitionTask/transition"/>

@@ -8,6 +8,7 @@ package com.bluexml.side.workflow;
 
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.ModelElement;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,6 +25,7 @@ import com.bluexml.side.common.ModelElement;
  *   <li>{@link com.bluexml.side.workflow.Attribute#getTyp <em>Typ</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Attribute#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Attribute#getName <em>Name</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.Attribute#getAllowedValues <em>Allowed Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,5 +129,21 @@ public interface Attribute extends ModelElement {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Allowed Values</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Allowed Values</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Allowed Values</em>' attribute list.
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getAttribute_AllowedValues()
+	 * @model ordered="false"
+	 * @generated
+	 */
+	EList<String> getAllowedValues();
 
 } // Attribute

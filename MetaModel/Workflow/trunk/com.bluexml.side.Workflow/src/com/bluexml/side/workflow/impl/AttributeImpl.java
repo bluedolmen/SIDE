@@ -7,8 +7,10 @@
 package com.bluexml.side.workflow.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.common.DataType;
@@ -16,6 +18,7 @@ import com.bluexml.side.common.impl.ModelElementImpl;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.WorkflowPackage;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +30,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *   <li>{@link com.bluexml.side.workflow.impl.AttributeImpl#getTyp <em>Typ</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.AttributeImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.AttributeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.AttributeImpl#getAllowedValues <em>Allowed Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,6 +96,16 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAllowedValues() <em>Allowed Values</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllowedValues()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> allowedValues;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,6 +194,18 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getAllowedValues() {
+		if (allowedValues == null) {
+			allowedValues = new EDataTypeUniqueEList<String>(String.class, this, WorkflowPackage.ATTRIBUTE__ALLOWED_VALUES);
+		}
+		return allowedValues;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -189,6 +215,8 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 				return getTitle();
 			case WorkflowPackage.ATTRIBUTE__NAME:
 				return getName();
+			case WorkflowPackage.ATTRIBUTE__ALLOWED_VALUES:
+				return getAllowedValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -198,6 +226,7 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -209,6 +238,10 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 				return;
 			case WorkflowPackage.ATTRIBUTE__NAME:
 				setName((String)newValue);
+				return;
+			case WorkflowPackage.ATTRIBUTE__ALLOWED_VALUES:
+				getAllowedValues().clear();
+				getAllowedValues().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -231,6 +264,9 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 			case WorkflowPackage.ATTRIBUTE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case WorkflowPackage.ATTRIBUTE__ALLOWED_VALUES:
+				getAllowedValues().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -249,6 +285,8 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case WorkflowPackage.ATTRIBUTE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case WorkflowPackage.ATTRIBUTE__ALLOWED_VALUES:
+				return allowedValues != null && !allowedValues.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -269,6 +307,8 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 		result.append(title);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", allowedValues: ");
+		result.append(allowedValues);
 		result.append(')');
 		return result.toString();
 	}

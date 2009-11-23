@@ -2416,13 +2416,22 @@ public interface WorkflowPackage extends EPackage {
 	int ATTRIBUTE__NAME = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Allowed Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__ALLOWED_VALUES = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int ATTRIBUTE_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.BPMEventType <em>BPM Event Type</em>}' enum.
@@ -3196,6 +3205,17 @@ public interface WorkflowPackage extends EPackage {
 	EAttribute getAttribute_Name();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.workflow.Attribute#getAllowedValues <em>Allowed Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Allowed Values</em>'.
+	 * @see com.bluexml.side.workflow.Attribute#getAllowedValues()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_AllowedValues();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.TransitionTask <em>Transition Task</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3855,6 +3875,14 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATTRIBUTE__NAME = eINSTANCE.getAttribute_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Allowed Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__ALLOWED_VALUES = eINSTANCE.getAttribute_AllowedValues();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.TransitionTaskImpl <em>Transition Task</em>}' class.

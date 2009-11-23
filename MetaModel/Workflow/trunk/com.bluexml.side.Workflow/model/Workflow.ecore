@@ -365,6 +365,8 @@
         <details key="documentation" value="Definition: The 'name' attribute specifies the name of the 'Attribute'.&#xD;&#xD;Constraint/limit: The 'name' of the 'Attribute' must be unique in all the process."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowedValues" ordered="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionTask" eSuperTypes="#//State">
     <eOperations name="getAllNextStates" upperBound="-1" eType="#//State">
