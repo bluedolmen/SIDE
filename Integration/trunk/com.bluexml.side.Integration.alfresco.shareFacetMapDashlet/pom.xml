@@ -39,7 +39,7 @@
     <dependency>
       <groupId>com.bluexml.side.Integration.alfresco</groupId>
       <artifactId>shareDoclist</artifactId>
-      <version>1.0.2</version>
+      <version>[1.0.2,)</version>
       <type>zip</type>
     </dependency>
   </dependencies>
