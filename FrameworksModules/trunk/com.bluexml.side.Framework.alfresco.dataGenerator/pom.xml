@@ -165,6 +165,13 @@
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+    	<groupId>log4j</groupId>
+    	<artifactId>log4j</artifactId>
+    	<version>1.2.15</version>
+    	<type>jar</type>
+    	<scope>provided</scope>
+    </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering
