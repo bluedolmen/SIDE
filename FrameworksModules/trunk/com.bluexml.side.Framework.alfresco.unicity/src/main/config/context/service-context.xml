@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+	<bean id="unicityDescriptorReader" class="com.bluexml.side.framework.alfresco.unicity.UnicityXMLReader" singleton="true" init-method="init">
+		<property name="resourcePattern" value="classpath*:alfresco/module/*/unicity.xml" />
+	</bean>
+
+	<bean id="unicityCheckerBean" class="com.bluexml.side.framework.alfresco.unicity.LuceneUnicityCheckerImpl" singleton="true">		
+		<property name="indexerAndSearcherFactory" ref="admLuceneIndexerAndSearcherFactory" />
+		<property name="tenantService" ref="tenantService" />
+		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="namespacePrefixResolver" ref="namespaceService" />
+		<property name="unicityDescriptorReader" ref="unicityDescriptorReader" />
+	</bean>
+	
+	<bean id="unicityCheckerBeanPolicy" class="com.bluexml.side.framework.alfresco.unicity.UnicityPolicy" singleton="true" init-method="init">
+		<property name="nodeService" ref="nodeService" />
+		<property name="unicityCheckerBean" ref="unicityCheckerBean" />
+		<property name="policyComponent" ref="policyComponent" />
+	</bean>
+</beans>
