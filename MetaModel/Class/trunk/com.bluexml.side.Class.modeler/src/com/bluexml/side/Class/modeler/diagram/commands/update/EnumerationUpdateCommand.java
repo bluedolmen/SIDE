@@ -64,7 +64,7 @@ public class EnumerationUpdateCommand extends Command {
 
 		// Store new data
 		name = (String) data.get(EnumerationEditDialog.ENUMERATION_NAME);
-		isDynamic = (Boolean) data.get(EnumerationEditDialog.ENUMERATION_ISDYNAMIC);
+//		isDynamic = (Boolean) data.get(EnumerationEditDialog.ENUMERATION_ISDYNAMIC);
 		
 		inputTypes = (EnumerationLiteralDataStructure) data
 				.get(EnumerationEditDialog.ENUMERATION_LITERALS);
