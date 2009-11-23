@@ -70,17 +70,44 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
   <%}%>
 
  <%for (tasknode){%>
+ 	<%for (attributes){%>
+ 		<%if (allowedValues.split(",").length() > 0){%>
+ 	<constraint name="wfbx<%current("Process").name%>:<%name%>:allowedValues" type="LIST">
+        <parameter name="allowedValues">
+            <list>
+            	<%for (allowedValues.split(",")){%>
+            	<value><%self()%></value>
+            	<%}%>
+            </list>
+        </parameter>
+        <parameter name="caseSensitive"><value>true</value></parameter>
+     </constraint>
+     	<%}%>
+     <%}%>
+ 	
 	<type name="wfbx<%current("Process").name%>:<%name%>">
 		<parent>bpm:workflowTask</parent>
 			<!-- Properties -->
 			<properties>
 				<%for (attributes){%>
+					<%if (allowedValues.split(",").length() > 0){%>
+						<%allowedValues.split(",")%>
+					<%}else{%>
+					<%}%>
+					
 				<property name="wfbx<%current("Process").name%>:<%name%>">
 					<%if (title != null) {%>
 					<title> <%title%> </title>
 					<%}%>
 					<type><%getPropertyType()%></type>
 				</property>
+				
+				<%if (allowedValues.split(",").length() > 0){%>
+				<constraints>
+					<constraint ref="wfbx<%current("Process").name%>:<%name%>:allowedValues"/>
+				</constraints>
+				<%}%>
+				
 				<%}%>
 			</properties>
 			
