@@ -1,8 +1,8 @@
 package com.bluexml.side.application.ui.action.tree;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 /**
@@ -10,12 +10,21 @@ import org.eclipse.core.runtime.IConfigurationElement;
  * @author davidabad
  *
  */
-public abstract class ImplNode extends TreeNode {
+public abstract class ImplNode extends TreeNode implements Comparable<ImplNode> { 
 	protected String version;
 	protected String launchClass;
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(ImplNode o) {
+		return this.getVersion().compareTo(o.getVersion());
+	}
+
 	protected String contributorId;
 
-	protected Set<TreeNode> options = new HashSet<TreeNode>();
+	protected Set<TreeNode> options = new TreeSet<TreeNode>();
 
 	public ImplNode(IConfigurationElement elt, TechnologyVersion tv,TreeView root) {
 		super(root);
@@ -78,5 +87,9 @@ public abstract class ImplNode extends TreeNode {
 
 	public Collection<TreeNode> getChildren() {
 		return options;
+	}
+	
+	public boolean equals(Object o) {
+		return (o instanceof ImplNode) && ((ImplNode)o).getId().equals(this.getId());
 	}
 }

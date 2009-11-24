@@ -1,16 +1,29 @@
 package com.bluexml.side.application.ui.action.tree;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 
-public abstract class OptionComponant extends TreeNode {
+public abstract class OptionComponant extends TreeNode implements Comparable<OptionComponant> {
 
 	private String key;
 	private String label;
 	private String description;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(OptionComponant o) {
+		return this.getLabel().compareTo(o.getLabel());
+	}
+
+	public boolean equals(Object o) {
+		return (o instanceof OptionComponant) && ((OptionComponant) o).getId().equals(this.getId());
+	}
 
 	private boolean isDefault = false;
 
@@ -86,10 +99,8 @@ public abstract class OptionComponant extends TreeNode {
 	}
 
 	public Set<TreeNode> getChildren() {
-		return new HashSet<TreeNode>();
+		return new TreeSet<TreeNode>();
 	}
 
-	public void addChildren() {
-
-	}
+	
 }

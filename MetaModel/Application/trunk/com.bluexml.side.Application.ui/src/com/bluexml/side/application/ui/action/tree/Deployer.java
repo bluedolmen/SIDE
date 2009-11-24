@@ -1,14 +1,12 @@
 package com.bluexml.side.application.ui.action.tree;
 
-import java.util.HashSet;
-
 import org.eclipse.core.runtime.IConfigurationElement;
 
 import com.bluexml.side.application.ApplicationFactory;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.DeployerConfiguration;
-import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ModuleConstraint;
+import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 
@@ -24,7 +22,6 @@ public class Deployer extends ImplNode {
 		version = elt.getAttribute("version");
 		launchClass = elt.getAttribute("class");
 		contributorId = elt.getContributor().getName();
-		options = new HashSet<TreeNode>();
 		if (elt.getAttribute("shared") != null)
 			shared = Boolean.parseBoolean(elt.getAttribute("shared"));
 	}

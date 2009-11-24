@@ -1,7 +1,5 @@
 package com.bluexml.side.application.ui.action.tree;
 
-import java.util.HashSet;
-
 import org.eclipse.core.runtime.IConfigurationElement;
 
 import com.bluexml.side.application.ApplicationFactory;
@@ -22,7 +20,6 @@ public class Generator extends ImplNode {
 		launchClass = elt.getAttribute("class");
 		contributorId = elt.getContributor().getName();
 		description = elt.getAttribute("description");
-		options = new HashSet<TreeNode>();
 	}
 
 	public void updateApplication() {

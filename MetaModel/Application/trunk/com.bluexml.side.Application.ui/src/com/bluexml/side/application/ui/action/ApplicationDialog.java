@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.core.internal.resources.Container;
 import org.eclipse.core.internal.resources.Folder;
@@ -26,8 +27,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.IJobChangeEvent;
-import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -113,7 +112,6 @@ import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.application.ui.action.tree.TreeNode;
 import com.bluexml.side.application.ui.action.tree.TreeView;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
-import com.bluexml.side.application.ui.action.utils.Generate;
 import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
 import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
 
@@ -618,19 +616,17 @@ public class ApplicationDialog extends Dialog {
 			if (!t.isEnabled()) {
 				t.setEnabled(true);
 			}
-			if (!t.isChecked()) {				
+			if (!t.isChecked()) {
 				t.setChecked(true);
 				if (t instanceof ImplNode) {
-					ImplNode tt= (ImplNode)t;
+					ImplNode tt = (ImplNode) t;
 					for (TreeNode treeNode : tt.getChildren()) {
-						OptionComponant op =(OptionComponant)treeNode;
+						OptionComponant op = (OptionComponant) treeNode;
 						op.setEnabled(true);
-					} 
+					}
 					checkDefaultOptions(tt, tv);
 				}
-				
-				
-				
+
 			}
 		}
 		// Ugly but avoid modification made pop up.
@@ -1598,7 +1594,6 @@ public class ApplicationDialog extends Dialog {
 					// System.out.println("isEnabled !");
 					// Inverse
 					el.setChecked(!(el.isChecked()));
-					
 
 					if (el.isChecked()) {
 						// System.out.println("is Checked !");
@@ -1612,7 +1607,7 @@ public class ApplicationDialog extends Dialog {
 						} else if (action == SWT.NO) {
 							// uncheck to return to previous state
 							el.setChecked(false);
-							//tv.update(el, null);
+							// tv.update(el, null);
 						}
 					} else {
 						// System.out.println("is Not Checked !");
@@ -1638,7 +1633,7 @@ public class ApplicationDialog extends Dialog {
 			Point point = new Point(event.x, event.y);
 			documentationText.setText(builDocumentationText());
 			TreeItem item = tv.getTree().getItem(point);
-			
+
 			TreeElement el = (TreeElement) item.getData();
 			// If click on image : check it, else : just show informations
 			if (item.getImageBounds(0) != null && event.x <= item.getImageBounds(0).x + item.getImageBounds(0).width) {
@@ -1739,6 +1734,6 @@ public class ApplicationDialog extends Dialog {
 				}
 			}
 		}
-		
+
 	}
 }

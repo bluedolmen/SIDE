@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 
-public class Metamodel extends TreeNode {
+public class Metamodel extends TreeNode implements Comparable<Metamodel> {
 
 	private String label;
 	private String url;
-	private List<TreeNode> technology;
+	private List<TreeNode> technology= new ArrayList<TreeNode>();
 	private String description;
 
 	public Metamodel(IConfigurationElement elt, TreeView root) {
@@ -20,8 +20,6 @@ public class Metamodel extends TreeNode {
 		label = elt.getAttribute("name");
 		url = elt.getAttribute("url");
 		description = elt.getAttribute("description");
-		technology = new ArrayList<TreeNode>();
-
 		setEnabled(true);
 	}
 
@@ -37,14 +35,12 @@ public class Metamodel extends TreeNode {
 		super(root);
 		this.id = id;
 		label = "";
-		technology = new ArrayList<TreeNode>();
 	}
 
 	public Metamodel(String id, String label, TreeView root) {
 		super(root);
 		this.id = id;
 		this.label = label;
-		technology = new ArrayList<TreeNode>();
 	}
 
 	public Collection<TreeNode> getChildren() {
@@ -68,4 +64,11 @@ public class Metamodel extends TreeNode {
 		technology.add(child);
 	}
 
+	public int compareTo(Metamodel o) {
+		return this.getLabel().compareTo(o.getLabel());
+	}
+	
+	public boolean equals(Object o) {
+		return (o instanceof Metamodel) && ((Metamodel)o).getId().equals(this.getId());
+	}
 }

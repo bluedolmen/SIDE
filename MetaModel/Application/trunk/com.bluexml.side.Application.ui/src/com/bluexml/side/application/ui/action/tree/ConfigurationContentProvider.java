@@ -3,6 +3,7 @@ package com.bluexml.side.application.ui.action.tree;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,13 +19,13 @@ import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 public class ConfigurationContentProvider implements ITreeContentProvider {
 
 	private Map<?, ?> rootSet;
-	private Map<String, Metamodel> metamodelSet = new HashMap<String, Metamodel>();
-	private Map<String, Technology> technologySet = new HashMap<String, Technology>();
-	private Map<String, TechnologyVersion> technologyVersionSet = new HashMap<String, TechnologyVersion>();
-	private Map<String, Generator> generatorSet = new HashMap<String, Generator>();
-	private Map<String, Deployer> deployerSet = new HashMap<String, Deployer>();
-	private Map<String, OptionGenerator> optGeneratorSet = new HashMap<String, OptionGenerator>();
-	private Map<String, OptionDeployer> optDeployerSet = new HashMap<String, OptionDeployer>();
+	private Map<Metamodel, Metamodel> metamodelSet = new TreeMap<Metamodel, Metamodel>();
+	private Map<Technology, Technology> technologySet = new TreeMap<Technology, Technology>();
+	private Map<TechnologyVersion, TechnologyVersion> technologyVersionSet = new TreeMap<TechnologyVersion, TechnologyVersion>();
+	private Map<Generator, Generator> generatorSet = new TreeMap<Generator, Generator>();
+	private Map<Deployer, Deployer> deployerSet = new TreeMap<Deployer, Deployer>();
+	private Map<OptionComponant, OptionGenerator> optGeneratorSet = new TreeMap<OptionComponant, OptionGenerator>();
+	private Map<OptionComponant, OptionDeployer> optDeployerSet = new TreeMap<OptionComponant, OptionDeployer>();
 	private Map<Class<?>, Map<?, ?>> classByLevel = new HashMap<Class<?>, Map<?, ?>>();
 	private Class<?> neededRootClass;
 	List<?> omitedObject;
@@ -192,11 +193,11 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 			// We create the metal for this config element
 			Metamodel m = new Metamodel(config, root);
 			// We check if we already have this metamodel in your set
-			if (!metamodelSet.containsKey(m.getId())) {
-				metamodelSet.put(m.getId(), m);
+			if (!metamodelSet.containsKey(m)) {
+				metamodelSet.put(m, m);
 				//System.err.println("\t + Add metamodel " + m.getId());
 			} else {
-				m = metamodelSet.get(m.getId());
+				m = metamodelSet.get(m);
 				//System.err.println("\t * Get metamodel " + m.getId());
 			}
 			futurParent = m;
@@ -205,12 +206,12 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		// Scan for technology
 		if (!omitedObject.contains(Technology.class) && config.getName().equalsIgnoreCase("technology")) {
 			Technology t = new Technology(config, (Metamodel) parent, root);
-			String fullId = t.getFullId();
-			if (!technologySet.containsKey(fullId) || (rootSet != technologySet && parent != technologySet.get(fullId).getParent())) {
-				technologySet.put(fullId, t);
+//			String fullId = t.getFullId();
+			if (!technologySet.containsKey(t) || (rootSet != technologySet && parent != technologySet.get(t).getParent())) {
+				technologySet.put(t, t);
 				//System.err.println("\t\t + Add techno " + fullId);
 			} else {
-				t = technologySet.get(fullId);
+				t = technologySet.get(t);
 				//System.err.println("\t\t * Get techno " + fullId);
 			}
 			futurParent = t;
@@ -219,12 +220,12 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		// Scan for technology version
 		if (!omitedObject.contains(TechnologyVersion.class) && config.getName().equalsIgnoreCase("technologyVersion")) {
 			TechnologyVersion tv = new TechnologyVersion(config, (Technology) parent, root);
-			String fullId = tv.getFullId();
-			if (!technologyVersionSet.containsKey(fullId) || (rootSet != technologyVersionSet && parent != technologyVersionSet.get(fullId).getParent())) {
-				technologyVersionSet.put(fullId, tv);
+//			String fullId = tv.getFullId();
+			if (!technologyVersionSet.containsKey(tv) || (rootSet != technologyVersionSet && parent != technologyVersionSet.get(tv).getParent())) {
+				technologyVersionSet.put(tv, tv);
 				//System.err.println("\t\t\t + Add technoVersion " + fullId);
 			} else {
-				tv = technologyVersionSet.get(fullId);
+				tv = technologyVersionSet.get(tv);
 				//System.err.println("\t\t\t * Get technoVersion " + fullId);
 			}
 			futurParent = tv;
@@ -238,13 +239,13 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 					gv.setToHidde(true);
 					toCheck.add(gv);
 				}
-				String fullId = gv.getFullId();
-				if (!generatorSet.containsKey(fullId) ||
-						(rootSet != technologyVersionSet && parent != generatorSet.get(fullId).getParent())) {
-					generatorSet.put(fullId, gv);
+//				String fullId = gv.getFullId();
+				if (!generatorSet.containsKey(gv) ||
+						(rootSet != technologyVersionSet && parent != generatorSet.get(gv).getParent())) {
+					generatorSet.put(gv, gv);
 					//System.err.println("\t\t\t\t + Add Generator " + fullId);
 				} else {
-					gv = generatorSet.get(fullId);
+					gv = generatorSet.get(gv);
 					//System.err.println("\t\t\t\t * Get Generator " + fullId);
 				}
 				futurParent = gv;
@@ -259,11 +260,11 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 					dv.setToHidde(true);
 					toCheck.add(dv);
 				}
-				String fullId = dv.getFullId();
-				if (!deployerSet.containsKey(fullId) || (rootSet != deployerSet && parent != deployerSet.get(fullId).getParent())) {
-					deployerSet.put(fullId, dv);
+//				String fullId = dv.getFullId();
+				if (!deployerSet.containsKey(dv) || (rootSet != deployerSet && parent != deployerSet.get(dv).getParent())) {
+					deployerSet.put(dv, dv);
 				} else {
-					dv = deployerSet.get(fullId);
+					dv = deployerSet.get(dv);
 				}
 				futurParent = dv;
 			}
@@ -274,19 +275,19 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 			OptionComponant opt = null;
 			if (parent instanceof Generator) {
 				opt = new OptionGenerator(config, (Generator) parent, root);
-				String fullid = opt.getFullId();
-				if (!optGeneratorSet.containsKey(fullid)) {
-					optGeneratorSet.put(fullid, (OptionGenerator) opt);
+//				String fullid = opt.getFullId();
+				if (!optGeneratorSet.containsKey(opt)) {
+					optGeneratorSet.put(opt, (OptionGenerator) opt);
 				} else {
-					opt = optGeneratorSet.get(fullid);
+					opt = optGeneratorSet.get(opt);
 				}
 			} else if (parent instanceof Deployer) {
 				opt = new OptionDeployer(config, (Deployer) parent, root);
-				String fullid = opt.getFullId();
-				if (!optDeployerSet.containsKey(fullid)) {
-					optDeployerSet.put(fullid, (OptionDeployer) opt);
+//				String fullid = opt.getFullId();
+				if (!optDeployerSet.containsKey(opt)) {
+					optDeployerSet.put(opt, (OptionDeployer) opt);
 				} else {
-					opt = optDeployerSet.get(fullid);
+					opt = optDeployerSet.get(opt);
 				}
 			}
 			futurParent = opt;

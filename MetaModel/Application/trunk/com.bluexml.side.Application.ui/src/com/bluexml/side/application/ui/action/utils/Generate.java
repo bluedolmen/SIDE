@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.progress.IProgressConstants;
 import org.osgi.framework.Bundle;
 
@@ -30,7 +29,6 @@ import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.Activator;
-import com.bluexml.side.application.ui.SWTResourceManager;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.MustBeStopped;
 import com.bluexml.side.util.componentmonitor.AbstractMonitor;
@@ -68,7 +66,9 @@ public class Generate extends WorkspaceJob {
 	private boolean doDocumentation;
 	private boolean skipValidation;
 	private boolean doClean;
-
+	public List<Throwable> errors = new ArrayList<Throwable>();
+	public List<String> warns = new ArrayList<String>();
+	
 	public void setHeadless(boolean headless) {
 		this.headless = headless;
 	}
@@ -80,11 +80,15 @@ public class Generate extends WorkspaceJob {
 		this.configuration = configuration;
 		this.models = models;
 		setProperty(IProgressConstants.KEEPONE_PROPERTY, Boolean.TRUE);
+		setProperty(IProgressConstants.ICON_PROPERTY, getImage());
+
+	}
+
+	private ImageDescriptor getImage() {
 		Bundle plugin = Platform.getBundle(Activator.PLUGIN_ID);
 		URL imgPath = plugin.getResource("/icon/side_16.gif");
 		ImageDescriptor imgDesc = ImageDescriptor.createFromURL(imgPath);
-		setProperty(IProgressConstants.ICON_PROPERTY, imgDesc);
-
+		return imgDesc;
 	}
 
 	protected Action getReservationCompletedAction() {
@@ -133,7 +137,7 @@ public class Generate extends WorkspaceJob {
 	 * @throws IllegalAccessException
 	 * @throws IOException
 	 */
-	
+
 	public IStatus run_(final IProgressMonitor monitor) {
 		try {
 			// bind generalMonitor with given monitor from ProgressManager
@@ -143,7 +147,7 @@ public class Generate extends WorkspaceJob {
 				public void skipTasks(int skippedTask) {
 				}
 
-				public void isCanceled() {					
+				public void isCanceled() {
 				}
 
 				public void addText(String txt, LogEntryType type) {
@@ -177,12 +181,12 @@ public class Generate extends WorkspaceJob {
 			monitor.beginTask("", nbTask);
 			// Secondly we get the meta-model associated to a model
 			HashMap<String, List<IFile>> modelsInfo = null;
-			boolean modelWithError = false;
+			
 
 			try {
 				modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
 			} catch (Exception e) {
-				modelWithError = true;
+				
 				generalMonitor.addErrorText(Activator.Messages.getString("Generate.4") + e.getMessage()); //$NON-NLS-1$
 				e.printStackTrace();
 			}
@@ -203,46 +207,39 @@ public class Generate extends WorkspaceJob {
 							if (ApplicationUtil.validate(m)) {
 								generalMonitor.addText(m.getName() + Activator.Messages.getString("Generate.6")); //$NON-NLS-1$
 							} else {
-								generalMonitor
-										.addErrorText(Activator.Messages.getString("Generate.7") + m.getName() + " isn't validated. Please launch 'Validate' on top model element of " + m.getName() + "."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-								modelWithError = true;
+								throw new Exception(Activator.Messages.getString("Generate.7", m.getName()));
 							}
 						} catch (Exception e) {
 							generalMonitor.addErrorText(Activator.Messages.getString("Generate.10") + m.getName() + " : " + e.getMessage()); //$NON-NLS-1$ //$NON-NLS-2$
-							modelWithError = true;
-							e.printStackTrace();
+			
 						}
 					}
 				}
 				generalMonitor.taskDone(Activator.Messages.getString("Generate.1")); //$NON-NLS-1$
 				checkUserRequest();
 			}
-			if (!modelWithError) {
 
-				IFolder logFolder = IFileHelper.getIFolder(configurationParameters.get(ApplicationDialog.KEY_LOGPATH));
-				if (!logFolder.exists()) {
-					generalMonitor.addWarningText(Activator.Messages.getString("Generate.12") + logPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				IFolder genFolder = IFileHelper.getIFolder(genPath);
-				if (!genFolder.exists()) {
-					generalMonitor.addWarningText(Activator.Messages.getString("Generate.14") + genPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-
-				try {
-					generate(configuration, modelsInfo, configurationParameters, generationParameters);
-				} catch (Exception e) {
-					e.printStackTrace();
-					return new Status(Status.ERROR, Activator.PLUGIN_ID, e.getMessage(), e);
-				}
-			} else {
-				generalMonitor.addErrorText(Activator.Messages.getString("Generate_0")); //$NON-NLS-1$
+			IFolder logFolder = IFileHelper.getIFolder(configurationParameters.get(ApplicationDialog.KEY_LOGPATH));
+			if (!logFolder.exists()) {
+				generalMonitor.addWarningText(Activator.Messages.getString("Generate.12") + logPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
+			IFolder genFolder = IFileHelper.getIFolder(genPath);
+			if (!genFolder.exists()) {
+				generalMonitor.addWarningText(Activator.Messages.getString("Generate.14") + genPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+
+			generate(configuration, modelsInfo, configurationParameters, generationParameters);
 
 		} catch (MustBeStopped e1) {
 			generalMonitor.addErrorText(e1.getMessage());
 			monitor.subTask(e1.getMessage());
-			setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());			
+			setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
 			return new Status(Status.CANCEL, Activator.PLUGIN_ID, e1.getMessage());
+		} catch (Exception e2) {
+			fatalError(e2);
+			setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
+			generalMonitor.addErrorText(Activator.Messages.getString("Generate_0")); //$NON-NLS-1$
+			return new Status(Status.ERROR, Activator.PLUGIN_ID, e2.getMessage());
 		}
 		monitor.done();
 		setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
@@ -301,7 +298,7 @@ public class Generate extends WorkspaceJob {
 	}
 
 	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters,
-			final Map<String, String> generationParameters) throws ClassNotFoundException, InstantiationException, IllegalAccessException, MustBeStopped {
+			final Map<String, String> generationParameters) throws MustBeStopped, Exception {
 
 		// Clean if needed :
 		if (doClean) {
@@ -388,7 +385,7 @@ public class Generate extends WorkspaceJob {
 	}
 
 	private boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters,
-			final Map<String, String> generationParameters) throws MustBeStopped {
+			final Map<String, String> generationParameters) throws MustBeStopped, Exception {
 
 		// For all generator version we will call generation method
 		boolean error = false;
@@ -453,7 +450,7 @@ public class Generate extends WorkspaceJob {
 						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm, componentMonitor);
 					} catch (Exception e) {
 						error = true;
-						fatalError("Generate.32", e, componentMonitor); //$NON-NLS-1$
+						throw new Exception(Activator.Messages.getString("Generate.32",e.getMessage()),e);
 					}
 
 					this.componentMonitor.taskDone(Activator.Messages.getString("Generate.8")); //$NON-NLS-1$
@@ -467,7 +464,8 @@ public class Generate extends WorkspaceJob {
 								this.componentMonitor.taskDone(Activator.Messages.getString("Generate.34")); //$NON-NLS-1$
 							} catch (Exception e) {
 								error = true;
-								fatalError("Generate.39", e, this.componentMonitor); //$NON-NLS-1$
+								throw new Exception(Activator.Messages.getString("Generate.39",e.getMessage()),e);
+								// fatalError("Generate.39", e, this.componentMonitor); //$NON-NLS-1$
 							}
 							this.componentMonitor.beginTask(Activator.Messages.getString("Generate.35", name)); //$NON-NLS-1$
 
@@ -476,7 +474,8 @@ public class Generate extends WorkspaceJob {
 								generator.complete();
 							} catch (Exception e) {
 								error = true;
-								fatalError("Generate.61", e, this.componentMonitor); //$NON-NLS-1$
+								throw new Exception(Activator.Messages.getString("Generate.61",e.getMessage()),e);
+//								fatalError("Generate.61", e, this.componentMonitor); //$NON-NLS-1$
 							}
 							this.componentMonitor.taskDone(Activator.Messages.getString("Generate.36")); //$NON-NLS-1$
 
@@ -484,7 +483,8 @@ public class Generate extends WorkspaceJob {
 								generator.createStampFile();
 							} catch (Exception e) {
 								error = true;
-								fatalError("Generate.42", e, this.componentMonitor); //$NON-NLS-1$
+								throw new Exception(Activator.Messages.getString("Generate.42",e.getMessage()),e);
+//								fatalError("Generate.42", e, this.componentMonitor); //$NON-NLS-1$
 							}
 						}
 					} else {
@@ -506,7 +506,8 @@ public class Generate extends WorkspaceJob {
 
 				} catch (Exception e) {
 					error = true;
-					fatalError("Generate.62", e, generalMonitor); //$NON-NLS-1$
+					throw new Exception(Activator.Messages.getString("Generate.62",e.getMessage()),e);
+//					fatalError("Generate.62", e, generalMonitor); //$NON-NLS-1$
 				}
 			} else {
 				generalMonitor.skipTasks(NB_GENERATION_STEP);
@@ -516,7 +517,7 @@ public class Generate extends WorkspaceJob {
 	}
 
 	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters,
-			final Map<String, String> generationParameters) throws MustBeStopped {
+			final Map<String, String> generationParameters) throws MustBeStopped, Exception {
 		boolean error = false;
 
 		List<DeployerConfiguration> ldeployers = configuration.getDeployerConfigurations();
@@ -546,7 +547,7 @@ public class Generate extends WorkspaceJob {
 	}
 
 	private boolean launchDeployer(DeployerConfiguration depConf, Configuration configuration, Map<String, String> configurationParameters, Map<String, String> generationParameters)
-			throws MustBeStopped {
+			throws MustBeStopped, Exception {
 
 		checkUserRequest();
 		boolean error = false;
@@ -621,7 +622,8 @@ public class Generate extends WorkspaceJob {
 					}
 				} catch (Exception e) {
 					error = true;
-					fatalError("Generate.56", e, this.componentMonitor); //$NON-NLS-1$
+					throw new Exception(Activator.Messages.getString("Generate.56",e.getMessage()),e);
+					// fatalError("Generate.56", e, this.componentMonitor); //$NON-NLS-1$
 				}
 
 				try {
@@ -635,7 +637,8 @@ public class Generate extends WorkspaceJob {
 					this.componentMonitor.getLog().saveLog(); //$NON-NLS-1$
 				} catch (Exception e) {
 					error = true;
-					fatalError("Generate.62", e, generalMonitor); //$NON-NLS-1$
+					throw new Exception(Activator.Messages.getString("Generate.62",e.getMessage()),e);
+//					fatalError("Generate.62", e, generalMonitor); //$NON-NLS-1$
 				}
 			} else {
 				this.componentMonitor.skipTasks(NB_DEPLOY_STEP);
@@ -650,42 +653,37 @@ public class Generate extends WorkspaceJob {
 		return error;
 	}
 
-	protected void fatalError(String key, Throwable e, ComponentMonitor monitor) {
-		monitor.addErrorTextAndLog(Activator.Messages.getString(key, e.getMessage()), e, null);
-		try {
-			monitor.getLog().saveLog();
-		} catch (Exception e1) {
-			monitor.addErrorText(e.getMessage());
-			e1.printStackTrace();
+	protected void fatalError(Throwable e) {
+		String message = e.getMessage();
+		if (componentMonitor.isInitialized()) {
+			// so we can log in current componentMonitor
+			componentMonitor.addErrorTextAndLog(message, e, null);
+			// save component log file
+			try {
+				componentMonitor.getLog().saveLog();
+			} catch (Exception e1) {
+				componentMonitor.addErrorText(e1.getMessage());
+				e1.printStackTrace();
+			}
+			// set labels
+			componentMonitor.setLabel(message);
 		}
-		monitor.beginTask(e.getMessage());
-		generalMonitor.beginTask(Activator.Messages.getString("Generate_9", e.getMessage()));
-		fatalError_(key, e, monitor);
-	}
-
-	protected void fatalError(String key, Throwable e, Monitor monitor) {
-		monitor.addErrorText((Activator.Messages.getString(key, e.getMessage())));
-		monitor.beginTask(Activator.Messages.getString("Generate_9", e.getMessage()));
-		fatalError_(key, e, monitor);
-	}
-
-	protected void fatalError_(String key, Throwable e, AbstractMonitor monitor) {
+		// manage generalMonitor
+		generalMonitor.setLabel(message);
 		try {
-			monitor.getConsoleLog().saveLog();
+			generalMonitor.getConsoleLog().saveLog();
 		} catch (Exception e1) {
-			monitor.addErrorText(e.getMessage());
+			generalMonitor.addErrorText(e1.getMessage());
 			e1.printStackTrace();
 		}
 		saveSideReportAndFeedBack();
-		monitor.skipAllTasks(true);
+		generalMonitor.skipAllTasks(true);
 		e.printStackTrace();
-		// must be the last action because this cause a break in
-		// the execution stack
-		// if (Activator.getDefault() != null && Activator.getDefault().getLog()
-		// !=null) {
-		Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString(key), e));
-		// }
-
+		if (Activator.getDefault() != null && Activator.getDefault().getLog() != null) {
+			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, message, e));
+		} else {
+			new Activator().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, message, e));
+		}
 	}
 
 	private void saveSideReportAndFeedBack() {
@@ -735,10 +733,10 @@ public class Generate extends WorkspaceJob {
 		}
 	}
 
-//	@Override
-//	protected IStatus run(IProgressMonitor monitor) {
-//		return run_(monitor);
-//	}
+	// @Override
+	// protected IStatus run(IProgressMonitor monitor) {
+	// return run_(monitor);
+	// }
 
 	@Override
 	public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
