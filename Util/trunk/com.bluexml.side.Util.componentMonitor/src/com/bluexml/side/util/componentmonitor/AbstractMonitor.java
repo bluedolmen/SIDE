@@ -63,6 +63,10 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 
 	}
 
+	public void setLabel(String txt) {
+		this.progressBarlabel.setText(txt);
+	}
+	
 	public void addText(String text) {
 		addText(text, LogEntryType.CONSOLE);
 	}

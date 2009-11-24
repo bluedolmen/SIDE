@@ -13,6 +13,13 @@ public class ComponentMonitor extends AbstractMonitor implements CoreInterface {
 	private LogHelper log;
 	boolean initialized = false;
 
+	/**
+	 * @return the initialized
+	 */
+	public boolean isInitialized() {
+		return initialized;
+	}
+
 	public ComponentMonitor(StyledTextInterface styletext, ProgressBarInterface progressBar, Integer totalWork, LabelInterface progressBarlabel, AbstractMonitor parent,
 			final Map<String, String> configurationParameters, LogType logType, LogHelper consoleLog, String logFileName) {
 		super(styletext, progressBar, progressBarlabel, parent);
