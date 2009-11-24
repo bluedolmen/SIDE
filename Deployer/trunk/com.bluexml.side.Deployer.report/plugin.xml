@@ -22,6 +22,7 @@
                      label="Tomcat installation directory">
                </configurationParameter>
                <option
+                     defaultOption="true"
                      documentation="deploy in a clean webapp"
                      key="com.bluexml.side.Deployer.birtReport.clean"
                      label="clean">
