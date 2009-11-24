@@ -41,8 +41,9 @@
 	associations, ...).</description>
   <repositories>
     <repository>
+      <!-- beware to use unique ID to avoid collision with other repository -->
       <id>releases_alfresco</id>
-      <url>http://repository.sourcesense.com/nexus/content/repositories/releases/</url>
+      <url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.releases/</url>
     </repository>
     <repository>
       <id>ss-public</id>
@@ -115,7 +116,7 @@
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-repository</artifactId>
-      <version>3.2</version>
+      <version>3.2r</version>
       <scope>provided</scope>
       <classifier>community</classifier>
     </dependency>
