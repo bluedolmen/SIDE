@@ -21,9 +21,9 @@ public abstract class OptionComponant extends TreeNode implements Comparable<Opt
 		return this.getLabel().compareTo(o.getLabel());
 	}
 
-	public boolean equals(Object o) {
-		return (o instanceof OptionComponant) && ((OptionComponant) o).getId().equals(this.getId());
-	}
+//	public boolean equals(Object o) {
+//		return (o instanceof OptionComponant) && ((OptionComponant) o).getId().equals(this.getId());
+//	}
 
 	private boolean isDefault = false;
 

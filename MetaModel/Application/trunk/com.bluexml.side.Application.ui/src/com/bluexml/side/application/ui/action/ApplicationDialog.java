@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.eclipse.core.internal.resources.Container;
 import org.eclipse.core.internal.resources.Folder;
@@ -219,10 +218,21 @@ public class ApplicationDialog extends Dialog {
 			initializeTree();
 
 			Set<TreeItem> generators = collectImplNode(genOptionsTree);
-			configureTree(configuration, generators, genOptionsTree);
+			boolean atleastOneCheckedGenerator = configureTree(configuration, generators, genOptionsTree);
 
 			Set<TreeItem> deployers = collectImplNode(deployOptionsTree);
-			configureTree(configuration, deployers, deployOptionsTree);
+			boolean atleastOneCheckedDeployer = configureTree(configuration, deployers, deployOptionsTree);
+
+			if (atleastOneCheckedGenerator) {
+				collapseUnchecked(genOptionsTree.getTree().getItems());
+			} else {
+				genOptionsTree.expandAll();
+			}
+			if (atleastOneCheckedDeployer) {
+				collapseUnchecked(deployOptionsTree.getTree().getItems());
+			} else {
+				deployOptionsTree.expandAll();
+			}
 
 			// Refresh static generator parameters
 			initializeStaticParameters();
@@ -577,7 +587,8 @@ public class ApplicationDialog extends Dialog {
 	 * @param configuration
 	 * @param generators
 	 */
-	private void configureTree(Configuration configuration, Set<TreeItem> generators, TreeViewer tv) {
+	private boolean configureTree(Configuration configuration, Set<TreeItem> generators, TreeViewer tv) {
+		boolean atleastOnchecked = false;
 		ConfigurationContentProvider ctp = (ConfigurationContentProvider) tv.getContentProvider();
 		for (TreeItem item : generators) {
 			ImplNode g = (ImplNode) item.getData();
@@ -605,7 +616,7 @@ public class ApplicationDialog extends Dialog {
 					for (TreeItem option : item.getItems()) {
 						tv.update(option.getData(), null);
 					}
-
+					atleastOnchecked = true;
 					refreshParents(item, tv);
 				}
 			}
@@ -631,6 +642,20 @@ public class ApplicationDialog extends Dialog {
 		}
 		// Ugly but avoid modification made pop up.
 		saveData();
+
+		return atleastOnchecked;
+	}
+
+	private void collapseUnchecked(TreeItem[] childs) {
+		for (TreeItem treeItem : childs) {
+			TreeElement item = (TreeElement) treeItem.getData();
+
+			if (!(item.isChecked() && item.isEnabled())) {
+				treeItem.setExpanded(false);
+			} else {
+				collapseUnchecked(treeItem.getItems());
+			}
+		}
 	}
 
 	private void refreshParents(TreeItem item, TreeViewer tv) {
@@ -1633,7 +1658,6 @@ public class ApplicationDialog extends Dialog {
 			Point point = new Point(event.x, event.y);
 			documentationText.setText(builDocumentationText());
 			TreeItem item = tv.getTree().getItem(point);
-
 			TreeElement el = (TreeElement) item.getData();
 			// If click on image : check it, else : just show informations
 			if (item.getImageBounds(0) != null && event.x <= item.getImageBounds(0).x + item.getImageBounds(0).width) {

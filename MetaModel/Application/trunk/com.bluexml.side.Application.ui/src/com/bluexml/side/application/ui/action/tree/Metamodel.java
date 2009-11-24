@@ -68,7 +68,7 @@ public class Metamodel extends TreeNode implements Comparable<Metamodel> {
 		return this.getLabel().compareTo(o.getLabel());
 	}
 	
-	public boolean equals(Object o) {
-		return (o instanceof Metamodel) && ((Metamodel)o).getId().equals(this.getId());
-	}
+//	public boolean equals(Object o) {
+//		return (o instanceof Metamodel) && ((Metamodel)o).getId().equals(this.getId());
+//	}
 }

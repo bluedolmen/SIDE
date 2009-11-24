@@ -69,7 +69,7 @@ public class TechnologyVersion extends TreeNode implements Comparable<Technology
 		return this.getVersion().compareTo(o.getVersion());
 	}
 
-	public boolean equals(Object o) {
-		return (o instanceof TechnologyVersion) && ((TechnologyVersion) o).getId().equals(this.getId());
-	}
+//	public boolean equals(Object o) {
+//		return (o instanceof TechnologyVersion) && ((TechnologyVersion) o).getId().equals(this.getId());
+//	}
 }

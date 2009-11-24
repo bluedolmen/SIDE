@@ -89,7 +89,7 @@ public abstract class ImplNode extends TreeNode implements Comparable<ImplNode> 
 		return options;
 	}
 	
-	public boolean equals(Object o) {
-		return (o instanceof ImplNode) && ((ImplNode)o).getId().equals(this.getId());
-	}
+//	public boolean equals(Object o) {
+//		return (o instanceof ImplNode) && ((ImplNode)o).getId().equals(this.getId());
+//	}
 }

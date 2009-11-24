@@ -53,8 +53,8 @@ public class Technology extends TreeNode implements Comparable<Technology> {
 		return this.getLabel().compareTo(o.getLabel());
 	}
 	
-	public boolean equals(Object o) {
-		return (o instanceof Technology) && ((Technology)o).getId().equals(this.getId());
-	}
+//	public boolean equals(Object o) {
+//		return (o instanceof Technology) && ((Technology)o).getId().equals(this.getId());
+//	}
 
 }
