@@ -23,6 +23,7 @@
                      label="Tomcat installation directory">
                </configurationParameter>
                <option
+                     defaultOption="true"
                      documentation="Check this option if you want to completely remove previous deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time."
                      key="com.bluexml.side.deployerDirect.alfresco.clean"
                      label="clean">
