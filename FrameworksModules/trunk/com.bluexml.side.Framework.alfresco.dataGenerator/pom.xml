@@ -43,6 +43,11 @@
       <url>http://repository.sourcesense.com/maven2</url>
     </repository>
     <repository>
+      <!-- beware to use unique ID to avoid collision with other repository -->
+      <id>releases_alfresco</id>
+      <url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.releases/</url>
+    </repository>
+    <repository>
       <id>thirdparty</id>
       <url>http://repository.sourcesense.com/nexus/content/repositories/thirdparty/</url>
     </repository>
@@ -94,21 +99,21 @@
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-repository</artifactId>
-      <version>3.2</version>
+      <version>3.2r</version>
       <scope>provided</scope>
       <classifier>community</classifier>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-webscript-framework</artifactId>
-      <version>3.2</version>
+      <version>3.2r</version>
       <classifier>community</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-core</artifactId>
-      <version>3.2</version>
+      <version>3.2r</version>
       <classifier>community</classifier>
       <scope>provided</scope>
     </dependency>
