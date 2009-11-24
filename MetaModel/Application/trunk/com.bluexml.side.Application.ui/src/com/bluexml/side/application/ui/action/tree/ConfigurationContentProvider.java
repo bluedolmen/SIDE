@@ -24,8 +24,8 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	private Map<TechnologyVersion, TechnologyVersion> technologyVersionSet = new TreeMap<TechnologyVersion, TechnologyVersion>();
 	private Map<Generator, Generator> generatorSet = new TreeMap<Generator, Generator>();
 	private Map<Deployer, Deployer> deployerSet = new TreeMap<Deployer, Deployer>();
-	private Map<OptionComponant, OptionGenerator> optGeneratorSet = new TreeMap<OptionComponant, OptionGenerator>();
-	private Map<OptionComponant, OptionDeployer> optDeployerSet = new TreeMap<OptionComponant, OptionDeployer>();
+	private Map<String, OptionGenerator> optGeneratorSet = new TreeMap<String, OptionGenerator>();
+	private Map<String, OptionDeployer> optDeployerSet = new TreeMap<String, OptionDeployer>();
 	private Map<Class<?>, Map<?, ?>> classByLevel = new HashMap<Class<?>, Map<?, ?>>();
 	private Class<?> neededRootClass;
 	List<?> omitedObject;
@@ -276,18 +276,18 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 			if (parent instanceof Generator) {
 				opt = new OptionGenerator(config, (Generator) parent, root);
 //				String fullid = opt.getFullId();
-				if (!optGeneratorSet.containsKey(opt)) {
-					optGeneratorSet.put(opt, (OptionGenerator) opt);
+				if (!optGeneratorSet.containsKey(opt.getLabel()+opt.getId())) {
+					optGeneratorSet.put(opt.getLabel()+opt.getId(), (OptionGenerator) opt);
 				} else {
-					opt = optGeneratorSet.get(opt);
+					opt = optGeneratorSet.get(opt.getLabel()+opt.getId());
 				}
 			} else if (parent instanceof Deployer) {
 				opt = new OptionDeployer(config, (Deployer) parent, root);
 //				String fullid = opt.getFullId();
-				if (!optDeployerSet.containsKey(opt)) {
-					optDeployerSet.put(opt, (OptionDeployer) opt);
+				if (!optDeployerSet.containsKey(opt.getLabel()+opt.getId())) {
+					optDeployerSet.put(opt.getLabel()+opt.getId(), (OptionDeployer) opt);
 				} else {
-					opt = optDeployerSet.get(opt);
+					opt = optDeployerSet.get(opt.getLabel()+opt.getId());
 				}
 			}
 			futurParent = opt;
