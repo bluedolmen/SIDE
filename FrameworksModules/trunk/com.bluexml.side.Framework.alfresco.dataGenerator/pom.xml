@@ -30,7 +30,7 @@
   In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
-  <version>1.0.8</version>
+  <version>1.0.9</version>
   <description>Project to generate data test in Alfresco for a given model</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -171,11 +171,11 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-    	<groupId>log4j</groupId>
-    	<artifactId>log4j</artifactId>
-    	<version>1.2.15</version>
-    	<type>jar</type>
-    	<scope>provided</scope>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.15</version>
+      <type>jar</type>
+      <scope>provided</scope>
     </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
