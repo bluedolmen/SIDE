@@ -11,22 +11,22 @@
 <plugin>
 
 
-  <extension
-    point = "org.eclipse.ui.newWizards">
-    <category
-      id = "com.bluexml.side.modeler.category.ID"
-      name="SIDE Modeler">
-    </category>
-    <wizard
-      id = "com.bluexml.side.portal.presentation.PortalModelWizardID"
-      name = "%_UI_PortalModelWizard_label"
-      class = "com.bluexml.side.portal.presentation.PortalModelWizard"
-      category = "com.bluexml.side.modeler.category.ID"
-      icon = "icons/full/obj16/PortalModelFile.gif">
-      <description>%_UI_PortalModelWizard_description</description>
-      <selection class = "org.eclipse.core.resources.IResource" />
-    </wizard>
-  </extension>
+<!--  <extension-->
+<!--    point = "org.eclipse.ui.newWizards">-->
+<!--    <category-->
+<!--      id = "com.bluexml.side.modeler.category.ID"-->
+<!--      name="SIDE Modeler">-->
+<!--    </category>-->
+<!--    <wizard-->
+<!--      id = "com.bluexml.side.portal.presentation.PortalModelWizardID"-->
+<!--      name = "%_UI_PortalModelWizard_label"-->
+<!--      class = "com.bluexml.side.portal.presentation.PortalModelWizard"-->
+<!--      category = "com.bluexml.side.modeler.category.ID"-->
+<!--      icon = "icons/full/obj16/PortalModelFile.gif">-->
+<!--      <description>%_UI_PortalModelWizard_description</description>-->
+<!--      <selection class = "org.eclipse.core.resources.IResource" />-->
+<!--    </wizard>-->
+<!--  </extension>-->
 
   <extension point = "org.eclipse.ui.editors">
     <editor
