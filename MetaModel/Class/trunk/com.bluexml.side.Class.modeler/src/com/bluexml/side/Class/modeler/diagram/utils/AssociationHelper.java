@@ -35,6 +35,8 @@ public class AssociationHelper {
 	public static final String ASSOCIATION_TITLE = "association title";
 
 	public static final String ASSOCIATION_DESCRIPTION = "association description";
+	
+	public static final String ASSOCIATION_DOCUMENTATION = "association documentation";
 
 	public static final String ASSOCIATION_TYPE = "association type";
 

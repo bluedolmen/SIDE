@@ -51,16 +51,15 @@ import com.bluexml.side.common.MetaInfoGroup;
 
 /**
  * Updating association parameters
- *
+ * 
  */
 public class AssociationEditDialog extends Dialog implements IDialogConstants {
 	private static final int MIN_DIALOG_HEIGHT = 300;
 
 	private static final int MIN_DIALOG_WIDTH = 200;
 
-
-
-
+	private Text documentation;
+	private String associationDocumentation;
 
 	/** Current edited Association */
 	private Association association;
@@ -133,7 +132,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	private String secondEndClass;
 
-	private Map<String,Object> drawConstraints = new HashMap<String,Object>();
+	private Map<String, Object> drawConstraints = new HashMap<String, Object>();
 
 	private ConstraintsDataStructure dataConstraints;
 
@@ -148,8 +147,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 	private ModifyListener firstEndValidationListener = new ModifyListener() {
 		public void modifyText(ModifyEvent e) {
 			if (getButton(IDialogConstants.OK_ID) != null) {
-				getButton(IDialogConstants.OK_ID).setEnabled(
-						validateFirstEndGroup());
+				getButton(IDialogConstants.OK_ID).setEnabled(validateFirstEndGroup());
 			}
 		}
 	};
@@ -157,15 +155,14 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 	private ModifyListener secondEndValidationListener = new ModifyListener() {
 		public void modifyText(ModifyEvent e) {
 			if (getButton(IDialogConstants.OK_ID) != null) {
-				getButton(IDialogConstants.OK_ID).setEnabled(
-						validateSecondEndGroup());
+				getButton(IDialogConstants.OK_ID).setEnabled(validateSecondEndGroup());
 			}
 		}
 	};
 
 	/**
 	 * Create the dialog for a given association
-	 *
+	 * 
 	 * @param assoc
 	 *            the association to edit
 	 * @param parentShell
@@ -194,6 +191,10 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		if (associationDescription == null)
 			associationDescription = new String();
 
+		associationDocumentation = association.getDocumentation();
+		if (associationDocumentation == null)
+			associationDocumentation = new String();
+
 		associationKind = association.getAssociationType();
 		associationRoleSrc = association.getFirstEnd().getName();
 		associationRoleTarget = association.getSecondEnd().getName();
@@ -211,9 +212,9 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		if (firstEndUpperBound.equals("-1"))
 			firstEndUpperBound = "*";
 		if (association.getFirstEnd().getLinkedClass() instanceof Clazz)
-			firstEndClass = ((Clazz)association.getFirstEnd().getLinkedClass()).getName();
+			firstEndClass = ((Clazz) association.getFirstEnd().getLinkedClass()).getName();
 		if (association.getFirstEnd().getLinkedClass() instanceof Aspect)
-			firstEndClass = ((Aspect)association.getFirstEnd().getLinkedClass()).getName();
+			firstEndClass = ((Aspect) association.getFirstEnd().getLinkedClass()).getName();
 
 		secondEndIsNavigable = association.getSecondEnd().isNavigable();
 		secondEndLowerBound = association.getSecondEnd().getCardMin();
@@ -225,14 +226,14 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		if (secondEndUpperBound.equals("-1"))
 			secondEndUpperBound = "*";
 		if (association.getSecondEnd().getLinkedClass() instanceof Clazz)
-			secondEndClass = ((Clazz)association.getSecondEnd().getLinkedClass()).getName();
+			secondEndClass = ((Clazz) association.getSecondEnd().getLinkedClass()).getName();
 		if (association.getSecondEnd().getLinkedClass() instanceof Aspect)
-			secondEndClass = ((Aspect)association.getSecondEnd().getLinkedClass()).getName();
+			secondEndClass = ((Aspect) association.getSecondEnd().getLinkedClass()).getName();
 	}
 
 	/**
 	 * Set the shell title
-	 *
+	 * 
 	 * @see org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets.Shell)
 	 */
 	protected void configureShell(Shell newShell) {
@@ -244,7 +245,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the Dialog area
-	 *
+	 * 
 	 * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
 	 */
 	protected Control createDialogArea(Composite parent) {
@@ -261,7 +262,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Creates the group
-	 *
+	 * 
 	 * @param parent
 	 *            the parent Composite
 	 */
@@ -272,7 +273,8 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		createGeneralTabItem(tabFolder);
 		createFirstEndTabItem(tabFolder);
 		createSecondEndTabItem(tabFolder);
-		createOptionsTabItem(tabFolder);
+//		createOptionsTabItem(tabFolder);
+		createDocumentationTab(tabFolder);
 	}
 
 	private void createOptionsTabItem(TabFolder parent) {
@@ -289,23 +291,20 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 		for (Object obj : c) {
 			if (obj instanceof MetaInfo)
-				MetaInfoHelper.drawConstraint(composite, (MetaInfo) obj,
-						drawConstraints, association);
+				MetaInfoHelper.drawConstraint(composite, (MetaInfo) obj, drawConstraints, association);
 			else if (obj instanceof MetaInfoGroup)
-				MetaInfoHelper.drawConstraintGroup(composite,
-						(MetaInfoGroup) obj, drawConstraints, association);
+				MetaInfoHelper.drawConstraintGroup(composite, (MetaInfoGroup) obj, drawConstraints, association);
 		}
 	}
 
 	/**
 	 * Create the Tab for the first end of the association
-	 *
+	 * 
 	 * @param parent
 	 *            the owning Tab folder
 	 */
 	private void createFirstEndTabItem(TabFolder parent) {
-		Composite composite = createCompositeTab(parent,
-				"Association first end");
+		Composite composite = createCompositeTab(parent, "Association first end");
 
 		Label lbl = new Label(composite, SWT.NONE);
 		lbl.setText("Class linked :");
@@ -336,13 +335,12 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the Tab for the second end of the association
-	 *
+	 * 
 	 * @param parent
 	 *            the owning Tab folder
 	 */
 	private void createSecondEndTabItem(TabFolder parent) {
-		Composite composite = createCompositeTab(parent,
-				"Association second end");
+		Composite composite = createCompositeTab(parent, "Association second end");
 
 		Label lbl = new Label(composite, SWT.NONE);
 		lbl.setText("Class linked :");
@@ -372,7 +370,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the tab item that contains main data
-	 *
+	 * 
 	 * @param parent
 	 *            the tab folder parent
 	 */
@@ -391,8 +389,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		Label nameLbl = new Label(composite, SWT.NONE);
 		nameLbl.setText("Association name");
 		associationNameTxt = new Text(composite, SWT.BORDER);
-		associationNameTxt
-				.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		associationNameTxt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Label titleLbl = new Label(composite, SWT.NONE);
 		titleLbl.setText("Title");
@@ -413,7 +410,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create a composite tab
-	 *
+	 * 
 	 * @param parent
 	 *            the parent tab folder
 	 * @param tabName
@@ -436,7 +433,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create a group for the Property attributes
-	 *
+	 * 
 	 * @param composite
 	 *            the parent composite
 	 * @return the group for the Property attributes
@@ -452,7 +449,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the navigable button
-	 *
+	 * 
 	 * @param composite
 	 *            the parent composite
 	 * @return the created button
@@ -468,7 +465,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create a Group with a given label
-	 *
+	 * 
 	 * @param composite
 	 *            the parent composite
 	 * @param label
@@ -485,7 +482,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create a RadioButton with a text in the given Group
-	 *
+	 * 
 	 * @param theGroup
 	 *            the owning group for the item
 	 * @param label
@@ -500,7 +497,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create a group for the cardinality selection
-	 *
+	 * 
 	 * @param composite
 	 *            the parent composite
 	 * @return the group for the cardinality selection
@@ -517,7 +514,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the Text field for the cardinality
-	 *
+	 * 
 	 * @param cardinalityGroup
 	 *            the ownng group of cardinality selection
 	 * @param label
@@ -536,7 +533,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 	/**
 	 * Create a Label that will display error and warning messages of the
 	 * validation step
-	 *
+	 * 
 	 * @param composite
 	 *            the parent Composite
 	 * @return the created Label
@@ -563,38 +560,32 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Check if the informations contained in the Group are valid
-	 *
+	 * 
 	 * @return true if it is OK
 	 */
 	protected boolean validateFirstEndGroup() {
 		try {
 			int lowerBound = Integer.parseInt(firstEndLowerBoundTxt.getText());
 			if (lowerBound < 0) {
-				firstEndValidationLbl
-						.setText("lowerBound should be greater or equal to 0");
+				firstEndValidationLbl.setText("lowerBound should be greater or equal to 0");
 				return false;
 			}
 		} catch (NumberFormatException e) {
-			firstEndValidationLbl
-					.setText("lowerBound should be a valid integer value");
+			firstEndValidationLbl.setText("lowerBound should be a valid integer value");
 			return false;
 		}
 
 		try {
 			if (!"*".equals(firstEndUpperBoundTxt.getText())) {
-				int upperBound = Integer.parseInt(firstEndUpperBoundTxt
-						.getText());
-				int lowerBound = Integer.parseInt(firstEndLowerBoundTxt
-						.getText());
+				int upperBound = Integer.parseInt(firstEndUpperBoundTxt.getText());
+				int lowerBound = Integer.parseInt(firstEndLowerBoundTxt.getText());
 				if (upperBound < 1 || upperBound < lowerBound) {
-					firstEndValidationLbl
-							.setText("upperBound can not be lower than lowerBound.");
+					firstEndValidationLbl.setText("upperBound can not be lower than lowerBound.");
 					return false;
 				}
 			}
 		} catch (NumberFormatException e) {
-			firstEndValidationLbl
-					.setText("upperBound should be a valid integer value");
+			firstEndValidationLbl.setText("upperBound should be a valid integer value");
 			return false;
 		}
 
@@ -604,38 +595,32 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Check if the informations contained in the Group are valid
-	 *
+	 * 
 	 * @return true if it is OK
 	 */
 	protected boolean validateSecondEndGroup() {
 		try {
 			int lowerBound = Integer.parseInt(secondEndLowerBoundTxt.getText());
 			if (lowerBound < 0) {
-				secondEndValidationLbl
-						.setText("lowerBound should be greater or equal to 0");
+				secondEndValidationLbl.setText("lowerBound should be greater or equal to 0");
 				return false;
 			}
 		} catch (NumberFormatException e) {
-			secondEndValidationLbl
-					.setText("lowerBound should be a valid integer value");
+			secondEndValidationLbl.setText("lowerBound should be a valid integer value");
 			return false;
 		}
 
 		try {
 			if (!"*".equals(secondEndUpperBoundTxt.getText())) {
-				int upperBound = Integer.parseInt(secondEndUpperBoundTxt
-						.getText());
-				int lowerBound = Integer.parseInt(secondEndLowerBoundTxt
-						.getText());
+				int upperBound = Integer.parseInt(secondEndUpperBoundTxt.getText());
+				int lowerBound = Integer.parseInt(secondEndLowerBoundTxt.getText());
 				if (upperBound < 1 || upperBound < lowerBound) {
-					secondEndValidationLbl
-							.setText("upperBound can not be lower than lowerBound.");
+					secondEndValidationLbl.setText("upperBound can not be lower than lowerBound.");
 					return false;
 				}
 			}
 		} catch (NumberFormatException e) {
-			secondEndValidationLbl
-					.setText("upperBound should be a valid integer value");
+			secondEndValidationLbl.setText("upperBound should be a valid integer value");
 			return false;
 		}
 
@@ -651,12 +636,13 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		associationNameTxt.setText(associationName);
 		associationTitleTxt.setText(associationTitle);
 		associationDescriptionTxt.setText(associationDescription);
-		assoTypeDirecBt.setSelection(associationKind
-				.equals(AssociationType.DIRECT));
-		assoTypeCompositeBt.setSelection(associationKind
-				.equals(AssociationType.COMPOSITION));
-		assoTypeAggregateBt.setSelection(associationKind
-				.equals(AssociationType.AGGREGATION));
+		// Doc
+		if (association.getDocumentation() != null)
+			documentation.setText(association.getDocumentation());
+		
+		assoTypeDirecBt.setSelection(associationKind.equals(AssociationType.DIRECT));
+		assoTypeCompositeBt.setSelection(associationKind.equals(AssociationType.COMPOSITION));
+		assoTypeAggregateBt.setSelection(associationKind.equals(AssociationType.AGGREGATION));
 		if (associationRoleSrc != null)
 			roleSourceNameTxt.setText(associationRoleSrc);
 		if (associationRoleTarget != null)
@@ -666,7 +652,6 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 			roleSourceNameTxtTitle.setText(associationRoleSrcTitle);
 		if (associationRoleTargetTitle != null)
 			roleTargetNameTxtTitle.setText(associationRoleTargetTitle);
-
 
 		// First end data
 		firstEndIsNavigableBt.setSelection(firstEndIsNavigable);
@@ -700,11 +685,12 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 				}
 			}
 		}
+		
 	}
 
 	/**
 	 * Save the datas before the widgets are disposed
-	 *
+	 * 
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
@@ -712,6 +698,8 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		associationName = associationNameTxt.getText();
 		associationTitle = associationTitleTxt.getText();
 		associationDescription = associationDescriptionTxt.getText();
+		associationDocumentation = documentation.getText();
+
 		associationRoleSrc = roleSourceNameTxt.getText();
 		associationRoleTarget = roleTargetNameTxt.getText();
 		associationRoleSrcTitle = roleSourceNameTxtTitle.getText();
@@ -749,45 +737,49 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Return all the informations concerning an Association
-	 *
+	 * 
 	 * @return a Map
 	 */
-	public Map<String,Object> getAssociationData() {
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+	public Map<String, Object> getAssociationData() {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 
 		resultMap.put(AssociationHelper.ASSOCIATION_NAME, associationName);
 		resultMap.put(AssociationHelper.ASSOCIATION_TITLE, associationTitle);
 		resultMap.put(AssociationHelper.ASSOCIATION_DESCRIPTION, associationDescription);
-		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_SRC,
-				associationRoleSrc);
-		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_TARGET,
-				associationRoleTarget);
+		resultMap.put(AssociationHelper.ASSOCIATION_DOCUMENTATION, associationDocumentation);
 
-		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_SRC_TITLE,
-				associationRoleSrcTitle);
-		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_TARGET_TITLE,
-				associationRoleTargetTitle);
+		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_SRC, associationRoleSrc);
+		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_TARGET, associationRoleTarget);
 
+		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_SRC_TITLE, associationRoleSrcTitle);
+		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_TARGET_TITLE, associationRoleTargetTitle);
 
 		resultMap.put(AssociationHelper.ASSOCIATION_TYPE, associationKind);
 
-		resultMap.put(AssociationHelper.FIRST_END_IS_NAVIGABLE, new Boolean(
-				firstEndIsNavigable));
-		resultMap.put(AssociationHelper.FIRST_END_LOWER_BOUND,
-				firstEndLowerBound);
-		resultMap.put(AssociationHelper.FIRST_END_UPPER_BOUND,
-				firstEndUpperBound);
+		resultMap.put(AssociationHelper.FIRST_END_IS_NAVIGABLE, new Boolean(firstEndIsNavigable));
+		resultMap.put(AssociationHelper.FIRST_END_LOWER_BOUND, firstEndLowerBound);
+		resultMap.put(AssociationHelper.FIRST_END_UPPER_BOUND, firstEndUpperBound);
 
-		resultMap.put(AssociationHelper.SECOND_END_IS_NAVIGABLE, new Boolean(
-				secondEndIsNavigable));
-		resultMap.put(AssociationHelper.SECOND_END_LOWER_BOUND,
-				secondEndLowerBound);
-		resultMap.put(AssociationHelper.SECOND_END_UPPER_BOUND,
-				secondEndUpperBound);
+		resultMap.put(AssociationHelper.SECOND_END_IS_NAVIGABLE, new Boolean(secondEndIsNavigable));
+		resultMap.put(AssociationHelper.SECOND_END_LOWER_BOUND, secondEndLowerBound);
+		resultMap.put(AssociationHelper.SECOND_END_UPPER_BOUND, secondEndUpperBound);
 
 		resultMap.put(AssociationHelper.META_INFO, dataConstraints);
 
 		return resultMap;
 	}
 
+	private void createDocumentationTab(TabFolder parent) {
+		// Create tab item and add it composite that fills it
+		TabItem viewItem = new TabItem((TabFolder) parent, SWT.NONE);
+		viewItem.setText("Documentation");
+		Composite composite = new Composite(parent, SWT.NONE);
+		viewItem.setControl(composite);
+
+		composite.setLayout(new GridLayout(2, false));
+		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		documentation = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
+		documentation.setLayoutData(new GridData(GridData.FILL_BOTH));
+	}
 }

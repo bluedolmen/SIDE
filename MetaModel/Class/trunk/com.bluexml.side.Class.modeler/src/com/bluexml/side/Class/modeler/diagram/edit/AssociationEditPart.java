@@ -137,10 +137,9 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY, null);
 
 		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
-		
-		 installEditPolicy(ModelerEditPolicyConstants.EDGE_OBJECTS_UV_EDITPOLICY,
-	                new AssociationEdgeObjectUVEditPolicy());
-	        installEditPolicy(ModelerEditPolicyConstants.EDGE_OBJECTS_OFFSET_EDITPOLICY, new EdgeObjectOffsetEditPolicy());
+
+		installEditPolicy(ModelerEditPolicyConstants.EDGE_OBJECTS_UV_EDITPOLICY, new AssociationEdgeObjectUVEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.EDGE_OBJECTS_OFFSET_EDITPOLICY, new EdgeObjectOffsetEditPolicy());
 	}
 
 	/**
@@ -403,29 +402,24 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 		}
 		((PolylineConnection) figure).setTargetDecoration(targetDecor);
 	}
-	
+
 	@Override
 	public IEdgeObjectFigure getEdgeObjectFigure(EdgeObject edgeObject) {
-		if (CdEdgeObjectConstants.SRCNAME_EDGE_OBJECT_ID.equals(edgeObject.getId()))
-		{
+		if (CdEdgeObjectConstants.SRCNAME_EDGE_OBJECT_ID.equals(edgeObject.getId())) {
 			return ((AssociationFigure) getFigure()).getsrcNameEdgeObjectFigure();
 		}
-		if (CdEdgeObjectConstants.SRCCOUNT_EDGE_OBJECT_ID.equals(edgeObject.getId()))
-		{
+		if (CdEdgeObjectConstants.SRCCOUNT_EDGE_OBJECT_ID.equals(edgeObject.getId())) {
 			return ((AssociationFigure) getFigure()).getsrcCountEdgeObjectFigure();
 		}
-		if (CdEdgeObjectConstants.TARGETNAME_EDGE_OBJECT_ID.equals(edgeObject.getId()))
-		{
+		if (CdEdgeObjectConstants.TARGETNAME_EDGE_OBJECT_ID.equals(edgeObject.getId())) {
 			return ((AssociationFigure) getFigure()).gettargetNameEdgeObjectFigure();
 		}
-		if (CdEdgeObjectConstants.TARGETCOUNT_EDGE_OBJECT_ID.equals(edgeObject.getId()))
-		{
+		if (CdEdgeObjectConstants.TARGETCOUNT_EDGE_OBJECT_ID.equals(edgeObject.getId())) {
 			return ((AssociationFigure) getFigure()).gettargetCountEdgeObjectFigure();
 		}
-		if (CdEdgeObjectConstants.MIDDLENAME_EDGE_OBJECT_ID.equals(edgeObject.getId()))
-		{
+		if (CdEdgeObjectConstants.MIDDLENAME_EDGE_OBJECT_ID.equals(edgeObject.getId())) {
 			return ((AssociationFigure) getFigure()).getmiddleNameEdgeObjectFigure();
 		}
 		return null;
-	    }
+	}
 }
