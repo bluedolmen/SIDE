@@ -173,7 +173,7 @@ public class AssociationHelper {
 			se.setCardMin("0");
 		}
 		if (se.getName() == null) {
-			se.setName("R2");
+			se.setName("");
 		}
 		if (se.getTitle() == null) {
 			se.setTitle("");
