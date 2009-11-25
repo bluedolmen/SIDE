@@ -10,17 +10,17 @@
 
 <plugin>
 
-   <extension point="org.eclipse.ui.newWizards">
-      <wizard
-            id="com.bluexml.side.requirements.presentation.RequirementsModelWizardID"
-            name="%_UI_RequirementsModelWizard_label"
-            class="com.bluexml.side.requirements.presentation.RequirementsModelWizard"
-            category="com.bluexml.side.modeler.category.ID"
-            icon="icons/Requirements.gif">
-         <description>%_UI_RequirementsModelWizard_description</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
+<!--   <extension point="org.eclipse.ui.newWizards">-->
+<!--      <wizard-->
+<!--            id="com.bluexml.side.requirements.presentation.RequirementsModelWizardID"-->
+<!--            name="%_UI_RequirementsModelWizard_label"-->
+<!--            class="com.bluexml.side.requirements.presentation.RequirementsModelWizard"-->
+<!--            category="com.bluexml.side.modeler.category.ID"-->
+<!--            icon="icons/Requirements.gif">-->
+<!--         <description>%_UI_RequirementsModelWizard_description</description>-->
+<!--         <selection class="org.eclipse.core.resources.IResource"/>-->
+<!--      </wizard>-->
+<!--   </extension>-->
 
    <extension point="org.eclipse.ui.editors">
       <editor
