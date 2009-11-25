@@ -1,43 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Deployer.facetMap.feature"
-      label="SIDE FacetMap Deployer"
-      version="1.0.14.v11077-20091104"
-      provider-name="BlueXML">
-
-   <description url="http://www.bluexml.com">
-      SIDE MDA environment eases the deployment of generated or developed extensions on specialized
-frameworks like Alfresco. This feature allows to deploy extensions on FacetMap Library to perform Facet Navigation on data.
-   </description>
-
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
-
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="com.bluexml.side.Application" version="1.0.8" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.deployer" version="1.0.8" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.security" version="1.0.8" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.deployer.war" version="1.0.0" match="greaterOrEqual"/>
-   </requires>
-
-   <plugin
-         id="com.bluexml.side.Deployer.facetMap"
-         download-size="0"
-         install-size="0"
-         version="1.0.17.v11077-20091104"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Deployer.facetMapMultiTypes"
-         download-size="0"
-         install-size="0"
-         version="1.0.0"
-         unpack="false"/>
-
+<feature id="com.bluexml.side.Deployer.facetMap.feature" label="SIDE FacetMap Deployer" version="1.0.15.v11603-20091125" provider-name="BlueXML">
+  <description url="http://www.bluexml.com">SIDE MDA environment eases the deployment of generated or developed extensions on specialized
+frameworks like Alfresco. This feature allows to deploy extensions on FacetMap Library to perform Facet Navigation on data.</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <requires>
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="com.bluexml.side.Application" version="1.0.8" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Util.deployer" version="1.0.8" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Util.security" version="1.0.8" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Util.deployer.war" version="1.0.0" match="greaterOrEqual" />
+  </requires>
+  <plugin id="com.bluexml.side.Deployer.facetMap" download-size="0" install-size="0" version="1.0.20.v11603-20091125" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.facetMapMultiTypes" download-size="0" install-size="0" version="1.0.5.v11603-20091125" unpack="false" />
 </feature>
+
