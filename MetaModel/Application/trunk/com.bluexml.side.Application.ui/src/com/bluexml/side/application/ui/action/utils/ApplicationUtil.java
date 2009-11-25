@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
@@ -765,5 +766,10 @@ public class ApplicationUtil {
 		} catch (Exception e) {
 			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Error opening browser", e)); //$NON-NLS-1$
 		}
+	}
+	
+	public static Configuration cloneConfiguration(Configuration conf_) {
+		Configuration config = (Configuration) EcoreUtil.copy(conf_);
+		return config;
 	}
 }

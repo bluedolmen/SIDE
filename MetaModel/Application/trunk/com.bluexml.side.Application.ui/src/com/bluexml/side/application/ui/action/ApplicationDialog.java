@@ -1021,9 +1021,13 @@ public class ApplicationDialog extends Dialog {
 				if (tabFolder.getSelection().length > 0) {
 					if (tabFolder.getSelection()[0].equals(generationConfigurationTabItem) || tabFolder.getSelection()[0].equals(deployementTabItem)) {
 						optionsGroup.setVisible(true);
+						config_description.setVisible(true);
+						documentationText.setBounds(490, 45, 297, 197);
 						refreshOptions();
 					} else {
 						optionsGroup.setVisible(false);
+						config_description.setVisible(false);
+						documentationText.setBounds(490, 45, 297, 518);
 						refreshModelPropertiesTable();
 					}
 				}
@@ -1061,13 +1065,13 @@ public class ApplicationDialog extends Dialog {
 		}
 		// Component thaht shows the description in the top right of the scree
 		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER | SWT.WRAP);
-		config_description.setBounds(493, 10, 297, 51);
-
+		config_description.setBounds(490, 250, 297, 51);
+		config_description.setVisible(false);
 		// Browser that shows informations on the selected component (right)
 		documentationText = new Browser(container, SWT.BORDER);
-		documentationText.setBounds(493, 88, 297, 197);
+		documentationText.setBounds(490, 45, 297, 518);
 		documentationText.setText(buildHelpDocumentationText("")); //$NON-NLS-1$
-
+		
 		final Label listOfConfigurayionsLabel = new Label(container, SWT.NONE);
 		listOfConfigurayionsLabel.setBounds(5, 13, 136, 23);
 		listOfConfigurayionsLabel.setText(Activator.Messages.getString("ApplicationDialog.49")); //$NON-NLS-1$
@@ -1109,8 +1113,19 @@ public class ApplicationDialog extends Dialog {
 		});
 		addBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/add.png")); //$NON-NLS-1$
 
+		final Button copyBt = new Button(container, SWT.NONE);
+		copyBt.setBounds(425, 10, 48, 26);
+		copyBt.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				copyConfiguration();
+			}
+		});
+		copyBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/copy.png")); //$NON-NLS-1$
+
+		
+		
 		final Button deleteBt = new Button(container, SWT.NONE);
-		deleteBt.setBounds(425, 10, 48, 26);
+		deleteBt.setBounds(475, 10, 48, 26);
 		deleteBt.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				if (configurationList.getItemCount() > 0) {
@@ -1137,12 +1152,12 @@ public class ApplicationDialog extends Dialog {
 
 		optionsGroup = new Group(container, SWT.NONE);
 		optionsGroup.setText(Activator.Messages.getString("ApplicationDialog.63")); //$NON-NLS-1$
-		optionsGroup.setBounds(490, 291, 300, 222);
+		optionsGroup.setBounds(490, 300, 300, 259);
 		optionsGroup.setVisible(false);
 
 		generatorParameters = new Table(optionsGroup, SWT.BORDER + SWT.FULL_SELECTION);
 		generatorParameters.setLayout(new TableLayout());
-		generatorParameters.setBounds(0, 23, 295, 199);
+		generatorParameters.setBounds(0, 23, 295, 236);
 		generatorParameters.setTopIndex(3);
 		generatorParameters.getHorizontalBar().setVisible(true);
 		generatorParameters.getHorizontalBar().setEnabled(true);
@@ -1231,6 +1246,32 @@ public class ApplicationDialog extends Dialog {
 		refreshConfiguration();
 	}
 
+	private void copyConfiguration() {
+		Configuration config_ =getCurrentConfiguration();
+		int i = 0;
+
+		String newName=config_.getName();
+		String old = config_.getName().replaceFirst(" \\([0-9]*\\)","");
+		
+		while (application.getConfiguration(newName) != null) {
+			i++;
+			newName = old+" (" + i + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		
+		Configuration config = ApplicationUtil.cloneConfiguration(config_);
+		
+		
+		config.setName(newName);
+		configurationList.add(newName);
+		configurationList.select(configurationList.getItemCount() - 1);
+		addStaticParameters(config);
+		application.getElements().add(config);
+		modificationMade();
+		tabFolder.setEnabled(true);
+		errorMsg.setText(""); //$NON-NLS-1$
+		refreshConfiguration();
+	}
+	
 	/**
 	 * Create the static parameters (used for conf init)
 	 * 
