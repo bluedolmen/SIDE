@@ -460,9 +460,6 @@ public class Generate extends WorkspaceJob {
 							try {
 								this.componentMonitor.beginTask(Activator.Messages.getString("Generate.33", name)); //$NON-NLS-1$
 								generator.generate(modelsInfo, elem.getId_metamodel());
-								if (true) {
-									throw new Exception("TEST ERROR");
-								}
 
 								this.componentMonitor.taskDone(Activator.Messages.getString("Generate.34")); //$NON-NLS-1$
 							} catch (Exception e) {
