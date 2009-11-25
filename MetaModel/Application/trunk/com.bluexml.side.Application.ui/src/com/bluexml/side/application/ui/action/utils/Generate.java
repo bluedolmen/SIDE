@@ -31,7 +31,6 @@ import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.MustBeStopped;
-import com.bluexml.side.util.componentmonitor.AbstractMonitor;
 import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.componentmonitor.Monitor;
 import com.bluexml.side.util.componentmonitor.MonitorListener;
@@ -68,7 +67,7 @@ public class Generate extends WorkspaceJob {
 	private boolean doClean;
 	public List<Throwable> errors = new ArrayList<Throwable>();
 	public List<String> warns = new ArrayList<String>();
-	
+
 	public void setHeadless(boolean headless) {
 		this.headless = headless;
 	}
@@ -79,6 +78,7 @@ public class Generate extends WorkspaceJob {
 		this.componentMonitor = componentMonitor;
 		this.configuration = configuration;
 		this.models = models;
+		// setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY, Boolean.TRUE);
 		setProperty(IProgressConstants.KEEPONE_PROPERTY, Boolean.TRUE);
 		setProperty(IProgressConstants.ICON_PROPERTY, getImage());
 
@@ -181,12 +181,11 @@ public class Generate extends WorkspaceJob {
 			monitor.beginTask("", nbTask);
 			// Secondly we get the meta-model associated to a model
 			HashMap<String, List<IFile>> modelsInfo = null;
-			
 
 			try {
 				modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
 			} catch (Exception e) {
-				
+
 				generalMonitor.addErrorText(Activator.Messages.getString("Generate.4") + e.getMessage()); //$NON-NLS-1$
 				e.printStackTrace();
 			}
@@ -211,7 +210,7 @@ public class Generate extends WorkspaceJob {
 							}
 						} catch (Exception e) {
 							generalMonitor.addErrorText(Activator.Messages.getString("Generate.10") + m.getName() + " : " + e.getMessage()); //$NON-NLS-1$ //$NON-NLS-2$
-			
+
 						}
 					}
 				}
@@ -239,7 +238,7 @@ public class Generate extends WorkspaceJob {
 			fatalError(e2);
 			setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
 			generalMonitor.addErrorText(Activator.Messages.getString("Generate_0")); //$NON-NLS-1$
-			return new Status(Status.ERROR, Activator.PLUGIN_ID, e2.getMessage());
+			return new Status(Status.ERROR, Activator.PLUGIN_ID, e2.getMessage(), e2);
 		}
 		monitor.done();
 		setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
@@ -450,7 +449,7 @@ public class Generate extends WorkspaceJob {
 						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm, componentMonitor);
 					} catch (Exception e) {
 						error = true;
-						throw new Exception(Activator.Messages.getString("Generate.32",e.getMessage()),e);
+						throw new Exception(Activator.Messages.getString("Generate.32", e.getMessage()), e);
 					}
 
 					this.componentMonitor.taskDone(Activator.Messages.getString("Generate.8")); //$NON-NLS-1$
@@ -461,10 +460,14 @@ public class Generate extends WorkspaceJob {
 							try {
 								this.componentMonitor.beginTask(Activator.Messages.getString("Generate.33", name)); //$NON-NLS-1$
 								generator.generate(modelsInfo, elem.getId_metamodel());
+								if (true) {
+									throw new Exception("TEST ERROR");
+								}
+
 								this.componentMonitor.taskDone(Activator.Messages.getString("Generate.34")); //$NON-NLS-1$
 							} catch (Exception e) {
 								error = true;
-								throw new Exception(Activator.Messages.getString("Generate.39",e.getMessage()),e);
+								throw new Exception(Activator.Messages.getString("Generate.39", e.getMessage()), e);
 								// fatalError("Generate.39", e, this.componentMonitor); //$NON-NLS-1$
 							}
 							this.componentMonitor.beginTask(Activator.Messages.getString("Generate.35", name)); //$NON-NLS-1$
@@ -474,8 +477,8 @@ public class Generate extends WorkspaceJob {
 								generator.complete();
 							} catch (Exception e) {
 								error = true;
-								throw new Exception(Activator.Messages.getString("Generate.61",e.getMessage()),e);
-//								fatalError("Generate.61", e, this.componentMonitor); //$NON-NLS-1$
+								throw new Exception(Activator.Messages.getString("Generate.61", e.getMessage()), e);
+								//								fatalError("Generate.61", e, this.componentMonitor); //$NON-NLS-1$
 							}
 							this.componentMonitor.taskDone(Activator.Messages.getString("Generate.36")); //$NON-NLS-1$
 
@@ -483,8 +486,8 @@ public class Generate extends WorkspaceJob {
 								generator.createStampFile();
 							} catch (Exception e) {
 								error = true;
-								throw new Exception(Activator.Messages.getString("Generate.42",e.getMessage()),e);
-//								fatalError("Generate.42", e, this.componentMonitor); //$NON-NLS-1$
+								throw new Exception(Activator.Messages.getString("Generate.42", e.getMessage()), e);
+								//								fatalError("Generate.42", e, this.componentMonitor); //$NON-NLS-1$
 							}
 						}
 					} else {
@@ -506,8 +509,8 @@ public class Generate extends WorkspaceJob {
 
 				} catch (Exception e) {
 					error = true;
-					throw new Exception(Activator.Messages.getString("Generate.62",e.getMessage()),e);
-//					fatalError("Generate.62", e, generalMonitor); //$NON-NLS-1$
+					throw new Exception(Activator.Messages.getString("Generate.62", e.getMessage()), e);
+					//					fatalError("Generate.62", e, generalMonitor); //$NON-NLS-1$
 				}
 			} else {
 				generalMonitor.skipTasks(NB_GENERATION_STEP);
@@ -622,7 +625,7 @@ public class Generate extends WorkspaceJob {
 					}
 				} catch (Exception e) {
 					error = true;
-					throw new Exception(Activator.Messages.getString("Generate.56",e.getMessage()),e);
+					throw new Exception(Activator.Messages.getString("Generate.56", e.getMessage()), e);
 					// fatalError("Generate.56", e, this.componentMonitor); //$NON-NLS-1$
 				}
 
@@ -637,8 +640,8 @@ public class Generate extends WorkspaceJob {
 					this.componentMonitor.getLog().saveLog(); //$NON-NLS-1$
 				} catch (Exception e) {
 					error = true;
-					throw new Exception(Activator.Messages.getString("Generate.62",e.getMessage()),e);
-//					fatalError("Generate.62", e, generalMonitor); //$NON-NLS-1$
+					throw new Exception(Activator.Messages.getString("Generate.62", e.getMessage()), e);
+					//					fatalError("Generate.62", e, generalMonitor); //$NON-NLS-1$
 				}
 			} else {
 				this.componentMonitor.skipTasks(NB_DEPLOY_STEP);
@@ -679,11 +682,14 @@ public class Generate extends WorkspaceJob {
 		saveSideReportAndFeedBack();
 		generalMonitor.skipAllTasks(true);
 		e.printStackTrace();
-		if (Activator.getDefault() != null && Activator.getDefault().getLog() != null) {
-			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, message, e));
-		} else {
-			new Activator().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, message, e));
-		}
+		// if (Activator.getDefault() != null && Activator.getDefault().getLog()
+		// != null) {
+		// Activator.getDefault().getLog().log(new Status(Status.ERROR,
+		// Activator.PLUGIN_ID, message, e));
+		// } else {
+		// new Activator().getLog().log(new Status(Status.ERROR,
+		// Activator.PLUGIN_ID, message, e));
+		// }
 	}
 
 	private void saveSideReportAndFeedBack() {
