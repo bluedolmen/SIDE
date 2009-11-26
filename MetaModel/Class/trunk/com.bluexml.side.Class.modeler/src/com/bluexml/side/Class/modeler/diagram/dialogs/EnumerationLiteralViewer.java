@@ -38,11 +38,11 @@ import org.eclipse.swt.widgets.Text;
 
 public class EnumerationLiteralViewer
 {
-    private static final int NAME_COLUMN_WIDTH = 350;
+    private static final int NAME_COLUMN_WIDTH = 150;
 
     private TableViewer tableViewer;
 
-    private String[] columnNames = new String[] {"Name"};
+    private String[] columnNames = new String[] {"Name","Value"};
 
     private EnumerationLiteralDataStructure dataStructure;
 
@@ -67,7 +67,7 @@ public class EnumerationLiteralViewer
      */
     public void addParameter()
     {
-        dataStructure.add("new");
+        dataStructure.add("new","");
         tableViewer.refresh();
     }
 
@@ -103,6 +103,9 @@ public class EnumerationLiteralViewer
         TableColumn nameColumn = new TableColumn(table, SWT.LEFT);
         nameColumn.setText(columnNames[0]);
         nameColumn.setWidth(NAME_COLUMN_WIDTH);
+        TableColumn nameColumn2 = new TableColumn(table, SWT.LEFT);
+        nameColumn2.setText(columnNames[1]);
+        nameColumn2.setWidth(NAME_COLUMN_WIDTH);
 
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
@@ -127,11 +130,14 @@ public class EnumerationLiteralViewer
         tableViewer.setUseHashlookup(true);
         tableViewer.setColumnProperties(columnNames);
 
-        CellEditor[] editors = new CellEditor[1];
+        CellEditor[] editors = new CellEditor[2];
 
         TextCellEditor textEditor = new TextCellEditor(table);
         ((Text) textEditor.getControl()).setTextLimit(60);
         editors[0] = textEditor;
+        TextCellEditor textEditor2 = new TextCellEditor(table);
+        ((Text) textEditor2.getControl()).setTextLimit(60);
+        editors[1] = textEditor2;
 
         tableViewer.setCellEditors(editors);
         tableViewer.setContentProvider(new ParameterContentProvider());
@@ -163,6 +169,9 @@ public class EnumerationLiteralViewer
                 case 0:
                     result = dataStructure.getDisplayName(element);
                     break;
+                case 1:
+                    result = dataStructure.getDisplayValue(element);
+                    break;
                 default:
                     break;
             }
@@ -181,6 +190,10 @@ public class EnumerationLiteralViewer
                 case 0:
                     dataStructure.setName(item.getData(), (String) value);
                     break;
+                case 1:
+                    dataStructure.setValue(item.getData(), (String) value);
+                    break;
+                    
                 default:
                     break;
             }
@@ -236,6 +249,10 @@ public class EnumerationLiteralViewer
                 case 0:
                     result = dataStructure.getDisplayName(element);
                     break;
+                case 1:
+                    result = dataStructure.getDisplayValue(element);
+                    break;
+                    
                 default:
                     break;
             }

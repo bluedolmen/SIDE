@@ -53,10 +53,8 @@ public class ShowViewAction extends WorkbenchPartAction {
 
 	@Override
 	protected boolean calculateEnabled() {
-		if (selectedObject == null) {
-			ClazzEditor editor = (ClazzEditor) getWorkbenchPart();
-			setSelection(editor.getSelection());
-		}
+		ClazzEditor editor = (ClazzEditor) getWorkbenchPart();
+		setSelection(editor.getSelection());
 		return (selectedObject != null);
 	}
 
@@ -64,16 +62,14 @@ public class ShowViewAction extends WorkbenchPartAction {
 	public void run() {
 		// Search the good form model
 		// Get project
-		IFile iFile = XMIResource2IFile((XMIResource) selectedObject
-				.eResource());
+		IFile iFile = XMIResource2IFile((XMIResource) selectedObject.eResource());
 		IProject project = iFile.getProject();
 
 		List<ViewCollection> wfl = searchFormModel(project);
 		List<AbstractViewOf> forms = searchForm(wfl, selectedObject);
 
 		if (forms.size() == 0)
-			MessageDialog.openInformation(null, ClazzPlugin.Messages
-					.getString("ShowViewAction.1"), //$NON-NLS-1$
+			MessageDialog.openInformation(null, ClazzPlugin.Messages.getString("ShowViewAction.1"), //$NON-NLS-1$
 					ClazzPlugin.Messages.getString("ShowViewAction.2", project.getName()) //$NON-NLS-1$
 					); //$NON-NLS-1$
 		else {
@@ -81,19 +77,17 @@ public class ShowViewAction extends WorkbenchPartAction {
 		}
 	}
 
-	private void selectView(ViewCollection wfc, ViewEditor editor,
-			AbstractViewOf view) {
+	private void selectView(ViewCollection wfc, ViewEditor editor, AbstractViewOf view) {
 
 		for (AbstractView fc : wfc.getViews()) {
 			if (fc instanceof AbstractViewOf) {
 				AbstractViewOf fw = (AbstractViewOf) fc;
-				if ((view.getName() == null && fw.getName() == null) || (view.getName().equals(fw.getName()) 
-						&& view.getViewOf().eClass().equals(fw.getViewOf().eClass()))) {
+				if ((view.getName() == null && fw.getName() == null) || (view.getName().equals(fw.getName()) && view.getViewOf().eClass().equals(fw.getViewOf().eClass()))) {
 					Container co = fw.getViewOf();
 					if (co instanceof Clazz && view.getViewOf() instanceof Clazz) {
 						Clazz c = (Clazz) co;
-						
-						if (c.getFullName().equals(((Clazz)view.getViewOf()).getFullName())) {
+
+						if (c.getFullName().equals(((Clazz) view.getViewOf()).getFullName())) {
 							editor.setSelectionToViewer(Collections.singleton(fw));
 						}
 					}
@@ -104,28 +98,20 @@ public class ShowViewAction extends WorkbenchPartAction {
 
 	private void recomputeAndSelect(List<AbstractViewOf> views, Clazz clazz) {
 
-		IWorkbenchPage page = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage();
-		IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry()
-				.getDefaultEditor(
-						XMIResource2IFile(
-								(XMIResource) views.get(0).eResource())
-								.getName());
+		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(XMIResource2IFile((XMIResource) views.get(0).eResource()).getName());
 
 		for (AbstractViewOf view : views) {
 			IEditorPart editorPart;
 			try {
-				editorPart = page.openEditor(new FileEditorInput(
-						XMIResource2IFile((XMIResource) view
-								.eResource())), desc.getId());
+				editorPart = page.openEditor(new FileEditorInput(XMIResource2IFile((XMIResource) view.eResource())), desc.getId());
 				if (editorPart instanceof ViewEditor) {
 					ViewEditor editor = (ViewEditor) editorPart;
 					TreeViewer treeViewer = (TreeViewer) editor.getViewer();
 					TreeItem item = treeViewer.getTree().getItem(0);
 					item.setExpanded(true);
 					treeViewer.refresh();
-					ViewCollection wfc = (ViewCollection) item
-							.getItem(0).getData();
+					ViewCollection wfc = (ViewCollection) item.getItem(0).getData();
 
 					selectView(wfc, editor, view);
 				}
@@ -135,8 +121,7 @@ public class ShowViewAction extends WorkbenchPartAction {
 		}
 	}
 
-	private List<AbstractViewOf> searchForm(List<ViewCollection> wfl,
-			Clazz clazz) {
+	private List<AbstractViewOf> searchForm(List<ViewCollection> wfl, Clazz clazz) {
 		List<AbstractViewOf> result = new ArrayList<AbstractViewOf>();
 		for (ViewCollection wfc : wfl) {
 
@@ -187,8 +172,7 @@ public class ShowViewAction extends WorkbenchPartAction {
 	protected void init() {
 		setId(ID);
 		setText(ClazzPlugin.Messages.getString("ShowViewAction.5")); //$NON-NLS-1$
-		setImageDescriptor(ClazzImageRegistry
-				.getImageDescriptor("VIEWMODEL")); //$NON-NLS-1$
+		setImageDescriptor(ClazzImageRegistry.getImageDescriptor("VIEWMODEL")); //$NON-NLS-1$
 	}
 
 	public void setSelection(ISelection s) {
@@ -200,8 +184,7 @@ public class ShowViewAction extends WorkbenchPartAction {
 		selectedObject = null;
 		// Recompute the command according to the current selection
 		if (selection.getFirstElement() instanceof EMFGraphNodeEditPart) {
-			EMFGraphNodeEditPart editPart = (EMFGraphNodeEditPart) selection
-					.getFirstElement();
+			EMFGraphNodeEditPart editPart = (EMFGraphNodeEditPart) selection.getFirstElement();
 			if (editPart.getEObject() instanceof Clazz) {
 				selectedObject = (Clazz) editPart.getEObject();
 			}
@@ -210,8 +193,7 @@ public class ShowViewAction extends WorkbenchPartAction {
 
 	private EObject openModel(IFile model) throws IOException {
 		ResourceSetImpl set = new ResourceSetImpl();
-		Resource inputResource = set.createResource(URI.createFileURI(model
-				.getRawLocation().toFile().getCanonicalPath()));
+		Resource inputResource = set.createResource(URI.createFileURI(model.getRawLocation().toFile().getCanonicalPath()));
 		inputResource.load(null);
 		EList<?> l = inputResource.getContents();
 		return (EObject) l.get(0);
@@ -228,17 +210,14 @@ public class ShowViewAction extends WorkbenchPartAction {
 				platformResourcePath.append('/');
 				platformResourcePath.append(uri.segment(j));
 			}
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(
-					new Path(platformResourcePath.toString()));
+			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformResourcePath.toString()));
 		} else if ("file".equals(scheme)) { //$NON-NLS-1$
 			StringBuffer platformResourcePath = new StringBuffer();
-			for (int j = ResourcesPlugin.getWorkspace().getRoot().getLocation()
-					.segments().length, size = uri.segmentCount(); j < size; ++j) {
+			for (int j = ResourcesPlugin.getWorkspace().getRoot().getLocation().segments().length, size = uri.segmentCount(); j < size; ++j) {
 				platformResourcePath.append('/');
 				platformResourcePath.append(uri.segment(j));
 			}
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(
-					new Path(platformResourcePath.toString()));
+			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformResourcePath.toString()));
 		}
 		return null;
 	}

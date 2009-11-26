@@ -52,10 +52,8 @@ public class ShowFormAction extends WorkbenchPartAction {
 
 	@Override
 	protected boolean calculateEnabled() {
-		if (selectedObject == null) {
-			ClazzEditor editor = (ClazzEditor) getWorkbenchPart();
-			setSelection(editor.getSelection());
-		}
+		ClazzEditor editor = (ClazzEditor) getWorkbenchPart();
+		setSelection(editor.getSelection());
 		return (selectedObject != null);
 	}
 
@@ -63,16 +61,14 @@ public class ShowFormAction extends WorkbenchPartAction {
 	public void run() {
 		// Search the good form model
 		// Get project
-		IFile iFile = XMIResource2IFile((XMIResource) selectedObject
-				.eResource());
+		IFile iFile = XMIResource2IFile((XMIResource) selectedObject.eResource());
 		IProject project = iFile.getProject();
 
 		List<ClassFormCollection> wfl = searchFormModel(project);
 		List<FormClass> forms = searchForm(wfl, selectedObject);
 
 		if (forms.size() == 0)
-			MessageDialog.openInformation(null, ClazzPlugin.Messages
-					.getString("ShowFormAction.1"), //$NON-NLS-1$
+			MessageDialog.openInformation(null, ClazzPlugin.Messages.getString("ShowFormAction.1"), //$NON-NLS-1$
 					ClazzPlugin.Messages.getString("ShowFormAction.2", project.getName()) //$NON-NLS-1$
 					); //$NON-NLS-1$
 		else {
@@ -80,14 +76,13 @@ public class ShowFormAction extends WorkbenchPartAction {
 		}
 	}
 
-	private void selectForm(ClassFormCollection wfc, FormEditor editor,
-			Clazz clazz) {
+	private void selectForm(ClassFormCollection wfc, FormEditor editor, Clazz clazz) {
 
 		for (FormContainer fc : wfc.getForms()) {
 			if (fc instanceof FormClass) {
 				FormClass fw = (FormClass) fc;
 				Clazz c = fw.getReal_class();
-				
+
 				if (c.getFullName().equals(clazz.getFullName())) {
 					editor.setSelectionToViewer(Collections.singleton(fw));
 				}
@@ -97,28 +92,20 @@ public class ShowFormAction extends WorkbenchPartAction {
 
 	private void recomputeAndSelect(List<FormClass> forms, Clazz clazz) {
 
-		IWorkbenchPage page = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage();
-		IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry()
-				.getDefaultEditor(
-						XMIResource2IFile(
-								(XMIResource) forms.get(0).eResource())
-								.getName());
+		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(XMIResource2IFile((XMIResource) forms.get(0).eResource()).getName());
 
 		for (FormClass formClass : forms) {
 			IEditorPart editorPart;
 			try {
-				editorPart = page.openEditor(new FileEditorInput(
-						XMIResource2IFile((XMIResource) formClass
-								.eResource())), desc.getId());
+				editorPart = page.openEditor(new FileEditorInput(XMIResource2IFile((XMIResource) formClass.eResource())), desc.getId());
 				if (editorPart instanceof FormEditor) {
 					FormEditor editor = (FormEditor) editorPart;
 					TreeViewer treeViewer = (TreeViewer) editor.getViewer();
 					TreeItem item = treeViewer.getTree().getItem(0);
 					item.setExpanded(true);
 					treeViewer.refresh();
-					ClassFormCollection wfc = (ClassFormCollection) item
-							.getItem(0).getData();
+					ClassFormCollection wfc = (ClassFormCollection) item.getItem(0).getData();
 
 					selectForm(wfc, editor, clazz);
 				}
@@ -128,19 +115,18 @@ public class ShowFormAction extends WorkbenchPartAction {
 		}
 	}
 
-	private List<FormClass> searchForm(List<ClassFormCollection> wfl,
-			Clazz clazz) {
+	private List<FormClass> searchForm(List<ClassFormCollection> wfl, Clazz clazz) {
 		List<FormClass> result = new ArrayList<FormClass>();
 		for (ClassFormCollection wfc : wfl) {
 
 			for (FormContainer fc : wfc.getForms()) {
 				if (fc instanceof FormClass) {
 					FormClass fw = (FormClass) fc;
-					
+
 					Clazz c = fw.getReal_class();
 					if (c.getFullName().equals(clazz.getFullName()))
 						result.add(fw);
-					}	
+				}
 			}
 		}
 		return result;
@@ -178,8 +164,7 @@ public class ShowFormAction extends WorkbenchPartAction {
 	protected void init() {
 		setId(ID);
 		setText(ClazzPlugin.Messages.getString("ShowFormAction.5")); //$NON-NLS-1$
-		setImageDescriptor(ClazzImageRegistry
-				.getImageDescriptor("FORMMODEL")); //$NON-NLS-1$
+		setImageDescriptor(ClazzImageRegistry.getImageDescriptor("FORMMODEL")); //$NON-NLS-1$
 	}
 
 	public void setSelection(ISelection s) {
@@ -191,8 +176,7 @@ public class ShowFormAction extends WorkbenchPartAction {
 		selectedObject = null;
 		// Recompute the command according to the current selection
 		if (selection.getFirstElement() instanceof EMFGraphNodeEditPart) {
-			EMFGraphNodeEditPart editPart = (EMFGraphNodeEditPart) selection
-					.getFirstElement();
+			EMFGraphNodeEditPart editPart = (EMFGraphNodeEditPart) selection.getFirstElement();
 			if (editPart.getEObject() instanceof Clazz) {
 				selectedObject = (Clazz) editPart.getEObject();
 			}
@@ -201,8 +185,7 @@ public class ShowFormAction extends WorkbenchPartAction {
 
 	private EObject openModel(IFile model) throws IOException {
 		ResourceSetImpl set = new ResourceSetImpl();
-		Resource inputResource = set.createResource(URI.createFileURI(model
-				.getRawLocation().toFile().getCanonicalPath()));
+		Resource inputResource = set.createResource(URI.createFileURI(model.getRawLocation().toFile().getCanonicalPath()));
 		inputResource.load(null);
 		EList<?> l = inputResource.getContents();
 		return (EObject) l.get(0);
@@ -219,17 +202,14 @@ public class ShowFormAction extends WorkbenchPartAction {
 				platformResourcePath.append('/');
 				platformResourcePath.append(uri.segment(j));
 			}
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(
-					new Path(platformResourcePath.toString()));
+			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformResourcePath.toString()));
 		} else if ("file".equals(scheme)) { //$NON-NLS-1$
 			StringBuffer platformResourcePath = new StringBuffer();
-			for (int j = ResourcesPlugin.getWorkspace().getRoot().getLocation()
-					.segments().length, size = uri.segmentCount(); j < size; ++j) {
+			for (int j = ResourcesPlugin.getWorkspace().getRoot().getLocation().segments().length, size = uri.segmentCount(); j < size; ++j) {
 				platformResourcePath.append('/');
 				platformResourcePath.append(uri.segment(j));
 			}
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(
-					new Path(platformResourcePath.toString()));
+			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformResourcePath.toString()));
 		}
 		return null;
 	}

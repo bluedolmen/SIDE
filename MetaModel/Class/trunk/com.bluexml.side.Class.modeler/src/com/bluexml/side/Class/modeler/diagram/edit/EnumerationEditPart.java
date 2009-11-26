@@ -150,19 +150,22 @@ public class EnumerationEditPart extends EMFGraphNodeEditPart {
 			if (dlg.open() == Window.OK) {
 				EnumerationUpdateCommand command = new EnumerationUpdateCommand(object, dlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
-
-				CdConfiguration config = new CdConfiguration();
-				GraphNode literalsListNode = (GraphNode) getGraphNode().getContained().get(0);
-				EList literals = literalsListNode.getContained();
-				while (literals.size() > 0)
-					literals.remove(0);
-				for (Object o : object.getLiterals()) {
-					GraphElement elt = config.getCreationUtils().createGraphElement((EObject) o);
-					literals.add(elt);
-				}
+				updateGraphycalElement(object);
 			}
 		} else {
 			super.performRequest(request);
+		}
+	}
+
+	public void updateGraphycalElement(Enumeration object) {
+		CdConfiguration config = new CdConfiguration();
+		GraphNode literalsListNode = (GraphNode) getGraphNode().getContained().get(0);
+		EList literals = literalsListNode.getContained();
+		while (literals.size() > 0)
+			literals.remove(0);
+		for (Object o : object.getLiterals()) {
+			GraphElement elt = config.getCreationUtils().createGraphElement((EObject) o);
+			literals.add(elt);
 		}
 	}
 

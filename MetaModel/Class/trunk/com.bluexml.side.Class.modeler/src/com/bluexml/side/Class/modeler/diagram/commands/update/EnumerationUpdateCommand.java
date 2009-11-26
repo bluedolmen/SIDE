@@ -25,6 +25,7 @@ import org.eclipse.gef.commands.Command;
 
 import com.bluexml.side.Class.modeler.diagram.dialogs.EnumerationEditDialog;
 import com.bluexml.side.Class.modeler.diagram.dialogs.EnumerationLiteralDataStructure;
+import com.bluexml.side.Class.modeler.diagram.dialogs.EnumerationLiteralDataStructure.EnumerationLiteralObject;
 import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.EnumerationLiteral;
@@ -39,14 +40,14 @@ public class EnumerationUpdateCommand extends Command {
 
 	/** Old values */
 	private String oldName;
-	
+
 	private boolean oldIsDynamic;
 
 	private EnumerationLiteralDataStructure oldInputTypes;
 
 	/** New values */
 	private String name;
-	
+
 	private boolean isDynamic;
 
 	private EnumerationLiteralDataStructure inputTypes;
@@ -59,15 +60,15 @@ public class EnumerationUpdateCommand extends Command {
 	 * @param data
 	 *            the map containing the new values
 	 */
-	public EnumerationUpdateCommand(Enumeration op, Map data) {
+	public EnumerationUpdateCommand(Enumeration op, Map<String, Object> data) {
 		enumeration = op;
 
 		// Store new data
 		name = (String) data.get(EnumerationEditDialog.ENUMERATION_NAME);
-//		isDynamic = (Boolean) data.get(EnumerationEditDialog.ENUMERATION_ISDYNAMIC);
-		
-		inputTypes = (EnumerationLiteralDataStructure) data
-				.get(EnumerationEditDialog.ENUMERATION_LITERALS);
+		// isDynamic = (Boolean)
+		// data.get(EnumerationEditDialog.ENUMERATION_ISDYNAMIC);
+
+		inputTypes = (EnumerationLiteralDataStructure) data.get(EnumerationEditDialog.ENUMERATION_LITERALS);
 	}
 
 	/**
@@ -88,15 +89,18 @@ public class EnumerationUpdateCommand extends Command {
 		enumeration.setName(name);
 		enumeration.setDynamic(isDynamic);
 		// Perform update for input parameters
-		List newParameters = new ArrayList();
-		Iterator iterator = inputTypes.getData().iterator();
+		List<EnumerationLiteral> newParameters = new ArrayList<EnumerationLiteral>();
+		Iterator<?> iterator = inputTypes.getData().iterator();
 
 		while (iterator.hasNext()) {
-			Object object = iterator.next();
+			EnumerationLiteralObject object = (EnumerationLiteralObject) iterator.next();
+
+			EnumerationLiteral literal = ClazzFactory.eINSTANCE.createEnumerationLiteral();
 			String displayName = inputTypes.getDisplayName(object);
-			EnumerationLiteral literal = ClazzFactory.eINSTANCE
-					.createEnumerationLiteral();
 			literal.setName(displayName);
+			String displayValue = inputTypes.getDisplayValue(object);
+			literal.setValue(displayValue);
+
 			newParameters.add(literal);
 		}
 		enumeration.getLiterals().clear();

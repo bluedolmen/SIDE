@@ -75,7 +75,8 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 	public EnumerationEditDialog(Enumeration object, Shell parentShell) {
 		super(parentShell);
 		setBlockOnOpen(true);
-		setShellStyle(getShellStyle() | SWT.RESIZE);
+//		setShellStyle(getShellStyle() | SWT.RESIZE);
+		setShellStyle(getShellStyle());
 		this.object = object;
 	}
 
@@ -166,7 +167,7 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 		// Create panel button
 		Composite panelButton = new Composite(composite, SWT.NONE);
 		panelButton.setLayout(new GridLayout(1, false));
-		panelButton.setLayoutData(new GridData(GridData.FILL_BOTH | GridData.HORIZONTAL_ALIGN_CENTER));
+		panelButton.setLayoutData(new GridData( GridData.HORIZONTAL_ALIGN_CENTER | GridData.VERTICAL_ALIGN_CENTER));
 
 		new Label(panelTable, SWT.NONE).setText("Value");
 
@@ -175,7 +176,7 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 		Button add = new Button(panelButton, SWT.PUSH | SWT.CENTER);
 		add.setText("Add");
 
-		GridData gd = new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_END);
+		GridData gd = new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_CENTER);
 		gd.widthHint = 80;
 		add.setLayoutData(gd);
 		add.addSelectionListener(new SelectionAdapter() {
@@ -186,7 +187,7 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 
 		Button delete = new Button(panelButton, SWT.PUSH | SWT.CENTER);
 		delete.setText("Delete");
-		gd = new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_BEGINNING);
+		gd = new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_CENTER);
 		gd.widthHint = 80;
 		delete.setLayoutData(gd);
 
