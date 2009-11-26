@@ -1,6 +1,7 @@
 package com.bluexml.side.Portal.modeler.diagram.dialogs;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
@@ -19,6 +20,7 @@ import org.eclipse.swt.widgets.TabItem;
 
 import com.bluexml.side.Portal.modeler.PortalPlugin;
 import com.bluexml.side.Portal.modeler.diagram.dialogs.dataStructure.PositionDataStructure;
+import com.bluexml.side.Portal.modeler.diagram.dialogs.dataStructure.PositionDataStructure.PositionObject;
 import com.bluexml.side.Portal.modeler.diagram.dialogs.viewer.PositionViewer;
 import com.bluexml.side.portal.HavePortlet;
 import com.bluexml.side.portal.Page;
@@ -112,7 +114,13 @@ public class HavePortletEditDialog  extends Dialog implements IDialogConstants {
 	protected void okPressed() {
 		data = new HashMap();
 		try {
-			data.put(HAVEPORTLET_Position, inputPosition.getData());			
+			List<PositionObject> listPos = inputPosition.getData().getData();
+			for (PositionObject positionObject : listPos) {
+				if (positionObject.getColumnId().equals("") || positionObject.getLayoutId().equals("")) {
+					throw new Exception("Not valide please check Page and Layout Elements ...");
+				}
+			}
+			data.put(HAVEPORTLET_Position, inputPosition.getData());
 			super.okPressed();
 		} catch (Exception e) {
 			// TODO change this with a validation listener that disable the ok
