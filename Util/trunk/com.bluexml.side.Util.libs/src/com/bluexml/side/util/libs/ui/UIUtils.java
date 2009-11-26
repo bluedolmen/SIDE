@@ -1,8 +1,13 @@
 package com.bluexml.side.util.libs.ui;
 
+import java.net.URL;
+
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
+import org.osgi.framework.Bundle;
 
 public class UIUtils {
 
@@ -56,5 +61,12 @@ public class UIUtils {
 		if (display == null)
 			display = Display.getDefault();
 		return display;
+	}
+	
+	public static ImageDescriptor getImage(String pluginID,String imgPath) {
+		Bundle plugin = Platform.getBundle(pluginID);
+		URL imgURL = plugin.getResource(imgPath);
+		ImageDescriptor imgDesc = ImageDescriptor.createFromURL(imgURL);
+		return imgDesc;
 	}
 }
