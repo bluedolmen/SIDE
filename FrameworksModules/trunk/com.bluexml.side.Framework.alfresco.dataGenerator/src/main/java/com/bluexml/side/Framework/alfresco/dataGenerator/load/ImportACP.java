@@ -75,7 +75,9 @@ public class ImportACP {
 		List<FileInfo> contentFiles = fileFolderService.listFiles(container);
 		if (contentFiles.size() > 0) {
 			for (FileInfo file : contentFiles) {
-				fileFolderService.delete(file.getNodeRef());
+				if (fileFolderService.exists(file.getNodeRef())){
+					fileFolderService.delete(file.getNodeRef());
+				}
 			}
 		}		
 		return container;
