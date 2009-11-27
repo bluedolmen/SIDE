@@ -23,6 +23,10 @@
 	<bean id="springContext"
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.context.SpringContext" >
 	</bean>
+	
+	<bean id="pathReader"
+	      class="com.bluexml.side.Framework.alfresco.dataGenerator.context.PathReader">
+	</bean>
 
 	<!-- structure -->
 	  
@@ -41,6 +45,7 @@
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.dictionary.AlfrescoModelDictionary" >
 		  <property name="dictionaryService" ref="dictionaryService" />
 		  <property name="alfrescoModelStructure" ref="alfrescoModelStructure" />
+		  <property name="pathReader" ref="pathReader"/>
 	</bean>
 	
 	<!-- generator -->
