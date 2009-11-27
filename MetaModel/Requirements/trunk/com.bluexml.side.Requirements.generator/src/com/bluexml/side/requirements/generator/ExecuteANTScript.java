@@ -40,21 +40,23 @@ public class ExecuteANTScript {
 			while (files.hasMoreElements()) {
 				URL o = (URL) files.nextElement();
 				File f = new File(FileLocator.toFileURL(o).toURI());
-				
-				if (f.isDirectory()) {
-					String dir = o.getPath().substring(script.length());
-					IFolder sub = buildFolder.getFolder(dir);
-					if (!sub.exists())
-						sub.create(true, true, new NullProgressMonitor());
-				} else {
-					String file = o.getPath().substring(script.length());
-					IFile fi = buildFolder.getFile(file);
-					if (!fi.exists()) {
-						InputStream stream = FileLocator.openStream(b, new Path(o.getFile()), false);
-						fi.create(stream, true, new NullProgressMonitor());
+
+				if (!f.getAbsolutePath().contains(".svn")) {
+					if (f.isDirectory()) {
+						String dir = o.getPath().substring(script.length());
+						IFolder sub = buildFolder.getFolder(dir);
+						if (!sub.exists())
+							sub.create(true, true, new NullProgressMonitor());
+					} else {
+						String file = o.getPath().substring(script.length());
+						IFile fi = buildFolder.getFile(file);
+						if (!fi.exists()) {
+							InputStream stream = FileLocator.openStream(b, new Path(o.getFile()), false);
+							fi.create(stream, true, new NullProgressMonitor());
+						}
+						if (fi.getName().equalsIgnoreCase("build.xml"))
+							antScripts.add(fi);
 					}
-					if (fi.getName().equalsIgnoreCase("build.xml"))
-						antScripts.add(fi);
 				}
 			}
 			

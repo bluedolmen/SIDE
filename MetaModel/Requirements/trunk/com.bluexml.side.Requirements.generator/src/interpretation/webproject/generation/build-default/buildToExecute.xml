@@ -1,0 +1,21 @@
+	<project name="MysqlCreateTable" basedir="." default="createTables">
+	
+		<property name="sql.driver" value="org.gjt.mm.mysql.Driver" />
+		<property name="sql.url" value="jdbc:mysql://localhost/reqs_prototype" />
+		<property name="sql.user" value="root" />
+		<property name="sql.pass" value="" />
+		<property name="sql.driver" value="org.gjt.mm.mysql.Driver" />
+		<property name="output.directory" value="/Applications/xampp/htdocs/" />
+	
+		<target name="createTables">
+			<sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.pass}">
+				<transaction src="schema.sql" />
+			</sql>
+	
+			<copy todir="${output.directory}">
+				<fileset dir="../" />
+			</copy>
+	
+		</target>
+	
+	</project> 

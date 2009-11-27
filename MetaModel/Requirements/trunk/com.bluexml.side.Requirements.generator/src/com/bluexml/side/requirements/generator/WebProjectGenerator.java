@@ -72,5 +72,4 @@ public class WebProjectGenerator extends RequirementsGenerator {
 	protected String getTargetModelName(String keyGenerator) {
 		return "webproject.ecore";
 	}
-
 }

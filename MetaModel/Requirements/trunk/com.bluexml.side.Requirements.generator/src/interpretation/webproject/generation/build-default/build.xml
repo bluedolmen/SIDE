@@ -17,6 +17,7 @@
         		<include name="**/*.css"/>
         		<include name="**/*.php"/>
         		<include name="**/*.png"/>
+        		<include name="**/*.xml"/>
         	</fileset>
         </copy>
     </target>
