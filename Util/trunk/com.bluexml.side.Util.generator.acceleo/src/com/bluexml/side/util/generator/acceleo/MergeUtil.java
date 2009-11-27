@@ -39,6 +39,15 @@ public class MergeUtil {
 					l.add(model);
 					gb.put(pname, l);
 				}
+			} else if (root instanceof com.bluexml.side.requirements.Process) {
+				String pname = ((com.bluexml.side.requirements.Process) root).getName()+"_"+root.eClass().getName();
+				if (gb.containsKey(pname)) {
+					gb.get(pname).add(model);
+				} else {
+					ArrayList<IFile> l = new ArrayList<IFile>();
+					l.add(model);
+					gb.put(pname, l);
+				}
 			} else {
 				System.err.println("No Package element for this models (" + models.toString() + ")");
 			}
