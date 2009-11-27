@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,7 +27,6 @@ import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.namespace.QName;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -45,7 +43,7 @@ public class AlfrescoModelDictionary implements IDictionary {
 	private String qnameStringModel;
 	private IStructure alfrescoModelStructure;
 	
-	private static final String PATH_TO_ALFRESCO_CONFIG_FILE = "tomcat\\webapps\\alfresco\\WEB-INF\\classes\\alfresco\\module\\SIDE_ModelExtension_enterprise\\web-client-config-custom.xml";
+	private String alfrescoDirectory;
 	
 	/**
 	 * @return the qnameStringModel
@@ -87,6 +85,19 @@ public class AlfrescoModelDictionary implements IDictionary {
 	 */
 	public void setAlfrescoModelStructure(IStructure alfrescoModelStructure) {
 		this.alfrescoModelStructure = alfrescoModelStructure;
+	}
+	/**
+	 * @return the alfrescoDirectory
+	 */
+	public String getAlfrescoDirectory() {
+		return alfrescoDirectory;
+	}
+
+	/**
+	 * @param alfrescoDirectory the alfrescoDirectory to set
+	 */
+	public void setAlfrescoDirectory(String alfrescoDirectory) {
+		this.alfrescoDirectory = alfrescoDirectory;
 	}
 
 	public ModelDefinition getModel(String qnameModel){
@@ -184,7 +195,7 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 		Collection<String> notAbstractTypes = new ArrayList<String>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
-		File xmlAlfrescoConfig = new File(PATH_TO_ALFRESCO_CONFIG_FILE);
+		File xmlAlfrescoConfig = new File(getPathToConfigFile());
 		Document document = builder.parse(xmlAlfrescoConfig);
 		Element root = document.getDocumentElement();
 		Element firstChild = (Element)root.getElementsByTagName("config").item(0);
@@ -214,5 +225,33 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 		return aspectsByTypes;
 	}
 
-	
+	private String getPathToConfigFile(){
+		StringBuffer path = new StringBuffer();
+		path.append(alfrescoDirectory);
+		path.append(File.separator);
+		path.append("tomcat");
+		path.append(File.separator);
+		path.append("webapps");
+		path.append(File.separator);
+		path.append("alfresco");
+		path.append(File.separator);
+		path.append("WEB-INF");
+		path.append(File.separator);
+		path.append("classes");
+		path.append(File.separator);
+		path.append("alfresco");
+		path.append(File.separator);
+		path.append("module");
+		path.append(File.separator);
+		path.append(getSideModule(qnameStringModel));
+		path.append(File.separator);
+		path.append("web-client-config-custom.xml");
+		return path.toString();
+	}
+
+	private Object getSideModule(String qnameModel) {
+		String name = "SIDE_ModelExtension_";
+		String elements[] = qnameModel.split("}")[0].split("/");
+		return name + elements[elements.length-2];
+	}
 }
