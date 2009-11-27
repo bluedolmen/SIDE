@@ -37,6 +37,7 @@ public class Generate extends DeclarativeWebScript {
 	private static final String NUMBER_OF_CONTENTS_PARAMETER_NAME ="numOfInstances";
 	private static final String NUMBER_OF_OUTPUT_ARCS_PARAMETER_NAME = "numOfOutputArcs";
 	private static final String PATH_TO_ALFRESCO_REPOSITORY = "alfrescoRepository";
+	private static final String PATH_TO_ALFRESCO_DIRECTORY = "alfrescoDirectory";
 	
 	private static final String XML_FILE_NAME = "test.xml";
 	public static final String ACP_FILE_NAME = "TestACP";
@@ -52,6 +53,8 @@ public class Generate extends DeclarativeWebScript {
 		
 		String modelParameterValue = req.getParameter(MODEL_PARAMETER_NAME);
 		dictionary.setQnameStringModel(modelParameterValue);
+		String alfrescoDirParameterValue = req.getParameter(PATH_TO_ALFRESCO_DIRECTORY);
+		dictionary.setAlfrescoDirectory(alfrescoDirParameterValue);
 		
 		//get model structure
 		IStructure structure = null;
