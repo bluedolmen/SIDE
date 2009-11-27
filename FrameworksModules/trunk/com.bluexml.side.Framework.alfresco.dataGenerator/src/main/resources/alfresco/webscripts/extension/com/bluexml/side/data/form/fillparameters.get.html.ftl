@@ -26,10 +26,16 @@
 	                    </div>
 	            </div>
 	            <div id="property">
-	                    <div id="label">Average number of output associations per content: </div>
+	                    <div id="label">Maximum number of output associations per content: </div>
 	                    <div id="field">
 	                            <input name="numOfOutputArcs" type="text" />
 	                    </div>
+	            </div>
+	            <div id="property">
+                        <div id="label">Alfresco installation directory: </div>
+                        <div id="field">      
+                                <input name="alfrescoDirectory" type="text" value=""/>
+                        </div>                        
 	            </div>
 	            <div id="property">
                         <div id="label">Alfresco path repository to store ACP and its deployement (use XPath representation): </div>
