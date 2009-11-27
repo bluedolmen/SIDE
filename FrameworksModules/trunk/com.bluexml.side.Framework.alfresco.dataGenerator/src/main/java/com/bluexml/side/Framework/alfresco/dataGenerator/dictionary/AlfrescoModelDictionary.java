@@ -25,11 +25,14 @@ import org.alfresco.service.cmr.dictionary.ModelDefinition;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.namespace.QName;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.bluexml.side.Framework.alfresco.dataGenerator.context.PathReader;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.AlfrescoModelStructure;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
 
@@ -43,7 +46,7 @@ public class AlfrescoModelDictionary implements IDictionary {
 	private String qnameStringModel;
 	private IStructure alfrescoModelStructure;
 	
-	private String alfrescoDirectory;
+	private PathReader pathReader;
 	
 	/**
 	 * @return the qnameStringModel
@@ -79,25 +82,26 @@ public class AlfrescoModelDictionary implements IDictionary {
 	public IStructure getAlfrescoModelStructure() {
 		return alfrescoModelStructure;
 	}
+	
+	/**
+	 * @return the path
+	 */
+	public PathReader getPathReader() {
+		return pathReader;
+	}
+
+	/**
+	 * @param path the path to set
+	 */
+	public void setPathReader(PathReader pathReader) {
+		this.pathReader = pathReader;
+	}
 
 	/**
 	 * @param alfrescoModelStructure the alfrescoModelStructure to set
 	 */
 	public void setAlfrescoModelStructure(IStructure alfrescoModelStructure) {
 		this.alfrescoModelStructure = alfrescoModelStructure;
-	}
-	/**
-	 * @return the alfrescoDirectory
-	 */
-	public String getAlfrescoDirectory() {
-		return alfrescoDirectory;
-	}
-
-	/**
-	 * @param alfrescoDirectory the alfrescoDirectory to set
-	 */
-	public void setAlfrescoDirectory(String alfrescoDirectory) {
-		this.alfrescoDirectory = alfrescoDirectory;
 	}
 
 	public ModelDefinition getModel(String qnameModel){
@@ -195,7 +199,7 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 		Collection<String> notAbstractTypes = new ArrayList<String>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
-		File xmlAlfrescoConfig = new File(getPathToConfigFile());
+		File xmlAlfrescoConfig = getConfigFile();
 		Document document = builder.parse(xmlAlfrescoConfig);
 		Element root = document.getDocumentElement();
 		Element firstChild = (Element)root.getElementsByTagName("config").item(0);
@@ -225,33 +229,24 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 		return aspectsByTypes;
 	}
 
-	private String getPathToConfigFile(){
-		StringBuffer path = new StringBuffer();
-		path.append(alfrescoDirectory);
-		path.append(File.separator);
-		path.append("tomcat");
-		path.append(File.separator);
-		path.append("webapps");
-		path.append(File.separator);
-		path.append("alfresco");
-		path.append(File.separator);
-		path.append("WEB-INF");
-		path.append(File.separator);
-		path.append("classes");
-		path.append(File.separator);
-		path.append("alfresco");
-		path.append(File.separator);
-		path.append("module");
-		path.append(File.separator);
-		path.append(getSideModule(qnameStringModel));
-		path.append(File.separator);
-		path.append("web-client-config-custom.xml");
-		return path.toString();
+	private File getConfigFile() throws IOException{
+		File file = null;
+		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		pathReader.setPathPattern("classpath*:alfresco/module/"+getSideModule()+"/web-client-config-custom.xml");
+		Resource[] resources = resolver.getResources(pathReader.getPathPattern());
+		if (resources.length == 1){
+			file = resources[0].getFile();
+		}
+		else{
+			//log.error
+		}
+		return file;
 	}
-
-	private Object getSideModule(String qnameModel) {
+	
+	private String getSideModule() {
 		String name = "SIDE_ModelExtension_";
-		String elements[] = qnameModel.split("}")[0].split("/");
+		String elements[] = qnameStringModel.split("}")[0].split("/");
 		return name + elements[elements.length-2];
 	}
+
 }
