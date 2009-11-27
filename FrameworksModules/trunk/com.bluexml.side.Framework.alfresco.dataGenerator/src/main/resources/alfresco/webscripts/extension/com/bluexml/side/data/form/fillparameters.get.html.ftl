@@ -32,12 +32,6 @@
 	                    </div>
 	            </div>
 	            <div id="property">
-                        <div id="label">Alfresco installation directory: </div>
-                        <div id="field">      
-                                <input name="alfrescoDirectory" type="text" value=""/>
-                        </div>                        
-	            </div>
-	            <div id="property">
                         <div id="label">Alfresco path repository to store ACP and its deployement (use XPath representation): </div>
                         <div id="field">
                                 /app:company_home/       
