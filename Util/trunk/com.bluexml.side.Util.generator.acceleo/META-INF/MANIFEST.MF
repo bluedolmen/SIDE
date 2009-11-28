@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Acceleo Generator Utilities
 Bundle-SymbolicName: com.bluexml.side.Util.generator.acceleo
-Bundle-Version: 1.0.38.v10774-20091027
+Bundle-Version: 1.0.39.v11766-20091128
 Bundle-Activator: com.bluexml.side.util.generator.acceleo.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
