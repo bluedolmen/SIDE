@@ -37,35 +37,6 @@
     <artifactId>superpom</artifactId>
     <version>1.9</version>
   </parent>
-  <repositories>
-    <repository>
-      <id>ss-public</id>
-      <url>http://repository.sourcesense.com/maven2</url>
-    </repository>
-    <repository>
-      <id>releases</id>
-      <url>http://repository.sourcesense.com/nexus/content/repositories/releases/</url>
-    </repository>
-    <repository>
-      <!-- beware to use unique ID to avoid collision with other repository -->
-      <id>releases_alfresco</id>
-      <url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.releases/</url>
-    </repository>
-    <repository>
-      <id>ss-public</id>
-      <url>http://repository.sourcesense.com/maven2</url>
-    </repository>
-    <repository>
-      <id>thirdparty</id>
-      <url>http://repository.sourcesense.com/nexus/content/repositories/thirdparty/</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>ss-public</id>
-      <url>http://repository.sourcesense.com/maven2</url>
-    </pluginRepository>
-  </pluginRepositories>
   <properties>
     <!--
 			Default for which src/main/properties/<env>/application.properties is
@@ -242,7 +213,7 @@
       <plugin>
         <groupId>com.bluexml.side.Integration.m2</groupId>
         <artifactId>ampMojo</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <extensions>true</extensions>
         <configuration>
           <dependentAmpExcludes>**</dependentAmpExcludes>
