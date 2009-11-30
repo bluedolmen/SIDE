@@ -38,21 +38,8 @@
   <version>1.0.8</version>
   <description>amp module to enable custom views in AlfrescoShare Document library</description>
   <repositories>
-    <repository>
-      <id>ss-public</id>
-      <url>http://repository.sourcesense.com/maven2</url>
-    </repository>
-    <repository>
-      <!-- beware to use unique ID to avoid collision with other repository -->
-      <id>releases_alfresco</id>
-      <url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.releases/</url>
-    </repository>
   </repositories>
   <pluginRepositories>
-    <pluginRepository>
-      <id>ss-public</id>
-      <url>http://repository.sourcesense.com/maven2</url>
-    </pluginRepository>
   </pluginRepositories>
   <properties>
     <!--
@@ -172,7 +159,7 @@
       <plugin>
         <groupId>com.bluexml.side.Integration.m2</groupId>
         <artifactId>ampMojo</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <extensions>true</extensions>
         <configuration>
           <dependentAmpExcludes>**</dependentAmpExcludes>
