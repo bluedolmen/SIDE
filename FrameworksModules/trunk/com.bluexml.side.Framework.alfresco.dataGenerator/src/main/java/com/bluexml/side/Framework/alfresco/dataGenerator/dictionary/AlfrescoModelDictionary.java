@@ -232,7 +232,15 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 	private File getConfigFile() throws IOException{
 		File file = null;
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		pathReader.setPathPattern("classpath*:alfresco/module/"+getSideModule()+"/web-client-config-custom.xml");
+		StringBuffer pathPattern = new StringBuffer();
+		pathPattern.append("classpath*:alfresco");
+		pathPattern.append(File.pathSeparator);
+		pathPattern.append("module");
+		pathPattern.append(File.pathSeparator);
+		pathPattern.append(getSideModule());
+		pathPattern.append(File.pathSeparator);
+		pathPattern.append("web-client-config-custom.xml");
+		pathReader.setPathPattern(pathPattern.toString());
 		Resource[] resources = resolver.getResources(pathReader.getPathPattern());
 		if (resources.length == 1){
 			file = resources[0].getFile();
