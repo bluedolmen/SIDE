@@ -9,7 +9,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 	<text:h text:style-name="Heading_20_2" text:outline-level="2"><%name%></text:h>
 <!--	<%if (service::getSrvDocumentation() != null){%><%service::getSrvDocumentation()%><%}%> -->
 	<text:p>
-		<%service::getSrvDocumentation()%>
+		<%service::getSrvDocumentation().replaceAll("\\n","</text:p><text:p>" )%>
 	</text:p>
 	<%content_class%>
 <%}%>
@@ -19,7 +19,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 <%for (service::getSrvEAttributes()){%>
 	<text:h text:style-name="Heading_20_4" text:outline-level="4"><%name%> :</text:h>
 	<text:p>
-		<%service::getSrvDocumentation()%>
+		<%service::getSrvDocumentation().replaceAll("\\n","</text:p><text:p>" )%>
 	</text:p>
 <%}%>
 
@@ -31,21 +31,21 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 	<text:a xlink:type="simple" xlink:href="#1.<%eType().name%>|outline"><%eType().name%></text:a>
 </text:p>
 <text:p>
-	<%service::getSrvDocumentation()%>
+	<%service::getSrvDocumentation().replaceAll("\\n","</text:p><text:p>" )%>
 </text:p>
 <%}%>
 
 <text:h text:style-name="Heading_20_3" text:outline-level="3"><%name%> validation rules</text:h>
 <%if (service::getSrvValidationRuleDescription()!=null){%>
 	<text:p>
-		<%service::getSrvValidationRuleDescription()%>
+		<%service::getSrvValidationRuleDescription().replaceAll("\\n","</text:p><text:p>" )%>
 	</text:p>
 <%}%>
 <%if (service::getSrvValidationRule()!=null){%>
 <%for (service::getSrvValidationRule()){%>
 <text:h text:style-name="Heading_20_4" text:outline-level="4"><%getKey()%> :</text:h>
 <text:p>
-	<%getValue().processString()%>
+	<%getValue().processString().replaceAll("\\n","</text:p><text:p>" )%>
 </text:p>
 <%}%>
 <%}%>
