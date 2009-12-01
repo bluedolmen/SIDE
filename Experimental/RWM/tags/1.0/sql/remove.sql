@@ -1,0 +1,1 @@
+delete from versions where (select COUNT(*) = 0 from models where id = idModel);
