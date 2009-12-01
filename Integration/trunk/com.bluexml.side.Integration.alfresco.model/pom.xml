@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.bluexml</groupId>
     <artifactId>superpom</artifactId>
-    <version>1.9</version>
+    <version>1.10</version>
   </parent>
   <!-- An Alfresco version number must be of the form 1.2.3.4. Using 1.0-SNAPSHOT as the AMP version 
 	     will create an exception. See http://wiki.alfresco.com/wiki/Developing_an_Alfresco_Module:	
