@@ -3,7 +3,7 @@
 metamodel http://www.eclipse.org/emf/2002/Ecore
 import com.bluexml.side.util.generator.documentation.services.DocumentationServices
 import templates.content_chapter
-%>
+%> 
 
 <%script type="ecore.EPackage" name="validatedFilename"%>
 <%if (eContainer() == null) {%><%getModelName()%>/doc/content.xml<%}%>
@@ -73,6 +73,7 @@ import templates.content_chapter
     <text:sequence-decl text:display-outline-level="0" text:name="Text"/>
     <text:sequence-decl text:display-outline-level="0" text:name="Drawing"/>
    </text:sequence-decls>
+<%--  the index creation has been put in comment because not used in user guide
    <text:p text:style-name="P3"><%getModelName()%></text:p>
    <text:p text:style-name="P1"/>
    <text:table-of-content text:style-name="Sect1" text:protected="true" text:name="Table des matires1">
@@ -165,6 +166,7 @@ import templates.content_chapter
   </text:table-of-content>
    <!-- Break line -->
   <text:soft-page-break />
+--%>
   <%content_chapter()%>
   </office:text>
  </office:body>
