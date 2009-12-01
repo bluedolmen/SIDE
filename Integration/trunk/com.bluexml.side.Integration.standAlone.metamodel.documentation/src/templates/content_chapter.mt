@@ -6,24 +6,27 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 <%script type="ecore.EPackage" name="content_chapter"%>
 <!-- Break line -->
 <%for (eClassifiers().sort()){%>
-	<text:h text:style-name="Heading_20_1" text:outline-level="1"><%name%></text:h>
-	<%if (service::getSrvDocumentation() != null){%><%service::getSrvDocumentation()%><%}%>
+	<text:h text:style-name="Heading_20_1" text:outline-level="2"><%name%></text:h>
+<!--	<%if (service::getSrvDocumentation() != null){%><%service::getSrvDocumentation()%><%}%> -->
+	<text:p>
+		<%service::getSrvDocumentation()%>
+	</text:p>
 	<%content_class%>
 <%}%>
 
 <%script type="ecore.EClassifier" name="content_class"%>
-<text:h text:style-name="Heading_20_2" text:outline-level="2"><%name%> attributes</text:h>
+<text:h text:style-name="Heading_20_2" text:outline-level="3"><%name%> attributes</text:h>
 <%for (service::getSrvEAttributes()){%>
-	<text:h text:style-name="Heading_20_3" text:outline-level="3"><%name%> :</text:h>
+	<text:h text:style-name="Heading_20_3" text:outline-level="4"><%name%> :</text:h>
 	<text:p>
 		<%service::getSrvDocumentation()%>
 	</text:p>
 <%}%>
 
-<text:h text:style-name="Heading_20_2" text:outline-level="2"><%name%> associations</text:h>
+<text:h text:style-name="Heading_20_2" text:outline-level="3"><%name%> associations</text:h>
 <%for (getSrvAssociations()){%>
 
-<text:h text:style-name="Heading_20_3" text:outline-level="3"><%name%></text:h>
+<text:h text:style-name="Heading_20_3" text:outline-level="4"><%name%></text:h>
 <text:p>
 	<text:a xlink:type="simple" xlink:href="#1.<%eType().name%>|outline"><%eType().name%></text:a>
 </text:p>
@@ -32,7 +35,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 </text:p>
 <%}%>
 
-<text:h text:style-name="Heading_20_2" text:outline-level="2"><%name%> validation rules</text:h>
+<text:h text:style-name="Heading_20_2" text:outline-level="3"><%name%> validation rules</text:h>
 <%if (service::getSrvValidationRuleDescription()!=null){%>
 	<text:p>
 		<%service::getSrvValidationRuleDescription()%>
@@ -40,7 +43,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 <%}%>
 <%if (service::getSrvValidationRule()!=null){%>
 <%for (service::getSrvValidationRule()){%>
-<text:h text:style-name="Heading_20_3" text:outline-level="3"><%getKey()%> :</text:h>
+<text:h text:style-name="Heading_20_3" text:outline-level="4"><%getKey()%> :</text:h>
 <text:p>
 	<%getValue().processString()%>
 </text:p>
