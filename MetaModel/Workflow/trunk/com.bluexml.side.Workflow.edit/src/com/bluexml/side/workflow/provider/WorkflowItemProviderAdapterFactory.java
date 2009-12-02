@@ -512,6 +512,29 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.WfPackage} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected WfPackageItemProvider wfPackageItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.workflow.WfPackage}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createWfPackageAdapter() {
+		if (wfPackageItemProvider == null) {
+			wfPackageItemProvider = new WfPackageItemProvider(this);
+		}
+
+		return wfPackageItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -629,6 +652,7 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
 		if (attributeItemProvider != null) attributeItemProvider.dispose();
 		if (transitionTaskItemProvider != null) transitionTaskItemProvider.dispose();
+		if (wfPackageItemProvider != null) wfPackageItemProvider.dispose();
 	}
 
 }

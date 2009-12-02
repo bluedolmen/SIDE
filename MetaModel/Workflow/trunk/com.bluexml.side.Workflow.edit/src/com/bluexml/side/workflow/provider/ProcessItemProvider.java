@@ -263,6 +263,11 @@ public class ProcessItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 WorkflowFactory.eINSTANCE.createWfPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
 				 ClazzFactory.eINSTANCE.createClassPackage()));
 
 		newChildDescriptors.add
