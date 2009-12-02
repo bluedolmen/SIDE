@@ -30,12 +30,10 @@
 		below as the AMP module version. Instead we use the
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
-  <version>1.0.11</version>
+  <version>1.0.12</version>
   <description>A webscript that lists the document of a certain type. It is used by facetmap to browse documents</description>
-  <repositories>
-  </repositories>
-  <pluginRepositories>
-  </pluginRepositories>
+  <repositories />
+  <pluginRepositories />
   <parent>
     <groupId>org.bluexml</groupId>
     <artifactId>superpom</artifactId>
