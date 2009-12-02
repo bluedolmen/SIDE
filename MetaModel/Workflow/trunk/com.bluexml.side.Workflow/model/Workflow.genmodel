@@ -121,5 +121,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TransitionTask/transition"/>
       <genOperations ecoreOperation="Workflow.ecore#//TransitionTask/getAllNextStates"/>
     </genClasses>
+    <genClasses ecoreClass="Workflow.ecore#//WfPackage"/>
   </genPackages>
 </genmodel:GenModel>

@@ -32,6 +32,7 @@ import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.TransitionTask;
 import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.Variable;
+import com.bluexml.side.workflow.WfPackage;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
 
@@ -174,6 +175,10 @@ public class WorkflowAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTransitionTask(TransitionTask object) {
 				return createTransitionTaskAdapter();
+			}
+			@Override
+			public Adapter caseWfPackage(WfPackage object) {
+				return createWfPackageAdapter();
 			}
 			@Override
 			public Adapter caseModelElement(ModelElement object) {
@@ -498,6 +503,20 @@ public class WorkflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTransitionTaskAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.workflow.WfPackage <em>Wf Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.workflow.WfPackage
+	 * @generated
+	 */
+	public Adapter createWfPackageAdapter() {
 		return null;
 	}
 

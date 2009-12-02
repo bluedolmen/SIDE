@@ -32,6 +32,7 @@ import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.TransitionTask;
 import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.Variable;
+import com.bluexml.side.workflow.WfPackage;
 import com.bluexml.side.workflow.WorkflowFactory;
 import com.bluexml.side.workflow.WorkflowPackage;
 
@@ -98,6 +99,7 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 			case WorkflowPackage.TRANSITION: return createTransition();
 			case WorkflowPackage.ATTRIBUTE: return createAttribute();
 			case WorkflowPackage.TRANSITION_TASK: return createTransitionTask();
+			case WorkflowPackage.WF_PACKAGE: return createWfPackage();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -321,6 +323,16 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 	public TransitionTask createTransitionTask() {
 		TransitionTaskImpl transitionTask = new TransitionTaskImpl();
 		return transitionTask;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WfPackage createWfPackage() {
+		WfPackageImpl wfPackage = new WfPackageImpl();
+		return wfPackage;
 	}
 
 	/**

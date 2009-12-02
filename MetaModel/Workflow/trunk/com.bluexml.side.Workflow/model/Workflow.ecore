@@ -378,4 +378,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
         eType="#//Transition" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WfPackage" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package"/>
 </ecore:EPackage>

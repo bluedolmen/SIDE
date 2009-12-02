@@ -43,6 +43,7 @@ import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.TransitionTask;
 import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.Variable;
+import com.bluexml.side.workflow.WfPackage;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
 import java.util.Arrays;
@@ -306,6 +307,8 @@ public class WorkflowValidator extends EObjectValidator {
 				return validateAttribute((Attribute)value, diagnostics, context);
 			case WorkflowPackage.TRANSITION_TASK:
 				return validateTransitionTask((TransitionTask)value, diagnostics, context);
+			case WorkflowPackage.WF_PACKAGE:
+				return validateWfPackage((WfPackage)value, diagnostics, context);
 			case WorkflowPackage.BPM_EVENT_TYPE:
 				return validateBPMEventType((BPMEventType)value, diagnostics, context);
 			default:
@@ -1402,6 +1405,15 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(transitionTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NameNull(transitionTask, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateWfPackage(WfPackage wfPackage, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(wfPackage, diagnostics, context);
 	}
 
 	/**

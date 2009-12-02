@@ -32,6 +32,7 @@ import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.TransitionTask;
 import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.Variable;
+import com.bluexml.side.workflow.WfPackage;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
 
@@ -287,6 +288,15 @@ public class WorkflowSwitch<T> {
 				if (result == null) result = caseState(transitionTask);
 				if (result == null) result = caseWorkflowModelElement(transitionTask);
 				if (result == null) result = caseModelElement(transitionTask);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WorkflowPackage.WF_PACKAGE: {
+				WfPackage wfPackage = (WfPackage)theEObject;
+				T result = caseWfPackage(wfPackage);
+				if (result == null) result = casePackage(wfPackage);
+				if (result == null) result = caseNamedModelElement(wfPackage);
+				if (result == null) result = caseModelElement(wfPackage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -606,6 +616,21 @@ public class WorkflowSwitch<T> {
 	 * @generated
 	 */
 	public T caseTransitionTask(TransitionTask object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Wf Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Wf Package</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWfPackage(WfPackage object) {
 		return null;
 	}
 

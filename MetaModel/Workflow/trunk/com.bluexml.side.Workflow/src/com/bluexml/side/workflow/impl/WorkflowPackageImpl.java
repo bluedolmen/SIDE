@@ -37,6 +37,7 @@ import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.TransitionTask;
 import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.Variable;
+import com.bluexml.side.workflow.WfPackage;
 import com.bluexml.side.workflow.WorkflowFactory;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
@@ -195,6 +196,13 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	private EClass transitionTaskEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass wfPackageEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -947,6 +955,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getWfPackage() {
+		return wfPackageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getBPMEventType() {
 		return bpmEventTypeEEnum;
 	}
@@ -1074,6 +1091,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		transitionTaskEClass = createEClass(TRANSITION_TASK);
 		createEReference(transitionTaskEClass, TRANSITION_TASK__TRANSITION);
 
+		wfPackageEClass = createEClass(WF_PACKAGE);
+
 		// Create enums
 		bpmEventTypeEEnum = createEEnum(BPM_EVENT_TYPE);
 	}
@@ -1128,6 +1147,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		stateEClass.getESuperTypes().add(this.getWorkflowModelElement());
 		attributeEClass.getESuperTypes().add(theCommonPackage.getModelElement());
 		transitionTaskEClass.getESuperTypes().add(this.getState());
+		wfPackageEClass.getESuperTypes().add(theCommonPackage.getPackage());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(workflowModelElementEClass, WorkflowModelElement.class, "WorkflowModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1229,6 +1249,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEReference(getTransitionTask_Transition(), this.getTransition(), null, "transition", null, 0, -1, TransitionTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(transitionTaskEClass, this.getState(), "getAllNextStates", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(wfPackageEClass, WfPackage.class, "WfPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(bpmEventTypeEEnum, BPMEventType.class, "BPMEventType");

@@ -2434,6 +2434,106 @@ public interface WorkflowPackage extends EPackage {
 	int ATTRIBUTE_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.WfPackageImpl <em>Wf Package</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.workflow.impl.WfPackageImpl
+	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getWfPackage()
+	 * @generated
+	 */
+	int WF_PACKAGE = 21;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__STEREOTYPES = CommonPackage.PACKAGE__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__TAGS = CommonPackage.PACKAGE__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__COMMENTS = CommonPackage.PACKAGE__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__DOCUMENTATION = CommonPackage.PACKAGE__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__DESCRIPTION = CommonPackage.PACKAGE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__METAINFO = CommonPackage.PACKAGE__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__NAME = CommonPackage.PACKAGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Stereotype Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__STEREOTYPE_SET = CommonPackage.PACKAGE__STEREOTYPE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Package Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__PACKAGE_SET = CommonPackage.PACKAGE__PACKAGE_SET;
+
+	/**
+	 * The number of structural features of the '<em>Wf Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.BPMEventType <em>BPM Event Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2441,7 +2541,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getBPMEventType()
 	 * @generated
 	 */
-	int BPM_EVENT_TYPE = 21;
+	int BPM_EVENT_TYPE = 22;
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.WorkflowModelElement <em>Model Element</em>}'.
@@ -3237,6 +3337,16 @@ public interface WorkflowPackage extends EPackage {
 	EReference getTransitionTask_Transition();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.workflow.WfPackage <em>Wf Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Wf Package</em>'.
+	 * @see com.bluexml.side.workflow.WfPackage
+	 * @generated
+	 */
+	EClass getWfPackage();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.workflow.BPMEventType <em>BPM Event Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3901,6 +4011,16 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSITION_TASK__TRANSITION = eINSTANCE.getTransitionTask_Transition();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.WfPackageImpl <em>Wf Package</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.workflow.impl.WfPackageImpl
+		 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getWfPackage()
+		 * @generated
+		 */
+		EClass WF_PACKAGE = eINSTANCE.getWfPackage();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.BPMEventType <em>BPM Event Type</em>}' enum.
