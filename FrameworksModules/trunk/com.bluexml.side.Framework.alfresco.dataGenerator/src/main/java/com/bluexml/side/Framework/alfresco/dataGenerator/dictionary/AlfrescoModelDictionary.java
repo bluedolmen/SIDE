@@ -246,7 +246,7 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 			file = resources[0].getFile();
 		}
 		else{
-			//log.error
+			System.out.println(pathReader.getPathPattern());
 		}
 		return file;
 	}
