@@ -35,12 +35,10 @@
 		below as the AMP module version. Instead we use the
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
-  <version>1.0.8</version>
+  <version>1.0.9</version>
   <description>amp module to enable custom views in AlfrescoShare Document library</description>
-  <repositories>
-  </repositories>
-  <pluginRepositories>
-  </pluginRepositories>
+  <repositories />
+  <pluginRepositories />
   <properties>
     <!--
 			Default for which src/main/properties/<env>/application.properties is
