@@ -43,7 +43,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Swimlane" eSuperTypes="#//WorkflowModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="ActorNameMustBeUnique" value="Swimlane.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
+      <details key="ActorNameMustBeUnique" value="self.getContainer().oclAsType(Process).swimlane -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="MustManageAtLeastOneTask" value="(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
       <details key="ActoridOrPooledactor" value="not((self.pooledactors  -> isEmpty() or self.pooledactors ='') and&#xA;(self.actorid -> isEmpty() or self.actorid=''))"/>
@@ -326,7 +326,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="State" abstract="true" eSuperTypes="#//WorkflowModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
-      <details key="NoStateWithSameName" value="State.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
+      <details key="NoStateWithSameName" value="State.allInstances()->select(s | s.getContainer() = self.getContainer())-> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">

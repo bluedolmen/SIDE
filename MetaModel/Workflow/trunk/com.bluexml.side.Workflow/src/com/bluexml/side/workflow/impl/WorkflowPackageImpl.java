@@ -1279,7 +1279,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		  (swimlaneEClass, 
 		   source, 
 		   new String[] {
-			 "ActorNameMustBeUnique", "Swimlane.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
+			 "ActorNameMustBeUnique", "self.getContainer().oclAsType(Process).swimlane -> select(n|n.name = self.name and n <> self )->size()=0",
 			 "MustManageAtLeastOneTask", "(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))",
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
 			 "ActoridOrPooledactor", "not((self.pooledactors  -> isEmpty() or self.pooledactors =\'\') and\n(self.actorid -> isEmpty() or self.actorid=\'\'))"
@@ -1328,7 +1328,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   source, 
 		   new String[] {
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
-			 "NoStateWithSameName", "State.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
+			 "NoStateWithSameName", "State.allInstances()->select(s | s.getContainer() = self.getContainer())-> select(n|n.name = self.name and n <> self )->size()=0",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'"
 		   });			
 		addAnnotation

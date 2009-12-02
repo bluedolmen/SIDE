@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getState()
  * @model abstract="true"
- *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true' NoStateWithSameName='State.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0' NameNull='not self.name.oclIsUndefined() and self.name <> \'\''"
+ *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true' NoStateWithSameName='State.allInstances()->select(s | s.getContainer() = self.getContainer())-> select(n|n.name = self.name and n <> self )->size()=0' NameNull='not self.name.oclIsUndefined() and self.name <> \'\''"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoStateWithSameName noSpecialCharacters NameNull'"
  * @generated
  */
