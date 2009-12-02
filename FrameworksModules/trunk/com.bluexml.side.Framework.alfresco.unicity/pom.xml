@@ -30,17 +30,15 @@
 		below as the AMP module version. Instead we use the
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <description>module for manage unicity on side content types (see unicity attribute meta in side)</description>
   <parent>
     <groupId>org.bluexml</groupId>
     <artifactId>superpom</artifactId>
     <version>1.10</version>
   </parent>
-  <repositories>
-  </repositories>
-  <pluginRepositories>
-  </pluginRepositories>
+  <repositories />
+  <pluginRepositories />
   <properties>
     <!--
 			Default for which src/main/properties/<env>/application.properties is
