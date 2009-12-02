@@ -35,6 +35,8 @@ import org.xml.sax.SAXException;
 import com.bluexml.side.Framework.alfresco.dataGenerator.context.PathReader;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.AlfrescoModelStructure;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
+import com.bluexml.side.Framework.alfresco.dataGenerator.webscript.Generate;
+import com.bluexml.side.Framework.alfresco.dataGenerator.webscript.Log;
 
 /**
  * @author davidchevrier
@@ -47,6 +49,8 @@ public class AlfrescoModelDictionary implements IDictionary {
 	private IStructure alfrescoModelStructure;
 	
 	private PathReader pathReader;
+	
+	private static Log logger = LogFactory.getLog(Generate.class);
 	
 	/**
 	 * @return the qnameStringModel
@@ -246,7 +250,7 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 			file = resources[0].getFile();
 		}
 		else{
-			System.out.println(pathReader.getPathPattern());
+			logger.error("Error:" + pathReader.getPathPattern());
 		}
 		return file;
 	}
