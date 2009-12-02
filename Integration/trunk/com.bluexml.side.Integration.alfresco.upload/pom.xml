@@ -35,10 +35,8 @@
 		below as the AMP module version. Instead we use the
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
-  <repositories>
-  </repositories>
-  <pluginRepositories>
-  </pluginRepositories>
+  <repositories />
+  <pluginRepositories />
   <properties>
     <!--
 			Default for which src/main/properties/<env>/application.properties is
@@ -133,7 +131,7 @@
 		-->
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
-  <version>1.0.9</version>
+  <version>1.0.10</version>
   <description>this module contains S-IDE extension to extends Alfresco to support custom type on Alfresco Share</description>
   <!--
 		The scm is required for the buildnumber-maven-plugin which is required
