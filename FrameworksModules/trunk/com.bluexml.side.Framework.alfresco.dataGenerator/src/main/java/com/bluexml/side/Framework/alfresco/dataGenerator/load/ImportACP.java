@@ -18,6 +18,7 @@ import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.search.ResultSet;
 import org.alfresco.service.cmr.search.SearchService;
+import org.alfresco.service.cmr.security.AuthenticationService;
 import org.alfresco.service.cmr.view.ImporterService;
 import org.alfresco.service.cmr.view.Location;
 
@@ -97,6 +98,9 @@ public class ImportACP {
 	}
 
 	public NodeRef createOrGiveMeFolder(StoreRef store, String xpath) {
+		AuthenticationService serviceAuthentification = serviceRegistry.getAuthenticationService();
+		char[] passwd = {'a','d','m','i','n'};
+		serviceAuthentification.authenticate("admin",passwd);
 		ResultSet rs = serviceRegistry.getSearchService().query(store, SearchService.LANGUAGE_XPATH, xpath);
 		NodeRef nr = null;
 		if (rs.length() == 1) {
