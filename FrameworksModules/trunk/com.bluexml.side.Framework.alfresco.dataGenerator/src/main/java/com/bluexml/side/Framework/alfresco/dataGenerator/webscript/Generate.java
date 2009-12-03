@@ -117,6 +117,8 @@ public class Generate extends DeclarativeWebScript {
 			
 		}
 		
+		acp.delete();
+		
 		return new HashMap<String, Object>();
 	}
 	
