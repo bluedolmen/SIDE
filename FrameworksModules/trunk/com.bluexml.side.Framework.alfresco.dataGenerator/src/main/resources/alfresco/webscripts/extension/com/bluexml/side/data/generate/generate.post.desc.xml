@@ -4,6 +4,6 @@
     <description></description>
     <url>/data/generate/generate</url>
     <format default="html">argument</format>
-    <authentication>guest</authentication>
+    <authentication>none</authentication>
     <transaction>required</transaction>
 </webscript>
