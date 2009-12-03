@@ -36,7 +36,8 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.context.PathReader;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.AlfrescoModelStructure;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
 import com.bluexml.side.Framework.alfresco.dataGenerator.webscript.Generate;
-import com.bluexml.side.Framework.alfresco.dataGenerator.webscript.Log;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author davidchevrier
@@ -238,11 +239,11 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		StringBuffer pathPattern = new StringBuffer();
 		pathPattern.append("classpath*:alfresco");
-		pathPattern.append(File.pathSeparator);
+		pathPattern.append(File.separator);
 		pathPattern.append("module");
-		pathPattern.append(File.pathSeparator);
+		pathPattern.append(File.separator);
 		pathPattern.append(getSideModule());
-		pathPattern.append(File.pathSeparator);
+		pathPattern.append(File.separator);
 		pathPattern.append("web-client-config-custom.xml");
 		pathReader.setPathPattern(pathPattern.toString());
 		Resource[] resources = resolver.getResources(pathReader.getPathPattern());
