@@ -87,9 +87,8 @@ public class ACPPackaging implements ISerialization {
 		archiveOutput.closeEntry();
 		xmlFileBuffer.close();
 		archiveOutput.close();
-		File acp =new File(archiveName + ".acp"); 
+		File acp =new File(archiveName + ".acp");
 		System.out.println("ACP File :"+acp.getAbsolutePath());
-		FileUtils.copyFileToDirectory(acp, new File("/Users/davidabad/Desktop/acpTest"));
 		return acp;
 	}
 
