@@ -209,7 +209,7 @@ public class GoalItemProvider
 				(RequirementsPackage.Literals.GOAL__SUBGOALS,
 				 RequirementsFactory.eINSTANCE.createGoal()));
 
-		/*newChildDescriptors.add
+		newChildDescriptors.add
 			(createChildParameter
 				(RequirementsPackage.Literals.GOAL__PRIVILEGE_GROUP,
 				 RequirementsFactory.eINSTANCE.createPrivilegeGroup()));
@@ -217,7 +217,7 @@ public class GoalItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(RequirementsPackage.Literals.GOAL__STEP,
-				 RequirementsFactory.eINSTANCE.createGoalStep()));*/
+				 RequirementsFactory.eINSTANCE.createGoalStep()));
 	}
 
 }
