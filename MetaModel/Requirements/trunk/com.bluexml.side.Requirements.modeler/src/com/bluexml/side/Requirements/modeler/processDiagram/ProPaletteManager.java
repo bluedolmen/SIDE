@@ -124,13 +124,13 @@ public class ProPaletteManager extends ModelerPaletteManager {
 
 		CreationFactory factory;
 
-		factory = new GraphElementCreationFactory(creationUtils,
+		/*factory = new GraphElementCreationFactory(creationUtils,
 				ProSimpleObjectConstants.SIMPLE_OBJECT_IS_SUB_GOAL, "default",
 				false);
 		entries.add(new ModelerConnectionCreationToolEntry("Sub goal",
 				"Sub goal", factory, ProImageRegistry
 						.getImageDescriptor("IS_SUB_GOAL"), ProImageRegistry
-						.getImageDescriptor("IS_SUB_GOAL_LARGE")));
+						.getImageDescriptor("IS_SUB_GOAL_LARGE")));*/
 
 		factory = new GraphElementCreationFactory(creationUtils,
 				ProSimpleObjectConstants.SIMPLE_OBJECT_IS_RESPONSIBLE,

@@ -253,14 +253,14 @@
  </extension>
 
 
-   <extension point="org.topcased.modeler.templates">
+  <!-- <extension point="org.topcased.modeler.templates">
       <template
             di="templates/processDiagram/%name%.requirementsdi"
             model="templates/processDiagram/%name%.requirements"
             name="Process"
             id="com.bluexml.side.Requirements.modeler.templates.processDiagram"
             editorId="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor"/>
-   </extension>
+   </extension> -->
    
    <extension point="org.topcased.modeler.diagrams">
       <diagram

@@ -10,8 +10,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.topcased.modeler.commands.AbstractRestoreConnectionCommand;
+import org.topcased.modeler.di.model.Diagram;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
+import org.topcased.modeler.diagrams.model.Diagrams;
 import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.utils.Utils;
 
@@ -39,7 +41,7 @@ public class GoalRestoreConnectionCommand extends
 
 	/**
 	 * @see org.topcased.modeler.commands.AbstractRestoreConnectionCommand#initializeCommands()
-	 * @generated
+	 * @_generated
 	 */
 	protected void initializeCommands() {
 
@@ -60,7 +62,7 @@ public class GoalRestoreConnectionCommand extends
 								graphElementTgt, graphElementSrc);
 					}
 				}
-				if (eObjectTgt instanceof Goal) {
+				/*if (eObjectTgt instanceof Goal) {
 					if (autoRef) {
 						// autoRef not allowed
 					} else {
@@ -71,7 +73,7 @@ public class GoalRestoreConnectionCommand extends
 						createis_sub_goalFromGoalToGoal(graphElementTgt,
 								graphElementSrc);
 					}
-				}
+				}*/
 
 				if (eObjectTgt instanceof Entity) {
 					if (autoRef) {
@@ -193,10 +195,14 @@ public class GoalRestoreConnectionCommand extends
 	/**
 	 * @param srcElt the source element
 	 * @param targetElt the target element
-	 * @generated
+	 * @_generated
 	 */
 	private void createGoalStepFromGoalToGoal_NextGoals(GraphElement srcElt,
 			GraphElement targetElt) {
+		Diagram diagram = (Diagram) srcElt.getContainer();
+		Diagrams diagrams = (Diagrams) diagram.eContainer();
+		com.bluexml.side.requirements.Process process = (com.bluexml.side.requirements.Process) diagrams.getModel();
+		
 		Goal sourceObject = (Goal) Utils.getElement(srcElt);
 		Goal targetObject = (Goal) Utils.getElement(targetElt);
 
@@ -206,7 +212,8 @@ public class GoalRestoreConnectionCommand extends
 			if (obj instanceof GoalStep) {
 				GoalStep edgeObject = (GoalStep) obj;
 				if (edgeObject.getNextGoals().contains(targetObject)
-						&& sourceObject.getStep().contains(edgeObject)) {
+						&& sourceObject.getStep().contains(edgeObject)
+						&& edgeObject.getProcess().equals(process)) {
 					// check if the relation does not exists yet
 					List<GraphEdge> existing = getExistingEdges(srcElt,
 							targetElt, GoalStep.class);
