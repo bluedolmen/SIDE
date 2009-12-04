@@ -13,5 +13,7 @@ Export-Package: com.bluexml.side.requirements,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.ui,
- org.eclipse.emf.ecore.xmi
+ org.eclipse.emf.ecore.xmi,
+ com.bluexml.side.Util.metaModel.validate,
+ org.eclipse.ocl.ecore
 Bundle-ActivationPolicy: lazy

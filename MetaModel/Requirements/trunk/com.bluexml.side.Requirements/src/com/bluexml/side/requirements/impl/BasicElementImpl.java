@@ -10,8 +10,10 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.RequirementsPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -214,5 +216,9 @@ public abstract class BasicElementImpl extends ModelElementImpl implements Basic
 		result.append(')');
 		return result.toString();
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //BasicElementImpl

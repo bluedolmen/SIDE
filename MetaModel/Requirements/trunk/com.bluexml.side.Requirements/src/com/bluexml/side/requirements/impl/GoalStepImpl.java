@@ -10,6 +10,7 @@ import com.bluexml.side.requirements.Goal;
 import com.bluexml.side.requirements.GoalStep;
 import com.bluexml.side.requirements.RequirementsPackage;
 
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -196,5 +198,8 @@ public class GoalStepImpl extends EObjectImpl implements GoalStep {
 		}
 		return super.eIsSet(featureID);
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //GoalStepImpl

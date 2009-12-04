@@ -8,7 +8,9 @@ package com.bluexml.side.requirements.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.requirements.RequirementsPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,5 +40,8 @@ public class ProcessImpl extends OrganizationImpl implements com.bluexml.side.re
 	protected EClass eStaticClass() {
 		return RequirementsPackage.Literals.PROCESS;
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //ProcessImpl

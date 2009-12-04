@@ -15,9 +15,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.requirements.ModelElement;
 import com.bluexml.side.requirements.Organization;
 import com.bluexml.side.requirements.RequirementsPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -147,5 +149,8 @@ public class OrganizationImpl extends BasicElementImpl implements Organization {
 		}
 		return super.eIsSet(featureID);
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //OrganizationImpl

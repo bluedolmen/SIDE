@@ -18,12 +18,14 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.requirements.Agent;
 import com.bluexml.side.requirements.Goal;
 import com.bluexml.side.requirements.GoalStep;
 import com.bluexml.side.requirements.PriorityLevel;
 import com.bluexml.side.requirements.PrivilegeGroup;
 import com.bluexml.side.requirements.RequirementsPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -344,5 +346,9 @@ public class GoalImpl extends BasicElementImpl implements Goal {
 		result.append(')');
 		return result.toString();
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //GoalImpl

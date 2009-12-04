@@ -36,7 +36,7 @@ public interface BasicElement extends ModelElement {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.bluexml.side.requirements.RequirementsPackage#getBasicElement_Name()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getName();

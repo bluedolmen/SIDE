@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import com.bluexml.side.requirements.Agent;
@@ -30,6 +31,7 @@ import com.bluexml.side.requirements.RelationShip;
 import com.bluexml.side.requirements.RequirementsDefinition;
 import com.bluexml.side.requirements.RequirementsFactory;
 import com.bluexml.side.requirements.RequirementsPackage;
+import com.bluexml.side.requirements.util.RequirementsValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -201,6 +203,15 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 
 		// Initialize created meta-data
 		theRequirementsPackage.initializePackageContents();
+
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(theRequirementsPackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return RequirementsValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theRequirementsPackage.freeze();
@@ -738,7 +749,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		initEClass(modelElementEClass, ModelElement.class, "ModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(basicElementEClass, BasicElement.class, "BasicElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBasicElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, BasicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBasicElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, BasicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBasicElement_Documentation(), ecorePackage.getEString(), "documentation", null, 0, 1, BasicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -811,6 +822,44 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.bluexml.com/OCL
+		createOCLAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.bluexml.com/OCL</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createOCLAnnotations() {
+		String source = "http://www.bluexml.com/OCL";		
+		addAnnotation
+		  (goalEClass, 
+		   source, 
+		   new String[] {
+			 "uniqueName", "Goal.allInstances()->select(g | g.name = self.name)->reject(g | g =self)->size() = 0"
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";			
+		addAnnotation
+		  (goalEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "uniqueName"
+		   });
 	}
 
 } //RequirementsPackageImpl

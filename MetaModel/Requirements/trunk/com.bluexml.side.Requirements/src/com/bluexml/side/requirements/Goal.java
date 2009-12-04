@@ -25,7 +25,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.requirements.RequirementsPackage#getGoal()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL uniqueName='Goal.allInstances()->select(g | g.name = self.name)->reject(g | g =self)->size() = 0'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='uniqueName'"
  * @generated
  */
 public interface Goal extends BasicElement {
