@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -25,9 +25,17 @@ import org.eclipse.m2m.atl.engine.vm.AtlLauncher;
 import org.eclipse.m2m.atl.engine.vm.AtlModelHandler;
 import org.eclipse.m2m.atl.engine.vm.ModelLoader;
 import org.eclipse.m2m.atl.engine.vm.nativelib.ASMModel;
+import org.osgi.framework.Bundle;
 
 public class TransformModel {
 
+	private class Model {
+		public String modelName;
+		public String metamodelName;
+		public String modelFile;
+		public InputStream metamodelStream;
+	}
+	
 	private Map<Object, Object> loaders;
 	private Map<Object, Object> modelCache;
 	private Map<Object, Object> in;
@@ -36,11 +44,8 @@ public class TransformModel {
 	private Set<String> outputModels;
 	private String asmFile;
 	private String contributor;
-	private String inputModelName;
-	private String inputMetamodelName;
-	private String outputModelName;
-	private String outputMetamodelName;
-	private String targetMetamodel;
+	private Set<Model> _inputModels = new HashSet<Model>();
+	private Set<Model> _outputModels = new HashSet<Model>();
 	
 	public TransformModel() {
 		loaders = new HashMap<Object, Object>();
@@ -126,7 +131,7 @@ public class TransformModel {
 		paths.put(metamodel_name, metamodel_stream);
 	}
 	
-	public void execute(IFile inputModel, String outputModel) throws Exception {
+	public void execute() throws Exception {
 		Map<Object, Object> models = new HashMap<Object, Object>();
 		outputModels = new HashSet<String>();
 		
@@ -135,18 +140,17 @@ public class TransformModel {
 
 		trans = Platform.getBundle(contributor).getEntry(asmPath);
 
-		InputStream in_model_stream = new FileInputStream(inputModel.getRawLocation().toFile());
-		InputStream in_metamodel_stream = Platform.getBundle("com.bluexml.side.Requirements").getEntry("/model/requirements.ecore").openStream();
-		addInputModel(inputModelName, in_model_stream, inputMetamodelName, in_metamodel_stream);
+		/*InputStream in_metamodel_stream = Platform.getBundle("com.bluexml.side.Requirements").getEntry("/model/requirements.ecore").openStream();*/
+		for (Model model : _inputModels) {
+			InputStream in_model_stream = new FileInputStream(model.modelFile);
+			addInputModel(model.modelName, in_model_stream, model.metamodelName, model.metamodelStream);
+		}
+		
+		for (Model model : _outputModels) {
+			URI out_model_uri = URI.create(model.modelFile);
 
-		URI out_model_uri = URI.create(outputModel);
-		InputStream out_metamodel_stream = Platform.getBundle(contributor).getEntry(targetMetamodel).openStream();
-		
-		ResourceSet resourceSet = new ResourceSetImpl();
-		org.eclipse.emf.common.util.URI emfUri = org.eclipse.emf.common.util.URI.createURI(Platform.getBundle(contributor).getEntry(targetMetamodel).toString());
-		resourceSet.getResource(emfUri, true);
-		
-		addOutputModel(outputModelName, out_model_uri, outputMetamodelName, out_metamodel_stream);
+			addOutputModel(model.modelName, out_model_uri, model.metamodelName, model.metamodelStream);
+		}
 
 		// add input models
 		for (Iterator<Object> i = in.keySet().iterator(); i.hasNext();) {
@@ -189,26 +193,46 @@ public class TransformModel {
 		contributor = _contributor;
 	}
 
-	public void setInputModelName(String _inputModelName) {
-		inputModelName = _inputModelName;
+	public void addInputModel(String _modelName, String _metamodelName, String _modelFile, String _metamodelFile) {
+		Model m = new Model();
+		m.modelName = _modelName;
+		m.metamodelName = _metamodelName;
+		m.modelFile = _modelFile;
+		
+		Path p = new Path(_metamodelFile);
+		Bundle b = Platform.getBundle(p.segment(0));
+		try {
+			m.metamodelStream = b.getResource(p.removeFirstSegments(1).toString()).openStream();
+		} catch (IOException e) {
+			//Nothing to do
+		}
+
+		_inputModels.add(m);
 	}
 
-	public void setInputMetamodelName(String _inputMetamodelName) {
-		inputMetamodelName = _inputMetamodelName;
+	public void addOutputModel(String _modelName, String _metamodelName, String _modelFile, String _metamodelFile) {
+		Model m = new Model();
+		m.modelName = _modelName;
+		m.metamodelName = _metamodelName;
+		m.modelFile = _modelFile;
+		
+		Path p = new Path(_metamodelFile);
+		Bundle b = Platform.getBundle(p.segment(0));
+		try {
+			URL r = b.getResource(p.removeFirstSegments(1).toString());
+			m.metamodelStream = r.openStream();
+			
+			ResourceSet resourceSet = new ResourceSetImpl();
+			org.eclipse.emf.common.util.URI emfUri = org.eclipse.emf.common.util.URI.createURI(r.toString());
+			resourceSet.getResource(emfUri, true);
+		} catch (IOException e) {
+			//Nothing to do
+		}
+		
+		_outputModels.add(m);
 	}
 
-	public void setOutputModelName(String _outputModelName) {
-		outputModelName = _outputModelName;
-	}
-
-	public void setOutputMetamodelName(String _outputMetamodelName) {
-		outputMetamodelName = _outputMetamodelName;
-	}
-
-	public void setTargetMetamodel(String _targetMetamodel) {
-		targetMetamodel = _targetMetamodel;
-	}
-
+	
 	public Set<String> getOutputModels() {
 		return outputModels;
 	}

@@ -121,5 +121,21 @@
             uri="http://www.bluexml.com/rwm/documentation/1.0/">
       </package>
    </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="com.bluexml.side.Requirements.generator.contribution1"
+            nameFilter="*.requirements"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               class="com.bluexml.side.requirements.generator.actions.ExportSIDEModels"
+               enablesFor="1"
+               icon="icons/document-export.gif"
+               id="com.bluexml.side.Requirements.generator.newAction"
+               label="Export SIDE models"
+               menubarPath="com.bluexml.side/requirements">
+         </action>
+      </objectContribution>
+   </extension>
 
 </plugin>

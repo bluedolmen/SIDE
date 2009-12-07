@@ -1,0 +1,374 @@
+-- @path Data=platform:/plugin/com.bluexml.side.Class/model/Class.ecore
+-- @path Reqs=platform:/plugin/com.bluexml.side.Requirements/model/requirements.ecore
+-- @path DataForm=platform:/plugin/com.bluexml.side.Form/model/Forms.ecore
+-- @path WorkflowForm=platform:/plugin/com.bluexml.side.Form/model/Forms.ecore
+-- @path Workflow=platform:/plugin/com.bluexml.side.Workflow/model/Workflow.ecore
+
+module Reqs2SIDEData;
+create OUTData : Data, OUTDataForm : DataForm, OUTWfForm : WorkflowForm, OUTWorkflow : Workflow from IN : Reqs;
+
+-------------------------------------------------
+-- GLOBAL VARS
+
+helper def: dataFormsCollection : DataForm!ClassFormCollection = OclUndefined;
+helper def: workflowFormsCollection : DataForm!WorkflowFormCollection = OclUndefined;
+
+-------------------------------------------------
+
+helper def: id : Integer = 0;
+
+rule generateId() { -- : Integer
+  do {
+    thisModule.id <- thisModule.id + 1; -- increment id
+    thisModule.id; -- returns id
+  }
+} 
+
+helper context Integer def : translateCardinality : String = 
+	if (self = -1) then
+		'-1'
+	else
+		self.toString()
+	endif;
+
+rule ReqDefs {
+	from s : Reqs!RequirementsDefinition
+	to data : Data!Model (
+		name <- s.name,
+		description <- 'Data model generated from requirements model.',
+		classSet <- Reqs!Entity->allInstances(),
+		associationSet <- Reqs!RelationShip->allInstances()
+	),
+	form : DataForm!ClassFormCollection(
+		forms <- Reqs!PrivilegeGroup->allInstances()
+	),
+	workflow : Workflow!WfPackage(
+		name <- 'Processes',
+		packageSet <- Reqs!Process->allInstances()
+	),
+	wfForm : WorkflowForm!WorkflowFormCollection(
+	)
+	do {
+		thisModule.dataFormsCollection <- form;
+		thisModule.workflowFormsCollection <- wfForm;
+	}
+}
+
+rule Entity {
+	from s : Reqs!Entity
+	to t : Data!Clazz (
+		name <- s.name.regexReplaceAll(' ',''),
+		title <- s.name,
+		attributes <- s.attributes
+	)
+}
+
+rule Property {
+	from s : Reqs!Attribute
+	to t : Data!Attribute (
+		name <- s.name.regexReplaceAll(' ',''),
+		title <- s.name,
+		typ <-
+			if (s.type = #TemporalValue) then
+				#DateTime
+			else
+				#"String"
+			endif
+				
+	)
+}
+
+rule Relationship {
+	from s : Reqs!RelationShip
+	to t : Data!Association (
+		name <- s.name.regexReplaceAll(' ',''),
+		title <- s.name,
+		firstEnd <- fe,
+		secondEnd <- se
+	),
+	fe : Data!AssociationEnd (
+			cardMin <- if (s.sourceMin.oclIsUndefined()) then '0' else s.sourceMin.translateCardinality endif,
+			cardMax <- if (s.sourceMax.oclIsUndefined()) then '0' else s.sourceMax.translateCardinality endif,
+			navigable <- true,
+			linkedClass <- s.source,
+			name <- ''
+		),
+	se : Data!AssociationEnd (
+			cardMin <- if (s.targetMin.oclIsUndefined()) then '0' else s.targetMin.translateCardinality endif,
+			cardMax <- if (s.targetMax.oclIsUndefined()) then '0' else s.targetMax.translateCardinality endif,
+			navigable <- true,
+			linkedClass <- s.target,
+			name <- ''
+		)
+}
+
+-------------- DATA FORM --------------------
+
+helper def : sortEntities(seq : Sequence(Reqs!Entity), pset : Sequence(Reqs!Privilege), first : Reqs!Entity) : Sequence(Reqs!Entity) =
+	if (seq->size() <= 1) then
+		seq
+	else
+    	let newpset : Sequence(Reqs!Privilege) =
+            pset->select(p | p.element.oclIsTypeOf(Reqs!RelationShip))->select(p | p.element.source = first or p.element.target = first)
+        in
+        let rset : Sequence(Reqs!RelationShip) =
+            newpset->collect(p | p.element)
+        in
+        let entityset : Set(Reqs!Entity) =
+            rset->collect(r | r.source)->union(rset->collect(r | r.target))->flatten()->excluding(first)->asSet()
+        in
+        let next : Reqs!Entity =
+        	if (entityset.size() >= 1) then
+    			entityset->asSequence()->first()
+    		else
+    		    seq->first()
+    		endif
+        in
+        	thisModule.sortEntities(seq->excluding(first),pset->excluding(newpset),next)->prepend(first)
+	endif;
+
+rule PrivilegeGroup {
+	from s : Reqs!PrivilegeGroup
+	to t : DataForm!FormClass (
+		id <- s.entryPoint.name.regexReplaceAll(' ','')+'_'+thisModule.generateId().toString(),
+		label <- s.refImmediateComposite().name,
+		real_class <- s.entryPoint,
+		children <-
+			let entities : Sequence(Reqs!Entity) =
+				s.privileges->collect(p | p.element)->select(e | e.oclIsTypeOf(Reqs!Entity))
+			in let sortedEntities : Sequence(Reqs!Entity) =
+				thisModule.sortEntities(entities, s.privileges, s.entryPoint)
+			in
+				thisModule.createChildForm(s.privileges, s.entryPoint, sortedEntities)
+	)
+}
+
+rule temporalAttribute(s : Reqs!Attribute) {
+	to t : DataForm!DateTimeField(
+		id <- s.name.regexReplaceAll(' ','')+'_'+thisModule.generateId().toString(),
+		label <- s.name,
+		ref <- s
+	)
+	do {
+		t;
+	}
+}
+
+rule otherAttribute(s : Reqs!Attribute) {
+	to t : DataForm!CharField(
+		id <- s.name.regexReplaceAll(' ','')+'_'+thisModule.generateId().toString(),
+		label <- s.name,
+		ref <- s
+	)
+	do {
+		t;
+	}
+}
+
+rule createChildForm(privileges : Set(Reqs!Privilege), entity : Reqs!Entity, entities : Set(Reqs!Entity)) {
+	do {
+		--Create sub forms
+		let relationships : Sequence(Reqs!RelationShip) =
+			Reqs!RelationShip.allInstances()->select(r | (r.source = entity or r.target = entity) and entities->includes(r.source) and entities->includes(r.target))
+		in let activeRelationships : Sequence(Reqs!RelationShip) =
+			relationships->select(r | privileges->select(p | p.element = r)->size() > 1)
+		in let referencedEntities : Sequence(Reqs!Entity) =
+			activeRelationships->collect(r | r.source)->union(activeRelationships->collect(r | r.target))->reject(e | e = entity)
+		in let subFormClass : Sequence(DataForm!FormClass) =
+			referencedEntities->collect(e | thisModule.createForm(privileges, e, entities->reject(e | e = entity)))
+		in let listFields : Sequence(DataForm!Reference) =
+			subFormClass->collect(formClass | thisModule.createReference(formClass, activeRelationships->select(r | Set{r.source.name, r.target.name}->includesAll(Set{entity.name, formClass.real_class.title}))->first()))
+		
+		in let attributePrivileges : Sequence(Reqs!Privilege) = 
+					privileges->select(p | entity.attributes.includes(p.element) and p.category = #read)
+		in let dateTimeFields : Sequence(DataForm!DateTimeField) =
+					attributePrivileges->select(p|p.element.type = #TemporalValue)->collect(p|thisModule.temporalAttribute(p.element))
+		in let otherFields : Sequence(DataForm!CharField) =
+					attributePrivileges->reject(p|p.element.type=#TemporalValue)->collect(p|thisModule.otherAttribute(p.element))
+		
+		in dateTimeFields->union(otherFields)->union(listFields);
+	}
+}
+
+rule createReference(formClass : DataForm!FormClass, relationship : Reqs!Relationship) {
+	to reference : DataForm!Reference (
+		id <- 'reference_'+thisModule.generateId().toString(),
+		target <- formClass,
+		ref <- relationship,
+		real_class <- formClass.real_class,
+		--widget <- #Inline,
+		min_bound <- 0,
+		max_bound <- -1
+	)
+	do {
+		reference;
+	}
+}
+
+rule createForm(privileges : Set(Reqs!Privilege), entity : Reqs!Entity, entities : Set(Reqs!Entity)) {
+	to t : DataForm!FormClass (
+		id <- entity.name.regexReplaceAll(' ','')+'_'+thisModule.generateId().toString(),
+		label <- entity.name,
+		real_class <- entity,
+		children <- thisModule.createChildForm(privileges, entity, entities)
+	)
+	do {
+		thisModule.dataFormsCollection.forms <- thisModule.dataFormsCollection.forms->append(t);
+		t;
+	}
+}
+
+-------------------------------------
+-- Workflow
+-------------------------------------
+
+rule process {
+	from s : Reqs!Process
+	using {
+		steps : Set(Reqs!GoalStep) =
+				Reqs!GoalStep->allInstances()->select(step | step.process = s);
+		goals : Set(Reqs!Goal) =
+				steps->collect(s | s.refImmediateComposite())->union(steps->collect(s | s.nextGoals)->flatten())->asSet();
+		startGoal : Reqs!Goal =
+				goals->select(g | steps->collect(s | s.nextGoals)->flatten()->excludes(g))->first();
+		endGoals : Set(Reqs!Goal) =
+				goals->select(g | steps->excludesAll(g.step));
+	}
+	to t : Workflow!Process (
+		name <- s.name.regexReplaceAll(' ',''),
+		title <- s.name,
+		swimlane <- goals->collect(g | g.responsible)->flatten()->reject(a | a.oclIsUndefined())->asSet()->collect(a | thisModule.createSwimlane(a)),
+		startstate <- thisModule.createStartState(startGoal,t.swimlane),
+		endstate <- endGoals->collect(g | thisModule.createEndState(g)),
+		node <- goals->select(g | endGoals->excludes(g) and g <> startGoal)->select(g | g.responsible.size() = 0)->collect(g | thisModule.createNode(g)),
+		tasknode <- goals->select(g | endGoals->excludes(g) and g <> startGoal)->select(g | g.responsible.size() > 0)->collect(g | thisModule.createTaskNode(g,t.swimlane))
+	)
+	do {
+		for (node in t.node->union(t.tasknode)->including(t.startstate)) {
+			--Create all transitions
+			node.transition <- 
+				let nodes : Set(Workflow!Node) =
+					t.node->union(t.endstate)->union(t.tasknode)->including(t.startstate)
+				in let goal : Reqs!Goal =
+					goals->select(g | g.name.regexReplaceAll('[^a-zA-Z]','') = node.name)->first()
+				in let nextGoals : Set(Reqs!Goal) =
+					steps->select(s | s.refImmediateComposite() = goal)->collect(s | s.nextGoals)->flatten()->asSet()
+				in let nextStates : Set(Workflow!State) =
+					nextGoals->collect(g | nodes->select(n | n.name = g.name.regexReplaceAll('[^a-zA-Z]','')))->flatten()
+				in
+				 	nextStates->collect(s | thisModule.createTransition(s));
+		}
+		
+		for (node in t.tasknode->including(t.startstate)) {
+			--Create all workflow forms
+			thisModule.workflowFormsCollection.forms <- 
+				let goal : Reqs!Goal =
+					goals->select(g | g.name.regexReplaceAll('[^a-zA-Z]','') = node.name)->first()
+				in let wfForm : WorflowForm!FormWorkflow =
+					thisModule.createWfForm(node, goal)
+				in
+					thisModule.workflowFormsCollection.forms.append(wfForm);
+		}
+	}
+}
+
+rule createSwimlane(a : Reqs!Agent) {
+	to swimlane : Workflow!Swimlane (
+		name <- a.name.regexReplaceAll('[^a-zA-Z]',''),
+		pooledactors <- a.name,
+		documentation <- a.documentation
+	)
+	do {
+		swimlane;
+	}
+}
+
+rule createStartState(g : Reqs!Goal, swimlanes : Sequence(Workflow!Swimlane)) {
+	to start : Workflow!StartState (
+		name <- g.name.regexReplaceAll('[^a-zA-Z]',''),
+		title <- g.name,
+		initiator <- 
+			if (g.responsible.size() = 0) then
+				OclUndefined
+			else
+				swimlanes->select(s | s.name = g.responsible->first().name)->first()
+			endif
+	)
+	do {		
+		start;
+	}
+}
+
+rule createEndState(g : Reqs!Goal) {
+	to end : Workflow!EndState (
+		name <- g.name.regexReplaceAll('[^a-zA-Z]',''),
+		title <- g.name
+	)
+	do {
+		end;
+	}
+}
+
+rule createNode(g : Reqs!Goal) {
+	to node : Workflow!Node (
+		name <- g.name.regexReplaceAll('[^a-zA-Z]',''),
+		title <- g.name
+	)
+	do {
+		node;
+	}
+}
+
+rule createTaskNode(g : Reqs!Goal, swimlanes : Sequence(Workflow!Swimlane)) {
+	to tasknode : Workflow!TaskNode (
+		name <- g.name.regexReplaceAll('[^a-zA-Z]',''),
+		title <- g.name,
+		swimlane <- 
+			if (g.responsible.size() = 0) then
+				OclUndefined
+			else
+				swimlanes->select(s | s.name = g.responsible->first().name.regexReplaceAll('[^a-zA-Z]',''))->first()
+			endif
+	)
+	do {
+		tasknode;
+	}
+}
+
+rule createTransition(s : Workflow!State) {
+	to t : Workflow!Transition (
+		"to" <- s,
+		title <- 'Go to '+s.title,
+		name <- 'goTo'+s.name+thisModule.generateId().toString()
+	)
+	do {
+		t;
+	}
+}
+
+------------------
+
+rule createWfForm(node : Workflow!TransitionTask, goal : Reqs!Goal) {
+	to t : WorkflowForm!FormWorkflow (
+		id <- node.refImmediateComposite().name+'_'+node.name,
+		label <- node.title,
+		DataForm <- thisModule.dataFormsCollection.forms->select(f | f.label = goal.name)->first(),
+		ref <- node
+	)
+	do {
+		t.children <- node.transition->collect(t | thisModule.createButton(t));
+		t;
+	}
+}
+
+rule createButton(transition : Workflow!Transition) {
+	to t : WorkflowForm!ActionField (
+		id <- transition.name,
+		label <- transition.title,
+		ref <- transition
+	)
+	do {
+		t;
+	}
+}
+

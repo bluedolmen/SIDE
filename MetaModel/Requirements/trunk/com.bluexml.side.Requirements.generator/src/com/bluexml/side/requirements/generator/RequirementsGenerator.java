@@ -88,14 +88,23 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 			t.setASMFile(getASMFile(keyGenerator));
 
 			for (String key : getInputModels(keyGenerator).keySet()) {
-				t.setInputModelName(key);	
-				t.setInputMetamodelName(getInputModels(keyGenerator).get(key));
+				String _modelName = key;
+				String _metamodelName = getInputModels(keyGenerator).get(key);
+				//By default
+				String _metamodelFile = "/com.bluexml.side.Requirements/model/requirements.ecore";
+				String _modelFile = model.getRawLocation().toString();
+				
+				t.addInputModel(_modelName, _metamodelName, _modelFile, _metamodelFile);
 			}
 			for (String key : getOutputModels(keyGenerator).keySet()) {
-				t.setOutputModelName(key);
-				t.setOutputMetamodelName(getOutputModels(keyGenerator).get(key));
+				String _modelName = key;
+				String _metamodelName = getOutputModels(keyGenerator).get(key);
+				//By default
+				String _metamodelFile = "/com.bluexml.side.Requirements.generator/" + getTargetMetamodel(keyGenerator);
+				String _modelFile = getTargetPath() + File.separator + getTargetModelName(keyGenerator);
+				
+				t.addOutputModel(_modelName, _metamodelName, _modelFile, _metamodelFile);
 			}
-			t.setTargetMetamodel(getTargetMetamodel(keyGenerator));
 			t.setContributor(Activator.getDefault().getBundle().getSymbolicName());
 
 			/*if (elt.getAttribute("new_name") == null || elt.getAttribute("new_name").length() == 0)
@@ -108,7 +117,7 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 		IFile newInputModelFile = SIDE_XMIResource.export(model, newInputModelName);*/
 
 			try {
-				t.execute(model, getTargetPath() + File.separator + getTargetModelName(keyGenerator));
+				t.execute();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
