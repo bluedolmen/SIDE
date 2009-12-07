@@ -41,7 +41,7 @@ public class ClazzUpdateCommand extends Command {
 
 	/** Map containing new association data */
 	private Map newAssociationData;
-	
+
 	private ConstraintsDataStructure metainfo;
 
 	/**
@@ -55,8 +55,7 @@ public class ClazzUpdateCommand extends Command {
 	public ClazzUpdateCommand(Clazz classe, Map data) {
 		this.classe = classe;
 		this.newAssociationData = data;
-		this.metainfo = ((ConstraintsDataStructure) data
-				.get(ClazzEditDialog.CLASSE_METAINFO));
+		this.metainfo = ((ConstraintsDataStructure) data.get(ClazzEditDialog.CLASSE_METAINFO));
 	}
 
 	/**
@@ -75,24 +74,18 @@ public class ClazzUpdateCommand extends Command {
 	 */
 	public void redo() {
 		// Update the class properties
-		classe.setName((String) newAssociationData
-				.get(ClazzEditDialog.CLASSE_NAME));
-		
-		classe.setTitle((String) newAssociationData
-				.get(ClazzEditDialog.CLASSE_TITLE));
-		
-		classe.setDescription((String) newAssociationData
-				.get(ClazzEditDialog.CLASSE_DESCRIPTION));
-		
-		classe.setDocumentation((String) newAssociationData
-				.get(ClazzEditDialog.CLASSE_DOCUMENTATION));
-		
-		classe.setAbstract((Boolean) newAssociationData
-				.get(ClazzEditDialog.CLASSE_ISABSTRACT));
-		
-		classe.setDeprecated((Boolean) newAssociationData
-				.get(ClazzEditDialog.CLASSE_ISDEPRECATED));
-		
+		classe.setName((String) newAssociationData.get(ClazzEditDialog.CLASSE_NAME));
+
+		classe.setTitle((String) newAssociationData.get(ClazzEditDialog.CLASSE_TITLE));
+
+		classe.setDescription((String) newAssociationData.get(ClazzEditDialog.CLASSE_DESCRIPTION));
+
+		classe.setDocumentation((String) newAssociationData.get(ClazzEditDialog.CLASSE_DOCUMENTATION));
+
+		classe.setAbstract((Boolean) newAssociationData.get(ClazzEditDialog.CLASSE_ISABSTRACT));
+
+		classe.setDeprecated((Boolean) newAssociationData.get(ClazzEditDialog.CLASSE_ISDEPRECATED));
+
 		Comment layout = null, view = null;
 
 		for (Object o : classe.getComments()) {
@@ -107,41 +100,40 @@ public class ClazzUpdateCommand extends Command {
 			}
 		}
 
-		String _view = (String) newAssociationData
-				.get(ClazzEditDialog.CLASSE_VIEW);
-		String _layout = (String) newAssociationData
-				.get(ClazzEditDialog.CLASSE_LAYOUT);
+		String _view = (String) newAssociationData.get(ClazzEditDialog.CLASSE_VIEW);
+		// String _layout = (String)
+		// newAssociationData.get(ClazzEditDialog.CLASSE_LAYOUT);
 
-		if (layout == null) {
-			if (_layout.length() > 0) {
-				layout = CommonFactoryImpl.init().createComment();
-				layout.setValue(_layout);
-				classe.getComments().add(layout);
-				Stereotype s = searchStereotype("layout");
-				
-				if (s == null) {
-					s = CommonFactoryImpl.init().createStereotype();
-					s.setName("layout");
-					((ClassPackage) classe.eContainer()).getStereotypeSet().add(s);
-				}
-				layout.getStereotypes().add(s);
-			}
-		} else {
-			if (_layout.length() > 0) {
-				layout.setValue(_layout);
-			} else {
-				//We delete the comments
-				classe.getComments().remove(layout);
-			}
-		}
-		
+		// if (layout == null) {
+		// if (_layout.length() > 0) {
+		// layout = CommonFactoryImpl.init().createComment();
+		// layout.setValue(_layout);
+		// classe.getComments().add(layout);
+		// Stereotype s = searchStereotype("layout");
+		//
+		// if (s == null) {
+		// s = CommonFactoryImpl.init().createStereotype();
+		// s.setName("layout");
+		// ((ClassPackage) classe.eContainer()).getStereotypeSet().add(s);
+		// }
+		// layout.getStereotypes().add(s);
+		// }
+		// } else {
+		// if (_layout.length() > 0) {
+		// layout.setValue(_layout);
+		// } else {
+		// // We delete the comments
+		// classe.getComments().remove(layout);
+		// }
+		// }
+
 		if (view == null) {
 			if (_view.length() > 0) {
 				view = CommonFactoryImpl.init().createComment();
 				view.setValue(_view);
 				classe.getComments().add(view);
 				Stereotype s = searchStereotype("view");
-				
+
 				if (s == null) {
 					s = CommonFactoryImpl.init().createStereotype();
 					s.setName("view");
@@ -153,25 +145,26 @@ public class ClazzUpdateCommand extends Command {
 			if (_view.length() > 0) {
 				view.setValue(_view);
 			} else {
-				//We delete the comments
+				// We delete the comments
 				classe.getComments().remove(view);
 			}
 		}
-		
-		//Metainfo
+
+		// Metainfo
 		classe.getMetainfo().clear();
 
-		for (Object o : metainfo.getData()) {
-			ConstraintObject co = (ConstraintObject) o;
-			MetaInfo c = (new OblClassMetaInfo()).getMetaInfo(co.getKey());
-
-			c.setValue(co.getValue());
-			c.setConstraintType(null);
-			c.setValueSet(null);
-			c.setValueType(null);
-			classe.getMetainfo().add(c);
+		if (metainfo != null) {
+			for (Object o : metainfo.getData()) {
+				ConstraintObject co = (ConstraintObject) o;
+				MetaInfo c = (new OblClassMetaInfo()).getMetaInfo(co.getKey());
+				c.setValue(co.getValue());
+				c.setConstraintType(null);
+				c.setValueSet(null);
+				c.setValueType(null);
+				classe.getMetainfo().add(c);
+			}
 		}
-		
+
 	}
 
 	private boolean isStereotyped(Comment c, String stereotype) {
@@ -189,12 +182,10 @@ public class ClazzUpdateCommand extends Command {
 	}
 
 	private Stereotype searchStereotype(String value) {
-		Collection reachableStereotypes = ItemPropertyDescriptor
-				.getReachableObjectsOfType(classe, CommonPackage.eINSTANCE
-						.getStereotype());
+		Collection reachableStereotypes = ItemPropertyDescriptor.getReachableObjectsOfType(classe, CommonPackage.eINSTANCE.getStereotype());
 		Stereotype result = null;
-		
-		for (Object  o : reachableStereotypes) {
+
+		for (Object o : reachableStereotypes) {
 			if (o instanceof Stereotype) {
 				Stereotype s = (Stereotype) o;
 				if (s.getName().equalsIgnoreCase(value)) {
@@ -202,7 +193,7 @@ public class ClazzUpdateCommand extends Command {
 				}
 			}
 		}
-		
+
 		return result;
 	}
 }
