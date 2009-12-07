@@ -17,7 +17,7 @@ public class ExportSIDEModels implements IObjectActionDelegate {
 	private Shell shell;
 	private ISelection _selection;
 	
-	private static String ASM_FILE = "src/interpretation/side/transformation/Reqs2SIDE.asm";
+	private static String ASM_FILE = "/interpretation/side/transformation/Reqs2SIDE.asm";
 	
 	/**
 	 * Constructor for Action1.
