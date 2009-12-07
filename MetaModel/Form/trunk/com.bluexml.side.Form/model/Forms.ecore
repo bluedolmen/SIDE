@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="form"
     nsURI="http://www.kerblue.org/form/1.0" nsPrefix="form">
-  <eClassifiers xsi:type="ecore:EClass" name="FormElement" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="FormElement" abstract="true" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="noSpecialCharacters"/>
     </eAnnotations>
@@ -28,14 +28,14 @@
         <details key="documentation" value="Definition: The 'help_text' attribute specifies a text that will appear when the cursor moves over the form element.&#xD;&#xD;&#xA;Constraint/Limit: The internationalization convention may be used for the help_text's value; if the value of the help_text in the form model is of the form &quot;#label&quot;,  the token &quot;label&quot; is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '&lt;xforms_webapp>/WEB-INF/classes/messages.properties'.&#xD;&#xD;&#xA;Example: help_text=This is an help message"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'hidden' attribute specifies that a form element will be hidden in the generated form if true or will be visible if false."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FormCollection" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
+  <eClassifiers xsi:type="ecore:EClass" name="FormCollection" abstract="true" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//Package">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: This is the root element which is the first created element of the form model. All forms will be child of this element. &#xD;&#xA;It has no corresponding elements in the Data model and is usually not generated.&#xD;&#xA;Operations:&#xD;&#xA;- The operation ‘Synchronize with Class Diagram’ might be called when your Data model has been changed to propagate these changes in your forms. &#xD;&#xA;The changes which will be propagated are: &#xD;&#xA; . New attribute (in Data Diagram) are added to the form.&#xD;&#xA; . Deleted attribute (in Data Diagram) are removed from the form.&#xD;&#xA; . Attribute which have been put as mandatory (in Data Diagram) will be put in form if they have been deleted in field’s form.&#xD;&#xA; . If an attribute (in Data Diagram) have been changed its type (eg : String to Date) the kind of field will be changed (CharFiled to DateField).&#xD;&#xA;All the other changes which are not propagated imply a manual update in the concerned forms.&#xD;&#xA;"/>
     </eAnnotations>
