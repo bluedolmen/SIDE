@@ -22,7 +22,7 @@ public class Startup implements IStartup {
 							pref == FeedbackActivator.FEEDBACK_PREF_NOW) {
 					// Get last update date
 					Long longDate = FeedbackActivator.getDefault().getPreferenceStore().getLong(FeedbackActivator.LAST_UPDATE_DATE);
-					if (!longDate.equals(0L)) {
+					if (longDate.equals(0L)) {
 						// Does we need to send data?
 						Date lastUpdate = new Date(longDate);
 						Date now = new Date();
