@@ -7,11 +7,10 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 		<title><%title%></title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
-	<body>
-		<div id="projectTitle">
+	<body class="body">
+		<div id="users" class="centered_div">
 			<h1><%eContainer().name%></h1>
-		</div>
-		<div id="users">
+			<hr/>
 			<h1><%title%></h1>
 			<ul>
 			<%for (links.nSort("label")){%>
@@ -24,7 +23,7 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 <%script type="WebProject.FramePage" name="goalPage_frame" file="<%eContainer().name%>/<%name%>"%>
 <frameset cols="20%,80%" frameborder="no">
 	<frame src="<%col1.name%>" name="goalItems">
-	<frame name="data">
+	<frame src="blank.html" name="data">
 </frameset>
 <%script type="WebProject.GoalPage" name="goalPage_list" file="<%eContainer().name%>/<%name%>"%>
 <html>
@@ -32,33 +31,34 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 		<title><%title%></title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
-	<body>
-		<div id="goalItems">
-			<h1><%title%></h1>
+	<body class="body">
+		<div id="goalItems" class="box">
+			<h2><%title%></h2>
+			<hr/>
+			<ul>
 			<%for (items){%>
 			 	<%goalPage_goalItem%>
 			<%}%>
+			</ul>
 		</div>
 		<br/>
-		<div id="logout">
-			<a href="<%eContainer().pages[eClass().name.equalsIgnoreCase("LoginPage")].name%>" target="_parent">Logout</a>
+		<div id="logout" class="box">
+			<img src="images/logout.png"/><a href="<%eContainer().pages[eClass().name.equalsIgnoreCase("LoginPage")].name%>" target="_parent">Logout</a>
 		</div>
 	</body>
 </html>
 <%script type="WebProject.GoalItem" name="goalPage_goalItem"%>
-<ul>
 	<li/><a href="<%page.name%>" target="data"><%label%></a>
 	<%for (sub){%>
 		<%goalPage_goalItem%>
 	<%}%>
-</ul>
 <%script type="WebProject.DataPage" name="dataPage" file="<%eContainer().name%>/<%name%>"%>
 <html>
 	<head>
 		<title><%title%></title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
-	<body>
+	<body class="body"> 
 		<? 
 			require("./mysql/mysql_util.php");
 			
@@ -77,8 +77,8 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
  				return $tmp;
 			}
 		?>
-		<div id="data">
-			<h1><%title%></h1>
+		<div id="data" class="box">
+			<h2><%title%></h2>
 			<%for (components){%>
 				<%if (current("DataPage").mainComponent == current()){%>
 					<%dataPage_component%>
@@ -94,7 +94,7 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 <%script type="WebProject.Component" name="dataPage_component"%>
 <div id="component">
 	<div class="component_title">
-	<h2><%name%></h2>
+	<h3><%name%></h3>
 	</div>
 	<%if (canRead){%>
 		<%dataPage_component_read%>
@@ -106,7 +106,7 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 	<%}%>
 </div>
 <%script type="WebProject.Component" name="dataPage_component_read"%>
-	<table>
+	<table class="list-table">
 		<tr>
 		<%for (properties[canRead == true]) {%>
 			<%if (	eClass().name.equalsIgnoreCase("ComponentAttribute") ||
@@ -220,11 +220,11 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 <%script type="WebProject.Component" name="dataPage_component_sqlQuery"%>
 if (isset($pkPreviousTable)) {
 	$sql = "SELECT "
-		." <%properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].cast("ComponentAttribute").field.name.sep(",")%>"
+		." `<%properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].cast("ComponentAttribute").field.name.sep("`,`")%>`"
 		<%if (properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].nSize()> 0){%>
 		.","
 		<%}%>
-		." <%table.primaryKey.name.split(",")%>"
+		." `<%table.primaryKey.name.split("`,`")%>`"
 		." FROM <%table.name%> as s"
 		." WHERE ("
 		."     SELECT COUNT(*)"
@@ -240,14 +240,14 @@ if (isset($pkPreviousTable)) {
 		."     FROM <%cast("ComponentRelationShip").idLeft.eContainer().name%>2<%cast("ComponentRelationShip").idRight.eContainer().name%> as t"
 			<%}%>
 		<%}%>
-		."     WHERE t.<%table.primaryKey.name%> = s.<%table.primaryKey.name%>"
+		."     WHERE t.`<%table.primaryKey.name%>` = s.`<%table.primaryKey.name%>`"
 		."     AND t.$pkPreviousTable = \"".$_GET["id$nbPreviousTable"]."\") > 0;";
 } else {
 	$sql = "SELECT "
-		." <%properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].cast("ComponentAttribute").field.name.sep(",")%>"
+		." `<%properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].cast("ComponentAttribute").field.name.sep("`,`")%>`"
 		<%if (properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].nSize()> 0){%>
 		.","
 		<%}%>
-		." <%table.primaryKey.name.split(",")%>"
+		." `<%table.primaryKey.name.split("`,`")%>`"
 	    ." FROM <%table.name%>;";
 }

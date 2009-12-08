@@ -10,12 +10,12 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 		<title><%name%></title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
-	<body>
+	<body class="body">
 		<? 
 			require("./mysql/mysql_util.php");
 		?>
-		<div id="data">
-			<h1><%name%></h1>
+		<div id="data" class="box">
+			<h2><%name%></h2>
 			<%dataPage_component_create_update%>
 		</div>
 	</body>
@@ -23,13 +23,13 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 <%script type="WebProject.Component" name="dataPage_component_sqlQueryUpdate"%>
 $idObject = $_GET["idObject"];
 $sql = "SELECT "
-	." <%properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canUpdate].cast("ComponentAttribute").field.name.sep(",")%>"
+	." `<%properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canUpdate].cast("ComponentAttribute").field.name.sep("`,`")%>`"
 	<%if (properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canUpdate].nSize()> 0){%>
 	.","
 	<%}%>
-	." <%table.primaryKey.name.split(",")%>"
+	." `<%table.primaryKey.name.split("`,`")%>`"
     ." FROM <%table.name%>"
-	." WHERE <%table.primaryKey.nFirst().name%>=$idObject;";
+	." WHERE `<%table.primaryKey.nFirst().name%>`=$idObject;";
 <%script type="WebProject.Component" name="dataPage_component_create_update"%>
 	<? if (isset($_GET["<%table.name%>"])) { ?>	
 		<div id="component_create">
@@ -43,7 +43,7 @@ $sql = "SELECT "
 				$url = "<%eContainer().name%>".$param;
 			?>
 			<form method="POST" action="<? echo $url; ?>">
-			<table class="table_edit">
+			<table class="table_edit" class="list-table">
 			<?
 				mysql_connect($host, $user, $password);
 				mysql_select_db($db);
@@ -78,7 +78,7 @@ $sql = "SELECT "
 					$idTarget = "<%current("ComponentRelationShip").idRight.name%>";
 					$tableSource = "<%current("ComponentRelationShip").idLeft.eContainer().name%>";
 					$tableTarget = "<%current("ComponentRelationShip").idRight.eContainer().name%>";
-					$attributes = "<%current("ComponentRelationShip").idRight.eContainer().fields.name.sep(",")%>";
+					$attributes = "`<%current("ComponentRelationShip").idRight.eContainer().fields.name.sep("`,`")%>`";
 						<%if (current("ComponentRelationShip").mandatoryRight){%>
 					$multiple = 1;
 						<%}else{%>
@@ -94,7 +94,7 @@ $sql = "SELECT "
 					$idTarget = "<%current("ComponentRelationShip").idLeft.name%>";
 					$tableSource = "<%current("ComponentRelationShip").idRight.eContainer().name%>";
 					$tableTarget = "<%current("ComponentRelationShip").idLeft.eContainer().name%>";
-					$attributes = "<%current("ComponentRelationShip").idLeft.eContainer().fields.name.sep(",")%>";
+					$attributes = "`<%current("ComponentRelationShip").idLeft.eContainer().fields.name.sep("`,`")%>`";
 						<%if (current("ComponentRelationShip").mandatoryLeft){%>
 					$multiple = 1;
 						<%}else{%>
@@ -118,7 +118,7 @@ $sql = "SELECT "
 						$sql = "SELECT t.$attributes ";
 						if (isset($_GET["idObject"])) {
 							$sql .= " ,EXISTS(SELECT * FROM $joinTable j WHERE ";
-							$sql .= " t.$idTarget = j.$idTarget AND j.$idSource=\"".$_GET["idObject"]."\" ) as selected";
+							$sql .= " t.`$idTarget` = j.`$idTarget` AND j.`$idSource`=\"".$_GET["idObject"]."\" ) as selected";
 						}
 						$sql .= " FROM $tableTarget t;";
 						$result = mysql_query($sql);
@@ -134,6 +134,7 @@ $sql = "SELECT "
 				 			}
 				 			$label = "";
 				 			foreach($attributesA as $fieldName) {
+							 	$fieldName = str_replace("`","",$fieldName);
 				 				$label .= "($fieldName=".$data2[$fieldName].")";
 				 			}
 				 			if (strlen($label) > 85) {

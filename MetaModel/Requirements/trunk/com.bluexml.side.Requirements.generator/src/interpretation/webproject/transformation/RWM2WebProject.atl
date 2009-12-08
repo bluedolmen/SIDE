@@ -47,19 +47,15 @@ rule agent {
     goalPage : WebProject!GoalPage (
         name <- s.__xmiID__+'.html',
         title <- 'Goals of '+s.name,
-        items <-
-        	let allSubGoals : Sequence(RWM!Goal) =
-        	    s.isResponsible->collect(g | g.getAllSubGoals())->flatten()->select(g | not(s.isResponsible.includes(g)))
-        	in
-        		s.isResponsible->select(g | not(allSubGoals->includes(g)))->collect(g | thisModule.createGoalItem(g))
+        items <- s.isResponsible->collect(g | thisModule.createGoalItem(g))
     )
 }
 
 rule createGoalItem(s : RWM!Goal) {
 	to t : WebProject!GoalItem (
 		label <- s.name,
-		page <- thisModule.resolveTemp(s,'dataPage'),
-		sub <- s.subgoals->collect(g | thisModule.createGoalItem(g))
+		page <- thisModule.resolveTemp(s,'dataPage')--,
+		--sub <- s.subgoals->collect(g | thisModule.createGoalItem(g))
 	)
 	do {
 		t;

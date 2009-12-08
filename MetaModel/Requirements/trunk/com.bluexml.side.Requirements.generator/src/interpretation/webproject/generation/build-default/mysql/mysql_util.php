@@ -59,7 +59,7 @@
 		//Delete the last comma
 		$sql = substr($sql,0,strlen($sql)-1);
 		
-		$sql .= " WHERE ".$_POST["idFieldName"]." = $idObject;";
+		$sql .= " WHERE `".$_POST["idFieldName"]."` = $idObject;";
 
 		$database = mysql_connect($host, $user, $password);  
 		$db_instance = mysql_select_db ($db, $database) ;
@@ -78,7 +78,7 @@
 		$idObject = $_GET["idObject"];
 		
 		$sql = "DELETE FROM $table_name ";
-		$sql .= " WHERE ".$_GET["field_name"]." = $idObject;";
+		$sql .= " WHERE `".$_GET["field_name"]."` = $idObject;";
 
 		$database = mysql_connect($host, $user, $password);  
 		$db_instance = mysql_select_db ($db, $database) ;
@@ -87,10 +87,12 @@
 	}
 	
 	function deleteRelationShip($joinTable, $paramName, $paramValue) {
-		//Delete links
-		$sql = "DELETE FROM $joinTable ";
-		$sql .= " WHERE $paramName=$paramValue;";
-		mysql_query ($sql) or die ('Error SQL !'.$sql.'<br />'.mysql_error());
+		if (strlen($paramValue) > 0) {
+			//Delete links
+			$sql = "DELETE FROM $joinTable ";
+			$sql .= " WHERE `$paramName`=$paramValue;";
+			mysql_query ($sql) or die ('Error SQL !'.$sql.'<br />'.mysql_error());
+		}
 	}
 	
 	function deleteAllRelationShips() {
@@ -103,7 +105,7 @@
 	
 	function createRelationShip($joinTable, $paramName1, $paramValue1, $paramName2, $paramValue2) {
 		//Create link
-		$sql = "INSERT INTO $joinTable($paramName1,$paramName2)";
+		$sql = "INSERT INTO $joinTable(`$paramName1`,`$paramName2`)";
 		$sql .= " VALUES(\"$paramValue1\",\"$paramValue2\");";
 		mysql_query ($sql) or die ('Error SQL !'.$sql.'<br />'.mysql_error());
 	}
