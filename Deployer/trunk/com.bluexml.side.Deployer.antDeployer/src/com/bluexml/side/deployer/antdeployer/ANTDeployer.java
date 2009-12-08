@@ -6,6 +6,7 @@ import java.io.PrintStream;
 
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
+import org.apache.tools.ant.helper.ProjectHelper2;
 import org.apache.tools.ant.helper.ProjectHelperImpl;
 
 import com.bluexml.side.util.deployer.Deployer;
@@ -52,7 +53,8 @@ public class ANTDeployer extends Deployer {
 				monitor.addTextAndLog("Deploy post process", "");
 
 				if (antProject != null) {
-					ProjectHelper helper = new ProjectHelperImpl();
+					//ProjectHelper helper = new ProjectHelperImpl();
+					ProjectHelper helper = new ProjectHelper2();
 					helper.parse(antProject, f);
 					antProject.executeTarget("post-build");
 					monitor.addTextAndLog("standard output "+outputStream.toString(), "");
@@ -64,7 +66,8 @@ public class ANTDeployer extends Deployer {
 				monitor.addTextAndLog("Deploy pre process", "");
 
 				if (antProject != null) {
-					ProjectHelper helper = new ProjectHelperImpl();
+					//ProjectHelper helper = new ProjectHelperImpl();
+					ProjectHelper helper = new ProjectHelper2();
 					helper.parse(antProject, f);
 					antProject.setProperty("directory", arg0.toString());
 					antProject.executeTarget("pre-build");
