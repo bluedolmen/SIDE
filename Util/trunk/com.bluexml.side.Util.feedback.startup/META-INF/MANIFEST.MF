@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Feedback Startup
 Bundle-SymbolicName: com.bluexml.side.Util.feedback.startup;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.1.v11991-20091208
 Bundle-Activator: com.bluexml.side.util.feedback.startup.Activator
 Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
