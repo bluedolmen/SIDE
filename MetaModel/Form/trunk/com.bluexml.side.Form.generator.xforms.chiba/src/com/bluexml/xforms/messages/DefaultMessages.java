@@ -5,48 +5,88 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * This class // TODO
+ * This class is used to generate the content of the default messages.properties file.
  * 
  * @author Amenel
  * 
  */
 public class DefaultMessages {
 
-	private static final String[] properties = { "association.mandatory.part1=Association \"",
-			"association.mandatory.part2=\" is mandatory!", "caption.button.cancel=Cancel",
-			"caption.button.create=Create", "caption.button.create.class=Create",
-			"caption.button.create.form=Create", "caption.button.delete=Delete",
-			"caption.button.edit=Modify", "caption.button.edit.class=Edit",
-			"caption.button.edit.form=Edit form.", "caption.button.submit=Submit",
-			"field.mandatory.part1=Field \"", "field.mandatory.part2=\" is mandatory !",
-			"key.not.found=Message key not found", "# trailing space",
-			"length.between.part1=Allowed length between", "# leading space and trailing space",
-			"length.between.part2=\\ et ", "# trailing space", "length.maximal=Maximal length ",
-			"# trailing space", "length.minimal=Minimal length ", "# leading space",
-			"length.post.info.part1=\\ for field \"", "length.post.info.part2=\"",
-			"workflow.section.label=Workflow Task", "# trailing space",
-			"selection.list.label.mandatory=Select ", "selection.list.show.all.results=Show all",
-			"session.timed.out=Your session has timed out.",
-			"status.message.delete.success=Deletion successful.",
-			"status.message.delete.failure=Error while deleting.",
-			"status.message.edit.success=Modification successful.",
-			"status.message.edit.failure=Error while modifying.",
-			"# status.message.empty should have at least one whitespace",
-			"status.message.empty=\\ ", "status.message.iteration.after=)",
-			"status.message.iteration.before=\\ (",
-			"status.message.submit.success=Creation successful.",
-			"status.message.submit.failure=Error while saving.", "# workflow-related",
-			"caption.button.workflow.cancel=Cancel",
+	private static final String[] allLines = {
+			"#",
+			"# THESE ENTRIES ARE USED AT GENERATION TIME ONLY. Any modifications after a",
+			"# generation will NOT have any effect at runtime. To make the modifications",
+			"# effective, a new generation is REQUIRED: these are essentially static entries.",
+			"# See the documentation for instructions on making the entries dynamic.",
+			"#",
+			"# Runtime entries can be found further in the file.",
+			"#",
+			"# 0: label/title of the field",
+			"association.is.mandatory=Association \"{0}\" is mandatory.",
+			"",
+			"caption.button.cancel=Cancel",
+			"caption.button.create.form=Create",
+			"caption.button.create.class=Create",
+			"caption.button.delete=Delete",
+			"caption.button.edit.class=Edit",
+			"caption.button.edit.form=Edit",
+			"caption.button.submit=Submit",
+			"",
+			"default.error.msg=An unexpected error occurred. Please report it to the administrator.",
+			"",
+			"# 0: label/title of the field",
+			"field.is.mandatory=Field \"{0}\" is mandatory.",
+			"",
+			"file.field.label=File",
+			"",
+			"# 0: list of labels for mandatory fields that are not filled at submission time",
+			"fill.mandatory.fields=Please fill mandatory fields ({0}).",
+			"",
+			"# 0: 4-digit year, 1: two-digit year, {2}: two-digit month, {3}: two-digit day",
+			"format.date.output={0}-{2}-{3}",
+			"",
+			"# 0: hour (00 - 23), 1: minutes, 2: seconds, 3: milliseconds",
+			"format.time.output={0}:{1}:{2}",
+			"",
+			"# 0: label of the field (the selection list) that implements the association on the current form",
+			"integrity.violation=Integrity constraint violation on \"{0}\"",
+			"#integrity.violation=the item chosen in field \"{0}\" is already used. Please select another item.",
+			"",
+			"# 0: label of the field",
+			"invalid.regex.format=Invalid content for this field",
+			"",
+			"key.not.found=Message key not found",
+			"# 0: min length allowed; 1: max length allowed; 2: label of the field",
+			"length.between.min.and.max=The text length must be between {0} and {1} for the field \"{2}\"",
+			"", "# 0: max length allowed; 1: label of the field",
+			"length.maximal=Maximal length allowed is {0} for the field \"{1}\"", "",
+			"# 0: min length allowed; 1: nom du champ",
+			"length.minimal=Minimal length allowed is {0} for the field \"{1}\"", "",
+			"selection.list.label=Select", "selection.list.show.all.results=Show all", "#",
+			"# workflow-related", "#", "caption.button.workflow.cancel=Cancel",
 			"caption.button.workflow.select=Select this workflow",
 			"caption.button.workflow.start=Activate this workflow",
+			"workflow.error.submit.data=Please submit the data form before starting a workflow.",
+			"workflow.error.start.failure=Failed in starting the workflow.",
+			"workflow.instance.widget.title=Instances",
+			"workflow.process.widget.title=Process definitions",
+			"workflow.section.label=Workflow Task",
 			"workflow.selection.page.title=Select a workflow",
 			"workflow.selection.process.group=Process definitions",
-			"workflow.selection.instance.group=In-progress instances",
 			"workflow.selection.global.group=Workflows",
-			"workflow.process.widget.title=Process definitions",
-			"workflow.instance.widget.title=Instances",
-			"workflow.error.submit.data=Please submit the data form before starting a workflow.",
-			"workflow.error.start.failure=Failed in starting the workflow." };
+			"workflow.selection.instance.group=In-progress instances", "#",
+			"# ALL ENTRIES BELOW ARE RUNTIME ENTRIES: THEY CAN BE MODIFIED.",
+			"# Use \"reloadProperties=true\" as url parameter to make modifications",
+			"# effective in the webapp.", "#", "session.timed.out=Your session has timed out.",
+			"status.message.create.failure=Error while saving the data.",
+			"status.message.create.success=Data successfully saved.",
+			"status.message.delete.failure=Error while deleting.",
+			"status.message.delete.success=Data successfully deleted.",
+			"status.message.edit.failure=Error while editing the data.",
+			"status.message.edit.success=Data successfully edited.",
+			"# status.message.empty should have at least one whitespace",
+			"status.message.empty=\\ ", "# 0: sequence number of the iteration",
+			"status.message.iteration.postfix=\\ ({0})", "" };
 
 	/**
 	 * @param args
@@ -60,9 +100,8 @@ public class DefaultMessages {
 			String dirPath = filePath.substring(0, pos);
 			File dir = new File(dirPath);
 			dir.mkdirs();
-//			File file = new File(filePath);
 			fos = new FileOutputStream(filePath);
-			for (String property : properties) {
+			for (String property : allLines) {
 				line = property + "\n";
 				fos.write(line.getBytes());
 			}

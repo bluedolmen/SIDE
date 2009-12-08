@@ -77,7 +77,7 @@ public class MsgPool {
 	 *            the key, either an enum from class MsgId or a String
 	 * @return the string attached to the key
 	 */
-	public static String getMsg(Object msgKey) {
+	public static String getMsg(Object msgKey, String... args) {
 		String theKey = null;
 
 		if (msgKey instanceof MsgId) {
@@ -90,7 +90,7 @@ public class MsgPool {
 		getInstance();
 		String res = MsgPool.getPool().getProperty(theKey);
 		if (res != null) {
-			return res;
+			return replaceArgs(res, args);
 		}
 		// a key may be set to an empty string in the properties file
 		if (hasProperty(theKey) == true) {
@@ -101,6 +101,17 @@ public class MsgPool {
 			return MsgId.INT_MSGPOOL_NO_MESSAGE_FILE.getText();
 		}
 		return MsgPool.getMsg(MsgId.MSG_KEY_NOT_FOUND);
+	}
+
+	private static String replaceArgs(String msg, String[] args) {
+		String result = msg;
+		int idx = 0;
+		for (String arg : args) {
+			String idxStr = "{" + idx + "}";
+			result = StringUtils.replace(result, idxStr, arg);
+			idx++;
+		}
+		return result;
 	}
 
 	/**
@@ -128,9 +139,10 @@ public class MsgPool {
 	 * @param theKey
 	 * @return the key value if the key is found, null otherwise
 	 */
-	public static String testMsg(Object theKey) {
-		String res = MsgPool.getMsg(theKey);
-		if (StringUtils.equals(res, MsgId.INT_MSGPOOL_NO_MESSAGE_FILE.getText())) {
+	public static String testMsg(Object theKey, String... args) {
+		String res = MsgPool.getMsg(theKey, args);
+		if (StringUtils.equals(res, MsgId.INT_MSGPOOL_NO_MESSAGE_FILE.getText())
+				|| StringUtils.equals(res, MsgId.MSG_KEY_NOT_FOUND.getText())) {
 			return null;
 		}
 		return res;
