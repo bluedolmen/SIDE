@@ -18,7 +18,7 @@ public class FeedbackActivator extends AbstractUIPlugin {
 	// URL for image stats to show
 	public static String STATS_URL = "http://www.statssheet.com/images/web_counter_stats.jpg";
 	// URL for link on image :
-	public static String STATS_LINK_URL = "http://www.bluexml.com";
+	public static String STATS_LINK_URL = "http://www.side-labs.org";
 
 	// Zipe file name
 	public static String ZIP_FILE_NAME = "sideLog.zip";
