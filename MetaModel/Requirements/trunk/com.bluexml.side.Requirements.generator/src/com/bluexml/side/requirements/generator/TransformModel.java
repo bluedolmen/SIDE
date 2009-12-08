@@ -139,7 +139,7 @@ public class TransformModel {
 		String asmPath = asmFile;
 
 		trans = Platform.getBundle(contributor).getEntry(asmPath);
-		if (trans != null)
+		if (trans == null)
 			trans = Platform.getBundle(contributor).getEntry("/src"+asmPath);
 
 		/*InputStream in_metamodel_stream = Platform.getBundle("com.bluexml.side.Requirements").getEntry("/model/requirements.ecore").openStream();*/
