@@ -135,8 +135,10 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		return new UUID(idarg1,idarg2);
 	}
 	private String generateName(TypeDefinition type) {
-		String name = type.getTitle();
-		//name += "_" + randomGenerator.nextInt(generator.getNumberOfNodes());
+		String name = null;
+		String qName = type.getName().toString();
+		String[] parts = qName.split("}");
+		name = parts[parts.length-1];
 		name += "_" + randomGenerator.nextInt();
 		return name;
 	}
