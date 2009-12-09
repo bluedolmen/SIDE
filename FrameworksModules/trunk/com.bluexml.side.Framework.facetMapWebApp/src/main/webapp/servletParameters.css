@@ -1,0 +1,62 @@
+body {
+  color : #000000;
+  font-family:Courier New, Courier, Prestige, monospace;
+}
+
+a{
+	color:#000000;
+	font-weight:bold;
+	text-decoration:none;
+}
+a:hover {
+	background-color:#CCCCCC;
+}
+
+a:visited {
+	color: #828F95;  
+}
+
+a:hover{
+	color:#FFFFFF;
+	background:#828F95;
+}
+
+a:active {
+	color: #FFFFFF;
+	background: #000000;
+}
+
+h4 {
+	text-decoration:underline;
+	font-weight:bold;
+	font-size: 130%;
+	text-align:center;
+}
+
+.servletParameters{
+	border : 2px solid #828F95;
+}
+
+.top-context-nav {
+    text-align : center;
+}
+.top-context-item{
+	border : 2px solid #828F95;
+}
+
+.code {
+	font-weight:bold;
+	font-size: 115%;
+}
+
+.return_message {
+	text-align:center;
+    font-weight : bold;
+    color : red;
+	font-size: 115%;
+}
+
+p.description {}
+
+tr.description td p {}
+
