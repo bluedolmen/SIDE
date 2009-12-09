@@ -71,12 +71,10 @@ public enum MsgId {
 	//
 	CAPTION_BUTTON_CANCEL			("caption.button.cancel"),
 	// label for create in selection widget
-	CAPTION_BUTTON_CREATE_CLASS		("caption.button.create.class"),
-	CAPTION_BUTTON_CREATE_FORM		("caption.button.create.form"),
+	CAPTION_BUTTON_CREATE			("caption.button.create"),
 	CAPTION_BUTTON_DELETE			("caption.button.delete"),
 	// label for modify (edit) in right side of selection widget
-	CAPTION_BUTTON_EDIT_CLASS		("caption.button.edit.class"),
-	CAPTION_BUTTON_EDIT_FORM		("caption.button.edit.form"),
+	CAPTION_BUTTON_EDIT				("caption.button.edit"),
 	CAPTION_BUTTON_SUBMIT			("caption.button.submit"),
 	CAPTION_BUTTON_WORKFLOW_CANCEL	("caption.button.workflow.cancel"),
 	CAPTION_BUTTON_WORKFLOW_SELECT	("caption.button.workflow.select"),
