@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<facetmap xmlns:alf="http://www.alfresco.com" xmlns:cmis="http://www.cmis.org/2008/05">
+    <resources>
+        <resource
+            href="http://localhost:8080/alfresco/d/a/workspace/SpacesStore/be4a179f-b8f9-48e6-9145-376e674f64b5/link-1235747198007_36+http://localhost:8080/share/page/site/base/document-details?nodeRef=workspace://SpacesStore/be4a179f-b8f9-48e6-9145-376e674f64b5"
+            title="No value">
+            <map heading="nullA"/>
+            <map heading="nullB"/>
+            <map heading="nullC"/>
+        </resource>
+    </resources>
+    <taxonomy facetid="com.bluexml.demo.rh.Personne.age" root-heading-title="Personne.age"
+        title="Personne.age">
+        <heading title="nullA" id="nullA"/>
+    </taxonomy>
+    <taxonomy facetid="com.bluexml.demo.rh.Personne.mobilite" root-heading-title="Personne.mobilite"
+        title="Personne.mobilite">
+        <heading title="nullB" id="nullB"/>
+    </taxonomy>
+    <taxonomy facetid="com.bluexml.demo.rh.Personne.permisB" root-heading-title="Personne.permisB"
+        title="Personne.permisB">
+        <heading title="nullC" id="nullC"/>
+    </taxonomy>
+</facetmap>
