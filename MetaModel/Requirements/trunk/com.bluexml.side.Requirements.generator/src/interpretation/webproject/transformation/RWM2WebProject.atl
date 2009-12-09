@@ -22,9 +22,10 @@ rule ReqDefs {
         tables <- WebProject!Table->allInstances()
     ),
     loginP : WebProject!LoginPage (
-        title <- 'List of users',
+        title <- 'Start...',
         name <- 'index.html',
-        links <- RWM!Agent->allInstances()->collect(a | thisModule.resolveTemp(a,'link_loginPage'))
+        links <- RWM!Agent->allInstances()->collect(a | thisModule.resolveTemp(a,'link_loginPage'))->
+					union(RWM!Process->allInstances()->collect(a | thisModule.resolveTemp(a,'link_loginPage')))
     )
     do {
         thisModule.webProject <- t;
@@ -62,6 +63,17 @@ rule createGoalItem(s : RWM!Goal) {
 	}
 }
 
+rule createNextGoalItem(s : RWM!Goal, p: RWM!Process) {
+	to t : WebProject!GoalItem (
+		label <- s.name,
+		page <- thisModule.resolveTemp(s,'dataPage'),
+		sub <- s.step->select(st | st.process = p)->collect(st | st.nextGoals)->flatten()->asSet()->collect(g | thisModule.createNextGoalItem(g,p))
+	)
+	do {
+		t;
+	}
+}
+
 helper def : sortEntities(seq : Sequence(RWM!Entity), pset : Sequence(RWM!Privilege), first : RWM!Entity) : Sequence(RWM!Entity) =
 	if (seq->size() <= 1) then
 		seq
@@ -88,7 +100,12 @@ helper def : sortEntities(seq : Sequence(RWM!Entity), pset : Sequence(RWM!Privil
 rule goalWithPrivileges {
     from s : RWM!Goal (s.privilegeGroup.size() > 0)
     to dataPage : WebProject!DataPage (
-        title <- s.name,
+        title <-
+			if (s.responsible.size() > 0) then 
+				s.name + '(' + s.responsible.first().name + ')'
+			else
+				s.name
+			endif,
         name <- s.__xmiID__+'.php',
         components <- 
         	if (s.privilegeGroup <> OclUndefined) then
@@ -212,5 +229,32 @@ rule relationship {
     idRight : WebProject!Field (
         name <- 'id_'+r.target.__xmiID__,
         dataType <- #integer
+    )
+}
+
+rule process {
+    from s : RWM!Process
+	using {
+		steps : Set(RWM!GoalStep) =
+				RWM!GoalStep->allInstances()->select(step | step.process = s);
+		goals : Set(RWM!Goal) =
+				steps->collect(s | s.refImmediateComposite())->union(steps->collect(s | s.nextGoals)->flatten())->asSet();
+		startGoal : Set(RWM!Goal) =
+				goals->select(g | steps->collect(s | s.nextGoals)->flatten()->excludes(g));
+	}
+    to
+    link_loginPage : WebProject!Link(
+        label <- s.name,
+        page <- goalPage
+    ),
+    framePage : WebProject!FramePage(
+        name <- 'frame_'+s.__xmiID__+'.html',
+        title <- thisModule.webProject.name,
+        col1 <- goalPage
+    ),
+    goalPage : WebProject!GoalPage (
+        name <- s.__xmiID__+'.html',
+        title <- 'Process : '+s.name,
+        items <- startGoal->collect(g | thisModule.createNextGoalItem(g,s))
     )
 }

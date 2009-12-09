@@ -14,12 +14,12 @@ img {
 
 .centered_div {
 	width:550px;
-	height: 250px;
+	height: 400px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	margin-left: -250px;
-	margin-top: -125px;
+	margin-top: -200px;
 	background: url(../images/bg.png);
 	text-align: center;
 	font-weight:bold;
@@ -120,14 +120,26 @@ a{
 	color:black;
 }
 
-#users li:before {
+.user li:before {
 	display: marker;
 	content: url("../images/user.png");
 	vertical-align: -2px;
 	padding-right: 5px;
 }
 
-#users li {
+.user li {
+	list-style-type: none;
+	margin-left: -14px;
+}
+
+.process li:before {
+	display: marker;
+	content: url("../images/process.png");
+	vertical-align: -2px;
+	padding-right: 5px;
+}
+
+.process li {
 	list-style-type: none;
 	margin-left: -14px;
 }
@@ -143,4 +155,16 @@ a{
 
 #logout img{
 	margin-right: 10px;
+}
+
+li {
+	margin-left: -25px;
+}
+
+td{
+	font-size: smaller;
+}
+
+.action_col{
+	text-align: center;
 }

@@ -12,11 +12,19 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 			<h1><%eContainer().name%></h1>
 			<hr/>
 			<h1><%title%></h1>
-			<ul>
+			<div class="user">
 			<%for (links.nSort("label")){%>
-				<li/><a href="frame_<%page.name%>"><%label%></a>
+				<%if (!page.title.startsWith("Process : ")){%><li/><a href="frame_<%page.name%>"><%label%></a><%}%>
 			<%}%>
-			</ul>
+			</div>
+			<hr/>
+			<div class="process">
+			<%for (links.nSort("label")){%>
+				<%if (page.title.startsWith("Process : ")){%><li/><a href="frame_<%page.name%>"><%label%></a><%}%>
+			<%}%>
+			</div>
+			</td>
+			</tr></table>
 		</div>
 	</body>
 </html>
@@ -49,9 +57,11 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 </html>
 <%script type="WebProject.GoalItem" name="goalPage_goalItem"%>
 	<li/><a href="<%page.name%>" target="data"><%label%></a>
+	<%if (sub.nSize() > 0){%><ul><%}%>
 	<%for (sub){%>
 		<%goalPage_goalItem%>
 	<%}%>
+	<%if (sub.nSize() > 0){%></ul><%}%>
 <%script type="WebProject.DataPage" name="dataPage" file="<%eContainer().name%>/<%name%>"%>
 <html>
 	<head>
@@ -100,9 +110,9 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 		<%dataPage_component_read%>
 	<%}%>
 	<%if (canCreate){%>
-		<div class="component_create">
-		<a href="edit_<%table.name%>_<%eContainer().name%>?view<%table.name%>=1&<%table.name%>=1">Create a new <i><%name%></i></a>
-		</div>
+		<table class="list-table">
+		<tr><th><a href="edit_<%table.name%>_<%eContainer().name%>?view<%table.name%>=1&<%table.name%>=1"><img src="images/create.png"/>Create a new <i><%name%></i></a></th></tr>
+		</table>
 	<%}%>
 </div>
 <%script type="WebProject.Component" name="dataPage_component_read"%>
@@ -116,12 +126,7 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 			<th><%name%></th>
 			<%}%>
 		<%}%>
-		<%if (canUpdate){%>
-			<th>Edit</th>
-		<%}%>
-		<%if (canDelete){%>
-			<th>Delete</th>
-		<%}%>
+			<th>Actions</th>
 		</tr>
 		<?
 			<%if (current("Component").precedingSibling().nSize() > 0){%>
@@ -205,12 +210,14 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 						<%}%>
 					<%}%>
 				<%}%>
+				<td class="action_col">
 				<%if (canUpdate){%>
-				<td><a href="edit_<%table.name%>_<%eContainer().name%>?<%table.name%>=1&idObject=<? echo $data['<%table.primaryKey.name%>']; ?>">Edit</a></td>
+				<a href="edit_<%table.name%>_<%eContainer().name%>?<%table.name%>=1&idObject=<? echo $data['<%table.primaryKey.name%>']; ?>"><img src="images/edit.png"/></a>
 				<%}%>
 				<%if (canDelete){%>
-				<td><a href="<%eContainer().name%>?view<%table.name%>=1&deleteObject=1&table_name=<%table.name%>&field_name=<%table.primaryKey.name%>&idObject=<? echo $data['<%table.primaryKey.name%>']; ?>">Delete</a></td>
+				<a href="<%eContainer().name%>?view<%table.name%>=1&deleteObject=1&table_name=<%table.name%>&field_name=<%table.primaryKey.name%>&idObject=<? echo $data['<%table.primaryKey.name%>']; ?>"><img src="images/delete.png"/></a>
 				<%}%>
+				</td>
 			</tr>
 		<?			
 			}
