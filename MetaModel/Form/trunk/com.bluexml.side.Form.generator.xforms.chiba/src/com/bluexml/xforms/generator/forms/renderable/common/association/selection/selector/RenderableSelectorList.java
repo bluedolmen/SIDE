@@ -61,7 +61,7 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 		if (bean.isMandatory()) {
 			Element label = XFormsGenerator
 					.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
-			label.setText(MsgPool.getMsg(MsgId.MSG_SELECT_LIST_MANDATORY));
+			label.setText(MsgPool.getMsg(MsgId.MSG_SELECT_LIST_LABEL));
 			select.addContent(label);
 		}
 
@@ -106,12 +106,10 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 				helpElt.setText(hintMsg);
 				select.addContent(helpElt);
 			}
-			String msg = MsgPool.getMsg(MsgId.MSG_ASSOC_MANDATORY_PART1)
-					+ MsgPool.getMsg(MsgId.MSG_ASSOC_MANDATORY_PART2);
+			String msg = MsgPool.getMsg(MsgId.MSG_ASSOC_MANDATORY);
 			if (StringUtils.trimToNull(msg) != null) {
 				String errMsg = "";
-				errMsg = MsgPool.getMsg(MsgId.MSG_ASSOC_MANDATORY_PART1) + bean.getTitle()
-						+ MsgPool.getMsg(MsgId.MSG_ASSOC_MANDATORY_PART2);
+				errMsg = MsgPool.getMsg(MsgId.MSG_ASSOC_MANDATORY, bean.getTitle());
 				Element alertElement = XFormsGenerator.createElement("alert",
 						XFormsGenerator.NAMESPACE_XFORMS);
 				alertElement.setText(errMsg);

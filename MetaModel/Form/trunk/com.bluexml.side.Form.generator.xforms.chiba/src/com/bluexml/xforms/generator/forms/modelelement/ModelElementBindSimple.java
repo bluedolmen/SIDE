@@ -24,7 +24,7 @@ public class ModelElementBindSimple extends ModelElement {
 	protected List<Element> linkedElements = new ArrayList<Element>();
 
 	/** The constraint. */
-	protected String constraint =  null;
+	protected String constraint = null;
 
 	/** The length constraint. */
 	private String lengthConstraint = null;
@@ -90,27 +90,68 @@ public class ModelElementBindSimple extends ModelElement {
 				setConstraint("(. ne '')");
 			}
 		} else {
-//			if (getLengthConstraint() != null) {
-//				bindElement.setAttribute("required", "not (string-length(.) = 0 or ("
-//						+ getLengthConstraint() + "))");
-//			}
+			// if (getLengthConstraint() != null) {
+			// bindElement.setAttribute("required", "not (string-length(.) = 0 or ("
+			// + getLengthConstraint() + "))");
+			// }
 		}
 		if (isReadOnly()) {
 			bindElement.setAttribute("readonly", "true()");
 		}
 		if (isHidden()) {
 			bindElement.setAttribute("relevant", "false()");
+		} else {
+			// ** #1340
+			if (isRequired()) { // TO UPDATE in case regex fields no longer allow empty strings
+				setRelevantAttrForGhostTemplate(bindElement);
+			}
+			// ** #1340
 		}
-
 		if (StringUtils.trimToNull(constraint) != null) {
 			bindElement.setAttribute("constraint", constraint);
 		}
-		
+
 		for (Element linkedElement : linkedElements) {
 			linkedElement.setAttribute("bind", bindId);
 		}
 
 		return bindElement;
+	}
+
+	/**
+	 * @param bindElement
+	 */
+	private void setRelevantAttrForGhostTemplate(Element bindElement) {
+		// special processing added for telling Chiba not to validate the ghost section that
+		// we use in repeaters as templates
+		// example of what we want to obtain: relevant="index('field_456Repeater') &lt;
+		// count(instance('minstance')/NewsletterTech/field_456/associationItem)"
+		boolean first = true;
+		int posStart = 0;
+		String relevantStr = "";
+		posStart = nodeset.indexOf("[index('", posStart);
+		while (posStart != -1) { // there is a ghost template
+			int posEnd = nodeset.indexOf("')]", posStart + 1);
+			if (posEnd == -1) {
+				// TODO: output message
+//				if (logger.isErrorEnabled()) {
+//					logger.error("Error when parsing a nodeset for repeater name");
+//				}
+			} else {
+				String lvalue = nodeset.substring(posStart + 1, posEnd + 2);
+				String rvalue = nodeset.substring(0, posStart);
+				if (first) {
+					first = false;
+				} else {
+					relevantStr += " and ";
+				}
+				relevantStr += "(" + lvalue + " < count(instance('minstance')/" + rvalue + "))";
+			}
+			posStart = nodeset.indexOf("[index('", posEnd + 1);
+		}
+		if (StringUtils.trimToNull(relevantStr) != null) {
+			bindElement.setAttribute("relevant", relevantStr);
+		}
 	}
 
 	/**
@@ -306,14 +347,14 @@ public class ModelElementBindSimple extends ModelElement {
 	}
 
 	/**
-	 * @return 
+	 * @return
 	 */
 	public boolean isRepeaterRootBind() {
 		return isRepeaterRootBind;
 	}
 
 	/**
-	 * @param isRepeaterRootBind 
+	 * @param isRepeaterRootBind
 	 */
 	public void setRepeaterRootBind(boolean isRepeaterRootBind) {
 		this.isRepeaterRootBind = isRepeaterRootBind;
@@ -327,7 +368,8 @@ public class ModelElementBindSimple extends ModelElement {
 	}
 
 	/**
-	 * @param isAnAssociation the isAnAssociation to set
+	 * @param isAnAssociation
+	 *            the isAnAssociation to set
 	 */
 	public void setAnAssociation(boolean isAnAssociation) {
 		this.isAnAssociation = isAnAssociation;

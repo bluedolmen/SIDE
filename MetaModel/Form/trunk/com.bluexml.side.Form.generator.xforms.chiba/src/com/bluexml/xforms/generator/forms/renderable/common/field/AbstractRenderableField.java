@@ -6,6 +6,7 @@ import java.util.Stack;
 
 import javax.xml.namespace.QName;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
@@ -30,6 +31,7 @@ public abstract class AbstractRenderableField extends Renderable {
 	private String attributeId = null;
 	private String maxLength = null;
 	private String minLength = null;
+	private String regex = null;
 
 	/**
 	 * Instantiates a new abstract renderable field.
@@ -87,7 +89,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		}
 		rendered.setXformsElement(element);
 		applyStyle(rendered);
-		
+
 		return rendered;
 	}
 
@@ -178,12 +180,62 @@ public abstract class AbstractRenderableField extends Renderable {
 	protected abstract String getHint();
 
 	/**
-	 * Gets the error message.
+	 * Gets the error message. This message contains indications (to the user) for all possible
+	 * error sources.
 	 * 
-	 * @return the error message entered in the form modeler or an <b>empty string</b> if not
-	 *         defined
+	 * @return the error message that is built or an <b>empty string</b> if not defined
 	 */
-	protected abstract String getErrorMessage();
+	protected String getErrorMessage() {
+
+		String errMsg = getErrorMsgForLength();
+		String errMsgRegex = getErrorMsgForRegex();
+
+		if (StringUtils.trimToNull(errMsgRegex) != null) {
+			if (StringUtils.trimToNull(errMsg) != null) {
+				errMsg += " ";
+			}
+			errMsg += errMsgRegex;
+		}
+
+		return errMsg;
+	}
+
+	/**
+	 * Builds the error message that is related to length constraints on the field.
+	 * 
+	 * @return
+	 */
+	protected String getErrorMsgForLength() {
+		String errMsg = "";
+		if ((getMinLength() != null) && (getMaxLength() != null)) {
+			errMsg = MsgPool.getMsg(MsgId.MSG_LENGTH_BETWEEN, getMinLength(), getMaxLength(),
+					getTitle());
+		} else if (getMinLength() != null) {
+			errMsg = MsgPool.getMsg(MsgId.MSG_LENGTH_MINIMAL, getMinLength(), getTitle());
+		} else if (getMaxLength() != null) {
+			errMsg = MsgPool.getMsg(MsgId.MSG_LENGTH_MAXIMAL, getMaxLength(), getTitle());
+		}
+		// if (StringUtils.trimToNull(errMsg) != null) {
+		// if (!isRequired()) {
+		// errMsg += MsgPool.getMsg(MsgId.MSG_LENGTH_POST_INFO_PART1) + getTitle()
+		// + MsgPool.getMsg(MsgId.MSG_LENGTH_POST_INFO_PART2);
+		// }
+		// }
+		return errMsg;
+	}
+
+	/**
+	 * Builds the error message that is related to length constraints on the field.
+	 * 
+	 * @return
+	 */
+	protected String getErrorMsgForRegex() {
+		String errMsg = "";
+		if (getRegex() != null) {
+			errMsg = MsgPool.getMsg(MsgId.MSG_INVALID_REGEX_FORMAT);
+		}
+		return errMsg;
+	}
 
 	/**
 	 * Gets the custom element.
@@ -261,9 +313,12 @@ public abstract class AbstractRenderableField extends Renderable {
 		// deal with error message
 		String errMsg = "";
 		if (isRequired()) {
-			errMsg = MsgPool.getMsg(MsgId.MSG_FIELD_MANDATORY_PART1) + getTitle()
-					+ MsgPool.getMsg(MsgId.MSG_FIELD_MANDATORY_PART2);
+			errMsg = MsgPool.getMsg(MsgId.MSG_FIELD_MANDATORY, getTitle());
 		}
+		if (StringUtils.trimToNull(errMsg) != null) {
+			errMsg += " ";
+		}
+		// get full message for the constraints of the field
 		errMsg += getErrorMessage();
 		if (StringUtils.trimToNull(errMsg) != null) {
 			Element alertElement = XFormsGenerator.createElement("alert",
@@ -456,6 +511,13 @@ public abstract class AbstractRenderableField extends Renderable {
 		input.setAttribute("incremental", "true");
 		input.setAttribute("id", attributeId);
 		meb.addLinkedElement(input);
+		// ** #1267
+		String labelStr = MsgPool.testMsg(MsgId.MSG_FILE_FIELD_LABEL);
+		Element label = getLabelElement(labelStr);
+		if (labelStr != null) {
+			input.addContent(label);
+		}
+		// ** #1267
 		Element filename = XFormsGenerator.createElement("filename",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		filename.setAttribute("ref", "attribute::file");
@@ -535,7 +597,21 @@ public abstract class AbstractRenderableField extends Renderable {
 	 *            the regular expression
 	 */
 	protected void setConstraintRegexp(ModelElementBindSimple bind, String regularExpression) {
+		setRegex(escapeRegEx(regularExpression));
 		setConstraint(bind, regularExpression);
+	}
+
+	/**
+	 * Escapes XML entities in the regular expression.
+	 * 
+	 * @param expr
+	 * @return
+	 */
+	protected String escapeRegEx(String expr) {
+		// unescape first to avoid over-escaping
+		String unescaped = StringEscapeUtils.unescapeXml(expr);
+		String escaped = StringEscapeUtils.escapeXml(unescaped);
+		return escaped;
 	}
 
 	/**
@@ -566,22 +642,42 @@ public abstract class AbstractRenderableField extends Renderable {
 	 *            the s max length
 	 */
 	protected void setLength(ModelElementBindSimple meb, String sMinLength, String sMaxLength) {
-		String constraint = null;
-		maxLength = sMaxLength;
-		minLength = sMinLength;
+		boolean maxOK = (sMaxLength == null) ? false : !sMaxLength.equals("0");
+		boolean minOK = (sMinLength == null) ? false : !sMinLength.equals("0");
 
-		if (sMinLength != null && sMaxLength != null) {
-			constraint = sMinLength + " <= string-length(.) and string-length(.) <= " + sMaxLength;
+		if ((maxOK == false) && (minOK == false)) {
+			return;
+		}
+		String constraint = null;
+		String realMaxLength = null;
+		String realMinLength = null;
+
+		if (maxOK && minOK) {
+			realMaxLength = sMaxLength;
+			realMinLength = sMinLength;
+		} else if (maxOK) {
+			realMaxLength = sMaxLength;
+		} else if (minOK) {
+			realMinLength = sMinLength;
+		}
+
+		maxLength = realMaxLength;
+		minLength = realMinLength;
+
+		if (realMinLength != null && realMaxLength != null) {
+			constraint = realMinLength + " <= string-length(.) and string-length(.) <= "
+					+ realMaxLength;
 		} else {
-			if (sMinLength != null) {
-				constraint = sMinLength + " <= string-length(.)";
+			if (realMinLength != null) {
+				constraint = realMinLength + " <= string-length(.)";
 			}
-			if (sMaxLength != null) {
-				constraint = "string-length(.) <= " + sMaxLength;
+			if (realMaxLength != null) {
+				constraint = "string-length(.) <= " + realMaxLength;
 			}
 		}
 		if (constraint != null) {
 			meb.setLengthConstraint(constraint);
+//			setIncremental(true); // #1264
 		}
 	}
 
@@ -638,4 +734,20 @@ public abstract class AbstractRenderableField extends Renderable {
 	public void setMinLength(String minLength) {
 		this.minLength = minLength;
 	}
+
+	/**
+	 * @return the regex
+	 */
+	private String getRegex() {
+		return regex;
+	}
+
+	/**
+	 * @param regex
+	 *            the regex to set
+	 */
+	private void setRegex(String regex) {
+		this.regex = regex;
+	}
+
 }

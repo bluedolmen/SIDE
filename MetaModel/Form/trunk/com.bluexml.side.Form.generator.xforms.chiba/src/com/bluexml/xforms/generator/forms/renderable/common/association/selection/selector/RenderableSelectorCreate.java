@@ -61,10 +61,10 @@ public class RenderableSelectorCreate extends AbstractRenderableSelectorItem {
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
 		RenderedParentGroup renderedParentGroup = new RenderedParentGroup(renderedParents);
 		if (bean.getCreateEditForm() != null) {
-			submissionCreate.setAction(MsgId.INT_URL_SCHEME_WRITER + "createForm/" + bean.getName()
+			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER + "createForm/" + bean.getName()
 					+ "/" + bean.getCreateEditForm());
 		} else {
-			submissionCreate.setAction(MsgId.INT_URL_SCHEME_WRITER + "create/" + bean.getName()
+			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER + "create/" + bean.getName()
 					+ "/" + ModelTools.getCompleteName(bean.getDestinationClass()));
 		}
 		renderedParentGroup.getParent().addModelElement(submissionCreate);

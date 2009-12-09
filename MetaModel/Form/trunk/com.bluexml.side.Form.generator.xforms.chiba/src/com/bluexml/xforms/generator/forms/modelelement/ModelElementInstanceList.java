@@ -65,7 +65,7 @@ public class ModelElementInstanceList extends ModelElement {
 	public Element getModelElement() {
 		Element instance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		instance.setAttribute("src", MsgId.INT_URL_SCHEME_READER
+		instance.setAttribute("src", MsgId.INT_URI_SCHEME_READER
 				+ MsgId.INT_ACT_CODE_LIST.getText() + "/" + typeCompleteName + "/"
 				+ StringUtils.trimToEmpty(formatPattern) + "/" + maxLength);
 		instance.setAttribute("id", instanceName);

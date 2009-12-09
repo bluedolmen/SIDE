@@ -224,23 +224,15 @@ public class RenderableAttribute extends AbstractRenderableField {
 	 */
 	@Override
 	protected String getErrorMessage() {
-		String errMsg = null;
+		String errMsg = "";
 		if ((getMinLength() != null) && (getMaxLength() != null)) {
-			errMsg = MsgPool.getMsg(MsgId.MSG_LENGTH_BETWEEN_PART1) + getMinLength()
-					+ MsgPool.getMsg(MsgId.MSG_LENGTH_BETWEEN_PART2) + getMaxLength();
+			errMsg = MsgPool.getMsg(MsgId.MSG_LENGTH_BETWEEN, getMinLength(), getMaxLength(), getTitle());
 		} else if (getMinLength() != null) {
-			errMsg = MsgPool.getMsg(MsgId.MSG_LENGTH_MINIMAL) + getMinLength();
+			errMsg = MsgPool.getMsg(MsgId.MSG_LENGTH_MINIMAL, getMinLength(), getTitle());
 		} else if (getMaxLength() != null) {
-			errMsg = MsgPool.getMsg(MsgId.MSG_LENGTH_MAXIMAL) + getMaxLength();
+			errMsg = MsgPool.getMsg(MsgId.MSG_LENGTH_MAXIMAL, getMaxLength(), getTitle());
 		}
-		if (errMsg != null) {
-			if (!isRequired()) {
-				errMsg += MsgPool.getMsg(MsgId.MSG_LENGTH_POST_INFO_PART1) + getTitle()
-						+ MsgPool.getMsg(MsgId.MSG_LENGTH_POST_INFO_PART2);
-			}
-			return errMsg + ".";
-		}
-		return "";
+		return errMsg;
 	}
 
 	@Override

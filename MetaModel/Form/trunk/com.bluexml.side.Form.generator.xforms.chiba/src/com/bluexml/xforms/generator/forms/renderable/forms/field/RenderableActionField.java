@@ -44,7 +44,7 @@ public class RenderableActionField extends Renderable {
 		String infixe = MsgId.INT_ACT_CODE_WRKFLW_TRANSITION.getText();
 		actionName = formElement.getId();
 		label = formElement.getLabel();
-		submission = new ModelElementSubmission(MsgId.INT_URL_SCHEME_WRITER + infixe + "/"
+		submission = new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER + infixe + "/"
 				+ actionName, label, true, false);
 		RenderableSubmit button = new RenderableSubmit(submission, label, false);
 		add(button);

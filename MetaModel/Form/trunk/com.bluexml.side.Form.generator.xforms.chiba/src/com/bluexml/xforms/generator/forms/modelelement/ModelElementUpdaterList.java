@@ -32,7 +32,7 @@ public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 	public Element getModelElement() {
 		Element submission = XFormsGenerator.createElement("submission",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		submission.setAttribute("action", MsgId.INT_URL_SCHEME_WRITER
+		submission.setAttribute("action", MsgId.INT_URI_SCHEME_WRITER
 				+ MsgId.INT_ACT_CODE_LIST.getText() + "/" + typeCompleteName + "/"
 				+ StringUtils.trimToEmpty(formatPattern) + "/" + maxLength);
 		submission.setAttribute("replace", "instance");

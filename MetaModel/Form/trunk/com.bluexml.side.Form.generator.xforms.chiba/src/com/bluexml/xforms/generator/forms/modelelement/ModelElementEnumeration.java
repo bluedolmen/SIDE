@@ -49,7 +49,7 @@ public class ModelElementEnumeration extends ModelElement {
 	public Element getModelElement() {
 		Element enumsInstance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		enumsInstance.setAttribute("src", MsgId.INT_URL_SCHEME_READER + "enum/" + getParameters());
+		enumsInstance.setAttribute("src", MsgId.INT_URI_SCHEME_READER + "enum/" + getParameters());
 		enumsInstance.setAttribute("id", enumInstanceName);
 		return enumsInstance;
 	}

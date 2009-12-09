@@ -34,7 +34,7 @@ public class RenderableListCreate extends Renderable {
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
 		RenderedParentGroup renderedParentGroup = new RenderedParentGroup(renderedParents);
-		submissionCreate.setAction(MsgId.INT_URL_SCHEME_WRITER + "create//"
+		submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER + "create//"
 				+ ModelTools.getCompleteName(renderableClassList.getClasse()));
 		renderedParentGroup.getParent().addModelElement(submissionCreate);
 		return renderedParentGroup;

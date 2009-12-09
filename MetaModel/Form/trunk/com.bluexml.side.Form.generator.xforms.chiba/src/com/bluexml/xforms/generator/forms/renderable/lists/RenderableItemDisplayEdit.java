@@ -32,7 +32,8 @@ public class RenderableItemDisplayEdit extends Renderable {
 		RenderedInput rendered = new RenderedInput();
 
 		ModelElementSubmission submission = new ModelElementSubmission("", "", true, false);
-		submission.setAction(MsgId.INT_URL_SCHEME_WRITER + "edit//"
+		submission.setAlwaysActive(false); // #1222
+		submission.setAction(MsgId.INT_URI_SCHEME_WRITER + "edit//"
 				+ ModelTools.getCompleteName(renderableClassList.getClasse()));
 
 		Element trigger = XFormsGenerator.createElementWithLabel("trigger",

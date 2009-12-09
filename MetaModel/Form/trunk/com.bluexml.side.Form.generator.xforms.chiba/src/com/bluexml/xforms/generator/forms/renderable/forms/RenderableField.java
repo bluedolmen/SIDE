@@ -153,8 +153,9 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 	protected void applyConstraints(ModelElementBindSimple meb) {
 
 		setHidden(meb, formElement.isHidden());
-		// setRequired doit être appelé avant setLength!
+		// setRequired must be called before setLength!
 		setRequired(meb, formElement.isMandatory());
+		
 		if (formElement instanceof CharField) {
 			CharField charFieldElt = ((CharField) formElement);
 			int minlength = charFieldElt.getMin_length();

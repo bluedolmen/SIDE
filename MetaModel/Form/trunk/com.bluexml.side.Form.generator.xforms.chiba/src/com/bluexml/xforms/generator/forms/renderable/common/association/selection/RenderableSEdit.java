@@ -56,11 +56,12 @@ public class RenderableSEdit extends AbstractRenderable {
 		RenderedInput rendered = new RenderedInput();
 
 		ModelElementSubmission submission = new ModelElementSubmission("", "", true, false);
+		submission.setAlwaysActive(false); // #1222
 		if (bean.getCreateEditForm() != null) {
-			submission.setAction(MsgId.INT_URL_SCHEME_WRITER + "editForm/" + bean.getName() + "/"
+			submission.setAction(MsgId.INT_URI_SCHEME_WRITER + "editForm/" + bean.getName() + "/"
 					+ bean.getCreateEditForm());
 		} else {
-			submission.setAction(MsgId.INT_URL_SCHEME_WRITER + "edit/" + bean.getName() + "/"
+			submission.setAction(MsgId.INT_URI_SCHEME_WRITER + "edit/" + bean.getName() + "/"
 					+ ModelTools.getCompleteName(bean.getDestinationClass()));
 		}
 

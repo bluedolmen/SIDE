@@ -32,7 +32,7 @@ public class RenderedTabContainer extends Rendered {
 			xformsElement.setAttribute("dojoType", "TabContainer");
 			xformsElement.setAttribute("doLayout", "false");
 		}
-		xformsElement.setAttribute("id", divId);
+		xformsElement.setAttribute("id", XFormsGenerator.getId(divId)); // #1346
 	}
 
 	/*

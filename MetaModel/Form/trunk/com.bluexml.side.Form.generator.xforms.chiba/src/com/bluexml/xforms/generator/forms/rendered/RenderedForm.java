@@ -48,7 +48,7 @@ public class RenderedForm extends Rendered {
 		} else if (isWrkflwSelectionForm) {
 			getAction = MsgId.INT_ACT_CODE_GET_WKFLW_SELECTION;
 		}
-		modelInstance.setAttribute("src", MsgId.INT_URL_SCHEME_READER + getAction.getText() + "/");
+		modelInstance.setAttribute("src", MsgId.INT_URI_SCHEME_READER + getAction.getText() + "/");
 		model.addContent(modelInstance);
 
 		head.addContent(model);

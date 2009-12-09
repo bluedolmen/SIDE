@@ -22,7 +22,7 @@ public class ModelElementWorkflowInstanceUpdater extends AbstractModelElementUpd
 	public Element getModelElement() {
 		Element submission = XFormsGenerator.createElement("submission",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		submission.setAttribute("action", MsgId.INT_URL_SCHEME_WRITER.getText()
+		submission.setAttribute("action", MsgId.INT_URI_SCHEME_WRITER.getText()
 				+ MsgId.INT_ACT_CODE_WRKFLW_INSTANCE_LIST + "/");
 		submission.setAttribute("replace", "instance");
 		submission.setAttribute("instance", instanceName);

@@ -43,7 +43,7 @@ public class ModelElementUpdaterEnum extends AbstractModelElementUpdater {
 	public Element getModelElement() {
 		Element submission = XFormsGenerator.createElement("submission",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		submission.setAttribute("action", MsgId.INT_URL_SCHEME_WRITER + "enum/" + getParameters());
+		submission.setAttribute("action", MsgId.INT_URI_SCHEME_WRITER + "enum/" + getParameters());
 		submission.setAttribute("replace", "instance");
 		submission.setAttribute("instance", instanceName);
 		submission.setAttribute("method", "post");

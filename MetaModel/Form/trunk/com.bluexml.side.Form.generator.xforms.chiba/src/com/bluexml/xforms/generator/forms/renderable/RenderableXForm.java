@@ -49,7 +49,7 @@ public class RenderableXForm extends Renderable {
 		this.isWrkflwSelectionForm = isWrkflwSelectionForm;
 		submissions = new ArrayList<ModelElementSubmission>();
 		for (AbstractAction abstractAction : classActions) {
-			submissions.add(new ModelElementSubmission(MsgId.INT_URL_SCHEME_WRITER
+			submissions.add(new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER
 					+ abstractAction.getActionName() + "/", abstractAction.getActionCaption(),
 					abstractAction.isReplaceAll(), abstractAction.isValidateFirst()));
 		}
