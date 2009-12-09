@@ -14,6 +14,9 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import com.bluexml.side.requirements.Agent;
+import com.bluexml.side.requirements.AnnotableElement;
+import com.bluexml.side.requirements.Annotation;
+import com.bluexml.side.requirements.AnnotationStatus;
 import com.bluexml.side.requirements.Attribute;
 import com.bluexml.side.requirements.AttributeType;
 import com.bluexml.side.requirements.Entity;
@@ -84,6 +87,8 @@ public class RequirementsFactoryImpl extends EFactoryImpl implements Requirement
 			case RequirementsPackage.PRIVILEGE_GROUP: return createPrivilegeGroup();
 			case RequirementsPackage.PROCESS: return createProcess();
 			case RequirementsPackage.GOAL_STEP: return createGoalStep();
+			case RequirementsPackage.ANNOTATION: return createAnnotation();
+			case RequirementsPackage.ANNOTABLE_ELEMENT: return createAnnotableElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -103,6 +108,8 @@ public class RequirementsFactoryImpl extends EFactoryImpl implements Requirement
 				return createPriorityLevelFromString(eDataType, initialValue);
 			case RequirementsPackage.PRIVILEGE_NATURE:
 				return createPrivilegeNatureFromString(eDataType, initialValue);
+			case RequirementsPackage.ANNOTATION_STATUS:
+				return createAnnotationStatusFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -122,6 +129,8 @@ public class RequirementsFactoryImpl extends EFactoryImpl implements Requirement
 				return convertPriorityLevelToString(eDataType, instanceValue);
 			case RequirementsPackage.PRIVILEGE_NATURE:
 				return convertPrivilegeNatureToString(eDataType, instanceValue);
+			case RequirementsPackage.ANNOTATION_STATUS:
+				return convertAnnotationStatusToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -242,6 +251,26 @@ public class RequirementsFactoryImpl extends EFactoryImpl implements Requirement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Annotation createAnnotation() {
+		AnnotationImpl annotation = new AnnotationImpl();
+		return annotation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AnnotableElement createAnnotableElement() {
+		AnnotableElementImpl annotableElement = new AnnotableElementImpl();
+		return annotableElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AttributeType createAttributeTypeFromString(EDataType eDataType, String initialValue) {
 		AttributeType result = AttributeType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -294,6 +323,26 @@ public class RequirementsFactoryImpl extends EFactoryImpl implements Requirement
 	 * @generated
 	 */
 	public String convertPrivilegeNatureToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AnnotationStatus createAnnotationStatusFromString(EDataType eDataType, String initialValue) {
+		AnnotationStatus result = AnnotationStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAnnotationStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

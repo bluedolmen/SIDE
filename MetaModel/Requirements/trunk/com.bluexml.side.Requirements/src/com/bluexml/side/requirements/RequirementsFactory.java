@@ -125,6 +125,24 @@ public interface RequirementsFactory extends EFactory {
 	GoalStep createGoalStep();
 
 	/**
+	 * Returns a new object of class '<em>Annotation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Annotation</em>'.
+	 * @generated
+	 */
+	Annotation createAnnotation();
+
+	/**
+	 * Returns a new object of class '<em>Annotable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Annotable Element</em>'.
+	 * @generated
+	 */
+	AnnotableElement createAnnotableElement();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

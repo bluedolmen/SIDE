@@ -29,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='uniqueName'"
  * @generated
  */
-public interface Goal extends BasicElement {
+public interface Goal extends AnnotableElement {
 	/**
 	 * Returns the value of the '<em><b>Subgoals</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.requirements.Goal}.

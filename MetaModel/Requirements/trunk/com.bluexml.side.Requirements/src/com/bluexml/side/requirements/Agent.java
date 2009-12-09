@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Agent extends BasicElement {
+public interface Agent extends AnnotableElement {
 	/**
 	 * Returns the value of the '<em><b>Is Human</b></em>' attribute.
 	 * The default value is <code>"true"</code>.

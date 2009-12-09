@@ -7,6 +7,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BasicElement" abstract="true" eSuperTypes="#//ModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//BasicElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Entity"/>
@@ -32,17 +33,17 @@
     <eLiterals name="TemporalValue" value="2" literal="TemporalValue"/>
     <eLiterals name="Other" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Organization" eSuperTypes="#//BasicElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Organization" eSuperTypes="#//AnnotableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="childElements" upperBound="-1"
         eType="#//ModelElement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Agent" eSuperTypes="#//BasicElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Agent" eSuperTypes="#//AnnotableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isHuman" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="isResponsible" upperBound="-1"
         eType="#//Goal" eOpposite="#//Goal/responsible"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="#//BasicElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="#//AnnotableElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="uniqueName" value="Goal.allInstances()->select(g | g.name = self.name)->reject(g | g =self)->size() = 0"/>
     </eAnnotations>
@@ -92,5 +93,25 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="nextGoals" upperBound="-1"
         eType="#//Goal"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="process" eType="#//Process"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="author" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="annotation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//AnnotationStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AnnotationStatus">
+    <eLiterals name="New" literal="New"/>
+    <eLiterals name="Fixed" value="1"/>
+    <eLiterals name="Invalid" value="2"/>
+    <eLiterals name="Wontfix" value="3" literal="Won't fix"/>
+    <eLiterals name="Duplicate" value="4"/>
+    <eLiterals name="Incomplete" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotableElement" eSuperTypes="#//BasicElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

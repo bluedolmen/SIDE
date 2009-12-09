@@ -108,13 +108,22 @@ public interface RequirementsPackage extends EPackage {
 	int BASIC_ELEMENT__DOCUMENTATION = MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_ELEMENT__ID = MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Basic Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_ELEMENT_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int BASIC_ELEMENT_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.impl.EntityImpl <em>Entity</em>}' class.
@@ -143,6 +152,15 @@ public interface RequirementsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTITY__DOCUMENTATION = BASIC_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY__ID = BASIC_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -198,6 +216,15 @@ public interface RequirementsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_SHIP__DOCUMENTATION = BASIC_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_SHIP__ID = BASIC_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -291,6 +318,15 @@ public interface RequirementsPackage extends EPackage {
 	int ATTRIBUTE__DOCUMENTATION = BASIC_ELEMENT__DOCUMENTATION;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__ID = BASIC_ELEMENT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -319,13 +355,23 @@ public interface RequirementsPackage extends EPackage {
 	int ORGANIZATION = 5;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.requirements.impl.AnnotableElementImpl <em>Annotable Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.requirements.impl.AnnotableElementImpl
+	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getAnnotableElement()
+	 * @generated
+	 */
+	int ANNOTABLE_ELEMENT = 14;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORGANIZATION__NAME = BASIC_ELEMENT__NAME;
+	int ANNOTABLE_ELEMENT__NAME = BASIC_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -334,7 +380,70 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORGANIZATION__DOCUMENTATION = BASIC_ELEMENT__DOCUMENTATION;
+	int ANNOTABLE_ELEMENT__DOCUMENTATION = BASIC_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTABLE_ELEMENT__ID = BASIC_ELEMENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTABLE_ELEMENT__ANNOTATION = BASIC_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Annotable Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTABLE_ELEMENT_FEATURE_COUNT = BASIC_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__NAME = ANNOTABLE_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__DOCUMENTATION = ANNOTABLE_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__ID = ANNOTABLE_ELEMENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__ANNOTATION = ANNOTABLE_ELEMENT__ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Child Elements</b></em>' containment reference list.
@@ -343,7 +452,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORGANIZATION__CHILD_ELEMENTS = BASIC_ELEMENT_FEATURE_COUNT + 0;
+	int ORGANIZATION__CHILD_ELEMENTS = ANNOTABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Organization</em>' class.
@@ -352,7 +461,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORGANIZATION_FEATURE_COUNT = BASIC_ELEMENT_FEATURE_COUNT + 1;
+	int ORGANIZATION_FEATURE_COUNT = ANNOTABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.impl.AgentImpl <em>Agent</em>}' class.
@@ -371,7 +480,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT__NAME = BASIC_ELEMENT__NAME;
+	int AGENT__NAME = ANNOTABLE_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -380,7 +489,25 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT__DOCUMENTATION = BASIC_ELEMENT__DOCUMENTATION;
+	int AGENT__DOCUMENTATION = ANNOTABLE_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGENT__ID = ANNOTABLE_ELEMENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGENT__ANNOTATION = ANNOTABLE_ELEMENT__ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Human</b></em>' attribute.
@@ -389,7 +516,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT__IS_HUMAN = BASIC_ELEMENT_FEATURE_COUNT + 0;
+	int AGENT__IS_HUMAN = ANNOTABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Responsible</b></em>' reference list.
@@ -398,7 +525,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT__IS_RESPONSIBLE = BASIC_ELEMENT_FEATURE_COUNT + 1;
+	int AGENT__IS_RESPONSIBLE = ANNOTABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Agent</em>' class.
@@ -407,7 +534,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT_FEATURE_COUNT = BASIC_ELEMENT_FEATURE_COUNT + 2;
+	int AGENT_FEATURE_COUNT = ANNOTABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.impl.GoalImpl <em>Goal</em>}' class.
@@ -426,7 +553,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL__NAME = BASIC_ELEMENT__NAME;
+	int GOAL__NAME = ANNOTABLE_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -435,7 +562,25 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL__DOCUMENTATION = BASIC_ELEMENT__DOCUMENTATION;
+	int GOAL__DOCUMENTATION = ANNOTABLE_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL__ID = ANNOTABLE_ELEMENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL__ANNOTATION = ANNOTABLE_ELEMENT__ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Subgoals</b></em>' containment reference list.
@@ -444,7 +589,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL__SUBGOALS = BASIC_ELEMENT_FEATURE_COUNT + 0;
+	int GOAL__SUBGOALS = ANNOTABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Priority</b></em>' attribute.
@@ -453,7 +598,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL__PRIORITY = BASIC_ELEMENT_FEATURE_COUNT + 1;
+	int GOAL__PRIORITY = ANNOTABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Responsible</b></em>' reference list.
@@ -462,7 +607,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL__RESPONSIBLE = BASIC_ELEMENT_FEATURE_COUNT + 2;
+	int GOAL__RESPONSIBLE = ANNOTABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Privilege Group</b></em>' containment reference list.
@@ -471,7 +616,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL__PRIVILEGE_GROUP = BASIC_ELEMENT_FEATURE_COUNT + 3;
+	int GOAL__PRIVILEGE_GROUP = ANNOTABLE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Step</b></em>' containment reference list.
@@ -480,7 +625,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL__STEP = BASIC_ELEMENT_FEATURE_COUNT + 4;
+	int GOAL__STEP = ANNOTABLE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Goal</em>' class.
@@ -489,7 +634,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL_FEATURE_COUNT = BASIC_ELEMENT_FEATURE_COUNT + 5;
+	int GOAL_FEATURE_COUNT = ANNOTABLE_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.impl.PrivilegeImpl <em>Privilege</em>}' class.
@@ -555,6 +700,24 @@ public interface RequirementsPackage extends EPackage {
 	 * @ordered
 	 */
 	int REQUIREMENTS_DEFINITION__DOCUMENTATION = ORGANIZATION__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIREMENTS_DEFINITION__ID = ORGANIZATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIREMENTS_DEFINITION__ANNOTATION = ORGANIZATION__ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Child Elements</b></em>' containment reference list.
@@ -667,6 +830,24 @@ public interface RequirementsPackage extends EPackage {
 	int PROCESS__DOCUMENTATION = ORGANIZATION__DOCUMENTATION;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__ID = ORGANIZATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__ANNOTATION = ORGANIZATION__ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Child Elements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -722,6 +903,79 @@ public interface RequirementsPackage extends EPackage {
 	int GOAL_STEP_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.requirements.impl.AnnotationImpl <em>Annotation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.requirements.impl.AnnotationImpl
+	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getAnnotation()
+	 * @generated
+	 */
+	int ANNOTATION = 13;
+
+	/**
+	 * The feature id for the '<em><b>Author</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__AUTHOR = 0;
+
+	/**
+	 * The feature id for the '<em><b>Annotation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__ANNOTATION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__DATE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__STATUS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__ID = 4;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__COMMENT = 5;
+
+	/**
+	 * The number of structural features of the '<em>Annotation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_FEATURE_COUNT = 6;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.AttributeType <em>Attribute Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -729,7 +983,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getAttributeType()
 	 * @generated
 	 */
-	int ATTRIBUTE_TYPE = 13;
+	int ATTRIBUTE_TYPE = 15;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.PriorityLevel <em>Priority Level</em>}' enum.
@@ -739,7 +993,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getPriorityLevel()
 	 * @generated
 	 */
-	int PRIORITY_LEVEL = 14;
+	int PRIORITY_LEVEL = 16;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.PrivilegeNature <em>Privilege Nature</em>}' enum.
@@ -749,7 +1003,18 @@ public interface RequirementsPackage extends EPackage {
 	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getPrivilegeNature()
 	 * @generated
 	 */
-	int PRIVILEGE_NATURE = 15;
+	int PRIVILEGE_NATURE = 17;
+
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.requirements.AnnotationStatus <em>Annotation Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.requirements.AnnotationStatus
+	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getAnnotationStatus()
+	 * @generated
+	 */
+	int ANNOTATION_STATUS = 18;
 
 
 	/**
@@ -793,6 +1058,17 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBasicElement_Documentation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.BasicElement#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.bluexml.side.requirements.BasicElement#getId()
+	 * @see #getBasicElement()
+	 * @generated
+	 */
+	EAttribute getBasicElement_Id();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.requirements.Entity <em>Entity</em>}'.
@@ -1191,6 +1467,103 @@ public interface RequirementsPackage extends EPackage {
 	EReference getGoalStep_Process();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.requirements.Annotation <em>Annotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Annotation</em>'.
+	 * @see com.bluexml.side.requirements.Annotation
+	 * @generated
+	 */
+	EClass getAnnotation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.Annotation#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.bluexml.side.requirements.Annotation#getId()
+	 * @see #getAnnotation()
+	 * @generated
+	 */
+	EAttribute getAnnotation_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.Annotation#getAuthor <em>Author</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Author</em>'.
+	 * @see com.bluexml.side.requirements.Annotation#getAuthor()
+	 * @see #getAnnotation()
+	 * @generated
+	 */
+	EAttribute getAnnotation_Author();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.Annotation#getAnnotation <em>Annotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Annotation</em>'.
+	 * @see com.bluexml.side.requirements.Annotation#getAnnotation()
+	 * @see #getAnnotation()
+	 * @generated
+	 */
+	EAttribute getAnnotation_Annotation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.Annotation#getComment <em>Comment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Comment</em>'.
+	 * @see com.bluexml.side.requirements.Annotation#getComment()
+	 * @see #getAnnotation()
+	 * @generated
+	 */
+	EAttribute getAnnotation_Comment();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.Annotation#getDate <em>Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Date</em>'.
+	 * @see com.bluexml.side.requirements.Annotation#getDate()
+	 * @see #getAnnotation()
+	 * @generated
+	 */
+	EAttribute getAnnotation_Date();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.Annotation#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see com.bluexml.side.requirements.Annotation#getStatus()
+	 * @see #getAnnotation()
+	 * @generated
+	 */
+	EAttribute getAnnotation_Status();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.requirements.AnnotableElement <em>Annotable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Annotable Element</em>'.
+	 * @see com.bluexml.side.requirements.AnnotableElement
+	 * @generated
+	 */
+	EClass getAnnotableElement();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.requirements.AnnotableElement#getAnnotation <em>Annotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Annotation</em>'.
+	 * @see com.bluexml.side.requirements.AnnotableElement#getAnnotation()
+	 * @see #getAnnotableElement()
+	 * @generated
+	 */
+	EReference getAnnotableElement_Annotation();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.requirements.AttributeType <em>Attribute Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1219,6 +1592,16 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getPrivilegeNature();
+
+	/**
+	 * Returns the meta object for enum '{@link com.bluexml.side.requirements.AnnotationStatus <em>Annotation Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Annotation Status</em>'.
+	 * @see com.bluexml.side.requirements.AnnotationStatus
+	 * @generated
+	 */
+	EEnum getAnnotationStatus();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1277,6 +1660,14 @@ public interface RequirementsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BASIC_ELEMENT__DOCUMENTATION = eINSTANCE.getBasicElement_Documentation();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BASIC_ELEMENT__ID = eINSTANCE.getBasicElement_Id();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.requirements.impl.EntityImpl <em>Entity</em>}' class.
@@ -1597,6 +1988,82 @@ public interface RequirementsPackage extends EPackage {
 		EReference GOAL_STEP__PROCESS = eINSTANCE.getGoalStep_Process();
 
 		/**
+		 * The meta object literal for the '{@link com.bluexml.side.requirements.impl.AnnotationImpl <em>Annotation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.requirements.impl.AnnotationImpl
+		 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getAnnotation()
+		 * @generated
+		 */
+		EClass ANNOTATION = eINSTANCE.getAnnotation();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANNOTATION__ID = eINSTANCE.getAnnotation_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Author</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANNOTATION__AUTHOR = eINSTANCE.getAnnotation_Author();
+
+		/**
+		 * The meta object literal for the '<em><b>Annotation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANNOTATION__ANNOTATION = eINSTANCE.getAnnotation_Annotation();
+
+		/**
+		 * The meta object literal for the '<em><b>Comment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANNOTATION__COMMENT = eINSTANCE.getAnnotation_Comment();
+
+		/**
+		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANNOTATION__DATE = eINSTANCE.getAnnotation_Date();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANNOTATION__STATUS = eINSTANCE.getAnnotation_Status();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.requirements.impl.AnnotableElementImpl <em>Annotable Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.requirements.impl.AnnotableElementImpl
+		 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getAnnotableElement()
+		 * @generated
+		 */
+		EClass ANNOTABLE_ELEMENT = eINSTANCE.getAnnotableElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Annotation</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANNOTABLE_ELEMENT__ANNOTATION = eINSTANCE.getAnnotableElement_Annotation();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.requirements.AttributeType <em>Attribute Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1625,6 +2092,16 @@ public interface RequirementsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum PRIVILEGE_NATURE = eINSTANCE.getPrivilegeNature();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.requirements.AnnotationStatus <em>Annotation Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.requirements.AnnotationStatus
+		 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getAnnotationStatus()
+		 * @generated
+		 */
+		EEnum ANNOTATION_STATUS = eINSTANCE.getAnnotationStatus();
 
 	}
 

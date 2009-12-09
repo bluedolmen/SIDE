@@ -9,8 +9,9 @@ package com.bluexml.side.requirements.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.RequirementsPackage;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
@@ -24,6 +25,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  * <ul>
  *   <li>{@link com.bluexml.side.requirements.impl.BasicElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.impl.BasicElementImpl#getDocumentation <em>Documentation</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.impl.BasicElementImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,12 +73,34 @@ public abstract class BasicElementImpl extends ModelElementImpl implements Basic
 	protected String documentation = DOCUMENTATION_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see #getId()
 	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	protected BasicElementImpl() {
 		super();
+		//By default, generate id
+		setId(EcoreUtil.generateUUID());
 	}
 
 	/**
@@ -136,6 +160,27 @@ public abstract class BasicElementImpl extends ModelElementImpl implements Basic
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RequirementsPackage.BASIC_ELEMENT__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -143,6 +188,8 @@ public abstract class BasicElementImpl extends ModelElementImpl implements Basic
 				return getName();
 			case RequirementsPackage.BASIC_ELEMENT__DOCUMENTATION:
 				return getDocumentation();
+			case RequirementsPackage.BASIC_ELEMENT__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -160,6 +207,9 @@ public abstract class BasicElementImpl extends ModelElementImpl implements Basic
 				return;
 			case RequirementsPackage.BASIC_ELEMENT__DOCUMENTATION:
 				setDocumentation((String)newValue);
+				return;
+			case RequirementsPackage.BASIC_ELEMENT__ID:
+				setId((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -179,6 +229,9 @@ public abstract class BasicElementImpl extends ModelElementImpl implements Basic
 			case RequirementsPackage.BASIC_ELEMENT__DOCUMENTATION:
 				setDocumentation(DOCUMENTATION_EDEFAULT);
 				return;
+			case RequirementsPackage.BASIC_ELEMENT__ID:
+				setId(ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -195,6 +248,8 @@ public abstract class BasicElementImpl extends ModelElementImpl implements Basic
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case RequirementsPackage.BASIC_ELEMENT__DOCUMENTATION:
 				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
+			case RequirementsPackage.BASIC_ELEMENT__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -213,6 +268,8 @@ public abstract class BasicElementImpl extends ModelElementImpl implements Basic
 		result.append(name);
 		result.append(", documentation: ");
 		result.append(documentation);
+		result.append(", id: ");
+		result.append(id);
 		result.append(')');
 		return result.toString();
 	}

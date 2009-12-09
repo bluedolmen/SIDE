@@ -15,6 +15,9 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import com.bluexml.side.requirements.Agent;
+import com.bluexml.side.requirements.AnnotableElement;
+import com.bluexml.side.requirements.Annotation;
+import com.bluexml.side.requirements.AnnotationStatus;
 import com.bluexml.side.requirements.Attribute;
 import com.bluexml.side.requirements.AttributeType;
 import com.bluexml.side.requirements.BasicElement;
@@ -136,6 +139,20 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass annotationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass annotableElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum attributeTypeEEnum = null;
 
 	/**
@@ -151,6 +168,13 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 	 * @generated
 	 */
 	private EEnum privilegeNatureEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum annotationStatusEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -256,6 +280,15 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 	 */
 	public EAttribute getBasicElement_Documentation() {
 		return (EAttribute)basicElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBasicElement_Id() {
+		return (EAttribute)basicElementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -596,6 +629,87 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAnnotation() {
+		return annotationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAnnotation_Id() {
+		return (EAttribute)annotationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAnnotation_Author() {
+		return (EAttribute)annotationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAnnotation_Annotation() {
+		return (EAttribute)annotationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAnnotation_Comment() {
+		return (EAttribute)annotationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAnnotation_Date() {
+		return (EAttribute)annotationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAnnotation_Status() {
+		return (EAttribute)annotationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAnnotableElement() {
+		return annotableElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAnnotableElement_Annotation() {
+		return (EReference)annotableElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getAttributeType() {
 		return attributeTypeEEnum;
 	}
@@ -616,6 +730,15 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 	 */
 	public EEnum getPrivilegeNature() {
 		return privilegeNatureEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getAnnotationStatus() {
+		return annotationStatusEEnum;
 	}
 
 	/**
@@ -651,6 +774,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		basicElementEClass = createEClass(BASIC_ELEMENT);
 		createEAttribute(basicElementEClass, BASIC_ELEMENT__NAME);
 		createEAttribute(basicElementEClass, BASIC_ELEMENT__DOCUMENTATION);
+		createEAttribute(basicElementEClass, BASIC_ELEMENT__ID);
 
 		entityEClass = createEClass(ENTITY);
 		createEReference(entityEClass, ENTITY__PARENT);
@@ -700,10 +824,22 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		createEReference(goalStepEClass, GOAL_STEP__NEXT_GOALS);
 		createEReference(goalStepEClass, GOAL_STEP__PROCESS);
 
+		annotationEClass = createEClass(ANNOTATION);
+		createEAttribute(annotationEClass, ANNOTATION__AUTHOR);
+		createEAttribute(annotationEClass, ANNOTATION__ANNOTATION);
+		createEAttribute(annotationEClass, ANNOTATION__DATE);
+		createEAttribute(annotationEClass, ANNOTATION__STATUS);
+		createEAttribute(annotationEClass, ANNOTATION__ID);
+		createEAttribute(annotationEClass, ANNOTATION__COMMENT);
+
+		annotableElementEClass = createEClass(ANNOTABLE_ELEMENT);
+		createEReference(annotableElementEClass, ANNOTABLE_ELEMENT__ANNOTATION);
+
 		// Create enums
 		attributeTypeEEnum = createEEnum(ATTRIBUTE_TYPE);
 		priorityLevelEEnum = createEEnum(PRIORITY_LEVEL);
 		privilegeNatureEEnum = createEEnum(PRIVILEGE_NATURE);
+		annotationStatusEEnum = createEEnum(ANNOTATION_STATUS);
 	}
 
 	/**
@@ -738,12 +874,13 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		entityEClass.getESuperTypes().add(this.getBasicElement());
 		relationShipEClass.getESuperTypes().add(this.getBasicElement());
 		attributeEClass.getESuperTypes().add(this.getBasicElement());
-		organizationEClass.getESuperTypes().add(this.getBasicElement());
-		agentEClass.getESuperTypes().add(this.getBasicElement());
-		goalEClass.getESuperTypes().add(this.getBasicElement());
+		organizationEClass.getESuperTypes().add(this.getAnnotableElement());
+		agentEClass.getESuperTypes().add(this.getAnnotableElement());
+		goalEClass.getESuperTypes().add(this.getAnnotableElement());
 		requirementsDefinitionEClass.getESuperTypes().add(this.getOrganization());
 		privilegeGroupEClass.getESuperTypes().add(this.getModelElement());
 		processEClass.getESuperTypes().add(this.getOrganization());
+		annotableElementEClass.getESuperTypes().add(this.getBasicElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelElementEClass, ModelElement.class, "ModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -751,6 +888,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		initEClass(basicElementEClass, BasicElement.class, "BasicElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBasicElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, BasicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBasicElement_Documentation(), ecorePackage.getEString(), "documentation", null, 0, 1, BasicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBasicElement_Id(), ecorePackage.getEString(), "id", null, 1, 1, BasicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEntity_Parent(), this.getEntity(), null, "parent", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -800,6 +938,17 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		initEReference(getGoalStep_NextGoals(), this.getGoal(), null, "nextGoals", null, 0, -1, GoalStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGoalStep_Process(), this.getProcess(), null, "process", null, 0, 1, GoalStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(annotationEClass, Annotation.class, "Annotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAnnotation_Author(), ecorePackage.getEString(), "author", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnnotation_Annotation(), ecorePackage.getEString(), "annotation", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnnotation_Date(), ecorePackage.getEDate(), "date", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnnotation_Status(), this.getAnnotationStatus(), "status", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnnotation_Id(), ecorePackage.getEString(), "id", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnnotation_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(annotableElementEClass, AnnotableElement.class, "AnnotableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAnnotableElement_Annotation(), this.getAnnotation(), null, "annotation", null, 0, -1, AnnotableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(attributeTypeEEnum, AttributeType.class, "AttributeType");
 		addEEnumLiteral(attributeTypeEEnum, AttributeType.TEXTUAL_VALUE);
@@ -819,6 +968,14 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		addEEnumLiteral(privilegeNatureEEnum, PrivilegeNature.READ);
 		addEEnumLiteral(privilegeNatureEEnum, PrivilegeNature.UPDATE);
 		addEEnumLiteral(privilegeNatureEEnum, PrivilegeNature.DELETE);
+
+		initEEnum(annotationStatusEEnum, AnnotationStatus.class, "AnnotationStatus");
+		addEEnumLiteral(annotationStatusEEnum, AnnotationStatus.NEW);
+		addEEnumLiteral(annotationStatusEEnum, AnnotationStatus.FIXED);
+		addEEnumLiteral(annotationStatusEEnum, AnnotationStatus.INVALID);
+		addEEnumLiteral(annotationStatusEEnum, AnnotationStatus.WONTFIX);
+		addEEnumLiteral(annotationStatusEEnum, AnnotationStatus.DUPLICATE);
+		addEEnumLiteral(annotationStatusEEnum, AnnotationStatus.INCOMPLETE);
 
 		// Create resource
 		createResource(eNS_URI);

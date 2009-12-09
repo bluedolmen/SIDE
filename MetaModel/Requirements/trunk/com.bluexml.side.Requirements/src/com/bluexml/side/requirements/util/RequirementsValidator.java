@@ -7,6 +7,9 @@
 package com.bluexml.side.requirements.util;
 
 import com.bluexml.side.requirements.Agent;
+import com.bluexml.side.requirements.AnnotableElement;
+import com.bluexml.side.requirements.Annotation;
+import com.bluexml.side.requirements.AnnotationStatus;
 import com.bluexml.side.requirements.Attribute;
 import com.bluexml.side.requirements.AttributeType;
 import com.bluexml.side.requirements.BasicElement;
@@ -154,12 +157,18 @@ public class RequirementsValidator extends EObjectValidator {
 				return validateProcess((com.bluexml.side.requirements.Process)value, diagnostics, context);
 			case RequirementsPackage.GOAL_STEP:
 				return validateGoalStep((GoalStep)value, diagnostics, context);
+			case RequirementsPackage.ANNOTATION:
+				return validateAnnotation((Annotation)value, diagnostics, context);
+			case RequirementsPackage.ANNOTABLE_ELEMENT:
+				return validateAnnotableElement((AnnotableElement)value, diagnostics, context);
 			case RequirementsPackage.ATTRIBUTE_TYPE:
 				return validateAttributeType((AttributeType)value, diagnostics, context);
 			case RequirementsPackage.PRIORITY_LEVEL:
 				return validatePriorityLevel((PriorityLevel)value, diagnostics, context);
 			case RequirementsPackage.PRIVILEGE_NATURE:
 				return validatePrivilegeNature((PrivilegeNature)value, diagnostics, context);
+			case RequirementsPackage.ANNOTATION_STATUS:
+				return validateAnnotationStatus((AnnotationStatus)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -334,6 +343,24 @@ public class RequirementsValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateAnnotation(Annotation annotation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(annotation, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAnnotableElement(AnnotableElement annotableElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(annotableElement, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateAttributeType(AttributeType attributeType, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
@@ -353,6 +380,15 @@ public class RequirementsValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePrivilegeNature(PrivilegeNature privilegeNature, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAnnotationStatus(AnnotationStatus annotationStatus, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

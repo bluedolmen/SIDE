@@ -44,7 +44,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class GoalImpl extends BasicElementImpl implements Goal {
+public class GoalImpl extends AnnotableElementImpl implements Goal {
 	/**
 	 * The cached value of the '{@link #getSubgoals() <em>Subgoals</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

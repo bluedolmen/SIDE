@@ -6,51 +6,56 @@
  */
 package com.bluexml.side.requirements.impl;
 
+import com.bluexml.side.requirements.AnnotableElement;
+import com.bluexml.side.requirements.Annotation;
+import com.bluexml.side.requirements.RequirementsPackage;
+
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.ocl.ecore.OCL;
-import com.bluexml.side.requirements.ModelElement;
-import com.bluexml.side.requirements.Organization;
-import com.bluexml.side.requirements.RequirementsPackage;
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Organization</b></em>'.
+ * An implementation of the model object '<em><b>Annotable Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.requirements.impl.OrganizationImpl#getChildElements <em>Child Elements</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.impl.AnnotableElementImpl#getAnnotation <em>Annotation</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class OrganizationImpl extends AnnotableElementImpl implements Organization {
+public class AnnotableElementImpl extends BasicElementImpl implements AnnotableElement {
 	/**
-	 * The cached value of the '{@link #getChildElements() <em>Child Elements</em>}' containment reference list.
+	 * The cached value of the '{@link #getAnnotation() <em>Annotation</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getChildElements()
+	 * @see #getAnnotation()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ModelElement> childElements;
+	protected EList<Annotation> annotation;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OrganizationImpl() {
+	protected AnnotableElementImpl() {
 		super();
 	}
 
@@ -61,7 +66,7 @@ public class OrganizationImpl extends AnnotableElementImpl implements Organizati
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return RequirementsPackage.Literals.ORGANIZATION;
+		return RequirementsPackage.Literals.ANNOTABLE_ELEMENT;
 	}
 
 	/**
@@ -69,11 +74,11 @@ public class OrganizationImpl extends AnnotableElementImpl implements Organizati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ModelElement> getChildElements() {
-		if (childElements == null) {
-			childElements = new EObjectContainmentEList<ModelElement>(ModelElement.class, this, RequirementsPackage.ORGANIZATION__CHILD_ELEMENTS);
+	public EList<Annotation> getAnnotation() {
+		if (annotation == null) {
+			annotation = new EObjectContainmentEList<Annotation>(Annotation.class, this, RequirementsPackage.ANNOTABLE_ELEMENT__ANNOTATION);
 		}
-		return childElements;
+		return annotation;
 	}
 
 	/**
@@ -84,8 +89,8 @@ public class OrganizationImpl extends AnnotableElementImpl implements Organizati
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RequirementsPackage.ORGANIZATION__CHILD_ELEMENTS:
-				return ((InternalEList<?>)getChildElements()).basicRemove(otherEnd, msgs);
+			case RequirementsPackage.ANNOTABLE_ELEMENT__ANNOTATION:
+				return ((InternalEList<?>)getAnnotation()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -98,8 +103,8 @@ public class OrganizationImpl extends AnnotableElementImpl implements Organizati
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RequirementsPackage.ORGANIZATION__CHILD_ELEMENTS:
-				return getChildElements();
+			case RequirementsPackage.ANNOTABLE_ELEMENT__ANNOTATION:
+				return getAnnotation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,9 +118,9 @@ public class OrganizationImpl extends AnnotableElementImpl implements Organizati
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RequirementsPackage.ORGANIZATION__CHILD_ELEMENTS:
-				getChildElements().clear();
-				getChildElements().addAll((Collection<? extends ModelElement>)newValue);
+			case RequirementsPackage.ANNOTABLE_ELEMENT__ANNOTATION:
+				getAnnotation().clear();
+				getAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -129,8 +134,8 @@ public class OrganizationImpl extends AnnotableElementImpl implements Organizati
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RequirementsPackage.ORGANIZATION__CHILD_ELEMENTS:
-				getChildElements().clear();
+			case RequirementsPackage.ANNOTABLE_ELEMENT__ANNOTATION:
+				getAnnotation().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -144,13 +149,12 @@ public class OrganizationImpl extends AnnotableElementImpl implements Organizati
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RequirementsPackage.ORGANIZATION__CHILD_ELEMENTS:
-				return childElements != null && !childElements.isEmpty();
+			case RequirementsPackage.ANNOTABLE_ELEMENT__ANNOTATION:
+				return annotation != null && !annotation.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
-
-} //OrganizationImpl
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
+} //AnnotableElementImpl

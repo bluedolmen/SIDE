@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.requirements.Agent;
+import com.bluexml.side.requirements.AnnotableElement;
+import com.bluexml.side.requirements.Annotation;
 import com.bluexml.side.requirements.Attribute;
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Entity;
@@ -139,6 +141,7 @@ public class RequirementsSwitch<T> {
 			case RequirementsPackage.ORGANIZATION: {
 				Organization organization = (Organization)theEObject;
 				T result = caseOrganization(organization);
+				if (result == null) result = caseAnnotableElement(organization);
 				if (result == null) result = caseBasicElement(organization);
 				if (result == null) result = caseModelElement(organization);
 				if (result == null) result = defaultCase(theEObject);
@@ -147,6 +150,7 @@ public class RequirementsSwitch<T> {
 			case RequirementsPackage.AGENT: {
 				Agent agent = (Agent)theEObject;
 				T result = caseAgent(agent);
+				if (result == null) result = caseAnnotableElement(agent);
 				if (result == null) result = caseBasicElement(agent);
 				if (result == null) result = caseModelElement(agent);
 				if (result == null) result = defaultCase(theEObject);
@@ -155,6 +159,7 @@ public class RequirementsSwitch<T> {
 			case RequirementsPackage.GOAL: {
 				Goal goal = (Goal)theEObject;
 				T result = caseGoal(goal);
+				if (result == null) result = caseAnnotableElement(goal);
 				if (result == null) result = caseBasicElement(goal);
 				if (result == null) result = caseModelElement(goal);
 				if (result == null) result = defaultCase(theEObject);
@@ -170,6 +175,7 @@ public class RequirementsSwitch<T> {
 				RequirementsDefinition requirementsDefinition = (RequirementsDefinition)theEObject;
 				T result = caseRequirementsDefinition(requirementsDefinition);
 				if (result == null) result = caseOrganization(requirementsDefinition);
+				if (result == null) result = caseAnnotableElement(requirementsDefinition);
 				if (result == null) result = caseBasicElement(requirementsDefinition);
 				if (result == null) result = caseModelElement(requirementsDefinition);
 				if (result == null) result = defaultCase(theEObject);
@@ -186,6 +192,7 @@ public class RequirementsSwitch<T> {
 				com.bluexml.side.requirements.Process process = (com.bluexml.side.requirements.Process)theEObject;
 				T result = caseProcess(process);
 				if (result == null) result = caseOrganization(process);
+				if (result == null) result = caseAnnotableElement(process);
 				if (result == null) result = caseBasicElement(process);
 				if (result == null) result = caseModelElement(process);
 				if (result == null) result = defaultCase(theEObject);
@@ -194,6 +201,20 @@ public class RequirementsSwitch<T> {
 			case RequirementsPackage.GOAL_STEP: {
 				GoalStep goalStep = (GoalStep)theEObject;
 				T result = caseGoalStep(goalStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RequirementsPackage.ANNOTATION: {
+				Annotation annotation = (Annotation)theEObject;
+				T result = caseAnnotation(annotation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RequirementsPackage.ANNOTABLE_ELEMENT: {
+				AnnotableElement annotableElement = (AnnotableElement)theEObject;
+				T result = caseAnnotableElement(annotableElement);
+				if (result == null) result = caseBasicElement(annotableElement);
+				if (result == null) result = caseModelElement(annotableElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -393,6 +414,36 @@ public class RequirementsSwitch<T> {
 	 * @generated
 	 */
 	public T caseGoalStep(GoalStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Annotation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Annotation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnnotation(Annotation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Annotable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Annotable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnnotableElement(AnnotableElement object) {
 		return null;
 	}
 

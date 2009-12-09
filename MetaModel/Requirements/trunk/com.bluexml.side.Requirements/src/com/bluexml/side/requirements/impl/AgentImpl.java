@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.requirements.Agent;
 import com.bluexml.side.requirements.Goal;
 import com.bluexml.side.requirements.RequirementsPackage;
@@ -37,7 +37,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class AgentImpl extends BasicElementImpl implements Agent {
+public class AgentImpl extends AnnotableElementImpl implements Agent {
 	/**
 	 * The default value of the '{@link #isIsHuman() <em>Is Human</em>}' attribute.
 	 * <!-- begin-user-doc -->

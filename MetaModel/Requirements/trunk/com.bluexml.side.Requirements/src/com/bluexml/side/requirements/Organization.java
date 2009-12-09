@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Organization extends BasicElement {
+public interface Organization extends AnnotableElement {
 	/**
 	 * Returns the value of the '<em><b>Child Elements</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.requirements.ModelElement}.

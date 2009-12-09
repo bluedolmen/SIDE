@@ -12,6 +12,8 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.requirements.Agent;
+import com.bluexml.side.requirements.AnnotableElement;
+import com.bluexml.side.requirements.Annotation;
 import com.bluexml.side.requirements.Attribute;
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Entity;
@@ -132,6 +134,14 @@ public class RequirementsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseGoalStep(GoalStep object) {
 				return createGoalStepAdapter();
+			}
+			@Override
+			public Adapter caseAnnotation(Annotation object) {
+				return createAnnotationAdapter();
+			}
+			@Override
+			public Adapter caseAnnotableElement(AnnotableElement object) {
+				return createAnnotableElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -332,6 +342,34 @@ public class RequirementsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGoalStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.Annotation <em>Annotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.requirements.Annotation
+	 * @generated
+	 */
+	public Adapter createAnnotationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.AnnotableElement <em>Annotable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.requirements.AnnotableElement
+	 * @generated
+	 */
+	public Adapter createAnnotableElementAdapter() {
 		return null;
 	}
 
