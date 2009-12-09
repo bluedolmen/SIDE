@@ -56,10 +56,10 @@ public class FieldImpl extends EObjectImpl implements Field {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDataType()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final dataType DATA_TYPE_EDEFAULT = null;
+	protected static final dataType DATA_TYPE_EDEFAULT = com.bluexml.side.requirements.generator.metamodel.WebProject.dataType.STRING;
 
 	/**
 	 * The cached value of the '{@link #getDataType() <em>Data Type</em>}' attribute.

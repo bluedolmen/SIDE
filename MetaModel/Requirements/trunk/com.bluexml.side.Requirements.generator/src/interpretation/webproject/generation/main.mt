@@ -38,6 +38,9 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 	<head>
 		<title><%title%></title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.nyroModal-1.5.5.pack.js"></script>
+		<link rel="stylesheet" href="styles/nyroModal.css" type="text/css" media="screen" />
 	</head>
 	<body class="body">
 		<div id="goalItems" class="box">
@@ -48,6 +51,10 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 			 	<%goalPage_goalItem%>
 			<%}%>
 			</ul>
+		</div>
+		<br/>
+		<div id="logout" class="box">
+			<img src="images/comment.png"/><a href="addComment.php?elementId=<%id%>" class="nyroModal">Add a comment</a>
 		</div>
 		<br/>
 		<div id="logout" class="box">
@@ -67,6 +74,9 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 	<head>
 		<title><%title%></title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.nyroModal-1.5.5.pack.js"></script>
+		<link rel="stylesheet" href="styles/nyroModal.css" type="text/css" media="screen" />
 	</head>
 	<body class="body"> 
 		<? 
@@ -89,6 +99,9 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 		?>
 		<div id="data" class="box">
 			<h2><%title%></h2>
+			<div id="logout" class="box">
+				<img src="images/comment.png"/><a href="addComment.php?elementId=_<%id%>" class="nyroModal">Add a comment</a>
+			</div>
 			<%for (components){%>
 				<%if (current("DataPage").mainComponent == current()){%>
 					<%dataPage_component%>

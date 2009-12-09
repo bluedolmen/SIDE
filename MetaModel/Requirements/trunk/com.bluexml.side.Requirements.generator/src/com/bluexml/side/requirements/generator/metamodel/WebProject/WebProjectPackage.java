@@ -172,13 +172,22 @@ public interface WebProjectPackage extends EPackage {
 	int PAGE__TITLE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__ID = 2;
+
+	/**
 	 * The number of structural features of the '<em>Page</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_FEATURE_COUNT = 2;
+	int PAGE_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.LoginPageImpl <em>Login Page</em>}' class.
@@ -207,6 +216,15 @@ public interface WebProjectPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOGIN_PAGE__TITLE = PAGE__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGIN_PAGE__ID = PAGE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Links</b></em>' containment reference list.
@@ -253,6 +271,15 @@ public interface WebProjectPackage extends EPackage {
 	 * @ordered
 	 */
 	int GOAL_PAGE__TITLE = PAGE__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_PAGE__ID = PAGE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Items</b></em>' containment reference list.
@@ -347,6 +374,15 @@ public interface WebProjectPackage extends EPackage {
 	int DATA_PAGE__TITLE = PAGE__TITLE;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_PAGE__ID = PAGE__ID;
+
+	/**
 	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -400,6 +436,15 @@ public interface WebProjectPackage extends EPackage {
 	 * @ordered
 	 */
 	int FRAME_PAGE__TITLE = PAGE__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME_PAGE__ID = PAGE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Col1</b></em>' reference.
@@ -939,6 +984,17 @@ public interface WebProjectPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPage_Title();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.WebProject.Page#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.WebProject.Page#getId()
+	 * @see #getPage()
+	 * @generated
+	 */
+	EAttribute getPage_Id();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.WebProject.LoginPage <em>Login Page</em>}'.
@@ -1529,6 +1585,14 @@ public interface WebProjectPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PAGE__TITLE = eINSTANCE.getPage_Title();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PAGE__ID = eINSTANCE.getPage_Id();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.LoginPageImpl <em>Login Page</em>}' class.

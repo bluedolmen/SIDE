@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.PageImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.PageImpl#getTitle <em>Title</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.PageImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,6 +71,26 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 	 * @ordered
 	 */
 	protected String title = TITLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -137,6 +158,27 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WebProjectPackage.PAGE__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -144,6 +186,8 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 				return getName();
 			case WebProjectPackage.PAGE__TITLE:
 				return getTitle();
+			case WebProjectPackage.PAGE__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -161,6 +205,9 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 				return;
 			case WebProjectPackage.PAGE__TITLE:
 				setTitle((String)newValue);
+				return;
+			case WebProjectPackage.PAGE__ID:
+				setId((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,6 +227,9 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 			case WebProjectPackage.PAGE__TITLE:
 				setTitle(TITLE_EDEFAULT);
 				return;
+			case WebProjectPackage.PAGE__ID:
+				setId(ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -196,6 +246,8 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WebProjectPackage.PAGE__TITLE:
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+			case WebProjectPackage.PAGE__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -214,6 +266,8 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 		result.append(name);
 		result.append(", title: ");
 		result.append(title);
+		result.append(", id: ");
+		result.append(id);
 		result.append(')');
 		return result.toString();
 	}

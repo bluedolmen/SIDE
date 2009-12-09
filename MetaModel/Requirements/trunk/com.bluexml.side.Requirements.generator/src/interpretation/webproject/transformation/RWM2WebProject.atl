@@ -48,6 +48,7 @@ rule agent {
     goalPage : WebProject!GoalPage (
         name <- s.__xmiID__+'.html',
         title <- 'Goals of '+s.name,
+		id <- s.id,
         items <- s.isResponsible->collect(g | thisModule.createGoalItem(g))
     )
 }
@@ -100,7 +101,8 @@ helper def : sortEntities(seq : Sequence(RWM!Entity), pset : Sequence(RWM!Privil
 rule goalWithPrivileges {
     from s : RWM!Goal (s.privilegeGroup.size() > 0)
     to dataPage : WebProject!DataPage (
-        title <-
+        id <- s.id,
+    	title <-
 			if (s.responsible.size() > 0) then 
 				s.name + '(' + s.responsible.first().name + ')'
 			else
@@ -130,6 +132,7 @@ rule goalWithPrivileges {
 rule goalWithoutPrivileges {
     from s : RWM!Goal (s.privilegeGroup.size() = 0)
     to dataPage : WebProject!GoalPage (
+    	id <- s.id,
         title <- s.name,
         name <- s.__xmiID__+'.html',
         items <- thisModule.createGoalItem(s)
@@ -254,6 +257,7 @@ rule process {
     ),
     goalPage : WebProject!GoalPage (
         name <- s.__xmiID__+'.html',
+		id <- s.id,
         title <- 'Process : '+s.name,
         items <- startGoal->collect(g | thisModule.createNextGoalItem(g,s))
     )

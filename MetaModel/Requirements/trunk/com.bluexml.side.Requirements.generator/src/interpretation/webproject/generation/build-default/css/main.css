@@ -145,7 +145,7 @@ a{
 }
 
 #goalItems {
-	height:91%;
+	height:87%;
 }
 
 #logout {
@@ -167,4 +167,12 @@ td{
 
 .action_col{
 	text-align: center;
+}
+
+input {
+	width:100%;
+}
+
+textarea {
+	width:100%;
 }
