@@ -11,104 +11,54 @@
 	<dependencies></dependencies>
 	<profiles>
 		<profile>
-			<id>local</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<repositories>
-				<repository>
-					<id>releases</id>
-					<url>http://localhost:8081/nexus/content/repositories/releases</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-				</repository>
-				<repository>
-					<id>snapshots</id>
-					<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
-					<releases>
-						<enabled>false</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>releases</id>
-					<url>http://localhost:8081/nexus/content/repositories/releases</url>
-				</pluginRepository>
-				<pluginRepository>
-					<id>snapshots</id>
-					<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<repositories>
-				<repository>
-					<id>releases</id>
-					<url>http://pipin.bluexml.com/nexus/content/repositories/releases</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-				</repository>
-				<repository>
-					<id>snapshots</id>
-					<url>http://pipin.bluexml.com/nexus/content/repositories/snapshots</url>
-					<releases>
-						<enabled>false</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>snapshots</id>
-					<url>http://pipin.bluexml.com/nexus/content/repositories/snapshots</url>
-				</pluginRepository>
-				<pluginRepository>
-					<id>releases</id>
-					<url>http://pipin.bluexml.com/nexus/content/repositories/releases</url>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
-		<profile>
 			<id>public</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<repositories>
 				<repository>
-					<id>BXKB-repo</id>
-					<url>http://merry.bluexml.com/m2/repository</url>
+					<id>side-releases</id>
+					<url>http://pipin.bluexml.com/nexus/content/repositories/side-releases</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
 				</repository>
 				<repository>
-					<id>BXKB-repo-snapshots</id>
-					<url>http://merry.bluexml.com/m2/snapshotrepository</url>
+					<id>side-snapshots</id>
+					<url>http://pipin.bluexml.com/nexus/content/repositories/side-snapshots</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>central</id>
+					<url>http://pipin.bluexml.com/nexus/content/repositories/central</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
 				</repository>
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
-					<id>BXKB-repo</id>
-					<url>http://merry.bluexml.com/m2/repository</url>
+					<id>central</id>
+					<url>http://pipin.bluexml.com/nexus/content/repositories/central</url>
 				</pluginRepository>
 				<pluginRepository>
-					<id>BXKB-repo-snapshots</id>
-					<url>http://merry.bluexml.com/m2/snapshotrepository</url>
+					<id>side-snapshots</id>
+					<url>http://pipin.bluexml.com/nexus/content/repositories/side-snapshots</url>
+				</pluginRepository>
+				<pluginRepository>
+					<id>side-releases</id>
+					<url>http://pipin.bluexml.com/nexus/content/repositories/side-releases</url>
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
@@ -123,19 +73,11 @@
 					<url>${settings.localRepository}</url>
 				</repository>
 				<repository>
-					<id>releases</id>
+					<id>side-releases</id>
 					<url>${settings.localRepository}</url>
 				</repository>
 				<repository>
-					<id>snapshots</id>
-					<url>${settings.localRepository}</url>
-				</repository>
-				<repository>
-					<id>BXKB-repo</id>
-					<url>${settings.localRepository}</url>
-				</repository>
-				<repository>
-					<id>BXKB-repo-snapshots</id>
+					<id>side-snapshots</id>
 					<url>${settings.localRepository}</url>
 				</repository>
 			</repositories>
@@ -145,19 +87,11 @@
 					<url>${settings.localRepository}</url>
 				</pluginRepository>
 				<pluginRepository>
-					<id>releases</id>
+					<id>side-releases</id>
 					<url>${settings.localRepository}</url>
 				</pluginRepository>
 				<pluginRepository>
-					<id>snapshots</id>
-					<url>${settings.localRepository}</url>
-				</pluginRepository>
-				<pluginRepository>
-					<id>BXKB-repo</id>
-					<url>${settings.localRepository}</url>
-				</pluginRepository>
-				<pluginRepository>
-					<id>BXKB-repo-snapshots</id>
+					<id>side-snapshots</id>
 					<url>${settings.localRepository}</url>
 				</pluginRepository>
 			</pluginRepositories>

@@ -20,7 +20,9 @@ public class MavenTmpProject {
 	private File pomFile;
 	private File projectFolder;
 	private MavenUtil mavenUtil;
-	String[] inline_profiles = new String[] { "public", "dev", "local" };
+
+	// String[] inline_profiles = new String[] { "public", "local" };
+	String[] inline_profiles = new String[] { "public" };
 	String[] offline_profiles = new String[] { "offline" };
 	private static final String TARGET_ARTIFACT = "tmpProject_";
 	private Boolean offline = false;
@@ -86,14 +88,16 @@ public class MavenTmpProject {
 		createProject();
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("outputDirectory", whereTocopy.getAbsolutePath());
-
+		params.put("excludeScope", "provided");
+		params.put("excludeTypes", "jar");
+		
 		String[] profiles = offline_profiles;
 		boolean offline = true;
-//		if (offline) {
-//			profiles = offline_profiles;
-//		} else {
-//			profiles = inline_profiles;
-//		}
+		// if (offline) {
+		// profiles = offline_profiles;
+		// } else {
+		// profiles = inline_profiles;
+		// }
 		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params, profiles, offline);
 		if (result.getExceptions().size() > 0) {
 			List<?> exceps = result.getExceptions();

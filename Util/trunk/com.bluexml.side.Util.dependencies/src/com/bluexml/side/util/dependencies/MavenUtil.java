@@ -18,6 +18,7 @@ public class MavenUtil {
 	private MavenEmbedder embedder;
 
 	public MavenExecutionResult doMavenGoal(File baseDir, List<String> goals, Map<String, String> parameters, List<String> profiles, Boolean offline) throws Exception {
+		System.out.println(baseDir.getAbsolutePath());
 		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
 		archetypeCreateRequest.setBaseDirectory(baseDir);
 		archetypeCreateRequest.setGoals(goals);
@@ -82,6 +83,9 @@ public class MavenUtil {
 		if (embedder == null) {
 			Configuration configuration;
 			configuration = new DefaultConfiguration();
+			// load user configuration file
+			// configuration.setUserSettingsFile( MavenEmbedder.DEFAULT_USER_SETTINGS_FILE );
+
 			configuration.setClassLoader(Thread.currentThread().getContextClassLoader());
 			embedder = new MavenEmbedder(configuration);
 		}
