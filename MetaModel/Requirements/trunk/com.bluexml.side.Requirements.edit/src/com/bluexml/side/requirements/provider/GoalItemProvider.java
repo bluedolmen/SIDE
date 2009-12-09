@@ -34,7 +34,7 @@ import com.bluexml.side.requirements.RequirementsPackage;
  * @generated
  */
 public class GoalItemProvider
-	extends BasicElementItemProvider
+	extends AnnotableElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

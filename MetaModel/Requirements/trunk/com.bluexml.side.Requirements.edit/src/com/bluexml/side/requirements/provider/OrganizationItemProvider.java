@@ -32,7 +32,7 @@ import com.bluexml.side.requirements.RequirementsPackage;
  * @generated
  */
 public class OrganizationItemProvider
-	extends BasicElementItemProvider
+	extends AnnotableElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -163,6 +163,11 @@ public class OrganizationItemProvider
 			(createChildParameter
 				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
 				 RequirementsFactory.eINSTANCE.createAttribute()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
+				 RequirementsFactory.eINSTANCE.createAnnotableElement()));
 
 		newChildDescriptors.add
 			(createChildParameter

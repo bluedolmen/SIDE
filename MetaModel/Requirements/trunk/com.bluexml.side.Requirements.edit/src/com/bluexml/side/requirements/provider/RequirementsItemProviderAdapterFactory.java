@@ -328,6 +328,52 @@ public class RequirementsItemProviderAdapterFactory extends RequirementsAdapterF
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.requirements.Annotation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AnnotationItemProvider annotationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.requirements.Annotation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAnnotationAdapter() {
+		if (annotationItemProvider == null) {
+			annotationItemProvider = new AnnotationItemProvider(this);
+		}
+
+		return annotationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.requirements.AnnotableElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AnnotableElementItemProvider annotableElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.requirements.AnnotableElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAnnotableElementAdapter() {
+		if (annotableElementItemProvider == null) {
+			annotableElementItemProvider = new AnnotableElementItemProvider(this);
+		}
+
+		return annotableElementItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -437,6 +483,8 @@ public class RequirementsItemProviderAdapterFactory extends RequirementsAdapterF
 		if (privilegeGroupItemProvider != null) privilegeGroupItemProvider.dispose();
 		if (processItemProvider != null) processItemProvider.dispose();
 		if (goalStepItemProvider != null) goalStepItemProvider.dispose();
+		if (annotationItemProvider != null) annotationItemProvider.dispose();
+		if (annotableElementItemProvider != null) annotableElementItemProvider.dispose();
 	}
 
 }

@@ -32,7 +32,7 @@ import com.bluexml.side.requirements.RequirementsPackage;
  * @generated
  */
 public class AgentItemProvider
-	extends BasicElementItemProvider
+	extends AnnotableElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
