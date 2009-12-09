@@ -20,24 +20,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>ant</groupId>
-			<artifactId>ant-antlr</artifactId>
-			<version>1.6.5</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>ant</groupId>
-			<artifactId>ant</artifactId>
-			<version>1.7.0</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>com.facetmap</groupId>
 			<artifactId>facetmap</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.0</version>
 			<type>jar</type>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
