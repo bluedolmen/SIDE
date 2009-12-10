@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<project default="main">
+
+	<property name="project.name"    value="digitizationProcess" />
+	<property name="models.name"    value="models" />
+	<property name="models.dir"    value="${models.name}" />
+	<property name="application.name"    value="application" />
+	<property name="application.dir"    value="${application.name}" />
+	<property name="distrib.name"    value="distrib" />
+	<property name="distrib.dir"    value="${application.dir}/${distrib.name}" />
+
+	<target name="main" depends="distrib" description="Main target">
+		<echo>
+            Building the 3 distribution files.
+        </echo>
+	</target>
+
+
+    <!-- Creates the distribution -->
+     <target name="distrib" description="Generates 3 distribution files: models, application wars, application webapps extension">
+        <copy file="README.txt" todir="${distrib.dir}"/>
+        <zip zipfile="${distrib.dir}/${project.name}_models.zip" compress="true">
+            <zipfileset dir="models" prefix="models"/>
+            <zipfileset dir="." includes="README.txt"/>
+         </zip>
+     </target>
+</project>
