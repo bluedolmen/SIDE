@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portal:Portal xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:portal="http://www.kerblue.org/portal/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_SmQJcOM3Ed6qNvjsNi40SA">
+  <pageSet xmi:id="_TDopAOM3Ed6qNvjsNi40SA" ID="PageLibrary" useLayout="_U7m3QOM3Ed6qNvjsNi40SA">
+    <portlets xmi:id="_mYPtQOM3Ed6qNvjsNi40SA" associationPortlet="_eH4ZkOM3Ed6qNvjsNi40SA" associationPage="_TDopAOM3Ed6qNvjsNi40SA"/>
+    <portlets xmi:id="_qfvuIOM3Ed6qNvjsNi40SA" associationPortlet="_eH4ZkOM3Ed6qNvjsNi40SA" associationPage="_TDopAOM3Ed6qNvjsNi40SA"/>
+    <portlets xmi:id="_raBlEOM3Ed6qNvjsNi40SA" associationPortlet="_jMx20OM3Ed6qNvjsNi40SA" associationPage="_TDopAOM3Ed6qNvjsNi40SA"/>
+  </pageSet>
+  <layoutSet xmi:id="_U7m3QOM3Ed6qNvjsNi40SA" description="" name="PortalLayout1">
+    <columns xmi:id="_X1mjMOM3Ed6qNvjsNi40SA" name="new_0" width="100"/>
+  </layoutSet>
+  <portletSet xmi:id="_eH4ZkOM3Ed6qNvjsNi40SA" name="DocumentDetails" isPortletInternal="_zu6MYOM3Ed6qNvjsNi40SA"/>
+  <portletSet xmi:id="_jMx20OM3Ed6qNvjsNi40SA" name="documentlibrary" isPortletInternal="_4uHRUOM3Ed6qNvjsNi40SA"/>
+  <portletSetType xmi:id="_yvn5oOM3Ed6qNvjsNi40SA" name="PortletType1"/>
+  <internalPortletSet xmi:id="_zu6MYOM3Ed6qNvjsNi40SA">
+    <view xsi:type="view:ComposedView" href="../View/DigitizationProcess.view#_8cHFsOM6Ed6qNvjsNi40SA"/>
+  </internalPortletSet>
+  <internalPortletSet xmi:id="_4uHRUOM3Ed6qNvjsNi40SA">
+    <view xsi:type="view:ComposedView" href="../View/DigitizationProcess.view#_yopnkOM6Ed6qNvjsNi40SA"/>
+  </internalPortletSet>
+</portal:Portal>

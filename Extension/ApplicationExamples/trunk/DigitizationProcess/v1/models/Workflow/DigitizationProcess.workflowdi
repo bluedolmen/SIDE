@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="DigitizationProcess.workflow#_30L-UNRSEd6mvv4ISlOk-Q"/>
+  <diagrams position="0,0" size="100,100" name="DigitizationProcess.workflowdi" viewport="553,414">
+    <property key="pageFormatName" value="A3"/>
+    <property key="diagramWidth" value="1188"/>
+    <property key="diagramHeight" value="1680"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="landscape"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Workflow.modeler.diagram">
+      <element href="DigitizationProcess.workflow#_30L-UNRSEd6mvv4ISlOk-Q"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="12,11" size="93,81">
+      <anchorage graphEdge="//@diagrams.0/@contained.3 //@diagrams.0/@contained.14"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30MlYNRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="26,228" size="65,81">
+      <anchorage graphEdge="//@diagrams.0/@contained.8"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30MlYdRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="177,33" size="50,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.3 //@diagrams.0/@contained.15"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30OakNRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30OakNRSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30OakNRSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="manage"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="20,332" size="77,81">
+      <anchorage graphEdge="//@diagrams.0/@contained.6"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30MlYtRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="635,353" size="82,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.6 //@diagrams.0/@contained.12 //@diagrams.0/@contained.17 //@diagrams.0/@contained.23"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30TTEdRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30TTEdRSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30TTEdRSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.5/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="manage"/>
+      <waypoints>[3, -54, -615, -53]</waypoints>
+      <waypoints>[625, -54, 7, -53]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="634,249" size="83,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.8 //@diagrams.0/@contained.18 //@diagrams.0/@contained.25"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30TTE9RSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30TTE9RSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30TTE9RSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="manage"/>
+      <waypoints>[0, -55, -617, -54]</waypoints>
+      <waypoints>[624, -55, 7, -54]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="20,432" size="77,81">
+      <anchorage graphEdge="//@diagrams.0/@contained.11"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30MlY9RSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="769,445" size="117,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.11 //@diagrams.0/@contained.12 //@diagrams.0/@contained.23 //@diagrams.0/@contained.26"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30TTHdRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30TTHdRSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="DigitizationProcess.workflow#_30TTH9RSEd6mvv4ISlOk-Q"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30TTHdRSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.9/@anchorage.0 //@diagrams.0/@contained.10/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="manage"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.10/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30TTEtRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="306,24" size="146,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.14 //@diagrams.0/@contained.15 //@diagrams.0/@contained.19 //@diagrams.0/@contained.20"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30SsANRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30SsANRSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="DigitizationProcess.workflow#_30TTENRSEd6mvv4ISlOk-Q"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30SsANRSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.13/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="manage"/>
+      <waypoints>[0, -49, -436, -50]</waypoints>
+      <waypoints>[436, -49, 0, -50]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.13/@anchorage.0">
+      <anchorage graphEdge="//@diagrams.0/@contained.30"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30PBoNRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="522,131" size="-1,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.17 //@diagrams.0/@contained.18 //@diagrams.0/@contained.19 //@diagrams.0/@contained.20 //@diagrams.0/@contained.35"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30T6INRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.5/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30T6IdRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <waypoints>[-1, 247, -131, 29]</waypoints>
+      <waypoints>[130, 247, 0, 29]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30T6ItRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <waypoints>[-2, 140, -131, 26]</waypoints>
+      <waypoints>[129, 140, 0, 26]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.13/@anchorage.0 //@diagrams.0/@contained.16/@anchorage.0">
+      <anchorage graphEdge="//@diagrams.0/@contained.22"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30SsCNRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <waypoints>[152, 0, -15, -104]</waypoints>
+      <waypoints>[152, 1, -15, -103]</waypoints>
+      <waypoints>[163, 1, -4, -103]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.13/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30T6I9RSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <waypoints>[-164, -1, 3, 103]</waypoints>
+      <waypoints>[-164, -2, 3, 102]</waypoints>
+      <waypoints>[-167, -2, 0, 102]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="634,51" size="57,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.22"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_O_3CkNU2Ed6Ay6xwhgeFBA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.19/@anchorage.0 //@diagrams.0/@contained.21/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="actions"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.10/@anchorage.0 //@diagrams.0/@contained.5/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_wXK6MNWyEd6Ay6xwhgeFBA"/>
+      </semanticModel>
+      <waypoints>[-4, -99, 163, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="892,570" size="115,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.25 //@diagrams.0/@contained.26 //@diagrams.0/@contained.28 //@diagrams.0/@contained.34"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_gwoYQNW0Ed6FW7J925m8sQ"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_gwoYQNW0Ed6FW7J925m8sQ"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="DigitizationProcess.workflow#_wBbBwNW0Ed6FW7J925m8sQ"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.7/@anchorage.0 //@diagrams.0/@contained.24/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30TTFNRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <waypoints>[274, -1, 0, -321]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.10/@anchorage.0 //@diagrams.0/@contained.24/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30TTHtRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1064,573" size="50,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.28"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_30PosNRSEd6mvv4ISlOk-Q"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_30PosNRSEd6mvv4ISlOk-Q"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.24/@anchorage.0 //@diagrams.0/@contained.27/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_tzGJANW0Ed6FW7J925m8sQ"/>
+      </semanticModel>
+      <waypoints>[138, -1, -106, 3]</waypoints>
+      <waypoints>[138, -3, -106, 1]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="199,105" size="50,50">
+      <anchorage graphEdge="//@diagrams.0/@contained.30"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_9QcKUNXAEd6FW7J925m8sQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.29/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="actions"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="28,535" size="77,81">
+      <anchorage graphEdge="//@diagrams.0/@contained.33"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_TqytcOWZEd6to8edPQE7Gw"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="633,544" size="50,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.33 //@diagrams.0/@contained.34 //@diagrams.0/@contained.35"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_W2J2MOWZEd6to8edPQE7Gw"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_W2J2MOWZEd6to8edPQE7Gw"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="DigitizationProcess.workflow#_W2J2MOWZEd6to8edPQE7Gw"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.31/@anchorage.0 //@diagrams.0/@contained.32/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="manage"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.32/@anchorage.0 //@diagrams.0/@contained.24/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_cGcrIOWZEd6to8edPQE7Gw"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.32/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.workflow#_mH0CYOWZEd6to8edPQE7Gw"/>
+      </semanticModel>
+      <waypoints>[-1, 358, -113, -51]</waypoints>
+      <waypoints>[109, 358, -3, -51]</waypoints>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

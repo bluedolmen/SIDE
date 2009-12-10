@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_05_TgdRREd6d24BtuZ-cgQ" description="" name="DigitizationProcess">
+  <packageSet xsi:type="clazz:ClassPackage" xmi:id="_06AhoNRREd6d24BtuZ-cgQ" name="com">
+    <packageSet xsi:type="clazz:ClassPackage" xmi:id="_06AhodRREd6d24BtuZ-cgQ" name="bluexml">
+      <packageSet xsi:type="clazz:ClassPackage" xmi:id="_06AhotRREd6d24BtuZ-cgQ" name="side">
+        <packageSet xsi:type="clazz:ClassPackage" xmi:id="_06Aho9RREd6d24BtuZ-cgQ" name="models">
+          <packageSet xsi:type="clazz:ClassPackage" xmi:id="_06BIsNRREd6d24BtuZ-cgQ" name="list">
+            <classSet xmi:id="_06EMANRREd6d24BtuZ-cgQ" documentation="" description="" name="IncomingMail" title="Incoming Mail" generalizations="_06OkG9RREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06Mu4NRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06N9ANRREd6d24BtuZ-cgQ" documentation="" description="" name="ArrivalDate" title="Arrival Date" typ="Date">
+                <metainfo xmi:id="_1Gy0QONWEd6sL9QxK1vqZQ" key="required" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06N9AtRREd6d24BtuZ-cgQ" documentation="" description="" name="ArrivalNumber" title="Arrival Number" typ="int" unique="true">
+                <metainfo xmi:id="_HzIJ0ONSEd6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+                <metainfo xmi:id="_HzIw4ONSEd6sL9QxK1vqZQ" key="required" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06OkEtRREd6d24BtuZ-cgQ" documentation="" description="" name="DeliveryService" title="DeliveryService" valueList="_06Wf4dRREd6d24BtuZ-cgQ">
+                <metainfo xmi:id="_2cbxgONWEd6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06OkFdRREd6d24BtuZ-cgQ" documentation="" description="" name="OtherAssignment" title="Other Assignment" valueList="_06Wf4dRREd6d24BtuZ-cgQ"/>
+              <attributes xmi:id="_06OkFtRREd6d24BtuZ-cgQ" documentation="" description="" name="ServiceArrivalDate" title="Arrival date in the service" typ="Date"/>
+              <attributes xmi:id="_06OkF9RREd6d24BtuZ-cgQ" documentation="" description="" name="Attribution" title="Attribution" valueList="_06XuDNRREd6d24BtuZ-cgQ">
+                <metainfo xmi:id="_402aYONWEd6sL9QxK1vqZQ" key="required" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06OkGdRREd6d24BtuZ-cgQ" documentation="" description="" name="Classification" title="Classification"/>
+            </classSet>
+            <classSet xmi:id="_06OkG9RREd6d24BtuZ-cgQ" documentation="" description="" name="Document" title="Document">
+              <metainfo xmi:id="_06OkHNRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06OkHdRREd6d24BtuZ-cgQ" documentation="" description="" name="Title" title="Document Title">
+                <metainfo xmi:id="_bE-4YON7Ed6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06OkItRREd6d24BtuZ-cgQ" documentation="" description="" name="Number" title="file number">
+                <metainfo xmi:id="_cJMHYON7Ed6sL9QxK1vqZQ" key="required" value="True"/>
+                <metainfo xmi:id="_cJMucON7Ed6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06OkJdRREd6d24BtuZ-cgQ" documentation="" description="" name="Observation" title="Observation"/>
+              <attributes xmi:id="_81Z8gNWyEd6Ay6xwhgeFBA" documentation="" description="" name="DigitizationDate" title="Digitization Date" typ="DateTime"/>
+              <attributes xmi:id="_Ib5egNWzEd6Ay6xwhgeFBA" documentation="" description="" name="Author" title="Author"/>
+            </classSet>
+            <classSet xmi:id="_06PLINRREd6d24BtuZ-cgQ" documentation="" description="" name="OutgoingMail" title="Outgoing Mail" generalizations="_06OkG9RREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06PLIdRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06PLItRREd6d24BtuZ-cgQ" documentation="" description="" name="DepartureDate" title="DepartureDate" typ="Date">
+                <metainfo xmi:id="_xAftQONWEd6sL9QxK1vqZQ" key="required" value="True"/>
+                <metainfo xmi:id="_xAftQeNWEd6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06PLJdRREd6d24BtuZ-cgQ" documentation="" description="" name="SenderService" title="Sender Service" valueList="_06Wf4dRREd6d24BtuZ-cgQ">
+                <metainfo xmi:id="_yB3qsONWEd6sL9QxK1vqZQ" key="required" value="True"/>
+                <metainfo xmi:id="_yB4RwONWEd6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+              </attributes>
+            </classSet>
+            <classSet xmi:id="_06PLKNRREd6d24BtuZ-cgQ" documentation="" description="" name="Vehicle" title="Vehicle" generalizations="_06OkG9RREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06PLKdRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06PLKtRREd6d24BtuZ-cgQ" documentation="" description="" name="Lifting" title="Lifting Apparatus" valueList="_06YVENRREd6d24BtuZ-cgQ">
+                <metainfo xmi:id="_Vq30kOOFEd66sYcH2bURSQ" key="required" value="True"/>
+                <metainfo xmi:id="_Vq30keOFEd66sYcH2bURSQ" key="propertySearched" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06PLLdRREd6d24BtuZ-cgQ" documentation="" description="" name="NextControlDate" title="Next control visit date" typ="Date">
+                <metainfo xmi:id="_Uk3OwOOFEd66sYcH2bURSQ" key="required" value="True"/>
+                <metainfo xmi:id="_Uk3OweOFEd66sYcH2bURSQ" key="propertySearched" value="True"/>
+              </attributes>
+            </classSet>
+            <classSet xmi:id="_06PLMNRREd6d24BtuZ-cgQ" documentation="" description="" name="BIC" title="BIC" generalizations="_06OkG9RREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06PLMdRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+            </classSet>
+            <classSet xmi:id="_06PLMtRREd6d24BtuZ-cgQ" documentation="" description="" name="Invoice" title="Invoice" generalizations="_06OkG9RREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06PLM9RREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06PyMNRREd6d24BtuZ-cgQ" documentation="" description="Incrémentation à chaque validation" name="PartNumber" title="Part Number" typ="int">
+                <metainfo xmi:id="_UTIzUOOKEd66sYcH2bURSQ" key="propertySearched" value="True"/>
+                <metainfo xmi:id="_UTIzUeOKEd66sYcH2bURSQ" key="required" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06PyM9RREd6d24BtuZ-cgQ" documentation="" description="" name="OrderNumber" title="Order Form Number"/>
+            </classSet>
+            <classSet xmi:id="_06PyNNRREd6d24BtuZ-cgQ" documentation="" description="" name="CarRegistration" title="Car Registration" generalizations="_06PLKNRREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06PyNdRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+            </classSet>
+            <classSet xmi:id="_06PyNtRREd6d24BtuZ-cgQ" documentation="" description="" name="TechnicalControl" title="Technical Control" generalizations="_06PLKNRREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06PyN9RREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+            </classSet>
+            <classSet xmi:id="_06PyONRREd6d24BtuZ-cgQ" documentation="" description="" name="Instance" title="Administrative Records" generalizations="_06OkG9RREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06PyOdRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06PyOtRREd6d24BtuZ-cgQ" documentation="" description="" name="Date" title="" typ="Date" visibility="Public">
+                <metainfo xmi:id="_06PyO9RREd6d24BtuZ-cgQ" key="required" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06PyPNRREd6d24BtuZ-cgQ" documentation="" description="" name="Subject" title="Subject" visibility="Public"/>
+            </classSet>
+            <classSet xmi:id="_06PyPdRREd6d24BtuZ-cgQ" documentation="" description="" name="Quotation" title="Quotation" generalizations="_06OkG9RREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06PyPtRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06PyP9RREd6d24BtuZ-cgQ" documentation="" description="" name="Holder" title="Bid Holder" visibility="Public">
+                <metainfo xmi:id="_06PyQNRREd6d24BtuZ-cgQ" key="propertySearched" value="True"/>
+                <metainfo xmi:id="_06PyQdRREd6d24BtuZ-cgQ" key="required" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06QZQNRREd6d24BtuZ-cgQ" documentation="" description="" name="Subject" title="Subject" visibility="Public">
+                <metainfo xmi:id="_06QZQdRREd6d24BtuZ-cgQ" key="required" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06QZQtRREd6d24BtuZ-cgQ" documentation="" description="" name="BeginningDate" title="Quotation begining date" typ="Date">
+                <metainfo xmi:id="_iMOdIONVEd6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+                <metainfo xmi:id="_iMPrQONVEd6sL9QxK1vqZQ" key="required" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06QZRdRREd6d24BtuZ-cgQ" documentation="" description="" name="EndDate" title="Quotation end date" typ="Date" visibility="Public">
+                <metainfo xmi:id="_06RAUNRREd6d24BtuZ-cgQ" key="required" value="True"/>
+                <metainfo xmi:id="_06RAUdRREd6d24BtuZ-cgQ" key="propertySearched" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06RAUtRREd6d24BtuZ-cgQ" documentation="" description="" name="Price" title="Last price revision" visibility="Public">
+                <metainfo xmi:id="_06RAU9RREd6d24BtuZ-cgQ" key="required" value="True"/>
+              </attributes>
+            </classSet>
+            <classSet xmi:id="_06RAVNRREd6d24BtuZ-cgQ" documentation="" description="" name="STP" title="Special Technical Specifications" generalizations="_06PyPdRREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06RnYNRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+            </classSet>
+            <classSet xmi:id="_06RnYdRREd6d24BtuZ-cgQ" documentation="" description="" name="STC" title="Special Terms of Contract" generalizations="_06PyPdRREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06RnYtRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+            </classSet>
+            <classSet xmi:id="_06RnY9RREd6d24BtuZ-cgQ" documentation="" description="" name="QR" title="Quotation Rules" generalizations="_06PyPdRREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06RnZNRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+            </classSet>
+            <classSet xmi:id="_06SOcNRREd6d24BtuZ-cgQ" documentation="" description="" name="Tender" title="Submission of tenders" generalizations="_06PyPdRREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06SOcdRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+            </classSet>
+            <classSet xmi:id="_06SOctRREd6d24BtuZ-cgQ" documentation="" description="Contient les annexes du marché" name="Annex" title="Annex" generalizations="_06PyPdRREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06SOc9RREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06SOdNRREd6d24BtuZ-cgQ" documentation="" description="" name="Title" title="Annex title">
+                <metainfo xmi:id="_RJWxMOOFEd66sYcH2bURSQ" key="required" value="True"/>
+              </attributes>
+            </classSet>
+            <classSet xmi:id="_06SOd9RREd6d24BtuZ-cgQ" documentation="" description="contient les questions/réponses des soumissionnaires" name="DataComplement" title="Information Complement" generalizations="_06PyPdRREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06SOeNRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06SOedRREd6d24BtuZ-cgQ" documentation="" description="" name="Date" title="Response publication date" typ="Date" visibility="Public">
+                <metainfo xmi:id="_06S1gNRREd6d24BtuZ-cgQ" key="required" value="True"/>
+              </attributes>
+            </classSet>
+            <classSet xmi:id="_06S1gdRREd6d24BtuZ-cgQ" documentation="" description="" name="ByLaw" title="Personal By-Law" generalizations="_06OkG9RREd6d24BtuZ-cgQ">
+              <metainfo xmi:id="_06S1gtRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06S1g9RREd6d24BtuZ-cgQ" documentation="" description="" name="Assignment" title="Assignment">
+                <metainfo xmi:id="_-Fhp0ONWEd6sL9QxK1vqZQ" key="required" value="True"/>
+              </attributes>
+            </classSet>
+            <classSet xmi:id="_06S1hdRREd6d24BtuZ-cgQ" documentation="" description="" name="Agent" title="Agent">
+              <metainfo xmi:id="_06S1htRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06S1h9RREd6d24BtuZ-cgQ" documentation="" description="" name="Name" title="Name">
+                <metainfo xmi:id="_UXBOwON_Ed6sL9QxK1vqZQ" key="required" value="True"/>
+                <metainfo xmi:id="_UXBOweN_Ed6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06S1itRREd6d24BtuZ-cgQ" documentation="" description="" name="Firstname" title="Firstname">
+                <metainfo xmi:id="__drIgONWEd6sL9QxK1vqZQ" key="required" value="True"/>
+                <metainfo xmi:id="__drIgeNWEd6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06S1jdRREd6d24BtuZ-cgQ" documentation="" description="" name="ReferenceNumber" title="Reference Number">
+                <metainfo xmi:id="__47hIONWEd6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+                <metainfo xmi:id="__48IMONWEd6sL9QxK1vqZQ" key="required" value="True"/>
+              </attributes>
+            </classSet>
+            <classSet xmi:id="_06S1kNRREd6d24BtuZ-cgQ" documentation="" description="" name="Entity" title="Entity">
+              <metainfo xmi:id="_06S1kdRREd6d24BtuZ-cgQ" key="visual-component" value=""/>
+              <attributes xmi:id="_06S1ktRREd6d24BtuZ-cgQ" documentation="" description="" name="CompanyName" title="Company Name">
+                <metainfo xmi:id="_6h9ccONWEd6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+                <metainfo xmi:id="_6h9cceNWEd6sL9QxK1vqZQ" key="required" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06S1ldRREd6d24BtuZ-cgQ" documentation="" description="" name="CorporateName" title="Corporate Name">
+                <metainfo xmi:id="_6IPU4ONWEd6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+              </attributes>
+              <attributes xmi:id="_06S1l9RREd6d24BtuZ-cgQ" documentation="" description="" name="Siret" title="SIRET Number" typ="int">
+                <metainfo xmi:id="_7iKVMONWEd6sL9QxK1vqZQ" key="required" value="True"/>
+                <metainfo xmi:id="_7iK8QONWEd6sL9QxK1vqZQ" key="propertySearched" value="True"/>
+              </attributes>
+            </classSet>
+            <classSet xmi:id="_pJnNYeDhEd6LINoz-y_wfg" documentation="" description="" name="SDACR" title="Risk Analysis and Coverage Management" generalizations="_06OkG9RREd6d24BtuZ-cgQ">
+              <attributes xmi:id="_7yU08ODhEd6LINoz-y_wfg" documentation="" description="" name="SignatureDate" title="Signature Date" typ="Date"/>
+              <attributes xmi:id="_tXQLIeDkEd69Cd3WIdkURA" documentation="" description="" name="ValidityPeriod" title="Validity Period"/>
+            </classSet>
+            <associationSet xmi:id="_06UqsNRREd6d24BtuZ-cgQ" description="" name="response" title="in reply to">
+              <firstEnd xmi:id="_06VRwNRREd6d24BtuZ-cgQ" name="response" title="" navigable="true" linkedClass="_06PLINRREd6d24BtuZ-cgQ"/>
+              <secondEnd xmi:id="_06VRwdRREd6d24BtuZ-cgQ" name="following" title="" navigable="true" linkedClass="_06EMANRREd6d24BtuZ-cgQ"/>
+            </associationSet>
+            <associationSet xmi:id="_06V40NRREd6d24BtuZ-cgQ" description="" name="concerns" title="concerns">
+              <firstEnd xmi:id="_06V40dRREd6d24BtuZ-cgQ" name="from" title="" cardMax="-1" navigable="true" linkedClass="_06S1gdRREd6d24BtuZ-cgQ"/>
+              <secondEnd xmi:id="_06V40tRREd6d24BtuZ-cgQ" name="for" title="" cardMin="1" navigable="true" linkedClass="_06S1hdRREd6d24BtuZ-cgQ"/>
+            </associationSet>
+            <associationSet xmi:id="_06V409RREd6d24BtuZ-cgQ" description="" name="fromEntity" title="from the entity">
+              <firstEnd xmi:id="_06V41NRREd6d24BtuZ-cgQ" name="for" title="" cardMax="-1" linkedClass="_06EMANRREd6d24BtuZ-cgQ"/>
+              <secondEnd xmi:id="_06V41dRREd6d24BtuZ-cgQ" name="from" title="" navigable="true" linkedClass="_06S1kNRREd6d24BtuZ-cgQ"/>
+            </associationSet>
+            <associationSet xmi:id="_06V41tRREd6d24BtuZ-cgQ" description="" name="toEntity" title="towards the entity">
+              <firstEnd xmi:id="_06V419RREd6d24BtuZ-cgQ" name="" title="" cardMax="-1" linkedClass="_06PLINRREd6d24BtuZ-cgQ"/>
+              <secondEnd xmi:id="_06V42NRREd6d24BtuZ-cgQ" name="from" title="" navigable="true" linkedClass="_06S1kNRREd6d24BtuZ-cgQ"/>
+            </associationSet>
+            <associationSet xmi:id="_qtbwkODhEd6LINoz-y_wfg" documentation="" description="" name="is composed of" title="Is composed of">
+              <firstEnd xmi:id="_qtbwkeDhEd6LINoz-y_wfg" name="" title="" linkedClass="_pJnNYeDhEd6LINoz-y_wfg"/>
+              <secondEnd xmi:id="_qtbwkuDhEd6LINoz-y_wfg" name="" title="" cardMax="-1" navigable="true" linkedClass="_06OkG9RREd6d24BtuZ-cgQ"/>
+            </associationSet>
+            <enumerationSet xmi:id="_06Wf4dRREd6d24BtuZ-cgQ" name="Service">
+              <literals xmi:id="_06XG8NRREd6d24BtuZ-cgQ" name="Administrative direction"/>
+              <literals xmi:id="_06XuANRREd6d24BtuZ-cgQ" name="Logistic"/>
+              <literals xmi:id="_06XuAdRREd6d24BtuZ-cgQ" name="Assets"/>
+              <literals xmi:id="_06XuAtRREd6d24BtuZ-cgQ" name="Human Resources"/>
+              <literals xmi:id="_06XuA9RREd6d24BtuZ-cgQ" name="Finance"/>
+              <literals xmi:id="_06XuBNRREd6d24BtuZ-cgQ" name="Prevention"/>
+              <literals xmi:id="_06XuBdRREd6d24BtuZ-cgQ" name="Rescue"/>
+              <literals xmi:id="_06XuBtRREd6d24BtuZ-cgQ" name="Prediction"/>
+              <literals xmi:id="_06XuB9RREd6d24BtuZ-cgQ" name="GIS"/>
+              <literals xmi:id="_06XuCNRREd6d24BtuZ-cgQ" name="IT"/>
+              <literals xmi:id="_06XuCdRREd6d24BtuZ-cgQ" name="Transmission"/>
+              <literals xmi:id="_06XuCtRREd6d24BtuZ-cgQ" name="Communication"/>
+              <literals xmi:id="_06XuC9RREd6d24BtuZ-cgQ" name="Health and Medical Rescue"/>
+            </enumerationSet>
+            <enumerationSet xmi:id="_06XuDNRREd6d24BtuZ-cgQ" name="Attribution">
+              <literals xmi:id="_06XuDdRREd6d24BtuZ-cgQ" name="Attribution1"/>
+              <literals xmi:id="_06XuDtRREd6d24BtuZ-cgQ" name="Attribution2"/>
+            </enumerationSet>
+            <enumerationSet xmi:id="_06YVENRREd6d24BtuZ-cgQ" name="LiftingApparatus">
+              <literals xmi:id="_06YVEdRREd6d24BtuZ-cgQ" name="Lifting trolley"/>
+              <literals xmi:id="_06YVEtRREd6d24BtuZ-cgQ" name="Telescopic trolley"/>
+              <literals xmi:id="_06YVE9RREd6d24BtuZ-cgQ" name="Jack"/>
+              <literals xmi:id="_06YVFNRREd6d24BtuZ-cgQ" name="Crane"/>
+              <literals xmi:id="_06YVFdRREd6d24BtuZ-cgQ" name="Basket"/>
+              <literals xmi:id="_06YVFtRREd6d24BtuZ-cgQ" name="Hoist"/>
+              <literals xmi:id="_06YVF9RREd6d24BtuZ-cgQ" name="Palett truck"/>
+              <literals xmi:id="_06YVGNRREd6d24BtuZ-cgQ" name="Winch"/>
+            </enumerationSet>
+          </packageSet>
+        </packageSet>
+      </packageSet>
+    </packageSet>
+  </packageSet>
+</clazz:Model>

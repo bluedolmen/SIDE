@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form:ClassFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_s29bwdRSEd6mvv4ISlOk-Q" description="">
+  <forms xsi:type="form:FormClass" xmi:id="_s3BGINRSEd6mvv4ISlOk-Q" label="Document" id="commonForm">
+    <children xsi:type="form:CharField" xmi:id="_s3C7UNRSEd6mvv4ISlOk-Q" label="Document title" id="Title" help_text="">
+      <ref href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="form:CharField" xmi:id="_s3C7UtRSEd6mvv4ISlOk-Q" label="Document number" id="Number" help_text="">
+      <ref href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="form:TextField" xmi:id="_s3DiYNRSEd6mvv4ISlOk-Q" label="Observation" id="Observation" help_text="">
+      <ref href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="form:FormGroup" xmi:id="_tgwRQNWzEd6FW7J925m8sQ" label="Digitization Information" id="DigitInfo">
+      <children xsi:type="form:CharField" xmi:id="_tgwRQtWzEd6FW7J925m8sQ" label="Author" id="Author" help_text="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="form:DateTimeField" xmi:id="_0phVoNgiEd6odP3CvGCK4A" label="Digitization Date" id="DigitizationDate" help_text="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+      </children>
+    </children>
+    <disabled xsi:type="form:DateTimeField" xmi:id="_ps3I4NWzEd6FW7J925m8sQ" label="Date de numérisation" id="DateNumerisation" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:CharField" xmi:id="_ps3v8NWzEd6FW7J925m8sQ" label="Auteur" id="Auteur" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:DateTimeField" xmi:id="_xrgTENW2Ed6FW7J925m8sQ" label="Date de numérisation" id="DateNumerisation" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:DateField" xmi:id="_02OU4NgiEd6odP3CvGCK4A" label="Date de numérisation" id="DateNumerisation" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <real_class href="../Data/DigitizationProcess.dt#_06OkG9RREd6d24BtuZ-cgQ"/>
+  </forms>
+  <forms xsi:type="form:FormClass" xmi:id="_e4enQNUZEd6MucaiNEHzdA" label="Outgoing Mail" id="OutgoingMail">
+    <children xsi:type="form:FormGroup" xmi:id="_CTeq0NUbEd6tA9o9YyVHIw" label="Common Information" id="OutgoingMail_CommonInformation">
+      <children xsi:type="form:CharField" xmi:id="_CTfR4tUbEd6tA9o9YyVHIw" label="Document title" id="Title" help_text="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="form:CharField" xmi:id="_CTfR49UbEd6tA9o9YyVHIw" label="Document Number" id="Number" help_text="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="form:TextField" xmi:id="_kNqRUNUbEd6tA9o9YyVHIw" label="Observation" id="Observation" help_text="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+    </children>
+    <children xsi:type="form:FormGroup" xmi:id="_DczDUNUbEd6tA9o9YyVHIw" label="Specific Information" id="OutgoingMail_SpecificInformation">
+      <children xsi:type="form:DateField" xmi:id="_DczDUtUbEd6tA9o9YyVHIw" label="Outgoing Date" id="OutgoingDate" help_text="">
+        <ref href="../Data/DigitizationProcess.dt#_06PLItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="form:ModelChoiceField" xmi:id="_DczDU9UbEd6tA9o9YyVHIw" label="To Entity" id="toEntity" initial="" min_bound="1" max_bound="1" show_actions="false" format_pattern="RaisonSociale">
+        <ref href="../Data/DigitizationProcess.dt#_06V41tRREd6d24BtuZ-cgQ"/>
+        <real_class href="../Data/DigitizationProcess.dt#_06S1kNRREd6d24BtuZ-cgQ"/>
+      </children>
+    </children>
+    <children xsi:type="form:FormGroup" xmi:id="_txsQQNWzEd6FW7J925m8sQ" label="Digitization Information" id="OutgoingMail_DigitizationInformation">
+      <children xsi:type="form:CharField" xmi:id="_txsQQtWzEd6FW7J925m8sQ" label="Author" id="Author" help_text="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="form:DateTimeField" xmi:id="_1NdwMNgiEd6odP3CvGCK4A" label="Digitization Date" id="DigitizationDate" help_text="" initial="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+      </children>
+    </children>
+    <disabled xsi:type="form:DateTimeField" xmi:id="_yTtikNW2Ed6FW7J925m8sQ" label="Date de numérisation" id="DateNumerisation" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:DateField" xmi:id="_1Z6QwNgiEd6odP3CvGCK4A" label="Date de numérisation" id="DateNumerisation" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:ModelChoiceField" xmi:id="_A4Z1YOM8Ed6qNvjsNi40SA" label="en réponse à" id="reponsesuiteA" max_bound="1" show_actions="false">
+      <ref href="../Data/DigitizationProcess.dt#_06UqsNRREd6d24BtuZ-cgQ"/>
+      <real_class href="../Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
+    </disabled>
+    <real_class href="../Data/DigitizationProcess.dt#_06PLINRREd6d24BtuZ-cgQ"/>
+  </forms>
+  <forms xsi:type="form:FormClass" xmi:id="_WtcNkNUbEd6tA9o9YyVHIw" label="Vehicle" id="Vehicle">
+    <children xsi:type="form:FormGroup" xmi:id="_cSZq8NUbEd6tA9o9YyVHIw" label="Informations communes" id="Vehicule_commonInformation">
+      <children xsi:type="form:CharField" xmi:id="_cSZq89UbEd6tA9o9YyVHIw" label="Document title" id="Title" help_text="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="form:CharField" xmi:id="_cSZq9NUbEd6tA9o9YyVHIw" label="Document Number" id="Number" help_text="" initial="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="form:TextField" xmi:id="_kwl_QNUbEd6tA9o9YyVHIw" label="Observation" id="Observation" help_text="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+    </children>
+    <children xsi:type="form:FormGroup" xmi:id="_c5ZZgNUbEd6tA9o9YyVHIw" label="Informations spécifiques" id="Vehicule_specificInformation">
+      <children xsi:type="form:DateField" xmi:id="_c5ZZgdUbEd6tA9o9YyVHIw" label="Next Control Visit" id="NextControl" help_text="">
+        <ref href="../Data/DigitizationProcess.dt#_06PLLdRREd6d24BtuZ-cgQ"/>
+      </children>
+    </children>
+    <children xsi:type="form:FormGroup" xmi:id="_uCP0wNWzEd6FW7J925m8sQ" label="Informations de numérisation" id="InfoNum">
+      <children xsi:type="form:CharField" xmi:id="_uCP0wtWzEd6FW7J925m8sQ" label="Author" id="Author" help_text="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="form:DateTimeField" xmi:id="_1t48sNgiEd6odP3CvGCK4A" label="Digitization Date" id="DigitizationDate" help_text="" initial="" disabled="true">
+        <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+      </children>
+    </children>
+    <disabled xsi:type="form:DateTimeField" xmi:id="_zGYVoNW2Ed6FW7J925m8sQ" label="Date de numérisation" id="DateNumerisation" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:DateField" xmi:id="_13RiMNgiEd6odP3CvGCK4A" label="Date de numérisation" id="DateNumerisation" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <real_class href="../Data/DigitizationProcess.dt#_06PLKNRREd6d24BtuZ-cgQ"/>
+  </forms>
+  <forms xsi:type="form:FormClass" xmi:id="_BlhUMNXBEd6FW7J925m8sQ" label="Document (Light)" id="commonFormLight">
+    <children xsi:type="form:CharField" xmi:id="_BlhUMdXBEd6FW7J925m8sQ" label="Document Title" id="Title" help_text="">
+      <ref href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="form:CharField" xmi:id="_BlhUMtXBEd6FW7J925m8sQ" label="Document Number" id="Number" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="form:TextField" xmi:id="_BlhUM9XBEd6FW7J925m8sQ" label="Observation" id="Observation" help_text="">
+      <ref href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <disabled xsi:type="form:DateTimeField" xmi:id="_BlhUN9XBEd6FW7J925m8sQ" label="Date de numérisation" id="DateNumerisation" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:CharField" xmi:id="_BlhUONXBEd6FW7J925m8sQ" label="Auteur" id="Auteur" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:DateTimeField" xmi:id="_BlhUOdXBEd6FW7J925m8sQ" label="Date de numérisation" id="DateNumerisation" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:CharField" xmi:id="_EYNeQNXBEd6FW7J925m8sQ" label="Auteur" id="Auteur" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:DateField" xmi:id="_EYNeQdXBEd6FW7J925m8sQ" label="Date de numérisation" id="DateNumerisation" help_text="" disabled="true">
+      <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <real_class href="../Data/DigitizationProcess.dt#_06OkG9RREd6d24BtuZ-cgQ"/>
+  </forms>
+</form:ClassFormCollection>

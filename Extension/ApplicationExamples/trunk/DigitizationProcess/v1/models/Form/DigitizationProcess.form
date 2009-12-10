@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ASCII"?>
+<form:WorkflowFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_HoSW4dUcEd6dMKXYFUnZ5g">
+  <forms xsi:type="form:FormWorkflow" xmi:id="_HoTlANUcEd6dMKXYFUnZ5g" label="Start" id="DigitizationProcess_Start">
+    <ref href="../Workflow/DigitizationProcess.workflow#_30OakNRSEd6mvv4ISlOk-Q"/>
+    <children xsi:type="form:ActionField" xmi:id="_HoTlAdUcEd6dMKXYFUnZ5g" label="Assign the Document type" id="DocumentType" initial="">
+      <ref href="../Workflow/DigitizationProcess.workflow#_30PBoNRSEd6mvv4ISlOk-Q"/>
+    </children>
+    <DataForm href="DigitalizationProcess.data.form#_BlhUMNXBEd6FW7J925m8sQ"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_HoTlAtUcEd6dMKXYFUnZ5g" label="CheckDocumentType" id="DigitizationProcess_CheckDocumentType">
+    <ref href="../Workflow/DigitizationProcess.workflow#_30SsANRSEd6mvv4ISlOk-Q"/>
+    <children xsi:type="form:CharField" xmi:id="_HoTlA9UcEd6dMKXYFUnZ5g" label="Document content type" id="DocumentType">
+      <ref href="../Workflow/DigitizationProcess.workflow#_30TTENRSEd6mvv4ISlOk-Q"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_HoTlBNUcEd6dMKXYFUnZ5g" label="Assign to qualified person for updating" id="checkDocumentType">
+      <ref href="../Workflow/DigitizationProcess.workflow#_30SsCNRSEd6mvv4ISlOk-Q"/>
+    </children>
+    <DataForm href="DigitalizationProcess.data.form#_s3BGINRSEd6mvv4ISlOk-Q"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_HoTlBdUcEd6dMKXYFUnZ5g" label="ProcessMail" id="DigitizationProcess_ProcessMail">
+    <ref href="../Workflow/DigitizationProcess.workflow#_30TTEdRSEd6mvv4ISlOk-Q"/>
+    <children xsi:type="form:TextField" xmi:id="_u9k58NXGEd6FW7J925m8sQ" label="Manager comment" id="Comment" disabled="true">
+      <ref href="../Workflow/DigitizationProcess.workflow#_30TTH9RSEd6mvv4ISlOk-Q"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_HoTlBtUcEd6dMKXYFUnZ5g" label="Request the approval on update" id="RequestApproval">
+      <ref href="../Workflow/DigitizationProcess.workflow#_30TTEtRSEd6mvv4ISlOk-Q"/>
+    </children>
+    <DataForm href="DigitalizationProcess.data.form#_e4enQNUZEd6MucaiNEHzdA"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_HoTlB9UcEd6dMKXYFUnZ5g" label="ProcessVehicle" id="DigitizationProcess_ProcessVehicle">
+    <ref href="../Workflow/DigitizationProcess.workflow#_30TTE9RSEd6mvv4ISlOk-Q"/>
+    <children xsi:type="form:ActionField" xmi:id="_HoUzINUcEd6dMKXYFUnZ5g" label="Integrate the document in ECM" id="integrateDocument">
+      <ref href="../Workflow/DigitizationProcess.workflow#_30TTFNRSEd6mvv4ISlOk-Q"/>
+    </children>
+    <DataForm href="DigitalizationProcess.data.form#_WtcNkNUbEd6tA9o9YyVHIw"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_HoUzJNUcEd6dMKXYFUnZ5g" label="Approuver" id="DigitizationProcess_Approuver">
+    <ref href="../Workflow/DigitizationProcess.workflow#_30TTHdRSEd6mvv4ISlOk-Q"/>
+    <children xsi:type="form:TextField" xmi:id="_vndkcNXGEd6FW7J925m8sQ" label="Manager Comment" id="Comment">
+      <ref href="../Workflow/DigitizationProcess.workflow#_30TTH9RSEd6mvv4ISlOk-Q"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_HoUzJ9UcEd6dMKXYFUnZ5g" label="Integrate the document in ECM" id="integrateDocument">
+      <ref href="../Workflow/DigitizationProcess.workflow#_30TTHtRSEd6mvv4ISlOk-Q"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_08PQwNXGEd6FW7J925m8sQ" label="Complete the document meta-data" id="CorrectionRequest">
+      <ref href="../Workflow/DigitizationProcess.workflow#_wXK6MNWyEd6Ay6xwhgeFBA"/>
+    </children>
+    <DataForm href="DigitalizationProcess.data.form#_e4enQNUZEd6MucaiNEHzdA"/>
+  </forms>
+  <linked_process href="../Workflow/DigitizationProcess.workflow#_30L-UNRSEd6mvv4ISlOk-Q"/>
+</form:WorkflowFormCollection>
