@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.bluexml.side.Requirements.edit;singleton:=true
-Bundle-Version: 1.0.24.v11919-20091205
+Bundle-Version: 1.0.25.v12083-20091210
 Bundle-ClassPath: .
 Bundle-Activator: com.bluexml.side.requirements.provider.RequirementsEditPlugin$Implementation
 Bundle-Vendor: %providerName
