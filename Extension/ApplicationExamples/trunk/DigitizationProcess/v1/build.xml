@@ -1,27 +1,52 @@
 <?xml version="1.0" ?>
 <project default="main">
+	<property file="build.properties"/>
 
-	<property name="project.name"    value="digitizationProcess" />
-	<property name="models.name"    value="models" />
-	<property name="models.dir"    value="${models.name}" />
-	<property name="application.name"    value="application" />
-	<property name="application.dir"    value="${application.name}" />
-	<property name="distrib.name"    value="distrib" />
-	<property name="distrib.dir"    value="${application.dir}/${distrib.name}" />
-
-	<target name="main" depends="distrib" description="Main target">
-		<echo>
-            Building the 3 distribution files.
-        </echo>
+	<target name="main" depends="distrib_model,distrib_comp,distrib_war" description="Main target to generate 3 distribution files: models, application wars, components webapps extension">
+		<echo>Building the 3 distribution files.</echo>
 	</target>
 
 
-    <!-- Creates the distribution -->
-     <target name="distrib" description="Generates 3 distribution files: models, application wars, application webapps extension">
-        <copy file="README.txt" todir="${distrib.dir}"/>
-        <zip zipfile="${distrib.dir}/${project.name}_models.zip" compress="true">
-            <zipfileset dir="models" prefix="models"/>
+    <!-- Creates the models distribution -->
+     <target name="distrib_model" description="generate the distribution file project_models.zip containing SIDE models application">
+        <delete file="${distrib.dir}/${project.name}_${distrib.suffix.model}.zip"/>
+        <zip zipfile="${distrib.dir}/${project.name}_${distrib.suffix.model}.zip" compress="true">
+            <zipfileset dir="${model.dir}" prefix="${model.dir}"/>
             <zipfileset dir="." includes="README.txt"/>
          </zip>
      </target>
-</project>
+
+    <!-- Creates the component webapps extension distribution -->
+     <target name="distrib_comp" description="generate the distribution file project_application_comp.zip containing the generated components of the webapp">
+        <delete file="${distrib.dir}/${project.name}_${distrib.suffix.application.component}.zip"/>
+        <zip zipfile="${distrib.dir}/${project.name}_${distrib.suffix.application.component}.zip" compress="true">
+            <zipfileset dir="${generation.out.dir}/${alfresco}" includes="*.amp" prefix="${alfresco}/${distrib.suffix.amp}"/>
+            <zipfileset dir="${generation.out.dir}/${alfresco}" includes="*.zip" prefix="${alfresco}/${distrib.suffix.zip}"/>
+            <zipfileset dir="${generation.out.dir}/${chiba}" includes="*.zip" prefix="${chiba}/${distrib.suffix.zip}"/>
+            <zipfileset dir="${generation.logs.dir}/${project.name}" includes="${side-report}"/>
+            <zipfileset dir="." includes="README.txt"/>
+         </zip>
+     </target>
+
+	 <!-- Creates the component webapps extension distribution -->
+	 <target name="distrib_war" description="generate the distribution file project_application_war.zip containing the webapp war">
+        <delete file="${generation.out.dir}/${alfresco.war}"/>
+	 	<zip zipfile="${generation.out.dir}/${alfresco.war}" compress="true">
+           <zipfileset dir="${tomcat.webapp.dir}/${alfresco.webapp}" prefix=""/>
+        </zip>
+        <delete file="${generation.out.dir}/${share.war}"/>
+	 	<zip zipfile="${generation.out.dir}/${share.war}" compress="true">
+           <zipfileset dir="${tomcat.webapp.dir}/${share.webapp}" prefix=""/>
+        </zip>
+        <delete file="${generation.out.dir}/${chiba.war}"/>
+	 	<zip zipfile="${generation.out.dir}/${chiba.war}" compress="true">
+           <zipfileset dir="${tomcat.webapp.dir}/${chiba.webapp}" prefix=""/>
+        </zip>
+        <delete file="${distrib.dir}/${project.name}_${distrib.suffix.application.war}.zip"/>
+	 	<zip zipfile="${distrib.dir}/${project.name}_${distrib.suffix.application.war}.zip" compress="true">
+           <zipfileset dir="${generation.out.dir}" includes="*.war" prefix=""/>
+           <zipfileset dir="." includes="README.txt"/>
+        </zip>
+	 </target>
+
+ </project>
