@@ -150,6 +150,10 @@ public enum MsgId {
 	INT_NAMESPACE_XHTML					("http://www.w3.org/1999/xhtml"),
 	INT_NAMESPACE_XFORMS				("http://www.w3.org/2002/xforms"),
 	INT_MSGPOOL_NO_MESSAGE_FILE			("INVALID MESSAGE FILE!"),
+	INT_READ_ONLY_FORMS_SUFFIX			("RO"),
+	INT_TYPE_XSD_DATE 					("date"),
+	INT_TYPE_XSD_DATETIME 				("dateTime"),
+	INT_TYPE_XSD_TIME 					("time"),
 	INT_WEBSCRIPT_AUTHENTICATE			("auth"),
 	INT_WEBSCRIPT_BATCH					("batch"),
 	INT_WEBSCRIPT_DELETE				("delete"),
@@ -221,6 +225,9 @@ public enum MsgId {
 	/** whether to reload the mapping.xml file*/
 	PARAM_RELOAD_MAPPING_FILE("dynamicReload"),
 	PARAM_SHOW_SUBMITS("showSubmitButtons"),
+	PARAM_SHOW_CANCEL("showCancel"),
+	PARAM_SHOW_DELETE("showDelete"),
+	PARAM_SHOW_VALIDATE("showSubmit"),	
 	/** whether to avoid contacting the webscript on Alfresco*/
 	PARAM_STANDALONE("standalone"),
 	/** originally for passing the status msg to client URL, now also considered as an input*/
