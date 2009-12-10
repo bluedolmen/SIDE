@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.ModelChoiceWidgetType;
@@ -53,15 +54,18 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 		properties.setInline(false);
 
 		if (formElement.getTarget().size() > 0) {
+			// we need to get the real object, in case the target form is from another file.
+			FormContainer targetedForm = (FormContainer) getFormGenerator().getRealObject(
+					formElement.getTarget().get(0));
 			if (formElement.getWidget() == ModelChoiceWidgetType.INLINE) {
 				properties.setInline(true);
 				RenderableFormContainer renderableForm = generationManager
-						.getRenderableForm(formElement.getTarget().get(0));
+						.getRenderableForm(targetedForm);
 				properties.setDestinationRenderable(renderableForm);
 			}
 
 			properties.setCreateEditFormType(FormTypeEnum.FORM);
-			properties.setCreateEditFormName(formElement.getTarget().get(0).getId());
+			properties.setCreateEditFormName(targetedForm.getId());
 		} else {
 			properties.setCreateEditFormType(FormTypeEnum.CLASS);
 			properties.setCreateEditFormName(null);

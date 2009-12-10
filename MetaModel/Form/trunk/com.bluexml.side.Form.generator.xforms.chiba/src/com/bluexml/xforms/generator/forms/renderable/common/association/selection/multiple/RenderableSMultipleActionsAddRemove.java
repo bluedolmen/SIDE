@@ -144,7 +144,7 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 	 */
 	private Element getTriggerAdd(ModelElementBindSimple bindActions, String path, String rootPath) {
 
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage("resources/images/right.gif");
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_RIGHT);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);

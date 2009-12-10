@@ -61,8 +61,12 @@ public class RenderableIUnique extends AbstractRenderable {
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
 		Rendered rendered = null;
 		if (ownGroup) {
-			rendered = new RenderedGroup(ModelTools.getTitle(bean.getDestinationClass()),
-					ModelTools.getCompleteNameJAXB(bean.getDestinationClass()));
+			String groupTitle = ModelTools.getTitle(bean.getDestinationClass());
+			if (bean.getTitle() != null) { // #1279
+				groupTitle = bean.getTitle();
+			}
+			rendered = new RenderedGroup(groupTitle, ModelTools.getCompleteNameJAXB(bean
+					.getDestinationClass()));
 			if (returnToLine) {
 				rendered.setReturnToLine(true);
 			}

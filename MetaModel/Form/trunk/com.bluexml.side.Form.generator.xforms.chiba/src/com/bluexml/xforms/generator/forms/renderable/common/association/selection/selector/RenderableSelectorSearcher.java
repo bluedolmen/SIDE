@@ -9,6 +9,8 @@ import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 
 /**
  * The Class RenderableSelectorSearcher.
@@ -51,6 +53,10 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 		RenderedInput rendered = new RenderedInput();
 
 		Element input = XFormsGenerator.createElement("input", XFormsGenerator.NAMESPACE_XFORMS);
+		
+		Element label = XFormsGenerator.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
+		label.setText(MsgPool.getMsg(MsgId.MSG_SELECT_LIST_SEARCH_LABEL));
+		input.addContent(label);
 		input.setAttribute("id", XFormsGenerator.getId("searchInput"));
 		input.setAttribute("incremental", "true");
 		input.setAttribute("ref", getInstancePath() + "query/query");
@@ -67,7 +73,11 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 		action.addContent(send);
 		input.addContent(action);
 
-		rendered.setXformsElement(input);
+		Element div = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+		div.setAttribute("class", MsgId.INT_CSS_SELECT_SEARCH_INPUT.getText());
+		div.addContent(input);
+		
+		rendered.setXformsElement(div);
 		return rendered;
 	}
 

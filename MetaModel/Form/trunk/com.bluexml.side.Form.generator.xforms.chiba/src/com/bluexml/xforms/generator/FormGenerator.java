@@ -249,13 +249,13 @@ public class FormGenerator {
 	 */
 	public String getAssoQualifiedName(Association asso) {
 		StringBuffer res = new StringBuffer(128);
-		//** #979, #1273
+		// ** #979, #1273
 		AssociationEnd srcEnd = (AssociationEnd) getRealObject(asso.getFirstEnd());
 		AssociationEnd targetEnd = (AssociationEnd) getRealObject(srcEnd.getOpposite());
 		// @Amenel: not sure whether linked classes may be proxies but getRealObject won't hurt
 		AbstractClass srcClass = (AbstractClass) getRealObject(srcEnd.getLinkedClass());
 		AbstractClass targetClass = (AbstractClass) getRealObject(targetEnd.getLinkedClass());
-		//** #979, #1273
+		// ** #979, #1273
 		// definition in Acceleo template used for writing this function
 		// <%args(0).linkedClass.getQualifiedName()%>_<%name%><%if
 		// (args(0).getOpposite().name !=
@@ -553,7 +553,7 @@ public class FormGenerator {
 	private void processAssociation(Association association) {
 		logger.info("Processing Association " + ModelTools.getCompleteName(association));
 
-		//** #979, #1273
+		// ** #979, #1273
 		AssociationEnd fEnd = (AssociationEnd) getRealObject(association.getFirstEnd());
 		Clazz fEndLinkedClass = null;
 		if (fEnd.getLinkedClass() != null) {
@@ -564,7 +564,7 @@ public class FormGenerator {
 		if (sEnd.getLinkedClass() != null) {
 			sEndLinkedClass = (Clazz) getRealObject(sEnd.getLinkedClass());
 		}
-		//** #979, #1273
+		// ** #979, #1273
 		if ((fEndLinkedClass != null) && (sEndLinkedClass != null)) {
 			boolean doublenav = sEnd.isNavigable() && fEnd.isNavigable();
 			AssociationCardinality associationType = getAssociationType(association);
@@ -811,12 +811,12 @@ public class FormGenerator {
 		AssociationInfo result = null;
 		String sourceName = ModelTools.getCompleteName(source);
 		for (Association association : allAssociations) {
-			//** #979, #1273
+			// ** #979, #1273
 			AssociationEnd firstEnd = (AssociationEnd) getRealObject(association.getFirstEnd());
 			AssociationEnd secondEnd = (AssociationEnd) getRealObject(association.getSecondEnd());
 			AbstractClass firstEndClass = (AbstractClass) getRealObject(firstEnd.getLinkedClass());
 			AbstractClass secondEndClass = (AbstractClass) getRealObject(secondEnd.getLinkedClass());
-			//** #979, #1273
+			// ** #979, #1273
 			if (firstEndClass != null && secondEndClass != null) {
 				Clazz assoSource = null;
 				if (firstEndClass instanceof Clazz) {
@@ -938,13 +938,19 @@ public class FormGenerator {
 					if (classe instanceof Clazz) {
 						Clazz clazz = (Clazz) classe;
 						EList<Aspect> aspects = clazz.getAspects();
+						// #1257: search the attribute in the appropriate aspect
+						AbstractClass refAspect = (AbstractClass) modelElement.eContainer();
+						String refAspectName = getClassQualifiedName(refAspect);
 						for (Aspect aspect : aspects) {
-							attributes = aspect.getAttributes();
-							for (Attribute attribute : attributes) {
-								if (elementEquals(attribute, modelElement)) {
-									result = getClassQualifiedName(aspect) + "_"
-											+ attribute.getName();
-									return result; // $$
+							String aspectName = getClassQualifiedName(aspect);
+							if (refAspectName.equals(aspectName)) {
+								attributes = aspect.getAttributes();
+								for (Attribute attribute : attributes) {
+									if (elementEquals(attribute, modelElement)) {
+										result = getClassQualifiedName(aspect) + "_"
+												+ attribute.getName();
+										return result; // $$
+									}
 								}
 							}
 						}
@@ -979,6 +985,7 @@ public class FormGenerator {
 	public boolean isRenderDataBeforeWorkflow() {
 		return renderDataBeforeWorkflow;
 	}
+
 	/**
 	 * @return the inReadOnlyMode
 	 */

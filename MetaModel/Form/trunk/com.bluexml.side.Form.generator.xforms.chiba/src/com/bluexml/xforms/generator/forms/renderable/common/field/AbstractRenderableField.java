@@ -66,13 +66,18 @@ public abstract class AbstractRenderableField extends Renderable {
 
 		ModelElementBindSimple meb = null;
 		String xsdType = getXsdType();
-		if (xsdType.equals("dateTime")) {
-			meb = new ModelElementBindSimple(path + "/date");
-			meb.setType(new QName("date"));
-			ModelElementBindSimple mebTime = new ModelElementBindSimple(path + "/time");
-			mebTime.setType(new QName("time"));
-			meb.setAnotherMeb(mebTime);
-			rendered.addModelElement(mebTime);
+		if (xsdType.equals(MsgId.INT_TYPE_XSD_DATETIME.getText())) {
+			if (isReadOnly()) {
+				meb = new ModelElementBindSimple(path);
+				meb.setType(new QName("string"));
+			} else {
+				meb = new ModelElementBindSimple(path + "/date");
+				meb.setType(new QName(MsgId.INT_TYPE_XSD_DATE.getText()));
+				ModelElementBindSimple mebTime = new ModelElementBindSimple(path + "/time");
+				mebTime.setType(new QName(MsgId.INT_TYPE_XSD_TIME.getText()));
+				meb.setAnotherMeb(mebTime);
+				rendered.addModelElement(mebTime);
+			}
 		} else {
 			meb = new ModelElementBindSimple(path);
 			meb.setType(new QName(xsdType));
@@ -86,6 +91,11 @@ public abstract class AbstractRenderableField extends Renderable {
 		element = getCustomElement(rendered, meb, slabel, parents, renderedParents);
 		if (isReadOnly()) {
 			meb.setReadOnly(true);
+			if (StringUtils.equals(getXsdType(), MsgId.INT_TYPE_XSD_DATE.getText())
+					|| StringUtils.equals(getXsdType(), MsgId.INT_TYPE_XSD_TIME.getText())
+					|| StringUtils.equals(getXsdType(), MsgId.INT_TYPE_XSD_DATETIME.getText())) {
+				element = getReadOnlyElement(meb, slabel, false); // #1248
+			}
 		}
 		rendered.setXformsElement(element);
 		applyStyle(rendered);
@@ -345,6 +355,10 @@ public abstract class AbstractRenderableField extends Renderable {
 		Element element;
 		element = XFormsGenerator.createElement("textarea", XFormsGenerator.NAMESPACE_XFORMS);
 		if (isRichTextEditor) {
+			if (isReadOnly()) {
+				element = getReadOnlyElement(meb, slabel, true); // #1265
+				return element;
+			}
 			element.setAttribute("mediatype", "text/html");
 		}
 		element.setAttribute("id", getAttributeId());
@@ -547,31 +561,35 @@ public abstract class AbstractRenderableField extends Renderable {
 	 * 
 	 * @return the read only element
 	 */
-	protected Element getReadOnlyElement(ModelElementBindSimple meb, String slabel) {
+	protected Element getReadOnlyElement(ModelElementBindSimple meb, String slabel, boolean isTextArea) {
 		Element element;
 		element = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		element.setAttribute("id", attributeId + "_container");
+		element.setAttribute("class", "xformstdclear"); // #1248
 
 		if (meb.getAnotherMeb() != null) {
 			List<ModelElementBindSimple> binds = new ArrayList<ModelElementBindSimple>();
 			binds.add(meb);
 			binds.add(meb.getAnotherMeb());
 			for (ModelElementBindSimple modelElementBindSimple : binds) {
-				Element output = getReadOnlyOutput(modelElementBindSimple, slabel);
+				Element output = getReadOnlyOutput(modelElementBindSimple, slabel, isTextArea);
 				element.addContent(output);
 			}
 		} else {
-			Element output = getReadOnlyOutput(meb, slabel);
+			Element output = getReadOnlyOutput(meb, slabel, isTextArea);
 			element.addContent(output);
 		}
 
 		return element;
 	}
 
-	private Element getReadOnlyOutput(ModelElementBindSimple meb, String slabel) {
+	private Element getReadOnlyOutput(ModelElementBindSimple meb, String slabel, boolean isTextArea) {
 		Element output = null;
 		output = XFormsGenerator.createElement("output", XFormsGenerator.NAMESPACE_XFORMS);
 		output.setAttribute("id", XFormsGenerator.getId(attributeId));
+		if (isTextArea) {
+			output.setAttribute("mediatype", "text/html");
+		}
 		meb.addLinkedElement(output);
 		output.addContent(getLabelElement(slabel));
 		return output;
@@ -624,8 +642,8 @@ public abstract class AbstractRenderableField extends Renderable {
 	 */
 	private void setConstraint(ModelElementBindSimple bind, String regexp) {
 		if (regexp != null) {
-			// String escaped = StringEscapeUtils.escapeJavaScript(regexp);
-			bind.setConstraint("chibafn:match(.,'" + regexp + "','')");
+			// #1210: check constraint only for non-null text
+			bind.setConstraint("(.eq '' or (chibafn:match(.,'" + regexp + "','')))");
 		}
 	}
 
@@ -677,7 +695,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		}
 		if (constraint != null) {
 			meb.setLengthConstraint(constraint);
-//			setIncremental(true); // #1264
+			// setIncremental(true); // #1264
 		}
 	}
 

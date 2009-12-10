@@ -82,7 +82,17 @@ public class ModelElementBindSimple extends ModelElement {
 		bindElement.setAttribute("nodeset", nodeset);
 		bindElement.setAttribute("id", bindId);
 		if (type != null) {
-			bindElement.setAttribute("type", type.toString());
+			//** #1280
+			String typeStr = type.toString();
+			if ((typeStr.equalsIgnoreCase(MsgId.INT_TYPE_XSD_DATE.getText())
+					|| typeStr.equalsIgnoreCase(MsgId.INT_TYPE_XSD_DATETIME.getText()) || typeStr
+					.equalsIgnoreCase(MsgId.INT_TYPE_XSD_TIME.getText()))
+					&& isReadOnly()) {
+				typeStr = "string";
+				type = new QName("string"); // not much use in setting the type, just to be coherent
+			}
+			//** #1280
+			bindElement.setAttribute("type", typeStr);
 		}
 		if (isRequired()) {
 			bindElement.setAttribute("required", "true()");

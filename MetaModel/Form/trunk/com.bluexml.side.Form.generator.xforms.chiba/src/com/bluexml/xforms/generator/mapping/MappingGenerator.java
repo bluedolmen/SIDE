@@ -204,6 +204,14 @@ public class MappingGenerator extends AbstractDataGenerator {
 			isMultiple = (StringUtils.equalsIgnoreCase(result, "true"));
 		}
 		attributeType.setMultiple(isMultiple);
+
+		boolean isDisabled = false;
+		result = ModelTools.getMetaInfoValue(attribute, "read-only");
+		if (result != null) {
+			isMultiple = (StringUtils.equalsIgnoreCase(result, "true"));
+		}
+		attributeType.setReadOnly(isDisabled);
+		
 		attributeType.setDefault(attribute.getInitialValue());
 		attributeType.setFieldSize(ModelTools.getMetaInfoValue(attribute, "size"));
 
@@ -331,6 +339,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 
 			AssociationType associationType = new AssociationType();
 			associationType.setPackage(ModelTools.getPackage(association));
+			associationType.setCaption(title);
 			associationType.setName(name);
 			associationType.setType(copyClassType(getClassType(destination)));
 			associationType.setMultiple(type.getAssociationCardinality().isMultiple());
@@ -661,16 +670,22 @@ public class MappingGenerator extends AbstractDataGenerator {
 	 * 
 	 * @see com.bluexml.xforms.generator.DataGenerator#beginForm(com.bluexml.side .form.Form)
 	 */
-	public void beginForm(FormContainer formContainer) {
-		if (formContainer instanceof FormClass) {
-			FormType formType = newFormType(formContainer);
+	public void beginForm(FormContainer form) {
+		FormContainer realContainer = form;
 
-			FormClass formClass = (FormClass) formContainer;
+		if (form.eIsProxy()) { // #1225
+			realContainer = (FormContainer) formGenerator.getRealObject(form);
+		}
+
+		if (realContainer instanceof FormClass) {
+			FormType formType = newFormType(realContainer);
+
+			FormClass formClass = (FormClass) realContainer;
 			formType.setRealClass(copyClassType(getClassType(formClass.getReal_class())));
-			processFormElement(formType, formContainer, formContainer, formContainer);
+			processFormElement(formType, realContainer, realContainer, realContainer);
 			mapping.getCanister().add(objectFactory.createForm(formType));
-		} else if (formContainer instanceof FormWorkflow) {
-			FormWorkflow formWorkflow = ((FormWorkflow) formContainer);
+		} else if (realContainer instanceof FormWorkflow) {
+			FormWorkflow formWorkflow = ((FormWorkflow) realContainer);
 
 			WorkflowTaskType task = objectFactory.createWorkflowTaskType();
 			String formName = formWorkflow.getId();
@@ -702,7 +717,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 			task.setActorId(swimlane.getActorid());
 			task.setPooledActors(swimlane.getPooledactors());
 
-			processFormElement(task, formContainer, formContainer, formContainer);
+			processFormElement(task, realContainer, realContainer, realContainer);
 			mapping.getCanister().add(objectFactory.createTask(task));
 		}
 	}
@@ -839,6 +854,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 		// boolean attributes
 		formFieldType.setSearchEnum(false);
 		formFieldType.setMultiple(isMultiple);
+		formFieldType.setReadOnly(field.isDisabled());
 
 		if (field instanceof FileField) {
 			FileFieldType fileFieldType = initFileFieldFromFormField(formFieldType);
@@ -1000,9 +1016,14 @@ public class MappingGenerator extends AbstractDataGenerator {
 	 * 
 	 * @return the form type
 	 */
-	private FormType newFormType(FormContainer formContainer) {
+	private FormType newFormType(FormContainer form) {
+		FormContainer realContainer = form;
+		if (form.eIsProxy()) { // #1225
+			realContainer = (FormContainer) formGenerator.getRealObject(form);
+		}
+		
 		FormType childFormType = new FormType();
-		childFormType.setName(formContainer.getId());
+		childFormType.setName(realContainer.getId());
 		return childFormType;
 	}
 
@@ -1023,6 +1044,9 @@ public class MappingGenerator extends AbstractDataGenerator {
 			CSSCollector.add(style);
 			modelChoiceType.setAppearance(style);
 		}
+
+		modelChoiceType.setDisplayLabel(modelChoiceField.getLabel()); // #1212
+
 		if (modelChoiceField.getWidget() == ModelChoiceWidgetType.INLINE) {
 			modelChoiceType.setInline(true);
 		} else {

@@ -74,13 +74,13 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	public static final Namespace NAMESPACE_XHTML = Namespace.getNamespace("xhtml",
 			"http://www.w3.org/1999/xhtml");
 
-	public static final String IMG_RIGHT = "resources/images/go-next.png";
+	public static final String IMG_RIGHT = "resources/images/right.gif";
 
-	public static final String IMG_LEFT = "resources/images/go-previous.png";
+	public static final String IMG_LEFT = "resources/images/left.gif";
 
-	public static final String IMG_DOWN = "resources/images/go-down.png";
+	public static final String IMG_DOWN = "resources/images/down.gif";
 
-	public static final String IMG_UP = "resources/images/go-up.png";
+	public static final String IMG_UP = "resources/images/up.gif";
 
 	/** The sax builder. */
 	public static SAXBuilder saxBuilder;
@@ -109,8 +109,11 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	private Map<Clazz, RenderableClass> classes = new TreeMap<Clazz, RenderableClass>(
 			ClasseComparator.INSTANCE);
 
-	/** The forms. */
-	private Map<FormContainer, RenderableFormContainer> forms = new HashMap<FormContainer, RenderableFormContainer>();
+	/** The formsRenderables, with their renderable versions. */
+	private Map<String, RenderableFormContainer> formsRenderables = new HashMap<String, RenderableFormContainer>();
+
+	/** The formsRenderables, with their original version. */
+	private Map<String, FormContainer> formsModels = new HashMap<String, FormContainer>();
 
 	private static boolean renderingWorkflow;
 
@@ -419,12 +422,18 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginForm(com.bluexml.side .form.Form)
+	 * @see com.bluexml.xforms.generator.DataGenerator#beginForm(com.bluexml.side.form.FormContainer)
 	 */
-	public void beginForm(FormContainer formContainer) {
-		RenderableFormContainer formBean = new RenderableFormContainer(this, null, formContainer);
+	public void beginForm(FormContainer form) {
+		FormContainer realContainer = form;
 
-		forms.put(formContainer, formBean);
+		if (form.eIsProxy()) { // #1225
+			realContainer = (FormContainer) formGenerator.getRealObject(form);
+		}
+		RenderableFormContainer renForm = new RenderableFormContainer(this, null, realContainer);
+
+		formsRenderables.put(realContainer.getId(), renForm);
+		formsModels.put(realContainer.getId(), realContainer);
 	}
 
 	/*
@@ -545,21 +554,21 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		}
 
 		boolean atLeastOneWorfklowForm = false;
-		Set<Entry<FormContainer, RenderableFormContainer>> entrySetForms = forms.entrySet();
-		for (Entry<FormContainer, RenderableFormContainer> formEntry : entrySetForms) {
-			FormContainer form = formEntry.getKey();
-			boolean isAWorkflowForm = form instanceof FormWorkflow;
+		Set<Entry<String, RenderableFormContainer>> entrySetForms = formsRenderables.entrySet();
+		for (Entry<String, RenderableFormContainer> formEntry : entrySetForms) {
+			String formId = formEntry.getKey();
+			boolean isAWorkflowForm = formEntry.getValue() instanceof FormWorkflow;
 			atLeastOneWorfklowForm = atLeastOneWorfklowForm || isAWorkflowForm;
 			String logText = " Rendering "
-					+ (form instanceof FormClass ? "FormClass" : "FormWorkflow") + ": "
-					+ form.getId();
+					+ (formEntry.getValue() instanceof FormClass ? "FormClass" : "FormWorkflow")
+					+ ": " + formId;
 			genLogger.info(logText);
 			if (monitor != null) {
 				monitor.addText(logText);
 			}
 			RenderableFormContainer value = formEntry.getValue();
 
-			render(outputXForms, form, value, isAWorkflowForm);
+			render(outputXForms, formId, value, isAWorkflowForm);
 		}
 
 		if (atLeastOneWorfklowForm) {
@@ -727,16 +736,16 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 * @see com.bluexml.xforms.generator.DataGenerator#endListForms()
 	 */
 	public void endListForms() {
-		Set<Entry<FormContainer, RenderableFormContainer>> entrySet = forms.entrySet();
-		// System.out.println("listing forms ---");
-		// for (FormContainer entry : forms.keySet()) {
+		Set<Entry<String, RenderableFormContainer>> entrySet = formsRenderables.entrySet();
+		// System.out.println("listing formsRenderables ---");
+		// for (FormContainer entry : formsRenderables.keySet()) {
 		// System.out.println(entry.getId());
 		// }
 		// System.out.println("-----------------");
 		//
 		// deal with FormClass's first
-		for (Entry<FormContainer, RenderableFormContainer> entry : entrySet) {
-			FormContainer FC = entry.getKey();
+		for (Entry<String, RenderableFormContainer> entry : entrySet) {
+			FormContainer FC = formsModels.get(entry.getKey());
 			if (FC instanceof FormClass) {
 				RenderableFormContainer renderableFC = entry.getValue();
 				renderableFC.compute();
@@ -744,8 +753,8 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		}
 
 		//
-		for (Entry<FormContainer, RenderableFormContainer> entry : entrySet) {
-			FormContainer FC = entry.getKey();
+		for (Entry<String, RenderableFormContainer> entry : entrySet) {
+			FormContainer FC = formsModels.get(entry.getKey());
 			if (FC instanceof FormWorkflow) {
 				RenderableFormContainer renderableFC = entry.getValue();
 				// add all form elements defined in the form editor
@@ -776,18 +785,18 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	}
 
 	/**
-	 * Finds in the map <b>forms</b> the renderable element attached to a form class.<br/>
-	 * This function is made necessary by the fact that forms.get(dataForm) is apparently unable to
-	 * find dataForm when the referenced FormClass object is from a file distinct from the workflow
-	 * form's file: it returns null in those cases.
+	 * Finds in the map <b>formsRenderables</b> the renderable element attached to a form class.<br/>
+	 * This function is made necessary by the fact that formsRenderables.get(dataForm) is apparently
+	 * unable to find dataForm when the referenced FormClass object is from a file distinct from the
+	 * workflow form's file: it returns null in those cases.
 	 * 
 	 * @param dataForm
 	 *            the form class
 	 * @return
 	 */
 	private RenderableFormContainer searchForForm(FormClass dataForm) {
-		for (Entry<FormContainer, RenderableFormContainer> entry : forms.entrySet()) {
-			FormContainer key = entry.getKey();
+		for (Entry<String, RenderableFormContainer> entry : formsRenderables.entrySet()) {
+			FormContainer key = formsModels.get(entry.getKey());
 			if (key instanceof FormClass) {
 				FormClass fcl = (FormClass) key;
 				if (fcl.getId().equals(dataForm.getId())) {
@@ -829,7 +838,11 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 * @return the renderable form
 	 */
 	public RenderableFormContainer getRenderableForm(FormContainer form) {
-		return forms.get(form);
+		FormContainer realContainer = form;
+		if (form.eIsProxy()) { // #1225
+			realContainer = (FormContainer) formGenerator.getRealObject(form);
+		}
+		return formsRenderables.get(realContainer);
 	}
 
 	/*
@@ -909,28 +922,27 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 * Render a FormClass or FormWorkflow.
 	 * 
 	 * @param outputXForms
-	 *            the output x forms
-	 * @param form
+	 *            the output x formsRenderables
+	 * @param formId
 	 *            the form
 	 * @param rFC
 	 *            the form container
 	 * @param isWorkflowAble
 	 *            whether workflows can be started on the form
 	 */
-	private void render(File outputXForms, FormContainer form, RenderableFormContainer rFC,
+	private void render(File outputXForms, String formId, RenderableFormContainer rFC,
 			boolean isAWorkflowForm) {
-		String formName = form.getId();
-		String title = form.getLabel();
+		String title = formsModels.get(formId).getLabel();
 		FormTypeRendered formTypeRendered = (isAWorkflowForm) ? FormTypeRendered.formWkflw
 				: FormTypeRendered.form;
-		render(outputXForms, rFC, formName, title, formTypeRendered, isAWorkflowForm, false);
+		render(outputXForms, rFC, formId, title, formTypeRendered, isAWorkflowForm, false);
 	}
 
 	/**
 	 * Render any renderable in a file.
 	 * 
 	 * @param outputXForms
-	 *            the output x forms
+	 *            the output x formsRenderables
 	 * @param renderable
 	 *            the renderable
 	 * @param formName
@@ -943,7 +955,8 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 * @param formType
 	 *            the form type. CLASS, FORM, WKFLW, etc.
 	 * @param isWorkflowAble
-	 *            whether workflows can be started on the form, always false for formClass forms.
+	 *            whether workflows can be started on the form, always false for formClass
+	 *            formsRenderables.
 	 */
 	private void render(File outputXForms, Renderable renderable, String formName, String title,
 			FormTypeRendered formType, boolean isAWorkflowForm, boolean isWrkflwSelectionForm) {
@@ -1011,7 +1024,9 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		return renderingWorkflow;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.bluexml.xforms.generator.AbstractDataGenerator#isReadOnlyMode()
 	 */
 	@Override
@@ -1019,7 +1034,9 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		return readOnlyMode;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.bluexml.xforms.generator.AbstractDataGenerator#setReadOnlyMode(boolean)
 	 */
 	@Override
@@ -1027,7 +1044,9 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		this.readOnlyMode = onOff;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.bluexml.xforms.generator.AbstractDataGenerator#supportsReadOnlyMode()
 	 */
 	@Override
@@ -1035,5 +1054,4 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		return true;
 	}
 
-	
 }

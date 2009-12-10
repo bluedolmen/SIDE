@@ -55,8 +55,7 @@ public class CommonRenderableAssociation extends Renderable {
 		associationBean.setHiBound(properties.getHiBound());
 
 		// hide or display action buttons
-		boolean lshowingActions = properties.isShowingActions();
-		associationBean.setShowingActions(lshowingActions);
+		associationBean.setShowingActions(properties.isShowingActions());
 		associationBean.setDisabled(properties.isDisabled());
 		associationBean.setMandatory(properties.isMandatory());
 

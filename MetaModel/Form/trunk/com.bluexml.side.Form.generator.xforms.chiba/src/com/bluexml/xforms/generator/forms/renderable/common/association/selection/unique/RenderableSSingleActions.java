@@ -98,7 +98,7 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 * @return the trigger reset
 	 */
 	private Element getTriggerReset(ModelElementBindSimple bindId, ModelElementBindSimple bindLabel) {
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage("resources/images/left.gif");
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_LEFT);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
 
@@ -147,7 +147,7 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 */
 	private Element getTriggerSet(Stack<Rendered> renderedParents, ModelElementBindSimple bindId,
 			ModelElementBindSimple bindLabel) {
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage("resources/images/right.gif");
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_RIGHT);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
 
