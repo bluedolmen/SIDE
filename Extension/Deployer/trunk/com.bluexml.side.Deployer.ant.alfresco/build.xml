@@ -4,8 +4,28 @@
 	<property file="data_post.properties"/>
 
 	<!-- =========================================================================
-							      pre-build task
+							      pre-build tasks
 	     ========================================================================= -->
+	
+	<target name="pre-build">
+		<antcall target="stopAlfresco"/>
+		<antcall target="stopMySql"/>
+	</target>
+	
+	<!-- ============================= Windows tasks ============================== -->
+	
+	<target name="stopMySql" depends="isMySqlRunningBefore" unless="mySqlOff" if="windows">
+		<sleep seconds="20"/>
+		<exec executable="${alfresco.dir}/mysql/bin/mysqladmin.exe">
+			<arg value="-u"/>
+			<arg value="root"/>
+			<arg value="shutdown"/>
+		</exec>
+	</target>
+	
+	<!-- ============================= Linux tasks ================================ -->
+	
+	<!-- ============================= Common tasks ================================ -->
 	
 	<target name="isAlfrescoRunningBefore">
 		<waitfor maxwait="4" maxwaitunit="second" checkevery="250" timeoutproperty="alfrescoOff">
@@ -26,34 +46,32 @@
 		</waitfor>
 	</target>
 	
-	<target name="stopMySql" depends="stopAlfresco,isMySqlRunningBefore" unless="mySqlOff">
-		<sleep seconds="20"/>
-		<exec executable="${alfresco.dir}/mysql/bin/mysqladmin.exe">
-			<arg value="-u"/>
-			<arg value="root"/>
-			<arg value="shutdown"/>
-		</exec>
-	</target>
-	
-	<target name="pre-build">
-		<antcall target="stopMySql"/>
-	</target>
-	
 	<!-- =========================================================================
-								      post-build task
+								      post-build tasks
 		 ========================================================================= -->
 	
 	<target name="post-build">
 		<parallel>
-			<antcall target="startAlfresco"/>
+			<antcall target="startAlfrescoWin"/>
+			<antcall target="startAlfrescoLx"/>
 			<antcall target="createAlfSynchro"/>
 			<antcall target="loadData"/>
 		</parallel>
 	</target>
 	
-	<target name="startAlfresco">
+	<!-- ============================= Windows tasks ============================== -->
+	
+	<target name="startAlfrescoWin" if="windows">
 		<exec executable="${alfresco.dir}\alf_start.bat" spawn="true" vmlauncher="false" dir="${alfresco.dir}"/>
 	</target>
+	
+	<!-- ============================= Linux tasks ================================ -->
+	
+	<target name="startAlfrescoLx" if="linux">
+		<exec executable="${alfresco.dir}\alf_start.sh" />
+	</target>
+	
+	<!-- ============================= Common tasks ================================ -->
 	
 	<target name="isMySqlRunning">
 		<waitfor maxwait="2" maxwaitunit="minute" checkevery="250" timeoutproperty="mySqlOff">
