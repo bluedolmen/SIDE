@@ -65,10 +65,11 @@ public class AnnotationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addAuthorPropertyDescriptor(object);
-			addCommentPropertyDescriptor(object);
+			addAnnotationPropertyDescriptor(object);
 			addDatePropertyDescriptor(object);
 			addStatusPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
+			addCommentPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -96,6 +97,28 @@ public class AnnotationItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Annotation feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAnnotationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Annotation_annotation_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Annotation_annotation_feature", "_UI_Annotation_type"),
+				 RequirementsPackage.Literals.ANNOTATION__ANNOTATION,
+				 true,
+				 true,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Comment feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -109,7 +132,7 @@ public class AnnotationItemProvider
 				 getString("_UI_Annotation_comment_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Annotation_comment_feature", "_UI_Annotation_type"),
 				 RequirementsPackage.Literals.ANNOTATION__COMMENT,
-				 false,
+				 true,
 				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
@@ -221,10 +244,11 @@ public class AnnotationItemProvider
 
 		switch (notification.getFeatureID(Annotation.class)) {
 			case RequirementsPackage.ANNOTATION__AUTHOR:
-			case RequirementsPackage.ANNOTATION__COMMENT:
+			case RequirementsPackage.ANNOTATION__ANNOTATION:
 			case RequirementsPackage.ANNOTATION__DATE:
 			case RequirementsPackage.ANNOTATION__STATUS:
 			case RequirementsPackage.ANNOTATION__ID:
+			case RequirementsPackage.ANNOTATION__COMMENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
