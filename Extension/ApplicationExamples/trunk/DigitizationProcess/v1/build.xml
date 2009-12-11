@@ -15,10 +15,10 @@
             <!-- the models and the necessary extensions of the application -->
         	<zipfileset dir="${model.dir}" prefix="${model.dir}"/>
             <!-- the components extensions for the application (properties, javascript, jar, ... files) -->
-            <zipfileset dir="${extension.dir}" prefix="extension"/>
+            <zipfileset dir="${extension.dir}" prefix="${distrib.suffix.extension}"/>
             <!-- the Readme and License file -->
-            <fileset dir="." file="README.txt"/>
-            <fileset dir="." file="license.txt"/>
+            <fileset dir="." file="${readme.file}"/>
+            <fileset dir="." file="${license.file}"/>
          </zip>
      </target>
 
@@ -34,12 +34,12 @@
             <!-- the generated components for Chiba Xforms -->
             <zipfileset dir="${generation.out.dir}/${chiba}" includes="*.zip" prefix="${chiba}/${distrib.suffix.zip}"/>
             <!-- the components extensions for the application (properties, javascript, jar, ... files) -->
-           <zipfileset dir="${extension.dir}" prefix="extension"/>
+           <zipfileset dir="${extension.dir}" prefix="${distrib.suffix.extension}"/>
             <!-- the SIDE generation report -->
-            <zipfileset dir="${generation.logs.dir}/${project.name}" includes="${side-report}"/>
+            <fileset dir="${generation.logs.dir}/${project.name}" file="${side-report.file}"/>
             <!-- the Readme and License file -->
-            <fileset dir="." file="README.txt"/>
-            <fileset dir="." file="license.txt"/>
+            <fileset dir="." file="${readme.file}"/>
+            <fileset dir="." file="${license.file}"/>
          </zip>
      </target>
 
@@ -66,12 +66,12 @@
             <!-- the application webapp war files: Alfresco, Alfresco share, Chiba, Birt, Facetmap, ...  -->
            <zipfileset dir="${generation.out.dir}" includes="*.war"/>
             <!-- the components extensions for the application (properties, javascript, jar, ... files) -->
-           <zipfileset dir="${extension.dir}" prefix="extension"/>
+           <zipfileset dir="${extension.dir}" prefix="${distrib.suffix.extension}"/>
             <!-- the SIDE generation report -->
-           <zipfileset dir="${generation.logs.dir}/${project.name}" includes="${side-report}"/>
+            <fileset dir="${generation.logs.dir}/${project.name}" file="${side-report.file}"/>
             <!-- the Readme and License file -->
-            <fileset dir="." file="README.txt"/>
-            <fileset dir="." file="license.txt"/>
+            <fileset dir="." file="${readme.file}"/>
+            <fileset dir="." file="${license.file}"/>
         </zip>
 	 </target>
 	

@@ -126,8 +126,8 @@ Having performed the Prerequisite steps and with Alfresco running,
     Note: for task 'Assign the type of the document', enter for the type one of the following value: mail, vehicle, quotation.
           a "mail" type will go through an approval supplementary step before integration of the document in Alfresco.
           At the end, the documents are automatically moved, according to their type, from 'inProgress' to 'achieved/<type>'.
-- Go to http://localhost:8080/share to see the meta-data of the documents.
-- Go to http://localhost:8080/xforms to see all the generated forms to handle document meta-data.
+- Go to http://localhost:8080/share to see the meta-data of the loaded documents.
+- Go to http://localhost:8080/xforms to see all the generated forms to handle documents meta-data.
 
 
 Pointers & License notices :
