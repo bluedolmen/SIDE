@@ -12,12 +12,11 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;
-import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.FormWorkflow;
+import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.WorkflowFormCollection;
-import com.bluexml.side.form.clazz.utils.ClassInitialization;
 import com.bluexml.side.util.libs.ui.UIUtils;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.Process;
@@ -87,9 +86,23 @@ public class WorkflowInitialization {
 			UserTask ut = (UserTask) s;
 			// For all attribute we get the field :
 			for (Attribute a : ut.getAttributes()) {
-				Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
-				if (f != null) {
-					fw.getChildren().add(f);
+				if (a.getAllowedValues().size() == 0) {
+					Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
+					if (f != null) {
+						fw.getChildren().add(f);
+					}
+				} else {
+					ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
+					f.setId(a.getName());
+					f.setRef(a);
+					if (a.getTitle() != null && a.getTitle().length() > 0) {
+						f.setLabel(a.getTitle());
+					} else {
+						f.setLabel(a.getName());
+					}
+					if (f != null) {
+						fw.getChildren().add(f);
+					}
 				}
 			}
 
