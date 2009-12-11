@@ -18,5 +18,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.topcased.modeler,
  org.eclipse.ui,
- com.bluexml.side.Util.libs
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.ecore
 Eclipse-LazyStart: true
+Bundle-ClassPath: lib/mysql-connector-java-5.1.10-bin.jar,
+ .

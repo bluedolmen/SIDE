@@ -438,6 +438,23 @@
 		</page>
     	
 	</extension>
+ <extension
+       point="org.eclipse.ui.importWizards">
+    <category
+          id="com.bluexml.side.Requirements.modeler.wizards.sampleCategory"
+          name="SIDE Requirements">
+    </category>
+    <wizard
+          category="com.bluexml.side.Requirements.modeler.wizards.sampleCategory"
+          class="com.bluexml.side.Requirements.modeler.wizards.ImportAnnotationWizard"
+          icon="icons/importAnnotations.gif"
+          id="com.bluexml.side.Requirements.modeler.wizards.ImportAnnotationWizard"
+          name="Import annotations">
+       <description>
+          Import annotations from database.
+       </description>
+    </wizard>
+ </extension>
 
 	
 </plugin>
