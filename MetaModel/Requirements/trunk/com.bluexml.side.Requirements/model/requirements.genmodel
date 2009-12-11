@@ -91,12 +91,11 @@
     </genClasses>
     <genClasses ecoreClass="requirements.ecore#//Annotation">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Annotation/author"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Annotation/annotation"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute requirements.ecore#//Annotation/annotation"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Annotation/date"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Annotation/status"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Annotation/id"/>
-      <genFeatures property="Readonly" createChild="false" propertyMultiLine="true"
-          ecoreFeature="ecore:EAttribute requirements.ecore#//Annotation/comment"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute requirements.ecore#//Annotation/comment"/>
     </genClasses>
     <genClasses ecoreClass="requirements.ecore#//AnnotableElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//AnnotableElement/annotation"/>
