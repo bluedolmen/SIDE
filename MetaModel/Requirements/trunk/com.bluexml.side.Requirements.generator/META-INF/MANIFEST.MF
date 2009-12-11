@@ -15,6 +15,8 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.dependencies,
  com.bluexml.side.Util.security,
  org.eclipse.m2m.atl.drivers.emf4atl,
- org.eclipse.ant.core
+ org.eclipse.ant.core,
+ com.bluexml.side.Requirements,
+ com.bluexml.side.Util.ecore
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

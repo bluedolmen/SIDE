@@ -38,22 +38,6 @@ CREATE TABLE IF NOT EXISTS `annotation` (
 	`date` DATE NOT NULL
 ) ENGINE = MYISAM;
 
-<%for (getRootContainer().eAllContents("Annotation")){%>
-INSERT OR REPLACE INTO `reqs_prototype` (
-	`id` ,
-	`elementId` ,
-	`author` ,
-	`annotation` ,
-	`comment` ,
-	`date`
-)
-VALUES (
-	'<%id%>', '<%eContainer().id%>', '<%author%>', '<%annotation%>', '<%comment%>', '<%date%>'
-);
-<%}%>
- 
-
-
 <%script type="WebProject.Field" name="RelationalSchema_FieldType"%>
 <%if (dataType == "integer"){%>
 int(10)<%}else{%>

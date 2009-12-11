@@ -100,7 +100,7 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 		<div id="data" class="box">
 			<h2><%title%></h2>
 			<div id="logout" class="box">
-				<img src="images/comment.png"/><a href="addComment.php?elementId=_<%id%>" class="nyroModal">Add a comment</a>
+				<img src="images/comment.png"/><a href="addComment.php?elementId=<%id%>" class="nyroModal">Add a comment</a>
 			</div>
 			<%for (components){%>
 				<%if (current("DataPage").mainComponent == current()){%>
