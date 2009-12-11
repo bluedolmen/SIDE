@@ -14,8 +14,11 @@
         <zip destfile="${distrib.dir}/${project.name}_${distrib.suffix.model}.zip" compress="true">
             <!-- the models and the necessary extensions of the application -->
         	<zipfileset dir="${model.dir}" prefix="${model.dir}"/>
+            <!-- the components extensions for the application (properties, javascript, jar, ... files) -->
+            <zipfileset dir="${extension.dir}" prefix="extension"/>
             <!-- the Readme and License file -->
-            <zipfileset dir="." includes="README.txt"/>
+            <fileset dir="." file="README.txt"/>
+            <fileset dir="." file="license.txt"/>
          </zip>
      </target>
 
@@ -35,7 +38,8 @@
             <!-- the SIDE generation report -->
             <zipfileset dir="${generation.logs.dir}/${project.name}" includes="${side-report}"/>
             <!-- the Readme and License file -->
-            <zipfileset dir="." includes="README.txt"/>
+            <fileset dir="." file="README.txt"/>
+            <fileset dir="." file="license.txt"/>
          </zip>
      </target>
 
@@ -60,13 +64,14 @@
         <delete file="${distrib.dir}/${project.name}_${distrib.suffix.application.war}.zip"/>
 	 	<zip destfile="${distrib.dir}/${project.name}_${distrib.suffix.application.war}.zip" compress="true">
             <!-- the application webapp war files: Alfresco, Alfresco share, Chiba, Birt, Facetmap, ...  -->
-           <zipfileset dir="${generation.out.dir}" includes="*.war" prefix="extension"/>
+           <zipfileset dir="${generation.out.dir}" includes="*.war"/>
             <!-- the components extensions for the application (properties, javascript, jar, ... files) -->
            <zipfileset dir="${extension.dir}" prefix="extension"/>
             <!-- the SIDE generation report -->
            <zipfileset dir="${generation.logs.dir}/${project.name}" includes="${side-report}"/>
-	           <!-- the Readme and License file -->
-           <zipfileset dir="." includes="README.txt"/>
+            <!-- the Readme and License file -->
+            <fileset dir="." file="README.txt"/>
+            <fileset dir="." file="license.txt"/>
         </zip>
 	 </target>
 	
