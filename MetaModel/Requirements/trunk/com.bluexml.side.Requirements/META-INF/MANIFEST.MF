@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.bluexml.side.Requirements;singleton:=true
-Bundle-Version: 1.0.25.v12083-20091210
+Bundle-Version: 1.0.26.v12157-20091212
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
