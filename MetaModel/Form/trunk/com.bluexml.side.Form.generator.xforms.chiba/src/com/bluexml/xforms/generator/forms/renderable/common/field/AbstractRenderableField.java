@@ -443,23 +443,39 @@ public abstract class AbstractRenderableField extends Renderable {
 		element.setAttribute("appearance", elemAppearance);
 
 		// deal with choice options
+		if (selectBean.isWorkflowEnum() == false) {
+			ModelElementEnumeration modelElementEnumeration = getModelElementEnumeration(selectBean);
+			rendered.addModelElement(modelElementEnumeration);
+
+			String enumInstance = modelElementEnumeration.getEnumInstanceName();
 		Element itemset = XFormsGenerator
 				.createElement("itemset", XFormsGenerator.NAMESPACE_XFORMS);
-
-		ModelElementEnumeration modelElementEnumeration = getModelElementEnumeration(selectBean);
-		rendered.addModelElement(modelElementEnumeration);
-
-		String enumInstance = modelElementEnumeration.getEnumInstanceName();
-		itemset.setAttribute("nodeset", "instance('" + enumInstance + "')/item");
-		Element itemLabel = XFormsGenerator
-				.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
-		itemLabel.setAttribute("ref", "value");
-		itemset.addContent(itemLabel);
-		Element itemValue = XFormsGenerator
-				.createElement("value", XFormsGenerator.NAMESPACE_XFORMS);
-		itemValue.setAttribute("ref", "id");
-		itemset.addContent(itemValue);
+			itemset.setAttribute("nodeset", "instance('" + enumInstance + "')/item");
+			Element itemLabel = XFormsGenerator.createElement("label",
+					XFormsGenerator.NAMESPACE_XFORMS);
+			itemLabel.setAttribute("ref", "value");
+			itemset.addContent(itemLabel);
+			Element itemValue = XFormsGenerator.createElement("value",
+					XFormsGenerator.NAMESPACE_XFORMS);
+			itemValue.setAttribute("ref", "id");
+			itemset.addContent(itemValue);
 		element.addContent(itemset);
+		} else { // #1313
+			for (String itemText : selectBean.getAllowedValues()) {
+				Element item = XFormsGenerator.createElement("item",
+						XFormsGenerator.NAMESPACE_XFORMS);
+				Element label = XFormsGenerator.createElement("label",
+						XFormsGenerator.NAMESPACE_XFORMS);
+				Element value = XFormsGenerator.createElement("value",
+						XFormsGenerator.NAMESPACE_XFORMS);
+				label.setText(itemText);
+				value.setText(itemText);
+				item.addContent(label);
+				item.addContent(value);
+				
+				element.addContent(item);
+			}
+		}
 
 		addHintAndMessages(element);
 		return element;
@@ -561,7 +577,8 @@ public abstract class AbstractRenderableField extends Renderable {
 	 * 
 	 * @return the read only element
 	 */
-	protected Element getReadOnlyElement(ModelElementBindSimple meb, String slabel, boolean isTextArea) {
+	protected Element getReadOnlyElement(ModelElementBindSimple meb, String slabel,
+			boolean isTextArea) {
 		Element element;
 		element = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		element.setAttribute("id", attributeId + "_container");

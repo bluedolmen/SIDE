@@ -4,8 +4,10 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.emf.common.util.EList;
 import org.jdom.Element;
 
+import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
 import com.bluexml.side.form.CharField;
@@ -26,6 +28,7 @@ import com.bluexml.side.form.RegexField;
 import com.bluexml.side.form.TextField;
 import com.bluexml.side.form.TimeField;
 import com.bluexml.side.form.URLField;
+import com.bluexml.side.workflow.Attribute;
 import com.bluexml.xforms.generator.FormGenerator;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -33,6 +36,7 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.field.AbstractRenderableField;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableActionField;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableChoiceInput;
+import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableChoiceInputWorkflow;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableDateTimeInput;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableFileInput;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableMailInput;
@@ -234,6 +238,16 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 		} else if (formElement instanceof CharField) {
 			renderable = new RenderableSimpleInput<CharField>(generationManager, parent,
 					(CharField) formElement, "string");
+			// ** #1313
+			CharField charField = (CharField) formElement;
+			ModelElement ref = (ModelElement) getFormGenerator().getRealObject(charField.getRef());
+			if (ref instanceof Attribute) {
+				EList<String> elist = ((Attribute) ref).getAllowedValues();
+				if ((elist != null) && (elist.size() > 0)) {
+					renderable = new RenderableChoiceInputWorkflow(generationManager, parent, charField);
+				}
+			}
+			// ** #1313
 		} else if (formElement instanceof ActionField) {
 			renderable = new RenderableActionField(generationManager, parent,
 					(ActionField) formElement);

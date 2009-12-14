@@ -1,6 +1,8 @@
 package com.bluexml.xforms.generator.forms.renderable.common;
 
 
+import java.util.List;
+
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
@@ -29,6 +31,10 @@ public class SelectBean {
 
 	private String enumParent;
 
+	private boolean isWorkflowEnum;
+	
+	private List<String> allowedValues;
+
 	private ChoiceWidgetType widgetType;
 
 	public SelectBean(ModelElementBindSimple meb, String slabel, Enumeration valueList,
@@ -43,6 +49,8 @@ public class SelectBean {
 		// configuration by default
 		setLimited(false);
 		setWidgetType(ChoiceWidgetType.SHOW_ONE);
+		setWorkflowEnum(false);
+		setAllowedValues(null);
 	}
 
 	/**
@@ -178,5 +186,33 @@ public class SelectBean {
 	 */
 	public void setEnumParent(String enumParent) {
 		this.enumParent = enumParent;
+	}
+
+	/**
+	 * @param isWorkflowEnum the isWorkflowEnum to set
+	 */
+	public void setWorkflowEnum(boolean isWorkflowEnum) {
+		this.isWorkflowEnum = isWorkflowEnum;
+	}
+
+	/**
+	 * @return the isWorkflowEnum
+	 */
+	public boolean isWorkflowEnum() {
+		return isWorkflowEnum;
+	}
+
+	/**
+	 * @param allowedValues the allowedValues to set
+	 */
+	public void setAllowedValues(List<String> allowedValues) {
+		this.allowedValues = allowedValues;
+	}
+
+	/**
+	 * @return the allowedValues
+	 */
+	public List<String> getAllowedValues() {
+		return allowedValues;
 	}
 }

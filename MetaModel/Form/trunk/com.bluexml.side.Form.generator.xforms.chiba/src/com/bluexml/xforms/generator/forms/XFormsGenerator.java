@@ -422,7 +422,8 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginForm(com.bluexml.side.form.FormContainer)
+	 * @see
+	 * com.bluexml.xforms.generator.DataGenerator#beginForm(com.bluexml.side.form.FormContainer)
 	 */
 	public void beginForm(FormContainer form) {
 		FormContainer realContainer = form;
@@ -557,10 +558,10 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		Set<Entry<String, RenderableFormContainer>> entrySetForms = formsRenderables.entrySet();
 		for (Entry<String, RenderableFormContainer> formEntry : entrySetForms) {
 			String formId = formEntry.getKey();
-			boolean isAWorkflowForm = formEntry.getValue() instanceof FormWorkflow;
+			FormContainer formContainer = formsModels.get(formId);
+			boolean isAWorkflowForm = formContainer instanceof FormWorkflow;
 			atLeastOneWorfklowForm = atLeastOneWorfklowForm || isAWorkflowForm;
-			String logText = " Rendering "
-					+ (formEntry.getValue() instanceof FormClass ? "FormClass" : "FormWorkflow")
+			String logText = " Rendering " + (isAWorkflowForm ? "FormWorkflow" : "FormClass")
 					+ ": " + formId;
 			genLogger.info(logText);
 			if (monitor != null) {

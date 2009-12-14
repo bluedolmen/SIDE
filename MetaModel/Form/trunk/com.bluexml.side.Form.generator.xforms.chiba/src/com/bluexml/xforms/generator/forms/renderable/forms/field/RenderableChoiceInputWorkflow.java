@@ -7,9 +7,8 @@ import java.util.Stack;
 import org.eclipse.emf.common.util.EList;
 import org.jdom.Element;
 
-import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.Enumeration;
-import com.bluexml.side.form.ChoiceField;
+import com.bluexml.side.form.CharField;
+import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
@@ -21,7 +20,7 @@ import com.bluexml.xforms.generator.forms.renderable.forms.RenderableField;
 /**
  * The Class RenderableChoiceInput.
  */
-public class RenderableChoiceInput extends RenderableField<ChoiceField> {
+public class RenderableChoiceInputWorkflow extends RenderableField<CharField> {
 
 	/**
 	 * Instantiates a new renderable choice input.
@@ -33,8 +32,8 @@ public class RenderableChoiceInput extends RenderableField<ChoiceField> {
 	 * @param formElement
 	 *            the form element
 	 */
-	public RenderableChoiceInput(XFormsGenerator generationManager, FormElement parent,
-			ChoiceField formElement) {
+	public RenderableChoiceInputWorkflow(XFormsGenerator generationManager, FormElement parent,
+			CharField formElement) {
 		super(generationManager, parent, formElement);
 	}
 
@@ -49,23 +48,14 @@ public class RenderableChoiceInput extends RenderableField<ChoiceField> {
 	@Override
 	protected Element getCustomElement(Rendered rendered, ModelElementBindSimple meb,
 			String slabel, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
-		Enumeration anEnum = null;
-		boolean enumTypeIsWorkflow = false;
 		com.bluexml.side.common.ModelElement ref;
 		List<String> listOfValues = null;
-		String enumContext = null;
-		String enumParent = null;
 
 		ref = formElement.getRef();
 		ref = (com.bluexml.side.common.ModelElement) generationManager.getFormGenerator()
 				.getRealObject(ref);
-		if (ref instanceof Attribute) {
-			Attribute attribute = (Attribute) ref;
-			anEnum = attribute.getValueList();
-		}
 		// ** #1313
 		if (ref instanceof com.bluexml.side.workflow.Attribute) {
-			enumTypeIsWorkflow = true;
 			com.bluexml.side.workflow.Attribute attribute = (com.bluexml.side.workflow.Attribute) ref;
 			EList<String> elist = attribute.getAllowedValues();
 			if (elist != null) {
@@ -79,23 +69,18 @@ public class RenderableChoiceInput extends RenderableField<ChoiceField> {
 		}
 		// ** #1313
 
-		if (enumTypeIsWorkflow == false) {
-			if (anEnum.getDynamic()) {
-				enumContext = getDynEnumContextString(formElement.getId());
-				enumParent = getDynEnumParentString(formElement.getId());
-			}
-		}
 		SelectBean selectBean = new SelectBean();
+
+		selectBean.setWorkflowEnum(true);
 		selectBean.setAllowedValues(listOfValues);
-		selectBean.setEnumeration(anEnum);
-		selectBean.setEnumContext(enumContext);
-		selectBean.setEnumParent(enumParent);
+		selectBean.setEnumeration(null);
+		selectBean.setEnumContext(null);
+		selectBean.setEnumParent(null);
 		selectBean.setLabel(slabel);
 		selectBean.setModelElementBindSimple(meb);
-		selectBean.setMultiple(formElement.isMultiple());
+		selectBean.setMultiple(false);
 		selectBean.setLimited(false);
-		selectBean.setWidgetType(formElement.getWidget());
-		selectBean.setWorkflowEnum(enumTypeIsWorkflow);
+		selectBean.setWidgetType(ChoiceWidgetType.SHOW_ONE);
 		return getSelectElement(rendered, selectBean);
 	}
 

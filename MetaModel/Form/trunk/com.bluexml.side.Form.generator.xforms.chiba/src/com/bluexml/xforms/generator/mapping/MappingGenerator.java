@@ -208,7 +208,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 		boolean isDisabled = false;
 		result = ModelTools.getMetaInfoValue(attribute, "read-only");
 		if (result != null) {
-			isMultiple = (StringUtils.equalsIgnoreCase(result, "true"));
+			isDisabled = (StringUtils.equalsIgnoreCase(result, "true"));
 		}
 		attributeType.setReadOnly(isDisabled);
 		
