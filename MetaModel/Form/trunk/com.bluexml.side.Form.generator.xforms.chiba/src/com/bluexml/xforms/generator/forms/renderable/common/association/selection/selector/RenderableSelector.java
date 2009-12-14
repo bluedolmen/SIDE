@@ -4,6 +4,8 @@ import java.util.Stack;
 
 import javax.xml.namespace.QName;
 
+import org.jdom.Element;
+
 import com.bluexml.xforms.messages.MsgId;
 
 import com.bluexml.xforms.generator.forms.Renderable;

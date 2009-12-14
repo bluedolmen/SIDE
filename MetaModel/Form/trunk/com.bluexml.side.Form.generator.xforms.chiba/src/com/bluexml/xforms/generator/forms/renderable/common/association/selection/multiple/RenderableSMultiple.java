@@ -3,6 +3,7 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 import java.util.Stack;
 
 import org.apache.commons.lang.StringUtils;
+import org.jdom.Element;
 
 import com.bluexml.xforms.messages.MsgId;
 
@@ -95,6 +96,8 @@ public class RenderableSMultiple extends AbstractRenderable {
 		String nodeSetItems = computeNodeSetItems(path);
 		String nodeSetActions = computeNodeSetActions(path);
 		Rendered rendered = new RenderedLine();
+		Element div = rendered.getXformsElement();
+		div.setAttribute("class", MsgId.INT_CSS_SELECT_WIDGET.getText());
 		rendered.setOptionalData(XFormsGenerator.getId(bean.getName() + "Repeater"));
 		bindRepeater.setNodeset(nodeSetItems);
 		rendered.addModelElement(bindRepeater);

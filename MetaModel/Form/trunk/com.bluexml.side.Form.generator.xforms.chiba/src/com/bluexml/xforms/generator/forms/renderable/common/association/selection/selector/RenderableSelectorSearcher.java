@@ -74,7 +74,7 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 		input.addContent(action);
 
 		Element div = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
-		div.setAttribute("class", MsgId.INT_CSS_SELECT_SEARCH_INPUT.getText());
+		div.setAttribute("class", MsgId.INT_CSS_SELECT_SEARCH_ZONE.getText());
 		div.addContent(input);
 		
 		rendered.setXformsElement(div);

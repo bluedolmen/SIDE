@@ -2,6 +2,8 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
+import org.jdom.Element;
+
 import com.bluexml.xforms.messages.MsgId;
 
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -74,6 +76,8 @@ public class RenderableSSingle extends AbstractRenderable {
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
 		Rendered rendered = new RenderedLine();
+		Element div = rendered.getXformsElement();
+		div.setAttribute("class", MsgId.INT_CSS_SELECT_WIDGET.getText());
 
 		String targetPath = path;
 //		if (StringUtils.trimToNull(targetPath) != null) {
