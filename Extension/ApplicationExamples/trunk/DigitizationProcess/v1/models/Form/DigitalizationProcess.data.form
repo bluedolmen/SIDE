@@ -74,7 +74,7 @@
     <real_class href="../Data/DigitizationProcess.dt#_06PLINRREd6d24BtuZ-cgQ"/>
   </forms>
   <forms xsi:type="form:FormClass" xmi:id="_WtcNkNUbEd6tA9o9YyVHIw" label="Vehicle" id="Vehicle">
-    <children xsi:type="form:FormGroup" xmi:id="_cSZq8NUbEd6tA9o9YyVHIw" label="Informations communes" id="Vehicule_commonInformation">
+    <children xsi:type="form:FormGroup" xmi:id="_cSZq8NUbEd6tA9o9YyVHIw" label="Common Information" id="Vehicule_commonInformation">
       <children xsi:type="form:CharField" xmi:id="_cSZq89UbEd6tA9o9YyVHIw" label="Document title" id="Title" help_text="" disabled="true">
         <ref href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
       </children>
@@ -85,12 +85,12 @@
         <ref href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
       </children>
     </children>
-    <children xsi:type="form:FormGroup" xmi:id="_c5ZZgNUbEd6tA9o9YyVHIw" label="Informations spécifiques" id="Vehicule_specificInformation">
+    <children xsi:type="form:FormGroup" xmi:id="_c5ZZgNUbEd6tA9o9YyVHIw" label="Specific Information" id="Vehicule_specificInformation">
       <children xsi:type="form:DateField" xmi:id="_c5ZZgdUbEd6tA9o9YyVHIw" label="Next Control Visit" id="NextControl" help_text="">
         <ref href="../Data/DigitizationProcess.dt#_06PLLdRREd6d24BtuZ-cgQ"/>
       </children>
     </children>
-    <children xsi:type="form:FormGroup" xmi:id="_uCP0wNWzEd6FW7J925m8sQ" label="Informations de numérisation" id="InfoNum">
+    <children xsi:type="form:FormGroup" xmi:id="_uCP0wNWzEd6FW7J925m8sQ" label="Digitization Information" id="InfoNum">
       <children xsi:type="form:CharField" xmi:id="_uCP0wtWzEd6FW7J925m8sQ" label="Author" id="Author" help_text="" disabled="true">
         <ref href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>

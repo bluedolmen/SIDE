@@ -7,12 +7,12 @@
     </children>
     <DataForm href="DigitalizationProcess.data.form#_BlhUMNXBEd6FW7J925m8sQ"/>
   </forms>
-  <forms xsi:type="form:FormWorkflow" xmi:id="_HoTlAtUcEd6dMKXYFUnZ5g" label="CheckDocumentType" id="DigitizationProcess_CheckDocumentType">
+  <forms xsi:type="form:FormWorkflow" xmi:id="_HoTlAtUcEd6dMKXYFUnZ5g" label="AssignDocumentType" id="DigitizationProcess_AssignDocumentType">
     <ref href="../Workflow/DigitizationProcess.workflow#_30SsANRSEd6mvv4ISlOk-Q"/>
     <children xsi:type="form:CharField" xmi:id="_HoTlA9UcEd6dMKXYFUnZ5g" label="Document content type" id="DocumentType">
       <ref href="../Workflow/DigitizationProcess.workflow#_30TTENRSEd6mvv4ISlOk-Q"/>
     </children>
-    <children xsi:type="form:ActionField" xmi:id="_HoTlBNUcEd6dMKXYFUnZ5g" label="Assign to qualified person for updating" id="checkDocumentType">
+    <children xsi:type="form:ActionField" xmi:id="_HoTlBNUcEd6dMKXYFUnZ5g" label="Assign to qualified person for updating" id="testDocumentType">
       <ref href="../Workflow/DigitizationProcess.workflow#_30SsCNRSEd6mvv4ISlOk-Q"/>
     </children>
     <DataForm href="DigitalizationProcess.data.form#_s3BGINRSEd6mvv4ISlOk-Q"/>
@@ -22,27 +22,27 @@
     <children xsi:type="form:TextField" xmi:id="_u9k58NXGEd6FW7J925m8sQ" label="Manager comment" id="Comment" disabled="true">
       <ref href="../Workflow/DigitizationProcess.workflow#_30TTH9RSEd6mvv4ISlOk-Q"/>
     </children>
-    <children xsi:type="form:ActionField" xmi:id="_HoTlBtUcEd6dMKXYFUnZ5g" label="Request the approval on update" id="RequestApproval">
+    <children xsi:type="form:ActionField" xmi:id="_HoTlBtUcEd6dMKXYFUnZ5g" label="Request the approval on update" id="ApprovalRequest">
       <ref href="../Workflow/DigitizationProcess.workflow#_30TTEtRSEd6mvv4ISlOk-Q"/>
     </children>
     <DataForm href="DigitalizationProcess.data.form#_e4enQNUZEd6MucaiNEHzdA"/>
   </forms>
-  <forms xsi:type="form:FormWorkflow" xmi:id="_HoTlB9UcEd6dMKXYFUnZ5g" label="ProcessVehicle" id="DigitizationProcess_ProcessVehicle">
+  <forms xsi:type="form:FormWorkflow" xmi:id="_HoTlB9UcEd6dMKXYFUnZ5g" label="ProcessVehicleDocument" id="DigitizationProcess_ProcessVehicleDocument">
     <ref href="../Workflow/DigitizationProcess.workflow#_30TTE9RSEd6mvv4ISlOk-Q"/>
-    <children xsi:type="form:ActionField" xmi:id="_HoUzINUcEd6dMKXYFUnZ5g" label="Integrate the document in ECM" id="integrateDocument">
+    <children xsi:type="form:ActionField" xmi:id="_HoUzINUcEd6dMKXYFUnZ5g" label="Integrate the document in ECM" id="integrateVehicleDocument">
       <ref href="../Workflow/DigitizationProcess.workflow#_30TTFNRSEd6mvv4ISlOk-Q"/>
     </children>
     <DataForm href="DigitalizationProcess.data.form#_WtcNkNUbEd6tA9o9YyVHIw"/>
   </forms>
-  <forms xsi:type="form:FormWorkflow" xmi:id="_HoUzJNUcEd6dMKXYFUnZ5g" label="Approuver" id="DigitizationProcess_Approuver">
+  <forms xsi:type="form:FormWorkflow" xmi:id="_HoUzJNUcEd6dMKXYFUnZ5g" label="Approve" id="DigitizationProcess_Approve">
     <ref href="../Workflow/DigitizationProcess.workflow#_30TTHdRSEd6mvv4ISlOk-Q"/>
     <children xsi:type="form:TextField" xmi:id="_vndkcNXGEd6FW7J925m8sQ" label="Manager Comment" id="Comment">
       <ref href="../Workflow/DigitizationProcess.workflow#_30TTH9RSEd6mvv4ISlOk-Q"/>
     </children>
-    <children xsi:type="form:ActionField" xmi:id="_HoUzJ9UcEd6dMKXYFUnZ5g" label="Integrate the document in ECM" id="integrateDocument">
+    <children xsi:type="form:ActionField" xmi:id="_HoUzJ9UcEd6dMKXYFUnZ5g" label="Integrate the document in ECM" id="integrateMailDocument">
       <ref href="../Workflow/DigitizationProcess.workflow#_30TTHtRSEd6mvv4ISlOk-Q"/>
     </children>
-    <children xsi:type="form:ActionField" xmi:id="_08PQwNXGEd6FW7J925m8sQ" label="Complete the document meta-data" id="CorrectionRequest">
+    <children xsi:type="form:ActionField" xmi:id="_08PQwNXGEd6FW7J925m8sQ" label="Complete the document meta-data" id="RequestUpdate">
       <ref href="../Workflow/DigitizationProcess.workflow#_wXK6MNWyEd6Ay6xwhgeFBA"/>
     </children>
     <DataForm href="DigitalizationProcess.data.form#_e4enQNUZEd6MucaiNEHzdA"/>
