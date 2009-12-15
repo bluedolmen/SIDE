@@ -149,7 +149,7 @@ public class TransformModel {
 		}
 		
 		for (Model model : _outputModels) {
-			URI out_model_uri = URI.create(model.modelFile);
+			URI out_model_uri = URI.create(model.modelFile.replaceAll( " ", "%20" ));
 
 			addOutputModel(model.modelName, out_model_uri, model.metamodelName, model.metamodelStream);
 		}
