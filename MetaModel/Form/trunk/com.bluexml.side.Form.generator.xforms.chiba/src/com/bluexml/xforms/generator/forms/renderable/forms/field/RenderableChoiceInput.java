@@ -70,8 +70,9 @@ public class RenderableChoiceInput extends RenderableField<ChoiceField> {
 			EList<String> elist = attribute.getAllowedValues();
 			if (elist != null) {
 				if (elist.size() == 0) {
-					throw new RuntimeException("Invalid list of allowed values for '"
-							+ attribute.getTitle() + "'.");
+					throw new RuntimeException(
+							"Invalid list of allowed values for the Workflow Attribute '"
+									+ attribute.getTitle() + "'.");
 				}
 				listOfValues = new ArrayList<String>(elist.size());
 				listOfValues.addAll(elist);

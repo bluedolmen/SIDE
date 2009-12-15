@@ -23,7 +23,9 @@ import com.bluexml.xforms.generator.forms.renderable.forms.RenderableField;
 public class RenderableChoiceInputWorkflow extends RenderableField<CharField> {
 
 	/**
-	 * Instantiates a new renderable choice input.
+	 * Instantiates a new renderable choice input. <p/>
+	 * <b>PRECONDITIONS:</b> the list of allowed values is non null and non empty; the <i>ref</i>
+	 * property of the form element points to a Workflow Attribute.
 	 * 
 	 * @param generationManager
 	 *            the generation manager
@@ -55,18 +57,10 @@ public class RenderableChoiceInputWorkflow extends RenderableField<CharField> {
 		ref = (com.bluexml.side.common.ModelElement) generationManager.getFormGenerator()
 				.getRealObject(ref);
 		// ** #1313
-		if (ref instanceof com.bluexml.side.workflow.Attribute) {
-			com.bluexml.side.workflow.Attribute attribute = (com.bluexml.side.workflow.Attribute) ref;
-			EList<String> elist = attribute.getAllowedValues();
-			if (elist != null) {
-				if (elist.size() == 0) {
-					throw new RuntimeException("Invalid list of allowed values for '"
-							+ attribute.getTitle() + "'.");
-				}
-				listOfValues = new ArrayList<String>(elist.size());
-				listOfValues.addAll(elist);
-			}
-		}
+		com.bluexml.side.workflow.Attribute attribute = (com.bluexml.side.workflow.Attribute) ref;
+		EList<String> elist = attribute.getAllowedValues();
+		listOfValues = new ArrayList<String>(elist.size());
+		listOfValues.addAll(elist);
 		// ** #1313
 
 		SelectBean selectBean = new SelectBean();
