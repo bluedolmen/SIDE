@@ -59,8 +59,9 @@ In order to deploy the generated components on Alfresco and Chiba or to generate
   . System users : digi 
   . Users groups : Digitization, Manager, Vehicle, Mail, Quotation
   . Associate the groups to 'digi' and potentially admin if you want to test with admin
-    Note: we associate all the groups to digi in order to avoid having to connect and disconnet for each task of the demo procedure.
+    Note: we associate all the groups to digi (or admin) in order to avoid having to connect and disconnet for each task of the demo procedure.
           For a production e-procedure, you use several users having their own groups and permissions. 
+          You may experience a problem to see the first task through the demo webapp using digi with Alfresco 3.2 community. In this case, use 'admin'.
   . Under a space of your choice '<one of your space>', create the space inProgress, achieved, achieved/vehicle, achieved/mail, achieved/quotation
     This space '<one of your space>' may obviously be in an Alfresco Share site. 
   . On the space 'inProgress', add the content rule corresponding to the script 'launchWorkflow.js' 
