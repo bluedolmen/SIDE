@@ -92,21 +92,21 @@
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
-			<version>3.2</version>
+			<version>3.2r</version>
 			<scope>provided</scope>
 			<classifier>community</classifier>
 		</dependency>
 		<dependency>
 		  <groupId>org.alfresco</groupId>
 		  <artifactId>alfresco-webscript-framework</artifactId>
-		  <version>3.2</version>
+		  <version>3.2r</version>
 		  <classifier>community</classifier>
 		  <scope>provided</scope>
 		</dependency>
 		<dependency>
 		  <groupId>org.alfresco</groupId>
 		  <artifactId>alfresco-core</artifactId>
-		  <version>3.2</version>
+		  <version>3.2r</version>
 		  <classifier>community</classifier>
 		  <scope>provided</scope>
 		</dependency>
@@ -195,7 +195,7 @@
 			<plugin>
 				<groupId>com.bluexml.side.Integration.m2</groupId>
 				<artifactId>ampMojo</artifactId>
-				<version>1.0.1</version>
+				<version>1.0.2</version>
 				<extensions>true</extensions>
 				<configuration>
 					<dependentAmpExcludes>**</dependentAmpExcludes>
