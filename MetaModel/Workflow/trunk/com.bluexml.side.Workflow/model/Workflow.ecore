@@ -4,8 +4,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="workflow"
     nsURI="http://www.kerblue.org/workflow/1.0" nsPrefix="workflow">
   <eClassifiers xsi:type="ecore:EClass" name="WorkflowModelElement" abstract="true"
-      eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//Package">
+      eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="PackageNameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
       <details key="OneStartTask" value="self.startstate -> size() = 1"/>
@@ -241,14 +241,15 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//ModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="NoTransitionWithSameName" value="Transition.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="SourceAndTargetMustBeSet" value="not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
+      <details key="titleMustNotBeNull" value="if (self.getContainer().oclIsKindOf(UserTask)) then&#xA;&#x9;if (self.title = null or self.title.size() = 0) then&#xA;&#x9;&#x9;false&#xA;&#x9;else&#xA;&#x9;&#x9;true&#xA;&#x9;endif&#xA;else &#xA;&#x9;true&#xA;endif"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters"/>
+      <details key="constraints" value="NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters titleMustNotBeNull"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: A 'Transition' represents a link between two nodes. &#xD;&#xD;Constraint/limit: Transitions must have a source node and a destination node."/>
@@ -272,7 +273,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="timer" upperBound="-1"
         eType="#//Timer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//State"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'title' attribute specifies the text that will appear in the target platform."/>
       </eAnnotations>
@@ -339,7 +340,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//ModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="UniqueNameForTaskAttribute" value="Attribute.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
     </eAnnotations>
@@ -349,7 +350,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: 'Attribute' specifies properties for TaskNode or StartState."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//DataType"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum ../../com.bluexml.side.Common/model/Common.ecore#//DataType"
         defaultValueLiteral="String">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The attribute 'typ' specifies the type of an 'Attribute'.&#xD;&#xD;Example: This is the list of the different type of an attribute: boolean, byte, char, double, float, int, long, short, String, void, Date, Object, DateTime and Time."/>
@@ -378,5 +379,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
         eType="#//Transition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WfPackage" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//Package"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WfPackage" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package"/>
 </ecore:EPackage>

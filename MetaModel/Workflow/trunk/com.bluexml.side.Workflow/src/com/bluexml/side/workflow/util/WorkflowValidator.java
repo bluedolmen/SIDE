@@ -204,6 +204,14 @@ public class WorkflowValidator extends EObjectValidator {
 	 */
 	private static Constraint transition_noSpecialCharactersInvOCL;
 	/**
+	 * The parsed OCL expression for the definition of the '<em>titleMustNotBeNull</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint transition_titleMustNotBeNullInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>NoStateWithSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1076,6 +1084,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateTransition_NoTransitionWithSameName(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_SourceAndTargetMustBeSet(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_noSpecialCharacters(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_titleMustNotBeNull(transition, diagnostics, context);
 		return result;
 	}
 
@@ -1189,6 +1198,45 @@ public class WorkflowValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(transition, context) }),
+						 new Object[] { transition }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the titleMustNotBeNull constraint of '<em>Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTransition_titleMustNotBeNull(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (transition_titleMustNotBeNullInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(WorkflowPackage.Literals.TRANSITION);
+
+			EAnnotation ocl = WorkflowPackage.Literals.TRANSITION.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("titleMustNotBeNull");
+
+			try {
+				transition_titleMustNotBeNullInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(transition_titleMustNotBeNullInvOCL);
+
+		if (!query.check(transition)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( WorkflowPackage.Literals.TRANSITION.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"titleMustNotBeNull")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "titleMustNotBeNull", getObjectLabel(transition, context) }),
 						 new Object[] { transition }));
 			}
 			return false;

@@ -1231,7 +1231,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEReference(getTransition_ParentTaskNode(), this.getTaskNode(), null, "parentTaskNode", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransition_Timer(), this.getTimer(), null, "timer", null, 0, -1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_To(), this.getState(), null, "to", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTransition_Title(), ecorePackage.getEString(), "title", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransition_Title(), ecorePackage.getEString(), "title", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 1, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -1343,7 +1343,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   new String[] {
 			 "NoTransitionWithSameName", "Transition.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
 			 "SourceAndTargetMustBeSet", "not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()",
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
+			 "titleMustNotBeNull", "if (self.getContainer().oclIsKindOf(UserTask)) then\n\tif (self.title = null or self.title.size() = 0) then\n\t\tfalse\n\telse\n\t\ttrue\n\tendif\nelse \n\ttrue\nendif"
 		   });														
 		addAnnotation
 		  (stateEClass, 
@@ -1416,7 +1417,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		  (transitionEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters"
+			 "constraints", "NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters titleMustNotBeNull"
 		   });														
 		addAnnotation
 		  (stateEClass, 
