@@ -183,7 +183,7 @@
               <firstEnd xmi:id="_06V419RREd6d24BtuZ-cgQ" name="" title="" cardMax="-1" linkedClass="_06PLINRREd6d24BtuZ-cgQ"/>
               <secondEnd xmi:id="_06V42NRREd6d24BtuZ-cgQ" name="from" title="" navigable="true" linkedClass="_06S1kNRREd6d24BtuZ-cgQ"/>
             </associationSet>
-            <associationSet xmi:id="_qtbwkODhEd6LINoz-y_wfg" documentation="" description="" name="is composed of" title="Is composed of">
+            <associationSet xmi:id="_qtbwkODhEd6LINoz-y_wfg" documentation="" description="" name="isComposedOf" title="Is composed of">
               <firstEnd xmi:id="_qtbwkeDhEd6LINoz-y_wfg" name="" title="" linkedClass="_pJnNYeDhEd6LINoz-y_wfg"/>
               <secondEnd xmi:id="_qtbwkuDhEd6LINoz-y_wfg" name="" title="" cardMax="-1" navigable="true" linkedClass="_06OkG9RREd6d24BtuZ-cgQ"/>
             </associationSet>
