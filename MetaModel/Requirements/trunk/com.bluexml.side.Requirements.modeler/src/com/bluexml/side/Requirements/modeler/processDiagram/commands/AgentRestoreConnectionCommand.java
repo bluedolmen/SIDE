@@ -3,6 +3,9 @@
  ******************************************************************************/
 package com.bluexml.side.Requirements.modeler.processDiagram.commands;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.topcased.modeler.commands.AbstractRestoreConnectionCommand;
@@ -60,15 +63,21 @@ public class AgentRestoreConnectionCommand extends
 	/**
 	 * @param srcElt the source element
 	 * @param targetElt the target element
-	 * @generated
+	 * @generated NOT
 	 */
 	private void createis_responsibleFromAgentToGoal_Responsible(
 			GraphElement srcElt, GraphElement targetElt) {
 		Agent sourceObject = (Agent) Utils.getElement(srcElt);
 		Goal targetObject = (Goal) Utils.getElement(targetElt);
 
-		if (sourceObject.getIsResponsible().contains(targetObject)
-				&& targetObject.getResponsible().contains(sourceObject)) {
+		boolean createEdge = false;
+		for (Goal g : getAllParentGoals(targetObject, true))
+			if (!createEdge)
+				createEdge = sourceObject.getIsResponsible().contains(g)
+				&& g.getResponsible().contains(sourceObject);
+		
+		
+		if (createEdge) {
 			// check if the relation does not exists yet
 			if (getExistingEdges(srcElt, targetElt,
 					ProSimpleObjectConstants.SIMPLE_OBJECT_IS_RESPONSIBLE)
@@ -81,6 +90,15 @@ public class AgentRestoreConnectionCommand extends
 				add(cmd);
 			}
 		}
+	}
+	
+	private Set<Goal> getAllParentGoals(Goal g, boolean includesMe) {
+		Set<Goal> result = new HashSet<Goal>();
+		if (includesMe)
+			result.add(g);
+		if (g.eContainer() != null && g.eContainer() instanceof Goal)
+			result.addAll(getAllParentGoals((Goal) g.eContainer(), true));
+		return result;
 	}
 
 }
