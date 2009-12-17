@@ -438,6 +438,7 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateAssociation_ClassCantBeReferencedbyTwoSameNameAssociation(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_IfAggregationOrCompositionThenUnidirectionalAssociation(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_doubleNavigable(association, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAssociation_noSpecialChracters(association, diagnostics, context);
 		return result;
 	}
 
@@ -811,6 +812,32 @@ public class ClazzValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "doubleNavigable", getObjectLabel(association, context) }),
+						 new Object[] { association }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the noSpecialChracters constraint of '<em>Association</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAssociation_noSpecialChracters(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialChracters", getObjectLabel(association, context) }),
 						 new Object[] { association }));
 			}
 			return false;

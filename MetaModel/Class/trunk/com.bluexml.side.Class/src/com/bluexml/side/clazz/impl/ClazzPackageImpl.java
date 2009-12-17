@@ -1131,7 +1131,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "AtLeastOneNavigableEdge", "(firstEnd.navigable or secondEnd.navigable)",
 			 "ClassCantBeReferencedbyTwoSameNameAssociation", "self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1",
 			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )",
-			 "twoWayNavigation", "(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name <> \'\' and self.secondEnd.name <> \'\')"
+			 "twoWayNavigation", "(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name <> \'\' and self.secondEnd.name <> \'\')",
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
 		   });				
 		addAnnotation
 		  (associationEClass.getEOperations().get(0), 
@@ -1262,7 +1263,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (associationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "reflexiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation doubleNavigable",
+			 "constraints", "reflexiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation doubleNavigable noSpecialChracters",
 			 "warning", "twoWayNavigation"
 		   });																
 		addAnnotation
