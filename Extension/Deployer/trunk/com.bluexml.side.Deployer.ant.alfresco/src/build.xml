@@ -1,0 +1,109 @@
+<project name="TestANT" default="pre-build">
+	
+	<property file="build.properties"/>	
+	<property file="data_post.properties"/>
+
+	<!-- =========================================================================
+							      pre-build tasks
+	     ========================================================================= -->
+	
+	<target name="pre-build">
+		<antcall target="stopAlfresco"/>
+		<antcall target="stopMySql"/>
+	</target>
+	
+	<!-- ============================= Windows tasks ============================== -->
+	
+	<target name="stopMySql" depends="isMySqlRunningBefore" unless="mySqlOff" if="windows">
+		<sleep seconds="20"/>
+		<exec executable="${alfresco.dir}/mysql/bin/mysqladmin.exe">
+			<arg value="-u"/>
+			<arg value="root"/>
+			<arg value="shutdown"/>
+		</exec>
+	</target>
+	
+	<!-- ============================= Linux tasks ================================ -->
+	
+	<!-- ============================= Common tasks ================================ -->
+	
+	<target name="isAlfrescoRunningBefore">
+		<waitfor maxwait="4" maxwaitunit="second" checkevery="250" timeoutproperty="alfrescoOff">
+			<http url="http://${alfresco.server}:${alfresco.port}/alfresco"/>
+		</waitfor>
+	</target>
+	
+	<target name="stopAlfresco" depends="isAlfrescoRunningBefore" unless="alfrescoOff">
+		<java jar="${alfresco.dir}/tomcat/bin/bootstrap.jar" fork="true">
+			<jvmarg value="-Dcatalina.home=${alfresco.dir}/tomcat"/>
+			<arg line="stop"/>
+		</java>
+	</target>
+	
+	<target name="isMySqlRunningBefore">
+		<waitfor maxwait="2" maxwaitunit="second" checkevery="250" timeoutproperty="mySqlOff">
+			<socket server="${mysql.server}" port="${mysql.port}"/>
+		</waitfor>
+	</target>
+	
+	<!-- =========================================================================
+								      post-build tasks
+		 ========================================================================= -->
+	
+	<target name="post-build">
+		<parallel>
+			<antcall target="startAlfrescoWin"/>
+			<antcall target="startAlfrescoLx"/>
+			<antcall target="createAlfSynchro"/>
+			<antcall target="loadData"/>
+		</parallel>
+	</target>
+	
+	<!-- ============================= Windows tasks ============================== -->
+	
+	<target name="startAlfrescoWin" if="windows">
+		<exec executable="${alfresco.dir}\alf_start.bat" spawn="true" vmlauncher="false" dir="${alfresco.dir}"/>
+	</target>
+	
+	<!-- ============================= Linux tasks ================================ -->
+	
+	<target name="startAlfrescoLx" if="linux">
+		<exec executable="${alfresco.dir}\alf_start.sh" />
+	</target>
+	
+	<!-- ============================= Common tasks ================================ -->
+	
+	<target name="isMySqlRunning">
+		<waitfor maxwait="2" maxwaitunit="minute" checkevery="250" timeoutproperty="mySqlOff">
+			<socket server="${mysql.server}" port="${mysql.port}"/>
+		</waitfor>
+	</target>
+	
+	<target name="createAlfSynchro" depends="isMySqlRunning" unless="mySqlOff" if="create.alf.synchro">
+		<sql classpath="${alfresco.dir}\tomcat\lib\mysql-connector-java-5.1.7-bin.jar"
+			 driver="org.gjt.mm.mysql.Driver"
+			 url="jdbc:mysql://${mysql.server}/${alfresco.db.name}"
+			 userid="${user.db}"
+			 password="${passwd.db}">
+			create database if not exists alf_synchro default character set utf8;
+			grant all on alf_synchro.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;
+		</sql>
+		<echo message="Database alf_synchro created."/>
+	</target>
+	
+	<target name="isAlfrescoRunning">
+		<waitfor maxwait="5" maxwaitunit="minute" checkevery="500" timeoutproperty="alfOff">
+			<http url="http://${alfresco.server}:${alfresco.port}/alfresco"/>
+		</waitfor>
+	</target>
+	
+	<target name="loadData" depends="isAlfrescoRunning" unless="alfOff" if="load.data">
+		<taskdef name="post" classname="ise.antelope.tasks.PostTask" classpath="../dist/antelopetasks-3.2.10.jar"/>
+		<post file="data_post.properties" to="http://${alfresco.server}:${alfresco.port}/alfresco/service/data/generate/generate"
+		      verbose="true">
+		</post>
+	</target>
+	
+	<!-- =========================================================================
+		 ========================================================================= -->
+</project>
