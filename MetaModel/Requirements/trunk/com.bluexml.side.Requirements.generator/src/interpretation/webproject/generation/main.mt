@@ -204,7 +204,10 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 								<%}%>
 								$value = "1";
 								
+								$joinTable = "<%current("ComponentRelationShip").idLeft.eContainer().name%>2<%current("ComponentRelationShip").idRight.eContainer().name%>";
+								
 								$url = appendParameter($url,$name,$value);
+								$url = appendParameter($url,"joinTable",$joinTable);
 								
  								$name = "id<%current("Component").table.name%>";
  								$value = $data[$idSource];
@@ -240,33 +243,28 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 <%script type="WebProject.Component" name="dataPage_component_sqlQuery"%>
 if (isset($pkPreviousTable)) {
 	$sql = "SELECT "
-		." `<%properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].cast("ComponentAttribute").field.name.sep("`,`")%>`"
 		<%if (properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].nSize()> 0){%>
-		.","
+		." `"
+		<%}%>
+		."<%properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].cast("ComponentAttribute").field.name.sep("`,`")%>"
+		<%if (properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].nSize()> 0){%>
+		."`,"
 		<%}%>
 		." `<%table.primaryKey.name.split("`,`")%>`"
 		." FROM <%table.name%> as s"
 		." WHERE ("
 		."     SELECT COUNT(*)"
-		<%for properties[eClass().name.equalsIgnoreCase("ComponentRelationShip")] {%>
-			<%if (cast("ComponentRelationShip").idLeft.eContainer() == current("Component").table
-				&& cast("ComponentRelationShip").idRight.eContainer() == current("Component").precedingSibling().nLast().table
-				){%>
-		."     FROM <%cast("ComponentRelationShip").idLeft.eContainer().name%>2<%cast("ComponentRelationShip").idRight.eContainer().name%> as t"
-			<%}%>
-			<%if (cast("ComponentRelationShip").idRight.eContainer() == current("Component").table
-				&& cast("ComponentRelationShip").idLeft.eContainer() == current("Component").precedingSibling().nLast().table
-				){%>
-		."     FROM <%cast("ComponentRelationShip").idLeft.eContainer().name%>2<%cast("ComponentRelationShip").idRight.eContainer().name%> as t"
-			<%}%>
-		<%}%>
+		."     FROM ".$_GET["joinTable"]." t"
 		."     WHERE t.`<%table.primaryKey.name%>` = s.`<%table.primaryKey.name%>`"
 		."     AND t.$pkPreviousTable = \"".$_GET["id$nbPreviousTable"]."\") > 0;";
 } else {
 	$sql = "SELECT "
-		." `<%properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].cast("ComponentAttribute").field.name.sep("`,`")%>`"
 		<%if (properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].nSize()> 0){%>
-		.","
+		." `"
+		<%}%>
+		."<%properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].cast("ComponentAttribute").field.name.sep("`,`")%>"
+		<%if (properties[eClass().name.equalsIgnoreCase("ComponentAttribute") && canRead].nSize()> 0){%>
+		."`,"
 		<%}%>
 		." `<%table.primaryKey.name.split("`,`")%>`"
 	    ." FROM <%table.name%>;";

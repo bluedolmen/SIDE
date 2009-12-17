@@ -79,7 +79,7 @@ $sql = "SELECT "
 					$tableSource = "<%current("ComponentRelationShip").idLeft.eContainer().name%>";
 					$tableTarget = "<%current("ComponentRelationShip").idRight.eContainer().name%>";
 					$attributes = "`<%current("ComponentRelationShip").idRight.eContainer().fields.name.sep("`,`")%>`";
-						<%if (current("ComponentRelationShip").mandatoryRight){%>
+						<%if (current("ComponentRelationShip").manyRight){%>
 					$multiple = 1;
 						<%}else{%>
 					$multiple = 0;
@@ -95,7 +95,7 @@ $sql = "SELECT "
 					$tableSource = "<%current("ComponentRelationShip").idRight.eContainer().name%>";
 					$tableTarget = "<%current("ComponentRelationShip").idLeft.eContainer().name%>";
 					$attributes = "`<%current("ComponentRelationShip").idLeft.eContainer().fields.name.sep("`,`")%>`";
-						<%if (current("ComponentRelationShip").mandatoryLeft){%>
+						<%if (current("ComponentRelationShip").manyLeft){%>
 					$multiple = 1;
 						<%}else{%>
 					$multiple = 0;

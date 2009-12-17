@@ -56,8 +56,8 @@ rule agent {
 rule createGoalItem(s : RWM!Goal) {
 	to t : WebProject!GoalItem (
 		label <- s.name,
-		page <- thisModule.resolveTemp(s,'dataPage')--,
-		--sub <- s.subgoals->collect(g | thisModule.createGoalItem(g))
+		page <- thisModule.resolveTemp(s,'dataPage'),
+		sub <- s.subgoals->collect(g | thisModule.createGoalItem(g))
 	)
 	do {
 		t;
@@ -172,9 +172,11 @@ rule createComponentRelationShip(r : RWM!RelationShip, pset : Sequence(RWM!Privi
 	to c : WebProject!ComponentRelationShip (
 	    name <- r.name,
 	    idLeft <-thisModule.resolveTemp(r.source,'id'),
-        mandatoryLeft <- r.sourceMax = -1 or r.sourceMax > 1,
+        manyLeft <- r.sourceMax = -1 or r.sourceMax > 1,
+        mandatoryLeft <- r.sourceMin = 1 and r.sourceMax = 1,
 	    idRight <- thisModule.resolveTemp(r.target,'id'),
-        mandatoryRight <- r.targetMax = -1 or r.targetMax > 1,
+        manyRight <- r.targetMax = -1 or r.targetMax > 1,
+        mandatoryRight <- r.targetMin = 1 and r.targetMax = 1,
         canRead <- pset->select(p | p.element = r and p.category = #read)->size() > 0,
         canUpdate <- pset->select(p | p.element = r and p.category = #update)->size() > 0
     )

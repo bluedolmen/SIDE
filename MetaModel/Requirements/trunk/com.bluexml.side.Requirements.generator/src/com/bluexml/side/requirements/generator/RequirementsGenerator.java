@@ -1,6 +1,5 @@
 package com.bluexml.side.requirements.generator;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -8,13 +7,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
@@ -38,38 +34,7 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 	public Collection<IFile> generate(IFile model) throws Exception {
 		Collection<IFile> result = null;
 		try {
-			IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-			// Temporary project
-			IProject tmpProject = myWorkspaceRoot.getProject(".requirements");
-
-			// create and open if necessary
-			if (!tmpProject.exists()) {
-				tmpProject.create(null);
-			}
-			if (!tmpProject.isOpen()) {
-				tmpProject.open(null);
-			}
-			
-			/*tmpProject.setDefaultCharset("UTF-8", null);
-
-			IFolder outputFolder = tmpProject.getFolder("output");
-			if (!outputFolder.exists())
-				outputFolder.create(true, true, null);
-			IFolder modelFolder = tmpProject.getFolder("models");
-			if (!modelFolder.exists())
-				modelFolder.create(true, true, null);*/
-
-			// Create sub-directory
-			IPath path = model.getFullPath().removeLastSegments(1).removeFirstSegments(1);
-			IFolder newFolder = model.getProject().getFolder(path.toString() + File.separator + "Generated files for " + model.getName());
-			if (newFolder.exists())
-				newFolder.delete(true, null);
-
 			result = execute(model);
-
-			//Delete the temporary project
-			tmpProject.delete(true, new NullProgressMonitor());
-
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -96,25 +61,19 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 				
 				t.addInputModel(_modelName, _metamodelName, _modelFile, _metamodelFile);
 			}
+
+			IPath targetPath = new Path(getTargetPath());
+			targetPath = targetPath.append(new Path(getTEMP_FOLDER()));
 			for (String key : getOutputModels(keyGenerator).keySet()) {
 				String _modelName = key;
 				String _metamodelName = getOutputModels(keyGenerator).get(key);
 				//By default
 				String _metamodelFile = "/com.bluexml.side.Requirements.generator/" + getTargetMetamodel(keyGenerator);
-				String _modelFile = getTargetPath() + File.separator + getTargetModelName(keyGenerator);
+				String _modelFile = targetPath.append(getTargetModelName(keyGenerator)).toString();
 				
 				t.addOutputModel(_modelName, _metamodelName, _modelFile, _metamodelFile);
 			}
 			t.setContributor(Activator.getDefault().getBundle().getSymbolicName());
-
-			/*if (elt.getAttribute("new_name") == null || elt.getAttribute("new_name").length() == 0)
-			outputModelName = model.getName() + ".tmp";
-		else
-			outputModelName = elt.getAttribute("new_name");*/
-
-			//Serialize input model file with xmi:id
-			/*String newInputModelName = modelFolder.getLocation().toFile() + File.separator + model.getName();
-		IFile newInputModelFile = SIDE_XMIResource.export(model, newInputModelName);*/
 
 			try {
 				t.execute();
@@ -124,7 +83,7 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 			Set<String> outModels = t.getOutputModels();
 
 			for (String out : outModels) {
-				IPath p = new Path(out);
+				IPath p = new Path(out.replaceAll("%20", " "));
 				IFile omodel = ResourcesPlugin.getWorkspace().getRoot().getFile(p);
 				if (omodel.exists())
 					result.addAll(super.generate(omodel));
@@ -139,13 +98,6 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 			IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 			a.execute(myWorkspaceRoot.getFolder(new Path(getTemporaryFolder())));
 
-			//Delete models
-			for (String out : outModels) {
-				IPath p = new Path(out);
-				IFile omodel = ResourcesPlugin.getWorkspace().getRoot().getFile(p);
-				if (omodel.exists())
-					omodel.delete(true, null);
-			}	
 			monitor.addText("End of model interpretation");
 		}
 		return result;
