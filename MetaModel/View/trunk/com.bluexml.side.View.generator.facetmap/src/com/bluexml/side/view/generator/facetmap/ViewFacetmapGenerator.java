@@ -16,30 +16,27 @@
  ******************************************************************************/
 package com.bluexml.side.view.generator.facetmap;
 
-import java.io.File;
-import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
-import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
-import com.bluexml.side.util.libs.FileHelper;
+import com.bluexml.side.util.generator.packager.WarPatchPackager;
 import com.bluexml.side.util.libs.IFileHelper;
-import com.bluexml.side.util.libs.zip.ZipManager;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
-import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
 
 /**
  * @author <a href="mailto:pbertrand@bluexml.com"> Pierre BERTRAND </a>
  * 
  */
-public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator implements FacetmapConstants {
+public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2"; //$NON-NLS-1$
 
 	public static String ALFRESCO_URL_defaultValue = "http://localhost:8080/alfresco"; //$NON-NLS-1$
@@ -82,6 +79,9 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-sql2xfml-generation.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslbasicfacets-generation.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslglobal-generation.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnavContent-generation.mt"); //$NON-NLS-1$
+		
 		// results
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-content-basicresults-generation.mt"); //$NON-NLS-1$
 		return templates;
@@ -100,97 +100,23 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		return configurationParameters.get(paramName);
 	}
 
-	public Collection<IFile> complete() throws Exception {
-		if (groupedModels.entrySet().size() > 1)
-			try {
-				throw new Exception(Activator.Messages.getString("ViewFacetmapGenerator.14")); //$NON-NLS-1$
-			} catch (Exception e) {
-				monitor.addErrorTextAndLog(Activator.Messages.getString("ViewFacetmapGenerator.15"), e, null); //$NON-NLS-1$
-			}
-		setTEMP_FOLDER("generator_" + getClass().getName()); //$NON-NLS-1$
-		// Adding file generated to log
-		generatedFiles.addAll(buildPackages(groupedModels.keySet().toArray()[0].toString()));
-		for (IFile f : generatedFiles) {
-			monitor.getLog().addFileGeneratedLog(Activator.Messages.getString("ViewFacetmapGenerator.17"), f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI()); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
-		// add resources to match with package dependencies
-		try {
-			addDependences();
-		} catch (Exception e) {
-			monitor.addErrorTextAndLog(Activator.Messages.getString("ViewFacetmapGenerator.19"), e, null); //$NON-NLS-1$
-		}
-		// Adding services to log
-		// CMIS
-		String alfrescoUrl = generationParameters.get(AbstractAlfrescoGenerator.CONFIGURATION_PARAMETER_ALFRESCO_URL);
-		if (alfrescoUrl != null && alfrescoUrl.length() > 0) {
-			if (!alfrescoUrl.endsWith("/")) { //$NON-NLS-1$
-				alfrescoUrl += "/"; //$NON-NLS-1$
-			}
-		} else {
-			alfrescoUrl = ALFRESCO_URL_defaultValue;
-			monitor.getLog().addWarningLog(Activator.Messages.getString("ViewFacetmapGenerator.22"), Activator.Messages.getString("ViewFacetmapGenerator.23") + alfrescoUrl, ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		}
-		String cmisUri = alfrescoUrl + "service/com/bluexml/side/facetMap/doclist_user.xml"; //$NON-NLS-1$
-		monitor.getLog().addServiceLog(Activator.Messages.getString("ViewFacetmapGenerator.26"), Activator.Messages.getString("ViewFacetmapGenerator.27"), cmisUri); //$NON-NLS-1$ //$NON-NLS-2$
-		// Dashlets
-		String shareUrl = generationParameters.get(AbstractAlfrescoGenerator.CONFIGURATION_PARAMETER_ALFRESCOSHARE_URL);
-		if (shareUrl != null && shareUrl.length() > 0) {
-			if (!shareUrl.endsWith("/")) { //$NON-NLS-1$
-				shareUrl += "/"; //$NON-NLS-1$
-			}
-		} else {
-			// set to default value
-			shareUrl = ALFRESCO_SHARE_URL_defaultValue;
-			monitor.getLog().addWarningLog(Activator.Messages.getString("ViewFacetmapGenerator.24"), Activator.Messages.getString("ViewFacetmapGenerator.31") + shareUrl, ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		}
-		String dashletContentUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/content"; //$NON-NLS-1$
-		String dashletFacetstUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/facet"; //$NON-NLS-1$
-		monitor.getLog().addServiceLog(Activator.Messages.getString("ViewFacetmapGenerator.35"), Activator.Messages.getString("ViewFacetmapGenerator.36"), dashletContentUri); //$NON-NLS-1$ //$NON-NLS-2$
-		monitor.getLog().addServiceLog(Activator.Messages.getString("ViewFacetmapGenerator.37"), Activator.Messages.getString("ViewFacetmapGenerator.38"), dashletFacetstUri); //$NON-NLS-1$ //$NON-NLS-2$
-
-		return generatedFiles;
-	}
-
 	@Override
-	public Collection<IFile> buildPackages(String modelId) {
+	public Collection<IFile> buildPackages(String modelId) throws Exception {
 		Collection<IFile> pkgs = new ArrayList<IFile>();
-		String folder = IFileHelper.getSystemFolderPath(getTemporaryFolder() + FILESEP + modelId) + FILESEP;
-		// Destinations
-		String destFacets = folder + "zip" + FILESEP + WEBAPP_FACETS; //$NON-NLS-1$
-		String destContent = folder + "zip" + FILESEP + WEBAPP_CONTENT; //$NON-NLS-1$
-		if (new File(folder).listFiles().length > 0) {
-			try {
-				// Copy
-				FileHelper.copyFiles(new File(folder + "common"), new File(destFacets), true); //$NON-NLS-1$
-				FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true); //$NON-NLS-1$
-				FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true); //$NON-NLS-1$
-				FileHelper.copyFiles(new File(folder + "content"), new File(destContent), true); //$NON-NLS-1$
-			} catch (IOException e) {
-				monitor.addErrorTextAndLog(Activator.Messages.getString("ViewFacetmapGenerator.45"), e, null); //$NON-NLS-1$
-			}
-
-			// Zip
-			String zipFolder = IFileHelper.getSystemFolderPath(getTargetPath() + FILESEP + getTechVersion()) + FILESEP;
-			new File(zipFolder).mkdirs();
-			File zipFacets = new File(zipFolder + WEBAPP_FACETS + ".zip"); //$NON-NLS-1$
-			File zipContent = new File(zipFolder + WEBAPP_CONTENT + ".zip"); //$NON-NLS-1$
-			try {
-				ZipManager.zip(new File(destFacets), zipFacets, false);
-				ZipManager.zip(new File(destContent), zipContent, false);
-			} catch (Exception e) {
-				monitor.addErrorTextAndLog(Activator.Messages.getString("ViewFacetmapGenerator.48"), e, null); //$NON-NLS-1$
-			}
-			// Creating file collection
-			IFolder workingDir = IFileHelper.getIFolder(getTemporaryFolder() + FILESEP + "../"); //$NON-NLS-1$
-
-			pkgs.add(IFileHelper.getIFile(workingDir.toString().replaceFirst("[^/]*/", "/") + FILESEP + getTechVersion() + FILESEP + WEBAPP_FACETS + ".zip")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			pkgs.add(IFileHelper.getIFile(workingDir.toString().replaceFirst("[^/]*/", "/") + FILESEP + getTechVersion() + FILESEP + WEBAPP_CONTENT + ".zip")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		} else {
-			// no files generated, commonly happen when view model do not contains facetmap view 
-			this.monitor.addWarningTextAndLog("FacetMap View Not found, check your view model or unselect this generator", "");
-		}
+		WarPatchPackager pkger = new WarPatchPackager(IFileHelper.getIFolder(getTemporaryFolder()), buildModuleProperties(modelId), techVersion, "facetmap");
+		IFile package_ = pkger.buildPackage();
+		pkgs.add(package_);
 		return pkgs;
 	}
 
+	public Properties buildModuleProperties(String rootPackage) {
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss"); //$NON-NLS-1$
+		Properties props = new Properties();
+		props.put("module.id", "SIDE_FacetMapExtension_" + rootPackage); //$NON-NLS-1$ //$NON-NLS-2$
+		props.put("module.version", getVersioNumber()); //$NON-NLS-1$
+		props.put("module.title", Activator.Messages.getString("ClassAlfrescoGenerator_7")); //$NON-NLS-1$
+		props.put("module.description", Activator.Messages.getString("ClassAlfrescoGenerator_8") + sdf.format(now)); //$NON-NLS-1$
+		return props;
+	}
 }

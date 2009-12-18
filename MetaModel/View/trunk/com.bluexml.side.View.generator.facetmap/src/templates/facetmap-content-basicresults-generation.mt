@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./content/xsl/display/includes/basic-Results.xsl
+	./webapps/facetmap/xsl/display/includes/basic_<%name%>-Results.xsl
 	
 <%script type="view.FacetMap" name="rightnavGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="iso-8859-1"?>

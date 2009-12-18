@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./facets/xsl/display/Rightnav.xsl
+	./webapps/facetmap/xsl/display/Rightnav_<%name%>_facets.xsl
 	
 <%script type="view.FacetMap" name="morePagingFacet"%>
 <xsl:if test="count(s) &gt; $nb_paging_facets">
@@ -34,7 +34,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
         Likely this should be the path to your processor i.e. 'myinputprocessor.jsp?ref='
     -->
     <xsl:include href="includes/basic-Global.xsl"/>
-    <xsl:include href="includes/basic-Facets.xsl"/>
+    <xsl:include href="includes/basic_<%name%>-Facets.xsl"/>
     <!-- URL -->
 
     <xsl:template match="selection">
@@ -43,12 +43,10 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	        <div class="facets-title">
 	            <div style="display: inline; align: left;">Criteres</div>
 		        <div style="display: inline; align: right;">
-				    <input type="button" name="config_facet" id="config_facet" value="Configurer"
-				        onclick="setup()"/>
-				    <input type="button" name="update_facets" id="update_facets" value="Mise à jour" 
-		                    onclick="update_facets()"/>
-		            <input type="button" name="update_facets_with_SQL" id="update_facets_with_SQL" value="Mise à jour par SQL" 
-		                    onclick="update_facets_with_SQL()"/>
+		        	<xsl:if test="{$isAdmin == 'true'}">
+						<input type="button" name="config_facet" id="config_facet"
+							value="Configurer" onclick="setup('{$facetName}','{$community}')" />
+					</xsl:if>
 				</div>
 	        </div>
 	        <hr Class="hr1"/>
@@ -100,15 +98,15 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 				<%}else{%>
 					<xsl:attribute name="style"/>
 				<%}%>
-				<a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
-	                onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
+				<a href="{$pre_reference_url}{@ref}{$facetName}{$community}"
+	                onclick="show_selection('{$pre_reference_url}{@ref}{$facetName}{$community}')">
 	                <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>)
 	            </a>
 	        </li>
         <%}%>
         <%if (facetDisplayType == "cloud"){%>
-              <a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
-	                onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
+              <a href="{$pre_reference_url}{@ref}{$facetName}{$community}"
+	                onclick="show_selection('{$pre_reference_url}{@ref}{$facetName}{$community}')">
 	                <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>)
 	          </a>
             <xsl:text>  </xsl:text>
@@ -129,8 +127,8 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
-              <a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
-	                onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
+              <a href="{$pre_reference_url}{@ref}{$facetName}{$community}"
+	                onclick="show_selection('{$pre_reference_url}{@ref}{$facetName}{$community}')">
 	                <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>)
               </a>
             </span>

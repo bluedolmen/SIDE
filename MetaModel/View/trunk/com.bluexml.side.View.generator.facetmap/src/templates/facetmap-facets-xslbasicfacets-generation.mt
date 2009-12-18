@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./facets/xsl/display/includes/basic-Facets.xsl
+	./webapps/facetmap/xsl/display/includes/basic_<%name%>-Facets.xsl
 
 <%script type="view.FacetMap" name="basicGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="iso-8859-1"?>
@@ -13,9 +13,6 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 version="1.0">
  
   <!-- URL -->
-  <xsl:param name="server">../</xsl:param>
-  <xsl:param name="app">facetmap-content</xsl:param>
-  <xsl:param name="app2">facetmap-facets</xsl:param>
   <xsl:param name="nb_paging_facets"><%paging.maxItems%></xsl:param>
   
   <xsl:template match="superset">
@@ -38,7 +35,7 @@ version="1.0">
     <xsl:if test="position()!=1">
     <xsl:text> &gt; </xsl:text>
 	</xsl:if>
-    <a href="{$server}/{$app2}/{$pre_reference_url}{@ref}" onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
+    <a href="{$pre_reference_url}{@ref}{$facetName}{$community}" onclick="show_selection('{$pre_reference_url}{@ref}{$facetName}{$community}')">
       <xsl:value-of select="@title" />
     </a>
   </xsl:template>
@@ -51,6 +48,8 @@ version="1.0">
         <xsl:value-of select="$pre_reference_url" />
         <xsl:value-of select="$ref" />
         <xsl:value-of select="$post_reference_url" />
+        <xsl:value-of select="$facetName" />
+        <xsl:value-of select="$community" />
       </xsl:attribute>
       <xsl:value-of select="$text" />
     </xsl:element>

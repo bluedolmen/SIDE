@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./facets/WEB-INF/xsl/cmis2xfml.xsl
+	./webapps/facetmap/WEB-INF/classes/alfrescoConnector/xsl/<%name%>/cmis2xfml.xsl
 
 <%-- get the correct path to the cmis element when you got a FieldElement --%>
 <%script type="view.FieldElement" name="cmisPath"%>	
@@ -41,7 +41,7 @@ child::entry/<% cmisPath() %>
 	
 <%script type="view.FacetMap" name="cmis2xfmlGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cmis="http://www.cmis.org/2008/05" xmlns:alf="http://www.alfresco.com" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200901" xmlns:alf="http://www.alfresco.com" version="2.0">
 	 <!-- classes node -->
 	<xsl:template match="classes">
 	    <facetmap>

@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./facets/WEB-INF/xsl/sql2xfml.xsl
+	./webapps/facetmap/WEB-INF/classes/alfrescoConnector/xsl/<%name%>/sql2xfml.xsl
 
 <%script type="view.FieldElement" name="contentModelUrl"%>
 {http://www.bluexml.com/model/content/com/1.0}
