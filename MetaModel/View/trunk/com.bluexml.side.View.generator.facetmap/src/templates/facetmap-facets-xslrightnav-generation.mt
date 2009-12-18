@@ -43,7 +43,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	        <div class="facets-title">
 	            <div style="display: inline; align: left;">Criteres</div>
 		        <div style="display: inline; align: right;">
-		        	<xsl:if test="{$isAdmin == 'true'}">
+		        	<xsl:if test="$isAdmin = 'true'">
 						<input type="button" name="config_facet" id="config_facet"
 							value="Configurer" onclick="setup('{$facetName}','{$community}')" />
 					</xsl:if>
