@@ -1,4 +1,5 @@
 script: {
+	
 	var contentType = "Document";
 	if (args["contentType"] && args["contentType"].indexOf(":") !=-1) {
 		contentType = args["contentType"].replace(":", "_");

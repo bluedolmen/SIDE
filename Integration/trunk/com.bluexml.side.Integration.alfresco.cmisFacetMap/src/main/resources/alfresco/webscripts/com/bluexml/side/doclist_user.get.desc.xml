@@ -11,7 +11,7 @@ pageSize 	: pagination parameters, default value is '5'<br/>
 ]]>
   </description>
 	<url>/com/bluexml/side/facetMap/doclist_user?contentType={model}:{type}&amp;skipCount={skipCount}&amp;pageSize={pageSize}</url>
-	<authentication>user</authentication>
+	<authentication runas="dabad" >admin</authentication>
 	<transaction allow="readonly" />
 	<format default="xml" />
 	<family>SIDE</family>

@@ -1,7 +1,17 @@
 <projectDescription>
-  <name>com.bluexml.side.Integration.alfresco.cmisFacetMap</name>
-  <comment>Test AMP project</comment>
+  <name>cmisFacetMap</name>
+  <comment>A webscript that lists the document of a certain type. It is used by facetmap to browse documents</comment>
   <projects/>
-  <buildSpec/>
-  <natures/>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+    <buildCommand>
+      <name>org.maven.ide.eclipse.maven2Builder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+    <nature>org.maven.ide.eclipse.maven2Nature</nature>
+  </natures>
 </projectDescription>
