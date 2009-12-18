@@ -1,39 +1,45 @@
 package com.bluexml.side.framework.facetmap.alfrescoConnector;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.tools.ant.Project;
-import org.w3c.dom.Node;
-import org.w3c.dom.bootstrap.DOMImplementationRegistry;
-import org.w3c.dom.ls.DOMImplementationLS;
-import org.w3c.dom.ls.LSSerializer;
+import javax.servlet.http.HttpServletRequest;
 
-import com.facetmap.Selection;
-import com.facetmap.simple.XmlGenerator;
+import org.apache.tools.ant.Project;
+
+import com.bluexml.side.framework.facetmap.multimap.FacetMapNotAvailableException;
 
 public class Helper {
 	public static String cacheRep = "/multimap/cache";
 	public static String alfrescoConnector = "/alfrescoConnector";
 
-	public Properties getProperties(String mapId) {
-		InputStream in = this.getClass().getResourceAsStream(alfrescoConnector+"/build."+mapId+".properties");
+	public Properties getProperties(String mapId) throws FacetMapNotAvailableException {
 		Properties p = new Properties();
+		String fileName = "/build." + mapId + ".properties";
+		if (mapId ==null) {
+			fileName = "/build.properties";
+		}
+		
+		String path = alfrescoConnector + fileName;
 		try {
+			File f = getFileFromClassPath(path);
+			// InputStream in = this.getClass().getResourceAsStream(path);
+			InputStream in = new FileInputStream(f);
+
 			p.load(in);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new FacetMapNotAvailableException("Error occure while updating facetmap, check facet name :" + mapId, e);
 		}
 		return p;
 	}
 
 	public File getBuildFile() throws Exception {
-		return getFileFromClassPath(alfrescoConnector+"/build.xml");
+		return getFileFromClassPath(alfrescoConnector + "/build.xml");
 	}
 
 	public File getFileFromClassPath(String path) throws Exception {
@@ -48,33 +54,23 @@ public class Helper {
 		}
 	}
 
-	
-	public String serializeFMap(com.facetmap.Map selection) throws Exception {
-		XmlGenerator xml = new XmlGenerator();     
-        return serializeDom(xml.documentOf(selection));
+	public File getMapFile(String mapId, String community) throws Exception {
+		return new File(new Helper().getFileFromClassPath(Helper.cacheRep), getFacetId(mapId, community));
+	}
+
+	public String getFacetId(String mapId, String community) {
+		return "map_" + mapId + "_" + community + ".xml";
+	}
+
+	public boolean isCommunityAdmin(HttpServletRequest req) {
+		String community = req.getParameter("community");
+		List<String> auths = (List<String>) req.getSession().getAttribute("userRight");
+		String authToSearch = "GROUP_site_" + community + "_SiteManager";
+		return auths.contains(authToSearch);
 	}
 	
-	public String serializeFMap(Selection selection) throws Exception {
-		XmlGenerator xml = new XmlGenerator();     
-        return serializeDom(xml.documentOf(selection));
-	}
-	
-	public String serializeDom(Node doc) throws Exception {
-
-		DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
-
-		DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
-
-		LSSerializer writer = impl.createLSSerializer();
-
-		String str = writer.writeToString(doc);
-		return str;
-	}
-	
-	public boolean checkUserSession() {
-		boolean auth =false;
-		
-		
-		return auth;
+	public boolean isAdmin(List<String> auths) {
+		String authToSearch = "ROLE_ADMINISTRATOR";
+		return auths.contains(authToSearch);
 	}
 }

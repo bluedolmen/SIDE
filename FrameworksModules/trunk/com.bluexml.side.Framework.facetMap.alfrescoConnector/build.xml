@@ -1,4 +1,4 @@
-<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="alfrescoShare.alfrescoConnector" default="patchWebapps">
+<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.side.Framework.facetMap.alfrescoConnector" default="patchWebapps">
 	<property file="${user.home}/build.properties" />
 	<property file="build.${user.name}.properties" />
 	<path id="maven-ant-tasks.classpath" path="maven-ant-tasks-2.0.10.jar" />
@@ -11,8 +11,8 @@
 	         ================================= -->
 	<target name="patchWebapps" depends="" description="build and install in local alfresco">
 		<echo message="use maven to build package..." />
-		<maven basedir="${basedir}" options="" goal="clean" resultproperty="maven.build.result" />
-		<maven basedir="${basedir}" options="" goal="package" resultproperty="maven.build.result" />
+		<maven basedir="${basedir}" options="-P offline" goal="clean" resultproperty="maven.build.result" />
+		<maven basedir="${basedir}" options="-P offline" goal="install" resultproperty="maven.build.result" />
 		<!--<artifact:mvn pom="pom.xml" mavenHome="${maven.home}">
 				<arg value="clean" />
 				<arg value="package" />
@@ -21,10 +21,15 @@
 		<echo message="==========" />
 		<echo message="patch the web application webapps.home=${webapps.home}" />
 
-	
+		<delete verbose="true">
+			<fileset dir="${webapps.home}/${webappName}/WEB-INF/lib">
+				<include name="${moduleId}-*.jar" />
+			</fileset>
+		</delete>
+
 		<unzip dest="${webapps.home}/${webappName}" overwrite="true" src="target/${moduleId}-${mypom.version}.zip">
 		</unzip>
-		
+
 		<!--
 		<copy todir="${webapps.home}/${webappName}" overwrite="true" failonerror="false" verbose="true">
 			<fileset dir="target/${moduleId}-${mypom.version}" id="id">

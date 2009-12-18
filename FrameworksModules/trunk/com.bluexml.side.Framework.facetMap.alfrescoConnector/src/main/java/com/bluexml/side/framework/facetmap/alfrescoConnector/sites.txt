@@ -1,0 +1,20 @@
+
+[
+{
+	"url" : "\/alfresco\/service\/api\/sites\/demo",
+	"sitePreset" : "site-dashboard",
+	"shortName" : "demo",
+	"title" : "demo",
+	"description" : "",
+		"node" : "\/alfresco\/service\/api\/node\/workspace\/SpacesStore\/07bbd19d-c4a1-44f2-b694-d2965f282294",
+		"tagScope" : "\/alfresco\/service\/api\/tagscopes\/workspace\/SpacesStore\/07bbd19d-c4a1-44f2-b694-d2965f282294",
+	"isPublic" : true,
+	"visibility" : "PUBLIC",
+	"siteManagers" : 
+	[			
+         "admin"  
+         
+   ]
+}
+		
+]

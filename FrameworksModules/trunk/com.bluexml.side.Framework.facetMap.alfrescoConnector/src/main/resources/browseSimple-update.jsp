@@ -1,4 +1,5 @@
 <%@page
+	import="com.bluexml.side.framework.facetmap.multimap.FacetMapAlfrescoServlet"%><%@page
 	import="com.bluexml.side.framework.facetmap.alfrescoConnector.Updater"%>
 <%@ page
 	import="java.io.File,org.apache.tools.ant.Project,org.apache.tools.ant.ProjectHelper;
@@ -6,12 +7,17 @@ import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;"
 	contentType="text/html; charset=ISO-8859-1"%>
+<jsp:include page="security.jsp" />
 <%
-	String mapId = (String) request.getSession().getAttribute("current_map");
+	FacetMapAlfrescoServlet fms = (FacetMapAlfrescoServlet) getServletContext().getAttribute("com.facetmap.servlet");
+	
+	
+	String current = Updater.update(request);
+	System.out.println(current);
 
-	Updater.update(request.getHeader("host"), mapId);
+	fms.updateFacets();
 %>
 
 <%
-	response.sendRedirect("servletParameters.jsp");
+	response.sendRedirect("browseSimple_facets.jsp?"+request.getQueryString());
 %>

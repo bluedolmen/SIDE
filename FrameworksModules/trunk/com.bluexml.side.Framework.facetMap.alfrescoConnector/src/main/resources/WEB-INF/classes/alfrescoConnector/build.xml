@@ -6,8 +6,9 @@
 		<!-- creating the folder for result-->
 		<mkdir dir="${ant.infFolder}" />
 		<!-- getting the file-->
-		<get src="http://${ant.host}/${ant.CMISurl}?contentType=${ant.contentType}" dest="${ant.infFolder}${ant.CMISresult}" username="${ant.usernameAlfresco}" password="${ant.passwordAlfresco}" />
-		<echo message="http://${ant.host}/${ant.CMISurl}?contentType=${ant.contentType}" />
+		<echo message="http://${ant.host}/${ant.CMISurl}?contentType=${ant.contentType}&amp;folder=${ant.community}" />
+		<get src="http://${ant.host}/${ant.CMISurl}?contentType=${ant.contentType}&amp;folder=${ant.community}" dest="${ant.infFolder}${ant.CMISresult}" username="${ant.usernameAlfresco}" password="${ant.passwordAlfresco}" />
+		
 		<echo message="${ant.infFolder}${ant.CMISresult}" />
 		<echo message="${ant.usernameAlfresco}" />
 		<echo message="${ant.passwordAlfresco}" />
@@ -18,12 +19,9 @@
 			<fileset dir="." includes="${ant.infFolder}${ant.CMISresult}" />
 		</replaceregexp>
 		<!-- making the xslt tranformation-->
-		<xslt basedir="." in="${ant.infFolder}${ant.CMISresult}" out="${ant.infFolder}${ant.Mapname}" processor="trax" style="${ant.infFolder}${ant.xslFolder}cmis2xfml.xsl">
+		<xslt basedir="." in="${ant.infFolder}${ant.CMISresult}" out="${ant.Mapname}" processor="trax" style="${ant.infFolder}${ant.xslFolder}cmis2xfml.xsl">
 			<outputproperty name="encoding" value="${ant.encoding}" />
 		</xslt>
-		<!-- Copying the file in the folder of the results -->
-		<copy file="${ant.infFolder}${ant.Mapname}" toFile="../../facetmap-content/WEB-INF/${ant.Mapname}" overwrite="true" />
-		<!-- cleaning the folder-->
-		<delete file="${ant.infFolder}${ant.CMISresult}" />
+		
 	</target>
 </project>
