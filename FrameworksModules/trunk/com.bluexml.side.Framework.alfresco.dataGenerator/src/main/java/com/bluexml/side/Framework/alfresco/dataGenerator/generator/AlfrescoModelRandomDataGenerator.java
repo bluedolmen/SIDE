@@ -26,6 +26,7 @@ import org.alfresco.util.ISO8601DateFormat;
 import com.bluexml.side.Framework.alfresco.dataGenerator.data.AlfrescoModelData;
 import com.bluexml.side.Framework.alfresco.dataGenerator.data.IData;
 import com.bluexml.side.Framework.alfresco.dataGenerator.dictionary.IDictionary;
+import com.bluexml.side.Framework.alfresco.dataGenerator.graph.AlfrescoArc;
 import com.bluexml.side.Framework.alfresco.dataGenerator.graph.AlfrescoNode;
 import com.bluexml.side.Framework.alfresco.dataGenerator.graph.IArc;
 import com.bluexml.side.Framework.alfresco.dataGenerator.graph.INode;
@@ -43,7 +44,9 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 	
 	private IDictionary dictionary;
 	private int numberOfNodes;
-	private int numberOfOutputArcs;	
+	private int numberOfOutputArcs;
+	
+	private Collection<INode> nodesToDelete = new ArrayList<INode>();
 	
 	private static class RandomMethods {
 		
@@ -224,6 +227,20 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		this.alfrescoModelDatas = alfrescoModelDatas;
 	}
 	
+	/**
+	 * @return the nodesToDelete
+	 */
+	public Collection<INode> getNodesToDelete() {
+		return nodesToDelete;
+	}
+
+	/**
+	 * @param nodesToDelete the nodesToDelete to set
+	 */
+	public void setNodesToDelete(Collection<INode> nodesToDelete) {
+		this.nodesToDelete = nodesToDelete;
+	}
+
 	public boolean generateNodesInstances(IStructure structure) throws Exception{
 		List<INode> nodesInstances = new ArrayList<INode>();
 		Collection<TypeDefinition> createdTypes = new ArrayList<TypeDefinition>();
@@ -310,6 +327,12 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 					}
 					arcsInstances.addAll(arcsInstancesByAssociation);
 				}
+				if (!sourceMultiplicity || !targetMultiplicity){
+					arcsInstances.removeAll(getSameArcs(arcsInstances));
+				}
+//				if (!sourcesNodes.isEmpty() && associationDefinition.isTargetMandatory()){
+//					nodesToDelete.addAll(sourcesNodes);
+//				}
 			}
 			((AlfrescoModelData) alfrescoModelDatas).setGeneratedAssociationsInstances(arcsInstances);
 		}
@@ -381,6 +404,9 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 	public IArc createRandomlyArc(INode source, INode target, AssociationDefinition associationDefinition) {
 		IArc arc = null;
 		boolean isCreated = RandomMethods.randomGenerator.nextBoolean();
+		if (associationDefinition.isTargetMandatory()){
+			isCreated = true;
+		}
 		if (isCreated){
 			arc = ((Instance) instance).instanciation(source,target,associationDefinition);
 		}
@@ -398,12 +424,12 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			}
 			sourcesNodes.remove(source);
 			targetsNodes.remove(target);
-			if (targetsNodes.contains(source)){
-				targetsNodes.remove(source);
-			}
-			if (sourcesNodes.contains(target)){
-				sourcesNodes.remove(target);
-			}
+//			if (targetsNodes.contains(source)){
+//				targetsNodes.remove(source);
+//			}
+//			if (sourcesNodes.contains(target)){
+//				sourcesNodes.remove(target);
+//			}
 		}
 		return arcsInstances;
 	}
@@ -453,6 +479,46 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			dataAspects.put(aspect,dataProperties);
 		}
 		return dataAspects;
+	}
+	
+//	public void deleteExceededNodes(){
+//		Collection<INode> generatedNodes = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedTypesInstances();
+//		generatedNodes.removeAll(nodesToDelete);
+//		((AlfrescoModelData) alfrescoModelDatas).setGeneratedTypesInstances(generatedNodes);
+//	}
+	
+	public void deleteExceededArcs(){
+		Collection<IArc> generatedArcs = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedAssociationsInstances();
+		Collection<IArc> temp = new ArrayList<IArc>();
+		for (IArc iArc : generatedArcs) {
+			if (((AlfrescoArc)iArc).getTypeAssociation().isSourceMandatory()){
+				temp.add(iArc);
+			}
+		}
+		generatedArcs.removeAll(temp);
+		((AlfrescoModelData) alfrescoModelDatas).setGeneratedAssociationsInstances(generatedArcs);
+	}
+	
+	private Collection<IArc> getSameArcs(Collection<IArc> generatedArcs){
+		Collection<INode> sources = new ArrayList<INode>();
+		Collection<INode> targets = new ArrayList<INode>();
+		for (IArc iArc : generatedArcs) {
+			AlfrescoNode src = (AlfrescoNode)((AlfrescoArc)iArc).getSource();
+			AlfrescoNode tgt = (AlfrescoNode)((AlfrescoArc)iArc).getTarget();
+			sources.add(src);
+			targets.add(tgt);
+		}
+		Collection<IArc> same = new ArrayList<IArc>();
+		for (IArc iArc : generatedArcs){
+			for (INode src : sources){
+				for (INode tgt : targets){
+					if (targets.contains(src) && sources.contains(tgt)){
+						same.add(iArc);
+					}
+				}
+			}
+		}
+		return same;
 	}
 
 }
