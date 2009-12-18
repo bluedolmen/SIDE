@@ -134,19 +134,20 @@ public class AlfrescoCommunicator {
 
 		for (int c = 0; c < json.length(); c++) {
 			JSONObject site = json.getJSONObject(c);
-			String url = site.getString("url");
-			String sitePreset = site.getString("sitePreset");
+//			String url = site.getString("url");
+//			String sitePreset = site.getString("sitePreset");
+//			
+//			String title = site.getString("title");
+//			String description = site.getString("description");
+//			String node = site.getString("node");
+//			String tagScope = site.getString("tagScope");
+//			String isPublic = site.getString("isPublic");
+//			String visibility = site.getString("visibility");
+//			JSONArray sitesManagers = site.getJSONArray("sitesManagers");
+//			for (int i = 0; c < sitesManagers.length(); i++) {
+//				String username = sitesManagers.getString(i);
+//			}
 			String shortName = site.getString("shortName");
-			String title = site.getString("title");
-			String description = site.getString("description");
-			String node = site.getString("node");
-			String tagScope = site.getString("tagScope");
-			String isPublic = site.getString("isPublic");
-			String visibility = site.getString("visibility");
-			JSONArray sitesManagers = site.getJSONArray("sitesManagers");
-			for (int i = 0; c < sitesManagers.length(); i++) {
-				String username = sitesManagers.getString(i);
-			}
 			ls.add(shortName);
 		}
 
