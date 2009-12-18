@@ -85,8 +85,8 @@
     </session-config>
     
 	<error-page>
-		<exception-type>com.bluexml.side.framework.facetmap.multimap.FacetMapNotAvailableException</exception-type>
-		<location>/facetMapError.jsp</location>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>facetMapError.jsp</location>
 	</error-page>
 
 </web-app>

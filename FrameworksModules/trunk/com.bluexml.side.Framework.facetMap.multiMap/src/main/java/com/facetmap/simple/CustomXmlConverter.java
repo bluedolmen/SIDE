@@ -1,8 +1,5 @@
 package com.facetmap.simple;
 
-import java.io.File;
-import java.net.URL;
-
 import com.facetmap.DataException;
 import com.facetmap.InternalException;
 import com.facetmap.Map;
@@ -19,8 +16,8 @@ public class CustomXmlConverter extends XmlConverter {
 		return simplefacetmap;
 	}
 
-	public CustomXmlConverter(URL url, File file) {
-		super(url, file);
+	public CustomXmlConverter() {
+		super();
 	}
 
 	

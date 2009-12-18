@@ -16,23 +16,17 @@
 	com.bluexml.side.framework.facetmap.multimap.*"
 	contentType="text/html; charset=ISO-8859-1" 
  %>
+<jsp:include page="security.jsp" />
 <%
 	FacetMapAlfrescoServlet fms = (FacetMapAlfrescoServlet)getServletContext().getAttribute("com.facetmap.servlet");
-	String groupId ="admin";
-	String contentType="cm:content";
-	contentType="com:com_bluexml_demo_rh_Personne";
-	if (request.getParameter("contentType") !=null) {
-		contentType=request.getParameter("contentType");
-	}
 	
-	String mapId=contentType+"_"+groupId;
-	
-	Map facetmap = (Map)fms.getMap(request, mapId);
+	FacetMapInstance fmi = fms.getFacetInstance(request);
+	Map facetmap = (Map)fmi.getFacet();
 	System.out.println("facetMap loaded");
 	Selection selection = ServletUtil.processRequest(request, facetmap);
 	String sRef = selection.getRef();
 	request.setAttribute("_selection", selection);
-	String view = fms.getParameter("view_facets");
+	String view = fmi.getProps().getProperty("view_facets");
 	
 	response.setHeader("Cache-control", "max-age=0, no-cache");
 %>

@@ -13,22 +13,16 @@
 	javax.xml.transform.stream.StreamSource,
 	javax.xml.transform.stream.StreamResult,
 	javax.xml.transform.dom.DOMResult,
-	com.bluexml.side.framework.facetmap.multimap.*,
-	com.bluexml.side.framework.facetmap.multimap.FacetMapAlfrescoServlet,
-	com.bluexml.side.framework.facetmap.alfrescoConnector.Helper"
+	com.bluexml.side.framework.facetmap.multimap.*	
+	"
 	contentType="text/html; charset=ISO-8859-1" 
  %>
+  <jsp:include page="security.jsp" />
 <%
 	FacetMapAlfrescoServlet fms = (FacetMapAlfrescoServlet)getServletContext().getAttribute("com.facetmap.servlet");
-	String groupId ="admin"; // must use alfresco srvice to get group
-	String contentType="cm:content";
-	contentType="com:com_bluexml_demo_rh_Personne";
-	if (request.getParameter("contentType") !=null) {
-		contentType=request.getParameter("contentType");
-	}
-	
-	String mapId=contentType+"_"+groupId;
-	Map facetmap = (Map)fms.getMap(request,mapId);
+
+	FacetMapInstance fmi = fms.getFacetInstance(request);
+	Map facetmap = (Map)fmi.getFacet();
 	System.out.println("facetMap loaded");
 	
 	Selection selection = ServletUtil.processRequest(request, facetmap);
@@ -36,7 +30,7 @@
 	
 	String sRef = selection.getRef();
 	request.setAttribute("_selection", selection);
-	String view = fms.getParameter("view_content");
+	String view = fmi.getProps().getProperty("view_content");
 	System.out.println("use View :"+view);
 	response.setHeader("Cache-control", "max-age=0, no-cache");
 %>

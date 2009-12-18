@@ -22,10 +22,9 @@ public class BrowseServlet extends BrowseXmlServlet {
 		XmlGenerator xmlgenerator = new XmlGenerator();
 		httpservletresponse.setContentType("text/xml");
 		try {
-//			Map map = (Map) getServletContext().getAttribute("facetmap");
 			FacetMapAlfrescoServlet fms = (FacetMapAlfrescoServlet)getServletContext().getAttribute("com.facetmap.servlet");
 			
-			Map map = fms.getCurrentMap(httpservletrequest);
+			Map map = fms.getFacetInstance(httpservletrequest).getFacet();
 			com.facetmap.Selection selection = ServletUtil.processRequest(httpservletrequest, map);
 			xmlgenerator.outputSelection(selection, httpservletresponse.getWriter());
 		} catch (Exception dataexception) {
