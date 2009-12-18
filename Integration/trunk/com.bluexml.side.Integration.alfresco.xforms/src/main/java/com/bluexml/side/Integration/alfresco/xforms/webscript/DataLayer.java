@@ -954,12 +954,15 @@ public class DataLayer implements DataLayerInterface {
 				String attribute = null;
 				String association = null;
 
-				if (st2.hasMoreTokens())
+				if (st2.hasMoreTokens()) {
 					clazz = st2.nextToken();
-				if (st2.hasMoreTokens())
+				}
+				if (st2.hasMoreTokens()) {
 					attribute = st2.nextToken();
-				if (st2.hasMoreTokens())
+				}
+				if (st2.hasMoreTokens()) {
 					association = st2.nextToken();
+				}
 
 				if (clazz != null) {
 					//
@@ -1013,10 +1016,12 @@ public class DataLayer implements DataLayerInterface {
 							}
 						}
 					} else {
-						logger.error("The class " + clazz + " is not this class.");
+						logger.error("The class " + clazz + " is not appropriate for this node ('"
+								+ nodeRef.toString() + "').");
 					}
 				}
 			} else {
+				// simple attribute
 				for (QName qname : properties.keySet()) {
 					String key = qname.getLocalName();
 					if (key.endsWith("_" + token)) {
