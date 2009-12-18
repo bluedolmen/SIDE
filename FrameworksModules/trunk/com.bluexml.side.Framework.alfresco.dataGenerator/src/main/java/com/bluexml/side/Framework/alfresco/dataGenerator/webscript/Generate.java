@@ -76,6 +76,8 @@ public class Generate extends DeclarativeWebScript {
 		} catch (Exception e1) {
 			logger.error("Error :", e1);
 		}
+//		generator.deleteExceededNodes();
+//		generator.deleteExceededArcs();
 		
 		//serialize xml for acp
 		serializer.setFileName(XML_FILE_NAME);
