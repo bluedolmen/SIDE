@@ -8,6 +8,7 @@
 	contentType="text/html; charset=ISO-8859-1"%>
 <%
 	response.setHeader("Cache-control", "max-age=0, no-cache");
+
 	if (request.getSession().getAttribute("alf_ticket") == null) {
 		// put in session all Alfresco parameters
 		String userName = request.getParameter("userName");
@@ -16,6 +17,7 @@
 		request.getSession().setAttribute("userName", userName);
 		request.getSession().setAttribute("userTicket", userTicket);
 		request.getSession().setAttribute("userpwd", userpwd);
+		
 	}
 
 	String userName = (String) request.getSession().getAttribute("userName");
@@ -29,7 +31,7 @@
 	} else {
 		// facetName = (String) request.getSession().getAttribute("facetName");
 		if (facetName == null) {
-	throw new FacetMapNotAvailableException("Missing parameter : please to fill facetName");
+			throw new FacetMapNotAvailableException("Missing parameter : please to fill facetName");
 		}
 	}
 	String community = null;
@@ -39,7 +41,7 @@
 	} else {
 		// community = (String) request.getSession().getAttribute("community");
 		if (community == null) {
-	throw new FacetMapNotAvailableException("Missing parameter : please to fill community");
+			throw new FacetMapNotAvailableException("Missing parameter : please to fill community");
 		}
 	}
 
