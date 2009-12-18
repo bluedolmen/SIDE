@@ -169,7 +169,6 @@
       <artifactId>xforms</artifactId>
       <version>[1.0.10,)</version>
       <type>amp</type>
-      <scope>provided</scope>
     </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
