@@ -12,7 +12,7 @@
 	<target name="patchWebapps" depends="" description="build and install in local alfresco">
 		<echo message="use maven to build package..." />
 		<maven basedir="${basedir}" options="" goal="clean" resultproperty="maven.build.result" />
-		<maven basedir="${basedir}" options="" goal="package" resultproperty="maven.build.result" />
+		<maven basedir="${basedir}" options="" goal="install" resultproperty="maven.build.result" />
 		<!--<artifact:mvn pom="pom.xml" mavenHome="${maven.home}">
 				<arg value="clean" />
 				<arg value="package" />
