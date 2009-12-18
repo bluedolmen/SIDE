@@ -130,6 +130,17 @@
                            versionMin="1.0.0">
                      </moduleDependence>
                   </option>
+                  <option
+                        defaultOption="false"
+                        key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript"
+                        label="Alfresco FacetMap Extension">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.x"
+                           versionMin="1.0.0">
+                     </moduleDependence>
+                  </option>
                </generatorVersion>
             </technologyVersion>
          </technology>
