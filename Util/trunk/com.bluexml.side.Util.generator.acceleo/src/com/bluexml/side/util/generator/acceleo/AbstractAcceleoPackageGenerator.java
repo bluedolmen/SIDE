@@ -12,7 +12,7 @@ import com.bluexml.side.util.libs.IFileHelper;
 public abstract class AbstractAcceleoPackageGenerator extends AbstractAcceleoGenerator {
 
 	abstract public Collection<IFile> buildPackages(String modelId) throws Exception;
-
+	
 	public Collection<IFile> complete() throws Exception {
 		for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
 			String rootName = l.getKey();
