@@ -1,0 +1,23 @@
+<webscript>
+	<shortname>BxDS-CMIS</shortname>
+	<description><![CDATA[
+This service is used to get SIDE contents using cmis <br/>
+originally designed for facetMap web application<br/>
+<br/>
+Parameters :<br/>
+contentType : {modelId}:{fullQualifiedName}, use the type/@name value found in model definition <br/>
+folder 		: folder where to search documents<br/>
+recursive	: if or not search in sub folders, false by default<br/>
+skipCount 	: pagination parameter, default value is '0'<br/>
+pageSize 	: pagination parameters, default value is 'unlimited'<br/>
+
+Exemples :
+doclist_user?contentType=com:bluexml_demo_rh_Personne&folder=Company%20Home/Sites/mySite/documentLibrary
+]]>
+  </description>
+	<url>/com/bluexml/side/facetMap/doclist_user?contentType={model}:{type}&amp;folder={/store/folderPath}&amp;recursive={true|false}&amp;skipCount={skipCount}&amp;pageSize={pageSize}</url>
+	<authentication>admin</authentication>
+	<transaction allow="readonly" />
+	<format default="xml" />
+	<family>SIDE</family>
+</webscript>
