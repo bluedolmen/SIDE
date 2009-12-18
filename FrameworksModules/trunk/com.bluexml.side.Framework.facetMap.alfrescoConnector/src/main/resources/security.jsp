@@ -52,7 +52,7 @@
 		auth = alfCom.checkUserAccessForSite(userName, userpwd, community);
 
 	} else {
-		auth = alfCom.checkUserAccessForSite(userName, userTicket, community);
+		auth = alfCom.checkUserTicketForSite(userName, userTicket, community);
 	}
 	if (auth == null) {
 		throw new FacetMapNotAvailableException("Access denied please to logon");
