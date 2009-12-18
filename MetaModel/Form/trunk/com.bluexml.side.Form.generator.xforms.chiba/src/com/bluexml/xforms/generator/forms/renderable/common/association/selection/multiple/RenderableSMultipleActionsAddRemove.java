@@ -2,7 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
-import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -12,8 +11,8 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.selector.RenderableSelector;
-import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
 import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableSMultipleActionsAddRemove. Adds LEFT and RIGHT buttons in the N-N selection

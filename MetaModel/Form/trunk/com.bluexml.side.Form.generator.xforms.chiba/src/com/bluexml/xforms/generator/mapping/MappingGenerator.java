@@ -211,7 +211,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 			isDisabled = (StringUtils.equalsIgnoreCase(result, "true"));
 		}
 		attributeType.setReadOnly(isDisabled);
-		
+
 		attributeType.setDefault(attribute.getInitialValue());
 		attributeType.setFieldSize(ModelTools.getMetaInfoValue(attribute, "size"));
 
@@ -819,11 +819,11 @@ public class MappingGenerator extends AbstractDataGenerator {
 			formFieldType.setAlfrescoName(alfrescoName);
 		} else {
 			com.bluexml.side.workflow.Attribute attribute = (com.bluexml.side.workflow.Attribute) ref;
-			formFieldType.setAlfrescoName(attribute.getName()); // FIXME: à
-			// vérifier
+			formFieldType.setAlfrescoName(attribute.getName()); // FIXME: à vérifier
 		}
 
 		formFieldType.setDefault(field.getInitial());
+		formFieldType.setMandatory(field.isMandatory());
 
 		if (field instanceof ChoiceField) {
 			ChoiceField choiceField = (ChoiceField) field;
@@ -856,16 +856,22 @@ public class MappingGenerator extends AbstractDataGenerator {
 		formFieldType.setMultiple(isMultiple);
 		formFieldType.setReadOnly(field.isDisabled());
 
+		formFieldType.setDummyValue(pickDummyValue(formFieldType.getType()));
 		if (field instanceof FileField) {
 			FileFieldType fileFieldType = initFileFieldFromFormField(formFieldType);
 
 			fileFieldType.setInRepository(((FileField) field).isInRepository());
 			canister.getField().add(fileFieldType);
 		} else {
+			// check that if mandatory, the field has an initial value
+			if (formFieldType.isMandatory()
+					&& (StringUtils.trimToNull(formFieldType.getDefault()) == null)) {
+				monitor.addText("Attribute '" + formFieldType.getAlfrescoName()
+						+ "' is mandatory: it should have an initial value!");
+			}
 			canister.getField().add(formFieldType);
 		}
 
-		formFieldType.setDummyValue(pickDummyValue(formFieldType.getType()));
 	}
 
 	/**
@@ -1021,7 +1027,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 		if (form.eIsProxy()) { // #1225
 			realContainer = (FormContainer) formGenerator.getRealObject(form);
 		}
-		
+
 		FormType childFormType = new FormType();
 		childFormType.setName(realContainer.getId());
 		return childFormType;

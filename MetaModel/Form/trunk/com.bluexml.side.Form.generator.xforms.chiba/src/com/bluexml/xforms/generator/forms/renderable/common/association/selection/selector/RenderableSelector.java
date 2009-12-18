@@ -4,10 +4,6 @@ import java.util.Stack;
 
 import javax.xml.namespace.QName;
 
-import org.jdom.Element;
-
-import com.bluexml.xforms.messages.MsgId;
-
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -25,6 +21,7 @@ import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean.Asso
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
 import com.bluexml.xforms.generator.forms.rendered.RenderedDiv;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableSelector.
