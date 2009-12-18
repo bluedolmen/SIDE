@@ -15,7 +15,7 @@
 	<target name="patchWebapps" depends="" description="build and install in local alfresco">
 		<echo message="use maven to build package..." />
 		<maven basedir="${symbol_dollar}{basedir}" options="" goal="clean" resultproperty="maven.build.result" />
-		<maven basedir="${symbol_dollar}{basedir}" options="" goal="package" resultproperty="maven.build.result" />
+		<maven basedir="${symbol_dollar}{basedir}" options="" goal="install" resultproperty="maven.build.result" />
 		<!--<artifact:mvn pom="pom.xml" mavenHome="${symbol_dollar}{maven.home}">
 			<arg value="clean" />
 			<arg value="package" />
@@ -34,7 +34,7 @@
 				<include name="**/**" />
 			</fileset>
 		</copy>
-		<delete failonerror="false">
+		<delete failonerror="false" verbose="true">
 			<fileset dir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/lib">
 				<include name="${symbol_dollar}{moduleId}-*.jar" />
 			</fileset>
