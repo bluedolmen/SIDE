@@ -31,7 +31,7 @@
     <parameters key="generation.option.Skip.Validation" value="false"/>
     <parameters key="generation.options.clean" value="true"/>
     <parameters key="generation.options.logPath" value="/DigitizationProcess/v1/application/logs"/>
-    <parameters key="generation.options.destinationPath" value="/DigitizationProcess/out"/>
+    <parameters key="generation.options.destinationPath" value="/DigitizationProcess/v1/application/out"/>
     <parameters key="generation.option.offlineMode" value="false"/>
     <parameters key="alfresco.url" value="http://localhost:8080/alfresco"/>
     <parameters key="alfresco.share.url" value="http://localhost:8080/share"/>
