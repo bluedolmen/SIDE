@@ -18,6 +18,7 @@ import org.alfresco.web.scripts.WebScriptRequest;
 
 import com.bluexml.side.Framework.alfresco.dataGenerator.dictionary.AlfrescoModelDictionary;
 import com.bluexml.side.Framework.alfresco.dataGenerator.generator.AlfrescoModelRandomDataGenerator;
+import com.bluexml.side.Framework.alfresco.dataGenerator.generator.NativeAlfrescoModelRandomDataGenerator;
 import com.bluexml.side.Framework.alfresco.dataGenerator.load.ImportACP;
 import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.ACPPackaging;
 import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.XMLForACPSerialization;
@@ -37,9 +38,10 @@ public class Generate extends DeclarativeWebScript {
 	private static final String NUMBER_OF_CONTENTS_PARAMETER_NAME ="numOfInstances";
 	private static final String NUMBER_OF_OUTPUT_ARCS_PARAMETER_NAME = "numOfOutputArcs";
 	private static final String PATH_TO_ALFRESCO_REPOSITORY = "alfrescoRepository";
+	private static final String PATH_TO_DOCUMENTS = "pathToDocuments";
 	
-	private static final String XML_FILE_NAME = "test.xml";
-	public static final String ACP_FILE_NAME = "TestACP";
+	private static final String XML_FILE_NAME = "Data.xml";
+	public static final String ACP_FILE_NAME = "Data";
 
 	
 	@Override
@@ -52,6 +54,10 @@ public class Generate extends DeclarativeWebScript {
 		
 		String modelParameterValue = req.getParameter(MODEL_PARAMETER_NAME);
 		dictionary.setQnameStringModel(modelParameterValue);
+		
+		String pathToDocuments = req.getParameter(PATH_TO_DOCUMENTS);
+		nativeGenerator.setPathToDocumentsFolder(pathToDocuments);
+		
 		
 		//get model structure
 		IStructure structure = null;
@@ -66,13 +72,16 @@ public class Generate extends DeclarativeWebScript {
 		}
 		
 		//genarate datas 
+		boolean generated = false;
 		try {
-			generator.generateNodesInstances(structure);
+			generated = generator.generateNodesInstances(structure);
 		} catch (Exception e1) {
 			logger.error("Error :", e1);
 		}
 		try {
-			generator.generateArcsInstances(structure);
+			if (generated){
+				generator.generateArcsInstances(structure);
+			}
 		} catch (Exception e1) {
 			logger.error("Error :", e1);
 		}
@@ -87,7 +96,7 @@ public class Generate extends DeclarativeWebScript {
 			logger.error("Error :", e);
 		}
 		
-		//package to alfresco repository
+		//package to alfresco repository (with contents)
 		packager.setArchiveName(ACP_FILE_NAME);
 		File acp = null;
 		try {
@@ -133,6 +142,7 @@ public class Generate extends DeclarativeWebScript {
 	XMLForACPSerialization serializer = null;
 	ACPPackaging packager = null;
 	ImportACP importer = null;
+	NativeAlfrescoModelRandomDataGenerator nativeGenerator = null;
 	
 	public void setAlfrescoModelRandomGenerator (AlfrescoModelRandomDataGenerator generator_) {
 		generator = generator_;
@@ -152,6 +162,10 @@ public class Generate extends DeclarativeWebScript {
 	
 	public void setImportACP (ImportACP importer_) {
 		importer = importer_;
+	}
+	
+	public void setNativeAlfrescoModelRandomDataGenerator(NativeAlfrescoModelRandomDataGenerator nativeGenerator_){
+		nativeGenerator = nativeGenerator_;
 	}
 
 
