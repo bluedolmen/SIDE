@@ -233,14 +233,6 @@
           <exclude>**README-*</exclude>
         </excludes>
       </resource>
-      <resource>
-		<targetPath>../${artifactId}-${version}/META-INF</targetPath>
-		<filtering>true</filtering>
-		<directory>META-INF</directory>
-		<includes>
-			<include>mime.types</include>
-		</includes>
-	  </resource>
     </resources>
   </build>
   <profiles>
