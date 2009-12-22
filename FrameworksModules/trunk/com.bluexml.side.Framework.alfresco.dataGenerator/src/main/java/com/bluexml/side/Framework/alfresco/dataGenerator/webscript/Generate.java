@@ -85,7 +85,7 @@ public class Generate extends DeclarativeWebScript {
 		} catch (Exception e1) {
 			logger.error("Error :", e1);
 		}
-//		generator.deleteExceededNodes();
+		generator.deleteExceededNodes();
 //		generator.deleteExceededArcs();
 		
 		//serialize xml for acp
@@ -128,7 +128,7 @@ public class Generate extends DeclarativeWebScript {
 			
 		}
 		
-		acp.delete();
+		packager.clean(acp);
 		
 		return new HashMap<String, Object>();
 	}
