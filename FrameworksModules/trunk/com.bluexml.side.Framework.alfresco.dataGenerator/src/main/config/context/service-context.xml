@@ -121,7 +121,8 @@
 	
 	<bean id="acpPackaging"
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.ACPPackaging" >
-		<property name="xmlSerializer" ref="xmlForACPSerialization" />  
+		<property name="xmlSerializer" ref="xmlForACPSerialization" />
+		<property name="nativeGenerator" ref="nativeAlfrescoModelRandomDataGenerator" />  
 	</bean>
 	
 	<!-- import -->
@@ -149,5 +150,6 @@
     	  <property name="XMLForACPSerialization" ref="xmlForACPSerialization" />
     	  <property name="ACPPackaging" ref="acpPackaging" />
     	  <property name="importACP" ref="importACP" />
+    	  <property name="nativeAlfrescoModelRandomDataGenerator" ref="nativeAlfrescoModelRandomDataGenerator" />
     </bean>
 </beans>
