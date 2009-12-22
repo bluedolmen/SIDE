@@ -128,11 +128,19 @@ public class ACPPackaging implements ISerialization {
 		}
 		
 		archiveOutput.close();
+		
 		documents.clear();
 		nativeGenerator.setDocuments(documents);
+		
 		File acp =new File(archiveName + ".acp");
 		//System.out.println("ACP File :"+acp.getAbsolutePath());
 		return acp;
+	}
+	
+	public void clean(File acp){
+		acp.deleteOnExit();
+		File xml = new File(xmlSerializer.getFileName());
+		xml.deleteOnExit();
 	}
 
 }
