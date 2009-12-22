@@ -156,6 +156,12 @@
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+	 	<groupId>javax.activation</groupId>
+		<artifactId>activation</artifactId>
+		<version>1.0.2</version>
+		<scope>provided</scope>
+	</dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering
@@ -227,6 +233,14 @@
           <exclude>**README-*</exclude>
         </excludes>
       </resource>
+      <resource>
+		<targetPath>../${artifactId}-${version}/META-INF</targetPath>
+		<filtering>true</filtering>
+		<directory>META-INF</directory>
+		<includes>
+			<include>mime.types</include>
+		</includes>
+	  </resource>
     </resources>
   </build>
   <profiles>
