@@ -329,9 +329,9 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 				if (!sourceMultiplicity || !targetMultiplicity){
 					arcsInstances.removeAll(getSameArcs(arcsInstances));
 				}
-//				if (!sourcesNodes.isEmpty() && associationDefinition.isTargetMandatory()){
-//					nodesToDelete.addAll(sourcesNodes);
-//				}
+				if (!sourcesNodes.isEmpty() && associationDefinition.isTargetMandatory()){
+					nodesToDelete.addAll(sourcesNodes);
+				}
 			}
 			((AlfrescoModelData) alfrescoModelDatas).setGeneratedAssociationsInstances(arcsInstances);
 //		}
