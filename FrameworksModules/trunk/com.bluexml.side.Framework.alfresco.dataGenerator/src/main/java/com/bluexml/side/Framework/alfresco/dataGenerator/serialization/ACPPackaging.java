@@ -10,10 +10,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
+
+import com.bluexml.side.Framework.alfresco.dataGenerator.generator.NativeAlfrescoModelRandomDataGenerator;
 
 /**
  * @author davidchevrier
@@ -24,6 +28,8 @@ public class ACPPackaging implements ISerialization {
 	private OutputStream acpArchive;
 	private String archiveName;
 	private XMLForACPSerialization xmlSerializer;
+	private NativeAlfrescoModelRandomDataGenerator nativeGenerator;
+	
 	private static int bufferSize = 2048;
 
 	/**
@@ -68,6 +74,21 @@ public class ACPPackaging implements ISerialization {
 		this.archiveName = archiveName;
 	}
 	
+	/**
+	 * @return the nativeGenerator
+	 */
+	public NativeAlfrescoModelRandomDataGenerator getNativeGenerator() {
+		return nativeGenerator;
+	}
+
+	/**
+	 * @param nativeGenerator the nativeGenerator to set
+	 */
+	public void setNativeGenerator(
+			NativeAlfrescoModelRandomDataGenerator nativeGenerator) {
+		this.nativeGenerator = nativeGenerator;
+	}
+
 	public File packageACP() throws IOException{
 		acpArchive = new FileOutputStream(archiveName + ".acp");
 		byte[] datas = new byte[bufferSize];
@@ -75,7 +96,7 @@ public class ACPPackaging implements ISerialization {
 		BufferedOutputStream buffer = new BufferedOutputStream(acpArchive);
 		ZipOutputStream archiveOutput = new ZipOutputStream(buffer);
 		
-		//Here, we just zip the xml file
+		//zip xml first
 		FileInputStream xmlFile = new FileInputStream(xmlSerializer.getFileName());
 		BufferedInputStream xmlFileBuffer = new BufferedInputStream(xmlFile, bufferSize);
 		ZipEntry entry = new ZipEntry(xmlSerializer.getFileName());
@@ -86,9 +107,31 @@ public class ACPPackaging implements ISerialization {
 		}
 		archiveOutput.closeEntry();
 		xmlFileBuffer.close();
+		
+		//then, zip documents
+		Collection<File> documents = nativeGenerator.getDocuments();
+		Collection<String> entries = new ArrayList<String>();
+		for (File file : documents) {
+			FileInputStream doc = new FileInputStream(file.getAbsolutePath());
+			BufferedInputStream docBuffer = new BufferedInputStream(doc, bufferSize);
+			ZipEntry e = new ZipEntry(file.getName());
+			if (!entries.contains(e.getName())){
+				entries.add(e.getName());
+				archiveOutput.putNextEntry(e);
+				int counter;
+				while((counter = docBuffer.read(datas, 0, bufferSize)) != -1) {
+					archiveOutput.write(datas, 0, counter);
+				}
+			}
+			archiveOutput.closeEntry();
+			docBuffer.close();
+		}
+		
 		archiveOutput.close();
+		documents.clear();
+		nativeGenerator.setDocuments(documents);
 		File acp =new File(archiveName + ".acp");
-		System.out.println("ACP File :"+acp.getAbsolutePath());
+		//System.out.println("ACP File :"+acp.getAbsolutePath());
 		return acp;
 	}
 
