@@ -3,14 +3,19 @@
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.generator;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
+
+import javax.activation.MimetypesFileTypeMap;
 
 import org.alfresco.model.ContentModel;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
@@ -31,6 +36,11 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 	private Random randomGenerator = new Random();
 	private Calendar calendar = new GregorianCalendar();
 	private IStructure nativeAlfrescoStructure;
+	
+	private String pathToDocumentsFolder;
+	private Collection<File> documents = new ArrayList<File>();
+	
+	private static String separator = "|";
 	
 	/**
 	 * @return the calendar
@@ -83,6 +93,32 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		this.randomGenerator = randomGenerator;
 	}
 	
+	/**
+	 * @return the pathToDocumentsFolder
+	 */
+	public String getPathToDocumentsFolder() {
+		return pathToDocumentsFolder;
+	}
+	/**
+	 * @param pathToDocumentsFolder the pathToDocumentsFolder to set
+	 */
+	public void setPathToDocumentsFolder(String pathToDocumentsFolder) {
+		this.pathToDocumentsFolder = pathToDocumentsFolder;
+	}
+	
+	/**
+	 * @return the documents
+	 */
+	public Collection<File> getDocuments() {
+		return documents;
+	}
+	/**
+	 * @param documents the documents to set
+	 */
+	public void setDocuments(Collection<File> documents) {
+		this.documents = documents;
+	}
+	
 	public Map<QNamePattern,Object> generateNativeDatasProperties(TypeDefinition type) {
 		Map<QNamePattern,Object> datasProperties = new HashMap<QNamePattern, Object>();
 		Collection<QNamePattern> nativeProperites = ((NativeAlfrescoModelStructure) nativeAlfrescoStructure).getNativeMandatoryProperties();
@@ -94,7 +130,7 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 	private Object fillNativeDataProperty(QNamePattern property, TypeDefinition type) {
 		Object data = new Object();
 		if (((QName) property).equals(ContentModel.PROP_CONTENT)){
-			data = "";
+			data = generateUrl(type);
 		}
 		else if (((QName) property).equals(ContentModel.PROP_NAME)){
 			data = generateName(type);
@@ -141,6 +177,56 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		name = parts[parts.length-1];
 		name += "_" + randomGenerator.nextInt();
 		return name;
+	}
+	
+	private String generateUrl(TypeDefinition type){
+		StringBuffer url = new StringBuffer();
+		File document = chooseRandomlyDocument();
+		url.append("contentUrl=");
+		url.append(getDocumentTitle(document));
+		url.append(separator);
+		url.append("mimetype=");
+		url.append(getMimeTypeDocument(document));
+		url.append(separator);
+		url.append("size=");
+		url.append(getDocumentSize(document));
+		url.append(separator);
+		url.append("encoding=");
+		url.append(getDocumentEncoding(document));
+		url.append(separator);
+		url.append("locale=");
+		url.append(getDocumentLocale(document));
+		return url.toString();
+	}
+	
+	private Object getDocumentLocale(File document) {
+		Locale locale = Locale.getDefault();
+		return locale.toString();
+	}
+	
+	private Object getDocumentEncoding(File document) {
+		// waiting for something else ...:
+		return "utf-8";
+	}
+	
+	private Object getDocumentSize(File document) {	
+		return document.length();
+	}
+	
+	private Object getMimeTypeDocument(File document) {
+		return new MimetypesFileTypeMap().getContentType(document.getName());
+	}
+	
+	private Object getDocumentTitle(File document) {
+		return document.getName();
+	}
+	
+	private File chooseRandomlyDocument() {
+		File folder = new File(pathToDocumentsFolder);
+		File[] docs = folder.listFiles();
+		File document = docs[randomGenerator.nextInt(docs.length)];
+		documents.add(document);
+		return document;
 	}
 	
 	public Map<QNamePattern,Object> generateNativeDatasAspects(TypeDefinition type){

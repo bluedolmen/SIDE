@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
@@ -301,7 +300,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 	}
 
 	public void generateArcsInstances(IStructure structure) throws Exception{
-		if (generateNodesInstances(structure)){
+		//if (generateNodesInstances(structure)){
 			List<IArc> arcsInstances = new ArrayList<IArc>();
 			Collection<AssociationDefinition> associations = ((AlfrescoModelStructure) structure).getAssociations();
 			for (AssociationDefinition associationDefinition : associations) {
@@ -335,10 +334,10 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 //				}
 			}
 			((AlfrescoModelData) alfrescoModelDatas).setGeneratedAssociationsInstances(arcsInstances);
-		}
-		else{
-			//throws Exception
-		}
+//		}
+//		else{
+//			//throws Exception
+//		}
 	}
 	
 	private List<IArc> generateArcsInstancesCaseN1(Collection<INode> sourcesNodes, Collection<INode> targetsNodes,AssociationDefinition associationDefinition) {
@@ -481,11 +480,12 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		return dataAspects;
 	}
 	
-//	public void deleteExceededNodes(){
-//		Collection<INode> generatedNodes = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedTypesInstances();
-//		generatedNodes.removeAll(nodesToDelete);
-//		((AlfrescoModelData) alfrescoModelDatas).setGeneratedTypesInstances(generatedNodes);
-//	}
+	public void deleteExceededNodes(){
+		Collection<INode> generatedNodes = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedTypesInstances();
+		generatedNodes.removeAll(nodesToDelete);
+		((AlfrescoModelData) alfrescoModelDatas).setGeneratedTypesInstances(generatedNodes);
+		nodesToDelete.clear();
+	}
 	
 	public void deleteExceededArcs(){
 		Collection<IArc> generatedArcs = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedAssociationsInstances();
