@@ -9,7 +9,14 @@
 	
 	<target name="pre-build">
 		<antcall target="stopAlfresco"/>
+		<antcall target="startMySql"/>
+		<antcall target="delteAlfrescoDb"/>
 		<antcall target="stopMySql"/>
+		<antcall target="deleteAlfDataWin"/>
+		<antcall target="deleteAlfDataLx"/>
+		<antcall target="startMySql"/>
+		<antcall target="createAlfrescoDb"/>
+		<antcall target="stopMySql"/>	
 	</target>
 	
 	<!-- ============================= Windows tasks ============================== -->
@@ -20,6 +27,15 @@
 			<arg value="-u"/>
 			<arg value="root"/>
 			<arg value="shutdown"/>
+		</exec>
+	</target>
+	
+	<target name="startMySql" depends="isMySqlRunningBefore" if="mySqlOff,windows">
+		<exec executable="${alfresco.dir}/mysql/bin/mysqld.exe" spawn="true" vmlauncher="false">
+			<arg value="--defaults-file=${alfresco.dir}\mysql\my.ini"/>
+			<arg value="--basedir=${alfresco.dir}\mysql"/>
+			<arg value="--datadir=${alfresco.dir}\alf_data\mysql"/>
+			<arg value="--console"/>
 		</exec>
 	</target>
 	
@@ -44,6 +60,49 @@
 		<waitfor maxwait="2" maxwaitunit="second" checkevery="250" timeoutproperty="mySqlOff">
 			<socket server="${mysql.server}" port="${mysql.port}"/>
 		</waitfor>
+	</target>
+	
+	<target name="delteAlfrescoDb" if="delete.alfresco.db">
+		<sql classpath="${alfresco.dir}\tomcat\lib\mysql-connector-java-5.1.7-bin.jar"
+			 driver="org.gjt.mm.mysql.Driver"
+			 url="jdbc:mysql://${mysql.server}"
+			 userid="${user.db}"
+			 password="${passwd.db}">
+		  <transaction>
+			 drop database if exists ${alfresco.db.name}
+		  </transaction>
+		</sql>
+	</target>
+	
+	<target name="deleteAlfDataWin" if="windows,delete.alfresco.db">
+		<delete>
+			<dirset dir="${alfresco.dir}/alf_data" excludes="mysql,oouser"/>
+		</delete>
+		<delete>
+			<fileset dir="${alfresco.dir}/alf_data/mysql/${alfresco.db.name}" excludes="db.opt"/>
+		</delete>
+		<delete>
+			<fileset dir="${alfresco.dir}/alf_data/mysql" includes="ib*"/>
+		</delete>
+	</target>
+	
+	<target name="deleteAlfDataLx" if="linux,delete.alfresco.db">
+		<delete>
+			<dirset dir="${alfresco.dir}/alf_data"/>
+		</delete>
+	</target>
+	
+	<target name="createAlfrescoDb" if="delete.alfresco.db">
+		<sql classpath="${alfresco.dir}\tomcat\lib\mysql-connector-java-5.1.7-bin.jar"
+			 driver="org.gjt.mm.mysql.Driver"
+			 url="jdbc:mysql://${mysql.server}"
+			 userid="${user.db}"
+			 password="${passwd.db}">
+		  <transaction>
+		  	create database if not exists ${alfresco.db.name} default character set utf8;
+		  	grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;
+		  </transaction>
+	   </sql>
 	</target>
 	
 	<!-- =========================================================================
