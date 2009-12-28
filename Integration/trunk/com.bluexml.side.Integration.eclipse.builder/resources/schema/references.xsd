@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.side-labs.org/referential/references" xmlns:sideR="http://www.side-labs.org/referential/references" elementFormDefault="qualified">
+
+	<element name="models">
+	 	<complexType>
+	 		<sequence>
+	 			<element name="model" type="sideR:Model" minOccurs="0" maxOccurs="unbounded"></element>
+	 		</sequence>
+	 	</complexType>
+	</element>
+	
+	<complexType name="Model">
+		<sequence>
+			<element name="referencedBy" type="sideR:Reference" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+		<attribute name="path" type="string"></attribute>
+	</complexType>
+
+	<complexType name="Reference">
+		<attribute name="model" type="string" use="required"/>
+		<attribute name="uuid" type="string" use="required"/>
+		<attribute name="source" type="string" use="required"/>
+	</complexType>
+</schema>
