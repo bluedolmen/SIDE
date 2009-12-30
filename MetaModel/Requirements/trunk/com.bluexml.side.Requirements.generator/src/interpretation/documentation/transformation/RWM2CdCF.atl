@@ -101,14 +101,14 @@ rule ReqDefs {
 		content <- Sequence{t_preface,t_chapter_agents,t_chapter_goals,t_chapter_entities}
 	),
 	t_preface:Documentation!Section (
-	    title <- 'Prï¿½face',
+	    title <- 'Préface',
 		para <- Sequence{t_preface_part}
 	),
 	t_preface_part:Documentation!Paragraph (
 		values <- Sequence{t_preface_part_value}
 	),
 	t_preface_part_value:Documentation!TextualValue (
-		value <- 'Ce document a pour objectif de rï¿½sumer l\'ensembles des besoins du futur outil mï¿½tier.'
+		value <- 'Ce document a pour objectif de résumer l\'ensembles des besoins du futur outil métier.'
 	),
 	t_chapter_agents:Documentation!Section (
 		title <- 'Liste des agents',
@@ -119,7 +119,7 @@ rule ReqDefs {
 		section <- RWM!Goal->allInstances()
 	),
 	t_chapter_entities:Documentation!Section (
-		title <- 'Liste des entitï¿½s',
+		title <- 'Liste des entités',
 		section <- RWM!Entity->allInstances()
 	)
 }
@@ -160,20 +160,20 @@ rule Member {
 				 endif
 	),
 	t_section_responsibilities:Documentation!Section (
-		title <- 'Responsabilitï¿½(s)',
+		title <- 'Responsabilité(s)',
 		para <- Sequence{t_para_responsibilities}
 	),
 	t_para_responsibilities:Documentation!Paragraph (
 		values <- Sequence{t_para_responsibilities_list_value,t_para_responsibilities_list}
 	),
 	t_para_responsibilities_list_value:Documentation!TextualValue (
-		value <- 'A la responsabilitï¿½ de : '
+		value <- 'A la responsabilité de : '
 	),
 	t_para_responsibilities_list:Documentation!ItemizedListValue (
 		items <- s.isResponsible->collect(g | thisModule.createLinkItem(g))
 	),
 	t_section_privileges:Documentation!Section (
-		title <- 'Privilï¿½ge(s)',
+		title <- 'Privilège(s)',
 		para <- Sequence{t_para_privileges}
 	),
 	t_para_privileges:Documentation!Paragraph (
@@ -194,10 +194,10 @@ rule Member {
 		entry <- Sequence{t_entry_element, t_entry_create, t_entry_read, t_entry_update, t_entry_delete}
 	),
 	t_entry_element:Documentation!InformalTableValueEntry(
-		value <- 'Elï¿½ment'
+		value <- 'Elément'
 	), 
 	t_entry_create:Documentation!InformalTableValueEntry(
-		value <- 'Crï¿½er'
+		value <- 'Créer'
 	), 
 	t_entry_read:Documentation!InformalTableValueEntry(
 		value <- 'Lire'
@@ -281,7 +281,7 @@ rule Goal {
 		role <- 'bold'
 	),
 	t_section_privileges:Documentation!Section (
-		title <- 'Privilï¿½ges',
+		title <- 'Privilèges',
 		para <- Sequence{t_para_privileges}
 	),
 	t_para_privileges:Documentation!Paragraph (
@@ -295,14 +295,14 @@ rule GoalWithResponsible extends Goal{
 		section <- Sequence{t_section_description, t_section_responsibilities,t_section_privileges}
 	),
 	t_section_responsibilities:Documentation!Section (
-		title <- 'Responsabilitï¿½(s)',
+		title <- 'Responsabilité(s)',
 		para <- Sequence{t_para_responsibilities}
 	),
 	t_para_responsibilities:Documentation!Paragraph (
 		values <- Sequence{t_para_responsibilities_list_value, t_para_responsibilities_list}
 	),
 	t_para_responsibilities_list_value:Documentation!TextualValue (
-		value <- 'Sous la responsabilitï¿½ de : '
+		value <- 'Sous la responsabilité de : '
 	),
 	t_para_responsibilities_list:Documentation!ItemizedListValue (
 		items <- s.responsible->collect(a | thisModule.createLinkItem(a))
@@ -326,10 +326,10 @@ rule PrivilegeGroup {
 		entry <- Sequence{t_entry_element, t_entry_create, t_entry_read, t_entry_update, t_entry_delete}
 	),
 	t_entry_element:Documentation!InformalTableValueEntry(
-		value <- 'Elï¿½ment'
+		value <- 'Elément'
 	), 
 	t_entry_create:Documentation!InformalTableValueEntry(
-		value <- 'Crï¿½er'
+		value <- 'Créer'
 	), 
 	t_entry_read:Documentation!InformalTableValueEntry(
 		value <- 'Lire'
