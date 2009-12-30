@@ -75,5 +75,8 @@ public class DocumentationGenerator extends RequirementsGenerator {
 	protected String getTargetModelName(String keyGenerator) {
 		return "cdcf.ecore";
 	}
-
+	
+	protected Collection<String> getExtensionsForServices() {
+		return Collections.singleton(".odt");
+	}
 }

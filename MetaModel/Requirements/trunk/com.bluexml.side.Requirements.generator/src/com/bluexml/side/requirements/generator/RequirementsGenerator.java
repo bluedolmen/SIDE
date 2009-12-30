@@ -1,12 +1,15 @@
 package com.bluexml.side.requirements.generator;
 
+import java.io.File;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -35,6 +38,7 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 		Collection<IFile> result = null;
 		try {
 			result = execute(model);
+			computeServices();
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -106,5 +110,24 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 	@Override
 	final protected List<String> getTemplates() {
 		return getTemplates(current_keyGenerator);
+	}
+	
+	protected void computeServices() throws CoreException {
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IFolder targetFolder = myWorkspaceRoot.getFolder(new Path(getTemporaryFolder()));
+		if (targetFolder.exists()) {
+			for (File f : targetFolder.getRawLocation().toFile().listFiles()) {
+				String ext = f.getName().substring(f.getName().lastIndexOf('.'));
+				if (getExtensionsForServices().contains(ext)) {
+					String url = f.getAbsolutePath();
+					url = url.replaceAll(" ", "%20");
+					monitor.getLog().addServiceLog("Generated document",f.getName(), url);
+				}
+			}
+		}
+	}
+	
+	protected Collection<String> getExtensionsForServices() {
+		return Collections.EMPTY_SET;
 	}
 }

@@ -1,6 +1,7 @@
 package com.bluexml.side.requirements.generator;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,6 +14,11 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -143,6 +149,19 @@ public class WebProjectGenerator extends RequirementsGenerator {
 		
 		return result;
 	}
+
 	
-	
+	protected void computeServices() throws CoreException {
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IFolder targetFolder = myWorkspaceRoot.getFolder(new Path(getTemporaryFolder()));
+		if (targetFolder.exists()) {
+			for (File f : targetFolder.getRawLocation().toFile().listFiles()) {
+				if (f.getName().equalsIgnoreCase("My Web Project")) {
+					String url = f.getAbsolutePath();
+					url = url.replaceAll(" ", "%20");
+					monitor.getLog().addServiceLog("Generated prototype",f.getName(), url);
+				}
+			}
+		}
+	}
 }

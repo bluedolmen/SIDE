@@ -111,4 +111,7 @@ public class FreeMindGenerator extends RequirementsGenerator {
 		return "";
 	}
 
+	protected Collection<String> getExtensionsForServices() {
+		return Collections.singleton(".mm");
+	}
 }

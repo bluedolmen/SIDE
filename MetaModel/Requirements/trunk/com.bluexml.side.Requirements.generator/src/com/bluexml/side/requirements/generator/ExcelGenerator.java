@@ -100,4 +100,7 @@ public class ExcelGenerator extends RequirementsGenerator {
 		return "";
 	}
 
+	protected Collection<String> getExtensionsForServices() {
+		return Collections.singleton(".xml");
+	}
 }
