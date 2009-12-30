@@ -15,6 +15,7 @@
         <copy todir="${generated_dir}/My Web Project/"  overwrite="true">
         	<fileset dir =".">
         		<include name="**/*.css"/>
+        		<include name="**/*.js"/>
         		<include name="**/*.php"/>
         		<include name="**/*.png"/>
         		<include name="**/*.jpg"/>
