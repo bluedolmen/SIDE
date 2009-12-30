@@ -31,7 +31,7 @@ metamodel http://www.bluexml.com/rwm/documentation/1.0/
 		<%if (filter("TextualValue").value != null) {%><%filter("TextualValue").value%><%}%>
 	<%}%>
 	<%if (filter("EmphasisValue") != null){%>
-		<text:span text:style-name="T1"><<%if (filter("EmphasisValue").value != null) {%><%filter("EmphasisValue").value%><%}%></text:span>
+		<text:span text:style-name="T1"><%if (filter("EmphasisValue").value != null) {%><%filter("EmphasisValue").value%><%}%></text:span>
 	<%}%>
 	<%if (filter("ItemizedListValue") != null){%>
 		</text:p>
