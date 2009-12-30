@@ -28,10 +28,10 @@ metamodel http://www.bluexml.com/rwm/documentation/1.0/
 <text:p text:style-name="Text_20_body">
 <%for (values){%>
 	<%if (filter("TextualValue") != null){%>
-		<%if (value != null) {%><%value%><%}%>
+		<%if (filter("TextualValue").value != null) {%><%filter("TextualValue").value%><%}%>
 	<%}%>
 	<%if (filter("EmphasisValue") != null){%>
-		<text:span text:style-name="T1"><<%if (value != null) {%><%value%><%}%></text:span>
+		<text:span text:style-name="T1"><<%if (filter("EmphasisValue").value != null) {%><%filter("EmphasisValue").value%><%}%></text:span>
 	<%}%>
 	<%if (filter("ItemizedListValue") != null){%>
 		</text:p>
