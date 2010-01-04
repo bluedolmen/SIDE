@@ -32,7 +32,7 @@ fi
 cd $BUILD_PATH
 # remove projects not to integrate in labs release
 # rm -rf $SOURCE_PATH/S-IDE/Integration
-for f in `ls $SOURCE_PATH/S-IDE/Integration/trunk | grep -v -e 'com.bluexml.side.Integration.eclipse.branding' | grep -v -e 'com.bluexml.side.Integration.alfresco.sql' `
+for f in `ls $SOURCE_PATH/S-IDE/Integration/trunk | grep -v -e 'com.bluexml.side.Integration.eclipse.branding' | grep -v -e 'com.bluexml.side.Integration.eclipse.builder' | grep -v -e 'com.bluexml.side.Integration.alfresco.sql' `
 do
      rm -rf $SOURCE_PATH/S-IDE/Integration/trunk/$f
 done
