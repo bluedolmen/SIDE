@@ -224,6 +224,36 @@ public class DOMUtil {
 	}
 
 	/**
+	 * Retrieves a specific element based on tag name anywhere below a node with the additional
+	 * condition that its text content is not empty.
+	 * 
+	 * @param rootElt
+	 *            the root of the tree to search
+	 * @param tagName
+	 * @return the first Element that matches the tagName
+	 */
+	public static Element getElementInDescentByNameNonNull(Element rootElt, String tagName) {
+		Element res = null;
+		if (rootElt != null) {
+			List<Element> children = getAllChildren(rootElt);
+			res = getOneElementByTagName(children, tagName);
+			if (res != null) {
+				if (StringUtils.trimToNull(res.getTextContent()) != null) {
+					return res;
+				}
+				return null;
+			}
+			for (Element elt : children) {
+				res = getElementInDescentByNameNonNull(elt, tagName);
+				if (res != null) {
+					return res;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the immediate children whose tag name matches the given name.
 	 * 
 	 * @param rootElement
