@@ -1,5 +1,6 @@
+
 <projectDescription>
-  <name>alfrescoConnector</name>
+  <name>com.bluexml.side.Framework.facetMap.alfrescoConnector</name>
   <comment>including facetmap in alfresco share</comment>
   <projects/>
   <buildSpec>
