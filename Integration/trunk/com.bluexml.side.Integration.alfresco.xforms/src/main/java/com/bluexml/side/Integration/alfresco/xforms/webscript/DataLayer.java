@@ -819,7 +819,7 @@ public class DataLayer implements DataLayerInterface {
 			OutputFormat outputformat = new OutputFormat();
 			outputformat.setEncoding("UTF-8");
 			outputformat.setIndenting(false);
-			outputformat.setPreserveSpace(false);
+			outputformat.setPreserveSpace(true);
 			outputformat.setOmitXMLDeclaration(true);
 			outputformat.setOmitDocumentType(true);
 			XMLSerializer serializer = new XMLSerializer();
