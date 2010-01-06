@@ -41,7 +41,7 @@ public class TicketValidatorForSiteMenbership extends DeclarativeWebScript {
 	 */
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
-		logger.info("Super webscript loaded");
+		logger.debug("Super webscript loaded");
 		boolean ticketValide = false;
 		String userName = req.getParameter("userName");
 		String shortName = req.getParameter("siteName");
