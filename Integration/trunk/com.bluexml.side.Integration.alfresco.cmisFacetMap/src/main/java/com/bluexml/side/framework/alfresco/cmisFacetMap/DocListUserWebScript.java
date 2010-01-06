@@ -12,7 +12,7 @@ public class DocListUserWebScript extends DeclarativeWebScript {
 	 */
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
-		logger.info("Super webscript loaded");
+		logger.debug("Super webscript loaded");
 		return super.executeImpl(req, status, cache);
 	}
 
