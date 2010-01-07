@@ -66,6 +66,12 @@
                            optionId="alfresco.share.extension">
                      </optionRef>
                   </mustBeChecked>
+                  <moduleDependence
+                        moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension"
+                        moduleType="zip"
+                        technologyVersion="alfresco_3.x"
+                        versionMin="1.0.0">
+                  </moduleDependence>
                </generatorVersion>
             </technologyVersion>
          </technology>

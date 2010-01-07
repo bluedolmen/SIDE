@@ -6,19 +6,9 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 
 <%-- Templates creation --%>
 <%script type="Page" name="createTemplates"%>
-<%if (eContainer() != null) {%>
 <%ID.toLowerCase().nPut("templates_name")%>
-<%for (portlets){%>
-<%for (associationPortlet){%>
-<%if (isPortletInternal != null && isPortletInternal.view != null){%>
-<%for (isPortletInternal.view){%>
-<%if (current().startsWith("view.FacetMap")){%>
+<%if (isDefaultSharePage() =="false"){%>
 <%getProperty("alf.share.paths.core.templates")%><%nGet("templates_name")%>.ftl
-<%}%>
-<%}%>
-<%}%>
-<%}%>
-<%}%>
 <%}%>
 <%script type="Page" name="alfrescoGenerator" file="<%createTemplates%>" post="trim()"%>
 <%ID.toLowerCase().nPut("templates_name")%>
@@ -52,17 +42,12 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 		<%for (associationPortlet){%>
 			<%if (isPortletInternal != null && isPortletInternal.view != null){%>
 				<%for (isPortletInternal.view){%>
-					<%if (current().startsWith("view.FacetMap")){%>
-<iframe name="frame1_<%nGet("templates_name").substring(nGet("templates_name").lastIndexOf("-") +1)%>" id="frame1_<%nGet("templates_name").substring(nGet("templates_name").lastIndexOf("-") +1)%>" src="${url.context}/../facetmap-facets-<%nGet("templates_name").substring(nGet("templates_name").lastIndexOf("-") +1)%>/browseSimple.jsp"></iframe>
-<iframe name="frame2_<%nGet("templates_name").substring(nGet("templates_name").lastIndexOf("-") +1)%>" id="frame2_<%nGet("templates_name").substring(nGet("templates_name").lastIndexOf("-") +1)%>" src="${url.context}/../facetmap-content-<%nGet("templates_name").substring(nGet("templates_name").lastIndexOf("-") +1)%>/browseSimple.jsp"></iframe>
+					<%if (current("view.FacetMap")){%>
+<iframe src="/facetmap/browseSimple_facets.jsp?facetName=<%name%>&community=${siteID}&userName=${userName}&userTicket=${ticket}" id="facetsContainer" style="width: 600px; height: 600px"></iframe>
+<iframe src="/facetmap/browseSimple_content.jsp?facetName=<%name%>&community=${siteID}&userName=${userName}&userTicket=${ticket}" id="resultsContainer" style="width: 600px; height: 600px"></iframe>
 					<%}else{%>
-<table>
-						<%for (children){%>
-<tr>
-<td><%mapTo.filter("common.NamedModelElement").getFolder()%>:<%mapTo.filter("common.NamedModelElement").getQualifiedName()%></td>
-</tr>
-						<%}%>
-</table>
+<%-- manage other view types --%>
+<!-- portlet <%current("Portlet").name%>-->
 					<%}%>
 				<%}%>
 			<%}%>

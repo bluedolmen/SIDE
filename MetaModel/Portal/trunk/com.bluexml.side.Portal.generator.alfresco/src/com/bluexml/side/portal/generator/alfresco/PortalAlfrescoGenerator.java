@@ -50,12 +50,14 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 //		}
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_FACETMAP)) {
 			//result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/web-framework-config-custom.mt");
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/presets.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/page.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/css.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template-instances.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/title.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/navigation.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template.mt");
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template_js.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/messages.mt");
 		}
 		// shared resources
@@ -65,7 +67,8 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	public static boolean getGeneratorOptionValue(EObject o,String key) {
-		//System.out.println(AbstractGenerator.generatorOptions.values());
+		System.out.println("options :"+AbstractGenerator.generatorOptions.values());
+		
 		return getGeneratorOptionValue(key);
 	}
 }

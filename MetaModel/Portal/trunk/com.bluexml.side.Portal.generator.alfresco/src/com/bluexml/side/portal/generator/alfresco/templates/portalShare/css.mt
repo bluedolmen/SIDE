@@ -1,31 +1,17 @@
 <%
 metamodel http://www.kerblue.org/portal/1.0
+import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 %>
 
 <%-- CSS creation --%>
 <%script type="Page" name="createPagesCssStyle"%>
-<%if (eContainer() != null) {%>
 <%ID.toLowerCase().nPut("css_name")%>
-<%for (portlets){%>
-<%for (associationPortlet){%>
-<%if (isPortletInternal != null && isPortletInternal.view != null){%>
-<%for (isPortletInternal.view){%>
-<%if (current().startsWith("view.FacetMap")){%>
+<%if (isDefaultSharePage() =="false"){%>
 <%getProperty("alf.share.paths.core.css")%><%nGet("css_name")%>/<%nGet("css_name")%>.css
 <%}%>
-<%}%>
-<%}%>
-<%}%>
-<%}%>
-<%}%>
+
 <%script type="Page" name="alfrescoGenerator" file="<%createPagesCssStyle%>"%>
-<%if (eContainer() != null) {%>
 <%ID.toLowerCase().nPut("css_name")%>
-<%for (portlets){%>
-<%for (associationPortlet){%>
-<%if (isPortletInternal != null && isPortletInternal.view != null){%>
-<%for (isPortletInternal.view){%>
-<%if (current().startsWith("view.FacetMap")){%>
 .yui-t1
 {
    width: auto;
@@ -54,9 +40,3 @@ metamodel http://www.kerblue.org/portal/1.0
 	border-style:none;
 	align:left;
 }
-<%}%>
-<%}%>
-<%}%>
-<%}%>
-<%}%>
-<%}%>
