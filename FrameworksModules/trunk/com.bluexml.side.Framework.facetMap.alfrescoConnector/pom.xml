@@ -126,8 +126,6 @@
             <configuration>
               <outputDirectory>${target}</outputDirectory>
               <excludeScope>provided</excludeScope>
-              <excludeScope>test</excludeScope>
-              
             </configuration>
           </execution>
         </executions>
