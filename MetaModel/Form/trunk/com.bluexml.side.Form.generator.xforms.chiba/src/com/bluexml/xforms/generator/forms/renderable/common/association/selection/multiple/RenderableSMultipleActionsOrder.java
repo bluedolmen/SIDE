@@ -98,7 +98,9 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 	}
 
 	/**
-	 * Gets the trigger move.
+	 * Common function for the UP and DOWN features. Specifies the condition for triggering the
+	 * action, the manipulations of the instance document and possibly, updates the index of the
+	 * highlighted item.
 	 * 
 	 * @param bindActions
 	 *            the bind actions
@@ -113,25 +115,18 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 	 */
 	private Element getTriggerMove(ModelElementBindSimple bindActions, boolean moveUp,
 			String image, String rootPath) {
-		String delta = "- 1";
-		String notMovableIndex = "1";
-		if (!moveUp) {
-			delta = "+ 1";
-			notMovableIndex = "last() - 1";
-		}
 
 		Element trigger = XFormsGenerator.createTriggerWithLabelImage(image);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 
-		String ifCondition = "";
-
-		String realActionsNodeset = StringUtils.trimToEmpty(rootPath) + bindActions.getNodeset();
+		String realActionsNodeset = "instance('minstance')/" + StringUtils.trimToEmpty(rootPath)
+				+ bindActions.getNodeset();
 		String indexStr = "index('" + repeaterId + "')";
-
-		ifCondition += "((" + indexStr + " > 0) and "; // #1157
+		String ifCondition = indexStr
+				+ (moveUp ? " > 1" : (" < (count(" + realActionsNodeset + ") - 1)")); // #1157
 		// ifCondition += "not(" + realActionsNodeset + "[" + notMovableIndex + "] is "
 		// + realActionsNodeset + "[index('" + repeaterId + "')])";
-		ifCondition += "(" + indexStr + " != " + notMovableIndex + "))";
+		// ifCondition += "(" + indexStr + " != " + notMovableIndex + "))";
 
 		action.setAttribute("if", ifCondition);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
@@ -156,12 +151,13 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 		action.addContent(insert);
 		action.addContent(delete);
 
-		Element setindex = XFormsGenerator.createElement("setindex",
-				XFormsGenerator.NAMESPACE_XFORMS);
-		setindex.setAttribute("repeat", repeaterId);
-		setindex.setAttribute("index", indexStr + " " + delta);
-		action.addContent(setindex);
-
+		if (!moveUp) {
+			Element setindex = XFormsGenerator.createElement("setindex",
+					XFormsGenerator.NAMESPACE_XFORMS);
+			setindex.setAttribute("repeat", repeaterId);
+			setindex.setAttribute("index", indexStr + " - 1");
+			action.addContent(setindex);
+		}
 		trigger.addContent(action);
 		return trigger;
 	}
