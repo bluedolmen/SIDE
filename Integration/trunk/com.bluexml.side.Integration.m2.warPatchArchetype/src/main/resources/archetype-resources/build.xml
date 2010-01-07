@@ -57,8 +57,8 @@
 	</target>
 
 	<target name="maven_deploy" depends="" description="do mvn deploy">
-		<maven basedir="${symbol_dollar}{basedir}" options="" goal="clean" resultproperty="maven.build.result" />
-		<maven basedir="${symbol_dollar}{basedir}" options="" goal="deploy" resultproperty="maven.build.result" />
+		<maven basedir="${symbol_dollar}{basedir}" options="-P public" goal="clean" resultproperty="maven.build.result" />
+		<maven basedir="${symbol_dollar}{basedir}" options="-P public" goal="deploy" resultproperty="maven.build.result" />
 		<!--
 			<artifact:mvn pom="pom.xml" mavenHome="${symbol_dollar}{maven.home}">
 				<arg value="clean" />
