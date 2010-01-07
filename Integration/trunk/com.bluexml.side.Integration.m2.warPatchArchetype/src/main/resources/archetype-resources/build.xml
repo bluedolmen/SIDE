@@ -25,16 +25,13 @@
 		<echo message="patch the web application webapps.home=${symbol_dollar}{webapps.home}" />
 
 		<delete verbose="true">
-			<fileset dir="${webapps.home}/${webappName}/WEB-INF/lib">
-				<include name="${moduleId}-*.jar" />
+			<fileset dir="${symbol_dollar}{webapps.home}/${symbol_dollar}{webappName}/WEB-INF/lib">
+				<include name="${symbol_dollar}{moduleId}-*.jar" />
 			</fileset>
 		</delete>
 
-		<copy todir="${symbol_dollar}{webapps.home}/${symbol_dollar}{webappName}" overwrite="true" failonerror="false" verbose="true">
-			<fileset dir="target/${symbol_dollar}{moduleId}-${symbol_dollar}{mypom.version}" id="id">
-				<include name="**/**" />
-			</fileset>
-		</copy>
+		<unzip dest="${symbol_dollar}{webapps.home}/${symbol_dollar}{webappName}" overwrite="true" src="target/${symbol_dollar}{moduleId}-${symbol_dollar}{mypom.version}.zip">
+		</unzip>
 
 		<echo message="==========" />
 		<!--
