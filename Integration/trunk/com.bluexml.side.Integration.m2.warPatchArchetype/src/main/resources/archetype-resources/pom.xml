@@ -52,7 +52,6 @@
 						<configuration>
 							<outputDirectory>${symbol_dollar}{target}</outputDirectory>
 							<excludeScope>provided</excludeScope>
-							<excludeScope>test</excludeScope>
 						</configuration>
 					</execution>
 				</executions>
