@@ -198,7 +198,7 @@ public class FacetMapAlfrescoServlet extends com.facetmap.simple.SimpleFacetmapS
 	 * @see com.facetmap.servlet.FacetMapServlet#getParameterNames()
 	 */
 	@Override
-	public Enumeration getParameterNames() {
+	public Enumeration<?> getParameterNames() {
 		throw new RuntimeException("getParameterNames Not Implemented, use instead getParameter(String s,String facetName)");
 	}
 
