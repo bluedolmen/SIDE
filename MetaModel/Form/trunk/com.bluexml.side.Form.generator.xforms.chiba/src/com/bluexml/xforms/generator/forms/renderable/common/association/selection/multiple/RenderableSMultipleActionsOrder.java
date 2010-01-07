@@ -2,6 +2,7 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -49,14 +50,16 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		RenderedXMLElement rendered = new RenderedXMLElement();
 		if ((getFormGenerator().isInReadOnlyMode() == false) || bean.isDisabled()) { // #1238
 			repeaterId = renderedParents.peek().getOptionalData();
 			Element xformsElement = XFormsGenerator.createElement("div",
 					XFormsGenerator.NAMESPACE_XHTML);
-			ModelElementBindSimple bindActions = XFormsGenerator.getBind(renderedParents.peek(), 2);
-			String rootPath = getRootPath(renderedParents);
+			ModelElementBindSimple bindActions = ((RenderableSMultiple) parents.peek())
+					.getBindActions();
+			String rootPath = isInIMultRepeater ? getRootPath(renderedParents) : null;
 			xformsElement.addContent(getTriggerUp(bindActions, rootPath));
 			xformsElement.addContent(XFormsGenerator.createElement("br",
 					XFormsGenerator.NAMESPACE_XHTML));
@@ -122,9 +125,14 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 
 		String ifCondition = "";
 
-		ifCondition += "(index('" + repeaterId + "') > 0) and "; // #1157
-		ifCondition += "not(" + bindActions.getNodeset() + "[" + notMovableIndex + "] is "
-				+ bindActions.getNodeset() + "[index('" + repeaterId + "')])";
+		String realActionsNodeset = StringUtils.trimToEmpty(rootPath) + bindActions.getNodeset();
+		String indexStr = "index('" + repeaterId + "')";
+
+		ifCondition += "((" + indexStr + " > 0) and "; // #1157
+		// ifCondition += "not(" + realActionsNodeset + "[" + notMovableIndex + "] is "
+		// + realActionsNodeset + "[index('" + repeaterId + "')])";
+		ifCondition += "(" + indexStr + " != " + notMovableIndex + "))";
+
 		action.setAttribute("if", ifCondition);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
 
@@ -132,17 +140,16 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 		Element delete = XFormsGenerator.createElement("delete", XFormsGenerator.NAMESPACE_XFORMS);
 
 		if (moveUp) {
-			insert.setAttribute("at", "index('" + repeaterId + "') - 1");
+			insert.setAttribute("at", indexStr + " - 1");
 			insert.setAttribute("position", "before");
-			delete.setAttribute("at", "index('" + repeaterId + "') + 2");
+			delete.setAttribute("at", indexStr + " + 2");
 		} else {
-			insert.setAttribute("at", "index('" + repeaterId + "') + 1");
+			insert.setAttribute("at", indexStr + " + 1");
 			insert.setAttribute("position", "after");
-			delete.setAttribute("at", "index('" + repeaterId + "') - 2");
+			delete.setAttribute("at", indexStr + " - 2");
 		}
 
-		insert.setAttribute("origin", "instance('minstance')/" + rootPath
-				+ bindActions.getNodeset() + "[index('" + repeaterId + "')]");
+		insert.setAttribute("origin", realActionsNodeset + "[" + indexStr + "]");
 		bindActions.addLinkedElement(insert);
 		bindActions.addLinkedElement(delete);
 
@@ -152,7 +159,7 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 		Element setindex = XFormsGenerator.createElement("setindex",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		setindex.setAttribute("repeat", repeaterId);
-		setindex.setAttribute("index", "index('" + repeaterId + "') " + delta);
+		setindex.setAttribute("index", indexStr + " " + delta);
 		action.addContent(setindex);
 
 		trigger.addContent(action);

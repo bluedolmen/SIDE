@@ -235,16 +235,16 @@ public class MappingGenerator extends AbstractDataGenerator {
 	 * @see com.bluexml.xforms.generator.DataGenerator#addIdForClass(com.bluexml. side.clazz.Clazz,
 	 * java.lang.String, boolean)
 	 */
-	public void addIdForClass(Clazz classe, String string, boolean hasParent) {
-		if (!hasParent) {
-			AttributeType attributeType = new AttributeType();
-			attributeType.setName(string);
-			attributeType.setType("string");
-			attributeType.setInAlfresco(false);
-			attributeType.setAlfrescoName(string);
-			getClassType(classe).getAttribute().add(attributeType);
-		}
-	}
+	// public void addIdForClass(Clazz classe, String string, boolean hasParent) {
+	// if (!hasParent) {
+	// AttributeType attributeType = new AttributeType();
+	// attributeType.setName(string);
+	// attributeType.setType("string");
+	// attributeType.setInAlfresco(false);
+	// attributeType.setAlfrescoName(string);
+	// getClassType(classe).getAttribute().add(attributeType);
+	// }
+	// }
 
 	/*
 	 * (non-Javadoc)

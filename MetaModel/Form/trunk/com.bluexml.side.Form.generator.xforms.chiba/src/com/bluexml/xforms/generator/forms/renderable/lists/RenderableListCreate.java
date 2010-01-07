@@ -32,7 +32,7 @@ public class RenderableListCreate extends Renderable {
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedParentGroup renderedParentGroup = new RenderedParentGroup(renderedParents);
 		submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER + "create//"
 				+ ModelTools.getCompleteName(renderableClassList.getClasse()));

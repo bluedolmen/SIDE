@@ -263,7 +263,7 @@ public class RenderableLayout extends Renderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		if (firstRender) {
 			for (List<String> line : lines) {
 				RenderableLine renderableLine = new RenderableLine();

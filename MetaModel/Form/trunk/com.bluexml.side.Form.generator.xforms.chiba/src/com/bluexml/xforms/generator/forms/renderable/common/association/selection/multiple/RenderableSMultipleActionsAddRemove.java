@@ -2,6 +2,7 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -25,9 +26,6 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 
 	/** The selector bind label. */
 	private ModelElementBindSimple selectorBindLabel;
-
-	/** The selector bind for the number of selected items. */
-	private ModelElementBindSimple selectorBindNb;
 
 	private RenderableSelector selector;
 
@@ -70,13 +68,12 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		// FIXME root path
-		ModelElementBindSimple bindActions = XFormsGenerator.getBind(renderedParents.peek(), 2);
-
+		ModelElementBindSimple bindActions = ((RenderableSMultiple) parents.peek()).getBindActions();
+		
 		this.selectorBindId = selector.getBindId();
 		this.selectorBindLabel = selector.getBindLabel();
-		this.selectorBindNb = selector.getBindMandatory();
 
 		RenderedXMLElement rendered = new RenderedXMLElement();
 
@@ -110,20 +107,13 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_LEFT);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 
+		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
+
 		Element deleteAction = XFormsGenerator.createElement("delete",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		deleteAction.setAttribute("at", "index('" + repeaterId + "')");
-		deleteAction.setAttribute("event", "DOMActivate");
 		bindActions.addLinkedElement(deleteAction);
 		action.addContent(deleteAction);
-
-		if (bean.isMandatory()) {
-			Element setvalueNb = XFormsGenerator.createElement("setvalue",
-					XFormsGenerator.NAMESPACE_XFORMS);
-			setvalueNb.setAttribute("ref", selectorBindNb.getNodeset());
-			setvalueNb.setAttribute("value", ". - 1");
-			action.addContent(setvalueNb);
-		}
 
 		trigger.addContent(action);
 		return trigger;
@@ -150,7 +140,8 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 		// <xf:action ev:event="DOMActivate"
 		// if="(instance('ComBluexmlDataRubriqueListInstance1')/SELECTEDID ne '') and not(parentchildOf[com.bluexml.data.Rubrique/BXDSID = instance('ComBluexmlDataRubriqueListInstance1')/SELECTEDID])">
 		String selectorNodeset = selectorBindId.getNodeset();
-		String realActionsNodeset = "instance('minstance')/" + rootPath + bindActions.getNodeset();
+		String realActionsNodeset = StringUtils.trimToEmpty(rootPath)
+		+ bindActions.getNodeset();
 		String iftest = "(" + selectorNodeset + " ne '') " + "and not(" + realActionsNodeset + "["
 				+ path + MsgId.INT_INSTANCE_SIDEID + " = " + selectorNodeset + "])";
 		if (bean.getHiBound() > 1) {
@@ -178,14 +169,6 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 		setvalueLabel.setAttribute("ref", pathSIDE + MsgId.INT_INSTANCE_SIDELABEL);
 		setvalueLabel.setAttribute("value", selectorBindLabel.getNodeset());
 		action.addContent(setvalueLabel);
-
-		if (bean.isMandatory()) {
-			Element setvalueNb = XFormsGenerator.createElement("setvalue",
-					XFormsGenerator.NAMESPACE_XFORMS);
-			setvalueNb.setAttribute("ref", selectorBindNb.getNodeset());
-			setvalueNb.setAttribute("value", ". + 1");
-			action.addContent(setvalueNb);
-		}
 
 		trigger.addContent(action);
 		return trigger;

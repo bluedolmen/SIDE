@@ -30,6 +30,10 @@ public class RenderableSMultiple extends AbstractRenderable {
 
 	private ModelElementBindSimple selectorBindId; // #1156
 
+	private ModelElementBindHolder bindRepeater = null; // #1310
+	private ModelElementBindSimple bindActions = null;
+	private ModelElementBindSimple bindEdit = null;
+
 	/**
 	 * Instantiates a new renderable s multiple.
 	 * 
@@ -40,8 +44,7 @@ public class RenderableSMultiple extends AbstractRenderable {
 	 * @param associationClassBean
 	 *            the association class bean
 	 */
-	public RenderableSMultiple(AssociationBean associationBean, RenderableSelector selector,
-			AssociationBean associationClassBean) {
+	public RenderableSMultiple(AssociationBean associationBean, RenderableSelector selector) {
 		super(associationBean);
 
 		add(selector);
@@ -56,9 +59,6 @@ public class RenderableSMultiple extends AbstractRenderable {
 			add(new RenderableSMultipleActionsOrder(associationBean));
 		}
 
-		if (associationClassBean != null) {
-			add(new RenderableSMultipleAssociationClass(associationClassBean));
-		}
 	}
 
 	/*
@@ -80,30 +80,36 @@ public class RenderableSMultiple extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
-		ModelElementBindHolder bindRepeater = new ModelElementBindHolder("");
-		ModelElementBindSimple bindActions = new ModelElementBindSimple("");
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+		ModelElementBindHolder bindRepeater = getBindRepeater();
+		ModelElementBindSimple bindActions = getBindActions();
 
-		String dataPath = "";
-		ModelElementBindSimple bindLabel = new ModelElementBindSimple(dataPath
-				+ MsgId.INT_INSTANCE_SIDELABEL);
-		ModelElementBindSimple bindId = new ModelElementBindSimple(dataPath
-				+ MsgId.INT_INSTANCE_SIDEID);
+		ModelElementBindSimple bindLabel = new ModelElementBindSimple(MsgId.INT_INSTANCE_SIDELABEL.getText());
+		ModelElementBindSimple bindId = new ModelElementBindSimple(MsgId.INT_INSTANCE_SIDEID.getText());
+		ModelElementBindSimple bindEdit = getBindEdit();
+		bindEdit.setNodeset(MsgId.INT_INSTANCE_SIDEEDIT.getText());
+		
 
 		bindRepeater.addSubBind(bindLabel);
 		bindRepeater.addSubBind(bindId);
+		bindRepeater.addSubBind(bindEdit);
+		setBindEdit(bindEdit);
 
-		String nodeSetItems = computeNodeSetItems(path);
 		String nodeSetActions = computeNodeSetActions(path);
+		String nodeSetItems = computeNodeSetItems(path, nodeSetActions);
 		Rendered rendered = new RenderedLine();
+		rendered.setOptionalData(XFormsGenerator.getId(bean.getName() + "Repeater"));
+		
 		Element div = rendered.getXformsElement();
 		div.setAttribute("class", MsgId.INT_CSS_SELECT_WIDGET.getText());
-		rendered.setOptionalData(XFormsGenerator.getId(bean.getName() + "Repeater"));
+		
+		// e.g.: Paragraphe1310/field_12/modelcyvel.Video (usual suffix is [position()!=last()])
+		bindActions.setNodeset(nodeSetActions);
+		bindActions.setRepeaterRootBind(true); // #1241
+
 		bindRepeater.setNodeset(nodeSetItems);
 		rendered.addModelElement(bindRepeater);
-		bindActions.setNodeset(nodeSetActions);
 		rendered.addModelElement(bindActions);
-		bindActions.setRepeaterRootBind(true); // #1241
 
 		if (getFormGenerator().isInReadOnlyMode() == false) {
 			if (bean.isMandatory()) { // #978
@@ -121,6 +127,54 @@ public class RenderableSMultiple extends AbstractRenderable {
 		}
 		
 		return rendered;
+	}
+	/**
+	 * 
+	 * @return the bind holder for the repeated items
+	 */
+	public ModelElementBindHolder getBindRepeater() {
+		if (bindRepeater == null) {
+			bindRepeater = new ModelElementBindHolder("");
+		}
+		return bindRepeater;
+	}
+
+	/**
+	 * @return the bindActions
+	 */
+	public ModelElementBindSimple getBindActions() {
+		if (bindActions == null) {
+			bindActions = new ModelElementBindSimple("");
+		}
+		return bindActions;
+	}
+
+	/**
+	 * @return the bindEdit
+	 */
+	public ModelElementBindSimple getBindEdit() {
+		if (bindEdit == null) {
+			bindEdit = new ModelElementBindSimple("");
+		}
+		return bindEdit;
+	}
+
+	/**
+	 * @param bindEdit the bindEdit to set
+	 */
+	public void setBindEdit(ModelElementBindSimple bindEdit) {
+		this.bindEdit = bindEdit;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.blueXML.xforms.generator.forms.Renderable#renderEnd(org.blueXML.xforms.generator.forms.Rendered)
+	 */
+	@Override
+	public void renderEnd(Rendered rendered) {
+		super.renderEnd(rendered);
+		bindRepeater = null;
+		bindActions = null;
+		bindEdit = null;
 	}
 
 }

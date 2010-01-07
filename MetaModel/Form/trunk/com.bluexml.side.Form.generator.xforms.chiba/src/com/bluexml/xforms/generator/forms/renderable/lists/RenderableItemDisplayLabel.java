@@ -25,7 +25,7 @@ public class RenderableItemDisplayLabel extends Renderable {
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 
 		RenderedInput renderedInput = new RenderedInput();
 

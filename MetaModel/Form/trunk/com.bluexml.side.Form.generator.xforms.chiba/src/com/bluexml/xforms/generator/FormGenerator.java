@@ -153,6 +153,8 @@ public class FormGenerator {
 
 	private boolean generateReadOnlyForms;
 
+	private boolean generateLogListForms;
+
 	private boolean inReadOnlyMode;
 
 	/**
@@ -272,6 +274,11 @@ public class FormGenerator {
 
 		return res.toString();
 	}
+
+	/** Name of the form being processed. For error messages. */
+	private String currentForm;
+
+	private int logLevel; // #1275
 
 	/**
 	 * Gets the all packages.
@@ -722,9 +729,9 @@ public class FormGenerator {
 	private void processClasse(Clazz classe, boolean rendered) {
 		currentGenerator.beginClasse(classe, rendered);
 
-		Clazz parent = ModelTools.getParent(classe);
-		boolean hasParent = (parent != null);
-		currentGenerator.addIdForClass(classe, "BXDSID", hasParent);
+		// Clazz parent = ModelTools.getParent(classe);
+		// boolean hasParent = (parent != null);
+		// currentGenerator.addIdForClass(classe, "BXDSID", hasParent);
 
 		Map<Aspect, Clazz> allClassAspects = ModelTools.getClassAspects(classe);
 		Set<Entry<Aspect, Clazz>> aspectEntrySet = allClassAspects.entrySet();
@@ -748,6 +755,8 @@ public class FormGenerator {
 	 *            the form
 	 */
 	private void processForm(FormContainer form) {
+		currentForm = ModelTools.getCompleteName(form);
+		logger.info("Processing " + currentForm);
 		currentGenerator.beginForm(form);
 		currentGenerator.endForm(form);
 	}
@@ -1044,6 +1053,36 @@ public class FormGenerator {
 	 */
 	public void setAutoSwitchToStandaloneMode(boolean autoSwitchToStandaloneMode) {
 		this.autoSwitchToStandaloneMode = autoSwitchToStandaloneMode;
+	}
+
+	/**
+	 * @return the generateLogListForms
+	 */
+	public boolean isGenerateLogListForms() {
+		return generateLogListForms;
+	}
+
+	/**
+	 * @param generateLogListForms
+	 *            the generateLogListForms to set
+	 */
+	public void setGenerateLogListForms(boolean generateLogListForms) {
+		this.generateLogListForms = generateLogListForms;
+	}
+
+	/**
+	 * @param logLevel
+	 *            the logLevel to set
+	 */
+	public void setLogLevel(int logLevel) {
+		this.logLevel = logLevel;
+	}
+
+	/**
+	 * @return the logLevel
+	 */
+	public int getLogLevel() {
+		return logLevel;
 	}
 
 }

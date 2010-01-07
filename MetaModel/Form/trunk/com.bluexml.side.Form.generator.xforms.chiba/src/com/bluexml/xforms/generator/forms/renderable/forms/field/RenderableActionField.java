@@ -18,6 +18,8 @@ public class RenderableActionField extends Renderable {
 
 	private ModelElementSubmission submission;
 	private String label;
+	
+	private final boolean DEFAULT_VALIDATE_FIRST = true;
 
 	public RenderableActionField(XFormsGenerator generationManager, FormElement parent,
 			ActionField formElement) {
@@ -40,12 +42,12 @@ public class RenderableActionField extends Renderable {
 		// } else {
 		// actionName = formElement.getId();
 		// }
-		// FIXME: differentiate user actions from workflow actions
+		// FIXME: differentiate user actions (when they become available) from workflow actions
 		String infixe = MsgId.INT_ACT_CODE_WRKFLW_TRANSITION.getText();
 		actionName = formElement.getId();
 		label = formElement.getLabel();
 		submission = new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER + infixe + "/"
-				+ actionName, label, true, false);
+				+ actionName, label, true, DEFAULT_VALIDATE_FIRST);
 		RenderableSubmit button = new RenderableSubmit(submission, label, false);
 		add(button);
 	}
@@ -58,7 +60,7 @@ public class RenderableActionField extends Renderable {
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 
 		RenderedParentGroup renderedParentGroup = new RenderedParentGroup(renderedParents);
 		renderedParentGroup.getParent().addModelElement(submission);

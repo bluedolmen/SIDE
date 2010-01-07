@@ -25,9 +25,6 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	/** The selector bind label. */
 	private ModelElementBindSimple selectorBindLabel;
 
-	/** The selector bind for the number of selected items. */
-	private ModelElementBindSimple selectorBindNb;
-
 	private RenderableSelector selector;
 
 	/**
@@ -42,11 +39,10 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 */
 	public RenderableSSingleActions(AssociationBean associationBean,
 			ModelElementBindSimple selectorBindId, ModelElementBindSimple selectorBindLabel,
-			ModelElementBindSimple selectorBindNb, RenderableSelector selector) {
+			RenderableSelector selector) {
 		super(associationBean);
 		this.selectorBindId = selectorBindId;
 		this.selectorBindLabel = selectorBindLabel;
-		this.selectorBindNb = selectorBindNb;
 		this.selector = selector;
 	}
 
@@ -69,11 +65,11 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedInput rendered = new RenderedInput();
 
-		ModelElementBindSimple bindId = XFormsGenerator.getBind(renderedParents.peek(), 1);
-		ModelElementBindSimple bindLabel = XFormsGenerator.getBind(renderedParents.peek(), 2);
+		ModelElementBindSimple bindId = ((RenderableSSingle) parents.peek()).getSelectedBindId();
+		ModelElementBindSimple bindLabel = ((RenderableSSingle) parents.peek()).getSelectedBindLabel();
 
 		if ((getFormGenerator().isInReadOnlyMode() == false) || bean.isDisabled()) { // #1238
 			Element xformsElement = XFormsGenerator.createElement("div",
@@ -113,14 +109,6 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		bindLabel.addLinkedElement(setvalueLabel);
 		setvalueLabel.setText("");
 		action.addContent(setvalueLabel);
-
-		if (bean.isMandatory()) {
-			Element setvalueNb = XFormsGenerator.createElement("setvalue",
-					XFormsGenerator.NAMESPACE_XFORMS);
-			setvalueNb.setAttribute("ref", selectorBindNb.getNodeset());
-			setvalueNb.setAttribute("value", ". - 1");
-			action.addContent(setvalueNb);
-		}
 
 		if (getBean().getAssociationType() == AssociationType.wkflwProcess) {
 			// for updating the instances list wrt current process definition
@@ -162,14 +150,6 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		bindLabel.addLinkedElement(setvalueLabel);
 		setvalueLabel.setAttribute("value", selectorBindLabel.getNodeset());
 		action.addContent(setvalueLabel);
-
-		if (bean.isMandatory()) {
-			Element setvalueNb = XFormsGenerator.createElement("setvalue",
-					XFormsGenerator.NAMESPACE_XFORMS);
-			setvalueNb.setAttribute("ref", selectorBindNb.getNodeset());
-			setvalueNb.setAttribute("value", ". + 1");
-			action.addContent(setvalueNb);
-		}
 
 		if (getBean().getAssociationType() == AssociationType.wkflwProcess) {
 			// for updating the instances list wrt current process definition

@@ -4,7 +4,6 @@ import java.util.Stack;
 
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
-import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindHolder;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
@@ -30,7 +29,7 @@ public class RenderableSMultipleDisplay extends AbstractRenderable {
 		super(associationBean);
 		add(new RenderableSDisplay(associationBean));
 		if (associationBean.isShowingActions()) {
-			editButton = new RenderableSEdit(associationBean);
+			editButton = new RenderableSEdit(associationBean, true);
 			add(editButton);
 		}
 	}
@@ -54,10 +53,10 @@ public class RenderableSMultipleDisplay extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		String repeaterId = renderedParents.peek().getOptionalData();
-		ModelElementBindHolder bindRepeater = (ModelElementBindHolder) XFormsGenerator.getBind(
-				renderedParents.peek(), 1);
+		ModelElementBindHolder bindRepeater = ((RenderableSMultiple) parents.peek())
+				.getBindRepeater();
 		RenderedRepeater renderedRepeater = new RenderedRepeater(bindRepeater, repeaterId);
 		return renderedRepeater;
 	}

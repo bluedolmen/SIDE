@@ -149,7 +149,7 @@ public class RenderableClass extends Renderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		if (firstRender) {
 			if (otherAssociationsTab.getChildrenSize() > 0) {
 				addFirst(otherAssociationsTab);

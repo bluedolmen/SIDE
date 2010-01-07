@@ -43,6 +43,7 @@ public class ModelElementBindSimple extends ModelElement {
 
 	protected ModelElementBindSimple anotherMeb = null;
 
+	// if true, this item's "readonly" attribute is never set to "true"
 	private boolean isRepeaterRootBind = false; // #1241
 
 	// #1223-related: do not add a constraint for widgets even if required is set to true
@@ -155,7 +156,7 @@ public class ModelElementBindSimple extends ModelElement {
 				} else {
 					relevantStr += " and ";
 				}
-				relevantStr += "(" + lvalue + " < count(instance('minstance')/" + rvalue + "))";
+				relevantStr += "(" + lvalue + " < count(" + rvalue + "))";
 			}
 			posStart = nodeset.indexOf("[index('", posEnd + 1);
 		}

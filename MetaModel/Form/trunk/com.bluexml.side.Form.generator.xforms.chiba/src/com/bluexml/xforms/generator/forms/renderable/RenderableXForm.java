@@ -77,7 +77,7 @@ public class RenderableXForm extends Renderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedForm renderedForm = new RenderedForm(title, isAWorkflowForm, isWrkflwSelectionForm);
 		for (ModelElementSubmission modelElementSubmission : submissions) {
 			renderedForm.addModelElement(modelElementSubmission);

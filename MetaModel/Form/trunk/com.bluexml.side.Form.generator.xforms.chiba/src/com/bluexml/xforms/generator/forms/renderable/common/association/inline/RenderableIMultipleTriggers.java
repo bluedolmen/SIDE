@@ -107,12 +107,12 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedInput input = new RenderedInput();
-		ModelElementBindSimple bind = XFormsGenerator.getBind(renderedParents.peek(), 2);
+		ModelElementBindSimple bindActions = ((RenderableIMultiple) parents.peek()).getBindActions();
 		String repeaterId = renderedParents.peek().getOptionalData();
-		Element addButton = createAdd(bind, repeaterId);
-		Element deleteButton = createDelete(bind, repeaterId);
+		Element addButton = createAdd(bindActions, repeaterId);
+		Element deleteButton = createDelete(bindActions, repeaterId);
 		Element divButtons = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		divButtons.setAttribute("class", ModelTools.getCompleteNameJAXB(bean.getDestinationClass())
 				+ "_triggers");

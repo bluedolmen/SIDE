@@ -29,6 +29,7 @@ public class RenderedForm extends Rendered {
 	 *            the title
 	 */
 	public RenderedForm(String title, boolean isAWorkflowForm, boolean isWrkflwSelectionForm) {
+		setRootContainer(this);
 		xformsElement = XFormsGenerator.createElement("html", XFormsGenerator.NAMESPACE_XHTML);
 		Element head = XFormsGenerator.createElement("head", XFormsGenerator.NAMESPACE_XHTML);
 
@@ -143,6 +144,7 @@ public class RenderedForm extends Rendered {
 		for (Element element : modelElementsRendered) {
 			model.addContent(element);
 		}
-	}
+		setRootContainer(null);
+}
 
 }

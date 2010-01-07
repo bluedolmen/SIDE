@@ -25,7 +25,7 @@ public class RenderableSelectorCount extends AbstractRenderableSelectorItem {
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedXMLElement rendered = new RenderedXMLElement();
 
 		Element div = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);

@@ -327,8 +327,15 @@ public class XFormsGenerator extends AbstractDataGenerator {
 			Clazz destination, boolean doublenav, Association association) {
 		RenderableClass classBeanSource = getClassBean(source);
 		RenderableClass classBeanDestination = getClassBean(destination);
-		classBeanSource.addAssociation(destination, classBeanDestination, name, title, type,
-				association);
+		try {
+			classBeanSource.addAssociation(destination, classBeanDestination, name, title, type,
+					association);
+		} catch (NullPointerException e) {
+			// nothing to do if in dev mode
+			if (formGenerator.isAutoSwitchToStandaloneMode() == false) {
+				throw (e);
+			}
+		}
 	}
 
 	/*
@@ -394,9 +401,9 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 * @see com.bluexml.xforms.generator.DataGenerator#addIdForClass(com.bluexml. side.clazz.Clazz,
 	 * java.lang.String, boolean)
 	 */
-	public void addIdForClass(Clazz classe, String string, boolean hasParent) {
-		addIdForClass(classe, string);
-	}
+	// public void addIdForClass(Clazz classe, String string, boolean hasParent) {
+	// addIdForClass(classe, string);
+	// }
 
 	/*
 	 * (non-Javadoc)
@@ -541,9 +548,10 @@ public class XFormsGenerator extends AbstractDataGenerator {
 				if (!classe.isAbstract()) {
 					render(outputXForms, classeBean, formName, title, FormTypeRendered.formClass,
 							false, false);
-
-					render(outputXForms, new RenderableClassList(classe), formName, title,
-							FormTypeRendered.formClassList, false, false);
+					if (formGenerator.isGenerateLogListForms()) {
+						render(outputXForms, new RenderableClassList(classe), formName, title,
+								FormTypeRendered.formClassList, false, false);
+					}
 				}
 				if (classeBean.hasSubClasses()) {
 					render(outputXForms, new RenderableClassSelector(classeBean.getSubClasses()),
@@ -685,7 +693,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		associationBean.setFieldSize("0");
 
 		RenderableSelector selector = new RenderableSelector(associationBean);
-		RenderableSSingle renderable = new RenderableSSingle(associationBean, selector, null);
+		RenderableSSingle renderable = new RenderableSSingle(associationBean, selector);
 		// Rendered rendered = renderable.recursiveRender();
 		// MsgId.INT_WKFLW_NODESET_PREFIX.getText(), null, null);
 		// renderedParent.addRendered(rendered, null);

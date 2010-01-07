@@ -58,7 +58,7 @@ public class RenderableIUnique extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		Rendered rendered = null;
 		if (ownGroup) {
 			String groupTitle = ModelTools.getTitle(bean.getDestinationClass());

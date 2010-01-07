@@ -303,7 +303,7 @@ public interface DataGenerator {
 	 * @param hasParent
 	 *            the has parent
 	 */
-	void addIdForClass(Clazz classe, String string, boolean hasParent);
+//	void addIdForClass(Clazz classe, String string, boolean hasParent);
 
 	/**
 	 * Begin aspect.

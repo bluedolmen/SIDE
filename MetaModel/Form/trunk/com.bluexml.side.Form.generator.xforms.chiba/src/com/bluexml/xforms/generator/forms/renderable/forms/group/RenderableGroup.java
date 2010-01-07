@@ -53,7 +53,7 @@ public class RenderableGroup<G extends FormGroup> extends RenderableFormElement<
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		Rendered rendered = null;
 		if (formElement.getId() == null) {
 			throw new RuntimeException("Form element " + formElement.getLabel() + " has no id!");

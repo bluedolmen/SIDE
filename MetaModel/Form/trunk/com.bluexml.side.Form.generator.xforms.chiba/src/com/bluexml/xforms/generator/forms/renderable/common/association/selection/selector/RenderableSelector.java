@@ -37,9 +37,6 @@ public class RenderableSelector extends AbstractRenderable {
 	/** The bind for max results. */
 	private ModelElementBindSimple bindMaxResults;
 
-	/** The bind for implementing the "mandatory" property. */
-	private ModelElementBindSimple bindMandatory;
-
 	/** The instance name. */
 	private String instanceName;
 
@@ -72,18 +69,20 @@ public class RenderableSelector extends AbstractRenderable {
 			} else {
 				instanceName = MsgId.INT_WKFLW_INSTANCE_INSTANCE_NAME.getText();
 			}
-		} else if (associationBean.getAssociationType() == AssociationType.clazz) {
-			instanceName = XFormsGenerator.getId(ModelTools.getCompleteNameJAXB(associationBean
-					.getDestinationClass())
-					+ "ListInstance");
-			modelElementUpdater = new ModelElementUpdaterList(
-					associationBean.getDestinationClass(), instanceName, associationBean
-							.getFormatPattern(), associationBean.getLabelLength());
 		} else {
-			instanceName = XFormsGenerator.getId(ModelTools.getCompleteNameJAXB(associationBean
-					.getDestinationSelect().getEnumeration())
-					+ "EnumInstance");
-			modelElementUpdater = new ModelElementUpdaterEnum(associationBean, instanceName);
+			if (associationBean.getAssociationType() == AssociationType.clazz) {
+				instanceName = ModelTools
+						.getCompleteNameJAXB(associationBean.getDestinationClass())
+						+ "List";
+				modelElementUpdater = new ModelElementUpdaterList(associationBean
+						.getDestinationClass(), instanceName, associationBean.getFormatPattern(),
+						associationBean.getLabelLength());
+			} else {
+				instanceName = ModelTools.getCompleteNameJAXB(associationBean
+						.getDestinationSelect().getEnumeration())
+						+ "EnumInstance";
+				modelElementUpdater = new ModelElementUpdaterEnum(associationBean, instanceName);
+			}
 		}
 		instancePath = "instance('" + instanceName + "')/";
 		instanceNodePath = instancePath + "item";
@@ -91,19 +90,15 @@ public class RenderableSelector extends AbstractRenderable {
 		bindId = new ModelElementBindSimple("");
 		bindLabel = new ModelElementBindSimple("");
 		bindMaxResults = new ModelElementBindSimple("");
-		bindMandatory = new ModelElementBindSimple("");
 
 		bindId.setType(new QName("string"));
 		bindLabel.setType(new QName("string"));
 		bindMaxResults.setType(new QName("string"));
 		bindMaxResults.setHidden(true);
-		bindMandatory.setType(new QName("integer"));
-		bindMandatory.setHidden(true);
 
 		bindId.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDID);
 		bindLabel.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL);
 		bindMaxResults.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDMAX);
-		bindMandatory.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDNUMBER);
 
 		if (bean.isMandatory()) { // #978
 			// setting bindId's required to true will give the visual cue (a red star under Chiba)
@@ -196,13 +191,6 @@ public class RenderableSelector extends AbstractRenderable {
 		return modelElementUpdater;
 	}
 
-	/**
-	 * @return the bindMandatory
-	 */
-	public ModelElementBindSimple getBindMandatory() {
-		return bindMandatory;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -210,7 +198,7 @@ public class RenderableSelector extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedDiv rendered = new RenderedDiv(XFormsGenerator.getId("Selector"));
 		initBinds();
 
@@ -231,19 +219,18 @@ public class RenderableSelector extends AbstractRenderable {
 				rendered.addModelElement(new ModelElementWorkflowInstanceList());
 			}
 		}
-		rendered.addModelElement(bindId);
-		rendered.addModelElement(bindLabel);
-		rendered.addModelElement(bindMaxResults);
-		rendered.addModelElement(bindMandatory);
+		rendered.addModelElementRoot(bindId);
+		rendered.addModelElementRoot(bindLabel);
+		rendered.addModelElementRoot(bindMaxResults);
 
 		return rendered;
 	}
 
 	/**
 	 * We need to add this function so that nested forms (following the additional feature of #1225)
-	 * continue to perform as needed in #978, meaning "so that mandatory selection widgets have their
-	 * alert message display when nothing is selected and that message disappears when an element is
-	 * selected". <br>
+	 * continue to perform as needed in #978, meaning "so that mandatory selection widgets have
+	 * their alert message display when nothing is selected and that message disappears when an
+	 * element is selected". <br>
 	 * If bindId, bindLabel, etc. are created in the constructor, the same binds stand for all
 	 * versions of the form. The consequence is that any previously set constraint is accumulated
 	 * with new constraints, leading to the first version performing as expected w.r.t. #978 and the
@@ -255,21 +242,18 @@ public class RenderableSelector extends AbstractRenderable {
 		bindId = new ModelElementBindSimple("");
 		bindLabel = new ModelElementBindSimple("");
 		bindMaxResults = new ModelElementBindSimple("");
-		bindMandatory = new ModelElementBindSimple("");
 
-		bindId.setType(new QName("string"));
-		bindLabel.setType(new QName("string"));
-		bindMaxResults.setType(new QName("string"));
-		bindMaxResults.setHidden(true);
-		bindMandatory.setType(new QName("integer"));
-		bindMandatory.setHidden(true);
+		// NONE OF THESE IS REALLY NEEDED
+		// bindId.setType(new QName("string"));
+		// bindLabel.setType(new QName("string"));
+		// bindMaxResults.setType(new QName("string"));
+		// bindMaxResults.setHidden(true);
 
-		bindId.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDID.getText());
-		bindLabel.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL.getText());
-		bindMaxResults.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDMAX.getText());
-		bindMandatory.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDNUMBER.getText());
+		bindId.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDID);
+		bindLabel.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL);
+		bindMaxResults.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDMAX);
 
-		if (bean.isMandatory()) { 
+		if (bean.isMandatory()) {
 			// #978
 			// setting bindId's required to true will give the visual cue (a red star under Chiba)
 			bindId.setRequired(true);
@@ -282,15 +266,18 @@ public class RenderableSelector extends AbstractRenderable {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.generator.forms.Renderable#renderEnd(com.bluexml.xforms.generator.forms.Rendered)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.bluexml.xforms.generator.forms.Renderable#renderEnd(com.bluexml.xforms.generator.forms
+	 * .Rendered)
 	 */
 	@Override
 	public void renderEnd(Rendered rendered) {
 		super.renderEnd(rendered);
 		bindId = null;
 		bindLabel = null;
-		bindMandatory = null;
 		bindMaxResults = null;
 	}
 

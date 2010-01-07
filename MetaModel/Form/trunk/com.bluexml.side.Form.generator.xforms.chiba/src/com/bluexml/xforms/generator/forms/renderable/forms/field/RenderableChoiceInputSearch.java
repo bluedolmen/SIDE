@@ -59,7 +59,7 @@ public class RenderableChoiceInputSearch extends Renderable {
 		associationBean.setMandatory(choiceField.isMandatory());
 
 		RenderableSelector selector = new RenderableSelector(associationBean);
-		add(new RenderableSSingle(associationBean, selector, null));
+		add(new RenderableSSingle(associationBean, selector));
 		throw new RuntimeException("This class is deprecated");
 	}
 
@@ -70,7 +70,7 @@ public class RenderableChoiceInputSearch extends Renderable {
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		return new RenderedParentGroup(renderedParents);
 	}
 

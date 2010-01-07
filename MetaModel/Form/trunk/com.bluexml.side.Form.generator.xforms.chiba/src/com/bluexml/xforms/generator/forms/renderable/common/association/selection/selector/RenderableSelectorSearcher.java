@@ -49,7 +49,7 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedInput rendered = new RenderedInput();
 
 		Element input = XFormsGenerator.createElement("input", XFormsGenerator.NAMESPACE_XFORMS);

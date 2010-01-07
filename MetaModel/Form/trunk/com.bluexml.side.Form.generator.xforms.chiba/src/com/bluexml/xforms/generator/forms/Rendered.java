@@ -2,13 +2,20 @@ package com.bluexml.xforms.generator.forms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import org.jdom.Element;
+
+import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindHolder;
+import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 
 /**
  * A rendered item.
  */
 public abstract class Rendered {
+
+	/** The current form that's being rendered. */
+	private static Rendered rootContainer = null;
 
 	/** The rendered children. */
 	private List<Rendered> children = new ArrayList<Rendered>();
@@ -22,9 +29,15 @@ public abstract class Rendered {
 	/** The optional data. */
 	private String optionnalData;
 
-	/** Does layout has to return to line after this element?. */
+	/** Does layout have to return to line after this element?. */
 	private boolean returnToLine = false;
 
+	/** The bind holder which binds of this rendered will be nested into. */
+	ModelElementBindHolder bindHolder = null;
+	
+	/** The stack of bind holders that have been encountered since the rendering started. */
+	private static Stack<ModelElementBindHolder> bindHolderStack = null;
+	
 	/**
 	 * Gets the optional data.
 	 * 
@@ -83,18 +96,58 @@ public abstract class Rendered {
 	 */
 	public void addAllModelElement(List<ModelElement> modelElement) {
 		for (ModelElement modelElementToAdd : modelElement) {
-			addModelElement(modelElementToAdd);
+			addModelElementLocal(modelElementToAdd);
 		}
 	}
 
 	/**
-	 * Adds the model element.
+	 * Add a model element to this object.
+	 * 
+	 * @param modelElement
+	 */
+	public void addModelElementLocal(ModelElement modelElement) {
+		modelElements.add(modelElement);
+	}
+
+	/**
+	 * Adds the model element, not adding it in the holder even if one exists
+	 * 
+	 * @param modelElement
+	 * @param asStandalone
+	 *            if true, the model element is added to the root container
+	 */
+	public void addModelElementRoot(ModelElement modelElement) {
+		getRootContainer().addModelElementLocal(modelElement);
+	}
+
+	/**
+	 * Adds the model element into the bind holder if any.
 	 * 
 	 * @param modelElement
 	 *            the model element
 	 */
 	public void addModelElement(ModelElement modelElement) {
-		modelElements.add(modelElement);
+		ModelElementBindHolder holder = getTopBindHolder();
+		if (holder == null || !(modelElement instanceof ModelElementBindSimple)) {
+			addModelElementLocal(modelElement);
+		} else {
+			holder.addSubBind((ModelElementBindSimple) modelElement);
+		}
+	}
+
+	/** Gets the bind holder at the top of the stack.
+	 * 
+	 * @return
+	 */
+	private static ModelElementBindHolder getTopBindHolder() {
+		if (getBindHolderStack().size() > 0) {
+			return getBindHolderStack().peek();
+		}
+		return null;
+	}
+
+	private static Rendered getRootContainer() {
+		return rootContainer;
 	}
 
 	/**
@@ -120,7 +173,9 @@ public abstract class Rendered {
 	 *            the renderable
 	 */
 	public void renderEnd(Renderable renderable) {
-		// nothing by default
+		if (getBindHolder() != null) {
+			getBindHolderStack().pop();
+		}
 	}
 
 	/**
@@ -150,6 +205,44 @@ public abstract class Rendered {
 	 */
 	public void setReturnToLine(boolean returnToLine) {
 		this.returnToLine = returnToLine;
+	}
+
+	public void setRepeater(ModelElementBindHolder bindRepeater) {
+		setBindHolder(bindRepeater);
+		getBindHolderStack().push(bindRepeater);
+	}
+
+	/**
+	 * @param bindHolder
+	 *            the bindHolder to set
+	 */
+	private void setBindHolder(ModelElementBindHolder bindHolder) {
+		this.bindHolder = bindHolder;
+	}
+
+	/**
+	 * @return the bindHolder
+	 */
+	public ModelElementBindHolder getBindHolder() {
+		return bindHolder;
+	}
+
+	/**
+	 * @return the bindHolderStack
+	 */
+	private static Stack<ModelElementBindHolder> getBindHolderStack() {
+		if (bindHolderStack == null) {
+			bindHolderStack = new Stack<ModelElementBindHolder>();
+		}
+		return bindHolderStack;
+	}
+
+	/**
+	 * @param rootContainer
+	 *            the rootContainer to set
+	 */
+	protected static void setRootContainer(Rendered rootContainer) {
+		Rendered.rootContainer = rootContainer;
 	}
 
 }

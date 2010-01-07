@@ -22,7 +22,7 @@ public class RenderableItemDisplay extends Renderable {
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		return new RenderedDiv(XFormsGenerator.getId("item"));
 	}
 

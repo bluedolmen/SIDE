@@ -48,7 +48,7 @@ public class RenderableSubmits extends Renderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		return new RenderedGroup("", MsgId.INT_SUBMIT_BUTTONS_GROUP_ID.getText());
 	}
 

@@ -176,7 +176,7 @@ public abstract class Renderable {
 		logger.debug("-------------------------------------------------");
 		logger.debug("RENDERING " + this.toString());
 		logger.debug("-------------------------------------------------");
-		return recursiveRender("", new Stack<Renderable>(), new Stack<Rendered>());
+		return recursiveRender("", new Stack<Renderable>(), new Stack<Rendered>(), false);
 	}
 
 	/**
@@ -188,11 +188,12 @@ public abstract class Renderable {
 	 *            the parents
 	 * @param renderedParents
 	 *            the rendered parents
-	 * 
+	 * @param isInIMultRepeater
+	 *            TODO
 	 * @return the rendered
 	 */
 	private Rendered recursiveRender(String parentPath, Stack<Renderable> parents,
-			Stack<Rendered> renderedParents) {
+			Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		boolean previous = XFormsGenerator.isRenderingWorkflow();
 		// logger.debug(this.toString() );
 
@@ -210,10 +211,11 @@ public abstract class Renderable {
 		// System.out.println("non empty path");
 		// }
 		// real render
-		Rendered rendered = render(sPath, parents, renderedParents);
+		Rendered rendered = render(sPath, parents, renderedParents, isInIMultRepeater);
 
 		// recursive render
 		parents.push(this);
+		boolean childIsInIMultiple = isInIMultRepeater || isInlineMultipleRepeater(); // #1310
 
 		if (this instanceof RenderableFormContainer) {
 			XFormsGenerator.setRenderingWorkflow(isInWorkflowForm());
@@ -221,7 +223,8 @@ public abstract class Renderable {
 		renderedParents.push(rendered);
 		for (Renderable child : children) {
 			if (child.shouldRender(parents)) {
-				Rendered renderedChild = child.recursiveRender(sPath, parents, renderedParents);
+				Rendered renderedChild = child.recursiveRender(sPath, parents, renderedParents,
+						childIsInIMultiple);
 				rendered.addRendered(renderedChild, child);
 			}
 		}
@@ -248,11 +251,12 @@ public abstract class Renderable {
 	 *            the parents
 	 * @param renderedParents
 	 *            the rendered parents
-	 * 
+	 * @param isInIMultRepeater
+	 *            TODO
 	 * @return the rendered
 	 */
 	public abstract Rendered render(String path, Stack<Renderable> parents,
-			Stack<Rendered> renderedParents);
+			Stack<Rendered> renderedParents, boolean isInIMultRepeater);
 
 	/**
 	 * Called when render is over.
@@ -284,7 +288,7 @@ public abstract class Renderable {
 	 * @param renderedParents
 	 *            the rendered parents
 	 * 
-	 * @return the root path
+	 * @return the root path (empty string if no repeater are found among parents)
 	 */
 	protected String getRootPath(Stack<Rendered> renderedParents) {
 		StringBuffer result = new StringBuffer("");
@@ -323,6 +327,7 @@ public abstract class Renderable {
 	public boolean isInWorkflowForm() {
 		return inWorkflowForm;
 	}
+
 	/**
 	 * @return the formGenerator
 	 */
@@ -336,6 +341,16 @@ public abstract class Renderable {
 	 */
 	public static void setFormGenerator(FormGenerator formGenerator) {
 		Renderable.formGenerator = formGenerator;
+	}
+
+	/**
+	 * Tells whether this object is an inline multiple repeater. Needed to avoid having all repeated
+	 * inline forms to point to the same nodes of the form's XML instance.
+	 * 
+	 * @return
+	 */
+	public boolean isInlineMultipleRepeater() {
+		return false;
 	}
 
 }

@@ -4,18 +4,16 @@ import java.util.Stack;
 
 import org.jdom.Element;
 
-import com.bluexml.xforms.messages.MsgId;
-
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
-import com.bluexml.xforms.generator.forms.renderable.common.association.inline.RenderableIUnique;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.RenderableSDisplay;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.RenderableSEdit;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.selector.RenderableSelector;
 import com.bluexml.xforms.generator.forms.rendered.RenderedLine;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableSSingle.
@@ -23,6 +21,11 @@ import com.bluexml.xforms.generator.forms.rendered.RenderedLine;
 public class RenderableSSingle extends AbstractRenderable {
 
 	private ModelElementBindSimple selectorBindId; // #1156
+	//** #1310
+	private ModelElementBindSimple selectedBindId; 
+	private ModelElementBindSimple selectedBindLabel;
+	private ModelElementBindSimple selectedBindEdit;
+	//** #1310
 
 	/**
 	 * Instantiates a new renderable s single.
@@ -34,8 +37,7 @@ public class RenderableSSingle extends AbstractRenderable {
 	 * @param associationClassBean
 	 *            the association class bean
 	 */
-	public RenderableSSingle(AssociationBean associationBean, RenderableSelector selector,
-			AssociationBean associationClassBean) {
+	public RenderableSSingle(AssociationBean associationBean, RenderableSelector selector) {
 		super(associationBean);
 
 		add(selector);
@@ -43,16 +45,13 @@ public class RenderableSSingle extends AbstractRenderable {
 
 		if (associationBean.isDisabled() == false) {
 			add(new RenderableSSingleActions(associationBean, selector.getBindId(), selector
-					.getBindLabel(), selector.getBindMandatory(), selector));
+					.getBindLabel(), selector));
 		}
 		add(new RenderableSDisplay(associationBean));
 		if (associationBean.isShowingActions()) {
-			add(new RenderableSEdit(associationBean));
+			add(new RenderableSEdit(associationBean, false));
 		}
 
-		if (associationClassBean != null) {
-			add(new RenderableIUnique(associationClassBean, true, true));
-		}
 	}
 
 	/*
@@ -74,20 +73,21 @@ public class RenderableSSingle extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		Rendered rendered = new RenderedLine();
 		Element div = rendered.getXformsElement();
 		div.setAttribute("class", MsgId.INT_CSS_SELECT_WIDGET.getText());
 
-		String targetPath = path;
 //		if (StringUtils.trimToNull(targetPath) != null) {
 //			System.out.println("found a non empty path");
 //		}
-		ModelElementBindSimple bindLabel = new ModelElementBindSimple("");
-		ModelElementBindSimple bindId = new ModelElementBindSimple("");
+		ModelElementBindSimple bindLabel = getSelectedBindLabel();
+		ModelElementBindSimple bindId = getSelectedBindId();
+		ModelElementBindSimple bindEdit = getSelectedBindEdit();
 
-		bindLabel.setNodeset(targetPath + MsgId.INT_INSTANCE_SIDELABEL);
-		bindId.setNodeset(targetPath + MsgId.INT_INSTANCE_SIDEID);
+		bindLabel.setNodeset(path + MsgId.INT_INSTANCE_SIDELABEL);
+		bindId.setNodeset(path + MsgId.INT_INSTANCE_SIDEID);
+		bindEdit.setNodeset(path + MsgId.INT_INSTANCE_SIDEEDIT);
 
 		if (bean.isMandatory()) { // #978
 			// no visual cues here, but useful for causing XForms validation to
@@ -102,8 +102,56 @@ public class RenderableSSingle extends AbstractRenderable {
 
 		rendered.addModelElement(bindId);
 		rendered.addModelElement(bindLabel);
+		rendered.addModelElement(bindEdit);
 
 		return rendered;
+	}
+	/**
+	 * @return the selectedBindId
+	 */
+	public ModelElementBindSimple getSelectedBindId() {
+		if (selectedBindId == null) {
+			selectedBindId = new ModelElementBindSimple("");
+		}
+		return selectedBindId;
+	}
+
+	/**
+	 * @return the selectedBindLabel
+	 */
+	public ModelElementBindSimple getSelectedBindLabel() {
+		if (selectedBindLabel == null) {
+			selectedBindLabel = new ModelElementBindSimple("");
+		}
+		return selectedBindLabel;
+	}
+
+	/**
+	 * @return the selectedBindEdit
+	 */
+	public ModelElementBindSimple getSelectedBindEdit() {
+		if (selectedBindEdit == null) {
+			selectedBindEdit = new ModelElementBindSimple("");
+		}
+		return selectedBindEdit;
+	}
+
+	/**
+	 * @param selectedBindEdit the selectedBindEdit to set
+	 */
+	public void setSelectedBindEdit(ModelElementBindSimple selectedBindEdit) {
+		this.selectedBindEdit = selectedBindEdit;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.blueXML.xforms.generator.forms.Renderable#renderEnd(org.blueXML.xforms.generator.forms.Rendered)
+	 */
+	@Override
+	public void renderEnd(Rendered rendered) {
+		super.renderEnd(rendered);
+		selectedBindEdit = null;
+		selectedBindId = null;
+		selectedBindLabel = null;
 	}
 
 }

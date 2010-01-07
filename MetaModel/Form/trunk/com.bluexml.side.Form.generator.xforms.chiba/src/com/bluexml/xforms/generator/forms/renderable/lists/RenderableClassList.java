@@ -42,7 +42,7 @@ public class RenderableClassList extends Renderable {
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedGroup renderedGroup = new RenderedGroup("Liste des " + ModelTools.getTitle(classe),
 				"list");
 		renderedGroup.addModelElement(modelElementListUpdater);

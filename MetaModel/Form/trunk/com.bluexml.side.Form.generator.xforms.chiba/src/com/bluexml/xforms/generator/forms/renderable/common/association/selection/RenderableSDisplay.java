@@ -11,7 +11,9 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindHolder;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
+import com.bluexml.xforms.generator.forms.renderable.common.association.selection.multiple.RenderableSMultiple;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.multiple.RenderableSMultipleDisplay;
+import com.bluexml.xforms.generator.forms.renderable.common.association.selection.unique.RenderableSSingle;
 import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
 
 /**
@@ -49,18 +51,18 @@ public class RenderableSDisplay extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedInput renderedInput = new RenderedInput();
 
 		ModelElementBindSimple bindLabel = null;
 		Renderable parent = parents.peek();
+
 		if (parent instanceof RenderableSMultipleDisplay) {
-			Rendered grandpa = renderedParents.get(renderedParents.size() - 2);
-			ModelElementBindHolder bindRepeater = (ModelElementBindHolder) XFormsGenerator.getBind(
-					grandpa, 1);
+			RenderableSMultiple grandpa = (RenderableSMultiple) parents.get(parents.size() - 2);
+			ModelElementBindHolder bindRepeater = grandpa.getBindRepeater();
 			bindLabel = bindRepeater.getSubBind(0);
-		} else {
-			bindLabel = XFormsGenerator.getBind(renderedParents.peek(), 2);
+		} else { // we're in a Nx1 widget
+			bindLabel = ((RenderableSSingle) parent).getSelectedBindLabel();
 		}
 
 		Element output = XFormsGenerator.createElement("output", XFormsGenerator.NAMESPACE_XFORMS);

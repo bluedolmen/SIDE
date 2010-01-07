@@ -58,7 +58,7 @@ public class RenderableSelectorCreate extends AbstractRenderableSelectorItem {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedParentGroup renderedParentGroup = new RenderedParentGroup(renderedParents);
 		if (bean.getCreateEditForm() != null) {
 			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER + "createForm/" + bean.getName()
@@ -67,7 +67,7 @@ public class RenderableSelectorCreate extends AbstractRenderableSelectorItem {
 			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER + "create/" + bean.getName()
 					+ "/" + ModelTools.getCompleteName(bean.getDestinationClass()));
 		}
-		renderedParentGroup.getParent().addModelElement(submissionCreate);
+		renderedParentGroup.getParent().addModelElementRoot(submissionCreate);
 		return renderedParentGroup;
 	}
 }

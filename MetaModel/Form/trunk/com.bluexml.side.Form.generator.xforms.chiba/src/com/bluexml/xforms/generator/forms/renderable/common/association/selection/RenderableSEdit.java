@@ -2,25 +2,31 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
-import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.xforms.messages.MsgPool;
-
-import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
+import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindHolder;
+import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementSubmission;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
+import com.bluexml.xforms.generator.forms.renderable.common.association.selection.multiple.RenderableSMultiple;
+import com.bluexml.xforms.generator.forms.renderable.common.association.selection.multiple.RenderableSMultipleDisplay;
+import com.bluexml.xforms.generator.forms.renderable.common.association.selection.unique.RenderableSSingle;
 import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 
 /**
  * The Class RenderableSEdit.
  */
 public class RenderableSEdit extends AbstractRenderable {
+
+	@SuppressWarnings("unused")
+	private boolean isInMultipleWidget;
 
 	/**
 	 * Instantiates a new renderable s edit.
@@ -28,8 +34,9 @@ public class RenderableSEdit extends AbstractRenderable {
 	 * @param associationBean
 	 *            the association bean
 	 */
-	public RenderableSEdit(AssociationBean associationBean) {
+	public RenderableSEdit(AssociationBean associationBean, boolean isInMultipleWidget) {
 		super(associationBean);
+		this.isInMultipleWidget = isInMultipleWidget;
 	}
 
 	/*
@@ -52,7 +59,7 @@ public class RenderableSEdit extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedInput rendered = new RenderedInput();
 
 		ModelElementSubmission submission = new ModelElementSubmission("", "", true, false);
@@ -74,15 +81,28 @@ public class RenderableSEdit extends AbstractRenderable {
 
 			Element setvalue = XFormsGenerator.createElement("setvalue",
 					XFormsGenerator.NAMESPACE_XFORMS);
-			setvalue.setAttribute("ref", "instance('minstance')/editedid");
-			String rootPath = getRootPath(renderedParents);
-			String instancePathToSIDEID;
-			if (StringUtils.trimToNull(rootPath) != null) { // we are in a nxn widget
-				instancePathToSIDEID = "instance('minstance')/" + rootPath ;
-			} else { // we are in a nx1 widget
-				instancePathToSIDEID = "instance('minstance')/" + path;
+//			setvalue.setAttribute("ref", "instance('minstance')/editedid");
+//			String rootPath = getRootPath(renderedParents);
+//			String instancePathToSIDEID;
+//			if (StringUtils.trimToNull(rootPath) != null) { // we are in a nxn widget
+//				instancePathToSIDEID = "instance('minstance')/" + rootPath ;
+//			} else { // we are in a nx1 widget
+//				instancePathToSIDEID = "instance('minstance')/" + path;
+//			}
+//			setvalue.setAttribute("value", instancePathToSIDEID + MsgId.INT_INSTANCE_SIDEID);
+			
+			Renderable parent = parents.peek();
+			ModelElementBindSimple bindEdit;
+			if (parent instanceof RenderableSMultipleDisplay) {
+				RenderableSMultiple grandpa = (RenderableSMultiple) parents.get(parents.size() - 2);
+				ModelElementBindHolder bindRepeater = grandpa.getBindRepeater();
+				bindEdit = bindRepeater.getSubBind(2);
+			} else { // we're in a Nx1 widget
+				bindEdit = ((RenderableSSingle) parent).getSelectedBindEdit();
 			}
-			setvalue.setAttribute("value", instancePathToSIDEID + MsgId.INT_INSTANCE_SIDEID);
+			bindEdit.addLinkedElement(setvalue);
+			setvalue.setAttribute("value", "../" + MsgId.INT_INSTANCE_SIDEEDIT);
+
 			action.addContent(setvalue);
 
 			Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);

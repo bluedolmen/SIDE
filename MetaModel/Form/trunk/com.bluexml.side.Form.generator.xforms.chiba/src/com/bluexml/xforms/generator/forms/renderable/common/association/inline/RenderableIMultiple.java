@@ -2,6 +2,8 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.inline;
 
 import java.util.Stack;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -16,6 +18,9 @@ import com.bluexml.xforms.generator.forms.rendered.RenderedParentGroup;
  */
 public class RenderableIMultiple extends AbstractRenderable {
 
+	ModelElementBindHolder bindRepeater = null; // #1310
+	ModelElementBindSimple bindActions = null;
+
 	/**
 	 * Instantiates a new renderable i multiple.
 	 * 
@@ -24,10 +29,17 @@ public class RenderableIMultiple extends AbstractRenderable {
 	 * @param associationClassBean
 	 *            the association class bean
 	 */
-	public RenderableIMultiple(AssociationBean bean, AssociationBean associationClassBean) {
+	public RenderableIMultiple(AssociationBean bean) {
 		super(bean);
-		add(new RenderableIMultipleRepeater(bean, associationClassBean));
+		add(new RenderableIMultipleRepeater(bean));
 		add(new RenderableIMultipleTriggers(bean));
+	}
+
+	public ModelElementBindHolder getBindRepeater() {
+		if (bindRepeater == null) {
+			bindRepeater = new ModelElementBindHolder("");
+		}
+		return bindRepeater;
 	}
 
 	/*
@@ -49,16 +61,61 @@ public class RenderableIMultiple extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
-		String nodeSetItems = computeNodeSetItems(path);
-		String nodeSetActions = computeNodeSetActions(path);
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
+		// ** #1310
+		String finalPath = path;
+		String completePath = null;
+
 		Rendered rendered = new RenderedParentGroup(renderedParents);
-		rendered.setOptionalData(XFormsGenerator.getId(bean.getName() + "Repeater"));
-		rendered.addModelElement(new ModelElementBindHolder(nodeSetItems));
-		ModelElementBindSimple bindActions = new ModelElementBindSimple(nodeSetActions);
+		if (isInIMultRepeater) {
+			completePath = getRootPath(renderedParents);
+		}
+
+		if (StringUtils.trimToNull(completePath) != null) {
+			finalPath = "instance('minstance')/" + completePath + path;
+		}
+		// ** #1310
+
+		String nodeSetActions = computeNodeSetActions(finalPath);
+		String nodeSetItems = computeNodeSetItems(finalPath, nodeSetActions);
+
+		// the bind used by actions: e.g. Article1310/field_2/modelcyvel.Paragraphe
+		ModelElementBindSimple bindActions = getBindActions();
+		bindActions.setNodeset(nodeSetActions);
 		bindActions.setRepeaterRootBind(true); // #1241
+
+		ModelElementBindHolder bindRepeater = getBindRepeater(); // we shadow the class field!
+		bindRepeater.setNodeset(nodeSetItems);
+		rendered.setOptionalData(XFormsGenerator.getId(bean.getName() + "Repeater"));
+
+		rendered.addModelElement(bindRepeater);
 		rendered.addModelElement(bindActions);
+		rendered.setRepeater(bindRepeater);
 		return rendered;
+	}
+
+	/**
+	 * @return the bindActions
+	 */
+	public ModelElementBindSimple getBindActions() {
+		if (bindActions == null) {
+			bindActions = new ModelElementBindSimple("");
+		}
+		return bindActions;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.blueXML.xforms.generator.forms.Renderable#renderEnd(org.blueXML.xforms.generator.forms
+	 * .Rendered)
+	 */
+	@Override
+	public void renderEnd(Rendered rendered) {
+		super.renderEnd(rendered);
+		bindRepeater = null;
 	}
 
 }

@@ -3,7 +3,6 @@ package com.bluexml.xforms.generator.forms.renderable.common;
 import java.util.Stack;
 
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
-
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.renderable.common.association.inline.RenderableIMultiple;
@@ -12,7 +11,6 @@ import com.bluexml.xforms.generator.forms.renderable.common.association.selectio
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.selector.RenderableSelector;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.unique.RenderableSSingle;
 import com.bluexml.xforms.generator.forms.rendered.RenderedGroup;
-import com.bluexml.xforms.generator.tools.ModelTools;
 
 /**
  * The Class CommonRenderableAssociation. Représente un aiguilleur vers le type adéquat de widget,
@@ -25,9 +23,6 @@ public class CommonRenderableAssociation extends Renderable {
 
 	/** The association bean. */
 	private AssociationBean associationBean;
-
-	/** The association class bean. */
-	private AssociationBean associationClassBean;
 
 	/** The name. */
 	private String name;
@@ -67,16 +62,16 @@ public class CommonRenderableAssociation extends Renderable {
 		
 		if (properties.isInline()) {
 			if (properties.isMultiple()) {
-				add(new RenderableIMultiple(associationBean, associationClassBean));
+				add(new RenderableIMultiple(associationBean));
 			} else {
 				add(new RenderableIUnique(associationBean, false, false));
 			}
 		} else {
 			RenderableSelector selector = new RenderableSelector(associationBean);
 			if (properties.isMultiple()) {
-				add(new RenderableSMultiple(associationBean, selector, associationClassBean));
+				add(new RenderableSMultiple(associationBean, selector));
 			} else {
-				add(new RenderableSSingle(associationBean, selector, associationClassBean));
+				add(new RenderableSSingle(associationBean, selector));
 			}
 		}
 	}
@@ -90,10 +85,6 @@ public class CommonRenderableAssociation extends Renderable {
 	@Override
 	public Path getPath(String parentPath, Stack<Renderable> parents,
 			Stack<Rendered> renderedParents) {
-		if (associationClassBean == null) {
-			return new Path(PathType.relativePath, name + "/"
-					+ ModelTools.getCompleteName(associationBean.getDestinationClass()) + "/");
-		}
 		return new Path(PathType.relativePath, name + "/associationItem/");
 	}
 
@@ -104,7 +95,7 @@ public class CommonRenderableAssociation extends Renderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		return new RenderedGroup(title, name);
 	}
 

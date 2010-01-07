@@ -37,7 +37,7 @@ public class RenderableReferenceWithAC extends RenderableFormElement<Reference> 
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		return new RenderedDiv(XFormsGenerator.getId(FormGenerator.getUniqueName(formElement)
 				+ "Item" + index));
 	}

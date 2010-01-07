@@ -50,7 +50,7 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		RenderedInput renderedInput = new RenderedInput();
 
 		Element select = XFormsGenerator.createElement("select1", XFormsGenerator.NAMESPACE_XFORMS);
