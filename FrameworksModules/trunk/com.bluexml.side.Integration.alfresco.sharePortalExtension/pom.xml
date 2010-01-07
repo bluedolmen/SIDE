@@ -73,7 +73,7 @@
 			<plugin>
 				<groupId>com.bluexml.side.Integration.m2</groupId>
 				<artifactId>zipPackage</artifactId>
-				<version>1.0.4</version>
+				<version>1.0.7</version>
 				<extensions>true</extensions>
 				<configuration>
 					<attachClasses>true</attachClasses>
