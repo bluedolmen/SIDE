@@ -212,6 +212,7 @@ public enum MsgId {
 	/** output param for redirection; indicates which workflow form the redirection comes from*/ 
 	PARAM_LEAVING_FORM("leavingForm"),
 	PARAM_LANGUAGE ("language"),
+	PARAM_PAGE_SUBMIT ("nextPageSubmit"),
 	PARAM_PAGE_SUCCESS ("successPage"),
 	PARAM_PAGE_FAILURE ("failurePage"),
 	/** filesystem path to the messages.properties file*/
