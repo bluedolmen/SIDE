@@ -464,7 +464,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 				if (StringUtils.trimToNull(elt) != null) {
 					if (!(elt.charAt(0) == '#')) {
 						count++;
-						String line = "." + MsgId.INT_CSS_CLASS_BLUEXML_AUTOGEN + " > ." + elt
+						String line = "." + MsgId.INT_CSS_BLUEXML_AUTOGEN + " > ." + elt
 								+ " > div label" + (count == nbClasses ? " {" : ",");
 						pw.println(line);
 					}

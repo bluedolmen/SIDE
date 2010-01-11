@@ -298,7 +298,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 			div.addContent(nestedElement);
 
 			Element divOut = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
-			divOut.setAttribute("class", MsgId.INT_CSS_CLASS_BLUEXML_AUTOGEN.getText());
+			divOut.setAttribute("class", MsgId.INT_CSS_BLUEXML_AUTOGEN.getText());
 			divOut.addContent(div);
 
 			rendered.setXMLElement(divOut);
