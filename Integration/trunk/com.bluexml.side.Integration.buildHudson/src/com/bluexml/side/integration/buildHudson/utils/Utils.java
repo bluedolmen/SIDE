@@ -664,17 +664,54 @@ public class Utils {
 
 		}
 		
+		// On parcours la liste des pom et on les met a jour
+		for (String pom : listeProjetPoms) {
+			updateVersionNumberPom(pom);
+
+		}
+		
+		// mettre a jour les plugins avec les versions des pom.xml
+		// ajouter les plugins modifier dans la listePlugin
+		if (listeProjetPoms.size() != 0) {
+			for (String pom : listeProjetPoms) {
+				String versionPom= getVersionNumberPom(pom);
+				String valeurf= pom;
+				String [] tab=valeurf.split("/pom.xm");
+				String valeur2=tab[0];
+				String nomPom=valeur2.substring(valeur2.lastIndexOf("/"));
+				
+				for (String element : projects) {
+					
+						if (element.indexOf("feature") == -1) {
+							//si contient reference pom alors modifie max version
+							// et ajouter a la liste listePlugin
+							boolean ajouter=updatePluginModuleDependencies(element, nomPom, versionPom);
+							if (ajouter){
+								if (listePlugin.indexOf(element) == -1){
+									listePlugin.add(element);
+								}
+									
+							}
+								
+							
+						
+						}
+
+				}
+				
+			}
+			}
+		
+		
+		
 		// On parcours la liste des plugins et on les met a jour
 		for (String plugin : listePlugin) {
 			updateVersionNumber(plugin);
 
 		}
 		
-		// On parcours la liste des pom et on les met a jour
-		for (String pom : listeProjetPoms) {
-			updateVersionNumberPom(pom);
-
-		}
+		
+		
 
 		// On fait la meme chose mais pour toutes les features
 		for (int i = 0; i < projects.size(); i++) {
@@ -800,6 +837,88 @@ public class Utils {
 
 	}
 
+	
+	
+	
+	
+	/**
+	 * Update la version des modules des fichier feature.xml
+	 * 
+	 * 
+	 * @param projectName
+	 */
+	public static boolean updatePluginModuleDependencies(String element, String module, String version) {
+		
+		boolean modifie=false;
+		// chemin vers le plugin.xml
+		String fileFeaturePath = getPathToLocalCopy(element)
+		+ File.separator + "plugin.xml";
+
+		org.jdom.Document document = null;
+		org.jdom.Element racine;
+
+		// On cr�e une instance de SAXBuilder
+		SAXBuilder sxb = new SAXBuilder();
+
+		try {
+			// On cr�e un nouveau document JDOM avec en argument le fichier
+			// XML
+			document = sxb.build(new File(fileFeaturePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// On initialise un nouvel �l�ment racine avec l'�l�ment racine du
+		// document.
+		racine = document.getRootElement();
+
+		// On va maintenant mettre a jour les num�ro de version des plugins
+		// associ�s a la feature
+
+		// on garde en m�moire l'ancien num�ro de version du plugin pour
+		// savoir s'il a changer et ainsi savoir s'il faut changer ou non le
+		// num�ro de version de la feature
+
+		
+
+		// On cr�e une List contenant tous les noeuds "moduleDependence" de
+		// l'Element racine
+		List<?> listModules = racine.getChildren("moduleDependence");
+
+		// On cr�e un Iterator sur notre liste
+		Iterator<?> i = listModules.iterator();
+		// on va parcourir tous les modules
+		while (i.hasNext()) {
+			// On recr�e l'Element courant � chaque tour de boucle afin de
+			// pouvoir utiliser les m�thodes propres aux Element comme :
+			// selectionner un noeud fils, modifier du texte, etc...
+			Element courant = (Element) i.next();
+			
+			
+			String moduleId = courant.getAttributeValue("moduleId");
+			if (moduleId.equals(module)){
+				courant.setAttribute("versionMax", version);
+				modifie=true;
+			}
+			
+
+		// Enregistrement du fichier
+		try {
+			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+			sortie.output(document, new FileOutputStream(fileFeaturePath));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	
+		}
+	return modifie;
+		
+	}
+	
+	
 	/**
 	 * Update le num�ro de version du projet, le pattern pour cet update est
 	 * dans le fichier build.properties
