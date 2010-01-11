@@ -16,6 +16,8 @@ public interface CoreInterface {
 
 	void addErrorTextAndLog(String title, Throwable error, String uri);
 
+	void addServiceLog(String title, String description, String uri);
+	
 	void setTaskName(String name);
 
 }

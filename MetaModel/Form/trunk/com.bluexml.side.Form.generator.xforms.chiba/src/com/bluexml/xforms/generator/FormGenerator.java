@@ -157,6 +157,8 @@ public class FormGenerator {
 
 	private boolean inReadOnlyMode;
 
+	private boolean workflowCapable;
+	
 	/**
 	 * The Class PackageInfo.
 	 */
@@ -322,6 +324,7 @@ public class FormGenerator {
 	public FormGenerator(File[] obls, File[] kerblueforms, Log genLogger, boolean simplifyClasses,
 			boolean renderDataBeforeWorkflow) {
 		super();
+		setWorkflowCapable(false);
 		if (genLogger != null) {
 			this.genLogger = genLogger;
 		} else {
@@ -452,6 +455,18 @@ public class FormGenerator {
 		logger.info("End of generation.");
 		if (monitor != null) {
 			monitor.addText("Xforms Generation completed successfully");
+			monitor
+					.addServiceLog(
+							"List of generated forms",
+							"This page provides an easy access to the forms, with default parameters. The server, port and webapp context can be adapted as needed.",
+							"http://localhost:8080/xforms/resources/jsp/forms.jsp");
+			if (isWorkflowCapable()) {
+				monitor
+						.addServiceLog(
+								"Demo webapp",
+								"This page links to a demo webapp deployed we provide to you so that you may easily test the integration of workflows with forms. The server, port and webapp context can be adapted as needed.",
+								"http://localhost:8080/xforms/demo/index.jsp");
+			}
 		}
 	}
 
@@ -1083,6 +1098,20 @@ public class FormGenerator {
 	 */
 	public int getLogLevel() {
 		return logLevel;
+	}
+
+	/**
+	 * @param workflowCapable the workflowCapable to set
+	 */
+	public void setWorkflowCapable(boolean workflowCapable) {
+		this.workflowCapable = workflowCapable;
+	}
+
+	/**
+	 * @return the workflowCapable
+	 */
+	public boolean isWorkflowCapable() {
+		return workflowCapable;
 	}
 
 }

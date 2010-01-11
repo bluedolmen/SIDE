@@ -582,6 +582,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 
 		if (atLeastOneWorfklowForm) {
 			renderWorkflowSelectionForm();
+			formGenerator.setWorkflowCapable(true);
 		}
 		genLogger.info("XFormGenerator: Finished generating XHTML templates.");
 	}

@@ -126,4 +126,8 @@ public class ComponentMonitor extends AbstractMonitor implements CoreInterface {
 		getLog().addWarningLog(title, "", uri);
 	}
 
+	public void addServiceLog(String title, String description, String uri) {
+		getLog().addServiceLog(title, "", uri);
+	}
+
 }
