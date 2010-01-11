@@ -511,6 +511,8 @@ public abstract class AbstractRenderableField extends Renderable {
 
 		Element previewDiv = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		previewDiv.setAttribute("id", attributeId + "_preview");
+		previewDiv.setAttribute("class", MsgId.INT_CSS_UPLOAD_PREVIEW.getText());
+		//
 		Element preview = XFormsGenerator.createElement("output", XFormsGenerator.NAMESPACE_XFORMS);
 		StringBuffer value = new StringBuffer();
 		value.append("concat('<img src=\"" + MsgId.INT_GEN_PLACEHOLDER_CONTEXT_PATH
@@ -522,8 +524,11 @@ public abstract class AbstractRenderableField extends Renderable {
 		previewDiv.addContent(preview);
 		element.addContent(previewDiv);
 
+		//
 		Element filenameDiv = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		filenameDiv.setAttribute("id", attributeId + "_filename");
+		filenameDiv.setAttribute("class", MsgId.INT_CSS_UPLOAD_FILENAME.getText());
+		//
 		Element filenameElement = XFormsGenerator.createElement("output",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		StringBuffer valueFilename = new StringBuffer();
@@ -582,7 +587,11 @@ public abstract class AbstractRenderableField extends Renderable {
 		Element element;
 		element = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		element.setAttribute("id", attributeId + "_container");
-		element.setAttribute("class", "xformstdclear"); // #1248
+		String css = "xformstdclear";
+		if (isTextArea) {
+			css = css + " " + MsgId.INT_CSS_RO_TEXTAREA;
+		}
+		element.setAttribute("class", css); // #1248
 
 		if (meb.getAnotherMeb() != null) {
 			List<ModelElementBindSimple> binds = new ArrayList<ModelElementBindSimple>();
