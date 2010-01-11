@@ -17,7 +17,7 @@ public class RenderedHR extends Rendered {
 	public RenderedHR() {
 		super();
 		xformsElement = XFormsGenerator.createElement("hr", XFormsGenerator.NAMESPACE_XHTML);
-		xformsElement.setAttribute("class", MsgId.INT_CSS_CLASS_LINE.getText());
+		xformsElement.setAttribute("class", MsgId.INT_CSS_HORIZ_LINE.getText());
 	}
 
 	/*
