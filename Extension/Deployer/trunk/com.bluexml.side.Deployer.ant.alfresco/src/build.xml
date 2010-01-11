@@ -10,19 +10,18 @@
 	<target name="pre-build">
 		<antcall target="stopAlfresco"/>
 		<antcall target="startMySql"/>
-		<antcall target="delteAlfrescoDb"/>
-		<antcall target="stopMySql"/>
+		<antcall target="deleteAlfrescoDbWin"/>
+		<antcall target="deleteAlfrescoDbLx"/>
 		<antcall target="deleteAlfDataWin"/>
 		<antcall target="deleteAlfDataLx"/>
-		<antcall target="startMySql"/>
-		<antcall target="createAlfrescoDb"/>
+		<antcall target="createAlfrescoDbWin"/>
+		<antcall target="createAlfrescoDbLx"/>
 		<antcall target="stopMySql"/>	
 	</target>
 	
 	<!-- ============================= Windows tasks ============================== -->
 	
 	<target name="stopMySql" depends="isMySqlRunningBefore" unless="mySqlOff" if="windows">
-		<sleep seconds="20"/>
 		<exec executable="${alfresco.dir}/mysql/bin/mysqladmin.exe">
 			<arg value="-u"/>
 			<arg value="root"/>
@@ -30,7 +29,7 @@
 		</exec>
 	</target>
 	
-	<target name="startMySql" depends="isMySqlRunningBefore" if="mySqlOff,windows">
+	<target name="startMySql" depends="isMySqlRunningBefore" if="mySqlOff" unless="linux">
 		<exec executable="${alfresco.dir}/mysql/bin/mysqld.exe" spawn="true" vmlauncher="false">
 			<arg value="--defaults-file=${alfresco.dir}\mysql\my.ini"/>
 			<arg value="--basedir=${alfresco.dir}\mysql"/>
@@ -39,7 +38,147 @@
 		</exec>
 	</target>
 	
+	<target name="deleteAlfrescoDbWin" if="delete.alfresco.db" unless="linux">
+		<condition property="passwd.not.empty">
+			<matches string="${passwd.db}" pattern="(.)+"/>		
+		</condition>
+		<antcall target="deleteDbWithPasswdWin"/>
+		<antcall target="deleteDbWithoutPasswdWin"/>
+	</target>
+	
+	<target name="deleteDbWithPasswdWin" if="passwd.not.empty">
+		<exec executable="${alfresco.dir}/mysql/bin/mysql.exe">
+			<arg value="-h"/>
+			<arg value="${mysql.server}"/>
+			<arg value="-u"/>
+			<arg value="${user.db}"/>
+			<arg value="-p${passwd.db}"/>
+			<arg value="-e"/>
+			<arg value="drop database if exists ${alfresco.db.name}"/>
+		</exec>
+	</target>
+	
+	<target name="deleteDbWithoutPasswdWin" unless="passwd.not.empty">
+		<exec executable="${alfresco.dir}/mysql/bin/mysql.exe">
+			<arg value="-h"/>
+			<arg value="${mysql.server}"/>
+			<arg value="-u"/>
+			<arg value="${user.db}"/>
+			<arg value="-e"/>
+			<arg value="drop database if exists ${alfresco.db.name}"/>
+		</exec>
+	</target>
+	
+	<target name="deleteAlfDataWin" if="delete.alfresco.db" unless="linux">
+		<delete includeemptydirs="true">
+			<fileset dir="${alfresco.dir}/alf_data" excludes="mysql/**,oouser/**"/>	
+		</delete>
+	</target>
+	
+	<target name="createAlfrescoDbWin" if="delete.alfresco.db" unless="linux">
+		<condition property="passwd.not.empty">
+			<matches string="${passwd.db}" pattern="(.)+"/>		
+		</condition>
+		<antcall target="createDbWithPasswdWin"/>
+		<antcall target="createDbWithoutPasswdWin"/>
+	</target>
+	
+	<target name="createDbWithPasswdWin" if="passwd.not.empty">
+		<exec executable="${alfresco.dir}/mysql/bin/mysql.exe">
+			<arg value="-h"/>
+			<arg value="${mysql.server}"/>
+			<arg value="-u"/>
+			<arg value="${user.db}"/>
+			<arg value="-p${passwd.db}"/>
+			<arg value="-e"/>
+			<arg value="create database if not exists ${alfresco.db.name} default character set utf8;
+						grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;"/>
+		</exec>
+	</target>
+	
+	<target name="createDbWithoutPasswdWin" unless="passwd.not.empty">
+		<exec executable="${alfresco.dir}/mysql/bin/mysql.exe">
+			<arg value="-h"/>
+			<arg value="${mysql.server}"/>
+			<arg value="-u"/>
+			<arg value="${user.db}"/>
+			<arg value="-e"/>
+			<arg value="create database if not exists ${alfresco.db.name} default character set utf8;
+						grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;"/>
+		</exec>
+	</target>
+	
 	<!-- ============================= Linux tasks ================================ -->
+	
+	<target name="deleteAlfrescoDbLx" if="delete.alfresco.db" unless="windows">
+				<!--<sql classpath="${alfresco.dir}\tomcat\lib\mysql-connector-java-5.1.7-bin.jar"
+					 driver="org.gjt.mm.mysql.Driver"
+					 url="jdbc:mysql://${mysql.server}"
+					 userid="${user.db}"
+					 password="${passwd.db}">
+				  <transaction>
+					 drop database if exists ${alfresco.db.name}
+				  </transaction>
+				</sql>-->
+		<exec executable="mysql">
+			<arg value="-h"/>
+			<arg value="${mysql.server}"/>
+			<arg value="-u"/>
+			<arg value="${user.db}"/>
+			<arg value="-p${passwd.db}"/>
+			<arg value="-e"/>
+			<arg value="drop database if exists ${alfresco.db.name}"/>
+		</exec>
+	</target>
+	
+	<target name="deleteAlfDataLx" if="delete.alfresco.db" unless="windows">
+		<delete>
+			<fileset dir="${alfresco.dir}/alf_data"/>
+		</delete>
+	</target>
+	
+	<target name="createAlfrescoDbLx" if="delete.alfresco.db" unless="windows">
+				<!--<sql classpath="${alfresco.dir}\tomcat\lib\mysql-connector-java-5.1.7-bin.jar"
+					 driver="org.gjt.mm.mysql.Driver"
+					 url="jdbc:mysql://${mysql.server}"
+					 userid="${user.db}"
+					 password="${passwd.db}">
+				  <transaction>
+				  	create database if not exists ${alfresco.db.name} default character set utf8;
+				  	grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;
+				  </transaction>
+			   </sql>-->
+		<condition property="passwd.not.empty">
+			<matches string="${passwd.db}" pattern="(.)+"/>		
+		</condition>
+		<antcall target="createDbWithPasswdLx"/>
+		<antcall target="createDbWithoutPasswdLx"/>
+	</target>
+	
+	<target name="createDbWithPasswdLx" if="passwd.not.empty">
+		<exec executable="mysql">
+			<arg value="-h"/>
+			<arg value="${mysql.server}"/>
+			<arg value="-u"/>
+			<arg value="${user.db}"/>
+			<arg value="-p${passwd.db}"/>
+			<arg value="-e"/>
+			<arg value="create database if not exists ${alfresco.db.name} default character set utf8;
+						grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;"/>
+		</exec>
+	</target>
+	
+	<target name="createDbWithoutPasswdLx" unless="passwd.not.empty">
+		<exec executable="mysql">
+			<arg value="-h"/>
+			<arg value="${mysql.server}"/>
+			<arg value="-u"/>
+			<arg value="${user.db}"/>
+			<arg value="-e"/>
+			<arg value="create database if not exists ${alfresco.db.name} default character set utf8;
+						grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;"/>
+		</exec>
+	</target>
 	
 	<!-- ============================= Common tasks ================================ -->
 	
@@ -54,55 +193,13 @@
 			<jvmarg value="-Dcatalina.home=${alfresco.dir}/tomcat"/>
 			<arg line="stop"/>
 		</java>
+		<sleep seconds="14"/>
 	</target>
 	
 	<target name="isMySqlRunningBefore">
 		<waitfor maxwait="2" maxwaitunit="second" checkevery="250" timeoutproperty="mySqlOff">
 			<socket server="${mysql.server}" port="${mysql.port}"/>
 		</waitfor>
-	</target>
-	
-	<target name="delteAlfrescoDb" if="delete.alfresco.db">
-		<sql classpath="${alfresco.dir}\tomcat\lib\mysql-connector-java-5.1.7-bin.jar"
-			 driver="org.gjt.mm.mysql.Driver"
-			 url="jdbc:mysql://${mysql.server}"
-			 userid="${user.db}"
-			 password="${passwd.db}">
-		  <transaction>
-			 drop database if exists ${alfresco.db.name}
-		  </transaction>
-		</sql>
-	</target>
-	
-	<target name="deleteAlfDataWin" if="windows,delete.alfresco.db">
-		<delete>
-			<dirset dir="${alfresco.dir}/alf_data" excludes="mysql,oouser"/>
-		</delete>
-		<delete>
-			<fileset dir="${alfresco.dir}/alf_data/mysql/${alfresco.db.name}" excludes="db.opt"/>
-		</delete>
-		<delete>
-			<fileset dir="${alfresco.dir}/alf_data/mysql" includes="ib*"/>
-		</delete>
-	</target>
-	
-	<target name="deleteAlfDataLx" if="linux,delete.alfresco.db">
-		<delete>
-			<dirset dir="${alfresco.dir}/alf_data"/>
-		</delete>
-	</target>
-	
-	<target name="createAlfrescoDb" if="delete.alfresco.db">
-		<sql classpath="${alfresco.dir}\tomcat\lib\mysql-connector-java-5.1.7-bin.jar"
-			 driver="org.gjt.mm.mysql.Driver"
-			 url="jdbc:mysql://${mysql.server}"
-			 userid="${user.db}"
-			 password="${passwd.db}">
-		  <transaction>
-		  	create database if not exists ${alfresco.db.name} default character set utf8;
-		  	grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;
-		  </transaction>
-	   </sql>
 	</target>
 	
 	<!-- =========================================================================
