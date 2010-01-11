@@ -4,40 +4,68 @@ BlueXML SIDE Example : Pre and Post Deployment tasks with Alfresco
 Table of Contents:
 ------------------
 - Introduction
-- Prerequisites and Use
+- Prerequisites
+- Use
 - Pointers & License Notice
 
 Introduction:
 -------------
-This sample aims to demonstrate the use of operations before and after the SIDE deployment.
-In our case:
--check if Alfresco is running before deployment; if it is, stop it.
--start Alfresco after deployment, having the possibility of creating the database alf_synchro and loading data test in Alfresco.  
+This sample aims to demonstrate the use of a SIDE ant deployer.operations before and after the SIDE deployment.
+This kind of deployer is used to perform processing before (pre-build task) and after (post-build task) the other deployers you define in your application model.
 
+This example of ant deployer performs the following tasks:
+- pre-build task:
+  . check if Alfresco is running
+  . if Alfresco is running, stop it
+  . if you choose in build.properties to re-create alfresco and alf_data,
+    re-start MySQL
+    delete alfresco database and alf_data content store
+    create alfresco database
+    stop MySQL
+- post-build task:
+  . start Alfresco
+  . if you choose in build.properties to load test data, load test data in Alfresco relatively to the setting of data_post.properties
+  . if you choose in build.properties to create alf_synchro database, create alf_synchro database.
 
-Prerequisites and Use:
-----------------------
-We suppose you have made at least one Data model with SIDE and unziped the project in a specific directory;
-we'll call the path to it <f_u>.
+Note: the alf_synchro database is a relational schema image of all the data inserted in alfresco database relatively to the model extension you create.
 
+The ant process of this sample ant deployer is useful when you want to tune data or workflow model and deploy on Alfresco: update of Alfresco model requires to re-start Alfresco in order to take accoung changes.
+If your data and workflow models are ok and you start modeling form, view, portal or security, you do not need anymore restart alfresco but only webapps like share or xforms: in this case, you can design other application configurations with other ant build scripts.
+
+Prerequisites:
+--------------
+We suppose you have made at least one Data model with SIDE and unzipped the current project in a specific directory;
+let's call the path to this directory <sideAntDeployerPath>.
+
+Use:
+----
 The project's structure contains two directories.
-To configure the the tasks that will run before and after the SIDE Deployment, go to src and open the build.properties;
-that one will be use to configure environment parameters and give the choice to create alf_synchro and/or load data test.
-Just follow the instructions written in but note that with windows os you have to write two anti-slash in path as separator 
-and use, in general, alfresco for database user name and password (because ALfresco have its own MySql server but not Linux).
-With Linux os, write simple slash in path and use the user name and password of a MySql's user who have enough rigths to create a database
-(as said, Linux Alfresco's distribution doesn't have its own MySql server; this one is a service that must be on).  
+To configure the tasks that will run before and after the SIDE Deployment, go to src and open the build.properties file.
+This file contains the build configuration parameters you can update.
+Just follow the instructions written in this file
+Important: 
+- For Windows os, write path with two anti-slash "\\" characters as separator; just single slash "/" for Linux. 
+- in order to delete and create alfresco and alf_synchro database, you need the database connection information to MySQL.
 
 If you choose to load data test (i.e Data model instances), open data_post.properties:
-you first have to indicate your model name as follow:
-{http://www.bluexml.com/model/content/<model_name>/1.0}model
-Then, fill the number of data instances you want (for all types) and, if there is associations in your Data model with multiplicity 
-greater than one, the maximum number of types that can be associated through those associations.
-Finally, indicates, with the Alfresco xPath writing, the Alfresco's repository where instances will be stored.  
-   
-To make SIDE take into account of the project tasks, just tick, in the SIDE Manager Configuration the ANT Deployer in the Déploiement part and fill, 
-on the right, the Ant File Path with the path to the build.xml file you have unzip (it must look like: <f_u>/src/build.xml).
-Save and launch. 
+1/ "model": indicate your model name as follow: {http://www.bluexml.com/model/content/<model_name>/1.0}model
+2/ "numOfInstances": this parameter allows limiting the overall number of data you want the webscript stores in ALfresco. 
+   It is important to note that this number is for all the content types defined in the Alfresco data model you choose through the previous parameter: if you give a
+value inferior to the number of content types in the model, some content type may not be generated.
+3/ "numOfOutputArcs": this parameter allows limiting the number of associations between nodes; 
+   this limitation is achieved per node (content type instance).
+4/ "pathToDocuments": this parameters points to a folder where you can store files in order they are associated as content to the newly Alfresco nodes. If you do not set this parameters, the node will be generated
+without content but only metadata.
+5/ "alfrescoRepository": this parameters allows to define the Alfresco path to store the generated nodes under /app:company_home; 
+   this path must be expressed using an Xpath representation like app:guest_home/cm:testData
+   It is important to note that you must be connected to Alfresco under an account having write permission on this Path.
+  
+In order to declare these pre and post-build task in your deployment process, under the deployer tab of application configuration window of the SIDE Graphical environment, 
+select the ANT Deployer and set the "Ant file path" parameter to  "<sideAntDeployerPath>/src/build.xml".
+
+Save the application configuration and launch.
+
+During deployment, the pre-build and post-build tasks will be performed. Look at the side-report to get results of the MDA process.  
 
 Pointers & License notices :
 ----------------------------
