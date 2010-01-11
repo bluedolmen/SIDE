@@ -52,6 +52,7 @@ import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.form.ClassFormCollection;
 import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.integration.eclipse.builder.SIDENature;
 import com.bluexml.side.portal.Portal;
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.requirements.RequirementsDefinition;
@@ -329,6 +330,19 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 		}
 
 		newProject = newProjectHandle;
+		
+		//Add the SIDE nature
+		try {
+			IProjectDescription desc = newProject.getDescription();
+			String[] natures = desc.getNatureIds();
+			String[] newNatures = new String[natures.length + 1];
+			System.arraycopy(natures, 0, newNatures, 0, natures.length);
+			newNatures[natures.length] = SIDENature.NATURE_ID;
+			description.setNatureIds(newNatures);
+			newProject.setDescription(description, null);
+		} catch (CoreException e) {
+			//Nothing to do
+		}
 
 		return newProject;
 	}
