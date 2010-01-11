@@ -20,3 +20,4 @@ Bundle-ClassPath: lib/reference.jar,
  .,
  lib/xbean.jar,
  lib/jsr173_1.0_api.jar
+Export-Package: com.bluexml.side.integration.eclipse.builder
