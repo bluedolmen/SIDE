@@ -678,7 +678,7 @@ public class Utils {
 				String valeurf= pom;
 				String [] tab=valeurf.split("/pom.xm");
 				String valeur2=tab[0];
-				String nomPom=valeur2.substring(valeur2.lastIndexOf("/"));
+				String nomPom=valeur2.substring(valeur2.lastIndexOf("/")+1);
 				
 				for (String element : projects) {
 					
