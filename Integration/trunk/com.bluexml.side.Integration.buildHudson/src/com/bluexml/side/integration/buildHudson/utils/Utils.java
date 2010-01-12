@@ -840,7 +840,7 @@ public class Utils {
 	
 	
 	/**
-	 * Update la version des modules des fichier feature.xml
+	 * Update the version number of the modules in the files feature.xml
 	 * 
 	 * 
 	 * @param projectName
@@ -961,7 +961,7 @@ public class Utils {
 									
 									String moduleId = courantmoduleDependence.getAttributeValue("moduleId");
 									
-									
+									// if we find the module then we add the attributes versionMax and versionMin
 									if (moduleId.equals(module)){
 										courantmoduleDependence.setAttribute("versionMax", version);
 										courantmoduleDependence.setAttribute("versionMin", version);
