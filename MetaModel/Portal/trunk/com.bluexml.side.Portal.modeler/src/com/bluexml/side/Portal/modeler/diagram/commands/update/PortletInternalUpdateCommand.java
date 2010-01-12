@@ -5,6 +5,7 @@ import java.util.Map;
 import org.eclipse.gef.commands.Command;
 
 import com.bluexml.side.Portal.modeler.diagram.dialogs.PortletInternalEditDialog;
+import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.portal.InternalPortletType;
 import com.bluexml.side.portal.PortletInternal;
@@ -38,7 +39,7 @@ private Map<String,Object> newData;
 	public void redo() {		
 		portletInternal.setType((InternalPortletType) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_Type));
 		portletInternal.setView((AbstractView) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_View));
-		portletInternal.setForm((FormContainer) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_Form));
+		portletInternal.setForm((FormCollection) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_Form));
 		
 	}
 }

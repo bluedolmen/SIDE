@@ -202,8 +202,9 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 		} else {
 			// select types to view
 			ArrayList<EClass> formsType = new ArrayList<EClass>();
-			formsType.add(FormPackage.eINSTANCE.getFormWorkflow());
-			formsType.add(FormPackage.eINSTANCE.getFormClass());
+			//formsType.add(FormPackage.eINSTANCE.getFormWorkflow());
+			//formsType.add(FormPackage.eINSTANCE.getFormClass());
+			formsType.add(FormPackage.eINSTANCE.getFormCollection());
 			ILabelProvider labelProvider = new AdapterFactoryLabelProvider(new FormItemProviderAdapterFactory());
 			chooser.setLabelProvider(labelProvider);
 			// load instances list
