@@ -172,9 +172,14 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 	}
 	private String generateName(TypeDefinition type) {
 		String name = null;
-		String qName = type.getName().toString();
-		String[] parts = qName.split("}");
-		name = parts[parts.length-1];
+		if (type.getTitle() != null){
+			name = type.getTitle();
+		}
+		else{
+			String qName = type.getName().toString();
+			String[] parts = qName.split("}");
+			name = parts[parts.length-1];
+		}
 		name += "_" + randomGenerator.nextInt();
 		return name;
 	}
@@ -182,20 +187,22 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 	private String generateUrl(TypeDefinition type){
 		StringBuffer url = new StringBuffer();
 		File document = chooseRandomlyDocument();
-		url.append("contentUrl=");
-		url.append(getDocumentTitle(document));
-		url.append(separator);
-		url.append("mimetype=");
-		url.append(getMimeTypeDocument(document));
-		url.append(separator);
-		url.append("size=");
-		url.append(getDocumentSize(document));
-		url.append(separator);
-		url.append("encoding=");
-		url.append(getDocumentEncoding(document));
-		url.append(separator);
-		url.append("locale=");
-		url.append(getDocumentLocale(document));
+		if (document != null){
+			url.append("contentUrl=");
+			url.append(getDocumentTitle(document));
+			url.append(separator);
+			url.append("mimetype=");
+			url.append(getMimeTypeDocument(document));
+			url.append(separator);
+			url.append("size=");
+			url.append(getDocumentSize(document));
+			url.append(separator);
+			url.append("encoding=");
+			url.append(getDocumentEncoding(document));
+			url.append(separator);
+			url.append("locale=");
+			url.append(getDocumentLocale(document));
+		}
 		return url.toString();
 	}
 	
@@ -224,8 +231,11 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 	private File chooseRandomlyDocument() {
 		File folder = new File(pathToDocumentsFolder);
 		File[] docs = folder.listFiles();
-		File document = docs[randomGenerator.nextInt(docs.length)];
-		documents.add(document);
+		File document = null;
+		if (docs.length > 0){
+			document = docs[randomGenerator.nextInt(docs.length)];
+			documents.add(document);
+		}
 		return document;
 	}
 	
