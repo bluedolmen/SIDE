@@ -193,7 +193,7 @@ public class PortalLayoutImpl extends PortalModelElementImpl implements PortalLa
 			case PortalPackage.PORTAL_LAYOUT__COLUMNS:
 				return getColumns();
 			case PortalPackage.PORTAL_LAYOUT__COLUMN_MODE:
-				return isColumnMode() ? Boolean.TRUE : Boolean.FALSE;
+				return isColumnMode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -215,7 +215,7 @@ public class PortalLayoutImpl extends PortalModelElementImpl implements PortalLa
 				getColumns().addAll((Collection<? extends Column>)newValue);
 				return;
 			case PortalPackage.PORTAL_LAYOUT__COLUMN_MODE:
-				setColumnMode(((Boolean)newValue).booleanValue());
+				setColumnMode((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

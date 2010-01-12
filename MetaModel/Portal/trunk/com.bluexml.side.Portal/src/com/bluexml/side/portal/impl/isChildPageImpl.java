@@ -152,7 +152,7 @@ public class isChildPageImpl extends EObjectImpl implements isChildPage {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case PortalPackage.IS_CHILD_PAGE__INHERIT:
-				return isInherit() ? Boolean.TRUE : Boolean.FALSE;
+				return isInherit();
 			case PortalPackage.IS_CHILD_PAGE__IS_CHILD_PAGE_OF:
 				if (resolve) return getIsChildPageOf();
 				return basicGetIsChildPageOf();
@@ -169,7 +169,7 @@ public class isChildPageImpl extends EObjectImpl implements isChildPage {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case PortalPackage.IS_CHILD_PAGE__INHERIT:
-				setInherit(((Boolean)newValue).booleanValue());
+				setInherit((Boolean)newValue);
 				return;
 			case PortalPackage.IS_CHILD_PAGE__IS_CHILD_PAGE_OF:
 				setIsChildPageOf((Page)newValue);

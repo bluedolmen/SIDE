@@ -231,9 +231,9 @@ public class PortletAttributeImpl extends AbstractPortletAttributesImpl implemen
 			case PortalPackage.PORTLET_ATTRIBUTE__TYPE:
 				return getType();
 			case PortalPackage.PORTLET_ATTRIBUTE__REQUIRED:
-				return isRequired() ? Boolean.TRUE : Boolean.FALSE;
+				return isRequired();
 			case PortalPackage.PORTLET_ATTRIBUTE__MULTI_VALUED:
-				return isMultiValued() ? Boolean.TRUE : Boolean.FALSE;
+				return isMultiValued();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -253,10 +253,10 @@ public class PortletAttributeImpl extends AbstractPortletAttributesImpl implemen
 				setType((PortletTypeAttributeType)newValue);
 				return;
 			case PortalPackage.PORTLET_ATTRIBUTE__REQUIRED:
-				setRequired(((Boolean)newValue).booleanValue());
+				setRequired((Boolean)newValue);
 				return;
 			case PortalPackage.PORTLET_ATTRIBUTE__MULTI_VALUED:
-				setMultiValued(((Boolean)newValue).booleanValue());
+				setMultiValued((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

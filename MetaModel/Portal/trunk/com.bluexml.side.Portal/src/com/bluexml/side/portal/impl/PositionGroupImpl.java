@@ -202,7 +202,7 @@ public class PositionGroupImpl extends EObjectImpl implements PositionGroup {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case PortalPackage.POSITION_GROUP__POSITION:
-				return new Integer(getPosition());
+				return getPosition();
 			case PortalPackage.POSITION_GROUP__ON_COLUMN:
 				if (resolve) return getOnColumn();
 				return basicGetOnColumn();
@@ -222,7 +222,7 @@ public class PositionGroupImpl extends EObjectImpl implements PositionGroup {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case PortalPackage.POSITION_GROUP__POSITION:
-				setPosition(((Integer)newValue).intValue());
+				setPosition((Integer)newValue);
 				return;
 			case PortalPackage.POSITION_GROUP__ON_COLUMN:
 				setOnColumn((Column)newValue);

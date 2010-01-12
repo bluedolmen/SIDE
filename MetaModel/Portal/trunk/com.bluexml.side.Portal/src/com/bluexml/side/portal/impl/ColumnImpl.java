@@ -188,7 +188,7 @@ public class ColumnImpl extends EObjectImpl implements Column {
 			case PortalPackage.COLUMN__NAME:
 				return getName();
 			case PortalPackage.COLUMN__WIDTH:
-				return new Integer(getWidth());
+				return getWidth();
 			case PortalPackage.COLUMN__UNIT:
 				return getUnit();
 		}
@@ -207,7 +207,7 @@ public class ColumnImpl extends EObjectImpl implements Column {
 				setName((String)newValue);
 				return;
 			case PortalPackage.COLUMN__WIDTH:
-				setWidth(((Integer)newValue).intValue());
+				setWidth((Integer)newValue);
 				return;
 			case PortalPackage.COLUMN__UNIT:
 				setUnit((widthUnit)newValue);

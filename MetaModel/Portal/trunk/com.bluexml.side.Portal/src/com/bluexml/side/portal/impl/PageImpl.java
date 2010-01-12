@@ -347,7 +347,7 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 			case PortalPackage.PAGE__PORTLETS:
 				return getPortlets();
 			case PortalPackage.PAGE__POSITION:
-				return new Integer(getPosition());
+				return getPosition();
 			case PortalPackage.PAGE__IS_CHILD_PAGE_OF:
 				return getIsChildPageOf();
 		}
@@ -377,7 +377,7 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 				getPortlets().addAll((Collection<? extends HavePortlet>)newValue);
 				return;
 			case PortalPackage.PAGE__POSITION:
-				setPosition(((Integer)newValue).intValue());
+				setPosition((Integer)newValue);
 				return;
 			case PortalPackage.PAGE__IS_CHILD_PAGE_OF:
 				setIsChildPageOf((isChildPage)newValue);

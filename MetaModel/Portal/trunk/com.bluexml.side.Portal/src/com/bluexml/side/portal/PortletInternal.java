@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal;
 
+import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.view.AbstractView;
@@ -93,12 +94,12 @@ public interface PortletInternal extends PortalModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Form</em>' reference.
-	 * @see #setForm(FormContainer)
+	 * @see #setForm(FormCollection)
 	 * @see com.bluexml.side.portal.PortalPackage#getPortletInternal_Form()
 	 * @model
 	 * @generated
 	 */
-	FormContainer getForm();
+	FormCollection getForm();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.portal.PortletInternal#getForm <em>Form</em>}' reference.
@@ -108,6 +109,6 @@ public interface PortletInternal extends PortalModelElement {
 	 * @see #getForm()
 	 * @generated
 	 */
-	void setForm(FormContainer value);
+	void setForm(FormCollection value);
 
 } // PortletInternal

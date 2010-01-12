@@ -237,7 +237,7 @@ public class PortletTypeImpl extends PortalModelElementImpl implements PortletTy
 			case PortalPackage.PORTLET_TYPE__HAVE_ATTRIBUTE:
 				return getHaveAttribute();
 			case PortalPackage.PORTLET_TYPE__INSTANCEABLE:
-				return isInstanceable() ? Boolean.TRUE : Boolean.FALSE;
+				return isInstanceable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -262,7 +262,7 @@ public class PortletTypeImpl extends PortalModelElementImpl implements PortletTy
 				getHaveAttribute().addAll((Collection<? extends PortletAttribute>)newValue);
 				return;
 			case PortalPackage.PORTLET_TYPE__INSTANCEABLE:
-				setInstanceable(((Boolean)newValue).booleanValue());
+				setInstanceable((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

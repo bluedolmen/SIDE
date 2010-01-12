@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal.impl;
 
+import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormContainer;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
@@ -74,7 +75,7 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * @generated
 	 * @ordered
 	 */
-	protected FormContainer form;
+	protected FormCollection form;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -159,10 +160,10 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FormContainer getForm() {
+	public FormCollection getForm() {
 		if (form != null && form.eIsProxy()) {
 			InternalEObject oldForm = (InternalEObject)form;
-			form = (FormContainer)eResolveProxy(oldForm);
+			form = (FormCollection)eResolveProxy(oldForm);
 			if (form != oldForm) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PortalPackage.PORTLET_INTERNAL__FORM, oldForm, form));
@@ -176,7 +177,7 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FormContainer basicGetForm() {
+	public FormCollection basicGetForm() {
 		return form;
 	}
 
@@ -185,8 +186,8 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setForm(FormContainer newForm) {
-		FormContainer oldForm = form;
+	public void setForm(FormCollection newForm) {
+		FormCollection oldForm = form;
 		form = newForm;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PORTLET_INTERNAL__FORM, oldForm, form));
@@ -227,7 +228,7 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 				setView((AbstractView)newValue);
 				return;
 			case PortalPackage.PORTLET_INTERNAL__FORM:
-				setForm((FormContainer)newValue);
+				setForm((FormCollection)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -248,7 +249,7 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 				setView((AbstractView)null);
 				return;
 			case PortalPackage.PORTLET_INTERNAL__FORM:
-				setForm((FormContainer)null);
+				setForm((FormCollection)null);
 				return;
 		}
 		super.eUnset(featureID);
