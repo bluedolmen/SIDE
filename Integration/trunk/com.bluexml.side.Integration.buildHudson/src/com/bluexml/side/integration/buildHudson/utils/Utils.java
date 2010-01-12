@@ -683,6 +683,7 @@ public class Utils {
 				for (String element : projects) {
 					
 						if (element.indexOf("feature") == -1) {
+							
 							//si contient reference pom alors modifie max version
 							// et ajouter a la liste listePlugin
 							boolean ajouter=updatePluginModuleDependencies(element, nomPom, versionPom);
@@ -691,12 +692,9 @@ public class Utils {
 									listePlugin.add(element);
 								}
 									
-							}
-								
-							
+							}	
 						
 						}
-
 				}
 				
 			}
@@ -853,6 +851,9 @@ public class Utils {
 		// chemin vers le plugin.xml
 		String fileFeaturePath = getPathToLocalCopy(element)
 		+ File.separator + "plugin.xml";
+		
+		boolean exists = (new File(fileFeaturePath)).exists();
+		if (exists) { 
 
 		org.jdom.Document document = null;
 		org.jdom.Element racine;
@@ -883,10 +884,12 @@ public class Utils {
 
 		// On cr�e une List contenant tous les noeuds "moduleDependence" de
 		// l'Element racine
-		List<?> listModules = racine.getChildren("moduleDependence");
+		List<?> listModules = racine.getChildren("extension");
+		
 
 		// On cr�e un Iterator sur notre liste
 		Iterator<?> i = listModules.iterator();
+		
 		// on va parcourir tous les modules
 		while (i.hasNext()) {
 			// On recr�e l'Element courant � chaque tour de boucle afin de
@@ -894,12 +897,93 @@ public class Utils {
 			// selectionner un noeud fils, modifier du texte, etc...
 			Element courant = (Element) i.next();
 			
+			List<?> listmetamodel = courant.getChildren("metamodel");
+			Iterator<?> imetamodel = listmetamodel.iterator();
 			
-			String moduleId = courant.getAttributeValue("moduleId");
-			if (moduleId.equals(module)){
-				courant.setAttribute("versionMax", version);
-				modifie=true;
+			// on va parcourir tous les modules
+			while (imetamodel.hasNext()) {
+				// On recr�e l'Element courant � chaque tour de boucle afin de
+				// pouvoir utiliser les m�thodes propres aux Element comme :
+				// selectionner un noeud fils, modifier du texte, etc...
+				Element courantmetamodel = (Element) imetamodel.next();
+				
+				List<?> listtechnology = courantmetamodel.getChildren("technology");
+				Iterator<?> itechnology = listtechnology.iterator();
+				
+				// on va parcourir tous les modules
+				while (itechnology.hasNext()) {
+					// On recr�e l'Element courant � chaque tour de boucle afin de
+					// pouvoir utiliser les m�thodes propres aux Element comme :
+					// selectionner un noeud fils, modifier du texte, etc...
+					Element couranttechnology = (Element) itechnology.next();
+					
+					List<?> listtechnologyVersion = couranttechnology.getChildren("technologyVersion");
+					Iterator<?> itechnologyVersion = listtechnologyVersion.iterator();
+					
+					// on va parcourir tous les modules
+					while (itechnologyVersion.hasNext()) {
+						// On recr�e l'Element courant � chaque tour de boucle afin de
+						// pouvoir utiliser les m�thodes propres aux Element comme :
+						// selectionner un noeud fils, modifier du texte, etc...
+						Element couranttechnologyVersion = (Element) itechnologyVersion.next();
+						
+						List<?> listgeneratorVersion = couranttechnologyVersion.getChildren("generatorVersion");
+						Iterator<?> igeneratorVersion = listgeneratorVersion.iterator();
+						
+						// on va parcourir tous les modules
+						while (igeneratorVersion.hasNext()) {
+							// On recr�e l'Element courant � chaque tour de boucle afin de
+							// pouvoir utiliser les m�thodes propres aux Element comme :
+							// selectionner un noeud fils, modifier du texte, etc...
+							Element courantgeneratorVersion = (Element) igeneratorVersion.next();
+							
+							List<?> listoption = courantgeneratorVersion.getChildren("option");
+							Iterator<?> ioption = listoption.iterator();
+							
+							// on va parcourir tous les modules
+							while (ioption.hasNext()) {
+								// On recr�e l'Element courant � chaque tour de boucle afin de
+								// pouvoir utiliser les m�thodes propres aux Element comme :
+								// selectionner un noeud fils, modifier du texte, etc...
+								Element courantoption = (Element) ioption.next();
+								
+								
+								List<?> listmoduleDependence = courantoption.getChildren("moduleDependence");
+								Iterator<?> imoduleDependence = listmoduleDependence.iterator();
+								
+								// on va parcourir tous les modules
+								while (imoduleDependence.hasNext()) {
+									// On recr�e l'Element courant � chaque tour de boucle afin de
+									// pouvoir utiliser les m�thodes propres aux Element comme :
+									// selectionner un noeud fils, modifier du texte, etc...
+									Element courantmoduleDependence = (Element) imoduleDependence.next();
+									
+									
+									String moduleId = courantmoduleDependence.getAttributeValue("moduleId");
+									
+									
+									if (moduleId.equals(module)){
+										courantmoduleDependence.setAttribute("versionMax", version);
+										courantmoduleDependence.setAttribute("versionMin", version);
+										modifie=true;
+									}
+								}
+							}
+						}
+					}
+					
+					
+				}
+				
 			}
+			
+			//String moduleId = courant.getAttributeValue("moduleId");
+			
+			
+			//if (moduleId.equals(module)){
+			//	courant.setAttribute("versionMax", version);
+			//	modifie=true;
+			//}
 			
 
 		// Enregistrement du fichier
@@ -913,6 +997,7 @@ public class Utils {
 		}
 
 	
+		}
 		}
 	return modifie;
 		
