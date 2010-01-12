@@ -76,14 +76,19 @@ In order to generate and deploy models on Alfresco, follow the steps:
 - Import the new digitization process project using File -> Import -> existing Project -> select the "DigitizationProcess" folder
 - Update the myLocal.application to your settings using click droit on the file and 'Manage Configuration':
   you have mainly to update:
-  . In the generation tab, according to your environment, update the following parameters : 
+  . In the generation tab, according to your environment, update the following parameters: 
     Alfresco URL, Alfresco share URL
-  . In the deployment tab, according to your environment, update the following parameters : 
+  . In the deployment tab, according to your environment, update the following parameter: 
     Tomcat installation directory
   . The first time you will generate, uncheck the outline mode of the generation tab in order to get the up-to-date SIDE modules from the Maven repository.
     As this update increase the duration of the generation, the next time checks this mode to avoid a new update from the Maven repository.
+- Stop Alfresco if it's running
 - Generate and deploy the models using SIDE
 - Restart Alfresco
+
+Note: to avoid starting and stopping Alfresco for each generation, you can use the Alfresco ant deployer provided in the
+      extension/Alfresco/antDeployeralfresco.zip file.
+      Look at the README file for usage.
 
 Applications Usage with Alfresco and Chiba :
 --------------------------------------------
