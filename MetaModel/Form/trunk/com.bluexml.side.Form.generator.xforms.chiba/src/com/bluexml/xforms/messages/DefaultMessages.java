@@ -56,12 +56,19 @@ public class DefaultMessages {
 			"key.not.found=Message key not found",
 			"# 0: min length allowed; 1: max length allowed; 2: label of the field",
 			"length.between.min.and.max=The text length must be between {0} and {1} for the field \"{2}\"",
-			"", "# 0: max length allowed; 1: label of the field",
-			"length.maximal=Maximal length allowed is {0} for the field \"{1}\"", "",
+			"",
+			"# 0: max length allowed; 1: label of the field",
+			"length.maximal=Maximal length allowed is {0} for the field \"{1}\"",
+			"",
 			"# 0: min length allowed; 1: nom du champ",
-			"length.minimal=Minimal length allowed is {0} for the field \"{1}\"", "",
-			"selection.list.label=Select", "selection.list.show.all.results=Show all",
-			"selection.list.search.label=Search items:", "#", "# workflow-related", "#",
+			"length.minimal=Minimal length allowed is {0} for the field \"{1}\"",
+			"",
+			"selection.list.label=Select",
+			"selection.list.show.all.results=Show all",
+			"selection.list.search.label=Search items:",
+			"#",
+			"# workflow-related",
+			"#",
 			"caption.button.workflow.cancel=Cancel",
 			"caption.button.workflow.select=Select this workflow",
 			"caption.button.workflow.start=Activate this workflow",
@@ -85,7 +92,8 @@ public class DefaultMessages {
 			"status.message.edit.success=Data successfully edited.",
 			"# status.message.empty should have at least one whitespace",
 			"status.message.empty=\\ ", "# 0: sequence number of the iteration",
-			"status.message.iteration.postfix=\\ ({0})", "" };
+			"status.message.iteration.postfix=\\ ({0})",
+			"upload.to.repository.failure=Upload to the repository failed.", "" };
 
 	/**
 	 * @param args

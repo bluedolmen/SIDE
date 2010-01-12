@@ -35,7 +35,7 @@ public enum MsgId {
 	// keys for messages in the message.properties file; user-changeable
 	//
 	MSG_ASSOC_MANDATORY				("association.is.mandatory"),
-	MSG_DEFAULT_ERROR_MSG			("default.error.msg"), // #1249
+	MSG_DEFAULT_ERROR_MSG			("default.error.msg"), 
 	MSG_FIELD_MANDATORY				("field.is.mandatory"),
 	MSG_FILE_FIELD_LABEL			("file.field.label"),
 	MSG_FILL_MANDATORY_FIELDS		("fill.mandatory.fields"),
@@ -59,6 +59,7 @@ public enum MsgId {
 	MSG_STATUS_EDIT_SUCCESS			("status.message.edit.success"),
 	MSG_STATUS_EMPTY				("status.message.empty"),
 	MSG_STATUS_ITERATION			("status.message.iteration.postfix"),
+	MSG_UPLOAD_FAILED				("upload.to.repository.failure"),
 	MSG_WKFLW_ERROR_START_FAILURE	("workflow.error.start.failure"),
 	MSG_WKFLW_ERROR_SUBMIT_DATA		("workflow.error.submit.data"),
 	MSG_WKFLW_SECTION_LABEL			("workflow.section.label"),
@@ -110,10 +111,13 @@ public enum MsgId {
 	INT_EXC_ASSOCIATION_ENDS			("Illegal association: both ends must be classes."),
 	INT_EXC_WKFLW_GET_INSTANCE			("Exception getting instance with id: "),
 	INT_EXC_WKFLW_GET_INSTANCE_PATHS	("Exception getting paths for instance: "),
+	INT_DIRECTORY_FORM_CLASSES			("defaults"),
 	INT_DIRECTORY_FORM_FORMS			("forms"),
 	INT_DIRECTORY_FORM_LISTS			("lists"),
-	INT_DIRECTORY_FORM_WKFLW			("workflow"),
-	INT_DIRECTORY_WKFLW_SEL_FORM		("workflow"),
+	INT_DIRECTORY_FORM_READONLY			("readonly"),
+	INT_DIRECTORY_FORM_WKFLW			("workflows"),
+	INT_DIRECTORY_WKFLW_SEL_FORM		("workflows"),
+	// form types must be kept in sync with the forms.jsp
 	INT_FORMTYPE_FORM					("form"),
 	INT_FORMTYPE_LIST					("list"),
 	INT_FORMTYPE_WKFLW					("wkflw"),
