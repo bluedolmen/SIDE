@@ -615,6 +615,19 @@ public class Application {
 							+ File.separator + "META-INF\">\n";
 					out += "\t\t\t\t<include name=\"MANIFEST.MF\" />\n";
 					out += "\t\t\t</fileset>\n";
+					
+					String fileFeaturePath = Utils.getPathToLocalCopy(projects[i])
+					+ File.separator + "plugin.xml";
+					
+					boolean exists = (new File(fileFeaturePath)).exists();
+					if (exists) { 
+					
+						out += "\t\t\t<fileset dir=\""
+							+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
+						out += "\t\t\t\t<include name=\"plugin.xml\" />\n";
+						out += "\t\t\t</fileset>\n";
+					}	
+					
 	
 				} // si 'feature' est pr�sent
 				else if (projects[i].indexOf("feature") != -1) {
