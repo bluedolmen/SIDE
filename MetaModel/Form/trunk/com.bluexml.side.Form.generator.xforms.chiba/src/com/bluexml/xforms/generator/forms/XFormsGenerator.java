@@ -450,9 +450,13 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 * @see com.bluexml.xforms.generator.DataGenerator#beginGeneration()
 	 */
 	public void beginGeneration() {
-		genLogger.info("XFormGenerator: Generating XHTML templates.");
 		if (monitor != null) {
 			monitor.setTaskName("Generation of XHTML templates.");
+		}
+		if (isReadOnlyMode()) {
+			genLogger.info("XFormGenerator: Generating XHTML templates (Read Only).");
+		} else {
+			genLogger.info("XFormGenerator: Generating XHTML templates.");
 		}
 	}
 
@@ -1000,6 +1004,9 @@ public class XFormsGenerator extends AbstractDataGenerator {
 			fileName.append(File.separatorChar);
 			fileName.append(formType.getFolder());
 			fileName.append(formName);
+			if (isReadOnlyMode()) {
+				fileName.append(formGenerator.getReadOnlySuffix());
+			}
 			fileName.append(formType.getSuffix());
 			fileName.append(".xhtml");
 			File file = new File(fileName.toString());
