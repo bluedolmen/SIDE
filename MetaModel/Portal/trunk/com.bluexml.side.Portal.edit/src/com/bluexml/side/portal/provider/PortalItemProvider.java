@@ -25,6 +25,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.provider.PackageItemProvider;
+import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.portal.Portal;
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalPackage;
@@ -186,12 +187,32 @@ public class PortalItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 ClazzFactory.eINSTANCE.createModel()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 FormFactory.eINSTANCE.createWorkflowFormCollection()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 FormFactory.eINSTANCE.createClassFormCollection()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
 				 ViewFactory.eINSTANCE.createViewCollection()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
 				 WorkflowFactory.eINSTANCE.createProcess()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 WorkflowFactory.eINSTANCE.createWfPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter

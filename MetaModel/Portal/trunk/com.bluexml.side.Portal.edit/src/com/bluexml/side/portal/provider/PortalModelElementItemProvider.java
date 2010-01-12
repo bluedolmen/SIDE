@@ -74,7 +74,7 @@ public class PortalModelElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PortalModelElement)object).getDocumentation();
+		String label = crop(((PortalModelElement)object).getDocumentation());
 		return label == null || label.length() == 0 ?
 			getString("_UI_PortalModelElement_type") :
 			getString("_UI_PortalModelElement_type") + " " + label;
