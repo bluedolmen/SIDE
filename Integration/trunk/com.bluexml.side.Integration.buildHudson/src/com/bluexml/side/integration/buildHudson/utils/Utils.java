@@ -717,6 +717,16 @@ public class Utils {
 				updateVersionNumber(projects.get(i));
 			}
 		}
+		
+		if (listeProjetPoms.size() != 0) {
+			System.out.println("\nListe des poms modifi�es: ");
+			for (String pom : listeProjetPoms) {
+				String valeurf= pom;
+				String [] tab=valeurf.split("/S-IDE/");
+				System.out.println("\t- " + tab[1] + ": "
+						+ getVersionNumberPom(pom));
+			}
+			}
 
 		// affichage des donn�es
 		if (listePlugin.size() != 0) {
@@ -736,15 +746,7 @@ public class Utils {
 			}
 		}
 		
-		if (listeProjetPoms.size() != 0) {
-			System.out.println("\nListe des poms modifi�es: ");
-			for (String pom : listeProjetPoms) {
-				String valeurf= pom;
-				String [] tab=valeurf.split("/S-IDE/");
-				System.out.println("\t- " + tab[1] + ": "
-						+ getVersionNumberPom(pom));
-			}
-			}
+		
 		// fin affichage
 
 		copyToRepository();
