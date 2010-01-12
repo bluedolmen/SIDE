@@ -32,12 +32,18 @@
                <configurationParameter
                      documentation="Set the address to the webapp context, e.g. http://localhost:8080/xforms.&lt;br/&gt;This option is accessory as it is used for providing service URLs. If not given, default values will be used."
                      key="com.bluexml.side.Form.generator.xforms.chiba.webappContext"
-                     label="Webapp address">
+                     label="XForm Webapp URL">
                </configurationParameter>
                <mustBeChecked
                      pluginId="com.bluexml.side.Class.generator.alfresco">
                   <optionRef
                         optionId="alfresco.webscripts.common">
+                  </optionRef>
+               </mustBeChecked>
+               <mustBeChecked
+                     pluginId="com.bluexml.side.Portal.generator.alfresco">
+                  <optionRef
+                        optionId="com.bluexml.side.Portal.generator.alfresco.xforms">
                   </optionRef>
                </mustBeChecked>
             </generatorVersion>
