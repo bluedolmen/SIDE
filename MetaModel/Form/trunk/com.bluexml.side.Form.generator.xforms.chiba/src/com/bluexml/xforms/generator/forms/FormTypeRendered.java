@@ -13,14 +13,16 @@ import com.bluexml.xforms.messages.MsgId;
 public enum FormTypeRendered {
 
 		// NOTE: the rendering procedure adds actions in reverse order!
-		form(new AbstractAction[] { new DeleteAction(), new SubmitAction() }, "",
-				MsgId.INT_DIRECTORY_FORM_FORMS.getText() + File.separatorChar),
-		formClass(new AbstractAction[] { new DeleteAction(), new SubmitAction() }, "", ""),
+		formClass(new AbstractAction[] { new DeleteAction(), new SubmitAction() }, "",
+				MsgId.INT_DIRECTORY_FORM_CLASSES.getText()),
 		formClassSubClassSelector(new AbstractAction[] { new SetTypeAction() }, "_selector", ""),
 		formClassList(new AbstractAction[] {}, "", MsgId.INT_DIRECTORY_FORM_LISTS.getText()
 				+ File.separatorChar),
-		formWkflw(new AbstractAction[] { new SubmitAction() }, "",
-				MsgId.INT_DIRECTORY_FORM_WKFLW.getText() + File.separatorChar),
+		formForm(new AbstractAction[] { new DeleteAction(), new SubmitAction() }, "",
+				MsgId.INT_DIRECTORY_FORM_FORMS.getText() + File.separatorChar),
+		formWkflw(new AbstractAction[] { new SubmitAction() }, "", MsgId.INT_DIRECTORY_FORM_WKFLW
+				.getText()
+				+ File.separatorChar),
 		// cancel action is added here because the process selection form (the only
 		// form to have this type) goes through a specific rendering process.
 		formWkflwSel(new AbstractAction[] { new CancelAction(), new WorkflowStartAction() }, "",

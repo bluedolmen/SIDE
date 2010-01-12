@@ -944,7 +944,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 			boolean isAWorkflowForm) {
 		String title = formsModels.get(formId).getLabel();
 		FormTypeRendered formTypeRendered = (isAWorkflowForm) ? FormTypeRendered.formWkflw
-				: FormTypeRendered.form;
+				: FormTypeRendered.formForm;
 		render(outputXForms, rFC, formId, title, formTypeRendered, isAWorkflowForm, false);
 	}
 
