@@ -224,10 +224,12 @@ public enum MsgId {
 	PARAM_PROPERTIES_FILE_FORMS ("formsPropertiesFile"),
 	/** filesystem path to the messages.properties file*/
 	PARAM_PROPERTIES_FILE_MESSAGES ("messagesPropertiesFile"),
-	/** the URL the page being left was called with */
+	PARAM_PAGE_CANCEL ("nextPageCancel"),
+	PARAM_PAGE_DELETE ("nextPageDelete"),
 	PARAM_PAGE_SUBMIT ("nextPageSubmit"),
 	PARAM_PAGE_SUCCESS ("successPage"),
 	PARAM_PAGE_FAILURE ("failurePage"),
+	/** the URL the page being left was called with */
 	@Deprecated
 	PARAM_REDIRECT_FROM_URL("redirectFromUrl"),
 	/** filesystem path to the redirect.xml file*/
