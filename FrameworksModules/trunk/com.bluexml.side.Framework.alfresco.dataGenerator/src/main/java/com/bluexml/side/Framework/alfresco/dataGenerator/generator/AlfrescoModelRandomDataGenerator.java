@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
@@ -313,25 +314,28 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 				boolean targetMultiplicity = associationDefinition.isTargetMany();
 				if (!sourcesNodes.isEmpty() && !targetsNodes.isEmpty()){
 					if (!sourceMultiplicity && !targetMultiplicity){
-						arcsInstancesByAssociation = generateArcsInstancesCase11(sourcesNodes,targetsNodes,associationDefinition);
+						arcsInstancesByAssociation = generateArcsInstancesCase11(sourcesNodes,targetsNodes,associationDefinition,associations,arcsInstances);
 					}
 					else if (!sourceMultiplicity && targetMultiplicity){
-						arcsInstancesByAssociation = generateArcsInstancesCase1N(sourcesNodes,targetsNodes,associationDefinition);
+						arcsInstancesByAssociation = generateArcsInstancesCase1N(sourcesNodes,targetsNodes,associationDefinition,associations,arcsInstances);
 					}
 					else if (sourceMultiplicity && !targetMultiplicity){
-						arcsInstancesByAssociation = generateArcsInstancesCaseN1(sourcesNodes,targetsNodes,associationDefinition);
+						arcsInstancesByAssociation = generateArcsInstancesCaseN1(sourcesNodes,targetsNodes,associationDefinition,associations,arcsInstances);
 					}
 					else if (sourceMultiplicity && targetMultiplicity){
 						arcsInstancesByAssociation = generateArcsInstancesCaseNN(sourcesNodes,targetsNodes,associationDefinition);
 					}
 					arcsInstances.addAll(arcsInstancesByAssociation);
 				}
-				if (!sourceMultiplicity || !targetMultiplicity){
-					arcsInstances.removeAll(getSameArcs(arcsInstances));
-				}
-				if (!sourcesNodes.isEmpty() && associationDefinition.isTargetMandatory()){
-					nodesToDelete.addAll(sourcesNodes);
-				}
+//				if (!sourceMultiplicity || !targetMultiplicity){
+//					arcsInstances.removeAll(getSameArcs(arcsInstances));
+//				}
+//				if (!sourcesNodes.isEmpty() && associationDefinition.isTargetMandatory()){
+//					nodesToDelete.addAll(sourcesNodes);
+//				}
+//				if (!targetsNodes.isEmpty() && associationDefinition.isSourceMandatory()){
+//					nodesToDelete.addAll(targetsNodes);
+//				}
 			}
 			((AlfrescoModelData) alfrescoModelDatas).setGeneratedAssociationsInstances(arcsInstances);
 //		}
@@ -339,8 +343,9 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 //			//throws Exception
 //		}
 	}
-	
-	private List<IArc> generateArcsInstancesCaseN1(Collection<INode> sourcesNodes, Collection<INode> targetsNodes,AssociationDefinition associationDefinition) {
+
+	private List<IArc> generateArcsInstancesCaseN1(Collection<INode> sourcesNodes, Collection<INode> targetsNodes,AssociationDefinition associationDefinition,
+			Collection<AssociationDefinition> associations, Collection<IArc> generatedArcs) {
 		List<IArc> arcsInstances = new ArrayList<IArc>();
 		while (!targetsNodes.isEmpty()){
 			INode target = RandomMethods.selectRandomlyNode(targetsNodes);
@@ -348,6 +353,13 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			while (numberOfArcs < numberOfOutputArcs && !sourcesNodes.isEmpty()){
 				INode source = RandomMethods.selectRandomlyNode(sourcesNodes);
 				IArc arc = createRandomlyArc(source,target,associationDefinition);
+				AssociationDefinition invAssoc = searchInverseAssoc(source, target, associationDefinition, associations);
+				if (invAssoc != null){
+					IArc invArc = getInverseGeneratedArc(source,target,invAssoc,generatedArcs);
+					if (invArc != null){
+						arc = null;
+					}
+				}
 				if (arc != null){
 					arcsInstances.add(arc);
 					numberOfArcs++;
@@ -381,7 +393,8 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		return arcsInstances;
 	}
 
-	private List<IArc> generateArcsInstancesCase1N(Collection<INode> sourcesNodes, Collection<INode> targetsNodes, AssociationDefinition associationDefinition) {
+	private List<IArc> generateArcsInstancesCase1N(Collection<INode> sourcesNodes, Collection<INode> targetsNodes, AssociationDefinition associationDefinition,
+			Collection<AssociationDefinition> associations, Collection<IArc> generatedArcs) {
 		List<IArc> arcsInstances = new ArrayList<IArc>();
 		while (!sourcesNodes.isEmpty()){
 			INode source = RandomMethods.selectRandomlyNode(sourcesNodes);
@@ -389,6 +402,16 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			while (numberOfArcs < numberOfOutputArcs && !targetsNodes.isEmpty()){
 				INode target = RandomMethods.selectRandomlyNode(targetsNodes);
 				IArc arc = createRandomlyArc(source,target,associationDefinition);
+				AssociationDefinition invAssoc = searchInverseAssoc(source, target, associationDefinition, associations);
+				if (invAssoc != null && (invAssoc.isTargetMandatory() || invAssoc.isSourceMandatory())){
+					arc = null;
+				}
+				if (invAssoc != null){
+					IArc invArc = getInverseGeneratedArc(source,target,invAssoc,generatedArcs);
+					if (invArc != null){
+						arc = null;
+					}
+				}
 				if (arc != null){
 					arcsInstances.add(arc);
 					numberOfArcs++;
@@ -398,6 +421,16 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			sourcesNodes.remove(source);
 		}
 		return arcsInstances;
+	}
+
+	private boolean searchInverseArc(INode source, INode target, AssociationDefinition invAssoc, Collection<IArc> generatedArcs) {
+		for (IArc iArc : generatedArcs){
+			AlfrescoArc invArc = (AlfrescoArc) iArc;
+			if (invArc.getTypeAssociation().equals(invAssoc) && invArc.getSource().equals(target) && invArc.getTarget().equals(source)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public IArc createRandomlyArc(INode source, INode target, AssociationDefinition associationDefinition) {
@@ -412,12 +445,26 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		return arc;
 	}
 	
-	private List<IArc> generateArcsInstancesCase11(Collection<INode> sourcesNodes, Collection<INode> targetsNodes, AssociationDefinition associationDefinition) {
+	private List<IArc> generateArcsInstancesCase11(Collection<INode> sourcesNodes, Collection<INode> targetsNodes, 
+			AssociationDefinition associationDefinition, Collection<AssociationDefinition> associations,
+			Collection<IArc> generatedArcs) {
 		List<IArc> arcsInstances = new ArrayList<IArc>();
 		while (!sourcesNodes.isEmpty() && !targetsNodes.isEmpty()){
 			INode source = RandomMethods.selectRandomlyNode(sourcesNodes);
 			INode target = RandomMethods.selectRandomlyNode(targetsNodes);
 			IArc arc = createRandomlyArc(source,target,associationDefinition);
+			AssociationDefinition invAssoc = searchInverseAssoc(source,target,associationDefinition,associations);
+			if (invAssoc != null){
+				IArc invArc = getInverseGeneratedArc(source,target,invAssoc,generatedArcs);
+				if (invArc != null /**&& checkTarget(target,invArc)**/){
+					arc = null;
+//					arc = ((Instance) instance).instanciation(source,((AlfrescoArc)invArc).getSource(),associationDefinition);
+//					targetsNodes.remove(((AlfrescoArc)invArc).getSource());
+//					if (generatedArcs.contains(arc)){
+//						arc = null;
+//					}
+				}
+			}
 			if (arc != null){
 				arcsInstances.add(arc);
 			}
@@ -431,6 +478,28 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 //			}
 		}
 		return arcsInstances;
+	}
+
+	private IArc getInverseGeneratedArc(INode source, INode target,AssociationDefinition invAssoc, Collection<IArc> generatedArcs) {
+		for (IArc iArc : generatedArcs){
+			if(invAssoc.equals(((AlfrescoArc)iArc).getTypeAssociation()) && (((AlfrescoArc)iArc).getSource().equals(target)) || ((AlfrescoArc)iArc).getTarget().equals(source)){
+				return iArc;
+			}
+		}
+		return null;
+	}
+
+	private AssociationDefinition searchInverseAssoc(INode src, INode tgt, AssociationDefinition associationDefinition, Collection<AssociationDefinition> associations) {
+		TypeDefinition srcType = (TypeDefinition) associationDefinition.getSourceClass();
+		TypeDefinition tgtType = (TypeDefinition) associationDefinition.getTargetClass();
+		for (AssociationDefinition assoc : associations){
+			TypeDefinition invSrcType = (TypeDefinition) assoc.getSourceClass();
+			TypeDefinition invTgtType = (TypeDefinition) assoc.getTargetClass();
+			if (srcType.equals(invTgtType) && tgtType.equals(invSrcType)){
+				return assoc;
+			}
+		}
+		return null;
 	}
 
 	private List<INode> getGeneratedNodesByType(TypeDefinition type){
@@ -481,10 +550,50 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 	}
 	
 	public void deleteExceededNodes(){
+//		Collection<INode> nodesToAdd = new ArrayList<INode>();
 		Collection<INode> generatedNodes = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedTypesInstances();
-		generatedNodes.removeAll(nodesToDelete);
+		Collection<IArc> generatedArcs = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedAssociationsInstances();
+//		Map<AssociationDefinition,Collection<INode>> nodesAssociatedByAssociation = new HashMap<AssociationDefinition, Collection<INode>>();
+		Collection<INode> generatedNonMadtryNodes = new ArrayList<INode>();
+		Collection<INode> nodesAssociated = new ArrayList<INode>();
+		boolean pass = false;
+		for (IArc arc : generatedArcs){
+			if (((AlfrescoArc)arc).getTypeAssociation().isTargetMandatory()){
+				if (!nodesAssociated.contains(((AlfrescoArc)arc).getSource())){
+					nodesAssociated.add(((AlfrescoArc)arc).getSource());
+				}
+				if (!pass){
+					generatedNonMadtryNodes = getGeneratedNodesByType((TypeDefinition) ((AlfrescoArc)arc).getTypeAssociation().getSourceClass());
+					pass = true;
+				}
+			}
+			if (((AlfrescoArc)arc).getTypeAssociation().isSourceMandatory()){
+				if (!nodesAssociated.contains(((AlfrescoArc)arc).getTarget())){
+					nodesAssociated.add(((AlfrescoArc)arc).getTarget());
+				}
+				if (!pass){
+					generatedNonMadtryNodes = getGeneratedNodesByType((TypeDefinition) ((AlfrescoArc)arc).getTypeAssociation().getTargetClass());
+					pass =true;
+				}
+			}
+//			nodesAssociatedByAssociation.put(((AlfrescoArc)arc).getTypeAssociation(), nodesAssociated);
+		}
+		
+		generatedNonMadtryNodes.removeAll(nodesAssociated);
+		generatedNodes.removeAll(generatedNonMadtryNodes);
+		
+		
+//		Set<AssociationDefinition> associations = nodesAssociatedByAssociation.keySet();
+//		for (AssociationDefinition assoc : associations){
+//			if (assoc.isTargetMandatory()){
+//				TypeDefinition srcType = (TypeDefinition) assoc.getSourceClass();
+//				Collection<INode> allGeneratedNodes = getGeneratedNodesByType(srcType);
+//				allGeneratedNodes.removeAll(nodesAssociatedByAssociation.get(assoc));
+//				nodesToDelete.addAll(allGeneratedNodes);
+//			}
+//			nodesToAdd.addAll(nodesAssociatedByAssociation.get(assoc));
+//		}
 		((AlfrescoModelData) alfrescoModelDatas).setGeneratedTypesInstances(generatedNodes);
-		nodesToDelete.clear();
 	}
 	
 	public void deleteExceededArcs(){
