@@ -59,7 +59,8 @@ public abstract class AbstractRenderableField extends Renderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		attributeId = XFormsGenerator.getId(getOwner() + "_" + getName());
 
 		RenderedXMLElement rendered = new RenderedXMLElement();
@@ -69,7 +70,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		if (xsdType.equals(MsgId.INT_TYPE_XSD_DATETIME.getText())) {
 			if (isReadOnly()) {
 				meb = new ModelElementBindSimple(path);
-				meb.setType(new QName("string"));
+				// meb.setType(new QName("string"));
 			} else {
 				meb = new ModelElementBindSimple(path + "/date");
 				meb.setType(new QName(MsgId.INT_TYPE_XSD_DATE.getText()));
@@ -88,14 +89,18 @@ public abstract class AbstractRenderableField extends Renderable {
 		String slabel = getTitle() + " : ";
 
 		Element element = null;
-		element = getCustomElement(rendered, meb, slabel, parents, renderedParents);
+		element = null;
 		if (isReadOnly()) {
 			meb.setReadOnly(true);
 			if (StringUtils.equals(getXsdType(), MsgId.INT_TYPE_XSD_DATE.getText())
 					|| StringUtils.equals(getXsdType(), MsgId.INT_TYPE_XSD_TIME.getText())
 					|| StringUtils.equals(getXsdType(), MsgId.INT_TYPE_XSD_DATETIME.getText())) {
 				element = getReadOnlyElement(meb, slabel, false); // #1248
+			} else {
+				element = getCustomElement(rendered, meb, slabel, parents, renderedParents);
 			}
+		} else {
+			element = getCustomElement(rendered, meb, slabel, parents, renderedParents);
 		}
 		rendered.setXformsElement(element);
 		applyStyle(rendered);
@@ -448,8 +453,8 @@ public abstract class AbstractRenderableField extends Renderable {
 			rendered.addModelElement(modelElementEnumeration);
 
 			String enumInstance = modelElementEnumeration.getEnumInstanceName();
-		Element itemset = XFormsGenerator
-				.createElement("itemset", XFormsGenerator.NAMESPACE_XFORMS);
+			Element itemset = XFormsGenerator.createElement("itemset",
+					XFormsGenerator.NAMESPACE_XFORMS);
 			itemset.setAttribute("nodeset", "instance('" + enumInstance + "')/item");
 			Element itemLabel = XFormsGenerator.createElement("label",
 					XFormsGenerator.NAMESPACE_XFORMS);
@@ -459,7 +464,7 @@ public abstract class AbstractRenderableField extends Renderable {
 					XFormsGenerator.NAMESPACE_XFORMS);
 			itemValue.setAttribute("ref", "id");
 			itemset.addContent(itemValue);
-		element.addContent(itemset);
+			element.addContent(itemset);
 		} else { // #1313
 			for (String itemText : selectBean.getAllowedValues()) {
 				Element item = XFormsGenerator.createElement("item",
@@ -472,7 +477,7 @@ public abstract class AbstractRenderableField extends Renderable {
 				value.setText(itemText);
 				item.addContent(label);
 				item.addContent(value);
-				
+
 				element.addContent(item);
 			}
 		}
