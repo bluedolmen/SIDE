@@ -17,6 +17,10 @@ package com.bluexml.xforms.messages;
  * <li>INT: chaînes utilisées en interne, dans le code; objectif: centraliser.</li>
  * <li>PARAM: noms de paramètres admis dans l'url.</li>
  * </ul>
+ * NOTES:
+ * <ul>
+ * <li>form types must be kept in sync with the forms.jsp</li>
+ * </ul>
  *
  * @author Amenel
  *
@@ -24,14 +28,14 @@ package com.bluexml.xforms.messages;
 public enum MsgId {
 	// keys for messages in the forms.properties file
 	KEY_ALFRESCO_URL("alfresco.url"),
+	KEY_MAX_RESULTS("max.results"),
+	KEY_TEMP_DIRECTORY("temp.directory"),
 	/** The key for the complete path when uploading to file system.*/
 	KEY_UPLOAD_DIRECTORY("upload.directory"),
-	KEY_TEMP_DIRECTORY("temp.directory"),
 	/** The key for the repository upload path.*/
 	KEY_UPLOAD_REPOSITORY("upload.repository"),
 	KEY_USER_NAME("user.name"),
 	KEY_USER_PSWD("user.pswd"),
-	KEY_MAX_RESULTS("max.results"),
 	// keys for messages in the message.properties file; user-changeable
 	//
 	MSG_ASSOC_MANDATORY				("association.is.mandatory"),
@@ -62,13 +66,13 @@ public enum MsgId {
 	MSG_UPLOAD_FAILED				("upload.to.repository.failure"),
 	MSG_WKFLW_ERROR_START_FAILURE	("workflow.error.start.failure"),
 	MSG_WKFLW_ERROR_SUBMIT_DATA		("workflow.error.submit.data"),
-	MSG_WKFLW_SECTION_LABEL			("workflow.section.label"),
-	MSG_WKFLW_SEL_PAGE_TITLE		("workflow.selection.page.title"),
 	MSG_WKFLW_GLOBAL_GROUP			("workflow.selection.global.group"),
 	MSG_WKFLW_INSTANCE_GROUP		("workflow.selection.instance.group"),
-	MSG_WKFLW_PROCESS_GROUP			("workflow.selection.process.group"),
 	MSG_WKFLW_INSTANCE_WIDGET_TITLE	("workflow.instance.widget.title"),
+	MSG_WKFLW_PROCESS_GROUP			("workflow.selection.process.group"),
 	MSG_WKFLW_PROCESS_WIDGET_TITLE	("workflow.process.widget.title"),
+	MSG_WKFLW_SECTION_LABEL			("workflow.section.label"),
+	MSG_WKFLW_SEL_PAGE_TITLE		("workflow.selection.page.title"),
 	// captions for buttons; user-changeable
 	//
 	CAPTION_BUTTON_CANCEL			("caption.button.cancel"),
@@ -106,18 +110,25 @@ public enum MsgId {
 	INT_ACT_PARAM_LIST_MAXLENGTH		("maxLength"),
 	INT_ACT_PARAM_LIST_TYPE				("type"),
 	INT_BLUEXML_DEFAULT_STORE_PATH		("/app:company_home/app:dictionary/cm:SIDE DATA"),
-	INT_ERR_NULL_WKFLW_INSTANCE_PATHS	("No paths for instance: "),
-	INT_ERR_NULL_WKFLW_ACTIVE_PATHS		("No active path for instance: "),
-	INT_EXC_ASSOCIATION_ENDS			("Illegal association: both ends must be classes."),
-	INT_EXC_WKFLW_GET_INSTANCE			("Exception getting instance with id: "),
-	INT_EXC_WKFLW_GET_INSTANCE_PATHS	("Exception getting paths for instance: "),
+	INT_CSS_BLUEXML_AUTOGEN				("bluexml-autogen"),
+	INT_CSS_HORIZ_LINE					("side_horizontal_line"),
+	INT_CSS_RO_TEXTAREA					("side_ro_textarea"),
+	INT_CSS_SELECT_SEARCH_ZONE			("side_select_search_zone"),
+	INT_CSS_SELECT_WIDGET				("side_select_widget"),
+	INT_CSS_STATUS_BAR_ID				("side_status_bar"),
+	INT_CSS_UPLOAD_FILENAME 			("side_upload_filename"),
+	INT_CSS_UPLOAD_PREVIEW 				("side_upload_preview"),
 	INT_DIRECTORY_FORM_CLASSES			("defaults"),
 	INT_DIRECTORY_FORM_FORMS			("forms"),
 	INT_DIRECTORY_FORM_LISTS			("lists"),
 	INT_DIRECTORY_FORM_READONLY			("readonly"),
 	INT_DIRECTORY_FORM_WKFLW			("workflows"),
 	INT_DIRECTORY_WKFLW_SEL_FORM		("workflows"),
-	// form types must be kept in sync with the forms.jsp
+	INT_ERR_NULL_WKFLW_ACTIVE_PATHS		("No active path for instance: "),
+	INT_ERR_NULL_WKFLW_INSTANCE_PATHS	("No paths for instance: "),
+	INT_EXC_ASSOCIATION_ENDS			("Illegal association: both ends must be classes."),
+	INT_EXC_WKFLW_GET_INSTANCE			("Exception getting instance with id: "),
+	INT_EXC_WKFLW_GET_INSTANCE_PATHS	("Exception getting paths for instance: "),
 	INT_FORMTYPE_FORM					("form"),
 	INT_FORMTYPE_LIST					("list"),
 	INT_FORMTYPE_WKFLW					("wkflw"),
@@ -126,8 +137,8 @@ public enum MsgId {
 	INT_GEN_DYN_ENUM_PREFIX_CONTEXT		("enumContext"),
 	INT_GEN_DYN_ENUM_PREFIX_PARENT		("enumParent"),
 	INT_GEN_ID_OBJECTMODEL				("objectmodel"),
-	INT_GEN_PLACEHOLDER_SESSION_ID		("{@sessionid}"),
 	INT_GEN_PLACEHOLDER_CONTEXT_PATH	("{@contextpath}"),
+	INT_GEN_PLACEHOLDER_SESSION_ID		("{@sessionid}"),
 	INT_GEN_PREFIX_BIND_FORM			("bind"),
 	INT_GEN_PREFIX_BIND_WKFLW			("wkflwbind"),
 	INT_GEN_PREFIX_SUBMIT_FORM			("submit"),
@@ -137,32 +148,24 @@ public enum MsgId {
 	INT_GEN_REDIRECT_ENTRY				("entry"),
 	INT_GEN_REDIRECT_NAME				("name"),
 	INT_GEN_REDIRECT_URL				("url"),
-	INT_INSTANCE_SIDE_DATATYPE			("SIDEDataType"),
-	INT_INSTANCE_SIDEID					("SIDEID"),
-	INT_INSTANCE_SIDELABEL				("SIDELABEL"),
-	INT_INSTANCE_SIDEEDIT				("SIDEEDIT"),
 	INT_INSTANCE_SELECTEDID				("SELECTEDID"),
 	INT_INSTANCE_SELECTEDLABEL			("SELECTEDLABEL"),
 	INT_INSTANCE_SELECTEDMAX			("SELECTEDMAX"),
-	INT_CSS_BLUEXML_AUTOGEN				("bluexml-autogen"),
-	INT_CSS_HORIZ_LINE					("side_horizontal_line"),
-	INT_CSS_RO_TEXTAREA					("side_ro_textarea"),
-	INT_CSS_SELECT_WIDGET				("side_select_widget"),
-	INT_CSS_SELECT_SEARCH_ZONE			("side_select_search_zone"),
-	INT_CSS_STATUS_BAR_ID				("side_status_bar"),
-	INT_CSS_UPLOAD_FILENAME 			("side_upload_filename"),
-	INT_CSS_UPLOAD_PREVIEW 				("side_upload_preview"),
+	INT_INSTANCE_SIDE_DATATYPE			("SIDEDataType"),
+	INT_INSTANCE_SIDEEDIT				("SIDEEDIT"),
+	INT_INSTANCE_SIDEID					("SIDEID"),
+	INT_INSTANCE_SIDELABEL				("SIDELABEL"),
+	INT_MSGPOOL_NO_MESSAGE_FILE			("INVALID MESSAGE FILE!"),
+	INT_NAMESPACE_XFORMS				("http://www.w3.org/2002/xforms"),
+	INT_NAMESPACE_XHTML					("http://www.w3.org/1999/xhtml"),
+	INT_READ_ONLY_FORMS_SUFFIX			("RO"),
 	INT_SERVLET_REDIRECTOR_PATH			("redirect"),
 	INT_SUBMIT_BUTTONS_GROUP_ID			("submitButtons"),
-	INT_URI_SCHEME_READER				("sidereader://{@sessionid}/"),
-	INT_URI_SCHEME_WRITER				("sidewriter://{@sessionid}/"),
-	INT_NAMESPACE_XHTML					("http://www.w3.org/1999/xhtml"),
-	INT_NAMESPACE_XFORMS				("http://www.w3.org/2002/xforms"),
-	INT_MSGPOOL_NO_MESSAGE_FILE			("INVALID MESSAGE FILE!"),
-	INT_READ_ONLY_FORMS_SUFFIX			("RO"),
 	INT_TYPE_XSD_DATE 					("date"),
 	INT_TYPE_XSD_DATETIME 				("dateTime"),
 	INT_TYPE_XSD_TIME 					("time"),
+	INT_URI_SCHEME_READER				("sidereader://{@sessionid}/"),
+	INT_URI_SCHEME_WRITER				("sidewriter://{@sessionid}/"),
 	INT_WEBSCRIPT_AUTHENTICATE			("auth"),
 	INT_WEBSCRIPT_BATCH					("batch"),
 	INT_WEBSCRIPT_DELETE				("delete"),
@@ -178,15 +181,15 @@ public enum MsgId {
 	INT_WEBSCRIPT_WORKFLOW				("workflow"),
 	//
 	// these are used when generating the workflow selection page
-	INT_WKFLW_SEL_FORM_FILENAME			("ProcessSelection"),
 	INT_WKFLW_INSTANCE_INSTANCE_NAME	("InstanceInstance"),
 	INT_WKFLW_NODESET_PREFIX			("workflow"),
 	INT_WKFLW_PROCESS_INSTANCE_NAME		("ProcessInstance"),
+	INT_WKFLW_SEL_FORM_FILENAME			("ProcessSelection"),
 	//// caution: the nodeset prefix must be the actual prefix in all nodesets
-	INT_WKFLW_PROCESS_NODESET			("process"),
 	INT_WKFLW_INSTANCE_NODESET			("instance"),
-	INT_WKFLW_PROCESS_WIDGET_NAME		("workflow_definitions"),
 	INT_WKFLW_INSTANCE_WIDGET_NAME		("workflow_instances"),
+	INT_WKFLW_PROCESS_NODESET			("process"),
+	INT_WKFLW_PROCESS_WIDGET_NAME		("workflow_definitions"),
 	// must end with a trailing slash
 	INT_WKFKW_BLUEXML_NAMESPACE			("http://www.bluexml.com/model/workflow/"),
 	//
@@ -199,7 +202,6 @@ public enum MsgId {
 	INT_WKFLW_TMPLT_WKFLW_GROUP_ID		("workflow_section"),
 	// strings by which we accept parameters in the url
 	//
-	PARAM_SKIP_ADDITIONAL_INFO("skipAdditionalInfo"),
 	/** the name of a Java class to be called */
 	PARAM_ACTION_NAME ("actionName"),
 	/** the address (protocol, host and port) to the Alfresco server*/
@@ -216,28 +218,29 @@ public enum MsgId {
 	/** specifies a dummy call whose returned result will be "success" or "failure"*/
 	PARAM_INIT_CALL("init"),
 	/** output param for redirection; indicates which workflow form the redirection comes from*/ 
-	PARAM_LEAVING_FORM("leavingForm"),
 	PARAM_LANGUAGE ("language"),
+	PARAM_LEAVING_FORM("leavingForm"),
+	/** filesystem path to the forms.properties file*/
+	PARAM_PROPERTIES_FILE_FORMS ("formsPropertiesFile"),
+	/** filesystem path to the messages.properties file*/
+	PARAM_PROPERTIES_FILE_MESSAGES ("messagesPropertiesFile"),
+	/** the URL the page being left was called with */
 	PARAM_PAGE_SUBMIT ("nextPageSubmit"),
 	PARAM_PAGE_SUCCESS ("successPage"),
 	PARAM_PAGE_FAILURE ("failurePage"),
-	/** filesystem path to the messages.properties file*/
-	PARAM_MESSAGES_PROPERTIES_FILE ("messagesPropertiesFile"),
-	/** filesystem path to the forms.properties file*/
-	PARAM_FORMS_PROPERTIES_FILE ("formsPropertiesFile"),
-	/** the URL the page being left was called with */
 	@Deprecated
 	PARAM_REDIRECT_FROM_URL("redirectFromUrl"),
 	/** filesystem path to the redirect.xml file*/
 	PARAM_REDIRECTOR_CONFIG_FILE("redirectXmlFile"),
-	/** whether to reload properties and config files*/
-	PARAM_RELOAD_PROPERTIES("reloadProperties"),
 	/** whether to reload the mapping.xml file*/
 	PARAM_RELOAD_MAPPING_FILE("dynamicReload"),
+	/** whether to reload properties and config files*/
+	PARAM_RELOAD_PROPERTIES("reloadProperties"),
 	PARAM_SHOW_SUBMITS("showSubmitButtons"),
 	PARAM_SHOW_CANCEL("showCancel"),
 	PARAM_SHOW_DELETE("showDelete"),
 	PARAM_SHOW_VALIDATE("showSubmit"),	
+	PARAM_SKIP_ADDITIONAL_INFO("skipAdditionalInfo"),
 	/** whether to avoid contacting the webscript on Alfresco*/
 	PARAM_STANDALONE("standalone"),
 	/** originally for passing the status msg to client URL, now also considered as an input*/
