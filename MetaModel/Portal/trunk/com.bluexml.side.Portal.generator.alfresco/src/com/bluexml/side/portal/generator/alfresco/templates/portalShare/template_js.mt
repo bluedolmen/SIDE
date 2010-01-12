@@ -25,10 +25,8 @@ script: {
 		model.ticket = obj.ticket;
 		model.userName = obj.userName;			
 	}
-	// TODO :must getting the site id
-	// for a while work only if site url equals siteID
-	var sitePath = page.url.url.split('/');
-	var siteID = sitePath[sitePath.length -2];
+	
+	var siteID =page.url.templateArgs.site;
 	model.siteID = siteID;
 
 }

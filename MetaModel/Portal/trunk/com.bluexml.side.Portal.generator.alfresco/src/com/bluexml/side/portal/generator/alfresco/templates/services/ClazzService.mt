@@ -30,6 +30,17 @@ true
 <%}else{%>
 false
 <%}%>
+<%script type="portal.Page" name="isDefaultPublicSharePage"  post="trim()"%>
+<%if (ID == "documentlibrary"
+|| ID == "calendar"
+|| ID == "wiki-page"
+|| ID == "discussions-topiclist"
+|| ID == "blog-postlist"
+){%>
+true
+<%}else{%>
+false
+<%}%>
 <%script type="portal.Portlet" name="isDefaultShareComponent" post="trim()"%>
 <%if (name == "documentlibrary"
 || name == "documentdetails"
