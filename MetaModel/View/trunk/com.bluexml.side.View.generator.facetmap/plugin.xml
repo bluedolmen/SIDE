@@ -60,6 +60,12 @@
                            technologyVersion="Facetmap_2.x"
                            versionMin="1.0.0">
                      </moduleDependence>
+                     <mustBeChecked
+                           pluginId="com.bluexml.side.Portal.generator.alfresco">
+                        <optionRef
+                              optionId="com.bluexml.side.Portal.generator.alfresco.facetmap">
+                        </optionRef>
+                     </mustBeChecked>
                   </option>
                </generatorVersion>
             </technologyVersion>
