@@ -1,254 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
-
-   <extension point="org.eclipse.ui.editors">
-      <editor
-            class="com.bluexml.side.Portal.modeler.editor.PortalEditor"
-            icon="icons/Portal.gif"
-            default="true"
-            name="Portal Modeler"
-            id="com.bluexml.side.Portal.modeler.editor.PortalEditor"
-            contributorClass="com.bluexml.side.Portal.modeler.actions.PortalEditorActionBarContributor"
-            extensions="portaldi">
-      </editor>
-   </extension>
-   
-   <extension point="org.eclipse.ui.newWizards">
-      <wizard
-            icon="icons/Portal.gif"
-            class="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams"
-            category="com.bluexml.side.modeler.category.ID"
-            name="Side Portal Diagram"
-            id="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams">
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
-   
-   <extension point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension targetID="org.topcased.modeler.perspective">
-         <newWizardShortcut id="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams"/>
-      </perspectiveExtension>
-   </extension>
-   
-   <extension point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.topcased.modeler.preferences.ModelerPreferencePage"
-            class="com.bluexml.side.Portal.modeler.preferences.PortalPreferencePage"
-            id="com.bluexml.side.Portal.modeler.preferences.PortalPreferencePage"
-            name="Portal"/>
-   </extension>
-   
-	<extension point="org.eclipse.ui.propertyPages">
-		<page
-			id="com.bluexml.side.Portal.modeler.preferences.property.PortalPreferencePage"
-			class="com.bluexml.side.Portal.modeler.preferences.PortalPreferencePage"
-			category="org.topcased.modeler.preferences.property.ModelerPreferencePage"
-			name="Portal">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-	</extension>
-   
-   	<extension point="org.eclipse.core.runtime.preferences">
-		<initializer class="com.bluexml.side.Portal.modeler.preferences.AllDiagramPreferenceInitializer"/>
-	</extension>
-	<extension point="org.topcased.modeler.templates">
-      <template
-            di="templates/diagram/%name%.portaldi"
-            model="templates/diagram/%name%.portal"
-            name="PortalDiagram"
-            id="com.bluexml.side.Portal.modeler.templates.diagram"
-            editorId="com.bluexml.side.Portal.modeler.editor.PortalEditor"/>
-   </extension>
-   
-   <extension point="org.topcased.modeler.diagrams">
-      <diagram
-            configuration="com.bluexml.side.Portal.modeler.diagram.PdConfiguration"
-            id="com.bluexml.side.Portal.modeler.diagram"
-            name="PortalDiagram">
-      </diagram>
-	</extension>
-	
-	
-	<extension
-       point="org.topcased.modeler.topcasedPreferenceInitializer">
-    <preferenceInitializer
-          class="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramTopcasedPreferenceInitializer"
-          editorId="com.bluexml.side.Portal.modeler.editor.PortalEditor"
-          id="com.bluexml.side.Portal.modeler.diagram.preferences.PdTopcasedPreferenceInitializer">
-    </preferenceInitializer>
- </extension>
-
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			category="com.bluexml.side.Portal.modeler.preferences.PortalPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			name="PdDiagram"/>
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.PagePreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PagePreferencePage"
-			name="Page"/>
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.isChildPagePreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.isChildPagePreferencePage"
-			name="isChildPage"/>
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.PortalLayoutPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PortalLayoutPreferencePage"
-			name="PortalLayout"/>
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.UseLayoutPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.UseLayoutPreferencePage"
-			name="UseLayout"/>
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.PortletPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletPreferencePage"
-			name="Portlet"/>
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.PortletTypePreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletTypePreferencePage"
-			name="PortletType"/>
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.PortletInternalPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletInternalPreferencePage"
-			name="PortletInternal"/>
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.isInternalPortletPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.isInternalPortletPreferencePage"
-			name="isInternalPortlet"/>
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.HavePortletPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.HavePortletPreferencePage"
-			name="HavePortlet"/>
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.InstanciatePortletTypePreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.InstanciatePortletTypePreferencePage"
-			name="InstanciatePortletType"/>
-	</extension>
-
-	<extension point="org.eclipse.ui.propertyPages">
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			category="com.bluexml.side.Portal.modeler.preferences.property.PortalPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage"
-			name="PdDiagram">       
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-		
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PagePreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PagePreferencePage"
-			name="Page">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.isChildPagePreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.isChildPagePreferencePage"
-			name="isChildPage">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PortalLayoutPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PortalLayoutPreferencePage"
-			name="PortalLayout">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.UseLayoutPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.UseLayoutPreferencePage"
-			name="UseLayout">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PortletPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletPreferencePage"
-			name="Portlet">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PortletTypePreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletTypePreferencePage"
-			name="PortletType">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PortletInternalPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletInternalPreferencePage"
-			name="PortletInternal">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.isInternalPortletPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.isInternalPortletPreferencePage"
-			name="isInternalPortlet">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.HavePortletPreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.HavePortletPreferencePage"
-			name="HavePortlet">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-		<page
-			id="com.bluexml.side.Portal.modeler.diagram.preferences.property.InstanciatePortletTypePreferencePage"
-			category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage"
-			class="com.bluexml.side.Portal.modeler.diagram.preferences.InstanciatePortletTypePreferencePage"
-			name="InstanciatePortletType">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-	</extension>
+  <extension point="org.eclipse.ui.editors">
+    <editor class="com.bluexml.side.Portal.modeler.editor.PortalEditor" icon="icons/Portal.gif" default="true" name="Portal Modeler" id="com.bluexml.side.Portal.modeler.editor.PortalEditor" contributorClass="com.bluexml.side.Portal.modeler.actions.PortalEditorActionBarContributor" extensions="portaldi" />
+  </extension>
+  <extension point="org.eclipse.ui.newWizards">
+    <wizard icon="icons/Portal.gif" class="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams" category="com.bluexml.side.modeler.category.ID" name="Side Portal Diagram" id="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams">
+      <selection class="org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+  <extension point="org.eclipse.ui.perspectiveExtensions">
+    <perspectiveExtension targetID="org.topcased.modeler.perspective">
+      <newWizardShortcut id="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams" />
+    </perspectiveExtension>
+  </extension>
+  <extension point="org.eclipse.ui.preferencePages">
+    <page category="org.topcased.modeler.preferences.ModelerPreferencePage" class="com.bluexml.side.Portal.modeler.preferences.PortalPreferencePage" id="com.bluexml.side.Portal.modeler.preferences.PortalPreferencePage" name="Portal" />
+  </extension>
+  <extension point="org.eclipse.ui.propertyPages">
+    <page id="com.bluexml.side.Portal.modeler.preferences.property.PortalPreferencePage" class="com.bluexml.side.Portal.modeler.preferences.PortalPreferencePage" category="org.topcased.modeler.preferences.property.ModelerPreferencePage" name="Portal">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+  </extension>
+  <extension point="org.eclipse.core.runtime.preferences">
+    <initializer class="com.bluexml.side.Portal.modeler.preferences.AllDiagramPreferenceInitializer" />
+  </extension>
+  <extension point="org.topcased.modeler.templates">
+    <template di="templates/diagram/%name%.portaldi" model="templates/diagram/%name%.portal" name="PortalDiagram" id="com.bluexml.side.Portal.modeler.templates.diagram" editorId="com.bluexml.side.Portal.modeler.editor.PortalEditor" />
+  </extension>
+  <extension point="org.topcased.modeler.diagrams">
+    <diagram configuration="com.bluexml.side.Portal.modeler.diagram.PdConfiguration" id="com.bluexml.side.Portal.modeler.diagram" name="PortalDiagram" />
+  </extension>
+  <extension point="org.topcased.modeler.topcasedPreferenceInitializer">
+    <preferenceInitializer class="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramTopcasedPreferenceInitializer" editorId="com.bluexml.side.Portal.modeler.editor.PortalEditor" id="com.bluexml.side.Portal.modeler.diagram.preferences.PdTopcasedPreferenceInitializer" />
+  </extension>
+  <extension point="org.eclipse.ui.preferencePages">
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" category="com.bluexml.side.Portal.modeler.preferences.PortalPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" name="PdDiagram" />
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.PagePreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PagePreferencePage" name="Page" />
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.isChildPagePreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.isChildPagePreferencePage" name="isChildPage" />
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.PortalLayoutPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PortalLayoutPreferencePage" name="PortalLayout" />
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.UseLayoutPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.UseLayoutPreferencePage" name="UseLayout" />
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.PortletPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletPreferencePage" name="Portlet" />
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.PortletTypePreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletTypePreferencePage" name="PortletType" />
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.PortletInternalPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletInternalPreferencePage" name="PortletInternal" />
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.isInternalPortletPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.isInternalPortletPreferencePage" name="isInternalPortlet" />
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.HavePortletPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.HavePortletPreferencePage" name="HavePortlet" />
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.InstanciatePortletTypePreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.InstanciatePortletTypePreferencePage" name="InstanciatePortletType" />
+  </extension>
+  <extension point="org.eclipse.ui.propertyPages">
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" category="com.bluexml.side.Portal.modeler.preferences.property.PortalPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferencePage" name="PdDiagram">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PagePreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PagePreferencePage" name="Page">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.isChildPagePreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.isChildPagePreferencePage" name="isChildPage">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PortalLayoutPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PortalLayoutPreferencePage" name="PortalLayout">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.UseLayoutPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.UseLayoutPreferencePage" name="UseLayout">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PortletPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletPreferencePage" name="Portlet">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PortletTypePreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletTypePreferencePage" name="PortletType">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.PortletInternalPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.PortletInternalPreferencePage" name="PortletInternal">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.isInternalPortletPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.isInternalPortletPreferencePage" name="isInternalPortlet">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.HavePortletPreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.HavePortletPreferencePage" name="HavePortlet">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Portal.modeler.diagram.preferences.property.InstanciatePortletTypePreferencePage" category="com.bluexml.side.Portal.modeler.diagram.preferences.property.PdDiagramPreferencePage" class="com.bluexml.side.Portal.modeler.diagram.preferences.InstanciatePortletTypePreferencePage" name="InstanciatePortletType">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+  </extension>
 </plugin>
+
