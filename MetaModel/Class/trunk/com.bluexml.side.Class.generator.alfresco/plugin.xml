@@ -36,21 +36,21 @@
             <option documentation="Check this option to include the production of the Alfresco's report webscripts in the generation.&lt;br&gt;If not checked, the webscripts report are not included in the generated AMPs.&lt;br&gt;SIDE allows to configure the Alfresco's report webscripts with the newly designed content types of the data model." key="alfresco.webscript.report" label="Alfresco Report Webscripts" />
             <configurationParameter documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
             <option documentation="Check this option to include the SIDE SQL extension module for Alfresco.&lt;br&gt;This module provides the synchronisation of alfresco data into a relational database.&lt;br&gt; Queries with joins can thus be performed." key="com.bluexml.side.Class.generator.alfresco.sql" label="Alfresco SQL">
-              <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.sql" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.12" versionMax="1.1.12" />
+              <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.sql" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.13" versionMax="1.1.13" />
             </option>
             <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
             <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
             <option documentation="Check this option to include the production of the Alfresco's common webscripts in the generation.&lt;br&gt;If not checked, the webscripts are not included in the generated AMPs.&lt;br&gt;" key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
-              <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.27" versionMax="1.0.27" />
+              <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.28" versionMax="1.0.28" />
             </option>
             <option documentation="Generates random data regarding the current Alfresco model. The generated ACP can be imported and reused accross various Alfresco installations." key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator" label="Alfresco Random Data Generator">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.24" versionMax="1.0.24" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.25" versionMax="1.0.25" />
             </option>
             <option defaultOption="false" documentation="additional module to check if created/updated items already exists, in this case the update or creation is forbidden" key="alfresco.unicity" label="Content Type Unicity">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.5" versionMax="1.0.5" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.6" versionMax="1.0.6" />
             </option>
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" label="Alfresco FacetMap Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.18" versionMax="1.0.18" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.19" versionMax="1.0.19" />
             </option>
           </generatorVersion>
         </technologyVersion>
