@@ -1,39 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <!--
  <copyright>
  </copyright>
 
  $Id$
 -->
-
 <plugin>
-
-   <extension point="org.eclipse.ui.newWizards">
-      <category
-            id="com.bluexml.side.modeler.category.ID"
-            name="%_UI_Wizard_category"/>
-      <wizard
-            id="com.bluexml.side.view.presentation.ViewModelWizardID"
-            name="%_UI_ViewModelWizard_label"
-            class="com.bluexml.side.view.presentation.ViewModelWizard"
-            category="com.bluexml.side.modeler.category.ID"
-            icon="icons/full/obj16/ViewModelFile.gif">
-         <description>%_UI_ViewModelWizard_description</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
-
-   <extension point="org.eclipse.ui.editors">
-      <editor
-            id="com.bluexml.side.view.presentation.ViewEditorID"
-            name="%_UI_ViewEditor_label"
-            icon="icons/full/obj16/ViewModelFile.gif"
-            extensions="view"
-            class="com.bluexml.side.view.presentation.ViewEditor"
-            contributorClass="com.bluexml.side.view.presentation.ViewActionBarContributor">
-      </editor>
-   </extension>
-
+  <extension point="org.eclipse.ui.newWizards">
+    <category id="com.bluexml.side.modeler.category.ID" name="%_UI_Wizard_category" />
+    <wizard id="com.bluexml.side.view.presentation.ViewModelWizardID" name="%_UI_ViewModelWizard_label" class="com.bluexml.side.view.presentation.ViewModelWizard" category="com.bluexml.side.modeler.category.ID" icon="icons/full/obj16/ViewModelFile.gif">
+      <description>%_UI_ViewModelWizard_description</description>
+      <selection class="org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+  <extension point="org.eclipse.ui.editors">
+    <editor id="com.bluexml.side.view.presentation.ViewEditorID" name="%_UI_ViewEditor_label" icon="icons/full/obj16/ViewModelFile.gif" extensions="view" class="com.bluexml.side.view.presentation.ViewEditor" contributorClass="com.bluexml.side.view.presentation.ViewActionBarContributor" />
+  </extension>
 </plugin>
+
