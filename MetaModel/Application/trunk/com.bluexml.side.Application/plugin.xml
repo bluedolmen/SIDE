@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <!--
  <copyright>
  </copyright>
 
  $Id$
 -->
-
 <plugin>
-
-<extension-point id="com_bluexml_application_configuration" name="Generation configuration" schema="schema/com_bluexml_application_configuration.exsd"/>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.bluexml.com/application/1.0/"
-            class="com.bluexml.side.application.ApplicationPackage"
-            genModel="model/application.genmodel"/>
-   </extension>
-   <extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="com.bluexml.side.application.util.ApplicationResourceFactory"
-            type="application">
-      </parser>
-   </extension>
-
+  <extension-point id="com_bluexml_application_configuration" name="Generation configuration" schema="schema/com_bluexml_application_configuration.exsd" />
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package uri="http://www.bluexml.com/application/1.0/" class="com.bluexml.side.application.ApplicationPackage" genModel="model/application.genmodel" />
+  </extension>
+  <extension point="org.eclipse.emf.ecore.extension_parser">
+    <parser class="com.bluexml.side.application.util.ApplicationResourceFactory" type="application" />
+  </extension>
 </plugin>
+
