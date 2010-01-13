@@ -6,7 +6,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 <%-- Templates instance creation --%>
 <%script type="Page" name="createTemplateInstances"%>
 <%ID.toLowerCase().nPut("ti_name")%>
-<%if (isDefaultSharePage() =="false"){%>
+<%if (generate){%>
 <%getProperty("alf.share.paths.web-ext.template-instances")%><%nGet("ti_name")%>.xml
 <%}%>
 <%script type="Page" name="alfrescoGenerator" file="<%createTemplateInstances%>" post="trim()"%>

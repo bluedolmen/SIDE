@@ -7,7 +7,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 <%-- Title component templates creation --%>
 <%script type="Page" name="createTitleComponentTemplate"%>
 <%ID.toLowerCase().nPut("title_name")%>
-<%if (isDefaultSharePage() =="false"){%>
+<%if (generate){%>
 <%getProperty("alf.share.paths.web-ext.components")%>template.title.<%nGet("title_name")%>.xml
 <%}%>
 <%script type="Page" name="alfrescoGenerator" file="<%createTitleComponentTemplate%>" post="trim()"%>

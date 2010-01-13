@@ -7,7 +7,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 <%-- Navigation component templates creation --%>
 <%script type="Page" name="createNavigationComponentTemplate"%>
 <%ID.toLowerCase().nPut("navigation_name")%>
-<%if (isDefaultSharePage() =="false"){%>
+<%if (generate){%>
 <%getProperty("alf.share.paths.web-ext.components")%>template.navigation.<%nGet("navigation_name")%>.xml
 <%}%>
 <%script type="Page" name="alfrescoGenerator" file="<%createNavigationComponentTemplate%>" post="trim()"%>

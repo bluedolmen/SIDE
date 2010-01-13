@@ -7,7 +7,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%-- Templates creation --%>
 <%script type="Page" name="createTemplates"%>
 <%ID.toLowerCase().nPut("templates_name")%>
-<%if (isDefaultSharePage() =="false"){%>
+<%if (generate){%>
 <%getProperty("alf.share.paths.core.templates")%><%nGet("templates_name")%>.ftl
 <%}%>
 <%script type="Page" name="alfrescoGenerator" file="<%createTemplates%>" post="trim()"%>

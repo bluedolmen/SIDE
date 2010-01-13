@@ -6,7 +6,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 <%-- CSS creation --%>
 <%script type="Page" name="createPagesCssStyle"%>
 <%ID.toLowerCase().nPut("css_name")%>
-<%if (isDefaultSharePage() =="false"){%>
+<%if (generate){%>
 <%getProperty("alf.share.paths.core.css")%><%nGet("css_name")%>/<%nGet("css_name")%>.css
 <%}%>
 

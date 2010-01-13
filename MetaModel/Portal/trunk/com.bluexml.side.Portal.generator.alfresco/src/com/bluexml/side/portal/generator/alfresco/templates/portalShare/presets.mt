@@ -77,8 +77,10 @@ metamodel http://www.kerblue.org/portal/1.0
                <!--<sitePages>[{"pageId":"wiki-page"}, {"pageId":"blog-postlist"}, {"pageId":"documentlibrary"}, {"pageId":"calendar"},{"pageId":"links"},{"pageId":"discussions-topiclist"}-->
                <sitePages>[
                <%for (pageSet.nSort("position")){%>
-               	{"pageId":"<%ID%>"}<%if (current("Portal").pageSet.nLast() != current()){%>, <%}%>
-               	<%}%>
+	               <%if (visibility.toString().toLowerCase() == "public"){%>
+	               	{"pageId":"<%ID%>"}<%if (current("Portal").pageSet.nLast() != current()){%>, <%}%>
+	               <%}%>
+               <%}%>
                	]               
                </sitePages>
             </properties>

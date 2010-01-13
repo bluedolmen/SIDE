@@ -6,7 +6,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 <%-- Custom pages creation, templates creation and referencing --%>
 <%script type="Page" name="createSitePages"%>
 <%ID.toLowerCase().nPut("page_name")%>
-<%if (isDefaultSharePage() =="false"){%>
+<%if (generate){%>
 <%getProperty("alf.share.paths.web-ext.pages")%><%nGet("page_name")%>.xml
 <%}%>
 <%script type="Page" name="alfrescoGenerator" file="<%createSitePages%>" post="trim()"%>
