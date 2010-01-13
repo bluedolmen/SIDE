@@ -15,7 +15,7 @@ import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
-	protected static final String versionProperty = "com.bluexml.side.Class.generator.alfresco.module.version"; //$NON-NLS-1$
+	
 	/*
 	 * final fields used in generation too
 	 */
@@ -32,6 +32,10 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String WEBSCRIPT_SIDE_FAMILY = "/service/index/family/SIDE"; //$NON-NLS-1$
 	XMLConflictResolver xmlresolver = null;
 
+	public ClassAlfrescoGenerator() {
+		versionProperty = "com.bluexml.side.Class.generator.alfresco.module.version"; //$NON-NLS-1$
+	}
+	
 	public XMLConflictResolver getXmlresolver() {
 		if (xmlresolver == null) {
 			xmlresolver = new XMLConflictResolver(this.getCresolver());
@@ -174,5 +178,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		// return true;
 		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
 	}
+	
+	
 
 }
