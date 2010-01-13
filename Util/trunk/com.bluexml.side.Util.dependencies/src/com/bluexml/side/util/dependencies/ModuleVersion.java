@@ -26,6 +26,7 @@ public class ModuleVersion {
 
 			switch (v.length) {
 			case 1:
+				System.out.println("CASE1");
 				// version=1 ; version=1-SNAPSHOT
 				String p1 = v[0];
 				boolean isqualifier_0 = !p1.matches("^[\\d]*$");
@@ -39,6 +40,7 @@ public class ModuleVersion {
 				}
 				break;
 			case 2:
+				System.out.println("CASE2");
 				// version=1.1 version 1.1-SNAPSHOT
 				this.major = Integer.parseInt(v[0]);
 				// search for qualifier
@@ -54,6 +56,7 @@ public class ModuleVersion {
 				}
 				break;
 			case 3:
+				System.out.println("CASE3");
 				// version 1.1.1 version=1.1.1-SNAPSHOT
 				this.major = Integer.parseInt(v[0]);
 				this.middle = Integer.parseInt(v[1]);
@@ -70,6 +73,7 @@ public class ModuleVersion {
 				}
 				break;
 			case 4:
+				System.out.println("CASE4");
 				// version 1.1.1.qualifier
 				this.major = Integer.parseInt(v[0]);
 				this.middle = Integer.parseInt(v[1]);
@@ -77,6 +81,7 @@ public class ModuleVersion {
 				this.qualifier = v[3];
 				break;
 			default:
+				System.out.println("CASE default");
 				// version 1.1.1.qualifier.qualifier
 				if (v.length > 4) {
 					this.major = Integer.parseInt(v[0]);
@@ -157,7 +162,7 @@ public class ModuleVersion {
 		}
 		if (this.minor !=null) {
 			version+=separator;
-			version+=this.middle.toString();
+			version+=this.minor.toString();
 		}
 		
 		if (!qualifier.equals("")) {
