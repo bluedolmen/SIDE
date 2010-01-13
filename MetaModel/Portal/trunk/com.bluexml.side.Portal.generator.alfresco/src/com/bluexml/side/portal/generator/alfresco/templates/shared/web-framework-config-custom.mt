@@ -3,7 +3,6 @@ metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.portal.generator.alfresco.templates.formsDetails.web-framework-config-custom
-import com.bluexml.side.portal.generator.alfresco.templates.portalShare.web-framework-config-custom
 import com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator
 %>
 
@@ -19,14 +18,10 @@ import com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator
       </evaluators>
    </plug-ins-->
 
-<%if (getGeneratorOptionValue("com.bluexml.side.Portal.generator.alfresco.facetmap")){%>
-<%addPages()%>
-<%}%>
 
 <%if (getGeneratorOptionValue("com.bluexml.side.Portal.generator.alfresco.forms")){%>
 <%buildForms()%>
 <%}%>
-
 
 
 </alfresco-config>

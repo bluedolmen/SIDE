@@ -82,6 +82,7 @@ function main()
    //dumpFormUIModel(formUIModel);
    
    // pass form ui model to FTL
+   model.nodeRef = itemId;
    model.form = formModel.data;
 }
 
