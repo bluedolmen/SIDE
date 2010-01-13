@@ -9,7 +9,7 @@ import org.alfresco.repo.security.authentication.TicketComponent;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.web.scripts.*;
 import org.apache.log4j.Logger;
-
+ 
 public class TicketValidatorForSiteMenbership extends DeclarativeWebScript {
 	ServiceRegistry serviceRegistry;
 	TicketComponent ticketComponent;
