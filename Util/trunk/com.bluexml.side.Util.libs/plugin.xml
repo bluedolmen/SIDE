@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
-         point="org.eclipse.ui.views">
-      <category
-            id="com.bluexml.side"
-            name="BlueXML">
-      </category>
-      <view
-            category="KerBlue.Forms.editor"
-            class="com.bluexml.side.util.libs.view.OutlineHTMLView"
-            icon="icons/outlineView.png"
-            id="com.bluexml.view.OutlineHTMLView"
-            name="OutlineHTMLView">
-      </view>
-   </extension>
-
+  <extension point="org.eclipse.ui.views">
+    <category id="com.bluexml.side" name="BlueXML" />
+    <view category="KerBlue.Forms.editor" class="com.bluexml.side.util.libs.view.OutlineHTMLView" icon="icons/outlineView.png" id="com.bluexml.view.OutlineHTMLView" name="OutlineHTMLView" />
+  </extension>
 </plugin>
+
