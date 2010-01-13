@@ -5,7 +5,7 @@
  * $Id$
  */
 package com.bluexml.side.common;
-
+ 
 
 /**
  * <!-- begin-user-doc -->

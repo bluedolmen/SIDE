@@ -1,5 +1,5 @@
 package com.bluexml.side.view.generator.alfresco;
-
+ 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 

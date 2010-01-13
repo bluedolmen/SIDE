@@ -5,7 +5,7 @@
  * $Id$
  */
 package com.bluexml.side.clazz.presentation;
-
+ 
 import com.bluexml.side.common.provider.CommonEditPlugin;
 
 import org.eclipse.emf.common.EMFPlugin;

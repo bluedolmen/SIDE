@@ -1,5 +1,5 @@
 package com.bluexml.side.Integration.alfresco.model;
-
+ 
 import org.alfresco.service.namespace.QName;
 
 public interface ContentModel {

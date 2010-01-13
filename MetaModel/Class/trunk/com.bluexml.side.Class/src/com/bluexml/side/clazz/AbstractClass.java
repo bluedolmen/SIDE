@@ -5,7 +5,7 @@
  * $Id$
  */
 package com.bluexml.side.clazz;
-
+ 
 import com.bluexml.side.common.Container;
 
 import org.eclipse.emf.common.util.EList;

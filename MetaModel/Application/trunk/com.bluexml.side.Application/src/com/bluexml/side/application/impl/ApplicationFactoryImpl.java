@@ -5,7 +5,7 @@
  * $Id$
  */
 package com.bluexml.side.application.impl;
-
+ 
 import com.bluexml.side.application.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;

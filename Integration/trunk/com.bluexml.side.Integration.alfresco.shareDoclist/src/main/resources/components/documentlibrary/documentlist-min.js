@@ -30,7 +30,7 @@
  * @class Alfresco.DocumentList
  */
 (function()
-{
+{ 
    /**
     * YUI Library aliases
     */

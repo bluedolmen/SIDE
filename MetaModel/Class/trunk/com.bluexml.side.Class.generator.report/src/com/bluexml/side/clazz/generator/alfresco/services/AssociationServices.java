@@ -15,7 +15,7 @@
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  ******************************************************************************/
 package com.bluexml.side.clazz.generator.alfresco.services;
-
+ 
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;

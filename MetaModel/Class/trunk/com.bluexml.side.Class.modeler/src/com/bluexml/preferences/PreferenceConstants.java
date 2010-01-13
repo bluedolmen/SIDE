@@ -15,7 +15,7 @@
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  ******************************************************************************/
 package com.bluexml.preferences;
-
+ 
 /**
  * Constant definitions for plug-in preferences
  * 

@@ -1,5 +1,5 @@
 package com.bluexml.side.integration.openSourcePublication;
-
+ 
 import java.io.File;
 import java.io.IOException;
 

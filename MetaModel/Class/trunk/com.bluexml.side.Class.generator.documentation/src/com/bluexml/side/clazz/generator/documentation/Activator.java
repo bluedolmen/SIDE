@@ -1,5 +1,5 @@
 package com.bluexml.side.clazz.generator.documentation;
-
+ 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 

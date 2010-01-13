@@ -1,5 +1,5 @@
 package com.bluexml.side.deployer.xformsdirectcopy;
-
+ 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 

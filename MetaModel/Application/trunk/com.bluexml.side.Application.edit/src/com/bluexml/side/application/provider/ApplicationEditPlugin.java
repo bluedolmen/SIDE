@@ -5,7 +5,7 @@
  * $Id$
  */
 package com.bluexml.side.application.provider;
-
+ 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 

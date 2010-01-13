@@ -1,5 +1,5 @@
 package com.bluexml.side.application.ui;
-
+ 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 

@@ -5,7 +5,7 @@
  * $Id$
  */
 package com.bluexml.side.common.provider;
-
+ 
 
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;

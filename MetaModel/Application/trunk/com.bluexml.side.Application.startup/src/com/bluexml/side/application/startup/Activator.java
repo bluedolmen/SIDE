@@ -2,7 +2,7 @@ package com.bluexml.side.application.startup;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-
+ 
 /**
  * The activator class controls the plug-in life cycle
  */

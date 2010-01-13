@@ -1,4 +1,4 @@
-<webscript>
+<webscript> 
   <shortname>SIDE-Facetmap-Content</shortname>
   <description>un webscript pour tester l'appel à un autre webscript</description>
   <family>user-dashlet</family>
