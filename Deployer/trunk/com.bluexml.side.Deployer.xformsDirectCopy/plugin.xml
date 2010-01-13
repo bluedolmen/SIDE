@@ -1,43 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <technology
-            description="Check this to generate your form models on a XForms engine.&lt;br&gt;XForms is a standard to describe the structure of web forms using precise semantics and separation of concern.&lt;br&gt;SIDE allows to optimize the production of XForms-based web forms through graphical design, automatic generation, data integration and Xforms-based engine deployment."
-            id="xforms"
-            idMetamodel="http://www.kerblue.org/form/1.0"
-            name="XForms"
-            url="http://www.alfresco.com">
-         <technologyVersion
-               description="Check this to generate your form models on the major release 1.5 of the XForms-based Chiba engine.&lt;br&gt;Chiba 1.5.x is the leading open source Xforms engine solution.&lt;br&gt;SIDE allows to generate the XForms templates and this generation has been heavily qualified on Chiba."
-               id="chiba_1_5.x"
-               idTechnology="alfresco"
-               version="Chiba 1.5.x">
-            <deployerVersion
-                  class="com.bluexml.side.deployer.xformsdirectcopy.DeployerXforms"
-                  hidden="visible"
-                  id="com.bluexml.side.Deployer.xformsDirectCopy"
-                  version="SIDE Chiba X-Forms Direct Deployer">
-               <configurationParameter
-                     documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
-                     key="CATALINA_HOME"
-                     label="Tomcat installation directory">
-               </configurationParameter>
-               <option
-                     defaultOption="true"
-                     documentation="Check this option if you want to completely remove previous deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time."
-                     key="com.bluexml.side.Deployer.xformsDirectCopy.clean"
-                     label="clean">
-               </option>
-               <configurationParameter
-                     documentation="Set the name of your Chiba webapp. The default name for the war file provided by BlueXML is &quot;xforms&quot;.&lt;br/&gt;If not filled, the default name will be considered."
-                     key="com.bluexml.side.Deployer.xforms.webappName"
-                     label="Webapp context name">
-               </configurationParameter>
-            </deployerVersion>
-         </technologyVersion>
-      </technology>
-   </extension>
-
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <technology description="Check this to generate your form models on a XForms engine.&lt;br&gt;XForms is a standard to describe the structure of web forms using precise semantics and separation of concern.&lt;br&gt;SIDE allows to optimize the production of XForms-based web forms through graphical design, automatic generation, data integration and Xforms-based engine deployment." id="xforms" idMetamodel="http://www.kerblue.org/form/1.0" name="XForms" url="http://www.alfresco.com">
+      <technologyVersion description="Check this to generate your form models on the major release 1.5 of the XForms-based Chiba engine.&lt;br&gt;Chiba 1.5.x is the leading open source Xforms engine solution.&lt;br&gt;SIDE allows to generate the XForms templates and this generation has been heavily qualified on Chiba." id="chiba_1_5.x" idTechnology="alfresco" version="Chiba 1.5.x">
+        <deployerVersion class="com.bluexml.side.deployer.xformsdirectcopy.DeployerXforms" hidden="visible" id="com.bluexml.side.Deployer.xformsDirectCopy" version="SIDE Chiba X-Forms Direct Deployer">
+          <configurationParameter documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;" key="CATALINA_HOME" label="Tomcat installation directory" />
+          <option defaultOption="true" documentation="Check this option if you want to completely remove previous deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time." key="com.bluexml.side.Deployer.xformsDirectCopy.clean" label="clean" />
+          <configurationParameter documentation="Set the name of your Chiba webapp. The default name for the war file provided by BlueXML is &quot;xforms&quot;.&lt;br/&gt;If not filled, the default name will be considered." key="com.bluexml.side.Deployer.xforms.webappName" label="Webapp context name" />
+        </deployerVersion>
+      </technologyVersion>
+    </technology>
+  </extension>
 </plugin>
+
