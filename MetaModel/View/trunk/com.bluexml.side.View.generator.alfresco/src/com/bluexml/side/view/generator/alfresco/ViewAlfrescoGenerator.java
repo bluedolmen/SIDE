@@ -15,6 +15,10 @@ public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String GENERATOR_CODE = "CODE_GED_G_V_ALFRESCO_3";
 	public static String GENERATOR_OPTIONS_DOCLIST = "alfresco.view.doclist";
 
+	
+	public ViewAlfrescoGenerator() {
+		versionProperty="com.bluexml.side.View.generator.alfresco.module.version";
+	}
 	@Override
 	protected String getMetamodelURI() {
 		return MMUri;
