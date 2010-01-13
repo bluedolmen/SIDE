@@ -1,36 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <!--
  <copyright>
  </copyright>
 
  $Id$
 -->
-
 <plugin>
-
-   <extension point="org.eclipse.ui.newWizards">
-      <wizard
-            id="com.bluexml.side.application.presentation.ApplicationModelWizardID"
-            name="%_UI_ApplicationModelWizard_label"
-            class="com.bluexml.side.application.presentation.ApplicationModelWizard"
-            category="com.bluexml.side.modeler.category.ID"
-            icon="icons/full/obj16/ApplicationModelFile.gif">
-         <description>%_UI_ApplicationModelWizard_description</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
-
-   <extension point="org.eclipse.ui.editors">
-      <editor
-            id="com.bluexml.side.application.presentation.ApplicationEditorID"
-            name="%_UI_ApplicationEditor_label"
-            icon="icons/full/obj16/ApplicationModelFile.gif"
-            extensions="application"
-            class="com.bluexml.side.application.presentation.ApplicationEditor"
-            contributorClass="com.bluexml.side.application.presentation.ApplicationActionBarContributor">
-      </editor>
-   </extension>
-
+  <extension point="org.eclipse.ui.newWizards">
+    <wizard id="com.bluexml.side.application.presentation.ApplicationModelWizardID" name="%_UI_ApplicationModelWizard_label" class="com.bluexml.side.application.presentation.ApplicationModelWizard" category="com.bluexml.side.modeler.category.ID" icon="icons/full/obj16/ApplicationModelFile.gif">
+      <description>%_UI_ApplicationModelWizard_description</description>
+      <selection class="org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+  <extension point="org.eclipse.ui.editors">
+    <editor id="com.bluexml.side.application.presentation.ApplicationEditorID" name="%_UI_ApplicationEditor_label" icon="icons/full/obj16/ApplicationModelFile.gif" extensions="application" class="com.bluexml.side.application.presentation.ApplicationEditor" contributorClass="com.bluexml.side.application.presentation.ApplicationActionBarContributor" />
+  </extension>
 </plugin>
+
