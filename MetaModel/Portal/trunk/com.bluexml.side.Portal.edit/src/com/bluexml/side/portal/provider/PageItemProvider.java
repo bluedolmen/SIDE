@@ -72,6 +72,8 @@ public class PageItemProvider
 			addTitlePropertyDescriptor(object);
 			addUseLayoutPropertyDescriptor(object);
 			addPositionPropertyDescriptor(object);
+			addVisibilityPropertyDescriptor(object);
+			addGeneratePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -165,6 +167,50 @@ public class PageItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Visibility feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVisibilityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Page_visibility_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Page_visibility_feature", "_UI_Page_type"),
+				 PortalPackage.Literals.PAGE__VISIBILITY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Generate feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGeneratePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Page_generate_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Page_generate_feature", "_UI_Page_type"),
+				 PortalPackage.Literals.PAGE__GENERATE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -235,6 +281,8 @@ public class PageItemProvider
 			case PortalPackage.PAGE__ID:
 			case PortalPackage.PAGE__TITLE:
 			case PortalPackage.PAGE__POSITION:
+			case PortalPackage.PAGE__VISIBILITY:
+			case PortalPackage.PAGE__GENERATE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case PortalPackage.PAGE__PORTLETS:
