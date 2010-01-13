@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <technology
-            description="Make an .odt file."
-            id="opendocument"
-            name="OpenDocument"
-            url="http://www.odfalliance.org/">
-         <technologyVersion
-               id="opendocument1_2"
-               version="OpenDocument 1.2">
-            <deployerVersion
-                  class="com.bluexml.side.deployer.documentation.DocumentationDeployer"
-                  hidden="hidden and used by default"
-                  id="com.bluexml.side.Deployer.documentation"
-                  version="SIDE Documentation Deployer">
-            </deployerVersion>
-         </technologyVersion>
-      </technology>
-   </extension>
-
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <technology description="Make an .odt file." id="opendocument" name="OpenDocument" url="http://www.odfalliance.org/">
+      <technologyVersion id="opendocument1_2" version="OpenDocument 1.2">
+        <deployerVersion class="com.bluexml.side.deployer.documentation.DocumentationDeployer" hidden="hidden and used by default" id="com.bluexml.side.Deployer.documentation" version="SIDE Documentation Deployer" />
+      </technologyVersion>
+    </technology>
+  </extension>
 </plugin>
+
