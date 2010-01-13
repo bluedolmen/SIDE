@@ -1,96 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <metamodel
-            description="Check this to generate portal models on leading frameworks.&lt;br&gt; This Portal Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce class models and various generators to instantiate these models on leading frameworks."
-            id="http://www.kerblue.org/portal/1.0"
-            name="KSR200 Portal"
-            url="http://www.kerblue.org/portal/1.0">
-         <technology
-               description="Check this to generate your class models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports."
-               id="alfresco"
-               name="Alfresco"
-               url="http://www.alfresco.com">
-            <technologyVersion
-                  description="Check this to generate class models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release."
-                  id="alfresco_3.x"
-                  version="Alfresco3.x Labs and Entreprise">
-               <generatorVersion
-                     class="com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator"
-                     description="Check this to generate a full deployable Alfresco package containing the newly designed content model and other Alfresco artefacts.&lt;br&gt;The generated packages are standard Alfresco Module package which may be deployed in any Alfresco 3.x instance under the &apos;amps&apos; directory.&lt;br&gt;SIDE provides the necessary components to deploy these packages through the &apos;deployer&apos; tab."
-                     id="com.bluexml.side.Portal.generator.alfresco"
-                     version="SIDE Alfresco Portal Generator">
-                  <option
-                        defaultOption="true"
-                        key="com.bluexml.side.Portal.generator.alfresco.doclist"
-                        label="Alfresco Share document library component">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Integration.alfresco.shareDoclist"
-                           moduleType="zip"
-                           technologyVersion="alfresco_3.x"
-                           versionMin="1.0.0">
-                     </moduleDependence>
-                     <!--<mustBeUnchecked
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <metamodel description="Check this to generate portal models on leading frameworks.&lt;br&gt; This Portal Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce class models and various generators to instantiate these models on leading frameworks." id="http://www.kerblue.org/portal/1.0" name="KSR200 Portal" url="http://www.kerblue.org/portal/1.0">
+      <technology description="Check this to generate your class models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports." id="alfresco" name="Alfresco" url="http://www.alfresco.com">
+        <technologyVersion description="Check this to generate class models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.x" version="Alfresco3.x Labs and Entreprise">
+          <generatorVersion class="com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator" description="Check this to generate a full deployable Alfresco package containing the newly designed content model and other Alfresco artefacts.&lt;br&gt;The generated packages are standard Alfresco Module package which may be deployed in any Alfresco 3.x instance under the 'amps' directory.&lt;br&gt;SIDE provides the necessary components to deploy these packages through the 'deployer' tab." id="com.bluexml.side.Portal.generator.alfresco" version="SIDE Alfresco Portal Generator">
+            <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.doclist" label="Alfresco Share document library component">
+              <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.shareDoclist" moduleType="zip" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
+              <!--<mustBeUnchecked
                            pluginId="com.bluexml.side.Class.generator.alfresco">
                         <optionRef
                               optionId="alfrescoShare.defaultDocList">
                         </optionRef>
                      </mustBeUnchecked>-->
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Integration.alfresco.doclist"
-                           moduleType="amp"
-                           technologyVersion="alfresco_3.x"
-                           versionMin="1.0.2">
-                     </moduleDependence>
-                  </option>
-                  <option
-                        defaultOption="true"
-                        key="com.bluexml.side.Portal.generator.alfresco.forms"
-                        label="document details editing">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.framework.alfresco.formProcessor"
-                           moduleType="amp"
-                           technologyVersion="alfresco_3.x"
-                           versionMin="1.0.0">
-                     </moduleDependence>
-                  </option>
-                  <option
-                        key="com.bluexml.side.Portal.generator.alfresco.facetmap"
-                        label="facetMap integration">
-                  </option>
-                  <mustBeChecked
-                        pluginId="com.bluexml.side.Class.generator.alfresco">
-                     <optionRef
-                           optionId="alfresco.share.extension">
-                     </optionRef>
-                  </mustBeChecked>
-                  <moduleDependence
-                        moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension"
-                        moduleType="zip"
-                        technologyVersion="alfresco_3.x"
-                        versionMin="1.0.0">
-                  </moduleDependence>
-                  <option
-                        defaultOption="false"
-                        key="com.bluexml.side.Portal.generator.alfresco.xforms"
-                        label="XForms Integration">
-                  </option>
-                  <configurationParameter
-                        documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploye the 2 new Facet navigation components (menu and results list)."
-                        key="alfresco.share.url"
-                        label="Alfresco share URL">
-                  </configurationParameter>
-                  <configurationParameter
-                     documentation="Set the address to the webapp context, e.g. http://localhost:8080/xforms.&lt;br/&gt;This option is accessory as it is used for providing service URLs. If not given, default values will be used."
-                     key="com.bluexml.side.Form.generator.xforms.chiba.webappContext"
-                     label="XForm Webapp URL">
-               </configurationParameter>
-               </generatorVersion>
-            </technologyVersion>
-         </technology>
-      </metamodel>
-   </extension>
-
+              <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.doclist" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.2" />
+            </option>
+            <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.forms" label="document details editing">
+              <moduleDependence moduleId="com.bluexml.side.framework.alfresco.formProcessor" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
+            </option>
+            <option key="com.bluexml.side.Portal.generator.alfresco.facetmap" label="facetMap integration" />
+            <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco">
+              <optionRef optionId="alfresco.share.extension" />
+            </mustBeChecked>
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension" moduleType="zip" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
+            <option defaultOption="false" key="com.bluexml.side.Portal.generator.alfresco.xforms" label="XForms Integration" />
+            <configurationParameter documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploye the 2 new Facet navigation components (menu and results list)." key="alfresco.share.url" label="Alfresco share URL" />
+            <configurationParameter documentation="Set the address to the webapp context, e.g. http://localhost:8080/xforms.&lt;br/&gt;This option is accessory as it is used for providing service URLs. If not given, default values will be used." key="com.bluexml.side.Form.generator.xforms.chiba.webappContext" label="XForm Webapp URL" />
+          </generatorVersion>
+        </technologyVersion>
+      </technology>
+    </metamodel>
+  </extension>
 </plugin>
+
