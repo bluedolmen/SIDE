@@ -40,6 +40,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Portal.ecore#//Page/portlets"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Page/position"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Portal.ecore#//Page/isChildPageOf"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Page/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Page/generate"/>
     </genClasses>
     <genClasses ecoreClass="Portal.ecore#//PortalLayout">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//PortalLayout/name"/>

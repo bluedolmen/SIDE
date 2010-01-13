@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal;
 
+import com.bluexml.side.common.Visibility;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -22,6 +23,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.portal.Page#getPortlets <em>Portlets</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Page#getPosition <em>Position</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Page#getIsChildPageOf <em>Is Child Page Of</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.Page#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.Page#isGenerate <em>Generate</em>}</li>
  * </ul>
  * </p>
  *
@@ -175,5 +178,61 @@ public interface Page extends PortalModelElement {
 	 * @generated
 	 */
 	void setIsChildPageOf(isChildPage value);
+
+	/**
+	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
+	 * The literals are from the enumeration {@link com.bluexml.side.common.Visibility}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Visibility</em>' attribute.
+	 * @see com.bluexml.side.common.Visibility
+	 * @see #setVisibility(Visibility)
+	 * @see com.bluexml.side.portal.PortalPackage#getPage_Visibility()
+	 * @model
+	 * @generated
+	 */
+	Visibility getVisibility();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.portal.Page#getVisibility <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Visibility</em>' attribute.
+	 * @see com.bluexml.side.common.Visibility
+	 * @see #getVisibility()
+	 * @generated
+	 */
+	void setVisibility(Visibility value);
+
+	/**
+	 * Returns the value of the '<em><b>Generate</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Generate</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Generate</em>' attribute.
+	 * @see #setGenerate(boolean)
+	 * @see com.bluexml.side.portal.PortalPackage#getPage_Generate()
+	 * @model default="true"
+	 * @generated
+	 */
+	boolean isGenerate();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.portal.Page#isGenerate <em>Generate</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Generate</em>' attribute.
+	 * @see #isGenerate()
+	 * @generated
+	 */
+	void setGenerate(boolean value);
 
 } // Page

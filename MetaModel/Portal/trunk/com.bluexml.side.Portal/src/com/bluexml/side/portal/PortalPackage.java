@@ -399,13 +399,31 @@ public interface PortalPackage extends EPackage {
 	int PAGE__IS_CHILD_PAGE_OF = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__VISIBILITY = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Generate</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__GENERATE = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Page</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_FEATURE_COUNT = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 6;
+	int PAGE_FEATURE_COUNT = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.impl.PortalLayoutImpl <em>Layout</em>}' class.
@@ -1359,6 +1377,28 @@ public interface PortalPackage extends EPackage {
 	EReference getPage_IsChildPageOf();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.portal.Page#getVisibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Visibility</em>'.
+	 * @see com.bluexml.side.portal.Page#getVisibility()
+	 * @see #getPage()
+	 * @generated
+	 */
+	EAttribute getPage_Visibility();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.portal.Page#isGenerate <em>Generate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Generate</em>'.
+	 * @see com.bluexml.side.portal.Page#isGenerate()
+	 * @see #getPage()
+	 * @generated
+	 */
+	EAttribute getPage_Generate();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.portal.PortalLayout <em>Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2031,6 +2071,22 @@ public interface PortalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PAGE__IS_CHILD_PAGE_OF = eINSTANCE.getPage_IsChildPageOf();
+
+		/**
+		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PAGE__VISIBILITY = eINSTANCE.getPage_Visibility();
+
+		/**
+		 * The meta object literal for the '<em><b>Generate</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PAGE__GENERATE = eINSTANCE.getPage_Generate();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.portal.impl.PortalLayoutImpl <em>Layout</em>}' class.

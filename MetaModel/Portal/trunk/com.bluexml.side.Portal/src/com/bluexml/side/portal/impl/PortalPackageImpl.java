@@ -378,6 +378,24 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPage_Visibility() {
+		return (EAttribute)pageEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPage_Generate() {
+		return (EAttribute)pageEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPortalLayout() {
 		return portalLayoutEClass;
 	}
@@ -867,6 +885,8 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		createEReference(pageEClass, PAGE__PORTLETS);
 		createEAttribute(pageEClass, PAGE__POSITION);
 		createEReference(pageEClass, PAGE__IS_CHILD_PAGE_OF);
+		createEAttribute(pageEClass, PAGE__VISIBILITY);
+		createEAttribute(pageEClass, PAGE__GENERATE);
 
 		portalLayoutEClass = createEClass(PORTAL_LAYOUT);
 		createEAttribute(portalLayoutEClass, PORTAL_LAYOUT__NAME);
@@ -993,6 +1013,8 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		initEReference(getPage_Portlets(), this.getHavePortlet(), null, "portlets", null, 0, -1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPage_Position(), ecorePackage.getEInt(), "position", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPage_IsChildPageOf(), this.getisChildPage(), null, "isChildPageOf", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPage_Visibility(), theCommonPackage.getVisibility(), "visibility", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPage_Generate(), ecorePackage.getEBoolean(), "generate", "true", 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portalLayoutEClass, PortalLayout.class, "PortalLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPortalLayout_Name(), ecorePackage.getEString(), "name", null, 0, 1, PortalLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

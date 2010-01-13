@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal.impl;
 
+import com.bluexml.side.common.Visibility;
 import com.bluexml.side.portal.HavePortlet;
 import com.bluexml.side.portal.Page;
 import com.bluexml.side.portal.PortalLayout;
@@ -42,6 +43,8 @@ import org.eclipse.ocl.ecore.OCL;
  *   <li>{@link com.bluexml.side.portal.impl.PageImpl#getPortlets <em>Portlets</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PageImpl#getPosition <em>Position</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PageImpl#getIsChildPageOf <em>Is Child Page Of</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.impl.PageImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.impl.PageImpl#isGenerate <em>Generate</em>}</li>
  * </ul>
  * </p>
  *
@@ -137,6 +140,46 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 	 * @ordered
 	 */
 	protected isChildPage isChildPageOf;
+
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Visibility VISIBILITY_EDEFAULT = Visibility.PUBLIC;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility = VISIBILITY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isGenerate() <em>Generate</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isGenerate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean GENERATE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isGenerate() <em>Generate</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isGenerate()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean generate = GENERATE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -318,6 +361,48 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PAGE__VISIBILITY, oldVisibility, visibility));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isGenerate() {
+		return generate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGenerate(boolean newGenerate) {
+		boolean oldGenerate = generate;
+		generate = newGenerate;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PAGE__GENERATE, oldGenerate, generate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -350,6 +435,10 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 				return getPosition();
 			case PortalPackage.PAGE__IS_CHILD_PAGE_OF:
 				return getIsChildPageOf();
+			case PortalPackage.PAGE__VISIBILITY:
+				return getVisibility();
+			case PortalPackage.PAGE__GENERATE:
+				return isGenerate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -382,6 +471,12 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 			case PortalPackage.PAGE__IS_CHILD_PAGE_OF:
 				setIsChildPageOf((isChildPage)newValue);
 				return;
+			case PortalPackage.PAGE__VISIBILITY:
+				setVisibility((Visibility)newValue);
+				return;
+			case PortalPackage.PAGE__GENERATE:
+				setGenerate((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -412,6 +507,12 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 			case PortalPackage.PAGE__IS_CHILD_PAGE_OF:
 				setIsChildPageOf((isChildPage)null);
 				return;
+			case PortalPackage.PAGE__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
+			case PortalPackage.PAGE__GENERATE:
+				setGenerate(GENERATE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -436,6 +537,10 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 				return position != POSITION_EDEFAULT;
 			case PortalPackage.PAGE__IS_CHILD_PAGE_OF:
 				return isChildPageOf != null;
+			case PortalPackage.PAGE__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
+			case PortalPackage.PAGE__GENERATE:
+				return generate != GENERATE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -456,6 +561,10 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 		result.append(title);
 		result.append(", position: ");
 		result.append(position);
+		result.append(", visibility: ");
+		result.append(visibility);
+		result.append(", generate: ");
+		result.append(generate);
 		result.append(')');
 		return result.toString();
 	}
