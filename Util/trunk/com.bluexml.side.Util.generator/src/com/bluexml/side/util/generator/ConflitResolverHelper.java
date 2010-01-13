@@ -11,7 +11,7 @@ import org.eclipse.core.runtime.CoreException;
 
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
-
+@Deprecated
 public class ConflitResolverHelper {
 	String basePath = null;
 	String temporyFolderPath = null;
