@@ -779,6 +779,17 @@ public class Utils {
 						+ getVersionNumberPom(pom));
 			}
 			}
+		
+		if (listePomsModuleDepencies.size() != 0) {
+			System.out.println("\nListe des poms modifi�es suite mis a jour module: ");
+			for (String pom : listePomsModuleDepencies) {
+				String valeurf= pom;
+				String [] tab=valeurf.split("/S-IDE/");
+				System.out.println("\t- " + tab[1] + ": "
+						+ getVersionNumberPom(pom));
+			}
+			}
+
 
 		// affichage des donn�es
 		if (listePlugin.size() != 0) {
@@ -901,8 +912,7 @@ public class Utils {
 		boolean modifie=false;
 		
 		// chemin vers le plugin.xml
-		String fileFeaturePath = getPathToLocalCopy(element)
-		+ File.separator + "pom.xml";
+		String fileFeaturePath = element;
 		
 		boolean exists = (new File(fileFeaturePath)).exists();
 		if (exists) { 
@@ -936,9 +946,9 @@ public class Utils {
 
 		// On cr�e une List contenant tous les noeuds "moduleDependence" de
 		// l'Element racine
-		List<?> listDependencies = racine.getChildren("dependencies");
+		List<?> listDependencies = racine.getChildren();
 		
-
+	
 		// On cr�e un Iterator sur notre liste
 		Iterator<?> i = listDependencies.iterator();
 		
@@ -949,29 +959,58 @@ public class Utils {
 			// selectionner un noeud fils, modifier du texte, etc...
 			Element courant = (Element) i.next();
 			
-			List<?> listdependency = courant.getChildren("dependency");
-			Iterator<?> idependency = listdependency.iterator();
+			 if(courant.getName().equals("dependencies")){
+				 
+				 List<?> listDependency = courant.getChildren();
+					
+					
+					// On cr�e un Iterator sur notre liste
+					Iterator<?> iDependency = listDependency.iterator();
+					
+					while (iDependency.hasNext()) {
+						// On recr�e l'Element courant � chaque tour de boucle afin de
+						// pouvoir utiliser les m�thodes propres aux Element comme :
+						// selectionner un noeud fils, modifier du texte, etc...
+						Element courantDependency = (Element) iDependency.next();
+						
+						List<?> listDependent = courantDependency.getChildren();
+						
+						
+						// On cr�e un Iterator sur notre liste
+						Iterator<?> iDependent = listDependent.iterator();
+						
+						
+						if (iDependent.hasNext()) {
+							// On recr�e l'Element courant � chaque tour de boucle afin de
+							// pouvoir utiliser les m�thodes propres aux Element comme :
+							// selectionner un noeud fils, modifier du texte, etc...
+							Element courantDependent = (Element) iDependent.next();
+							String projectName;
+							if (courantDependent.getName().equals("groupId")){
+								projectName=courantDependent.getText();
+								if(module.contains(projectName)){
+									while (iDependent.hasNext()) {
+										Element courantDependentversion = (Element) iDependent.next();
+										if (courantDependentversion.getName().equals("artifactId")){
+											projectName=projectName+"."+courantDependentversion.getText();
+										}
+										if(courantDependentversion.getName().equals("version") && module.equals(projectName)){
+											courantDependentversion.setText(version);
+											modifie=true;
+										}
+									}
+								}
+									
+							}
+									
+						}
+						
+				
+				
+					}
+			 }
+				
 			
-			// on va parcourir tous les modules
-			while (idependency.hasNext()) {
-				// On recr�e l'Element courant � chaque tour de boucle afin de
-				// pouvoir utiliser les m�thodes propres aux Element comme :
-				// selectionner un noeud fils, modifier du texte, etc...
-				Element courantdependency = (Element) idependency.next();
-				
-				List<?> listgroupId = courantdependency.getChildren("groupId");
-				Iterator<?> igroupId = listgroupId.iterator();
-				Element courantgroupId = (Element) igroupId.next();
-				
-				if (courantgroupId.getText().equals(module)){
-					List<?> listversion = courantdependency.getChildren("version");
-					Iterator<?> iversion = listversion.iterator();
-					Element courantversion = (Element) iversion.next();
-					courantversion.setText(version);
-					modifie=true;
-				}
-				
-			}
 	
 		}
 		
