@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <technology
-            description="Check this to generate Facet navigation features associated to the designed objects of your data models.&lt;br&gt;Facet Navigation allows to drill drown through object categories.&lt;br&gt;SIDE allows to optimize the generation of the Facetmap components based on the newly designed objects of your data models."
-            id="Facetmap"
-            name="Facet Navigation"
-            url="http://facetmap.com/spec/facetmap2_0.dtd">
-         <technologyVersion
-               description="Check this to generate Facet navigation components on the major release 2 of the Facetmap library.&lt;br&gt;Facetmap 2.x is one of the more efficient and robust Facet navigation component which may be easily embedded in web application.&lt;br&gt;Additionally to content generation, SIDE provides the generated components to integrate Facet navigation features according to the designed application objects."
-               id="Facetmap_2.x"
-               version="Facetmap 2.x">
-            <deployerVersion
-                  class="com.bluexml.side.deployer.facetmap.FacetMapDeployer"
-                  id="com.bluexml.side.Deployer.facetMap"
-                  version="SIDE Facetmap Deployer">
-               <configurationParameter
-                     documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
-                     key="CATALINA_HOME"
-                     label="Tomcat installation directory">
-               </configurationParameter>
-               <option
-                     defaultOption="true"
-                     documentation="Check this option if you want to completely remove previous deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time."
-                     key="com.bluexml.side.Deployer.facetMap.clean"
-                     label="clean webapp">
-               </option>
-            </deployerVersion>
-         </technologyVersion>
-      </technology>
-   </extension>
-
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <technology description="Check this to generate Facet navigation features associated to the designed objects of your data models.&lt;br&gt;Facet Navigation allows to drill drown through object categories.&lt;br&gt;SIDE allows to optimize the generation of the Facetmap components based on the newly designed objects of your data models." id="Facetmap" name="Facet Navigation" url="http://facetmap.com/spec/facetmap2_0.dtd">
+      <technologyVersion description="Check this to generate Facet navigation components on the major release 2 of the Facetmap library.&lt;br&gt;Facetmap 2.x is one of the more efficient and robust Facet navigation component which may be easily embedded in web application.&lt;br&gt;Additionally to content generation, SIDE provides the generated components to integrate Facet navigation features according to the designed application objects." id="Facetmap_2.x" version="Facetmap 2.x">
+        <deployerVersion class="com.bluexml.side.deployer.facetmap.FacetMapDeployer" id="com.bluexml.side.Deployer.facetMap" version="SIDE Facetmap Deployer">
+          <configurationParameter documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;" key="CATALINA_HOME" label="Tomcat installation directory" />
+          <option defaultOption="true" documentation="Check this option if you want to completely remove previous deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time." key="com.bluexml.side.Deployer.facetMap.clean" label="clean webapp" />
+        </deployerVersion>
+      </technologyVersion>
+    </technology>
+  </extension>
 </plugin>
+
