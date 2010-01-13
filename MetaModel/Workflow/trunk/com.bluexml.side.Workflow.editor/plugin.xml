@@ -1,41 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <!--
  <copyright>
  </copyright>
 
  $Id$
 -->
-
 <plugin>
-
-
-<!--  <extension-->
-<!--    point = "org.eclipse.ui.newWizards">-->
-<!--    <category-->
-<!--      id = "com.bluexml.side.modeler.category.ID"-->
-<!--      name="%_UI_Wizard_category">-->
-<!--    </category>-->
-<!--    <wizard-->
-<!--      id = "com.bluexml.side.workflow.presentation.WorkflowModelWizardID"-->
-<!--      name = "%_UI_WorkflowModelWizard_label"-->
-<!--      class = "com.bluexml.side.workflow.presentation.WorkflowModelWizard"-->
-<!--      category = "com.bluexml.side.modeler.category.ID"-->
-<!--      icon = "icons/full/obj16/WorkflowModelFile.gif">-->
-<!--      <description>%_UI_WorkflowModelWizard_description</description>-->
-<!--      <selection class = "org.eclipse.core.resources.IResource" />-->
-<!--    </wizard>-->
-<!--  </extension>-->
-
-  <extension point = "org.eclipse.ui.editors">
-    <editor
-        id = "com.bluexml.side.workflow.presentation.WorkflowEditorID"
-        name = "%_UI_WorkflowEditor_label"
-        icon = "icons/full/obj16/WorkflowModelFile.gif"
-        extensions = "workflow"
-        class = "com.bluexml.side.workflow.presentation.WorkflowEditor" 
-        contributorClass="com.bluexml.side.workflow.presentation.WorkflowActionBarContributor" >
-    </editor>
+  <!--  <extension-->
+  <!--    point = "org.eclipse.ui.newWizards">-->
+  <!--    <category-->
+  <!--      id = "com.bluexml.side.modeler.category.ID"-->
+  <!--      name="%_UI_Wizard_category">-->
+  <!--    </category>-->
+  <!--    <wizard-->
+  <!--      id = "com.bluexml.side.workflow.presentation.WorkflowModelWizardID"-->
+  <!--      name = "%_UI_WorkflowModelWizard_label"-->
+  <!--      class = "com.bluexml.side.workflow.presentation.WorkflowModelWizard"-->
+  <!--      category = "com.bluexml.side.modeler.category.ID"-->
+  <!--      icon = "icons/full/obj16/WorkflowModelFile.gif">-->
+  <!--      <description>%_UI_WorkflowModelWizard_description</description>-->
+  <!--      <selection class = "org.eclipse.core.resources.IResource" />-->
+  <!--    </wizard>-->
+  <!--  </extension>-->
+  <extension point="org.eclipse.ui.editors">
+    <editor id="com.bluexml.side.workflow.presentation.WorkflowEditorID" name="%_UI_WorkflowEditor_label" icon="icons/full/obj16/WorkflowModelFile.gif" extensions="workflow" class="com.bluexml.side.workflow.presentation.WorkflowEditor" contributorClass="com.bluexml.side.workflow.presentation.WorkflowActionBarContributor" />
   </extension>
 </plugin>
+
