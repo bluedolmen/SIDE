@@ -26,6 +26,7 @@ public class CustomCChain extends CChain {
 	}
 
 	public void launch(IGenFilter genFilter, IProgressMonitor monitor, LaunchManager mode) throws CoreException {
+		
 		if (mode.isProfiling()) {
 			TemplateElement.getProfiler().start(getFile());
 		}

@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -55,7 +57,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	protected final String projectName = ".side_generation"; //$NON-NLS-1$
 	private static final String DEFAULT_ENCODING = "ISO-8859-1"; //$NON-NLS-1$
 	private String fileEncoding = System.getProperty("file.encoding"); //$NON-NLS-1$
-	protected static final String versionProperty = null;
+	protected String versionProperty = null;
 
 	/**
 	 * use to give an version number to this generation package
@@ -113,7 +115,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 					// update IFolder
 					IFileHelper.refreshFolder(wkdir);
 					if (!result) {
-						monitor.getLog().addWarningLog(Activator.Messages.getString("AbstractAcceleoGenerator_7"), Activator.Messages.getString("AbstractAcceleoGenerator_8"), "");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
+						monitor.getLog().addWarningLog(Activator.Messages.getString("AbstractAcceleoGenerator_7"), Activator.Messages.getString("AbstractAcceleoGenerator_8"), ""); //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
 					}
 				}
 				// generate
@@ -127,20 +129,19 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		if (models.size() == 1) {
 			return models.get(0);
 		} else {
-			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_10"), "");  //$NON-NLS-1$//$NON-NLS-2$
+			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_10"), ""); //$NON-NLS-1$//$NON-NLS-2$
 			// create resource for merged file
 			IPath p = models.get(0).getParent().getFullPath();
 			p = p.append(mergedFilePath + "." + models.get(0).getFileExtension()); //$NON-NLS-1$
 			IFile mergedIFile = IFileHelper.getIFile(p);
 			// do merge
 			MergeUtils.merge(mergedIFile, models, this.getClass().getClassLoader());
-			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_13"), "");  //$NON-NLS-1$//$NON-NLS-2$
+			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_13"), ""); //$NON-NLS-1$//$NON-NLS-2$
 			return mergedIFile;
 		}
 	}
 
 	public Collection<IFile> generate(IFile model) throws Exception {
-
 		// System.out.println("Generate IFile model");
 
 		// References to files in the project
@@ -349,6 +350,15 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 	protected List<IFile> searchForConflict() {
 		return getCresolver().searchForConflict(generatedFiles);
+	}
+
+
+	public static String getProperty(String key, String defaultValue) throws FileNotFoundException, IOException {
+		String result =getGenerationParameter(key);
+		if ( result== null || result.equals("")) {
+			result=defaultValue;
+		}
+		return result;
 	}
 
 }
