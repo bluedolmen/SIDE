@@ -1,74 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
-
-   <extension point="org.eclipse.ui.editors">
-      <editor
-            class="com.bluexml.side.Class.modeler.editor.ClazzEditor"
-            icon="icons/Clazz.gif"
-            default="true"
-            name="Data Modeler"
-            id="com.bluexml.side.Class.modeler.editor.ClazzEditor"
-            contributorClass="com.bluexml.side.Class.modeler.actions.ClazzEditorActionBarContributor"
-            extensions="dtdi">
-      </editor>
-   </extension>
-   
-   <extension point="org.eclipse.ui.newWizards">
-      <wizard
-            icon="icons/Clazz.gif"
-            class="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams"
-            category="com.bluexml.side.modeler.category.ID"
-            name="Side Data Diagram"
-            id="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams">
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
-   
-   <extension point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension targetID="org.topcased.modeler.perspective">
-         <newWizardShortcut id="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams"/>
-      </perspectiveExtension>
-   </extension>
-   
-   <extension point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.topcased.modeler.preferences.ModelerPreferencePage"
-            class="com.bluexml.side.Class.modeler.preferences.ClazzPreferencePage"
-            id="com.bluexml.side.Class.modeler.preferences.ClazzPreferencePage"
-            name="Clazz"/>
-   </extension>
-   
-	<extension point="org.eclipse.ui.propertyPages">
-		<page
-			id="com.bluexml.side.Class.modeler.preferences.property.ClazzPreferencePage"
-			class="com.bluexml.side.Class.modeler.preferences.ClazzPreferencePage"
-			category="org.topcased.modeler.preferences.property.ModelerPreferencePage"
-			name="Clazz">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-	</extension>
-   
-   	<extension point="org.eclipse.core.runtime.preferences">
-		<initializer class="com.bluexml.side.Class.modeler.preferences.AllDiagramPreferenceInitializer"/>
-	</extension>
-	 <extension point="org.topcased.modeler.templates">
-      <template
-            di="templates/diagram/%name%.dtdi"
-            model="templates/diagram/%name%.dt"
-            name="Data Diagram"
-            id="com.bluexml.side.Class.modeler.templates.diagram"
-            editorId="com.bluexml.side.Class.modeler.editor.ClazzEditor"/>
-   </extension>
-	
-   <extension point="org.topcased.modeler.diagrams">
-      <diagram
-            configuration="com.bluexml.side.Class.modeler.diagram.CdConfiguration"
-            id="com.bluexml.side.Class.modeler.diagram"
-            name="Data Diagram">
-            	<enableFor class="com.bluexml.side.clazz.ClassPackage"/>
-      </diagram>
-	</extension>
+  <extension point="org.eclipse.ui.editors">
+    <editor class="com.bluexml.side.Class.modeler.editor.ClazzEditor" icon="icons/Clazz.gif" default="true" name="Data Modeler" id="com.bluexml.side.Class.modeler.editor.ClazzEditor" contributorClass="com.bluexml.side.Class.modeler.actions.ClazzEditorActionBarContributor" extensions="dtdi" />
+  </extension>
+  <extension point="org.eclipse.ui.newWizards">
+    <wizard icon="icons/Clazz.gif" class="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams" category="com.bluexml.side.modeler.category.ID" name="Side Data Diagram" id="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams">
+      <selection class="org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+  <extension point="org.eclipse.ui.perspectiveExtensions">
+    <perspectiveExtension targetID="org.topcased.modeler.perspective">
+      <newWizardShortcut id="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams" />
+    </perspectiveExtension>
+  </extension>
+  <extension point="org.eclipse.ui.preferencePages">
+    <page category="org.topcased.modeler.preferences.ModelerPreferencePage" class="com.bluexml.side.Class.modeler.preferences.ClazzPreferencePage" id="com.bluexml.side.Class.modeler.preferences.ClazzPreferencePage" name="Clazz" />
+  </extension>
+  <extension point="org.eclipse.ui.propertyPages">
+    <page id="com.bluexml.side.Class.modeler.preferences.property.ClazzPreferencePage" class="com.bluexml.side.Class.modeler.preferences.ClazzPreferencePage" category="org.topcased.modeler.preferences.property.ModelerPreferencePage" name="Clazz">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+  </extension>
+  <extension point="org.eclipse.core.runtime.preferences">
+    <initializer class="com.bluexml.side.Class.modeler.preferences.AllDiagramPreferenceInitializer" />
+  </extension>
+  <extension point="org.topcased.modeler.templates">
+    <template di="templates/diagram/%name%.dtdi" model="templates/diagram/%name%.dt" name="Data Diagram" id="com.bluexml.side.Class.modeler.templates.diagram" editorId="com.bluexml.side.Class.modeler.editor.ClazzEditor" />
+  </extension>
+  <extension point="org.topcased.modeler.diagrams">
+    <diagram configuration="com.bluexml.side.Class.modeler.diagram.CdConfiguration" id="com.bluexml.side.Class.modeler.diagram" name="Data Diagram">
+      <enableFor class="com.bluexml.side.clazz.ClassPackage" />
+    </diagram>
+  </extension>
 </plugin>
+
