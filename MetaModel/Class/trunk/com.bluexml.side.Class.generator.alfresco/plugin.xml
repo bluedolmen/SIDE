@@ -1,34 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <metamodel
-            description="Check this to generate data models on leading frameworks.&lt;br&gt; This Data Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce data models and various generators to instantiate these models on leading frameworks."
-            id="http://www.kerblue.org/class/1.0"
-            name="KSR500 Data"
-            url="http://www.kerblue.org/v2/ksr500-class/">
-         <technology
-               description="Check this to generate your Data models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports."
-               id="alfresco"
-               name="Alfresco"
-               url="http://www.alfresco.com">
-            <technologyVersion
-                  description="Check this to generate data models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release."
-                  id="alfresco_3.x"
-                  version="Alfresco3.x Labs and Enterprise">
-               <generatorVersion
-                     class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator"
-                     description="Check this to generate a full deployable Alfresco package containing the newly designed content types and other Alfresco artefacts.&lt;br&gt;The generated packages are standard Alfresco Module package which may be deployed in any Alfresco 3.x instance.&lt;br&gt;SIDE provides the necessary components to deploy these packages through the &apos;deployer&apos; tab."
-                     id="com.bluexml.side.Class.generator.alfresco"
-                     version="SIDE Content Model Generator for Alfresco">
-                  <configurationParameter
-                        documentation="Set this value to the version of the generated AMPs, default value is &apos;1.0&apos;.&lt;br&gt;At Alfresco start, the version is displayed in the console and may easily be checked to ensure good production deployment."
-                        key="com.bluexml.side.Class.generator.alfresco.module.version"
-                        label="Class Module version">
-                  </configurationParameter>
-                  <!--<option
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <metamodel description="Check this to generate data models on leading frameworks.&lt;br&gt; This Data Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce data models and various generators to instantiate these models on leading frameworks." id="http://www.kerblue.org/class/1.0" name="KSR500 Data" url="http://www.kerblue.org/v2/ksr500-class/">
+      <technology description="Check this to generate your Data models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports." id="alfresco" name="Alfresco" url="http://www.alfresco.com">
+        <technologyVersion description="Check this to generate data models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.x" version="Alfresco3.x Labs and Enterprise">
+          <generatorVersion class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator" description="Check this to generate a full deployable Alfresco package containing the newly designed content types and other Alfresco artefacts.&lt;br&gt;The generated packages are standard Alfresco Module package which may be deployed in any Alfresco 3.x instance.&lt;br&gt;SIDE provides the necessary components to deploy these packages through the 'deployer' tab." id="com.bluexml.side.Class.generator.alfresco" version="SIDE Content Model Generator for Alfresco">
+            <configurationParameter documentation="Set this value to the version of the generated AMPs, default value is '1.0'.&lt;br&gt;At Alfresco start, the version is displayed in the console and may easily be checked to ensure good production deployment." key="com.bluexml.side.Class.generator.alfresco.module.version" label="Class Module version" />
+            <!--<option
                         documentation="Check this option to generate a default view for the document list of the Alfresco Share Document Library page."
                         key="alfrescoShare.defaultDocList"
                         label="Alfresco Share docList (default views)">
@@ -51,101 +30,33 @@
                      </moduleDependence>
                   </option>
                   -->
-                  <option
-                        defaultOption="true"
-                        documentation="Check this option to include the production of the Alfresco Share&apos;s module extension in the generation.&lt;br&gt;If not checked, the extension modules are not included in the generated AMPs.&lt;br&gt;SIDE provides extension modules to Alfresco Share in order to view and edit all the metadata of the newly generated content model."
-                        key="alfresco.share.extension"
-                        label="Alfresco Share Extension">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Integration.alfresco.upload"
-                           moduleType="amp"
-                           technologyVersion="alfresco_3.x"
-                           versionMin="1.0.0">
-                     </moduleDependence>
-                  </option>
-                  <option
-                        documentation="Check this option to include the production of the Alfresco&apos;s report webscripts in the generation.&lt;br&gt;If not checked, the webscripts report are not included in the generated AMPs.&lt;br&gt;SIDE allows to configure the Alfresco&apos;s report webscripts with the newly designed content types of the data model."
-                        key="alfresco.webscript.report"
-                        label="Alfresco Report Webscripts">
-                  </option>
-                  <configurationParameter
-                        documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model."
-                        key="alfresco.url"
-                        label="Alfresco URL">
-                  </configurationParameter>
-                  <option
-                        documentation="Check this option to include the SIDE SQL extension module for Alfresco.&lt;br&gt;This module provides the synchronisation of alfresco data into a relational database.&lt;br&gt; Queries with joins can thus be performed."
-                        key="com.bluexml.side.Class.generator.alfresco.sql"
-                        label="Alfresco SQL">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Integration.alfresco.sql"
-                           moduleType="amp"
-                           technologyVersion="alfresco_3.x"
-                           versionMin="1.0.0">
-                     </moduleDependence>
-                  </option>
-                  <moduleDependence
-                        moduleId="com.bluexml.side.Integration.alfresco.model"
-                        moduleType="amp"
-                        technologyVersion="alfresco_3.x"
-                        versionMin="1.0.0">
-                  </moduleDependence>
-                  <moduleDependence
-                        moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement"
-                        moduleType="amp"
-                        technologyVersion="alfresco_3.x"
-                        versionMin="1.0.0">
-                  </moduleDependence>
-                  <option
-                        documentation="Check this option to include the production of the Alfresco&apos;s common webscripts in the generation.&lt;br&gt;If not checked, the webscripts are not included in the generated AMPs.&lt;br&gt;"
-                        key="alfresco.webscripts.common"
-                        label="Alfresco Common Webscripts">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Integration.alfresco.xforms"
-                           moduleType="amp"
-                           technologyVersion="alfresco_3.x"
-                           versionMin="1.0.1">
-                     </moduleDependence>
-                  </option>
-                  <option
-                        documentation="Generates random data regarding the current Alfresco model. The generated ACP can be imported and reused accross various Alfresco installations."
-                        key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator"
-                        label="Alfresco Random Data Generator">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Framework.alfresco.dataGenerator"
-                           moduleType="amp"
-                           technologyVersion="alfresco_3.x"
-                           versionMin="1.0.0">
-                     </moduleDependence>
-                  </option>
-                  <option
-                        defaultOption="false"
-                        documentation="additional module to check if created/updated items already exists, in this case the update or creation is forbidden"
-                        key="alfresco.unicity"
-                        label="Content Type Unicity">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Framework.alfresco.unicity"
-                           moduleType="amp"
-                           technologyVersion="alfresco_3.x"
-                           versionMin="1.0.0">
-                     </moduleDependence>
-                  </option>
-                  <option
-                        defaultOption="false"
-                        key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript"
-                        label="Alfresco FacetMap Extension">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap"
-                           moduleType="amp"
-                           technologyVersion="alfresco_3.x"
-                           versionMin="1.0.0">
-                     </moduleDependence>
-                  </option>
-               </generatorVersion>
-            </technologyVersion>
-         </technology>
-      </metamodel>
-      <!--to test sort order
+            <option defaultOption="true" documentation="Check this option to include the production of the Alfresco Share's module extension in the generation.&lt;br&gt;If not checked, the extension modules are not included in the generated AMPs.&lt;br&gt;SIDE provides extension modules to Alfresco Share in order to view and edit all the metadata of the newly generated content model." key="alfresco.share.extension" label="Alfresco Share Extension">
+              <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.upload" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
+            </option>
+            <option documentation="Check this option to include the production of the Alfresco's report webscripts in the generation.&lt;br&gt;If not checked, the webscripts report are not included in the generated AMPs.&lt;br&gt;SIDE allows to configure the Alfresco's report webscripts with the newly designed content types of the data model." key="alfresco.webscript.report" label="Alfresco Report Webscripts" />
+            <configurationParameter documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
+            <option documentation="Check this option to include the SIDE SQL extension module for Alfresco.&lt;br&gt;This module provides the synchronisation of alfresco data into a relational database.&lt;br&gt; Queries with joins can thus be performed." key="com.bluexml.side.Class.generator.alfresco.sql" label="Alfresco SQL">
+              <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.sql" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.11" versionMax="1.1.11" />
+            </option>
+            <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
+            <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
+            <option documentation="Check this option to include the production of the Alfresco's common webscripts in the generation.&lt;br&gt;If not checked, the webscripts are not included in the generated AMPs.&lt;br&gt;" key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
+              <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.1" />
+            </option>
+            <option documentation="Generates random data regarding the current Alfresco model. The generated ACP can be imported and reused accross various Alfresco installations." key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator" label="Alfresco Random Data Generator">
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.24" versionMax="1.0.24" />
+            </option>
+            <option defaultOption="false" documentation="additional module to check if created/updated items already exists, in this case the update or creation is forbidden" key="alfresco.unicity" label="Content Type Unicity">
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
+            </option>
+            <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" label="Alfresco FacetMap Extension">
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
+            </option>
+          </generatorVersion>
+        </technologyVersion>
+      </technology>
+    </metamodel>
+    <!--to test sort order
       <metamodel
             id="zefdsfd"
             name="AAA"
@@ -289,6 +200,6 @@
             </technologyVersion>
          </technology>
       </metamodel>-->
-   </extension>
-
+  </extension>
 </plugin>
+
