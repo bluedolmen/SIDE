@@ -1,37 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-  <extension
-        point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           id="com.bluexml.side.Class.edit.ui.contribution1"
-           nameFilter="*.dt"
-           objectClass="org.eclipse.core.resources.IFile">
-        <menu
-              id="com.bluexml.side.Class.edit.ui.editor.menu1"
-              label="S-IDE"
-              path="additions">
-           <separator
-                 name="group1">
-           </separator>
-        </menu>
-        <action
-              class="com.bluexml.side.clazz.edit.ui.actions.InitializeFormModel"
-              enablesFor="1"
-              icon="icons/menu/initializeFormModel.png"
-              id="com.bluexml.side.Class.edit.ui..editor.newAction"
-              label="Initialize Form Model"
-              menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1">
-        </action>
-        <action
-              class="com.bluexml.side.clazz.edit.ui.actions.InitializeViewModel"
-              enablesFor="1"
-              icon="icons/menu/initializeFormModel.png"
-              id="com.bluexml.side.Class.edit.ui.action1"
-              label="Initialize View Model"
-              menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1">
-        </action>
-     </objectContribution>
+  <extension point="org.eclipse.ui.popupMenus">
+    <objectContribution id="com.bluexml.side.Class.edit.ui.contribution1" nameFilter="*.dt" objectClass="org.eclipse.core.resources.IFile">
+      <menu id="com.bluexml.side.Class.edit.ui.editor.menu1" label="S-IDE" path="additions">
+        <separator name="group1" />
+      </menu>
+      <action class="com.bluexml.side.clazz.edit.ui.actions.InitializeFormModel" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Class.edit.ui..editor.newAction" label="Initialize Form Model" menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1" />
+      <action class="com.bluexml.side.clazz.edit.ui.actions.InitializeViewModel" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Class.edit.ui.action1" label="Initialize View Model" menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1" />
+    </objectContribution>
   </extension>
-
 </plugin>
+
