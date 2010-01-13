@@ -1,40 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <metamodel
-            id="http://www.kerblue.org/view/1.0"
-            name="KSR300 View"
-            url="http://www.kerblue.org/v2/ksr300-view/">
-         <technology
-               description="Check this to generate your view models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports."
-               id="alfresco"
-               name="Alfresco"
-               url="http://www.alfresco.com">
-            <technologyVersion
-                  description="Check this to generate view models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content, form and view generation, SIDE provides useful server components to enhance some features of this release."
-                  id="alfresco_3.x"
-                  version="Alfresco3.x Labs and Entreprise">
-               <generatorVersion
-                     class="com.bluexml.side.view.generator.alfresco.ViewAlfrescoGenerator"
-                     description="Check this to generate a full deployable Alfresco package containing the newly designed views and other Alfresco artefacts.&lt;br&gt;The generated packages are standard Alfresco Module package which may be deployed in any Alfresco 3.x instance.&lt;br&gt;SIDE provides the necessary components to deploy these packages through the &apos;deployer&apos; tab."
-                     id="com.bluexml.side.View.generator.alfresco"
-                     version="SIDE View Generator for Alfresco Share">
-                  <configurationParameter
-                        documentation="Set this value to the version of the generated AMPs, default value is &apos;1.0&apos;.&lt;br&gt;At Alfresco start, the version is displayed in the console and may easily be checked to ensure good production deployment."
-                        key="com.bluexml.side.View.generator.alfresco.module.version"
-                        label="View Module version">
-                  </configurationParameter>
-                  <configurationParameter
-                        documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploye the 2 new Facet navigation components (menu and results list)."
-                        key="alfresco.share.url"
-                        label="Alfresco share URL">
-                  </configurationParameter>
-               </generatorVersion>
-            </technologyVersion>
-         </technology>
-      </metamodel>
-   </extension>
-
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <metamodel id="http://www.kerblue.org/view/1.0" name="KSR300 View" url="http://www.kerblue.org/v2/ksr300-view/">
+      <technology description="Check this to generate your view models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports." id="alfresco" name="Alfresco" url="http://www.alfresco.com">
+        <technologyVersion description="Check this to generate view models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content, form and view generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.x" version="Alfresco3.x Labs and Entreprise">
+          <generatorVersion class="com.bluexml.side.view.generator.alfresco.ViewAlfrescoGenerator" description="Check this to generate a full deployable Alfresco package containing the newly designed views and other Alfresco artefacts.&lt;br&gt;The generated packages are standard Alfresco Module package which may be deployed in any Alfresco 3.x instance.&lt;br&gt;SIDE provides the necessary components to deploy these packages through the 'deployer' tab." id="com.bluexml.side.View.generator.alfresco" version="SIDE View Generator for Alfresco Share">
+            <configurationParameter documentation="Set this value to the version of the generated AMPs, default value is '1.0'.&lt;br&gt;At Alfresco start, the version is displayed in the console and may easily be checked to ensure good production deployment." key="com.bluexml.side.View.generator.alfresco.module.version" label="View Module version" />
+            <configurationParameter documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploye the 2 new Facet navigation components (menu and results list)." key="alfresco.share.url" label="Alfresco share URL" />
+          </generatorVersion>
+        </technologyVersion>
+      </technology>
+    </metamodel>
+  </extension>
 </plugin>
+
