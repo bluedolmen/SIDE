@@ -1,102 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-
-   <extension
-         id="application"
-         point="org.eclipse.core.runtime.applications">
-      <application>
-         <run
-               class="com.bluexml.side.Integration.eclipse.branding.Application">
-         </run>
-      </application>
-   </extension>
-   <extension
-         id="perspective"
-         name="%extension.name"
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            class="com.bluexml.side.Integration.eclipse.branding.Perspective"
-            icon="icons/perspective_icon.png"
-            id="com.bluexml.side.Integration.eclipse.branding.perspective"
-            name="%perspective.name">
-      </perspective>
-   </extension>
-   <extension
-         id="product"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="org.eclipse.ui.ide.workbench"
-            
-            name="%product.name">
-            <!--  application="com.bluexml.side.app.application"  -->
-         <property
-               name="windowImages"
-               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
-         </property>
-         <property
-          name="appName" 
-          value="SIDE"/>
-          <property
-          name="aboutImage" 
-          value="icons/about.gif"/>
-          
-          <property
-          name="aboutText" 
-          value="SIDE by http://www.bluexml.com"/>
-          
-         
-      </product>
-   </extension>
-   <extension
-         point="org.eclipse.ui.intro">
-      <intro
-            class="org.eclipse.ui.intro.config.CustomizableIntroPart"
-            id="com.bluexml.side.Integration.eclipse.branding.intro">
-      </intro>
-      <introProductBinding
-            introId="com.bluexml.side.app.intro"
-            productId="com.bluexml.side.app.product">
-      </introProductBinding>
-   </extension>
-   <extension
-         point="org.eclipse.ui.intro.config">
-      <config
-            introId="com.bluexml.side.Integration.eclipse.branding.intro"
-            content="introContent.xml"
-            id="com.bluexml.side.Integration.eclipse.branding.configId">
-         <presentation
-               home-page-id="root">
-            <implementation
-                  kind="html"
-                  os="win32,linux,macosx">
-            </implementation>
-         </presentation>
-      </config>
-   </extension>
-   <extension
-         id="wizard"
-         name="%extension.name.0"
-         point="org.eclipse.ui.newWizards">
-      <wizard
-            category="com.bluexml.side.modeler.category.ID"
-            class="com.bluexml.side.Integration.eclipse.branding.Wizard"
-            finalPerspective="com.bluexml.side.Integration.eclipse.branding.perspective"
-            hasPages="true"
-            icon="icons/newProject.png"
-            id="com.bluexml.side.Integration.eclipse.branding.wizard"
-            name="%wizard.name"
-            project="true">
-      </wizard>
-      <category
-            id="com.bluexml.side.modeler.category.ID"
-            name="%category.name">
-      </category>
-      <category
-            id="com.bluexml.side.Intregation.eclipse.branding.category.example"
-            name="%category.name.0"
-            parentCategory="com.bluexml.side.Intregation.eclipse.branding.category">
-      </category>
-   </extension>
-
+  <extension id="application" point="org.eclipse.core.runtime.applications">
+    <application>
+      <run class="com.bluexml.side.Integration.eclipse.branding.Application" />
+    </application>
+  </extension>
+  <extension id="perspective" name="%extension.name" point="org.eclipse.ui.perspectives">
+    <perspective class="com.bluexml.side.Integration.eclipse.branding.Perspective" icon="icons/perspective_icon.png" id="com.bluexml.side.Integration.eclipse.branding.perspective" name="%perspective.name" />
+  </extension>
+  <extension id="product" point="org.eclipse.core.runtime.products">
+    <product application="org.eclipse.ui.ide.workbench" name="%product.name">
+      <!--  application="com.bluexml.side.app.application"  -->
+      <property name="windowImages" value="icons/alt_window_16.gif,icons/alt_window_32.gif" />
+      <property name="appName" value="SIDE" />
+      <property name="aboutImage" value="icons/about.gif" />
+      <property name="aboutText" value="SIDE by http://www.bluexml.com" />
+    </product>
+  </extension>
+  <extension point="org.eclipse.ui.intro">
+    <intro class="org.eclipse.ui.intro.config.CustomizableIntroPart" id="com.bluexml.side.Integration.eclipse.branding.intro" />
+    <introProductBinding introId="com.bluexml.side.app.intro" productId="com.bluexml.side.app.product" />
+  </extension>
+  <extension point="org.eclipse.ui.intro.config">
+    <config introId="com.bluexml.side.Integration.eclipse.branding.intro" content="introContent.xml" id="com.bluexml.side.Integration.eclipse.branding.configId">
+      <presentation home-page-id="root">
+        <implementation kind="html" os="win32,linux,macosx" />
+      </presentation>
+    </config>
+  </extension>
+  <extension id="wizard" name="%extension.name.0" point="org.eclipse.ui.newWizards">
+    <wizard category="com.bluexml.side.modeler.category.ID" class="com.bluexml.side.Integration.eclipse.branding.Wizard" finalPerspective="com.bluexml.side.Integration.eclipse.branding.perspective" hasPages="true" icon="icons/newProject.png" id="com.bluexml.side.Integration.eclipse.branding.wizard" name="%wizard.name" project="true" />
+    <category id="com.bluexml.side.modeler.category.ID" name="%category.name" />
+    <category id="com.bluexml.side.Intregation.eclipse.branding.category.example" name="%category.name.0" parentCategory="com.bluexml.side.Intregation.eclipse.branding.category" />
+  </extension>
 </plugin>
+
