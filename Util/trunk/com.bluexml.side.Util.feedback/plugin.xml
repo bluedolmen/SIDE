@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="com.bluexml.side.Application.ui.PreferencePage"
-            class="com.bluexml.side.util.feedback.ui.SideSettingsFeedbackPreferencesPage"
-            id="com.bluexml.side.Util.feedback.preferences"
-            name="Feedback">
-      </page>
-      <page
-            category="com.bluexml.side.Application.ui.PreferencePage"
-            class="com.bluexml.side.util.feedback.ui.SideSettingFeedbackTermOfUsePage"
-            id="com.bluexml.side.Util.feedback.termOfUse"
-            name="Term Of Use">
-      </page>
-   </extension>
+  <extension point="org.eclipse.ui.preferencePages">
+    <page category="com.bluexml.side.Application.ui.PreferencePage" class="com.bluexml.side.util.feedback.ui.SideSettingsFeedbackPreferencesPage" id="com.bluexml.side.Util.feedback.preferences" name="Feedback" />
+    <page category="com.bluexml.side.Application.ui.PreferencePage" class="com.bluexml.side.util.feedback.ui.SideSettingFeedbackTermOfUsePage" id="com.bluexml.side.Util.feedback.termOfUse" name="Term Of Use" />
+  </extension>
 </plugin>
+
