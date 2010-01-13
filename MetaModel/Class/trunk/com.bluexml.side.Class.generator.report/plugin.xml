@@ -1,52 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <metamodel
-            description="Check this to generate data models on leading frameworks.&lt;br&gt; This DataMetamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce data models and various generators to instantiate these models on leading frameworks."
-            id="http://www.kerblue.org/class/1.0"
-            name="KSR500 Data"
-            url="http://www.kerblue.org/v2/ksr500-class/">
-         <technology
-               description="Check this to generate predefined reports associated to the designed objects of your data models.&lt;br&gt;At runtime, these reports may be instantiated using the Birt report execution environment. These reports may also be customized using the Birt report designer.&lt;br&gt;SIDE allows to optimize the generation of reports useful to follow up the lifecycle of the newly designed objects of your application."
-               id="birt"
-               name="Birt"
-               url="http://www.eclipse.org/birt/">
-            <technologyVersion
-                  description="Check this to generate reports on the release 2.3 of the Birt reporting tool.&lt;br&gt;Birt 2.3.x is the leading open source reporting tool which may be easily embedded in web framework like Alfresco.&lt;br&gt;Additionally to content generation, SIDE provides the generated reports to follow up the lifecycle of the designed objects."
-                  id="Birt_2.3.x"
-                  version="Birt_2.3.x">
-               <generatorVersion
-                     class="com.bluexml.side.clazz.generator.report.ReportGenerator"
-                     description="Check this to generate the Birt reports to integrate  to your application.&lt;br&gt;The generated reports may be deployed in any Birt runtime environment and they load data from an Alfresco repository.&lt;br&gt;SIDE provides the necessary components to deploy these reprorts through the &apos;deployer&apos; tab on a Birt runtime environement."
-                     id="com.bluexml.side.Class.generator.report"
-                     version="SIDE Birt Report Generator for Alfresco">
-                  <configurationParameter
-                        documentation="Set this value to name of the author of the report.&lt;br&gt;The author name will be inserted in the generated report templates."
-                        key="report.author"
-                        label="Author">
-                  </configurationParameter>
-                  <configurationParameter
-                        documentation="Set this value to the URL of birt webapp.&lt;br&gt;For instance, &quot;http://localhost:8080/birt&quot;."
-                        key="birt.webapp"
-                        label="Birt webapp url">
-                  </configurationParameter>
-                  <configurationParameter
-                        documentation="Set this value to the URL of the Alfresco instance on which has been generated and deployed the content types from the SIDE data model on which is based the Birt report."
-                        key="alfresco.url"
-                        label="Alfresco URL">
-                  </configurationParameter>
-                  <mustBeChecked
-                        pluginId="com.bluexml.side.Class.generator.alfresco">
-                     <optionRef
-                           optionId="alfresco.webscript.report">
-                     </optionRef>
-                  </mustBeChecked>
-               </generatorVersion>
-            </technologyVersion>
-         </technology>
-      </metamodel>
-   </extension>
-
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <metamodel description="Check this to generate data models on leading frameworks.&lt;br&gt; This DataMetamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce data models and various generators to instantiate these models on leading frameworks." id="http://www.kerblue.org/class/1.0" name="KSR500 Data" url="http://www.kerblue.org/v2/ksr500-class/">
+      <technology description="Check this to generate predefined reports associated to the designed objects of your data models.&lt;br&gt;At runtime, these reports may be instantiated using the Birt report execution environment. These reports may also be customized using the Birt report designer.&lt;br&gt;SIDE allows to optimize the generation of reports useful to follow up the lifecycle of the newly designed objects of your application." id="birt" name="Birt" url="http://www.eclipse.org/birt/">
+        <technologyVersion description="Check this to generate reports on the release 2.3 of the Birt reporting tool.&lt;br&gt;Birt 2.3.x is the leading open source reporting tool which may be easily embedded in web framework like Alfresco.&lt;br&gt;Additionally to content generation, SIDE provides the generated reports to follow up the lifecycle of the designed objects." id="Birt_2.3.x" version="Birt_2.3.x">
+          <generatorVersion class="com.bluexml.side.clazz.generator.report.ReportGenerator" description="Check this to generate the Birt reports to integrate  to your application.&lt;br&gt;The generated reports may be deployed in any Birt runtime environment and they load data from an Alfresco repository.&lt;br&gt;SIDE provides the necessary components to deploy these reprorts through the 'deployer' tab on a Birt runtime environement." id="com.bluexml.side.Class.generator.report" version="SIDE Birt Report Generator for Alfresco">
+            <configurationParameter documentation="Set this value to name of the author of the report.&lt;br&gt;The author name will be inserted in the generated report templates." key="report.author" label="Author" />
+            <configurationParameter documentation="Set this value to the URL of birt webapp.&lt;br&gt;For instance, &quot;http://localhost:8080/birt&quot;." key="birt.webapp" label="Birt webapp url" />
+            <configurationParameter documentation="Set this value to the URL of the Alfresco instance on which has been generated and deployed the content types from the SIDE data model on which is based the Birt report." key="alfresco.url" label="Alfresco URL" />
+            <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco">
+              <optionRef optionId="alfresco.webscript.report" />
+            </mustBeChecked>
+          </generatorVersion>
+        </technologyVersion>
+      </technology>
+    </metamodel>
+  </extension>
 </plugin>
+
