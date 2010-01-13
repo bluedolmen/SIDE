@@ -120,6 +120,9 @@ public class ModuleConstraint {
 		} else {
 			close = exclusiveMax;
 		}
+		if (min.equals(max)) {
+			return min;
+		}
 		return open + min + "," + max + close;
 	}
 
