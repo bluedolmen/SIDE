@@ -1,141 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <metamodel
-            description="Check this to generate requirements models on leading frameworks."
-            id="http://www.kerblue.org/requirements/1.0"
-            name="KSR100 Requirements"
-            url="http://www.kerblue.org/v2/ksr100-requirements/">
-         <technology
-               description="A mind map is a diagram used to represent words, ideas, tasks, or other items linked to and arranged around a central key word or idea. Mind maps are used to generate, visualize, structure, and classify ideas, and as an aid in study, organization, problem solving, decision making, and writing."
-               id="mindmap"
-               name="MindMap"
-               url="http://en.wikipedia.org/wiki/Mind_map">
-            <technologyVersion
-                  description="FreeMind is a premier free mind-mapping software written in Java."
-                  id="freemind"
-                  version="FreeMind">
-               <generatorVersion
-                     class="com.bluexml.side.requirements.generator.FreeMindGenerator"
-                     id="com.bluexml.side.Requirements.generator.freemind"
-                     version="FreeMind generator 1.0.0">
-                  <option
-                        key="com.bluexml.side.Requirements.generator.mindmap.freemind.agentList"
-                        label="List of agents">
-                  </option>
-                  <option
-                        key="com.bluexml.side.Requirements.generator.mindmap.freemind.entityList"
-                        label="List of entities">
-                  </option>
-                  <option
-                        key="com.bluexml.side.Requirements.generator.mindmap.freemind.goalList"
-                        label="List of goals">
-                  </option>
-                  <option
-                        key="com.bluexml.side.Requirements.generator.mindmap.freemind.entityListByAgent"
-                        label="List of entities by agent">
-                  </option>
-                  <option
-                        key="com.bluexml.side.Requirements.generator.mindmap.freemind.goalListByAgent"
-                        label="List of goals by agent">
-                  </option>
-               </generatorVersion>
-            </technologyVersion>
-         </technology>
-         <technology
-               id="office"
-               name="Office Document">
-            <technologyVersion
-                  id="office_excel"
-                  version="Excel Document">
-               <generatorVersion
-                     class="com.bluexml.side.requirements.generator.ExcelGenerator"
-                     id="com.bluexml.side.Requirements.generator.excel"
-                     version="Excel Generator">
-                  <option
-                        key="com.bluexml.side.Requirements.generator.office.excel.riskAnalysis"
-                        label="Risk analysis">
-                  </option>
-                  <option
-                        key="com.bluexml.side.Requirements.generator.office.excel.diagnostic"
-                        label="Diagnostic">
-                  </option>
-               </generatorVersion>
-            </technologyVersion>
-         </technology>
-         <technology
-               id="webproject"
-               name="Web Project">
-            <technologyVersion
-                  id="webproject_1_0"
-                  version="Web Project 1.0">
-               <generatorVersion
-                     class="com.bluexml.side.requirements.generator.WebProjectGenerator"
-                     id="com.bluexml.side.Requirements.generator.webproject"
-                     version="PHP Web Project">
-               </generatorVersion>
-            </technologyVersion>
-         </technology>
-         <technology
-               id="opendocument"
-               name="Open Document">
-            <technologyVersion
-                  id="opendocument_writer"
-                  version="Open Document Writer">
-               <generatorVersion
-                     class="com.bluexml.side.requirements.generator.DocumentationGenerator"
-                     id="com.bluexml.side.Requirements.generator.doc"
-                     version="Documentation Generator">
-               </generatorVersion>
-            </technologyVersion>
-         </technology>
-      </metamodel>
-   </extension>
-   <extension
-         point="org.eclipse.emf.ecore.generated_package">
-      <package
-            class="com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapPackage"
-            genModel="src/interpretation/mindmap/mindmap.genmodel"
-            uri="http://www.bluexml.com/rwm/mindmap/1.0/">
-      </package>
-      <package
-            class="com.bluexml.side.requirements.generator.metamodel.Risk.RiskPackage"
-            genModel="src/interpretation/risk/risk.genmodel"
-            uri="http://www.bluexml.com/rwm/risk/1.0/">
-      </package>
-      <package
-            class="com.bluexml.side.requirements.generator.metamodel.Diagnostic.DiagnosticPackage"
-            genModel="src/interpretation/diagnostic/diagnostic.genmodel"
-            uri="http://www.bluexml.com/rwm/diagnostic/1.0/">
-      </package>
-      <package
-            class="com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectPackage"
-            genModel="src/interpretation/webproject/webproject.genmodel"
-            uri="http://www.bluexml.com/rwm/webproject/1.0/">
-      </package>
-      <package
-            class="com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage"
-            genModel="src/interpretation/documentation/documentation.genmodel"
-            uri="http://www.bluexml.com/rwm/documentation/1.0/">
-      </package>
-   </extension>
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            id="com.bluexml.side.Requirements.generator.contribution1"
-            nameFilter="*.requirements"
-            objectClass="org.eclipse.core.resources.IFile">
-         <action
-               class="com.bluexml.side.requirements.generator.actions.ExportSIDEModels"
-               enablesFor="1"
-               icon="icons/document-export.gif"
-               id="com.bluexml.side.Requirements.generator.newAction"
-               label="Export SIDE models"
-               menubarPath="com.bluexml.side/requirements">
-         </action>
-      </objectContribution>
-   </extension>
-
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <metamodel description="Check this to generate requirements models on leading frameworks." id="http://www.kerblue.org/requirements/1.0" name="KSR100 Requirements" url="http://www.kerblue.org/v2/ksr100-requirements/">
+      <technology description="A mind map is a diagram used to represent words, ideas, tasks, or other items linked to and arranged around a central key word or idea. Mind maps are used to generate, visualize, structure, and classify ideas, and as an aid in study, organization, problem solving, decision making, and writing." id="mindmap" name="MindMap" url="http://en.wikipedia.org/wiki/Mind_map">
+        <technologyVersion description="FreeMind is a premier free mind-mapping software written in Java." id="freemind" version="FreeMind">
+          <generatorVersion class="com.bluexml.side.requirements.generator.FreeMindGenerator" id="com.bluexml.side.Requirements.generator.freemind" version="FreeMind generator 1.0.0">
+            <option key="com.bluexml.side.Requirements.generator.mindmap.freemind.agentList" label="List of agents" />
+            <option key="com.bluexml.side.Requirements.generator.mindmap.freemind.entityList" label="List of entities" />
+            <option key="com.bluexml.side.Requirements.generator.mindmap.freemind.goalList" label="List of goals" />
+            <option key="com.bluexml.side.Requirements.generator.mindmap.freemind.entityListByAgent" label="List of entities by agent" />
+            <option key="com.bluexml.side.Requirements.generator.mindmap.freemind.goalListByAgent" label="List of goals by agent" />
+          </generatorVersion>
+        </technologyVersion>
+      </technology>
+      <technology id="office" name="Office Document">
+        <technologyVersion id="office_excel" version="Excel Document">
+          <generatorVersion class="com.bluexml.side.requirements.generator.ExcelGenerator" id="com.bluexml.side.Requirements.generator.excel" version="Excel Generator">
+            <option key="com.bluexml.side.Requirements.generator.office.excel.riskAnalysis" label="Risk analysis" />
+            <option key="com.bluexml.side.Requirements.generator.office.excel.diagnostic" label="Diagnostic" />
+          </generatorVersion>
+        </technologyVersion>
+      </technology>
+      <technology id="webproject" name="Web Project">
+        <technologyVersion id="webproject_1_0" version="Web Project 1.0">
+          <generatorVersion class="com.bluexml.side.requirements.generator.WebProjectGenerator" id="com.bluexml.side.Requirements.generator.webproject" version="PHP Web Project" />
+        </technologyVersion>
+      </technology>
+      <technology id="opendocument" name="Open Document">
+        <technologyVersion id="opendocument_writer" version="Open Document Writer">
+          <generatorVersion class="com.bluexml.side.requirements.generator.DocumentationGenerator" id="com.bluexml.side.Requirements.generator.doc" version="Documentation Generator" />
+        </technologyVersion>
+      </technology>
+    </metamodel>
+  </extension>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package class="com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapPackage" genModel="src/interpretation/mindmap/mindmap.genmodel" uri="http://www.bluexml.com/rwm/mindmap/1.0/" />
+    <package class="com.bluexml.side.requirements.generator.metamodel.Risk.RiskPackage" genModel="src/interpretation/risk/risk.genmodel" uri="http://www.bluexml.com/rwm/risk/1.0/" />
+    <package class="com.bluexml.side.requirements.generator.metamodel.Diagnostic.DiagnosticPackage" genModel="src/interpretation/diagnostic/diagnostic.genmodel" uri="http://www.bluexml.com/rwm/diagnostic/1.0/" />
+    <package class="com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectPackage" genModel="src/interpretation/webproject/webproject.genmodel" uri="http://www.bluexml.com/rwm/webproject/1.0/" />
+    <package class="com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage" genModel="src/interpretation/documentation/documentation.genmodel" uri="http://www.bluexml.com/rwm/documentation/1.0/" />
+  </extension>
+  <extension point="org.eclipse.ui.popupMenus">
+    <objectContribution id="com.bluexml.side.Requirements.generator.contribution1" nameFilter="*.requirements" objectClass="org.eclipse.core.resources.IFile">
+      <action class="com.bluexml.side.requirements.generator.actions.ExportSIDEModels" enablesFor="1" icon="icons/document-export.gif" id="com.bluexml.side.Requirements.generator.newAction" label="Export SIDE models" menubarPath="com.bluexml.side/requirements" />
+    </objectContribution>
+  </extension>
 </plugin>
+
