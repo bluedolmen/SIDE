@@ -1,65 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
- <extension
-       id="com.bluexml.application.ui"
-       name="Manage Configuration"
-       point="org.eclipse.ui.popupMenus">
-    <objectContribution
-          id="com.bluexml.application.ui.createGeneration"
-          nameFilter="*.application"
-          objectClass="org.eclipse.core.resources.IFile">
-       <action
-             class="com.bluexml.side.application.ui.action.CreateGenerationConfiguration"
-             enablesFor="1"
-             icon="icon/manage.png"
-             id="com.bluexml.application.ui.createGeneration"
-             label="Manage Configuration"
-             menubarPath="com.bluexml.side/application">
-       </action>
-       <menu
-             icon="icon/side_16.gif"
-             id="com.bluexml.side"
-             label="SIDE"
-             path="additions">
-          <separator
-                name="application">
-          </separator>
-       </menu>
+  <extension id="com.bluexml.application.ui" name="Manage Configuration" point="org.eclipse.ui.popupMenus">
+    <objectContribution id="com.bluexml.application.ui.createGeneration" nameFilter="*.application" objectClass="org.eclipse.core.resources.IFile">
+      <action class="com.bluexml.side.application.ui.action.CreateGenerationConfiguration" enablesFor="1" icon="icon/manage.png" id="com.bluexml.application.ui.createGeneration" label="Manage Configuration" menubarPath="com.bluexml.side/application" />
+      <menu icon="icon/side_16.gif" id="com.bluexml.side" label="SIDE" path="additions">
+        <separator name="application" />
+      </menu>
     </objectContribution>
- </extension>
-     <extension point = "org.eclipse.ui.popupMenus">
-      <objectContribution
-         	objectClass="org.eclipse.core.resources.IFile"
-        	adaptable="true"
-        	nameFilter="*.application"
-            id="com.bluexml.application.ui.generate">
-         <action
-               label="Launch Generation"
-               style="pulldown"
-               class="com.bluexml.side.application.ui.menu.DynamicMenuAction"
-               menubarPath="com.bluexml.side/application"
-               enablesFor="+"
-               icon="icon/launch.png"
-               id="com.bluexml.application.ui.generate">
-         </action>
-         <menu
-               icon="icon/side_16.gif"
-               id="com.bluexml.side"
-               label="SIDE"
-               path="additions">
-            <separator
-                  name="application">
-            </separator>
-         </menu>
-      </objectContribution>
-    </extension>
-     <extension
-           point="org.eclipse.ui.preferencePages">
-        <page
-              class="com.bluexml.side.application.ui.preferencePages.PreferencePageSide"
-              id="com.bluexml.side.Application.ui.PreferencePage"
-              name="SIDE">
-        </page>
-     </extension>
+  </extension>
+  <extension point="org.eclipse.ui.popupMenus">
+    <objectContribution objectClass="org.eclipse.core.resources.IFile" adaptable="true" nameFilter="*.application" id="com.bluexml.application.ui.generate">
+      <action label="Launch Generation" style="pulldown" class="com.bluexml.side.application.ui.menu.DynamicMenuAction" menubarPath="com.bluexml.side/application" enablesFor="+" icon="icon/launch.png" id="com.bluexml.application.ui.generate" />
+      <menu icon="icon/side_16.gif" id="com.bluexml.side" label="SIDE" path="additions">
+        <separator name="application" />
+      </menu>
+    </objectContribution>
+  </extension>
+  <extension point="org.eclipse.ui.preferencePages">
+    <page class="com.bluexml.side.application.ui.preferencePages.PreferencePageSide" id="com.bluexml.side.Application.ui.PreferencePage" name="SIDE" />
+  </extension>
 </plugin>
+
