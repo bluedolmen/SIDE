@@ -30,7 +30,7 @@
 		below as the AMP module version. Instead we use the
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
-  <version>1.0.15</version>
+  <version>1.0.16</version>
   <description>A webscript that lists the document of a certain type. It is used by facetmap to browse documents</description>
   <repositories />
   <pluginRepositories />
