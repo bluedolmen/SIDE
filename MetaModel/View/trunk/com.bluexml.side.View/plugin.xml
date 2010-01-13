@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <!--
  <copyright>
  </copyright>
 
  $Id$
 -->
-
 <plugin>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            class="com.bluexml.side.view.ViewPackage"
-            genModel="model/view.genmodel"
-            uri="http://www.kerblue.org/view/1.0"/>
-   </extension>
-   <extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="com.bluexml.side.view.util.ViewResourceFactory"
-            type="view">
-      </parser>
-   </extension>
-
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package class="com.bluexml.side.view.ViewPackage" genModel="model/view.genmodel" uri="http://www.kerblue.org/view/1.0" />
+  </extension>
+  <extension point="org.eclipse.emf.ecore.extension_parser">
+    <parser class="com.bluexml.side.view.util.ViewResourceFactory" type="view" />
+  </extension>
 </plugin>
+
