@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <!--
  <copyright>
  </copyright>
 
  $Id$
 -->
-
 <plugin>
-
   <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.kerblue.org/portal/1.0" 
-       class = "com.bluexml.side.portal.PortalPackage"
-       genModel = "model/Portal.genmodel" /> 
+    <package uri="http://www.kerblue.org/portal/1.0" class="com.bluexml.side.portal.PortalPackage" genModel="model/Portal.genmodel" />
   </extension>
-  <extension
-        point="org.eclipse.emf.ecore.extension_parser">
-     <parser
-           class="com.bluexml.side.portal.util.PortalResourceFactory"
-           type="portal">
-     </parser>
+  <extension point="org.eclipse.emf.ecore.extension_parser">
+    <parser class="com.bluexml.side.portal.util.PortalResourceFactory" type="portal" />
   </extension>
-
 </plugin>
+
