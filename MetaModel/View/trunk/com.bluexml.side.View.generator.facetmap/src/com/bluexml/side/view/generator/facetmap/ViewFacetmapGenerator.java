@@ -46,6 +46,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 
 	public ViewFacetmapGenerator() {
 		techVersion = "Facetmap_2.x"; //$NON-NLS-1$
+		versionProperty="";
 		this.setTEMP_FOLDER(getTechVersion());
 	}
 
