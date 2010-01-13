@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Deployer.alfresco.feature" label="SIDE Alfresco Deployer" version="1.0.26.v11672-20091126" provider-name="BlueXML">
+<feature id="com.bluexml.side.Deployer.alfresco.feature" label="SIDE Alfresco Deployer" version="1.0.27.v12759-20100113" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the deployment of generated or developed extensions on specialized
 frameworks like Alfresco. This feature allows to deploy extensions on Alfresco instances using Alfresco deployment standard procedure.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
@@ -14,6 +14,6 @@ frameworks like Alfresco. This feature allows to deploy extensions on Alfresco i
     <import plugin="com.bluexml.side.Util.security" version="1.0.8" match="greaterOrEqual" />
     <import plugin="com.bluexml.side.Util.deployer.war" version="1.0.0" match="greaterOrEqual" />
   </requires>
-  <plugin id="com.bluexml.side.Deployer.alfresco" download-size="0" install-size="0" version="1.0.41.v11672-20091126" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.alfresco" download-size="0" install-size="0" version="1.0.42.v12759-20100113" unpack="false" />
 </feature>
 
