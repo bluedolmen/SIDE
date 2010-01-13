@@ -672,6 +672,7 @@ public class Utils {
 		
 		// mettre a jour les plugins avec les versions des pom.xml
 		// ajouter les plugins modifier dans la listePlugin
+		ArrayList<String> listePomsModuleDepencies = new ArrayList<String>();
 		if (listeProjetPoms.size() != 0) {
 			for (String pom : listeProjetPoms) {
 				String versionPom= getVersionNumberPom(pom);
@@ -680,6 +681,7 @@ public class Utils {
 				String valeur2=tab[0];
 				String nomPom=valeur2.substring(valeur2.lastIndexOf("/")+1);
 				
+				//fixer les versions des fichiers plugin.xml
 				for (String element : projects) {
 					
 						if (element.indexOf("feature") == -1) {
@@ -697,8 +699,58 @@ public class Utils {
 						}
 				}
 				
+				
+				//fixer les versions des fichier pom.xml
+				
+				for (String element : listefichierpom) { 
+						
+					//si contient reference pom alors modifie max version
+					// et ajouter a la liste listePlugin
+					boolean ajouter=updatePomModuleDependencies(element, nomPom, versionPom);
+					if (ajouter){
+						if (listeProjetPoms.indexOf(element) == -1){
+							listePomsModuleDepencies.add(element);
+						}	
+					}	
+				}
+				
 			}
+		}
+		
+		//mettre a jour les pom.xml modifiers
+		// On parcours la liste des pom et on les met a jour
+		for (String pomModuleDepencies : listePomsModuleDepencies) {
+			updateVersionNumberPom(pomModuleDepencies);
+
+		}
+		
+		if (listePomsModuleDepencies.size() != 0) {
+			for (String pom : listePomsModuleDepencies) {
+				String versionPom= getVersionNumberPom(pom);
+				String valeurf= pom;
+				String [] tab=valeurf.split("/pom.xm");
+				String valeur2=tab[0];
+				String nomPom=valeur2.substring(valeur2.lastIndexOf("/")+1);
+				
+				//fixer les versions des fichiers plugin.xml
+				for (String element : projects) {
+					
+						if (element.indexOf("feature") == -1) {
+							
+							//si contient reference pom alors modifie max version
+							// et ajouter a la liste listePlugin
+							boolean ajouter=updatePluginModuleDependencies(element, nomPom, versionPom);
+							if (ajouter){
+								if (listePlugin.indexOf(element) == -1){
+									listePlugin.add(element);
+								}
+									
+							}	
+						
+						}
+				}
 			}
+		}
 		
 		
 		
@@ -837,6 +889,109 @@ public class Utils {
 
 	}
 
+	
+	/**
+	 * Update the version number of the modules in the files pom.xml
+	 * 
+	 * 
+	 * @param projectName
+	 */
+	public static boolean updatePomModuleDependencies(String element, String module, String version) {
+		
+		boolean modifie=false;
+		
+		// chemin vers le plugin.xml
+		String fileFeaturePath = getPathToLocalCopy(element)
+		+ File.separator + "pom.xml";
+		
+		boolean exists = (new File(fileFeaturePath)).exists();
+		if (exists) { 
+
+		org.jdom.Document document = null;
+		org.jdom.Element racine;
+
+		// On cr�e une instance de SAXBuilder
+		SAXBuilder sxb = new SAXBuilder();
+
+		try {
+			// On cr�e un nouveau document JDOM avec en argument le fichier
+			// XML
+			document = sxb.build(new File(fileFeaturePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// On initialise un nouvel �l�ment racine avec l'�l�ment racine du
+		// document.
+		racine = document.getRootElement();
+
+		// On va maintenant mettre a jour les num�ro de version des plugins
+		// associ�s a la feature
+
+		// on garde en m�moire l'ancien num�ro de version du plugin pour
+		// savoir s'il a changer et ainsi savoir s'il faut changer ou non le
+		// num�ro de version de la feature
+
+		
+
+		// On cr�e une List contenant tous les noeuds "moduleDependence" de
+		// l'Element racine
+		List<?> listDependencies = racine.getChildren("dependencies");
+		
+
+		// On cr�e un Iterator sur notre liste
+		Iterator<?> i = listDependencies.iterator();
+		
+		// on va parcourir tous les modules
+		while (i.hasNext()) {
+			// On recr�e l'Element courant � chaque tour de boucle afin de
+			// pouvoir utiliser les m�thodes propres aux Element comme :
+			// selectionner un noeud fils, modifier du texte, etc...
+			Element courant = (Element) i.next();
+			
+			List<?> listdependency = courant.getChildren("dependency");
+			Iterator<?> idependency = listdependency.iterator();
+			
+			// on va parcourir tous les modules
+			while (idependency.hasNext()) {
+				// On recr�e l'Element courant � chaque tour de boucle afin de
+				// pouvoir utiliser les m�thodes propres aux Element comme :
+				// selectionner un noeud fils, modifier du texte, etc...
+				Element courantdependency = (Element) idependency.next();
+				
+				List<?> listgroupId = courantdependency.getChildren("groupId");
+				Iterator<?> igroupId = listgroupId.iterator();
+				Element courantgroupId = (Element) igroupId.next();
+				
+				if (courantgroupId.getText().equals(module)){
+					List<?> listversion = courantdependency.getChildren("version");
+					Iterator<?> iversion = listversion.iterator();
+					Element courantversion = (Element) iversion.next();
+					courantversion.setText(version);
+					modifie=true;
+				}
+				
+			}
+	
+		}
+		
+		if (modifie){
+			// Enregistrement du fichier
+				try {
+					XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+					sortie.output(document, new FileOutputStream(fileFeaturePath));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+		
+		return modifie;
+	}
 	
 	
 	
@@ -986,21 +1141,25 @@ public class Utils {
 			//	courant.setAttribute("versionMax", version);
 			//	modifie=true;
 			//}
-			
-
-		// Enregistrement du fichier
-		try {
-			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-			sortie.output(document, new FileOutputStream(fileFeaturePath));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 	
 		}
+		
+		if (modifie){
+		// Enregistrement du fichier
+			try {
+				XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+				sortie.output(document, new FileOutputStream(fileFeaturePath));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
+	}
+		
+		
 	return modifie;
 		
 	}
