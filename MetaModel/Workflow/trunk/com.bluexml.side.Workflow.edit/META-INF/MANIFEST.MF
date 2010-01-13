@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.bluexml.side.Workflow.edit; singleton:=true
-Bundle-Version: 1.0.39.v11885-20091202
+Bundle-Version: 1.0.40.v12759-20100113
 Bundle-ClassPath: .
 Bundle-Activator: com.bluexml.side.workflow.provider.WorkflowEditPlugin$Implementation
 Bundle-Vendor: %providerName
