@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <!--
  <copyright>
  </copyright>
 
  $Id$
 -->
-
 <plugin>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.kerblue.org/requirements/1.0"
-            class="com.bluexml.side.requirements.RequirementsPackage"
-            genModel="model/requirements.genmodel"/>
-   </extension>
-   <extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="com.bluexml.side.requirements.util.RequirementsResourceFactory"
-            type="requirements">
-      </parser>
-   </extension>
-
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package uri="http://www.kerblue.org/requirements/1.0" class="com.bluexml.side.requirements.RequirementsPackage" genModel="model/requirements.genmodel" />
+  </extension>
+  <extension point="org.eclipse.emf.ecore.extension_parser">
+    <parser class="com.bluexml.side.requirements.util.RequirementsResourceFactory" type="requirements" />
+  </extension>
 </plugin>
+
