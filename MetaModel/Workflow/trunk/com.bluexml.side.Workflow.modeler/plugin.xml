@@ -1,156 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
-   <extension-point id="action" name="Transition Action" schema="schema/action.exsd"/>
-
-   <extension point="org.eclipse.ui.editors">
-      <editor
-            class="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor"
-            icon="icons/Editor.gif"
-            default="true"
-            name="Workflow modeler"
-            id="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor"
-            contributorClass="com.bluexml.side.Workflow.modeler.actions.WorkflowEditorActionBarContributor"
-            extensions="workflowdi">
-      </editor>
-   </extension>
-   
-   <extension point="org.eclipse.ui.newWizards">
-      <wizard
-            icon="icons/Editor.gif"
-            class="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams"
-            category="com.bluexml.side.modeler.category.ID"
-            name="Side Workflow Diagram"
-            id="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams">
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
-   
-   <extension point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension targetID="org.topcased.modeler.perspective">
-         <newWizardShortcut id="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams"/>
-      </perspectiveExtension>
-   </extension>
-   
-   <extension point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.topcased.modeler.preferences.ModelerPreferencePage"
-            class="com.bluexml.side.Workflow.modeler.preferences.WorkflowPreferencePage"
-            id="com.bluexml.side.Workflow.modeler.preferences.WorkflowPreferencePage"
-            name="Workflow"/>
-   </extension>
-   
-	<extension point="org.eclipse.ui.propertyPages">
-		<page
-			id="com.bluexml.side.Workflow.modeler.preferences.property.WorkflowPreferencePage"
-			class="com.bluexml.side.Workflow.modeler.preferences.WorkflowPreferencePage"
-			category="org.topcased.modeler.preferences.property.ModelerPreferencePage"
-			name="Workflow">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-	</extension>
-   
-   	<extension point="org.eclipse.core.runtime.preferences">
-		<initializer class="com.bluexml.side.Workflow.modeler.preferences.AllDiagramPreferenceInitializer"/>
-	</extension>
-
- <extension point="org.topcased.modeler.templates">
-      <template
-            di="templates/diagram/%name%.workflowdi"
-            model="templates/diagram/%name%.workflow"
-            name="Workflow"
-            id="com.bluexml.side.Workflow.modeler.templates.diagram"
-            editorId="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor"/>
-   </extension>
-   
-   <extension point="org.topcased.modeler.diagrams">
-      <diagram
-            configuration="com.bluexml.side.Workflow.modeler.diagram.WfConfiguration"
-            id="com.bluexml.side.Workflow.modeler.diagram"
-            name="Workflow">
-            <enableFor
-                  class="com.bluexml.side.workflow.Process">
-            </enableFor>
-      </diagram>
-	</extension>
-	
-	
-	<extension
-       point="org.topcased.modeler.topcasedPreferenceInitializer">
-    <preferenceInitializer
-          class="com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramTopcasedPreferenceInitializer"
-          editorId="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor"
-          id="com.bluexml.side.Workflow.modeler.diagram.preferences.WfTopcasedPreferenceInitializer">
-    </preferenceInitializer>
- </extension>
-
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			id="com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferencePage"
-			category="com.bluexml.side.Workflow.modeler.preferences.WorkflowPreferencePage"
-			class="com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferencePage"
-			name="WfDiagram"/>
-		<page
-			id="com.bluexml.side.Workflow.modeler.diagram.preferences.StartStatePreferencePage"
-			category="com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferencePage"
-			class="com.bluexml.side.Workflow.modeler.diagram.preferences.StartStatePreferencePage"
-			name="StartState"/>
-	</extension>
-
-	<extension point="org.eclipse.ui.propertyPages">
-		<page
-			id="com.bluexml.side.Workflow.modeler.diagram.preferences.property.WfDiagramPreferencePage"
-			category="com.bluexml.side.Workflow.modeler.preferences.property.WorkflowPreferencePage"
-			class="com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferencePage"
-			name="WfDiagram">       
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-		
-		<page
-			id="com.bluexml.side.Workflow.modeler.diagram.preferences.property.StartStatePreferencePage"
-			category="com.bluexml.side.Workflow.modeler.diagram.preferences.property.WfDiagramPreferencePage"
-			class="com.bluexml.side.Workflow.modeler.diagram.preferences.StartStatePreferencePage"
-			name="StartState">
-			<enabledWhen>
-				<adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-		</page>
-    	
-	</extension>
- <extension
-       point="com.bluexml.side.Workflow.modeler.action">
-    <action
-          code="resources/actions/alfresco/sendemail.js"
-          icon="icons/sendEMail.png"
-          name="Send e-mail"
-          technology="Alfresco">
-    </action>
-    <action
-          code="resources/actions/alfresco/createNewContent.js"
-          icon="icons/document-new.png"
-          name="Create new content"
-          technology="Alfresco">
-    </action>
-    <action
-          code="resources/actions/alfresco/pdf/importPDF.js"
-          icon="icons/file_acrobat.gif"
-          javaClass="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler"
-          java_class="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler"
-          name="Import PDF"
-          technology="Alfresco">
-    </action>
-    <action
-          code="resources/actions/alfresco/pdf/exportPDF.js"
-          icon="icons/file_acrobat.gif"
-          javaClass="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler"
-          java_class="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler"
-          name="Export PDF"
-          technology="Alfresco">
-    </action>
- </extension>
-	
+  <extension-point id="action" name="Transition Action" schema="schema/action.exsd" />
+  <extension point="org.eclipse.ui.editors">
+    <editor class="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor" icon="icons/Editor.gif" default="true" name="Workflow modeler" id="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor" contributorClass="com.bluexml.side.Workflow.modeler.actions.WorkflowEditorActionBarContributor" extensions="workflowdi" />
+  </extension>
+  <extension point="org.eclipse.ui.newWizards">
+    <wizard icon="icons/Editor.gif" class="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams" category="com.bluexml.side.modeler.category.ID" name="Side Workflow Diagram" id="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams">
+      <selection class="org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+  <extension point="org.eclipse.ui.perspectiveExtensions">
+    <perspectiveExtension targetID="org.topcased.modeler.perspective">
+      <newWizardShortcut id="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams" />
+    </perspectiveExtension>
+  </extension>
+  <extension point="org.eclipse.ui.preferencePages">
+    <page category="org.topcased.modeler.preferences.ModelerPreferencePage" class="com.bluexml.side.Workflow.modeler.preferences.WorkflowPreferencePage" id="com.bluexml.side.Workflow.modeler.preferences.WorkflowPreferencePage" name="Workflow" />
+  </extension>
+  <extension point="org.eclipse.ui.propertyPages">
+    <page id="com.bluexml.side.Workflow.modeler.preferences.property.WorkflowPreferencePage" class="com.bluexml.side.Workflow.modeler.preferences.WorkflowPreferencePage" category="org.topcased.modeler.preferences.property.ModelerPreferencePage" name="Workflow">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+  </extension>
+  <extension point="org.eclipse.core.runtime.preferences">
+    <initializer class="com.bluexml.side.Workflow.modeler.preferences.AllDiagramPreferenceInitializer" />
+  </extension>
+  <extension point="org.topcased.modeler.templates">
+    <template di="templates/diagram/%name%.workflowdi" model="templates/diagram/%name%.workflow" name="Workflow" id="com.bluexml.side.Workflow.modeler.templates.diagram" editorId="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor" />
+  </extension>
+  <extension point="org.topcased.modeler.diagrams">
+    <diagram configuration="com.bluexml.side.Workflow.modeler.diagram.WfConfiguration" id="com.bluexml.side.Workflow.modeler.diagram" name="Workflow">
+      <enableFor class="com.bluexml.side.workflow.Process" />
+    </diagram>
+  </extension>
+  <extension point="org.topcased.modeler.topcasedPreferenceInitializer">
+    <preferenceInitializer class="com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramTopcasedPreferenceInitializer" editorId="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor" id="com.bluexml.side.Workflow.modeler.diagram.preferences.WfTopcasedPreferenceInitializer" />
+  </extension>
+  <extension point="org.eclipse.ui.preferencePages">
+    <page id="com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferencePage" category="com.bluexml.side.Workflow.modeler.preferences.WorkflowPreferencePage" class="com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferencePage" name="WfDiagram" />
+    <page id="com.bluexml.side.Workflow.modeler.diagram.preferences.StartStatePreferencePage" category="com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferencePage" class="com.bluexml.side.Workflow.modeler.diagram.preferences.StartStatePreferencePage" name="StartState" />
+  </extension>
+  <extension point="org.eclipse.ui.propertyPages">
+    <page id="com.bluexml.side.Workflow.modeler.diagram.preferences.property.WfDiagramPreferencePage" category="com.bluexml.side.Workflow.modeler.preferences.property.WorkflowPreferencePage" class="com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferencePage" name="WfDiagram">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+    <page id="com.bluexml.side.Workflow.modeler.diagram.preferences.property.StartStatePreferencePage" category="com.bluexml.side.Workflow.modeler.diagram.preferences.property.WfDiagramPreferencePage" class="com.bluexml.side.Workflow.modeler.diagram.preferences.StartStatePreferencePage" name="StartState">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject" />
+      </enabledWhen>
+    </page>
+  </extension>
+  <extension point="com.bluexml.side.Workflow.modeler.action">
+    <action code="resources/actions/alfresco/sendemail.js" icon="icons/sendEMail.png" name="Send e-mail" technology="Alfresco" />
+    <action code="resources/actions/alfresco/createNewContent.js" icon="icons/document-new.png" name="Create new content" technology="Alfresco" />
+    <action code="resources/actions/alfresco/pdf/importPDF.js" icon="icons/file_acrobat.gif" javaClass="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler" java_class="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler" name="Import PDF" technology="Alfresco" />
+    <action code="resources/actions/alfresco/pdf/exportPDF.js" icon="icons/file_acrobat.gif" javaClass="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler" java_class="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler" name="Export PDF" technology="Alfresco" />
+  </extension>
 </plugin>
+
