@@ -1,41 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <!--
  <copyright>
  </copyright>
 
  $Id$
 -->
-
 <plugin>
-
-
-<!--  <extension-->
-<!--    point = "org.eclipse.ui.newWizards">-->
-<!--    <category-->
-<!--      id = "com.bluexml.side.modeler.category.ID"-->
-<!--      name="%_UI_Wizard_category">-->
-<!--    </category>-->
-<!--    <wizard-->
-<!--      id = "com.bluexml.side.clazz.presentation.ClazzModelWizardID"-->
-<!--      name = "%_UI_ClazzModelWizard_label"-->
-<!--      class = "com.bluexml.side.clazz.presentation.ClazzModelWizard"-->
-<!--      category = "com.bluexml.side.modeler.category.ID"-->
-<!--      icon = "icons/full/obj16/ClazzModelFile.gif">-->
-<!--      <description>%_UI_ClazzModelWizard_description</description>-->
-<!--      <selection class = "org.eclipse.core.resources.IResource" />-->
-<!--    </wizard>-->
-<!--  </extension>-->
-
-  <extension point = "org.eclipse.ui.editors">
-    <editor
-        id = "com.bluexml.side.clazz.presentation.ClazzEditorID"
-        name = "%_UI_ClazzEditor_label"
-        icon = "icons/full/obj16/ClazzModelFile.gif"
-        extensions = "dt"
-        class = "com.bluexml.side.clazz.presentation.ClazzEditor"
-        contributorClass="com.bluexml.side.clazz.presentation.ClazzActionBarContributor" >
-    </editor>
+  <!--  <extension-->
+  <!--    point = "org.eclipse.ui.newWizards">-->
+  <!--    <category-->
+  <!--      id = "com.bluexml.side.modeler.category.ID"-->
+  <!--      name="%_UI_Wizard_category">-->
+  <!--    </category>-->
+  <!--    <wizard-->
+  <!--      id = "com.bluexml.side.clazz.presentation.ClazzModelWizardID"-->
+  <!--      name = "%_UI_ClazzModelWizard_label"-->
+  <!--      class = "com.bluexml.side.clazz.presentation.ClazzModelWizard"-->
+  <!--      category = "com.bluexml.side.modeler.category.ID"-->
+  <!--      icon = "icons/full/obj16/ClazzModelFile.gif">-->
+  <!--      <description>%_UI_ClazzModelWizard_description</description>-->
+  <!--      <selection class = "org.eclipse.core.resources.IResource" />-->
+  <!--    </wizard>-->
+  <!--  </extension>-->
+  <extension point="org.eclipse.ui.editors">
+    <editor id="com.bluexml.side.clazz.presentation.ClazzEditorID" name="%_UI_ClazzEditor_label" icon="icons/full/obj16/ClazzModelFile.gif" extensions="dt" class="com.bluexml.side.clazz.presentation.ClazzEditor" contributorClass="com.bluexml.side.clazz.presentation.ClazzActionBarContributor" />
   </extension>
 </plugin>
+
