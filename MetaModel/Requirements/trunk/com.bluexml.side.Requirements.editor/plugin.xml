@@ -1,36 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <!--
  <copyright>
  </copyright>
 
  $Id$
 -->
-
 <plugin>
-
-<!--   <extension point="org.eclipse.ui.newWizards">-->
-<!--      <wizard-->
-<!--            id="com.bluexml.side.requirements.presentation.RequirementsModelWizardID"-->
-<!--            name="%_UI_RequirementsModelWizard_label"-->
-<!--            class="com.bluexml.side.requirements.presentation.RequirementsModelWizard"-->
-<!--            category="com.bluexml.side.modeler.category.ID"-->
-<!--            icon="icons/Requirements.gif">-->
-<!--         <description>%_UI_RequirementsModelWizard_description</description>-->
-<!--         <selection class="org.eclipse.core.resources.IResource"/>-->
-<!--      </wizard>-->
-<!--   </extension>-->
-
-   <extension point="org.eclipse.ui.editors">
-      <editor
-            id="com.bluexml.side.requirements.presentation.RequirementsEditorID"
-            name="%_UI_RequirementsEditor_label"
-            icon="icons/full/obj16/RequirementsModelFile.gif"
-            extensions="requirements"
-            class="com.bluexml.side.requirements.presentation.RequirementsEditor"
-            contributorClass="com.bluexml.side.requirements.presentation.RequirementsActionBarContributor">
-      </editor>
-   </extension>
-
+  <!--   <extension point="org.eclipse.ui.newWizards">-->
+  <!--      <wizard-->
+  <!--            id="com.bluexml.side.requirements.presentation.RequirementsModelWizardID"-->
+  <!--            name="%_UI_RequirementsModelWizard_label"-->
+  <!--            class="com.bluexml.side.requirements.presentation.RequirementsModelWizard"-->
+  <!--            category="com.bluexml.side.modeler.category.ID"-->
+  <!--            icon="icons/Requirements.gif">-->
+  <!--         <description>%_UI_RequirementsModelWizard_description</description>-->
+  <!--         <selection class="org.eclipse.core.resources.IResource"/>-->
+  <!--      </wizard>-->
+  <!--   </extension>-->
+  <extension point="org.eclipse.ui.editors">
+    <editor id="com.bluexml.side.requirements.presentation.RequirementsEditorID" name="%_UI_RequirementsEditor_label" icon="icons/full/obj16/RequirementsModelFile.gif" extensions="requirements" class="com.bluexml.side.requirements.presentation.RequirementsEditor" contributorClass="com.bluexml.side.requirements.presentation.RequirementsActionBarContributor" />
+  </extension>
 </plugin>
+
