@@ -1,29 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <technology
-            id="ant"
-            name="ANT"
-            url="http://ant.apache.org/">
-         <technologyVersion
-               id="ant_1.7.1"
-               version="ANT 1.7.1">
-            <deployerVersion
-                  class="com.bluexml.side.deployer.antdeployer.ANTDeployer"
-                  hidden="visible"
-                  id="com.bluexml.side.Deployer.antDeployer"
-                  shared="true"
-                  version="ANT Deployer">
-               <configurationParameter
-                     documentation="This parameter permits to specify the ant file to used. This file must contains two targets : pre-build and post-build."
-                     key="com.bluexml.side.Deployer.antDeployer.param.antFile"
-                     label="Ant File Path">
-               </configurationParameter>
-            </deployerVersion>
-         </technologyVersion>
-      </technology>
-   </extension>
-
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <technology id="ant" name="ANT" url="http://ant.apache.org/">
+      <technologyVersion id="ant_1.7.1" version="ANT 1.7.1">
+        <deployerVersion class="com.bluexml.side.deployer.antdeployer.ANTDeployer" hidden="visible" id="com.bluexml.side.Deployer.antDeployer" shared="true" version="ANT Deployer">
+          <configurationParameter documentation="This parameter permits to specify the ant file to used. This file must contains two targets : pre-build and post-build." key="com.bluexml.side.Deployer.antDeployer.param.antFile" label="Ant File Path" />
+        </deployerVersion>
+      </technologyVersion>
+    </technology>
+  </extension>
 </plugin>
+
