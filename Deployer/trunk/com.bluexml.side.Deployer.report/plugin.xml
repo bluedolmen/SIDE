@@ -1,40 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <technology
-            description="Check this to generate predefined reports associated to the designed objects of your class models.&lt;br&gt;At runtime, these reports may be instantiated using the Birt report execution environment. These reports may also be customized using the Birt report designer.&lt;br&gt;SIDE allows to optimize the generation of reports useful to follow up the lifecycle of the newly designed objects of your application."
-            id="birt"
-            name="Birt"
-            url="http://www.eclipse.org/birt/">
-         <technologyVersion
-               description="Check this to generate reports on the release 2.3 of the Birt reporting tool.&lt;br&gt;Birt 2.3.x is the leading open source reporting tool which may be easily embedded in web framework like Alfresco.&lt;br&gt;Additionally to content generation, SIDE provides the generated reports to follow up the lifecycle of the designed objects."
-               id="Birt_2.3.x"
-               version="Birt 2.3.x">
-            <deployerVersion
-                  class="com.bluexml.side.deployer.report.BirtReportDirectDeployer"
-                  id="com.bluexml.side.Deployer.report"
-                  version="SIDE Report Deployer">
-               <configurationParameter
-                     documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
-                     key="CATALINA_HOME"
-                     label="Tomcat installation directory">
-               </configurationParameter>
-               <option
-                     defaultOption="true"
-                     documentation="deploy in a clean webapp"
-                     key="com.bluexml.side.Deployer.birtReport.clean"
-                     label="clean">
-               </option>
-               <configurationParameter
-                     documentation="default value : birt"
-                     key="com.bluexml.side.Deployer.birtReport.webappName"
-                     label="Birt webapp name">
-               </configurationParameter>
-            </deployerVersion>
-         </technologyVersion>
-      </technology>
-   </extension>
-
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <technology description="Check this to generate predefined reports associated to the designed objects of your class models.&lt;br&gt;At runtime, these reports may be instantiated using the Birt report execution environment. These reports may also be customized using the Birt report designer.&lt;br&gt;SIDE allows to optimize the generation of reports useful to follow up the lifecycle of the newly designed objects of your application." id="birt" name="Birt" url="http://www.eclipse.org/birt/">
+      <technologyVersion description="Check this to generate reports on the release 2.3 of the Birt reporting tool.&lt;br&gt;Birt 2.3.x is the leading open source reporting tool which may be easily embedded in web framework like Alfresco.&lt;br&gt;Additionally to content generation, SIDE provides the generated reports to follow up the lifecycle of the designed objects." id="Birt_2.3.x" version="Birt 2.3.x">
+        <deployerVersion class="com.bluexml.side.deployer.report.BirtReportDirectDeployer" id="com.bluexml.side.Deployer.report" version="SIDE Report Deployer">
+          <configurationParameter documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;" key="CATALINA_HOME" label="Tomcat installation directory" />
+          <option defaultOption="true" documentation="deploy in a clean webapp" key="com.bluexml.side.Deployer.birtReport.clean" label="clean" />
+          <configurationParameter documentation="default value : birt" key="com.bluexml.side.Deployer.birtReport.webappName" label="Birt webapp name" />
+        </deployerVersion>
+      </technologyVersion>
+    </technology>
+  </extension>
 </plugin>
+
