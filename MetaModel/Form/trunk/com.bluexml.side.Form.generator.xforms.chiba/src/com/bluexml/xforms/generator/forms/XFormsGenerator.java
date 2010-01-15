@@ -9,13 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.bluexml.xforms.actions.AbstractAction;
-import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.xforms.messages.MsgPool;
 import org.eclipse.emf.common.util.EList;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -37,6 +36,7 @@ import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.impl.FormGroupImpl;
+import com.bluexml.xforms.actions.AbstractAction;
 import com.bluexml.xforms.generator.AbstractDataGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.RenderableXForm;
@@ -56,6 +56,8 @@ import com.bluexml.xforms.generator.forms.renderable.lists.RenderableClassList;
 import com.bluexml.xforms.generator.forms.rendered.RenderedParentGroup;
 import com.bluexml.xforms.generator.tools.ClasseComparator;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 
 /**
  * The Class XFormsGenerator.
@@ -114,6 +116,8 @@ public class XFormsGenerator extends AbstractDataGenerator {
 
 	/** The formsRenderables, with their original version. */
 	private Map<String, FormContainer> formsModels = new HashMap<String, FormContainer>();
+
+	private Set<FormTypeRendered> formTypesToDescribe;
 
 	private static boolean renderingWorkflow;
 
@@ -458,6 +462,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		} else {
 			genLogger.info("XFormGenerator: Generating XHTML templates.");
 		}
+		formTypesToDescribe = new TreeSet<FormTypeRendered>();
 	}
 
 	/*
@@ -539,9 +544,65 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 */
 	public void endGeneration() {
 
+		renderAllClasses();
+
+		boolean atLeastOneWorfklowForm = renderAllForms();
+
+		if (atLeastOneWorfklowForm) {
+			renderWorkflowSelectionForm();
+			formGenerator.setWorkflowCapable(true);
+		}
+
+		renderDescriptionFiles();
+
+		genLogger.info("XFormGenerator: Finished generating XHTML templates.");
+	}
+
+	/**
+	 * 
+	 */
+	private void renderDescriptionFiles() {
+		Element root = new Element("root");
+		Document doc = new Document(root);
+
+		Element labelElt = new Element("label");
+		root.addContent(labelElt);
+		Element descrElt = new Element("description");
+		root.addContent(descrElt);
+
+		for (FormTypeRendered formType : formTypesToDescribe) {
+			StringBuffer fileName = new StringBuffer(outputXForms.getAbsolutePath());
+			fileName.append(File.separatorChar);
+			fileName.append(formType.getFolder());
+			if (StringUtils.trimToNull(formType.getFolder()) != null) {
+				fileName.append(File.separatorChar);
+			}
+			fileName.append("descr.xml");
+			File descrFile = new File(fileName.toString());
+
+			if (StringUtils.trimToNull(formType.getLabel()) != null) {
+				labelElt.setText(formType.getLabel());
+				descrElt.setText(formType.getDescription());
+
+				try {
+					FileOutputStream fos = new FileOutputStream(descrFile);
+					outputter.output(doc, fos);
+					fos.close();
+				} catch (Exception ex) {
+					logger.error(ex);
+					throw new RuntimeException(ex);
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * 
+	 */
+	private void renderAllClasses() {
 		Set<Entry<Clazz, RenderableClass>> entrySet = classes.entrySet();
 		for (Entry<Clazz, RenderableClass> entry : entrySet) {
-
 			Clazz classe = entry.getKey();
 			genLogger.info("  class: " + ModelTools.getCompleteName(classe));
 			RenderableClass classeBean = entry.getValue();
@@ -551,21 +612,25 @@ public class XFormsGenerator extends AbstractDataGenerator {
 				String title = ModelTools.getTitle(classe);
 				if (!classe.isAbstract()) {
 					render(outputXForms, classeBean, formName, title, FormTypeRendered.formClass,
-							false, false);
+							false);
 					if (formGenerator.isGenerateLogListForms()) {
 						render(outputXForms, new RenderableClassList(classe), formName, title,
-								FormTypeRendered.formClassList, false, false);
+								FormTypeRendered.formClassList, false);
 					}
 				}
 				if (classeBean.hasSubClasses()) {
 					render(outputXForms, new RenderableClassSelector(classeBean.getSubClasses()),
-							formName, title, FormTypeRendered.formClassSubClassSelector, false,
-							false);
+							formName, title, FormTypeRendered.formClassSubClassSelector, false);
 				}
 			}
 
 		}
+	}
 
+	/**
+	 * @return true if there is one or more workflow forms
+	 */
+	private boolean renderAllForms() {
 		boolean atLeastOneWorfklowForm = false;
 		Set<Entry<String, RenderableFormContainer>> entrySetForms = formsRenderables.entrySet();
 		for (Entry<String, RenderableFormContainer> formEntry : entrySetForms) {
@@ -581,14 +646,9 @@ public class XFormsGenerator extends AbstractDataGenerator {
 			}
 			RenderableFormContainer value = formEntry.getValue();
 
-			render(outputXForms, formId, value, isAWorkflowForm);
+			renderForm(outputXForms, formId, value, isAWorkflowForm);
 		}
-
-		if (atLeastOneWorfklowForm) {
-			renderWorkflowSelectionForm();
-			formGenerator.setWorkflowCapable(true);
-		}
-		genLogger.info("XFormGenerator: Finished generating XHTML templates.");
+		return atLeastOneWorfklowForm;
 	}
 
 	/**
@@ -647,7 +707,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		// RenderableXForm rform = new RenderableXForm(rglobalGroup,
 		// MsgId.MSG_WKFLW_SEL_PAGE_TITLE.getText(), actions, true);
 		render(outputXForms, rglobalGroup, MsgId.INT_WKFLW_SEL_FORM_FILENAME.getText(), MsgPool
-				.getMsg(MsgId.MSG_WKFLW_SEL_PAGE_TITLE), FormTypeRendered.formWkflwSel, false, true);
+				.getMsg(MsgId.MSG_WKFLW_SEL_PAGE_TITLE), FormTypeRendered.formWkflwSel, true);
 	}
 
 	/**
@@ -868,6 +928,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	public void processEnum(Enumeration enumeration) {
 		int i = 1;
 		if (!enumeration.getDynamic()) {
+			formTypesToDescribe.add(FormTypeRendered.formEnum);
 			Element racineEnums = new Element("enums");
 			Document documentEnums = new Document(racineEnums);
 
@@ -889,7 +950,11 @@ public class XFormsGenerator extends AbstractDataGenerator {
 			}
 
 			String fileName = ModelTools.getCompleteName(enumeration) + ".enum.xml";
-			File file = new File(outputXForms.getAbsolutePath() + "/" + fileName);
+			String pathname = outputXForms.getAbsolutePath() + File.separator
+					+ MsgId.INT_DIRECTORY_ENUMS + File.separator;
+			File parentDir = new File(pathname);
+			parentDir.mkdirs();
+			File file = new File(pathname + fileName);
 
 			try {
 				FileOutputStream fos = new FileOutputStream(file);
@@ -944,12 +1009,12 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 * @param isWorkflowAble
 	 *            whether workflows can be started on the form
 	 */
-	private void render(File outputXForms, String formId, RenderableFormContainer rFC,
+	private void renderForm(File outputXForms, String formId, RenderableFormContainer rFC,
 			boolean isAWorkflowForm) {
 		String title = formsModels.get(formId).getLabel();
 		FormTypeRendered formTypeRendered = (isAWorkflowForm) ? FormTypeRendered.formWkflw
 				: FormTypeRendered.formForm;
-		render(outputXForms, rFC, formId, title, formTypeRendered, isAWorkflowForm, false);
+		render(outputXForms, rFC, formId, title, formTypeRendered, false);
 	}
 
 	/**
@@ -973,7 +1038,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 *            formsRenderables.
 	 */
 	private void render(File outputXForms, Renderable renderable, String formName, String title,
-			FormTypeRendered formType, boolean isAWorkflowForm, boolean isWrkflwSelectionForm) {
+			FormTypeRendered formType, boolean isWrkflwSelectionForm) {
 		resetKeys();
 
 		List<AbstractAction> actions;
@@ -983,11 +1048,14 @@ public class XFormsGenerator extends AbstractDataGenerator {
 			actions.add(0, abstractAction);
 		}
 
+		formTypesToDescribe.add(formType);
+
 		Renderable realRenderable = renderable;
 		if (formType == FormTypeRendered.formClass) {
 			realRenderable = new RenderableXGroup(renderable, title);
 		}
 
+		boolean isAWorkflowForm = formType.equals(FormTypeRendered.formWkflw);
 		RenderableXForm form = new RenderableXForm(realRenderable, title, actions, isAWorkflowForm,
 				isWrkflwSelectionForm);
 		// #976 adding the status bar
@@ -1003,6 +1071,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 			StringBuffer fileName = new StringBuffer(outputXForms.getAbsolutePath());
 			fileName.append(File.separatorChar);
 			fileName.append(formType.getFolder());
+			fileName.append(File.separatorChar);
 			fileName.append(formName);
 			if (isReadOnlyMode()) {
 				fileName.append(formGenerator.getReadOnlySuffix());
