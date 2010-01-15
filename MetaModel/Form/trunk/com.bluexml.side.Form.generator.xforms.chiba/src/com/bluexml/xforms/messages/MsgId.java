@@ -1,5 +1,5 @@
 /**
- * NE PAS FORMATTER CE FICHIER.
+ * PLEASE DO NOT FORMAT THIS FILE.
  */
 package com.bluexml.xforms.messages;
 
@@ -118,10 +118,13 @@ public enum MsgId {
 	INT_CSS_STATUS_BAR_ID				("side_status_bar"),
 	INT_CSS_UPLOAD_FILENAME 			("side_upload_filename"),
 	INT_CSS_UPLOAD_PREVIEW 				("side_upload_preview"),
+	// All directories must be filled.
+	INT_DIRECTORY_ENUMS					("enums"),
 	INT_DIRECTORY_FORM_CLASSES			("defaults"),
 	INT_DIRECTORY_FORM_FORMS			("forms"),
 	INT_DIRECTORY_FORM_LISTS			("lists"),
 	INT_DIRECTORY_FORM_READONLY			("readonly"),
+	INT_DIRECTORY_FORM_SELECTOR			("selectors"),
 	INT_DIRECTORY_FORM_WKFLW			("workflows"),
 	INT_DIRECTORY_WKFLW_SEL_FORM		("workflows"),
 	INT_ERR_NULL_WKFLW_ACTIVE_PATHS		("No active path for instance: "),
