@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="mapping">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" name="enum" type="enumType" />
+				<xsd:element maxOccurs="unbounded" name="aspect" type="aspectType" />
+				<xsd:element maxOccurs="unbounded" name="class" type="classType" />
+				<xsd:element maxOccurs="unbounded" ref="canister" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="canister" type="canisterType" />
+	<xsd:element name="form" type="formType" substitutionGroup="canister" />
+	<xsd:element name="task" type="workflowTaskType"
+		substitutionGroup="canister" />
+
+	<xsd:complexType name="canisterType" abstract="true">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="action" type="actionFieldType" />
+			<xsd:element maxOccurs="unbounded" name="field" type="formFieldType" />
+			<xsd:element maxOccurs="unbounded" name="modelChoice"
+				type="modelChoiceType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="enumType">
+		<xsd:sequence>
+			<xsd:element name="package" type="xsd:string" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="alfrescoName" type="xsd:string" />
+			<xsd:element name="dynamic" type="xsd:boolean" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="aspectType">
+		<xsd:sequence>
+			<xsd:element name="package" type="xsd:string" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="alfrescoName" type="xsd:string" />
+			<xsd:element maxOccurs="unbounded" name="attribute" type="attributeType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="attributeType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="alfrescoName" type="xsd:string" />
+			<xsd:element name="inAlfresco" type="xsd:boolean" />
+			<xsd:element name="type" type="xsd:string" />
+			<xsd:element minOccurs="0" name="enumQName" type="xsd:string" />
+			<xsd:element name="dynamicEnum" type="xsd:boolean" />
+			<xsd:element name="default" type="xsd:string" />
+			<xsd:element name="multiple" type="xsd:boolean" />
+			<xsd:element name="fieldSize" type="xsd:string" />
+			<xsd:element name="readOnly" type="xsd:boolean" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="associationType">
+		<xsd:sequence>
+			<xsd:element name="package" type="xsd:string" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="caption" type="xsd:string" />
+			<xsd:element name="alfrescoName" type="xsd:string" />
+			<xsd:element name="type" type="classType" />
+			<xsd:element name="multiple" type="xsd:boolean" />
+			<xsd:element name="inline" type="xsd:boolean" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="classType">
+		<xsd:sequence>
+			<xsd:element name="package" type="xsd:string" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="alfrescoName" type="xsd:string" />
+			<xsd:element maxOccurs="unbounded" name="attribute" type="attributeType" />
+			<xsd:element maxOccurs="unbounded" name="aspect" type="aspectType" />
+			<xsd:element maxOccurs="unbounded" name="association"
+				type="associationType" />
+			<xsd:element minOccurs="0" name="parentClass" type="classType" />
+			<xsd:element maxOccurs="unbounded" name="subClass" type="classType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="fieldType">
+		<xsd:sequence>
+			<xsd:element name="uniqueName" type="xsd:string" />
+			<xsd:element name="appearance" type="xsd:string" />
+			<xsd:element name="shortName" type="xsd:string" />
+			<xsd:element name="mandatory" type="xsd:boolean" />
+			<xsd:element name="displayLabel" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="formFieldType">
+		<xsd:complexContent>
+			<xsd:extension base="fieldType">
+				<xsd:sequence>
+					<xsd:element name="alfrescoName" type="xsd:string" />
+					<xsd:element name="type" type="xsd:string" />
+					<xsd:element minOccurs="0" name="staticEnumType" type="xsd:string" />
+					<xsd:element name="default" type="xsd:string" />
+					<xsd:element name="dummyValue" type="xsd:string" />
+					<xsd:element name="multiple" type="xsd:boolean" />
+					<xsd:element name="searchEnum" type="xsd:boolean" />
+					<xsd:element name="readOnly" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="fileFieldType">
+		<xsd:complexContent>
+			<xsd:extension base="formFieldType">
+				<xsd:sequence>
+					<xsd:element name="inRepository" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="virtualFieldType">
+		<xsd:complexContent>
+			<xsd:extension base="fieldType">
+				<xsd:sequence>
+					<xsd:element name="fieldName" type="xsd:string" />
+					<xsd:element name="formName" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="actionFieldType">
+		<xsd:complexContent>
+			<xsd:extension base="fieldType">
+				<xsd:sequence>
+					<xsd:element name="label" type="xsd:string" />
+					<xsd:element name="inWorkflow" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="modelChoiceType">
+		<xsd:complexContent>
+			<xsd:extension base="fieldType">
+				<xsd:sequence>
+					<xsd:element name="alfrescoName" type="xsd:string" />
+					<xsd:element name="minBound" type="xsd:int" />
+					<xsd:element name="maxBound" type="xsd:int" />
+					<xsd:element name="inline" type="xsd:boolean" />
+					<xsd:element name="realClass" type="classType" />
+					<xsd:element maxOccurs="unbounded" name="target" type="formType" />
+					<xsd:element name="fieldSize" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="referenceType">
+		<xsd:complexContent>
+			<xsd:extension base="modelChoiceType">
+				<xsd:sequence></xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="formType">
+		<xsd:complexContent>
+			<xsd:extension base="canisterType">
+				<xsd:sequence>
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element maxOccurs="unbounded" name="virtual"
+						type="virtualFieldType" />
+					<xsd:element maxOccurs="unbounded" name="reference"
+						type="referenceType" />
+					<xsd:element maxOccurs="unbounded" name="fileField"
+						type="fileFieldType" />
+					<xsd:element name="realClass" type="classType" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="workflowTaskType">
+		<xsd:complexContent>
+			<xsd:extension base="canisterType">
+				<xsd:sequence>
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="taskId" type="xsd:string" />
+					<xsd:element name="dataForm" type="xsd:string" />
+					<xsd:element name="title" type="xsd:string" />
+					<xsd:element name="startTask" type="xsd:boolean" />
+					<xsd:element minOccurs="0" name="actorId" type="xsd:string" />
+					<xsd:element minOccurs="0" name="pooledActors" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

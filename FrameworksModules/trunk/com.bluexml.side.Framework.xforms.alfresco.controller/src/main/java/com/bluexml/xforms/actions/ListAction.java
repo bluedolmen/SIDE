@@ -1,0 +1,140 @@
+package com.bluexml.xforms.actions;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.apache.commons.lang.StringUtils;
+import org.chiba.processor.XFormsProcessor;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import com.bluexml.xforms.messages.MsgId;
+
+/**
+ * The Class ListAction.<br>
+ * Get the list of a specified type with a search query
+ */
+public class ListAction extends AbstractAction {
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.bluexml.xforms.actions.AbstractAction#executeResolve()
+	 */
+	@Override
+	public Node resolve() throws Exception {
+		// retrieves elements
+		return list();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.bluexml.xforms.actions.AbstractAction#executeSubmit()
+	 */
+	/**
+	 * Used when performing searches on lists. Invoked via ModelElementListUpdater.
+	 */
+	@SuppressWarnings("deprecation")
+	@Override
+	public void submit() throws Exception {
+		// update list using search
+		Document doc = (Document) node;
+		String query = "";
+		String maxResults = "";
+		Element queryElement = doc.getDocumentElement();
+		NodeList childNodes = queryElement.getChildNodes();
+		for (int i = 0; i < childNodes.getLength(); i++) {
+			Node child = childNodes.item(i);
+			if (child instanceof Element) {
+				Element element = (Element) child;
+				if (StringUtils.equals(element.getTagName(), "query")) {
+					query = element.getTextContent();
+				}
+				if (StringUtils.equals(element.getTagName(), "maxResults")) {
+					maxResults = element.getTextContent();
+				}
+			}
+		}
+
+		requestParameters.put(DATA_QUERY, query);
+		requestParameters.put(DATA_MAXRESULTS, maxResults);
+
+		// retrieves elements
+		Node list = list();
+
+		// convert to string
+		Source xmlSource = new DOMSource(list);
+		ByteArrayOutputStream pos = new ByteArrayOutputStream();
+		Result outputTarget = new StreamResult(pos);
+		documentTransformer.transform(xmlSource, outputTarget);
+
+		ByteArrayInputStream pis = new ByteArrayInputStream(pos.toByteArray());
+
+		result.put(XFormsProcessor.SUBMISSION_RESPONSE_STREAM, pis);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.bluexml.xforms.actions.AbstractAction#getActionName()
+	 */
+	@Override
+	public String getActionName() {
+		return MsgId.INT_ACT_CODE_LIST.getText();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.bluexml.xforms.actions.AbstractAction#getParamNames()
+	 */
+	@Override
+	protected String[] getParamNames() {
+		return new String[] { MsgId.INT_ACT_PARAM_LIST_TYPE.getText(),
+				MsgId.INT_ACT_PARAM_LIST_FORMAT.getText(),
+				MsgId.INT_ACT_PARAM_LIST_MAXLENGTH.getText() };
+	}
+
+	/**
+	 * Bridge to the controller to get a list of items from a data type.
+	 * 
+	 * @return the node
+	 * 
+	 * @throws Exception
+	 *             the exception
+	 */
+	private Node list() throws Exception {
+		// simply call controller
+		String dataType = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_TYPE.getText());
+		String query = requestParameters.get(DATA_QUERY);
+		String maxResults = requestParameters.get(DATA_MAXRESULTS);
+		String format = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_FORMAT.getText());
+		String maxLength = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_MAXLENGTH.getText());
+		// "format" was partially decoded so we need to re encode the format pattern, since it
+		// will be transmitted again via URL to the webscript where it'll have to be decoded again.
+		try {
+			if (StringUtils.trimToNull(format) != null) {
+				format = URLDecoder.decode(format, "UTF-8");
+				format = URLEncoder.encode(format, "UTF-8");
+				// format = StringEscapeUtils.escapeXml(format);
+			}
+		} catch (UnsupportedEncodingException e) {
+			logger.fatal("Unsupported encoding scheme");
+			throw new RuntimeException("Unsupported encoding scheme");
+		}
+
+		return controller.getList(transaction, dataType, query, maxResults, format, maxLength);
+	}
+
+}
