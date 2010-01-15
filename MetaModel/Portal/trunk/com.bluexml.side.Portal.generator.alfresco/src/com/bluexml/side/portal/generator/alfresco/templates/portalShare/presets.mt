@@ -1,5 +1,6 @@
 <%
 metamodel http://www.kerblue.org/portal/1.0
+import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 %>
 
 <%-- Templates creation --%>
@@ -75,14 +76,7 @@ metamodel http://www.kerblue.org/portal/1.0
             <authentication>user</authentication>
             <properties>
                <!--<sitePages>[{"pageId":"wiki-page"}, {"pageId":"blog-postlist"}, {"pageId":"documentlibrary"}, {"pageId":"calendar"},{"pageId":"links"},{"pageId":"discussions-topiclist"}-->
-               <sitePages>[
-               <%for (pageSet.nSort("position")){%>
-	               <%if (visibility.toString().toLowerCase() == "public"){%>
-	               	{"pageId":"<%ID%>"}<%if (current("Portal").pageSet.nLast() != current()){%>, <%}%>
-	               <%}%>
-               <%}%>
-               	]               
-               </sitePages>
+               <sitePages><%getPublicPageList()%></sitePages>
             </properties>
          </page>
       </pages>

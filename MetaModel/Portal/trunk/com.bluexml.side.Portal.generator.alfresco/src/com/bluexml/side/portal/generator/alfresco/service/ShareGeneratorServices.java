@@ -7,6 +7,12 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Properties;
 
+import org.eclipse.emf.common.util.EList;
+
+import com.bluexml.side.common.Visibility;
+import com.bluexml.side.portal.Page;
+import com.bluexml.side.portal.Portal;
+
 public class ShareGeneratorServices {
 	Properties defaultShareElements;
 	List<String> publicPages = new ArrayList<String>();
@@ -46,5 +52,16 @@ public class ShareGeneratorServices {
 		new ShareGeneratorServices();
 	}
 
-	
+	public static String getPublicPageList(Portal p) {
+		String result ="";
+		EList<Page> l=p.getPageSet();
+		List<String> rt = new ArrayList<String>();
+		for (Page page : l) {
+			if (page.getVisibility().equals(Visibility.PUBLIC)) {
+				rt.add("{\"pageId\":\""+page.getID()+"\"}");
+			}
+		}
+		
+		return rt.toString();
+	}
 }

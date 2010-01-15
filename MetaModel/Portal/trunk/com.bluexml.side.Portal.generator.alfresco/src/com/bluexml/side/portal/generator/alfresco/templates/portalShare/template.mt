@@ -26,7 +26,9 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
    </div>
    <div id="bd">
       <div class="yui-t1">
-         <div id="yui-main"><%view()%></div>
+         <div id="yui-main">
+         	<%view()%>         
+         </div>
       </div>
    </div>
 </@>
@@ -46,10 +48,20 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <iframe src="/facetmap/browseSimple_facets.jsp?facetName=<%name%>&community=${siteID}&userName=${userName}&userTicket=${ticket}" id="facetsContainer" style="width: 600px; height: 600px"></iframe>
 <iframe src="/facetmap/browseSimple_content.jsp?facetName=<%name%>&community=${siteID}&userName=${userName}&userTicket=${ticket}" id="resultsContainer" style="width: 600px; height: 600px"></iframe>
 					<%}else{%>
-<%-- TODO : manage other view types --%>
+<%-- TODO : manage other view --%>
 <!-- portlet <%current("Portlet").name%>-->
 					<%}%>
 				<%}%>
+			<%}else{%>
+				<!-- use default share components-->
+				<@region 
+				<%for (isInstanceOfPortletType.instances){%>
+					<%if (instanceOf.name == "scope"){%>
+					<%instanceOf.name%>="<%value%>" 
+					<%}%>
+				<%}%>
+					id="<%name%>"
+				 	protected=true />
 			<%}%>
 		<%}%>
 	<%}%>
