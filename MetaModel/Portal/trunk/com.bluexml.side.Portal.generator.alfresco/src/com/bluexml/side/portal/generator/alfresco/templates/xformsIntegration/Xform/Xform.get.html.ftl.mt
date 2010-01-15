@@ -9,7 +9,7 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 
 <%-- Templates creation --%>
 <%script type="Portlet" name="createTemplates"%>
-<%if (name.toLowerCase() =="edit-metadata-XFrom"){%>
+<%if (name.toLowerCase() =="edit-metadata-xform"){%>
 <%getProperty("alf.share.paths.core.site-webscripts")%>/com/bluexml/components/Xform/Xform.get.html.ftl
 <%}%>
 
