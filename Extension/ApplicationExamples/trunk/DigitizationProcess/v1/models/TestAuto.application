@@ -4,9 +4,10 @@
     <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator" id="com.bluexml.side.Portal.generator.alfresco" metaModelName="KSR200 Portal" technologyVersionName="Alfresco3.x Labs and Entreprise" technologyName="alfresco" contributorId="com.bluexml.side.Portal.generator.alfresco" id_metamodel="http://www.kerblue.org/portal/1.0" generatorName="SIDE Alfresco Portal Generator">
       <options key="com.bluexml.side.Portal.generator.alfresco.doclist"/>
       <options key="com.bluexml.side.Portal.generator.alfresco.forms"/>
-      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.shareDoclist" versionMin="1.0.0" moduleType="zip" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.doclist" versionMin="1.0.2" moduleType="amp" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.framework.alfresco.formProcessor" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.shareDoclist" versionMin="1.0.7" versionMax="1.0.7" moduleType="zip" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.doclist" versionMin="1.0.11" versionMax="1.0.11" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.framework.alfresco.formProcessor" versionMin="1.0.8" versionMax="1.0.8" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension" versionMin="1.0.0" moduleType="zip" technologyVersion="alfresco_3.x"/>
     </generatorConfigurations>
     <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.view.generator.alfresco.ViewAlfrescoGenerator" id="com.bluexml.side.View.generator.alfresco" metaModelName="KSR300 View" technologyVersionName="Alfresco3.x Labs and Entreprise" technologyName="alfresco" contributorId="com.bluexml.side.View.generator.alfresco" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="SIDE View Generator for Alfresco Share"/>
     <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator" id="com.bluexml.side.Workflow.generator.alfresco" metaModelName="KSR600 Workflow" technologyVersionName="Alfresco3.x Labs and Entreprise" technologyName="alfresco-jbpm" contributorId="com.bluexml.side.Workflow.generator.alfresco" id_metamodel="http://www.kerblue.org/workflow/1.0" generatorName="SIDE Workflow Generator for Alfresco">
@@ -20,16 +21,16 @@
       <options key="alfresco.share.extension"/>
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.model" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.xforms" versionMin="1.0.1" moduleType="amp" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.xforms" versionMin="1.0.28" versionMax="1.0.28" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" versionMin="1.0.25" versionMax="1.0.25" moduleType="amp" technologyVersion="alfresco_3.x"/>
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.upload" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
     </generatorConfigurations>
-    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.view.generator.documentation.ViewDocumentationGenerator" id="com.bluexml.side.View.generator.documentation" metaModelName="KSR300 View" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.View.generator.documentation" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="SIDE View Documentation Generator"/>
     <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.form.generator.documentation.FormDocumentationGenerator" id="com.bluexml.side.Form.generator.documentation" metaModelName="KSR400 Form" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Form.generator.documentation" id_metamodel="http://www.kerblue.org/form/1.0" generatorName="SIDE Form Documentation Generator"/>
-    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator" id="com.bluexml.side.Class.generator.documentation" metaModelName="KSR500 Data" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Class.generator.documentation" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="SIDE Class Documentation Generator">
+    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.view.generator.documentation.ViewDocumentationGenerator" id="com.bluexml.side.View.generator.documentation" metaModelName="KSR300 View" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.View.generator.documentation" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="SIDE View Documentation Generator"/>
+    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.workflow.generator.documentation.WorkflowDocumentationGenerator" id="com.bluexml.side.Workflow.generator.documentation" metaModelName="KSR600 Workflow" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Workflow.generator.documentation" id_metamodel="http://www.kerblue.org/workflow/1.0" generatorName="SIDE Workflow Documentation Generator">
       <options key="doc.gen.screenshoot"/>
     </generatorConfigurations>
-    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.workflow.generator.documentation.WorkflowDocumentationGenerator" id="com.bluexml.side.Workflow.generator.documentation" metaModelName="KSR600 Workflow" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Workflow.generator.documentation" id_metamodel="http://www.kerblue.org/workflow/1.0" generatorName="SIDE Workflow Documentation Generator">
+    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator" id="com.bluexml.side.Class.generator.documentation" metaModelName="KSR500 Data" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Class.generator.documentation" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="SIDE Class Documentation Generator">
       <options key="doc.gen.screenshoot"/>
     </generatorConfigurations>
     <parameters key="generation.options.documentation" value="false"/>
@@ -45,12 +46,16 @@
     <parameters key="com.bluexml.side.Workflow.generator.alfresco.module.version" value="1.0"/>
     <parameters key="com.bluexml.side.Deployer.antDeployer.param.antFile" value="/root/.hudson/jobs/Test_Demo/workspace/testAuto/Ankle/AntDeployer/src/build.xml"/>
     <parameters key="CATALINA_HOME" value="/root/.hudson/jobs/Test_Demo/workspace/testAuto/Ankle/Alfresco/tomcat"/>
-    <parameters key="com.bluexml.side.Form.generator.xforms.chiba.webappContext" value=""/>
-    <deployerConfigurations id_techno_version="ant_1.7.1" impl_class="com.bluexml.side.deployer.antdeployer.ANTDeployer" id="com.bluexml.side.Deployer.antDeployer" technologyVersionName="ANT 1.7.1" technologyName="ANT" contributorId="com.bluexml.side.Deployer.antDeployer" deployerName="ANT Deployer" shared="true"/>
+    <parameters key="com.bluexml.side.Form.generator.xforms.chiba.webappContext" value="xforms"/>
+    <parameters key="com.bluexml.side.Deployer.xforms.webappName" value=""/>
     <deployerConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.deployer.alfresco.directcopy.AlfrescoDeployer" id="com.bluexml.side.Deployer.alfrescoDirectCopy" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="Alfresco" contributorId="com.bluexml.side.Deployer.alfrescoDirectCopy" deployerName="SIDE Alfresco Direct Deployer">
       <options key="com.bluexml.side.deployerDirect.alfresco.clean"/>
     </deployerConfigurations>
+    <deployerConfigurations id_techno_version="ant_1.7.1" impl_class="com.bluexml.side.deployer.antdeployer.ANTDeployer" id="com.bluexml.side.Deployer.antDeployer" technologyVersionName="ANT 1.7.1" technologyName="ANT" contributorId="com.bluexml.side.Deployer.antDeployer" deployerName="ANT Deployer" shared="true"/>
     <deployerConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Deployer.documentation" deployerName="SIDE Documentation Deployer"/>
+    <deployerConfigurations id_techno_version="chiba_1_5.x" impl_class="com.bluexml.side.deployer.xformsdirectcopy.DeployerXforms" id="com.bluexml.side.Deployer.xformsDirectCopy" technologyVersionName="Chiba 1.5.x" technologyName="XForms" contributorId="com.bluexml.side.Deployer.xformsDirectCopy" deployerName="SIDE Chiba X-Forms Direct Deployer">
+      <options key="com.bluexml.side.Deployer.xformsDirectCopy.clean"/>
+    </deployerConfigurations>
   </elements>
   <elements xsi:type="app:Model" name="DigitizationProcess.dt" file="/DigitizationProcess/v1/models/Data/DigitizationProcess.dt"/>
   <elements xsi:type="app:Model" name="DigitalizationProcess.data.form" file="/DigitizationProcess/v1/models/Form/DigitalizationProcess.data.form"/>
