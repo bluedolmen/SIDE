@@ -82,6 +82,7 @@ public enum MsgId {
 	// label for modify (edit) in right side of selection widget
 	CAPTION_BUTTON_EDIT				("caption.button.edit"),
 	CAPTION_BUTTON_SUBMIT			("caption.button.submit"),
+	CAPTION_BUTTON_SETTYPE			("caption.button.submit"),
 	CAPTION_BUTTON_WORKFLOW_CANCEL	("caption.button.workflow.cancel"),
 	CAPTION_BUTTON_WORKFLOW_SELECT	("caption.button.workflow.select"),
 	CAPTION_BUTTON_WORKFLOW_START	("caption.button.workflow.start"),	

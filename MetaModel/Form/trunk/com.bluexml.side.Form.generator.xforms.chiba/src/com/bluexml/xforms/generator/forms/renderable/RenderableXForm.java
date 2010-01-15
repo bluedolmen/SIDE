@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import com.bluexml.xforms.actions.AbstractAction;
-import com.bluexml.xforms.messages.MsgId;
-
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
+import com.bluexml.xforms.generator.forms.FormSubmissionActions;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementSubmission;
 import com.bluexml.xforms.generator.forms.renderable.common.RenderableSubmits;
 import com.bluexml.xforms.generator.forms.rendered.RenderedForm;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 
 /**
  * The Class RenderableXForm. Adds generic elements to generated forms. The elements are submit
@@ -41,17 +41,17 @@ public class RenderableXForm extends Renderable {
 	 * @param formType
 	 *            the form type
 	 */
-	public RenderableXForm(Renderable renderable, String title, List<AbstractAction> classActions,
+	public RenderableXForm(Renderable renderable, String title, List<FormSubmissionActions> classActions,
 			boolean isAWorkflowForm, boolean isWrkflwSelectionForm) {
 		super();
 		this.title = title;
 		this.isAWorkflowForm = isAWorkflowForm;
 		this.isWrkflwSelectionForm = isWrkflwSelectionForm;
 		submissions = new ArrayList<ModelElementSubmission>();
-		for (AbstractAction abstractAction : classActions) {
+		for (FormSubmissionActions anAction : classActions) {
 			submissions.add(new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER
-					+ abstractAction.getActionName() + "/", abstractAction.getActionCaption(),
-					abstractAction.isReplaceAll(), abstractAction.isValidateFirst()));
+					+ MsgPool.getMsg(anAction.getName()) + "/", MsgPool.getMsg(anAction.getCaption()),
+					anAction.isReplaceAll(), anAction.isValidateFirst()));
 		}
 		add(renderable);
 		RenderableSubmits renderableSubmits = new RenderableSubmits(submissions);

@@ -2,7 +2,7 @@ package com.bluexml.xforms.generator.forms.renderable.common;
 
 import java.util.Stack;
 
-import com.bluexml.xforms.controller.navigation.FormTypeEnum;
+import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.renderable.common.association.inline.RenderableIMultiple;
@@ -44,7 +44,7 @@ public class CommonRenderableAssociation extends Renderable {
 		associationBean.setTitle(properties.getAssocTitle());
 		associationBean.setHint(properties.getHint());
 		associationBean.setDestinationRenderable(properties.getDestinationRenderable());
-		if (properties.getCreateEditFormType() == FormTypeEnum.FORM) {
+		if (properties.getCreateEditFormType().equals(FormTypeRendered.formForm)) {
 			associationBean.setCreateEditForm(properties.getCreateEditFormName());
 		}
 		associationBean.setHiBound(properties.getHiBound());

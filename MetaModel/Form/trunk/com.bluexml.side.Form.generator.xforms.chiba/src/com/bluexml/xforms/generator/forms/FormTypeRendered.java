@@ -3,31 +3,25 @@
  */
 package com.bluexml.xforms.generator.forms;
 
-import com.bluexml.xforms.actions.AbstractAction;
-import com.bluexml.xforms.actions.CancelAction;
-import com.bluexml.xforms.actions.DeleteAction;
-import com.bluexml.xforms.actions.SetTypeAction;
-import com.bluexml.xforms.actions.SubmitAction;
-import com.bluexml.xforms.actions.WorkflowStartAction;
 import com.bluexml.xforms.messages.MsgId;
 
 public enum FormTypeRendered {
 
 		// NOTE: the rendering procedure adds actions in reverse order!
 		formClass(
-				new AbstractAction[] { new DeleteAction(), new SubmitAction() }, 
+				new FormSubmissionActions[] { FormSubmissionActions.Delete, FormSubmissionActions.Submit }, 
 				"",
 				MsgId.INT_DIRECTORY_FORM_CLASSES.getText(), 
 				"Class forms", 
 				"default forms based on data diagrams"),
 		formClassSubClassSelector(
-				new AbstractAction[] { new SetTypeAction() }, 
+				new FormSubmissionActions[] { FormSubmissionActions.SetType }, 
 				"_selector", 
 				MsgId.INT_DIRECTORY_FORM_SELECTOR.getText(),
 				"Special forms for selecting subtypes",
 				"these should not be called directly as they are reserved for the controller"),
 		formClassList(
-				new AbstractAction[] {}, 
+				new FormSubmissionActions[] {}, 
 				"", 
 				MsgId.INT_DIRECTORY_FORM_LISTS.getText(),
 				"List forms",
@@ -40,13 +34,13 @@ public enum FormTypeRendered {
 				""
 				),
 		formForm(
-				new AbstractAction[] { new DeleteAction(), new SubmitAction() }, 
+				new FormSubmissionActions[] { FormSubmissionActions.Delete, FormSubmissionActions.Submit }, 
 				"",
 				MsgId.INT_DIRECTORY_FORM_FORMS.getText(),
 				"Customized forms",
 				"based on form models"),
 		formWkflw(
-				new AbstractAction[] { new SubmitAction() }, 
+				new FormSubmissionActions[] { FormSubmissionActions.Submit }, 
 				"", 
 				MsgId.INT_DIRECTORY_FORM_WKFLW.getText(),
 				"Workflow forms",
@@ -54,20 +48,20 @@ public enum FormTypeRendered {
 		// cancel action is added here because the process selection form (the only
 		// form to have this type) goes through a specific rendering process.
 		formWkflwSel(
-				new AbstractAction[] { new CancelAction(), new WorkflowStartAction() }, 
+				new FormSubmissionActions[] { FormSubmissionActions.Delete, FormSubmissionActions.Workflow }, 
 				"",
 				MsgId.INT_DIRECTORY_FORM_WKFLW.getText(),
 				"",
 				"");
 
-	private AbstractAction[] actions;
+	private FormSubmissionActions[] actions;
 	private String suffix;
 	private String folder;
 	private String label;
 	private String description;
 	
 
-	private FormTypeRendered(AbstractAction[] actions, String suffix, String folder, String label, String description) {
+	private FormTypeRendered(FormSubmissionActions[] actions, String suffix, String folder, String label, String description) {
 		this.actions = actions;
 		this.suffix = suffix;
 		this.folder = folder;
@@ -75,7 +69,7 @@ public enum FormTypeRendered {
 		this.description = description;
 	}
 
-	public AbstractAction[] getActions() {
+	public FormSubmissionActions[] getActions() {
 		return actions;
 	}
 

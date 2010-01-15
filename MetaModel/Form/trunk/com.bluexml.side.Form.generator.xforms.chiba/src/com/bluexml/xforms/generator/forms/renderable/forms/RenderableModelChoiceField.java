@@ -5,7 +5,6 @@ import java.net.URLEncoder;
 import java.util.Stack;
 
 import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.FormContainer;
@@ -13,6 +12,7 @@ import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.xforms.generator.FormGenerator;
+import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -64,10 +64,10 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 				properties.setDestinationRenderable(renderableForm);
 			}
 
-			properties.setCreateEditFormType(FormTypeEnum.FORM);
+			properties.setCreateEditFormType(FormTypeRendered.formForm);
 			properties.setCreateEditFormName(targetedForm.getId());
 		} else {
-			properties.setCreateEditFormType(FormTypeEnum.CLASS);
+			properties.setCreateEditFormType(FormTypeRendered.formClass);
 			properties.setCreateEditFormName(null);
 		}
 		// add support for hiding/displaying action buttons

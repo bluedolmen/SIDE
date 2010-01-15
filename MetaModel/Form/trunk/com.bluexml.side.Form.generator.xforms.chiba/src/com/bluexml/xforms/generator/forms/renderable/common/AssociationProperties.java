@@ -1,8 +1,7 @@
 package com.bluexml.xforms.generator.forms.renderable.common;
 
-import com.bluexml.xforms.controller.navigation.FormTypeEnum;
-
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 
 /**
@@ -50,7 +49,7 @@ public class AssociationProperties {
 	private boolean mandatory;
 
 	/** The create edit form type. */
-	private FormTypeEnum createEditFormType;
+	private FormTypeRendered createEditFormType;
 
 	/** The create edit form name. */
 	private String createEditFormName;
@@ -97,7 +96,7 @@ public class AssociationProperties {
 		this.inline = inline;
 		this.hiBound = hiBound;
 		this.loBound = loBound;
-		this.createEditFormType = FormTypeEnum.CLASS;
+		this.createEditFormType = FormTypeRendered.formClass;
 		this.createEditFormName = null;
 		this.showingActions = true;
 		this.fieldSize = "0";
@@ -215,7 +214,7 @@ public class AssociationProperties {
 	 * 
 	 * @return the creates the edit form type
 	 */
-	public FormTypeEnum getCreateEditFormType() {
+	public FormTypeRendered getCreateEditFormType() {
 		return createEditFormType;
 	}
 
@@ -225,7 +224,7 @@ public class AssociationProperties {
 	 * @param createEditFormType
 	 *            the new creates the edit form type
 	 */
-	public void setCreateEditFormType(FormTypeEnum createEditFormType) {
+	public void setCreateEditFormType(FormTypeRendered createEditFormType) {
 		this.createEditFormType = createEditFormType;
 	}
 

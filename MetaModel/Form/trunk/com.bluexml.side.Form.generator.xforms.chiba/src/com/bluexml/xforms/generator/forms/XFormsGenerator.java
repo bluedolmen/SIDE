@@ -36,7 +36,6 @@ import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.impl.FormGroupImpl;
-import com.bluexml.xforms.actions.AbstractAction;
 import com.bluexml.xforms.generator.AbstractDataGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.RenderableXForm;
@@ -1041,10 +1040,10 @@ public class XFormsGenerator extends AbstractDataGenerator {
 			FormTypeRendered formType, boolean isWrkflwSelectionForm) {
 		resetKeys();
 
-		List<AbstractAction> actions;
-		actions = new ArrayList<AbstractAction>();
+		List<FormSubmissionActions> actions;
+		actions = new ArrayList<FormSubmissionActions>();
 
-		for (AbstractAction abstractAction : formType.getActions()) {
+		for (FormSubmissionActions abstractAction : formType.getActions()) {
 			actions.add(0, abstractAction);
 		}
 
