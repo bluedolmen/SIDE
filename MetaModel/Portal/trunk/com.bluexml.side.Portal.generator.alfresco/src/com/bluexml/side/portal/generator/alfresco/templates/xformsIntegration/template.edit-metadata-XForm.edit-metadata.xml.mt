@@ -7,8 +7,8 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 
 <%-- Templates creation --%>
 <%script type="Portlet" name="createTemplates"%>
-<%if (name.toLowerCase() =="edit-metadata-XFrom"){%>
-<%getProperty("alf.share.paths.core.site-data")%>/components/template.edit-metadata-XForm.edit-metadata.xml
+<%if (name.toLowerCase() =="edit-metadata-xform"){%>
+<%getProperty("alf.share.paths.web-ext.components")%>/template.edit-metadata-XForm.edit-metadata.xml
 <%}%>
 
 <%script type="Portlet" name="alfrescoGenerator" file="<%createTemplates%>" post="trim()"%>
