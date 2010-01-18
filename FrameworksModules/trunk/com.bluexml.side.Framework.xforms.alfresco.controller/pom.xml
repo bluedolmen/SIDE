@@ -201,5 +201,16 @@
       </plugin>
     </plugins>
   </build>
+  <distributionManagement>
+        <repository>
+            <id>BXKB-repo</id>
+            <url>scp://merry.bluexml.com/home/m2/repositories/repository</url>
+        </repository>
+        <snapshotRepository>
+            <id>BXKB-repo</id>
+            <url>scp://merry.bluexml.com/home/m2/repositories/snapshotrepository</url>
+        </snapshotRepository>
+    </distributionManagement>
+  
 </project>
 
