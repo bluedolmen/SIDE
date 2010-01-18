@@ -196,6 +196,7 @@
           <outputDirectory>${project.build.sourceDirectory}</outputDirectory>
           <!-- Suppress package info annotation, otherwise each build would mark the working copy as dirty (SVN-wise) -->
           <arguments>-no-header</arguments>
+          <target>2.0</target>
         </configuration>
       </plugin>
     </plugins>
