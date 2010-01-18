@@ -52,7 +52,7 @@ public class RenderableChoiceInputSearch extends Renderable {
 		associationBean.setTitle(choiceField.getLabel());
 		associationBean.setHint(choiceField.getHelp_text());
 		associationBean.setShowingActions(false);
-		String lsize = "" + choiceField.getFieldSize();
+		String lsize = "" + choiceField.getField_size();
 		if (StringUtils.trimToNull(lsize) != null) {
 			associationBean.setFieldSize(lsize);
 		}

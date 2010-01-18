@@ -1078,7 +1078,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 			i++;
 		}
 		// field size
-		String lsize = "" + modelChoiceField.getFieldSize();
+		String lsize = "" + modelChoiceField.getField_size();
 		if (StringUtils.trimToNull(lsize) != null) {
 			modelChoiceType.setFieldSize(lsize);
 		}

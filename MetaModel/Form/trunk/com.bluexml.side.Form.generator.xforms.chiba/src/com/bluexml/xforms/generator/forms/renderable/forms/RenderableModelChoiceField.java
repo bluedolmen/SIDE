@@ -77,7 +77,7 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 		properties.setMandatory(formElement.isMandatory());
 
 		// set maximum number of items to display
-		String lsize = "" + formElement.getFieldSize();
+		String lsize = "" + formElement.getField_size();
 		if (StringUtils.trimToNull(lsize) != null) {
 			properties.setFieldSize(lsize);
 		}
