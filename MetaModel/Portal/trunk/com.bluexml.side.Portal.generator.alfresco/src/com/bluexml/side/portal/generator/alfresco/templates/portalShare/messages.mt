@@ -243,23 +243,14 @@ yuieditor.toolbar.item.italic=Italic CTRL + SHIFT + I
 yuieditor.toolbar.item.underline=Underline CTRL + SHIFT + U
 yuieditor.toolbar.item.link=HTML Link CTRL + SHIFT + L
 
-<%if (eContainer() == null) {%>
+## BlueXML SIDE Custom pages keys
 <%for (pageSet){%>
 <%ID.toLowerCase().nPut("messages_name")%>
 <%ID.nPut("title_name")%>
 <%title.nPut("description_name")%>
-<%for (portlets){%>
-<%for (associationPortlet){%>
-<%if (isPortletInternal != null && isPortletInternal.view != null){%>
-<%for (isPortletInternal.view){%>
-
-## BlueXML SIDE <%nGet("title_name")%> Custom page keys
+<%if (current().generate){%>
 page.<%nGet("messages_name")%>.title=<%nGet("title_name")%>
 page.<%nGet("messages_name")%>.description=<%if (nGet("description_name") !=null){%><%nGet("description_name")%><%}else{%><%}%>
+<%}%>
 
-<%}%>
-<%}%>
-<%}%>
-<%}%>
-<%}%>
 <%}%>

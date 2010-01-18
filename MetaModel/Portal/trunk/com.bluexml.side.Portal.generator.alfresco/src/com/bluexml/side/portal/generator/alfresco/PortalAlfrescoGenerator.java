@@ -14,7 +14,7 @@ import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
 public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 	static String GENERATOR_PARAM_SHAREURL = "alfresco.share.url";
-
+	static String GENERATOR_PARAM_FACETMAPURL = "facetMap.url";
 	static String GENERATOR_PARAM_XFORMURL = "com.bluexml.side.Form.generator.xforms.chiba.webappContext";
 
 	private static String MMUri = "http://www.kerblue.org/portal/1.0";
@@ -53,18 +53,27 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		// if (getGeneratorOptionValue(GENERATOR_OPTIONS_FORMS)) {
 		// see web-framework-config-custom.mt
 		// }
+		
+		// general templates, pages, navigation component 
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/presets.mt");
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/page.mt");
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/css.mt");
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template-instances.mt");
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/title.mt");
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/navigation.mt");
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/shareComponents.mt");
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template.mt");
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template_js.mt");
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/messages.mt");
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/create-site.get.properties.mt");
+		
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_FACETMAP)) {
 			// result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/web-framework-config-custom.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/presets.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/page.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/css.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template-instances.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/title.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/navigation.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/shareComponents.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template_js.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/messages.mt");
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/template.facetMap.xml.mt");
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.desc.xml.mt");
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.head.ftl.mt");
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.html.ftl.mt");
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.js.mt");
 		}
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_XFORMS)) {
 			// XForm portlet
@@ -108,6 +117,15 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		if (result == null || result.equals("")) {
 			System.out.println("share url, default value used");
 			result = "http://localhost:8080/share";
+		}
+		return result;
+	}
+	
+	public String getFacetMapURL(EObject o) {
+		String result = getGenerationParameter(GENERATOR_PARAM_FACETMAPURL);
+		if (result == null || result.equals("")) {
+			System.out.println("facetMap url, default value used");
+			result = "http://localhost:8080/facetmap";
 		}
 		return result;
 	}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Model" path="/bigTest/models/DefaultName.portal"/>
+    <files xsi:type="chain:Folder" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/default.log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/portal/1.0"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/css.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/messages.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/navigation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/page.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/presets.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/shareComponents.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template-instances.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template_js.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/title.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/portalShare/web-framework-config-custom.mt"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="css" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="messages" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="navigation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.6" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="page" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.7" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="presets" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.8" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="shareComponents" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.9" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-instances" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.10" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.11" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template_js" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.12" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="title" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.13" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="web-framework-config-custom" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.14" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>

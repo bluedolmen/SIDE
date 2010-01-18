@@ -1,6 +1,7 @@
 <%
 metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
+import com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 %>
 
@@ -44,9 +45,8 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 		<%for (associationPortlet){%>
 			<%if (isPortletInternal != null && isPortletInternal.view != null){%>
 				<%for (isPortletInternal.view){%>
-					<%if (current("view.FacetMap")){%>
-<iframe src="/facetmap/browseSimple_facets.jsp?facetName=<%name%>&community=${siteID}&userName=${userName}&userTicket=${ticket}" id="facetsContainer" style="width: 600px; height: 600px"></iframe>
-<iframe src="/facetmap/browseSimple_content.jsp?facetName=<%name%>&community=${siteID}&userName=${userName}&userTicket=${ticket}" id="resultsContainer" style="width: 600px; height: 600px"></iframe>
+					<%if (getGeneratorOptionValue("com.bluexml.side.Portal.generator.alfresco.forms") && current("view.FacetMap")){%>
+					<@region scope="template" id="<%current("Portlet").name%>" protected=true/>
 					<%}else{%>
 <%-- TODO : manage other view --%>
 <!-- portlet <%current("Portlet").name%>-->
