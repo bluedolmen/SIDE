@@ -13,7 +13,7 @@ package com.bluexml.side.form;
  *
  * <!-- begin-model-doc -->
  * Definition: used to upload file either on the filesystem or on an ECM repository.
- * Constraint/Limit: the path where to upload the file is not defined in the form model but must be supplied as configuration parameters of the form runtime.  In the case of XForms generation on Alfresco, the path is defined in the Ô<xforms_webapp>/WEB-INF/classes/alfresco.propertiesÕ configuration file.
+ * Constraint/Limit: the path where to upload the file is not defined in the form model but must be supplied as configuration parameters of the form runtime.  In the case of XForms generation on Alfresco, the path is defined in the â€˜<xforms_webapp>/WEB-INF/classes/alfresco.propertiesâ€™ configuration file.
  * Operations: Transformation to other formats (ImageField, CharField)
  * Inherits: Field
  * 
@@ -44,12 +44,12 @@ public interface FileField extends Field {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'inRepository' attributes specifies if the file will be imported in the target ECM repository (for instance Alfresco) or on the disk. 
 	 * In the case of Xforms generation on Alfresco, the target path to store the file is given through:
-	 * - If upload on disk (inRepository=false), the target directory must be set up either in the Ô<xforms_webapp>/WEB-INF/classes/alfresco.propertiesÕ file using the Ôupload.directoryÕ  parameter or through the url parameter ÔuploadDirectoryÕ.
-	 * - If upload on Alfresco repository (inRepository=true), the target space must be set up either in the Ô<xforms_webapp>/WEB-INF/classes/alfresco.propertiesÕ file using the Ôupload.repositoryÕ  parameter or through the url parameter ÔuploadRepositoryÕ.
+	 * - If upload on disk (inRepository=false), the target directory must be set up either in the â€˜<xforms_webapp>/WEB-INF/classes/alfresco.propertiesâ€™ file using the â€˜upload.directoryâ€™  parameter or through the url parameter â€˜uploadDirectoryâ€™.
+	 * - If upload on Alfresco repository (inRepository=true), the target space must be set up either in the â€˜<xforms_webapp>/WEB-INF/classes/alfresco.propertiesâ€™ file using the â€˜upload.repositoryâ€™  parameter or through the url parameter â€˜uploadRepositoryâ€™.
 	 * 
 	 * Example:
-	 * - 'false': The file will be uploaded to a directory of the file system. For instance, Ôupload.directory=c:\myWorkspace\filesÕ or ÔuploadDirectory=c:\myWorkspace\filesÕ; if not set up through upload.directory and uploadDirectory, default value is the current directory. 
-	 * - 'true': The file will be uploaded to the target repository. For instance, Ôupload.repository=app:company_home/cm:dictionaryÕ or ÔuploadRepositoryÕ= app:company_home/cm:dictionaryÕ; if not set up through upload.repository and uploadRepositoryÕ, default value is Ôapp:company_homeÕ for Alfresco.
+	 * - 'false': The file will be uploaded to a directory of the file system. For instance, â€˜upload.directory=c:\myWorkspace\filesâ€™ or â€˜uploadDirectory=c:\myWorkspace\filesâ€™; if not set up through upload.directory and uploadDirectory, default value is the current directory. 
+	 * - 'true': The file will be uploaded to the target repository. For instance, â€˜upload.repository=app:company_home/cm:dictionaryâ€™ or â€˜uploadRepositoryâ€™= app:company_home/cm:dictionaryâ€™; if not set up through upload.repository and uploadRepositoryâ€™, default value is â€˜app:company_homeâ€™ for Alfresco.
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>In Repository</em>' attribute.

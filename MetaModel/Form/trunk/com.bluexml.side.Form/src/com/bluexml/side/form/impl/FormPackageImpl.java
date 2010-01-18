@@ -34,6 +34,7 @@ import com.bluexml.side.form.EmailField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FieldSearchOperators;
 import com.bluexml.side.form.FileField;
+import com.bluexml.side.form.FileFieldPreviewType;
 import com.bluexml.side.form.FileFieldSearchOperators;
 import com.bluexml.side.form.FloatField;
 import com.bluexml.side.form.FormAspect;
@@ -610,7 +611,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_FieldSize() {
+	public EAttribute getField_Field_size() {
 		return (EAttribute)fieldEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -999,6 +1000,15 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 */
 	public EClass getFormClass() {
 		return formClassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFormClass_Has_content() {
+		return (EAttribute)formClassEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1452,6 +1462,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEReference(formWorkflowEClass, FORM_WORKFLOW__DATA_FORM);
 
 		formClassEClass = createEClass(FORM_CLASS);
+		createEAttribute(formClassEClass, FORM_CLASS__HAS_CONTENT);
 
 		booleanFieldEClass = createEClass(BOOLEAN_FIELD);
 
@@ -1660,7 +1671,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getField_Error_messages(), g1, "error_messages", null, 0, 1, Field.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Initial(), ecorePackage.getEString(), "initial", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Disabled(), ecorePackage.getEBoolean(), "disabled", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getField_FieldSize(), ecorePackage.getEInt(), "fieldSize", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getField_Field_size(), ecorePackage.getEInt(), "field_size", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Style(), ecorePackage.getEString(), "style", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getField_SearchOperatorConfiguration(), this.getSearchOperatorConfiguration(), null, "searchOperatorConfiguration", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Mockup(), ecorePackage.getEString(), "mockup", null, 0, -1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1677,6 +1688,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEReference(getFormWorkflow_DataForm(), this.getFormClass(), null, "DataForm", null, 0, 1, FormWorkflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(formClassEClass, FormClass.class, "FormClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFormClass_Has_content(), ecorePackage.getEBoolean(), "Has_content", "false", 0, 1, FormClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(booleanFieldEClass, BooleanField.class, "BooleanField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1865,7 +1877,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "ClassMustMatchWithProcessContentType"
-		   });				
+		   });					
 		addAnnotation
 		  (charFieldEClass, 
 		   source, 
@@ -1935,7 +1947,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "ClassMustMatchWithProcessContentType", "(not(self.getContainer().oclIsUndefined()) and not(self.getContainer().oclAsType(WorkflowFormCollection).linked_process.contentType.oclIsUndefined()) and (not self.DataForm.oclIsUndefined())) implies (self.getContainer().oclAsType(WorkflowFormCollection).linked_process.contentType = self.DataForm.real_class)"
-		   });						
+		   });							
 		addAnnotation
 		  (charFieldEClass, 
 		   source, 
@@ -1969,7 +1981,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																																										
+		   });																																																																																											
 	}
 
 	public FormFactory getFormsFactory() {

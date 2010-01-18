@@ -1078,7 +1078,7 @@ public interface FormPackage extends EPackage {
 	int FIELD__DISABLED = FORM_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1547,13 +1547,22 @@ public interface FormPackage extends EPackage {
 	int FORM_CLASS__REAL_CLASS = FORM_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Has content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__HAS_CONTENT = FORM_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 1;
+	int FORM_CLASS_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1691,7 +1700,7 @@ public interface FormPackage extends EPackage {
 	int BOOLEAN_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1871,7 +1880,7 @@ public interface FormPackage extends EPackage {
 	int CHAR_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2069,7 +2078,7 @@ public interface FormPackage extends EPackage {
 	int DATE_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2276,7 +2285,7 @@ public interface FormPackage extends EPackage {
 	int DATE_TIME_FIELD__DISABLED = DATE_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2493,7 +2502,7 @@ public interface FormPackage extends EPackage {
 	int NUMERICAL_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2673,7 +2682,7 @@ public interface FormPackage extends EPackage {
 	int DECIMAL_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2889,7 +2898,7 @@ public interface FormPackage extends EPackage {
 	int FLOAT_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3087,7 +3096,7 @@ public interface FormPackage extends EPackage {
 	int INTEGER_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3285,7 +3294,7 @@ public interface FormPackage extends EPackage {
 	int MODEL_CHOICE_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3546,7 +3555,7 @@ public interface FormPackage extends EPackage {
 	int EMAIL_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3744,7 +3753,7 @@ public interface FormPackage extends EPackage {
 	int FILE_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3933,7 +3942,7 @@ public interface FormPackage extends EPackage {
 	int IMAGE_FIELD__DISABLED = FILE_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4122,7 +4131,7 @@ public interface FormPackage extends EPackage {
 	int TIME_FIELD__DISABLED = DATE_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4329,7 +4338,7 @@ public interface FormPackage extends EPackage {
 	int URL_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4536,7 +4545,7 @@ public interface FormPackage extends EPackage {
 	int PHONE_NUMBER_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4878,7 +4887,7 @@ public interface FormPackage extends EPackage {
 	int REFERENCE__DISABLED = MODEL_CHOICE_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5139,7 +5148,7 @@ public interface FormPackage extends EPackage {
 	int CHOICE_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5355,7 +5364,7 @@ public interface FormPackage extends EPackage {
 	int REGEX_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5580,7 +5589,7 @@ public interface FormPackage extends EPackage {
 	int PASSWORD_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5778,7 +5787,7 @@ public interface FormPackage extends EPackage {
 	int VIRTUAL_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5967,7 +5976,7 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -6147,7 +6156,7 @@ public interface FormPackage extends EPackage {
 	int TEXT_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -6789,15 +6798,15 @@ public interface FormPackage extends EPackage {
 	EAttribute getField_Disabled();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#getFieldSize <em>Field Size</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#getField_size <em>Field size</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Field Size</em>'.
-	 * @see com.bluexml.side.form.Field#getFieldSize()
+	 * @return the meta object for the attribute '<em>Field size</em>'.
+	 * @see com.bluexml.side.form.Field#getField_size()
 	 * @see #getField()
 	 * @generated
 	 */
-	EAttribute getField_FieldSize();
+	EAttribute getField_Field_size();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#getStyle <em>Style</em>}'.
@@ -7255,6 +7264,17 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getFormClass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormClass#isHas_content <em>Has content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Has content</em>'.
+	 * @see com.bluexml.side.form.FormClass#isHas_content()
+	 * @see #getFormClass()
+	 * @generated
+	 */
+	EAttribute getFormClass_Has_content();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.Reference <em>Reference</em>}'.
@@ -7851,12 +7871,12 @@ public interface FormPackage extends EPackage {
 		EAttribute FIELD__DISABLED = eINSTANCE.getField_Disabled();
 
 		/**
-		 * The meta object literal for the '<em><b>Field Size</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Field size</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FIELD__FIELD_SIZE = eINSTANCE.getField_FieldSize();
+		EAttribute FIELD__FIELD_SIZE = eINSTANCE.getField_Field_size();
 
 		/**
 		 * The meta object literal for the '<em><b>Style</b></em>' attribute feature.
@@ -8233,6 +8253,14 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FORM_CLASS = eINSTANCE.getFormClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Has content</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FORM_CLASS__HAS_CONTENT = eINSTANCE.getFormClass_Has_content();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ReferenceImpl <em>Reference</em>}' class.

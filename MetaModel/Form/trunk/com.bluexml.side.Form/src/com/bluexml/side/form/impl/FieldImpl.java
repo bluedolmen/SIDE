@@ -41,7 +41,7 @@ import java.util.Collection;
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getError_messages <em>Error messages</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getInitial <em>Initial</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#isDisabled <em>Disabled</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getFieldSize <em>Field Size</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getField_size <em>Field size</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getStyle <em>Style</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getSearchOperatorConfiguration <em>Search Operator Configuration</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getMockup <em>Mockup</em>}</li>
@@ -122,24 +122,24 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	protected boolean disabled = DISABLED_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getFieldSize() <em>Field Size</em>}' attribute.
+	 * The default value of the '{@link #getField_size() <em>Field size</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFieldSize()
+	 * @see #getField_size()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final int FIELD_SIZE_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getFieldSize() <em>Field Size</em>}' attribute.
+	 * The cached value of the '{@link #getField_size() <em>Field size</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFieldSize()
+	 * @see #getField_size()
 	 * @generated
 	 * @ordered
 	 */
-	protected int fieldSize = FIELD_SIZE_EDEFAULT;
+	protected int field_size = FIELD_SIZE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStyle() <em>Style</em>}' attribute.
@@ -289,8 +289,8 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getFieldSize() {
-		return fieldSize;
+	public int getField_size() {
+		return field_size;
 	}
 
 	/**
@@ -298,11 +298,11 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFieldSize(int newFieldSize) {
-		int oldFieldSize = fieldSize;
-		fieldSize = newFieldSize;
+	public void setField_size(int newField_size) {
+		int oldField_size = field_size;
+		field_size = newField_size;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__FIELD_SIZE, oldFieldSize, fieldSize));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__FIELD_SIZE, oldField_size, field_size));
 	}
 
 	/**
@@ -447,7 +447,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case FormPackage.FIELD__DISABLED:
 				return isDisabled();
 			case FormPackage.FIELD__FIELD_SIZE:
-				return getFieldSize();
+				return getField_size();
 			case FormPackage.FIELD__STYLE:
 				return getStyle();
 			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
@@ -480,7 +480,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 				setDisabled((Boolean)newValue);
 				return;
 			case FormPackage.FIELD__FIELD_SIZE:
-				setFieldSize((Integer)newValue);
+				setField_size((Integer)newValue);
 				return;
 			case FormPackage.FIELD__STYLE:
 				setStyle((String)newValue);
@@ -517,7 +517,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 				setDisabled(DISABLED_EDEFAULT);
 				return;
 			case FormPackage.FIELD__FIELD_SIZE:
-				setFieldSize(FIELD_SIZE_EDEFAULT);
+				setField_size(FIELD_SIZE_EDEFAULT);
 				return;
 			case FormPackage.FIELD__STYLE:
 				setStyle(STYLE_EDEFAULT);
@@ -549,7 +549,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case FormPackage.FIELD__DISABLED:
 				return disabled != DISABLED_EDEFAULT;
 			case FormPackage.FIELD__FIELD_SIZE:
-				return fieldSize != FIELD_SIZE_EDEFAULT;
+				return field_size != FIELD_SIZE_EDEFAULT;
 			case FormPackage.FIELD__STYLE:
 				return STYLE_EDEFAULT == null ? style != null : !STYLE_EDEFAULT.equals(style);
 			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
@@ -578,8 +578,8 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		result.append(initial);
 		result.append(", disabled: ");
 		result.append(disabled);
-		result.append(", fieldSize: ");
-		result.append(fieldSize);
+		result.append(", field_size: ");
+		result.append(field_size);
 		result.append(", style: ");
 		result.append(style);
 		result.append(", mockup: ");

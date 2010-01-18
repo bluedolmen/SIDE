@@ -16,9 +16,9 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-model-doc -->
  * Definition: The 'ModelChoiceField' makes reference to the associations of classes. An association is, by default seen as a select list with all elements of the targeted class. This association can be expanded in order to have a form of the targeted elements in the form itself.
  * Operations:
- * - 'Relation / Expand to reference': Available on association, this action allows having the form of the linked class inside the actual form. It creates another form under the same form collection that can be personalized too: this form is directly inserted in the uniting form; we say the form is ÔinlineÕ instead of ÔSelectÕ.
- * - 'Relation / Collapse to Model Choice FieldÕ: when an association has been expanded, this operation allows coming back to the Select mode.
- * - ÔRelation / Add Reference': Available after an ÔexpandÕ operation, it works the same way. It will add a form to the original form. Only available on associations with max cardinality set to more than one.
+ * - 'Relation / Expand to reference': Available on association, this action allows having the form of the linked class inside the actual form. It creates another form under the same form collection that can be personalized too: this form is directly inserted in the uniting form; we say the form is â€˜inlineâ€™ instead of â€˜Selectâ€™.
+ * - 'Relation / Collapse to Model Choice Fieldâ€™: when an association has been expanded, this operation allows coming back to the Select mode.
+ * - â€˜Relation / Add Reference': Available after an â€˜expandâ€™ operation, it works the same way. It will add a form to the original form. Only available on associations with max cardinality set to more than one.
  * Inherits: ClassReference, Field.
  * <!-- end-model-doc -->
  *
@@ -51,7 +51,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: the number of choice items in the list for pagination.
-	 * Constraint/limit: The input value cannot be not superior to the Ômax_boundÕ.
+	 * Constraint/limit: The input value cannot be not superior to the â€˜max_boundâ€™.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min bound</em>' attribute.
 	 * @see #setMin_bound(int)
@@ -175,7 +175,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'Show_actions' attribute specifies that the action field ÔeditÕ, ÔcreateÕ, ÔdeleteÕ or others are available if true or are not visible if false. If false, this allows to integrated read-only sub-form.
+	 * Definition: The 'Show_actions' attribute specifies that the action field â€˜editâ€™, â€˜createâ€™, â€˜deleteâ€™ or others are available if true or are not visible if false. If false, this allows to integrated read-only sub-form.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Show actions</em>' attribute.
 	 * @see #setShow_actions(boolean)

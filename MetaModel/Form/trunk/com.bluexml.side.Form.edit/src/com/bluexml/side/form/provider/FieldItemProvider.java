@@ -67,7 +67,7 @@ public class FieldItemProvider
 			addError_messagesPropertyDescriptor(object);
 			addInitialPropertyDescriptor(object);
 			addDisabledPropertyDescriptor(object);
-			addFieldSizePropertyDescriptor(object);
+			addField_sizePropertyDescriptor(object);
 			addStylePropertyDescriptor(object);
 			addMockupPropertyDescriptor(object);
 		}
@@ -163,18 +163,18 @@ public class FieldItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Field Size feature.
+	 * This adds a property descriptor for the Field size feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addFieldSizePropertyDescriptor(Object object) {
+	protected void addField_sizePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Field_fieldSize_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_fieldSize_feature", "_UI_Field_type"),
+				 getString("_UI_Field_field_size_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_field_size_feature", "_UI_Field_type"),
 				 FormPackage.Literals.FIELD__FIELD_SIZE,
 				 true,
 				 false,

@@ -49,7 +49,7 @@ public interface FormElement extends ModelElement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'label' attribute specifies the text associated to a form element. This text is displayed on or near the form element.
-	 * Constraint/Limit: The internationalization convention may be used for the label's value; if the value of the label in the form model is of the form "#label",  the token "label" is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
+	 * Constraint/Limit: The internationalization convention may be used for the label's value; if the value of the label in the form model is of the form "#label",  the token "label" is then considered as a ‚Äúdelayed message‚Äù, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Label</em>' attribute.
 	 * @see #setLabel(String)
@@ -111,7 +111,7 @@ public interface FormElement extends ModelElement {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'help_text' attribute specifies a text that will appear when the cursor moves over the form element.
 	 * 
-	 * Constraint/Limit: The internationalization convention may be used for the help_text's value; if the value of the help_text in the form model is of the form "#label",  the token "label" is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
+	 * Constraint/Limit: The internationalization convention may be used for the help_text's value; if the value of the help_text in the form model is of the form "#label",  the token "label" is then considered as a ‚Äúdelayed message‚Äù, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
 	 * 
 	 * Example: help_text=This is an help message
 	 * <!-- end-model-doc -->

@@ -13,11 +13,11 @@ package com.bluexml.side.form;
  *
  * <!-- begin-model-doc -->
  * Definition: The 'ActionField' represents a button.
- * You must set the ÔnameÕ attribute to the fully qualified name of a Java class and the ÔLabelÕ attribute to the text (or code for internationalization) you want to display on the button.
- * This class must implement a ÔrunÕ method whose signature is : public void run(org.w3c.dom.Node node, java.lang.String dataId)
+ * You must set the â€˜nameâ€™ attribute to the fully qualified name of a Java class and the â€˜Labelâ€™ attribute to the text (or code for internationalization) you want to display on the button.
+ * This class must implement a â€˜runâ€™ method whose signature is : public void run(org.w3c.dom.Node node, java.lang.String dataId)
  * where :
- * -	ÔnodeÕ is the form tree
- * -	ÔdataIdÕ is the id of the node being edited: dataId is null when in creation mode.
+ * -	â€˜nodeâ€™ is the form tree
+ * -	â€˜dataIdâ€™ is the id of the node being edited: dataId is null when in creation mode.
  * When the form is initialized, the button is generated. On click, the Java class loader loads and run the class (check that the class location is in the classpath).
  * 
  * 

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.form.FileField;
+import com.bluexml.side.form.FileFieldPreviewType;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 

@@ -12,9 +12,9 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The ÔRegexFieldÕ allows setting a constraint on the value of an input field. The langage used to express this constraint is standard Java Regular expression (java.util.regex). 
- * To create a RegexField (not available in the Data model), you must use a ÔTransform to RegexFieldÕ operation on the field where you want to make a control of the user input.
- * Example: Ò.+@.+\\.[a-z]+Ó to validate the structure of an email
+ * Definition: The â€˜RegexFieldâ€™ allows setting a constraint on the value of an input field. The langage used to express this constraint is standard Java Regular expression (java.util.regex). 
+ * To create a RegexField (not available in the Data model), you must use a â€˜Transform to RegexFieldâ€™ operation on the field where you want to make a control of the user input.
+ * Example: â€œ.+@.+\\.[a-z]+â€ to validate the structure of an email
  * 
  * 
  * Inherits: CharField.

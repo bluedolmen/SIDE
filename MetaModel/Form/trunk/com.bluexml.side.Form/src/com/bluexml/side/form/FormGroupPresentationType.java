@@ -33,7 +33,7 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	AUTO(0, "auto", "auto"),
+	AUTO(0, "Auto", "Auto"),
 
 	/**
 	 * The '<em><b>Horizontal</b></em>' literal object.
@@ -43,7 +43,7 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	HORIZONTAL(1, "horizontal", "horizontal"),
+	HORIZONTAL(1, "Horizontal", "Horizontal"),
 
 	/**
 	 * The '<em><b>Vertical</b></em>' literal object.
@@ -53,7 +53,7 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	VERTICAL(2, "vertical", "vertical"), /**
+	VERTICAL(2, "Vertical", "Vertical"), /**
 	 * The '<em><b>Tabbed</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,7 +69,7 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	BORDERLESS(4, "borderless", "borderless");
+	BORDERLESS(4, "Borderless", "Borderless");
 
 	/**
 	 * The '<em><b>Auto</b></em>' literal value.
@@ -83,7 +83,7 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * Definition: The 'auto' option displays elements in an horizontal way with a border.
 	 * <!-- end-model-doc -->
 	 * @see #AUTO
-	 * @model name="auto"
+	 * @model name="Auto"
 	 * @generated
 	 * @ordered
 	 */
@@ -101,7 +101,7 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * Definition: The 'horizontal' option displays elements in an horizontal way. The label of the form group will not appear.
 	 * <!-- end-model-doc -->
 	 * @see #HORIZONTAL
-	 * @model name="horizontal"
+	 * @model name="Horizontal"
 	 * @generated
 	 * @ordered
 	 */
@@ -119,7 +119,7 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * Definition: The 'vertical' value displays elements in a vertical way. The label of the form group will not appear.
 	 * <!-- end-model-doc -->
 	 * @see #VERTICAL
-	 * @model name="vertical"
+	 * @model name="Vertical"
 	 * @generated
 	 * @ordered
 	 */
@@ -155,7 +155,7 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * Definition: The 'bordeless' option displays elements border. The label of the form group will not appear.
 	 * <!-- end-model-doc -->
 	 * @see #BORDERLESS
-	 * @model name="borderless"
+	 * @model name="Borderless"
 	 * @generated
 	 * @ordered
 	 */

@@ -115,7 +115,7 @@
         <details key="documentation" value="Definition: The 'disabled' attribute protects the field from being modified if true. If false (default), it can be modified."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="field_size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'fieldSize' attribute specifies the number of element to show for a selection list.&#xD;&#xD;&#xD;&#xA;Constraint/limit: When there are two relations R1 and R2 between the two same classes A and B, the value of field size set for R1 will be set for R2 too, even there is no value for field size of R2.&#xD;&#xA;&#xD;&#xD;Example: Field Size = 10 will limit to 10 the number of elements in a generated selection list."/>
       </eAnnotations>
@@ -165,6 +165,12 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The Form Class is the container for the form itself. If not empty, this element generates a form. Moreover, the Form Class is the link between a single data class of the loaded Data Model and the customized form.&#xD;&#xA;Operations: &#xD;&#xA;-&#x9;The operation 'Load Ressources...' enables to select and import Data Models in the Form Model. One of the first steps to modelize form is to connect this form diagram with the data model through this operation: Right click on the editor and select 'Load Resource' to choose a data model (with suffix .dt and not a '.dtdi' data diagram). The Real Class attribute of Form Class may then be set up by selecting the name of the targeted data class of the loaded data model. &#xD;&#xA;-&#x9;The operation 'Initialize form class' creates the default form from a selected Data Class. The selected Data Class is set up with the attribute 'Real class'. This action creates all fields corresponding to the Attributes and Associations defined in the data model: this default form may then be refined according to the needs.&#xD;&#xA;-&#x9;The operation ‘Refresh Outline’ refreshes an outline html view of the form. This view is useful to see the transformations made on the form before generating it and to have a general view of what will be generated. It is important to note that this outline view does not give the final generated form and the shape may be different according to the targeted technology.&#xD;&#xA;-&#x9;The operation ‘Restore’ allows restoring a field which has been previously deleted.&#xD;&#xA;Inherits: ClassReference, FormContainer.&#xD;&#xA;"/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Has_content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This option tells whether the data form may have a content. If true, a content upload field (that does not appear in the modeler and has no file preview) will be automatically attached to the form."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -438,17 +444,17 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'FormGroupPresentationType' is an enumeration list with the different layout for a form group."/>
     </eAnnotations>
-    <eLiterals name="auto">
+    <eLiterals name="Auto">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'auto' option displays elements in an horizontal way with a border."/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="horizontal" value="1">
+    <eLiterals name="Horizontal" value="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'horizontal' option displays elements in an horizontal way. The label of the form group will not appear."/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="vertical" value="2">
+    <eLiterals name="Vertical" value="2">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'vertical' value displays elements in a vertical way. The label of the form group will not appear."/>
       </eAnnotations>
@@ -458,7 +464,7 @@
         <details key="documentation" value="Definition: The 'Tabbed' option displays elements in a tab."/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="borderless" value="4" literal="borderless">
+    <eLiterals name="Borderless" value="4" literal="Borderless">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'bordeless' option displays elements border. The label of the form group will not appear."/>
       </eAnnotations>

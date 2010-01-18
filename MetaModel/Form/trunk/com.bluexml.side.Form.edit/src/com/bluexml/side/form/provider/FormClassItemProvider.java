@@ -21,6 +21,8 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormPackage;
 
@@ -60,6 +62,7 @@ public class FormClassItemProvider
 			super.getPropertyDescriptors(object);
 
 			addReal_classPropertyDescriptor(object);
+			addHas_contentPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -82,6 +85,28 @@ public class FormClassItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Has content feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHas_contentPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FormClass_Has_content_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FormClass_Has_content_feature", "_UI_FormClass_type"),
+				 FormPackage.Literals.FORM_CLASS__HAS_CONTENT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -126,6 +151,12 @@ public class FormClassItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(FormClass.class)) {
+			case FormPackage.FORM_CLASS__HAS_CONTENT:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

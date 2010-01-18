@@ -44,7 +44,7 @@ public interface CharField extends Field {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'min_length' attribute specifies the minimum length of a char field input.
 	 * Constraint/limit: If the 'min_length' attribute is superior than 0, the char field is mandatory. If you want to set up a non-mandatory with a mininum length when filled up, use a regular expression.
-	 * The input value cannot be superior to the Ômax_lengthÕ.
+	 * The input value cannot be superior to the â€˜max_lengthâ€™.
 	 * Example: min_length=1
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min length</em>' attribute.
@@ -76,7 +76,7 @@ public interface CharField extends Field {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'max_length' attribute specifies the maximum length of a char field input.
 	 * 
-	 * Constraint/Limit: The input value cannot be inferior to the Ômin_lengthÕ.
+	 * Constraint/Limit: The input value cannot be inferior to the â€˜min_lengthâ€™.
 	 * 
 	 * Example: max_length=9
 	 * <!-- end-model-doc -->

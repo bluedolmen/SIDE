@@ -43,7 +43,7 @@ public interface ChoiceField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: the minimum number of choice items in the list.
-	 * Constraint/limit: The input value cannot be superior to the Ômax_boundÕ.
+	 * Constraint/limit: The input value cannot be superior to the â€˜max_boundâ€™.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min bound</em>' attribute.
 	 * @see #setMin_bound(int)
