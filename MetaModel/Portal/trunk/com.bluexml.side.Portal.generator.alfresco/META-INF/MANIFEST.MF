@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Alfresco Share Portal Generator
 Bundle-SymbolicName: com.bluexml.side.Portal.generator.alfresco;singleton:=true
-Bundle-Version: 1.0.27.v12901-20100116
+Bundle-Version: 1.0.28.v12919-20100118
 Bundle-Activator: com.bluexml.side.portal.generator.alfresco.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
