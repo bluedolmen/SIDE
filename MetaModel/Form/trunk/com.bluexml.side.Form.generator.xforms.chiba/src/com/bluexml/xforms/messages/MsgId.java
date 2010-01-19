@@ -64,7 +64,8 @@ public enum MsgId {
 	MSG_STATUS_EMPTY				("status.message.empty"),
 	MSG_STATUS_ITERATION			("status.message.iteration.postfix"),
 	MSG_UPLOAD_FAILED				("upload.to.repository.failure"),
-	MSG_UPLOAD_NODE_CONTENT_LABEL	("upload.node.content.label"),
+	MSG_UPLOAD_CONTENT_FIELD_LABEL	("upload.node.content.field.label"),
+	MSG_UPLOAD_CONTENT_GROUP_LABEL	("upload.node.content.group.label"),
 	MSG_WKFLW_ERROR_START_FAILURE	("workflow.error.start.failure"),
 	MSG_WKFLW_ERROR_SUBMIT_DATA		("workflow.error.submit.data"),
 	MSG_WKFLW_GLOBAL_GROUP			("workflow.selection.global.group"),
@@ -80,7 +81,7 @@ public enum MsgId {
 	// label for create in selection widget
 	CAPTION_BUTTON_CREATE			("caption.button.create"),
 	CAPTION_BUTTON_DELETE			("caption.button.delete"),
-	// label for modify (edit) in right side of selection widget
+	// label for 'Modify' (edit) on right side of selection widget
 	CAPTION_BUTTON_EDIT				("caption.button.edit"),
 	CAPTION_BUTTON_SETTYPE			("caption.button.settype"),
 	CAPTION_BUTTON_SUBMIT			("caption.button.submit"),
@@ -159,6 +160,7 @@ public enum MsgId {
 	INT_INSTANCE_SELECTEDLABEL			("SELECTEDLABEL"),
 	INT_INSTANCE_SELECTEDMAX			("SELECTEDMAX"),
 	INT_INSTANCE_SIDE_DATATYPE			("SIDEDataType"),
+	INT_INSTANCE_SIDE_NODE_CONTENT		("SIDENodeContent"),
 	INT_INSTANCE_SIDEEDIT				("SIDEEDIT"),
 	INT_INSTANCE_SIDEID					("SIDEID"),
 	INT_INSTANCE_SIDELABEL				("SIDELABEL"),

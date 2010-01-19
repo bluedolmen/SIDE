@@ -94,7 +94,8 @@ public class DefaultMessages {
 			"# status.message.empty should have at least one whitespace",
 			"status.message.empty=\\ ", "# 0: sequence number of the iteration",
 			"status.message.iteration.postfix=\\ ({0})",
-			"upload.node.content.label=Upload your content",
+			"upload.node.content.field.label=Upload a file",
+			"upload.node.content.group.label=Attach content",
 			"upload.to.repository.failure=Upload to the repository failed.", "" };
 
 	/**
