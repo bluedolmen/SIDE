@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;extension base="{}canisterType">
  *       &lt;sequence>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="contentEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="virtual" type="{}virtualFieldType" maxOccurs="unbounded"/>
  *         &lt;element name="reference" type="{}referenceType" maxOccurs="unbounded"/>
  *         &lt;element name="fileField" type="{}fileFieldType" maxOccurs="unbounded"/>
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "formType", propOrder = {
     "name",
+    "contentEnabled",
     "virtual",
     "reference",
     "fileField",
@@ -46,6 +48,7 @@ public class FormType
 
     @XmlElement(required = true)
     protected String name;
+    protected boolean contentEnabled;
     @XmlElement(required = true)
     protected List<VirtualFieldType> virtual;
     @XmlElement(required = true)
@@ -77,6 +80,22 @@ public class FormType
      */
     public void setName(String value) {
         this.name = value;
+    }
+
+    /**
+     * Gets the value of the contentEnabled property.
+     * 
+     */
+    public boolean isContentEnabled() {
+        return contentEnabled;
+    }
+
+    /**
+     * Sets the value of the contentEnabled property.
+     * 
+     */
+    public void setContentEnabled(boolean value) {
+        this.contentEnabled = value;
     }
 
     /**
