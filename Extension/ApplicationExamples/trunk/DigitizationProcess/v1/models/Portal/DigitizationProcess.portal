@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<portal:Portal xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:portal="http://www.kerblue.org/portal/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_SmQJcOM3Ed6qNvjsNi40SA">
+<portal:Portal xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:portal="http://www.kerblue.org/portal/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_SmQJcOM3Ed6qNvjsNi40SA" name="DigitizationProcess">
   <pageSet xmi:id="_TDopAOM3Ed6qNvjsNi40SA" ID="PageLibrary" useLayout="_U7m3QOM3Ed6qNvjsNi40SA">
     <portlets xmi:id="_mYPtQOM3Ed6qNvjsNi40SA" associationPortlet="_eH4ZkOM3Ed6qNvjsNi40SA" associationPage="_TDopAOM3Ed6qNvjsNi40SA"/>
     <portlets xmi:id="_qfvuIOM3Ed6qNvjsNi40SA" associationPortlet="_eH4ZkOM3Ed6qNvjsNi40SA" associationPage="_TDopAOM3Ed6qNvjsNi40SA"/>
