@@ -156,6 +156,7 @@
 			<xsd:extension base="canisterType">
 				<xsd:sequence>
 					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="hasContent" type="xsd:boolean" />
 					<xsd:element maxOccurs="unbounded" name="virtual" type="virtualFieldType" />
 					<xsd:element maxOccurs="unbounded" name="reference" type="referenceType" />
 					<xsd:element maxOccurs="unbounded" name="fileField" type="fileFieldType" />
