@@ -4,7 +4,6 @@
 package com.bluexml.side.Framework.alfresco.dataGenerator.generator;
 
 import java.util.Collection;
-import java.util.Map;
 
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
@@ -98,11 +97,11 @@ public class Instance implements IInstance {
 	public INode instanciation(TypeDefinition type) throws Exception{
 		INode nodeInstance = new AlfrescoNode();
 		Collection<PropertyDefinition> properties = ((AlfrescoModelStructure) structure).getProperties().get(type);
-		((AlfrescoNode) nodeInstance).setDatasProperties(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDatasProperties(properties));
+		((AlfrescoNode) nodeInstance).setDatasProperties(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDatasProperties(type,properties));
 		((AlfrescoNode) nodeInstance).setNativeNode(((NativeInstance) nativeInstance).instanciation(type));
 		((AlfrescoNode) nodeInstance).setTypeDefinition(type);
 		Collection<AspectDefinition> aspects = ((AlfrescoModelStructure) structure).getAspects().get(type);
-		((AlfrescoNode) nodeInstance).setDataAspects(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDataAspect(aspects));
+		((AlfrescoNode) nodeInstance).setDataAspects(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDataAspect(type,aspects));
 		return nodeInstance;
 	}
 
