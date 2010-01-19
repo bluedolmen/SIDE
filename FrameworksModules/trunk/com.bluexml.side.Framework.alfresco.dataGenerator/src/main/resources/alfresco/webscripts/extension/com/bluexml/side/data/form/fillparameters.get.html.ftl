@@ -1,16 +1,21 @@
 <html>
     <style type="text/css">
+    	body {font-family: Tahoma;}
+    	h2 {text-align: center; color: white;  background-color: blue;}
+    	p#intro {text-align: center;}
+    	p#note {font-style:italic; font-size: 8pt;}
 	    div#property {margin: 2 0 2 0;}
-	    div#label {width: 500px; margin-right: 5px; text-align: right; font-weight: bold; display: block; float: left}
+	    div#label {width: 600px; margin-right: 5px; text-align: right; font-weight: bold; display: block; float: left;}
 	    div#field {width:300px; text-align: left; display: inline;}
-	    div#button {width:800px; padding: 2 400 2 400;}               
+	    div#button {width:800px; padding: 2 200 2 600;}               
     </style>
 
 	<body>
-		<h2>Random Data Model Generator</h2>
+	   <h2>SIDE-Alfresco: Random Metadata and document Loading for Test</h2>
+	   <p id="intro">The following input form allows to give the parameters to load test metadata and documents in the Alfresco repository in conformance with the customized content types you model, generate and deploy through SIDE-Alfresco MDA environment:</p>
 	   <form method="post" action="/alfresco/service/data/generate/generate">
 	            <div id="property">
-	                    <div id="label">Model: </div>
+	                    <div id="label">SIDE Data Model: </div>
 	                    <div id="field">
 	                            <select name="model">
 	                            <#list qnameModels as qnameModel>
@@ -20,33 +25,61 @@
 	                    </div>
 	            </div>
 	            <div id="property">
-	                    <div id="label">Number of generated model contents: </div>        
+	                    <div id="label">Number of content type instances to load: </div>        
 	                    <div id="field">
 	                            <input name="numOfInstances" type="text" />
 	                    </div>
 	            </div>
 	            <div id="property">
-	                    <div id="label">Maximum number of output associations per content: </div>
+	                    <div id="label">Maximum Number of output associations per content type instance: </div>
 	                    <div id="field">
 	                            <input name="numOfOutputArcs" type="text" />
 	                    </div>
 	            </div>
 	            <div id="property">
-	                    <div id="label">Path to associates documents folder : </div>
+	                    <div id="label">Path to the documents to load with generated metadata: </div>
 	                    <div id="field">
 	                            <input name="pathToDocuments" type="text" />
 	                    </div>
 	            </div>
 	            <div id="property">
-                        <div id="label">Alfresco path repository to store ACP and its deployement (use XPath representation): </div>
+                        <div id="label">Path to store documents in Alfresco: </div>
                         <div id="field">
                                 /app:company_home/       
                                 <input name="alfrescoRepository" type="text" value="app:guest_home/"/>
                         </div>                        
 	            </div>
+	            <div id="property">
+	                    <div id="label">Scenario: </div>
+	                    <div id="field">
+	                            <select name="scenario">
+	                            	<option value="random">Random</option>
+	                            	<option value="incremental">Incremental</option>
+	                            </select>
+	                    </div>
+	            </div>
 	            <div id="button">
 	                    <input name="submit" type="Submit" value="Generate" />
 	            </div>
 	    </form>
+	    <p id="note">Note:</p> 
+	    <table>
+	    	<td>
+	    		<tr>
+	    			<p id="note">- SIDE Data model: The select list gives you the valid Alfresco data model extensions you can use to generated new content types.</p>
+	    		</tr>
+	    		<tr>
+	    			<p id="note">- Number of content type instances to load: this parameter allows limiting the overall number of data you want the webscript stores in ALfresco. It is important to note that this number is for all the content types defined in the Alfresco data model you choose through the previous parameter: if you give a value inferior to the number of content types in the model, some content type may not be generated.</p> 
+	    		</tr>
+	    		<tr>
+	    			<p id="note">- Maximum Number of output associations per content type instance: this parameter allows limiting the number of associations between nodes; this limitation is achieved per node (content type instance).</p>
+	    		</tr>
+	    		<tr>
+	    			<p id="note">- Path to store documents in Alfresco: this parameters points to a folder where you can store files in order they are associated as content to the newly Alfresco nodes. If you do not set this parameters, the node will be generated without content but only metadata.</p>
+	    		</tr> 
+	    		<tr>
+	    			<p id="note">- Path to store documents in Alfresco: this parameters allows to define the Alfresco path to store the generated nodes under /app:company_home; this path must be expressed using an Xpath representation like app:guest_home/cm:testData; It is important to note that you must be connected to Alfresco under an account having write permission on this Path.</p>
+	    		</tr>
+	    </table>
 	</body>
 </html>
