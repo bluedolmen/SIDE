@@ -74,7 +74,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 				//Delete backup model
 				if (resource instanceof IFile) {
 					IFile file = (IFile) resource;
-					IFile backupModel = getBackupModel(file);
+					IFile backupModel = SIDEBuilderUtil.getBackupModel(file);
 					if (backupModel.exists())
 						backupModel.delete(true, null);
 				}
@@ -101,7 +101,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 								doc.getModels().removeModel(i);
 							
 							//Save the referential
-							prepareFolder((IFolder) referential.getParent());
+							SIDEBuilderUtil.prepareFolder((IFolder) referential.getParent());
 							File f = referential.getRawLocation().toFile();
 							if (!f.exists())
 								f.createNewFile();
@@ -184,7 +184,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
 			throws CoreException {
 		IFolder folder = getProject().getFolder(SIDEBuilderConstants.metadataFolder);
-		prepareFolder(folder);
+		SIDEBuilderUtil.prepareFolder(folder);
 		
 		checkedFiles = new ArrayList<String>();
 		if (kind == FULL_BUILD) {
@@ -248,23 +248,15 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		}
 	}
 	
-	private IFile getBackupModel(IFile file) {
-		IPath path = file.getFullPath().removeFirstSegments(1);
-		IFolder folder = file.getProject().getFolder(SIDEBuilderConstants.metadataFolder);
-		folder = folder.getFolder(path.removeLastSegments(1));
-		path = folder.getFullPath().append(file.getName());	
-		return file.getProject().getFile(path.removeFirstSegments(1));
-	}
-	
 	private void backupModel(IFile file) {
 		try {
 			if (file.exists()) {
-				IFile backupModel = getBackupModel(file);
+				IFile backupModel = SIDEBuilderUtil.getBackupModel(file);
 				if (backupModel.exists())
 					backupModel.delete(true, null);
 				IResource container = backupModel.getParent(); 
 				if (!container.exists() && container instanceof IFolder)
-					prepareFolder((IFolder) container);
+					SIDEBuilderUtil.prepareFolder((IFolder) container);
 				file.copy(backupModel.getFullPath(), true, null);
 			}
 		} catch (CoreException e) {
@@ -393,7 +385,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 					//Save the referential
 					IProject p = file.getProject();
 					IFile referential = p.getFile(SIDEBuilderConstants.referentialFileName);
-					prepareFolder((IFolder) referential.getParent());
+					SIDEBuilderUtil.prepareFolder((IFolder) referential.getParent());
 					File f = referential.getRawLocation().toFile();
 					if (!f.exists())
 						f.createNewFile();
@@ -496,9 +488,8 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			throws CoreException {
 		try {
 			IFolder folder = getProject().getFolder(SIDEBuilderConstants.metadataFolder);
-			if (folder.exists())
-				folder.delete(true, null);
-			prepareFolder(folder);
+			SIDEBuilderUtil.clearFolder(folder);
+			SIDEBuilderUtil.prepareFolder(folder);
 			getProject().accept(new EMFResourceVisitor());
 		} catch (CoreException e) {
 		}
@@ -521,13 +512,5 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		delta.accept(new SIDEDeltaVisitor());
 	}
 	
-	public void prepareFolder(IFolder folder) throws CoreException
-	{
-		IContainer parent = folder.getParent();
-		if (parent instanceof IFolder)
-			prepareFolder((IFolder) parent);
-		if (!folder.exists())
-			folder.create(true, true, null);
-	}
 }
 		
