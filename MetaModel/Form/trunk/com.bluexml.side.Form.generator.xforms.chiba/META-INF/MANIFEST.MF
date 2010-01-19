@@ -5,7 +5,8 @@ Bundle-SymbolicName: com.bluexml.side.Form.generator.xforms.chiba;singleton:=tru
 Bundle-Version: 1.0.70.v12938-20100119
 Bundle-Vendor: BlueXML
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: com.bluexml.side.Util.generator,
+Require-Bundle: com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.generator,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
  com.bluexml.side.Class,
@@ -16,8 +17,7 @@ Require-Bundle: com.bluexml.side.Util.generator,
  com.bluexml.side.Workflow,
  com.bluexml.side.Util.ecore,
  org.eclipse.emf.ecore.xmi,
- com.bluexml.side.Util.log,
- com.bluexml.side.Util.libs
+ com.bluexml.side.Util.log
 Bundle-ClassPath: .,
  lib/com.bluexml.side.Form.utils-1.0.1.jar
 Export-Package: .,
