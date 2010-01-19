@@ -56,7 +56,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 	}
 
 	/**
-	 * Checks if is file field.
+	 * Checks if is the attribute refers to a file field.
 	 * 
 	 * @return true, if is file field
 	 */
@@ -65,6 +65,16 @@ public class RenderableAttribute extends AbstractRenderableField {
 				.getName(), "repositoryContent"));
 	}
 
+	/**
+	 * Checks if is the attribute refers to an image file field.
+	 * 
+	 * @return true, if is an image file field
+	 */
+	private boolean isImageFileField() {
+		return (StringUtils.equals(attribute.getName(), "content_img") || StringUtils.equals(attribute
+				.getName(), "repositoryContent_img"));
+	}
+	
 	private boolean isDateTimeField() {
 		return StringUtils.equals(getXsdType(), "dateTime");
 	}
@@ -156,8 +166,10 @@ public class RenderableAttribute extends AbstractRenderableField {
 		} else if (isTextArea()) {
 			boolean richTextEditor = (getMetaInfoValue("rte-rows") != null);
 			element = getTextAreaElement(meb, slabel, richTextEditor);
+		} else if (isImageFileField()) {
+			element = getFileElement(meb, slabel, MsgId.INT_FILEFIELD_PREVIEW_IMAGE, false);
 		} else if (isFileField()) {
-			element = getFileElement(meb, slabel);
+			element = getFileElement(meb, slabel, MsgId.INT_FILEFIELD_PREVIEW_NONE, false);
 		} else if (isDateTimeField()) {
 			element = getDateTimeElement(meb, slabel);
 		} else {

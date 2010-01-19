@@ -11,12 +11,14 @@ import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.forms.RenderableField;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableFileInput.
  */
 public class RenderableFileInput extends RenderableField<Field> {
 
+	private MsgId previewId;
 	/**
 	 * Instantiates a new renderable file input.
 	 * 
@@ -30,8 +32,9 @@ public class RenderableFileInput extends RenderableField<Field> {
 	 *            the is image
 	 */
 	public RenderableFileInput(XFormsGenerator generationManager, FormElement parent,
-			Field formElement, boolean isImage) {
+			Field formElement, MsgId previewer) {
 		super(generationManager, parent, formElement);
+		this.previewId = previewer;
 	}
 
 	/*
@@ -45,7 +48,7 @@ public class RenderableFileInput extends RenderableField<Field> {
 	@Override
 	protected Element getCustomElement(Rendered rendered, ModelElementBindSimple meb,
 			String slabel, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
-		return getFileElement(meb, slabel);
+		return getFileElement(meb, slabel, this.previewId, false);
 	}
 
 	/*

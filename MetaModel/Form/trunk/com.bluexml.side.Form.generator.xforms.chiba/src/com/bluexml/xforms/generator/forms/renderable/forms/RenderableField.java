@@ -159,7 +159,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 		setHidden(meb, formElement.isHidden());
 		// setRequired must be called before setLength!
 		setRequired(meb, formElement.isMandatory());
-		
+
 		if (formElement instanceof CharField) {
 			CharField charFieldElt = ((CharField) formElement);
 			int minlength = charFieldElt.getMin_length();
@@ -212,9 +212,11 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 			renderable = new RenderableMailInput(generationManager, parent,
 					(EmailField) formElement);
 		} else if (formElement instanceof ImageField) {
-			renderable = new RenderableFileInput(generationManager, parent, formElement, true);
+			renderable = new RenderableFileInput(generationManager, parent, formElement,
+					MsgId.INT_FILEFIELD_PREVIEW_IMAGE);
 		} else if (formElement instanceof FileField) {
-			renderable = new RenderableFileInput(generationManager, parent, formElement, false);
+			renderable = new RenderableFileInput(generationManager, parent, formElement,
+					MsgId.INT_FILEFIELD_PREVIEW_NONE);
 		} else if (formElement instanceof FloatField) {
 			renderable = new RenderableSimpleInput<FloatField>(generationManager, parent,
 					(FloatField) formElement, "float");
@@ -244,7 +246,8 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 			if (ref instanceof Attribute) {
 				EList<String> elist = ((Attribute) ref).getAllowedValues();
 				if ((elist != null) && (elist.size() > 0)) {
-					renderable = new RenderableChoiceInputWorkflow(generationManager, parent, charField);
+					renderable = new RenderableChoiceInputWorkflow(generationManager, parent,
+							charField);
 				}
 			}
 			// ** #1313

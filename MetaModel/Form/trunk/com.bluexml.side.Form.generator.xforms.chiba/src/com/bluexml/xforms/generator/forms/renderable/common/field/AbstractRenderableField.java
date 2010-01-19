@@ -500,34 +500,42 @@ public abstract class AbstractRenderableField extends Renderable {
 	}
 
 	/**
-	 * Gets the file element.
+	 * Gets the description of a file upload field.
 	 * 
 	 * @param meb
 	 *            the meb
 	 * @param slabel
 	 *            the slabel
-	 * 
+	 * @param isNodeContent
+	 *            if true, indicates that this file element is the default content upload field that
+	 *            is fully managed by the controller: the field is present in the generated xhtml
+	 *            file but not in the form models.
 	 * @return the file element
 	 */
-	protected Element getFileElement(ModelElementBindSimple meb, String slabel) {
+	protected Element getFileElement(ModelElementBindSimple meb, String slabel, MsgId previewer,
+			boolean isNodeContent) {
 		Element element;
 		element = XFormsGenerator.createXFormsGroup(slabel);
 		element.setAttribute("id", attributeId + "_global");
 
-		Element previewDiv = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
-		previewDiv.setAttribute("id", attributeId + "_preview");
-		previewDiv.setAttribute("class", MsgId.INT_CSS_UPLOAD_PREVIEW.getText());
-		//
-		Element preview = XFormsGenerator.createElement("output", XFormsGenerator.NAMESPACE_XFORMS);
-		StringBuffer value = new StringBuffer();
-		value.append("concat('<img src=\"" + MsgId.INT_GEN_PLACEHOLDER_CONTEXT_PATH
-				+ "/file?location=', current()/");
-		value.append(meb.getNodeset());
-		value.append(", '\" />')");
-		preview.setAttribute("value", value.toString());
-		preview.setAttribute("mediatype", "text/html");
-		previewDiv.addContent(preview);
-		element.addContent(previewDiv);
+		if (previewer.equals(MsgId.INT_FILEFIELD_PREVIEW_IMAGE)) {
+			Element previewDiv = XFormsGenerator.createElement("div",
+					XFormsGenerator.NAMESPACE_XHTML);
+			previewDiv.setAttribute("id", attributeId + "_preview");
+			previewDiv.setAttribute("class", MsgId.INT_CSS_UPLOAD_PREVIEW.getText());
+			//
+			Element preview = XFormsGenerator.createElement("output",
+					XFormsGenerator.NAMESPACE_XFORMS);
+			StringBuffer value = new StringBuffer();
+			value.append("concat('<img src=\"" + MsgId.INT_GEN_PLACEHOLDER_CONTEXT_PATH
+					+ "/file?location=', current()/");
+			value.append(meb.getNodeset());
+			value.append(", '\" />')");
+			preview.setAttribute("value", value.toString());
+			preview.setAttribute("mediatype", "text/html");
+			previewDiv.addContent(preview);
+			element.addContent(previewDiv);
+		}
 
 		//
 		Element filenameDiv = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
@@ -552,10 +560,10 @@ public abstract class AbstractRenderableField extends Renderable {
 		input.setAttribute("id", attributeId);
 		meb.addLinkedElement(input);
 		// ** #1267
-		String labelStr = MsgPool.testMsg(MsgId.MSG_FILE_FIELD_LABEL);
-		Element label = getLabelElement(labelStr);
+		String labelStr = MsgPool.testMsg(isNodeContent ? MsgId.MSG_UPLOAD_NODE_CONTENT_LABEL
+				: MsgId.MSG_FILE_FIELD_LABEL);
 		if (labelStr != null) {
-			input.addContent(label);
+			input.addContent(getLabelElement(labelStr));
 		}
 		// ** #1267
 		Element filename = XFormsGenerator.createElement("filename",
