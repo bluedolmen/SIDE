@@ -76,8 +76,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Privilege/category"/>
     </genClasses>
     <genClasses ecoreClass="requirements.ecore#//RequirementsDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//RequirementsDefinition/version"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//RequirementsDefinition/date"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//RequirementsDefinition/version"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//RequirementsDefinition/date"/>
     </genClasses>
     <genClasses ecoreClass="requirements.ecore#//PrivilegeGroup">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//PrivilegeGroup/entryPoint"/>
