@@ -28,6 +28,7 @@ public class DefaultMessages {
 			"caption.button.create=Create",
 			"caption.button.delete=Delete",
 			"caption.button.edit=Edit",
+			"caption.button.settype=Submit",
 			"caption.button.submit=Submit",
 			"",
 			"default.error.msg=An unexpected error occurred. Please report it to the administrator.",
@@ -93,6 +94,7 @@ public class DefaultMessages {
 			"# status.message.empty should have at least one whitespace",
 			"status.message.empty=\\ ", "# 0: sequence number of the iteration",
 			"status.message.iteration.postfix=\\ ({0})",
+			"upload.node.content.label=Upload your content",
 			"upload.to.repository.failure=Upload to the repository failed.", "" };
 
 	/**
