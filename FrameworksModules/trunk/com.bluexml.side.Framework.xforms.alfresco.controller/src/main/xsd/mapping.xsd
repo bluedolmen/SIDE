@@ -12,15 +12,13 @@
 	</xsd:element>
 	<xsd:element name="canister" type="canisterType" />
 	<xsd:element name="form" type="formType" substitutionGroup="canister" />
-	<xsd:element name="task" type="workflowTaskType"
-		substitutionGroup="canister" />
+	<xsd:element name="task" type="workflowTaskType" substitutionGroup="canister" />
 
 	<xsd:complexType name="canisterType" abstract="true">
 		<xsd:sequence>
 			<xsd:element maxOccurs="unbounded" name="action" type="actionFieldType" />
 			<xsd:element maxOccurs="unbounded" name="field" type="formFieldType" />
-			<xsd:element maxOccurs="unbounded" name="modelChoice"
-				type="modelChoiceType" />
+			<xsd:element maxOccurs="unbounded" name="modelChoice" type="modelChoiceType" />
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -72,8 +70,7 @@
 			<xsd:element name="alfrescoName" type="xsd:string" />
 			<xsd:element maxOccurs="unbounded" name="attribute" type="attributeType" />
 			<xsd:element maxOccurs="unbounded" name="aspect" type="aspectType" />
-			<xsd:element maxOccurs="unbounded" name="association"
-				type="associationType" />
+			<xsd:element maxOccurs="unbounded" name="association" type="associationType" />
 			<xsd:element minOccurs="0" name="parentClass" type="classType" />
 			<xsd:element maxOccurs="unbounded" name="subClass" type="classType" />
 		</xsd:sequence>
@@ -159,12 +156,9 @@
 			<xsd:extension base="canisterType">
 				<xsd:sequence>
 					<xsd:element name="name" type="xsd:string" />
-					<xsd:element maxOccurs="unbounded" name="virtual"
-						type="virtualFieldType" />
-					<xsd:element maxOccurs="unbounded" name="reference"
-						type="referenceType" />
-					<xsd:element maxOccurs="unbounded" name="fileField"
-						type="fileFieldType" />
+					<xsd:element maxOccurs="unbounded" name="virtual" type="virtualFieldType" />
+					<xsd:element maxOccurs="unbounded" name="reference" type="referenceType" />
+					<xsd:element maxOccurs="unbounded" name="fileField" type="fileFieldType" />
 					<xsd:element name="realClass" type="classType" />
 				</xsd:sequence>
 			</xsd:extension>
