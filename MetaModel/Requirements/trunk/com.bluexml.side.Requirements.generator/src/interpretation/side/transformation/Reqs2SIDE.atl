@@ -1,3 +1,4 @@
+-- @path Common=platform:/plugin/com.bluexml.side.Common/model/Common.ecore
 -- @path Data=platform:/plugin/com.bluexml.side.Class/model/Class.ecore
 -- @path Reqs=platform:/plugin/com.bluexml.side.Requirements/model/requirements.ecore
 -- @path DataForm=platform:/plugin/com.bluexml.side.Form/model/Forms.ecore
