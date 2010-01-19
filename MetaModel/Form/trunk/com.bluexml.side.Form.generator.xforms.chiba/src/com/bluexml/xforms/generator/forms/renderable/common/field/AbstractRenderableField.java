@@ -506,14 +506,9 @@ public abstract class AbstractRenderableField extends Renderable {
 	 *            the meb
 	 * @param slabel
 	 *            the slabel
-	 * @param isNodeContent
-	 *            if true, indicates that this file element is the default content upload field that
-	 *            is fully managed by the controller: the field is present in the generated xhtml
-	 *            file but not in the form models.
 	 * @return the file element
 	 */
-	protected Element getFileElement(ModelElementBindSimple meb, String slabel, MsgId previewer,
-			boolean isNodeContent) {
+	protected Element getFileElement(ModelElementBindSimple meb, String slabel, MsgId previewer) {
 		Element element;
 		element = XFormsGenerator.createXFormsGroup(slabel);
 		element.setAttribute("id", attributeId + "_global");
@@ -560,8 +555,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		input.setAttribute("id", attributeId);
 		meb.addLinkedElement(input);
 		// ** #1267
-		String labelStr = MsgPool.testMsg(isNodeContent ? MsgId.MSG_UPLOAD_NODE_CONTENT_LABEL
-				: MsgId.MSG_FILE_FIELD_LABEL);
+		String labelStr = MsgPool.testMsg(MsgId.MSG_FILE_FIELD_LABEL);
 		if (labelStr != null) {
 			input.addContent(getLabelElement(labelStr));
 		}
