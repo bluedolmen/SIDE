@@ -30,7 +30,7 @@
 
   ]]>
   </description>
-  <url>/com/bluexml/api/upload</url>
+  <url>/api/upload</url>
   <format default="json"/>
   <authentication>user</authentication>
   <transaction>required</transaction>
