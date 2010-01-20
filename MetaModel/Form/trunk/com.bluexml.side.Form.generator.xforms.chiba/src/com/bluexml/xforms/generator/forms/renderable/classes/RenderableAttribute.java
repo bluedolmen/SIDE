@@ -167,9 +167,9 @@ public class RenderableAttribute extends AbstractRenderableField {
 			boolean richTextEditor = (getMetaInfoValue("rte-rows") != null);
 			element = getTextAreaElement(meb, slabel, richTextEditor);
 		} else if (isImageFileField()) {
-			element = getFileElement(meb, slabel, MsgId.INT_FILEFIELD_PREVIEW_IMAGE, false);
+			element = getFileElement(meb, slabel, MsgId.INT_FILEFIELD_PREVIEW_IMAGE);
 		} else if (isFileField()) {
-			element = getFileElement(meb, slabel, MsgId.INT_FILEFIELD_PREVIEW_NONE, false);
+			element = getFileElement(meb, slabel, MsgId.INT_FILEFIELD_PREVIEW_NONE);
 		} else if (isDateTimeField()) {
 			element = getDateTimeElement(meb, slabel);
 		} else {

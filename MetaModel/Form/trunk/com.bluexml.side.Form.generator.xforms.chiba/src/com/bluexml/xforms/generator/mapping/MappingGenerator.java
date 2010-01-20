@@ -681,6 +681,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 			FormType formType = newFormType(realContainer);
 
 			FormClass formClass = (FormClass) realContainer;
+			formType.setContentEnabled(formClass.isHas_content());
 			formType.setRealClass(copyClassType(getClassType(formClass.getReal_class())));
 			processFormElement(formType, realContainer, realContainer, realContainer);
 			mapping.getCanister().add(objectFactory.createForm(formType));

@@ -48,6 +48,7 @@ import com.bluexml.xforms.generator.forms.renderable.common.RenderableXGroup;
 import com.bluexml.xforms.generator.forms.renderable.common.SelectBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.selector.RenderableSelector;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.unique.RenderableSSingle;
+import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableFileInputForContent;
 import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableFormContainer;
 import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableGroup;
 import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableGroupWorkflow;
@@ -62,6 +63,31 @@ import com.bluexml.xforms.messages.MsgPool;
  * The Class XFormsGenerator.
  */
 public class XFormsGenerator extends AbstractDataGenerator {
+
+	class IntGroupImpl extends FormGroupImpl {
+		String id;
+		String label;
+
+		public IntGroupImpl(String id, String label) {
+			this.id = id;
+			this.label = label;
+		}
+
+		@Override
+		public FormGroupPresentationType getPresentation() {
+			return FormGroupPresentationType.AUTO;
+		}
+
+		@Override
+		public String getLabel() {
+			return label;
+		}
+
+		@Override
+		public String getId() {
+			return id;
+		}
+	}
 
 	/** The Constant NAMESPACE_EVENTS. */
 	public static final Namespace NAMESPACE_EVENTS = Namespace.getNamespace("ev",
@@ -611,15 +637,16 @@ public class XFormsGenerator extends AbstractDataGenerator {
 				String title = ModelTools.getTitle(classe);
 				if (!classe.isAbstract()) {
 					render(outputXForms, classeBean, formName, title, FormTypeRendered.formClass,
-							false);
+							false, false);
 					if (formGenerator.isGenerateLogListForms()) {
 						render(outputXForms, new RenderableClassList(classe), formName, title,
-								FormTypeRendered.formClassList, false);
+								FormTypeRendered.formClassList, false, false);
 					}
 				}
 				if (classeBean.hasSubClasses()) {
 					render(outputXForms, new RenderableClassSelector(classeBean.getSubClasses()),
-							formName, title, FormTypeRendered.formClassSubClassSelector, false);
+							formName, title, FormTypeRendered.formClassSubClassSelector, false,
+							false);
 				}
 			}
 
@@ -635,7 +662,14 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		for (Entry<String, RenderableFormContainer> formEntry : entrySetForms) {
 			String formId = formEntry.getKey();
 			FormContainer formContainer = formsModels.get(formId);
-			boolean isAWorkflowForm = formContainer instanceof FormWorkflow;
+			boolean isAWorkflowForm = false;
+			boolean isContentEnabled = false;
+			if (formContainer instanceof FormWorkflow) {
+				isAWorkflowForm = true;
+			} else {
+				FormClass formClass = (FormClass) formContainer;
+				isContentEnabled = formClass.isHas_content();
+			}
 			atLeastOneWorfklowForm = atLeastOneWorfklowForm || isAWorkflowForm;
 			String logText = " Rendering " + (isAWorkflowForm ? "FormWorkflow" : "FormClass")
 					+ ": " + formId;
@@ -645,7 +679,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 			}
 			RenderableFormContainer value = formEntry.getValue();
 
-			renderForm(outputXForms, formId, value, isAWorkflowForm);
+			renderForm(outputXForms, formId, value, isAWorkflowForm, isContentEnabled);
 		}
 		return atLeastOneWorfklowForm;
 	}
@@ -655,30 +689,6 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 */
 	private void renderWorkflowSelectionForm() {
 
-		class IntGroupImpl extends FormGroupImpl {
-			String id;
-			String label;
-
-			public IntGroupImpl(String id, String label) {
-				this.id = id;
-				this.label = label;
-			}
-
-			@Override
-			public FormGroupPresentationType getPresentation() {
-				return FormGroupPresentationType.AUTO;
-			}
-
-			@Override
-			public String getLabel() {
-				return label;
-			}
-
-			@Override
-			public String getId() {
-				return id;
-			}
-		}
 		//
 		IntGroupImpl fglobalGroup = new IntGroupImpl("workflow", MsgPool
 				.getMsg(MsgId.MSG_WKFLW_GLOBAL_GROUP));
@@ -706,7 +716,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		// RenderableXForm rform = new RenderableXForm(rglobalGroup,
 		// MsgId.MSG_WKFLW_SEL_PAGE_TITLE.getText(), actions, true);
 		render(outputXForms, rglobalGroup, MsgId.INT_WKFLW_SEL_FORM_FILENAME.getText(), MsgPool
-				.getMsg(MsgId.MSG_WKFLW_SEL_PAGE_TITLE), FormTypeRendered.formWkflwSel, true);
+				.getMsg(MsgId.MSG_WKFLW_SEL_PAGE_TITLE), FormTypeRendered.formWkflwSel, true, false);
 	}
 
 	/**
@@ -1005,15 +1015,16 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 *            the form
 	 * @param rFC
 	 *            the form container
+	 * @param isContentEnabled
 	 * @param isWorkflowAble
 	 *            whether workflows can be started on the form
 	 */
 	private void renderForm(File outputXForms, String formId, RenderableFormContainer rFC,
-			boolean isAWorkflowForm) {
+			boolean isAWorkflowForm, boolean isContentEnabled) {
 		String title = formsModels.get(formId).getLabel();
 		FormTypeRendered formTypeRendered = (isAWorkflowForm) ? FormTypeRendered.formWkflw
 				: FormTypeRendered.formForm;
-		render(outputXForms, rFC, formId, title, formTypeRendered, false);
+		render(outputXForms, rFC, formId, title, formTypeRendered, false, isContentEnabled);
 	}
 
 	/**
@@ -1032,32 +1043,51 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 *            the title
 	 * @param formType
 	 *            the form type. CLASS, FORM, WKFLW, etc.
+	 * @param isContentEnabled
+	 *            whether the file upload control should appear on the form
 	 * @param isWorkflowAble
 	 *            whether workflows can be started on the form, always false for formClass
 	 *            formsRenderables.
 	 */
 	private void render(File outputXForms, Renderable renderable, String formName, String title,
-			FormTypeRendered formType, boolean isWrkflwSelectionForm) {
+			FormTypeRendered formType, boolean isWrkflwSelectionForm, boolean isContentEnabled) {
+
+		// there's no point in writing RO versions of some form types
+		if (isReadOnlyMode()) {
+			if (formType != FormTypeRendered.formForm && formType != FormTypeRendered.formClass) {
+				return;
+			}
+		}
+		// register this type of form for writing the descr.xml files
+		formTypesToDescribe.add(formType);
+
 		resetKeys();
 
+		// build the submission actions that are relevant for this type of form
 		List<FormSubmissionActions> actions;
 		actions = new ArrayList<FormSubmissionActions>();
-
 		for (FormSubmissionActions abstractAction : formType.getActions()) {
 			actions.add(0, abstractAction);
 		}
 
-		formTypesToDescribe.add(formType);
-
+		// if form class, wrap the renderable in a group
 		Renderable realRenderable = renderable;
 		if (formType == FormTypeRendered.formClass) {
 			realRenderable = new RenderableXGroup(renderable, title);
 		}
 
+		// if applicable, show the content upload field
+		if (isContentEnabled) {
+			RenderableFileInputForContent rContent = new RenderableFileInputForContent();
+			realRenderable.add(new RenderableHR());
+			realRenderable.add(rContent);
+		}
+
 		boolean isAWorkflowForm = formType.equals(FormTypeRendered.formWkflw);
 		RenderableXForm form = new RenderableXForm(realRenderable, title, actions, isAWorkflowForm,
 				isWrkflwSelectionForm);
-		// #976 adding the status bar
+
+		// add the status bar
 		RenderableDiv statusDiv = new RenderableDiv(MsgId.INT_CSS_STATUS_BAR_ID.getText());
 		RenderableHR lineAbove = new RenderableHR();
 		RenderableHR lineBelow = new RenderableHR();
@@ -1065,7 +1095,10 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		form.add(statusDiv);
 		form.add(lineBelow);
 
+		// render all elements on the form
 		Rendered rendered = form.recursiveRender();
+
+		// write the XHTML/XForms rendering in a file
 		try {
 			StringBuffer fileName = new StringBuffer(outputXForms.getAbsolutePath());
 			fileName.append(File.separatorChar);

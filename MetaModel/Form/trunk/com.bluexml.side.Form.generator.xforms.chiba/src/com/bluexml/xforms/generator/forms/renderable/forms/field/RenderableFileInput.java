@@ -48,7 +48,7 @@ public class RenderableFileInput extends RenderableField<Field> {
 	@Override
 	protected Element getCustomElement(Rendered rendered, ModelElementBindSimple meb,
 			String slabel, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
-		return getFileElement(meb, slabel, this.previewId, false);
+		return getFileElement(meb, slabel, this.previewId);
 	}
 
 	/*

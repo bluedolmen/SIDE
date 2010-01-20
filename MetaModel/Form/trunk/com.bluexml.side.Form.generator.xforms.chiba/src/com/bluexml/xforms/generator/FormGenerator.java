@@ -143,6 +143,7 @@ public class FormGenerator {
 
 	private Log genLogger;
 
+	/** if true, associations are rendered as model choice fields instead of inline forms */
 	private boolean simplifyClasses;
 
 	private boolean renderDataBeforeWorkflow;
@@ -155,10 +156,12 @@ public class FormGenerator {
 
 	private boolean generateLogListForms;
 
+	/** whether the generation is in read only mode. Normally true during the second pass. */
 	private boolean inReadOnlyMode;
 
+	/** true if at least one workflow form was generated. Used at post-generation time. */
 	private boolean workflowCapable;
-	
+
 	/**
 	 * The Class PackageInfo.
 	 */
@@ -403,9 +406,7 @@ public class FormGenerator {
 	 *            the generators
 	 */
 	public void generate(List<DataGenerator> generators, CoreInterface monitor) {
-		if (monitor != null) {
-			monitor.setTaskName("Collecting data");
-		}
+		monitor.setTaskName("Collecting data");
 		alfrescoNameStereotype = commonFactory.createStereotype();
 		alfrescoNameStereotype.setName(ALFRESCO_NAME_ASSOCIATION);
 
@@ -452,22 +453,20 @@ public class FormGenerator {
 				}
 			}
 		}
-		logger.info("End of generation.");
-		if (monitor != null) {
-			monitor.addText("Xforms Generation completed successfully");
+		monitor.addText("Xforms Generation completed successfully");
+		monitor
+				.addServiceLog(
+						"List of generated forms",
+						"This page provides an easy access to the forms, with default parameters. The server, port and webapp context should be adapted as needed.",
+						"http://localhost:8080/xforms/resources/jsp/forms.jsp");
+		if (isWorkflowCapable()) {
 			monitor
 					.addServiceLog(
-							"List of generated forms",
-							"This page provides an easy access to the forms, with default parameters. The server, port and webapp context can be adapted as needed.",
-							"http://localhost:8080/xforms/resources/jsp/forms.jsp");
-			if (isWorkflowCapable()) {
-				monitor
-						.addServiceLog(
-								"Demo webapp",
-								"This page links to a demo webapp deployed we provide to you so that you may easily test the integration of workflows with forms. The server, port and webapp context can be adapted as needed.",
-								"http://localhost:8080/xforms/demo/index.jsp");
-			}
+							"Demo webapp",
+							"This page links to a demo webapp we provide to you so that you may easily test the integration of workflows with forms. The server, port and webapp context should be adapted as needed.",
+							"http://localhost:8080/xforms/demo/index.jsp");
 		}
+		logger.info("End of generation.");
 	}
 
 	/**
@@ -1101,7 +1100,8 @@ public class FormGenerator {
 	}
 
 	/**
-	 * @param workflowCapable the workflowCapable to set
+	 * @param workflowCapable
+	 *            the workflowCapable to set
 	 */
 	public void setWorkflowCapable(boolean workflowCapable) {
 		this.workflowCapable = workflowCapable;
