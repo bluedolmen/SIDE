@@ -59,6 +59,7 @@
         eType="#//PrivilegeGroup" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="step" upperBound="-1" eType="#//GoalStep"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="synopsis" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PriorityLevel">
     <eLiterals name="VeryHigh"/>

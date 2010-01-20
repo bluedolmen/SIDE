@@ -628,13 +628,22 @@ public interface RequirementsPackage extends EPackage {
 	int GOAL__STEP = ANNOTABLE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Synopsis</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL__SYNOPSIS = ANNOTABLE_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Goal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL_FEATURE_COUNT = ANNOTABLE_ELEMENT_FEATURE_COUNT + 5;
+	int GOAL_FEATURE_COUNT = ANNOTABLE_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.impl.PrivilegeImpl <em>Privilege</em>}' class.
@@ -1318,6 +1327,17 @@ public interface RequirementsPackage extends EPackage {
 	EReference getGoal_Step();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.Goal#getSynopsis <em>Synopsis</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Synopsis</em>'.
+	 * @see com.bluexml.side.requirements.Goal#getSynopsis()
+	 * @see #getGoal()
+	 * @generated
+	 */
+	EAttribute getGoal_Synopsis();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.requirements.Privilege <em>Privilege</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1864,6 +1884,14 @@ public interface RequirementsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference GOAL__STEP = eINSTANCE.getGoal_Step();
+
+		/**
+		 * The meta object literal for the '<em><b>Synopsis</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GOAL__SYNOPSIS = eINSTANCE.getGoal_Synopsis();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.requirements.impl.PrivilegeImpl <em>Privilege</em>}' class.

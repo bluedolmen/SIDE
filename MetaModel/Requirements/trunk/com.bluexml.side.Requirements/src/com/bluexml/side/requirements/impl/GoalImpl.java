@@ -39,6 +39,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.requirements.impl.GoalImpl#getResponsible <em>Responsible</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.impl.GoalImpl#getPrivilegeGroup <em>Privilege Group</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.impl.GoalImpl#getStep <em>Step</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.impl.GoalImpl#getSynopsis <em>Synopsis</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,6 +105,26 @@ public class GoalImpl extends AnnotableElementImpl implements Goal {
 	 * @ordered
 	 */
 	protected EList<GoalStep> step;
+
+	/**
+	 * The default value of the '{@link #getSynopsis() <em>Synopsis</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSynopsis()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SYNOPSIS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSynopsis() <em>Synopsis</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSynopsis()
+	 * @generated
+	 * @ordered
+	 */
+	protected String synopsis = SYNOPSIS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -198,6 +219,27 @@ public class GoalImpl extends AnnotableElementImpl implements Goal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSynopsis() {
+		return synopsis;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSynopsis(String newSynopsis) {
+		String oldSynopsis = synopsis;
+		synopsis = newSynopsis;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RequirementsPackage.GOAL__SYNOPSIS, oldSynopsis, synopsis));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -246,6 +288,8 @@ public class GoalImpl extends AnnotableElementImpl implements Goal {
 				return getPrivilegeGroup();
 			case RequirementsPackage.GOAL__STEP:
 				return getStep();
+			case RequirementsPackage.GOAL__SYNOPSIS:
+				return getSynopsis();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -278,6 +322,9 @@ public class GoalImpl extends AnnotableElementImpl implements Goal {
 				getStep().clear();
 				getStep().addAll((Collection<? extends GoalStep>)newValue);
 				return;
+			case RequirementsPackage.GOAL__SYNOPSIS:
+				setSynopsis((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -305,6 +352,9 @@ public class GoalImpl extends AnnotableElementImpl implements Goal {
 			case RequirementsPackage.GOAL__STEP:
 				getStep().clear();
 				return;
+			case RequirementsPackage.GOAL__SYNOPSIS:
+				setSynopsis(SYNOPSIS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -327,6 +377,8 @@ public class GoalImpl extends AnnotableElementImpl implements Goal {
 				return privilegeGroup != null && !privilegeGroup.isEmpty();
 			case RequirementsPackage.GOAL__STEP:
 				return step != null && !step.isEmpty();
+			case RequirementsPackage.GOAL__SYNOPSIS:
+				return SYNOPSIS_EDEFAULT == null ? synopsis != null : !SYNOPSIS_EDEFAULT.equals(synopsis);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -343,6 +395,8 @@ public class GoalImpl extends AnnotableElementImpl implements Goal {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (priority: ");
 		result.append(priority);
+		result.append(", synopsis: ");
+		result.append(synopsis);
 		result.append(')');
 		return result.toString();
 	}

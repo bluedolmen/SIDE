@@ -70,6 +70,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//Goal/responsible"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//Goal/privilegeGroup"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//Goal/step"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute requirements.ecore#//Goal/synopsis"/>
     </genClasses>
     <genClasses ecoreClass="requirements.ecore#//Privilege">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//Privilege/element"/>

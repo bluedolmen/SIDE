@@ -503,6 +503,15 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getGoal_Synopsis() {
+		return (EAttribute)goalEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPrivilege() {
 		return privilegeEClass;
 	}
@@ -804,6 +813,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		createEReference(goalEClass, GOAL__RESPONSIBLE);
 		createEReference(goalEClass, GOAL__PRIVILEGE_GROUP);
 		createEReference(goalEClass, GOAL__STEP);
+		createEAttribute(goalEClass, GOAL__SYNOPSIS);
 
 		privilegeEClass = createEClass(PRIVILEGE);
 		createEReference(privilegeEClass, PRIVILEGE__ELEMENT);
@@ -918,6 +928,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		initEReference(getGoal_Responsible(), this.getAgent(), this.getAgent_IsResponsible(), "responsible", null, 0, -1, Goal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGoal_PrivilegeGroup(), this.getPrivilegeGroup(), null, "privilegeGroup", null, 0, -1, Goal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGoal_Step(), this.getGoalStep(), null, "step", null, 0, -1, Goal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGoal_Synopsis(), ecorePackage.getEString(), "synopsis", null, 0, 1, Goal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(privilegeEClass, Privilege.class, "Privilege", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPrivilege_Element(), this.getBasicElement(), null, "element", null, 1, 1, Privilege.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

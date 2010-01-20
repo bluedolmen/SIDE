@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.requirements.Goal#getResponsible <em>Responsible</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.Goal#getPrivilegeGroup <em>Privilege Group</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.Goal#getStep <em>Step</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.Goal#getSynopsis <em>Synopsis</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,5 +125,31 @@ public interface Goal extends AnnotableElement {
 	 * @generated
 	 */
 	EList<GoalStep> getStep();
+
+	/**
+	 * Returns the value of the '<em><b>Synopsis</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Synopsis</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Synopsis</em>' attribute.
+	 * @see #setSynopsis(String)
+	 * @see com.bluexml.side.requirements.RequirementsPackage#getGoal_Synopsis()
+	 * @model
+	 * @generated
+	 */
+	String getSynopsis();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.requirements.Goal#getSynopsis <em>Synopsis</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Synopsis</em>' attribute.
+	 * @see #getSynopsis()
+	 * @generated
+	 */
+	void setSynopsis(String value);
 
 } // Goal
