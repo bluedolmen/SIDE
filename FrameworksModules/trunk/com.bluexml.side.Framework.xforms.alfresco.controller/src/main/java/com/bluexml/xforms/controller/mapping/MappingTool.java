@@ -108,7 +108,25 @@ public class MappingTool {
 	}
 
 	/**
-	 * Gets the repository content info..
+	 * Gets the repository content info.
+	 * 
+	 * @param transaction
+	 *            the login
+	 * @param alfClass
+	 *            the alf class
+	 * 
+	 * @return the bean, or null if no repository content file exists in the class
+	 * 
+	 * @throws AlfrescoControllerException
+	 *             the alfresco controller exception
+	 */
+	public RepoContentInfoBean getNodeContentInfo(AlfrescoTransaction transaction,
+			GenericClass alfClass) throws AlfrescoControllerException {
+		return mappingToolFormsToAlfresco.getNodeContentInfo(transaction, alfClass);
+	}
+
+	/**
+	 * Gets the repository content info.
 	 * 
 	 * @param transaction
 	 *            the login
@@ -124,7 +142,7 @@ public class MappingTool {
 			GenericClass alfClass) throws AlfrescoControllerException {
 		return mappingToolImplXFormsToAlfresco.getRepoContentInfo(transaction, alfClass);
 	}
-
+	
 	/**
 	 * Sets the content file name.
 	 * 

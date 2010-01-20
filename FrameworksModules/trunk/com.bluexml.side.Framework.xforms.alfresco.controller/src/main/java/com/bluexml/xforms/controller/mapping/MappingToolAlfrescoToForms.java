@@ -262,12 +262,6 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		Document formInstance = documentBuilder.newDocument();
 		Element rootElement = formInstance.createElement("root");
 
-		Element typeElement = formInstance
-				.createElement(MsgId.INT_INSTANCE_SIDE_DATATYPE.getText());
-		// Element editedidElement = formInstance.createElement(MsgId.INT_INSTANCE_SIDE_EDITEDID
-		// .getText());
-		typeElement.setTextContent(classTypeToString(getClassType(formType.getRealClass())));
-
 		// get the actual form structure
 		Element formElement = newForm(formType, formInstance, at,
 				new HashMap<String, GenericClass>(), initParams, formIsReadOnly);
@@ -277,8 +271,18 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 
 		rootElement.appendChild(formElement);
 
+		Element typeElement = formInstance
+				.createElement(MsgId.INT_INSTANCE_SIDE_DATATYPE.getText());
+		typeElement.setTextContent(classTypeToString(getClassType(formType.getRealClass())));
 		rootElement.appendChild(typeElement);
-		// rootElement.appendChild(editedidElement);
+
+		if (formType.isContentEnabled()) {
+			Element nodeContentElt = formInstance
+					.createElement(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
+			nodeContentElt.setAttribute("file", "");
+			nodeContentElt.setAttribute("type", "");
+			rootElement.appendChild(nodeContentElt);
+		}
 
 		formInstance.appendChild(rootElement);
 		return formInstance;

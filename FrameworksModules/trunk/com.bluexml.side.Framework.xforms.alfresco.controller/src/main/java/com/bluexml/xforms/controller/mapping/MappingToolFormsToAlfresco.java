@@ -27,6 +27,7 @@ import org.w3c.dom.Node;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.side.form.utils.DOMUtil;
 
 /**
@@ -83,6 +84,35 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 		virtualResolver.prepareXFormsToAlfresco(element, formName);
 
 		GenericClass result = persistFormElement(transaction, formName, element);
+		
+		// if applicable, append an attribute that will keep info about the node content
+		Element nodeContentElt = DOMUtil.getChild(formNode,
+				MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
+		if (nodeContentElt != null) {
+			GenericAttribute contentAttr = alfrescoObjectFactory.createGenericAttribute();
+			contentAttr.setQualifiedName(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
+			contentAttr.setSkipMe("true");
+			
+			ValueType pathValue = alfrescoObjectFactory.createValueType();
+			ValueType nameValue = alfrescoObjectFactory.createValueType();
+			ValueType mimeValue = alfrescoObjectFactory.createValueType();
+			
+			String path = nodeContentElt.getTextContent();
+			pathValue.setValue(path);
+
+			String nameAndExt = nodeContentElt.getAttribute("file");
+			nameValue.setValue(nameAndExt);
+
+			String mimetype = nodeContentElt.getAttribute("type");
+			mimeValue.setValue(mimetype);
+
+			contentAttr.getValue().add(pathValue);
+			contentAttr.getValue().add(nameValue);
+			contentAttr.getValue().add(mimeValue);
+			
+			// append the attribute for content
+			result.getAttributes().getAttribute().add(contentAttr);
+		}
 		return result;
 	}
 
@@ -434,6 +464,51 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 				alfClass.getAttributes().getAttribute().add(attribute);
 			}
 		}
+	}
+
+	/**
+	 * Gets the (repository) content attribute.
+	 * 
+	 * @param alfClass
+	 *            the alf class
+	 * 
+	 * @return the repository content attribute
+	 */
+	private GenericAttribute getNodeContentAttribute(GenericClass alfClass) {
+		
+		List<GenericAttribute> attributes = alfClass.getAttributes().getAttribute();
+		for (GenericAttribute attribute : attributes) {
+			if (attribute.getQualifiedName().equals(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText())) {
+				return attribute;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the repository content file name.
+	 * 
+	 * @param transaction
+	 *            the login
+	 * @param alfClass
+	 *            the alf class
+	 * 
+	 * @return null if no repository content file name was detected
+	 * 
+	 * @throws AlfrescoControllerException
+	 *             the alfresco controller exception
+	 */
+	public RepoContentInfoBean getNodeContentInfo(AlfrescoTransaction transaction,
+			GenericClass alfClass) throws AlfrescoControllerException {
+		GenericAttribute contentAttribute = getNodeContentAttribute(alfClass);
+		if (contentAttribute != null) {
+			String path = contentAttribute.getValue().get(0).getValue();
+			String name = contentAttribute.getValue().get(1).getValue();
+			String type = contentAttribute.getValue().get(2).getValue();
+			
+			return new RepoContentInfoBean(path, name, type);
+		}
+		return null;
 	}
 
 }

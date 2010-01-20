@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="value" type="{}ValueType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="qualifiedName" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       &lt;attribute name="skipMe" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -42,6 +43,9 @@ public class GenericAttribute {
     @XmlAttribute(required = true)
     @XmlSchemaType(name = "anySimpleType")
     protected String qualifiedName;
+    @XmlAttribute
+    @XmlSchemaType(name = "anySimpleType")
+    protected String skipMe;
 
     /**
      * Gets the value of the value property.
@@ -94,6 +98,30 @@ public class GenericAttribute {
      */
     public void setQualifiedName(String value) {
         this.qualifiedName = value;
+    }
+
+    /**
+     * Gets the value of the skipMe property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSkipMe() {
+        return skipMe;
+    }
+
+    /**
+     * Sets the value of the skipMe property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSkipMe(String value) {
+        this.skipMe = value;
     }
 
 }

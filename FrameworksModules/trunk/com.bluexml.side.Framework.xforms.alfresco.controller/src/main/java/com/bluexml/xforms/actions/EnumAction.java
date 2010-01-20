@@ -106,7 +106,7 @@ public class EnumAction extends AbstractReadAction {
 		result = enums.get(type);
 		if (result == null) {
 			InputStream xformsStream = NavigationSessionListener.getContext().getResourceAsStream(
-					"/forms/" + type + ".enum.xml");
+					"/forms/" + MsgId.INT_DIRECTORY_ENUMS + "/" + type + ".enum.xml");
 			try {
 				result = DOMUtil.parseInputStream(xformsStream, true, false);
 				fillValues(type, result);

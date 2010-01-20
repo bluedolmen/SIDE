@@ -568,7 +568,7 @@ public class AlfrescoController {
 
 	/**
 	 * Saves a content type. The values from the instance have already been collected. Moves
-	 * uploaded files to the file system/repository and enqueue the operation in the transaction,
+	 * uploaded files to the file system/repository and enqueues the operation in the transaction,
 	 * returning the id given by the transaction manager.
 	 * 
 	 * @param alfClass
@@ -587,7 +587,10 @@ public class AlfrescoController {
 		String fileName = null;
 		String filePath = null;
 		String mimeType = null;
-		// content file
+		// enqueue the operation
+		transaction.queueSave(alfClass);
+
+		// content file(s); these will be saved to the server's filesystem
 		fileName = StringUtils
 				.trimToNull(mappingTool.getFileContentFileName(transaction, alfClass));
 		if (fileName != null && fileName.startsWith("file:")) {
@@ -613,11 +616,32 @@ public class AlfrescoController {
 		} else {
 			mappingTool.setRepoContentFileName(alfClass, "");
 		}
-		// enqueue the operation
-		transaction.queueSave(alfClass);
 
-		if ((infoBean != null) && StringUtils.trimToNull(fileName) != null) { // #1335
-			transaction.queueAttachContent(alfClass.getId(), fileName, filePath, mimeType, alfClass.getQualifiedName());
+		// node content file; there's at most one instance of this
+		RepoContentInfoBean nodeContentInfoBean = mappingTool.getNodeContentInfo(transaction,
+				alfClass);
+		if (nodeContentInfoBean != null) {
+			fileName = infoBean.getName();
+			filePath = infoBean.getPath();
+			mimeType = infoBean.getMimeType();
+
+			if (filePath != null && filePath.startsWith("file:")) {
+				File file;
+				URI fileURI = URI.create(filePath);
+				String fullFileName = fileURI.getPath();
+				file = new File(fullFileName);
+
+				if (!file.exists()) {
+					logger.error("The file '" + fullFileName + "' to be uploaded does not exist.");
+					throw new ServletException(
+							"The file to upload does not exist. Your session may have expired. Please load the form again.");
+				}
+
+				if (file.length() > 0) {
+					transaction.queueAttachContent(alfClass.getId(), fileName, filePath, mimeType,
+							alfClass.getQualifiedName());
+				}
+			}
 		}
 
 		return alfClass.getId();
@@ -688,7 +712,7 @@ public class AlfrescoController {
 
 		transaction.queueUpdate(alfClass);
 		// TODO: attach content
-		
+
 		// TODO: avoid deleting the temp file
 		if (xformsFileName != null) {
 			try {

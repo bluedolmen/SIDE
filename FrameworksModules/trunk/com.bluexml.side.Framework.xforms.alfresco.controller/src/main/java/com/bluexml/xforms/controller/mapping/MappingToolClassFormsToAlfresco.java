@@ -122,31 +122,6 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	}
 
 	/**
-	 * Gets the repository content file name.
-	 * 
-	 * @param transaction
-	 *            the login
-	 * @param alfClass
-	 *            the alf class
-	 * 
-	 * @return null if no repository content file name was detected
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
-	 */
-	public RepoContentInfoBean getRepoContentInfo(AlfrescoTransaction transaction,
-			GenericClass alfClass) throws AlfrescoControllerException {
-		GenericAttribute contentAttribute = getRepoContentAttribute(alfClass);
-		if (contentAttribute != null) {
-			String path = contentAttribute.getValue().get(0).getValue();
-			String name = contentAttribute.getValue().get(1).getValue();
-			String type = contentAttribute.getValue().get(2).getValue();
-			return new RepoContentInfoBean(path, name, type);
-		}
-		return null;
-	}
-
-	/**
 	 * Gets the content attribute.
 	 * 
 	 * @param alfClass
@@ -166,6 +141,24 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	}
 
 	/**
+	 * Sets the content file name.
+	 * 
+	 * @param alfClass
+	 *            the alf class
+	 * @param fileName
+	 *            the file name
+	 */
+	public void setFileContentFileName(GenericClass alfClass, String fileName) {
+		GenericAttribute contentAttribute = getFileContentAttribute(alfClass);
+		if (contentAttribute != null) {
+			contentAttribute.getValue().clear();
+			ValueType value = alfrescoObjectFactory.createValueType();
+			value.setValue(fileName);
+			contentAttribute.getValue().add(value);
+		}
+	}
+	
+	/**
 	 * Gets the (repository) content attribute.
 	 * 
 	 * @param alfClass
@@ -174,14 +167,60 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 * @return the repository content attribute
 	 */
 	private GenericAttribute getRepoContentAttribute(GenericClass alfClass) {
-
+		
 		List<GenericAttribute> attributes = alfClass.getAttributes().getAttribute();
 		for (GenericAttribute attribute : attributes) {
-			if (attribute.getQualifiedName().endsWith("_repositoryContent")) {
+			if (attribute.getQualifiedName().equals(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText())) {
 				return attribute;
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Gets the repository content file name.
+	 * 
+	 * @param transaction
+	 *            the login
+	 * @param alfClass
+	 *            the alf class
+	 * 
+	 * @return null if no repository content file name was detected
+	 * 
+	 * @throws AlfrescoControllerException
+	 *             the alfresco controller exception
+	 */
+	public RepoContentInfoBean getRepoContentInfo(AlfrescoTransaction transaction,
+			GenericClass alfClass) throws AlfrescoControllerException {
+		GenericAttribute contentAttribute = getRepoContentAttribute(alfClass);
+		if (contentAttribute != null) {
+			String path = contentAttribute.getValue().get(0).getValue();
+			String name = contentAttribute.getValue().get(1).getValue();
+			String type = contentAttribute.getValue().get(2).getValue();
+			
+			return new RepoContentInfoBean(path, name, type);
+		}
+		return null;
+	}
+
+	/**
+	 * Sets the repository content file name as a reference in the format
+	 * "workspace://SpacesStore/...".
+	 * 
+	 * @param alfClass
+	 *            the alf class
+	 * @param fileName
+	 *            the file name
+	 */
+	public void setRepoContentFileName(GenericClass alfClass, String fileRef) {
+		GenericAttribute contentAttribute = getRepoContentAttribute(alfClass);
+		if (contentAttribute != null) {
+			contentAttribute.getValue().clear();
+
+			ValueType valueName = alfrescoObjectFactory.createValueType();
+			valueName.setValue(fileRef);
+			contentAttribute.getValue().add(valueName);
+		}
 	}
 
 	/**
@@ -231,44 +270,6 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 			associations.getAssociation().add(association);
 		}
 
-	}
-
-	/**
-	 * Sets the content file name.
-	 * 
-	 * @param alfClass
-	 *            the alf class
-	 * @param fileName
-	 *            the file name
-	 */
-	public void setFileContentFileName(GenericClass alfClass, String fileName) {
-		GenericAttribute contentAttribute = getFileContentAttribute(alfClass);
-		if (contentAttribute != null) {
-			contentAttribute.getValue().clear();
-			ValueType value = alfrescoObjectFactory.createValueType();
-			value.setValue(fileName);
-			contentAttribute.getValue().add(value);
-		}
-	}
-
-	/**
-	 * Sets the repository content file name as a reference in the format
-	 * "workspace://SpacesStore/...".
-	 * 
-	 * @param alfClass
-	 *            the alf class
-	 * @param fileName
-	 *            the file name
-	 */
-	public void setRepoContentFileName(GenericClass alfClass, String fileRef) {
-		GenericAttribute contentAttribute = getRepoContentAttribute(alfClass);
-		if (contentAttribute != null) {
-			contentAttribute.getValue().clear();
-
-			ValueType valueName = alfrescoObjectFactory.createValueType();
-			valueName.setValue(fileRef);
-			contentAttribute.getValue().add(valueName);
-		}
 	}
 
 	/**
