@@ -66,12 +66,12 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		Element rootElement = formInstance.createElement("root");
 
 		String realName = formName;
-		WorkflowTaskType entry = getWorkflowTaskType(formName, false);
-		if (entry != null) {
-			// on a workflow form; we'll need to add the data form
-			realName = entry.getDataForm();
-			getWorkflowInstance(formInstance, rootElement, alfrescoNodes);
-		}
+		// WorkflowTaskType entry = getWorkflowTaskType(formName, false);
+		// if (entry != null) {
+		// // on a workflow form; we'll need to add the data form
+		// realName = entry.getDataForm();
+		// getWorkflowInstance(formInstance, rootElement, alfrescoNodes);
+		// }
 		getDataFormInstance(formInstance, rootElement, transaction, realName, alfrescoId,
 				alfrescoNodes, formIsReadOnly);
 
@@ -93,11 +93,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			AlfrescoTransaction transaction, String formName, String alfrescoId,
 			Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly)
 			throws AlfrescoControllerException {
-		Element typeElement = doc.createElement(MsgId.INT_INSTANCE_SIDE_DATATYPE.getText());
-		// Element editedidElement = doc.createElement(MsgId.INT_INSTANCE_SIDE_EDITEDID.getText());
 		FormType formType = getFormType(formName);
-
-		typeElement.setTextContent(classTypeToString(getClassType(formType.getRealClass())));
 
 		Element formElement = getForm(transaction, formType, alfrescoId, alfrescoNodes, doc,
 				formIsReadOnly);
@@ -106,8 +102,18 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 
 		rootElement.appendChild(formElement);
 
+		Element typeElement = doc.createElement(MsgId.INT_INSTANCE_SIDE_DATATYPE.getText());
+		typeElement.setTextContent(classTypeToString(getClassType(formType.getRealClass())));
 		rootElement.appendChild(typeElement);
-		// rootElement.appendChild(editedidElement);
+
+		if (formType.isContentEnabled()) {
+			Element nodeContentElt = doc.createElement(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT
+					.getText());
+			nodeContentElt.setAttribute("file", "");
+			nodeContentElt.setAttribute("type", "");
+			nodeContentElt.setTextContent(controller.getWebscriptNodeContentInfo(alfrescoId));
+			rootElement.appendChild(nodeContentElt);
+		}
 	}
 
 	/**
@@ -133,6 +139,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param bean
 	 *            the bean that contains the process id and/or instance id
 	 */
+	@SuppressWarnings("unused")
 	@Deprecated
 	private void getWorkflowInstance(Document formInstance, Element rootElement,
 			Map<String, GenericClass> alfrescoNodes) {

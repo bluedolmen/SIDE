@@ -478,7 +478,7 @@ public class AlfrescoController {
 			throws AlfrescoControllerException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("objectId", id);
-		return requestDocumentFromAlfresco(transaction, parameters, MsgId.INT_WEBSCRIPT_READ);
+		return requestDocumentFromAlfresco(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_READ);
 	}
 
 	/**
@@ -598,7 +598,8 @@ public class AlfrescoController {
 			fileName = moveFileToUploadDir(type, fileName, transaction);
 			mappingTool.setFileContentFileName(alfClass, fileName);
 		}
-		// repository content file
+
+		// repository content file(s); these will be directly uploaded to the repository
 		RepoContentInfoBean infoBean = mappingTool.getRepoContentInfo(transaction, alfClass);
 		fileName = null;
 		if (infoBean != null) {
@@ -617,13 +618,13 @@ public class AlfrescoController {
 			mappingTool.setRepoContentFileName(alfClass, "");
 		}
 
-		// node content file; there's at most one instance of this
+		// node content file; there's at most one instance of this.
 		RepoContentInfoBean nodeContentInfoBean = mappingTool.getNodeContentInfo(transaction,
 				alfClass);
 		if (nodeContentInfoBean != null) {
-			fileName = infoBean.getName();
-			filePath = infoBean.getPath();
-			mimeType = infoBean.getMimeType();
+			fileName = nodeContentInfoBean.getName();
+			filePath = nodeContentInfoBean.getPath();
+			mimeType = nodeContentInfoBean.getMimeType();
 
 			if (filePath != null && filePath.startsWith("file:")) {
 				File file;
@@ -634,12 +635,12 @@ public class AlfrescoController {
 				if (!file.exists()) {
 					logger.error("The file '" + fullFileName + "' to be uploaded does not exist.");
 					throw new ServletException(
-							"The file to upload does not exist. Your session may have expired. Please load the form again.");
+							"The file to upload does not exist. Your session may have expired. Please load and submit the form again.");
 				}
 
 				if (file.length() > 0) {
-					transaction.queueAttachContent(alfClass.getId(), fileName, filePath, mimeType,
-							alfClass.getQualifiedName());
+					transaction.queueAttachContent(alfClass.getId(), fileName, fullFileName,
+							mimeType, alfClass.getQualifiedName());
 				}
 			}
 		}
@@ -739,7 +740,7 @@ public class AlfrescoController {
 			if (StringUtils.startsWithIgnoreCase(previousRepoContentInfo.getPath(), "workspace")) {
 				Map<String, String> parameters = new TreeMap<String, String>();
 				parameters.put("nodeRef", previousRepoContentInfo.getPath());
-				requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_DELETE);
+				requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_DELETE);
 			}
 		}
 	}
@@ -817,7 +818,7 @@ public class AlfrescoController {
 		parameters.put("location", location);
 		parameters.put("mimetype", mimetype);
 		// call the webscript
-		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_UPLOAD);
+		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_UPLOAD);
 
 		return resultId;
 	}
@@ -912,7 +913,7 @@ public class AlfrescoController {
 		Map<String, String> ids = new HashMap<String, String>();
 
 		Document result = requestDocumentFromAlfresco(alfrescoTransaction, parameters,
-				MsgId.INT_WEBSCRIPT_BATCH);
+				MsgId.INT_WEBSCRIPT_OPCODE_BATCH);
 		Element idsElement = result.getDocumentElement();
 		NodeList childNodes = idsElement.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {
@@ -960,7 +961,7 @@ public class AlfrescoController {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("query", StringUtils.join(ids, ";"));
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
-				MsgId.INT_WEBSCRIPT_LABELS);
+				MsgId.INT_WEBSCRIPT_OPCODE_LABELS);
 
 		List<String> result = new ArrayList<String>();
 		// List elements = DOMUtil.getChildElements(requestDocument.getDocumentElement());
@@ -977,7 +978,7 @@ public class AlfrescoController {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("query", "enum;" + code);
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
-				MsgId.INT_WEBSCRIPT_LABELS);
+				MsgId.INT_WEBSCRIPT_OPCODE_LABELS);
 
 		String result = null;
 		List elements = DOMUtil.getAllChildren(requestDocument.getDocumentElement());
@@ -1028,7 +1029,7 @@ public class AlfrescoController {
 
 		parameters.put("type", mappingTool.getEnumType(type).getName());
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
-				MsgId.INT_WEBSCRIPT_ENUM);
+				MsgId.INT_WEBSCRIPT_OPCODE_ENUM);
 		Element documentElement = requestDocument.getDocumentElement();
 
 		Element queryElement = requestDocument.createElement("query");
@@ -1089,7 +1090,8 @@ public class AlfrescoController {
 		if (isStandaloneMode()) {
 			reqDoc = requestDummyDocumentList(alfTypeName, maxLength);
 		} else {
-			reqDoc = requestDocumentFromAlfresco(transaction, parameters, MsgId.INT_WEBSCRIPT_LIST);
+			reqDoc = requestDocumentFromAlfresco(transaction, parameters,
+					MsgId.INT_WEBSCRIPT_OPCODE_LIST);
 			// ** #1234
 			if (reqDoc == null) {
 				logger.error("The Alfresco server is unavailable. Returning a dummy list.");
@@ -1614,7 +1616,6 @@ public class AlfrescoController {
 	 * @return The updated instance
 	 * @throws AlfrescoControllerException
 	 */
-	// FIXME: keep this function ?
 	public WorkflowInstance workflowCancel(AlfrescoTransaction transaction, String workflowId)
 			throws AlfrescoControllerException {
 		Map<String, Object> parameters = new HashMap<String, Object>();
@@ -1632,7 +1633,7 @@ public class AlfrescoController {
 	 * @return The updated instance (yes, a deleted instance!...)
 	 * @throws AlfrescoControllerException
 	 */
-	// FIXME: keep this function ?
+	@Deprecated
 	public WorkflowInstance workflowDelete(AlfrescoTransaction transaction, String workflowId)
 			throws AlfrescoControllerException {
 		Map<String, Object> parameters = new HashMap<String, Object>();
@@ -1681,7 +1682,7 @@ public class AlfrescoController {
 		parameters.put("content", nodeToAdd);
 		parameters.put("package", wkPackage.toString());
 		transaction.setLogin(userName);
-		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_PACKAGE);
+		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_PACKAGE);
 
 		if (StringUtils.trimToNull(resultId) != null) {
 			return wkPackage;
@@ -1749,7 +1750,7 @@ public class AlfrescoController {
 		}
 
 		try {
-			sresult = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_WORKFLOW);
+			sresult = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_WORKFLOW);
 		} catch (AlfrescoControllerException e) {
 			return null;
 		}
@@ -1781,7 +1782,7 @@ public class AlfrescoController {
 		String result;
 		try {
 			result = (String) xstream.fromXML(requestString(new AlfrescoTransaction(this),
-					parameters, MsgId.INT_WEBSCRIPT_SERVICE));
+					parameters, MsgId.INT_WEBSCRIPT_OPCODE_SERVICE));
 		} catch (AlfrescoControllerException e) {
 			e.printStackTrace();
 			return null;
@@ -1810,7 +1811,7 @@ public class AlfrescoController {
 		QName result;
 		try {
 			String requestString = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_SERVICE);
+					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (QName) xstream.fromXML(requestString);
 			// } catch (AlfrescoControllerException e) {
 			// e.printStackTrace();
@@ -1842,7 +1843,7 @@ public class AlfrescoController {
 		NodeRef result;
 		try {
 			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_SERVICE);
+					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (NodeRef) xstream.fromXML(resultStr);
 		} catch (AlfrescoControllerException e) {
 			e.printStackTrace();
@@ -1862,7 +1863,7 @@ public class AlfrescoController {
 		NodeRef result;
 		try {
 			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_SERVICE);
+					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (NodeRef) xstream.fromXML(resultStr);
 		} catch (AlfrescoControllerException e) {
 			e.printStackTrace();
@@ -1892,7 +1893,7 @@ public class AlfrescoController {
 		NodeRef result;
 		try {
 			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_SERVICE);
+					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (NodeRef) xstream.fromXML(resultStr);
 		} catch (AlfrescoControllerException e) {
 			e.printStackTrace();
@@ -1926,7 +1927,7 @@ public class AlfrescoController {
 		Set<String> result;
 		try {
 			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_SERVICE);
+					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (Set<String>) xstream.fromXML(resultStr);
 		} catch (AlfrescoControllerException e) {
 			e.printStackTrace();
@@ -1958,7 +1959,7 @@ public class AlfrescoController {
 		Set<String> result;
 		try {
 			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_SERVICE);
+					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (Set<String>) xstream.fromXML(resultStr);
 		} catch (AlfrescoControllerException e) {
 			e.printStackTrace();
@@ -2231,12 +2232,13 @@ public class AlfrescoController {
 		// call the webscript
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
 		transaction.setLogin(userName);
-		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_MKDIR);
+		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_MKDIR);
 
 		return resultId;
 	}
 
-	// TODO: remove. for debug
+	// Remove. Initially written for debugging purposes.
+	@Deprecated
 	public String systemNodeGetPath(NodeRef noderef) {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("serviceName", "NodeService");
@@ -2249,7 +2251,7 @@ public class AlfrescoController {
 		Path result;
 		try {
 			result = (Path) xstream.fromXML(requestString(new AlfrescoTransaction(this),
-					parameters, MsgId.INT_WEBSCRIPT_SERVICE));
+					parameters, MsgId.INT_WEBSCRIPT_OPCODE_SERVICE));
 		} catch (AlfrescoControllerException e) {
 			e.printStackTrace();
 			return null;
@@ -2555,6 +2557,128 @@ public class AlfrescoController {
 		return underlyingDataType;
 	}
 
+	/**
+	 * Tests authentication credentials with an Alfresco instance.
+	 * 
+	 * @param username
+	 * @param password
+	 * @return true if the authentication succeeded, false otherwise or in case of exception.
+	 */
+	public boolean authenticate(String username, String password) {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("username", username);
+		parameters.put("password", password);
+		transaction.setLogin(username);
+		String result;
+		try {
+			result = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_AUTHENTICATE);
+		} catch (AlfrescoControllerException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return StringUtils.equals(result, "success");
+	}
+
+	public String getWebscriptHelp() {
+		String result;
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
+		Map<String, String> parameters = new HashMap<String, String>();
+		try {
+			result = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_HELP);
+		} catch (AlfrescoControllerException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return result;
+	}
+
+	/**
+	 * Reloads dynamically all static (class-related) info (such as the mapping.xml file).
+	 * 
+	 * @return false if an exception occurred
+	 */
+	public boolean performDynamicReload() {
+		try {
+			AlfrescoController.loadMappingXml();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 
+	 * @param nodeId
+	 * @return the info about a content
+	 */
+	public String getWebscriptNodeContentInfo(String nodeId) {
+		String result;
+		String request;
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("nodeId", nodeId);
+
+		try {
+			request = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_NODE_INFO);
+		} catch (AlfrescoControllerException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		String[] infos = request.split(",");
+		result = infos[0]; // the node name
+		long size = Long.parseLong(infos[1]); // content size
+		String sizeStr;
+		if (size > 0) {
+			sizeStr = ": " + size + " bytes";
+			char multiplier = getFileSizeMultiplier(size);
+			if (multiplier != 'b') {
+				sizeStr += " (" + getFileSizeShortReadable(size, multiplier) + ")";
+			}
+		} else {
+			sizeStr = "(no content)";
+		}
+		result += " " + sizeStr;
+		return result;
+	}
+
+	private static char getFileSizeMultiplier(long size) {
+		char multiplier = 'b'; // bytes
+		if (size > 1024 * 1024 * 1024) {
+			multiplier = 'g';
+		} else if (size > 1024 * 1024) {
+			multiplier = 'm';
+		} else if (size > 1024) {
+			multiplier = 'k';
+		}
+		return multiplier;
+	}
+
+	private static String getFileSizeShortReadable(long transferred, char multiplier) {
+		float res = transferred;
+		String unit = "B";
+		switch (multiplier) {
+			case 'k':
+			case 'K':
+				res = (float) transferred / (float) (1024);
+				unit = "KB";
+				break;
+			case 'm':
+			case 'M':
+				res = (float) transferred / (float) (1024 * 1024);
+				unit = "MB";
+				break;
+			case 'g':
+			case 'G':
+				res = (float) transferred / (float) (1024 * 1024 * 1024);
+				unit = "GB";
+				break;
+		}
+		return res + " " + unit;
+	}
+
 	//
 	// REDIRECTION
 	//
@@ -2638,54 +2762,4 @@ public class AlfrescoController {
 		return false;
 	}
 
-	/**
-	 * Tests authentication credentials with an Alfresco instance.
-	 * 
-	 * @param username
-	 * @param password
-	 * @return true if the authentication succeeded, false otherwise or in case of exception.
-	 */
-	public boolean authenticate(String username, String password) {
-		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("username", username);
-		parameters.put("password", password);
-		transaction.setLogin(username);
-		String result;
-		try {
-			result = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_AUTHENTICATE);
-		} catch (AlfrescoControllerException e) {
-			e.printStackTrace();
-			return false;
-		}
-		return StringUtils.equals(result, "success");
-	}
-
-	public String getWebscriptHelp() {
-		String result;
-		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
-		Map<String, String> parameters = new HashMap<String, String>();
-		try {
-			result = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_HELP);
-		} catch (AlfrescoControllerException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return result;
-	}
-
-	/**
-	 * Reloads dynamically all static (class-related) info (such as the mapping.xml file).
-	 * 
-	 * @return false if an exception occurred
-	 */
-	public boolean performDynamicReload() {
-		try {
-			AlfrescoController.loadMappingXml();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
 }

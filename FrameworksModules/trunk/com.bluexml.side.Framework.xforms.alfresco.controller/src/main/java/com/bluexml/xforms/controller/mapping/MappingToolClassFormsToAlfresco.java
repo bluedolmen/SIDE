@@ -170,7 +170,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 		
 		List<GenericAttribute> attributes = alfClass.getAttributes().getAttribute();
 		for (GenericAttribute attribute : attributes) {
-			if (attribute.getQualifiedName().equals(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText())) {
+			if (attribute.getQualifiedName().endsWith("_repositoryContent")) {
 				return attribute;
 			}
 		}
