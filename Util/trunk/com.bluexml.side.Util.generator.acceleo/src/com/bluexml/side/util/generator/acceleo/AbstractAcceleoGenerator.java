@@ -48,6 +48,7 @@ import fr.obeo.acceleo.chain.Repository;
 import fr.obeo.acceleo.ecore.factories.EFactory;
 import fr.obeo.acceleo.gen.IGenFilter;
 import fr.obeo.acceleo.gen.template.eval.LaunchManager;
+import fr.obeo.acceleo.tools.classloaders.AcceleoClassLoader;
 
 public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	protected String mergedFilePath = "mergedFile"; //$NON-NLS-1$
@@ -142,6 +143,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	}
 
 	public Collection<IFile> generate(IFile model) throws Exception {
+		AcceleoClassLoader.setPreferredClassLoader(this.getClass().getClassLoader());
 		// System.out.println("Generate IFile model");
 
 		// References to files in the project
