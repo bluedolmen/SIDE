@@ -30,7 +30,7 @@
             <configurationParameter
                   documentation="The URL to reach facetMap web application (for exemple http://localhost:8080/facetmap)"
                   key="facetMap.url"
-                  label="FaceetMap URL">
+                  label="FacetMap URL">
             </configurationParameter>
           </generatorVersion>
         </technologyVersion>
