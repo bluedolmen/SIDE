@@ -76,9 +76,9 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SHARE_EXTENSION)) {
 				// generator for alfresco Share web application
 				// upload configuration
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/file-upload-response-get-patch.mt"); //$NON-NLS-1$
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload-js-get-patch.mt"); //$NON-NLS-1$
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/html-upload-js-get-patch.mt"); //$NON-NLS-1$
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload.get.html.ftl.mt"); //$NON-NLS-1$
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/defaultdocListView/documentlist.get.properties.mt"); //$NON-NLS-1$
 
 				// add forms/details management

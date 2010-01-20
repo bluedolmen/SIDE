@@ -11,26 +11,27 @@ import templates.servicesTemplates.Common
   --%>
 
 <%script type="clazz.ClassPackage" name="getHtmlOrFlashUploadJs"%>
-// A webscript that returns a list has been asked for on the wiki.
-var contentTypes = [{id: "Content", value: "Content"}];
-if (contentTypes === undefined || contentTypes.length < 1)
+/**
+ * Custom content types
+ */
+function getContentTypes()
 {
-   status.code = 400;
-   status.message = "Could not get contentTypes from the system";
-   status.redirect = true;
-}
+   // TODO: Data webscript call to return list of available types
+   var contentTypes = [
+   {
+      id: "cm:content",
+      value: "cm_content"
+   }];
 
+   return contentTypes;
+}
 //--START BLUEXML-PATCH [add custom content types]
 var availableContentTypes = [
 <%getCustomContentTypesAsJSON%>];
    
-contentTypes = contentTypes.concat(availableContentTypes);   
+var contentTypes = getContentTypes().concat(availableContentTypes);   
 //--END BLUEXML-PATCH [add custom content types]
-
-// Prepare the model
 model.contentTypes = contentTypes;
-
-
 <%script type="clazz.ClassPackage" name="getCustomContentTypesAsJSON"%>
 <%getAllClasses().push()%>
 <%for (peek()){%>
