@@ -37,7 +37,7 @@ public class DefaultMessages {
 			"field.is.mandatory=Field \"{0}\" is mandatory.",
 			"",
 			"file.field.label=Choose a file:",
-			"file.field.filename.message=File uploaded to temporary location: ",
+			"file.field.filename.temporary=File uploaded to temporary location: ",
 			"",
 			"# 0: list of labels for mandatory fields that are not filled at submission time",
 			"fill.mandatory.fields=Please fill mandatory fields ({0}).",
@@ -62,7 +62,7 @@ public class DefaultMessages {
 			"# 0: max length allowed; 1: label of the field",
 			"length.maximal=Maximal length allowed is {0} for the field \"{1}\"",
 			"",
-			"# 0: min length allowed; 1: nom du champ",
+			"# 0: min length allowed; 1: label of the field",
 			"length.minimal=Minimal length allowed is {0} for the field \"{1}\"",
 			"",
 			"selection.list.label=Select",
@@ -74,6 +74,9 @@ public class DefaultMessages {
 			"caption.button.workflow.cancel=Cancel",
 			"caption.button.workflow.select=Select this workflow",
 			"caption.button.workflow.start=Activate this workflow",
+			"upload.node.content.field.label=Choose a file:",
+			"upload.node.content.group.label=Attach content",
+			"upload.node.content.repository.info=Content information:", 
 			"workflow.error.submit.data=Please submit the data form before starting a workflow.",
 			"workflow.error.start.failure=Failed in starting the workflow.",
 			"workflow.instance.widget.title=Instances",
@@ -95,8 +98,6 @@ public class DefaultMessages {
 			"# status.message.empty should have at least one whitespace",
 			"status.message.empty=\\ ", "# 0: sequence number of the iteration",
 			"status.message.iteration.postfix=\\ ({0})",
-			"upload.node.content.field.label=Choose a file:",
-			"upload.node.content.group.label=Attach content",
 			"upload.to.repository.failure=Upload to the repository failed.", "" };
 
 	/**
