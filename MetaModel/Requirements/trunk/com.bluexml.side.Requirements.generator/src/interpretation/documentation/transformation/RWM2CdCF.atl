@@ -5,14 +5,14 @@ create OUT : Documentation from IN : RWM;
 helper context String def : normalize() : String =
 	self.regexReplaceAll('<([a-zA-Z0-9]*)>(.*)</\\1>','$2').regexReplaceAll('<([a-zA-Z0-9]*)>','')
 	    .regexReplaceAll('&lt;([a-zA-Z0-9]*)>(.*)&lt;/\\1>','$2').regexReplaceAll('&lt;([a-zA-Z0-9]*)>','')
-		.regexReplaceAll('\\\\(.)','$1');
+		.regexReplaceAll('\\\\(.)','$1').regexReplaceAll('&#xA;','&#xD;&#xA;');
 
 helper context RWM!Goal def : getAllSubGoals() : Sequence(RWM!Goal) =
 	Sequence{self}->union(self.subgoals->collect(goal | goal.getAllSubGoals())->flatten());
 
 rule createLinkItem(element : RWM!BasicElement) {
 	to t : Documentation!ItemizedListValueItem(
-		values <- Sequence{t_value,t_xref,t_value2,t_description}
+		values <- Sequence{t_value,t_xref,t_value2}
 	),
 	t_value : Documentation!TextualValue (
 		value <- element.name +' ( voir'
@@ -22,14 +22,6 @@ rule createLinkItem(element : RWM!BasicElement) {
 	),
 	t_value2 : Documentation!TextualValue (
 		value <- ')'
-	),
-	t_description : Documentation!EmphasisValue (
-		value <- 
-			if (element.documentation <> OclUndefined) then
-				'(' + element.documentation.normalize() + ')'
-			else
-				'()'
-			endif
 	)
 	do {
 		t;
@@ -80,17 +72,9 @@ rule createLinkWithoutParagraph(element : RWM!BasicElement) {
 	),
 	t_value2 : Documentation!TextualValue (
 		value <- ')'
-	),
-	t_description : Documentation!EmphasisValue (
-		value <-
-			if (element.documentation <> OclUndefined) then
-				'(' + element.documentation.normalize() + ')'
-			else
-				'()'
-			endif
 	)
 	do {
-		Sequence{t_value,t_xref,t_value2,t_description};
+		Sequence{t_value,t_xref,t_value2};
 	}
 }
 
@@ -102,13 +86,22 @@ rule ReqDefs {
 	),
 	t_preface:Documentation!Section (
 	    title <- 'Préface',
-		para <- Sequence{t_preface_part}
+		para <- Sequence{t_preface_part, t_documentation_part}
 	),
 	t_preface_part:Documentation!Paragraph (
 		values <- Sequence{t_preface_part_value}
 	),
 	t_preface_part_value:Documentation!TextualValue (
 		value <- 'Ce document a pour objectif de résumer l\'ensembles des besoins du futur outil métier.'
+	),
+	t_documentation_part:Documentation!Paragraph (
+		values <- Sequence{t_documentation_part_title,t_documentation_part_value}
+	),
+	t_documentation_part_title:Documentation!EmphasisValue (
+		value <- 'Description du projet :'
+	),
+	t_documentation_part_value:Documentation!TextualValue (
+		value <- s.documentation
 	),
 	t_chapter_agents:Documentation!Section (
 		title <- 'Liste des agents',
@@ -231,7 +224,22 @@ rule Goal {
 	from s:RWM!Goal 
 	to t:Documentation!Section (
 		title <- s.name,
-		section <- Sequence{t_section_description,t_section_privileges}
+		section <- Sequence{t_section_description,t_section_synopsis,t_section_privileges}
+	),
+	t_section_synopsis:Documentation!Section (
+		title <- 'Synopsis',
+		para <- Sequence{t_para_synopsis}
+	),
+	t_para_synopsis:Documentation!Paragraph (
+		values <- Sequence{t_para_synopsis_value}
+	),
+	t_para_synopsis_value:Documentation!TextualValue (
+		value <-
+			if (s.synopsis <> OclUndefined) then
+				s.synopsis.normalize()
+			else
+				''
+			endif
 	),
 	t_section_description:Documentation!Section (
 		title <- 'Documentation',
@@ -256,7 +264,20 @@ rule Goal {
 		role <- 'bold'
 	),
 	t_para_description_level_value2:Documentation!EmphasisValue (
-		value <- s.priority.toString()
+		value <-
+			if (s.priority = #VeryHigh) then
+				'Très important'
+			else if (s.priority = #High) then
+				'Important'
+			else if (s.priority = #Normal) then
+				'Normal'
+			else if (s.priority = #Low) then
+				'Faible'
+			else if (s.priority = #VeryLow) then
+				'Très faible'
+			else
+				''
+			endif endif endif endif endif
 	),
 	t_para_description_parent:Documentation!Paragraph (
 		values <- if (RWM!Goal->allInstances()->select(g | g.subgoals->includes(s))->size() > 0) then
@@ -292,7 +313,7 @@ rule Goal {
 rule GoalWithResponsible extends Goal{
 	from s:RWM!Goal (s.responsible.size() > 0)
 	to t:Documentation!Section (
-		section <- Sequence{t_section_description, t_section_responsibilities,t_section_privileges}
+		section <- Sequence{t_section_description,t_section_synopsis,t_section_responsibilities,t_section_privileges}
 	),
 	t_section_responsibilities:Documentation!Section (
 		title <- 'Responsabilité(s)',

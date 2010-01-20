@@ -1,20 +1,20 @@
-<project default="createODT_file">
+<project default='createODT_file'>
 
 	<!-- ================================= 
           target: createODT_file              
          ================================= -->
-	<target name="createODT_file">
+	<target name='createODT_file'>
 		<!-- Create configuration directory -->
-		<mkdir dir="${generated_dir}${file.separator}cdc${file.separator}Configurations2"/>
+		<mkdir dir='${generated_dir}${file.separator}cdc${file.separator}Configurations2'/>
 		<!-- Create the zip file -->
-		<jar destfile="${generated_dir}${file.separator}cdc.odt">
-			<fileset dir="${generated_dir}${file.separator}cdc">
-				<include name="**/*.xml" />
-				<include name="mimetype" />
+		<jar destfile='${generated_dir}${file.separator}cdc.odt'>
+			<fileset dir='${generated_dir}${file.separator}cdc'>
+				<include name='**/*.xml' />
+				<include name='mimetype' />
 			</fileset>
 		</jar>
 		<!-- Delete generated files -->
-		<delete dir="${generated_dir}${file.separator}cdc"/>
+		<delete dir='${generated_dir}${file.separator}cdc'/>
 	</target>
 
 </project>
