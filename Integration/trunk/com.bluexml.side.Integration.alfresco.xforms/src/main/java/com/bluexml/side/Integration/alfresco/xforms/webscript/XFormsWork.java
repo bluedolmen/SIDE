@@ -1,6 +1,5 @@
 package com.bluexml.side.Integration.alfresco.xforms.webscript;
 
-import java.io.File;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringReader;
@@ -36,10 +35,8 @@ import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
-import org.alfresco.service.cmr.model.FileExistsException;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
-import org.alfresco.service.cmr.repository.ContentIOException;
-import org.alfresco.service.cmr.repository.ContentWriter;
+import org.alfresco.service.cmr.repository.ContentData;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.repository.StoreRef;
@@ -126,6 +123,9 @@ public class XFormsWork implements RunAsWork<String> {
 			if (queryType == XFormsWebscript.XFormsQueryType.read) {
 				result = read();
 			}
+			if (queryType == XFormsWebscript.XFormsQueryType.nodeinfo) {
+				result = nodeInfo();
+			}
 			if (queryType == XFormsWebscript.XFormsQueryType.list) {
 				result = list();
 			}
@@ -161,12 +161,13 @@ public class XFormsWork implements RunAsWork<String> {
 			}
 			dataLayer.setInTransaction(false);
 
-			logger.debug("XFormsWork: returning: ****");
+			logger.debug("XFormsWork (opcode " + queryType + "): returning: ****");
 			logger.debug(result);
 			logger.debug("***************************");
 
 			return result;
 		}
+
 	}
 
 	public String doWork() throws Exception {
@@ -251,6 +252,38 @@ public class XFormsWork implements RunAsWork<String> {
 			return "failure";
 		}
 		return "success";
+	}
+
+	/**
+	 * Builds some information about the content of a node.
+	 * <p>
+	 * Parameter: "nodeId": complete (store + workspace) id.
+	 * </p>
+	 * 
+	 * @return an empty string if any problem or the comma-separated string containing the
+	 *         information built. Currently, {full node id}, {content size in bytes}.
+	 */
+	private String nodeInfo() {
+		String nodeId = parameters.get("nodeId");
+
+		try {
+			String result;
+			NodeRef nodeRef = new NodeRef(nodeId);
+			Serializable name = this.serviceRegistry.getNodeService().getProperty(nodeRef,
+					ContentModel.PROP_NAME);
+			Serializable content = this.serviceRegistry.getNodeService().getProperty(nodeRef,
+					ContentModel.PROP_CONTENT);
+			ContentData contentData = (ContentData) content;
+
+			long size = contentData.getSize();
+
+			result = name.toString() + "," + size;
+			return result;
+
+		} catch (Exception e) {
+			logger.error("Failed to provide info for node id: " + nodeId + ". An error occurred.");
+		}
+		return "";
 	}
 
 	private void exceptionToString(Throwable e, StringBuffer sb, HashSet<Throwable> causes) {
@@ -581,6 +614,26 @@ public class XFormsWork implements RunAsWork<String> {
 					created.put(nodeId, result.toString());
 				} else if (StringUtils.equals(element.getTagName(), "delete")) {
 					dataLayer.delete(element.getTextContent());
+				} else if (StringUtils.equals(element.getTagName(), "requester")) {
+					if (StringUtils.equals(element.getTextContent(), "XFormsController") == true) {
+						// NOTHING YET
+					}
+				} else if (StringUtils.equals(element.getTagName(), "attach")) {
+					String target = DOMUtil.getChild(element, "targetNode").getTextContent();
+					String filename = DOMUtil.getChild(element, "fileName").getTextContent();
+					String filepath = DOMUtil.getChild(element, "filePath").getTextContent();
+					String mimetype = DOMUtil.getChild(element, "mimeType").getTextContent();
+					String contentType = DOMUtil.getChild(element, "contentType").getTextContent();
+
+					// we must ensure the receiver is a valid id
+					String receiver = target;
+					try {
+						@SuppressWarnings("unused")
+						NodeRef nodeRef = new NodeRef(target);
+					} catch (Exception e) {
+						receiver = created.get(target);
+					}
+					dataLayer.attachContent(receiver, filename, filepath, mimetype, contentType);
 				}
 			}
 		} catch (RuntimeException e) {
@@ -978,12 +1031,12 @@ public class XFormsWork implements RunAsWork<String> {
 	 * The file system path must be a valid path (not an escaped URL)<br/>
 	 * .
 	 * 
-	 * @return the node ref to the newly created node, or empty string if the parent folder does not
-	 *         exist.
+	 * @return the node ref (protocol, store and id) to the newly created node, or empty string if
+	 *         any errors occur (e.g. the parent folder does not exist).
 	 */
 	protected String upload() {
 		NodeRef parent, newNode = null;
-		String resultId, FAILURE = "";
+		String FAILURE = "";
 
 		String filename = parameters.get("filename");
 		String filepath = parameters.get("filepath");
@@ -1011,60 +1064,9 @@ public class XFormsWork implements RunAsWork<String> {
 		// create the node
 		newNode = serviceRegistry.getNodeService().createNode(parent, assocTypeQName, assocQName,
 				nodeTypeQName).getChildRef();
-		// set the node name
-		try {
-			serviceRegistry.getFileFolderService().rename(newNode, filename);
-		} catch (FileExistsException e) {
-			logger.debug("Failed to rename: the file already exists!", e);
-			return FAILURE;
-		} catch (org.alfresco.service.cmr.model.FileNotFoundException e) {
-			logger.debug("Failed to rename: the node to rename does not exist!", e);
-			return FAILURE;
-		}
-		// set some properties
-		ContentWriter writer = serviceRegistry.getContentService().getWriter(newNode,
-				nodeTypeQName, false);
-		writer.setMimetype(mimeType);
-		// upload the file content to the node
-		if (writeFileContentIntoNode(filepath, writer)) {
-			// set other properties
-			Map<QName, Serializable> properties = this.serviceRegistry.getNodeService()
-					.getProperties(newNode);
-			properties.put(ContentModel.PROP_CONTENT, writer.getContentData());
-			this.serviceRegistry.getNodeService().setProperties(newNode, properties);
-			resultId = StringEscapeUtils.escapeXml(newNode.toString());
-			logger.debug(" File '" + filename + "' upload with nodeId: " + resultId);
-			return resultId;
-		}
-		return FAILURE;
-	}
 
-	/**
-	 * Writes the content of a file into a node. The file is read as a binary file.
-	 * 
-	 * @param filename
-	 *            the name of the node
-	 * @param filepath
-	 *            complete path to the file, including name and extension
-	 * @param location
-	 *            address of a folder in the content repository
-	 * @param writer
-	 *            the appropriate content writer to the node. <b>Must have been already gotten from
-	 *            the content service.</b>
-	 * @return <b>true</b> if no exception was thrown during the process.
-	 */
-	private boolean writeFileContentIntoNode(String filepath, ContentWriter writer) {
-
-		File theFile = new File(filepath);
-		long length = theFile.length();
-
-		try {
-			writer.putContent(theFile);
-		} catch (ContentIOException e) {
-			return false;
-		}
-		logger.debug("Loaded repo file '" + filepath + "', size: " + length);
-		return true;
+		return dataLayer.uploadContentToNode(newNode, filename, filepath, mimeType, nodeTypeQName,
+				true);
 	}
 
 	private void createdToXML(StringBuffer sb, Map<String, String> created) {

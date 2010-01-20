@@ -4,6 +4,7 @@
 package com.bluexml.side.Integration.alfresco.xforms.webscript;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,6 +34,8 @@ import org.alfresco.service.cmr.model.FileExistsException;
 import org.alfresco.service.cmr.repository.AssociationExistsException;
 import org.alfresco.service.cmr.repository.AssociationRef;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
+import org.alfresco.service.cmr.repository.ContentIOException;
+import org.alfresco.service.cmr.repository.ContentWriter;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.repository.StoreRef;
@@ -42,6 +45,7 @@ import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.cmr.security.AuthenticationService;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.service.namespace.RegexQNamePattern;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1312,6 +1316,104 @@ public class DataLayer implements DataLayerInterface {
 	private String getDefaultNodePath(QName nodeType) throws Exception {
 		nodeType = getDataTypeQName(nodeType.getLocalName());
 		return defaultStorePath + "/cm:" + nodeType.getLocalName();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#attachContent(java
+	 * .lang.String, java.lang.String)
+	 */
+	public boolean attachContent(String receiver, String filename, String filepath,
+			String mimeType, String contentType) throws Exception {
+		NodeRef newNode = new NodeRef(receiver);
+		QName nodeTypeQName = QName.createQName(BLUEXML_MODEL_URI + "1.0", contentType);
+
+		boolean applyName = (StringUtils.trimToNull(filename) != null);
+
+		String resultId = uploadContentToNode(newNode, filename, filepath, mimeType, nodeTypeQName,
+				applyName);
+		if (StringUtils.trimToNull(resultId) == null) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * @param newNode
+	 *            an existing node
+	 * @param filename
+	 *            the display name that should be set on the node if the content writing succeeds.
+	 *            NO GUARANTEE is given about whether the name is indeed applied.
+	 * @param filepath
+	 * @param mimeType
+	 * @param nodeTypeQName
+	 *            the node content type. Non-BlueXML types are supported.
+	 * @return the node ref (protocol, store and id) to the node, or empty string if the parent
+	 *         folder does not exist.
+	 */
+	public String uploadContentToNode(NodeRef newNode, String filename, String filepath,
+			String mimeType, QName nodeTypeQName, boolean applyName) {
+		String resultId, FAILURE = "";
+		ContentWriter writer = serviceRegistry.getContentService().getWriter(newNode,
+				nodeTypeQName, false);
+
+		// set MIME type property
+		writer.setMimetype(mimeType);
+
+		// upload the file content to the node
+		long sizeUploaded = writeFileContentIntoNode(filepath, writer);
+		if (sizeUploaded != -1) {
+			// set other properties
+			Map<QName, Serializable> properties = this.serviceRegistry.getNodeService()
+					.getProperties(newNode);
+			properties.put(ContentModel.PROP_CONTENT, writer.getContentData());
+			this.serviceRegistry.getNodeService().setProperties(newNode, properties);
+			resultId = StringEscapeUtils.escapeXml(newNode.toString());
+			logger.debug(" File '" + filename + "' (size: " + sizeUploaded
+					+ ") uploaded to node: " + resultId);
+			// set the node name
+			if (applyName) {
+				try {
+					serviceRegistry.getFileFolderService().rename(newNode, filename);
+				} catch (FileExistsException e) {
+					logger.debug("Failed to rename: the file already exists!", e);
+				} catch (org.alfresco.service.cmr.model.FileNotFoundException e) {
+					logger.debug("Failed to rename: the node to rename does not exist!", e);
+				}
+			}
+			return resultId;
+		}
+		return FAILURE;
+	}
+
+	/**
+	 * Writes the content of a file into a node. The file is read as a binary file.
+	 * 
+	 * @param filename
+	 *            the name of the node
+	 * @param filepath
+	 *            complete path to the file, including name and extension
+	 * @param location
+	 *            address of a folder in the content repository
+	 * @param writer
+	 *            the appropriate content writer to the node. <b>Must have been already gotten from
+	 *            the content service.</b>
+	 * @return the length in bytes of the uploaded content if no exception was thrown during the
+	 *         process, -1 otherwise
+	 */
+	private long writeFileContentIntoNode(String filepath, ContentWriter writer) {
+
+		File theFile = new File(filepath);
+		long length = theFile.length();
+
+		try {
+			writer.putContent(theFile);
+		} catch (ContentIOException e) {
+			return -1;
+		}
+		return length;
 	}
 
 }

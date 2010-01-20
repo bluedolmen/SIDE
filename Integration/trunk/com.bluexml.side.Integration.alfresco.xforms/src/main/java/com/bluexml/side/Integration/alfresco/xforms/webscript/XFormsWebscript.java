@@ -55,6 +55,7 @@ public class XFormsWebscript extends AbstractWebScript {
 			addToPackage,
 			auth,
 			help,
+			nodeinfo,
 			batch;
 	}
 
@@ -203,6 +204,9 @@ public class XFormsWebscript extends AbstractWebScript {
 		}
 		if (query.endsWith("batch")) {
 			result = XFormsQueryType.batch;
+		}
+		if (query.endsWith("nodeinfo")) {
+			result = XFormsQueryType.nodeinfo;
 		}
 		if (query.endsWith("list")) {
 			result = XFormsQueryType.list;
