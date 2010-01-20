@@ -64,6 +64,7 @@ public class GoalItemProvider
 
 			addPriorityPropertyDescriptor(object);
 			addResponsiblePropertyDescriptor(object);
+			addSynopsisPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -108,6 +109,28 @@ public class GoalItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Synopsis feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSynopsisPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Goal_synopsis_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Goal_synopsis_feature", "_UI_Goal_type"),
+				 RequirementsPackage.Literals.GOAL__SYNOPSIS,
+				 true,
+				 true,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -182,6 +205,7 @@ public class GoalItemProvider
 
 		switch (notification.getFeatureID(Goal.class)) {
 			case RequirementsPackage.GOAL__PRIORITY:
+			case RequirementsPackage.GOAL__SYNOPSIS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case RequirementsPackage.GOAL__SUBGOALS:
