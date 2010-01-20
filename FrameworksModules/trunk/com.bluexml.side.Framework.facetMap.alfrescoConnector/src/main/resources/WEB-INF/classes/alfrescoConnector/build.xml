@@ -6,8 +6,8 @@
 		<!-- creating the folder for result-->
 		<mkdir dir="${ant.infFolder}" />
 		<!-- getting the file-->
-		<echo message="http://${ant.host}/${ant.CMISurl}?contentType=${ant.contentType}&amp;folder=${ant.community}" />
-		<get src="http://${ant.host}/${ant.CMISurl}?contentType=${ant.contentType}&amp;folder=${ant.community}" dest="${ant.infFolder}${ant.CMISresult}" username="${ant.usernameAlfresco}" password="${ant.passwordAlfresco}" />
+		<echo message="http://${ant.host}/${ant.CMISurl}?contentType=${ant.contentType}&amp;path=${ant.community}" />
+		<get src="http://${ant.host}/${ant.CMISurl}?contentType=${ant.contentType}&amp;path=${ant.community}" dest="${ant.infFolder}${ant.CMISresult}" username="${ant.usernameAlfresco}" password="${ant.passwordAlfresco}" />
 		
 		<echo message="${ant.infFolder}${ant.CMISresult}" />
 		<echo message="${ant.usernameAlfresco}" />

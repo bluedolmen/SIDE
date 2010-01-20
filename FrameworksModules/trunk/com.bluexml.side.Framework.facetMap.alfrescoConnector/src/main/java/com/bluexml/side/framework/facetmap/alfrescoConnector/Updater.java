@@ -17,6 +17,10 @@ import com.bluexml.side.framework.facetmap.multimap.FacetMapNotAvailableExceptio
 
 public class Updater {
 
+	public static String getDocBase(String community) {
+		return "Sites/"+community+"/documentLibrary";
+	}
+	
 	public static String update(HttpServletRequest httpservletrequest) throws Exception {
 		// extract parameters
 		String host=httpservletrequest.getHeader("host");
@@ -49,7 +53,7 @@ public class Updater {
 		help.setProperties(ant, p);
 		ant.setProperty("ant.host", host);
 		
-		String path= "Company Home/Sites/"+community+"/documentLibrary";
+		String path= getDocBase(community);
 		path=path.replaceAll(" ", "%20");
 		ant.setProperty("ant.community", path);
 		
