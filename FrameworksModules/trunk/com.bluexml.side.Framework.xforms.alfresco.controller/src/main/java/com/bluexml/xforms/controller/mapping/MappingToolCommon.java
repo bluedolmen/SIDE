@@ -598,7 +598,8 @@ public class MappingToolCommon {
 			return DateTimeConverter.convert_AlfrescoToXForms_DateTime(textContent);
 		}
 		if (xformsAttribute.equals("Date")) {
-			return DateTimeConverter.convert_AlfrescoToXForms_Date(textContent);
+			String localTimeZone = createXFormsInitialValue("Time", null, null).substring(12);
+			return DateTimeConverter.convert_AlfrescoToXForms_Date(textContent, localTimeZone);
 		}
 		if (xformsAttribute.equals("Time")) {
 			return DateTimeConverter.convert_AlfrescoToXForms_Time(textContent);

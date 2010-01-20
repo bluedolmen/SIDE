@@ -26,14 +26,14 @@ public class DateTimeConverter {
 		return convert_AlfrescoToXForms_DateTime(value);
 	}
 
-	public static String convert_AlfrescoToXForms_Date(String isoDate) {
+	public static String convert_AlfrescoToXForms_Date(String isoDate, String localTimeZone) {
 		long value;
 		try {
 			value = dateTimeFormatter.parseMillis(isoDate);
 		} catch (IllegalArgumentException e) {
 			if (e.getMessage().contains("is too short")) {
 				// make passing dates as url parameters easier (see #937)
-				value = dateTimeFormatter.parseMillis(isoDate + "T00:00:00.000Z");
+				value = dateTimeFormatter.parseMillis(isoDate + "T00:00:00.000" + localTimeZone);
 			} else {
 				throw (e);
 			}
