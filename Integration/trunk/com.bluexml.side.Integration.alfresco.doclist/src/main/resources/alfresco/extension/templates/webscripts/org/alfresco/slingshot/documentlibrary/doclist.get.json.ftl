@@ -9,21 +9,25 @@
    "startIndex": ${paging.startIndex?c},
    "metadata":
    {
-      "permissions":
+      "parent":
       {
-         "userRole": "${user.role!""}",
-         "userAccess":
+         <#if doclist.parent??>"nodeRef": "${doclist.parent.nodeRef}",</#if>
+         "permissions":
          {
-            "create" : ${user.permissions.create?string},
-            "edit" : ${user.permissions.edit?string},
-            "delete" : ${user.permissions.delete?string}
+            "userRole": "${user.role!""}",
+            "userAccess":
+            {
+               "create" : ${user.permissions.create?string},
+               "edit" : ${user.permissions.edit?string},
+               "delete" : ${user.permissions.delete?string}
+            }
          }
       },
       "onlineEditing": ${doclist.onlineEditing?string},
       "itemCounts":
       {
-         "folders": ${(itemCount.folders!0)?string},
-         "documents": ${(itemCount.documents!0)?string}
+         "folders": ${(itemCount.folders!0)?c},
+         "documents": ${(itemCount.documents!0)?c}
       }
    },
    "items":
@@ -55,9 +59,9 @@
          "index": ${item_index},
          "nodeRef": "${d.nodeRef}",
          "type": "${item.type}",
+         "isFolder": ${d.isContainer?string},
          "isLink": ${item.isLink?string},
          "mimetype": "${d.mimetype!""}",
-         "icon32": "${d.icon32}",
          "fileName": "<#if item.isLink>${item.linkAsset.name}<#else>${d.name}</#if>",
          "displayName": "${d.name?replace(workingCopyLabel, "")}",
          "status": "<#list item.status as s>${s}<#if s_has_next>,</#if></#list>",
@@ -82,9 +86,11 @@
          	<#include "customViews.ftl">
          },
          "activeWorkflows": "<#list item.activeWorkflows as aw>${aw}<#if aw_has_next>,</#if></#list>",
+         "isFavourite": ${item.isFavourite?string},
          "location":
          {
             "site": "${item.location.site!""}",
+            "siteTitle": "${item.location.siteTitle!""}",
             "container": "${item.location.container!""}",
             "path": "${item.location.path!""}",
             "file": "${item.location.file!""}"
