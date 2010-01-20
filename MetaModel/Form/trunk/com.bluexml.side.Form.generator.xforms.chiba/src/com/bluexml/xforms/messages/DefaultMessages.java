@@ -36,7 +36,8 @@ public class DefaultMessages {
 			"# 0: label/title of the field",
 			"field.is.mandatory=Field \"{0}\" is mandatory.",
 			"",
-			"file.field.label=File",
+			"file.field.label=Choose a file:",
+			"file.field.filename.message=File uploaded to temporary location: ",
 			"",
 			"# 0: list of labels for mandatory fields that are not filled at submission time",
 			"fill.mandatory.fields=Please fill mandatory fields ({0}).",
@@ -94,7 +95,7 @@ public class DefaultMessages {
 			"# status.message.empty should have at least one whitespace",
 			"status.message.empty=\\ ", "# 0: sequence number of the iteration",
 			"status.message.iteration.postfix=\\ ({0})",
-			"upload.node.content.field.label=Upload a file",
+			"upload.node.content.field.label=Choose a file:",
 			"upload.node.content.group.label=Attach content",
 			"upload.to.repository.failure=Upload to the repository failed.", "" };
 
