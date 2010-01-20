@@ -1,11 +1,11 @@
-<%--encoding=iso-8859-1--%>
+<%--encoding=utf-8--%>
 <%
 metamodel http://www.bluexml.com/rwm/documentation/1.0/
 import interpretation.documentation.generation.opendocument.content_chapter
 %>
 
 <%script type="Documentation.Book" name="content_book" file="cdc/content.xml"%>
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <office:document-content
 	xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
 	xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
