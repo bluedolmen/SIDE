@@ -1,5 +1,5 @@
 package com.bluexml.side.framework.alfresco.webscriptExtension;
-  
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +30,7 @@ public class CMISWebScriptExtension extends BaseScopableProcessorExtension {
 	private Paging paging;
 	private CMISScript cmiswebscript;
 	private RepositoryImageResolver imageResolver;
+	public static final String FOLDER = "cmis:folder";
 
 	/**
 	 * @return the cmiswebscript
@@ -128,9 +129,10 @@ public class CMISWebScriptExtension extends BaseScopableProcessorExtension {
 		String clauses = " WHERE " + clauseFolder;
 		String statement = cmisQuerySelect + tables + clauses;
 		logger.debug("queryChildren :" + statement);
-		// FIXME: Alfresco Bug ! unlimited page Must be a negative value, so paging.createUnlimitedPage() do not work
-		// Page p =  this.paging.createUnlimitedPage();
-		Page p =  this.paging.createPage(0, -1);
+		// FIXME: Alfresco Bug ! unlimited page Must be a negative value, so
+		// paging.createUnlimitedPage() do not work
+		// Page p = this.paging.createUnlimitedPage();
+		Page p = this.paging.createPage(0, -1);
 		PagedResults paged = cmiswebscript.query(statement, p);
 		return paged;
 	}
@@ -166,7 +168,7 @@ public class CMISWebScriptExtension extends BaseScopableProcessorExtension {
 
 		}
 
-		PagedResults pagedFolders = queryChildren(node, "FOLDER");
+		PagedResults pagedFolders = queryChildren(node, FOLDER);
 		CMISResultSet resultSetFolders = (CMISResultSet) pagedFolders.getResult();
 		for (int i = 0; i < resultSetFolders.getLength(); i++) {
 			CMISResultSetRow row = resultSetFolders.getRow(i);
