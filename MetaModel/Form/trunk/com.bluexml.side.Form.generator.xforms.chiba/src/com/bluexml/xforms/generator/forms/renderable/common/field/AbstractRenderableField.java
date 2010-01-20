@@ -548,7 +548,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		valueFilename.append("if (current()/");
 		valueFilename.append(meb.getNodeset());
 		valueFilename.append(" eq '') then '' else concat('");
-		valueFilename.append(MsgPool.getMsg(MsgId.MSG_FILE_FIELD_FILENAME_MSG));
+		valueFilename.append(MsgPool.getMsg(MsgId.MSG_FILE_FIELD_FILENAME_TEMP));
 		valueFilename.append("', current()/");
 		valueFilename.append(meb.getNodeset());
 		valueFilename.append(")");
