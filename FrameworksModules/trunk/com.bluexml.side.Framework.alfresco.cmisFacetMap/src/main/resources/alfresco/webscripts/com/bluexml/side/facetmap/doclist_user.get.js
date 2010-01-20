@@ -1,8 +1,9 @@
+<import resource="classpath:alfresco/templates/webscripts/org/alfresco/cmis/lib/read.lib.js">
 script: {
 
-	var contentType = "Document";
+	var contentType = "cmis:document";
 	if (args["contentType"] && args["contentType"].indexOf(":") != -1) {
-		contentType = args["contentType"].replace(":", "_");
+		contentType = args["contentType"];
 	}
 
 	// process paging
@@ -19,10 +20,10 @@ script: {
 
 	// perform query
 	var paged;
-	if (args["folder"]) {
+	if (args["path"]) {
 		var refType = "path";
 
-		model.node = findFolder(args["folder"], refType);
+		model.node = findFolder(args["path"], refType);
 		if (model.node == null) {
 			status.code = 500;
 			status.message = "folder not found please check your request";
@@ -46,9 +47,11 @@ script: {
 }
 
 function findFolder(path, refType) {
-	var id = args["folder"];
-	var store_type = "workspace";
-	var store_id = "SpacesStore";
-	var reference = [ store_type, store_id ].concat(id.split("/"));
-	return cmis.findNode(refType, reference);
+	var object = getObjectFromUrl();
+    if (object.node == null)
+    {
+        return null;
+    }
+    var node = object.node;
+    return node;
 }

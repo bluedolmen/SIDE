@@ -15,7 +15,7 @@ Exemples :
 doclist_user?contentType=com:bluexml_demo_rh_Personne&folder=Company%20Home/Sites/mySite/documentLibrary
 ]]>
   </description>
-	<url>/com/bluexml/side/facetMap/doclist_user?contentType={model}:{type}&amp;folder={/store/folderPath}&amp;recursive={true|false}&amp;skipCount={skipCount}&amp;pageSize={pageSize}</url>
+	<url>/com/bluexml/side/facetMap/doclist_user?contentType={model}:{type}&amp;path={/store/folderPath}&amp;recursive={true|false}&amp;skipCount={skipCount}&amp;pageSize={pageSize}</url>
 	<authentication>admin</authentication>
 	<transaction allow="readonly" />
 	<format default="xml" />
