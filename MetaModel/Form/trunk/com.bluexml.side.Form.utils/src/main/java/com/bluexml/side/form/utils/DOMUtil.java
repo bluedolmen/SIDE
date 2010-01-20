@@ -306,6 +306,7 @@ public class DOMUtil {
 	 *            the tag name
 	 * 
 	 * @return the unique children by tag name
+	 * @since 1.0.1
 	 */
 	public static Element getOneElementByTagName(List<Element> elements, String tagName) {
 		for (Element element : elements) {
