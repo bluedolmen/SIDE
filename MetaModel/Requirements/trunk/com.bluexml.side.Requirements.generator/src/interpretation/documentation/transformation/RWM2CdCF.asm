@@ -273,7 +273,7 @@
 		<constant value="content"/>
 		<constant value="Préface"/>
 		<constant value="para"/>
-		<constant value="Ce document a pour objectif de résumer l'ensembles des besoins du futur outil métier."/>
+		<constant value="Ce document a pour objectif de résumer l'ensemble des besoins du futur outil métier."/>
 		<constant value="Description du projet :"/>
 		<constant value="Liste des agents"/>
 		<constant value="Agent"/>
@@ -298,8 +298,8 @@
 		<constant value="92:22-92:42"/>
 		<constant value="92:13-92:43"/>
 		<constant value="92:3-92:43"/>
-		<constant value="95:12-95:100"/>
-		<constant value="95:3-95:100"/>
+		<constant value="95:12-95:99"/>
+		<constant value="95:3-95:99"/>
 		<constant value="98:22-98:48"/>
 		<constant value="98:49-98:75"/>
 		<constant value="98:13-98:76"/>

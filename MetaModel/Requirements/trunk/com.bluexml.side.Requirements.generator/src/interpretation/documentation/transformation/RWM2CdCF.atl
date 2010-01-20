@@ -92,7 +92,7 @@ rule ReqDefs {
 		values <- Sequence{t_preface_part_value}
 	),
 	t_preface_part_value:Documentation!TextualValue (
-		value <- 'Ce document a pour objectif de résumer l\'ensembles des besoins du futur outil métier.'
+		value <- 'Ce document a pour objectif de résumer l\'ensemble des besoins du futur outil métier.'
 	),
 	t_documentation_part:Documentation!Paragraph (
 		values <- Sequence{t_documentation_part_title,t_documentation_part_value}
