@@ -540,11 +540,18 @@ public abstract class AbstractRenderableField extends Renderable {
 		Element filenameElement = XFormsGenerator.createElement("output",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		StringBuffer valueFilename = new StringBuffer();
-		valueFilename.append("if (not(starts-with(current()/");
+//		valueFilename.append("if (not(starts-with(current()/");
+//		valueFilename.append(meb.getNodeset());
+//		valueFilename.append(", 'file'))) then current()/");
+//		valueFilename.append(meb.getNodeset());
+//		valueFilename.append(" else ''");
+		valueFilename.append("if (current()/");
 		valueFilename.append(meb.getNodeset());
-		valueFilename.append(", 'file'))) then current()/");
+		valueFilename.append(" eq '') then '' else concat('");
+		valueFilename.append(MsgPool.getMsg(MsgId.MSG_FILE_FIELD_FILENAME_MSG));
+		valueFilename.append("', current()/");
 		valueFilename.append(meb.getNodeset());
-		valueFilename.append(" else ''");
+		valueFilename.append(")");
 		filenameElement.setAttribute("value", valueFilename.toString());
 		filenameElement.setAttribute("mediatype", "text/html");
 		filenameDiv.addContent(filenameElement);
