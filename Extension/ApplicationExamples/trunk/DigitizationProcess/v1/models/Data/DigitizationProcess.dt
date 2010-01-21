@@ -171,9 +171,9 @@
               <firstEnd xmi:id="_06VRwNRREd6d24BtuZ-cgQ" name="response" title="" navigable="true" linkedClass="_06PLINRREd6d24BtuZ-cgQ"/>
               <secondEnd xmi:id="_06VRwdRREd6d24BtuZ-cgQ" name="following" title="" navigable="true" linkedClass="_06EMANRREd6d24BtuZ-cgQ"/>
             </associationSet>
-            <associationSet xmi:id="_06V40NRREd6d24BtuZ-cgQ" description="" name="concerns" title="concerns">
+            <associationSet xmi:id="_06V40NRREd6d24BtuZ-cgQ" documentation="" description="" name="concerns" title="concerns">
               <firstEnd xmi:id="_06V40dRREd6d24BtuZ-cgQ" name="from" title="" cardMax="-1" navigable="true" linkedClass="_06S1gdRREd6d24BtuZ-cgQ"/>
-              <secondEnd xmi:id="_06V40tRREd6d24BtuZ-cgQ" name="for" title="" cardMin="1" navigable="true" linkedClass="_06S1hdRREd6d24BtuZ-cgQ"/>
+              <secondEnd xmi:id="_06V40tRREd6d24BtuZ-cgQ" name="for" title="" cardMin="1" linkedClass="_06S1hdRREd6d24BtuZ-cgQ"/>
             </associationSet>
             <associationSet xmi:id="_06V409RREd6d24BtuZ-cgQ" description="" name="fromEntity" title="from the entity">
               <firstEnd xmi:id="_06V41NRREd6d24BtuZ-cgQ" name="for" title="" cardMax="-1" linkedClass="_06EMANRREd6d24BtuZ-cgQ"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
   <model href="DigitizationProcess.dt#_06BIsNRREd6d24BtuZ-cgQ"/>
-  <diagrams position="0,0" size="100,100" name="DigitizationProcess.dtdi" zoom="0.75" viewport="0,0">
+  <diagrams position="0,0" size="100,100" name="DigitizationProcess.dtdi" zoom="0.75" viewport="0,168">
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
     <property key="diagramHeight" value="1188"/>
@@ -617,7 +617,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="662,656" size="182,108">
+    <contained xsi:type="di:GraphNode" position="690,662" size="182,108">
       <anchorage graphEdge="//@diagrams.0/@contained.34"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.dt#_06S1hdRREd6d24BtuZ-cgQ"/>
@@ -660,10 +660,10 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.dt#_06V40NRREd6d24BtuZ-cgQ"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="-5" vDistance="16"/>
       <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="-10" vDistance="-29"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.32/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">

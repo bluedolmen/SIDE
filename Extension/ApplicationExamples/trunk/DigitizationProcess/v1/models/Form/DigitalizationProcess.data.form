@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:ClassFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_s29bwdRSEd6mvv4ISlOk-Q" description="">
+<form:ClassFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_s29bwdRSEd6mvv4ISlOk-Q" description="" name="MyFormCollection">
   <forms xsi:type="form:FormClass" xmi:id="_s3BGINRSEd6mvv4ISlOk-Q" label="Document" id="commonForm">
     <children xsi:type="form:CharField" xmi:id="_s3C7UNRSEd6mvv4ISlOk-Q" label="Document title" id="Title" help_text="">
       <ref href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
