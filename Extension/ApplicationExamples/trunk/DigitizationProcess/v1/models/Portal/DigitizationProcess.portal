@@ -1,20 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<portal:Portal xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:portal="http://www.kerblue.org/portal/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_SmQJcOM3Ed6qNvjsNi40SA" name="DigitizationProcess">
-  <pageSet xmi:id="_TDopAOM3Ed6qNvjsNi40SA" ID="PageLibrary" useLayout="_U7m3QOM3Ed6qNvjsNi40SA">
+<portal:Portal xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmlns:portal="http://www.kerblue.org/portal/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_SmQJcOM3Ed6qNvjsNi40SA" name="digitizationProcess">
+  <pageSet xmi:id="_TDopAOM3Ed6qNvjsNi40SA" ID="documentlibrary" useLayout="_U7m3QOM3Ed6qNvjsNi40SA" generate="false">
     <portlets xmi:id="_mYPtQOM3Ed6qNvjsNi40SA" associationPortlet="_eH4ZkOM3Ed6qNvjsNi40SA" associationPage="_TDopAOM3Ed6qNvjsNi40SA"/>
     <portlets xmi:id="_qfvuIOM3Ed6qNvjsNi40SA" associationPortlet="_eH4ZkOM3Ed6qNvjsNi40SA" associationPage="_TDopAOM3Ed6qNvjsNi40SA"/>
-    <portlets xmi:id="_raBlEOM3Ed6qNvjsNi40SA" associationPortlet="_jMx20OM3Ed6qNvjsNi40SA" associationPage="_TDopAOM3Ed6qNvjsNi40SA"/>
+    <portlets xmi:id="_raBlEOM3Ed6qNvjsNi40SA" associationPortlet="_jMx20OM3Ed6qNvjsNi40SA" associationPage="_TDopAOM3Ed6qNvjsNi40SA">
+      <positionGroup xmi:id="_l-oegADzEd-iQ-Ghy96rpQ" onColumn="_X1mjMOM3Ed6qNvjsNi40SA" onLayout="_U7m3QOM3Ed6qNvjsNi40SA"/>
+    </portlets>
+  </pageSet>
+  <pageSet xmi:id="_iJ2zUABZEd-pVYKNSGS_OQ" description="Page with Facet Navigation" ID="MyPageWithFacet" title="FacetNavigation" useLayout="_U7m3QOM3Ed6qNvjsNi40SA">
+    <portlets xmi:id="_EI8SgABbEd-pVYKNSGS_OQ" associationPortlet="_wMvfQABZEd-pVYKNSGS_OQ" associationPage="_iJ2zUABZEd-pVYKNSGS_OQ">
+      <positionGroup xmi:id="_mcYxgADzEd-iQ-Ghy96rpQ" onColumn="_X1mjMOM3Ed6qNvjsNi40SA" onLayout="_U7m3QOM3Ed6qNvjsNi40SA"/>
+    </portlets>
+  </pageSet>
+  <pageSet xmi:id="_HjHHwABlEd-pVYKNSGS_OQ" ID="document-details" title="document-details" useLayout="_U7m3QOM3Ed6qNvjsNi40SA" visibility="Private" generate="false">
+    <portlets xmi:id="_TOslIABlEd-pVYKNSGS_OQ" associationPortlet="_eH4ZkOM3Ed6qNvjsNi40SA" associationPage="_HjHHwABlEd-pVYKNSGS_OQ">
+      <positionGroup xmi:id="_lATOAADzEd-iQ-Ghy96rpQ" onColumn="_X1mjMOM3Ed6qNvjsNi40SA" onLayout="_U7m3QOM3Ed6qNvjsNi40SA"/>
+    </portlets>
+  </pageSet>
+  <pageSet xmi:id="_eysz0ABlEd-pVYKNSGS_OQ" description="" ID="edit-metadata" useLayout="_U7m3QOM3Ed6qNvjsNi40SA" visibility="Private" generate="false">
+    <portlets xmi:id="_mKA_oABlEd-pVYKNSGS_OQ" associationPortlet="_gmJHYABlEd-pVYKNSGS_OQ" associationPage="_eysz0ABlEd-pVYKNSGS_OQ">
+      <positionGroup xmi:id="_nPRnAADzEd-iQ-Ghy96rpQ" onColumn="_X1mjMOM3Ed6qNvjsNi40SA" onLayout="_U7m3QOM3Ed6qNvjsNi40SA"/>
+    </portlets>
   </pageSet>
   <layoutSet xmi:id="_U7m3QOM3Ed6qNvjsNi40SA" description="" name="PortalLayout1">
     <columns xmi:id="_X1mjMOM3Ed6qNvjsNi40SA" name="new_0" width="100"/>
   </layoutSet>
   <portletSet xmi:id="_eH4ZkOM3Ed6qNvjsNi40SA" name="DocumentDetails" isPortletInternal="_zu6MYOM3Ed6qNvjsNi40SA"/>
-  <portletSet xmi:id="_jMx20OM3Ed6qNvjsNi40SA" name="documentlibrary" isPortletInternal="_4uHRUOM3Ed6qNvjsNi40SA"/>
+  <portletSet xmi:id="_jMx20OM3Ed6qNvjsNi40SA" name="DocumentLibrary" isPortletInternal="_4uHRUOM3Ed6qNvjsNi40SA"/>
+  <portletSet xmi:id="_wMvfQABZEd-pVYKNSGS_OQ" name="Portlet_FacetMap" isPortletInternal="_u0X-IABZEd-pVYKNSGS_OQ"/>
+  <portletSet xmi:id="_gmJHYABlEd-pVYKNSGS_OQ" name="edit-metadata" isPortletInternal="_qShtIABlEd-pVYKNSGS_OQ"/>
   <portletSetType xmi:id="_yvn5oOM3Ed6qNvjsNi40SA" name="PortletType1"/>
+  <portletSetType xmi:id="_tu5j0ABZEd-pVYKNSGS_OQ" name="PortletType2"/>
   <internalPortletSet xmi:id="_zu6MYOM3Ed6qNvjsNi40SA">
     <view xsi:type="view:ComposedView" href="../View/DigitizationProcess.view#_8cHFsOM6Ed6qNvjsNi40SA"/>
   </internalPortletSet>
   <internalPortletSet xmi:id="_4uHRUOM3Ed6qNvjsNi40SA">
     <view xsi:type="view:ComposedView" href="../View/DigitizationProcess.view#_yopnkOM6Ed6qNvjsNi40SA"/>
+  </internalPortletSet>
+  <internalPortletSet xmi:id="_u0X-IABZEd-pVYKNSGS_OQ">
+    <view xsi:type="view:FacetMap" href="../View/DigitizationProcess.view#_0Gj0AABaEd-pVYKNSGS_OQ"/>
+  </internalPortletSet>
+  <internalPortletSet xmi:id="_qShtIABlEd-pVYKNSGS_OQ" type="Form">
+    <form xsi:type="form:ClassFormCollection" href="../Form/DigitalizationProcess.data.form#_s29bwdRSEd6mvv4ISlOk-Q"/>
   </internalPortletSet>
 </portal:Portal>
