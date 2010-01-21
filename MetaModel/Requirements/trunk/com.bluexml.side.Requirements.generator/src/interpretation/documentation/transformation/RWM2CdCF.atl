@@ -5,17 +5,70 @@ create OUT : Documentation from IN : RWM;
 helper context String def : normalize() : String =
 	self.regexReplaceAll('<([a-zA-Z0-9]*)>(.*)</\\1>','$2').regexReplaceAll('<([a-zA-Z0-9]*)>','')
 	    .regexReplaceAll('&lt;([a-zA-Z0-9]*)>(.*)&lt;/\\1>','$2').regexReplaceAll('&lt;([a-zA-Z0-9]*)>','')
-		.regexReplaceAll('\\\\(.)','$1').regexReplaceAll('&#xA;','&#xD;&#xA;');
+		.regexReplaceAll('\\\\(.)','$1').regexReplaceAll('&#xA;','&#xD;&#xA;')
+		.regexReplaceAll('&','&amp;');
 
 helper context RWM!Goal def : getAllSubGoals() : Sequence(RWM!Goal) =
 	Sequence{self}->union(self.subgoals->collect(goal | goal.getAllSubGoals())->flatten());
 
+helper def : sort(goals : Sequence(RWM!Goal), previous : Set(RWM!Goal), p : RWM!Process) : Sequence(RWM!Goal) =
+	if (goals->size() <= 1) then
+		goals
+	else
+		let first : Sequence(RWM!Goal) =
+			previous->collect(g | g.step)->flatten()->select(st | st.process = p)->collect(st | st.nextGoals)->flatten()->asSet()->intersection(goals)
+		in
+			first->union(thisModule.sort(goals->reject(g | previous->includes(g) or first->includes(g)),first,p))
+	endif;
+	
+rule createTextualValue(text : String) {
+	to t : Documentation!TextualValue (
+		value <- text
+	)
+	do {
+		t;
+	}
+}
+
+rule createParagraph(text : String) {
+	to t : Documentation!Paragraph(
+		values <- Sequence{thisModule.createTextualValue(text)}
+	)
+	do {
+		t;
+	}
+}
+
+rule createSection(_title : String, text : String) {
+	to t : Documentation!Section(
+		para <- Sequence{thisModule.createParagraph(text)},
+		title <- _title
+	)
+	do {
+		t;
+	}
+}
+
+rule createPrivilegeSection(s : RWM!Goal) {
+	to t_section_privileges:Documentation!Section (
+		title <- 'Privilèges',
+		para <- Sequence{t_para_privileges}
+	),
+	t_para_privileges:Documentation!Paragraph (
+		values <- Sequence{s.privilegeGroup}
+	)
+	do {
+		t_section_privileges;
+	}
+}
+
+	
 rule createLinkItem(element : RWM!BasicElement) {
 	to t : Documentation!ItemizedListValueItem(
 		values <- Sequence{t_value,t_xref,t_value2}
 	),
 	t_value : Documentation!TextualValue (
-		value <- element.name +' ( voir'
+		value <- element.name.normalize() +' ( voir'
 	),
 	t_xref : Documentation!XRefValue (
 		linkend <- element
@@ -28,9 +81,35 @@ rule createLinkItem(element : RWM!BasicElement) {
 	}
 }
 
+rule createLinkItemWithDocumentation(element : RWM!BasicElement) {
+	to t : Documentation!ItemizedListValueItem(
+		values <- Sequence{t_value,t_xref,t_value2,t_description}
+	),
+	t_value : Documentation!TextualValue (
+		value <- element.name.normalize() +' ( voir'
+	),
+	t_xref : Documentation!XRefValue (
+		linkend <- element
+	),
+	t_value2 : Documentation!TextualValue (
+		value <- ')'
+	),
+	t_description : Documentation!EmphasisValue (
+		value <- 
+			if (element.documentation <> OclUndefined) then
+				'(' + element.documentation.normalize() + ')'
+			else
+				'()'
+			endif
+	)
+	do {
+		t;
+	}
+}
+
 rule createLinkList(elements : Sequence(RWM!BasicElement)) {
 	to t : Documentation!ItemizedListValue(
-		--items <- elements->collect(e | thisModule.createLink(e))
+		items <- elements->collect(e | thisModule.createLinkItem(e))
 	)
 	do {
 		t;
@@ -78,43 +157,98 @@ rule createLinkWithoutParagraph(element : RWM!BasicElement) {
 	}
 }
 
+rule createProcessStep(goal : RWM!Goal, p : RWM!Process, start : Boolean) {
+	using {
+		nextGoals : Sequence(RWM!Goal) = 
+			goal.step->select(st | st.process = p)->collect(st | st.nextGoals)->flatten()->asSet();
+	}
+	to t : Documentation!ItemizedListValueItem(
+		values <- Sequence{t_value,t_xref,t_value2,t_value3}
+	),
+	t_value : Documentation!TextualValue (
+		value <-
+			if (start) then
+				'[DEBUT] '+goal.name.normalize() +' ( voir'
+			else
+				goal.name.normalize() +' ( voir'
+			endif
+	),
+	t_xref : Documentation!XRefValue (
+		linkend <- goal
+	),
+	t_value2 : Documentation!TextualValue (
+		value <- 
+			if (nextGoals->size() > 0) then
+				'). Prochaine(s) étape(s) : '
+			else
+				').'
+			endif
+	),
+	t_value3 : Documentation!ItemizedListValue(
+		items <- nextGoals->collect(g | thisModule.createProcessNextStep(g))
+	)
+	do {
+		t;
+	}
+}
+
+rule createProcessNextStep(goal : RWM!Goal) {
+	to t : Documentation!ItemizedListValueItem(
+		values <- Sequence{t_value}
+	),
+	t_value : Documentation!TextualValue (
+		value <- goal.name.normalize()
+	)
+	do {
+		t;
+	}
+}
+
 rule ReqDefs {
 	from s:RWM!RequirementsDefinition
 	to t:Documentation!Book (
-		title <- 'Definition des besoins',
-		content <- Sequence{t_preface,t_chapter_agents,t_chapter_goals,t_chapter_entities}
-	),
-	t_preface:Documentation!Section (
-	    title <- 'Préface',
-		para <- Sequence{t_preface_part, t_documentation_part}
-	),
-	t_preface_part:Documentation!Paragraph (
-		values <- Sequence{t_preface_part_value}
-	),
-	t_preface_part_value:Documentation!TextualValue (
-		value <- 'Ce document a pour objectif de résumer l\'ensemble des besoins du futur outil métier.'
-	),
-	t_documentation_part:Documentation!Paragraph (
-		values <- Sequence{t_documentation_part_title,t_documentation_part_value}
-	),
-	t_documentation_part_title:Documentation!EmphasisValue (
-		value <- 'Description du projet :'
-	),
-	t_documentation_part_value:Documentation!TextualValue (
-		value <- s.documentation
+		title <- s.name+'
+		
+		Cahier des charges',
+		content <-
+			let preface : Documentation!Section =
+				thisModule.createSection('Préface','Le but de ce document est de décrire les besoins métier de l\'application cible. 
+					Il s\'appuie sur une méthodologie de description des besoins basée sur les objectifs. 
+					Cette méthodologie consiste à:
+						1/ identifier chaque catégorie d\'acteur pouvant intervenir sur l\'application,
+						2/ définir par catégorie d\'acteur les objectifs métier qu\'il souhaite adresser via l\'application et dont on dit qu\'il est responsable.
+						3/ structurer ces objectifs soit en termes de processus pour tenir compte de la dépendance des objectifs, soit en termes de hiérarchies pour tenir compte de la spécialisation progressive d\'objectifs (hiérarchie de sous-objectifs).
+						4/ caractériser ces objectifs à travers les objets que l\'acteur va être amené à manipuler pour adresser ses objectifs via l\'application. Par exemple, un objet peut être un document qui sera manipulé dans le cadre d\'un objectif de "publication de documents". Ces objets sont décrits à travers leurs attributs et les relations qu\'ils ont entre eux.
+
+				Cette méthodologie est mise en oeuvre dans l\'environnement MDA SIDE de BlueXML à travers des modèles de besoins créé sous le modeleur graphique de besoins: ces modèles sont ensuite générés pour produire un certain nombre de livrables dont ce cahier des charges orienté objectifs. Un autre livrable est une application web d\'annotations permettant à des fonctionnels d\'annoter les modèles pour les améliorer et mieux circonscrire les besoins.')
+			in let structure : Documentation!Section =
+				thisModule.createSection('Structure de la documentation','Ce document est structuré en 4 chapitres principaux:
+					- "Agents": ce chapitre liste les catégories d\'acteurs visant à utiliser l\'application cible et pour lesquels il est nécessaire de décrire les besoins adressés,
+					- "Objectifs": ce chapitre décrit les caractéristiques des objectifs adressés,
+					- "Processus": ce chapitre décrit des processus métier particuliers de l\'application faisant apparaître l\'enchainement d\'objectifs dépendants,
+					- "Entités": ce chapitre décrit les objets manipulés par les objectifs, les privilèges en terme de manipulation (création, visualisation, mise à jour et suppression) des ces objets par les acteurs et les relations entre ces objets.')
+			in let project : Documentation!Section =
+				thisModule.createSection('Définition du projet',s.documentation.normalize())
+			in
+				Sequence{preface,structure,project,t_chapter_agents,t_chapter_goals,t_chapter_entities,t_chapter_process}
 	),
 	t_chapter_agents:Documentation!Section (
-		title <- 'Liste des agents',
+		title <- 'Agents',
 		section <- RWM!Agent->allInstances()
 	),
 	t_chapter_goals:Documentation!Section (
-		title <- 'Liste des objectifs',
+		title <- 'Objectifs',
 		section <- RWM!Goal->allInstances()
 	),
 	t_chapter_entities:Documentation!Section (
-		title <- 'Liste des entités',
+		title <- 'Entités',
 		section <- RWM!Entity->allInstances()
+	),
+	t_chapter_process:Documentation!Section (
+		title <- 'Processus',
+		section <- RWM!Process->allInstances()
 	)
+	
 }
 
 rule Member {
@@ -187,7 +321,7 @@ rule Member {
 		entry <- Sequence{t_entry_element, t_entry_create, t_entry_read, t_entry_update, t_entry_delete}
 	),
 	t_entry_element:Documentation!InformalTableValueEntry(
-		value <- 'Elément'
+		value <- 'Entité &amp; attribut'
 	), 
 	t_entry_create:Documentation!InformalTableValueEntry(
 		value <- 'Créer'
@@ -223,22 +357,20 @@ rule Member {
 rule Goal {
 	from s:RWM!Goal 
 	to t:Documentation!Section (
-		title <- s.name,
-		section <- Sequence{t_section_description,t_section_synopsis,t_section_privileges}
-	),
-	t_section_synopsis:Documentation!Section (
-		title <- 'Synopsis',
-		para <- Sequence{t_para_synopsis}
-	),
-	t_para_synopsis:Documentation!Paragraph (
-		values <- Sequence{t_para_synopsis_value}
-	),
-	t_para_synopsis_value:Documentation!TextualValue (
-		value <-
-			if (s.synopsis <> OclUndefined) then
-				s.synopsis.normalize()
+		title <- s.name.normalize(),
+		section <- 
+			if (not(s.synopsis.oclIsUndefined())) then
+				if (s.privilegeGroup->collect(pg | pg.privileges)->flatten()->size() > 0) then
+					Sequence{t_section_description,thisModule.createSection('Synopsis',s.synopsis.normalize()),t_section_responsibilities,thisModule.createPrivilegeSection(s)}
+				else
+					Sequence{t_section_description,thisModule.createSection('Synopsis',s.synopsis.normalize()),t_section_responsibilities}
+				endif
 			else
-				''
+				if (s.privilegeGroup->collect(pg | pg.privileges)->flatten()->size() > 0) then
+					Sequence{t_section_description,t_section_responsibilities,thisModule.createPrivilegeSection(s)}
+				else
+					Sequence{t_section_description,t_section_responsibilities}
+				endif
 			endif
 	),
 	t_section_description:Documentation!Section (
@@ -283,7 +415,7 @@ rule Goal {
 		values <- if (RWM!Goal->allInstances()->select(g | g.subgoals->includes(s))->size() > 0) then
 		            thisModule.createLinkWithoutParagraph(RWM!Goal->allInstances()->select(g | g.subgoals->includes(s))->first())->insertAt(1,t_para_description_parent_value)
 				  else
-				  	Sequence{t_para_description_parent_value}
+				  	Sequence{t_para_description_parent_value, thisModule.createTextualValue('N/A')}
 		          endif
 	),
 	t_para_description_parent_value:Documentation!EmphasisValue (
@@ -294,39 +426,26 @@ rule Goal {
 		values <- if (s.subgoals->size() > 0) then 
 		            Sequence{t_para_description_child_list_value,thisModule.createLinkList(s.subgoals)}
 		          else
-		          	Sequence{t_para_description_child_list_value}
+		          	Sequence{t_para_description_child_list_value, thisModule.createTextualValue('N/A')}
 		          endif
 	),
 	t_para_description_child_list_value:Documentation!EmphasisValue (
 		value <- 'Liste des sous-objectifs : ',
 		role <- 'bold'
 	),
-	t_section_privileges:Documentation!Section (
-		title <- 'Privilèges',
-		para <- Sequence{t_para_privileges}
-	),
-	t_para_privileges:Documentation!Paragraph (
-		values <- Sequence{s.privilegeGroup}
-	)
-}
-
-rule GoalWithResponsible extends Goal{
-	from s:RWM!Goal (s.responsible.size() > 0)
-	to t:Documentation!Section (
-		section <- Sequence{t_section_description,t_section_synopsis,t_section_responsibilities,t_section_privileges}
-	),
 	t_section_responsibilities:Documentation!Section (
 		title <- 'Responsabilité(s)',
 		para <- Sequence{t_para_responsibilities}
 	),
 	t_para_responsibilities:Documentation!Paragraph (
-		values <- Sequence{t_para_responsibilities_list_value, t_para_responsibilities_list}
+		values <- if (s.subgoals->size() > 0) then 
+		            Sequence{t_para_responsibilities_list_value,thisModule.createLinkList(s.responsible)}
+		          else
+		          	Sequence{t_para_responsibilities_list_value, thisModule.createTextualValue('N/A')}
+		          endif
 	),
 	t_para_responsibilities_list_value:Documentation!TextualValue (
 		value <- 'Sous la responsabilité de : '
-	),
-	t_para_responsibilities_list:Documentation!ItemizedListValue (
-		items <- s.responsible->collect(a | thisModule.createLinkItem(a))
 	)
 }
 
@@ -347,7 +466,7 @@ rule PrivilegeGroup {
 		entry <- Sequence{t_entry_element, t_entry_create, t_entry_read, t_entry_update, t_entry_delete}
 	),
 	t_entry_element:Documentation!InformalTableValueEntry(
-		value <- 'Elément'
+		value <- 'Entité &amp; attribut'
 	), 
 	t_entry_create:Documentation!InformalTableValueEntry(
 		value <- 'Créer'
@@ -463,7 +582,7 @@ rule Entity {
 
 rule RelationShip(s : RWM!Entity) {
 	to t_para_relationship_list:Documentation!ItemizedListValue (
-		items <- RWM!RelationShip->allInstances()->select(r | r.source = s or r.target = s)->collect(r | Sequence{r.source, r.target})->flatten()->asSet()->select(elt | elt <> s)->collect(elt | thisModule.createLinkItem(elt))
+		items <- RWM!RelationShip->allInstances()->select(r | r.source = s or r.target = s)->collect(r | Sequence{r.source, r.target})->flatten()->asSet()->select(elt | elt <> s)->collect(elt | thisModule.createLinkItemWithDocumentation(elt))
 	)
 	do {
 		t_para_relationship_list;
@@ -528,5 +647,50 @@ rule Attribute {
 			else
 				''
 			endif
+	)
+}
+
+rule Process {
+    from s : RWM!Process
+	using {
+		steps : Set(RWM!GoalStep) =
+				RWM!GoalStep->allInstances()->select(step | step.process = s);
+		goals : Set(RWM!Goal) =
+				steps->collect(s | s.refImmediateComposite())->union(steps->collect(s | s.nextGoals)->flatten())->asSet();
+		startGoal : Set(RWM!Goal) =
+				goals->select(g | steps->collect(s | s.nextGoals)->flatten()->excludes(g));
+		endGoal : Set(RWM!Goal) =
+				goals->select(g | steps->excludesAll(g.step));
+	}
+	to t:Documentation!Section (
+		title <- s.name.normalize(),
+		section <- Sequence{t_section_description,t_section_process}
+	),
+	t_section_description:Documentation!Section (
+		title <- 'Documentation',
+		para <- Sequence{t_para_description}
+	),
+	t_para_description:Documentation!Paragraph (
+		values <- Sequence{t_para_description_value}
+	),
+	t_para_description_value:Documentation!TextualValue (
+		value <-
+			if (s.documentation <> OclUndefined) then
+				s.documentation.normalize()
+			else
+				''
+			endif
+	),
+	t_section_process:Documentation!Section (
+		title <- 'Description du processus',
+		para <- Sequence{t_para_description_process}
+	),
+	t_para_description_process:Documentation!Paragraph (
+		values <- Sequence{t_para_description_process_list}
+	),
+	t_para_description_process_list:Documentation!ItemizedListValue (
+		items <- startGoal->collect(g | thisModule.createProcessStep(g,s,true))
+			->union(thisModule.sort(goals->select(g | startGoal->excludes(g) and endGoal->excludes(g)),startGoal,s)->collect(g | thisModule.createProcessStep(g,s,false)))
+			->union(endGoal->collect(g | thisModule.createProcessStep(g,s,false)))
 	)
 }

@@ -230,6 +230,10 @@ import interpretation.documentation.generation.opendocument.content_chapter
 				<text:sequence-decl text:display-outline-level="0"
 					text:name="Drawing" />
 			</text:sequence-decls>
+			<text:p text:style-name="Heading_20_1">
+				<%title.replaceAll("\n","</text:p><text:p text:style-name=\"Text_20_body\">")%>
+			</text:p>
+			<text:p text:style-name="P1"/>
 			<text:table-of-content text:style-name="Sect1"
 				text:protected="true" text:name="Sommaire1">
 				<text:table-of-content-source text:outline-level="10">

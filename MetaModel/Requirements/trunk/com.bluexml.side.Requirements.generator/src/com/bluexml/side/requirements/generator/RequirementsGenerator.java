@@ -1,6 +1,13 @@
 package com.bluexml.side.requirements.generator;
 
-import java.io.File;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -92,7 +99,37 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 				if (omodel.exists())
 					result.addAll(super.generate(omodel));
 			}
+			System.out.println(System.getProperty("os.name"));
+			
+			if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+				IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+				IFolder targetFolder = myWorkspaceRoot.getFolder(new Path(getTemporaryFolder()));
+				targetFolder = targetFolder.getFolder("cdc");
+				IFile myFile = targetFolder.getFile("content.xml");
 
+				//Modify the header of content.xml
+				List<String> contents = new ArrayList<String>();
+				FileInputStream fis = new FileInputStream(myFile.getRawLocation().toFile());
+				InputStreamReader inr = new InputStreamReader(fis, "ISO-8859-1"); 
+				BufferedReader in = new BufferedReader(inr);
+				String line = null;
+				while (( line = in.readLine()) != null) {
+					contents.add(line.concat(System.getProperty("line.separator")));
+				}
+				in.close();
+
+				OutputStream fout= new FileOutputStream(myFile.getRawLocation().toFile());
+		        OutputStream bout= new BufferedOutputStream(fout);
+		        OutputStreamWriter out = new OutputStreamWriter(bout, "8859_1");
+				for (String l : contents)
+					if (l.contains("encoding=\"UTF-8\""))
+						out.write(l.replace("encoding=\"UTF-8\"", "encoding=\"ISO-8859-1\""));
+					else
+						out.write(l);
+				out.flush();
+				out.close();
+			}
+			
 			// Execute ANT scripts
 			ExecuteANTScript a = new ExecuteANTScript();
 			a.setContributor(PLUGIN_ID);
@@ -113,7 +150,7 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 	}
 	
 	protected void computeServices() throws CoreException {
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		/*IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IFolder targetFolder = myWorkspaceRoot.getFolder(new Path(getTemporaryFolder()));
 		if (targetFolder.exists()) {
 			for (File f : targetFolder.getRawLocation().toFile().listFiles()) {
@@ -124,7 +161,7 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 					monitor.getLog().addServiceLog("Generated document",f.getName(), url);
 				}
 			}
-		}
+		}*/
 	}
 	
 	protected Collection<String> getExtensionsForServices() {
