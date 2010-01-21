@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launchConfiguration type="org.eclipse.m2m.atl.adt.launching.atlTransformation">
+<stringAttribute key="ATL File Name" value="/com.bluexml.side.Requirements.generator/src/interpretation/documentation/transformation/RWM2CdCF.atl"/>
+<stringAttribute key="ATL VM" value="EMF-specific VM"/>
+<stringAttribute key="ATL_COMPILER" value="atl2006"/>
+<booleanAttribute key="IS_REFINING" value="false"/>
+<mapAttribute key="Input">
+<mapEntry key="IN" value="RWM"/>
+</mapAttribute>
+<mapAttribute key="Libs"/>
+<mapAttribute key="Model Handler">
+<mapEntry key="Documentation" value="EMF"/>
+<mapEntry key="RWM" value="EMF"/>
+</mapAttribute>
+<mapAttribute key="ModelType">
+<mapEntry key="OUT" value="MODELOUTPUT"/>
+<mapEntry key="Documentation" value="METAMODELOUTPUT"/>
+<mapEntry key="RWM" value="METAMODELINPUT"/>
+<mapEntry key="IN" value="MODELINPUT"/>
+</mapAttribute>
+<mapAttribute key="Options">
+<mapEntry key="OPTION_CLEAR" value="false"/>
+<mapEntry key="printExecutionTime" value="false"/>
+<mapEntry key="OPTION_DERIVED" value="true"/>
+<mapEntry key="allowInterModelReferences" value="false"/>
+<mapEntry key="supportUML2Stereotypes" value="false"/>
+<mapEntry key="step" value="false"/>
+</mapAttribute>
+<mapAttribute key="Output">
+<mapEntry key="OUT" value="Documentation"/>
+</mapAttribute>
+<mapAttribute key="Path">
+<mapEntry key="OUT" value="/test/cdcf.ecore"/>
+<mapEntry key="Documentation" value="uri:http://www.bluexml.com/rwm/documentation/1.0/"/>
+<mapEntry key="IN" value="/test/wagramLeadsMgmt.requirements"/>
+<mapEntry key="RWM" value="uri:http://www.kerblue.org/requirements/1.0"/>
+</mapAttribute>
+<listAttribute key="Superimpose"/>
+</launchConfiguration>
