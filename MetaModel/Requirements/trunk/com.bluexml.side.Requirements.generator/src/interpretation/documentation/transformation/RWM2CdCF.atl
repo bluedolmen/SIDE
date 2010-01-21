@@ -65,16 +65,10 @@ rule createPrivilegeSection(s : RWM!Goal) {
 	
 rule createLinkItem(element : RWM!BasicElement) {
 	to t : Documentation!ItemizedListValueItem(
-		values <- Sequence{t_value,t_xref,t_value2}
-	),
-	t_value : Documentation!TextualValue (
-		value <- element.name.normalize() +' ( voir'
+		values <- Sequence{t_xref}
 	),
 	t_xref : Documentation!XRefValue (
 		linkend <- element
-	),
-	t_value2 : Documentation!TextualValue (
-		value <- ')'
 	)
 	do {
 		t;
@@ -97,9 +91,9 @@ rule createLinkItemWithDocumentation(element : RWM!BasicElement) {
 	t_description : Documentation!EmphasisValue (
 		value <- 
 			if (element.documentation <> OclUndefined) then
-				'(' + element.documentation.normalize() + ')'
+				' : ' + element.documentation.normalize()
 			else
-				'()'
+				''
 			endif
 	)
 	do {
@@ -143,17 +137,11 @@ rule createLink(element : RWM!BasicElement) {
 }
 
 rule createLinkWithoutParagraph(element : RWM!BasicElement) {
-	to t_value : Documentation!TextualValue (
-		value <- element.name +' ( voir'
-	),
-	t_xref : Documentation!XRefValue (
+	to t_xref : Documentation!XRefValue (
 		linkend <- element
-	),
-	t_value2 : Documentation!TextualValue (
-		value <- ')'
 	)
 	do {
-		Sequence{t_value,t_xref,t_value2};
+		Sequence{t_xref};
 	}
 }
 
@@ -168,9 +156,9 @@ rule createProcessStep(goal : RWM!Goal, p : RWM!Process, start : Boolean) {
 	t_value : Documentation!TextualValue (
 		value <-
 			if (start) then
-				'[DEBUT] '+goal.name.normalize() +' ( voir'
+				'[DEBUT] '
 			else
-				goal.name.normalize() +' ( voir'
+				''
 			endif
 	),
 	t_xref : Documentation!XRefValue (
@@ -179,9 +167,9 @@ rule createProcessStep(goal : RWM!Goal, p : RWM!Process, start : Boolean) {
 	t_value2 : Documentation!TextualValue (
 		value <- 
 			if (nextGoals->size() > 0) then
-				'). Prochaine(s) étape(s) : '
+				'\n Prochaine(s) étape(s) : '
 			else
-				').'
+				''
 			endif
 	),
 	t_value3 : Documentation!ItemizedListValue(
@@ -230,7 +218,7 @@ rule ReqDefs {
 			in let project : Documentation!Section =
 				thisModule.createSection('Définition du projet',s.documentation.normalize())
 			in
-				Sequence{preface,structure,project,t_chapter_agents,t_chapter_goals,t_chapter_entities,t_chapter_process}
+				Sequence{preface,structure,project,t_chapter_agents,t_chapter_goals,t_chapter_process,t_chapter_entities}
 	),
 	t_chapter_agents:Documentation!Section (
 		title <- 'Agents',
