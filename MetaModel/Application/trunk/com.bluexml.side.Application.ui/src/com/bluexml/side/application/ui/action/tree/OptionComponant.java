@@ -39,7 +39,7 @@ public abstract class OptionComponant extends TreeNode implements Comparable<Opt
 		super(root);
 		root.addOption(this);
 		parent = (TreeNode) implNode;
-		id = elt.getAttribute("key");
+		id = parent.id+"_"+elt.getAttribute("key");
 		key = elt.getAttribute("key");
 		label = elt.getAttribute("label");
 		if (elt.getAttribute("defaultOption") != null) {
