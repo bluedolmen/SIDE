@@ -27,6 +27,8 @@ import org.eclipse.swt.graphics.Image;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
+import org.topcased.modeler.editor.Modeler;
+import org.topcased.modeler.editor.ModelerGraphicalViewer;
 import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.utils.Utils;
 
@@ -127,11 +129,12 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 	@Override
 	public void performRequest(Request request) {
 		PrivilegeGroup g = (PrivilegeGroup) Utils.getElement(getGraphEdge());
+		Modeler editor = ((ModelerGraphicalViewer) getViewer()).getModelerEditor();
 
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			if (g.getEntryPoint() != null) {
 				PrivilegeDialog dialog = new PrivilegeDialog(ModelerPlugin
-						.getActiveWorkbenchShell(), g);
+						.getActiveWorkbenchShell(), g,editor);
 				if (dialog.open() == Window.OK) {
 					PrivilegeNullUpdateCommand command = new PrivilegeNullUpdateCommand();
 					getViewer().getEditDomain().getCommandStack().execute(

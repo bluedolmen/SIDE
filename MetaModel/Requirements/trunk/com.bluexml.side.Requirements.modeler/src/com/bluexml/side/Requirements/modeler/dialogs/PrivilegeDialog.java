@@ -1,11 +1,13 @@
 package com.bluexml.side.Requirements.modeler.dialogs;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -28,6 +30,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.TreeItem;
+import org.topcased.modeler.editor.Modeler;
 
 import com.bluexml.side.Requirements.modeler.goalDiagram.ReqImageRegistry;
 import com.bluexml.side.requirements.Attribute;
@@ -52,14 +55,25 @@ public class PrivilegeDialog extends Dialog implements IDialogConstants {
 	private Button updateAccess;
 	private Button deleteAccess;
 	private TreeViewer viewer;
+	private Modeler modeler;
 
 	public PrivilegeDialog(Shell parent, PrivilegeGroup g) {
 		super(parent);
 		setBlockOnOpen(true);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 		group = g;
+		modeler = null;
 	}
 	
+	public PrivilegeDialog(Shell activeWorkbenchShell, PrivilegeGroup g,
+			Modeler editor) {
+		super(activeWorkbenchShell);
+		setBlockOnOpen(true);
+		setShellStyle(getShellStyle() | SWT.RESIZE);
+		group = g;
+		modeler = editor;
+	}
+
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		// Create Open button
@@ -312,8 +326,14 @@ public class PrivilegeDialog extends Dialog implements IDialogConstants {
 			}
 
 		for (RelationShip r : relations) {
-			if (r.getSource().equals(e) || r.getTarget().equals(e))
-				result.add(r);
+			if (r.getSource() == null || r.getTarget() == null) {
+				if (modeler != null) {
+					DeleteCommand cmd = new DeleteCommand(modeler.getEditingDomain(), Collections.singleton(r));
+					modeler.getEditingDomain().getCommandStack().execute(cmd);
+				}
+			} else
+				if (r.getSource().equals(e) || r.getTarget().equals(e))
+					result.add(r);
 		}
 
 		return result;
