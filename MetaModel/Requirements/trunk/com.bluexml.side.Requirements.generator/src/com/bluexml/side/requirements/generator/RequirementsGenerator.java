@@ -2,6 +2,7 @@ package com.bluexml.side.requirements.generator;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
@@ -150,7 +151,7 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 	}
 	
 	protected void computeServices() throws CoreException {
-		/*IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IFolder targetFolder = myWorkspaceRoot.getFolder(new Path(getTemporaryFolder()));
 		if (targetFolder.exists()) {
 			for (File f : targetFolder.getRawLocation().toFile().listFiles()) {
@@ -161,7 +162,7 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 					monitor.getLog().addServiceLog("Generated document",f.getName(), url);
 				}
 			}
-		}*/
+		}
 	}
 	
 	protected Collection<String> getExtensionsForServices() {
