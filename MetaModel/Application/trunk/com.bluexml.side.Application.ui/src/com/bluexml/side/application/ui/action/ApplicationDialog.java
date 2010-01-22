@@ -602,7 +602,10 @@ public class ApplicationDialog extends Dialog {
 						OptionComponant o = (OptionComponant) tn;
 						for (Option opt : ce.getOptions()) {
 							o.setEnabled(true);
-							if (opt.getKey().equals(o.getKey())) {
+							ComponantConfiguration parent = (ComponantConfiguration)opt.eContainer();
+							String idOpt= parent.getId()+"_"+opt.getKey();
+							
+							if (idOpt.equals(o.getId())) {
 								o.setChecked(true);
 							}
 						}
@@ -1647,7 +1650,7 @@ public class ApplicationDialog extends Dialog {
 				} else {
 					errorMsg.setText(""); //$NON-NLS-1$
 				}
-				System.out.println("HandlerEvent P2");
+				// System.out.println("HandlerEvent P2");
 			} else {
 				errorMsg.setText(""); //$NON-NLS-1$
 			}

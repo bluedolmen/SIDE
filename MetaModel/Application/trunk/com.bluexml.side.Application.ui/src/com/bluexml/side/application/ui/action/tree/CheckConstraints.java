@@ -40,7 +40,8 @@ public class CheckConstraints {
 		for (IConfigurationElement child : config.getChildren()) {
 			if (child.getName().equalsIgnoreCase("optionRef")) {
 				String op = child.getAttribute("optionId");
-				optionsIds.add(op);
+				String id=pluginsId+"_"+op;
+				optionsIds.add(id);
 			}
 		}
 	}

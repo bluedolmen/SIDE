@@ -13,13 +13,7 @@ import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 public class Generator extends ImplNode {
 
 	public Generator(IConfigurationElement elt, TechnologyVersion tv, TreeView root) {
-		super(elt, tv, root);
-		parent = (TreeNode) tv;
-		id = elt.getAttribute("id");
-		version = elt.getAttribute("version");
-		launchClass = elt.getAttribute("class");
-		contributorId = elt.getContributor().getName();
-		description = elt.getAttribute("description");
+		super(elt, tv, root);		
 	}
 
 	public void updateApplication() {

@@ -24,7 +24,9 @@ public class TreeView extends TreeViewer {
 	}
 
 	public TreeItem getOptionTreeItemById(String id) {
+//		System.out.println("*** SEARCH *** :"+id);
 		for (TreeNode op : allOptions) {
+//			System.out.println("## currentNode ##"+op.id);
 			if (op.getId().equals(id)) {
 				return getTreeItemOf(op);
 			}

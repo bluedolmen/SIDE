@@ -29,6 +29,15 @@ public abstract class ImplNode extends TreeNode implements Comparable<ImplNode> 
 	public ImplNode(IConfigurationElement elt, TechnologyVersion tv,TreeView root) {
 		super(root);
 		root.addOption(this);
+		// set ImplNode attribute
+		parent = (TreeNode) tv;
+		id = elt.getAttribute("id");
+		version = elt.getAttribute("version");
+		launchClass = elt.getAttribute("class");
+		contributorId = elt.getContributor().getName();
+		description = elt.getAttribute("description");
+		
+		
 		for (IConfigurationElement child : elt.getChildren()) {
 			if (child.getName().equalsIgnoreCase("mustBeChecked")) {
 				mustbechecked.add(new CheckConstraints(child,this));

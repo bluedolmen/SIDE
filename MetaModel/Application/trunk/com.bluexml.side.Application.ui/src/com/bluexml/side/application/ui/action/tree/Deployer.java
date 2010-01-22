@@ -16,12 +16,7 @@ public class Deployer extends ImplNode {
 	
 	public Deployer(IConfigurationElement elt, TechnologyVersion tv, TreeView root) {
 		super(elt, tv, root);
-		parent = tv;
-		id = elt.getAttribute("id");
-		description = elt.getAttribute("description");
-		version = elt.getAttribute("version");
-		launchClass = elt.getAttribute("class");
-		contributorId = elt.getContributor().getName();
+		// set additional attibutes
 		if (elt.getAttribute("shared") != null)
 			shared = Boolean.parseBoolean(elt.getAttribute("shared"));
 	}
@@ -66,6 +61,7 @@ public class Deployer extends ImplNode {
 						if (o.isChecked() && o.isEnabled()) {
 							Option opt = ApplicationFactory.eINSTANCE.createOption();
 							opt.setKey(o.getKey());
+							
 							elt.getOptions().add(opt);
 							
 							for (com.bluexml.side.util.dependencies.ModuleConstraint module : o.getIntegrationModules()) {
