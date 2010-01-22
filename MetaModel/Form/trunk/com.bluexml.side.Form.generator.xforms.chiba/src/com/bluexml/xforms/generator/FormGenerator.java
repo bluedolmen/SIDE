@@ -453,7 +453,7 @@ public class FormGenerator {
 				}
 			}
 		}
-		monitor.addText("Xforms Generation completed successfully");
+		monitor.addText("XForms Generation completed successfully");
 		monitor
 				.addServiceLog(
 						"List of generated forms",
