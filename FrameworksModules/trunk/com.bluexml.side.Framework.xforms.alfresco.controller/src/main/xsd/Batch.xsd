@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xs:include schemaLocation="Class.xsd"/>
+
+	<xs:element name="batch">
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded" minOccurs="0">
+				<xs:choice>
+					<xs:element name="create" type="GenericCreate"/>
+					<xs:element name="update" type="GenericUpdate"/>
+					<xs:element name="delete" type="GenericDelete"/>
+					<!-- indique si le batch est demandé par l'interface XForms ou par batchUpdate -->
+					<xs:element name="requester" type="ServiceRequestSource"/>
+					<xs:element name="attach" type="AttachContentInfo"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType> 
+	</xs:element>
+
+	<xs:complexType name="AttachContentInfo">
+		<xs:sequence>
+			<xs:element name="targetNode" type="xs:string"/>
+			<xs:element name="fileName" type="xs:string"/>
+			<xs:element name="filePath" type="xs:string"/>
+			<xs:element name="mimeType" type="xs:string"/>
+			<xs:element name="contentType" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ServiceRequestSource">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GenericCreate">
+		<xs:sequence>
+			<xs:element name="class" type="GenericClass"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GenericUpdate">
+		<xs:sequence>
+			<xs:element name="class" type="GenericClass"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GenericDelete">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="assocObject" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
