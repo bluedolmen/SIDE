@@ -1,5 +1,5 @@
 package com.bluexml.side.forms.generator.alfresco.chiba;
- 
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +27,8 @@ import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.generator.packager.WarPatchPackager;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
-import com.bluexml.xforms.generator.DataGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
+import com.bluexml.xforms.generator.GeneratorInterface;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.mapping.MappingGenerator;
 import com.bluexml.xforms.messages.DefaultMessages;
@@ -46,7 +47,7 @@ public class FormGenerator extends AbstractGenerator {
 	private File messagesFile;
 	private boolean successfulInit;
 	private String webappContext;
-	private List<DataGenerator> generators = new ArrayList<DataGenerator>();
+	private List<GeneratorInterface> generators = new ArrayList<GeneratorInterface>();
 
 	@Override
 	public void initialize(Map<String, String> generationParameters_,
@@ -165,10 +166,10 @@ public class FormGenerator extends AbstractGenerator {
 		result.add(chibaPackage);
 		return result;
 	}
-	
+
 	/**
 	 * Return the IFolder with the with the given project relative path.
-	 *
+	 * 
 	 * @param path
 	 * @return
 	 */
@@ -192,9 +193,9 @@ public class FormGenerator extends AbstractGenerator {
 		boolean simplifyClasses = true;
 		boolean renderDataBeforeWorkflow = true;
 		try {
-			com.bluexml.xforms.generator.FormGenerator formGenerator = new com.bluexml.xforms.generator.FormGenerator(
-					clazzFiles, formsFiles, LogFactory.getLog(FormGenerator.class),
-					simplifyClasses, renderDataBeforeWorkflow, false);
+			FormGeneratorsManager formGenerator = new FormGeneratorsManager(clazzFiles, formsFiles,
+					LogFactory.getLog(FormGenerator.class), simplifyClasses,
+					renderDataBeforeWorkflow, false);
 			formGenerator.generate(generators, monitor);
 		} catch (RuntimeException e) {
 			monitor.addErrorTextAndLog("ERROR :" + e.getMessage(), e, "");
