@@ -1,0 +1,118 @@
+.xformstdleft {
+	float: left;
+}
+
+.xformstdclear {
+	clear: both;
+}
+
+#chiba-logo {
+	display: none;
+}
+
+#copyright {
+	display: none;
+}
+
+.group {
+	padding: 3px;
+	margin: 3px;
+	background: #ffffff;
+}
+
+.minimal-group {
+	padding: 3px;
+}
+
+.full-group {
+	border: thin solid #eeeeee;
+}
+
+.full-group label {
+	width: auto;
+	vertical-align: middle;
+	float: left;
+}
+
+.group-label {
+	font-weight: bold;
+}
+
+.full-repeat {
+	border: thin solid #EEEEEE;
+}
+
+.input label,.textarea label,.full-group label {
+	height: 1.3em;
+	width: 150px;
+	padding-right: 5px;
+	text-align: right;
+	margin-top: 4px;
+	overflow: hidden;
+}
+
+/* align (vertically) bottom line of readonly fields' label with the text*/
+div.xformstdclear label {
+	margin-top: 0px;
+}
+
+/*
+ * FILE UPLOAD WIDGET
+*/
+
+div.side_upload_filename span {
+	font-size: 8pt;
+}
+
+/*
+ * SELECTION WIDGETS
+ */
+div.side_select_widget,div.side_select_search_zone {
+	padding-left: 0px;
+}
+
+div.side_select_widget .submit { /* the create button*/
+	margin-left: 10px;
+}
+
+div.side_select_widget label {
+	width: auto;
+}
+
+div.side_select_search_zone label {
+	padding-right: 5px;
+}
+
+/* make the text in read only textareas visible when in inline multiple forms */
+div.bxds_ro_textarea span.mediatype-text-html {
+	background: #A7BCFC;
+}
+
+div.side_jsp_footer {
+	text-align: center;
+	width: 100%;
+	border-top: solid 1px #AAA;
+	font-size: 14px;
+	vertical-align: middle;
+	min-height: 1.5em;
+}
+
+div.side_jsp_using {
+	text-align: right;
+	width: 100%;
+	border-top: solid 1px #AAA;
+	font-size: 12px;
+}
+
+a.side_jsp_using:link,a.side_jsp_footer:link {
+	color: #6FF;
+}
+
+div.upload div {
+	padding: 0px;
+}
+
+#side_status_bar {
+	min-height: 1em;
+	font-weight: bold;
+}
