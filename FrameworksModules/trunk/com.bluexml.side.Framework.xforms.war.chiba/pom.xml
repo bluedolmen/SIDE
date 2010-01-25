@@ -27,17 +27,13 @@
 			<artifactId>chiba-web-jar</artifactId>
 			<version>2.3.0</version>
 			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>com.bluexml.xforms</groupId>
-			<artifactId>demo</artifactId>
-			<version>[1.0.0,)</version>
-			<type>jar</type>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.bluexml.side.Framework.xforms.alfresco</groupId>
 			<artifactId>controller</artifactId>
 			<version>1.0.7</version>
+			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -47,7 +43,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>xforms.${artifactId}-${version}</finalName>
+		<finalName>xforms.war.${artifactId}-${version}</finalName>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
 			<plugin>
