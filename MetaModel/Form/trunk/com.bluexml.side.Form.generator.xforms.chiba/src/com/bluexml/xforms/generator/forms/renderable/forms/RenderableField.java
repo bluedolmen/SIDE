@@ -29,7 +29,7 @@ import com.bluexml.side.form.TextField;
 import com.bluexml.side.form.TimeField;
 import com.bluexml.side.form.URLField;
 import com.bluexml.side.workflow.Attribute;
-import com.bluexml.xforms.generator.FormGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
@@ -122,7 +122,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 	 */
 	@Override
 	protected final String getName() {
-		return FormGenerator.getUniqueName(formElement);
+		return FormGeneratorsManager.getUniqueName(formElement);
 	}
 
 	/*

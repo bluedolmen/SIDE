@@ -15,7 +15,7 @@ import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.Stereotype;
-import com.bluexml.xforms.generator.FormGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.renderable.common.RenderableDiv;
@@ -85,7 +85,7 @@ public class RenderableLayout extends Renderable {
 		for (Comment comment : comments) {
 			EList<Stereotype> stereotypes = comment.getStereotypes();
 			for (Stereotype stereotype : stereotypes) {
-				if (stereotype.getName().equals(FormGenerator.ALFRESCO_NAME_ASSOCIATION)) {
+				if (stereotype.getName().equals(FormGeneratorsManager.ALFRESCO_NAME_ASSOCIATION)) {
 					return comment.getValue();
 				}
 			}

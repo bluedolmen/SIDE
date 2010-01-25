@@ -64,8 +64,8 @@ import com.bluexml.xforms.controller.binding.ObjectFactory;
 import com.bluexml.xforms.controller.binding.ReferenceType;
 import com.bluexml.xforms.controller.binding.VirtualFieldType;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
-import com.bluexml.xforms.generator.AbstractDataGenerator;
-import com.bluexml.xforms.generator.FormGenerator;
+import com.bluexml.xforms.generator.AbstractGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.tools.AspectComparator;
 import com.bluexml.xforms.generator.tools.ClasseComparator;
 import com.bluexml.xforms.generator.tools.ModelTools;
@@ -74,7 +74,7 @@ import com.bluexml.xforms.messages.MsgId;
 /**
  * The Class MappingGenerator.
  */
-public class MappingGenerator extends AbstractDataGenerator {
+public class MappingGenerator extends AbstractGenerator {
 
 	private static final String BLUEXML_WORKFLOW_PREFIX = "wfbx";
 	/** Used to enforce start task form being processed before other task forms */
@@ -128,21 +128,21 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#addAspectForClass(com.bluexml
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#addAspectForClass(com.bluexml
 	 * .side.clazz.Clazz, com.bluexml.side.clazz.Aspect, com.bluexml.side.clazz.Clazz)
 	 */
 	public void addAspectForClass(Clazz classe, Aspect aspect, Clazz owner) {
 		AspectType aspectType = new AspectType();
 		aspectType.setName(aspect.getName());
 		aspectType.setPackage(ModelTools.getPackage(aspect));
-		aspectType.setAlfrescoName(FormGenerator.getClassQualifiedName(aspect));
+		aspectType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(aspect));
 		getClassType(classe).getAspect().add(aspectType);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#addAttributeForAspect(com.
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#addAttributeForAspect(com.
 	 * bluexml.side.clazz.Aspect, com.bluexml.side.clazz.Attribute)
 	 */
 	public void addAttributeForAspect(Aspect aspect, Attribute attribute) {
@@ -191,7 +191,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 
 		AttributeType attributeType = new AttributeType();
 		attributeType.setName(attribute.getName());
-		attributeType.setAlfrescoName(FormGenerator.getClassQualifiedName(classe) + "_"
+		attributeType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(classe) + "_"
 				+ attribute.getName());
 		attributeType.setInAlfresco(true);
 		attributeType.setType(attribute.getTyp().getLiteral());
@@ -221,7 +221,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#addAttributeForClass(com.bluexml
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#addAttributeForClass(com.bluexml
 	 * .side.clazz.Clazz, com.bluexml.side.clazz.Attribute, com.bluexml.side.clazz.Clazz)
 	 */
 	public void addAttributeForClass(Clazz classe, Attribute attribute, Clazz owner) {
@@ -232,7 +232,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#addIdForClass(com.bluexml. side.clazz.Clazz,
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#addIdForClass(com.bluexml. side.clazz.Clazz,
 	 * java.lang.String, boolean)
 	 */
 	// public void addIdForClass(Clazz classe, String string, boolean hasParent) {
@@ -249,13 +249,13 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginAspect(com.bluexml.side .clazz.Aspect)
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginAspect(com.bluexml.side .clazz.Aspect)
 	 */
 	public void beginAspect(Aspect aspect) {
 		AspectType aspectType = new AspectType();
 		aspectType.setName(aspect.getName());
 		aspectType.setPackage(ModelTools.getPackage(aspect));
-		aspectType.setAlfrescoName(FormGenerator.getClassQualifiedName(aspect));
+		aspectType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(aspect));
 		aspectTypes.put(aspect, aspectType);
 		mapping.getAspect().add(aspectType);
 	}
@@ -263,14 +263,14 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginClasse(com.bluexml.side .clazz.Clazz,
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginClasse(com.bluexml.side .clazz.Clazz,
 	 * boolean)
 	 */
 	public void beginClasse(Clazz classe, boolean rendered) {
 		ClassType classType = new ClassType();
 		classType.setName(classe.getName());
 		classType.setPackage(ModelTools.getPackage(classe));
-		classType.setAlfrescoName(FormGenerator.getClassQualifiedName(classe));
+		classType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(classe));
 		classTypes.put(classe, classType);
 		mapping.getClazz().add(classType);
 	}
@@ -278,7 +278,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginGeneration()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginGeneration()
 	 */
 	public void beginGeneration() {
 		mapping = new Mapping();
@@ -291,7 +291,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginListAspects()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginListAspects()
 	 */
 	public void beginListAspects() {
 		// nothing
@@ -300,7 +300,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginListAssociations()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginListAssociations()
 	 */
 	public void beginListAssociations() {
 		// nothing
@@ -309,7 +309,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginListClasses()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginListClasses()
 	 */
 	public void beginListClasses() {
 		// nothing
@@ -318,7 +318,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginListEnums()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginListEnums()
 	 */
 	public void beginListEnums() {
 		// nothing
@@ -327,8 +327,8 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#addAssociation(org.blueXML
-	 * .xforms.generator.DataGenerator.AssociationKind, java.lang.String, java.lang.String,
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#addAssociation(org.blueXML
+	 * .xforms.generator.GeneratorInterface.AssociationKind, java.lang.String, java.lang.String,
 	 * com.bluexml.side.clazz.Clazz, com.bluexml.side.clazz.Clazz, java.lang.String, boolean,
 	 * com.bluexml.side.clazz.Association, com.bluexml.side.clazz.Clazz)
 	 */
@@ -364,7 +364,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#endAspect(com.bluexml.side .clazz.Aspect)
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#endAspect(com.bluexml.side .clazz.Aspect)
 	 */
 	public void endAspect(Aspect aspect) {
 		// nothing
@@ -373,7 +373,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#endClasse(com.bluexml.side .clazz.Clazz)
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#endClasse(com.bluexml.side .clazz.Clazz)
 	 */
 	public void endClasse(Clazz classe) {
 		// nothing
@@ -382,7 +382,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#endGeneration()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#endGeneration()
 	 */
 	/**
 	 * Writes all generated files.
@@ -537,7 +537,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#endListAspects()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#endListAspects()
 	 */
 	public void endListAspects() {
 		// nothing
@@ -546,7 +546,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#endListAssociations()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#endListAssociations()
 	 */
 	public void endListAssociations() {
 		// nothing
@@ -555,7 +555,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#endListClasses()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#endListClasses()
 	 */
 	public void endListClasses() {
 		Set<Entry<Clazz, ClassType>> entrySet = classTypes.entrySet();
@@ -610,7 +610,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#endListEnums()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#endListEnums()
 	 */
 	public void endListEnums() {
 		// nothing
@@ -619,7 +619,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#processEnum(com.bluexml.side
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#processEnum(com.bluexml.side
 	 * .clazz.Enumeration)
 	 */
 	public void processEnum(Enumeration enumeration) {
@@ -668,7 +668,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginForm(com.bluexml.side .form.Form)
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginForm(com.bluexml.side .form.Form)
 	 */
 	public void beginForm(FormContainer form) {
 		FormContainer realContainer = form;
@@ -772,7 +772,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 		ActionFieldType actionFieldType = new ActionFieldType();
 
 		// inherited properties
-		actionFieldType.setUniqueName(FormGenerator.getUniqueName(field));
+		actionFieldType.setUniqueName(FormGeneratorsManager.getUniqueName(field));
 		String style = field.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
@@ -804,7 +804,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 		boolean isMultiple = false;
 		FormFieldType formFieldType = new FormFieldType();
 
-		formFieldType.setUniqueName(FormGenerator.getUniqueName(field));
+		formFieldType.setUniqueName(FormGeneratorsManager.getUniqueName(field));
 		String style = field.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
@@ -944,14 +944,14 @@ public class MappingGenerator extends AbstractDataGenerator {
 		FormClass formClass = getFormClass(linkedField);
 		VirtualFieldType virtualFieldType = new VirtualFieldType();
 		// propriétés héritées
-		virtualFieldType.setUniqueName(FormGenerator.getUniqueName(virtualField));
+		virtualFieldType.setUniqueName(FormGeneratorsManager.getUniqueName(virtualField));
 		String style = virtualField.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
 			virtualFieldType.setAppearance(style);
 		}
 		// propriétés propres
-		virtualFieldType.setFieldName(FormGenerator.getUniqueName(linkedField));
+		virtualFieldType.setFieldName(FormGeneratorsManager.getUniqueName(linkedField));
 		virtualFieldType.setFormName(formClass.getId());
 		if (canister instanceof FormType) {
 			FormType formType = (FormType) canister;
@@ -1062,7 +1062,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 		modelChoiceType.setInline(false);
 		modelChoiceType.setMaxBound(modelChoiceField.getMax_bound());
 		modelChoiceType.setMinBound(modelChoiceField.getMin_bound());
-		modelChoiceType.setUniqueName(FormGenerator.getUniqueName(modelChoiceField));
+		modelChoiceType.setUniqueName(FormGeneratorsManager.getUniqueName(modelChoiceField));
 		String alfrescoName = formGenerator.getAlfrescoName(modelChoiceField.getReal_class(),
 				modelChoiceField.getRef()); // #980
 		modelChoiceType.setAlfrescoName(alfrescoName);
@@ -1089,7 +1089,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#beginListForms()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginListForms()
 	 */
 	public void beginListForms() {
 		// nothing
@@ -1098,7 +1098,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#endForm(com.bluexml.side.form .Form)
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#endForm(com.bluexml.side.form .Form)
 	 */
 	public void endForm(FormContainer form) {
 		// nothing
@@ -1107,7 +1107,7 @@ public class MappingGenerator extends AbstractDataGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.DataGenerator#endListForms()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#endListForms()
 	 */
 	public void endListForms() {
 		// nothing

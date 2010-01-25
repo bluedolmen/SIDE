@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.jdom.Element;
 
-import com.bluexml.xforms.generator.FormGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
 
 /**
  * The Class ModelElement.<br>
@@ -12,7 +12,7 @@ import com.bluexml.xforms.generator.FormGenerator;
  */
 public abstract class ModelElement {
 	
-	private static FormGenerator formGenerator;
+	private static FormGeneratorsManager formGenerator;
 	
 	/** The model element. */
 	private Element modelElement;
@@ -57,14 +57,14 @@ public abstract class ModelElement {
 	/**
 	 * @return the formGenerator
 	 */
-	public static FormGenerator getFormGenerator() {
+	public static FormGeneratorsManager getFormGenerator() {
 		return formGenerator;
 	}
 
 	/**
 	 * @param formGenerator the formGenerator to set
 	 */
-	public static void setFormGenerator(FormGenerator formGenerator) {
+	public static void setFormGenerator(FormGeneratorsManager formGenerator) {
 		ModelElement.formGenerator = formGenerator;
 	}
 

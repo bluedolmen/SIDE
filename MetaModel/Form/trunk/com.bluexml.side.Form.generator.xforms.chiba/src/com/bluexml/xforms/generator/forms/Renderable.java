@@ -9,7 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.bluexml.xforms.messages.MsgId;
 
-import com.bluexml.xforms.generator.FormGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableFormContainer;
 import com.bluexml.xforms.generator.forms.rendered.RenderedRepeater;
 import com.bluexml.xforms.generator.forms.rendered.RenderedTabContainer;
@@ -70,7 +70,7 @@ public abstract class Renderable {
 	/** Absolute path : root. */
 	protected static Path ROOT_ABSOLUTE = new Path(PathType.absolutePath, "");
 
-	private static FormGenerator formGenerator;
+	private static FormGeneratorsManager formGenerator;
 
 	/**
 	 * The children.<br>
@@ -331,7 +331,7 @@ public abstract class Renderable {
 	/**
 	 * @return the formGenerator
 	 */
-	public static FormGenerator getFormGenerator() {
+	public static FormGeneratorsManager getFormGenerator() {
 		return formGenerator;
 	}
 
@@ -339,7 +339,7 @@ public abstract class Renderable {
 	 * @param formGenerator
 	 *            the formGenerator to set
 	 */
-	public static void setFormGenerator(FormGenerator formGenerator) {
+	public static void setFormGenerator(FormGeneratorsManager formGenerator) {
 		Renderable.formGenerator = formGenerator;
 	}
 

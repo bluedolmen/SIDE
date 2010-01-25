@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.FormElement;
-import com.bluexml.xforms.generator.FormGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -48,7 +48,7 @@ public class RenderableChoiceInputSearch extends Renderable {
 		associationBean.setCreateEditForm(null);
 		associationBean.setDestinationRenderable(null);
 		associationBean.setDestinationSelect(selectBean);
-		associationBean.setName(FormGenerator.getUniqueName(choiceField));
+		associationBean.setName(FormGeneratorsManager.getUniqueName(choiceField));
 		associationBean.setTitle(choiceField.getLabel());
 		associationBean.setHint(choiceField.getHelp_text());
 		associationBean.setShowingActions(false);
@@ -66,7 +66,7 @@ public class RenderableChoiceInputSearch extends Renderable {
 	@Override
 	public Path getPath(String parentPath, Stack<Renderable> parents,
 			Stack<Rendered> renderedParents) {
-		return new Path(PathType.relativePath, FormGenerator.getUniqueName(choiceField) + "/");
+		return new Path(PathType.relativePath, FormGeneratorsManager.getUniqueName(choiceField) + "/");
 	}
 
 	@Override

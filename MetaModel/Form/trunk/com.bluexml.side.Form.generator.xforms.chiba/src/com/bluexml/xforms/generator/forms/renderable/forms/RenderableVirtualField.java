@@ -2,10 +2,9 @@ package com.bluexml.xforms.generator.forms.renderable.forms;
 
 import java.util.Stack;
 
-
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.xforms.generator.FormGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -50,7 +49,8 @@ public class RenderableVirtualField extends RenderableFormElement<VirtualField> 
 	@Override
 	public Path getPath(String parentPath, Stack<Renderable> parents,
 			Stack<Rendered> renderedParents) {
-		return new Path(PathType.relativePath, FormGenerator.getUniqueName(formElement) + "/");
+		return new Path(PathType.relativePath, FormGeneratorsManager.getUniqueName(formElement)
+				+ "/");
 	}
 
 	/*
@@ -60,7 +60,8 @@ public class RenderableVirtualField extends RenderableFormElement<VirtualField> 
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		return new RenderedParentGroup(renderedParents);
 	}
 

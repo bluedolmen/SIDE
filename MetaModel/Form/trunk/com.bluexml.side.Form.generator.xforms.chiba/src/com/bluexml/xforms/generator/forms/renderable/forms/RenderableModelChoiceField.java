@@ -11,7 +11,7 @@ import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.ModelChoiceWidgetType;
-import com.bluexml.xforms.generator.FormGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
@@ -47,7 +47,7 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 				formElement.getReal_class()));
 		properties.setHiBound(formElement.getMax_bound());
 		properties.setLoBound(formElement.getMin_bound());
-		properties.setName(FormGenerator.getUniqueName(formElement));
+		properties.setName(FormGeneratorsManager.getUniqueName(formElement));
 		properties.setHint(formElement.getHelp_text());
 
 		properties.setDestinationRenderable(null);

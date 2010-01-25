@@ -13,7 +13,7 @@ import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
 /**
  * The Interface DataGenerator.
  */
-public interface DataGenerator {
+public interface GeneratorInterface {
 
 	/**
 	 * The Class AssociationKind.
@@ -232,7 +232,7 @@ public interface DataGenerator {
 	 * @param formGenerator
 	 *            the new form generator
 	 */
-	void setFormGenerator(FormGenerator formGenerator);
+	void setFormGenerator(FormGeneratorsManager formGenerator);
 
 	/**
 	 * Adds the aspect for class.

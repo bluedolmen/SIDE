@@ -8,7 +8,7 @@ import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.Reference;
-import com.bluexml.xforms.generator.FormGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -69,7 +69,8 @@ public class RenderableReference extends RenderableFormElement<Reference> {
 	@Override
 	public Path getPath(String parentPath, Stack<Renderable> parents,
 			Stack<Rendered> renderedParents) {
-		return new Path(PathType.relativePath, FormGenerator.getUniqueName(formElement) + "/");
+		return new Path(PathType.relativePath, FormGeneratorsManager.getUniqueName(formElement)
+				+ "/");
 	}
 
 	/*
@@ -79,7 +80,8 @@ public class RenderableReference extends RenderableFormElement<Reference> {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		return new RenderedParentGroup(renderedParents);
 	}
 

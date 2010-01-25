@@ -9,7 +9,7 @@ import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.xforms.generator.DataGenerator.AssociationKind;
+import com.bluexml.xforms.generator.GeneratorInterface.AssociationKind;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;

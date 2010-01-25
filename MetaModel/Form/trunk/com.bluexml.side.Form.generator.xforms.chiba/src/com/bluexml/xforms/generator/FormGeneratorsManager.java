@@ -44,8 +44,8 @@ import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
 import com.bluexml.side.workflow.WorkflowPackage;
-import com.bluexml.xforms.generator.DataGenerator.AssociationCardinality;
-import com.bluexml.xforms.generator.DataGenerator.AssociationKind;
+import com.bluexml.xforms.generator.GeneratorInterface.AssociationCardinality;
+import com.bluexml.xforms.generator.GeneratorInterface.AssociationKind;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.tools.ClasseComparator;
@@ -55,7 +55,7 @@ import com.bluexml.xforms.messages.MsgId;
 /**
  * The Class FormGenerator.
  */
-public class FormGenerator {
+public class FormGeneratorsManager {
 
 	private static void initEcoreFactories() {
 //		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("library",
@@ -88,7 +88,7 @@ public class FormGenerator {
 	public static final String ALFRESCO_NAME_ASSOCIATION = "alfrescoNameAssociation";
 
 	/** The logger. */
-	protected static Log logger = LogFactory.getLog(FormGenerator.class);
+	protected static Log logger = LogFactory.getLog(FormGeneratorsManager.class);
 
 	/** The classes. */
 	private Map<URI, EObject> eobjects = new HashMap<URI, EObject>();
@@ -123,7 +123,7 @@ public class FormGenerator {
 	private List<FormCollection> formCollections;
 
 	/** The current generator. */
-	private DataGenerator currentGenerator;
+	private GeneratorInterface currentGenerator;
 
 	/** The sub classes. */
 	private Map<Clazz, Set<Clazz>> subClasses;
@@ -320,7 +320,7 @@ public class FormGenerator {
 	 *            the kerblueforms
 	 * @param simplifyClasses
 	 */
-	public FormGenerator(File[] obls, File[] kerblueforms, Log genLogger, boolean simplifyClasses,
+	public FormGeneratorsManager(File[] obls, File[] kerblueforms, Log genLogger, boolean simplifyClasses,
 			boolean renderDataBeforeWorkflow, boolean asMavenPlugin) {
 		super();
 		if (asMavenPlugin) {
@@ -330,7 +330,7 @@ public class FormGenerator {
 		if (genLogger != null) {
 			this.genLogger = genLogger;
 		} else {
-			this.genLogger = LogFactory.getLog(FormGenerator.class);
+			this.genLogger = LogFactory.getLog(FormGeneratorsManager.class);
 		}
 		this.simplifyClasses = simplifyClasses;
 		this.setRenderDataBeforeWorkflow(renderDataBeforeWorkflow);
@@ -404,7 +404,7 @@ public class FormGenerator {
 	 * @param generators
 	 *            the generators
 	 */
-	public void generate(List<DataGenerator> generators, CoreInterface monitor) {
+	public void generate(List<GeneratorInterface> generators, CoreInterface monitor) {
 		monitor.setTaskName("Collecting data");
 		alfrescoNameStereotype = commonFactory.createStereotype();
 		alfrescoNameStereotype.setName(ALFRESCO_NAME_ASSOCIATION);
@@ -433,7 +433,7 @@ public class FormGenerator {
 
 		// first pass: normal generation
 		setInReadOnlyMode(false);
-		for (DataGenerator dataGenerator : generators) {
+		for (GeneratorInterface dataGenerator : generators) {
 			currentGenerator = dataGenerator;
 			currentGenerator.setLogger(genLogger);
 			currentGenerator.setMonitor(monitor);
@@ -443,7 +443,7 @@ public class FormGenerator {
 		if (isGenerateReadOnlyForms()) {
 			// second pass: generation in readOnly mode
 			setInReadOnlyMode(true);
-			for (DataGenerator dataGenerator : generators) {
+			for (GeneratorInterface dataGenerator : generators) {
 				if (dataGenerator.supportsReadOnlyMode()) {
 					currentGenerator = dataGenerator;
 					currentGenerator.setLogger(genLogger);

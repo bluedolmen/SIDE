@@ -7,10 +7,10 @@ import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
 /**
  * The Class AbstractDataGenerator.
  */
-public abstract class AbstractDataGenerator implements DataGenerator {
+public abstract class AbstractGenerator implements GeneratorInterface {
 
 	/** The form generator. */
-	protected FormGenerator formGenerator;
+	protected FormGeneratorsManager formGenerator;
 	protected Log genLogger;
 	protected boolean readOnlyMode; // #1222
 	protected CoreInterface monitor;
@@ -19,10 +19,10 @@ public abstract class AbstractDataGenerator implements DataGenerator {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.bluexml.xforms.generator.DataGenerator#setFormGenerator(com.bluexml.xforms.generator.
+	 * com.bluexml.xforms.generator.GeneratorInterface#setFormGenerator(com.bluexml.xforms.generator.
 	 * FormGenerator)
 	 */
-	public void setFormGenerator(FormGenerator formGenerator) {
+	public void setFormGenerator(FormGeneratorsManager formGenerator) {
 		this.formGenerator = formGenerator;
 	}
 
@@ -31,7 +31,7 @@ public abstract class AbstractDataGenerator implements DataGenerator {
 	 * 
 	 * @return the form generator
 	 */
-	public FormGenerator getFormGenerator() {
+	public FormGeneratorsManager getFormGenerator() {
 		return formGenerator;
 	}
 
@@ -44,21 +44,21 @@ public abstract class AbstractDataGenerator implements DataGenerator {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.generator.DataGenerator#isReadOnlyMode()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#isReadOnlyMode()
 	 */
 	public boolean isReadOnlyMode() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.generator.DataGenerator#setReadOnlyMode(boolean)
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#setReadOnlyMode(boolean)
 	 */
 	public void setReadOnlyMode(boolean onOff) {
 		// nothing to do
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.generator.DataGenerator#supportsReadOnlyMode()
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#supportsReadOnlyMode()
 	 */
 	public boolean supportsReadOnlyMode() {
 		return false;

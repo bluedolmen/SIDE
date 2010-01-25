@@ -36,7 +36,7 @@ import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.impl.FormGroupImpl;
-import com.bluexml.xforms.generator.AbstractDataGenerator;
+import com.bluexml.xforms.generator.AbstractGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.RenderableXForm;
 import com.bluexml.xforms.generator.forms.renderable.classes.RenderableClass;
@@ -62,7 +62,7 @@ import com.bluexml.xforms.messages.MsgPool;
 /**
  * The Class XFormsGenerator.
  */
-public class XFormsGenerator extends AbstractDataGenerator {
+public class XFormsGenerator extends AbstractGenerator {
 
 	class IntGroupImpl extends FormGroupImpl {
 		String id;
