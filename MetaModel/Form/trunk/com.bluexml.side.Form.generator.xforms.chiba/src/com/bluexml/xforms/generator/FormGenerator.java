@@ -15,7 +15,6 @@ import java.util.Map.Entry;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.bluexml.xforms.messages.MsgId;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -23,7 +22,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.clazz.AbstractClass;
@@ -35,7 +33,6 @@ import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
-import com.bluexml.side.clazz.impl.ClazzFactoryImpl;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.Package;
@@ -45,9 +42,7 @@ import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormPackage;
-import com.bluexml.side.form.impl.FormFactoryImpl;
 import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
-import com.bluexml.side.workflow.impl.WorkflowFactoryImpl;
 import com.bluexml.side.workflow.WorkflowPackage;
 import com.bluexml.xforms.generator.DataGenerator.AssociationCardinality;
 import com.bluexml.xforms.generator.DataGenerator.AssociationKind;
@@ -55,6 +50,7 @@ import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.tools.ClasseComparator;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class FormGenerator.
@@ -62,14 +58,14 @@ import com.bluexml.xforms.generator.tools.ModelTools;
 public class FormGenerator {
 
 	private static void initEcoreFactories() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("library",
-				new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("form",
-				new FormFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("clazz",
-				new ClazzFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("workflow",
-				new WorkflowFactoryImpl());
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("library",
+//				new XMIResourceFactoryImpl());
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("form",
+//				new FormFactoryImpl());
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("clazz",
+//				new ClazzFactoryImpl());
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("workflow",
+//				new WorkflowFactoryImpl());
 
 		EPackage.Registry.INSTANCE.put(org.eclipse.emf.ecore.EcorePackage.eNS_URI,
 				org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
