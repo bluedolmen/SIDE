@@ -5,6 +5,7 @@ package com.bluexml.xforms.messages;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -32,15 +33,29 @@ public class MsgPool {
 	private static MsgPool instance = null;
 
 	private MsgPool() {
+		boolean closeAfterwards = false;
 		pool = new Properties();
+		
+		// open and load
 		try {
 			if (inputStream == null) {
 				File messagesFile = new File(messageFilePath);
 				inputStream = new FileInputStream(messagesFile);
+				closeAfterwards = true;
 			}
 			pool.load(inputStream);
 		} catch (Exception e) {
 			logger.error("Error opening the message file.");
+		}
+		
+		// close the stream if applicable
+		if (closeAfterwards) {
+			try {
+				inputStream.close();
+			} catch (IOException e) {
+				logger.error("Failed to close the message file. Continuing anyway.");
+				e.printStackTrace();
+			}
 		}
 	}
 
