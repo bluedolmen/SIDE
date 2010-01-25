@@ -36,6 +36,7 @@ import com.bluexml.side.util.componentmonitor.Monitor;
 import com.bluexml.side.util.componentmonitor.MonitorListener;
 import com.bluexml.side.util.componentmonitor.guiAdapter.IProgressMonitorAdapter;
 import com.bluexml.side.util.dependencies.DependencesManager;
+import com.bluexml.side.util.dependencies.DependenciesDeployer;
 import com.bluexml.side.util.dependencies.ModuleConstraint;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
@@ -313,17 +314,24 @@ public class Generate extends WorkspaceJob {
 		checkUserRequest();
 		// if work online do a mvn go-offline to prepare maven to work
 		// offline if asked
-		if (!isOfflineMode(configurationParameters)) {
-			// get all Integration modules for offline mode
-			try {
-				generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
-				ApplicationUtil.prepareForOffline();
-				generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
-			} catch (Exception e1) {
-				e1.printStackTrace();
-				generalMonitor.addErrorText(Activator.Messages.getString("Generate.15")); //$NON-NLS-1$
-			}
-		}
+//		if (!isOfflineMode(configurationParameters)) {
+//			// get all Integration modules for offline mode
+//			try {
+//				generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
+//				ApplicationUtil.prepareForOffline();
+//				generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
+//			} catch (Exception e1) {
+//				e1.printStackTrace();
+//				generalMonitor.addErrorText(Activator.Messages.getString("Generate.15")); //$NON-NLS-1$
+//			}
+//		}
+		
+		// update local repository from embedded archive
+		generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
+		DependenciesDeployer.deploy();
+		generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
+		
+		
 		checkUserRequest();
 		boolean error = false;
 		// generate

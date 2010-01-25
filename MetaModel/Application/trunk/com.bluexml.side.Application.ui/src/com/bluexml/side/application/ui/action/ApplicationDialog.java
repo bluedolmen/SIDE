@@ -156,7 +156,7 @@ public class ApplicationDialog extends Dialog {
 	private TabItem deployementTabItem;
 	private Table modelPropertiesTable;
 	private Button cleanButton;
-	private Button offlineMode;
+//	private Button offlineMode;
 	private TabItem modelsTabItem;
 
 	public static String KEY_DOCUMENTATION = StaticConfigurationParameters.GENERATIONOPTIONSDOCUMENTATION.getLiteral();
@@ -362,10 +362,10 @@ public class ApplicationDialog extends Dialog {
 			destinationText.setText(updatePathParam.getValue());
 		}
 
-		ConfigurationParameters offline = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
-		if (offline != null) {
-			offlineMode.setSelection(Boolean.parseBoolean(offline.getValue()));
-		}
+//		ConfigurationParameters offline = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
+//		if (offline != null) {
+//			offlineMode.setSelection(Boolean.parseBoolean(offline.getValue()));
+//		}
 	}
 
 	/**
@@ -998,22 +998,22 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 
-		offlineMode = new Button(composite_1, SWT.CHECK);
-		offlineMode.setToolTipText(Activator.Messages.getString("ApplicationDialog.53")); //$NON-NLS-1$
-		offlineMode.setText(Activator.Messages.getString("ApplicationDialog.52")); //$NON-NLS-1$
-		offlineMode.setBounds(10, 137, 159, 16);
-		offlineMode.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(final SelectionEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
-				Button b = (Button) e.getSource();
-				if (param != null) {
-					param.setValue(Boolean.toString(b.getSelection()));
-				} else {
-					addStaticParam(KEY_OFFLINE, Boolean.toString(b.getSelection()));
-				}
-				ApplicationDialog.modificationMade();
-			}
-		});
+//		offlineMode = new Button(composite_1, SWT.CHECK);
+//		offlineMode.setToolTipText(Activator.Messages.getString("ApplicationDialog.53")); //$NON-NLS-1$
+//		offlineMode.setText(Activator.Messages.getString("ApplicationDialog.52")); //$NON-NLS-1$
+//		offlineMode.setBounds(10, 137, 159, 16);
+//		offlineMode.addSelectionListener(new SelectionAdapter() {
+//			public void widgetSelected(final SelectionEvent e) {
+//				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
+//				Button b = (Button) e.getSource();
+//				if (param != null) {
+//					param.setValue(Boolean.toString(b.getSelection()));
+//				} else {
+//					addStaticParam(KEY_OFFLINE, Boolean.toString(b.getSelection()));
+//				}
+//				ApplicationDialog.modificationMade();
+//			}
+//		});
 
 		deployementTabItem = new TabItem(tabFolder, SWT.NONE);
 		deployementTabItem.setText(Activator.Messages.getString("ApplicationDialog.45")); //$NON-NLS-1$
