@@ -194,7 +194,7 @@ public class FormGenerator extends AbstractGenerator {
 		try {
 			com.bluexml.xforms.generator.FormGenerator formGenerator = new com.bluexml.xforms.generator.FormGenerator(
 					clazzFiles, formsFiles, LogFactory.getLog(FormGenerator.class),
-					simplifyClasses, renderDataBeforeWorkflow);
+					simplifyClasses, renderDataBeforeWorkflow, false);
 			formGenerator.generate(generators, monitor);
 		} catch (RuntimeException e) {
 			monitor.addErrorTextAndLog("ERROR :" + e.getMessage(), e, "");
