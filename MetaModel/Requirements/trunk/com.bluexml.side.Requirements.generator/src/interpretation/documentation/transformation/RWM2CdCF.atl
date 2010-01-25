@@ -3,10 +3,10 @@ module RWM2DocBook; -- Module Template
 create OUT : Documentation from IN : RWM;
 
 helper context String def : normalize() : String =
-	self.regexReplaceAll('<([a-zA-Z0-9]*)>(.*)</\\1>','$2').regexReplaceAll('<([a-zA-Z0-9]*)>','')
-	    .regexReplaceAll('&lt;([a-zA-Z0-9]*)>(.*)&lt;/\\1>','$2').regexReplaceAll('&lt;([a-zA-Z0-9]*)>','')
-		.regexReplaceAll('\\\\(.)','$1').regexReplaceAll('&#xA;','&#xD;&#xA;')
-		.regexReplaceAll('&','&amp;');
+	self.regexReplaceAll('&','&amp;').regexReplaceAll('<','&lt;').regexReplaceAll('>','&gt;')
+	    .regexReplaceAll('<([a-zA-Z0-9]*)>(.*)</\\1>','$2').regexReplaceAll('&lt;([a-zA-Z0-9]*)>(.*)&lt;/\\1>','$2')
+		.regexReplaceAll('\\\\(.)','$1').regexReplaceAll('&#xA;','&#xD;&#xA;');
+		
 
 helper context RWM!Goal def : getAllSubGoals() : Sequence(RWM!Goal) =
 	Sequence{self}->union(self.subgoals->collect(goal | goal.getAllSubGoals())->flatten());
