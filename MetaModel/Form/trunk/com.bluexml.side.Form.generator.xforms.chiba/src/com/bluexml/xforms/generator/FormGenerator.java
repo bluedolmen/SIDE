@@ -61,7 +61,7 @@ import com.bluexml.xforms.generator.tools.ModelTools;
  */
 public class FormGenerator {
 
-	static {
+	private static void initEcoreFactories() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("library",
 				new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("form",
@@ -79,11 +79,11 @@ public class FormGenerator {
 		EPackage.Registry.INSTANCE.put(FormPackage.eNS_URI, FormPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(WorkflowPackage.eNS_URI, WorkflowPackage.eINSTANCE);
 
-		ClazzPackage.eINSTANCE.eClass();
-		FormPackage.eINSTANCE.eClass();
-		WorkflowPackage.eINSTANCE.eClass();
-		org.eclipse.emf.ecore.EcorePackage.eINSTANCE.eClass();
-		org.eclipse.ocl.ecore.EcorePackage.eINSTANCE.eClass();
+//		ClazzPackage.eINSTANCE.eClass();
+//		FormPackage.eINSTANCE.eClass();
+//		WorkflowPackage.eINSTANCE.eClass();
+//		org.eclipse.emf.ecore.EcorePackage.eINSTANCE.eClass();
+//		org.eclipse.ocl.ecore.EcorePackage.eINSTANCE.eClass();
 	}
 
 	private static final CommonFactory commonFactory = CommonFactoryImpl.init();
@@ -325,8 +325,11 @@ public class FormGenerator {
 	 * @param simplifyClasses
 	 */
 	public FormGenerator(File[] obls, File[] kerblueforms, Log genLogger, boolean simplifyClasses,
-			boolean renderDataBeforeWorkflow) {
+			boolean renderDataBeforeWorkflow, boolean asMavenPlugin) {
 		super();
+		if (asMavenPlugin) {
+			initEcoreFactories();
+		}
 		setWorkflowCapable(false);
 		if (genLogger != null) {
 			this.genLogger = genLogger;
