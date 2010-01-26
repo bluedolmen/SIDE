@@ -225,7 +225,6 @@ public class Application {
 	    while ((line = is.readLine()) != null)
 	      System.out.println(line);
 	    
-	    System.out.println("In Main after EOF");
 	    System.out.flush();
 	    try {
 	      p.waitFor();  // wait for process to complete
