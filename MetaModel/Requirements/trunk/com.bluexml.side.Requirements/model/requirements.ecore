@@ -84,7 +84,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrivilegeGroup" eSuperTypes="#//ModelElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="entryPoint" eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entryPoint" lowerBound="1"
+        eType="#//Entity"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="privileges" upperBound="-1"
         eType="#//Privilege" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

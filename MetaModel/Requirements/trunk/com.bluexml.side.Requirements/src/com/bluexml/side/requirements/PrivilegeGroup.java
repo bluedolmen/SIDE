@@ -38,7 +38,7 @@ public interface PrivilegeGroup extends ModelElement {
 	 * @return the value of the '<em>Entry Point</em>' reference.
 	 * @see #setEntryPoint(Entity)
 	 * @see com.bluexml.side.requirements.RequirementsPackage#getPrivilegeGroup_EntryPoint()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	Entity getEntryPoint();

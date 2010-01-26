@@ -939,7 +939,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		initEAttribute(getRequirementsDefinition_Date(), ecorePackage.getEDate(), "date", null, 0, 1, RequirementsDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(privilegeGroupEClass, PrivilegeGroup.class, "PrivilegeGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPrivilegeGroup_EntryPoint(), this.getEntity(), null, "entryPoint", null, 0, 1, PrivilegeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPrivilegeGroup_EntryPoint(), this.getEntity(), null, "entryPoint", null, 1, 1, PrivilegeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPrivilegeGroup_Privileges(), this.getPrivilege(), null, "privileges", null, 0, -1, PrivilegeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPrivilegeGroup_Documentation(), ecorePackage.getEString(), "documentation", null, 0, 1, PrivilegeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
