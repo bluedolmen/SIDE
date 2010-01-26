@@ -34,5 +34,13 @@
     <category id="com.bluexml.side.modeler.category.ID" name="%category.name" />
     <category id="com.bluexml.side.Intregation.eclipse.branding.category.example" name="%category.name.0" parentCategory="com.bluexml.side.Intregation.eclipse.branding.category" />
   </extension>
+  <extension
+        point="org.eclipse.ui.ide.projectNatureImages">
+     <image
+           icon="icons/project_icon.png"
+           id="com.bluexml.side.integration.eclipse.nature.icon"
+           natureId="com.bluexml.side.integration.eclipse.nature">
+     </image>
+  </extension>
 </plugin>
 
