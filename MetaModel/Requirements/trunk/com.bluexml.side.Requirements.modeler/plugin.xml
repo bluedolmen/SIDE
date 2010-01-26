@@ -1,109 +1,258 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
-  <extension point="org.eclipse.ui.editors">
-    <editor class="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor" icon="icons/Requirements.gif" default="true" name="Requirements modeler" id="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor" contributorClass="com.bluexml.side.Requirements.modeler.actions.RequirementsEditorActionBarContributor" extensions="requirementsdi" />
-  </extension>
-  <extension point="org.eclipse.ui.newWizards">
-    <wizard icon="icons/Requirements.gif" class="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams" category="com.bluexml.side.modeler.category.ID" name="Side Requirements Diagram" id="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams">
-      <selection class="org.eclipse.core.resources.IResource" />
-    </wizard>
-  </extension>
-  <extension point="org.eclipse.ui.perspectiveExtensions">
-    <perspectiveExtension targetID="org.topcased.modeler.perspective">
-      <newWizardShortcut id="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams" />
-    </perspectiveExtension>
-  </extension>
-  <extension point="org.eclipse.ui.preferencePages">
-    <page category="org.topcased.modeler.preferences.ModelerPreferencePage" class="com.bluexml.side.Requirements.modeler.preferences.RequirementsPreferencePage" id="com.bluexml.side.Requirements.modeler.preferences.RequirementsPreferencePage" name="Requirements" />
-  </extension>
-  <extension point="org.eclipse.ui.propertyPages">
-    <page id="com.bluexml.side.Requirements.modeler.preferences.property.RequirementsPreferencePage" class="com.bluexml.side.Requirements.modeler.preferences.RequirementsPreferencePage" category="org.topcased.modeler.preferences.property.ModelerPreferencePage" name="Requirements">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-  </extension>
-  <extension point="org.eclipse.core.runtime.preferences">
-    <initializer class="com.bluexml.side.Requirements.modeler.preferences.AllDiagramPreferenceInitializer" />
-  </extension>
-  <extension point="org.topcased.modeler.templates">
-    <template di="templates/goalDiagram/%name%.requirementsdi" model="templates/goalDiagram/%name%.requirements" name="Goal" id="com.bluexml.side.Requirements.modeler.templates.goalDiagram" editorId="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor" />
-  </extension>
-  <extension point="org.topcased.modeler.diagrams">
-    <diagram configuration="com.bluexml.side.Requirements.modeler.goalDiagram.ReqConfiguration" icon="icons/Requirements.gif" id="com.bluexml.side.Requirements.modeler.goalDiagram" name="Goal">
-      <enableFor class="com.bluexml.side.requirements.RequirementsDefinition" />
-    </diagram>
-  </extension>
-  <extension point="org.topcased.modeler.topcasedPreferenceInitializer">
-    <preferenceInitializer class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramTopcasedPreferenceInitializer" editorId="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor" id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqTopcasedPreferenceInitializer" />
-  </extension>
-  <extension point="org.eclipse.ui.preferencePages">
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" category="com.bluexml.side.Requirements.modeler.preferences.RequirementsPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" name="ReqDiagram" />
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_responsiblePreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_responsiblePreferencePage" name="is_responsible" />
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_sub_goalPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_sub_goalPreferencePage" name="is_sub_goal" />
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.RelationShipPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.RelationShipPreferencePage" name="RelationShip" />
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.PrivilegeGroupPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.PrivilegeGroupPreferencePage" name="PrivilegeGroup" />
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.GoalPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.GoalPreferencePage" name="Goal" />
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AgentPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AgentPreferencePage" name="Agent" />
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.EntityPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.EntityPreferencePage" name="Entity" />
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AttributePreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AttributePreferencePage" name="Attribute" />
-  </extension>
-  <extension point="org.eclipse.ui.propertyPages">
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage" category="com.bluexml.side.Requirements.modeler.preferences.property.RequirementsPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage" name="ReqDiagram">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.is_responsiblePreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_responsiblePreferencePage" name="is_responsible">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.is_sub_goalPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_sub_goalPreferencePage" name="is_sub_goal">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.RelationShipPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.RelationShipPreferencePage" name="RelationShip">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.PrivilegeGroupPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.PrivilegeGroupPreferencePage" name="PrivilegeGroup">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.GoalPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.GoalPreferencePage" name="Goal">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.AgentPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AgentPreferencePage" name="Agent">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.EntityPreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.EntityPreferencePage" name="Entity">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.AttributePreferencePage" category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AttributePreferencePage" name="Attribute">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-  </extension>
-  <extension point="org.eclipse.ui.popupMenus">
-    <objectContribution id="com.bluexml.side.requirements.modeler.actions.BackupSpecification" nameFilter="*.requirements" objectClass="org.eclipse.core.resources.IFile">
-      <action class="com.bluexml.side.Requirements.modeler.actions.BackupSpecification" enablesFor="1" icon="icons/backup.png" id="com.bluexml.side.requirements.modeler.actions.BackupSpecification" label="Backup requirements" menubarPath="com.bluexml.side/requirements" />
-      <menu id="com.bluexml.side" label="SIDE" path="additions">
-        <separator name="requirements" />
-      </menu>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            class="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor"
+            icon="icons/Requirements.gif"
+            default="true"
+            name="Requirements modeler"
+            id="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor"
+            contributorClass="com.bluexml.side.Requirements.modeler.actions.RequirementsEditorActionBarContributor"
+            extensions="requirementsdi">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.newWizards">
+      <wizard
+            icon="icons/Requirements.gif"
+            class="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams"
+            category="com.bluexml.side.modeler.category.ID"
+            name="Side Requirements Diagram"
+            id="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams">
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+   
+   <extension point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.topcased.modeler.perspective">
+         <newWizardShortcut id="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams"/>
+      </perspectiveExtension>
+   </extension>
+   
+   <extension point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.topcased.modeler.preferences.ModelerPreferencePage"
+            class="com.bluexml.side.Requirements.modeler.preferences.RequirementsPreferencePage"
+            id="com.bluexml.side.Requirements.modeler.preferences.RequirementsPreferencePage"
+            name="Requirements"/>
+   </extension>
+   
+	<extension point="org.eclipse.ui.propertyPages">
+		<page
+			id="com.bluexml.side.Requirements.modeler.preferences.property.RequirementsPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.preferences.RequirementsPreferencePage"
+			category="org.topcased.modeler.preferences.property.ModelerPreferencePage"
+			name="Requirements">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+	</extension>
+   
+   	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="com.bluexml.side.Requirements.modeler.preferences.AllDiagramPreferenceInitializer"/>
+	</extension>
+	
+	<extension point="org.topcased.modeler.templates">
+      <template
+            di="templates/goalDiagram/%name%.requirementsdi"
+            model="templates/goalDiagram/%name%.requirements"
+            name="Goal"
+            id="com.bluexml.side.Requirements.modeler.templates.goalDiagram"
+            editorId="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor"/>
+   </extension>
+   
+   <extension point="org.topcased.modeler.diagrams">
+      <diagram
+            configuration="com.bluexml.side.Requirements.modeler.goalDiagram.ReqConfiguration"
+            icon="icons/Requirements.gif"
+            id="com.bluexml.side.Requirements.modeler.goalDiagram"
+            name="Goal">
+            <enableFor
+                  class="com.bluexml.side.requirements.RequirementsDefinition">
+            </enableFor>
+      </diagram>
+	</extension>
+	
+	
+	<extension
+       point="org.topcased.modeler.topcasedPreferenceInitializer">
+    <preferenceInitializer
+          class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramTopcasedPreferenceInitializer"
+          editorId="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor"
+          id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqTopcasedPreferenceInitializer">
+    </preferenceInitializer>
+ </extension>
+
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.preferences.RequirementsPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			name="ReqDiagram"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_responsiblePreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_responsiblePreferencePage"
+			name="is_responsible"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_sub_goalPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_sub_goalPreferencePage"
+			name="is_sub_goal"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.RelationShipPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.RelationShipPreferencePage"
+			name="RelationShip"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.PrivilegeGroupPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.PrivilegeGroupPreferencePage"
+			name="PrivilegeGroup"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.GoalPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.GoalPreferencePage"
+			name="Goal"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AgentPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AgentPreferencePage"
+			name="Agent"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.EntityPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.EntityPreferencePage"
+			name="Entity"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AttributePreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AttributePreferencePage"
+			name="Attribute"/>
+	</extension>
+
+	<extension point="org.eclipse.ui.propertyPages">
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.preferences.property.RequirementsPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferencePage"
+			name="ReqDiagram">       
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+		
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.is_responsiblePreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_responsiblePreferencePage"
+			name="is_responsible">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.is_sub_goalPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.is_sub_goalPreferencePage"
+			name="is_sub_goal">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.RelationShipPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.RelationShipPreferencePage"
+			name="RelationShip">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.PrivilegeGroupPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.PrivilegeGroupPreferencePage"
+			name="PrivilegeGroup">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.GoalPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.GoalPreferencePage"
+			name="Goal">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.AgentPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AgentPreferencePage"
+			name="Agent">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.EntityPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.EntityPreferencePage"
+			name="Entity">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.AttributePreferencePage"
+			category="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.property.ReqDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.goalDiagram.preferences.AttributePreferencePage"
+			name="Attribute">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+	</extension>
+	
+	 <extension
+       point="org.eclipse.ui.popupMenus">
+    <objectContribution
+          id="com.bluexml.side.requirements.modeler.actions.BackupSpecification"
+          nameFilter="*.requirements"
+          objectClass="org.eclipse.core.resources.IFile">
+       <action
+             class="com.bluexml.side.Requirements.modeler.actions.BackupSpecification"
+             enablesFor="1"
+             icon="icons/backup.png"
+             id="com.bluexml.side.requirements.modeler.actions.BackupSpecification"
+             label="Backup requirements"
+             menubarPath="com.bluexml.side/requirements">
+       </action>
+       <menu
+             id="com.bluexml.side"
+             label="SIDE"
+             path="additions">
+          <separator
+                name="requirements">
+          </separator>
+       </menu>
     </objectContribution>
-  </extension>
+ </extension>
+
+
   <!-- <extension point="org.topcased.modeler.templates">
       <template
             di="templates/processDiagram/%name%.requirementsdi"
@@ -112,83 +261,214 @@
             id="com.bluexml.side.Requirements.modeler.templates.processDiagram"
             editorId="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor"/>
    </extension> -->
-  <extension point="org.topcased.modeler.diagrams">
-    <diagram configuration="com.bluexml.side.Requirements.modeler.processDiagram.ProConfiguration" id="com.bluexml.side.Requirements.modeler.processDiagram" name="Process">
-      <enableFor class="com.bluexml.side.requirements.Process" />
-    </diagram>
-  </extension>
-  <extension point="org.topcased.modeler.topcasedPreferenceInitializer">
-    <preferenceInitializer class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramTopcasedPreferenceInitializer" editorId="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor" id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProTopcasedPreferenceInitializer" />
-  </extension>
-  <extension point="org.eclipse.ui.preferencePages">
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" category="com.bluexml.side.Requirements.modeler.preferences.RequirementsPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" name="ProDiagram" />
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_responsiblePreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_responsiblePreferencePage" name="is_responsible" />
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_sub_goalPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_sub_goalPreferencePage" name="is_sub_goal" />
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.RelationShipPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.RelationShipPreferencePage" name="RelationShip" />
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.GoalPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.GoalPreferencePage" name="Goal" />
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AgentPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AgentPreferencePage" name="Agent" />
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.EntityPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.EntityPreferencePage" name="Entity" />
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AttributePreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AttributePreferencePage" name="Attribute" />
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegePreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegePreferencePage" name="Privilege" />
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegeGroupPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegeGroupPreferencePage" name="PrivilegeGroup" />
-  </extension>
-  <extension point="org.eclipse.ui.propertyPages">
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage" category="com.bluexml.side.Requirements.modeler.preferences.property.RequirementsPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage" name="ProDiagram">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.is_responsiblePreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_responsiblePreferencePage" name="is_responsible">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.is_sub_goalPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_sub_goalPreferencePage" name="is_sub_goal">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.RelationShipPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.RelationShipPreferencePage" name="RelationShip">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.GoalPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.GoalPreferencePage" name="Goal">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.AgentPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AgentPreferencePage" name="Agent">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.EntityPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.EntityPreferencePage" name="Entity">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.AttributePreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AttributePreferencePage" name="Attribute">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.PrivilegePreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegePreferencePage" name="Privilege">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-    <page id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.PrivilegeGroupPreferencePage" category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage" class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegeGroupPreferencePage" name="PrivilegeGroup">
-      <enabledWhen>
-        <adapt type="org.eclipse.core.resources.IProject" />
-      </enabledWhen>
-    </page>
-  </extension>
-  <extension point="org.eclipse.ui.importWizards">
-    <category id="com.bluexml.side.Requirements.modeler.wizards.sampleCategory" name="SIDE Requirements" />
-    <wizard category="com.bluexml.side.Requirements.modeler.wizards.sampleCategory" class="com.bluexml.side.Requirements.modeler.wizards.ImportAnnotationWizard" icon="icons/importAnnotations.gif" id="com.bluexml.side.Requirements.modeler.wizards.ImportAnnotationWizard" name="Import annotations">
-      <description>Import annotations from database.</description>
-    </wizard>
-  </extension>
-</plugin>
+   
+   <extension point="org.topcased.modeler.diagrams">
+      <diagram
+            configuration="com.bluexml.side.Requirements.modeler.processDiagram.ProConfiguration"
+            id="com.bluexml.side.Requirements.modeler.processDiagram"
+            name="Process">
+            <enableFor
+                  class="com.bluexml.side.requirements.Process">
+            </enableFor>
+      </diagram>
+	</extension>
+	
+	
+	<extension
+       point="org.topcased.modeler.topcasedPreferenceInitializer">
+    <preferenceInitializer
+          class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramTopcasedPreferenceInitializer"
+          editorId="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor"
+          id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProTopcasedPreferenceInitializer">
+    </preferenceInitializer>
+ </extension>
 
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.preferences.RequirementsPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			name="ProDiagram"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_responsiblePreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_responsiblePreferencePage"
+			name="is_responsible"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_sub_goalPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_sub_goalPreferencePage"
+			name="is_sub_goal"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.RelationShipPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.RelationShipPreferencePage"
+			name="RelationShip"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.GoalPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.GoalPreferencePage"
+			name="Goal"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AgentPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AgentPreferencePage"
+			name="Agent"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.EntityPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.EntityPreferencePage"
+			name="Entity"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AttributePreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AttributePreferencePage"
+			name="Attribute"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegePreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegePreferencePage"
+			name="Privilege"/>
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegeGroupPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegeGroupPreferencePage"
+			name="PrivilegeGroup"/>
+	</extension>
+
+	<extension point="org.eclipse.ui.propertyPages">
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.preferences.property.RequirementsPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferencePage"
+			name="ProDiagram">       
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+		
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.is_responsiblePreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_responsiblePreferencePage"
+			name="is_responsible">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.is_sub_goalPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.is_sub_goalPreferencePage"
+			name="is_sub_goal">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.RelationShipPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.RelationShipPreferencePage"
+			name="RelationShip">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.GoalPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.GoalPreferencePage"
+			name="Goal">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.AgentPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AgentPreferencePage"
+			name="Agent">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.EntityPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.EntityPreferencePage"
+			name="Entity">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.AttributePreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.AttributePreferencePage"
+			name="Attribute">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.PrivilegePreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegePreferencePage"
+			name="Privilege">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+		<page
+			id="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.PrivilegeGroupPreferencePage"
+			category="com.bluexml.side.Requirements.modeler.processDiagram.preferences.property.ProDiagramPreferencePage"
+			class="com.bluexml.side.Requirements.modeler.processDiagram.preferences.PrivilegeGroupPreferencePage"
+			name="PrivilegeGroup">
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+		</page>
+    	
+	</extension>
+ <extension
+       point="org.eclipse.ui.importWizards">
+    <category
+          id="com.bluexml.side.Requirements.modeler.wizards.sampleCategory"
+          name="SIDE Requirements">
+    </category>
+    <wizard
+          category="com.bluexml.side.Requirements.modeler.wizards.sampleCategory"
+          class="com.bluexml.side.Requirements.modeler.wizards.ImportAnnotationWizard"
+          icon="icons/importAnnotations.gif"
+          id="com.bluexml.side.Requirements.modeler.wizards.ImportAnnotationWizard"
+          name="Import annotations">
+       <description>
+          Import annotations from database.
+       </description>
+    </wizard>
+ </extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <category
+          id="com.bluexml.side.Requirements.modeler"
+          name="SIDE">
+    </category>
+    <view
+          category="com.bluexml.side.Requirements.modeler"
+          class="com.bluexml.side.Requirements.modeler.views.AnnotationView"
+          icon="icons/Annotation.gif"
+          id="com.bluexml.side.Requirements.modeler.views.AnnotationView"
+          name="Annotations">
+    </view>
+ </extension>
+
+	
+</plugin>
