@@ -9,7 +9,7 @@
   <groupId>com.bluexml.side.m2</groupId>
   <artifactId>repositoryBuilderForSIDE</artifactId>
   <name>Repository Builder for SIDE (offline)</name>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <description>This project aims to scan SIDE plugin and build an archive of all maven dpendecies used by SIDE this includes frameworks modules</description>
   <dependencies>
     <dependency>
