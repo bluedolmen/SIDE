@@ -210,7 +210,7 @@ public class Application {
 	    try {
 	      // file contains unsorted data
 	    	String SIDE_path=Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
-	      p = r.exec("cd "+Utils.getBuildPath());
+	      p = r.exec("cd "+Utils.getBuildPath() );
 	      p = r.exec("launch_maven.sh "+workspace+ " "+SIDE_path);
 	
 	      p.waitFor();
