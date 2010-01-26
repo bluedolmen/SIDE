@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -16,12 +17,9 @@ import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -64,9 +62,13 @@ import com.bluexml.side.workflow.WorkflowFactory;
 
 public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 		INewWizard {
-	public static final String DEFAULT_MODELS_DIR = "models"; //$NON-NLS-1$
-	public static final String DEFAULT_LOG_DIR = "logs"; //$NON-NLS-1$
-	public static final String DEFAULT_GEN_DIR = "out"; //$NON-NLS-1$
+	
+	public static final String DEFAULT_SRC_DIR = "src"; //$NON-NLS-1$
+	public static final String DEFAULT_MODELS_DIR = DEFAULT_SRC_DIR+"/models"; //$NON-NLS-1$
+	private static final String[] modelTypes = {"application","data","form","portal","requirement","view","workflow"};
+	private static final String[] srcDirs = {"acp","images","installer","js","models","properties"};
+	public static final String DEFAULT_LOG_DIR = "build/logs"; //$NON-NLS-1$
+	public static final String DEFAULT_GEN_DIR = "build/generated"; //$NON-NLS-1$
 	public static final String DEFAULT_MODEL_NAME = "my"; //$NON-NLS-1$
 
 	// The workbench
@@ -98,14 +100,12 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 
 		try {
 			// Folders
-			IFolder modelsDir = newProject.getFolder(DEFAULT_MODELS_DIR);
-			IFolder logDir = newProject.getFolder(DEFAULT_LOG_DIR);
-			IFolder genDir = newProject.getFolder(DEFAULT_GEN_DIR);
-
-			// Create folders
-			modelsDir.create(true, true, new NullProgressMonitor());
-			logDir.create(true, true, new NullProgressMonitor());
-			genDir.create(true, true, new NullProgressMonitor());
+			for (String dir : srcDirs)
+				prepareFolder(newProject.getFolder(DEFAULT_SRC_DIR).getFolder(dir));
+			for (String type : modelTypes)
+				prepareFolder(newProject.getFolder(DEFAULT_MODELS_DIR).getFolder(type));
+			prepareFolder(newProject.getFolder(DEFAULT_GEN_DIR));
+			prepareFolder(newProject.getFolder(DEFAULT_LOG_DIR));
 
 			// Create initial model if needed :
 			if (optionsPage.isCreateDataModel()) {
@@ -144,6 +144,18 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 
 	private IFile createFileForModel(String extension) throws CoreException {
 		IFolder folder = newProject.getFolder(DEFAULT_MODELS_DIR);
+		if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID")))
+			folder = folder.getFolder("data");
+		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID")))
+			folder = folder.getFolder("form");
+		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID")))
+			folder = folder.getFolder("portal");
+		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.requirements.presentation.RequirementsEditorID")))
+			folder = folder.getFolder("requirement");
+		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID")))
+			folder = folder.getFolder("view");
+		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.workflow.presentation.WorkflowEditorID")))
+			folder = folder.getFolder("workflow");
 		return folder.getFile(optionsPage.getModelNameValue() + extension);
 	}
 
@@ -221,7 +233,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 
 
 	private void createApplicationFile() throws IOException {
-		IFile file = newProject.getFile(optionsPage.getModelNameValue() + ".application");
+		IFile file = newProject.getFolder(DEFAULT_MODELS_DIR+"/application").getFile(optionsPage.getModelNameValue() + ".application");
 		com.bluexml.side.application.Application app = ApplicationFactory.eINSTANCE.createApplication();
 		app.setName(newProject.getName());
 		// Add initial configuration
@@ -243,7 +255,23 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 		for (IFile f : createdModels) {
 			Model model = ApplicationFactory.eINSTANCE.createModel();
 			model.setName(f.getName());
-			model.setFile("/" + newProject.getName() + "/" + DEFAULT_MODELS_DIR + "/" + f.getName());
+			
+			String path = "/" + newProject.getName() + "/" + DEFAULT_MODELS_DIR + "/";
+			if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID")))
+				path = path.concat("data");
+			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID")))
+				path = path.concat("form");
+			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID")))
+				path = path.concat("portal");
+			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.requirements.presentation.RequirementsEditorID")))
+				path = path.concat("requirement");
+			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID")))
+				path = path.concat("view");
+			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.workflow.presentation.WorkflowEditorID")))
+				path = path.concat("workflow");
+			path = path.concat("/"+ f.getName());
+			
+			model.setFile(path);
 			app.getElements().add(model);
 		}
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)app);
@@ -463,6 +491,21 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 				});
 			}
 		}
+		
+	}
+
+	public IFolder prepareFolder(IFolder folder) throws CoreException
+	{
+		IContainer parent = folder.getParent();
+		if (parent instanceof IFolder)
+		{
+			prepareFolder((IFolder) parent);
+		}
+		if (!folder.exists())
+		{
+			folder.create(true, true, null);
+		}
+		return folder;
 	}
 
 }
