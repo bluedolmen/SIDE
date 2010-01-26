@@ -116,7 +116,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 			return Utils.getColor(preferenceForeground);
 		}
 		return null;
-
 	}
 
 	/**
@@ -141,9 +140,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 				.getMiddleNameEdgeObject();
 		String name = transition.getName();
 
-		String condition = transition.getCondition();
-		if (condition != null && condition.length() > 0)
-			name += "[" + condition + "]";
 		label.setText(name);
 	}
 
