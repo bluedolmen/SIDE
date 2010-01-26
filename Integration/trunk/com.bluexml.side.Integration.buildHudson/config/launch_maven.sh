@@ -34,8 +34,8 @@ done
 mvn clean deploy -e -P public > log_maven.log
 
 if grep -q "BUILD ERROR" "log_maven.log" ; then
-	echo "Maven deploy faild"
-	exit -3
+	echo "Maven deploy failed"
+	exit -1
 else
 	echo "Maven deploy success"
 fi
