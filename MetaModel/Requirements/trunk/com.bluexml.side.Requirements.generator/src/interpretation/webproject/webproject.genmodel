@@ -26,6 +26,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Page/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Page/title"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Page/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Page/comment"/>
     </genClasses>
     <genClasses ecoreClass="webproject.ecore#//LoginPage">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference webproject.ecore#//LoginPage/links"/>

@@ -100,36 +100,8 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 				if (omodel.exists())
 					result.addAll(super.generate(omodel));
 			}
-			System.out.println(System.getProperty("os.name"));
 			
-			if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
-				IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-				IFolder targetFolder = myWorkspaceRoot.getFolder(new Path(getTemporaryFolder()));
-				targetFolder = targetFolder.getFolder("cdc");
-				IFile myFile = targetFolder.getFile("content.xml");
-
-				//Modify the header of content.xml
-				List<String> contents = new ArrayList<String>();
-				FileInputStream fis = new FileInputStream(myFile.getRawLocation().toFile());
-				InputStreamReader inr = new InputStreamReader(fis, "ISO-8859-1"); 
-				BufferedReader in = new BufferedReader(inr);
-				String line = null;
-				while (( line = in.readLine()) != null) {
-					contents.add(line.concat(System.getProperty("line.separator")));
-				}
-				in.close();
-
-				OutputStream fout= new FileOutputStream(myFile.getRawLocation().toFile());
-		        OutputStream bout= new BufferedOutputStream(fout);
-		        OutputStreamWriter out = new OutputStreamWriter(bout, "8859_1");
-				for (String l : contents)
-					if (l.contains("encoding=\"UTF-8\""))
-						out.write(l.replace("encoding=\"UTF-8\"", "encoding=\"ISO-8859-1\""));
-					else
-						out.write(l);
-				out.flush();
-				out.close();
-			}
+			postGeneration();
 			
 			// Execute ANT scripts
 			ExecuteANTScript a = new ExecuteANTScript();
@@ -168,4 +140,9 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 	protected Collection<String> getExtensionsForServices() {
 		return Collections.EMPTY_SET;
 	}
+	
+	protected void postGeneration() {
+		//By default, nothing to do
+	}
+	
 }

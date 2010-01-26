@@ -125,6 +125,15 @@ public class WebProjectGenerator extends RequirementsGenerator {
 	        	BufferedWriter out = new BufferedWriter(fstream);
 				for (Annotation a : annotations) {
 					String sql = "";
+					
+					String annotation = "";
+					if (a.getAnnotation() != null)
+						annotation = a.getAnnotation().replaceAll("'","\\\\'");
+					
+					String comment = "";
+					if (a.getComment() != null)
+						comment = a.getComment().replaceAll("'", "\\\\'");
+					
 					sql = "INSERT IGNORE INTO `annotation` (" +
 							"`id` ," +
 							"`elementId` ," +
@@ -136,14 +145,15 @@ public class WebProjectGenerator extends RequirementsGenerator {
 							"	'"+a.getId()+"', " +
 							"	'"+((AnnotableElement)a.eContainer()).getId()+"', " +
 							"	'"+a.getAuthor()+"', " +
-							"	'"+a.getAnnotation().replaceAll("'","\\\\'")+"', " +
-							"	'"+a.getComment().replaceAll("'", "\\\\'")+"', " +
+							"	'"+annotation+"', " +
+							"	'"+comment+"', " +
 							"	'"+a.getDate()+"');\n";
 					out.write(sql);
 				}
 				out.close();
 			}
 		} catch (Exception e1) {
+			e1.printStackTrace();
 			MessageDialog.openError(null, "Problem during reading of input model !", e1.getMessage());
 		}
 		

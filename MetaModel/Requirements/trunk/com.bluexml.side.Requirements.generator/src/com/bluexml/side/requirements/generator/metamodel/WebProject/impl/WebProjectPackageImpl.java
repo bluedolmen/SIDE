@@ -317,6 +317,15 @@ public class WebProjectPackageImpl extends EPackageImpl implements WebProjectPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPage_Comment() {
+		return (EAttribute)pageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLoginPage() {
 		return loginPageEClass;
 	}
@@ -758,6 +767,7 @@ public class WebProjectPackageImpl extends EPackageImpl implements WebProjectPac
 		createEAttribute(pageEClass, PAGE__NAME);
 		createEAttribute(pageEClass, PAGE__TITLE);
 		createEAttribute(pageEClass, PAGE__ID);
+		createEAttribute(pageEClass, PAGE__COMMENT);
 
 		loginPageEClass = createEClass(LOGIN_PAGE);
 		createEReference(loginPageEClass, LOGIN_PAGE__LINKS);
@@ -868,6 +878,7 @@ public class WebProjectPackageImpl extends EPackageImpl implements WebProjectPac
 		initEAttribute(getPage_Name(), ecorePackage.getEString(), "name", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPage_Title(), ecorePackage.getEString(), "title", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPage_Id(), ecorePackage.getEString(), "id", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPage_Comment(), ecorePackage.getEString(), "comment", null, 0, -1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(loginPageEClass, LoginPage.class, "LoginPage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLoginPage_Links(), this.getLink(), null, "links", null, 0, -1, LoginPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

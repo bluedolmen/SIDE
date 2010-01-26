@@ -11,6 +11,10 @@ helper context RWM!Goal def : getAllSubGoals() : Sequence(RWM!Goal) =
 helper context String def : normalize() : String =
     self.regexReplaceAll('[^a-zA-Z]','');
 
+helper context String def : format() : String =
+    self.regexReplaceAll('&','&amp;').regexReplaceAll('<','&lt;').regexReplaceAll('>','&gt;')
+		.regexReplaceAll('\\n','<br/>');
+
 rule ReqDefs {
     from s : RWM!RequirementsDefinition
     to t : WebProject!Project (
@@ -102,6 +106,7 @@ rule goalWithPrivileges {
     from s : RWM!Goal (s.privilegeGroup.size() > 0)
     to dataPage : WebProject!DataPage (
         id <- s.id,
+		comment<-Sequence{s.documentation.format(),s.synopsis.format()},
     	title <-
 			if (s.responsible.size() > 0) then 
 				s.name + '(' + s.responsible.first().name + ')'
@@ -133,6 +138,7 @@ rule goalWithoutPrivileges {
     from s : RWM!Goal (s.privilegeGroup.size() = 0)
     to dataPage : WebProject!GoalPage (
     	id <- s.id,
+		comment<-Sequence{s.documentation.format(),s.synopsis.format()},
         title <- s.name,
         name <- s.__xmiID__+'.html',
         items <- thisModule.createGoalItem(s)

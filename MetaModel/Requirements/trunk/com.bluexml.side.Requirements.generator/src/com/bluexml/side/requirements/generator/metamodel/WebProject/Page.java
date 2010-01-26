@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.WebProject;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.Page#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.Page#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.Page#getId <em>Id</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.Page#getComment <em>Comment</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,5 +106,21 @@ public interface Page extends EObject {
 	 * @generated
 	 */
 	void setId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Comment</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Comment</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Comment</em>' attribute list.
+	 * @see com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectPackage#getPage_Comment()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getComment();
 
 } // Page

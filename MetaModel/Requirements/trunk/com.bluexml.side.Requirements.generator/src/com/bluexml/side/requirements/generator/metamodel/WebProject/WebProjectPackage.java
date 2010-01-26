@@ -181,13 +181,22 @@ public interface WebProjectPackage extends EPackage {
 	int PAGE__ID = 2;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__COMMENT = 3;
+
+	/**
 	 * The number of structural features of the '<em>Page</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_FEATURE_COUNT = 3;
+	int PAGE_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.LoginPageImpl <em>Login Page</em>}' class.
@@ -225,6 +234,15 @@ public interface WebProjectPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOGIN_PAGE__ID = PAGE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGIN_PAGE__COMMENT = PAGE__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Links</b></em>' containment reference list.
@@ -280,6 +298,15 @@ public interface WebProjectPackage extends EPackage {
 	 * @ordered
 	 */
 	int GOAL_PAGE__ID = PAGE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_PAGE__COMMENT = PAGE__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Items</b></em>' containment reference list.
@@ -383,6 +410,15 @@ public interface WebProjectPackage extends EPackage {
 	int DATA_PAGE__ID = PAGE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_PAGE__COMMENT = PAGE__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -445,6 +481,15 @@ public interface WebProjectPackage extends EPackage {
 	 * @ordered
 	 */
 	int FRAME_PAGE__ID = PAGE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME_PAGE__COMMENT = PAGE__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Col1</b></em>' reference.
@@ -995,6 +1040,17 @@ public interface WebProjectPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPage_Id();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.requirements.generator.metamodel.WebProject.Page#getComment <em>Comment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Comment</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.WebProject.Page#getComment()
+	 * @see #getPage()
+	 * @generated
+	 */
+	EAttribute getPage_Comment();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.WebProject.LoginPage <em>Login Page</em>}'.
@@ -1593,6 +1649,14 @@ public interface WebProjectPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PAGE__ID = eINSTANCE.getPage_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Comment</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PAGE__COMMENT = eINSTANCE.getPage_Comment();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.LoginPageImpl <em>Login Page</em>}' class.

@@ -43,7 +43,7 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 		<link rel="stylesheet" href="styles/nyroModal.css" type="text/css" media="screen" />
 	</head>
 	<body class="body">
-		<div id="goalItems" class="box">
+		<div <%if (comment==null){%>id="goalItems" <%}%>class="box">
 			<h2><%title%></h2>
 			<hr/>
 			<ul>
@@ -53,6 +53,18 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 			</ul>
 		</div>
 		<br/>
+		<%if (comment != null) {%>
+			<div class="box">
+				<span style="font-weight:bold;">Description :</span><br/>
+				<%comment.nFirst()%>
+			</div>
+			<br/>
+			<div class="box">
+				<span style="font-weight:bold;">Synopsis :</span><br/>
+				<%comment.nLast()%>
+			</div>
+			<br/>
+		<%}%>
 		<div id="logout" class="box">
 			<img src="images/comment.png"/><a href="addComment.php?elementId=<%id%>" class="nyroModal">Add a comment</a>
 		</div>
@@ -99,6 +111,16 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 		?>
 		<div id="data" class="box">
 			<h2><%title%></h2>
+			<div class="box">
+				<span style="font-weight:bold;">Description :</span><br/>
+				<%comment.nFirst()%>
+			</div>
+			<br/>
+			<div class="box">
+				<span style="font-weight:bold;">Synopsis :</span><br/>
+				<%comment.nLast()%>
+			</div>
+			<br/>
 			<div id="logout" class="box">
 				<img src="images/comment.png"/><a href="addComment.php?elementId=<%id%>" class="nyroModal">Add a comment</a>
 			</div>
@@ -183,7 +205,7 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 							
 								$sql = "SELECT COUNT(*) as nb FROM "
 									." <%cast("ComponentRelationShip").idLeft.eContainer().name%>2<%cast("ComponentRelationShip").idRight.eContainer().name%>"
-									." WHERE $idSource = " . $data[$idSource]
+									." WHERE \"$idSource\" = " . $data[$idSource]
 									.";";
 								
 								$result2 = mysql_query($sql);

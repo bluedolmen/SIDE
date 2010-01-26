@@ -9,12 +9,15 @@ package com.bluexml.side.requirements.generator.metamodel.WebProject.impl;
 import com.bluexml.side.requirements.generator.metamodel.WebProject.Page;
 import com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectPackage;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +29,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.PageImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.PageImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.PageImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.generator.metamodel.WebProject.impl.PageImpl#getComment <em>Comment</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,6 +95,16 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 	 * @ordered
 	 */
 	protected String id = ID_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getComment() <em>Comment</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> comment;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -179,6 +193,18 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getComment() {
+		if (comment == null) {
+			comment = new EDataTypeUniqueEList<String>(String.class, this, WebProjectPackage.PAGE__COMMENT);
+		}
+		return comment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -188,6 +214,8 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 				return getTitle();
 			case WebProjectPackage.PAGE__ID:
 				return getId();
+			case WebProjectPackage.PAGE__COMMENT:
+				return getComment();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -197,6 +225,7 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -208,6 +237,10 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 				return;
 			case WebProjectPackage.PAGE__ID:
 				setId((String)newValue);
+				return;
+			case WebProjectPackage.PAGE__COMMENT:
+				getComment().clear();
+				getComment().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -230,6 +263,9 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 			case WebProjectPackage.PAGE__ID:
 				setId(ID_EDEFAULT);
 				return;
+			case WebProjectPackage.PAGE__COMMENT:
+				getComment().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -248,6 +284,8 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case WebProjectPackage.PAGE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case WebProjectPackage.PAGE__COMMENT:
+				return comment != null && !comment.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -268,6 +306,8 @@ public abstract class PageImpl extends EObjectImpl implements Page {
 		result.append(title);
 		result.append(", id: ");
 		result.append(id);
+		result.append(", comment: ");
+		result.append(comment);
 		result.append(')');
 		return result.toString();
 	}

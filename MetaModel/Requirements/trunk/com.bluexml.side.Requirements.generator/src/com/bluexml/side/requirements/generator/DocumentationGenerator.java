@@ -1,5 +1,15 @@
 package com.bluexml.side.requirements.generator;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -9,6 +19,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 
 public class DocumentationGenerator extends RequirementsGenerator {
 
@@ -78,5 +92,45 @@ public class DocumentationGenerator extends RequirementsGenerator {
 	
 	protected Collection<String> getExtensionsForServices() {
 		return Collections.singleton(".odt");
+	}
+
+	@Override
+	protected void postGeneration() {
+		try {
+			if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+				IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+				IFolder targetFolder = myWorkspaceRoot.getFolder(new Path(getTemporaryFolder()));
+				targetFolder = targetFolder.getFolder("cdc");
+				IFile myFile = targetFolder.getFile("content.xml");
+
+				//Modify the header of content.xml
+				List<String> contents = new ArrayList<String>();
+				FileInputStream fis = new FileInputStream(myFile.getRawLocation().toFile());
+				InputStreamReader inr = new InputStreamReader(fis, "ISO-8859-1"); 
+				BufferedReader in = new BufferedReader(inr);
+				String line = null;
+				while (( line = in.readLine()) != null) {
+					contents.add(line.concat(System.getProperty("line.separator")));
+				}
+				in.close();
+
+				OutputStream fout= new FileOutputStream(myFile.getRawLocation().toFile());
+			    OutputStream bout= new BufferedOutputStream(fout);
+			    OutputStreamWriter out = new OutputStreamWriter(bout, "8859_1");
+				for (String l : contents)
+					if (l.contains("encoding=\"UTF-8\""))
+						out.write(l.replace("encoding=\"UTF-8\"", "encoding=\"ISO-8859-1\""));
+					else
+						out.write(l);
+				out.flush();
+				out.close();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
 	}
 }
