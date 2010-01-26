@@ -31,6 +31,7 @@ for s in `ls -d */ `; do
 	perl -pi -le 'print "'$res'" if $. == 13' pom.xml
 done
 
-mvn clean deploy -e -P public > log_maven.log
+#mvn clean deploy -e -P public > log_maven.log
+mvn clean deploy -e -P public
 
 exit 0
