@@ -5,10 +5,10 @@
 	<parent>
 		<groupId>org.bluexml</groupId>
 		<artifactId>superpom</artifactId>
-		<version>1.10</version>
+		<version>1.7</version>
 	</parent>
 	<groupId>com.bluexml.side.Form</groupId>
-	<artifactId>utils</artifactId>
+	<artifactId>XFormsUtils</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0.1</version>
 	<name>BlueXML XForms Utils</name>
