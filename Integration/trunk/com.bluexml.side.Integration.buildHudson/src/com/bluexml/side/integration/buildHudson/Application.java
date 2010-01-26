@@ -1,9 +1,11 @@
 package com.bluexml.side.integration.buildHudson;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -206,20 +208,51 @@ public class Application {
 			
 		Runtime r = Runtime.getRuntime();
 		Process p;
-	
+		BufferedReader is;  // reader for output of process
+	    String line;
+	    
 	    try {
+	    	
+	 
+	    String SIDE_path=Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
+    	System.out.println("."+Utils.getBuildPath() + File.separator+"launch_maven.sh "+workspace+ " "+SIDE_path);
+    
+    	p = r.exec(Utils.getBuildPath() + File.separator+"launch_maven.sh "+workspace+ " "+SIDE_path);
+
+	    
+	    is = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+	    while ((line = is.readLine()) != null)
+	      System.out.println(line);
+	    
+	    System.out.println("In Main after EOF");
+	    System.out.flush();
+	    try {
+	      p.waitFor();  // wait for process to complete
+	    } catch (InterruptedException e) {
+	      System.err.println(e);  // "Can'tHappen"
+	      return;
+	    }
+	    System.err.println("Process done, exit status was " + p.exitValue());
+	    return;
+	    
+	    } catch (java.io.IOException e) {
+		      System.err.println("I/O error: " + e);
+		} 
+	
+	    /*try {
 	      // file contains unsorted data
 	    	String SIDE_path=Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
 	    	System.out.println("."+Utils.getBuildPath() + File.separator+"launch_maven.sh "+workspace+ " "+SIDE_path);
 	    
-	      p = r.exec(Utils.getBuildPath() + File.separator+"launch_maven.sh "+workspace+ " "+SIDE_path);
+	    	p = r.exec(Utils.getBuildPath() + File.separator+"launch_maven.sh "+workspace+ " "+SIDE_path);
 	
-	      p.waitFor();
+	    	p.waitFor();
 	    } catch (java.io.IOException e) {
 	      System.err.println("I/O error: " + e);
 	    } catch (InterruptedException e) {
 	      // nothing to do
-	    }
+	    }*/
 		
 	}
 
