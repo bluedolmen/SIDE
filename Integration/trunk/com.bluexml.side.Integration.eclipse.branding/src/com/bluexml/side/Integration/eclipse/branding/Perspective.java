@@ -28,6 +28,7 @@ public class Perspective implements IPerspectiveFactory {
 		addView(layout, bottom, IPageLayout.ID_PROP_SHEET);
 		addView(layout, bottom, IPageLayout.ID_PROBLEM_VIEW);
 		addView(layout, bottom, "com.bluexml.view.OutlineHTMLView");
+		addView(layout, bottom, "com.bluexml.side.Requirements.modeler.views.AnnotationView");
 	}
 
 	private void addView(IPageLayout parent, IFolderLayout folder, String viewid) {
