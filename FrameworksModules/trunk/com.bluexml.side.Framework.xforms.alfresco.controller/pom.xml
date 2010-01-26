@@ -39,8 +39,8 @@
   <dependencies>
     <dependency>
       <groupId>com.bluexml.side.Form</groupId>
-      <artifactId>utils</artifactId>
-      <version>[1.0.0,)</version>
+      <artifactId>XFormsUtils</artifactId>
+      <version>[1.0.1,)</version>
     </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
