@@ -4,10 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
@@ -151,7 +155,14 @@ public class Application {
 				System.out.println("\t-" + projet);
 			}
 		}
-
+		
+		//create maven work folder and launch maven deploy
+		launchMavenDeploy();
+		
+		//launch script to build repository zip file
+		
+		
+		
 		execBuild("build", "build");
 
 		// cr�ation du site.xml
@@ -175,6 +186,40 @@ public class Application {
 		 * execBuild("build", "buildProject");
 		 */
 		System.out.println("\nFINISH !");
+	}
+	
+	
+	
+	/**
+	 * M�thode qui execute lance la tache maven deploy
+	 * fichier de log est cr�e: log_maven.txt
+	 * @throws IOException 
+	 * 
+	 * 
+	 *          
+	 * 
+	 *            
+	 * 
+	 */
+	private static void launchMavenDeploy()  {
+		
+			
+		Runtime r = Runtime.getRuntime();
+		Process p;
+	
+	    try {
+	      // file contains unsorted data
+	    	String SIDE_path=Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
+	      p = r.exec("cd "+Utils.getBuildPath());
+	      p = r.exec("launch_maven.sh "+workspace+ " "+SIDE_path);
+	
+	      p.waitFor();
+	    } catch (java.io.IOException e) {
+	      System.err.println("I/O error: " + e);
+	    } catch (InterruptedException e) {
+	      // nothing to do
+	    }
+		
 	}
 
 	/**
