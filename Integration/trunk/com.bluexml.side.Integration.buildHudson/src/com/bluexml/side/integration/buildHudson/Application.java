@@ -212,7 +212,7 @@ public class Application {
 	    	String SIDE_path=Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
 	    	System.out.println("."+Utils.getBuildPath() + File.separator+"launch_maven.sh "+workspace+ " "+SIDE_path);
 	    
-	      p = r.exec("."+Utils.getBuildPath() + File.separator+"launch_maven.sh "+workspace+ " "+SIDE_path);
+	      p = r.exec(Utils.getBuildPath() + File.separator+"launch_maven.sh "+workspace+ " "+SIDE_path);
 	
 	      p.waitFor();
 	    } catch (java.io.IOException e) {
