@@ -102,10 +102,8 @@ public class EntityRestoreConnectionCommand extends
 		Entity sourceObject = (Entity) Utils.getElement(srcElt);
 		Entity targetObject = (Entity) Utils.getElement(targetElt);
 
-		EList edgeObjectList = ((com.bluexml.side.requirements.Process) Utils
-				.getDiagramModelObject(srcElt)).getChildElements();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
-			Object obj = it.next();
+		for (Iterator<EObject> it = Utils.getDiagramModelObject(srcElt).eResource().getAllContents(); it.hasNext();) {
+		 	Object obj = it.next();
 			if (obj instanceof RelationShip) {
 				RelationShip edgeObject = (RelationShip) obj;
 				if (targetObject.equals(edgeObject.getTarget())
