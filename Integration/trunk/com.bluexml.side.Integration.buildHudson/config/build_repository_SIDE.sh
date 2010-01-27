@@ -16,7 +16,7 @@ SIDEHOME=$WORKSPACE/../../Build_SIDE/workspace/S-IDE
 BUILDERHOME=$WORKSPACE/../buildAuto/Ankle/buildAllMaven
 POM_PATCHER=$WORKSPACE/../buildAuto/Ankle/repositoryBuilderForSIDE/target/repositoryBuilderForSIDE-0.0.1-jar-with-dependencies.jar
 POM_IN=$WORKSPACE/../../superpom/workspace/superpom/pom.xml
-MAVENREPO_ARCHIVE=$WORKSPACE/S-IDE/Util/trunk/com.bluexml.side.Util.dependencies/src/com/bluexml/side/util/dependencies/mavenRepository/m2repositoryForSIDE.zip
+MAVENREPO_ARCHIVE=$REPOSITORY_COPY/S-IDE/Util/trunk/com.bluexml.side.Util.dependencies/src/com/bluexml/side/util/dependencies/mavenRepository/m2repositoryForSIDE.zip
 
 
 # set constantes
