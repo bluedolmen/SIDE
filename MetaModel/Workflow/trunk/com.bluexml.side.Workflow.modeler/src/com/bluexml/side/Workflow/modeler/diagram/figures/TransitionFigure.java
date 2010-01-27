@@ -17,7 +17,7 @@ package com.bluexml.side.Workflow.modeler.diagram.figures;
 import org.eclipse.draw2d.Locator;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.widgets.Display;
 import org.topcased.modeler.edit.locators.EdgeObjectOffsetLocator;
 import org.topcased.modeler.figures.EdgeObjectOffsetEditableLabel;
 import org.topcased.modeler.figures.IEdgeObjectFigure;
@@ -42,8 +42,7 @@ public class TransitionFigure extends PolylineConnectionEx {
 		setLineStyle(SWT.LINE_SOLID);
 
 		middleNameEdgeObject = new EdgeObjectOffsetEditableLabel(this);
-		float[] rgb = {0f,0f,0f}; 
-		middleNameEdgeObject.setForegroundColor(Color.cocoa_new(null, rgb));
+		middleNameEdgeObject.setForegroundColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
 		middleNameLocator = new EdgeObjectOffsetLocator(
 				(IEdgeObjectOffsetFigure) middleNameEdgeObject);
 		add(middleNameEdgeObject, middleNameLocator);
