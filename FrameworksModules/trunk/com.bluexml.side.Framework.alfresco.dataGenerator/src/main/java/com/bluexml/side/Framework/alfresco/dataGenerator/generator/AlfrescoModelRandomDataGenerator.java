@@ -21,8 +21,10 @@ import java.util.Random;
 
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
+import org.alfresco.service.cmr.dictionary.ClassDefinition;
 import org.alfresco.service.cmr.dictionary.ConstraintDefinition;
 import org.alfresco.service.cmr.dictionary.DataTypeDefinition;
+import org.alfresco.service.cmr.dictionary.DictionaryService;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.namespace.QName;
@@ -48,16 +50,20 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 	
 	private IInstance instance;
 	private IData alfrescoModelDatas;
+	private NativeAlfrescoModelRandomDataGenerator nativeGenerator;
 	
 	private IDictionary dictionary;
+	private DictionaryService service;
 	private int numberOfNodes;
 	private int numberOfOutputArcs;
 	private static String scenario;
 	
-	private static int index;
+	private static Map<TypeDefinition,Integer> indexType = new HashMap<TypeDefinition, Integer>();
+	private static Map<TypeDefinition,Map<PropertyDefinition,Integer>> index = new HashMap<TypeDefinition, Map<PropertyDefinition,Integer>>();
 	private static int numOfTypes;
-	private int numOfSame;
-	private Collection<Object> sameData = new ArrayList<Object>();
+	private static TypeDefinition typeRef;
+	private Map<TypeDefinition,Map<PropertyDefinition,Integer>> numOfSame = new HashMap<TypeDefinition, Map<PropertyDefinition,Integer>>();
+	private Map<TypeDefinition,Map<PropertyDefinition,Object>> sameData = new HashMap<TypeDefinition, Map<PropertyDefinition,Object>>();
 	
 	private ArrayList<Serial> serializedData = new ArrayList<Serial>();
 	
@@ -88,19 +94,44 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		static String generateRandomDate() throws Exception{
 			//TODO besoin contraintes...
 			
-//			Date date = new Date(randomGenerator.nextLong());
-//			return ISO8601DateFormat.format(date);
-			//TODO besoin contraintes...
+			Date today = new Date();
+			long sup = today.getTime()*5/4;
+			long inf = today.getTime()*3/4;
 			
+			long randomDateValue = randomGenerator.nextLong();
+			while (randomDateValue > sup || randomDateValue < inf){
+				randomDateValue = randomGenerator.nextLong();
+			}
+			
+			Date randomDate = new Date(randomDateValue);
 			DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
-			Date minDate = df.parse("1970/01/01");			
-			Date maxDate = df.parse("3000/01/01");
-
-			float f = randomGenerator.nextFloat();
-			long l = (long)(f * (maxDate.getTime() - minDate.getTime()) ) + minDate.getTime();
-			Date date = new Date(l);			
+			Date simpleDate = df.parse(df.format(randomDate));
 			
-			return ISO8601DateFormat.format(date);
+//			DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
+//			Date minDate = df.parse("1970/01/01");			
+//			Date maxDate = df.parse("3000/01/01");
+//			
+//			df.format(today);
+//
+//			float f = randomGenerator.nextFloat();
+//			long l = (long)(f * (maxDate.getTime() - minDate.getTime()) ) + minDate.getTime();
+//			Date date = new Date(l);			
+			
+//			return ISO8601DateFormat.format(date);
+			return ISO8601DateFormat.format(simpleDate);
+		}
+		
+		static String generateRandomDateTime() throws Exception{			
+			Date today = new Date();
+			long sup = today.getTime()*5/4;
+			long inf = today.getTime()*3/4;
+			
+			long randomDateValue = randomGenerator.nextLong();
+			while (randomDateValue > sup || randomDateValue < inf){
+				randomDateValue = randomGenerator.nextLong();
+			}
+			
+			return ISO8601DateFormat.format(new Date(randomDateValue));
 		}
 		
 		static String generateRandomString(String defaultValue, PropertyDefinition property){
@@ -117,12 +148,12 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			}
 			else if (scenario.equals("incremental")){
 				if (defaultValue != null){
-					data = defaultValue + "_" + Integer.valueOf(index).toString();
+					data = defaultValue + "_" + Integer.valueOf(index.get(typeRef).get(property)).toString();
 				}
 				else{
 					String [] parts = property.getName().toString().split("_");
 					String propertyName = parts[parts.length-1];
-					data = propertyName.substring(0,4) + "_" + Integer.valueOf(index).toString();
+					data = propertyName.substring(0,propertyName.length()/2) + "_" + Integer.valueOf(index.get(typeRef).get(property)).toString();
 				}
 			}
 			return data;
@@ -157,8 +188,11 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			else if (dataType.equals(DataTypeDefinition.DOUBLE)){
 				randomData = generateRandomDouble();
 			}
-			else if (dataType.equals(DataTypeDefinition.DATE) || dataType.equals(DataTypeDefinition.DATETIME)){
+			else if (dataType.equals(DataTypeDefinition.DATE)){
 				randomData = generateRandomDate();
+			}
+			else if(dataType.equals(DataTypeDefinition.DATETIME)){
+				randomData = generateRandomDateTime();
 			}
 			else if (dataType.equals(DataTypeDefinition.TEXT)){
 				randomData = generateRandomString(defaultValue,property);
@@ -188,6 +222,82 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		
 	}
 	
+	public DictionaryService getService() {
+		return service;
+	}
+
+	public void setService(DictionaryService service) {
+		this.service = service;
+	}
+
+	public static Map<TypeDefinition, Integer> getIndexType() {
+		return indexType;
+	}
+
+	public static void setIndexType(Map<TypeDefinition, Integer> indexType) {
+		AlfrescoModelRandomDataGenerator.indexType = indexType;
+	}
+
+	public NativeAlfrescoModelRandomDataGenerator getNativeGenerator() {
+		return nativeGenerator;
+	}
+
+	public void setNativeGenerator(
+			NativeAlfrescoModelRandomDataGenerator nativeGenerator) {
+		this.nativeGenerator = nativeGenerator;
+	}
+
+	public static int getNumOfTypes() {
+		return numOfTypes;
+	}
+
+	public static void setNumOfTypes(int numOfTypes) {
+		AlfrescoModelRandomDataGenerator.numOfTypes = numOfTypes;
+	}
+
+	public ArrayList<Serial> getSerializedData() {
+		return serializedData;
+	}
+
+	public void setSerializedData(ArrayList<Serial> serializedData) {
+		this.serializedData = serializedData;
+	}
+
+	public static Map<TypeDefinition, Map<PropertyDefinition, Integer>> getIndex() {
+		return index;
+	}
+
+	public static void setIndex(
+			Map<TypeDefinition, Map<PropertyDefinition, Integer>> index) {
+		AlfrescoModelRandomDataGenerator.index = index;
+	}
+
+	public static TypeDefinition getTypeRef() {
+		return typeRef;
+	}
+
+	public static void setTypeRef(TypeDefinition typeRef) {
+		AlfrescoModelRandomDataGenerator.typeRef = typeRef;
+	}
+
+	public Map<TypeDefinition, Map<PropertyDefinition, Integer>> getNumOfSame() {
+		return numOfSame;
+	}
+
+	public void setNumOfSame(
+			Map<TypeDefinition, Map<PropertyDefinition, Integer>> numOfSame) {
+		this.numOfSame = numOfSame;
+	}
+
+	public Map<TypeDefinition, Map<PropertyDefinition, Object>> getSameData() {
+		return sameData;
+	}
+
+	public void setSameData(
+			Map<TypeDefinition, Map<PropertyDefinition, Object>> sameData) {
+		this.sameData = sameData;
+	}
+
 	/**
 	 * @return the dictionary
 	 */
@@ -263,7 +373,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 	}
 
 	public void setScenario(String scenario) {
-		this.scenario = scenario;
+		AlfrescoModelRandomDataGenerator.scenario = scenario;
 	}
 
 	public boolean generateNodesInstances(IStructure structure) throws Exception{
@@ -278,45 +388,53 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		}
 		Collection<TypeDefinition> deletedTargetsTypes = deleteTargetsTypesOfNotCreatedSourcesTypesOfCompositions(getSourcesTypesOfCompositionsNotCreated(createdTypes, sourcesTypesOfCompositions),compositions);
 		createdTypes.removeAll(deletedTargetsTypes);
-		Map<TypeDefinition,Integer> sameNodes = new HashMap<TypeDefinition,Integer>();
-		for (int k = 0; k < types.size(); k++){
-			sameNodes.put(((ArrayList<TypeDefinition>)types).get(k), 0);
+		
+		for (TypeDefinition type : createdTypes){
+			indexType.put(type, Integer.valueOf(0));
 		}
-		for (int i = 0; i < createdTypes.size(); i++){
-			TypeDefinition type = ((ArrayList<TypeDefinition>)createdTypes).get(i);
-			numOfTypes = countSameTypes(createdTypes,type) - sameNodes.get(type).intValue();
-			if (getUnicityProperties(type,((AlfrescoModelStructure) structure).getProperties().get(type)).isEmpty()){
-				if (scenario.equals("incremental")){
-					if (numOfTypes > 0){
-						numOfSame = RandomMethods.randomGenerator.nextInt(numOfTypes + 1);
-					}
-					else{
-						numOfSame = 0;
-					}
-				}
-				else if (scenario.equals("random")){
-					numOfSame = 1;
-				}
+		for (TypeDefinition type : createdTypes){
+			FileInputStream fis = new FileInputStream("tomcat/webapps/alfresco/WEB-INF/classes/META-INF/unicity.serial");
+			ObjectInputStream ois = null;
+			try{
+				ois = new ObjectInputStream(fis);
+				serializedData = (ArrayList<Serial>) ois.readObject();
+			} catch (EOFException e) {
+				//Nothing to do
 			}
-			else{
-				numOfSame = 1;
-			}
-			for (int j = 0; j < numOfSame; j++){
-				nodesInstances.add(((Instance)instance).instanciation(type));
-				if (j == 0){
-					sameNodes.put(type,sameNodes.get(type).intValue() + Integer.valueOf(numOfSame));
+			finally{
+				if (ois != null){
+					ois.close();
 				}
+				fis.close();
 			}
-			index++;
+			
+			typeRef = type;
+			index.put(typeRef, new HashMap<PropertyDefinition, Integer>());
+			numOfSame.put(typeRef, new HashMap<PropertyDefinition, Integer>());
+			sameData.put(typeRef, new HashMap<PropertyDefinition, Object>());
+			
+			numOfTypes = countSameTypes(createdTypes,type);
+			
+			nodesInstances.add(((Instance)instance).instanciation(type));
+			
+			Integer newValue = Integer.valueOf(indexType.get(type).intValue() + 1);
+			indexType.put(type, newValue);
+			
+			serializeData();
 		}
 		((AlfrescoModelData) alfrescoModelDatas).setGeneratedTypesInstances(nodesInstances);
+		
+		//Reinitialization because beans still exist until Alfresco be shutdown
 		PrintWriter printwriter = new PrintWriter(new FileOutputStream("tomcat/webapps/alfresco/WEB-INF/classes/META-INF/unicity.serial"));
 	    printwriter.println("");
 	    printwriter.close();
 	    numOfTypes = 0;
-	    index = 0;
-	    serializedData.clear(); //why because instance's variable ?
-	    numOfSame = 0; //
+	    index.clear();
+	    serializedData.clear();
+	    numOfSame.clear();
+	    indexType.clear();
+	    sameData.clear();
+	    
 		return true;
 	}
 
@@ -537,7 +655,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		return null;
 	}
 
-	private List<INode> getGeneratedNodesByType(TypeDefinition type){
+	public List<INode> getGeneratedNodesByType(TypeDefinition type){
 		List<INode> nodesInstances = new ArrayList<INode>();
 		Collection<INode> generatedNodes = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedTypesInstances();
 		for (INode node : generatedNodes) {
@@ -551,91 +669,115 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 
 	public Map<PropertyDefinition,Object> generateDatasProperties(TypeDefinition type, Collection<PropertyDefinition> properties) throws Exception{
 		Map<PropertyDefinition,Object> datasProperties = new HashMap<PropertyDefinition,Object>();
+		
 		Collection<PropertyDefinition> unicityProperties = getUnicityProperties(type,properties);
+		
 		Collection<PropertyDefinition> tempProperties = new ArrayList<PropertyDefinition>();
 		tempProperties.addAll(properties);
 		tempProperties.removeAll(unicityProperties);
 		for (PropertyDefinition propertyDefinition : tempProperties) {
 			datasProperties.put(propertyDefinition, generateDatasProperty(propertyDefinition));
 		}
-		for (PropertyDefinition propertyDefinition : unicityProperties) {
-			FileInputStream fis = new FileInputStream("tomcat/webapps/alfresco/WEB-INF/classes/META-INF/unicity.serial");
-			ObjectInputStream ois = null;
-			try{
-				ois = new ObjectInputStream(fis);
-				serializedData = (ArrayList<Serial>) ois.readObject();
-			} catch (EOFException e) {
-				//Nothing to do
-			}
-			finally{
-				if (ois != null){
-					ois.close();
-				}
-				fis.close();
-			}
-			datasProperties.put(propertyDefinition, generateDatasForUnicityProperty(propertyDefinition));
+		
+		Map<PropertyDefinition,Object> dataUnicityProperties = generateDataForUnicityProperties(type,unicityProperties);
+		if (dataUnicityProperties.size() > 0){
+			datasProperties.putAll(dataUnicityProperties);
 		}
+		
 		return datasProperties;
 	}
 
-	private Object generateDatasForUnicityProperty(PropertyDefinition propertyDefinition) throws Exception {
-		Object data = generateDatasProperty(propertyDefinition);
-		while (checkIfDataExists(propertyDefinition,data)){
-			index ++;
-			data = generateDatasProperty(propertyDefinition);
+	private Map<PropertyDefinition, Object> generateDataForUnicityProperties(TypeDefinition type,Collection<PropertyDefinition> unicityProperties) throws Exception {
+		Collection<Serial> dataProperties = new ArrayList<Serial>();
+		boolean same = true;
+		while (same){
+			for (PropertyDefinition propertyDefinition : unicityProperties) {
+				dataProperties.add(new Serial(type.getName().toString(),propertyDefinition.getName().toString(),generateDatasProperty(propertyDefinition)));
+			}
+			if (serializedData.size() > 0 && unicityProperties.size() > 0){
+				for (Serial dataProperty : dataProperties){
+					boolean contains = false;
+					for (Serial serializedDataProperty : serializedData){
+						if (dataProperty.getType().equals(serializedDataProperty.getType())
+							&& dataProperty.getProperty().equals(serializedDataProperty.getProperty())
+							&& dataProperty.getData().toString().equals(serializedDataProperty.getData().toString())){
+							contains = true;
+						}
+					}
+					same &= contains;
+				}
+			}
+			else{
+				same = false;
+			}
 		}
-		serializedData.add(new Serial(propertyDefinition.getName().toString(),data));
-		serializeData();
-		return data;
+		Collection<Serial> temp = new ArrayList<Serial>();
+		for (Serial dataProperty : dataProperties){
+			boolean contains = false;
+			for (Serial serializedDataProperty : serializedData){
+				if (dataProperty.getType().equals(serializedDataProperty.getType())
+					&& dataProperty.getProperty().equals(serializedDataProperty.getProperty()) 
+					&& dataProperty.getData().toString().equals(serializedDataProperty.getData().toString())){
+					contains = true;
+				}
+			}
+			if (!contains){
+				temp.add(dataProperty);
+			}
+		}
+		if (temp.size() > 0){
+			serializedData.addAll(temp);
+		}
+		Map<PropertyDefinition,Object> finalDataProperties = new HashMap<PropertyDefinition, Object>();
+		for (Serial dataProperty : dataProperties){
+			PropertyDefinition property = service.getProperty(QName.createQName(dataProperty.getProperty()));
+			finalDataProperties.put(property,dataProperty.getData());
+		}
+		return finalDataProperties;
 	}
 
+//	private Object generateDatasForUnicityProperty(PropertyDefinition propertyDefinition) throws Exception {
+//		Object data = generateDatasProperty(propertyDefinition);
+//		while (checkIfDataExists(propertyDefinition,data)){
+//			index.put(propertyDefinition, Integer.valueOf(index.get(propertyDefinition).intValue()+1));
+//			data = generateDatasProperty(propertyDefinition);
+//		}
+//		serializedData.add(new Serial(propertyDefinition.getName().toString(),data));
+//		serializeData();
+//		return data;
+//	}
+
 	private void serializeData() throws Exception {
+		PrintWriter printwriter = new PrintWriter(new FileOutputStream("tomcat/webapps/alfresco/WEB-INF/classes/META-INF/unicity.serial"));
+	    printwriter.println("");
+	    printwriter.close();
+	    
 		FileOutputStream fos = new FileOutputStream("tomcat/webapps/alfresco/WEB-INF/classes/META-INF/unicity.serial");
 		ObjectOutputStream oos= new ObjectOutputStream(fos);
-		oos.writeObject(serializedData); 
+		if (serializedData.size() > 0){
+			oos.writeObject(serializedData);
+		}
 		oos.flush();
 		oos.close();
 		fos.close();
 	}
 
-	private boolean checkIfDataExists(PropertyDefinition propertyDefinition, Object data){
-		for(int i = 0; i < serializedData.size(); i++){
-//			Object castData = null;
-//			if (data instanceof Boolean){
-//				castData = (Boolean) serializedData.get(i).bData;
+//	private boolean checkIfDataExists(PropertyDefinition propertyDefinition, Object data){
+//		for(int i = 0; i < serializedData.size(); i++){
+//			if (propertyDefinition.getName().toString().equals(serializedData.get(i).getProperty()) && data.equals(serializedData.get(i).getData())){
+//				return true;
 //			}
-//			else if (data instanceof Integer){
-//				castData = (Integer) serializedData.get(i).iData;
-//			}
-//			else if (data instanceof Long){
-//				castData = (Long) serializedData.get(i).lData;
-//			}
-//			else if (data instanceof Float){
-//				castData = (Float) serializedData.get(i).fData;
-//			}
-//			else if (data instanceof Double){
-//				castData = (Double) serializedData.get(i).dData;
-//			}
-//			else if (data instanceof String){
-//				castData = (String) serializedData.get(i).sData;
-//			}
-//			else if (data instanceof Date){
-//				castData = (Date) serializedData.get(i).dateData;
-//			}
-			if (propertyDefinition.getName().toString().equals(serializedData.get(i).getProperty()) && data.equals(serializedData.get(i).getData())){
-				return true;
-			}
-		}
-		return false;
-	}
+//		}
+//		return false;
+//	}
 
-	private Collection<PropertyDefinition> getUnicityProperties(TypeDefinition type, Collection<PropertyDefinition> properties) throws Exception{
+	private Collection<PropertyDefinition> getUnicityProperties(ClassDefinition type, Collection<PropertyDefinition> properties) throws Exception{
 		Collection<PropertyDefinition> unicityProperties = new ArrayList<PropertyDefinition>();
 		Map<QName, List<QName>> qnamedUnicityPropertiesByType = ((UnicityXMLReader) SpringContext.getContext().getBean("unicityDescriptorReader")).getUnicityDictionary();
 		List<QName> qnamedUnicityProperties = qnamedUnicityPropertiesByType.get(type.getName());
 		for (QName qnameUnicityProperty : qnamedUnicityProperties) {
 			for (PropertyDefinition property : properties){
-				if (property.getName().equals(qnameUnicityProperty)){
+				if (property.getName().equals(qnameUnicityProperty) && !unicityProperties.contains(property)){
 					unicityProperties.add(property);
 				}
 			}
@@ -644,25 +786,48 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 	}
 
 	private Object generateDatasProperty(PropertyDefinition propertyDefinition) throws Exception {
+		if (scenario.equals("incremental")){
+			if (numOfSame.get(typeRef).get(propertyDefinition) == null){
+				Integer value = Integer.valueOf(RandomMethods.randomGenerator.nextInt(numOfTypes + 1));
+				numOfSame.get(typeRef).put(propertyDefinition, value);
+				index.get(typeRef).put(propertyDefinition, Integer.valueOf(0));
+			}
+			else{
+				Integer value = Integer.valueOf(numOfSame.get(typeRef).get(propertyDefinition).intValue() - 1);
+				if (value.intValue() >= 0){
+					numOfSame.get(typeRef).put(propertyDefinition, value);
+					Integer indexValue = Integer.valueOf(index.get(typeRef).get(propertyDefinition).intValue() + 1);
+					index.get(typeRef).put(propertyDefinition, indexValue);
+				}
+				else{
+					Integer newValue = Integer.valueOf(RandomMethods.randomGenerator.nextInt(numOfTypes + 1));
+					numOfSame.get(typeRef).put(propertyDefinition, newValue);
+					index.get(typeRef).put(propertyDefinition, Integer.valueOf(0));
+				}
+			}
+		}
+		else if(scenario.equals("random")){
+			numOfSame.get(typeRef).put(propertyDefinition,Integer.valueOf(0));
+		}
 		Object randomData = new Object();
 		String defaultValue = propertyDefinition.getDefaultValue();
 		QName dataTypeOfProperty = propertyDefinition.getDataType().getName();
 		List<ConstraintDefinition> constraints = propertyDefinition.getConstraints();
-		if (constraints.size() == 1){//we suppose there is a one-to-one correspondance between property and enumeration (?)
+		if (constraints.size() == 1){//we suppose there is a one-to-one correspondance between property and enumeration
 			for (ConstraintDefinition constraint : constraints) {
 				randomData = RandomMethods.getRandomlyValue(constraint);
 			}		
 		}
 		else{
-			if (numOfSame == 1){
+			if (numOfSame.get(typeRef).get(propertyDefinition).equals(Integer.valueOf(0))){
 				randomData = RandomMethods.generateDataByDataTypeProperty(dataTypeOfProperty, defaultValue, propertyDefinition);
 			}
-			else if(numOfSame != 1 && sameData.size() == 0){
+			else if(!numOfSame.get(typeRef).get(propertyDefinition).equals(Integer.valueOf(0)) && sameData.get(typeRef).get(propertyDefinition) == null){
 				randomData = RandomMethods.generateDataByDataTypeProperty(dataTypeOfProperty, defaultValue, propertyDefinition);
-				sameData.add(randomData);
+				sameData.get(typeRef).put(propertyDefinition,randomData);
 			}
-			else if(numOfSame != 1 && sameData.size() != 0){
-				randomData = ((ArrayList<Object>)sameData).get(0);
+			else if(!numOfSame.get(typeRef).get(propertyDefinition).equals(Integer.valueOf(0)) && sameData.get(typeRef).get(propertyDefinition) != null){
+				randomData = sameData.get(typeRef).get(propertyDefinition);
 			}
 		}
 		return randomData;
