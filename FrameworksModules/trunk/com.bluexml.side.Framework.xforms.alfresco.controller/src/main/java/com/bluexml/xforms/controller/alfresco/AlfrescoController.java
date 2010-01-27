@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.ConnectException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
@@ -522,8 +523,8 @@ public class AlfrescoController {
 		if (StringUtils.trimToNull(property) != null) {
 			MAX_RESULTS = property;
 		}
-		checkFileExists(UPLOAD_DIRECTORY);
-		checkFileExists(TEMP_DIRECTORY);
+		checkDirectoryExists(UPLOAD_DIRECTORY, true);
+		checkDirectoryExists(TEMP_DIRECTORY, false);
 		ALFRESCO_URL = config.getProperty(MsgId.KEY_ALFRESCO_URL.getText());
 		ALFRESCO_XFORMS_URL = ALFRESCO_URL + "/service/xforms/";
 	}
@@ -533,11 +534,43 @@ public class AlfrescoController {
 	 * 
 	 * @param file
 	 *            the file
+	 * @param isUploadDir
 	 */
-	private void checkFileExists(File file) {
+	private void checkDirectoryExists(File file, boolean isUploadDir) {
 		if (!file.exists()) {
-			logger.error(file.getAbsolutePath() + " doesn't exist...");
-			throw new RuntimeException(new FileNotFoundException(file.getAbsolutePath()));
+			logger.error(file.getAbsolutePath() + " doesn't exist. Will try to create the path.");
+			if (file.mkdirs() == false) {
+				String dirName = isUploadDir ? "upload" : "temp";
+
+				logger.error("Couldn't create " + file.getAbsolutePath() + ". Will default to '"
+						+ dirName + "' under the webapp's current folder.");
+				// we need to create the directory under the webapp's folder
+				URL url = AlfrescoController.class.getResource("/mapping.xml");
+				File mappingFile = null; 
+				try {
+					mappingFile = new File(new URI(url.toString()));
+				} catch (URISyntaxException e) {
+					e.printStackTrace();
+				}
+				String dirPath = mappingFile.getAbsolutePath();
+				// @Amenel: I am not comfortable with the assumption about the path to mapping.xml:
+				// although true today, it may not be so in the future, depending on OS or JVM
+				// the easiest would have been to create the dirs as siblings of mapping.xml
+				dirPath = StringUtils.replace(dirPath, "/WEB-INF/classes/mapping.xml", "");
+				dirPath += File.separator + dirName;
+				boolean result;
+				if (isUploadDir) {
+					UPLOAD_DIRECTORY = new File(dirPath);
+					result = UPLOAD_DIRECTORY.mkdirs();
+				} else {
+					TEMP_DIRECTORY = new File(dirPath);
+					result = TEMP_DIRECTORY.mkdirs();
+				}
+				if (result == false) {
+					logger.error("Couldn't create directory " + dirPath
+							+ ". Uploads will not perform correctly.");
+				}
+			}
 		}
 	}
 
