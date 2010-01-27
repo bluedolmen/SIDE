@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE View Model Documentation Generator
 Bundle-SymbolicName: com.bluexml.side.View.generator.documentation;singleton:=true
-Bundle-Version: 1.0.16.v12759-20100113
+Bundle-Version: 1.0.17.v13286-20100127
 Bundle-Activator: com.bluexml.side.view.generator.documentation.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
