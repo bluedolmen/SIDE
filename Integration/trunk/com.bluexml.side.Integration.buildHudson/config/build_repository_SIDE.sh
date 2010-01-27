@@ -16,7 +16,7 @@ SIDEHOME=$WORKSPACE/../../Build_SIDE/workspace/S-IDE
 BUILDERHOME=$WORKSPACE/../buildAuto/Ankle/buildAllMaven
 POM_PATCHER=$WORKSPACE/../buildAuto/Ankle/repositoryBuilderForSIDE/target/repositoryBuilderForSIDE-0.0.1-jar-with-dependencies.jar
 POM_IN=$WORKSPACE/../../superpom/workspace/superpom/pom.xml
-MAVENREPO_ARCHIVE=$REPOSITORY_COPY/S-IDE/Util/trunk/com.bluexml.side.Util.dependencies/src/com/bluexml/side/util/dependencies/mavenRepository/m2repositoryForSIDE.zip
+MAVENREPO_ARCHIVE=$WORKSPACE/S-IDE/Util/trunk/com.bluexml.side.Util.dependencies/src/com/bluexml/side/util/dependencies/mavenRepository/m2repositoryForSIDE.zip
 
 
 # set constantes
@@ -57,7 +57,6 @@ java -jar $POM_PATCHER $SIDEHOME $POM_OUT
 mvn dependency:go-offline -P public -Dmaven.repo.local=$MAVENREPO
 cd $MAVENREPO
 
-mkdir $WORKSPACE/result
 zip -r $MAVENREPO_ARCHIVE .
 
 
