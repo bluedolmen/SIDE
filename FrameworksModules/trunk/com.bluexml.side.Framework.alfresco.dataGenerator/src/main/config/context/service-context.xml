@@ -74,6 +74,7 @@
 		 <property name="instance" ref="instance" />
 		 <property name="alfrescoModelDatas" ref="alfrescoModelData" /> 
 		 <property name="dictionary" ref="alfrescoModelDictionary" />
+		 <property name="service" ref="dictionaryService" />
 	</bean>
 	
 	<!-- data -->
@@ -84,19 +85,19 @@
 	
 	<!-- serialization -->
 	
-	<bean id="tagsConstants"
+	<!--<bean id="tagsConstants"
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.TagsConstants" 
 		  abstract="true">
 	</bean>
 	
-	<bean id="xmlForACPMappingMain" 
+	--><!--<bean id="xmlForACPMappingMain" 
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingMain" 
 		  init-method="init">
 		 <property name="alfrescoModelDatas" ref="alfrescoModelData" />
 		 <property name="mappingMethods" ref="xmlForACPMappingMethods" /> 
 	</bean>
 	
-	<bean id="xmlForACPMappingMethods"
+	--><!--<bean id="xmlForACPMappingMethods"
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingMethods" 
 		  init-method="init">
 		  <property name="tagFactory" ref="structureTagFactory" />
@@ -104,24 +105,46 @@
 		  <property name="alfrescoModelDatas" ref="alfrescoModelData" />
 	</bean>
 	
-	<bean id="structureTagFactory"
+	--><!--<bean id="structureTagFactory"
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.StructureTagFactory" 
 		  init-method="init">
 	</bean>
 	
-	<bean id="fillDataFactory"
+	--><!--<bean id="fillDataFactory"
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.FillDataFactory" 
 		  init-method="init">
 	</bean>
 	
-	<bean id="xmlForACPSerialization"
+	--><!-- <bean id="xmlForACPSerialization"
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.XMLForACPSerialization" >
 		 <property name="mainMap" ref="xmlForACPMappingMain" /> 
+	</bean>-->
+	
+	<bean id="XMLForACPMappingBuilder"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingBuilder" >
+		  <property name="helper" ref="XMLForACPMappingHelper" />
+		  <property name="alfrescoModelData" ref="alfrescoModelData" />
+	</bean>
+	
+	<bean id="XMLForACPMappingHelper"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingHelper" >
+		  <property name="builder" ref="XMLForACPMappingBuilder" />
+		  <property name="services" ref="XMLForACPMappingServices" />
+	</bean>
+	
+	<bean id="XMLForACPMappingServices"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingServices" >
+		  <property name="helper" ref="XMLForACPMappingHelper" />
+	</bean>
+	
+	<bean id="XMLForACPSerializer"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.XMLForACPSerializer" >
+		  <property name="builder" ref="XMLForACPMappingBuilder" />
 	</bean>
 	
 	<bean id="acpPackaging"
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.ACPPackaging" >
-		<property name="xmlSerializer" ref="xmlForACPSerialization" />
+		<property name="xmlSerializer" ref="XMLForACPSerializer" />
 		<property name="nativeGenerator" ref="nativeAlfrescoModelRandomDataGenerator" />  
 	</bean>
 	
@@ -147,7 +170,9 @@
     	  parent="webscript">
     	  <property name="alfrescoModelRandomGenerator" ref="alfrescoModelRandomGenerator" />
     	  <property name="alfrescoModelDictionary" ref="alfrescoModelDictionary" />
-    	  <property name="XMLForACPSerialization" ref="xmlForACPSerialization" />
+    	  <!--<property name="XMLForACPSerialization" ref="xmlForACPSerialization" />
+    	  -->
+    	  <property name="XMLForACPSerializer" ref="XMLForACPSerializer" />
     	  <property name="ACPPackaging" ref="acpPackaging" />
     	  <property name="importACP" ref="importACP" />
     	  <property name="nativeAlfrescoModelRandomDataGenerator" ref="nativeAlfrescoModelRandomDataGenerator" />
