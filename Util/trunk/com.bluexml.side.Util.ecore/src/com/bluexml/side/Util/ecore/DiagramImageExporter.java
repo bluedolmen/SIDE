@@ -13,6 +13,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -36,82 +37,90 @@ public abstract class DiagramImageExporter {
 	 * @return
 	 */
 	public boolean exportFile(IFile f, String selectedDirectory) {
-		boolean error = false;
-
-		IEditorPart editorPart = null;
-		try {
-			editorPart = IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), f, true);
-		} catch (PartInitException e) {
-			e.printStackTrace();
-			error = true; // An error occurred during the opening of the graphical editor
-		}
-		if (editorPart != null && editorPart instanceof Modeler) {
-			Modeler editor = (Modeler) editorPart;
-			GraphicalViewer viewer = (GraphicalViewer) editor
-					.getAdapter(GraphicalViewer.class);
-
-			List<Diagram> allDiagrams = DiagramsUtils.findAllDiagrams(editor
-					.getDiagrams());
-			for (Diagram d : allDiagrams) {
-				editor.setActiveDiagram(d);
-				viewer.flush();
-
-				IFigure figure = ((AbstractGraphicalEditPart) viewer
-						.getRootEditPart()).getFigure();
-				// Remove selection handles
-				((EditPart) ((AbstractGraphicalEditPart) viewer
-						.getRootEditPart()).getChildren().get(0))
-						.setSelected(EditPart.SELECTED_NONE);
-				// Store initial zoom value
-				double initialZoomValue = d.getZoom();
-				// Enforce zoom level as 100%
-				((ScalableFreeformRootEditPart) viewer.getRootEditPart())
-						.getZoomManager().setZoom(1.0);
-
-				FileOutputStream fos = null;
-				try {
-					File file = getFile(f, selectedDirectory, d.getName());
-					fos = new FileOutputStream(file);
-
-					ExporterDescriptor descriptor = getExporter(file);
-					if (descriptor != null) {
-						descriptor.getExporter().export(figure, fos);
-
-						// Remember values
-						lastExtension = descriptor.getExtension();
-					}
-
-					if (d.getSemanticModel() instanceof EMFSemanticModelBridgeImpl)
-						executeAction(file, ((EMFSemanticModelBridgeImpl) d
-								.getSemanticModel()).getElement());
-
-					fileNames.add(file.getName());
-				} catch (Exception e) {
-					error = true;
-					e.printStackTrace();
-				} finally {
-					try {
-						if (fos != null) {
-							fos.close();
-
-						}
-					} catch (IOException ioe) {
-						error = true;
-						ioe.printStackTrace();
-					}
-					// Restore initial zool level
-					d.setZoom(initialZoomValue);
-				}
-
-			}
-
-			/*
+		final IFile _f = f;
+		final String _selectedDirectory = selectedDirectory;
+		final Object[] result = new Object[1];
+		
+		Display.getDefault().syncExec(new Runnable() {
+			
+		    public void run() {
+		    	result[0] = false;
+		    	IEditorPart editorPart = null;
+		    	try {
+		    		editorPart = IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), _f, true);
+		    	} catch (PartInitException e) {
+		    		e.printStackTrace();
+		    		result[0] = true; // An error occurred during the opening of the graphical editor
+		    	}
+		    	if (editorPart != null && editorPart instanceof Modeler) {
+		    		Modeler editor = (Modeler) editorPart;
+		    		GraphicalViewer viewer = (GraphicalViewer) editor
+		    		.getAdapter(GraphicalViewer.class);
+		    		
+		    		List<Diagram> allDiagrams = DiagramsUtils.findAllDiagrams(editor
+		    				.getDiagrams());
+		    		for (Diagram d : allDiagrams) {
+		    			editor.setActiveDiagram(d);
+		    			viewer.flush();
+		    			
+		    			IFigure figure = ((AbstractGraphicalEditPart) viewer
+		    					.getRootEditPart()).getFigure();
+		    			// Remove selection handles
+		    			((EditPart) ((AbstractGraphicalEditPart) viewer
+		    					.getRootEditPart()).getChildren().get(0))
+		    					.setSelected(EditPart.SELECTED_NONE);
+		    			// Store initial zoom value
+		    			double initialZoomValue = d.getZoom();
+		    			// Enforce zoom level as 100%
+		    			((ScalableFreeformRootEditPart) viewer.getRootEditPart())
+		    			.getZoomManager().setZoom(1.0);
+		    			
+		    			FileOutputStream fos = null;
+		    			try {
+		    				File file = getFile(_f, _selectedDirectory, d.getName());
+		    				fos = new FileOutputStream(file);
+		    				
+		    				ExporterDescriptor descriptor = getExporter(file);
+		    				if (descriptor != null) {
+		    					descriptor.getExporter().export(figure, fos);
+		    					
+		    					// Remember values
+		    					lastExtension = descriptor.getExtension();
+		    				}
+		    				
+		    				if (d.getSemanticModel() instanceof EMFSemanticModelBridgeImpl)
+		    					executeAction(file, ((EMFSemanticModelBridgeImpl) d
+		    							.getSemanticModel()).getElement());
+		    				
+		    				fileNames.add(file.getName());
+		    			} catch (Exception e) {
+		    				result[0] = true;
+		    				e.printStackTrace();
+		    			} finally {
+		    				try {
+		    					if (fos != null) {
+		    						fos.close();
+		    						
+		    					}
+		    				} catch (IOException ioe) {
+		    					result[0] = true;
+		    					ioe.printStackTrace();
+		    				}
+		    				// Restore initial zool level
+		    				d.setZoom(initialZoomValue);
+		    			}
+		    			
+		    		}
+		    		
+		    		/*
 			ep = page.findEditor(input);
 			page.closeEditor(ep, true);
-			*/
-		}
+		    		 */
+		    	}
+		    }
+		});
 
-		return error;
+		return Boolean.valueOf(result[0].toString());
 	}
 
 	public List<String> getFileNames() {
