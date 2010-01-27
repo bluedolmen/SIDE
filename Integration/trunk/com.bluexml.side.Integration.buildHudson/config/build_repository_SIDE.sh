@@ -57,6 +57,11 @@ java -jar $POM_PATCHER $SIDEHOME $POM_OUT
 mvn dependency:go-offline -P public -Dmaven.repo.local=$MAVENREPO
 cd $MAVENREPO
 
+if [ -f $MAVENREPO_ARCHIVE ] ; then
+	rm $MAVENREPO_ARCHIVE	
+fi
+
+
 zip -r $MAVENREPO_ARCHIVE .
 
 
