@@ -128,12 +128,21 @@ public class Application {
 			//System.out.println("\nCommit des modifications sur le r�pository...");
 			//execBuild("buildSVN", "svnCommit");
 //		}
+			
+			//create maven work folder and launch maven deploy
+			launchShScript("launch_maven.sh");
+			
+			//launch script to build repository zip file
+			launchShScript("build_repository_SIDE.sh");
 
 		if (parametre) {
 			// copie du r�pository dans le repertoire de travail (en s�parant
 			// les plugins et les features)
 			Utils.preTraitement();
 		}
+		
+		
+		
 		
 		// cr�ation du build.xml
 		System.out.println("\n\n- Cr�ation de " + Utils.getBuildPath()
@@ -158,11 +167,7 @@ public class Application {
 			}
 		}
 		
-		//create maven work folder and launch maven deploy
-		launchShScript("launch_maven.sh");
 		
-		//launch script to build repository zip file
-		launchShScript("build_repository_SIDE.sh");
 		
 		
 		execBuild("build", "build");
