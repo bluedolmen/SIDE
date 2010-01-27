@@ -159,10 +159,10 @@ public class Application {
 		}
 		
 		//create maven work folder and launch maven deploy
-		launchMavenDeploy();
+		launchShScript("launch_maven.sh");
 		
 		//launch script to build repository zip file
-		
+		launchShScript("build_repository_SIDE.sh");
 		
 		
 		execBuild("build", "build");
@@ -193,17 +193,17 @@ public class Application {
 	
 	
 	/**
-	 * M�thode qui execute lance la tache maven deploy
-	 * fichier de log est cr�e: log_maven.txt
-	 * @throws IOException 
+	 * M�thode qui execute lance un script sh
 	 * 
+	 * @param script
+	 * 					nom du script
 	 * 
 	 *          
 	 * 
 	 *            
 	 * 
 	 */
-	private static void launchMavenDeploy()  {
+	private static void launchShScript(String script)  {
 		
 			
 		Runtime r = Runtime.getRuntime();
@@ -215,9 +215,9 @@ public class Application {
 	    	
 	 
 	    String SIDE_path=Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
-    	System.out.println("."+Utils.getBuildPath() + File.separator+"launch_maven.sh "+workspace+ " "+SIDE_path);
+    	System.out.println("."+Utils.getBuildPath() + File.separator+script+" "+workspace+ " "+SIDE_path);
     
-    	p = r.exec(Utils.getBuildPath() + File.separator+"launch_maven.sh "+workspace+ " "+SIDE_path);
+    	p = r.exec(Utils.getBuildPath() + File.separator+script+" "+workspace+ " "+SIDE_path);
 
 	    
 	    is = new BufferedReader(new InputStreamReader(p.getInputStream()));
