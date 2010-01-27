@@ -128,6 +128,7 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		return datasProperties;
 	}
 	private Object fillNativeDataProperty(QNamePattern property, TypeDefinition type) {
+		
 		Object data = new Object();
 		if (((QName) property).equals(ContentModel.PROP_CONTENT)){
 			data = generateUrl(type);
@@ -151,6 +152,7 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 			data = generateDBID();
 		}
 		return data;
+		
 	}
 	
 	private Object generateDBID() {
@@ -180,7 +182,12 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 			String[] parts = qName.split("}");
 			name = parts[parts.length-1];
 		}
-		name += "_" + randomGenerator.nextInt();
+		if (generator.getScenario().equals("random")){
+			name += "_" + randomGenerator.nextInt();
+		}
+		else if (generator.getScenario().equals("incremental")){
+			name += "_" + AlfrescoModelRandomDataGenerator.getIndexType().get(type).toString();
+		}
 		return name;
 	}
 	
