@@ -13,8 +13,8 @@ fi
 
 # configuration
 SIDEHOME=$WORKSPACE/../../Build_SIDE/workspace/S-IDE
-BUILDERHOME=$WORKSPACE/buildAllMaven
-POM_PATCHER=$WORKSPACE/repositoryBuilderForSIDE/target/repositoryBuilderForSIDE-0.0.1-jar-with-dependencies.jar
+BUILDERHOME=$WORKSPACE/../buildAuto/Ankle/buildAllMaven
+POM_PATCHER=$WORKSPACE/../buildAuto/Ankle/repositoryBuilderForSIDE/target/repositoryBuilderForSIDE-0.0.1-jar-with-dependencies.jar
 POM_IN=$WORKSPACE/../../superpom/workspace/superpom/pom.xml
 MAVENREPO_ARCHIVE=$REPOSITORY_COPY/S-IDE/Util/trunk/com.bluexml.side.Util.dependencies/src/com/bluexml/side/util/dependencies/mavenRepository/m2repositoryForSIDE.zip
 
@@ -37,7 +37,8 @@ echo MAVENREPO_ARCHIVE=$MAVENREPO_ARCHIVE
 echo ==================
 
 
-cd $WORKSPACE/repositoryBuilderForSIDE
+cp -R $WORKSPACE/SIDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE $WORKSPACE/../buildAuto/Ankle/
+cd $WORKSPACE/../buildAuto/Ankle/repositoryBuilderForSIDE
 mvn package
 
 cd $WORKSPACE
