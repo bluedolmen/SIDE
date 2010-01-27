@@ -2,6 +2,7 @@
 <%
 metamodel http://www.bluexml.com/rwm/documentation/1.0/
 import interpretation.documentation.generation.opendocument.content_chapter
+import com.bluexml.side.requirements.generator.services.DocumentationServices
 %>
 
 <%script type="Documentation.Book" name="content_book" file="cdc/content.xml"%>

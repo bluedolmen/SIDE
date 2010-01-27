@@ -2,6 +2,7 @@ package com.bluexml.side.requirements.generator;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,9 +21,14 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
+
+import com.bluexml.side.Util.ecore.DiagramImageExporter;
+import com.bluexml.side.Util.ecore.export.JPEGExporter;
+import com.bluexml.side.requirements.generator.services.DocumentationServices;
 
 public class DocumentationGenerator extends RequirementsGenerator {
 
@@ -132,5 +138,31 @@ public class DocumentationGenerator extends RequirementsGenerator {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	@Override
+	public Collection<IFile> generate(IFile model) throws Exception {
+		DocumentationServices.setModelName(model.getName());
+
+		// Check if there is a diagram file :
+		IFile diag = model.getParent().getFile(new Path(model.getName()+"di"));
+		if (diag.exists()) {
+			// If one generate image for each diagram :
+			DiagramImageExporter diagExporter = new JPEGExporter();
+			// TODO : add to result[]
+			String pathName = getTemporarySystemFolder() + File.separator + "cdc" + File.separator + "Pictures" + File.separator;
+			File f = new File(pathName);
+			f.mkdirs();
+			diagExporter.exportFile(diag, pathName);
+			// Add fileName to list (to include it in generation)
+			List<String> diagImgFileName = diagExporter.getFileNames();
+			for (String name : diagImgFileName) {
+				DocumentationServices.addDiagImgPath(name);
+			}
+		}
+		
+		model.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
+		Collection<IFile> result = super.generate(model);
+		return result;
 	}
 }

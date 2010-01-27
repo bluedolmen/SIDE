@@ -11,6 +11,7 @@
 			<fileset dir='${generated_dir}${file.separator}cdc'>
 				<include name='**/*.xml' />
 				<include name='mimetype' />
+				<include name='**/*.jpg' />
 			</fileset>
 		</jar>
 		<!-- Delete generated files -->

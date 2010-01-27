@@ -127,11 +127,13 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 		IFolder targetFolder = myWorkspaceRoot.getFolder(new Path(getTemporaryFolder()));
 		if (targetFolder.exists()) {
 			for (File f : targetFolder.getRawLocation().toFile().listFiles()) {
-				String ext = f.getName().substring(f.getName().lastIndexOf('.'));
-				if (getExtensionsForServices().contains(ext)) {
-					String url = f.getAbsolutePath();
-					url = url.replaceAll(" ", "%20");
-					monitor.getLog().addServiceLog("Generated document",f.getName(), url);
+				if (f.getName().contains(".")) {
+					String ext = f.getName().substring(f.getName().lastIndexOf('.'));
+					if (getExtensionsForServices().contains(ext)) {
+						String url = f.getAbsolutePath();
+						url = url.replaceAll(" ", "%20");
+						monitor.getLog().addServiceLog("Generated document",f.getName(), url);
+					}
 				}
 			}
 		}
