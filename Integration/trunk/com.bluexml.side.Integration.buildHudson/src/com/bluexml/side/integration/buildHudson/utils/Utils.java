@@ -482,7 +482,7 @@ public class Utils {
 	public static void findFile(File f,String s)
 	{
 		boolean stopfind=false;
-		if(f.getName().equals(s)&& !(f.getPath().indexOf("src")>-1)){
+		if(f.getName().equals(s)&& !(f.getPath().indexOf("src")>-1)&& !(f.getPath().indexOf("config")>-1)){
 			
 			listefichierpom.add(f.getPath());
 			stopfind=true;
