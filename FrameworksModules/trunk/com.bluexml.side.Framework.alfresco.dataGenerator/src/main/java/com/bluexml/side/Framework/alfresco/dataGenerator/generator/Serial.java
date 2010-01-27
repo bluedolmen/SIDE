@@ -6,9 +6,16 @@ public class Serial implements Serializable {
 
 	private static final long serialVersionUID = 4980443534822014010L;
 	
+	private String type;
 	private String property;
 	private Object data;
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getProperty() {
 		return property;
 	}
@@ -22,7 +29,8 @@ public class Serial implements Serializable {
 		this.data = data;
 	}
 	
-	public Serial(String property,Object data){
+	public Serial(String type,String property,Object data){
+		this.type = type;
 		this.property = property;
 		this.data = data;
 	}
