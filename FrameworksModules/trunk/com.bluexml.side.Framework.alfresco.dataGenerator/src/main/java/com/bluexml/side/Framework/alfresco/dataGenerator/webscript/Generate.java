@@ -24,7 +24,7 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.generator.AlfrescoModel
 import com.bluexml.side.Framework.alfresco.dataGenerator.generator.NativeAlfrescoModelRandomDataGenerator;
 import com.bluexml.side.Framework.alfresco.dataGenerator.load.ImportACP;
 import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.ACPPackaging;
-import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.XMLForACPSerialization;
+import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.XMLForACPSerializer;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
 
 /**
@@ -32,7 +32,9 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
  *
  */
 public class Generate extends DeclarativeWebScript {
+	
 	private static Log logger = LogFactory.getLog(Generate.class);
+	
 	//parameters names (cf fillparameters.get.html.ftl)
 	private static final String MODEL_PARAMETER_NAME = "model";
 	private static final String NUMBER_OF_CONTENTS_PARAMETER_NAME ="numOfInstances";
@@ -47,7 +49,10 @@ public class Generate extends DeclarativeWebScript {
 	private Map<String,Object> model = new HashMap<String, Object>();
 
 	@Override
-	protected Map<String, Object> executeImpl(WebScriptRequest req,Status status, Cache cache) {		
+	protected Map<String, Object> executeImpl(WebScriptRequest req,Status status, Cache cache) {
+		
+		model.clear();
+		
 		//get and fill generator parameters
 		String numOfContentsParameterValue = req.getParameter(NUMBER_OF_CONTENTS_PARAMETER_NAME);
 		String numOfOutPutArcsParameterValue = req.getParameter(NUMBER_OF_OUTPUT_ARCS_PARAMETER_NAME);
@@ -88,18 +93,18 @@ public class Generate extends DeclarativeWebScript {
 		try {
 			if (generated){
 				generator.generateArcsInstances(structure);
+				generator.deleteExceededNodes();
 			}
 		} catch (Exception e1) {
 			model.put("error", e1);
 			logger.error("Error :", e1);
 		}
-		generator.deleteExceededNodes();
 		
 		//serialize xml for acp
 		serializer.setFileName(XML_FILE_NAME);
 		try {
 			serializer.serializeXml();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			model.put("error", e);
 			logger.error("Error :", e);
 		}
@@ -152,7 +157,7 @@ public class Generate extends DeclarativeWebScript {
 	
 	AlfrescoModelRandomDataGenerator generator = null;
 	AlfrescoModelDictionary dictionary = null;
-	XMLForACPSerialization serializer = null;
+	XMLForACPSerializer serializer = null;
 	ACPPackaging packager = null;
 	ImportACP importer = null;
 	NativeAlfrescoModelRandomDataGenerator nativeGenerator = null;
@@ -165,7 +170,7 @@ public class Generate extends DeclarativeWebScript {
 		dictionary = dictionary_;
 	}
 	
-	public void setXMLForACPSerialization (XMLForACPSerialization serializer_) {
+	public void setXMLForACPSerializer (XMLForACPSerializer serializer_) {
 		serializer = serializer_;
 	}
 	
