@@ -192,6 +192,8 @@
           <directoryName>${project.build.sourceDirectory}</directoryName>
           <clearOutputDir>false</clearOutputDir>
           <outputDirectory>${project.build.sourceDirectory}</outputDirectory>
+          <!-- Do not validate the schemas -->
+          <nv>true</nv>
           <!-- Suppress package info annotation, otherwise each build would mark the working copy as dirty (SVN-wise) -->
           <arguments>-no-header</arguments>
           <target>2.0</target>
