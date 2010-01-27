@@ -12,7 +12,7 @@ else
 fi
 
 # configuration
-SIDEHOME=$WORKSPACE/../../Build_SIDE/workspace/S-IDE
+SIDEHOME=$WORKSPACE/S-IDE
 BUILDERHOME=$WORKSPACE/../buildAuto/Ankle/buildAllMaven
 POM_PATCHER=$WORKSPACE/../buildAuto/Ankle/repositoryBuilderForSIDE/target/repositoryBuilderForSIDE-0.0.1-jar-with-dependencies.jar
 POM_IN=$WORKSPACE/../../superpom/workspace/superpom/pom.xml
