@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.bluexml</groupId>
 		<artifactId>superpom</artifactId>
-		<version>1.7</version>
+		<version>1.10</version>
 	</parent>
 	<groupId>com.bluexml.side.Form</groupId>
 	<artifactId>XFormsUtils</artifactId>
