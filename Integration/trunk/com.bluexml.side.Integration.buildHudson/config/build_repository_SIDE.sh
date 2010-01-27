@@ -37,7 +37,7 @@ echo MAVENREPO_ARCHIVE=$MAVENREPO_ARCHIVE
 echo ==================
 
 
-cp -R $WORKSPACE/SIDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE $WORKSPACE/../buildAuto/Ankle/
+cp -R $WORKSPACE/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE $WORKSPACE/../buildAuto/Ankle/
 cd $WORKSPACE/../buildAuto/Ankle/repositoryBuilderForSIDE
 mvn package
 
