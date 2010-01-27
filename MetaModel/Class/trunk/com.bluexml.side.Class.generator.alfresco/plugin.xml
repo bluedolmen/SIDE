@@ -44,7 +44,7 @@
               <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.30" versionMax="1.0.30" />
             </option>
             <option documentation="Generates random data regarding the current Alfresco model. The generated ACP can be imported and reused accross various Alfresco installations." key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator" label="Alfresco Random Data Generator">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.29" versionMax="1.0.29" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.30" versionMax="1.0.30" />
             </option>
             <option defaultOption="false" documentation="additional module to check if created/updated items already exists, in this case the update or creation is forbidden" key="alfresco.unicity" label="Content Type Unicity">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.8" versionMax="1.0.8" />
