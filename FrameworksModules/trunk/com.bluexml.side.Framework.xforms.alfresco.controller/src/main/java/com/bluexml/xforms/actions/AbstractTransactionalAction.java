@@ -1,6 +1,7 @@
 package com.bluexml.xforms.actions;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
@@ -29,8 +30,8 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 			prepareSubmit();
 			transaction.executeBatch();
 
-			// all went OK, we may delete the temporary file if any
-			deleteUploadedFile(transaction.getTempFileName(), true);
+			// all went OK, we may delete the temporary files if any
+			deleteUploadedFiles(transaction.getTempFileNames(), true);
 			// update the status message
 			if (getActionName() == MsgId.INT_ACT_CODE_SUBMIT.getText()) {
 				if (curPage.getDataId() == null) {
@@ -43,7 +44,7 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 			}
 		} catch (Exception e) {
 			if (getActionName() == MsgId.INT_ACT_CODE_SUBMIT.getText()) {
-				deleteUploadedFile(transaction.getUploadedFileName(), false);
+				deleteUploadedFiles(transaction.getUploadedFileNames(), false);
 				if (curPage.getDataId() == null) {
 					navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_CREATE_FAILURE));
 				} else {
@@ -63,8 +64,8 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 	/**
 	 * Deletes the uploaded or temporary file.
 	 */
-	private void deleteUploadedFile(String fileName, boolean isTemporary) { // #1278
-		if (fileName != null) {
+	private void deleteUploadedFiles(List<String> list, boolean isTemporary) { // #1278
+		for (String fileName : list) {
 			try {
 				File sourceFile = new File(fileName);
 				File parent = sourceFile.getParentFile();
@@ -73,7 +74,8 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 					return;
 				}
 				sourceFile.delete();
-				// we need as many parent.delete()'s as the number of characters in randomPath in
+				// we need as many parent.delete()'s as the number of characters in randomPath
+				// in
 				// AlfrescoController.findNewName
 				parent.delete();
 				parent = parent.getParentFile();

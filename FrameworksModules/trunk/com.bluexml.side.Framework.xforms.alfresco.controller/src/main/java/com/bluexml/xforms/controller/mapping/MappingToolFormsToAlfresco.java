@@ -68,12 +68,12 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 */
 	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
 			Node formNode) throws AlfrescoControllerException, ServletException {
-		Element element = getRootElement(formName, formNode);
+		Element rootElt = getRootElement(formName, formNode);
 
 		VirtualResolver virtualResolver = new VirtualResolver(this);
-		virtualResolver.prepareXFormsToAlfresco(element, formName);
+		virtualResolver.prepareXFormsToAlfresco(rootElt, formName);
 
-		GenericClass result = persistFormElement(transaction, formName, element);
+		GenericClass result = persistFormElement(transaction, formName, rootElt);
 
 		// if applicable, append an attribute that will keep info about the node content
 		Element nodeContentElt = DOMUtil.getChild(formNode, MsgId.INT_INSTANCE_SIDE_NODE_CONTENT
@@ -165,7 +165,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 		ClassType realClass = formType.getRealClass();
 		String packageName = realClass.getPackage();
 		String rootPackage = packageName.substring(0, packageName.indexOf('.'));
-		String namespace = MsgId.INT_BLUEXML_NAMESPACE_CLASS.getText() + rootPackage + "/1.0";
+		String namespace = MsgId.INT_NAMESPACE_BLUEXML_CLASS + "/" + rootPackage + "/1.0";
 
 		buf.append("{"); // open JSON string
 
@@ -211,7 +211,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 *            the login
 	 * @param formName
 	 *            the form name
-	 * @param element
+	 * @param rootElt
 	 *            the element
 	 * 
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
@@ -221,7 +221,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @throws ServletException
 	 */
 	private GenericClass persistFormElement(AlfrescoTransaction transaction, String formName,
-			Element element) throws AlfrescoControllerException, ServletException {
+			Element rootElt) throws AlfrescoControllerException, ServletException {
 
 		GenericClass alfClass = alfrescoObjectFactory.createGenericClass();
 		alfClass.setAttributes(alfrescoObjectFactory.createGenericAttributes());
@@ -232,25 +232,25 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 		if (formType != null) {
 			ClassType classType = getClassType(formType.getRealClass());
 
-			List<Element> children = DOMUtil.getAllChildren(element);
+			List<Element> children = DOMUtil.getAllChildren(rootElt);
 			String elementId = xformsIdToAlfresco(children);
 
 			alfClass.setQualifiedName(classType.getAlfrescoName());
 
 			if (elementId != null) {
 				alfClass.setId(elementId);
-				collectAssocsToClear(transaction, element, formType, classType, alfClass);
+				collectAssocsToClear(transaction, rootElt, formType, classType, alfClass);
 			}
 
-			collectFields(element, formType.getField(), alfClass);
-			collectAssocs(transaction, element, formType.getModelChoice(), formType.getReference(),
+			collectFields(formName, rootElt, formType.getField(), alfClass);
+			collectAssocs(transaction, rootElt, formType.getModelChoice(), formType.getReference(),
 					alfClass);
 		} else {
 			// dealing with a Form Workflow
 			WorkflowTaskType taskType = getWorkflowTaskType(formName, false);
-			collectFields(element, taskType.getField(), alfClass);
+			collectFields(formName, rootElt, taskType.getField(), alfClass);
 			// change the references list if references become supported in FormWorkflow's
-			collectAssocs(transaction, element, taskType.getModelChoice(),
+			collectAssocs(transaction, rootElt, taskType.getModelChoice(),
 					new ArrayList<ReferenceType>(), alfClass);
 		}
 		return alfClass;
@@ -496,75 +496,87 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	/**
 	 * Collect fields.
 	 * 
-	 * @param element
-	 *            the element
+	 * @param formName
+	 *            the name of the current form, used for messages.
+	 * @param rootElt
+	 *            the root element of the instance
 	 * @param formType
 	 *            the form type
 	 * @param classType
 	 *            the class type
 	 * @param alfClass
-	 *            the alf class
+	 *            the GenericClass to be filled
 	 */
-	// private void collectFields(Element element, FormType formType,
-	// GenericClass alfClass) {
-	// List<FormFieldType> fields = formType.getField();
-	private void collectFields(Element element, List<FormFieldType> fields, GenericClass alfClass) {
+	private void collectFields(String formName, Element rootElt, List<FormFieldType> fields,
+			GenericClass alfClass) {
 		for (FormFieldType fieldType : fields) {
-			Element fieldElement = DOMUtil.getChild(element, fieldType.getUniqueName());
-			if (fieldElement != null) {
-
-				GenericAttribute attribute = alfrescoObjectFactory.createGenericAttribute();
-				String alfrescoName = fieldType.getAlfrescoName();
-				attribute.setQualifiedName(alfrescoName);
-				String type = fieldType.getType();
-				String inputTextContent = fieldElement.getTextContent();
-				boolean readOnly = fieldType.isReadOnly();
-				if (logger.isTraceEnabled()) {
-					logger.debug("Received value '" + inputTextContent + "' for attribute '"
-							+ alfrescoName + "' with type '" + type + "'. Read-only status '"
-							+ readOnly + "'. isFileField: " + (fieldType instanceof FileFieldType)
-							+ " . isServletRequest: N/A");
-				}
-				// mark FileField's with their destination
-				if (fieldType instanceof FileFieldType) {
-					FileFieldType fileField = (FileFieldType) fieldType;
-					String destination = fileField.isInRepository() ? "repository" : "filesystem";
-					attribute.setUploadTo(destination);
-				}
-				if (fieldType.isMultiple()) {
-					convertXformsAttributeToAlfresco(attribute, inputTextContent, type,
-							fieldType.getStaticEnumType());
-				} else {
-					String alfrescoValue = null;
-					if (isAmendable(type, fieldType.isReadOnly(), false)) {
-						inputTextContent = getReadOnlyDateOrTimeModifiedValue(type,
-								inputTextContent);
-					}
-					if (type.equals("DateTime")) {
-						String date;
-						String time;
-						if (fieldType.isReadOnly()) {
-							date = extractDateFromDateTimeModified(inputTextContent);
-							time = extractTimeFromDateTimeModified(inputTextContent);
-						} else {
-							date = DOMUtil.getChild(fieldElement, "date").getTextContent();
-							time = DOMUtil.getChild(fieldElement, "time").getTextContent();
-						}
-						alfrescoValue = getDateTimeFromDateAndTime(date, time);
-					} else if (fieldType.isSearchEnum()) {
-						alfrescoValue = DOMUtil.getChild(fieldElement, "BXDSID").getTextContent();
-					} else {
-						String rawFieldValue = inputTextContent;
-						alfrescoValue = convertXformsAttributeToAlfresco(rawFieldValue, type,
-								fieldType.getStaticEnumType());
-					}
-					ValueType valueType = alfrescoObjectFactory.createValueType();
-					valueType.setValue(alfrescoValue);
-					attribute.getValue().add(valueType);
-				}
-
-				alfClass.getAttributes().getAttribute().add(attribute);
+			String uniqueName = fieldType.getUniqueName();
+			String alfrescoName = fieldType.getAlfrescoName();
+			Element fieldElement = DOMUtil.getChild(rootElt, uniqueName);
+			if (fieldElement == null) {
+				throw new RuntimeException("No DOM element was found in the instance for field: "
+						+ uniqueName + "' (" + alfrescoName
+						+ "). Probably another form has the same id as this one ('" + formName
+						+ "') or there's a bug in the XForms engine.");
 			}
+
+			//
+			GenericAttribute attribute = alfrescoObjectFactory.createGenericAttribute();
+			attribute.setQualifiedName(alfrescoName);
+			String type = fieldType.getType();
+			String inputTextContent = fieldElement.getTextContent();
+			boolean readOnly = fieldType.isReadOnly();
+			if (logger.isTraceEnabled()) {
+				logger.debug("Received value '" + inputTextContent + "' for attribute '"
+						+ alfrescoName + "' with type '" + type + "'. Read-only status '"
+						+ readOnly + "'. isFileField: " + (fieldType instanceof FileFieldType)
+						+ " . isServletRequest: N/A");
+			}
+
+			//
+			// mark FileField's with their destination. Useful for the webscript.
+			if (fieldType instanceof FileFieldType) {
+				FileFieldType fileField = (FileFieldType) fieldType;
+				String destination = fileField.isInRepository() ? MsgId.INT_UPLOAD_DEST_REPO
+						.getText() : MsgId.INT_UPLOAD_DEST_FILE.getText();
+				attribute.setUploadTo(destination);
+			}
+
+			//
+			// convert the XForms field value to an attribute (possibly multiple) value
+			if (fieldType.isMultiple()) {
+				convertXformsAttributeToAlfresco(attribute, inputTextContent, type, fieldType
+						.getStaticEnumType());
+			} else {
+				String alfrescoValue = null;
+				// if applicable, take the user format into account
+				if (isAmendable(type, fieldType.isReadOnly(), false)) {
+					inputTextContent = getReadOnlyDateOrTimeModifiedValue(type, inputTextContent);
+				}
+				if (type.equals("DateTime")) {
+					String date;
+					String time;
+					if (readOnly) {
+						date = extractDateFromDateTimeModified(inputTextContent);
+						time = extractTimeFromDateTimeModified(inputTextContent);
+					} else {
+						date = DOMUtil.getChild(fieldElement, "date").getTextContent();
+						time = DOMUtil.getChild(fieldElement, "time").getTextContent();
+					}
+					alfrescoValue = getDateTimeFromDateAndTime(date, time);
+				} else if (fieldType.isSearchEnum()) {
+					alfrescoValue = DOMUtil.getChild(fieldElement,
+							MsgId.INT_INSTANCE_SIDEID.getText()).getTextContent();
+				} else {
+					alfrescoValue = convertXformsAttributeToAlfresco(inputTextContent, type,
+							fieldType.getStaticEnumType());
+				}
+				ValueType valueType = alfrescoObjectFactory.createValueType();
+				valueType.setValue(alfrescoValue);
+				attribute.getValue().add(valueType);
+			}
+
+			alfClass.getAttributes().getAttribute().add(attribute);
 		}
 	}
 
@@ -608,7 +620,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			String name = contentAttribute.getValue().get(1).getValue();
 			String type = contentAttribute.getValue().get(2).getValue();
 
-			return new RepoContentInfoBean(path, name, type);
+			return new RepoContentInfoBean(path, name, type, contentAttribute);
 		}
 		return null;
 	}

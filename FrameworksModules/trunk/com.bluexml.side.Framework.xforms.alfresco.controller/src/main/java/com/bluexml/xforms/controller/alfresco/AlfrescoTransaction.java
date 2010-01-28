@@ -1,5 +1,6 @@
 package com.bluexml.xforms.controller.alfresco;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -29,10 +30,11 @@ public class AlfrescoTransaction {
 	/** the name of the form's */
 	private String formId = null; // #1212
 
-	/** the name of the uploaded file in the file store, so that it can be removed in case of error */
-	private String uploadedFileName = null; // #1278
-	/** the name of the temporary file for the upload, so that it can be removed in case of success */
-	private String tempFileName = null; // #1278
+	/** name(s) of uploaded file(s) in the file store, to be deleted in case of error */
+	private ArrayList<String> uploadedFileNames = null; // #1278
+
+	/** name(s) of temporary file(s) for the upload, to be deleted in case of success */
+	private ArrayList<String> tempFileNames = null; // #1278
 
 	public AlfrescoTransaction(AlfrescoController alfrescoController) {
 		super();
@@ -159,33 +161,39 @@ public class AlfrescoTransaction {
 	}
 
 	/**
+	 * @return the tempFileName
+	 */
+	public ArrayList<String> getTempFileNames() {
+		return tempFileNames;
+	}
+
+	/**
 	 * @return the uploadedFileName
 	 */
-	public String getUploadedFileName() {
-		return uploadedFileName;
+	public ArrayList<String> getUploadedFileNames() {
+		return uploadedFileNames;
 	}
 
 	/**
 	 * @param uploadedFileName
 	 *            the uploadedFileName to set
 	 */
-	public void setUploadedFileName(String uploadedFileName) {
-		this.uploadedFileName = uploadedFileName;
+	public void registerUploadedFileName(String uploadedFileName) {
+		if (uploadedFileNames == null) {
+			uploadedFileNames = new ArrayList<String>();
+		}
+		this.uploadedFileNames.add(uploadedFileName);
 	}
 
 	/**
 	 * @param tempFileName
 	 *            the tempFileName to set
 	 */
-	public void setTempFileName(String tempFileName) {
-		this.tempFileName = tempFileName;
-	}
-
-	/**
-	 * @return the tempFileName
-	 */
-	public String getTempFileName() {
-		return tempFileName;
+	public void registerTempFileName(String tempFileName) {
+		if (tempFileNames == null) {
+			tempFileNames = new ArrayList<String>();
+		}
+		this.tempFileNames.add(tempFileName);
 	}
 
 }

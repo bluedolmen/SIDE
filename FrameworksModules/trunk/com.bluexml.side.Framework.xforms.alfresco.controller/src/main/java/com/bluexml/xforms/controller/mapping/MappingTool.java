@@ -15,6 +15,7 @@ import com.bluexml.xforms.controller.binding.ClassType;
 import com.bluexml.xforms.controller.binding.EnumType;
 import com.bluexml.xforms.controller.binding.FormFieldType;
 import com.bluexml.xforms.controller.binding.FormType;
+import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.ModelChoiceType;
@@ -26,6 +27,7 @@ import org.w3c.dom.Node;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class MappingTool.<br>
@@ -102,9 +104,29 @@ public class MappingTool {
 	 * @throws AlfrescoControllerException
 	 *             the alfresco controller exception
 	 */
-	public String getFileContentFileName(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws AlfrescoControllerException {
-		return mappingToolImplXFormsToAlfresco.getFileContentFileName(transaction, alfClass);
+	public List<RepoContentInfoBean> getUploadBeansFilesystem(AlfrescoTransaction transaction,
+			GenericClass alfClass) throws AlfrescoControllerException {
+		return mappingToolImplXFormsToAlfresco.getFileUploadBeans(transaction, alfClass,
+				MsgId.INT_UPLOAD_DEST_FILE.getText(), MsgId.INT_UPLOAD_SUFFIX_FILE.getText());
+	}
+
+	/**
+	 * Gets the beans containing info for repository contents.
+	 * 
+	 * @param transaction
+	 *            the login
+	 * @param alfClass
+	 *            the alf class
+	 * 
+	 * @return the bean, or null if no repository content file exists in the class
+	 * 
+	 * @throws AlfrescoControllerException
+	 *             the alfresco controller exception
+	 */
+	public List<RepoContentInfoBean> getUploadBeansRepo(AlfrescoTransaction transaction,
+			GenericClass alfClass) throws AlfrescoControllerException {
+		return mappingToolImplXFormsToAlfresco.getFileUploadBeans(transaction, alfClass,
+				MsgId.INT_UPLOAD_DEST_REPO.getText(), null);
 	}
 
 	/**
@@ -126,24 +148,6 @@ public class MappingTool {
 	}
 
 	/**
-	 * Gets the repository content info.
-	 * 
-	 * @param transaction
-	 *            the login
-	 * @param alfClass
-	 *            the alf class
-	 * 
-	 * @return the bean, or null if no repository content file exists in the class
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
-	 */
-	public RepoContentInfoBean getRepoContentInfo(AlfrescoTransaction transaction,
-			GenericClass alfClass) throws AlfrescoControllerException {
-		return mappingToolImplXFormsToAlfresco.getRepoContentInfo(transaction, alfClass);
-	}
-
-	/**
 	 * Sets the content file name.
 	 * 
 	 * @param alfClass
@@ -151,20 +155,8 @@ public class MappingTool {
 	 * @param fileName
 	 *            the file name
 	 */
-	public void setFileContentFileName(GenericClass alfClass, String fileName) {
-		mappingToolImplXFormsToAlfresco.setFileContentFileName(alfClass, fileName);
-	}
-
-	/**
-	 * Sets the repository content file name.
-	 * 
-	 * @param alfClass
-	 *            the alf class
-	 * @param fileName
-	 *            the file name
-	 */
-	public void setRepoContentFileName(GenericClass alfClass, String fileName) {
-		mappingToolImplXFormsToAlfresco.setRepoContentFileName(alfClass, fileName);
+	public void setFileUploadFileName(String fileName, GenericAttribute attr) {
+		mappingToolImplXFormsToAlfresco.setFileUploadFileName(fileName, attr);
 	}
 
 	/**

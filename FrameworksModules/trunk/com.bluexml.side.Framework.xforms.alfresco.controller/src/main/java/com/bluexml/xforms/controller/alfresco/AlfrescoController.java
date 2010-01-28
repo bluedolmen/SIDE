@@ -66,6 +66,7 @@ import com.bluexml.xforms.controller.binding.CanisterType;
 import com.bluexml.xforms.controller.binding.EnumType;
 import com.bluexml.xforms.controller.binding.FormFieldType;
 import com.bluexml.xforms.controller.binding.FormType;
+import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
@@ -631,31 +632,36 @@ public class AlfrescoController {
 		transaction.queueSave(alfClass);
 
 		// content file(s); these will be saved to the server's filesystem
-		fileName = StringUtils
-				.trimToNull(mappingTool.getFileContentFileName(transaction, alfClass));
-		if (fileName != null && fileName.startsWith("file:")) {
-			String type = alfClass.getQualifiedName();
-			fileName = moveFileToUploadDir(type, fileName, transaction);
-			mappingTool.setFileContentFileName(alfClass, fileName);
+		List<RepoContentInfoBean> fileBeans = mappingTool.getUploadBeansFilesystem(transaction,
+				alfClass);
+		for (RepoContentInfoBean infoBean : fileBeans) {
+			fileName = infoBean.getPath();
+			if (fileName != null && fileName.startsWith("file:")) {
+				String type = alfClass.getQualifiedName();
+				fileName = moveFileToUploadDir(type, fileName, transaction);
+				mappingTool.setFileUploadFileName(fileName, infoBean.getAttribute());
+			}
 		}
 
 		// repository content file(s); these will be directly uploaded to the repository
-		RepoContentInfoBean infoBean = mappingTool.getRepoContentInfo(transaction, alfClass);
-		fileName = null;
-		if (infoBean != null) {
-			fileName = infoBean.getName();
-			filePath = infoBean.getPath();
-			mimeType = infoBean.getMimeType();
-			if (filePath != null && filePath.startsWith("file:")) {
-				String location = getUploadPathInRepository();
-				fileName = processRepoContent(transaction, fileName, filePath, location, mimeType);
-				if (StringUtils.trimToNull(fileName) == null) {
-					throw new ServletException(MsgPool.getMsg(MsgId.MSG_UPLOAD_FAILED));
+		List<RepoContentInfoBean> repoBeans = mappingTool.getUploadBeansRepo(transaction, alfClass);
+		for (RepoContentInfoBean infoBean : repoBeans) {
+			fileName = null;
+			if (infoBean != null) {
+				fileName = infoBean.getName();
+				filePath = infoBean.getPath();
+				mimeType = infoBean.getMimeType();
+				GenericAttribute attribute = infoBean.getAttribute();
+				if (filePath != null && filePath.startsWith("file:")) {
+					String location = getUploadPathInRepository();
+					fileName = processRepoContent(transaction, fileName, filePath, location,
+							mimeType);
+					if (StringUtils.trimToNull(fileName) == null) {
+						throw new ServletException(MsgPool.getMsg(MsgId.MSG_UPLOAD_FAILED));
+					}
+					mappingTool.setFileUploadFileName(fileName, attribute);
 				}
-				mappingTool.setRepoContentFileName(alfClass, fileName);
 			}
-		} else {
-			mappingTool.setRepoContentFileName(alfClass, "");
 		}
 
 		// node content file; there's at most one instance of this.
@@ -731,58 +737,34 @@ public class AlfrescoController {
 	 */
 	private void update(AlfrescoTransaction transaction, GenericClass alfClass)
 			throws AlfrescoControllerException {
-		String previousContentFileName = null;
-		RepoContentInfoBean previousRepoContentInfo = null;
+		List<RepoContentInfoBean> previousFileContentInfo;
+		List<RepoContentInfoBean> previousRepoContentInfo;
 
-		String xformsFileName = StringUtils.trimToNull(mappingTool.getFileContentFileName(
-				transaction, alfClass));
-		if (xformsFileName != null && xformsFileName.startsWith("file:")) {
-			GenericClass oldClass = null;
-			try {
-				oldClass = MappingToolCommon.unmarshal(processRead(transaction, alfClass.getId()));
-			} catch (JAXBException e) {
-				throw new AlfrescoControllerException(e);
-			}
-			previousContentFileName = StringUtils.trimToNull(mappingTool.getFileContentFileName(
-					transaction, oldClass));
-			previousRepoContentInfo = mappingTool.getRepoContentInfo(transaction, oldClass);
-			String type = alfClass.getQualifiedName();
-			String fileName = moveFileToUploadDir(type, xformsFileName, transaction);
-			mappingTool.setFileContentFileName(alfClass, fileName);
+		// read the old class
+		GenericClass oldClass = null;
+		try {
+			oldClass = MappingToolCommon.unmarshal(processRead(transaction, alfClass.getId()));
+		} catch (JAXBException e) {
+			throw new AlfrescoControllerException(e);
 		}
+		previousFileContentInfo = mappingTool.getUploadBeansFilesystem(transaction, oldClass);
+		previousRepoContentInfo = mappingTool.getUploadBeansRepo(transaction, oldClass);
 
-		transaction.queueUpdate(alfClass);
 		// TODO: attach content
 
 		// TODO: avoid deleting the temp file
-		if (xformsFileName != null) {
-			try {
-				File tmpFile = new File(xformsFileName);
-				File tmpParent = tmpFile.getParentFile();
-				tmpFile.delete();
-				tmpParent.delete();
-			} catch (Exception e) {
-				logger.error("Failed to delete temp file");
-			}
-		}
-		// FIXME: ceci ne fonctionnera probablement pas comme il faut lorsque
-		// l'upload directory est fourni en paramètre dans l'url. L'ancien
-		// fichier associé peut être dans un autre dossier
-		if (previousContentFileName != null) {
-			File toDelete = new File(getUploadPathInFileSystem().getAbsolutePath(),
-					previousContentFileName);
-			if (toDelete.delete() == false) {
-				logger.error("Failed to delete file: " + toDelete.getAbsolutePath());
-			}
-		}
-		// dans le cas d'un repoContent en update, supprimer l'ancien fichier
-		if (previousRepoContentInfo != null) {
-			if (StringUtils.startsWithIgnoreCase(previousRepoContentInfo.getPath(), "workspace")) {
-				Map<String, String> parameters = new TreeMap<String, String>();
-				parameters.put("nodeRef", previousRepoContentInfo.getPath());
-				requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_DELETE);
-			}
-		}
+
+		// TODO: dans le cas de repoContent en update, supprimer l'ancien fichier
+		
+		// filter what must remain untouched
+		
+		// if (previousRepoContentInfo != null) {
+		// if (StringUtils.startsWithIgnoreCase(previousRepoContentInfo.getPath(), "workspace")) {
+		// Map<String, String> parameters = new TreeMap<String, String>();
+		// parameters.put("nodeRef", previousRepoContentInfo.getPath());
+		// requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_DELETE);
+		// }
+		// }
 	}
 
 	/**
@@ -808,7 +790,8 @@ public class AlfrescoController {
 		} catch (Exception e) {
 			String message = "XForms Controller: error when processing the file to upload. Check the path: "
 					+ fileURI;
-			logger.error(message + e);
+			logger.error(message);
+			logger.error(e);
 			return null;
 		}
 
@@ -818,16 +801,10 @@ public class AlfrescoController {
 		copyFile(sourceFile, targetFile);
 		String relativePath = targetFile.getAbsolutePath().replace(uploadDir.getAbsolutePath(), "");
 
-		// #1278: we won't delete temporary versions of uploaded files here anymore
-		// File parentFile = sourceFile.getParentFile();
-		// try {
-		// FileUtils.deleteDirectory(parentFile);
-		// } catch (IOException e) {
-		// logger.error(e);
-		// }
 		String outputFileName = relativePath.replace('\\', '/');
-		transaction.setUploadedFileName(outputFileName);
-		transaction.setTempFileName(sourceFile.getAbsolutePath());
+		transaction.registerUploadedFileName(outputFileName);
+		transaction.registerTempFileName(sourceFile.getAbsolutePath());
+
 		return outputFileName;
 	}
 
@@ -2427,7 +2404,7 @@ public class AlfrescoController {
 	 * @return
 	 */
 	public static String workflowBuildNamespaceURI(String processName) {
-		return MsgId.INT_BLUEXML_NAMESPACE_WORKFLOW + processName + "/1.0";
+		return MsgId.INT_NAMESPACE_BLUEXML_WORKFLOW + "/" + processName + "/1.0";
 	}
 
 	/**

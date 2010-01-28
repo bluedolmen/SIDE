@@ -808,6 +808,62 @@ public class MappingToolCommon {
 	}
 
 	/**
+	 * Gets the list of content beans for the specified destination.
+	 * 
+	 * @param transaction
+	 *            the login
+	 * @param alfClass
+	 *            the alf class
+	 * @param uploadDestination
+	 *            the identification of the upload store
+	 * @param suffix
+	 *            the suffix that, when found in attribute names, denotes an upload
+	 * @return null if no repository content file name was detected
+	 * 
+	 * @throws AlfrescoControllerException
+	 *             the alfresco controller exception
+	 */
+	public List<RepoContentInfoBean> getFileUploadBeans(AlfrescoTransaction transaction,
+			GenericClass alfClass, String uploadDestination, String suffix)
+			throws AlfrescoControllerException {
+		List<RepoContentInfoBean> list = new ArrayList<RepoContentInfoBean>();
+		List<GenericAttribute> attributes = alfClass.getAttributes().getAttribute();
+
+		for (GenericAttribute attribute : attributes) {
+			if (attribute.getQualifiedName().endsWith(suffix)
+					|| StringUtils.equals(attribute.getUploadTo(), uploadDestination)) {
+				String path = attribute.getValue().get(0).getValue();
+				String name = attribute.getValue().get(1).getValue();
+				String type = attribute.getValue().get(2).getValue();
+
+				list.add(new RepoContentInfoBean(path, name, type, attribute));
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Sets the value of an attribute to the reference, which should be a file name for a filesystem
+	 * upload, or a reference in the format "workspace://SpacesStore/..." in case of repository
+	 * content.
+	 * 
+	 * @param attr
+	 * @param fileName
+	 *            the file name
+	 */
+	public void setFileUploadFileName(String fileRef, GenericAttribute attr) {
+		GenericAttribute contentAttribute = attr;
+		if (contentAttribute != null) {
+			contentAttribute.getValue().clear();
+			
+			ValueType valueName = alfrescoObjectFactory.createValueType();
+			valueName.setValue(fileRef);
+			contentAttribute.getValue().add(valueName);
+		}
+	}
+
+	/**
 	 * Tells whether the data type and read only status provided indicate a special processing.
 	 * 
 	 * @param type
