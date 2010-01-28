@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -46,7 +45,6 @@ import com.bluexml.side.requirements.AnnotationStatus;
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.RequirementsDefinition;
 import com.bluexml.side.requirements.RequirementsFactory;
-import com.bluexml.side.requirements.impl.RequirementsFactoryImpl;
 import com.bluexml.side.requirements.util.RequirementsResource;
 import com.bluexml.side.requirements.util.RequirementsResourceFactory;
 
@@ -96,18 +94,18 @@ public class ImportAnnotationWizard extends Wizard implements IImportWizard {
 					Resource r = EResourceUtils.createResource(uri,rs);//rs.getResource(uri, true);
 					r.load(m);
 					xmi = (RequirementsResource) r;
-					if (xmi.getContents().get(0) instanceof RequirementsDefinition) {
-						def = (RequirementsDefinition) xmi.getContents().get(0);
-						for (Iterator<EObject> iterator = def.eAllContents(); iterator.hasNext();) {
-							EObject obj = (EObject) iterator.next();
-							if (obj instanceof Annotation) {
-								Annotation a = (Annotation) obj;
-								annotations.put(a.getId(), a);
-							}
-							if (obj instanceof BasicElement) {
-								BasicElement elt = (BasicElement) obj;
-								objects.put(elt.getId(), elt);
-							}
+					for (Iterator<EObject> iterator = xmi.getAllContents(); iterator.hasNext();) {
+						EObject obj = (EObject) iterator.next();
+						if (def == null)
+							if (obj instanceof RequirementsDefinition)
+								def = (RequirementsDefinition) obj;
+						if (obj instanceof Annotation) {
+							Annotation a = (Annotation) obj;
+							annotations.put(a.getId(), a);
+						}
+						if (obj instanceof BasicElement) {
+							BasicElement elt = (BasicElement) obj;
+							objects.put(elt.getId(), elt);
 						}
 					}
 					
@@ -142,7 +140,12 @@ public class ImportAnnotationWizard extends Wizard implements IImportWizard {
 							String author = resultat.getString("author");
 							String annotation = resultat.getString("annotation");
 							String comment = resultat.getString("comment");
-							Date date = resultat.getDate("date");
+							Date date = null;
+							try {
+								date = resultat.getDate("date");
+							} catch (Exception e) {
+								//Nothing to do
+							}
 							
 							if (!annotations.containsKey(id)) {
 								Annotation a = RequirementsFactory.eINSTANCE.createAnnotation();
