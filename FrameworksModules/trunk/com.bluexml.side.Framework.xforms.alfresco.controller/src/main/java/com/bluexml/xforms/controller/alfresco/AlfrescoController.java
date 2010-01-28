@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -2606,7 +2607,7 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Tests authentication credentials with an Alfresco instance.
+	 * Tests authentication credentials with the Alfresco instance defined in the properties file.
 	 * 
 	 * @param username
 	 * @param password
@@ -2657,8 +2658,17 @@ public class AlfrescoController {
 	}
 
 	/**
+	 * Retrieves some information about the content of an existing node and provides a user-readable
+	 * version of the collected info if the node has a defined content. <br/>
+	 * For now, gets:
+	 * <ul>
+	 * <li>node name as displayed via a web client</li>
+	 * <li>the localized content size, as number of bytes and readable file size. e.g. "7 614 525
+	 * bytes (7.26 MB)"</li>
+	 * </ul>
 	 * 
 	 * @param nodeId
+	 *            the full node Id (including protocol and workspace)
 	 * @return the info about a content
 	 */
 	public String getWebscriptNodeContentInfo(String nodeId) {
@@ -2680,7 +2690,8 @@ public class AlfrescoController {
 		long size = Long.parseLong(infos[1]); // content size
 		String sizeStr;
 		if (size > 0) {
-			sizeStr = ": " + size + " bytes";
+			Formatter formatter = new Formatter();
+			sizeStr = ": " + formatter.format("%,d", size) + " bytes";
 			char multiplier = getFileSizeMultiplier(size);
 			if (multiplier != 'b') {
 				sizeStr += " (" + getFileSizeShortReadable(size, multiplier) + ")";
@@ -2704,6 +2715,15 @@ public class AlfrescoController {
 		return multiplier;
 	}
 
+	/**
+	 * Returns a "short" version of the given file size using the appropriate multiplier, and
+	 * formatted with a fixed number of decimal places. <br/>
+	 * Examples: 1024 bytes => 1.00 KB, 7 614 525 bytes => 7.26 MB
+	 * 
+	 * @param transferred
+	 * @param multiplier
+	 * @return
+	 */
 	private static String getFileSizeShortReadable(long transferred, char multiplier) {
 		float res = transferred;
 		String unit = "B";
@@ -2724,7 +2744,8 @@ public class AlfrescoController {
 				unit = "GB";
 				break;
 		}
-		return res + " " + unit;
+		Formatter formatter = new Formatter();
+		return formatter.format("%,.2f", res) + " " + unit;
 	}
 
 	//
