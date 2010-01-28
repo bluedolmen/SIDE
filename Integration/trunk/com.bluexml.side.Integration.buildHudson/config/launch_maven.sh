@@ -35,10 +35,11 @@ mvn clean deploy -e -P public > log_maven.log
 
 if grep -q "BUILD SUCCESSFUL" "log_maven.log" ; then
 	echo "Maven deploy success"
+	exit 0
 else
 	echo "Maven deploy failed"
 	exit -1
 	
 fi
 
-exit 0
+
