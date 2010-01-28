@@ -24,7 +24,7 @@ public class SubmitAction extends AbstractTransactionalAction {
 	Map<String, String> pageInitParams = null;
 
 	Page currentPage = null;
-	
+
 	boolean isSearching = false; // #1465
 
 	/*

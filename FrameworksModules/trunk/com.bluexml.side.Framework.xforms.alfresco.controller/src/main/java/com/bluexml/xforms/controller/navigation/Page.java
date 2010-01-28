@@ -42,11 +42,11 @@ public class Page {
 	private boolean showCancel;
 	private boolean showDelete;
 	private boolean showValidate;
-	
+
 	private boolean wrongCallType;
-	
+
 	private String cssUrl;
-	
+
 	/**
 	 * the definition id of the current workflow if the workflow is not started or the workflow
 	 * instance id if the workflow is started
@@ -256,7 +256,8 @@ public class Page {
 	}
 
 	/**
-	 * @param showCancel the showCancel to set
+	 * @param showCancel
+	 *            the showCancel to set
 	 */
 	public void setShowCancel(boolean showCancel) {
 		this.showCancel = showCancel;
@@ -270,7 +271,8 @@ public class Page {
 	}
 
 	/**
-	 * @param showDelete the showDelete to set
+	 * @param showDelete
+	 *            the showDelete to set
 	 */
 	public void setShowDelete(boolean showDelete) {
 		this.showDelete = showDelete;
@@ -284,7 +286,8 @@ public class Page {
 	}
 
 	/**
-	 * @param showValidate the showValidate to set
+	 * @param showValidate
+	 *            the showValidate to set
 	 */
 	public void setShowValidate(boolean showValidate) {
 		this.showValidate = showValidate;
@@ -298,7 +301,8 @@ public class Page {
 	}
 
 	/**
-	 * @param wkflwProcessId the wkflwProcessId to set
+	 * @param wkflwProcessId
+	 *            the wkflwProcessId to set
 	 */
 	public void setWkflwProcessId(String wkflwProcessId) {
 		this.wkflwProcessId = wkflwProcessId;
@@ -312,14 +316,16 @@ public class Page {
 	}
 
 	/**
-	 * @param wkflwInstanceId the wkflwInstanceId to set
+	 * @param wkflwInstanceId
+	 *            the wkflwInstanceId to set
 	 */
 	public void setWkflwInstanceId(String wkflwInstanceId) {
 		this.wkflwInstanceId = wkflwInstanceId;
 	}
 
 	/**
-	 * @param wrongCallType the wrongCallType to set
+	 * @param wrongCallType
+	 *            the wrongCallType to set
 	 */
 	public void setWrongCallType(boolean wrongCallType) {
 		this.wrongCallType = wrongCallType;
@@ -333,7 +339,8 @@ public class Page {
 	}
 
 	/**
-	 * @param cSSUrl the cSSUrl to set
+	 * @param cSSUrl
+	 *            the cSSUrl to set
 	 */
 	public void setCssUrl(String cssUrl) {
 		this.cssUrl = cssUrl;
@@ -347,7 +354,8 @@ public class Page {
 	}
 
 	/**
-	 * @param dataType the dataType to set
+	 * @param dataType
+	 *            the dataType to set
 	 */
 	public void setDataType(String dataType) {
 		this.dataType = dataType;

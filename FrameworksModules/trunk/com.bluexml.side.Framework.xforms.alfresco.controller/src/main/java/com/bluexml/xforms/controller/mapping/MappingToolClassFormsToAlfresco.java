@@ -157,7 +157,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 			contentAttribute.getValue().add(value);
 		}
 	}
-	
+
 	/**
 	 * Gets the (repository) content attribute.
 	 * 
@@ -167,7 +167,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 * @return the repository content attribute
 	 */
 	private GenericAttribute getRepoContentAttribute(GenericClass alfClass) {
-		
+
 		List<GenericAttribute> attributes = alfClass.getAttributes().getAttribute();
 		for (GenericAttribute attribute : attributes) {
 			if (attribute.getQualifiedName().endsWith("_repositoryContent")) {
@@ -176,7 +176,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gets the repository content file name.
 	 * 
@@ -197,7 +197,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 			String path = contentAttribute.getValue().get(0).getValue();
 			String name = contentAttribute.getValue().get(1).getValue();
 			String type = contentAttribute.getValue().get(2).getValue();
-			
+
 			return new RepoContentInfoBean(path, name, type);
 		}
 		return null;
