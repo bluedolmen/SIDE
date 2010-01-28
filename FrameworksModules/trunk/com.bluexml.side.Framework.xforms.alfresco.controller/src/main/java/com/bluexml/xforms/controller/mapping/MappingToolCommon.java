@@ -782,7 +782,7 @@ public class MappingToolCommon {
 		// this item has to be updated or saved
 		String targetId = null;
 		try {
-			targetId = controller.persistClass(transaction, targetNode);
+			targetId = controller.persistClass(transaction, targetNode, false);
 		} catch (AlfrescoControllerException e) {
 			throw new RuntimeException(e);
 		}
@@ -812,10 +812,12 @@ public class MappingToolCommon {
 	 * 
 	 * @param type
 	 * @param isReadOnly
+	 * @param isServletRequest
 	 * @return
 	 */
-	protected static boolean isAmendable(String type, boolean isReadOnly) {
+	protected static boolean isAmendable(String type, boolean isReadOnly, boolean isServletRequest) {
 		return isReadOnly
+				&& (isServletRequest == false)
 				&& (type.equalsIgnoreCase(MsgId.INT_TYPE_XSD_DATE.getText())
 						|| type.equalsIgnoreCase(MsgId.INT_TYPE_XSD_DATETIME.getText()) || type
 						.equalsIgnoreCase(MsgId.INT_TYPE_XSD_TIME.getText()));

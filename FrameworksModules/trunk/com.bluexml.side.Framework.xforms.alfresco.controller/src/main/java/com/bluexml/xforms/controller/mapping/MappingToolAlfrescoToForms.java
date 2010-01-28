@@ -111,7 +111,8 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 					.getText());
 			nodeContentElt.setAttribute("file", "");
 			nodeContentElt.setAttribute("type", "");
-			nodeContentElt.setTextContent(controller.getWebscriptNodeContentInfo(alfrescoId));
+			String contentInfo = controller.getWebscriptNodeContentInfo(alfrescoId);
+			nodeContentElt.setTextContent(contentInfo);
 			rootElement.appendChild(nodeContentElt);
 		}
 	}

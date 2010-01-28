@@ -27,17 +27,23 @@ public class ReadServlet extends AbstractServlet {
 	/** The Constant DATA_TYPE. */
 	public static final String DATA_TYPE = "type";
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
+			IOException {
 		read(req, resp);
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -56,8 +62,7 @@ public class ReadServlet extends AbstractServlet {
 	 * @throws ServletException
 	 *             the servlet exception
 	 */
-	protected void read(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException {
+	protected void read(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 		AlfrescoController controller = AlfrescoController.getInstance();
 		String dataType = StringUtils.trimToNull(req.getParameter(DATA_TYPE));
 		if (dataType != null) {
@@ -65,9 +70,14 @@ public class ReadServlet extends AbstractServlet {
 		}
 		String dataId = StringUtils.trimToNull(req.getParameter(DATA_ID));
 		dataId = AlfrescoController.patchDataId(dataId);
+
+		String skipIdStr = StringUtils.trimToNull(req.getParameter(ID_AS_SERVLET));
+		boolean idAsServlet = !StringUtils.equals(skipIdStr, "false");
+
 		try {
 			AlfrescoTransaction transaction = createTransaction(controller);
-			Document node = controller.getClass(transaction, dataType, dataId, null, false);
+			Document node = controller.getClass(transaction, dataType, dataId, null, false,
+					idAsServlet);
 			Source xmlSource = new DOMSource(node);
 			Result outputTarget = new StreamResult(resp.getOutputStream());
 			documentTransformer.transform(xmlSource, outputTarget);
@@ -76,7 +86,9 @@ public class ReadServlet extends AbstractServlet {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.servlet.GenericServlet#init()
 	 */
 	@Override
@@ -84,5 +96,5 @@ public class ReadServlet extends AbstractServlet {
 		super.init();
 		System.out.println("BlueXML XForms - ReadServlet initialized.");
 	}
-	
+
 }

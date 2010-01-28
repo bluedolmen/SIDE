@@ -375,6 +375,8 @@ public class AlfrescoController {
 	 *            the init params
 	 * @param transaction
 	 *            the transaction
+	 * @param idAsServlet
+	 *            whether the request comes from a servlet
 	 * 
 	 * @return the class
 	 * 
@@ -382,7 +384,7 @@ public class AlfrescoController {
 	 *             the alfresco controller exception
 	 */
 	public Document getClass(AlfrescoTransaction transaction, String type, String id,
-			Map<String, String> initParams, boolean formIsReadOnly)
+			Map<String, String> initParams, boolean formIsReadOnly, boolean isServletRequest)
 			throws AlfrescoControllerException {
 		Document instance = null;
 		// save the initParams
@@ -390,9 +392,10 @@ public class AlfrescoController {
 		try {
 			if (id == null) {
 				instance = createElement(transaction, type, initParams,
-						new Stack<AssociationType>(), formIsReadOnly);
+						new Stack<AssociationType>(), formIsReadOnly, isServletRequest);
 			} else {
-				instance = getElement(transaction, id, new Stack<AssociationType>(), formIsReadOnly);
+				instance = getElement(transaction, id, new Stack<AssociationType>(),
+						formIsReadOnly, isServletRequest);
 			}
 		} catch (Exception e) {
 			throw new AlfrescoControllerException(e);
@@ -448,6 +451,7 @@ public class AlfrescoController {
 	 *            the stack
 	 * @param transaction
 	 *            the transaction
+	 * @param isServletRequest
 	 * 
 	 * @return the element
 	 * 
@@ -455,12 +459,12 @@ public class AlfrescoController {
 	 *             the alfresco controller exception
 	 */
 	public Document getElement(AlfrescoTransaction transaction, String id,
-			Stack<AssociationType> stack, boolean formIsReadOnly)
+			Stack<AssociationType> stack, boolean formIsReadOnly, boolean isServletRequest)
 			throws AlfrescoControllerException {
 		Document alfrescoNode = processRead(transaction, id);
 
 		return mappingTool.transformAlfrescoToClassForms(transaction, alfrescoNode, stack,
-				formIsReadOnly);
+				formIsReadOnly, isServletRequest);
 	}
 
 	/**
@@ -582,6 +586,7 @@ public class AlfrescoController {
 	 *            the instance
 	 * @param transaction
 	 *            the transaction
+	 * @param isServletRequest
 	 * 
 	 * @return the string
 	 * 
@@ -589,9 +594,10 @@ public class AlfrescoController {
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
-	public String persistClass(AlfrescoTransaction transaction, Node instance)
-			throws AlfrescoControllerException, ServletException {
-		GenericClass alfClass = mappingTool.transformClassFormsToAlfresco(transaction, instance);
+	public String persistClass(AlfrescoTransaction transaction, Node instance,
+			boolean isServletRequest) throws AlfrescoControllerException, ServletException {
+		GenericClass alfClass = mappingTool.transformClassFormsToAlfresco(transaction, instance,
+				isServletRequest);
 		if (alfClass.getId() == null) {
 			alfClass.setId(save(transaction, alfClass));
 		} else {
@@ -1376,10 +1382,10 @@ public class AlfrescoController {
 	 *             the alfresco controller exception
 	 */
 	public Document createElement(AlfrescoTransaction transaction, String type,
-			Map<String, String> initParams, Stack<AssociationType> stack, boolean formIsReadOnly)
-			throws AlfrescoControllerException {
+			Map<String, String> initParams, Stack<AssociationType> stack, boolean formIsReadOnly,
+			boolean isServletRequest) throws AlfrescoControllerException {
 		return mappingTool.createClassFormsInstance(transaction, type, initParams, stack,
-				formIsReadOnly);
+				formIsReadOnly, isServletRequest);
 	}
 
 	/**

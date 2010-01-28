@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Node;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
@@ -53,10 +54,13 @@ public class UpdateServlet extends AbstractServlet {
 		AlfrescoController controller = AlfrescoController.getInstance();
 		try {
 			Node node = getDocumentReq(req);
+			String skipIdStr = StringUtils.trimToNull(req.getParameter(ID_AS_SERVLET));
+			boolean idAsServlet = !StringUtils.equals(skipIdStr, "false");
+
 			AlfrescoTransaction transaction = new AlfrescoTransaction(
 					controller);
 			transaction.setLogin(controller.getLoginUserName());
-			controller.persistClass(transaction, node);
+			controller.persistClass(transaction, node, idAsServlet);
 			transaction.executeBatch();
 		} catch (Exception e) {
 			throw new ServletException(e);

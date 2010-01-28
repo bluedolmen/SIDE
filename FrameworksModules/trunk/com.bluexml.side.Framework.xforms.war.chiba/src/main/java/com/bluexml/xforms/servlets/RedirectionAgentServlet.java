@@ -34,6 +34,7 @@ import com.bluexml.side.form.utils.DOMUtil;
  * @author Amenel
  * 
  */
+@Deprecated
 public class RedirectionAgentServlet extends HttpServlet {
 
 	private class RedirectionBean {

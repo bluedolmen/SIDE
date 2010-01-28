@@ -54,7 +54,7 @@ public class CreateServlet extends AbstractServlet {
 		try {
 			Node node = getDocumentReq(req);
 			AlfrescoTransaction transaction = createTransaction(controller);
-			String result = controller.persistClass(transaction, node);
+			String result = controller.persistClass(transaction, node, true);
 			transaction.executeBatch();
 			result = transaction.getIds().get(result);
 			resp.getOutputStream().write(result.getBytes());

@@ -141,7 +141,7 @@ public class SubmitAction extends AbstractTransactionalAction {
 		String result = null;
 		// persist instance
 		if (type == FormTypeEnum.CLASS) {
-			result = controller.persistClass(transaction, node);
+			result = controller.persistClass(transaction, node, false);
 		} else {
 			String formName = currentPage.getFormName();
 			String datatype = controller.getUnderlyingForm(formName);

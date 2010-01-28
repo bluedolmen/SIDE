@@ -60,7 +60,7 @@ public class GetAction extends AbstractReadAction {
 						.getForm(transaction, dataType, dataId, initParams, formIsReadOnly);
 			} else { // expecting FormTypeEnum.CLASS here
 				node = controller.getClass(transaction, dataType, dataId, initParams,
-						formIsReadOnly);
+						formIsReadOnly, false);
 			}
 		}
 		return node;

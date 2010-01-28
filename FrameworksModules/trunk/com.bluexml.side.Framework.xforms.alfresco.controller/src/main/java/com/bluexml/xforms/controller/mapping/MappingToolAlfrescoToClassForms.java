@@ -64,14 +64,14 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *             the controller exception
 	 */
 	public Document createClassFormsInstance(AlfrescoTransaction transaction, String type,
-			Map<String, String> initParams, Stack<AssociationType> stack, boolean formIsReadOnly)
-			throws AlfrescoControllerException {
+			Map<String, String> initParams, Stack<AssociationType> stack, boolean formIsReadOnly,
+			boolean isServletRequest) throws AlfrescoControllerException {
 		Document xformsDocument = documentBuilder.newDocument();
 		GenericClass alfrescoClass = alfrescoObjectFactory.createGenericClass();
 		alfrescoClass.setQualifiedName(getClassType(type).getAlfrescoName());
 
 		fillXFormsDocument(transaction, xformsDocument, alfrescoClass, type, initParams, stack,
-				formIsReadOnly);
+				formIsReadOnly, isServletRequest);
 
 		logXML(xformsDocument, "createXFormsInstance", type);
 
@@ -91,15 +91,16 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *            the attributes
 	 * @param initParams
 	 *            the init params
+	 * @param isServletRequest
 	 */
 	private void fillXFormsAspect(Document xformsDocument, Element classElement, AspectType aspect,
 			List<GenericAttribute> attributes, Map<String, String> initParams,
-			boolean formIsReadOnly) {
+			boolean formIsReadOnly, boolean isServletRequest) {
 		Element aspectElement = xformsDocument.createElement(aspect.getName());
 		List<AttributeType> aspectAttributes = getAspectType(aspect).getAttribute();
 		for (AttributeType attributeType : aspectAttributes) {
 			fillXFormsAttribute(xformsDocument, aspectElement, attributeType, attributes,
-					initParams, formIsReadOnly);
+					initParams, formIsReadOnly, isServletRequest);
 		}
 		classElement.appendChild(aspectElement);
 	}
@@ -121,6 +122,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *            the init params
 	 * @param stack
 	 *            the stack
+	 * @param isServletRequest
 	 * 
 	 * @throws AlfrescoControllerException
 	 *             the alfresco controller exception
@@ -128,7 +130,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	private void fillXFormsAssociationType(AlfrescoTransaction transaction,
 			Document xformsDocument, Element classElement, AssociationType association,
 			GenericClass alfrescoClass, Map<String, String> initParams,
-			Stack<AssociationType> stack, boolean formIsReadOnly)
+			Stack<AssociationType> stack, boolean formIsReadOnly, boolean isServletRequest)
 			throws AlfrescoControllerException {
 		if (!stackContains(stack, association)) {
 			stack.push(association);
@@ -136,7 +138,8 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 					association);
 			String targetClassType = classTypeToString(association.getType());
 			fillXFormsAssociation(transaction, xformsDocument, classElement, association, stack,
-					alfrescoAssociations, targetClassType, initParams, formIsReadOnly);
+					alfrescoAssociations, targetClassType, initParams, formIsReadOnly,
+					isServletRequest);
 			stack.pop();
 		}
 	}
@@ -160,6 +163,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *            the target class type
 	 * @param initParams
 	 *            the init params
+	 * @param isServletRequest
 	 * 
 	 * @throws AlfrescoControllerException
 	 *             the alfresco controller exception
@@ -167,12 +171,12 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	private void fillXFormsAssociation(AlfrescoTransaction transaction, Document xformsDocument,
 			Element classElement, AssociationType association, Stack<AssociationType> stack,
 			List<GenericAssociation> alfrescoAssociations, String targetClassType,
-			Map<String, String> initParams, boolean formIsReadOnly)
+			Map<String, String> initParams, boolean formIsReadOnly, boolean isServletRequest)
 			throws AlfrescoControllerException {
 		String initId = initParams.get("id");
 		if (initId != null) {
 			fillXFormsAssociationInit(transaction, xformsDocument, classElement, association,
-					stack, targetClassType, initId, formIsReadOnly);
+					stack, targetClassType, initId, formIsReadOnly, isServletRequest);
 		} else {
 			Element associationElement = xformsDocument.createElement(association.getName());
 			if (alfrescoAssociations.size() > 0) {
@@ -184,7 +188,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 					Node associationClassValue = null;
 					if (association.isInline()) {
 						targetValue = fillXFormsElementFromIdInline(transaction, xformsDocument,
-								stack, alfrescoTargetId, formIsReadOnly);
+								stack, alfrescoTargetId, formIsReadOnly, isServletRequest);
 					} else {
 						targetValue = fillXFormsElementFromIdNonInline(xformsDocument,
 								targetClassType, target, alfrescoTargetId);
@@ -195,11 +199,13 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 				// add empty item if multiple
 				if (association.isMultiple()) {
 					processXFormsAssociationCreate(transaction, xformsDocument, association, stack,
-							targetClassType, initParams, associationElement, formIsReadOnly);
+							targetClassType, initParams, associationElement, formIsReadOnly,
+							isServletRequest);
 				}
 			} else {
 				processXFormsAssociationCreate(transaction, xformsDocument, association, stack,
-						targetClassType, initParams, associationElement, formIsReadOnly);
+						targetClassType, initParams, associationElement, formIsReadOnly,
+						isServletRequest);
 			}
 			classElement.appendChild(associationElement);
 		}
@@ -229,12 +235,13 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	private void processXFormsAssociationCreate(AlfrescoTransaction transaction,
 			Document xformsDocument, AssociationType association, Stack<AssociationType> stack,
 			String targetClassType, Map<String, String> initParams, Element associationElement,
-			boolean formIsReadOnly) throws AlfrescoControllerException {
+			boolean formIsReadOnly, boolean isServletRequest) throws AlfrescoControllerException {
 		Node targetValue = null;
 		Node associationClassValue = null;
 		if (association.isInline()) {
 			targetValue = fillXFormsAssociationCreateElementInline(transaction, xformsDocument,
-					association, stack, targetClassType, initParams, formIsReadOnly);
+					association, stack, targetClassType, initParams, formIsReadOnly,
+					isServletRequest);
 		} else {
 			targetValue = fillXFormsAssociationCreateElementNonInline(xformsDocument,
 					targetClassType);
@@ -347,11 +354,11 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 */
 	private Node fillXFormsAssociationCreateElementInline(AlfrescoTransaction transaction,
 			Document xformsDocument, AssociationType association, Stack<AssociationType> stack,
-			String targetClassType, Map<String, String> initParams, boolean formIsReadOnly)
-			throws AlfrescoControllerException {
+			String targetClassType, Map<String, String> initParams, boolean formIsReadOnly,
+			boolean isServletRequest) throws AlfrescoControllerException {
 		Document inlineElement = null;
 		inlineElement = createClassFormsInstance(transaction, targetClassType, subMap(initParams,
-				association.getName()), stack, formIsReadOnly);
+				association.getName()), stack, formIsReadOnly, isServletRequest);
 		Node clonedNode = inlineElement.getDocumentElement().cloneNode(true);
 		clonedNode = xformsDocument.adoptNode(clonedNode);
 		return clonedNode;
@@ -374,19 +381,20 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *            the target class type
 	 * @param initId
 	 *            the init id
+	 * @param isServletRequest
 	 * 
 	 * @return the int
 	 */
 	private int fillXFormsAssociationInit(AlfrescoTransaction transaction, Document xformsDocument,
 			Element classElement, AssociationType association, Stack<AssociationType> stack,
-			String targetClassType, String initId, boolean formIsReadOnly) {
+			String targetClassType, String initId, boolean formIsReadOnly, boolean isServletRequest) {
 		initId = AlfrescoController.patchDataId(initId);
 
 		Element associationElement = xformsDocument.createElement(association.getName());
 		Node subNode = null;
 		if (association.isInline()) {
 			subNode = fillXFormsElementFromIdInline(transaction, xformsDocument, stack, initId,
-					formIsReadOnly);
+					formIsReadOnly, isServletRequest);
 		} else {
 			String label = null;
 			try {
@@ -415,17 +423,18 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *            the stack
 	 * @param alfrescoTargetId
 	 *            the alfresco target id
+	 * @param isServletRequest
 	 * 
 	 * @return the node
 	 */
 	private Node fillXFormsElementFromIdInline(AlfrescoTransaction transaction,
 			Document xformsDocument, Stack<AssociationType> stack, String alfrescoTargetId,
-			boolean formIsReadOnly) {
+			boolean formIsReadOnly, boolean isServletRequest) {
 		Node subNode;
 		Document inlineElement = null;
 		try {
 			inlineElement = controller.getElement(transaction, alfrescoTargetId, stack,
-					formIsReadOnly);
+					formIsReadOnly, isServletRequest);
 		} catch (AlfrescoControllerException e) {
 			throw new RuntimeException(e);
 		}
@@ -448,10 +457,11 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *            the attributes
 	 * @param initParams
 	 *            the init params
+	 * @param isServletRequest
 	 */
 	private void fillXFormsAttribute(Document xformsDocument, Element containerElement,
 			AttributeType attribute, List<GenericAttribute> attributes,
-			Map<String, String> initParams, boolean formIsReadOnly) {
+			Map<String, String> initParams, boolean formIsReadOnly, boolean isServletRequest) {
 
 		Element attributeElement = xformsDocument.createElement(attribute.getName());
 		// the value to set eventually
@@ -486,7 +496,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 		if (type.equals("DateTime")) {
 			String timeValue = getTimeFromDateTime(textualValue);
 			String dateValue = getDateFromDateTime(textualValue);
-			if (formIsReadOnly || attribute.isReadOnly()) {
+			if ((isServletRequest == false) && (formIsReadOnly || attribute.isReadOnly())) {
 				dateValue = transformDateValueForDisplay(dateValue);
 				timeValue = transformTimeValueForDisplay(timeValue);
 				attributeElement.setTextContent(dateValue + " " + timeValue);
@@ -500,13 +510,13 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 			}
 		} else if (type.equals("Date")) {
 			String dateValue = textualValue;
-			if (formIsReadOnly || attribute.isReadOnly()) {
+			if ((isServletRequest == false) && (formIsReadOnly || attribute.isReadOnly())) {
 				transformDateValueForDisplay(textualValue);
 			}
 			attributeElement.setTextContent(dateValue);
 		} else if (type.equals("Time")) {
 			String timeValue = textualValue;
-			if (formIsReadOnly || attribute.isReadOnly()) {
+			if ((isServletRequest == false) && (formIsReadOnly || attribute.isReadOnly())) {
 				timeValue = transformTimeValueForDisplay(textualValue);
 			}
 			attributeElement.setTextContent(timeValue);
@@ -537,13 +547,14 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *            the init params
 	 * @param stack
 	 *            the stack
+	 * @param isServletRequest
 	 * 
 	 * @throws AlfrescoControllerException
 	 *             the alfresco controller exception
 	 */
 	private void fillXFormsDocument(AlfrescoTransaction transaction, Document xformsDocument,
 			GenericClass alfrescoClass, String type, Map<String, String> initParams,
-			Stack<AssociationType> stack, boolean formIsReadOnly)
+			Stack<AssociationType> stack, boolean formIsReadOnly, boolean isServletRequest)
 			throws AlfrescoControllerException {
 		ClassType classType = getClassType(type);
 		// checkStack(classType, stack);
@@ -600,19 +611,20 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 		for (Entry<String, AttributeType> entry : attributesEntrySet) {
 			AttributeType attribute = entry.getValue();
 			fillXFormsAttribute(xformsDocument, classElement, attribute, alfrescoAttributes,
-					initParams, formIsReadOnly);
+					initParams, formIsReadOnly, isServletRequest);
 		}
 		Set<Entry<String, AspectType>> aspectsEntrySet = aspects.entrySet();
 		for (Entry<String, AspectType> entry : aspectsEntrySet) {
 			AspectType aspect = entry.getValue();
 			fillXFormsAspect(xformsDocument, classElement, aspect, alfrescoAttributes, subMap(
-					initParams, aspect.getName()), formIsReadOnly);
+					initParams, aspect.getName()), formIsReadOnly, isServletRequest);
 		}
 		Set<Entry<String, AssociationType>> associationsEntrySet = associations.entrySet();
 		for (Entry<String, AssociationType> entry : associationsEntrySet) {
 			AssociationType association = entry.getValue();
 			fillXFormsAssociationType(transaction, xformsDocument, classElement, association,
-					alfrescoClass, subMap(initParams, association.getName()), stack, formIsReadOnly);
+					alfrescoClass, subMap(initParams, association.getName()), stack,
+					formIsReadOnly, isServletRequest);
 		}
 
 		classElement.appendChild(typeElement);
@@ -703,6 +715,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *            the alfresco node
 	 * @param stack
 	 *            the stack
+	 * @param isServletRequest
 	 * 
 	 * @return the document
 	 * 
@@ -710,8 +723,8 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *             the controller exception
 	 */
 	public Document transformAlfrescoToClassForms(AlfrescoTransaction transaction,
-			Document alfrescoNode, Stack<AssociationType> stack, boolean formIsReadOnly)
-			throws AlfrescoControllerException {
+			Document alfrescoNode, Stack<AssociationType> stack, boolean formIsReadOnly,
+			boolean isServletRequest) throws AlfrescoControllerException {
 		logXML(alfrescoNode, "transformAlfrescoToXForms", "input");
 
 		if (alfrescoNode.getDocumentElement().getTagName().equalsIgnoreCase("exception")) {
@@ -727,7 +740,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 			String realType = classTypeToString(classTypeQName);
 
 			fillXFormsDocument(transaction, xformsDocument, alfrescoClass, realType, null, stack,
-					formIsReadOnly);
+					formIsReadOnly, isServletRequest);
 		} catch (Exception e) {
 			logger.error(e);
 			throw new AlfrescoControllerException(e);

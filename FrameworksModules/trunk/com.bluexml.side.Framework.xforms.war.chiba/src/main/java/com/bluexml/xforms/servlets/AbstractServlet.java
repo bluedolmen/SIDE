@@ -21,11 +21,19 @@ import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
  */
 public abstract class AbstractServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7815279587960310608L;
+
 	/** The Constant DATA_NODE. */
 	protected static final String DATA_NODE = "data";
 
 	/** The Constant DATA_ID. */
 	protected static final String DATA_ID = "id";
+
+	/** Whether servlet tells controller that service requests come from a servlet. For debugging. */
+	protected static final String ID_AS_SERVLET = "identifyAsServlet";
 
 	/** The document transformer. */
 	protected static Transformer documentTransformer;

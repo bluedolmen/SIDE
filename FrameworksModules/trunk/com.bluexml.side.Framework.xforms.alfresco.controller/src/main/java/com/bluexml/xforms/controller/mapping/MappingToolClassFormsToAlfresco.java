@@ -59,10 +59,11 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *            the alfresco class
 	 * @param xformsNode
 	 *            the xforms node
+	 * @param isServletRequest
 	 * @throws ServletException
 	 */
 	private void fillAlfrescoClass(AlfrescoTransaction transaction, GenericClass alfrescoClass,
-			Node xformsNode) throws ServletException {
+			Node xformsNode, boolean isServletRequest) throws ServletException {
 		Element element = null;
 		if (xformsNode instanceof Document) {
 			element = ((Document) xformsNode).getDocumentElement();
@@ -87,7 +88,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 		GenericAssociations associations = alfrescoObjectFactory.createGenericAssociations();
 		associations.setAction("replace");
 		for (ClassType subClassType : classTypes) {
-			xformsAttributesToAlfresco(attributes, children, subClassType);
+			xformsAttributesToAlfresco(attributes, children, subClassType, isServletRequest);
 			xformsAssociationsToAlfresco(transaction, associations, children, subClassType);
 		}
 		alfrescoClass.setAttributes(attributes);
@@ -279,6 +280,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *            the login
 	 * @param node
 	 *            the node
+	 * @param isServletRequest
 	 * 
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
 	 * 
@@ -286,12 +288,12 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
-	public GenericClass transformClassFormsToAlfresco(AlfrescoTransaction transaction, Node node)
-			throws AlfrescoControllerException, ServletException {
+	public GenericClass transformClassFormsToAlfresco(AlfrescoTransaction transaction, Node node,
+			boolean isServletRequest) throws AlfrescoControllerException, ServletException {
 		logXML(node, "transformXFormsToAlfresco", "input");
 
 		GenericClass alfrescoClass = alfrescoObjectFactory.createGenericClass();
-		fillAlfrescoClass(transaction, alfrescoClass, node);
+		fillAlfrescoClass(transaction, alfrescoClass, node, isServletRequest);
 
 		// String datas = marshal(alfrescoClass);
 		// logXML(null, "transformXFormsToAlfresco", "output", datas);
@@ -379,11 +381,12 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *            the children
 	 * @param classType
 	 *            the class type
+	 * @param isServletRequest
 	 */
 	private void xformsAttributesToAlfresco(GenericAttributes attributes, List<Element> children,
-			ClassType classType) {
+			ClassType classType, boolean isServletRequest) {
 		List<AttributeType> xformsAttributes = classType.getAttribute();
-		xformsAttributesToAlfresco(children, attributes, xformsAttributes);
+		xformsAttributesToAlfresco(children, attributes, xformsAttributes, isServletRequest);
 
 		List<AspectType> aspects = classType.getAspect();
 		for (AspectType aspectType : aspects) {
@@ -391,7 +394,8 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 			if (aspect != null) {
 				List<AttributeType> aspectAttributes = getAspectType(aspectType).getAttribute();
 				List<Element> aspectChildren = DOMUtil.getAllChildren(aspect);
-				xformsAttributesToAlfresco(aspectChildren, attributes, aspectAttributes);
+				xformsAttributesToAlfresco(aspectChildren, attributes, aspectAttributes,
+						isServletRequest);
 			}
 		}
 	}
@@ -407,13 +411,13 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *            the xforms attributes
 	 */
 	private void xformsAttributesToAlfresco(List<Element> children, GenericAttributes attributes,
-			List<AttributeType> xformsAttributes) {
+			List<AttributeType> xformsAttributes, boolean isServletRequest) {
 		for (AttributeType xformsAttribute : xformsAttributes) {
 			if (xformsAttribute.isInAlfresco()) {
 				Element child = DOMUtil.getOneElementByTagName(children, xformsAttribute.getName());
 				if (child != null) {
-					attributes.getAttribute()
-							.add(xformsAttributeToAlfresco(child, xformsAttribute));
+					attributes.getAttribute().add(
+							xformsAttributeToAlfresco(child, xformsAttribute, isServletRequest));
 				}
 			}
 		}
@@ -426,12 +430,15 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *            the child
 	 * @param attributeType
 	 *            the xforms attribute
+	 * @param isServletRequest
 	 * 
 	 * @return the attribute
 	 */
-	private GenericAttribute xformsAttributeToAlfresco(Element child, AttributeType attributeType) {
+	private GenericAttribute xformsAttributeToAlfresco(Element child, AttributeType attributeType,
+			boolean isServletRequest) {
 		GenericAttribute result = alfrescoObjectFactory.createGenericAttribute();
-		result.setQualifiedName(attributeType.getAlfrescoName());
+		String alfrescoName = attributeType.getAlfrescoName();
+		result.setQualifiedName(alfrescoName);
 		String enumName = attributeType.isDynamicEnum() ? null : attributeType.getEnumQName();
 
 		String inputTextContent = child.getTextContent();
@@ -440,7 +447,14 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 			convertXformsAttributeToAlfresco(result, inputTextContent, type, enumName);
 		} else {
 			String value = null;
-			if (isAmendable(type, attributeType.isReadOnly())) {
+			boolean readOnly = attributeType.isReadOnly();
+			if (logger.isTraceEnabled()) {
+				logger.debug("Received value '" + inputTextContent + "' for attribute '"
+						+ alfrescoName + "' with type '" + type + "'. Read-only status '"
+						+ readOnly + "'. isFileField: " + controller.isFileField(attributeType)
+						+ " . isServletRequest: " + isServletRequest);
+			}
+			if (isAmendable(type, attributeType.isReadOnly(), isServletRequest)) {
 				inputTextContent = getReadOnlyDateOrTimeModifiedValue(type, inputTextContent);
 			}
 			if (type.equals(MsgId.INT_TYPE_XSD_DATETIME.getText())) {
@@ -458,7 +472,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 				value = convertXformsAttributeToAlfresco(inputTextContent, type, enumName);
 			}
 			if (controller.isFileField(attributeType)) {
-				logger.debug("Attribute " + attributeType.getAlfrescoName() + " is a FileField");
+				logger.debug("Attribute " + alfrescoName + " is a FileField");
 			}
 			result.getValue().clear();
 			ValueType valueType = alfrescoObjectFactory.createValueType();

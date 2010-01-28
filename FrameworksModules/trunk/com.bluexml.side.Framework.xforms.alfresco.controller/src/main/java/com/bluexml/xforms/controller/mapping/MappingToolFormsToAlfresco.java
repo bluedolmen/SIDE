@@ -509,33 +509,41 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	// GenericClass alfClass) {
 	// List<FormFieldType> fields = formType.getField();
 	private void collectFields(Element element, List<FormFieldType> fields, GenericClass alfClass) {
-		for (FormFieldType formFieldType : fields) {
-			Element fieldElement = DOMUtil.getChild(element, formFieldType.getUniqueName());
+		for (FormFieldType fieldType : fields) {
+			Element fieldElement = DOMUtil.getChild(element, fieldType.getUniqueName());
 			if (fieldElement != null) {
 
 				GenericAttribute attribute = alfrescoObjectFactory.createGenericAttribute();
-				attribute.setQualifiedName(formFieldType.getAlfrescoName());
-				String type = formFieldType.getType();
+				String alfrescoName = fieldType.getAlfrescoName();
+				attribute.setQualifiedName(alfrescoName);
+				String type = fieldType.getType();
 				String inputTextContent = fieldElement.getTextContent();
+				boolean readOnly = fieldType.isReadOnly();
+				if (logger.isTraceEnabled()) {
+					logger.debug("Received value '" + inputTextContent + "' for attribute '"
+							+ alfrescoName + "' with type '" + type + "'. Read-only status '"
+							+ readOnly + "'. isFileField: " + (fieldType instanceof FileFieldType)
+							+ " . isServletRequest: N/A");
+				}
 				// mark FileField's with their destination
-				if (formFieldType instanceof FileFieldType) {
-					FileFieldType fileField = (FileFieldType) formFieldType;
+				if (fieldType instanceof FileFieldType) {
+					FileFieldType fileField = (FileFieldType) fieldType;
 					String destination = fileField.isInRepository() ? "repository" : "filesystem";
 					attribute.setUploadTo(destination);
 				}
-				if (formFieldType.isMultiple()) {
+				if (fieldType.isMultiple()) {
 					convertXformsAttributeToAlfresco(attribute, inputTextContent, type,
-							formFieldType.getStaticEnumType());
+							fieldType.getStaticEnumType());
 				} else {
 					String alfrescoValue = null;
-					if (isAmendable(type, formFieldType.isReadOnly())) {
+					if (isAmendable(type, fieldType.isReadOnly(), false)) {
 						inputTextContent = getReadOnlyDateOrTimeModifiedValue(type,
 								inputTextContent);
 					}
 					if (type.equals("DateTime")) {
 						String date;
 						String time;
-						if (formFieldType.isReadOnly()) {
+						if (fieldType.isReadOnly()) {
 							date = extractDateFromDateTimeModified(inputTextContent);
 							time = extractTimeFromDateTimeModified(inputTextContent);
 						} else {
@@ -543,12 +551,12 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 							time = DOMUtil.getChild(fieldElement, "time").getTextContent();
 						}
 						alfrescoValue = getDateTimeFromDateAndTime(date, time);
-					} else if (formFieldType.isSearchEnum()) {
+					} else if (fieldType.isSearchEnum()) {
 						alfrescoValue = DOMUtil.getChild(fieldElement, "BXDSID").getTextContent();
 					} else {
 						String rawFieldValue = inputTextContent;
 						alfrescoValue = convertXformsAttributeToAlfresco(rawFieldValue, type,
-								formFieldType.getStaticEnumType());
+								fieldType.getStaticEnumType());
 					}
 					ValueType valueType = alfrescoObjectFactory.createValueType();
 					valueType.setValue(alfrescoValue);
