@@ -12,6 +12,7 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.security,
  com.bluexml.side.Util.componentMonitor,
  org.apache.ant,
- com.bluexml.side.Util.log
+ com.bluexml.side.Util.log,
+ org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

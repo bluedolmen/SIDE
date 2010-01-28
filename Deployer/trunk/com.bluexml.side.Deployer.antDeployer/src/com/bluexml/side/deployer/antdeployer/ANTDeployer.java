@@ -7,7 +7,11 @@ import java.io.PrintStream;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.helper.ProjectHelper2;
-import org.apache.tools.ant.helper.ProjectHelperImpl;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 
 import com.bluexml.side.util.deployer.Deployer;
 
@@ -26,15 +30,50 @@ public class ANTDeployer extends Deployer {
 	}
 
 	@Override
-	protected void deployProcess(File arg0) throws Exception {
+	protected void deployProcess(File fileToDeploy) throws Exception {
 		String antFile = getGenerationParameters().get(KEY_ANTFILE);
 		if (antFile != null) {
 			File f = new File(antFile);
-
+			
 			Project antProject = null;
 			ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
+			if (!f.exists()) {
+				//Trying to search the file in the workspace
+				Path p = new Path(antFile);
+				if (p.segmentCount() > 0) {
+					String projectName = p.segment(0);
+					IWorkspace workspace = ResourcesPlugin.getWorkspace();
+					IProject project = workspace.getRoot().getProject(projectName);
+					if (project.exists()) {
+						IFile file = project.getFile(p.removeFirstSegments(1));
+						if (file.exists())
+							f = file.getRawLocation().toFile();
+					}
+				}
+			}
+			
+			if (!f.exists()) {
+				//Trying to search the file in the same project than the file to deploy
+				IWorkspace workspace = ResourcesPlugin.getWorkspace();
+				String wsLocation = workspace.getRoot().getLocation().toString();
+				
+				if (fileToDeploy.getAbsolutePath().startsWith(wsLocation)) {
+					String wsPath = fileToDeploy.getAbsolutePath().substring(wsLocation.length());
+					Path p = new Path(wsPath);
+					if (p.segmentCount() > 0 && p.segment(0).length() == 0)
+						p.removeFirstSegments(1);
+					String projectName = p.segment(0);
+					IProject project = workspace.getRoot().getProject(projectName);
+					if (project.exists()) {
+						IFile file = project.getFile(antFile);
+						if (file.exists())
+							f = file.getRawLocation().toFile();
+					}
+				}
+			}
+			
 			if (!f.exists())
 				monitor.addWarningText("The file " + f.getAbsolutePath() + " doesn't exist. ANT deployment is cancelled.");
 			else {
@@ -69,7 +108,7 @@ public class ANTDeployer extends Deployer {
 					//ProjectHelper helper = new ProjectHelperImpl();
 					ProjectHelper helper = new ProjectHelper2();
 					helper.parse(antProject, f);
-					antProject.setProperty("directory", arg0.toString());
+					antProject.setProperty("directory", fileToDeploy.toString());
 					antProject.executeTarget("pre-build");
 					monitor.addTextAndLog("standard output "+outputStream.toString(), "");
 					antError(errorStream);
