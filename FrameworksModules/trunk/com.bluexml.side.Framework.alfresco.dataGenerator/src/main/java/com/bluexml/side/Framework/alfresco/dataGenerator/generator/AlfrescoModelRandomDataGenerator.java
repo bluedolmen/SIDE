@@ -143,7 +143,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 				else{
 					String [] parts = property.getName().toString().split("_");
 					String propertyName = parts[parts.length-1];
-					data = propertyName.substring(0,4) + "_" + Integer.valueOf(randomGenerator.nextInt()).toString();
+					data = propertyName.substring(0,propertyName.length()/2) + "_" + Integer.valueOf(randomGenerator.nextInt()).toString();
 				}
 			}
 			else if (scenario.equals("incremental")){
