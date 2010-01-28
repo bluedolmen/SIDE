@@ -15,8 +15,6 @@ import java.util.Collection;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.commons.io.FileUtils;
-
 import com.bluexml.side.Framework.alfresco.dataGenerator.generator.NativeAlfrescoModelRandomDataGenerator;
 
 /**
@@ -27,7 +25,8 @@ public class ACPPackaging implements ISerialization {
 	
 	private OutputStream acpArchive;
 	private String archiveName;
-	private XMLForACPSerialization xmlSerializer;
+//	private XMLForACPSerialization xmlSerializer;
+	private XMLForACPSerializer xmlSerializer;
 	private NativeAlfrescoModelRandomDataGenerator nativeGenerator;
 	
 	private static int bufferSize = 2048;
@@ -46,25 +45,33 @@ public class ACPPackaging implements ISerialization {
 		this.acpArchive = acpArchive;
 	}
 	
-	/**
-	 * @return the xmlSerializer
-	 */
-	public XMLForACPSerialization getXmlSerializer() {
-		return xmlSerializer;
-	}
-
-	/**
-	 * @param xmlSerializer the xmlSerializer to set
-	 */
-	public void setXmlSerializer(XMLForACPSerialization xmlSerializer) {
-		this.xmlSerializer = xmlSerializer;
-	}
+//	/**
+//	 * @return the xmlSerializer
+//	 */
+//	public XMLForACPSerialization getXmlSerializer() {
+//		return xmlSerializer;
+//	}
+//
+//	/**
+//	 * @param xmlSerializer the xmlSerializer to set
+//	 */
+//	public void setXmlSerializer(XMLForACPSerialization xmlSerializer) {
+//		this.xmlSerializer = xmlSerializer;
+//	}
 	
 	/**
 	 * @return the archiveName
 	 */
 	public String getArchiveName() {
 		return archiveName;
+	}
+
+	public XMLForACPSerializer getXmlSerializer() {
+		return xmlSerializer;
+	}
+
+	public void setXmlSerializer(XMLForACPSerializer xmlSerializer) {
+		this.xmlSerializer = xmlSerializer;
 	}
 
 	/**
