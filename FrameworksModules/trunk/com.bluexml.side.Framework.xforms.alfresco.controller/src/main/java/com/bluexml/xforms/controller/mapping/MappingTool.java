@@ -142,7 +142,7 @@ public class MappingTool {
 			GenericClass alfClass) throws AlfrescoControllerException {
 		return mappingToolImplXFormsToAlfresco.getRepoContentInfo(transaction, alfClass);
 	}
-	
+
 	/**
 	 * Sets the content file name.
 	 * 
@@ -291,10 +291,25 @@ public class MappingTool {
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
-	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction,
-			AlfrescoController controller, String formName, Node formNode)
-			throws AlfrescoControllerException, ServletException {
+	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
+			Node formNode) throws AlfrescoControllerException, ServletException {
 		return mappingToolFormsToAlfresco.transformsToAlfresco(transaction, formName, formNode);
+	}
+
+	/**
+	 * 
+	 * @param transaction
+	 * @param alfrescoController
+	 * @param formName
+	 * @param instance
+	 * @return
+	 * @throws ServletException
+	 * @throws AlfrescoControllerException
+	 */
+	public String transformsToJSON(AlfrescoTransaction transaction, String formName, Node instance,
+			boolean shortPropertyNames) throws AlfrescoControllerException, ServletException {
+		return mappingToolFormsToAlfresco.transformsToJSON(transaction, formName, instance,
+				shortPropertyNames);
 	}
 
 	/**

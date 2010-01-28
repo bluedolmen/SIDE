@@ -21,6 +21,12 @@ public class SubmitAction extends AbstractTransactionalAction {
 
 	private String transactionId = null;
 
+	Map<String, String> pageInitParams = null;
+
+	Page currentPage = null;
+	
+	boolean isSearching = false; // #1465
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -58,6 +64,18 @@ public class SubmitAction extends AbstractTransactionalAction {
 
 	@Override
 	protected void afterSubmit() throws Exception {
+		String submitURL = StringUtils.trimToNull(pageInitParams.get(MsgId.PARAM_PAGE_SUBMIT
+				.getText()));
+
+		// if in search mode, a specific processing applies
+		if (isSearching) {
+			String nextPageURL = submitURL;
+			nextPageURL += (submitURL.indexOf('?') == -1) ? "?" : "&";
+			nextPageURL += "search=" + transactionId;
+			super.redirectClient(nextPageURL);
+			return;
+		}
+
 		String elementId = transaction.getIds().get(transactionId);
 		String extActionResultURL = null;
 
@@ -67,9 +85,8 @@ public class SubmitAction extends AbstractTransactionalAction {
 		currentPage.setNode(null);
 
 		// call external action if any
-		Map<String, String> initParams = currentPage.getInitParams();
-		if (initParams != null) {
-			String className = StringUtils.trimToNull(initParams.get(MsgId.PARAM_ACTION_NAME
+		if (pageInitParams != null) {
+			String className = StringUtils.trimToNull(pageInitParams.get(MsgId.PARAM_ACTION_NAME
 					.getText()));
 			if ((className != null) && !(className.equals("null"))) {
 				extActionResultURL = callExternalAction(className);
@@ -78,8 +95,6 @@ public class SubmitAction extends AbstractTransactionalAction {
 		if (StringUtils.trimToNull(extActionResultURL) != null) {
 			super.redirectClient(extActionResultURL);
 		} else {
-			String submitURL = StringUtils.trimToNull(initParams.get(MsgId.PARAM_PAGE_SUBMIT
-					.getText()));
 			if (StringUtils.trimToNull(submitURL) != null) {
 				super.redirectClient(submitURL);
 			} else {
@@ -121,16 +136,32 @@ public class SubmitAction extends AbstractTransactionalAction {
 	 * @throws ServletException
 	 */
 	private String submitNode() throws AlfrescoControllerException, ServletException {
-		FormTypeEnum type = navigationPath.peekCurrentPage().getFormType();
-		String id = null;
+		currentPage = navigationPath.peekCurrentPage();
+		FormTypeEnum type = currentPage.getFormType();
+		String result = null;
 		// persist instance
 		if (type == FormTypeEnum.CLASS) {
-			id = controller.persistClass(transaction, node);
+			result = controller.persistClass(transaction, node);
 		} else {
-			String formName = navigationPath.peekCurrentPage().getFormName();
+			String formName = currentPage.getFormName();
 			String datatype = controller.getUnderlyingForm(formName);
-			id = controller.persistForm(transaction, datatype, node);
+			pageInitParams = currentPage.getInitParams();
+			String searchStr = StringUtils.trimToNull(pageInitParams.get(MsgId.PARAM_SEARCH_MODE
+					.getText()));
+			isSearching = StringUtils.equals(searchStr, "true");
+
+			String propStr = StringUtils.trimToNull(pageInitParams
+					.get(MsgId.PARAM_SEARCH_USE_SHORT_NAMES.getText()));
+			boolean useShortPropertyNames = StringUtils.equals(propStr, "true");
+
+			if (isSearching) {
+				result = controller.persistFormJSON(transaction, datatype, node,
+						useShortPropertyNames);
+			} else {
+				result = controller.persistForm(transaction, datatype, node);
+			}
 		}
-		return id;
+		return result;
 	}
+
 }

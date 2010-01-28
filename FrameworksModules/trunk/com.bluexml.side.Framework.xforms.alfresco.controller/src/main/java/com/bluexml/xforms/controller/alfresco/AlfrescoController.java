@@ -546,7 +546,7 @@ public class AlfrescoController {
 						+ dirName + "' under the webapp's current folder.");
 				// we need to create the directory under the webapp's folder
 				URL url = AlfrescoController.class.getResource("/mapping.xml");
-				File mappingFile = null; 
+				File mappingFile = null;
 				try {
 					mappingFile = new File(new URI(url.toString()));
 				} catch (URISyntaxException e) {
@@ -1446,7 +1446,7 @@ public class AlfrescoController {
 	 * @param transaction
 	 *            the transaction
 	 * 
-	 * @return the string
+	 * @return the temporary id assigned to the class
 	 * 
 	 * @throws AlfrescoControllerException
 	 *             the alfresco controller exception
@@ -1464,18 +1464,33 @@ public class AlfrescoController {
 	}
 
 	/**
+	 * Returns the data on the form on a specific JSON format.
+	 * 
+	 * @param transaction
+	 * @param formName
+	 * @param instance
+	 * @return a JSON string
+	 * @throws AlfrescoControllerException
+	 * @throws ServletException
+	 */
+	public String persistFormJSON(AlfrescoTransaction transaction, String formName, Node instance,
+			boolean shortPropertyNames) throws AlfrescoControllerException, ServletException {
+		return mappingTool.transformsToJSON(transaction, formName, instance, shortPropertyNames);
+	}
+
+	/**
 	 * Bridge function. Extracted from persistForm to provide an access to workflow actions.
 	 * 
 	 * @param transaction
-	 * @param type
+	 * @param formName
 	 * @param instance
 	 * @return
 	 * @throws AlfrescoControllerException
 	 * @throws ServletException
 	 */
-	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String type,
+	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
 			Node instance) throws AlfrescoControllerException, ServletException {
-		return mappingTool.transformsToAlfresco(transaction, this, type, instance);
+		return mappingTool.transformsToAlfresco(transaction, formName, instance);
 	}
 
 	/**
@@ -2405,7 +2420,7 @@ public class AlfrescoController {
 	 * @return
 	 */
 	public static String workflowBuildNamespaceURI(String processName) {
-		return MsgId.INT_WKFKW_BLUEXML_NAMESPACE + processName + "/1.0";
+		return MsgId.INT_BLUEXML_NAMESPACE_WORKFLOW + processName + "/1.0";
 	}
 
 	/**

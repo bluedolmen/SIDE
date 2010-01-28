@@ -4,6 +4,7 @@ package com.bluexml.xforms.controller.binding;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -37,6 +38,12 @@ import javax.xml.bind.annotation.XmlType;
     "shortName",
     "mandatory",
     "displayLabel"
+})
+@XmlSeeAlso({
+    ActionFieldType.class,
+    VirtualFieldType.class,
+    ModelChoiceType.class,
+    FormFieldType.class
 })
 public class FieldType {
 

@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import com.bluexml.xforms.controller.binding.AssociationActions;
 import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.ClassType;
+import com.bluexml.xforms.controller.binding.FileFieldType;
 import com.bluexml.xforms.controller.binding.FormFieldType;
 import com.bluexml.xforms.controller.binding.FormType;
 import com.bluexml.xforms.controller.binding.GenericAssociation;
@@ -20,6 +21,8 @@ import com.bluexml.xforms.controller.binding.ModelChoiceType;
 import com.bluexml.xforms.controller.binding.ReferenceType;
 import com.bluexml.xforms.controller.binding.ValueType;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
+
+import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -65,38 +68,25 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 */
 	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
 			Node formNode) throws AlfrescoControllerException, ServletException {
-		Element element = null;
-		DOMUtil.logXML(formNode, true);
-		if (formNode instanceof Document) {
-			Element docElt = ((Document) formNode).getDocumentElement();
-			element = DOMUtil.getChild(docElt, formName);
-			if (element == null) {
-				// we may be saving from a workflow form
-				element = DOMUtil.getFirstElement(docElt); // behavior when workflows didn't exist
-				element = DOMUtil.getChild(element, formName);
-			}
-		}
-		if (formNode instanceof Element) {
-			element = (Element) formNode;
-		}
+		Element element = getRootElement(formName, formNode);
 
 		VirtualResolver virtualResolver = new VirtualResolver(this);
 		virtualResolver.prepareXFormsToAlfresco(element, formName);
 
 		GenericClass result = persistFormElement(transaction, formName, element);
-		
+
 		// if applicable, append an attribute that will keep info about the node content
-		Element nodeContentElt = DOMUtil.getChild(formNode,
-				MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
+		Element nodeContentElt = DOMUtil.getChild(formNode, MsgId.INT_INSTANCE_SIDE_NODE_CONTENT
+				.getText());
 		if (nodeContentElt != null) {
 			GenericAttribute contentAttr = alfrescoObjectFactory.createGenericAttribute();
 			contentAttr.setQualifiedName(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
 			contentAttr.setSkipMe("true");
-			
+
 			ValueType pathValue = alfrescoObjectFactory.createValueType();
 			ValueType nameValue = alfrescoObjectFactory.createValueType();
 			ValueType mimeValue = alfrescoObjectFactory.createValueType();
-			
+
 			String path = nodeContentElt.getTextContent();
 			pathValue.setValue(path);
 
@@ -109,7 +99,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			contentAttr.getValue().add(pathValue);
 			contentAttr.getValue().add(nameValue);
 			contentAttr.getValue().add(mimeValue);
-			
+
 			// append the attribute for content
 			result.getAttributes().getAttribute().add(contentAttr);
 		}
@@ -117,7 +107,105 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	}
 
 	/**
-	 * Persist form element.
+	 * @param formName
+	 * @param formNode
+	 * @return
+	 */
+	private Element getRootElement(String formName, Node formNode) {
+		Element element = null;
+		DOMUtil.logXML(formNode, true);
+		if (formNode instanceof Document) {
+			Element docElt = ((Document) formNode).getDocumentElement();
+			element = DOMUtil.getChild(docElt, formName);
+			if (element == null) {
+				// we may be saving from a workflow form
+				// element = DOMUtil.getFirstElement(docElt); // behavior when no workflows existed
+				element = DOMUtil.getChild(element, formName);
+			}
+		}
+		if (formNode instanceof Element) {
+			element = (Element) formNode;
+		}
+		return element;
+	}
+
+	/**
+	 * Returns a JSON string reflecting the content of the GenericClass object built from the
+	 * instance. The example used as a specification is:
+	 * <p>
+	 * 
+	 * <pre>
+	 * {type:"{http://www.bluexml.com/model/content/com/1.0}bluexml_demo_rh_Personne",
+	 *  properties:{"{http://www.bluexml.com/model/content/com/1.0}bluexml_demo_rh_Personne_nom":"abad", 
+	 *              "{http://www.bluexml.com/model/content/com/1.0}bluexml_demo_rh_Personne_prenom":"david"
+	 *             }
+	 * }
+	 * 
+	 * <pre>
+	 * @param transaction
+	 * @param formName
+	 * @param shortPropertyNames
+	 * @param instance
+	 * @return
+	 * @throws ServletException
+	 * @throws AlfrescoControllerException
+	 */
+	public String transformsToJSON(AlfrescoTransaction transaction, String formName, Node formNode,
+			boolean shortPropertyNames) throws AlfrescoControllerException, ServletException {
+
+		Element root = getRootElement(formName, formNode);
+
+		FormType formType = getFormType(formName);
+		GenericClass alfClass = persistFormElement(transaction, formName, root);
+
+		StringBuffer buf = new StringBuffer(256);
+		String propName = "";
+		String typeName = "";
+
+		ClassType realClass = formType.getRealClass();
+		String packageName = realClass.getPackage();
+		String rootPackage = packageName.substring(0, packageName.indexOf('.'));
+		String namespace = MsgId.INT_BLUEXML_NAMESPACE_CLASS.getText() + rootPackage + "/1.0";
+
+		buf.append("{"); // open JSON string
+
+		// the title
+		buf.append("type:\"");
+		typeName = "{" + namespace + "}" + realClass.getAlfrescoName();
+		buf.append(typeName);
+		buf.append("\"");
+
+		// the properties
+		buf.append(",properties:{");
+		boolean first = true;
+		for (GenericAttribute attribute : alfClass.getAttributes().getAttribute()) {
+			if (first == false) {
+				buf.append(",");
+			}
+			first = false;
+			propName = "{";
+			propName += namespace;
+			propName += "}";
+			propName += attribute.getQualifiedName();
+			if (shortPropertyNames) {
+				propName = StringUtils.replace(propName, typeName, "");
+			}
+			buf.append("\"");
+			buf.append(propName);
+			buf.append("\":\"");
+			buf.append(attribute.getValue().get(0).getValue());
+			buf.append("\"");
+		}
+		buf.append("}"); // close properties
+
+		buf.append("}"); // close the JSON string
+
+		return buf.toString();
+	}
+
+	/**
+	 * Builds a GenericClass from fields and associations defined on the form only: the special
+	 * attribute for data node content is added afterwards.
 	 * 
 	 * @param transaction
 	 *            the login
@@ -134,10 +222,10 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 */
 	private GenericClass persistFormElement(AlfrescoTransaction transaction, String formName,
 			Element element) throws AlfrescoControllerException, ServletException {
+
 		GenericClass alfClass = alfrescoObjectFactory.createGenericClass();
 		alfClass.setAttributes(alfrescoObjectFactory.createGenericAttributes());
 		GenericAssociations createAssociations = alfrescoObjectFactory.createGenericAssociations();
-		// createAssociations.setAction("replace");
 		alfClass.setAssociations(createAssociations);
 
 		FormType formType = getFormType(formName);
@@ -429,6 +517,12 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 				attribute.setQualifiedName(formFieldType.getAlfrescoName());
 				String type = formFieldType.getType();
 				String inputTextContent = fieldElement.getTextContent();
+				// mark FileField's with their destination
+				if (formFieldType instanceof FileFieldType) {
+					FileFieldType fileField = (FileFieldType) formFieldType;
+					String destination = fileField.isInRepository() ? "repository" : "filesystem";
+					attribute.setUploadTo(destination);
+				}
 				if (formFieldType.isMultiple()) {
 					convertXformsAttributeToAlfresco(attribute, inputTextContent, type,
 							formFieldType.getStaticEnumType());
@@ -475,7 +569,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @return the repository content attribute
 	 */
 	private GenericAttribute getNodeContentAttribute(GenericClass alfClass) {
-		
+
 		List<GenericAttribute> attributes = alfClass.getAttributes().getAttribute();
 		for (GenericAttribute attribute : attributes) {
 			if (attribute.getQualifiedName().equals(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText())) {
@@ -484,7 +578,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gets the repository content file name.
 	 * 
@@ -505,7 +599,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			String path = contentAttribute.getValue().get(0).getValue();
 			String name = contentAttribute.getValue().get(1).getValue();
 			String type = contentAttribute.getValue().get(2).getValue();
-			
+
 			return new RepoContentInfoBean(path, name, type);
 		}
 		return null;

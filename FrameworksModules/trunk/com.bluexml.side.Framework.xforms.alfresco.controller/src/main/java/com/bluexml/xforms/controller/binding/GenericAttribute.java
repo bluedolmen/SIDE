@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="value" type="{}ValueType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="qualifiedName" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       &lt;attribute name="uploadTo" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="skipMe" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -43,6 +44,9 @@ public class GenericAttribute {
     @XmlAttribute(required = true)
     @XmlSchemaType(name = "anySimpleType")
     protected String qualifiedName;
+    @XmlAttribute
+    @XmlSchemaType(name = "anySimpleType")
+    protected String uploadTo;
     @XmlAttribute
     @XmlSchemaType(name = "anySimpleType")
     protected String skipMe;
@@ -98,6 +102,30 @@ public class GenericAttribute {
      */
     public void setQualifiedName(String value) {
         this.qualifiedName = value;
+    }
+
+    /**
+     * Gets the value of the uploadTo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUploadTo() {
+        return uploadTo;
+    }
+
+    /**
+     * Sets the value of the uploadTo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUploadTo(String value) {
+        this.uploadTo = value;
     }
 
     /**

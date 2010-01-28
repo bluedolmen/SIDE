@@ -45,10 +45,10 @@ public class Batch {
 
     @XmlElements({
         @XmlElement(name = "update", type = GenericUpdate.class),
-        @XmlElement(name = "create", type = GenericCreate.class),
-        @XmlElement(name = "attach", type = AttachContentInfo.class),
         @XmlElement(name = "requester", type = ServiceRequestSource.class),
-        @XmlElement(name = "delete", type = GenericDelete.class)
+        @XmlElement(name = "delete", type = GenericDelete.class),
+        @XmlElement(name = "create", type = GenericCreate.class),
+        @XmlElement(name = "attach", type = AttachContentInfo.class)
     })
     protected List<Object> createOrUpdateOrDelete;
 
@@ -71,10 +71,10 @@ public class Batch {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericUpdate }
-     * {@link GenericCreate }
-     * {@link AttachContentInfo }
      * {@link ServiceRequestSource }
      * {@link GenericDelete }
+     * {@link GenericCreate }
+     * {@link AttachContentInfo }
      * 
      * 
      */
