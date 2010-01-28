@@ -26,8 +26,10 @@ rule ReqDefs {
         tables <- WebProject!Table->allInstances()
     ),
     loginP : WebProject!LoginPage (
-        title <- 'Start...',
+        title <- s.name,
         name <- 'index.html',
+		id <- s.id,
+		comment<-Sequence{s.documentation.format()},
         links <- RWM!Agent->allInstances()->collect(a | thisModule.resolveTemp(a,'link_loginPage'))->
 					union(RWM!Process->allInstances()->collect(a | thisModule.resolveTemp(a,'link_loginPage')))
     )

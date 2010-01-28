@@ -6,25 +6,41 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 	<head>
 		<title><%title%></title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.nyroModal-1.5.5.pack.js"></script>
+		<link rel="stylesheet" href="styles/nyroModal.css" type="text/css" media="screen" />
 	</head>
 	<body class="body">
-		<div id="users" class="centered_div">
-			<h1><%eContainer().name%></h1>
-			<hr/>
+		<div class="box">
 			<h1><%title%></h1>
+		</div>
+		<br/>
+		<div class="box">
 			<div class="user">
 			<%for (links.nSort("label")){%>
 				<%if (!page.title.startsWith("Process : ")){%><li/><a href="frame_<%page.name%>"><%label%></a><%}%>
 			<%}%>
 			</div>
-			<hr/>
+		</div>
+		<br/>
+		<div class="box">
 			<div class="process">
 			<%for (links.nSort("label")){%>
 				<%if (page.title.startsWith("Process : ")){%><li/><a href="frame_<%page.name%>"><%label%></a><%}%>
 			<%}%>
 			</div>
-			</td>
-			</tr></table>
+		</div>
+		<br/>		
+		<div class="box">
+			<span style="font-weight:bold;">Description :</span><br/>
+				<%comment.nFirst()%>
+			</div>
+		</div>
+		<br/>
+		<div id="logout" class="box">
+			<img src="images/addcomment.png"/><a href="addComment.php?elementId=<%id%>" class="nyroModal">Add a comment</a>
+			--
+			<img src="images/comment.png"/><a href="listComment.php?elementId=<%id%>" class="nyroModal">List all comments</a>
 		</div>
 	</body>
 </html>
@@ -66,7 +82,9 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 			<br/>
 		<%}%>
 		<div id="logout" class="box">
-			<img src="images/comment.png"/><a href="addComment.php?elementId=<%id%>" class="nyroModal">Add a comment</a>
+			<img src="images/addcomment.png"/><a href="addComment.php?elementId=<%id%>" class="nyroModal">Add a comment</a>
+			<br/>
+			<img src="images/comment.png"/><a href="listComment.php?elementId=<%id%>" class="nyroModal">List all comments</a>
 		</div>
 		<br/>
 		<div id="logout" class="box">
@@ -122,7 +140,9 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 			</div>
 			<br/>
 			<div id="logout" class="box">
-				<img src="images/comment.png"/><a href="addComment.php?elementId=<%id%>" class="nyroModal">Add a comment</a>
+				<img src="images/addcomment.png"/><a href="addComment.php?elementId=<%id%>" class="nyroModal">Add a comment</a>
+				--
+				<img src="images/comment.png"/><a href="listComment.php?elementId=<%id%>" class="nyroModal">List all comments</a>
 			</div>
 			<%for (components){%>
 				<%if (current("DataPage").mainComponent == current()){%>

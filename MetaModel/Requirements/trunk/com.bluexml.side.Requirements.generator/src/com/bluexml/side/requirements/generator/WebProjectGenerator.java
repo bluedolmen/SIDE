@@ -3,6 +3,7 @@ package com.bluexml.side.requirements.generator;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,13 +23,11 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.jface.dialogs.MessageDialog;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.requirements.AnnotableElement;
 import com.bluexml.side.requirements.Annotation;
-import com.bluexml.side.requirements.RequirementsDefinition;
 
 public class WebProjectGenerator extends RequirementsGenerator {
 
@@ -98,20 +97,15 @@ public class WebProjectGenerator extends RequirementsGenerator {
 		Collection<IFile> result = super.generate(model);
 
 		//Export annotations
-		RequirementsDefinition def = null;
 		try {
 			Map<?,?> m = new HashMap<Object, Object>();
 			Resource r  = EResourceUtils.openModel(URI.createFileURI(model.getLocation().toString()), m);
-			XMIResource xmi = (XMIResource) r;
 			Set<Annotation> annotations = new HashSet<Annotation>();
-			if (xmi.getContents().get(0) instanceof RequirementsDefinition) {
-				def = (RequirementsDefinition) xmi.getContents().get(0);
-				for (Iterator<EObject> iterator = def.eAllContents(); iterator.hasNext();) {
-					EObject obj = (EObject) iterator.next();
-					if (obj instanceof Annotation) {
-						Annotation a = (Annotation) obj;
-						annotations.add(a);
-					}
+			for (Iterator<EObject> iterator = r.getAllContents(); iterator.hasNext();) {
+				EObject obj = (EObject) iterator.next();
+				if (obj instanceof Annotation) {
+					Annotation a = (Annotation) obj;
+					annotations.add(a);
 				}
 			}
 			
@@ -123,16 +117,17 @@ public class WebProjectGenerator extends RequirementsGenerator {
 			if (sqlSchema != null) {
 				FileWriter fstream = new FileWriter(sqlSchema.getRawLocation().toString(),true);
 	        	BufferedWriter out = new BufferedWriter(fstream);
+	        	SimpleDateFormat  simpleFormat = new SimpleDateFormat("yyyy-MM-dd");
 				for (Annotation a : annotations) {
 					String sql = "";
 					
 					String annotation = "";
 					if (a.getAnnotation() != null)
-						annotation = a.getAnnotation().replaceAll("'","\\\\'");
+						annotation = a.getAnnotation().replaceAll("'","\\\\'").replaceAll("\n","\\\\n");
 					
 					String comment = "";
 					if (a.getComment() != null)
-						comment = a.getComment().replaceAll("'", "\\\\'");
+						comment = a.getComment().replaceAll("'", "\\\\'").replaceAll("\n","\\\\n");
 					
 					sql = "INSERT IGNORE INTO `annotation` (" +
 							"`id` ," +
@@ -147,7 +142,7 @@ public class WebProjectGenerator extends RequirementsGenerator {
 							"	'"+a.getAuthor()+"', " +
 							"	'"+annotation+"', " +
 							"	'"+comment+"', " +
-							"	'"+a.getDate()+"');\n";
+							"	'"+simpleFormat.format(a.getDate())+"');\n";
 					out.write(sql);
 				}
 				out.close();

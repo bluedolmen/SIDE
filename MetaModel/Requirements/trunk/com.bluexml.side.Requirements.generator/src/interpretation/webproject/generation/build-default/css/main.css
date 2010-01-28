@@ -129,7 +129,7 @@ a{
 
 .user li {
 	list-style-type: none;
-	margin-left: -14px;
+	margin-left: 0px;
 }
 
 .process li:before {
@@ -141,11 +141,11 @@ a{
 
 .process li {
 	list-style-type: none;
-	margin-left: -14px;
+	margin-left: 0px;
 }
 
 #goalItems {
-	height:87%;
+	height:85%;
 }
 
 #logout {
