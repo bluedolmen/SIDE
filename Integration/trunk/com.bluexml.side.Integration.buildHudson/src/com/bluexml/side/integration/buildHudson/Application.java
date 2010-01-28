@@ -238,6 +238,10 @@ public class Application {
 	    }
 	    System.err.println("Process done, exit status was " + p.exitValue());
 	    
+	    if (p.exitValue() != 0){
+	    	System.exit(1);
+	    }
+	    
 	    } catch (java.io.IOException e) {
 		      System.err.println("I/O error: " + e);
 		} 
