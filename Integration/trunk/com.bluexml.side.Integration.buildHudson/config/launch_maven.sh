@@ -38,8 +38,7 @@ if grep -q "[ERROR]" "log_maven.log" ; then
 	exit 1
 else
 	echo "Maven deploy success"
-	exit 0
 	
 fi
 
-
+exit 0
