@@ -146,7 +146,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * bluexml.side.clazz.Aspect, com.bluexml.side.clazz.Attribute)
 	 */
 	public void addAttributeForAspect(Aspect aspect, Attribute attribute) {
-		AttributeType asAttributeType = asAttributeType(aspect, attribute);
+		AttributeType asAttributeType = processAttribute(aspect, attribute);
 		getAspectType(aspect).getAttribute().add(asAttributeType);
 	}
 
@@ -185,7 +185,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * 
 	 * @return the attribute type
 	 */
-	private AttributeType asAttributeType(AbstractClass classe, Attribute attribute) {
+	private AttributeType processAttribute(AbstractClass classe, Attribute attribute) {
 		boolean isMultiple = false;
 		String result;
 
@@ -225,7 +225,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * .side.clazz.Clazz, com.bluexml.side.clazz.Attribute, com.bluexml.side.clazz.Clazz)
 	 */
 	public void addAttributeForClass(Clazz classe, Attribute attribute, Clazz owner) {
-		AttributeType asAttributeType = asAttributeType(owner, attribute);
+		AttributeType asAttributeType = processAttribute(owner, attribute);
 		getClassType(classe).getAttribute().add(asAttributeType);
 	}
 
