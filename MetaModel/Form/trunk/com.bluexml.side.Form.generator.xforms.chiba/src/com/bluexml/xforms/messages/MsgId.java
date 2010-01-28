@@ -115,6 +115,9 @@ public enum MsgId {
 	INT_ACT_PARAM_LIST_MAXLENGTH		("maxLength"),
 	INT_ACT_PARAM_LIST_TYPE				("type"),
 	INT_BLUEXML_DEFAULT_STORE_PATH		("/app:company_home/app:dictionary/cm:SIDE DATA"),
+	// name spaces must end with a trailing slash
+	INT_BLUEXML_NAMESPACE_CLASS			("http://www.bluexml.com/model/content/"),
+	INT_BLUEXML_NAMESPACE_WORKFLOW		("http://www.bluexml.com/model/workflow/"),
 	INT_CSS_BLUEXML_AUTOGEN				("bluexml-autogen"),
 	INT_CSS_HORIZ_LINE					("side_horizontal_line"),
 	INT_CSS_RO_TEXTAREA					("side_ro_textarea"),
@@ -202,8 +205,6 @@ public enum MsgId {
 	INT_WKFLW_INSTANCE_WIDGET_NAME		("workflow_instances"),
 	INT_WKFLW_PROCESS_NODESET			("process"),
 	INT_WKFLW_PROCESS_WIDGET_NAME		("workflow_definitions"),
-	// must end with a trailing slash
-	INT_WKFKW_BLUEXML_NAMESPACE			("http://www.bluexml.com/model/workflow/"),
 	//
 	// these are used when expanding xforms instances with wkflw data
 	INT_WKFLW_INSTANCE_TAG_WKFLW		("workflow"),
@@ -250,6 +251,8 @@ public enum MsgId {
 	PARAM_RELOAD_MAPPING_FILE("dynamicReload"),
 	/** whether to reload properties and config files*/
 	PARAM_RELOAD_PROPERTIES("reloadProperties"),
+	PARAM_SEARCH_MODE("searchMode"),
+	PARAM_SEARCH_USE_SHORT_NAMES("searchUseShortNames"),
 	PARAM_SHOW_SUBMITS("showSubmitButtons"),
 	PARAM_SHOW_CANCEL("showCancel"),
 	PARAM_SHOW_DELETE("showDelete"),
