@@ -75,6 +75,7 @@
 		 <property name="alfrescoModelDatas" ref="alfrescoModelData" /> 
 		 <property name="dictionary" ref="alfrescoModelDictionary" />
 		 <property name="service" ref="dictionaryService" />
+		 <property name="structure" ref="alfrescoModelStructure" />
 	</bean>
 	
 	<!-- data -->
