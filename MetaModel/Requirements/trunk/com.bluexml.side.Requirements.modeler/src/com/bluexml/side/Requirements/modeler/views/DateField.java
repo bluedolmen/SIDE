@@ -20,7 +20,8 @@ public class DateField extends AbstractField {
 	public String getValue(Object obj) {
 		if (obj instanceof Annotation) {
 			Annotation a = (Annotation) obj;
-			return a.getDate().toLocaleString();
+			if (a.getDate() != null)
+				return a.getDate().toLocaleString();
 		}
 		return "Not defined";
 	}

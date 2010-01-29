@@ -31,7 +31,8 @@ public class IdField extends AbstractField {
 			Annotation a1 = (Annotation) obj1;
 			Annotation a2 = (Annotation) obj2;
 			
-			return Integer.valueOf(a1.getId()).compareTo(Integer.valueOf(a2.getId()));
+			if (a1.getId() != null && a2.getId() != null)
+				return Integer.valueOf(a1.getId()).compareTo(Integer.valueOf(a2.getId()));
 		}
 		return super.compare(obj1, obj2);
 	}

@@ -30,7 +30,10 @@ public abstract class AbstractField implements IField {
 	public int compare(Object obj1, Object obj2) {
 		String v1 = getValue(obj1);
 		String v2 = getValue(obj2);
-		return v1.compareTo(v2);
+		if (v1 != null && v2 != null)
+			return v1.compareTo(v2);
+		else
+			return 0;
 	}
 	
 	public Image getColumnHeaderImage() {
