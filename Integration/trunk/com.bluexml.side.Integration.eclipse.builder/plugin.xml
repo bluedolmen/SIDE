@@ -10,11 +10,16 @@
     <runtime>
       <run class="com.bluexml.side.integration.eclipse.builder.SIDENature" />
     </runtime>
+  </extension>
+  <extension id="com.bluexml.side.integration.eclipse.nature.activatedBuilder" name="SIDE Nature with builder" point="org.eclipse.core.resources.natures">
+    <runtime>
+      <run class="com.bluexml.side.integration.eclipse.builder.SIDENatureWithBuilder" />
+    </runtime>
     <builder id="com.bluexml.side.integration.eclipse.builder" />
   </extension>
   <extension point="org.eclipse.ui.popupMenus">
     <objectContribution adaptable="true" id="com.bluexml.side.Integration.eclipse.builder.contribution1" nameFilter="*" objectClass="org.eclipse.core.resources.IProject">
-      <action class="com.bluexml.side.integration.eclipse.builder.ToggleNatureAction" enablesFor="+" id="com.bluexml.side.Integration.eclipse.builder.addRemoveNatureAction" label="Add/Remove SIDE Nature" menubarPath="com.bluexml.side/project" />
+      <action class="com.bluexml.side.integration.eclipse.builder.ToggleNatureAction" enablesFor="+" id="com.bluexml.side.Integration.eclipse.builder.addRemoveNatureAction" label="Activate/Deactivate SIDE builder" menubarPath="com.bluexml.side/project" />
       <menu icon="icon/side_16.gif" id="com.bluexml.side" label="SIDE" path="additions">
         <separator name="project" />
       </menu>

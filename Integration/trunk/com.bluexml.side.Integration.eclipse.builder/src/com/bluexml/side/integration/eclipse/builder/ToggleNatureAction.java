@@ -66,12 +66,40 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 	 *            to have sample nature added or removed
 	 */
 	private void toggleNature(IProject project) {
+		if (!hasNature(project, SIDENature.NATURE_ID) && !hasNature(project, SIDENatureWithBuilder.NATURE_ID)) {
+			addNature(project, SIDENatureWithBuilder.NATURE_ID);
+		} else if (hasNature(project, SIDENature.NATURE_ID)) {
+			removeNature(project,SIDENature.NATURE_ID);
+			addNature(project, SIDENatureWithBuilder.NATURE_ID);
+		} else if (hasNature(project, SIDENatureWithBuilder.NATURE_ID)) {
+			removeNature(project,SIDENatureWithBuilder.NATURE_ID);
+			addNature(project, SIDENature.NATURE_ID);
+		}
+	}
+
+	private boolean hasNature(IProject project, String nature) {
+		boolean found = false;
 		try {
 			IProjectDescription description = project.getDescription();
 			String[] natures = description.getNatureIds();
 
 			for (int i = 0; i < natures.length; ++i) {
-				if (SIDENature.NATURE_ID.equals(natures[i])) {
+				if (nature.equals(natures[i]))
+					found = true;
+			}
+
+		} catch (CoreException e) {
+		}
+		return found;
+	}
+	
+	private void removeNature(IProject project, String nature) {
+		try {
+			IProjectDescription description = project.getDescription();
+			String[] natures = description.getNatureIds();
+
+			for (int i = 0; i < natures.length; ++i) {
+				if (nature.equals(natures[i])) {
 					// Remove the nature
 					String[] newNatures = new String[natures.length - 1];
 					System.arraycopy(natures, 0, newNatures, 0, i);
@@ -82,15 +110,30 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 					return;
 				}
 			}
-
-			// Add the nature
-			String[] newNatures = new String[natures.length + 1];
-			System.arraycopy(natures, 0, newNatures, 0, natures.length);
-			newNatures[natures.length] = SIDENature.NATURE_ID;
-			description.setNatureIds(newNatures);
-			project.setDescription(description, null);
 		} catch (CoreException e) {
 		}
 	}
+	
+	private void addNature(IProject project, String nature) {
+		try {
+			boolean found = false;
+			IProjectDescription description = project.getDescription();
+			String[] natures = description.getNatureIds();
 
+			for (int i = 0; i < natures.length; ++i) {
+				if (nature.equals(natures[i]))
+					found = true;
+			}
+
+			if (!found) {
+				// Add the nature
+				String[] newNatures = new String[natures.length + 1];
+				System.arraycopy(natures, 0, newNatures, 0, natures.length);
+				newNatures[natures.length] = nature;
+				description.setNatureIds(newNatures);
+				project.setDescription(description, null);
+			}
+		} catch (CoreException e) {
+		}	
+	}
 }
