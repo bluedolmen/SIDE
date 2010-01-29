@@ -1701,7 +1701,7 @@ public class Utils {
 				new File(getFinalDirectory()).mkdir();
 
 			System.out.println("\t- Suppression de l'ancien update site" );
-			if (new File(getUpdateSiteDir() + File.separator + getCodeName()
+			/*if (new File(getUpdateSiteDir() + File.separator + getCodeName()
 					+ File.separator + "features").exists()) {
 				FileHelper.deleteFile(new File(getUpdateSiteDir() + File.separator
 						+ getCodeName() + File.separator + "features"));
@@ -1714,7 +1714,7 @@ public class Utils {
 						+ getCodeName() + File.separator + "plugins"));
 				new File(getUpdateSiteDir() + File.separator + getCodeName()
 						+ File.separator + "plugins").mkdir();
-			}
+			}*/
 
 			// copie de l'update site
 			System.out.println("\t- Update Site copy :" );
