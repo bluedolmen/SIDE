@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="styles/style.css"/>
 	<link rel="stylesheet" type="text/css" href="styles/nyroModal.full.css"/>
 	<title>BlueXML Demo for XForms &amp; workflows</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script src="js/jquery.nyroModal-1.5.5.js" type="text/javascript"></script>
 </head>
 <body class="body">
