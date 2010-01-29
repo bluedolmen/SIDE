@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ant Deployer
 Bundle-SymbolicName: com.bluexml.side.Deployer.antDeployer;singleton:=true
-Bundle-Version: 1.0.8.v13286-20100127
+Bundle-Version: 1.0.9.v13482-20100129
 Bundle-Activator: com.bluexml.side.deployer.antdeployer.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
