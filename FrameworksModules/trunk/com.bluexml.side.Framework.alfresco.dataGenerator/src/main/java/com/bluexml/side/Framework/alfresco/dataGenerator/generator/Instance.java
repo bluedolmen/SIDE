@@ -116,38 +116,47 @@ public class Instance implements IInstance {
 	}
 
 	
-	private boolean checkUnicity(TypeDefinition type, Map<PropertyDefinition, Object> sideDataProperties, Map<AspectDefinition, Map<PropertyDefinition, Object>> sideAspectDataProperties) {
+	private boolean checkUnicity(TypeDefinition type, Map<PropertyDefinition, Object> sideDataProperties, Map<AspectDefinition, Map<PropertyDefinition, Object>> sideAspectDataProperties) throws Exception {
+		Set<PropertyDefinition> SIDEProperties = sideDataProperties.keySet();
+		Collection<PropertyDefinition> unicitySIDEProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).getUnicityProperties(type,SIDEProperties);
+		
+		Collection<PropertyDefinition> unicityAspectsProperties = new ArrayList<PropertyDefinition>();
+		
 		Collection<Map<PropertyDefinition, Object>> aspectDataProperties = sideAspectDataProperties.values();
 		Collection<Serial> serialProperties = new ArrayList<Serial>();
 		for (Map<PropertyDefinition, Object> dataProperties : aspectDataProperties){
 			Set<PropertyDefinition> properties = dataProperties.keySet();
-			for(PropertyDefinition property : properties){
+			unicityAspectsProperties.addAll(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).getUnicityProperties(type,properties));
+			for(PropertyDefinition property : unicityAspectsProperties){
 				serialProperties.add(new Serial(type.getName().toString(),property.getName().toString(),dataProperties.get(property).toString()));
 			}
 		}
-		Set<PropertyDefinition> properties = sideDataProperties.keySet();
-		for (PropertyDefinition property : properties){
+		for (PropertyDefinition property : unicitySIDEProperties){
 			serialProperties.add(new Serial(type.getName().toString(),property.getName().toString(),sideDataProperties.get(property).toString()));
 		}
 		
-		Collection<Serial> serializedData = ((AlfrescoModelRandomDataGenerator)alfrescoModelRandomGenerator).getSerializedData();
-		boolean same = false;
-		if (serializedData.size() > 0 && serialProperties.size() > 0){
-			same = true;
-			for (Serial dataProperty : serialProperties){
-				boolean contains = false;
-				for (Serial serializedDataProperty : serializedData){
-					if (dataProperty.getType().equals(serializedDataProperty.getType())
-						&& dataProperty.getProperty().equals(serializedDataProperty.getProperty())
-						&& dataProperty.getData().toString().equals(serializedDataProperty.getData().toString())){
-						contains = true;
+		if (unicitySIDEProperties.size() > 0 && unicityAspectsProperties.size() > 0){
+			Collection<Serial> serializedData = ((AlfrescoModelRandomDataGenerator)alfrescoModelRandomGenerator).getSerializedData();
+			boolean same = false;
+			if (serializedData.size() > 0 && serialProperties.size() > 0){
+				same = true;
+				for (Serial dataProperty : serialProperties){
+					boolean contains = false;
+					for (Serial serializedDataProperty : serializedData){
+						if (dataProperty.getType().equals(serializedDataProperty.getType())
+							&& dataProperty.getProperty().equals(serializedDataProperty.getProperty())
+							&& dataProperty.getData().toString().equals(serializedDataProperty.getData().toString())){
+							contains = true;
+						}
 					}
+					same &= contains;
 				}
-				same &= contains;
 			}
+			return same;
 		}
-		
-		return same;
+		else{
+			return false;
+		}
 	}
 
 
