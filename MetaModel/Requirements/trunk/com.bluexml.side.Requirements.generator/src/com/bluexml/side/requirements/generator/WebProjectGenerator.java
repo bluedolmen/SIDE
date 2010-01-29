@@ -129,6 +129,10 @@ public class WebProjectGenerator extends RequirementsGenerator {
 					if (a.getComment() != null)
 						comment = a.getComment().replaceAll("'", "\\\\'").replaceAll("\n","\\\\n");
 					
+					String date = "";
+					if (a.getDate() != null)
+						date = simpleFormat.format(a.getDate());
+					
 					sql = "INSERT IGNORE INTO `annotation` (" +
 							"`id` ," +
 							"`elementId` ," +
@@ -142,7 +146,7 @@ public class WebProjectGenerator extends RequirementsGenerator {
 							"	'"+a.getAuthor()+"', " +
 							"	'"+annotation+"', " +
 							"	'"+comment+"', " +
-							"	'"+simpleFormat.format(a.getDate())+"');\n";
+							"	'"+date+"');\n";
 					out.write(sql);
 				}
 				out.close();
