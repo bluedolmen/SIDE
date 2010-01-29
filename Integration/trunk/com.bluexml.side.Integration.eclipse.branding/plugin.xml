@@ -41,6 +41,11 @@
            id="com.bluexml.side.integration.eclipse.nature.icon"
            natureId="com.bluexml.side.integration.eclipse.nature">
      </image>
+     <image
+           icon="icons/project_icon_activated_builder.png"
+           id="com.bluexml.side.integration.eclipse.nature.activatedBuilder.icon"
+           natureId="com.bluexml.side.integration.eclipse.nature.activatedBuilder">
+     </image>
   </extension>
 </plugin>
 
