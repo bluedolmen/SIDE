@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
@@ -23,6 +22,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.diff.metamodel.AttributeChange;
 import org.eclipse.emf.compare.diff.metamodel.DiffElement;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
@@ -37,6 +37,10 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.sideLabs.referential.references.Model;
 import org.sideLabs.referential.references.ModelsDocument;
 import org.sideLabs.referential.references.Reference;
@@ -252,15 +256,21 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		try {
 			if (file.exists()) {
 				IFile backupModel = SIDEBuilderUtil.getBackupModel(file);
-				if (backupModel.exists())
-					backupModel.delete(true, null);
 				IResource container = backupModel.getParent(); 
 				if (!container.exists() && container instanceof IFolder)
 					SIDEBuilderUtil.prepareFolder((IFolder) container);
-				file.copy(backupModel.getFullPath(), true, null);
+				
+				Resource src = EResourceUtils.openModel(file.getLocation().toString(), new HashMap<Object, Object>());
+				Resource target = new XMIResourceImpl(URI.createFileURI(backupModel.getLocation().toString()));
+				target.getContents().addAll(src.getContents());
+				HashMap<String, Boolean> options = new HashMap<String, Boolean>();
+				options.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+				target.save(options);
+				backupModel.refreshLocal(IResource.DEPTH_ONE, null);
 			}
-		} catch (CoreException e) {
+		} catch (Exception e) {
 			//Nothing to do
+			e.printStackTrace();
 			addMarker(file, e.getMessage(), 0, IMarker.SEVERITY_ERROR);
 		}
 	}
@@ -488,7 +498,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			throws CoreException {
 		try {
 			IFolder folder = getProject().getFolder(SIDEBuilderConstants.metadataFolder);
-			SIDEBuilderUtil.clearFolder(folder);
+			//SIDEBuilderUtil.clearFolder(folder);
 			SIDEBuilderUtil.prepareFolder(folder);
 			getProject().accept(new EMFResourceVisitor());
 		} catch (CoreException e) {
