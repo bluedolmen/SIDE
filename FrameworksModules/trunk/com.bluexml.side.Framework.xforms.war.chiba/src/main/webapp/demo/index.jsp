@@ -20,6 +20,7 @@
 	String name = request.getParameter("username");
 	String password = request.getParameter("password");
 	String host = request.getParameter("alfrescohost");
+	String xforms = request.getParameter("xformshost");
 	if ((name != null) || (password != null)) {
 		if ((host == null) || (name == null) || (password == null) || (host.length() == 0) || (name.length() == 0) || (password.length() == 0)) {
 		%>
@@ -28,11 +29,14 @@
 		} else {
 			if (!host.endsWith("/"))
 				host += "/";
+			if (!xforms.endsWith("/"))
+				xforms += "/";
 			// we don't check 'host' cause function authenticate has a default for it.
 			if (Util.authenticate(host, name, password)) {
 				session.setAttribute("username", name);
 				session.setAttribute("password", password);
 				session.setAttribute("alfrescohost", host);
+				session.setAttribute("xformshost", xforms);
 		%>
 			<p class="confirmationaccept">Login successfully.</p>
 		<%
@@ -51,6 +55,8 @@
 		password= "";
 	if (host == null || host.length() == 0)
 	    host = "http://localhost:8080/alfresco/";
+	if (xforms == null || xforms.length() == 0)
+	    xforms = "http://localhost:8080/xforms/";
 	%>
 	    	<h1>Welcome</h1>
 	    	<form method="post" action="index.jsp">
@@ -64,6 +70,10 @@
 	    		<tr>
 	    			<td class="form_field">Alfresco URL :</td><td class="form_input">
 	    				<input type="text" value="<%=host%>" name="alfrescohost" size="40"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td class="form_field">XForms URL :</td><td class="form_input">
+	    				<input type="text" value="<%=xforms%>" name="xformshost" size="40"/></td>
 	    		</tr>
 	    	</table>
 	    	<div>
