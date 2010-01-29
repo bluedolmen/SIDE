@@ -1,96 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
->
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.bluexml</groupId>
-		<artifactId>superpom</artifactId>
-		<version>1.10</version>
-	</parent>
-	<groupId>com.bluexml.side.Framework.xforms.war</groupId>
-	<artifactId>chiba</artifactId>
-	<packaging>war</packaging>
-	<name>xforms.war.chiba for SIDE</name>
-	<version>1.0.13</version>
-	<description>Patches Chiba and provides a WAR ready to be overlayed by the final generation project.
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.bluexml</groupId>
+    <artifactId>superpom</artifactId>
+    <version>1.10</version>
+  </parent>
+  <groupId>com.bluexml.side.Framework.xforms.war</groupId>
+  <artifactId>chiba</artifactId>
+  <packaging>war</packaging>
+  <name>xforms.war.chiba for SIDE</name>
+  <version>1.0.14</version>
+  <description>Patches Chiba and provides a WAR ready to be overlayed by the final generation project.
 		It patches Chiba classes, javascripts and CSS. It also configures Chiba/webapp to use custom classes.
 		Those classes delegate work to controller then.</description>
-	<dependencies>
-		<dependency>
-			<groupId>com.bluexml.side.Framework.xforms.alfresco</groupId>
-			<artifactId>controller</artifactId>
-			<version>1.0.20</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.chiba</groupId>
-			<artifactId>chiba-web</artifactId>
-			<version>2.3.0</version>
-			<type>war</type>
-		</dependency>
-		<dependency>
-			<groupId>org.chiba</groupId>
-			<artifactId>chiba-web-jar</artifactId>
-			<version>2.3.0</version>
-			<type>jar</type>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.4</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
-	<build>
-		<finalName>xforms.war.${artifactId}-${version}</finalName>
-		<defaultGoal>install</defaultGoal>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1-alpha-2</version>
-				<configuration>
-					<!--
+  <dependencies>
+    <dependency>
+      <groupId>com.bluexml.side.Framework.xforms.alfresco</groupId>
+      <artifactId>controller</artifactId>
+      <version>1.0.21</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.chiba</groupId>
+      <artifactId>chiba-web</artifactId>
+      <version>2.3.0</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>org.chiba</groupId>
+      <artifactId>chiba-web-jar</artifactId>
+      <version>2.3.0</version>
+      <type>jar</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.4</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.4</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>xforms.war.${artifactId}-${version}</finalName>
+    <defaultGoal>install</defaultGoal>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1-alpha-2</version>
+        <configuration>
+          <!--
 						<outputFileNameMapping>@{artifactId}@-@{version}@.@{extension}@</outputFileNameMapping>
 					-->
-					<webResources>
-						<resource>
-							<directory>src/main/webapp</directory>
-						</resource>
-					</webResources>
-					<overlays>
-						<!-- configure which files to be excluded -->
-						<overlay>
-							<groupId>org.chiba</groupId>
-							<artifactId>chiba-web</artifactId>
-							<excludes>
-								<exclude>forms/apps</exclude>
-								<exclude>forms/demo</exclude>
-								<exclude>forms/incubator</exclude>
-								<exclude>forms/*.xhtml</exclude>
-								<exclude>forms/**/*.xhtml</exclude>
-								<exclude>forms/**/*.xml</exclude>
-								<exclude>WEB-INF/lib/chiba-web.jar</exclude>
-								<!-- if not excluded, xmlrpc-common3.0 would come in 3 instances -->
-								<exclude>
-									WEB-INF/lib/xmlrpc-xmlrpc-common-3.0.jar
-								</exclude>
-								<exclude>
-									WEB-INF/lib/org.apache.xmlrpc-xmlrpc-common-3.0.jar
-								</exclude>
-							</excludes>
-						</overlay>
-					</overlays>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+          <webResources>
+            <resource>
+              <directory>src/main/webapp</directory>
+            </resource>
+          </webResources>
+          <overlays>
+            <!-- configure which files to be excluded -->
+            <overlay>
+              <groupId>org.chiba</groupId>
+              <artifactId>chiba-web</artifactId>
+              <excludes>
+                <exclude>forms/apps</exclude>
+                <exclude>forms/demo</exclude>
+                <exclude>forms/incubator</exclude>
+                <exclude>forms/*.xhtml</exclude>
+                <exclude>forms/**/*.xhtml</exclude>
+                <exclude>forms/**/*.xml</exclude>
+                <exclude>WEB-INF/lib/chiba-web.jar</exclude>
+                <!-- if not excluded, xmlrpc-common3.0 would come in 3 instances -->
+                <exclude>WEB-INF/lib/xmlrpc-xmlrpc-common-3.0.jar</exclude>
+                <exclude>WEB-INF/lib/org.apache.xmlrpc-xmlrpc-common-3.0.jar</exclude>
+              </excludes>
+            </overlay>
+          </overlays>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
 
