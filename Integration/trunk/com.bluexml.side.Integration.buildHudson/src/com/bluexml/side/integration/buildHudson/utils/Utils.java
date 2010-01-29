@@ -1700,8 +1700,8 @@ public class Utils {
 			if (!new File(getFinalDirectory()).exists())
 				new File(getFinalDirectory()).mkdir();
 
-			System.out.println("\t- Suppression de l'ancien update site" );
-			/*if (new File(getUpdateSiteDir() + File.separator + getCodeName()
+			/*System.out.println("\t- Suppression de l'ancien update site" );
+			if (new File(getUpdateSiteDir() + File.separator + getCodeName()
 					+ File.separator + "features").exists()) {
 				FileHelper.deleteFile(new File(getUpdateSiteDir() + File.separator
 						+ getCodeName() + File.separator + "features"));
