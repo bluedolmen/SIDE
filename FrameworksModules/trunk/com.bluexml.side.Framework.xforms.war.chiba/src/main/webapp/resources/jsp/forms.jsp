@@ -18,6 +18,8 @@ td {
 <%@ page import="org.apache.commons.logging.LogFactory"%>
 <%@ page import="org.w3c.dom.Document"%>
 <%@ page import="org.w3c.dom.Element"%>
+<%@ page import="org.w3c.dom.Node"%>
+<%@ page import="org.w3c.dom.NodeList"%>
 <%@ page import="com.bluexml.side.form.utils.DOMUtil"%>
 <%@ page import="java.io.File"%>
 <%@ page import="java.io.InputStream"%>
@@ -38,23 +40,37 @@ td {
 
 	String chibaRoot = null;
 	String rootDir = null;
-	
+
 	private class DirDescrBean {
 		// Any of these fields may be null
 		public String label;
 		public String description;
-		
+
 		public DirDescrBean(String label, String description) {
 			this.label = label;
 			this.description = description;
 		}
 	}
-	
+
+	public String getTextContent(Element elt) {
+		StringBuffer buffer = new StringBuffer();
+		NodeList childList = elt.getChildNodes();
+		for (int i = 0; i < childList.getLength(); i++) {
+			Node child = childList.item(i);
+			if (child.getNodeType() == Node.TEXT_NODE) {
+				buffer.append(child.getNodeValue());
+			}
+		}
+
+		return buffer.toString();
+	}
+
 	/**
 	 * Never returns null.
 	 */
-	 
-	public DirDescrBean getDirectoryDescrBean(String descrFilePath, String initialLabel) throws IOException {
+
+	public DirDescrBean getDirectoryDescrBean(String descrFilePath, String initialLabel)
+			throws IOException {
 		String resultLabel = initialLabel;
 		Document doc = null;
 		InputStream is;
@@ -74,10 +90,10 @@ td {
 
 		Element labelElt = DOMUtil.getChild(doc, "label");
 		if (labelElt != null) {
-			resultLabel = StringUtils.trim(labelElt.getTextContent());
+			resultLabel = StringUtils.trim(getTextContent(labelElt));
 		}
 		Element descriptionElt = DOMUtil.getChild(doc, "description");
-		String descr = StringUtils.trimToNull(descriptionElt.getTextContent());
+		String descr = StringUtils.trimToNull(getTextContent(descriptionElt));
 		return new DirDescrBean(resultLabel, descr);
 	}
 
@@ -165,9 +181,13 @@ td {
 					href="<%=request.getContextPath()%>/resources/jsp/forms.jsp?<%=uri%>/<%=aFile.getName()%>">
 				<img src="<%=request.getContextPath()%>/resources/images/folder.gif"
 					border="0" width="20" height="20" align="left"><%=dirBean.label%>
-					<% if (dirBean.description != null) { %>
+					<%
+						if (dirBean.description != null) {
+					%>
 					(<%=dirBean.description%>)
-					<%} %>
+					<%
+						}
+					%>
 				</a></td>
 
 			</tr>
@@ -175,7 +195,7 @@ td {
 				}
 					}
 				}
-				
+
 				//root = new File(readDir);
 				//files = root.list();
 				//cat.debug("files: " + files.length);
@@ -192,22 +212,25 @@ td {
 				<td>
 				<%
 					String formType = "";
-					String rootPath = root.getPath();
-					if (aFile.getName().endsWith(".xhtml")) {
-						String className = aFile.getName().replace(".xhtml", "");
-						if (rootPath.endsWith("/forms/forms") || rootPath.endsWith("\\forms\\forms")) {
-							formType = "&formType=form";
-						}
-						if (rootPath.endsWith("/forms/lists") || rootPath.endsWith("\\forms\\lists")) {
-							formType = "&formType=list";
-						}
-						if (rootPath.endsWith("/forms/workflows") || rootPath.endsWith("\\forms\\workflows")) {
-							if (aFile.getName().endsWith("ProcessSelection.xhtml")) {
-								formType = "&formType=wkflwSel";
-							} else {
-								formType = "&formType=wkflw";
-							}
-						}
+								String rootPath = root.getPath();
+								if (aFile.getName().endsWith(".xhtml")) {
+									String className = aFile.getName().replace(".xhtml", "");
+									if (rootPath.endsWith("/forms/forms")
+											|| rootPath.endsWith("\\forms\\forms")) {
+										formType = "&formType=form";
+									}
+									if (rootPath.endsWith("/forms/lists")
+											|| rootPath.endsWith("\\forms\\lists")) {
+										formType = "&formType=list";
+									}
+									if (rootPath.endsWith("/forms/workflows")
+											|| rootPath.endsWith("\\forms\\workflows")) {
+										if (aFile.getName().endsWith("ProcessSelection.xhtml")) {
+											formType = "&formType=wkflwSel";
+										} else {
+											formType = "&formType=wkflw";
+										}
+									}
 				%> <a
 					href="<%=request.getContextPath()%>/xforms?type=<%=className%><%=formType%>">
 				<%=className%> </a> <%
