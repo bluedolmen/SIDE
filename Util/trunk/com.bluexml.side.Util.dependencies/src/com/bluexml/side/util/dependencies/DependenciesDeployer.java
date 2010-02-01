@@ -15,7 +15,12 @@ public class DependenciesDeployer {
 
 		File repository = MavenEmbedder.defaultUserLocalRepository;
 
-//		repository = new File("/Users/davidabad/Workspace2.0/com.bluexml.side.Application.enbededDependencies/repository");
+		if (!repository.exists()) {
+			boolean done = repository.mkdirs();
+			if (!done) {
+				throw new Exception("Error when installing dependencies, please repport this bug");
+			}
+		}
 
 		File tmpZip = File.createTempFile("side_repo", ".zip");
 		tmpZip.deleteOnExit();
