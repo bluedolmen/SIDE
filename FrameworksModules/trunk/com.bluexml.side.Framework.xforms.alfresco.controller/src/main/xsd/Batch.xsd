@@ -10,7 +10,6 @@
 					<xs:element name="create" type="GenericCreate" />
 					<xs:element name="update" type="GenericUpdate" />
 					<xs:element name="delete" type="GenericDelete" />
-					<!-- indique si le batch est demandé par l'interface XForms ou par batchUpdate -->
 					<xs:element name="requester" type="ServiceRequestSource" />
 					<xs:element name="attach" type="AttachContentInfo" />
 				</xs:choice>
@@ -24,10 +23,11 @@
 			<xs:element name="fileName" type="xs:string" />
 			<xs:element name="filePath" type="xs:string" />
 			<xs:element name="mimeType" type="xs:string" />
-			<xs:element name="contentType" type="xs:string" />
+			<xs:element name="contentType" type="xs:string" /><!-- nom qualifié de la classe -->
 		</xs:sequence>
 	</xs:complexType>
 
+	<!-- indique si le batch est demandé par l'interface XForms ou par batchUpdate -->
 	<xs:complexType name="ServiceRequestSource">
 		<xs:sequence>
 			<xs:element name="id" type="xs:string" />
