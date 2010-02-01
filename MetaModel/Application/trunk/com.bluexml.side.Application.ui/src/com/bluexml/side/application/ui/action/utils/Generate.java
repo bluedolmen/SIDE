@@ -52,6 +52,7 @@ public class Generate extends WorkspaceJob {
 	Configuration configuration;
 	List<Model> models;
 	boolean headless = false;
+	public static final String FM_dev="FM_dev"; // Developer mode that use directly local repository instead of embedded one 
 	private static int NB_GENERATION_STEP = 3;
 	private static int NB_DEPLOY_STEP = 4;
 	private static int NB_GENERAL_STEP = 2;
@@ -327,9 +328,15 @@ public class Generate extends WorkspaceJob {
 //		}
 		
 		// update local repository from embedded archive
-		generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
-		DependenciesDeployer.deploy();
-		generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
+		
+		if (!generationParameters.containsKey(FM_dev) || !Boolean.parseBoolean(generationParameters.get(FM_dev))) {
+			generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
+			DependenciesDeployer.deploy();
+			generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
+		} else {
+			generalMonitor.addWarningText(Activator.Messages.getString("Framework module Dev mode"));
+		}
+		
 		
 		
 		checkUserRequest();
