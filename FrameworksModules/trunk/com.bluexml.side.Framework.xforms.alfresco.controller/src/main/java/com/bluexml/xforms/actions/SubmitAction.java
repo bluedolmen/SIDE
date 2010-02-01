@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
@@ -19,13 +21,14 @@ import com.bluexml.xforms.messages.MsgPool;
  */
 public class SubmitAction extends AbstractTransactionalAction {
 
+	/** The logger. */
+	protected static Log logger = LogFactory.getLog(SubmitAction.class);
+
 	private String transactionId = null;
 
 	Map<String, String> pageInitParams = null;
 
 	Page currentPage = null;
-
-	boolean isSearching = false; // #1465
 
 	/*
 	 * (non-Javadoc)
@@ -69,6 +72,9 @@ public class SubmitAction extends AbstractTransactionalAction {
 
 		// if in search mode, a specific processing applies
 		if (isSearching) {
+			logger.debug("Redirecting after search mode");
+			logger.debug(" --> targetURL:'"+ submitURL + "'");
+			logger.debug(" --> search string:'"+ transactionId + "'");
 			String nextPageURL = submitURL;
 			nextPageURL += (submitURL.indexOf('?') == -1) ? "?" : "&";
 			nextPageURL += "search=" + transactionId;

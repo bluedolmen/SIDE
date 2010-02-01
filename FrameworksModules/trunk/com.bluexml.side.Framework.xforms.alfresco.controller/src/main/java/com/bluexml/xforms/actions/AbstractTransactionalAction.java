@@ -12,6 +12,8 @@ import com.bluexml.xforms.messages.MsgPool;
 
 public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 
+	boolean isSearching = false; // #1465
+
 	protected abstract void prepareSubmit() throws Exception;
 
 	protected abstract void afterSubmit() throws Exception;
@@ -28,19 +30,22 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 		Page curPage = navigationPath.peekCurrentPage();
 		try {
 			prepareSubmit();
-			transaction.executeBatch();
+			if (!isSearching) {
+				transaction.executeBatch();
 
-			// all went OK, we may delete the temporary files if any
-			deleteUploadedFiles(transaction.getTempFileNames(), true);
-			// update the status message
-			if (getActionName() == MsgId.INT_ACT_CODE_SUBMIT.getText()) {
-				if (curPage.getDataId() == null) {
-					navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_CREATE_SUCCESS));
+				// all went OK, we may delete the temporary files if any
+				deleteUploadedFiles(transaction.getTempFileNames(), true);
+				// update the status message
+				if (getActionName() == MsgId.INT_ACT_CODE_SUBMIT.getText()) {
+					if (curPage.getDataId() == null) {
+						navigationPath
+								.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_CREATE_SUCCESS));
+					} else {
+						navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_EDIT_SUCCESS));
+					}
 				} else {
-					navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_EDIT_SUCCESS));
+					navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_DELETE_SUCCESS));
 				}
-			} else {
-				navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_DELETE_SUCCESS));
 			}
 		} catch (Exception e) {
 			if (getActionName() == MsgId.INT_ACT_CODE_SUBMIT.getText()) {
