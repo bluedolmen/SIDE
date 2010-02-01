@@ -117,6 +117,7 @@ public class Instance implements IInstance {
 
 	
 	private boolean checkUnicity(TypeDefinition type, Map<PropertyDefinition, Object> sideDataProperties, Map<AspectDefinition, Map<PropertyDefinition, Object>> sideAspectDataProperties) throws Exception {
+		boolean result = false;
 		Set<PropertyDefinition> SIDEProperties = sideDataProperties.keySet();
 		Collection<PropertyDefinition> unicitySIDEProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).getUnicityProperties(type,SIDEProperties);
 		
@@ -135,8 +136,9 @@ public class Instance implements IInstance {
 			serialProperties.add(new Serial(type.getName().toString(),property.getName().toString(),sideDataProperties.get(property).toString()));
 		}
 		
+		Collection<Serial> serializedData = new ArrayList<Serial>();
 		if (unicitySIDEProperties.size() > 0 && unicityAspectsProperties.size() > 0){
-			Collection<Serial> serializedData = ((AlfrescoModelRandomDataGenerator)alfrescoModelRandomGenerator).getSerializedData();
+			serializedData = ((AlfrescoModelRandomDataGenerator)alfrescoModelRandomGenerator).getSerializedData();
 			boolean same = false;
 			if (serializedData.size() > 0 && serialProperties.size() > 0){
 				same = true;
@@ -152,11 +154,34 @@ public class Instance implements IInstance {
 					same &= contains;
 				}
 			}
-			return same;
+			result = same;
 		}
 		else{
-			return false;
+			result = false;
 		}
+		
+		if (result == false){
+			Collection<Serial> temp = new ArrayList<Serial>();
+			for (Serial dataProperty : serialProperties){
+				boolean contains = false;
+				for (Serial serializedDataProperty : serializedData){
+					if (dataProperty.getType().equals(serializedDataProperty.getType())
+						&& dataProperty.getProperty().equals(serializedDataProperty.getProperty()) 
+						&& dataProperty.getData().toString().equals(serializedDataProperty.getData().toString())){
+						contains = true;
+					}
+				}
+				if (!contains){
+					temp.add(dataProperty);
+				}
+			}
+			if (temp.size() > 0){
+				serializedData.addAll(temp);
+				((AlfrescoModelRandomDataGenerator)alfrescoModelRandomGenerator).setSerializedData((ArrayList<Serial>)serializedData);
+			}
+		}
+		
+		return result;
 	}
 
 
