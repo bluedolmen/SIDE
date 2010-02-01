@@ -649,11 +649,10 @@ public class NavigationManager {
 		InputStream xformsStream = null;
 
 		String base = dataType;
+
 		if (formType == FormTypeEnum.WKFLW_SELECTION) {
 			base = MsgId.INT_DIRECTORY_WKFLW_SEL_FORM.getText() + File.separatorChar
 					+ MsgId.INT_WKFLW_SEL_FORM_FILENAME;
-			// xformsStream = NavigationSessionListener.getContext()
-			// .getResourceAsStream(base + ".xhtml");
 		} else if (formType == FormTypeEnum.FORM) {
 			base = MsgId.INT_DIRECTORY_FORM_FORMS.getText() + File.separatorChar + base;
 		} else if (formType == FormTypeEnum.WKFLW || formType == FormTypeEnum.WKFLW_SELECTION) {
@@ -663,7 +662,10 @@ public class NavigationManager {
 		} else {
 			if (!dataTypeSet) {
 				if (getController().hasSubTypes(dataType)) {
-					base = dataType + "_selector";
+					base = MsgId.INT_DIRECTORY_FORM_SELECTOR.getText() + File.separatorChar
+							+ dataType + MsgId.INT_SUFFIX_FILENAME_SELECTORS;
+				} else {
+					base = MsgId.INT_DIRECTORY_FORM_CLASSES.getText() + File.separatorChar + base;
 				}
 			}
 		}
