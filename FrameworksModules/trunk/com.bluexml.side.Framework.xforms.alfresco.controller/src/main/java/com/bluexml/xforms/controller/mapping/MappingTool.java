@@ -107,7 +107,7 @@ public class MappingTool {
 	public List<RepoContentInfoBean> getUploadBeansFilesystem(AlfrescoTransaction transaction,
 			GenericClass alfClass) throws AlfrescoControllerException {
 		return mappingToolImplXFormsToAlfresco.getFileUploadBeans(transaction, alfClass,
-				MsgId.INT_UPLOAD_DEST_FILE.getText(), MsgId.INT_UPLOAD_SUFFIX_FILE.getText());
+				MsgId.INT_UPLOAD_DEST_FILE.getText(), MsgId.INT_SUFFIX_UPLOAD_FILE.getText());
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class MappingTool {
 	public List<RepoContentInfoBean> getUploadBeansRepo(AlfrescoTransaction transaction,
 			GenericClass alfClass) throws AlfrescoControllerException {
 		return mappingToolImplXFormsToAlfresco.getFileUploadBeans(transaction, alfClass,
-				MsgId.INT_UPLOAD_DEST_REPO.getText(), null);
+				MsgId.INT_UPLOAD_DEST_REPO.getText(), MsgId.INT_SUFFIX_UPLOAD_REPO.getText());
 	}
 
 	/**

@@ -2573,7 +2573,7 @@ public class AlfrescoController {
 	}
 
 	public String getReadOnlyFormsSuffix() {
-		return MsgId.INT_READ_ONLY_FORMS_SUFFIX.getText();
+		return MsgId.INT_SUFFIX_READ_ONLY_FORMS.getText();
 	}
 
 	/**
