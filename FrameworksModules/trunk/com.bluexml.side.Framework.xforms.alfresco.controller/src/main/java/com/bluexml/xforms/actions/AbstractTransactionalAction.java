@@ -3,6 +3,8 @@ package com.bluexml.xforms.actions;
 import java.io.File;
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import org.apache.commons.io.FileUtils;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
@@ -22,9 +24,9 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 	public void submit() throws Exception {
 
 		if (AlfrescoController.isStandaloneMode()) {
-			navigationPath
-					.setStatusMsg("The Alfresco Controller is in standalone mode. Some actions are unavailable");
-			return;
+			String msg = "The Alfresco Controller is in standalone mode. Some actions are unavailable";
+			navigationPath.setStatusMsg(msg);
+			throw new ServletException(msg);
 		}
 
 		Page curPage = navigationPath.peekCurrentPage();
@@ -70,6 +72,9 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 	 * Deletes the uploaded or temporary file.
 	 */
 	private void deleteUploadedFiles(List<String> list, boolean isTemporary) { // #1278
+		if (list == null) {
+			return;
+		}
 		for (String fileName : list) {
 			try {
 				File sourceFile = new File(fileName);

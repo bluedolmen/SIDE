@@ -131,6 +131,13 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 */
 	@Override
 	public void submit() throws Exception {
+
+		if (AlfrescoController.isStandaloneMode()) {
+			String msg = "The Alfresco Controller is in standalone mode. Some actions are unavailable";
+			navigationPath.setStatusMsg(msg);
+			throw new ServletException(msg);
+		}
+
 		Page currentPage = navigationPath.peekCurrentPage();
 
 		// do the work

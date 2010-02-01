@@ -100,10 +100,10 @@ public class AlfrescoController {
 	public static String ALFRESCO_XFORMS_URL = null;
 
 	/** The default user name for transactions */
-	public static String USER_NAME;
+	public static String USER_NAME = null;
 
 	/** The user password */
-	public static String USER_PSWD;
+	public static String USER_PSWD = null;
 	//
 	//
 	private static final String BLUEXML_WORKFLOW_PREFIX = "wfbx";
@@ -117,23 +117,23 @@ public class AlfrescoController {
 	protected static Log logger = LogFactory.getLog(AlfrescoController.class);
 
 	/** The doc builder. */
-	private static DocumentBuilder docBuilder;
+	private static DocumentBuilder docBuilder = null;
 
 	/** The controller. */
 	private static AlfrescoController instance = null;
 
 	//
 	// general settings that are persisted through sessions and users
-	private static String formsPropertiesPath;
+	private static String formsPropertiesPath = null;
 
-	private static String messagesPropertiesPath;
+	private static String messagesPropertiesPath = null;
 
 	/** whether calls to the webscript are intercepted */
-	private static boolean standaloneMode;
+	private static boolean standaloneMode = false;
 
-	private static String CssUrl;
+	private static String CssUrl = null;
 
-	private static String redirectXmlPath;
+	private static String redirectXmlPath = null;
 
 	/** Stores redirection info keyed by form names */
 	private static Map<String, RedirectionBean> targetTable = new HashMap<String, RedirectionBean>();
@@ -755,9 +755,9 @@ public class AlfrescoController {
 		// TODO: avoid deleting the temp file
 
 		// TODO: dans le cas de repoContent en update, supprimer l'ancien fichier
-		
+
 		// filter what must remain untouched
-		
+
 		// if (previousRepoContentInfo != null) {
 		// if (StringUtils.startsWithIgnoreCase(previousRepoContentInfo.getPath(), "workspace")) {
 		// Map<String, String> parameters = new TreeMap<String, String>();
@@ -2652,7 +2652,7 @@ public class AlfrescoController {
 	 * 
 	 * @param nodeId
 	 *            the full node Id (including protocol and workspace)
-	 * @return the info about a content
+	 * @return the info about a content, or null if an exception occured or empty if no content
 	 */
 	public String getWebscriptNodeContentInfo(String nodeId) {
 		String result;
@@ -2666,6 +2666,10 @@ public class AlfrescoController {
 		} catch (AlfrescoControllerException e) {
 			e.printStackTrace();
 			return null;
+		}
+		
+		if (StringUtils.trimToNull(request) == null) {
+			return "";
 		}
 
 		String[] infos = request.split(",");
