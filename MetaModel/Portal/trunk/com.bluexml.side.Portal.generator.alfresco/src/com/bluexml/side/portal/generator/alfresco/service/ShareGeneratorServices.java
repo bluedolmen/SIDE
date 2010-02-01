@@ -10,8 +10,11 @@ import java.util.Properties;
 import org.eclipse.emf.common.util.EList;
 
 import com.bluexml.side.common.Visibility;
+import com.bluexml.side.portal.InternalPortletType;
 import com.bluexml.side.portal.Page;
 import com.bluexml.side.portal.Portal;
+import com.bluexml.side.portal.Portlet;
+import com.bluexml.side.portal.PortletInternal;
 
 public class ShareGeneratorServices {
 	Properties defaultShareElements;
@@ -63,5 +66,17 @@ public class ShareGeneratorServices {
 		}
 		
 		return rt.toString();
+	}
+	
+	public static boolean isFormPortlet(Portlet p) {
+		PortletInternal pInt=p.getIsPortletInternal();
+		return pInt !=null && pInt.getType().equals(InternalPortletType.FORM);
+	}
+	public static boolean isViewPortlet(Portlet p) {
+		PortletInternal pInt=p.getIsPortletInternal();
+		return pInt !=null && pInt.getType().equals(InternalPortletType.VIEW);
+	}
+	public static boolean isCustomPortlet(Portlet p) {
+		return p.getIsPortletInternal() == null && p.getIsInstanceOfPortletType() !=null;
 	}
 }

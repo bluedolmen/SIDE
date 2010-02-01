@@ -24,7 +24,17 @@
               <optionRef optionId="alfresco.share.extension" />
             </mustBeChecked>
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension" moduleType="zip" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
-            <option defaultOption="false" key="com.bluexml.side.Portal.generator.alfresco.xforms" label="XForms Integration" />
+            <option
+                  defaultOption="false"
+                  key="com.bluexml.side.Portal.generator.alfresco.xforms"
+                  label="XForms Integration">
+               <moduleDependence
+                     moduleId="com.bluexml.side.Framework.alfresco.shareSearchResultsExtension"
+                     moduleType="zip"
+                     technologyVersion="alfresco_3.x"
+                     versionMin="1.0.0">
+               </moduleDependence>
+            </option>
             <configurationParameter documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploy" key="alfresco.share.url" label="Alfresco share URL" />
             <configurationParameter documentation="Set the address to the webapp context, e.g. http://localhost:8080/xforms.&lt;br/&gt;This option is accessory as it is used for providing service URLs. If not given, default values will be used." key="com.bluexml.side.Form.generator.xforms.chiba.webappContext" label="XForm Webapp URL" />
             <configurationParameter documentation="The URL to reach facetMap web application (for exemple http://localhost:8080/facetmap)" key="facetMap.url" label="FacetMap URL" />

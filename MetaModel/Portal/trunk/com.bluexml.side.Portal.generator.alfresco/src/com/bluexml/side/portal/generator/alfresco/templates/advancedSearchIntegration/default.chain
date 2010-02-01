@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Model" path="/bigTest/models/DefaultName.portal"/>
+    <files xsi:type="chain:Folder" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/default.log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/portal/1.0"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/searchFormCallBack.html.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/template.XformSearch.advancedSearch.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.desc.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.head.ftl.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.html.ftl.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.js.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.properties.mt"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="searchFormCallBack.html" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template.XformSearch.advancedSearch.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="XformSearch.get.desc.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.6" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="XformSearch.get.head.ftl" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.7" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="XformSearch.get.html.ftl" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.8" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="XformSearch.get.js" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.9" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="XformSearch.get.properties" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.10" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>
