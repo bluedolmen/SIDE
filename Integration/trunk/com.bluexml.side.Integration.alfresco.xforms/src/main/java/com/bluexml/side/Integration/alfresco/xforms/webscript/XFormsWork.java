@@ -263,7 +263,7 @@ public class XFormsWork implements RunAsWork<String> {
 	 * @return an empty string if any problem or the comma-separated string containing the
 	 *         information built. Currently, {full node id}, {content size in bytes}.
 	 */
-	private String nodeInfo() {
+	protected String nodeInfo() {
 		String nodeId = parameters.get("nodeId");
 
 		try {
@@ -273,6 +273,9 @@ public class XFormsWork implements RunAsWork<String> {
 					ContentModel.PROP_NAME);
 			Serializable content = this.serviceRegistry.getNodeService().getProperty(nodeRef,
 					ContentModel.PROP_CONTENT);
+			if (content == null) {
+				return "";
+			}
 			ContentData contentData = (ContentData) content;
 
 			long size = contentData.getSize();
