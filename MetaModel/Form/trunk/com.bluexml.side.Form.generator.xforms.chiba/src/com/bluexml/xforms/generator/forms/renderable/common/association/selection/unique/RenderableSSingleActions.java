@@ -13,6 +13,7 @@ import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean.Asso
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.selector.RenderableSelector;
 import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableSSingleActions. Adds LEFT and RIGHT buttons in the N-1 selection widget.
@@ -74,6 +75,8 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		if ((getFormGenerator().isInReadOnlyMode() == false) || bean.isDisabled()) { // #1238
 			Element xformsElement = XFormsGenerator.createElement("div",
 					XFormsGenerator.NAMESPACE_XHTML);
+			xformsElement.setAttribute("class", MsgId.INT_CSS_SELECT_TRIGGER_IMG.getText());
+
 			xformsElement.addContent(getTriggerSet(renderedParents, bindId, bindLabel));
 			xformsElement.addContent(XFormsGenerator.createElement("br",
 					XFormsGenerator.NAMESPACE_XHTML));

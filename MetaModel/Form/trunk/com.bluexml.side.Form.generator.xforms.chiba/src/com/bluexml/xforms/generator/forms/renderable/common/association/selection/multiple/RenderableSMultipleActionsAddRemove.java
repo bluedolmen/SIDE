@@ -81,6 +81,7 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 			String repeaterId = renderedParents.peek().getOptionalData();
 			Element xformsElement = XFormsGenerator.createElement("div",
 					XFormsGenerator.NAMESPACE_XHTML);
+			xformsElement.setAttribute("class", MsgId.INT_CSS_SELECT_TRIGGER_IMG.getText());
 
 			String rootPath = getRootPath(renderedParents); // #1218
 
