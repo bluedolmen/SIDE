@@ -101,13 +101,17 @@ public class XFormsGenerator extends AbstractGenerator {
 	public static final Namespace NAMESPACE_XHTML = Namespace.getNamespace("xhtml",
 			"http://www.w3.org/1999/xhtml");
 
-	public static final String IMG_RIGHT = "resources/images/right.gif";
+	public static final String IMG_ADD = "resources/images/add.png";
 
+	public static final String IMG_REMOVE = "resources/images/remove.png";
+
+	public static final String IMG_RIGHT = "resources/images/right.gif";
+	
 	public static final String IMG_LEFT = "resources/images/left.gif";
 
-	public static final String IMG_DOWN = "resources/images/down.gif";
+	public static final String IMG_DOWN = "resources/images/orderdown.png";
 
-	public static final String IMG_UP = "resources/images/up.gif";
+	public static final String IMG_UP = "resources/images/orderup.png";
 
 	/** The sax builder. */
 	public static SAXBuilder saxBuilder;
