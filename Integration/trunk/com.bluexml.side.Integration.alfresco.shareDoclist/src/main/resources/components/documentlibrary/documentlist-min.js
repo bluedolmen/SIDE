@@ -357,7 +357,11 @@
           * @property vtiServer
           * @type object
           */
-         vtiServer: null
+         vtiServer: null,
+         /**
+          * SIDE
+          */
+         search:{}
       },
 
       /**
@@ -2291,17 +2295,31 @@
          });
 
          // Filter parameters
-         params += "?filter=" + encodeURIComponent(obj.filter.filterId);
-         if (obj.filter.filterData)
-         {
-            params += "&filterData=" + encodeURIComponent(obj.filter.filterData);             
-         }
-         
+         if (this.options.search.type && this.options.search.type.length>0) {
+        	 params += "?filter=metadata";
+             // IDE
+             // search parameters
+             if (this.options.search)
+             {
+                params += "&search=" + encodeURIComponent(this.options.search.toSource());
+             }
+         } else if (this.options.search.fullText && this.options.search.fullText.length >0) {
+        	 params += "?filter=fullTextSearch";
+        	 params += "&term="+this.options.search.fullText;
+         } else {
+        	 params += "?filter=" + encodeURIComponent(obj.filter.filterId);
+	         if (obj.filter.filterData)
+	         {
+	            params += "&filterData=" + encodeURIComponent(obj.filter.filterData);             
+	         }
+         }         
          // Paging parameters
          if (this.options.usePagination)
          {
             params += "&size=" + obj.pageSize  + "&pos=" + obj.page;
          }
+
+
          return params;
       },
        
