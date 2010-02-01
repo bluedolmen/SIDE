@@ -21,7 +21,7 @@
   <groupId>com.bluexml.side.Integration.alfresco</groupId>
   <artifactId>shareDoclist</artifactId>
   <name>S-IDE integration module : Alfresco share docList</name>
-  <version>1.0.9</version>
+  <version>1.0.10</version>
   <packaging>zip</packaging>
   <description>this module contains S-IDE extension to extends Alfresco to support custom type on Alfresco Share</description>
   <parent>
@@ -47,10 +47,10 @@
       <type>amp</type>
     </dependency>
     <dependency>
-    	<groupId>com.bluexml.side.Integration.alfresco</groupId>
-    	<artifactId>doclist</artifactId>
-    	<version>1.0.12</version>
-    	<type>amp</type>
+      <groupId>com.bluexml.side.Integration.alfresco</groupId>
+      <artifactId>doclist</artifactId>
+      <version>1.0.14</version>
+      <type>amp</type>
     </dependency>
   </dependencies>
 </project>
