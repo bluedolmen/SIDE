@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Form.generator.xforms.feature" label="SIDE XForms Chiba Generator" version="1.0.88.v13621-20100201" provider-name="BlueXML">
+<feature id="com.bluexml.side.Form.generator.xforms.feature" label="SIDE XForms Chiba Generator" version="1.0.89.v13674-20100202" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of form models on XForms Chiba and Alfresco for web form editing.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -14,7 +14,7 @@
     <import plugin="com.bluexml.side.Util.dependencies" />
     <import plugin="com.bluexml.side.Util.componentMonitor" />
   </requires>
-  <plugin id="com.bluexml.side.Form.generator.xforms.chiba" download-size="0" install-size="0" version="1.0.84.v13621-20100201" unpack="false" />
+  <plugin id="com.bluexml.side.Form.generator.xforms.chiba" download-size="0" install-size="0" version="1.0.85.v13674-20100202" unpack="false" />
   <plugin id="com.bluexml.side.Form.generator.xforms.maven" download-size="0" install-size="0" version="1.0.27.v13286-20100127" unpack="false" />
 </feature>
 
