@@ -155,10 +155,12 @@ var Filters =
         	 var operator=" AND ";
         	 var query='+TYPE:"'+type+'"';
         	 var propQuery="";
-        	 for (var prop in properties) {        		 
-    			 propQuery+="@"+prop;
-    			 propQuery+=":"+properties[prop];        		 
-    			 propQuery+=operator;
+        	 for (var prop in properties) {
+        		 if (properties[prop] != "") {
+        			 propQuery+="@"+prop;
+        			 propQuery+=":"+properties[prop];        		 
+        			 propQuery+=operator;
+        		 }
         	 }
         	 if (propQuery !=="") {
         		 var ind=propQuery.lastIndexOf(operator);
