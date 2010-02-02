@@ -36,7 +36,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
   			
   			<%if (pooledactors != null){%>
   			<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
-  				<pooledactors><%pooledactors%></pooledactors>  				
+  				<pooledactors>#{people.getGroup('GROUP_<%pooledactors%>')}</pooledactors>  				
         	</assignment>   
   			<%}%>
   		<%}%>
