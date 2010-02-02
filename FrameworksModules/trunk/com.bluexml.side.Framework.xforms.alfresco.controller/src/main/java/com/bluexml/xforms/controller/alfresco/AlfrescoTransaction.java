@@ -30,12 +30,18 @@ public class AlfrescoTransaction {
 	/** the name of the form's */
 	private String formId = null; // #1212
 
-	/** name(s) of uploaded file(s) in the file store, to be deleted in case of error */
+	/** name(s) of file(s) uploaded to the file store, to be deleted in case of error */
 	private ArrayList<String> uploadedFileNames = null; // #1278
+
+	/** id(s) of node(s) created for uploads to the repository, to be deleted in case of error */
+	private ArrayList<String> uploadedNodes = null; // #1278
 
 	/** name(s) of temporary file(s) for the upload, to be deleted in case of success */
 	private ArrayList<String> tempFileNames = null; // #1278
 
+	/** id(s) of old node(s) on update, to be deleted in case of success */
+	private ArrayList<String> tempNodeIds = null; 
+	
 	public AlfrescoTransaction(AlfrescoController alfrescoController) {
 		super();
 		this.alfrescoController = alfrescoController;
@@ -168,12 +174,48 @@ public class AlfrescoTransaction {
 	}
 
 	/**
+	 * @return the tempNodeIds
+	 */
+	public ArrayList<String> getTempNodeIds() {
+		return tempNodeIds;
+	}
+
+	/**
 	 * @return the uploadedFileName
 	 */
 	public ArrayList<String> getUploadedFileNames() {
 		return uploadedFileNames;
 	}
 
+	/**
+	 * @return the uploadedNodes
+	 */
+	public ArrayList<String> getUploadedNodes() {
+		return uploadedNodes;
+	}
+	
+	/**
+	 * @param tempFileName
+	 *            the tempFileName to set
+	 */
+	public void registerTempFileName(String tempFileName) {
+		if (tempFileNames == null) {
+			tempFileNames = new ArrayList<String>();
+		}
+		this.tempFileNames.add(tempFileName);
+	}
+
+	/**
+	 * @param tempFileName
+	 *            the tempFileName to set
+	 */
+	public void registerTempNodeId(String nodeId) {
+		if (tempNodeIds == null) {
+			tempNodeIds = new ArrayList<String>();
+		}
+		this.tempNodeIds.add(nodeId);
+	}
+	
 	/**
 	 * @param uploadedFileName
 	 *            the uploadedFileName to set
@@ -186,14 +228,13 @@ public class AlfrescoTransaction {
 	}
 
 	/**
-	 * @param tempFileName
-	 *            the tempFileName to set
+	 * @param uploadedNodes the uploadedNodes to set
 	 */
-	public void registerTempFileName(String tempFileName) {
-		if (tempFileNames == null) {
-			tempFileNames = new ArrayList<String>();
+	public void registerUploadedNodes(String nodeId) {
+		if (uploadedNodes == null) {
+			uploadedNodes = new ArrayList<String>();
 		}
-		this.tempFileNames.add(tempFileName);
+		this.uploadedNodes.add(nodeId);
 	}
 
 }

@@ -602,7 +602,7 @@ public class AlfrescoController {
 		if (alfClass.getId() == null) {
 			alfClass.setId(save(transaction, alfClass));
 		} else {
-			update(transaction, alfClass);
+			uploadProcessOnUpdate(transaction, alfClass);
 		}
 		return alfClass.getId();
 	}
@@ -625,11 +625,94 @@ public class AlfrescoController {
 	 */
 	private String save(AlfrescoTransaction transaction, GenericClass alfClass)
 			throws AlfrescoControllerException, ServletException {
+		// enqueue the operation
+		transaction.queueSave(alfClass);
+
+		// process file upload fields if any
+		uploadProcessOnSave(transaction, alfClass);
+
+		return alfClass.getId();
+	}
+
+	/**
+	 * Attaches the referenced content to a transaction. The attachment is not done if the file name
+	 * is not a valid file URI (which happens when there's no uploaded file and when a content has
+	 * been uploaded previously).
+	 * 
+	 * @param transaction
+	 * @param alfClass
+	 * @param fileName
+	 * @param filePath
+	 * @param mimeType
+	 * @throws ServletException
+	 *             if the file doesn't exist
+	 */
+	private void uploadAttachContent(AlfrescoTransaction transaction, GenericClass alfClass,
+			String fileName, String filePath, String mimeType) throws ServletException {
+		if (filePath != null && filePath.startsWith("file:")) {
+			File file;
+			URI fileURI = URI.create(filePath);
+			String fullFileName = fileURI.getPath();
+			file = new File(fullFileName);
+
+			if (!file.exists()) {
+				logger.error("The file '" + fullFileName + "' to be uploaded does not exist.");
+				throw new ServletException(
+						"The file to upload does not exist. Your session may have expired. Please load and submit the form again.");
+			}
+
+			if (file.length() > 0) {
+				transaction.queueAttachContent(alfClass.getId(), fileName, fullFileName, mimeType,
+						alfClass.getQualifiedName());
+			}
+		}
+	}
+
+	/**
+	 * Returns the directory for uploading files into the file system. If none given in initParams
+	 * or the directory does not exist, falls back to the value from configuration init.
+	 */
+	private File getUploadPathInFileSystem() {
+
+		String result = null;
+		if (initParameters != null) {
+			result = initParameters.get(MsgId.PARAM_UPLOAD_DIRECTORY.getText());
+		}
+		if (StringUtils.trimToNull(result) == null) {
+			return UPLOAD_DIRECTORY;
+		}
+		File resFile = new File(result);
+		return resFile.exists() ? resFile : UPLOAD_DIRECTORY;
+	}
+
+	/**
+	 * Returns a path for uploading files into the repository. If none given in initParams, falls
+	 * back to the value from configuration init.
+	 */
+	private String getUploadPathInRepository() {
+
+		String result = null;
+		if (initParameters != null) {
+			result = initParameters.get(MsgId.PARAM_UPLOAD_REPOSITORY.getText());
+		}
+		return (result != null) ? result : UPLOAD_REPOSITORY;
+	}
+
+	/**
+	 * Processes all upload fields on initial submission. Moves filesystem uploads to the directory,
+	 * stores repo uploads into the repository and attaches the (possible) node content to the
+	 * transaction. If the transaction fails subsequently, all uploads should be removed.
+	 * 
+	 * @param transaction
+	 * @param alfClass
+	 * @throws AlfrescoControllerException
+	 * @throws ServletException
+	 */
+	private void uploadProcessOnSave(AlfrescoTransaction transaction, GenericClass alfClass)
+			throws AlfrescoControllerException, ServletException {
 		String fileName = null;
 		String filePath = null;
 		String mimeType = null;
-		// enqueue the operation
-		transaction.queueSave(alfClass);
 
 		// content file(s); these will be saved to the server's filesystem
 		List<RepoContentInfoBean> fileBeans = mappingTool.getUploadBeansFilesystem(transaction,
@@ -638,7 +721,7 @@ public class AlfrescoController {
 			fileName = infoBean.getPath();
 			if (fileName != null && fileName.startsWith("file:")) {
 				String type = alfClass.getQualifiedName();
-				fileName = moveFileToUploadDir(type, fileName, transaction);
+				fileName = uploadMoveFileToDir(type, fileName, transaction);
 				mappingTool.setFileUploadFileName(fileName, infoBean.getAttribute());
 			}
 		}
@@ -654,7 +737,7 @@ public class AlfrescoController {
 				GenericAttribute attribute = infoBean.getAttribute();
 				if (filePath != null && filePath.startsWith("file:")) {
 					String location = getUploadPathInRepository();
-					fileName = processRepoContent(transaction, fileName, filePath, location,
+					fileName = uploadMoveFileToRepo(transaction, fileName, filePath, location,
 							mimeType);
 					if (StringUtils.trimToNull(fileName) == null) {
 						throw new ServletException(MsgPool.getMsg(MsgId.MSG_UPLOAD_FAILED));
@@ -672,60 +755,17 @@ public class AlfrescoController {
 			filePath = nodeContentInfoBean.getPath();
 			mimeType = nodeContentInfoBean.getMimeType();
 
-			if (filePath != null && filePath.startsWith("file:")) {
-				File file;
-				URI fileURI = URI.create(filePath);
-				String fullFileName = fileURI.getPath();
-				file = new File(fullFileName);
-
-				if (!file.exists()) {
-					logger.error("The file '" + fullFileName + "' to be uploaded does not exist.");
-					throw new ServletException(
-							"The file to upload does not exist. Your session may have expired. Please load and submit the form again.");
-				}
-
-				if (file.length() > 0) {
-					transaction.queueAttachContent(alfClass.getId(), fileName, fullFileName,
-							mimeType, alfClass.getQualifiedName());
-				}
-			}
+			uploadAttachContent(transaction, alfClass, fileName, filePath, mimeType);
 		}
-
-		return alfClass.getId();
 	}
 
 	/**
-	 * Returns a path for uploading files into the file system. If none given in initParams, fall
-	 * back to the value from configuration init.
-	 */
-	private File getUploadPathInFileSystem() {
-
-		String result = null;
-		if (initParameters != null) {
-			result = initParameters.get(MsgId.PARAM_UPLOAD_DIRECTORY.getText());
-		}
-		if (StringUtils.trimToNull(result) == null) {
-			return UPLOAD_DIRECTORY;
-		}
-		File resFile = new File(result);
-		return resFile.exists() ? resFile : UPLOAD_DIRECTORY;
-	}
-
-	/**
-	 * Returns a path for uploading files into the repository. If none given in initParams, fall
-	 * back to the value from configuration init.
-	 */
-	private String getUploadPathInRepository() {
-
-		String result = null;
-		if (initParameters != null) {
-			result = initParameters.get(MsgId.PARAM_UPLOAD_REPOSITORY.getText());
-		}
-		return (result != null) ? result : UPLOAD_REPOSITORY;
-	}
-
-	/**
-	 * Update.
+	 * Processes the upload files on update: deletes (if relevant) the old files and uploads the new
+	 * ones. The deletions are not actually performed here: files/nodes to be deleted are put in
+	 * queues.<br/>
+	 * <p>
+	 * <b>The file providing the node content is not deleted!</b> Don't know whether we should.
+	 * </p>
 	 * 
 	 * @param alfClass
 	 *            the alf class
@@ -734,11 +774,14 @@ public class AlfrescoController {
 	 * 
 	 * @throws AlfrescoControllerException
 	 *             the alfresco controller exception
+	 * @throws ServletException
 	 */
-	private void update(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws AlfrescoControllerException {
+	private void uploadProcessOnUpdate(AlfrescoTransaction transaction, GenericClass alfClass)
+			throws AlfrescoControllerException, ServletException {
 		List<RepoContentInfoBean> previousFileContentInfo;
 		List<RepoContentInfoBean> previousRepoContentInfo;
+		List<RepoContentInfoBean> newFileContentInfo;
+		List<RepoContentInfoBean> newRepoContentInfo;
 
 		// read the old class
 		GenericClass oldClass = null;
@@ -749,27 +792,64 @@ public class AlfrescoController {
 		}
 		previousFileContentInfo = mappingTool.getUploadBeansFilesystem(transaction, oldClass);
 		previousRepoContentInfo = mappingTool.getUploadBeansRepo(transaction, oldClass);
+		newFileContentInfo = mappingTool.getUploadBeansFilesystem(transaction, alfClass);
+		newRepoContentInfo = mappingTool.getUploadBeansRepo(transaction, alfClass);
 
-		// TODO: attach content
+		//
+		// enqueue files/nodes to be deleted
+		String fileName;
+		RepoContentInfoBean oldBean;
+		for (RepoContentInfoBean newBean : newFileContentInfo) {
+			fileName = newBean.getPath();
+			if (fileName != null && fileName.startsWith("file:")) { // <- value to be replaced
+				String qualifiedName = newBean.getAttribute().getQualifiedName();
+				oldBean = uploadFindBean(previousFileContentInfo, qualifiedName);
+				if (oldBean != null) {
+					// we need to register as a temp file for deletion in case of success
+					transaction.registerTempFileName(getUploadPathInFileSystem() + File.separator
+							+ oldBean.getPath());
+				}
+			}
+		}
+		for (RepoContentInfoBean newBean : newRepoContentInfo) {
+			fileName = newBean.getPath();
+			if (fileName != null && fileName.startsWith("file:")) {
+				String qualifiedName = newBean.getAttribute().getQualifiedName();
+				oldBean = uploadFindBean(previousRepoContentInfo, qualifiedName);
+				if (oldBean != null) {
+					String oldNodeId = oldBean.getPath();
+					transaction.registerTempNodeId(oldNodeId);
+				}
+			}
+		}
 
-		// TODO: avoid deleting the temp file
-
-		// TODO: dans le cas de repoContent en update, supprimer l'ancien fichier
-
-		// filter what must remain untouched
-
-		// if (previousRepoContentInfo != null) {
-		// if (StringUtils.startsWithIgnoreCase(previousRepoContentInfo.getPath(), "workspace")) {
-		// Map<String, String> parameters = new TreeMap<String, String>();
-		// parameters.put("nodeRef", previousRepoContentInfo.getPath());
-		// requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_DELETE);
-		// }
-		// }
+		//
+		// set the new version of the object
+		uploadProcessOnSave(transaction, alfClass);
 	}
 
 	/**
-	 * Process content. Moves the uploaded file to a randomly chosen folder under the file system
-	 * upload directory.
+	 * Finds the bean with the given name.
+	 * 
+	 * @param previousFileContentInfo
+	 * @param qname
+	 * @return the bean or null if not found
+	 */
+	private RepoContentInfoBean uploadFindBean(List<RepoContentInfoBean> list, String qname) {
+		if (list == null) {
+			return null;
+		}
+		for (RepoContentInfoBean bean : list) {
+			GenericAttribute attribute = bean.getAttribute();
+			if (attribute != null) {
+				// if (attri
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Moves the uploaded file to a randomly chosen folder under the file system upload directory.
 	 * 
 	 * @param type
 	 *            the type
@@ -781,7 +861,7 @@ public class AlfrescoController {
 	 * @throws AlfrescoControllerException
 	 *             the alfresco controller exception
 	 */
-	private String moveFileToUploadDir(String type, String fileName, AlfrescoTransaction transaction)
+	private String uploadMoveFileToDir(String type, String fileName, AlfrescoTransaction transaction)
 			throws AlfrescoControllerException {
 		URI fileURI = URI.create(fileName);
 		File sourceFile = null;
@@ -796,7 +876,8 @@ public class AlfrescoController {
 		}
 
 		uploadDir = getUploadPathInFileSystem();
-		File targetFile = findNewName(type, sourceFile.getName());
+		int depth = getUploadPathDepth();
+		File targetFile = findNewName(depth, type, sourceFile.getName());
 
 		copyFile(sourceFile, targetFile);
 		String relativePath = targetFile.getAbsolutePath().replace(uploadDir.getAbsolutePath(), "");
@@ -806,6 +887,23 @@ public class AlfrescoController {
 		transaction.registerTempFileName(sourceFile.getAbsolutePath());
 
 		return outputFileName;
+	}
+
+	/**
+	 * Provides the number of directory levels into which filesystem uploads should be randomly
+	 * distributed.
+	 * 
+	 * @return
+	 */
+	private int getUploadPathDepth() {
+		int depth = 0;
+		try {
+			Integer.parseInt(MsgPool.getMsg(MsgId.MSG_UPLOAD_RANDOM_PATH_DEPTH));
+		} catch (NumberFormatException e) {
+			logger.error("Failed to parse directory path depth.");
+			return 0;
+		}
+		return depth;
 	}
 
 	/**
@@ -823,7 +921,7 @@ public class AlfrescoController {
 	 * @throws AlfrescoControllerException
 	 *             the alfresco controller exception
 	 */
-	private String processRepoContent(AlfrescoTransaction transaction, String fileName,
+	private String uploadMoveFileToRepo(AlfrescoTransaction transaction, String fileName,
 			String filePath, String location, String mimetype) throws AlfrescoControllerException {
 
 		// collect parameters
@@ -882,16 +980,17 @@ public class AlfrescoController {
 	 * 
 	 * @return the file
 	 */
-	private File findNewName(String type, String fileName) {
+	private File findNewName(int depth, String type, String fileName) {
 		if (fileName.contains("\\")) {
 			int lastIndexOf = StringUtils.lastIndexOf(fileName, '\\');
 			fileName = StringUtils.substring(fileName, lastIndexOf + 1);
 		}
 		String rootPath = uploadDir.getAbsolutePath() + File.separator + type;
 
-		String randomPath = RandomStringUtils.randomNumeric(3);
-		rootPath = rootPath + File.separator + randomPath.charAt(0) + File.separator
-				+ randomPath.charAt(1) + File.separator + randomPath.charAt(2);
+		String randomPath = RandomStringUtils.randomNumeric(depth);
+		for (int i = 0; i < depth; i++) {
+			rootPath += File.separator + +randomPath.charAt(i);
+		}
 
 		File root = new File(rootPath);
 
@@ -1442,7 +1541,7 @@ public class AlfrescoController {
 		if (alfClass.getId() == null) {
 			alfClass.setId(save(transaction, alfClass));
 		} else {
-			update(transaction, alfClass);
+			uploadProcessOnUpdate(transaction, alfClass);
 		}
 		return alfClass.getId();
 	}
@@ -2655,7 +2754,6 @@ public class AlfrescoController {
 	 * @return the info about a content, or null if an exception occured or empty if no content
 	 */
 	public String getWebscriptNodeContentInfo(String nodeId) {
-		String result;
 		String request;
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -2667,39 +2765,47 @@ public class AlfrescoController {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		if (StringUtils.trimToNull(request) == null) {
 			return "";
 		}
 
-		String[] infos = request.split(",");
-		result = infos[0]; // the node name
-		long size = Long.parseLong(infos[1]); // content size
-		String sizeStr;
+		String result;
+		String[] infos = request.split(","); // <- see the webscript for the actual format
+		String nodeName = infos[0]; // the node name
+		long size = Long.parseLong(infos[1]); // the content's size
 		if (size > 0) {
+			String sizeUnit = "";
 			Formatter formatter = new Formatter();
-			sizeStr = ": " + formatter.format("%,d", size) + " bytes";
-			char multiplier = getFileSizeMultiplier(size);
+			String sizeBytes = formatter.format("%,d", size).toString();
+			char multiplier = getFileSizeUnit(size);
 			if (multiplier != 'b') {
-				sizeStr += " (" + getFileSizeShortReadable(size, multiplier) + ")";
+				sizeUnit = getFileSizeShortReadable(size, multiplier);
 			}
+			result = MsgPool.getMsg(MsgId.MSG_UPLOAD_CONTENT_REPO_FORMAT, nodeName, sizeBytes,
+					sizeUnit);
 		} else {
-			sizeStr = "(no content)";
+			result = MsgPool.getMsg(MsgId.MSG_UPLOAD_CONTENT_NO_CONTENT);
 		}
-		result += " " + sizeStr;
+		result += " " + result;
 		return result;
 	}
 
-	private static char getFileSizeMultiplier(long size) {
-		char multiplier = 'b'; // bytes
+	/**
+	 * 
+	 * @param size
+	 * @return 'b' or 'k' or 'm' or 'k'
+	 */
+	private static char getFileSizeUnit(long size) {
+		char unit = 'b'; // bytes
 		if (size > 1024 * 1024 * 1024) {
-			multiplier = 'g';
+			unit = 'g';
 		} else if (size > 1024 * 1024) {
-			multiplier = 'm';
+			unit = 'm';
 		} else if (size > 1024) {
-			multiplier = 'k';
+			unit = 'k';
 		}
-		return multiplier;
+		return unit;
 	}
 
 	/**
@@ -2708,31 +2814,31 @@ public class AlfrescoController {
 	 * Examples: 1024 bytes => 1.00 KB, 7 614 525 bytes => 7.26 MB
 	 * 
 	 * @param transferred
-	 * @param multiplier
+	 * @param unit
 	 * @return
 	 */
-	private static String getFileSizeShortReadable(long transferred, char multiplier) {
+	private static String getFileSizeShortReadable(long transferred, char unit) {
 		float res = transferred;
-		String unit = "B";
-		switch (multiplier) {
+		String unitStr = "B";
+		switch (unit) {
 			case 'k':
 			case 'K':
 				res = (float) transferred / (float) (1024);
-				unit = "KB";
+				unitStr = "KB";
 				break;
 			case 'm':
 			case 'M':
 				res = (float) transferred / (float) (1024 * 1024);
-				unit = "MB";
+				unitStr = "MB";
 				break;
 			case 'g':
 			case 'G':
 				res = (float) transferred / (float) (1024 * 1024 * 1024);
-				unit = "GB";
+				unitStr = "GB";
 				break;
 		}
 		Formatter formatter = new Formatter();
-		return formatter.format("%,.2f", res) + " " + unit;
+		return formatter.format("%,.2f", res) + " " + unitStr;
 	}
 
 	//
