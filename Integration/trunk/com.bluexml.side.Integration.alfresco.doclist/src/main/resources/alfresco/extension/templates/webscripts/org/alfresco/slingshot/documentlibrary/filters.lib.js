@@ -165,7 +165,8 @@ var Filters =
         	 if (propQuery !=="") {
         		 var ind=propQuery.lastIndexOf(operator);
         		 propQuery=propQuery.substring(0,ind);
-        		 propQuery=propQuery.replace(/([{}:])/g,"\\$1");
+        		 propQuery=propQuery.replace(/([{}])/g,"\\$1");
+        		 propQuery=propQuery.replace(/(http):/g,"$1\\:");
         		 query+=" +(";
         		 query+=propQuery
 	        	 query+=") ";
