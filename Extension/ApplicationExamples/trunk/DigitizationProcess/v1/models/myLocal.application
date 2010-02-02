@@ -6,16 +6,11 @@
     </generatorConfigurations>
     <generatorConfigurations id_techno_version="chiba_1_5.x" impl_class="com.bluexml.side.forms.generator.alfresco.chiba.FormGenerator" id="com.bluexml.side.Form.generator.xforms.chiba" metaModelName="KSR400 Form" technologyVersionName="Chiba 1.5.x" technologyName="xforms" contributorId="com.bluexml.side.Form.generator.xforms.chiba" id_metamodel="http://www.kerblue.org/form/1.0" generatorName="SIDE Chiba Form Generator for Alfresco"/>
     <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.view.generator.alfresco.ViewAlfrescoGenerator" id="com.bluexml.side.View.generator.alfresco" metaModelName="KSR300 View" technologyVersionName="Alfresco3.x Labs and Entreprise" technologyName="alfresco" contributorId="com.bluexml.side.View.generator.alfresco" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="SIDE View Generator for Alfresco Share"/>
-    <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator" id="com.bluexml.side.Portal.generator.alfresco" metaModelName="KSR200 Portal" technologyVersionName="Alfresco3.x Labs and Entreprise" technologyName="alfresco" contributorId="com.bluexml.side.Portal.generator.alfresco" id_metamodel="http://www.kerblue.org/portal/1.0" generatorName="SIDE Alfresco Portal Generator">
-      <options key="com.bluexml.side.Portal.generator.alfresco.doclist"/>
-      <options key="com.bluexml.side.Portal.generator.alfresco.xforms"/>
-      <options key="com.bluexml.side.Portal.generator.alfresco.forms"/>
-      <options key="com.bluexml.side.Portal.generator.alfresco.facetmap"/>
-      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension" versionMin="1.0.0" moduleType="zip" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.shareDoclist" versionMin="1.0.10" versionMax="1.0.10" moduleType="zip" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.doclist" versionMin="1.0.14" versionMax="1.0.14" moduleType="amp" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.shareSearchResultsExtension" versionMin="1.0.1" versionMax="1.0.1" moduleType="zip" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.framework.alfresco.formProcessor" versionMin="1.0.10" versionMax="1.0.10" moduleType="amp" technologyVersion="alfresco_3.x"/>
+    <generatorConfigurations id_techno_version="Facetmap_2.x" impl_class="com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator" id="com.bluexml.side.View.generator.facetmap" metaModelName="KSR300 View" technologyVersionName="Facetmap 2.x" technologyName="Facetmap" contributorId="com.bluexml.side.View.generator.facetmap" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="SIDE Facetmap Generator for Alfresco">
+      <options key="com.bluexml.side.View.generator.facetmap.alfrescoConnector"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.shareFacetMapDashlet" versionMin="1.0.0" moduleType="zip" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.facetMap.alfrescoConnector" versionMin="1.0.9" versionMax="1.0.9" moduleType="zip" technologyVersion="Facetmap_2.x"/>
     </generatorConfigurations>
     <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator" id="com.bluexml.side.Class.generator.alfresco" metaModelName="KSR500 Data" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="alfresco" contributorId="com.bluexml.side.Class.generator.alfresco" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="SIDE Content Model Generator for Alfresco">
       <options key="alfresco.webscripts.common"/>
@@ -32,28 +27,40 @@
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.upload" versionMin="1.0.13" versionMax="1.0.13" moduleType="amp" technologyVersion="alfresco_3.x"/>
       <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.unicity" versionMin="1.0.9" versionMax="1.0.9" moduleType="amp" technologyVersion="alfresco_3.x"/>
     </generatorConfigurations>
+    <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator" id="com.bluexml.side.Portal.generator.alfresco" metaModelName="KSR200 Portal" technologyVersionName="Alfresco3.x Labs and Entreprise" technologyName="alfresco" contributorId="com.bluexml.side.Portal.generator.alfresco" id_metamodel="http://www.kerblue.org/portal/1.0" generatorName="SIDE Alfresco Portal Generator">
+      <options key="com.bluexml.side.Portal.generator.alfresco.doclist"/>
+      <options key="com.bluexml.side.Portal.generator.alfresco.xforms"/>
+      <options key="com.bluexml.side.Portal.generator.alfresco.forms"/>
+      <options key="com.bluexml.side.Portal.generator.alfresco.facetmap"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension" versionMin="1.0.0" moduleType="zip" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.shareDoclist" versionMin="1.0.10" versionMax="1.0.10" moduleType="zip" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.doclist" versionMin="1.0.14" versionMax="1.0.14" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.shareSearchResultsExtension" versionMin="1.0.1" versionMax="1.0.1" moduleType="zip" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.framework.alfresco.formProcessor" versionMin="1.0.10" versionMax="1.0.10" moduleType="amp" technologyVersion="alfresco_3.x"/>
+    </generatorConfigurations>
     <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator" id="com.bluexml.side.Class.generator.documentation" metaModelName="KSR500 Data" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Class.generator.documentation" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="SIDE Class Documentation Generator">
       <options key="doc.gen.screenshoot"/>
     </generatorConfigurations>
-    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.form.generator.documentation.FormDocumentationGenerator" id="com.bluexml.side.Form.generator.documentation" metaModelName="KSR400 Form" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Form.generator.documentation" id_metamodel="http://www.kerblue.org/form/1.0" generatorName="SIDE Form Documentation Generator"/>
     <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.view.generator.documentation.ViewDocumentationGenerator" id="com.bluexml.side.View.generator.documentation" metaModelName="KSR300 View" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.View.generator.documentation" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="SIDE View Documentation Generator"/>
     <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.workflow.generator.documentation.WorkflowDocumentationGenerator" id="com.bluexml.side.Workflow.generator.documentation" metaModelName="KSR600 Workflow" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Workflow.generator.documentation" id_metamodel="http://www.kerblue.org/workflow/1.0" generatorName="SIDE Workflow Documentation Generator">
       <options key="doc.gen.screenshoot"/>
     </generatorConfigurations>
-    <parameters key="generation.options.logPath" value="/DigitizationProcess/v1/application/logs"/>
-    <parameters key="generation.options.destinationPath" value="/DigitizationProcess/v1/application/out"/>
+    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.form.generator.documentation.FormDocumentationGenerator" id="com.bluexml.side.Form.generator.documentation" metaModelName="KSR400 Form" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Form.generator.documentation" id_metamodel="http://www.kerblue.org/form/1.0" generatorName="SIDE Form Documentation Generator"/>
+    <parameters key="generation.options.logPath" value="/DigitizationProcess/v1/application/logs2"/>
+    <parameters key="generation.options.destinationPath" value="/DigitizationProcess/v1/application/out2"/>
     <parameters key="generation.option.offlineMode" value="true"/>
     <parameters key="generation.options.clean" value="true"/>
-    <parameters key="alfresco.url" value="http://localhost:8080/alfresco/"/>
+    <parameters key="alfresco.url" value="http://localhost:8080/alfresco"/>
     <parameters key="com.bluexml.side.Class.generator.alfresco.module.version" value="1.0"/>
     <parameters key="com.bluexml.side.Workflow.generator.alfresco.module.version" value="1.1"/>
-    <parameters key="com.bluexml.side.Form.generator.xforms.chiba.webappContext" value="xforms"/>
-    <parameters key="CATALINA_HOME" value="C:\Alfresco\tomcat"/>
+    <parameters key="com.bluexml.side.Form.generator.xforms.chiba.webappContext" value="http://localhost:8080/xforms"/>
+    <parameters key="CATALINA_HOME" value="/Users/davidabad/servers/Alfresco/tomcat"/>
     <parameters key="com.bluexml.side.Deployer.xforms.webappName" value="xforms"/>
     <parameters key="com.bluexml.side.Form.generator.xforms.chiba.messagesFilePath" value=""/>
-    <parameters key="alfresco.share.url" value="http://localhost:8080/alfresco/"/>
+    <parameters key="alfresco.share.url" value="http://localhost:8080/share"/>
     <parameters key="com.bluexml.side.View.generator.alfresco.module.version" value="1.0"/>
     <parameters key="generation.options.documentation" value="false"/>
+    <parameters key="facetMap.url" value="http://localhost:8080/facetmap"/>
     <deployerConfigurations id_techno_version="chiba_1_5.x" impl_class="com.bluexml.side.deployer.xformsdirectcopy.DeployerXforms" id="com.bluexml.side.Deployer.xformsDirectCopy" technologyVersionName="Chiba 1.5.x" technologyName="XForms" contributorId="com.bluexml.side.Deployer.xformsDirectCopy" deployerName="SIDE Chiba X-Forms Direct Deployer">
       <options key="com.bluexml.side.Deployer.xformsDirectCopy.clean"/>
     </deployerConfigurations>
@@ -176,4 +183,5 @@
   <elements xsi:type="app:Model" name="DigitizationProcess.view" file="/DigitizationProcess/v1/models/View/DigitizationProcess.view"/>
   <elements xsi:type="app:Model" name="DigitizationProcess.workflow" file="/DigitizationProcess/v1/models/Workflow/DigitizationProcess.workflow"/>
   <elements xsi:type="app:Model" name="DigitizationProcess.form" file="/DigitizationProcess/v1/models/Form/DigitizationProcess.form"/>
+  <elements xsi:type="app:Model" name="advancedSearch.form" file="/DigitizationProcess/v1/models/Form/advancedSearch.form"/>
 </app:Application>

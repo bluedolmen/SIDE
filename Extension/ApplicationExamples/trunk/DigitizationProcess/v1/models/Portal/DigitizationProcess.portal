@@ -22,13 +22,19 @@
       <positionGroup xmi:id="_nPRnAADzEd-iQ-Ghy96rpQ" onColumn="_X1mjMOM3Ed6qNvjsNi40SA" onLayout="_U7m3QOM3Ed6qNvjsNi40SA"/>
     </portlets>
   </pageSet>
+  <pageSet xmi:id="_bbUTgBAXEd-G74-FPfFl5A" ID="AdvancedSearch" title="advanced search" useLayout="_U7m3QOM3Ed6qNvjsNi40SA">
+    <portlets xmi:id="_kuz4IBAXEd-G74-FPfFl5A" associationPortlet="_emmjwBAXEd-G74-FPfFl5A" associationPage="_bbUTgBAXEd-G74-FPfFl5A">
+      <positionGroup xmi:id="_rT580BAXEd-G74-FPfFl5A" onColumn="_X1mjMOM3Ed6qNvjsNi40SA" onLayout="_U7m3QOM3Ed6qNvjsNi40SA"/>
+    </portlets>
+  </pageSet>
   <layoutSet xmi:id="_U7m3QOM3Ed6qNvjsNi40SA" description="" name="PortalLayout1">
     <columns xmi:id="_X1mjMOM3Ed6qNvjsNi40SA" name="new_0" width="100"/>
   </layoutSet>
   <portletSet xmi:id="_eH4ZkOM3Ed6qNvjsNi40SA" name="DocumentDetails" isPortletInternal="_zu6MYOM3Ed6qNvjsNi40SA"/>
   <portletSet xmi:id="_jMx20OM3Ed6qNvjsNi40SA" name="DocumentLibrary" isPortletInternal="_4uHRUOM3Ed6qNvjsNi40SA"/>
-  <portletSet xmi:id="_wMvfQABZEd-pVYKNSGS_OQ" name="Portlet_FacetMap" isPortletInternal="_u0X-IABZEd-pVYKNSGS_OQ"/>
+  <portletSet xmi:id="_wMvfQABZEd-pVYKNSGS_OQ" name="facetMap" isPortletInternal="_u0X-IABZEd-pVYKNSGS_OQ"/>
   <portletSet xmi:id="_gmJHYABlEd-pVYKNSGS_OQ" name="edit-metadata" isPortletInternal="_qShtIABlEd-pVYKNSGS_OQ"/>
+  <portletSet xmi:id="_emmjwBAXEd-G74-FPfFl5A" name="advanced-search" isPortletInternal="_lvNlMBAXEd-G74-FPfFl5A"/>
   <portletSetType xmi:id="_yvn5oOM3Ed6qNvjsNi40SA" name="PortletType1"/>
   <portletSetType xmi:id="_tu5j0ABZEd-pVYKNSGS_OQ" name="PortletType2"/>
   <internalPortletSet xmi:id="_zu6MYOM3Ed6qNvjsNi40SA">
@@ -42,5 +48,8 @@
   </internalPortletSet>
   <internalPortletSet xmi:id="_qShtIABlEd-pVYKNSGS_OQ" type="Form">
     <form xsi:type="form:ClassFormCollection" href="../Form/DigitalizationProcess.data.form#_s29bwdRSEd6mvv4ISlOk-Q"/>
+  </internalPortletSet>
+  <internalPortletSet xmi:id="_lvNlMBAXEd-G74-FPfFl5A" type="Form">
+    <form xsi:type="form:ClassFormCollection" href="../Form/advancedSearch.form#_IsGl4BAYEd-G74-FPfFl5A"/>
   </internalPortletSet>
 </portal:Portal>

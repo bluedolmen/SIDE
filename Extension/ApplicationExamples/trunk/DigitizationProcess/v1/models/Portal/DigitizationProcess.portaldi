@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
   <model href="DigitizationProcess.portal#_SmQJcOM3Ed6qNvjsNi40SA"/>
-  <diagrams position="0,0" size="100,100" name="DigitizationProcess" viewport="0,72">
+  <diagrams position="0,0" size="100,100" name="DigitizationProcess" viewport="1,0">
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
     <property key="diagramHeight" value="1188"/>
@@ -14,14 +14,14 @@
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Portal.modeler.diagram">
       <element href="DigitizationProcess.portal#_SmQJcOM3Ed6qNvjsNi40SA"/>
     </semanticModel>
-    <contained xsi:type="di:GraphNode" position="280,88" size="100,89">
+    <contained xsi:type="di:GraphNode" position="156,146" size="100,89">
       <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.5"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_TDopAOM3Ed6qNvjsNi40SA"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="30,6" size="64,76">
-      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.11 //@diagrams.0/@contained.17 //@diagrams.0/@contained.20"/>
+    <contained xsi:type="di:GraphNode" position="301,12" size="64,76">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.11 //@diagrams.0/@contained.17 //@diagrams.0/@contained.20 //@diagrams.0/@contained.27"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_U7m3QOM3Ed6qNvjsNi40SA"/>
       </semanticModel>
@@ -29,13 +29,13 @@
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="UseLayout"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="75,243" size="100,78">
+    <contained xsi:type="di:GraphNode" position="24,263" size="100,78">
       <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.18"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_eH4ZkOM3Ed6qNvjsNi40SA"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="314,218" size="100,78">
+    <contained xsi:type="di:GraphNode" position="155,272" size="100,78">
       <anchorage graphEdge="//@diagrams.0/@contained.5 //@diagrams.0/@contained.9"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_jMx20OM3Ed6qNvjsNi40SA"/>
@@ -46,7 +46,7 @@
         <element href="DigitizationProcess.portal#_raBlEOM3Ed6qNvjsNi40SA"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="99,356" size="64,78">
+    <contained xsi:type="di:GraphNode" position="43,391" size="64,78">
       <anchorage graphEdge="//@diagrams.0/@contained.7"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_zu6MYOM3Ed6qNvjsNi40SA"/>
@@ -55,7 +55,7 @@
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="isInternalPortlet"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="406,329" size="64,78">
+    <contained xsi:type="di:GraphNode" position="176,394" size="64,78">
       <anchorage graphEdge="//@diagrams.0/@contained.9"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_4uHRUOM3Ed6qNvjsNi40SA"/>
@@ -64,7 +64,7 @@
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.8/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="isInternalPortlet"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="495,79" size="53,89">
+    <contained xsi:type="di:GraphNode" position="457,155" size="100,89">
       <anchorage graphEdge="//@diagrams.0/@contained.11 //@diagrams.0/@contained.15"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_iJ2zUABZEd-pVYKNSGS_OQ"/>
@@ -73,13 +73,13 @@
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.10/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="UseLayout"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="580,331" size="64,78">
+    <contained xsi:type="di:GraphNode" position="471,397" size="64,78">
       <anchorage graphEdge="//@diagrams.0/@contained.14"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_u0X-IABZEd-pVYKNSGS_OQ"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="532,203" size="64,78">
+    <contained xsi:type="di:GraphNode" position="453,280" size="100,78">
       <anchorage graphEdge="//@diagrams.0/@contained.14 //@diagrams.0/@contained.15"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_wMvfQABZEd-pVYKNSGS_OQ"/>
@@ -93,7 +93,7 @@
         <element href="DigitizationProcess.portal#_EI8SgABbEd-pVYKNSGS_OQ"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="36,121" size="100,89">
+    <contained xsi:type="di:GraphNode" position="19,152" size="100,89">
       <anchorage graphEdge="//@diagrams.0/@contained.17 //@diagrams.0/@contained.18"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_HjHHwABlEd-pVYKNSGS_OQ"/>
@@ -107,7 +107,7 @@
         <element href="DigitizationProcess.portal#_TOslIABlEd-pVYKNSGS_OQ"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="652,59" size="53,89">
+    <contained xsi:type="di:GraphNode" position="318,152" size="95,89">
       <anchorage graphEdge="//@diagrams.0/@contained.20 //@diagrams.0/@contained.22"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_eysz0ABlEd-pVYKNSGS_OQ"/>
@@ -116,7 +116,7 @@
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.19/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="UseLayout"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="655,202" size="64,78">
+    <contained xsi:type="di:GraphNode" position="311,274" size="95,78">
       <anchorage graphEdge="//@diagrams.0/@contained.22 //@diagrams.0/@contained.24"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_gmJHYABlEd-pVYKNSGS_OQ"/>
@@ -127,13 +127,42 @@
         <element href="DigitizationProcess.portal#_mKA_oABlEd-pVYKNSGS_OQ"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="666,308" size="64,78">
+    <contained xsi:type="di:GraphNode" position="325,392" size="64,78">
       <anchorage graphEdge="//@diagrams.0/@contained.24"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_qShtIABlEd-pVYKNSGS_OQ"/>
       </semanticModel>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.21/@anchorage.0 //@diagrams.0/@contained.23/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="isInternalPortlet"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="613,157" size="100,89">
+      <anchorage graphEdge="//@diagrams.0/@contained.27 //@diagrams.0/@contained.28"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.portal#_bbUTgBAXEd-G74-FPfFl5A"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="634,279" size="64,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.28 //@diagrams.0/@contained.30"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.portal#_emmjwBAXEd-G74-FPfFl5A"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.25/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="UseLayout"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.25/@anchorage.0 //@diagrams.0/@contained.26/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.portal#_kuz4IBAXEd-G74-FPfFl5A"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="633,396" size="64,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.30"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="DigitizationProcess.portal#_lvNlMBAXEd-G74-FPfFl5A"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.26/@anchorage.0 //@diagrams.0/@contained.29/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="isInternalPortlet"/>
     </contained>
   </diagrams>
