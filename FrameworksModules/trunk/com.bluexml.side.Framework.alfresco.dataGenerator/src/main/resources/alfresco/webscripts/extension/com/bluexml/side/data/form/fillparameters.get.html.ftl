@@ -58,6 +58,12 @@
 	                            </select>
 	                    </div>
 	            </div>
+	            <div id="property">
+                        <div id="label">Index: </div>
+                        <div id="field">      
+                                <input name="indexes" type="text" />
+                        </div>                        
+	            </div>
 	            <div id="button">
 	                    <input name="submit" type="Submit" value="Generate" />
 	            </div>
@@ -79,6 +85,12 @@
 	    		</tr> 
 	    		<tr>
 	    			<p id="note">- Path to store documents in Alfresco: this parameters allows to define the Alfresco path to store the generated nodes under /app:company_home; this path must be expressed using an Xpath representation like app:guest_home/cm:testData; It is important to note that you must be connected to Alfresco under an account having write permission on this Path.</p>
+	    		</tr>
+	    		<tr>
+	    			<p id="note">-Scenario: this parameter allows to index the types instances and its attributes in an incremental way or fully randomly.</p>
+	    		</tr>
+	    		<tr>
+	    			<p id="note">-Index: this parameter is used for the incremental scenario; it assures unicity of attributes if necessary (for the first generation, you can fill it with 0).</p>
 	    		</tr>
 	    </table>
 	</body>
