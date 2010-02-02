@@ -3,6 +3,7 @@
     	body {font-family: Tahoma;}
     	h2 {text-align: center; color: white;  background-color: blue;}
     	p#content {text-align: center;}
+    	p#note {text-align: center; font-style:italic; font-size: 8pt;}
     </style>
 	<body>
 		<h2>SIDE-Alfresco: Random Metadata and document Loading for Test</h2>
@@ -13,6 +14,9 @@
 		<#else>
 			<p id="content">The test data have been successfully loaded under Alfresco.<br>
 			   You can load other test data through the <a href="http://localhost:8080/alfresco/service/data/form/fillparameters">Random Metadata and document Loading webscript</a>.</p>
+			   <#if incremental?exists>
+					<p id="note">Note: You can load with ${attributeIndex} as index parameter to assure unicity (if necessary).</p>
+			   </#if>
 		</#if>
 	</body>
 </html>
