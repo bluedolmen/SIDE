@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="form"
     nsURI="http://www.kerblue.org/form/1.0" nsPrefix="form">
-  <eClassifiers xsi:type="ecore:EClass" name="FormElement" abstract="true" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//ModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="FormElement" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="noSpecialCharacters"/>
     </eAnnotations>
@@ -23,19 +23,20 @@
         <details key="documentation" value="Definition: The 'id' attribute specifies a unique identifier of the form element in the form.&#xD;&#xA;Constraint/limit: The 'id' value must not contain space, is mandatory and must be unique in the FormClass or FormWorkflow.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="help_text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="help_text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'help_text' attribute specifies a text that will appear when the cursor moves over the form element.&#xD;&#xD;&#xA;Constraint/Limit: The internationalization convention may be used for the help_text's value; if the value of the help_text in the form model is of the form &quot;#label&quot;,  the token &quot;label&quot; is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '&lt;xforms_webapp>/WEB-INF/classes/messages.properties'.&#xD;&#xD;&#xA;Example: help_text=This is an help message"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'hidden' attribute specifies that a form element will be hidden in the generated form if true or will be visible if false."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FormCollection" abstract="true" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//Package">
+  <eClassifiers xsi:type="ecore:EClass" name="FormCollection" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: This is the root element which is the first created element of the form model. All forms will be child of this element. &#xD;&#xA;It has no corresponding elements in the Data model and is usually not generated.&#xD;&#xA;Operations:&#xD;&#xA;- The operation ‘Synchronize with Class Diagram’ might be called when your Data model has been changed to propagate these changes in your forms. &#xD;&#xA;The changes which will be propagated are: &#xD;&#xA; . New attribute (in Data Diagram) are added to the form.&#xD;&#xA; . Deleted attribute (in Data Diagram) are removed from the form.&#xD;&#xA; . Attribute which have been put as mandatory (in Data Diagram) will be put in form if they have been deleted in field’s form.&#xD;&#xA; . If an attribute (in Data Diagram) have been changed its type (eg : String to Date) the kind of field will be changed (CharFiled to DateField).&#xD;&#xA;All the other changes which are not propagated imply a manual update in the concerned forms.&#xD;&#xA;"/>
     </eAnnotations>
@@ -49,6 +50,14 @@
     <eOperations name="getFields" upperBound="-1" eType="#//Field">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.children->select(oclIsKindOf(Field)).oclAsType(Field)->union(self.children->select(oclIsKindOf(FormGroup)).oclAsType(FormGroup).getFields().oclAsType(Field)).oclAsType(Field)"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: to get the list of the fields of the FormGroup."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getSearchFields" upperBound="-1" eType="#//SearchField">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.children->select(oclIsKindOf(SearchField)).oclAsType(SearchField)->union(self.children->select(oclIsKindOf(FormGroup)).oclAsType(FormGroup).getSearchFields().oclAsType(SearchField)).oclAsType(SearchField)"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: to get the list of the fields of the FormGroup."/>
@@ -115,7 +124,7 @@
         <details key="documentation" value="Definition: The 'disabled' attribute protects the field from being modified if true. If false (default), it can be modified."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="field_size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'fieldSize' attribute specifies the number of element to show for a selection list.&#xD;&#xD;&#xD;&#xA;Constraint/limit: When there are two relations R1 and R2 between the two same classes A and B, the value of field size set for R1 will be set for R2 too, even there is no value for field size of R2.&#xD;&#xA;&#xD;&#xD;Example: Field Size = 10 will limit to 10 the number of elements in a generated selection list."/>
       </eAnnotations>
@@ -125,8 +134,6 @@
         <details key="documentation" value="Definition: a specific style code associated to the field which may be defined in style file like css file to be applied on the field input at runtime.&#xD;&#xA;Constraint/Limit: the semantic of the style code is not defined in the model but is known by the targeted form engine on which will be deployed the generated forms.  In the case of XForms generation on Alfresco, this style code refers a CSS class."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="searchOperatorConfiguration"
-        eType="#//SearchOperatorConfiguration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mockup" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -165,12 +172,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The Form Class is the container for the form itself. If not empty, this element generates a form. Moreover, the Form Class is the link between a single data class of the loaded Data Model and the customized form.&#xD;&#xA;Operations: &#xD;&#xA;-&#x9;The operation 'Load Ressources...' enables to select and import Data Models in the Form Model. One of the first steps to modelize form is to connect this form diagram with the data model through this operation: Right click on the editor and select 'Load Resource' to choose a data model (with suffix .dt and not a '.dtdi' data diagram). The Real Class attribute of Form Class may then be set up by selecting the name of the targeted data class of the loaded data model. &#xD;&#xA;-&#x9;The operation 'Initialize form class' creates the default form from a selected Data Class. The selected Data Class is set up with the attribute 'Real class'. This action creates all fields corresponding to the Attributes and Associations defined in the data model: this default form may then be refined according to the needs.&#xD;&#xA;-&#x9;The operation ‘Refresh Outline’ refreshes an outline html view of the form. This view is useful to see the transformations made on the form before generating it and to have a general view of what will be generated. It is important to note that this outline view does not give the final generated form and the shape may be different according to the targeted technology.&#xD;&#xA;-&#x9;The operation ‘Restore’ allows restoring a field which has been previously deleted.&#xD;&#xA;Inherits: ClassReference, FormContainer.&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Has_content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="This option tells whether the data form may have a content. If true, a content upload field (that does not appear in the modeler and has no file preview) will be automatically attached to the form."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -444,17 +445,17 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'FormGroupPresentationType' is an enumeration list with the different layout for a form group."/>
     </eAnnotations>
-    <eLiterals name="Auto">
+    <eLiterals name="auto">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'auto' option displays elements in an horizontal way with a border."/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="Horizontal" value="1">
+    <eLiterals name="horizontal" value="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'horizontal' option displays elements in an horizontal way. The label of the form group will not appear."/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="Vertical" value="2">
+    <eLiterals name="vertical" value="2">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'vertical' value displays elements in a vertical way. The label of the form group will not appear."/>
       </eAnnotations>
@@ -464,7 +465,7 @@
         <details key="documentation" value="Definition: The 'Tabbed' option displays elements in a tab."/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="Borderless" value="4" literal="Borderless">
+    <eLiterals name="borderless" value="4" literal="borderless">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'bordeless' option displays elements border. The label of the form group will not appear."/>
       </eAnnotations>
@@ -472,7 +473,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'ActionField' represents a button.&#xD;&#xA;You must set the ‘name’ attribute to the fully qualified name of a Java class and the ‘Label’ attribute to the text (or code for internationalization) you want to display on the button.&#xD;&#xA;This class must implement a ‘run’ method whose signature is : public void run(org.w3c.dom.Node node, java.lang.String dataId)&#xD;&#xA;where :&#xD;&#xA;-&#x9;‘node’ is the form tree&#xD;&#xA;-&#x9;‘dataId’ is the id of the node being edited: dataId is null when in creation mode.&#xD;&#xA;When the form is initialized, the button is generated. On click, the Java class loader loads and run the class (check that the class location is in the classpath).&#xD;&#xA;&#xD;&#xA;&#xD;Inherits:&#xD; Field."/>
+      <details key="documentation" value="Definition: The 'ActionField' represents a button.&amp;#x0D;&#xD;&#xA;You must set the ‘name’ attribute to the fully qualified name of a Java class and the ‘Label’ attribute to the text (or code for internationalization) you want to display on the button.&lt;br>&#xD;&#xA;This class must implement a ‘run’ method whose signature is : public void run(org.w3c.dom.Node node, java.lang.String dataId)&#xD;&#xA;where :\n&#xD;&#xA;-&#x9;‘node’ is the form tree&amp;#x0D;&#xD;&#xA;-&#x9;‘dataId’ is the id of the node being edited: dataId is null when in creation mode.&lt;br>&#xD;&#xA;When the form is initialized, the button is generated. On click, the Java class loader loads and run the class (check that the class location is in the classpath).&#xD;&#xA;&amp;#x0D;&amp;#x0D;&#xD;&#xA;&#xD;Inherits:&#xD; Field."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TextField" eSuperTypes="#//CharField">
@@ -527,17 +528,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="SearchForm" eSuperTypes="#//FormContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataForm" eType="#//FormClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinationOperator" eType="#//CombinationOperators"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//SearchFormCollection"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumericalField" eSuperTypes="#//Field"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SearchOperatorConfiguration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultOperator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="proposedOperators" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="FieldSearchOperators">
-    <eLiterals name="equals"/>
-    <eLiterals name="empty" value="1"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CharFieldSearchOperators">
     <eLiterals name="contains"/>
     <eLiterals name="icontains" value="1"/>
@@ -545,11 +538,15 @@
     <eLiterals name="istartsWith" value="3"/>
     <eLiterals name="endsWith" value="4"/>
     <eLiterals name="iendsWith" value="5"/>
+    <eLiterals name="empty" value="6"/>
+    <eLiterals name="is" value="7"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="NumericalFieldSearchOperators">
     <eLiterals name="between"/>
     <eLiterals name="below" value="1"/>
     <eLiterals name="above" value="2"/>
+    <eLiterals name="exactly" value="3"/>
+    <eLiterals name="empty" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ChoiceFieldSearchOperators">
     <eLiterals name="all"/>
@@ -560,6 +557,7 @@
   <eClassifiers xsi:type="ecore:EEnum" name="FileFieldSearchOperators">
     <eLiterals name="fileType"/>
     <eLiterals name="contents" value="1"/>
+    <eLiterals name="size" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CombinationOperators">
     <eLiterals name="and"/>
@@ -567,5 +565,42 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StaticText" eSuperTypes="#//FormElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchFormCollection" eSuperTypes="#//FormCollection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SearchForm" upperBound="-1"
+        eType="#//SearchForm" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchField" eSuperTypes="#//FormElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericalSearchField" eSuperTypes="#//SearchField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="#//NumericalFieldSearchOperators"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultOperator" eType="#//NumericalFieldSearchOperators"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharSearchField" eSuperTypes="#//SearchField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="#//CharFieldSearchOperators"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultOperator" eType="#//CharFieldSearchOperators"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateSearchField" eSuperTypes="#//SearchField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="#//DateFieldSearchOperators"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultOperator" eType="#//DateFieldSearchOperators"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoiceSearchField" eSuperTypes="#//SearchField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="#//ChoiceFieldSearchOperators"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultOperator" eType="#//ChoiceFieldSearchOperators"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DateFieldSearchOperators">
+    <eLiterals name="between"/>
+    <eLiterals name="before" value="1"/>
+    <eLiterals name="after" value="2"/>
+    <eLiterals name="exactly" value="3"/>
+    <eLiterals name="empty" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FileSearchField" eSuperTypes="#//SearchField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="#//FileFieldSearchOperators"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultOperator" eType="#//FileFieldSearchOperators"/>
   </eClassifiers>
 </ecore:EPackage>
