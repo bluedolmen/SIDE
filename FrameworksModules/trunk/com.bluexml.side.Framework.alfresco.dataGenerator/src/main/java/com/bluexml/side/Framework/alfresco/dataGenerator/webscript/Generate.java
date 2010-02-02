@@ -10,6 +10,8 @@ import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.alfresco.service.cmr.dictionary.PropertyDefinition;
+import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.web.scripts.Cache;
 import org.alfresco.web.scripts.DeclarativeWebScript;
@@ -42,6 +44,7 @@ public class Generate extends DeclarativeWebScript {
 	private static final String PATH_TO_ALFRESCO_REPOSITORY = "alfrescoRepository";
 	private static final String PATH_TO_DOCUMENTS = "pathToDocuments";
 	private static final String SCENARIO = "scenario";
+	private static final String INDEXES = "indexes";
 	
 	private static final String XML_FILE_NAME = "Data.xml";
 	public static final String ACP_FILE_NAME = "Data";
@@ -57,9 +60,16 @@ public class Generate extends DeclarativeWebScript {
 		String numOfContentsParameterValue = req.getParameter(NUMBER_OF_CONTENTS_PARAMETER_NAME);
 		String numOfOutPutArcsParameterValue = req.getParameter(NUMBER_OF_OUTPUT_ARCS_PARAMETER_NAME);
 		String scenarioParameterValue = req.getParameter(SCENARIO);
+		String indexesParameterValue = req.getParameter(INDEXES);
 		generator.setNumberOfNodes(Integer.valueOf(numOfContentsParameterValue));
 		generator.setNumberOfOutputArcs(Integer.valueOf(numOfOutPutArcsParameterValue));
 		generator.setScenario(scenarioParameterValue);
+		if (!indexesParameterValue.equals("")){
+			generator.setSavedStartIndexAttribute(Integer.valueOf(indexesParameterValue));
+		}
+		else{
+			generator.setSavedStartIndexAttribute(Integer.valueOf(0));
+		}
 		
 		String modelParameterValue = req.getParameter(MODEL_PARAMETER_NAME);
 		dictionary.setQnameStringModel(modelParameterValue);
@@ -140,13 +150,31 @@ public class Generate extends DeclarativeWebScript {
 			// Brice : First save (in case of problem during import in order to analyze the situation), next import
 			try {
 				importer.importACP(acp,repository);
+				packager.clean(acp);
 			} catch (Exception e) {
 				model.put("error", e);
 				logger.error("Error :", e);
 			}
 		}
 		
-		packager.clean(acp);
+		if (scenarioParameterValue.equals("incremental")){
+			model.put("incremental", new Object());
+			Integer maxAttributeIndex;
+			try {
+				maxAttributeIndex = Integer.valueOf(generator.getMaxAttributeIndex());
+				model.put("attributeIndex", maxAttributeIndex);
+				
+				Map<TypeDefinition,Map<PropertyDefinition,Integer>> index = AlfrescoModelRandomDataGenerator.getIndex();
+				index.clear();
+				AlfrescoModelRandomDataGenerator.setIndex(index);
+				Map<TypeDefinition,Integer> indexType = AlfrescoModelRandomDataGenerator.getIndexType();
+				indexType.clear();
+				AlfrescoModelRandomDataGenerator.setIndexType(indexType);
+			} catch (Exception e) {
+				model.put("error", e);
+				logger.error("Error :", e);
+			}
+		}
 		
 		return model;
 	}
