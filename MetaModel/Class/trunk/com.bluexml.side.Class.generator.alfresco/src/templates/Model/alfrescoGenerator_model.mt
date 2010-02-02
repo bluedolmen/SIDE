@@ -49,6 +49,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<import uri="http://www.alfresco.org/model/wcmmodel/1.0" prefix="wcm"/>
       	<import uri="http://www.alfresco.org/model/forum/1.0" prefix="fm"/>
       	<import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
+      	<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
       	<!-- Import BlueXML Definitions -->
       	<import uri="http://www.bluexml.com/model/content/1.0" prefix="bxcm" />
 	</imports>
