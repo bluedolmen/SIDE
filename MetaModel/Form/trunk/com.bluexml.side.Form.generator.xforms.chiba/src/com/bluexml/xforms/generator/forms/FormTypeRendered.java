@@ -16,7 +16,7 @@ public enum FormTypeRendered {
 				"default forms based on data diagrams"),
 		formClassSubClassSelector(
 				new FormSubmissionActions[] { FormSubmissionActions.SetType }, 
-				"_selector", 
+				MsgId.INT_SUFFIX_FILENAME_SELECTORS.getText(), 
 				MsgId.INT_DIRECTORY_FORM_SELECTOR.getText(),
 				"Special forms for selecting subtypes",
 				"these should not be called directly as they are reserved for the controller"),
@@ -95,5 +95,4 @@ public enum FormTypeRendered {
 		return description;
 	}
 
-	
 }
