@@ -501,6 +501,9 @@ public class NavigationManager {
 		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_LIST.getText())) {
 			formType = FormTypeEnum.LIST;
 		}
+		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_SELECTOR.getText())) {
+			formType = FormTypeEnum.SELECTOR;
+		}
 		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_WKFLW.getText())) {
 			formType = FormTypeEnum.WKFLW;
 		}
@@ -510,8 +513,14 @@ public class NavigationManager {
 		bean.formType = formType;
 
 		String originalDatatype = req.getParameter(AbstractAction.DATA_TYPE);
-		String dataType = (formType == FormTypeEnum.WKFLW) ? originalDatatype : StringUtils
-				.trimToNull(originalDatatype).replace('_', '.');
+		String dataType = null;
+		if (formType == FormTypeEnum.WKFLW) {
+			dataType = originalDatatype;
+		} else if (formType == FormTypeEnum.SELECTOR) {
+			dataType = originalDatatype.substring(0, originalDatatype.indexOf("_selector"));
+		} else {
+			dataType = StringUtils.trimToNull(originalDatatype).replace('_', '.');
+		}
 		if (dataType == null) {
 			throw new ServletException("type cannot be null");
 		}
@@ -648,24 +657,29 @@ public class NavigationManager {
 		StringBuffer xformsStringBuffer = new StringBuffer();
 		InputStream xformsStream = null;
 
-		String base = dataType;
+		String base = null; // the directory and filename (without extension)
+		// String corrected = dataType; // the real datatype, relevant for selectors
 
 		if (formType == FormTypeEnum.WKFLW_SELECTION) {
 			base = MsgId.INT_DIRECTORY_WKFLW_SEL_FORM.getText() + File.separatorChar
 					+ MsgId.INT_WKFLW_SEL_FORM_FILENAME;
 		} else if (formType == FormTypeEnum.FORM) {
-			base = MsgId.INT_DIRECTORY_FORM_FORMS.getText() + File.separatorChar + base;
+			base = MsgId.INT_DIRECTORY_FORM_FORMS.getText() + File.separatorChar + dataType;
 		} else if (formType == FormTypeEnum.WKFLW || formType == FormTypeEnum.WKFLW_SELECTION) {
-			base = MsgId.INT_DIRECTORY_FORM_WKFLW.getText() + File.separatorChar + base;
+			base = MsgId.INT_DIRECTORY_FORM_WKFLW.getText() + File.separatorChar + dataType;
 		} else if (formType == FormTypeEnum.LIST) {
-			base = MsgId.INT_DIRECTORY_FORM_LISTS.getText() + File.separatorChar + base;
+			base = MsgId.INT_DIRECTORY_FORM_LISTS.getText() + File.separatorChar + dataType;
+		} else if (formType == FormTypeEnum.SELECTOR) {
+			base = MsgId.INT_DIRECTORY_FORM_SELECTOR.getText() + File.separatorChar + dataType
+					+ MsgId.INT_SUFFIX_FILENAME_SELECTORS;
 		} else {
 			if (!dataTypeSet) {
 				if (getController().hasSubTypes(dataType)) {
 					base = MsgId.INT_DIRECTORY_FORM_SELECTOR.getText() + File.separatorChar
 							+ dataType + MsgId.INT_SUFFIX_FILENAME_SELECTORS;
 				} else {
-					base = MsgId.INT_DIRECTORY_FORM_CLASSES.getText() + File.separatorChar + base;
+					base = MsgId.INT_DIRECTORY_FORM_CLASSES.getText() + File.separatorChar
+							+ dataType;
 				}
 			}
 		}
@@ -751,7 +765,7 @@ public class NavigationManager {
 		String doubleShiftReplace;
 		int pos;
 
-		// choose the right replacement for "##"
+		// choose the right surrogate for "##" and do the replacement
 		if (pageText.indexOf("@@") == -1) {
 			doubleShiftReplace = "@@";
 		} else if (pageText.indexOf("&@") == -1) {

@@ -40,18 +40,18 @@ td {
 
 	String chibaRoot = null;
 	String rootDir = null;
-
+	
 	private class DirDescrBean {
 		// Any of these fields may be null
 		public String label;
 		public String description;
-
+		
 		public DirDescrBean(String label, String description) {
 			this.label = label;
 			this.description = description;
 		}
 	}
-
+	
 	public String getTextContent(Element elt) {
 		StringBuffer buffer = new StringBuffer();
 		NodeList childList = elt.getChildNodes();
@@ -68,9 +68,8 @@ td {
 	/**
 	 * Never returns null.
 	 */
-
-	public DirDescrBean getDirectoryDescrBean(String descrFilePath, String initialLabel)
-			throws IOException {
+	 
+	public DirDescrBean getDirectoryDescrBean(String descrFilePath, String initialLabel) throws IOException {
 		String resultLabel = initialLabel;
 		Document doc = null;
 		InputStream is;
@@ -195,7 +194,7 @@ td {
 				}
 					}
 				}
-
+				
 				//root = new File(readDir);
 				//files = root.list();
 				//cat.debug("files: " + files.length);
@@ -212,32 +211,34 @@ td {
 				<td>
 				<%
 					String formType = "";
-								String rootPath = root.getPath();
-								if (aFile.getName().endsWith(".xhtml")) {
-									String className = aFile.getName().replace(".xhtml", "");
+					String rootPath = root.getPath();
+					if (aFile.getName().endsWith(".xhtml")) {
+						String className = aFile.getName().replace(".xhtml", "");
 									if (rootPath.endsWith("/forms/forms")
 											|| rootPath.endsWith("\\forms\\forms")) {
-										formType = "&formType=form";
-									}
+							formType = "&formType=form";
+						}
 									if (rootPath.endsWith("/forms/lists")
 											|| rootPath.endsWith("\\forms\\lists")) {
-										formType = "&formType=list";
-									}
-									if (rootPath.endsWith("/forms/workflows")
-											|| rootPath.endsWith("\\forms\\workflows")) {
-										if (aFile.getName().endsWith("ProcessSelection.xhtml")) {
-											formType = "&formType=wkflwSel";
-										} else {
-											formType = "&formType=wkflw";
-										}
-									}
+							formType = "&formType=list";
+						}
+						if (rootPath.endsWith("/forms/selectors") || rootPath.endsWith("\\forms\\selectors")) {
+							formType = "&formType=selector";
+						}
+						if (rootPath.endsWith("/forms/workflows") || rootPath.endsWith("\\forms\\workflows")) {
+							if (aFile.getName().endsWith("ProcessSelection.xhtml")) {
+								formType = "&formType=wkflwSel";
+							} else {
+								formType = "&formType=wkflw";
+							}
+						}
 				%> <a
 					href="<%=request.getContextPath()%>/xforms?type=<%=className%><%=formType%>">
-				<%=className%> </a> <%
- 	} else {
- %> <%=aFile.getName()%> <%
- 	}
- %>
+					<%=className%> </a> <%
+					} else {
+					%> <%=aFile.getName()%> <%
+					}
+				%>
 				</td>
 				<td align="center" valign="middle">
 				<%

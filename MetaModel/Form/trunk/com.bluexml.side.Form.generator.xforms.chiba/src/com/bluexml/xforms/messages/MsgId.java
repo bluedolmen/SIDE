@@ -142,6 +142,7 @@ public enum MsgId {
 	INT_FILEFIELD_PREVIEW_NONE			(""),
 	INT_FORMTYPE_FORM					("form"),
 	INT_FORMTYPE_LIST					("list"),
+	INT_FORMTYPE_SELECTOR				("selector"),
 	INT_FORMTYPE_WKFLW					("wkflw"),
 	INT_FORMTYPE_WKFLWSEL				("wkflwSel"),
 	INT_GEN_DYN_ENUM_PREFIX				("$"),

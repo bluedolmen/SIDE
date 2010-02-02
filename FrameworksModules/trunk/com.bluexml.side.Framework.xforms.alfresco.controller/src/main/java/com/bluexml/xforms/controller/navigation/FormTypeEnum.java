@@ -9,6 +9,8 @@ public enum FormTypeEnum {
 		CLASS,
 		/** Forms built from form diagrams, for data. */
 		FORM,
+		/** Forms for abstract types (and types with subtypes)*/
+		SELECTOR,
 		/** Forms built from form diagrams, for workflows. */
 		WKFLW,
 		LIST,
