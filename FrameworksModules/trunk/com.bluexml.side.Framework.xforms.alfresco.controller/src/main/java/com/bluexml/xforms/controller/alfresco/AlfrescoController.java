@@ -600,7 +600,7 @@ public class AlfrescoController {
 		GenericClass alfClass = mappingTool.transformClassFormsToAlfresco(transaction, instance,
 				isServletRequest);
 		if (alfClass.getId() == null) {
-			alfClass.setId(save(transaction, alfClass));
+			alfClass.setId(saveMain(transaction, alfClass));
 		} else {
 			uploadProcessOnUpdate(transaction, alfClass);
 		}
@@ -623,13 +623,33 @@ public class AlfrescoController {
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
-	private String save(AlfrescoTransaction transaction, GenericClass alfClass)
+	private String saveMain(AlfrescoTransaction transaction, GenericClass alfClass)
 			throws AlfrescoControllerException, ServletException {
 		// enqueue the operation
 		transaction.queueSave(alfClass);
 
 		// process file upload fields if any
 		uploadProcessOnSave(transaction, alfClass);
+
+		return alfClass.getId();
+	}
+
+	/**
+	 * Updates a node: enqueues the operation in the transaction and processes file uploads.
+	 * 
+	 * @param transaction
+	 * @param alfClass
+	 * @return
+	 * @throws AlfrescoControllerException
+	 * @throws ServletException
+	 */
+	private String updateMain(AlfrescoTransaction transaction, GenericClass alfClass)
+			throws AlfrescoControllerException, ServletException {
+		// enqueue the operation
+		transaction.queueUpdate(alfClass);
+
+		// process file upload fields if any
+		uploadProcessOnUpdate(transaction, alfClass);
 
 		return alfClass.getId();
 	}
@@ -1539,9 +1559,9 @@ public class AlfrescoController {
 			throws AlfrescoControllerException, ServletException {
 		GenericClass alfClass = this.transformsToAlfresco(transaction, type, instance);
 		if (alfClass.getId() == null) {
-			alfClass.setId(save(transaction, alfClass));
+			alfClass.setId(saveMain(transaction, alfClass));
 		} else {
-			uploadProcessOnUpdate(transaction, alfClass);
+			updateMain(transaction, alfClass);
 		}
 		return alfClass.getId();
 	}
