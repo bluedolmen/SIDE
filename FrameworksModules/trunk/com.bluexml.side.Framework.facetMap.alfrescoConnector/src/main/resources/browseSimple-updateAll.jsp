@@ -38,6 +38,14 @@
 	List<String> sites = Updater.updateAll(fms, request);
 %>
 
-<%
+<%--
 	response.sendRedirect("browseSimple_facets.jsp?" + request.getQueryString());
-%>
+--%>
+<html>
+<head>
+<title>Facet Map initialized</title>
+</head>
+<body>
+<p>all facet have been generated</p>
+</body>
+</html>
