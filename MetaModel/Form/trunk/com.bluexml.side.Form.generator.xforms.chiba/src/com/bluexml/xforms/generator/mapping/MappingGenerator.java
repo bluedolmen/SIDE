@@ -232,8 +232,8 @@ public class MappingGenerator extends AbstractGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#addIdForClass(com.bluexml. side.clazz.Clazz,
-	 * java.lang.String, boolean)
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#addIdForClass(com.bluexml.
+	 * side.clazz.Clazz, java.lang.String, boolean)
 	 */
 	// public void addIdForClass(Clazz classe, String string, boolean hasParent) {
 	// if (!hasParent) {
@@ -249,7 +249,8 @@ public class MappingGenerator extends AbstractGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginAspect(com.bluexml.side .clazz.Aspect)
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginAspect(com.bluexml.side
+	 * .clazz.Aspect)
 	 */
 	public void beginAspect(Aspect aspect) {
 		AspectType aspectType = new AspectType();
@@ -263,8 +264,8 @@ public class MappingGenerator extends AbstractGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginClasse(com.bluexml.side .clazz.Clazz,
-	 * boolean)
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginClasse(com.bluexml.side
+	 * .clazz.Clazz, boolean)
 	 */
 	public void beginClasse(Clazz classe, boolean rendered) {
 		ClassType classType = new ClassType();
@@ -341,7 +342,13 @@ public class MappingGenerator extends AbstractGenerator {
 			associationType.setPackage(ModelTools.getPackage(association));
 			associationType.setCaption(title);
 			associationType.setName(name);
-			associationType.setType(copyClassType(getClassType(destination)));
+			ClassType classType = getClassType(destination);
+			if (classType == null) {
+				genLogger.warn("No classType found for class '" + destination.getLabel()
+						+ "'. Please add the containing model to the generation project.");
+			} else {
+				associationType.setType(copyClassType(classType));
+			}
 			associationType.setMultiple(type.getAssociationCardinality().isMultiple());
 			associationType.setInline(type.isInline());
 			String associationName = null;
@@ -364,7 +371,8 @@ public class MappingGenerator extends AbstractGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#endAspect(com.bluexml.side .clazz.Aspect)
+	 * @see com.bluexml.xforms.generator.GeneratorInterface#endAspect(com.bluexml.side
+	 * .clazz.Aspect)
 	 */
 	public void endAspect(Aspect aspect) {
 		// nothing
@@ -560,7 +568,9 @@ public class MappingGenerator extends AbstractGenerator {
 	public void endListClasses() {
 		Set<Entry<Clazz, ClassType>> entrySet = classTypes.entrySet();
 		for (Entry<Clazz, ClassType> entry : entrySet) {
-			addGeneralizations(entry.getKey(), entry.getKey(), 0);
+			Clazz classe = entry.getKey();
+			genLogger.info("Adding Generalizations to '" + classe.getLabel() + "'");
+			addGeneralizations(classe, classe, 0);
 		}
 	}
 
@@ -579,12 +589,15 @@ public class MappingGenerator extends AbstractGenerator {
 		for (Clazz generalization : generalizations) {
 			if (generalization != null) {
 				Clazz parentClasse = generalization;
-				if (!classe.isAbstract()) {
-					getClassType(parentClasse).getSubClass().add(
-							copyClassType(getClassType(classe)));
-				}
-				if (level == 0) {
-					getClassType(classe).setParentClass(copyClassType(getClassType(parentClasse)));
+				ClassType classType = getClassType(classe);
+				ClassType parentClassType = getClassType(parentClasse);
+				if (parentClassType != null) {
+					if (!classe.isAbstract()) {
+						parentClassType.getSubClass().add(copyClassType(classType));
+					}
+					if (level == 0) {
+						classType.setParentClass(copyClassType(parentClassType));
+					}
 				}
 				addGeneralizations(parentClasse, classe, level + 1);
 			}

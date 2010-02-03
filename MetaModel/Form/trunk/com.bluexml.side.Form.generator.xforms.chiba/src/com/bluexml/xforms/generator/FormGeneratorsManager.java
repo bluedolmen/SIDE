@@ -554,7 +554,8 @@ public class FormGeneratorsManager {
 	 *            the aspect
 	 */
 	private void processAspect(Aspect aspect) {
-		logger.info("Processing Aspect " + ModelTools.getCompleteName(aspect));
+		String completeName = ModelTools.getCompleteName(aspect);
+		logger.info("Processing Aspect '" + completeName + "'");
 
 		currentGenerator.beginAspect(aspect);
 		List<Attribute> aspectAttributes = aspect.getAttributes();
