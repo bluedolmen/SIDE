@@ -42,6 +42,7 @@ import com.bluexml.xforms.controller.binding.ClassType;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import org.chiba.agent.web.WebFactory;
 import org.chiba.xml.xforms.core.Submission;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -268,7 +269,11 @@ public class NavigationManager {
 
 		controller = AlfrescoController.getInstance();
 
+		String testStr = StringUtils.trimToNull(req.getParameter(MsgId.PARAM_SERVE_TEST_PAGE
+				.getText()));
+		boolean serveTestPage = StringUtils.equals(testStr, "true");
 		String pageId = StringUtils.trimToNull(req.getParameter(PAGE_ID));
+
 		// called from a direct link? set our info (pageId, stackId)
 		if (pageId == null) {
 			// check for a possible initialisation call
@@ -318,78 +323,99 @@ public class NavigationManager {
 			navigationPath.setCurrentPage(pageInfo);
 			String location = curServletURL + "?pageId=" + pageId + "&stackId="
 					+ navigationPath.getSize();
-			// redirect the web client, providing ids we need
-			resp.sendRedirect(resp.encodeRedirectURL(location));
-		} else {
-			// the ids are available
-			NavigationPath navigationPath = NavigationSessionListener.getNavigationPath(sessionId,
-					pageId);
-			String xformsString = null;
-			Page currentPage = navigationPath.peekCurrentPage();
-			if (navigationPath.isEmpty()) {
-				// the servlet is called directly with ids we did not register
-				throw new ServletException(MsgPool.getMsg(MsgId.MSG_SESSION_TIMED_OUT));
+			if (serveTestPage == false) {
+				// redirect the web client, providing ids we need
+				resp.sendRedirect(resp.encodeRedirectURL(location));
+				return;
 			}
-			// set the warning if page was called with an object it can't display
-			if (currentPage.isWrongCallType()) {
-				navigationPath
-						.setStatusMsg("WARNING: the data Id provided is not appropriate for this form.");
-			}
-
-			// get the form template as a string
-			String dataType = currentPage.getFormName();
-			FormTypeEnum formType = currentPage.getFormType();
-			boolean dataTypeSet = currentPage.isDataTypeSet();
-			String templateId = currentPage.getTemplate();
-			String pageLanguage = currentPage.getLanguage();
-			Map<String, String> initParams = currentPage.getInitParams();
-			xformsString = getXFormsString(formType, dataType, dataTypeSet, templateId, sessionId,
-					pageId, req.getContextPath(), pageLanguage, initParams);
-			Document doc;
-			try {
-				doc = org.chiba.xml.dom.DOMUtil.parseString(xformsString, true, false);
-			} catch (ParserConfigurationException e) {
-				throw new ServletException(e);
-			} catch (SAXException e) {
-				throw new ServletException(e);
-			}
-			Element docElt = doc.getDocumentElement();
-
-			// add CSS file if one is provided
-			if (StringUtils.trimToNull(AlfrescoController.getCssUrl()) != null) {
-				Element head = DOMUtil.getChild(docElt, "xhtml:head");
-				Element css = doc.createElementNS("http://www.w3.org/1999/xhtml", "link");
-				css.setAttribute("rel", "stylesheet");
-				css.setAttribute("type", "text/css");
-				css.setAttribute("href", currentPage.getCssUrl());
-				head.appendChild(css);
-			}
-			// hide buttons if applicable
-			if (currentPage.isShowSubmitButtons() == false) {
-				String tagName = MsgId.INT_SUBMIT_BUTTONS_GROUP_ID.getText();
-				DOMUtil.removeEltInDescentByAttrValue(docElt, "id", tagName);
-			} else { // #1181: individual hiding of submission buttons
-				if (currentPage.isShowCancel() == false) {
-					removeSubmitButton(docElt, MsgId.CAPTION_BUTTON_CANCEL);
-				}
-				if (currentPage.isShowDelete() == false) {
-					removeSubmitButton(docElt, MsgId.CAPTION_BUTTON_DELETE);
-				}
-				if (currentPage.isShowValidate() == false) {
-					removeSubmitButton(docElt, MsgId.CAPTION_BUTTON_SUBMIT);
-				}
-			}
-			// add status message
-			String statusMsg = navigationPath.getStatusDisplayedMsg();
-			if (statusMsg != null) {
-				String tagVal = MsgId.INT_CSS_STATUS_BAR_ID.getText();
-				Element status = DOMUtil.getEltInDescentByAttrValue(docElt, "id", tagVal);
-				status.setTextContent(statusMsg);
-			}
-
-			req.setAttribute(WebFactory.XFORMS_NODE, doc);
-			resp.getOutputStream().close();
 		}
+		// the ids are available
+		NavigationPath navigationPath = NavigationSessionListener.getNavigationPath(sessionId,
+				pageId);
+		Page currentPage = navigationPath.peekCurrentPage();
+		if (navigationPath.isEmpty()) {
+			// the servlet is called directly with ids we did not register
+			throw new ServletException(MsgPool.getMsg(MsgId.MSG_SESSION_TIMED_OUT));
+		}
+		// set the warning if page was called with an object it can't display
+		if (currentPage.isWrongCallType()) {
+			navigationPath
+					.setStatusMsg("WARNING: the data Id provided is not appropriate for this form.");
+		}
+
+		// get the form template as a string
+		String statusDisplayedMsg = navigationPath.getStatusDisplayedMsg();
+		Document doc = loadXFormsDocument(req, sessionId, pageId, statusDisplayedMsg, currentPage);
+
+		req.setAttribute(WebFactory.XFORMS_NODE, doc);
+		resp.getOutputStream().close();
+	}
+
+	/**
+	 * @param req
+	 * @param sessionId
+	 * @param pageId
+	 * @param statusDisplayedMsg
+	 * @param currentPage
+	 * @return
+	 * @throws IOException
+	 * @throws ServletException
+	 * @throws DOMException
+	 */
+	private Document loadXFormsDocument(HttpServletRequest req, String sessionId, String pageId,
+			String statusDisplayedMsg, Page currentPage) throws IOException, ServletException,
+			DOMException {
+		String xformsString;
+		String dataType = currentPage.getFormName();
+		FormTypeEnum formType = currentPage.getFormType();
+		boolean dataTypeSet = currentPage.isDataTypeSet();
+		String templateId = currentPage.getTemplate();
+		String pageLanguage = currentPage.getLanguage();
+		Map<String, String> initParams = currentPage.getInitParams();
+		xformsString = getXFormsString(formType, dataType, dataTypeSet, templateId, sessionId,
+				pageId, req.getContextPath(), pageLanguage, initParams);
+		Document doc;
+		try {
+			doc = org.chiba.xml.dom.DOMUtil.parseString(xformsString, true, false);
+		} catch (ParserConfigurationException e) {
+			throw new ServletException(e);
+		} catch (SAXException e) {
+			throw new ServletException(e);
+		}
+		Element docElt = doc.getDocumentElement();
+
+		// add CSS file if one is provided
+		if (StringUtils.trimToNull(AlfrescoController.getCssUrl()) != null) {
+			Element head = DOMUtil.getChild(docElt, "xhtml:head");
+			Element css = doc.createElementNS("http://www.w3.org/1999/xhtml", "link");
+			css.setAttribute("rel", "stylesheet");
+			css.setAttribute("type", "text/css");
+			css.setAttribute("href", currentPage.getCssUrl());
+			head.appendChild(css);
+		}
+		// hide buttons if applicable
+		if (currentPage.isShowSubmitButtons() == false) {
+			String tagName = MsgId.INT_SUBMIT_BUTTONS_GROUP_ID.getText();
+			DOMUtil.removeEltInDescentByAttrValue(docElt, "id", tagName);
+		} else { // #1181: individual hiding of submission buttons
+			if (currentPage.isShowCancel() == false) {
+				removeSubmitButton(docElt, MsgId.CAPTION_BUTTON_CANCEL);
+			}
+			if (currentPage.isShowDelete() == false) {
+				removeSubmitButton(docElt, MsgId.CAPTION_BUTTON_DELETE);
+			}
+			if (currentPage.isShowValidate() == false) {
+				removeSubmitButton(docElt, MsgId.CAPTION_BUTTON_SUBMIT);
+			}
+		}
+		// add status message
+		String statusMsg = statusDisplayedMsg;
+		if (statusMsg != null) {
+			String tagVal = MsgId.INT_CSS_STATUS_BAR_ID.getText();
+			Element status = DOMUtil.getEltInDescentByAttrValue(docElt, "id", tagVal);
+			status.setTextContent(statusMsg);
+		}
+		return doc;
 	}
 
 	/**
@@ -681,6 +707,8 @@ public class NavigationManager {
 					base = MsgId.INT_DIRECTORY_FORM_CLASSES.getText() + File.separatorChar
 							+ dataType;
 				}
+			} else {
+				base = MsgId.INT_DIRECTORY_FORM_CLASSES.getText() + File.separatorChar + dataType;
 			}
 		}
 		xformsStream = NavigationSessionListener.getContext().getResourceAsStream(

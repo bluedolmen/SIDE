@@ -263,6 +263,7 @@ public enum MsgId {
 	PARAM_RELOAD_PROPERTIES("reloadProperties"),
 	PARAM_SEARCH_MODE("searchMode"),
 	PARAM_SEARCH_USE_SHORT_NAMES("searchUseShortNames"),
+	PARAM_SERVE_TEST_PAGE("serveTestPage"),
 	PARAM_SHOW_SUBMITS("showSubmitButtons"),
 	PARAM_SHOW_CANCEL("showCancel"),
 	PARAM_SHOW_DELETE("showDelete"),
