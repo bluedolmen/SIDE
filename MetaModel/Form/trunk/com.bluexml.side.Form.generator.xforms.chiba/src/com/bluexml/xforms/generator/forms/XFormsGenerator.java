@@ -106,7 +106,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	public static final String IMG_REMOVE = "resources/images/remove.png";
 
 	public static final String IMG_RIGHT = "resources/images/right.gif";
-	
+
 	public static final String IMG_LEFT = "resources/images/left.gif";
 
 	public static final String IMG_DOWN = "resources/images/orderdown.png";
@@ -677,7 +677,7 @@ public class XFormsGenerator extends AbstractGenerator {
 			atLeastOneWorfklowForm = atLeastOneWorfklowForm || isAWorkflowForm;
 			String logText = " Rendering " + (isAWorkflowForm ? "FormWorkflow" : "FormClass")
 					+ ": " + formId;
-			genLogger.info(logText);
+			// genLogger.info(logText);
 			if (monitor != null) {
 				monitor.addText(logText);
 			}
@@ -929,7 +929,7 @@ public class XFormsGenerator extends AbstractGenerator {
 		if (form.eIsProxy()) { // #1225
 			realContainer = (FormContainer) formGenerator.getRealObject(form);
 		}
-		return formsRenderables.get(realContainer);
+		return formsRenderables.get(realContainer.getId());
 	}
 
 	/*
