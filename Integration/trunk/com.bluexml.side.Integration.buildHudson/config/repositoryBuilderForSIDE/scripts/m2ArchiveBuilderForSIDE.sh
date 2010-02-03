@@ -1,7 +1,7 @@
 # configuration
 SIDEHOME=/Users/davidabad/Workspace2.0/S-IDE
 BUILDERHOME=/Users/davidabad/Workspace2.0/buildAllMaven
-POM_PATCHER=/Users/davidabad/Workspace2.0/repositoryBuilderForSIDE/target/repositoryBuilderForSIDE-0.0.1-jar-with-dependencies.jar
+POM_PATCHER=/Users/davidabad/Workspace2.0/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE/target/repositoryBuilderForSIDE-0.0.1-jar-with-dependencies.jar
 POM_IN=/Users/davidabad/Workspace2.0/superpom/pom.xml
 MAVENREPO_ARCHIVE=/Users/davidabad/Workspace2.0/S-IDE/Util/trunk/com.bluexml.side.Util.dependencies/src/com/bluexml/side/util/dependencies/mavenRepository/m2repositoryForSIDE.zip
 
@@ -25,7 +25,7 @@ echo ==================
 
 
 # clean working directories
-#rm -rf $BUILDERHOME/*
+rm -rf $BUILDERHOME/*
 mkdir -p $WORKDIR
 mkdir -p $MAVENREPO
 # copy ressources
@@ -35,6 +35,6 @@ cd $WORKDIR;
 # patch superpom file (add as dependencies all extension used by side components)
 java -jar $POM_PATCHER $SIDEHOME $POM_OUT
 # build archive of all maven requirements
-mvn dependency:go-offline -P public -Dmaven.repo.local=$MAVENREPO
+mvn dependency:go-offline -P offline -Dmaven.repo.local=$MAVENREPO
 cd $MAVENREPO
 zip -r $MAVENREPO_ARCHIVE .
