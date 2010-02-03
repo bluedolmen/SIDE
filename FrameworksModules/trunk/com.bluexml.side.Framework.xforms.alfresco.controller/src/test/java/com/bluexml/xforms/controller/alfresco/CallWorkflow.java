@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.servlet.ServletException;
+
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.workflow.WorkflowDefinition;
 import org.alfresco.service.cmr.workflow.WorkflowInstance;
@@ -109,9 +111,9 @@ public class CallWorkflow {
 		WorkflowDefinition def = callGetDefinitionByName(fullName);
 		if (def == null) {
 			System.out.println("Nothing found");
-		} else {
-			System.out.println("found id: " + def.id);
+			return null;
 		}
+		System.out.println("found id: " + def.id);
 		return def.id;
 	}
 
@@ -392,7 +394,7 @@ public class CallWorkflow {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static void getActivePath() throws AlfrescoControllerException {
+	private static void getActivePath() throws ServletException {
 		// start a workflow and get a path
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add("jbpm$1");
@@ -404,14 +406,11 @@ public class CallWorkflow {
 		List<WorkflowPath> paths = null;
 		Vector<Object> paramList = new Vector<Object>();
 		paramList.add(workflowRequest.instance.id);
-		try {
-			paths = (List<WorkflowPath>) controller.workflowRequest(null, "getWorkflowPaths",
-					paramList);
-		} catch (AlfrescoControllerException e) {
-			e.printStackTrace();
-		}
+		paths = (List<WorkflowPath>) controller.workflowRequest(null, "getWorkflowPaths",
+				paramList);
 		if (paths == null) {
 			System.out.println("paths is empty");
+			return;
 		}
 		// get the active path
 		WorkflowPath path = null;
@@ -423,6 +422,7 @@ public class CallWorkflow {
 		}
 		if (path == null) {
 			System.out.println("no active path found");
+			return;
 		}
 		WorkflowNode node = path.node;
 		System.out.println("the path is at node:" + node.name);
@@ -430,11 +430,11 @@ public class CallWorkflow {
 		List<WorkflowTask> tasks = null;
 		Vector<Object> paramTaskList = new Vector<Object>();
 		paramTaskList.add(path.id);
-		try {
-			tasks = (List<WorkflowTask>) controller.workflowRequest(null,
-					"getTasksForWorkflowPath", paramTaskList);
-		} catch (AlfrescoControllerException e) {
-			e.printStackTrace();
+		tasks = (List<WorkflowTask>) controller.workflowRequest(null,
+				"getTasksForWorkflowPath", paramTaskList);
+		if (tasks == null) {
+			System.out.println("No tasks found");
+			return;
 		}
 		for (WorkflowTask task : tasks) {
 			System.out.println("Found task with id:" + task.id + " name:" + task.name + " title:"
