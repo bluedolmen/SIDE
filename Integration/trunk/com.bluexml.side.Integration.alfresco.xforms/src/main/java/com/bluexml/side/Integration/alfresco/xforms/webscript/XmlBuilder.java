@@ -50,6 +50,7 @@ public class XmlBuilder {
 			documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
+			throw new RuntimeException("Couldn't create a document builder.");
 		}
 		Document doc = documentBuilder.newDocument();
 

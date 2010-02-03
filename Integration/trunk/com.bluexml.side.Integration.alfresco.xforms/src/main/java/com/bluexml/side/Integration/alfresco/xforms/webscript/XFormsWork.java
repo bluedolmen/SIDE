@@ -884,10 +884,9 @@ public class XFormsWork implements RunAsWork<String> {
 	 * @param methodParams
 	 * @return
 	 * @throws SecurityException
-	 * @throws NoSuchMethodException
 	 */
 	private Object callAuthorityDAO(String methodName, List<Object> methodParams)
-			throws SecurityException, NoSuchMethodException {
+			throws SecurityException {
 		AuthorityDAO authorityDAO = formsWebscript.getAuthorityDAO();
 		Object[] paramArray = methodParams.toArray();
 		if (StringUtils.equals(methodName, "getAuthorityNodeRefOrNull")) {
@@ -918,11 +917,10 @@ public class XFormsWork implements RunAsWork<String> {
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
-	 * @throws InstantiationException
 	 */
 	private Object callDictionaryService(String methodName, List<Object> methodParams)
 			throws SecurityException, NoSuchMethodException, IllegalArgumentException,
-			IllegalAccessException, InvocationTargetException, InstantiationException {
+			IllegalAccessException, InvocationTargetException {
 		DictionaryService theService = serviceRegistry.getDictionaryService();
 		Class<?> theClass = theService.getClass();
 		Object[] paramArray = methodParams.toArray();

@@ -817,7 +817,7 @@ public class DataLayer implements DataLayerInterface {
 	 * @return
 	 */
 	private static String convertDocument2String(Document doc) {
-		StringBuilder stringBuilder = null;
+		StringBuilder stringBuilder = new StringBuilder();
 		try {
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			OutputFormat outputformat = new OutputFormat();
