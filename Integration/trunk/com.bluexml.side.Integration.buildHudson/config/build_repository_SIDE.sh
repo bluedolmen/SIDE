@@ -44,7 +44,7 @@ mvn package
 cd $WORKSPACE
 
 # clean working directories
-#rm -rf $BUILDERHOME/*
+rm -rf $BUILDERHOME/*
 mkdir -p $WORKDIR
 mkdir -p $MAVENREPO
 # copy ressources
