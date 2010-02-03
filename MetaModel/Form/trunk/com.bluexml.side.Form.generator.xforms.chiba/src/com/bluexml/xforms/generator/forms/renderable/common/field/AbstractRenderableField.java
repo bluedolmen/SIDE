@@ -450,6 +450,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		// deal with choice options
 		if (selectBean.isWorkflowEnum() == false) {
 			ModelElementEnumeration modelElementEnumeration = getModelElementEnumeration(selectBean);
+			// TODO: deal with returned null value
 			rendered.addModelElement(modelElementEnumeration);
 
 			String enumInstance = modelElementEnumeration.getEnumInstanceName();
@@ -490,6 +491,7 @@ public abstract class AbstractRenderableField extends Renderable {
 
 		if (selectBean == null) {
 			System.err.println("SelectBean is null!");
+			return null;
 		}
 		String enumInstance = ModelTools.toJAXB(ModelTools.getCompleteName(selectBean
 				.getEnumeration()))

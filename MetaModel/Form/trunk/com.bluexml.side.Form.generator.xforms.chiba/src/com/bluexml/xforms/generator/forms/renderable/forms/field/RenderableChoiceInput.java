@@ -81,7 +81,7 @@ public class RenderableChoiceInput extends RenderableField<ChoiceField> {
 		// ** #1313
 
 		if (enumTypeIsWorkflow == false) {
-			if (anEnum.getDynamic()) {
+			if (anEnum != null && anEnum.getDynamic()) {
 				enumContext = getDynEnumContextString(formElement.getId());
 				enumParent = getDynEnumParentString(formElement.getId());
 			}

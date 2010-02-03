@@ -222,6 +222,10 @@ public abstract class Renderable {
 		}
 		renderedParents.push(rendered);
 		for (Renderable child : children) {
+			if (child == null) {
+				throw new RuntimeException(
+						"A null child was found. You probably forgot to reference a form.");
+			}
 			if (child.shouldRender(parents)) {
 				Rendered renderedChild = child.recursiveRender(sPath, parents, renderedParents,
 						childIsInIMultiple);
