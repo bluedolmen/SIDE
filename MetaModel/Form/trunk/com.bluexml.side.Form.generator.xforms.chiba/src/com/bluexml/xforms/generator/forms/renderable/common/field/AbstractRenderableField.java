@@ -89,7 +89,6 @@ public abstract class AbstractRenderableField extends Renderable {
 		String slabel = getTitle() + " : ";
 
 		Element element = null;
-		element = null;
 		if (isReadOnly()) {
 			meb.setReadOnly(true);
 			if (StringUtils.equals(getXsdType(), MsgId.INT_TYPE_XSD_DATE.getText())

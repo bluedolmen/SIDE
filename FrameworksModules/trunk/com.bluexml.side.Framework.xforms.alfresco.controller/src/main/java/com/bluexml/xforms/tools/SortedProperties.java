@@ -20,7 +20,7 @@ public class SortedProperties extends Properties {
 	 * @see java.util.Hashtable#keys()
 	 */
 	@Override
-	public java.util.Enumeration keys() {
+	public synchronized java.util.Enumeration keys() {
 		ArrayList<?> list = Collections.list(super.keys());
 		Collections.sort(list, new Comparator() {
 			public int compare(Object o1, Object o2) {

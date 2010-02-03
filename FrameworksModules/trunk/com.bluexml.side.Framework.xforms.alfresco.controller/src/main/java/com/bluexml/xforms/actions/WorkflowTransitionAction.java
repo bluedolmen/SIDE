@@ -24,24 +24,23 @@ import org.alfresco.service.cmr.workflow.WorkflowTask;
 import org.alfresco.service.cmr.workflow.WorkflowTaskDefinition;
 import org.alfresco.service.namespace.QName;
 import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.controller.binding.GenericAttribute;
-import com.bluexml.xforms.controller.binding.GenericClass;
-import com.bluexml.xforms.controller.binding.ValueType;
-import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.alfresco.RedirectionBean;
+import com.bluexml.xforms.controller.binding.GenericAttribute;
+import com.bluexml.xforms.controller.binding.GenericClass;
+import com.bluexml.xforms.controller.binding.ValueType;
+import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.controller.navigation.NavigationSessionListener;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.controller.navigation.PageInfoBean;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
-import com.bluexml.side.form.utils.DOMUtil;
 
 /**
  * Responds to workflow transition buttons on form.
@@ -174,9 +173,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			URLsuffix = URLsuffix + "&" + MsgId.PARAM_WORKFLOW_INSTANCE_ID + "="
 					+ currentPage.getWkflwInstanceId();
 		}
-		if (initParams != null) {
-			nextPage = initParams.get(MsgId.PARAM_PAGE_SUCCESS.getText());
-		}
+		nextPage = initParams.get(MsgId.PARAM_PAGE_SUCCESS.getText());
 
 		if (nextPage != null) {
 			// go to any url that was specified
@@ -200,16 +197,17 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 
 		if (initParams != null) {
 			nextPage = initParams.get(MsgId.PARAM_PAGE_FAILURE.getText());
+			if (nextPage != null) {
+				boolean noAddInfo = (StringUtils.equals(initParams
+						.get(MsgId.PARAM_SKIP_ADDITIONAL_INFO.getText()), "true"));
+				redirectToClientURL(currentPage.getFormName(), nextPage, URLsuffix, noAddInfo);
+				return;
+			}
 		}
-		if (nextPage != null) {
-			boolean noAddInfo = (StringUtils.equals(initParams.get(MsgId.PARAM_SKIP_ADDITIONAL_INFO
-					.getText()), "true"));
-			redirectToClientURL(currentPage.getFormName(), nextPage, URLsuffix, noAddInfo);
-		} else {
-			PageInfoBean bean = new PageInfoBean(currentPage);
-			navigationPath.setCurrentPage(bean);
-			setSubmissionDefaultLocation(getServletURL(), result);
-		}
+
+		PageInfoBean bean = new PageInfoBean(currentPage);
+		navigationPath.setCurrentPage(bean);
+		setSubmissionDefaultLocation(getServletURL(), result);
 	}
 
 	/**
@@ -361,10 +359,10 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * Worker function.
 	 * 
 	 * @return false if exception or can't do the transition. Otherwise true.
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 * @throws ServletException
 	 */
-	private TransitionResultBean submitWork() throws AlfrescoControllerException, ServletException {
+	private TransitionResultBean submitWork() throws ServletException, ServletException {
 		TransitionResultBean resultBean = new TransitionResultBean();
 		HashMap<QName, Serializable> properties = new HashMap<QName, Serializable>();
 		currentPage = navigationPath.peekCurrentPage();
@@ -392,6 +390,11 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		String candidateId = currentPage.getInitParams().get(
 				MsgId.PARAM_WORKFLOW_PROCESS_ID.getText());
 		String processId = findProcessId(candidateId, formName);
+		if (processId == null) {
+			navigationPath
+					.setStatusMsg("Could not find the process Id. Giving up.");
+			return resultBean;
+		}
 
 		// add properties from the form fields
 		String formTaskName = AlfrescoController.workflowBuildBlueXMLTaskName(formName);
@@ -530,11 +533,10 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @param workflowTitle
 	 * @param isStartTask
 	 * @return false if any exception or error happens. Otherwise true.
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 */
 	private boolean initializeTask(String formName, WorkflowTaskType taskType,
-			HashMap<QName, Serializable> properties, String processId)
-			throws AlfrescoControllerException {
+			HashMap<QName, Serializable> properties, String processId) throws ServletException {
 		if (taskType.isStartTask()) {
 			// check that the user is authorized to start the workflow
 			if (validateCurrentUser(taskType) == false) {
@@ -593,10 +595,8 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * This updating is COMPULSORY: Alfresco will not do it automatically as one could expect.
 	 * 
 	 * @param transaction
-	 * @throws AlfrescoControllerException
 	 */
-	private TransitionResultBean reassignWorkflow(AlfrescoTransaction transaction)
-			throws AlfrescoControllerException {
+	private TransitionResultBean reassignWorkflow(AlfrescoTransaction transaction) {
 		TransitionResultBean result = new TransitionResultBean();
 		HashMap<QName, Serializable> properties;
 		List<WorkflowTask> tasks;
@@ -693,10 +693,9 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @param node
 	 * @param taskTypeName
 	 * @return null in case of exception
-	 * @throws ServletException
 	 */
 	private GenericClass collectTaskProperties(HashMap<QName, Serializable> properties, Node node,
-			WorkflowTaskType taskType, String processId) throws ServletException {
+			WorkflowTaskType taskType, String processId) {
 		String taskTypeName = taskType.getName();
 		String taskTypeId = taskType.getTaskId();
 
@@ -712,7 +711,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		// Assemble a BlueXML Class.xsd object from the instance.
 		try {
 			toCreate = controller.transformsToAlfresco(transaction, taskTypeName, taskElt);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -722,10 +721,8 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 				.workflowExtractProcessNameFromFormName(taskTypeName);
 		String namespaceURI = AlfrescoController.workflowBuildNamespaceURI(processName);
 		WorkflowTaskDefinition taskDef;
-		try {
-			taskDef = controller.workflowGetTaskDefinition(processId, taskTypeId);
-		} catch (AlfrescoControllerException e) {
-			e.printStackTrace();
+		taskDef = controller.workflowGetTaskDefinition(processId, taskTypeId);
+		if (taskDef == null) {
 			return null;
 		}
 		Map<QName, PropertyDefinition> propDefs = taskDef.metadata.getProperties();
@@ -760,10 +757,8 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @param formName
 	 *            the name of the workflow form
 	 * @return candidateProcessId if given, the Id for the latest version
-	 * @throws AlfrescoControllerException
 	 */
-	private String findProcessId(String candidateProcessId, String formName)
-			throws AlfrescoControllerException {
+	private String findProcessId(String candidateProcessId, String formName) {
 		if (StringUtils.trimToNull(candidateProcessId) != null) {
 			return candidateProcessId;
 		}
@@ -775,7 +770,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		methodParameters.add(AlfrescoController.workflowBuildBlueXMLDefinitionName(processName));
 		WorkflowDefinition def = (WorkflowDefinition) controller.workflowRequest(transaction,
 				methodName, methodParameters);
-		return def.id;
+		return (def != null) ? def.id : null;
 	}
 
 }

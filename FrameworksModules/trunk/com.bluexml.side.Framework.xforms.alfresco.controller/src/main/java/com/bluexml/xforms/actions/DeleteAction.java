@@ -6,11 +6,10 @@ import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
+import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
-import com.bluexml.side.form.utils.DOMUtil;
 
 /**
  * The Class DeleteAction.<br>
@@ -78,11 +77,8 @@ public class DeleteAction extends AbstractTransactionalAction {
 	 * Delete node.
 	 * 
 	 * @return the string
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
 	 */
-	private void deleteNode() throws AlfrescoControllerException {
+	private void deleteNode() {
 		elementId = DOMUtil.getNodeValueByTagName(node, MsgId.INT_INSTANCE_SIDEID.getText(), false);
 		// #977: deletes fail to be performed in form's
 		if (elementId == null) {

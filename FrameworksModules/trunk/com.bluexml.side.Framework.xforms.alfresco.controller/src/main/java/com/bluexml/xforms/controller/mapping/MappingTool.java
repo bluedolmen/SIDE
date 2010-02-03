@@ -8,6 +8,12 @@ import javax.servlet.ServletException;
 import javax.xml.bind.JAXBElement;
 
 import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
+import com.bluexml.xforms.controller.alfresco.AlfrescoController;
+import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.binding.AspectType;
 import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.CanisterType;
@@ -20,13 +26,6 @@ import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.ModelChoiceType;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
-import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
-import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
@@ -81,12 +80,12 @@ public class MappingTool {
 	 * 
 	 * @return the document
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	public Document createClassFormsInstance(AlfrescoTransaction transaction, String type,
 			Map<String, String> initParams, Stack<AssociationType> stack, boolean formIsReadOnly,
-			boolean isServletRequest) throws AlfrescoControllerException {
+			boolean isServletRequest) throws ServletException {
 		return mappingToolImplAlfrescoToXForms.createClassFormsInstance(transaction, type,
 				initParams, stack, formIsReadOnly, isServletRequest);
 	}
@@ -100,12 +99,9 @@ public class MappingTool {
 	 *            the alf class
 	 * 
 	 * @return the content file name
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
 	 */
 	public List<RepoContentInfoBean> getUploadBeansFilesystem(AlfrescoTransaction transaction,
-			GenericClass alfClass) throws AlfrescoControllerException {
+			GenericClass alfClass) {
 		return mappingToolImplXFormsToAlfresco.getFileUploadBeans(transaction, alfClass,
 				MsgId.INT_UPLOAD_DEST_FILE.getText(), MsgId.INT_SUFFIX_UPLOAD_FILE.getText());
 	}
@@ -119,12 +115,9 @@ public class MappingTool {
 	 *            the alf class
 	 * 
 	 * @return the bean, or null if no repository content file exists in the class
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
 	 */
 	public List<RepoContentInfoBean> getUploadBeansRepo(AlfrescoTransaction transaction,
-			GenericClass alfClass) throws AlfrescoControllerException {
+			GenericClass alfClass) {
 		return mappingToolImplXFormsToAlfresco.getFileUploadBeans(transaction, alfClass,
 				MsgId.INT_UPLOAD_DEST_REPO.getText(), MsgId.INT_SUFFIX_UPLOAD_REPO.getText());
 	}
@@ -138,12 +131,9 @@ public class MappingTool {
 	 *            the alf class
 	 * 
 	 * @return the bean, or null if no repository content file exists in the class
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
 	 */
 	public RepoContentInfoBean getNodeContentInfo(AlfrescoTransaction transaction,
-			GenericClass alfClass) throws AlfrescoControllerException {
+			GenericClass alfClass) {
 		return mappingToolFormsToAlfresco.getNodeContentInfo(transaction, alfClass);
 	}
 
@@ -172,12 +162,12 @@ public class MappingTool {
 	 * 
 	 * @return the document
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	public Document transformAlfrescoToClassForms(AlfrescoTransaction transaction,
 			Document alfrescoNode, Stack<AssociationType> stack, boolean formIsReadOnly,
-			boolean isServletRequest) throws AlfrescoControllerException {
+			boolean isServletRequest) throws ServletException {
 		return mappingToolImplAlfrescoToXForms.transformAlfrescoToClassForms(transaction,
 				alfrescoNode, stack, formIsReadOnly, isServletRequest);
 	}
@@ -192,13 +182,9 @@ public class MappingTool {
 	 * @param isServletRequest
 	 * 
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	public GenericClass transformClassFormsToAlfresco(AlfrescoTransaction transaction, Node node,
-			boolean isServletRequest) throws AlfrescoControllerException, ServletException {
+			boolean isServletRequest) {
 		return mappingToolImplXFormsToAlfresco.transformClassFormsToAlfresco(transaction, node,
 				isServletRequest);
 	}
@@ -239,11 +225,11 @@ public class MappingTool {
 	 * 
 	 * @return the document
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	public Document createFormInstance(AlfrescoTransaction transaction, String formName,
-			String alfrescoId, boolean formIsReadOnly) throws AlfrescoControllerException {
+			String alfrescoId, boolean formIsReadOnly) throws ServletException {
 		return mappingToolAlfrescoToForms.getFormInstance(transaction, formName, alfrescoId,
 				formIsReadOnly);
 	}
@@ -258,12 +244,12 @@ public class MappingTool {
 	 * 
 	 * @return the document
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	public Document newFormInstance(String formName, AlfrescoTransaction transaction,
 			Map<String, String> initParams, boolean formIsReadOnly)
-			throws AlfrescoControllerException {
+			throws ServletException {
 		return mappingToolAlfrescoToForms.newFormInstance(formName, transaction, initParams,
 				formIsReadOnly);
 	}
@@ -282,12 +268,12 @@ public class MappingTool {
 	 * 
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
-			Node formNode) throws AlfrescoControllerException, ServletException {
+			Node formNode) throws ServletException, ServletException {
 		return mappingToolFormsToAlfresco.transformsToAlfresco(transaction, formName, formNode);
 	}
 
@@ -299,10 +285,10 @@ public class MappingTool {
 	 * @param instance
 	 * @return
 	 * @throws ServletException
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 */
 	public String transformsToJSON(AlfrescoTransaction transaction, String formName, Node instance,
-			boolean shortPropertyNames) throws AlfrescoControllerException, ServletException {
+			boolean shortPropertyNames) throws ServletException, ServletException {
 		return mappingToolFormsToAlfresco.transformsToJSON(transaction, formName, instance,
 				shortPropertyNames);
 	}
@@ -423,7 +409,7 @@ public class MappingTool {
 
 	public void collectTaskProperties(Document instance, Element taskElt,
 			WorkflowTaskType taskType, Map<String, GenericClass> alfrescoNodes,
-			boolean formIsReadOnly) throws AlfrescoControllerException {
+			boolean formIsReadOnly) throws ServletException {
 		mappingToolAlfrescoToForms.collectTaskProperties(instance, taskElt, taskType,
 				alfrescoNodes, formIsReadOnly);
 	}

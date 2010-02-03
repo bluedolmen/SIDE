@@ -8,7 +8,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.controller.navigation.NavigationPath;
 import com.bluexml.xforms.controller.navigation.Page;
@@ -137,11 +136,11 @@ public class SubmitAction extends AbstractTransactionalAction {
 	 * 
 	 * @return the string
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
-	private String submitNode() throws AlfrescoControllerException, ServletException {
+	private String submitNode() throws ServletException, ServletException {
 		currentPage = navigationPath.peekCurrentPage();
 		FormTypeEnum type = currentPage.getFormType();
 		String result = null;
@@ -156,11 +155,11 @@ public class SubmitAction extends AbstractTransactionalAction {
 					.getText()));
 			isSearching = StringUtils.equals(searchStr, "true");
 
-			String propStr = StringUtils.trimToNull(pageInitParams
-					.get(MsgId.PARAM_SEARCH_USE_SHORT_NAMES.getText()));
-			boolean useShortPropertyNames = StringUtils.equals(propStr, "true");
-
 			if (isSearching) {
+				String propStr = StringUtils.trimToNull(pageInitParams
+						.get(MsgId.PARAM_SEARCH_USE_SHORT_NAMES.getText()));
+				boolean useShortPropertyNames = StringUtils.equals(propStr, "true");
+				
 				result = controller.persistFormJSON(transaction, datatype, node,
 						useShortPropertyNames);
 			} else {

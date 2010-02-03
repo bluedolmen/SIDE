@@ -70,6 +70,7 @@ public class I18NAction extends AbstractReadAction {
 				db = dbf.newDocumentBuilder();
 			} catch (ParserConfigurationException pce) {
 				assert (false);
+				return null;
 			}
 			strings = db.newDocument();
 			Element rootElement = (Element) strings

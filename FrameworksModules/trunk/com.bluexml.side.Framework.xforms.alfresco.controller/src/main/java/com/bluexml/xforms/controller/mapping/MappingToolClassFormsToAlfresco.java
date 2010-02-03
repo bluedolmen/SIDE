@@ -3,11 +3,16 @@ package com.bluexml.xforms.controller.mapping;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletException;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
+import com.bluexml.side.form.utils.DOMUtil;
+import com.bluexml.xforms.controller.alfresco.AlfrescoController;
+import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.binding.AspectType;
 import com.bluexml.xforms.controller.binding.AssociationActions;
 import com.bluexml.xforms.controller.binding.AssociationType;
@@ -21,15 +26,7 @@ import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.binding.GenericClassReference;
 import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.ValueType;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
-import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
-import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.side.form.utils.DOMUtil;
 
 /**
  * The Class MappingToolClassFormsToAlfresco.
@@ -60,10 +57,9 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 * @param xformsNode
 	 *            the xforms node
 	 * @param isServletRequest
-	 * @throws ServletException
 	 */
 	private void fillAlfrescoClass(AlfrescoTransaction transaction, GenericClass alfrescoClass,
-			Node xformsNode, boolean isServletRequest) throws ServletException {
+			Node xformsNode, boolean isServletRequest) {
 		Element element = null;
 		if (xformsNode instanceof Document) {
 			element = ((Document) xformsNode).getDocumentElement();
@@ -111,11 +107,10 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *            the association type
 	 * @param associationElement
 	 *            the association element
-	 * @throws ServletException
 	 */
 	private void processAssociation(AlfrescoTransaction transaction,
 			GenericAssociations associations, AssociationType associationType,
-			Element associationElement) throws ServletException {
+			Element associationElement) {
 		String targetId = null;
 
 		Element targetNode = null;
@@ -159,13 +154,9 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 * @param isServletRequest
 	 * 
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	public GenericClass transformClassFormsToAlfresco(AlfrescoTransaction transaction, Node node,
-			boolean isServletRequest) throws AlfrescoControllerException, ServletException {
+			boolean isServletRequest) {
 		logXML(node, "transformXFormsToAlfresco", "input");
 
 		GenericClass alfrescoClass = alfrescoObjectFactory.createGenericClass();
@@ -189,11 +180,9 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *            the children
 	 * @param classType
 	 *            the class type
-	 * @throws ServletException
 	 */
 	private void xformsAssociationsToAlfresco(AlfrescoTransaction transaction,
-			GenericAssociations associations, List<Element> children, ClassType classType)
-			throws ServletException {
+			GenericAssociations associations, List<Element> children, ClassType classType) {
 		List<AssociationType> xformsAssociations = classType.getAssociation();
 		xformsAssociationsToAlfresco(transaction, children, associations, xformsAssociations);
 	}
@@ -209,11 +198,10 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *            the associations
 	 * @param xformsAssociations
 	 *            the xforms associations
-	 * @throws ServletException
 	 */
 	private void xformsAssociationsToAlfresco(AlfrescoTransaction transaction,
 			List<Element> children, GenericAssociations associations,
-			List<AssociationType> xformsAssociations) throws ServletException {
+			List<AssociationType> xformsAssociations) {
 		for (AssociationType associationType : xformsAssociations) {
 			xformsAssociationToAlfresco(transaction, children, associations, associationType);
 		}
@@ -230,11 +218,10 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *            the associations
 	 * @param associationType
 	 *            the association type
-	 * @throws ServletException
 	 */
 	private void xformsAssociationToAlfresco(AlfrescoTransaction transaction,
 			List<Element> children, GenericAssociations associations,
-			AssociationType associationType) throws ServletException {
+			AssociationType associationType) {
 		Element associationElement = DOMUtil.getOneElementByTagName(children, associationType
 				.getName());
 		if (associationElement != null) {
@@ -388,7 +375,10 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 		} else {
 			if (node instanceof Element) {
 				element = (Element) node;
+			} else {
+				throw new RuntimeException("Unknow type of DOM node element");
 			}
+			
 		}
 
 		List<Element> children = DOMUtil.getAllChildren(element);

@@ -3,6 +3,8 @@ package com.bluexml.xforms.controller.alfresco;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -136,7 +138,7 @@ public class AlfrescoTransaction {
 		return "transactionID-" + counter;
 	}
 
-	public void executeBatch() throws AlfrescoControllerException {
+	public void executeBatch() throws ServletException, ServletException {
 		if (batch == null) {
 			initializeBatch();
 		}

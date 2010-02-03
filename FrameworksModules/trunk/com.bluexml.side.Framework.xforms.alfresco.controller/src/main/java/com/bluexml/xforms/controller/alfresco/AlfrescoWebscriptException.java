@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import javax.servlet.ServletException;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,7 +19,7 @@ import org.w3c.dom.NodeList;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 
-public class AlfrescoWebscriptException extends AlfrescoControllerException {
+public class AlfrescoWebscriptException extends ServletException {
 
 	private static final long serialVersionUID = 1L;
 

@@ -2,12 +2,13 @@ package com.bluexml.xforms.actions;
 
 import java.util.Map;
 
+import javax.servlet.ServletException;
+
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.controller.navigation.Page;
@@ -48,12 +49,12 @@ public class GetAction extends AbstractReadAction {
 	 * @param node
 	 * @param formType
 	 * @return
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 */
 	public static Document provideInstance(AlfrescoController controller,
 			AlfrescoTransaction transaction, String dataType, Map<String, String> initParams,
 			String dataId, Document node, FormTypeEnum formType, boolean formIsReadOnly)
-			throws AlfrescoControllerException {
+			throws ServletException {
 		if (StringUtils.trimToNull(dataId) != null || node == null) {
 			if (formType == FormTypeEnum.FORM) {
 				node = controller

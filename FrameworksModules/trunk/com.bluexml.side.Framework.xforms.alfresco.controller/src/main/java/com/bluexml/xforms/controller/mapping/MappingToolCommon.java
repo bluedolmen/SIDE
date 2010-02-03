@@ -43,7 +43,6 @@ import org.w3c.dom.Node;
 import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.actions.EnumAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.binding.AspectType;
 import com.bluexml.xforms.controller.binding.Batch;
@@ -145,31 +144,31 @@ public class MappingToolCommon {
 	 * 
 	 * @return the string
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
-	public static String marshal(GenericClass alfrescoClass) throws AlfrescoControllerException {
+	public static String marshal(GenericClass alfrescoClass) throws ServletException {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		try {
 			marshal(alfrescoClass, os);
 		} catch (JAXBException e) {
-			throw new AlfrescoControllerException(e);
+			throw new ServletException(e);
 		}
 		String datas = "";
 		try {
 			datas = os.toString("UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			throw new AlfrescoControllerException(e);
+			throw new ServletException(e);
 		}
 		return datas;
 	}
 
-	public static String marshal(Batch batch) throws AlfrescoControllerException {
+	public static String marshal(Batch batch) throws ServletException {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		try {
 			marshal(batch, os);
 		} catch (JAXBException e) {
-			throw new AlfrescoControllerException(e);
+			throw new ServletException(e);
 		}
 		String datas = os.toString();
 		return datas;
@@ -775,15 +774,13 @@ public class MappingToolCommon {
 	 *            the target node
 	 * 
 	 * @return the string
-	 * @throws ServletException
 	 */
-	protected String processSave(AlfrescoTransaction transaction, Element targetNode)
-			throws ServletException {
+	protected String processSave(AlfrescoTransaction transaction, Element targetNode) {
 		// this item has to be updated or saved
 		String targetId = null;
 		try {
 			targetId = controller.persistClass(transaction, targetNode, false);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			throw new RuntimeException(e);
 		}
 		return targetId;
@@ -819,13 +816,9 @@ public class MappingToolCommon {
 	 * @param suffix
 	 *            the suffix that, when found in attribute names, denotes an upload
 	 * @return null if no repository content file name was detected
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
 	 */
 	public List<RepoContentInfoBean> getFileUploadBeans(AlfrescoTransaction transaction,
-			GenericClass alfClass, String uploadDestination, String suffix)
-			throws AlfrescoControllerException {
+			GenericClass alfClass, String uploadDestination, String suffix) {
 		List<RepoContentInfoBean> list = new ArrayList<RepoContentInfoBean>();
 		List<GenericAttribute> attributes = alfClass.getAttributes().getAttribute();
 

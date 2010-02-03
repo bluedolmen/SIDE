@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
@@ -89,7 +88,7 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 		// run the transaction
 		try {
 			delTrans.executeBatch();
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			logger.error("Deletion of files uploaded to repository failed.");
 			e.printStackTrace();
 		}

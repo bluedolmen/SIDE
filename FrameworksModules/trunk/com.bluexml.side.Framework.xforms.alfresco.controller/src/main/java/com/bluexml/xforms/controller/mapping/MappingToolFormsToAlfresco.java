@@ -5,6 +5,14 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
+import com.bluexml.side.form.utils.DOMUtil;
+import com.bluexml.xforms.controller.alfresco.AlfrescoController;
+import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.binding.AssociationActions;
 import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.ClassType;
@@ -21,17 +29,7 @@ import com.bluexml.xforms.controller.binding.ModelChoiceType;
 import com.bluexml.xforms.controller.binding.ReferenceType;
 import com.bluexml.xforms.controller.binding.ValueType;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
-
-import org.apache.commons.lang.StringUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
-import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.alfresco.AlfrescoControllerException;
-import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.side.form.utils.DOMUtil;
 
 /**
  * The Class MappingToolFormsToAlfresco.
@@ -62,12 +60,12 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * 
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
-			Node formNode) throws AlfrescoControllerException, ServletException {
+			Node formNode) throws ServletException, ServletException {
 		Element rootElt = getRootElement(formName, formNode);
 
 		VirtualResolver virtualResolver = new VirtualResolver(this);
@@ -148,10 +146,10 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @param instance
 	 * @return
 	 * @throws ServletException
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 */
 	public String transformsToJSON(AlfrescoTransaction transaction, String formName, Node formNode,
-			boolean shortPropertyNames) throws AlfrescoControllerException, ServletException {
+			boolean shortPropertyNames) throws ServletException, ServletException {
 
 		Element root = getRootElement(formName, formNode);
 
@@ -216,12 +214,12 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * 
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	private GenericClass persistFormElement(AlfrescoTransaction transaction, String formName,
-			Element rootElt) throws AlfrescoControllerException, ServletException {
+			Element rootElt) throws ServletException, ServletException {
 
 		GenericClass alfClass = alfrescoObjectFactory.createGenericClass();
 		alfClass.setAttributes(alfrescoObjectFactory.createGenericAttributes());
@@ -345,16 +343,16 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @param alfClass
 	 *            the alf class
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	// private void collectAssocs(AlfrescoTransaction transaction, Element
 	// element, FormType formType,
-	// GenericClass alfClass) throws AlfrescoControllerException {
+	// GenericClass alfClass) throws ServletException {
 	private void collectAssocs(AlfrescoTransaction transaction, Element element,
 			List<ModelChoiceType> modelChoices, List<ReferenceType> references,
-			GenericClass alfClass) throws AlfrescoControllerException, ServletException {
+			GenericClass alfClass) throws ServletException, ServletException {
 		for (ModelChoiceType modelChoiceType : modelChoices) {
 			Element modelChoiceElement = DOMUtil.getChild(element, modelChoiceType.getUniqueName());
 			collectModelChoices(transaction, alfClass, modelChoiceType, modelChoiceElement);
@@ -378,13 +376,13 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @param modelChoiceElement
 	 *            the model choice element
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	private void collectModelChoices(AlfrescoTransaction transaction, GenericClass alfClass,
 			ModelChoiceType modelChoiceType, Element modelChoiceElement)
-			throws AlfrescoControllerException, ServletException {
+			throws ServletException, ServletException {
 		List<Element> values = new ArrayList<Element>(DOMUtil.getAllChildren(modelChoiceElement));
 		if (modelChoiceType.getMaxBound() != 1) {
 			values.remove(values.size() - 1);
@@ -404,11 +402,11 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @param value
 	 *            the value
 	 * @param at
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 * @throws ServletException
 	 */
 	private void collectModelChoice(GenericClass alfClass, ModelChoiceType modelChoiceType,
-			Element value, AlfrescoTransaction at) throws AlfrescoControllerException,
+			Element value, AlfrescoTransaction at) throws ServletException,
 			ServletException {
 		String id = getModelChoiceId(value, modelChoiceType, at);
 		if (id != null) {
@@ -417,7 +415,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	}
 
 	private String getModelChoiceId(Element value, ModelChoiceType modelChoiceType,
-			AlfrescoTransaction at) throws AlfrescoControllerException, ServletException {
+			AlfrescoTransaction at) throws ServletException, ServletException {
 		String id = null;
 		if (modelChoiceType.isInline()) {
 			id = controller.persistForm(at, modelChoiceType.getTarget().get(0).getName(), DOMUtil
@@ -442,13 +440,13 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @param targets
 	 *            the targets
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	private void collectTargets(AlfrescoTransaction transaction, GenericClass alfClass,
 			ReferenceType referenceType, Element referenceElement, List<FormType> targets)
-			throws AlfrescoControllerException, ServletException {
+			throws ServletException, ServletException {
 
 		int i = 0;
 		for (FormType target : targets) {
@@ -608,12 +606,9 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 *            the alf class
 	 * 
 	 * @return null if no repository content file name was detected
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
 	 */
 	public RepoContentInfoBean getNodeContentInfo(AlfrescoTransaction transaction,
-			GenericClass alfClass) throws AlfrescoControllerException {
+			GenericClass alfClass) {
 		GenericAttribute contentAttribute = getNodeContentAttribute(alfClass);
 		if (contentAttribute != null) {
 			String path = contentAttribute.getValue().get(0).getValue();

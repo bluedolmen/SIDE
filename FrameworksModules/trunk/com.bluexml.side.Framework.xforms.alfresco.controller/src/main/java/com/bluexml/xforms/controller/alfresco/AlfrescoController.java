@@ -30,7 +30,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.Path;
@@ -384,12 +383,12 @@ public class AlfrescoController {
 	 * 
 	 * @return the class
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	public Document getClass(AlfrescoTransaction transaction, String type, String id,
 			Map<String, String> initParams, boolean formIsReadOnly, boolean isServletRequest)
-			throws AlfrescoControllerException {
+			throws ServletException {
 		Document instance = null;
 		// save the initParams
 		this.initParameters = initParams;
@@ -402,7 +401,7 @@ public class AlfrescoController {
 						formIsReadOnly, isServletRequest);
 			}
 		} catch (Exception e) {
-			throw new AlfrescoControllerException(e);
+			throw new ServletException(e);
 		}
 		return instance;
 	}
@@ -420,12 +419,11 @@ public class AlfrescoController {
 	 * 
 	 * @return the form
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	public Document getForm(AlfrescoTransaction transaction, String type, String id,
-			Map<String, String> initParams, boolean formIsReadOnly)
-			throws AlfrescoControllerException {
+			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
 		Document instance = null;
 		// save some data for later
 		this.initParameters = initParams;
@@ -441,7 +439,7 @@ public class AlfrescoController {
 				instance = loadForm(transaction, type, id, formIsReadOnly);
 			}
 		} catch (Exception e) {
-			throw new AlfrescoControllerException(e);
+			throw new ServletException(e);
 		}
 		return instance;
 	}
@@ -459,12 +457,13 @@ public class AlfrescoController {
 	 * 
 	 * @return the element
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
+	 * @throws ServletException
 	 */
 	public Document getElement(AlfrescoTransaction transaction, String id,
 			Stack<AssociationType> stack, boolean formIsReadOnly, boolean isServletRequest)
-			throws AlfrescoControllerException {
+			throws ServletException, ServletException {
 		Document alfrescoNode = processRead(transaction, id);
 
 		return mappingTool.transformAlfrescoToClassForms(transaction, alfrescoNode, stack,
@@ -481,14 +480,16 @@ public class AlfrescoController {
 	 * 
 	 * @return the document
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the controller exception
+	 * @throws ServletException
 	 */
 	public Document processRead(AlfrescoTransaction transaction, String id)
-			throws AlfrescoControllerException {
+			throws ServletException, ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("objectId", id);
-		return requestDocumentFromAlfresco(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_READ);
+		return requestDocumentFromAlfresco(transaction, parameters,
+				MsgId.INT_WEBSCRIPT_OPCODE_READ, true);
 	}
 
 	/**
@@ -562,26 +563,26 @@ public class AlfrescoController {
 				File mappingFile = null;
 				try {
 					mappingFile = new File(new URI(url.toString()));
+					String dirPath = mappingFile.getAbsolutePath();
+					// @Amenel: I am not comfortable with the assumption about the path to
+					// mapping.xml: although true today, it may not be so in the future, depending
+					// on OS or JVM the easiest would've been to create the dirs as siblings of it
+					dirPath = StringUtils.replace(dirPath, "/WEB-INF/classes/mapping.xml", "");
+					dirPath += File.separator + dirName;
+					boolean result;
+					if (isUploadDir) {
+						UPLOAD_DIRECTORY = new File(dirPath);
+						result = UPLOAD_DIRECTORY.mkdirs();
+					} else {
+						TEMP_DIRECTORY = new File(dirPath);
+						result = TEMP_DIRECTORY.mkdirs();
+					}
+					if (result == false) {
+						logger.error("Couldn't create directory " + dirPath
+								+ ". Uploads will not perform correctly.");
+					}
 				} catch (URISyntaxException e) {
 					e.printStackTrace();
-				}
-				String dirPath = mappingFile.getAbsolutePath();
-				// @Amenel: I am not comfortable with the assumption about the path to mapping.xml:
-				// although true today, it may not be so in the future, depending on OS or JVM
-				// the easiest would have been to create the dirs as siblings of mapping.xml
-				dirPath = StringUtils.replace(dirPath, "/WEB-INF/classes/mapping.xml", "");
-				dirPath += File.separator + dirName;
-				boolean result;
-				if (isUploadDir) {
-					UPLOAD_DIRECTORY = new File(dirPath);
-					result = UPLOAD_DIRECTORY.mkdirs();
-				} else {
-					TEMP_DIRECTORY = new File(dirPath);
-					result = TEMP_DIRECTORY.mkdirs();
-				}
-				if (result == false) {
-					logger.error("Couldn't create directory " + dirPath
-							+ ". Uploads will not perform correctly.");
 				}
 			}
 		}
@@ -598,12 +599,12 @@ public class AlfrescoController {
 	 * 
 	 * @return the string
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	public String persistClass(AlfrescoTransaction transaction, Node instance,
-			boolean isServletRequest) throws AlfrescoControllerException, ServletException {
+			boolean isServletRequest) throws ServletException, ServletException {
 		GenericClass alfClass = mappingTool.transformClassFormsToAlfresco(transaction, instance,
 				isServletRequest);
 		if (alfClass.getId() == null) {
@@ -626,12 +627,12 @@ public class AlfrescoController {
 	 * 
 	 * @return the string
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	private String saveMain(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws AlfrescoControllerException, ServletException {
+			throws ServletException, ServletException {
 		// enqueue the operation
 		transaction.queueSave(alfClass);
 
@@ -647,11 +648,11 @@ public class AlfrescoController {
 	 * @param transaction
 	 * @param alfClass
 	 * @return
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 * @throws ServletException
 	 */
 	private String updateMain(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws AlfrescoControllerException, ServletException {
+			throws ServletException, ServletException {
 		// enqueue the operation
 		transaction.queueUpdate(alfClass);
 
@@ -745,11 +746,11 @@ public class AlfrescoController {
 	 * 
 	 * @param transaction
 	 * @param alfClass
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 * @throws ServletException
 	 */
 	private void uploadProcessOnSave(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws AlfrescoControllerException, ServletException {
+			throws ServletException, ServletException {
 		String fileName = null;
 		String filePath = null;
 		String mimeType = null;
@@ -812,12 +813,12 @@ public class AlfrescoController {
 	 * @param transaction
 	 *            the transaction
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	private void uploadProcessOnUpdate(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws AlfrescoControllerException, ServletException {
+			throws ServletException, ServletException {
 		List<RepoContentInfoBean> previousFileContentInfo;
 		List<RepoContentInfoBean> previousRepoContentInfo;
 		List<RepoContentInfoBean> newFileContentInfo;
@@ -828,7 +829,7 @@ public class AlfrescoController {
 		try {
 			oldClass = MappingToolCommon.unmarshal(processRead(transaction, alfClass.getId()));
 		} catch (JAXBException e) {
-			throw new AlfrescoControllerException(e);
+			throw new ServletException(e);
 		}
 		previousFileContentInfo = mappingTool.getUploadBeansFilesystem(transaction, oldClass);
 		previousRepoContentInfo = mappingTool.getUploadBeansRepo(transaction, oldClass);
@@ -898,11 +899,11 @@ public class AlfrescoController {
 	 * 
 	 * @return the string
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	private String uploadMoveFileToDir(String type, String fileName, AlfrescoTransaction transaction)
-			throws AlfrescoControllerException {
+			throws ServletException {
 		URI fileURI = URI.create(fileName);
 		File sourceFile = null;
 		try { // #1160
@@ -959,12 +960,12 @@ public class AlfrescoController {
 	 *            path to a folder in the content management system
 	 * @param shouldAppendSuffix
 	 * @return the string
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	private String uploadMoveFileToRepo(AlfrescoTransaction transaction, String fileName,
 			String filePath, String location, String mimetype, boolean shouldAppendSuffix)
-			throws AlfrescoControllerException {
+			throws ServletException {
 
 		// collect parameters
 		Map<String, String> parameters = new TreeMap<String, String>();
@@ -990,10 +991,10 @@ public class AlfrescoController {
 	 * @param targetFile
 	 *            the target file
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
-	private void copyFile(File sourceFile, File targetFile) throws AlfrescoControllerException {
+	private void copyFile(File sourceFile, File targetFile) throws ServletException {
 		FileChannel srcChannel = null;
 		FileChannel dstChannel = null;
 		try {
@@ -1002,7 +1003,7 @@ public class AlfrescoController {
 				dstChannel = new FileOutputStream(targetFile).getChannel();
 				dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
 			} catch (IOException e) {
-				throw new AlfrescoControllerException(e);
+				throw new ServletException(e);
 			} finally {
 				if (srcChannel != null)
 					srcChannel.close();
@@ -1010,7 +1011,7 @@ public class AlfrescoController {
 					dstChannel.close();
 			}
 		} catch (Exception e) {
-			throw new AlfrescoControllerException(e);
+			throw new ServletException(e);
 		}
 	}
 
@@ -1066,14 +1067,14 @@ public class AlfrescoController {
 	}
 
 	public void executeBatch(AlfrescoTransaction alfrescoTransaction, Batch batch)
-			throws AlfrescoControllerException {
+			throws ServletException, ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("datas", MappingToolCommon.marshal(batch));
 
 		Map<String, String> ids = new HashMap<String, String>();
 
 		Document result = requestDocumentFromAlfresco(alfrescoTransaction, parameters,
-				MsgId.INT_WEBSCRIPT_OPCODE_BATCH);
+				MsgId.INT_WEBSCRIPT_OPCODE_BATCH, true);
 		Element idsElement = result.getDocumentElement();
 		NodeList childNodes = idsElement.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {
@@ -1112,16 +1113,17 @@ public class AlfrescoController {
 	 * 
 	 * @return the captions
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
+	 * @throws ServletException
 	 */
 	@SuppressWarnings("all")
 	public List<String> getCaptions(AlfrescoTransaction transaction, List<String> ids)
-			throws AlfrescoControllerException {
+			throws ServletException, ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("query", StringUtils.join(ids, ";"));
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
-				MsgId.INT_WEBSCRIPT_OPCODE_LABELS);
+				MsgId.INT_WEBSCRIPT_OPCODE_LABELS, true);
 
 		List<String> result = new ArrayList<String>();
 		// List elements = DOMUtil.getChildElements(requestDocument.getDocumentElement());
@@ -1134,11 +1136,11 @@ public class AlfrescoController {
 
 	@SuppressWarnings("unchecked")
 	public String getEnumCaption(AlfrescoTransaction transaction, String code)
-			throws AlfrescoControllerException {
+			throws ServletException, ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("query", "enum;" + code);
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
-				MsgId.INT_WEBSCRIPT_OPCODE_LABELS);
+				MsgId.INT_WEBSCRIPT_OPCODE_LABELS, true);
 
 		String result = null;
 		List elements = DOMUtil.getAllChildren(requestDocument.getDocumentElement());
@@ -1165,11 +1167,13 @@ public class AlfrescoController {
 	 * 
 	 * @return the enum
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
+	 * @throws ServletException
 	 */
 	public Node getDynamicEnum(AlfrescoTransaction transaction, String type, String filterParent,
-			String filterData, String query, boolean limit) throws AlfrescoControllerException {
+			String filterData, String query, boolean limit) throws ServletException,
+			ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		String fp = StringUtils.trimToNull(filterParent);
 		if (fp != null) {
@@ -1189,7 +1193,7 @@ public class AlfrescoController {
 
 		parameters.put("type", mappingTool.getEnumType(type).getName());
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
-				MsgId.INT_WEBSCRIPT_OPCODE_ENUM);
+				MsgId.INT_WEBSCRIPT_OPCODE_ENUM, true);
 		Element documentElement = requestDocument.getDocumentElement();
 
 		Element queryElement = requestDocument.createElement("query");
@@ -1215,11 +1219,13 @@ public class AlfrescoController {
 	 * 
 	 * @return the list
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
+	 * @throws ServletException
 	 */
 	public Node getList(AlfrescoTransaction transaction, String type, String query,
-			String maxResults, String format, String maxLength) throws AlfrescoControllerException {
+			String maxResults, String format, String maxLength) throws ServletException,
+			ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 
 		String alfTypeName = null;
@@ -1251,7 +1257,7 @@ public class AlfrescoController {
 			reqDoc = requestDummyDocumentList(alfTypeName, maxLength);
 		} else {
 			reqDoc = requestDocumentFromAlfresco(transaction, parameters,
-					MsgId.INT_WEBSCRIPT_OPCODE_LIST);
+					MsgId.INT_WEBSCRIPT_OPCODE_LIST, true);
 			// ** #1234
 			if (reqDoc == null) {
 				logger.error("The Alfresco server is unavailable. Returning a dummy list.");
@@ -1334,18 +1340,18 @@ public class AlfrescoController {
 	 * 
 	 * @return the string
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	private String requestString(AlfrescoTransaction transaction, Map<String, String> parameters,
-			MsgId opCode) throws AlfrescoControllerException {
+			MsgId opCode) throws ServletException {
 		String result = null;
 		try {
 			PostMethod post = requestPost(transaction, parameters, opCode);
 			result = StringUtils.trim(post.getResponseBodyAsString());
 		} catch (Exception e) {
 			logger.error(e);
-			throw new AlfrescoControllerException(e);
+			throw new ServletException(e);
 		}
 		if (result != null && result.startsWith("<exception>")) {
 			throw new AlfrescoWebscriptException(result);
@@ -1362,23 +1368,29 @@ public class AlfrescoController {
 	 *            the opCode
 	 * @param transaction
 	 *            the transaction
+	 * @param throwIfOffline
 	 * 
 	 * @return the document
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
+	 * @throws ServletException
 	 */
 	private Document requestDocumentFromAlfresco(AlfrescoTransaction transaction,
-			Map<String, String> parameters, MsgId opCode) throws AlfrescoControllerException {
+			Map<String, String> parameters, MsgId opCode, boolean throwIfOffline)
+			throws ServletException, ServletException {
 		Document result = null;
 		try {
 			PostMethod post = requestPost(transaction, parameters, opCode);
 			result = synchronizedParse(post.getResponseBodyAsStream()); // #1227
 		} catch (ConnectException e) { // #1234
+			if (throwIfOffline) {
+				throw new ServletException("The Alfresco server is unavailable.");
+			}
 			return null;
 		} catch (Exception e) {
 			logger.error(e);
-			throw new AlfrescoControllerException(e);
+			throw new ServletException(e);
 		}
 		if (result != null) {
 			if (StringUtils.equalsIgnoreCase("exception", result.getDocumentElement().getTagName())) {
@@ -1498,12 +1510,12 @@ public class AlfrescoController {
 	 * 
 	 * @return the document
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	public Document createElement(AlfrescoTransaction transaction, String type,
 			Map<String, String> initParams, Stack<AssociationType> stack, boolean formIsReadOnly,
-			boolean isServletRequest) throws AlfrescoControllerException {
+			boolean isServletRequest) throws ServletException {
 		return mappingTool.createClassFormsInstance(transaction, type, initParams, stack,
 				formIsReadOnly, isServletRequest);
 	}
@@ -1515,12 +1527,8 @@ public class AlfrescoController {
 	 *            the node ref
 	 * @param transaction
 	 *            the transaction
-	 * 
-	 * @throws AlfrescoControllerException
-	 *             the alfresco controller exception
 	 */
-	public void delete(AlfrescoTransaction transaction, String nodeRef)
-			throws AlfrescoControllerException {
+	public void delete(AlfrescoTransaction transaction, String nodeRef) {
 		transaction.queueDelete(nodeRef);
 	}
 
@@ -1534,12 +1542,11 @@ public class AlfrescoController {
 	 * 
 	 * @return the document
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	public Document createForm(AlfrescoTransaction transaction, String type,
-			Map<String, String> initParams, boolean formIsReadOnly)
-			throws AlfrescoControllerException {
+			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
 		return mappingTool.newFormInstance(type, transaction, initParams, formIsReadOnly);
 	}
 
@@ -1555,11 +1562,11 @@ public class AlfrescoController {
 	 * 
 	 * @return the document
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
 	public Document loadForm(AlfrescoTransaction transaction, String type, String id,
-			boolean formIsReadOnly) throws AlfrescoControllerException {
+			boolean formIsReadOnly) throws ServletException {
 		return mappingTool.createFormInstance(transaction, type, id, formIsReadOnly);
 	}
 
@@ -1575,12 +1582,12 @@ public class AlfrescoController {
 	 * 
 	 * @return the temporary id assigned to the class
 	 * 
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	public String persistForm(AlfrescoTransaction transaction, String type, Node instance)
-			throws AlfrescoControllerException, ServletException {
+			throws ServletException, ServletException {
 		GenericClass alfClass = this.transformsToAlfresco(transaction, type, instance);
 		if (alfClass.getId() == null) {
 			alfClass.setId(saveMain(transaction, alfClass));
@@ -1597,11 +1604,11 @@ public class AlfrescoController {
 	 * @param formName
 	 * @param instance
 	 * @return a JSON string
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 * @throws ServletException
 	 */
 	public String persistFormJSON(AlfrescoTransaction transaction, String formName, Node instance,
-			boolean shortPropertyNames) throws AlfrescoControllerException, ServletException {
+			boolean shortPropertyNames) throws ServletException, ServletException {
 		return mappingTool.transformsToJSON(transaction, formName, instance, shortPropertyNames);
 	}
 
@@ -1612,11 +1619,11 @@ public class AlfrescoController {
 	 * @param formName
 	 * @param instance
 	 * @return
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 * @throws ServletException
 	 */
 	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
-			Node instance) throws AlfrescoControllerException, ServletException {
+			Node instance) throws ServletException, ServletException {
 		return mappingTool.transformsToAlfresco(transaction, formName, instance);
 	}
 
@@ -1736,10 +1743,9 @@ public class AlfrescoController {
 	 * @param attributes
 	 *            Qualified Alfresco Attributes
 	 * @return Newly created Workflow
-	 * @throws AlfrescoControllerException
 	 */
 	public WorkflowPath workflowStart(AlfrescoTransaction transaction, String workflowDefinitionId,
-			Map<QName, Serializable> attributes) throws AlfrescoControllerException {
+			Map<QName, Serializable> attributes) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("wfName", workflowDefinitionId);
 		parameters.put("attributes", attributes);
@@ -1760,10 +1766,9 @@ public class AlfrescoController {
 	 * @param remove
 	 *            Linked instances to remove
 	 * @return Updated task
-	 * @throws AlfrescoControllerException
 	 */
 	public WorkflowTask workflowEndTask(AlfrescoTransaction transaction, String taskId,
-			String transitionId) throws AlfrescoControllerException {
+			String transitionId) {
 		ArrayList<Object> paramList = new ArrayList<Object>();
 		paramList.add(taskId);
 		paramList.add(transitionId);
@@ -1772,7 +1777,7 @@ public class AlfrescoController {
 
 	public WorkflowTask workflowUpdateTask(AlfrescoTransaction transaction, String taskId,
 			Map<QName, Serializable> attributes, Map<QName, List<NodeRef>> add,
-			Map<QName, List<NodeRef>> remove) throws AlfrescoControllerException {
+			Map<QName, List<NodeRef>> remove) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("taskId", taskId);
 		parameters.put("attributes", attributes);
@@ -1789,10 +1794,8 @@ public class AlfrescoController {
 	 * @param workflowId
 	 *            Id of the workflow to cancel
 	 * @return The updated instance
-	 * @throws AlfrescoControllerException
 	 */
-	public WorkflowInstance workflowCancel(AlfrescoTransaction transaction, String workflowId)
-			throws AlfrescoControllerException {
+	public WorkflowInstance workflowCancel(AlfrescoTransaction transaction, String workflowId) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("workflowId", workflowId);
 		return (WorkflowInstance) workflowRequestCall(transaction, "wfCancel", parameters);
@@ -1806,11 +1809,9 @@ public class AlfrescoController {
 	 * @param workflowId
 	 *            Id of the instance to delete
 	 * @return The updated instance (yes, a deleted instance!...)
-	 * @throws AlfrescoControllerException
 	 */
 	@Deprecated
-	public WorkflowInstance workflowDelete(AlfrescoTransaction transaction, String workflowId)
-			throws AlfrescoControllerException {
+	public WorkflowInstance workflowDelete(AlfrescoTransaction transaction, String workflowId) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("workflowId", workflowId);
 		return (WorkflowInstance) workflowRequestCall(transaction, "wfDelete", parameters);
@@ -1824,11 +1825,10 @@ public class AlfrescoController {
 	 * @param instanceId
 	 *            the workflow instance Id
 	 * @return
-	 * @throws AlfrescoControllerException
 	 */
 	@SuppressWarnings("unchecked")
 	private Map<QName, Serializable> workflowCollectInstanceProperties(
-			AlfrescoTransaction transaction, String instanceId) throws AlfrescoControllerException {
+			AlfrescoTransaction transaction, String instanceId) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("workflowId", instanceId);
 
@@ -1844,10 +1844,10 @@ public class AlfrescoController {
 	 * @param transaction
 	 *            Alfresco transaction (for login)
 	 * @return the new package
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 */
 	public NodeRef workflowCreatePackage(AlfrescoTransaction transaction, String nodeToAdd,
-			String userName) throws AlfrescoControllerException {
+			String userName) throws ServletException {
 		// we use workflowRequest as proxy here
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("container", (String) null);
@@ -1876,10 +1876,9 @@ public class AlfrescoController {
 	 *            a list containing the method parameters in the order of the function's signature.
 	 *            CANNOT BE NULL.
 	 * @return an object of the return type of the function that was called.
-	 * @throws AlfrescoControllerException
 	 */
 	public Object workflowRequest(AlfrescoTransaction transaction, String methodName,
-			List<Object> methodParameters) throws AlfrescoControllerException {
+			List<Object> methodParameters) {
 		Map<String, Object> parameterMaps = new HashMap<String, Object>();
 		int i = 0;
 		for (Object parameter : methodParameters) {
@@ -1901,11 +1900,10 @@ public class AlfrescoController {
 	 *            Method to call (mapped in WorkflowService)
 	 * @param methodParameters
 	 *            Parameters needed by the method (same types as declared by the interface)
-	 * @return The deserialized Object
-	 * @throws AlfrescoControllerException
+	 * @return The deserialized Object or null if exception
 	 */
 	private Object workflowRequestCall(AlfrescoTransaction transaction, String methodName,
-			Map<String, Object> methodParameters) throws AlfrescoControllerException {
+			Map<String, Object> methodParameters) {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("method", methodName);
 		Set<String> keys = methodParameters.keySet();
@@ -1926,7 +1924,7 @@ public class AlfrescoController {
 
 		try {
 			sresult = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_WORKFLOW);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			return null;
 		}
 		Object result = null;
@@ -1958,7 +1956,7 @@ public class AlfrescoController {
 		try {
 			result = (String) xstream.fromXML(requestString(new AlfrescoTransaction(this),
 					parameters, MsgId.INT_WEBSCRIPT_OPCODE_SERVICE));
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -1988,7 +1986,7 @@ public class AlfrescoController {
 			String requestString = requestString(new AlfrescoTransaction(this), parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (QName) xstream.fromXML(requestString);
-			// } catch (AlfrescoControllerException e) {
+			// } catch (ServletException e) {
 			// e.printStackTrace();
 			// return null;
 		} catch (Exception e) {
@@ -2020,7 +2018,7 @@ public class AlfrescoController {
 			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (NodeRef) xstream.fromXML(resultStr);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -2040,7 +2038,7 @@ public class AlfrescoController {
 			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (NodeRef) xstream.fromXML(resultStr);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -2070,7 +2068,7 @@ public class AlfrescoController {
 			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (NodeRef) xstream.fromXML(resultStr);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -2104,7 +2102,7 @@ public class AlfrescoController {
 			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (Set<String>) xstream.fromXML(resultStr);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -2136,7 +2134,7 @@ public class AlfrescoController {
 			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (Set<String>) xstream.fromXML(resultStr);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -2158,7 +2156,7 @@ public class AlfrescoController {
 	// WorkflowInstance wkInstance;
 	// try {
 	// wkInstance = (WorkflowInstance) workflowRequest(null, "getWorkflowById", paramList);
-	// } catch (AlfrescoControllerException e) {
+	// } catch (ServletException e) {
 	// logger.error(MsgId.INT_EXC_WKFLW_GET_INSTANCE + bean.instanceId);
 	// // any exception should let us continue so we just bail out.
 	// return;
@@ -2188,7 +2186,7 @@ public class AlfrescoController {
 	// paramList.add(bean.processId);
 	// try {
 	// def = (WorkflowDefinition) workflowRequest(null, "getDefinitionById", paramList);
-	// } catch (AlfrescoControllerException e) {
+	// } catch (ServletException e) {
 	// // any exception should let us continue so bail out.
 	// return null;
 	// }
@@ -2208,8 +2206,8 @@ public class AlfrescoController {
 	 * with the instance, each active path may provide tasks.
 	 * 
 	 * @param path
-	 * @return null if exception, otherwise the list (possibly empty) of in-progress tasks.
-	 * @throws AlfrescoControllerException
+	 * @return the list (possibly empty if exception) of in-progress tasks.
+	 * @throws ServletException
 	 */
 	@SuppressWarnings("unchecked")
 	public List<WorkflowTask> workflowGetCurrentTasks(String instanceId) {
@@ -2218,13 +2216,7 @@ public class AlfrescoController {
 		List<WorkflowPath> paths = null;
 		ArrayList<Object> paramList = new ArrayList<Object>();
 		paramList.add(instanceId);
-		try {
-			paths = (List<WorkflowPath>) workflowRequest(null, "getWorkflowPaths", paramList);
-		} catch (AlfrescoControllerException e) {
-			logger.error(MsgId.INT_EXC_WKFLW_GET_INSTANCE_PATHS + instanceId);
-			e.printStackTrace();
-			return null;
-		}
+		paths = (List<WorkflowPath>) workflowRequest(null, "getWorkflowPaths", paramList);
 		if (paths == null) {
 			logger.error(MsgId.INT_ERR_NULL_WKFLW_INSTANCE_PATHS + instanceId);
 			return result;
@@ -2236,19 +2228,15 @@ public class AlfrescoController {
 				List<WorkflowTask> tasks = null;
 				ArrayList<Object> params = new ArrayList<Object>();
 				params.add(path.id);
-				try {
-					tasks = (List<WorkflowTask>) workflowRequest(null, "getTasksForWorkflowPath",
-							params);
-				} catch (AlfrescoControllerException e) {
-					e.printStackTrace();
-					return null;
+				tasks = (List<WorkflowTask>) workflowRequest(null, "getTasksForWorkflowPath",
+						params);
+				if (tasks == null) {
+					return result;
 				}
 				// add the tasks to complete
-				if (tasks != null) {
-					for (WorkflowTask task : tasks) {
-						if (task.state == WorkflowTaskState.IN_PROGRESS) {
-							result.add(task);
-						}
+				for (WorkflowTask task : tasks) {
+					if (task.state == WorkflowTaskState.IN_PROGRESS) {
+						result.add(task);
 					}
 				}
 			}
@@ -2263,10 +2251,8 @@ public class AlfrescoController {
 	 * @param task
 	 *            the task to search for in the definition
 	 * @return
-	 * @throws AlfrescoControllerException
 	 */
-	public WorkflowTaskDefinition workflowGetTaskDefinition(String processDefId, String task)
-			throws AlfrescoControllerException {
+	public WorkflowTaskDefinition workflowGetTaskDefinition(String processDefId, String task) {
 
 		List<WorkflowTaskDefinition> taskDefs = workflowGetTaskDefinitions(processDefId);
 		for (WorkflowTaskDefinition taskDef : taskDefs) {
@@ -2278,8 +2264,7 @@ public class AlfrescoController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId)
-			throws AlfrescoControllerException {
+	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId) {
 		String methodName = "getTaskDefinitions";
 		List<Object> params = new ArrayList<Object>();
 		params.add(processDefId);
@@ -2289,8 +2274,7 @@ public class AlfrescoController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<WorkflowInstance> workflowGetWorkflowsForContent(String refStr, boolean onlyActive)
-			throws AlfrescoControllerException {
+	public List<WorkflowInstance> workflowGetWorkflowsForContent(String refStr, boolean onlyActive) {
 		NodeRef nodeRef = new NodeRef(refStr);
 		String methodName = "getWorkflowsForContent";
 		List<Object> params = new ArrayList<Object>();
@@ -2301,8 +2285,7 @@ public class AlfrescoController {
 		return workflowRequest;
 	}
 
-	public WorkflowDefinition workflowGetWorkflowById(String defId)
-			throws AlfrescoControllerException {
+	public WorkflowDefinition workflowGetWorkflowById(String defId) {
 		String methodName = "getDefinitionById";
 		List<Object> params = new ArrayList<Object>();
 		params.add(defId);
@@ -2317,11 +2300,9 @@ public class AlfrescoController {
 	 * @see com.bluexml.xforms.actions.WorkflowFormGetAction
 	 * @param formName
 	 * @return
-	 * @throws ParserConfigurationException
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 */
-	public Document getWorkflowFormInstance(String formName) throws ParserConfigurationException,
-			AlfrescoControllerException {
+	public Document getWorkflowFormInstance(String formName) throws ServletException {
 		Document instance = docBuilder.newDocument();
 
 		WorkflowTaskType taskType = mappingTool.getWorkflowTaskType(formName, false);
@@ -2396,10 +2377,10 @@ public class AlfrescoController {
 	 * @param folderPath
 	 * @param userName
 	 * @return
-	 * @throws AlfrescoControllerException
+	 * @throws ServletException
 	 */
 	public String createPathInRepository(String folderPath, String userName)
-			throws AlfrescoControllerException {
+			throws ServletException {
 
 		// collect parameters
 		Map<String, String> parameters = new TreeMap<String, String>();
@@ -2427,7 +2408,7 @@ public class AlfrescoController {
 		try {
 			result = (Path) xstream.fromXML(requestString(new AlfrescoTransaction(this),
 					parameters, MsgId.INT_WEBSCRIPT_OPCODE_SERVICE));
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -2555,11 +2536,9 @@ public class AlfrescoController {
 	 * 
 	 * @param userName
 	 * @return
-	 * @throws AlfrescoControllerException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<WorkflowTask> workflowGetPooledTasks(String userName)
-			throws AlfrescoControllerException {
+	public List<WorkflowTask> workflowGetPooledTasks(String userName) {
 		String methodName = "getPooledTasks";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(userName);
@@ -2573,9 +2552,8 @@ public class AlfrescoController {
 	 * 
 	 * @param taskId
 	 * @return the requested task object, or <b>null</b> if not found
-	 * @throws AlfrescoControllerException
 	 */
-	public WorkflowTask workflowGetTaskById(String taskId) throws AlfrescoControllerException {
+	public WorkflowTask workflowGetTaskById(String taskId) {
 		String methodName = "getTaskById";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(taskId);
@@ -2589,11 +2567,9 @@ public class AlfrescoController {
 	 * 
 	 * @param taskId
 	 * @return the list of items associated with the task's workflow package
-	 * @throws AlfrescoControllerException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<NodeRef> workflowGetPackageContents(String taskId)
-			throws AlfrescoControllerException {
+	public List<NodeRef> workflowGetPackageContents(String taskId) {
 		String methodName = "getPackageContents";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(taskId);
@@ -2642,10 +2618,8 @@ public class AlfrescoController {
 
 				// read the QName value from the collected properties of the workflow instance
 				if (properties == null) {
-					try {
-						properties = workflowCollectInstanceProperties(transaction, instanceId);
-					} catch (AlfrescoControllerException e) {
-						e.printStackTrace();
+					properties = workflowCollectInstanceProperties(transaction, instanceId);
+					if (properties == null) {
 						return false; // there's no point in continuing without the properties
 					}
 				}
@@ -2748,7 +2722,7 @@ public class AlfrescoController {
 		String result;
 		try {
 			result = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_AUTHENTICATE);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -2761,7 +2735,7 @@ public class AlfrescoController {
 		Map<String, String> parameters = new HashMap<String, String>();
 		try {
 			result = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_HELP);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -2805,7 +2779,7 @@ public class AlfrescoController {
 
 		try {
 			request = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_NODE_INFO);
-		} catch (AlfrescoControllerException e) {
+		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
 		}

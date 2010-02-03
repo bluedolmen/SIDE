@@ -950,7 +950,7 @@ public class FormGeneratorsManager {
 				}
 			}
 			if (classe != null) {
-				while ((classe != null) && (result == null)) {
+				while (classe != null) {
 					EList<Attribute> attributes = classe.getAttributes();
 					for (Attribute attribute : attributes) {
 						if (elementEquals(attribute, modelElement)) {
