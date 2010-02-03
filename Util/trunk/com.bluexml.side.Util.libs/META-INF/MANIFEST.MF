@@ -262,4 +262,5 @@ Bundle-ClassPath: .,
  libs/jaxb-impl-2.1.3.jar,
  libs/stax-api-1.0-2.jar,
  libs/saxon9he.jar,
- libs/activation-1.1.jar
+ libs/activation-1.1.jar,
+ libs/xercesImpl-2.8.0.jar
