@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.sideForAlfresco.feature" label="SIDE for Alfresco" version="1.0.66.v13674-20100202" provider-name="blueXML" plugin="com.bluexml.side.Integration.eclipse.branding">
+<feature id="com.bluexml.side.Common.sideForAlfresco.feature" label="SIDE for Alfresco" version="1.0.67.v13698-20100203" provider-name="blueXML" plugin="com.bluexml.side.Integration.eclipse.branding">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature gathers common tools for SIDE modelers.</description>
   <copyright url="http://www.bluexml.com">(c) Copyright BlueXML. 2007, 2009.  All rights reserved.</copyright>
   <license url="http://www.bluexml.com">GNU GENERAL PUBLIC LICENSE
@@ -631,10 +631,10 @@ copy of the Program in return for a fee.
   <includes id="com.bluexml.side.Deployer.xformsDirectCopy.feature" version="1.0.16.v13286-20100127" />
   <includes id="com.bluexml.side.Deployer.facetMap.feature" version="1.0.19.v13286-20100127" />
   <includes id="com.bluexml.side.Deployer.report.feature" version="1.0.22.v13286-20100127" />
-  <includes id="com.bluexml.side.Form.generator.xforms.feature" version="1.0.89.v13674-20100202" />
-  <includes id="com.bluexml.side.Portal.generator.alfresco.feature" version="1.0.24.v13637-20100201" />
+  <includes id="com.bluexml.side.Form.generator.xforms.feature" version="1.0.90.v13698-20100203" />
+  <includes id="com.bluexml.side.Portal.generator.alfresco.feature" version="1.0.25.v13698-20100203" />
   <includes id="com.bluexml.side.View.generator.alfresco.feature" version="1.0.18.v13286-20100127" />
   <includes id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.33.v13286-20100127" />
-  <includes id="com.bluexml.side.Workflow.generator.alfresco.feature" version="1.0.51.v13286-20100127" />
+  <includes id="com.bluexml.side.Workflow.generator.alfresco.feature" version="1.0.52.v13698-20100203" />
 </feature>
 
