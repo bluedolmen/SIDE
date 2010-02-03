@@ -28,6 +28,7 @@ public class Builder {
 			// search <moduleDependency>.*<moduleDependency>
 			try {
 				Document pluginXML = buildJdomDocument(file);
+				System.out.println("Scanning File :"+file);
 				XPath xpa = XPath.newInstance("//moduleDependence");
 				List<?> lmd = xpa.selectNodes(pluginXML.getRootElement());
 				for (Object object : lmd) {
@@ -60,7 +61,7 @@ public class Builder {
 					}
 
 					ModuleConstraint mc = new ModuleConstraint(id, tech_version, moduleType, versionNumMin, versionNumMax);
-
+					System.out.println("found :" + mc);
 					moduleIds.add(mc);
 				}
 
