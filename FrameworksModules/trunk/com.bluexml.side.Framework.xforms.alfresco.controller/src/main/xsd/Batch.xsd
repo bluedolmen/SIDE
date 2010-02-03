@@ -24,6 +24,7 @@
 			<xs:element name="filePath" type="xs:string" />
 			<xs:element name="mimeType" type="xs:string" />
 			<xs:element name="contentType" type="xs:string" /><!-- nom qualifié de la classe -->
+			<xs:element name="appendSuffix" type="xs:string" /><!--  don't use boolean -->
 		</xs:sequence>
 	</xs:complexType>
 
