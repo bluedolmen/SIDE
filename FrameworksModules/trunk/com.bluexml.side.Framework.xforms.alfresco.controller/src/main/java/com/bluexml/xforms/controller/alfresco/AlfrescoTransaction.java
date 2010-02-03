@@ -80,12 +80,13 @@ public class AlfrescoTransaction {
 	 *            the complete path to the file on the server side
 	 * @param mimeType
 	 *            the MIME type as served by the web client
+	 * @param shouldAppendSuffix 
 	 * @param contentType
 	 *            the qualified name of the (generated) content type that has the meta data. This
 	 *            type must correspond to the type of the receiver
 	 */
 	public void queueAttachContent(String receiver, String fileName, String filePath,
-			String mimeType, String contentType) {
+			String mimeType, boolean shouldAppendSuffix, String contentType) {
 		if (batch == null) {
 			initializeBatch();
 		}
@@ -95,6 +96,7 @@ public class AlfrescoTransaction {
 		entry.setFilePath(filePath);
 		entry.setMimeType(mimeType);
 		entry.setContentType(contentType);
+		entry.setAppendSuffix("" + shouldAppendSuffix);
 
 		batch.getCreateOrUpdateOrDelete().add(entry);
 	}

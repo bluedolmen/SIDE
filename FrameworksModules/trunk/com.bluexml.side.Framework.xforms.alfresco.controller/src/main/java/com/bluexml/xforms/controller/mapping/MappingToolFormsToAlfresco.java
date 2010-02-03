@@ -620,7 +620,8 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			String name = contentAttribute.getValue().get(1).getValue();
 			String type = contentAttribute.getValue().get(2).getValue();
 
-			return new RepoContentInfoBean(path, name, type, contentAttribute);
+			return new RepoContentInfoBean(path, name, type, contentAttribute, controller
+					.getUploadRepoAppendSuffix());
 		}
 		return null;
 	}

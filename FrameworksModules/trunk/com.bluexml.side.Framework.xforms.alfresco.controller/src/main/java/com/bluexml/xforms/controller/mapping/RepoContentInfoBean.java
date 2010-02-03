@@ -19,15 +19,19 @@ public class RepoContentInfoBean {
 	/** MIME type of the uploaded file */
 	private String mimeType;
 
-	/** */
+	/** The attribute that provided the path, name and mimetype */
 	private GenericAttribute attribute;
 
-	public RepoContentInfoBean(String path, String name, String mimetype, GenericAttribute attr) {
+	private boolean shouldAppendSuffix;
+
+	public RepoContentInfoBean(String path, String name, String mimetype, GenericAttribute attr,
+			boolean shouldAppendSuffix) {
 		super();
 		this.path = path;
 		this.name = name;
 		this.mimeType = mimetype;
 		this.attribute = attr;
+		this.shouldAppendSuffix = shouldAppendSuffix;
 	}
 
 	/**
@@ -56,6 +60,13 @@ public class RepoContentInfoBean {
 	 */
 	public GenericAttribute getAttribute() {
 		return attribute;
+	}
+
+	/**
+	 * @return the shouldAppendSuffix
+	 */
+	public boolean isShouldAppendSuffix() {
+		return shouldAppendSuffix;
 	}
 
 }

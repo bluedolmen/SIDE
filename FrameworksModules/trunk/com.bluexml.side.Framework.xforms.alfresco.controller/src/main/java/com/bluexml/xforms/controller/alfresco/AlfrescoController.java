@@ -88,6 +88,9 @@ public class AlfrescoController {
 	/** The upload base directory in the content management system. */
 	public static String UPLOAD_REPOSITORY = null;
 
+	/** The upload base directory in the content management system. */
+	public static boolean UPLOAD_REPOSITORY_APPEND = true;
+
 	/** The temp directory. */
 	public static File TEMP_DIRECTORY = null;
 
@@ -529,6 +532,10 @@ public class AlfrescoController {
 		if (StringUtils.trimToNull(property) != null) {
 			MAX_RESULTS = property;
 		}
+		// whether to append ordering suffix to file names
+		property = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY_APPEND.getText());
+		UPLOAD_REPOSITORY_APPEND = !(StringUtils.equals(property, "false"));
+
 		checkDirectoryExists(UPLOAD_DIRECTORY, true);
 		checkDirectoryExists(TEMP_DIRECTORY, false);
 		ALFRESCO_URL = config.getProperty(MsgId.KEY_ALFRESCO_URL.getText());
@@ -664,11 +671,13 @@ public class AlfrescoController {
 	 * @param fileName
 	 * @param filePath
 	 * @param mimeType
+	 * @param shouldAppendSuffix
 	 * @throws ServletException
 	 *             if the file doesn't exist
 	 */
 	private void uploadAttachContent(AlfrescoTransaction transaction, GenericClass alfClass,
-			String fileName, String filePath, String mimeType) throws ServletException {
+			String fileName, String filePath, String mimeType, boolean shouldAppendSuffix)
+			throws ServletException {
 		if (filePath != null && filePath.startsWith("file:")) {
 			File file;
 			URI fileURI = URI.create(filePath);
@@ -683,7 +692,7 @@ public class AlfrescoController {
 
 			if (file.length() > 0) {
 				transaction.queueAttachContent(alfClass.getId(), fileName, fullFileName, mimeType,
-						alfClass.getQualifiedName());
+						shouldAppendSuffix, alfClass.getQualifiedName());
 			}
 		}
 	}
@@ -716,6 +725,17 @@ public class AlfrescoController {
 			result = initParameters.get(MsgId.PARAM_UPLOAD_REPOSITORY.getText());
 		}
 		return (result != null) ? result : UPLOAD_REPOSITORY;
+	}
+
+	public boolean getUploadRepoAppendSuffix() {
+		String paramStr = null;
+		if (initParameters != null) {
+			paramStr = initParameters.get(MsgId.PARAM_UPLOAD_REPOSITORY_APPEND.getText());
+		}
+		if (StringUtils.trimToNull(paramStr) != null) {
+			return !(StringUtils.equals(paramStr, "false"));
+		}
+		return UPLOAD_REPOSITORY_APPEND;
 	}
 
 	/**
@@ -758,7 +778,7 @@ public class AlfrescoController {
 				if (filePath != null && filePath.startsWith("file:")) {
 					String location = getUploadPathInRepository();
 					fileName = uploadMoveFileToRepo(transaction, fileName, filePath, location,
-							mimeType);
+							mimeType, infoBean.isShouldAppendSuffix());
 					if (StringUtils.trimToNull(fileName) == null) {
 						throw new ServletException(MsgPool.getMsg(MsgId.MSG_UPLOAD_FAILED));
 					}
@@ -768,14 +788,14 @@ public class AlfrescoController {
 		}
 
 		// node content file; there's at most one instance of this.
-		RepoContentInfoBean nodeContentInfoBean = mappingTool.getNodeContentInfo(transaction,
-				alfClass);
-		if (nodeContentInfoBean != null) {
-			fileName = nodeContentInfoBean.getName();
-			filePath = nodeContentInfoBean.getPath();
-			mimeType = nodeContentInfoBean.getMimeType();
+		RepoContentInfoBean nodeInfoBean = mappingTool.getNodeContentInfo(transaction, alfClass);
+		if (nodeInfoBean != null) {
+			fileName = nodeInfoBean.getName();
+			filePath = nodeInfoBean.getPath();
+			mimeType = nodeInfoBean.getMimeType();
 
-			uploadAttachContent(transaction, alfClass, fileName, filePath, mimeType);
+			uploadAttachContent(transaction, alfClass, fileName, filePath, mimeType, nodeInfoBean
+					.isShouldAppendSuffix());
 		}
 	}
 
@@ -937,21 +957,25 @@ public class AlfrescoController {
 	 *            may be different from parameter 'fileName'.
 	 * @param location
 	 *            path to a folder in the content management system
+	 * @param shouldAppendSuffix
 	 * @return the string
 	 * @throws AlfrescoControllerException
 	 *             the alfresco controller exception
 	 */
 	private String uploadMoveFileToRepo(AlfrescoTransaction transaction, String fileName,
-			String filePath, String location, String mimetype) throws AlfrescoControllerException {
+			String filePath, String location, String mimetype, boolean shouldAppendSuffix)
+			throws AlfrescoControllerException {
 
 		// collect parameters
 		Map<String, String> parameters = new TreeMap<String, String>();
 		URI fileURI = URI.create(filePath);
 		String fullFileName = fileURI.getPath();
+
 		parameters.put("filename", fileName);
 		parameters.put("filepath", fullFileName);
 		parameters.put("location", location);
 		parameters.put("mimetype", mimetype);
+		parameters.put("suffixappend", "" + shouldAppendSuffix);
 		// call the webscript
 		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_UPLOAD);
 

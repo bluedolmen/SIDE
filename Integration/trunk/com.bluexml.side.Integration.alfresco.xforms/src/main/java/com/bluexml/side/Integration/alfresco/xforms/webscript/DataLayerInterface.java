@@ -28,12 +28,16 @@ public interface DataLayerInterface {
 	 *            the MIME type, usually provided by web clients
 	 * @param contentType
 	 *            the content type as seen by the class generator
+	 * @param shouldAppendSuffix
+	 *            if set to true, requests an index [e.g. '(1)'] to be appended to the filename if
+	 *            the original filename is not available. <b>DEFAULTS to true</b>. Needs to be
+	 *            explicitly set to false to prevent the renaming.
 	 * @return true if the content of the has been successfully reassigned. False in case the
 	 *         provider has no content.
 	 * @throws Exception
 	 */
 	public boolean attachContent(String receiver, String filename, String filepath,
-			String mimeType, String contentType) throws Exception;
+			String mimeType, String contentType, boolean shouldAppendSuffix) throws Exception;
 
 	/**
 	 * Create a node with the specified properties.

@@ -836,7 +836,8 @@ public class MappingToolCommon {
 				String name = attribute.getValue().get(1).getValue();
 				String type = attribute.getValue().get(2).getValue();
 
-				list.add(new RepoContentInfoBean(path, name, type, attribute));
+				list.add(new RepoContentInfoBean(path, name, type, attribute, controller
+						.getUploadRepoAppendSuffix()));
 			}
 		}
 
@@ -856,7 +857,7 @@ public class MappingToolCommon {
 		GenericAttribute contentAttribute = attr;
 		if (contentAttribute != null) {
 			contentAttribute.getValue().clear();
-			
+
 			ValueType valueName = alfrescoObjectFactory.createValueType();
 			valueName.setValue(fileRef);
 			contentAttribute.getValue().add(valueName);

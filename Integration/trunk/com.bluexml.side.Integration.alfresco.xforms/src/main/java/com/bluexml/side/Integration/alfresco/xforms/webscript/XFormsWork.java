@@ -627,6 +627,8 @@ public class XFormsWork implements RunAsWork<String> {
 					String filepath = DOMUtil.getChild(element, "filePath").getTextContent();
 					String mimetype = DOMUtil.getChild(element, "mimeType").getTextContent();
 					String contentType = DOMUtil.getChild(element, "contentType").getTextContent();
+					String appendStr = DOMUtil.getChild(element, "appendSuffix").getTextContent();
+					boolean shouldAppendSuffix = !(StringUtils.equals(appendStr, "false"));
 
 					// we must ensure the receiver is a valid id
 					String receiver = target;
@@ -636,7 +638,8 @@ public class XFormsWork implements RunAsWork<String> {
 					} catch (Exception e) {
 						receiver = created.get(target);
 					}
-					dataLayer.attachContent(receiver, filename, filepath, mimetype, contentType);
+					dataLayer.attachContent(receiver, filename, filepath, mimetype, contentType,
+							shouldAppendSuffix);
 				}
 			}
 		} catch (RuntimeException e) {
@@ -1029,7 +1032,9 @@ public class XFormsWork implements RunAsWork<String> {
 	/**
 	 * Uploads an existing file to the repository at a specific location. Parameters: "filename"
 	 * (name+extension), filepath (complete filesystem path, including filename and extension),
-	 * "location" (path in the repository), "mimetype".
+	 * "location" (path in the repository), "mimetype", "suffixAppend" (whether existing filenames
+	 * should be appended with a number if not available, e.g. 'filename.ext' becomes 'filename
+	 * (1).ext'. DEFAULTS to true)
 	 * <p/>
 	 * The file system path must be a valid path (not an escaped URL)<br/>
 	 * .
@@ -1045,6 +1050,8 @@ public class XFormsWork implements RunAsWork<String> {
 		String filepath = parameters.get("filepath");
 		String location = parameters.get("location");
 		String mimeType = parameters.get("mimetype");
+		String suffixAppend = parameters.get("suffixAppend");
+		boolean shouldAppendSuffix = !(StringUtils.equals(suffixAppend, "false"));
 		// test for the parent folder
 		List<NodeRef> results = null;
 		try {
@@ -1069,7 +1076,7 @@ public class XFormsWork implements RunAsWork<String> {
 				nodeTypeQName).getChildRef();
 
 		return dataLayer.uploadContentToNode(newNode, filename, filepath, mimeType, nodeTypeQName,
-				true);
+				true, shouldAppendSuffix);
 	}
 
 	private void createdToXML(StringBuffer sb, Map<String, String> created) {

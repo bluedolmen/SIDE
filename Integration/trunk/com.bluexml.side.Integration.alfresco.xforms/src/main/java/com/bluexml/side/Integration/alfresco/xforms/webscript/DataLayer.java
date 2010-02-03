@@ -1326,14 +1326,14 @@ public class DataLayer implements DataLayerInterface {
 	 * .lang.String, java.lang.String)
 	 */
 	public boolean attachContent(String receiver, String filename, String filepath,
-			String mimeType, String contentType) throws Exception {
+			String mimeType, String contentType, boolean shouldAppendSuffix) throws Exception {
 		NodeRef newNode = new NodeRef(receiver);
 		QName nodeTypeQName = QName.createQName(BLUEXML_MODEL_URI + "1.0", contentType);
 
 		boolean applyName = (StringUtils.trimToNull(filename) != null);
 
 		String resultId = uploadContentToNode(newNode, filename, filepath, mimeType, nodeTypeQName,
-				applyName);
+				applyName, shouldAppendSuffix);
 		if (StringUtils.trimToNull(resultId) == null) {
 			return false;
 		}
@@ -1350,11 +1350,15 @@ public class DataLayer implements DataLayerInterface {
 	 * @param mimeType
 	 * @param nodeTypeQName
 	 *            the node content type. Non-BlueXML types are supported.
-	 * @return the node ref (protocol, store and id) to the node, or empty string if the parent
-	 *         folder does not exist.
+	 * @param applyName
+	 *            if false, there will be no attempt to set the file name
+	 * @param shouldAppendSuffix
+	 *            if the renaming is activated, an index [e.g. '(1)'] may be appended to the
+	 *            filename there will be no failure due to an unavailable name
+	 * @return the node ref (protocol, store and id) to the node, or empty string if exception.
 	 */
 	public String uploadContentToNode(NodeRef newNode, String filename, String filepath,
-			String mimeType, QName nodeTypeQName, boolean applyName) {
+			String mimeType, QName nodeTypeQName, boolean applyName, boolean shouldAppendSuffix) {
 		String resultId, FAILURE = "";
 		ContentWriter writer = serviceRegistry.getContentService().getWriter(newNode,
 				nodeTypeQName, false);
@@ -1371,16 +1375,35 @@ public class DataLayer implements DataLayerInterface {
 			properties.put(ContentModel.PROP_CONTENT, writer.getContentData());
 			this.serviceRegistry.getNodeService().setProperties(newNode, properties);
 			resultId = StringEscapeUtils.escapeXml(newNode.toString());
-			logger.debug(" File '" + filename + "' (size: " + sizeUploaded
-					+ ") uploaded to node: " + resultId);
+			logger.debug(" File '" + filename + "' (size: " + sizeUploaded + ") uploaded to node: "
+					+ resultId);
 			// set the node name
 			if (applyName) {
-				try {
-					serviceRegistry.getFileFolderService().rename(newNode, filename);
-				} catch (FileExistsException e) {
-					logger.debug("Failed to rename: the file already exists!", e);
-				} catch (org.alfresco.service.cmr.model.FileNotFoundException e) {
-					logger.debug("Failed to rename: the node to rename does not exist!", e);
+				if (shouldAppendSuffix) {
+					String currentName = filename;
+					int idx = 0;
+					while (idx < 1000) { // is there any need to go beyond
+						try {
+							serviceRegistry.getFileFolderService().rename(newNode, currentName);
+							break;
+						} catch (FileExistsException e) {
+							idx++;
+							currentName = filename + " (" + idx + ")";
+						} catch (org.alfresco.service.cmr.model.FileNotFoundException e) {
+							logger.debug("Failed to rename: the node to rename does not exist!", e);
+							return FAILURE;
+						}
+					}
+				} else {
+					try {
+						serviceRegistry.getFileFolderService().rename(newNode, filename);
+					} catch (FileExistsException e) {
+						logger.debug("Failed to rename: the file already exists!", e);
+						return FAILURE;
+					} catch (org.alfresco.service.cmr.model.FileNotFoundException e) {
+						logger.debug("Failed to rename: the node to rename does not exist!", e);
+						return FAILURE;
+					}
 				}
 			}
 			return resultId;
