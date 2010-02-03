@@ -4,6 +4,7 @@
     	h2 {text-align: center; color: white;  background-color: blue;}
     	p#intro {text-align: center;}
     	p#note {font-style:italic; font-size: 8pt;}
+    	p#link {text-align: center; color: blue;}
 	    div#property {margin: 2 0 2 0;}
 	    div#label {width: 600px; margin-right: 5px; text-align: right; font-weight: bold; display: block; float: left;}
 	    div#field {width:300px; text-align: left; display: inline;}
@@ -91,6 +92,9 @@
 	    		</tr>
 	    		<tr>
 	    			<p id="note">-Index: this parameter is used for the incremental scenario; it assures unicity of attributes if necessary (for the first generation, you can fill it with 0).</p>
+	    		</tr>
+	    		<tr>
+	    			<p id="link"><a href="http://www.bluexml.com">BlueXML</a></p>
 	    		</tr>
 	    </table>
 	</body>
