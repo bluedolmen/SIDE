@@ -117,7 +117,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			element = DOMUtil.getChild(docElt, formName);
 			if (element == null) {
 				// we may be saving from a workflow form
-				// element = DOMUtil.getFirstElement(docElt); // behavior when no workflows existed
+				element = DOMUtil.getFirstElement(docElt); // behavior when no workflows existed
 				element = DOMUtil.getChild(element, formName);
 			}
 		}
