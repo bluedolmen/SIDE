@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.bluexml.side.Framework.xforms.alfresco</groupId>
   <artifactId>controller</artifactId>
-  <version>1.0.30</version>
+  <version>1.0.31</version>
   <name>XForms controller</name>
   <description>This module provides controller allowing conversion to and from XForm XML and Alfresco custom webscript.
 		It uses generated files : forms and mapping</description>
@@ -148,11 +148,11 @@
       <artifactId>jibx-run</artifactId>
       <version>1.2.1</version>
     </dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring</artifactId>
-		<version>2.0.2</version>
-	</dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring</artifactId>
+      <version>2.0.2</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>xforms.controller-${project.version}</finalName>
