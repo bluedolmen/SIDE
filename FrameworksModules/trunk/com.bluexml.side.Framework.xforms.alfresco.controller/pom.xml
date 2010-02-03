@@ -92,13 +92,13 @@
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-repository</artifactId>
-      <version>3.2r</version>
+      <version>3.2r2</version>
       <classifier>community</classifier>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-core</artifactId>
-      <version>3.2r</version>
+      <version>3.2r2</version>
       <classifier>community</classifier>
     </dependency>
     <dependency>
