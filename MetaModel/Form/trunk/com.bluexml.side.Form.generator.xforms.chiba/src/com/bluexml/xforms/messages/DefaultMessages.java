@@ -72,12 +72,9 @@ public class DefaultMessages {
 			"upload.node.content.group.label=Attach content",
 			"upload.node.content.no.content=(no content)",
 			"# 0: node name; 1: content size in bytes with digit grouping; 2: content size in best-fitting unit",
-			"upload.node.content.repository.format={0}: {1} bytes({2})", 
-			"upload.node.content.repository.info=Content information:", 
-			"#",
-			"# workflow-related",
-			"#",
-			"caption.button.workflow.cancel=Cancel",
+			"upload.node.content.repository.format={0}: {1} bytes({2})",
+			"upload.node.content.repository.info=Content information:", "#", "# workflow-related",
+			"#", "caption.button.workflow.cancel=Cancel",
 			"caption.button.workflow.select=Select this workflow",
 			"caption.button.workflow.start=Activate this workflow",
 			"workflow.error.submit.data=Please submit the data form before starting a workflow.",
@@ -100,8 +97,7 @@ public class DefaultMessages {
 			"status.message.edit.success=Data successfully edited.",
 			"# status.message.empty should have at least one whitespace",
 			"status.message.empty=\\ ", "# 0: sequence number of the iteration",
-			"status.message.iteration.postfix=\\ ({0})",
-			"upload.random.path.depth=3",
+			"status.message.iteration.postfix=\\ ({0})", "upload.random.path.depth=3",
 			"upload.to.repository.failure=Upload to the repository failed.", "" };
 
 	/**
@@ -125,7 +121,9 @@ public class DefaultMessages {
 			e.printStackTrace();
 			return false;
 		} finally {
-			fos.close();
+			if (fos != null) {
+				fos.close();
+			}
 		}
 		return true;
 	}
