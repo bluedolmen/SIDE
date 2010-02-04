@@ -692,7 +692,7 @@ public class Utils {
 				String nomPom=valeur2.substring(valeur2.lastIndexOf("/")+1);
 				
 				//fixer les versions des fichiers plugin.xml
-				System.out.println("Fixer les versions des fichiers plugins : ");
+				System.out.println("\nFixer les versions des fichiers plugins : ");
 				for (String element : projects) {
 					
 						if (element.indexOf("feature") == -1) {
@@ -703,6 +703,7 @@ public class Utils {
 							if (ajouter){
 								if (listePlugin.indexOf(element) == -1){
 									listePlugin.add(element);
+									System.out.println("update plugin : "+element+ " pom : "+nomPom+ "version : "+versionPom);
 								}
 									
 							}	
@@ -712,7 +713,7 @@ public class Utils {
 				
 				
 				//fixer les versions des fichier pom.xml
-				System.out.println("Fixer les versions des fichiers pom : ");
+				System.out.println("\nFixer les versions des fichiers pom : ");
 				for (String element : listefichierpom) { 
 						
 					//si contient reference pom alors modifie max version
@@ -721,6 +722,7 @@ public class Utils {
 					if (ajouter){
 						if (listeProjetPoms.indexOf(element) == -1){
 							listePomsModuleDepencies.add(element);
+							System.out.println("update pom : "+element+ " pom : "+nomPom+ "version : "+versionPom);
 						}	
 					}	
 				}
@@ -745,6 +747,7 @@ public class Utils {
 			}
 			}
 		
+		System.out.println("\nFixer les versions des fichiers plugin : ");
 		if (listePomsModuleDepencies.size() != 0) {
 			for (String pom : listePomsModuleDepencies) {
 				String versionPom= getVersionNumberPom(pom);
@@ -764,6 +767,7 @@ public class Utils {
 							if (ajouter){
 								if (listePlugin.indexOf(element) == -1){
 									listePlugin.add(element);
+									System.out.println("update plugin : "+element+ " pom : "+nomPom+ "version : "+versionPom);
 								}
 									
 							}	
@@ -921,7 +925,7 @@ public class Utils {
 		boolean exists = (new File(fileFeaturePath)).exists();
 		if (exists) { 
 			
-		System.out.println("Update Pom: "+fileFeaturePath+ " module :"+module+ " version :"+version);
+		
 
 		org.jdom.Document document = null;
 		org.jdom.Element racine;
@@ -1056,7 +1060,7 @@ public class Utils {
 		
 		boolean exists = (new File(fileFeaturePath)).exists();
 		if (exists) { 
-		System.out.println("Update plugin dependencies : "+fileFeaturePath +" version: "+ " module :"+module);
+		
 
 		org.jdom.Document document = null;
 		org.jdom.Element racine;
