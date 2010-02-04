@@ -179,8 +179,7 @@ public class FormGenerator extends AbstractGenerator {
 		return folder;
 	}
 
-	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_mm)
-			throws Exception {
+	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_mm) {
 
 		if (successfulInit == false) {
 			return null;

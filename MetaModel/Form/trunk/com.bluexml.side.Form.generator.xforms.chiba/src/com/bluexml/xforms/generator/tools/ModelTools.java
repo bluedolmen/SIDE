@@ -40,11 +40,8 @@ public class ModelTools {
 	 *            the resource
 	 * 
 	 * @return the model
-	 * 
-	 * @throws Exception
-	 *             the exception
 	 */
-	public static com.bluexml.side.common.Package getModel(Resource resource) throws Exception {
+	public static com.bluexml.side.common.Package getModel(Resource resource) {
 		if (resource.getContents().size() > 0) {
 			EObject object = resource.getContents().get(0);
 			if (object instanceof com.bluexml.side.common.Package) {
@@ -62,11 +59,8 @@ public class ModelTools {
 	 *            the resource
 	 * 
 	 * @return the form collection
-	 * 
-	 * @throws Exception
-	 *             the exception
 	 */
-	public static FormCollection getFormCollection(Resource resource) throws Exception {
+	public static FormCollection getFormCollection(Resource resource) {
 		if (resource.getContents().size() > 0)
 			return (FormCollection) resource.getContents().get(0);
 		return null;
@@ -555,6 +549,7 @@ public class ModelTools {
 	 */
 	public static void sortClasses(List<AbstractClass> abstractClasses) {
 		Collections.sort(abstractClasses, new Comparator<AbstractClass>() {
+			@SuppressWarnings("synthetic-access")
 			public int compare(AbstractClass o1, AbstractClass o2) {
 				return getLevels(o1) - getLevels(o2);
 			}
