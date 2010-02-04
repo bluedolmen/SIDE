@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side.Framework.facetMap</groupId>
   <artifactId>alfrescoConnector</artifactId>
-  <version>1.0.10</version>
+  <version>1.0.11</version>
   <name>Dashlets Alfresco share</name>
   <description>including facetmap in alfresco share</description>
   <packaging>zip</packaging>
@@ -54,14 +54,14 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.facetMap</groupId>
       <artifactId>multiMap</artifactId>
-      <version>1.0.7</version>
+      <version>1.0.8</version>
       <classifier>classes</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.bluexml.side.Framework.facetMap</groupId>
       <artifactId>multiMap</artifactId>
-      <version>1.0.7</version>
+      <version>1.0.8</version>
       <type>zip</type>
       <scope>compile</scope>
     </dependency>
