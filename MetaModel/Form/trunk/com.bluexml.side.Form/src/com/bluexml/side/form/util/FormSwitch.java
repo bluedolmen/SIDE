@@ -441,17 +441,74 @@ public class FormSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FormPackage.SEARCH_OPERATOR_CONFIGURATION: {
-				SearchOperatorConfiguration searchOperatorConfiguration = (SearchOperatorConfiguration)theEObject;
-				T result = caseSearchOperatorConfiguration(searchOperatorConfiguration);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case FormPackage.STATIC_TEXT: {
 				StaticText staticText = (StaticText)theEObject;
 				T result = caseStaticText(staticText);
 				if (result == null) result = caseFormElement(staticText);
 				if (result == null) result = caseModelElement(staticText);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.SEARCH_FORM_COLLECTION: {
+				SearchFormCollection searchFormCollection = (SearchFormCollection)theEObject;
+				T result = caseSearchFormCollection(searchFormCollection);
+				if (result == null) result = caseFormCollection(searchFormCollection);
+				if (result == null) result = casePackage(searchFormCollection);
+				if (result == null) result = caseNamedModelElement(searchFormCollection);
+				if (result == null) result = caseModelElement(searchFormCollection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.SEARCH_FIELD: {
+				SearchField searchField = (SearchField)theEObject;
+				T result = caseSearchField(searchField);
+				if (result == null) result = caseFormElement(searchField);
+				if (result == null) result = caseModelElement(searchField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.NUMERICAL_SEARCH_FIELD: {
+				NumericalSearchField numericalSearchField = (NumericalSearchField)theEObject;
+				T result = caseNumericalSearchField(numericalSearchField);
+				if (result == null) result = caseSearchField(numericalSearchField);
+				if (result == null) result = caseFormElement(numericalSearchField);
+				if (result == null) result = caseModelElement(numericalSearchField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.CHAR_SEARCH_FIELD: {
+				CharSearchField charSearchField = (CharSearchField)theEObject;
+				T result = caseCharSearchField(charSearchField);
+				if (result == null) result = caseSearchField(charSearchField);
+				if (result == null) result = caseFormElement(charSearchField);
+				if (result == null) result = caseModelElement(charSearchField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.DATE_SEARCH_FIELD: {
+				DateSearchField dateSearchField = (DateSearchField)theEObject;
+				T result = caseDateSearchField(dateSearchField);
+				if (result == null) result = caseSearchField(dateSearchField);
+				if (result == null) result = caseFormElement(dateSearchField);
+				if (result == null) result = caseModelElement(dateSearchField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.CHOICE_SEARCH_FIELD: {
+				ChoiceSearchField choiceSearchField = (ChoiceSearchField)theEObject;
+				T result = caseChoiceSearchField(choiceSearchField);
+				if (result == null) result = caseSearchField(choiceSearchField);
+				if (result == null) result = caseFormElement(choiceSearchField);
+				if (result == null) result = caseModelElement(choiceSearchField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.FILE_SEARCH_FIELD: {
+				FileSearchField fileSearchField = (FileSearchField)theEObject;
+				T result = caseFileSearchField(fileSearchField);
+				if (result == null) result = caseSearchField(fileSearchField);
+				if (result == null) result = caseFormElement(fileSearchField);
+				if (result == null) result = caseModelElement(fileSearchField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -910,21 +967,6 @@ public class FormSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Search Operator Configuration</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Search Operator Configuration</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSearchOperatorConfiguration(SearchOperatorConfiguration object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Static Text</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -936,6 +978,111 @@ public class FormSwitch<T> {
 	 * @generated
 	 */
 	public T caseStaticText(StaticText object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Search Form Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Search Form Collection</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSearchFormCollection(SearchFormCollection object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Search Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSearchField(SearchField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Numerical Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Numerical Search Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNumericalSearchField(NumericalSearchField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Char Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Char Search Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCharSearchField(CharSearchField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Date Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Date Search Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDateSearchField(DateSearchField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Choice Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Choice Search Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseChoiceSearchField(ChoiceSearchField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>File Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>File Search Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFileSearchField(FileSearchField object) {
 		return null;
 	}
 

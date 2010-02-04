@@ -26,7 +26,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.form.impl.FormClassImpl#getReal_class <em>Real class</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.FormClassImpl#isHas_content <em>Has content</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FormClassImpl#isContent_enabled <em>Content enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,24 +44,24 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 	protected Clazz real_class;
 
 	/**
-	 * The default value of the '{@link #isHas_content() <em>Has content</em>}' attribute.
+	 * The default value of the '{@link #isContent_enabled() <em>Content enabled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHas_content()
+	 * @see #isContent_enabled()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean HAS_CONTENT_EDEFAULT = false;
+	protected static final boolean CONTENT_ENABLED_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isHas_content() <em>Has content</em>}' attribute.
+	 * The cached value of the '{@link #isContent_enabled() <em>Content enabled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHas_content()
+	 * @see #isContent_enabled()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean has_content = HAS_CONTENT_EDEFAULT;
+	protected boolean content_enabled = CONTENT_ENABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -125,8 +125,8 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isHas_content() {
-		return has_content;
+	public boolean isContent_enabled() {
+		return content_enabled;
 	}
 
 	/**
@@ -134,11 +134,11 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setHas_content(boolean newHas_content) {
-		boolean oldHas_content = has_content;
-		has_content = newHas_content;
+	public void setContent_enabled(boolean newContent_enabled) {
+		boolean oldContent_enabled = content_enabled;
+		content_enabled = newContent_enabled;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_CLASS__HAS_CONTENT, oldHas_content, has_content));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_CLASS__CONTENT_ENABLED, oldContent_enabled, content_enabled));
 	}
 
 	/**
@@ -152,8 +152,8 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 			case FormPackage.FORM_CLASS__REAL_CLASS:
 				if (resolve) return getReal_class();
 				return basicGetReal_class();
-			case FormPackage.FORM_CLASS__HAS_CONTENT:
-				return isHas_content();
+			case FormPackage.FORM_CLASS__CONTENT_ENABLED:
+				return isContent_enabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -169,8 +169,8 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 			case FormPackage.FORM_CLASS__REAL_CLASS:
 				setReal_class((Clazz)newValue);
 				return;
-			case FormPackage.FORM_CLASS__HAS_CONTENT:
-				setHas_content((Boolean)newValue);
+			case FormPackage.FORM_CLASS__CONTENT_ENABLED:
+				setContent_enabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -187,8 +187,8 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 			case FormPackage.FORM_CLASS__REAL_CLASS:
 				setReal_class((Clazz)null);
 				return;
-			case FormPackage.FORM_CLASS__HAS_CONTENT:
-				setHas_content(HAS_CONTENT_EDEFAULT);
+			case FormPackage.FORM_CLASS__CONTENT_ENABLED:
+				setContent_enabled(CONTENT_ENABLED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -204,8 +204,8 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 		switch (featureID) {
 			case FormPackage.FORM_CLASS__REAL_CLASS:
 				return real_class != null;
-			case FormPackage.FORM_CLASS__HAS_CONTENT:
-				return has_content != HAS_CONTENT_EDEFAULT;
+			case FormPackage.FORM_CLASS__CONTENT_ENABLED:
+				return content_enabled != CONTENT_ENABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -252,8 +252,8 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (Has_content: ");
-		result.append(has_content);
+		result.append(" (content_enabled: ");
+		result.append(content_enabled);
 		result.append(')');
 		return result.toString();
 	}

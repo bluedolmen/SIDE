@@ -264,10 +264,22 @@ public class FormValidator extends EObjectValidator {
 				return validateSearchForm((SearchForm)value, diagnostics, context);
 			case FormPackage.NUMERICAL_FIELD:
 				return validateNumericalField((NumericalField)value, diagnostics, context);
-			case FormPackage.SEARCH_OPERATOR_CONFIGURATION:
-				return validateSearchOperatorConfiguration((SearchOperatorConfiguration)value, diagnostics, context);
 			case FormPackage.STATIC_TEXT:
 				return validateStaticText((StaticText)value, diagnostics, context);
+			case FormPackage.SEARCH_FORM_COLLECTION:
+				return validateSearchFormCollection((SearchFormCollection)value, diagnostics, context);
+			case FormPackage.SEARCH_FIELD:
+				return validateSearchField((SearchField)value, diagnostics, context);
+			case FormPackage.NUMERICAL_SEARCH_FIELD:
+				return validateNumericalSearchField((NumericalSearchField)value, diagnostics, context);
+			case FormPackage.CHAR_SEARCH_FIELD:
+				return validateCharSearchField((CharSearchField)value, diagnostics, context);
+			case FormPackage.DATE_SEARCH_FIELD:
+				return validateDateSearchField((DateSearchField)value, diagnostics, context);
+			case FormPackage.CHOICE_SEARCH_FIELD:
+				return validateChoiceSearchField((ChoiceSearchField)value, diagnostics, context);
+			case FormPackage.FILE_SEARCH_FIELD:
+				return validateFileSearchField((FileSearchField)value, diagnostics, context);
 			case FormPackage.FORM_GROUP_PRESENTATION_TYPE:
 				return validateFormGroupPresentationType((FormGroupPresentationType)value, diagnostics, context);
 			case FormPackage.TEXT_WIDGET_TYPE:
@@ -276,8 +288,6 @@ public class FormValidator extends EObjectValidator {
 				return validateChoiceWidgetType((ChoiceWidgetType)value, diagnostics, context);
 			case FormPackage.MODEL_CHOICE_WIDGET_TYPE:
 				return validateModelChoiceWidgetType((ModelChoiceWidgetType)value, diagnostics, context);
-			case FormPackage.FIELD_SEARCH_OPERATORS:
-				return validateFieldSearchOperators((FieldSearchOperators)value, diagnostics, context);
 			case FormPackage.CHAR_FIELD_SEARCH_OPERATORS:
 				return validateCharFieldSearchOperators((CharFieldSearchOperators)value, diagnostics, context);
 			case FormPackage.NUMERICAL_FIELD_SEARCH_OPERATORS:
@@ -288,6 +298,8 @@ public class FormValidator extends EObjectValidator {
 				return validateFileFieldSearchOperators((FileFieldSearchOperators)value, diagnostics, context);
 			case FormPackage.COMBINATION_OPERATORS:
 				return validateCombinationOperators((CombinationOperators)value, diagnostics, context);
+			case FormPackage.DATE_FIELD_SEARCH_OPERATORS:
+				return validateDateFieldSearchOperators((DateFieldSearchOperators)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -1045,15 +1057,6 @@ public class FormValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSearchOperatorConfiguration(SearchOperatorConfiguration searchOperatorConfiguration, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(searchOperatorConfiguration, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateStaticText(StaticText staticText, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = validate_EveryMultiplicityConforms(staticText, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(staticText, diagnostics, context);
@@ -1063,6 +1066,117 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(staticText, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(staticText, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(staticText, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSearchFormCollection(SearchFormCollection searchFormCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(searchFormCollection, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSearchField(SearchField searchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(searchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(searchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(searchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(searchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(searchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(searchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(searchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(searchField, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNumericalSearchField(NumericalSearchField numericalSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(numericalSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(numericalSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(numericalSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(numericalSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(numericalSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(numericalSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(numericalSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(numericalSearchField, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCharSearchField(CharSearchField charSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(charSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(charSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(charSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(charSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(charSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(charSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(charSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(charSearchField, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDateSearchField(DateSearchField dateSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(dateSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(dateSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(dateSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(dateSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(dateSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(dateSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(dateSearchField, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateChoiceSearchField(ChoiceSearchField choiceSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(choiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(choiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(choiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(choiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(choiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(choiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(choiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(choiceSearchField, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFileSearchField(FileSearchField fileSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(fileSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(fileSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(fileSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(fileSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(fileSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fileSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(fileSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(fileSearchField, diagnostics, context);
 		return result;
 	}
 
@@ -1268,15 +1382,6 @@ public class FormValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateFieldSearchOperators(FieldSearchOperators fieldSearchOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateCharFieldSearchOperators(CharFieldSearchOperators charFieldSearchOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
@@ -1314,6 +1419,15 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCombinationOperators(CombinationOperators combinationOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDateFieldSearchOperators(DateFieldSearchOperators dateFieldSearchOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

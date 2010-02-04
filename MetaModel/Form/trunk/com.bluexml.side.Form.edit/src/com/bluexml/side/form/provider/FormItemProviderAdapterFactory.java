@@ -674,29 +674,6 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.SearchOperatorConfiguration} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SearchOperatorConfigurationItemProvider searchOperatorConfigurationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.form.SearchOperatorConfiguration}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSearchOperatorConfigurationAdapter() {
-		if (searchOperatorConfigurationItemProvider == null) {
-			searchOperatorConfigurationItemProvider = new SearchOperatorConfigurationItemProvider(this);
-		}
-
-		return searchOperatorConfigurationItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.StaticText} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -717,6 +694,167 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 		}
 
 		return staticTextItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.SearchFormCollection} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SearchFormCollectionItemProvider searchFormCollectionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.SearchFormCollection}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSearchFormCollectionAdapter() {
+		if (searchFormCollectionItemProvider == null) {
+			searchFormCollectionItemProvider = new SearchFormCollectionItemProvider(this);
+		}
+
+		return searchFormCollectionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.SearchField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SearchFieldItemProvider searchFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.SearchField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSearchFieldAdapter() {
+		if (searchFieldItemProvider == null) {
+			searchFieldItemProvider = new SearchFieldItemProvider(this);
+		}
+
+		return searchFieldItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.NumericalSearchField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NumericalSearchFieldItemProvider numericalSearchFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.NumericalSearchField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNumericalSearchFieldAdapter() {
+		if (numericalSearchFieldItemProvider == null) {
+			numericalSearchFieldItemProvider = new NumericalSearchFieldItemProvider(this);
+		}
+
+		return numericalSearchFieldItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.CharSearchField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CharSearchFieldItemProvider charSearchFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.CharSearchField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCharSearchFieldAdapter() {
+		if (charSearchFieldItemProvider == null) {
+			charSearchFieldItemProvider = new CharSearchFieldItemProvider(this);
+		}
+
+		return charSearchFieldItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.DateSearchField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DateSearchFieldItemProvider dateSearchFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.DateSearchField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDateSearchFieldAdapter() {
+		if (dateSearchFieldItemProvider == null) {
+			dateSearchFieldItemProvider = new DateSearchFieldItemProvider(this);
+		}
+
+		return dateSearchFieldItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.ChoiceSearchField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ChoiceSearchFieldItemProvider choiceSearchFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.ChoiceSearchField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createChoiceSearchFieldAdapter() {
+		if (choiceSearchFieldItemProvider == null) {
+			choiceSearchFieldItemProvider = new ChoiceSearchFieldItemProvider(this);
+		}
+
+		return choiceSearchFieldItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.FileSearchField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FileSearchFieldItemProvider fileSearchFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.FileSearchField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFileSearchFieldAdapter() {
+		if (fileSearchFieldItemProvider == null) {
+			fileSearchFieldItemProvider = new FileSearchFieldItemProvider(this);
+		}
+
+		return fileSearchFieldItemProvider;
 	}
 
 	/**
@@ -916,8 +1054,14 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 		if (textFieldItemProvider != null) textFieldItemProvider.dispose();
 		if (searchFormItemProvider != null) searchFormItemProvider.dispose();
 		if (numericalFieldItemProvider != null) numericalFieldItemProvider.dispose();
-		if (searchOperatorConfigurationItemProvider != null) searchOperatorConfigurationItemProvider.dispose();
 		if (staticTextItemProvider != null) staticTextItemProvider.dispose();
+		if (searchFormCollectionItemProvider != null) searchFormCollectionItemProvider.dispose();
+		if (searchFieldItemProvider != null) searchFieldItemProvider.dispose();
+		if (numericalSearchFieldItemProvider != null) numericalSearchFieldItemProvider.dispose();
+		if (charSearchFieldItemProvider != null) charSearchFieldItemProvider.dispose();
+		if (dateSearchFieldItemProvider != null) dateSearchFieldItemProvider.dispose();
+		if (choiceSearchFieldItemProvider != null) choiceSearchFieldItemProvider.dispose();
+		if (fileSearchFieldItemProvider != null) fileSearchFieldItemProvider.dispose();
 	}
 
 }

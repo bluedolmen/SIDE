@@ -27,9 +27,10 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  * <ul>
  *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#isHidden <em>Hidden</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getHelp_text <em>Help text</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getRef <em>Ref</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#isHidden <em>Hidden</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getStyle <em>Style</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,6 +78,26 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 	protected String id = ID_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hidden = HIDDEN_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getHelp_text() <em>Help text</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,7 +105,7 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String HELP_TEXT_EDEFAULT = null;
+	protected static final String HELP_TEXT_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getHelp_text() <em>Help text</em>}' attribute.
@@ -107,24 +128,24 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 	protected ModelElement ref;
 
 	/**
-	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * The default value of the '{@link #getStyle() <em>Style</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHidden()
+	 * @see #getStyle()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean HIDDEN_EDEFAULT = false;
+	protected static final String STYLE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * The cached value of the '{@link #getStyle() <em>Style</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHidden()
+	 * @see #getStyle()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean hidden = HIDDEN_EDEFAULT;
+	protected String style = STYLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -251,6 +272,27 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getStyle() {
+		return style;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStyle(String newStyle) {
+		String oldStyle = style;
+		style = newStyle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_ELEMENT__STYLE, oldStyle, style));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isHidden() {
 		return hidden;
 	}
@@ -279,13 +321,15 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 				return getLabel();
 			case FormPackage.FORM_ELEMENT__ID:
 				return getId();
+			case FormPackage.FORM_ELEMENT__HIDDEN:
+				return isHidden();
 			case FormPackage.FORM_ELEMENT__HELP_TEXT:
 				return getHelp_text();
 			case FormPackage.FORM_ELEMENT__REF:
 				if (resolve) return getRef();
 				return basicGetRef();
-			case FormPackage.FORM_ELEMENT__HIDDEN:
-				return isHidden();
+			case FormPackage.FORM_ELEMENT__STYLE:
+				return getStyle();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -304,14 +348,17 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 			case FormPackage.FORM_ELEMENT__ID:
 				setId((String)newValue);
 				return;
+			case FormPackage.FORM_ELEMENT__HIDDEN:
+				setHidden((Boolean)newValue);
+				return;
 			case FormPackage.FORM_ELEMENT__HELP_TEXT:
 				setHelp_text((String)newValue);
 				return;
 			case FormPackage.FORM_ELEMENT__REF:
 				setRef((ModelElement)newValue);
 				return;
-			case FormPackage.FORM_ELEMENT__HIDDEN:
-				setHidden((Boolean)newValue);
+			case FormPackage.FORM_ELEMENT__STYLE:
+				setStyle((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -331,14 +378,17 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 			case FormPackage.FORM_ELEMENT__ID:
 				setId(ID_EDEFAULT);
 				return;
+			case FormPackage.FORM_ELEMENT__HIDDEN:
+				setHidden(HIDDEN_EDEFAULT);
+				return;
 			case FormPackage.FORM_ELEMENT__HELP_TEXT:
 				setHelp_text(HELP_TEXT_EDEFAULT);
 				return;
 			case FormPackage.FORM_ELEMENT__REF:
 				setRef((ModelElement)null);
 				return;
-			case FormPackage.FORM_ELEMENT__HIDDEN:
-				setHidden(HIDDEN_EDEFAULT);
+			case FormPackage.FORM_ELEMENT__STYLE:
+				setStyle(STYLE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -356,12 +406,14 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 			case FormPackage.FORM_ELEMENT__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case FormPackage.FORM_ELEMENT__HIDDEN:
+				return hidden != HIDDEN_EDEFAULT;
 			case FormPackage.FORM_ELEMENT__HELP_TEXT:
 				return HELP_TEXT_EDEFAULT == null ? help_text != null : !HELP_TEXT_EDEFAULT.equals(help_text);
 			case FormPackage.FORM_ELEMENT__REF:
 				return ref != null;
-			case FormPackage.FORM_ELEMENT__HIDDEN:
-				return hidden != HIDDEN_EDEFAULT;
+			case FormPackage.FORM_ELEMENT__STYLE:
+				return STYLE_EDEFAULT == null ? style != null : !STYLE_EDEFAULT.equals(style);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -380,10 +432,12 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 		result.append(label);
 		result.append(", id: ");
 		result.append(id);
-		result.append(", help_text: ");
-		result.append(help_text);
 		result.append(", hidden: ");
 		result.append(hidden);
+		result.append(", help_text: ");
+		result.append(help_text);
+		result.append(", style: ");
+		result.append(style);
 		result.append(')');
 		return result.toString();
 	}

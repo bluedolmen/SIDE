@@ -27,11 +27,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.form.Field#isMandatory <em>Mandatory</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getError_messages <em>Error messages</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getInitial <em>Initial</em>}</li>
- *   <li>{@link com.bluexml.side.form.Field#isDisabled <em>Disabled</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getField_size <em>Field size</em>}</li>
- *   <li>{@link com.bluexml.side.form.Field#getStyle <em>Style</em>}</li>
- *   <li>{@link com.bluexml.side.form.Field#getSearchOperatorConfiguration <em>Search Operator Configuration</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getMockup <em>Mockup</em>}</li>
+ *   <li>{@link com.bluexml.side.form.Field#isDisabled <em>Disabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -146,35 +144,6 @@ public interface Field extends FormElement {
 	void setInitial(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Disabled</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Definition: The 'disabled' attribute protects the field from being modified if true. If false (default), it can be modified.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Disabled</em>' attribute.
-	 * @see #setDisabled(boolean)
-	 * @see com.bluexml.side.form.FormPackage#getField_Disabled()
-	 * @model
-	 * @generated
-	 */
-	boolean isDisabled();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.Field#isDisabled <em>Disabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Disabled</em>' attribute.
-	 * @see #isDisabled()
-	 * @generated
-	 */
-	void setDisabled(boolean value);
-
-	/**
 	 * Returns the value of the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -206,60 +175,33 @@ public interface Field extends FormElement {
 	void setField_size(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Style</b></em>' attribute.
+	 * Returns the value of the '<em><b>Disabled</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Style</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Disabled</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: a specific style code associated to the field which may be defined in style file like css file to be applied on the field input at runtime.
-	 * Constraint/Limit: the semantic of the style code is not defined in the model but is known by the targeted form engine on which will be deployed the generated forms.  In the case of XForms generation on Alfresco, this style code refers a CSS class.
+	 * Definition: The 'disabled' attribute protects the field from being modified if true. If false (default), it can be modified.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Style</em>' attribute.
-	 * @see #setStyle(String)
-	 * @see com.bluexml.side.form.FormPackage#getField_Style()
+	 * @return the value of the '<em>Disabled</em>' attribute.
+	 * @see #setDisabled(boolean)
+	 * @see com.bluexml.side.form.FormPackage#getField_Disabled()
 	 * @model
 	 * @generated
 	 */
-	String getStyle();
+	boolean isDisabled();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.Field#getStyle <em>Style</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.form.Field#isDisabled <em>Disabled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Style</em>' attribute.
-	 * @see #getStyle()
+	 * @param value the new value of the '<em>Disabled</em>' attribute.
+	 * @see #isDisabled()
 	 * @generated
 	 */
-	void setStyle(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Search Operator Configuration</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Search Operator Configuration</em>' containment reference.
-	 * @see #setSearchOperatorConfiguration(SearchOperatorConfiguration)
-	 * @see com.bluexml.side.form.FormPackage#getField_SearchOperatorConfiguration()
-	 * @model containment="true"
-	 * @generated
-	 */
-	SearchOperatorConfiguration getSearchOperatorConfiguration();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.Field#getSearchOperatorConfiguration <em>Search Operator Configuration</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Search Operator Configuration</em>' containment reference.
-	 * @see #getSearchOperatorConfiguration()
-	 * @generated
-	 */
-	void setSearchOperatorConfiguration(SearchOperatorConfiguration value);
+	void setDisabled(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Mockup</b></em>' attribute list.

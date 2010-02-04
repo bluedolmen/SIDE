@@ -40,11 +40,9 @@ import java.util.Collection;
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#isMandatory <em>Mandatory</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getError_messages <em>Error messages</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getInitial <em>Initial</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.FieldImpl#isDisabled <em>Disabled</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getField_size <em>Field size</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getStyle <em>Style</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getSearchOperatorConfiguration <em>Search Operator Configuration</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getMockup <em>Mockup</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FieldImpl#isDisabled <em>Disabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,26 +100,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	protected String initial = INITIAL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isDisabled() <em>Disabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isDisabled()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean DISABLED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isDisabled() <em>Disabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isDisabled()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean disabled = DISABLED_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getField_size() <em>Field size</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -142,36 +120,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	protected int field_size = FIELD_SIZE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getStyle() <em>Style</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStyle()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String STYLE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getStyle() <em>Style</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStyle()
-	 * @generated
-	 * @ordered
-	 */
-	protected String style = STYLE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getSearchOperatorConfiguration() <em>Search Operator Configuration</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSearchOperatorConfiguration()
-	 * @generated
-	 * @ordered
-	 */
-	protected SearchOperatorConfiguration searchOperatorConfiguration;
-
-	/**
 	 * The cached value of the '{@link #getMockup() <em>Mockup</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -180,6 +128,26 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * @ordered
 	 */
 	protected EList<String> mockup;
+
+	/**
+	 * The default value of the '{@link #isDisabled() <em>Disabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDisabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DISABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDisabled() <em>Disabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDisabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean disabled = DISABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -268,27 +236,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isDisabled() {
-		return disabled;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDisabled(boolean newDisabled) {
-		boolean oldDisabled = disabled;
-		disabled = newDisabled;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__DISABLED, oldDisabled, disabled));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public int getField_size() {
 		return field_size;
 	}
@@ -310,8 +257,8 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getStyle() {
-		return style;
+	public boolean isDisabled() {
+		return disabled;
 	}
 
 	/**
@@ -319,54 +266,11 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStyle(String newStyle) {
-		String oldStyle = style;
-		style = newStyle;
+	public void setDisabled(boolean newDisabled) {
+		boolean oldDisabled = disabled;
+		disabled = newDisabled;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__STYLE, oldStyle, style));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SearchOperatorConfiguration getSearchOperatorConfiguration() {
-		return searchOperatorConfiguration;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetSearchOperatorConfiguration(SearchOperatorConfiguration newSearchOperatorConfiguration, NotificationChain msgs) {
-		SearchOperatorConfiguration oldSearchOperatorConfiguration = searchOperatorConfiguration;
-		searchOperatorConfiguration = newSearchOperatorConfiguration;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION, oldSearchOperatorConfiguration, newSearchOperatorConfiguration);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSearchOperatorConfiguration(SearchOperatorConfiguration newSearchOperatorConfiguration) {
-		if (newSearchOperatorConfiguration != searchOperatorConfiguration) {
-			NotificationChain msgs = null;
-			if (searchOperatorConfiguration != null)
-				msgs = ((InternalEObject)searchOperatorConfiguration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION, null, msgs);
-			if (newSearchOperatorConfiguration != null)
-				msgs = ((InternalEObject)newSearchOperatorConfiguration).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION, null, msgs);
-			msgs = basicSetSearchOperatorConfiguration(newSearchOperatorConfiguration, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION, newSearchOperatorConfiguration, newSearchOperatorConfiguration));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__DISABLED, oldDisabled, disabled));
 	}
 
 	/**
@@ -422,20 +326,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
-				return basicSetSearchOperatorConfiguration(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.FIELD__MANDATORY:
@@ -444,16 +334,12 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 				return getError_messages();
 			case FormPackage.FIELD__INITIAL:
 				return getInitial();
-			case FormPackage.FIELD__DISABLED:
-				return isDisabled();
 			case FormPackage.FIELD__FIELD_SIZE:
 				return getField_size();
-			case FormPackage.FIELD__STYLE:
-				return getStyle();
-			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
-				return getSearchOperatorConfiguration();
 			case FormPackage.FIELD__MOCKUP:
 				return getMockup();
+			case FormPackage.FIELD__DISABLED:
+				return isDisabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -476,21 +362,15 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case FormPackage.FIELD__INITIAL:
 				setInitial((String)newValue);
 				return;
-			case FormPackage.FIELD__DISABLED:
-				setDisabled((Boolean)newValue);
-				return;
 			case FormPackage.FIELD__FIELD_SIZE:
 				setField_size((Integer)newValue);
-				return;
-			case FormPackage.FIELD__STYLE:
-				setStyle((String)newValue);
-				return;
-			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
-				setSearchOperatorConfiguration((SearchOperatorConfiguration)newValue);
 				return;
 			case FormPackage.FIELD__MOCKUP:
 				getMockup().clear();
 				getMockup().addAll((Collection<? extends String>)newValue);
+				return;
+			case FormPackage.FIELD__DISABLED:
+				setDisabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -513,20 +393,14 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case FormPackage.FIELD__INITIAL:
 				setInitial(INITIAL_EDEFAULT);
 				return;
-			case FormPackage.FIELD__DISABLED:
-				setDisabled(DISABLED_EDEFAULT);
-				return;
 			case FormPackage.FIELD__FIELD_SIZE:
 				setField_size(FIELD_SIZE_EDEFAULT);
 				return;
-			case FormPackage.FIELD__STYLE:
-				setStyle(STYLE_EDEFAULT);
-				return;
-			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
-				setSearchOperatorConfiguration((SearchOperatorConfiguration)null);
-				return;
 			case FormPackage.FIELD__MOCKUP:
 				getMockup().clear();
+				return;
+			case FormPackage.FIELD__DISABLED:
+				setDisabled(DISABLED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -546,16 +420,12 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 				return error_messages != null;
 			case FormPackage.FIELD__INITIAL:
 				return INITIAL_EDEFAULT == null ? initial != null : !INITIAL_EDEFAULT.equals(initial);
-			case FormPackage.FIELD__DISABLED:
-				return disabled != DISABLED_EDEFAULT;
 			case FormPackage.FIELD__FIELD_SIZE:
 				return field_size != FIELD_SIZE_EDEFAULT;
-			case FormPackage.FIELD__STYLE:
-				return STYLE_EDEFAULT == null ? style != null : !STYLE_EDEFAULT.equals(style);
-			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
-				return searchOperatorConfiguration != null;
 			case FormPackage.FIELD__MOCKUP:
 				return mockup != null && !mockup.isEmpty();
+			case FormPackage.FIELD__DISABLED:
+				return disabled != DISABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -576,14 +446,12 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		result.append(error_messages);
 		result.append(", initial: ");
 		result.append(initial);
-		result.append(", disabled: ");
-		result.append(disabled);
 		result.append(", field_size: ");
 		result.append(field_size);
-		result.append(", style: ");
-		result.append(style);
 		result.append(", mockup: ");
 		result.append(mockup);
+		result.append(", disabled: ");
+		result.append(disabled);
 		result.append(')');
 		return result.toString();
 	}

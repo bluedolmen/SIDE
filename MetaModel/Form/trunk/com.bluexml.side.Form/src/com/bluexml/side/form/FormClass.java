@@ -28,7 +28,7 @@ package com.bluexml.side.form;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.form.FormClass#isHas_content <em>Has content</em>}</li>
+ *   <li>{@link com.bluexml.side.form.FormClass#isContent_enabled <em>Content enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,28 +39,28 @@ package com.bluexml.side.form;
 public interface FormClass extends FormContainer, ClassReference {
 
 	/**
-	 * Returns the value of the '<em><b>Has content</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * Returns the value of the '<em><b>Content enabled</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Content enabled</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * This option tells whether the data form may have a content. If true, a content upload field (that does not appear in the modeler and has no file preview) will be automatically attached to the form.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Has content</em>' attribute.
-	 * @see #setHas_content(boolean)
-	 * @see com.bluexml.side.form.FormPackage#getFormClass_Has_content()
-	 * @model default="false"
+	 * @return the value of the '<em>Content enabled</em>' attribute.
+	 * @see #setContent_enabled(boolean)
+	 * @see com.bluexml.side.form.FormPackage#getFormClass_Content_enabled()
+	 * @model
 	 * @generated
 	 */
-	boolean isHas_content();
+	boolean isContent_enabled();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.FormClass#isHas_content <em>Has content</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.form.FormClass#isContent_enabled <em>Content enabled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Has content</em>' attribute.
-	 * @see #isHas_content()
+	 * @param value the new value of the '<em>Content enabled</em>' attribute.
+	 * @see #isContent_enabled()
 	 * @generated
 	 */
-	void setHas_content(boolean value);
+	void setContent_enabled(boolean value);
 } // FormClass

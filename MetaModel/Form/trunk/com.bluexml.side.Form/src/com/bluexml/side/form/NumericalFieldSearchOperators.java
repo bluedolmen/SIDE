@@ -50,7 +50,23 @@ public enum NumericalFieldSearchOperators implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ABOVE(2, "above", "above");
+	ABOVE(2, "above", "above"), /**
+	 * The '<em><b>Exactly</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #EXACTLY_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	EXACTLY(3, "exactly", "exactly"), /**
+	 * The '<em><b>Empty</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #EMPTY_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	EMPTY(4, "empty", "empty");
 
 	/**
 	 * The '<em><b>Between</b></em>' literal value.
@@ -98,6 +114,36 @@ public enum NumericalFieldSearchOperators implements Enumerator {
 	public static final int ABOVE_VALUE = 2;
 
 	/**
+	 * The '<em><b>Exactly</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Exactly</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #EXACTLY
+	 * @model name="exactly"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EXACTLY_VALUE = 3;
+
+	/**
+	 * The '<em><b>Empty</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Empty</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #EMPTY
+	 * @model name="empty"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EMPTY_VALUE = 4;
+
+	/**
 	 * An array of all the '<em><b>Numerical Field Search Operators</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,6 +154,8 @@ public enum NumericalFieldSearchOperators implements Enumerator {
 			BETWEEN,
 			BELOW,
 			ABOVE,
+			EXACTLY,
+			EMPTY,
 		};
 
 	/**
@@ -161,6 +209,8 @@ public enum NumericalFieldSearchOperators implements Enumerator {
 			case BETWEEN_VALUE: return BETWEEN;
 			case BELOW_VALUE: return BELOW;
 			case ABOVE_VALUE: return ABOVE;
+			case EXACTLY_VALUE: return EXACTLY;
+			case EMPTY_VALUE: return EMPTY;
 		}
 		return null;
 	}

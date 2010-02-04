@@ -62,7 +62,7 @@ public class FormClassItemProvider
 			super.getPropertyDescriptors(object);
 
 			addReal_classPropertyDescriptor(object);
-			addHas_contentPropertyDescriptor(object);
+			addContent_enabledPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,19 +90,19 @@ public class FormClassItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Has content feature.
+	 * This adds a property descriptor for the Content enabled feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addHas_contentPropertyDescriptor(Object object) {
+	protected void addContent_enabledPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FormClass_Has_content_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FormClass_Has_content_feature", "_UI_FormClass_type"),
-				 FormPackage.Literals.FORM_CLASS__HAS_CONTENT,
+				 getString("_UI_FormClass_content_enabled_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FormClass_content_enabled_feature", "_UI_FormClass_type"),
+				 FormPackage.Literals.FORM_CLASS__CONTENT_ENABLED,
 				 true,
 				 false,
 				 false,
@@ -153,7 +153,7 @@ public class FormClassItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(FormClass.class)) {
-			case FormPackage.FORM_CLASS__HAS_CONTENT:
+			case FormPackage.FORM_CLASS__CONTENT_ENABLED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

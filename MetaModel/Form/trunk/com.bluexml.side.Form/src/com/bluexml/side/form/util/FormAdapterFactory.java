@@ -241,12 +241,36 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 				return createNumericalFieldAdapter();
 			}
 			@Override
-			public Adapter caseSearchOperatorConfiguration(SearchOperatorConfiguration object) {
-				return createSearchOperatorConfigurationAdapter();
-			}
-			@Override
 			public Adapter caseStaticText(StaticText object) {
 				return createStaticTextAdapter();
+			}
+			@Override
+			public Adapter caseSearchFormCollection(SearchFormCollection object) {
+				return createSearchFormCollectionAdapter();
+			}
+			@Override
+			public Adapter caseSearchField(SearchField object) {
+				return createSearchFieldAdapter();
+			}
+			@Override
+			public Adapter caseNumericalSearchField(NumericalSearchField object) {
+				return createNumericalSearchFieldAdapter();
+			}
+			@Override
+			public Adapter caseCharSearchField(CharSearchField object) {
+				return createCharSearchFieldAdapter();
+			}
+			@Override
+			public Adapter caseDateSearchField(DateSearchField object) {
+				return createDateSearchFieldAdapter();
+			}
+			@Override
+			public Adapter caseChoiceSearchField(ChoiceSearchField object) {
+				return createChoiceSearchFieldAdapter();
+			}
+			@Override
+			public Adapter caseFileSearchField(FileSearchField object) {
+				return createFileSearchFieldAdapter();
 			}
 			@Override
 			public Adapter caseModelElement(ModelElement object) {
@@ -701,20 +725,6 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.SearchOperatorConfiguration <em>Search Operator Configuration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.form.SearchOperatorConfiguration
-	 * @generated
-	 */
-	public Adapter createSearchOperatorConfigurationAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.StaticText <em>Static Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -725,6 +735,104 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStaticTextAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.SearchFormCollection <em>Search Form Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.SearchFormCollection
+	 * @generated
+	 */
+	public Adapter createSearchFormCollectionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.SearchField <em>Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.SearchField
+	 * @generated
+	 */
+	public Adapter createSearchFieldAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.NumericalSearchField <em>Numerical Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.NumericalSearchField
+	 * @generated
+	 */
+	public Adapter createNumericalSearchFieldAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.CharSearchField <em>Char Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.CharSearchField
+	 * @generated
+	 */
+	public Adapter createCharSearchFieldAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.DateSearchField <em>Date Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.DateSearchField
+	 * @generated
+	 */
+	public Adapter createDateSearchFieldAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.ChoiceSearchField <em>Choice Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.ChoiceSearchField
+	 * @generated
+	 */
+	public Adapter createChoiceSearchFieldAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FileSearchField <em>File Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.FileSearchField
+	 * @generated
+	 */
+	public Adapter createFileSearchFieldAdapter() {
 		return null;
 	}
 

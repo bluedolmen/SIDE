@@ -261,15 +261,6 @@ public interface FormFactory extends EFactory {
 	NumericalField createNumericalField();
 
 	/**
-	 * Returns a new object of class '<em>Search Operator Configuration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Search Operator Configuration</em>'.
-	 * @generated
-	 */
-	SearchOperatorConfiguration createSearchOperatorConfiguration();
-
-	/**
 	 * Returns a new object of class '<em>Static Text</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -277,6 +268,69 @@ public interface FormFactory extends EFactory {
 	 * @generated
 	 */
 	StaticText createStaticText();
+
+	/**
+	 * Returns a new object of class '<em>Search Form Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Search Form Collection</em>'.
+	 * @generated
+	 */
+	SearchFormCollection createSearchFormCollection();
+
+	/**
+	 * Returns a new object of class '<em>Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Search Field</em>'.
+	 * @generated
+	 */
+	SearchField createSearchField();
+
+	/**
+	 * Returns a new object of class '<em>Numerical Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Numerical Search Field</em>'.
+	 * @generated
+	 */
+	NumericalSearchField createNumericalSearchField();
+
+	/**
+	 * Returns a new object of class '<em>Char Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Char Search Field</em>'.
+	 * @generated
+	 */
+	CharSearchField createCharSearchField();
+
+	/**
+	 * Returns a new object of class '<em>Date Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Date Search Field</em>'.
+	 * @generated
+	 */
+	DateSearchField createDateSearchField();
+
+	/**
+	 * Returns a new object of class '<em>Choice Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Choice Search Field</em>'.
+	 * @generated
+	 */
+	ChoiceSearchField createChoiceSearchField();
+
+	/**
+	 * Returns a new object of class '<em>File Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>File Search Field</em>'.
+	 * @generated
+	 */
+	FileSearchField createFileSearchField();
 
 	/**
 	 * Returns a new object of class '<em>Workflow Form Collection</em>'.

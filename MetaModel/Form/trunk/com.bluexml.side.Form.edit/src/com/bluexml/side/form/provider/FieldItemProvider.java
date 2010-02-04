@@ -66,10 +66,9 @@ public class FieldItemProvider
 			addMandatoryPropertyDescriptor(object);
 			addError_messagesPropertyDescriptor(object);
 			addInitialPropertyDescriptor(object);
-			addDisabledPropertyDescriptor(object);
 			addField_sizePropertyDescriptor(object);
-			addStylePropertyDescriptor(object);
 			addMockupPropertyDescriptor(object);
+			addDisabledPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -141,28 +140,6 @@ public class FieldItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Disabled feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDisabledPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Field_disabled_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_disabled_feature", "_UI_Field_type"),
-				 FormPackage.Literals.FIELD__DISABLED,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Field size feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -185,23 +162,23 @@ public class FieldItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Style feature.
+	 * This adds a property descriptor for the Disabled feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addStylePropertyDescriptor(Object object) {
+	protected void addDisabledPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Field_style_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_style_feature", "_UI_Field_type"),
-				 FormPackage.Literals.FIELD__STYLE,
+				 getString("_UI_Field_disabled_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_disabled_feature", "_UI_Field_type"),
+				 FormPackage.Literals.FIELD__DISABLED,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -226,36 +203,6 @@ public class FieldItemProvider
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
-	}
-
-	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(FormPackage.Literals.FIELD__SEARCH_OPERATOR_CONFIGURATION);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -286,14 +233,10 @@ public class FieldItemProvider
 			case FormPackage.FIELD__MANDATORY:
 			case FormPackage.FIELD__ERROR_MESSAGES:
 			case FormPackage.FIELD__INITIAL:
-			case FormPackage.FIELD__DISABLED:
 			case FormPackage.FIELD__FIELD_SIZE:
-			case FormPackage.FIELD__STYLE:
 			case FormPackage.FIELD__MOCKUP:
+			case FormPackage.FIELD__DISABLED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -309,10 +252,5 @@ public class FieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(FormPackage.Literals.FIELD__SEARCH_OPERATOR_CONFIGURATION,
-				 FormFactory.eINSTANCE.createSearchOperatorConfiguration()));
 	}
 }

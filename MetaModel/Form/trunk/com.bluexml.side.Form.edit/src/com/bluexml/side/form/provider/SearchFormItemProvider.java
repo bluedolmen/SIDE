@@ -63,6 +63,7 @@ public class SearchFormItemProvider
 
 			addDataFormPropertyDescriptor(object);
 			addCombinationOperatorPropertyDescriptor(object);
+			addEReference0PropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -107,6 +108,28 @@ public class SearchFormItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the EReference0 feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEReference0PropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SearchForm_EReference0_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SearchForm_EReference0_feature", "_UI_SearchForm_type"),
+				 FormPackage.Literals.SEARCH_FORM__EREFERENCE0,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

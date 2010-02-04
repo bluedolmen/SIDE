@@ -26,9 +26,10 @@ import com.bluexml.side.clazz.ClassModelElement;
  * <ul>
  *   <li>{@link com.bluexml.side.form.FormElement#getLabel <em>Label</em>}</li>
  *   <li>{@link com.bluexml.side.form.FormElement#getId <em>Id</em>}</li>
+ *   <li>{@link com.bluexml.side.form.FormElement#isHidden <em>Hidden</em>}</li>
  *   <li>{@link com.bluexml.side.form.FormElement#getHelp_text <em>Help text</em>}</li>
  *   <li>{@link com.bluexml.side.form.FormElement#getRef <em>Ref</em>}</li>
- *   <li>{@link com.bluexml.side.form.FormElement#isHidden <em>Hidden</em>}</li>
+ *   <li>{@link com.bluexml.side.form.FormElement#getStyle <em>Style</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,6 +103,7 @@ public interface FormElement extends ModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Help text</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Help text</em>' attribute isn't clear,
@@ -118,7 +120,7 @@ public interface FormElement extends ModelElement {
 	 * @return the value of the '<em>Help text</em>' attribute.
 	 * @see #setHelp_text(String)
 	 * @see com.bluexml.side.form.FormPackage#getFormElement_Help_text()
-	 * @model
+	 * @model default=""
 	 * @generated
 	 */
 	String getHelp_text();
@@ -158,6 +160,32 @@ public interface FormElement extends ModelElement {
 	 * @generated
 	 */
 	void setRef(ModelElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: a specific style code associated to the field which may be defined in style file like css file to be applied on the field input at runtime.
+	 * Constraint/Limit: the semantic of the style code is not defined in the model but is known by the targeted form engine on which will be deployed the generated forms.  In the case of XForms generation on Alfresco, this style code refers a CSS class.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Style</em>' attribute.
+	 * @see #setStyle(String)
+	 * @see com.bluexml.side.form.FormPackage#getFormElement_Style()
+	 * @model
+	 * @generated
+	 */
+	String getStyle();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.form.FormElement#getStyle <em>Style</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Style</em>' attribute.
+	 * @see #getStyle()
+	 * @generated
+	 */
+	void setStyle(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Hidden</b></em>' attribute.

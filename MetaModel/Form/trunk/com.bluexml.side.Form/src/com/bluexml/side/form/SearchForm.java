@@ -17,6 +17,7 @@ package com.bluexml.side.form;
  * <ul>
  *   <li>{@link com.bluexml.side.form.SearchForm#getDataForm <em>Data Form</em>}</li>
  *   <li>{@link com.bluexml.side.form.SearchForm#getCombinationOperator <em>Combination Operator</em>}</li>
+ *   <li>{@link com.bluexml.side.form.SearchForm#getEReference0 <em>EReference0</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,5 +80,31 @@ public interface SearchForm extends FormContainer {
 	 * @generated
 	 */
 	void setCombinationOperator(CombinationOperators value);
+
+	/**
+	 * Returns the value of the '<em><b>EReference0</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>EReference0</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EReference0</em>' reference.
+	 * @see #setEReference0(SearchFormCollection)
+	 * @see com.bluexml.side.form.FormPackage#getSearchForm_EReference0()
+	 * @model
+	 * @generated
+	 */
+	SearchFormCollection getEReference0();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.form.SearchForm#getEReference0 <em>EReference0</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>EReference0</em>' reference.
+	 * @see #getEReference0()
+	 * @generated
+	 */
+	void setEReference0(SearchFormCollection value);
 		
 } // SearchForm

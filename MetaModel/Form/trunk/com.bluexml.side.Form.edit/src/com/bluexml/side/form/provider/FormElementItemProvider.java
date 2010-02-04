@@ -75,9 +75,10 @@ public class FormElementItemProvider
 
 			addLabelPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
+			addHiddenPropertyDescriptor(object);
 			addHelp_textPropertyDescriptor(object);
 			addRefPropertyDescriptor(object);
-			addHiddenPropertyDescriptor(object);
+			addStylePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -171,6 +172,28 @@ public class FormElementItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Style feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStylePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FormElement_style_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_style_feature", "_UI_FormElement_type"),
+				 FormPackage.Literals.FORM_ELEMENT__STYLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Hidden feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -220,8 +243,9 @@ public class FormElementItemProvider
 		switch (notification.getFeatureID(FormElement.class)) {
 			case FormPackage.FORM_ELEMENT__LABEL:
 			case FormPackage.FORM_ELEMENT__ID:
-			case FormPackage.FORM_ELEMENT__HELP_TEXT:
 			case FormPackage.FORM_ELEMENT__HIDDEN:
+			case FormPackage.FORM_ELEMENT__HELP_TEXT:
+			case FormPackage.FORM_ELEMENT__STYLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

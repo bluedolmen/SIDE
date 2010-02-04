@@ -146,13 +146,22 @@ public interface FormPackage extends EPackage {
 	int FORM_ELEMENT__ID = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ELEMENT__HIDDEN = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT__HELP_TEXT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int FORM_ELEMENT__HELP_TEXT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -161,16 +170,16 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT__REF = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int FORM_ELEMENT__REF = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT__HIDDEN = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int FORM_ELEMENT__STYLE = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Element</em>' class.
@@ -179,7 +188,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 5;
+	int FORM_ELEMENT_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Group</em>}' class.
@@ -563,6 +572,15 @@ public interface FormPackage extends EPackage {
 	int FORM_GROUP__ID = FORM_ELEMENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_GROUP__HIDDEN = FORM_ELEMENT__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -581,13 +599,13 @@ public interface FormPackage extends EPackage {
 	int FORM_GROUP__REF = FORM_ELEMENT__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_GROUP__HIDDEN = FORM_ELEMENT__HIDDEN;
+	int FORM_GROUP__STYLE = FORM_ELEMENT__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -704,16 +722,6 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int SEARCH_FORM = 32;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.SearchOperatorConfigurationImpl <em>Search Operator Configuration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.form.impl.SearchOperatorConfigurationImpl
-	 * @see com.bluexml.side.form.impl.FormPackageImpl#getSearchOperatorConfiguration()
-	 * @generated
-	 */
-	int SEARCH_OPERATOR_CONFIGURATION = 34;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.WorkflowFormCollectionImpl <em>Workflow Form Collection</em>}' class.
@@ -1015,6 +1023,15 @@ public interface FormPackage extends EPackage {
 	int FIELD__ID = FORM_ELEMENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__HIDDEN = FORM_ELEMENT__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1033,13 +1050,13 @@ public interface FormPackage extends EPackage {
 	int FIELD__REF = FORM_ELEMENT__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__HIDDEN = FORM_ELEMENT__HIDDEN;
+	int FIELD__STYLE = FORM_ELEMENT__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -1069,40 +1086,13 @@ public interface FormPackage extends EPackage {
 	int FIELD__INITIAL = FORM_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__DISABLED = FORM_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__FIELD_SIZE = FORM_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__STYLE = FORM_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__SEARCH_OPERATOR_CONFIGURATION = FORM_ELEMENT_FEATURE_COUNT + 6;
+	int FIELD__FIELD_SIZE = FORM_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
@@ -1111,7 +1101,16 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__MOCKUP = FORM_ELEMENT_FEATURE_COUNT + 7;
+	int FIELD__MOCKUP = FORM_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__DISABLED = FORM_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Field</em>' class.
@@ -1120,7 +1119,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 8;
+	int FIELD_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1195,6 +1194,15 @@ public interface FormPackage extends EPackage {
 	int FORM_CONTAINER__ID = FORM_GROUP__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__HIDDEN = FORM_GROUP__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1213,13 +1221,13 @@ public interface FormPackage extends EPackage {
 	int FORM_CONTAINER__REF = FORM_GROUP__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CONTAINER__HIDDEN = FORM_GROUP__HIDDEN;
+	int FORM_CONTAINER__STYLE = FORM_GROUP__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1340,6 +1348,15 @@ public interface FormPackage extends EPackage {
 	int FORM_WORKFLOW__ID = FORM_CONTAINER__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__HIDDEN = FORM_CONTAINER__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1358,13 +1375,13 @@ public interface FormPackage extends EPackage {
 	int FORM_WORKFLOW__REF = FORM_CONTAINER__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_WORKFLOW__HIDDEN = FORM_CONTAINER__HIDDEN;
+	int FORM_WORKFLOW__STYLE = FORM_CONTAINER__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1484,6 +1501,15 @@ public interface FormPackage extends EPackage {
 	int FORM_CLASS__ID = FORM_CONTAINER__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__HIDDEN = FORM_CONTAINER__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1502,13 +1528,13 @@ public interface FormPackage extends EPackage {
 	int FORM_CLASS__REF = FORM_CONTAINER__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__HIDDEN = FORM_CONTAINER__HIDDEN;
+	int FORM_CLASS__STYLE = FORM_CONTAINER__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1547,13 +1573,13 @@ public interface FormPackage extends EPackage {
 	int FORM_CLASS__REAL_CLASS = FORM_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Has content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content enabled</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__HAS_CONTENT = FORM_CONTAINER_FEATURE_COUNT + 1;
+	int FORM_CLASS__CONTENT_ENABLED = FORM_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Class</em>' class.
@@ -1637,6 +1663,15 @@ public interface FormPackage extends EPackage {
 	int BOOLEAN_FIELD__ID = FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1655,13 +1690,13 @@ public interface FormPackage extends EPackage {
 	int BOOLEAN_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_FIELD__HIDDEN = FIELD__HIDDEN;
+	int BOOLEAN_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -1691,15 +1726,6 @@ public interface FormPackage extends EPackage {
 	int BOOLEAN_FIELD__INITIAL = FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__DISABLED = FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1709,24 +1735,6 @@ public interface FormPackage extends EPackage {
 	int BOOLEAN_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__STYLE = FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1734,6 +1742,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
 	 * The number of structural features of the '<em>Boolean Field</em>' class.
@@ -1817,6 +1834,15 @@ public interface FormPackage extends EPackage {
 	int CHAR_FIELD__ID = FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1835,13 +1861,13 @@ public interface FormPackage extends EPackage {
 	int CHAR_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHAR_FIELD__HIDDEN = FIELD__HIDDEN;
+	int CHAR_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -1871,15 +1897,6 @@ public interface FormPackage extends EPackage {
 	int CHAR_FIELD__INITIAL = FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHAR_FIELD__DISABLED = FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1889,24 +1906,6 @@ public interface FormPackage extends EPackage {
 	int CHAR_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHAR_FIELD__STYLE = FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1914,6 +1913,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHAR_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -2015,6 +2023,15 @@ public interface FormPackage extends EPackage {
 	int DATE_FIELD__ID = FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2033,13 +2050,13 @@ public interface FormPackage extends EPackage {
 	int DATE_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATE_FIELD__HIDDEN = FIELD__HIDDEN;
+	int DATE_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2069,15 +2086,6 @@ public interface FormPackage extends EPackage {
 	int DATE_FIELD__INITIAL = FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__DISABLED = FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2087,24 +2095,6 @@ public interface FormPackage extends EPackage {
 	int DATE_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__STYLE = FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2112,6 +2102,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Input formats</b></em>' attribute list.
@@ -2222,6 +2221,15 @@ public interface FormPackage extends EPackage {
 	int DATE_TIME_FIELD__ID = DATE_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__HIDDEN = DATE_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2240,13 +2248,13 @@ public interface FormPackage extends EPackage {
 	int DATE_TIME_FIELD__REF = DATE_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATE_TIME_FIELD__HIDDEN = DATE_FIELD__HIDDEN;
+	int DATE_TIME_FIELD__STYLE = DATE_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2276,15 +2284,6 @@ public interface FormPackage extends EPackage {
 	int DATE_TIME_FIELD__INITIAL = DATE_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__DISABLED = DATE_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2294,24 +2293,6 @@ public interface FormPackage extends EPackage {
 	int DATE_TIME_FIELD__FIELD_SIZE = DATE_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__STYLE = DATE_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__SEARCH_OPERATOR_CONFIGURATION = DATE_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2319,6 +2300,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_TIME_FIELD__MOCKUP = DATE_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__DISABLED = DATE_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Input formats</b></em>' attribute list.
@@ -2439,6 +2429,15 @@ public interface FormPackage extends EPackage {
 	int NUMERICAL_FIELD__ID = FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2457,13 +2456,13 @@ public interface FormPackage extends EPackage {
 	int NUMERICAL_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERICAL_FIELD__HIDDEN = FIELD__HIDDEN;
+	int NUMERICAL_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2493,15 +2492,6 @@ public interface FormPackage extends EPackage {
 	int NUMERICAL_FIELD__INITIAL = FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERICAL_FIELD__DISABLED = FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2511,24 +2501,6 @@ public interface FormPackage extends EPackage {
 	int NUMERICAL_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERICAL_FIELD__STYLE = FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2536,6 +2508,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int NUMERICAL_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
 	 * The number of structural features of the '<em>Numerical Field</em>' class.
@@ -2619,6 +2600,15 @@ public interface FormPackage extends EPackage {
 	int DECIMAL_FIELD__ID = NUMERICAL_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__HIDDEN = NUMERICAL_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2637,13 +2627,13 @@ public interface FormPackage extends EPackage {
 	int DECIMAL_FIELD__REF = NUMERICAL_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__HIDDEN = NUMERICAL_FIELD__HIDDEN;
+	int DECIMAL_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2673,15 +2663,6 @@ public interface FormPackage extends EPackage {
 	int DECIMAL_FIELD__INITIAL = NUMERICAL_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECIMAL_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2691,24 +2672,6 @@ public interface FormPackage extends EPackage {
 	int DECIMAL_FIELD__FIELD_SIZE = NUMERICAL_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECIMAL_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECIMAL_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2716,6 +2679,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECIMAL_FIELD__MOCKUP = NUMERICAL_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
@@ -2835,6 +2807,15 @@ public interface FormPackage extends EPackage {
 	int FLOAT_FIELD__ID = NUMERICAL_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__HIDDEN = NUMERICAL_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2853,13 +2834,13 @@ public interface FormPackage extends EPackage {
 	int FLOAT_FIELD__REF = NUMERICAL_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__HIDDEN = NUMERICAL_FIELD__HIDDEN;
+	int FLOAT_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2889,15 +2870,6 @@ public interface FormPackage extends EPackage {
 	int FLOAT_FIELD__INITIAL = NUMERICAL_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2907,24 +2879,6 @@ public interface FormPackage extends EPackage {
 	int FLOAT_FIELD__FIELD_SIZE = NUMERICAL_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2932,6 +2886,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int FLOAT_FIELD__MOCKUP = NUMERICAL_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
@@ -3033,6 +2996,15 @@ public interface FormPackage extends EPackage {
 	int INTEGER_FIELD__ID = NUMERICAL_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__HIDDEN = NUMERICAL_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3051,13 +3023,13 @@ public interface FormPackage extends EPackage {
 	int INTEGER_FIELD__REF = NUMERICAL_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__HIDDEN = NUMERICAL_FIELD__HIDDEN;
+	int INTEGER_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -3087,15 +3059,6 @@ public interface FormPackage extends EPackage {
 	int INTEGER_FIELD__INITIAL = NUMERICAL_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3105,24 +3068,6 @@ public interface FormPackage extends EPackage {
 	int INTEGER_FIELD__FIELD_SIZE = NUMERICAL_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3130,6 +3075,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTEGER_FIELD__MOCKUP = NUMERICAL_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
@@ -3231,6 +3185,15 @@ public interface FormPackage extends EPackage {
 	int MODEL_CHOICE_FIELD__ID = FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3249,13 +3212,13 @@ public interface FormPackage extends EPackage {
 	int MODEL_CHOICE_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD__HIDDEN = FIELD__HIDDEN;
+	int MODEL_CHOICE_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -3285,15 +3248,6 @@ public interface FormPackage extends EPackage {
 	int MODEL_CHOICE_FIELD__INITIAL = FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_CHOICE_FIELD__DISABLED = FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3303,24 +3257,6 @@ public interface FormPackage extends EPackage {
 	int MODEL_CHOICE_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_CHOICE_FIELD__STYLE = FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_CHOICE_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3328,6 +3264,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_CHOICE_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Real class</b></em>' reference.
@@ -3492,6 +3437,15 @@ public interface FormPackage extends EPackage {
 	int EMAIL_FIELD__ID = CHAR_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3510,13 +3464,13 @@ public interface FormPackage extends EPackage {
 	int EMAIL_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+	int EMAIL_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -3546,15 +3500,6 @@ public interface FormPackage extends EPackage {
 	int EMAIL_FIELD__INITIAL = CHAR_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__DISABLED = CHAR_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3564,24 +3509,6 @@ public interface FormPackage extends EPackage {
 	int EMAIL_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__STYLE = CHAR_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3589,6 +3516,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int EMAIL_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -3690,6 +3626,15 @@ public interface FormPackage extends EPackage {
 	int FILE_FIELD__ID = FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3708,13 +3653,13 @@ public interface FormPackage extends EPackage {
 	int FILE_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_FIELD__HIDDEN = FIELD__HIDDEN;
+	int FILE_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -3744,15 +3689,6 @@ public interface FormPackage extends EPackage {
 	int FILE_FIELD__INITIAL = FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__DISABLED = FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3762,24 +3698,6 @@ public interface FormPackage extends EPackage {
 	int FILE_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__STYLE = FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3787,6 +3705,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>In Repository</b></em>' attribute.
@@ -3879,6 +3806,15 @@ public interface FormPackage extends EPackage {
 	int IMAGE_FIELD__ID = FILE_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__HIDDEN = FILE_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3897,13 +3833,13 @@ public interface FormPackage extends EPackage {
 	int IMAGE_FIELD__REF = FILE_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_FIELD__HIDDEN = FILE_FIELD__HIDDEN;
+	int IMAGE_FIELD__STYLE = FILE_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -3933,15 +3869,6 @@ public interface FormPackage extends EPackage {
 	int IMAGE_FIELD__INITIAL = FILE_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGE_FIELD__DISABLED = FILE_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3951,24 +3878,6 @@ public interface FormPackage extends EPackage {
 	int IMAGE_FIELD__FIELD_SIZE = FILE_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGE_FIELD__STYLE = FILE_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGE_FIELD__SEARCH_OPERATOR_CONFIGURATION = FILE_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3976,6 +3885,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMAGE_FIELD__MOCKUP = FILE_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__DISABLED = FILE_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>In Repository</b></em>' attribute.
@@ -4068,6 +3986,15 @@ public interface FormPackage extends EPackage {
 	int TIME_FIELD__ID = DATE_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__HIDDEN = DATE_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4086,13 +4013,13 @@ public interface FormPackage extends EPackage {
 	int TIME_FIELD__REF = DATE_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TIME_FIELD__HIDDEN = DATE_FIELD__HIDDEN;
+	int TIME_FIELD__STYLE = DATE_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -4122,15 +4049,6 @@ public interface FormPackage extends EPackage {
 	int TIME_FIELD__INITIAL = DATE_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__DISABLED = DATE_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4140,24 +4058,6 @@ public interface FormPackage extends EPackage {
 	int TIME_FIELD__FIELD_SIZE = DATE_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__STYLE = DATE_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__SEARCH_OPERATOR_CONFIGURATION = DATE_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4165,6 +4065,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_FIELD__MOCKUP = DATE_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__DISABLED = DATE_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Input formats</b></em>' attribute list.
@@ -4275,6 +4184,15 @@ public interface FormPackage extends EPackage {
 	int URL_FIELD__ID = CHAR_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4293,13 +4211,13 @@ public interface FormPackage extends EPackage {
 	int URL_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int URL_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+	int URL_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -4329,15 +4247,6 @@ public interface FormPackage extends EPackage {
 	int URL_FIELD__INITIAL = CHAR_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int URL_FIELD__DISABLED = CHAR_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4347,24 +4256,6 @@ public interface FormPackage extends EPackage {
 	int URL_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int URL_FIELD__STYLE = CHAR_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int URL_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4372,6 +4263,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int URL_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -4482,6 +4382,15 @@ public interface FormPackage extends EPackage {
 	int PHONE_NUMBER_FIELD__ID = CHAR_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4500,13 +4409,13 @@ public interface FormPackage extends EPackage {
 	int PHONE_NUMBER_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PHONE_NUMBER_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+	int PHONE_NUMBER_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -4536,15 +4445,6 @@ public interface FormPackage extends EPackage {
 	int PHONE_NUMBER_FIELD__INITIAL = CHAR_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__DISABLED = CHAR_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4554,24 +4454,6 @@ public interface FormPackage extends EPackage {
 	int PHONE_NUMBER_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__STYLE = CHAR_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4579,6 +4461,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int PHONE_NUMBER_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -4689,6 +4580,15 @@ public interface FormPackage extends EPackage {
 	int FORM_ASPECT__ID = FORM_GROUP__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ASPECT__HIDDEN = FORM_GROUP__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4707,13 +4607,13 @@ public interface FormPackage extends EPackage {
 	int FORM_ASPECT__REF = FORM_GROUP__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ASPECT__HIDDEN = FORM_GROUP__HIDDEN;
+	int FORM_ASPECT__STYLE = FORM_GROUP__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -4824,6 +4724,15 @@ public interface FormPackage extends EPackage {
 	int REFERENCE__ID = MODEL_CHOICE_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__HIDDEN = MODEL_CHOICE_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4842,13 +4751,13 @@ public interface FormPackage extends EPackage {
 	int REFERENCE__REF = MODEL_CHOICE_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE__HIDDEN = MODEL_CHOICE_FIELD__HIDDEN;
+	int REFERENCE__STYLE = MODEL_CHOICE_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -4878,15 +4787,6 @@ public interface FormPackage extends EPackage {
 	int REFERENCE__INITIAL = MODEL_CHOICE_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE__DISABLED = MODEL_CHOICE_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4896,24 +4796,6 @@ public interface FormPackage extends EPackage {
 	int REFERENCE__FIELD_SIZE = MODEL_CHOICE_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE__STYLE = MODEL_CHOICE_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE__SEARCH_OPERATOR_CONFIGURATION = MODEL_CHOICE_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4921,6 +4803,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE__MOCKUP = MODEL_CHOICE_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__DISABLED = MODEL_CHOICE_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Real class</b></em>' reference.
@@ -5085,6 +4976,15 @@ public interface FormPackage extends EPackage {
 	int CHOICE_FIELD__ID = FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5103,13 +5003,13 @@ public interface FormPackage extends EPackage {
 	int CHOICE_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHOICE_FIELD__HIDDEN = FIELD__HIDDEN;
+	int CHOICE_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -5139,15 +5039,6 @@ public interface FormPackage extends EPackage {
 	int CHOICE_FIELD__INITIAL = FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHOICE_FIELD__DISABLED = FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5157,24 +5048,6 @@ public interface FormPackage extends EPackage {
 	int CHOICE_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHOICE_FIELD__STYLE = FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHOICE_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5182,6 +5055,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHOICE_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min bound</b></em>' attribute.
@@ -5301,6 +5183,15 @@ public interface FormPackage extends EPackage {
 	int REGEX_FIELD__ID = CHAR_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5319,13 +5210,13 @@ public interface FormPackage extends EPackage {
 	int REGEX_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGEX_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+	int REGEX_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -5355,15 +5246,6 @@ public interface FormPackage extends EPackage {
 	int REGEX_FIELD__INITIAL = CHAR_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGEX_FIELD__DISABLED = CHAR_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5373,24 +5255,6 @@ public interface FormPackage extends EPackage {
 	int REGEX_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGEX_FIELD__STYLE = CHAR_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGEX_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5398,6 +5262,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int REGEX_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -5526,6 +5399,15 @@ public interface FormPackage extends EPackage {
 	int PASSWORD_FIELD__ID = CHAR_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5544,13 +5426,13 @@ public interface FormPackage extends EPackage {
 	int PASSWORD_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PASSWORD_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+	int PASSWORD_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -5580,15 +5462,6 @@ public interface FormPackage extends EPackage {
 	int PASSWORD_FIELD__INITIAL = CHAR_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__DISABLED = CHAR_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5598,24 +5471,6 @@ public interface FormPackage extends EPackage {
 	int PASSWORD_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__STYLE = CHAR_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5623,6 +5478,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int PASSWORD_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -5724,6 +5588,15 @@ public interface FormPackage extends EPackage {
 	int VIRTUAL_FIELD__ID = FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5742,13 +5615,13 @@ public interface FormPackage extends EPackage {
 	int VIRTUAL_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIRTUAL_FIELD__HIDDEN = FIELD__HIDDEN;
+	int VIRTUAL_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -5778,15 +5651,6 @@ public interface FormPackage extends EPackage {
 	int VIRTUAL_FIELD__INITIAL = FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIRTUAL_FIELD__DISABLED = FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5796,24 +5660,6 @@ public interface FormPackage extends EPackage {
 	int VIRTUAL_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIRTUAL_FIELD__STYLE = FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIRTUAL_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5821,6 +5667,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int VIRTUAL_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Link</b></em>' reference.
@@ -5913,6 +5768,15 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD__ID = FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5931,13 +5795,13 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FIELD__HIDDEN = FIELD__HIDDEN;
+	int ACTION_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -5967,15 +5831,6 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD__INITIAL = FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__DISABLED = FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5985,24 +5840,6 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__STYLE = FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6010,6 +5847,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACTION_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
 	 * The number of structural features of the '<em>Action Field</em>' class.
@@ -6093,6 +5939,15 @@ public interface FormPackage extends EPackage {
 	int TEXT_FIELD__ID = CHAR_FIELD__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6111,13 +5966,13 @@ public interface FormPackage extends EPackage {
 	int TEXT_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+	int TEXT_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -6147,15 +6002,6 @@ public interface FormPackage extends EPackage {
 	int TEXT_FIELD__INITIAL = CHAR_FIELD__INITIAL;
 
 	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_FIELD__DISABLED = CHAR_FIELD__DISABLED;
-
-	/**
 	 * The feature id for the '<em><b>Field size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6165,24 +6011,6 @@ public interface FormPackage extends EPackage {
 	int TEXT_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_FIELD__STYLE = CHAR_FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
 	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6190,6 +6018,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__DISABLED = CHAR_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -6300,6 +6137,15 @@ public interface FormPackage extends EPackage {
 	int SEARCH_FORM__ID = FORM_CONTAINER__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM__HIDDEN = FORM_CONTAINER__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6318,13 +6164,13 @@ public interface FormPackage extends EPackage {
 	int SEARCH_FORM__REF = FORM_CONTAINER__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__HIDDEN = FORM_CONTAINER__HIDDEN;
+	int SEARCH_FORM__STYLE = FORM_CONTAINER__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -6372,40 +6218,22 @@ public interface FormPackage extends EPackage {
 	int SEARCH_FORM__COMBINATION_OPERATOR = FORM_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>EReference0</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM__EREFERENCE0 = FORM_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Search Form</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Default Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEARCH_OPERATOR_CONFIGURATION__DEFAULT_OPERATOR = 0;
-
-	/**
-	 * The feature id for the '<em><b>Proposed Operators</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEARCH_OPERATOR_CONFIGURATION__PROPOSED_OPERATORS = 1;
-
-	/**
-	 * The number of structural features of the '<em>Search Operator Configuration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEARCH_OPERATOR_CONFIGURATION_FEATURE_COUNT = 2;
+	int SEARCH_FORM_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.StaticTextImpl <em>Static Text</em>}' class.
@@ -6415,7 +6243,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getStaticText()
 	 * @generated
 	 */
-	int STATIC_TEXT = 35;
+	int STATIC_TEXT = 34;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -6490,6 +6318,15 @@ public interface FormPackage extends EPackage {
 	int STATIC_TEXT__ID = FORM_ELEMENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__HIDDEN = FORM_ELEMENT__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6508,13 +6345,13 @@ public interface FormPackage extends EPackage {
 	int STATIC_TEXT__REF = FORM_ELEMENT__REF;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_TEXT__HIDDEN = FORM_ELEMENT__HIDDEN;
+	int STATIC_TEXT__STYLE = FORM_ELEMENT__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -6535,6 +6372,976 @@ public interface FormPackage extends EPackage {
 	int STATIC_TEXT_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.SearchFormCollectionImpl <em>Search Form Collection</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.SearchFormCollectionImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getSearchFormCollection()
+	 * @generated
+	 */
+	int SEARCH_FORM_COLLECTION = 35;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__STEREOTYPES = FORM_COLLECTION__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__TAGS = FORM_COLLECTION__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__COMMENTS = FORM_COLLECTION__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__DOCUMENTATION = FORM_COLLECTION__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__DESCRIPTION = FORM_COLLECTION__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__METAINFO = FORM_COLLECTION__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__NAME = FORM_COLLECTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Stereotype Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__STEREOTYPE_SET = FORM_COLLECTION__STEREOTYPE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Package Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__PACKAGE_SET = FORM_COLLECTION__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Forms</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__FORMS = FORM_COLLECTION__FORMS;
+
+	/**
+	 * The feature id for the '<em><b>Search Form</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__SEARCH_FORM = FORM_COLLECTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Search Form Collection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION_FEATURE_COUNT = FORM_COLLECTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.SearchFieldImpl <em>Search Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.SearchFieldImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getSearchField()
+	 * @generated
+	 */
+	int SEARCH_FIELD = 36;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__STEREOTYPES = FORM_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__TAGS = FORM_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__COMMENTS = FORM_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__DOCUMENTATION = FORM_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__DESCRIPTION = FORM_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__METAINFO = FORM_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__LABEL = FORM_ELEMENT__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__ID = FORM_ELEMENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__HIDDEN = FORM_ELEMENT__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__HELP_TEXT = FORM_ELEMENT__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__REF = FORM_ELEMENT__REF;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__STYLE = FORM_ELEMENT__STYLE;
+
+	/**
+	 * The number of structural features of the '<em>Search Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.NumericalSearchFieldImpl <em>Numerical Search Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.NumericalSearchFieldImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericalSearchField()
+	 * @generated
+	 */
+	int NUMERICAL_SEARCH_FIELD = 37;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__STEREOTYPES = SEARCH_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__TAGS = SEARCH_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__COMMENTS = SEARCH_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__DOCUMENTATION = SEARCH_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__DESCRIPTION = SEARCH_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__METAINFO = SEARCH_FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__LABEL = SEARCH_FIELD__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__ID = SEARCH_FIELD__ID;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__HIDDEN = SEARCH_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__HELP_TEXT = SEARCH_FIELD__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__REF = SEARCH_FIELD__REF;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__OPERATORS = SEARCH_FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Default Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__DEFAULT_OPERATOR = SEARCH_FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Numerical Search Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.CharSearchFieldImpl <em>Char Search Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.CharSearchFieldImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharSearchField()
+	 * @generated
+	 */
+	int CHAR_SEARCH_FIELD = 38;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__STEREOTYPES = SEARCH_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__TAGS = SEARCH_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__COMMENTS = SEARCH_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__DOCUMENTATION = SEARCH_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__DESCRIPTION = SEARCH_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__METAINFO = SEARCH_FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__LABEL = SEARCH_FIELD__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__ID = SEARCH_FIELD__ID;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__HIDDEN = SEARCH_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__HELP_TEXT = SEARCH_FIELD__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__REF = SEARCH_FIELD__REF;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__OPERATORS = SEARCH_FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Default Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__DEFAULT_OPERATOR = SEARCH_FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Char Search Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.DateSearchFieldImpl <em>Date Search Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.DateSearchFieldImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateSearchField()
+	 * @generated
+	 */
+	int DATE_SEARCH_FIELD = 39;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__STEREOTYPES = SEARCH_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__TAGS = SEARCH_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__COMMENTS = SEARCH_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__DOCUMENTATION = SEARCH_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__DESCRIPTION = SEARCH_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__METAINFO = SEARCH_FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__LABEL = SEARCH_FIELD__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__ID = SEARCH_FIELD__ID;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__HIDDEN = SEARCH_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__HELP_TEXT = SEARCH_FIELD__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__REF = SEARCH_FIELD__REF;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__OPERATORS = SEARCH_FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Default Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__DEFAULT_OPERATOR = SEARCH_FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Date Search Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.ChoiceSearchFieldImpl <em>Choice Search Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.ChoiceSearchFieldImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceSearchField()
+	 * @generated
+	 */
+	int CHOICE_SEARCH_FIELD = 40;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__STEREOTYPES = SEARCH_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__TAGS = SEARCH_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__COMMENTS = SEARCH_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__DOCUMENTATION = SEARCH_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__DESCRIPTION = SEARCH_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__METAINFO = SEARCH_FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__LABEL = SEARCH_FIELD__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__ID = SEARCH_FIELD__ID;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__HIDDEN = SEARCH_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__HELP_TEXT = SEARCH_FIELD__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__REF = SEARCH_FIELD__REF;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__OPERATORS = SEARCH_FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Default Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__DEFAULT_OPERATOR = SEARCH_FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Choice Search Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FileSearchFieldImpl <em>File Search Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.FileSearchFieldImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileSearchField()
+	 * @generated
+	 */
+	int FILE_SEARCH_FIELD = 41;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__STEREOTYPES = SEARCH_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__TAGS = SEARCH_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__COMMENTS = SEARCH_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__DOCUMENTATION = SEARCH_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__DESCRIPTION = SEARCH_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__METAINFO = SEARCH_FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__LABEL = SEARCH_FIELD__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__ID = SEARCH_FIELD__ID;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__HIDDEN = SEARCH_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__HELP_TEXT = SEARCH_FIELD__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__REF = SEARCH_FIELD__REF;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__OPERATORS = SEARCH_FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Default Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__DEFAULT_OPERATOR = SEARCH_FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>File Search Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6542,7 +7349,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormGroupPresentationType()
 	 * @generated
 	 */
-	int FORM_GROUP_PRESENTATION_TYPE = 36;
+	int FORM_GROUP_PRESENTATION_TYPE = 42;
 
 
 	/**
@@ -6553,7 +7360,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getTextWidgetType()
 	 * @generated
 	 */
-	int TEXT_WIDGET_TYPE = 37;
+	int TEXT_WIDGET_TYPE = 43;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceWidgetType <em>Choice Widget Type</em>}' enum.
@@ -6563,7 +7370,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceWidgetType()
 	 * @generated
 	 */
-	int CHOICE_WIDGET_TYPE = 38;
+	int CHOICE_WIDGET_TYPE = 44;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ModelChoiceWidgetType <em>Model Choice Widget Type</em>}' enum.
@@ -6573,17 +7380,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceWidgetType()
 	 * @generated
 	 */
-	int MODEL_CHOICE_WIDGET_TYPE = 39;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.FieldSearchOperators <em>Field Search Operators</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.form.FieldSearchOperators
-	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFieldSearchOperators()
-	 * @generated
-	 */
-	int FIELD_SEARCH_OPERATORS = 40;
+	int MODEL_CHOICE_WIDGET_TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.CharFieldSearchOperators <em>Char Field Search Operators</em>}' enum.
@@ -6593,7 +7390,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharFieldSearchOperators()
 	 * @generated
 	 */
-	int CHAR_FIELD_SEARCH_OPERATORS = 41;
+	int CHAR_FIELD_SEARCH_OPERATORS = 46;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.NumericalFieldSearchOperators <em>Numerical Field Search Operators</em>}' enum.
@@ -6603,7 +7400,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericalFieldSearchOperators()
 	 * @generated
 	 */
-	int NUMERICAL_FIELD_SEARCH_OPERATORS = 42;
+	int NUMERICAL_FIELD_SEARCH_OPERATORS = 47;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceFieldSearchOperators <em>Choice Field Search Operators</em>}' enum.
@@ -6613,7 +7410,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceFieldSearchOperators()
 	 * @generated
 	 */
-	int CHOICE_FIELD_SEARCH_OPERATORS = 43;
+	int CHOICE_FIELD_SEARCH_OPERATORS = 48;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FileFieldSearchOperators <em>File Field Search Operators</em>}' enum.
@@ -6623,7 +7420,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileFieldSearchOperators()
 	 * @generated
 	 */
-	int FILE_FIELD_SEARCH_OPERATORS = 44;
+	int FILE_FIELD_SEARCH_OPERATORS = 49;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.CombinationOperators <em>Combination Operators</em>}' enum.
@@ -6633,7 +7430,17 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCombinationOperators()
 	 * @generated
 	 */
-	int COMBINATION_OPERATORS = 45;
+	int COMBINATION_OPERATORS = 50;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.DateFieldSearchOperators <em>Date Field Search Operators</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.DateFieldSearchOperators
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateFieldSearchOperators()
+	 * @generated
+	 */
+	int DATE_FIELD_SEARCH_OPERATORS = 51;
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.FormElement <em>Element</em>}'.
@@ -6688,6 +7495,17 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFormElement_Ref();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormElement#getStyle <em>Style</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Style</em>'.
+	 * @see com.bluexml.side.form.FormElement#getStyle()
+	 * @see #getFormElement()
+	 * @generated
+	 */
+	EAttribute getFormElement_Style();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormElement#isHidden <em>Hidden</em>}'.
@@ -6787,17 +7605,6 @@ public interface FormPackage extends EPackage {
 	EAttribute getField_Initial();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#isDisabled <em>Disabled</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Disabled</em>'.
-	 * @see com.bluexml.side.form.Field#isDisabled()
-	 * @see #getField()
-	 * @generated
-	 */
-	EAttribute getField_Disabled();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#getField_size <em>Field size</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6809,26 +7616,15 @@ public interface FormPackage extends EPackage {
 	EAttribute getField_Field_size();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#getStyle <em>Style</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#isDisabled <em>Disabled</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Style</em>'.
-	 * @see com.bluexml.side.form.Field#getStyle()
+	 * @return the meta object for the attribute '<em>Disabled</em>'.
+	 * @see com.bluexml.side.form.Field#isDisabled()
 	 * @see #getField()
 	 * @generated
 	 */
-	EAttribute getField_Style();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.form.Field#getSearchOperatorConfiguration <em>Search Operator Configuration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Search Operator Configuration</em>'.
-	 * @see com.bluexml.side.form.Field#getSearchOperatorConfiguration()
-	 * @see #getField()
-	 * @generated
-	 */
-	EReference getField_SearchOperatorConfiguration();
+	EAttribute getField_Disabled();
 
 	/**
 	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.Field#getMockup <em>Mockup</em>}'.
@@ -7266,15 +8062,15 @@ public interface FormPackage extends EPackage {
 	EClass getFormClass();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormClass#isHas_content <em>Has content</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormClass#isContent_enabled <em>Content enabled</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Has content</em>'.
-	 * @see com.bluexml.side.form.FormClass#isHas_content()
+	 * @return the meta object for the attribute '<em>Content enabled</em>'.
+	 * @see com.bluexml.side.form.FormClass#isContent_enabled()
 	 * @see #getFormClass()
 	 * @generated
 	 */
-	EAttribute getFormClass_Has_content();
+	EAttribute getFormClass_Content_enabled();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.Reference <em>Reference</em>}'.
@@ -7498,6 +8294,17 @@ public interface FormPackage extends EPackage {
 	EAttribute getSearchForm_CombinationOperator();
 
 	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.form.SearchForm#getEReference0 <em>EReference0</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EReference0</em>'.
+	 * @see com.bluexml.side.form.SearchForm#getEReference0()
+	 * @see #getSearchForm()
+	 * @generated
+	 */
+	EReference getSearchForm_EReference0();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.NumericalField <em>Numerical Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7506,38 +8313,6 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNumericalField();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.SearchOperatorConfiguration <em>Search Operator Configuration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Search Operator Configuration</em>'.
-	 * @see com.bluexml.side.form.SearchOperatorConfiguration
-	 * @generated
-	 */
-	EClass getSearchOperatorConfiguration();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.SearchOperatorConfiguration#getDefaultOperator <em>Default Operator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Operator</em>'.
-	 * @see com.bluexml.side.form.SearchOperatorConfiguration#getDefaultOperator()
-	 * @see #getSearchOperatorConfiguration()
-	 * @generated
-	 */
-	EAttribute getSearchOperatorConfiguration_DefaultOperator();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.SearchOperatorConfiguration#getProposedOperators <em>Proposed Operators</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Proposed Operators</em>'.
-	 * @see com.bluexml.side.form.SearchOperatorConfiguration#getProposedOperators()
-	 * @see #getSearchOperatorConfiguration()
-	 * @generated
-	 */
-	EAttribute getSearchOperatorConfiguration_ProposedOperators();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.StaticText <em>Static Text</em>}'.
@@ -7559,6 +8334,197 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getStaticText_Value();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.SearchFormCollection <em>Search Form Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Search Form Collection</em>'.
+	 * @see com.bluexml.side.form.SearchFormCollection
+	 * @generated
+	 */
+	EClass getSearchFormCollection();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.form.SearchFormCollection#getSearchForm <em>Search Form</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Search Form</em>'.
+	 * @see com.bluexml.side.form.SearchFormCollection#getSearchForm()
+	 * @see #getSearchFormCollection()
+	 * @generated
+	 */
+	EReference getSearchFormCollection_SearchForm();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.SearchField <em>Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Search Field</em>'.
+	 * @see com.bluexml.side.form.SearchField
+	 * @generated
+	 */
+	EClass getSearchField();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.NumericalSearchField <em>Numerical Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Numerical Search Field</em>'.
+	 * @see com.bluexml.side.form.NumericalSearchField
+	 * @generated
+	 */
+	EClass getNumericalSearchField();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.NumericalSearchField#getOperators <em>Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Operators</em>'.
+	 * @see com.bluexml.side.form.NumericalSearchField#getOperators()
+	 * @see #getNumericalSearchField()
+	 * @generated
+	 */
+	EAttribute getNumericalSearchField_Operators();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.NumericalSearchField#getDefaultOperator <em>Default Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Operator</em>'.
+	 * @see com.bluexml.side.form.NumericalSearchField#getDefaultOperator()
+	 * @see #getNumericalSearchField()
+	 * @generated
+	 */
+	EAttribute getNumericalSearchField_DefaultOperator();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.CharSearchField <em>Char Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Char Search Field</em>'.
+	 * @see com.bluexml.side.form.CharSearchField
+	 * @generated
+	 */
+	EClass getCharSearchField();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.CharSearchField#getOperators <em>Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Operators</em>'.
+	 * @see com.bluexml.side.form.CharSearchField#getOperators()
+	 * @see #getCharSearchField()
+	 * @generated
+	 */
+	EAttribute getCharSearchField_Operators();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.CharSearchField#getDefaultOperator <em>Default Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Operator</em>'.
+	 * @see com.bluexml.side.form.CharSearchField#getDefaultOperator()
+	 * @see #getCharSearchField()
+	 * @generated
+	 */
+	EAttribute getCharSearchField_DefaultOperator();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.DateSearchField <em>Date Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Date Search Field</em>'.
+	 * @see com.bluexml.side.form.DateSearchField
+	 * @generated
+	 */
+	EClass getDateSearchField();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.DateSearchField#getOperators <em>Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Operators</em>'.
+	 * @see com.bluexml.side.form.DateSearchField#getOperators()
+	 * @see #getDateSearchField()
+	 * @generated
+	 */
+	EAttribute getDateSearchField_Operators();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.DateSearchField#getDefaultOperator <em>Default Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Operator</em>'.
+	 * @see com.bluexml.side.form.DateSearchField#getDefaultOperator()
+	 * @see #getDateSearchField()
+	 * @generated
+	 */
+	EAttribute getDateSearchField_DefaultOperator();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.ChoiceSearchField <em>Choice Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Choice Search Field</em>'.
+	 * @see com.bluexml.side.form.ChoiceSearchField
+	 * @generated
+	 */
+	EClass getChoiceSearchField();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.ChoiceSearchField#getOperators <em>Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Operators</em>'.
+	 * @see com.bluexml.side.form.ChoiceSearchField#getOperators()
+	 * @see #getChoiceSearchField()
+	 * @generated
+	 */
+	EAttribute getChoiceSearchField_Operators();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ChoiceSearchField#getDefaultOperator <em>Default Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Operator</em>'.
+	 * @see com.bluexml.side.form.ChoiceSearchField#getDefaultOperator()
+	 * @see #getChoiceSearchField()
+	 * @generated
+	 */
+	EAttribute getChoiceSearchField_DefaultOperator();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FileSearchField <em>File Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>File Search Field</em>'.
+	 * @see com.bluexml.side.form.FileSearchField
+	 * @generated
+	 */
+	EClass getFileSearchField();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.FileSearchField#getOperators <em>Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Operators</em>'.
+	 * @see com.bluexml.side.form.FileSearchField#getOperators()
+	 * @see #getFileSearchField()
+	 * @generated
+	 */
+	EAttribute getFileSearchField_Operators();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FileSearchField#getDefaultOperator <em>Default Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Operator</em>'.
+	 * @see com.bluexml.side.form.FileSearchField#getDefaultOperator()
+	 * @see #getFileSearchField()
+	 * @generated
+	 */
+	EAttribute getFileSearchField_DefaultOperator();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.WorkflowFormCollection <em>Workflow Form Collection</em>}'.
@@ -7663,16 +8629,6 @@ public interface FormPackage extends EPackage {
 	EEnum getModelChoiceWidgetType();
 
 	/**
-	 * Returns the meta object for enum '{@link com.bluexml.side.form.FieldSearchOperators <em>Field Search Operators</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Field Search Operators</em>'.
-	 * @see com.bluexml.side.form.FieldSearchOperators
-	 * @generated
-	 */
-	EEnum getFieldSearchOperators();
-
-	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.form.CharFieldSearchOperators <em>Char Field Search Operators</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7721,6 +8677,16 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getCombinationOperators();
+
+	/**
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.DateFieldSearchOperators <em>Date Field Search Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Date Field Search Operators</em>'.
+	 * @see com.bluexml.side.form.DateFieldSearchOperators
+	 * @generated
+	 */
+	EEnum getDateFieldSearchOperators();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -7785,6 +8751,14 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FORM_ELEMENT__REF = eINSTANCE.getFormElement_Ref();
+
+		/**
+		 * The meta object literal for the '<em><b>Style</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FORM_ELEMENT__STYLE = eINSTANCE.getFormElement_Style();
 
 		/**
 		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
@@ -7877,22 +8851,6 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FIELD__FIELD_SIZE = eINSTANCE.getField_Field_size();
-
-		/**
-		 * The meta object literal for the '<em><b>Style</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FIELD__STYLE = eINSTANCE.getField_Style();
-
-		/**
-		 * The meta object literal for the '<em><b>Search Operator Configuration</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FIELD__SEARCH_OPERATOR_CONFIGURATION = eINSTANCE.getField_SearchOperatorConfiguration();
 
 		/**
 		 * The meta object literal for the '<em><b>Mockup</b></em>' attribute list feature.
@@ -8255,12 +9213,12 @@ public interface FormPackage extends EPackage {
 		EClass FORM_CLASS = eINSTANCE.getFormClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Has content</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Content enabled</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FORM_CLASS__HAS_CONTENT = eINSTANCE.getFormClass_Has_content();
+		EAttribute FORM_CLASS__CONTENT_ENABLED = eINSTANCE.getFormClass_Content_enabled();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ReferenceImpl <em>Reference</em>}' class.
@@ -8451,6 +9409,14 @@ public interface FormPackage extends EPackage {
 		EAttribute SEARCH_FORM__COMBINATION_OPERATOR = eINSTANCE.getSearchForm_CombinationOperator();
 
 		/**
+		 * The meta object literal for the '<em><b>EReference0</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SEARCH_FORM__EREFERENCE0 = eINSTANCE.getSearchForm_EReference0();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.NumericalFieldImpl <em>Numerical Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8459,32 +9425,6 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EClass NUMERICAL_FIELD = eINSTANCE.getNumericalField();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.SearchOperatorConfigurationImpl <em>Search Operator Configuration</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.form.impl.SearchOperatorConfigurationImpl
-		 * @see com.bluexml.side.form.impl.FormPackageImpl#getSearchOperatorConfiguration()
-		 * @generated
-		 */
-		EClass SEARCH_OPERATOR_CONFIGURATION = eINSTANCE.getSearchOperatorConfiguration();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Operator</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SEARCH_OPERATOR_CONFIGURATION__DEFAULT_OPERATOR = eINSTANCE.getSearchOperatorConfiguration_DefaultOperator();
-
-		/**
-		 * The meta object literal for the '<em><b>Proposed Operators</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SEARCH_OPERATOR_CONFIGURATION__PROPOSED_OPERATORS = eINSTANCE.getSearchOperatorConfiguration_ProposedOperators();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.StaticTextImpl <em>Static Text</em>}' class.
@@ -8503,6 +9443,164 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATIC_TEXT__VALUE = eINSTANCE.getStaticText_Value();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.SearchFormCollectionImpl <em>Search Form Collection</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.SearchFormCollectionImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getSearchFormCollection()
+		 * @generated
+		 */
+		EClass SEARCH_FORM_COLLECTION = eINSTANCE.getSearchFormCollection();
+
+		/**
+		 * The meta object literal for the '<em><b>Search Form</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SEARCH_FORM_COLLECTION__SEARCH_FORM = eINSTANCE.getSearchFormCollection_SearchForm();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.SearchFieldImpl <em>Search Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.SearchFieldImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getSearchField()
+		 * @generated
+		 */
+		EClass SEARCH_FIELD = eINSTANCE.getSearchField();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.NumericalSearchFieldImpl <em>Numerical Search Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.NumericalSearchFieldImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericalSearchField()
+		 * @generated
+		 */
+		EClass NUMERICAL_SEARCH_FIELD = eINSTANCE.getNumericalSearchField();
+
+		/**
+		 * The meta object literal for the '<em><b>Operators</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NUMERICAL_SEARCH_FIELD__OPERATORS = eINSTANCE.getNumericalSearchField_Operators();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NUMERICAL_SEARCH_FIELD__DEFAULT_OPERATOR = eINSTANCE.getNumericalSearchField_DefaultOperator();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.CharSearchFieldImpl <em>Char Search Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.CharSearchFieldImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharSearchField()
+		 * @generated
+		 */
+		EClass CHAR_SEARCH_FIELD = eINSTANCE.getCharSearchField();
+
+		/**
+		 * The meta object literal for the '<em><b>Operators</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHAR_SEARCH_FIELD__OPERATORS = eINSTANCE.getCharSearchField_Operators();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHAR_SEARCH_FIELD__DEFAULT_OPERATOR = eINSTANCE.getCharSearchField_DefaultOperator();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.DateSearchFieldImpl <em>Date Search Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.DateSearchFieldImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateSearchField()
+		 * @generated
+		 */
+		EClass DATE_SEARCH_FIELD = eINSTANCE.getDateSearchField();
+
+		/**
+		 * The meta object literal for the '<em><b>Operators</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATE_SEARCH_FIELD__OPERATORS = eINSTANCE.getDateSearchField_Operators();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATE_SEARCH_FIELD__DEFAULT_OPERATOR = eINSTANCE.getDateSearchField_DefaultOperator();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ChoiceSearchFieldImpl <em>Choice Search Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.ChoiceSearchFieldImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceSearchField()
+		 * @generated
+		 */
+		EClass CHOICE_SEARCH_FIELD = eINSTANCE.getChoiceSearchField();
+
+		/**
+		 * The meta object literal for the '<em><b>Operators</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHOICE_SEARCH_FIELD__OPERATORS = eINSTANCE.getChoiceSearchField_Operators();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHOICE_SEARCH_FIELD__DEFAULT_OPERATOR = eINSTANCE.getChoiceSearchField_DefaultOperator();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FileSearchFieldImpl <em>File Search Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.FileSearchFieldImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileSearchField()
+		 * @generated
+		 */
+		EClass FILE_SEARCH_FIELD = eINSTANCE.getFileSearchField();
+
+		/**
+		 * The meta object literal for the '<em><b>Operators</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE_SEARCH_FIELD__OPERATORS = eINSTANCE.getFileSearchField_Operators();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE_SEARCH_FIELD__DEFAULT_OPERATOR = eINSTANCE.getFileSearchField_DefaultOperator();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.WorkflowFormCollectionImpl <em>Workflow Form Collection</em>}' class.
@@ -8601,16 +9699,6 @@ public interface FormPackage extends EPackage {
 		EEnum MODEL_CHOICE_WIDGET_TYPE = eINSTANCE.getModelChoiceWidgetType();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.FieldSearchOperators <em>Field Search Operators</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.form.FieldSearchOperators
-		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFieldSearchOperators()
-		 * @generated
-		 */
-		EEnum FIELD_SEARCH_OPERATORS = eINSTANCE.getFieldSearchOperators();
-
-		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.CharFieldSearchOperators <em>Char Field Search Operators</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8659,6 +9747,16 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum COMBINATION_OPERATORS = eINSTANCE.getCombinationOperators();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.DateFieldSearchOperators <em>Date Field Search Operators</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.DateFieldSearchOperators
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateFieldSearchOperators()
+		 * @generated
+		 */
+		EEnum DATE_FIELD_SEARCH_OPERATORS = eINSTANCE.getDateFieldSearchOperators();
 
 	}
 

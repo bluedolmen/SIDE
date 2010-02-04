@@ -30,6 +30,7 @@ import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.SearchField;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
@@ -188,6 +189,43 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getFieldsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<SearchField> getSearchFields() {
+		if (getSearchFieldsBodyOCL == null) {
+			EOperation eOperation = FormPackage.Literals.FORM_GROUP.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(FormPackage.Literals.FORM_GROUP, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getSearchFieldsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getSearchFieldsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<SearchField> result = (Collection<SearchField>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<SearchField>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getSearchFields <em>Get Search Fields</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSearchFields
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getSearchFieldsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

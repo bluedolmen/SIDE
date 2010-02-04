@@ -70,7 +70,23 @@ public enum CharFieldSearchOperators implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	IENDS_WITH(5, "iendsWith", "iendsWith");
+	IENDS_WITH(5, "iendsWith", "iendsWith"), /**
+	 * The '<em><b>Empty</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #EMPTY_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	EMPTY(6, "empty", "empty"), /**
+	 * The '<em><b>Is</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #IS_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	IS(7, "is", "is");
 
 	/**
 	 * The '<em><b>Contains</b></em>' literal value.
@@ -163,6 +179,36 @@ public enum CharFieldSearchOperators implements Enumerator {
 	public static final int IENDS_WITH_VALUE = 5;
 
 	/**
+	 * The '<em><b>Empty</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Empty</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #EMPTY
+	 * @model name="empty"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EMPTY_VALUE = 6;
+
+	/**
+	 * The '<em><b>Is</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Is</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #IS
+	 * @model name="is"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IS_VALUE = 7;
+
+	/**
 	 * An array of all the '<em><b>Char Field Search Operators</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -176,6 +222,8 @@ public enum CharFieldSearchOperators implements Enumerator {
 			ISTARTS_WITH,
 			ENDS_WITH,
 			IENDS_WITH,
+			EMPTY,
+			IS,
 		};
 
 	/**
@@ -232,6 +280,8 @@ public enum CharFieldSearchOperators implements Enumerator {
 			case ISTARTS_WITH_VALUE: return ISTARTS_WITH;
 			case ENDS_WITH_VALUE: return ENDS_WITH;
 			case IENDS_WITH_VALUE: return IENDS_WITH;
+			case EMPTY_VALUE: return EMPTY;
+			case IS_VALUE: return IS;
 		}
 		return null;
 	}

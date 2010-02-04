@@ -121,8 +121,14 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 			case FormPackage.TEXT_FIELD: return createTextField();
 			case FormPackage.SEARCH_FORM: return createSearchForm();
 			case FormPackage.NUMERICAL_FIELD: return createNumericalField();
-			case FormPackage.SEARCH_OPERATOR_CONFIGURATION: return createSearchOperatorConfiguration();
 			case FormPackage.STATIC_TEXT: return createStaticText();
+			case FormPackage.SEARCH_FORM_COLLECTION: return createSearchFormCollection();
+			case FormPackage.SEARCH_FIELD: return createSearchField();
+			case FormPackage.NUMERICAL_SEARCH_FIELD: return createNumericalSearchField();
+			case FormPackage.CHAR_SEARCH_FIELD: return createCharSearchField();
+			case FormPackage.DATE_SEARCH_FIELD: return createDateSearchField();
+			case FormPackage.CHOICE_SEARCH_FIELD: return createChoiceSearchField();
+			case FormPackage.FILE_SEARCH_FIELD: return createFileSearchField();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -144,8 +150,6 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 				return createChoiceWidgetTypeFromString(eDataType, initialValue);
 			case FormPackage.MODEL_CHOICE_WIDGET_TYPE:
 				return createModelChoiceWidgetTypeFromString(eDataType, initialValue);
-			case FormPackage.FIELD_SEARCH_OPERATORS:
-				return createFieldSearchOperatorsFromString(eDataType, initialValue);
 			case FormPackage.CHAR_FIELD_SEARCH_OPERATORS:
 				return createCharFieldSearchOperatorsFromString(eDataType, initialValue);
 			case FormPackage.NUMERICAL_FIELD_SEARCH_OPERATORS:
@@ -156,6 +160,8 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 				return createFileFieldSearchOperatorsFromString(eDataType, initialValue);
 			case FormPackage.COMBINATION_OPERATORS:
 				return createCombinationOperatorsFromString(eDataType, initialValue);
+			case FormPackage.DATE_FIELD_SEARCH_OPERATORS:
+				return createDateFieldSearchOperatorsFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -177,8 +183,6 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 				return convertChoiceWidgetTypeToString(eDataType, instanceValue);
 			case FormPackage.MODEL_CHOICE_WIDGET_TYPE:
 				return convertModelChoiceWidgetTypeToString(eDataType, instanceValue);
-			case FormPackage.FIELD_SEARCH_OPERATORS:
-				return convertFieldSearchOperatorsToString(eDataType, instanceValue);
 			case FormPackage.CHAR_FIELD_SEARCH_OPERATORS:
 				return convertCharFieldSearchOperatorsToString(eDataType, instanceValue);
 			case FormPackage.NUMERICAL_FIELD_SEARCH_OPERATORS:
@@ -189,6 +193,8 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 				return convertFileFieldSearchOperatorsToString(eDataType, instanceValue);
 			case FormPackage.COMBINATION_OPERATORS:
 				return convertCombinationOperatorsToString(eDataType, instanceValue);
+			case FormPackage.DATE_FIELD_SEARCH_OPERATORS:
+				return convertDateFieldSearchOperatorsToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -459,9 +465,9 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SearchOperatorConfiguration createSearchOperatorConfiguration() {
-		SearchOperatorConfigurationImpl searchOperatorConfiguration = new SearchOperatorConfigurationImpl();
-		return searchOperatorConfiguration;
+	public StaticText createStaticText() {
+		StaticTextImpl staticText = new StaticTextImpl();
+		return staticText;
 	}
 
 	/**
@@ -469,9 +475,69 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StaticText createStaticText() {
-		StaticTextImpl staticText = new StaticTextImpl();
-		return staticText;
+	public SearchFormCollection createSearchFormCollection() {
+		SearchFormCollectionImpl searchFormCollection = new SearchFormCollectionImpl();
+		return searchFormCollection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SearchField createSearchField() {
+		SearchFieldImpl searchField = new SearchFieldImpl();
+		return searchField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NumericalSearchField createNumericalSearchField() {
+		NumericalSearchFieldImpl numericalSearchField = new NumericalSearchFieldImpl();
+		return numericalSearchField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CharSearchField createCharSearchField() {
+		CharSearchFieldImpl charSearchField = new CharSearchFieldImpl();
+		return charSearchField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DateSearchField createDateSearchField() {
+		DateSearchFieldImpl dateSearchField = new DateSearchFieldImpl();
+		return dateSearchField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ChoiceSearchField createChoiceSearchField() {
+		ChoiceSearchFieldImpl choiceSearchField = new ChoiceSearchFieldImpl();
+		return choiceSearchField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FileSearchField createFileSearchField() {
+		FileSearchFieldImpl fileSearchField = new FileSearchFieldImpl();
+		return fileSearchField;
 	}
 
 	/**
@@ -590,26 +656,6 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FieldSearchOperators createFieldSearchOperatorsFromString(EDataType eDataType, String initialValue) {
-		FieldSearchOperators result = FieldSearchOperators.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertFieldSearchOperatorsToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public CharFieldSearchOperators createCharFieldSearchOperatorsFromString(EDataType eDataType, String initialValue) {
 		CharFieldSearchOperators result = CharFieldSearchOperators.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -702,6 +748,26 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * @generated
 	 */
 	public String convertCombinationOperatorsToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DateFieldSearchOperators createDateFieldSearchOperatorsFromString(EDataType eDataType, String initialValue) {
+		DateFieldSearchOperators result = DateFieldSearchOperators.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDateFieldSearchOperatorsToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
