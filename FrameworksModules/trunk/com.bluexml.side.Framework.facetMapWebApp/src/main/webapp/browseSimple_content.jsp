@@ -16,7 +16,7 @@
 "
 	contentType="text/html; charset=ISO-8859-1" 
  %>  
-<%
+<% 
 	FacetMapServlet fms = (FacetMapServlet)getServletContext().getAttribute("com.facetmap.servlet");
 	
 	Map facetmap = (Map)getServletContext().getAttribute("facetmap");
