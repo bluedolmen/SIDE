@@ -107,7 +107,7 @@
         <element href="DigitizationProcess.portal#_TOslIABlEd-pVYKNSGS_OQ"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="318,152" size="95,89">
+    <contained xsi:type="di:GraphNode" position="314,153" size="95,89">
       <anchorage graphEdge="//@diagrams.0/@contained.20 //@diagrams.0/@contained.22"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_eysz0ABlEd-pVYKNSGS_OQ"/>
@@ -116,7 +116,7 @@
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.19/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="UseLayout"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="311,274" size="95,78">
+    <contained xsi:type="di:GraphNode" position="311,274" size="100,78">
       <anchorage graphEdge="//@diagrams.0/@contained.22 //@diagrams.0/@contained.24"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="DigitizationProcess.portal#_gmJHYABlEd-pVYKNSGS_OQ"/>
