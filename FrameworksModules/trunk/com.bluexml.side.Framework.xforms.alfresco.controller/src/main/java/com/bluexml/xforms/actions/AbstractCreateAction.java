@@ -20,7 +20,7 @@ public abstract class AbstractCreateAction extends AbstractWriteAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#executeSubmit()
 	 */
 	@Override
-	public void submit() throws Exception {
+	public void submit() {
 		// save status
 		navigationPath.peekCurrentPage().setDataId(null);
 		navigationPath.peekCurrentPage().setNode((Document) node);

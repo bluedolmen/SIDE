@@ -24,7 +24,7 @@ public abstract class AbstractEditAction extends AbstractWriteAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#executeSubmit()
 	 */
 	@Override
-	public void submit() throws Exception {
+	public void submit() throws ServletException {
 		if (AlfrescoController.isStandaloneMode()) {
 			String msg = "The Alfresco Controller is in standalone mode. Some actions are unavailable";
 			navigationPath.setStatusMsg(msg);
@@ -39,6 +39,6 @@ public abstract class AbstractEditAction extends AbstractWriteAction {
 		setSubmissionDefaultLocation(getServletURL(), result);
 	}
 
-	protected abstract void edit() throws Exception;
+	protected abstract void edit() throws ServletException;
 
 }

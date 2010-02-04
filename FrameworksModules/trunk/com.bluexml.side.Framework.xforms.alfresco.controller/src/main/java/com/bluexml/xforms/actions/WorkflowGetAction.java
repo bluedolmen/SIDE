@@ -5,6 +5,7 @@ package com.bluexml.xforms.actions;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -59,8 +60,14 @@ public class WorkflowGetAction extends AbstractReadAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#resolve()
 	 */
 	@Override
-	public Node resolve() throws Exception {
-		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	public Node resolve() {
+		DocumentBuilder docBuilder = null;
+		try {
+			docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			logger.error("Failed to obtain a document builder", e);
+			return null;
+		}
 		Document instance = docBuilder.newDocument();
 		Element rootElement = instance.createElement("root");
 

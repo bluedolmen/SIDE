@@ -1,5 +1,7 @@
 package com.bluexml.xforms.actions;
 
+import javax.servlet.ServletException;
+
 import org.w3c.dom.Node;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
@@ -41,11 +43,12 @@ public class EditClassAction extends AbstractEditAction {
 
 	/**
 	 * Edits the.
+	 * @throws ServletException 
 	 * 
 	 * @throws Exception
 	 *             the exception
 	 */
-	protected void edit() throws Exception {
+	protected void edit() throws ServletException {
 		// retrieve id and datatype
 		String dataType = requestParameters.get(DATA_TYPE);
 		AlfrescoController alfController = AlfrescoController.getInstance();
@@ -79,7 +82,7 @@ public class EditClassAction extends AbstractEditAction {
 	 *             the exception
 	 */
 	private String findRealDataType(AlfrescoController controller, String dataType, String dataId)
-			throws Exception {
+			throws ServletException {
 		// FIXME do not get all class with all associations...
 		Node node = controller.getClass(transaction, dataType, dataId, null, false, false);
 		String realDataType = DOMUtil.getNodeValueByTagName(node, MsgId.INT_INSTANCE_SIDE_DATATYPE

@@ -65,7 +65,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @throws ServletException
 	 */
 	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
-			Node formNode) throws ServletException, ServletException {
+			Node formNode) throws ServletException {
 		Element rootElt = getRootElement(formName, formNode);
 
 		VirtualResolver virtualResolver = new VirtualResolver(this);
@@ -149,7 +149,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @throws ServletException
 	 */
 	public String transformsToJSON(AlfrescoTransaction transaction, String formName, Node formNode,
-			boolean shortPropertyNames) throws ServletException, ServletException {
+			boolean shortPropertyNames) throws ServletException {
 
 		Element root = getRootElement(formName, formNode);
 
@@ -219,7 +219,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @throws ServletException
 	 */
 	private GenericClass persistFormElement(AlfrescoTransaction transaction, String formName,
-			Element rootElt) throws ServletException, ServletException {
+			Element rootElt) throws ServletException {
 
 		GenericClass alfClass = alfrescoObjectFactory.createGenericClass();
 		alfClass.setAttributes(alfrescoObjectFactory.createGenericAttributes());
@@ -352,7 +352,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	// GenericClass alfClass) throws ServletException {
 	private void collectAssocs(AlfrescoTransaction transaction, Element element,
 			List<ModelChoiceType> modelChoices, List<ReferenceType> references,
-			GenericClass alfClass) throws ServletException, ServletException {
+			GenericClass alfClass) throws ServletException {
 		for (ModelChoiceType modelChoiceType : modelChoices) {
 			Element modelChoiceElement = DOMUtil.getChild(element, modelChoiceType.getUniqueName());
 			collectModelChoices(transaction, alfClass, modelChoiceType, modelChoiceElement);
@@ -382,7 +382,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 */
 	private void collectModelChoices(AlfrescoTransaction transaction, GenericClass alfClass,
 			ModelChoiceType modelChoiceType, Element modelChoiceElement)
-			throws ServletException, ServletException {
+			throws ServletException {
 		List<Element> values = new ArrayList<Element>(DOMUtil.getAllChildren(modelChoiceElement));
 		if (modelChoiceType.getMaxBound() != 1) {
 			values.remove(values.size() - 1);
@@ -406,7 +406,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @throws ServletException
 	 */
 	private void collectModelChoice(GenericClass alfClass, ModelChoiceType modelChoiceType,
-			Element value, AlfrescoTransaction at) throws ServletException,
+			Element value, AlfrescoTransaction at) throws 
 			ServletException {
 		String id = getModelChoiceId(value, modelChoiceType, at);
 		if (id != null) {
@@ -415,7 +415,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	}
 
 	private String getModelChoiceId(Element value, ModelChoiceType modelChoiceType,
-			AlfrescoTransaction at) throws ServletException, ServletException {
+			AlfrescoTransaction at) throws ServletException {
 		String id = null;
 		if (modelChoiceType.isInline()) {
 			id = controller.persistForm(at, modelChoiceType.getTarget().get(0).getName(), DOMUtil
@@ -446,7 +446,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 */
 	private void collectTargets(AlfrescoTransaction transaction, GenericClass alfClass,
 			ReferenceType referenceType, Element referenceElement, List<FormType> targets)
-			throws ServletException, ServletException {
+			throws ServletException {
 
 		int i = 0;
 		for (FormType target : targets) {

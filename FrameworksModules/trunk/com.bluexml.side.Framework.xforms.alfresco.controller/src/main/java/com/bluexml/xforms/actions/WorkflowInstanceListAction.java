@@ -10,11 +10,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -57,6 +59,7 @@ public class WorkflowInstanceListAction extends AbstractAction {
 	 * 
 	 */
 	public WorkflowInstanceListAction() {
+		super();
 	}
 
 	/*
@@ -89,8 +92,13 @@ public class WorkflowInstanceListAction extends AbstractAction {
 	 * Called when the form loads initially.
 	 */
 	@Override
-	public Node resolve() throws Exception {
-		return buildInstance();
+	public Node resolve() {
+			try {
+				return buildInstance();
+			} catch (ParserConfigurationException e) {
+				logger.error("Failed to obtain a document builder", e);
+				return null;
+			}
 	}
 
 	private Document buildInstance() throws ParserConfigurationException {
@@ -130,18 +138,26 @@ public class WorkflowInstanceListAction extends AbstractAction {
 
 	/**
 	 * Called when there's a change of selection in the process list.
+	 * @throws ServletException 
 	 * 
 	 */
 	@SuppressWarnings("deprecation")
 	@Override
-	public void submit() throws Exception {
+	public void submit() throws ServletException {
 		Map<String, String> initParams = navigationPath.peekCurrentPage().getInitParams();
 		String userName = initParams.get(MsgId.PARAM_USER_NAME.getText());
 		if (StringUtils.trimToNull(userName) == null) {
-			throw new Exception("Can't retrieve instances: no user name is provided.");
+			throw new ServletException("Can't retrieve instances: no user name is provided.");
 		}
 		String defId;
-		Document instance = buildInstance();
+		Document instance;
+		try {
+			instance = buildInstance();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+			logger.error("Failed to obtain a document builder", e);
+			return;
+		}
 		Element rootElement = instance.getDocumentElement();
 
 		if (node != null) {
@@ -185,7 +201,12 @@ public class WorkflowInstanceListAction extends AbstractAction {
 			Source xmlSource = new DOMSource(instance);
 			ByteArrayOutputStream pos = new ByteArrayOutputStream();
 			Result outputTarget = new StreamResult(pos);
-			documentTransformer.transform(xmlSource, outputTarget);
+			try {
+				documentTransformer.transform(xmlSource, outputTarget);
+			} catch (TransformerException e) {
+				logger.error("Failed to convert the list document into a string", e);
+				throw new ServletException(MsgId.MSG_DEFAULT_ERROR_MSG.getText());
+			}
 
 			ByteArrayInputStream pis = new ByteArrayInputStream(pos.toByteArray());
 

@@ -55,7 +55,7 @@ public abstract class AbstractServlet extends HttpServlet {
 	}
 
 	/**
-	 * Gets the document req.
+	 * Gets the data document from the request.
 	 * 
 	 * @param req
 	 *            the req

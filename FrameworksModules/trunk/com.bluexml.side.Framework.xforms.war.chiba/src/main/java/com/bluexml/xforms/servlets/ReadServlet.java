@@ -1,7 +1,5 @@
 package com.bluexml.xforms.servlets;
 
-import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,8 +32,7 @@ public class ReadServlet extends AbstractServlet {
 	 * javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
-			IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 		read(req, resp);
 	}
 
@@ -47,7 +44,7 @@ public class ReadServlet extends AbstractServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+			throws ServletException {
 		read(req, resp);
 	}
 

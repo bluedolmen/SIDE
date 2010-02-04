@@ -65,6 +65,13 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 	}
 
 	/**
+	 * @return the casUrl
+	 */
+	public static String getCasUrl() {
+		return casUrl;
+	}
+
+	/**
 	 * The Class CASFilterConfig. Overrides filter config
 	 */
 	protected class CASFilterConfig implements FilterConfig {
@@ -95,13 +102,13 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 		 */
 		public String getInitParameter(String parameterName) {
 			if (parameterName.equals(CASFilter.LOGIN_INIT_PARAM)) {
-				return casUrl + "/login";
+				return getCasUrl() + "/login";
 			}
 			if (parameterName.equals(CASFilter.VALIDATE_INIT_PARAM)) {
-				return casUrl + "/serviceValidate";
+				return getCasUrl() + "/serviceValidate";
 			}
 			if (parameterName.equals(CASFilter.SERVERNAME_INIT_PARAM)) {
-				return serverName;
+				return getServerName();
 			}
 			return ownedFilterConfig.getInitParameter(parameterName);
 		}
@@ -120,6 +127,13 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 			return ownedFilterConfig.getServletContext();
 		}
 
+	}
+
+	/**
+	 * @return the serverName
+	 */
+	public static String getServerName() {
+		return serverName;
 	}
 
 }

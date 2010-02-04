@@ -12,17 +12,13 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
-import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.side.form.utils.DOMUtil;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * This servlet is intended to act as a switching (shunting) agent who, depending on specifications
@@ -115,7 +111,7 @@ public class RedirectionAgentServlet extends HttpServlet {
 		if (document == null) {
 			return false;
 		}
-		
+
 		// we won't check the tag name for the root element
 		Element root = document.getDocumentElement();
 		List<Element> entries = DOMUtil.getChildren(root, "entry");
@@ -148,6 +144,7 @@ public class RedirectionAgentServlet extends HttpServlet {
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
 	 * javax.servlet.http.HttpServletResponse)
 	 */
+	@SuppressWarnings("unchecked")
 	/**
 	 * We expect this to be called when the web client is redirected to this servlet after clicking
 	 * a transition button.
@@ -192,6 +189,7 @@ public class RedirectionAgentServlet extends HttpServlet {
 
 	/**
 	 * Tells whether a parameter should not be reported to the redirection address.
+	 * 
 	 * @param paramName
 	 * @return
 	 */
@@ -211,14 +209,17 @@ public class RedirectionAgentServlet extends HttpServlet {
 	 * @param outParamsStr
 	 * @param first
 	 * @param param
+	 * @return true if a '&' was added.
 	 */
-	private void addParam(StringBuffer outParamsStr, boolean first, String paramName,
+	private boolean addParam(StringBuffer outParamsStr, boolean first, String paramName,
 			String[] paramValue) {
+		boolean result = true;
 		if (first == false) {
 			outParamsStr.append('&');
+			result = false;
 		}
 		outParamsStr.append(paramName + "=" + paramValue);
-		first = false;
+		return result;
 	}
 
 	/*
@@ -228,8 +229,7 @@ public class RedirectionAgentServlet extends HttpServlet {
 	 * javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String paramConfigPath = req.getParameter(MsgId.PARAM_REDIRECTOR_CONFIG_FILE.getText());
 		if (paramConfigPath != null) {
 			loadConfigTable(paramConfigPath, resp);

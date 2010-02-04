@@ -6,6 +6,8 @@ package com.bluexml.xforms.actions;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -54,7 +56,7 @@ public class WorkflowFormGetAction extends AbstractReadAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#resolve()
 	 */
 	@Override
-	public Node resolve() throws Exception {
+	public Node resolve() throws ServletException {
 		Page currentPage = navigationPath.peekCurrentPage();
 		String wkFormName = currentPage.getFormName();
 		//

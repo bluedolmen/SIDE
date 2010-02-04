@@ -138,7 +138,7 @@ public class AlfrescoTransaction {
 		return "transactionID-" + counter;
 	}
 
-	public void executeBatch() throws ServletException, ServletException {
+	public void executeBatch() throws ServletException {
 		if (batch == null) {
 			initializeBatch();
 		}

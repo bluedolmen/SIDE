@@ -60,12 +60,12 @@ public class SubmitAction extends AbstractTransactionalAction {
 	}
 
 	@Override
-	protected void prepareSubmit() throws Exception {
+	protected void prepareSubmit() throws ServletException {
 		transactionId = submitNode();
 	}
 
 	@Override
-	protected void afterSubmit() throws Exception {
+	protected void afterSubmit() {
 		String submitURL = StringUtils.trimToNull(pageInitParams.get(MsgId.PARAM_PAGE_SUBMIT
 				.getText()));
 
@@ -121,7 +121,7 @@ public class SubmitAction extends AbstractTransactionalAction {
 	 * @throws Exception
 	 *             the exception
 	 */
-	private void restorePrevPage(NavigationPath navigationPath, String elementId) throws Exception {
+	private void restorePrevPage(NavigationPath navigationPath, String elementId) {
 		Page currentPage = navigationPath.popCurrentPage();
 		// previous page by default
 		boolean empty = navigationPath.isEmpty();
@@ -140,7 +140,7 @@ public class SubmitAction extends AbstractTransactionalAction {
 	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
-	private String submitNode() throws ServletException, ServletException {
+	private String submitNode() throws ServletException {
 		currentPage = navigationPath.peekCurrentPage();
 		FormTypeEnum type = currentPage.getFormType();
 		String result = null;

@@ -40,13 +40,13 @@ public class DeleteAction extends AbstractTransactionalAction {
 	}
 
 	@Override
-	protected void prepareSubmit() throws Exception {
+	protected void prepareSubmit() {
 		// delete element
 		deleteNode();
 	}
 
 	@Override
-	protected void afterSubmit() throws Exception {
+	protected void afterSubmit() {
 		// unstack last page
 		Page currentPage = navigationPath.popCurrentPage();
 		Map<String, String> initParams = currentPage.getInitParams();

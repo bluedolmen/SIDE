@@ -16,12 +16,12 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 
 	boolean isSearching = false; // #1465
 
-	protected abstract void prepareSubmit() throws Exception;
+	protected abstract void prepareSubmit() throws ServletException;
 
-	protected abstract void afterSubmit() throws Exception;
+	protected abstract void afterSubmit() throws ServletException;
 
 	@Override
-	public void submit() throws Exception {
+	public void submit() throws ServletException {
 
 		if (AlfrescoController.isStandaloneMode()) {
 			String msg = "The Alfresco Controller is in standalone mode. Some actions are unavailable";
@@ -51,7 +51,7 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 					navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_DELETE_SUCCESS));
 				}
 			}
-		} catch (Exception e) {
+		} catch (ServletException e) {
 			if (getActionName() == MsgId.INT_ACT_CODE_SUBMIT.getText()) {
 				deleteUploadedFiles(transaction.getUploadedFileNames(), false);
 				if (curPage.getDataId() == null) {
@@ -105,7 +105,7 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 			try {
 				File sourceFile = new File(fileName);
 				sourceFile.delete();
-			} catch (Exception io) {
+			} catch (SecurityException io) {
 				logger.error(io);
 			}
 		}

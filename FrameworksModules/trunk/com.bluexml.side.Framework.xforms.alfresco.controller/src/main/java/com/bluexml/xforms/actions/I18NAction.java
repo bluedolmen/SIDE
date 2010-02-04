@@ -1,11 +1,13 @@
 package com.bluexml.xforms.actions;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.ServletException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -57,11 +59,19 @@ public class I18NAction extends AbstractReadAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#executeResolve()
 	 */
 	@Override
-	public Node resolve() throws Exception {
+	public Node resolve() throws ServletException {
 		if (strings == null) {
 			Properties properties = new SortedProperties();
-			properties.load(NavigationSessionListener.getContext().getResourceAsStream(
-					"/WEB-INF/classes/strings.properties"));
+			try {
+				properties.load(NavigationSessionListener.getContext().getResourceAsStream(
+						"/WEB-INF/classes/strings.properties"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				String msg = "Failed to load strings.properties";
+				logger.error(msg);
+				throw new ServletException(msg);
+			}
 			ArrayList<Object> keys = Collections.list(properties.keys());
 
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

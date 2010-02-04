@@ -273,7 +273,7 @@ public class MappingTool {
 	 * @throws ServletException
 	 */
 	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
-			Node formNode) throws ServletException, ServletException {
+			Node formNode) throws ServletException {
 		return mappingToolFormsToAlfresco.transformsToAlfresco(transaction, formName, formNode);
 	}
 
@@ -288,7 +288,7 @@ public class MappingTool {
 	 * @throws ServletException
 	 */
 	public String transformsToJSON(AlfrescoTransaction transaction, String formName, Node instance,
-			boolean shortPropertyNames) throws ServletException, ServletException {
+			boolean shortPropertyNames) throws ServletException {
 		return mappingToolFormsToAlfresco.transformsToJSON(transaction, formName, instance,
 				shortPropertyNames);
 	}

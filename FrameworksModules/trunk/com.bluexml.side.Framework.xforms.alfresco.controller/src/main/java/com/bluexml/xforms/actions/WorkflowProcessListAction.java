@@ -9,6 +9,7 @@ import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.alfresco.service.cmr.workflow.WorkflowDefinition;
 import org.apache.commons.lang.StringUtils;
@@ -44,6 +45,7 @@ public class WorkflowProcessListAction extends AbstractReadAction {
 	 * 
 	 */
 	public WorkflowProcessListAction() {
+		super();
 	}
 
 	/*
@@ -74,7 +76,7 @@ public class WorkflowProcessListAction extends AbstractReadAction {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Node resolve() throws Exception {
+	public Node resolve() {
 		// get to know if we should be limiting process defs to BlueXML-generated ones
 		Page currentPage = navigationPath.peekCurrentPage();
 		Map<String, String> initParams = currentPage.getInitParams();
@@ -84,7 +86,13 @@ public class WorkflowProcessListAction extends AbstractReadAction {
 		}
 		boolean allowAllDefs = StringUtils.equals(paramValue, "true");
 		// build skeleton of the instance
-		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		DocumentBuilder docBuilder;
+		try {
+			docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			logger.error("Failed to obtain a document builder", e);
+			return null;
+		}
 		Document instance = docBuilder.newDocument();
 		Element rootElement = instance.createElement("root");
 		Element selLabel = instance.createElement(MsgId.INT_INSTANCE_SELECTEDLABEL.getText());

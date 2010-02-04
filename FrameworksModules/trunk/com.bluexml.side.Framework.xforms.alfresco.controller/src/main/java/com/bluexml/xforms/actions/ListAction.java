@@ -6,8 +6,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
+import javax.servlet.ServletException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -32,7 +34,7 @@ public class ListAction extends AbstractAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#executeResolve()
 	 */
 	@Override
-	public Node resolve() throws Exception {
+	public Node resolve() throws ServletException {
 		// retrieves elements
 		return list();
 	}
@@ -47,7 +49,7 @@ public class ListAction extends AbstractAction {
 	 */
 	@SuppressWarnings("deprecation")
 	@Override
-	public void submit() throws Exception {
+	public void submit() throws ServletException {
 		// update list using search
 		Document doc = (Document) node;
 		String query = "";
@@ -77,7 +79,12 @@ public class ListAction extends AbstractAction {
 		Source xmlSource = new DOMSource(list);
 		ByteArrayOutputStream pos = new ByteArrayOutputStream();
 		Result outputTarget = new StreamResult(pos);
-		documentTransformer.transform(xmlSource, outputTarget);
+		try {
+			documentTransformer.transform(xmlSource, outputTarget);
+		} catch (TransformerException e) {
+			logger.error("Failed to convert the list document into a string", e);
+			throw new ServletException(MsgId.MSG_DEFAULT_ERROR_MSG.getText());
+		}
 
 		ByteArrayInputStream pis = new ByteArrayInputStream(pos.toByteArray());
 
@@ -114,7 +121,7 @@ public class ListAction extends AbstractAction {
 	 * @throws Exception
 	 *             the exception
 	 */
-	private Node list() throws Exception {
+	private Node list() throws ServletException {
 		// simply call controller
 		String dataType = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_TYPE.getText());
 		String query = requestParameters.get(DATA_QUERY);

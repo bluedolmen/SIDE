@@ -40,7 +40,7 @@ public class CancelAction extends AbstractWriteAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#executeSubmit()
 	 */
 	@Override
-	public void submit() throws Exception {
+	public void submit() {
 		// pop page from stack
 		Page currentPage = navigationPath.popCurrentPage();
 		Map<String, String> initParams = currentPage.getInitParams();

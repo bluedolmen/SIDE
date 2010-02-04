@@ -463,7 +463,7 @@ public class AlfrescoController {
 	 */
 	public Document getElement(AlfrescoTransaction transaction, String id,
 			Stack<AssociationType> stack, boolean formIsReadOnly, boolean isServletRequest)
-			throws ServletException, ServletException {
+			throws ServletException {
 		Document alfrescoNode = processRead(transaction, id);
 
 		return mappingTool.transformAlfrescoToClassForms(transaction, alfrescoNode, stack,
@@ -484,8 +484,7 @@ public class AlfrescoController {
 	 *             the controller exception
 	 * @throws ServletException
 	 */
-	public Document processRead(AlfrescoTransaction transaction, String id)
-			throws ServletException, ServletException {
+	public Document processRead(AlfrescoTransaction transaction, String id) throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("objectId", id);
 		return requestDocumentFromAlfresco(transaction, parameters,
@@ -604,7 +603,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	public String persistClass(AlfrescoTransaction transaction, Node instance,
-			boolean isServletRequest) throws ServletException, ServletException {
+			boolean isServletRequest) throws ServletException {
 		GenericClass alfClass = mappingTool.transformClassFormsToAlfresco(transaction, instance,
 				isServletRequest);
 		if (alfClass.getId() == null) {
@@ -632,7 +631,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	private String saveMain(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws ServletException, ServletException {
+			throws ServletException {
 		// enqueue the operation
 		transaction.queueSave(alfClass);
 
@@ -652,7 +651,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	private String updateMain(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws ServletException, ServletException {
+			throws ServletException {
 		// enqueue the operation
 		transaction.queueUpdate(alfClass);
 
@@ -750,7 +749,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	private void uploadProcessOnSave(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws ServletException, ServletException {
+			throws ServletException {
 		String fileName = null;
 		String filePath = null;
 		String mimeType = null;
@@ -818,7 +817,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	private void uploadProcessOnUpdate(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws ServletException, ServletException {
+			throws ServletException {
 		List<RepoContentInfoBean> previousFileContentInfo;
 		List<RepoContentInfoBean> previousRepoContentInfo;
 		List<RepoContentInfoBean> newFileContentInfo;
@@ -1026,9 +1025,10 @@ public class AlfrescoController {
 	 * @return the file
 	 */
 	private File findNewName(int depth, String type, String fileName) {
-		if (fileName.contains("\\")) {
-			int lastIndexOf = StringUtils.lastIndexOf(fileName, '\\');
-			fileName = StringUtils.substring(fileName, lastIndexOf + 1);
+		String lFileName = fileName;
+		if (lFileName.contains("\\")) {
+			int lastIndexOf = StringUtils.lastIndexOf(lFileName, '\\');
+			lFileName = StringUtils.substring(lFileName, lastIndexOf + 1);
 		}
 		String rootPath = uploadDir.getAbsolutePath() + File.separator + type;
 
@@ -1039,18 +1039,18 @@ public class AlfrescoController {
 
 		File root = new File(rootPath);
 
-		File result = new File(root, fileName);
+		File result = new File(root, lFileName);
 		if (result.exists()) {
-			int dotPos = fileName.lastIndexOf(".");
+			int dotPos = lFileName.lastIndexOf(".");
 
 			String fileNameWihoutExtension = null;
 			String fileNameExtension = null;
 
 			if (dotPos == -1) {
-				fileNameWihoutExtension = fileName;
+				fileNameWihoutExtension = lFileName;
 			} else {
-				fileNameWihoutExtension = fileName.substring(0, dotPos);
-				fileNameExtension = fileName.substring(dotPos + 1);
+				fileNameWihoutExtension = lFileName.substring(0, dotPos);
+				fileNameExtension = lFileName.substring(dotPos + 1);
 			}
 			int i = 0;
 			do {
@@ -1067,7 +1067,7 @@ public class AlfrescoController {
 	}
 
 	public void executeBatch(AlfrescoTransaction alfrescoTransaction, Batch batch)
-			throws ServletException, ServletException {
+			throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("datas", MappingToolCommon.marshal(batch));
 
@@ -1119,7 +1119,7 @@ public class AlfrescoController {
 	 */
 	@SuppressWarnings("all")
 	public List<String> getCaptions(AlfrescoTransaction transaction, List<String> ids)
-			throws ServletException, ServletException {
+			throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("query", StringUtils.join(ids, ";"));
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
@@ -1136,7 +1136,7 @@ public class AlfrescoController {
 
 	@SuppressWarnings("unchecked")
 	public String getEnumCaption(AlfrescoTransaction transaction, String code)
-			throws ServletException, ServletException {
+			throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("query", "enum;" + code);
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
@@ -1172,8 +1172,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	public Node getDynamicEnum(AlfrescoTransaction transaction, String type, String filterParent,
-			String filterData, String query, boolean limit) throws ServletException,
-			ServletException {
+			String filterData, String query, boolean limit) throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		String fp = StringUtils.trimToNull(filterParent);
 		if (fp != null) {
@@ -1224,8 +1223,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	public Node getList(AlfrescoTransaction transaction, String type, String query,
-			String maxResults, String format, String maxLength) throws ServletException,
-			ServletException {
+			String maxResults, String format, String maxLength) throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 
 		String alfTypeName = null;
@@ -1378,7 +1376,7 @@ public class AlfrescoController {
 	 */
 	private Document requestDocumentFromAlfresco(AlfrescoTransaction transaction,
 			Map<String, String> parameters, MsgId opCode, boolean throwIfOffline)
-			throws ServletException, ServletException {
+			throws ServletException {
 		Document result = null;
 		try {
 			PostMethod post = requestPost(transaction, parameters, opCode);
@@ -1587,7 +1585,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	public String persistForm(AlfrescoTransaction transaction, String type, Node instance)
-			throws ServletException, ServletException {
+			throws ServletException {
 		GenericClass alfClass = this.transformsToAlfresco(transaction, type, instance);
 		if (alfClass.getId() == null) {
 			alfClass.setId(saveMain(transaction, alfClass));
@@ -1608,7 +1606,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	public String persistFormJSON(AlfrescoTransaction transaction, String formName, Node instance,
-			boolean shortPropertyNames) throws ServletException, ServletException {
+			boolean shortPropertyNames) throws ServletException {
 		return mappingTool.transformsToJSON(transaction, formName, instance, shortPropertyNames);
 	}
 
@@ -1623,7 +1621,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
-			Node instance) throws ServletException, ServletException {
+			Node instance) throws ServletException {
 		return mappingTool.transformsToAlfresco(transaction, formName, instance);
 	}
 
@@ -1871,7 +1869,7 @@ public class AlfrescoController {
 	 * @param transaction
 	 *            a transaction object. May be null.
 	 * @param methodName
-	 *            the name of the method to call, case-sensitive
+	 *            the name of the method to call, case-sensitive.
 	 * @param methodParameters
 	 *            a list containing the method parameters in the order of the function's signature.
 	 *            CANNOT BE NULL.
@@ -1885,10 +1883,12 @@ public class AlfrescoController {
 			parameterMaps.put("arg" + i, parameter);
 			i++;
 		}
-		if (transaction == null) {
-			transaction = new AlfrescoTransaction(this);
+
+		AlfrescoTransaction realTransaction = transaction;
+		if (realTransaction == null) {
+			realTransaction = new AlfrescoTransaction(this);
 		}
-		return workflowRequestCall(transaction, methodName, parameterMaps);
+		return workflowRequestCall(realTransaction, methodName, parameterMaps);
 	}
 
 	/**

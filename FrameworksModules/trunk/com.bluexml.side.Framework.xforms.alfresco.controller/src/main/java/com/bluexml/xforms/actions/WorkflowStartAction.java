@@ -6,6 +6,8 @@ package com.bluexml.xforms.actions;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.workflow.WorkflowPath;
 import org.alfresco.service.cmr.workflow.WorkflowTask;
@@ -65,9 +67,10 @@ public class WorkflowStartAction extends AbstractWriteAction {
 	/**
 	 * Called when there's a click on the button. Redirects the user to the appropriate form: the
 	 * task's form if a task is selected, or the start task form otherwise.
+	 * @throws ServletException 
 	 */
 	@Override
-	public void submit() throws Exception {
+	public void submit() throws ServletException {
 		DOMUtil.logXML(node, true);
 		Map<String, String> initParams = navigationPath.peekCurrentPage().getInitParams();
 		String userName = initParams.get(MsgId.PARAM_USER_NAME.getText());
@@ -78,7 +81,7 @@ public class WorkflowStartAction extends AbstractWriteAction {
 		// build the location where to redirect the client, i.e. the appropriate form.
 		if (StringUtils.trimToNull(selTaskId) == null) {
 			if (StringUtils.trimToNull(selDefinitionId) == null) {
-				throw new Exception("Please select a process before proceeding.");
+				throw new ServletException("Please select a process before proceeding.");
 			}
 			// a process is selected but no task is specified
 			// WorkflowDefinition def = controller.workflowGetWorkflowById(selDefinitionId);

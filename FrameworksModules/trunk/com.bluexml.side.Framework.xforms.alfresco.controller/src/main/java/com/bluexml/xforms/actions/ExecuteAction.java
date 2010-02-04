@@ -50,7 +50,7 @@ public class ExecuteAction extends AbstractWriteAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#submit()
 	 */
 	@Override
-	public void submit() throws Exception {
+	public void submit() {
 		try {
 			// load the class
 			String className = requestParameters.get(CLASS_NAME);

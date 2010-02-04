@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -136,7 +137,7 @@ public abstract class AbstractAction {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public abstract Node resolve() throws Exception;
+	public abstract Node resolve() throws ServletException;
 
 	/**
 	 * Execute submit. Used for write operations.
@@ -144,7 +145,7 @@ public abstract class AbstractAction {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public abstract void submit() throws Exception;
+	public abstract void submit() throws ServletException;
 
 	/**
 	 * Checks if is replace all.
@@ -300,28 +301,34 @@ public abstract class AbstractAction {
 	}
 
 	/**
+	 * Loads and executes a user class available in the class path. The class must implement a
+	 * specific method.
+	 * 
 	 * @param className
+	 * @return the result of the call as defined by the contract method signature, or null if an
+	 *         exception occurs.
 	 * @throws ClassNotFoundException
 	 * @throws NoSuchMethodException
-	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
 	 * @throws InstantiationException
 	 */
-	protected String callExternalAction(String className) throws ClassNotFoundException,
-			NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-			InstantiationException {
-		String resultStr = "";
-		Class<?> theClass = Class.forName(className);
-		Method method = theClass.getMethod("run", new Class[] { org.w3c.dom.Node.class,
-				java.lang.String.class });
-		String dataId = navigationPath.peekCurrentPage().getDataId();
-		Object result = method.invoke(theClass.newInstance(), new Object[] { node, dataId });
+	protected String callExternalAction(String className) {
 		try {
+			String resultStr = "";
+			Class<?> theClass = Class.forName(className);
+			Method method = theClass.getMethod("run", new Class[] { org.w3c.dom.Node.class,
+					java.lang.String.class });
+			String dataId = navigationPath.peekCurrentPage().getDataId();
+			Object result = method.invoke(theClass.newInstance(), new Object[] { node, dataId });
 			resultStr = (String) result;
-		} catch (ClassCastException e) {
-			logger.warn("Returned result is not of type java.lang.String; will be ignored.", e);
+			return resultStr;
+		} catch (ClassCastException cce) {
+			logger.warn("Returned result is not of type java.lang.String; will be ignored.", cce);
+			return null;
+		} catch (Exception e) {
+			logger.error("An error occurred when invoking class '" + className + "'", e);
+			return null;
 		}
-		return resultStr;
 	}
 
 	/**

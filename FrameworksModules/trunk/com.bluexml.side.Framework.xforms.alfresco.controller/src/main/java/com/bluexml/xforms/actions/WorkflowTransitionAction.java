@@ -65,7 +65,6 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		public TransitionResultBean() {
 			super();
 			this.success = false;
-			;
 			this.tasks = null;
 		}
 
@@ -129,7 +128,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#submit()
 	 */
 	@Override
-	public void submit() throws Exception {
+	public void submit() throws ServletException {
 
 		if (AlfrescoController.isStandaloneMode()) {
 			String msg = "The Alfresco Controller is in standalone mode. Some actions are unavailable";
@@ -164,23 +163,24 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		Map<String, String> initParams = currentPage.getInitParams();
 		String nextPage = null;
 
+		String suffix = URLsuffix;
 		boolean noAddInfo = (StringUtils.equals(initParams.get(MsgId.PARAM_SKIP_ADDITIONAL_INFO
 				.getText()), "true"));
 		if (noAddInfo == false) {
 			// normally, the instance and process ids are available
-			URLsuffix = URLsuffix + "&" + MsgId.PARAM_WORKFLOW_PROCESS_ID + "="
+			suffix = suffix + "&" + MsgId.PARAM_WORKFLOW_PROCESS_ID + "="
 					+ currentPage.getWkflwProcessId();
-			URLsuffix = URLsuffix + "&" + MsgId.PARAM_WORKFLOW_INSTANCE_ID + "="
+			suffix = suffix + "&" + MsgId.PARAM_WORKFLOW_INSTANCE_ID + "="
 					+ currentPage.getWkflwInstanceId();
 		}
 		nextPage = initParams.get(MsgId.PARAM_PAGE_SUCCESS.getText());
 
 		if (nextPage != null) {
 			// go to any url that was specified
-			redirectToClientURL(currentPage.getFormName(), nextPage, URLsuffix, noAddInfo);
+			redirectToClientURL(currentPage.getFormName(), nextPage, suffix, noAddInfo);
 		} else {
 			// we get to decide where to redirect
-			redirectToWorkflowForm(currentPage, resultBean, URLsuffix);
+			redirectToWorkflowForm(currentPage, resultBean, suffix);
 		}
 	}
 
@@ -362,7 +362,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @throws ServletException
 	 * @throws ServletException
 	 */
-	private TransitionResultBean submitWork() throws ServletException, ServletException {
+	private TransitionResultBean submitWork() throws ServletException {
 		TransitionResultBean resultBean = new TransitionResultBean();
 		HashMap<QName, Serializable> properties = new HashMap<QName, Serializable>();
 		currentPage = navigationPath.peekCurrentPage();

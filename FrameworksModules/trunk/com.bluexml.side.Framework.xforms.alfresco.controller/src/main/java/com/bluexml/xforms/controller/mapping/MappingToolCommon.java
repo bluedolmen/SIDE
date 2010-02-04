@@ -606,11 +606,13 @@ public class MappingToolCommon {
 		if (xformsAttribute.equals("double") || xformsAttribute.equals("float")) {
 			return textContent.replace(',', '.');
 		}
+
+		String realTextContent = textContent;
 		if (StringUtils.trimToNull(staticEnumType) != null) {
-			textContent = StringUtils.trimToEmpty(EnumAction
-					.getEnumKey(staticEnumType, textContent));
+			realTextContent = StringUtils.trimToEmpty(EnumAction.getEnumKey(staticEnumType,
+					textContent));
 		}
-		return textContent;
+		return realTextContent;
 	}
 
 	protected String convertAlfrescoAttributeToXforms(List<ValueType> value, String type,

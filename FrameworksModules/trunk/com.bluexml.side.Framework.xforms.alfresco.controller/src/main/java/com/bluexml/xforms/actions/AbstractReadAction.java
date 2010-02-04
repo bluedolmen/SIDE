@@ -3,6 +3,7 @@
  */
 package com.bluexml.xforms.actions;
 
+
 /**
  * Superclass for actions that are called via reader://... URIs.
  * 
@@ -17,7 +18,7 @@ public abstract class AbstractReadAction extends AbstractAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#submit()
 	 */
 	@Override
-	public void submit() throws Exception {
+	public void submit() {
 		// nothing to do here in read only actions
 	}
 

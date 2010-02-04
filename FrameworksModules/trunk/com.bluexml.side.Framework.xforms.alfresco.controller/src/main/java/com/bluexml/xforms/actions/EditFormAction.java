@@ -37,11 +37,8 @@ public class EditFormAction extends AbstractEditAction {
 
 	/**
 	 * Edits the.
-	 * 
-	 * @throws Exception
-	 *             the exception
 	 */
-	protected void edit() throws Exception {
+	protected void edit() {
 		// retrieve id
 		AlfrescoController alfController = AlfrescoController.getInstance();
 		String dataId = alfController.getAndResetEditNode(node);

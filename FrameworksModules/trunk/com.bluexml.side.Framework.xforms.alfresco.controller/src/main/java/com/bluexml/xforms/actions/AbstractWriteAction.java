@@ -15,7 +15,7 @@ public abstract class AbstractWriteAction extends AbstractAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#resolve()
 	 */
 	@Override
-	public Node resolve() throws Exception {
+	public Node resolve() {
 		// This does not get called for write actions.
 		return null;
 	}

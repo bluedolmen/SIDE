@@ -27,7 +27,7 @@ public class GetAction extends AbstractReadAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#executeResolve()
 	 */
 	@Override
-	public Node resolve() throws Exception {
+	public Node resolve() throws ServletException {
 		// load element from current page
 		Page currentPage = navigationPath.peekCurrentPage();
 		String dataType = currentPage.getFormName();
@@ -55,16 +55,17 @@ public class GetAction extends AbstractReadAction {
 			AlfrescoTransaction transaction, String dataType, Map<String, String> initParams,
 			String dataId, Document node, FormTypeEnum formType, boolean formIsReadOnly)
 			throws ServletException {
+		Document doc = node;
 		if (StringUtils.trimToNull(dataId) != null || node == null) {
 			if (formType == FormTypeEnum.FORM) {
-				node = controller
+				doc = controller
 						.getForm(transaction, dataType, dataId, initParams, formIsReadOnly);
 			} else { // expecting FormTypeEnum.CLASS here
-				node = controller.getClass(transaction, dataType, dataId, initParams,
+				doc = controller.getClass(transaction, dataType, dataId, initParams,
 						formIsReadOnly, false);
 			}
 		}
-		return node;
+		return doc;
 	}
 
 	/*
