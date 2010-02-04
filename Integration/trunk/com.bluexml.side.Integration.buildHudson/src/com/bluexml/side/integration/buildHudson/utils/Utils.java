@@ -678,7 +678,13 @@ public class Utils {
 				System.out.println("\t- " + tab[1] + ": "
 						+ getVersionNumberPom(pom));
 			}
-			}
+			
+			
+			if (listePlugin.indexOf("com.bluexml.side.Util.dependencies") == -1){
+				listePlugin.add("com.bluexml.side.Util.dependencies");
+			} 
+			
+		}
 		
 		// mettre a jour les plugins avec les versions des pom.xml
 		// ajouter les plugins modifier dans la listePlugin
