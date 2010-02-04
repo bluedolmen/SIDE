@@ -670,6 +670,16 @@ public class Utils {
 
 		}
 		
+		if (listeProjetPoms.size() != 0) {
+			System.out.println("\nListe des poms modifi�es: ");
+			for (String pom : listeProjetPoms) {
+				String valeurf= pom;
+				String [] tab=valeurf.split("/S-IDE/");
+				System.out.println("\t- " + tab[1] + ": "
+						+ getVersionNumberPom(pom));
+			}
+			}
+		
 		// mettre a jour les plugins avec les versions des pom.xml
 		// ajouter les plugins modifier dans la listePlugin
 		ArrayList<String> listePomsModuleDepencies = new ArrayList<String>();
@@ -682,6 +692,7 @@ public class Utils {
 				String nomPom=valeur2.substring(valeur2.lastIndexOf("/")+1);
 				
 				//fixer les versions des fichiers plugin.xml
+				System.out.println("Fixer les versions des fichiers plugins : ");
 				for (String element : projects) {
 					
 						if (element.indexOf("feature") == -1) {
@@ -701,7 +712,7 @@ public class Utils {
 				
 				
 				//fixer les versions des fichier pom.xml
-				
+				System.out.println("Fixer les versions des fichiers pom : ");
 				for (String element : listefichierpom) { 
 						
 					//si contient reference pom alors modifie max version
@@ -723,6 +734,16 @@ public class Utils {
 			updateVersionNumberPom(pomModuleDepencies);
 
 		}
+		
+		if (listePomsModuleDepencies.size() != 0) {
+			System.out.println("\nListe des poms modifi�es suite mis a jour module: ");
+			for (String pom : listePomsModuleDepencies) {
+				String valeurf= pom;
+				String [] tab=valeurf.split("/S-IDE/");
+				System.out.println("\t- " + tab[1] + ": "
+						+ getVersionNumberPom(pom));
+			}
+			}
 		
 		if (listePomsModuleDepencies.size() != 0) {
 			for (String pom : listePomsModuleDepencies) {
@@ -770,25 +791,8 @@ public class Utils {
 			}
 		}
 		
-		if (listeProjetPoms.size() != 0) {
-			System.out.println("\nListe des poms modifi�es: ");
-			for (String pom : listeProjetPoms) {
-				String valeurf= pom;
-				String [] tab=valeurf.split("/S-IDE/");
-				System.out.println("\t- " + tab[1] + ": "
-						+ getVersionNumberPom(pom));
-			}
-			}
 		
-		if (listePomsModuleDepencies.size() != 0) {
-			System.out.println("\nListe des poms modifi�es suite mis a jour module: ");
-			for (String pom : listePomsModuleDepencies) {
-				String valeurf= pom;
-				String [] tab=valeurf.split("/S-IDE/");
-				System.out.println("\t- " + tab[1] + ": "
-						+ getVersionNumberPom(pom));
-			}
-			}
+		
 
 
 		// affichage des donn�es
@@ -916,6 +920,8 @@ public class Utils {
 		
 		boolean exists = (new File(fileFeaturePath)).exists();
 		if (exists) { 
+			
+		System.out.println("Update Pom: "+fileFeaturePath+ " module :"+module+ " version :"+version);
 
 		org.jdom.Document document = null;
 		org.jdom.Element racine;
@@ -1050,6 +1056,7 @@ public class Utils {
 		
 		boolean exists = (new File(fileFeaturePath)).exists();
 		if (exists) { 
+		System.out.println("Update plugin dependencies : "+fileFeaturePath +" version: "+ " module :"+module);
 
 		org.jdom.Document document = null;
 		org.jdom.Element racine;
