@@ -52,7 +52,15 @@ public class Generate extends WorkspaceJob {
 	Configuration configuration;
 	List<Model> models;
 	boolean headless = false;
-	public static final String FM_dev="FM_dev"; // Developer mode that use directly local repository instead of embedded one 
+	/*
+	 * Developer mode that use directly local repository instead of embedded one
+	 */
+	public static final String FM_dev = "FM_dev"; 
+	/*
+	 * Developer mode that use maven repository servers to update local repository
+	 */
+	public static final String UPDATE_DEPENDENCIES = "UPDATE_DEPENDENCIES";
+	
 	private static int NB_GENERATION_STEP = 3;
 	private static int NB_DEPLOY_STEP = 4;
 	private static int NB_GENERAL_STEP = 2;
@@ -80,7 +88,8 @@ public class Generate extends WorkspaceJob {
 		this.componentMonitor = componentMonitor;
 		this.configuration = configuration;
 		this.models = models;
-		// setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY, Boolean.TRUE);
+		// setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY,
+		// Boolean.TRUE);
 		setProperty(IProgressConstants.KEEPONE_PROPERTY, Boolean.TRUE);
 		setProperty(IProgressConstants.ICON_PROPERTY, getImage());
 
@@ -315,30 +324,34 @@ public class Generate extends WorkspaceJob {
 		checkUserRequest();
 		// if work online do a mvn go-offline to prepare maven to work
 		// offline if asked
-//		if (!isOfflineMode(configurationParameters)) {
-//			// get all Integration modules for offline mode
-//			try {
-//				generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
-//				ApplicationUtil.prepareForOffline();
-//				generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
-//			} catch (Exception e1) {
-//				e1.printStackTrace();
-//				generalMonitor.addErrorText(Activator.Messages.getString("Generate.15")); //$NON-NLS-1$
-//			}
-//		}
-		
-		// update local repository from embedded archive
-		
-		if (!generationParameters.containsKey(FM_dev) || !Boolean.parseBoolean(generationParameters.get(FM_dev))) {
+		// if (!isOfflineMode(configurationParameters)) {
+		// // get all Integration modules for offline mode
+		// try {
+		//				generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
+		// ApplicationUtil.prepareForOffline();
+		//				generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
+		// } catch (Exception e1) {
+		// e1.printStackTrace();
+		//				generalMonitor.addErrorText(Activator.Messages.getString("Generate.15")); //$NON-NLS-1$
+		// }
+		// }
+
+		if (generationParameters.containsKey(UPDATE_DEPENDENCIES) && Boolean.parseBoolean(generationParameters.get(UPDATE_DEPENDENCIES))) {
+			// update from repository servers
 			generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
-			DependenciesDeployer.deploy();
+			ApplicationUtil.prepareForOffline();
 			generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
 		} else {
-			generalMonitor.addWarningText(Activator.Messages.getString("Framework module Dev mode"));
+			if (!generationParameters.containsKey(FM_dev) || !Boolean.parseBoolean(generationParameters.get(FM_dev))) {
+				// update local repository from embedded archive
+				generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
+				DependenciesDeployer.deploy();
+				generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
+			} else {
+				generalMonitor.addWarningText(Activator.Messages.getString("Framework module Dev mode"));
+			}
 		}
-		
-		
-		
+
 		checkUserRequest();
 		boolean error = false;
 		// generate
