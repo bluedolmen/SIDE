@@ -332,11 +332,11 @@ public class NavigationManager {
 		// the ids are available
 		NavigationPath navigationPath = NavigationSessionListener.getNavigationPath(sessionId,
 				pageId);
-		Page currentPage = navigationPath.peekCurrentPage();
 		if (navigationPath.isEmpty()) {
 			// the servlet is called directly with ids we did not register
 			throw new ServletException(MsgPool.getMsg(MsgId.MSG_SESSION_TIMED_OUT));
 		}
+		Page currentPage = navigationPath.peekCurrentPage();
 		// set the warning if page was called with an object it can't display
 		if (currentPage.isWrongCallType()) {
 			navigationPath
