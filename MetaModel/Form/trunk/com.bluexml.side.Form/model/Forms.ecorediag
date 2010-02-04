@@ -124,7 +124,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_B3MCoZuPEd68JO4ATwwBpA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_B3NQwJuPEd68JO4ATwwBpA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="Forms.ecore#//Field/fieldSize"/>
+        <element xmi:type="ecore:EAttribute" href="Forms.ecore#//Field/field_size"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_B3NQwZuPEd68JO4ATwwBpA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_F71-ERFzEd-fh7b7R1pC_A" type="2001">
@@ -195,6 +195,10 @@
   <children xmi:type="notation:Node" xmi:id="_B3TXYJuPEd68JO4ATwwBpA" type="1001">
     <children xmi:type="notation:Node" xmi:id="_B3T-cJuPEd68JO4ATwwBpA" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_B3T-cZuPEd68JO4ATwwBpA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_FQ5C8BF7Ed-fh7b7R1pC_A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="Forms.ecore#//FormClass/content_enabled"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_FQ5C8RF7Ed-fh7b7R1pC_A"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_B3T-cpuPEd68JO4ATwwBpA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_B3T-c5uPEd68JO4ATwwBpA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_B3T-dJuPEd68JO4ATwwBpA"/>
