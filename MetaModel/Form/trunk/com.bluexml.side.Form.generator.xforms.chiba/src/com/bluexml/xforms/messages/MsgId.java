@@ -125,6 +125,7 @@ public enum MsgId {
 	INT_CSS_SELECT_SEARCH_ZONE			("side_select_search_zone"),
 	INT_CSS_SELECT_TRIGGER_IMG			("side_select_trigger_img"),
 	INT_CSS_SELECT_WIDGET				("side_select_widget"),
+	INT_CSS_STATIC_TEXT					("side_static_text"),
 	INT_CSS_STATUS_BAR_ID				("side_status_bar"),
 	INT_CSS_UPLOAD_FILENAME 			("side_upload_filename"),
 	INT_CSS_UPLOAD_PREVIEW 				("side_upload_preview"),

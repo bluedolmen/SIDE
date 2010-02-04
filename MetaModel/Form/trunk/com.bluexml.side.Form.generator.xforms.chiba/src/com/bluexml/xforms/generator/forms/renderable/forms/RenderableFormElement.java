@@ -10,6 +10,7 @@ import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.Reference;
+import com.bluexml.side.form.StaticText;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -126,6 +127,9 @@ public abstract class RenderableFormElement<FE extends FormElement> extends Rend
 			} else if (formElement instanceof FormGroup) {
 				renderable = new RenderableGroup<FormGroup>(generationManager, formElement,
 						(FormGroup) formElement);
+			} else if (formElement instanceof StaticText) {
+				renderable = new RenderableStaticText(generationManager, formElement,
+						(StaticText) formElement);
 			}
 
 			// Commenté car hidden est traité via l'attribut "relevant" dans le bind

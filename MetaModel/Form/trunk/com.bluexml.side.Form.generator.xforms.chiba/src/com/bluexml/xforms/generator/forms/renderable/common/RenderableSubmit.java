@@ -8,7 +8,7 @@ import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementSubmission;
-import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
+import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
 
 /**
  * The Class RenderableSubmit.
@@ -59,7 +59,7 @@ public class RenderableSubmit extends Renderable {
 	 */
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
-		RenderedInput rendered = new RenderedInput();
+		RenderedXMLElement rendered = new RenderedXMLElement();
 
 		if (hideIfReadOnlyMode && getFormGenerator().isInReadOnlyMode()) {
 			return rendered;

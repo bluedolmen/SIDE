@@ -88,8 +88,8 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 				pattern = URLEncoder.encode(pattern, "UTF-8");
 			}
 		} catch (UnsupportedEncodingException e) {
-			logger.fatal("Unsupported encoding scheme");
-			throw new RuntimeException("Unsupported encoding scheme");
+			logger.fatal("Unsupported encoding scheme: UTF-8");
+			throw new RuntimeException("Unsupported encoding scheme: UTF-8");
 		}
 		properties.setFormatPattern(pattern);
 		properties.setLabelLength("" + formElement.getLabel_length());
