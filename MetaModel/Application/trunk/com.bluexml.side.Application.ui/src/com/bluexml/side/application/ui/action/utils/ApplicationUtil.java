@@ -1,6 +1,8 @@
 package com.bluexml.side.application.ui.action.utils;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,18 +21,22 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationFactory;
+import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
@@ -428,16 +434,28 @@ public class ApplicationUtil {
 		return lmc;
 	}
 
+	public static void updateApplicationFromExtensionPoint(Application appModel, IFile model) throws Exception {
+		List<ModelElement> elements = appModel.getElements();
+		for (ModelElement modelElement : elements) {
+			if (modelElement instanceof Configuration) {
+				Configuration config = (Configuration) modelElement;
+				updateConfigurationFromExtensionPoint(config);
+			}
+		}
+		// save changes
+		saveData(model, appModel);
+	}
+
 	/**
 	 * take a configuration and update all properties from SIDE extension, this
 	 * manage : <li>deleted elements (options, dependencies)</li> <li>added
 	 * elements</li> <li>updates elements</li>
 	 * 
 	 * @param config
+	 * @param appModel
 	 * @throws Exception
 	 */
 	public static void updateConfigurationFromExtensionPoint(Configuration config) throws Exception {
-
 		// scan all generator
 		List<GeneratorConfiguration> lgen = config.getGeneratorConfigurations();
 		List<GeneratorConfiguration> generatorConfToremove = new ArrayList<GeneratorConfiguration>();
@@ -643,10 +661,9 @@ public class ApplicationUtil {
 				}
 			}
 		}
-		
+
 		// remove invalid deployerConfiguration
 		config.getDeployerConfigurations().removeAll(deployerConfToremove);
-		
 
 	}
 
@@ -789,5 +806,26 @@ public class ApplicationUtil {
 	public static Configuration cloneConfiguration(Configuration conf_) {
 		Configuration config = (Configuration) EcoreUtil.copy(conf_);
 		return config;
+	}
+
+	/**
+	 * Save data in XML file
+	 */
+	public static void saveData(IFile model, Application appModel) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("application", new XMIResourceFactoryImpl()); //$NON-NLS-1$
+		resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI, ApplicationPackage.eINSTANCE);
+		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(URI.createURI(model.getRawLocation().toFile().getAbsolutePath()));
+		resource.getContents().add(appModel);
+
+		try {
+			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(model.getRawLocation().toFile().getAbsolutePath()));
+			Map<String, Object> saveOptions = new HashMap<String, Object>();
+			resource.save(out, saveOptions);
+			out.close();
+			model.refreshLocal(-1, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

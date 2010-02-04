@@ -1,9 +1,7 @@
 package com.bluexml.side.application.ui.action;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -28,11 +26,8 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -1504,7 +1499,7 @@ public class ApplicationDialog extends Dialog {
 				}
 			}
 			final GeneratePopUp generationPopUp = new GeneratePopUp(Display.getDefault().getActiveShell(), getCurrentConfiguration());
-			GeneratePopUp.launch(getCurrentConfiguration(), generationPopUp);
+			GeneratePopUp.launch(getCurrentConfiguration(), generationPopUp, application, model);
 			close();
 			return;
 		}
@@ -1516,22 +1511,8 @@ public class ApplicationDialog extends Dialog {
 	 * Save data in XML file
 	 */
 	protected void saveData() {
-		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("application", new XMIResourceFactoryImpl()); //$NON-NLS-1$
-		resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI, ApplicationPackage.eINSTANCE);
-		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(URI.createURI(model.getRawLocation().toFile().getAbsolutePath()));
-		resource.getContents().add(application);
-
-		try {
-			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(model.getRawLocation().toFile().getAbsolutePath()));
-			Map<String, Object> saveOptions = new HashMap<String, Object>();
-			resource.save(out, saveOptions);
-			out.close();
-			model.refreshLocal(-1, null);
-			applicationModified = false;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		ApplicationUtil.saveData(model, application);
+		applicationModified = false;
 	}
 
 	protected void configureShell(Shell newShell) {

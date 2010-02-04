@@ -83,7 +83,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 								try {
 									generationPopUp = new GeneratePopUp(Display.getDefault().getActiveShell(), file, configuration.getName());
 
-									GeneratePopUp.launch(configuration, generationPopUp);
+									GeneratePopUp.launch(configuration, generationPopUp, application, file);
 								} catch (IOException e1) {
 									e1.printStackTrace();
 								}

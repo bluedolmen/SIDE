@@ -265,7 +265,16 @@ public class GeneratePopUp extends Dialog {
 	}
 
 	
-	public static void launch(final Configuration configuration, final GeneratePopUp generationPopUp) {
+	public static void launch(final Configuration configuration, final GeneratePopUp generationPopUp, Application appModel, IFile model) {
+		/*
+		 * update .application with plugin extensions
+		 */
+		try {
+			ApplicationUtil.updateApplicationFromExtensionPoint(appModel, model);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		generationPopUp.setBlockOnOpen(false);
 
 		generationPopUp.open();
