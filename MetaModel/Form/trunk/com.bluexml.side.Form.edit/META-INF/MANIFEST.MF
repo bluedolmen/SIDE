@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.bluexml.side.Form.edit;singleton:=true
-Bundle-Version: 1.0.38.v13286-20100127
+Bundle-Version: 1.0.40.v13952-20100204
 Bundle-ClassPath: .
 Bundle-Activator: com.bluexml.side.form.provider.FormsEditPlugin$Implementation
 Bundle-Vendor: %providerName
