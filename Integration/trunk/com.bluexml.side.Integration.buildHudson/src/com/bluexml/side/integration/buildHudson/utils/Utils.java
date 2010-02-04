@@ -1176,6 +1176,28 @@ public class Utils {
 									}
 								}
 							}
+							
+							List<?> listmdep = courantgeneratorVersion.getChildren("moduleDependence");
+							Iterator<?> imdep = listmdep.iterator();
+							
+							
+							// on va parcourir tous les modules
+							while (imdep.hasNext()) {
+								// On recr�e l'Element courant � chaque tour de boucle afin de
+								// pouvoir utiliser les m�thodes propres aux Element comme :
+								// selectionner un noeud fils, modifier du texte, etc...
+								Element courantmoduleDependence1 = (Element) imdep.next();
+								
+								
+								String moduleId = courantmoduleDependence1.getAttributeValue("moduleId");
+								
+								// if we find the module then we add the attributes versionMax and versionMin
+								if (moduleId.equals(module)){
+									courantmoduleDependence1.setAttribute("versionMax", version);
+									courantmoduleDependence1.setAttribute("versionMin", version);
+									modifie=true;
+								}
+							}
 						}
 					}
 					
