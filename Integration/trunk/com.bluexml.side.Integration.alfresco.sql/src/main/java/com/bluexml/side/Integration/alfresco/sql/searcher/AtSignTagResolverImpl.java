@@ -1,5 +1,5 @@
 package com.bluexml.side.Integration.alfresco.sql.searcher;
-  
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
