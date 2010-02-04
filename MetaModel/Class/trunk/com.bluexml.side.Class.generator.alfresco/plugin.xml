@@ -38,8 +38,8 @@
             <option documentation="Check this option to include the SIDE SQL extension module for Alfresco.&lt;br&gt;This module provides the synchronisation of alfresco data into a relational database.&lt;br&gt; Queries with joins can thus be performed." key="com.bluexml.side.Class.generator.alfresco.sql" label="Alfresco SQL">
               <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.sql" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.17" versionMax="1.1.17" />
             </option>
-            <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
-            <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.0" />
+            <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.12" versionMax="1.0.12" />
+            <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.15" versionMax="1.1.15" />
             <option documentation="Check this option to include the production of the Alfresco's common webscripts in the generation.&lt;br&gt;If not checked, the webscripts are not included in the generated AMPs.&lt;br&gt;" key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
               <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.34" versionMax="1.0.34" />
             </option>
