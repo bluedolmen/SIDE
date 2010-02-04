@@ -1,5 +1,5 @@
 package com.bluexml.side.framework.facetmap.alfrescoConnector;
- 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
