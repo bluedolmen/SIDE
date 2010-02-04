@@ -14,7 +14,7 @@
               <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco">
                 <optionRef optionId="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" />
               </mustBeChecked>
-              <moduleDependence moduleId="com.bluexml.side.Framework.facetMap.alfrescoConnector" moduleType="zip" technologyVersion="Facetmap_2.x" versionMin="1.0.10" versionMax="1.0.10" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.facetMap.alfrescoConnector" moduleType="zip" technologyVersion="Facetmap_2.x" versionMin="1.0.11" versionMax="1.0.11" />
               <mustBeChecked pluginId="com.bluexml.side.Portal.generator.alfresco">
                 <optionRef optionId="com.bluexml.side.Portal.generator.alfresco.facetmap" />
               </mustBeChecked>
