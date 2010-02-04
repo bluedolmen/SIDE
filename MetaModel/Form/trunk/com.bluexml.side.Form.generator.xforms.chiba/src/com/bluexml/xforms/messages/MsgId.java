@@ -129,6 +129,7 @@ public enum MsgId {
 	INT_CSS_STATUS_BAR_ID				("side_status_bar"),
 	INT_CSS_UPLOAD_FILENAME 			("side_upload_filename"),
 	INT_CSS_UPLOAD_PREVIEW 				("side_upload_preview"),
+	INT_CSS_UPLOAD_WIDGET 				("side_upload_widget"),
 	// All directories must be filled.
 	INT_DIRECTORY_ENUMS					("enums"),
 	INT_DIRECTORY_FORM_CLASSES			("defaults"),

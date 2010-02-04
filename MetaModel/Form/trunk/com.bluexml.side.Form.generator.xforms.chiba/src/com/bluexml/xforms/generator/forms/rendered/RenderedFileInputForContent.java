@@ -56,6 +56,8 @@ public class RenderedFileInputForContent extends Rendered {
 		filenameDiv.addContent(filenameElement);
 		element.addContent(filenameDiv);
 
+		Element widgetDiv = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+		widgetDiv.setAttribute("class", MsgId.INT_CSS_UPLOAD_WIDGET.getText());
 		Element input = XFormsGenerator.createElement("upload", XFormsGenerator.NAMESPACE_XFORMS);
 		input.setAttribute("incremental", "true");
 		input.setAttribute("id", attributeId);
@@ -82,7 +84,9 @@ public class RenderedFileInputForContent extends Rendered {
 				XFormsGenerator.NAMESPACE_XFORMS);
 		action.addContent(recalculate);
 		input.addContent(action);
-		element.addContent(input);
+
+		widgetDiv.addContent(input);
+		element.addContent(widgetDiv);
 
 		this.addModelElement(meb);
 		xformsElement = element;

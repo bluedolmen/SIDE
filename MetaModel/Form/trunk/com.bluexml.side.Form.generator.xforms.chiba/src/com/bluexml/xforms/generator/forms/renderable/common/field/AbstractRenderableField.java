@@ -558,6 +558,8 @@ public abstract class AbstractRenderableField extends Renderable {
 		filenameDiv.addContent(filenameElement);
 		element.addContent(filenameDiv);
 
+		Element widgetDiv = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+		widgetDiv.setAttribute("class", MsgId.INT_CSS_UPLOAD_WIDGET.getText());
 		Element input = XFormsGenerator.createElement("upload", XFormsGenerator.NAMESPACE_XFORMS);
 		input.setAttribute("incremental", "true");
 		input.setAttribute("id", attributeId);
@@ -583,7 +585,9 @@ public abstract class AbstractRenderableField extends Renderable {
 		action.addContent(recalculate);
 		input.addContent(action);
 		addHintAndMessages(input);
-		element.addContent(input);
+		
+		widgetDiv.addContent(input);
+		element.addContent(widgetDiv);
 		return element;
 	}
 
