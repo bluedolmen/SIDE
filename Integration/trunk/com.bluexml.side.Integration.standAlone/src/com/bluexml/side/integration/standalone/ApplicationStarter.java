@@ -249,7 +249,11 @@ public class ApplicationStarter implements IApplication {
 
 		try {
 			Application application = (Application) resource.getContents().get(0);
+			System.out.println("\tupdateApplicationFile : ");
+			ApplicationUtil.updateApplicationFromExtensionPoint(application, file);
 			System.out.println("\tapplication: " + application);
+			
+			
 
 			System.out.println("\tstaticParameters: " + ApplicationDialog.staticFieldsName);
 			Configuration configuration = application.getConfiguration(name);
