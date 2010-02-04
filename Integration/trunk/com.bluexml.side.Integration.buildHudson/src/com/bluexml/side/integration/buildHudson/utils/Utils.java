@@ -703,7 +703,7 @@ public class Utils {
 							if (ajouter){
 								if (listePlugin.indexOf(element) == -1){
 									listePlugin.add(element);
-									System.out.println("update plugin : "+element+ " pom : "+nomPom+ "version : "+versionPom);
+									System.out.println("update plugin : "+element+ " pom : "+nomPom+ " version : "+versionPom);
 								}
 									
 							}	
@@ -722,7 +722,7 @@ public class Utils {
 					if (ajouter){
 						if (listeProjetPoms.indexOf(element) == -1){
 							listePomsModuleDepencies.add(element);
-							System.out.println("update pom : "+element+ " pom : "+nomPom+ "version : "+versionPom);
+							System.out.println("update pom : "+element+ " pom : "+nomPom+ " version : "+versionPom);
 						}	
 					}	
 				}
@@ -767,7 +767,7 @@ public class Utils {
 							if (ajouter){
 								if (listePlugin.indexOf(element) == -1){
 									listePlugin.add(element);
-									System.out.println("update plugin : "+element+ " pom : "+nomPom+ "version : "+versionPom);
+									System.out.println("update plugin : "+element+ " pom : "+nomPom+ " version : "+versionPom);
 								}
 									
 							}	
