@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>sharePortalExtension</name>
+  <name>com.bluexml.side.Framework.alfresco.sharePortalExtension</name>
   <comment>including facetmap in alfresco share</comment>
   <projects/>
   <buildSpec>
