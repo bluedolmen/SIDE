@@ -672,7 +672,7 @@ public class XFormsGenerator extends AbstractGenerator {
 				isAWorkflowForm = true;
 			} else {
 				FormClass formClass = (FormClass) formContainer;
-				isContentEnabled = formClass.isHas_content();
+				isContentEnabled = formClass.isContent_enabled();
 			}
 			atLeastOneWorfklowForm = atLeastOneWorfklowForm || isAWorkflowForm;
 			String logText = " Rendering " + (isAWorkflowForm ? "FormWorkflow" : "FormClass")
