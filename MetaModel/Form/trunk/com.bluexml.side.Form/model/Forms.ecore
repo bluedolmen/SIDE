@@ -23,6 +23,11 @@
         <details key="documentation" value="Definition: The 'id' attribute specifies a unique identifier of the form element in the form.&#xD;&#xA;Constraint/limit: The 'id' value must not contain space, is mandatory and must be unique in the FormClass or FormWorkflow.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'hidden' attribute specifies that a form element will be hidden in the generated form if true or will be visible if false."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="help_text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -30,9 +35,9 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'hidden' attribute specifies that a form element will be hidden in the generated form if true or will be visible if false."/>
+        <details key="documentation" value="Definition: a specific style code associated to the field which may be defined in style file like css file to be applied on the field input at runtime.&#xD;&#xA;Constraint/Limit: the semantic of the style code is not defined in the model but is known by the targeted form engine on which will be deployed the generated forms.  In the case of XForms generation on Alfresco, this style code refers a CSS class."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -119,23 +124,18 @@
         <details key="documentation" value="Definition: The 'initial' attribute specifies a default value for a field.&#xD;&#xA;&#xD;&#xA;Constraint/limit: &#xD;&#xA;- If the field is linked to an enumeration, the initial value must be the exact value of an item of the enumeration but there is not validation performed either at modeling or generation: if a wrong value has been provided, no default value will be set up in the enumeration widget.&#xD;&#xA;- In the case of XForms generation on Alfresco, to specify an initial value for a field, add to the url the parameter &amp;XX=YY. YY is an initial value; it follows the same rules as the value of the attribute 'initial' in the form modeler. XX is an id name of the field to initialize. For more flexibility, there are two different ways to initialize a field. The first way is to used the name that appears in the element 'uniqueName' which can be found in the file mapping.xml under the tag 'field' of the target field (for example: field_11). The second way is to use id name of the element 'alfrescoName' of the file mappin.xml (for example: modelcyvel_Fiche_titre).&#xD;&#xA;- In the case of XForms generation on Alfresco and considering different fields having the same alfresco attribute, all these fields can have a same initial value by setting '&lt;alfrescoName>=&lt;value>'. A particular field can have a different value to the other by setting '&lt;uniqueName>=&lt;value>'.&#xD;&#xA;&#xD;&#xA;Example: &#xD;&#xA;&#x9;initial=Book&#xD;&#xA;&#x9;http://vmbx2k3:8080/pforms/xforms?type=modelcyvel.Article&amp;field_11=valeur&#xD;&#xA;&#x9;http://vmbx2k3:8080/pforms/xforms?type=modelcyvel.Article&amp;modelcyvel_Fiche_accroche=valeur&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="disabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'disabled' attribute protects the field from being modified if true. If false (default), it can be modified."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'fieldSize' attribute specifies the number of element to show for a selection list.&#xD;&#xD;&#xD;&#xA;Constraint/limit: When there are two relations R1 and R2 between the two same classes A and B, the value of field size set for R1 will be set for R2 too, even there is no value for field size of R2.&#xD;&#xA;&#xD;&#xD;Example: Field Size = 10 will limit to 10 the number of elements in a generated selection list."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: a specific style code associated to the field which may be defined in style file like css file to be applied on the field input at runtime.&#xD;&#xA;Constraint/Limit: the semantic of the style code is not defined in the model but is known by the targeted form engine on which will be deployed the generated forms.  In the case of XForms generation on Alfresco, this style code refers a CSS class."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mockup" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="disabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'disabled' attribute protects the field from being modified if true. If false (default), it can be modified."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormContainer" abstract="true" eSuperTypes="#//FormGroup">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
