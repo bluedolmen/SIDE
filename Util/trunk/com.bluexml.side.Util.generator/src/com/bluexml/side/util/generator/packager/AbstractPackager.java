@@ -1,7 +1,6 @@
 package com.bluexml.side.util.generator.packager;
 
 import java.io.File;
-import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -11,16 +10,13 @@ import com.bluexml.side.util.libs.IFileHelper;
 public abstract class AbstractPackager {
 	protected String workingdir;
 	protected IFolder IworkingDir; // generated folder
-	protected Properties moduleProperties;
 	protected String technoV;
 	
 
-	public AbstractPackager(IFolder folder, Properties moduleProperties, String technoV) {
+	public AbstractPackager(IFolder folder, String technoV) {
 		this.IworkingDir = folder;
 		this.workingdir = IFileHelper.convertIRessourceToSystemString(folder);
-		this.moduleProperties = moduleProperties;
-		this.technoV = technoV;
-		
+		this.technoV = technoV;		
 	}
 
 	abstract public IFile buildPackage() throws Exception;
