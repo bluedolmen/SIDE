@@ -101,8 +101,8 @@ public class FormGenerator extends AbstractGenerator {
 			}
 		}
 		if (StringUtils.trimToNull(messagesFilePath) == null) {
-			String filePath = defaultsDir + File.separator + "messages.properties";
-			if (DefaultMessages.generate(filePath)) {
+			String filePath = defaultsDir + File.separator + "messages.properties";			
+			if (DefaultMessages.generateMessages(filePath)) {
 				setMessagesFilePath(filePath);
 			} else {
 				monitor.addWarningText("Could not generate and set the messages file.");
@@ -159,7 +159,7 @@ public class FormGenerator extends AbstractGenerator {
 		// must build package
 		// build archive from tmp folder
 		WarPatchPackager wpp = new WarPatchPackager(getIFolder(getTemporaryFolder()),
-				buildModuleProperties(defaultModelID), techVersion, webappName);
+				buildModuleProperties(defaultModelID).getProperty("module.id"), techVersion, webappName);
 
 		IFile chibaPackage = wpp.buildPackage();
 		ArrayList<IFile> result = new ArrayList<IFile>();
