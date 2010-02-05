@@ -1,11 +1,9 @@
 package com.bluexml.side.workflow.generator.alfresco;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.XMLConflictResolver;
