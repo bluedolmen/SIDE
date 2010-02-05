@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ASCII"?>
+<form:ClassFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" name="advancedSearchForms">
+  <forms xsi:type="form:FormClass" label="Document" id="Document">
+    <children xsi:type="form:CharField" label="Document Title" id="Title" help_text="">
+      <ref href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="form:CharField" label="file number" id="Number" help_text="" mandatory="true">
+      <ref href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+    </children>
+    <disabled xsi:type="form:CharField" label="Observation" id="Observation" help_text="">
+      <ref href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+    </disabled>
+    <disabled xsi:type="form:DateTimeField" label="Digitization Date" id="DigitizationDate" help_text="">
+      <ref href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <disabled xsi:type="form:CharField" label="Author" id="Author" help_text="">
+      <ref href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+    </disabled>
+    <real_class href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkG9RREd6d24BtuZ-cgQ"/>
+  </forms>
+  <forms xsi:type="form:FormClass" label="Agent" id="Agent">
+    <children xsi:type="form:CharField" label="Name" id="Name" help_text="" mandatory="true">
+      <ref href="../../../../v1/models/Data/DigitizationProcess.dt#_06S1h9RREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="form:CharField" label="Firstname" id="Firstname" help_text="" mandatory="true">
+      <ref href="../../../../v1/models/Data/DigitizationProcess.dt#_06S1itRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="form:CharField" label="Reference Number" id="ReferenceNumber" help_text="" mandatory="true">
+      <ref href="../../../../v1/models/Data/DigitizationProcess.dt#_06S1jdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <disabled xsi:type="form:ModelChoiceField" label="concerns" id="concernsfrom" max_bound="-1">
+      <ref href="../../../../v1/models/Data/DigitizationProcess.dt#_06V40NRREd6d24BtuZ-cgQ"/>
+      <real_class href="../../../../v1/models/Data/DigitizationProcess.dt#_06S1gdRREd6d24BtuZ-cgQ"/>
+    </disabled>
+    <real_class href="../../../../v1/models/Data/DigitizationProcess.dt#_06S1hdRREd6d24BtuZ-cgQ"/>
+  </forms>
+</form:ClassFormCollection>
