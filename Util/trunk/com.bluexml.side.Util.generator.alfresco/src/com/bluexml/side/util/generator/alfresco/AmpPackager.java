@@ -20,9 +20,11 @@ import com.bluexml.side.util.libs.zip.ZipManager;
 public class AmpPackager extends AbstractPackager {
 	private static String alfrescoModuleComment = Activator.Messages.getString("AmpPackager_0");
 	private Map<String, File> mapper;
+	protected Properties moduleProperties;
 
 	public AmpPackager(IFolder folder, Properties moduleProperties, String technoV) {
-		super(folder, moduleProperties, technoV);
+		super(folder, technoV);
+		this.moduleProperties = moduleProperties;
 		mapper = createAMPSkelleton();
 	}
 
@@ -34,9 +36,9 @@ public class AmpPackager extends AbstractPackager {
 		File ampFile = getPackageFile();
 		ampFile.createNewFile();
 		ZipManager.zip(getFolderToPackage(), ampFile, false);
-//		if (doClean) {
-//			FileHelper.deleteFile(getWorkingFolder());
-//		}
+		// if (doClean) {
+		// FileHelper.deleteFile(getWorkingFolder());
+		// }
 		IFile ampIFile = getPackageIFile();
 		return ampIFile;
 	}

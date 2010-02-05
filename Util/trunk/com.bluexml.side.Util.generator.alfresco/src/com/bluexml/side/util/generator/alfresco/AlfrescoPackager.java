@@ -20,7 +20,7 @@ public class AlfrescoPackager extends AbstractMultiPackager {
 		AmpPackager ampP = new AmpPackager(folder, moduleProperties, technoV);
 		packagers.put("amp", ampP);
 
-		WarPatchPackager wpackager = new WarPatchPackager(folder, moduleProperties, technoV, "share");
+		WarPatchPackager wpackager = new WarPatchPackager(folder, moduleProperties.getProperty("module.id"), technoV, "share");
 		packagers.put("wpackager", wpackager);
 	}
 
