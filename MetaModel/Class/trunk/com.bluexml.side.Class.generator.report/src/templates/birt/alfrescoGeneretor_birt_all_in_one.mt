@@ -10,7 +10,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%>Content_type_report.rptdesign<%}%>
+<%if (eContainer() == null) {%>webapps/birt/Content_type_report.rptdesign<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGeneretor_birt_allInOne" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">

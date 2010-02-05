@@ -1,6 +1,5 @@
 package com.bluexml.side.clazz.generator.report;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
-import com.bluexml.side.util.libs.FileHelper;
+import com.bluexml.side.util.generator.packager.WarPatchPackager;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
@@ -64,7 +63,7 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 		}
 		return alfrescoURL;
 	}
-	public Collection<IFile> complete() throws Exception {
+	/*public Collection<IFile> complete() throws Exception {
 
 		String target = IFileHelper.getSystemFolderPath(getTargetPath()+File.separator+getTechVersion())+File.separator;
 		new File(target).mkdirs();
@@ -83,11 +82,14 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 
 		return generatedFiles;
 	}
-
+*/
 	@Override
 	public Collection<IFile> buildPackages(String modelId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<IFile> pkgs = new ArrayList<IFile>();
+		WarPatchPackager pkger = new WarPatchPackager(IFileHelper.getIFolder(getTemporaryFolder()), "SIDE_Birt_"+modelId, techVersion, "birt");
+		IFile package_ = pkger.buildPackage();
+		pkgs.add(package_);
+		return pkgs;
 	}
 
 }
