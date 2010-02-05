@@ -94,6 +94,7 @@ public class ClassUtils {
 			} else if(att.getTyp().equals(DataType.DOUBLE)) {
 			// Decimal Field
 				//field = ViewFactory.eINSTANCE.createDecimalField();
+				field = ViewFactory.eINSTANCE.createFloatField();
 			} else if(att.getTyp().equals(DataType.SHORT)) {
 			// Short Field
 				field = ViewFactory.eINSTANCE.createIntegerField();
