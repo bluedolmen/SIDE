@@ -1294,7 +1294,12 @@ public class ApplicationDialog extends Dialog {
 	 */
 	protected void addStaticParam(String key, String value) {
 		Configuration config = getCurrentConfiguration();
-		addStaticParam(key, value, config);
+		boolean exist = false;
+		for (ConfigurationParameters p : config.getParameters())
+			if (p.getKey() != null && p.getKey().equals(key))
+				exist = true;
+		if (!exist)
+			addStaticParam(key, value, config);
 	}
 
 	/**
@@ -1306,10 +1311,16 @@ public class ApplicationDialog extends Dialog {
 	 * @param config
 	 */
 	protected void addStaticParam(String key, String value, Configuration config) {
-		ConfigurationParameters param = ApplicationFactory.eINSTANCE.createConfigurationParameters();
-		param.setKey(key);
-		param.setValue(value);
-		config.getParameters().add(param);
+		boolean exist = false;
+		for (ConfigurationParameters p : config.getParameters())
+			if (p.getKey() != null && p.getKey().equals(key))
+				exist = true;
+		if (!exist) {
+			ConfigurationParameters param = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+			param.setKey(key);
+			param.setValue(value);
+			config.getParameters().add(param);
+		}
 	}
 
 	/**
