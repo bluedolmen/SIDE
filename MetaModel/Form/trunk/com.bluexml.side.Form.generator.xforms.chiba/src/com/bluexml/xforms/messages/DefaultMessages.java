@@ -5,14 +5,39 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * This class is used to generate the content of the default messages.properties file.
+ * This class is used to generate the content of the default properties files.
  * 
  * @author Amenel
  * 
  */
 public class DefaultMessages {
 
-	private static final String[] allLines = {
+	private static final String[] allFormsProperties = {
+			"# address of the Alfresco server",
+			"alfresco.url=http://localhost:8080/alfresco",
+			"# CAS server URL",
+			"cas.url=https://CASserver:8443/cas",
+			"# hostname and port used by the XForms web application",
+			"cas.serverName=127.0.0.1:8081",
+			"# enable cas authentication",
+			"cas.enabled=false",
+			"# number of results displayed in selection lists of associations. 0 = unlimited (dangerous)",
+			"selection.list.max.results=50",
+			"",
+			"# temporary folder (on the server's filesystem) for storing the files uploaded by users",
+			"temp.directory=/tmp",
+			"# archive folder (on the server's filesystem) for storing the files uploaded by users",
+			"upload.directory=/tmp",
+			"# number of levels between the archive folder and the actual folders where to-server uploads are stored. If set to 0, all uploads are stored in the archive folder.",
+			"upload.directory.random.path.depth=3",
+			"",
+			"# path for uploads in the repository. If not given, \"/app:company_home\" is used.",
+			"upload.repository=/app:company_home/app:user_homes",
+			"# whether names of non-content files uploaded to the repository are appended with a '(x)' in case the initial name already exists.",
+			"upload.repository.append.suffix=true", "", "# authentication", "user.name=admin",
+			"user.pswd=admin" };
+
+	private static final String[] allMessagesProperties = {
 			"#",
 			"# THESE ENTRIES ARE USED AT GENERATION TIME ONLY. Any modifications after a",
 			"# generation will NOT have any effect at runtime. To make the modifications",
@@ -104,7 +129,26 @@ public class DefaultMessages {
 	 * @param args
 	 * @throws IOException
 	 */
-	public static boolean generate(String filePath) throws IOException {
+	public static boolean generateMessages(String filePath) throws IOException {
+		return generate(filePath, allMessagesProperties);
+	}
+
+	/**
+	 * @param args
+	 * @throws IOException
+	 */
+	public static boolean generateForms(String filePath) throws IOException {
+		return generate(filePath, allFormsProperties);
+	}
+
+	/**
+	 * 
+	 * @param filePath
+	 * @param allLines
+	 * @return
+	 * @throws IOException
+	 */
+	public static boolean generate(String filePath, String[] allLines) throws IOException {
 		String line;
 		FileOutputStream fos = null;
 		try {

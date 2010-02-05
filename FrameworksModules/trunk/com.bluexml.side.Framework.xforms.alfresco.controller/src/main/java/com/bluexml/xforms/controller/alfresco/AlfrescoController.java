@@ -87,7 +87,7 @@ public class AlfrescoController {
 	/** The upload base directory in the content management system. */
 	public static String UPLOAD_REPOSITORY = null;
 
-	/** The upload base directory in the content management system. */
+	/** Whether file names of uploads receive a '(x)' in case the initial name already exists. */
 	public static boolean UPLOAD_REPOSITORY_APPEND = true;
 
 	/** The temp directory. */
@@ -938,7 +938,7 @@ public class AlfrescoController {
 	private int getUploadPathDepth() {
 		int depth = 0;
 		try {
-			Integer.parseInt(MsgPool.getMsg(MsgId.MSG_UPLOAD_RANDOM_PATH_DEPTH));
+			Integer.parseInt(MsgPool.getMsg(MsgId.KEY_UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH));
 		} catch (NumberFormatException e) {
 			logger.error("Failed to parse directory path depth.");
 			return 0;

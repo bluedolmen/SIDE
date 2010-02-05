@@ -28,10 +28,11 @@ package com.bluexml.xforms.messages;
 public enum MsgId {
 	// keys for messages in the forms.properties file
 	KEY_ALFRESCO_URL("alfresco.url"),
-	KEY_MAX_RESULTS("max.results"),
+	KEY_MAX_RESULTS("selection.list.max.results"),
 	KEY_TEMP_DIRECTORY("temp.directory"),
 	/** The key for the complete path when uploading to file system.*/
 	KEY_UPLOAD_DIRECTORY("upload.directory"),
+	KEY_UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH("upload.directory.random.path.depth"),
 	/** The key for the repository upload path.*/
 	KEY_UPLOAD_REPOSITORY("upload.repository"),
 	KEY_UPLOAD_REPOSITORY_APPEND("upload.repository.append.suffix"),
@@ -71,7 +72,6 @@ public enum MsgId {
 	MSG_UPLOAD_CONTENT_REPO_FORMAT	("upload.node.content.repository.format"),
 	MSG_UPLOAD_CONTENT_REPO_INFO	("upload.node.content.repository.info"),
 	MSG_UPLOAD_FAILED				("upload.to.repository.failure"),
-	MSG_UPLOAD_RANDOM_PATH_DEPTH	("upload.random.path.depth"),
 	MSG_WKFLW_ERROR_START_FAILURE	("workflow.error.start.failure"),
 	MSG_WKFLW_ERROR_SUBMIT_DATA		("workflow.error.submit.data"),
 	MSG_WKFLW_GLOBAL_GROUP			("workflow.selection.global.group"),

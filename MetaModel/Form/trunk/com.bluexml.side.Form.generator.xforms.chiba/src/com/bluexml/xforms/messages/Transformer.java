@@ -8,14 +8,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Use this class for building the value of the <b>allLines</b> array in
+ * Use this class for building the value of the arrays in
  * {@link com.bluexml.xforms.messages.DefaultMessages}
  * <p/>
- * HOWTO: change the path to a 'messages.properties' file and run the class. Copy the output and
- * paste as the value for <b>allLines</b>.
+ * HOWTO: change the path to a '.properties' file and run the class. Copy the output and paste as
+ * the value for a string array.
  * <p/>
- * Obviously, the 'messages.properties' file whose path is indicated must be exactly what is
- * expected in default messages files that will be generated.
+ * Obviously, the '.properties' file whose path is indicated must be exactly what is expected in
+ * default messages files that will be generated.
  * 
  * @author Amenel
  * 
@@ -63,7 +63,7 @@ public class Transformer {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		String path = "/Users/amenel/workspace/repository/XForms/trunk/examples/xforms/src/main/resources/messages.properties";
+		String path = "/Users/amenel/workspace/repository/XForms/trunk/examples/xforms/src/main/resources/forms.properties";
 		FileInputStream is = new FileInputStream(new File(path));
 		new Transformer().convertStreamToString(is);
 	}
