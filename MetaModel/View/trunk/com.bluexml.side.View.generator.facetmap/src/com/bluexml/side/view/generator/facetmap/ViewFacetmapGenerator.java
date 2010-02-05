@@ -104,7 +104,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 	@Override
 	public Collection<IFile> buildPackages(String modelId) throws Exception {
 		Collection<IFile> pkgs = new ArrayList<IFile>();
-		WarPatchPackager pkger = new WarPatchPackager(IFileHelper.getIFolder(getTemporaryFolder()), buildModuleProperties(modelId), techVersion, "facetmap");
+		WarPatchPackager pkger = new WarPatchPackager(IFileHelper.getIFolder(getTemporaryFolder()), buildModuleProperties(modelId).getProperty("module.id"), techVersion, "facetmap");
 		IFile package_ = pkger.buildPackage();
 		pkgs.add(package_);
 		return pkgs;
