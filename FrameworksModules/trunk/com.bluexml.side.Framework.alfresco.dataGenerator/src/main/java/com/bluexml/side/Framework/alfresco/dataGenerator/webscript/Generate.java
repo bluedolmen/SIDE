@@ -136,6 +136,7 @@ public class Generate extends DeclarativeWebScript {
 		try {
 			repository = importer.manageAlfrescoRepository(pathToAlfrescoRepository);
 		} catch (Exception e1) {
+			model.put("error", e1);
 			logger.error("Error :", e1);
 		}
 		
