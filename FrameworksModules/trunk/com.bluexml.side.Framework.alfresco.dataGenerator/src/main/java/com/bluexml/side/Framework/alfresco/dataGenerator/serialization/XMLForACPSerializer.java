@@ -3,7 +3,11 @@
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.serialization;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 
 import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingBuilder;
 
@@ -33,8 +37,10 @@ public class XMLForACPSerializer {
 	}
 	
 	public void serializeXml() throws Exception {
-		FileWriter out = new FileWriter(fileName);
-	    builder.build().write(out); 
-	    out.close();
+		FileOutputStream fos = new FileOutputStream(fileName);
+		OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
+	    builder.build().write(osw); 
+	    osw.close();
+	    fos.close();
 	}	
 }
