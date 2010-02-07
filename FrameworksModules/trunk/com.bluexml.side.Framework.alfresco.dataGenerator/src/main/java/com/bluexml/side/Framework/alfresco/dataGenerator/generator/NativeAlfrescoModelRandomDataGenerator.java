@@ -236,12 +236,14 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 	}
 	
 	private File chooseRandomlyDocument() {
-		File folder = new File(pathToDocumentsFolder);
-		File[] docs = folder.listFiles();
 		File document = null;
-		if (docs.length > 0){
-			document = docs[randomGenerator.nextInt(docs.length)];
-			documents.add(document);
+		if (!pathToDocumentsFolder.equals("")){
+			File folder = new File(pathToDocumentsFolder);
+			File[] docs = folder.listFiles();
+			if (docs.length > 0){
+				document = docs[randomGenerator.nextInt(docs.length)];
+				documents.add(document);
+			}
 		}
 		return document;
 	}
