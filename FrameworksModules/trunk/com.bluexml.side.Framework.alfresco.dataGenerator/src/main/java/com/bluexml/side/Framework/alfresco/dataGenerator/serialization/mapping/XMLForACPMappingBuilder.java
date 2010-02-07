@@ -45,6 +45,7 @@ public class XMLForACPMappingBuilder implements IMapping {
 	public Document build (){
 		
 		document = DocumentHelper.createDocument();
+		document.setXMLEncoding("UTF-8");
 		Element root = helper.createRoot();
 		mapsAllNodes(root);
 		mapsAllArcs(root);
