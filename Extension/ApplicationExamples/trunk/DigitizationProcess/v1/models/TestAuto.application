@@ -49,13 +49,9 @@
     <parameters key="com.bluexml.side.Form.generator.xforms.chiba.webappContext" value="xforms"/>
     <parameters key="com.bluexml.side.Deployer.xforms.webappName" value=""/>
     <deployerConfigurations id_techno_version="ant_1.7.1" impl_class="com.bluexml.side.deployer.antdeployer.ANTDeployer" id="com.bluexml.side.Deployer.antDeployer" technologyVersionName="ANT 1.7.1" technologyName="ANT" contributorId="com.bluexml.side.Deployer.antDeployer" deployerName="ANT Deployer" shared="true"/>
-    <deployerConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.deployer.alfresco.directcopy.AlfrescoDeployer" id="com.bluexml.side.Deployer.alfrescoDirectCopy" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="Alfresco" contributorId="com.bluexml.side.Deployer.alfrescoDirectCopy" deployerName="SIDE Alfresco Direct Deployer">
-      <options key="com.bluexml.side.deployerDirect.alfresco.clean"/>
-    </deployerConfigurations>
-    <deployerConfigurations id_techno_version="chiba_1_5.x" impl_class="com.bluexml.side.deployer.xformsdirectcopy.DeployerXforms" id="com.bluexml.side.Deployer.xformsDirectCopy" technologyVersionName="Chiba 1.5.x" technologyName="XForms" contributorId="com.bluexml.side.Deployer.xformsDirectCopy" deployerName="SIDE Chiba X-Forms Direct Deployer">
-      <options key="com.bluexml.side.Deployer.xformsDirectCopy.clean"/>
-    </deployerConfigurations>
     <deployerConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Deployer.documentation" deployerName="SIDE Documentation Deployer"/>
+    <deployerConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.deployer.alfresco.directcopy.AlfrescoDeployer" id="com.bluexml.side.Deployer.alfrescoDirectCopy" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="Alfresco" contributorId="com.bluexml.side.Deployer.alfrescoDirectCopy" deployerName="SIDE Alfresco Direct Deployer"/>
+    <deployerConfigurations id_techno_version="chiba_1_5.x" impl_class="com.bluexml.side.deployer.xformsdirectcopy.DeployerXforms" id="com.bluexml.side.Deployer.xformsDirectCopy" technologyVersionName="Chiba 1.5.x" technologyName="XForms" contributorId="com.bluexml.side.Deployer.xformsDirectCopy" deployerName="SIDE Chiba X-Forms Direct Deployer"/>
   </elements>
   <elements xsi:type="app:Model" name="DigitizationProcess.dt" file="/DigitizationProcess/v1/models/Data/DigitizationProcess.dt"/>
   <elements xsi:type="app:Model" name="DigitalizationProcess.data.form" file="/DigitizationProcess/v1/models/Form/DigitalizationProcess.data.form"/>
