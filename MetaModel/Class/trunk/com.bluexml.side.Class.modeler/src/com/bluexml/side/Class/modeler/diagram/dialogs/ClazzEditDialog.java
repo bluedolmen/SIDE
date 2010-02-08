@@ -85,7 +85,7 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 
 	private Map data;
 
-	private Control view;
+	// private Control view;
 
 	private Control layout;
 
@@ -156,7 +156,7 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		createGeneralTab(tabFolder);
-		createViewTab(tabFolder);
+//		createViewTab(tabFolder);
 //		createLayoutTab(tabFolder);
 //		createAspectOrganizationTabItem(tabFolder);
 //		createOptionsTab(tabFolder);
@@ -207,8 +207,8 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		view = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
-		view.setLayoutData(new GridData(GridData.FILL_BOTH));
+		// view = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
+		// view.setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
 
 	private void createLayoutTab(TabFolder parent) {
@@ -363,6 +363,8 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 		checkIsDeprecatedBt.setSelection(classe.isDeprecated());
 
 		// Layout & View
+		
+		/*
 		for (Object o : classe.getComments()) {
 			Comment c = (Comment) o;
 			if (isStereotyped(c, "view")) {
@@ -372,7 +374,8 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 				((Text) layout).setText(c.getValue());
 			}
 		}
-
+		 */
+		
 		// MetaInfo
 		MetaInfoHelper.loadData(classe, drawConstraints);
 
@@ -406,7 +409,7 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 			data.put(CLASSE_NAME, classeNameTxt.getText());
 			data.put(CLASSE_TITLE, classeTitleTxt.getText());
 			data.put(CLASSE_DESCRIPTION, classeDescriptionTxt.getText());
-			data.put(CLASSE_VIEW, ((Text) view).getText());
+//			data.put(CLASSE_VIEW, ((Text) view).getText());
 			
 //			data.put(CLASSE_LAYOUT, ((Text) layout).getText());
 //			ConstraintsDataStructure dataConstraints = MetaInfoHelper.getDataStructure(drawConstraints);
