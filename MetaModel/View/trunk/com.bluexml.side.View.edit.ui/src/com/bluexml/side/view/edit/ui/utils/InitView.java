@@ -26,7 +26,6 @@ import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 import com.bluexml.side.view.edit.ui.utils.model.ClassUtils;
-import com.bluexml.side.view.edit.ui.utils.model.ViewUtils;
 
 public class InitView {
 
@@ -74,7 +73,8 @@ public class InitView {
 						}
 					}
 					cmd.append(AddCommand.create(domain, av, ViewPackage.eINSTANCE.getFieldContainer_Children(), c));
-					av.setName(cl.getName() + " (" + ViewUtils.getTypeAsString(av) + ")");
+//					av.setName(cl.getName() + " (" + ViewUtils.getTypeAsString(av) + ")");
+					av.setName(cl.getName());
 				}
 			}
 		} else {
