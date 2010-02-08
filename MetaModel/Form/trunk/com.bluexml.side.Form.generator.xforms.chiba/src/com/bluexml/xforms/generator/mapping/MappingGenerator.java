@@ -282,7 +282,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 */
 	public void beginGeneration() {
 		mapping = new Mapping();
-		monitor.setTaskName("Generating the resources.");
+		monitor.setTaskName("Generating resources.");
 	}
 
 	/*
@@ -879,8 +879,8 @@ public class MappingGenerator extends AbstractGenerator {
 			// check that if mandatory, the field has an initial value
 			if (formFieldType.isMandatory()
 					&& (StringUtils.trimToNull(formFieldType.getDefault()) == null)) {
-				monitor.addText("Attribute '" + formFieldType.getAlfrescoName()
-						+ "' is mandatory: it should have an initial value!");
+				monitor.addErrorTextAndLog("Attribute '" + formFieldType.getAlfrescoName()
+						+ "' is mandatory: it should have an initial value!", null, null);
 			}
 			canister.getField().add(formFieldType);
 		}

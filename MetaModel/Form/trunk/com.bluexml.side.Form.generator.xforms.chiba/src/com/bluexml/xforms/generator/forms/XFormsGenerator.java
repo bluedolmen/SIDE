@@ -625,7 +625,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * 
 	 */
 	private void renderAllClasses() {
-		monitor.addText(" Rendering default forms");
+		monitor.addText("Rendering default forms");
 
 		Set<Entry<Clazz, RenderableClass>> entrySet = classes.entrySet();
 		for (Entry<Clazz, RenderableClass> entry : entrySet) {
@@ -658,7 +658,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * @return true if there is one or more workflow forms
 	 */
 	private boolean renderAllForms() {
-		monitor.addText(" Rendering customized forms");
+		monitor.addText("Rendering customized forms");
 		
 		boolean atLeastOneWorfklowForm = false;
 		Set<Entry<String, RenderableFormContainer>> entrySetForms = formsRenderables.entrySet();
@@ -675,7 +675,7 @@ public class XFormsGenerator extends AbstractGenerator {
 			}
 			atLeastOneWorfklowForm = atLeastOneWorfklowForm || isAWorkflowForm;
 			if (formGenerator.isDebugMode()) {
-				String logText = " Rendering " + (isAWorkflowForm ? "FormWorkflow" : "FormClass")
+				String logText = "  " + (isAWorkflowForm ? "FormWorkflow" : "FormClass")
 						+ ": " + formId;
 				monitor.addText(logText);
 			}

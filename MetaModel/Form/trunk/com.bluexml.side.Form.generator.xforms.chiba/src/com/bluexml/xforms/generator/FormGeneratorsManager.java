@@ -320,7 +320,7 @@ public class FormGeneratorsManager {
 	 *            the kerblueforms
 	 * @param simplifyClasses
 	 */
-	public FormGeneratorsManager(File[] obls, File[] kerblueforms, CoreInterface genLogger,
+	public FormGeneratorsManager(File[] obls, File[] kerblueforms, CoreInterface monitor,
 			boolean simplifyClasses, boolean renderDataBeforeWorkflow, boolean asMavenPlugin) {
 		super();
 		if (asMavenPlugin) {
@@ -328,7 +328,7 @@ public class FormGeneratorsManager {
 		}
 		setWorkflowCapable(false);
 		this.debugMode = false;
-		this.genLogger = genLogger;
+		this.genLogger = monitor;
 		this.simplifyClasses = simplifyClasses;
 		this.setRenderDataBeforeWorkflow(renderDataBeforeWorkflow);
 		XFormsGenerator.resetKeys();
