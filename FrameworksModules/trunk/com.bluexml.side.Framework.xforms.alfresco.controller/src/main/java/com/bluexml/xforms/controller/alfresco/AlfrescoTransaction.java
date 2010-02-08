@@ -42,8 +42,8 @@ public class AlfrescoTransaction {
 	private ArrayList<String> tempFileNames = null; // #1278
 
 	/** id(s) of old node(s) on update, to be deleted in case of success */
-	private ArrayList<String> tempNodeIds = null; 
-	
+	private ArrayList<String> tempNodeIds = null;
+
 	public AlfrescoTransaction(AlfrescoController alfrescoController) {
 		super();
 		this.alfrescoController = alfrescoController;
@@ -82,7 +82,10 @@ public class AlfrescoTransaction {
 	 *            the complete path to the file on the server side
 	 * @param mimeType
 	 *            the MIME type as served by the web client
-	 * @param shouldAppendSuffix 
+	 * @param shouldAppendSuffix
+	 *            if set to true, an index [e.g. '(1)'] is appended to the filename if the original
+	 *            filename is not available. However, for node contents, it should be false to allow
+	 *            overwriting the previous content.
 	 * @param contentType
 	 *            the qualified name of the (generated) content type that has the meta data. This
 	 *            type must correspond to the type of the receiver
@@ -98,7 +101,8 @@ public class AlfrescoTransaction {
 		entry.setFilePath(filePath);
 		entry.setMimeType(mimeType);
 		entry.setContentType(contentType);
-		entry.setAppendSuffix("" + shouldAppendSuffix);
+		// entry.setAppendSuffix("" + shouldAppendSuffix);
+		entry.setAppendSuffix("false");
 
 		batch.getCreateOrUpdateOrDelete().add(entry);
 	}
@@ -197,7 +201,7 @@ public class AlfrescoTransaction {
 	public ArrayList<String> getUploadedNodes() {
 		return uploadedNodes;
 	}
-	
+
 	/**
 	 * @param tempFileName
 	 *            the tempFileName to set
@@ -219,7 +223,7 @@ public class AlfrescoTransaction {
 		}
 		this.tempNodeIds.add(nodeId);
 	}
-	
+
 	/**
 	 * @param uploadedFileName
 	 *            the uploadedFileName to set
@@ -232,7 +236,8 @@ public class AlfrescoTransaction {
 	}
 
 	/**
-	 * @param uploadedNodes the uploadedNodes to set
+	 * @param nodeId
+	 *            a complete node Id
 	 */
 	public void registerUploadedNodes(String nodeId) {
 		if (uploadedNodes == null) {
