@@ -1739,10 +1739,10 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		// Create annotations
 		// http://www.bluexml.com/OCL
 		createOCLAnnotations();
-		// http://www.topcased.org/documentation
-		createDocumentationAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
+		// http://www.topcased.org/documentation
+		createDocumentationAnnotations();
 	}
 
 	/**
@@ -1752,7 +1752,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createDocumentationAnnotations() {
-		String source = "http://www.topcased.org/documentation";											
+		String source = "http://www.topcased.org/documentation";													
 		addAnnotation
 		  (getAbstractDataTable_HaveRowActions(), 
 		   source, 
@@ -1780,7 +1780,13 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createOCLAnnotations() {
-		String source = "http://www.bluexml.com/OCL";					
+		String source = "http://www.bluexml.com/OCL";				
+		addAnnotation
+		  (fieldElementEClass, 
+		   source, 
+		   new String[] {
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
+		   });				
 		addAnnotation
 		  (abstractViewEClass.getEOperations().get(0), 
 		   source, 
@@ -1845,7 +1851,13 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";																					
+		String source = "http://www.eclipse.org/emf/2002/Ecore";					
+		addAnnotation
+		  (fieldElementEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "noSpecialCharacters"
+		   });																			
 		addAnnotation
 		  (fieldEClass, 
 		   source, 

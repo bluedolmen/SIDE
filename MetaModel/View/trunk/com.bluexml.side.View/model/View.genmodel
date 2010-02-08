@@ -4,7 +4,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.View/src"
     creationIcons="false" modelPluginID="com.bluexml.side.View" templateDirectory="/com.bluexml.side.Util.metaModel.validate/templates"
     dynamicTemplates="true" modelName="View" rootImplementsInterface="" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../com.bluexml.side.Common/model/Common.genmodel#//common">
+    complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../com.bluexml.side.Class/model/Class.genmodel#//clazz ../../com.bluexml.side.Common/model/Common.genmodel#//common">
   <foreignModel>View.ecore</foreignModel>
   <editPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</editPluginVariables>
   <genPackages prefix="View" basePackage="com.bluexml.side" disposableProviderFactory="true"

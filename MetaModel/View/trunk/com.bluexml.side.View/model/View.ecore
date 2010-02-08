@@ -24,6 +24,12 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FieldElement" abstract="true" eSuperTypes="#//Stylable ../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="noSpecialCharacters"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapTo" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="this may be use to show of the path use to reach the data to display exemple for attribute Object : ClassA ->association1 ->ClassB ->AspectA ->Attribute1"/>
