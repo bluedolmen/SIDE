@@ -39,17 +39,14 @@ public class InitView {
 		if (av.getViewOf() != null) {
 			boolean doWork = true;
 			if (av.getChildren().size() > 0 || av.getDisabled().size() > 0) {
-				doWork = UIUtils
-						.showConfirmation("View already set",
-								"View have already been set. Do you want to overwrite it?");
+				doWork = UIUtils.showConfirmation("View already set", "View have already been set. Do you want to overwrite it?");
 			}
 			if (doWork) {
 				if (av.getChildren().size() > 0) {
 					cmd.append(DeleteCommand.create(domain, av.getChildren()));
 				}
 				if (av.getDisabled().size() > 0) {
-					Command delCmd = DeleteCommand.create(domain, av
-							.getDisabled());
+					Command delCmd = DeleteCommand.create(domain, av.getDisabled());
 					// TODO : find a better way, tried with RemoveCommand and
 					// DeleteCommand
 					if (delCmd.canExecute()) {
@@ -66,11 +63,9 @@ public class InitView {
 						if (kindOfList != 0) {
 							AbstractViewOf subList = null;
 							if (kindOfList == 1) {
-								subList = ViewFactory.eINSTANCE
-										.createDataTable();
+								subList = ViewFactory.eINSTANCE.createDataTable();
 							} else {
-								subList = ViewFactory.eINSTANCE
-										.createDataList();
+								subList = ViewFactory.eINSTANCE.createDataList();
 							}
 							subList.setViewOf(av.getViewOf());
 							subList.setMapTo((ModelElement) av.getViewOf());
@@ -78,27 +73,22 @@ public class InitView {
 							c.add(subList);
 						}
 					}
-					cmd.append(AddCommand.create(domain, av,
-							ViewPackage.eINSTANCE.getFieldContainer_Children(),
-							c));
-					av.setName(cl.getLabel() + " ("
-							+ ViewUtils.getTypeAsString(av) + ")");
+					cmd.append(AddCommand.create(domain, av, ViewPackage.eINSTANCE.getFieldContainer_Children(), c));
+					av.setName(cl.getName() + " (" + ViewUtils.getTypeAsString(av) + ")");
 				}
 			}
 		} else {
-			UIUtils.showError("No Class defined",
-					"No class have been defined. \n"
-							+ "Choose one and run Initiliaze again.");
+			UIUtils.showError("No Class defined", "No class have been defined. \n" + "Choose one and run Initiliaze again.");
 		}
 		return cmd;
 	}
 
 	/**
-	 * Show a dialog to ask if we user wants a Data List or a Data Table (for result on Facet Map)
+	 * Show a dialog to ask if we user wants a Data List or a Data Table (for
+	 * result on Facet Map)
 	 */
 	private static void askTypeOfList() {
-		final Shell dialog = new Shell(Display.getCurrent().getActiveShell(),
-				SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+		final Shell dialog = new Shell(Display.getCurrent().getActiveShell(), SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
 		dialog.setText("Which kind of list");
 		dialog.setSize(250, 150);
 
@@ -109,10 +99,10 @@ public class InitView {
 		final Button buttonDT = new Button(dialog, SWT.PUSH);
 		buttonDT.setText("Data Table");
 		buttonDT.setBounds(120, 55, 80, 25);
-		
+
 		final Label label = new Label(dialog, SWT.NONE);
-	    label.setText("Which kind of list do you want to use \n to display result ?");
-	    label.setBounds(20, 15, 200, 40);
+		label.setText("Which kind of list do you want to use \n to display result ?");
+		label.setBounds(20, 15, 200, 40);
 
 		Listener listener = new Listener() {
 			public void handleEvent(Event event) {
@@ -127,17 +117,16 @@ public class InitView {
 
 		buttonDL.addListener(SWT.Selection, listener);
 		buttonDT.addListener(SWT.Selection, listener);
-		
+
 		dialog.open();
-		
+
 		while (!dialog.isDisposed()) {
-	      if (!Display.getCurrent().readAndDispatch())
-	    	  Display.getCurrent().sleep();
-	    }
+			if (!Display.getCurrent().readAndDispatch())
+				Display.getCurrent().sleep();
+		}
 	}
 
-	private static Collection<FieldElement> getViewElementForClass(Clazz c,
-			AbstractViewOf av) {
+	private static Collection<FieldElement> getViewElementForClass(Clazz c, AbstractViewOf av) {
 		Collection<FieldElement> list = new ArrayList<FieldElement>();
 		if (c != null) {
 			// Attributes :
