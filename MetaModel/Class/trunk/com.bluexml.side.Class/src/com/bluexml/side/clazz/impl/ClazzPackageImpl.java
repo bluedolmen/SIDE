@@ -1166,7 +1166,14 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "body", "Sequence{self.firstEnd,self.secondEnd} -> select(ae | ae.linkedClass = clazz)\n",
 			 "description", "returns the association end for which the parameter class (clazz) is linked to"
-		   });									
+		   });				
+		addAnnotation
+		  (attributeEClass, 
+		   source, 
+		   new String[] {
+			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
+		   });								
 		addAnnotation
 		  (enumerationEClass, 
 		   source, 
@@ -1230,7 +1237,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createInternalDocAnnotations() {
-		String source = "InternalDoc";																																																																			
+		String source = "InternalDoc";																																																																					
 		addAnnotation
 		  (classCommentEClass, 
 		   source, 
@@ -1265,7 +1272,13 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "constraints", "reflexiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation doubleNavigable noSpecialChracters",
 			 "warning", "twoWayNavigation"
-		   });																
+		   });											
+		addAnnotation
+		  (attributeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "NameNull noSpecialCharacters "
+		   });								
 		addAnnotation
 		  (enumerationEClass, 
 		   source, 

@@ -36,7 +36,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAttribute()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NameNull noSpecialCharacters '"
  * @generated
  */
 public interface Attribute extends TitledNamedClassModelElement {

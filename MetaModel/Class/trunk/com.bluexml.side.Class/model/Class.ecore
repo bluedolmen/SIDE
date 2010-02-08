@@ -3,14 +3,14 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="clazz"
     nsURI="http://www.kerblue.org/class/1.0" nsPrefix="clazz">
-  <eClassifiers xsi:type="ecore:EClass" name="ClassModelElement" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//ModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ClassModelElement" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: 'Has comment' allows to link a class to a comment."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="hasComments" upperBound="-1"
         eType="#//ClassComment" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassPackage" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//Package">
+  <eClassifiers xsi:type="ecore:EClass" name="ClassPackage" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: a package allows to organize class/data; this is similar to Java package structure.&#xD;&#xA;Constraints: the fully qualified name of a class is compose of the successive names of the containing package and the attribute name of the class. This fully qualified name must be unique in your application. For instance, 'org.bluexml.library.mediaVideo' identifies the class mediaVideo contains in the 'library' package, itself contains in the 'bluexml' package, itself contains in the 'org' package."/>
     </eAnnotations>
@@ -191,7 +191,7 @@
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
-        eType="ecore:EClass platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
+        eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generalizations" upperBound="-1"
         eType="#//Clazz"/>
@@ -273,7 +273,14 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: a class property descibes a characteristic of the concerned class. For example, the property 'title' of the class 'book' gives the title of the book.&#xD;&#xA;Constraints: &#xD;&#xA;- the name of a class property must be unique between all the direct and inherited property of a class.&#xD;&#xA;- a property is associated to a single class or abstract class; a class or an abstract class may contain zero, one or several properties.&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//DataType"
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="NameNull noSpecialCharacters "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum ../../com.bluexml.side.Common/model/Common.ecore#//DataType"
         defaultValueLiteral="String">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: the type of a class property allows to define its format; the supported property types are boolean, byte, char, double, float, int, long, short, String, Date, Object.&#xD;&#xA;"/>
@@ -284,7 +291,7 @@
         <details key="documentation" value="Definition: this attribute allows to set up an initial value to the class property at creation of an object."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//Visibility"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum ../../com.bluexml.side.Common/model/Common.ecore#//Visibility"
         defaultValueLiteral="Private">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: this attribute indicates the scope of the class property the possible values are:&#xD;&#xA;- public: the class property is visible to other classes through association.&#xD;&#xA;- private: the class property is not visible to other classes.&#xD;&#xA;- protected: the class property cannot be updated."/>
@@ -300,7 +307,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mockup" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: an enumeration represents a list of values which may be associated to a class property.&#xD;&#xA;Example: the list of languages associated to the property 'language' of a book.&#xD;&#xA;Deprecated: the link'depends of' was used in previous release of S-IDE to model a relation between enumeration like between a department list and a country list; this link has been kept for compatibility reason but is no more useful at the data level and is now managed between fields of Form model as a management rule."/>
     </eAnnotations>
@@ -356,7 +363,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="generalizations" upperBound="-1"
         eType="#//Aspect"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//TitledNamedClassModelElement platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//Container">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//TitledNamedClassModelElement ../../com.bluexml.side.Common/model/Common.ecore#//Container">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="TwoModelElementWithSameName" value="AbstractClass.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a &lt;> self)->size() = 0"/>
       <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
@@ -376,7 +383,7 @@
         eType="#//Attribute" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TitledNamedClassModelElement" abstract="true"
-      eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//NamedModelElement #//ClassModelElement">
+      eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement #//ClassModelElement">
     <eOperations name="getLabel" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="if self.title.oclIsUndefined() or self.title.size() = 0 then&#xD; self.name &#xD;else&#xD; self.title &#xD;endif"/>
@@ -388,7 +395,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassComment" eSuperTypes="platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//Comment">
+  <eClassifiers xsi:type="ecore:EClass" name="ClassComment" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Comment">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: Comments may be used to describe class. Double click to fill up the comment body with the text you want."/>
     </eAnnotations>
@@ -396,7 +403,7 @@
       <details key="documentation" value="Used because we can't put a Comment (from Common) on the diagram. "/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssociationEnd" eSuperTypes="#//TitledNamedClassModelElement platform:/plugin/com.bluexml.side.Common/model/Common.ecore#//Comment">
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationEnd" eSuperTypes="#//TitledNamedClassModelElement ../../com.bluexml.side.Common/model/Common.ecore#//Comment">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: one of the two sides of an association; it references a class/data."/>
     </eAnnotations>

@@ -162,6 +162,22 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	private static Constraint association_IfAggregationOrCompositionThenUnidirectionalAssociationInvOCL;
 	/**
+	 * The parsed OCL expression for the definition of the '<em>NameNull</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint attribute_NameNullInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>noSpecialCharacters</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint attribute_noSpecialCharactersInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>enumDynamicAreNotAvailable</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -851,7 +867,94 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAttribute(Attribute attribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(attribute, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAttribute_NameNull(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAttribute_noSpecialCharacters(attribute, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the NameNull constraint of '<em>Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAttribute_NameNull(Attribute attribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (attribute_NameNullInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ATTRIBUTE);
+
+			EAnnotation ocl = ClazzPackage.Literals.ATTRIBUTE.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("NameNull");
+
+			try {
+				attribute_NameNullInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(attribute_NameNullInvOCL);
+
+		if (!query.check(attribute)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( ClazzPackage.Literals.ATTRIBUTE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"NameNull")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NameNull", getObjectLabel(attribute, context) }),
+						 new Object[] { attribute }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the noSpecialCharacters constraint of '<em>Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAttribute_noSpecialCharacters(Attribute attribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (attribute_noSpecialCharactersInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ATTRIBUTE);
+
+			EAnnotation ocl = ClazzPackage.Literals.ATTRIBUTE.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("noSpecialCharacters");
+
+			try {
+				attribute_noSpecialCharactersInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(attribute_noSpecialCharactersInvOCL);
+
+		if (!query.check(attribute)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( ClazzPackage.Literals.ATTRIBUTE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"noSpecialCharacters")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(attribute, context) }),
+						 new Object[] { attribute }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
