@@ -129,7 +129,7 @@ public class DefaultMessages {
 	 * @param args
 	 * @throws IOException
 	 */
-	public static boolean generateMessages(String filePath) throws IOException {
+	public static boolean generateMessagesFile(String filePath) throws IOException {
 		return generate(filePath, allMessagesProperties);
 	}
 
@@ -137,7 +137,7 @@ public class DefaultMessages {
 	 * @param args
 	 * @throws IOException
 	 */
-	public static boolean generateForms(String filePath) throws IOException {
+	public static boolean generateFormsFile(String filePath) throws IOException {
 		return generate(filePath, allFormsProperties);
 	}
 
