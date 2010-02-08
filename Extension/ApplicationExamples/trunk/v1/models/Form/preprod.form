@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<form:WorkflowFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_UMfUQBDmEd-lL8lAQN3fwA">
+  <forms xsi:type="form:FormWorkflow" xmi:id="_UMfUQRDmEd-lL8lAQN3fwA" label="Reception" id="preprod_Reception">
+    <ref href="../Workflow/preprod.workflow#_VOsqEBDkEd-eFJrsZcrkww"/>
+    <children xsi:type="form:ActionField" xmi:id="_UMfUQhDmEd-lL8lAQN3fwA" label="Etablissement du devis" id="etabDevis">
+      <ref href="../Workflow/preprod.workflow#_8qe38BDkEd-eFJrsZcrkww"/>
+    </children>
+    <DataForm href="preprod.data.form#_col94BDmEd-lL8lAQN3fwA"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_UMfUQxDmEd-lL8lAQN3fwA" label="EtablissementDevis" id="preprod_EtablissementDevis">
+    <ref href="../Workflow/preprod.workflow#_n6xusBDkEd-eFJrsZcrkww"/>
+    <children xsi:type="form:ActionField" xmi:id="_UMfURBDmEd-lL8lAQN3fwA" label="Analyse" id="analyse">
+      <ref href="../Workflow/preprod.workflow#_8-q_QBDkEd-eFJrsZcrkww"/>
+    </children>
+    <DataForm href="preprod.data.form#_col94BDmEd-lL8lAQN3fwA"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_UMfURRDmEd-lL8lAQN3fwA" label="AnalyseDevis" id="preprod_AnalyseDevis">
+    <ref href="../Workflow/preprod.workflow#_rVErUBDkEd-eFJrsZcrkww"/>
+    <children xsi:type="form:ActionField" xmi:id="_UMfURhDmEd-lL8lAQN3fwA" label="Accepter le devis" id="ok">
+      <ref href="../Workflow/preprod.workflow#_9ShIUBDkEd-eFJrsZcrkww"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_UMfURxDmEd-lL8lAQN3fwA" label="Refuser" id="ko">
+      <ref href="../Workflow/preprod.workflow#_9pNxEBDkEd-eFJrsZcrkww"/>
+    </children>
+    <DataForm href="preprod.data.form#_col94BDmEd-lL8lAQN3fwA"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_UMfUSBDmEd-lL8lAQN3fwA" label="DemarrageProduction" id="preprod_DemarrageProduction">
+    <ref href="../Workflow/preprod.workflow#_ykopUBDkEd-eFJrsZcrkww"/>
+    <children xsi:type="form:ActionField" xmi:id="_UMfUSRDmEd-lL8lAQN3fwA" label="Mise en production" id="prod">
+      <ref href="../Workflow/preprod.workflow#__2HGcBDkEd-eFJrsZcrkww"/>
+    </children>
+    <DataForm href="preprod.data.form#_col94BDmEd-lL8lAQN3fwA"/>
+  </forms>
+  <linked_process href="../Workflow/preprod.workflow#_16bV4BDjEd-eFJrsZcrkww"/>
+</form:WorkflowFormCollection>

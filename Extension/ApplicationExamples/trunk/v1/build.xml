@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<project default="main">
+	<property file="build.properties"/>
+
+	<target name="main" depends="distrib_model,distrib_comp,distrib_war" description="Main target to generate 3 distribution files: models, application wars, components webapps extension">
+		<echo>Building the 3 distribution files.</echo>
+	</target>
+
+
+    <!-- Creates the models distribution -->
+     <target name="distrib_model" description="generate the distribution file project_models.zip containing SIDE models application">
+        <!-- build the SIDE models distribution file -->
+        <delete file="${distrib.dir}/${project.name}_${distrib.suffix.model}.zip"/>
+        <zip destfile="${distrib.dir}/${project.name}_${distrib.suffix.model}.zip" compress="true">
+            <!-- the models and the necessary extensions of the application -->
+        	<zipfileset dir="${model.dir}" prefix="${model.dir}"/>
+            <!-- the components extensions for the application (properties, javascript, jar, ... files) -->
+            <zipfileset dir="${extension.dir}" prefix="${distrib.suffix.extension}"/>
+            <!-- the Readme and License file -->
+            <fileset dir="." file="${readme.file}"/>
+            <fileset dir="." file="${license.file}"/>
+         </zip>
+     </target>
+
+    <!-- Creates the component webapps extension distribution -->
+     <target name="distrib_comp" description="generate the distribution file project_application_comp.zip containing the generated components of the webapp">
+        <!-- build the framework components extension distribution file -->
+        <delete file="${distrib.dir}/${project.name}_${distrib.suffix.application.component}.zip"/>
+        <zip destfile="${distrib.dir}/${project.name}_${distrib.suffix.application.component}.zip" compress="true">
+            <!-- the generated components for Alfresco -->
+            <zipfileset dir="${generation.out.dir}/${alfresco}" includes="*.amp" prefix="${alfresco}/${distrib.suffix.amp}"/>
+            <!-- the generated components for Alfresco Share -->
+            <zipfileset dir="${generation.out.dir}/${alfresco}" includes="*.zip" prefix="${alfresco}/${distrib.suffix.zip}"/>
+            <!-- the generated components for Chiba Xforms -->
+            <zipfileset dir="${generation.out.dir}/${chiba}" includes="*.zip" prefix="${chiba}/${distrib.suffix.zip}"/>
+            <!-- the components extensions for the application (properties, javascript, jar, ... files) -->
+           <zipfileset dir="${extension.dir}" prefix="${distrib.suffix.extension}"/>
+            <!-- the SIDE generation report -->
+            <fileset dir="${generation.logs.dir}/${project.name}" file="${side-report.file}"/>
+            <!-- the Readme and License file -->
+            <fileset dir="." file="${readme.file}"/>
+            <fileset dir="." file="${license.file}"/>
+         </zip>
+     </target>
+
+	 <!-- Creates the component webapps extension distribution -->
+	 <target name="distrib_war" description="generate the distribution file project_application_war.zip containing the webapp war">
+        <!-- build the Alfresco war file -->
+        <delete file="${generation.out.dir}/${alfresco.war}"/>
+	 	<zip destfile="${generation.out.dir}/${alfresco.war}" compress="true">
+           <zipfileset dir="${tomcat.webapp.dir}/${alfresco.webapp}" prefix=""/>
+        </zip>
+        <!-- build the Alfresco Share war file -->
+        <delete file="${generation.out.dir}/${share.war}"/>
+	 	<zip destfile="${generation.out.dir}/${share.war}" compress="true">
+           <zipfileset dir="${tomcat.webapp.dir}/${share.webapp}" prefix=""/>
+        </zip>
+        <!-- build the Chiba war file -->
+        <delete file="${generation.out.dir}/${chiba.war}"/>
+	 	<zip destfile="${generation.out.dir}/${chiba.war}" compress="true">
+           <zipfileset dir="${tomcat.webapp.dir}/${chiba.webapp}" prefix=""/>
+        </zip>
+        <!-- build the war distribution file -->
+        <delete file="${distrib.dir}/${project.name}_${distrib.suffix.application.war}.zip"/>
+	 	<zip destfile="${distrib.dir}/${project.name}_${distrib.suffix.application.war}.zip" compress="true">
+            <!-- the application webapp war files: Alfresco, Alfresco share, Chiba, Birt, Facetmap, ...  -->
+           <zipfileset dir="${generation.out.dir}" includes="*.war"/>
+            <!-- the components extensions for the application (properties, javascript, jar, ... files) -->
+           <zipfileset dir="${extension.dir}" prefix="${distrib.suffix.extension}"/>
+            <!-- the SIDE generation report -->
+            <fileset dir="${generation.logs.dir}/${project.name}" file="${side-report.file}"/>
+            <!-- the Readme and License file -->
+            <fileset dir="." file="${readme.file}"/>
+            <fileset dir="." file="${license.file}"/>
+        </zip>
+	 </target>
+	
+ </project>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ASCII"?>
+<form:WorkflowFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_iCOpABAKEd---eo9saYntw">
+  <forms xsi:type="form:FormWorkflow" xmi:id="_iCOpARAKEd---eo9saYntw" label="DemandePublication" id="demande_DemandePublication">
+    <ref href="../Workflow/demande.workflow#_5g8TABAGEd-QPZneBoCQXA"/>
+    <children xsi:type="form:ActionField" xmi:id="_iCOpAhAKEd---eo9saYntw" label="Demande de la publication" id="demande">
+      <ref href="../Workflow/demande.workflow#_MNuiQBAHEd-QPZneBoCQXA"/>
+    </children>
+    <DataForm href="demande.data.form#_z-bv4BAKEd---eo9saYntw"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_iCOpAxAKEd---eo9saYntw" label="Reception" id="demande_Reception">
+    <ref href="../Workflow/demande.workflow#_GeAmYBAHEd-QPZneBoCQXA"/>
+    <children xsi:type="form:TextField" xmi:id="_reehABAKEd---eo9saYntw" label="commentaire" id="commentaire">
+      <ref href="../Workflow/demande.workflow#_cqNGUBAIEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:TextField" xmi:id="_t5aSYBAKEd---eo9saYntw" label="reponse" id="reponse" disabled="true">
+      <ref href="../Workflow/demande.workflow#_o8ohQBAIEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_iCOpBRAKEd---eo9saYntw" label="Demande de compl&#xe9;ment d'information" id="complement">
+      <ref href="../Workflow/demande.workflow#_qIDLgBAIEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_iCOpBhAKEd---eo9saYntw" label="Refuser la demande" id="refuser">
+      <ref href="../Workflow/demande.workflow#_3D1FcBAIEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_iCOpBxAKEd---eo9saYntw" label="Accepter la demande" id="accepter">
+      <ref href="../Workflow/demande.workflow#_5CHXEBAIEd-QPZneBoCQXA"/>
+    </children>
+    <DataForm href="demande.data.form#_GVyQgBChEd-68c7TOzQSDg"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_iCOpCBAKEd---eo9saYntw" description="" label="Complement" id="demande_Complement">
+    <ref href="../Workflow/demande.workflow#_ixM5wBAIEd-QPZneBoCQXA"/>
+    <children xsi:type="form:TextField" xmi:id="_sSUYwBAKEd---eo9saYntw" label="commentaire" id="commentaire" disabled="true">
+      <ref href="../Workflow/demande.workflow#_cqNGUBAIEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:TextField" xmi:id="_tHrTcBAKEd---eo9saYntw" label="reponse" id="reponse">
+      <ref href="../Workflow/demande.workflow#_o8ohQBAIEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_iCOpChAKEd---eo9saYntw" label="Soumettre ma r&#xe9;ponse" id="repondre">
+      <ref href="../Workflow/demande.workflow#_unWBUBAIEd-QPZneBoCQXA"/>
+    </children>
+    <DataForm href="demande.data.form#_HyJK8BALEd---eo9saYntw"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_iCOpCxAKEd---eo9saYntw" label="Refuser" id="demande_Refuser">
+    <ref href="../Workflow/demande.workflow#_1BhPcBAIEd-QPZneBoCQXA"/>
+    <children xsi:type="form:TextField" xmi:id="_z5GvoBDpEd-O_agBGzZuOQ" label="motif" id="motif">
+      <ref href="../Workflow/demande.workflow#__jup8BAIEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_iCOpDRAKEd---eo9saYntw" label="Archiver la demande" id="archiver">
+      <ref href="../Workflow/demande.workflow#_DDwbIBAJEd-QPZneBoCQXA"/>
+    </children>
+    <DataForm href="demande.data.form#_HyJK8BALEd---eo9saYntw"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_iCOpDhAKEd---eo9saYntw" label="Accepter" id="demande_Accepter">
+    <ref href="../Workflow/demande.workflow#_18888BAIEd-QPZneBoCQXA"/>
+    <children xsi:type="form:CharField" xmi:id="_iCOpDxAKEd---eo9saYntw" label="ISBN" id="ISBN">
+      <ref href="../Workflow/demande.workflow#_Nda9oBAJEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:DecimalField" xmi:id="_iCOpEBAKEd---eo9saYntw" label="Prix" id="Prix">
+      <ref href="../Workflow/demande.workflow#_RUrjEBAJEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_iCOpERAKEd---eo9saYntw" label="Cr&#xe9;ation du projet de publication" id="creationProjet">
+      <ref href="../Workflow/demande.workflow#_7sAVABAJEd---eo9saYntw"/>
+    </children>
+    <DataForm href="demande.data.form#_HyJK8BALEd---eo9saYntw"/>
+  </forms>
+  <linked_process href="../Workflow/demande.workflow#_reS3oBAGEd-QPZneBoCQXA"/>
+</form:WorkflowFormCollection>

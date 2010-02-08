@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_MT3mYBGPEd-y1uNXScORgg">
+  <views xsi:type="view:ComposedView" xmi:id="_W_4gUBGTEd-y1uNXScORgg" name="List">
+    <children xsi:type="view:DataList" xmi:id="_W_4gURGTEd-y1uNXScORgg" name="Document (Data List)">
+      <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_XfXV4BDIEd-gpYv8CBAghQ"/>
+    </children>
+    <children xsi:type="view:DataList" xmi:id="_W_4gUhGTEd-y1uNXScORgg" name="Demande (Data List)">
+      <children xsi:type="view:TextField" xmi:id="_W_4gUxGTEd-y1uNXScORgg" name="Version">
+        <mapTo href="../Data/coeprepress.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_W_4gVBGTEd-y1uNXScORgg" name="Description">
+        <mapTo href="../Data/coeprepress.dt#_gcQ4IBAHEd-QPZneBoCQXA"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_W_4gVRGTEd-y1uNXScORgg" name="Date de la demande">
+        <mapTo href="../Data/coeprepress.dt#_gsuWABAHEd-QPZneBoCQXA"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_W_4gVhGTEd-y1uNXScORgg" name="Date de la réponse">
+        <mapTo href="../Data/coeprepress.dt#_hNKwoBAHEd-QPZneBoCQXA"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_W_4gVxGTEd-y1uNXScORgg" name="Dispo le">
+        <mapTo href="../Data/coeprepress.dt#_hYX7EBAHEd-QPZneBoCQXA"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_W_4gWBGTEd-y1uNXScORgg" name="Statut">
+        <mapTo href="../Data/coeprepress.dt#_iEQJoBAHEd-QPZneBoCQXA"/>
+      </children>
+      <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="view:DataList" xmi:id="_W_4gWRGTEd-y1uNXScORgg" name="Projet (Data List)">
+      <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_HJUnoBDgEd-eFJrsZcrkww"/>
+    </children>
+    <children xsi:type="view:DataList" xmi:id="_W_4gWhGTEd-y1uNXScORgg" name="Publication (Data List)">
+      <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_OAlaYBDgEd-eFJrsZcrkww"/>
+    </children>
+  </views>
+  <composedViews xmi:id="_NSYdEBGPEd-y1uNXScORgg" name="Detail">
+    <children xsi:type="view:DataList" xmi:id="_N3sJkBGPEd-y1uNXScORgg" name="Document (Data List)">
+      <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_XfXV4BDIEd-gpYv8CBAghQ"/>
+    </children>
+    <children xsi:type="view:DataList" xmi:id="_X7Hg4BGQEd-y1uNXScORgg" name="Demande (Data List)">
+      <children xsi:type="view:TextField" xmi:id="_ZsA2wBGQEd-y1uNXScORgg" name="Version">
+        <mapTo href="../Data/coeprepress.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_ZsA2wRGQEd-y1uNXScORgg" name="Description">
+        <mapTo href="../Data/coeprepress.dt#_gcQ4IBAHEd-QPZneBoCQXA"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_ZsA2whGQEd-y1uNXScORgg" name="Date de la demande">
+        <mapTo href="../Data/coeprepress.dt#_gsuWABAHEd-QPZneBoCQXA"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_ZsA2wxGQEd-y1uNXScORgg" name="Date de la réponse">
+        <mapTo href="../Data/coeprepress.dt#_hNKwoBAHEd-QPZneBoCQXA"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_ZsA2xBGQEd-y1uNXScORgg" name="Dispo le">
+        <mapTo href="../Data/coeprepress.dt#_hYX7EBAHEd-QPZneBoCQXA"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_ZsA2xRGQEd-y1uNXScORgg" name="Statut">
+        <mapTo href="../Data/coeprepress.dt#_iEQJoBAHEd-QPZneBoCQXA"/>
+      </children>
+      <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="view:DataList" xmi:id="_aqcN4BGQEd-y1uNXScORgg" name="Projet (Data List)">
+      <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_HJUnoBDgEd-eFJrsZcrkww"/>
+    </children>
+    <children xsi:type="view:DataList" xmi:id="_dfGG0BGQEd-y1uNXScORgg" name="Publication (Data List)">
+      <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_OAlaYBDgEd-eFJrsZcrkww"/>
+    </children>
+  </composedViews>
+</view:ViewCollection>
