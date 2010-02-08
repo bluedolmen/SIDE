@@ -816,7 +816,7 @@ public class MappingToolCommon {
 	 * @param uploadDestination
 	 *            the identification of the upload store
 	 * @param suffix
-	 *            the suffix that, when found in attribute names, denotes an upload
+	 *            the suffix that, when found in attribute names, denotes an upload field/attribute
 	 * @return null if no repository content file name was detected
 	 */
 	public List<RepoContentInfoBean> getFileUploadBeans(AlfrescoTransaction transaction,
@@ -842,7 +842,9 @@ public class MappingToolCommon {
 	/**
 	 * Sets the value of an attribute to the reference, which should be a file name for a filesystem
 	 * upload, or a reference in the format "workspace://SpacesStore/..." in case of repository
-	 * content.
+	 * content.<br/>
+	 * Clearing is needed before setting the value! Or the attr will be taken as multiple-valued
+	 * since the GenericAttribute has file name, path, MIME...
 	 * 
 	 * @param attr
 	 * @param fileName

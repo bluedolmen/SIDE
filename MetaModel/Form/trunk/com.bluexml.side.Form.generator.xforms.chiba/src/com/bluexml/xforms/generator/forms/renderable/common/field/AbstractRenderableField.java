@@ -586,7 +586,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		input.addContent(action);
 		addHintAndMessages(input);
 		
-		widgetDiv.addContent(input);
+		widgetDiv.addContent(input); // #1480
 		element.addContent(widgetDiv);
 		return element;
 	}

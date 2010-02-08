@@ -841,7 +841,7 @@ public class AlfrescoController {
 		RepoContentInfoBean oldBean;
 		for (RepoContentInfoBean newBean : newFileContentInfo) {
 			fileName = newBean.getPath();
-			if (fileName != null && fileName.startsWith("file:")) { // <- value to be replaced
+			if (fileName != null && fileName.startsWith("file:")) { // value is being replaced
 				String qualifiedName = newBean.getAttribute().getQualifiedName();
 				oldBean = uploadFindBean(previousFileContentInfo, qualifiedName);
 				if (oldBean != null) {
@@ -958,6 +958,8 @@ public class AlfrescoController {
 	 * @param location
 	 *            path to a folder in the content management system
 	 * @param shouldAppendSuffix
+	 *            if set to true, an index [e.g. '(1)'] is appended to the filename if the original
+	 *            filename is not available
 	 * @return the string
 	 * @throws ServletException
 	 *             the alfresco controller exception
