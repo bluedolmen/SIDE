@@ -33,6 +33,69 @@
         </technologyVersion>
       </technology>
     </metamodel>
+    <technology
+          description="A mind map is a diagram used to represent words, ideas, tasks, or other items linked to and arranged around a central key word or idea. Mind maps are used to generate, visualize, structure, and classify ideas, and as an aid in study, organization, problem solving, decision making, and writing."
+          id="mindmap"
+          name="MindMap"
+          url="http://en.wikipedia.org/wiki/Mind_map">
+       <technologyVersion
+             description="FreeMind is a premier free mind-mapping software written in Java."
+             id="freemind"
+             version="FreeMind">
+          <deployerVersion
+                class="com.bluexml.side.util.deployer.FakeDeployer"
+                hidden="hidden and used by default"
+                id="com.bluexml.side.Requirements.deployer.freemind"
+                shared="false"
+                version="com.bluexml.side.Requirements.generator.deployerVersion3">
+          </deployerVersion>
+       </technologyVersion>
+    </technology>
+    <technology
+          id="office"
+          name="Office Document">
+       <technologyVersion
+             id="office_excel"
+             version="Excel Document">
+          <deployerVersion
+                class="com.bluexml.side.util.deployer.FakeDeployer"
+                hidden="hidden and used by default"
+                id="com.bluexml.side.Requirements.deployer.excel"
+                shared="false"
+                version="com.bluexml.side.Requirements.generator.deployerVersion4">
+          </deployerVersion>
+       </technologyVersion>
+    </technology>
+    <technology
+          id="webproject"
+          name="Web Project">
+       <technologyVersion
+             id="webproject_1_0"
+             version="Web Project 1.0">
+          <deployerVersion
+                class="com.bluexml.side.util.deployer.FakeDeployer"
+                hidden="hidden and used by default"
+                id="com.bluexml.side.Requirements.deployer.webproject"
+                shared="false"
+                version="com.bluexml.side.Requirements.generator.deployerVersion5">
+          </deployerVersion>
+       </technologyVersion>
+    </technology>
+    <technology
+          id="opendocument"
+          name="Open Document">
+       <technologyVersion
+             id="opendocument_writer"
+             version="Open Document Writer">
+          <deployerVersion
+                class="com.bluexml.side.util.deployer.FakeDeployer"
+                hidden="hidden and used by default"
+                id="com.bluexml.side.Requirements.deployer.doc"
+                shared="false"
+                version="com.bluexml.side.Requirements.generator.deployerVersion6">
+          </deployerVersion>
+       </technologyVersion>
+    </technology>
   </extension>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package class="com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapPackage" genModel="src/interpretation/mindmap/mindmap.genmodel" uri="http://www.bluexml.com/rwm/mindmap/1.0/" />
