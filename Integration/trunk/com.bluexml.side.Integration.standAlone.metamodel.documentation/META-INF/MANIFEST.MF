@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Documentation Plug-in
 Bundle-SymbolicName: com.bluexml.side.Integration.standAlone.metamodel.documentation;singleton:=true
-Bundle-Version: 1.0.28.v14029-20100205
+Bundle-Version: 1.0.29.v14062-20100208
 Bundle-Activator: com.bluexml.side.integration.standalone.metamodel.documentation.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
