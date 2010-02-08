@@ -12,7 +12,6 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -101,13 +100,20 @@ public class FormGenerator extends AbstractGenerator {
 			}
 		}
 		if (StringUtils.trimToNull(messagesFilePath) == null) {
-			String filePath = defaultsDir + File.separator + "messages.properties";			
-			if (DefaultMessages.generateMessages(filePath)) {
+			String filePath = defaultsDir + File.separator + "messages.properties";
+			if (DefaultMessages.generateMessagesFile(filePath)) {
 				setMessagesFilePath(filePath);
 			} else {
 				monitor.addWarningText("Could not generate and set the messages file.");
 			}
 		}
+		
+		// generate the forms.properties file
+		String filePath = resDir + File.separator + "forms.properties";
+		if (DefaultMessages.generateFormsFile(filePath) == false) {
+			monitor.addWarningText("Could not generate and set the 'forms.properties' file.");
+		}
+
 		// deal with the webapp address (protocol, host, port, context)
 		webappContext = generationParameters
 				.get("com.bluexml.side.Form.generator.xforms.chiba.webappContext");
@@ -159,7 +165,8 @@ public class FormGenerator extends AbstractGenerator {
 		// must build package
 		// build archive from tmp folder
 		WarPatchPackager wpp = new WarPatchPackager(getIFolder(getTemporaryFolder()),
-				buildModuleProperties(defaultModelID).getProperty("module.id"), techVersion, webappName);
+				buildModuleProperties(defaultModelID).getProperty("module.id"), techVersion,
+				webappName);
 
 		IFile chibaPackage = wpp.buildPackage();
 		ArrayList<IFile> result = new ArrayList<IFile>();
@@ -193,9 +200,8 @@ public class FormGenerator extends AbstractGenerator {
 		boolean renderDataBeforeWorkflow = true;
 		try {
 			FormGeneratorsManager formGenerator = new FormGeneratorsManager(clazzFiles, formsFiles,
-					LogFactory.getLog(FormGenerator.class), simplifyClasses,
-					renderDataBeforeWorkflow, false);
-			formGenerator.generate(generators, monitor);
+					monitor, simplifyClasses, renderDataBeforeWorkflow, false);
+			formGenerator.generate(generators);
 		} catch (RuntimeException e) {
 			monitor.addErrorTextAndLog("ERROR :" + e.getMessage(), e, "");
 		}
