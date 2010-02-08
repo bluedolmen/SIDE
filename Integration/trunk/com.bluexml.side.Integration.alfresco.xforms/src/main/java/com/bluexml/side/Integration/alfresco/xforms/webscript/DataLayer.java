@@ -1354,7 +1354,7 @@ public class DataLayer implements DataLayerInterface {
 	 *            if false, there will be no attempt to set the file name
 	 * @param shouldAppendSuffix
 	 *            if the renaming is activated, an index [e.g. '(1)'] may be appended to the
-	 *            filename there will be no failure due to an unavailable name
+	 *            filename. There will be no failure due to an unavailable name.
 	 * @return the node ref (protocol, store and id) to the node, or empty string if exception.
 	 */
 	public String uploadContentToNode(NodeRef newNode, String filename, String filepath,
