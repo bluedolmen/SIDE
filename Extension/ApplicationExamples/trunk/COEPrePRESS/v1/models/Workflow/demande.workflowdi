@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="demande.workflow#_reS3oBAGEd-QPZneBoCQXA"/>
+  <diagrams position="0,0" size="100,100" name="No name" viewport="168,182">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Workflow.modeler.diagram">
+      <element href="demande.workflow#_reS3oBAGEd-QPZneBoCQXA"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="464,205" size="116,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3 //@diagrams.0/@contained.5 //@diagrams.0/@contained.7 //@diagrams.0/@contained.12 //@diagrams.0/@contained.20"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_GeAmYBAHEd-QPZneBoCQXA"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_GeAmYBAHEd-QPZneBoCQXA"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="demande.workflow#_cqNGUBAIEd-QPZneBoCQXA"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_GeAmYBAHEd-QPZneBoCQXA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="55,307" size="90,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3 //@diagrams.0/@contained.10"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_ixM5wBAIEd-QPZneBoCQXA"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_ixM5wBAIEd-QPZneBoCQXA"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="demande.workflow#_o8ohQBAIEd-QPZneBoCQXA"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_ixM5wBAIEd-QPZneBoCQXA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_unWBUBAIEd-QPZneBoCQXA"/>
+      </semanticModel>
+      <waypoints>[127, 0, -295, 102]</waypoints>
+      <waypoints>[127, -102, -295, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_qIDLgBAIEd-QPZneBoCQXA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="534,352" size="74,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.5 //@diagrams.0/@contained.8 //@diagrams.0/@contained.26"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_1BhPcBAIEd-QPZneBoCQXA"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_1BhPcBAIEd-QPZneBoCQXA"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="demande.workflow#__jup8BAIEd-QPZneBoCQXA"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_1BhPcBAIEd-QPZneBoCQXA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_3D1FcBAIEd-QPZneBoCQXA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="442,10" size="143,81">
+      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.8 //@diagrams.0/@contained.21"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_ABTBoBAHEd-QPZneBoCQXA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="manage"/>
+      <waypoints>[130, 0, 121, -182]</waypoints>
+      <waypoints>[130, 182, 121, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="manage"/>
+      <waypoints>[129, 0, 71, -329]</waypoints>
+      <waypoints>[129, 329, 71, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="60,13" size="101,81">
+      <anchorage graphEdge="//@diagrams.0/@contained.10 //@diagrams.0/@contained.13"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_2FdDkBAGEd-QPZneBoCQXA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.9/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="manage"/>
+      <waypoints>[-81, 0, -71, -281]</waypoints>
+      <waypoints>[-81, 281, -71, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="46,148" size="123,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.12 //@diagrams.0/@contained.13"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_5g8TABAGEd-QPZneBoCQXA"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_5g8TABAGEd-QPZneBoCQXA"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_5g8TABAGEd-QPZneBoCQXA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.11/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <anchorage graphEdge="//@diagrams.0/@contained.15"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_MNuiQBAHEd-QPZneBoCQXA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.9/@anchorage.0 //@diagrams.0/@contained.11/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="initialize"/>
+      <waypoints>[-82, 0, -79, -113]</waypoints>
+      <waypoints>[-82, 113, -79, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="241,57" size="50,50">
+      <anchorage graphEdge="//@diagrams.0/@contained.15"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_jRklYBDYEd-2T7u5qLlNWA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.14/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="actions"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="actions"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="actions"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="497,563" size="50,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.22 //@diagrams.0/@contained.29"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_FvBHgBAJEd-QPZneBoCQXA"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_FvBHgBAJEd-QPZneBoCQXA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="375,372" size="69,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.20 //@diagrams.0/@contained.21 //@diagrams.0/@contained.22"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_18888BAIEd-QPZneBoCQXA"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_18888BAIEd-QPZneBoCQXA"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="demande.workflow#_Nda9oBAJEd-QPZneBoCQXA"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="demande.workflow#_RUrjEBAJEd-QPZneBoCQXA"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_18888BAIEd-QPZneBoCQXA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.19/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_5CHXEBAIEd-QPZneBoCQXA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.19/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="manage"/>
+      <waypoints>[-104, 6, 0, -355]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.19/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
+      <anchorage graphEdge="//@diagrams.0/@contained.24"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_7sAVABAJEd---eo9saYntw"/>
+      </semanticModel>
+      <waypoints>[0, 159, -113, -6]</waypoints>
+      <waypoints>[-1, 159, -114, -6]</waypoints>
+      <waypoints>[-1, 164, -114, -1]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="191,467" size="94,65">
+      <anchorage graphEdge="//@diagrams.0/@contained.24"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_6rZykBDYEd-2T7u5qLlNWA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.22/@anchorage.0 //@diagrams.0/@contained.23/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="actions"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="511,485" size="72,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.26 //@diagrams.0/@contained.29"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_W06HABDxEd-O_agBGzZuOQ"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="demande.workflow#_W06HABDxEd-O_agBGzZuOQ"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.25/@anchorage.0">
+      <anchorage graphEdge="//@diagrams.0/@contained.28"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_DDwbIBAJEd-QPZneBoCQXA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="670,482" size="50,50">
+      <anchorage graphEdge="//@diagrams.0/@contained.28"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_MXMZsBDrEd-O_agBGzZuOQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.26/@anchorage.0 //@diagrams.0/@contained.27/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="actions"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.25/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="demande.workflow#_i4VcoBDxEd-O_agBGzZuOQ"/>
+      </semanticModel>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

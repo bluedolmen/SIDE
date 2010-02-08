@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form:ClassFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_oqLX0BGTEd-y1uNXScORgg">
+  <forms xsi:type="form:FormClass" xmi:id="_pYpAUBGTEd-y1uNXScORgg" label="Demande" id="Demande">
+    <children xsi:type="form:CharField" xmi:id="_5Fi-EBGTEd-y1uNXScORgg" label="Version" id="Version" help_text="">
+      <ref href="../Data/coeprepress.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:CharField" xmi:id="_5Fi-ERGTEd-y1uNXScORgg" label="Description" id="Description" help_text="">
+      <ref href="../Data/coeprepress.dt#_gcQ4IBAHEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:DateField" xmi:id="_5Fi-EhGTEd-y1uNXScORgg" label="Date de la demande" id="DateDemande" help_text="">
+      <ref href="../Data/coeprepress.dt#_gsuWABAHEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:DateField" xmi:id="_5Fi-ExGTEd-y1uNXScORgg" label="Date de la réponse" id="DateReponse" help_text="">
+      <ref href="../Data/coeprepress.dt#_hNKwoBAHEd-QPZneBoCQXA"/>
+    </children>
+    <children xsi:type="form:DateField" xmi:id="_5Fi-FBGTEd-y1uNXScORgg" label="Dispo le" id="DateDispo" help_text="">
+      <ref href="../Data/coeprepress.dt#_hYX7EBAHEd-QPZneBoCQXA"/>
+    </children>
+    <disabled xsi:type="form:ChoiceField" xmi:id="_MNlk8BGfEd-y1uNXScORgg" label="Statut" id="Statut" help_text="">
+      <ref href="../Data/coeprepress.dt#_iEQJoBAHEd-QPZneBoCQXA"/>
+    </disabled>
+    <real_class href="../Data/coeprepress.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
+  </forms>
+  <forms xsi:type="form:FormClass" xmi:id="_52-bABGTEd-y1uNXScORgg" label="Document" id="Document">
+    <children xsi:type="form:ModelChoiceField" xmi:id="_7F0zwBGTEd-y1uNXScORgg" label="demande" id="demande" max_bound="1">
+      <ref href="../Data/coeprepress.dt#_X9gmQRDPEd-9O_mBBmnH3A"/>
+      <real_class href="../Data/coeprepress.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
+    </children>
+    <real_class href="../Data/coeprepress.dt#_XfXV4BDIEd-gpYv8CBAghQ"/>
+  </forms>
+  <forms xsi:type="form:FormClass" xmi:id="_7zej8BGTEd-y1uNXScORgg" label="Projet" id="Projet">
+    <children xsi:type="form:ModelChoiceField" xmi:id="_81W3sBGTEd-y1uNXScORgg" label="publication" id="publication" max_bound="1">
+      <ref href="../Data/coeprepress.dt#_qd190BDjEd-eFJrsZcrkww"/>
+      <real_class href="../Data/coeprepress.dt#_OAlaYBDgEd-eFJrsZcrkww"/>
+    </children>
+    <children xsi:type="form:ModelChoiceField" xmi:id="_81W3sRGTEd-y1uNXScORgg" label="demande" id="demande" max_bound="1">
+      <ref href="../Data/coeprepress.dt#_LiQ90BDgEd-eFJrsZcrkww"/>
+      <real_class href="../Data/coeprepress.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
+    </children>
+    <real_class href="../Data/coeprepress.dt#_HJUnoBDgEd-eFJrsZcrkww"/>
+  </forms>
+  <forms xsi:type="form:FormClass" xmi:id="_9ZkYABGTEd-y1uNXScORgg" label="Publication" id="Publication">
+    <children xsi:type="form:CharField" xmi:id="_-7CKwBGTEd-y1uNXScORgg" label="Version" id="Version" help_text="">
+      <ref href="../Data/coeprepress.dt#_T1h0gBDgEd-eFJrsZcrkww"/>
+    </children>
+    <children xsi:type="form:CharField" xmi:id="_-7Cx0BGTEd-y1uNXScORgg" label="Titre" id="Titre" help_text="">
+      <ref href="../Data/coeprepress.dt#_WnnhoBDgEd-eFJrsZcrkww"/>
+    </children>
+    <children xsi:type="form:IntegerField" xmi:id="_-7Cx0RGTEd-y1uNXScORgg" label="Année de publication" id="AnneePub" help_text="">
+      <ref href="../Data/coeprepress.dt#_YcNEsBDgEd-eFJrsZcrkww"/>
+    </children>
+    <children xsi:type="form:CharField" xmi:id="_-7Cx0hGTEd-y1uNXScORgg" label="Auteurs" id="Auteurs" help_text="">
+      <ref href="../Data/coeprepress.dt#_cRWKQBDgEd-eFJrsZcrkww"/>
+    </children>
+    <children xsi:type="form:CharField" xmi:id="_-7Cx0xGTEd-y1uNXScORgg" label="Langues" id="Langues" help_text="">
+      <ref href="../Data/coeprepress.dt#_HMtLcBDjEd-eFJrsZcrkww"/>
+    </children>
+    <children xsi:type="form:CharField" xmi:id="_-7Cx1BGTEd-y1uNXScORgg" label="ISBN" id="ISBN" help_text="">
+      <ref href="../Data/coeprepress.dt#_HXF2gBDjEd-eFJrsZcrkww"/>
+    </children>
+    <children xsi:type="form:DecimalField" xmi:id="_-7Cx1RGTEd-y1uNXScORgg" label="Prix" id="Prix" help_text="">
+      <ref href="../Data/coeprepress.dt#_Hf1i0BDjEd-eFJrsZcrkww"/>
+    </children>
+    <disabled xsi:type="form:ChoiceField" xmi:id="_M8NlgBGfEd-y1uNXScORgg" label="Statut" id="Statut" help_text="">
+      <ref href="../Data/coeprepress.dt#_kOp3sBDjEd-eFJrsZcrkww"/>
+    </disabled>
+    <real_class href="../Data/coeprepress.dt#_OAlaYBDgEd-eFJrsZcrkww"/>
+  </forms>
+</form:ClassFormCollection>
