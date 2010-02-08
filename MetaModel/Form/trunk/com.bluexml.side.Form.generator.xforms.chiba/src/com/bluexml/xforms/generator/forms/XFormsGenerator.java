@@ -13,8 +13,6 @@ import java.util.TreeSet;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -124,9 +122,6 @@ public class XFormsGenerator extends AbstractGenerator {
 
 	/** The general keys. */
 	private static Map<String, Set<String>> generalKeys = new HashMap<String, Set<String>>();
-
-	/** The logger. */
-	protected static Log logger = LogFactory.getLog(XFormsGenerator.class);
 
 	static {
 		saxBuilder = new SAXBuilder();
@@ -487,9 +482,9 @@ public class XFormsGenerator extends AbstractGenerator {
 			monitor.setTaskName("Generation of XHTML templates.");
 		}
 		if (isReadOnlyMode()) {
-			genLogger.info("XFormGenerator: Generating XHTML templates (Read Only).");
+			monitor.addText("Generating XHTML templates (Read Only).");
 		} else {
-			genLogger.info("XFormGenerator: Generating XHTML templates.");
+			monitor.addText("Generating XHTML templates.");
 		}
 		formTypesToDescribe = new TreeSet<FormTypeRendered>();
 	}
@@ -584,7 +579,7 @@ public class XFormsGenerator extends AbstractGenerator {
 
 		renderDescriptionFiles();
 
-		genLogger.info("XFormGenerator: Finished generating XHTML templates.");
+		monitor.addText("XFormGenerator: Finished generating XHTML templates.");
 	}
 
 	/**
@@ -618,8 +613,8 @@ public class XFormsGenerator extends AbstractGenerator {
 					outputter.output(doc, fos);
 					fos.close();
 				} catch (Exception ex) {
-					logger.error(ex);
-					throw new RuntimeException(ex);
+					monitor.addErrorTextAndLog("Could not write folder description file "
+							+ descrFile.getAbsolutePath(), null, null);
 				}
 			}
 		}
@@ -630,10 +625,12 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * 
 	 */
 	private void renderAllClasses() {
+		monitor.addText(" Rendering default forms");
+
 		Set<Entry<Clazz, RenderableClass>> entrySet = classes.entrySet();
 		for (Entry<Clazz, RenderableClass> entry : entrySet) {
 			Clazz classe = entry.getKey();
-			genLogger.info("  class: " + ModelTools.getCompleteName(classe));
+			monitor.addText("  class: " + ModelTools.getCompleteName(classe));
 			RenderableClass classeBean = entry.getValue();
 
 			if (classeBean.isToRender()) {
@@ -661,6 +658,8 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * @return true if there is one or more workflow forms
 	 */
 	private boolean renderAllForms() {
+		monitor.addText(" Rendering customized forms");
+		
 		boolean atLeastOneWorfklowForm = false;
 		Set<Entry<String, RenderableFormContainer>> entrySetForms = formsRenderables.entrySet();
 		for (Entry<String, RenderableFormContainer> formEntry : entrySetForms) {
@@ -675,10 +674,9 @@ public class XFormsGenerator extends AbstractGenerator {
 				isContentEnabled = formClass.isContent_enabled();
 			}
 			atLeastOneWorfklowForm = atLeastOneWorfklowForm || isAWorkflowForm;
-			String logText = " Rendering " + (isAWorkflowForm ? "FormWorkflow" : "FormClass")
-					+ ": " + formId;
-			// genLogger.info(logText);
-			if (monitor != null) {
+			if (formGenerator.isDebugMode()) {
+				String logText = " Rendering " + (isAWorkflowForm ? "FormWorkflow" : "FormClass")
+						+ ": " + formId;
 				monitor.addText(logText);
 			}
 			RenderableFormContainer value = formEntry.getValue();
@@ -974,8 +972,8 @@ public class XFormsGenerator extends AbstractGenerator {
 				outputter.output(documentEnums, fos);
 				fos.close();
 			} catch (Exception ex) {
-				logger.error(ex);
-				throw new RuntimeException(ex);
+				monitor.addErrorTextAndLog("Could not write file " + file.getAbsolutePath(), ex,
+						null);
 			}
 		}
 	}
@@ -1103,18 +1101,19 @@ public class XFormsGenerator extends AbstractGenerator {
 		Rendered rendered = form.recursiveRender();
 
 		// write the XHTML/XForms rendering in a file
+		StringBuffer fileName = new StringBuffer(outputXForms.getAbsolutePath());
+		fileName.append(File.separatorChar);
+		fileName.append(formType.getFolder());
+		fileName.append(File.separatorChar);
+		fileName.append(formName);
+		if (isReadOnlyMode()) {
+			fileName.append(formGenerator.getReadOnlySuffix());
+		}
+		fileName.append(formType.getSuffix());
+		fileName.append(".xhtml");
+		String currentFilePath = fileName.toString();
 		try {
-			StringBuffer fileName = new StringBuffer(outputXForms.getAbsolutePath());
-			fileName.append(File.separatorChar);
-			fileName.append(formType.getFolder());
-			fileName.append(File.separatorChar);
-			fileName.append(formName);
-			if (isReadOnlyMode()) {
-				fileName.append(formGenerator.getReadOnlySuffix());
-			}
-			fileName.append(formType.getSuffix());
-			fileName.append(".xhtml");
-			File file = new File(fileName.toString());
+			File file = new File(currentFilePath);
 			file.getParentFile().mkdirs();
 			Element xformsElement = rendered.getXformsElement();
 			Element clonedElement = (Element) xformsElement.clone();
@@ -1126,8 +1125,7 @@ public class XFormsGenerator extends AbstractGenerator {
 			outputter.output(newDocument, fos);
 			fos.close();
 		} catch (Exception e) {
-			logger.error(e);
-			throw new RuntimeException(e);
+			monitor.addErrorTextAndLog("Could not write form file " + currentFilePath, e, null);
 		}
 	}
 

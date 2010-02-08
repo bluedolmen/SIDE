@@ -1,7 +1,5 @@
 package com.bluexml.xforms.generator;
 
-import org.apache.commons.logging.Log;
-
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
@@ -422,8 +420,6 @@ public interface GeneratorInterface {
 	 *            the form
 	 */
 	void endForm(FormContainer form);
-
-	void setLogger(Log genLogger);
 
 	void setMonitor(CoreInterface monitor);
 

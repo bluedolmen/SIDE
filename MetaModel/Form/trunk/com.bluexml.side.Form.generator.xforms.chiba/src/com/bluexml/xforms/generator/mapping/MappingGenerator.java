@@ -77,7 +77,6 @@ import com.bluexml.xforms.messages.MsgId;
 public class MappingGenerator extends AbstractGenerator {
 
 	private static final String BLUEXML_WORKFLOW_PREFIX = "wfbx";
-	/** Used to enforce start task form being processed before other task forms */
 	/** The mapping marshaller. */
 	private static Marshaller mappingMarshaller;
 	protected static ObjectFactory objectFactory = new ObjectFactory();
@@ -108,10 +107,10 @@ public class MappingGenerator extends AbstractGenerator {
 	private Map<Clazz, ClassType> classTypes = new TreeMap<Clazz, ClassType>(
 			ClasseComparator.INSTANCE);
 
-	/** The CSS output. */
+	/** The file for outputting the list of CSS classes defined in the models. */
 	private File CSSFile;
 
-	/** The CSS output. */
+	/** The output file for the redirection table of workflow forms. */
 	private File RedirectFile;
 
 	/** The style collector specific to CSS */
@@ -283,10 +282,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 */
 	public void beginGeneration() {
 		mapping = new Mapping();
-		genLogger.info("MappingGenerator: Generating required resources");
-		if (monitor != null) {
-			monitor.setTaskName("Generation of resources.");
-		}
+		monitor.setTaskName("Generating the resources.");
 	}
 
 	/*
@@ -344,8 +340,10 @@ public class MappingGenerator extends AbstractGenerator {
 			associationType.setName(name);
 			ClassType classType = getClassType(destination);
 			if (classType == null) {
-				genLogger.warn("No classType found for class '" + destination.getLabel()
-						+ "'. Please add the containing model to the generation project.");
+				monitor.addErrorTextAndLog("No classType found for class '"
+						+ destination.getLabel()
+						+ "'. Please add the containing model to the generation project.", null,
+						null);
 			} else {
 				associationType.setType(copyClassType(classType));
 			}
@@ -406,17 +404,16 @@ public class MappingGenerator extends AbstractGenerator {
 		try {
 			writeSkeletonCSS();
 		} catch (IOException e) {
-			System.err.print("File error while trying to write the CSS file.");
-			e.printStackTrace();
+			monitor.addErrorTextAndLog("File error while trying to write the CSS file.", e, null);
 		}
 		// redirector configuration file
 		try {
 			writeSkeletonRedirector();
 		} catch (IOException e) {
-			System.err.print("File error while trying to write the redirector file.");
-			e.printStackTrace();
+			monitor.addErrorTextAndLog("File error while trying to write the redirection file.", e,
+					null);
 		}
-		genLogger.info("MappingGenerator: Finished generating resources.");
+		monitor.addText("Finished generating resources.");
 	}
 
 	/**
@@ -569,7 +566,9 @@ public class MappingGenerator extends AbstractGenerator {
 		Set<Entry<Clazz, ClassType>> entrySet = classTypes.entrySet();
 		for (Entry<Clazz, ClassType> entry : entrySet) {
 			Clazz classe = entry.getKey();
-			genLogger.info("Adding Generalizations to '" + classe.getLabel() + "'");
+			if (formGenerator.isDebugMode()) {
+				monitor.addText("Adding Generalizations to '" + classe.getLabel() + "'");
+			}
 			addGeneralizations(classe, classe, 0);
 		}
 	}

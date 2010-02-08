@@ -13,8 +13,6 @@ import java.util.TreeSet;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -58,14 +56,14 @@ import com.bluexml.xforms.messages.MsgId;
 public class FormGeneratorsManager {
 
 	private static void initEcoreFactories() {
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("library",
-//				new XMIResourceFactoryImpl());
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("form",
-//				new FormFactoryImpl());
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("clazz",
-//				new ClazzFactoryImpl());
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("workflow",
-//				new WorkflowFactoryImpl());
+		// Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("library",
+		// new XMIResourceFactoryImpl());
+		// Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("form",
+		// new FormFactoryImpl());
+		// Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("clazz",
+		// new ClazzFactoryImpl());
+		// Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("workflow",
+		// new WorkflowFactoryImpl());
 
 		EPackage.Registry.INSTANCE.put(org.eclipse.emf.ecore.EcorePackage.eNS_URI,
 				org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
@@ -75,20 +73,17 @@ public class FormGeneratorsManager {
 		EPackage.Registry.INSTANCE.put(FormPackage.eNS_URI, FormPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(WorkflowPackage.eNS_URI, WorkflowPackage.eINSTANCE);
 
-//		ClazzPackage.eINSTANCE.eClass();
-//		FormPackage.eINSTANCE.eClass();
-//		WorkflowPackage.eINSTANCE.eClass();
-//		org.eclipse.emf.ecore.EcorePackage.eINSTANCE.eClass();
-//		org.eclipse.ocl.ecore.EcorePackage.eINSTANCE.eClass();
+		// ClazzPackage.eINSTANCE.eClass();
+		// FormPackage.eINSTANCE.eClass();
+		// WorkflowPackage.eINSTANCE.eClass();
+		// org.eclipse.emf.ecore.EcorePackage.eINSTANCE.eClass();
+		// org.eclipse.ocl.ecore.EcorePackage.eINSTANCE.eClass();
 	}
 
 	private static final CommonFactory commonFactory = CommonFactoryImpl.init();
 
 	/** The Constant ALFRESCO_NAME_ASSOCIATION. */
 	public static final String ALFRESCO_NAME_ASSOCIATION = "alfrescoNameAssociation";
-
-	/** The logger. */
-	protected static Log logger = LogFactory.getLog(FormGeneratorsManager.class);
 
 	/** The classes. */
 	private Map<URI, EObject> eobjects = new HashMap<URI, EObject>();
@@ -137,7 +132,7 @@ public class FormGeneratorsManager {
 	/** The real name stereotype. */
 	private Stereotype realNameStereotype;
 
-	private Log genLogger;
+	private CoreInterface genLogger;
 
 	/** if true, associations are rendered as model choice fields instead of inline forms */
 	private boolean simplifyClasses;
@@ -157,6 +152,16 @@ public class FormGeneratorsManager {
 
 	/** true if at least one workflow form was generated. Used at post-generation time. */
 	private boolean workflowCapable;
+
+	/** Name of the form being processed. For error messages. */
+	private String currentForm;
+
+	/** If true, all some messages that are usually not displayed are sent to the monitor. */
+	private boolean debugMode;
+
+	public boolean isDebugMode() {
+		return debugMode;
+	}
 
 	/**
 	 * The Class PackageInfo.
@@ -276,11 +281,6 @@ public class FormGeneratorsManager {
 		return res.toString();
 	}
 
-	/** Name of the form being processed. For error messages. */
-	private String currentForm;
-
-	private int logLevel; // #1275
-
 	/**
 	 * Gets the all packages.
 	 * 
@@ -320,18 +320,15 @@ public class FormGeneratorsManager {
 	 *            the kerblueforms
 	 * @param simplifyClasses
 	 */
-	public FormGeneratorsManager(File[] obls, File[] kerblueforms, Log genLogger, boolean simplifyClasses,
-			boolean renderDataBeforeWorkflow, boolean asMavenPlugin) {
+	public FormGeneratorsManager(File[] obls, File[] kerblueforms, CoreInterface genLogger,
+			boolean simplifyClasses, boolean renderDataBeforeWorkflow, boolean asMavenPlugin) {
 		super();
 		if (asMavenPlugin) {
 			initEcoreFactories();
 		}
 		setWorkflowCapable(false);
-		if (genLogger != null) {
-			this.genLogger = genLogger;
-		} else {
-			this.genLogger = LogFactory.getLog(FormGeneratorsManager.class);
-		}
+		this.debugMode = false;
+		this.genLogger = genLogger;
 		this.simplifyClasses = simplifyClasses;
 		this.setRenderDataBeforeWorkflow(renderDataBeforeWorkflow);
 		XFormsGenerator.resetKeys();
@@ -364,8 +361,7 @@ public class FormGeneratorsManager {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("Please check file paths.");
-			logger.error(e);
+			genLogger.addErrorTextAndLog("Please check file paths.", e, null);
 			throw new RuntimeException(e);
 		}
 	}
@@ -404,8 +400,8 @@ public class FormGeneratorsManager {
 	 * @param generators
 	 *            the generators
 	 */
-	public void generate(List<GeneratorInterface> generators, CoreInterface monitor) {
-		monitor.setTaskName("Collecting data");
+	public void generate(List<GeneratorInterface> generators) {
+		genLogger.setTaskName("Collecting data");
 		alfrescoNameStereotype = commonFactory.createStereotype();
 		alfrescoNameStereotype.setName(ALFRESCO_NAME_ASSOCIATION);
 
@@ -435,8 +431,7 @@ public class FormGeneratorsManager {
 		setInReadOnlyMode(false);
 		for (GeneratorInterface dataGenerator : generators) {
 			currentGenerator = dataGenerator;
-			currentGenerator.setLogger(genLogger);
-			currentGenerator.setMonitor(monitor);
+			currentGenerator.setMonitor(genLogger);
 			processGenerator();
 		}
 
@@ -446,26 +441,25 @@ public class FormGeneratorsManager {
 			for (GeneratorInterface dataGenerator : generators) {
 				if (dataGenerator.supportsReadOnlyMode()) {
 					currentGenerator = dataGenerator;
-					currentGenerator.setLogger(genLogger);
 					currentGenerator.setReadOnlyMode(true);
 					processGenerator();
 				}
 			}
 		}
-		monitor.addText("XForms Generation completed successfully");
-		monitor
+		genLogger.addText("XForms Generation completed successfully");
+		genLogger
 				.addServiceLog(
 						"List of generated forms",
 						"This page provides an easy access to the forms, with default parameters. The server, port and webapp context should be adapted as needed.",
 						"http://localhost:8080/xforms/resources/jsp/forms.jsp");
 		if (isWorkflowCapable()) {
-			monitor
+			genLogger
 					.addServiceLog(
 							"Demo webapp",
 							"This page links to a demo webapp we provide to you so that you may easily test the integration of workflows with forms. The server, port and webapp context should be adapted as needed.",
 							"http://localhost:8080/xforms/demo/index.jsp");
 		}
-		logger.info("End of generation.");
+		genLogger.addText("End of generation.");
 	}
 
 	/**
@@ -555,7 +549,7 @@ public class FormGeneratorsManager {
 	 */
 	private void processAspect(Aspect aspect) {
 		String completeName = ModelTools.getCompleteName(aspect);
-		logger.info("Processing Aspect '" + completeName + "'");
+		genLogger.addText("Processing Aspect '" + completeName + "'");
 
 		currentGenerator.beginAspect(aspect);
 		List<Attribute> aspectAttributes = aspect.getAttributes();
@@ -572,18 +566,27 @@ public class FormGeneratorsManager {
 	 *            the association
 	 */
 	private void processAssociation(Association association) {
-		logger.info("Processing Association " + ModelTools.getCompleteName(association));
+		String assoCompleteName = ModelTools.getCompleteName(association);
+		if (isDebugMode()) {
+			genLogger.addText("Processing Association " + assoCompleteName);
+		}
 
 		// ** #979, #1273
 		AssociationEnd fEnd = (AssociationEnd) getRealObject(association.getFirstEnd());
 		Clazz fEndLinkedClass = null;
 		if (fEnd.getLinkedClass() != null) {
-			fEndLinkedClass = (Clazz) getRealObject(fEnd.getLinkedClass());
+			EObject realObject = getRealObject(fEnd.getLinkedClass());
+			if (realObject instanceof Clazz) {
+				fEndLinkedClass = (Clazz) getRealObject(fEnd.getLinkedClass());
+			}
 		}
 		AssociationEnd sEnd = (AssociationEnd) getRealObject(association.getSecondEnd());
 		Clazz sEndLinkedClass = null;
 		if (sEnd.getLinkedClass() != null) {
-			sEndLinkedClass = (Clazz) getRealObject(sEnd.getLinkedClass());
+			EObject realObject = getRealObject(sEnd.getLinkedClass());
+			if (realObject instanceof Clazz) {
+				sEndLinkedClass = (Clazz) realObject;
+			}
 		}
 		// ** #979, #1273
 		if ((fEndLinkedClass != null) && (sEndLinkedClass != null)) {
@@ -617,7 +620,8 @@ public class FormGeneratorsManager {
 						doublenav, association);
 			}
 		} else {
-			throw new RuntimeException(MsgId.INT_EXC_ASSOCIATION_ENDS.getText());
+			genLogger.addText("Ignoring association '" + assoCompleteName
+					+ "' both ends must be classes to be supported.");
 		}
 	}
 
@@ -741,6 +745,10 @@ public class FormGeneratorsManager {
 	 *            the rendered
 	 */
 	private void processClasse(Clazz classe, boolean rendered) {
+		if (isDebugMode()) {
+			String className = getClassQualifiedName(classe);
+			genLogger.addText("Processing " + className);
+		}
 		currentGenerator.beginClasse(classe, rendered);
 
 		// Clazz parent = ModelTools.getParent(classe);
@@ -770,7 +778,9 @@ public class FormGeneratorsManager {
 	 */
 	private void processForm(FormContainer form) {
 		currentForm = ModelTools.getCompleteName(form);
-		logger.info("Processing " + currentForm);
+		if (isDebugMode()) {
+			genLogger.addText("Processing " + currentForm);
+		}
 		currentGenerator.beginForm(form);
 		currentGenerator.endForm(form);
 	}
@@ -1085,21 +1095,6 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * @param logLevel
-	 *            the logLevel to set
-	 */
-	public void setLogLevel(int logLevel) {
-		this.logLevel = logLevel;
-	}
-
-	/**
-	 * @return the logLevel
-	 */
-	public int getLogLevel() {
-		return logLevel;
-	}
-
-	/**
 	 * @param workflowCapable
 	 *            the workflowCapable to set
 	 */
@@ -1112,6 +1107,10 @@ public class FormGeneratorsManager {
 	 */
 	public boolean isWorkflowCapable() {
 		return workflowCapable;
+	}
+
+	public void setDebugMode(boolean debugMode) {
+		this.debugMode = debugMode;
 	}
 
 }
