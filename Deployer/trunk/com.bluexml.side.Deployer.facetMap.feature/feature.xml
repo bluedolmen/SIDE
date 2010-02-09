@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Deployer.facetMap.feature" label="SIDE FacetMap Deployer" version="1.0.20.v14140-20100209" provider-name="BlueXML">
+<feature id="com.bluexml.side.Deployer.facetMap.feature" label="SIDE FacetMap Deployer" version="1.0.21.v14213-20100209" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the deployment of generated or developed extensions on specialized
 frameworks like Alfresco. This feature allows to deploy extensions on FacetMap Library to perform Facet Navigation on data.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
