@@ -476,6 +476,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'ActionField' represents a button.&amp;#x0D;&#xD;&#xA;You must set the ‘name’ attribute to the fully qualified name of a Java class and the ‘Label’ attribute to the text (or code for internationalization) you want to display on the button.&lt;br>&#xD;&#xA;This class must implement a ‘run’ method whose signature is : public void run(org.w3c.dom.Node node, java.lang.String dataId)&#xD;&#xA;where :\n&#xD;&#xA;-&#x9;‘node’ is the form tree&amp;#x0D;&#xD;&#xA;-&#x9;‘dataId’ is the id of the node being edited: dataId is null when in creation mode.&lt;br>&#xD;&#xA;When the form is initialized, the button is generated. On click, the Java class loader loads and run the class (check that the class location is in the classpath).&#xD;&#xA;&amp;#x0D;&amp;#x0D;&#xD;&#xA;&#xD;Inherits:&#xD; Field."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action_handler" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This property refers to the action handler according to contextualized conventions. For instance, the BlueXML XForms generation requires this property to be the fully qualified name of a Java class that implements an interface. See the documentation for more details."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TextField" eSuperTypes="#//CharField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -526,8 +531,7 @@
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FormSearch" eSuperTypes="#//FormContainer">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataForm" eType="#//FormClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FormSearch" eSuperTypes="#//FormContainer #//ClassReference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinationOperator" eType="#//CombinationOperators"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumericalField" eSuperTypes="#//Field"/>
@@ -564,10 +568,7 @@
     <eLiterals name="or" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StaticText" eSuperTypes="#//FormElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SearchFormCollection" eSuperTypes="#//FormCollection">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="SearchForm" upperBound="-1"
-        eType="#//FormSearch" containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchFormCollection" eSuperTypes="#//FormCollection"/>
   <eClassifiers xsi:type="ecore:EClass" name="SearchField" eSuperTypes="#//FormElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumericalSearchField" eSuperTypes="#//SearchField">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
