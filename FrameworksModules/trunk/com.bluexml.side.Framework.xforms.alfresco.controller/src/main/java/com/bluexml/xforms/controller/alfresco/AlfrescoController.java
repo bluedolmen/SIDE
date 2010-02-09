@@ -84,6 +84,9 @@ public class AlfrescoController {
 	/** The upload base directory in the file system. */
 	public static File UPLOAD_DIRECTORY = null;
 
+	/** Depth of the random path where to distribute uploaded files. */
+	public static int UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH = 3;
+	
 	/** The upload base directory in the content management system. */
 	public static String UPLOAD_REPOSITORY = null;
 
@@ -536,6 +539,16 @@ public class AlfrescoController {
 		property = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY_APPEND.getText());
 		UPLOAD_REPOSITORY_APPEND = !(StringUtils.equals(property, "false"));
 
+		// depth of the random path
+		property = config.getProperty(MsgId.KEY_UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH.getText());
+		int depth = UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH;
+		try {
+			depth = Integer.parseInt(property);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH = depth;
+		
 		checkDirectoryExists(UPLOAD_DIRECTORY, true);
 		checkDirectoryExists(TEMP_DIRECTORY, false);
 		ALFRESCO_URL = config.getProperty(MsgId.KEY_ALFRESCO_URL.getText());
@@ -936,14 +949,8 @@ public class AlfrescoController {
 	 * @return
 	 */
 	private int getUploadPathDepth() {
-		int depth = 0;
-		try {
-			Integer.parseInt(MsgPool.getMsg(MsgId.KEY_UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH));
-		} catch (NumberFormatException e) {
-			logger.error("Failed to parse directory path depth.");
-			return 0;
-		}
-		return depth;
+		
+		return UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH;
 	}
 
 	/**
