@@ -1,5 +1,5 @@
 /**
- * 
+ * This class represents the result of generation, i.e. types and associations instances (filled with data) 
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.data;
 
@@ -13,9 +13,10 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.graph.INode;
  *
  */
 public class AlfrescoModelData implements IData {
-
+	
 	private Collection<INode> generatedTypesInstances;
 	private Collection<IArc> generatedAssociationsInstances;
+	
 	/**
 	 * @return the generatedTypesInstances
 	 */
