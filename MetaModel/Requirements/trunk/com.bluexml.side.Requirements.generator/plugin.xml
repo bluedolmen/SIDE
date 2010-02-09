@@ -47,7 +47,7 @@
                 hidden="hidden and used by default"
                 id="com.bluexml.side.Requirements.deployer.freemind"
                 shared="false"
-                version="com.bluexml.side.Requirements.generator.deployerVersion3">
+                version="freemind deployer">
           </deployerVersion>
        </technologyVersion>
     </technology>
@@ -62,7 +62,7 @@
                 hidden="hidden and used by default"
                 id="com.bluexml.side.Requirements.deployer.excel"
                 shared="false"
-                version="com.bluexml.side.Requirements.generator.deployerVersion4">
+                version="excel deployer">
           </deployerVersion>
        </technologyVersion>
     </technology>
@@ -77,7 +77,7 @@
                 hidden="hidden and used by default"
                 id="com.bluexml.side.Requirements.deployer.webproject"
                 shared="false"
-                version="com.bluexml.side.Requirements.generator.deployerVersion5">
+                version="webproject deployer">
           </deployerVersion>
        </technologyVersion>
     </technology>
@@ -92,7 +92,7 @@
                 hidden="hidden and used by default"
                 id="com.bluexml.side.Requirements.deployer.doc"
                 shared="false"
-                version="com.bluexml.side.Requirements.generator.deployerVersion6">
+                version="doc deployer">
           </deployerVersion>
        </technologyVersion>
     </technology>
