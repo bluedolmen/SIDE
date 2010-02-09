@@ -86,41 +86,6 @@
 	
 	<!-- serialization -->
 	
-	<!--<bean id="tagsConstants"
-		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.TagsConstants" 
-		  abstract="true">
-	</bean>
-	
-	--><!--<bean id="xmlForACPMappingMain" 
-		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingMain" 
-		  init-method="init">
-		 <property name="alfrescoModelDatas" ref="alfrescoModelData" />
-		 <property name="mappingMethods" ref="xmlForACPMappingMethods" /> 
-	</bean>
-	
-	--><!--<bean id="xmlForACPMappingMethods"
-		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingMethods" 
-		  init-method="init">
-		  <property name="tagFactory" ref="structureTagFactory" />
-		  <property name="datasFactory" ref="fillDataFactory" />
-		  <property name="alfrescoModelDatas" ref="alfrescoModelData" />
-	</bean>
-	
-	--><!--<bean id="structureTagFactory"
-		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.StructureTagFactory" 
-		  init-method="init">
-	</bean>
-	
-	--><!--<bean id="fillDataFactory"
-		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.FillDataFactory" 
-		  init-method="init">
-	</bean>
-	
-	--><!-- <bean id="xmlForACPSerialization"
-		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.XMLForACPSerialization" >
-		 <property name="mainMap" ref="xmlForACPMappingMain" /> 
-	</bean>-->
-	
 	<bean id="XMLForACPMappingBuilder"
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingBuilder" >
 		  <property name="helper" ref="XMLForACPMappingHelper" />
@@ -153,9 +118,20 @@
 	
 	<bean id="importACP" 
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.load.ImportACP" >
+		 <property name="services" ref="importACPServices" />
 		 <property name="fileFolderService" ref="fileFolderService" /> 
 		 <property name="serviceRegistry" ref="ServiceRegistry" />
-		 <property name="nodeService" ref="NodeService" />
+	</bean>
+	
+	<bean id="importACPServices"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.load.ImportACPServices" >
+		  <property name="importer" ref="importACP" />
+		  <property name="serviceRegistry" ref="ServiceRegistry" />
+	</bean>
+	
+	<bean id="folderStructure"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.load.FolderStructure" >
+		  <property name="service" ref="ServiceRegistry" />
 	</bean>
 			
     <!-- webscripts -->
@@ -171,11 +147,10 @@
     	  parent="webscript">
     	  <property name="alfrescoModelRandomGenerator" ref="alfrescoModelRandomGenerator" />
     	  <property name="alfrescoModelDictionary" ref="alfrescoModelDictionary" />
-    	  <!--<property name="XMLForACPSerialization" ref="xmlForACPSerialization" />
-    	  -->
     	  <property name="XMLForACPSerializer" ref="XMLForACPSerializer" />
     	  <property name="ACPPackaging" ref="acpPackaging" />
     	  <property name="importACP" ref="importACP" />
     	  <property name="nativeAlfrescoModelRandomDataGenerator" ref="nativeAlfrescoModelRandomDataGenerator" />
+    	  <property name="folderStructure" ref="folderStructure" />
     </bean>
 </beans>
