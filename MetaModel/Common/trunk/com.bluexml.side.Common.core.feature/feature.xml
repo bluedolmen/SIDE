@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.feature" label="SIDE Core Components" version="1.0.113.v14140-20100209" provider-name="blueXML">
+<feature id="com.bluexml.side.Common.core.feature" label="SIDE Core Components" version="1.0.114.v14213-20100209" provider-name="blueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized
 frameworks like Alfresco. This feature gathers common tools for
 SIDE modelers.</description>
@@ -625,17 +625,17 @@ Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
 
                      END OF TERMS AND CONDITIONS</license>
-  <includes id="com.bluexml.side.Application.feature" version="1.0.120.v14140-20100209" />
-  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.74.v14140-20100209" />
-  <includes id="com.bluexml.side.Common.feature" version="1.0.29.v14140-20100209" />
-  <includes id="com.bluexml.side.Form.feature" version="1.0.80.v14140-20100209" />
-  <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.34.v14140-20100209" />
-  <includes id="com.bluexml.side.Requirements.feature" version="1.0.82.v14140-20100209" />
-  <includes id="com.bluexml.side.View.feature" version="1.0.47.v14140-20100209" />
-  <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.83.v14140-20100209" />
-  <includes id="com.bluexml.side.Util.feature" version="1.0.161.v14140-20100209" />
-  <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.30.v14140-20100209" />
-  <plugin id="com.bluexml.side.Integration.eclipse.branding" download-size="0" install-size="0" version="1.0.19.v14140-20100209" unpack="false" />
-  <plugin id="com.bluexml.side.Integration.eclipse.builder" download-size="0" install-size="0" version="1.0.22.v14140-20100209" unpack="false" />
+  <includes id="com.bluexml.side.Application.feature" version="1.0.121.v14213-20100209" />
+  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.75.v14213-20100209" />
+  <includes id="com.bluexml.side.Common.feature" version="1.0.30.v14213-20100209" />
+  <includes id="com.bluexml.side.Form.feature" version="1.0.81.v14213-20100209" />
+  <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.35.v14213-20100209" />
+  <includes id="com.bluexml.side.Requirements.feature" version="1.0.83.v14213-20100209" />
+  <includes id="com.bluexml.side.View.feature" version="1.0.48.v14213-20100209" />
+  <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.84.v14213-20100209" />
+  <includes id="com.bluexml.side.Util.feature" version="1.0.162.v14213-20100209" />
+  <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.31.v14213-20100209" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding" download-size="0" install-size="0" version="1.0.20.v14213-20100209" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.builder" download-size="0" install-size="0" version="1.0.23.v14213-20100209" unpack="false" />
 </feature>
 
