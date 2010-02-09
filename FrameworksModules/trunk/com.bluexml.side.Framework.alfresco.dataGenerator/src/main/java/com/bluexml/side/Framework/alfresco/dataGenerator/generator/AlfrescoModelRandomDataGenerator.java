@@ -540,7 +540,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		return compositions;
 	}
 
-	public void generateArcsInstances(IStructure structure) throws Exception{
+	public boolean generateArcsInstances(IStructure structure) throws Exception{	
 			List<IArc> arcsInstances = new ArrayList<IArc>();
 			Collection<AssociationDefinition> associations = ((AlfrescoModelStructure) structure).getAssociations();
 			for (AssociationDefinition associationDefinition : associations) {
@@ -568,6 +568,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 				}
 			}
 			((AlfrescoModelData) alfrescoModelDatas).setGeneratedAssociationsInstances(arcsInstances);
+		return true;
 	}
 
 	private List<IArc> generateArcsInstancesCaseN1(Collection<INode> sourcesNodes, Collection<INode> targetsNodes,AssociationDefinition associationDefinition,
@@ -877,7 +878,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		return dataAspects;
 	}
 	
-	public void deleteExceededNodes(){
+	public boolean deleteExceededNodes(){
 		Collection<INode> generatedNodes = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedTypesInstances();
 		Collection<IArc> generatedArcs = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedAssociationsInstances();
 		Collection<INode> generatedIsolatedNodesSrc = new ArrayList<INode>();
@@ -926,6 +927,8 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		generatedNodes.removeAll(generatedIsolatedNodesTgt);
 		
 		((AlfrescoModelData) alfrescoModelDatas).setGeneratedTypesInstances(generatedNodes);
+		
+		return true;
 	}
 	
 	public int getMaxAttributeIndex() throws Exception{
