@@ -381,8 +381,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @throws ServletException
 	 */
 	private void collectModelChoices(AlfrescoTransaction transaction, GenericClass alfClass,
-			ModelChoiceType modelChoiceType, Element modelChoiceElement)
-			throws ServletException {
+			ModelChoiceType modelChoiceType, Element modelChoiceElement) throws ServletException {
 		List<Element> values = new ArrayList<Element>(DOMUtil.getAllChildren(modelChoiceElement));
 		if (modelChoiceType.getMaxBound() != 1) {
 			values.remove(values.size() - 1);
@@ -406,8 +405,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @throws ServletException
 	 */
 	private void collectModelChoice(GenericClass alfClass, ModelChoiceType modelChoiceType,
-			Element value, AlfrescoTransaction at) throws 
-			ServletException {
+			Element value, AlfrescoTransaction at) throws ServletException {
 		String id = getModelChoiceId(value, modelChoiceType, at);
 		if (id != null) {
 			collectAddAssociation(alfClass, id, modelChoiceType);
@@ -532,15 +530,6 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			}
 
 			//
-			// mark FileField's with their destination. Useful for the webscript.
-			if (fieldType instanceof FileFieldType) {
-				FileFieldType fileField = (FileFieldType) fieldType;
-				String destination = fileField.isInRepository() ? MsgId.INT_UPLOAD_DEST_REPO
-						.getText() : MsgId.INT_UPLOAD_DEST_FILE.getText();
-				attribute.setUploadTo(destination);
-			}
-
-			//
 			// convert the XForms field value to an attribute (possibly multiple) value
 			if (fieldType.isMultiple()) {
 				convertXformsAttributeToAlfresco(attribute, inputTextContent, type, fieldType
@@ -572,6 +561,24 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 				ValueType valueType = alfrescoObjectFactory.createValueType();
 				valueType.setValue(alfrescoValue);
 				attribute.getValue().add(valueType);
+			}
+			//
+			// mark FileField's with their destination. Useful for the webscript.
+			if (fieldType instanceof FileFieldType) {
+				FileFieldType fileField = (FileFieldType) fieldType;
+				String destination = fileField.isInRepository() ? MsgId.INT_UPLOAD_DEST_REPO
+						.getText() : MsgId.INT_UPLOAD_DEST_FILE.getText();
+				attribute.setUploadTo(destination);
+				// we need a name for the node when uploaded in the repository
+				ValueType valueTypeNameAndExt = alfrescoObjectFactory.createValueType();
+				String nameAndExt = fieldElement.getAttribute("file");
+				valueTypeNameAndExt.setValue(nameAndExt);
+				attribute.getValue().add(valueTypeNameAndExt);
+				// we also need the MIME type
+				ValueType valueTypeMIME = alfrescoObjectFactory.createValueType();
+				String mimetype = fieldElement.getAttribute("type");
+				valueTypeMIME.setValue(mimetype);
+				attribute.getValue().add(valueTypeMIME);
 			}
 
 			alfClass.getAttributes().getAttribute().add(attribute);
