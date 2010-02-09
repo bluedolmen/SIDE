@@ -36,11 +36,12 @@ public class XMLForACPSerializer {
 		this.fileName = fileName;
 	}
 	
-	public void serializeXml() throws Exception {
+	public boolean serializeXml() throws Exception {
 		FileOutputStream fos = new FileOutputStream(fileName);
 		OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
 	    builder.build().write(osw); 
 	    osw.close();
 	    fos.close();
+	    return true;
 	}	
 }

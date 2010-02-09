@@ -25,7 +25,6 @@ public class ACPPackaging implements ISerialization {
 	
 	private OutputStream acpArchive;
 	private String archiveName;
-//	private XMLForACPSerialization xmlSerializer;
 	private XMLForACPSerializer xmlSerializer;
 	private NativeAlfrescoModelRandomDataGenerator nativeGenerator;
 	
@@ -144,10 +143,12 @@ public class ACPPackaging implements ISerialization {
 		return acp;
 	}
 	
-	public void clean(File acp){
+	public boolean clean(File acp){
 		acp.deleteOnExit();
 		File xml = new File(xmlSerializer.getFileName());
 		xml.deleteOnExit();
+		
+		return true;
 	}
 
 }
