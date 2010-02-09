@@ -61,8 +61,7 @@ public class WorkflowDiagramsPage extends DiagramsPage {
 	 * @generated
 	 */
 	public String getDefaultTemplateId() {
-		// TODO return the corresponding ID of the default template
-		return "";
+		return "com.bluexml.side.Workflow.modeler.templates.diagram";
 
 	}
 
