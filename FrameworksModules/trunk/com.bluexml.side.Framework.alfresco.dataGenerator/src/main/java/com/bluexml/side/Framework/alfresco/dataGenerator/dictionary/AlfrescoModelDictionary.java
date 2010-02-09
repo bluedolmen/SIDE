@@ -1,5 +1,5 @@
 /**
- * 
+ * This class allows to get the structure of the loaded model (types, associations, aspects, ...)
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.dictionary;
 
@@ -25,6 +25,8 @@ import org.alfresco.service.cmr.dictionary.ModelDefinition;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.namespace.QName;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.w3c.dom.Document;
@@ -36,15 +38,13 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.context.PathReader;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.AlfrescoModelStructure;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
 import com.bluexml.side.Framework.alfresco.dataGenerator.webscript.Generate;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * @author davidchevrier
  *
  */
 public class AlfrescoModelDictionary implements IDictionary {
-
+	
 	private DictionaryService dictionaryService;
 	private String qnameStringModel;
 	private IStructure alfrescoModelStructure;
@@ -108,11 +108,21 @@ public class AlfrescoModelDictionary implements IDictionary {
 	public void setAlfrescoModelStructure(IStructure alfrescoModelStructure) {
 		this.alfrescoModelStructure = alfrescoModelStructure;
 	}
-
+	
+	/**
+	 * to access the loaded model in Alfresco selected via the webscript
+	 * @param qnameModel
+	 * @return the loaded model in Alfresco selected via the webscript
+	 */
 	public ModelDefinition getModel(String qnameModel){
 		return dictionaryService.getModel(QName.createQName(qnameModel));
 	}
 	
+	/**
+	 * 
+	 * @param qNameModel
+	 * @return types defined in the loaded model
+	 */
 	private Collection<TypeDefinition> getTypes(QName qNameModel){
 		Collection<QName> typesQNamed = dictionaryService.getTypes(qNameModel);
 		Collection<TypeDefinition> types = new ArrayList<TypeDefinition>();
@@ -122,6 +132,11 @@ public class AlfrescoModelDictionary implements IDictionary {
 		return types;
 	}
 	
+	/**
+	 * 
+	 * @param type
+	 * @return the properties of a type defined in the loaded model
+	 */
 	private Collection<PropertyDefinition> getProperties(TypeDefinition type){
 		Collection<PropertyDefinition> sidePropertiesByType = new ArrayList<PropertyDefinition>();
 		Map<QName,PropertyDefinition> propertiesForType = type.getProperties();
@@ -133,7 +148,11 @@ public class AlfrescoModelDictionary implements IDictionary {
 		}
 		return sidePropertiesByType;
 	}
-	
+	 /**
+	  * 
+	  * @param qNameModel
+	  * @return the associations defined in the loaded model
+	  */
 	private Collection<AssociationDefinition> getAssociations(QName qNameModel){
 		Collection<QName> associationsQNamed = dictionaryService.getAssociations(qNameModel);
 		Collection<AssociationDefinition> associations = new ArrayList<AssociationDefinition>();
@@ -143,10 +162,23 @@ public class AlfrescoModelDictionary implements IDictionary {
 		return associations;
 	}
 	
+	/**
+	 * 
+	 * @param property
+	 * @return the constraints defined on a property in the loaded model
+	 */
 	public Collection<ConstraintDefinition> getConstraintsByProperty(PropertyDefinition property){
 		return property.getConstraints();
 	}
 	
+	/**
+	 * 
+	 * @param qnameModel
+	 * @return the structure of the loaded model, i.e. types, associations, ...
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public IStructure getStructure(String qnameModel) throws ParserConfigurationException, SAXException, IOException {
 		QName qNameModel = getModel(qnameModel).getName();
 		Collection<TypeDefinition> types = getTypes(qNameModel);
@@ -154,13 +186,22 @@ public class AlfrescoModelDictionary implements IDictionary {
 		((AlfrescoModelStructure) alfrescoModelStructure).setProperties(getProperties(types,qNameModel));
 		((AlfrescoModelStructure) alfrescoModelStructure).setAssociations(getAssociations(qNameModel));
 		((AlfrescoModelStructure) alfrescoModelStructure).setAspects(getAspects(qNameModel,types));
+		//Only non abstract types can be use under Alfresco
 		Collection<TypeDefinition> notAbstractTypes = removeAbstractTypes(types);
 		((AlfrescoModelStructure) alfrescoModelStructure).setTypes(notAbstractTypes);
 		
 		return alfrescoModelStructure;
 	}
-
-private Collection<TypeDefinition> removeAbstractTypes(Collection<TypeDefinition> types) throws ParserConfigurationException, SAXException, IOException {
+	
+	/**
+	 * removes of the model's types types that can't be instantiate, i.e. abstract types 
+	 * @param types
+	 * @return the non abstract types, i.e. types that can be instantiate under Alfresco
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	private Collection<TypeDefinition> removeAbstractTypes(Collection<TypeDefinition> types) throws ParserConfigurationException, SAXException, IOException {
 		Collection<TypeDefinition> tempTypes = new ArrayList<TypeDefinition>();
 		Collection<QName> notAbstractTypes = getNotAbstractTypes();
 		for (TypeDefinition type : types){
@@ -172,22 +213,35 @@ private Collection<TypeDefinition> removeAbstractTypes(Collection<TypeDefinition
 		types.removeAll(tempTypes);
 		return types;
 	}
-
-private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collection<TypeDefinition> types, QName qNameModel) {
-	Map<TypeDefinition,Collection<PropertyDefinition>> properties = new HashMap<TypeDefinition, Collection<PropertyDefinition>>();
-	for (TypeDefinition typeDefinition : ((AlfrescoModelStructure) alfrescoModelStructure).getTypes()) {
-		Collection<PropertyDefinition> propertiesByType = getProperties(typeDefinition);
-		QName qnamedParent = typeDefinition.getParentName();
-		while (qnamedParent != null){
-			TypeDefinition parentType = dictionaryService.getType(qnamedParent);
-			propertiesByType.addAll(getProperties(parentType));
-			qnamedParent = parentType.getParentName();
+	
+	/**
+	 * 
+	 * @param types
+	 * @param qNameModel
+	 * @return properties by type defined in the loaded model
+	 */
+	private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collection<TypeDefinition> types, QName qNameModel) {
+		Map<TypeDefinition,Collection<PropertyDefinition>> properties = new HashMap<TypeDefinition, Collection<PropertyDefinition>>();
+		for (TypeDefinition typeDefinition : ((AlfrescoModelStructure) alfrescoModelStructure).getTypes()) {
+			Collection<PropertyDefinition> propertiesByType = getProperties(typeDefinition);
+			QName qnamedParent = typeDefinition.getParentName();
+			while (qnamedParent != null){
+				TypeDefinition parentType = dictionaryService.getType(qnamedParent);
+				propertiesByType.addAll(getProperties(parentType));
+				qnamedParent = parentType.getParentName();
+			}
+			properties.put(typeDefinition, propertiesByType);
 		}
-		properties.put(typeDefinition, propertiesByType);
+		return properties;
 	}
-	return properties;
-}
-
+	
+	/**
+	 * 
+	 * @return non abstract types
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	private Collection<QName> getNotAbstractTypes() throws ParserConfigurationException, SAXException, IOException {
 		Collection<QName> notAbstractTypes = new ArrayList<QName>();
 		Collection<String> stringQNameNotAbstractTypes = parseConfigFile();
@@ -199,7 +253,14 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 		}
 		return notAbstractTypes;
 	}
-
+	
+	/**
+	 * parse the configuration file "web-client-config-custom.xml" where types that can be instantiate are stored
+	 * @return the names of the non abstract types 
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	private Collection<String> parseConfigFile() throws ParserConfigurationException, SAXException, IOException {
 		Collection<String> notAbstractTypes = new ArrayList<String>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -211,12 +272,17 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 		Element secondChild = (Element) firstChild.getElementsByTagName("content-types").item(0);
 		NodeList contentsTypes = ((Element) secondChild).getElementsByTagName("type");
 		for (int indexNode = 0; indexNode < contentsTypes.getLength(); indexNode++){
-			//notAbstractTypes.add(contentsTypes.item(indexNode).getAttributes().item(0).getNodeValue());
 			notAbstractTypes.add(((Element)contentsTypes.item(indexNode)).getAttribute("name"));
 		}
 		return notAbstractTypes;
 	}
-
+	
+	/**
+	 * to access the aspects defined in the loaded model
+	 * @param qNameModel
+	 * @param types
+	 * @return aspects associated with types
+	 */
 	private Map<TypeDefinition,Collection<AspectDefinition>> getAspects(QName qNameModel, Collection<TypeDefinition> types) {
 		Map<TypeDefinition,Collection<AspectDefinition>> aspectsByTypes = new HashMap<TypeDefinition, Collection<AspectDefinition>>();
 		Collection<QName> aspectsQNamedForModel = dictionaryService.getAspects(qNameModel);
@@ -233,7 +299,12 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 		}
 		return aspectsByTypes;
 	}
-
+	
+	/**
+	 * 
+	 * @return the web-client-config-custom.xml file object
+	 * @throws IOException
+	 */
 	private File getConfigFile() throws IOException{
 		File file = null;
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -251,11 +322,15 @@ private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collec
 			file = resources[0].getFile();
 		}
 		else{
-			logger.error("Error:" + pathReader.getPathPattern());
+			logger.error("The web-client-config-custom.xml file is not found: " + pathReader.getPathPattern());
 		}
 		return file;
 	}
 	
+	/**
+	 * 
+	 * @return name of the module folder corresponding to the loaded model
+	 */
 	private String getSideModule() {
 		String name = "SIDE_ModelExtension_";
 		String elements[] = qnameStringModel.split("}")[0].split("/");
