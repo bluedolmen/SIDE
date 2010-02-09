@@ -191,8 +191,8 @@
     </wizard>
   </extension>
   <extension point="org.eclipse.ui.views">
-    <category id="com.bluexml.side.Requirements.modeler" name="SIDE" />
-    <view category="com.bluexml.side.Requirements.modeler" class="com.bluexml.side.Requirements.modeler.views.AnnotationView" icon="icons/Annotation.gif" id="com.bluexml.side.Requirements.modeler.views.AnnotationView" name="Annotations" />
+    <category id="com.bluexml.side" name="SIDE" />
+    <view category="com.bluexml.side" class="com.bluexml.side.Requirements.modeler.views.AnnotationView" icon="icons/Annotation.gif" id="com.bluexml.side.Requirements.modeler.views.AnnotationView" name="Annotations" />
   </extension>
 </plugin>
 
