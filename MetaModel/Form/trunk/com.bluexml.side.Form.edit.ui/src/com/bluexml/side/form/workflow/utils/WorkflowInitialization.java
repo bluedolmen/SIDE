@@ -38,7 +38,7 @@ public class WorkflowInitialization {
 		if (p != null) {
 			boolean doWork = true;
 			if(fc.getForms().size() > 0) {
-				doWork = UIUtils.showConfirmation("Workflow already set","Workflow have already been set. Do you want to overwrite it?");
+				doWork = UIUtils.showConfirmation("Workflow already set","This Workflow Form Collection has already been set. Do you want to overwrite it?");
 			}
 
 			if (doWork) {
@@ -64,8 +64,8 @@ public class WorkflowInitialization {
 				cmd.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormCollection_Forms(), lf));
 			}
 		} else {
-			UIUtils.showError("No Process defined","No Process have been defined. \n"
-					+ "Choose one and run Initiliaze again.");
+			UIUtils.showError("No Process defined","No Process has been defined. \n"
+					+ "Choose one and run Initialize again.");
 		}
 		return cmd;
 	}
