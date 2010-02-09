@@ -35,7 +35,7 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 	private AlfrescoModelRandomDataGenerator generator;
 	private Random randomGenerator = new Random();
 	private Calendar calendar = new GregorianCalendar();
-	private IStructure nativeAlfrescoStructure;
+	private NativeAlfrescoModelStructure nativeAlfrescoStructure;
 	
 	private String pathToDocumentsFolder;
 	private Collection<File> documents = new ArrayList<File>();
@@ -58,13 +58,13 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 	/**
 	 * @return the nativeAlfrescoStructure
 	 */
-	public IStructure getNativeAlfrescoStructure() {
+	public NativeAlfrescoModelStructure getNativeAlfrescoStructure() {
 		return nativeAlfrescoStructure;
 	}
 	/**
 	 * @param nativeAlfrescoStructure the nativeAlfrescoStructure to set
 	 */
-	public void setNativeAlfrescoStructure(IStructure nativeAlfrescoStructure) {
+	public void setNativeAlfrescoStructure(NativeAlfrescoModelStructure nativeAlfrescoStructure) {
 		this.nativeAlfrescoStructure = nativeAlfrescoStructure;
 	}
 	
