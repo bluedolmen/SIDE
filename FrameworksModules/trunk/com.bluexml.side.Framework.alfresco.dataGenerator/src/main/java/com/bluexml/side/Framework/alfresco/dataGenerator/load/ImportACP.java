@@ -27,10 +27,28 @@ import org.alfresco.service.cmr.view.Location;
  * 
  */
 public class ImportACP {
+	
+	private ImportACPServices services;
 
 	private FileFolderService fileFolderService;
 	private ServiceRegistry serviceRegistry;
-	private NodeService nodeService;
+	
+	private String login;
+	private String password;
+	
+	/**
+	 * @return the services
+	 */
+	public ImportACPServices getServices() {
+		return services;
+	}
+
+	/**
+	 * @param services the services to set
+	 */
+	public void setServices(ImportACPServices services) {
+		this.services = services;
+	}
 
 	/**
 	 * @return the fileFolderService
@@ -46,15 +64,7 @@ public class ImportACP {
 	public void setFileFolderService(FileFolderService fileFolderService) {
 		this.fileFolderService = fileFolderService;
 	}
-
-	/**
-	 * @param nodeService
-	 *            the nodeService to set
-	 */
-	public void setNodeService(NodeService nodeService) {
-		this.nodeService = nodeService;
-	}
-
+	
 	/**
 	 * @return the serviceRegistry
 	 */
@@ -69,11 +79,41 @@ public class ImportACP {
 	public void setServiceRegistry(ServiceRegistry serviceRegistry) {
 		this.serviceRegistry = serviceRegistry;
 	}
+	
+	/**
+	 * @return the login
+	 */
+	public String getLogin() {
+		return login;
+	}
+
+	/**
+	 * @param login the login to set
+	 */
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public NodeRef manageAlfrescoRepository(String pathToAlfrescoRepository) throws Exception {
+		services.authenticate();
+		
 		NodeRef container = createOrGiveMeFolder(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, pathToAlfrescoRepository);
 		
-		List<FileInfo> contentFiles = fileFolderService.listFiles(container);
+		List<FileInfo> contentFiles = fileFolderService.list(container);
 		if (contentFiles.size() > 0) {
 			for (FileInfo file : contentFiles) {
 				if (fileFolderService.exists(file.getNodeRef())){
@@ -84,23 +124,23 @@ public class ImportACP {
 		return container;
 	}
 
-	public void importACP(File acp, NodeRef repository) {
+	public boolean importACP(File acp, NodeRef repository) {
 		ImporterService importerService = serviceRegistry.getImporterService();
 
 		ACPImportPackageHandler importerHandler = new ACPImportPackageHandler(acp, ACPImportPackageHandler.DEFAULT_ENCODING);
 		importerService.importView(importerHandler, new Location(repository), null, null);
+		
+		return true;
 	}
 
-	public void saveACP(File acp, NodeRef parent) throws IOException {		
+	public boolean saveACP(File acp, NodeRef parent) throws IOException {		
 		NodeRef acpFile = fileFolderService.create(parent, acp.getName(), ContentModel.TYPE_CONTENT).getNodeRef();
 		ContentWriter writer = fileFolderService.getWriter(acpFile);
 		writer.putContent(acp);
+		return true;
 	}
 
 	public NodeRef createOrGiveMeFolder(StoreRef store, String xpath) {
-		AuthenticationService serviceAuthentification = serviceRegistry.getAuthenticationService();
-		char[] passwd = {'a','d','m','i','n'};
-		serviceAuthentification.authenticate("admin",passwd);
 		ResultSet rs = serviceRegistry.getSearchService().query(store, SearchService.LANGUAGE_XPATH, xpath);
 		NodeRef nr = null;
 		if (rs.length() == 1) {
