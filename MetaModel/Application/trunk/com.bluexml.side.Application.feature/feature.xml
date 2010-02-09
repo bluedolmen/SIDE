@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Application.feature" label="SIDE Application Modeler" version="1.0.119.v14062-20100208" provider-name="BlueXML">
+<feature id="com.bluexml.side.Application.feature" label="SIDE Application Modeler" version="1.0.120.v14140-20100209" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature allows to model the MDA process (modeling, generation, deployment).</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -18,7 +18,7 @@
   <plugin id="com.bluexml.side.Application" download-size="0" install-size="0" version="1.0.42.v13711-20100203" unpack="false" />
   <plugin id="com.bluexml.side.Application.edit" download-size="0" install-size="0" version="1.0.33.v13286-20100127" unpack="false" />
   <plugin id="com.bluexml.side.Application.editor" download-size="0" install-size="0" version="1.0.23.v13286-20100127" unpack="false" />
-  <plugin id="com.bluexml.side.Application.ui" download-size="0" install-size="0" version="1.0.117.v14062-20100208" unpack="false" />
+  <plugin id="com.bluexml.side.Application.ui" download-size="0" install-size="0" version="1.0.118.v14140-20100209" unpack="false" />
   <plugin id="com.bluexml.side.Application.startup" download-size="0" install-size="0" version="1.0.11.v13286-20100127" unpack="false" />
 </feature>
 
