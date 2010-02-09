@@ -115,7 +115,7 @@ public class ApplicationDialog extends Dialog {
 	private Group optionsGroup;
 	private static final int APPLY_ID = IDialogConstants.CLIENT_ID + 2;
 	private static final int GEN_ID = IDialogConstants.CLIENT_ID + 1;
-	private Text config_description;
+//	private Text config_description;
 	private Label errorMsg;
 	private TreeView genOptionsTree;
 	private Tree tree_1;
@@ -206,8 +206,10 @@ public class ApplicationDialog extends Dialog {
 			}
 			// Refresh documentation
 			if (configuration != null)
-				if (configuration.getDescription() != null)
-					config_description.setText(configuration.getDescription());
+				if (configuration.getDescription() != null) {
+					configurationList.setToolTipText(configuration.getDescription());
+//					config_description.setText(configuration.getDescription());
+				}
 
 			// Refresh tree
 			initializeTree();
@@ -816,7 +818,7 @@ public class ApplicationDialog extends Dialog {
 				refreshConfiguration();
 			}
 		});
-
+		
 		// Fill the combo
 		for (ModelElement elt : application.getElements()) {
 			if (elt instanceof Configuration) {
@@ -827,7 +829,7 @@ public class ApplicationDialog extends Dialog {
 
 		// Show a warning if the component is not valid
 		errorMsg = new Label(container, SWT.BOLD);
-		errorMsg.setBounds(493, 67, 297, 15);
+		errorMsg.setBounds(100, 570, 297, 15);
 		errorMsg.setForeground(new Color(container.getDisplay(), 255, 0, 0));
 
 		generationConfigurationTabItem = new TabItem(tabFolder, SWT.NONE);
@@ -870,7 +872,8 @@ public class ApplicationDialog extends Dialog {
 		});
 
 		logText.setBounds(115, 7, 260, 30);
-
+		
+		
 		final Label logLabel = new Label(composite_1, SWT.NONE);
 		logLabel.setAlignment(SWT.RIGHT);
 		logLabel.setText(Activator.Messages.getString("ApplicationDialog.30")); //$NON-NLS-1$
@@ -1019,12 +1022,12 @@ public class ApplicationDialog extends Dialog {
 				if (tabFolder.getSelection().length > 0) {
 					if (tabFolder.getSelection()[0].equals(generationConfigurationTabItem) || tabFolder.getSelection()[0].equals(deployementTabItem)) {
 						optionsGroup.setVisible(true);
-						config_description.setVisible(true);
-						documentationText.setBounds(490, 45, 297, 197);
+//						config_description.setVisible(true);
+						documentationText.setBounds(490, 45, 297, 245);
 						refreshOptions();
 					} else {
 						optionsGroup.setVisible(false);
-						config_description.setVisible(false);
+//						config_description.setVisible(false);
 						documentationText.setBounds(490, 45, 297, 518);
 						refreshModelPropertiesTable();
 					}
@@ -1062,9 +1065,9 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 		// Component thaht shows the description in the top right of the scree
-		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER | SWT.WRAP);
-		config_description.setBounds(490, 250, 297, 51);
-		config_description.setVisible(false);
+//		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER | SWT.WRAP);
+//		config_description.setBounds(490, 250, 297, 51);
+//		config_description.setVisible(false);
 		// Browser that shows informations on the selected component (right)
 		documentationText = new Browser(container, SWT.BORDER);
 		documentationText.setBounds(490, 45, 297, 518);
@@ -1093,7 +1096,8 @@ public class ApplicationDialog extends Dialog {
 							configurationList.removeAll();
 							configurationList.setItems(items);
 							configurationList.select(index);
-							config_description.setText(config.getDescription());
+							configurationList.setToolTipText(config.getDescription());
+//							config_description.setText(config.getDescription());
 							modificationMade();
 						}
 					}
