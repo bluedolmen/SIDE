@@ -24,10 +24,12 @@ for f in `find $update_site/plugins -type f -name "*.jar" | sort -n `; do
 
 done
 
+
 cp $update_site/site.xml $new_update_site
 perl -pi -e 's/<site>/<site pack200="true" digestURL="http:\/\/www.side-labs.org\/SIDE-Labs\/2.0\/update-site\/" >/g' $new_update_site/site.xml
 
+echo "Generate digest.zip"
+java -jar $eclipse_launcher -application org.eclipse.update.core.siteOptimizer -digestBuilder  -digestOutputDir=$new_update_site -siteXML=$new_update_site/site.xml -jarProcessor -pack -outputDir $new_update_site $new_update_site
 
-   java -jar $eclipse_launcher -application org.eclipse.update.core.siteOptimizer -digestBuilder  -digestOutputDir=$new_update_site -siteXML=$new_update_site/site.xml -jarProcessor -pack -outputDir $new_update_site $new_update_site
-
+echo "Generate content.jar and artifact.jar"
 java -jar $eclipse_launcher -application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator -updateSite $new_update_site site file:$new_update_site/site.xml -metadataRepository file:$new_update_site -metadataRepositoryName "SIDE Update Site" -artifactRepository file:$new_update_site -artifactRepositoryName "SIDE Artifacts" -compress -reusePack200Files -noDefaultIUs -vmargs -Xmx256M
