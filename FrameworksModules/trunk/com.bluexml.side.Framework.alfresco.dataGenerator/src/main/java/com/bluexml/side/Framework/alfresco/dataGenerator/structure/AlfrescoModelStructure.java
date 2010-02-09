@@ -1,5 +1,5 @@
 /**
- * 
+ * This class is a Java bean representing the loaded model in Alfresco 
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.structure;
 
@@ -21,7 +21,10 @@ public class AlfrescoModelStructure implements IStructure {
 	private Map<TypeDefinition,Collection<PropertyDefinition>> properties;
 	private Collection<AssociationDefinition> associations;
 	private Map<TypeDefinition,Collection<AspectDefinition>> aspects;
-	private IStructure nativeStructure;
+	//This sub-structure repesents all the non SIDE model definitions,
+	//i.e. the native Alfresco properties that we have to take into account
+	//to create content instances
+	private NativeAlfrescoModelStructure nativeStructure;
 	/**
 	 * @return the types
 	 */
@@ -73,13 +76,13 @@ public class AlfrescoModelStructure implements IStructure {
 	/**
 	 * @return the nativeStructure
 	 */
-	public IStructure getNativeStructure() {
+	public NativeAlfrescoModelStructure getNativeStructure() {
 		return nativeStructure;
 	}
 	/**
 	 * @param nativeStructure the nativeStructure to set
 	 */
-	public void setNativeStructure(IStructure nativeStructure) {
+	public void setNativeStructure(NativeAlfrescoModelStructure nativeStructure) {
 		this.nativeStructure = nativeStructure;
 	}
 	
