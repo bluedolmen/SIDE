@@ -65,6 +65,24 @@
                                 <input name="indexes" type="text" />
                         </div>                        
 	            </div>
+	            <div id="property">
+                        <div id="label">Folders structure: </div>
+                        <div id="field">      
+                                <input name="folders" type="checkbox" />
+                        </div>                        
+	            </div>
+	            <div id="property">
+	                    <div id="label">Alfresco login: </div>        
+	                    <div id="field">
+	                            <input name="login" type="text" value="admin"/>
+	                    </div>
+	            </div>
+	            <div id="property">
+	                    <div id="label">Alfresco password: </div>        
+	                    <div id="field">
+	                            <input name="password" type="text" value="admin"/>
+	                    </div>
+	            </div>
 	            <div id="button">
 	                    <input name="submit" type="Submit" value="Generate" />
 	            </div>
@@ -85,13 +103,18 @@
 	    			<p id="note">- Path to store documents in Alfresco: this parameters points to a folder where you can store files in order they are associated as content to the newly Alfresco nodes. If you do not set this parameters, the node will be generated without content but only metadata.</p>
 	    		</tr> 
 	    		<tr>
-	    			<p id="note">- Path to store documents in Alfresco: this parameters allows to define the Alfresco path to store the generated nodes under /app:company_home; this path must be expressed using an Xpath representation like app:guest_home/cm:testData; It is important to note that you must be connected to Alfresco under an account having write permission on this Path.</p>
+	    			<p id="note">- Path to store documents in Alfresco: this parameters allows to define the Alfresco path to store the generated nodes under /app:company_home; this path must be expressed using an Xpath representation like app:guest_home/cm:testData; 
+	    						   If you want to generate under Alfresco Share, you must indicate a path like /app:company_home/st:sites/cm:mySite/cm:documentLibrary/cm:SIDELoadedTestData.
+	    						   It is important to note that you must be connected to Alfresco under an account having write permission on this Path.</p>
 	    		</tr>
 	    		<tr>
 	    			<p id="note">-Scenario: this parameter allows to index the types instances and its attributes in an incremental way or fully randomly.</p>
 	    		</tr>
 	    		<tr>
 	    			<p id="note">-Index: this parameter is used for the incremental scenario; it assures unicity of attributes if necessary (for the first generation, you can fill it with 0).</p>
+	    		</tr>
+	    		<tr>
+	    			<p id="note">-Folders Structure: if checked, this parameter allows the content instances to be grouped by type into folders.</p>
 	    		</tr>
 	    		<tr>
 	    			<p id="link"><a href="http://www.bluexml.com">BlueXML</a></p>
