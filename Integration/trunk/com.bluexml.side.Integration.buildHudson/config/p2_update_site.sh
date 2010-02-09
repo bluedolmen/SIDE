@@ -14,6 +14,7 @@ fi
 
 mkdir $new_update_site
 mkdir $new_update_site/plugins
+cp -r $update_site/features $new_update_site
 
 
 for f in `find $update_site/plugins -type f -name "*.jar" | sort -n `; do
@@ -24,6 +25,8 @@ for f in `find $update_site/plugins -type f -name "*.jar" | sort -n `; do
 done
 
 cp $update_site/site.xml $new_update_site
+perl -pi -e 's/<site>/<site pack200="true" digestURL="http:\/\/www.side-labs.org\/SIDE-Labs\/2.0\/update-site\/" >/g' $new_update_site/site.xml
+
 
    java -jar $eclipse_launcher -application org.eclipse.update.core.siteOptimizer -digestBuilder  -digestOutputDir=$new_update_site -siteXML=$new_update_site/site.xml -jarProcessor -pack -outputDir $new_update_site $new_update_site
 
