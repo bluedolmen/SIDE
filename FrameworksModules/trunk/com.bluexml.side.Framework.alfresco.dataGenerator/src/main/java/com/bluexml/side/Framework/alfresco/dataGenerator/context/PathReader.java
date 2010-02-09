@@ -1,8 +1,8 @@
 /**
- * 
+ * This class allows manipulations of path patterns to access files or folders
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.context;
- 
+
 
 /**
  * @author dchevrier

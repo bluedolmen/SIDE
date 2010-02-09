@@ -1,5 +1,5 @@
 /**
- * 
+ * This class enables access to the Spring context in order to access instanciated beans 
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.context;
 
@@ -19,6 +19,12 @@ public class SpringContext implements ApplicationContextAware {
 		ctx = applicationContext;
 	}
 	
-	public static ApplicationContext getContext() { return ctx; }
+	/**
+	 * 
+	 * @return the Spring context application
+	 */
+	public static ApplicationContext getContext(){ 
+		return ctx; 
+	}
 
 }
