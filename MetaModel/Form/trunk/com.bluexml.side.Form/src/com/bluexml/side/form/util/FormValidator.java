@@ -260,8 +260,8 @@ public class FormValidator extends EObjectValidator {
 				return validateActionField((ActionField)value, diagnostics, context);
 			case FormPackage.TEXT_FIELD:
 				return validateTextField((TextField)value, diagnostics, context);
-			case FormPackage.SEARCH_FORM:
-				return validateSearchForm((SearchForm)value, diagnostics, context);
+			case FormPackage.FORM_SEARCH:
+				return validateFormSearch((FormSearch)value, diagnostics, context);
 			case FormPackage.NUMERICAL_FIELD:
 				return validateNumericalField((NumericalField)value, diagnostics, context);
 			case FormPackage.STATIC_TEXT:
@@ -1020,17 +1020,17 @@ public class FormValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSearchForm(SearchForm searchForm, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(searchForm, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(searchForm, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(searchForm, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(searchForm, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(searchForm, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(searchForm, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(searchForm, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(searchForm, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormContainer_validName(searchForm, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormContainer_TwoFormsWithSameName(searchForm, diagnostics, context);
+	public boolean validateFormSearch(FormSearch formSearch, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_validName(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_TwoFormsWithSameName(formSearch, diagnostics, context);
 		return result;
 	}
 
@@ -1074,8 +1074,8 @@ public class FormValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSearchFormCollection(SearchFormCollection searchFormCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(searchFormCollection, diagnostics, context);
+	public boolean validateSearchFormCollection(SearchFormCollection SearchFormCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(SearchFormCollection, diagnostics, context);
 	}
 
 	/**

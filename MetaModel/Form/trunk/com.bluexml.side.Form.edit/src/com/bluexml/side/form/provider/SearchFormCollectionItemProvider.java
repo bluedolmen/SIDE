@@ -154,7 +154,7 @@ public class SearchFormCollectionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(FormPackage.Literals.SEARCH_FORM_COLLECTION__SEARCH_FORM,
-				 FormFactory.eINSTANCE.createSearchForm()));
+				 FormFactory.eINSTANCE.createFormSearch()));
 	}
 
 	/**

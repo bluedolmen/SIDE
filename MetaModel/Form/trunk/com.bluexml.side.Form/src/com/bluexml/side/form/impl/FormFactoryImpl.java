@@ -119,7 +119,7 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 			case FormPackage.VIRTUAL_FIELD: return createVirtualField();
 			case FormPackage.ACTION_FIELD: return createActionField();
 			case FormPackage.TEXT_FIELD: return createTextField();
-			case FormPackage.SEARCH_FORM: return createSearchForm();
+			case FormPackage.FORM_SEARCH: return createFormSearch();
 			case FormPackage.NUMERICAL_FIELD: return createNumericalField();
 			case FormPackage.STATIC_TEXT: return createStaticText();
 			case FormPackage.SEARCH_FORM_COLLECTION: return createSearchFormCollection();
@@ -445,9 +445,9 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SearchForm createSearchForm() {
-		SearchFormImpl searchForm = new SearchFormImpl();
-		return searchForm;
+	public FormSearch createFormSearch() {
+		FormSearchImpl formSearch = new FormSearchImpl();
+		return formSearch;
 	}
 
 	/**
@@ -476,8 +476,8 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * @generated
 	 */
 	public SearchFormCollection createSearchFormCollection() {
-		SearchFormCollectionImpl searchFormCollection = new SearchFormCollectionImpl();
-		return searchFormCollection;
+		SearchFormCollectionImpl SearchFormCollection = new SearchFormCollectionImpl();
+		return SearchFormCollection;
 	}
 
 	/**

@@ -422,13 +422,13 @@ public class FormSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FormPackage.SEARCH_FORM: {
-				SearchForm searchForm = (SearchForm)theEObject;
-				T result = caseSearchForm(searchForm);
-				if (result == null) result = caseFormContainer(searchForm);
-				if (result == null) result = caseFormGroup(searchForm);
-				if (result == null) result = caseFormElement(searchForm);
-				if (result == null) result = caseModelElement(searchForm);
+			case FormPackage.FORM_SEARCH: {
+				FormSearch formSearch = (FormSearch)theEObject;
+				T result = caseFormSearch(formSearch);
+				if (result == null) result = caseFormContainer(formSearch);
+				if (result == null) result = caseFormGroup(formSearch);
+				if (result == null) result = caseFormElement(formSearch);
+				if (result == null) result = caseModelElement(formSearch);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -450,12 +450,12 @@ public class FormSwitch<T> {
 				return result;
 			}
 			case FormPackage.SEARCH_FORM_COLLECTION: {
-				SearchFormCollection searchFormCollection = (SearchFormCollection)theEObject;
-				T result = caseSearchFormCollection(searchFormCollection);
-				if (result == null) result = caseFormCollection(searchFormCollection);
-				if (result == null) result = casePackage(searchFormCollection);
-				if (result == null) result = caseNamedModelElement(searchFormCollection);
-				if (result == null) result = caseModelElement(searchFormCollection);
+				SearchFormCollection SearchFormCollection = (SearchFormCollection)theEObject;
+				T result = caseSearchFormCollection(SearchFormCollection);
+				if (result == null) result = caseFormCollection(SearchFormCollection);
+				if (result == null) result = casePackage(SearchFormCollection);
+				if (result == null) result = caseNamedModelElement(SearchFormCollection);
+				if (result == null) result = caseModelElement(SearchFormCollection);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -937,17 +937,17 @@ public class FormSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Search Form</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Search</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Search Form</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Search</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSearchForm(SearchForm object) {
+	public T caseFormSearch(FormSearch object) {
 		return null;
 	}
 

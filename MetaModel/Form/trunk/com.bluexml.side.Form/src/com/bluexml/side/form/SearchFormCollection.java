@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.form.SearchFormCollection#getSearchForm <em>Search Form</em>}</li>
+ *   <li>{@link com.bluexml.side.form.SearchFormCollection#getFormSearch <em>Search Form</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
 public interface SearchFormCollection extends FormCollection {
 	/**
 	 * Returns the value of the '<em><b>Search Form</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.form.SearchForm}.
+	 * The list contents are of type {@link com.bluexml.side.form.FormSearch}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Search Form</em>' containment reference list isn't clear,
@@ -35,10 +35,10 @@ public interface SearchFormCollection extends FormCollection {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Search Form</em>' containment reference list.
-	 * @see com.bluexml.side.form.FormPackage#getSearchFormCollection_SearchForm()
+	 * @see com.bluexml.side.form.FormPackage#getSearchFormCollection_FormSearch()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<SearchForm> getSearchForm();
+	EList<FormSearch> getFormSearch();
 		
 } // SearchFormCollection

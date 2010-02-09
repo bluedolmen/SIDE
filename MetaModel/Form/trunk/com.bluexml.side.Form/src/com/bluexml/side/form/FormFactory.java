@@ -243,13 +243,13 @@ public interface FormFactory extends EFactory {
 	TextField createTextField();
 
 	/**
-	 * Returns a new object of class '<em>Search Form</em>'.
+	 * Returns a new object of class '<em>Search</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Search Form</em>'.
+	 * @return a new object of class '<em>Search</em>'.
 	 * @generated
 	 */
-	SearchForm createSearchForm();
+	FormSearch createFormSearch();
 
 	/**
 	 * Returns a new object of class '<em>Numerical Field</em>'.

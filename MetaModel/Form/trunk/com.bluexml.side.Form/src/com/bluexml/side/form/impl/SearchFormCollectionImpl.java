@@ -7,7 +7,8 @@
 package com.bluexml.side.form.impl;
 
 import com.bluexml.side.form.FormPackage;
-import com.bluexml.side.form.SearchForm;
+import com.bluexml.side.form.FormSearch;
+import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.SearchFormCollection;
 
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
@@ -33,7 +34,7 @@ import org.eclipse.ocl.ecore.OCL;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.form.impl.SearchFormCollectionImpl#getSearchForm <em>Search Form</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.SearchFormCollectionImpl#getFormSearch <em>Search Form</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,14 +42,14 @@ import org.eclipse.ocl.ecore.OCL;
  */
 public class SearchFormCollectionImpl extends FormCollectionImpl implements SearchFormCollection {
 	/**
-	 * The cached value of the '{@link #getSearchForm() <em>Search Form</em>}' containment reference list.
+	 * The cached value of the '{@link #getFormSearch() <em>Search Form</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSearchForm()
+	 * @see #getFormSearch()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<SearchForm> searchForm;
+	protected EList<FormSearch> FormSearch;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,11 +75,11 @@ public class SearchFormCollectionImpl extends FormCollectionImpl implements Sear
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<SearchForm> getSearchForm() {
-		if (searchForm == null) {
-			searchForm = new EObjectContainmentEList<SearchForm>(SearchForm.class, this, FormPackage.SEARCH_FORM_COLLECTION__SEARCH_FORM);
+	public EList<FormSearch> getFormSearch() {
+		if (FormSearch == null) {
+			FormSearch = new EObjectContainmentEList<FormSearch>(FormSearch.class, this, FormPackage.SEARCH_FORM_COLLECTION__SEARCH_FORM);
 		}
-		return searchForm;
+		return FormSearch;
 	}
 
 	/**
@@ -90,7 +91,7 @@ public class SearchFormCollectionImpl extends FormCollectionImpl implements Sear
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FormPackage.SEARCH_FORM_COLLECTION__SEARCH_FORM:
-				return ((InternalEList<?>)getSearchForm()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getFormSearch()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -104,7 +105,7 @@ public class SearchFormCollectionImpl extends FormCollectionImpl implements Sear
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.SEARCH_FORM_COLLECTION__SEARCH_FORM:
-				return getSearchForm();
+				return getFormSearch();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,8 +120,8 @@ public class SearchFormCollectionImpl extends FormCollectionImpl implements Sear
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.SEARCH_FORM_COLLECTION__SEARCH_FORM:
-				getSearchForm().clear();
-				getSearchForm().addAll((Collection<? extends SearchForm>)newValue);
+				getFormSearch().clear();
+				getFormSearch().addAll((Collection<? extends FormSearch>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,7 +136,7 @@ public class SearchFormCollectionImpl extends FormCollectionImpl implements Sear
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FormPackage.SEARCH_FORM_COLLECTION__SEARCH_FORM:
-				getSearchForm().clear();
+				getFormSearch().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -150,7 +151,7 @@ public class SearchFormCollectionImpl extends FormCollectionImpl implements Sear
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case FormPackage.SEARCH_FORM_COLLECTION__SEARCH_FORM:
-				return searchForm != null && !searchForm.isEmpty();
+				return FormSearch != null && !FormSearch.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

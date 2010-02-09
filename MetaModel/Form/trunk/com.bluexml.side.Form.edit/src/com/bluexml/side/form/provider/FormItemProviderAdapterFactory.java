@@ -628,26 +628,26 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.SearchForm} instances.
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.FormSearch} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SearchFormItemProvider searchFormItemProvider;
+	protected FormSearchItemProvider formSearchItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.form.SearchForm}.
+	 * This creates an adapter for a {@link com.bluexml.side.form.FormSearch}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createSearchFormAdapter() {
-		if (searchFormItemProvider == null) {
-			searchFormItemProvider = new SearchFormItemProvider(this);
+	public Adapter createFormSearchAdapter() {
+		if (formSearchItemProvider == null) {
+			formSearchItemProvider = new FormSearchItemProvider(this);
 		}
 
-		return searchFormItemProvider;
+		return formSearchItemProvider;
 	}
 
 	/**
@@ -702,7 +702,7 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SearchFormCollectionItemProvider searchFormCollectionItemProvider;
+	protected SearchFormCollectionItemProvider SearchFormCollectionItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link com.bluexml.side.form.SearchFormCollection}.
@@ -712,11 +712,11 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	 */
 	@Override
 	public Adapter createSearchFormCollectionAdapter() {
-		if (searchFormCollectionItemProvider == null) {
-			searchFormCollectionItemProvider = new SearchFormCollectionItemProvider(this);
+		if (SearchFormCollectionItemProvider == null) {
+			SearchFormCollectionItemProvider = new SearchFormCollectionItemProvider(this);
 		}
 
-		return searchFormCollectionItemProvider;
+		return SearchFormCollectionItemProvider;
 	}
 
 	/**
@@ -1052,10 +1052,10 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 		if (virtualFieldItemProvider != null) virtualFieldItemProvider.dispose();
 		if (actionFieldItemProvider != null) actionFieldItemProvider.dispose();
 		if (textFieldItemProvider != null) textFieldItemProvider.dispose();
-		if (searchFormItemProvider != null) searchFormItemProvider.dispose();
+		if (formSearchItemProvider != null) formSearchItemProvider.dispose();
 		if (numericalFieldItemProvider != null) numericalFieldItemProvider.dispose();
 		if (staticTextItemProvider != null) staticTextItemProvider.dispose();
-		if (searchFormCollectionItemProvider != null) searchFormCollectionItemProvider.dispose();
+		if (SearchFormCollectionItemProvider != null) SearchFormCollectionItemProvider.dispose();
 		if (searchFieldItemProvider != null) searchFieldItemProvider.dispose();
 		if (numericalSearchFieldItemProvider != null) numericalSearchFieldItemProvider.dispose();
 		if (charSearchFieldItemProvider != null) charSearchFieldItemProvider.dispose();

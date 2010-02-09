@@ -714,16 +714,6 @@ public interface FormPackage extends EPackage {
 	int TEXT_FIELD = 31;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.SearchFormImpl <em>Search Form</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.form.impl.SearchFormImpl
-	 * @see com.bluexml.side.form.impl.FormPackageImpl#getSearchForm()
-	 * @generated
-	 */
-	int SEARCH_FORM = 32;
-
-	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.WorkflowFormCollectionImpl <em>Workflow Form Collection</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6065,13 +6055,23 @@ public interface FormPackage extends EPackage {
 	int TEXT_FIELD_FEATURE_COUNT = CHAR_FIELD_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormSearchImpl <em>Search</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.FormSearchImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormSearch()
+	 * @generated
+	 */
+	int FORM_SEARCH = 32;
+
+	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__STEREOTYPES = FORM_CONTAINER__STEREOTYPES;
+	int FORM_SEARCH__STEREOTYPES = FORM_CONTAINER__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -6080,7 +6080,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__TAGS = FORM_CONTAINER__TAGS;
+	int FORM_SEARCH__TAGS = FORM_CONTAINER__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -6089,7 +6089,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__COMMENTS = FORM_CONTAINER__COMMENTS;
+	int FORM_SEARCH__COMMENTS = FORM_CONTAINER__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -6098,7 +6098,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__DOCUMENTATION = FORM_CONTAINER__DOCUMENTATION;
+	int FORM_SEARCH__DOCUMENTATION = FORM_CONTAINER__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -6107,7 +6107,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__DESCRIPTION = FORM_CONTAINER__DESCRIPTION;
+	int FORM_SEARCH__DESCRIPTION = FORM_CONTAINER__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
@@ -6116,7 +6116,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__METAINFO = FORM_CONTAINER__METAINFO;
+	int FORM_SEARCH__METAINFO = FORM_CONTAINER__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -6125,7 +6125,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__LABEL = FORM_CONTAINER__LABEL;
+	int FORM_SEARCH__LABEL = FORM_CONTAINER__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -6134,7 +6134,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__ID = FORM_CONTAINER__ID;
+	int FORM_SEARCH__ID = FORM_CONTAINER__ID;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -6143,7 +6143,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__HIDDEN = FORM_CONTAINER__HIDDEN;
+	int FORM_SEARCH__HIDDEN = FORM_CONTAINER__HIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
@@ -6152,7 +6152,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__HELP_TEXT = FORM_CONTAINER__HELP_TEXT;
+	int FORM_SEARCH__HELP_TEXT = FORM_CONTAINER__HELP_TEXT;
 
 	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -6161,7 +6161,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__REF = FORM_CONTAINER__REF;
+	int FORM_SEARCH__REF = FORM_CONTAINER__REF;
 
 	/**
 	 * The feature id for the '<em><b>Style</b></em>' attribute.
@@ -6170,7 +6170,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__STYLE = FORM_CONTAINER__STYLE;
+	int FORM_SEARCH__STYLE = FORM_CONTAINER__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -6179,7 +6179,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__CHILDREN = FORM_CONTAINER__CHILDREN;
+	int FORM_SEARCH__CHILDREN = FORM_CONTAINER__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Presentation</b></em>' attribute.
@@ -6188,7 +6188,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__PRESENTATION = FORM_CONTAINER__PRESENTATION;
+	int FORM_SEARCH__PRESENTATION = FORM_CONTAINER__PRESENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
@@ -6197,7 +6197,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__DISABLED = FORM_CONTAINER__DISABLED;
+	int FORM_SEARCH__DISABLED = FORM_CONTAINER__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Data Form</b></em>' reference.
@@ -6206,7 +6206,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__DATA_FORM = FORM_CONTAINER_FEATURE_COUNT + 0;
+	int FORM_SEARCH__DATA_FORM = FORM_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Combination Operator</b></em>' attribute.
@@ -6215,25 +6215,16 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__COMBINATION_OPERATOR = FORM_CONTAINER_FEATURE_COUNT + 1;
+	int FORM_SEARCH__COMBINATION_OPERATOR = FORM_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>EReference0</b></em>' reference.
+	 * The number of structural features of the '<em>Search</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM__EREFERENCE0 = FORM_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Search Form</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEARCH_FORM_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 3;
+	int FORM_SEARCH_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.StaticTextImpl <em>Static Text</em>}' class.
@@ -6354,22 +6345,13 @@ public interface FormPackage extends EPackage {
 	int STATIC_TEXT__STYLE = FORM_ELEMENT__STYLE;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATIC_TEXT__VALUE = FORM_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Static Text</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_TEXT_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 1;
+	int STATIC_TEXT_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.SearchFormCollectionImpl <em>Search Form Collection</em>}' class.
@@ -8262,47 +8244,36 @@ public interface FormPackage extends EPackage {
 	EAttribute getTextField_Widget();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.SearchForm <em>Search Form</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormSearch <em>Search</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Search Form</em>'.
-	 * @see com.bluexml.side.form.SearchForm
+	 * @return the meta object for class '<em>Search</em>'.
+	 * @see com.bluexml.side.form.FormSearch
 	 * @generated
 	 */
-	EClass getSearchForm();
+	EClass getFormSearch();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.bluexml.side.form.SearchForm#getDataForm <em>Data Form</em>}'.
+	 * Returns the meta object for the reference '{@link com.bluexml.side.form.FormSearch#getDataForm <em>Data Form</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Data Form</em>'.
-	 * @see com.bluexml.side.form.SearchForm#getDataForm()
-	 * @see #getSearchForm()
+	 * @see com.bluexml.side.form.FormSearch#getDataForm()
+	 * @see #getFormSearch()
 	 * @generated
 	 */
-	EReference getSearchForm_DataForm();
+	EReference getFormSearch_DataForm();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.SearchForm#getCombinationOperator <em>Combination Operator</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormSearch#getCombinationOperator <em>Combination Operator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Combination Operator</em>'.
-	 * @see com.bluexml.side.form.SearchForm#getCombinationOperator()
-	 * @see #getSearchForm()
+	 * @see com.bluexml.side.form.FormSearch#getCombinationOperator()
+	 * @see #getFormSearch()
 	 * @generated
 	 */
-	EAttribute getSearchForm_CombinationOperator();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.bluexml.side.form.SearchForm#getEReference0 <em>EReference0</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>EReference0</em>'.
-	 * @see com.bluexml.side.form.SearchForm#getEReference0()
-	 * @see #getSearchForm()
-	 * @generated
-	 */
-	EReference getSearchForm_EReference0();
+	EAttribute getFormSearch_CombinationOperator();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.NumericalField <em>Numerical Field</em>}'.
@@ -8325,17 +8296,6 @@ public interface FormPackage extends EPackage {
 	EClass getStaticText();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.StaticText#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see com.bluexml.side.form.StaticText#getValue()
-	 * @see #getStaticText()
-	 * @generated
-	 */
-	EAttribute getStaticText_Value();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.SearchFormCollection <em>Search Form Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8346,15 +8306,15 @@ public interface FormPackage extends EPackage {
 	EClass getSearchFormCollection();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.form.SearchFormCollection#getSearchForm <em>Search Form</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.form.SearchFormCollection#getFormSearch <em>Search Form</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Search Form</em>'.
-	 * @see com.bluexml.side.form.SearchFormCollection#getSearchForm()
+	 * @see com.bluexml.side.form.SearchFormCollection#getFormSearch()
 	 * @see #getSearchFormCollection()
 	 * @generated
 	 */
-	EReference getSearchFormCollection_SearchForm();
+	EReference getSearchFormCollection_FormSearch();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.SearchField <em>Search Field</em>}'.
@@ -9383,14 +9343,14 @@ public interface FormPackage extends EPackage {
 		EAttribute TEXT_FIELD__WIDGET = eINSTANCE.getTextField_Widget();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.SearchFormImpl <em>Search Form</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormSearchImpl <em>Search</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.form.impl.SearchFormImpl
-		 * @see com.bluexml.side.form.impl.FormPackageImpl#getSearchForm()
+		 * @see com.bluexml.side.form.impl.FormSearchImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormSearch()
 		 * @generated
 		 */
-		EClass SEARCH_FORM = eINSTANCE.getSearchForm();
+		EClass FORM_SEARCH = eINSTANCE.getFormSearch();
 
 		/**
 		 * The meta object literal for the '<em><b>Data Form</b></em>' reference feature.
@@ -9398,7 +9358,7 @@ public interface FormPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SEARCH_FORM__DATA_FORM = eINSTANCE.getSearchForm_DataForm();
+		EReference FORM_SEARCH__DATA_FORM = eINSTANCE.getFormSearch_DataForm();
 
 		/**
 		 * The meta object literal for the '<em><b>Combination Operator</b></em>' attribute feature.
@@ -9406,15 +9366,7 @@ public interface FormPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute SEARCH_FORM__COMBINATION_OPERATOR = eINSTANCE.getSearchForm_CombinationOperator();
-
-		/**
-		 * The meta object literal for the '<em><b>EReference0</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SEARCH_FORM__EREFERENCE0 = eINSTANCE.getSearchForm_EReference0();
+		EAttribute FORM_SEARCH__COMBINATION_OPERATOR = eINSTANCE.getFormSearch_CombinationOperator();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.NumericalFieldImpl <em>Numerical Field</em>}' class.
@@ -9437,14 +9389,6 @@ public interface FormPackage extends EPackage {
 		EClass STATIC_TEXT = eINSTANCE.getStaticText();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STATIC_TEXT__VALUE = eINSTANCE.getStaticText_Value();
-
-		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.SearchFormCollectionImpl <em>Search Form Collection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9460,7 +9404,7 @@ public interface FormPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SEARCH_FORM_COLLECTION__SEARCH_FORM = eINSTANCE.getSearchFormCollection_SearchForm();
+		EReference SEARCH_FORM_COLLECTION__SEARCH_FORM = eINSTANCE.getSearchFormCollection_FormSearch();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.SearchFieldImpl <em>Search Field</em>}' class.

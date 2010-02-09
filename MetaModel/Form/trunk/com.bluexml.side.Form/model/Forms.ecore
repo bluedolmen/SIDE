@@ -15,7 +15,7 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'label' attribute specifies the text associated to a form element. This text is displayed on or near the form element.&#xD;&#xA;Constraint/Limit: The internationalization convention may be used for the label's value; if the value of the label in the form model is of the form &quot;#label&quot;,  the token &quot;label&quot; is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '&lt;xforms_webapp>/WEB-INF/classes/messages.properties'."/>
+        <details key="documentation" value="Definition: The 'label' attribute specifies the text associated to a form element. This text is displayed on or near the form element. However, if the form element is a static text, the label provides the text to be displayed.&#xA;Constraint/Limit: The internationalization convention may be used for the label's value; if the value of the label in the form model is of the form &quot;#label&quot;,  the token &quot;label&quot; is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '&lt;xforms_webapp>/WEB-INF/classes/messages.properties'."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -526,10 +526,9 @@
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SearchForm" eSuperTypes="#//FormContainer">
+  <eClassifiers xsi:type="ecore:EClass" name="FormSearch" eSuperTypes="#//FormContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataForm" eType="#//FormClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinationOperator" eType="#//CombinationOperators"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//SearchFormCollection"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumericalField" eSuperTypes="#//Field"/>
   <eClassifiers xsi:type="ecore:EEnum" name="CharFieldSearchOperators">
@@ -564,12 +563,10 @@
     <eLiterals name="and"/>
     <eLiterals name="or" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StaticText" eSuperTypes="#//FormElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticText" eSuperTypes="#//FormElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="SearchFormCollection" eSuperTypes="#//FormCollection">
     <eStructuralFeatures xsi:type="ecore:EReference" name="SearchForm" upperBound="-1"
-        eType="#//SearchForm" containment="true"/>
+        eType="#//FormSearch" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SearchField" eSuperTypes="#//FormElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumericalSearchField" eSuperTypes="#//SearchField">

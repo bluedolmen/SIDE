@@ -51,6 +51,7 @@ import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ImageField;
 import com.bluexml.side.form.IntegerField;
@@ -64,7 +65,7 @@ import com.bluexml.side.form.PhoneNumberField;
 import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.RegexField;
 import com.bluexml.side.form.SearchField;
-import com.bluexml.side.form.SearchForm;
+import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.SearchFormCollection;
 import com.bluexml.side.form.SearchOperatorConfiguration;
 import com.bluexml.side.form.StaticText;
@@ -285,7 +286,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass searchFormEClass = null;
+	private EClass formSearchEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -306,7 +307,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass searchFormCollectionEClass = null;
+	private EClass SearchFormCollectionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1219,8 +1220,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSearchForm() {
-		return searchFormEClass;
+	public EClass getFormSearch() {
+		return formSearchEClass;
 	}
 
 	/**
@@ -1228,8 +1229,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSearchForm_DataForm() {
-		return (EReference)searchFormEClass.getEStructuralFeatures().get(0);
+	public EReference getFormSearch_DataForm() {
+		return (EReference)formSearchEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1237,17 +1238,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSearchForm_CombinationOperator() {
-		return (EAttribute)searchFormEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSearchForm_EReference0() {
-		return (EReference)searchFormEClass.getEStructuralFeatures().get(2);
+	public EAttribute getFormSearch_CombinationOperator() {
+		return (EAttribute)formSearchEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1273,17 +1265,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStaticText_Value() {
-		return (EAttribute)staticTextEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSearchFormCollection() {
-		return searchFormCollectionEClass;
+		return SearchFormCollectionEClass;
 	}
 
 	/**
@@ -1291,8 +1274,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSearchFormCollection_SearchForm() {
-		return (EReference)searchFormCollectionEClass.getEStructuralFeatures().get(0);
+	public EReference getSearchFormCollection_FormSearch() {
+		return (EReference)SearchFormCollectionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1726,18 +1709,16 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		textFieldEClass = createEClass(TEXT_FIELD);
 		createEAttribute(textFieldEClass, TEXT_FIELD__WIDGET);
 
-		searchFormEClass = createEClass(SEARCH_FORM);
-		createEReference(searchFormEClass, SEARCH_FORM__DATA_FORM);
-		createEAttribute(searchFormEClass, SEARCH_FORM__COMBINATION_OPERATOR);
-		createEReference(searchFormEClass, SEARCH_FORM__EREFERENCE0);
+		formSearchEClass = createEClass(FORM_SEARCH);
+		createEReference(formSearchEClass, FORM_SEARCH__DATA_FORM);
+		createEAttribute(formSearchEClass, FORM_SEARCH__COMBINATION_OPERATOR);
 
 		numericalFieldEClass = createEClass(NUMERICAL_FIELD);
 
 		staticTextEClass = createEClass(STATIC_TEXT);
-		createEAttribute(staticTextEClass, STATIC_TEXT__VALUE);
 
-		searchFormCollectionEClass = createEClass(SEARCH_FORM_COLLECTION);
-		createEReference(searchFormCollectionEClass, SEARCH_FORM_COLLECTION__SEARCH_FORM);
+		SearchFormCollectionEClass = createEClass(SEARCH_FORM_COLLECTION);
+		createEReference(SearchFormCollectionEClass, SEARCH_FORM_COLLECTION__SEARCH_FORM);
 
 		searchFieldEClass = createEClass(SEARCH_FIELD);
 
@@ -1840,10 +1821,10 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		virtualFieldEClass.getESuperTypes().add(this.getField());
 		actionFieldEClass.getESuperTypes().add(this.getField());
 		textFieldEClass.getESuperTypes().add(this.getCharField());
-		searchFormEClass.getESuperTypes().add(this.getFormContainer());
+		formSearchEClass.getESuperTypes().add(this.getFormContainer());
 		numericalFieldEClass.getESuperTypes().add(this.getField());
 		staticTextEClass.getESuperTypes().add(this.getFormElement());
-		searchFormCollectionEClass.getESuperTypes().add(this.getFormCollection());
+		SearchFormCollectionEClass.getESuperTypes().add(this.getFormCollection());
 		searchFieldEClass.getESuperTypes().add(this.getFormElement());
 		numericalSearchFieldEClass.getESuperTypes().add(this.getSearchField());
 		charSearchFieldEClass.getESuperTypes().add(this.getSearchField());
@@ -1982,18 +1963,16 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEClass(textFieldEClass, TextField.class, "TextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTextField_Widget(), this.getTextWidgetType(), "widget", null, 0, 1, TextField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(searchFormEClass, SearchForm.class, "SearchForm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSearchForm_DataForm(), this.getFormClass(), null, "dataForm", null, 0, 1, SearchForm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSearchForm_CombinationOperator(), this.getCombinationOperators(), "combinationOperator", null, 0, 1, SearchForm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSearchForm_EReference0(), this.getSearchFormCollection(), null, "EReference0", null, 0, 1, SearchForm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(formSearchEClass, FormSearch.class, "FormSearch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFormSearch_DataForm(), this.getFormClass(), null, "dataForm", null, 0, 1, FormSearch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFormSearch_CombinationOperator(), this.getCombinationOperators(), "combinationOperator", null, 0, 1, FormSearch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(numericalFieldEClass, NumericalField.class, "NumericalField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(staticTextEClass, StaticText.class, "StaticText", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStaticText_Value(), ecorePackage.getEString(), "value", null, 0, 1, StaticText.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(searchFormCollectionEClass, SearchFormCollection.class, "SearchFormCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSearchFormCollection_SearchForm(), this.getSearchForm(), null, "SearchForm", null, 0, -1, SearchFormCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(SearchFormCollectionEClass, SearchFormCollection.class, "SearchFormCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSearchFormCollection_FormSearch(), this.getFormSearch(), null, "FormSearch", null, 0, -1, SearchFormCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(searchFieldEClass, SearchField.class, "SearchField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
