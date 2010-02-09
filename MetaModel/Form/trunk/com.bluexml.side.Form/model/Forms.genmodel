@@ -29,10 +29,6 @@
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ModelChoiceWidgetType/Select"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ModelChoiceWidgetType/Inline"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//FieldSearchOperators">
-      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FieldSearchOperators/equals"/>
-      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FieldSearchOperators/empty"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//CharFieldSearchOperators">
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/contains"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/icontains"/>
@@ -40,11 +36,15 @@
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/istartsWith"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/endsWith"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/iendsWith"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/empty"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/is"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//NumericalFieldSearchOperators">
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//NumericalFieldSearchOperators/between"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//NumericalFieldSearchOperators/below"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//NumericalFieldSearchOperators/above"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//NumericalFieldSearchOperators/exactly"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//NumericalFieldSearchOperators/empty"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//ChoiceFieldSearchOperators">
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceFieldSearchOperators/all"/>
@@ -55,17 +55,26 @@
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//FileFieldSearchOperators">
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FileFieldSearchOperators/fileType"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FileFieldSearchOperators/contents"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FileFieldSearchOperators/size"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//CombinationOperators">
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CombinationOperators/and"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CombinationOperators/or"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//DateFieldSearchOperators">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//DateFieldSearchOperators/between"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//DateFieldSearchOperators/before"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//DateFieldSearchOperators/after"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//DateFieldSearchOperators/exactly"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//DateFieldSearchOperators/empty"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="Forms.ecore#//FormElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormElement/label"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormElement/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormElement/hidden"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormElement/help_text"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//FormElement/ref"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormElement/hidden"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormElement/style"/>
     </genClasses>
     <genClasses ecoreClass="Forms.ecore#//FormCollection">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//FormCollection/forms"/>
@@ -75,6 +84,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormGroup/presentation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//FormGroup/disabled"/>
       <genOperations ecoreOperation="Forms.ecore#//FormGroup/getFields"/>
+      <genOperations ecoreOperation="Forms.ecore#//FormGroup/getSearchFields"/>
     </genClasses>
     <genClasses ecoreClass="Forms.ecore#//WorkflowFormCollection">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//WorkflowFormCollection/linked_process"/>
@@ -84,11 +94,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/mandatory"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/error_messages"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/initial"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/disabled"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/fieldSize"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/style"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//Field/searchOperatorConfiguration"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/field_size"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/mockup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/disabled"/>
       <genOperations ecoreOperation="Forms.ecore#//Field/getLabel"/>
       <genOperations ecoreOperation="Forms.ecore#//Field/getInitialProposedOperators"/>
     </genClasses>
@@ -98,7 +106,9 @@
     <genClasses ecoreClass="Forms.ecore#//FormWorkflow">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//FormWorkflow/DataForm"/>
     </genClasses>
-    <genClasses ecoreClass="Forms.ecore#//FormClass"/>
+    <genClasses ecoreClass="Forms.ecore#//FormClass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormClass/content_enabled"/>
+    </genClasses>
     <genClasses ecoreClass="Forms.ecore#//BooleanField"/>
     <genClasses ecoreClass="Forms.ecore#//CharField">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//CharField/min_length"/>
@@ -168,17 +178,35 @@
     <genClasses ecoreClass="Forms.ecore#//TextField">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//TextField/widget"/>
     </genClasses>
-    <genClasses ecoreClass="Forms.ecore#//SearchForm">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//SearchForm/dataForm"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//SearchForm/combinationOperator"/>
+    <genClasses ecoreClass="Forms.ecore#//FormSearch">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//FormSearch/dataForm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormSearch/combinationOperator"/>
     </genClasses>
     <genClasses ecoreClass="Forms.ecore#//NumericalField"/>
-    <genClasses ecoreClass="Forms.ecore#//SearchOperatorConfiguration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//SearchOperatorConfiguration/defaultOperator"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//SearchOperatorConfiguration/proposedOperators"/>
+    <genClasses ecoreClass="Forms.ecore#//StaticText"/>
+    <genClasses ecoreClass="Forms.ecore#//SearchFormCollection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//SearchFormCollection/SearchForm"/>
     </genClasses>
-    <genClasses ecoreClass="Forms.ecore#//StaticText">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//StaticText/value"/>
+    <genClasses ecoreClass="Forms.ecore#//SearchField"/>
+    <genClasses ecoreClass="Forms.ecore#//NumericalSearchField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//NumericalSearchField/operators"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//NumericalSearchField/defaultOperator"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//CharSearchField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//CharSearchField/operators"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//CharSearchField/defaultOperator"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//DateSearchField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//DateSearchField/operators"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//DateSearchField/defaultOperator"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//ChoiceSearchField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ChoiceSearchField/operators"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ChoiceSearchField/defaultOperator"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//FileSearchField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FileSearchField/operators"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FileSearchField/defaultOperator"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Model" path="/Cyvel/My1.kerblueforms"/>
+    <files xsi:type="chain:Log" path="/KerBlue.Forms.edit.ui/src/kerblue/forms/editor/views/log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="/KerBlue.Forms/metamodels/Forms.ecore"/>
+    <files xsi:type="chain:Generator" path="/KerBlue.Forms.edit.ui/src/kerblue/forms/editor/views/default.mt"/>
+    <files xsi:type="chain:Folder" path="/KerBlue.Forms.edit.ui/generated"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="" log="//@repository/@files.1" model="//@repository/@files.0" metamodel="//@repository/@files.2" generator="//@repository/@files.3" folder="//@repository/@files.4"/>
+  </actions>
+</chain:Chain>

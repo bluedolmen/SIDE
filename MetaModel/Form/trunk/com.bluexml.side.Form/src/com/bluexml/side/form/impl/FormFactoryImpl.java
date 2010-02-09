@@ -476,8 +476,8 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * @generated
 	 */
 	public SearchFormCollection createSearchFormCollection() {
-		SearchFormCollectionImpl SearchFormCollection = new SearchFormCollectionImpl();
-		return SearchFormCollection;
+		SearchFormCollectionImpl searchFormCollection = new SearchFormCollectionImpl();
+		return searchFormCollection;
 	}
 
 	/**

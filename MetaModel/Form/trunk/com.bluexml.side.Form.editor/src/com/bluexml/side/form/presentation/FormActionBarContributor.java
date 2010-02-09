@@ -49,9 +49,11 @@ import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
+import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.Reference;
+import com.bluexml.side.form.SearchFormCollection;
 import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.form.clazz.AddRefAction;
 import com.bluexml.side.form.clazz.CollapseReferenceAction;
@@ -67,6 +69,7 @@ import com.bluexml.side.form.common.RestoreFormElementAction;
 import com.bluexml.side.form.common.TransformFieldAction;
 import com.bluexml.side.form.common.utils.FieldTransformation;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
+import com.bluexml.side.form.search.InitializeFormSearchAction;
 import com.bluexml.side.form.workflow.InitializeFormWorkflowAction;
 import com.bluexml.side.form.workflow.ShowLinkedTaskAction;
 import com.bluexml.side.form.workflow.SynchonizeWithWorkflowDiagramAction;
@@ -143,6 +146,7 @@ public class FormActionBarContributor
 	protected GroupAttributeAction groupAttributeAction = new GroupAttributeAction();
 	protected InitializeFormClassAction initializeFormClassAction = new InitializeFormClassAction();
 	protected InitializeFormWorkflowAction initializeFormWorkflowAction = new InitializeFormWorkflowAction();
+	protected InitializeFormSearchAction initializeFormSearchAction = new InitializeFormSearchAction();
 	protected ShowLinkedTaskAction showLinkedTaskAction = new ShowLinkedTaskAction();
 	protected ShowLinkedClassAction showLinkedClassAction = new ShowLinkedClassAction();
 	protected RefreshOutlineAction refreshOutlineAction = new RefreshOutlineAction();
@@ -532,6 +536,11 @@ public class FormActionBarContributor
 				menuManager.insertAfter("ui-actions", initializeFormWorkflowAction);
 			}
 			
+			if (o instanceof FormSearch) {
+				initializeFormSearchAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/initializeFromClass.png"));
+				menuManager.insertAfter("ui-actions", initializeFormSearchAction);
+			}
+			
 			if (o instanceof FormWorkflow) {
 				showLinkedTaskAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/show_link.png"));
 				menuManager.insertAfter("ui-actions", showLinkedTaskAction);
@@ -679,6 +688,7 @@ public class FormActionBarContributor
 		groupAttributeAction.setActiveWorkbenchPart(activeEditor);
 		initializeFormClassAction.setActiveWorkbenchPart(activeEditor);
 		initializeFormWorkflowAction.setActiveWorkbenchPart(activeEditor);
+		initializeFormSearchAction.setActiveWorkbenchPart(activeEditor);
 		collapseReferenceAction.setActiveWorkbenchPart(activeEditor);
 		copyFormAction.setActiveWorkbenchPart(activeEditor);
 		synchronizeWithClassDiagram.setActiveWorkbenchPart(activeEditor);
@@ -691,6 +701,7 @@ public class FormActionBarContributor
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) groupAttributeAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) initializeFormClassAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) initializeFormWorkflowAction);
+		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) initializeFormSearchAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) showLinkedTaskAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) showLinkedClassAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) refreshOutlineAction);

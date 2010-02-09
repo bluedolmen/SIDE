@@ -25,10 +25,41 @@ package com.bluexml.side.form;
  *  Field.
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link com.bluexml.side.form.ActionField#getActionHandler <em>Action Handler</em>}</li>
+ * </ul>
+ * </p>
  *
  * @see com.bluexml.side.form.FormPackage#getActionField()
  * @model
  * @generated
  */
 public interface ActionField extends Field {
+
+	/**
+	 * Returns the value of the '<em><b>Action Handler</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This property refers to the action handler according to contextualized conventions. For instance, the BlueXML XForms generation requires this property to be the fully qualified name of a Java class that implements an interface. See the documentation for more details.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Action Handler</em>' attribute.
+	 * @see #setActionHandler(String)
+	 * @see com.bluexml.side.form.FormPackage#getActionField_ActionHandler()
+	 * @model
+	 * @generated
+	 */
+	String getActionHandler();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.form.ActionField#getActionHandler <em>Action Handler</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Action Handler</em>' attribute.
+	 * @see #getActionHandler()
+	 * @generated
+	 */
+	void setActionHandler(String value);
 } // ActionField

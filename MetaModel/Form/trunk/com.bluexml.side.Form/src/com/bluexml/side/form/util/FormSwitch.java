@@ -426,6 +426,7 @@ public class FormSwitch<T> {
 				FormSearch formSearch = (FormSearch)theEObject;
 				T result = caseFormSearch(formSearch);
 				if (result == null) result = caseFormContainer(formSearch);
+				if (result == null) result = caseClassReference(formSearch);
 				if (result == null) result = caseFormGroup(formSearch);
 				if (result == null) result = caseFormElement(formSearch);
 				if (result == null) result = caseModelElement(formSearch);
@@ -450,12 +451,12 @@ public class FormSwitch<T> {
 				return result;
 			}
 			case FormPackage.SEARCH_FORM_COLLECTION: {
-				SearchFormCollection SearchFormCollection = (SearchFormCollection)theEObject;
-				T result = caseSearchFormCollection(SearchFormCollection);
-				if (result == null) result = caseFormCollection(SearchFormCollection);
-				if (result == null) result = casePackage(SearchFormCollection);
-				if (result == null) result = caseNamedModelElement(SearchFormCollection);
-				if (result == null) result = caseModelElement(SearchFormCollection);
+				SearchFormCollection searchFormCollection = (SearchFormCollection)theEObject;
+				T result = caseSearchFormCollection(searchFormCollection);
+				if (result == null) result = caseFormCollection(searchFormCollection);
+				if (result == null) result = casePackage(searchFormCollection);
+				if (result == null) result = caseNamedModelElement(searchFormCollection);
+				if (result == null) result = caseModelElement(searchFormCollection);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

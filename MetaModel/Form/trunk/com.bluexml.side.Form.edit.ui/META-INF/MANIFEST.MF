@@ -21,6 +21,8 @@ Export-Package: com.bluexml.side.form.clazz,
  com.bluexml.side.form.common.utils,
  com.bluexml.side.form.editor.views,
  com.bluexml.side.form.editor.views.service,
+ com.bluexml.side.form.search,
+ com.bluexml.side.form.search.utils,
  com.bluexml.side.form.workflow,
  com.bluexml.side.form.workflow.utils
 Bundle-Activator: com.bluexml.side.form.FormUI

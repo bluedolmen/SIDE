@@ -7,9 +7,9 @@
  $Id$
 -->
 <plugin>
-  <extension point="org.eclipse.ui.views">
-    <category id="com.bluexml.side" name="BlueXML" />
-    <view category="KerBlue.Forms.editor" class="com.bluexml.side.form.editor.views.OutlineHTMLView" icon="icon/outlineView.png" id="com.bluexml.side.form.editor.views.OutlineHTMLView" name="OutlineHTMLView" />
-  </extension>
+<!--  <extension point="org.eclipse.ui.views">-->
+<!--    <category id="com.bluexml.side" name="SIDE" />-->
+<!--    <view category="com.bluexml.side" class="com.bluexml.side.form.editor.views.OutlineHTMLView" icon="icon/outlineView.png" id="com.bluexml.side.form.editor.views.OutlineHTMLView" name="OutlineHTMLView" />-->
+<!--  </extension>-->
 </plugin>
 

@@ -1031,6 +1031,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_TwoFormsWithSameName(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(formSearch, diagnostics, context);
 		return result;
 	}
 
@@ -1074,8 +1075,8 @@ public class FormValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSearchFormCollection(SearchFormCollection SearchFormCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(SearchFormCollection, diagnostics, context);
+	public boolean validateSearchFormCollection(SearchFormCollection searchFormCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(searchFormCollection, diagnostics, context);
 	}
 
 	/**

@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.form.presentation;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -132,60 +131,53 @@ import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.provider.FormItemProviderAdapterFactory;
 import com.bluexml.side.workflow.provider.WorkflowItemProviderAdapterFactory;
 
-
 /**
  * This is an example of a Form model editor.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class FormEditor
-	extends MultiPageEditorPart
-	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+public class FormEditor extends MultiPageEditorPart implements IEditingDomainProvider,
+		ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
-	 * This keeps track of the editing domain that is used to track all changes to the model.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This keeps track of the editing domain that is used to track all changes to the model. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected AdapterFactoryEditingDomain editingDomain;
 
 	/**
 	 * This is the one adapter factory used for providing views of the model.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected ComposedAdapterFactory adapterFactory;
 
 	/**
 	 * This is the content outline page.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected IContentOutlinePage contentOutlinePage;
 
 	/**
 	 * This is a kludge...
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected IStatusLineManager contentOutlineStatusLineManager;
 
 	/**
 	 * This is the content outline page's viewer.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected TreeViewer contentOutlineViewer;
 
 	/**
 	 * This is the property sheet page.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected PropertySheetPage propertySheetPage;
@@ -193,24 +185,21 @@ public class FormEditor
 	/**
 	 * This is the viewer that shadows the selection in the content outline.
 	 * The parent relation must be correctly defined for this to work.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected TreeViewer selectionViewer;
 
 	/**
 	 * This inverts the roll of parent and child in the content provider and show parents as a tree.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected TreeViewer parentViewer;
 
 	/**
 	 * This shows how a tree view works.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected TreeViewer treeViewer;
@@ -218,65 +207,60 @@ public class FormEditor
 	/**
 	 * This shows how a list view works.
 	 * A list viewer doesn't support icons.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected ListViewer listViewer;
 
 	/**
-	 * This shows how a table view works.
-	 * A table can be used as a list with icons.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This shows how a table view works. A table can be used as a list with icons. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TableViewer tableViewer;
 
 	/**
 	 * This shows how a tree view with columns works.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected TreeViewer treeViewerWithColumns;
 
 	/**
 	 * This keeps track of the active viewer pane, in the book.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	protected ViewerPane currentViewerPane;
 
 	/**
 	 * This keeps track of the active content viewer, which may be either one of the viewers in the pages or the content outline viewer.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Viewer currentViewer;
 
 	/**
 	 * This listens to which ever viewer is active.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected ISelectionChangedListener selectionChangedListener;
 
 	/**
 	 * This keeps track of all the {@link org.eclipse.jface.viewers.ISelectionChangedListener}s that are listening to this editor.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
 
 	/**
 	 * This keeps track of the selection of the editor as a whole.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	protected ISelection editorSelection = StructuredSelection.EMPTY;
@@ -284,20 +268,18 @@ public class FormEditor
 	/**
 	 * The MarkerHelper is responsible for creating workspace resource markers presented
 	 * in Eclipse's Problems View.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected MarkerHelper markerHelper = new EditUIMarkerHelper();
 
 	/**
-	 * This listens for when the outline becomes active
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This listens for when the outline becomes active <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
-	protected IPartListener partListener =
-		new IPartListener() {
+	protected IPartListener partListener = new IPartListener() {
 			public void partActivated(IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
@@ -332,52 +314,50 @@ public class FormEditor
 
 	/**
 	 * Resources that have been removed since last activation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
 	/**
 	 * Resources that have been changed since last activation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<Resource> changedResources = new ArrayList<Resource>();
 
 	/**
 	 * Resources that have been saved.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<Resource> savedResources = new ArrayList<Resource>();
 
 	/**
 	 * Map to store the diagnostic associated with a resource.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	protected Map<Resource, Diagnostic> resourceToDiagnosticMap = new LinkedHashMap<Resource, Diagnostic>();
 
 	/**
 	 * Controls whether the problem indication should be updated.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	protected boolean updateProblemIndication = true;
 
 	/**
-	 * Adapter used to update the problem indication when resources are demanded loaded.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Adapter used to update the problem indication when resources are demanded loaded. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	protected EContentAdapter problemIndicationAdapter = 
-		new EContentAdapter() {
+	protected EContentAdapter problemIndicationAdapter = new EContentAdapter() {
 			@Override
 			public void notifyChanged(Notification notification) {
 				if (notification.getNotifier() instanceof Resource) {
@@ -424,12 +404,10 @@ public class FormEditor
 
 	/**
 	 * This listens for workspace changes.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IResourceChangeListener resourceChangeListener =
-		new IResourceChangeListener() {
+	protected IResourceChangeListener resourceChangeListener = new IResourceChangeListener() {
 			public void resourceChanged(IResourceChangeEvent event) {
 				IResourceDelta delta = event.getDelta();
 				try {
@@ -501,8 +479,8 @@ public class FormEditor
 
 	/**
 	 * Handles activation of the editor or it's associated views.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	protected void handleActivate() {
@@ -536,8 +514,8 @@ public class FormEditor
 
 	/**
 	 * Handles what to do with changed resources on activation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	protected void handleChangedResources() {
@@ -570,11 +548,10 @@ public class FormEditor
 			updateProblemIndication();
 		}
 	}
-  
+
 	/**
 	 * Updates the problems indication with the information described in the specified diagnostic.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void updateProblemIndication() {
@@ -644,8 +621,7 @@ public class FormEditor
 
 	/**
 	 * This creates a model editor.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public FormEditor() {
@@ -655,8 +631,8 @@ public class FormEditor
 
 	/**
 	 * This sets up the editing domain for the model editor.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	protected void initializeEditingDomain() {
@@ -706,19 +682,19 @@ public class FormEditor
 
 	/**
 	 * This is here for the listener to be able to call it.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
-			@Override
+	@Override
 	protected void firePropertyChange(int action) {
 		super.firePropertyChange(action);
 	}
 
 	/**
 	 * This sets the selection into whichever viewer is active.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	public void setSelectionToViewer(Collection<?> collection) {
@@ -744,8 +720,8 @@ public class FormEditor
 	 * This returns the editing domain as required by the {@link IEditingDomainProvider} interface.
 	 * This is important for implementing the static methods of {@link AdapterFactoryEditingDomain}
 	 * and for supporting {@link org.eclipse.emf.edit.ui.action.CommandAction}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EditingDomain getEditingDomain() {
@@ -753,14 +729,12 @@ public class FormEditor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public class ReverseAdapterFactoryContentProvider extends AdapterFactoryContentProvider {
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		public ReverseAdapterFactoryContentProvider(AdapterFactory adapterFactory) {
@@ -768,8 +742,7 @@ public class FormEditor
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		@Override
@@ -779,8 +752,7 @@ public class FormEditor
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		@Override
@@ -790,8 +762,7 @@ public class FormEditor
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		@Override
@@ -801,8 +772,7 @@ public class FormEditor
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		@Override
@@ -812,8 +782,7 @@ public class FormEditor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCurrentViewerPane(ViewerPane viewerPane) {
@@ -829,8 +798,7 @@ public class FormEditor
 	/**
 	 * This makes sure that one content viewer, either for the current page or the outline view, if it has focus,
 	 * is the current one.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCurrentViewer(Viewer viewer) {
@@ -873,9 +841,9 @@ public class FormEditor
 	}
 
 	/**
-	 * This returns the viewer as required by the {@link IViewerProvider} interface.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the viewer as required by the {@link IViewerProvider} interface. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Viewer getViewer() {
@@ -883,9 +851,9 @@ public class FormEditor
 	}
 
 	/**
-	 * This creates a context menu for the viewer and adds a listener as well registering the menu for extension.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This creates a context menu for the viewer and adds a listener as well registering the menu
+	 * for extension. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @_generated
 	 */
 	protected void createContextMenuFor(StructuredViewer viewer) {
@@ -893,19 +861,20 @@ public class FormEditor
 		contextMenu.add(new Separator("additions"));
 		contextMenu.setRemoveAllWhenShown(true);
 		contextMenu.addMenuListener(this);
-		Menu menu= contextMenu.createContextMenu(viewer.getControl());
+		Menu menu = contextMenu.createContextMenu(viewer.getControl());
 		viewer.getControl().setMenu(menu);
 		getSite().registerContextMenu(contextMenu, new UnwrappingSelectionProvider(viewer));
 
 		int dndOperations = DND.DROP_COPY | DND.DROP_MOVE | DND.DROP_LINK;
 		Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance() };
 		viewer.addDragSupport(dndOperations, transfers, new ViewerDragAdapter(viewer));
-		viewer.addDropSupport(dndOperations, transfers, new EditingDomainViewerDropAdapter(editingDomain, viewer));
+		viewer.addDropSupport(dndOperations, transfers, new EditingDomainViewerDropAdapter(
+				editingDomain, viewer));
 		// Add a double click event
 		addDoubleClickEventListener(viewer);
 	}
 
-/**
+	/**
 	 * Add double click listener to show the properties view on double click
 	 * 
 	 * @param viewer
@@ -918,8 +887,7 @@ public class FormEditor
 				public void doubleClick(DoubleClickEvent event) {
 					// Show property view
 					try {
-						getEditorSite().getPage().showView(
-								"org.eclipse.ui.views.PropertySheet");
+						getEditorSite().getPage().showView("org.eclipse.ui.views.PropertySheet");
 					} catch (PartInitException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -927,8 +895,7 @@ public class FormEditor
 					// Open if is container
 					ISelection selection = event.getSelection();
 					if (selection instanceof IStructuredSelection) {
-						Object item = ((IStructuredSelection) selection)
-								.getFirstElement();
+						Object item = ((IStructuredSelection) selection).getFirstElement();
 						if (newTreeViewer.getExpandedState(item)) {
 							newTreeViewer.collapseToLevel(item, 1);
 						} else {
@@ -936,13 +903,15 @@ public class FormEditor
 						}
 					}
 					// If reference change focus to target FormClass
-					if ((((IStructuredSelection) selection).getFirstElement() instanceof Reference) &&
-							((IStructuredSelection) selection).size() == 1) {
-						Reference ref = ((Reference)((IStructuredSelection) selection).getFirstElement());
+					if ((((IStructuredSelection) selection).getFirstElement() instanceof Reference)
+							&& ((IStructuredSelection) selection).size() == 1) {
+						Reference ref = ((Reference) ((IStructuredSelection) selection)
+								.getFirstElement());
 						setSelectionToViewer(ref.getTarget());
-					} else if ((((IStructuredSelection) selection).getFirstElement() instanceof VirtualField) &&
-							((IStructuredSelection) selection).size() == 1) {
-						VirtualField vf = (VirtualField)((IStructuredSelection) selection).getFirstElement();
+					} else if ((((IStructuredSelection) selection).getFirstElement() instanceof VirtualField)
+							&& ((IStructuredSelection) selection).size() == 1) {
+						VirtualField vf = (VirtualField) ((IStructuredSelection) selection)
+								.getFirstElement();
 						ArrayList<Field> list = new ArrayList<Field>(1);
 						list.add(vf.getLink());
 						setSelectionToViewer(list);
@@ -951,10 +920,10 @@ public class FormEditor
 			});
 		}
 	}
+
 	/**
 	 * This is the method called to load a resource into the editing domain's resource set based on the editor's input.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void createModel() {
@@ -981,8 +950,7 @@ public class FormEditor
 	/**
 	 * Returns a diagnostic describing the errors and warnings listed in the resource
 	 * and the specified exception (if any).
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Diagnostic analyzeResourceProblems(Resource resource, Exception exception) {
@@ -1013,8 +981,8 @@ public class FormEditor
 
 	/**
 	 * This is the method used by the framework to install your own controls.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1262,8 +1230,7 @@ public class FormEditor
 	/**
 	 * If there is just one page in the multi-page editor part,
 	 * this hides the single tab at the bottom.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void hideTabs() {
@@ -1280,8 +1247,7 @@ public class FormEditor
 	/**
 	 * If there is more than one page in the multi-page editor part,
 	 * this shows the tabs at the bottom.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void showTabs() {
@@ -1297,8 +1263,7 @@ public class FormEditor
 
 	/**
 	 * This is used to track the active viewer.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1334,9 +1299,9 @@ public class FormEditor
 	}
 
 	/**
-	 * This accesses a cached version of the content outliner.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This accesses a cached version of the content outliner. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @_generated
 	 */
 	public IContentOutlinePage getContentOutlinePage() {
@@ -1352,8 +1317,10 @@ public class FormEditor
 
 					// Set up the tree viewer.
 					//
-					contentOutlineViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-					contentOutlineViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+					contentOutlineViewer.setContentProvider(new AdapterFactoryContentProvider(
+							adapterFactory));
+					contentOutlineViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+							adapterFactory));
 					contentOutlineViewer.setInput(editingDomain.getResourceSet());
 
 					// Make sure our popups work.
@@ -1361,14 +1328,17 @@ public class FormEditor
 					createContextMenuFor(contentOutlineViewer);
 
 					if (!editingDomain.getResourceSet().getResources().isEmpty()) {
-					  // Select the root object in the view.
-					  //
-					  //contentOutlineViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
+						// Select the root object in the view.
+						//
+						// contentOutlineViewer.setSelection(new
+						// StructuredSelection(editingDomain.getResourceSet().getResources().get(0)),
+						// true);
 					}
 				}
 
 				@Override
-				public void makeContributions(IMenuManager menuManager, IToolBarManager toolBarManager, IStatusLineManager statusLineManager) {
+				public void makeContributions(IMenuManager menuManager,
+						IToolBarManager toolBarManager, IStatusLineManager statusLineManager) {
 					super.makeContributions(menuManager, toolBarManager, statusLineManager);
 					contentOutlineStatusLineManager = statusLineManager;
 				}
@@ -1376,7 +1346,12 @@ public class FormEditor
 				@Override
 				public void setActionBars(IActionBars actionBars) {
 					super.setActionBars(actionBars);
-					getActionBarContributor().shareGlobalActions(this, actionBars);
+					if (actionBars != null) {
+						EditingDomainActionBarContributor actionBarContributor = getActionBarContributor();
+						if (actionBarContributor != null) {
+							actionBarContributor.shareGlobalActions(this, actionBars);
+						}
+					}
 				}
 			}
 
@@ -1384,14 +1359,13 @@ public class FormEditor
 
 			// Listen to selection so that we can handle it is a special way.
 			//
-			contentOutlinePage.addSelectionChangedListener
-				(new ISelectionChangedListener() {
-					 // This ensures that we handle selections correctly.
-					 //
-					 public void selectionChanged(SelectionChangedEvent event) {
-						 handleContentOutlineSelection(event.getSelection());
-					 }
-				 });
+			contentOutlinePage.addSelectionChangedListener(new ISelectionChangedListener() {
+				// This ensures that we handle selections correctly.
+				//
+				public void selectionChanged(SelectionChangedEvent event) {
+					handleContentOutlineSelection(event.getSelection());
+				}
+			});
 		}
 
 		return contentOutlinePage;
@@ -1399,8 +1373,8 @@ public class FormEditor
 
 	/**
 	 * This accesses a cached version of the property sheet.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	public IPropertySheetPage getPropertySheetPage() {
@@ -1426,9 +1400,9 @@ public class FormEditor
 	}
 
 	/**
-	 * This deals with how we want selection in the outliner to affect the other views.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This deals with how we want selection in the outliner to affect the other views. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void handleContentOutlineSelection(ISelection selection) {
@@ -1465,9 +1439,9 @@ public class FormEditor
 	}
 
 	/**
-	 * This is for implementing {@link IEditorPart} and simply tests the command stack.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is for implementing {@link IEditorPart} and simply tests the command stack. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1476,9 +1450,9 @@ public class FormEditor
 	}
 
 	/**
-	 * This is for implementing {@link IEditorPart} and simply saves the model file.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is for implementing {@link IEditorPart} and simply saves the model file. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1540,8 +1514,7 @@ public class FormEditor
 	/**
 	 * This returns whether something has been persisted to the URI of the specified resource.
 	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream. 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected boolean isPersisted(Resource resource) {
@@ -1561,8 +1534,8 @@ public class FormEditor
 
 	/**
 	 * This always returns true because it is not currently supported.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1572,8 +1545,7 @@ public class FormEditor
 
 	/**
 	 * This also changes the editor's input.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1590,8 +1562,7 @@ public class FormEditor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void doSaveAs(URI uri, IEditorInput editorInput) {
@@ -1606,8 +1577,7 @@ public class FormEditor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void gotoMarker(IMarker marker) {
@@ -1630,8 +1600,7 @@ public class FormEditor
 
 	/**
 	 * This is called during startup.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1645,8 +1614,7 @@ public class FormEditor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1681,8 +1649,7 @@ public class FormEditor
 
 	/**
 	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to return this editor's overall selection.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ISelection getSelection() {
@@ -1706,8 +1673,7 @@ public class FormEditor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setStatusLineManager(ISelection selection) {
@@ -1741,8 +1707,8 @@ public class FormEditor
 
 	/**
 	 * This looks up a string in the plugin's plugin.properties file.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	private static String getString(String key) {
@@ -1761,8 +1727,7 @@ public class FormEditor
 
 	/**
 	 * This implements {@link org.eclipse.jface.action.IMenuListener} to help fill the context menus with contributions from the Edit menu.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void menuAboutToShow(IMenuManager menuManager) {
@@ -1770,8 +1735,7 @@ public class FormEditor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EditingDomainActionBarContributor getActionBarContributor() {
@@ -1779,8 +1743,7 @@ public class FormEditor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public IActionBars getActionBars() {
@@ -1788,8 +1751,7 @@ public class FormEditor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public AdapterFactory getAdapterFactory() {
@@ -1797,8 +1759,7 @@ public class FormEditor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

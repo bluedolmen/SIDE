@@ -702,7 +702,7 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SearchFormCollectionItemProvider SearchFormCollectionItemProvider;
+	protected SearchFormCollectionItemProvider searchFormCollectionItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link com.bluexml.side.form.SearchFormCollection}.
@@ -712,11 +712,11 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	 */
 	@Override
 	public Adapter createSearchFormCollectionAdapter() {
-		if (SearchFormCollectionItemProvider == null) {
-			SearchFormCollectionItemProvider = new SearchFormCollectionItemProvider(this);
+		if (searchFormCollectionItemProvider == null) {
+			searchFormCollectionItemProvider = new SearchFormCollectionItemProvider(this);
 		}
 
-		return SearchFormCollectionItemProvider;
+		return searchFormCollectionItemProvider;
 	}
 
 	/**
@@ -1055,7 +1055,7 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 		if (formSearchItemProvider != null) formSearchItemProvider.dispose();
 		if (numericalFieldItemProvider != null) numericalFieldItemProvider.dispose();
 		if (staticTextItemProvider != null) staticTextItemProvider.dispose();
-		if (SearchFormCollectionItemProvider != null) SearchFormCollectionItemProvider.dispose();
+		if (searchFormCollectionItemProvider != null) searchFormCollectionItemProvider.dispose();
 		if (searchFieldItemProvider != null) searchFieldItemProvider.dispose();
 		if (numericalSearchFieldItemProvider != null) numericalSearchFieldItemProvider.dispose();
 		if (charSearchFieldItemProvider != null) charSearchFieldItemProvider.dispose();

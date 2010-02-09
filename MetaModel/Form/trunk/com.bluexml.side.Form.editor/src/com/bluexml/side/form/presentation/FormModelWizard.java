@@ -179,6 +179,7 @@ public class FormModelWizard extends Wizard implements INewWizard {
 
 			initialObjectNames.add(formPackage.getClassFormCollection().getName());
 			initialObjectNames.add(formPackage.getWorkflowFormCollection().getName());
+			initialObjectNames.add(formPackage.getSearchFormCollection().getName());
 
 			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
 		}

@@ -7,22 +7,46 @@
 package com.bluexml.side.form.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import org.eclipse.emf.common.notify.Notification;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Action Field</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link com.bluexml.side.form.impl.ActionFieldImpl#getActionHandler <em>Action Handler</em>}</li>
+ * </ul>
  * </p>
  *
  * @generated
  */
 public class ActionFieldImpl extends FieldImpl implements ActionField {
+	/**
+	 * The default value of the '{@link #getActionHandler() <em>Action Handler</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActionHandler()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ACTION_HANDLER_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getActionHandler() <em>Action Handler</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActionHandler()
+	 * @generated
+	 * @ordered
+	 */
+	protected String actionHandler = ACTION_HANDLER_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,6 +64,101 @@ public class ActionFieldImpl extends FieldImpl implements ActionField {
 	@Override
 	protected EClass eStaticClass() {
 		return FormPackage.Literals.ACTION_FIELD;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getActionHandler() {
+		return actionHandler;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActionHandler(String newActionHandler) {
+		String oldActionHandler = actionHandler;
+		actionHandler = newActionHandler;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.ACTION_FIELD__ACTION_HANDLER, oldActionHandler, actionHandler));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case FormPackage.ACTION_FIELD__ACTION_HANDLER:
+				return getActionHandler();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case FormPackage.ACTION_FIELD__ACTION_HANDLER:
+				setActionHandler((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case FormPackage.ACTION_FIELD__ACTION_HANDLER:
+				setActionHandler(ACTION_HANDLER_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case FormPackage.ACTION_FIELD__ACTION_HANDLER:
+				return ACTION_HANDLER_EDEFAULT == null ? actionHandler != null : !ACTION_HANDLER_EDEFAULT.equals(actionHandler);
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (actionHandler: ");
+		result.append(actionHandler);
+		result.append(')');
+		return result.toString();
 	}
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

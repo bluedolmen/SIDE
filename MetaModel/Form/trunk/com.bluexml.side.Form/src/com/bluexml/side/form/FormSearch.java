@@ -15,7 +15,6 @@ package com.bluexml.side.form;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.form.FormSearch#getDataForm <em>Data Form</em>}</li>
  *   <li>{@link com.bluexml.side.form.FormSearch#getCombinationOperator <em>Combination Operator</em>}</li>
  * </ul>
  * </p>
@@ -24,33 +23,7 @@ package com.bluexml.side.form;
  * @model
  * @generated
  */
-public interface FormSearch extends FormContainer {
-	/**
-	 * Returns the value of the '<em><b>Data Form</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Data Form</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Form</em>' reference.
-	 * @see #setDataForm(FormClass)
-	 * @see com.bluexml.side.form.FormPackage#getFormSearch_DataForm()
-	 * @model
-	 * @generated
-	 */
-	FormClass getDataForm();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.FormSearch#getDataForm <em>Data Form</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Data Form</em>' reference.
-	 * @see #getDataForm()
-	 * @generated
-	 */
-	void setDataForm(FormClass value);
-
+public interface FormSearch extends FormContainer, ClassReference {
 	/**
 	 * Returns the value of the '<em><b>Combination Operator</b></em>' attribute.
 	 * The literals are from the enumeration {@link com.bluexml.side.form.CombinationOperators}.

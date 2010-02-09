@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.form.impl;
 
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.CombinationOperators;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormPackage;
@@ -29,7 +31,7 @@ import org.eclipse.ocl.ecore.OCL;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.form.impl.FormSearchImpl#getDataForm <em>Data Form</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FormSearchImpl#getReal_class <em>Real class</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FormSearchImpl#getCombinationOperator <em>Combination Operator</em>}</li>
  * </ul>
  * </p>
@@ -38,14 +40,14 @@ import org.eclipse.ocl.ecore.OCL;
  */
 public class FormSearchImpl extends FormContainerImpl implements FormSearch {
 	/**
-	 * The cached value of the '{@link #getDataForm() <em>Data Form</em>}' reference.
+	 * The cached value of the '{@link #getReal_class() <em>Real class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDataForm()
+	 * @see #getReal_class()
 	 * @generated
 	 * @ordered
 	 */
-	protected FormClass dataForm;
+	protected Clazz real_class;
 
 	/**
 	 * The default value of the '{@link #getCombinationOperator() <em>Combination Operator</em>}' attribute.
@@ -91,16 +93,16 @@ public class FormSearchImpl extends FormContainerImpl implements FormSearch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FormClass getDataForm() {
-		if (dataForm != null && dataForm.eIsProxy()) {
-			InternalEObject oldDataForm = (InternalEObject)dataForm;
-			dataForm = (FormClass)eResolveProxy(oldDataForm);
-			if (dataForm != oldDataForm) {
+	public Clazz getReal_class() {
+		if (real_class != null && real_class.eIsProxy()) {
+			InternalEObject oldReal_class = (InternalEObject)real_class;
+			real_class = (Clazz)eResolveProxy(oldReal_class);
+			if (real_class != oldReal_class) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.FORM_SEARCH__DATA_FORM, oldDataForm, dataForm));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.FORM_SEARCH__REAL_CLASS, oldReal_class, real_class));
 			}
 		}
-		return dataForm;
+		return real_class;
 	}
 
 	/**
@@ -108,8 +110,8 @@ public class FormSearchImpl extends FormContainerImpl implements FormSearch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FormClass basicGetDataForm() {
-		return dataForm;
+	public Clazz basicGetReal_class() {
+		return real_class;
 	}
 
 	/**
@@ -117,11 +119,11 @@ public class FormSearchImpl extends FormContainerImpl implements FormSearch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDataForm(FormClass newDataForm) {
-		FormClass oldDataForm = dataForm;
-		dataForm = newDataForm;
+	public void setReal_class(Clazz newReal_class) {
+		Clazz oldReal_class = real_class;
+		real_class = newReal_class;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_SEARCH__DATA_FORM, oldDataForm, dataForm));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_SEARCH__REAL_CLASS, oldReal_class, real_class));
 	}
 
 	/**
@@ -153,9 +155,9 @@ public class FormSearchImpl extends FormContainerImpl implements FormSearch {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FormPackage.FORM_SEARCH__DATA_FORM:
-				if (resolve) return getDataForm();
-				return basicGetDataForm();
+			case FormPackage.FORM_SEARCH__REAL_CLASS:
+				if (resolve) return getReal_class();
+				return basicGetReal_class();
 			case FormPackage.FORM_SEARCH__COMBINATION_OPERATOR:
 				return getCombinationOperator();
 		}
@@ -170,8 +172,8 @@ public class FormSearchImpl extends FormContainerImpl implements FormSearch {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FormPackage.FORM_SEARCH__DATA_FORM:
-				setDataForm((FormClass)newValue);
+			case FormPackage.FORM_SEARCH__REAL_CLASS:
+				setReal_class((Clazz)newValue);
 				return;
 			case FormPackage.FORM_SEARCH__COMBINATION_OPERATOR:
 				setCombinationOperator((CombinationOperators)newValue);
@@ -188,8 +190,8 @@ public class FormSearchImpl extends FormContainerImpl implements FormSearch {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FormPackage.FORM_SEARCH__DATA_FORM:
-				setDataForm((FormClass)null);
+			case FormPackage.FORM_SEARCH__REAL_CLASS:
+				setReal_class((Clazz)null);
 				return;
 			case FormPackage.FORM_SEARCH__COMBINATION_OPERATOR:
 				setCombinationOperator(COMBINATION_OPERATOR_EDEFAULT);
@@ -206,12 +208,44 @@ public class FormSearchImpl extends FormContainerImpl implements FormSearch {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FormPackage.FORM_SEARCH__DATA_FORM:
-				return dataForm != null;
+			case FormPackage.FORM_SEARCH__REAL_CLASS:
+				return real_class != null;
 			case FormPackage.FORM_SEARCH__COMBINATION_OPERATOR:
 				return combinationOperator != COMBINATION_OPERATOR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ClassReference.class) {
+			switch (derivedFeatureID) {
+				case FormPackage.FORM_SEARCH__REAL_CLASS: return FormPackage.CLASS_REFERENCE__REAL_CLASS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ClassReference.class) {
+			switch (baseFeatureID) {
+				case FormPackage.CLASS_REFERENCE__REAL_CLASS: return FormPackage.FORM_SEARCH__REAL_CLASS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
