@@ -38,8 +38,7 @@ rule ReqDefs {
 	to data : Data!Model (
 		name <- s.name,
 		description <- 'Data model generated from requirements model.',
-		classSet <- Reqs!Entity->allInstances(),
-		associationSet <- Reqs!RelationShip->allInstances()
+		packageSet <- Sequence{packageOrg}
 	),
 	form : DataForm!ClassFormCollection(
 		forms <- Reqs!PrivilegeGroup->allInstances()
@@ -49,6 +48,19 @@ rule ReqDefs {
 		packageSet <- Reqs!Process->allInstances()
 	),
 	wfForm : WorkflowForm!WorkflowFormCollection(
+	),
+	packageOrg : Data!ClassPackage (
+		name <- 'org',
+		packageSet <- Sequence{packageSide}
+	),
+	packageSide : Data!ClassPackage (
+		name <- 'side',
+		packageSet <- Sequence{packageModels}
+	),
+	packageModels : Data!ClassPackage (
+		name <- 'models',
+		classSet <- Reqs!Entity->allInstances(),
+		associationSet <- Reqs!RelationShip->allInstances()
 	)
 	do {
 		thisModule.dataFormsCollection <- form;
