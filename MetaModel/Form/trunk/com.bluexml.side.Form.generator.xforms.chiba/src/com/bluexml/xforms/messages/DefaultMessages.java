@@ -13,14 +13,21 @@ import java.io.IOException;
 public class DefaultMessages {
 
 	private static final String[] allFormsProperties = {
-			"# address of the Alfresco server",
-			"alfresco.url=http://localhost:8080/alfresco",
+			"#",
+			"# NON-RELOADABLE ENTRIES",
+			"#",
 			"# CAS server URL",
 			"cas.url=https://CASserver:8443/cas",
 			"# hostname and port used by the XForms web application",
 			"cas.serverName=127.0.0.1:8081",
 			"# enable cas authentication",
 			"cas.enabled=false",
+			"#",
+			"#",
+			"# RELOADABLE ENTRIES",
+			"#",
+			"# address of the Alfresco server",
+			"alfresco.url=http://localhost:8080/alfresco",
 			"# number of results displayed in selection lists of associations. 0 = unlimited (dangerous)",
 			"selection.list.max.results=50",
 			"",
@@ -32,9 +39,11 @@ public class DefaultMessages {
 			"upload.directory.random.path.depth=3",
 			"",
 			"# path for uploads in the repository. If not given, \"/app:company_home\" is used.",
-			"upload.repository=/app:company_home/app:user_homes",
+			"upload.repository=/app:company_home/app:user_homes/cm:store/cm:uploads",
 			"# whether names of non-content files uploaded to the repository are appended with a '(x)' in case the initial name already exists.",
-			"upload.repository.append.suffix=true", "", "# authentication", "user.name=admin",
+			"upload.repository.append.suffix=true",
+			"# whether the information of repository uploads are formatted in the same way as content information",
+			"upload.repository.format.info=true", "", "# authentication", "user.name=admin",
 			"user.pswd=admin" };
 
 	private static final String[] allMessagesProperties = {
