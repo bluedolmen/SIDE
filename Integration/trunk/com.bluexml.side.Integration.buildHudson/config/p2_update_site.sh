@@ -1,7 +1,8 @@
-if [ $# -eq 3 ]; then
+if [ $# -eq 4 ]; then
   eclipse_launcher=$1
   new_update_site=$2
   update_site=$3
+  url=$4
 else
   echo "Usage: launch_maven.sh WORKSPACE REPOSITORY_COPY"
   echo "       with eclipse_launcher =   path of the plugin org.eclipse.equinox.launcher_1.0.200.v20090520.jar"
@@ -26,7 +27,7 @@ done
 
 
 cp $update_site/site.xml $new_update_site
-perl -pi -e 's/<site>/<site pack200="true" digestURL="http:\/\/www.side-labs.org\/SIDE-Labs\/2.0\/update-site\/" >/g' $new_update_site/site.xml
+perl -pi -e 's/<site>/<site pack200="true" digestURL="$url" >/g' $new_update_site/site.xml
 
 echo "Generate digest.zip"
 java -jar $eclipse_launcher -application org.eclipse.update.core.siteOptimizer -digestBuilder  -digestOutputDir=$new_update_site -siteXML=$new_update_site/site.xml -jarProcessor -pack -outputDir $new_update_site $new_update_site
