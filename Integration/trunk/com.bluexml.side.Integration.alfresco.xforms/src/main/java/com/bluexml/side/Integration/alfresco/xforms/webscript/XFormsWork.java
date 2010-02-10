@@ -1055,13 +1055,24 @@ public class XFormsWork implements RunAsWork<String> {
 		try {
 			results = dataLayer.request(location);
 		} catch (Exception e) {
-			logger.error("Error while requesting for upload location: " + location, e);
+			logger.error("Error while testing existence of upload location: " + location, e);
 			return FAILURE;
 		}
 		if (results.size() == 0) {
-			logger.error("Can't upload to '" + location
-					+ "': the repository folder does not exist.");
-			return FAILURE;
+			if (logger.isDebugEnabled()) {
+				logger.debug(location + " does not exist: trying to create it.");
+			}
+			try {
+				NodeRef createdPath = dataLayer.createPath(location);
+				results = new ArrayList<NodeRef>(1);
+				results.add(createdPath);
+				if (logger.isDebugEnabled()) {
+					logger.debug("Suceeded in creating upload location '" + location + "'.");
+				}
+			} catch (Exception e) {
+				logger.error("Creation of '" + location + "' failed. Giving up on the upload.", e);
+				return FAILURE;
+			}
 		}
 		parent = results.get(0);
 		// set node type and other qnames
