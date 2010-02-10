@@ -305,8 +305,9 @@ public class DataLayer implements DataLayerInterface {
 		if (where == null) {
 			where = getDefaultNodePath(nodeTypeQName);
 		}
-		logger.debug(" createNode :");
-		logger.debug(" NodePath :" + where);
+		if (logger.isDebugEnabled()) {
+			logger.debug(" createNode: NodePath=" + where);
+		}
 
 		NodeRef parent = createPath(where);
 		NodeRef newNode = null;
@@ -325,10 +326,15 @@ public class DataLayer implements DataLayerInterface {
 			try {
 				serviceRegistry.getFileFolderService().rename(newNode, nodeName);
 			} catch (FileExistsException e) {
-				logger.debug("Failed to rename", e);
+				if (logger.isDebugEnabled()) {
+					logger.debug("Failed to rename node '" + newNode + "' into '" + nodeName + "'",
+							e);
+				}
 			}
 		}
-		logger.debug(" NodeProperties :" + nodeService.getProperties(newNode));
+		if (logger.isDebugEnabled()) {
+			logger.debug(" NodeProperties :" + nodeService.getProperties(newNode));
+		}
 		return newNode;
 	}
 
@@ -589,8 +595,10 @@ public class DataLayer implements DataLayerInterface {
 	 */
 	private synchronized void createAssociation(NodeRef nodeRef, QName source,
 			AssociationBean associationBean) throws Exception {
-		logger.debug("createAssociation : NodeRef =" + nodeRef + " NodeType=" + source
-				+ " AssoBean=" + associationBean);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createAssociation : NodeRef =" + nodeRef + " NodeType=" + source
+					+ " AssoBean=" + associationBean);
+		}
 		// extract datas from assos Map
 		QName targetQualifiedName = getDataTypeQName(associationBean.getTargetQualifiedName());
 		String targetRef = associationBean.getTargetId();
@@ -608,6 +616,10 @@ public class DataLayer implements DataLayerInterface {
 		}
 		if (success == false) {
 			logger.error("createAssociation: failure.");
+		} else {
+			if (logger.isDebugEnabled()) {
+				logger.debug("createAssociation: success");
+			}
 		}
 	}
 
@@ -688,7 +700,9 @@ public class DataLayer implements DataLayerInterface {
 	 */
 	private NodeRef updateAssociations(NodeRef nodeRef, QName nodeType, List<AssociationBean> list,
 			boolean deleteAllAssociations) throws Exception {
-		logger.debug("UpdateAssociations");
+		if (logger.isDebugEnabled()) {
+			logger.debug("UpdateAssociations: nodeRef=" + nodeRef);
+		}
 		if (deleteAllAssociations) {
 			// remove all associations of any Type !!
 			QName removeNodeType = nodeService.getType(nodeRef);
@@ -793,8 +807,10 @@ public class DataLayer implements DataLayerInterface {
 	 */
 	private void removeAssociation(NodeRef nodeRef, QName nodeType, AssociationBean associationBean)
 			throws Exception {
-		logger.debug("RemoveAssociation : NodeRef =" + nodeRef + " NodeType=" + nodeType
-				+ " AssoBean=" + associationBean);
+		if (logger.isDebugEnabled()) {
+			logger.debug("RemoveAssociation : NodeRef =" + nodeRef + " NodeType=" + nodeType
+					+ " AssoBean=" + associationBean);
+		}
 		QName assoType = getAssociationQName(nodeType, associationBean.getAssociationName());
 		AssociationRef asso = new AssociationRef(nodeRef, assoType, new NodeRef(associationBean
 				.getTargetId()));
@@ -1375,8 +1391,10 @@ public class DataLayer implements DataLayerInterface {
 			properties.put(ContentModel.PROP_CONTENT, writer.getContentData());
 			this.serviceRegistry.getNodeService().setProperties(newNode, properties);
 			resultId = StringEscapeUtils.escapeXml(newNode.toString());
-			logger.debug(" File '" + filename + "' (size: " + sizeUploaded + ") uploaded to node: "
-					+ resultId);
+			if (logger.isDebugEnabled()) {
+				logger.debug(" File '" + filename + "' (size: " + sizeUploaded
+						+ ") uploaded to node: " + resultId);
+			}
 			// set the node name
 			if (applyName) {
 				if (shouldAppendSuffix) {
@@ -1390,7 +1408,9 @@ public class DataLayer implements DataLayerInterface {
 							idx++;
 							currentName = filename + " (" + idx + ")";
 						} catch (org.alfresco.service.cmr.model.FileNotFoundException e) {
-							logger.debug("Failed to rename: the node to rename does not exist!", e);
+							if (logger.isDebugEnabled()) {
+								logger.debug("Failed to rename: the node does not exist!", e);
+							}
 							return FAILURE;
 						}
 					}
@@ -1398,10 +1418,14 @@ public class DataLayer implements DataLayerInterface {
 					try {
 						serviceRegistry.getFileFolderService().rename(newNode, filename);
 					} catch (FileExistsException e) {
-						logger.debug("Failed to rename: the file already exists!", e);
+						if (logger.isDebugEnabled()) {
+							logger.debug("Failed to rename: the file already exists!", e);
+						}
 						return FAILURE;
 					} catch (org.alfresco.service.cmr.model.FileNotFoundException e) {
-						logger.debug("Failed to rename: the node to rename does not exist!", e);
+						if (logger.isDebugEnabled()) {
+							logger.debug("Failed to rename: the node to rename does not exist!", e);
+						}
 						return FAILURE;
 					}
 				}
