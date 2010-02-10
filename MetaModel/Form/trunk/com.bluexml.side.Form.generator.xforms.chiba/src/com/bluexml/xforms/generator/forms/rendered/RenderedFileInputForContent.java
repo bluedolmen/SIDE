@@ -38,18 +38,19 @@ public class RenderedFileInputForContent extends Rendered {
 		Element filenameElement = XFormsGenerator.createElement("output",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		StringBuffer valueFilename = new StringBuffer();
-		valueFilename.append("if (current()/");
-		valueFilename.append(meb.getNodeset());
-		valueFilename.append(" eq '') then '' else (if (not(starts-with(current()/");
-		valueFilename.append(meb.getNodeset());
+		String curNodeSet = "current()/" + meb.getNodeset();
+		valueFilename.append("if (");
+		valueFilename.append(curNodeSet);
+		valueFilename.append(" eq '') then '' else (if (not(starts-with(");
+		valueFilename.append(curNodeSet);
 		valueFilename.append(", 'file'))) then concat('");
 		valueFilename.append(MsgPool.getMsg(MsgId.MSG_UPLOAD_CONTENT_REPO_INFO));
-		valueFilename.append("', current()/");
-		valueFilename.append(meb.getNodeset());
+		valueFilename.append("', ");
+		valueFilename.append(curNodeSet);
 		valueFilename.append(") else concat('");
 		valueFilename.append(MsgPool.getMsg(MsgId.MSG_FILE_FIELD_FILENAME_TEMP));
-		valueFilename.append("', current()/");
-		valueFilename.append(meb.getNodeset());
+		valueFilename.append("', ");
+		valueFilename.append(curNodeSet);
 		valueFilename.append("))");
 		filenameElement.setAttribute("value", valueFilename.toString());
 		filenameElement.setAttribute("mediatype", "text/html");
