@@ -37,5 +37,5 @@ echo "Generate content.jar and artifact.jar"
 java -jar $eclipse_launcher -application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator -updateSite $new_update_site site file:$new_update_site/site.xml -metadataRepository file:$new_update_site -metadataRepositoryName "SIDE Update Site" -artifactRepository file:$new_update_site -artifactRepositoryName "SIDE Artifacts" -compress -reusePack200Files -noDefaultIUs -vmargs -Xmx256M
 
 cp $new_update_site/site.xml $new_update_site/category.xml
-java -jar $eclipse_launcher -application -application org.eclipse.equinox.p2.publisher.CategoryPublisher  -metadataRepository file:$new_update_site  -categoryDefinition file:$new_update_site/cat/category.xml -compress
+java -jar $eclipse_launcher -application -application org.eclipse.equinox.p2.publisher.CategoryPublisher  -metadataRepository file:$new_update_site  -categoryDefinition file:$new_update_site/category.xml -compress
 rm $new_update_site/category.xml
