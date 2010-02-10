@@ -36,6 +36,7 @@ public enum MsgId {
 	/** The key for the repository upload path.*/
 	KEY_UPLOAD_REPOSITORY("upload.repository"),
 	KEY_UPLOAD_REPOSITORY_APPEND("upload.repository.append.suffix"),
+	KEY_UPLOAD_REPOSITORY_FORMAT_INFO("upload.repository.format.info"),
 	KEY_USER_NAME("user.name"),
 	KEY_USER_PSWD("user.pswd"),
 	// keys for messages in the message.properties file; user-changeable
@@ -282,6 +283,7 @@ public enum MsgId {
 	PARAM_UPLOAD_DIRECTORY("uploadDirectory"),
 	PARAM_UPLOAD_REPOSITORY("uploadRepository"),
 	PARAM_UPLOAD_REPOSITORY_APPEND("uploadRepoAppend"),
+	PARAM_UPLOAD_REPOSITORY_FORMAT("uploadRepoFormat"),
 	PARAM_WORKFLOW_INSTANCE_ID("workflowInstanceId"),
 	PARAM_WORKFLOW_PROCESS_ID("workflowProcessId");
 

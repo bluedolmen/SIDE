@@ -93,6 +93,9 @@ public class AlfrescoController {
 	/** Whether file names of uploads receive a '(x)' in case the initial name already exists. */
 	public static boolean UPLOAD_REPOSITORY_APPEND = true;
 
+	/** whether info of repository uploads are formatted in the same way as content information*/
+	public static boolean UPLOAD_REPOSITORY_FORMAT_INFO = false;
+	
 	/** The temp directory. */
 	public static File TEMP_DIRECTORY = null;
 
@@ -741,7 +744,7 @@ public class AlfrescoController {
 		return (result != null) ? result : UPLOAD_REPOSITORY;
 	}
 
-	public boolean getUploadRepoAppendSuffix() {
+	public boolean getParamUploadRepoAppendSuffix() {
 		String paramStr = null;
 		if (initParameters != null) {
 			paramStr = initParameters.get(MsgId.PARAM_UPLOAD_REPOSITORY_APPEND.getText());
@@ -752,6 +755,17 @@ public class AlfrescoController {
 		return UPLOAD_REPOSITORY_APPEND;
 	}
 
+	public boolean getParamUploadRepoFormatInfo() {
+		String paramStr = null;
+		if (initParameters != null) {
+			paramStr = initParameters.get(MsgId.PARAM_UPLOAD_REPOSITORY_FORMAT.getText());
+		}
+		if (StringUtils.trimToNull(paramStr) != null) {
+			return !(StringUtils.equals(paramStr, "false"));
+		}
+		return UPLOAD_REPOSITORY_FORMAT_INFO;
+	}
+	
 	/**
 	 * Processes all upload fields on initial submission. Moves filesystem uploads to the directory,
 	 * stores repo uploads into the repository and attaches the (possible) node content to the

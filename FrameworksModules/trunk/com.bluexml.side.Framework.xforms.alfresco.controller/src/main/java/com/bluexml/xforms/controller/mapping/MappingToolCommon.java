@@ -832,7 +832,7 @@ public class MappingToolCommon {
 				String type = attribute.getValue().get(2).getValue();
 
 				list.add(new RepoContentInfoBean(path, name, type, attribute, controller
-						.getUploadRepoAppendSuffix()));
+						.getParamUploadRepoAppendSuffix()));
 			}
 		}
 
