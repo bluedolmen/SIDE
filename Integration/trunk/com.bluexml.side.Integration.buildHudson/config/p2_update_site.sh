@@ -27,7 +27,7 @@ done
 
 
 cp $update_site/site.xml $new_update_site
-perl -pi -e 's/<site>/<site pack200="true" digestURL="$url" >/g' $new_update_site/site.xml
+perl -pi -e 's/<site>/<site pack200="true" digestURL="'$url'" >/g' $new_update_site/site.xml
 
 echo "Generate digest.zip"
 java -jar $eclipse_launcher -application org.eclipse.update.core.siteOptimizer -digestBuilder  -digestOutputDir=$new_update_site -siteXML=$new_update_site/site.xml -jarProcessor -pack -outputDir $new_update_site $new_update_site
