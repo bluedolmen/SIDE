@@ -32,7 +32,7 @@ public enum MsgId {
 	KEY_TEMP_DIRECTORY("temp.directory"),
 	/** The key for the complete path when uploading to file system.*/
 	KEY_UPLOAD_DIRECTORY("upload.directory"),
-	KEY_UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH("upload.directory.random.path.depth"),
+	KEY_UPLOAD_DIR_PATH_DEPTH("upload.directory.random.path.depth"),
 	/** The key for the repository upload path.*/
 	KEY_UPLOAD_REPOSITORY("upload.repository"),
 	KEY_UPLOAD_REPOSITORY_APPEND("upload.repository.append.suffix"),
@@ -245,6 +245,7 @@ public enum MsgId {
 	/** output param for redirection; indicates which workflow form the redirection comes from*/ 
 	PARAM_LANGUAGE ("language"),
 	PARAM_LEAVING_FORM("leavingForm"),
+	PARAM_MAX_RESULTS("maxResults"),
 	/** filesystem path to the forms.properties file*/
 	PARAM_PROPERTIES_FILE_FORMS ("formsPropertiesFile"),
 	/** filesystem path to the messages.properties file*/
@@ -277,6 +278,7 @@ public enum MsgId {
 	PARAM_STATUS_MSG("statusMsg"),
 	PARAM_USER_NAME("userName"),
 	PARAM_USER_PSWD("userPswd"),
+	PARAM_UPLOAD_DEPTH("uploadDepth"),
 	PARAM_UPLOAD_DIRECTORY("uploadDirectory"),
 	PARAM_UPLOAD_REPOSITORY("uploadRepository"),
 	PARAM_UPLOAD_REPOSITORY_APPEND("uploadRepoAppend"),

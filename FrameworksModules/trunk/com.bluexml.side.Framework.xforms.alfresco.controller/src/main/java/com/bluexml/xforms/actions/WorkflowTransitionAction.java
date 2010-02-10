@@ -446,7 +446,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		}
 
 		// save the task's current state
-		if (controller.workflowUpdateTask(transaction, task.id, properties, null, null) == null) {
+		if (controller.workflowUpdateTask(transaction, task.id, properties) == null) {
 			navigationPath.setStatusMsg("Transition not followed. Failed while updating the task.");
 			return resultBean;
 		}
@@ -489,7 +489,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 */
 	private String getCurrentUserName() {
 		userName = currentPage.getInitParams().get(MsgId.PARAM_USER_NAME.getText());
-		return (userName != null) ? userName : controller.getLoginUserName();
+		return (userName != null) ? userName : controller.getParamLoginUserName();
 	}
 
 	/**
@@ -510,7 +510,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		if (refPool == null) {
 			return false;
 		}
-		Set<String> auths = controller.systemGetContaingGroups(userName);
+		Set<String> auths = controller.systemGetContainingGroups(userName);
 		String refGroup = PermissionService.GROUP_PREFIX + refPool;
 		if (auths != null) {
 			for (String group : auths) {
@@ -637,7 +637,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 					}
 					//
 					properties.put(WorkflowModel.ASSOC_POOLED_ACTORS, (Serializable) refToActors);
-					controller.workflowUpdateTask(transaction, task.id, properties, null, null);
+					controller.workflowUpdateTask(transaction, task.id, properties);
 				}
 			}
 			String nextTasksTitles = buildNextTasksTitles(tasks);
@@ -768,7 +768,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		String methodName = "getDefinitionByName";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(AlfrescoController.workflowBuildBlueXMLDefinitionName(processName));
-		WorkflowDefinition def = (WorkflowDefinition) controller.workflowRequest(transaction,
+		WorkflowDefinition def = (WorkflowDefinition) controller.workflowRequestWrapper(transaction,
 				methodName, methodParameters);
 		return (def != null) ? def.id : null;
 	}

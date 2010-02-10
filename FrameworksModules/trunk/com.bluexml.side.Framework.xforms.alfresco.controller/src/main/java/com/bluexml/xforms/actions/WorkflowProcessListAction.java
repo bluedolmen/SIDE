@@ -102,7 +102,7 @@ public class WorkflowProcessListAction extends AbstractReadAction {
 
 		// retrieve the process definitions id
 		List<WorkflowDefinition> processList;
-		processList = (List<WorkflowDefinition>) controller.workflowRequest(transaction,
+		processList = (List<WorkflowDefinition>) controller.workflowRequestWrapper(transaction,
 				"getDefinitions", new Vector<Object>());
 		// for each relevant definition, return an item
 		for (WorkflowDefinition process : processList) {
