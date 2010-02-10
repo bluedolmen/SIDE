@@ -71,7 +71,7 @@ public class CallWorkflow {
 	}
 
 	private static void listAuthorities(String userName) {
-		Set<String> auths = controller.systemGetContaingGroups(userName);
+		Set<String> auths = controller.systemGetContainingGroups(userName);
 		System.out.println("Groups for user " + userName + " --------");
 		if (auths == null) {
 			System.out.println("no containing groups");
@@ -273,9 +273,9 @@ public class CallWorkflow {
 		String methodName = "getPooledTasks";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(userName);
-		List<WorkflowTask> workflowRequest = (List<WorkflowTask>) controller.workflowRequest(
+		List<WorkflowTask> workflowRequestWrapper = (List<WorkflowTask>) controller.workflowRequestWrapper(
 				transaction, methodName, methodParameters);
-		return workflowRequest;
+		return workflowRequestWrapper;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -285,16 +285,16 @@ public class CallWorkflow {
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(userName);
 		methodParameters.add(WorkflowTaskState.IN_PROGRESS);
-		List<WorkflowTask> workflowRequest = (List<WorkflowTask>) controller.workflowRequest(
+		List<WorkflowTask> workflowRequestWrapper = (List<WorkflowTask>) controller.workflowRequestWrapper(
 				transaction, methodName, methodParameters);
-		return workflowRequest;
+		return workflowRequestWrapper;
 	}
 
 	private static void callUndeployDefinition(String defId) throws AlfrescoControllerException {
 		String methodName = "undeployDefinition";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(defId);
-		controller.workflowRequest(transaction, methodName, methodParameters);
+		controller.workflowRequestWrapper(transaction, methodName, methodParameters);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -305,9 +305,9 @@ public class CallWorkflow {
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(nodeRef);
 		methodParameters.add(onlyActive);
-		List<WorkflowInstance> workflowRequest = (List<WorkflowInstance>) controller
-				.workflowRequest(transaction, methodName, methodParameters);
-		return workflowRequest;
+		List<WorkflowInstance> workflowRequestWrapper = (List<WorkflowInstance>) controller
+				.workflowRequestWrapper(transaction, methodName, methodParameters);
+		return workflowRequestWrapper;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -316,9 +316,9 @@ public class CallWorkflow {
 		String methodName = "getTaskDefinitions";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(defId);
-		List<WorkflowTaskDefinition> workflowRequest = (List<WorkflowTaskDefinition>) controller
-				.workflowRequest(transaction, methodName, methodParameters);
-		return workflowRequest;
+		List<WorkflowTaskDefinition> workflowRequestWrapper = (List<WorkflowTaskDefinition>) controller
+				.workflowRequestWrapper(transaction, methodName, methodParameters);
+		return workflowRequestWrapper;
 	}
 
 	private static WorkflowInstance callGetWorkflowById(String refStr)
@@ -326,16 +326,16 @@ public class CallWorkflow {
 		String methodName = "getWorkflowById";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(refStr);
-		WorkflowInstance workflowRequest = (WorkflowInstance) controller.workflowRequest(
+		WorkflowInstance workflowRequestWrapper = (WorkflowInstance) controller.workflowRequestWrapper(
 				transaction, methodName, methodParameters);
-		return workflowRequest;
+		return workflowRequestWrapper;
 	}
 
 	private static boolean callDeleteWorkflow(String instanceId) throws Exception {
 		String methodName = "deleteWorkflow";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(instanceId);
-		if (controller.workflowRequest(transaction, methodName, methodParameters) == null) {
+		if (controller.workflowRequestWrapper(transaction, methodName, methodParameters) == null) {
 			return false;
 		}
 		return true;
@@ -349,18 +349,18 @@ public class CallWorkflow {
 		String methodName = "createPackage";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(null);
-		NodeRef workflowRequest = (NodeRef) controller.workflowRequest(transaction, methodName,
+		NodeRef workflowRequestWrapper = (NodeRef) controller.workflowRequestWrapper(transaction, methodName,
 				methodParameters);
-		return workflowRequest;
+		return workflowRequestWrapper;
 	}
 
 	@SuppressWarnings("unchecked")
 	private static List<WorkflowDefinition> callGetDefinitions() throws AlfrescoControllerException {
 		String methodName = "getAllDefinitions";
 		List<Object> methodParameters = new ArrayList<Object>();
-		List<WorkflowDefinition> workflowRequest = (List<WorkflowDefinition>) controller
-				.workflowRequest(transaction, methodName, methodParameters);
-		return workflowRequest;
+		List<WorkflowDefinition> workflowRequestWrapper = (List<WorkflowDefinition>) controller
+				.workflowRequestWrapper(transaction, methodName, methodParameters);
+		return workflowRequestWrapper;
 	}
 
 	private static WorkflowDefinition callGetDefinition(String processId)
@@ -368,9 +368,9 @@ public class CallWorkflow {
 		String methodName = "getDefinitionById";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(processId);
-		WorkflowDefinition workflowRequest = (WorkflowDefinition) controller.workflowRequest(
+		WorkflowDefinition workflowRequestWrapper = (WorkflowDefinition) controller.workflowRequestWrapper(
 				transaction, methodName, methodParameters);
-		return workflowRequest;
+		return workflowRequestWrapper;
 	}
 
 	private static WorkflowDefinition callGetDefinitionByName(String processId)
@@ -378,9 +378,9 @@ public class CallWorkflow {
 		String methodName = "getDefinitionByName";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(processId);
-		WorkflowDefinition workflowRequest = (WorkflowDefinition) controller.workflowRequest(
+		WorkflowDefinition workflowRequestWrapper = (WorkflowDefinition) controller.workflowRequestWrapper(
 				transaction, methodName, methodParameters);
-		return workflowRequest;
+		return workflowRequestWrapper;
 	}
 
 	private static void callStartWorkflow() throws AlfrescoControllerException {
@@ -388,9 +388,9 @@ public class CallWorkflow {
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add("jbpm$1");
 		methodParameters.add(new HashMap<QName, Serializable>());
-		WorkflowPath workflowRequest = (WorkflowPath) controller.workflowRequest(transaction,
+		WorkflowPath workflowRequestWrapper = (WorkflowPath) controller.workflowRequestWrapper(transaction,
 				methodName, methodParameters);
-		System.out.println(workflowRequest);
+		System.out.println(workflowRequestWrapper);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -399,14 +399,14 @@ public class CallWorkflow {
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add("jbpm$1");
 		methodParameters.add(new HashMap<QName, Serializable>());
-		WorkflowPath workflowRequest = (WorkflowPath) controller.workflowRequest(transaction,
+		WorkflowPath workflowRequestWrapper = (WorkflowPath) controller.workflowRequestWrapper(transaction,
 				"startWorkflow", methodParameters);
 
 		// get the paths from the instance we know does exist
 		List<WorkflowPath> paths = null;
 		Vector<Object> paramList = new Vector<Object>();
-		paramList.add(workflowRequest.instance.id);
-		paths = (List<WorkflowPath>) controller.workflowRequest(null, "getWorkflowPaths",
+		paramList.add(workflowRequestWrapper.instance.id);
+		paths = (List<WorkflowPath>) controller.workflowRequestWrapper(null, "getWorkflowPaths",
 				paramList);
 		if (paths == null) {
 			System.out.println("paths is empty");
@@ -430,7 +430,7 @@ public class CallWorkflow {
 		List<WorkflowTask> tasks = null;
 		Vector<Object> paramTaskList = new Vector<Object>();
 		paramTaskList.add(path.id);
-		tasks = (List<WorkflowTask>) controller.workflowRequest(null,
+		tasks = (List<WorkflowTask>) controller.workflowRequestWrapper(null,
 				"getTasksForWorkflowPath", paramTaskList);
 		if (tasks == null) {
 			System.out.println("No tasks found");
