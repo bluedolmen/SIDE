@@ -50,7 +50,7 @@ public abstract class AbstractServlet extends HttpServlet {
 	protected AlfrescoTransaction createTransaction(
 			AlfrescoController controller) {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(controller);
-		transaction.setLogin(controller.getLoginUserName());
+		transaction.setLogin(controller.getParamLoginUserName());
 		return transaction;
 	}
 

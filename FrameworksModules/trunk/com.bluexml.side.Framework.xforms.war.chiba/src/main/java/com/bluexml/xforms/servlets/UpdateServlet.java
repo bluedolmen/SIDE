@@ -57,7 +57,7 @@ public class UpdateServlet extends AbstractServlet {
 
 			AlfrescoTransaction transaction = new AlfrescoTransaction(
 					controller);
-			transaction.setLogin(controller.getLoginUserName());
+			transaction.setLogin(controller.getParamLoginUserName());
 			controller.persistClass(transaction, node, idAsServlet);
 			transaction.executeBatch();
 		} catch (Exception e) {

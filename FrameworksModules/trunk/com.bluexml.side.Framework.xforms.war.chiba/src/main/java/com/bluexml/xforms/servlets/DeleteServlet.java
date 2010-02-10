@@ -54,7 +54,7 @@ public class DeleteServlet extends AbstractServlet {
 			dataId = AlfrescoController.patchDataId(dataId);
 			AlfrescoTransaction transaction = new AlfrescoTransaction(
 					controller);
-			transaction.setLogin(controller.getLoginUserName());
+			transaction.setLogin(controller.getParamLoginUserName());
 			controller.delete(transaction, dataId);
 			transaction.executeBatch();
 		} catch (Exception e) {
