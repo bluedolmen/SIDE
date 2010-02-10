@@ -2808,7 +2808,7 @@ public class AlfrescoController {
 				sizeUnit = getFileSizeShortReadable(size, multiplier);
 			}
 			result = MsgPool.getMsg(MsgId.MSG_UPLOAD_CONTENT_REPO_FORMAT, nodeName, sizeBytes,
-					sizeUnit);
+					sizeUnit, nodeId);
 		} else {
 			result = MsgPool.getMsg(MsgId.MSG_UPLOAD_CONTENT_NO_CONTENT);
 		}
