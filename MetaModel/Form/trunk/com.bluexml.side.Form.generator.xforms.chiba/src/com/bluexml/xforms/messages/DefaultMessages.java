@@ -43,7 +43,7 @@ public class DefaultMessages {
 			"# whether names of non-content files uploaded to the repository are appended with a '(x)' in case the initial name already exists.",
 			"upload.repository.append.suffix=true",
 			"# whether the information of repository uploads are formatted in the same way as content information",
-			"upload.repository.format.info=true", "", "# authentication", "user.name=admin",
+			"upload.repository.format.info=false", "", "# authentication", "user.name=admin",
 			"user.pswd=admin" };
 
 	private static final String[] allMessagesProperties = {
