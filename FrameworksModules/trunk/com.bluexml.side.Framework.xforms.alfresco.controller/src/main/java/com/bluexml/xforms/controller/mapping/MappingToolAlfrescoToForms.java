@@ -864,7 +864,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		GenericClass result = alfrescoNodes.get(alfrescoId);
 		if (result == null) {
 			try {
-				result = unmarshal(controller.processRead(transaction, alfrescoId));
+				result = unmarshal(controller.readObjectFromRepository(transaction, alfrescoId));
 			} catch (Exception e) {
 				throw new ServletException(e);
 			}

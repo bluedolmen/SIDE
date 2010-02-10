@@ -441,7 +441,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 		Node subNode;
 		Document inlineElement = null;
 		try {
-			inlineElement = controller.getElement(transaction, alfrescoTargetId, stack,
+			inlineElement = controller.getObjectInstance(transaction, alfrescoTargetId, stack,
 					formIsReadOnly, isServletRequest);
 		} catch (ServletException e) {
 			throw new RuntimeException(e);

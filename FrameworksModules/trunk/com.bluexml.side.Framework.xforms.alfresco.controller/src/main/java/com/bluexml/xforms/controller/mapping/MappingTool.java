@@ -388,9 +388,6 @@ public class MappingTool {
 		return ""; // normally, we should never get here (unless there are multiple violations)
 	}
 
-	//
-	// Bridge functions.
-	//
 	public FormType getFormType(String refName) {
 		return mappingToolAlfrescoToForms.getFormType(refName);
 	}
@@ -403,8 +400,8 @@ public class MappingTool {
 		return mappingToolAlfrescoToForms.getWorkflowTaskTypeWithField(fieldName);
 	}
 
-	public FormFieldType getFormFieldTypeFromCanister(CanisterType taskType, String fieldName) {
-		return mappingToolAlfrescoToForms.getFormFieldTypeFromCanister(taskType, fieldName);
+	public FormFieldType getFormFieldTypeFromCanister(CanisterType formType, String fieldName) {
+		return mappingToolAlfrescoToForms.getFormFieldTypeFromCanister(formType, fieldName);
 	}
 
 	public void collectTaskProperties(Document instance, Element taskElt,
