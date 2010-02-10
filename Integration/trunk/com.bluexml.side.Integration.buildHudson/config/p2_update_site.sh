@@ -8,6 +8,7 @@ else
   echo "       with eclipse_launcher =   path of the plugin org.eclipse.equinox.launcher_1.0.200.v20090520.jar"
   echo "       with new_update_site =   path of the new update site"
   echo "       with plugins =   path of the update_site"
+  echo "       with plugins =   url of the update site"
   exit -2
 fi
 
