@@ -143,7 +143,8 @@ public class AlfrescoController {
 	private static Map<String, RedirectionBean> targetTable = new HashMap<String, RedirectionBean>();
 	//
 
-	/** The last initParams we saw. */ // <-- not safe in multi-user or production environments
+	/** The last initParams we saw. */
+	// <-- not safe in multi-user or production environments
 	Map<String, String> initParameters = null;
 
 	/** The last form type we saw. */
@@ -1350,9 +1351,9 @@ public class AlfrescoController {
 		try {
 			PostMethod post = requestPost(transaction, parameters, opCode);
 			result = StringUtils.trim(post.getResponseBodyAsString());
-		} catch (Exception e) {
+		} catch (IOException e) {
 			logger.error(e);
-			throw new ServletException(e);
+			throw new ServletException(MsgPool.getMsg(MsgId.MSG_DEFAULT_ERROR_MSG));
 		}
 		if (result != null && result.startsWith("<exception>")) {
 			throw new AlfrescoWebscriptException(result);
@@ -1427,9 +1428,11 @@ public class AlfrescoController {
 	 *             Signals that an I/O exception has occurred.
 	 * @throws HttpException
 	 *             the http exception
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	private PostMethod requestPost(AlfrescoTransaction transaction, Map<String, String> parameters,
-			MsgId opCode) throws IOException, HttpException {
+			MsgId opCode) throws ServletException, IOException {
 		logger.debug("Alfresco request " + opCode);
 		logger.debug("Parameters : ");
 		Set<Entry<String, String>> entrySet2 = parameters.entrySet();
@@ -1452,7 +1455,18 @@ public class AlfrescoController {
 		post.setParameter("serviceCallerId", "XFormsController");
 		post.setParameter("serviceCallerVersion", "2.0.0");
 
-		executeMethod(post, false);
+		try {
+			executeMethod(post, false);
+		} catch (ConnectException e) {
+			e.printStackTrace();
+			throw new ServletException("Can't perform actions: the Alfresco server is unreachable.");
+		} catch (HttpException e) {
+			e.printStackTrace();
+			throw new ServletException("Can't perform actions: the Alfresco server is unreachable.");
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new ServletException("Can't perform actions: the Alfresco server is unreachable.");
+		}
 
 		logger.debug("Response : ");
 		logger.debug(StringUtils.trim(post.getResponseBodyAsString()));
