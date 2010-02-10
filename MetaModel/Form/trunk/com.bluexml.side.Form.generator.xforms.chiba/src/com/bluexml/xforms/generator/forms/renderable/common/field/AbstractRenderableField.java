@@ -541,18 +541,30 @@ public abstract class AbstractRenderableField extends Renderable {
 		Element filenameElement = XFormsGenerator.createElement("output",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		StringBuffer valueFilename = new StringBuffer();
-//		valueFilename.append("if (not(starts-with(current()/");
+//		valueFilename.append("if (current()/");
 //		valueFilename.append(meb.getNodeset());
-//		valueFilename.append(", 'file'))) then current()/");
+//		valueFilename.append(" eq '') then '' else concat('");
+//		valueFilename.append(MsgPool.getMsg(MsgId.MSG_FILE_FIELD_FILENAME_TEMP));
+//		valueFilename.append("', current()/");
 //		valueFilename.append(meb.getNodeset());
-//		valueFilename.append(" else ''");
-		valueFilename.append("if (current()/");
-		valueFilename.append(meb.getNodeset());
-		valueFilename.append(" eq '') then '' else concat('");
+//		valueFilename.append(")");
+
+		String curNodeSet = "current()/" + meb.getNodeset();
+		valueFilename.append("if (");
+		valueFilename.append(curNodeSet);
+		valueFilename.append(" eq '') then '' else (if (not(starts-with(");
+		valueFilename.append(curNodeSet);
+		valueFilename.append(", 'file'))) then concat('");
+		valueFilename.append(MsgPool.getMsg(MsgId.MSG_UPLOAD_CONTENT_REPO_INFO));
+		valueFilename.append("', ");
+		valueFilename.append(curNodeSet);
+		valueFilename.append(") else concat('");
 		valueFilename.append(MsgPool.getMsg(MsgId.MSG_FILE_FIELD_FILENAME_TEMP));
-		valueFilename.append("', current()/");
-		valueFilename.append(meb.getNodeset());
-		valueFilename.append(")");
+		valueFilename.append("', ");
+		valueFilename.append(curNodeSet);
+		valueFilename.append("))");
+		
+		
 		filenameElement.setAttribute("value", valueFilename.toString());
 		filenameElement.setAttribute("mediatype", "text/html");
 		filenameDiv.addContent(filenameElement);
