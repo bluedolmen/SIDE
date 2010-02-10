@@ -29,5 +29,18 @@
     <super type="org.eclipse.core.resources.problemmarker" />
     <persistent value="true" />
   </extension>
+    <extension
+        point="org.eclipse.ui.ide.projectNatureImages">
+     <image
+           icon="icon/project_icon.png"
+           id="com.bluexml.side.integration.eclipse.nature.icon"
+           natureId="com.bluexml.side.integration.eclipse.nature">
+     </image>
+     <image
+           icon="icon/project_icon_activated_builder.png"
+           id="com.bluexml.side.integration.eclipse.nature.activatedBuilder.icon"
+           natureId="com.bluexml.side.integration.eclipse.nature.activatedBuilder">
+     </image>
+  </extension>
 </plugin>
 
