@@ -120,18 +120,17 @@ public class FileHelper {
 	}
 
 	public static boolean deleteFile(File f, boolean failonError) throws Exception {
-		if (f.isDirectory()) {
-			boolean status = true;
+		boolean status = true;
+		if (f.isDirectory()) {			
 			File[] fl = f.listFiles();
 			for (int i = 0; i < fl.length; i++) {
 				status &= deleteFile(fl[i], failonError);
-			}
-			return status;
+			}			
 		}
 		if (f.exists() && f.canWrite()) {
-			return f.delete();
+			return f.delete() && status;
 		} else if (failonError) {
-			throw new Exception("file can't be deleted");
+			throw new Exception("file can't be deleted: "+f);
 		}
 		return false;
 	}

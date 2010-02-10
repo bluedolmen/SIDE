@@ -57,8 +57,13 @@ public class TrueZipHelper {
 			result = srcF.copyAllTo(destF, ArchiveDetector.NULL, ArchiveDetector.NULL);
 		}
 
-		// mandatory call see TrueZip doc
 		File.update();
+		if (!result) {
+			System.out.println("Source:"+srcF);
+			System.out.println("Dest:"+destF);
+		}
+		
+		// mandatory call see TrueZip doc
 		return result;
 	}
 
