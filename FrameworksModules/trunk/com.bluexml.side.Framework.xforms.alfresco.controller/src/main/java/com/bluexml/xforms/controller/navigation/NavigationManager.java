@@ -478,10 +478,14 @@ public class NavigationManager {
 		try {
 			String formsPath = req.getParameter(MsgId.PARAM_PROPERTIES_FILE_FORMS.getText());
 			String msgPath = req.getParameter(MsgId.PARAM_PROPERTIES_FILE_MESSAGES.getText());
-			AlfrescoController.loadProperties(formsPath, msgPath);
+			if (AlfrescoController.loadProperties(formsPath, msgPath) == false) {
+				return false;
+			}
 
 			String redirectPath = req.getParameter(MsgId.PARAM_REDIRECTOR_CONFIG_FILE.getText());
-			AlfrescoController.loadRedirectionTable(redirectPath);
+			if (AlfrescoController.loadRedirectionTable(redirectPath) == false) {
+				return false;
+			}
 			if (fromInitCall) {
 				// we'll also deal with CSS, alfrescoHost
 				this.setCssUrl(req);
@@ -491,8 +495,7 @@ public class NavigationManager {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("Couldn't load all configuration files.");
-			e.printStackTrace();
+			logger.error("Couldn't load all configuration files.", e);
 			return false;
 		}
 		return true;
