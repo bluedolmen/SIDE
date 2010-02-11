@@ -638,16 +638,15 @@ public class XFormsGenerator extends AbstractGenerator {
 				String title = ModelTools.getTitle(classe);
 				if (!classe.isAbstract()) {
 					render(outputXForms, classeBean, formName, title, FormTypeRendered.formClass,
-							false, false);
+							false);
 					if (formGenerator.isGenerateLogListForms()) {
 						render(outputXForms, new RenderableClassList(classe), formName, title,
-								FormTypeRendered.formClassList, false, false);
+								FormTypeRendered.formClassList, false);
 					}
 				}
 				if (classeBean.hasSubClasses()) {
 					render(outputXForms, new RenderableClassSelector(classeBean.getSubClasses()),
-							formName, title, FormTypeRendered.formClassSubClassSelector, false,
-							false);
+							formName, title, FormTypeRendered.formClassSubClassSelector, false);
 				}
 			}
 
@@ -659,7 +658,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	 */
 	private boolean renderAllForms() {
 		monitor.addText("Rendering customized forms");
-		
+
 		boolean atLeastOneWorfklowForm = false;
 		Set<Entry<String, RenderableFormContainer>> entrySetForms = formsRenderables.entrySet();
 		for (Entry<String, RenderableFormContainer> formEntry : entrySetForms) {
@@ -675,8 +674,8 @@ public class XFormsGenerator extends AbstractGenerator {
 			}
 			atLeastOneWorfklowForm = atLeastOneWorfklowForm || isAWorkflowForm;
 			if (formGenerator.isDebugMode()) {
-				String logText = "  " + (isAWorkflowForm ? "FormWorkflow" : "FormClass")
-						+ ": " + formId;
+				String logText = "  " + (isAWorkflowForm ? "FormWorkflow" : "FormClass") + ": "
+						+ formId;
 				monitor.addText(logText);
 			}
 			RenderableFormContainer value = formEntry.getValue();
@@ -718,7 +717,7 @@ public class XFormsGenerator extends AbstractGenerator {
 		// RenderableXForm rform = new RenderableXForm(rglobalGroup,
 		// MsgId.MSG_WKFLW_SEL_PAGE_TITLE.getText(), actions, true);
 		render(outputXForms, rglobalGroup, MsgId.INT_WKFLW_SEL_FORM_FILENAME.getText(), MsgPool
-				.getMsg(MsgId.MSG_WKFLW_SEL_PAGE_TITLE), FormTypeRendered.formWkflwSel, true, false);
+				.getMsg(MsgId.MSG_WKFLW_SEL_PAGE_TITLE), FormTypeRendered.formWkflwSel, false);
 	}
 
 	/**
@@ -1026,7 +1025,7 @@ public class XFormsGenerator extends AbstractGenerator {
 		String title = formsModels.get(formId).getLabel();
 		FormTypeRendered formTypeRendered = (isAWorkflowForm) ? FormTypeRendered.formWkflw
 				: FormTypeRendered.formForm;
-		render(outputXForms, rFC, formId, title, formTypeRendered, false, isContentEnabled);
+		render(outputXForms, rFC, formId, title, formTypeRendered, isContentEnabled);
 	}
 
 	/**
@@ -1052,7 +1051,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	 *            formsRenderables.
 	 */
 	private void render(File outputXForms, Renderable renderable, String formName, String title,
-			FormTypeRendered formType, boolean isWrkflwSelectionForm, boolean isContentEnabled) {
+			FormTypeRendered formType, boolean isContentEnabled) {
 
 		// there's no point in writing RO versions of some form types
 		if (isReadOnlyMode()) {
@@ -1085,9 +1084,7 @@ public class XFormsGenerator extends AbstractGenerator {
 			realRenderable.add(rContent);
 		}
 
-		boolean isAWorkflowForm = formType.equals(FormTypeRendered.formWkflw);
-		RenderableXForm form = new RenderableXForm(realRenderable, title, actions, isAWorkflowForm,
-				isWrkflwSelectionForm);
+		RenderableXForm form = new RenderableXForm(realRenderable, title, actions, formType);
 
 		// add the status bar
 		RenderableDiv statusDiv = new RenderableDiv(MsgId.INT_CSS_STATUS_BAR_ID.getText());

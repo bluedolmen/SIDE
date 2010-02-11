@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.FormSubmissionActions;
@@ -26,8 +27,7 @@ public class RenderableXForm extends Renderable {
 	/** The title. */
 	private String title;
 
-	private boolean isWrkflwSelectionForm;
-	private boolean isAWorkflowForm;
+	private FormTypeRendered formType;
 
 	/**
 	 * Instantiates a new renderable x form.
@@ -41,17 +41,16 @@ public class RenderableXForm extends Renderable {
 	 * @param formType
 	 *            the form type
 	 */
-	public RenderableXForm(Renderable renderable, String title, List<FormSubmissionActions> classActions,
-			boolean isAWorkflowForm, boolean isWrkflwSelectionForm) {
+	public RenderableXForm(Renderable renderable, String title,
+			List<FormSubmissionActions> classActions, FormTypeRendered formType) {
 		super();
 		this.title = title;
-		this.isAWorkflowForm = isAWorkflowForm;
-		this.isWrkflwSelectionForm = isWrkflwSelectionForm;
+		this.formType = formType;
 		submissions = new ArrayList<ModelElementSubmission>();
 		for (FormSubmissionActions anAction : classActions) {
 			submissions.add(new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER.getText()
-					+ anAction.getName() + "/", MsgPool.getMsg(anAction.getCaption()),
-					anAction.isReplaceAll(), anAction.isValidateFirst()));
+					+ anAction.getName() + "/", MsgPool.getMsg(anAction.getCaption()), anAction
+					.isReplaceAll(), anAction.isValidateFirst()));
 		}
 		add(renderable);
 		RenderableSubmits renderableSubmits = new RenderableSubmits(submissions);
@@ -77,8 +76,9 @@ public class RenderableXForm extends Renderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
-		RenderedForm renderedForm = new RenderedForm(title, isAWorkflowForm, isWrkflwSelectionForm);
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
+		RenderedForm renderedForm = new RenderedForm(title, formType);
 		for (ModelElementSubmission modelElementSubmission : submissions) {
 			renderedForm.addModelElement(modelElementSubmission);
 		}

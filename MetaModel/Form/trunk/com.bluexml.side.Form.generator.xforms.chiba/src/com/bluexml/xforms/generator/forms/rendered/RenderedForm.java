@@ -6,6 +6,7 @@ import java.util.List;
 import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
+import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.ModelElement;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
@@ -27,8 +28,9 @@ public class RenderedForm extends Rendered {
 	 * 
 	 * @param title
 	 *            the title
+	 * @param formType
 	 */
-	public RenderedForm(String title, boolean isAWorkflowForm, boolean isWrkflwSelectionForm) {
+	public RenderedForm(String title, FormTypeRendered formType) {
 		setRootContainer(this);
 		xformsElement = XFormsGenerator.createElement("html", XFormsGenerator.NAMESPACE_XHTML);
 		Element head = XFormsGenerator.createElement("head", XFormsGenerator.NAMESPACE_XHTML);
@@ -44,12 +46,24 @@ public class RenderedForm extends Rendered {
 		modelInstance.setAttribute("id", "minstance");
 		//
 		MsgId getAction = MsgId.INT_ACT_CODE_GET_FORM;
-		if (isAWorkflowForm) {
+		String suffix = "";
+		if (formType.equals(FormTypeRendered.formWkflw)) {
 			getAction = MsgId.INT_ACT_CODE_GET_FORM_WKFLW;
-		} else if (isWrkflwSelectionForm) {
+		} else if (formType.equals(FormTypeRendered.formWkflwSel)) {
 			getAction = MsgId.INT_ACT_CODE_GET_WKFLW_SELECTION;
+		} else if (formType.equals(FormTypeRendered.formClass)) {
+			suffix = MsgId.INT_ACT_SUFFIX_GET_FORM_CLASS.getText();
+		} else if (formType.equals(FormTypeRendered.formClassList)) {
+			suffix = MsgId.INT_ACT_SUFFIX_GET_FORM_LIST.getText();
+		} else if (formType.equals(FormTypeRendered.formClassSubClassSelector)) {
+			suffix = MsgId.INT_ACT_SUFFIX_GET_FORM_SELECTOR.getText();
+		} else if (formType.equals(FormTypeRendered.formForm)) {
+			suffix = MsgId.INT_ACT_SUFFIX_GET_FORM_FORM.getText();
+		} else if (formType.equals(FormTypeRendered.formSearch)) {
+			suffix = MsgId.INT_ACT_SUFFIX_GET_FORM_SEARCH.getText();
 		}
-		modelInstance.setAttribute("src", MsgId.INT_URI_SCHEME_READER + getAction.getText() + "/");
+		String source = MsgId.INT_URI_SCHEME_READER + getAction.getText() + "/" + suffix;
+		modelInstance.setAttribute("src", source);
 		model.addContent(modelInstance);
 
 		head.addContent(model);
@@ -145,6 +159,6 @@ public class RenderedForm extends Rendered {
 			model.addContent(element);
 		}
 		setRootContainer(null);
-}
+	}
 
 }

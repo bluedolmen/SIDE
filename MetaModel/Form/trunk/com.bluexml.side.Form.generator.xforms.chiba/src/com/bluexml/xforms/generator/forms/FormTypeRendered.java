@@ -27,7 +27,7 @@ public enum FormTypeRendered {
 				"List forms",
 				"for listing the objects present in the repository and editing them in a default form"),
 		formEnum(
-				null,
+				null, // not relevant for enums
 				"",
 				MsgId.INT_DIRECTORY_ENUMS.getText(),
 				"Static enumerations",
@@ -39,6 +39,12 @@ public enum FormTypeRendered {
 				MsgId.INT_DIRECTORY_FORM_FORMS.getText(),
 				"Customized forms",
 				"based on form models"),
+		formSearch(
+				new FormSubmissionActions[] { FormSubmissionActions.Submit }, 
+				"",
+				MsgId.INT_DIRECTORY_FORM_SEARCH.getText(),
+				"Search forms",
+				""),
 		formWkflw(
 				new FormSubmissionActions[] { FormSubmissionActions.Submit }, 
 				"", 
