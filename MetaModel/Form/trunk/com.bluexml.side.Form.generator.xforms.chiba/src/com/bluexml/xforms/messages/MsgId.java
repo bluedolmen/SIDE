@@ -26,7 +26,10 @@ package com.bluexml.xforms.messages;
  *
  */
 public enum MsgId {
+	//
+	//
 	// keys for messages in the forms.properties file
+	//
 	KEY_ALFRESCO_URL("alfresco.url"),
 	KEY_MAX_RESULTS("selection.list.max.results"),
 	KEY_TEMP_DIRECTORY("temp.directory"),
@@ -39,7 +42,9 @@ public enum MsgId {
 	KEY_UPLOAD_REPOSITORY_FORMAT_INFO("upload.repository.format.info"),
 	KEY_USER_NAME("user.name"),
 	KEY_USER_PSWD("user.pswd"),
-	// keys for messages in the message.properties file; user-changeable
+	//
+	//
+	// keys for messages in the messages.properties file; user-changeable
 	//
 	MSG_ASSOC_MANDATORY				("association.is.mandatory"),
 	MSG_DEFAULT_ERROR_MSG			("default.error.msg"), 
@@ -94,7 +99,9 @@ public enum MsgId {
 	CAPTION_BUTTON_SUBMIT			("caption.button.submit"),
 	CAPTION_BUTTON_WORKFLOW_CANCEL	("caption.button.workflow.cancel"),
 	CAPTION_BUTTON_WORKFLOW_SELECT	("caption.button.workflow.select"),
-	CAPTION_BUTTON_WORKFLOW_START	("caption.button.workflow.start"),	
+	CAPTION_BUTTON_WORKFLOW_START	("caption.button.workflow.start"),
+	//
+	//
 	// shortcuts for internal strings
 	//
 	INT_ACT_CODE_CANCEL					("cancel"),
@@ -116,12 +123,18 @@ public enum MsgId {
 	INT_ACT_CODE_WRKFLW_PROCESS_LIST	("process-list"),
 	INT_ACT_CODE_WRKFLW_START			("workflow-start"),
 	INT_ACT_CODE_WRKFLW_TRANSITION		("transition"),
+	INT_ACT_PARAM_GET_FORMTYPE			("formType"),
 	INT_ACT_PARAM_LIST_FORMAT			("format"),
 	INT_ACT_PARAM_LIST_MAXLENGTH		("maxLength"),
 	INT_ACT_PARAM_LIST_TYPE				("type"),
+	INT_ACT_SUFFIX_GET_CLASS			("default"),
+	INT_ACT_SUFFIX_GET_FORM_CLASS		("formClass"),
+	INT_ACT_SUFFIX_GET_FORM_SEARCH		("formSearch"),
+	INT_ACT_SUFFIX_GET_FORM_WKFLW		("formWorkflow"),
 	INT_BLUEXML_DEFAULT_STORE_PATH		("/app:company_home/app:dictionary/cm:SIDE DATA"),
 	INT_CSS_BLUEXML_AUTOGEN				("bluexml-autogen"),
 	INT_CSS_HORIZ_LINE					("side_horizontal_line"),
+	INT_CSS_NO_LABEL_FIELD				("side_no_label_field"),
 	INT_CSS_RO_TEXTAREA					("side_ro_textarea"),
 	INT_CSS_SELECT_SEARCH_ZONE			("side_select_search_zone"),
 	INT_CSS_SELECT_TRIGGER_IMG			("side_select_trigger_img"),
@@ -131,12 +144,13 @@ public enum MsgId {
 	INT_CSS_UPLOAD_FILENAME 			("side_upload_filename"),
 	INT_CSS_UPLOAD_PREVIEW 				("side_upload_preview"),
 	INT_CSS_UPLOAD_WIDGET 				("side_upload_widget"),
-	// All directories must be filled.
+	// NOTE: all directories must be filled.
 	INT_DIRECTORY_ENUMS					("enums"),
 	INT_DIRECTORY_FORM_CLASSES			("defaults"),
 	INT_DIRECTORY_FORM_FORMS			("forms"),
 	INT_DIRECTORY_FORM_LISTS			("lists"),
 	INT_DIRECTORY_FORM_READONLY			("readonly"),
+	INT_DIRECTORY_FORM_SEARCH			("search"),
 	INT_DIRECTORY_FORM_SELECTOR			("selectors"),
 	INT_DIRECTORY_FORM_WKFLW			("workflows"),
 	INT_DIRECTORY_WKFLW_SEL_FORM		("workflows"),
@@ -149,6 +163,7 @@ public enum MsgId {
 	INT_FILEFIELD_PREVIEW_NONE			(""),
 	INT_FORMTYPE_FORM					("form"),
 	INT_FORMTYPE_LIST					("list"),
+	INT_FORMTYPE_SEARCH					("search"),
 	INT_FORMTYPE_SELECTOR				("selector"),
 	INT_FORMTYPE_WKFLW					("wkflw"),
 	INT_FORMTYPE_WKFLWSEL				("wkflwSel"),
@@ -246,8 +261,8 @@ public enum MsgId {
 	 * processing of that call, persistent parameters are set to the given values if applicable.
 	 */
 	PARAM_INIT_CALL("init"),
-	/** output param for redirection; indicates which workflow form the redirection comes from*/ 
 	PARAM_LANGUAGE ("language"),
+	/** output param for redirection; indicates which workflow form the redirection comes from*/ 
 	PARAM_LEAVING_FORM("leavingForm"),
 	PARAM_MAX_RESULTS("maxResults"),
 	/** filesystem path to the forms.properties file. PERSISTENT.*/
