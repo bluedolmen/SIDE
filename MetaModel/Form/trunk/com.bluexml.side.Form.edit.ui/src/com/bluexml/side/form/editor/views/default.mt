@@ -166,11 +166,7 @@ li.tabs, ul.tabs {
 	<%}else if (cast("FormGroup") && current("FormGroup").presentation.equalsIgnoreCase("horizontal")){%>
 	&nbsp;<table><tr>
 	<%}else if((cast("Reference") && (current("Reference").target.nSize() == 1 && !current("Reference").target.nGet(0).hidden)) || !cast("Reference")){%>
-	<%if (current().presentation.equalsIgnoreCase("borderless")){%>
-		<fieldset style="border:0px;">
-	<%}else{%>
 		<fieldset>
-	<%}%>
 		<legend><%label.encode()%></legend>
 			<ol>
 	<%}%>
