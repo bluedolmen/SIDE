@@ -32,7 +32,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.alfresco.service.cmr.repository.NodeRef;
-import org.alfresco.service.cmr.repository.Path;
 import org.alfresco.service.cmr.security.AuthorityType;
 import org.alfresco.service.cmr.security.PermissionService;
 import org.alfresco.service.cmr.workflow.WorkflowDefinition;
@@ -115,9 +114,6 @@ public class AlfrescoController {
 	//
 	//
 	private static final String BLUEXML_WORKFLOW_PREFIX = "wfbx";
-
-	private static final String PACKAGE_PATH = MsgId.INT_BLUEXML_DEFAULT_STORE_PATH
-			+ "/cm:WORKFLOW_PACKAGES";
 
 	private static final XStream xstream = new XStream();
 
@@ -382,24 +378,6 @@ public class AlfrescoController {
 	 */
 	public static String unpatchDataId(String dataId) {
 		return dataId.substring(dataId.lastIndexOf('/') + 1);
-	}
-
-	/**
-	 * Provides a unique package path built from the arguments.
-	 * 
-	 * @param processName
-	 * @param instanceId
-	 * @param dataId
-	 *            a full data Id with protocol and space
-	 * @return the complete path to the package folder.
-	 */
-	@Deprecated
-	public static String buildWorkflowPackagePath(String processName, String instanceId,
-			String dataId) {
-		String instance = instanceId.replaceAll(":", "_");
-		String data = unpatchDataId(dataId);
-		String result = PACKAGE_PATH + "/cm:" + processName + "/cm:" + instance + "/cm:" + data;
-		return result;
 	}
 
 	/**
@@ -2152,28 +2130,6 @@ public class AlfrescoController {
 		return result;
 	}
 
-	// To be removed (replaced by systemGetNodeRefForUser).
-	@Deprecated
-	public NodeRef systemGetNodeRefForPerson(String userName) {
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("serviceName", "PersonService");
-		parameters.put("methodName", "getPerson");
-		Vector<Object> paramList = new Vector<Object>();
-		// add parameters to the method in paramList
-		paramList.add(userName);
-		parameters.put("methodParams", xstream.toXML(paramList));
-		NodeRef result;
-		try {
-			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
-			result = (NodeRef) xstream.fromXML(resultStr);
-		} catch (ServletException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return result;
-	}
-
 	/**
 	 * Returns the node ref for a user group identified by name.
 	 * 
@@ -2464,29 +2420,6 @@ public class AlfrescoController {
 		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_MKDIR);
 
 		return resultId;
-	}
-
-	//
-	// To be removed. Initially written for debugging purposes.
-	@Deprecated
-	public String systemNodeGetPath(NodeRef noderef) {
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("serviceName", "NodeService");
-		parameters.put("methodName", "getPath");
-		Vector<Object> paramList = new Vector<Object>();
-		// add parameters to the method in paramList
-		paramList.add(noderef);
-		//
-		parameters.put("methodParams", xstream.toXML(paramList));
-		Path result;
-		try {
-			result = (Path) xstream.fromXML(requestString(new AlfrescoTransaction(this),
-					parameters, MsgId.INT_WEBSCRIPT_OPCODE_SERVICE));
-		} catch (ServletException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return result.toString();
 	}
 
 	/**
