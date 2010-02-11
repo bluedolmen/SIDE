@@ -15,6 +15,7 @@
 		<xsd:sequence>
 			<xsd:element name="readOnlyFormsSuffix" type="xsd:string" />
 			<xsd:element name="debugMode" type="xsd:boolean" />
+			<xsd:element name="timeStamp" type="xsd:dateTime" />
 		</xsd:sequence>
 	</xsd:complexType>
 
