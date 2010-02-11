@@ -144,7 +144,6 @@ public class AlfrescoController {
 
 	/** Stores redirection info keyed by form names */
 	private static Map<String, RedirectionBean> targetTable = new HashMap<String, RedirectionBean>();
-	//
 
 	/** The last initParams we saw. */
 	// <-- not safe in multi-user or production environments
@@ -336,7 +335,7 @@ public class AlfrescoController {
 	/**
 	 * @return the URL to the Alfresco host
 	 */
-	public static String getALFRESCO_URL() {
+	public static String getAlfrescoUrl() {
 		return ALFRESCO_URL;
 	}
 
@@ -344,7 +343,7 @@ public class AlfrescoController {
 	 * @param alfresco_url
 	 *            the URL to the Alfresco host to set
 	 */
-	public static void setALFRESCO_URL(String alfresco_url) {
+	public static void setAlfrescoUrl(String alfresco_url) {
 		ALFRESCO_URL = alfresco_url;
 	}
 
@@ -444,10 +443,6 @@ public class AlfrescoController {
 			if (id == null) {
 				instance = createForm(transaction, type, initParams, formIsReadOnly);
 			} else {
-				// WorkflowBean bean = new WorkflowBean();
-				// bean.dataId = id;
-				// bean.processId = initParams.get(MsgId.PARAM_WORKFLOW_PROCESS_ID.getText());
-				// bean.instanceId = initParams.get(MsgId.PARAM_WORKFLOW_INSTANCE_ID.getText());
 				instance = loadForm(transaction, type, id, formIsReadOnly);
 			}
 		} catch (Exception e) {

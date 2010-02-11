@@ -487,7 +487,7 @@ public class NavigationManager {
 				this.setCssUrl(req);
 				String host = req.getParameter(MsgId.PARAM_ALFRESCO_HOST.getText());
 				if (StringUtils.trimToNull(host) != null) {
-					AlfrescoController.setALFRESCO_URL(host);
+					AlfrescoController.setAlfrescoUrl(host);
 				}
 			}
 		} catch (Exception e) {

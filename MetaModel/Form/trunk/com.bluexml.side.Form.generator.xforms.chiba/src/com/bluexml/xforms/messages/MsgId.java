@@ -230,48 +230,50 @@ public enum MsgId {
 	//
 	/** the name of a Java class to be called */
 	PARAM_ACTION_NAME ("actionName"),
-	/** the address (protocol, host and port) to the Alfresco server*/
+	/** the address (protocol, host and port) to the Alfresco server. PERSISTENT.*/
 	PARAM_ALFRESCO_HOST("alfrescoHost"),
 	/** whether non BlueXML definitions should also be listed*/
 	PARAM_ALLOW_ALL_DEFS ("allowAllDefs"),
 	/** Used when redirecting from a workflow form to continually progress along a workflow path*/
 	PARAM_AUTO_ADVANCE ("autoAdvance"),
-	/** the HTTP address of a CSS file to include in xhtml templates sent to clients*/
-	PARAM_CSS_FILE("CSS"),
+	/** URL of a CSS for inclusion in templates sent to clients. PERSISTENT.*/
+	PARAM_CSS_FILE("CSS"), 
 	PARAM_DATA_ID("id"),
 	PARAM_DATA_TYPE("type"),
 	PARAM_FORM_TYPE("formType"),
-	/** specifies a dummy call whose returned result will be "success" or "failure"*/
+	/**
+	 * specifies a dummy call whose returned result will be "success" or "failure". During the
+	 * processing of that call, persistent parameters are set to the given values if applicable.
+	 */
 	PARAM_INIT_CALL("init"),
 	/** output param for redirection; indicates which workflow form the redirection comes from*/ 
 	PARAM_LANGUAGE ("language"),
 	PARAM_LEAVING_FORM("leavingForm"),
 	PARAM_MAX_RESULTS("maxResults"),
-	/** filesystem path to the forms.properties file*/
+	/** filesystem path to the forms.properties file. PERSISTENT.*/
 	PARAM_PROPERTIES_FILE_FORMS ("formsPropertiesFile"),
-	/** filesystem path to the messages.properties file*/
+	/** filesystem path to the messages.properties file. PERSISTENT.*/
 	PARAM_PROPERTIES_FILE_MESSAGES ("messagesPropertiesFile"),
 	PARAM_PAGE_CANCEL ("nextPageCancel"),
 	PARAM_PAGE_DELETE ("nextPageDelete"),
 	PARAM_PAGE_SUBMIT ("nextPageSubmit"),
 	PARAM_PAGE_SUCCESS ("successPage"),
 	PARAM_PAGE_FAILURE ("failurePage"),
-	/** the URL the page being left was called with */
-	@Deprecated
-	PARAM_REDIRECT_FROM_URL("redirectFromUrl"),
-	/** filesystem path to the redirect.xml file*/
+	/** filesystem path to the redirect.xml file. PERSISTENT.*/
 	PARAM_REDIRECTOR_CONFIG_FILE("redirectXmlFile"),
 	/** whether to reload the mapping.xml file*/
 	PARAM_RELOAD_MAPPING_FILE("dynamicReload"),
-	/** whether to reload properties and config files*/
+	/** whether to reload properties and redirection files*/
 	PARAM_RELOAD_PROPERTIES("reloadProperties"),
+	/** whether to send a JSON string to */
 	PARAM_SEARCH_MODE("searchMode"),
 	PARAM_SEARCH_USE_SHORT_NAMES("searchUseShortNames"),
 	PARAM_SERVE_TEST_PAGE("serveTestPage"),
 	PARAM_SHOW_SUBMITS("showSubmitButtons"),
 	PARAM_SHOW_CANCEL("showCancel"),
 	PARAM_SHOW_DELETE("showDelete"),
-	PARAM_SHOW_VALIDATE("showSubmit"),	
+	PARAM_SHOW_VALIDATE("showSubmit"),
+	/** whether parameters should not be added to a next page URL*/
 	PARAM_SKIP_ADDITIONAL_INFO("skipAdditionalInfo"),
 	/** whether to avoid contacting the webscript on Alfresco*/
 	PARAM_STANDALONE("standalone"),
