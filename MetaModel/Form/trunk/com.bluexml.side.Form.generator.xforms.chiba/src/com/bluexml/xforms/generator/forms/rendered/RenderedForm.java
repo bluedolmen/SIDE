@@ -44,7 +44,8 @@ public class RenderedForm extends Rendered {
 		Element modelInstance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		modelInstance.setAttribute("id", "minstance");
-		//
+		
+		// build the URI for the Get action
 		MsgId getAction = MsgId.INT_ACT_CODE_GET_FORM;
 		String suffix = "";
 		if (formType.equals(FormTypeRendered.formWkflw)) {
