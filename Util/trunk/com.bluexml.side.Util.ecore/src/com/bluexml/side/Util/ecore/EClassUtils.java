@@ -20,6 +20,7 @@ import java.util.ListIterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
@@ -62,7 +63,7 @@ public class EClassUtils {
 	 */
 	public static EReference findERefWichLinkSourceToTarget(EClass source, EClass target ){
 		EReference result = null;
-		result =(EReference) EClassUtils.findEStructuralFeature(null,target.getName() , source.getName(), source);
+		result =(EReference) EClassUtils.findEStructuralFeature(null,target,source);
 		return result;
 	}
 	
@@ -103,6 +104,46 @@ public class EClassUtils {
 				truth[2] = true;
 			}
 			if(truth[0] && truth[1] && truth[2]){
+				founded = true;
+				result =esf;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * browse source EStructural Feature list and 
+	 * Return null, or an the first eStructuralFeature which match :
+	 * <p><b>getName()</b> = {name}</p>
+	 * <p><b>eType.getName()</b> = {etype}(target for ereference)</p>
+	 * <p><b>econtainingClass().getName()</b> = {econtainingClass}</p>
+	 * each parameter null is ignored in the test
+	 * For example : findEStructuralFeature("azerty",null,null,null) will return the structural feature named "azerty"
+	 * @param name
+	 * @param target
+	 * @param source
+	 * @return
+	 */
+	public static EStructuralFeature findEStructuralFeature(String name,EClass target,EClass source){
+		EStructuralFeature result = null;
+		ListIterator<EStructuralFeature> lisf = source.getEAllStructuralFeatures().listIterator();
+		boolean founded = false;
+		while(lisf.hasNext() && !founded){
+			boolean[] truth = new boolean[2];
+			EStructuralFeature esf = lisf.next();
+			if(name != null){
+				truth[0] = esf.getName().equals(name);
+			}else{
+				truth[0] = true;
+			}
+			if(target != null && esf.getEType()!=null){
+				for (EGenericType et : target.getEAllGenericSuperTypes())
+					if (et.getERawType().getName().equals(esf.getEType().getName()))
+						truth[1] = true;
+			}else{
+				truth[1] = true;
+			}
+			if(truth[0] && truth[1]){
 				founded = true;
 				result =esf;
 			}
