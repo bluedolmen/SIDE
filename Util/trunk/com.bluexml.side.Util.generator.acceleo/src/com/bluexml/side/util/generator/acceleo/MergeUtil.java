@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -22,7 +23,13 @@ public class MergeUtil {
 			Resource modelResource = EResourceUtils.openModel(IFileHelper.convertIRessourceToSystemString(model), null);
 			EObject root = modelResource.getContents().get(0);
 			if (root instanceof Package) {
-				String pname = ((Package) root).getName()+"_"+root.eClass().getName();
+				
+				String eClass = root.eClass().getName();
+				for (EGenericType parent : root.eClass().getEAllGenericSuperTypes())
+					if (parent.getERawType().getName().equalsIgnoreCase("FormCollection"))
+						eClass = "FormCollection";
+				
+				String pname = ((Package) root).getName()+"_"+eClass;
 				if (gb.containsKey(pname)) {
 					gb.get(pname).add(model);
 				} else {
