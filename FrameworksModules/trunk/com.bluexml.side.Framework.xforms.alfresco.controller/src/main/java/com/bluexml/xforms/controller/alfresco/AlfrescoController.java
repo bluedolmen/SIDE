@@ -93,13 +93,13 @@ public class AlfrescoController {
 	/** Whether file names of uploads receive a '(x)' in case the initial name already exists. */
 	public static boolean UPLOAD_REPOSITORY_APPEND = true;
 
-	/** whether info of repository uploads are formatted in the same way as content information*/
+	/** whether info of repository uploads are formatted in the same way as content information */
 	public static boolean UPLOAD_REPOSITORY_FORMAT_INFO = false;
-	
+
 	/** The temp directory. */
 	public static File TEMP_DIRECTORY = null;
 
-	public static String MAX_RESULTS = "50";
+	public static int MAX_RESULTS = 50;
 
 	/** The alfresco url. */
 	public static String ALFRESCO_URL = null;
@@ -520,44 +520,60 @@ public class AlfrescoController {
 		if (StringUtils.trimToNull(USER_PSWD) == null) {
 			USER_PSWD = "admin";
 		}
-		// file system folder for uploads, if none, default to current folder
-		fsPath = config.getProperty(MsgId.KEY_UPLOAD_DIRECTORY.getText());
-		if (StringUtils.trimToNull(fsPath) == null) {
-			fsPath = ".";
-		}
-		UPLOAD_DIRECTORY = new File(fsPath);
-		// repo folder for uploads, if none given, use "/app:company_home"
-		UPLOAD_REPOSITORY = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY.getText());
-		if (StringUtils.trimToNull(UPLOAD_REPOSITORY) == null) {
-			UPLOAD_REPOSITORY = "/app:company_home";
-		}
+
 		// temp dir for file system uploads
 		fsPath = config.getProperty(MsgId.KEY_TEMP_DIRECTORY.getText());
 		if (StringUtils.trimToNull(fsPath) == null) {
-			fsPath = ".";
+			fsPath = "/tmp"; // TODO: check that this works on all platforms
 		}
 		TEMP_DIRECTORY = new File(fsPath);
 
-		String property = config.getProperty(MsgId.KEY_MAX_RESULTS.getText());
-		if (StringUtils.trimToNull(property) != null) {
-			MAX_RESULTS = property;
+		// file system archive folder for uploads, if none, default to current folder
+		fsPath = config.getProperty(MsgId.KEY_UPLOAD_DIRECTORY.getText());
+		if (StringUtils.trimToNull(fsPath) == null) {
+			fsPath = "/tmp/uploads"; // TODO: check on all platforms
 		}
+		UPLOAD_DIRECTORY = new File(fsPath);
+
+		// repo folder for uploads, if none given, use "/app:company_home/app:user_homes"
+		UPLOAD_REPOSITORY = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY.getText());
+		if (StringUtils.trimToNull(UPLOAD_REPOSITORY) == null) {
+			UPLOAD_REPOSITORY = "/app:company_home/app:user_homes";
+		}
+
+		// max results: default number of items in lists
+		String property = config.getProperty(MsgId.KEY_MAX_RESULTS.getText());
+		try {
+			int value = Integer.parseInt(property);
+			MAX_RESULTS = value;
+		} catch (NumberFormatException e) {
+			logger.error("Can't parse the value '" + property + "' for key '"
+					+ MsgId.KEY_MAX_RESULTS + "'. Will revert to the default value.", e);
+			MAX_RESULTS = 50;
+		}
+
 		// whether to append ordering suffix to file names
 		property = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY_APPEND.getText());
 		UPLOAD_REPOSITORY_APPEND = !(StringUtils.equals(property, "false"));
 
+		// whether to format info of repo uploads like the info of node content 
+		property = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY_FORMAT_INFO.getText());
+		UPLOAD_REPOSITORY_FORMAT_INFO = StringUtils.equals(property, "true");
+		
 		// depth of the random path
 		property = config.getProperty(MsgId.KEY_UPLOAD_DIR_PATH_DEPTH.getText());
-		int depth = UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH;
 		try {
-			depth = Integer.parseInt(property);
+			int depth = Integer.parseInt(property);
+			UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH = depth;
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			logger.error("Can't parse the value '" + property + "' for key '"
+					+ MsgId.KEY_UPLOAD_DIR_PATH_DEPTH + "'. Will revert to the default value.", e);
+			UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH = 3;
 		}
-		UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH = depth;
 
 		checkDirectoryExists(UPLOAD_DIRECTORY, true);
 		checkDirectoryExists(TEMP_DIRECTORY, false);
+
 		ALFRESCO_URL = config.getProperty(MsgId.KEY_ALFRESCO_URL.getText());
 		ALFRESCO_XFORMS_URL = ALFRESCO_URL + "/service/xforms/";
 	}
@@ -586,7 +602,7 @@ public class AlfrescoController {
 					String dirPath = mappingFile.getAbsolutePath();
 					// @Amenel: I am not comfortable with the assumption about the path to
 					// mapping.xml: although true today, it may not be so in the future, depending
-					// on OS or JVM the easiest would've been to create the dirs as siblings of it
+					// on OS or JVM. The easiest would've been to create the dirs as siblings of it
 					dirPath = StringUtils.replace(dirPath, "/WEB-INF/classes/mapping.xml", "");
 					dirPath += File.separator + dirName;
 					boolean result;
@@ -765,7 +781,7 @@ public class AlfrescoController {
 		}
 		return UPLOAD_REPOSITORY_FORMAT_INFO;
 	}
-	
+
 	/**
 	 * Processes all upload fields on initial submission. Moves filesystem uploads to the directory,
 	 * stores repo uploads into the repository and attaches the (possible) node content to the
@@ -1251,7 +1267,8 @@ public class AlfrescoController {
 		 * celle indiquée ds forms.properties) ou fixé par la propriété 'field size' dans le
 		 * modeleur. Dans ce cas, SELECTMAX conserve tjrs la valeur de field size.
 		 */
-		String maxSize = mappingTool.getFieldSizeForField(type, getParamMaxResults(), lastFormName);
+		String maxSize = mappingTool.getFieldSizeForField(type, "" + getParamMaxResults(),
+				lastFormName);
 		alfTypeName = mappingTool.getClassType(type).getAlfrescoName();
 		parameters.put("type", alfTypeName);
 		parameters.put("format", StringUtils.trimToEmpty(format));
@@ -1504,12 +1521,21 @@ public class AlfrescoController {
 		return (StringUtils.trimToNull(result) == null) ? USER_PSWD : result;
 	}
 
-	public String getParamMaxResults() {
-		String result = null;
+	public int getParamMaxResults() {
+		int result = MAX_RESULTS;
 		if (initParameters != null) {
-			result = initParameters.get(MsgId.PARAM_MAX_RESULTS.getText());
+			String resultStr = initParameters.get(MsgId.PARAM_MAX_RESULTS.getText());
+			if (StringUtils.trimToNull(resultStr) != null) {
+				try {
+					result = Integer.parseInt(resultStr);
+				} catch (NumberFormatException e) {
+					logger.error("Can't parse the value '" + resultStr + "' for parameter '"
+							+ MsgId.PARAM_MAX_RESULTS + "'. Will revert to the previous value.", e);
+					result = MAX_RESULTS;
+				}
+			}
 		}
-		return (StringUtils.trimToNull(result) == null) ? MAX_RESULTS : result;
+		return result;
 	}
 
 	/**
