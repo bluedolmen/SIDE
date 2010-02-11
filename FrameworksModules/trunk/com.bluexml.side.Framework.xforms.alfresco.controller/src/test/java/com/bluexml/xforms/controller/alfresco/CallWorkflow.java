@@ -341,10 +341,6 @@ public class CallWorkflow {
 		return true;
 	}
 
-	private static String callGetPath(NodeRef noderef) throws AlfrescoControllerException {
-		return controller.systemNodeGetPath(noderef);
-	}
-
 	private static NodeRef callCreatePackage() throws AlfrescoControllerException {
 		String methodName = "createPackage";
 		List<Object> methodParameters = new ArrayList<Object>();
