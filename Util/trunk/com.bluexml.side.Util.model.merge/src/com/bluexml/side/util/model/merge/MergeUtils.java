@@ -36,6 +36,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -43,6 +44,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -374,14 +376,28 @@ public abstract class MergeUtils {
 		EClass elMergeEClass = elMergeResource.eClass();
 		EClass elModelEClass = elModelToMerge.eClass();
 
+		boolean hackForm = false;
+		boolean sourceIsFormCollection = false;
+		boolean targetIsFormCollection = false;
+		for (EGenericType type : elMergeEClass.getEGenericSuperTypes())
+			if (type.getERawType().getName().equalsIgnoreCase("FormCollection"))
+				sourceIsFormCollection = true;
+		for (EGenericType type : elModelEClass.getEGenericSuperTypes())
+			if (type.getERawType().getName().equalsIgnoreCase("FormCollection"))
+				targetIsFormCollection = true;
+		hackForm = sourceIsFormCollection == targetIsFormCollection;
+		
 		// retrievening ereference in which we can store element from model into
 		// element from merge resource
 		EReference eRefLink = EClassUtils.findERefWichLinkSourceToTarget(elMergeEClass, elModelEClass);
 		boolean isAlreadyPresent = EObjectUtils.isTargetPresentHasChildInSourceUsingERefLInk(elMergeResource, elModelToMerge, eRefLink, cl);
-		if (isAlreadyPresent) {
-			EObject eObjectlMergeResourceToMerge = EObjectUtils.getEObjectFromSourceEqualsTarget(elMergeResource, elModelToMerge, eRefLink, cl);
-			doMergeSameDepth(eObjectlMergeResourceToMerge, elModelToMerge, cl);
-
+		if (isAlreadyPresent || hackForm) {
+			if (isAlreadyPresent) {
+				EObject eObjectlMergeResourceToMerge = EObjectUtils.getEObjectFromSourceEqualsTarget(elMergeResource, elModelToMerge, eRefLink, cl);
+				doMergeSameDepth(eObjectlMergeResourceToMerge, elModelToMerge, cl);
+			} else {
+				doMergeSameDepth(elMergeResource, elModelToMerge, cl);
+			}
 		} else {
 			System.out.println("Package  " + elModelToMerge.eClass().getName() + " " + EObjectUtils.eGetFromString(elModelToMerge, "name") + " " + "was not already present--> Adding");
 			doAddHasChild(elMergeResource, elModelToMerge, (EReference) eRefLink);
@@ -644,23 +660,18 @@ public abstract class MergeUtils {
 			Object o = eo.eGet(esf, false);
 			if (o instanceof List<?>) {
 				// List<EObject> leo = (List<EObject> )o;
-				EObjectEList<EObject> listeEObject = (EObjectEList) o;
+				if (o instanceof EObjectEList) {
+					EObjectEList<EObject> listeEObject = (EObjectEList) o;
 
-				int walker = 0;
-				while (walker < listeEObject.size()) {
-					EObject cur = listeEObject.basicGet(walker);
-					EStructuralFeature nameFeature = cur.eClass().getEStructuralFeature("name");
-					if (nameFeature != null) {
-						Object nameObject = cur.eGet(nameFeature);
-						if (nameObject != null && nameObject.equals("offreoi")) {
-							System.out.println("trouvé !...");
+					int walker = 0;
+					while (walker < listeEObject.size()) {
+						EObject cur = listeEObject.basicGet(walker);
+						if (cur.eIsProxy()) {
+							resolveProxyFromElist(cur, rs, mergeRoot, cl, listeEObject);
 						}
+						browse2(cur, rs, mergeRoot, cl);
+						walker++;
 					}
-					if (cur.eIsProxy()) {
-						resolveProxyFromElist(cur, rs, mergeRoot, cl, listeEObject);
-					}
-					browse2(cur, rs, mergeRoot, cl);
-					walker++;
 				}
 
 			} else {
@@ -762,6 +773,8 @@ public abstract class MergeUtils {
 	public static void resolveProxyFromEStructuralFeature(EObject eo, ResourceSet rs, EObject mergeRoot, ClassLoader cl, EStructuralFeature esf, EObject parent) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException,
 			InvocationTargetException, ClassNotFoundException {
 		String proxy_resolved = " not resolved ";
+		ResourceSet rs2 = new ResourceSetImpl();
+		
 		if (eo != null) {
 			if (eo.eIsProxy()) {
 				if (eo instanceof InternalEObject) {
@@ -775,8 +788,13 @@ public abstract class MergeUtils {
 							System.err.println("Unable to resolve proxy " + eo.toString());
 						}
 						EObject copy = find(resolved, mergeRoot, cl);
-						parent.eSet(esf, copy);
-
+						if (copy != null)
+							parent.eSet(esf, copy);
+						else
+							parent.eSet(esf, resolved);
+					} else {
+						EObject resolved = EcoreUtil.resolve(eo, rs);
+						parent.eSet(esf, resolved);
 					}
 					System.out.println(proxy_resolved);
 				}
