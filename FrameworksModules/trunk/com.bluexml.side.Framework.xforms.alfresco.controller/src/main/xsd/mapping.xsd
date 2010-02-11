@@ -3,6 +3,7 @@
 	<xsd:element name="mapping">
 		<xsd:complexType>
 			<xsd:sequence>
+				<xsd:element maxOccurs="1" name="genInfo" type="genInfoType" />
 				<xsd:element maxOccurs="unbounded" name="enum" type="enumType" />
 				<xsd:element maxOccurs="unbounded" name="aspect" type="aspectType" />
 				<xsd:element maxOccurs="unbounded" name="class" type="classType" />
@@ -10,6 +11,13 @@
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
+	<xsd:complexType name="genInfoType">
+		<xsd:sequence>
+			<xsd:element name="readOnlyFormsSuffix" type="xsd:string" />
+			<xsd:element name="debugMode" type="xsd:boolean" />
+		</xsd:sequence>
+	</xsd:complexType>
+
 	<xsd:element name="canister" type="canisterType" />
 	<xsd:element name="form" type="formType" substitutionGroup="canister" />
 	<xsd:element name="task" type="workflowTaskType" substitutionGroup="canister" />
