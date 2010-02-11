@@ -387,7 +387,20 @@ public class MappingTool {
 		}
 		return ""; // normally, we should never get here (unless there are multiple violations)
 	}
+	
+	/**
+	 * Gets the suffix (specified at generation time) for read only forms.
+	 * 
+	 * @return the suffix
+	 */
+	public String getReadOnlyFormsSuffix() {
+		return mapping.getGenInfo().getReadOnlyFormsSuffix();
+	}
 
+	public boolean getDebugModeStatus() {
+		return mapping.getGenInfo().isDebugMode();
+	}
+	
 	public FormType getFormType(String refName) {
 		return mappingToolAlfrescoToForms.getFormType(refName);
 	}
