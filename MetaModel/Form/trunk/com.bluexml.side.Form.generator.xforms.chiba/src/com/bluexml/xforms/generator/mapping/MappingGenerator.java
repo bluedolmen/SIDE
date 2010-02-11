@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -288,6 +290,12 @@ public class MappingGenerator extends AbstractGenerator {
 		GenInfoType genInfoType = new GenInfoType();
 		genInfoType.setReadOnlyFormsSuffix(formGenerator.getReadOnlySuffix());
 		genInfoType.setDebugMode(formGenerator.isDebugMode());
+		
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		String dateString = formatter.format(date);
+		genInfoType.setTimeStamp(dateString);
+
 		mapping.setGenInfo(genInfoType);
 
 	}
