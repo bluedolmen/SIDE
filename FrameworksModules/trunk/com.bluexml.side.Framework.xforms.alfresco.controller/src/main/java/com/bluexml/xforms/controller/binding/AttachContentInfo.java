@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="filePath" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="mimeType" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="contentType" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="appendSuffix" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,7 +37,8 @@ import javax.xml.bind.annotation.XmlType;
     "fileName",
     "filePath",
     "mimeType",
-    "contentType"
+    "contentType",
+    "appendSuffix"
 })
 public class AttachContentInfo {
 
@@ -50,6 +52,8 @@ public class AttachContentInfo {
     protected String mimeType;
     @XmlElement(required = true)
     protected String contentType;
+    @XmlElement(required = true)
+    protected String appendSuffix;
 
     /**
      * Gets the value of the targetNode property.
@@ -169,6 +173,30 @@ public class AttachContentInfo {
      */
     public void setContentType(String value) {
         this.contentType = value;
+    }
+
+    /**
+     * Gets the value of the appendSuffix property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAppendSuffix() {
+        return appendSuffix;
+    }
+
+    /**
+     * Sets the value of the appendSuffix property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAppendSuffix(String value) {
+        this.appendSuffix = value;
     }
 
 }

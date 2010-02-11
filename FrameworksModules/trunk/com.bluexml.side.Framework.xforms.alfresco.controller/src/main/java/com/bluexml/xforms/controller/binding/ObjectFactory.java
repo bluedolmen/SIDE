@@ -37,27 +37,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AspectType }
+     * Create an instance of {@link FileFieldType }
      * 
      */
-    public AspectType createAspectType() {
-        return new AspectType();
+    public FileFieldType createFileFieldType() {
+        return new FileFieldType();
     }
 
     /**
-     * Create an instance of {@link EnumType }
+     * Create an instance of {@link ReferenceType }
      * 
      */
-    public EnumType createEnumType() {
-        return new EnumType();
-    }
-
-    /**
-     * Create an instance of {@link Mapping }
-     * 
-     */
-    public Mapping createMapping() {
-        return new Mapping();
+    public ReferenceType createReferenceType() {
+        return new ReferenceType();
     }
 
     /**
@@ -69,43 +61,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AssociationType }
+     * Create an instance of {@link AspectType }
      * 
      */
-    public AssociationType createAssociationType() {
-        return new AssociationType();
-    }
-
-    /**
-     * Create an instance of {@link GenericUpdate }
-     * 
-     */
-    public GenericUpdate createGenericUpdate() {
-        return new GenericUpdate();
-    }
-
-    /**
-     * Create an instance of {@link WorkflowTaskType }
-     * 
-     */
-    public WorkflowTaskType createWorkflowTaskType() {
-        return new WorkflowTaskType();
-    }
-
-    /**
-     * Create an instance of {@link GenericAttributes }
-     * 
-     */
-    public GenericAttributes createGenericAttributes() {
-        return new GenericAttributes();
-    }
-
-    /**
-     * Create an instance of {@link AttachContentInfo }
-     * 
-     */
-    public AttachContentInfo createAttachContentInfo() {
-        return new AttachContentInfo();
+    public AspectType createAspectType() {
+        return new AspectType();
     }
 
     /**
@@ -117,123 +77,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FileFieldType }
-     * 
-     */
-    public FileFieldType createFileFieldType() {
-        return new FileFieldType();
-    }
-
-    /**
-     * Create an instance of {@link Batch }
-     * 
-     */
-    public Batch createBatch() {
-        return new Batch();
-    }
-
-    /**
-     * Create an instance of {@link ActionFieldType }
-     * 
-     */
-    public ActionFieldType createActionFieldType() {
-        return new ActionFieldType();
-    }
-
-    /**
-     * Create an instance of {@link GenericDelete }
-     * 
-     */
-    public GenericDelete createGenericDelete() {
-        return new GenericDelete();
-    }
-
-    /**
-     * Create an instance of {@link FormType }
-     * 
-     */
-    public FormType createFormType() {
-        return new FormType();
-    }
-
-    /**
-     * Create an instance of {@link ModelChoiceType }
-     * 
-     */
-    public ModelChoiceType createModelChoiceType() {
-        return new ModelChoiceType();
-    }
-
-    /**
-     * Create an instance of {@link ValueType }
-     * 
-     */
-    public ValueType createValueType() {
-        return new ValueType();
-    }
-
-    /**
-     * Create an instance of {@link GenericAttribute }
-     * 
-     */
-    public GenericAttribute createGenericAttribute() {
-        return new GenericAttribute();
-    }
-
-    /**
-     * Create an instance of {@link GenericAssociation }
-     * 
-     */
-    public GenericAssociation createGenericAssociation() {
-        return new GenericAssociation();
-    }
-
-    /**
      * Create an instance of {@link GenericAssociations }
      * 
      */
     public GenericAssociations createGenericAssociations() {
         return new GenericAssociations();
-    }
-
-    /**
-     * Create an instance of {@link AttributeType }
-     * 
-     */
-    public AttributeType createAttributeType() {
-        return new AttributeType();
-    }
-
-    /**
-     * Create an instance of {@link VirtualFieldType }
-     * 
-     */
-    public VirtualFieldType createVirtualFieldType() {
-        return new VirtualFieldType();
-    }
-
-    /**
-     * Create an instance of {@link GenericCreate }
-     * 
-     */
-    public GenericCreate createGenericCreate() {
-        return new GenericCreate();
-    }
-
-    /**
-     * Create an instance of {@link FieldType }
-     * 
-     */
-    public FieldType createFieldType() {
-        return new FieldType();
-    }
-
-    /**
-     * Create an instance of {@link Classes }
-     * 
-     */
-    public Classes createClasses() {
-        return new Classes();
     }
 
     /**
@@ -245,11 +93,67 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GenericClass }
+     * Create an instance of {@link Classes }
      * 
      */
-    public GenericClass createGenericClass() {
-        return new GenericClass();
+    public Classes createClasses() {
+        return new Classes();
+    }
+
+    /**
+     * Create an instance of {@link Mapping }
+     * 
+     */
+    public Mapping createMapping() {
+        return new Mapping();
+    }
+
+    /**
+     * Create an instance of {@link AttributeType }
+     * 
+     */
+    public AttributeType createAttributeType() {
+        return new AttributeType();
+    }
+
+    /**
+     * Create an instance of {@link GenericAttributes }
+     * 
+     */
+    public GenericAttributes createGenericAttributes() {
+        return new GenericAttributes();
+    }
+
+    /**
+     * Create an instance of {@link AssociationType }
+     * 
+     */
+    public AssociationType createAssociationType() {
+        return new AssociationType();
+    }
+
+    /**
+     * Create an instance of {@link GenericAttribute }
+     * 
+     */
+    public GenericAttribute createGenericAttribute() {
+        return new GenericAttribute();
+    }
+
+    /**
+     * Create an instance of {@link ValueType }
+     * 
+     */
+    public ValueType createValueType() {
+        return new ValueType();
+    }
+
+    /**
+     * Create an instance of {@link VirtualFieldType }
+     * 
+     */
+    public VirtualFieldType createVirtualFieldType() {
+        return new VirtualFieldType();
     }
 
     /**
@@ -261,11 +165,115 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ReferenceType }
+     * Create an instance of {@link FormType }
      * 
      */
-    public ReferenceType createReferenceType() {
-        return new ReferenceType();
+    public FormType createFormType() {
+        return new FormType();
+    }
+
+    /**
+     * Create an instance of {@link AttachContentInfo }
+     * 
+     */
+    public AttachContentInfo createAttachContentInfo() {
+        return new AttachContentInfo();
+    }
+
+    /**
+     * Create an instance of {@link GenericCreate }
+     * 
+     */
+    public GenericCreate createGenericCreate() {
+        return new GenericCreate();
+    }
+
+    /**
+     * Create an instance of {@link WorkflowTaskType }
+     * 
+     */
+    public WorkflowTaskType createWorkflowTaskType() {
+        return new WorkflowTaskType();
+    }
+
+    /**
+     * Create an instance of {@link ModelChoiceType }
+     * 
+     */
+    public ModelChoiceType createModelChoiceType() {
+        return new ModelChoiceType();
+    }
+
+    /**
+     * Create an instance of {@link GenericAssociation }
+     * 
+     */
+    public GenericAssociation createGenericAssociation() {
+        return new GenericAssociation();
+    }
+
+    /**
+     * Create an instance of {@link EnumType }
+     * 
+     */
+    public EnumType createEnumType() {
+        return new EnumType();
+    }
+
+    /**
+     * Create an instance of {@link ActionFieldType }
+     * 
+     */
+    public ActionFieldType createActionFieldType() {
+        return new ActionFieldType();
+    }
+
+    /**
+     * Create an instance of {@link FieldType }
+     * 
+     */
+    public FieldType createFieldType() {
+        return new FieldType();
+    }
+
+    /**
+     * Create an instance of {@link Batch }
+     * 
+     */
+    public Batch createBatch() {
+        return new Batch();
+    }
+
+    /**
+     * Create an instance of {@link GenericDelete }
+     * 
+     */
+    public GenericDelete createGenericDelete() {
+        return new GenericDelete();
+    }
+
+    /**
+     * Create an instance of {@link GenericClass }
+     * 
+     */
+    public GenericClass createGenericClass() {
+        return new GenericClass();
+    }
+
+    /**
+     * Create an instance of {@link GenericUpdate }
+     * 
+     */
+    public GenericUpdate createGenericUpdate() {
+        return new GenericUpdate();
+    }
+
+    /**
+     * Create an instance of {@link GenInfoType }
+     * 
+     */
+    public GenInfoType createGenInfoType() {
+        return new GenInfoType();
     }
 
     /**

@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="genInfo" type="{}genInfoType"/>
  *         &lt;element name="enum" type="{}enumType" maxOccurs="unbounded"/>
  *         &lt;element name="aspect" type="{}aspectType" maxOccurs="unbounded"/>
  *         &lt;element name="class" type="{}classType" maxOccurs="unbounded"/>
@@ -36,6 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "genInfo",
     "_enum",
     "aspect",
     "clazz",
@@ -44,6 +46,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "mapping")
 public class Mapping {
 
+    @XmlElement(required = true)
+    protected GenInfoType genInfo;
     @XmlElement(name = "enum", required = true)
     protected List<EnumType> _enum;
     @XmlElement(required = true)
@@ -52,6 +56,30 @@ public class Mapping {
     protected List<ClassType> clazz;
     @XmlElementRef(name = "canister", type = JAXBElement.class)
     protected List<JAXBElement<? extends CanisterType>> canister;
+
+    /**
+     * Gets the value of the genInfo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link GenInfoType }
+     *     
+     */
+    public GenInfoType getGenInfo() {
+        return genInfo;
+    }
+
+    /**
+     * Sets the value of the genInfo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link GenInfoType }
+     *     
+     */
+    public void setGenInfo(GenInfoType value) {
+        this.genInfo = value;
+    }
 
     /**
      * Gets the value of the enum property.
@@ -158,9 +186,9 @@ public class Mapping {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link WorkflowTaskType }{@code >}
-     * {@link JAXBElement }{@code <}{@link FormType }{@code >}
      * {@link JAXBElement }{@code <}{@link CanisterType }{@code >}
+     * {@link JAXBElement }{@code <}{@link FormType }{@code >}
+     * {@link JAXBElement }{@code <}{@link WorkflowTaskType }{@code >}
      * 
      * 
      */
