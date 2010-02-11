@@ -33,7 +33,7 @@ done
 
 mvn clean deploy -e -P public > log_maven.log
 
-sleep 6m
+sleep 5m
 
 if grep -q "BUILD SUCCESSFUL" "log_maven.log" ; then
 	echo "Maven deploy success"
