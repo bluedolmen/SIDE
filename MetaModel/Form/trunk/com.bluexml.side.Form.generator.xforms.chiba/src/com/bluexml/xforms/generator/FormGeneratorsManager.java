@@ -139,8 +139,6 @@ public class FormGeneratorsManager {
 
 	private boolean renderDataBeforeWorkflow;
 
-	private boolean autoSwitchToStandaloneMode;
-
 	private String readOnlySuffix;
 
 	private boolean generateReadOnlyForms;
@@ -150,18 +148,17 @@ public class FormGeneratorsManager {
 	/** whether the generation is in read only mode. Normally true during the second pass. */
 	private boolean inReadOnlyMode;
 
-	/** true if at least one workflow form was generated. Used at post-generation time. */
+	/**
+	 * true if at least one workflow form was generated. Used at post-generation time, notably for
+	 * outputting a URL for the demo webapp.
+	 */
 	private boolean workflowCapable;
 
 	/** Name of the form being processed. For error messages. */
 	private String currentForm;
 
-	/** If true, all some messages that are usually not displayed are sent to the monitor. */
-	private boolean debugMode;
-
-	public boolean isDebugMode() {
-		return debugMode;
-	}
+	/** If true, some messages that are usually not displayed are sent to the monitor. */
+	private boolean debugMode = false;
 
 	/**
 	 * The Class PackageInfo.
@@ -1065,21 +1062,6 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * @return the autoSwitchToStandaloneMode
-	 */
-	public boolean isAutoSwitchToStandaloneMode() {
-		return autoSwitchToStandaloneMode;
-	}
-
-	/**
-	 * @param autoSwitchToStandaloneMode
-	 *            the autoSwitchToStandaloneMode to set
-	 */
-	public void setAutoSwitchToStandaloneMode(boolean autoSwitchToStandaloneMode) {
-		this.autoSwitchToStandaloneMode = autoSwitchToStandaloneMode;
-	}
-
-	/**
 	 * @return the generateLogListForms
 	 */
 	public boolean isGenerateLogListForms() {
@@ -1103,10 +1085,14 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * @return the workflowCapable
+	 * @return the workflowCapable status
 	 */
 	public boolean isWorkflowCapable() {
 		return workflowCapable;
+	}
+
+	public boolean isDebugMode() {
+		return debugMode;
 	}
 
 	public void setDebugMode(boolean debugMode) {

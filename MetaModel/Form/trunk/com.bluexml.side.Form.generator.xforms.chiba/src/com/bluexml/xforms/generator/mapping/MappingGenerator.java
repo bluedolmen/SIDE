@@ -58,6 +58,7 @@ import com.bluexml.xforms.controller.binding.EnumType;
 import com.bluexml.xforms.controller.binding.FileFieldType;
 import com.bluexml.xforms.controller.binding.FormFieldType;
 import com.bluexml.xforms.controller.binding.FormType;
+import com.bluexml.xforms.controller.binding.GenInfoType;
 import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.ModelChoiceType;
 import com.bluexml.xforms.controller.binding.ObjectFactory;
@@ -281,8 +282,14 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginGeneration()
 	 */
 	public void beginGeneration() {
-		mapping = new Mapping();
 		monitor.setTaskName("Generating resources.");
+		mapping = new Mapping();
+		
+		GenInfoType genInfoType = new GenInfoType();
+		genInfoType.setReadOnlyFormsSuffix(formGenerator.getReadOnlySuffix());
+		genInfoType.setDebugMode(formGenerator.isDebugMode());
+		mapping.setGenInfo(genInfoType);
+
 	}
 
 	/*

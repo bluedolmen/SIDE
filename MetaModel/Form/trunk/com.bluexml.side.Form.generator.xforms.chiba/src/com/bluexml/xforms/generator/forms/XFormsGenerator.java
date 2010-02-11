@@ -360,7 +360,7 @@ public class XFormsGenerator extends AbstractGenerator {
 					association);
 		} catch (NullPointerException e) {
 			// nothing to do if in dev mode
-			if (formGenerator.isAutoSwitchToStandaloneMode() == false) {
+			if (formGenerator.isDebugMode() == false) {
 				throw (e);
 			}
 		}
