@@ -158,13 +158,6 @@
 			com.bluexml.xforms.servlets.DeleteServlet
 		</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>RedirectionAgentServlet</servlet-name>
-		<servlet-class>
-			com.bluexml.xforms.servlets.RedirectionAgentServlet
-		</servlet-class>
-	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>BlueXFormsServlet</servlet-name>
 		<url-pattern>/xforms</url-pattern>
@@ -189,10 +182,6 @@
 	<servlet-mapping>
 		<servlet-name>DeleteServlet</servlet-name>
 		<url-pattern>/delete</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>RedirectionAgentServlet</servlet-name>
-		<url-pattern>/redirect</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
