@@ -133,7 +133,6 @@ public enum MsgId {
 	INT_ACT_SUFFIX_GET_FORM_SEARCH		("search"),
 	INT_ACT_SUFFIX_GET_FORM_SELECTOR	("selector"),
 	INT_ACT_SUFFIX_GET_FORM_WKFLW		("workflow"),
-	INT_BLUEXML_DEFAULT_STORE_PATH		("/app:company_home/app:dictionary/cm:SIDE DATA"),
 	INT_CSS_BLUEXML_AUTOGEN				("bluexml-autogen"),
 	INT_CSS_HORIZ_LINE					("side_horizontal_line"),
 	INT_CSS_NO_LABEL_FIELD				("side_no_label_field"),
