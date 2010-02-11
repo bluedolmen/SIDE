@@ -134,13 +134,12 @@ public class AlfrescoController {
 	// general settings that are persisted through sessions and users
 	private static String formsPropertiesPath = null;
 	private static String messagesPropertiesPath = null;
+	private static String CssUrl = null;
+	private static String redirectXmlPath = null;
+	//
 
 	/** whether calls to the webscript are intercepted */
 	private static boolean standaloneMode = false;
-
-	private static String CssUrl = null;
-
-	private static String redirectXmlPath = null;
 
 	/** Stores redirection info keyed by form names */
 	private static Map<String, RedirectionBean> targetTable = new HashMap<String, RedirectionBean>();
@@ -203,48 +202,51 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Loads the properties files and passes them to the appropriate "consumer".
+	 * Loads the properties files and passes them to the appropriate processor for parsing.
 	 * 
 	 * @throws IOException
 	 * @throws Exception
+	 * @return true if both files have been loaded. If any of the files was found neither at the
+	 *         specified location or at the default location, returns false. If true, the files may
+	 *         have been loaded from default locations instead of the given paths.
 	 */
-	public static void loadProperties(String formsFilePath, String messagesFilePath)
+	public static boolean loadProperties(String formsFilePath, String messagesFilePath)
 			throws IOException, Exception {
 
+		//
 		// forms.properties
-		Properties config = new Properties();
-		URL formsURL = AlfrescoController.class.getResource("/forms.properties");
-		File formsFile = new File(new URI(formsURL.toString()));
-		InputStream streamForms = new FileInputStream(formsFile);
-		InputStream defStreamForms = streamForms;
-		if (StringUtils.trimToNull(formsFilePath) != null) {
+		boolean resForms;
+		if (StringUtils.trimToNull(formsFilePath) != null) { // we may be setting a new path
 			try {
 				File theFile = new File(formsFilePath);
-				streamForms = new FileInputStream(theFile);
+				InputStream stream = new FileInputStream(theFile);
+				resForms = loadPropertiesFormInit(stream);
 				// keep the path so that a subsequent reload does not require re-giving the path
 				formsPropertiesPath = formsFilePath;
 			} catch (Exception e) {
-				e.printStackTrace();
-				streamForms = defStreamForms;
+				logger.error("Configuration file 'forms.properties' not found at '" + formsFilePath
+						+ "'. Will use defaults.", e);
+				resForms = loadPropertiesFormsDefault();
 			}
-		} else if (StringUtils.trimToNull(formsPropertiesPath) != null) {
+		} else if (StringUtils.trimToNull(formsPropertiesPath) != null) { // reusing previous path
 			try {
 				File theFile = new File(formsPropertiesPath);
-				streamForms = new FileInputStream(theFile);
+				InputStream stream = new FileInputStream(theFile);
+				resForms = loadPropertiesFormInit(stream);
 			} catch (Exception e) {
-				e.printStackTrace();
-				streamForms = defStreamForms;
+				logger.error("Configuration file 'forms.properties' not found at " + formsFilePath,
+						e);
+				resForms = loadPropertiesFormsDefault();
 			}
+		} else {
+			resForms = loadPropertiesFormsDefault();
+		}
+		if (resForms == false) {
+			return false;
 		}
 
-		config.load(streamForms);
-		instance.initConfig(config);
-
 		// messages.properties
-		URL msgURL = AlfrescoController.class.getResource("/messages.properties");
-		File msgFile = new File(new URI(msgURL.toString()));
-		InputStream streamMsgs = new FileInputStream(msgFile);
-		InputStream defStreamMsgs = streamMsgs;
+		InputStream streamMsgs;
 		if (StringUtils.trimToNull(messagesFilePath) != null) {
 			try {
 				File theFile = new File(messagesFilePath);
@@ -252,8 +254,9 @@ public class AlfrescoController {
 				// keep the path so that a subsequent reload does not require re-giving the path
 				messagesPropertiesPath = messagesFilePath;
 			} catch (Exception e) {
-				e.printStackTrace();
-				streamMsgs = defStreamMsgs;
+				logger.error("Configuration file 'messages.properties' not found at '"
+						+ messagesFilePath + "'. Will use defaults.", e);
+				streamMsgs = loadPropertiesMessagesDefaults();
 			}
 		} else if (StringUtils.trimToNull(messagesPropertiesPath) != null) {
 			try {
@@ -261,10 +264,77 @@ public class AlfrescoController {
 				streamMsgs = new FileInputStream(theFile);
 			} catch (Exception e) {
 				e.printStackTrace();
-				streamMsgs = defStreamMsgs;
+				streamMsgs = loadPropertiesMessagesDefaults();
 			}
+		} else {
+			streamMsgs = loadPropertiesMessagesDefaults();
+		}
+		
+		if (streamMsgs == null) {
+			return false;
 		}
 		MsgPool.setInputStream(streamMsgs);
+		return true;
+	}
+
+	private static boolean loadPropertiesFormsDefault() {
+		// get the default file
+		URL formsURL = AlfrescoController.class.getResource("/forms.properties");
+		if (formsURL == null) {
+			logger
+					.error("Configuration file 'forms.properties' not found in WEB-INF/classes. Null URL received from system.");
+			return false;
+		}
+		try {
+			File formsFile = new File(new URI(formsURL.toString()));
+			InputStream stream = new FileInputStream(formsFile);
+			return loadPropertiesFormInit(stream);
+		} catch (URISyntaxException e) {
+			// I don't think this will ever be reached
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			logger.error("Configuration file 'forms.properties' not found in WEB-INF/classes.", e);
+		}
+		return false;
+	}
+
+	private static InputStream loadPropertiesMessagesDefaults() {
+		// get the default file
+		URL msgURL = AlfrescoController.class.getResource("/messages.properties");
+		if (msgURL == null) {
+			logger
+					.error("Configuration file 'messages.properties' not found in WEB-INF/classes. Null URL received from system.");
+			return null;
+		}
+		try {
+			File formsFile = new File(new URI(msgURL.toString()));
+			InputStream stream = new FileInputStream(formsFile);
+			return stream;
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			logger.error("Configuration file 'messages.properties' not found in WEB-INF/classes.",
+					e);
+		}
+		return null;
+	}
+
+	/**
+	 * Loads the properties from the given stream and initializes default values.
+	 * 
+	 * @param stream
+	 * @return
+	 */
+	private static boolean loadPropertiesFormInit(InputStream stream) {
+		Properties config = new Properties();
+		try {
+			config.load(stream);
+			instance.initConfig(config);
+			return true;
+		} catch (Exception e) {
+			logger.error("Failed in loading and initializing 'forms.properties'.", e);
+			return false;
+		}
 	}
 
 	/**
@@ -491,8 +561,7 @@ public class AlfrescoController {
 			throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("objectId", id);
-		return requestDocumentFromAlfresco(transaction, parameters,
-				MsgId.INT_WEBSCRIPT_OPCODE_READ, true);
+		return requestDocumentFromAlfresco(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_READ);
 	}
 
 	/**
@@ -551,10 +620,10 @@ public class AlfrescoController {
 		property = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY_APPEND.getText());
 		UPLOAD_REPOSITORY_APPEND = !(StringUtils.equals(property, "false"));
 
-		// whether to format info of repo uploads like the info of node content 
+		// whether to format info of repo uploads like the info of node content
 		property = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY_FORMAT_INFO.getText());
 		UPLOAD_REPOSITORY_FORMAT_INFO = StringUtils.equals(property, "true");
-		
+
 		// depth of the random path
 		property = config.getProperty(MsgId.KEY_UPLOAD_DIR_PATH_DEPTH.getText());
 		try {
@@ -1103,7 +1172,7 @@ public class AlfrescoController {
 		Map<String, String> ids = new HashMap<String, String>();
 
 		Document result = requestDocumentFromAlfresco(alfrescoTransaction, parameters,
-				MsgId.INT_WEBSCRIPT_OPCODE_BATCH, true);
+				MsgId.INT_WEBSCRIPT_OPCODE_BATCH);
 		Element idsElement = result.getDocumentElement();
 		NodeList childNodes = idsElement.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {
@@ -1152,7 +1221,7 @@ public class AlfrescoController {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("query", StringUtils.join(ids, ";"));
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
-				MsgId.INT_WEBSCRIPT_OPCODE_LABELS, true);
+				MsgId.INT_WEBSCRIPT_OPCODE_LABELS);
 
 		List<String> result = new ArrayList<String>();
 		// List elements = DOMUtil.getChildElements(requestDocument.getDocumentElement());
@@ -1169,7 +1238,7 @@ public class AlfrescoController {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("query", "enum;" + code);
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
-				MsgId.INT_WEBSCRIPT_OPCODE_LABELS, true);
+				MsgId.INT_WEBSCRIPT_OPCODE_LABELS);
 
 		String result = null;
 		List elements = DOMUtil.getAllChildren(requestDocument.getDocumentElement());
@@ -1221,7 +1290,7 @@ public class AlfrescoController {
 
 		parameters.put("type", mappingTool.getEnumType(type).getName());
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
-				MsgId.INT_WEBSCRIPT_OPCODE_ENUM, true);
+				MsgId.INT_WEBSCRIPT_OPCODE_ENUM);
 		Element documentElement = requestDocument.getDocumentElement();
 
 		Element queryElement = requestDocument.createElement("query");
@@ -1285,7 +1354,7 @@ public class AlfrescoController {
 			reqDoc = requestDummyDocumentList(alfTypeName, maxLength);
 		} else {
 			reqDoc = requestDocumentFromAlfresco(transaction, parameters,
-					MsgId.INT_WEBSCRIPT_OPCODE_LIST, true);
+					MsgId.INT_WEBSCRIPT_OPCODE_LIST);
 			// ** #1234
 			if (reqDoc == null) {
 				logger.error("The Alfresco server is unavailable. Returning a dummy list.");
@@ -1377,6 +1446,8 @@ public class AlfrescoController {
 		try {
 			PostMethod post = requestPost(transaction, parameters, opCode);
 			result = StringUtils.trim(post.getResponseBodyAsString());
+		} catch (ConnectException e) {
+			throw new ServletException("Can't perform actions: the Alfresco server is unreachable.");
 		} catch (IOException e) {
 			logger.error(e);
 			throw new ServletException(MsgPool.getMsg(MsgId.MSG_DEFAULT_ERROR_MSG));
@@ -1390,13 +1461,12 @@ public class AlfrescoController {
 	/**
 	 * Provides a bridge to the webscript, returning a Document.
 	 * 
+	 * @param transaction
+	 *            the transaction
 	 * @param parameters
 	 *            the parameters
 	 * @param opCode
 	 *            the opCode
-	 * @param transaction
-	 *            the transaction
-	 * @param throwIfOffline
 	 * 
 	 * @return the document
 	 * 
@@ -1405,14 +1475,13 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 */
 	private Document requestDocumentFromAlfresco(AlfrescoTransaction transaction,
-			Map<String, String> parameters, MsgId opCode, boolean throwIfOffline)
-			throws ServletException {
+			Map<String, String> parameters, MsgId opCode) throws ServletException {
 		Document result = null;
 		try {
 			PostMethod post = requestPost(transaction, parameters, opCode);
 			result = synchronizedParse(post.getResponseBodyAsStream()); // #1227
 		} catch (ConnectException e) { // #1234
-			if (throwIfOffline) {
+			if (!isDebugMode()) {
 				throw new ServletException("The Alfresco server is unavailable.");
 			}
 			return null;
@@ -1458,7 +1527,7 @@ public class AlfrescoController {
 	 * @throws IOException
 	 */
 	private PostMethod requestPost(AlfrescoTransaction transaction, Map<String, String> parameters,
-			MsgId opCode) throws ServletException, IOException {
+			MsgId opCode) throws IOException {
 		logger.debug("Alfresco request " + opCode);
 		logger.debug("Parameters : ");
 		Set<Entry<String, String>> entrySet2 = parameters.entrySet();
@@ -1481,18 +1550,7 @@ public class AlfrescoController {
 		post.setParameter("serviceCallerId", "XFormsController");
 		post.setParameter("serviceCallerVersion", "2.0.0");
 
-		try {
-			executeMethod(post, false);
-		} catch (ConnectException e) {
-			e.printStackTrace();
-			throw new ServletException("Can't perform actions: the Alfresco server is unreachable.");
-		} catch (HttpException e) {
-			e.printStackTrace();
-			throw new ServletException("Can't perform actions: the Alfresco server is unreachable.");
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new ServletException("Can't perform actions: the Alfresco server is unreachable.");
-		}
+		executeMethod(post, false);
 
 		logger.debug("Response : ");
 		logger.debug(StringUtils.trim(post.getResponseBodyAsString()));
@@ -2723,7 +2781,11 @@ public class AlfrescoController {
 	 * @return
 	 */
 	public String getReadOnlyFormsSuffix() {
-		return MsgId.INT_SUFFIX_READ_ONLY_FORMS.getText();
+		return mappingTool.getReadOnlyFormsSuffix();
+	}
+
+	public boolean isDebugMode() {
+		return mappingTool.getDebugModeStatus();
 	}
 
 	/**
@@ -2945,6 +3007,10 @@ public class AlfrescoController {
 				}
 			}
 			URL url = AlfrescoController.class.getResource("/redirect.xml");
+			if (url == null) {
+				logger.error("Redirection file not found. Redirection will not be available.");
+				return false;
+			}
 			File file;
 			try {
 				file = new File(new URI(url.toString()));
