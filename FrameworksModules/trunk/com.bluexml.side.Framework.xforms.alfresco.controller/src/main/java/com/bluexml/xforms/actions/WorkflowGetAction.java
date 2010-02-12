@@ -30,7 +30,7 @@ import com.bluexml.xforms.messages.MsgId;
  * </pre>
  * 
  * @author Amenel
- * @Deprecated since the demo webapp was available.
+ * @deprecated since the demo webapp was available.
  */
 public class WorkflowGetAction extends AbstractReadAction {
 

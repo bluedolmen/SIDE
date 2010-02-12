@@ -35,6 +35,7 @@ import com.bluexml.xforms.messages.MsgId;
  * &lt;/workflow&gt;
  * </pre>
  * 
+ * @deprecated as of 2010-02-12: this was moved to GetAction.
  * @author Amenel
  */
 public class WorkflowFormGetAction extends AbstractReadAction {
