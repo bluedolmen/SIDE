@@ -38,8 +38,6 @@ import org.alfresco.service.namespace.QName;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.bluexml.xforms.controller.binding.ClassType;
-import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import org.chiba.agent.web.WebFactory;
 import org.chiba.xml.xforms.core.Submission;
 import org.w3c.dom.DOMException;
@@ -49,6 +47,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.actions.AbstractAction;
 import com.bluexml.xforms.actions.CancelAction;
 import com.bluexml.xforms.actions.CreateClassAction;
@@ -70,9 +69,10 @@ import com.bluexml.xforms.actions.WorkflowProcessListAction;
 import com.bluexml.xforms.actions.WorkflowStartAction;
 import com.bluexml.xforms.actions.WorkflowTransitionAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
+import com.bluexml.xforms.controller.binding.ClassType;
+import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
-import com.bluexml.side.form.utils.DOMUtil;
 
 /**
  * The Class NavigationManager.
@@ -522,13 +522,17 @@ public class NavigationManager {
 	private PageInfoBean collectPageInfo(HttpServletRequest req) throws ServletException {
 		PageInfoBean bean = new PageInfoBean();
 
-		FormTypeEnum formType = FormTypeEnum.CLASS;
+		// form type
+		FormTypeEnum formType = FormTypeEnum.CLASS; // <-- default type
 		String paramFormType = req.getParameter(AbstractAction.FORM_TYPE);
 		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_FORM.getText())) {
 			formType = FormTypeEnum.FORM;
 		}
 		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_LIST.getText())) {
 			formType = FormTypeEnum.LIST;
+		}
+		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_SEARCH.getText())) {
+			formType = FormTypeEnum.SEARCH;
 		}
 		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_SELECTOR.getText())) {
 			formType = FormTypeEnum.SELECTOR;
@@ -546,7 +550,10 @@ public class NavigationManager {
 		if (formType == FormTypeEnum.WKFLW) {
 			dataType = originalDatatype;
 		} else if (formType == FormTypeEnum.SELECTOR) {
-			dataType = originalDatatype.substring(0, originalDatatype.indexOf("_selector"));
+			dataType = originalDatatype.substring(0, originalDatatype
+					.indexOf(MsgId.INT_SUFFIX_FILENAME_SELECTORS.getText()));
+		} else if (formType == FormTypeEnum.FORM) {
+			dataType = originalDatatype;
 		} else {
 			dataType = StringUtils.trimToNull(originalDatatype).replace('_', '.');
 		}
@@ -560,9 +567,6 @@ public class NavigationManager {
 
 		// check that the form is appropriate for the data id
 		String dataId = StringUtils.trimToNull(req.getParameter(AbstractAction.DATA_ID));
-		// if ((bean.formType == FormTypeEnum.WKFLW_SELECTION)) {
-		// dataId = null;
-		// }
 		String realFormName = originalDatatype;
 		if (bean.formType == FormTypeEnum.WKFLW) {
 			WorkflowTaskType taskType = controller.getWorkflowTaskType(dataType);
