@@ -185,9 +185,6 @@
       </children>
       <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLINRREd6d24BtuZ-cgQ"/>
     </children>
-    <disabled xsi:type="view:TextField" name="Num&#xe9;ro de dossier">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-    </disabled>
   </composedViews>
   <composedViews name="Detail">
     <children xsi:type="view:DataList" name="Document">
