@@ -33,7 +33,6 @@ import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
 import com.bluexml.side.form.FormWorkflow;
-import com.bluexml.side.form.SearchForm;
 import com.bluexml.side.form.impl.FormGroupImpl;
 import com.bluexml.xforms.generator.AbstractGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
@@ -681,9 +680,9 @@ public class XFormsGenerator extends AbstractGenerator {
 				isContentEnabled = ((FormClass) formContainer).isContent_enabled();
 				formTypeRendered = FormTypeRendered.formForm;
 				logPrefix = "FormClass";
-			} else if (formContainer instanceof SearchForm) {
-				formTypeRendered = FormTypeRendered.formSearch;
-				logPrefix = "FormSearch";
+//			} else if (formContainer instanceof SearchForm) {
+//				formTypeRendered = FormTypeRendered.formSearch;
+//				logPrefix = "FormSearch";
 			} else {
 				// we never reach here.
 			}
