@@ -989,7 +989,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Adds the generalizations.
+	 * Adds the generalizations/specializations for ulterior building of the selector forms.
 	 * 
 	 * @param leafClasse
 	 *            the leaf classe
@@ -1001,7 +1001,14 @@ public class XFormsGenerator extends AbstractGenerator {
 		for (Clazz generalization : generalizations) {
 			Clazz parentClasse = generalization;
 			if (!classe.isAbstract()) {
-				classes.get(parentClasse).addSubClass(classe, classes.get(classe));
+				RenderableClass parentClass = classes.get(parentClasse);
+				if (parentClass != null) {
+					parentClass.addSubClass(classe, classes.get(classe));
+				} else {
+					monitor.addErrorTextAndLog("No classType found for class '" + classe.getLabel()
+							+ "'. Please add the containing model to the generation project.",
+							null, null);
+				}
 			}
 			addGeneralizations(parentClasse, classe);
 		}
