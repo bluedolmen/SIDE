@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * Bean for keeping page-specific info.<br/>
- * <b>NOTE:</b> dataTypeSet is the only page info not reported here. Set by default to "false" in
+ * <b>NOTE:</b> <em>dataTypeSet</em> is the only page info not reported here. Set by default to "false" in
  * the Page constructor, it is checked only for abstract data types in
  * {@link NavigationManager#getXFormsString()}.
  * 
@@ -72,6 +72,7 @@ public class PageInfoBean {
 		this.dataType = page.getDataType();
 		this.formName = page.getFormName();
 		this.initParams = new HashMap<String, String>(page.getInitParams());
+		this.wrongCallType = page.isWrongCallType();
 	}
 
 }
