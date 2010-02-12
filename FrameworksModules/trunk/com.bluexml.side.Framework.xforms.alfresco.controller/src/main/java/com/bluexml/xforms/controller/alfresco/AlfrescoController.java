@@ -95,6 +95,9 @@ public class AlfrescoController {
 	/** whether info of repository uploads are formatted in the same way as content information */
 	public static boolean UPLOAD_REPOSITORY_FORMAT_INFO = false;
 
+	/** whether to check that the form being opened matches the data id */
+	public static boolean CHECK_MATCH_DATA_FORM = true;
+	
 	/** The temp directory. */
 	public static File TEMP_DIRECTORY = null;
 
@@ -594,10 +597,14 @@ public class AlfrescoController {
 			MAX_RESULTS = 50;
 		}
 
+		// whether to check matching of form vs data 
+		property = config.getProperty(MsgId.KEY_CHECK_MATCH_DATA_FORM.getText());
+		CHECK_MATCH_DATA_FORM = !(StringUtils.equals(property, "false"));
+
 		// whether to append ordering suffix to file names
 		property = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY_APPEND.getText());
 		UPLOAD_REPOSITORY_APPEND = !(StringUtils.equals(property, "false"));
-
+		
 		// whether to format info of repo uploads like the info of node content
 		property = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY_FORMAT_INFO.getText());
 		UPLOAD_REPOSITORY_FORMAT_INFO = StringUtils.equals(property, "true");
@@ -823,6 +830,18 @@ public class AlfrescoController {
 		}
 		return UPLOAD_REPOSITORY_FORMAT_INFO;
 	}
+
+	public boolean getParamCheckMatchDataForm() {
+		String paramStr = null;
+		if (initParameters != null) {
+			paramStr = initParameters.get(MsgId.PARAM_CHECK_MATCH_DATA_FORM.getText());
+		}
+		if (StringUtils.trimToNull(paramStr) != null) {
+			return !(StringUtils.equals(paramStr, "false"));
+		}
+		return CHECK_MATCH_DATA_FORM;
+	}
+	
 
 	/**
 	 * Processes all upload fields on initial submission. Moves filesystem uploads to the directory,

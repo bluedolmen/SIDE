@@ -28,6 +28,8 @@ public class DefaultMessages {
 			"#",
 			"# address of the Alfresco server",
 			"alfresco.url=http://localhost:8080/alfresco",
+			"# whether to check that the form being opened matches the data whose id is provided. If true and there's no matching, a warning is displayed on the form.",
+			"check.match.data.and.form=true",
 			"# number of results displayed in selection lists of associations. 0 = unlimited (dangerous)",
 			"selection.list.max.results=50",
 			"",

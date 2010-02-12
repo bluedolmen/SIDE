@@ -31,6 +31,7 @@ public enum MsgId {
 	// keys for messages in the forms.properties file
 	//
 	KEY_ALFRESCO_URL("alfresco.url"),
+	KEY_CHECK_MATCH_DATA_FORM("check.match.data.and.form"),
 	KEY_MAX_RESULTS("selection.list.max.results"),
 	KEY_TEMP_DIRECTORY("temp.directory"),
 	/** The key for the complete path when uploading to file system.*/
@@ -252,6 +253,7 @@ public enum MsgId {
 	PARAM_ALLOW_ALL_DEFS ("allowAllDefs"),
 	/** Used when redirecting from a workflow form to continually progress along a workflow path*/
 	PARAM_AUTO_ADVANCE ("autoAdvance"),
+	PARAM_CHECK_MATCH_DATA_FORM("checkMatchDF"),
 	/** URL of a CSS for inclusion in templates sent to clients. PERSISTENT.*/
 	PARAM_CSS_FILE("CSS"), 
 	PARAM_DATA_ID("id"),
