@@ -1,191 +1,188 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_E4XnsOM4Ed6qNvjsNi40SA">
-  <views xsi:type="view:FacetMap" xmi:id="_0Gj0AABaEd-pVYKNSGS_OQ" name="Incoming Mail (FacetMap)" prefix="">
-    <children xsi:type="view:TextField" xmi:id="_VNl4hAEaEd-iQ-Ghy96rpQ" name="DeliveryService" prefix="">
-      <mapTo href="../Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
-    </children>
-    <children xsi:type="view:TextField" xmi:id="_VNl4iQEaEd-iQ-Ghy96rpQ" name="Other Assignment">
-      <mapTo href="../Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
-    </children>
-    <children xsi:type="view:TextField" xmi:id="_VNl4iwEaEd-iQ-Ghy96rpQ" name="Attribution">
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_E4XnsOM4Ed6qNvjsNi40SA" name="views">
+  <views xsi:type="view:FacetMap" xmi:id="_0Gj0AABaEd-pVYKNSGS_OQ" name="IncomingMail" prefix="">
+    <children xsi:type="view:TextField" xmi:id="_QO1SsBfHEd-n3oYS5dLh8Q" name="Attribution">
       <mapTo href="../Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_VNl4jAEaEd-iQ-Ghy96rpQ" name="Incoming Mail (Data List)">
+    <children xsi:type="view:DateTimeField" xmi:id="_QO1SsRfHEd-n3oYS5dLh8Q" name="DigitizationDate">
+      <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </children>
+    <children xsi:type="view:DateField" xmi:id="_QO1SshfHEd-n3oYS5dLh8Q" name="ArrivalDate">
+      <mapTo href="../Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" xmi:id="_QO1SsxfHEd-n3oYS5dLh8Q" name="Observation">
+      <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" xmi:id="_QO1StBfHEd-n3oYS5dLh8Q" name="Author">
+      <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+    </children>
+    <children xsi:type="view:TextField" xmi:id="_QO1StRfHEd-n3oYS5dLh8Q" name="Title">
+      <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" xmi:id="_QO1SthfHEd-n3oYS5dLh8Q" name="Classification">
+      <mapTo href="../Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:DateField" xmi:id="_QO15wBfHEd-n3oYS5dLh8Q" name="ServiceArrivalDate">
+      <mapTo href="../Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" xmi:id="_QO15wRfHEd-n3oYS5dLh8Q" name="DeliveryService">
+      <mapTo href="../Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" xmi:id="_QO15whfHEd-n3oYS5dLh8Q" name="OtherAssignment">
+      <mapTo href="../Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:IntegerField" xmi:id="_QO15wxfHEd-n3oYS5dLh8Q" name="ArrivalNumber">
+      <mapTo href="../Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" xmi:id="_QO15xBfHEd-n3oYS5dLh8Q" name="Number">
+      <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:DataList" xmi:id="_QO15xRfHEd-n3oYS5dLh8Q" name="IncomingMail">
       <mapTo href="../Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
-      <children xsi:type="view:IntegerField" xmi:id="_VNl4jQEaEd-iQ-Ghy96rpQ" name="Arrival Number">
-        <mapTo href="../Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_VNl4kQEaEd-iQ-Ghy96rpQ" name="DeliveryService">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateField" xmi:id="_VNl4kgEaEd-iQ-Ghy96rpQ" name="Arrival date in the service">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_VNl4kwEaEd-iQ-Ghy96rpQ" name="Author">
-        <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_VNl4lAEaEd-iQ-Ghy96rpQ" name="Document Title">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_VNl4lgEaEd-iQ-Ghy96rpQ" name="Other Assignment">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_VNl4mAEaEd-iQ-Ghy96rpQ" name="Attribution">
+      <children xsi:type="view:TextField" xmi:id="_QO15xhfHEd-n3oYS5dLh8Q" name="Attribution">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
       </children>
-      <disabled xsi:type="view:DateTimeField" xmi:id="_3RUKoAEcEd-iQ-Ghy96rpQ" name="Digitization Date">
+      <children xsi:type="view:DateTimeField" xmi:id="_QO15xxfHEd-n3oYS5dLh8Q" name="DigitizationDate">
         <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
-      </disabled>
-      <disabled xsi:type="view:DateField" xmi:id="_6vI8YAEcEd-iQ-Ghy96rpQ" name="Arrival Date">
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_QO15yBfHEd-n3oYS5dLh8Q" name="ArrivalDate">
         <mapTo href="../Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" xmi:id="__vl-gAEcEd-iQ-Ghy96rpQ" name="file number">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" xmi:id="_BUA-oAEdEd-iQ-Ghy96rpQ" name="Classification">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" xmi:id="_CJRysAEdEd-iQ-Ghy96rpQ" name="Observation">
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_QO15yRfHEd-n3oYS5dLh8Q" name="Observation">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_QO15yhfHEd-n3oYS5dLh8Q" name="Author">
+        <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_QO15yxfHEd-n3oYS5dLh8Q" name="Title">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_QO15zBfHEd-n3oYS5dLh8Q" name="Classification">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_QO15zRfHEd-n3oYS5dLh8Q" name="ServiceArrivalDate">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_QO15zhfHEd-n3oYS5dLh8Q" name="DeliveryService">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_QO15zxfHEd-n3oYS5dLh8Q" name="OtherAssignment">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:IntegerField" xmi:id="_QO150BfHEd-n3oYS5dLh8Q" name="ArrivalNumber">
+        <mapTo href="../Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_QO150RfHEd-n3oYS5dLh8Q" name="Number">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
       <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
     </children>
-    <disabled xsi:type="view:IntegerField" xmi:id="_dDHDQAEaEd-iQ-Ghy96rpQ" name="Arrival Number">
-      <mapTo href="../Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:DateTimeField" xmi:id="_dZ39cAEaEd-iQ-Ghy96rpQ" name="Digitization Date">
-      <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
-    </disabled>
-    <disabled xsi:type="view:DateField" xmi:id="_dqiPoAEaEd-iQ-Ghy96rpQ" name="Arrival Date">
-      <mapTo href="../Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:TextField" xmi:id="_d81gkAEaEd-iQ-Ghy96rpQ" name="Observation">
-      <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:DateField" xmi:id="_esvTgAEaEd-iQ-Ghy96rpQ" name="Arrival date in the service">
-      <mapTo href="../Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:TextField" xmi:id="_fEY-gAEaEd-iQ-Ghy96rpQ" name="Author">
-      <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-    </disabled>
-    <disabled xsi:type="view:TextField" xmi:id="_f5gooAEaEd-iQ-Ghy96rpQ" name="Document Title">
-      <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:TextField" xmi:id="_gUlbEAEaEd-iQ-Ghy96rpQ" name="Classification">
-      <mapTo href="../Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:TextField" xmi:id="_gwsvUAEaEd-iQ-Ghy96rpQ" name="file number">
-      <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-    </disabled>
     <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
   </views>
   <composedViews xmi:id="_yopnkOM6Ed6qNvjsNi40SA" name="List">
-    <children xsi:type="view:DataList" xmi:id="_22NNIOM6Ed6qNvjsNi40SA" name="Document (Data List)">
-      <children xsi:type="view:TextField" xmi:id="_5yoiAeM6Ed6qNvjsNi40SA" name="Reference Number">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_5yoiAOM6Ed6qNvjsNi40SA" name="Title">
+    <children xsi:type="view:DataList" xmi:id="_22NNIOM6Ed6qNvjsNi40SA" name="Document">
+      <children xsi:type="view:TextField" xmi:id="_NjvlcBfHEd-n3oYS5dLh8Q" name="Title">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:DateTimeField" xmi:id="_5yoiA-M6Ed6qNvjsNi40SA" name="Digitization Date">
+      <children xsi:type="view:TextField" xmi:id="_NjvlcRfHEd-n3oYS5dLh8Q" name="Number">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_NjvlchfHEd-n3oYS5dLh8Q" name="Observation">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateTimeField" xmi:id="_NjvlcxfHEd-n3oYS5dLh8Q" name="DigitizationDate">
         <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_5yoiBOM6Ed6qNvjsNi40SA" name="Author">
+      <children xsi:type="view:TextField" xmi:id="_NjvldBfHEd-n3oYS5dLh8Q" name="Author">
         <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
-      <disabled xsi:type="view:TextField" xmi:id="_BKfgYOM7Ed6qNvjsNi40SA" name="Observation">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
       <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06OkG9RREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_1ykucONREd6sL9QxK1vqZQ" name="Vehicle (Data List)" prefix="">
-      <children xsi:type="view:TextField" xmi:id="_5eC6oeNREd6sL9QxK1vqZQ" name="Reference Number">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_5eC6puNREd6sL9QxK1vqZQ" name="Title">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" xmi:id="_5eC6o-NREd6sL9QxK1vqZQ" name="Digitization Date">
+    <children xsi:type="view:DataList" xmi:id="_1ykucONREd6sL9QxK1vqZQ" name="Vehicle" prefix="">
+      <children xsi:type="view:DateTimeField" xmi:id="_NjwMgBfHEd-n3oYS5dLh8Q" name="DigitizationDate">
         <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_5eC6peNREd6sL9QxK1vqZQ" name="Author">
+      <children xsi:type="view:TextField" xmi:id="_NjwMgRfHEd-n3oYS5dLh8Q" name="Observation">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_NjwMghfHEd-n3oYS5dLh8Q" name="Author">
         <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:DateField" xmi:id="_CYepkeNTEd6sL9QxK1vqZQ" name="Next Control Visit">
+      <children xsi:type="view:TextField" xmi:id="_NjwMgxfHEd-n3oYS5dLh8Q" name="Title">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_NjwMhBfHEd-n3oYS5dLh8Q" name="Lifting">
+        <mapTo href="../Data/DigitizationProcess.dt#_06PLKtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_NjwMhRfHEd-n3oYS5dLh8Q" name="NextControlDate">
         <mapTo href="../Data/DigitizationProcess.dt#_06PLLdRREd6d24BtuZ-cgQ"/>
       </children>
-      <disabled xsi:type="view:TextField" xmi:id="__YV5YONSEd6sL9QxK1vqZQ" name="Numéro de dossier">
+      <children xsi:type="view:TextField" xmi:id="_NjwMhhfHEd-n3oYS5dLh8Q" name="Number">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" xmi:id="_CYepkONTEd6sL9QxK1vqZQ" name="Marériel de levage">
-        <mapTo href="../Data/DigitizationProcess.dt#_06PLKtRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" xmi:id="_CYepkuNTEd6sL9QxK1vqZQ" name="Observation">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
+      </children>
       <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06PLKNRREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_EHVYEONTEd6sL9QxK1vqZQ" name="IncomingMail (Data List)">
-      <children xsi:type="view:TextField" xmi:id="_G4tTgeNTEd6sL9QxK1vqZQ" name="Reference Number">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+    <children xsi:type="view:DataList" xmi:id="_EHVYEONTEd6sL9QxK1vqZQ" name="IncomingMail">
+      <children xsi:type="view:TextField" xmi:id="_NjxaoBfHEd-n3oYS5dLh8Q" name="Attribution">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_G4tThONTEd6sL9QxK1vqZQ" name="Title">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" xmi:id="_G4tTiONTEd6sL9QxK1vqZQ" name="Digitization Date">
+      <children xsi:type="view:DateTimeField" xmi:id="_NjxaoRfHEd-n3oYS5dLh8Q" name="DigitizationDate">
         <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_G4tTi-NTEd6sL9QxK1vqZQ" name="Author">
+      <children xsi:type="view:DateField" xmi:id="_NjxaohfHEd-n3oYS5dLh8Q" name="ArrivalDate">
+        <mapTo href="../Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_NjxaoxfHEd-n3oYS5dLh8Q" name="Observation">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_NjxapBfHEd-n3oYS5dLh8Q" name="Author">
         <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:DateField" xmi:id="_G4tTgONTEd6sL9QxK1vqZQ" name="Incoming Date in service">
+      <children xsi:type="view:TextField" xmi:id="_NjxapRfHEd-n3oYS5dLh8Q" name="Title">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_NjxaphfHEd-n3oYS5dLh8Q" name="Classification">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_NjxapxfHEd-n3oYS5dLh8Q" name="ServiceArrivalDate">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
       </children>
-      <disabled xsi:type="view:TextField" xmi:id="_Wnrt0ONTEd6sL9QxK1vqZQ" name="Attribution">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" xmi:id="_WnsU4ONTEd6sL9QxK1vqZQ" name="Autre Affectation">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" xmi:id="_WnsU4eNTEd6sL9QxK1vqZQ" name="Classement">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" xmi:id="_WnsU4uNTEd6sL9QxK1vqZQ" name="Service Destinataire">
+      <children xsi:type="view:TextField" xmi:id="_NjxaqBfHEd-n3oYS5dLh8Q" name="DeliveryService">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:IntegerField" xmi:id="_WnsU4-NTEd6sL9QxK1vqZQ" name="Numéro d'Arrivee">
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_NjxaqRfHEd-n3oYS5dLh8Q" name="OtherAssignment">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:IntegerField" xmi:id="_NjxaqhfHEd-n3oYS5dLh8Q" name="ArrivalNumber">
         <mapTo href="../Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" xmi:id="_WnsU5ONTEd6sL9QxK1vqZQ" name="Observation">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:DateField" xmi:id="_WnsU5eNTEd6sL9QxK1vqZQ" name="Date d'Arrivee">
-        <mapTo href="../Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
-    </children>
-    <children xsi:type="view:DataList" xmi:id="_RXzvoONTEd6sL9QxK1vqZQ" name="OutgoingMail (Data List)" suffix="">
-      <children xsi:type="view:TextField" xmi:id="_TePQoONTEd6sL9QxK1vqZQ" name="Reference Number">
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_NjxaqxfHEd-n3oYS5dLh8Q" name="Number">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_TePQouNTEd6sL9QxK1vqZQ" name="Title">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" xmi:id="_TePQpONTEd6sL9QxK1vqZQ" name="Digitization Date">
+      <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:DataList" xmi:id="_RXzvoONTEd6sL9QxK1vqZQ" name="OutgoingMail" suffix="">
+      <children xsi:type="view:DateTimeField" xmi:id="_NjxarBfHEd-n3oYS5dLh8Q" name="DigitizationDate">
         <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_TePQpuNTEd6sL9QxK1vqZQ" name="Author">
+      <children xsi:type="view:TextField" xmi:id="_NjxarRfHEd-n3oYS5dLh8Q" name="Observation">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_NjxarhfHEd-n3oYS5dLh8Q" name="Author">
         <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:DateField" xmi:id="_TePQoeNTEd6sL9QxK1vqZQ" name="Outgoing Date">
+      <children xsi:type="view:TextField" xmi:id="_NjyBsBfHEd-n3oYS5dLh8Q" name="Title">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_NjyBsRfHEd-n3oYS5dLh8Q" name="SenderService">
+        <mapTo href="../Data/DigitizationProcess.dt#_06PLJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_NjyBshfHEd-n3oYS5dLh8Q" name="DepartureDate">
         <mapTo href="../Data/DigitizationProcess.dt#_06PLItRREd6d24BtuZ-cgQ"/>
       </children>
-      <disabled xsi:type="view:TextField" xmi:id="_ZJuMwONTEd6sL9QxK1vqZQ" name="Service Expéditeur">
-        <mapTo href="../Data/DigitizationProcess.dt#_06PLJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" xmi:id="_ZJuMweNTEd6sL9QxK1vqZQ" name="Observation">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
+      <children xsi:type="view:TextField" xmi:id="_NjyBsxfHEd-n3oYS5dLh8Q" name="Number">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
       <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06PLINRREd6d24BtuZ-cgQ"/>
     </children>
     <disabled xsi:type="view:TextField" xmi:id="_AKUI4ONTEd6sL9QxK1vqZQ" name="Numéro de dossier">
@@ -193,146 +190,146 @@
     </disabled>
   </composedViews>
   <composedViews xmi:id="_8cHFsOM6Ed6qNvjsNi40SA" name="Detail">
-    <children xsi:type="view:DataList" xmi:id="_-8cUcOM6Ed6qNvjsNi40SA" name="Document (Data List)">
-      <children xsi:type="view:TextField" xmi:id="_AqACceM7Ed6qNvjsNi40SA" name="Reference Number">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_AqACcOM7Ed6qNvjsNi40SA" name="Title">
+    <children xsi:type="view:DataList" xmi:id="_-8cUcOM6Ed6qNvjsNi40SA" name="Document">
+      <children xsi:type="view:TextField" xmi:id="_MBqHoBfHEd-n3oYS5dLh8Q" name="Title">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:DateTimeField" xmi:id="_AqACc-M7Ed6qNvjsNi40SA" name="Digitization Date">
+      <children xsi:type="view:TextField" xmi:id="_MBqHoRfHEd-n3oYS5dLh8Q" name="Number">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBqHohfHEd-n3oYS5dLh8Q" name="Observation">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateTimeField" xmi:id="_MBqHoxfHEd-n3oYS5dLh8Q" name="DigitizationDate">
         <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_AqACdOM7Ed6qNvjsNi40SA" name="Author">
+      <children xsi:type="view:TextField" xmi:id="_MBqHpBfHEd-n3oYS5dLh8Q" name="Author">
         <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_AqACcuM7Ed6qNvjsNi40SA" name="Observation">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
       </children>
       <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06OkG9RREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_vSLHEONSEd6sL9QxK1vqZQ" name="Vehicle (Data List)" prefix="">
-      <children xsi:type="view:TextField" xmi:id="_xagskONSEd6sL9QxK1vqZQ" name="Reference Number">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_xagskeNSEd6sL9QxK1vqZQ" name="Title">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_xagsluNSEd6sL9QxK1vqZQ" name="Author">
-        <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:DateTimeField" xmi:id="_xagskuNSEd6sL9QxK1vqZQ" name="Digitization Date">
+    <children xsi:type="view:DataList" xmi:id="_vSLHEONSEd6sL9QxK1vqZQ" name="Vehicle" prefix="">
+      <children xsi:type="view:DateTimeField" xmi:id="_MBrVwBfHEd-n3oYS5dLh8Q" name="DigitizationDate">
         <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:DateField" xmi:id="_xagsk-NSEd6sL9QxK1vqZQ" name="Next Control Visit">
-        <mapTo href="../Data/DigitizationProcess.dt#_06PLLdRREd6d24BtuZ-cgQ"/>
+      <children xsi:type="view:TextField" xmi:id="_MBrVwRfHEd-n3oYS5dLh8Q" name="Observation">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_xagsleNSEd6sL9QxK1vqZQ" name="Lifting Apparatus">
+      <children xsi:type="view:TextField" xmi:id="_MBrVwhfHEd-n3oYS5dLh8Q" name="Author">
+        <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBrVwxfHEd-n3oYS5dLh8Q" name="Title">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBrVxBfHEd-n3oYS5dLh8Q" name="Lifting">
         <mapTo href="../Data/DigitizationProcess.dt#_06PLKtRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_xagslONSEd6sL9QxK1vqZQ" name="Observation">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      <children xsi:type="view:DateField" xmi:id="_MBrVxRfHEd-n3oYS5dLh8Q" name="NextControlDate">
+        <mapTo href="../Data/DigitizationProcess.dt#_06PLLdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBrVxhfHEd-n3oYS5dLh8Q" name="Number">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
       </children>
       <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06PLKNRREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_0P4-QONSEd6sL9QxK1vqZQ" name="IncomingMail (Data List)">
-      <children xsi:type="view:TextField" xmi:id="_2CWaYeNSEd6sL9QxK1vqZQ" name="Reference Number">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_2CWaZONSEd6sL9QxK1vqZQ" name="Title">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_2CWaa-NSEd6sL9QxK1vqZQ" name="Author">
-        <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:DateField" xmi:id="_2CWaYONSEd6sL9QxK1vqZQ" name="Incoming Date in service">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_2CWaYuNSEd6sL9QxK1vqZQ" name="Attribution">
+    <children xsi:type="view:DataList" xmi:id="_0P4-QONSEd6sL9QxK1vqZQ" name="IncomingMail">
+      <children xsi:type="view:TextField" xmi:id="_MBr80BfHEd-n3oYS5dLh8Q" name="Attribution">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_2CWaZeNSEd6sL9QxK1vqZQ" name="Classification">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_2CWaZuNSEd6sL9QxK1vqZQ" name="Delivery Service">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:IntegerField" xmi:id="_2CWaZ-NSEd6sL9QxK1vqZQ" name="Arrival Number">
-        <mapTo href="../Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateField" xmi:id="_2CWaauNSEd6sL9QxK1vqZQ" name="Incoming Date">
-        <mapTo href="../Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_2CWaY-NSEd6sL9QxK1vqZQ" name="Other Assignment">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" xmi:id="_2CWaaONSEd6sL9QxK1vqZQ" name="Digitization Date">
+      <children xsi:type="view:DateTimeField" xmi:id="_MBr80RfHEd-n3oYS5dLh8Q" name="DigitizationDate">
         <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_2CWaaeNSEd6sL9QxK1vqZQ" name="Observation">
+      <children xsi:type="view:DateField" xmi:id="_MBr80hfHEd-n3oYS5dLh8Q" name="ArrivalDate">
+        <mapTo href="../Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBr80xfHEd-n3oYS5dLh8Q" name="Observation">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBr81BfHEd-n3oYS5dLh8Q" name="Author">
+        <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBr81RfHEd-n3oYS5dLh8Q" name="Title">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBr81hfHEd-n3oYS5dLh8Q" name="Classification">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_MBr81xfHEd-n3oYS5dLh8Q" name="ServiceArrivalDate">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBr82BfHEd-n3oYS5dLh8Q" name="DeliveryService">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBr82RfHEd-n3oYS5dLh8Q" name="OtherAssignment">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:IntegerField" xmi:id="_MBr82hfHEd-n3oYS5dLh8Q" name="ArrivalNumber">
+        <mapTo href="../Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBr82xfHEd-n3oYS5dLh8Q" name="Number">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
       </children>
       <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_6V4sIONSEd6sL9QxK1vqZQ" name="OutgoingMail (Data List)">
-      <children xsi:type="view:TextField" xmi:id="_7x-2sONSEd6sL9QxK1vqZQ" name="Reference Number">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_7x-2suNSEd6sL9QxK1vqZQ" name="Title">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_7x-2tuNSEd6sL9QxK1vqZQ" name="Author">
-        <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:DateField" xmi:id="_7x-2seNSEd6sL9QxK1vqZQ" name="Outgoing Date">
-        <mapTo href="../Data/DigitizationProcess.dt#_06PLItRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_7x-2s-NSEd6sL9QxK1vqZQ" name="Sender Service">
-        <mapTo href="../Data/DigitizationProcess.dt#_06PLJdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" xmi:id="_7x-2tONSEd6sL9QxK1vqZQ" name="Digitization Date">
+    <children xsi:type="view:DataList" xmi:id="_6V4sIONSEd6sL9QxK1vqZQ" name="OutgoingMail">
+      <children xsi:type="view:DateTimeField" xmi:id="_MBsj4BfHEd-n3oYS5dLh8Q" name="DigitizationDate">
         <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_7x-2teNSEd6sL9QxK1vqZQ" name="Observation">
+      <children xsi:type="view:TextField" xmi:id="_MBsj4RfHEd-n3oYS5dLh8Q" name="Observation">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBsj4hfHEd-n3oYS5dLh8Q" name="Author">
+        <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBsj4xfHEd-n3oYS5dLh8Q" name="Title">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBsj5BfHEd-n3oYS5dLh8Q" name="SenderService">
+        <mapTo href="../Data/DigitizationProcess.dt#_06PLJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_MBsj5RfHEd-n3oYS5dLh8Q" name="DepartureDate">
+        <mapTo href="../Data/DigitizationProcess.dt#_06PLItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBsj5hfHEd-n3oYS5dLh8Q" name="Number">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
       </children>
       <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06PLINRREd6d24BtuZ-cgQ"/>
     </children>
-    <disabled xsi:type="view:DataList" xmi:id="_g6_XYONYEd6sL9QxK1vqZQ" name="Annexe (Data List)">
-      <children xsi:type="view:TextField" xmi:id="_g6_-cONYEd6sL9QxK1vqZQ" name="Auteur">
-        <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:DateField" xmi:id="_g6_-ceNYEd6sL9QxK1vqZQ" name="Date de Fin du marché">
-        <mapTo href="../Data/DigitizationProcess.dt#_06QZRdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_g6_-cuNYEd6sL9QxK1vqZQ" name="Objet">
-        <mapTo href="../Data/DigitizationProcess.dt#_06QZQNRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_g6_-c-NYEd6sL9QxK1vqZQ" name="Libellé du document">
-        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_g6_-dONYEd6sL9QxK1vqZQ" name="Titre de l'annexe">
-        <mapTo href="../Data/DigitizationProcess.dt#_06SOdNRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateField" xmi:id="_g6_-deNYEd6sL9QxK1vqZQ" name="Date de debut du marche">
-        <mapTo href="../Data/DigitizationProcess.dt#_06QZQtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" xmi:id="_g6_-duNYEd6sL9QxK1vqZQ" name="Date de numerisation">
-        <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_g6_-d-NYEd6sL9QxK1vqZQ" name="Titulaire du marché">
-        <mapTo href="../Data/DigitizationProcess.dt#_06PyP9RREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" xmi:id="_g6_-eONYEd6sL9QxK1vqZQ" name="Dernière Révision de prix">
+    <children xsi:type="view:DataList" xmi:id="_g6_XYONYEd6sL9QxK1vqZQ" name="Annex">
+      <children xsi:type="view:TextField" xmi:id="_MBtK8BfHEd-n3oYS5dLh8Q" name="Price">
         <mapTo href="../Data/DigitizationProcess.dt#_06RAUtRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_g6_-eeNYEd6sL9QxK1vqZQ" name="Observation">
+      <children xsi:type="view:DateTimeField" xmi:id="_MBtK8RfHEd-n3oYS5dLh8Q" name="DigitizationDate">
+        <mapTo href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_MBtK8hfHEd-n3oYS5dLh8Q" name="BeginningDate">
+        <mapTo href="../Data/DigitizationProcess.dt#_06QZQtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBtK8xfHEd-n3oYS5dLh8Q" name="Title">
+        <mapTo href="../Data/DigitizationProcess.dt#_06SOdNRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBtK9BfHEd-n3oYS5dLh8Q" name="Observation">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_g6_-euNYEd6sL9QxK1vqZQ" name="Numéro de dossier">
+      <children xsi:type="view:TextField" xmi:id="_MBtK9RfHEd-n3oYS5dLh8Q" name="Subject">
+        <mapTo href="../Data/DigitizationProcess.dt#_06QZQNRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBtK9hfHEd-n3oYS5dLh8Q" name="Title">
+        <mapTo href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBtyABfHEd-n3oYS5dLh8Q" name="Author">
+        <mapTo href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBtyARfHEd-n3oYS5dLh8Q" name="Holder">
+        <mapTo href="../Data/DigitizationProcess.dt#_06PyP9RREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" xmi:id="_MBtyAhfHEd-n3oYS5dLh8Q" name="EndDate">
+        <mapTo href="../Data/DigitizationProcess.dt#_06QZRdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_MBtyAxfHEd-n3oYS5dLh8Q" name="Number">
         <mapTo href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
       </children>
       <viewOf xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06SOctRREd6d24BtuZ-cgQ"/>
-    </disabled>
+    </children>
   </composedViews>
 </view:ViewCollection>

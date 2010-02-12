@@ -1,191 +1,188 @@
 <?xml version="1.0" encoding="ASCII"?>
-<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0">
-  <views xsi:type="view:FacetMap" name="Incoming Mail (FacetMap)" prefix="">
-    <children xsi:type="view:TextField" name="DeliveryService" prefix="">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
-    </children>
-    <children xsi:type="view:TextField" name="Other Assignment">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
-    </children>
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" name="views">
+  <views xsi:type="view:FacetMap" name="IncomingMail" prefix="">
     <children xsi:type="view:TextField" name="Attribution">
       <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="view:DataList" name="Incoming Mail (Data List)">
+    <children xsi:type="view:DateTimeField" name="DigitizationDate">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+    </children>
+    <children xsi:type="view:DateField" name="ArrivalDate">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" name="Observation">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" name="Author">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+    </children>
+    <children xsi:type="view:TextField" name="Title">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" name="Classification">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:DateField" name="ServiceArrivalDate">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" name="DeliveryService">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" name="OtherAssignment">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:IntegerField" name="ArrivalNumber">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:TextField" name="Number">
+      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:DataList" name="IncomingMail">
       <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
-      <children xsi:type="view:IntegerField" name="Arrival Number">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
+      <children xsi:type="view:TextField" name="Attribution">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateTimeField" name="DigitizationDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:DateField" name="ArrivalDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Observation">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Author">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:TextField" name="Title">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Classification">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" name="ServiceArrivalDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
       </children>
       <children xsi:type="view:TextField" name="DeliveryService">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:DateField" name="Arrival date in the service">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Author">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:TextField" name="Document Title">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Other Assignment">
+      <children xsi:type="view:TextField" name="OtherAssignment">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" name="Attribution">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
+      <children xsi:type="view:IntegerField" name="ArrivalNumber">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
       </children>
-      <disabled xsi:type="view:DateTimeField" name="Digitization Date">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
-      </disabled>
-      <disabled xsi:type="view:DateField" name="Arrival Date">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="file number">
+      <children xsi:type="view:TextField" name="Number">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="Classification">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="Observation">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
+      </children>
       <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
     </children>
-    <disabled xsi:type="view:IntegerField" name="Arrival Number">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:DateTimeField" name="Digitization Date">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
-    </disabled>
-    <disabled xsi:type="view:DateField" name="Arrival Date">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:TextField" name="Observation">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:DateField" name="Arrival date in the service">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:TextField" name="Author">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-    </disabled>
-    <disabled xsi:type="view:TextField" name="Document Title">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:TextField" name="Classification">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
-    </disabled>
-    <disabled xsi:type="view:TextField" name="file number">
-      <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-    </disabled>
     <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
   </views>
   <composedViews name="List">
-    <children xsi:type="view:DataList" name="Document (Data List)">
-      <children xsi:type="view:TextField" name="Reference Number">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </children>
+    <children xsi:type="view:DataList" name="Document">
       <children xsi:type="view:TextField" name="Title">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:DateTimeField" name="Digitization Date">
+      <children xsi:type="view:TextField" name="Number">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Observation">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateTimeField" name="DigitizationDate">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
       <children xsi:type="view:TextField" name="Author">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
-      <disabled xsi:type="view:TextField" name="Observation">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
       <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkG9RREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="view:DataList" name="Vehicle (Data List)" prefix="">
-      <children xsi:type="view:TextField" name="Reference Number">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Title">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" name="Digitization Date">
+    <children xsi:type="view:DataList" name="Vehicle" prefix="">
+      <children xsi:type="view:DateTimeField" name="DigitizationDate">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:TextField" name="Observation">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
       </children>
       <children xsi:type="view:TextField" name="Author">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:DateField" name="Next Control Visit">
+      <children xsi:type="view:TextField" name="Title">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Lifting">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLKtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" name="NextControlDate">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLLdRREd6d24BtuZ-cgQ"/>
       </children>
-      <disabled xsi:type="view:TextField" name="Num&#xe9;ro de dossier">
+      <children xsi:type="view:TextField" name="Number">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="Mar&#xe9;riel de levage">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLKtRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="Observation">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
+      </children>
       <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLKNRREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="view:DataList" name="IncomingMail (Data List)">
-      <children xsi:type="view:TextField" name="Reference Number">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+    <children xsi:type="view:DataList" name="IncomingMail">
+      <children xsi:type="view:TextField" name="Attribution">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" name="Title">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" name="Digitization Date">
+      <children xsi:type="view:DateTimeField" name="DigitizationDate">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:DateField" name="ArrivalDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Observation">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
       </children>
       <children xsi:type="view:TextField" name="Author">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:DateField" name="Incoming Date in service">
+      <children xsi:type="view:TextField" name="Title">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Classification">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" name="ServiceArrivalDate">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
       </children>
-      <disabled xsi:type="view:TextField" name="Attribution">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="Autre Affectation">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="Classement">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="Service Destinataire">
+      <children xsi:type="view:TextField" name="DeliveryService">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:IntegerField" name="Num&#xe9;ro d'Arrivee">
+      </children>
+      <children xsi:type="view:TextField" name="OtherAssignment">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:IntegerField" name="ArrivalNumber">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="Observation">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:DateField" name="Date d'Arrivee">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
-    </children>
-    <children xsi:type="view:DataList" name="OutgoingMail (Data List)" suffix="">
-      <children xsi:type="view:TextField" name="Reference Number">
+      </children>
+      <children xsi:type="view:TextField" name="Number">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" name="Title">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" name="Digitization Date">
+      <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:DataList" name="OutgoingMail" suffix="">
+      <children xsi:type="view:DateTimeField" name="DigitizationDate">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:TextField" name="Observation">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
       </children>
       <children xsi:type="view:TextField" name="Author">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:DateField" name="Outgoing Date">
+      <children xsi:type="view:TextField" name="Title">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="SenderService">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" name="DepartureDate">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLItRREd6d24BtuZ-cgQ"/>
       </children>
-      <disabled xsi:type="view:TextField" name="Service Exp&#xe9;diteur">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="Observation">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </disabled>
+      <children xsi:type="view:TextField" name="Number">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
       <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLINRREd6d24BtuZ-cgQ"/>
     </children>
     <disabled xsi:type="view:TextField" name="Num&#xe9;ro de dossier">
@@ -193,90 +190,129 @@
     </disabled>
   </composedViews>
   <composedViews name="Detail">
-    <children xsi:type="view:DataList" name="Document (Data List)">
-      <children xsi:type="view:TextField" name="Reference Number">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </children>
+    <children xsi:type="view:DataList" name="Document">
       <children xsi:type="view:TextField" name="Title">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:DateTimeField" name="Digitization Date">
+      <children xsi:type="view:TextField" name="Number">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Observation">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateTimeField" name="DigitizationDate">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
       <children xsi:type="view:TextField" name="Author">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:TextField" name="Observation">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
       </children>
       <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkG9RREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="view:DataList" name="Vehicle (Data List)" prefix="">
-      <children xsi:type="view:TextField" name="Reference Number">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Title">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Author">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:DateTimeField" name="Digitization Date">
+    <children xsi:type="view:DataList" name="Vehicle" prefix="">
+      <children xsi:type="view:DateTimeField" name="DigitizationDate">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:DateField" name="Next Control Visit">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLLdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Lifting Apparatus">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLKtRREd6d24BtuZ-cgQ"/>
       </children>
       <children xsi:type="view:TextField" name="Observation">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
       </children>
-      <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLKNRREd6d24BtuZ-cgQ"/>
-    </children>
-    <children xsi:type="view:DataList" name="IncomingMail (Data List)">
-      <children xsi:type="view:TextField" name="Reference Number">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      <children xsi:type="view:TextField" name="Author">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
       <children xsi:type="view:TextField" name="Title">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
       </children>
+      <children xsi:type="view:TextField" name="Lifting">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLKtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" name="NextControlDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLLdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Number">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLKNRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:DataList" name="IncomingMail">
+      <children xsi:type="view:TextField" name="Attribution">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateTimeField" name="DigitizationDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:DateField" name="ArrivalDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Observation">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
       <children xsi:type="view:TextField" name="Author">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:DateField" name="Incoming Date in service">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Attribution">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkF9RREd6d24BtuZ-cgQ"/>
+      <children xsi:type="view:TextField" name="Title">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
       </children>
       <children xsi:type="view:TextField" name="Classification">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkGdRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" name="Delivery Service">
+      <children xsi:type="view:DateField" name="ServiceArrivalDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="DeliveryService">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkEtRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:IntegerField" name="Arrival Number">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateField" name="Incoming Date">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9ANRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Other Assignment">
+      <children xsi:type="view:TextField" name="OtherAssignment">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkFdRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:DateTimeField" name="Digitization Date">
+      <children xsi:type="view:IntegerField" name="ArrivalNumber">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06N9AtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Number">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:DataList" name="OutgoingMail">
+      <children xsi:type="view:DateTimeField" name="DigitizationDate">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
       </children>
       <children xsi:type="view:TextField" name="Observation">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
       </children>
-      <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06EMANRREd6d24BtuZ-cgQ"/>
-    </children>
-    <children xsi:type="view:DataList" name="OutgoingMail (Data List)">
-      <children xsi:type="view:TextField" name="Reference Number">
+      <children xsi:type="view:TextField" name="Author">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:TextField" name="Title">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="SenderService">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateField" name="DepartureDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Number">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
+      </children>
+      <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLINRREd6d24BtuZ-cgQ"/>
+    </children>
+    <children xsi:type="view:DataList" name="Annex">
+      <children xsi:type="view:TextField" name="Price">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06RAUtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:DateTimeField" name="DigitizationDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
+      </children>
+      <children xsi:type="view:DateField" name="BeginningDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06QZQtRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Title">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06SOdNRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Observation">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
+      </children>
+      <children xsi:type="view:TextField" name="Subject">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06QZQNRREd6d24BtuZ-cgQ"/>
       </children>
       <children xsi:type="view:TextField" name="Title">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
@@ -284,55 +320,16 @@
       <children xsi:type="view:TextField" name="Author">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
       </children>
-      <children xsi:type="view:DateField" name="Outgoing Date">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLItRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Sender Service">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLJdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" name="Digitization Date">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:TextField" name="Observation">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06PLINRREd6d24BtuZ-cgQ"/>
-    </children>
-    <disabled xsi:type="view:DataList" name="Annexe (Data List)">
-      <children xsi:type="view:TextField" name="Auteur">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:DateField" name="Date de Fin du march&#xe9;">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06QZRdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Objet">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06QZQNRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Libell&#xe9; du document">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Titre de l'annexe">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06SOdNRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateField" name="Date de debut du marche">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06QZQtRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:DateTimeField" name="Date de numerisation">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
-      </children>
-      <children xsi:type="view:TextField" name="Titulaire du march&#xe9;">
+      <children xsi:type="view:TextField" name="Holder">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06PyP9RREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" name="Derni&#xe8;re R&#xe9;vision de prix">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06RAUtRREd6d24BtuZ-cgQ"/>
+      <children xsi:type="view:DateField" name="EndDate">
+        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06QZRdRREd6d24BtuZ-cgQ"/>
       </children>
-      <children xsi:type="view:TextField" name="Observation">
-        <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
-      </children>
-      <children xsi:type="view:TextField" name="Num&#xe9;ro de dossier">
+      <children xsi:type="view:TextField" name="Number">
         <mapTo href="../../../../v1/models/Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
       </children>
       <viewOf xsi:type="clazz:Clazz" href="../../../../v1/models/Data/DigitizationProcess.dt#_06SOctRREd6d24BtuZ-cgQ"/>
-    </disabled>
+    </children>
   </composedViews>
 </view:ViewCollection>
