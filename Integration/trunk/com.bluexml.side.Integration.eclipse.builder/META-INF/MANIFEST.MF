@@ -16,8 +16,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.compare
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: lib/reference.jar,
- .,
+Bundle-ClassPath: .,
+ lib/reference.jar,
  lib/xbean.jar,
  lib/jsr173_1.0_api.jar
 Export-Package: com.bluexml.side.integration.eclipse.builder
