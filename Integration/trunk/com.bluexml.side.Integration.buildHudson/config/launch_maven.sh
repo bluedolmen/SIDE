@@ -31,7 +31,10 @@ for s in `ls -d */ `; do
 	perl -pi -le 'print "'$res'" if $. == 13' pom.xml
 done
 
+echo "Maven deploy start"
 mvn clean deploy -e -P public > log_maven.log
+
+echo "Maven deploy done"
 
 sleep 5m
 
