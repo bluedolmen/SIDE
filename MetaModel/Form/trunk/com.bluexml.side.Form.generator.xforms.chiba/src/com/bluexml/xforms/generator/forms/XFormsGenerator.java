@@ -33,6 +33,7 @@ import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
 import com.bluexml.side.form.FormWorkflow;
+import com.bluexml.side.form.SearchForm;
 import com.bluexml.side.form.impl.FormGroupImpl;
 import com.bluexml.xforms.generator.AbstractGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
@@ -654,6 +655,8 @@ public class XFormsGenerator extends AbstractGenerator {
 	}
 
 	/**
+	 * Renders all modeled forms and sets/keeps relevant information about each type of FormXXX.
+	 * 
 	 * @return true if there is one or more workflow forms
 	 */
 	private boolean renderAllForms() {
@@ -664,23 +667,33 @@ public class XFormsGenerator extends AbstractGenerator {
 		for (Entry<String, RenderableFormContainer> formEntry : entrySetForms) {
 			String formId = formEntry.getKey();
 			FormContainer formContainer = formsModels.get(formId);
-			boolean isAWorkflowForm = false;
+			String title = formsModels.get(formId).getLabel();
+
 			boolean isContentEnabled = false;
+			FormTypeRendered formTypeRendered = null;
+			String logPrefix = "";
+
 			if (formContainer instanceof FormWorkflow) {
-				isAWorkflowForm = true;
+				atLeastOneWorfklowForm = atLeastOneWorfklowForm || true;
+				formTypeRendered = FormTypeRendered.formWkflw;
+				logPrefix = "FormWorkflow";
+			} else if (formContainer instanceof FormClass) {
+				isContentEnabled = ((FormClass) formContainer).isContent_enabled();
+				formTypeRendered = FormTypeRendered.formForm;
+				logPrefix = "FormClass";
+			} else if (formContainer instanceof SearchForm) {
+				formTypeRendered = FormTypeRendered.formSearch;
+				logPrefix = "FormSearch";
 			} else {
-				FormClass formClass = (FormClass) formContainer;
-				isContentEnabled = formClass.isContent_enabled();
+				// we never reach here.
 			}
-			atLeastOneWorfklowForm = atLeastOneWorfklowForm || isAWorkflowForm;
 			if (formGenerator.isDebugMode()) {
-				String logText = "  " + (isAWorkflowForm ? "FormWorkflow" : "FormClass") + ": "
-						+ formId;
+				String logText = "  " + logPrefix + ": " + formId;
 				monitor.addText(logText);
 			}
-			RenderableFormContainer value = formEntry.getValue();
+			RenderableFormContainer rfc = formEntry.getValue();
 
-			renderForm(outputXForms, formId, value, isAWorkflowForm, isContentEnabled);
+			render(outputXForms, rfc, formId, title, formTypeRendered, isContentEnabled);
 		}
 		return atLeastOneWorfklowForm;
 	}
@@ -989,7 +1002,8 @@ public class XFormsGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Adds the generalizations/specializations for ulterior building of the selector forms.
+	 * Adds the generalizations/specializations. The information collected is useful for building
+	 * the selector forms.
 	 * 
 	 * @param leafClasse
 	 *            the leaf classe
@@ -1027,6 +1041,8 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * @param isWorkflowAble
 	 *            whether workflows can be started on the form
 	 */
+	@Deprecated
+	@SuppressWarnings("unused")
 	private void renderForm(File outputXForms, String formId, RenderableFormContainer rFC,
 			boolean isAWorkflowForm, boolean isContentEnabled) {
 		String title = formsModels.get(formId).getLabel();
@@ -1053,9 +1069,6 @@ public class XFormsGenerator extends AbstractGenerator {
 	 *            the form type. CLASS, FORM, WKFLW, etc.
 	 * @param isContentEnabled
 	 *            whether the file upload control should appear on the form
-	 * @param isWorkflowAble
-	 *            whether workflows can be started on the form, always false for formClass
-	 *            formsRenderables.
 	 */
 	private void render(File outputXForms, Renderable renderable, String formName, String title,
 			FormTypeRendered formType, boolean isContentEnabled) {
