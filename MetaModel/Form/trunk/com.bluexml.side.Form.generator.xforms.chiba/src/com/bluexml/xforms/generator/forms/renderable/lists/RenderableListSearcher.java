@@ -31,7 +31,7 @@ public class RenderableListSearcher extends Renderable {
 		Element input = XFormsGenerator.createElement("input", XFormsGenerator.NAMESPACE_XFORMS);
 		input.setAttribute("id", XFormsGenerator.getId("searchInput"));
 		input.setAttribute("incremental", "true");
-		input.setAttribute("ref", "instance('instanceList')/query");
+		input.setAttribute("ref", "instance('instanceList')/query/query");
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "xforms-value-changed", XFormsGenerator.NAMESPACE_EVENTS);
 		Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
