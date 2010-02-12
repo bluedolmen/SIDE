@@ -8,15 +8,14 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 
-import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import com.bluexml.xforms.controller.navigation.FormTypeEnum;
+import com.bluexml.side.form.utils.DOMUtil;
+import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.side.form.utils.DOMUtil;
 
 /**
  * Returns the instance for workflow forms, which includes the instance for the data form. <br/>
@@ -61,8 +60,8 @@ public class WorkflowFormGetAction extends AbstractReadAction {
 		String wkFormName = currentPage.getFormName();
 		//
 		// get the instance for the task
-		Document instance = controller.getWorkflowFormInstance(wkFormName);
-		controller.patchWorkflowInstance(transaction, wkFormName, instance, currentPage
+		Document docWkflw = controller.getWorkflowFormInstance(wkFormName);
+		controller.patchWorkflowInstance(transaction, wkFormName, docWkflw, currentPage
 				.getWkflwInstanceId());
 		//
 		// get the instance of the attached data form
@@ -70,11 +69,10 @@ public class WorkflowFormGetAction extends AbstractReadAction {
 		String dataId = currentPage.getDataId();
 		WorkflowTaskType taskType = controller.getWorkflowTaskType(currentPage.getFormName());
 		String dataFormName = taskType.getDataForm();
-		Document docForm = GetAction.provideInstance(controller, transaction, dataFormName,
-				initParams, dataId, null, FormTypeEnum.FORM, false);
+		Document docForm = controller.getForm(transaction, dataFormName, dataId, initParams, false);
 		//
 		// we need to nest the data form instance under workflow
-		Element wkDocElt = instance.getDocumentElement();
+		Element wkDocElt = docWkflw.getDocumentElement();
 		List<Element> childrenWk = DOMUtil.getAllChildren(wkDocElt);
 		Element wkElt = DOMUtil.getOneElementByTagName(childrenWk, wkFormName);
 
@@ -82,20 +80,20 @@ public class WorkflowFormGetAction extends AbstractReadAction {
 		List<Element> children = DOMUtil.getAllChildren(docForm.getDocumentElement());
 		Element dataElt = DOMUtil.getOneElementByTagName(children, dataFormName);
 		clone = (Element) dataElt.cloneNode(true);
-		instance.adoptNode(clone);
+		docWkflw.adoptNode(clone);
 		wkElt.appendChild(clone);
 		//
-		// also copy supplementary tags that are added for internal usage
+		// also copy supplementary tags that are added for internal usage (SIDEDataType, etc.)
 		for (Element child : children) {
 			if (child.getTagName().equals(dataFormName) == false) {
 				clone = (Element) child.cloneNode(true);
-				instance.adoptNode(clone);
+				docWkflw.adoptNode(clone);
 				wkDocElt.appendChild(clone);
 			}
 		}
-		DOMUtil.logXML(instance, false);
+		DOMUtil.logXML(docWkflw, false);
 
-		return instance;
+		return docWkflw;
 	}
 
 }
