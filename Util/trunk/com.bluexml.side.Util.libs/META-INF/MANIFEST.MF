@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Common Libs utilities
 Bundle-SymbolicName: com.bluexml.side.Util.libs;singleton:=true
-Bundle-Version: 1.0.61.v14487-20100215
+Bundle-Version: 1.0.62.v14501-20100215
 Bundle-Activator: com.bluexml.side.util.libs.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
