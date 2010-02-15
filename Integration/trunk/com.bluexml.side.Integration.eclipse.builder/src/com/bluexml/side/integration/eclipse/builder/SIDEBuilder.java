@@ -1,12 +1,25 @@
 package com.bluexml.side.integration.eclipse.builder;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -38,9 +51,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.ui.IWorkbenchPage;
 import org.sideLabs.referential.references.Model;
 import org.sideLabs.referential.references.ModelsDocument;
 import org.sideLabs.referential.references.Reference;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -51,6 +69,7 @@ import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 public class SIDEBuilder extends IncrementalProjectBuilder {
 	
 	private List<String> checkedFiles;
+	static private IWorkbenchPage _activePage;
 
 	class SIDEDeltaVisitor implements IResourceDeltaVisitor {
 		/*
@@ -173,6 +192,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			}
 			marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
 		} catch (CoreException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -194,7 +214,9 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			IResourceDelta delta = getDelta(getProject());
 			if (delta == null) {
 				fullBuild(monitor);
-			} else if (hasMovedFile(delta)) {
+			} else if (getMovedFiles(delta).size() > 0) {
+				manageDifferences(delta, getMovedFiles(delta));
+				SIDEBuilderUtil.deleteEmptyFolders(folder);
 				fullBuild(monitor);
 			} else {
 				incrementalBuild(delta, monitor);
@@ -203,14 +225,201 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		return null;
 	}
 
-	private boolean hasMovedFile(IResourceDelta delta) {
-		 if (delta.getKind() == IResourceDelta.CHANGED && delta.getMovedFromPath() != delta.getResource().getFullPath())
-			 return true;
-		 else
-			 for (IResourceDelta d : delta.getAffectedChildren())
-				 if (hasMovedFile(d))
-					 return true;
-		return false;
+	private void manageDifferences(IResourceDelta delta, Collection<IResourceDelta> movedFiles) {
+		if (delta.getKind() == IResourceDelta.REMOVED) {
+			//Manage moved elements
+			IPath from = delta.getFullPath();
+			IPath to = delta.getMovedToPath();
+			
+			if (from != to) {
+				try {
+					//Delete the backup of from models
+					IFile backupModel = SIDEBuilderUtil.getBackupModel(from);
+					if (backupModel.exists())
+						backupModel.delete(true, null);
+					
+					//Try to move the diagram file
+					String fileName = from.lastSegment();
+					fileName = fileName.concat("di");
+					IFile diagram = SIDEBuilderUtil.getFile(from.removeLastSegments(1).append(fileName));
+					if (diagram.exists()) {
+						IPath _to = to.removeLastSegments(1).append(fileName);
+						diagram.move(_to, true, null);
+					}
+					
+					//Try to move the model
+					boolean moveDiagram = false;
+					fileName = from.lastSegment();
+					if (fileName.endsWith("di")) {
+						moveDiagram = true;
+						fileName = from.lastSegment();
+						fileName = fileName.substring(0,fileName.length()-2);
+						IFile model = SIDEBuilderUtil.getFile(from.removeLastSegments(1).append(fileName));
+						if (model.exists()) {
+							IPath _to = to.removeLastSegments(1).append(fileName);
+							model.move(_to, true, null);
+						}
+					}
+					
+					//Update dependencies
+					ModelsDocument doc = null;
+					IProject p = delta.getResource().getProject();
+					IResource r = p.findMember(SIDEBuilderConstants.referentialFileName);
+					if (r != null && r instanceof IFile && r.exists()) {
+						IFile referential = (IFile) r;
+						referential.refreshLocal(0, null);
+						doc = ModelsDocument.Factory.parse(referential.getContents());
+					}
+					//Compute all references
+					List<Reference> references = new ArrayList<Reference>();
+					if (doc != null) {
+						for (Model m : doc.getModels().getModelArray()) {
+							IPath _from = from;
+							if (moveDiagram) {
+								fileName = from.lastSegment();
+								fileName = fileName.substring(0,fileName.length()-2);
+								_from = from.removeLastSegments(1).append(fileName);
+							}
+							
+							if (m.getPath().equals(_from.toString())) {
+								for (Reference ref : m.getReferencedByArray())
+									references.add(ref);
+							}
+						}
+					}
+					//Organize references by model
+					Map<String, List<Reference>> referencesByFile = new HashMap<String, List<Reference>>();
+					for (Reference ref : references) {
+						if (referencesByFile.keySet().contains(ref.getModel()))
+							referencesByFile.get(ref.getModel()).add(ref);
+						else {
+							List<Reference> l = new ArrayList<Reference>();
+							l.add(ref);
+							referencesByFile.put(ref.getModel(), l);
+						}
+					}
+					//Apply modifications
+					for (String file : referencesByFile.keySet()) {
+						IFile f = SIDEBuilderUtil.getFile(new Path(file));
+						
+						//Check if the file is moved at the same moment
+						IResourceDelta foundDelta = null;
+						for (IResourceDelta d : movedFiles)
+							if (d.getFullPath() != null && d.getFullPath().equals(new Path(file)))
+								foundDelta = d;
+							else {
+								if (d.getFullPath() != null && d.getFullPath().lastSegment().endsWith("di")) {
+									fileName = d.getFullPath().lastSegment();
+									fileName = fileName.substring(0,fileName.length()-2);
+									if (d.getFullPath().removeLastSegments(1).append(fileName).equals(new Path(file)))
+										foundDelta = d;
+								}
+							}
+						if (foundDelta != null) {
+							IPath _to = foundDelta.getMovedToPath();
+							if (_to.lastSegment().endsWith("di")) {
+								fileName = _to.lastSegment();
+								fileName = fileName.substring(0,fileName.length()-2);
+								_to = _to.removeLastSegments(1).append(fileName);
+							}
+							f = SIDEBuilderUtil.getFile(_to);
+						}
+						
+						if (f.exists()) {
+							List<Reference> refs = referencesByFile.get(file);
+							List<String> ids = new ArrayList<String>();
+							for (Reference ref : refs)
+								ids.add(ref.getUuid());
+							
+							IPath _to = to;
+							//Check if we move the diagram
+							if (moveDiagram) {
+								fileName = from.lastSegment();
+								fileName = fileName.substring(0,fileName.length()-2);
+								_to = to.removeLastSegments(1).append(fileName);
+							}
+							//Check if we move the file at the same moment
+							foundDelta = null;
+							for (IResourceDelta d : movedFiles)
+								if (d.getMovedToPath() != null && d.getMovedToPath().equals(_to))
+									foundDelta = d;
+								else {
+									if (d.getMovedToPath() != null && d.getMovedToPath().lastSegment().endsWith("di")) {
+										fileName = d.getMovedToPath().lastSegment();
+										fileName = fileName.substring(0,fileName.length()-2);
+										if (d.getMovedToPath().removeLastSegments(1).append(fileName).equals(_to))
+											foundDelta = d;
+									}
+								}
+							if (foundDelta != null) {
+								_to = foundDelta.getMovedToPath();
+								if (_to.lastSegment().endsWith("di")) {
+									fileName = _to.lastSegment();
+									fileName = fileName.substring(0,fileName.length()-2);
+									_to = _to.removeLastSegments(1).append(fileName);
+								}
+							}
+							applyModifications(f,_to.toString(), ids);
+						}
+					}
+					
+					
+				} catch (Exception e) {
+					//Nothing to do
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		//Search children
+		for (IResourceDelta d : delta.getAffectedChildren())
+			manageDifferences(d, movedFiles);
+	}
+
+	private void applyModifications(IFile f, String newFile, List<String> list) throws Exception {
+		IResource[] res = {f};
+			
+		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document doc = docBuilder.parse (f.getRawLocation().toFile());
+        
+        applyModifications(doc.getDocumentElement(), f.getFullPath().toString(), newFile, list);
+
+        //Write xml documents
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        StreamResult result = new StreamResult(new StringWriter());
+        DOMSource source = new DOMSource(doc);
+        transformer.transform(source, result);
+        PrintWriter updates = new PrintWriter(new BufferedWriter(new FileWriter(f.getRawLocation().toFile())), true);
+        updates.println(result.getWriter().toString());
+	}
+
+	private void applyModifications(Element elt, String file, String newFile, List<String> list) {
+		String href = elt.getAttribute("href");
+		if (href != null && href.length() > 0) {
+			String id = href.substring(href.lastIndexOf('#')+1);
+			if (list.contains(id)) {
+				String newId = newFile + '#' + id;
+				elt.setAttribute("href", newId);
+			}
+		}
+		
+		//Search in child nodes
+		NodeList childs = elt.getChildNodes();
+		for (int i = 0; i < childs.getLength(); i++)
+			if (childs.item(i).getNodeType() == Node.ELEMENT_NODE)
+				applyModifications((Element) childs.item(i), file, newFile, list);
+	}
+
+	private Collection<IResourceDelta> getMovedFiles(IResourceDelta delta) {
+		List<IResourceDelta> result = new ArrayList<IResourceDelta>();
+		if (delta.getKind() == IResourceDelta.REMOVED && delta.getMovedFromPath() != delta.getResource().getFullPath())
+			result.add(delta);
+		else
+			for (IResourceDelta d : delta.getAffectedChildren())
+				result.addAll(getMovedFiles(d));
+		return result;
 	}
 
 	void checkModel(IResource resource, String previousName) {
@@ -336,6 +545,44 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			Resource r = EResourceUtils.openModel(file.getLocation().toString(), new HashMap<Object, Object>());
 			if (r instanceof XMIResource) {
 				XMIResource xmi = (XMIResource) r;
+				
+				//Specific case with application models
+				if (file.getName().endsWith(".application")) {
+					EObject o = xmi.getContents().get(0);
+					for (EObject eobj : o.eContents()) {
+						if (eobj.eClass().getName().equalsIgnoreCase("Model")) {
+							Method method = eobj.getClass().getMethod("getFile",  new Class[0]);
+							String path = method.invoke(eobj, new Object[0]).toString();
+							IFile referencedModel = SIDEBuilderUtil.getFile(new Path(path));
+							if (referencedModel.exists()) {
+								Model mod;
+								if (presentModels.containsKey(referencedModel.getFullPath().toString()))
+									mod = presentModels.get(referencedModel.getFullPath().toString());
+								else {
+									mod = doc.getModels().addNewModel();
+									mod.setPath(referencedModel.getFullPath().toString());
+									presentModels.put(referencedModel.getFullPath().toString(), mod);
+								}
+
+								Reference ref = null;
+								for (Reference ref2 : mod.getReferencedByArray()) {
+									String source = EcoreUtil.getURI(eobj).fragment(); 
+									if (ref2.getModel().equals(file.getFullPath().toString()) && ref2.getSource().equals(source))
+										ref = ref2;
+								}
+								
+								if (ref == null) {
+									ref = mod.addNewReferencedBy();
+									ref.setModel(file.getFullPath().toString());
+									ref.setSource(EcoreUtil.getURI(eobj).fragment());
+								}
+							} else {
+								addMarker(file, "The model "+referencedModel.getFullPath().toString()+" does not exist.", -1, IMarker.SEVERITY_ERROR);
+							}
+						}
+					}
+				}
+				
 				Map<EObject, Collection<Setting>> m = EcoreUtil.ProxyCrossReferencer.find(xmi);
 				for (EObject o : m.keySet()) {
 					String path = EcoreUtil.getURI(o).toFileString();
@@ -346,7 +593,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 					
 					if (referencedModel == null) {
 						IPath ipath = new Path(path);
-						ipath = ipath.removeFirstSegments(Platform.getLocation().segmentCount());
+						//ipath = ipath.removeFirstSegments(Platform.getLocation().segmentCount());
 						String projectName = ipath.segment(0);
 						if (projectName.equals(proj.getName())) {
 							ipath = ipath.removeFirstSegments(1);
@@ -389,18 +636,19 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 							addMarker(file, "The model "+path+" is not managed because it don't exists in this project.", -1, IMarker.SEVERITY_WARNING);
 					}
 					
-					//Save the referential
-					IProject p = file.getProject();
-					IFile referential = p.getFile(SIDEBuilderConstants.referentialFileName);
-					SIDEBuilderUtil.prepareFolder((IFolder) referential.getParent());
-					File f = referential.getRawLocation().toFile();
-					if (!f.exists())
-						f.createNewFile();
-					doc.save(f);
 				}
+				//Save the referential
+				IProject p = file.getProject();
+				IFile referential = p.getFile(SIDEBuilderConstants.referentialFileName);
+				SIDEBuilderUtil.prepareFolder((IFolder) referential.getParent());
+				File f = referential.getRawLocation().toFile();
+				if (!f.exists())
+					f.createNewFile();
+				doc.save(f);
 			}
 		} catch (Exception e1) {
 			//Nothing to do
+			e1.printStackTrace();
 		}
 	}
 
@@ -499,6 +747,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			SIDEBuilderUtil.prepareFolder(folder);
 			getProject().accept(new EMFResourceVisitor());
 		} catch (CoreException e) {
+			e.printStackTrace();
 		}
 	}
 
