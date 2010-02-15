@@ -1,6 +1,9 @@
-WORKSPACE=/Users/davidabad/Workspace2.0
-SIDE_HOME=$WORKSPACE/S-IDE
-BUILDER_HOME=$SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/productBuilder
+#SIDE_HOME=/Users/davidabad/Workspace2.0/S-IDE
+#BUILDER_HOME=$SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/productBuilder
+
+BUILDER_HOME=.
+SIDE_HOME=$BUILDER_HOME/../../../../..
+
 EclipseZIP=$BUILDER_HOME/eclipse3.5.1ForSIDE.zip
 EclipseDeltaPack=$BUILDER_HOME/eclipse-3.5.1-delta-pack.zip
 WORKDIR=$BUILDER_HOME/work
