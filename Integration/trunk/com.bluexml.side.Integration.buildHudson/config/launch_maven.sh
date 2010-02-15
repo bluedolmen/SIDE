@@ -38,11 +38,18 @@ echo "Maven deploy done"
 
 sleep 5m
 
+tail -100 log_maven.log
+
 if grep "BUILD SUCCESSFUL" log_maven.log ; then
 	echo "Maven deploy success"
 else
-	echo "Maven deploy failed"
-	exit 1
+
+	if grep "ERROR" log_maven.log ; then	
+		echo "Maven deploy failed"
+		exit 1
+	else
+		echo "Maven deploy no error"
+	fi
 	
 fi
 
