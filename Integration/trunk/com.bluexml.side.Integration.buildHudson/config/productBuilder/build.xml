@@ -1,0 +1,42 @@
+<project default="main">
+	<property file="build.properties" />
+
+
+	<target name="main">
+		<!-- by default, check for deltapack co-located with eclipse -->
+
+		<!-- Check that we have a deltapack -->
+		<available property="haveDeltaPack" file="${deltapack}" />
+		<fail unless="haveDeltaPack" message="The deltapack is required to build this product.  Please edit buildProduct.xml or set the &quot;deltapack&quot; property." />
+
+		<property name="builder" value="${basedir}" />
+		<property name="buildDirectory" value="${basedir}/buildDirectory" />
+		<property name="pluginPath" value="${baseLocation}/plugins${path.separator}${deltapack}" />
+		<property name="buildTempFolder" value="${buildDirectory}" />
+		<echoproperties></echoproperties>
+		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" />
+
+		<move todir="${distros}">
+			<fileset dir="${buildDirectory}/${buildLabel}" includes="*.zip" />
+		</move>
+	</target>
+
+
+	
+	<target name="pde-build2">
+		<record name="build_pde-build_debug.log" loglevel="debug" action="start" />
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
+			<arg value="-Xmx512m" />
+			<arg value="-Xms512m" />
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-buildfile" />
+			<arg value="build.xml" />
+			<arg value="-Dtimestamp=${timestamp}" />
+			<classpath>
+				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			</classpath>
+		</java>
+		<record name="build_pde-build_debug.log" action="stop" />
+	</target>
+</project>
