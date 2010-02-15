@@ -57,15 +57,24 @@ value inferior to the number of content types in the model, some content type ma
 4/ "pathToDocuments": this parameters points to a folder where you can store files in order they are associated as content to the newly Alfresco nodes. If you do not set this parameters, the node will be generated
 without content but only metadata.
 5/ "alfrescoRepository": this parameters allows to define the Alfresco path to store the generated nodes under /app:company_home; 
-   this path must be expressed using an Xpath representation like app:guest_home/cm:testData
+   this path must be expressed using an Xpath representation like app:guest_home/cm:testData. If you want to generate under Alfresco Share, 
+   you must indicate a path like /app:company_home/st:sites/cm:mySite/cm:documentLibrary/cm:SIDELoadedTestData.
    It is important to note that you must be connected to Alfresco under an account having write permission on this Path.
+6/ "scenario": this parameter allows to index the types instances and its attributes in an incremental way or fully randomly.
+7/ "indexes": this parameter is used for the incremental scenario; it assures unicity of attributes if necessary (for the first generation, you can fill it with 0).
+8/ "folders": this parameter allows the content instances to be grouped by type into folders.
+9/ "login": Alfresco login.
+10/ "password": Alfresco password.
   
 In order to declare these pre and post-build task in your deployment process, under the deployer tab of application configuration window of the SIDE Graphical environment, 
 select the ANT Deployer and set the "Ant file path" parameter to  "<sideAntDeployerPath>/src/build.xml".
 
 Save the application configuration and launch.
 
-During deployment, the pre-build and post-build tasks will be performed. Look at the side-report to get results of the MDA process.  
+During deployment, the pre-build and post-build tasks will be performed. Look at the side-report to get results of the MDA process.
+
+Note: only executed ant tasks have logs during the loading data option; so if you don't see any, it means that the corresponding task is not executed (except for isMySQLRunning and is AlfrescoRunning
+	  wich don't have logs).   
 
 Pointers & License notices :
 ----------------------------
