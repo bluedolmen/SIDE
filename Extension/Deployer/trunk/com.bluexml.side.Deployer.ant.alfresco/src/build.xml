@@ -22,6 +22,7 @@
 	<!-- ============================= Windows tasks ============================== -->
 	
 	<target name="stopMySql" depends="isMySqlRunningBefore" unless="mySqlOff" if="windows">
+		<echo message="Embedded MySQL (Windows os) is running: stopping MySQL ..."/>
 		<exec executable="${alfresco.dir}/mysql/bin/mysqladmin.exe">
 			<arg value="-u"/>
 			<arg value="root"/>
@@ -31,14 +32,14 @@
 	</target>
 	
 	<target name="startMySql" depends="isMySqlRunningBefore" if="mySqlOff" unless="linux">
-		<echo message="Embedded MySQL (Windows os) is running: stopping MySQL ..."/>
+		<echo message="Embedded MySQL (Windows os) is not running: starting MySQL ..."/>
 		<exec executable="${alfresco.dir}/mysql/bin/mysqld.exe" spawn="true" vmlauncher="false">
 			<arg value="--defaults-file=${alfresco.dir}\mysql\my.ini"/>
 			<arg value="--basedir=${alfresco.dir}\mysql"/>
 			<arg value="--datadir=${alfresco.dir}\alf_data\mysql"/>
 			<arg value="--console"/>
 		</exec>
-		<echo message="MySQL off."/>
+		<echo message="MySQL on."/>
 	</target>
 	
 	<target name="deleteAlfrescoDbWin" if="delete.alfresco.db" unless="linux">
