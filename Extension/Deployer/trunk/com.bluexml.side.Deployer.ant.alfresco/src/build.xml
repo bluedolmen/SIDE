@@ -212,7 +212,7 @@
 			<jvmarg value="-Dcatalina.home=${alfresco.dir}/tomcat"/>
 			<arg line="stop"/>
 		</java>
-		<sleep seconds="${alfresco.time.response}"/>
+		<sleep seconds="${alfresco.time.response.stop}"/>
 		<echo message="Alfresco off."/>
 	</target>
 	
@@ -275,7 +275,7 @@
 	</target>
 	
 	<target name="isAlfrescoRunning">
-		<waitfor maxwait="5" maxwaitunit="minute" checkevery="500" timeoutproperty="alfOff">
+		<waitfor maxwait="${alfresco.time.response.start}" maxwaitunit="minute" checkevery="500" timeoutproperty="alfOff">
 			<http url="http://${alfresco.server}:${alfresco.port}/alfresco"/>
 		</waitfor>
 	</target>
