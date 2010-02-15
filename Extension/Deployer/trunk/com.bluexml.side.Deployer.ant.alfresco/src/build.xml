@@ -27,18 +27,22 @@
 			<arg value="root"/>
 			<arg value="shutdown"/>
 		</exec>
+		<echo message="Widows os: embedeed MySQL off."/>
 	</target>
 	
 	<target name="startMySql" depends="isMySqlRunningBefore" if="mySqlOff" unless="linux">
+		<echo message="Embedded MySQL (Windows os) is running: stopping MySQL ..."/>
 		<exec executable="${alfresco.dir}/mysql/bin/mysqld.exe" spawn="true" vmlauncher="false">
 			<arg value="--defaults-file=${alfresco.dir}\mysql\my.ini"/>
 			<arg value="--basedir=${alfresco.dir}\mysql"/>
 			<arg value="--datadir=${alfresco.dir}\alf_data\mysql"/>
 			<arg value="--console"/>
 		</exec>
+		<echo message="MySQL off."/>
 	</target>
 	
 	<target name="deleteAlfrescoDbWin" if="delete.alfresco.db" unless="linux">
+		<echo message="Windows os: deleting alfresco database ..."/>
 		<condition property="passwd.not.empty">
 			<matches string="${passwd.db}" pattern="(.)+"/>		
 		</condition>
@@ -56,6 +60,7 @@
 			<arg value="-e"/>
 			<arg value="drop database if exists ${alfresco.db.name}"/>
 		</exec>
+		<echo message="Windows os: alfresco database deleted."/>
 	</target>
 	
 	<target name="deleteDbWithoutPasswdWin" unless="passwd.not.empty">
@@ -67,15 +72,19 @@
 			<arg value="-e"/>
 			<arg value="drop database if exists ${alfresco.db.name}"/>
 		</exec>
+		<echo message="Windows os: alfresco database deleted."/>
 	</target>
 	
 	<target name="deleteAlfDataWin" if="delete.alfresco.db" unless="linux">
+		<echo message="Windows os: deleting parts of alf_data directory ...."/>
 		<delete includeemptydirs="true">
 			<fileset dir="${alfresco.dir}/alf_data" excludes="mysql/**,oouser/**"/>	
 		</delete>
+		<echo message="Windows os: parts of alf_data deleted."/>
 	</target>
 	
 	<target name="createAlfrescoDbWin" if="delete.alfresco.db" unless="linux">
+		<echo message="Windows os: creating ${alfresco.db.name} database ..."/>
 		<condition property="passwd.not.empty">
 			<matches string="${passwd.db}" pattern="(.)+"/>		
 		</condition>
@@ -92,8 +101,9 @@
 			<arg value="-p${passwd.db}"/>
 			<arg value="-e"/>
 			<arg value="create database if not exists ${alfresco.db.name} default character set utf8;
-						grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;"/>
+						grant all on ${alfresco.db.name}.* to '${user.db}'@'localhost' identified by '${user.db}' with grant option;"/>
 		</exec>
+		<echo message="Windows os: ${alfresco.db.name} database created with privileges to '${user.db}' user."/>
 	</target>
 	
 	<target name="createDbWithoutPasswdWin" unless="passwd.not.empty">
@@ -104,8 +114,9 @@
 			<arg value="${user.db}"/>
 			<arg value="-e"/>
 			<arg value="create database if not exists ${alfresco.db.name} default character set utf8;
-						grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;"/>
+						grant all on ${alfresco.db.name}.* to '${user.db}'@'localhost' identified by '${user.db}' with grant option;"/>
 		</exec>
+		<echo message="Windows os: ${alfresco.db.name} database created with privileges to '${user.db}' user."/>
 	</target>
 	
 	<!-- ============================= Linux tasks ================================ -->
@@ -120,6 +131,7 @@
 					 drop database if exists ${alfresco.db.name}
 				  </transaction>
 				</sql>-->
+		<echo message="Linux os: deleting alfresco database ..."/>
 		<exec executable="mysql">
 			<arg value="-h"/>
 			<arg value="${mysql.server}"/>
@@ -129,12 +141,15 @@
 			<arg value="-e"/>
 			<arg value="drop database if exists ${alfresco.db.name}"/>
 		</exec>
+		<echo message="Linux os: alfresco database deleted."/>
 	</target>
 	
 	<target name="deleteAlfDataLx" if="delete.alfresco.db" unless="windows">
+		<echo message="Linux os: deleting alf_data directory ..."/>
 		<delete>
 			<fileset dir="${alfresco.dir}/alf_data"/>
 		</delete>
+		<echo message="Linux os: alf_data directory deleted."/>
 	</target>
 	
 	<target name="createAlfrescoDbLx" if="delete.alfresco.db" unless="windows">
@@ -148,6 +163,7 @@
 				  	grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;
 				  </transaction>
 			   </sql>-->
+		<echo message="Linux os: creating ${alfresco.db.name} database ..."/>
 		<condition property="passwd.not.empty">
 			<matches string="${passwd.db}" pattern="(.)+"/>		
 		</condition>
@@ -164,8 +180,9 @@
 			<arg value="-p${passwd.db}"/>
 			<arg value="-e"/>
 			<arg value="create database if not exists ${alfresco.db.name} default character set utf8;
-						grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;"/>
+						grant all on ${alfresco.db.name}.* to '${user.db}'@'localhost' identified by '${user.db}' with grant option;"/>
 		</exec>
+		<echo message="Linux os: ${alfresco.db.name} database created with privileges to '${user.db}' user."/>
 	</target>
 	
 	<target name="createDbWithoutPasswdLx" unless="passwd.not.empty">
@@ -176,8 +193,9 @@
 			<arg value="${user.db}"/>
 			<arg value="-e"/>
 			<arg value="create database if not exists ${alfresco.db.name} default character set utf8;
-						grant all on ${alfresco.db.name}.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;"/>
+						grant all on ${alfresco.db.name}.* to '${user.db}'@'localhost' identified by '${user.db}' with grant option;"/>
 		</exec>
+		<echo message="Linux os: ${alfresco.db.name} database created with privileges to '${user.db}' user."/>
 	</target>
 	
 	<!-- ============================= Common tasks ================================ -->
@@ -189,11 +207,13 @@
 	</target>
 	
 	<target name="stopAlfresco" depends="isAlfrescoRunningBefore" unless="alfrescoOff">
+		<echo message="Alfresco is running: stopping Alfresco ..."/>
 		<java jar="${alfresco.dir}/tomcat/bin/bootstrap.jar" fork="true">
 			<jvmarg value="-Dcatalina.home=${alfresco.dir}/tomcat"/>
 			<arg line="stop"/>
 		</java>
-		<sleep seconds="14"/>
+		<sleep seconds="${alfresco.time.response}"/>
+		<echo message="Alfresco off."/>
 	</target>
 	
 	<target name="isMySqlRunningBefore">
@@ -218,13 +238,19 @@
 	<!-- ============================= Windows tasks ============================== -->
 	
 	<target name="startAlfrescoWin" if="windows">
+		<echo message="Windows os: starting alfresco ..."/>
 		<exec executable="${alfresco.dir}\alf_start.bat" spawn="true" vmlauncher="false" dir="${alfresco.dir}"/>
+		<echo message="Windows os: alfresco on."/>
 	</target>
 	
 	<!-- ============================= Linux tasks ================================ -->
 	
 	<target name="startAlfrescoLx" if="linux">
-		<exec executable="${alfresco.dir}\alf_start.sh" />
+		<echo message="Linux os: starting alfresco ..."/>
+		<exec executable="${alfresco.dir}\alfresco.sh">
+			<arg value="start"/>
+		</exec>
+		<echo message="Linux os: alfresco on."/>
 	</target>
 	
 	<!-- ============================= Common tasks ================================ -->
@@ -236,13 +262,14 @@
 	</target>
 	
 	<target name="createAlfSynchro" depends="isMySqlRunning" unless="mySqlOff" if="create.alf.synchro">
+		<echo message="Creating alf_synchro database ..."/>
 		<sql classpath="${alfresco.dir}\tomcat\lib\mysql-connector-java-5.1.7-bin.jar"
 			 driver="org.gjt.mm.mysql.Driver"
 			 url="jdbc:mysql://${mysql.server}/${alfresco.db.name}"
 			 userid="${user.db}"
 			 password="${passwd.db}">
 			create database if not exists alf_synchro default character set utf8;
-			grant all on alf_synchro.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;
+			grant all on alf_synchro.* to '${user.db}'@'localhost' identified by '${user.db}' with grant option;
 		</sql>
 		<echo message="Database alf_synchro created."/>
 	</target>
@@ -254,10 +281,12 @@
 	</target>
 	
 	<target name="loadData" depends="isAlfrescoRunning" unless="alfOff" if="load.data">
+		<echo message="Loading data ..."/>
 		<taskdef name="post" classname="ise.antelope.tasks.PostTask" classpath="../dist/antelopetasks-3.2.10.jar"/>
 		<post file="data_post.properties" to="http://${alfresco.server}:${alfresco.port}/alfresco/service/data/generate/generate"
 		      verbose="true">
 		</post>
+		<echo message="Data loading may have been successfull: see above logs."/>
 	</target>
 	
 	<!-- =========================================================================
