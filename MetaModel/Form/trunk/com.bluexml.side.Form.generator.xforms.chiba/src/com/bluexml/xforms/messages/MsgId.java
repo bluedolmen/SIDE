@@ -114,15 +114,10 @@ public enum MsgId {
 	INT_ACT_CODE_ENUM					("enum"),
 	INT_ACT_CODE_EXECUTE				("execute"),
 	INT_ACT_CODE_GET_FORM				("get"),
-	INT_ACT_CODE_GET_FORM_WKFLW			("wrkflwfrm-get"),//%%
-	INT_ACT_CODE_GET_WKFLW_SELECTION	("process-get"), //%%
 	INT_ACT_CODE_I18N					("i18n"),
 	INT_ACT_CODE_LIST					("list"),
 	INT_ACT_CODE_SETTYPE				("settype"),
 	INT_ACT_CODE_SUBMIT					("submit"),
-	INT_ACT_CODE_WRKFLW_INSTANCE_LIST	("instance-list"),//%%
-	INT_ACT_CODE_WRKFLW_PROCESS_LIST	("process-list"),//%%
-	INT_ACT_CODE_WRKFLW_START			("workflow-start"),//%%
 	INT_ACT_CODE_WRKFLW_TRANSITION		("transition"),
 	INT_ACT_PARAM_GET_FORMTYPE			("formType"),
 	INT_ACT_PARAM_LIST_FORMAT			("format"),
@@ -226,15 +221,8 @@ public enum MsgId {
 	INT_WEBSCRIPT_OPCODE_WORKFLOW		("workflow"),
 	//
 	// these are used when generating the workflow selection page
-	INT_WKFLW_INSTANCE_INSTANCE_NAME	("InstanceInstance"),//%%
 	//// caution: the nodeset prefix must be the actual prefix in all nodesets
 	INT_WKFLW_NODESET_PREFIX			("workflow"),
-	INT_WKFLW_PROCESS_INSTANCE_NAME		("ProcessInstance"),//%%
-	INT_WKFLW_SEL_FORM_FILENAME			("ProcessSelection"),//%%
-	INT_WKFLW_INSTANCE_NODESET			("instance"),//%%
-	INT_WKFLW_INSTANCE_WIDGET_NAME		("workflow_instances"),//%%
-	INT_WKFLW_PROCESS_NODESET			("process"),//%%
-	INT_WKFLW_PROCESS_WIDGET_NAME		("workflow_definitions"),//%%
 	//
 	// these are used when expanding xforms instances with wkflw data
 	INT_WKFLW_INSTANCE_TAG_WKFLW		("workflow"),
