@@ -359,7 +359,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 									_to = _to.removeLastSegments(1).append(fileName);
 								}
 							}
-							applyModifications(f,_to.toString(), ids);
+							applyModifications(f,_to.toString(), ids, movedFiles);
 						}
 					}
 					
@@ -376,23 +376,80 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			manageDifferences(d, movedFiles);
 	}
 
-	private void applyModifications(IFile f, String newFile, List<String> list) throws Exception {
-		IResource[] res = {f};
-			
-		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse (f.getRawLocation().toFile());
-        
-        applyModifications(doc.getDocumentElement(), f.getFullPath().toString(), newFile, list);
+	private void applyModifications(IFile f, String newFile, List<String> ids, Collection<IResourceDelta> movedFiles) throws Exception {
+		if (f.getName().endsWith(".application")) {
+			applyModificationsOnApplicationModel(f,newFile,movedFiles);
+		} else {
+			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+	        Document doc = docBuilder.parse (f.getRawLocation().toFile());
+	        
+	        applyModifications(doc.getDocumentElement(), f.getFullPath().toString(), newFile, ids);
+	
+	        //Write xml documents
+	        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+	        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+	        StreamResult result = new StreamResult(new StringWriter());
+	        DOMSource source = new DOMSource(doc);
+	        transformer.transform(source, result);
+	        PrintWriter updates = new PrintWriter(new BufferedWriter(new FileWriter(f.getRawLocation().toFile())), true);
+	        updates.println(result.getWriter().toString());
+		}
+		
+		//refresh the file
+		f.refreshLocal(IResource.DEPTH_ONE, null);
+	}
 
-        //Write xml documents
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        StreamResult result = new StreamResult(new StringWriter());
-        DOMSource source = new DOMSource(doc);
-        transformer.transform(source, result);
-        PrintWriter updates = new PrintWriter(new BufferedWriter(new FileWriter(f.getRawLocation().toFile())), true);
-        updates.println(result.getWriter().toString());
+	private void applyModificationsOnApplicationModel(IFile f, String newFile, Collection<IResourceDelta> movedFiles) {
+		IPath from = null;
+		//Search the previous name
+		IResourceDelta foundDelta = null;
+		for (IResourceDelta d : movedFiles)
+			if (d.getMovedToPath() != null && d.getMovedToPath().equals(new Path(newFile)))
+				foundDelta = d;
+			else {
+				if (d.getMovedToPath() != null && d.getMovedToPath().lastSegment().endsWith("di")) {
+					String fileName = d.getMovedToPath().lastSegment();
+					fileName = fileName.substring(0,fileName.length()-2);
+					if (d.getMovedToPath().removeLastSegments(1).append(fileName).equals(new Path(newFile)))
+						foundDelta = d;
+				}
+			}
+		if (foundDelta != null) {
+			from = foundDelta.getFullPath();
+			if (from.lastSegment().endsWith("di")) {
+				String fileName = from.lastSegment();
+				fileName = fileName.substring(0,fileName.length()-2);
+				from = from.removeLastSegments(1).append(fileName);
+			}
+		}
+		
+		try {
+			//Open the model
+			Resource r = EResourceUtils.openModel(f.getLocation().toString(), new HashMap<Object, Object>());
+			if (r instanceof XMIResource && from != null) {
+				XMIResource xmi = (XMIResource) r;
+				EObject o = xmi.getContents().get(0);
+				for (EObject eobj : o.eContents()) {
+					if (eobj.eClass().getName().equalsIgnoreCase("Model")) {
+						Method method = eobj.getClass().getMethod("getFile",  new Class[0]);
+						String path = method.invoke(eobj, new Object[0]).toString();
+						if (path != null && path.equals(from.toString())) {
+							//The good model is found
+							Class[] paramsType = new Class[] {String.class};
+							method = eobj.getClass().getMethod("setFile",  paramsType);
+							method.invoke(eobj, new Object[] {newFile});
+						}
+					}
+				}
+			}
+			
+			//Save the resource
+			EResourceUtils.export(r);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private void applyModifications(Element elt, String file, String newFile, List<String> list) {
@@ -412,11 +469,13 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 				applyModifications((Element) childs.item(i), file, newFile, list);
 	}
 
+
 	private Collection<IResourceDelta> getMovedFiles(IResourceDelta delta) {
 		List<IResourceDelta> result = new ArrayList<IResourceDelta>();
-		if (delta.getKind() == IResourceDelta.REMOVED && delta.getMovedFromPath() != delta.getResource().getFullPath())
-			result.add(delta);
-		else
+		if (delta.getResource() instanceof IFile) { 
+			if ((delta.getKind() == IResourceDelta.REMOVED) && delta.getMovedFromPath() != delta.getResource().getFullPath())
+				result.add(delta);
+		} else
 			for (IResourceDelta d : delta.getAffectedChildren())
 				result.addAll(getMovedFiles(d));
 		return result;
@@ -567,14 +626,14 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 								Reference ref = null;
 								for (Reference ref2 : mod.getReferencedByArray()) {
 									String source = EcoreUtil.getURI(eobj).fragment(); 
-									if (ref2.getModel().equals(file.getFullPath().toString()) && ref2.getSource().equals(source))
+									if (ref2.getModel().equals(file.getFullPath().toString()) && ref2.getUuid().equals(source))
 										ref = ref2;
 								}
 								
 								if (ref == null) {
 									ref = mod.addNewReferencedBy();
 									ref.setModel(file.getFullPath().toString());
-									ref.setSource(EcoreUtil.getURI(eobj).fragment());
+									ref.setUuid(EcoreUtil.getURI(eobj).fragment());
 								}
 							} else {
 								addMarker(file, "The model "+referencedModel.getFullPath().toString()+" does not exist.", -1, IMarker.SEVERITY_ERROR);
@@ -598,6 +657,19 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 						if (projectName.equals(proj.getName())) {
 							ipath = ipath.removeFirstSegments(1);
 							referencedModel = proj.findMember(ipath);
+						}
+					}
+					
+					//Try to search model using the absolute path
+					if (referencedModel == null) {
+						IPath ipath = new Path(path);
+						if (ipath.segmentCount() >= Platform.getLocation().segmentCount()) {
+							ipath = ipath.removeFirstSegments(Platform.getLocation().segmentCount());
+							String projectName = ipath.segment(0);
+							if (projectName.equals(proj.getName())) {
+								ipath = ipath.removeFirstSegments(1);
+								referencedModel = proj.findMember(ipath);
+							}
 						}
 					}
 					
