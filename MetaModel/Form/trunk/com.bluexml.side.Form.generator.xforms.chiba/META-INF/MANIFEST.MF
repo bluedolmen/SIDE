@@ -46,5 +46,4 @@ Export-Package: .,
  com.bluexml.xforms.generator.xsd,
  com.bluexml.xforms.messages
 Import-Package: javax.activation,
- org.apache.commons.io,
  org.apache.xml.serialize
