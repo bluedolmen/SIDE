@@ -62,8 +62,6 @@ import com.bluexml.xforms.actions.I18NAction;
 import com.bluexml.xforms.actions.ListAction;
 import com.bluexml.xforms.actions.SetTypeAction;
 import com.bluexml.xforms.actions.SubmitAction;
-import com.bluexml.xforms.actions.WorkflowFormGetAction;
-import com.bluexml.xforms.actions.WorkflowGetAction;
 import com.bluexml.xforms.actions.WorkflowInstanceListAction;
 import com.bluexml.xforms.actions.WorkflowProcessListAction;
 import com.bluexml.xforms.actions.WorkflowStartAction;
@@ -84,7 +82,7 @@ public class NavigationManager {
 			CreateFormAction.class, EditClassAction.class, EditFormAction.class, EnumAction.class,
 			ExecuteAction.class, GetAction.class, I18NAction.class, ListAction.class,
 			SubmitAction.class, DeleteAction.class, SetTypeAction.class,
-			WorkflowFormGetAction.class, WorkflowGetAction.class, WorkflowInstanceListAction.class,
+			/*WorkflowFormGetAction.class, WorkflowGetAction.class,*/ WorkflowInstanceListAction.class,
 			WorkflowProcessListAction.class, WorkflowStartAction.class,
 			WorkflowTransitionAction.class };
 
@@ -545,17 +543,16 @@ public class NavigationManager {
 		}
 		bean.formType = formType;
 
+		// type-related
 		String originalDatatype = req.getParameter(AbstractAction.DATA_TYPE);
 		String dataType = null;
-		if (formType == FormTypeEnum.WKFLW) {
-			dataType = originalDatatype;
+		if (formType == FormTypeEnum.CLASS) {
+			dataType = StringUtils.trimToNull(originalDatatype).replace('_', '.');
 		} else if (formType == FormTypeEnum.SELECTOR) {
 			dataType = originalDatatype.substring(0, originalDatatype
 					.indexOf(MsgId.INT_SUFFIX_FILENAME_SELECTORS.getText()));
-		} else if (formType == FormTypeEnum.FORM) {
-			dataType = originalDatatype;
 		} else {
-			dataType = StringUtils.trimToNull(originalDatatype).replace('_', '.');
+			dataType = originalDatatype;
 		}
 		if (dataType == null) {
 			throw new ServletException("type cannot be null");
@@ -565,23 +562,25 @@ public class NavigationManager {
 		bean.dataType = AlfrescoController.getInstance().getDataTypeFromFormName(bean.formName);
 		bean.wrongCallType = false;
 
-		// check that the form is appropriate for the data id
 		String dataId = StringUtils.trimToNull(req.getParameter(AbstractAction.DATA_ID));
-		String realFormName = originalDatatype;
-		if (bean.formType == FormTypeEnum.WKFLW) {
-			WorkflowTaskType taskType = controller.getWorkflowTaskType(dataType);
-			realFormName = taskType.getDataForm();
-		}
-		if ((dataId != null) && (bean.formType != FormTypeEnum.WKFLW_SELECTION)) {
-			QName contentType = controller.systemGetNodeType(dataId);
-			if (contentType == null) {
-				dataId = null;
-			} else {
-				ClassType classType = controller.getFormType(realFormName).getRealClass();
-				dataType = classType.getAlfrescoName();
-				if (StringUtils.equals(dataType, contentType.getLocalName()) == false) {
-					bean.wrongCallType = true;
+		// check that the form is appropriate for the data id
+		if (AlfrescoController.getInstance().getParamCheckMatchDataForm()) {
+			String realFormName = originalDatatype;
+			if (bean.formType == FormTypeEnum.WKFLW) {
+				WorkflowTaskType taskType = controller.getWorkflowTaskType(dataType);
+				realFormName = taskType.getDataForm();
+			}
+			if ((dataId != null) && (bean.formType != FormTypeEnum.WKFLW_SELECTION)) {
+				QName contentType = controller.systemGetNodeType(dataId);
+				if (contentType == null) {
 					dataId = null;
+				} else {
+					ClassType classType = controller.getFormType(realFormName).getRealClass();
+					dataType = classType.getAlfrescoName();
+					if (StringUtils.equals(dataType, contentType.getLocalName()) == false) {
+						bean.wrongCallType = true;
+						dataId = null;
+					}
 				}
 			}
 		}
