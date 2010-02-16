@@ -5,7 +5,6 @@ package com.bluexml.xforms.generator.forms.modelelement;
 
 import java.util.List;
 
-import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.ModelElement;
@@ -13,7 +12,7 @@ import com.bluexml.xforms.generator.forms.XFormsGenerator;
 
 /**
  * @author Amenel
- * 
+ * @deprecated
  */
 public class ModelElementWorkflowInstanceList extends ModelElement {
 
@@ -25,9 +24,9 @@ public class ModelElementWorkflowInstanceList extends ModelElement {
 	public Element getModelElement() {
 		Element instance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		instance.setAttribute("src", MsgId.INT_URI_SCHEME_READER
-				+ MsgId.INT_ACT_CODE_WRKFLW_INSTANCE_LIST.getText() + "/");
-		instance.setAttribute("id", MsgId.INT_WKFLW_INSTANCE_INSTANCE_NAME.getText());
+		// instance.setAttribute("src", MsgId.INT_URI_SCHEME_READER
+		// + MsgId.INT_ACT_CODE_WRKFLW_INSTANCE_LIST.getText() + "/");
+		// instance.setAttribute("id", MsgId.INT_WKFLW_INSTANCE_INSTANCE_NAME.getText());
 		return instance;
 	}
 

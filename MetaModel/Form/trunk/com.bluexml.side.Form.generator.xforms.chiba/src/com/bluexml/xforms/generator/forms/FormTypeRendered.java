@@ -50,14 +50,6 @@ public enum FormTypeRendered {
 				"", 
 				MsgId.INT_DIRECTORY_FORM_WKFLW.getText(),
 				"Workflow forms",
-				""),
-		// cancel action is added here because the process selection form (the only
-		// form to have this type) goes through a specific rendering process.
-		formWkflwSel(
-				new FormSubmissionActions[] { FormSubmissionActions.Delete, FormSubmissionActions.Workflow }, 
-				"",
-				MsgId.INT_DIRECTORY_FORM_WKFLW.getText(),
-				"",
 				"");
 
 	private FormSubmissionActions[] actions;

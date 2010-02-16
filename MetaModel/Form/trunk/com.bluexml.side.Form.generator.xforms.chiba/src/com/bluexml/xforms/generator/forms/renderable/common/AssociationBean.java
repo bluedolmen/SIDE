@@ -1,6 +1,5 @@
 package com.bluexml.xforms.generator.forms.renderable.common;
 
-
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.xforms.generator.forms.Renderable;
 
@@ -14,13 +13,10 @@ public class AssociationBean {
 	 */
 	public enum AssociationType {
 
-			/** The clazz. */
+			/** The target is a list of clazz objects. */
 			clazz,
 
-			wkflwProcess,
-			wkflwInstance,
-
-			/** The enume. */
+			/** The target list is a list of enumerations items. */
 			enume;
 	}
 
@@ -53,8 +49,6 @@ public class AssociationBean {
 
 	private boolean disabled;
 
-	private boolean forWorkflow;
-
 	/** The default number of elements to display. */
 	private String fieldSize;
 
@@ -66,11 +60,11 @@ public class AssociationBean {
 
 	/** Whether at least one element is required. */
 	private boolean mandatory;
-	
-	/** The format of labels displayed for the association items.*/
+
+	/** The format of labels displayed for the association items. */
 	private String formatPattern;
 
-	/** The length at which to truncate labels.*/
+	/** The length at which to truncate labels. */
 	private String labelLength;
 
 	public AssociationBean() {
@@ -78,7 +72,6 @@ public class AssociationBean {
 		fieldSize = "0";
 		formatPattern = "";
 		labelLength = "0";
-		forWorkflow = false;
 	}
 
 	/**
@@ -194,16 +187,6 @@ public class AssociationBean {
 		this.associationType = AssociationType.enume;
 	}
 
-	public void setDestinationProcessSelect(SelectBean destinationSelect) {
-		this.destinationSelect = destinationSelect;
-		this.associationType = AssociationType.wkflwProcess;
-	}
-
-	public void setDestinationInstanceSelect(SelectBean destinationSelect) {
-		this.destinationSelect = destinationSelect;
-		this.associationType = AssociationType.wkflwInstance;
-	}
-
 	/**
 	 * Gets the association type.
 	 * 
@@ -242,21 +225,6 @@ public class AssociationBean {
 	 */
 	public void setFieldSize(String fieldSize) {
 		this.fieldSize = fieldSize;
-	}
-
-	/**
-	 * @return the forWorkflow
-	 */
-	public boolean isForWorkflow() {
-		return forWorkflow;
-	}
-
-	/**
-	 * @param forWorkflow
-	 *            the forWorkflow to set
-	 */
-	public void setForWorkflow(boolean forWorkflow) {
-		this.forWorkflow = forWorkflow;
 	}
 
 	/**
@@ -343,7 +311,8 @@ public class AssociationBean {
 	}
 
 	/**
-	 * @param formatPattern the formatPattern to set
+	 * @param formatPattern
+	 *            the formatPattern to set
 	 */
 	public void setFormatPattern(String formatPattern) {
 		this.formatPattern = formatPattern;
@@ -357,7 +326,8 @@ public class AssociationBean {
 	}
 
 	/**
-	 * @param labelLength the labelLength to set
+	 * @param labelLength
+	 *            the labelLength to set
 	 */
 	public void setLabelLength(String labelLength) {
 		this.labelLength = labelLength;

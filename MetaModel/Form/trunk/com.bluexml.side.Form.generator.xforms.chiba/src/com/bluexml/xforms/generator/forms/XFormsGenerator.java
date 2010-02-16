@@ -27,10 +27,8 @@ import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.EnumerationLiteral;
-import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.impl.FormGroupImpl;
@@ -39,23 +37,16 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.RenderableXForm;
 import com.bluexml.xforms.generator.forms.renderable.classes.RenderableClass;
 import com.bluexml.xforms.generator.forms.renderable.classes.RenderableClassSelector;
-import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.RenderableDiv;
 import com.bluexml.xforms.generator.forms.renderable.common.RenderableHR;
 import com.bluexml.xforms.generator.forms.renderable.common.RenderableXGroup;
-import com.bluexml.xforms.generator.forms.renderable.common.SelectBean;
-import com.bluexml.xforms.generator.forms.renderable.common.association.selection.selector.RenderableSelector;
-import com.bluexml.xforms.generator.forms.renderable.common.association.selection.unique.RenderableSSingle;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableFileInputForContent;
 import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableFormContainer;
-import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableGroup;
-import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableGroupWorkflow;
 import com.bluexml.xforms.generator.forms.renderable.lists.RenderableClassList;
 import com.bluexml.xforms.generator.forms.rendered.RenderedParentGroup;
 import com.bluexml.xforms.generator.tools.ClasseComparator;
 import com.bluexml.xforms.generator.tools.ModelTools;
 import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.xforms.messages.MsgPool;
 
 /**
  * The Class XFormsGenerator.
@@ -573,7 +564,7 @@ public class XFormsGenerator extends AbstractGenerator {
 		boolean atLeastOneWorfklowForm = renderAllForms();
 
 		if (atLeastOneWorfklowForm) {
-			renderWorkflowSelectionForm();
+			// renderWorkflowSelectionForm();
 			formGenerator.setWorkflowCapable(true);
 		}
 
@@ -680,9 +671,9 @@ public class XFormsGenerator extends AbstractGenerator {
 				isContentEnabled = ((FormClass) formContainer).isContent_enabled();
 				formTypeRendered = FormTypeRendered.formForm;
 				logPrefix = "FormClass";
-//			} else if (formContainer instanceof SearchForm) {
-//				formTypeRendered = FormTypeRendered.formSearch;
-//				logPrefix = "FormSearch";
+				// } else if (formContainer instanceof SearchForm) {
+				// formTypeRendered = FormTypeRendered.formSearch;
+				// logPrefix = "FormSearch";
 			} else {
 				// we never reach here.
 			}
@@ -700,36 +691,39 @@ public class XFormsGenerator extends AbstractGenerator {
 	/**
 	 * Generates the form for selecting a process definition.
 	 */
+	@SuppressWarnings("unused")
+	@Deprecated
 	private void renderWorkflowSelectionForm() {
 
+		// //
+		// IntGroupImpl fglobalGroup = new IntGroupImpl("workflow", MsgPool
+		// .getMsg(MsgId.MSG_WKFLW_GLOBAL_GROUP));
+		// RenderableGroup<FormGroup> rglobalGroup = new RenderableGroup<FormGroup>(this, null,
+		// fglobalGroup);
+		// //
+		// IntGroupImpl fprocessGroup = new IntGroupImpl(MsgId.INT_WKFLW_PROCESS_NODESET.getText(),
+		// MsgPool.getMsg(MsgId.MSG_WKFLW_PROCESS_GROUP));
+		// RenderableGroupWorkflow<FormGroup> rprocessGroup = new
+		// RenderableGroupWorkflow<FormGroup>(
+		// this, fglobalGroup, fprocessGroup);
 		//
-		IntGroupImpl fglobalGroup = new IntGroupImpl("workflow", MsgPool
-				.getMsg(MsgId.MSG_WKFLW_GLOBAL_GROUP));
-		RenderableGroup<FormGroup> rglobalGroup = new RenderableGroup<FormGroup>(this, null,
-				fglobalGroup);
+		// Renderable processList = newWorkflowSelectionWidget(true);
+		// rprocessGroup.add(processList);
+		// rglobalGroup.add(rprocessGroup);
+		// //
+		// IntGroupImpl finstanceGroup = new
+		// IntGroupImpl(MsgId.INT_WKFLW_INSTANCE_NODESET.getText(),
+		// MsgPool.getMsg(MsgId.MSG_WKFLW_INSTANCE_GROUP));
+		// RenderableGroupWorkflow<FormGroup> rinstanceGroup = new
+		// RenderableGroupWorkflow<FormGroup>(
+		// this, fglobalGroup, finstanceGroup);
 		//
-		IntGroupImpl fprocessGroup = new IntGroupImpl(MsgId.INT_WKFLW_PROCESS_NODESET.getText(),
-				MsgPool.getMsg(MsgId.MSG_WKFLW_PROCESS_GROUP));
-		RenderableGroupWorkflow<FormGroup> rprocessGroup = new RenderableGroupWorkflow<FormGroup>(
-				this, fglobalGroup, fprocessGroup);
+		// Renderable instanceList = newWorkflowSelectionWidget(false);
+		// rinstanceGroup.add(instanceList);
+		// rglobalGroup.add(rinstanceGroup);
 
-		Renderable processList = newWorkflowSelectionWidget(true);
-		rprocessGroup.add(processList);
-		rglobalGroup.add(rprocessGroup);
-		//
-		IntGroupImpl finstanceGroup = new IntGroupImpl(MsgId.INT_WKFLW_INSTANCE_NODESET.getText(),
-				MsgPool.getMsg(MsgId.MSG_WKFLW_INSTANCE_GROUP));
-		RenderableGroupWorkflow<FormGroup> rinstanceGroup = new RenderableGroupWorkflow<FormGroup>(
-				this, fglobalGroup, finstanceGroup);
-
-		Renderable instanceList = newWorkflowSelectionWidget(false);
-		rinstanceGroup.add(instanceList);
-		rglobalGroup.add(rinstanceGroup);
-
-		// RenderableXForm rform = new RenderableXForm(rglobalGroup,
-		// MsgId.MSG_WKFLW_SEL_PAGE_TITLE.getText(), actions, true);
-		render(outputXForms, rglobalGroup, MsgId.INT_WKFLW_SEL_FORM_FILENAME.getText(), MsgPool
-				.getMsg(MsgId.MSG_WKFLW_SEL_PAGE_TITLE), FormTypeRendered.formWkflwSel, false);
+		// render(outputXForms, rglobalGroup, MsgId.INT_WKFLW_SEL_FORM_FILENAME.getText(), MsgPool
+		// .getMsg(MsgId.MSG_WKFLW_SEL_PAGE_TITLE), FormTypeRendered.formWkflwSel, false);
 	}
 
 	/**
@@ -737,54 +731,54 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * 
 	 * @param renderedParent
 	 */
+	@SuppressWarnings("unused")
+	@Deprecated
 	private Renderable newWorkflowSelectionWidget(boolean isProcess) {
-		String nodeset;
-		MsgId widgetTitle;
-		String groupName;
-
-		if (isProcess) {
-			nodeset = MsgId.INT_WKFLW_PROCESS_NODESET.getText();
-			widgetTitle = MsgId.MSG_WKFLW_PROCESS_WIDGET_TITLE;
-			groupName = "workflow_definitions";
-		} else {
-			nodeset = MsgId.INT_WKFLW_PROCESS_NODESET.getText();
-			widgetTitle = MsgId.MSG_WKFLW_INSTANCE_WIDGET_TITLE;
-			groupName = "workflow_instances";
-		}
-		SelectBean selectBean = new SelectBean();
-		ModelElementBindSimple meb = new ModelElementBindSimple(MsgId.INT_WKFLW_NODESET_PREFIX
-				.getText()
-				+ "/" + nodeset);
-
-		selectBean.setEnumeration(null);
-		selectBean.setEnumContext(null);
-		selectBean.setEnumParent(null);
-		selectBean.setWidgetType(ChoiceWidgetType.SHOW_ONE);
-		selectBean.setLabel(MsgPool.getMsg(widgetTitle));
-		selectBean.setModelElementBindSimple(meb);
-		selectBean.setMultiple(false);
-		selectBean.setLimited(false);
-
-		AssociationBean associationBean = new AssociationBean();
-
-		associationBean.setForWorkflow(true);
-		associationBean.setCreateEditForm(null);
-		associationBean.setDestinationRenderable(null);
-		if (isProcess) {
-			associationBean.setDestinationProcessSelect(selectBean);
-		} else {
-			associationBean.setDestinationInstanceSelect(selectBean);
-		}
-		associationBean.setName(groupName);
-		associationBean.setShowingActions(false);
-		associationBean.setFieldSize("0");
-
-		RenderableSelector selector = new RenderableSelector(associationBean);
-		RenderableSSingle renderable = new RenderableSSingle(associationBean, selector);
-		// Rendered rendered = renderable.recursiveRender();
-		// MsgId.INT_WKFLW_NODESET_PREFIX.getText(), null, null);
-		// renderedParent.addRendered(rendered, null);
-		return renderable;
+		// String nodeset;
+		// MsgId widgetTitle;
+		// String groupName;
+		//
+		// if (isProcess) {
+		// nodeset = MsgId.INT_WKFLW_PROCESS_NODESET.getText();
+		// widgetTitle = MsgId.MSG_WKFLW_PROCESS_WIDGET_TITLE;
+		// groupName = "workflow_definitions";
+		// } else {
+		// nodeset = MsgId.INT_WKFLW_PROCESS_NODESET.getText();
+		// widgetTitle = MsgId.MSG_WKFLW_INSTANCE_WIDGET_TITLE;
+		// groupName = "workflow_instances";
+		// }
+		// SelectBean selectBean = new SelectBean();
+		// ModelElementBindSimple meb = new ModelElementBindSimple(MsgId.INT_WKFLW_NODESET_PREFIX
+		// .getText()
+		// + "/" + nodeset);
+		//
+		// selectBean.setEnumeration(null);
+		// selectBean.setEnumContext(null);
+		// selectBean.setEnumParent(null);
+		// selectBean.setWidgetType(ChoiceWidgetType.SHOW_ONE);
+		// selectBean.setLabel(MsgPool.getMsg(widgetTitle));
+		// selectBean.setModelElementBindSimple(meb);
+		// selectBean.setMultiple(false);
+		// selectBean.setLimited(false);
+		//
+		// AssociationBean associationBean = new AssociationBean();
+		//
+		// associationBean.setForWorkflow(true);
+		// associationBean.setCreateEditForm(null);
+		// associationBean.setDestinationRenderable(null);
+		// if (isProcess) {
+		// associationBean.setDestinationProcessSelect(selectBean);
+		// } else {
+		// associationBean.setDestinationInstanceSelect(selectBean);
+		// }
+		// associationBean.setName(groupName);
+		// associationBean.setShowingActions(false);
+		// associationBean.setFieldSize("0");
+		//
+		// RenderableSelector selector = new RenderableSelector(associationBean);
+		// RenderableSSingle renderable = new RenderableSSingle(associationBean, selector);
+		// return renderable;
+		return null;
 	}
 
 	/*

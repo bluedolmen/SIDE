@@ -13,9 +13,6 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementEnumeration;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementInstanceList;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementUpdaterEnum;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementUpdaterList;
-import com.bluexml.xforms.generator.forms.modelelement.ModelElementWorkflowInstanceList;
-import com.bluexml.xforms.generator.forms.modelelement.ModelElementWorkflowInstanceUpdater;
-import com.bluexml.xforms.generator.forms.modelelement.ModelElementWorkflowProcessList;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean.AssociationType;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
@@ -49,8 +46,6 @@ public class RenderableSelector extends AbstractRenderable {
 	/** The model element list updater. */
 	private AbstractModelElementUpdater modelElementUpdater;
 
-	private boolean isForWorkflow;
-
 	/**
 	 * Instantiates a new renderable selector.
 	 * 
@@ -60,29 +55,17 @@ public class RenderableSelector extends AbstractRenderable {
 	public RenderableSelector(AssociationBean associationBean) {
 		super(associationBean);
 
-		isForWorkflow = associationBean.isForWorkflow();
-
-		if (isForWorkflow) {
-			if (associationBean.getAssociationType() == AssociationType.wkflwProcess) {
-				instanceName = MsgId.INT_WKFLW_PROCESS_INSTANCE_NAME.getText();
-				modelElementUpdater = new ModelElementWorkflowInstanceUpdater();
-			} else {
-				instanceName = MsgId.INT_WKFLW_INSTANCE_INSTANCE_NAME.getText();
-			}
+		if (associationBean.getAssociationType() == AssociationType.clazz) {
+			instanceName = ModelTools.getCompleteNameJAXB(associationBean.getDestinationClass())
+					+ "List";
+			modelElementUpdater = new ModelElementUpdaterList(
+					associationBean.getDestinationClass(), instanceName, associationBean
+							.getFormatPattern(), associationBean.getLabelLength());
 		} else {
-			if (associationBean.getAssociationType() == AssociationType.clazz) {
-				instanceName = ModelTools
-						.getCompleteNameJAXB(associationBean.getDestinationClass())
-						+ "List";
-				modelElementUpdater = new ModelElementUpdaterList(associationBean
-						.getDestinationClass(), instanceName, associationBean.getFormatPattern(),
-						associationBean.getLabelLength());
-			} else {
-				instanceName = ModelTools.getCompleteNameJAXB(associationBean
-						.getDestinationSelect().getEnumeration())
-						+ "EnumInstance";
-				modelElementUpdater = new ModelElementUpdaterEnum(associationBean, instanceName);
-			}
+			instanceName = ModelTools.getCompleteNameJAXB(associationBean.getDestinationSelect()
+					.getEnumeration())
+					+ "EnumInstance";
+			modelElementUpdater = new ModelElementUpdaterEnum(associationBean, instanceName);
 		}
 		instancePath = "instance('" + instanceName + "')/";
 		instanceNodePath = instancePath + "item";
@@ -107,13 +90,11 @@ public class RenderableSelector extends AbstractRenderable {
 		}
 		// for workflows, we don't want anything but the list
 		add(new RenderableSelectorList(associationBean, this));
-		if (isForWorkflow == false) {
-			add(new RenderableSelectorCount(associationBean, this));
-			add(new RenderableSelectorSearcher(associationBean, this));
-			if (associationBean.isShowingActions()
-					&& associationBean.getAssociationType() == AssociationBean.AssociationType.clazz) {
-				add(new RenderableSelectorCreate(associationBean, this));
-			}
+		add(new RenderableSelectorCount(associationBean, this));
+		add(new RenderableSelectorSearcher(associationBean, this));
+		if (associationBean.isShowingActions()
+				&& associationBean.getAssociationType() == AssociationBean.AssociationType.clazz) {
+			add(new RenderableSelectorCreate(associationBean, this));
 		}
 	}
 
@@ -198,27 +179,20 @@ public class RenderableSelector extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		RenderedDiv rendered = new RenderedDiv(XFormsGenerator.getId("Selector"));
 		initBinds();
 
-		if (isForWorkflow == false) {
-			if (bean.getAssociationType() == AssociationType.clazz) {
-				rendered.addModelElement(new ModelElementInstanceList(bean.getDestinationClass(),
-						instanceName, bean.getFormatPattern(), bean.getLabelLength()));
-			} else {
-				rendered.addModelElement(new ModelElementEnumeration(bean.getDestinationSelect(),
-						instanceName));
-			}
-			rendered.addModelElement(modelElementUpdater);
+		if (bean.getAssociationType() == AssociationType.clazz) {
+			rendered.addModelElement(new ModelElementInstanceList(bean.getDestinationClass(),
+					instanceName, bean.getFormatPattern(), bean.getLabelLength()));
 		} else {
-			if (bean.getAssociationType() == AssociationType.wkflwProcess) {
-				rendered.addModelElement(new ModelElementWorkflowProcessList());
-				rendered.addModelElement(modelElementUpdater);
-			} else {
-				rendered.addModelElement(new ModelElementWorkflowInstanceList());
-			}
+			rendered.addModelElement(new ModelElementEnumeration(bean.getDestinationSelect(),
+					instanceName));
 		}
+		rendered.addModelElement(modelElementUpdater);
+
 		rendered.addModelElementRoot(bindId);
 		rendered.addModelElementRoot(bindLabel);
 		rendered.addModelElementRoot(bindMaxResults);

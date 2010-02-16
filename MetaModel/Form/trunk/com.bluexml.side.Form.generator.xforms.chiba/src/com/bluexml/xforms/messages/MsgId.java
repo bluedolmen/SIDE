@@ -150,7 +150,6 @@ public enum MsgId {
 	INT_DIRECTORY_FORM_SEARCH			("search"),
 	INT_DIRECTORY_FORM_SELECTOR			("selectors"),
 	INT_DIRECTORY_FORM_WKFLW			("workflows"),
-	INT_DIRECTORY_WKFLW_SEL_FORM		("workflows"),
 	INT_ERR_NULL_WKFLW_ACTIVE_PATHS		("No active path for instance: "),
 	INT_ERR_NULL_WKFLW_INSTANCE_PATHS	("No paths for instance: "),
 	INT_EXC_ASSOCIATION_ENDS			("Illegal association: both ends must be classes."),
@@ -163,7 +162,6 @@ public enum MsgId {
 	INT_FORMTYPE_SEARCH					("search"),
 	INT_FORMTYPE_SELECTOR				("selector"),
 	INT_FORMTYPE_WKFLW					("wkflw"),
-	INT_FORMTYPE_WKFLWSEL				("wkflwSel"),
 	INT_GEN_DYN_ENUM_PREFIX				("$"),
 	INT_GEN_DYN_ENUM_PREFIX_CONTEXT		("enumContext"),
 	INT_GEN_DYN_ENUM_PREFIX_PARENT		("enumParent"),
@@ -187,6 +185,7 @@ public enum MsgId {
 	INT_INSTANCE_SIDEEDIT				("SIDEEDIT"),
 	INT_INSTANCE_SIDEID					("SIDEID"),
 	INT_INSTANCE_SIDELABEL				("SIDELABEL"),
+	INT_INSTANCE_WKFLW_NODESET			("workflow"),
 	INT_MSGPOOL_NO_MESSAGE_FILE			("INVALID MESSAGE FILE!"),
 	INT_NAMESPACE_BLUEXML_CLASS			("http://www.bluexml.com/model/content"),
 	INT_NAMESPACE_BLUEXML_WORKFLOW		("http://www.bluexml.com/model/workflow"),
@@ -220,17 +219,6 @@ public enum MsgId {
 	INT_WEBSCRIPT_OPCODE_UPLOAD			("upload"),
 	INT_WEBSCRIPT_OPCODE_WORKFLOW		("workflow"),
 	//
-	// these are used when generating the workflow selection page
-	//// caution: the nodeset prefix must be the actual prefix in all nodesets
-	INT_WKFLW_NODESET_PREFIX			("workflow"),
-	//
-	// these are used when expanding xforms instances with wkflw data
-	INT_WKFLW_INSTANCE_TAG_WKFLW		("workflow"),
-	INT_WKFLW_INSTANCE_TAG_PROCESS_ID	("processId"),
-	INT_WKFLW_INSTANCE_TAG_INSTANCE_ID	("pathId"),
-	//
-	// these are used when expanding xforms file templates with wkflw
-	INT_WKFLW_TMPLT_WKFLW_GROUP_ID		("workflow_section"),
 	// strings by which we accept parameters in the url
 	//
 	/** the name of a Java class to be called */

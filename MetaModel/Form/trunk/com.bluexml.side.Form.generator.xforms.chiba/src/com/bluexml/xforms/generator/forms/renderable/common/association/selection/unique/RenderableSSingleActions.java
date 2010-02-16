@@ -9,7 +9,6 @@ import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
-import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean.AssociationType;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.selector.RenderableSelector;
 import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
@@ -26,6 +25,7 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	/** The selector bind label. */
 	private ModelElementBindSimple selectorBindLabel;
 
+	@SuppressWarnings("unused")
 	private RenderableSelector selector;
 
 	/**
@@ -66,11 +66,13 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		RenderedInput rendered = new RenderedInput();
 
 		ModelElementBindSimple bindId = ((RenderableSSingle) parents.peek()).getSelectedBindId();
-		ModelElementBindSimple bindLabel = ((RenderableSSingle) parents.peek()).getSelectedBindLabel();
+		ModelElementBindSimple bindLabel = ((RenderableSSingle) parents.peek())
+				.getSelectedBindLabel();
 
 		if ((getFormGenerator().isInReadOnlyMode() == false) || bean.isDisabled()) { // #1238
 			Element xformsElement = XFormsGenerator.createElement("div",
@@ -113,12 +115,12 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		setvalueLabel.setText("");
 		action.addContent(setvalueLabel);
 
-		if (getBean().getAssociationType() == AssociationType.wkflwProcess) {
-			// for updating the instances list wrt current process definition
-			Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
-			selector.getModelElementUpdater().addLinkedElement(send);
-			action.addContent(send);
-		}
+		// if (getBean().getAssociationType() == AssociationType.wkflwProcess) {
+		// // for updating the instances list wrt current process definition
+		// Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
+		// selector.getModelElementUpdater().addLinkedElement(send);
+		// action.addContent(send);
+		// }
 
 		trigger.addContent(action);
 		return trigger;
@@ -154,12 +156,12 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		setvalueLabel.setAttribute("value", selectorBindLabel.getNodeset());
 		action.addContent(setvalueLabel);
 
-		if (getBean().getAssociationType() == AssociationType.wkflwProcess) {
-			// for updating the instances list wrt current process definition
-			Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
-			selector.getModelElementUpdater().addLinkedElement(send);
-			action.addContent(send);
-		}
+		// if (getBean().getAssociationType() == AssociationType.wkflwProcess) {
+		// // for updating the instances list wrt current process definition
+		// Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
+		// selector.getModelElementUpdater().addLinkedElement(send);
+		// action.addContent(send);
+		// }
 
 		trigger.addContent(action);
 		return trigger;
