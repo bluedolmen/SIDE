@@ -3,35 +3,22 @@
  */
 package com.bluexml.xforms.actions;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.alfresco.model.ContentModel;
 import org.alfresco.service.cmr.repository.NodeRef;
-import org.alfresco.service.cmr.workflow.WorkflowDefinition;
 import org.alfresco.service.cmr.workflow.WorkflowTask;
-import org.apache.commons.lang.StringUtils;
-import org.chiba.processor.XFormsProcessor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.side.form.utils.DOMUtil;
 
 /**
  * Read action: returns the list of in-progress tasks from Alfresco for a specific user and a
@@ -52,6 +39,7 @@ import com.bluexml.side.form.utils.DOMUtil;
  * 
  * 
  * @author Amenel
+ * @deprecated
  */
 public class WorkflowInstanceListAction extends AbstractAction {
 
@@ -69,7 +57,8 @@ public class WorkflowInstanceListAction extends AbstractAction {
 	 */
 	@Override
 	public String getActionName() {
-		return MsgId.INT_ACT_CODE_WRKFLW_INSTANCE_LIST.getText();
+//		return MsgId.INT_ACT_CODE_WRKFLW_INSTANCE_LIST.getText();
+		return "dummy";
 	}
 
 	/*
@@ -119,6 +108,7 @@ public class WorkflowInstanceListAction extends AbstractAction {
 	 * @param task
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private String buildDisplayTitle(WorkflowTask task) {
 		String result;
 		NodeRef initiator = task.path.instance.initiator;
@@ -141,77 +131,76 @@ public class WorkflowInstanceListAction extends AbstractAction {
 	 * @throws ServletException 
 	 * 
 	 */
-	@SuppressWarnings("deprecation")
 	@Override
 	public void submit() throws ServletException {
-		Map<String, String> initParams = navigationPath.peekCurrentPage().getInitParams();
-		String userName = initParams.get(MsgId.PARAM_USER_NAME.getText());
-		if (StringUtils.trimToNull(userName) == null) {
-			throw new ServletException("Can't retrieve instances: no user name is provided.");
-		}
-		String defId;
-		Document instance;
-		try {
-			instance = buildInstance();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-			logger.error("Failed to obtain a document builder", e);
-			return;
-		}
-		Element rootElement = instance.getDocumentElement();
-
-		if (node != null) {
-			// retrieve the process id
-			Element element = null;
-			if (node instanceof Document) {
-				element = ((Document) node).getDocumentElement();
-			} else if (node instanceof Element) {
-				element = (Element) node;
-			}
-			Element processElt = DOMUtil.getChild(element, MsgId.INT_WKFLW_PROCESS_NODESET
-					.getText());
-			Element IDElt = DOMUtil.getChild(processElt, MsgId.INT_INSTANCE_SIDEID.getText());
-			defId = StringUtils.trimToNull(IDElt.getTextContent());
-			// ask for instances
-			if (StringUtils.trimToNull(defId) != null) {
-				List<WorkflowTask> taskList = controller.workflowGetPooledTasks(userName);
-				if (taskList != null) {
-					// find the def name of the selected process; we can't rely on ids because
-					// each server launch creates a new version of the def, with different ids...
-					WorkflowDefinition def = controller.workflowGetWorkflowById(defId);
-
-					// for each filtered instance, return an item
-					for (WorkflowTask wkTask : taskList) {
-						if (StringUtils.equals(wkTask.path.instance.definition.name, def.name)) {
-							Element item = instance.createElement("item");
-							Element id = instance.createElement("id");
-							Element value = instance.createElement("value");
-
-							id.setTextContent(wkTask.id);
-							String displayTitle = buildDisplayTitle(wkTask);
-							value.setTextContent(displayTitle);
-							item.appendChild(id);
-							item.appendChild(value);
-							rootElement.appendChild(item);
-						}
-					}
-				}
-			}
-			// convert to string
-			Source xmlSource = new DOMSource(instance);
-			ByteArrayOutputStream pos = new ByteArrayOutputStream();
-			Result outputTarget = new StreamResult(pos);
-			try {
-				documentTransformer.transform(xmlSource, outputTarget);
-			} catch (TransformerException e) {
-				logger.error("Failed to convert the list document into a string", e);
-				throw new ServletException(MsgId.MSG_DEFAULT_ERROR_MSG.getText());
-			}
-
-			ByteArrayInputStream pis = new ByteArrayInputStream(pos.toByteArray());
-
-			result.put(XFormsProcessor.SUBMISSION_RESPONSE_STREAM, pis);
-		}
+//		Map<String, String> initParams = navigationPath.peekCurrentPage().getInitParams();
+//		String userName = initParams.get(MsgId.PARAM_USER_NAME.getText());
+//		if (StringUtils.trimToNull(userName) == null) {
+//			throw new ServletException("Can't retrieve instances: no user name is provided.");
+//		}
+//		String defId;
+//		Document instance;
+//		try {
+//			instance = buildInstance();
+//		} catch (ParserConfigurationException e) {
+//			e.printStackTrace();
+//			logger.error("Failed to obtain a document builder", e);
+//			return;
+//		}
+//		Element rootElement = instance.getDocumentElement();
+//
+//		if (node != null) {
+//			// retrieve the process id
+//			Element element = null;
+//			if (node instanceof Document) {
+//				element = ((Document) node).getDocumentElement();
+//			} else if (node instanceof Element) {
+//				element = (Element) node;
+//			}
+//			Element processElt = DOMUtil.getChild(element, MsgId.INT_WKFLW_PROCESS_NODESET
+//					.getText());
+//			Element IDElt = DOMUtil.getChild(processElt, MsgId.INT_INSTANCE_SIDEID.getText());
+//			defId = StringUtils.trimToNull(IDElt.getTextContent());
+//			// ask for instances
+//			if (StringUtils.trimToNull(defId) != null) {
+//				List<WorkflowTask> taskList = controller.workflowGetPooledTasks(userName);
+//				if (taskList != null) {
+//					// find the def name of the selected process; we can't rely on ids because
+//					// each server launch creates a new version of the def, with different ids...
+//					WorkflowDefinition def = controller.workflowGetWorkflowById(defId);
+//
+//					// for each filtered instance, return an item
+//					for (WorkflowTask wkTask : taskList) {
+//						if (StringUtils.equals(wkTask.path.instance.definition.name, def.name)) {
+//							Element item = instance.createElement("item");
+//							Element id = instance.createElement("id");
+//							Element value = instance.createElement("value");
+//
+//							id.setTextContent(wkTask.id);
+//							String displayTitle = buildDisplayTitle(wkTask);
+//							value.setTextContent(displayTitle);
+//							item.appendChild(id);
+//							item.appendChild(value);
+//							rootElement.appendChild(item);
+//						}
+//					}
+//				}
+//			}
+//			// convert to string
+//			Source xmlSource = new DOMSource(instance);
+//			ByteArrayOutputStream pos = new ByteArrayOutputStream();
+//			Result outputTarget = new StreamResult(pos);
+//			try {
+//				documentTransformer.transform(xmlSource, outputTarget);
+//			} catch (TransformerException e) {
+//				logger.error("Failed to convert the list document into a string", e);
+//				throw new ServletException(MsgId.MSG_DEFAULT_ERROR_MSG.getText());
+//			}
+//
+//			ByteArrayInputStream pis = new ByteArrayInputStream(pos.toByteArray());
+//
+//			result.put(XFormsProcessor.SUBMISSION_RESPONSE_STREAM, pis);
+//		}
 	}
 
 }

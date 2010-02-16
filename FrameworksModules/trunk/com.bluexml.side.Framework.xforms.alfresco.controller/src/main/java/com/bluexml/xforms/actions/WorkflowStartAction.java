@@ -12,13 +12,11 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.workflow.WorkflowPath;
 import org.alfresco.service.cmr.workflow.WorkflowTask;
 import org.apache.commons.lang.StringUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
+import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
-import com.bluexml.side.form.utils.DOMUtil;
 
 /**
  * This gets called from the process selection page with the <CAPTION_BUTTON_WORKFLOW_SELECT>
@@ -26,6 +24,7 @@ import com.bluexml.side.form.utils.DOMUtil;
  * <p>
  * 
  * @author Amenel
+ * @deprecated
  */
 public class WorkflowStartAction extends AbstractWriteAction {
 
@@ -56,7 +55,8 @@ public class WorkflowStartAction extends AbstractWriteAction {
 	@Override
 	public String getActionName() {
 
-		return MsgId.INT_ACT_CODE_WRKFLW_START.getText();
+		// return MsgId.INT_ACT_CODE_WRKFLW_START.getText();
+		return "dummy";
 	}
 
 	/*
@@ -67,7 +67,8 @@ public class WorkflowStartAction extends AbstractWriteAction {
 	/**
 	 * Called when there's a click on the button. Redirects the user to the appropriate form: the
 	 * task's form if a task is selected, or the start task form otherwise.
-	 * @throws ServletException 
+	 * 
+	 * @throws ServletException
 	 */
 	@Override
 	public void submit() throws ServletException {
@@ -126,28 +127,29 @@ public class WorkflowStartAction extends AbstractWriteAction {
 	 */
 	private boolean getProcessInfo() {
 		if (node != null) {
-			Element root = null;
-			if (node instanceof Document) {
-				root = ((Document) node).getDocumentElement();
-			}
-			if (node instanceof Element) {
-				root = (Element) node;
-			}
-			Element processElt = DOMUtil.getChild(root, MsgId.INT_WKFLW_PROCESS_NODESET.getText());
-			Element processIdElt = DOMUtil
-					.getChild(processElt, MsgId.INT_INSTANCE_SIDEID.getText());
-			if ((processElt == null) || (processIdElt == null)) {
-				return false;
-			}
-			selDefinitionId = processIdElt.getTextContent();
-
-			Element instanceElt = DOMUtil
-					.getChild(root, MsgId.INT_WKFLW_INSTANCE_NODESET.getText());
-			Element instanceIdElt = DOMUtil.getChild(instanceElt, MsgId.INT_INSTANCE_SIDEID
-					.getText());
-			if (instanceIdElt != null) {
-				selTaskId = instanceIdElt.getTextContent();
-			}
+			// Element root = null;
+			// if (node instanceof Document) {
+			// root = ((Document) node).getDocumentElement();
+			// }
+			// if (node instanceof Element) {
+			// root = (Element) node;
+			// }
+			// Element processElt = DOMUtil.getChild(root,
+			// MsgId.INT_WKFLW_PROCESS_NODESET.getText());
+			// Element processIdElt = DOMUtil
+			// .getChild(processElt, MsgId.INT_INSTANCE_SIDEID.getText());
+			// if ((processElt == null) || (processIdElt == null)) {
+			// return false;
+			// }
+			// selDefinitionId = processIdElt.getTextContent();
+			//
+			// Element instanceElt = DOMUtil
+			// .getChild(root, MsgId.INT_WKFLW_INSTANCE_NODESET.getText());
+			// Element instanceIdElt = DOMUtil.getChild(instanceElt, MsgId.INT_INSTANCE_SIDEID
+			// .getText());
+			// if (instanceIdElt != null) {
+			// selTaskId = instanceIdElt.getTextContent();
+			// }
 			return true;
 		}
 		return false;

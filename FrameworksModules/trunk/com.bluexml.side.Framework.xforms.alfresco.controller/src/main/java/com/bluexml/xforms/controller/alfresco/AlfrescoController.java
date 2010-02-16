@@ -2356,7 +2356,7 @@ public class AlfrescoController {
 
 		mappingTool.collectTaskProperties(instance, taskElt, taskType, alfrescoNodes, false);
 
-		Element rootElement = instance.createElement(MsgId.INT_WKFLW_NODESET_PREFIX.getText());
+		Element rootElement = instance.createElement(MsgId.INT_INSTANCE_WKFLW_NODESET.getText());
 		rootElement.appendChild(taskElt);
 
 		instance.appendChild(rootElement);

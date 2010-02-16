@@ -62,9 +62,6 @@ import com.bluexml.xforms.actions.I18NAction;
 import com.bluexml.xforms.actions.ListAction;
 import com.bluexml.xforms.actions.SetTypeAction;
 import com.bluexml.xforms.actions.SubmitAction;
-import com.bluexml.xforms.actions.WorkflowInstanceListAction;
-import com.bluexml.xforms.actions.WorkflowProcessListAction;
-import com.bluexml.xforms.actions.WorkflowStartAction;
 import com.bluexml.xforms.actions.WorkflowTransitionAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.binding.ClassType;
@@ -92,8 +89,8 @@ public class NavigationManager {
 			SubmitAction.class,
 			DeleteAction.class,
 			SetTypeAction.class,
-			/* WorkflowFormGetAction.class, WorkflowGetAction.class, */WorkflowInstanceListAction.class,
-			WorkflowProcessListAction.class, WorkflowStartAction.class,
+			/* WorkflowFormGetAction.class, WorkflowGetAction.class, WorkflowInstanceListAction.class,
+			WorkflowProcessListAction.class, WorkflowStartAction.class,*/
 			WorkflowTransitionAction.class };
 
 	/** The Constant PAGE_ID. */
@@ -570,9 +567,6 @@ public class NavigationManager {
 		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_WKFLW.getText())) {
 			formType = FormTypeEnum.WKFLW;
 		}
-		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_WKFLWSEL.getText())) {
-			formType = FormTypeEnum.WKFLW_SELECTION;
-		}
 		bean.formType = formType;
 
 		// type-related
@@ -602,7 +596,7 @@ public class NavigationManager {
 				WorkflowTaskType taskType = controller.getWorkflowTaskType(dataType);
 				realFormName = taskType.getDataForm();
 			}
-			if ((dataId != null) && (bean.formType != FormTypeEnum.WKFLW_SELECTION)) {
+			if (dataId != null) {
 				QName contentType = controller.systemGetNodeType(dataId);
 				if (contentType == null) {
 					dataId = null;
@@ -724,12 +718,9 @@ public class NavigationManager {
 		String base = null; // the directory and filename (without extension)
 		// String corrected = dataType; // the real datatype, relevant for selectors
 
-		if (formType == FormTypeEnum.WKFLW_SELECTION) {
-			base = MsgId.INT_DIRECTORY_WKFLW_SEL_FORM.getText() + File.separatorChar
-					+ MsgId.INT_WKFLW_SEL_FORM_FILENAME;
-		} else if (formType == FormTypeEnum.FORM) {
+		if (formType == FormTypeEnum.FORM) {
 			base = MsgId.INT_DIRECTORY_FORM_FORMS.getText() + File.separatorChar + dataType;
-		} else if (formType == FormTypeEnum.WKFLW || formType == FormTypeEnum.WKFLW_SELECTION) {
+		} else if (formType == FormTypeEnum.WKFLW) {
 			base = MsgId.INT_DIRECTORY_FORM_WKFLW.getText() + File.separatorChar + dataType;
 		} else if (formType == FormTypeEnum.LIST) {
 			base = MsgId.INT_DIRECTORY_FORM_LISTS.getText() + File.separatorChar + dataType;

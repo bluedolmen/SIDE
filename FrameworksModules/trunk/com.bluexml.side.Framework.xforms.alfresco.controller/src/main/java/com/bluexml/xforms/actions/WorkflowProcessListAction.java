@@ -38,6 +38,7 @@ import com.bluexml.xforms.messages.MsgId;
  * Read action.
  * 
  * @author Amenel
+ * @deprecated
  */
 public class WorkflowProcessListAction extends AbstractReadAction {
 
@@ -55,7 +56,8 @@ public class WorkflowProcessListAction extends AbstractReadAction {
 	 */
 	@Override
 	public String getActionName() {
-		return MsgId.INT_ACT_CODE_WRKFLW_PROCESS_LIST.getText();
+//		return MsgId.INT_ACT_CODE_WRKFLW_PROCESS_LIST.getText();
+		return "dummy";
 	}
 
 	/*

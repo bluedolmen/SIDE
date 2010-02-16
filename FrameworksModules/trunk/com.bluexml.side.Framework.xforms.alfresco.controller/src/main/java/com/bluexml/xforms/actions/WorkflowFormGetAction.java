@@ -15,7 +15,6 @@ import org.w3c.dom.Node;
 import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.controller.navigation.Page;
-import com.bluexml.xforms.messages.MsgId;
 
 /**
  * Returns the instance for workflow forms, which includes the instance for the data form. <br/>
@@ -47,7 +46,8 @@ public class WorkflowFormGetAction extends AbstractReadAction {
 	 */
 	@Override
 	public String getActionName() {
-		return MsgId.INT_ACT_CODE_GET_FORM_WKFLW.getText();
+		// return MsgId.INT_ACT_CODE_GET_FORM_WKFLW.getText();
+		return "dummy";
 	}
 
 	/*
