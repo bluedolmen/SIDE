@@ -27,8 +27,8 @@ public class PageInfoBean {
 	public boolean showDelete;
 	public boolean showValidate;
 	public FormTypeEnum formType;
-	public String formName;
-	public String dataType;
+	public String formName; // e.g. Person_RO
+	public String dataType; // e.g. Person
 	Map<String, String> initParams;
 	/** true if the form was called to display an object whose type does not match the form */
 	public boolean wrongCallType;
