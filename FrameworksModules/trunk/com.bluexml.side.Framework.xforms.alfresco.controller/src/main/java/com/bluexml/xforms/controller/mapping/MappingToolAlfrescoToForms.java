@@ -579,7 +579,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 					FileFieldType fileFieldType = (FileFieldType) formFieldType;
 					if ((alfrescoId != null) && (fileFieldType.isInRepository())) {
 						formField
-								.setTextContent(controller.getWebscriptNodeContentInfo(alfrescoId));
+								.setTextContent(controller.getWebscriptNodeContentInfo(value));
 					}
 				}
 			}
