@@ -97,7 +97,7 @@ public class AlfrescoController {
 
 	/** whether to check that the form being opened matches the data id */
 	public static boolean CHECK_MATCH_DATA_FORM = true;
-	
+
 	/** The temp directory. */
 	public static File TEMP_DIRECTORY = null;
 
@@ -268,7 +268,7 @@ public class AlfrescoController {
 		} else {
 			streamMsgs = loadPropertiesMessagesDefaults();
 		}
-		
+
 		if (streamMsgs == null) {
 			return false;
 		}
@@ -597,14 +597,14 @@ public class AlfrescoController {
 			MAX_RESULTS = 50;
 		}
 
-		// whether to check matching of form vs data 
+		// whether to check matching of form vs data
 		property = config.getProperty(MsgId.KEY_CHECK_MATCH_DATA_FORM.getText());
 		CHECK_MATCH_DATA_FORM = !(StringUtils.equals(property, "false"));
 
 		// whether to append ordering suffix to file names
 		property = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY_APPEND.getText());
 		UPLOAD_REPOSITORY_APPEND = !(StringUtils.equals(property, "false"));
-		
+
 		// whether to format info of repo uploads like the info of node content
 		property = config.getProperty(MsgId.KEY_UPLOAD_REPOSITORY_FORMAT_INFO.getText());
 		UPLOAD_REPOSITORY_FORMAT_INFO = StringUtils.equals(property, "true");
@@ -841,7 +841,6 @@ public class AlfrescoController {
 		}
 		return CHECK_MATCH_DATA_FORM;
 	}
-	
 
 	/**
 	 * Processes all upload fields on initial submission. Moves filesystem uploads to the directory,
@@ -864,32 +863,30 @@ public class AlfrescoController {
 				alfClass);
 		for (RepoContentInfoBean infoBean : fileBeans) {
 			fileName = infoBean.getPath();
-			if (fileName != null && fileName.startsWith("file:")) {
+			if (fileName.startsWith("file:")) {
 				String type = alfClass.getQualifiedName();
 				fileName = uploadMoveFileToDir(type, fileName, transaction);
-				mappingTool.setFileUploadFileName(fileName, infoBean.getAttribute());
 			}
+			mappingTool.setFileUploadFileName(fileName, infoBean.getAttribute());
 		}
 
 		// repository content file(s); these will be directly uploaded to the repository
 		List<RepoContentInfoBean> repoBeans = mappingTool.getUploadBeansRepo(transaction, alfClass);
 		for (RepoContentInfoBean infoBean : repoBeans) {
 			fileName = null;
-			if (infoBean != null) {
-				fileName = infoBean.getName();
-				filePath = infoBean.getPath();
-				mimeType = infoBean.getMimeType();
-				GenericAttribute attribute = infoBean.getAttribute();
-				if (filePath != null && filePath.startsWith("file:")) {
-					String location = getParamUploadPathInRepository();
-					fileName = uploadMoveFileToRepo(transaction, fileName, filePath, location,
-							mimeType, infoBean.isShouldAppendSuffix());
-					if (StringUtils.trimToNull(fileName) == null) {
-						throw new ServletException(MsgPool.getMsg(MsgId.MSG_UPLOAD_FAILED));
-					}
-					mappingTool.setFileUploadFileName(fileName, attribute);
+			fileName = infoBean.getName();
+			filePath = infoBean.getPath();
+			mimeType = infoBean.getMimeType();
+			GenericAttribute attribute = infoBean.getAttribute();
+			if (filePath.startsWith("file:")) {
+				String location = getParamUploadPathInRepository();
+				fileName = uploadMoveFileToRepo(transaction, fileName, filePath, location,
+						mimeType, infoBean.isShouldAppendSuffix());
+				if (StringUtils.trimToNull(fileName) == null) {
+					throw new ServletException(MsgPool.getMsg(MsgId.MSG_UPLOAD_FAILED));
 				}
 			}
+			mappingTool.setFileUploadFileName(fileName, attribute);
 		}
 
 		// node content file; there's at most one instance of this.
@@ -2828,6 +2825,9 @@ public class AlfrescoController {
 	 * @return the info about a content, or null if an exception occured or empty if no content
 	 */
 	public String getWebscriptNodeContentInfo(String nodeId) {
+		if (StringUtils.trimToNull(nodeId) == null) {
+			return "";
+		}
 		String request;
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -2854,7 +2854,9 @@ public class AlfrescoController {
 			String sizeBytes = formatter.format("%,d", size).toString();
 			char multiplier = getFileSizeUnit(size);
 			if (multiplier != 'b') {
-				sizeUnit = getFileSizeShortReadable(size, multiplier);
+				sizeUnit = "(" + getFileSizeShortReadable(size, multiplier) + ")";
+			} else {
+				//
 			}
 			result = MsgPool.getMsg(MsgId.MSG_UPLOAD_CONTENT_REPO_FORMAT, nodeName, sizeBytes,
 					sizeUnit, nodeId);
