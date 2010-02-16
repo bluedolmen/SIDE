@@ -142,6 +142,7 @@ public class DocumentationGenerator extends RequirementsGenerator {
 	
 	@Override
 	public Collection<IFile> generate(IFile model) throws Exception {
+		DocumentationServices.clearAll();
 		DocumentationServices.setModelName(model.getName());
 
 		// Check if there is a diagram file :

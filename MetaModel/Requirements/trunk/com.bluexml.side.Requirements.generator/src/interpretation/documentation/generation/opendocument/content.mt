@@ -335,7 +335,17 @@ import com.bluexml.side.requirements.generator.services.DocumentationServices
 			<%for (content){%>
 				<%content_chapter()%>
 			<%}%>
-			
+			<%if (getDiagImgPath.length > 0){%>
+				<text:h text:style-name="Heading_20_1" text:outline-level="1">Diagrams</text:h>
+				<%for (getDiagImgPath) {%>
+					<text:h text:style-name="Heading_20_2" text:outline-level="2"><%if (i() > 0){%><%}%><%current%></text:h>
+					<text:p text:style-name="Standard">
+						<draw:frame draw:style-name="fr1" draw:name="<%current%>" text:anchor-type="paragraph" svg:x="0.52cm" svg:y="0.044cm" svg:width="15cm" svg:height="15cm" draw:z-index="0">
+							<draw:image xlink:href="Pictures/<%current%>" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
+						</draw:frame>
+					</text:p>
+				<%}%>
+			<%}%>
 		</office:text>
 	</office:body>
 </office:document-content>
