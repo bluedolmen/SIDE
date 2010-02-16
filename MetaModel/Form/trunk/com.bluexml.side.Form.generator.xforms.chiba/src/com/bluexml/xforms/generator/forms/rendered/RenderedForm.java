@@ -49,7 +49,7 @@ public class RenderedForm extends Rendered {
 		MsgId getAction = MsgId.INT_ACT_CODE_GET_FORM;
 		String suffix = "";
 		if (formType.equals(FormTypeRendered.formWkflw)) {
-			getAction = MsgId.INT_ACT_CODE_GET_FORM_WKFLW;
+			suffix = MsgId.INT_ACT_SUFFIX_GET_FORM_WKFLW.getText();
 		} else if (formType.equals(FormTypeRendered.formWkflwSel)) {
 			getAction = MsgId.INT_ACT_CODE_GET_WKFLW_SELECTION;
 		} else if (formType.equals(FormTypeRendered.formClass)) {
