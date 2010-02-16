@@ -108,7 +108,7 @@ public class DefaultMessages {
 			"upload.node.content.group.label=Attach content",
 			"upload.node.content.no.content=(no content)",
 			"# 0: node name; 1: content size in bytes with digit grouping; 2: content size in best-fitting unit surrounded by parentheses; 3: full nodeId",
-			"upload.node.content.repository.format={0}: {1} bytes {2}. NodeId: {3}.",
+			"upload.node.content.repository.format={0}: {1} bytes{2}. NodeId: {3}.",
 			"upload.node.content.repository.info=Content information:", "#", "# workflow-related",
 			"#", "caption.button.workflow.cancel=Cancel",
 			"caption.button.workflow.select=Select this workflow",

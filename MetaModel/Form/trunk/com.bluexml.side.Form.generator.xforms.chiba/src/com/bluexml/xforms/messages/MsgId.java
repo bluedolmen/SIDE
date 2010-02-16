@@ -114,15 +114,15 @@ public enum MsgId {
 	INT_ACT_CODE_ENUM					("enum"),
 	INT_ACT_CODE_EXECUTE				("execute"),
 	INT_ACT_CODE_GET_FORM				("get"),
-	INT_ACT_CODE_GET_FORM_WKFLW			("wrkflwfrm-get"),
+	INT_ACT_CODE_GET_FORM_WKFLW			("wrkflwfrm-get"),//%%
 	INT_ACT_CODE_GET_WKFLW_SELECTION	("process-get"), //%%
 	INT_ACT_CODE_I18N					("i18n"),
 	INT_ACT_CODE_LIST					("list"),
 	INT_ACT_CODE_SETTYPE				("settype"),
 	INT_ACT_CODE_SUBMIT					("submit"),
-	INT_ACT_CODE_WRKFLW_INSTANCE_LIST	("instance-list"),
-	INT_ACT_CODE_WRKFLW_PROCESS_LIST	("process-list"),
-	INT_ACT_CODE_WRKFLW_START			("workflow-start"),
+	INT_ACT_CODE_WRKFLW_INSTANCE_LIST	("instance-list"),//%%
+	INT_ACT_CODE_WRKFLW_PROCESS_LIST	("process-list"),//%%
+	INT_ACT_CODE_WRKFLW_START			("workflow-start"),//%%
 	INT_ACT_CODE_WRKFLW_TRANSITION		("transition"),
 	INT_ACT_PARAM_GET_FORMTYPE			("formType"),
 	INT_ACT_PARAM_LIST_FORMAT			("format"),

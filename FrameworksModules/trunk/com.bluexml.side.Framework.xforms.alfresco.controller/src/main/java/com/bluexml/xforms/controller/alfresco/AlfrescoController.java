@@ -2854,7 +2854,7 @@ public class AlfrescoController {
 			String sizeBytes = formatter.format("%,d", size).toString();
 			char multiplier = getFileSizeUnit(size);
 			if (multiplier != 'b') {
-				sizeUnit = "(" + getFileSizeShortReadable(size, multiplier) + ")";
+				sizeUnit = " (" + getFileSizeShortReadable(size, multiplier) + ")";
 			} else {
 				//
 			}
@@ -2863,7 +2863,7 @@ public class AlfrescoController {
 		} else {
 			result = MsgPool.getMsg(MsgId.MSG_UPLOAD_CONTENT_NO_CONTENT);
 		}
-		result += " " + result;
+//		result += " " + result;
 		return result;
 	}
 

@@ -78,11 +78,21 @@ import com.bluexml.xforms.messages.MsgPool;
 public class NavigationManager {
 
 	/** The Constant ACTIONS. */
-	private static final Class<?>[] ACTIONS = { CancelAction.class, CreateClassAction.class,
-			CreateFormAction.class, EditClassAction.class, EditFormAction.class, EnumAction.class,
-			ExecuteAction.class, GetAction.class, I18NAction.class, ListAction.class,
-			SubmitAction.class, DeleteAction.class, SetTypeAction.class,
-			/*WorkflowFormGetAction.class, WorkflowGetAction.class,*/ WorkflowInstanceListAction.class,
+	private static final Class<?>[] ACTIONS = {
+			CancelAction.class,
+			CreateClassAction.class,
+			CreateFormAction.class,
+			EditClassAction.class,
+			EditFormAction.class,
+			EnumAction.class,
+			ExecuteAction.class,
+			GetAction.class,
+			I18NAction.class,
+			ListAction.class,
+			SubmitAction.class,
+			DeleteAction.class,
+			SetTypeAction.class,
+			/* WorkflowFormGetAction.class, WorkflowGetAction.class, */WorkflowInstanceListAction.class,
 			WorkflowProcessListAction.class, WorkflowStartAction.class,
 			WorkflowTransitionAction.class };
 
@@ -279,7 +289,7 @@ public class NavigationManager {
 					"true");
 			if (isInit) {
 				ServletOutputStream stream = resp.getOutputStream();
-				String result = loadConfiguration(req, true) ? "success" : "failure";
+				String result = (loadConfiguration(req, true) == -1) ? "success" : "failure";
 				stream.write(result.getBytes());
 				stream.close();
 				return;
@@ -296,7 +306,26 @@ public class NavigationManager {
 			// check whether reloading of properties/configuration files was asked for
 			if (StringUtils.equals(req.getParameter(MsgId.PARAM_RELOAD_PROPERTIES.getText()),
 					"true")) {
-				loadConfiguration(req, false);
+				int resLoad = loadConfiguration(req, false);
+				if (logger.isDebugEnabled()) {
+					if (resLoad == -1) {
+						logger.debug("Reloaded properties: OK.");
+					} else {
+						String reason = "";
+						switch (resLoad) {
+							case 0:
+								reason = "an exception occured";
+								break;
+							case 1:
+								reason = "properties files";
+								break;
+							case 2:
+								reason = "redirection file";
+								break;
+						}
+						logger.debug("Failed in loading the configuration. Reason: " + reason);
+					}
+				}
 			}
 			// set specific CSS if given
 			this.setCssUrl(req);
@@ -468,21 +497,24 @@ public class NavigationManager {
 	}
 
 	/**
+	 * 
 	 * @param req
+	 * @return -1 if all files are loaded OK. 0 if an exception occurred. 1 if failed at properties
+	 *         files. 2 if failed at redirection file.
 	 * @throws IOException
 	 * @throws Exception
 	 */
-	private boolean loadConfiguration(HttpServletRequest req, boolean fromInitCall) {
+	private int loadConfiguration(HttpServletRequest req, boolean fromInitCall) {
 		try {
 			String formsPath = req.getParameter(MsgId.PARAM_PROPERTIES_FILE_FORMS.getText());
 			String msgPath = req.getParameter(MsgId.PARAM_PROPERTIES_FILE_MESSAGES.getText());
 			if (AlfrescoController.loadProperties(formsPath, msgPath) == false) {
-				return false;
+				return 1;
 			}
 
 			String redirectPath = req.getParameter(MsgId.PARAM_REDIRECTOR_CONFIG_FILE.getText());
 			if (AlfrescoController.loadRedirectionTable(redirectPath) == false) {
-				return false;
+				return 2;
 			}
 			if (fromInitCall) {
 				// we'll also deal with CSS, alfrescoHost
@@ -494,9 +526,9 @@ public class NavigationManager {
 			}
 		} catch (Exception e) {
 			logger.error("Couldn't load all configuration files.", e);
-			return false;
+			return 0;
 		}
-		return true;
+		return -1;
 	}
 
 	/**
