@@ -1,5 +1,8 @@
 package com.bluexml.side.integration.eclipse.builder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -8,6 +11,9 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.sideLabs.referential.references.Model;
+import org.sideLabs.referential.references.ModelsDocument;
 
 public class SIDEBuilderUtil {
 	
@@ -90,4 +96,36 @@ public class SIDEBuilderUtil {
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(path.segment(0));
 		return project.getFile(p);
 	}
+	
+	public static void cleanReferential(IProject project) {
+		IFile referential = project.getFile(SIDEBuilderConstants.referentialFileName);
+		if (referential.exists()) {
+			ModelsDocument doc = null;
+			try {
+				doc = ModelsDocument.Factory.parse(referential.getContents());
+				if (doc != null && doc.getModels() != null) {
+					int i = 0;
+					List<Integer> toDelete = new ArrayList<Integer>();
+					for (Model m : doc.getModels().getModelArray()) {
+						String path = m.getPath();
+						IFile model = SIDEBuilderUtil.getFile(new Path(path));
+						if (!model.exists()) {
+							toDelete.add(i);
+						}
+						i++;
+					}
+
+					int deleteElements = 0;
+					for (int j : toDelete) {
+						doc.getModels().removeModel(j-deleteElements);
+						deleteElements++;
+					}
+					doc.save(referential.getRawLocation().toFile());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }

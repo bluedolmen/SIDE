@@ -222,6 +222,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 				incrementalBuild(delta, monitor);
 			}
 		}
+		SIDEBuilderUtil.cleanReferential(getProject());
 		return null;
 	}
 
