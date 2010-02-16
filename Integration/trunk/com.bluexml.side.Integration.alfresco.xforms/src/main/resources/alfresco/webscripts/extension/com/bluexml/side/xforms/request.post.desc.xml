@@ -9,6 +9,7 @@
 	<url>/xforms/labels</url>
 	<url>/xforms/list</url>
 	<url>/xforms/mkdir</url>
+	<url>/xforms/nodeinfo</url>
 	<url>/xforms/package</url>
 	<url>/xforms/read</url>
 	<url>/xforms/service</url>
