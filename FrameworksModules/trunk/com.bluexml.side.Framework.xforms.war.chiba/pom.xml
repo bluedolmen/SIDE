@@ -10,7 +10,7 @@
   <artifactId>chiba</artifactId>
   <packaging>war</packaging>
   <name>xforms.war.chiba for SIDE</name>
-  <version>1.0.46</version>
+  <version>1.0.47</version>
   <description>Patches Chiba and provides a WAR ready to be overlayed by the final generation project.
 		It patches Chiba classes, javascripts and CSS. It also configures Chiba/webapp to use custom classes.
 		Those classes delegate work to controller then.</description>
@@ -18,7 +18,7 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.xforms.alfresco</groupId>
       <artifactId>controller</artifactId>
-      <version>1.0.51</version>
+      <version>1.0.52</version>
       <type>jar</type>
     </dependency>
     <dependency>
