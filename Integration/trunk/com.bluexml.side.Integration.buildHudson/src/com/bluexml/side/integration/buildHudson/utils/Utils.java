@@ -743,6 +743,7 @@ public class Utils {
 
 		}
 		
+		
 		if (listePomsModuleDepencies.size() != 0) {
 			System.out.println("\nListe des poms modifi�es suite mis a jour module: ");
 			for (String pom : listePomsModuleDepencies) {
@@ -751,7 +752,9 @@ public class Utils {
 				System.out.println("\t- " + tab[1] + ": "
 						+ getVersionNumberPom(pom));
 			}
-			}
+		}
+		
+		
 		
 		System.out.println("\nFixer les versions des fichiers plugin : ");
 		if (listePomsModuleDepencies.size() != 0) {
@@ -781,6 +784,124 @@ public class Utils {
 						}
 				}
 			}
+		}
+		
+		
+		while (listePomsModuleDepencies.size() != 0){
+			
+			System.out.println("\nFixer les versions des fichiers plugins suite mise a jour module : ");
+			// mettre a jour les plugins avec les versions des pom.xml
+			// ajouter les plugins modifier dans la listePlugin
+			ArrayList<String> listePomsModuleDepencies1 = new ArrayList<String>();
+			if (listePomsModuleDepencies.size() != 0) {
+				for (String pom : listePomsModuleDepencies) {
+					String versionPom= getVersionNumberPom(pom);
+					String valeurf= pom;
+					String [] tab=valeurf.split("/pom.xm");
+					String valeur2=tab[0];
+					String nomPom=valeur2.substring(valeur2.lastIndexOf("/")+1);
+					
+					//fixer les versions des fichiers plugin.xml
+					System.out.println("\nFixer les versions des fichiers plugins : ");
+					for (String element : projects) {
+						
+							if (element.indexOf("feature") == -1) {
+								
+								//si contient reference pom alors modifie max version
+								// et ajouter a la liste listePlugin
+								boolean ajouter=updatePluginModuleDependencies(element, nomPom, versionPom);
+								if (ajouter){
+									if (listePlugin.indexOf(element) == -1){
+										listePlugin.add(element);
+										System.out.println("update plugin : "+element+ " pom : "+nomPom+ " version : "+versionPom);
+									}
+										
+								}	
+							
+							}
+					}
+					
+					
+					//fixer les versions des fichier pom.xml
+					System.out.println("\nFixer les versions des fichiers pom suite mise a jour module : ");
+					for (String element : listefichierpom) { 
+							
+						//si contient reference pom alors modifie max version
+						// et ajouter a la liste listePlugin
+						boolean ajouter=updatePomModuleDependencies(element, nomPom, versionPom);
+						if (ajouter){
+							if ((listePomsModuleDepencies.indexOf(element) == -1)&& (listeProjetPoms.indexOf(element) == -1)){
+								listePomsModuleDepencies1.add(element);
+								System.out.println("update pom : "+element+ " pom : "+nomPom+ " version : "+versionPom);
+							}	
+						}	
+					}
+					
+				}
+			}
+			
+			//mettre a jour les pom.xml modifiers
+			// On parcours la liste des pom et on les met a jour
+			for (String pomModuleDepencies : listePomsModuleDepencies1) {
+				updateVersionNumberPom(pomModuleDepencies);
+
+			}
+			
+			
+			if (listePomsModuleDepencies1.size() != 0) {
+				System.out.println("\nListe des poms modifi�es suite mis a jour module: ");
+				for (String pom : listePomsModuleDepencies1) {
+					String valeurf= pom;
+					String [] tab=valeurf.split("/S-IDE/");
+					System.out.println("\t- " + tab[1] + ": "
+							+ getVersionNumberPom(pom));
+				}
+			}
+			
+			
+			
+			System.out.println("\nFixer les versions des fichiers plugin : ");
+			if (listePomsModuleDepencies1.size() != 0) {
+				for (String pom : listePomsModuleDepencies1) {
+					String versionPom= getVersionNumberPom(pom);
+					String valeurf= pom;
+					String [] tab=valeurf.split("/pom.xm");
+					String valeur2=tab[0];
+					String nomPom=valeur2.substring(valeur2.lastIndexOf("/")+1);
+					
+					//fixer les versions des fichiers plugin.xml
+					for (String element : projects) {
+						
+							if (element.indexOf("feature") == -1) {
+								
+								//si contient reference pom alors modifie max version
+								// et ajouter a la liste listePlugin
+								boolean ajouter=updatePluginModuleDependencies(element, nomPom, versionPom);
+								if (ajouter){
+									if (listePlugin.indexOf(element) == -1){
+										listePlugin.add(element);
+										System.out.println("update plugin : "+element+ " pom : "+nomPom+ " version : "+versionPom);
+									}
+										
+								}	
+							
+							}
+					}
+				}
+			}
+			
+			
+			listePomsModuleDepencies = new ArrayList<String>();
+			if (listePomsModuleDepencies1.size() != 0) {
+				for (String pom : listePomsModuleDepencies1) {
+					listePomsModuleDepencies.add(pom);
+				}
+			}
+				
+			
+			
+			
+			
 		}
 		
 		
