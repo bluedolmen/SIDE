@@ -41,7 +41,7 @@ cd $WORKDIR;
 # patch superpom file (add as dependencies all extension used by side components)
 java -jar $POM_PATCHER $SIDEHOME $POM_OUT
 # build archive of all maven requirements
-mvn dependency:go-offline -P offline -Dmaven.repo.local=$MAVENREPO
+mvn dependency:go-offline -P public -Dmaven.repo.local=$MAVENREPO
 cd $MAVENREPO
 if [ -f $MAVENREPO_ARCHIVE ] ; then
 	rm $MAVENREPO_ARCHIVE	
