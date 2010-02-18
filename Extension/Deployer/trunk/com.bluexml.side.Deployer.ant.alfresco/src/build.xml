@@ -248,8 +248,8 @@
 	
 	<target name="startAlfrescoLx" if="linux">
 		<echo message="Linux os: starting alfresco ..."/>
-		<exec executable="${alfresco.dir}\alfresco.sh">
-			<arg value="start"/>
+		<exec executable="bash" newenvironment="false" dir="${alfresco.dir}">
+			<arg line="./alfresco.sh start"/>
 		</exec>
 		<echo message="Linux os: alfresco on."/>
 	</target>
