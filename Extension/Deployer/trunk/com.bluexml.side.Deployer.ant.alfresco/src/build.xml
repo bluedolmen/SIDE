@@ -285,7 +285,7 @@
 		<echo message="Loading data ..."/>
 		<taskdef name="post" classname="ise.antelope.tasks.PostTask" classpath="../dist/antelopetasks-3.2.10.jar"/>
 		<post file="data_post.properties" to="http://${alfresco.server}:${alfresco.port}/alfresco/service/data/generate/generate"
-		      verbose="true">
+		      verbose="true" maxwait="${post.time.response}">
 		</post>
 		<echo message="Data loading may have been successfull: see above logs."/>
 	</target>
