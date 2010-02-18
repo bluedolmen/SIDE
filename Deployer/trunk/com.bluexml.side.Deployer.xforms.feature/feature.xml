@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Deployer.xforms.feature" label="SIDE Xforms Chiba Deployer" version="1.0.18.v14213-20100209" provider-name="BlueXML">
-  <description url="http://www.bluexml.com">SIDE MDA environment eases the deployment of generated or developed extensions on specialized
-frameworks like Alfresco. This feature allows to deploy extensions on XForms Chiba instances.</description>
-  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
-  <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <requires>
-    <import plugin="org.eclipse.core.runtime" />
-    <import plugin="com.bluexml.side.Util.deployer" />
-    <import plugin="com.bluexml.side.Util.security" />
-    <import plugin="com.bluexml.side.Util.libs" />
-    <import plugin="org.eclipse.core.resources" />
-    <import plugin="com.bluexml.side.Application" />
-  </requires>
-  <plugin id="com.bluexml.side.Deployer.xforms" download-size="0" install-size="0" version="1.0.19.v13286-20100127" unpack="false" />
-</feature>
+<feature
+      id="com.bluexml.side.Deployer.xforms.feature"
+      label="SIDE Xforms Chiba Deployer"
+      version="1.0.18.v14213-20100209"
+      provider-name="BlueXML">
 
+   <description url="http://www.bluexml.com">
+      SIDE MDA environment eases the deployment of generated or developed extensions on specialized
+frameworks like Alfresco. This feature allows to deploy extensions on XForms Chiba instances.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="com.bluexml.side.Util.deployer"/>
+      <import plugin="com.bluexml.side.Util.security"/>
+      <import plugin="com.bluexml.side.Util.libs"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Application"/>
+      <import plugin="com.bluexml.side.Util.deployer.war"/>
+      <import plugin="org.apache.commons.lang"/>
+   </requires>
+
+   <plugin
+         id="com.bluexml.side.Deployer.xforms"
+         download-size="0"
+         install-size="0"
+         version="1.0.19.v13286-20100127"
+         unpack="false"/>
+
+</feature>
