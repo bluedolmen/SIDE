@@ -9,8 +9,7 @@
 		<available property="haveDeltaPack" file="${deltapack}" />
 		<fail unless="haveDeltaPack" message="The deltapack is required to build this product.  Please edit buildProduct.xml or set the &quot;deltapack&quot; property." />
 
-		<property name="builder" value="${basedir}" />
-		<property name="buildDirectory" value="${basedir}/buildDirectory" />
+		<property name="buildDirectory" value="${builder}/buildDirectory" />
 		<property name="pluginPath" value="${baseLocation}/plugins${path.separator}${deltapack}" />
 		<property name="buildTempFolder" value="${buildDirectory}" />
 		<echoproperties></echoproperties>

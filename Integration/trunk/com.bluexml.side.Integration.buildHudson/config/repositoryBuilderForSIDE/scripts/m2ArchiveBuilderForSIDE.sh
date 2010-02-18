@@ -1,9 +1,10 @@
 # configuration
-SIDEHOME=/Users/davidabad/Workspace2.0/S-IDE
-BUILDERHOME=/Users/davidabad/Workspace2.0/buildAllMaven
-POM_PATCHER_PROJECT=/Users/davidabad/Workspace2.0/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE
-POM_IN=/Users/davidabad/Workspace2.0/superpom/pom.xml
-MAVENREPO_ARCHIVE=/Users/davidabad/Workspace2.0/S-IDE/Util/trunk/com.bluexml.side.Util.dependencies/src/com/bluexml/side/util/dependencies/mavenRepository/m2repositoryForSIDE.zip
+WORKSPACE=/Users/davidabad/Workspace2.0
+SIDEHOME=$WORKSPACE/S-IDE
+BUILDERHOME=$WORKSPACE/buildAllMaven
+POM_PATCHER_PROJECT=$SIDEHOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE
+POM_IN=$WORKSPACE/superpom/pom.xml
+MAVENREPO_ARCHIVE=$SIDEHOME/Util/trunk/com.bluexml.side.Util.dependencies/src/com/bluexml/side/util/dependencies/mavenRepository/m2repositoryForSIDE.zip
 
 
 # set constantes
