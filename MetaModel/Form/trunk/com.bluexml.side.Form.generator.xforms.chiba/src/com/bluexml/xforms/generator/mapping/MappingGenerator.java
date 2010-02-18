@@ -286,11 +286,11 @@ public class MappingGenerator extends AbstractGenerator {
 	public void beginGeneration() {
 		monitor.setTaskName("Generating resources.");
 		mapping = new Mapping();
-		
+
 		GenInfoType genInfoType = new GenInfoType();
 		genInfoType.setReadOnlyFormsSuffix(formGenerator.getReadOnlySuffix());
 		genInfoType.setDebugMode(formGenerator.isDebugMode());
-		
+
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		String dateString = formatter.format(date);
@@ -406,7 +406,8 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#endGeneration()
 	 */
 	/**
-	 * Writes all generated files.
+	 * Writes all generated files. <br/>
+	 * NOTE: the enumeration files for search operators are written by the template generator.
 	 */
 	public void endGeneration() {
 		// mapping file
@@ -415,6 +416,7 @@ public class MappingGenerator extends AbstractGenerator {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+
 		// CSS
 		try {
 			writeSkeletonCSS();
@@ -700,9 +702,7 @@ public class MappingGenerator extends AbstractGenerator {
 	public void beginForm(FormContainer form) {
 		FormContainer realContainer = form;
 
-		if (form.eIsProxy()) { // #1225
-			realContainer = (FormContainer) formGenerator.getRealObject(form);
-		}
+		realContainer = (FormContainer) formGenerator.getRealObject(form); // #1225
 
 		if (realContainer instanceof FormClass) {
 			FormType formType = newFormType(realContainer);
@@ -839,11 +839,26 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 
 		ModelElement ref = (ModelElement) formGenerator.getRealObject(field.getRef());
-		// TODO: traiter le cas formContainer en tt q FormWorkflow
 		if (formContainer instanceof FormClass) {
 			FormClass formClass = (FormClass) formContainer;
-			String alfrescoName = formGenerator.getAlfrescoName(formClass.getReal_class(), field
-					.getRef());
+			Clazz realClass = null;
+			try {
+				realClass = (Clazz) formGenerator.getRealObject(formClass.getReal_class());
+			} catch (ClassCastException cce) {
+				throw new RuntimeException("The model element in property <Real class> of form '"
+						+ formClass.getId() + "' is not a class.");
+			}
+			//
+			// check that the ref'ed attribute is legitimate for this FormClass
+			if (checkClassAttributeInclusion(realClass, ref) == false) {
+				throw new RuntimeException(
+						"The field '"
+								+ field.getLabel()
+								+ "' on form '"
+								+ formClass.getId()
+								+ "' has a bad <Ref> property: either the model element is not an attribute or the attribute belongs to another class.");
+			}
+			String alfrescoName = formGenerator.getAlfrescoName(realClass, ref);
 			formFieldType.setAlfrescoName(alfrescoName);
 		} else {
 			com.bluexml.side.workflow.Attribute attribute = (com.bluexml.side.workflow.Attribute) ref;
@@ -900,6 +915,26 @@ public class MappingGenerator extends AbstractGenerator {
 			canister.getField().add(formFieldType);
 		}
 
+	}
+
+	/**
+	 * Checks that the field reference belongs to the class reference.
+	 * 
+	 * @param classRef
+	 * @param fieldRef
+	 * @return false if the field reference is not a class diagram attribute or does not belong to
+	 *         the given class. True otherwise.
+	 */
+	private boolean checkClassAttributeInclusion(ModelElement classRef, ModelElement fieldRef) {
+		try {
+			@SuppressWarnings("unused")
+			Attribute attr = (Attribute) fieldRef;
+		} catch (ClassCastException cce) {
+			return false;
+		}
+		EObject container = ((EObject) fieldRef).eContainer();
+		ModelElement realContainer = (ModelElement) formGenerator.getRealObject(container);
+		return classRef.equals(realContainer);
 	}
 
 	/**
@@ -1051,10 +1086,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @return the form type
 	 */
 	private FormType newFormType(FormContainer form) {
-		FormContainer realContainer = form;
-		if (form.eIsProxy()) { // #1225
-			realContainer = (FormContainer) formGenerator.getRealObject(form);
-		}
+		FormContainer realContainer = (FormContainer) formGenerator.getRealObject(form); // #1225
 
 		FormType childFormType = new FormType();
 		childFormType.setName(realContainer.getId());
