@@ -3,8 +3,8 @@ SIDE_HOME=$WORKSPACE/S-IDE
 BUILDER_HOME=$SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/productBuilder
 REPO_BULDER=$SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE/scripts/m2ArchiveBuilderForSIDE.sh
 
-EclipseZIP=$BUILDER_HOME/eclipse3.5.1ForSIDE.zip
-EclipseDeltaPack=$BUILDER_HOME/eclipse-3.5.1-delta-pack.zip
+EclipseZIP=/Users/davidabad/Archive/eclipse3.5.1ForSIDE.zip
+EclipseDeltaPack=/Users/davidabad/Archive/eclipse-3.5.1-delta-pack.tar.gz
 WORKDIR=$BUILDER_HOME/work
 ECLIPSE_BUILDER=$WORKDIR/eclipse
 
@@ -19,7 +19,7 @@ ECLIPSE_BUILDER=$WORKDIR/eclipse
 
 
 # build mavenRepo and includes depndencies
-sh $REPO_BULDER
+#sh $REPO_BULDER
 
 ## Eclipse preparation
 echo "== Eclipse =="
@@ -29,7 +29,7 @@ cd $WORKDIR
 unzip $EclipseZIP
 mkdir -p eclipse/deltapack
 cd $ECLIPSE_BUILDER/deltapack
-unzip $EclipseDeltaPack
+tar -xvzf $EclipseDeltaPack
 echo "== copy plugins from SIDE source =="
 cp -rf $SIDE_HOME/MetaModel/*/trunk/* $ECLIPSE_BUILDER/plugins
 cp -rf $SIDE_HOME/Util/trunk/* $ECLIPSE_BUILDER/plugins
@@ -38,16 +38,14 @@ cp -rf $SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.eclipse* $ECLIP
 echo "== Add Fake feature includings all dependencies =="
 #cp -rfv /Users/davidabad/Workspace2.0/TestRCP $ECLIPSE_BUILDER/plugins
 echo "== copy features from SIDE source =="
-find $SIDE_HOME -name *feature | xargs -I source cp -rfv source $ECLIPSE_BUILDER/features
+#find $SIDE_HOME -name *feature | xargs -I source cp -rfv source $ECLIPSE_BUILDER/features
 # remove svn
 #find $ECLIPSE_BUILDER/features -name .svn | xargs sudo rm -rf
 #find $ECLIPSE_BUILDER/plugins -name .svn | xargs sudo rm -rf
 
 echo "== clean previous build =="
 rm -rf $BUILDER_HOME/dist
-rm -rf $BUILDER_HOME/buildDirectory
 mkdir -p $BUILDER_HOME/dist
-mkdir -p $BUILDER_HOME/buildDirectory
 echo "== run builder =="
 cd $BUILDER_HOME
-ant pde-build2 -Dworkspace=$WORKSPACE
+ant pde-build2

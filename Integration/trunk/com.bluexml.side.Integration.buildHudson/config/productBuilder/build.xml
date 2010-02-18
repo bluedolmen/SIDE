@@ -1,5 +1,5 @@
 <project default="main">
-	<property file="build.properties" />
+	<property file="build.${user.name}.properties" />
 
 
 	<target name="main">
