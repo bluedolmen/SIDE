@@ -14,4 +14,3 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.deployer.war
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Import-Package: org.apache.commons.lang
