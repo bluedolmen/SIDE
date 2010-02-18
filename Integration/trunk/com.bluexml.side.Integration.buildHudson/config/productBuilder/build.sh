@@ -1,9 +1,7 @@
-SIDE_HOME=/Users/davidabad/Workspace2.0/S-IDE
+WORKSPACE=/Users/davidabad/Workspace2.0
+SIDE_HOME=$WORKSPACE/S-IDE
 BUILDER_HOME=$SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/productBuilder
 REPO_BULDER=$SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE/scripts/m2ArchiveBuilderForSIDE.sh
-
-#BUILDER_HOME=.
-#SIDE_HOME=$BUILDER_HOME/../../../../..
 
 EclipseZIP=$BUILDER_HOME/eclipse3.5.1ForSIDE.zip
 EclipseDeltaPack=$BUILDER_HOME/eclipse-3.5.1-delta-pack.zip
@@ -21,7 +19,7 @@ ECLIPSE_BUILDER=$WORKDIR/eclipse
 
 
 # build mavenRepo and includes depndencies
-#sh $REPO_BULDER
+sh $REPO_BULDER
 
 ## Eclipse preparation
 echo "== Eclipse =="
@@ -52,4 +50,4 @@ mkdir -p $BUILDER_HOME/dist
 mkdir -p $BUILDER_HOME/buildDirectory
 echo "== run builder =="
 cd $BUILDER_HOME
-ant pde-build2
+ant pde-build2 -Dworkspace=$WORKSPACE

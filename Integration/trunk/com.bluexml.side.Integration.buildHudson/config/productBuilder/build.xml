@@ -22,8 +22,9 @@
 
 
 	
-	<target name="pde-build2">
-		<record name="build_pde-build_debug.log" loglevel="debug" action="start" />
+	<target name="pde-build2">		
+		<delete file="${logFile}" failonerror="false"/>
+		<record name="${logFile}" loglevel="debug" action="start" />
 		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
 			<arg value="-Xmx512m" />
 			<arg value="-Xms512m" />
@@ -36,6 +37,6 @@
 				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
 			</classpath>
 		</java>
-		<record name="build_pde-build_debug.log" action="stop" />
+		<record name="${logFile}" action="stop" />
 	</target>
 </project>
