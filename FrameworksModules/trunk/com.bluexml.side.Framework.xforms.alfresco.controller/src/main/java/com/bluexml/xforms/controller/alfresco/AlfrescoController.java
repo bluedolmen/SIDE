@@ -2616,10 +2616,20 @@ public class AlfrescoController {
 	 */
 	public boolean patchWorkflowInstance(AlfrescoTransaction transaction, String wkFormName,
 			Document doc, String instanceId) {
+		logger.debug("Patching workflow instance with Id:'" + instanceId + "', form name: "
+				+ wkFormName);
 		QName qname;
 		String namespaceURI = null; // to be set once
 		Map<QName, Serializable> properties = null; // to be set once
 
+		if (StringUtils.trimToNull(instanceId) == null) { 
+			logger.debug("  No patching performed: the instanceId is null");
+			return true;
+		}
+		if (instanceId.equals("null")) {
+			logger.debug("  No patching performed, invalid instanceId with string 'null'");
+			return true;
+		}
 		Element root = doc.getDocumentElement();
 		Element formElt = DOMUtil.getChild(root, wkFormName);
 		List<Element> allFields = DOMUtil.getAllChildren(formElt);
@@ -2863,7 +2873,7 @@ public class AlfrescoController {
 		} else {
 			result = MsgPool.getMsg(MsgId.MSG_UPLOAD_CONTENT_NO_CONTENT);
 		}
-//		result += " " + result;
+		// result += " " + result;
 		return result;
 	}
 
