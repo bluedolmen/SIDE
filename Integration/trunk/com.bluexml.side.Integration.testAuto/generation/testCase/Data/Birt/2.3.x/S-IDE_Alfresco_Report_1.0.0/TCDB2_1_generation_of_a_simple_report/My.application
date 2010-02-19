@@ -12,7 +12,7 @@
     </generatorConfigurations>
     <parameters key="generation.options.documentation" value="false"/>
     <parameters key="generation.option.Skip.Validation" value="false"/>
-    <parameters key="generation.options.clean" value="true"/>
+    <parameters key="generation.options.clean" value="false"/>
     <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TCDB2_1_generation_of_a_simple_report/log"/>
     <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TCDB2_1_generation_of_a_simple_report/target"/>
     <parameters key="generation.option.offlineMode" value="false"/>
