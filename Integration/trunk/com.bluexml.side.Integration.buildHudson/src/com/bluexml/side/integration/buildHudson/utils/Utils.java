@@ -37,16 +37,26 @@ public class Utils {
 	 * 
 	 */
 	public static Properties ouvrirFichier(String fichier) {
+		String[] filePart = fichier.split("\\.");
+		String fileName = filePart[0];
+		String userName =System.getenv("USER");
+		String userPropertyFile = fileName+"."+userName+"."+filePart[1];
+		
+		File props = new File(userPropertyFile);
+		if (!props.exists()) {
+			props = new File(fichier);
+		}
 		FileInputStream fileStream = null;
 		Properties properties = null;
 
 		try {
-			fileStream = new FileInputStream(fichier);
+			fileStream = new FileInputStream(props);
 
 			properties = new Properties();
 
 			properties.load(fileStream);
-
+			System.out.println("Properties File loaded :"+props.getAbsolutePath());
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
