@@ -9,13 +9,13 @@ public enum FormTypeRendered {
 
 		// NOTE: the rendering procedure adds actions in reverse order!
 		formClass(
-				new FormSubmissionActions[] { FormSubmissionActions.Delete, FormSubmissionActions.Submit }, 
+				new FormSubmissionActions[] { FormSubmissionActions.Submit, FormSubmissionActions.Delete, FormSubmissionActions.Cancel }, 
 				"",
 				MsgId.INT_DIRECTORY_FORM_CLASSES.getText(), 
 				"Class forms", 
 				"default forms based on data diagrams"),
 		formClassSubClassSelector(
-				new FormSubmissionActions[] { FormSubmissionActions.SetType }, 
+				new FormSubmissionActions[] { FormSubmissionActions.SetType, FormSubmissionActions.Cancel }, 
 				MsgId.INT_SUFFIX_FILENAME_SELECTORS.getText(), 
 				MsgId.INT_DIRECTORY_FORM_SELECTOR.getText(),
 				"Special forms for selecting subtypes",
@@ -34,13 +34,13 @@ public enum FormTypeRendered {
 				""
 				),
 		formForm(
-				new FormSubmissionActions[] { FormSubmissionActions.Delete, FormSubmissionActions.Submit }, 
+				new FormSubmissionActions[] { FormSubmissionActions.Submit, FormSubmissionActions.Delete, FormSubmissionActions.Cancel }, 
 				"",
 				MsgId.INT_DIRECTORY_FORM_FORMS.getText(),
 				"Customized forms",
 				"based on form models"),
 		formSearch(
-				new FormSubmissionActions[] { FormSubmissionActions.Submit }, 
+				new FormSubmissionActions[] { FormSubmissionActions.Search, FormSubmissionActions.Cancel }, 
 				"",
 				MsgId.INT_DIRECTORY_FORM_SEARCH.getText(),
 				"Search forms",

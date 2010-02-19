@@ -50,7 +50,8 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		RenderedInput renderedInput = new RenderedInput();
 
 		Element select = XFormsGenerator.createElement("select1", XFormsGenerator.NAMESPACE_XFORMS);
@@ -58,12 +59,9 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 		select.setAttribute("id", selectId);
 		getBindId().addLinkedElement(select);
 
-		if (bean.isMandatory()) {
-			Element label = XFormsGenerator
-					.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
-			label.setText(MsgPool.getMsg(MsgId.MSG_SELECT_LIST_LABEL));
-			select.addContent(label);
-		}
+		Element label = XFormsGenerator.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
+		label.setText(MsgPool.getMsg(bean.getTitle()));
+		select.addContent(label);
 
 		Element actionsv = XFormsGenerator
 				.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
@@ -81,9 +79,10 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 		Element itemset = XFormsGenerator
 				.createElement("itemset", XFormsGenerator.NAMESPACE_XFORMS);
 		itemset.setAttribute("nodeset", getInstanceNodePath());
-		Element label = XFormsGenerator.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
-		label.setAttribute("ref", "value");
-		itemset.addContent(label);
+		Element labelItem = XFormsGenerator
+				.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
+		labelItem.setAttribute("ref", "value");
+		itemset.addContent(labelItem);
 		Element value = XFormsGenerator.createElement("value", XFormsGenerator.NAMESPACE_XFORMS);
 		value.setAttribute("ref", "id");
 		itemset.addContent(value);
@@ -99,7 +98,7 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 						XFormsGenerator.NAMESPACE_XFORMS);
 				hintElt.setText(hintMsg);
 				select.addContent(hintElt);
-				// FIXME: until a specific property for help exists, we
+				// FIXME: as long as a specific property for help doesn't exist, we
 				// duplicate the hint message into help
 				Element helpElt = XFormsGenerator.createElement("help",
 						XFormsGenerator.NAMESPACE_XFORMS);

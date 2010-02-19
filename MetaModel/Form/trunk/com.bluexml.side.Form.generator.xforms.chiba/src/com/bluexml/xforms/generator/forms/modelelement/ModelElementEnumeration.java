@@ -55,7 +55,13 @@ public class ModelElementEnumeration extends ModelElement {
 	}
 
 	private String getParameters() {
-		StringBuffer sb = new StringBuffer(ModelTools.getCompleteName(selectBean.getEnumeration()));
+		String enumName;
+		if (selectBean.getEnumeration() != null) {
+			enumName = ModelTools.getCompleteName(selectBean.getEnumeration());
+		} else {
+			enumName = selectBean.getOperatorType();
+		}
+		StringBuffer sb = new StringBuffer(enumName);
 		sb.append("/");
 		sb.append(StringUtils.trimToEmpty(selectBean.getEnumParent()));
 		sb.append("/");
@@ -82,7 +88,9 @@ public class ModelElementEnumeration extends ModelElement {
 			}
 			if (modelElement instanceof ModelElementEnumeration) {
 				ModelElementEnumeration modelElementEnumeration = (ModelElementEnumeration) modelElement;
-				return isClone(modelElementEnumeration);
+				if (isClone(modelElementEnumeration)) {
+					return true;
+				}
 			}
 		}
 		return false;

@@ -13,6 +13,7 @@ public enum FormSubmissionActions {
 		Cancel(MsgId.INT_ACT_CODE_CANCEL, MsgId.CAPTION_BUTTON_CANCEL, true, false),
 		Delete(MsgId.INT_ACT_CODE_DELETE, MsgId.CAPTION_BUTTON_DELETE, true, false),
 		SetType(MsgId.INT_ACT_CODE_SETTYPE, MsgId.CAPTION_BUTTON_SETTYPE, true, false),
+		Search(MsgId.INT_ACT_CODE_SUBMIT, MsgId.CAPTION_BUTTON_SEARCH, true, true),
 		Submit(MsgId.INT_ACT_CODE_SUBMIT, MsgId.CAPTION_BUTTON_SUBMIT, true, true),
 		Workflow(MsgId.INT_ACT_CODE_SUBMIT, MsgId.CAPTION_BUTTON_SUBMIT, true, true);
 

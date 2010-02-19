@@ -1,9 +1,13 @@
 package com.bluexml.xforms.generator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,16 +40,28 @@ import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.Package;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.impl.CommonFactoryImpl;
+import com.bluexml.side.form.CharFieldSearchOperators;
+import com.bluexml.side.form.CharSearchField;
+import com.bluexml.side.form.ChoiceFieldSearchOperators;
+import com.bluexml.side.form.ChoiceSearchField;
+import com.bluexml.side.form.DateFieldSearchOperators;
+import com.bluexml.side.form.DateSearchField;
+import com.bluexml.side.form.FileFieldSearchOperators;
+import com.bluexml.side.form.FileSearchField;
 import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.NumericalFieldSearchOperators;
+import com.bluexml.side.form.NumericalSearchField;
+import com.bluexml.side.form.SearchField;
 import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
 import com.bluexml.side.workflow.WorkflowPackage;
 import com.bluexml.xforms.generator.GeneratorInterface.AssociationCardinality;
 import com.bluexml.xforms.generator.GeneratorInterface.AssociationKind;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
+import com.bluexml.xforms.generator.forms.renderable.forms.RenderableSearchField;
 import com.bluexml.xforms.generator.tools.ClasseComparator;
 import com.bluexml.xforms.generator.tools.ModelTools;
 import com.bluexml.xforms.messages.MsgId;
@@ -80,18 +96,53 @@ public class FormGeneratorsManager {
 		// org.eclipse.ocl.ecore.EcorePackage.eINSTANCE.eClass();
 	}
 
+	public class OperatorBean {
+		public final String id;
+		public final String label;
+
+		OperatorBean(String id, String label) {
+			this.id = id;
+			this.label = label;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
+		@Override
+		public boolean equals(Object obj) {
+			if (obj instanceof OperatorBean) {
+				return this.id.equals(((OperatorBean) obj).id);
+			}
+			return false;
+		}
+	}
+
 	private static final CommonFactory commonFactory = CommonFactoryImpl.init();
 
 	/** The Constant ALFRESCO_NAME_ASSOCIATION. */
 	public static final String ALFRESCO_NAME_ASSOCIATION = "alfrescoNameAssociation";
+
+	private static Map<FormElement, String> uniqueNames = new HashMap<FormElement, String>();
+
+	private static Comparator<OperatorBean> operatorBeanComparator = new Comparator<OperatorBean>() {
+		public int compare(OperatorBean o1, OperatorBean o2) {
+			return o1.label.compareTo(o2.label);
+		}
+	};
+
+	/** The set of all operators that are available. */
+	private Set<OperatorBean> operatorPool;
+
+	/** The register of <b>sorted</b> lists of operators that were specified in search forms. */
+	private Map<String, List<OperatorBean>> operatorsEnumsMap = new HashMap<String, List<OperatorBean>>();
 
 	/** The classes. */
 	private Map<URI, EObject> eobjects = new HashMap<URI, EObject>();
 
 	/** The resources. */
 	private Map<URI, Resource> resources = new HashMap<URI, Resource>();
-
-	private static Map<FormElement, String> uniqueNames = new HashMap<FormElement, String>();
 
 	/** The class models. */
 	private Map<URI, PackageInfo> classModels;
@@ -132,11 +183,13 @@ public class FormGeneratorsManager {
 	/** The real name stereotype. */
 	private Stereotype realNameStereotype;
 
+	/** The monitor through which messages will be output. */
 	private CoreInterface genLogger;
 
 	/** if true, associations are rendered as model choice fields instead of inline forms */
 	private boolean simplifyClasses;
 
+	/** Layout of workflow forms */
 	private boolean renderDataBeforeWorkflow;
 
 	private String readOnlySuffix;
@@ -153,6 +206,12 @@ public class FormGeneratorsManager {
 	 * outputting a URL for the demo webapp.
 	 */
 	private boolean workflowCapable;
+
+	/**
+	 * true if at least one search form was generated. Used at generation time for determining
+	 * whether to write search operators enumerations.
+	 */
+	private boolean searchCapable;
 
 	/** Name of the form being processed. For error messages. */
 	private String currentForm;
@@ -247,7 +306,8 @@ public class FormGeneratorsManager {
 	/**
 	 * Builds the association name in the same way as the generator when producing the model.xml
 	 * file.<br/>
-	 * NOTE: this is prone to discrepancies and obsolescence.
+	 * NOTE: this is prone to discrepancies and obsolescence w.r.t the generator's way of building
+	 * the names.
 	 * 
 	 * @param asso
 	 * @return
@@ -324,6 +384,7 @@ public class FormGeneratorsManager {
 			initEcoreFactories();
 		}
 		setWorkflowCapable(false);
+		setSearchCapable(false);
 		this.debugMode = false;
 		this.genLogger = monitor;
 		this.simplifyClasses = simplifyClasses;
@@ -334,6 +395,7 @@ public class FormGeneratorsManager {
 		com.bluexml.xforms.generator.forms.ModelElement.setFormGenerator(this);
 		Renderable.setFormGenerator(this);
 		// ** #1222
+		String currentFile = null;
 		try {
 			classModels = new HashMap<URI, PackageInfo>();
 			formCollections = new ArrayList<FormCollection>();
@@ -341,7 +403,11 @@ public class FormGeneratorsManager {
 			if (obls != null && obls.length > 0) {
 				for (File oblFile : obls) {
 					// Load the model
-					Resource resource = EResourceUtils.openModel(oblFile.getAbsolutePath(), null);
+					currentFile = oblFile.getAbsolutePath();
+					if (isDebugMode()) {
+						genLogger.addText("Opening file '" + currentFile);
+					}
+					Resource resource = EResourceUtils.openModel(currentFile, null);
 					Package model = ModelTools.getModel(resource);
 					classModels.put(EcoreUtil.getURI(model).trimFragment(), new PackageInfo(model,
 							true));
@@ -350,6 +416,10 @@ public class FormGeneratorsManager {
 
 			if (kerblueforms != null) {
 				for (File kerblueFormsFile : kerblueforms) {
+					currentFile = kerblueFormsFile.getAbsolutePath();
+					if (isDebugMode()) {
+						genLogger.addText("Opening file '" + currentFile);
+					}
 					Resource resource = EResourceUtils.openModel(
 							kerblueFormsFile.getAbsolutePath(), null);
 					addClassModels(resource);
@@ -357,8 +427,11 @@ public class FormGeneratorsManager {
 					formCollections.add(formCollection);
 				}
 			}
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
 			genLogger.addErrorTextAndLog("Please check file paths.", e, null);
+			throw new RuntimeException(e);
+		} catch (Exception e) {
+			genLogger.addErrorTextAndLog("Error opening " + currentFile, e, null);
 			throw new RuntimeException(e);
 		}
 	}
@@ -424,6 +497,8 @@ public class FormGeneratorsManager {
 
 		allForms = ModelTools.getAllForms(formCollections);
 
+		buildOperatorsPool();
+
 		// first pass: normal generation
 		setInReadOnlyMode(false);
 		for (GeneratorInterface dataGenerator : generators) {
@@ -457,6 +532,42 @@ public class FormGeneratorsManager {
 							"http://localhost:8080/xforms/demo/index.jsp");
 		}
 		genLogger.addText("End of generation.");
+	}
+
+	// 
+	private void buildOperatorsPool() {
+		operatorPool = new TreeSet<OperatorBean>(operatorBeanComparator); // FIXME: remove
+		// comparator
+		// char
+		operatorPool.add(new OperatorBean("contains", "Contains"));
+		operatorPool.add(new OperatorBean("icontains", "Contains (case-insensitive)"));
+		operatorPool.add(new OperatorBean("startsWith", "Starts with"));
+		operatorPool.add(new OperatorBean("istartsWith", "Starts with (case-insensitive)"));
+		operatorPool.add(new OperatorBean("is", "Is exactly"));
+		operatorPool.add(new OperatorBean("empty", "Is empty"));
+		operatorPool.add(new OperatorBean("endsWith", "Ends with"));
+		operatorPool.add(new OperatorBean("iendsWith", "Ends with (case-insensitive)"));
+		// date
+		operatorPool.add(new OperatorBean("before", "Before"));
+		operatorPool.add(new OperatorBean("exactly", "Is exactly"));
+		operatorPool.add(new OperatorBean("after", "After"));
+		operatorPool.add(new OperatorBean("empty", "Is empty"));
+		operatorPool.add(new OperatorBean("between", "Between"));
+		// choice
+		operatorPool.add(new OperatorBean("all", "All"));
+		operatorPool.add(new OperatorBean("oneOf", "One of"));
+		operatorPool.add(new OperatorBean("none", "None of"));
+		operatorPool.add(new OperatorBean("allBut", "Any but"));
+		// numerical
+		operatorPool.add(new OperatorBean("between", "Between"));
+		operatorPool.add(new OperatorBean("exactly", "Is exactly"));
+		operatorPool.add(new OperatorBean("below", "Below"));
+		operatorPool.add(new OperatorBean("empty", "Is empty"));
+		operatorPool.add(new OperatorBean("above", "Above"));
+		// file
+		operatorPool.add(new OperatorBean("fileType", "File type is"));
+		operatorPool.add(new OperatorBean("size", "Size is between"));
+		operatorPool.add(new OperatorBean("contents", "Contains"));
 	}
 
 	/**
@@ -1097,6 +1208,145 @@ public class FormGeneratorsManager {
 
 	public void setDebugMode(boolean debugMode) {
 		this.debugMode = debugMode;
+	}
+
+	/**
+	 * @param searchCapable
+	 *            the searchCapable status to set
+	 */
+	public void setSearchCapable(boolean searchCapable) {
+		this.searchCapable = searchCapable;
+	}
+
+	/**
+	 * @return the searchCapable status
+	 */
+	public boolean isSearchCapable() {
+		return searchCapable;
+	}
+
+	/**
+	 * @return the operatorsEnumsMap
+	 */
+	public Map<String, List<OperatorBean>> getOperatorsEnumsMap() {
+		return operatorsEnumsMap;
+	}
+
+	/**
+	 * Provides a unique id for the set of search operators defined in a search field. If an
+	 * equivalent set already exists, its id is returned. Otherwise, this set is registered with a
+	 * new id that's returned.
+	 * 
+	 * @param field
+	 * @return the id, a zero padded sequence number starting from 1
+	 */
+	public String getOperatorListId(RenderableSearchField<? extends SearchField> field) {
+		String resultId;
+		String defaultFieldOp = null;
+		ModelElement formField = field.getFormElement();
+		//
+		// the values must be kept in sync with names in the metamodel. The value chosen as default
+		// for a type should also be the same default in the controller
+		String defaultTypeOp = null;
+		//
+		// build the list of operators for this field
+		List<OperatorBean> opList = new ArrayList<OperatorBean>();
+		if (formField instanceof CharSearchField) {
+			defaultTypeOp = "is";
+			CharSearchField localField = (CharSearchField) formField;
+			defaultFieldOp = localField.getDefaultOperator().getName();
+			EList<CharFieldSearchOperators> fieldOps = localField.getOperators();
+			for (CharFieldSearchOperators op : fieldOps) {
+				opList.add(getOperatorFromPool(op.getName()));
+			}
+		} else if (formField instanceof DateSearchField) {
+			defaultTypeOp = "exactly";
+			DateSearchField localField = (DateSearchField) formField;
+			defaultFieldOp = localField.getDefaultOperator().getName();
+			EList<DateFieldSearchOperators> fieldOps = localField.getOperators();
+			for (DateFieldSearchOperators op : fieldOps) {
+				opList.add(getOperatorFromPool(op.getName()));
+			}
+		} else if (formField instanceof NumericalSearchField) {
+			defaultTypeOp = "exactly";
+			NumericalSearchField localField = (NumericalSearchField) formField;
+			defaultFieldOp = localField.getDefaultOperator().getName();
+			EList<NumericalFieldSearchOperators> fieldOps = localField.getOperators();
+			for (NumericalFieldSearchOperators op : fieldOps) {
+				opList.add(getOperatorFromPool(op.getName()));
+			}
+		} else if (formField instanceof ChoiceSearchField) {
+			defaultTypeOp = "all";
+			ChoiceSearchField localField = (ChoiceSearchField) formField;
+			defaultFieldOp = localField.getDefaultOperator().getName();
+			EList<ChoiceFieldSearchOperators> fieldOps = localField.getOperators();
+			for (ChoiceFieldSearchOperators op : fieldOps) {
+				opList.add(getOperatorFromPool(op.getName()));
+			}
+		} else if (formField instanceof FileSearchField) {
+			defaultTypeOp = "fileType";
+			FileSearchField localField = (FileSearchField) formField;
+			EList<FileFieldSearchOperators> fieldOps = localField.getOperators();
+			defaultFieldOp = localField.getDefaultOperator().getName();
+			for (FileFieldSearchOperators op : fieldOps) {
+				opList.add(getOperatorFromPool(op.getName()));
+			}
+		}
+		// if empty list, add the default op from either the field or that type
+		if (opList.size() == 0) {
+			if (StringUtils.trimToNull(defaultFieldOp) != null) {
+				opList.add(getOperatorFromPool(defaultFieldOp));
+			} else {
+				opList.add(getOperatorFromPool(defaultTypeOp));
+			}
+		}
+		// sort the list <-- this is MANDATORY for the reusing of operator sets to happen
+		Collections.sort(opList, operatorBeanComparator);
+
+		// test whether the list already exists
+		resultId = testOperatorList(opList);
+
+		// if so, return the id
+		if (resultId != null) {
+			return resultId;
+		}
+		// if not, register the list and return id
+		Formatter formatter = new Formatter();
+		resultId = formatter.format("%06d", operatorsEnumsMap.keySet().size() + 1).toString();
+		operatorsEnumsMap.put(resultId, opList);
+		return resultId;
+	}
+
+	/**
+	 * Finds the operator whose id is the same as the given id
+	 * 
+	 * @param refId
+	 * @return the matching operator
+	 */
+	private OperatorBean getOperatorFromPool(String refId) {
+		for (OperatorBean op : operatorPool) {
+			if (op.id.equals(refId)) {
+				return op;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Tests for the presence of the given list amongst the registered lists. We just test whether a
+	 * registered list 'equals' this one.
+	 * 
+	 * @param opList
+	 *            the list to check
+	 * @return the registration key, or null if the list is not registered.
+	 */
+	private String testOperatorList(List<OperatorBean> opList) {
+		for (String key : operatorsEnumsMap.keySet()) {
+			if (opList.equals(operatorsEnumsMap.get(key))) {
+				return key;
+			}
+		}
+		return null;
 	}
 
 }

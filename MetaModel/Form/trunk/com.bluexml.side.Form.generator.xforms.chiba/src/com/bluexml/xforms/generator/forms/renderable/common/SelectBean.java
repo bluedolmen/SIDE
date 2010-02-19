@@ -1,6 +1,5 @@
 package com.bluexml.xforms.generator.forms.renderable.common;
 
-
 import java.util.List;
 
 import com.bluexml.side.clazz.Enumeration;
@@ -8,33 +7,45 @@ import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 
 /**
- * The Class SelectBean.<br>
- * Configures a selector
+ * Configures a selector which is rendered as a 'select' or 'select1' in XForms, which means as a
+ * combo box, selection list or group of radiobuttons/checkboxes on an web page.<br/>
+ * Used for associations and enumerations (on data forms), fields with allowed values (on workflow
+ * forms) and operations (on search forms).
+ * <p/>
+ * Assumptions: when marked as a workflow enum, the list of allowed values provides the itemset
+ * rendered directly in the XHTML template. Otherwise, the itemset is provided via a URI whose
+ * actual writing is given by the enumeration's name (if applicable) or by the operator type.
  */
 public class SelectBean {
 
 	/** The model element bind simple. */
 	private ModelElementBindSimple modelElementBindSimple;
 
-	/** The label. */
+	/** The label, normally provided by the field (on forms) or the attribute. */
 	private String label;
 
 	/** The enumeration. */
 	private Enumeration enumeration;
 
-	/** The multiple. */
+	/** Whether multiple values can be selected in the UI control. */
 	private boolean multiple;
 
 	private boolean limited;
-	
+
 	private String enumContext;
 
 	private String enumParent;
 
+	/** Whether this is an enum with allowed values. If so, the itemset is embedded in the template. */
 	private boolean isWorkflowEnum;
-	
+
+	/** A list of allowed values used for workflow fields. */
 	private List<String> allowedValues;
 
+	/** The type of the search field */
+	private String operatorType;
+
+	/** For choosing the UI rendering, combobox, list or radiobuttons/checkboxes */
 	private ChoiceWidgetType widgetType;
 
 	public SelectBean(ModelElementBindSimple meb, String slabel, Enumeration valueList,
@@ -168,7 +179,8 @@ public class SelectBean {
 	}
 
 	/**
-	 * @param enumContext the enumContext to set
+	 * @param enumContext
+	 *            the enumContext to set
 	 */
 	public void setEnumContext(String enumContext) {
 		this.enumContext = enumContext;
@@ -182,14 +194,16 @@ public class SelectBean {
 	}
 
 	/**
-	 * @param enumParent the enumParent to set
+	 * @param enumParent
+	 *            the enumParent to set
 	 */
 	public void setEnumParent(String enumParent) {
 		this.enumParent = enumParent;
 	}
 
 	/**
-	 * @param isWorkflowEnum the isWorkflowEnum to set
+	 * @param isWorkflowEnum
+	 *            the isWorkflowEnum to set
 	 */
 	public void setWorkflowEnum(boolean isWorkflowEnum) {
 		this.isWorkflowEnum = isWorkflowEnum;
@@ -203,7 +217,8 @@ public class SelectBean {
 	}
 
 	/**
-	 * @param allowedValues the allowedValues to set
+	 * @param allowedValues
+	 *            the allowedValues to set
 	 */
 	public void setAllowedValues(List<String> allowedValues) {
 		this.allowedValues = allowedValues;
@@ -215,4 +230,20 @@ public class SelectBean {
 	public List<String> getAllowedValues() {
 		return allowedValues;
 	}
+
+	/**
+	 * @return the operatorType
+	 */
+	public String getOperatorType() {
+		return operatorType;
+	}
+
+	/**
+	 * @param operatorType
+	 *            the operatorType to set
+	 */
+	public void setOperatorType(String operatorType) {
+		this.operatorType = operatorType;
+	}
+
 }

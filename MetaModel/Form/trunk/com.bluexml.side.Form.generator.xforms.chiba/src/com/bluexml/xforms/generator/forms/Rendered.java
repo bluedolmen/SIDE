@@ -10,7 +10,14 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindHolder;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 
 /**
- * A rendered item.
+ * A rendered item. All elements of the generated XHTML templates are derived from this class.
+ * <p/>
+ * Content elements in the &lt;head&gt; section are "ModelElement's" (either <em>instance</em>,
+ * <em>submission</em> or <em>bind</em>).
+ * <p/>
+ * Content elements in the &lt;body&gt; section (i.e. DIVs and XForms controls) are necessarily from
+ * subclasses of this in which the xforms DOM element is non null. If that DOM element is null, the
+ * object being rendered will not contribute anything in the generated template.
  */
 public abstract class Rendered {
 
@@ -34,10 +41,10 @@ public abstract class Rendered {
 
 	/** The bind holder which binds of this rendered will be nested into. */
 	ModelElementBindHolder bindHolder = null;
-	
+
 	/** The stack of bind holders that have been encountered since the rendering started. */
 	private static Stack<ModelElementBindHolder> bindHolderStack = null;
-	
+
 	/**
 	 * Gets the optional data.
 	 * 
@@ -135,7 +142,8 @@ public abstract class Rendered {
 		}
 	}
 
-	/** Gets the bind holder at the top of the stack.
+	/**
+	 * Gets the bind holder at the top of the stack.
 	 * 
 	 * @return
 	 */

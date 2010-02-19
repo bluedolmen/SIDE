@@ -294,6 +294,7 @@ public class ModelElementBindSimple extends ModelElement {
 					}
 				}
 			}
+			
 		}
 		return false;
 	}

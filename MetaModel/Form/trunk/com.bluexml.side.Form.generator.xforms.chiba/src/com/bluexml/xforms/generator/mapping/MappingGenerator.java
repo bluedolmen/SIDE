@@ -918,14 +918,16 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Checks that the field reference belongs to the class reference.
+	 * Checks that the field reference belongs to the class reference, taking into account
+	 * generalizations. If the attribute is directly included in the class or comes from a parent
+	 * class, then the return value if <em>true</em>.
 	 * 
 	 * @param classRef
 	 * @param fieldRef
 	 * @return false if the field reference is not a class diagram attribute or does not belong to
 	 *         the given class. True otherwise.
 	 */
-	private boolean checkClassAttributeInclusion(ModelElement classRef, ModelElement fieldRef) {
+	private boolean checkClassAttributeInclusion(Clazz classRef, ModelElement fieldRef) {
 		try {
 			@SuppressWarnings("unused")
 			Attribute attr = (Attribute) fieldRef;
@@ -934,7 +936,16 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 		EObject container = ((EObject) fieldRef).eContainer();
 		ModelElement realContainer = (ModelElement) formGenerator.getRealObject(container);
-		return classRef.equals(realContainer);
+		boolean result = classRef.equals(realContainer);
+		if (result == false) {
+			// the field ref's container may be a superclass of the class ref
+			for (Clazz parentClass : classRef.getGeneralizations()) {
+				if (checkClassAttributeInclusion(parentClass, fieldRef)) {
+					return true;
+				}
+			}
+		}
+		return result;
 	}
 
 	/**

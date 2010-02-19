@@ -30,9 +30,11 @@ import com.bluexml.side.clazz.EnumerationLiteral;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormGroupPresentationType;
+import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.impl.FormGroupImpl;
 import com.bluexml.xforms.generator.AbstractGenerator;
+import com.bluexml.xforms.generator.FormGeneratorsManager.OperatorBean;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.RenderableXForm;
 import com.bluexml.xforms.generator.forms.renderable.classes.RenderableClass;
@@ -454,9 +456,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	public void beginForm(FormContainer form) {
 		FormContainer realContainer = form;
 
-		if (form.eIsProxy()) { // #1225
-			realContainer = (FormContainer) formGenerator.getRealObject(form);
-		}
+		realContainer = (FormContainer) formGenerator.getRealObject(form); // #1225
 		RenderableFormContainer renForm = new RenderableFormContainer(this, null, realContainer);
 
 		formsRenderables.put(realContainer.getId(), renForm);
@@ -560,17 +560,67 @@ public class XFormsGenerator extends AbstractGenerator {
 	public void endGeneration() {
 
 		renderAllClasses();
-
-		boolean atLeastOneWorfklowForm = renderAllForms();
-
-		if (atLeastOneWorfklowForm) {
-			// renderWorkflowSelectionForm();
-			formGenerator.setWorkflowCapable(true);
+		renderAllForms();
+		if (formGenerator.isSearchCapable()) {
+			renderSearchOperatorsEnums();
 		}
-
 		renderDescriptionFiles();
 
 		monitor.addText("XFormGenerator: Finished generating XHTML templates.");
+	}
+
+	/**
+	 * Writes the files containing the search operators enumerations.
+	 */
+	private void renderSearchOperatorsEnums() {
+		Map<String, List<OperatorBean>> opEnumsMap = formGenerator.getOperatorsEnumsMap();
+		for (Entry<String, List<OperatorBean>> entry : opEnumsMap.entrySet()) {
+			renderSearchOperatorsEnumFile(entry.getKey(), entry.getValue());
+		}
+	}
+
+	/**
+	 * Writes the file that will provide, at runtime, a specific set of operators.
+	 * 
+	 * @param opKey
+	 *            the identifier for the set of operators
+	 * @param opList
+	 *            the list of operators in this set
+	 */
+	private void renderSearchOperatorsEnumFile(String opKey, List<OperatorBean> opList) {
+		//
+		// the list is normally sorted so no need to sort it again
+		Element racineEnums = new Element("enums");
+		Document documentEnums = new Document(racineEnums);
+
+		for (OperatorBean operator : opList) {
+			Element l = new Element("item");
+
+			Element name = new Element("id");
+			name.setText(operator.id);
+			l.addContent(name);
+
+			Element value = new Element("value");
+			value.setText(operator.label);
+			l.addContent(value);
+
+			racineEnums.addContent(l);
+		}
+
+		String fileName = MsgId.INT_PREFIX_FILENAME_OPERATORS + opKey + ".enum.xml";
+		String pathname = outputXForms.getAbsolutePath() + File.separator
+				+ MsgId.INT_DIRECTORY_ENUMS + File.separator;
+		File parentDir = new File(pathname);
+		parentDir.mkdirs();
+		File file = new File(pathname + fileName);
+
+		try {
+			FileOutputStream fos = new FileOutputStream(file);
+			outputter.output(documentEnums, fos);
+			fos.close();
+		} catch (Exception ex) {
+			monitor.addErrorTextAndLog("Could not write file " + file.getAbsolutePath(), ex, null);
+		}
 	}
 
 	/**
@@ -649,10 +699,9 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * 
 	 * @return true if there is one or more workflow forms
 	 */
-	private boolean renderAllForms() {
+	private void renderAllForms() {
 		monitor.addText("Rendering customized forms");
 
-		boolean atLeastOneWorfklowForm = false;
 		Set<Entry<String, RenderableFormContainer>> entrySetForms = formsRenderables.entrySet();
 		for (Entry<String, RenderableFormContainer> formEntry : entrySetForms) {
 			String formId = formEntry.getKey();
@@ -664,7 +713,7 @@ public class XFormsGenerator extends AbstractGenerator {
 			String logPrefix = "";
 
 			if (formContainer instanceof FormWorkflow) {
-				atLeastOneWorfklowForm = atLeastOneWorfklowForm || true;
+				formGenerator.setWorkflowCapable(true);
 				formTypeRendered = FormTypeRendered.formWkflw;
 				logPrefix = "FormWorkflow";
 			} else if (formContainer instanceof FormClass) {
@@ -674,8 +723,12 @@ public class XFormsGenerator extends AbstractGenerator {
 				// } else if (formContainer instanceof SearchForm) {
 				// formTypeRendered = FormTypeRendered.formSearch;
 				// logPrefix = "FormSearch";
+			} else if (formContainer instanceof FormSearch) {
+				formGenerator.setSearchCapable(true);
+				formTypeRendered = FormTypeRendered.formSearch;
+				logPrefix = "FormSearch";
 			} else {
-				// we never reach here.
+				// normally, we never reach here.
 			}
 			if (formGenerator.isDebugMode()) {
 				String logText = "  " + logPrefix + ": " + formId;
@@ -685,7 +738,6 @@ public class XFormsGenerator extends AbstractGenerator {
 
 			render(outputXForms, rfc, formId, title, formTypeRendered, isContentEnabled);
 		}
-		return atLeastOneWorfklowForm;
 	}
 
 	/**
@@ -836,7 +888,7 @@ public class XFormsGenerator extends AbstractGenerator {
 		// deal with FormClass's first
 		for (Entry<String, RenderableFormContainer> entry : entrySet) {
 			FormContainer FC = formsModels.get(entry.getKey());
-			if (FC instanceof FormClass) {
+			if ((FC instanceof FormClass) || (FC instanceof FormSearch)) {
 				RenderableFormContainer renderableFC = entry.getValue();
 				renderableFC.compute();
 			}
@@ -929,9 +981,8 @@ public class XFormsGenerator extends AbstractGenerator {
 	 */
 	public RenderableFormContainer getRenderableForm(FormContainer form) {
 		FormContainer realContainer = form;
-		if (form.eIsProxy()) { // #1225
-			realContainer = (FormContainer) formGenerator.getRealObject(form);
-		}
+		realContainer = (FormContainer) formGenerator.getRealObject(form); // #1225
+
 		return formsRenderables.get(realContainer.getId());
 	}
 
@@ -1081,7 +1132,7 @@ public class XFormsGenerator extends AbstractGenerator {
 		List<FormSubmissionActions> actions;
 		actions = new ArrayList<FormSubmissionActions>();
 		for (FormSubmissionActions abstractAction : formType.getActions()) {
-			actions.add(0, abstractAction);
+			actions.add(abstractAction);
 		}
 
 		// if form class, wrap the renderable in a group

@@ -78,9 +78,6 @@ public class RenderableSSingle extends AbstractRenderable {
 		Element div = rendered.getXformsElement();
 		div.setAttribute("class", MsgId.INT_CSS_SELECT_WIDGET.getText());
 
-//		if (StringUtils.trimToNull(targetPath) != null) {
-//			System.out.println("found a non empty path");
-//		}
 		ModelElementBindSimple bindLabel = getSelectedBindLabel();
 		ModelElementBindSimple bindId = getSelectedBindId();
 		ModelElementBindSimple bindEdit = getSelectedBindEdit();

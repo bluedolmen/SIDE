@@ -15,10 +15,12 @@ import com.bluexml.xforms.generator.forms.rendered.RenderedGroup;
 /**
  * The Class CommonRenderableAssociation. Représente un aiguilleur vers le type adéquat de widget,
  * en fonction des propriétés 'inline' et 'multiple'.
+ * @JavaFormatter("off")
  */
 public class CommonRenderableAssociation extends Renderable {
 
 	/** The title. */
+	@SuppressWarnings("unused")
 	private String title;
 
 	/** The association bean. */
@@ -96,7 +98,7 @@ public class CommonRenderableAssociation extends Renderable {
 	 */
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
-		return new RenderedGroup(title, name);
+		return new RenderedGroup(null, name);
 	}
 
 }

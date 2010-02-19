@@ -2,7 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.forms;
 
 import java.util.List;
 
-
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormElement;
@@ -10,6 +9,7 @@ import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.Reference;
+import com.bluexml.side.form.SearchField;
 import com.bluexml.side.form.StaticText;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -31,6 +31,13 @@ public abstract class RenderableFormElement<FE extends FormElement> extends Rend
 
 	/** The form element. */
 	protected FE formElement;
+
+	/**
+	 * @return the formElement
+	 */
+	public FE getFormElement() {
+		return formElement;
+	}
 
 	/** The renderable tab container. */
 	protected RenderableTabContainer renderableTabContainer;
@@ -130,6 +137,10 @@ public abstract class RenderableFormElement<FE extends FormElement> extends Rend
 			} else if (formElement instanceof StaticText) {
 				renderable = new RenderableStaticText(generationManager, formElement,
 						(StaticText) formElement);
+			} else if (formElement instanceof SearchField) {
+				SearchField searchField = (SearchField) formElement;
+				renderable = RenderableSearchField.getRenderable(generationManager, formElement,
+						searchField);
 			}
 
 			// Commenté car hidden est traité via l'attribut "relevant" dans le bind
@@ -171,7 +182,8 @@ public abstract class RenderableFormElement<FE extends FormElement> extends Rend
 	}
 
 	/**
-	 * Compute.
+	 * Compute. Used for collecting the renderables of children form elements. Relevant only when
+	 * the form element is capable of having children form elements.
 	 */
 	public abstract void compute();
 
