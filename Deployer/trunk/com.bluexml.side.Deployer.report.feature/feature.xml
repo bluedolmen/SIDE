@@ -1,40 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Deployer.report.feature"
-      label="SIDE Birt Report Deployer"
-      version="1.0.24.v14213-20100209"
-      provider-name="BlueXML">
-
-   <description url="http://www.bluexml.com">
-      SIDE MDA environment eases the deployment of generated or developed extensions on specialized
-frameworks like Alfresco. This feature allows to deploy extensions on Birt instances.
-   </description>
-
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
-
-   <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="com.bluexml.side.Application"/>
-      <import plugin="com.bluexml.side.Util.deployer"/>
-      <import plugin="com.bluexml.side.Util.security"/>
-      <import plugin="com.bluexml.side.Util.libs"/>
-      <import plugin="com.bluexml.side.Util.componentMonitor"/>
-      <import plugin="com.bluexml.side.Util.log"/>
-      <import plugin="com.bluexml.side.Util.deployer.war"/>
-   </requires>
-
-   <plugin
-         id="com.bluexml.side.Deployer.report"
-         download-size="0"
-         install-size="0"
-         version="1.0.25.v13286-20100127"
-         unpack="false"/>
-
+<feature id="com.bluexml.side.Deployer.report.feature" label="SIDE Birt Report Deployer" version="1.0.25.v14649-20100219" provider-name="BlueXML">
+  <description url="http://www.bluexml.com">SIDE MDA environment eases the deployment of generated or developed extensions on specialized
+frameworks like Alfresco. This feature allows to deploy extensions on Birt instances.</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <requires>
+    <import plugin="org.eclipse.ui" />
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="com.bluexml.side.Application" />
+    <import plugin="com.bluexml.side.Util.deployer" />
+    <import plugin="com.bluexml.side.Util.security" />
+    <import plugin="com.bluexml.side.Util.libs" />
+    <import plugin="com.bluexml.side.Util.componentMonitor" />
+    <import plugin="com.bluexml.side.Util.log" />
+    <import plugin="com.bluexml.side.Util.deployer.war" />
+  </requires>
+  <plugin id="com.bluexml.side.Deployer.report" download-size="0" install-size="0" version="1.0.25.v13286-20100127" unpack="false" />
 </feature>
+
