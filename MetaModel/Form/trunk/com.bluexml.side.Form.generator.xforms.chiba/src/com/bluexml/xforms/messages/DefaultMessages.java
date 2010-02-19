@@ -45,7 +45,10 @@ public class DefaultMessages {
 			"# whether names of non-content files uploaded to the repository are appended with a '(x)' in case the initial name already exists.",
 			"upload.repository.append.suffix=true",
 			"# whether the information of repository uploads are formatted in the same way as content information",
-			"upload.repository.format.info=false", "", "# authentication", "user.name=admin",
+			"upload.repository.format.info=false",
+			"",
+			"# authentication",
+			"user.name=admin",
 			"user.pswd=admin" };
 
 	private static final String[] allMessagesProperties = {
@@ -110,8 +113,11 @@ public class DefaultMessages {
 			"upload.node.content.no.content=(no content)",
 			"# 0: node name; 1: content size in bytes with digit grouping; 2: content size in best-fitting unit surrounded by parentheses; 3: full nodeId",
 			"upload.node.content.repository.format={0}: {1} bytes{2}. NodeId: {3}.",
-			"upload.node.content.repository.info=Content information:", "#", "# workflow-related",
-			"#", "caption.button.workflow.cancel=Cancel",
+			"upload.node.content.repository.info=Content information:",
+			"#",
+			"# workflow-related",
+			"#",
+			"caption.button.workflow.cancel=Cancel",
 			"caption.button.workflow.select=Select this workflow",
 			"caption.button.workflow.start=Activate this workflow",
 			"workflow.error.submit.data=Please submit the data form before starting a workflow.",
@@ -122,10 +128,13 @@ public class DefaultMessages {
 			"workflow.selection.page.title=Select a workflow",
 			"workflow.selection.process.group=Process definitions",
 			"workflow.selection.global.group=Workflows",
-			"workflow.selection.instance.group=In-progress instances", "#",
+			"workflow.selection.instance.group=In-progress instances",
+			"#",
 			"# ALL ENTRIES BELOW ARE RUNTIME ENTRIES: THEY CAN BE MODIFIED.",
 			"# Use \"reloadProperties=true\" as url parameter to make modifications",
-			"# effective in the webapp.", "#", "session.timed.out=Your session has timed out.",
+			"# effective in the webapp.",
+			"#",
+			"session.timed.out=Your session has timed out.",
 			"status.message.create.failure=Error while saving the data.",
 			"status.message.create.success=Data successfully saved.",
 			"status.message.delete.failure=Error while deleting.",
@@ -133,9 +142,12 @@ public class DefaultMessages {
 			"status.message.edit.failure=Error while editing the data.",
 			"status.message.edit.success=Data successfully edited.",
 			"# status.message.empty should have at least one whitespace",
-			"status.message.empty=\\ ", "# 0: sequence number of the iteration",
-			"status.message.iteration.postfix=\\ ({0})", "upload.random.path.depth=3",
-			"upload.to.repository.failure=Upload to the repository failed.", "" };
+			"status.message.empty=\\ ",
+			"# 0: sequence number of the iteration",
+			"status.message.iteration.postfix=\\ ({0})",
+			"upload.random.path.depth=3",
+			"upload.to.repository.failure=Upload to the repository failed.",
+			"" };
 
 	/**
 	 * @param args
