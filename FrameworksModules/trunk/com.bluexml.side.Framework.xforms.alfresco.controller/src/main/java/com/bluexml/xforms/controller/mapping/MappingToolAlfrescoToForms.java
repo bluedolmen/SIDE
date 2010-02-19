@@ -268,6 +268,11 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	public Document newFormInstance(String formName, AlfrescoTransaction at,
 			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
 		FormType formType = getFormType(formName);
+		if (logger.isTraceEnabled()) {
+			logger.debug("Creating new form instance document for the controller; form: "
+					+ formName + ", read-only status: " + formIsReadOnly + ", formType found: "
+					+ formType.getName());
+		}
 		if (formType == null) {
 			throw new RuntimeException("Form '" + formName + "' not found in the mapping file.");
 		}
@@ -318,6 +323,9 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	private Element newForm(FormType formType, Document formInstance, AlfrescoTransaction at,
 			Map<String, GenericClass> an, Map<String, String> initParams, boolean formIsReadOnly)
 			throws ServletException {
+		if (logger.isTraceEnabled()) {
+			logger.debug("Creating new form instance section");
+		}
 		Element formElement = formInstance.createElement(formType.getName());
 
 		/*
@@ -473,6 +481,10 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	private void newFormField(Document formInstance, Element formElement,
 			FormFieldType formFieldType, AlfrescoTransaction transaction,
 			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
+		if (logger.isTraceEnabled()) {
+			logger.debug("  setting value for new form field '" + formFieldType.getUniqueName()
+					+ "' with alfresco name '" + formFieldType.getAlfrescoName() + "'");
+		}
 		String finalValue;
 		// try to get an initial value
 		String value = safeMapGet(initParams, formFieldType.getUniqueName());
@@ -578,8 +590,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 				if (controller.getParamUploadRepoFormatInfo()) {
 					FileFieldType fileFieldType = (FileFieldType) formFieldType;
 					if ((alfrescoId != null) && (fileFieldType.isInRepository())) {
-						formField
-								.setTextContent(controller.getWebscriptNodeContentInfo(value));
+						formField.setTextContent(controller.getWebscriptNodeContentInfo(value));
 					}
 				}
 			}
