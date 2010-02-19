@@ -64,6 +64,7 @@ public class DefaultMessages {
 			"caption.button.create=Create",
 			"caption.button.delete=Delete",
 			"caption.button.edit=Edit",
+			"caption.button.search=Launch the search",
 			"caption.button.settype=Submit",
 			"caption.button.submit=Submit",
 			"",
