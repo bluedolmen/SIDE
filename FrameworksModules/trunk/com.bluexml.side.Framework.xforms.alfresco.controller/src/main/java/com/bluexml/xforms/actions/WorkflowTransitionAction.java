@@ -391,8 +391,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 				MsgId.PARAM_WORKFLOW_PROCESS_ID.getText());
 		String processId = findProcessId(candidateId, formName);
 		if (processId == null) {
-			navigationPath
-					.setStatusMsg("Could not find the process Id. Giving up.");
+			navigationPath.setStatusMsg("Could not find the process Id. Giving up.");
 			return resultBean;
 		}
 
@@ -768,8 +767,8 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		String methodName = "getDefinitionByName";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(AlfrescoController.workflowBuildBlueXMLDefinitionName(processName));
-		WorkflowDefinition def = (WorkflowDefinition) controller.workflowRequestWrapper(transaction,
-				methodName, methodParameters);
+		WorkflowDefinition def = (WorkflowDefinition) controller.workflowRequestWrapper(
+				transaction, methodName, methodParameters);
 		return (def != null) ? def.id : null;
 	}
 
