@@ -8,6 +8,7 @@
 				<xsd:element maxOccurs="unbounded" name="aspect" type="aspectType" />
 				<xsd:element maxOccurs="unbounded" name="class" type="classType" />
 				<xsd:element maxOccurs="unbounded" ref="canister" />
+				<xsd:element maxOccurs="unbounded" name="search" type="searchFormType" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -188,5 +189,20 @@
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="searchFormType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="operator" type="xsd:string" />
+			<xsd:element name="realClass" type="classType" />
+			<xsd:element maxOccurs="unbounded" name="actions" type="actionFieldType" />
+			<xsd:element maxOccurs="unbounded" name="fields" type="searchFieldType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="searchFieldType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="defaultOp" type="xsd:string" />
+		</xsd:sequence>
 	</xsd:complexType>
 </xsd:schema>
