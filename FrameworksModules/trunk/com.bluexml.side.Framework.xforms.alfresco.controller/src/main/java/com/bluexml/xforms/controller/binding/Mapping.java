@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="aspect" type="{}aspectType" maxOccurs="unbounded"/>
  *         &lt;element name="class" type="{}classType" maxOccurs="unbounded"/>
  *         &lt;element ref="{}canister" maxOccurs="unbounded"/>
+ *         &lt;element name="search" type="{}searchFormType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,7 +42,8 @@ import javax.xml.bind.annotation.XmlType;
     "_enum",
     "aspect",
     "clazz",
-    "canister"
+    "canister",
+    "search"
 })
 @XmlRootElement(name = "mapping")
 public class Mapping {
@@ -56,6 +58,8 @@ public class Mapping {
     protected List<ClassType> clazz;
     @XmlElementRef(name = "canister", type = JAXBElement.class)
     protected List<JAXBElement<? extends CanisterType>> canister;
+    @XmlElement(required = true)
+    protected List<SearchFormType> search;
 
     /**
      * Gets the value of the genInfo property.
@@ -186,9 +190,9 @@ public class Mapping {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link CanisterType }{@code >}
-     * {@link JAXBElement }{@code <}{@link FormType }{@code >}
      * {@link JAXBElement }{@code <}{@link WorkflowTaskType }{@code >}
+     * {@link JAXBElement }{@code <}{@link FormType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CanisterType }{@code >}
      * 
      * 
      */
@@ -197,6 +201,35 @@ public class Mapping {
             canister = new ArrayList<JAXBElement<? extends CanisterType>>();
         }
         return this.canister;
+    }
+
+    /**
+     * Gets the value of the search property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the search property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSearch().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link SearchFormType }
+     * 
+     * 
+     */
+    public List<SearchFormType> getSearch() {
+        if (search == null) {
+            search = new ArrayList<SearchFormType>();
+        }
+        return this.search;
     }
 
 }
