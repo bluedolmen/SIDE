@@ -209,6 +209,7 @@ public enum MsgId {
 	INT_SUFFIX_UPLOAD_REPO				("_repoContent"),
 	INT_TYPE_XSD_DATE 					("date"),
 	INT_TYPE_XSD_DATETIME 				("dateTime"),
+	INT_TYPE_XSD_STRING 				("string"),
 	INT_TYPE_XSD_TIME 					("time"),
 	INT_UPLOAD_DEST_FILE				("filesystem"),
 	INT_UPLOAD_DEST_REPO				("repository"),
