@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" name="TCVAL_1">
-  <views xsi:type="view:DataList" name="Media Video (Data List)" suffix="">
-    <children xsi:type="view:TextField" name="Title">
-      <mapTo href="TCVAL_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_VqVuIB-TEd-liuDrxrfK0Q" name="TCVAL_1">
+  <views xsi:type="view:DataList" xmi:id="_VqbNsB-TEd-liuDrxrfK0Q" name="MediaVideo" suffix="">
+    <children xsi:type="view:TextField" xmi:id="_YS4dsB-TEd-liuDrxrfK0Q" name="Title">
+      <mapTo href="TCVAL_1.dt#_WjEs8B-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:TextField" name="Author">
-      <mapTo href="TCVAL_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+    <children xsi:type="view:TextField" xmi:id="_YS4dsR-TEd-liuDrxrfK0Q" name="Author">
+      <mapTo href="TCVAL_1.dt#_WjEs8R-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:DateField" name="Publishing Date">
-      <mapTo href="TCVAL_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+    <children xsi:type="view:DateField" xmi:id="_YS4dsh-TEd-liuDrxrfK0Q" name="PublishingDate">
+      <mapTo href="TCVAL_1.dt#_WjEs8h-TEd-liuDrxrfK0Q"/>
     </children>
-    <viewOf xsi:type="clazz:Clazz" href="TCVAL_1.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+    <viewOf xsi:type="clazz:Clazz" href="TCVAL_1.dt#_Wi5GwB-TEd-liuDrxrfK0Q"/>
   </views>
 </view:ViewCollection>
