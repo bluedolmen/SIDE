@@ -389,6 +389,7 @@ public class MappingToolCommon {
 	 *            the field name
 	 * 
 	 * @return the form field type
+	 * @deprecated
 	 */
 	public FormFieldType getFormFieldType(String formName, String fieldName) {
 		CanisterType canisterType = getFormType(formName);
@@ -409,10 +410,17 @@ public class MappingToolCommon {
 	 * @return the form field type
 	 */
 	public FormFieldType getFormFieldTypeFromCanister(CanisterType formType, String fieldName) {
-		List<FormFieldType> fields = formType.getField();
-		for (FormFieldType formFieldType : fields) {
-			if (formFieldType.getUniqueName().equals(fieldName)) {
-				return formFieldType;
+		List<FormFieldType> fields = null;
+		if (formType instanceof FormType) {
+			fields = ((FormType) formType).getField();
+		} else if (formType instanceof WorkflowTaskType) {
+			fields = ((WorkflowTaskType) formType).getField();
+		}
+		if (fields != null) {
+			for (FormFieldType formFieldType : fields) {
+				if (formFieldType.getUniqueName().equals(fieldName)) {
+					return formFieldType;
+				}
 			}
 		}
 		return null;
