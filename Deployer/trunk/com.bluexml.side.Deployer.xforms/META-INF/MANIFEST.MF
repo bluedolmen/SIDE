@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE XForms Chiba Deployer
 Bundle-SymbolicName: com.bluexml.side.Deployer.xforms;singleton:=true
-Bundle-Version: 1.0.20.v14649-20100219
+Bundle-Version: 1.0.21.v14695-20100222
 Bundle-Activator: com.bluexml.side.deployer.xforms.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
