@@ -55,7 +55,7 @@ public class RenderableSearchOperators extends Renderable {
 		ModelElementBindSimple opBind = new ModelElementBindSimple(nodeset);
 		refField.getBind().addSubBind(opBind);
 
-		String opSetId = getFormGenerator().getOperatorListId(refField);
+		String opSetId = getFormGenerator().getSearchOperatorsListId(refField.getFormElement());
 		String opFileId = MsgId.INT_PREFIX_FILENAME_OPERATORS + opSetId;
 		String opInstanceId = MsgId.INT_PREFIX_INSTANCE_OPERATORS + opSetId;
 		return new RenderedSearchOperators(opBind, refField.getFormElement().getId() + "_"

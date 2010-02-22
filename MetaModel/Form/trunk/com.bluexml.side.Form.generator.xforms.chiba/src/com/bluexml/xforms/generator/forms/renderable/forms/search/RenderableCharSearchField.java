@@ -38,7 +38,7 @@ public class RenderableCharSearchField extends RenderableSearchField<CharSearchF
 			boolean isInIMultRepeater) {
 		// the bind
 		ModelElementBindHolder mebRoot = getBind();
-		String nodeset = path + "/" + formElement.getId();
+		String nodeset = path + formElement.getId();
 		mebRoot.setNodeset(nodeset);
 		//
 		Rendered rendered = new RenderedSearchField();
