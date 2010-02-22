@@ -40,10 +40,12 @@ import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.side.form.Reference;
+import com.bluexml.side.form.SearchField;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.side.workflow.StartState;
@@ -65,6 +67,8 @@ import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.ModelChoiceType;
 import com.bluexml.xforms.controller.binding.ObjectFactory;
 import com.bluexml.xforms.controller.binding.ReferenceType;
+import com.bluexml.xforms.controller.binding.SearchFieldType;
+import com.bluexml.xforms.controller.binding.SearchFormType;
 import com.bluexml.xforms.controller.binding.VirtualFieldType;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.generator.AbstractGenerator;
@@ -712,29 +716,39 @@ public class MappingGenerator extends AbstractGenerator {
 			formType.setRealClass(copyClassType(getClassType(formClass.getReal_class())));
 			processFormElement(formType, realContainer, realContainer, realContainer);
 			mapping.getCanister().add(objectFactory.createForm(formType));
+		} else if (realContainer instanceof FormSearch) {
+			SearchFormType sfType = objectFactory.createSearchFormType();
+			sfType.setName(realContainer.getId());
+			FormSearch formSearch = (FormSearch) realContainer;
+			String operator = formSearch.getCombinationOperator().getName();
+			sfType.setOperator(operator);
+			sfType.setRealClass(copyClassType(getClassType(formSearch.getReal_class())));
+			processFormElement(sfType, realContainer, realContainer, realContainer);
+			// processSearchFields(sfType, formSearch, formSearch);
+			mapping.getCanister().add(objectFactory.createSearch(sfType));
 		} else if (realContainer instanceof FormWorkflow) {
 			FormWorkflow formWorkflow = ((FormWorkflow) realContainer);
 
-			WorkflowTaskType task = objectFactory.createWorkflowTaskType();
+			WorkflowTaskType taskType = objectFactory.createWorkflowTaskType();
 			String formName = formWorkflow.getId();
 			String taskId = workflowBuildBlueXMLTaskName(formName);
 
-			task.setName(formName);
-			task.setTaskId(taskId);
+			taskType.setName(formName);
+			taskType.setTaskId(taskId);
 			FormClass attached = formWorkflow.getDataForm();
-			task.setDataForm(attached.getId());
-			task.setTitle(formWorkflow.getLabel());
+			taskType.setDataForm(attached.getId());
+			taskType.setTitle(formWorkflow.getLabel());
 
 			// set the assignment.
 			// we won't check that the reference is indeed a state or node
 			ModelElement mel = formWorkflow.getRef();
 			Swimlane swimlane;
 			if (mel instanceof StartStateImpl) {
-				task.setStartTask(true);
+				taskType.setStartTask(true);
 				StartState start = ((StartStateImpl) mel);
 				swimlane = start.getInitiator();
 			} else {
-				task.setStartTask(false);
+				taskType.setStartTask(false);
 				TaskNode aTask = (TaskNode) mel;
 				swimlane = aTask.getSwimlane();
 			}
@@ -742,11 +756,43 @@ public class MappingGenerator extends AbstractGenerator {
 				throw new RuntimeException("Wrong assignment in form '" + formName
 						+ "'. Needs either 'actorId' or 'pooledActors'");
 			}
-			task.setActorId(swimlane.getActorid());
-			task.setPooledActors(swimlane.getPooledactors());
+			taskType.setActorId(swimlane.getActorid());
+			taskType.setPooledActors(swimlane.getPooledactors());
 
-			processFormElement(task, realContainer, realContainer, realContainer);
-			mapping.getCanister().add(objectFactory.createTask(task));
+			processFormElement(taskType, realContainer, realContainer, realContainer);
+			mapping.getCanister().add(objectFactory.createTask(taskType));
+		}
+	}
+
+	// private void processSearchFields(SearchFormType formType, FormContainer formContainer,
+	// FormElement formElement) {
+	// if (formElement instanceof FormSearch) {
+	// FormSearch form = (FormSearch) formElement;
+	// EList<FormElement> children = form.getChildren();
+	// for (FormElement child : children) {
+	// processSearchFields(formType, formContainer, child);
+	// }
+	// } else {
+	// if (formElement instanceof ActionField) {
+	// processActionField(null, formContainer, (Field) formElement);
+	// } else if (formElement instanceof SearchField) {
+	// processSearchField(formType, (FormSearch) formContainer, (SearchField) formElement);
+	// }
+	// }
+	//
+	// }
+
+	private void processSearchField(CanisterType formType, FormContainer formContainer,
+			SearchField searchField) {
+		if (formContainer instanceof FormSearch) {
+			SearchFieldType fieldType = objectFactory.createSearchFieldType();
+			fieldType.setName(searchField.getId());
+			String defaultOp = formGenerator.getSearchFieldDefaultOperator(searchField);
+			fieldType.setPick(defaultOp);
+			((SearchFormType) formType).getField().add(fieldType);
+		} else {
+			throw new RuntimeException("Search fields are allowed only on FormSearch objects. '"
+					+ formContainer.getLabel() + "' is not a FormSearch.");
 		}
 	}
 
@@ -754,7 +800,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * Process form element.
 	 * 
 	 * @param canister
-	 *            placeholder
+	 *            placeholder for a form (either a workflow or class)
 	 * @param parent
 	 *            the parent
 	 * @param formElement
@@ -781,6 +827,8 @@ public class MappingGenerator extends AbstractGenerator {
 				processActionField(canister, formContainer, (Field) formElement);
 			} else if (formElement instanceof Field) {
 				processField(canister, formContainer, (Field) formElement);
+			} else if (formElement instanceof SearchField) {
+				processSearchField(canister, formContainer, (SearchField) formElement);
 			}
 		}
 	}
@@ -790,10 +838,10 @@ public class MappingGenerator extends AbstractGenerator {
 	 * 
 	 * @param canister
 	 *            the FormType or workflowTaskType
-	 * @param field
-	 *            the field
 	 * @param formContainer
 	 *            the form container: FormClass or FormWorkflow
+	 * @param field
+	 *            the field
 	 */
 	private void processActionField(CanisterType canister, FormContainer formContainer, Field field) {
 		ActionFieldType actionFieldType = new ActionFieldType();
@@ -803,7 +851,6 @@ public class MappingGenerator extends AbstractGenerator {
 		String style = field.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
-			actionFieldType.setAppearance(style);
 		}
 		// own properties
 		if (formContainer instanceof FormWorkflow) {
@@ -830,12 +877,18 @@ public class MappingGenerator extends AbstractGenerator {
 		String result;
 		boolean isMultiple = false;
 		FormFieldType formFieldType = new FormFieldType();
+		List<FormFieldType> fieldTypesList;
+
+		if (canister instanceof WorkflowTaskType) {
+			fieldTypesList = ((WorkflowTaskType) canister).getField();
+		} else {
+			fieldTypesList = ((FormType) canister).getField();
+		}
 
 		formFieldType.setUniqueName(FormGeneratorsManager.getUniqueName(field));
 		String style = field.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
-			formFieldType.setAppearance(style);
 		}
 
 		ModelElement ref = (ModelElement) formGenerator.getRealObject(field.getRef());
@@ -904,7 +957,7 @@ public class MappingGenerator extends AbstractGenerator {
 			FileFieldType fileFieldType = initFileFieldFromFormField(formFieldType);
 
 			fileFieldType.setInRepository(((FileField) field).isInRepository());
-			canister.getField().add(fileFieldType);
+			fieldTypesList.add(fileFieldType);
 		} else {
 			// check that if mandatory, the field has an initial value
 			if (formFieldType.isMandatory()
@@ -912,7 +965,7 @@ public class MappingGenerator extends AbstractGenerator {
 				monitor.addErrorTextAndLog("Attribute '" + formFieldType.getAlfrescoName()
 						+ "' is mandatory: it should have an initial value!", null, null);
 			}
-			canister.getField().add(formFieldType);
+			fieldTypesList.add(formFieldType);
 		}
 
 	}
@@ -955,8 +1008,17 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @return
 	 */
 	private String pickDummyValue(String type) {
-		String[] strings = { "alpha", "beta", "gamma", "delta", "kappa", "sigma", "zeta", "omega",
-				"everything", "something" };
+		String[] strings = {
+				"alpha",
+				"beta",
+				"gamma",
+				"delta",
+				"kappa",
+				"sigma",
+				"zeta",
+				"omega",
+				"everything",
+				"something" };
 		if (type.equalsIgnoreCase("Date")) {
 			return null;
 		}
@@ -989,7 +1051,6 @@ public class MappingGenerator extends AbstractGenerator {
 
 		FileFieldType res = new FileFieldType();
 		res.setUniqueName(formFieldType.getUniqueName());
-		res.setAppearance(formFieldType.getAppearance());
 
 		res.setAlfrescoName(formFieldType.getAlfrescoName());
 		res.setType(formFieldType.getType());
@@ -1021,7 +1082,6 @@ public class MappingGenerator extends AbstractGenerator {
 		String style = virtualField.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
-			virtualFieldType.setAppearance(style);
 		}
 		// propriétés propres
 		virtualFieldType.setFieldName(FormGeneratorsManager.getUniqueName(linkedField));
@@ -1061,9 +1121,15 @@ public class MappingGenerator extends AbstractGenerator {
 	 */
 	private void processChoiceField(CanisterType canister, FormContainer formContainer,
 			ModelChoiceField formElement) {
+		List<ModelChoiceType> list = null;
+		if (canister instanceof WorkflowTaskType) {
+			list = ((WorkflowTaskType) canister).getModelChoice();
+		} else {
+			list = ((FormType) canister).getModelChoice();
+		}
 		ModelChoiceType modelChoiceType = new ModelChoiceType();
 		processChoiceFieldCommon(formElement, formContainer, modelChoiceType);
-		canister.getModelChoice().add(modelChoiceType);
+		list.add(modelChoiceType);
 	}
 
 	/**
@@ -1119,7 +1185,6 @@ public class MappingGenerator extends AbstractGenerator {
 		String style = modelChoiceField.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
-			modelChoiceType.setAppearance(style);
 		}
 
 		modelChoiceType.setDisplayLabel(modelChoiceField.getLabel()); // #1212
