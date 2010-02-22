@@ -515,7 +515,7 @@ public class Utils {
 
 		ArrayList<String> listePlugin = new ArrayList<String>();
 
-		String pathproject = getBuildPath() + File.separator + repositoryCopy;
+		String pathproject = getRepositoryCopyPath();
 
 		listefichierpom = new ArrayList();
 		findFile(new File(pathproject + "/S-IDE/"), "pom.xml");
@@ -890,6 +890,11 @@ public class Utils {
 		copyToRepository();
 	}
 
+	public static String getRepositoryCopyPath() {
+		String pathproject = getBuildPath() + File.separator + repositoryCopy;
+		return pathproject;
+	}
+
 	/**
 	 * Retourne le chemin vers la copie locale du projet en fonction de
 	 * l'utilisation de hudson ou non
@@ -932,7 +937,7 @@ public class Utils {
 			from = getBuildDirectory() + "_CO";
 		}
 
-		String to = getBuildPath() + File.separator + repositoryCopy;
+		String to = getRepositoryCopyPath();
 
 		try {
 			if (new File(to).exists()) {
@@ -957,7 +962,7 @@ public class Utils {
 			to = getBuildDirectory() + "_CO";
 		}
 
-		String from = getBuildPath() + File.separator + repositoryCopy;
+		String from = getRepositoryCopyPath();
 
 		try {
 			FileHelper.copyFiles(new File(from), new File(to), true);
