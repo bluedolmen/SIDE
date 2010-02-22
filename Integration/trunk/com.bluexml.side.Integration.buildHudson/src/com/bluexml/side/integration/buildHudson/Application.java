@@ -331,6 +331,7 @@ public class Application {
 		File file = new File(folderName + File.separator + fileName);
 		PrintWriter writer = null;
 		try {
+			System.out.println("Create File:"+file);
 			file.createNewFile();
 
 			writer = new PrintWriter(new FileWriter(file));
@@ -347,7 +348,7 @@ public class Application {
 	/**
 	 * Retourne le corps du fichier build.xml pour le projet donn�
 	 */
-	private static String getCorpsBuild() {
+	public static String getCorpsBuild() {
 		List<String> l = new ArrayList<String>();
 		l.addAll(Utils.getProjects());
 		l.addAll(Utils.getProjects("projectToVersioned"));
