@@ -8,7 +8,6 @@
 				<xsd:element maxOccurs="unbounded" name="aspect" type="aspectType" />
 				<xsd:element maxOccurs="unbounded" name="class" type="classType" />
 				<xsd:element maxOccurs="unbounded" ref="canister" />
-				<xsd:element maxOccurs="unbounded" name="search" type="searchFormType" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -23,12 +22,12 @@
 	<xsd:element name="canister" type="canisterType" />
 	<xsd:element name="form" type="formType" substitutionGroup="canister" />
 	<xsd:element name="task" type="workflowTaskType" substitutionGroup="canister" />
+	<xsd:element name="search" type="searchFormType" substitutionGroup="canister" />
 
 	<xsd:complexType name="canisterType" abstract="true">
 		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" />
 			<xsd:element maxOccurs="unbounded" name="action" type="actionFieldType" />
-			<xsd:element maxOccurs="unbounded" name="field" type="formFieldType" />
-			<xsd:element maxOccurs="unbounded" name="modelChoice" type="modelChoiceType" />
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -88,7 +87,6 @@
 	<xsd:complexType name="fieldType">
 		<xsd:sequence>
 			<xsd:element name="uniqueName" type="xsd:string" />
-			<xsd:element name="appearance" type="xsd:string" />
 			<xsd:element name="shortName" type="xsd:string" />
 			<xsd:element name="mandatory" type="xsd:boolean" />
 			<xsd:element name="displayLabel" type="xsd:string" />
@@ -165,11 +163,12 @@
 		<xsd:complexContent>
 			<xsd:extension base="canisterType">
 				<xsd:sequence>
-					<xsd:element name="name" type="xsd:string" />
 					<xsd:element name="contentEnabled" type="xsd:boolean" />
+					<xsd:element maxOccurs="unbounded" name="field" type="formFieldType" />
 					<xsd:element maxOccurs="unbounded" name="virtual" type="virtualFieldType" />
 					<xsd:element maxOccurs="unbounded" name="reference" type="referenceType" />
 					<xsd:element maxOccurs="unbounded" name="fileField" type="fileFieldType" />
+					<xsd:element maxOccurs="unbounded" name="modelChoice" type="modelChoiceType" />
 					<xsd:element name="realClass" type="classType" />
 				</xsd:sequence>
 			</xsd:extension>
@@ -179,25 +178,29 @@
 		<xsd:complexContent>
 			<xsd:extension base="canisterType">
 				<xsd:sequence>
-					<xsd:element name="name" type="xsd:string" />
 					<xsd:element name="taskId" type="xsd:string" />
 					<xsd:element name="dataForm" type="xsd:string" />
 					<xsd:element name="title" type="xsd:string" />
 					<xsd:element name="startTask" type="xsd:boolean" />
 					<xsd:element minOccurs="0" name="actorId" type="xsd:string" />
 					<xsd:element minOccurs="0" name="pooledActors" type="xsd:string" />
+					<xsd:element maxOccurs="unbounded" name="field" type="formFieldType" />
+					<xsd:element maxOccurs="unbounded" name="modelChoice" type="modelChoiceType" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 	<xsd:complexType name="searchFormType">
-		<xsd:sequence>
-			<xsd:element name="name" type="xsd:string" />
-			<xsd:element name="operator" type="xsd:string" />
-			<xsd:element name="realClass" type="classType" />
-			<xsd:element maxOccurs="unbounded" name="actions" type="actionFieldType" />
-			<xsd:element maxOccurs="unbounded" name="fields" type="searchFieldType" />
-		</xsd:sequence>
+		<xsd:complexContent>
+			<xsd:extension base="canisterType">
+				<xsd:sequence>
+					<xsd:element name="operator" type="xsd:string" />
+					<xsd:element name="realClass" type="classType" />
+					<xsd:element maxOccurs="unbounded" name="actions" type="actionFieldType" />
+					<xsd:element maxOccurs="unbounded" name="fields" type="searchFieldType" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
 	</xsd:complexType>
 	<xsd:complexType name="searchFieldType">
 		<xsd:sequence>
