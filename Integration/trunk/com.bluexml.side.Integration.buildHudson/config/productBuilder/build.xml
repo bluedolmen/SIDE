@@ -10,9 +10,10 @@
 		<fail unless="haveDeltaPack" message="The deltapack is required to build this product.  Please edit buildProduct.xml or set the &quot;deltapack&quot; property." />
 
 		<property name="buildDirectory" value="${builder}/buildDirectory" />
-		<property name="pluginPath" value="${baseLocation}/plugins${path.separator}${deltapack}" />
+		<property name="pluginPath" value="${sideSources}${path.separator}${deltapack}" />
 		<property name="buildTempFolder" value="${buildDirectory}" />
 		<echoproperties></echoproperties>
+		<echo message="builder : ${eclipse.pdebuild.scripts}/productBuild/productBuild.xml"></echo>
 		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" />
 
 		<move todir="${distros}">
