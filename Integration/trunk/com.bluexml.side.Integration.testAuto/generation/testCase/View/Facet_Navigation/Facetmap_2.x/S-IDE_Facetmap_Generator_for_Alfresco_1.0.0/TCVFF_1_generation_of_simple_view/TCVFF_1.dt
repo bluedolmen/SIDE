@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" name="TCVFF_1">
-  <packageSet xsi:type="clazz:ClassPackage" name="myCompany">
-    <packageSet xsi:type="clazz:ClassPackage" name="media">
-      <classSet documentation="" description="" name="MediaVideo" title="Media Video">
-        <metainfo key="visual-component" value=""/>
-        <attributes documentation="" description="" name="Title" title="Title" typ="String"/>
-        <attributes documentation="" description="" name="Author" title="Author" typ="String"/>
-        <attributes documentation="" description="" name="PublishingDate" title="Publishing Date" typ="Date"/>
+<clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_lS7zoB-TEd-liuDrxrfK0Q" name="TCVFF_1">
+  <packageSet xsi:type="clazz:ClassPackage" xmi:id="_lS7zoR-TEd-liuDrxrfK0Q" name="myCompany">
+    <packageSet xsi:type="clazz:ClassPackage" xmi:id="_lS7zoh-TEd-liuDrxrfK0Q" name="media">
+      <classSet xmi:id="_lS7zox-TEd-liuDrxrfK0Q" documentation="" description="" name="MediaVideo" title="Media Video">
+        <metainfo xmi:id="_lS7zpB-TEd-liuDrxrfK0Q" key="visual-component" value=""/>
+        <attributes xmi:id="_lS7zpR-TEd-liuDrxrfK0Q" documentation="" description="" name="Title" title="Title"/>
+        <attributes xmi:id="_lS7zph-TEd-liuDrxrfK0Q" documentation="" description="" name="Author" title="Author"/>
+        <attributes xmi:id="_lS7zpx-TEd-liuDrxrfK0Q" documentation="" description="" name="PublishingDate" title="Publishing Date" typ="Date"/>
       </classSet>
-      <classSet documentation="" description="" name="MediaCategory" title="Media Category">
-        <metainfo key="visual-component" value=""/>
-        <attributes documentation="" description="" name="categoryName" title="Category Name" typ="String"/>
+      <classSet xmi:id="_lS7zqB-TEd-liuDrxrfK0Q" documentation="" description="" name="MediaCategory" title="Media Category">
+        <metainfo xmi:id="_lS7zqR-TEd-liuDrxrfK0Q" key="visual-component" value=""/>
+        <attributes xmi:id="_lS7zqh-TEd-liuDrxrfK0Q" documentation="" description="" name="categoryName" title="Category Name"/>
       </classSet>
-      <associationSet description="" name="belongsto" title="belongs to">
-        <firstEnd name="" title="" cardMax="-1" linkedClass="//@packageSet.0/@packageSet.0/@classSet.0"/>
-        <secondEnd name="" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@classSet.1"/>
+      <associationSet xmi:id="_lS7zqx-TEd-liuDrxrfK0Q" description="" name="belongsto" title="belongs to">
+        <firstEnd xmi:id="_lS7zrB-TEd-liuDrxrfK0Q" name="" title="" cardMax="-1" linkedClass="_lS7zox-TEd-liuDrxrfK0Q"/>
+        <secondEnd xmi:id="_lS7zrR-TEd-liuDrxrfK0Q" name="" title="" navigable="true" linkedClass="_lS7zqB-TEd-liuDrxrfK0Q"/>
       </associationSet>
     </packageSet>
   </packageSet>
