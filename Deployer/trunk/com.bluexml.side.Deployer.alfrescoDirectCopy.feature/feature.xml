@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature" label="SIDE Alfresco Direct Deployer" version="1.0.25.v14649-20100219" provider-name="BlueXML">
+<feature id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature" label="SIDE Alfresco Direct Deployer" version="1.0.26.v14695-20100222" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the deployment of generated or developed extensions on specialized
 frameworks like Alfresco. This feature allows to deploy generated extensions on Alfresco instances using direct copy.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
