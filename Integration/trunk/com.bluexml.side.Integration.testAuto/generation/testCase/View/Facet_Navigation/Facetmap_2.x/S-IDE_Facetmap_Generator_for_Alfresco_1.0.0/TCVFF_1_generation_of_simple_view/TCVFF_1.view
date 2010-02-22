@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" name="TCVFF_1">
-  <views xsi:type="view:FacetMap" name="Media Video (FacetMap)" suffix="">
-    <children xsi:type="view:TextField" name="Title">
-      <mapTo href="TCVFF_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_kjabMB-TEd-liuDrxrfK0Q" name="TCVFF_1">
+  <views xsi:type="view:FacetMap" xmi:id="_kjabMR-TEd-liuDrxrfK0Q" name="MediaVideoF" suffix="">
+    <children xsi:type="view:TextField" xmi:id="_kjabMh-TEd-liuDrxrfK0Q" name="Title">
+      <mapTo href="TCVFF_1.dt#_lS7zpR-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:TextField" name="Author">
-      <mapTo href="TCVFF_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+    <children xsi:type="view:TextField" xmi:id="_kjabMx-TEd-liuDrxrfK0Q" name="Author">
+      <mapTo href="TCVFF_1.dt#_lS7zph-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:DateField" name="Publishing Date">
-      <mapTo href="TCVFF_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+    <children xsi:type="view:DateField" xmi:id="_kjbCQB-TEd-liuDrxrfK0Q" name="PublishingDate">
+      <mapTo href="TCVFF_1.dt#_lS7zpx-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:DataList" name="Media Video (Data List)">
-      <mapTo href="TCVFF_1.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
-      <children xsi:type="view:TextField" name="Title">
-        <mapTo href="TCVFF_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+    <children xsi:type="view:DataList" xmi:id="_kjbCQR-TEd-liuDrxrfK0Q" name="MediaVideo">
+      <mapTo href="TCVFF_1.dt#_lS7zox-TEd-liuDrxrfK0Q"/>
+      <children xsi:type="view:TextField" xmi:id="_n6ymsB-TEd-liuDrxrfK0Q" name="Title">
+        <mapTo href="TCVFF_1.dt#_lS7zpR-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:TextField" name="Author">
-        <mapTo href="TCVFF_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+      <children xsi:type="view:TextField" xmi:id="_n6ymsR-TEd-liuDrxrfK0Q" name="Author">
+        <mapTo href="TCVFF_1.dt#_lS7zph-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:DateField" name="Publishing Date">
-        <mapTo href="TCVFF_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+      <children xsi:type="view:DateField" xmi:id="_n6ymsh-TEd-liuDrxrfK0Q" name="PublishingDate">
+        <mapTo href="TCVFF_1.dt#_lS7zpx-TEd-liuDrxrfK0Q"/>
       </children>
-      <viewOf xsi:type="clazz:Clazz" href="TCVFF_1.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+      <viewOf xsi:type="clazz:Clazz" href="TCVFF_1.dt#_lS7zox-TEd-liuDrxrfK0Q"/>
     </children>
-    <viewOf xsi:type="clazz:Clazz" href="TCVFF_1.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+    <viewOf xsi:type="clazz:Clazz" href="TCVFF_1.dt#_lS7zox-TEd-liuDrxrfK0Q"/>
   </views>
 </view:ViewCollection>
