@@ -2,7 +2,7 @@
 <app:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:app="http://www.bluexml.com/application/1.0/">
   <elements xsi:type="app:Configuration" name="ConfigTest" description="">
     <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator" id="com.bluexml.side.Workflow.generator.alfresco" metaModelName="KSR600 Workflow" technologyVersionName="Alfresco3.x Labs and Entreprise" technologyName="alfresco-jbpm" contributorId="com.bluexml.side.Workflow.generator.alfresco" id_metamodel="http://www.kerblue.org/workflow/1.0" generatorName="SIDE Workflow Generator for Alfresco">
-      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator" versionMin="1.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator" versionMin="1.0.29" versionMax="1.0.29" moduleType="amp" technologyVersion="alfresco_3.x"/>
     </generatorConfigurations>
     <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator" id="com.bluexml.side.Class.generator.documentation" metaModelName="KSR500 Data" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Class.generator.documentation" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="SIDE Class Documentation Generator">
       <options key="doc.gen.screenshoot"/>
@@ -14,7 +14,7 @@
     </generatorConfigurations>
     <parameters key="generation.options.documentation" value="false"/>
     <parameters key="generation.option.Skip.Validation" value="false"/>
-    <parameters key="generation.options.clean" value="true"/>
+    <parameters key="generation.options.clean" value="false"/>
     <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Workflow/Alfresco-jBPM/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Workflow_Generator/TCWAL_1_generation_of_a_simple_workflow/log"/>
     <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Workflow/Alfresco-jBPM/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Workflow_Generator/TCWAL_1_generation_of_a_simple_workflow/target"/>
     <parameters key="generation.option.offlineMode" value="false"/>
@@ -22,6 +22,10 @@
     <parameters key="com.bluexml.side.Workflow.generator.alfresco.module.version" value="1.0"/>
     <parameters key="com.bluexml.side.Class.generator.alfresco.module.version" value="1.0"/>
     <deployerConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Deployer.documentation" deployerName="SIDE Documentation Deployer"/>
+    <deployerConfigurations id_techno_version="freemind" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.freemind" technologyVersionName="FreeMind" technologyName="MindMap" contributorId="com.bluexml.side.Requirements.generator" deployerName="freemind deployer"/>
+    <deployerConfigurations id_techno_version="office_excel" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.excel" technologyVersionName="Excel Document" technologyName="Office Document" contributorId="com.bluexml.side.Requirements.generator" deployerName="excel deployer"/>
+    <deployerConfigurations id_techno_version="webproject_1_0" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.webproject" technologyVersionName="Web Project 1.0" technologyName="Web Project" contributorId="com.bluexml.side.Requirements.generator" deployerName="webproject deployer"/>
+    <deployerConfigurations id_techno_version="opendocument_writer" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.doc" technologyVersionName="Open Document Writer" technologyName="Open Document" contributorId="com.bluexml.side.Requirements.generator" deployerName="doc deployer"/>
   </elements>
   <elements xsi:type="app:Model" name="TCWAL_1.workflow" file="/com.bluexml.side.Integration.testAuto/generation/testCase/Workflow/Alfresco-jBPM/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Workflow_Generator/TCWAL_1_generation_of_a_simple_workflow/TCWAL_1.workflow"/>
 </app:Application>
