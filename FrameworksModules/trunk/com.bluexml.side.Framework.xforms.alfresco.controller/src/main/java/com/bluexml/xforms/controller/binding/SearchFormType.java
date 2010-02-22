@@ -21,8 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="operator" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="realClass" type="{}classType"/>
- *         &lt;element name="actions" type="{}actionFieldType" maxOccurs="unbounded"/>
- *         &lt;element name="fields" type="{}searchFieldType" maxOccurs="unbounded"/>
+ *         &lt;element name="field" type="{}searchFieldType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -35,8 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "searchFormType", propOrder = {
     "operator",
     "realClass",
-    "actions",
-    "fields"
+    "field"
 })
 public class SearchFormType
     extends CanisterType
@@ -47,9 +45,7 @@ public class SearchFormType
     @XmlElement(required = true)
     protected ClassType realClass;
     @XmlElement(required = true)
-    protected List<ActionFieldType> actions;
-    @XmlElement(required = true)
-    protected List<SearchFieldType> fields;
+    protected List<SearchFieldType> field;
 
     /**
      * Gets the value of the operator property.
@@ -100,47 +96,18 @@ public class SearchFormType
     }
 
     /**
-     * Gets the value of the actions property.
+     * Gets the value of the field property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the actions property.
+     * This is why there is not a <CODE>set</CODE> method for the field property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getActions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ActionFieldType }
-     * 
-     * 
-     */
-    public List<ActionFieldType> getActions() {
-        if (actions == null) {
-            actions = new ArrayList<ActionFieldType>();
-        }
-        return this.actions;
-    }
-
-    /**
-     * Gets the value of the fields property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fields property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFields().add(newItem);
+     *    getField().add(newItem);
      * </pre>
      * 
      * 
@@ -150,11 +117,11 @@ public class SearchFormType
      * 
      * 
      */
-    public List<SearchFieldType> getFields() {
-        if (fields == null) {
-            fields = new ArrayList<SearchFieldType>();
+    public List<SearchFieldType> getField() {
+        if (field == null) {
+            field = new ArrayList<SearchFieldType>();
         }
-        return this.fields;
+        return this.field;
     }
 
 }

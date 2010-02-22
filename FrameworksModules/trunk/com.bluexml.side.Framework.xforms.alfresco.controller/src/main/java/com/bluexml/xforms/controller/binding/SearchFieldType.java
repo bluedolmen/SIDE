@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="defaultOp" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="pick" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -30,14 +30,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "searchFieldType", propOrder = {
     "name",
-    "defaultOp"
+    "pick"
 })
 public class SearchFieldType {
 
     @XmlElement(required = true)
     protected String name;
     @XmlElement(required = true)
-    protected String defaultOp;
+    protected String pick;
 
     /**
      * Gets the value of the name property.
@@ -64,27 +64,27 @@ public class SearchFieldType {
     }
 
     /**
-     * Gets the value of the defaultOp property.
+     * Gets the value of the pick property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getDefaultOp() {
-        return defaultOp;
+    public String getPick() {
+        return pick;
     }
 
     /**
-     * Sets the value of the defaultOp property.
+     * Sets the value of the pick property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setDefaultOp(String value) {
-        this.defaultOp = value;
+    public void setPick(String value) {
+        this.pick = value;
     }
 
 }
