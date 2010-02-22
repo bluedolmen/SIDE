@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" name="TCVFF_2">
-  <packageSet xsi:type="clazz:ClassPackage" name="bluexml">
-    <packageSet xsi:type="clazz:ClassPackage" name="demo">
-      <packageSet xsi:type="clazz:ClassPackage" name="rh">
-        <classSet documentation="" description="" name="Personne" title="Personne">
-          <metainfo key="visual-component" value=""/>
-          <attributes documentation="" description="" name="nom" title="Nom" typ="String"/>
-          <attributes documentation="" description="" name="prenom" title="Prénom" typ="String"/>
-          <attributes documentation="" description="" name="age" title="Age" typ="int"/>
-          <attributes documentation="" description="" name="mobilite" title="Mobilité" typ="String"/>
-          <attributes documentation="" description="" name="permisB" title="Permis B" typ="String"/>
+<clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_3ywk8B-TEd-liuDrxrfK0Q" name="TCVFF_2">
+  <packageSet xsi:type="clazz:ClassPackage" xmi:id="_3ywk8R-TEd-liuDrxrfK0Q" name="bluexml">
+    <packageSet xsi:type="clazz:ClassPackage" xmi:id="_3ywk8h-TEd-liuDrxrfK0Q" name="demo">
+      <packageSet xsi:type="clazz:ClassPackage" xmi:id="_3ywk8x-TEd-liuDrxrfK0Q" name="rh">
+        <classSet xmi:id="_3ywk9B-TEd-liuDrxrfK0Q" documentation="" description="" name="Personne" title="Personne">
+          <metainfo xmi:id="_3ywk9R-TEd-liuDrxrfK0Q" key="visual-component" value=""/>
+          <attributes xmi:id="_3ywk9h-TEd-liuDrxrfK0Q" documentation="" description="" name="nom" title="Nom"/>
+          <attributes xmi:id="_3ywk9x-TEd-liuDrxrfK0Q" documentation="" description="" name="prenom" title="Prénom"/>
+          <attributes xmi:id="_3ywk-B-TEd-liuDrxrfK0Q" documentation="" description="" name="age" title="Age" typ="int"/>
+          <attributes xmi:id="_3ywk-R-TEd-liuDrxrfK0Q" documentation="" description="" name="mobilite" title="Mobilité"/>
+          <attributes xmi:id="_3ywk-h-TEd-liuDrxrfK0Q" documentation="" description="" name="permisB" title="Permis B"/>
         </classSet>
-        <classSet documentation="" description="" name="Frais" title="Frais">
-          <metainfo key="visual-component" value=""/>
+        <classSet xmi:id="_3ywk-x-TEd-liuDrxrfK0Q" documentation="" description="" name="Frais" title="Frais">
+          <metainfo xmi:id="_3ywk_B-TEd-liuDrxrfK0Q" key="visual-component" value=""/>
         </classSet>
-        <classSet documentation="" description="" name="Cv" title="CV">
-          <metainfo key="visual-component" value=""/>
+        <classSet xmi:id="_3ywk_R-TEd-liuDrxrfK0Q" documentation="" description="" name="Cv" title="CV">
+          <metainfo xmi:id="_3ywk_h-TEd-liuDrxrfK0Q" key="visual-component" value=""/>
         </classSet>
-        <classSet documentation="" description="" name="ContratDeTravail" title="Contrat de travail">
-          <metainfo key="visual-component" value=""/>
-          <attributes documentation="" description="" name="type" title="Type" typ="String"/>
-          <attributes documentation="" description="" name="dateDembauche" title="Date d'embauche" typ="int"/>
-          <attributes documentation="" description="" name="statut" title="Statut" typ="String"/>
-          <attributes documentation="" description="" name="niveauContrat" title="Niveau Contrat" typ="String"/>
-          <attributes documentation="" description="" name="fonction" title="Fonction" typ="String"/>
+        <classSet xmi:id="_3ywk_x-TEd-liuDrxrfK0Q" documentation="" description="" name="ContratDeTravail" title="Contrat de travail">
+          <metainfo xmi:id="_3ywlAB-TEd-liuDrxrfK0Q" key="visual-component" value=""/>
+          <attributes xmi:id="_3ywlAR-TEd-liuDrxrfK0Q" documentation="" description="" name="type" title="Type"/>
+          <attributes xmi:id="_3ywlAh-TEd-liuDrxrfK0Q" documentation="" description="" name="dateDembauche" title="Date d'embauche" typ="int"/>
+          <attributes xmi:id="_3ywlAx-TEd-liuDrxrfK0Q" documentation="" description="" name="statut" title="Statut"/>
+          <attributes xmi:id="_3ywlBB-TEd-liuDrxrfK0Q" documentation="" description="" name="niveauContrat" title="Niveau Contrat"/>
+          <attributes xmi:id="_3ywlBR-TEd-liuDrxrfK0Q" documentation="" description="" name="fonction" title="Fonction"/>
         </classSet>
-        <classSet documentation="" description="" name="Formation" title="Formation">
-          <metainfo key="visual-component" value=""/>
-          <attributes documentation="" description="" name="besoinEntreprise" title="Besoin entreprise" typ="String"/>
-          <attributes documentation="" description="" name="envieSalarie" title="Envie Salarié" typ="String"/>
-          <attributes documentation="" description="" name="theme" title="Thème" typ="String"/>
-          <attributes documentation="" description="" name="dateSouhaitee" title="Date souhaitée" typ="int"/>
-          <attributes documentation="" description="" name="duree" title="Durée" typ="String"/>
+        <classSet xmi:id="_3ywlBh-TEd-liuDrxrfK0Q" documentation="" description="" name="Formation" title="Formation">
+          <metainfo xmi:id="_3ywlBx-TEd-liuDrxrfK0Q" key="visual-component" value=""/>
+          <attributes xmi:id="_3ywlCB-TEd-liuDrxrfK0Q" documentation="" description="" name="besoinEntreprise" title="Besoin entreprise"/>
+          <attributes xmi:id="_3ywlCR-TEd-liuDrxrfK0Q" documentation="" description="" name="envieSalarie" title="Envie Salarié"/>
+          <attributes xmi:id="_3ywlCh-TEd-liuDrxrfK0Q" documentation="" description="" name="theme" title="Thème"/>
+          <attributes xmi:id="_3ywlCx-TEd-liuDrxrfK0Q" documentation="" description="" name="dateSouhaitee" title="Date souhaitée" typ="int"/>
+          <attributes xmi:id="_3ywlDB-TEd-liuDrxrfK0Q" documentation="" description="" name="duree" title="Durée"/>
         </classSet>
-        <classSet documentation="" description="" name="Absence" title="Absence">
-          <metainfo key="visual-component" value=""/>
-          <attributes documentation="" description="" name="dateDeDebut" title="Date de début" typ="int"/>
-          <attributes documentation="" description="" name="duree" title="Durée" typ="String"/>
-          <attributes documentation="" description="" name="motif" title="Motif" typ="String" valueList="//@packageSet.0/@packageSet.0/@packageSet.0/@enumerationSet.0"/>
-          <attributes documentation="" description="" name="nombre" title="Nombre" typ="int"/>
+        <classSet xmi:id="_3ywlDR-TEd-liuDrxrfK0Q" documentation="" description="" name="Absence" title="Absence">
+          <metainfo xmi:id="_3ywlDh-TEd-liuDrxrfK0Q" key="visual-component" value=""/>
+          <attributes xmi:id="_3ywlDx-TEd-liuDrxrfK0Q" documentation="" description="" name="dateDeDebut" title="Date de début" typ="int"/>
+          <attributes xmi:id="_3ywlEB-TEd-liuDrxrfK0Q" documentation="" description="" name="duree" title="Durée"/>
+          <attributes xmi:id="_3ywlER-TEd-liuDrxrfK0Q" documentation="" description="" name="motif" title="Motif" valueList="_3yyaIB-TEd-liuDrxrfK0Q"/>
+          <attributes xmi:id="_3ywlEh-TEd-liuDrxrfK0Q" documentation="" description="" name="nombre" title="Nombre" typ="int"/>
         </classSet>
-        <associationSet description="Une personne génère des frais" name="Frais" title="Frais">
-          <firstEnd name="" title="" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
-          <secondEnd name="R2" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.1"/>
+        <associationSet xmi:id="_3ywlEx-TEd-liuDrxrfK0Q" description="Une personne génère des frais" name="Frais" title="Frais">
+          <firstEnd xmi:id="_3ywlFB-TEd-liuDrxrfK0Q" name="" title="" linkedClass="_3ywk9B-TEd-liuDrxrfK0Q"/>
+          <secondEnd xmi:id="_3yxMAB-TEd-liuDrxrfK0Q" name="R2" title="" navigable="true" linkedClass="_3ywk-x-TEd-liuDrxrfK0Q"/>
         </associationSet>
-        <associationSet description="" name="Cv" title="Cv">
-          <firstEnd name="" title="" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
-          <secondEnd name="R2" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.2"/>
+        <associationSet xmi:id="_3yxMAR-TEd-liuDrxrfK0Q" description="" name="Cv" title="Cv">
+          <firstEnd xmi:id="_3yxMAh-TEd-liuDrxrfK0Q" name="" title="" linkedClass="_3ywk9B-TEd-liuDrxrfK0Q"/>
+          <secondEnd xmi:id="_3yxMAx-TEd-liuDrxrfK0Q" name="R2" title="" navigable="true" linkedClass="_3ywk_R-TEd-liuDrxrfK0Q"/>
         </associationSet>
-        <associationSet description="" name="ContratDeTravail" title="Contrat de travail">
-          <firstEnd name="" title="" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
-          <secondEnd name="R2" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.3"/>
+        <associationSet xmi:id="_3yxMBB-TEd-liuDrxrfK0Q" description="" name="ContratDeTravail" title="Contrat de travail">
+          <firstEnd xmi:id="_3yxMBR-TEd-liuDrxrfK0Q" name="" title="" linkedClass="_3ywk9B-TEd-liuDrxrfK0Q"/>
+          <secondEnd xmi:id="_3yxMBh-TEd-liuDrxrfK0Q" name="R2" title="" navigable="true" linkedClass="_3ywk_x-TEd-liuDrxrfK0Q"/>
         </associationSet>
-        <associationSet description="" name="Formation" title="Formation">
-          <firstEnd name="" title="" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
-          <secondEnd name="R2" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4"/>
+        <associationSet xmi:id="_3yxMBx-TEd-liuDrxrfK0Q" description="" name="Formation" title="Formation">
+          <firstEnd xmi:id="_3yxMCB-TEd-liuDrxrfK0Q" name="" title="" linkedClass="_3ywk9B-TEd-liuDrxrfK0Q"/>
+          <secondEnd xmi:id="_3yxMCR-TEd-liuDrxrfK0Q" name="R2" title="" navigable="true" linkedClass="_3ywlBh-TEd-liuDrxrfK0Q"/>
         </associationSet>
-        <associationSet description="" name="Absence" title="Absence">
-          <firstEnd name="" title="" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
-          <secondEnd name="R2" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.5"/>
+        <associationSet xmi:id="_3yxMCh-TEd-liuDrxrfK0Q" description="" name="Absence" title="Absence">
+          <firstEnd xmi:id="_3yxMCx-TEd-liuDrxrfK0Q" name="" title="" linkedClass="_3ywk9B-TEd-liuDrxrfK0Q"/>
+          <secondEnd xmi:id="_3yxMDB-TEd-liuDrxrfK0Q" name="R2" title="" navigable="true" linkedClass="_3ywlDR-TEd-liuDrxrfK0Q"/>
         </associationSet>
-        <enumerationSet name="Motif">
-          <literals name="Congé"/>
-          <literals name="Maladie"/>
+        <enumerationSet xmi:id="_3yyaIB-TEd-liuDrxrfK0Q" name="Motif">
+          <literals xmi:id="_3yzoQB-TEd-liuDrxrfK0Q" name="Congé"/>
+          <literals xmi:id="_3yzoQR-TEd-liuDrxrfK0Q" name="Maladie"/>
         </enumerationSet>
       </packageSet>
     </packageSet>
