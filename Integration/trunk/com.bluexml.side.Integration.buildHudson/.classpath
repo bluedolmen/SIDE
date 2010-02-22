@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="config/lib/svnClientAdapter.jar"/>
 	<classpathentry kind="lib" path="config/lib/svnjavahl.jar"/>
 	<classpathentry kind="lib" path="config/lib/tools.jar"/>
+	<classpathentry kind="lib" path="config/lib/jaxen-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -46,12 +46,13 @@ cd $ECLIPSE_BUILDER/deltapack
 tar -xvzf $EclipseDeltaPack
 echo "== copy plugins from SIDE source =="
 rm -rf $ECLIPSE_TOBUILD
-mkdir -p $ECLIPSE_TOBUILD
+mkdir -p $ECLIPSE_TOBUILD/plugins
 cp -rf $SIDE_HOME/MetaModel/*/trunk/* $ECLIPSE_TOBUILD/plugins
 cp -rf $SIDE_HOME/Util/trunk/* $ECLIPSE_TOBUILD/plugins
 cp -rf $SIDE_HOME/Deployer/trunk/* $ECLIPSE_TOBUILD/plugins
 cp -rf $SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.eclipse* $ECLIPSE_TOBUILD/plugins
 echo "== copy features from SIDE source =="
+mkdir -p $ECLIPSE_TOBUILD/features
 for f in `find $SIDE_HOME -type d -name *feature`; do
      cp -rfv $f $ECLIPSE_TOBUILD/features
 done
