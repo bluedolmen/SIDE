@@ -17,15 +17,14 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="searchFormType">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{}canisterType">
  *       &lt;sequence>
- *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="operator" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="realClass" type="{}classType"/>
  *         &lt;element name="actions" type="{}actionFieldType" maxOccurs="unbounded"/>
  *         &lt;element name="fields" type="{}searchFieldType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -34,16 +33,15 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "searchFormType", propOrder = {
-    "name",
     "operator",
     "realClass",
     "actions",
     "fields"
 })
-public class SearchFormType {
+public class SearchFormType
+    extends CanisterType
+{
 
-    @XmlElement(required = true)
-    protected String name;
     @XmlElement(required = true)
     protected String operator;
     @XmlElement(required = true)
@@ -52,30 +50,6 @@ public class SearchFormType {
     protected List<ActionFieldType> actions;
     @XmlElement(required = true)
     protected List<SearchFieldType> fields;
-
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
 
     /**
      * Gets the value of the operator property.

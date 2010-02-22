@@ -24,6 +24,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _Search_QNAME = new QName("", "search");
     private final static QName _Form_QNAME = new QName("", "form");
     private final static QName _Class_QNAME = new QName("", "Class");
     private final static QName _Task_QNAME = new QName("", "task");
@@ -37,107 +38,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AssociationType }
+     * Create an instance of {@link FileFieldType }
      * 
      */
-    public AssociationType createAssociationType() {
-        return new AssociationType();
-    }
-
-    /**
-     * Create an instance of {@link SearchFormType }
-     * 
-     */
-    public SearchFormType createSearchFormType() {
-        return new SearchFormType();
-    }
-
-    /**
-     * Create an instance of {@link ClassType }
-     * 
-     */
-    public ClassType createClassType() {
-        return new ClassType();
-    }
-
-    /**
-     * Create an instance of {@link SearchFieldType }
-     * 
-     */
-    public SearchFieldType createSearchFieldType() {
-        return new SearchFieldType();
-    }
-
-    /**
-     * Create an instance of {@link VirtualFieldType }
-     * 
-     */
-    public VirtualFieldType createVirtualFieldType() {
-        return new VirtualFieldType();
-    }
-
-    /**
-     * Create an instance of {@link FormFieldType }
-     * 
-     */
-    public FormFieldType createFormFieldType() {
-        return new FormFieldType();
-    }
-
-    /**
-     * Create an instance of {@link GenericClassReference }
-     * 
-     */
-    public GenericClassReference createGenericClassReference() {
-        return new GenericClassReference();
-    }
-
-    /**
-     * Create an instance of {@link ActionFieldType }
-     * 
-     */
-    public ActionFieldType createActionFieldType() {
-        return new ActionFieldType();
-    }
-
-    /**
-     * Create an instance of {@link GenericAttributes }
-     * 
-     */
-    public GenericAttributes createGenericAttributes() {
-        return new GenericAttributes();
-    }
-
-    /**
-     * Create an instance of {@link GenericClass }
-     * 
-     */
-    public GenericClass createGenericClass() {
-        return new GenericClass();
-    }
-
-    /**
-     * Create an instance of {@link GenericAssociations }
-     * 
-     */
-    public GenericAssociations createGenericAssociations() {
-        return new GenericAssociations();
-    }
-
-    /**
-     * Create an instance of {@link WorkflowTaskType }
-     * 
-     */
-    public WorkflowTaskType createWorkflowTaskType() {
-        return new WorkflowTaskType();
-    }
-
-    /**
-     * Create an instance of {@link GenericUpdate }
-     * 
-     */
-    public GenericUpdate createGenericUpdate() {
-        return new GenericUpdate();
+    public FileFieldType createFileFieldType() {
+        return new FileFieldType();
     }
 
     /**
@@ -149,51 +54,59 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ModelChoiceType }
+     * Create an instance of {@link GenericClassReference }
      * 
      */
-    public ModelChoiceType createModelChoiceType() {
-        return new ModelChoiceType();
+    public GenericClassReference createGenericClassReference() {
+        return new GenericClassReference();
     }
 
     /**
-     * Create an instance of {@link Batch }
+     * Create an instance of {@link FormFieldType }
      * 
      */
-    public Batch createBatch() {
-        return new Batch();
+    public FormFieldType createFormFieldType() {
+        return new FormFieldType();
     }
 
     /**
-     * Create an instance of {@link GenericCreate }
+     * Create an instance of {@link WorkflowTaskType }
      * 
      */
-    public GenericCreate createGenericCreate() {
-        return new GenericCreate();
+    public WorkflowTaskType createWorkflowTaskType() {
+        return new WorkflowTaskType();
     }
 
     /**
-     * Create an instance of {@link GenInfoType }
+     * Create an instance of {@link GenericClass }
      * 
      */
-    public GenInfoType createGenInfoType() {
-        return new GenInfoType();
+    public GenericClass createGenericClass() {
+        return new GenericClass();
     }
 
     /**
-     * Create an instance of {@link GenericDelete }
+     * Create an instance of {@link GenericUpdate }
      * 
      */
-    public GenericDelete createGenericDelete() {
-        return new GenericDelete();
+    public GenericUpdate createGenericUpdate() {
+        return new GenericUpdate();
     }
 
     /**
-     * Create an instance of {@link AspectType }
+     * Create an instance of {@link SearchFormType }
      * 
      */
-    public AspectType createAspectType() {
-        return new AspectType();
+    public SearchFormType createSearchFormType() {
+        return new SearchFormType();
+    }
+
+    /**
+     * Create an instance of {@link AttributeType }
+     * 
+     */
+    public AttributeType createAttributeType() {
+        return new AttributeType();
     }
 
     /**
@@ -205,11 +118,163 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GenericDelete }
+     * 
+     */
+    public GenericDelete createGenericDelete() {
+        return new GenericDelete();
+    }
+
+    /**
+     * Create an instance of {@link GenericCreate }
+     * 
+     */
+    public GenericCreate createGenericCreate() {
+        return new GenericCreate();
+    }
+
+    /**
+     * Create an instance of {@link GenericAssociations }
+     * 
+     */
+    public GenericAssociations createGenericAssociations() {
+        return new GenericAssociations();
+    }
+
+    /**
+     * Create an instance of {@link SearchFieldType }
+     * 
+     */
+    public SearchFieldType createSearchFieldType() {
+        return new SearchFieldType();
+    }
+
+    /**
+     * Create an instance of {@link AspectType }
+     * 
+     */
+    public AspectType createAspectType() {
+        return new AspectType();
+    }
+
+    /**
+     * Create an instance of {@link GenericAttributes }
+     * 
+     */
+    public GenericAttributes createGenericAttributes() {
+        return new GenericAttributes();
+    }
+
+    /**
+     * Create an instance of {@link Mapping }
+     * 
+     */
+    public Mapping createMapping() {
+        return new Mapping();
+    }
+
+    /**
+     * Create an instance of {@link AttachContentInfo }
+     * 
+     */
+    public AttachContentInfo createAttachContentInfo() {
+        return new AttachContentInfo();
+    }
+
+    /**
+     * Create an instance of {@link Classes }
+     * 
+     */
+    public Classes createClasses() {
+        return new Classes();
+    }
+
+    /**
+     * Create an instance of {@link VirtualFieldType }
+     * 
+     */
+    public VirtualFieldType createVirtualFieldType() {
+        return new VirtualFieldType();
+    }
+
+    /**
+     * Create an instance of {@link ClassType }
+     * 
+     */
+    public ClassType createClassType() {
+        return new ClassType();
+    }
+
+    /**
+     * Create an instance of {@link ModelChoiceType }
+     * 
+     */
+    public ModelChoiceType createModelChoiceType() {
+        return new ModelChoiceType();
+    }
+
+    /**
+     * Create an instance of {@link GenInfoType }
+     * 
+     */
+    public GenInfoType createGenInfoType() {
+        return new GenInfoType();
+    }
+
+    /**
+     * Create an instance of {@link ActionFieldType }
+     * 
+     */
+    public ActionFieldType createActionFieldType() {
+        return new ActionFieldType();
+    }
+
+    /**
+     * Create an instance of {@link Batch }
+     * 
+     */
+    public Batch createBatch() {
+        return new Batch();
+    }
+
+    /**
+     * Create an instance of {@link ValueType }
+     * 
+     */
+    public ValueType createValueType() {
+        return new ValueType();
+    }
+
+    /**
+     * Create an instance of {@link AssociationType }
+     * 
+     */
+    public AssociationType createAssociationType() {
+        return new AssociationType();
+    }
+
+    /**
      * Create an instance of {@link FormType }
      * 
      */
     public FormType createFormType() {
         return new FormType();
+    }
+
+    /**
+     * Create an instance of {@link EnumType }
+     * 
+     */
+    public EnumType createEnumType() {
+        return new EnumType();
+    }
+
+    /**
+     * Create an instance of {@link FieldType }
+     * 
+     */
+    public FieldType createFieldType() {
+        return new FieldType();
     }
 
     /**
@@ -229,67 +294,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Classes }
+     * Create an instance of {@link JAXBElement }{@code <}{@link SearchFormType }{@code >}}
      * 
      */
-    public Classes createClasses() {
-        return new Classes();
-    }
-
-    /**
-     * Create an instance of {@link EnumType }
-     * 
-     */
-    public EnumType createEnumType() {
-        return new EnumType();
-    }
-
-    /**
-     * Create an instance of {@link AttachContentInfo }
-     * 
-     */
-    public AttachContentInfo createAttachContentInfo() {
-        return new AttachContentInfo();
-    }
-
-    /**
-     * Create an instance of {@link AttributeType }
-     * 
-     */
-    public AttributeType createAttributeType() {
-        return new AttributeType();
-    }
-
-    /**
-     * Create an instance of {@link ValueType }
-     * 
-     */
-    public ValueType createValueType() {
-        return new ValueType();
-    }
-
-    /**
-     * Create an instance of {@link FileFieldType }
-     * 
-     */
-    public FileFieldType createFileFieldType() {
-        return new FileFieldType();
-    }
-
-    /**
-     * Create an instance of {@link Mapping }
-     * 
-     */
-    public Mapping createMapping() {
-        return new Mapping();
-    }
-
-    /**
-     * Create an instance of {@link FieldType }
-     * 
-     */
-    public FieldType createFieldType() {
-        return new FieldType();
+    @XmlElementDecl(namespace = "", name = "search", substitutionHeadNamespace = "", substitutionHeadName = "canister")
+    public JAXBElement<SearchFormType> createSearch(SearchFormType value) {
+        return new JAXBElement<SearchFormType>(_Search_QNAME, SearchFormType.class, null, value);
     }
 
     /**

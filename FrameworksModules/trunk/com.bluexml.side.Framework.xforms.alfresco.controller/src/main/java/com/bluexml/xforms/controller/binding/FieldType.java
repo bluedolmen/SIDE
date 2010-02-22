@@ -18,7 +18,6 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="uniqueName" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="appearance" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="shortName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="mandatory" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="displayLabel" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -33,7 +32,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "fieldType", propOrder = {
     "uniqueName",
-    "appearance",
     "shortName",
     "mandatory",
     "displayLabel"
@@ -42,8 +40,6 @@ public class FieldType {
 
     @XmlElement(required = true)
     protected String uniqueName;
-    @XmlElement(required = true)
-    protected String appearance;
     @XmlElement(required = true)
     protected String shortName;
     protected boolean mandatory;
@@ -72,30 +68,6 @@ public class FieldType {
      */
     public void setUniqueName(String value) {
         this.uniqueName = value;
-    }
-
-    /**
-     * Gets the value of the appearance property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAppearance() {
-        return appearance;
-    }
-
-    /**
-     * Sets the value of the appearance property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAppearance(String value) {
-        this.appearance = value;
     }
 
     /**

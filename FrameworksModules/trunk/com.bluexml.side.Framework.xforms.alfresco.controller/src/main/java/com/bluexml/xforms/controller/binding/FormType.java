@@ -19,11 +19,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;extension base="{}canisterType">
  *       &lt;sequence>
- *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="contentEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="field" type="{}formFieldType" maxOccurs="unbounded"/>
  *         &lt;element name="virtual" type="{}virtualFieldType" maxOccurs="unbounded"/>
  *         &lt;element name="reference" type="{}referenceType" maxOccurs="unbounded"/>
  *         &lt;element name="fileField" type="{}fileFieldType" maxOccurs="unbounded"/>
+ *         &lt;element name="modelChoice" type="{}modelChoiceType" maxOccurs="unbounded"/>
  *         &lt;element name="realClass" type="{}classType"/>
  *       &lt;/sequence>
  *     &lt;/extension>
@@ -35,20 +36,21 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "formType", propOrder = {
-    "name",
     "contentEnabled",
+    "field",
     "virtual",
     "reference",
     "fileField",
+    "modelChoice",
     "realClass"
 })
 public class FormType
     extends CanisterType
 {
 
-    @XmlElement(required = true)
-    protected String name;
     protected boolean contentEnabled;
+    @XmlElement(required = true)
+    protected List<FormFieldType> field;
     @XmlElement(required = true)
     protected List<VirtualFieldType> virtual;
     @XmlElement(required = true)
@@ -56,31 +58,9 @@ public class FormType
     @XmlElement(required = true)
     protected List<FileFieldType> fileField;
     @XmlElement(required = true)
+    protected List<ModelChoiceType> modelChoice;
+    @XmlElement(required = true)
     protected ClassType realClass;
-
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
 
     /**
      * Gets the value of the contentEnabled property.
@@ -96,6 +76,35 @@ public class FormType
      */
     public void setContentEnabled(boolean value) {
         this.contentEnabled = value;
+    }
+
+    /**
+     * Gets the value of the field property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the field property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getField().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link FormFieldType }
+     * 
+     * 
+     */
+    public List<FormFieldType> getField() {
+        if (field == null) {
+            field = new ArrayList<FormFieldType>();
+        }
+        return this.field;
     }
 
     /**
@@ -183,6 +192,35 @@ public class FormType
             fileField = new ArrayList<FileFieldType>();
         }
         return this.fileField;
+    }
+
+    /**
+     * Gets the value of the modelChoice property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the modelChoice property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getModelChoice().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ModelChoiceType }
+     * 
+     * 
+     */
+    public List<ModelChoiceType> getModelChoice() {
+        if (modelChoice == null) {
+            modelChoice = new ArrayList<ModelChoiceType>();
+        }
+        return this.modelChoice;
     }
 
     /**
