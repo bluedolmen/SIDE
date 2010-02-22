@@ -61,7 +61,6 @@ import com.bluexml.xforms.generator.GeneratorInterface.AssociationCardinality;
 import com.bluexml.xforms.generator.GeneratorInterface.AssociationKind;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
-import com.bluexml.xforms.generator.forms.renderable.forms.RenderableSearchField;
 import com.bluexml.xforms.generator.tools.ClasseComparator;
 import com.bluexml.xforms.generator.tools.ModelTools;
 import com.bluexml.xforms.messages.MsgId;
@@ -119,6 +118,18 @@ public class FormGeneratorsManager {
 		}
 	}
 
+	public class SearchFieldDataBean {
+		public final String defaultOp;
+		public final List<OperatorBean> listOp;
+
+		public SearchFieldDataBean(String defaultOp, List<OperatorBean> listOp) {
+			super();
+			this.defaultOp = defaultOp;
+			this.listOp = listOp;
+		}
+
+	}
+
 	private static final CommonFactory commonFactory = CommonFactoryImpl.init();
 
 	/** The Constant ALFRESCO_NAME_ASSOCIATION. */
@@ -126,12 +137,18 @@ public class FormGeneratorsManager {
 
 	private static Map<FormElement, String> uniqueNames = new HashMap<FormElement, String>();
 
-	private static Comparator<OperatorBean> operatorBeanComparator = new Comparator<OperatorBean>() {
+	private static Comparator<OperatorBean> operatorBeanComparatorId = new Comparator<OperatorBean>() {
+		public int compare(OperatorBean o1, OperatorBean o2) {
+			return o1.id.compareTo(o2.id);
+		}
+	};
+
+	private static Comparator<OperatorBean> operatorBeanComparatorLabel = new Comparator<OperatorBean>() {
 		public int compare(OperatorBean o1, OperatorBean o2) {
 			return o1.label.compareTo(o2.label);
 		}
 	};
-
+	
 	/** The set of all operators that are available. */
 	private Set<OperatorBean> operatorPool;
 
@@ -536,7 +553,7 @@ public class FormGeneratorsManager {
 
 	// 
 	private void buildOperatorsPool() {
-		operatorPool = new TreeSet<OperatorBean>(operatorBeanComparator); // FIXME: remove
+		operatorPool = new TreeSet<OperatorBean>(operatorBeanComparatorId); // FIXME: remove
 		// comparator
 		// char
 		operatorPool.add(new OperatorBean("contains", "Contains"));
@@ -1237,74 +1254,15 @@ public class FormGeneratorsManager {
 	 * equivalent set already exists, its id is returned. Otherwise, this set is registered with a
 	 * new id that's returned.
 	 * 
-	 * @param field
+	 * @param searchField
 	 * @return the id, a zero padded sequence number starting from 1
 	 */
-	public String getOperatorListId(RenderableSearchField<? extends SearchField> field) {
+	public String getSearchOperatorsListId(SearchField searchField) {
 		String resultId;
-		String defaultFieldOp = null;
-		ModelElement formField = field.getFormElement();
-		//
-		// the values must be kept in sync with names in the metamodel. The value chosen as default
-		// for a type should also be the same default in the controller
-		String defaultTypeOp = null;
-		//
-		// build the list of operators for this field
-		List<OperatorBean> opList = new ArrayList<OperatorBean>();
-		if (formField instanceof CharSearchField) {
-			defaultTypeOp = "is";
-			CharSearchField localField = (CharSearchField) formField;
-			defaultFieldOp = localField.getDefaultOperator().getName();
-			EList<CharFieldSearchOperators> fieldOps = localField.getOperators();
-			for (CharFieldSearchOperators op : fieldOps) {
-				opList.add(getOperatorFromPool(op.getName()));
-			}
-		} else if (formField instanceof DateSearchField) {
-			defaultTypeOp = "exactly";
-			DateSearchField localField = (DateSearchField) formField;
-			defaultFieldOp = localField.getDefaultOperator().getName();
-			EList<DateFieldSearchOperators> fieldOps = localField.getOperators();
-			for (DateFieldSearchOperators op : fieldOps) {
-				opList.add(getOperatorFromPool(op.getName()));
-			}
-		} else if (formField instanceof NumericalSearchField) {
-			defaultTypeOp = "exactly";
-			NumericalSearchField localField = (NumericalSearchField) formField;
-			defaultFieldOp = localField.getDefaultOperator().getName();
-			EList<NumericalFieldSearchOperators> fieldOps = localField.getOperators();
-			for (NumericalFieldSearchOperators op : fieldOps) {
-				opList.add(getOperatorFromPool(op.getName()));
-			}
-		} else if (formField instanceof ChoiceSearchField) {
-			defaultTypeOp = "all";
-			ChoiceSearchField localField = (ChoiceSearchField) formField;
-			defaultFieldOp = localField.getDefaultOperator().getName();
-			EList<ChoiceFieldSearchOperators> fieldOps = localField.getOperators();
-			for (ChoiceFieldSearchOperators op : fieldOps) {
-				opList.add(getOperatorFromPool(op.getName()));
-			}
-		} else if (formField instanceof FileSearchField) {
-			defaultTypeOp = "fileType";
-			FileSearchField localField = (FileSearchField) formField;
-			EList<FileFieldSearchOperators> fieldOps = localField.getOperators();
-			defaultFieldOp = localField.getDefaultOperator().getName();
-			for (FileFieldSearchOperators op : fieldOps) {
-				opList.add(getOperatorFromPool(op.getName()));
-			}
-		}
-		// if empty list, add the default op from either the field or that type
-		if (opList.size() == 0) {
-			if (StringUtils.trimToNull(defaultFieldOp) != null) {
-				opList.add(getOperatorFromPool(defaultFieldOp));
-			} else {
-				opList.add(getOperatorFromPool(defaultTypeOp));
-			}
-		}
-		// sort the list <-- this is MANDATORY for the reusing of operator sets to happen
-		Collections.sort(opList, operatorBeanComparator);
+		SearchFieldDataBean sfDataBean = getSearchFieldDataBean(searchField);
 
 		// test whether the list already exists
-		resultId = testOperatorList(opList);
+		resultId = testOperatorList(sfDataBean.listOp);
 
 		// if so, return the id
 		if (resultId != null) {
@@ -1313,8 +1271,105 @@ public class FormGeneratorsManager {
 		// if not, register the list and return id
 		Formatter formatter = new Formatter();
 		resultId = formatter.format("%06d", operatorsEnumsMap.keySet().size() + 1).toString();
-		operatorsEnumsMap.put(resultId, opList);
+		operatorsEnumsMap.put(resultId, sfDataBean.listOp);
 		return resultId;
+	}
+
+	public String getSearchFieldDefaultOperator(SearchField searchField) {
+		SearchFieldDataBean sfDataBean = getSearchFieldDataBean(searchField);
+		return sfDataBean.defaultOp;
+	}
+
+	/**
+	 * Computes the list of operators for a search field and defines a default operator.
+	 * 
+	 * @param searchField
+	 * @return the bean that is computed. Default operator is always filled. List may be empty.
+	 */
+	private SearchFieldDataBean getSearchFieldDataBean(SearchField searchField) {
+		//
+		// the values must be kept in sync with names in the metamodel. The value chosen as default
+		// for a type should also be the same default in the controller.
+
+		// the id/name of the default op specified in the search field
+		String fieldOp = null;
+		// the default op we consider as the most suitable default for the field type
+		String defaultTypeOp = null;
+
+		//
+		// build the list of operators for this field
+		List<OperatorBean> listOp = new ArrayList<OperatorBean>();
+		if (searchField instanceof CharSearchField) {
+			defaultTypeOp = "is";
+			CharSearchField localField = (CharSearchField) searchField;
+			CharFieldSearchOperators defaultOperator = localField.getDefaultOperator();
+			if (defaultOperator != null) {
+				fieldOp = defaultOperator.getName();
+			}
+			EList<CharFieldSearchOperators> fieldOps = localField.getOperators();
+			for (CharFieldSearchOperators op : fieldOps) {
+				listOp.add(getOperatorFromPool(op.getName()));
+			}
+		} else if (searchField instanceof DateSearchField) {
+			defaultTypeOp = "exactly";
+			DateSearchField localField = (DateSearchField) searchField;
+			DateFieldSearchOperators defaultOperator = localField.getDefaultOperator();
+			if (defaultOperator != null) {
+				fieldOp = defaultOperator.getName();
+			}
+			EList<DateFieldSearchOperators> fieldOps = localField.getOperators();
+			for (DateFieldSearchOperators op : fieldOps) {
+				listOp.add(getOperatorFromPool(op.getName()));
+			}
+		} else if (searchField instanceof NumericalSearchField) {
+			defaultTypeOp = "exactly";
+			NumericalSearchField localField = (NumericalSearchField) searchField;
+			NumericalFieldSearchOperators defaultOperator = localField.getDefaultOperator();
+			if (defaultOperator != null) {
+				fieldOp = defaultOperator.getName();
+			}
+			EList<NumericalFieldSearchOperators> fieldOps = localField.getOperators();
+			for (NumericalFieldSearchOperators op : fieldOps) {
+				listOp.add(getOperatorFromPool(op.getName()));
+			}
+		} else if (searchField instanceof ChoiceSearchField) {
+			defaultTypeOp = "all";
+			ChoiceSearchField localField = (ChoiceSearchField) searchField;
+			ChoiceFieldSearchOperators defaultOperator = localField.getDefaultOperator();
+			if (defaultOperator != null) {
+				fieldOp = defaultOperator.getName();
+			}
+			EList<ChoiceFieldSearchOperators> fieldOps = localField.getOperators();
+			for (ChoiceFieldSearchOperators op : fieldOps) {
+				listOp.add(getOperatorFromPool(op.getName()));
+			}
+		} else if (searchField instanceof FileSearchField) {
+			defaultTypeOp = "fileType";
+			FileSearchField localField = (FileSearchField) searchField;
+			EList<FileFieldSearchOperators> fieldOps = localField.getOperators();
+			FileFieldSearchOperators defaultOperator = localField.getDefaultOperator();
+			if (defaultOperator != null) {
+				fieldOp = defaultOperator.getName();
+			}
+			for (FileFieldSearchOperators op : fieldOps) {
+				listOp.add(getOperatorFromPool(op.getName()));
+			}
+		}
+		// if empty list, add the default op from either the field or that type
+		if (listOp.size() == 0) {
+			if (StringUtils.trimToNull(fieldOp) == null) {
+				fieldOp = defaultTypeOp;
+			}
+			listOp.add(getOperatorFromPool(fieldOp));
+		} else {
+			if (fieldOp == null) {
+				fieldOp = listOp.get(0).id;
+			}
+		}
+		// sort the list <-- this is MANDATORY for the reusing of operator sets to happen
+		Collections.sort(listOp, operatorBeanComparatorLabel);
+
+		return new SearchFieldDataBean(fieldOp, listOp);
 	}
 
 	/**
