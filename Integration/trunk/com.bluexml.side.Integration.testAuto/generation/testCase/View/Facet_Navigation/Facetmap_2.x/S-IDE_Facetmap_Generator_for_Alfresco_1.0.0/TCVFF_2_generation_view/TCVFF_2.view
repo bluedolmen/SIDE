@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" name="TCVFF_2">
-  <views xsi:type="view:FacetMap" name="Personne (FacetMap)" suffix="">
-    <children xsi:type="view:TextField" name="Nom">
-      <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_2d2ngB-TEd-liuDrxrfK0Q" name="TCVFF_2">
+  <views xsi:type="view:FacetMap" xmi:id="_2d2ngR-TEd-liuDrxrfK0Q" name="PersonneF" prefix="" suffix="">
+    <children xsi:type="view:TextField" xmi:id="_2d2ngh-TEd-liuDrxrfK0Q" name="Nom">
+      <mapTo href="TCVFF_2.dt#_3ywk9h-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:TextField" name="Prénom">
-      <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+    <children xsi:type="view:TextField" xmi:id="_2d2ngx-TEd-liuDrxrfK0Q" name="Prenom">
+      <mapTo href="TCVFF_2.dt#_3ywk9x-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:IntegerField" name="Age">
-      <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+    <children xsi:type="view:IntegerField" xmi:id="_2d4csB-TEd-liuDrxrfK0Q" name="Age">
+      <mapTo href="TCVFF_2.dt#_3ywk-B-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:TextField" name="Mobilité">
-      <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.3"/>
+    <children xsi:type="view:TextField" xmi:id="_2d4csR-TEd-liuDrxrfK0Q" name="Mobilite">
+      <mapTo href="TCVFF_2.dt#_3ywk-R-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:TextField" name="Permis B">
-      <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.4"/>
+    <children xsi:type="view:TextField" xmi:id="_2d4csh-TEd-liuDrxrfK0Q" name="PermisB">
+      <mapTo href="TCVFF_2.dt#_3ywk-h-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:DataList" name="Personne (Data List)">
-      <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
-      <children xsi:type="view:TextField" name="Nom">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+    <children xsi:type="view:DataList" xmi:id="_2d5DwB-TEd-liuDrxrfK0Q" name="Personne">
+      <mapTo href="TCVFF_2.dt#_3ywk9B-TEd-liuDrxrfK0Q"/>
+      <children xsi:type="view:TextField" xmi:id="_9FGBQB-TEd-liuDrxrfK0Q" name="nom">
+        <mapTo href="TCVFF_2.dt#_3ywk9h-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:TextField" name="Prénom">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+      <children xsi:type="view:TextField" xmi:id="_9FGBQR-TEd-liuDrxrfK0Q" name="prenom">
+        <mapTo href="TCVFF_2.dt#_3ywk9x-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:IntegerField" name="Age">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+      <children xsi:type="view:IntegerField" xmi:id="_9FGBQh-TEd-liuDrxrfK0Q" name="age">
+        <mapTo href="TCVFF_2.dt#_3ywk-B-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:TextField" name="Mobilité">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.3"/>
+      <children xsi:type="view:TextField" xmi:id="_9FGBQx-TEd-liuDrxrfK0Q" name="mobilite">
+        <mapTo href="TCVFF_2.dt#_3ywk-R-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:TextField" name="Permis B">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.4"/>
+      <children xsi:type="view:TextField" xmi:id="_9FGBRB-TEd-liuDrxrfK0Q" name="permisB">
+        <mapTo href="TCVFF_2.dt#_3ywk-h-TEd-liuDrxrfK0Q"/>
       </children>
-      <viewOf xsi:type="clazz:Clazz" href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+      <viewOf xsi:type="clazz:Clazz" href="TCVFF_2.dt#_3ywk9B-TEd-liuDrxrfK0Q"/>
     </children>
-    <viewOf xsi:type="clazz:Clazz" href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+    <viewOf xsi:type="clazz:Clazz" href="TCVFF_2.dt#_3ywk9B-TEd-liuDrxrfK0Q"/>
   </views>
-  <composedViews name="testComposedView">
-    <children xsi:type="view:DataList" name="Personne (Data List)">
-      <children xsi:type="view:TextField" name="Nom">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+  <composedViews xmi:id="_2d5Dxh-TEd-liuDrxrfK0Q" name="testComposedView">
+    <children xsi:type="view:DataList" xmi:id="_2d5Dxx-TEd-liuDrxrfK0Q" name="Personne">
+      <children xsi:type="view:TextField" xmi:id="_8JD20B-TEd-liuDrxrfK0Q" name="nom">
+        <mapTo href="TCVFF_2.dt#_3ywk9h-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:IntegerField" name="Age">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+      <children xsi:type="view:TextField" xmi:id="_8JD20R-TEd-liuDrxrfK0Q" name="prenom">
+        <mapTo href="TCVFF_2.dt#_3ywk9x-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:TextField" name="Mobilité">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.3"/>
+      <children xsi:type="view:IntegerField" xmi:id="_8JD20h-TEd-liuDrxrfK0Q" name="age">
+        <mapTo href="TCVFF_2.dt#_3ywk-B-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:TextField" name="Permis B">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.4"/>
+      <children xsi:type="view:TextField" xmi:id="_8JD20x-TEd-liuDrxrfK0Q" name="mobilite">
+        <mapTo href="TCVFF_2.dt#_3ywk-R-TEd-liuDrxrfK0Q"/>
       </children>
-      <disabled xsi:type="view:TextField" name="Prénom">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
-      </disabled>
-      <viewOf xsi:type="clazz:Clazz" href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+      <children xsi:type="view:TextField" xmi:id="_8JD21B-TEd-liuDrxrfK0Q" name="permisB">
+        <mapTo href="TCVFF_2.dt#_3ywk-h-TEd-liuDrxrfK0Q"/>
+      </children>
+      <viewOf xsi:type="clazz:Clazz" href="TCVFF_2.dt#_3ywk9B-TEd-liuDrxrfK0Q"/>
     </children>
-    <children xsi:type="view:DataList" name="Formation (Data List)">
-      <children xsi:type="view:TextField" name="Besoin entreprise">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4/@attributes.0"/>
+    <children xsi:type="view:DataList" xmi:id="_2d5DzR-TEd-liuDrxrfK0Q" name="Formation">
+      <children xsi:type="view:TextField" xmi:id="_7NxTQB-TEd-liuDrxrfK0Q" name="besoinEntreprise">
+        <mapTo href="TCVFF_2.dt#_3ywlCB-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:TextField" name="Envie Salarié">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4/@attributes.1"/>
+      <children xsi:type="view:TextField" xmi:id="_7NxTQR-TEd-liuDrxrfK0Q" name="envieSalarie">
+        <mapTo href="TCVFF_2.dt#_3ywlCR-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:IntegerField" name="Date souhaitée">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4/@attributes.3"/>
+      <children xsi:type="view:TextField" xmi:id="_7NxTQh-TEd-liuDrxrfK0Q" name="theme">
+        <mapTo href="TCVFF_2.dt#_3ywlCh-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:TextField" name="Durée">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4/@attributes.4"/>
+      <children xsi:type="view:IntegerField" xmi:id="_7NxTQx-TEd-liuDrxrfK0Q" name="dateSouhaitee">
+        <mapTo href="TCVFF_2.dt#_3ywlCx-TEd-liuDrxrfK0Q"/>
       </children>
-      <disabled xsi:type="view:TextField" name="Thème">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4/@attributes.2"/>
-      </disabled>
-      <viewOf xsi:type="clazz:Clazz" href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4"/>
+      <children xsi:type="view:TextField" xmi:id="_7NxTRB-TEd-liuDrxrfK0Q" name="duree">
+        <mapTo href="TCVFF_2.dt#_3ywlDB-TEd-liuDrxrfK0Q"/>
+      </children>
+      <viewOf xsi:type="clazz:Clazz" href="TCVFF_2.dt#_3ywlBh-TEd-liuDrxrfK0Q"/>
     </children>
   </composedViews>
-  <composedViews name="vuePourDocDetail">
-    <children xsi:type="view:DataList" name="Personne (Data List)">
-      <children xsi:type="view:TextField" name="Nom">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+  <composedViews xmi:id="_2d5D0x-TEd-liuDrxrfK0Q" name="vuePourDocDetail">
+    <children xsi:type="view:DataList" xmi:id="_2d5D1B-TEd-liuDrxrfK0Q" name="Personne">
+      <children xsi:type="view:TextField" xmi:id="_52kPwB-TEd-liuDrxrfK0Q" name="nom">
+        <mapTo href="TCVFF_2.dt#_3ywk9h-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:TextField" name="Prénom">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+      <children xsi:type="view:TextField" xmi:id="_52kPwR-TEd-liuDrxrfK0Q" name="prenom">
+        <mapTo href="TCVFF_2.dt#_3ywk9x-TEd-liuDrxrfK0Q"/>
       </children>
-      <children xsi:type="view:IntegerField" name="Age">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+      <children xsi:type="view:IntegerField" xmi:id="_52kPwh-TEd-liuDrxrfK0Q" name="age">
+        <mapTo href="TCVFF_2.dt#_3ywk-B-TEd-liuDrxrfK0Q"/>
       </children>
-      <disabled xsi:type="view:TextField" name="Mobilité">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.3"/>
-      </disabled>
-      <disabled xsi:type="view:TextField" name="Permis B">
-        <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.4"/>
-      </disabled>
-      <viewOf xsi:type="clazz:Clazz" href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+      <children xsi:type="view:TextField" xmi:id="_52kPwx-TEd-liuDrxrfK0Q" name="mobilite">
+        <mapTo href="TCVFF_2.dt#_3ywk-R-TEd-liuDrxrfK0Q"/>
+      </children>
+      <children xsi:type="view:TextField" xmi:id="_52k20B-TEd-liuDrxrfK0Q" name="permisB">
+        <mapTo href="TCVFF_2.dt#_3ywk-h-TEd-liuDrxrfK0Q"/>
+      </children>
+      <viewOf xsi:type="clazz:Clazz" href="TCVFF_2.dt#_3ywk9B-TEd-liuDrxrfK0Q"/>
     </children>
-    <disabled xsi:type="view:DataList"/>
+    <disabled xsi:type="view:DataList" xmi:id="_2d5D2h-TEd-liuDrxrfK0Q"/>
   </composedViews>
 </view:ViewCollection>
