@@ -1,19 +1,21 @@
 WORKSPACE=/Users/davidabad/.hudson/jobs/SIDE_Enterprise_Product_Builder/workspace
-#WORKSPACE=/Users/davidabad/Workspace2.0
-SIDE_HOME=$WORKSPACE/S-IDE
-#BUILDER_HOME=$SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/productBuilder
-BUILDER_HOME=/Users/davidabad/Workspace2.0/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/productBuilder
-
-#REPO_BUILDER=$SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE/scripts/m2ArchiveBuilderForSIDE.sh
-
 EclipseZIP=/Users/davidabad/Archive/eclipse3.5.1ForSIDE.zip
 EclipseDeltaPack=/Users/davidabad/Archive/eclipse-3.5.1-delta-pack.tar.gz
+
+
+
+SIDE_HOME=$WORKSPACE/S-IDE
+BUILDER_HOME=$SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/productBuilder
+#BUILDER_HOME=/Users/davidabad/Workspace2.0/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/productBuilder
 
 WORKDIR=$WORKSPACE/work
 
 ECLIPSE_BUILDER=$WORKDIR/eclipse
 ECLIPSE_TOBUILD=$WORKSPACE/sources
-#ECLIPSE_TOBUILD=$ECLIPSE_BUILDER
+
+SIDE_BUILDS=$WORKSPACE/dist
+SIDE_BUILDS_PUBLIC=/Users/davidabad/Desktop/dist
+
 echo "=========="
 echo WORKSPACE			=$WORKSPACE 
 echo SIDE_HOME			=$SIDE_HOME
@@ -25,22 +27,7 @@ echo ECLIPSE_BUILDER	=$ECLIPSE_BUILDER
 echo ECLIPSE_TOBUILD	=$ECLIPSE_TOBUILD
 echo "=========="
 
-
-#cd $WORKSPACE
-#svn co http://www.bluexml.com/svn/private/S-IDE
-#rm -rf $SIDE_HOME
-#mkdir -p $SIDE_HOME
-
-#cd $SIDE_HOME
-#echo "== Update S-IDE =="
-#svn update
-
-
-# build mavenRepo and includes depndencies
-#sh $REPO_BULDER
-
 ## Eclipse preparation
-
 
 echo "== Eclipse =="
 rm -rf $WORKDIR
@@ -65,7 +52,7 @@ for f in `find $SIDE_HOME -type d -name *feature`; do
      cp -rfv $f $ECLIPSE_TOBUILD/features
 done
 
-
+## Building
 echo "== clean previous build =="
 rm -rf $BUILDER_HOME/dist
 mkdir -p $BUILDER_HOME/dist
@@ -73,3 +60,10 @@ echo "== run builder =="
 cd $BUILDER_HOME
 echo $BUILDER_HOME
 ant pde-build2
+
+## copy side RCP
+echo "== Copy builds to shared folder =="
+rm -rf $SIDE_BUILDS_PUBLIC
+mkdir -p $SIDE_BUILDS_PUBLIC
+cp -rf $SIDE_BUILDS/* $SIDE_BUILDS_PUBLIC
+chmod a+r $SIDE_BUILDS_PUBLIC/*
