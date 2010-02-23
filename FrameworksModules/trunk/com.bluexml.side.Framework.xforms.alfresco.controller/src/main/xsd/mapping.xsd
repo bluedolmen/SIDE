@@ -208,7 +208,7 @@
 			<xsd:element name="pick" type="xsd:string" />
 			<!--  -->
 			<!-- if present, gives the total number of UI input controls for the search field -->
-			<xs:attribute name="inputs" use="optional" />
 		</xsd:sequence>
+		<xsd:attribute name="inputs" use="optional" />
 	</xsd:complexType>
 </xsd:schema>
