@@ -83,6 +83,7 @@
 		<property name="policyComponent" ref="policyComponent" />
 		<property name="filterer" ref="synchronizationFilterer" />		
 		<property name="synchroNodeService" ref="synchronizationNodeService" />
+		<property name="synchroNodeServiceImpl" ref="synchronizationNodeServiceImpl" />
 		<property name="schemaCreation" ref="synchronizationSchemaCreator" />
 	</bean>
 
@@ -133,12 +134,23 @@
 		<property name="filterer" ref="synchronizationFilterer" />	
 	</bean>
 	
+	<bean id="synchronizationNodeServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeServiceImpl" init-method="init">
+		<property name="nodeService" ref="nodeService" />
+		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="databaseDictionary" ref="databaseDictionary" />
+		<property name="transactionListener" ref="synchronizationTransactionListener" />		
+		<property name="filterer" ref="synchronizationFilterer" />
+		<property name="nodeHelper" ref="nodeHelper" />		
+		<property name="synchronizationDialect" ref="defaultSynchronizationDialect" />
+		<property name="policyComponent" ref="policyComponent" />
+	</bean>
+	
 	<bean id="synchronizationNodeService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="proxyInterfaces">
             <value>com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeService</value>
         </property>
-        <property name="target">
-			<bean id="synchronizationNodeServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeServiceImpl" init-method="init">
+        <property name="target" ref="synchronizationNodeServiceImpl">
+			<!--<bean id="synchronizationNodeServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeServiceImpl" init-method="init">
 		 		<property name="nodeService" ref="nodeService" />
 				<property name="dictionaryService" ref="dictionaryService" />
 				<property name="databaseDictionary" ref="databaseDictionary" />
@@ -148,7 +160,7 @@
 				<property name="synchronizationDialect" ref="defaultSynchronizationDialect" />
 				<property name="policyComponent" ref="policyComponent" />
 			</bean>
-        </property>
+        --></property>
         <property name="transactionManager" ref="transactionManager" />
         <property name="transactionAttributes">
         	<props>
