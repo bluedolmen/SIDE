@@ -167,21 +167,21 @@
               <attributes xmi:id="_7yU08ODhEd6LINoz-y_wfg" documentation="" description="" name="SignatureDate" title="Signature Date" typ="Date"/>
               <attributes xmi:id="_tXQLIeDkEd69Cd3WIdkURA" documentation="" description="" name="ValidityPeriod" title="Validity Period"/>
             </classSet>
-            <associationSet xmi:id="_06UqsNRREd6d24BtuZ-cgQ" description="" name="response" title="in reply to">
+            <associationSet xmi:id="_06UqsNRREd6d24BtuZ-cgQ" documentation="" description="" name="response" title="in reply to">
               <firstEnd xmi:id="_06VRwNRREd6d24BtuZ-cgQ" name="response" title="" navigable="true" linkedClass="_06PLINRREd6d24BtuZ-cgQ"/>
               <secondEnd xmi:id="_06VRwdRREd6d24BtuZ-cgQ" name="following" title="" navigable="true" linkedClass="_06EMANRREd6d24BtuZ-cgQ"/>
             </associationSet>
             <associationSet xmi:id="_06V40NRREd6d24BtuZ-cgQ" documentation="" description="" name="concerns" title="concerns">
-              <firstEnd xmi:id="_06V40dRREd6d24BtuZ-cgQ" name="from" title="" cardMax="-1" navigable="true" linkedClass="_06S1gdRREd6d24BtuZ-cgQ"/>
-              <secondEnd xmi:id="_06V40tRREd6d24BtuZ-cgQ" name="for" title="" cardMin="1" linkedClass="_06S1hdRREd6d24BtuZ-cgQ"/>
+              <firstEnd xmi:id="_06V40dRREd6d24BtuZ-cgQ" name="transmitter" title="" cardMax="-1" navigable="true" linkedClass="_06S1gdRREd6d24BtuZ-cgQ"/>
+              <secondEnd xmi:id="_06V40tRREd6d24BtuZ-cgQ" name="receiver" title="" cardMin="1" linkedClass="_06S1hdRREd6d24BtuZ-cgQ"/>
             </associationSet>
-            <associationSet xmi:id="_06V409RREd6d24BtuZ-cgQ" description="" name="fromEntity" title="from the entity">
-              <firstEnd xmi:id="_06V41NRREd6d24BtuZ-cgQ" name="for" title="" cardMax="-1" linkedClass="_06EMANRREd6d24BtuZ-cgQ"/>
-              <secondEnd xmi:id="_06V41dRREd6d24BtuZ-cgQ" name="from" title="" navigable="true" linkedClass="_06S1kNRREd6d24BtuZ-cgQ"/>
+            <associationSet xmi:id="_06V409RREd6d24BtuZ-cgQ" documentation="" description="" name="fromEntity" title="from the entity">
+              <firstEnd xmi:id="_06V41NRREd6d24BtuZ-cgQ" name="receiver" title="" cardMax="-1" linkedClass="_06EMANRREd6d24BtuZ-cgQ"/>
+              <secondEnd xmi:id="_06V41dRREd6d24BtuZ-cgQ" name="transmitter" title="" navigable="true" linkedClass="_06S1kNRREd6d24BtuZ-cgQ"/>
             </associationSet>
-            <associationSet xmi:id="_06V41tRREd6d24BtuZ-cgQ" description="" name="toEntity" title="towards the entity">
+            <associationSet xmi:id="_06V41tRREd6d24BtuZ-cgQ" documentation="" description="" name="toEntity" title="towards the entity">
               <firstEnd xmi:id="_06V419RREd6d24BtuZ-cgQ" name="" title="" cardMax="-1" linkedClass="_06PLINRREd6d24BtuZ-cgQ"/>
-              <secondEnd xmi:id="_06V42NRREd6d24BtuZ-cgQ" name="from" title="" navigable="true" linkedClass="_06S1kNRREd6d24BtuZ-cgQ"/>
+              <secondEnd xmi:id="_06V42NRREd6d24BtuZ-cgQ" name="transmitter" title="" navigable="true" linkedClass="_06S1kNRREd6d24BtuZ-cgQ"/>
             </associationSet>
             <associationSet xmi:id="_qtbwkODhEd6LINoz-y_wfg" documentation="" description="" name="isComposedOf" title="Is composed of">
               <firstEnd xmi:id="_qtbwkeDhEd6LINoz-y_wfg" name="" title="" linkedClass="_pJnNYeDhEd6LINoz-y_wfg"/>
