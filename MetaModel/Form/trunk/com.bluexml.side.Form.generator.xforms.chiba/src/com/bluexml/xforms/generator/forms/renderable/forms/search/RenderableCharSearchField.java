@@ -11,7 +11,6 @@ import com.bluexml.side.form.SearchField;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
-import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindHolder;
 import com.bluexml.xforms.generator.forms.renderable.forms.RenderableSearchField;
 import com.bluexml.xforms.generator.forms.rendered.search.RenderedSearchField;
 import com.bluexml.xforms.messages.MsgId;
@@ -37,12 +36,14 @@ public class RenderableCharSearchField extends RenderableSearchField<CharSearchF
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
 			boolean isInIMultRepeater) {
 		// the bind
-		ModelElementBindHolder mebRoot = getBind();
-		String nodeset = path + formElement.getId();
-		mebRoot.setNodeset(nodeset);
+//		ModelElementBindHolder mebRoot = getBind();
+////		String prefix = "instance('minstance')/";
+//		String prefix = "";
+//		String nodeset = prefix + path + formElement.getId();
+//		mebRoot.setNodeset(nodeset);
 		//
 		Rendered rendered = new RenderedSearchField();
-		rendered.addModelElement(mebRoot);
+//		rendered.addModelElement(mebRoot);
 		return rendered;
 	}
 

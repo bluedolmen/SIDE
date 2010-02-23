@@ -46,7 +46,7 @@ public abstract class RenderableSearchField<F extends SearchField> extends
 	@Override
 	public Path getPath(String parentPath, Stack<Renderable> parents,
 			Stack<Rendered> renderedParents) {
-		return ROOT_RELATIVE;
+		return new Path(PathType.relativePath, formElement.getId() + "/");
 	}
 
 	
@@ -56,16 +56,6 @@ public abstract class RenderableSearchField<F extends SearchField> extends
 	@Override
 	public void compute() {
 		// nothing to do: search fields are not supposed to have children.
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.generator.forms.Renderable#render(java.lang.String, java.util.Stack, java.util.Stack, boolean)
-	 */
-	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
-			boolean isInIMultRepeater) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/**

@@ -5,12 +5,15 @@ package com.bluexml.xforms.generator.forms.renderable.forms.search;
 
 import java.util.Stack;
 
+import javax.xml.namespace.QName;
+
 import com.bluexml.side.form.SearchField;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.forms.RenderableSearchField;
 import com.bluexml.xforms.generator.forms.rendered.search.RenderedSearchInput;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * An input for widgets of search fields.
@@ -51,10 +54,14 @@ public class RenderableSearchInput extends Renderable {
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
 			boolean isInIMultRepeater) {
-		ModelElementBindSimple inputBind = new ModelElementBindSimple(nodeset);
-		refField.getBind().addSubBind(inputBind);
+		ModelElementBindSimple inputBind = new ModelElementBindSimple(path + nodeset);
+		inputBind.setType(new QName(MsgId.INT_TYPE_XSD_STRING.getText()));
 
-		return new RenderedSearchInput(inputBind, refField.getFormElement().getId() + "_" + nodeset);
+		RenderedSearchInput rendered = new RenderedSearchInput(inputBind, refField.getFormElement()
+				.getId()
+				+ "_" + nodeset);
+		rendered.addModelElement(inputBind);
+		return rendered;
 	}
 
 }
