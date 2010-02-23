@@ -2211,9 +2211,12 @@ public class Utils {
 
 			if (changes) {
 				Attribute version = productDoc.getRootElement().getAttribute("version");
+				String oldVersion=version.getValue();
 				String[] pattern = getNumVersionPattern();
 				String newversion = updatepom(version.getValue().split("\\."), pattern);
 				version.setValue(newversion);
+				System.out.println("sideProduct version :"+oldVersion);
+				System.out.println("sideProduct new version :"+newversion);
 				// save changes
 				saveXMLFile(product, productDoc);
 			}

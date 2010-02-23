@@ -140,8 +140,10 @@ public class Application {
 
 		// mise à jour du fichier side.product (utilisé pour la creation des
 		// RCP)
-		String repo = Utils.getRepositoryCopyPath();
-		File product = new File(repo + "/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product");
+		// String repo = Utils.getRepositoryCopyPath();
+		// File product = new File(repo + "/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product");
+		String brandingPath=Utils.getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding");
+		File product = new File(brandingPath + "/side.product");
 		File plugin_featureRepo = new File(Utils.getBuildDirectory());
 		boolean sideProductChanges = Utils.updateProduct(product, plugin_featureRepo);
 		if (sideProductChanges) {
@@ -657,12 +659,13 @@ public class Application {
 
 						boolean exists = (new File(fileFeaturePath)).exists();
 						if (exists) {
-
 							out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + "\">\n";
 							out += "\t\t\t\t<include name=\"plugin.xml\" />\n";
+							if (projects[i].endsWith("branding")) {
+								out += "\t\t\t\t<include name=\"side.product\" />\n";
+							}
 							out += "\t\t\t</fileset>\n";
 						}
-
 					} // si 'feature' est prï¿½sent
 					else if (projects[i].indexOf("feature") != -1) {
 						out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + "\">\n";
