@@ -44,6 +44,7 @@ public class SchemaCreation implements DictionaryListener {
 	private boolean ready = true;
 	
 	private Set<QName> replicatedModels = new HashSet<QName>();
+	private Map<QName,CheckTableStatus> statusByModel = new HashMap<QName, CheckTableStatus>();
 	
 	enum CheckTableStatus {
 		CREATE_TABLES,
@@ -60,36 +61,53 @@ public class SchemaCreation implements DictionaryListener {
 
 	}
 	
-	private void processModel(QName modelName) {
-		
+	private void createFromModel(QName modelName) {
+
 		if (ready) {
 			Connection connection = DataSourceUtils.getConnection(dataSource);
 			
 			List<CreateTableStatement> createStatements = doCreateStatement(modelName);
 			
 			CheckTableStatus checkTableStatus = doCheckStatus(createStatements, connection);
+			statusByModel.put(modelName, checkTableStatus);
 			
 			if (checkTableStatus == CheckTableStatus.CREATE_TABLES) {
+		
 				boolean creationSuccess = doExecuteCreateStatements(createStatements, connection);
 				if (! creationSuccess) {
 					logger.error("Creation of tables failed");
 					ready = false;
-				} else {
-					boolean replicationSuccess = doExecuteReplication(modelName);
-					if (!replicationSuccess) {
-						logger.error("Replication of existing data failed");
-						ready = false;
-					}
 				}
+				
+				DataSourceUtils.releaseConnection(connection, dataSource);
+				
+			} else {
+				if (logger.isDebugEnabled())
+					logger.debug("Creation of model \"" + modelName + "\" was not performed since the previous process marked the schema as not ready or creation has yet be done");
 			}
-	
-			replicatedModels.add(modelName);
 			
-			DataSourceUtils.releaseConnection(connection, dataSource);
+		}
+		
+	}
+	
+	private void replicateFromModel(QName modelName){
+		
+		CheckTableStatus checkTableStatus = statusByModel.get(modelName);
+
+		if (ready && CheckTableStatus.CREATE_TABLES.equals(checkTableStatus)) {
+
+			boolean replicationSuccess = doExecuteReplication(modelName);
+			if (!replicationSuccess) {
+				logger.error("Replication of existing data failed");
+				ready = false;
+			}
+
 		} else {
 			if (logger.isDebugEnabled())
-				logger.debug("Replication of model \"" + modelName + "\" was not performed since the previous process marked the schema as not ready");
+				logger.debug("Replication of model \"" + modelName + "\" was not performed since the previous process marked the schema as not ready or replication has yet be done");
 		}
+		
+		replicatedModels.add(modelName);
 	}
 	
 	public boolean isReady() {
@@ -315,7 +333,10 @@ public class SchemaCreation implements DictionaryListener {
 			logger.debug("New models: [" + StringUtils.join(acceptableModelNames.iterator(),",") + "]");
 		
 		for (QName modelName : acceptableModelNames) {
-			processModel(modelName);
+			createFromModel(modelName);
+		}
+		for (QName modelName : acceptableModelNames) {
+			replicateFromModel(modelName);
 		}
 	}
 
