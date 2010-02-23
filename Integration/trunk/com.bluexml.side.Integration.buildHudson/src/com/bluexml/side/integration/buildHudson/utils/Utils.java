@@ -58,7 +58,8 @@ public class Utils {
 			properties = new Properties();
 
 			properties.load(fileStream);
-			//System.out.println("Properties File loaded :" + props.getAbsolutePath());
+			// System.out.println("Properties File loaded :" +
+			// props.getAbsolutePath());
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -1317,7 +1318,7 @@ public class Utils {
 	public static void updateVersionNumber(String projectName) {
 
 		if (projectName.length() > 0) {
-			String[] pattern = ouvrirFichier("build.properties").getProperty("number-pattern").split("\\.");
+			String[] pattern = getNumVersionPattern();
 
 			// En fonction du type du projet (feature ou plugin)
 			// on ira regarder soit dans le MANIFEST.MF ou alors dans le
@@ -1494,7 +1495,7 @@ public class Utils {
 	 */
 	public static void updateVersionNumberPom(String projectName) {
 
-		String[] pattern = ouvrirFichier("build.properties").getProperty("number-pattern").split("\\.");
+		String[] pattern = getNumVersionPattern();
 
 		// chemin vers le pom.xml
 		String fileFeaturePath = projectName;
@@ -1558,6 +1559,11 @@ public class Utils {
 			e.printStackTrace();
 		}
 
+	}
+
+	private static String[] getNumVersionPattern() {
+		String[] pattern = ouvrirFichier("build.properties").getProperty("number-pattern").split("\\.");
+		return pattern;
 	}
 
 	/**
@@ -2148,9 +2154,9 @@ public class Utils {
 	}
 
 	public static boolean updateProduct(File product, File plugin_featureRepo) {
-		System.out.println("  Product to update :"+product);
-		System.out.println("  Pluginq/Features Repository :"+plugin_featureRepo);
-		
+		System.out.println("  Product to update :" + product);
+		System.out.println("  Pluginq/Features Repository :" + plugin_featureRepo);
+
 		boolean changes = false;
 		try {
 			Document productDoc = buildJdomDocument(product);
@@ -2204,6 +2210,10 @@ public class Utils {
 			}
 
 			if (changes) {
+				Attribute version = productDoc.getRootElement().getAttribute("version");
+				String[] pattern = getNumVersionPattern();
+				String newversion = updatepom(version.getValue().split("\\."), pattern);
+				version.setValue(newversion);
 				// save changes
 				saveXMLFile(product, productDoc);
 			}

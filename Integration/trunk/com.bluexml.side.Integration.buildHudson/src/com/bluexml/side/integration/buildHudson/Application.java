@@ -141,7 +141,7 @@ public class Application {
 		// mise à jour du fichier side.product (utilisé pour la creation des
 		// RCP)
 		String repo = Utils.getRepositoryCopyPath();
-		File product = new File(repo + "/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product");
+		File product = new File(repo + "/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product");
 		File plugin_featureRepo = new File(Utils.getBuildDirectory());
 		boolean sideProductChanges = Utils.updateProduct(product, plugin_featureRepo);
 		if (sideProductChanges) {
