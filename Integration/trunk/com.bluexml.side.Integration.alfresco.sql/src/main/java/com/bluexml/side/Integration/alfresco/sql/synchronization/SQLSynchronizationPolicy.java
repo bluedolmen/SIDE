@@ -1,6 +1,7 @@
 package com.bluexml.side.Integration.alfresco.sql.synchronization;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import org.apache.log4j.Logger;
 
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.Filterer;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeService;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeServiceImpl;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.SchemaCreation;
 
 public class SQLSynchronizationPolicy implements 
@@ -130,7 +132,8 @@ public class SQLSynchronizationPolicy implements
 	}
 
 	public void onCreateAssociation(AssociationRef associationRef) {
-		if (filterer.accept(associationRef)) {
+		Collection<AssociationRef> synchronizedAssocs = synchroNodeServiceImpl.getSynchronizedAssociations();
+		if (filterer.accept(associationRef) && !synchronizedAssocs.contains(associationRef)) {
 			logger.debug("Synchronization policy, CREATE ASSOCIATION");
 			synchroNodeService.createAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
 		}
@@ -169,6 +172,7 @@ public class SQLSynchronizationPolicy implements
 	private PolicyComponent policyComponent;
 	private Filterer filterer;
 	private NodeService synchroNodeService; /* BlueXML NodeService */
+	private NodeServiceImpl synchroNodeServiceImpl;
 	private SchemaCreation schemaCreation;
 	
 	public void setPolicyComponent(PolicyComponent policyComponent_) {
@@ -181,6 +185,10 @@ public class SQLSynchronizationPolicy implements
 	
 	public void setSynchroNodeService(NodeService nodeService_) {
 		synchroNodeService = nodeService_;
+	}
+	
+	public void setSynchroNodeServiceImpl(NodeServiceImpl nodeService_) {
+		synchroNodeServiceImpl = nodeService_;
 	}
 
 	public void setSchemaCreation(SchemaCreation schemaCreation_) {
