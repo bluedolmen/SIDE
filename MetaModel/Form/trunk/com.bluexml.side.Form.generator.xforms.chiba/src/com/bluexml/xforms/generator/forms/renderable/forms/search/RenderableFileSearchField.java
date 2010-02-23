@@ -5,7 +5,7 @@ package com.bluexml.xforms.generator.forms.renderable.forms.search;
 
 import java.util.Stack;
 
-import com.bluexml.side.form.CharSearchField;
+import com.bluexml.side.form.FileSearchField;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.SearchField;
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -16,14 +16,14 @@ import com.bluexml.xforms.generator.forms.rendered.search.RenderedSearchField;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
- * The widget for CharSearchField's.
+ * The widget for FileSearchField's.
  * 
  * @author Amenel
  * 
  */
-public class RenderableCharSearchField extends RenderableSearchField<CharSearchField> {
+public class RenderableFileSearchField extends RenderableSearchField<FileSearchField> {
 
-	public RenderableCharSearchField(XFormsGenerator generationManager, FormElement parent,
+	public RenderableFileSearchField(XFormsGenerator generationManager, FormElement parent,
 			SearchField formElement) {
 		super(generationManager, parent, formElement);
 

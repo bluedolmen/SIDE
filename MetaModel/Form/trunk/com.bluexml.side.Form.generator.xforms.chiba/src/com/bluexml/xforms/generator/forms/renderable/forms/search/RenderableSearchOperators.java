@@ -54,8 +54,9 @@ public class RenderableSearchOperators extends Renderable {
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
 			boolean isInIMultRepeater) {
 		String nodeset = MsgId.INT_INSTANCE_SEARCH_OPCODE.getText();
-		// NOTE: the full nodeset for the bind MUST not be an absolute path: apparently, Chiba does
-		// not support xf:select elements that bind to sub-binds. Don't know whether this is part of
+
+		// NOTE: the path for the bind MUST not be an absolute path: apparently, Chiba does not
+		// support xf:select elements that bind to sub-binds. Don't know whether this is part of
 		// the XForms specs.
 		ModelElementBindSimple opBind = new ModelElementBindSimple(path + nodeset);
 		opBind.setType(new QName(MsgId.INT_TYPE_XSD_STRING.getText()));

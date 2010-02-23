@@ -21,7 +21,6 @@ import com.bluexml.xforms.messages.MsgId;
 public class RenderedSearchField extends Rendered {
 
 	public RenderedSearchField() {
-		super();
 		xformsElement = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		xformsElement.setAttribute("class", MsgId.INT_CSS_SEARCH_FIELD.getText());
 	}

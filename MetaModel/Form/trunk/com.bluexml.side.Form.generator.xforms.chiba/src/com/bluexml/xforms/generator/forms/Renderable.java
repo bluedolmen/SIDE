@@ -33,6 +33,9 @@ public abstract class Renderable {
 			absolutePath;
 	}
 
+	/** The generation manager. */
+	protected XFormsGenerator generationManager;
+
 	/**
 	 * The Class Path.<br>
 	 * Gives a path, either absolute or relative

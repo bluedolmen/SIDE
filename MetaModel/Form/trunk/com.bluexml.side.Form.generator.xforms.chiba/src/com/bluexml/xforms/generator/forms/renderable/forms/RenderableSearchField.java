@@ -6,13 +6,20 @@ package com.bluexml.xforms.generator.forms.renderable.forms;
 import java.util.Stack;
 
 import com.bluexml.side.form.CharSearchField;
+import com.bluexml.side.form.ChoiceSearchField;
+import com.bluexml.side.form.DateSearchField;
+import com.bluexml.side.form.FileSearchField;
 import com.bluexml.side.form.FormElement;
+import com.bluexml.side.form.NumericalSearchField;
 import com.bluexml.side.form.SearchField;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
-import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindHolder;
 import com.bluexml.xforms.generator.forms.renderable.forms.search.RenderableCharSearchField;
+import com.bluexml.xforms.generator.forms.renderable.forms.search.RenderableChoiceSearchField;
+import com.bluexml.xforms.generator.forms.renderable.forms.search.RenderableDateSearchField;
+import com.bluexml.xforms.generator.forms.renderable.forms.search.RenderableFileSearchField;
+import com.bluexml.xforms.generator.forms.renderable.forms.search.RenderableNumericalSearchField;
 
 /**
  * @author Amenel
@@ -21,13 +28,19 @@ import com.bluexml.xforms.generator.forms.renderable.forms.search.RenderableChar
 public abstract class RenderableSearchField<F extends SearchField> extends
 		RenderableFormElement<SearchField> {
 
-	private ModelElementBindHolder bind;
-	
 	public static Renderable getRenderable(XFormsGenerator generationManager, FormElement parent,
 			SearchField formElement) {
 		Renderable renderable = null;
 		if (formElement instanceof CharSearchField) {
 			return new RenderableCharSearchField(generationManager, parent, formElement);
+		} else if (formElement instanceof DateSearchField) {
+			return new RenderableDateSearchField(generationManager, parent, formElement);
+		} else if (formElement instanceof NumericalSearchField) {
+			return new RenderableNumericalSearchField(generationManager, parent, formElement);
+		} else if (formElement instanceof ChoiceSearchField) {
+			return new RenderableChoiceSearchField(generationManager, parent, formElement);
+		}if (formElement instanceof FileSearchField) {
+			return new RenderableFileSearchField(generationManager, parent, formElement);
 		}
 		return renderable;
 	}
@@ -56,23 +69,6 @@ public abstract class RenderableSearchField<F extends SearchField> extends
 	@Override
 	public void compute() {
 		// nothing to do: search fields are not supposed to have children.
-	}
-
-	/**
-	 * @return the root bind
-	 */
-	public ModelElementBindHolder getBind() {
-		if (bind == null) {
-			bind = new ModelElementBindHolder("");
-		}
-		return bind;
-	}
-
-	/**
-	 * @param bind 
-	 */
-	public void setRootBind(ModelElementBindHolder bind) {
-		this.bind = bind;
 	}
 
 }

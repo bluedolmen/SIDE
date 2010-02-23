@@ -136,7 +136,7 @@ public abstract class RenderableFormElement<FE extends FormElement> extends Rend
 						(FormGroup) formElement);
 			} else if (formElement instanceof StaticText) {
 				renderable = new RenderableStaticText(generationManager, formElement,
-						(StaticText) formElement);
+						(StaticText) formElement, null);
 			} else if (formElement instanceof SearchField) {
 				SearchField searchField = (SearchField) formElement;
 				renderable = RenderableSearchField.getRenderable(generationManager, formElement,
