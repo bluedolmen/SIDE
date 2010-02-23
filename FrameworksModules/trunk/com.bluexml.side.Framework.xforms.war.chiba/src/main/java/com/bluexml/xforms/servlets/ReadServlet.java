@@ -73,7 +73,7 @@ public class ReadServlet extends AbstractServlet {
 
 		try {
 			AlfrescoTransaction transaction = createTransaction(controller);
-			Document node = controller.getClass(transaction, dataType, dataId, null, false,
+			Document node = controller.getInstanceClass(transaction, dataType, dataId, null, false,
 					idAsServlet);
 			Source xmlSource = new DOMSource(node);
 			Result outputTarget = new StreamResult(resp.getOutputStream());
