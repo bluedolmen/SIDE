@@ -51,6 +51,24 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		DELETE
 	}
 	
+	private Collection<NodeRef> synchronizedNodes = new ArrayList<NodeRef>();
+	private Collection<AssociationRef> synchronizedAssociations = new ArrayList<AssociationRef>();
+	
+	/**
+	 * @return the synchronizedAssociations
+	 */
+	public Collection<AssociationRef> getSynchronizedAssociations() {
+		return synchronizedAssociations;
+	}
+
+	/**
+	 * @param synchronizedAssociations the synchronizedAssociations to set
+	 */
+	public void setSynchronizedAssociations(
+			Collection<AssociationRef> synchronizedAssociations) {
+		this.synchronizedAssociations = synchronizedAssociations;
+	}
+
 	private void createCore(NodeRef nodeRef) {
 		QName nodeType = nodeService.getType(nodeRef);
 		String type_name = nodeType.getLocalName();
@@ -111,11 +129,13 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	}
 
 	public void createWithAssociations(NodeRef nodeRef) {
-		createCore(nodeRef);
+		if (!synchronizedNodes.contains(nodeRef)){
+			createCore(nodeRef);
+			
+			createAllRelatedAssociations(nodeRef);
 		
-		createAllRelatedAssociations(nodeRef);
-	
-		invokeOnCreateNode(nodeRef);
+			invokeOnCreateNode(nodeRef);
+		}
 	}
 	
 	public void delete(NodeRef nodeRef)  {
@@ -199,6 +219,16 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 
 	public void createAssociation(NodeRef sourceNodeRef, NodeRef targetNodeRef, QName typeQName) {
 		
+		if (!isSynchronized(sourceNodeRef)){
+			createCore(sourceNodeRef);
+			synchronizedNodes.add(sourceNodeRef);
+		}
+		
+		if (!isSynchronized(targetNodeRef)){
+			createCore(targetNodeRef);
+			synchronizedNodes.add(targetNodeRef);
+		}
+		
 		String associationName = typeQName.getLocalName();
 		
 		Serializable sourceId = getDbId(sourceNodeRef);
@@ -212,6 +242,8 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		
 		if (executeSQLQuery(sql_query) > 0) {
 			invokeOnCreateAssociation(sourceNodeRef, targetNodeRef, typeQName);
+			AssociationRef assocRef = new AssociationRef(sourceNodeRef, typeQName, targetNodeRef);
+			synchronizedAssociations.add(assocRef);
 		}
 	}
 
@@ -336,6 +368,14 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 			throw new NodeServiceFailureException(e);
 		}
 	}
+	
+	private int executeSelectQuery(String sqlQuery){
+		try {
+			return transactionListener.executeSelectQuery(sqlQuery);
+		} catch (SQLException e) {
+			throw new NodeServiceFailureException(e);
+		}
+	}
 
 	private String getSQLFormatFromSerializable(Serializable property, PropertyDefinition propertyDefinition) {
 		String value = null;
@@ -423,6 +463,19 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		}
 		
 		return processedChildAssociationRefs;
+	}
+	
+	private boolean isSynchronized(NodeRef node){
+		QName type = nodeService.getType(node);
+		
+		String typeName = type.getLocalName();
+		String table = databaseDictionary.resolveClassAsTableName(typeName);
+		
+		Serializable id = getDbId(node);
+		
+		String sql_query = String.format("SELECT id FROM %1$s WHERE id = %2$s", table, id);
+
+		return executeSelectQuery(sql_query) == 1;
 	}
 
 	//
