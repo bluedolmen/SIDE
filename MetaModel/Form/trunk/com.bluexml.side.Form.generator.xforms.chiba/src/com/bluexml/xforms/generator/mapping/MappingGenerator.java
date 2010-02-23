@@ -989,16 +989,27 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 		EObject container = ((EObject) fieldRef).eContainer();
 		ModelElement realContainer = (ModelElement) formGenerator.getRealObject(container);
-		boolean result = classRef.equals(realContainer);
-		if (result == false) {
-			// the field ref's container may be a superclass of the class ref
-			for (Clazz parentClass : classRef.getGeneralizations()) {
-				if (checkClassAttributeInclusion(parentClass, fieldRef)) {
-					return true;
-				}
+		if (classRef.equals(realContainer) == true) {
+			return true;
+		}
+
+		// the field ref's container may be a superclass of the class ref
+		for (Clazz parentClass : classRef.getGeneralizations()) {
+			Clazz realParentClass = (Clazz) formGenerator.getRealObject(parentClass);
+			if (checkClassAttributeInclusion(realParentClass, fieldRef)) {
+				return true;
 			}
 		}
-		return result;
+
+		// the field ref's container may be one of the class' aspects
+		for (Aspect aspect : classRef.getAspects()) {
+			Aspect realAspect = (Aspect) formGenerator.getRealObject(aspect);
+			if (realAspect.equals(realContainer)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
