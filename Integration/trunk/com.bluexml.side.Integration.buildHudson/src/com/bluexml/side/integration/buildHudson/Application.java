@@ -125,6 +125,8 @@ public class Application {
 		// execBuild("buildSVN", "svnCommit");
 		// }
 
+				
+		
 		// create maven work folder and launch maven deploy
 		launchShScript("launch_maven.sh");
 
@@ -137,20 +139,11 @@ public class Application {
 			// les plugins et les features)
 			Utils.preTraitement();
 		}
-
-		// mise à jour du fichier side.product (utilisé pour la creation des
-		// RCP)
-		// String repo = Utils.getRepositoryCopyPath();
-		// File product = new File(repo + "/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product");
-		String brandingPath=Utils.getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding");
-		File product = new File(brandingPath + "/side.product");
-		File plugin_featureRepo = new File(Utils.getBuildDirectory());
-		boolean sideProductChanges = Utils.updateProduct(product, plugin_featureRepo);
-		if (sideProductChanges) {
-			System.out.println("- side.product updated");
-		} else {
-			System.out.println("- side.product no changes ");
-		}
+		// update side.product
+		Utils.updateProduct();
+		
+		// get modified files and copy them into svn local copy
+		Utils.copyToRepository();
 
 		// crï¿½ation du build.xml
 		System.out.println("\n\n- Crï¿½ation de " + Utils.getBuildPath() + File.separator + "build.xml");

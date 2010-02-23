@@ -886,9 +886,24 @@ public class Utils {
 			}
 		}
 
-		// fin affichage
+		
+	}
 
-		copyToRepository();
+	public static void updateProduct() {
+		// update side.product
+		// mise à jour du fichier side.product (utilisé pour la creation des
+		// RCP)
+		// String repo = Utils.getRepositoryCopyPath();
+		// File product = new File(repo + "/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product");
+		String brandingPath=Utils.getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding");
+		File product = new File(brandingPath + "/side.product");
+		File plugin_featureRepo = new File(Utils.getBuildDirectory());
+		boolean sideProductChanges = Utils.updateProduct(product, plugin_featureRepo);
+		if (sideProductChanges) {
+			System.out.println("- side.product updated");
+		} else {
+			System.out.println("- side.product no changes ");
+		}
 	}
 
 	public static String getRepositoryCopyPath() {
@@ -913,7 +928,6 @@ public class Utils {
 
 		}
 		if (Application.parametre) {
-
 			path = path + File.separator + "S-IDE" + File.separator + getProjectPath(projectName) + File.separator + "trunk" + File.separator + projectName;
 		} else {
 			if (projectName.indexOf("feature") == -1) {
