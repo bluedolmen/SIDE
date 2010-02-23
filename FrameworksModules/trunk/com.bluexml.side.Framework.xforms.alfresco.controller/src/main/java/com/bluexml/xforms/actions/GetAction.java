@@ -36,7 +36,7 @@ public class GetAction extends AbstractReadAction {
 	@Override
 	public Node resolve() throws ServletException {
 		Page currentPage = navigationPath.peekCurrentPage();
-		String dataType = currentPage.getFormName();
+		String formName = currentPage.getFormName();
 		Map<String, String> initParams = currentPage.getInitParams();
 		String dataId = currentPage.getDataId();
 		FormTypeEnum formType = currentPage.getFormType();
@@ -49,16 +49,16 @@ public class GetAction extends AbstractReadAction {
 		if (StringUtils.trimToNull(dataId) != null || node == null) {
 			if (formType == FormTypeEnum.FORM) {
 				node = controller
-						.getForm(transaction, dataType, dataId, initParams, formIsReadOnly);
+						.getInstanceForm(transaction, formName, dataId, initParams, formIsReadOnly);
 			} else if (formType == FormTypeEnum.CLASS) {
-				node = controller.getClass(transaction, dataType, dataId, initParams,
+				node = controller.getInstanceClass(transaction, formName, dataId, initParams,
 						formIsReadOnly, false);
 			} else if (formType == FormTypeEnum.WKFLW) {
-				node = getInstanceWorkflow(currentPage, dataType);
+				node = getInstanceWorkflow(currentPage, formName);
 			} else if ((formType == FormTypeEnum.LIST) || (formType == FormTypeEnum.SELECTOR)) {
-				return getInstanceListSelector(dataType, formType);
-				// } else if (formType == FormTypeEnum.SEARCH) {
-				// node = getInstanceSearch(currentPage, dataType);
+				return getInstanceListOrSelector(formName, formType);
+			} else if (formType == FormTypeEnum.SEARCH) {
+				node = controller.getInstanceSearch(currentPage, formName, initParams);
 			}
 		}
 
@@ -74,7 +74,7 @@ public class GetAction extends AbstractReadAction {
 	 * @param formType
 	 * @return the instance
 	 */
-	private Document getInstanceListSelector(String dataType, FormTypeEnum formType) {
+	private Document getInstanceListOrSelector(String dataType, FormTypeEnum formType) {
 		DocumentBuilder docBuilder = null;
 		try {
 			docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -102,7 +102,7 @@ public class GetAction extends AbstractReadAction {
 	}
 
 	/**
-	 * Returns the instance for workflow forms, which includes the instance for the data form. <br/>
+	 * Returns the instance for FormWorkflow forms, which includes the instance for the data form. <br/>
 	 * NOTE: the form name is expected in the returned instance (incl. process & task names), and
 	 * the data form is nested under the [form name] tag.
 	 * <p>
@@ -132,7 +132,7 @@ public class GetAction extends AbstractReadAction {
 		String dataId = currentPage.getDataId();
 		WorkflowTaskType taskType = controller.getWorkflowTaskType(currentPage.getFormName());
 		String dataFormName = taskType.getDataForm();
-		Document docForm = controller.getForm(transaction, dataFormName, dataId, initParams, false);
+		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId, initParams, false);
 		//
 		// we need to nest the data form instance under workflow
 		Element wkDocElt = docWkflw.getDocumentElement();

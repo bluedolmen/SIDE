@@ -55,6 +55,7 @@ import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.ObjectFactory;
+import com.bluexml.xforms.controller.binding.SearchFormType;
 import com.bluexml.xforms.controller.binding.ValueType;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.messages.MsgId;
@@ -290,14 +291,15 @@ public class MappingToolCommon {
 	 * Gets the class type.
 	 * 
 	 * @param type
-	 *            the type
+	 *            the type, under the form package + "." + name
 	 * 
 	 * @return the class type
 	 */
 	public ClassType getClassType(String type) {
 		List<ClassType> clazz = mapping.getClazz();
 		for (ClassType classType : clazz) {
-			if (type.equals(classTypeToString(classType))) {
+			String refType = classTypeToString(classType);
+			if (type.equals(refType)) {
 				return classType;
 			}
 		}
@@ -305,7 +307,7 @@ public class MappingToolCommon {
 	}
 
 	/**
-	 * Gets the form type.
+	 * Gets the form type that matches the given name.
 	 * 
 	 * @param formName
 	 *            the form name
@@ -326,6 +328,28 @@ public class MappingToolCommon {
 		return null;
 	}
 
+	/**
+	 * Gets the search form type that matches the given name.
+	 * 
+	 * @param formName
+	 *            the form name
+	 * 
+	 * @return the search form type
+	 */
+	public SearchFormType getSearchFormType(String formName) {
+		List<JAXBElement<? extends CanisterType>> elements = mapping.getCanister();
+		
+		for (JAXBElement<? extends CanisterType> element : elements) {
+			if (element.getValue() instanceof SearchFormType) {
+				SearchFormType formType = (SearchFormType) element.getValue();
+				if (formType.getName().equals(formName)) {
+					return formType;
+				}
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Gets (from the mapping) the WorkflowTaskType object that matches the name. Example:
 	 * "Evaluation_Demarrage" includes process "Evaluation" and task "Demarrage".

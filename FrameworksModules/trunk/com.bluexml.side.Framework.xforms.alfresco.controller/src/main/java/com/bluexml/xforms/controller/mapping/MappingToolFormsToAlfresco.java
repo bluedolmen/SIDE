@@ -61,8 +61,6 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
 			Node formNode) throws ServletException {
@@ -146,7 +144,6 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @param instance
 	 * @return
 	 * @throws ServletException
-	 * @throws ServletException
 	 */
 	public String transformsToJSON(AlfrescoTransaction transaction, String formName, Node formNode,
 			boolean shortPropertyNames) throws ServletException {
@@ -214,8 +211,6 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * 
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
 	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	private GenericClass persistFormElement(AlfrescoTransaction transaction, String formName,
@@ -344,8 +339,6 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 *            the alf class
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	// private void collectAssocs(AlfrescoTransaction transaction, Element
 	// element, FormType formType,
@@ -377,8 +370,6 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 *            the model choice element
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	private void collectModelChoices(AlfrescoTransaction transaction, GenericClass alfClass,
 			ModelChoiceType modelChoiceType, Element modelChoiceElement) throws ServletException {
@@ -401,7 +392,6 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @param value
 	 *            the value
 	 * @param at
-	 * @throws ServletException
 	 * @throws ServletException
 	 */
 	private void collectModelChoice(GenericClass alfClass, ModelChoiceType modelChoiceType,
@@ -438,8 +428,6 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @param targets
 	 *            the targets
 	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	private void collectTargets(AlfrescoTransaction transaction, GenericClass alfClass,

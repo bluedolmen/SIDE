@@ -25,12 +25,14 @@ import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.ModelChoiceType;
+import com.bluexml.xforms.controller.binding.SearchFormType;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
+import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class MappingTool.<br>
- * Delegates operations to 4 instances of MappingToolCommon
+ * Delegates operations to instances of MappingToolCommon
  */
 public class MappingTool {
 
@@ -45,6 +47,9 @@ public class MappingTool {
 
 	/** The mapping tool forms to alfresco. */
 	private MappingToolFormsToAlfresco mappingToolFormsToAlfresco;
+
+	/** The mapping tool forms to alfresco. */
+	private MappingToolSearch mappingToolSearch;
 
 	private Mapping mapping;
 
@@ -63,6 +68,7 @@ public class MappingTool {
 		mappingToolImplXFormsToAlfresco = new MappingToolClassFormsToAlfresco(mapping, controller);
 		mappingToolAlfrescoToForms = new MappingToolAlfrescoToForms(mapping, controller);
 		mappingToolFormsToAlfresco = new MappingToolFormsToAlfresco(mapping, controller);
+		mappingToolSearch = new MappingToolSearch(mapping, controller);
 	}
 
 	/**
@@ -234,6 +240,11 @@ public class MappingTool {
 				formIsReadOnly);
 	}
 
+	public Document getInstanceSearch(Page currentPage, String formName,
+			Map<String, String> initParams) {
+		return mappingToolSearch.getInstanceSearch(currentPage, formName, initParams);
+	}
+	
 	/**
 	 * New form instance.
 	 * 
@@ -248,19 +259,16 @@ public class MappingTool {
 	 *             the alfresco controller exception
 	 */
 	public Document newFormInstance(String formName, AlfrescoTransaction transaction,
-			Map<String, String> initParams, boolean formIsReadOnly)
-			throws ServletException {
+			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
 		return mappingToolAlfrescoToForms.newFormInstance(formName, transaction, initParams,
 				formIsReadOnly);
 	}
 
 	/**
-	 * Transform forms to alfresco.
+	 * Transform forms to alfresco. Builds a GenericClass for a form from the given node.
 	 * 
 	 * @param transaction
 	 *            the login
-	 * @param controller
-	 *            the controller
 	 * @param formName
 	 *            the form name
 	 * @param formNode
@@ -269,8 +277,6 @@ public class MappingTool {
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
 			Node formNode) throws ServletException {
@@ -278,6 +284,7 @@ public class MappingTool {
 	}
 
 	/**
+	 * Transforms the instance into a JSON string for the given form id.
 	 * 
 	 * @param transaction
 	 * @param alfrescoController
@@ -285,12 +292,24 @@ public class MappingTool {
 	 * @param instance
 	 * @return
 	 * @throws ServletException
-	 * @throws ServletException
 	 */
 	public String transformsToJSON(AlfrescoTransaction transaction, String formName, Node instance,
 			boolean shortPropertyNames) throws ServletException {
 		return mappingToolFormsToAlfresco.transformsToJSON(transaction, formName, instance,
 				shortPropertyNames);
+	}
+
+	/**
+	 * Transforms the instance to the format for searches wrt the given form id.
+	 * 
+	 * @param formName
+	 *            the id of the search form
+	 * @param instance
+	 * @return
+	 * @throws ServletException
+	 */
+	public String transformSearchForm(String formName, Node instance) throws ServletException {
+		return mappingToolSearch.transformSearchForm(formName, instance);
 	}
 
 	/**
@@ -387,7 +406,7 @@ public class MappingTool {
 		}
 		return ""; // normally, we should never get here (unless there are multiple violations)
 	}
-	
+
 	/**
 	 * Gets the suffix (specified at generation time) for read only forms.
 	 * 
@@ -400,9 +419,13 @@ public class MappingTool {
 	public boolean getDebugModeStatus() {
 		return mapping.getGenInfo().isDebugMode();
 	}
-	
+
 	public FormType getFormType(String refName) {
 		return mappingToolAlfrescoToForms.getFormType(refName);
+	}
+
+	public SearchFormType getSearchType(String refName) {
+		return mappingToolAlfrescoToForms.getSearchFormType(refName);
 	}
 
 	public WorkflowTaskType getWorkflowTaskType(String refName, boolean byId) {

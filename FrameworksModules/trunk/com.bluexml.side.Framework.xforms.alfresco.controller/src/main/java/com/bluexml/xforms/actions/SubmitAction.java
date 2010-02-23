@@ -72,8 +72,8 @@ public class SubmitAction extends AbstractTransactionalAction {
 		// if in search mode, a specific processing applies
 		if (isSearching) {
 			logger.debug("Redirecting after search mode");
-			logger.debug(" --> targetURL:'"+ submitURL + "'");
-			logger.debug(" --> search string:'"+ transactionId + "'");
+			logger.debug(" --> targetURL:'" + submitURL + "'");
+			logger.debug(" --> search string:'" + transactionId + "'");
 			String nextPageURL = submitURL;
 			nextPageURL += (submitURL.indexOf('?') == -1) ? "?" : "&";
 			nextPageURL += "search=" + transactionId;
@@ -147,6 +147,9 @@ public class SubmitAction extends AbstractTransactionalAction {
 		// persist instance
 		if (type == FormTypeEnum.CLASS) {
 			result = controller.persistClass(transaction, node, false);
+		} else if (type == FormTypeEnum.SEARCH) {
+			String formName = currentPage.getFormName();
+			result = controller.persistSearch(formName, node);
 		} else {
 			String formName = currentPage.getFormName();
 			String datatype = controller.getUnderlyingForm(formName);
@@ -159,7 +162,7 @@ public class SubmitAction extends AbstractTransactionalAction {
 				String propStr = StringUtils.trimToNull(pageInitParams
 						.get(MsgId.PARAM_SEARCH_USE_SHORT_NAMES.getText()));
 				boolean useShortPropertyNames = StringUtils.equals(propStr, "true");
-				
+
 				result = controller.persistFormJSON(transaction, datatype, node,
 						useShortPropertyNames);
 			} else {

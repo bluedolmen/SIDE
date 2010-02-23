@@ -71,6 +71,7 @@ import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.controller.mapping.MappingTool;
 import com.bluexml.xforms.controller.mapping.MappingToolCommon;
 import com.bluexml.xforms.controller.mapping.RepoContentInfoBean;
+import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 import com.thoughtworks.xstream.XStream;
@@ -447,7 +448,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
-	public Document getClass(AlfrescoTransaction transaction, String type, String id,
+	public Document getInstanceClass(AlfrescoTransaction transaction, String type, String id,
 			Map<String, String> initParams, boolean formIsReadOnly, boolean isServletRequest)
 			throws ServletException {
 		Document instance = null;
@@ -484,7 +485,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
-	public Document getForm(AlfrescoTransaction transaction, String type, String id,
+	public Document getInstanceForm(AlfrescoTransaction transaction, String type, String id,
 			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
 		Document instance = null;
 		// save some data for later
@@ -500,6 +501,20 @@ public class AlfrescoController {
 			throw new ServletException(e);
 		}
 		return instance;
+	}
+
+	/**
+	 * Gets an XForms instance document for a FormSearch form.
+	 * 
+	 * @param currentPage
+	 * @param formName
+	 *            the form Id
+	 * @param initParams
+	 * @return
+	 */
+	public Document getInstanceSearch(Page currentPage, String formName,
+			Map<String, String> initParams) {
+		return mappingTool.getInstanceSearch(currentPage, formName, initParams);
 	}
 
 	/**
@@ -671,6 +686,21 @@ public class AlfrescoController {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Persists a search form: collects the search info on search forms.
+	 * 
+	 * @param transaction
+	 * @param instance
+	 * @param isServletRequest
+	 * @return
+	 * @throws ServletException
+	 */
+	public String persistSearch(String formName, Node instance) throws ServletException {
+		// TODO
+		return mappingTool.transformSearchForm(formName, instance);
+
 	}
 
 	/**
@@ -1728,7 +1758,9 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Returns the data on the form on a specific JSON format.
+	 * Returns the data on the form in a specific JSON format. This is to be used with forms other
+	 * than FormSearch'es when called in search mode. If the form is a FormSearch, use
+	 * {@link #persistSearch(AlfrescoTransaction, Node, boolean)}
 	 * 
 	 * @param transaction
 	 * @param formName
@@ -1742,7 +1774,8 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Extracted from persistForm to provide an access to workflow actions.
+	 * Transforms the XForms instance into a GenericClass. Extracted from persistForm to provide an
+	 * access to workflow actions.
 	 * 
 	 * @param transaction
 	 * @param formName
@@ -1789,7 +1822,10 @@ public class AlfrescoController {
 	 */
 	public boolean isDynamicEnum(String type) {
 		EnumType enumType = mappingTool.getEnumType(type);
-		return enumType.isDynamic();
+		if (enumType != null) {
+			return enumType.isDynamic();
+		}
+		return false; //happens for search operators enums; they don't get into the mapping file
 	}
 
 	/**
@@ -2622,7 +2658,7 @@ public class AlfrescoController {
 		String namespaceURI = null; // to be set once
 		Map<QName, Serializable> properties = null; // to be set once
 
-		if (StringUtils.trimToNull(instanceId) == null) { 
+		if (StringUtils.trimToNull(instanceId) == null) {
 			logger.debug("  No patching performed: the instanceId is null");
 			return true;
 		}

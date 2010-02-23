@@ -720,6 +720,8 @@ public class NavigationManager {
 
 		if (formType == FormTypeEnum.FORM) {
 			base = MsgId.INT_DIRECTORY_FORM_FORMS.getText() + File.separatorChar + dataType;
+		} else if (formType == FormTypeEnum.SEARCH) {
+			base = MsgId.INT_DIRECTORY_FORM_SEARCH.getText() + File.separatorChar + dataType;
 		} else if (formType == FormTypeEnum.WKFLW) {
 			base = MsgId.INT_DIRECTORY_FORM_WKFLW.getText() + File.separatorChar + dataType;
 		} else if (formType == FormTypeEnum.LIST) {

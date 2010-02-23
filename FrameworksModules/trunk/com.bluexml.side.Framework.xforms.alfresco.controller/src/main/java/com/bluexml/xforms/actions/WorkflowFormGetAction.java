@@ -70,7 +70,7 @@ public class WorkflowFormGetAction extends AbstractReadAction {
 		String dataId = currentPage.getDataId();
 		WorkflowTaskType taskType = controller.getWorkflowTaskType(currentPage.getFormName());
 		String dataFormName = taskType.getDataForm();
-		Document docForm = controller.getForm(transaction, dataFormName, dataId, initParams, false);
+		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId, initParams, false);
 		//
 		// we need to nest the data form instance under workflow
 		Element wkDocElt = docWkflw.getDocumentElement();

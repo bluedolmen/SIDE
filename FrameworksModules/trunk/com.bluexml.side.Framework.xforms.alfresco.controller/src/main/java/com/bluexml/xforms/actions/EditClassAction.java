@@ -84,7 +84,7 @@ public class EditClassAction extends AbstractEditAction {
 	private String findRealDataType(AlfrescoController controller, String dataType, String dataId)
 			throws ServletException {
 		// FIXME do not get all class with all associations...
-		Node node = controller.getClass(transaction, dataType, dataId, null, false, false);
+		Node node = controller.getInstanceClass(transaction, dataType, dataId, null, false, false);
 		String realDataType = DOMUtil.getNodeValueByTagName(node, MsgId.INT_INSTANCE_SIDE_DATATYPE
 				.getText(), false);
 		if (realDataType == null) {
