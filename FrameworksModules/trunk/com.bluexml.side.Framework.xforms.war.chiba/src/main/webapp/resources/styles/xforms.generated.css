@@ -83,6 +83,25 @@ div.side_select_search_zone label {
 	padding-right: 5px;
 }
 
+/*
+ * SEARCH WIDGETS
+ */
+div.side_search_value label {
+	width: auto;
+}
+
+div.side_search_operator {
+	float: left;
+}
+
+div.side_search_operator select {
+	width: 200px;
+}
+
+/*
+ *
+ */
+ 
 /* make the text in read only textareas visible when in inline multiple forms */
 div.bxds_ro_textarea span.mediatype-text-html {
 	background: #A7BCFC;

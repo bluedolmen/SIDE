@@ -225,6 +225,9 @@ td {
 						if (rootPath.endsWith("/forms/selectors") || rootPath.endsWith("\\forms\\selectors")) {
 							formType = "&formType=selector";
 						}
+						if (rootPath.endsWith("/forms/search") || rootPath.endsWith("\\forms\\search")) {
+							formType = "&formType=search";
+						}
 						if (rootPath.endsWith("/forms/workflows") || rootPath.endsWith("\\forms\\workflows")) {
 							if (aFile.getName().endsWith("ProcessSelection.xhtml")) {
 								formType = "&formType=wkflwSel";
