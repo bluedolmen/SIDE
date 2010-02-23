@@ -67,7 +67,11 @@ public abstract class Renderable {
 	/** Static path : relative without a suffix. */
 	protected static Path ROOT_RELATIVE = new Path(PathType.relativePath, "");
 
-	/** Absolute path : root. */
+	/**
+	 * Absolute path : root. If a concrete renderable returns this, then its children's binding is
+	 * independent of their depth relatively to the nesting of renderables.<br/>
+	 * This has no link with the path in the nodeset.
+	 */
 	protected static Path ROOT_ABSOLUTE = new Path(PathType.absolutePath, "");
 
 	private static FormGeneratorsManager formGenerator;
