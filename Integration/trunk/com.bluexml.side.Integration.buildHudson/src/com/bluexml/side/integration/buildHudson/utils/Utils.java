@@ -58,7 +58,7 @@ public class Utils {
 			properties = new Properties();
 
 			properties.load(fileStream);
-			System.out.println("Properties File loaded :" + props.getAbsolutePath());
+			//System.out.println("Properties File loaded :" + props.getAbsolutePath());
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -2148,6 +2148,9 @@ public class Utils {
 	}
 
 	public static boolean updateProduct(File product, File plugin_featureRepo) {
+		System.out.println("  Product to update :"+product);
+		System.out.println("  Pluginq/Features Repository :"+plugin_featureRepo);
+		
 		boolean changes = false;
 		try {
 			Document productDoc = buildJdomDocument(product);

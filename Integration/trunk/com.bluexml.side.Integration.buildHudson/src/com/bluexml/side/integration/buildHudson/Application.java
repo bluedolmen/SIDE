@@ -146,6 +146,8 @@ public class Application {
 		boolean sideProductChanges = Utils.updateProduct(product, plugin_featureRepo);
 		if (sideProductChanges) {
 			System.out.println("- side.product updated");
+		} else {
+			System.out.println("- side.product no changes ");
 		}
 
 		// cr�ation du build.xml
