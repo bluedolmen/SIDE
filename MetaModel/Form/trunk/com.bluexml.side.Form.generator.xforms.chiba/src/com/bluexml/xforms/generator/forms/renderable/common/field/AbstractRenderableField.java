@@ -86,7 +86,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		}
 		rendered.addModelElement(meb);
 
-		String slabel = getTitle() + " : ";
+		String slabel = MsgPool.getMsg(MsgId.MSG_FIELD_LABEL_FORMAT, getTitle());
 
 		Element element = null;
 		if (isReadOnly()) {
@@ -541,13 +541,13 @@ public abstract class AbstractRenderableField extends Renderable {
 		Element filenameElement = XFormsGenerator.createElement("output",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		StringBuffer valueFilename = new StringBuffer();
-//		valueFilename.append("if (current()/");
-//		valueFilename.append(meb.getNodeset());
-//		valueFilename.append(" eq '') then '' else concat('");
-//		valueFilename.append(MsgPool.getMsg(MsgId.MSG_FILE_FIELD_FILENAME_TEMP));
-//		valueFilename.append("', current()/");
-//		valueFilename.append(meb.getNodeset());
-//		valueFilename.append(")");
+		// valueFilename.append("if (current()/");
+		// valueFilename.append(meb.getNodeset());
+		// valueFilename.append(" eq '') then '' else concat('");
+		// valueFilename.append(MsgPool.getMsg(MsgId.MSG_FILE_FIELD_FILENAME_TEMP));
+		// valueFilename.append("', current()/");
+		// valueFilename.append(meb.getNodeset());
+		// valueFilename.append(")");
 
 		String curNodeSet = "current()/" + meb.getNodeset();
 		valueFilename.append("if (");
@@ -563,8 +563,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		valueFilename.append("', ");
 		valueFilename.append(curNodeSet);
 		valueFilename.append("))");
-		
-		
+
 		filenameElement.setAttribute("value", valueFilename.toString());
 		filenameElement.setAttribute("mediatype", "text/html");
 		filenameDiv.addContent(filenameElement);
@@ -597,7 +596,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		action.addContent(recalculate);
 		input.addContent(action);
 		addHintAndMessages(input);
-		
+
 		widgetDiv.addContent(input); // #1480
 		element.addContent(widgetDiv);
 		return element;
