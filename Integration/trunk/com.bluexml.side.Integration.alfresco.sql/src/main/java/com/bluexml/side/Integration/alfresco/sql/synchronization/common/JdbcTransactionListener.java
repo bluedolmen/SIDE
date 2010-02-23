@@ -1,6 +1,7 @@
 package com.bluexml.side.Integration.alfresco.sql.synchronization.common;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -62,6 +63,36 @@ public class JdbcTransactionListener implements TransactionListener {
 				logger.debug("[executeSQLQuery] " + sqlQuery);
 			st = connection.createStatement();
 			rowCount = st.executeUpdate(sqlQuery);
+			if (logger.isDebugEnabled())
+				logger.debug("[executeSQLQuery] Row count: " + rowCount);
+		} catch (SQLException e) {
+			logger.error("[executeSQLQuery]", e);
+			throw(e);
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					logger.error("[executeSQLQuery]", e);
+				}
+				st = null;
+			}
+		}
+		
+		return rowCount;
+	}
+	
+	public int executeSelectQuery(String sqlQuery) throws SQLException {
+		Connection connection = getConnection();
+		Statement st = null;
+		int rowCount = -1;
+		try {
+			if (logger.isDebugEnabled())
+				logger.debug("[executeSQLQuery] " + sqlQuery);
+			st = connection.createStatement();
+			ResultSet results = st.executeQuery(sqlQuery);
+			results.last();
+			rowCount = results.getRow();
 			if (logger.isDebugEnabled())
 				logger.debug("[executeSQLQuery] Row count: " + rowCount);
 		} catch (SQLException e) {
