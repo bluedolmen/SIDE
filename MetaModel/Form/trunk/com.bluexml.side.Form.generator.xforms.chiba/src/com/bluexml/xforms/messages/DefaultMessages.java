@@ -75,6 +75,8 @@ public class DefaultMessages {
 			"",
 			"# 0: label/title of the field",
 			"field.is.mandatory=Field \"{0}\" is mandatory.",
+			"# 0: label/title of the field",
+			"field.label.format={0} :\\ ",
 			"",
 			"file.field.label=Choose a file:",
 			"file.field.filename.temporary=File uploaded to temporary location: ",

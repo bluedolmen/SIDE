@@ -49,6 +49,7 @@ public enum MsgId {
 	//
 	MSG_ASSOC_MANDATORY				("association.is.mandatory"),
 	MSG_DEFAULT_ERROR_MSG			("default.error.msg"), 
+	MSG_FIELD_LABEL_FORMAT			("field.label.format"),
 	MSG_FIELD_MANDATORY				("field.is.mandatory"),
 	MSG_FILE_FIELD_FILENAME_TEMP	("file.field.filename.temporary"),
 	MSG_FILE_FIELD_LABEL			("file.field.label"),
