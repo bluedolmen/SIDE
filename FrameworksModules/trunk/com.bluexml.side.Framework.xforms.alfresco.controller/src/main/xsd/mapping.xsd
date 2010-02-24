@@ -210,5 +210,6 @@
 			<!-- if present, gives the total number of UI input controls for the search field -->
 		</xsd:sequence>
 		<xsd:attribute name="inputs" use="optional" />
+		<xsd:attribute name="type" use="optional" />
 	</xsd:complexType>
 </xsd:schema>
