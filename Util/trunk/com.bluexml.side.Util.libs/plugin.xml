@@ -3,7 +3,7 @@
 <plugin>
   <extension point="org.eclipse.ui.views">
     <category id="com.bluexml.side" name="SIDE" />
-    <view category="com.bluexml.side" class="com.bluexml.side.util.libs.view.OutlineHTMLView" icon="icons/outlineView.png" id="com.bluexml.view.OutlineHTMLView" name="OutlineHTMLView" />
+    <view category="com.bluexml.side" class="com.bluexml.side.util.libs.view.OutlineHTMLView" icon="icons/outlineView.gif" id="com.bluexml.view.OutlineHTMLView" name="SIDE Outline" />
   </extension>
 </plugin>
 
