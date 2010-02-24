@@ -34,14 +34,16 @@ public class RenderableSearchInput extends Renderable {
 	/** if true, a compact multiple-enabled select is rendered instead of a standard input */
 	private boolean isSelect;
 
-	/** if true, sets the bind's type to Date instead of the default String */
-	private boolean isDate;
+	// /** if true, sets the bind's type to Date instead of the default String */
+	// private boolean isDate;
+
+	private String type;
 
 	public RenderableSearchInput(RenderableSearchField<? extends SearchField> field, String nodeset) {
 		this.refField = field;
 		this.nodeset = nodeset;
 		this.isSelect = false;
-		this.isDate = false;
+		this.type = MsgId.INT_TYPE_XSD_STRING.getText();
 	}
 
 	/*
@@ -66,11 +68,7 @@ public class RenderableSearchInput extends Renderable {
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
 			boolean isInIMultRepeater) {
 		ModelElementBindSimple inputBind = new ModelElementBindSimple(path + nodeset);
-		if (isDate == false) {
-			inputBind.setType(new QName(MsgId.INT_TYPE_XSD_STRING.getText()));
-		} else {
-			inputBind.setType(new QName(MsgId.INT_TYPE_XSD_DATE.getText()));
-		}
+		inputBind.setType(new QName(this.type));
 
 		Rendered rendered;
 		String fullName = refField.getFormElement().getId() + "_" + nodeset;
@@ -87,17 +85,18 @@ public class RenderableSearchInput extends Renderable {
 	}
 
 	/**
-	 * @param isDate the isDate to set
-	 */
-	public void setDate(boolean isDate) {
-		this.isDate = isDate;
-	}
-
-	/**
 	 * @param isSelect
 	 */
 	public void setSelect(boolean isSelect) {
 		this.isSelect = isSelect;
+	}
+
+	/**
+	 * @param type
+	 *            the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

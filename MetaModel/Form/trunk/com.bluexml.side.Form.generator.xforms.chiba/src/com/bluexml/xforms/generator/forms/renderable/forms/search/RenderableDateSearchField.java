@@ -33,8 +33,19 @@ public class RenderableDateSearchField extends RenderableSearchField<DateSearchF
 		add(new RenderableSearchOperators(this));
 		rendLo = new RenderableSearchInput(this, MsgId.INT_INSTANCE_SEARCH_VALUE_LO.getText());
 		rendHi = new RenderableSearchInput(this, MsgId.INT_INSTANCE_SEARCH_VALUE_HI.getText());
-		rendLo.setDate(true); // necessary for having the calendar on the forms
-		rendHi.setDate(true); // idem
+
+		// set the appropriate data type; necessary for having the calendar on the forms
+		String type = MsgId.INT_TYPE_XSD_DATE.getText();
+		// NOTE: force type to "date" even if "DateTime" because of incomplete support by Chiba
+		
+		// ModelElement ref = formElement.getRef();
+		// DataType attrType = ((Attribute) getFormGenerator().getRealObject(ref)).getTyp();
+		// if (attrType.equals(DataType.DATE_TIME)) {
+		// type = MsgId.INT_TYPE_XSD_DATETIME.getText();
+		// }
+		rendLo.setType(type);
+		rendHi.setType(type);
+
 		add(rendLo);
 		add(rendHi);
 	}

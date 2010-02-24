@@ -30,6 +30,7 @@ import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.ChoiceField;
@@ -786,14 +787,42 @@ public class MappingGenerator extends AbstractGenerator {
 			SearchField searchField) {
 		if (formContainer instanceof FormSearch) {
 			SearchFieldType fieldType = objectFactory.createSearchFieldType();
+			// name
 			fieldType.setName(searchField.getId());
+
+			// default operator
 			String defaultOp = formGenerator.getSearchFieldDefaultOperator(searchField);
 			fieldType.setPick(defaultOp);
+
+			// number of UI input controls
+			Attribute attr = (Attribute) formGenerator.getRealObject(searchField.getRef());
+			DataType typ = attr.getTyp();
+			if (isDateType(typ)) {
+				fieldType.setInputs("2");
+			} else if (isNumericType(typ)) {
+				fieldType.setInputs("2");
+			}
+
+			// we set the 'type' attribute for data types whose inputs will be initialized
+			if (isDateType(typ)) {
+				fieldType.setType(typ.getName());
+			}
+
 			((SearchFormType) formType).getField().add(fieldType);
 		} else {
 			throw new RuntimeException("Search fields are allowed only on FormSearch objects. '"
 					+ formContainer.getLabel() + "' is not a FormSearch.");
 		}
+	}
+
+	private boolean isDateType(DataType typ) {
+		return typ.equals(DataType.DATE) || typ.equals(DataType.DATE_TIME);
+	}
+
+	private boolean isNumericType(DataType typ) {
+		return typ.equals(DataType.BYTE) || typ.equals(DataType.LONG) || typ.equals(DataType.INT)
+				|| typ.equals(DataType.SHORT) || typ.equals(DataType.DOUBLE)
+				|| typ.equals(DataType.FLOAT);
 	}
 
 	/**
