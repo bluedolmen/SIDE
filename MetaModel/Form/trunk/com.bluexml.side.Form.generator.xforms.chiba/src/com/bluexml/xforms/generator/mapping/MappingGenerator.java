@@ -32,6 +32,7 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.Tag;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.ChoiceWidgetType;
@@ -198,8 +199,7 @@ public class MappingGenerator extends AbstractGenerator {
 
 		AttributeType attributeType = new AttributeType();
 		attributeType.setName(attribute.getName());
-		attributeType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(classe) + "_"
-				+ attribute.getName());
+		attributeType.setAlfrescoName(getAlfrescoNameForAttribute(classe, attribute));
 		attributeType.setInAlfresco(true);
 		attributeType.setType(attribute.getTyp().getLiteral());
 		if (attribute.getValueList() != null) {
@@ -905,7 +905,7 @@ public class MappingGenerator extends AbstractGenerator {
 								+ formClass.getId()
 								+ "' has a bad <Ref> property: either the model element is not an attribute or the attribute belongs to another class.");
 			}
-			String alfrescoName = formGenerator.getAlfrescoName(realClass, ref);
+			String alfrescoName = getAlfrescoNameForAttribute(realClass, ref);
 			formFieldType.setAlfrescoName(alfrescoName);
 		} else {
 			com.bluexml.side.workflow.Attribute attribute = (com.bluexml.side.workflow.Attribute) ref;
@@ -963,6 +963,33 @@ public class MappingGenerator extends AbstractGenerator {
 			fieldTypesList.add(formFieldType);
 		}
 
+	}
+
+	/**
+	 * Computes the name of an attribute as specified in the Alfresco models.
+	 * 
+	 * @param classe
+	 * @param ref
+	 * @return
+	 */
+	private String getAlfrescoNameForAttribute(AbstractClass classe, ModelElement ref) {
+		boolean noPrefix = false;
+
+		Attribute attribute = (Attribute) ref;
+		for (Tag tag : attribute.getTags()) {
+			if (tag.getKey().equals(MsgId.INT_GEN_REVERSED_TAG_KEY.getText())) {
+				if (tag.getValue().contains(MsgId.INT_GEN_REVERSED_TAG_VAL_ALFRESCO.getText())) {
+					noPrefix = true;
+					break;
+				}
+			}
+		}
+		if (noPrefix) {
+			return attribute.getName();
+		}
+		String result = FormGeneratorsManager.getClassQualifiedName(classe) + "_"
+				+ attribute.getName();
+		return result;
 	}
 
 	/**
