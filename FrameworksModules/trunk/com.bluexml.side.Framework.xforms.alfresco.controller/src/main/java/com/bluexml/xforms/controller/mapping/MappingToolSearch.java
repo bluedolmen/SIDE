@@ -123,7 +123,7 @@ public class MappingToolSearch extends MappingToolCommon {
 			buf.append(operator);
 			buf.append("\"");
 
-			buf.append(",values:{"); // open values
+			buf.append(",values:["); // open values
 			if (isSingleValued(fieldType)) {
 				Element valElt = DOMUtil.getChild(fieldElt, MsgId.INT_INSTANCE_SEARCH_VALUE
 						.getText());
@@ -145,7 +145,7 @@ public class MappingToolSearch extends MappingToolCommon {
 				buf.append(valueHi);
 				buf.append("\"");
 			}
-			buf.append("}"); // close values
+			buf.append("]"); // close values
 			buf.append("}"); // close field
 		}
 		buf.append("}"); // close fields
@@ -214,6 +214,9 @@ public class MappingToolSearch extends MappingToolCommon {
 
 		String dataType = fieldType.getType();
 		boolean isTyped = (StringUtils.trimToNull(dataType) != null);
+		if (isTyped && dataType.equalsIgnoreCase("datetime")) {
+			dataType = "Date";
+		}
 
 		if (isSingleValued(fieldType) == true) {
 			Element valueElt = doc.createElement(MsgId.INT_INSTANCE_SEARCH_VALUE.getText());
