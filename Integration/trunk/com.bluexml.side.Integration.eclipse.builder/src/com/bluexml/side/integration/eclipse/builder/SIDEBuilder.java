@@ -302,6 +302,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 					//Apply modifications
 					for (String file : referencesByFile.keySet()) {
 						IFile f = SIDEBuilderUtil.getFile(new Path(file));
+						deleteMarkers(f);
 						
 						//Check if the file is moved at the same moment
 						IResourceDelta foundDelta = null;
@@ -788,6 +789,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 										for (String s : linkedFiles) {
 											path = new Path(s);
 											IFile file = p.getFile(path.removeFirstSegments(1));
+											deleteMarkers(file);
 											check(file);
 										}
 									}
@@ -808,6 +810,8 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 	private void deleteMarkers(IFile file) {
 		try {
 			file.deleteMarkers(MARKER_TYPE, false, IResource.DEPTH_ZERO);
+			//Delete EMF marker
+			file.deleteMarkers("org.eclipse.emf.validation.problem", false, IResource.DEPTH_ZERO);
 		} catch (CoreException ce) {
 		}
 	}
