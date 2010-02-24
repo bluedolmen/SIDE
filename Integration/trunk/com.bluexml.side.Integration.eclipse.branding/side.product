@@ -360,8 +360,8 @@
    <features>
       <feature id="org.eclipse.platform" version="3.5.0.v20090611a-9gEeG1HFtQcmRThO4O3aR_fqSMvJR2sJ"/>
       <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.0"/>
-      <feature id="com.bluexml.side.Common.core.feature" version="1.0.142.v14820-20100223"/>
-      <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.107.v14820-20100223"/>
+      <feature id="com.bluexml.side.Common.core.feature" version="1.0.143.v14844-20100224"/>
+      <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.108.v14844-20100224"/>
    </features>
 
 
