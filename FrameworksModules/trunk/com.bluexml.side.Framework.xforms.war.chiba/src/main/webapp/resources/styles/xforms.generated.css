@@ -25,7 +25,14 @@
 }
 
 .full-group {
-	border: thin solid #eeeeee;
+	background: #EEE;
+	border: none;
+	overflow: auto;
+}
+
+.full-group div {
+	display:block;
+	padding:5px;
 }
 
 .full-group label {
@@ -42,7 +49,17 @@
 	border: thin solid #EEEEEE;
 }
 
-.input label,.textarea label,.full-group label {
+.input,
+.textarea,
+.select1,
+.select,
+div.xformstdclear {
+	margin-left: 10px;
+}
+
+.input label,
+.textarea label,
+.full-group label {
 	height: 1.3em;
 	width: 150px;
 	padding-right: 5px;
@@ -58,10 +75,14 @@ div.xformstdclear label {
 
 /*
  * FILE UPLOAD WIDGET
-*/
+ */
 
 div.side_upload_filename span {
 	font-size: 8pt;
+}
+
+div.upload div {
+	padding: 0px;
 }
 
 /*
@@ -76,33 +97,43 @@ div.side_select_widget .submit { /* the create button*/
 }
 
 div.side_select_widget label {
-	width: auto;
+	width: 0px;
 }
 
 div.side_select_search_zone label {
 	padding-right: 5px;
+}
+div.side_select_widget label,
+div.side_select_search_zone label {
+	width: 0px;
 }
 
 /*
  * SEARCH WIDGETS
  */
 div.side_search_value label {
-	width: auto;
+	width: 0px;
 }
 
+div.side_search_value,
 div.side_search_operator {
 	float: left;
+	padding: 0px;
 }
 
 div.side_search_operator select {
 	width: 200px;
 }
 
+div.side_search_field {
+	clear: both;
+}
+
 /*
  *
  */
  
-/* make the text in read only textareas visible when in inline multiple forms */
+/* make the text in read-only textareas visible when in inline multiple forms */
 div.bxds_ro_textarea span.mediatype-text-html {
 	background: #A7BCFC;
 }
@@ -127,11 +158,22 @@ a.side_jsp_using:link,a.side_jsp_footer:link {
 	color: #6FF;
 }
 
-div.upload div {
-	padding: 0px;
+side_xforms_line {
+	visibility: hidden;
 }
 
 #side_status_bar {
 	min-height: 1em;
 	font-weight: bold;
 }
+
+#submitButtons {
+	text-align: right;
+}
+
+#submitButtons.full-group {
+	text-align: right;
+	background: #fff;
+	overflow: visible;
+}
+
