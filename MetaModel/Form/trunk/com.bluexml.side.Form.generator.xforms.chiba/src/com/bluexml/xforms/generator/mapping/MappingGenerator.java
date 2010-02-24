@@ -239,23 +239,6 @@ public class MappingGenerator extends AbstractGenerator {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#addIdForClass(com.bluexml.
-	 * side.clazz.Clazz, java.lang.String, boolean)
-	 */
-	// public void addIdForClass(Clazz classe, String string, boolean hasParent) {
-	// if (!hasParent) {
-	// AttributeType attributeType = new AttributeType();
-	// attributeType.setName(string);
-	// attributeType.setType("string");
-	// attributeType.setInAlfresco(false);
-	// attributeType.setAlfrescoName(string);
-	// getClassType(classe).getAttribute().add(attributeType);
-	// }
-	// }
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginAspect(com.bluexml.side
 	 * .clazz.Aspect)
 	 */
@@ -369,17 +352,7 @@ public class MappingGenerator extends AbstractGenerator {
 			}
 			associationType.setMultiple(type.getAssociationCardinality().isMultiple());
 			associationType.setInline(type.isInline());
-			String associationName = null;
-			// if (source.equals(destination)) {
-			// boolean reverse =
-			// !StringUtils.equals(association.getSecondEnd().getName(), role);
-			// associationName = AssociationServices.getName(association,
-			// source, reverse);
-			// } else {
-			// associationName =
-			// AssociationServices.getAssociationName(association, source);
-			// }
-			associationName = formGenerator.getAssoQualifiedName(association);
+			String associationName = formGenerator.getAssoQualifiedName(association);
 
 			associationType.setAlfrescoName(associationName);
 			sourceType.getAssociation().add(associationType);
@@ -678,7 +651,7 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Sets the CSS output file.
+	 * Sets the CSS output file and creates path.
 	 * 
 	 * @param name
 	 *            the path to the CSS file
@@ -689,7 +662,7 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Sets the redirector's configuration output file.
+	 * Sets the redirector's configuration output file and creates path.
 	 * 
 	 * @param name
 	 *            the path to the redirector's configuration file
@@ -725,7 +698,6 @@ public class MappingGenerator extends AbstractGenerator {
 			sfType.setOperator(operator);
 			sfType.setRealClass(copyClassType(getClassType(formSearch.getReal_class())));
 			processFormElement(sfType, realContainer, realContainer, realContainer);
-			// processSearchFields(sfType, formSearch, formSearch);
 			mapping.getCanister().add(objectFactory.createSearch(sfType));
 		} else if (realContainer instanceof FormWorkflow) {
 			FormWorkflow formWorkflow = ((FormWorkflow) realContainer);
@@ -765,24 +737,15 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 	}
 
-	// private void processSearchFields(SearchFormType formType, FormContainer formContainer,
-	// FormElement formElement) {
-	// if (formElement instanceof FormSearch) {
-	// FormSearch form = (FormSearch) formElement;
-	// EList<FormElement> children = form.getChildren();
-	// for (FormElement child : children) {
-	// processSearchFields(formType, formContainer, child);
-	// }
-	// } else {
-	// if (formElement instanceof ActionField) {
-	// processActionField(null, formContainer, (Field) formElement);
-	// } else if (formElement instanceof SearchField) {
-	// processSearchField(formType, (FormSearch) formContainer, (SearchField) formElement);
-	// }
-	// }
-	//
-	// }
-
+	/**
+	 * 
+	 * @param formType
+	 *            placeholder for a form (should be of the appropriate mapping type for search
+	 *            forms)
+	 * @param formContainer
+	 *            SHOULD be a FormSearch
+	 * @param searchField
+	 */
 	private void processSearchField(CanisterType formType, FormContainer formContainer,
 			SearchField searchField) {
 		if (formContainer instanceof FormSearch) {
@@ -871,6 +834,8 @@ public class MappingGenerator extends AbstractGenerator {
 	 *            the form container: FormClass or FormWorkflow
 	 * @param field
 	 *            the field
+	 * @deprecated I don't see any motive in this function since the info kept here (except for the
+	 *             style) is never used anywhere (@Amenel).
 	 */
 	private void processActionField(CanisterType canister, FormContainer formContainer, Field field) {
 		ActionFieldType actionFieldType = new ActionFieldType();
@@ -976,6 +941,7 @@ public class MappingGenerator extends AbstractGenerator {
 		} else {
 			formFieldType.setType("String");
 		}
+
 		// boolean attributes
 		formFieldType.setSearchEnum(false);
 		formFieldType.setMultiple(isMultiple);
@@ -1117,13 +1083,13 @@ public class MappingGenerator extends AbstractGenerator {
 
 		FormClass formClass = getFormClass(linkedField);
 		VirtualFieldType virtualFieldType = new VirtualFieldType();
-		// propriétés héritées
+		// inherited properties
 		virtualFieldType.setUniqueName(FormGeneratorsManager.getUniqueName(virtualField));
 		String style = virtualField.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
 		}
-		// propriétés propres
+		// own properties
 		virtualFieldType.setFieldName(FormGeneratorsManager.getUniqueName(linkedField));
 		virtualFieldType.setFormName(formClass.getId());
 		if (canister instanceof FormType) {
@@ -1184,11 +1150,10 @@ public class MappingGenerator extends AbstractGenerator {
 	 */
 	private void processReference(CanisterType canister, FormContainer formContainer,
 			Reference reference) {
-		ReferenceType referenceType = new ReferenceType();
-		processChoiceFieldCommon(reference, formContainer, referenceType);
-		// TODO: à mettre à jour qd les références seront dispo sur les
-		// FormWorkflow
+		// TODO: update the condition when references become available on FormWorkflow
 		if (canister instanceof FormType) {
+			ReferenceType referenceType = new ReferenceType();
+			processChoiceFieldCommon(reference, formContainer, referenceType);
 			FormType formType = (FormType) canister;
 			formType.getReference().add(referenceType);
 		}
@@ -1242,16 +1207,13 @@ public class MappingGenerator extends AbstractGenerator {
 				modelChoiceField.getRef()); // #980
 		modelChoiceType.setAlfrescoName(alfrescoName);
 		modelChoiceType.setRealClass(copyClassType(getClassType(modelChoiceField.getReal_class())));
-		int i = 0;
+
 		EList<FormContainer> targets = modelChoiceField.getTarget();
-		// FIXME: vérifier si i doit être incrémenté seulement quand il y a un
-		// 'add'
 		for (FormContainer target : targets) {
 			if (target instanceof FormClass) {
 				FormType childFormType = newFormType(target);
 				modelChoiceType.getTarget().add(childFormType);
 			}
-			i++;
 		}
 		// field size
 		String lsize = "" + modelChoiceField.getField_size();
