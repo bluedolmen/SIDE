@@ -45,7 +45,7 @@ public class EditFormAction extends AbstractEditAction {
 
 		PageInfoBean bean = new PageInfoBean();
 		bean.formType = FormTypeEnum.FORM;
-		bean.formName = requestParameters.get(DATA_TYPE);
+		bean.formName = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
 		bean.dataType = AlfrescoController.getInstance().getDataTypeFromFormName(bean.formName);
 		bean.dataId = dataId;
 		bean.language = navigationPath.peekCurrentPage().getLanguage();

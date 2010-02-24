@@ -22,11 +22,6 @@ import com.bluexml.xforms.messages.MsgId;
  */
 public class EnumAction extends AbstractReadAction {
 
-	/** The Constants for the action's parameters names. */
-	protected static final String FILTER_PARENT = "filterParent";
-	protected static final String FILTER_DATA = "filterData";
-	protected static final String LIMITED = "limited";
-
 	/** The Constant enums. */
 	private static final Map<String, Document> enums = new HashMap<String, Document>();
 
@@ -51,7 +46,11 @@ public class EnumAction extends AbstractReadAction {
 	 */
 	@Override
 	protected String[] getParamNames() {
-		return new String[] { RAW_DATA_TYPE, FILTER_PARENT, FILTER_DATA, LIMITED };
+		return new String[] {
+				MsgId.INT_ACT_PARAM_ENUM_RAWTYPE.getText(),
+				MsgId.INT_ACT_PARAM_ENUM_FILTER_PARENT.getText(),
+				MsgId.INT_ACT_PARAM_ENUM_FILTER_DATA.getText(),
+				MsgId.INT_ACT_PARAM_ENUM_LIMITED.getText() };
 	}
 
 	/**
@@ -179,11 +178,11 @@ public class EnumAction extends AbstractReadAction {
 	 */
 	@Override
 	public Node resolve() throws ServletException {
-		String dataType = requestParameters.get(RAW_DATA_TYPE);
-		String filterParent = requestParameters.get(FILTER_PARENT);
-		String filterData = requestParameters.get(FILTER_DATA);
+		String dataType = requestParameters.get(MsgId.INT_ACT_PARAM_ENUM_RAWTYPE.getText());
+		String filterPrnt = requestParameters.get(MsgId.INT_ACT_PARAM_ENUM_FILTER_PARENT.getText());
+		String filterData = requestParameters.get(MsgId.INT_ACT_PARAM_ENUM_FILTER_DATA.getText());
 
-		return getEnum(dataType, filterParent, filterData, null, isLimited());
+		return getEnum(dataType, filterPrnt, filterData, null, isLimited());
 	}
 
 	/*
@@ -192,34 +191,34 @@ public class EnumAction extends AbstractReadAction {
 	 * @see com.bluexml.xforms.actions.AbstractAction#executeSubmit()
 	 */
 	// TODO: remove this function
-//	@SuppressWarnings("deprecation")
-//	@Override
-//	public void submit() throws ServletException {
-//		
-//		// update list using search
-//		Document doc = (Document) node;
-//		String query = doc.getDocumentElement().getTextContent();
-//
-//		String dataType = requestParameters.get(RAW_DATA_TYPE);
-//		String filterParent = requestParameters.get(FILTER_PARENT);
-//		String filterData = requestParameters.get(FILTER_DATA);
-//
-//		// retrieves elements
-//		Node list = getEnum(dataType, filterParent, filterData, query, isLimited());
-//
-//		// convert to string
-//		Source xmlSource = new DOMSource(list);
-//		ByteArrayOutputStream pos = new ByteArrayOutputStream();
-//		Result outputTarget = new StreamResult(pos);
-//		documentTransformer.transform(xmlSource, outputTarget);
-//
-//		ByteArrayInputStream pis = new ByteArrayInputStream(pos.toByteArray());
-//
-//		result.put(XFormsProcessor.SUBMISSION_RESPONSE_STREAM, pis);
-//	}
+	// @SuppressWarnings("deprecation")
+	// @Override
+	// public void submit() throws ServletException {
+	//		
+	// // update list using search
+	// Document doc = (Document) node;
+	// String query = doc.getDocumentElement().getTextContent();
+	//
+	// String dataType = requestParameters.get(RAW_DATA_TYPE);
+	// String filterParent = requestParameters.get(FILTER_PARENT);
+	// String filterData = requestParameters.get(FILTER_DATA);
+	//
+	// // retrieves elements
+	// Node list = getEnum(dataType, filterParent, filterData, query, isLimited());
+	//
+	// // convert to string
+	// Source xmlSource = new DOMSource(list);
+	// ByteArrayOutputStream pos = new ByteArrayOutputStream();
+	// Result outputTarget = new StreamResult(pos);
+	// documentTransformer.transform(xmlSource, outputTarget);
+	//
+	// ByteArrayInputStream pis = new ByteArrayInputStream(pos.toByteArray());
+	//
+	// result.put(XFormsProcessor.SUBMISSION_RESPONSE_STREAM, pis);
+	// }
 
 	private boolean isLimited() {
-		String limited = requestParameters.get(LIMITED);
+		String limited = requestParameters.get(MsgId.INT_ACT_PARAM_ENUM_LIMITED.getText());
 		return StringUtils.equals(limited, "1");
 	}
 

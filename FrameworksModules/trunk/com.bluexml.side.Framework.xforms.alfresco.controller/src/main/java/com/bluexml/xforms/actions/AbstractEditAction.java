@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import org.w3c.dom.Document;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
+import com.bluexml.xforms.messages.MsgId;
 
 public abstract class AbstractEditAction extends AbstractWriteAction {
 
@@ -15,7 +16,7 @@ public abstract class AbstractEditAction extends AbstractWriteAction {
 	 */
 	@Override
 	protected String[] getParamNames() {
-		return new String[] { DATA_ASSOC, DATA_TYPE };
+		return new String[] { MsgId.INT_ACT_PARAM_ANY_ASSOC.getText(), MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText() };
 	}
 
 	/*

@@ -36,29 +36,6 @@ public abstract class AbstractAction {
 	/** The logger. */
 	protected static Log logger = LogFactory.getLog(AbstractAction.class);
 
-	/** The Constant DATA_TYPE. */
-	public static final String DATA_TYPE = "type";
-
-	/** The Constant RAW_DATA_TYPE. */
-	public static final String RAW_DATA_TYPE = "rawtype";
-
-	/** The Constant FORM_TYPE. */
-	public static final String FORM_TYPE = "formType";
-
-	/** The Constant DATA_ASSOC. */
-	public static final String DATA_ASSOC = "assoc";
-
-	/** The Constant DATA_ID. */
-	public static final String DATA_ID = "id";
-
-	/** The Constant DATA_QUERY. */
-	public static final String DATA_QUERY = "query";
-
-	/** The Constant DATA_MAXRESULTS. */
-	public static final String DATA_MAXRESULTS = "size";
-
-	public static final String LABEL_FORMAT = "format";
-
 	/** The document transformer. */
 	protected static Transformer documentTransformer;
 	static {
@@ -122,7 +99,7 @@ public abstract class AbstractAction {
 	protected void addEntry(String[] fragments, String name, int index) {
 		if (fragments.length > index) {
 			String fragment = fragments[index];
-			if (name.equals(DATA_TYPE)) {
+			if (name.equals(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText())) {
 				fragment = fragment.replace('_', '.');
 			}
 			requestParameters.put(name, fragment);

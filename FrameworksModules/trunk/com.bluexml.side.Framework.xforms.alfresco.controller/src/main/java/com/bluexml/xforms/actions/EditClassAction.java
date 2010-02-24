@@ -50,7 +50,7 @@ public class EditClassAction extends AbstractEditAction {
 	 */
 	protected void edit() throws ServletException {
 		// retrieve id and datatype
-		String dataType = requestParameters.get(DATA_TYPE);
+		String dataType = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
 		AlfrescoController alfController = AlfrescoController.getInstance();
 		String dataId = alfController.getAndResetEditNode(node);
 

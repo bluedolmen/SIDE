@@ -89,8 +89,11 @@ public class NavigationManager {
 			SubmitAction.class,
 			DeleteAction.class,
 			SetTypeAction.class,
-			/* WorkflowFormGetAction.class, WorkflowGetAction.class, WorkflowInstanceListAction.class,
-			WorkflowProcessListAction.class, WorkflowStartAction.class,*/
+			/*
+			 * WorkflowFormGetAction.class, WorkflowGetAction.class,
+			 * WorkflowInstanceListAction.class, WorkflowProcessListAction.class,
+			 * WorkflowStartAction.class,
+			 */
 			WorkflowTransitionAction.class };
 
 	/** The Constant PAGE_ID. */
@@ -551,7 +554,7 @@ public class NavigationManager {
 
 		// form type
 		FormTypeEnum formType = FormTypeEnum.CLASS; // <-- default type
-		String paramFormType = req.getParameter(AbstractAction.FORM_TYPE);
+		String paramFormType = req.getParameter(MsgId.PARAM_FORM_TYPE.getText());
 		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_FORM.getText())) {
 			formType = FormTypeEnum.FORM;
 		}
@@ -570,7 +573,7 @@ public class NavigationManager {
 		bean.formType = formType;
 
 		// type-related
-		String originalDatatype = req.getParameter(AbstractAction.DATA_TYPE);
+		String originalDatatype = req.getParameter(MsgId.PARAM_DATA_TYPE.getText());
 		String dataType = null;
 		if (formType == FormTypeEnum.CLASS) {
 			dataType = StringUtils.trimToNull(originalDatatype).replace('_', '.');
@@ -588,7 +591,8 @@ public class NavigationManager {
 		bean.dataType = AlfrescoController.getInstance().getDataTypeFromFormName(bean.formName);
 		bean.wrongCallType = false;
 
-		String dataId = StringUtils.trimToNull(req.getParameter(AbstractAction.DATA_ID));
+		String dataId = StringUtils.trimToNull(req.getParameter(MsgId.INT_ACT_PARAM_ANY_ID
+				.getText()));
 		// check that the form is appropriate for the data id
 		if (AlfrescoController.getInstance().getParamCheckMatchDataForm()) {
 			String realFormName = originalDatatype;
@@ -667,7 +671,7 @@ public class NavigationManager {
 		for (Entry<String, String[]> entry : entrySet) {
 			String key = entry.getKey();
 			if (!StringUtils.equals(key, PAGE_ID)
-					&& !StringUtils.equals(key, AbstractAction.DATA_TYPE)) {
+					&& !StringUtils.equals(key, MsgId.PARAM_DATA_TYPE.getText())) {
 				String[] values = entry.getValue();
 				if (values.length > 0) {
 					result.put(key, values[0]);

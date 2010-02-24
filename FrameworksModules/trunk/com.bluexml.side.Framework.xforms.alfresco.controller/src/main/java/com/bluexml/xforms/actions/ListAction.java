@@ -69,8 +69,8 @@ public class ListAction extends AbstractAction {
 			}
 		}
 
-		requestParameters.put(DATA_QUERY, query);
-		requestParameters.put(DATA_MAXRESULTS, maxResults);
+		requestParameters.put(MsgId.INT_ACT_PARAM_LIST_QUERY.getText(), query);
+		requestParameters.put(MsgId.INT_ACT_PARAM_LIST_SIZE.getText(), maxResults);
 
 		// retrieves elements
 		Node list = list();
@@ -108,7 +108,7 @@ public class ListAction extends AbstractAction {
 	 */
 	@Override
 	protected String[] getParamNames() {
-		return new String[] { MsgId.INT_ACT_PARAM_LIST_TYPE.getText(),
+		return new String[] { MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText(),
 				MsgId.INT_ACT_PARAM_LIST_FORMAT.getText(),
 				MsgId.INT_ACT_PARAM_LIST_MAXLENGTH.getText() };
 	}
@@ -123,9 +123,9 @@ public class ListAction extends AbstractAction {
 	 */
 	private Node list() throws ServletException {
 		// simply call controller
-		String dataType = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_TYPE.getText());
-		String query = requestParameters.get(DATA_QUERY);
-		String maxResults = requestParameters.get(DATA_MAXRESULTS);
+		String dataType = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
+		String query = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_QUERY.getText());
+		String maxResults = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_SIZE.getText());
 		String format = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_FORMAT.getText());
 		String maxLength = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_MAXLENGTH.getText());
 		// "format" was partially decoded so we need to re encode the format pattern, since it

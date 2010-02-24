@@ -37,7 +37,7 @@ public class CreateFormAction extends AbstractCreateAction {
 	 */
 	protected void create() {
 		// retrieve data type
-		String inputDataType = requestParameters.get(DATA_TYPE);
+		String inputDataType = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
 		// push new page
 		PageInfoBean bean = new PageInfoBean();
 		bean.formType = FormTypeEnum.FORM;
