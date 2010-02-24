@@ -106,6 +106,15 @@ public class XFormsWork implements RunAsWork<String> {
 
 	private class DoWorkInTransaction implements RetryingTransactionCallback<String> {
 
+		
+		/**
+		 * 
+		 */
+		public DoWorkInTransaction() {
+			super();
+		}
+
+		@SuppressWarnings("synthetic-access")
 		public String execute() throws Throwable {
 			String result = null;
 			faultyId = null; // reset faultyId on each execution
@@ -170,7 +179,7 @@ public class XFormsWork implements RunAsWork<String> {
 
 	}
 
-	public String doWork() throws Exception {
+	public String doWork() {
 		String result = null;
 		try {
 			boolean readOnly = false;
@@ -393,9 +402,8 @@ public class XFormsWork implements RunAsWork<String> {
 	/**
 	 * 
 	 * @return
-	 * @throws Exception
 	 */
-	protected String enum_() throws Exception {
+	protected String enum_() {
 		String type = parameters.get("type");
 
 		String parent = parameters.get("parent");
@@ -575,13 +583,13 @@ public class XFormsWork implements RunAsWork<String> {
 		return sql_query.toString();
 	}
 
-	protected String delete() throws Exception {
+	protected String delete() {
 		String nodeRef = parameters.get("nodeRef");
 		dataLayer.delete(nodeRef);
 		return nodeRef;
 	}
 
-	protected String read() throws Exception {
+	protected String read() {
 		String objectId = parameters.get("objectId");
 		String result = dataLayer.read(objectId);
 		return result;
@@ -1198,7 +1206,8 @@ public class XFormsWork implements RunAsWork<String> {
 		return result;
 	}
 
-	private Set<QName> computeSearchableAttributes(QName currentType) {
+	private Set<QName> computeSearchableAttributes(QName pCurrentType) {
+		QName currentType = pCurrentType;
 		List<QName> classTypes = new ArrayList<QName>();
 
 		while (currentType.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
