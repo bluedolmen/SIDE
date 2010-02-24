@@ -800,6 +800,33 @@ public class MappingToolCommon {
 	}
 
 	/**
+	 * Gets, from the given instance, the element whose tag name that matches the given form name.
+	 * 
+	 * @param formName
+	 *            the id of the form
+	 * @param formNode
+	 *            the XForms instance
+	 * @return
+	 */
+	protected Element getRootElement(String formName, Node formNode) {
+		Element element = null;
+		DOMUtil.logXML(formNode, true);
+		if (formNode instanceof Document) {
+			Element docElt = ((Document) formNode).getDocumentElement();
+			element = DOMUtil.getChild(docElt, formName);
+			if (element == null) {
+				// we may be dealing with a workflow form
+				element = DOMUtil.getFirstElement(docElt); // behavior when no workflows existed
+				element = DOMUtil.getChild(element, formName);
+			}
+		}
+		if (formNode instanceof Element) {
+			element = (Element) formNode;
+		}
+		return element;
+	}
+
+	/**
 	 * Process save.
 	 * 
 	 * @param login

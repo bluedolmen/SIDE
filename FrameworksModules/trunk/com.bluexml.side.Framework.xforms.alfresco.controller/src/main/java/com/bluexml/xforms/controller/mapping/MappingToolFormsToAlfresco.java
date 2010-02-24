@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -100,29 +99,6 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			result.getAttributes().getAttribute().add(contentAttr);
 		}
 		return result;
-	}
-
-	/**
-	 * @param formName
-	 * @param formNode
-	 * @return
-	 */
-	private Element getRootElement(String formName, Node formNode) {
-		Element element = null;
-		DOMUtil.logXML(formNode, true);
-		if (formNode instanceof Document) {
-			Element docElt = ((Document) formNode).getDocumentElement();
-			element = DOMUtil.getChild(docElt, formName);
-			if (element == null) {
-				// we may be saving from a workflow form
-				element = DOMUtil.getFirstElement(docElt); // behavior when no workflows existed
-				element = DOMUtil.getChild(element, formName);
-			}
-		}
-		if (formNode instanceof Element) {
-			element = (Element) formNode;
-		}
-		return element;
 	}
 
 	/**

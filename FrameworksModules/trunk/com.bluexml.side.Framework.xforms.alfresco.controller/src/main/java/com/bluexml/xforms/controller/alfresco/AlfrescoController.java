@@ -697,9 +697,10 @@ public class AlfrescoController {
 	 * @return
 	 * @throws ServletException
 	 */
-	public String persistSearch(String formName, Node instance) throws ServletException {
+	public String persistSearch(String formName, Node instance, boolean shortPropertyNames)
+			throws ServletException {
 		// TODO
-		return mappingTool.transformSearchForm(formName, instance);
+		return mappingTool.transformSearchForm(formName, instance, shortPropertyNames);
 
 	}
 
@@ -1825,7 +1826,7 @@ public class AlfrescoController {
 		if (enumType != null) {
 			return enumType.isDynamic();
 		}
-		return false; //happens for search operators enums; they don't get into the mapping file
+		return false; // happens for search operators enums; they don't get into the mapping file
 	}
 
 	/**

@@ -244,7 +244,7 @@ public class MappingTool {
 			Map<String, String> initParams) {
 		return mappingToolSearch.getInstanceSearch(currentPage, formName, initParams);
 	}
-	
+
 	/**
 	 * New form instance.
 	 * 
@@ -308,8 +308,9 @@ public class MappingTool {
 	 * @return
 	 * @throws ServletException
 	 */
-	public String transformSearchForm(String formName, Node instance) throws ServletException {
-		return mappingToolSearch.transformSearchForm(formName, instance);
+	public String transformSearchForm(String formName, Node instance, boolean shortPropertyNames)
+			throws ServletException {
+		return mappingToolSearch.transformSearchForm(formName, instance, shortPropertyNames);
 	}
 
 	/**
@@ -341,19 +342,18 @@ public class MappingTool {
 	}
 
 	/**
-	 * Retourne la valeur de fieldSize pour un type de données. On récupère cette valeur dans la
-	 * liste des ModelChoiceField du mapping.
+	 * Gets the value of the field size property for a data type from the mapping.
 	 * 
-	 * @param type
-	 *            le type de données concerné
+	 * @param attrType
+	 *            the complete type name of the items in the model choice field
 	 * @param defaultVal
-	 *            la valeur à renvoyer si aucune valeur n'existe pour ce type.
-	 * @param formType
-	 *            le type du formulaire concerné
+	 *            the value to return if no field size value is found
+	 * @param formName
+	 *            the id of the form
 	 * @return
 	 */
-	public String getFieldSizeForField(String type, String defaultVal, String formName) {
-		// on ne teste qu'un formulaire
+	public String getFieldSizeForField(String attrType, String defaultVal, String formName) {
+		// we'll test only one form so the form name should be unique in the mapping file
 		List<JAXBElement<? extends CanisterType>> elements = mapping.getCanister();
 		for (JAXBElement<? extends CanisterType> element : elements) {
 			if (element.getValue() instanceof FormType) {
@@ -363,9 +363,9 @@ public class MappingTool {
 					for (ModelChoiceType modelChoice : modelChoices) {
 						ClassType rc = modelChoice.getRealClass();
 						String completeName = rc.getAlfrescoName().replace("_", ".");
-						if (completeName.equalsIgnoreCase(type)) {
+						if (completeName.equalsIgnoreCase(attrType)) {
 							String value = modelChoice.getFieldSize();
-							// le nom peut exister sans avoir de field size
+							// the name may exist without having a value for field size
 							return ((value == null) ? defaultVal : value);
 						}
 					}
