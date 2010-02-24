@@ -270,13 +270,14 @@ public class DataLayer implements DataLayerInterface {
 	 * @throws Exception
 	 */
 	private NodeRef createFolder(String parentPath, String nodeName) throws Exception {
-		if (parentPath == null) {
-			parentPath = defaultStorePath;
+		String lparentPath = parentPath;
+		if (lparentPath == null) {
+			lparentPath = defaultStorePath;
 		}
 		QName assocTypeQName = ContentModel.ASSOC_CONTAINS;
 		QName assocQName = QName.createQName(ALF_CONTENT_URI + nodeName);
 		QName nodeTypeQName = QName.createQName(ALF_CONTENT_URI + "folder");
-		NodeRef result = createNode(parentPath, assocTypeQName, assocQName, nodeTypeQName,
+		NodeRef result = createNode(lparentPath, assocTypeQName, assocQName, nodeTypeQName,
 				nodeName, null);
 		return result;
 	}
@@ -302,23 +303,26 @@ public class DataLayer implements DataLayerInterface {
 	private NodeRef createNode(String where, QName assocTypeQName, QName assocQName,
 			QName nodeTypeQName, String nodeName, Map<QName, Serializable> properties)
 			throws Exception {
-		if (where == null) {
-			where = getDefaultNodePath(nodeTypeQName);
+		String lwhere = where;
+		if (lwhere == null) {
+			lwhere = getDefaultNodePath(nodeTypeQName);
 		}
 		if (logger.isDebugEnabled()) {
 			logger.debug(" createNode: NodePath=" + where);
 		}
 
-		NodeRef parent = createPath(where);
+		NodeRef parent = createPath(lwhere);
 		NodeRef newNode = null;
-		if (assocQName == null) {
-			assocQName = QName.createQName(ALF_CONTENT_URI + parent.getId());
+		
+		QName lassocQName = assocQName;
+		if (lassocQName == null) {
+			lassocQName = QName.createQName(ALF_CONTENT_URI + parent.getId());
 		}
 		if (properties != null) {
-			newNode = nodeService.createNode(parent, assocTypeQName, assocQName, nodeTypeQName,
+			newNode = nodeService.createNode(parent, assocTypeQName, lassocQName, nodeTypeQName,
 					properties).getChildRef();
 		} else {
-			newNode = nodeService.createNode(parent, assocTypeQName, assocQName, nodeTypeQName)
+			newNode = nodeService.createNode(parent, assocTypeQName, lassocQName, nodeTypeQName)
 					.getChildRef();
 		}
 		// set NodeName
@@ -326,15 +330,10 @@ public class DataLayer implements DataLayerInterface {
 			try {
 				serviceRegistry.getFileFolderService().rename(newNode, nodeName);
 			} catch (FileExistsException e) {
-				if (logger.isDebugEnabled()) {
-					logger.debug("Failed to rename node '" + newNode + "' into '" + nodeName + "'",
-							e);
-				}
+				logger.debug("Failed to rename", e);
 			}
 		}
-		if (logger.isDebugEnabled()) {
-			logger.debug(" NodeProperties :" + nodeService.getProperties(newNode));
-		}
+		logger.debug(" NodeProperties :" + nodeService.getProperties(newNode));
 		return newNode;
 	}
 
@@ -374,9 +373,8 @@ public class DataLayer implements DataLayerInterface {
 	 * 
 	 * @param dataTypeName
 	 * @return
-	 * @throws Exception
 	 */
-	private QName getDataTypeQName(String dataTypeName) throws Exception {
+	private QName getDataTypeQName(String dataTypeName) {
 		Collection<QName> datatypes = dictionaryService.getAllTypes();
 
 		for (QName type : datatypes) {
@@ -394,9 +392,8 @@ public class DataLayer implements DataLayerInterface {
 	 * 
 	 * @param propertyName
 	 * @return
-	 * @throws Exception
 	 */
-	private QName getPropertyQName(String propertyName) throws Exception {
+	private QName getPropertyQName(String propertyName) {
 		Collection<QName> properties = dictionaryService.getAllProperties(null);
 		for (QName type : properties) {
 			if (type.getLocalName().equals(propertyName)) {
@@ -415,9 +412,8 @@ public class DataLayer implements DataLayerInterface {
 	 * @param type
 	 * @param associationQualifiedName
 	 * @return
-	 * @throws Exception
 	 */
-	private QName getAssociationQName(QName type, String associationQualifiedName) throws Exception {
+	private QName getAssociationQName(QName type, String associationQualifiedName) {
 		TypeDefinition def = dictionaryService.getType(type);
 		for (QName key : def.getAssociations().keySet()) {
 			if (key.getLocalName().equals(associationQualifiedName)) {
@@ -494,11 +490,12 @@ public class DataLayer implements DataLayerInterface {
 	 * 
 	 * 
 	 * @param propertyDef
-	 * @param value
+	 * @param pValue
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	private Serializable makePropertyValue(PropertyDefinition propertyDef, Serializable value) {
+	private Serializable makePropertyValue(PropertyDefinition propertyDef, Serializable pValue) {
+		Serializable value = pValue;
 		// get property attributes
 		QName propertyTypeQName = null;
 		if (propertyDef == null) // property not recognised
@@ -529,11 +526,15 @@ public class DataLayer implements DataLayerInterface {
 		try {
 			return convertType(propertyTypeQName, value);
 		} catch (TypeConversionException e) {
+			String classe = "unknown";
+			if (value != null) {
+				classe = value.getClass().toString();
+			}
 			throw new TypeConversionException(
 					"The property value is not compatible with the type defined for the property: \n"
 							+ "   property: " + (propertyDef == null ? "unknown" : propertyDef)
 							+ "\n" + "   value: " + value + "\n" + "   value type: "
-							+ value.getClass(), e);
+							+ classe, e);
 		}
 	}
 
@@ -574,10 +575,8 @@ public class DataLayer implements DataLayerInterface {
 	 *            </ul>
 	 * 
 	 * @return
-	 * @throws Exception
 	 */
-	private NodeRef createAssociations(NodeRef nodeRef, QName source, List<AssociationBean> list)
-			throws Exception {
+	private NodeRef createAssociations(NodeRef nodeRef, QName source, List<AssociationBean> list) {
 		for (AssociationBean associationBean : list) {
 			createAssociation(nodeRef, source, associationBean);
 		}
@@ -591,10 +590,9 @@ public class DataLayer implements DataLayerInterface {
 	 * @param nodeRef
 	 * @param source
 	 * @param associationBean
-	 * @throws Exception
 	 */
 	private synchronized void createAssociation(NodeRef nodeRef, QName source,
-			AssociationBean associationBean) throws Exception {
+			AssociationBean associationBean) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("createAssociation : NodeRef =" + nodeRef + " NodeType=" + source
 					+ " AssoBean=" + associationBean);
@@ -700,9 +698,7 @@ public class DataLayer implements DataLayerInterface {
 	 */
 	private NodeRef updateAssociations(NodeRef nodeRef, QName nodeType, List<AssociationBean> list,
 			boolean deleteAllAssociations) throws Exception {
-		if (logger.isDebugEnabled()) {
-			logger.debug("UpdateAssociations: nodeRef=" + nodeRef);
-		}
+		logger.debug("UpdateAssociations");
 		if (deleteAllAssociations) {
 			// remove all associations of any Type !!
 			QName removeNodeType = nodeService.getType(nodeRef);
@@ -803,14 +799,10 @@ public class DataLayer implements DataLayerInterface {
 	 * @param nodeRef
 	 * @param nodeType
 	 * @param associationBean
-	 * @throws Exception
 	 */
-	private void removeAssociation(NodeRef nodeRef, QName nodeType, AssociationBean associationBean)
-			throws Exception {
-		if (logger.isDebugEnabled()) {
-			logger.debug("RemoveAssociation : NodeRef =" + nodeRef + " NodeType=" + nodeType
-					+ " AssoBean=" + associationBean);
-		}
+	private void removeAssociation(NodeRef nodeRef, QName nodeType, AssociationBean associationBean) {
+		logger.debug("RemoveAssociation : NodeRef =" + nodeRef + " NodeType=" + nodeType
+				+ " AssoBean=" + associationBean);
 		QName assoType = getAssociationQName(nodeType, associationBean.getAssociationName());
 		AssociationRef asso = new AssociationRef(nodeRef, assoType, new NodeRef(associationBean
 				.getTargetId()));
@@ -924,24 +916,25 @@ public class DataLayer implements DataLayerInterface {
 	 * @return
 	 */
 	public String getLabelForNode(NodeRef nodeRef, String pattern) {
-		if (StringUtils.trimToNull(pattern) == null) {
-			pattern = FormatPattern.ALLTEXT.get();
+		String lpattern = pattern;
+		if (StringUtils.trimToNull(lpattern) == null) {
+			lpattern = FormatPattern.ALLTEXT.get();
 		}
-		if (StringUtils.equals(pattern, FormatPattern.NONE.get())) {
+		if (StringUtils.equals(lpattern, FormatPattern.NONE.get())) {
 			return nodeRef.toString();
 		}
 		Map<QName, Serializable> properties = nodeService.getProperties(nodeRef);
 		Set<QName> names = properties.keySet();
 		//
-		if (StringUtils.equals(pattern, FormatPattern.FIRST.get())) {
+		if (StringUtils.equals(lpattern, FormatPattern.FIRST.get())) {
 			return getLabelForNodeFirst(nodeRef, properties, names);
-		} else if (StringUtils.equals(pattern, FormatPattern.ALLTEXT.get())) {
+		} else if (StringUtils.equals(lpattern, FormatPattern.ALLTEXT.get())) {
 			return getLabelForNodeAllText(nodeRef, properties, names);
-		} else if (StringUtils.equals(pattern, FormatPattern.ALL.get())) {
+		} else if (StringUtils.equals(lpattern, FormatPattern.ALL.get())) {
 			return getLabelForNodeAll(nodeRef, properties, names);
 		} else {
 			// Interpret the format pattern
-			return getNameForNode(pattern, nodeRef);
+			return getNameForNode(lpattern, nodeRef);
 		}
 	}
 
@@ -1329,9 +1322,9 @@ public class DataLayer implements DataLayerInterface {
 		parentFolderCache = new TreeMap<String, NodeRef>();
 	}
 
-	private String getDefaultNodePath(QName nodeType) throws Exception {
-		nodeType = getDataTypeQName(nodeType.getLocalName());
-		return defaultStorePath + "/cm:" + nodeType.getLocalName();
+	private String getDefaultNodePath(QName nodeType) {
+		QName lnodeType = getDataTypeQName(nodeType.getLocalName());
+		return defaultStorePath + "/cm:" + lnodeType.getLocalName();
 	}
 
 	/*
@@ -1391,10 +1384,8 @@ public class DataLayer implements DataLayerInterface {
 			properties.put(ContentModel.PROP_CONTENT, writer.getContentData());
 			this.serviceRegistry.getNodeService().setProperties(newNode, properties);
 			resultId = StringEscapeUtils.escapeXml(newNode.toString());
-			if (logger.isDebugEnabled()) {
-				logger.debug(" File '" + filename + "' (size: " + sizeUploaded
-						+ ") uploaded to node: " + resultId);
-			}
+			logger.debug(" File '" + filename + "' (size: " + sizeUploaded + ") uploaded to node: "
+					+ resultId);
 			// set the node name
 			if (applyName) {
 				if (shouldAppendSuffix) {
@@ -1408,9 +1399,7 @@ public class DataLayer implements DataLayerInterface {
 							idx++;
 							currentName = filename + " (" + idx + ")";
 						} catch (org.alfresco.service.cmr.model.FileNotFoundException e) {
-							if (logger.isDebugEnabled()) {
-								logger.debug("Failed to rename: the node does not exist!", e);
-							}
+							logger.debug("Failed to rename: the node to rename does not exist!", e);
 							return FAILURE;
 						}
 					}
@@ -1418,14 +1407,10 @@ public class DataLayer implements DataLayerInterface {
 					try {
 						serviceRegistry.getFileFolderService().rename(newNode, filename);
 					} catch (FileExistsException e) {
-						if (logger.isDebugEnabled()) {
-							logger.debug("Failed to rename: the file already exists!", e);
-						}
+						logger.debug("Failed to rename: the file already exists!", e);
 						return FAILURE;
 					} catch (org.alfresco.service.cmr.model.FileNotFoundException e) {
-						if (logger.isDebugEnabled()) {
-							logger.debug("Failed to rename: the node to rename does not exist!", e);
-						}
+						logger.debug("Failed to rename: the node to rename does not exist!", e);
 						return FAILURE;
 					}
 				}
