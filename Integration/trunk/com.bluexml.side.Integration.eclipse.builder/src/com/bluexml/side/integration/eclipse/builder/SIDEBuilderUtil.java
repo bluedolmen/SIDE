@@ -97,8 +97,9 @@ public class SIDEBuilderUtil {
 		return project.getFile(p);
 	}
 	
-	public static void cleanReferential(IProject project) {
+	public static void cleanReferential(IProject project) throws CoreException {
 		IFile referential = project.getFile(SIDEBuilderConstants.referentialFileName);
+		referential.refreshLocal(IResource.DEPTH_ZERO, null);
 		if (referential.exists()) {
 			ModelsDocument doc = null;
 			try {
