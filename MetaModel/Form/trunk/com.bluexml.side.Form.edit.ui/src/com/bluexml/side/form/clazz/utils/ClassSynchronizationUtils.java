@@ -6,12 +6,14 @@ import java.util.HashMap;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
@@ -31,6 +33,7 @@ import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.common.utils.FieldTransformation;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.common.utils.InternalModification;
+import com.bluexml.side.workflow.State;
 
 public class ClassSynchronizationUtils {
 
@@ -51,14 +54,14 @@ public class ClassSynchronizationUtils {
 			// First we check for Add and Update
 			getAddCommand(fc, domain, listClazz, formChild);
 			// Then for delete
-			for (String id : formChild.keySet()) {
-				if (!ClazzChild.containsKey(id)){
-					if(!(formChild.get(id) instanceof VirtualField)) {
-						if (formChild.get(id) instanceof Field) {
-							((Field)formChild.get(id)).setMandatory(false);
-						}
-						cToDelete.add(formChild.get(id));
-					}
+			for (FormElement fe : fc.getFields()) {
+				if (	((fe.getRef() == null)
+						&&(fe instanceof Field))
+								||
+						((fe.getRef() instanceof Attribute) && 
+						!(((AbstractClass) ((Attribute) fe.getRef()).eContainer()).equals(cl)))) {
+					
+					cToDelete.add(fe);
 				}
 			}
 			if (cToDelete.size() > 0) {;
@@ -172,9 +175,19 @@ public class ClassSynchronizationUtils {
 	}
 
 	protected static void getCommandForAttribute(EditingDomain domain, HashMap<String, FormElement> formChild, Attribute att, FormGroup fg) {
+		FormElement foundFormElement = null;
+		if (fg instanceof FormClass) {
+			for (FormElement fe : ((FormClass)fg).getFields())
+				if (fe.getRef() != null && fe.getRef().equals(att))
+					foundFormElement = fe;
+		}else
+			for (FormElement fe : fg.getChildren())
+				if (fe.getRef() != null && fe.getRef().equals(att))
+					foundFormElement = fe;
+		
 		// is it here?
-		if (formChild.containsKey(att.getName())) {
-			Field actualField = (Field) formChild.get(att.getName());
+		if (foundFormElement != null) {
+			Field actualField = (Field) foundFormElement;
 			Field transformedAttribute = ClassDiagramUtils.getFieldForAttribute(att);
 
 			// Field Transformation
@@ -197,6 +210,10 @@ public class ClassSynchronizationUtils {
 				} else {
 					cc.append(SetCommand.create(domain, actualField, FormPackage.eINSTANCE.getField_Mandatory(), true));
 				}
+			//Update id
+			} else if (transformedAttribute.getId() != null && !(transformedAttribute.getId().equals(actualField.getId()))) {
+				Command c = SetCommand.create(domain, actualField, FormPackage.eINSTANCE.getFormElement_Id(), transformedAttribute.getId());
+				cc.append(c);
 			}
 			// TODO
 		} else {

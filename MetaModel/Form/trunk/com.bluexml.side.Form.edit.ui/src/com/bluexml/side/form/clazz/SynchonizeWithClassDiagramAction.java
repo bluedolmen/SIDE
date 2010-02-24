@@ -2,6 +2,7 @@ package com.bluexml.side.form.clazz;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -54,7 +55,8 @@ ISelectionChangedListener {
 		// We will iterate on each child on make action for each FormClass
 		for(FormContainer form : fc.getForms()) {
 			if (form instanceof FormClass) {
-				domain.getCommandStack().execute(ClassSynchronizationUtils.synchronizeClass((FormClass)form, domain));
+				Command c = ClassSynchronizationUtils.synchronizeClass((FormClass)form, domain);
+				domain.getCommandStack().execute(c);
 			}
 		}
 	}

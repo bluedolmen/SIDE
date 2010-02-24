@@ -416,7 +416,7 @@ public class ClassDiagramUtils {
 							true), ass);
 				}
 			}
-			for (Attribute att : cl.getAllInheritedAttributes()) {
+			for (Attribute att : cl.getAllAttributes()) {
 				listChild.put(att.getName(), att);
 			}
 			for (OperationComponent op : cl.getOperations()) {

@@ -137,7 +137,7 @@ public class WorkflowSynchronizationUtils {
 			}
 			
 			// We decide to keep all attributes contained by user task
-			for (FormElement fe : f.getChildren()) {
+			for (FormElement fe : f.getFields()) {
 				if (	((fe.getRef() == null)
 						&&(fe instanceof Field))
 								||
