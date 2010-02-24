@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.bluexml.side.Framework.xforms.alfresco</groupId>
   <artifactId>controller</artifactId>
-  <version>1.0.62</version>
+  <version>1.0.63</version>
   <name>XForms controller</name>
   <description>This module provides controller allowing conversion to and from XForm XML and Alfresco custom webscript.
 		It uses generated files : forms and mapping</description>
