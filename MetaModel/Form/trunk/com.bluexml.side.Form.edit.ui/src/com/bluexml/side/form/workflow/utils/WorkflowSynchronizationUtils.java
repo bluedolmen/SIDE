@@ -9,6 +9,7 @@ import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
+import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
 import com.bluexml.side.clazz.Clazz;
@@ -23,6 +24,7 @@ import com.bluexml.side.form.common.utils.InternalModification;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.Process;
 import com.bluexml.side.workflow.StartState;
+import com.bluexml.side.workflow.State;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.UserTask;
@@ -75,7 +77,10 @@ public class WorkflowSynchronizationUtils {
 
 		// We manage all task delete
 		for (FormContainer f : fc.getForms()) {
-			if (!taskList.contains(f.getId())) {
+			String key = "";
+			if (f.getId() != null && f.getId().length() >p.getName().length()+1)
+				key = f.getId().substring(p.getName().length()+1);
+			if (!taskList.contains(key)) {
 				Command cmd = RemoveCommand.create(domain, f);
 				if (cmd.canExecute()) {
 					cc.append(cmd);
@@ -100,8 +105,9 @@ public class WorkflowSynchronizationUtils {
 			buildFormsList();
 		}
 		// Does the form exists for this task?
-		if (formList.containsKey(st.getName())) {
-			FormWorkflow f = formList.get(st.getName());
+		String key = p.getName()+"_"+st.getName();
+		if (formList.containsKey(key)) {
+			FormWorkflow f = formList.get(key);
 			// If yes, we check for modification
 			c = new CompoundCommand();
 			ArrayList<String> attList = new ArrayList<String>();
@@ -130,14 +136,18 @@ public class WorkflowSynchronizationUtils {
 				attList.add(cl.getName());
 			}
 			
-			// We check for class attribute delete :
+			// We decide to keep all attributes contained by user task
 			for (FormElement fe : f.getChildren()) {
-				if (!attList.contains(fe.getId())) {
+				if (	((fe.getRef() == null)
+						&&(fe instanceof Field))
+								||
+						((fe.getRef() instanceof Attribute) && 
+						!(((State) ((Attribute) fe.getRef()).eContainer()).eContainer().equals(p)))) {
+					
 					Command cmd = DeleteCommand.create(domain, fe);
 					if (cmd.canExecute()) {
 						cc.append(cmd);
 					}
-					//
 				}
 			}
 		} else {
@@ -163,10 +173,15 @@ public class WorkflowSynchronizationUtils {
 		if (!attributeList.containsKey(f)) {
 			buildAttributesList(f);
 		}
-		Map<String, FormElement> attList = attributeList.get(f);
 		// Does the attribute exists in form?
-		if (attList.containsKey(a.getName())) {
-			//TODO : modification (type)
+		FormElement formElement = null;
+		for (FormElement fe : f.getFields())
+			if (fe.getRef() != null && fe.getRef().equals(a))
+				formElement = fe;
+		if (formElement != null) {
+			//Change id
+			if (formElement.getId() != null && !(formElement.getId().equals(a.getName())))
+				c = SetCommand.create(domain, formElement, FormPackage.eINSTANCE.getFormElement_Id(), a.getName());
 		} else {
 			Field fi = WorkflowDiagramUtils.getFieldForAttribute(a);
 			c = AddCommand.create(domain, f, FormPackage.eINSTANCE.getFormGroup_Children(), fi);
