@@ -541,6 +541,7 @@
     <eLiterals name="icontains" value="1"/>
     <eLiterals name="startsWith" value="2"/>
     <eLiterals name="istartsWith" value="3"/>
+    <eLiterals name="ignore" value="8"/>
     <eLiterals name="endsWith" value="4"/>
     <eLiterals name="iendsWith" value="5"/>
     <eLiterals name="empty" value="6"/>
@@ -552,9 +553,10 @@
     <eLiterals name="above" value="2"/>
     <eLiterals name="exactly" value="3"/>
     <eLiterals name="empty" value="4"/>
+    <eLiterals name="ignore" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ChoiceFieldSearchOperators">
-    <eLiterals name="all"/>
+    <eLiterals name="ignore"/>
     <eLiterals name="oneOf" value="1"/>
     <eLiterals name="none" value="2"/>
     <eLiterals name="allBut" value="3"/>
@@ -563,6 +565,7 @@
     <eLiterals name="fileType"/>
     <eLiterals name="contents" value="1"/>
     <eLiterals name="size" value="2"/>
+    <eLiterals name="ignore" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CombinationOperators">
     <eLiterals name="and"/>
@@ -597,10 +600,22 @@
     <eLiterals name="after" value="2"/>
     <eLiterals name="exactly" value="3"/>
     <eLiterals name="empty" value="4"/>
+    <eLiterals name="notBetween" value="5"/>
+    <eLiterals name="ignore" value="6"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FileSearchField" eSuperTypes="#//SearchField">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
         eType="#//FileFieldSearchOperators"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultOperator" eType="#//FileFieldSearchOperators"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanSearchField" eSuperTypes="#//SearchField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="#//BooleanFieldSearchOperators"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultOperator" eType="#//BooleanFieldSearchOperators"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BooleanFieldSearchOperators">
+    <eLiterals name="ignore"/>
+    <eLiterals name="true" value="1"/>
+    <eLiterals name="false" value="2"/>
   </eClassifiers>
 </ecore:EPackage>

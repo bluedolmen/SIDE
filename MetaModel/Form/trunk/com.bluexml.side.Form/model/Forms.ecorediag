@@ -843,14 +843,6 @@
         <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//CharFieldSearchOperators/istartsWith"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_X-iz8ZuSEd6hsL1uodUK-w"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_emrmoA_zEd-dLtimM5B_Sw" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//CharFieldSearchOperators/is"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_emrmoQ_zEd-dLtimM5B_Sw"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_dl9wgA_zEd-dLtimM5B_Sw" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//CharFieldSearchOperators/empty"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_dl9wgQ_zEd-dLtimM5B_Sw"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_a2GP4JuSEd6hsL1uodUK-w" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//CharFieldSearchOperators/endsWith"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_a2GP4ZuSEd6hsL1uodUK-w"/>
@@ -859,13 +851,25 @@
         <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//CharFieldSearchOperators/iendsWith"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_cBjWYZuSEd6hsL1uodUK-w"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_dl9wgA_zEd-dLtimM5B_Sw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//CharFieldSearchOperators/empty"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dl9wgQ_zEd-dLtimM5B_Sw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_emrmoA_zEd-dLtimM5B_Sw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//CharFieldSearchOperators/is"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_emrmoQ_zEd-dLtimM5B_Sw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_srFU4CFfEd-tlqAGuVXLVQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//CharFieldSearchOperators/ignore"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_srFU4SFfEd-tlqAGuVXLVQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_MioKQpuSEd6hsL1uodUK-w"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_MioKQ5uSEd6hsL1uodUK-w"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_MioKRJuSEd6hsL1uodUK-w"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Mim8IZuSEd6hsL1uodUK-w" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EEnum" href="Forms.ecore#//CharFieldSearchOperators"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Mim8IpuSEd6hsL1uodUK-w" x="5" y="1210"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Mim8IpuSEd6hsL1uodUK-w" x="12" y="1164"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_tbgEwJuSEd6hsL1uodUK-w" type="1005">
     <children xmi:type="notation:Node" xmi:id="_tbhS4JuSEd6hsL1uodUK-w" type="4010"/>
@@ -890,19 +894,23 @@
         <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//NumericalFieldSearchOperators/above"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_0ni0sZuSEd6hsL1uodUK-w"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_zGtUgCFfEd-tlqAGuVXLVQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//NumericalFieldSearchOperators/ignore"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zGtUgSFfEd-tlqAGuVXLVQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_tbihAZuSEd6hsL1uodUK-w"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_tbihApuSEd6hsL1uodUK-w"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_tbihA5uSEd6hsL1uodUK-w"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_tbgEwZuSEd6hsL1uodUK-w" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EEnum" href="Forms.ecore#//NumericalFieldSearchOperators"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tbgEwpuSEd6hsL1uodUK-w" x="184" y="1100"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tbgEwpuSEd6hsL1uodUK-w" x="180" y="1028"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_EYyf4JuTEd6hsL1uodUK-w" type="1005">
     <children xmi:type="notation:Node" xmi:id="_EYzG8JuTEd6hsL1uodUK-w" type="4010"/>
     <children xmi:type="notation:Node" xmi:id="_EYzG8ZuTEd6hsL1uodUK-w" type="5008">
       <children xmi:type="notation:Node" xmi:id="_F08U0JuTEd6hsL1uodUK-w" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ChoiceFieldSearchOperators/all"/>
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ChoiceFieldSearchOperators/ignore"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_F08U0ZuTEd6hsL1uodUK-w"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_HS780JuTEd6hsL1uodUK-w" type="2006">
@@ -923,7 +931,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_EYyf4ZuTEd6hsL1uodUK-w" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EEnum" href="Forms.ecore#//ChoiceFieldSearchOperators"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EYyf4puTEd6hsL1uodUK-w" x="205" y="1370"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EYyf4puTEd6hsL1uodUK-w" x="396" y="1332"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ZdPxIJuTEd6hsL1uodUK-w" type="1005">
     <children xmi:type="notation:Node" xmi:id="_ZdQYMJuTEd6hsL1uodUK-w" type="4010"/>
@@ -940,13 +948,17 @@
         <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//FileFieldSearchOperators/contents"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_cjqvgZuTEd6hsL1uodUK-w"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_qVxDUCFfEd-tlqAGuVXLVQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//FileFieldSearchOperators/ignore"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qVxDUSFfEd-tlqAGuVXLVQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ZdQ_QZuTEd6hsL1uodUK-w"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_ZdQ_QpuTEd6hsL1uodUK-w"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ZdQ_Q5uTEd6hsL1uodUK-w"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ZdPxIZuTEd6hsL1uodUK-w" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EEnum" href="Forms.ecore#//FileFieldSearchOperators"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZdPxIpuTEd6hsL1uodUK-w" x="10" y="1120"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZdPxIpuTEd6hsL1uodUK-w" x="8" y="1064"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_nUNg8JuTEd6hsL1uodUK-w" type="1005">
     <children xmi:type="notation:Node" xmi:id="_nUOIAJuTEd6hsL1uodUK-w" type="4010"/>
@@ -965,7 +977,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_nUNg8ZuTEd6hsL1uodUK-w" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EEnum" href="Forms.ecore#//CombinationOperators"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nUNg8puTEd6hsL1uodUK-w" x="15" y="1035"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nUNg8puTEd6hsL1uodUK-w" x="12" y="992"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_va09cA_sEd-dLtimM5B_Sw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_va09cw_sEd-dLtimM5B_Sw" type="4001"/>
@@ -1021,7 +1033,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_xa9-UQ_uEd-dLtimM5B_Sw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="Forms.ecore#//NumericalSearchField"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xa9-Ug_uEd-dLtimM5B_Sw" x="10" y="945"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xa9-Ug_uEd-dLtimM5B_Sw" x="4" y="912"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_4wyVUA_uEd-dLtimM5B_Sw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_4wyVUw_uEd-dLtimM5B_Sw" type="4001"/>
@@ -1045,7 +1057,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_4wyVUQ_uEd-dLtimM5B_Sw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="Forms.ecore#//CharSearchField"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4wyVUg_uEd-dLtimM5B_Sw" x="185" y="855"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4wyVUg_uEd-dLtimM5B_Sw" x="160" y="832"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_S-06EA_wEd-dLtimM5B_Sw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_S-06Ew_wEd-dLtimM5B_Sw" type="4001"/>
@@ -1098,25 +1110,33 @@
   <children xmi:type="notation:Node" xmi:id="_V8LxIA_yEd-dLtimM5B_Sw" type="1005">
     <children xmi:type="notation:Node" xmi:id="_V8LxIw_yEd-dLtimM5B_Sw" type="4010"/>
     <children xmi:type="notation:Node" xmi:id="_V8LxJA_yEd-dLtimM5B_Sw" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_msiv8A_yEd-dLtimM5B_Sw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//DateFieldSearchOperators/between"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_msiv8Q_yEd-dLtimM5B_Sw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_opp84A_yEd-dLtimM5B_Sw" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//DateFieldSearchOperators/before"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_opp84Q_yEd-dLtimM5B_Sw"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_uppJYA_yEd-dLtimM5B_Sw" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//DateFieldSearchOperators/exactly"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_uppJYQ_yEd-dLtimM5B_Sw"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_sN4RkA_yEd-dLtimM5B_Sw" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//DateFieldSearchOperators/after"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_sN4RkQ_yEd-dLtimM5B_Sw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_uppJYA_yEd-dLtimM5B_Sw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//DateFieldSearchOperators/exactly"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uppJYQ_yEd-dLtimM5B_Sw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_ayZcsA_zEd-dLtimM5B_Sw" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//DateFieldSearchOperators/empty"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ayZcsQ_zEd-dLtimM5B_Sw"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_msiv8A_yEd-dLtimM5B_Sw" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//DateFieldSearchOperators/between"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_msiv8Q_yEd-dLtimM5B_Sw"/>
+      <children xmi:type="notation:Node" xmi:id="_q8vygCFZEd-tlqAGuVXLVQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//DateFieldSearchOperators/notBetween"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_q8vygSFZEd-tlqAGuVXLVQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_mO9mACFfEd-tlqAGuVXLVQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//DateFieldSearchOperators/ignore"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_mO9mASFfEd-tlqAGuVXLVQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_V8LxJQ_yEd-dLtimM5B_Sw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_V8LxJg_yEd-dLtimM5B_Sw"/>
@@ -1124,7 +1144,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_V8LxIQ_yEd-dLtimM5B_Sw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EEnum" href="Forms.ecore#//DateFieldSearchOperators"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_V8LxIg_yEd-dLtimM5B_Sw" x="225" y="1225"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_V8LxIg_yEd-dLtimM5B_Sw" x="180" y="1268"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_3xISUA_yEd-dLtimM5B_Sw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_3xISUw_yEd-dLtimM5B_Sw" type="4001"/>
@@ -1148,7 +1168,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_3xISUQ_yEd-dLtimM5B_Sw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="Forms.ecore#//FileSearchField"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3xISUg_yEd-dLtimM5B_Sw" x="-10" y="805"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3xISUg_yEd-dLtimM5B_Sw" x="-4" y="744"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_oG9cUBTQEd-MHszeA5y6ZA" type="1001">
     <children xmi:type="notation:Node" xmi:id="_oHIbcBTQEd-MHszeA5y6ZA" type="4001"/>
@@ -1165,6 +1185,53 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_oG9cURTQEd-MHszeA5y6ZA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="Forms.ecore#//StaticText"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_oG9cUhTQEd-MHszeA5y6ZA" x="48" y="152"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_UNaFECFfEd-tlqAGuVXLVQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_UNbTMCFfEd-tlqAGuVXLVQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_UNbTMSFfEd-tlqAGuVXLVQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_KJLKkCFgEd-tlqAGuVXLVQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="Forms.ecore#//BooleanSearchField/operators"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_KJLKkSFgEd-tlqAGuVXLVQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_PHNx4CFgEd-tlqAGuVXLVQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="Forms.ecore#//BooleanSearchField/defaultOperator"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PHNx4SFgEd-tlqAGuVXLVQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_UNbTMiFfEd-tlqAGuVXLVQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_UNbTMyFfEd-tlqAGuVXLVQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_UNbTNCFfEd-tlqAGuVXLVQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_UNb6QCFfEd-tlqAGuVXLVQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_UNb6QSFfEd-tlqAGuVXLVQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_UNb6QiFfEd-tlqAGuVXLVQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_UNb6QyFfEd-tlqAGuVXLVQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_UNaFESFfEd-tlqAGuVXLVQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="Forms.ecore#//BooleanSearchField"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UNaFEiFfEd-tlqAGuVXLVQ" x="304" y="1176"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_WUK9QCFfEd-tlqAGuVXLVQ" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_WULkUCFfEd-tlqAGuVXLVQ" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_WULkUSFfEd-tlqAGuVXLVQ" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_aRDCgCFfEd-tlqAGuVXLVQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//BooleanFieldSearchOperators/ignore"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_aRDCgSFfEd-tlqAGuVXLVQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_cdu8gCFfEd-tlqAGuVXLVQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//BooleanFieldSearchOperators/true"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cdu8gSFfEd-tlqAGuVXLVQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ddNcgCFfEd-tlqAGuVXLVQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//BooleanFieldSearchOperators/false"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ddNcgSFfEd-tlqAGuVXLVQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_WULkUiFfEd-tlqAGuVXLVQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_WULkUyFfEd-tlqAGuVXLVQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_WULkVCFfEd-tlqAGuVXLVQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_WUK9QSFfEd-tlqAGuVXLVQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="Forms.ecore#//BooleanFieldSearchOperators"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WUK9QiFfEd-tlqAGuVXLVQ" x="8" y="1360"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_B1O60ZuPEd68JO4ATwwBpA"/>
   <element xmi:type="ecore:EPackage" href="Forms.ecore#/"/>
@@ -1549,6 +1616,7 @@
     <styles xmi:type="notation:FontStyle" xmi:id="_1kFIwg_uEd-dLtimM5B_Sw" fontName="Segoe UI"/>
     <element xsi:nil="true"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1kFIww_uEd-dLtimM5B_Sw" points="[2, -16, -2, 72]$[2, -73, -2, 15]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_833FgCFfEd-tlqAGuVXLVQ" id="(0.39705882352941174,0.03076923076923077)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_I0qooA_vEd-dLtimM5B_Sw" type="3003" source="_4wyVUA_uEd-dLtimM5B_Sw" target="_nXqtYA_uEd-dLtimM5B_Sw">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_I0qooQ_vEd-dLtimM5B_Sw" routing="Rectilinear" lineColor="4210752"/>
@@ -1590,5 +1658,12 @@
     <styles xmi:type="notation:FontStyle" xmi:id="_s-5fwhWNEd--K4EBxsFzXA" fontName="Lucida Grande"/>
     <element xsi:nil="true"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s-5fwxWNEd--K4EBxsFzXA" points="[127, 1, -146, 339]$[256, 1, -17, 339]$[256, -318, -17, 20]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_Uh5R4CFgEd-tlqAGuVXLVQ" type="3003" source="_UNaFECFfEd-tlqAGuVXLVQ" target="_nXqtYA_uEd-dLtimM5B_Sw">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_Uh5R4SFgEd-tlqAGuVXLVQ" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Uh5R4iFgEd-tlqAGuVXLVQ" fontName="Lucida Grande"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Uh5R4yFgEd-tlqAGuVXLVQ" points="[-3, -31, 30, 452]$[-31, -471, 2, 12]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Uh7HECFgEd-tlqAGuVXLVQ" id="(0.7745098039215687,0.7142857142857143)"/>
   </edges>
 </notation:Diagram>
