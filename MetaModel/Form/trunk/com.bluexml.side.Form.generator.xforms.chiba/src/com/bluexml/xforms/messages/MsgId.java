@@ -191,6 +191,8 @@ public enum MsgId {
 	INT_GEN_REDIRECT_ENTRY				("entry"),
 	INT_GEN_REDIRECT_NAME				("name"),
 	INT_GEN_REDIRECT_URL				("url"),
+	INT_GEN_REVERSED_TAG_KEY			("reversed"),
+	INT_GEN_REVERSED_TAG_VAL_ALFRESCO	("alfresco"),
 	INT_INSTANCE_SEARCH_OPCODE			("op"),
 	INT_INSTANCE_SEARCH_VALUE			("val"),
 	INT_INSTANCE_SEARCH_VALUE_HI		("hiValue"),
