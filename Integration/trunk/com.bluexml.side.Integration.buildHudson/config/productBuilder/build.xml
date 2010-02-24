@@ -23,10 +23,11 @@
 
 
 	
-	<target name="pde-build2">		
+	<target name="pde-build2">
+		<echo message="launcher path :${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar"></echo>
 		<delete file="${logFile}" failonerror="false"/>
 		<record name="${logFile}" loglevel="debug" action="start" />
-		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true" jar="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
 			<arg value="-Xmx512m" />
 			<arg value="-Xms512m" />
 			<arg value="-application" />
