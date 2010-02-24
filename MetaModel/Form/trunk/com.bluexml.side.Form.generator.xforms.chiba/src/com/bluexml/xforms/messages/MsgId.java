@@ -282,7 +282,7 @@ public enum MsgId {
 	PARAM_RELOAD_PROPERTIES("reloadProperties"),
 	/** whether to send a JSON string to */
 	PARAM_SEARCH_MODE("searchMode"),
-	PARAM_SEARCH_USE_SHORT_NAMES("searchUseShortNames"),
+	PARAM_SEARCH_USE_SHORT_NAMES("useShortNames"),
 	PARAM_SERVE_TEST_PAGE("serveTestPage"),
 	PARAM_SHOW_SUBMITS("showSubmitButtons"),
 	PARAM_SHOW_CANCEL("showCancel"),
