@@ -338,7 +338,7 @@ public class MappingToolCommon {
 	 */
 	public SearchFormType getSearchFormType(String formName) {
 		List<JAXBElement<? extends CanisterType>> elements = mapping.getCanister();
-		
+
 		for (JAXBElement<? extends CanisterType> element : elements) {
 			if (element.getValue() instanceof SearchFormType) {
 				SearchFormType formType = (SearchFormType) element.getValue();
@@ -349,7 +349,7 @@ public class MappingToolCommon {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gets (from the mapping) the WorkflowTaskType object that matches the name. Example:
 	 * "Evaluation_Demarrage" includes process "Evaluation" and task "Demarrage".
@@ -625,17 +625,17 @@ public class MappingToolCommon {
 	 */
 	protected String convertAlfrescoAttributeToXforms(String textContent, String xformsAttribute,
 			String staticEnumType) {
-		if (xformsAttribute.equals("DateTime")) {
+		if (xformsAttribute.equalsIgnoreCase("DateTime")) {
 			return DateTimeConverter.convert_AlfrescoToXForms_DateTime(textContent);
 		}
-		if (xformsAttribute.equals("Date")) {
+		if (xformsAttribute.equalsIgnoreCase("Date")) {
 			String localTimeZone = createXFormsInitialValue("Time", null, null).substring(12);
 			return DateTimeConverter.convert_AlfrescoToXForms_Date(textContent, localTimeZone);
 		}
-		if (xformsAttribute.equals("Time")) {
+		if (xformsAttribute.equalsIgnoreCase("Time")) {
 			return DateTimeConverter.convert_AlfrescoToXForms_Time(textContent);
 		}
-		if (xformsAttribute.equals("double") || xformsAttribute.equals("float")) {
+		if (xformsAttribute.equalsIgnoreCase("double") || xformsAttribute.equalsIgnoreCase("float")) {
 			return textContent.replace(',', '.');
 		}
 
@@ -674,16 +674,16 @@ public class MappingToolCommon {
 	 */
 	protected String convertXformsAttributeToAlfresco(String textContent, String type,
 			String staticEnumType) {
-		if (type.equals("DateTime")) {
+		if (type.equalsIgnoreCase("DateTime")) {
 			return DateTimeConverter.convert_XFormsToAlfresco_DateTime(textContent);
 		}
-		if (type.equals("Date")) {
+		if (type.equalsIgnoreCase("Date")) {
 			return DateTimeConverter.convert_XFormsToAlfresco_Date(textContent);
 		}
-		if (type.equals("Time")) {
+		if (type.equalsIgnoreCase("Time")) {
 			return DateTimeConverter.convert_XFormsToAlfresco_Time(textContent);
 		}
-		if (type.equals("double") || type.equals("float")) {
+		if (type.equalsIgnoreCase("double") || type.equalsIgnoreCase("float")) {
 			return textContent.replace(',', '.');
 		}
 		if (StringUtils.trimToNull(staticEnumType) != null) {
@@ -730,17 +730,17 @@ public class MappingToolCommon {
 	 */
 	protected String createXFormsInitialValue(String attributeType, String candidateValue,
 			String enumType) {
-		if (attributeType.equals("DateTime")) {
+		if (attributeType.equalsIgnoreCase("DateTime")) {
 			return DateTimeConverter.convert_AlfrescoToXForms_DateTime(new Date().getTime());
 		}
-		if (attributeType.equals("Date")) {
+		if (attributeType.equalsIgnoreCase("Date")) {
 			return DateTimeConverter.convert_AlfrescoToXForms_Date(new Date().getTime());
 		}
-		if (attributeType.equals("Time")) {
+		if (attributeType.equalsIgnoreCase("Time")) {
 			return DateTimeConverter.convert_AlfrescoToXForms_Time(new Date().getTime());
 		}
 
-		if (attributeType.equals("boolean")) {
+		if (attributeType.equalsIgnoreCase("boolean")) {
 			return "false";
 		}
 		if (numberTypes.indexOf(attributeType) != -1) {
