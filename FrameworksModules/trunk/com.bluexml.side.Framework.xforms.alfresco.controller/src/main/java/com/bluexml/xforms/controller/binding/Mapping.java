@@ -187,9 +187,9 @@ public class Mapping {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link WorkflowTaskType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CanisterType }{@code >}
-     * {@link JAXBElement }{@code <}{@link SearchFormType }{@code >}
      * {@link JAXBElement }{@code <}{@link FormType }{@code >}
+     * {@link JAXBElement }{@code <}{@link SearchFormType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CanisterType }{@code >}
      * 
      * 
      */

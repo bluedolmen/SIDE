@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="pick" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *       &lt;attribute name="inputs" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -44,6 +45,9 @@ public class SearchFieldType {
     @XmlAttribute
     @XmlSchemaType(name = "anySimpleType")
     protected String inputs;
+    @XmlAttribute
+    @XmlSchemaType(name = "anySimpleType")
+    protected String type;
 
     /**
      * Gets the value of the name property.
@@ -115,6 +119,30 @@ public class SearchFieldType {
      */
     public void setInputs(String value) {
         this.inputs = value;
+    }
+
+    /**
+     * Gets the value of the type property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Sets the value of the type property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setType(String value) {
+        this.type = value;
     }
 
 }
