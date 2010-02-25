@@ -699,9 +699,7 @@ public class AlfrescoController {
 	 */
 	public String persistSearch(String formName, Node instance, boolean shortPropertyNames)
 			throws ServletException {
-		// TODO
 		return mappingTool.transformSearchForm(formName, instance, shortPropertyNames);
-
 	}
 
 	/**
