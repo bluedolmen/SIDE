@@ -11,7 +11,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%script type="Portal" name="alfrescoGenerator" file="<%createTemplates%>" post="trim()"%>
 <script>
 function selectXFormSearch(item) {
-	var blankurl = "<%getXFORMURL()%>/xforms?searchMode=true&type={formName}&formType=form&nextPageSubmit=<%getSHAREURL()%>/searchFormCallBack.html";
+	var blankurl = "<%getXFORMURL()%>/xforms?type={formName}&formType=search&nextPageSubmit=<%getSHAREURL()%>/searchFormCallBack.html";
 	var selected = item.options[item.selectedIndex];
 	var iframe = document.getElementById('xformSearch');
 	iframe.src=blankurl.replace(/{formName}/,selected.value);
