@@ -771,6 +771,12 @@ public class MappingGenerator extends AbstractGenerator {
 				fieldType.setType(typ.getName());
 			}
 
+			// style
+			String style = searchField.getStyle();
+			if (style != null) {
+				CSSCollector.add(style);
+			}
+
 			((SearchFormType) formType).getField().add(fieldType);
 		} else {
 			throw new RuntimeException("Search fields are allowed only on FormSearch objects. '"
