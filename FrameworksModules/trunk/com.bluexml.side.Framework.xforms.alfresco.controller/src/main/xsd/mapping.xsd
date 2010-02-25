@@ -207,9 +207,10 @@
 			<!-- no meaning in the following name, just wanted a 4-character token -->
 			<xsd:element name="pick" type="xsd:string" />
 			<!--  -->
-			<!-- if present, gives the total number of UI input controls for the search field -->
 		</xsd:sequence>
+		<!-- if present, gives the total number of UI input controls for the search field -->
 		<xsd:attribute name="inputs" use="optional" />
 		<xsd:attribute name="type" use="optional" />
+		<xsd:attribute name="enum" use="optional" />
 	</xsd:complexType>
 </xsd:schema>
