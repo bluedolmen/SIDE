@@ -174,4 +174,19 @@ public class ClassServices {
 	public static String getPrefixedNamespaceQName(NamedModelElement node) throws Exception {
 		return "{" + getNamespaceURI(node) + "}" + CommonServices.getNamedModelElementQName(node);
 	}
+	
+	public static boolean isFolder(Clazz clazz){
+		boolean is = false;
+		if (clazz.getGeneralizations().size() > 0){
+			for (Clazz cl : clazz.getGeneralizations()){
+				if (("cm:folder").equals("cm:" + cl.getName())){
+					return true;
+				}
+				else{
+					return isFolder(cl);
+				}
+			} 
+		}
+		return is;
+	}
 }
