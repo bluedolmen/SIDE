@@ -1,5 +1,5 @@
 /**
- * 
+ * This class contains useful constants
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping;
 

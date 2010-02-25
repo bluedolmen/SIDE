@@ -1,5 +1,5 @@
 /**
- * 
+ * This class allows access to native properties of instances defined in Alfresco
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.graph;
 
@@ -11,7 +11,7 @@ import org.alfresco.service.namespace.QNamePattern;
  * @author davidchevrier
  *
  */
-public class NativeAlfrescoNode implements INode {
+public class NativeAlfrescoNode {
 	
 	private Map<QNamePattern,Object> nativeDatasProperties;
 	private Map<QNamePattern,Object> nativeDatasAspects;

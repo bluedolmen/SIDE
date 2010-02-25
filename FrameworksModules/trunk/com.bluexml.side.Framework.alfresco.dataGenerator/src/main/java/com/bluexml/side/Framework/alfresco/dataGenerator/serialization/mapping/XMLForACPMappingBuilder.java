@@ -1,5 +1,6 @@
 /**
- * 
+ * This class manage the xml build containing instances's metadata by mapping 
+ * generated nodes and arcs to their corresponding xml's representation
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping;
 
@@ -42,6 +43,18 @@ public class XMLForACPMappingBuilder implements IMapping {
 		this.helper = helper;
 	}
 	
+	public AlfrescoModelData getAlfrescoModelData() {
+		return alfrescoModelData;
+	}
+
+	public void setAlfrescoModelData(AlfrescoModelData alfrescoModelData) {
+		this.alfrescoModelData = alfrescoModelData;
+	}
+	
+	/**
+	 * build the dom4j Document containing instances's metadata
+	 * @return the created dom4j Document 
+	 */
 	public Document build (){
 		
 		document = DocumentHelper.createDocument();
@@ -53,14 +66,10 @@ public class XMLForACPMappingBuilder implements IMapping {
 		
 	}
 	
-	public AlfrescoModelData getAlfrescoModelData() {
-		return alfrescoModelData;
-	}
-
-	public void setAlfrescoModelData(AlfrescoModelData alfrescoModelData) {
-		this.alfrescoModelData = alfrescoModelData;
-	}
-
+	/**
+	 * maps all generated nodes to their corresponding xml's elements
+	 * @param root
+	 */
 	private void mapsAllNodes(Element root) {
 		Collection<INode> generatedNodes = ((AlfrescoModelData) alfrescoModelData).getGeneratedTypesInstances();
 		for (INode node : generatedNodes) {
@@ -71,6 +80,10 @@ public class XMLForACPMappingBuilder implements IMapping {
 		
 	}
 	
+	/**
+	 * maps all generated arcs to their corresponding xml's elements
+	 * @param root
+	 */
 	private void mapsAllArcs(Element root) {
 		Collection<IArc> generatedArcs = ((AlfrescoModelData)alfrescoModelData).getGeneratedAssociationsInstances();
 		Collection<IArc> tempUsedArcs = new ArrayList<IArc>();

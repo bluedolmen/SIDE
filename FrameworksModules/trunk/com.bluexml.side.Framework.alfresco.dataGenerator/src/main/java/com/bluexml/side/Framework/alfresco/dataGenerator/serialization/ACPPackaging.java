@@ -1,5 +1,6 @@
 /**
- * 
+ * This class packages in a .acp file xml containing metadata's instances
+ * and their associated contents (.txt, .pdf, ... files)
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.serialization;
 
@@ -21,7 +22,7 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.generator.NativeAlfresc
  * @author davidchevrier
  *
  */
-public class ACPPackaging implements ISerialization {
+public class ACPPackaging {
 	
 	private OutputStream acpArchive;
 	private String archiveName;
@@ -43,20 +44,6 @@ public class ACPPackaging implements ISerialization {
 	public void setAcpArchive(OutputStream acpArchive) {
 		this.acpArchive = acpArchive;
 	}
-	
-//	/**
-//	 * @return the xmlSerializer
-//	 */
-//	public XMLForACPSerialization getXmlSerializer() {
-//		return xmlSerializer;
-//	}
-//
-//	/**
-//	 * @param xmlSerializer the xmlSerializer to set
-//	 */
-//	public void setXmlSerializer(XMLForACPSerialization xmlSerializer) {
-//		this.xmlSerializer = xmlSerializer;
-//	}
 	
 	/**
 	 * @return the archiveName
@@ -94,7 +81,13 @@ public class ACPPackaging implements ISerialization {
 			NativeAlfrescoModelRandomDataGenerator nativeGenerator) {
 		this.nativeGenerator = nativeGenerator;
 	}
-
+	
+	/**
+	 * packages in a .acp file xml containing metadata's instances
+	 * and their associated contents (.txt, .pdf, ... files) 
+	 * @return the .acp file
+	 * @throws IOException
+	 */
 	public File packageACP() throws IOException{
 		acpArchive = new FileOutputStream(archiveName + ".acp");
 		byte[] datas = new byte[bufferSize];
@@ -134,21 +127,27 @@ public class ACPPackaging implements ISerialization {
 		}
 		
 		archiveOutput.close();
+		buffer.close();
 		
 		documents.clear();
 		nativeGenerator.setDocuments(documents);
 		
-		File acp =new File(archiveName + ".acp");
-		//System.out.println("ACP File :"+acp.getAbsolutePath());
+		File acp = new File(archiveName + ".acp");
 		return acp;
 	}
 	
+	/**
+	 * delete .acp and .xml files in system files
+	 * @param acp
+	 * @return true if process is successful
+	 * @throws IOException 
+	 */
 	public boolean clean(File acp){
-		acp.deleteOnExit();
+		boolean delAcp = acp.delete();
 		File xml = new File(xmlSerializer.getFileName());
-		xml.deleteOnExit();
+		boolean delXml = xml.delete();
 		
-		return true;
+		return delAcp && delXml;
 	}
 
 }

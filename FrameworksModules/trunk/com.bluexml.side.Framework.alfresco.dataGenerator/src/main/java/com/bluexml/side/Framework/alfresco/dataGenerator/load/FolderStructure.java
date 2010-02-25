@@ -1,6 +1,6 @@
 /**
  * This class ensures, if the option is checked in the webscript's form, the organization of the content
- * instances grouped by types into folders
+ * instances grouped by type into folders
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.load;
 
@@ -40,8 +40,15 @@ public class FolderStructure {
 	public void setService(ServiceRegistry service) {
 		this.service = service;
 	}
-
+	/**
+	 * manage the organization by type into folders of content instances
+	 * @param repository
+	 * @return true if the process is successful
+	 * @throws Exception
+	 */
 	public boolean manageFolders(NodeRef repository) throws Exception {
+		// We choose to first generate the nodes and then organize them into folders moving them;
+		// in this way, folders organization can be made as a webscript's option. 
 		List<FileInfo> nodes = getContentInstances(repository);
 		for (int l = 0; l < nodes.size(); l++){
 			NodeRef node = nodes.get(l).getNodeRef();
@@ -59,7 +66,14 @@ public class FolderStructure {
 		}
 		return true;
 	}
-
+	
+	/**
+	 * allows access to a folder of a given name
+	 * @param folderName
+	 * @param repository
+	 * @return folder of the given name if exists in the given repository;
+	 * 		   null otherwise
+	 */
 	private NodeRef getFolder(String folderName, NodeRef repository) {
 		NodeRef folder= null;
 		List<FileInfo> folders = service.getFileFolderService().listFolders(repository);
@@ -72,12 +86,22 @@ public class FolderStructure {
 		}
 		return folder;
 	}
-
+	
+	/**
+	 * allows access to the cm:name property of a given name
+	 * @param node
+	 * @return cm:name property of the given name
+	 */
 	private String getNodeName(NodeRef node) {
 		Serializable nameProperty = service.getNodeService().getProperty(node, ContentModel.PROP_NAME);
 		return nameProperty.toString();
 	}
-
+	
+	/**
+	 * allows access to the generated contents
+	 * @param repository
+	 * @return generated content instances 
+	 */
 	private List<FileInfo> getContentInstances(NodeRef repository) {
 		return service.getFileFolderService().listFiles(repository);
 	}

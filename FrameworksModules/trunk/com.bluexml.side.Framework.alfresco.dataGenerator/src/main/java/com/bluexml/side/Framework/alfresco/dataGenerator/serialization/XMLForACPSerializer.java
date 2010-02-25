@@ -1,13 +1,11 @@
 /**
- * 
+ * This class allows the serialization of the builded xml containing 
+ * metadata for .acp
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.serialization;
 
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.OutputStreamWriter;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
 
 import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingBuilder;
 
@@ -15,7 +13,7 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.X
  * @author dchevrier
  *
  */
-public class XMLForACPSerializer {
+public class XMLForACPSerializer implements ISerialization{
 
 	private XMLForACPMappingBuilder builder;
 	private String fileName;
@@ -36,6 +34,11 @@ public class XMLForACPSerializer {
 		this.fileName = fileName;
 	}
 	
+	/**
+	 * write the Document object (dom4j) in file of given name
+	 * @return true if the process is successful
+	 * @throws Exception
+	 */
 	public boolean serializeXml() throws Exception {
 		FileOutputStream fos = new FileOutputStream(fileName);
 		OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");

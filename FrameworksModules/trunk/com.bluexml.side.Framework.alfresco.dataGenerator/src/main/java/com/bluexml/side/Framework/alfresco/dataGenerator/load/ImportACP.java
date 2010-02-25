@@ -1,10 +1,12 @@
 /**
- * 
+ * This class manage the deployment of the generated .acp
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.load;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.util.List;
 
 import org.alfresco.model.ContentModel;
@@ -14,11 +16,9 @@ import org.alfresco.service.cmr.model.FileFolderService;
 import org.alfresco.service.cmr.model.FileInfo;
 import org.alfresco.service.cmr.repository.ContentWriter;
 import org.alfresco.service.cmr.repository.NodeRef;
-import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.search.ResultSet;
 import org.alfresco.service.cmr.search.SearchService;
-import org.alfresco.service.cmr.security.AuthenticationService;
 import org.alfresco.service.cmr.view.ImporterService;
 import org.alfresco.service.cmr.view.Location;
 
@@ -35,6 +35,23 @@ public class ImportACP {
 	
 	private String login;
 	private String password;
+	
+	private class CustomACPImportPackageHandler extends ACPImportPackageHandler{
+
+	    public CustomACPImportPackageHandler(File zipFile, String dataFileEncoding) {
+	        super(zipFile, dataFileEncoding);
+	    }
+
+	    @Override
+	    public void endImport() {
+	        super.endImport();
+	        try {
+	            this.zipFile.close();
+	        } catch (IOException e) {
+	            throw new RuntimeException("Unable to close the zip file", e);
+	        }
+	    }
+	}
 	
 	/**
 	 * @return the services
@@ -107,8 +124,17 @@ public class ImportACP {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	/**
+	 * 
+	 * @param pathToAlfrescoRepository
+	 * @return the NodeRef's repository having the given path in Alfresco 
+	 * @throws Exception
+	 */
 	public NodeRef manageAlfrescoRepository(String pathToAlfrescoRepository) throws Exception {
+		// If folder of given path exists, we delete its contents before importing the .acp;
+		// If not, it is created.
+		
 		services.authenticate();
 		
 		NodeRef container = createOrGiveMeFolder(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, pathToAlfrescoRepository);
@@ -123,23 +149,44 @@ public class ImportACP {
 		}		
 		return container;
 	}
-
-	public boolean importACP(File acp, NodeRef repository) {
+	
+	/**
+	 * manage the generated .acp deployment in the given Alfresco repository
+	 * @param acp
+	 * @param repository
+	 * @return true if the process is successful
+	 */
+	public boolean importACP(File acp, NodeRef repository) throws Exception {
 		ImporterService importerService = serviceRegistry.getImporterService();
 
-		ACPImportPackageHandler importerHandler = new ACPImportPackageHandler(acp, ACPImportPackageHandler.DEFAULT_ENCODING);
+		CustomACPImportPackageHandler importerHandler = new CustomACPImportPackageHandler(acp, ACPImportPackageHandler.DEFAULT_ENCODING);
 		importerService.importView(importerHandler, new Location(repository), null, null);
+		importerHandler.endImport();
 		
 		return true;
 	}
-
-	public boolean saveACP(File acp, NodeRef parent) throws IOException {		
+	
+	/**
+	 * save the generated .acp in the given Alfresco repository
+	 * @param acp
+	 * @param parent
+	 * @return true if the process is successful
+	 * @throws IOException
+	 */
+	public boolean saveACP(File acp, NodeRef parent) throws IOException {
+		//Choice has been made to save the generated .acp in order to reproduce manually a data set
 		NodeRef acpFile = fileFolderService.create(parent, acp.getName(), ContentModel.TYPE_CONTENT).getNodeRef();
 		ContentWriter writer = fileFolderService.getWriter(acpFile);
 		writer.putContent(acp);
 		return true;
 	}
-
+	
+	/**
+	 * 
+	 * @param store
+	 * @param xpath
+	 * @return the NodeRef's folder if exists; else the folder and its reference are created
+	 */
 	public NodeRef createOrGiveMeFolder(StoreRef store, String xpath) {
 		ResultSet rs = serviceRegistry.getSearchService().query(store, SearchService.LANGUAGE_XPATH, xpath);
 		NodeRef nr = null;

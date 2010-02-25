@@ -1,5 +1,5 @@
 /**
- * 
+ * This class contains useful methods to help builder to build xml elements
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping;
 
@@ -47,19 +47,34 @@ public class XMLForACPMappingHelper {
 	public void setServices(XMLForACPMappingServices services) {
 		this.services = services;
 	}
-
+	
+	/**
+	 * create the Document's root element
+	 * @return the xml's root element
+	 */
 	public Element createRoot(){
 		String tag = services.createTag(NamespaceService.REPOSITORY_VIEW_PREFIX,NamespaceService.REPOSITORY_VIEW_PREFIX);
 		Element root = builder.getDocument().addElement(tag,NamespaceService.REPOSITORY_VIEW_1_0_URI);
 		return root;
 	}
 	
+	/**
+	 * create the xml's element corresponding to type of generated node
+	 * @param root
+	 * @param node
+	 * @return element corresponding to given generated node's type
+	 */
 	public Element createType(Element root, INode node){
 		Element type = root.addElement(createType(node));
 		type.addNamespace(Constants.NATIVE_SIDE_PREFIX, Constants.NATIVE_SIDE_URI);
 		return type;
 	}
 	
+	/**
+	 * create the dom4j qualified name of given generated node
+	 * @param node
+	 * @return the dom4j qualified name of given generated node
+	 */
 	public QName createType(INode node) {
 		String qualifiedName = services.getQualifiedName(node);
 		String name = services.getName(qualifiedName);
@@ -69,11 +84,22 @@ public class XMLForACPMappingHelper {
 		return new QName(name,namespace,qualifiedName);
 	}
 	
+	/**
+	 * create xml's elements corresponding to native Alfresco's aspects of given node
+	 * @param type
+	 * @param node
+	 */
 	public void createAspects(Element type, INode node) {
 		Element aspects = type.addElement(services.createTag(NamespaceService.REPOSITORY_VIEW_PREFIX, Constants.ASPECTS));
 		createNativeAspects(aspects,node);
 	}
-
+	
+	/**
+	 * create and fill the xml's elements corresponding to native Alfresco's aspects of given node 
+	 * under aspects element
+	 * @param aspects
+	 * @param node
+	 */
 	private void createNativeAspects(Element aspects, INode node) {
 		Map<QNamePattern,Object> dataAspects = ((NativeAlfrescoNode) ((AlfrescoNode) node).getNativeNode()).getNativeDatasAspects();
 		Set<QNamePattern> nativeAspects = dataAspects.keySet();
@@ -85,7 +111,12 @@ public class XMLForACPMappingHelper {
 		}
 		
 	}
-
+	
+	/**
+	 * create and fill xml's elements corresponding to SIDE properties
+	 * @param prop
+	 * @param propertiesData
+	 */
 	private void createAndFillSIDEProperties(Element prop, Map<PropertyDefinition, Object> propertiesData) {
 		Set<PropertyDefinition> properties = propertiesData.keySet();
 		for (PropertyDefinition property : properties) {
@@ -96,7 +127,12 @@ public class XMLForACPMappingHelper {
 		}
 		
 	}
-
+	
+	/**
+	 * create and fill xml's elements corresponding to all properties of given generated node
+	 * @param type
+	 * @param node
+	 */
 	public void createProperties(Element type, INode node) {
 		Element properties = type.addElement(services.createTag(NamespaceService.REPOSITORY_VIEW_PREFIX,Constants.PROPERTIES));
 		
@@ -112,7 +148,12 @@ public class XMLForACPMappingHelper {
 			createAndFillSIDEProperties(properties,dataSIDEAspects.get(sideAspect));
 		}
 	}
-
+	
+	/**
+	 * create and fill xml's elements corresponding to native properties of given generated node
+	 * @param properties
+	 * @param dataNativeProperties
+	 */
 	private void createAndFillNativeProperties(Element properties, Map<QNamePattern, Object> dataNativeProperties) {
 		Set<QNamePattern> nativePorperties = dataNativeProperties.keySet();
 		for (QNamePattern nativeProperty : nativePorperties) {
@@ -126,7 +167,13 @@ public class XMLForACPMappingHelper {
 		}
 		
 	}
-
+	
+	/**
+	 * create and fill the xml's elements corresponding to generated arcs of given source node
+	 * @param root
+	 * @param src
+	 * @return the associations root xml element
+	 */
 	public Element createAssociation(Element root, INode src) {
 		String tag = services.createTag(NamespaceService.REPOSITORY_VIEW_PREFIX,Constants.REFERENCE);
 		
@@ -137,7 +184,12 @@ public class XMLForACPMappingHelper {
 		
 		return root.addElement(tag,NamespaceService.REPOSITORY_VIEW_1_0_URI).addAttribute(attributeName,attributeValue);
 	}
-
+	
+	/**
+	 * create and fill the xml's elements corresponding to target of given generated arc
+	 * @param assoc
+	 * @param arc
+	 */
 	public void createTargetAssociation(Element assoc, IArc arc) {
 		org.alfresco.service.namespace.QName arcQName = ((AlfrescoArc)arc).getTypeAssociation().getName();
 		Element definedAssoc = assoc.addElement(arcQName.toPrefixString(),arcQName.getNamespaceURI());
@@ -145,6 +197,12 @@ public class XMLForACPMappingHelper {
 		createAssociation(definedAssoc,((AlfrescoArc)arc).getTarget());	
 	}
 	
+	/**
+	 * give generated arcs by given source
+	 * @param source
+	 * @param generatedArcs
+	 * @return the generated atcs of given source
+	 */
 	public Collection<IArc> getArcsBySource(INode source, Collection<IArc> generatedArcs) {
 		Collection<IArc> arcsBySource = new ArrayList<IArc>();
 		for (IArc generatedArc : generatedArcs){

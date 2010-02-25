@@ -1,5 +1,5 @@
 /**
- * Node is equivalent to an instance of an Alfresco type
+ * This class allows access to instance of some type defined in the model
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.graph;
 
@@ -18,7 +18,7 @@ public class AlfrescoNode implements INode {
 	private TypeDefinition typeDefinition;
 	private Map<PropertyDefinition,Object> datasProperties;
 	private Map<AspectDefinition,Map<PropertyDefinition,Object>> dataAspects;
-	private INode nativeNode;
+	private NativeAlfrescoNode nativeNode;
 	/**
 	 * @return the type
 	 */
@@ -60,13 +60,13 @@ public class AlfrescoNode implements INode {
 	/**
 	 * @return the nativeNode
 	 */
-	public INode getNativeNode() {
+	public NativeAlfrescoNode getNativeNode() {
 		return nativeNode;
 	}
 	/**
 	 * @param nativeNode the nativeNode to set
 	 */
-	public void setNativeNode(INode nativeNode) {
+	public void setNativeNode(NativeAlfrescoNode nativeNode) {
 		this.nativeNode = nativeNode;
 	}
 	

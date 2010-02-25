@@ -1,5 +1,5 @@
 /**
- * 
+ * This class contains useful services for import .acp management
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.load;
 
@@ -44,6 +44,10 @@ public class ImportACPServices {
 		this.serviceRegistry = serviceRegistry;
 	}
 
+	/**
+	 * allows the webscript's user authentication 
+	 * @throws Exception
+	 */
 	public void authenticate() throws Exception{
 		String login = importer.getLogin();
 		String passwd = importer.getPassword();
