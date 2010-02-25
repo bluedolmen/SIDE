@@ -615,7 +615,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BooleanFieldSearchOperators">
     <eLiterals name="ignore"/>
-    <eLiterals name="true" value="1"/>
-    <eLiterals name="false" value="2"/>
+    <eLiterals name="is" value="1" literal="is"/>
+    <eLiterals name="isNot" value="2" literal="isNot"/>
   </eClassifiers>
 </ecore:EPackage>

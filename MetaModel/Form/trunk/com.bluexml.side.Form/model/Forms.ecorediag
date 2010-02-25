@@ -869,7 +869,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Mim8IZuSEd6hsL1uodUK-w" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EEnum" href="Forms.ecore#//CharFieldSearchOperators"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Mim8IpuSEd6hsL1uodUK-w" x="12" y="1164"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Mim8IpuSEd6hsL1uodUK-w" x="12" y="1176"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_tbgEwJuSEd6hsL1uodUK-w" type="1005">
     <children xmi:type="notation:Node" xmi:id="_tbhS4JuSEd6hsL1uodUK-w" type="4010"/>
@@ -1218,11 +1218,11 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_aRDCgSFfEd-tlqAGuVXLVQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_cdu8gCFfEd-tlqAGuVXLVQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//BooleanFieldSearchOperators/true"/>
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//BooleanFieldSearchOperators/is"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_cdu8gSFfEd-tlqAGuVXLVQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ddNcgCFfEd-tlqAGuVXLVQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//BooleanFieldSearchOperators/false"/>
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//BooleanFieldSearchOperators/isNot"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ddNcgSFfEd-tlqAGuVXLVQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_WULkUiFfEd-tlqAGuVXLVQ"/>
