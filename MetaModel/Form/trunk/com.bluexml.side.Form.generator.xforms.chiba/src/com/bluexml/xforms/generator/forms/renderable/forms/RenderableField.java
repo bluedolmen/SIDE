@@ -3,9 +3,7 @@ package com.bluexml.xforms.generator.forms.renderable.forms;
 import java.util.Collection;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
-import org.jdom.Element;
 
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;
@@ -284,27 +282,12 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 		return result;
 	}
 
-	/**
-	 * Renders the element as nested into a div if the "appearance" property is set. The string
-	 * value of the property is the CSS class of the div.
-	 * 
-	 * @param rendered
-	 *            the XML element of this field. WILL BE MODIFIED IF A STYLE IS DEFINED.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field.AbstractRenderableField#applyStyle(com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement)
 	 */
 	@Override
 	protected void applyStyle(RenderedXMLElement rendered) {
-		String appearance = StringUtils.trimToNull(formElement.getStyle());
-		if (appearance != null) {
-			Element div = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
-			Element nestedElement = rendered.getXformsElement();
-			div.setAttribute("class", appearance);
-			div.addContent(nestedElement);
-
-			Element divOut = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
-			divOut.setAttribute("class", MsgId.INT_CSS_BLUEXML_AUTOGEN.getText());
-			divOut.addContent(div);
-
-			rendered.setXMLElement(divOut);
-		}
+		applyStyle(rendered, formElement.getStyle());
 	}
+
 }

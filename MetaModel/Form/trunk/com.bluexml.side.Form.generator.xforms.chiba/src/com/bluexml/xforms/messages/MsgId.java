@@ -219,6 +219,7 @@ public enum MsgId {
 	INT_SUFFIX_READ_ONLY_FORMS			("RO"),
 	INT_SUFFIX_UPLOAD_FILE				("_fileContent"),
 	INT_SUFFIX_UPLOAD_REPO				("_repoContent"),
+	INT_TYPE_XSD_BOOLEAN				("boolean"),
 	INT_TYPE_XSD_DATE 					("date"),
 	INT_TYPE_XSD_DATETIME 				("dateTime"),
 	INT_TYPE_XSD_STRING 				("string"),

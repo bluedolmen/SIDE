@@ -28,7 +28,7 @@ public class RenderedSearchSelectInput extends Rendered {
 	public RenderedSearchSelectInput(ModelElementBindSimple inputBind, String selId,
 			Enumeration valueList) {
 		xformsElement = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
-		xformsElement.setAttribute("class", MsgId.INT_CSS_SEARCH_OPERATOR.getText());
+		xformsElement.setAttribute("class", MsgId.INT_CSS_SEARCH_VALUE.getText());
 
 		// Top element and its attributes
 		Element selElt = XFormsGenerator.createElement("select", XFormsGenerator.NAMESPACE_XFORMS);

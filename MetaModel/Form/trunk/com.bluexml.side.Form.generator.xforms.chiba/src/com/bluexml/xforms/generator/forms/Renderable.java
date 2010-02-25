@@ -7,12 +7,13 @@ import java.util.Stack;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.bluexml.xforms.messages.MsgId;
+import org.jdom.Element;
 
 import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableFormContainer;
 import com.bluexml.xforms.generator.forms.rendered.RenderedRepeater;
 import com.bluexml.xforms.generator.forms.rendered.RenderedTabContainer;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class Renderable.<br>
@@ -314,6 +315,28 @@ public abstract class Renderable {
 			}
 		}
 		return result.toString();
+	}
+
+	/**
+	 * Renders the element as nested into a div if the "appearance" property is set. The string
+	 * value of the property is the CSS class of the div.
+	 * 
+	 * @param rendered
+	 *            the XML element of this field. WILL BE MODIFIED IF A STYLE IS DEFINED.
+	 */
+	protected void applyStyle(Rendered rendered, String style) {
+		if (StringUtils.trimToNull(style) != null) {
+			Element div = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+			Element nestedElement = rendered.getXformsElement();
+			div.setAttribute("class", style);
+			div.addContent(nestedElement);
+
+			Element divOut = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+			divOut.setAttribute("class", MsgId.INT_CSS_BLUEXML_AUTOGEN.getText());
+			divOut.addContent(div);
+
+			rendered.setXformsElement(divOut);
+		}
 	}
 
 	protected String getDynEnumContextString(String id) {

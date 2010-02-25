@@ -40,6 +40,8 @@ import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.Package;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.impl.CommonFactoryImpl;
+import com.bluexml.side.form.BooleanFieldSearchOperators;
+import com.bluexml.side.form.BooleanSearchField;
 import com.bluexml.side.form.CharFieldSearchOperators;
 import com.bluexml.side.form.CharSearchField;
 import com.bluexml.side.form.ChoiceFieldSearchOperators;
@@ -560,18 +562,20 @@ public class FormGeneratorsManager {
 		operatorPool.add(new OperatorBean("icontains", "Contains (case-insensitive)"));
 		operatorPool.add(new OperatorBean("startsWith", "Starts with"));
 		operatorPool.add(new OperatorBean("istartsWith", "Starts with (case-insensitive)"));
-		operatorPool.add(new OperatorBean("is", "Is exactly"));
+		operatorPool.add(new OperatorBean("is", "Is"));
 		operatorPool.add(new OperatorBean("empty", "Is empty"));
 		operatorPool.add(new OperatorBean("endsWith", "Ends with"));
 		operatorPool.add(new OperatorBean("iendsWith", "Ends with (case-insensitive)"));
+		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
 		// date
 		operatorPool.add(new OperatorBean("before", "Before"));
 		operatorPool.add(new OperatorBean("exactly", "Is exactly"));
 		operatorPool.add(new OperatorBean("after", "After"));
 		operatorPool.add(new OperatorBean("empty", "Is empty"));
 		operatorPool.add(new OperatorBean("between", "Between"));
+		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
 		// choice
-		operatorPool.add(new OperatorBean("all", "All"));
+		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
 		operatorPool.add(new OperatorBean("oneOf", "One of"));
 		operatorPool.add(new OperatorBean("none", "None of"));
 		operatorPool.add(new OperatorBean("allBut", "Any but"));
@@ -581,10 +585,16 @@ public class FormGeneratorsManager {
 		operatorPool.add(new OperatorBean("below", "Below"));
 		operatorPool.add(new OperatorBean("empty", "Is empty"));
 		operatorPool.add(new OperatorBean("above", "Above"));
+		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
 		// file
 		operatorPool.add(new OperatorBean("fileType", "File type is"));
 		operatorPool.add(new OperatorBean("size", "Size is between"));
 		operatorPool.add(new OperatorBean("contents", "Contains"));
+		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
+		// boolean
+		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
+		operatorPool.add(new OperatorBean("is", "Is"));
+		operatorPool.add(new OperatorBean("isNot", "Is not"));
 	}
 
 	/**
@@ -1333,7 +1343,7 @@ public class FormGeneratorsManager {
 				listOp.add(getOperatorFromPool(op.getName()));
 			}
 		} else if (searchField instanceof ChoiceSearchField) {
-			defaultTypeOp = "all";
+			defaultTypeOp = "oneOf";
 			ChoiceSearchField localField = (ChoiceSearchField) searchField;
 			ChoiceFieldSearchOperators defaultOperator = localField.getDefaultOperator();
 			if (defaultOperator != null) {
@@ -1352,6 +1362,17 @@ public class FormGeneratorsManager {
 				fieldOp = defaultOperator.getName();
 			}
 			for (FileFieldSearchOperators op : fieldOps) {
+				listOp.add(getOperatorFromPool(op.getName()));
+			}
+		} else if (searchField instanceof BooleanSearchField) {
+			defaultTypeOp = "is";
+			BooleanSearchField localField = (BooleanSearchField) searchField;
+			EList<BooleanFieldSearchOperators> fieldOps = localField.getOperators();
+			BooleanFieldSearchOperators defaultOperator = localField.getDefaultOperator();
+			if (defaultOperator != null) {
+				fieldOp = defaultOperator.getName();
+			}
+			for (BooleanFieldSearchOperators op : fieldOps) {
 				listOp.add(getOperatorFromPool(op.getName()));
 			}
 		}
@@ -1379,12 +1400,16 @@ public class FormGeneratorsManager {
 	 * @return the matching operator
 	 */
 	private OperatorBean getOperatorFromPool(String refId) {
+//		String refId = refId;
+//		if (refId.equals("all")) {
+//			refId = "oneOf";
+//		}
 		for (OperatorBean op : operatorPool) {
 			if (op.id.equals(refId)) {
 				return op;
 			}
 		}
-		return null;
+		throw new RuntimeException("No operator found with id '" + refId + "'");
 	}
 
 	/**
