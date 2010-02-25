@@ -758,17 +758,21 @@ public class MappingGenerator extends AbstractGenerator {
 			fieldType.setPick(defaultOp);
 
 			// number of UI input controls
-			Attribute attr = (Attribute) formGenerator.getRealObject(searchField.getRef());
-			DataType typ = attr.getTyp();
+			Attribute attribute = (Attribute) formGenerator.getRealObject(searchField.getRef());
+			DataType typ = attribute.getTyp();
 			if (isDateType(typ)) {
 				fieldType.setInputs("2");
 			} else if (isNumericType(typ)) {
 				fieldType.setInputs("2");
 			}
 
-			// we set the 'type' attribute for data types whose inputs will be initialized
+			// we set the 'type' attribute for data types whose inputs will be initialized 
 			if (isDateType(typ)) {
 				fieldType.setType(typ.getName());
+			}
+			// enums need special processing by the controller at runtime so let's be courteous
+			if (attribute.getValueList() != null) {
+				fieldType.setEnum(ModelTools.getCompleteName(attribute.getValueList()));
 			}
 
 			// style
