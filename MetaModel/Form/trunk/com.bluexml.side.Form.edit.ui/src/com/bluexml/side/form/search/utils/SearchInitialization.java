@@ -171,7 +171,7 @@ public class SearchInitialization {
 				// TODO
 			} else if (att.getTyp().equals(DataType.BOOLEAN)) {
 				// Boolean Field
-				// TODO
+				field = FormFactory.eINSTANCE.createBooleanSearchField();
 			} else if (att.getTyp().equals(DataType.INT)) {
 				// Integer Field
 				field = FormFactory.eINSTANCE.createNumericalSearchField();
@@ -186,6 +186,9 @@ public class SearchInitialization {
 				field = FormFactory.eINSTANCE.createNumericalSearchField();
 			} else if (att.getTyp().equals(DataType.SHORT)) {
 				// Short Field
+				field = FormFactory.eINSTANCE.createNumericalSearchField();
+			} else if (att.getTyp().equals(DataType.BYTE)) {
+				// Byte Field
 				field = FormFactory.eINSTANCE.createNumericalSearchField();
 			} else {
 				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
