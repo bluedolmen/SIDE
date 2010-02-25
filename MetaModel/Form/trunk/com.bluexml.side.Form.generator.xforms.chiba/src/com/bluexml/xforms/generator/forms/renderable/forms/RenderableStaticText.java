@@ -51,7 +51,9 @@ public class RenderableStaticText extends RenderableFormElement<StaticText> {
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
 			boolean isInIMultRepeater) {
 		String text = (formElement != null) ? formElement.getLabel() : textToDisplay;
-		return new RenderedStaticText(text);
+		RenderedStaticText rendered = new RenderedStaticText(text);
+		applyStyle(rendered, formElement.getStyle());
+		return rendered;
 	}
 
 }
