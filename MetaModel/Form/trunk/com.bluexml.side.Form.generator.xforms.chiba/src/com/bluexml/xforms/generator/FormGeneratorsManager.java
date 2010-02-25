@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -97,34 +98,11 @@ public class FormGeneratorsManager {
 		// org.eclipse.ocl.ecore.EcorePackage.eINSTANCE.eClass();
 	}
 
-	public class OperatorBean {
-		public final String id;
-		public final String label;
-
-		OperatorBean(String id, String label) {
-			this.id = id;
-			this.label = label;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Object#equals(java.lang.Object)
-		 */
-		@Override
-		public boolean equals(Object obj) {
-			if (obj instanceof OperatorBean) {
-				return this.id.equals(((OperatorBean) obj).id);
-			}
-			return false;
-		}
-	}
-
 	public class SearchFieldDataBean {
 		public final String defaultOp;
-		public final List<OperatorBean> listOp;
+		public final List<SearchOperator> listOp;
 
-		public SearchFieldDataBean(String defaultOp, List<OperatorBean> listOp) {
+		public SearchFieldDataBean(String defaultOp, List<SearchOperator> listOp) {
 			super();
 			this.defaultOp = defaultOp;
 			this.listOp = listOp;
@@ -139,23 +117,17 @@ public class FormGeneratorsManager {
 
 	private static Map<FormElement, String> uniqueNames = new HashMap<FormElement, String>();
 
-	private static Comparator<OperatorBean> operatorBeanComparatorId = new Comparator<OperatorBean>() {
-		public int compare(OperatorBean o1, OperatorBean o2) {
-			return o1.id.compareTo(o2.id);
+	private static Comparator<SearchOperator> operatorComparatorLabel = new Comparator<SearchOperator>() {
+		public int compare(SearchOperator o1, SearchOperator o2) {
+			return o1.getLabel().compareTo(o2.getLabel());
 		}
 	};
 
-	private static Comparator<OperatorBean> operatorBeanComparatorLabel = new Comparator<OperatorBean>() {
-		public int compare(OperatorBean o1, OperatorBean o2) {
-			return o1.label.compareTo(o2.label);
-		}
-	};
-	
 	/** The set of all operators that are available. */
-	private Set<OperatorBean> operatorPool;
+	private ArrayList<SearchOperator> operatorPool;
 
 	/** The register of <b>sorted</b> lists of operators that were specified in search forms. */
-	private Map<String, List<OperatorBean>> operatorsEnumsMap = new HashMap<String, List<OperatorBean>>();
+	private Map<String, List<SearchOperator>> operatorsEnumsMap = new HashMap<String, List<SearchOperator>>();
 
 	/** The classes. */
 	private Map<URI, EObject> eobjects = new HashMap<URI, EObject>();
@@ -555,46 +527,7 @@ public class FormGeneratorsManager {
 
 	// 
 	private void buildOperatorsPool() {
-		operatorPool = new TreeSet<OperatorBean>(operatorBeanComparatorId); // FIXME: remove
-		// comparator
-		// char
-		operatorPool.add(new OperatorBean("contains", "Contains"));
-		operatorPool.add(new OperatorBean("icontains", "Contains (case-insensitive)"));
-		operatorPool.add(new OperatorBean("startsWith", "Starts with"));
-		operatorPool.add(new OperatorBean("istartsWith", "Starts with (case-insensitive)"));
-		operatorPool.add(new OperatorBean("is", "Is"));
-		operatorPool.add(new OperatorBean("empty", "Is empty"));
-		operatorPool.add(new OperatorBean("endsWith", "Ends with"));
-		operatorPool.add(new OperatorBean("iendsWith", "Ends with (case-insensitive)"));
-		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
-		// date
-		operatorPool.add(new OperatorBean("before", "Before"));
-		operatorPool.add(new OperatorBean("exactly", "Is exactly"));
-		operatorPool.add(new OperatorBean("after", "After"));
-		operatorPool.add(new OperatorBean("empty", "Is empty"));
-		operatorPool.add(new OperatorBean("between", "Between"));
-		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
-		// choice
-		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
-		operatorPool.add(new OperatorBean("oneOf", "One of"));
-		operatorPool.add(new OperatorBean("none", "None of"));
-		operatorPool.add(new OperatorBean("allBut", "Any but"));
-		// numerical
-		operatorPool.add(new OperatorBean("between", "Between"));
-		operatorPool.add(new OperatorBean("exactly", "Is exactly"));
-		operatorPool.add(new OperatorBean("below", "Below"));
-		operatorPool.add(new OperatorBean("empty", "Is empty"));
-		operatorPool.add(new OperatorBean("above", "Above"));
-		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
-		// file
-		operatorPool.add(new OperatorBean("fileType", "File type is"));
-		operatorPool.add(new OperatorBean("size", "Size is between"));
-		operatorPool.add(new OperatorBean("contents", "Contains"));
-		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
-		// boolean
-		operatorPool.add(new OperatorBean("ignore", "Ignore this field"));
-		operatorPool.add(new OperatorBean("is", "Is"));
-		operatorPool.add(new OperatorBean("isNot", "Is not"));
+		operatorPool = new ArrayList<SearchOperator>(Arrays.asList(SearchOperator.values()));
 	}
 
 	/**
@@ -1255,7 +1188,7 @@ public class FormGeneratorsManager {
 	/**
 	 * @return the operatorsEnumsMap
 	 */
-	public Map<String, List<OperatorBean>> getOperatorsEnumsMap() {
+	public Map<String, List<SearchOperator>> getOperatorsEnumsMap() {
 		return operatorsEnumsMap;
 	}
 
@@ -1308,7 +1241,7 @@ public class FormGeneratorsManager {
 
 		//
 		// build the list of operators for this field
-		List<OperatorBean> listOp = new ArrayList<OperatorBean>();
+		List<SearchOperator> listOp = new ArrayList<SearchOperator>();
 		if (searchField instanceof CharSearchField) {
 			defaultTypeOp = "is";
 			CharSearchField localField = (CharSearchField) searchField;
@@ -1384,11 +1317,11 @@ public class FormGeneratorsManager {
 			listOp.add(getOperatorFromPool(fieldOp));
 		} else {
 			if (fieldOp == null) {
-				fieldOp = listOp.get(0).id;
+				fieldOp = listOp.get(0).getId();
 			}
 		}
 		// sort the list <-- this is MANDATORY for the reusing of operator sets to happen
-		Collections.sort(listOp, operatorBeanComparatorLabel);
+		Collections.sort(listOp, operatorComparatorLabel);
 
 		return new SearchFieldDataBean(fieldOp, listOp);
 	}
@@ -1399,13 +1332,13 @@ public class FormGeneratorsManager {
 	 * @param refId
 	 * @return the matching operator
 	 */
-	private OperatorBean getOperatorFromPool(String refId) {
-//		String refId = refId;
-//		if (refId.equals("all")) {
-//			refId = "oneOf";
-//		}
-		for (OperatorBean op : operatorPool) {
-			if (op.id.equals(refId)) {
+	private SearchOperator getOperatorFromPool(String refId) {
+		// String refId = refId;
+		// if (refId.equals("all")) {
+		// refId = "oneOf";
+		// }
+		for (SearchOperator op : operatorPool) {
+			if (op.getId().equals(refId)) {
 				return op;
 			}
 		}
@@ -1420,7 +1353,7 @@ public class FormGeneratorsManager {
 	 *            the list to check
 	 * @return the registration key, or null if the list is not registered.
 	 */
-	private String testOperatorList(List<OperatorBean> opList) {
+	private String testOperatorList(List<SearchOperator> opList) {
 		for (String key : operatorsEnumsMap.keySet()) {
 			if (opList.equals(operatorsEnumsMap.get(key))) {
 				return key;

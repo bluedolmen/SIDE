@@ -34,7 +34,7 @@ import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.impl.FormGroupImpl;
 import com.bluexml.xforms.generator.AbstractGenerator;
-import com.bluexml.xforms.generator.FormGeneratorsManager.OperatorBean;
+import com.bluexml.xforms.generator.SearchOperator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.RenderableXForm;
 import com.bluexml.xforms.generator.forms.renderable.classes.RenderableClass;
@@ -573,8 +573,8 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * Writes the files containing the search operators enumerations.
 	 */
 	private void renderSearchOperatorsEnums() {
-		Map<String, List<OperatorBean>> opEnumsMap = formGenerator.getOperatorsEnumsMap();
-		for (Entry<String, List<OperatorBean>> entry : opEnumsMap.entrySet()) {
+		Map<String, List<SearchOperator>> opEnumsMap = formGenerator.getOperatorsEnumsMap();
+		for (Entry<String, List<SearchOperator>> entry : opEnumsMap.entrySet()) {
 			renderSearchOperatorsEnumFile(entry.getKey(), entry.getValue());
 		}
 	}
@@ -587,21 +587,21 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * @param opList
 	 *            the list of operators in this set
 	 */
-	private void renderSearchOperatorsEnumFile(String opKey, List<OperatorBean> opList) {
+	private void renderSearchOperatorsEnumFile(String opKey, List<SearchOperator> opList) {
 		//
 		// the list is normally sorted so no need to sort it again
 		Element racineEnums = new Element("enums");
 		Document documentEnums = new Document(racineEnums);
 
-		for (OperatorBean operator : opList) {
+		for (SearchOperator operator : opList) {
 			Element l = new Element("item");
 
 			Element name = new Element("id");
-			name.setText(operator.id);
+			name.setText(operator.getId());
 			l.addContent(name);
 
 			Element value = new Element("value");
-			value.setText(operator.label);
+			value.setText(operator.getLabel());
 			l.addContent(value);
 
 			racineEnums.addContent(l);
