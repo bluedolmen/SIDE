@@ -75,7 +75,7 @@ public class SubmitAction extends AbstractTransactionalAction {
 			logger.debug(" --> targetURL:'" + submitURL + "'");
 			logger.debug(" --> search string:'" + transactionId + "'");
 			if (StringUtils.trimToNull(submitURL) == null) {
-				throw new ServletException("No next page provided.");
+				throw new ServletException("No next page was provided for this search.");
 			}
 			String nextPageURL = submitURL;
 			nextPageURL += (submitURL.indexOf('?') == -1) ? "?" : "&";
