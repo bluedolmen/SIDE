@@ -72,7 +72,8 @@ var Filters =
                dayCount = argDays;
             }
 
-            // Default limit to 50 documents - can be overridden using "max" argument
+            // Default limit to 50 documents - can be overridden using "max"
+			// argument
             if (filterParams.limitResults === null)
             {
                filterParams.limitResults = 50;
@@ -152,18 +153,25 @@ var Filters =
         	 var searchObj=eval('('+parsedArgs.args.search+')');
         	 properties=searchObj.properties;
         	 type=searchObj.type;
-        	 var operator=" AND ";
+        	 var logicalOperator=" AND ";
+			 if (logicalOperator.toLowerCase() == "or") {
+				 logicalOperator=" OR ";
+			 }
         	 var query='+TYPE:"'+type+'"';
         	 var propQuery="";
-        	 for (var prop in properties) {
+        	 
+        	 /*for (var prop in properties) {
         		 if (properties[prop] != "") {
         			 propQuery+="@"+prop;
         			 propQuery+=":"+properties[prop];        		 
         			 propQuery+=operator;
         		 }
         	 }
+        	 */
+        	 propQuery= Filters.parseAdvancedSearch(searchObj);
+        	 
         	 if (propQuery !=="") {
-        		 var ind=propQuery.lastIndexOf(operator);
+        		 var ind=propQuery.lastIndexOf(logicalOperator);
         		 propQuery=propQuery.substring(0,ind);
         		 propQuery=propQuery.replace(/([{}])/g,"\\$1");
         		 propQuery=propQuery.replace(/(http):/g,"$1\\:");
@@ -195,5 +203,173 @@ var Filters =
       filterParams.query += " " + (Filters.TYPE_MAP[parsedArgs.type] || "");
 
       return filterParams;
+   },
+   
+   parseAdvancedSearch : function (json) {
+	   const operators=[];
+	   const simpleFieldTypes=["string", "char", "boolean"];
+	   const boundedFieldTypes=["Date", "DateTime", "short", "byte", "int", "long", "double", "float"];
+	   const suportedTypes= simpleFieldTypes.concat(boundedFieldTypes);
+	   const unsuportedTypes=["time","object"];
+	   
+	   /*json ={type:"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document",
+			   operator:"and",
+			   fields:{
+			   	"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Libelle":{
+			   		type:"String",
+			   		operator:"contains",
+			   		values:["ssd"]},
+			   	"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Numero":{type:"String",operator:"is",values:[""]},
+			   	"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Observation":{type:"String",operator:"istartsWith",values:[""]},
+			   	"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_DateNumerisation":{
+			   		type:"DateTime",
+			   		operator:"between",
+			   		values:["2010-02-24T12:26:14.144+01:00","2010-02-24T12:26:14.161+01:00"]},
+			   	"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Auteur":{type:"String",operator:"is",values:[""]}
+			   }
+			  };
+		*/
+	   var type=json.type;
+	   var logicalOperator=" AND ";
+	   if (logicalOperator.toLowerCase() == "or") {
+		   logicalOperator=" OR ";
+	   }
+	   var properties=json.fields;
+	   
+	   
+	   var propQuery="";
+	   for (var prop in properties) {
+		 var att=properties[prop];
+  		 if (att.values.length >0 && att.values[0] != "") {
+  			var dataType=att.type.toLowerCase();
+  			var comparator=att.operator;
+  			var values=att.values;
+  			
+  			propQuery+=" @"+prop;
+  			
+  			switch (dataType) {
+  			// simple
+				case "string":
+					var valuePart="";
+					switch (comparator) {
+					case "contains":
+						valuePart="*"+values[0]+"*";
+						break;
+					case "icontains":
+						valuePart="*"+values[0]+"*";
+						break;
+					case "startsWith":
+						valuePart=values[0]+"*";
+						break;
+					case "istartsWith":
+						valuePart=values[0]+"*";
+						break;
+					case "endsWith":
+						valuePart="*"+values[0];
+						break;
+					case "iendsWith":
+						valuePart="*"+values[0];
+						break;
+					case "empty":
+						valuePart="";
+						break;
+					case "is":
+						valuePart=values[0];
+						break;
+					default:
+						break;
+					}
+					propQuery+=":"+valuePart;
+					break;
+				case "char":	
+					break;
+				case "boolean":	
+					propQuery+=":"+values[0];
+					break;
+			// bounded
+				case "datetime":
+				case "date":
+					var min="MIN";
+					var max="MAX";
+					values[0]=values[0].replace(/-/g,'\-');
+					if (values.length >1) {
+						values[1]=values[1].replace(/-/g,'\-');
+					}
+					switch (comparator) {						
+						case "between":
+							min=values[0];
+							max=values[1];
+							propQuery+=":"+"["+min+" TO "+max+"]";
+							break;
+						case "before":
+							max=values[0];
+							propQuery+=":"+"["+min+" TO "+max+"]";
+							break;
+						case "after":
+							min=values[0];
+							propQuery+=":"+"["+min+" TO "+max+"]";
+							break;
+						case "exactly":
+							propQuery+=":"+values[0];
+							break;
+						case "empty":
+							propQuery+=":";
+							break;	
+						default:
+							break;
+					}
+					
+					break;
+				case "byte":
+				case "int":	
+				case "long":
+				case "double":
+				case "float":
+				case "short":
+					var min="MIN";
+					var max="MAX";
+					
+					switch (comparator) {
+					case "between":
+						min=values[0];
+						max=values[1];
+						propQuery+=":"+"["+min+" TO "+max+"]";
+						break;
+					case "below":
+						max=values[0];
+						propQuery+=":"+"["+min+" TO "+max+"]";
+						break;
+					case "above":
+						min=values[0];
+						propQuery+=":"+"["+min+" TO "+max+"]";
+						break;
+					case "exactly":
+						if (value[0].indexOf("\.")) {
+							value[0]=value[0].replace(/([^.]*\.[^.]*)/,'"$1"');
+						}
+						propQuery+=":"+values[0];
+						break;
+					case "empty":
+						propQuery+=":";
+						break;
+					default:
+						break;
+					}
+					break;
+				
+			// not managed
+				case "time":	
+					break;
+				case "object":	
+					break;
+				default:
+					break;
+			}
+  			
+  			        		 
+  			propQuery+=logicalOperator;
+  		 }
+  	 }
+	   return propQuery;
    }
 };
