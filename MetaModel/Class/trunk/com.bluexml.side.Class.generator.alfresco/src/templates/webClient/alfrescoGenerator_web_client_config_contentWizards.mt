@@ -20,16 +20,19 @@ import templates.servicesTemplates.Common
 import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
 import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_contentWizards"%>
 		<%for (getAllClasses()){%>
-			<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()==0 && !abstract){%>
-			<type name="<%getFolder()%>:<%getQualifiedName()%>" />
+			<%-- We assume that folder type is defined by inheritance with reversed cm.dt model --%>
+			<%if (isFolder() && !abstract){%>	
+			<%}else{%>
+				<type name="<%getFolder()%>:<%getQualifiedName()%>" />
+				<%--<type name="<%getFolder()%>:<%getQualifiedName()%>_search" />--%>
 			<%}%>
-			<%--<type name="<%getFolder()%>:<%getQualifiedName()%>_search" />--%>
 		<%}%>
 		<%for (getAllEnumerations()) {%>
 		    <%if current("clazz.Enumeration").dynamic {%> 
