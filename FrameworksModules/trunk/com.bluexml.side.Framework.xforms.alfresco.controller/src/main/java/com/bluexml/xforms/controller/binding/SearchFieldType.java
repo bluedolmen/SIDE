@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;/sequence>
  *       &lt;attribute name="inputs" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       &lt;attribute name="enum" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -48,6 +49,9 @@ public class SearchFieldType {
     @XmlAttribute
     @XmlSchemaType(name = "anySimpleType")
     protected String type;
+    @XmlAttribute(name = "enum")
+    @XmlSchemaType(name = "anySimpleType")
+    protected String _enum;
 
     /**
      * Gets the value of the name property.
@@ -143,6 +147,30 @@ public class SearchFieldType {
      */
     public void setType(String value) {
         this.type = value;
+    }
+
+    /**
+     * Gets the value of the enum property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEnum() {
+        return _enum;
+    }
+
+    /**
+     * Sets the value of the enum property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEnum(String value) {
+        this._enum = value;
     }
 
 }
