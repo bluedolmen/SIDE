@@ -31,8 +31,8 @@
 }
 
 .full-group div {
-	display:block;
-	padding:5px;
+	display: block;
+	padding: 5px;
 }
 
 .full-group label {
@@ -49,17 +49,11 @@
 	border: thin solid #EEEEEE;
 }
 
-.input,
-.textarea,
-.select1,
-.select,
-div.xformstdclear {
+.input,.textarea,.select1,.select,div.xformstdclear {
 	margin-left: 10px;
 }
 
-.input label,
-.textarea label,
-.full-group label {
+.input label,.textarea label,.full-group label {
 	height: 1.3em;
 	width: 150px;
 	padding-right: 5px;
@@ -76,7 +70,6 @@ div.xformstdclear label {
 /*
  * FILE UPLOAD WIDGET
  */
-
 div.side_upload_filename span {
 	font-size: 8pt;
 }
@@ -96,15 +89,12 @@ div.side_select_widget .submit { /* the create button*/
 	margin-left: 10px;
 }
 
-div.side_select_widget label {
-	width: 0px;
-}
-
 div.side_select_search_zone label {
 	padding-right: 5px;
 }
-div.side_select_widget label,
-div.side_select_search_zone label {
+
+div.side_select_widget label,div.side_select_search_zone label {
+	display: none;
 	width: 0px;
 }
 
@@ -112,13 +102,21 @@ div.side_select_search_zone label {
  * SEARCH WIDGETS
  */
 div.side_search_value label {
+	display: none;
 	width: 0px;
 }
 
-div.side_search_value,
-div.side_search_operator {
+div.side_search_value,div.side_search_operator {
 	float: left;
 	padding: 0px;
+}
+
+div.side_search_value select {
+	min-width: 150px;
+}
+
+div.side_search_value div.xsd-boolean {
+	margin-left: 0px;
 }
 
 div.side_search_operator select {
@@ -132,8 +130,7 @@ div.side_search_field {
 /*
  *
  */
- 
-/* make the text in read-only textareas visible when in inline multiple forms */
+	/* make the text in read-only textareas visible when in inline multiple forms */
 div.bxds_ro_textarea span.mediatype-text-html {
 	background: #A7BCFC;
 }
@@ -176,4 +173,3 @@ side_xforms_line {
 	background: #fff;
 	overflow: visible;
 }
-
