@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.5447405902760655"
+             name="cmiscustom">
+      <classSet xmi:id="0.400466081471215" documentation="" description="" name="folder"
+             title="Custom Folder"
+             aspects="">
+         <generalizations xmi:id="0.8235499679850085" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.9794814622210293" key="reversedURI"
+            value="http://www.alfresco.org/model/cmis/custom"/>
+         <attributes xmi:id="0.42999613182452867" name="folderprop_string"
+                  title="Custom Folder Property (string)"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5435676565283806" key="reversed" value="alfresco"/>
+         </attributes>
+      </classSet>
+      <classSet xmi:id="0.24514050117722186" documentation="" description="" name="document"
+             title="Custom Document"
+             aspects="">
+         <generalizations xmi:id="0.09143552202349625" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.9478166111293032" key="reversedURI"
+            value="http://www.alfresco.org/model/cmis/custom"/>
+         <attributes xmi:id="0.19119615992685912" name="docprop_string"
+                  title="Custom Document Property (string)"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.06067080789378754" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.06740825460061106" name="docprop_boolean_multi"
+                  title="Custom Document Property (multi-valued boolean)"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7423947464756778" key="reversed" value="alfresco"/>
+         </attributes>
+      </classSet>
+      <associationSet xmi:id="0.008379196309741377" name="assoc" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.5241436005501247" name="assoc" title="" cardMax="1"
+                linkedClass="//@classSet.1"/>
+         <secondEnd xmi:id="0.2464420238942302" name="assoc" title="" navigable="true" cardMax="-1">
+            <linkedClass xmi:id="0.49586074795484836" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.2"/>
+         </secondEnd>
+      </associationSet>
+   </clazz:Model>

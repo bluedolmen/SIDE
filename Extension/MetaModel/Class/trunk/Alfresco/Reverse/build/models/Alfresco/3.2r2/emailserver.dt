@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.4092955020648864"
+             name="emailserver">
+      <aspectSet xmi:id="0.3763846355135675" name="emailed" title="Emailed" description=""
+              documentation="">
+         <generalizations xmi:id="0.3422607565490282" href="cm.dt#//@aspectSet.27"/>
+      </aspectSet>
+      <aspectSet xmi:id="0.5674318733414043" name="aliasable" title="Email Alias" description=""
+              documentation="">
+         <attributes xmi:id="0.3035027262527128" name="alias" title="Alias" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.8426124996621305" key="reversed" value="alfresco"/>
+         </attributes>
+      </aspectSet>
+   </clazz:Model>

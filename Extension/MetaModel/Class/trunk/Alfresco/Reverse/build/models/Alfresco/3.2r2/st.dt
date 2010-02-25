@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.24917724467665237"
+             name="st">
+      <classSet xmi:id="0.2946364181701071" documentation="" description="" name="site"
+             title="Site"
+             aspects="//@aspectSet.0 ">
+         <generalizations xmi:id="0.9517499454939566" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.33671274323056954" key="reversedURI"
+            value="http://www.alfresco.org/model/site/1.0 http://www.alfresco.org/model/sitecustomproperty/1.0"/>
+         <attributes xmi:id="0.6653104200120995" name="sitePreset" title="Site Preset"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.4647811428749977" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.009181045885759631" name="siteVisibility" title="Site Visibility"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.9966755531418329" key="reversed" value="alfresco"/>
+         </attributes>
+      </classSet>
+      <classSet xmi:id="0.23213481282343684" documentation="" description="" name="sites"
+             title="Sites"
+             aspects="">
+         <generalizations xmi:id="0.85514448615498" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.8647742577093979" key="reversedURI"
+            value="http://www.alfresco.org/model/site/1.0 http://www.alfresco.org/model/sitecustomproperty/1.0"/>
+      </classSet>
+      <aspectSet xmi:id="0.5932631563283665" name="siteContainer" title="Site Container"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.1752256542480195" name="componentId" title="Component Id"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7237026271456966" key="reversed" value="alfresco"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.6226037703096918" name="customSiteProperties"
+              title="Custom Site Properties"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.07545759500354376" name="additionalInformation"
+                  title="Additional Site Information"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.20645716619429988" key="reversed" value="alfresco"/>
+         </attributes>
+      </aspectSet>
+   </clazz:Model>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.052643697627380526"
+             name="fm">
+      <classSet xmi:id="0.433033308274402" documentation="" description="" name="forums"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.12223441532903323" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.1741462247293576" key="reversedURI"
+            value="http://www.alfresco.org/model/forum/1.0"/>
+      </classSet>
+      <classSet xmi:id="0.04913480759655087" documentation="" description="" name="forum"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.16438758086861072" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.7245633609423441" key="reversedURI"
+            value="http://www.alfresco.org/model/forum/1.0"/>
+      </classSet>
+      <classSet xmi:id="0.6451037143449041" documentation="" description="" name="topic"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.19075864014772015" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.5700887615421991" key="reversedURI"
+            value="http://www.alfresco.org/model/forum/1.0"/>
+      </classSet>
+      <classSet xmi:id="0.4726517903581582" documentation="" description="" name="post"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.4485273199021429" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.7526951210311601" key="reversedURI"
+            value="http://www.alfresco.org/model/forum/1.0"/>
+      </classSet>
+      <aspectSet xmi:id="0.16725504695808036" name="discussable" title="" description=""
+              documentation=""/>
+      <associationSet xmi:id="0.6465342909823042" name="discussion" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.5303430899947612" name="discussion" title="" cardMax="1"
+                linkedClass="//@aspectSet.0"/>
+         <secondEnd xmi:id="0.8651852896463634" name="discussion" title="" navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.3025234271671632" xsi:type="clazz:Clazz" href="fm.dt#//@classSet.1"/>
+         </secondEnd>
+      </associationSet>
+   </clazz:Model>

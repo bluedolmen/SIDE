@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.2764009385725201"
+             name="app">
+      <classSet xmi:id="0.19633320143339195" documentation="" description="" name="glossary"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.7071267462042579" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.2881251504684351" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+      </classSet>
+      <classSet xmi:id="0.6700374112346997" documentation="" description=""
+             name="configurations"
+             title="Configurations"
+             aspects="">
+         <generalizations xmi:id="0.31527333937425883" href="cm.dt#//@classSet.6"/>
+         <tags xmi:id="0.45325242131835386" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+      </classSet>
+      <classSet xmi:id="0.21270431200924644" documentation="" description="" name="filelink"
+             title="File Link Object"
+             aspects="">
+         <generalizations xmi:id="0.7791771779826699" href="cm.dt#//@classSet.4"/>
+         <tags xmi:id="0.442388296233852" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+      </classSet>
+      <classSet xmi:id="0.41984906254306276" documentation="" description="" name="folderlink"
+             title="Folder Link Object"
+             aspects="">
+         <generalizations xmi:id="0.6544895942168932" href="cm.dt#//@classSet.4"/>
+         <tags xmi:id="0.3485003674231868" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+      </classSet>
+      <aspectSet xmi:id="0.0847489328688803" name="uifacets" title="UI Facets" description=""
+              documentation="">
+         <generalizations xmi:id="0.4178270230393947" href="cm.dt#//@aspectSet.0"/>
+         <attributes xmi:id="0.8419341900826306" name="icon" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.03920574824726719" key="reversed" value="alfresco"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.4414856406873524" name="inlineeditable" title="Inline Editable"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.43883622293722035" name="editInline" title="Edit Inline"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.06302152622531076" key="reversed" value="alfresco"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.9710702659807252" name="workflow" title="Workflow" description=""
+              documentation=""/>
+      <aspectSet xmi:id="0.930044026053404" name="simpleworkflow" title="" description=""
+              documentation="">
+         <generalizations xmi:id="0.5637221167248564" href="app.dt#//@aspectSet.2"/>
+         <attributes xmi:id="0.6379991083239721" name="approveStep" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.49575275051162637" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.9779328534122268" name="approveFolder" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.40833233800616486" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.931606962851655" name="approveMove" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.22297855377720488" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.7424704038857224" name="rejectStep" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.6854398731802552" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.8158417547638275" name="rejectFolder" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7245626732130049" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.26966860603424747" name="rejectMove" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.06799398178089577" key="reversed" value="alfresco"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.17105591685173893" name="configurable" title="Configurable"
+              description=""
+              documentation=""/>
+      <associationSet xmi:id="0.40079860311636917" name="configurations" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.35827609145577965" name="configurations" title="" cardMax="1"
+                linkedClass="//@aspectSet.4"/>
+         <secondEnd xmi:id="0.3016051796395137" name="configurations" title="" navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.5961982691318055" xsi:type="clazz:Clazz" href="app.dt#//@classSet.1"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.7095611469430351" name="feedsource" title="Feed Source"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.056135117365763265" name="template" title="Feed Template"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.43311645988732395" key="reversed" value="alfresco"/>
+         </attributes>
+      </aspectSet>
+   </clazz:Model>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.48826127341231573"
+             name="blg">
+      <aspectSet xmi:id="0.3305412153444127" name="blogDetails" title="Blog Details"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.283389415583148" name="blogImplementation" title="Blog Type"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.09730740032144825" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.04650715961679486" name="id" title="Blog Identifier"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.8653511646150782" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.5507135420799026" name="name" title="Blog Name" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.035223993268420184" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.5588032693513245" name="description" title="Blog Description"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.35880945507383044" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.12061626300267003" name="url" title="Blog URL" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.40532168733304874" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.5354048219822904" name="userName" title="Blog User Name"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.26753402910190505" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.24600390207845113" name="password" title="Blog User Password"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.9925547825186634" key="reversed" value="alfresco"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.8697810979553469" name="blogPost" title="Blog Post" description=""
+              documentation="">
+         <attributes xmi:id="0.4990434830041166" name="postId" title="Blog post identifier"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.31257254282729197" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.12074067474524486" name="published" title="Blog published"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.2265885744219155" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.7978862197285838" name="link" title="Blog post link"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.8102300799890516" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.9299723537632547" name="posted" title="Date posted"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.28365286762640274" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.06488726604025874" name="lastUpdate" title="Date last updated"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.06363256830147257" key="reversed" value="alfresco"/>
+         </attributes>
+      </aspectSet>
+      <associationSet xmi:id="0.6935483907699413" name="blogDetails" title="Blog details"
+                   description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.2878286915096522" name="blogDetails" title="Blog details"
+                cardMax="-1"
+                linkedClass="//@aspectSet.1"/>
+         <secondEnd xmi:id="0.16142350684120632" name="blogDetails" title="Blog details"
+                 navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.5630519476734274" xsi:type="clazz:Aspect"
+                      href="blg.dt#//@aspectSet.0"/>
+         </secondEnd>
+      </associationSet>
+   </clazz:Model>

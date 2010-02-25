@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.11276223274346919"
+             name="lnk">
+      <classSet xmi:id="0.00037069555526214604" documentation="" description="" name="link"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.6572349175113408" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.8211666505372582" key="reversedURI"
+            value="http://www.alfresco.org/model/linksmodel/1.0"/>
+         <attributes xmi:id="0.3300784766738172" name="title" title="Link Title" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.24080890168456515" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.9606928118146351" name="url" title="Link URL" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.6730219424025303" key="reversed" value="alfresco"/>
+         </attributes>
+         <attributes xmi:id="0.1311079323153359" name="description" title="Link Description"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.47336965781799567" key="reversed" value="alfresco"/>
+         </attributes>
+      </classSet>
+      <aspectSet xmi:id="0.7745568596237189" name="internal" title="Internal Link"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.33702574321882217" name="isInternal" title="Is Internal"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.35710051620088856" key="reversed" value="alfresco"/>
+         </attributes>
+      </aspectSet>
+   </clazz:Model>
