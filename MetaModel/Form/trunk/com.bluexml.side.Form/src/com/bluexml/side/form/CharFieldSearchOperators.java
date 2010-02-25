@@ -55,6 +55,14 @@ public enum CharFieldSearchOperators implements Enumerator {
 	 * @ordered
 	 */
 	ISTARTS_WITH(3, "istartsWith", "istartsWith"), /**
+	 * The '<em><b>Ignore</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #IGNORE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	IGNORE(8, "ignore", "ignore"), /**
 	 * The '<em><b>Ends With</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -149,6 +157,21 @@ public enum CharFieldSearchOperators implements Enumerator {
 	public static final int ISTARTS_WITH_VALUE = 3;
 
 	/**
+	 * The '<em><b>Ignore</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Ignore</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #IGNORE
+	 * @model name="ignore"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IGNORE_VALUE = 8;
+
+	/**
 	 * The '<em><b>Ends With</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -220,6 +243,7 @@ public enum CharFieldSearchOperators implements Enumerator {
 			ICONTAINS,
 			STARTS_WITH,
 			ISTARTS_WITH,
+			IGNORE,
 			ENDS_WITH,
 			IENDS_WITH,
 			EMPTY,
@@ -278,6 +302,7 @@ public enum CharFieldSearchOperators implements Enumerator {
 			case ICONTAINS_VALUE: return ICONTAINS;
 			case STARTS_WITH_VALUE: return STARTS_WITH;
 			case ISTARTS_WITH_VALUE: return ISTARTS_WITH;
+			case IGNORE_VALUE: return IGNORE;
 			case ENDS_WITH_VALUE: return ENDS_WITH;
 			case IENDS_WITH_VALUE: return IENDS_WITH;
 			case EMPTY_VALUE: return EMPTY;

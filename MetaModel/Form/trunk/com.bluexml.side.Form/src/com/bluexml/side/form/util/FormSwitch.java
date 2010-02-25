@@ -513,6 +513,15 @@ public class FormSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FormPackage.BOOLEAN_SEARCH_FIELD: {
+				BooleanSearchField booleanSearchField = (BooleanSearchField)theEObject;
+				T result = caseBooleanSearchField(booleanSearchField);
+				if (result == null) result = caseSearchField(booleanSearchField);
+				if (result == null) result = caseFormElement(booleanSearchField);
+				if (result == null) result = caseModelElement(booleanSearchField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -1084,6 +1093,21 @@ public class FormSwitch<T> {
 	 * @generated
 	 */
 	public T caseFileSearchField(FileSearchField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Boolean Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Boolean Search Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBooleanSearchField(BooleanSearchField object) {
 		return null;
 	}
 

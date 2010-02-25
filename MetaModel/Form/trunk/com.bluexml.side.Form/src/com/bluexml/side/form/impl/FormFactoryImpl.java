@@ -129,6 +129,7 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 			case FormPackage.DATE_SEARCH_FIELD: return createDateSearchField();
 			case FormPackage.CHOICE_SEARCH_FIELD: return createChoiceSearchField();
 			case FormPackage.FILE_SEARCH_FIELD: return createFileSearchField();
+			case FormPackage.BOOLEAN_SEARCH_FIELD: return createBooleanSearchField();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -162,6 +163,8 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 				return createCombinationOperatorsFromString(eDataType, initialValue);
 			case FormPackage.DATE_FIELD_SEARCH_OPERATORS:
 				return createDateFieldSearchOperatorsFromString(eDataType, initialValue);
+			case FormPackage.BOOLEAN_FIELD_SEARCH_OPERATORS:
+				return createBooleanFieldSearchOperatorsFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -195,6 +198,8 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 				return convertCombinationOperatorsToString(eDataType, instanceValue);
 			case FormPackage.DATE_FIELD_SEARCH_OPERATORS:
 				return convertDateFieldSearchOperatorsToString(eDataType, instanceValue);
+			case FormPackage.BOOLEAN_FIELD_SEARCH_OPERATORS:
+				return convertBooleanFieldSearchOperatorsToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -545,6 +550,16 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BooleanSearchField createBooleanSearchField() {
+		BooleanSearchFieldImpl booleanSearchField = new BooleanSearchFieldImpl();
+		return booleanSearchField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public WorkflowFormCollection createWorkflowFormCollection() {
 		WorkflowFormCollectionImpl workflowFormCollection = new WorkflowFormCollectionImpl();
 		return workflowFormCollection;
@@ -768,6 +783,26 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * @generated
 	 */
 	public String convertDateFieldSearchOperatorsToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BooleanFieldSearchOperators createBooleanFieldSearchOperatorsFromString(EDataType eDataType, String initialValue) {
+		BooleanFieldSearchOperators result = BooleanFieldSearchOperators.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertBooleanFieldSearchOperatorsToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

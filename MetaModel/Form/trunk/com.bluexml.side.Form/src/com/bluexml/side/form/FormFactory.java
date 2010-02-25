@@ -333,6 +333,15 @@ public interface FormFactory extends EFactory {
 	FileSearchField createFileSearchField();
 
 	/**
+	 * Returns a new object of class '<em>Boolean Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Boolean Search Field</em>'.
+	 * @generated
+	 */
+	BooleanSearchField createBooleanSearchField();
+
+	/**
 	 * Returns a new object of class '<em>Workflow Form Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

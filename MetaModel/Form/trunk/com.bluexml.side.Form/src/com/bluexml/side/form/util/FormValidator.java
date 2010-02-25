@@ -288,6 +288,8 @@ public class FormValidator extends EObjectValidator {
 				return validateChoiceSearchField((ChoiceSearchField)value, diagnostics, context);
 			case FormPackage.FILE_SEARCH_FIELD:
 				return validateFileSearchField((FileSearchField)value, diagnostics, context);
+			case FormPackage.BOOLEAN_SEARCH_FIELD:
+				return validateBooleanSearchField((BooleanSearchField)value, diagnostics, context);
 			case FormPackage.FORM_GROUP_PRESENTATION_TYPE:
 				return validateFormGroupPresentationType((FormGroupPresentationType)value, diagnostics, context);
 			case FormPackage.TEXT_WIDGET_TYPE:
@@ -308,6 +310,8 @@ public class FormValidator extends EObjectValidator {
 				return validateCombinationOperators((CombinationOperators)value, diagnostics, context);
 			case FormPackage.DATE_FIELD_SEARCH_OPERATORS:
 				return validateDateFieldSearchOperators((DateFieldSearchOperators)value, diagnostics, context);
+			case FormPackage.BOOLEAN_FIELD_SEARCH_OPERATORS:
+				return validateBooleanFieldSearchOperators((BooleanFieldSearchOperators)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -1268,6 +1272,24 @@ public class FormValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateBooleanSearchField(BooleanSearchField booleanSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(booleanSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(booleanSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(booleanSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(booleanSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(booleanSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(booleanSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(booleanSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(booleanSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_validRef(booleanSearchField, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateWorkflowFormCollection(WorkflowFormCollection workflowFormCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(workflowFormCollection, diagnostics, context);
 	}
@@ -1513,6 +1535,15 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDateFieldSearchOperators(DateFieldSearchOperators dateFieldSearchOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBooleanFieldSearchOperators(BooleanFieldSearchOperators booleanFieldSearchOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

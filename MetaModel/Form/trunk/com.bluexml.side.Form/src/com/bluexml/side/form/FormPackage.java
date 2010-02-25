@@ -5848,7 +5848,7 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Action Handler</b></em>' attribute.
+	 * The feature id for the '<em><b>Action handler</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -7324,6 +7324,151 @@ public interface FormPackage extends EPackage {
 	int FILE_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.BooleanSearchFieldImpl <em>Boolean Search Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.BooleanSearchFieldImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getBooleanSearchField()
+	 * @generated
+	 */
+	int BOOLEAN_SEARCH_FIELD = 42;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__STEREOTYPES = SEARCH_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__TAGS = SEARCH_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__COMMENTS = SEARCH_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__DOCUMENTATION = SEARCH_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__DESCRIPTION = SEARCH_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__METAINFO = SEARCH_FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__LABEL = SEARCH_FIELD__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__ID = SEARCH_FIELD__ID;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__HIDDEN = SEARCH_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__HELP_TEXT = SEARCH_FIELD__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__REF = SEARCH_FIELD__REF;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__OPERATORS = SEARCH_FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Default Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR = SEARCH_FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Boolean Search Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7331,7 +7476,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormGroupPresentationType()
 	 * @generated
 	 */
-	int FORM_GROUP_PRESENTATION_TYPE = 42;
+	int FORM_GROUP_PRESENTATION_TYPE = 43;
 
 
 	/**
@@ -7342,7 +7487,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getTextWidgetType()
 	 * @generated
 	 */
-	int TEXT_WIDGET_TYPE = 43;
+	int TEXT_WIDGET_TYPE = 44;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceWidgetType <em>Choice Widget Type</em>}' enum.
@@ -7352,7 +7497,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceWidgetType()
 	 * @generated
 	 */
-	int CHOICE_WIDGET_TYPE = 44;
+	int CHOICE_WIDGET_TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ModelChoiceWidgetType <em>Model Choice Widget Type</em>}' enum.
@@ -7362,7 +7507,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceWidgetType()
 	 * @generated
 	 */
-	int MODEL_CHOICE_WIDGET_TYPE = 45;
+	int MODEL_CHOICE_WIDGET_TYPE = 46;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.CharFieldSearchOperators <em>Char Field Search Operators</em>}' enum.
@@ -7372,7 +7517,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharFieldSearchOperators()
 	 * @generated
 	 */
-	int CHAR_FIELD_SEARCH_OPERATORS = 46;
+	int CHAR_FIELD_SEARCH_OPERATORS = 47;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.NumericalFieldSearchOperators <em>Numerical Field Search Operators</em>}' enum.
@@ -7382,7 +7527,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericalFieldSearchOperators()
 	 * @generated
 	 */
-	int NUMERICAL_FIELD_SEARCH_OPERATORS = 47;
+	int NUMERICAL_FIELD_SEARCH_OPERATORS = 48;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceFieldSearchOperators <em>Choice Field Search Operators</em>}' enum.
@@ -7392,7 +7537,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceFieldSearchOperators()
 	 * @generated
 	 */
-	int CHOICE_FIELD_SEARCH_OPERATORS = 48;
+	int CHOICE_FIELD_SEARCH_OPERATORS = 49;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FileFieldSearchOperators <em>File Field Search Operators</em>}' enum.
@@ -7402,7 +7547,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileFieldSearchOperators()
 	 * @generated
 	 */
-	int FILE_FIELD_SEARCH_OPERATORS = 49;
+	int FILE_FIELD_SEARCH_OPERATORS = 50;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.CombinationOperators <em>Combination Operators</em>}' enum.
@@ -7412,7 +7557,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCombinationOperators()
 	 * @generated
 	 */
-	int COMBINATION_OPERATORS = 50;
+	int COMBINATION_OPERATORS = 51;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.DateFieldSearchOperators <em>Date Field Search Operators</em>}' enum.
@@ -7422,7 +7567,17 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateFieldSearchOperators()
 	 * @generated
 	 */
-	int DATE_FIELD_SEARCH_OPERATORS = 51;
+	int DATE_FIELD_SEARCH_OPERATORS = 52;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.BooleanFieldSearchOperators <em>Boolean Field Search Operators</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.BooleanFieldSearchOperators
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getBooleanFieldSearchOperators()
+	 * @generated
+	 */
+	int BOOLEAN_FIELD_SEARCH_OPERATORS = 53;
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.FormElement <em>Element</em>}'.
@@ -8223,15 +8378,15 @@ public interface FormPackage extends EPackage {
 	EClass getActionField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ActionField#getActionHandler <em>Action Handler</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ActionField#getAction_handler <em>Action handler</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Action Handler</em>'.
-	 * @see com.bluexml.side.form.ActionField#getActionHandler()
+	 * @return the meta object for the attribute '<em>Action handler</em>'.
+	 * @see com.bluexml.side.form.ActionField#getAction_handler()
 	 * @see #getActionField()
 	 * @generated
 	 */
-	EAttribute getActionField_ActionHandler();
+	EAttribute getActionField_Action_handler();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.TextField <em>Text Field</em>}'.
@@ -8476,6 +8631,38 @@ public interface FormPackage extends EPackage {
 	EAttribute getFileSearchField_DefaultOperator();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.BooleanSearchField <em>Boolean Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Boolean Search Field</em>'.
+	 * @see com.bluexml.side.form.BooleanSearchField
+	 * @generated
+	 */
+	EClass getBooleanSearchField();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.BooleanSearchField#getOperators <em>Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Operators</em>'.
+	 * @see com.bluexml.side.form.BooleanSearchField#getOperators()
+	 * @see #getBooleanSearchField()
+	 * @generated
+	 */
+	EAttribute getBooleanSearchField_Operators();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.BooleanSearchField#getDefaultOperator <em>Default Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Operator</em>'.
+	 * @see com.bluexml.side.form.BooleanSearchField#getDefaultOperator()
+	 * @see #getBooleanSearchField()
+	 * @generated
+	 */
+	EAttribute getBooleanSearchField_DefaultOperator();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.WorkflowFormCollection <em>Workflow Form Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8636,6 +8823,16 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getDateFieldSearchOperators();
+
+	/**
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.BooleanFieldSearchOperators <em>Boolean Field Search Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Boolean Field Search Operators</em>'.
+	 * @see com.bluexml.side.form.BooleanFieldSearchOperators
+	 * @generated
+	 */
+	EEnum getBooleanFieldSearchOperators();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -9314,12 +9511,12 @@ public interface FormPackage extends EPackage {
 		EClass ACTION_FIELD = eINSTANCE.getActionField();
 
 		/**
-		 * The meta object literal for the '<em><b>Action Handler</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Action handler</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ACTION_FIELD__ACTION_HANDLER = eINSTANCE.getActionField_ActionHandler();
+		EAttribute ACTION_FIELD__ACTION_HANDLER = eINSTANCE.getActionField_Action_handler();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.TextFieldImpl <em>Text Field</em>}' class.
@@ -9528,6 +9725,32 @@ public interface FormPackage extends EPackage {
 		EAttribute FILE_SEARCH_FIELD__DEFAULT_OPERATOR = eINSTANCE.getFileSearchField_DefaultOperator();
 
 		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.BooleanSearchFieldImpl <em>Boolean Search Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.BooleanSearchFieldImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getBooleanSearchField()
+		 * @generated
+		 */
+		EClass BOOLEAN_SEARCH_FIELD = eINSTANCE.getBooleanSearchField();
+
+		/**
+		 * The meta object literal for the '<em><b>Operators</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOOLEAN_SEARCH_FIELD__OPERATORS = eINSTANCE.getBooleanSearchField_Operators();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR = eINSTANCE.getBooleanSearchField_DefaultOperator();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.WorkflowFormCollectionImpl <em>Workflow Form Collection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9682,6 +9905,16 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum DATE_FIELD_SEARCH_OPERATORS = eINSTANCE.getDateFieldSearchOperators();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.BooleanFieldSearchOperators <em>Boolean Field Search Operators</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.BooleanFieldSearchOperators
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getBooleanFieldSearchOperators()
+		 * @generated
+		 */
+		EEnum BOOLEAN_FIELD_SEARCH_OPERATORS = eINSTANCE.getBooleanFieldSearchOperators();
 
 	}
 

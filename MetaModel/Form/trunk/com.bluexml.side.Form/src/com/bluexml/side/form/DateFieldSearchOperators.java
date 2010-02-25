@@ -70,7 +70,23 @@ public enum DateFieldSearchOperators implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	EMPTY(4, "empty", "empty");
+	EMPTY(4, "empty", "empty"), /**
+	 * The '<em><b>Not Between</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NOT_BETWEEN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	NOT_BETWEEN(5, "notBetween", "notBetween"), /**
+	 * The '<em><b>Ignore</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #IGNORE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	IGNORE(6, "ignore", "ignore");
 
 	/**
 	 * The '<em><b>Between</b></em>' literal value.
@@ -148,6 +164,36 @@ public enum DateFieldSearchOperators implements Enumerator {
 	public static final int EMPTY_VALUE = 4;
 
 	/**
+	 * The '<em><b>Not Between</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Not Between</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #NOT_BETWEEN
+	 * @model name="notBetween"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NOT_BETWEEN_VALUE = 5;
+
+	/**
+	 * The '<em><b>Ignore</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Ignore</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #IGNORE
+	 * @model name="ignore"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IGNORE_VALUE = 6;
+
+	/**
 	 * An array of all the '<em><b>Date Field Search Operators</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -160,6 +206,8 @@ public enum DateFieldSearchOperators implements Enumerator {
 			AFTER,
 			EXACTLY,
 			EMPTY,
+			NOT_BETWEEN,
+			IGNORE,
 		};
 
 	/**
@@ -215,6 +263,8 @@ public enum DateFieldSearchOperators implements Enumerator {
 			case AFTER_VALUE: return AFTER;
 			case EXACTLY_VALUE: return EXACTLY;
 			case EMPTY_VALUE: return EMPTY;
+			case NOT_BETWEEN_VALUE: return NOT_BETWEEN;
+			case IGNORE_VALUE: return IGNORE;
 		}
 		return null;
 	}

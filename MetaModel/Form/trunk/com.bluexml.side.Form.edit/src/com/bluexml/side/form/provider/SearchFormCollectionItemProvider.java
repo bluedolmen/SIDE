@@ -63,36 +63,35 @@ public class SearchFormCollectionItemProvider extends
 	}
 
 	/**
-	 * This returns SearchFormCollection.gif. <!-- begin-user-doc --> <!--
+	 * This returns SearchFormCollection.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/SearchFormCollection"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/SearchFormCollection"));
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SearchFormCollection) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_SearchFormCollection_type")
-				: getString("_UI_SearchFormCollection_type") + " " + label;
+		String label = ((SearchFormCollection)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_SearchFormCollection_type") :
+			getString("_UI_SearchFormCollection_type") + " " + label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

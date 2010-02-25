@@ -6,8 +6,8 @@
  */
 package com.bluexml.side.form.impl;
 
-import com.bluexml.side.form.ChoiceFieldSearchOperators;
-import com.bluexml.side.form.ChoiceSearchField;
+import com.bluexml.side.form.BooleanFieldSearchOperators;
+import com.bluexml.side.form.BooleanSearchField;
 import com.bluexml.side.form.FormPackage;
 
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
@@ -28,19 +28,19 @@ import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Choice Search Field</b></em>'.
+ * An implementation of the model object '<em><b>Boolean Search Field</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.form.impl.ChoiceSearchFieldImpl#getOperators <em>Operators</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.ChoiceSearchFieldImpl#getDefaultOperator <em>Default Operator</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.BooleanSearchFieldImpl#getOperators <em>Operators</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.BooleanSearchFieldImpl#getDefaultOperator <em>Default Operator</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSearchField {
+public class BooleanSearchFieldImpl extends SearchFieldImpl implements BooleanSearchField {
 	/**
 	 * The cached value of the '{@link #getOperators() <em>Operators</em>}' attribute list.
 	 * <!-- begin-user-doc -->
@@ -49,7 +49,7 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ChoiceFieldSearchOperators> operators;
+	protected EList<BooleanFieldSearchOperators> operators;
 
 	/**
 	 * The default value of the '{@link #getDefaultOperator() <em>Default Operator</em>}' attribute.
@@ -59,7 +59,7 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ChoiceFieldSearchOperators DEFAULT_OPERATOR_EDEFAULT = ChoiceFieldSearchOperators.IGNORE;
+	protected static final BooleanFieldSearchOperators DEFAULT_OPERATOR_EDEFAULT = BooleanFieldSearchOperators.IGNORE;
 
 	/**
 	 * The cached value of the '{@link #getDefaultOperator() <em>Default Operator</em>}' attribute.
@@ -69,14 +69,14 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	 * @generated
 	 * @ordered
 	 */
-	protected ChoiceFieldSearchOperators defaultOperator = DEFAULT_OPERATOR_EDEFAULT;
+	protected BooleanFieldSearchOperators defaultOperator = DEFAULT_OPERATOR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ChoiceSearchFieldImpl() {
+	protected BooleanSearchFieldImpl() {
 		super();
 	}
 
@@ -87,7 +87,7 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FormPackage.Literals.CHOICE_SEARCH_FIELD;
+		return FormPackage.Literals.BOOLEAN_SEARCH_FIELD;
 	}
 
 	/**
@@ -95,9 +95,9 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ChoiceFieldSearchOperators> getOperators() {
+	public EList<BooleanFieldSearchOperators> getOperators() {
 		if (operators == null) {
-			operators = new EDataTypeUniqueEList<ChoiceFieldSearchOperators>(ChoiceFieldSearchOperators.class, this, FormPackage.CHOICE_SEARCH_FIELD__OPERATORS);
+			operators = new EDataTypeUniqueEList<BooleanFieldSearchOperators>(BooleanFieldSearchOperators.class, this, FormPackage.BOOLEAN_SEARCH_FIELD__OPERATORS);
 		}
 		return operators;
 	}
@@ -107,7 +107,7 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ChoiceFieldSearchOperators getDefaultOperator() {
+	public BooleanFieldSearchOperators getDefaultOperator() {
 		return defaultOperator;
 	}
 
@@ -116,11 +116,11 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDefaultOperator(ChoiceFieldSearchOperators newDefaultOperator) {
-		ChoiceFieldSearchOperators oldDefaultOperator = defaultOperator;
+	public void setDefaultOperator(BooleanFieldSearchOperators newDefaultOperator) {
+		BooleanFieldSearchOperators oldDefaultOperator = defaultOperator;
 		defaultOperator = newDefaultOperator == null ? DEFAULT_OPERATOR_EDEFAULT : newDefaultOperator;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHOICE_SEARCH_FIELD__DEFAULT_OPERATOR, oldDefaultOperator, defaultOperator));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR, oldDefaultOperator, defaultOperator));
 	}
 
 	/**
@@ -131,9 +131,9 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FormPackage.CHOICE_SEARCH_FIELD__OPERATORS:
+			case FormPackage.BOOLEAN_SEARCH_FIELD__OPERATORS:
 				return getOperators();
-			case FormPackage.CHOICE_SEARCH_FIELD__DEFAULT_OPERATOR:
+			case FormPackage.BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR:
 				return getDefaultOperator();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -148,12 +148,12 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FormPackage.CHOICE_SEARCH_FIELD__OPERATORS:
+			case FormPackage.BOOLEAN_SEARCH_FIELD__OPERATORS:
 				getOperators().clear();
-				getOperators().addAll((Collection<? extends ChoiceFieldSearchOperators>)newValue);
+				getOperators().addAll((Collection<? extends BooleanFieldSearchOperators>)newValue);
 				return;
-			case FormPackage.CHOICE_SEARCH_FIELD__DEFAULT_OPERATOR:
-				setDefaultOperator((ChoiceFieldSearchOperators)newValue);
+			case FormPackage.BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR:
+				setDefaultOperator((BooleanFieldSearchOperators)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -167,10 +167,10 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FormPackage.CHOICE_SEARCH_FIELD__OPERATORS:
+			case FormPackage.BOOLEAN_SEARCH_FIELD__OPERATORS:
 				getOperators().clear();
 				return;
-			case FormPackage.CHOICE_SEARCH_FIELD__DEFAULT_OPERATOR:
+			case FormPackage.BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR:
 				setDefaultOperator(DEFAULT_OPERATOR_EDEFAULT);
 				return;
 		}
@@ -185,9 +185,9 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FormPackage.CHOICE_SEARCH_FIELD__OPERATORS:
+			case FormPackage.BOOLEAN_SEARCH_FIELD__OPERATORS:
 				return operators != null && !operators.isEmpty();
-			case FormPackage.CHOICE_SEARCH_FIELD__DEFAULT_OPERATOR:
+			case FormPackage.BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR:
 				return defaultOperator != DEFAULT_OPERATOR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -213,4 +213,4 @@ public class ChoiceSearchFieldImpl extends SearchFieldImpl implements ChoiceSear
 
 		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
-} //ChoiceSearchFieldImpl
+} //BooleanSearchFieldImpl

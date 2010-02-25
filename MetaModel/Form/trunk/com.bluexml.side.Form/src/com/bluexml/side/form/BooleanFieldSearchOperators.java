@@ -14,14 +14,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Choice Field Search Operators</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Boolean Field Search Operators</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see com.bluexml.side.form.FormPackage#getChoiceFieldSearchOperators()
+ * @see com.bluexml.side.form.FormPackage#getBooleanFieldSearchOperators()
  * @model
  * @generated
  */
-public enum ChoiceFieldSearchOperators implements Enumerator {
+public enum BooleanFieldSearchOperators implements Enumerator {
 	/**
 	 * The '<em><b>Ignore</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -30,35 +30,25 @@ public enum ChoiceFieldSearchOperators implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	IGNORE(0, "ignore", "ignore"), /**
-	 * The '<em><b>One Of</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ONE_OF_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	ONE_OF(1, "oneOf", "oneOf"),
+	IGNORE(0, "ignore", "ignore"),
 
 	/**
-	 * The '<em><b>None</b></em>' literal object.
+	 * The '<em><b>Is</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NONE_VALUE
+	 * @see #IS_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	NONE(2, "none", "none"),
-
-	/**
-	 * The '<em><b>All But</b></em>' literal object.
+	IS(1, "is", "is"), /**
+	 * The '<em><b>Is Not</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ALL_BUT_VALUE
+	 * @see #IS_NOT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ALL_BUT(3, "allBut", "allBut");
+	IS_NOT(2, "isNot", "isNot");
 
 	/**
 	 * The '<em><b>Ignore</b></em>' literal value.
@@ -76,81 +66,65 @@ public enum ChoiceFieldSearchOperators implements Enumerator {
 	public static final int IGNORE_VALUE = 0;
 
 	/**
-	 * The '<em><b>One Of</b></em>' literal value.
+	 * The '<em><b>Is</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>One Of</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Is</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ONE_OF
-	 * @model name="oneOf"
+	 * @see #IS
+	 * @model name="is"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ONE_OF_VALUE = 1;
+	public static final int IS_VALUE = 1;
 
 	/**
-	 * The '<em><b>None</b></em>' literal value.
+	 * The '<em><b>Is Not</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>None</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Is Not</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #NONE
-	 * @model name="none"
+	 * @see #IS_NOT
+	 * @model name="isNot"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NONE_VALUE = 2;
+	public static final int IS_NOT_VALUE = 2;
 
 	/**
-	 * The '<em><b>All But</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>All But</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #ALL_BUT
-	 * @model name="allBut"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int ALL_BUT_VALUE = 3;
-
-	/**
-	 * An array of all the '<em><b>Choice Field Search Operators</b></em>' enumerators.
+	 * An array of all the '<em><b>Boolean Field Search Operators</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final ChoiceFieldSearchOperators[] VALUES_ARRAY =
-		new ChoiceFieldSearchOperators[] {
+	private static final BooleanFieldSearchOperators[] VALUES_ARRAY =
+		new BooleanFieldSearchOperators[] {
 			IGNORE,
-			ONE_OF,
-			NONE,
-			ALL_BUT,
+			IS,
+			IS_NOT,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Choice Field Search Operators</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Boolean Field Search Operators</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<ChoiceFieldSearchOperators> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<BooleanFieldSearchOperators> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Choice Field Search Operators</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Boolean Field Search Operators</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static ChoiceFieldSearchOperators get(String literal) {
+	public static BooleanFieldSearchOperators get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			ChoiceFieldSearchOperators result = VALUES_ARRAY[i];
+			BooleanFieldSearchOperators result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -159,14 +133,14 @@ public enum ChoiceFieldSearchOperators implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Choice Field Search Operators</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Boolean Field Search Operators</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static ChoiceFieldSearchOperators getByName(String name) {
+	public static BooleanFieldSearchOperators getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			ChoiceFieldSearchOperators result = VALUES_ARRAY[i];
+			BooleanFieldSearchOperators result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -175,17 +149,16 @@ public enum ChoiceFieldSearchOperators implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Choice Field Search Operators</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Boolean Field Search Operators</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static ChoiceFieldSearchOperators get(int value) {
+	public static BooleanFieldSearchOperators get(int value) {
 		switch (value) {
 			case IGNORE_VALUE: return IGNORE;
-			case ONE_OF_VALUE: return ONE_OF;
-			case NONE_VALUE: return NONE;
-			case ALL_BUT_VALUE: return ALL_BUT;
+			case IS_VALUE: return IS;
+			case IS_NOT_VALUE: return IS_NOT;
 		}
 		return null;
 	}
@@ -217,7 +190,7 @@ public enum ChoiceFieldSearchOperators implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private ChoiceFieldSearchOperators(int value, String name, String literal) {
+	private BooleanFieldSearchOperators(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -261,4 +234,4 @@ public enum ChoiceFieldSearchOperators implements Enumerator {
 		return literal;
 	}
 	
-} //ChoiceFieldSearchOperators
+} //BooleanFieldSearchOperators

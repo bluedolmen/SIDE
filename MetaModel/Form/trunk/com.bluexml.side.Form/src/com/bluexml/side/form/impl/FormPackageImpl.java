@@ -19,6 +19,8 @@ import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
+import com.bluexml.side.form.BooleanFieldSearchOperators;
+import com.bluexml.side.form.BooleanSearchField;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.CharFieldSearchOperators;
 import com.bluexml.side.form.CharSearchField;
@@ -356,6 +358,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass booleanSearchFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass workflowFormCollectionEClass = null;
 
 	/**
@@ -448,6 +457,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	private EEnum dateFieldSearchOperatorsEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum booleanFieldSearchOperatorsEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1202,7 +1218,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getActionField_ActionHandler() {
+	public EAttribute getActionField_Action_handler() {
 		return (EAttribute)actionFieldEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1418,6 +1434,33 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBooleanSearchField() {
+		return booleanSearchFieldEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBooleanSearchField_Operators() {
+		return (EAttribute)booleanSearchFieldEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBooleanSearchField_DefaultOperator() {
+		return (EAttribute)booleanSearchFieldEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getWorkflowFormCollection() {
 		return workflowFormCollectionEClass;
 	}
@@ -1555,6 +1598,15 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 */
 	public EEnum getDateFieldSearchOperators() {
 		return dateFieldSearchOperatorsEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getBooleanFieldSearchOperators() {
+		return booleanFieldSearchOperatorsEEnum;
 	}
 
 	/**
@@ -1732,6 +1784,10 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEAttribute(fileSearchFieldEClass, FILE_SEARCH_FIELD__OPERATORS);
 		createEAttribute(fileSearchFieldEClass, FILE_SEARCH_FIELD__DEFAULT_OPERATOR);
 
+		booleanSearchFieldEClass = createEClass(BOOLEAN_SEARCH_FIELD);
+		createEAttribute(booleanSearchFieldEClass, BOOLEAN_SEARCH_FIELD__OPERATORS);
+		createEAttribute(booleanSearchFieldEClass, BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR);
+
 		// Create enums
 		formGroupPresentationTypeEEnum = createEEnum(FORM_GROUP_PRESENTATION_TYPE);
 		textWidgetTypeEEnum = createEEnum(TEXT_WIDGET_TYPE);
@@ -1743,6 +1799,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		fileFieldSearchOperatorsEEnum = createEEnum(FILE_FIELD_SEARCH_OPERATORS);
 		combinationOperatorsEEnum = createEEnum(COMBINATION_OPERATORS);
 		dateFieldSearchOperatorsEEnum = createEEnum(DATE_FIELD_SEARCH_OPERATORS);
+		booleanFieldSearchOperatorsEEnum = createEEnum(BOOLEAN_FIELD_SEARCH_OPERATORS);
 	}
 
 	/**
@@ -1822,6 +1879,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		dateSearchFieldEClass.getESuperTypes().add(this.getSearchField());
 		choiceSearchFieldEClass.getESuperTypes().add(this.getSearchField());
 		fileSearchFieldEClass.getESuperTypes().add(this.getSearchField());
+		booleanSearchFieldEClass.getESuperTypes().add(this.getSearchField());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(formElementEClass, FormElement.class, "FormElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1950,7 +2008,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEReference(getVirtualField_Link(), this.getField(), null, "link", null, 0, 1, VirtualField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(actionFieldEClass, ActionField.class, "ActionField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getActionField_ActionHandler(), ecorePackage.getEString(), "actionHandler", null, 0, 1, ActionField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActionField_Action_handler(), ecorePackage.getEString(), "action_handler", null, 0, 1, ActionField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(textFieldEClass, TextField.class, "TextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTextField_Widget(), this.getTextWidgetType(), "widget", null, 0, 1, TextField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1986,6 +2044,10 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getFileSearchField_Operators(), this.getFileFieldSearchOperators(), "operators", null, 0, -1, FileSearchField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFileSearchField_DefaultOperator(), this.getFileFieldSearchOperators(), "defaultOperator", null, 0, 1, FileSearchField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(booleanSearchFieldEClass, BooleanSearchField.class, "BooleanSearchField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBooleanSearchField_Operators(), this.getBooleanFieldSearchOperators(), "operators", null, 0, -1, BooleanSearchField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBooleanSearchField_DefaultOperator(), this.getBooleanFieldSearchOperators(), "defaultOperator", null, 0, 1, BooleanSearchField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(formGroupPresentationTypeEEnum, FormGroupPresentationType.class, "FormGroupPresentationType");
 		addEEnumLiteral(formGroupPresentationTypeEEnum, FormGroupPresentationType.AUTO);
@@ -2012,6 +2074,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.ICONTAINS);
 		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.STARTS_WITH);
 		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.ISTARTS_WITH);
+		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.IGNORE);
 		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.ENDS_WITH);
 		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.IENDS_WITH);
 		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.EMPTY);
@@ -2023,9 +2086,10 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		addEEnumLiteral(numericalFieldSearchOperatorsEEnum, NumericalFieldSearchOperators.ABOVE);
 		addEEnumLiteral(numericalFieldSearchOperatorsEEnum, NumericalFieldSearchOperators.EXACTLY);
 		addEEnumLiteral(numericalFieldSearchOperatorsEEnum, NumericalFieldSearchOperators.EMPTY);
+		addEEnumLiteral(numericalFieldSearchOperatorsEEnum, NumericalFieldSearchOperators.IGNORE);
 
 		initEEnum(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.class, "ChoiceFieldSearchOperators");
-		addEEnumLiteral(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.ALL);
+		addEEnumLiteral(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.IGNORE);
 		addEEnumLiteral(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.ONE_OF);
 		addEEnumLiteral(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.NONE);
 		addEEnumLiteral(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.ALL_BUT);
@@ -2034,6 +2098,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		addEEnumLiteral(fileFieldSearchOperatorsEEnum, FileFieldSearchOperators.FILE_TYPE);
 		addEEnumLiteral(fileFieldSearchOperatorsEEnum, FileFieldSearchOperators.CONTENTS);
 		addEEnumLiteral(fileFieldSearchOperatorsEEnum, FileFieldSearchOperators.SIZE);
+		addEEnumLiteral(fileFieldSearchOperatorsEEnum, FileFieldSearchOperators.IGNORE);
 
 		initEEnum(combinationOperatorsEEnum, CombinationOperators.class, "CombinationOperators");
 		addEEnumLiteral(combinationOperatorsEEnum, CombinationOperators.AND);
@@ -2045,6 +2110,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		addEEnumLiteral(dateFieldSearchOperatorsEEnum, DateFieldSearchOperators.AFTER);
 		addEEnumLiteral(dateFieldSearchOperatorsEEnum, DateFieldSearchOperators.EXACTLY);
 		addEEnumLiteral(dateFieldSearchOperatorsEEnum, DateFieldSearchOperators.EMPTY);
+		addEEnumLiteral(dateFieldSearchOperatorsEEnum, DateFieldSearchOperators.NOT_BETWEEN);
+		addEEnumLiteral(dateFieldSearchOperatorsEEnum, DateFieldSearchOperators.IGNORE);
+
+		initEEnum(booleanFieldSearchOperatorsEEnum, BooleanFieldSearchOperators.class, "BooleanFieldSearchOperators");
+		addEEnumLiteral(booleanFieldSearchOperatorsEEnum, BooleanFieldSearchOperators.IGNORE);
+		addEEnumLiteral(booleanFieldSearchOperatorsEEnum, BooleanFieldSearchOperators.IS);
+		addEEnumLiteral(booleanFieldSearchOperatorsEEnum, BooleanFieldSearchOperators.IS_NOT);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -2124,7 +2196,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "noSpecialCharacters", "self.id.regexMatch(\'[\\w]*\') = true",
-			 "validRef", "if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif"
+			 "validRef", "if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.getAllAttributes()->excludes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif"
 		   });										
 		addAnnotation
 		  (formGroupEClass.getEOperations().get(0), 

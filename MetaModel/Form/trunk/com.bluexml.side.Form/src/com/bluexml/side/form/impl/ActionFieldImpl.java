@@ -22,7 +22,7 @@ import org.eclipse.emf.common.notify.Notification;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.form.impl.ActionFieldImpl#getActionHandler <em>Action Handler</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ActionFieldImpl#getAction_handler <em>Action handler</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,23 +30,23 @@ import org.eclipse.emf.common.notify.Notification;
  */
 public class ActionFieldImpl extends FieldImpl implements ActionField {
 	/**
-	 * The default value of the '{@link #getActionHandler() <em>Action Handler</em>}' attribute.
+	 * The default value of the '{@link #getAction_handler() <em>Action handler</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getActionHandler()
+	 * @see #getAction_handler()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String ACTION_HANDLER_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getActionHandler() <em>Action Handler</em>}' attribute.
+	 * The cached value of the '{@link #getAction_handler() <em>Action handler</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getActionHandler()
+	 * @see #getAction_handler()
 	 * @generated
 	 * @ordered
 	 */
-	protected String actionHandler = ACTION_HANDLER_EDEFAULT;
+	protected String action_handler = ACTION_HANDLER_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,8 +71,8 @@ public class ActionFieldImpl extends FieldImpl implements ActionField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getActionHandler() {
-		return actionHandler;
+	public String getAction_handler() {
+		return action_handler;
 	}
 
 	/**
@@ -80,11 +80,11 @@ public class ActionFieldImpl extends FieldImpl implements ActionField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setActionHandler(String newActionHandler) {
-		String oldActionHandler = actionHandler;
-		actionHandler = newActionHandler;
+	public void setAction_handler(String newAction_handler) {
+		String oldAction_handler = action_handler;
+		action_handler = newAction_handler;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.ACTION_FIELD__ACTION_HANDLER, oldActionHandler, actionHandler));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.ACTION_FIELD__ACTION_HANDLER, oldAction_handler, action_handler));
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class ActionFieldImpl extends FieldImpl implements ActionField {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.ACTION_FIELD__ACTION_HANDLER:
-				return getActionHandler();
+				return getAction_handler();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,7 +110,7 @@ public class ActionFieldImpl extends FieldImpl implements ActionField {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.ACTION_FIELD__ACTION_HANDLER:
-				setActionHandler((String)newValue);
+				setAction_handler((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,7 +125,7 @@ public class ActionFieldImpl extends FieldImpl implements ActionField {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FormPackage.ACTION_FIELD__ACTION_HANDLER:
-				setActionHandler(ACTION_HANDLER_EDEFAULT);
+				setAction_handler(ACTION_HANDLER_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -140,7 +140,7 @@ public class ActionFieldImpl extends FieldImpl implements ActionField {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case FormPackage.ACTION_FIELD__ACTION_HANDLER:
-				return ACTION_HANDLER_EDEFAULT == null ? actionHandler != null : !ACTION_HANDLER_EDEFAULT.equals(actionHandler);
+				return ACTION_HANDLER_EDEFAULT == null ? action_handler != null : !ACTION_HANDLER_EDEFAULT.equals(action_handler);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -155,8 +155,8 @@ public class ActionFieldImpl extends FieldImpl implements ActionField {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (actionHandler: ");
-		result.append(actionHandler);
+		result.append(" (action_handler: ");
+		result.append(action_handler);
 		result.append(')');
 		return result.toString();
 	}

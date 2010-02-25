@@ -858,6 +858,29 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.BooleanSearchField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BooleanSearchFieldItemProvider booleanSearchFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.BooleanSearchField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBooleanSearchFieldAdapter() {
+		if (booleanSearchFieldItemProvider == null) {
+			booleanSearchFieldItemProvider = new BooleanSearchFieldItemProvider(this);
+		}
+
+		return booleanSearchFieldItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.WorkflowFormCollection} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1062,6 +1085,7 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 		if (dateSearchFieldItemProvider != null) dateSearchFieldItemProvider.dispose();
 		if (choiceSearchFieldItemProvider != null) choiceSearchFieldItemProvider.dispose();
 		if (fileSearchFieldItemProvider != null) fileSearchFieldItemProvider.dispose();
+		if (booleanSearchFieldItemProvider != null) booleanSearchFieldItemProvider.dispose();
 	}
 
 }

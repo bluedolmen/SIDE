@@ -66,7 +66,15 @@ public enum NumericalFieldSearchOperators implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	EMPTY(4, "empty", "empty");
+	EMPTY(4, "empty", "empty"), /**
+	 * The '<em><b>Ignore</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #IGNORE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	IGNORE(5, "ignore", "ignore");
 
 	/**
 	 * The '<em><b>Between</b></em>' literal value.
@@ -144,6 +152,21 @@ public enum NumericalFieldSearchOperators implements Enumerator {
 	public static final int EMPTY_VALUE = 4;
 
 	/**
+	 * The '<em><b>Ignore</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Ignore</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #IGNORE
+	 * @model name="ignore"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IGNORE_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>Numerical Field Search Operators</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -156,6 +179,7 @@ public enum NumericalFieldSearchOperators implements Enumerator {
 			ABOVE,
 			EXACTLY,
 			EMPTY,
+			IGNORE,
 		};
 
 	/**
@@ -211,6 +235,7 @@ public enum NumericalFieldSearchOperators implements Enumerator {
 			case ABOVE_VALUE: return ABOVE;
 			case EXACTLY_VALUE: return EXACTLY;
 			case EMPTY_VALUE: return EMPTY;
+			case IGNORE_VALUE: return IGNORE;
 		}
 		return null;
 	}

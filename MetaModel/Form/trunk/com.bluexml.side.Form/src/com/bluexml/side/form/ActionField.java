@@ -28,7 +28,7 @@ package com.bluexml.side.form;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.form.ActionField#getActionHandler <em>Action Handler</em>}</li>
+ *   <li>{@link com.bluexml.side.form.ActionField#getAction_handler <em>Action handler</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,27 +39,27 @@ package com.bluexml.side.form;
 public interface ActionField extends Field {
 
 	/**
-	 * Returns the value of the '<em><b>Action Handler</b></em>' attribute.
+	 * Returns the value of the '<em><b>Action handler</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * This property refers to the action handler according to contextualized conventions. For instance, the BlueXML XForms generation requires this property to be the fully qualified name of a Java class that implements an interface. See the documentation for more details.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Action Handler</em>' attribute.
-	 * @see #setActionHandler(String)
-	 * @see com.bluexml.side.form.FormPackage#getActionField_ActionHandler()
+	 * @return the value of the '<em>Action handler</em>' attribute.
+	 * @see #setAction_handler(String)
+	 * @see com.bluexml.side.form.FormPackage#getActionField_Action_handler()
 	 * @model
 	 * @generated
 	 */
-	String getActionHandler();
+	String getAction_handler();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.ActionField#getActionHandler <em>Action Handler</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.form.ActionField#getAction_handler <em>Action handler</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Action Handler</em>' attribute.
-	 * @see #getActionHandler()
+	 * @param value the new value of the '<em>Action handler</em>' attribute.
+	 * @see #getAction_handler()
 	 * @generated
 	 */
-	void setActionHandler(String value);
+	void setAction_handler(String value);
 } // ActionField

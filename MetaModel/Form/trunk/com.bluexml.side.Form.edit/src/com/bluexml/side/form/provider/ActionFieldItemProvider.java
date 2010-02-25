@@ -61,24 +61,24 @@ public class ActionFieldItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addActionHandlerPropertyDescriptor(object);
+			addAction_handlerPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Action Handler feature.
+	 * This adds a property descriptor for the Action handler feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addActionHandlerPropertyDescriptor(Object object) {
+	protected void addAction_handlerPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ActionField_actionHandler_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ActionField_actionHandler_feature", "_UI_ActionField_type"),
+				 getString("_UI_ActionField_action_handler_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ActionField_action_handler_feature", "_UI_ActionField_type"),
 				 FormPackage.Literals.ACTION_FIELD__ACTION_HANDLER,
 				 true,
 				 false,

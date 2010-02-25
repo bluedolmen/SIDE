@@ -48,7 +48,15 @@ public enum FileFieldSearchOperators implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SIZE(2, "size", "size");
+	SIZE(2, "size", "size"), /**
+	 * The '<em><b>Ignore</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #IGNORE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	IGNORE(3, "ignore", "ignore");
 
 	/**
 	 * The '<em><b>File Type</b></em>' literal value.
@@ -96,6 +104,21 @@ public enum FileFieldSearchOperators implements Enumerator {
 	public static final int SIZE_VALUE = 2;
 
 	/**
+	 * The '<em><b>Ignore</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Ignore</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #IGNORE
+	 * @model name="ignore"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IGNORE_VALUE = 3;
+
+	/**
 	 * An array of all the '<em><b>File Field Search Operators</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -106,6 +129,7 @@ public enum FileFieldSearchOperators implements Enumerator {
 			FILE_TYPE,
 			CONTENTS,
 			SIZE,
+			IGNORE,
 		};
 
 	/**
@@ -159,6 +183,7 @@ public enum FileFieldSearchOperators implements Enumerator {
 			case FILE_TYPE_VALUE: return FILE_TYPE;
 			case CONTENTS_VALUE: return CONTENTS;
 			case SIZE_VALUE: return SIZE;
+			case IGNORE_VALUE: return IGNORE;
 		}
 		return null;
 	}
