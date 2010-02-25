@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of SIDE-Labs/Reverse.
+
+	Copyright (C) 2009  BlueXML (http://www.bluexml.com)
+
+    SIDE-Labs/Reverse is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SIDE-Labs/Reverse is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<project name="common" basedir="../.." default="initialize">
+
+	<import file="../../build.xml" />
+
+    <target name="clean" description="Cleans the models build directory">
+    	<delete dir="${models.build.dir}/${model.dir}"/>
+    </target>
+
+    <target name="clean_all" description="Cleans the build directory">
+    	<delete dir="${build.dir}"/>
+    </target>
+
+    <target name="initialize" description="Create the build directory">
+    	<mkdir dir="${export.dir}"/>   	
+    	<mkdir dir="${temp.dir}"/>
+    </target>
+
+</project>

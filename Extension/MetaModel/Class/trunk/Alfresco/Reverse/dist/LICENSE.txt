@@ -1,0 +1,4 @@
+saxon9.jar has been extracted from saxonb9-1-0-7j.zip from which you will find
+legas notices in the notice directory.
+
+saxonb9 may be downloaded from http://saxon.sourceforge.net/

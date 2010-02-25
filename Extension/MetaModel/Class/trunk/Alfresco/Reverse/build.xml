@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of SIDE-Labs/Reverse.
+
+	Copyright (C) 2009  BlueXML (http://www.bluexml.com)
+
+    SIDE-Labs/Reverse is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SIDE-Labs/Reverse is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<project name="Alfresco reverse" basedir="." default="reverse">
+
+	<property file="build.properties" />
+		
+	<property name="src.dir" value="src"/>
+	<property name="build.dir" location="build"/>
+    <property name="models.src.dir" value="src/models"/>
+    <property name="models.build.dir" value="build/models"/>
+	<property name="models" value="models"/>
+ 	<property name="export.dir" location="${models.build.dir}/${model.dir}"/>
+	<property name="temp.dir" location="${build.dir}/temp"/>
+	<property name="saxon.dir" location="dist"/>
+
+    <property name="xsl.dir" location="src/xsl"/>
+    	
+	<!-- Core build scripts -->
+	<import file="src/build/common.xml" />
+	<import file="src/build/aggregate.xml" />
+	<import file="src/build/reverse.xml" />
+	<import file="src/build/decompose.xml" />
+		
+	<target name="reverse" description="Reverses the Alfresco model to SIDE 2.0"
+			depends="initialize,well_formation,reverse-all-2.0,resolve,produce">
+    </target>
+
+</project>

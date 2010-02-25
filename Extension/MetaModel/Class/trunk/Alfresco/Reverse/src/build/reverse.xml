@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of SIDE-Labs/Reverse.
+
+	Copyright (C) 2009  BlueXML (http://www.bluexml.com)
+
+    SIDE-Labs/Reverse is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SIDE-Labs/Reverse is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<project name="reverse-2.0" basedir="../.." default="reverse-2.0">
+
+	<import file="../../build.xml" />
+
+	<target name="reverse-2.0" description="Transform odt to odt.dbk.xml">
+		<xslt in="${models.src.dir}/${model.dir}/${model}.xml"
+			  style="${xsl.dir}/alfresco-3.xLabs2side-2.xLabs.xsl"
+			  out="${export.dir}/${model}.dt/"/>
+	</target>
+
+	<target name="reverse-all-2.0" description="Transform models.xml to global SIDE model">
+		<xslt in="${models.src.dir}/${model.dir}/${models}.xml"
+			  style="${xsl.dir}/alfresco-3.xLabs2side-2.xLabs-all.xsl"
+			  out="${export.dir}/${models}.dt"
+			  classpath="${saxon.dir}/saxon9.jar"/>
+	</target>
+	
+</project>

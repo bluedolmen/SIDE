@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of SIDE-Labs/Reverse.
+
+	Copyright (C) 2009  BlueXML (http://www.bluexml.com)
+
+    SIDE-Labs/Reverse is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SIDE-Labs/Reverse is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<project name="aggregate" basedir="../.." default="well_formation">
+	
+	<import file="../../build.xml" />
+	
+	<target name="clean_models" description="Delete models to use append method">
+		<delete file="${models.src.dir}/${model.dir}/${models}.xml" />
+	</target>
+	
+	<target name="concat" description="Aggregate the Alfresco Models">
+		<concat destfile="${models.src.dir}/${model.dir}/${models}.xml" append="true" fixlastline="yes">
+			<fileset dir="${models.src.dir}/${model.dir}" 
+					 includes="*.xml" excludes="allModels.xml,models.xml"/>
+		</concat>
+	</target>
+	
+	<target name="well_formation" depends="clean_models" description="Well form the aggregated models">
+		<echo message="&lt;models&gt;" file="${models.src.dir}/${model.dir}/${models}.xml" append="true"/>
+		
+		<antcall target="concat"/>
+		
+		<replace file="${models.src.dir}/${model.dir}/${models}.xml" token='&lt;?xml version="1.0" encoding="UTF-8"?&gt;' value=""/>
+		<replace file="${models.src.dir}/${model.dir}/${models}.xml" token="&lt;?xml version='1.0' encoding='UTF-8'?&gt;" value=""/>
+		<replace file="${models.src.dir}/${model.dir}/${models}.xml" token="&lt;!DOCTYPE permissions &gt;" value=""/>
+		<replace file="${models.src.dir}/${model.dir}/${models}.xml" 
+				 token="&lt;models&gt;" 
+				 value='&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE permissions &gt;&lt;models&gt;'/>
+		
+		<echo message="&lt;/models&gt;" file="${models.src.dir}/${model.dir}/models.xml" append="true"/>
+	</target>
+	
+	
+	
+</project>

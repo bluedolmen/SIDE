@@ -1,0 +1,4559 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE permissions ><models><model name="app:applicationmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <description>Alfresco Application Model</description>
+   <author>Alfresco</author>
+   <published>2005-09-29</published>
+   <version>1.0</version>
+
+   <imports>
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys"/>
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+      <import uri="http://www.alfresco.org/model/wcmmodel/1.0" prefix="wcm"/>
+   </imports>
+   
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/application/1.0" prefix="app"/>
+   </namespaces>
+
+   
+   <types>
+   
+      <!-- TODO: Glossary will be revisited when implementation is better understood -->
+      <type name="app:glossary">
+         <parent>cm:folder</parent>
+         <!--
+         <mandatory-aspects>
+            <aspect>CategoryContainable</aspect>
+         </mandatory-aspects>
+         <associations>
+            <association name="app:namespace">
+               <target-type>Category</target-type>
+               <target-multiplicity>0..*</target-multiplicity>
+               <source-mulitplicity>0..1<source-multiplicity>
+               <duplicates-allowed>false</duplicates-allowed>
+            </association>
+         </associations>
+         -->
+      </type>
+
+      <type name="app:configurations">
+         <title>Configurations</title>
+         <parent>cm:systemfolder</parent>
+      </type>
+      
+      <type name="app:filelink">
+         <title>File Link Object</title>
+         <parent>cm:link</parent>
+      </type>
+      
+      <type name="app:folderlink">
+         <title>Folder Link Object</title>
+         <parent>cm:link</parent>
+      </type>
+      
+	</types>
+
+	<aspects>
+   
+      <aspect name="app:uifacets">
+         <title>UI Facets</title>
+         <parent>cm:titled</parent>
+         <properties>
+            <property name="app:icon">
+               <type>d:text</type>
+            </property>
+         </properties>
+      </aspect>
+   
+      <aspect name="app:inlineeditable">
+         <title>Inline Editable</title>
+         <properties>
+            <property name="app:editInline">
+               <title>Edit Inline</title>
+               <type>d:boolean</type>
+            </property>
+         </properties>
+      </aspect>
+   
+      <!--  TODO: Is this needed - should simpleworkflow ? -->
+      <aspect name="app:workflow">
+         <title>Workflow</title>
+      </aspect>
+   
+      <aspect name="app:simpleworkflow">
+         <parent>app:workflow</parent>
+         <properties>
+            <property name="app:approveStep">
+               <type>d:text</type>
+               <protected>true</protected>
+            </property>
+            <property name="app:approveFolder">
+               <type>d:noderef</type>
+               <protected>true</protected>
+            </property>
+            <property name="app:approveMove">
+               <type>d:boolean</type>
+            </property>
+            <property name="app:rejectStep">
+               <type>d:text</type>
+               <protected>true</protected>
+            </property>
+            <property name="app:rejectFolder">
+               <type>d:noderef</type>
+               <protected>true</protected>
+            </property>
+            <property name="app:rejectMove">
+               <type>d:boolean</type>
+            </property>
+         </properties>
+      </aspect>
+
+      <aspect name="app:configurable">
+         <title>Configurable</title>
+         <associations>
+            <child-association name="app:configurations">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>app:configurations</class>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </target>
+            </child-association>
+         </associations>
+      </aspect>
+      
+      <aspect name="app:feedsource">
+         <title>Feed Source</title>
+         <properties>
+            <property name="app:template">
+               <title>Feed Template</title>
+               <type>d:noderef</type>
+               <mandatory>false</mandatory>
+            </property>
+         </properties>
+      </aspect>
+      
+	</aspects>
+	
+</model>
+
+
+<!-- Definition of Blog Integration Model -->
+
+<!-- Note: the blg: namespace is defined further on in the document -->
+<model name="blg:blogintegration" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <!-- Meta-data about the model -->   
+   <description>Blog Integration Model</description>
+   <author>Roy Wetherall</author>
+   <version>1.0</version>
+
+   <!-- Imports are required to allow references to definitions in other models -->   
+   <imports>
+      <!-- Import Alfresco Dictionary Definitions -->
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <!-- Import Alfresco Content Domain Model Definitions -->
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+      <!-- Import Alfresco Content Domain Model Definitions -->
+      <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys" />
+   </imports>
+
+   <!-- Records Management Namespace -->
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/blogintegration/1.0" prefix="blg"/>
+   </namespaces>
+   
+   <aspects>
+   
+      <aspect name="blg:blogDetails">
+        <title>Blog Details</title>
+        <properties>	            
+            <property name="blg:blogImplementation">
+				<title>Blog Type</title>
+				<type>d:text</type>
+				<mandatory>false</mandatory>
+			</property>                       
+            <property name="blg:id">
+				<title>Blog Identifier</title>
+				<type>d:text</type>
+				<mandatory>false</mandatory>
+				<default>0</default>
+			</property>                       
+            <property name="blg:name">
+				<title>Blog Name</title>
+				<type>d:text</type>
+				<mandatory>false</mandatory>
+			</property>             
+            <property name="blg:description">
+				<title>Blog Description</title>
+				<type>d:text</type>
+				<mandatory>false</mandatory>
+			</property>
+            <property name="blg:url">
+				<title>Blog URL</title>
+				<type>d:text</type>
+				<mandatory>false</mandatory>
+			</property>            
+            <property name="blg:userName">
+				<title>Blog User Name</title>
+				<type>d:text</type>
+				<mandatory>false</mandatory>
+			</property>            
+            <property name="blg:password">
+				<title>Blog User Password</title>
+				<type>d:text</type>
+				<mandatory>false</mandatory>
+			</property>			
+        </properties>
+     </aspect> 
+     
+     <aspect name="blg:blogPost">
+        <title>Blog Post</title>
+        <properties>	            
+            <property name="blg:postId">
+				<title>Blog post identifier</title>
+				<type>d:text</type>
+				<protected>true</protected>	
+				<mandatory>true</mandatory>			
+			</property>  	            
+            <property name="blg:published">
+				<title>Blog published</title>
+				<type>d:boolean</type>
+				<protected>true</protected>
+				<mandatory>true</mandatory>
+			</property>  	            
+            <property name="blg:link">
+				<title>Blog post link</title>
+				<type>d:text</type>
+				<protected>true</protected>
+				<mandatory>true</mandatory>
+			</property> 	            
+            <property name="blg:posted">
+				<title>Date posted</title>
+				<type>d:date</type>
+				<protected>true</protected>
+				<mandatory>true</mandatory>
+			</property> 	            
+            <property name="blg:lastUpdate">
+				<title>Date last updated</title>
+				<type>d:date</type>
+				<protected>true</protected>
+				<mandatory>true</mandatory>
+			</property> 
+		</properties>
+		
+         <associations>
+            <association name="blg:blogDetails">
+               <title>Blog details</title>
+               <source>
+                  <role>blg:posts</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>blg:blogDetails</class>
+                  <role>blg:blogDetails</role>
+                  <mandatory>true</mandatory>
+                  <many>false</many>
+               </target>
+            </association>
+         </associations>
+   	  </aspect>
+
+   </aspects>
+   
+</model>
+
+
+<model name="bpm:businessprocessmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+    <description>Business Process Model</description>
+    <author>Alfresco</author>
+    <version>1.0</version>
+
+    <!-- Imports are required to allow references to definitions in other models -->
+    <imports>
+        <!-- Import Alfresco Dictionary Definitions -->
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+        <!-- Import Alfresco System Definitions -->
+        <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys" />
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+        <!-- Import User Model Definitions -->
+        <import uri="http://www.alfresco.org/model/user/1.0" prefix="usr"/>
+    </imports>
+
+    <namespaces>
+        <namespace uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
+    </namespaces>
+
+    <constraints>
+
+        <constraint name="bpm:allowedPriority" type="LIST">
+            <parameter name="allowedValues">
+                <!--  TODO: Determine if priority values can be mapped to human-readable strings -->
+                <list>
+                    <value>1</value>
+                    <value>2</value>
+                    <value>3</value>
+                </list>
+            </parameter>
+        </constraint>
+
+        <constraint name="bpm:allowedStatus" type="LIST">
+            <parameter name="allowedValues">
+                <!--  TODO: Determine if status values can be mapped to human-readable strings -->
+                <list>
+                    <value>Not Yet Started</value>
+                    <value>In Progress</value>
+                    <value>On Hold</value>
+                    <value>Cancelled</value>
+                    <value>Completed</value>
+                </list>
+            </parameter>
+        </constraint>
+
+        <constraint name="bpm:percentage" type="MINMAX">
+            <parameter name="minValue">
+                <value>0</value>
+            </parameter>
+            <parameter name="maxValue">
+                <value>100</value>
+            </parameter>
+        </constraint>
+
+    </constraints>
+
+    <types>
+
+        <!--                                 -->
+        <!--  Base definition for all Tasks  -->
+        <!--                                 -->
+
+        <type name="bpm:task">
+            <parent>cm:content</parent>
+
+            <properties>
+
+                <!--             -->
+                <!--  Assignment -->
+                <!--             -->
+                <!--  Note: Implemented via cm:ownable aspect -->
+
+                <!--                  -->
+                <!--  Task Identifier -->
+                <!--                  -->
+                <property name="bpm:taskId">
+                    <type>d:long</type>
+                    <protected>true</protected>
+                    <mandatory>true</mandatory>
+                </property>
+
+                <!--  Task Description -->
+                <property name="bpm:description">
+                    <type>d:text</type>
+                </property>
+
+                <!--             -->
+                <!--  Task Dates -->
+                <!--             -->
+                <property name="bpm:startDate">
+                    <type>d:date</type>
+                    <protected>true</protected>
+                </property>
+                <property name="bpm:completionDate">
+                    <type>d:date</type>
+                    <protected>true</protected>
+                </property>
+                <property name="bpm:dueDate">
+                    <type>d:date</type>
+                </property>
+
+                <!--                -->
+                <!--  Task Progress -->
+                <!--                -->
+                <property name="bpm:status">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <default>Not Yet Started</default>
+                    <constraints>
+                        <constraint ref="bpm:allowedStatus" />
+                    </constraints>
+                </property>
+                <property name="bpm:priority">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <default>2</default>
+                    <constraints>
+                        <constraint ref="bpm:allowedPriority" />
+                    </constraints>
+                </property>
+                <property name="bpm:percentComplete">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <default>0</default>
+                    <constraints>
+                        <constraint ref="bpm:percentage" />
+                    </constraints>
+                </property>
+
+                <!--             -->
+                <!--  Task Notes -->
+                <!--             -->
+                <property name="bpm:comment">
+                    <type>d:text</type>
+                </property>
+
+            </properties>
+
+            <associations>
+
+                <!--  List of users who may potentially get assigned to the task -->
+                <association name="bpm:pooledActors">
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <!-- For now, this may consists of cm:person or usr:authorityContainer -->
+                        <class>sys:base</class>
+                        <mandatory>false</mandatory>
+                        <many>true</many>
+                    </target>
+                </association>
+
+            </associations>
+
+            <mandatory-aspects>
+                <aspect>cm:ownable</aspect>
+            </mandatory-aspects>
+        </type>
+
+
+        <!--                                                 -->
+        <!--  The base for all Tasks assigned via a Workflow -->
+        <!--                                                 -->
+
+        <type name="bpm:workflowTask">
+            <parent>bpm:task</parent>
+
+            <properties>
+
+                <!--  Task Context          -->
+                <!--  e.g. Space, Document  -->
+                <property name="bpm:context">
+                    <type>d:noderef</type>
+                </property>
+
+                <!--  Task Outcome -->
+                <property name="bpm:outcome">
+                    <!-- NOTE: Transition id -->
+                    <type>d:text</type>  
+                </property>
+
+                <!--  Items within package marked as complete -->
+                <property name="bpm:completedItems">
+                    <type>d:noderef</type>
+                    <multiple>true</multiple>
+                </property>
+
+                <!--  Applicable actions for workflow package -->
+                <property name="bpm:packageActionGroup">
+                    <type>d:text</type>
+                    <!-- NOTE: empty default specified, therefore no actions -->
+                    <default></default>
+                </property>
+
+                <!--  Applicable actions for workflow package item -->
+                <property name="bpm:packageItemActionGroup">
+                    <type>d:text</type>
+                    <default>read_package_item_actions</default>
+                </property>
+
+                <!-- List of "hidden" transitions to consider masking from user -->
+                <property name="bpm:hiddenTransitions">
+                    <type>d:text</type>
+                    <multiple>true</multiple>
+                    <default></default>
+                </property>
+            </properties>
+
+            <associations>
+
+                <association name="bpm:package">
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <class>bpm:workflowPackage</class>
+                        <mandatory>true</mandatory>
+                        <many>false</many>
+                    </target>
+                </association>
+
+            </associations>
+
+        </type>
+
+
+        <!--                     -->
+        <!--  Default Start Task -->
+        <!--                     -->
+
+        <type name="bpm:startTask">
+            <parent>bpm:workflowTask</parent>
+
+            <properties>
+
+                <!--  Description for the workflow as a whole -->
+                <property name="bpm:workflowDescription">
+                    <type>d:text</type>
+                </property>
+
+                <!--  Due date for the workflow as a whole -->
+                <property name="bpm:workflowDueDate">
+                    <type>d:date</type>
+                </property>
+
+                <!--  Priority for the workflow as a whole -->
+                <property name="bpm:workflowPriority">
+                    <type>d:int</type>
+                    <default>2</default>
+                    <constraints>
+                        <constraint ref="bpm:allowedPriority" />
+                    </constraints>
+                </property>
+
+            </properties>
+
+            <overrides>
+
+                <property name="bpm:packageActionGroup">
+                    <default>add_package_item_actions</default>
+                </property>
+
+                <property name="bpm:packageItemActionGroup">
+                    <default>start_package_item_actions</default>
+                </property>
+
+            </overrides>
+
+        </type>
+        
+        <!--                      -->
+        <!--  Workflow Definition -->
+        <!--                      -->
+        
+       <type name="bpm:workflowDefinition">
+          <title>Workflow Process Definition</title>
+          <parent>cm:content</parent>
+          <properties>
+             <property name="bpm:definitionName">
+                <title>Workflow Name</title>
+                <type>d:text</type>
+             </property>
+             <property name="bpm:engineId">
+                <title>Workflow Engine Id</title>
+                <type>d:text</type>
+                <mandatory>true</mandatory>
+                <default>jbpm</default>
+             </property>
+             <property name="bpm:definitionDeployed">
+                <title>Workflow Deployed</title>
+                <type>d:boolean</type>
+                <default>false</default>
+             </property>             
+          </properties>
+       </type>      
+
+    </types>
+
+    <aspects>
+    
+        <!--                       -->
+        <!--  Single Task Assignee -->
+        <!--                       -->
+        
+        <aspect name="bpm:assignee">
+            <associations>
+
+                <association name="bpm:assignee">
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <class>cm:person</class>
+                        <mandatory>true</mandatory>
+                        <many>false</many>
+                    </target>
+                </association>
+
+            </associations>
+        </aspect>
+    
+        <!--                          -->
+        <!--  Multiple Task Assignees -->
+        <!--                          -->
+
+        <aspect name="bpm:assignees">
+            <associations>
+
+                <association name="bpm:assignees">
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <class>cm:person</class>
+                        <mandatory>true</mandatory>
+                        <many>true</many>
+                    </target>
+                </association>
+
+            </associations>
+        </aspect>
+
+        <!--                          -->
+        <!--  Single Group Assignee   -->
+        <!--                          -->
+
+        <aspect name="bpm:groupAssignee">
+            <associations>
+
+                <association name="bpm:groupAssignee">
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <!-- TODO: Refactor when group is pulled into content model -->
+                        <class>cm:authorityContainer</class>
+                        <mandatory>true</mandatory>
+                        <many>false</many>
+                    </target>
+                </association>
+
+            </associations>
+        </aspect>
+
+        <!--                             -->
+        <!--  Multiple Group Assignees   -->
+        <!--                             -->
+
+        <aspect name="bpm:groupAssignees">
+            <associations>
+
+                <association name="bpm:groupAssignees">
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <!-- TODO: Refactor when group is pulled into content model -->
+                        <class>cm:authorityContainer</class>
+                        <mandatory>true</mandatory>
+                        <many>true</many>
+                    </target>
+                </association>
+
+            </associations>
+        </aspect>
+
+        <!--                                                             -->
+        <!--  A collection of content routed through a workflow.         -->
+        <!--                                                             -->
+        <!--  Note: this aspect should be applied to a container such as -->
+        <!--        a folder, versioned folder or layered folder.        -->
+        <!--                                                             -->
+
+        <aspect name="bpm:workflowPackage">
+            <properties>
+
+                <!--  Created by Workflow Service (true), or provided from outside (false) -->                
+                <property name="bpm:isSystemPackage">
+                    <type>d:boolean</type>
+                </property>
+
+                <!--                        -->
+                <!--  Associated Workflow   -->
+                <!--                        -->
+                <property name="bpm:workflowDefinitionId">
+                    <type>d:text</type>
+                </property>
+                <property name="bpm:workflowDefinitionName">
+                    <type>d:text</type>
+                </property>
+                <property name="bpm:workflowInstanceId">
+                    <type>d:text</type>
+                </property>
+
+                <!--  TODO: Define properties (replicated from Workflow/Task Engine) for -->
+                <!--        search within Alfresco e.g. task info, workflow info ...     -->
+
+            </properties>
+
+        </aspect>
+
+    </aspects>
+
+</model>
+
+
+<model name="ia:CalendarEventModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <!-- Optional meta-data about the model -->   
+   <description>Calendar Event Model</description>
+   <author>Snig Bhaumik</author>
+   <version>1.0</version>
+
+   <imports>
+   	<!-- Import Alfresco Dictionary Definitions -->
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <!-- Import Alfresco Content Domain Model Definitions -->
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+   </imports>
+
+   <!-- Introduction of new namespaces defined by this model -->
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/calendar" prefix="ia"/>
+   </namespaces>
+
+   <types>
+      <type name="ia:calendarEvent">
+         <title>Calendar Event</title>
+         <parent>cm:content</parent>
+         <properties>
+            <property name="ia:whatEvent">
+               <type>d:text</type>
+            </property>
+            <property name="ia:fromDate">
+               <type>d:datetime</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="ia:toDate">
+               <type>d:datetime</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="ia:whereEvent">
+               <type>d:text</type>
+            </property>
+            <property name="ia:descriptionEvent">
+               <type>d:text</type>
+            </property>
+            <property name="ia:colorEvent">
+               <type>d:text</type>
+            </property>
+         </properties>
+      </type>
+      
+      <type name="ia:calendar">
+         <title>Calendar Space</title>
+         <parent>cm:folder</parent>
+         <properties>
+            <property name="ia:whatEventDefault">
+               <type>d:text</type>
+            </property>
+            <property name="ia:fromDateDefault">
+               <type>d:datetime</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="ia:toDateDefault">
+               <type>d:datetime</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="ia:whereEventDefault">
+               <type>d:text</type>
+            </property>
+            <property name="ia:colorEventDefault">
+               <type>d:text</type>
+            </property>
+		   </properties>
+         <associations>
+   			<association name="ia:subscribedCalendarList">
+   				<source>
+   					<mandatory>false</mandatory>
+   					<many>true</many>
+   				</source>
+   				<target>
+   					<class>ia:calendar</class>
+   					<mandatory>false</mandatory>
+   					<many>true</many>
+   				</target>
+   			</association>
+   		</associations>
+      </type>
+   </types>
+   
+</model>
+<model name="cmis:cmismodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+  <description>CMIS Model Definitions</description>
+  <version>0.5</version>
+
+  <imports>
+    <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+    <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys" />
+  </imports>
+
+  <namespaces>
+    <namespace uri="http://www.alfresco.org/model/cmis/0.6" prefix="cmis" />
+  </namespaces>
+
+  <data-types>
+
+    <data-type name="cmis:id">
+      <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser
+      </analyser-class>
+      <java-class>java.lang.String</java-class>
+    </data-type>
+
+    <data-type name="cmis:uri">
+      <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser
+      </analyser-class>
+      <java-class>java.lang.String</java-class>
+    </data-type>
+
+    <data-type name="cmis:xml">
+      <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser
+      </analyser-class>
+      <java-class>java.lang.String</java-class>
+    </data-type>
+
+    <data-type name="cmis:html">
+      <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser
+      </analyser-class>
+      <java-class>java.lang.String</java-class>
+    </data-type>
+
+  </data-types>
+
+  <constraints>
+
+    <constraint name="cmis:allowedValuesForContentStreamAllowed" type="LIST">
+      <parameter name="allowedValues">
+        <list>
+          <value>notallowed</value>
+          <value>allowed</value>
+          <value>required</value>
+        </list>
+      </parameter>
+    </constraint>
+
+  </constraints>
+
+  <types>
+
+    <type name="cmis:object">
+      <properties>
+        <property name="cmis:ObjectId">
+          <title>Object Id</title>
+          <description>The unique object id (a node ref)</description>
+          <type>cmis:id</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>false</tokenised>
+          </index>
+        </property>
+        <property name="cmis:Uri">
+          <title>URI</title>
+          <description>URI</description>
+          <type>cmis:uri</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:ObjectTypeId">
+          <title>Object Type Id</title>
+          <description>The object type id</description>
+          <type>cmis:id</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>false</tokenised>
+          </index>
+        </property>
+        <property name="cmis:CreatedBy">
+          <title>Created by</title>
+          <description>The authority who created this object</description>
+          <type>d:text</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>false</tokenised>
+          </index>
+        </property>
+        <property name="cmis:CreationDate">
+          <title>Creation Date</title>
+          <description>The object creation date</description>
+          <type>d:datetime</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>false</tokenised>
+          </index>
+        </property>
+        <property name="cmis:LastModifiedBy">
+          <title>Last Modified By</title>
+          <description>The authority who last modified this object</description>
+          <type>d:text</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>false</tokenised>
+          </index>
+        </property>
+        <property name="cmis:LastModificationDate">
+          <title>Last Modified Date</title>
+          <description>The date this object was last modified</description>
+          <type>d:datetime</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>false</tokenised>
+          </index>
+        </property>
+        <property name="cmis:ChangeToken">
+          <title>Change token</title>
+          <description>Change Token</description>
+          <type>d:text</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+      </properties>
+    </type>
+
+    <!--  TODO: mark as abstract -->
+    <type name="cmis:filesystemobject">
+      <parent>cmis:object</parent>
+      <properties>
+        <property name="cmis:Name">
+          <title>Name</title>
+          <description>Name</description>
+          <type>d:text</type>
+          <protected>false</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>both</tokenised>
+          </index>
+        </property>
+      </properties>
+    </type>
+
+    <type name="cmis:document">
+      <title>Document</title>
+      <description>Document Type</description>
+      <parent>cmis:filesystemobject</parent>
+      <properties>
+        <property name="cmis:IsImmutable">
+          <title>Is Immutable</title>
+          <description>Is the document immutable?</description>
+          <type>d:boolean</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:IsLatestVersion">
+          <title>Is Latest Version</title>
+          <description>Is this the latest version of the document?</description>
+          <type>d:boolean</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:IsMajorVersion">
+          <title>Is Major Version</title>
+          <description>Is this a major version of the document?</description>
+          <type>d:boolean</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:IsLatestMajorVersion">
+          <title>Is Latest Major Version</title>
+          <description>Is this the latest major version of the document?</description>
+          <type>d:boolean</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:VersionLabel">
+          <title>Version Label</title>
+          <description>The version label</description>
+          <type>d:text</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>true</tokenised>
+          </index>
+        </property>
+        <property name="cmis:VersionSeriesId">
+          <title>Version series id</title>
+          <description>The version series id</description>
+          <type>cmis:id</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>false</tokenised>
+          </index>
+        </property>
+        <property name="cmis:IsVersionSeriesCheckedOut">
+          <title>Is Version Series Checked Out</title>
+          <description>Is the version series checked out?</description>
+          <type>d:boolean</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:VersionSeriesCheckedOutBy">
+          <title>Version Series Checked Out By</title>
+          <description>The authority who checked out this document version series</description>
+          <type>d:text</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:VersionSeriesCheckedOutId">
+          <title>Version Series Checked Out Id</title>
+          <description>The checked out version series id</description>
+          <type>cmis:id</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:CheckinComment">
+          <title>Checkin Comment</title>
+          <description>The checkin comment</description>
+          <type>d:text</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:ContentStreamAllowed">
+          <title>Content Stream Allowed</title>
+          <description>Is a content stream allowed?</description>
+          <type>d:text</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+          <constraints>
+            <constraint ref="cmis:allowedValuesForContentStreamAllowed" />
+          </constraints>
+        </property>
+        <property name="cmis:ContentStreamLength">
+          <title>Content Stream Length</title>
+          <description>The length of the content stream</description>
+          <type>d:int</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>false</tokenised>
+          </index>
+        </property>
+        <property name="cmis:ContentStreamMimeType">
+          <title>Content Stream MIME Type</title>
+          <description>The content stream MIME type</description>
+          <type>d:text</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>false</tokenised>
+          </index>
+        </property>
+        <property name="cmis:ContentStreamFilename">
+          <title>Content Stream Filename</title>
+          <description>The content stream filename</description>
+          <type>d:text</type>
+          <protected>false</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>true</tokenised>
+          </index>
+        </property>
+        <property name="cmis:ContentStreamUri">
+          <title>Content Stream URI</title>
+          <description>The content stream URI</description>
+          <type>cmis:uri</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+      </properties>
+    </type>
+
+    <type name="cmis:folder">
+      <title>Folder</title>
+      <description>Folder Type</description>
+      <parent>cmis:filesystemobject</parent>
+      <properties>
+        <property name="cmis:ParentId">
+          <title>Parent Id</title>
+          <description>The parent id of the folder</description>
+          <type>cmis:id</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="true">
+            <tokenised>false</tokenised>
+          </index>
+        </property>
+        <property name="cmis:AllowedChildObjectTypeIds">
+          <title>Allowed Child Object Types Ids</title>
+          <description>The allowed child object type ids</description>
+          <type>cmis:id</type>
+          <protected>true</protected>
+          <mandatory enforced="false">false</mandatory>
+          <multiple>true</multiple>
+          <index enabled="false" />
+        </property>
+      </properties>
+    </type>
+
+    <type name="cmis:relationship">
+      <title>Relationship</title>
+      <description>Relationship Type</description>
+      <parent>cmis:object</parent>
+      <properties>
+        <property name="cmis:SourceId">
+          <title>Source Id</title>
+          <description>The source id for the relationship</description>
+          <type>cmis:id</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:TargetId">
+          <title>Target Id</title>
+          <description>The target id for the relationship</description>
+          <type>cmis:id</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+      </properties>
+    </type>
+
+    <type name="cmis:policy">
+      <title>Policy</title>
+      <description>Policy Type</description>
+      <parent>cmis:object</parent>
+      <properties>
+        <property name="cmis:PolicyName">
+          <title>Policy Name</title>
+          <description>The name of the policy</description>
+          <type>d:text</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+        <property name="cmis:PolicyText">
+          <title>Policy Text</title>
+          <description>The policy text</description>
+          <type>d:text</type>
+          <protected>true</protected>
+          <mandatory enforced="true">true</mandatory>
+          <multiple>false</multiple>
+          <index enabled="false" />
+        </property>
+      </properties>
+    </type>
+
+  </types>
+
+</model>
+<model name="cm:contentmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <description>Alfresco Content Domain Model</description>
+   <author>Alfresco</author>
+   <published>2009-06-04</published>
+   <version>1.1</version>
+
+   <imports>
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys"/>
+   </imports>
+   
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+   </namespaces>
+
+   <constraints>
+      <constraint name="cm:filename" type="REGEX">
+         <parameter name="expression"><value><![CDATA[(.*[\"\*\\\>\<\?\/\:\|]+.*)|(.*[\.]?.*[\.]+$)|(.*[ ]+$)]]></value></parameter>
+         <parameter name="requiresMatch"><value>false</value></parameter>
+      </constraint>
+      <constraint name="cm:userNameConstraint" type="org.alfresco.repo.dictionary.constraint.UserNameConstraint" />
+      <constraint name="cm:authorityNameConstraint" type="org.alfresco.repo.dictionary.constraint.AuthorityNameConstraint" />
+      <constraint name="cm:storeSelectorConstraint" type="REGISTERED">
+         <parameter name="registeredName"><value>defaultStoreSelector</value></parameter>
+      </constraint>
+   </constraints>
+   
+   <types>
+   
+      <type name="cm:cmobject">
+         <title>Object</title>
+         <parent>sys:base</parent>
+         <properties>
+            <property name="cm:name">
+               <title>Name</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+               <constraints>
+                  <constraint ref="cm:filename" />
+               </constraints>
+            </property>
+         </properties>
+         <mandatory-aspects>
+            <aspect>cm:auditable</aspect>
+         </mandatory-aspects>
+      </type>
+      
+      <type name="cm:folder">
+         <title>Folder</title>
+         <parent>cm:cmobject</parent>
+         <archive>true</archive>
+         <associations>
+            <child-association name="cm:contains">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>sys:base</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+               <duplicate>false</duplicate>
+               <propagateTimestamps>true</propagateTimestamps>
+            </child-association>
+         </associations>
+      </type>
+      
+      <type name="cm:content">
+         <title>Content</title>
+         <parent>cm:cmobject</parent>
+         <archive>true</archive>
+         <properties>
+            <property name="cm:content">
+               <type>d:content</type>
+               <mandatory>false</mandatory>
+               <!--- Index content in the background -->
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>false</stored>
+                  <tokenised>true</tokenised>
+               </index>
+            </property>
+         </properties>
+      </type>
+      
+      <type name="cm:dictionaryModel">
+         <title>Dictionary Model</title>
+         <parent>cm:content</parent>
+         <properties>
+            <property name="cm:modelName">
+               <title>Model name</title>
+               <type>d:qname</type>
+               <protected>true</protected>
+            </property>
+            <property name="cm:modelDescription">
+               <title>Description</title>
+               <type>d:text</type>
+               <protected>true</protected>
+            </property>
+            <property name="cm:modelAuthor">
+               <title>Author</title>
+               <type>d:text</type>
+               <protected>true</protected>
+            </property>
+            <property name="cm:modelPublishedDate">
+               <title>Published Date</title>
+               <type>d:date</type>
+               <protected>true</protected>
+            </property>
+            <property name="cm:modelVersion">
+               <title>Version</title>
+               <type>d:text</type>
+               <protected>true</protected>
+            </property>
+            <property name="cm:modelActive">
+               <title>Model Active</title>
+               <type>d:boolean</type>
+               <default>false</default>
+            </property>
+         </properties>
+      </type>
+      
+      <type name="cm:link">
+         <title>Link Object</title>
+         <parent>cm:cmobject</parent>
+         <properties>
+            <property name="cm:destination">
+               <title>Link Destination</title>
+               <type>d:noderef</type>
+               <mandatory>true</mandatory>
+            </property>
+         </properties>
+      </type>
+      
+      <type name="cm:savedquery">
+         <title>Saved Query</title>
+         <parent>cm:content</parent>
+      </type>
+      
+      <type name="cm:systemfolder">
+         <title>System Folder</title>
+         <parent>cm:folder</parent>
+      </type>
+      
+      <type name="cm:authority">
+        <title>Alfresco Authority Abstract Type</title>
+         <parent>sys:base</parent>
+      </type>
+
+      <type name="cm:person">
+         <title>Person</title>
+         <parent>cm:authority</parent>
+         <properties>
+            <!-- The tokenisation set here is ignored - it is fixed for this type -->
+            <!-- This is so you can not break person lookup -->
+            <property name="cm:userName">
+               <type>d:text</type>
+               <mandatory>true</mandatory>
+               <constraints>
+                  <constraint ref="cm:userNameConstraint" />
+               </constraints>
+            </property>
+            <property name="cm:homeFolder">
+               <type>d:noderef</type>
+               <mandatory>true</mandatory>
+            </property>
+             <property name="cm:firstName">
+               <type>d:text</type>
+               <mandatory>true</mandatory>
+            </property>
+            <property name="cm:lastName">
+               <type>d:text</type>
+               <mandatory>true</mandatory>
+            </property>
+            <property name="cm:middleName">
+               <type>d:text</type>
+            </property>
+            <property name="cm:email">
+               <type>d:text</type>
+            </property>
+            <property name="cm:organizationId">
+               <type>d:text</type>
+            </property>
+            <property name="cm:homeFolderProvider">
+               <type>d:text</type>
+            </property>
+            <property name="cm:defaultHomeFolderPath">
+               <type>d:text</type>
+            </property>
+            <property name="cm:presenceProvider">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:presenceUsername">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:organization">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:jobtitle">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:location">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:persondescription">
+            	<type>d:content</type>
+            </property>
+            <property name="cm:telephone">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:mobile">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:companyaddress1">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:companyaddress2">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:companyaddress3">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:companypostcode">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:companytelephone">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:companyfax">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:companyemail">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:skype">
+            	<type>d:text</type>
+            </property>
+            <property name="cm:instantmsg">
+            	<type>d:text</type>
+            </property>
+            
+            <!-- system maintained values -->
+            <property name="cm:sizeCurrent">
+                <type>d:long</type>
+                <protected>true</protected>
+            </property>
+            <property name="cm:sizeQuota">
+                <type>d:long</type>
+                <protected>true</protected>
+            </property>
+         </properties>
+         
+         <associations>
+            <association name="cm:avatar">
+               <source>
+                  <role>cm:avatarOf</role>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>cm:content</class>
+                  <role>cm:hasAvatar</role>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </target>
+            </association>
+         </associations>
+      </type>
+
+      <type name="cm:authorityContainer">
+         <title>Alfresco Authority Type</title>
+         <parent>cm:authority</parent>
+         <properties>
+            <!-- The tokenisation set here is ignored - it is fixed for this type -->
+            <!-- This is so you can not break group lookup -->
+            <property name="cm:authorityName">
+               <type>d:text</type>
+               <constraints>
+                  <constraint ref="cm:authorityNameConstraint" />
+               </constraints>
+            </property>
+            <property name="cm:authorityDisplayName">
+               <type>d:text</type>
+            </property>
+         </properties>
+         <associations>
+            <child-association name="cm:member">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>cm:authority</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+               <duplicate>false</duplicate>
+            </child-association>
+         </associations>
+      </type>  
+
+      <type name="cm:zone">
+         <title>Alfresco Authentication Zone Type</title>
+         <parent>cm:cmobject</parent>
+         <properties>
+         </properties>
+         <associations>
+            <child-association name="cm:inZone">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>cm:authority</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+               <duplicate>false</duplicate>
+            </child-association>
+         </associations>
+      </type>  
+
+      <!-- Classification -->
+         
+      <type name="cm:category_root">
+         <title>Category Root</title>
+         <parent>cm:cmobject</parent>
+         <associations>
+            <child-association name="cm:categories">
+               <source>
+                   <mandatory>false</mandatory>
+                   <many>true</many>
+               </source>
+               <target> 
+                  <class>cm:category</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+         </associations>
+         <mandatory-aspects>
+            <aspect>sys:aspect_root</aspect>
+         </mandatory-aspects>
+      </type>
+      
+      <type name="cm:category">
+         <title>Category</title>
+         <parent>cm:cmobject</parent>
+         <associations>
+            <child-association name="cm:subcategories">
+               <source>
+                   <mandatory>false</mandatory>
+                   <many>true</many>
+               </source>
+               <target>
+                  <class>cm:category</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+			   <duplicate>false</duplicate>
+            </child-association>
+         </associations>
+      </type>
+      
+      <!-- Multilingual -->
+      <type name="cm:mlRoot">
+         <title>Multilingual Root</title>
+         <parent>sys:container</parent>
+         <associations>
+            <child-association name="cm:mlContainer">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>cm:mlContainer</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+         </associations>
+      </type>
+      
+      <type name="cm:mlContainer">
+         <title>Multilingual Container</title>
+         <parent>sys:container</parent>
+         <associations>
+            <child-association name="cm:mlChild">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>cm:mlDocument</class>
+                  <mandatory>true</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+         </associations>
+         <mandatory-aspects>
+            <aspect>cm:versionable</aspect>
+            <aspect>cm:author</aspect>
+            <aspect>sys:localized</aspect>
+         </mandatory-aspects>
+      </type>
+      
+      <!-- Thumbnail content type -->
+      <type name="cm:thumbnail">
+	     <title>Thumbnail</title>
+		 <parent>cm:content</parent>
+		 <archive>true</archive>
+		 <properties>     
+		    <property name="cm:thumbnailName">
+		        <title>Thumbnail Name</title>
+			    <type>d:text</type>
+			    <mandatory>false</mandatory>
+		    </property>     
+		    <property name="cm:contentPropertyName">
+		        <title>Thumbnailed Content Property Name</title>
+			    <type>d:qname</type>
+			    <mandatory>true</mandatory>
+		    </property>   		       
+		 </properties>
+	  </type>
+            
+   </types>
+   
+   
+   <aspects>
+   
+      <aspect name="cm:titled">
+         <title>Titled</title>
+         <properties>
+            <property name="cm:title">
+               <title>Title</title>
+               <type>d:mltext</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="cm:description">
+               <title>Description</title>
+               <type>d:mltext</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+         </properties>
+      </aspect>
+   
+      <aspect name="cm:auditable">
+         <title>Auditable</title>
+         <properties>
+            <property name="cm:created">
+               <title>Created</title>
+               <type>d:datetime</type>
+               <protected>true</protected>
+               <mandatory enforced="true">true</mandatory>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="cm:creator">
+               <title>Creator</title>
+               <type>d:text</type>
+               <protected>true</protected>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="cm:modified">
+               <title>Modified</title>
+               <type>d:datetime</type>
+               <protected>true</protected>
+               <mandatory enforced="true">true</mandatory>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="cm:modifier">
+               <title>Modifier</title>
+               <type>d:text</type>
+               <protected>true</protected>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="cm:accessed">
+               <title>Accessed</title>
+               <type>d:datetime</type>
+               <protected>true</protected>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+         </properties>
+      </aspect>
+
+      <aspect name="cm:transformable">
+         <title>Transformable</title>
+         <associations>
+            <association name="cm:formats">
+               <title>Formats</title>
+               <source>
+                  <role>cm:formatOf</role>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>cm:content</class>
+                  <role>cm:hasFormat</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </association>
+         </associations>
+      </aspect>
+      
+      <aspect name="cm:templatable">
+         <title>Templatable</title>
+         <properties>
+            <property name="cm:template">
+               <title>Template</title>
+               <type>d:noderef</type>
+               <mandatory>false</mandatory>
+            </property>
+         </properties>
+      </aspect>
+      
+      <aspect name="cm:webscriptable">
+         <title>Webscriptable</title>
+         <properties>
+            <property name="cm:webscript">
+               <title>Webscript</title>
+               <type>d:text</type>
+               <mandatory>false</mandatory>
+            </property>
+         </properties>
+      </aspect>
+      
+      <aspect name="cm:projectsummary">
+         <title>Project Summary</title>
+         <properties>
+            <property name="cm:summaryWebscript">
+               <title>Project Summary Webscript</title>
+               <type>d:text</type>
+               <mandatory>false</mandatory>
+            </property>
+         </properties>
+      </aspect>
+      
+      <aspect name="cm:complianceable">
+         <title>Complianceable</title>
+         <properties>
+            <property name="cm:removeAfter">
+               <title>Remove After</title>
+               <type>d:datetime</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+         </properties>
+         <mandatory-aspects>
+            <aspect>cm:auditable</aspect>
+         </mandatory-aspects>
+      </aspect>
+   
+      <aspect name="cm:ownable">
+         <title>Ownable</title>
+         <properties>
+            <property name="cm:owner">
+               <title>Owner</title>
+               <type>d:text</type> 
+            </property>
+         </properties>
+      </aspect>
+      
+      <aspect name="cm:author">
+         <title>Author</title>
+         <properties>
+            <property name="cm:author">
+               <title>Author</title>
+               <type>d:text</type> 
+            </property>
+         </properties>
+      </aspect>
+   
+      <aspect name="cm:dublincore">
+         <title>Dublin Core</title>
+         <parent>cm:titled</parent>
+         <properties>
+            <property name="cm:publisher">
+               <title>Publisher</title>
+               <type>d:text</type>
+               <mandatory enforced="false">true</mandatory>
+            </property>
+            <property name="cm:contributor">
+               <title>Contributor</title>
+               <type>d:text</type>
+               <mandatory enforced="false">true</mandatory>
+            </property>
+            <property name="cm:type">
+               <title>Type</title>
+               <type>d:text</type>
+               <mandatory enforced="false">true</mandatory>
+            </property>
+            <property name="cm:identifier">
+               <title>Identifier</title>
+               <type>d:text</type>
+               <mandatory enforced="false">true</mandatory>
+            </property>
+            <property name="cm:dcsource">
+               <title>Source</title>
+               <type>d:text</type>
+               <mandatory enforced="false">true</mandatory>
+            </property>
+            <property name="cm:coverage">
+               <title>Coverage</title>
+               <type>d:text</type>
+               <mandatory enforced="false">true</mandatory>
+            </property>
+            <property name="cm:rights">
+               <title>Rights</title>
+               <type>d:text</type>
+               <mandatory enforced="false">true</mandatory>
+            </property>
+            <property name="cm:subject">
+               <title>Subject</title>
+               <type>d:text</type>
+               <mandatory enforced="false">true</mandatory>
+            </property>
+         </properties>
+         <mandatory-aspects>
+            <aspect>cm:auditable</aspect>
+            <aspect>cm:author</aspect>
+         </mandatory-aspects>
+      </aspect>
+   
+      <aspect name="cm:basable">
+         <title>Basable</title>
+         <associations>
+            <association name="cm:basis">
+               <source>
+                  <role>cm:basedOn</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>cm:content</class>
+                  <role>cm:hasBasis</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </association>
+         </associations>
+      </aspect>
+   
+      <aspect name="cm:partable">
+         <title>Partable</title>
+         <associations>
+            <association name="cm:parts">
+               <source>
+                  <role>cm:partOf</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>cm:content</class>
+                  <role>cm:hasPart</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </association>
+         </associations>
+      </aspect>
+   
+      <aspect name="cm:referencing">
+         <title>Referencing</title>
+         <associations>
+            <association name="cm:references">
+               <source>
+                  <role>cm:referencedBy</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>cm:content</class>
+                  <role>cm:references</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </association>
+         </associations>
+      </aspect>
+   
+      <aspect name="cm:replaceable">
+         <title>Replacable</title>
+         <associations>
+            <association name="cm:replaces">
+               <source>
+                  <role>cm:replacedBy</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>cm:content</class>
+                  <role>cm:replaces</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </association>
+         </associations>
+      </aspect>
+   
+      <aspect name="cm:effectivity">
+         <title>Effectivity</title>
+         <properties>
+            <property name="cm:from">
+               <title>Effective From</title>
+               <type>d:datetime</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="cm:to">
+               <title>Effective To</title>
+               <type>d:datetime</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+         </properties>
+      </aspect>
+   
+      <aspect name="cm:summarizable">
+         <title>Summarizable</title>
+         <properties>
+            <property name="cm:summary">
+               <title>Summary</title>
+               <type>d:text</type>
+            </property>
+         </properties>
+      </aspect>
+   
+      <aspect name="cm:countable">
+         <title>Countable</title>
+         <properties>
+            <property name="cm:hits">
+               <type>d:int</type>
+            </property>
+            <property name="cm:counter">
+               <type>d:int</type>
+            </property>
+         </properties>
+      </aspect>
+   
+      <aspect name="cm:copiedfrom">
+         <title>Copied From</title>
+         <properties>
+            <property name="cm:source">
+               <type>d:noderef</type>
+               <protected>true</protected>
+               <mandatory>true</mandatory>
+               <multiple>false</multiple>               
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>false</stored>
+                  <tokenised>true</tokenised>
+               </index>
+            </property>
+         </properties>
+      </aspect>
+      
+      <aspect name="cm:workingcopy">
+         <title>Working Copy</title>
+         <properties>
+            <property name="cm:workingCopyOwner">
+               <type>d:text</type>
+               <protected>true</protected>
+               <mandatory>true</mandatory>
+            </property>
+            <property name="cm:workingCopyMode">
+               <type>d:text</type>
+            </property>
+           </properties>
+      </aspect>
+   
+      <aspect name="cm:versionable">
+         <title>Versionable</title>
+         <properties>
+            <property name="cm:versionLabel">
+               <title>Version Label</title>
+               <type>d:text</type>
+               <protected>true</protected>
+            </property>
+            <property name="cm:initialVersion">
+               <title>Initial Version</title>
+               <type>d:boolean</type>
+               <default>true</default>
+            </property>
+            <property name="cm:autoVersion">
+               <title>Auto Version</title>
+               <type>d:boolean</type>
+               <default>true</default>
+            </property>
+            <property name="cm:autoVersionOnUpdateProps">
+               <title>Auto Version - on update properties only</title>
+               <type>d:boolean</type>
+               <default>true</default>
+            </property>
+          </properties>
+      </aspect>
+      
+      <aspect name="cm:lockable">
+         <title>Lockable</title>
+         <properties>
+            <property name="cm:lockOwner">
+               <type>d:text</type>
+               <protected>true</protected>
+            </property>
+            <property name="cm:lockType">
+               <type>d:text</type>
+               <protected>true</protected>
+            </property>
+            <property name="cm:expiryDate">
+               <type>d:date</type>
+               <protected>true</protected>
+               <mandatory>false</mandatory>
+            </property>
+            <property name="cm:lockIsDeep">
+               <type>d:boolean</type>
+               <protected>true</protected>
+            </property>
+         </properties>
+      </aspect>
+      
+      <aspect name="cm:subscribable">
+         <associations>
+            <association name="cm:subscribedBy">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>cm:person</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </association>
+         </associations>
+      </aspect>
+   
+      <aspect name="cm:classifiable">
+         <title>Classifiable</title>
+      </aspect>
+   
+      <aspect name="cm:generalclassifiable">
+         <title>General Classifiable</title>
+         <parent>cm:classifiable</parent>
+         <properties>
+            <property name="cm:categories">
+               <title>Categories</title>
+               <type>d:category</type>
+               <mandatory>false</mandatory>
+               <multiple>true</multiple>
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>true</stored>
+                  <tokenised>false</tokenised>
+               </index>
+            </property>         
+         </properties>
+      </aspect>
+      
+      <aspect name="cm:taggable">
+         <title>Taggable</title>
+         <parent>cm:classifiable</parent>
+         <properties>
+            <property name="cm:taggable">
+               <title>Tags</title>
+               <type>d:category</type>
+               <mandatory>false</mandatory>
+               <multiple>true</multiple>
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>true</stored>
+                  <tokenised>false</tokenised>
+               </index>
+            </property>         
+         </properties>
+      </aspect>
+      
+      <aspect name="cm:tagscope">
+         <title>Tag Scope</title>
+         <properties>
+            <property name="cm:tagScopeCache">
+               <title>Tags</title>
+               <type>d:content</type>
+               <protected>true</protected>
+            </property>        
+         </properties>    
+      </aspect>
+   
+      <aspect name="cm:attachable">
+         <title>Attachable</title>
+         <associations>
+            <association name="cm:attachments">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>cm:cmobject</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </association>
+         </associations>
+      </aspect>
+      
+      <aspect name="cm:emailed">
+         <title>Emailed</title>
+         <properties>
+            <property name="cm:originator">
+               <title>Originator</title>
+               <type>d:text</type>
+            </property>
+            <property name="cm:addressee">
+               <title>Addressee</title>
+               <type>d:text</type>
+            </property>
+            <property name="cm:addressees">
+               <title>Addressees</title>
+               <type>d:text</type>
+               <multiple>true</multiple>
+            </property>
+            <property name="cm:subjectline">
+               <title>Subject</title>
+               <type>d:text</type>
+            </property>
+            <property name="cm:sentdate">
+               <title>Sent Date</title>
+               <type>d:datetime</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+         </properties>
+      </aspect>
+      
+      <!-- An aspect to make a node reference another node. Needed to
+           support cross repository references. There is a sys:reference type but
+           that is awkard for AVM Nodes which are less flexible as to type. -->
+      <aspect name="cm:referencesnode">
+         <title>References Node</title>
+         <properties>
+            <property name="cm:noderef">
+               <title>Node Reference</title>
+               <type>d:noderef</type>
+               <mandatory>true</mandatory>
+            </property>
+         </properties>
+      </aspect>
+            
+      <aspect name="cm:mlDocument">
+         <title>Multilingual Document</title>
+         <mandatory-aspects>
+            <aspect>sys:localized</aspect>
+            <aspect>cm:versionable</aspect>
+         </mandatory-aspects>
+      </aspect>
+            
+      <aspect name="cm:mlEmptyTranslation">
+         <title>Empty Translation</title>
+         <mandatory-aspects>
+            <aspect>cm:mlDocument</aspect>
+         </mandatory-aspects>
+      </aspect>
+      
+      <!-- Thumbnailed aspect relates a content node to it's thumbnails -->
+      <aspect name="cm:thumbnailed">
+         <title>Thumbnailed</title>
+         <properties>         	   
+            <property name="cm:automaticUpdate">
+               <title>Automatic Update</title>
+               <type>d:boolean</type>
+               <mandatory>true</mandatory>
+               <default>true</default>
+            </property> 
+         </properties>
+         <associations>
+             <child-association name="cm:thumbnails">
+                 <source>
+	                <mandatory>false</mandatory>
+	                <many>true</many>
+                 </source>
+                 <target>
+	                <class>cm:thumbnail</class>
+	                <mandatory>false</mandatory>
+	                <many>true</many>
+                 </target>
+             </child-association>
+         </associations>
+      </aspect>
+
+      <aspect name="cm:storeSelector">
+         <title>ContentStore Selector</title>
+         <properties>
+            <property name="cm:storeName">
+               <title>Store Name</title>
+               <type>d:text</type>
+               <mandatory enforced="false">true</mandatory>
+               <constraints>
+                  <constraint ref="cm:storeSelectorConstraint" />
+               </constraints>
+            </property>
+         </properties>
+      </aspect>
+             
+      <aspect name="cm:preferences">
+	     	<title>Preferences</title>
+	     	<properties>
+	        	<property name="cm:preferenceValues">
+	           	<type>d:content</type>
+	        	</property>
+			</properties>
+         <associations>
+            <child-association name="cm:preferenceImage">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>cm:content</class>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </target>
+            </child-association>
+         </associations>
+      </aspect>
+      
+      <aspect name="cm:syndication">
+         <title>Content syndication</title>
+         <properties>
+            <property name="cm:published">
+               <title>Published</title>
+               <type>d:datetime</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="cm:updated">
+               <title>Updated</title>
+               <type>d:datetime</type>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+         </properties>
+      </aspect>
+      
+   </aspects>
+
+</model>
+
+
+
+<!-- Custom Model -->
+
+<!-- Note: This model is pre-configured to load at startup of the Repository.  So, all custom -->
+<!--       types and aspects added here will automatically be registered -->
+
+<model name="custom:customModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <!-- Optional meta-data about the model -->   
+   <description>Custom Model</description>
+   <author></author>
+   <version>1.0</version>
+
+   <imports>
+   	  <!-- Import Alfresco Dictionary Definitions -->
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <!-- Import Alfresco Content Domain Model Definitions -->
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+   </imports>
+
+   <!-- Introduction of new namespaces defined by this model -->
+   <!-- NOTE: The following namespace custom.model should be changed to reflect your own namespace -->
+   <namespaces>
+      <namespace uri="custom.model" prefix="custom"/>
+   </namespaces>
+      
+</model>
+<model name="d:dictionary" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <description>Alfresco Dictionary Model</description>
+   <author>Alfresco</author>
+   <published>2005-09-29</published>
+   <version>1.0</version>
+   
+   <namespaces>
+      <!-- Default Namespace -->
+      <namespace uri="" prefix=""/>
+      <!-- Default Alfresco Namespace -->
+      <namespace uri="http://www.alfresco.org" prefix="alf"/>
+      <!-- Dictionary Namespace -->
+      <namespace uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <!-- View Namespace -->
+      <namespace uri="http://www.alfresco.org/view/repository/1.0" prefix="view"/>
+   </namespaces>
+
+   <data-types>
+
+      <data-type name="d:any">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>java.lang.Object</java-class>
+      </data-type>
+
+      <data-type name="d:text">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>java.lang.String</java-class>
+      </data-type>
+
+      <data-type name="d:mltext">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>org.alfresco.service.cmr.repository.MLText</java-class>
+      </data-type>
+
+      <data-type name="d:content">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>org.alfresco.service.cmr.repository.ContentData</java-class>
+      </data-type>
+
+      <data-type name="d:int">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.IntegerAnalyser</analyser-class>
+         <java-class>java.lang.Integer</java-class>
+      </data-type>
+
+      <data-type name="d:long">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.LongAnalyser</analyser-class>
+         <java-class>java.lang.Long</java-class>
+      </data-type>
+
+      <data-type name="d:float">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.FloatAnalyser</analyser-class>
+         <java-class>java.lang.Float</java-class>
+      </data-type>
+
+      <data-type name="d:double">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.DoubleAnalyser</analyser-class>
+         <java-class>java.lang.Double</java-class>
+      </data-type>
+
+      <data-type name="d:date">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.DateAnalyser</analyser-class>
+         <java-class>java.util.Date</java-class>
+      </data-type>
+
+      <data-type name="d:datetime">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.DateTimeAnalyser</analyser-class>
+         <java-class>java.util.Date</java-class>
+      </data-type>
+
+      <data-type name="d:boolean">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>java.lang.Boolean</java-class>
+      </data-type>
+      
+      <data-type name="d:qname">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>org.alfresco.service.namespace.QName</java-class>
+      </data-type>
+
+      <data-type name="d:noderef">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>org.alfresco.service.cmr.repository.NodeRef</java-class>
+      </data-type>
+
+      <data-type name="d:childassocref">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>org.alfresco.service.cmr.repository.ChildAssociationRef</java-class>
+      </data-type>
+
+      <data-type name="d:assocref">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>org.alfresco.service.cmr.repository.AssociationRef</java-class>
+      </data-type>
+
+      <data-type name="d:path">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>org.alfresco.service.cmr.repository.Path</java-class>
+      </data-type>
+
+      <data-type name="d:category">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.AlfrescoStandardAnalyser</analyser-class>
+         <java-class>org.alfresco.service.cmr.repository.NodeRef</java-class>
+      </data-type>
+
+      <data-type name="d:locale">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.VerbatimAnalyser</analyser-class>
+         <java-class>java.util.Locale</java-class>
+      </data-type>
+
+      <data-type name="d:version">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.VerbatimAnalyser</analyser-class>
+         <java-class>org.alfresco.util.VersionNumber</java-class>
+      </data-type>
+	   
+	  <data-type name="d:period">
+         <analyser-class>org.alfresco.repo.search.impl.lucene.analysis.VerbatimAnalyser</analyser-class>
+         <java-class>org.alfresco.service.cmr.repository.Period</java-class>
+      </data-type>
+
+   </data-types>
+
+
+   <!-- TODO: Define dictionary meta model -->
+   
+</model>
+
+
+
+<model name="emailserver:emailserverModel"
+	xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+	<!-- Optional meta-data about the model -->
+	<description>Emailserver Model</description>
+	<author>UTL</author>
+	<version>1.0</version>
+
+	<!-- Imports are required to allow references to definitions in other models -->
+	<imports>
+		<!-- Import Alfresco Dictionary Definitions -->
+		<import uri="http://www.alfresco.org/model/dictionary/1.0"
+			prefix="d" />
+		<!-- Import Alfresco Content Domain Model Definitions -->
+		<import uri="http://www.alfresco.org/model/content/1.0"
+			prefix="cm" />
+	</imports>
+
+	<!-- Introduction of new namespaces defined by this model -->
+	<!-- NOTE: The following namespace my.new.model should be changed to reflect your own namespace -->
+	<namespaces>
+		<namespace uri="http://www.alfresco.org/model/emailserver/1.0"
+			prefix="emailserver" />
+	</namespaces>
+
+   <constraints>
+      <constraint name="emailserver:alias" type="REGEX">
+         <parameter name="expression"><value><![CDATA[[a-zA-Z0-9.\-]*]]></value></parameter>
+         <parameter name="requiresMatch"><value>true</value></parameter>
+      </constraint>
+   </constraints>
+   
+	<aspects>
+
+		<aspect name="emailserver:emailed">
+			<title>Emailed</title>
+			<parent>cm:emailed</parent>
+		</aspect>
+
+		<aspect name="emailserver:aliasable">
+			<title>Email Alias</title>
+			<properties>
+				<property name="emailserver:alias">
+					<title>Alias</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+               <constraints>
+                  <constraint ref="emailserver:alias" />
+               </constraints>
+				</property>
+			</properties>
+		</aspect>
+
+	</aspects>
+</model>
+
+
+<model name="fm:forummodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <description>Forum Model</description>
+   <author></author>
+   <version>1.0</version>
+
+   <!-- Imports are required to allow references to definitions in other models -->   
+   <imports>
+   	  <!-- Import Alfresco Dictionary Definitions -->
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <!-- Import Alfresco Content Domain Model Definitions -->
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+   </imports>
+
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/forum/1.0" prefix="fm"/>
+   </namespaces>
+   
+   <types>
+      <type name="fm:forums">
+         <parent>cm:folder</parent>
+      </type>
+      
+      <type name="fm:forum">
+         <parent>cm:folder</parent>
+      </type>
+      
+      <type name="fm:topic">
+         <parent>cm:folder</parent>
+      </type>
+      
+      <type name="fm:post">
+         <parent>cm:content</parent>
+      </type>
+    </types>
+    
+    <aspects>
+      <aspect name="fm:discussable">
+         <associations>
+            <child-association name="fm:discussion">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>fm:forum</class>
+                  <mandatory enforced="true">true</mandatory>
+                  <many>false</many>
+               </target>
+               <duplicate>false</duplicate>
+            </child-association>
+         </associations>
+      </aspect>
+   </aspects>
+   
+</model>
+<model name="imap:imapmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <description>IMAP Content Model</description>
+   <author>Alfresco</author>
+   <published>2009-01-20</published>
+   <version>1.0</version>
+
+   <imports>
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+   </imports>
+
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/imap/1.0"   prefix="imap" />
+   </namespaces>
+
+   <types>
+      <type name="imap:imapFolder">
+         <title>IMAP Folder</title>
+         <parent>cm:folder</parent>
+         <properties>
+            <property name="imap:nonSubscribed">
+               <type>d:boolean</type>
+            </property>
+            <property name="imap:selectable">
+               <type>d:boolean</type>
+               <mandatory>true</mandatory>
+               <default>true</default>
+            </property>
+         </properties>
+      </type>
+
+      <type name="imap:imapAttach">
+         <title>Attachment to the IMAP message</title>
+         <parent>cm:content</parent>
+         <properties>
+            <property name="imap:attachID">
+               <type>d:text</type>
+            </property>
+         </properties>
+      </type>
+
+      <type name="imap:imapBody">
+         <title>Body of the IMAP message</title>
+         <parent>cm:content</parent>
+      </type>
+   </types>
+   
+   <aspects>
+      <aspect name="imap:imapContent">
+         <title>IMAP File</title>
+         <parent>imap:flaggable</parent>
+         <properties>
+            <!-- Message -->
+            <property name="imap:messageFrom">
+               <type>d:text</type>
+            </property>
+            <property name="imap:messageTo">
+               <type>d:text</type>
+            </property>
+            <property name="imap:messageCc">
+               <type>d:text</type>
+            </property>
+            <property name="imap:messageSubject">
+               <type>d:text</type>
+            </property>
+            <property name="imap:messageId">
+               <type>d:text</type>
+            </property>
+            <property name="imap:threadIndex">
+               <type>d:text</type>
+            </property>
+         </properties>
+         <associations>
+            <association name="imap:attachment">
+               <title>Attachment</title>
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>cm:cmobject</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </association>
+            <association name="imap:attachmentsFolder">
+               <title>Attachments Folder</title>
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>cm:cmobject</class>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </target>
+            </association>
+         </associations>
+      </aspect>
+   
+       <aspect name="imap:flaggable">
+          <properties>
+            <property name="imap:flagAnswered">
+               <type>d:boolean</type>
+            </property>
+            <property name="imap:flagDeleted">
+               <type>d:boolean</type>
+            </property>
+            <property name="imap:flagDraft">
+               <type>d:boolean</type>
+            </property>
+            <property name="imap:flagSeen">
+               <type>d:boolean</type>
+            </property>
+            <property name="imap:flagRecent">
+               <type>d:boolean</type>
+            </property>
+            <property name="imap:flagFlagged">
+               <type>d:boolean</type>
+            </property>          
+          </properties>
+       </aspect>
+      <aspect name="imap:nonSubscribed"/>
+       <aspect name="imap:nonselectable"/>
+    </aspects>
+
+</model>
+<model name="jcr:jcrmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <description>JCR Model Definitions</description>
+   <version>1.0</version>
+
+   <imports>
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+      <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys" />
+   </imports>
+
+   <namespaces>
+      <namespace uri="http://www.jcp.org/jcr/1.0" prefix="jcr" />
+      <namespace uri="http://www.jcp.org/jcr/nt/1.0" prefix="nt" />
+      <namespace uri="http://www.jcp.org/jcr/mix/1.0" prefix="mix" />
+      <namespace uri="http://www.jcp.org/jcr/sv/1.0" prefix="sv" />
+      <namespace uri="http://www.w3.org/XML/1998/namespace" prefix="xml" />
+   </namespaces>
+
+   <types>
+
+      <type name="nt:base">
+         <parent>sys:base</parent>
+         <properties>
+            <property name="jcr:primaryType">
+               <type>d:qname</type>
+               <protected>true</protected>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="jcr:mixinTypes">
+               <type>d:qname</type>
+               <protected>true</protected>
+               <multiple>true</multiple>
+            </property>
+         </properties>
+      </type>
+
+      <type name="nt:hierarchyNode">
+         <parent>nt:base</parent>
+         <properties>
+            <property name="jcr:created">
+               <type>d:date</type>
+               <protected>true</protected>
+               <mandatory>false</mandatory>
+               <multiple>false</multiple>
+            </property>
+         </properties>
+      </type>
+
+      <type name="nt:file">
+         <parent>nt:hierarchyNode</parent>
+         <associations>
+            <child-association name="jcr:content">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>nt:base</class>
+                  <mandatory enforced="true">true</mandatory>
+                  <many>false</many>
+               </target>
+               <child-name>jcr:content</child-name>
+               <duplicate>false</duplicate>
+            </child-association>
+         </associations>         
+      </type>         
+
+      <type name="nt:folder">
+         <parent>nt:hierarchyNode</parent>
+         <associations>
+            <child-association name="jcr:contains">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>nt:hierarchyNode</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+               <duplicate>false</duplicate>
+            </child-association>
+         </associations>         
+      </type>         
+
+      <type name="nt:resource">
+         <parent>nt:base</parent>
+         <properties>
+            <property name="jcr:encoding">
+               <type>d:text</type>
+               <protected>false</protected>
+               <mandatory>false</mandatory>
+               <multiple>false</multiple>
+            </property>
+            <property name="jcr:mimeType">
+               <type>d:text</type>
+               <protected>false</protected>
+               <mandatory>true</mandatory>
+               <multiple>false</multiple>
+            </property>
+            <property name="jcr:data">
+               <type>d:content</type>
+               <protected>false</protected>
+               <mandatory>true</mandatory>
+               <multiple>false</multiple>
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>false</stored>
+                  <tokenised>true</tokenised>
+               </index>
+            </property>
+            <property name="jcr:lastModified">
+               <type>d:date</type>
+               <protected>false</protected>
+               <mandatory>true</mandatory>
+               <multiple>false</multiple>
+            </property>
+         </properties>
+         <mandatory-aspects>
+            <aspect>mix:referenceable</aspect>
+         </mandatory-aspects>
+      </type>
+
+   </types>
+
+   <aspects>
+
+      <aspect name="mix:referenceable">
+         <properties>
+            <property name="jcr:uuid">
+               <type>d:text</type>
+               <protected>true</protected>
+               <mandatory>true</mandatory>
+            </property>
+         </properties>
+      </aspect>
+
+      <aspect name="mix:lockable">
+         <properties>
+            <property name="jcr:lockOwner">
+               <type>d:text</type>
+            </property>
+            <property name="jcr:lockIsDeep">
+               <type>d:boolean</type>
+            </property>
+         </properties>
+      </aspect>
+
+   </aspects>
+
+</model>
+
+
+<model name="lnk:linksmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <description>Links Model</description>
+   <author></author>
+   <version>1.0</version>
+
+   <!-- Imports are required to allow references to definitions in other models -->
+   <imports>
+      <!-- Import Alfresco Dictionary Definitions -->
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <!-- Import Alfresco Content Domain Model Definitions -->
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+   </imports>
+
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/linksmodel/1.0" prefix="lnk"/>
+   </namespaces>
+
+   <types>
+      <type name="lnk:link">
+         <parent>cm:content</parent>
+         <properties>
+            <property name="lnk:title">
+               <title>Link Title</title>
+               <type>d:text</type>
+               <mandatory>false</mandatory>
+            </property>
+            <property name="lnk:url">
+               <title>Link URL</title>
+               <type>d:text</type>
+               <mandatory>false</mandatory>
+            </property>
+            <property name="lnk:description">
+               <title>Link Description</title>
+               <type>d:text</type>
+               <mandatory>false</mandatory>
+            </property>
+         </properties>
+      </type>
+   </types>
+
+   <aspects>
+      <aspect name="lnk:internal">
+         <title>Internal Link</title>
+         <properties>
+            <property name="lnk:isInternal">
+               <title>Is Internal</title>
+               <type>d:text</type>
+               <mandatory>true</mandatory>
+            </property>
+         </properties>
+      </aspect>
+   </aspects>
+</model>
+
+
+
+<!--PUBLIC '-//ALFRECSO//DTD PERMISSIONS//EN' 'permissionSchema.dtd' -->
+
+<!-- Note: the above is commented out as spring does not seem to find the dtd -->
+
+<!-- ============================================ -->
+<!-- The base permission model for the repository -->
+<!-- ============================================ -->
+
+
+<!-- The parent permission checks were removed 20/1/2006 -->
+
+
+<permissions>
+    
+    <!-- Namespaces used in type references -->
+    
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/system/1.0" prefix="sys"/>
+      <namespace uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+      <namespace uri="http://www.alfresco.org/model/wcmmodel/1.0" prefix="wcm"/>
+      <namespace uri="http://www.alfresco.org/model/wcmappmodel/1.0" prefix="wca"/>
+   </namespaces>
+
+   <!--                                                                                   -->
+   <!-- Permission sets link permissions and groups of permissions to types and aspects   -->
+   <!-- defined in the model. Permissions defined against a type apply to all objects     -->
+   <!-- that inherit from that type. Permissions defined against aspects apply to all     -->
+   <!-- objects or only objects that have the aspect applied. For example, the permission -->
+   <!-- to lock an object could apply to any object but the permission to unlock an       -->
+   <!-- object woujld only apply to objects that have the lockable aspect.                -->
+   <!--                                                                                   -->
+    
+   <!-- =============================================== -->
+   <!-- Base permissions available on all types of node -->
+   <!-- =============================================== -->
+    
+   <permissionSet type="sys:base" expose="all" >
+    
+      <!-- ================= -->
+      <!-- Permission groups -->
+      <!-- ================= -->
+      
+      <!--                                                                                -->
+      <!-- Permission groups are convenient groups of permissions. They may be used in    -->
+      <!-- thier own right or as the effective set of permissions. If an authority has    -->
+      <!-- all the permissions that make up a permission group they also have that        -->
+      <!-- permission group even though it has not been explicitly granted.               -->
+      <!--                                                                                -->
+
+      <!-- =========== -->    
+      <!-- Full access -->
+      <!-- =========== -->
+    
+      <!--                                                                                -->  
+      <!-- By default this is exposed for all objects unless inherited objects choose to  -->
+      <!-- expose only selected objects at the object level.                              -->
+      <!--                                                                                -->
+      
+      <permissionGroup name="FullControl" expose="true" allowFullControl="true" />
+ 
+      <!-- ============================================= -->
+      <!-- Convenient groupings of low level permissions -->
+      <!-- ============================================= -->
+      
+      <permissionGroup name="Read"  expose="true" allowFullControl="false">
+           <includePermissionGroup type="sys:base" permissionGroup="ReadProperties"/>
+           <includePermissionGroup type="sys:base" permissionGroup="ReadChildren"/>
+           <includePermissionGroup type="sys:base" permissionGroup="ReadContent"/>
+      </permissionGroup>
+       
+      <permissionGroup name="Write" expose="true" allowFullControl="false">
+           <includePermissionGroup type="sys:base" permissionGroup="WriteProperties"/>
+           <includePermissionGroup type="sys:base" permissionGroup="WriteContent"/>
+      </permissionGroup>  
+       
+      <permissionGroup name="Delete" expose="true" allowFullControl="false">
+           <includePermissionGroup type="sys:base" permissionGroup="DeleteNode"/>
+           <includePermissionGroup type="sys:base" permissionGroup="DeleteChildren"/>
+      </permissionGroup>
+       
+      <permissionGroup name="AddChildren" expose="true" allowFullControl="false">
+           <includePermissionGroup type="sys:base" permissionGroup="CreateChildren"/>
+           <includePermissionGroup type="sys:base" permissionGroup="LinkChildren"/>
+      </permissionGroup>
+       
+      <permissionGroup name="Execute" allowFullControl="false" expose="false">
+          <includePermissionGroup type="sys:base" permissionGroup="ExecuteContent"/>
+      </permissionGroup>
+       
+      <!-- Groups for low level permissions -->
+       
+      <permissionGroup name="ReadProperties" expose="true" allowFullControl="false" />  
+      <permissionGroup name="ReadChildren" expose="true" allowFullControl="false" />  
+      <permissionGroup name="WriteProperties" expose="true" allowFullControl="false" />  
+      <permissionGroup name="ReadContent" expose="false" allowFullControl="false" />  
+      <permissionGroup name="WriteContent" expose="false" allowFullControl="false" />  
+      <permissionGroup name="ExecuteContent" expose="false" allowFullControl="false" />  
+      <permissionGroup name="DeleteNode" expose="true" allowFullControl="false" />  
+      <permissionGroup name="DeleteChildren" expose="true" allowFullControl="false" />  
+      <permissionGroup name="CreateChildren" expose="true" allowFullControl="false" />  
+      <permissionGroup name="LinkChildren" expose="true" allowFullControl="false" />  
+      <permissionGroup name="DeleteAssociations" expose="true" allowFullControl="false" />  
+      <permissionGroup name="ReadAssociations" expose="true" allowFullControl="false" />  
+      <permissionGroup name="CreateAssociations" expose="true" allowFullControl="false" />  
+      <permissionGroup name="ReadPermissions" expose="true" allowFullControl="false" />  
+      <permissionGroup name="ChangePermissions" expose="true" allowFullControl="false" />  
+      <permissionGroup name="Flatten" expose="true" allowFullControl="false" />  
+    
+      <!-- =========== -->
+      <!-- Permissions -->
+      <!-- =========== -->
+    
+      <!-- The permission to read properties on a node                                    -->
+      <!--                                                                                -->
+      <!-- The properties of a node may ony be read if there is read access to the parent -->
+      <!-- node. ReadChildren access to the parent node is recursive for all nodes from   -->
+      <!-- which the node inherits permissions. Access is required down the permission    -->
+      <!-- tree at all points.                                                           -->
+      <!--                                                                                -->
+      
+      <permission name="_ReadProperties" expose="false" >
+         <grantedToGroup permissionGroup="ReadProperties" />
+         <!-- Commented out parent permission check ...
+         <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+         -->
+      </permission>
+      
+      <!-- The permission to read the children of a node                                 -->
+      <!--                                                                               -->
+      <!-- This permission is recursive. It requires the same permission is granted to   -->
+      <!-- all of the parent nodes from which this node inherits permissions             -->
+      <!--                                                                               -->
+      
+      <permission name="_ReadChildren" expose="false" >
+         <grantedToGroup permissionGroup="ReadChildren" />
+         <!-- Commented out parent permission check ...
+         <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+         -->
+      </permission>
+      
+      <!-- The permission to write to the properties of a node                           -->
+      <!--                                                                               -->
+      <!-- This permission includes adding aspects to a node as they are stored as       -->
+      <!-- a property.                                                                   -->
+      <!--                                                                               -->
+      
+      <permission name="_WriteProperties" expose="false" >
+         <grantedToGroup permissionGroup="WriteProperties" />
+         <!-- Commented out parent permission check ...
+         <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+         -->
+      </permission>
+      
+      <!-- The permission to delete a node                                               -->
+      <!--                                                                               -->
+      <!-- A node can only be deleted if there is delete permission on the node, if the  -->
+      <!-- node is accesible via its parent, and if the node can be deleted from its     -->
+      <!-- parent. Currently, there is no check that all the children can be deleted.    -->
+      <!-- This check can be added but requires more work so the UI is not checking this -->
+      <!-- permission just to show the delete icon.                                      -->
+      <!--                                                                               -->
+      
+      <!-- The permission to read content.                                               -->
+      
+      <permission name="_ReadContent" expose="false">
+         <grantedToGroup permissionGroup="ReadContent"/>
+         <!-- Commented out parent permission check ...
+         <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+         -->
+      </permission>
+
+      <!-- The permission to write content.                                              -->
+      
+      <permission name="_WriteContent" expose="false">
+         <grantedToGroup permissionGroup="WriteContent" />
+         <!-- Commented out parent permission check ...
+         <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+         -->
+      </permission>
+      
+      <!-- Execute permission on content.                                                -->
+      
+      <permission name="_ExecuteContent" expose="false">
+         <grantedToGroup permissionGroup="ExecuteContent" />
+         <!-- Commented out parent permission check ...
+         <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+         -->
+      </permission>
+      
+      <permission name="_DeleteNode" expose="false" >
+         <grantedToGroup permissionGroup="DeleteNode" />
+         <!-- Commented out parent permission check ...
+         <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+         <requiredPermission on="parent" name="_DeleteChildren" implies="false"/>
+         <requiredPermission on="node" name="_DeleteChildren" implies="false"/>
+         -->
+         <!-- Remove the recursive check for now for performance -->
+         <!-- TODO: have one permission to check for delete on an item and one to check  -->
+         <!--       child permissions when delete is called on the node service          --> 
+         <!--  <requiredPermission on="children" name="_DeleteNode" implies="false"/>     -->
+      </permission>
+      
+      
+      <!-- The permission to delete children of a node                                   -->
+      <!--                                                                               -->
+      <!-- At the moment this includes both unlink and delete                            -->
+      <!--                                                                               -->
+      <permission name="_DeleteChildren" expose="false" >
+         <grantedToGroup permissionGroup="DeleteChildren" />
+         <!-- Commented out parent permission check ...
+         <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+         -->
+      </permission>
+      
+      <!-- The permission to create new nodes                                            -->
+      
+      <permission name="_CreateChildren" expose="false" >
+         <grantedToGroup permissionGroup="CreateChildren" />
+         <!-- Commented out parent permission check ...
+         <requiredPermission on="parent" name="_ReadChildren" implies="false" />
+         -->
+      </permission>
+      
+      <!-- The permission to link nodes                                                  -->
+      
+      <permission name="_LinkChildren" expose="false" >
+         <grantedToGroup permissionGroup="LinkChildren" />
+         <!-- Commented out parent permission check ...
+         <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+         -->
+      </permission>
+     
+     <!-- The permission to delte associations between nodes (not children)              -->
+     
+      <permission name="_DeleteAssociations" expose="false" >
+        <grantedToGroup permissionGroup="DeleteAssociations" />
+        <!-- Commented out parent permission check ...
+        <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+        -->
+      </permission>
+      
+      <!-- The permission to read associations                                           -->
+      
+      <permission name="_ReadAssociations" expose="false" >
+        <grantedToGroup permissionGroup="ReadAssociations" />
+        <!-- Commented out parent permission check ...
+        <requiredPermission on="parent" name="_ReadChildren" implies="false" />
+        -->
+      </permission>
+      
+      <!-- The permission to create associations                                         -->
+      
+      <permission name="_CreateAssociations" expose="false" >
+        <grantedToGroup permissionGroup="CreateAssociations" />
+        <!-- Commented out parent permission check ...
+        <requiredPermission on="parent" name="_ReadChildren" implies="false" />
+        -->
+      </permission>
+      
+      <!-- ==================================================== -->
+      <!-- Permissions related to the management of permissions -->
+      <!-- ==================================================== -->
+      
+      <!-- The permission to read the permissions on a node                              -->
+      
+      <permission name="_ReadPermissions" expose="false" >
+        <grantedToGroup permissionGroup="ReadPermissions" />
+        <!-- Commented out parent permission check ...
+        <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+        -->
+      </permission>
+      
+      <!-- The permission to the change the permissions associated with a node           -->
+      
+      <permission name="_ChangePermissions" expose="false" >
+        <grantedToGroup permissionGroup="ChangePermissions" />
+        <!-- Commented out parent permission check ...
+        <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+        -->
+      </permission>
+       
+      <!-- AVM specific -->
+       
+      <permission name="_Flatten" expose="false" >
+        <grantedToGroup permissionGroup="Flatten" />
+        <!-- Commented out parent permission check ...
+        <requiredPermission on="parent" name="_ReadChildren" implies="false"/>
+        -->
+      </permission>
+      
+   </permissionSet>
+   
+   <!-- ================================================ -->
+   <!-- Permissions available to all content and folders -->
+   <!-- ================================================ -->
+   
+   <permissionSet type="cm:cmobject" expose="selected">
+       
+       <!-- Kept for backward compatibility - the administrator permission has   -->
+      <!-- been removed to aviod confusion --> 
+      <permissionGroup name="Administrator" allowFullControl="true" expose="false" />
+      
+      <!-- A coordinator can do anything to the object or its childeren unless the     -->
+      <!-- permissions are set not to inherit or permission is denied.                 -->
+      <permissionGroup name="Coordinator" allowFullControl="true" expose="true" />
+      
+      <!-- A collaborator can do anything that an editor and a contributor can do -->
+      <permissionGroup name="Collaborator" allowFullControl="false" expose="true">
+         <includePermissionGroup permissionGroup="Editor" type="cm:cmobject" />
+         <includePermissionGroup permissionGroup="Contributor" type="cm:cmobject" />
+      </permissionGroup>
+      
+      <!-- A contributor can create content and then they have full permission on what -->
+      <!-- they have created - via the permissions assigned to the owner.              -->
+      <permissionGroup name="Contributor" allowFullControl="false" expose="true" >
+          <!-- Contributor is a consumer who can add content, and then can modify via the -->
+          <!-- owner permissions.                                                      -->
+          <includePermissionGroup permissionGroup="Consumer" type="cm:cmobject"/>
+          <includePermissionGroup permissionGroup="AddChildren" type="sys:base"/>
+          <includePermissionGroup permissionGroup="ReadPermissions" type="sys:base" />
+      </permissionGroup>
+      
+      <!-- An editor can read and write to the object; they can not create    -->
+      <!-- new nodes. They can check out content into a space to which they have       -->
+      <!-- create permission.                                                          -->
+      <permissionGroup name="Editor"  expose="true" allowFullControl="false" >
+          <includePermissionGroup type="cm:cmobject" permissionGroup="Consumer"/>
+          <includePermissionGroup type="sys:base" permissionGroup="Write"/>
+          <includePermissionGroup type="cm:lockable" permissionGroup="CheckOut"/>
+          <includePermissionGroup type="sys:base" permissionGroup="ReadPermissions"/>
+      </permissionGroup>
+      
+      <!-- The Consumer permission allows read to everything by default.                  -->
+      <permissionGroup name="Consumer" allowFullControl="false" expose="true" >
+          <includePermissionGroup permissionGroup="Read" type="sys:base" />
+      </permissionGroup>
+      
+      <!-- records permission -->
+      <!-- Should be tied to the aspect -->
+      <!-- onwership should be removed when using this permission --> 
+      <permissionGroup name="RecordAdministrator" allowFullControl="false" expose="false">
+          <includePermissionGroup type="sys:base" permissionGroup="ReadProperties"/>
+          <includePermissionGroup type="sys:base" permissionGroup="ReadChildren"/>
+          <includePermissionGroup type="sys:base" permissionGroup="WriteProperties"/>
+          <includePermissionGroup type="sys:base" permissionGroup="ReadContent"/>
+          <includePermissionGroup type="sys:base" permissionGroup="DeleteChildren"/>
+          <includePermissionGroup type="sys:base" permissionGroup="CreateChildren"/>
+          <includePermissionGroup type="sys:base" permissionGroup="LinkChildren"/>
+          <includePermissionGroup type="sys:base" permissionGroup="DeleteAssociations"/>
+          <includePermissionGroup type="sys:base" permissionGroup="CreateAssociations"/>
+      </permissionGroup>
+       
+      <!-- avm related permissions -->
+       
+       <!-- AVM website specific roles.                                               -->
+      <permissionGroup name="ContentManager" allowFullControl="true" expose="false" />
+      
+      <permissionGroup name="ContentPublisher" allowFullControl="false" expose="false">
+         <includePermissionGroup permissionGroup="Collaborator" type="cm:cmobject" />
+      </permissionGroup>
+      
+      <permissionGroup name="ContentContributor" allowFullControl="false" expose="false">
+         <includePermissionGroup permissionGroup="Contributor" type="cm:cmobject" />
+      </permissionGroup>
+      
+      <permissionGroup name="ContentReviewer" allowFullControl="false" expose="false">
+         <includePermissionGroup permissionGroup="Editor" type="cm:cmobject" />
+      </permissionGroup>
+       
+   </permissionSet>
+   
+   <!-- =============================== -->
+   <!-- Permissions specific to content -->
+   <!-- =============================== -->
+   
+   <permissionSet type="cm:content" expose="selected">
+
+      <!-- Content specific roles.                                                       -->
+      
+      <permissionGroup name="Coordinator" extends="true" expose="true"/>
+      <permissionGroup name="Collaborator" extends="true" expose="true"/>
+      <permissionGroup name="Contributor" extends="true" expose="true"/>
+      <permissionGroup name="Editor" extends="true" expose="true"/>
+      <permissionGroup name="Consumer" extends="true" expose="true"/>
+      <permissionGroup name="RecordAdministrator" extends="true" expose="false"/>
+      
+   </permissionSet>
+    
+    
+    <permissionSet type="cm:folder" expose="selected">
+
+      <!-- Content folder specific roles.                                                       -->
+      
+      <permissionGroup name="Coordinator" extends="true" expose="true"/>
+      <permissionGroup name="Collaborator" extends="true" expose="true"/>
+      <permissionGroup name="Contributor" extends="true" expose="true"/>
+      <permissionGroup name="Editor" extends="true" expose="true"/>
+      <permissionGroup name="Consumer" extends="true" expose="true"/>
+      <permissionGroup name="RecordAdministrator" extends="true" expose="false"/>
+      
+   </permissionSet>
+   
+   <!-- ========================================== -->
+   <!-- Permissions specific to avm website folder -->
+   <!-- ========================================== -->
+   
+   <permissionSet type="wcm:avmfolder" expose="selected">                                       -->
+      <permissionGroup name="ContentManager" extends="true" expose="true" />
+      <permissionGroup name="ContentPublisher" extends="true" expose="true" />
+      <permissionGroup name="ContentContributor" extends="true" expose="true" />
+      <permissionGroup name="ContentReviewer" extends="true" expose="true" />
+   </permissionSet>
+    
+   <permissionSet type="wcm:avmplainfolder" expose="selected">                                       -->
+      <permissionGroup name="ContentManager" extends="true" expose="true" />
+      <permissionGroup name="ContentPublisher" extends="true" expose="true" />
+      <permissionGroup name="ContentContributor" extends="true" expose="true" />
+      <permissionGroup name="ContentReviewer" extends="true" expose="true" />
+   </permissionSet>
+    
+   <permissionSet type="wcm:avmlayeredfolder" expose="selected">                                       -->
+      <permissionGroup name="ContentManager" extends="true" expose="true" />
+      <permissionGroup name="ContentPublisher" extends="true" expose="true" />
+      <permissionGroup name="ContentContributor" extends="true" expose="true" />
+      <permissionGroup name="ContentReviewer" extends="true" expose="true" />
+   </permissionSet>
+    
+   <permissionSet type="wcm:avmcontent" expose="selected">                                       -->
+      <permissionGroup name="ContentManager" extends="true" expose="true" />
+      <permissionGroup name="ContentPublisher" extends="true" expose="true" />
+      <permissionGroup name="ContentContributor" extends="true" expose="true" />
+      <permissionGroup name="ContentReviewer" extends="true" expose="true" />
+   </permissionSet>
+    
+   <permissionSet type="wcm:avmplaincontent" expose="selected">                                       -->
+      <permissionGroup name="ContentManager" extends="true" expose="true" />
+      <permissionGroup name="ContentPublisher" extends="true" expose="true" />
+      <permissionGroup name="ContentContributor" extends="true" expose="true" />
+      <permissionGroup name="ContentReviewer" extends="true" expose="true" />
+   </permissionSet>
+    
+   <permissionSet type="wcm:avmlayeredcontent" expose="selected">                                       -->
+      <permissionGroup name="ContentManager" extends="true" expose="true" />
+      <permissionGroup name="ContentPublisher" extends="true" expose="true" />
+      <permissionGroup name="ContentContributor" extends="true" expose="true" />
+      <permissionGroup name="ContentReviewer" extends="true" expose="true" />
+   </permissionSet>
+    
+   <permissionSet type="wca:webfolder" expose="selected">                                           -->
+      <permissionGroup name="ContentManager" extends="true" expose="true" />
+      <permissionGroup name="ContentPublisher" extends="true" expose="true" />
+      <permissionGroup name="ContentContributor" extends="true" expose="true" />
+      <permissionGroup name="ContentReviewer" extends="true" expose="true" />
+   </permissionSet>
+   
+   <!-- ============================================== -->
+   <!-- Permissions associated with the Ownable aspect -->
+   <!-- ============================================== -->
+   
+   <permissionSet type="cm:ownable" expose="selected">
+      
+      <!-- Permission control to allow ownership of the node to be taken from others     -->
+      <permissionGroup name="TakeOwnership" requiresType="false" expose="false">
+           <includePermissionGroup permissionGroup="SetOwner" type="cm:ownable" />
+      </permissionGroup>
+       
+      <permissionGroup name="SetOwner" requiresType="false" expose="false"/>
+      
+      <!-- The low level permission to control setting the owner of a node               -->
+      <permission name="_SetOwner" expose="false" requiresType="false">
+        <grantedToGroup permissionGroup="SetOwner" />
+        <!-- require to be able to reach the node and set properties in the node         -->
+        <!-- Commented out parent permission check ...
+        <requiredPermission on="parent" name="_ReadChildren" />
+        -->
+        <requiredPermission on="node" type="sys:base" name="_WriteProperties" />
+      </permission>
+      
+   </permissionSet>
+   
+   <!-- =================================================== -->
+   <!-- Permission related to lock, check out and check in. -->
+   <!-- =================================================== -->
+   
+   <permissionSet type="cm:lockable" expose="selected">
+    
+      <!-- At the moment these permissions are hidden so they do not appear in the list  -->
+      <!-- of permissions.                                                               -->
+    
+      <!-- Check Out permission - exposed for all object types                           -->
+      <permissionGroup name="CheckOut" requiresType="false" expose="false">
+          <includePermissionGroup permissionGroup="Lock" type="cm:lockable" />
+      </permissionGroup>
+      
+      <!-- Check In permission - only exposed when the lockable aspect is present        -->
+      <permissionGroup name="CheckIn" requiresType="true" expose="false">
+          <includePermissionGroup permissionGroup="Unlock" type="cm:lockable" />
+      </permissionGroup>
+      
+      <!-- Cancel Check Out permission - only exposed for the lockable aspect is present -->
+      <permissionGroup name="CancelCheckOut" requiresType="true" expose="false">
+          <includePermissionGroup permissionGroup="Unlock" type="cm:lockable" />
+      </permissionGroup>
+       
+       
+      <permissionGroup name="Lock" requiresType="false" expose="false"/>
+      <permissionGroup name="Unlock" requiresType="true" expose="false"/>
+       
+    
+      <!-- Low level lock permission                                                     -->
+      <permission name="_Lock" requiresType="false" expose="false">
+        <grantedToGroup permissionGroup="Lock" />
+        <requiredPermission on="node" type="sys:base"  name="Write"/>
+      </permission>
+      
+      <!-- Low level unlock permission                                                   -->
+      <permission name="_Unlock" requiresType="true" expose="false">
+        <grantedToGroup permissionGroup="Unlock" />
+      </permission>      
+      
+   </permissionSet>
+   
+   <!-- ================== -->
+   <!-- Global permissions -->
+   <!-- ================== -->
+   
+   <!--                                                                                  -->
+   <!-- Global permissions apply regardless of any particular node context.              -->
+   <!-- They can not be denied by the permissions set on any node.                       -->
+   <!--                                                                                  --> 
+      
+   <!-- Admin can do anything to any ndoe                                                -->
+   <globalPermission permission="FullControl" authority="ROLE_ADMINISTRATOR"/>
+   
+   <!-- For now, owners can always see, find and manipulate their stuff                  -->
+   <globalPermission permission="FullControl" authority="ROLE_OWNER"/>
+   
+   <!-- Unlock is granted to the lock owner                                              -->
+   <globalPermission permission="Unlock" authority="ROLE_LOCK_OWNER"/>
+   
+   <!-- Check in is granted to the lock owner                                            -->
+   <globalPermission permission="CheckIn" authority="ROLE_LOCK_OWNER"/>
+   
+   <!-- Cancel check out is granted to the locak owner                                   -->
+   <globalPermission permission="CancelCheckOut" authority="ROLE_LOCK_OWNER"/>
+   
+   <!-- Usere need to be able to remove stuff from thier own sandbox -->
+    
+   <globalPermission permission="Flatten" authority="ROLE_WCM_STORE_OWNER" />
+       
+</permissions>
+
+
+
+<!-- Definition of Site Model -->
+
+<model name="st:siteModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <!-- Meta-data about the model -->   
+   <description>Site Model</description>
+   <author>Roy Wetherall</author>
+   <version>1.0</version>
+
+   <!-- Imports are required to allow references to definitions in other models -->   
+   <imports>
+      <!-- Import Alfresco Dictionary Definitions -->
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <!-- Import Alfresco Content Domain Model Definitions -->
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+      <!-- Import Alfresco Content Domain Model Definitions -->
+      <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys" />
+   </imports>
+
+   <!-- Sites Namespace -->
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/site/1.0" prefix="st"/>
+      <!-- if you want to extend the properties of a site then use this namespace to mark the custom properties -->
+      <namespace uri="http://www.alfresco.org/model/sitecustomproperty/1.0" prefix="stcp"/>
+   </namespaces>
+   
+   <types>
+   
+      <!-- Site Definition:                                                                 -->
+      <!--    - The cm:name property is used to contain the 'short' name of the site        -->
+      <!--    - The titled aspect is used to contain the title and description of the site  -->
+      <!--    - Memberships are managed using the standard permissions mechanism            -->
+      <type name="st:site">
+         <title>Site</title>
+         <parent>cm:folder</parent>         
+         <properties>
+            <property name="st:sitePreset">
+            	<title>Site Preset</title>
+            	<type>d:text</type>        
+            </property>
+            <property name="st:siteVisibility">
+               <title>Site Visibility</title>
+               <type>d:text</type>        
+            </property>
+         </properties>
+         <mandatory-aspects>
+            <aspect>cm:titled</aspect>
+         </mandatory-aspects>
+      </type>
+
+	  <!-- Site Root Folder:                                                               -->
+	  <!--    - all sites are stored beneath the site root folder                           -->
+      <type name="st:sites">
+         <title>Sites</title>
+         <parent>cm:folder</parent>         
+      </type>    
+     
+   </types>
+   
+   <aspects>
+   
+      <!-- Site Container Aspect -->
+      <aspect name="st:siteContainer">
+     	<title>Site Container</title> 	      
+         <properties>
+            <property name="st:componentId">
+            	<title>Component Id</title>
+            	<type>d:text</type>        
+            </property>
+         </properties>
+  	   </aspect>
+  	   
+  	   <!-- Example Custom Site Properties Aspect -->
+      <aspect name="st:customSiteProperties">
+     	<title>Custom Site Properties</title> 	      
+         <properties>
+            <property name="stcp:additionalInformation">
+            	<title>Additional Site Information</title>
+            	<type>d:text</type>        
+            </property>
+         </properties>
+  	   </aspect>
+   
+   </aspects>
+   
+</model>
+
+
+
+<permissions>
+    
+    <!-- Namespaces used in type references -->
+    
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/system/1.0" prefix="sys"/>
+      <namespace uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+      <namespace uri="http://www.alfresco.org/model/site/1.0" prefix="st"/>
+   </namespaces>
+   
+   <!-- ============================================ -->
+   <!-- Permissions specific to the wiki integration -->
+   <!-- ============================================ -->
+   
+   <permissionSet type="st:site" expose="selected">
+   
+      <permissionGroup name="SiteManager" allowFullControl="true" expose="true" />
+      
+      <permissionGroup name="SiteCollaborator" allowFullControl="false" expose="true">
+         <includePermissionGroup permissionGroup="Collaborator" type="cm:cmobject" />
+      </permissionGroup>
+      
+      <permissionGroup name="SiteContributor" allowFullControl="false" expose="true">
+         <includePermissionGroup permissionGroup="Contributor" type="cm:cmobject" />
+      </permissionGroup>
+      
+      <permissionGroup name="SiteConsumer" allowFullControl="false" expose="true">
+         <includePermissionGroup permissionGroup="Consumer" type="cm:cmobject" />
+      </permissionGroup>
+      
+   </permissionSet>
+
+</permissions>
+<model name="sys:systemmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <description>Alfresco Repository System Definitions</description>
+   <author>Alfresco</author>
+   <published>2005-09-29</published>
+   <version>1.0</version>
+
+   <imports>
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+   </imports>
+
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/system/1.0" prefix="sys" />
+      <namespace uri="http://www.alfresco.org/system/registry/1.0" prefix="reg" />
+      <namespace uri="http://www.alfresco.org/system/modules/1.0" prefix="module" />
+   </namespaces>
+
+   <types>
+
+      <type name="sys:base">
+         <title>Base</title>
+         <mandatory-aspects>
+            <aspect>sys:referenceable</aspect>
+         </mandatory-aspects>
+      </type>
+
+      <type name="sys:descriptor">
+         <title>Descriptor</title>
+         <parent>sys:base</parent>
+         <properties>
+            <property name="sys:name">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="sys:versionMajor">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="sys:versionMinor">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="sys:versionRevision">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="sys:versionLabel">
+               <type>d:text</type>
+            </property>
+            <property name="sys:versionBuild">
+               <type>d:text</type>
+            </property>
+            <property name="sys:versionSchema">
+               <type>d:int</type>
+               <mandatory enforced="true">true</mandatory>
+               <default>0</default>
+            </property>
+            <property name="sys:versionEdition">
+               <type>d:any</type>
+               <multiple>true</multiple>
+            </property>               
+            <property name="sys:versionProperties">
+               <type>d:content</type>
+               <multiple>false</multiple>
+            </property>               
+         </properties>
+      </type>      
+
+      <type name="sys:container">
+         <title>Container</title>
+         <parent>sys:base</parent>
+         <associations>
+            <child-association name="sys:children">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </source>
+               <target>
+                  <class>sys:base</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+         </associations>
+      </type>
+
+      <type name="sys:store_root">
+         <title>Store Root</title>
+         <parent>sys:container</parent>
+         <mandatory-aspects>
+            <aspect>sys:aspect_root</aspect>
+         </mandatory-aspects>
+      </type>
+
+      <type name="sys:reference">
+         <title>Reference</title>
+         <parent>sys:base</parent>
+         <properties>
+            <property name="sys:reference">
+               <type>d:noderef</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+         </properties>
+      </type>
+      
+   </types>
+
+
+   <aspects>
+
+      <aspect name="sys:aspect_root">
+         <title>Root</title>
+      </aspect>
+
+      <!-- aspect to store the fundamental node identifiers -->
+      <aspect name="sys:referenceable">
+         <title>Referenceable</title>
+         <properties>
+            <property name="sys:store-protocol">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="sys:store-identifier">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="sys:node-uuid">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="sys:node-dbid">
+               <type>d:long</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+         </properties>
+      </aspect>
+
+      <!-- aspect to tag incomplete nodes -->
+      <aspect name="sys:incomplete">
+         <title>Incomplete</title>
+      </aspect>
+      
+      <!-- aspect to tag temporary nodes -->
+      <aspect name="sys:temporary">
+         <title>Temporary</title>
+      </aspect>
+      
+      <!-- details stored on archived nodes -->
+      <aspect name="sys:archived">
+         <title>Archived</title>
+         <properties>
+            <property name="sys:archivedOriginalParentAssoc">
+               <type>d:childassocref</type>
+               <mandatory>true</mandatory>
+            </property>
+            <property name="sys:archivedBy">
+               <type>d:text</type>
+               <mandatory>true</mandatory>
+            </property>
+            <property name="sys:archivedDate">
+               <type>d:datetime</type>
+               <mandatory>true</mandatory>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="sys:archivedOriginalOwner">
+               <type>d:text</type>
+               <mandatory>true</mandatory>
+            </property>
+         </properties>
+      </aspect>
+      <aspect name="sys:archived-assocs">
+         <properties>
+            <property name="sys:archivedParentAssocs">
+               <type>d:childassocref</type>
+               <mandatory>false</mandatory>
+               <multiple>true</multiple>
+               <index enabled="false" />
+            </property>
+            <property name="sys:archivedChildAssocs">
+               <type>d:childassocref</type>
+               <mandatory>false</mandatory>
+               <multiple>true</multiple>
+               <index enabled="false" />
+            </property>
+            <property name="sys:archivedSourceAssocs">
+               <type>d:assocref</type>
+               <mandatory>false</mandatory>
+               <multiple>true</multiple>
+               <index enabled="false" />
+            </property>
+            <property name="sys:archivedTargetAssocs">
+               <type>d:assocref</type>
+               <mandatory>false</mandatory>
+               <multiple>true</multiple>
+               <index enabled="false" />
+            </property>
+         </properties>
+      </aspect>
+
+      <!--
+         Localization:
+         If you add this aspect to a node, then the server will assume that all non-multilingual
+         properties apply to this locale.
+      -->
+      <aspect name="sys:localized">
+         <title>Translation</title>
+         <properties>
+            <property name="sys:locale">
+               <title>Locale</title>    
+               <type>d:locale</type>
+               <mandatory>true</mandatory>
+            </property>
+         </properties>
+      </aspect>
+
+      <!--
+         Aspect controlling some index behaviour.
+         Sometimes it is necessary to reindex an entire hierarchy.  But instead of
+         doing that inline, it can be done as a background process.
+      -->
+      <aspect name="sys:indexChildren">
+         <title>Cascade Index Children</title>
+      </aspect>
+
+   </aspects>
+
+</model>
+<model name="wca:applicationmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <description>Alfresco WCM Application Model</description>
+   <author>Alfresco</author>
+   <published>2006-11-27</published>
+   <version>1.0</version>
+
+   <imports>
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys"/>
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+      <import uri="http://www.alfresco.org/model/wcmmodel/1.0" prefix="wcm"/>
+   </imports>
+   
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/wcmappmodel/1.0" prefix="wca"/>
+   </namespaces>
+   
+   <constraints>
+      <constraint name="wca:deploytypes" type="LIST">
+         <parameter name="allowedValues">
+            <list>
+               <value>alfresco</value>
+               <value>file</value>
+            </list>
+         </parameter>
+      </constraint>
+      
+      <constraint name="wca:deployservertypes" type="LIST">
+         <parameter name="allowedValues">
+            <list>
+               <value>live</value>
+               <value>test</value>
+            </list>
+         </parameter>
+      </constraint>
+   </constraints>
+   
+   <types>
+   
+      <type name="wca:webfolder">
+         <title>WCM Web Project Folder</title>
+         <parent>wcm:avmfolder</parent>
+         <properties>
+            <!-- root name of the avm staging stores for this web folder -->
+            <property name="wca:avmstore">
+               <title>AVM Store Root</title>
+               <type>d:text</type>
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>false</stored>
+                  <tokenised>false</tokenised>
+               </index>
+            </property>
+            <property name="wca:defaultwebapp">
+               <title>Default Webapp</title>
+               <type>d:text</type>
+            </property>
+            <!-- the following properties are deprecated as of v2.2 -->
+            <property name="wca:deployto">
+               <title>Deploy To</title>
+               <type>d:text</type>
+               <multiple>true</multiple>
+            </property>
+            <property name="wca:selecteddeployto">
+               <title>Servers Selected For Deployment</title>
+               <type>d:text</type>
+               <multiple>true</multiple>
+            </property>
+            <property name="wca:selecteddeployversion">
+               <title>Snapshot Version Selected For Deployment</title>
+               <type>d:int</type>
+            </property>
+            <!-- end of deprecation -->
+            <property name="wca:issource">
+               <title>Used as a template website</title>
+               <type>d:boolean</type>
+            </property>
+            <!-- Preview URI Service Provider Name (since 3.2) -->
+            <property name="wca:previewprovidername">
+               <title>Preview Provider</title>
+               <type>d:text</type>
+            </property>
+         </properties>
+         <associations>
+            <child-association name="wca:webuser">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:webuser</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+            <child-association name="wca:webform">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:webform</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+            <child-association name="wca:webworkflowdefaults">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:webworkflowdefaults</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+            <!-- the following association is deprecated as of v2.2 -->
+            <child-association name="wca:deploymentreport">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:deploymentreport</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+            <!-- end of deprecation -->
+            <child-association name="wca:deploymentserver">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:deploymentserver</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+            <child-association name="wca:deploymentattempt">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:deploymentattempt</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+         </associations>
+      </type>
+      
+      <type name="wca:webuser">
+         <title>Website User Information</title>
+         <parent>sys:base</parent>
+         <properties>
+            <property name="wca:username">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="wca:role">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+         </properties>
+      </type>
+      
+      <type name="wca:webform">
+         <title>Website Web Form</title>
+         <parent>sys:base</parent>
+         <properties>
+            <property name="wca:formname">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>false</stored>
+                  <tokenised>false</tokenised>
+               </index>
+            </property>
+         </properties>
+         <associations>
+            <child-association name="wca:webformtemplate">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:webformtemplate</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+            <child-association name="wca:workflowdefaults">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:workflowdefaults</class>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </target>
+            </child-association>
+         </associations>
+         <mandatory-aspects>
+            <aspect>cm:titled</aspect>
+            <aspect>wca:outputpathpattern</aspect>
+         </mandatory-aspects>
+      </type>
+      
+      <type name="wca:webformtemplate">
+         <title>Website Web Form Template</title>
+         <parent>sys:base</parent>
+         <properties>
+            <property name="wca:baserenderingenginetemplatename">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+         </properties>
+         <mandatory-aspects>
+            <aspect>wca:outputpathpattern</aspect>
+         </mandatory-aspects>
+      </type>
+      
+      <type name="wca:workflowdefaults">
+         <title>Workflow Defaults</title>
+         <parent>sys:base</parent>
+         <properties>
+            <property name="wca:workflowname">
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="wca:workflowdefaultproperties">
+               <type>d:content</type>
+               <mandatory>false</mandatory>
+               <index enabled="false" />
+            </property>
+         </properties>
+      </type>
+      
+      <type name="wca:webworkflowdefaults">
+         <title>Web Workflow Defaults</title>
+         <parent>wca:workflowdefaults</parent>
+         <mandatory-aspects>
+            <aspect>wca:filenamepattern</aspect>
+         </mandatory-aspects>
+      </type>
+      
+      <type name="wca:renditionproperties">
+         <title>Properties for renditions</title>
+         <parent>sys:base</parent>
+         <properties>
+            <property name="wca:mimetypeforrendition">
+               <title>Mimetype for generated assets</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+         </properties>
+         <mandatory-aspects>
+            <aspect>wca:outputpathpattern</aspect>
+         </mandatory-aspects>
+      </type>
+
+      <type name="wca:formfolder">
+         <title>XForms Capture Form Folder</title>
+         <parent>cm:folder</parent>
+      </type>
+      
+      <type name="wca:deploymentserver">
+         <title>Website Deployment Server</title>
+         <parent>sys:base</parent>
+         <properties>
+            <property name="wca:deploytype">
+               <title>Deployment Type</title>
+               <type>d:text</type>
+               <constraints>
+                  <constraint ref="wca:deploytypes" />
+               </constraints>
+            </property>
+            <property name="wca:deployservertype">
+               <title>Deployment Server Type</title>
+               <type>d:text</type>
+               <constraints>
+                  <constraint ref="wca:deployservertypes" />
+               </constraints>
+            </property>
+            <property name="wca:deployserverhost">
+               <title>Host</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>false</stored>
+                  <tokenised>false</tokenised>
+               </index>
+            </property>
+            <property name="wca:deployserverport">
+               <title>Port</title>
+               <type>d:int</type>
+            </property>
+            <property name="wca:deployservername">
+               <title>Display Name</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployservergroup">
+               <title>Display Name</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca: deployserveradaptername">
+               <title>Deployment Server Adapter Name</title>
+               <type>d:text</type>
+            </property>          
+            <property name="wca:deployserverusername">
+               <title>Username</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployserverpassword">
+               <title>Password</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployserverurl">
+               <title>Runtime URL</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployservertarget">
+               <title>Deploy Target</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deploysourcepath">
+               <title>Source Path</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployexcludes">
+               <title>Excludes</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployserverallocatedto">
+               <title>Allocated To</title>
+               <type>d:text</type>
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>false</stored>
+                  <tokenised>false</tokenised>
+               </index>
+            </property>
+            <property name="wca:deployonapproval">
+               <title>Deploy On Approval</title>
+               <type>d:boolean</type>
+            </property>
+         </properties>
+      </type>
+      
+      <type name="wca:deploymentattempt">
+         <title>Website Deployment Attempt</title>
+         <parent>sys:base</parent>
+         <properties>
+            <property name="wca:deployattemptid">
+               <title>Deploy Attempt ID</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>false</stored>
+                  <tokenised>false</tokenised>
+               </index>
+            </property>
+            <property name="wca:deployattempttype">
+               <title>Attempt Type</title>
+               <type>d:text</type>
+               <constraints>
+                  <constraint ref="wca:deployservertypes" />
+               </constraints>
+            </property>
+            <property name="wca:deployattemptstore">
+               <title>Attempt Type</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+               <index enabled="true">
+                  <atomic>true</atomic>
+                  <stored>false</stored>
+                  <tokenised>false</tokenised>
+               </index>
+            </property>
+            <property name="wca:deployattemptversion">
+               <title>Snapshot Version Deployed</title>
+               <type>d:int</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="wca:deployattemptservers">
+               <title>Servers Deployed To</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+               <multiple>true</multiple>
+            </property>
+            <property name="wca:deployattempttime">
+               <title>Time Of Deploy Attempt</title>
+               <type>d:datetime</type>
+               <mandatory enforced="true">true</mandatory>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+         </properties>
+         <associations>
+            <child-association name="wca:deploymentreports">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:deploymentreport</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+               </target>
+            </child-association>
+         </associations>
+      </type>
+      
+      <type name="wca:deploymentreport">
+         <title>Website Deployment Report</title>
+         <parent>cm:content</parent>
+         <properties>
+            <property name="wca:deployserver">
+               <title>Server Deployed To</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="wca:deployversion">
+               <title>Snapshot Version Deployed</title>
+               <type>d:int</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="wca:deploystarttime">
+               <title>Time Deploy Started</title>
+               <type>d:datetime</type>
+               <mandatory enforced="true">true</mandatory>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="wca:deployendtime">
+               <title>Time Deploy Finished</title>
+               <type>d:datetime</type>
+               <mandatory enforced="true">true</mandatory>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+            <property name="wca:deploysuccessful">
+               <title>Deployment Successful</title>
+               <type>d:boolean</type>
+               <default>false</default>
+            </property>
+            <property name="wca:deployfailedreason">
+               <title>Failure Reason</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployservernameused">
+               <title>Server Display Name</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployserverusernameused">
+               <title>Username Used</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployservertargetused">
+               <title>Target Used</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deploysourcepathused">
+               <title>Source Path Used</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployexcludesused">
+               <title>Excludes Used</title>
+               <type>d:text</type>
+            </property>
+            <property name="wca:deployserverurlused">
+               <title>Source Path Used</title>
+               <type>d:text</type>
+            </property>
+         </properties>
+      </type>
+   </types>
+
+   <aspects>
+      
+      <aspect name="wca:webapp">
+         <title>Webapp</title>
+      </aspect>
+      
+      <aspect name="wca:filenamepattern">
+         <title>Filename Pattern</title>
+         <properties>
+            <property name="wca:filenamepattern">
+               <type>d:text</type>
+            </property>
+         </properties>
+      </aspect>
+      
+      <aspect name="wca:outputpathpattern">
+         <title>Output Path Pattern</title>
+         <properties>
+            <property name="wca:outputpathpattern">
+               <type>d:text</type>
+            </property>
+         </properties>
+      </aspect>
+      
+      <!-- An XForms capture form aspect. -->
+      <aspect name="wca:form">
+         <title>XForms Form</title>
+         <properties>
+            <property name="wca:xmlschemarootelementname">
+               <title>Schema Root Element Name</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="wca:xmlschema">
+               <title>Schema</title>
+               <type>d:noderef</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+         </properties>
+         <associations>
+            <association name="wca:renderingenginetemplates">
+               <title>Form Data Renderers</title>
+               <source>
+                  <role>wca:capture</role>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:renderingenginetemplate</class>
+                  <role>wca:presentation</role>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+              </target>
+            </association>
+            <child-association name="wca:formworkflowdefaults">
+               <source>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:workflowdefaults</class>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </target>
+            </child-association>
+         </associations>
+      </aspect>
+      
+      <!-- An XML to something else transformer. -->
+      <aspect name="wca:renderingenginetemplate">
+         <title>A Rendering Engine</title>
+         <properties>
+            <property name="wca:parentrenderingenginename">
+               <title>Type</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="wca:formsource">
+               <title>Form Source</title>
+               <type>d:noderef</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+         </properties>
+         <associations>
+            <child-association name="wca:renditionproperties">
+               <title>Rendition Properties</title>
+               <source>
+                  <role>wca:capture</role>
+                  <mandatory>false</mandatory>
+                  <many>false</many>
+               </source>
+               <target>
+                  <class>wca:renditionproperties</class>
+                  <mandatory>false</mandatory>
+                  <many>true</many>
+              </target>
+            </child-association>
+         </associations>
+      </aspect>
+
+      <aspect name="wca:forminstancedata">
+         <title>XML file generated by a form</title>
+         <properties>
+            <property name="wca:parentformname">
+               <title>Form that generated this asset</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="wca:originalparentpath">
+              <title>The original parent path when this form instance data was created - used for regenerating accurately.</title>
+              <type>d:text</type>
+              <mandatory>false</mandatory>
+            </property>
+
+            <property name="wca:renditions">
+               <title>Renditions of this form instance data</title>
+               <type>d:text</type>
+               <multiple>true</multiple>
+            </property>
+         </properties>
+      </aspect>
+
+      <aspect name="wca:rendition">
+         <title>Output file generated by a rendering engine template</title>
+         <properties>
+            <property name="wca:parentrenderingenginetemplate">
+               <title>Form data renderer that generated this asset</title>
+               <type>d:noderef</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="wca:parentrenditionproperties">
+               <title>Rendition properties used for this rendition</title>
+               <type>d:noderef</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+            <property name="wca:primaryforminstancedata">
+               <title>Primary XML Asset used to generate this asset</title>
+               <type>d:text</type>
+               <mandatory enforced="true">true</mandatory>
+            </property>
+         </properties>
+      </aspect>
+      
+      <aspect name="wca:expires">
+         <title>Content that has or can expire</title>
+         <properties>
+            <property name="wca:expirationDate">
+               <title>Expiration Date</title>
+               <type>d:datetime</type>
+               <mandatory enforced="true">true</mandatory>
+			   <index enabled="true">
+				  <atomic>true</atomic>
+				  <stored>false</stored> 
+                  <tokenised>both</tokenised>
+               </index>
+            </property>
+         </properties>
+      </aspect>
+   </aspects>
+
+</model>
+
+<model name="wcm:wcmmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <description>WCM Specific Types</description>
+   <author>Alfresco</author>
+   <published>2006-10-06</published>
+   <version>1.0</version>
+
+   <imports>
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+      <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys"/>
+   </imports>
+
+   <namespaces>
+      <namespace uri="http://www.alfresco.org/model/wcmmodel/1.0" prefix="wcm"/>
+   </namespaces>
+   
+   <types>
+      <!-- Consider this an abstract type for most purposes. -->
+      <type name="wcm:avmcontent">
+         <title>AVM Content</title>
+         <parent>cm:content</parent>
+      </type>
+      
+      <type name="wcm:avmplaincontent">
+         <title>AVM Plain content</title>
+         <parent>wcm:avmcontent</parent>
+      </type>
+      
+      <type name="wcm:avmlayeredcontent">
+         <title>AVM Layered Content</title>
+         <parent>cm:content</parent>
+         <properties>
+            <property name="wcm:avmfileindirection">
+               <title>File Layer Indirection</title>
+               <type>d:noderef</type>
+               <mandatory>true</mandatory>
+            </property>
+         </properties>
+      </type>
+      
+      <!-- Consider this abstract for most purposes. -->
+      <type name="wcm:avmfolder">
+         <title>AVM Folder</title>
+         <parent>cm:folder</parent>
+      </type>
+          
+      <type name="wcm:avmplainfolder">
+         <title>AVM Plain Folder</title>
+         <parent>wcm:avmfolder</parent>
+      </type>
+          
+      <type name="wcm:avmlayeredfolder">
+         <title>AVM Layered Folder</title>
+         <parent>wcm:avmfolder</parent>
+         <properties>
+            <property name="wcm:avmdirindirection">
+               <title>Directory Layer Indirection</title>
+               <type>d:noderef</type>
+               <mandatory>true</mandatory>
+             </property>
+          </properties>
+      </type>
+
+   </types>
+   
+   <aspects>
+       <!-- Captures the node that a node was reverted from. -->
+       <aspect name="wcm:reverted">
+           <title>Contains a reference to the node that this node was reverted from.</title>
+           <properties>
+               <property name="wcm:revertedid">
+                   <title>The id of the node this was reverted from.</title>
+                   <type>d:long</type>
+                   <mandatory>true</mandatory>
+               </property>
+           </properties>
+       </aspect>
+   </aspects>
+   
+</model>
+
+</models>
