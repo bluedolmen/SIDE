@@ -688,7 +688,7 @@ public class MappingToolCommon {
 		}
 		if (StringUtils.trimToNull(staticEnumType) != null) {
 			String res = StringUtils
-					.trimToEmpty(EnumAction.getEnumKey(staticEnumType, textContent));
+					.trimToEmpty(EnumAction.getEnumValue(staticEnumType, textContent));
 			if (res == null) {
 				logger.error("The value '" + textContent
 						+ "' is not a valid for enumeration type '" + staticEnumType
