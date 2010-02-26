@@ -48,8 +48,8 @@ public class GetAction extends AbstractReadAction {
 		boolean formIsReadOnly = (currentPage.getDataType() != currentPage.getFormName());
 		if (StringUtils.trimToNull(dataId) != null || node == null) {
 			if (formType == FormTypeEnum.FORM) {
-				node = controller
-						.getInstanceForm(transaction, formName, dataId, initParams, formIsReadOnly);
+				node = controller.getInstanceForm(transaction, formName, dataId, initParams,
+						formIsReadOnly);
 			} else if (formType == FormTypeEnum.CLASS) {
 				node = controller.getInstanceClass(transaction, formName, dataId, initParams,
 						formIsReadOnly, false);
@@ -132,7 +132,8 @@ public class GetAction extends AbstractReadAction {
 		String dataId = currentPage.getDataId();
 		WorkflowTaskType taskType = controller.getWorkflowTaskType(currentPage.getFormName());
 		String dataFormName = taskType.getDataForm();
-		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId, initParams, false);
+		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId,
+				initParams, false);
 		//
 		// we need to nest the data form instance under workflow
 		Element wkDocElt = docWkflw.getDocumentElement();

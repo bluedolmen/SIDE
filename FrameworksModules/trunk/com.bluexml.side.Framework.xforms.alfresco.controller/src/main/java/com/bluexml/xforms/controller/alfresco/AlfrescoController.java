@@ -1778,17 +1778,19 @@ public class AlfrescoController {
 	 * 
 	 * @param transaction
 	 * @param taskTypeName
+	 *            the id of the workflow form
 	 * @param taskElt
-	 * @return 
+	 *            the root element containing the workflow properties
+	 * @return
 	 * @throws ServletException
 	 */
 	public GenericClass persistWorkflow(AlfrescoTransaction transaction, String taskTypeName,
 			Node taskElt) throws ServletException {
-		GenericClass simulatedClass = transformsToAlfresco(transaction, taskTypeName, taskElt);
+		GenericClass transformed = transformsToAlfresco(transaction, taskTypeName, taskElt);
 
 		// #1209: we must support FileFields on workflow forms so we also simulate a queuing
-		saveObject(transaction, simulatedClass);
-		return simulatedClass;
+		saveObject(transaction, transformed);
+		return transformed;
 	}
 
 	/**
