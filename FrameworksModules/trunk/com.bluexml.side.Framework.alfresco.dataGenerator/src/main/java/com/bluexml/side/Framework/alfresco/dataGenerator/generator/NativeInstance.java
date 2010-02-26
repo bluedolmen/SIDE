@@ -14,21 +14,21 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.graph.NativeAlfrescoNod
  * @author davidchevrier
  *
  */
-public class NativeInstance implements IInstance {
+public class NativeInstance {
 	
-	IRandomGenerator generator;
+	NativeAlfrescoModelRandomDataGenerator generator;
 	
 	/**
 	 * @return the generator
 	 */
-	public IRandomGenerator getGenerator() {
+	public NativeAlfrescoModelRandomDataGenerator getGenerator() {
 		return generator;
 	}
 
 	/**
 	 * @param generator the generator to set
 	 */
-	public void setGenerator(IRandomGenerator generator) {
+	public void setGenerator(NativeAlfrescoModelRandomDataGenerator generator) {
 		this.generator = generator;
 	}
 
@@ -39,9 +39,9 @@ public class NativeInstance implements IInstance {
 	 */
 	public NativeAlfrescoNode instanciation(TypeDefinition type){
 		NativeAlfrescoNode nativeNode = new NativeAlfrescoNode();
-		Map<QNamePattern, Object> nativeDatasProperties = ((NativeAlfrescoModelRandomDataGenerator) generator).generateNativeDatasProperties(type);
+		Map<QNamePattern, Object> nativeDatasProperties = generator.generateNativeDatasProperties(type);
 		((NativeAlfrescoNode) nativeNode).setNativeDatasProperties(nativeDatasProperties);
-		Map<QNamePattern, Object> nativeDatasAspects = ((NativeAlfrescoModelRandomDataGenerator) generator).generateNativeDatasAspects(type);
+		Map<QNamePattern, Object> nativeDatasAspects = generator.generateNativeDatasAspects(type);
 		((NativeAlfrescoNode) nativeNode).setNativeDatasAspects(nativeDatasAspects);
 		return nativeNode;
 	}

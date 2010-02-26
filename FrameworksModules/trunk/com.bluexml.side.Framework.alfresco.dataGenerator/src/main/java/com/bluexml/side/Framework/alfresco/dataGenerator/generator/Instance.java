@@ -1,12 +1,10 @@
 /**
- * 
+ * This class allows instanciation of model's types
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.generator;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
@@ -30,7 +28,8 @@ public class Instance implements IInstance {
 	IStructure structure;
 	IRandomGenerator alfrescoModelRandomGenerator;
 	IData alfrescoModelDatasInstance;
-	IInstance nativeInstance;
+	NativeInstance nativeInstance;
+	InstanceServices services;
 	
 	/**
 	 * @return the structure
@@ -84,7 +83,7 @@ public class Instance implements IInstance {
 	/**
 	 * @return the nativeInstance
 	 */
-	public IInstance getNativeInstance() {
+	public NativeInstance getNativeInstance() {
 		return nativeInstance;
 	}
 
@@ -92,104 +91,56 @@ public class Instance implements IInstance {
 	/**
 	 * @param nativeInstance the nativeInstance to set
 	 */
-	public void setNativeInstance(IInstance nativeInstance) {
+	public void setNativeInstance(NativeInstance nativeInstance) {
 		this.nativeInstance = nativeInstance;
 	}
+	
+	public InstanceServices getServices() {
+		return services;
+	}
+	
+	public void setServices(InstanceServices services) {
+		this.services = services;
+	}
 
-
-	public INode instanciation(TypeDefinition type) throws Exception{
+	/**
+	 * 
+	 * @param type
+	 * @return the instance node of the given type
+	 * @throws Exception
+	 */
+	public INode instanciation(Object type) throws Exception{
 		INode nodeInstance = new AlfrescoNode();
 		Collection<PropertyDefinition> properties = ((AlfrescoModelStructure) structure).getProperties().get(type);
-		Map<PropertyDefinition,Object> sideDataProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDatasProperties(type,properties);
+		Map<PropertyDefinition,Object> sideDataProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDatasProperties((TypeDefinition)type,properties);
 		Collection<AspectDefinition> aspects = ((AlfrescoModelStructure) structure).getAspects().get(type);
-		Map<AspectDefinition,Map<PropertyDefinition,Object>> sideAspectDataProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDataAspect(type,aspects);
-		while (checkUnicity(type, sideDataProperties, sideAspectDataProperties)){
-			sideDataProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDatasProperties(type,properties);
-			sideAspectDataProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDataAspect(type,aspects);
+		Map<AspectDefinition,Map<PropertyDefinition,Object>> sideAspectDataProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDataAspect((TypeDefinition)type,aspects);
+		// As aspects's properties and types's properties are separated in the model's structure,
+		// if unicity module is used we have to check this unicity on both 
+		while (services.checkUnicity((TypeDefinition)type, sideDataProperties, sideAspectDataProperties)){
+			sideDataProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDatasProperties((TypeDefinition)type,properties);
+			sideAspectDataProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDataAspect((TypeDefinition)type,aspects);
 		}
 		((AlfrescoNode) nodeInstance).setDatasProperties(sideDataProperties);
 		((AlfrescoNode) nodeInstance).setDataAspects(sideAspectDataProperties);
-		((AlfrescoNode) nodeInstance).setNativeNode(((NativeInstance) nativeInstance).instanciation(type));
-		((AlfrescoNode) nodeInstance).setTypeDefinition(type);
+		((AlfrescoNode) nodeInstance).setNativeNode(((NativeInstance) nativeInstance).instanciation((TypeDefinition)type));
+		((AlfrescoNode) nodeInstance).setTypeDefinition((TypeDefinition)type);
 		
 		return nodeInstance;
 	}
 
-	
-	private boolean checkUnicity(TypeDefinition type, Map<PropertyDefinition, Object> sideDataProperties, Map<AspectDefinition, Map<PropertyDefinition, Object>> sideAspectDataProperties) throws Exception {
-		boolean result = false;
-		Set<PropertyDefinition> SIDEProperties = sideDataProperties.keySet();
-		Collection<PropertyDefinition> unicitySIDEProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).getUnicityProperties(type,SIDEProperties);
-		
-		Collection<PropertyDefinition> unicityAspectsProperties = new ArrayList<PropertyDefinition>();
-		
-		Collection<Map<PropertyDefinition, Object>> aspectDataProperties = sideAspectDataProperties.values();
-		Collection<Serial> serialProperties = new ArrayList<Serial>();
-		for (Map<PropertyDefinition, Object> dataProperties : aspectDataProperties){
-			Set<PropertyDefinition> properties = dataProperties.keySet();
-			unicityAspectsProperties.addAll(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).getUnicityProperties(type,properties));
-			for(PropertyDefinition property : unicityAspectsProperties){
-				serialProperties.add(new Serial(type.getName().toString(),property.getName().toString(),dataProperties.get(property).toString()));
-			}
-		}
-		for (PropertyDefinition property : unicitySIDEProperties){
-			serialProperties.add(new Serial(type.getName().toString(),property.getName().toString(),sideDataProperties.get(property).toString()));
-		}
-		
-		Collection<Serial> serializedData = new ArrayList<Serial>();
-		if (unicitySIDEProperties.size() > 0 && unicityAspectsProperties.size() > 0){
-			serializedData = ((AlfrescoModelRandomDataGenerator)alfrescoModelRandomGenerator).getSerializedData();
-			boolean same = false;
-			if (serializedData.size() > 0 && serialProperties.size() > 0){
-				same = true;
-				for (Serial dataProperty : serialProperties){
-					boolean contains = false;
-					for (Serial serializedDataProperty : serializedData){
-						if (dataProperty.getType().equals(serializedDataProperty.getType())
-							&& dataProperty.getProperty().equals(serializedDataProperty.getProperty())
-							&& dataProperty.getData().toString().equals(serializedDataProperty.getData().toString())){
-							contains = true;
-						}
-					}
-					same &= contains;
-				}
-			}
-			result = same;
-		}
-		else{
-			result = false;
-		}
-		
-		if (result == false){
-			Collection<Serial> temp = new ArrayList<Serial>();
-			for (Serial dataProperty : serialProperties){
-				boolean contains = false;
-				for (Serial serializedDataProperty : serializedData){
-					if (dataProperty.getType().equals(serializedDataProperty.getType())
-						&& dataProperty.getProperty().equals(serializedDataProperty.getProperty()) 
-						&& dataProperty.getData().toString().equals(serializedDataProperty.getData().toString())){
-						contains = true;
-					}
-				}
-				if (!contains){
-					temp.add(dataProperty);
-				}
-			}
-			if (temp.size() > 0){
-				serializedData.addAll(temp);
-				((AlfrescoModelRandomDataGenerator)alfrescoModelRandomGenerator).setSerializedData((ArrayList<Serial>)serializedData);
-			}
-		}
-		
-		return result;
-	}
-
-
-	public IArc instanciation(INode source, INode target, AssociationDefinition associationDefinition){
+	/**
+	 * 
+	 * @param source
+	 * @param target
+	 * @param associationDefinition
+	 * @return arc instance of the association 
+	 */
+	public IArc instanciation(INode source, INode target, Object associationDefinition){
 		IArc arcInstance = new AlfrescoArc();
 		((AlfrescoArc) arcInstance).setSource((AlfrescoNode) source);
 		((AlfrescoArc) arcInstance).setTarget((AlfrescoNode) target);
-		((AlfrescoArc) arcInstance).setTypeAssociation(associationDefinition);
+		((AlfrescoArc) arcInstance).setTypeAssociation((AssociationDefinition)associationDefinition);
 		return arcInstance;
 	}
 	

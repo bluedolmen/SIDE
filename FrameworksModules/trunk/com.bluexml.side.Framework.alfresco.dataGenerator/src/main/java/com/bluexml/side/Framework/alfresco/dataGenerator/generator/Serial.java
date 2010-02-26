@@ -1,3 +1,7 @@
+/**
+ * This class allows serialization of data by property and type 
+ * to manage unicity of some attributes defined in the model 
+ */
 package com.bluexml.side.Framework.alfresco.dataGenerator.generator;
 
 import java.io.Serializable;
