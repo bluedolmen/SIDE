@@ -75,13 +75,13 @@
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_uuPtgCABEd-8qvQk7m7roQ"/>
       </children>
       <disabled name="title" xmi:id="_nq-vsCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
-        <mapTo href="../data/Alfresco/3.2Labs/cm.dt#0.7820772452513156"/>
+        <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.7820772452513156"/>
       </disabled>
       <disabled name="description" xmi:id="_nq-vsSFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
-        <mapTo href="../data/Alfresco/3.2Labs/cm.dt#0.4825015239967553"/>
+        <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.4825015239967553"/>
       </disabled>
       <disabled name="name" xmi:id="_n5aNQCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
-        <mapTo href="../data/Alfresco/3.2Labs/cm.dt#0.38362934909383717"/>
+        <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.38362934909383717"/>
       </disabled>
       <viewOf href="/CG44_Agent/v1/models/Data/cg44agent.dt#_HJUnoBDgEd-eFJrsZcrkww" xsi:type="clazz:Clazz"/>
     </children>
@@ -122,13 +122,13 @@
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_uuPtgCABEd-8qvQk7m7roQ"/>
       </children>
       <disabled name="name" xmi:id="_rRY1sCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
-        <mapTo href="../data/Alfresco/3.2Labs/cm.dt#0.38362934909383717"/>
+        <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.38362934909383717"/>
       </disabled>
       <disabled name="title" xmi:id="_rolNsCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
-        <mapTo href="../data/Alfresco/3.2Labs/cm.dt#0.7820772452513156"/>
+        <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.7820772452513156"/>
       </disabled>
       <disabled name="description" xmi:id="_rol0wCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
-        <mapTo href="../data/Alfresco/3.2Labs/cm.dt#0.4825015239967553"/>
+        <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.4825015239967553"/>
       </disabled>
       <viewOf href="/CG44_Agent/v1/models/Data/cg44agent.dt#_HJUnoBDgEd-eFJrsZcrkww" xsi:type="clazz:Clazz"/>
     </children>
