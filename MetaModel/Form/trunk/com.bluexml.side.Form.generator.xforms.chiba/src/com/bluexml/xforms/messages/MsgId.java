@@ -236,7 +236,7 @@ public enum MsgId {
 	INT_NAMESPACE_XHTML					("http://www.w3.org/1999/xhtml"),
 	INT_PREFIX_FILENAME_OPERATORS		("search.operators."),
 	INT_PREFIX_INSTANCE_OPERATORS		("SearchOperators"),
-	INT_SERVLET_REDIRECTOR_PATH			("redirect"),
+	INT_SEARCH_OPERATOR_IGNORE			("ignore"),
 	INT_SUBMIT_BUTTONS_GROUP_ID			("submitButtons"),
 	INT_SUFFIX_FILENAME_SELECTORS		("_selector"),
 	INT_SUFFIX_READ_ONLY_FORMS			("RO"),
