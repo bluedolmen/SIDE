@@ -82,6 +82,12 @@
 		 <property name="dictionary" ref="alfrescoModelDictionary" />
 		 <property name="service" ref="dictionaryService" />
 		 <property name="structure" ref="alfrescoModelStructure" />
+		 <property name="generatorServices" ref="dataGeneratorServices" />
+	</bean>
+	
+	<bean id="dataGeneratorServices"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.generator.DataGeneratorServices" >
+		 <property name="generator" ref="alfrescoModelRandomGenerator" /> 
 	</bean>
 	
 	<!-- data -->
