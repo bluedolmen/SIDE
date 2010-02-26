@@ -17,12 +17,11 @@ import com.bluexml.side.util.deployer.Deployer;
 
 public class ANTDeployer extends Deployer {
 	
-	private boolean processExecuted;
+	private static boolean processExecuted;
 	private static String KEY_ANTFILE = "com.bluexml.side.Deployer.antDeployer.param.antFile";
 
 	public ANTDeployer() {
 		super("cleankey", "logChangesKey");
-		processExecuted = false;
 	}
 
 	@Override
