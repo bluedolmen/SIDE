@@ -9,7 +9,7 @@
     </eAnnotations>
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="noSpecialCharacters" value="self.id.regexMatch('[\w]*') = true"/>
-      <details key="validRef" value="if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then&#xD;&#x9;self.getContainer().oclAsType(FormClass).real_class.getAllAttributes()->excludes(self.ref.oclAsType(clazz::Attribute))&#xD;else&#xD;true&#xD;endif"/>
+      <details key="validRef" value="if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then&#xD;&#x9;self.getContainer().oclAsType(FormClass).real_class.getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))&#xD;else&#xD;true&#xD;endif"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The FormElement is an element of the form. It can be either a form group or a field. it is an abstract element and so does not directly appear in the Form modeler."/>

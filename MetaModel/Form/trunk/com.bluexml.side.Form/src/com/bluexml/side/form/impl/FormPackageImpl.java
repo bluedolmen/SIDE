@@ -2196,7 +2196,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "noSpecialCharacters", "self.id.regexMatch(\'[\\w]*\') = true",
-			 "validRef", "if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.getAllAttributes()->excludes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif"
+			 "validRef", "if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif"
 		   });										
 		addAnnotation
 		  (formGroupEClass.getEOperations().get(0), 
