@@ -122,7 +122,7 @@ public class Generate extends DeclarativeWebScript {
 		boolean deleted = false;
 		try {
 			if (generated){
-				deleted = generator.deleteExceededNodes();
+				deleted = generator.getGeneratorServices().deleteExceededNodes();
 			}
 		} catch (Exception e1) {
 			model.put("error", e1);
@@ -207,7 +207,7 @@ public class Generate extends DeclarativeWebScript {
 			model.put("incremental", new Object());
 			Integer maxAttributeIndex;
 			try {
-				maxAttributeIndex = Integer.valueOf(generator.getMaxAttributeIndex());
+				maxAttributeIndex = Integer.valueOf(generator.getGeneratorServices().getMaxAttributeIndex());
 				model.put("attributeIndex", maxAttributeIndex);
 				
 				Map<TypeDefinition,Map<PropertyDefinition,Integer>> index = AlfrescoModelRandomDataGenerator.getIndex();
