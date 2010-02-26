@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:ClassFormCollection xmlns:form="http://www.kerblue.org/form/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Share forms" xmi:id="_UtchQCAFEd-8qvQk7m7roQ" xmi:version="2.0">
-  <forms id="Document" label="Document" xmi:id="_IiMSwCFtEd-grPsxXhqAnQ" xsi:type="form:FormClass">
-    <children id="Categorie" label="Categorie" xmi:id="_K1LCAyFtEd-grPsxXhqAnQ" xsi:type="form:ChoiceField">
+<form:ClassFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_UtchQCAFEd-8qvQk7m7roQ" name="Share forms">
+  <forms xsi:type="form:FormClass" xmi:id="_IiMSwCFtEd-grPsxXhqAnQ" label="Document" id="Document">
+    <children xsi:type="form:ChoiceField" xmi:id="_K1LCAyFtEd-grPsxXhqAnQ" label="Categorie" id="Categorie">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_iEQJoBAHEd-QPZneBoCQXA"/>
     </children>
-    <children id="Origine" label="Origine" xmi:id="_K1LCBCFtEd-grPsxXhqAnQ" xsi:type="form:ChoiceField">
+    <children xsi:type="form:ChoiceField" xmi:id="_K1LCBCFtEd-grPsxXhqAnQ" label="Origine" id="Origine">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_X0njACAEEd-8qvQk7m7roQ"/>
     </children>
-    <children id="Nature" label="Nature" xmi:id="_K1LCBSFtEd-grPsxXhqAnQ" xsi:type="form:ChoiceField">
+    <children xsi:type="form:ChoiceField" xmi:id="_K1LCBSFtEd-grPsxXhqAnQ" label="Nature" id="Nature">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_wtikYCAEEd-8qvQk7m7roQ"/>
     </children>
-    <children id="Objet" label="Objet" xmi:id="_K1LCBiFtEd-grPsxXhqAnQ" xsi:type="form:ChoiceField">
+    <children xsi:type="form:ChoiceField" xmi:id="_K1LCBiFtEd-grPsxXhqAnQ" label="Objet" id="Objet">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_0AWY8CAEEd-8qvQk7m7roQ"/>
     </children>
-    <children id="Version" label="Version" xmi:id="_K1LCACFtEd-grPsxXhqAnQ" xsi:type="form:CharField">
+    <children xsi:type="form:CharField" xmi:id="_K1LCACFtEd-grPsxXhqAnQ" label="Version" id="Version">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
     </children>
-    <children id="Description" label="Description" xmi:id="_9k4ekCGWEd-grPsxXhqAnQ" xsi:type="form:TextField">
+    <children xsi:type="form:TextField" xmi:id="_9k4ekCGWEd-grPsxXhqAnQ" label="Description" id="Description">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gcQ4IBAHEd-QPZneBoCQXA"/>
     </children>
-    <children id="DateNumerisation" label="Date de la numerisation" xmi:id="_K1LCAiFtEd-grPsxXhqAnQ" xsi:type="form:DateField">
+    <children xsi:type="form:DateField" xmi:id="_K1LCAiFtEd-grPsxXhqAnQ" label="Date de la numerisation" id="DateNumerisation">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gsuWABAHEd-QPZneBoCQXA"/>
     </children>
     <real_class href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
   </forms>
-  <forms id="Dossier" label="Dossier" xmi:id="_3g57ACF3Ed-grPsxXhqAnQ" xsi:type="form:FormClass">
-    <children id="Matricule" label="Matricule" mandatory="true" xmi:id="_49EXACF3Ed-grPsxXhqAnQ" xsi:type="form:CharField">
+  <forms xsi:type="form:FormClass" xmi:id="_3g57ACF3Ed-grPsxXhqAnQ" label="Dossier" id="Dossier">
+    <children xsi:type="form:CharField" xmi:id="_49EXACF3Ed-grPsxXhqAnQ" label="Matricule" id="Matricule" initial="">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_qeSUMCABEd-8qvQk7m7roQ"/>
     </children>
-    <children id="Nom" label="Nom" mandatory="true" xmi:id="_49EXASF3Ed-grPsxXhqAnQ" xsi:type="form:CharField">
+    <children xsi:type="form:CharField" xmi:id="_49EXASF3Ed-grPsxXhqAnQ" label="Nom" id="Nom">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_uuPtgCABEd-8qvQk7m7roQ"/>
     </children>
-    <children id="Prenom" label="Prénom" mandatory="true" xmi:id="_49E-ECF3Ed-grPsxXhqAnQ" xsi:type="form:CharField">
+    <children xsi:type="form:CharField" xmi:id="_49E-ECF3Ed-grPsxXhqAnQ" label="Prénom" id="Prenom">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_yhCpsCABEd-8qvQk7m7roQ"/>
     </children>
     <real_class href="/CG44_Agent/v1/models/Data/cg44agent.dt#_HJUnoBDgEd-eFJrsZcrkww"/>
   </forms>
 </form:ClassFormCollection>
-
