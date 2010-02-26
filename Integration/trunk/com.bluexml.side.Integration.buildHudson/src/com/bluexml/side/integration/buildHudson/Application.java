@@ -362,6 +362,7 @@ public class Application {
 		out += "\t\t\t<record name=\"build_pde-build_debug.log\" loglevel=\"debug\" action=\"start\"/>\n";
 		// out +=
 		// "\t\t\t<chmod dir=\"${buildName}\" perm=\"777\" includes=\"*/**\"/>\n";
+		out += "\t\t\t<echoproperties></echoproperties>\n";
 		out += "\t\t\t<java classname=\"org.eclipse.equinox.launcher.Main\" fork=\"true\" failonerror=\"true\">\n";
 		out += "\t\t\t\t<arg value=\"-Xmx512m\"/>\n";
 		out += "\t\t\t\t<arg value=\"-Xms512m\"/>\n";
