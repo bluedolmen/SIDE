@@ -1,5 +1,5 @@
 /**
- * 
+ * This class allows generation of data for native Alfresco properties
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.generator;
 
@@ -7,13 +7,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 
 import javax.activation.MimetypesFileTypeMap;
 
@@ -21,16 +19,14 @@ import org.alfresco.model.ContentModel;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.service.namespace.QNamePattern;
-import org.alfresco.util.ISO8601DateFormat;
 
-import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.NativeAlfrescoModelStructure;
 
 /**
  * @author davidchevrier
  *
  */
-public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator {
+public class NativeAlfrescoModelRandomDataGenerator {
 	
 	private AlfrescoModelRandomDataGenerator generator;
 	private Random randomGenerator = new Random();
@@ -119,6 +115,11 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		this.documents = documents;
 	}
 	
+	/**
+	 * 
+	 * @param type
+	 * @return the filled native properties (data per native property) 
+	 */
 	public Map<QNamePattern,Object> generateNativeDatasProperties(TypeDefinition type) {
 		Map<QNamePattern,Object> datasProperties = new HashMap<QNamePattern, Object>();
 		Collection<QNamePattern> nativeProperites = ((NativeAlfrescoModelStructure) nativeAlfrescoStructure).getNativeMandatoryProperties();
@@ -127,6 +128,13 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		}
 		return datasProperties;
 	}
+	
+	/**
+	 * 
+	 * @param property
+	 * @param type
+	 * @return the filled data of property
+	 */
 	private Object fillNativeDataProperty(QNamePattern property, TypeDefinition type) {
 		
 		Object data = new Object();
@@ -136,42 +144,15 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		else if (((QName) property).equals(ContentModel.PROP_NAME)){
 			data = generateName(type);
 		}
-		else if (((QName) property).equals(ContentModel.PROP_CREATOR)){
-			data = NativeConstants.CREATOR;
-		}
-		else if(((QName) property).equals(ContentModel.PROP_CREATED)||((QName) property).equals(ContentModel.PROP_MODIFIED)){
-			data = generateAlfrescoDate();
-		}
-		else if (((QName) property).equals(ContentModel.PROP_MODIFIER)){
-			data = NativeConstants.MODIFIER;
-		}
-		else if (((QName) property).equals(ContentModel.PROP_NODE_UUID)){
-			data = generateUUID();
-		}
-		else if (((QName) property).equals(ContentModel.PROP_NODE_DBID)){
-			data = generateDBID();
-		}
 		return data;
 		
 	}
 	
-	private Object generateDBID() {
-		Object data = new Object();
-		data = randomGenerator.nextInt();
-		while ((Integer) data < 0){
-			data = randomGenerator.nextInt();
-		}
-		return data;
-	}
-	private Object generateAlfrescoDate() {
-		Date currentDate = calendar.getTime();
-		return ISO8601DateFormat.format(currentDate);
-	}
-	private Object generateUUID() {
-		Long idarg1 = randomGenerator.nextLong();
-		Long idarg2 = randomGenerator.nextLong();
-		return new UUID(idarg1,idarg2);
-	}
+	/**
+	 * 
+	 * @param type
+	 * @return the name of the node associated with type definition
+	 */
 	private String generateName(TypeDefinition type) {
 		String name = null;
 		if (type.getTitle() != null){
@@ -191,6 +172,11 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		return name;
 	}
 	
+	/**
+	 * 
+	 * @param type
+	 * @return the url content of node associated with type definition
+	 */
 	private String generateUrl(TypeDefinition type){
 		StringBuffer url = new StringBuffer();
 		File document = chooseRandomlyDocument();
@@ -213,28 +199,57 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		return url.toString();
 	}
 	
+	/**
+	 * 
+	 * @param document
+	 * @return the locale of document
+	 */
 	private Object getDocumentLocale(File document) {
 		Locale locale = Locale.getDefault();
 		return locale.toString();
 	}
 	
+	/**
+	 * 
+	 * @param document
+	 * @return the document encoding
+	 */
 	private Object getDocumentEncoding(File document) {
 		// waiting for something else ...:
 		return "utf-8";
 	}
 	
+	/**
+	 * 
+	 * @param document
+	 * @return the document size
+	 */
 	private Object getDocumentSize(File document) {	
 		return document.length();
 	}
 	
+	/**
+	 * 
+	 * @param document
+	 * @return the mime type of document
+	 */
 	private Object getMimeTypeDocument(File document) {
 		return new MimetypesFileTypeMap().getContentType(document.getName());
 	}
 	
+	/**
+	 * 
+	 * @param document
+	 * @return the document title
+	 */
 	private Object getDocumentTitle(File document) {
 		return document.getName();
 	}
 	
+	/**
+	 * Randomly choose a document (.pdf, .txt, ...) in indicated folder 
+	 * @return a randomly choosed document
+	 */
 	private File chooseRandomlyDocument() {
 		File document = null;
 		if (!pathToDocumentsFolder.equals("")){
@@ -248,6 +263,11 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		return document;
 	}
 	
+	/**
+	 * 
+	 * @param type
+	 * @return filled native aspects (data per aspect)
+	 */
 	public Map<QNamePattern,Object> generateNativeDatasAspects(TypeDefinition type){
 		Map<QNamePattern,Object> datasAspects = new HashMap<QNamePattern, Object>();
 		Collection<QNamePattern> aspects = ((NativeAlfrescoModelStructure) nativeAlfrescoStructure).getNativeAspects();
@@ -256,6 +276,13 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 		}
 		return datasAspects;
 	}
+	
+	/**
+	 * 
+	 * @param aspect
+	 * @param type
+	 * @return the filled data native aspect
+	 */
 	private Object fillNativeDataAspect(QNamePattern aspect, TypeDefinition type) {
 		Object data = new Object();
 		if (((QName) aspect).equals(ContentModel.ASPECT_TEMPORARY)){

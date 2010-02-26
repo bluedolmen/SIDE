@@ -3,12 +3,6 @@
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.generator;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,11 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
-import org.alfresco.service.cmr.dictionary.ClassDefinition;
 import org.alfresco.service.cmr.dictionary.ConstraintDefinition;
 import org.alfresco.service.cmr.dictionary.DataTypeDefinition;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
@@ -31,17 +23,13 @@ import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.util.ISO8601DateFormat;
 
-import com.bluexml.side.Framework.alfresco.dataGenerator.context.SpringContext;
 import com.bluexml.side.Framework.alfresco.dataGenerator.data.AlfrescoModelData;
 import com.bluexml.side.Framework.alfresco.dataGenerator.data.IData;
 import com.bluexml.side.Framework.alfresco.dataGenerator.dictionary.IDictionary;
-import com.bluexml.side.Framework.alfresco.dataGenerator.graph.AlfrescoArc;
-import com.bluexml.side.Framework.alfresco.dataGenerator.graph.AlfrescoNode;
 import com.bluexml.side.Framework.alfresco.dataGenerator.graph.IArc;
 import com.bluexml.side.Framework.alfresco.dataGenerator.graph.INode;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.AlfrescoModelStructure;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
-import com.bluexml.side.framework.alfresco.unicity.UnicityXMLReader;
 
 /**
  * @author davidchevrier
@@ -53,9 +41,10 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 	private IData alfrescoModelDatas;
 	private NativeAlfrescoModelRandomDataGenerator nativeGenerator;
 	private IStructure structure;
-	
 	private IDictionary dictionary;
 	private DictionaryService service;
+	private DataGeneratorServices generatorServices;
+	
 	private int numberOfNodes;
 	private int numberOfOutputArcs;
 	private static String scenario;
@@ -111,17 +100,6 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
 			Date simpleDate = df.parse(df.format(randomDate));
 			
-//			DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
-//			Date minDate = df.parse("1970/01/01");			
-//			Date maxDate = df.parse("3000/01/01");
-//			
-//			df.format(today);
-//
-//			float f = randomGenerator.nextFloat();
-//			long l = (long)(f * (maxDate.getTime() - minDate.getTime()) ) + minDate.getTime();
-//			Date date = new Date(l);			
-			
-//			return ISO8601DateFormat.format(date);
 			return ISO8601DateFormat.format(simpleDate);
 		}
 		
@@ -212,7 +190,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 				randomData = generateRandomObject();
 			}
 			else {
-				//throws exception
+				throw new Exception("Data type " + dataType.toString() + "is not take into account.");
 			}
 			return randomData;
 		}
@@ -263,6 +241,14 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 
 	public void setService(DictionaryService service) {
 		this.service = service;
+	}
+	
+	public DataGeneratorServices getGeneratorServices() {
+		return generatorServices;
+	}
+
+	public void setGeneratorServices(DataGeneratorServices generatorServices) {
+		this.generatorServices = generatorServices;
 	}
 
 	public static Map<TypeDefinition, Integer> getIndexType() {
@@ -415,142 +401,60 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		List<INode> nodesInstances = new ArrayList<INode>();
 		Collection<TypeDefinition> createdTypes = new ArrayList<TypeDefinition>();
 		Collection<TypeDefinition> types = ((AlfrescoModelStructure) structure).getTypes();
-		Collection<AssociationDefinition> compositions = extractCompositions(((AlfrescoModelStructure) structure).getAssociations());
+		Collection<AssociationDefinition> compositions = generatorServices.extractCompositions(((AlfrescoModelStructure) structure).getAssociations());
 		
 		for (int numOfNodes = 0; numOfNodes < numberOfNodes; numOfNodes++){
 			TypeDefinition type = RandomMethods.selectRandomlyType(types);
 			createdTypes.add(type);
 		}
 		
-		Map<AssociationDefinition,Collection<TypeDefinition>> sourcesTypesOfCompositions = getSourcesTypesOfCompositions(createdTypes,compositions);
-		Collection<TypeDefinition> deletedTargetsTypes = deleteTargetsTypesOfNotCreatedTargetsTypesOfCompositions(sourcesTypesOfCompositions,createdTypes);
+		Map<AssociationDefinition,Collection<TypeDefinition>> sourcesTypesOfCompositions = generatorServices.getSourcesTypesOfCompositions(createdTypes,compositions);
+		Collection<TypeDefinition> deletedTargetsTypes = generatorServices.deleteTargetsTypesOfNotCreatedTargetsTypesOfCompositions(sourcesTypesOfCompositions,createdTypes);
 		createdTypes.removeAll(deletedTargetsTypes);
 		
 		for (TypeDefinition type : createdTypes){
 			indexType.put(type, Integer.valueOf(0));
 		}
+		
 		for (TypeDefinition type : createdTypes){
-			FileInputStream fis = new FileInputStream("tomcat/webapps/alfresco/WEB-INF/classes/META-INF/unicity.serial");
-			ObjectInputStream ois = null;
-			try{
-				ois = new ObjectInputStream(fis);
-				serializedData = (ArrayList<Serial>) ois.readObject();
-			} catch (EOFException e) {
-				//Nothing to do
-			}
-			finally{
-				if (ois != null){
-					ois.close();
-				}
-				fis.close();
-			}
+			generatorServices.getSerializedDataFromFile();
 			
-			typeRef = type;
-			index.put(typeRef, new HashMap<PropertyDefinition, Integer>());
-			numOfSame.put(typeRef, new HashMap<PropertyDefinition, Integer>());
-			sameData.put(typeRef, new HashMap<PropertyDefinition, Object>());
-			
-			numOfTypes = countSameTypes(createdTypes,type);
+			generatorServices.initializeUnicityVariables(createdTypes, type);
 			
 			nodesInstances.add(((Instance)instance).instanciation(type));
 			
 			Integer newValue = Integer.valueOf(indexType.get(type).intValue() + 1);
 			indexType.put(type, newValue);
 			
-			serializeData();
+			generatorServices.serializeData();
 		}
 		((AlfrescoModelData) alfrescoModelDatas).setGeneratedTypesInstances(nodesInstances);
 		
 		//Reinitialization because beans still exist until Alfresco be shutdown
-		PrintWriter printwriter = new PrintWriter(new FileOutputStream("tomcat/webapps/alfresco/WEB-INF/classes/META-INF/unicity.serial"));
-	    printwriter.println("");
-	    printwriter.close();
-	    numOfTypes = 0;
-	    serializedData.clear();
-	    numOfSame.clear();
-	    sameData.clear();
+		generatorServices.reInitialization();
 	    
 		return true;
 	}
 
-	private int countSameTypes(Collection<TypeDefinition> createdTypes, TypeDefinition type) {
-		int same =0;
-		for (TypeDefinition typeDef : createdTypes){
-			if (typeDef.equals(type)){
-				same ++;
-			}
-		}
-		return same;
-	}
-
-	private Collection<TypeDefinition> deleteTargetsTypesOfNotCreatedTargetsTypesOfCompositions(Map<AssociationDefinition,Collection<TypeDefinition>> sourcesTypesOfCompositions,
-			Collection<TypeDefinition> createdTypes){
-		Collection<TypeDefinition> deletedTargetsTypes = new ArrayList<TypeDefinition>();
-		Set<AssociationDefinition> compositions = sourcesTypesOfCompositions.keySet();
-		for (AssociationDefinition composition : compositions) {
-			if (sourcesTypesOfCompositions.get(composition).isEmpty() || numberOfOutputArcs == 0){
-				deletedTargetsTypes.addAll(getTargetsTypesOfComposition(composition,createdTypes));
-			}
-		}
-		return deletedTargetsTypes;
-	}
-
-	private Collection<TypeDefinition> getTargetsTypesOfComposition(AssociationDefinition composition, Collection<TypeDefinition> createdTypes) {
-		Collection<TypeDefinition> targets = new ArrayList<TypeDefinition>();
-		for (TypeDefinition type : createdTypes){
-			if (type.getName().equals(((TypeDefinition)composition.getTargetClass()).getName())){
-				targets.add(type);
-			}
-		}
-		return targets;
-	}
-
-	private Collection<TypeDefinition> getSourcesTypesOfCompositionsNotCreated(Collection<TypeDefinition> createdTypes, Collection<TypeDefinition> sourcesTypesOfCompositions) {
-		Collection<TypeDefinition> notCreatedSources = new ArrayList<TypeDefinition>();
-		for (TypeDefinition sourceType : sourcesTypesOfCompositions){
-			if (!createdTypes.contains(sourceType)){
-				notCreatedSources.add(sourceType);
-			}
-		}
-		return notCreatedSources;
-	}
-
-	private Map<AssociationDefinition,Collection<TypeDefinition>> getSourcesTypesOfCompositions(Collection<TypeDefinition> createdTypes, Collection<AssociationDefinition> compositions) {
-		Map<AssociationDefinition,Collection<TypeDefinition>> sourcesByCompo = new HashMap<AssociationDefinition, Collection<TypeDefinition>>();
-		Collection<TypeDefinition> sources = new ArrayList<TypeDefinition>();
-		for (AssociationDefinition composition : compositions){
-			for (TypeDefinition createdType : createdTypes){
-				TypeDefinition source = (TypeDefinition) composition.getSourceClass();
-				if (createdType.getName().equals(source.getName())){
-					sources.add(createdType);
-				}
-			}
-			sourcesByCompo.put(composition, sources);
-		}
-		return sourcesByCompo;
-	}
-
-	private Collection<AssociationDefinition> extractCompositions(Collection<AssociationDefinition> associations) {
-		Collection<AssociationDefinition> compositions = new ArrayList<AssociationDefinition>();
-		for (AssociationDefinition association : associations){
-			if (association.isChild()){
-				compositions.add(association);
-			}
-		}
-		return compositions;
-	}
-
 	public boolean generateArcsInstances(IStructure structure) throws Exception{	
 			List<IArc> arcsInstances = new ArrayList<IArc>();
+			
 			Collection<AssociationDefinition> associations = ((AlfrescoModelStructure) structure).getAssociations();
+			
 			for (AssociationDefinition associationDefinition : associations) {
+				
 				List<IArc> arcsInstancesByAssociation = new ArrayList<IArc>();
+				
 				TypeDefinition sourceType = (TypeDefinition) associationDefinition.getSourceClass();
-				Collection<INode> sourcesNodes = getGeneratedNodesByType(sourceType);
+				Collection<INode> sourcesNodes = generatorServices.getGeneratedNodesByType(sourceType);
+				
 				boolean sourceMultiplicity = associationDefinition.isSourceMany();
+				
 				TypeDefinition targetType = (TypeDefinition) associationDefinition.getTargetClass();
-				Collection<INode> targetsNodes = getGeneratedNodesByType(targetType);
+				Collection<INode> targetsNodes = generatorServices.getGeneratedNodesByType(targetType);
+				
 				boolean targetMultiplicity = associationDefinition.isTargetMany();
+				
 				if (!sourcesNodes.isEmpty() && !targetsNodes.isEmpty()){
 					if (!sourceMultiplicity && !targetMultiplicity){
 						arcsInstancesByAssociation = generateArcsInstancesCase11(sourcesNodes,targetsNodes,associationDefinition,associations,arcsInstances);
@@ -580,9 +484,9 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			while (numberOfArcs < numberOfOutputArcs && !sourcesNodes.isEmpty()){
 				INode source = RandomMethods.selectRandomlyNode(sourcesNodes);
 				IArc arc = createRandomlyArc(source,target,associationDefinition);
-				AssociationDefinition invAssoc = searchInverseAssoc(source, target, associationDefinition, associations);
+				AssociationDefinition invAssoc = generatorServices.searchInverseAssoc(source, target, associationDefinition, associations);
 				if (invAssoc != null){
-					IArc invArc = getInverseGeneratedArc(source,target,invAssoc,generatedArcs);
+					IArc invArc = generatorServices.getInverseGeneratedArc(source,target,invAssoc,generatedArcs);
 					if (invArc != null){
 						arc = null;
 					}
@@ -629,12 +533,12 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			while (numberOfArcs < numberOfOutputArcs && !targetsNodes.isEmpty()){
 				INode target = RandomMethods.selectRandomlyNode(targetsNodes);
 				IArc arc = createRandomlyArc(source,target,associationDefinition);
-				AssociationDefinition invAssoc = searchInverseAssoc(source, target, associationDefinition, associations);
+				AssociationDefinition invAssoc = generatorServices.searchInverseAssoc(source, target, associationDefinition, associations);
 				if (invAssoc != null && (invAssoc.isTargetMandatory() || invAssoc.isSourceMandatory())){
 					arc = null;
 				}
 				if (invAssoc != null){
-					IArc invArc = getInverseGeneratedArc(source,target,invAssoc,generatedArcs);
+					IArc invArc = generatorServices.getInverseGeneratedArc(source,target,invAssoc,generatedArcs);
 					if (invArc != null){
 						arc = null;
 					}
@@ -671,9 +575,9 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 				INode source = RandomMethods.selectRandomlyNode(sourcesNodes);
 				INode target = RandomMethods.selectRandomlyNode(targetsNodes);
 				IArc arc = createRandomlyArc(source,target,associationDefinition);
-				AssociationDefinition invAssoc = searchInverseAssoc(source,target,associationDefinition,associations);
+				AssociationDefinition invAssoc = generatorServices.searchInverseAssoc(source,target,associationDefinition,associations);
 				if (invAssoc != null){
-					IArc invArc = getInverseGeneratedArc(source,target,invAssoc,generatedArcs);
+					IArc invArc = generatorServices.getInverseGeneratedArc(source,target,invAssoc,generatedArcs);
 					if (invArc != null){
 						arc = null;
 					}
@@ -688,44 +592,10 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		return arcsInstances;
 	}
 
-	private IArc getInverseGeneratedArc(INode source, INode target,AssociationDefinition invAssoc, Collection<IArc> generatedArcs) {
-		for (IArc iArc : generatedArcs){
-			if(invAssoc.equals(((AlfrescoArc)iArc).getTypeAssociation()) && (((AlfrescoArc)iArc).getSource().equals(target)) || ((AlfrescoArc)iArc).getTarget().equals(source)){
-				return iArc;
-			}
-		}
-		return null;
-	}
-
-	private AssociationDefinition searchInverseAssoc(INode src, INode tgt, AssociationDefinition associationDefinition, Collection<AssociationDefinition> associations) {
-		TypeDefinition srcType = (TypeDefinition) associationDefinition.getSourceClass();
-		TypeDefinition tgtType = (TypeDefinition) associationDefinition.getTargetClass();
-		for (AssociationDefinition assoc : associations){
-			TypeDefinition invSrcType = (TypeDefinition) assoc.getSourceClass();
-			TypeDefinition invTgtType = (TypeDefinition) assoc.getTargetClass();
-			if (srcType.equals(invTgtType) && tgtType.equals(invSrcType)){
-				return assoc;
-			}
-		}
-		return null;
-	}
-
-	public List<INode> getGeneratedNodesByType(TypeDefinition type){
-		List<INode> nodesInstances = new ArrayList<INode>();
-		Collection<INode> generatedNodes = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedTypesInstances();
-		for (INode node : generatedNodes) {
-			if (((AlfrescoNode) node).getTypeDefinition() == type){
-				nodesInstances.add(node);
-			}
-		}
-		return nodesInstances;
-	}
-
-
 	public Map<PropertyDefinition,Object> generateDatasProperties(TypeDefinition type, Collection<PropertyDefinition> properties) throws Exception{
 		Map<PropertyDefinition,Object> datasProperties = new HashMap<PropertyDefinition,Object>();
 		
-		Collection<PropertyDefinition> unicityProperties = getUnicityProperties(type,properties);
+		Collection<PropertyDefinition> unicityProperties = generatorServices.getUnicityProperties(type,properties);
 		
 		Collection<PropertyDefinition> tempProperties = new ArrayList<PropertyDefinition>();
 		tempProperties.addAll(properties);
@@ -777,46 +647,6 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			finalDataProperties.put(property,dataProperty.getData());
 		}
 		return finalDataProperties;
-	}
-
-	private void serializeData() throws Exception {
-		PrintWriter printwriter = new PrintWriter(new FileOutputStream("tomcat/webapps/alfresco/WEB-INF/classes/META-INF/unicity.serial"));
-	    printwriter.println("");
-	    printwriter.close();
-	    
-		FileOutputStream fos = new FileOutputStream("tomcat/webapps/alfresco/WEB-INF/classes/META-INF/unicity.serial");
-		ObjectOutputStream oos= new ObjectOutputStream(fos);
-		if (serializedData.size() > 0){
-			oos.writeObject(serializedData);
-		}
-		oos.flush();
-		oos.close();
-		fos.close();
-	}
-
-	public Collection<PropertyDefinition> getUnicityProperties(ClassDefinition type, Collection<PropertyDefinition> properties) throws Exception{
-		Collection<PropertyDefinition> unicityProperties = new ArrayList<PropertyDefinition>();
-		UnicityXMLReader reader = null;
-		try{
-			reader = ((UnicityXMLReader) SpringContext.getContext().getBean("unicityDescriptorReader"));
-		}
-		catch (Exception e){
-			//to avoid problems if module unicity not used
-		}
-		if (reader != null){
-			Map<QName, List<QName>> qnamedUnicityPropertiesByType = reader.getUnicityDictionary();
-			List<QName> qnamedUnicityProperties = qnamedUnicityPropertiesByType.get(type.getName());
-			if (qnamedUnicityProperties != null){
-				for (QName qnameUnicityProperty : qnamedUnicityProperties) {
-					for (PropertyDefinition property : properties){
-						if (property.getName().equals(qnameUnicityProperty) && !unicityProperties.contains(property)){
-							unicityProperties.add(property);
-						}
-					}
-				}
-			}
-		}
-		return unicityProperties;
 	}
 
 	private Object generateDatasProperty(PropertyDefinition propertyDefinition) throws Exception {
@@ -876,75 +706,6 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			dataAspects.put(aspect,dataProperties);
 		}
 		return dataAspects;
-	}
-	
-	public boolean deleteExceededNodes(){
-		Collection<INode> generatedNodes = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedTypesInstances();
-		Collection<IArc> generatedArcs = ((AlfrescoModelData) alfrescoModelDatas).getGeneratedAssociationsInstances();
-		Collection<INode> generatedIsolatedNodesSrc = new ArrayList<INode>();
-		Collection<INode> generatedIsolatedNodesTgt = new ArrayList<INode>();
-		Collection<INode> nodesAssociatedSrc = new ArrayList<INode>();
-		Collection<INode> nodesAssociatedTgt = new ArrayList<INode>();
-		boolean passSrc = false;
-		boolean passTgt = false;
-		if (generatedArcs.size() > 0){
-			for (IArc arc : generatedArcs){
-				if (((AlfrescoArc)arc).getTypeAssociation().isTargetMandatory()){
-					if (!nodesAssociatedSrc.contains(((AlfrescoArc)arc).getSource())){
-						nodesAssociatedSrc.add(((AlfrescoArc)arc).getSource());
-					}
-					if (!passSrc){
-						generatedIsolatedNodesSrc = getGeneratedNodesByType((TypeDefinition) ((AlfrescoArc)arc).getTypeAssociation().getSourceClass());
-						passSrc = true;
-					}
-				}
-				if (((AlfrescoArc)arc).getTypeAssociation().isSourceMandatory()){
-					if (!nodesAssociatedTgt.contains(((AlfrescoArc)arc).getTarget())){
-						nodesAssociatedTgt.add(((AlfrescoArc)arc).getTarget());
-					}
-					if (!passTgt){
-						generatedIsolatedNodesTgt = getGeneratedNodesByType((TypeDefinition) ((AlfrescoArc)arc).getTypeAssociation().getTargetClass());
-						passTgt =true;
-					}
-				}
-			}
-			generatedIsolatedNodesSrc.removeAll(nodesAssociatedSrc);
-			generatedIsolatedNodesTgt.removeAll(nodesAssociatedTgt);
-		}
-		else{
-			Collection<AssociationDefinition> assocs = ((AlfrescoModelStructure)structure).getAssociations();
-			for (AssociationDefinition assoc : assocs){
-				if (assoc.isTargetMandatory()){
-					generatedIsolatedNodesSrc = getGeneratedNodesByType((TypeDefinition) assoc.getSourceClass());
-				}
-				if (assoc.isSourceMandatory()){
-					generatedIsolatedNodesTgt = getGeneratedNodesByType((TypeDefinition) assoc.getTargetClass());
-				}
-			}
-		}
-		
-		generatedNodes.removeAll(generatedIsolatedNodesSrc);
-		generatedNodes.removeAll(generatedIsolatedNodesTgt);
-		
-		((AlfrescoModelData) alfrescoModelDatas).setGeneratedTypesInstances(generatedNodes);
-		
-		return true;
-	}
-	
-	public int getMaxAttributeIndex() throws Exception{
-		int max = 0;
-		Set<TypeDefinition> indexes = index.keySet();
-		for (TypeDefinition ind : indexes){
-			Map<PropertyDefinition,Integer> propertiesValues = index.get(ind);
-			Set<PropertyDefinition> properties = propertiesValues.keySet();
-			Collection<PropertyDefinition> unicityProperties = getUnicityProperties(ind, properties);
-			for (PropertyDefinition prop : unicityProperties){
-				if (propertiesValues.get(prop).intValue() > max){
-					max = propertiesValues.get(prop).intValue();
-				}
-			}
-		}
-		return max + 1;
 	}
 
 }

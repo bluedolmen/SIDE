@@ -40,7 +40,7 @@ public class InstanceServices {
 	public boolean checkUnicity(TypeDefinition type, Map<PropertyDefinition, Object> sideDataProperties, Map<AspectDefinition, Map<PropertyDefinition, Object>> sideAspectDataProperties) throws Exception {
 		boolean result = false;
 		Set<PropertyDefinition> SIDEProperties = sideDataProperties.keySet();
-		Collection<PropertyDefinition> unicitySIDEProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).getUnicityProperties(type,SIDEProperties);
+		Collection<PropertyDefinition> unicitySIDEProperties = ((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).getGeneratorServices().getUnicityProperties(type,SIDEProperties);
 		
 		Collection<PropertyDefinition> unicityAspectsProperties = new ArrayList<PropertyDefinition>();
 		
@@ -50,7 +50,7 @@ public class InstanceServices {
 		
 		for (Map<PropertyDefinition, Object> dataProperties : aspectDataProperties){
 			Set<PropertyDefinition> properties = dataProperties.keySet();
-			unicityAspectsProperties.addAll(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).getUnicityProperties(type,properties));
+			unicityAspectsProperties.addAll(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).getGeneratorServices().getUnicityProperties(type,properties));
 			for(PropertyDefinition property : unicityAspectsProperties){
 				serialProperties.add(new Serial(type.getName().toString(),property.getName().toString(),dataProperties.get(property).toString()));
 			}
