@@ -111,7 +111,9 @@
 	    			<p id="note">-Scenario: this parameter allows to index the types instances and its attributes in an incremental way or fully randomly.</p>
 	    		</tr>
 	    		<tr>
-	    			<p id="note">-Index: this parameter is used for the incremental scenario; it assures unicity of attributes if necessary (for the first generation, you can fill it with 0).</p>
+	    			<p id="note">-Index: this parameter is used for the incremental scenario; it assures unicity of attributes if necessary (for the first generation, you can fill it with 0).
+	    						 Note that its value is not took into account if unicity module is not used.
+	    			</p>
 	    		</tr>
 	    		<tr>
 	    			<p id="note">-Folders Structure: if checked, this parameter allows the content instances to be grouped by type into folders.</p>
