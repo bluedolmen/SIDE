@@ -133,16 +133,20 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 		String propName = "";
 		String typeName = "";
 
-		ClassType realClass = formType.getRealClass();
-		String packageName = realClass.getPackage();
-		String rootPackage = packageName.substring(0, packageName.indexOf('.'));
+		ClassType classType = formType.getRealClass();
+		String packageName = classType.getPackage();
+		String rootPackage = packageName;
+		int pos = packageName.indexOf('.');
+		if (pos != -1) {
+			rootPackage = packageName.substring(0, pos);
+		}
 		String namespace = MsgId.INT_NAMESPACE_BLUEXML_CLASS + "/" + rootPackage + "/1.0";
 
 		buf.append("{"); // open JSON string
 
 		// the title
 		buf.append("type:\"");
-		typeName = "{" + namespace + "}" + realClass.getAlfrescoName();
+		typeName = "{" + namespace + "}" + classType.getAlfrescoName();
 		buf.append(typeName);
 		buf.append("\"");
 
