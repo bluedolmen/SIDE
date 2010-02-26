@@ -112,7 +112,7 @@
 	    		</tr>
 	    		<tr>
 	    			<p id="note">-Index: this parameter is used for the incremental scenario; it assures unicity of attributes if necessary (for the first generation, you can fill it with 0).
-	    						 Note that its value is not took into account if unicity module is not used.
+	    						 Note that its filled value is not take into account if no unique property is defined in the selected model.
 	    			</p>
 	    		</tr>
 	    		<tr>
