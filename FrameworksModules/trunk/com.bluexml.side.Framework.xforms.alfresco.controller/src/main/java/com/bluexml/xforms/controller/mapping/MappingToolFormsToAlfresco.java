@@ -531,18 +531,21 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 				attribute.getValue().add(valueType);
 			}
 			//
-			// mark FileField's with their destination. Useful for the webscript.
+			// mark FileFields with their destination. Useful for the webscript and for the upload
+			// processing by the controller.
 			if (fieldType instanceof FileFieldType) {
 				FileFieldType fileField = (FileFieldType) fieldType;
 				String destination = fileField.isInRepository() ? MsgId.INT_UPLOAD_DEST_REPO
 						.getText() : MsgId.INT_UPLOAD_DEST_FILE.getText();
 				attribute.setUploadTo(destination);
-				// we need a name for the node when uploaded in the repository
+				
+				// we need a name for the node (in case of upload to the repository)
 				ValueType valueTypeNameAndExt = alfrescoObjectFactory.createValueType();
 				String nameAndExt = fieldElement.getAttribute("file");
 				valueTypeNameAndExt.setValue(nameAndExt);
 				attribute.getValue().add(valueTypeNameAndExt);
-				// we also need the MIME type
+				
+				// we also want the MIME type; not needed but it won't hurt
 				ValueType valueTypeMIME = alfrescoObjectFactory.createValueType();
 				String mimetype = fieldElement.getAttribute("type");
 				valueTypeMIME.setValue(mimetype);
