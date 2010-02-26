@@ -1,5 +1,5 @@
 /**
- * 
+ * This class allows instanciation of the native node embedeed in node 
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.generator;
 
@@ -8,7 +8,6 @@ import java.util.Map;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.namespace.QNamePattern;
 
-import com.bluexml.side.Framework.alfresco.dataGenerator.graph.INode;
 import com.bluexml.side.Framework.alfresco.dataGenerator.graph.NativeAlfrescoNode;
 
 /**
@@ -33,8 +32,13 @@ public class NativeInstance implements IInstance {
 		this.generator = generator;
 	}
 
-	public INode instanciation(TypeDefinition type){
-		INode nativeNode = new NativeAlfrescoNode();
+	/**
+	 * 
+	 * @param type
+	 * @return instance of native node for the given type
+	 */
+	public NativeAlfrescoNode instanciation(TypeDefinition type){
+		NativeAlfrescoNode nativeNode = new NativeAlfrescoNode();
 		Map<QNamePattern, Object> nativeDatasProperties = ((NativeAlfrescoModelRandomDataGenerator) generator).generateNativeDatasProperties(type);
 		((NativeAlfrescoNode) nativeNode).setNativeDatasProperties(nativeDatasProperties);
 		Map<QNamePattern, Object> nativeDatasAspects = ((NativeAlfrescoModelRandomDataGenerator) generator).generateNativeDatasAspects(type);
