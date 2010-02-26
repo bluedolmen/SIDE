@@ -60,7 +60,13 @@
 		<property name="structure" ref="alfrescoModelStructure" />
 		<property name="alfrescoModelRandomGenerator" ref="alfrescoModelRandomGenerator" />
 		<property name="alfrescoModelDatasInstance" ref="alfrescoModelData" />
-		<property name="nativeInstance" ref="nativeInstance" />  
+		<property name="nativeInstance" ref="nativeInstance" /> 
+		<property name="services" ref="instanceServices" />
+	</bean>
+	
+	<bean id="instanceServices"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.generator.InstanceServices" >
+		  <property name="alfrescoModelRandomGenerator" ref="alfrescoModelRandomGenerator" />
 	</bean>
 	
 	<bean id="nativeAlfrescoModelRandomDataGenerator"
