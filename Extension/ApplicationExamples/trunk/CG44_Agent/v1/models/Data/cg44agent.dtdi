@@ -263,24 +263,24 @@
     <contained xsi:type="di:GraphNode" position="728,164" size="50,79">
       <anchorage graphEdge="//@diagrams.0/@contained.7"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
+        <element href="/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="9"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
+          <element href="/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
         </semanticModel>
       </contained>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="10"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
+          <element href="/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
         </semanticModel>
       </contained>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="12"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
+          <element href="/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
         </semanticModel>
       </contained>
     </contained>
