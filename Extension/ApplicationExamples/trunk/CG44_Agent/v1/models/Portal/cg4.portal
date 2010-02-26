@@ -34,16 +34,16 @@
   <portletSet isPortletInternal="_JhlEoCGYEd-grPsxXhqAnQ" name="facetMap" xmi:id="_F6x9ECGYEd-grPsxXhqAnQ"/>
   <portletSet isPortletInternal="_2S--0CIFEd-R7N33Hlrq_A" name="advanced-search" xmi:id="_ooJmgCIFEd-R7N33Hlrq_A"/>
   <internalPortletSet xmi:id="_W5h28CAIEd-8qvQk7m7roQ">
-    <view href="../view/cg44agent.view#_1jWK0CAGEd-8qvQk7m7roQ" xsi:type="view:ComposedView"/>
+    <view href="../View/cg44agent.view#_1jWK0CAGEd-8qvQk7m7roQ" xsi:type="view:ComposedView"/>
   </internalPortletSet>
   <internalPortletSet xmi:id="_A2ck0CAJEd-8qvQk7m7roQ">
-    <view href="../view/cg44agent.view#_cBXlYCAGEd-8qvQk7m7roQ" xsi:type="view:ComposedView"/>
+    <view href="../View/cg44agent.view#_cBXlYCAGEd-8qvQk7m7roQ" xsi:type="view:ComposedView"/>
   </internalPortletSet>
   <internalPortletSet type="Form" xmi:id="_DIsUQCAJEd-8qvQk7m7roQ">
     <form href="/CG44_Agent/v1/models/Form/cg44agent.form#_UtchQCAFEd-8qvQk7m7roQ" xsi:type="form:ClassFormCollection"/>
   </internalPortletSet>
   <internalPortletSet xmi:id="_JhlEoCGYEd-grPsxXhqAnQ">
-    <view href="../view/cg44agent.view#_2vP68CF_Ed-grPsxXhqAnQ" xsi:type="view:FacetMap"/>
+    <view href="../View/cg44agent.view#_2vP68CF_Ed-grPsxXhqAnQ" xsi:type="view:FacetMap"/>
   </internalPortletSet>
   <internalPortletSet type="Form" xmi:id="_2S--0CIFEd-R7N33Hlrq_A">
     <form href="/CG44_Agent/v1/models/Form/search.form#_cOAykCFsEd-grPsxXhqAnQ" xsi:type="form:SearchFormCollection"/>
