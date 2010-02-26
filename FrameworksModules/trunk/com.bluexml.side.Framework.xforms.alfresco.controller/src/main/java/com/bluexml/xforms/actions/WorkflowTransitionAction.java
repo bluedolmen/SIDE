@@ -523,10 +523,10 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 
 	/**
 	 * Collects information and performs checks before starting the workflow.<br/>
-	 * PRECONDITION: all class fields.
 	 * 
 	 * @param formName
 	 * @param properties
+	 *            the properties to set on the task. Must be non-null.
 	 * @param dataId
 	 *            the complete (including protocol & namespace) ref to the linked data
 	 * @param workflowTitle
@@ -692,9 +692,10 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @param node
 	 * @param taskTypeName
 	 * @return null in case of exception
+	 * @throws ServletException 
 	 */
 	private GenericClass collectTaskProperties(HashMap<QName, Serializable> properties, Node node,
-			WorkflowTaskType taskType, String processId) {
+			WorkflowTaskType taskType, String processId) throws ServletException {
 		String taskTypeName = taskType.getName();
 		String taskTypeId = taskType.getTaskId();
 
@@ -707,13 +708,8 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		// Element processElt = DOMUtil.getChild(root, processName);
 		Element taskElt = DOMUtil.getChild(root, taskTypeName);
 		GenericClass toCreate;
-		// Assemble a BlueXML Class.xsd object from the instance.
-		try {
-			toCreate = controller.transformsToAlfresco(transaction, taskTypeName, taskElt);
-		} catch (ServletException e) {
-			e.printStackTrace();
-			return null;
-		}
+		// Assemble a BlueXML Class.xsd object from the instance, dealing with FileFields (#1209)
+		toCreate = controller.persistWorkflow(transaction, taskTypeName, taskElt);
 
 		// add task properties built from the attributes derived from form fields
 		String processName = AlfrescoController

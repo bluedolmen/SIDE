@@ -729,9 +729,9 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Saves a node. Moves uploaded files to the file system/repository and enqueues the operation
-	 * in the transaction, returning the id given by the transaction manager. <br/>
-	 * NOTE: The values from the instance have already been collected.
+	 * Saves a node. Moves uploaded files to the file system/repository and enqueues the 'save'
+	 * operation in the transaction, returning the id given by the transaction manager. <br/>
+	 * NOTE: The values from the instance <b>must</b> have already been collected.
 	 * 
 	 * @param alfClass
 	 *            the alf class
@@ -1773,6 +1773,25 @@ public class AlfrescoController {
 	}
 
 	/**
+	 * Builds a GenericClass object from the instance of a workflow and processes the possible
+	 * upload fields.
+	 * 
+	 * @param transaction
+	 * @param taskTypeName
+	 * @param taskElt
+	 * @return 
+	 * @throws ServletException
+	 */
+	public GenericClass persistWorkflow(AlfrescoTransaction transaction, String taskTypeName,
+			Node taskElt) throws ServletException {
+		GenericClass simulatedClass = transformsToAlfresco(transaction, taskTypeName, taskElt);
+
+		// #1209: we must support FileFields on workflow forms so we also simulate a queuing
+		saveObject(transaction, simulatedClass);
+		return simulatedClass;
+	}
+
+	/**
 	 * Transforms the XForms instance into a GenericClass. Extracted from persistForm to provide an
 	 * access to workflow actions.
 	 * 
@@ -1782,7 +1801,7 @@ public class AlfrescoController {
 	 * @return
 	 * @throws ServletException
 	 */
-	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
+	private GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
 			Node instance) throws ServletException {
 		return mappingTool.transformsToAlfresco(transaction, formName, instance);
 	}
