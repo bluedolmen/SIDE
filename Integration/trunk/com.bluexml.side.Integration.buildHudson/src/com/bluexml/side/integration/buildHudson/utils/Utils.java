@@ -887,6 +887,9 @@ public class Utils {
 		}
 
 		
+		// fin affichage
+
+		copyToRepository();
 	}
 
 	public static void updateProduct() {
