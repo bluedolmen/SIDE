@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.6844594695726981"
+             name="wca">
+      <enumerationSet xmi:id="412664.7556396459" name="deploytypes">
+         <literals xmi:id="503357.0616216707" name="alfresco"/>
+         <literals xmi:id="15962.144118549904" name="file"/>
+      </enumerationSet>
+      <enumerationSet xmi:id="2954.3868998437306" name="deployservertypes">
+         <literals xmi:id="243222.95899339687" name="live"/>
+         <literals xmi:id="520691.2524212598" name="test"/>
+      </enumerationSet>
+      <classSet xmi:id="0.6619594191538793" documentation="" description="" name="webfolder"
+             title="WCM Web Project Folder"
+             aspects="">
+         <generalizations xmi:id="0.3864132085267842" href="wcm.dt#//@classSet.3"/>
+         <attributes xmi:id="0.7179417945598119" name="avmstore" title="AVM Store Root"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.46698766613342624" name="defaultwebapp" title="Default Webapp"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.04166090536031797" name="deployto" title="Deploy To"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.8400612813448906" name="selecteddeployto"
+                  title="Servers Selected For Deployment"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.8847501501568139" name="selecteddeployversion"
+                  title="Snapshot Version Selected For Deployment"
+                  visibility="Public"
+                  typ="int"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.5287376814597626" name="issource" title="Used as a template website"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.3777916922593373" name="previewprovidername" title="Preview Provider"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <associationSet xmi:id="0.44375637898868825" name="webuser" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.747697366324071" name="webuser" title="" cardMax="1"
+                linkedClass="//@classSet.0"/>
+         <secondEnd xmi:id="0.3108763584341512" name="webuser" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.1"/>
+      </associationSet>
+      <associationSet xmi:id="0.5745545654365147" name="webform" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.991619465334577" name="webform" title="" cardMax="1"
+                linkedClass="//@classSet.0"/>
+         <secondEnd xmi:id="0.32028237272923754" name="webform" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.2"/>
+      </associationSet>
+      <associationSet xmi:id="0.8964402472728218" name="webworkflowdefaults" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.6435964353184366" name="webworkflowdefaults" title="" cardMax="1"
+                linkedClass="//@classSet.0"/>
+         <secondEnd xmi:id="0.13002223722330464" name="webworkflowdefaults" title=""
+                 navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.5"/>
+      </associationSet>
+      <associationSet xmi:id="0.7997059246782603" name="deploymentreport" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.16613317967276575" name="deploymentreport" title="" cardMax="1"
+                linkedClass="//@classSet.0"/>
+         <secondEnd xmi:id="0.7840551017183689" name="deploymentreport" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.10"/>
+      </associationSet>
+      <associationSet xmi:id="0.6198164760028989" name="deploymentserver" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.8455967817084895" name="deploymentserver" title="" cardMax="1"
+                linkedClass="//@classSet.0"/>
+         <secondEnd xmi:id="0.5412822418546426" name="deploymentserver" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.8"/>
+      </associationSet>
+      <associationSet xmi:id="0.7979914869065209" name="deploymentattempt" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.40044799249414176" name="deploymentattempt" title="" cardMax="1"
+                linkedClass="//@classSet.0"/>
+         <secondEnd xmi:id="0.8813333756595991" name="deploymentattempt" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.9"/>
+      </associationSet>
+      <classSet xmi:id="0.9435498524600141" documentation="" description="" name="webuser"
+             title="Website User Information"
+             aspects="">
+         <generalizations xmi:id="0.16020720144640466" href="sys.dt#//@classSet.0"/>
+         <attributes xmi:id="0.5916059922990685" name="username" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.9269025583975685" name="role" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.30089971142048766" documentation="" description="" name="webform"
+             title="Website Web Form"
+             aspects="//@aspectSet.0  //@aspectSet.1 ">
+         <generalizations xmi:id="0.8553933949958079" href="sys.dt#//@classSet.0"/>
+         <attributes xmi:id="0.43231607923123005" name="formname" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <associationSet xmi:id="0.7193073084820555" name="webformtemplate" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.37169826712355925" name="webformtemplate" title="" cardMax="1"
+                linkedClass="//@classSet.2"/>
+         <secondEnd xmi:id="0.04575163629254164" name="webformtemplate" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.3"/>
+      </associationSet>
+      <associationSet xmi:id="0.4278931802479189" name="workflowdefaults" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.7798557370115723" name="workflowdefaults" title="" cardMax="1"
+                linkedClass="//@classSet.2"/>
+         <secondEnd xmi:id="0.007465170787278708" name="workflowdefaults" title="" navigable="true"
+                 cardMax="1"
+                 linkedClass="//@classSet.4"/>
+      </associationSet>
+      <classSet xmi:id="0.7386727911661121" documentation="" description=""
+             name="webformtemplate"
+             title="Website Web Form Template"
+             aspects="//@aspectSet.0 ">
+         <generalizations xmi:id="0.6519288344639397" href="sys.dt#//@classSet.0"/>
+         <attributes xmi:id="0.6472340229272737" name="baserenderingenginetemplatename" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.229669823225228" documentation="" description=""
+             name="workflowdefaults"
+             title="Workflow Defaults"
+             aspects="">
+         <generalizations xmi:id="0.8867557183518772" href="sys.dt#//@classSet.0"/>
+         <attributes xmi:id="0.2334939770018778" name="workflowname" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7110861315129982" name="workflowdefaultproperties" title=""
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.6571030981641526" documentation="" description=""
+             name="webworkflowdefaults"
+             title="Web Workflow Defaults"
+             aspects="//@aspectSet.0 "
+             generalizations="//@classSet.4"/>
+      <classSet xmi:id="0.771392426105208" documentation="" description=""
+             name="renditionproperties"
+             title="Properties for renditions"
+             aspects="//@aspectSet.0 ">
+         <generalizations xmi:id="0.5489978124161277" href="sys.dt#//@classSet.0"/>
+         <attributes xmi:id="0.9528933863011112" name="mimetypeforrendition"
+                  title="Mimetype for generated assets"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.8877372540499188" documentation="" description="" name="formfolder"
+             title="XForms Capture Form Folder"
+             aspects="">
+         <generalizations xmi:id="0.09634178214855404" href="cm.dt#//@classSet.1"/>
+      </classSet>
+      <classSet xmi:id="0.533649547444578" documentation="" description=""
+             name="deploymentserver"
+             title="Website Deployment Server"
+             aspects="">
+         <generalizations xmi:id="0.4292678148306266" href="sys.dt#//@classSet.0"/>
+         <attributes xmi:id="0.41261837798913104" name="deploytype" title="Deployment Type"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""
+                  valueList="412664.7556396459"/>
+         <attributes xmi:id="0.9491591704737535" name="deployservertype"
+                  title="Deployment Server Type"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""
+                  valueList="2954.3868998437306"/>
+         <attributes xmi:id="0.8292287334677412" name="deployserverhost" title="Host"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.5173426163457695" name="deployserverport" title="Port"
+                  visibility="Public"
+                  typ="int"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.5192201184661369" name="deployservername" title="Display Name"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.6760451178025668" name="deployservergroup" title="Display Name"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.19287724023842046" name=" deployserveradaptername"
+                  title="Deployment Server Adapter Name"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7827642934181012" name="deployserverusername" title="Username"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.42781899728380546" name="deployserverpassword" title="Password"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7596206034815632" name="deployserverurl" title="Runtime URL"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7058836346564226" name="deployservertarget" title="Deploy Target"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.8278606117634315" name="deploysourcepath" title="Source Path"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.596835014172965" name="deployexcludes" title="Excludes"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.9893325607122287" name="deployserverallocatedto" title="Allocated To"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.8419391057128014" name="deployonapproval" title="Deploy On Approval"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.6308795238336058" documentation="" description=""
+             name="deploymentattempt"
+             title="Website Deployment Attempt"
+             aspects="">
+         <generalizations xmi:id="0.7317142153162597" href="sys.dt#//@classSet.0"/>
+         <attributes xmi:id="0.5706383202645963" name="deployattemptid" title="Deploy Attempt ID"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.381101122065696" name="deployattempttype" title="Attempt Type"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""
+                  valueList="2954.3868998437306"/>
+         <attributes xmi:id="0.6967636659710696" name="deployattemptstore" title="Attempt Type"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.5368120022072375" name="deployattemptversion"
+                  title="Snapshot Version Deployed"
+                  visibility="Public"
+                  typ="int"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.3318129021288322" name="deployattemptservers"
+                  title="Servers Deployed To"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.4887094291451928" name="deployattempttime"
+                  title="Time Of Deploy Attempt"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <associationSet xmi:id="0.8057463240786837" name="deploymentreports" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.66086959400052" name="deploymentreports" title="" cardMax="1"
+                linkedClass="//@classSet.9"/>
+         <secondEnd xmi:id="0.8561684239472585" name="deploymentreports" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.10"/>
+      </associationSet>
+      <classSet xmi:id="0.01775646363663519" documentation="" description=""
+             name="deploymentreport"
+             title="Website Deployment Report"
+             aspects="">
+         <generalizations xmi:id="0.2681241633905951" href="cm.dt#//@classSet.2"/>
+         <attributes xmi:id="0.6040583637809508" name="deployserver" title="Server Deployed To"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.19267046753925599" name="deployversion"
+                  title="Snapshot Version Deployed"
+                  visibility="Public"
+                  typ="int"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.2387223939858497" name="deploystarttime" title="Time Deploy Started"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.37188308050844066" name="deployendtime" title="Time Deploy Finished"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.5781997586454666" name="deploysuccessful"
+                  title="Deployment Successful"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7793809833020942" name="deployfailedreason" title="Failure Reason"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7526422364850762" name="deployservernameused"
+                  title="Server Display Name"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.14442328015852857" name="deployserverusernameused"
+                  title="Username Used"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.44165103776164916" name="deployservertargetused" title="Target Used"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.35185324329988976" name="deploysourcepathused"
+                  title="Source Path Used"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.3011811870173018" name="deployexcludesused" title="Excludes Used"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.6404502956005959" name="deployserverurlused" title="Source Path Used"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <aspectSet xmi:id="0.8664806713622659" name="webapp" title="Webapp" description=""
+              documentation=""/>
+      <aspectSet xmi:id="0.9025494210803661" name="filenamepattern" title="Filename Pattern"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.5517510958979218" name="filenamepattern" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.7151689979867191" name="outputpathpattern"
+              title="Output Path Pattern"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.83793877790943" name="outputpathpattern" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.20754635454524517" name="form" title="XForms Form" description=""
+              documentation="">
+         <attributes xmi:id="0.7062097866592754" name="xmlschemarootelementname"
+                  title="Schema Root Element Name"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.6452378848462037" name="xmlschema" title="Schema" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <associationSet xmi:id="0.43486223458919626" name="renderingenginetemplates"
+                   title="Form Data Renderers"
+                   description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.04324117434134567" name="renderingenginetemplates"
+                title="Form Data Renderers"
+                cardMax="1"
+                linkedClass="//@aspectSet.3"/>
+         <secondEnd xmi:id="0.9584419090818237" name="renderingenginetemplates"
+                 title="Form Data Renderers"
+                 navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.019510847939061438" xsi:type="clazz:Aspect"
+                      href="wca.dt#//@aspectSet.4"/>
+         </secondEnd>
+      </associationSet>
+      <associationSet xmi:id="0.5945355495466613" name="formworkflowdefaults" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.9784627143988792" name="formworkflowdefaults" title="" cardMax="1"
+                linkedClass="//@aspectSet.3"/>
+         <secondEnd xmi:id="0.40912861975033077" name="formworkflowdefaults" title=""
+                 navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.037414984116347805" xsi:type="clazz:Clazz"
+                      href="wca.dt#//@classSet.4"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.22666264196447627" name="renderingenginetemplate"
+              title="A Rendering Engine"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.5463410016357443" name="parentrenderingenginename" title="Type"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.035270351451210824" name="formsource" title="Form Source"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <associationSet xmi:id="0.7248821787656802" name="renditionproperties"
+                   title="Rendition Properties"
+                   description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.6084862569281205" name="renditionproperties"
+                title="Rendition Properties"
+                cardMax="1"
+                linkedClass="//@aspectSet.4"/>
+         <secondEnd xmi:id="0.6754816400594192" name="renditionproperties"
+                 title="Rendition Properties"
+                 navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.7075355291825378" xsi:type="clazz:Clazz" href="wca.dt#//@classSet.6"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.6060729597007909" name="forminstancedata"
+              title="XML file generated by a form"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.46672580809602837" name="parentformname"
+                  title="Form that generated this asset"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.49143774937988394" name="originalparentpath"
+                  title="The original parent path when this form instance data was created - used for regenerating accurately."
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.050265364991144534" name="renditions"
+                  title="Renditions of this form instance data"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.05370189555075122" name="rendition"
+              title="Output file generated by a rendering engine template"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.5318860602173276" name="parentrenderingenginetemplate"
+                  title="Form data renderer that generated this asset"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.9871669503155096" name="parentrenditionproperties"
+                  title="Rendition properties used for this rendition"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.14697296204899402" name="primaryforminstancedata"
+                  title="Primary XML Asset used to generate this asset"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.8815931961083696" name="expires"
+              title="Content that has or can expire"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.6366229144791778" name="expirationDate" title="Expiration Date"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+   </clazz:Model>

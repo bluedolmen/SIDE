@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="blg.dt#0.9921392030590325"/>
+  <diagrams position="0,0" size="100,100" name="blg" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Class.modeler.diagram">
+      <element href="blg.dt#0.9921392030590325"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="9,10" size="173,171">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="blg.dt#0.7968916455380773"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="blg.dt#0.7968916455380773"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.33295787489814765"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.9293794401860405"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.4587733659205797"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.7037681918314184"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.7892916166428079"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.6048341376622334"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.301041997803124"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="242,10" size="130,137">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="blg.dt#0.42477625355237125"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="blg.dt#0.42477625355237125"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.0966195423212538"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.791802663057782"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.38264017670420214"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.3874481344365921"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="blg.dt#0.13432204944442894"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

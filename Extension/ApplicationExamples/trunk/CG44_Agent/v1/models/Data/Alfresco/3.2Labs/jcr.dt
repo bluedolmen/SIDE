@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.17397202306029658"
+             name="jcr">
+      <classSet xmi:id="0.17359552276057255" documentation="" description="" name="base"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.8882024451387294" href="sys.dt#//@classSet.0"/>
+         <attributes xmi:id="0.4442042277679512" name="primaryType" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.8510226102510959" name="mixinTypes" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.6774431624888815" documentation="" description=""
+             name="hierarchyNode"
+             title=""
+             aspects=""
+             generalizations="//@classSet.0">
+         <attributes xmi:id="0.37790459248519626" name="created" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.935110389986329" documentation="" description="" name="file" title=""
+             aspects=""
+             generalizations="//@classSet.1"/>
+      <associationSet xmi:id="0.22009448965303335" name="content" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.5346790548934953" name="content" title="" cardMax="-1"
+                linkedClass="//@classSet.2"/>
+         <secondEnd xmi:id="0.5643058211593361" name="content" title="" navigable="true"
+                 cardMax="1"
+                 linkedClass="//@classSet.0"/>
+      </associationSet>
+      <classSet xmi:id="0.9488420448995818" documentation="" description="" name="folder"
+             title=""
+             aspects=""
+             generalizations="//@classSet.1"/>
+      <associationSet xmi:id="0.5829325722182347" name="contains" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.8090185434263436" name="contains" title="" cardMax="-1"
+                linkedClass="//@classSet.3"/>
+         <secondEnd xmi:id="0.7614755273620218" name="contains" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.1"/>
+      </associationSet>
+      <classSet xmi:id="0.6507116855730066" documentation="" description="" name="resource"
+             title=""
+             aspects="//@aspectSet.0 "
+             generalizations="//@classSet.0">
+         <attributes xmi:id="0.477757997153036" name="encoding" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.6463829646679752" name="mimeType" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.03225756540335645" name="data" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.03164191521644277" name="lastModified" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <aspectSet xmi:id="0.5822569591430319" name="referenceable" title="" description=""
+              documentation="">
+         <attributes xmi:id="0.17760823928178504" name="uuid" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.8444008351780727" name="lockable" title="" description=""
+              documentation="">
+         <attributes xmi:id="0.9339842583942443" name="lockOwner" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.45864586679054953" name="lockIsDeep" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+   </clazz:Model>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="st.dt#0.772886373249402"/>
+  <diagrams position="0,0" size="100,100" name="st" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Class.modeler.diagram">
+      <element href="st.dt#0.772886373249402"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="121,149" size="130,105">
+      <anchorage graphEdge="//@diagrams.0/@contained.4 //@diagrams.0/@contained.5"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="st.dt#0.5581353282494267"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="st.dt#0.5581353282494267"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="st.dt#0.0028193778159381067"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="st.dt#0.07345511417653772"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="st.dt#0.5581353282494267"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="st.dt#0.5581353282494267"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="9,10" size="50,79">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="st.dt#0.09225785003536591"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="st.dt#0.09225785003536591"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="st.dt#0.09225785003536591"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="st.dt#0.09225785003536591"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="119,10" size="135,69">
+      <anchorage graphEdge="//@diagrams.0/@contained.4 //@diagrams.0/@contained.5"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="st.dt#0.02459654515977716"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="st.dt#0.02459654515977716"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="st.dt#0.7077620952702528"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="314,10" size="182,69">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="st.dt#0.23594944215533264"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="st.dt#0.23594944215533264"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="st.dt#0.06998219446082032"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="include"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="hasAspect"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

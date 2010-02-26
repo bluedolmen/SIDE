@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.5451920926946386"
+             name="imap">
+      <classSet xmi:id="0.2865701232322262" documentation="" description="" name="imapFolder"
+             title="IMAP Folder"
+             aspects="">
+         <generalizations xmi:id="0.3874018616726951" href="cm.dt#//@classSet.1"/>
+         <attributes xmi:id="0.7895960660960103" name="nonSubscribed" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.6545067284073716" name="selectable" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.803369673206814" documentation="" description="" name="imapAttach"
+             title="Attachment to the IMAP message"
+             aspects="">
+         <generalizations xmi:id="0.3900748512066714" href="cm.dt#//@classSet.2"/>
+         <attributes xmi:id="0.9898091809919696" name="attachID" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.11101464364025415" documentation="" description="" name="imapBody"
+             title="Body of the IMAP message"
+             aspects="">
+         <generalizations xmi:id="0.0768822840534732" href="cm.dt#//@classSet.2"/>
+      </classSet>
+      <aspectSet xmi:id="0.027727949636867644" name="imapContent" title="IMAP File"
+              description=""
+              documentation="">
+         <generalizations xmi:id="0.1742525672446843" href="imap.dt#//@aspectSet.1"/>
+         <attributes xmi:id="0.021181542227957206" name="messageFrom" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.49453820163651674" name="messageTo" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.5455205708021491" name="messageCc" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.36357660834358096" name="messageSubject" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.19997154629549752" name="messageId" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.1054389332102672" name="threadIndex" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.4781745580401514" name="dateReceived" title="Date Received"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.4948914689021242" name="dateSent" title="Date Sent"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <associationSet xmi:id="0.23194239689307694" name="attachment" title="Attachment"
+                   description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.3770630315170639" name="attachment" title="Attachment" cardMax="1"
+                linkedClass="//@aspectSet.0"/>
+         <secondEnd xmi:id="0.7080890042564806" name="attachment" title="Attachment"
+                 navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.23488309399852325" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.0"/>
+         </secondEnd>
+      </associationSet>
+      <associationSet xmi:id="0.8628434442857509" name="attachmentsFolder" title="Attachments Folder"
+                   description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.7411609231209108" name="attachmentsFolder" title="Attachments Folder"
+                cardMax="1"
+                linkedClass="//@aspectSet.0"/>
+         <secondEnd xmi:id="0.713042416707842" name="attachmentsFolder" title="Attachments Folder"
+                 navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.043864676406710545" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.0"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.13446632520138202" name="flaggable" title="" description=""
+              documentation="">
+         <attributes xmi:id="0.9082400991699064" name="flagAnswered" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.1061742446170737" name="flagDeleted" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.16401210987815562" name="flagDraft" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.4694438354601901" name="flagSeen" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7942983792610521" name="flagRecent" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.818007614917139" name="flagFlagged" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.6474143377261636" name="nonSubscribed" title="" description=""
+              documentation=""/>
+      <aspectSet xmi:id="0.8628881179947167" name="nonselectable" title="" description=""
+              documentation=""/>
+   </clazz:Model>

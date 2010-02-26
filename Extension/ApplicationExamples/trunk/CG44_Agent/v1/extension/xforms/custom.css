@@ -1,0 +1,26 @@
+/* ***************************************************************************** */
+/* *** custom CSS *** */
+
+.group{
+    padding:10px;
+    margin:10px;
+    background:#eeeeee;
+}
+
+.group div{
+    display:block;
+}
+
+.full-group label {
+	float:left;
+	width:200px;
+}
+
+.full-group .value {
+	margin-left:20px;
+	width:200px;
+}
+
+.input label, .textarea label, .full-group label {
+	height:15px;
+}

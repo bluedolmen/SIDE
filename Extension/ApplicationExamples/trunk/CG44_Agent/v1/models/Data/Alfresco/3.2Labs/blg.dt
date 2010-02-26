@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.6004118472369121"
+             name="blg">
+      <aspectSet xmi:id="0.09542077697693874" name="blogDetails" title="Blog Details"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.9345246514631511" name="blogImplementation" title="Blog Type"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.930900717148522" name="id" title="Blog Identifier"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.5808873616939529" name="name" title="Blog Name" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.723987006281497" name="description" title="Blog Description"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.18046821922675382" name="url" title="Blog URL" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.5452280406727807" name="userName" title="Blog User Name"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.9388137426865147" name="password" title="Blog User Password"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.24760386309799298" name="blogPost" title="Blog Post" description=""
+              documentation="">
+         <attributes xmi:id="0.9886759542231196" name="postId" title="Blog post identifier"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.30411154260766016" name="published" title="Blog published"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.2877285880609871" name="link" title="Blog post link"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.12525618022024" name="posted" title="Date posted" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.682716642254476" name="lastUpdate" title="Date last updated"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <associationSet xmi:id="0.8909613854059794" name="blogDetails" title="Blog details"
+                   description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.6216235780155782" name="blogDetails" title="Blog details"
+                cardMax="-1"
+                linkedClass="//@aspectSet.1"/>
+         <secondEnd xmi:id="0.8178171649671019" name="blogDetails" title="Blog details"
+                 navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.2571165448305939" xsi:type="clazz:Aspect"
+                      href="blg.dt#//@aspectSet.0"/>
+         </secondEnd>
+      </associationSet>
+   </clazz:Model>

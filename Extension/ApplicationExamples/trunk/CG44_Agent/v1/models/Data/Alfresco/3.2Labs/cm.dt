@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="0.37201408170177275" name="cm">
+  <classSet xmi:id="0.7982142734367504" documentation="" description="" name="cmobject" title="Object" aspects="0.9473708660699585">
+    <attributes xmi:id="0.38362934909383717" documentation="" description="" name="name" title="Name" visibility="Public"/>
+    <generalizations href="sys.dt#0.7781428490504174"/>
+  </classSet>
+  <classSet xmi:id="0.6405372130951577" documentation="" description="" name="folder" title="Folder" generalizations="0.7982142734367504"/>
+  <classSet xmi:id="0.7536340115887051" documentation="" description="" name="content" title="Content" generalizations="0.7982142734367504">
+    <attributes xmi:id="0.25610174854608825" documentation="" description="" name="content" title="" typ="Object" visibility="Public"/>
+  </classSet>
+  <classSet xmi:id="0.631091793112173" documentation="" description="" name="dictionaryModel" title="Dictionary Model" generalizations="0.7536340115887051">
+    <attributes xmi:id="0.9116345921278239" documentation="" description="" name="modelName" title="Model name" typ="Object" visibility="Public"/>
+    <attributes xmi:id="0.2590990979526142" documentation="" description="" name="modelDescription" title="Description" visibility="Public"/>
+    <attributes xmi:id="0.30315812745724746" documentation="" description="" name="modelAuthor" title="Author" visibility="Public"/>
+    <attributes xmi:id="0.22975808964346223" documentation="" description="" name="modelPublishedDate" title="Published Date" typ="Date" visibility="Public"/>
+    <attributes xmi:id="0.418289599273695" documentation="" description="" name="modelVersion" title="Version" visibility="Public"/>
+    <attributes xmi:id="0.7019667339709746" documentation="" description="" name="modelActive" title="Model Active" typ="boolean" visibility="Public"/>
+  </classSet>
+  <classSet xmi:id="0.5883753533917997" documentation="" description="" name="link" title="Link Object" generalizations="0.7982142734367504">
+    <attributes xmi:id="0.5134170063685823" documentation="" description="" name="destination" title="Link Destination" typ="Object" visibility="Public"/>
+  </classSet>
+  <classSet xmi:id="0.07103012170003697" documentation="" description="" name="savedquery" title="Saved Query" generalizations="0.7536340115887051"/>
+  <classSet xmi:id="0.9266359666544088" documentation="" description="" name="systemfolder" title="System Folder" generalizations="0.6405372130951577"/>
+  <classSet xmi:id="0.5758440104146785" documentation="" description="" name="authority" title="Alfresco Authority Abstract Type">
+    <generalizations href="sys.dt#0.7781428490504174"/>
+  </classSet>
+  <classSet xmi:id="0.5720345108377652" documentation="" description="" name="person" title="Person" generalizations="0.5758440104146785">
+    <attributes xmi:id="0.6294322832256671" documentation="" description="" name="userName" title="" visibility="Public"/>
+    <attributes xmi:id="0.12717850794970742" documentation="" description="" name="homeFolder" title="" typ="Object" visibility="Public"/>
+    <attributes xmi:id="0.589840801328002" documentation="" description="" name="firstName" title="" visibility="Public"/>
+    <attributes xmi:id="0.41924506554719676" documentation="" description="" name="lastName" title="" visibility="Public"/>
+    <attributes xmi:id="0.12188950477361027" documentation="" description="" name="middleName" title="" visibility="Public"/>
+    <attributes xmi:id="0.5854702760367986" documentation="" description="" name="email" title="" visibility="Public"/>
+    <attributes xmi:id="0.873744488140091" documentation="" description="" name="organizationId" title="" visibility="Public"/>
+    <attributes xmi:id="0.9448029004699324" documentation="" description="" name="homeFolderProvider" title="" visibility="Public"/>
+    <attributes xmi:id="0.19723941506450426" documentation="" description="" name="defaultHomeFolderPath" title="" visibility="Public"/>
+    <attributes xmi:id="0.9074637013215644" documentation="" description="" name="presenceProvider" title="" visibility="Public"/>
+    <attributes xmi:id="0.6840342959666451" documentation="" description="" name="presenceUsername" title="" visibility="Public"/>
+    <attributes xmi:id="0.6954828516403476" documentation="" description="" name="organization" title="" visibility="Public"/>
+    <attributes xmi:id="0.4269216206506914" documentation="" description="" name="jobtitle" title="" visibility="Public"/>
+    <attributes xmi:id="0.7999175408213891" documentation="" description="" name="location" title="" visibility="Public"/>
+    <attributes xmi:id="0.5029986976146313" documentation="" description="" name="persondescription" title="" typ="Object" visibility="Public"/>
+    <attributes xmi:id="0.42993923739931794" documentation="" description="" name="telephone" title="" visibility="Public"/>
+    <attributes xmi:id="0.2578717681630064" documentation="" description="" name="mobile" title="" visibility="Public"/>
+    <attributes xmi:id="0.9303731222872879" documentation="" description="" name="companyaddress1" title="" visibility="Public"/>
+    <attributes xmi:id="0.4839620605335767" documentation="" description="" name="companyaddress2" title="" visibility="Public"/>
+    <attributes xmi:id="0.6999558662831128" documentation="" description="" name="companyaddress3" title="" visibility="Public"/>
+    <attributes xmi:id="0.48154171097249887" documentation="" description="" name="companypostcode" title="" visibility="Public"/>
+    <attributes xmi:id="0.803057830139122" documentation="" description="" name="companytelephone" title="" visibility="Public"/>
+    <attributes xmi:id="0.17165752486506447" documentation="" description="" name="companyfax" title="" visibility="Public"/>
+    <attributes xmi:id="0.5815270585937821" documentation="" description="" name="companyemail" title="" visibility="Public"/>
+    <attributes xmi:id="0.0020499242126525985" documentation="" description="" name="skype" title="" visibility="Public"/>
+    <attributes xmi:id="0.8174105984810548" documentation="" description="" name="instantmsg" title="" visibility="Public"/>
+    <attributes xmi:id="0.9101121513889733" documentation="" description="" name="sizeCurrent" title="" typ="long" visibility="Public"/>
+    <attributes xmi:id="0.6264784939277694" documentation="" description="" name="sizeQuota" title="" typ="long" visibility="Public"/>
+  </classSet>
+  <classSet xmi:id="0.5164704081803232" documentation="" description="" name="authorityContainer" title="Alfresco Authority Type" generalizations="0.5758440104146785">
+    <attributes xmi:id="0.005901201207352713" documentation="" description="" name="authorityName" title="" visibility="Public"/>
+    <attributes xmi:id="0.5176530677231043" documentation="" description="" name="authorityDisplayName" title="" visibility="Public"/>
+  </classSet>
+  <classSet xmi:id="0.15285735214710494" documentation="" description="" name="zone" title="Alfresco Authentication Zone Type" generalizations="0.7982142734367504"/>
+  <classSet xmi:id="0.6187829661415686" documentation="" description="" name="category_root" title="Category Root" generalizations="0.7982142734367504" aspects="0.9473708660699585"/>
+  <classSet xmi:id="0.3686214967700078" documentation="" description="" name="category" title="Category" generalizations="0.7982142734367504"/>
+  <classSet xmi:id="0.06272241480446061" documentation="" description="" name="mlRoot" title="Multilingual Root">
+    <generalizations href="sys.dt#0.6089810092477961"/>
+  </classSet>
+  <classSet xmi:id="0.1689757241637747" documentation="" description="" name="mlContainer" title="Multilingual Container" aspects="0.9473708660699585 0.30018804618364936 0.21359250960865273">
+    <generalizations href="sys.dt#0.6089810092477961"/>
+  </classSet>
+  <classSet xmi:id="0.336731296743378" documentation="" description="" name="thumbnail" title="Thumbnail" generalizations="0.7536340115887051">
+    <attributes xmi:id="0.5914306229287851" documentation="" description="" name="thumbnailName" title="Thumbnail Name" visibility="Public"/>
+    <attributes xmi:id="0.4314377601656175" documentation="" description="" name="contentPropertyName" title="Thumbnailed Content Property Name" typ="Object" visibility="Public"/>
+  </classSet>
+  <associationSet xmi:id="0.09390696355615025" description="" name="contains" title="" associationType="Composition">
+    <firstEnd xmi:id="0.09695331404933394" name="contains" title="" cardMax="-1" linkedClass="0.6405372130951577"/>
+    <secondEnd xmi:id="0.6885321309726998" name="contains" title="" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="sys.dt#0.7781428490504174"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="0.34355636651748644" description="" name="avatar" title="">
+    <firstEnd xmi:id="0.3597236739709846" name="avatar" title="" linkedClass="0.5720345108377652"/>
+    <secondEnd xmi:id="0.5055799982286571" name="avatar" title="" navigable="true" linkedClass="0.7536340115887051"/>
+  </associationSet>
+  <associationSet xmi:id="0.8341286477465979" description="" name="member" title="" associationType="Composition">
+    <firstEnd xmi:id="0.2186074343735278" name="member" title="" cardMax="-1" linkedClass="0.5164704081803232"/>
+    <secondEnd xmi:id="0.6027417958800915" name="member" title="" cardMax="-1" navigable="true" linkedClass="0.5758440104146785"/>
+  </associationSet>
+  <associationSet xmi:id="0.86180524609989" description="" name="inZone" title="" associationType="Composition">
+    <firstEnd xmi:id="0.6655133247959376" name="inZone" title="" cardMax="-1" linkedClass="0.15285735214710494"/>
+    <secondEnd xmi:id="0.6978680221031487" name="inZone" title="" cardMax="-1" navigable="true" linkedClass="0.5758440104146785"/>
+  </associationSet>
+  <associationSet xmi:id="0.9798785327685359" description="" name="categories" title="" associationType="Composition">
+    <firstEnd xmi:id="0.11261058605510843" name="categories" title="" cardMax="-1" linkedClass="0.6187829661415686"/>
+    <secondEnd xmi:id="0.39307109267568363" name="categories" title="" cardMax="-1" navigable="true" linkedClass="0.3686214967700078"/>
+  </associationSet>
+  <associationSet xmi:id="0.6484731491817854" description="" name="subcategories" title="" associationType="Composition">
+    <firstEnd xmi:id="0.3614785482303894" name="subcategories" title="" cardMax="-1" linkedClass="0.3686214967700078"/>
+    <secondEnd xmi:id="0.014886479575740297" name="subcategories" title="" cardMax="-1" navigable="true" linkedClass="0.3686214967700078"/>
+  </associationSet>
+  <associationSet xmi:id="0.9805459070642921" description="" name="mlContainer" title="" associationType="Composition">
+    <firstEnd xmi:id="0.6977268214239125" name="mlContainer" title="" linkedClass="0.06272241480446061"/>
+    <secondEnd xmi:id="0.5552525016492027" name="mlContainer" title="" cardMax="-1" navigable="true" linkedClass="0.1689757241637747"/>
+  </associationSet>
+  <associationSet xmi:id="0.26736597626765524" description="" name="mlChild" title="" associationType="Composition">
+    <firstEnd xmi:id="0.3166510439815553" name="mlChild" title="" linkedClass="0.1689757241637747"/>
+    <secondEnd xmi:id="0.6828500370690135" name="mlChild" title="" cardMax="-1" navigable="true" linkedClass="0.6263535963678442"/>
+  </associationSet>
+  <associationSet xmi:id="0.745449871890544" description="" name="formats" title="Formats">
+    <firstEnd xmi:id="0.6195202449448729" name="formats" title="Formats" linkedClass="0.21359250960865273"/>
+    <secondEnd xmi:id="0.9633048612528404" name="formats" title="Formats" cardMax="-1" navigable="true" linkedClass="0.7536340115887051"/>
+  </associationSet>
+  <associationSet xmi:id="0.9608894384492332" description="" name="basis" title="">
+    <firstEnd xmi:id="0.7340559321798809" name="basis" title="" cardMax="-1" linkedClass="0.357862158070275"/>
+    <secondEnd xmi:id="0.25467881314032936" name="basis" title="" cardMax="-1" navigable="true" linkedClass="0.7536340115887051"/>
+  </associationSet>
+  <associationSet xmi:id="0.5273276686922581" description="" name="parts" title="">
+    <firstEnd xmi:id="0.6467696746712821" name="parts" title="" cardMax="-1" linkedClass="0.9381843542938134"/>
+    <secondEnd xmi:id="0.20889091248351543" name="parts" title="" cardMax="-1" navigable="true" linkedClass="0.7536340115887051"/>
+  </associationSet>
+  <associationSet xmi:id="0.25238303508217097" description="" name="references" title="">
+    <firstEnd xmi:id="0.2507739941220598" name="references" title="" cardMax="-1" linkedClass="0.36821703235759784"/>
+    <secondEnd xmi:id="0.32762866121509404" name="references" title="" cardMax="-1" navigable="true" linkedClass="0.7536340115887051"/>
+  </associationSet>
+  <associationSet xmi:id="0.7015933261619915" description="" name="replaces" title="">
+    <firstEnd xmi:id="0.281442856794355" name="replaces" title="" cardMax="-1" linkedClass="0.9959403753863127"/>
+    <secondEnd xmi:id="0.6432442304326529" name="replaces" title="" cardMax="-1" navigable="true" linkedClass="0.7536340115887051"/>
+  </associationSet>
+  <associationSet xmi:id="0.11734619882606645" description="" name="subscribedBy" title="">
+    <firstEnd xmi:id="0.2724090067919753" name="subscribedBy" title="" cardMax="-1" linkedClass="0.27849962005047546"/>
+    <secondEnd xmi:id="0.36748490265114875" name="subscribedBy" title="" cardMax="-1" navigable="true" linkedClass="0.5720345108377652"/>
+  </associationSet>
+  <associationSet xmi:id="0.20325323654834593" description="" name="attachments" title="">
+    <firstEnd xmi:id="0.861220129144649" name="attachments" title="" cardMax="-1" linkedClass="0.9425430616951485"/>
+    <secondEnd xmi:id="0.9403836461589669" name="attachments" title="" cardMax="-1" navigable="true" linkedClass="0.7982142734367504"/>
+  </associationSet>
+  <associationSet xmi:id="0.7849970708333167" description="" name="thumbnails" title="" associationType="Composition">
+    <firstEnd xmi:id="0.9616145679264273" name="thumbnails" title="" cardMax="-1" linkedClass="0.5388238967183049"/>
+    <secondEnd xmi:id="0.8941836376603333" name="thumbnails" title="" cardMax="-1" navigable="true" linkedClass="0.336731296743378"/>
+  </associationSet>
+  <associationSet xmi:id="0.4082778021941408" description="" name="preferenceImage" title="" associationType="Composition">
+    <firstEnd xmi:id="0.3101731253733897" name="preferenceImage" title="" linkedClass="0.626996379910883"/>
+    <secondEnd xmi:id="0.894847781888793" name="preferenceImage" title="" navigable="true" linkedClass="0.7536340115887051"/>
+  </associationSet>
+  <aspectSet xmi:id="0.9473708660699585" documentation="" description="" name="titled" title="Titled">
+    <attributes xmi:id="0.7820772452513156" documentation="" description="" name="title" title="Title" visibility="Public"/>
+    <attributes xmi:id="0.4825015239967553" documentation="" description="" name="description" title="Description" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.30018804618364936" documentation="" description="" name="auditable" title="Auditable">
+    <attributes xmi:id="0.0032231781442160212" documentation="" description="" name="created" title="Created" typ="Date" visibility="Public"/>
+    <attributes xmi:id="0.12088691694380316" documentation="" description="" name="creator" title="Creator" visibility="Public"/>
+    <attributes xmi:id="0.3146210370596195" documentation="" description="" name="modified" title="Modified" typ="Date" visibility="Public"/>
+    <attributes xmi:id="0.5699980994363929" documentation="" description="" name="modifier" title="Modifier" visibility="Public"/>
+    <attributes xmi:id="0.7420895587062584" documentation="" description="" name="accessed" title="Accessed" typ="Date" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.21359250960865273" documentation="" description="" name="transformable" title="Transformable"/>
+  <aspectSet xmi:id="0.32401053594605056" documentation="" description="" name="templatable" title="Templatable">
+    <attributes xmi:id="0.1326566482653886" documentation="" description="" name="template" title="Template" typ="Object" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.7049676812614101" documentation="" description="" name="webscriptable" title="Webscriptable">
+    <attributes xmi:id="0.95530567119143" documentation="" description="" name="webscript" title="Webscript" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.3079004285197756" documentation="" description="" name="projectsummary" title="Project Summary">
+    <attributes xmi:id="0.9092571653763104" documentation="" description="" name="summaryWebscript" title="Project Summary Webscript" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.19145849358877653" documentation="" description="" name="complianceable" title="Complianceable">
+    <attributes xmi:id="0.9508109204639603" documentation="" description="" name="removeAfter" title="Remove After" typ="Date" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.7140533454708407" documentation="" description="" name="ownable" title="Ownable">
+    <attributes xmi:id="0.0816754247935304" documentation="" description="" name="owner" title="Owner" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.39263382596410035" documentation="" description="" name="author" title="Author">
+    <attributes xmi:id="0.6563745861572436" documentation="" description="" name="author" title="Author" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.4835726024812479" documentation="" description="" name="dublincore" title="Dublin Core" generalizations="0.9473708660699585">
+    <attributes xmi:id="0.4995368129447939" documentation="" description="" name="publisher" title="Publisher" visibility="Public"/>
+    <attributes xmi:id="0.14034940272524643" documentation="" description="" name="contributor" title="Contributor" visibility="Public"/>
+    <attributes xmi:id="0.6538551747335444" documentation="" description="" name="type" title="Type" visibility="Public"/>
+    <attributes xmi:id="0.5441407099709956" documentation="" description="" name="identifier" title="Identifier" visibility="Public"/>
+    <attributes xmi:id="0.5872844262145538" documentation="" description="" name="dcsource" title="Source" visibility="Public"/>
+    <attributes xmi:id="0.8228220735700406" documentation="" description="" name="coverage" title="Coverage" visibility="Public"/>
+    <attributes xmi:id="0.6001707574712767" documentation="" description="" name="rights" title="Rights" visibility="Public"/>
+    <attributes xmi:id="0.5419661338090951" documentation="" description="" name="subject" title="Subject" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.357862158070275" documentation="" description="" name="basable" title="Basable"/>
+  <aspectSet xmi:id="0.9381843542938134" documentation="" description="" name="partable" title="Partable"/>
+  <aspectSet xmi:id="0.36821703235759784" documentation="" description="" name="referencing" title="Referencing"/>
+  <aspectSet xmi:id="0.9959403753863127" documentation="" description="" name="replaceable" title="Replacable"/>
+  <aspectSet xmi:id="0.020865808515468487" documentation="" description="" name="effectivity" title="Effectivity">
+    <attributes xmi:id="0.0038213448925968896" documentation="" description="" name="from" title="Effective From" typ="Date" visibility="Public"/>
+    <attributes xmi:id="0.6073244781867635" documentation="" description="" name="to" title="Effective To" typ="Date" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.8191611031127255" documentation="" description="" name="summarizable" title="Summarizable">
+    <attributes xmi:id="0.17857984875348387" documentation="" description="" name="summary" title="Summary" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.061728251574035053" documentation="" description="" name="countable" title="Countable">
+    <attributes xmi:id="0.2633773127550132" documentation="" description="" name="hits" title="" typ="int" visibility="Public"/>
+    <attributes xmi:id="0.405290741926159" documentation="" description="" name="counter" title="" typ="int" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.020208226418932274" documentation="" description="" name="copiedfrom" title="Copied From">
+    <attributes xmi:id="0.9828277279518478" documentation="" description="" name="source" title="" typ="Object" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.16503268864145892" documentation="" description="" name="workingcopy" title="Working Copy">
+    <attributes xmi:id="0.03168572855517071" documentation="" description="" name="workingCopyOwner" title="" visibility="Public"/>
+    <attributes xmi:id="0.9980052457866807" documentation="" description="" name="workingCopyMode" title="" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.09992924345825671" documentation="" description="" name="versionable" title="Versionable">
+    <attributes xmi:id="0.4822780946979597" documentation="" description="" name="versionLabel" title="Version Label" visibility="Public"/>
+    <attributes xmi:id="0.25794464241450743" documentation="" description="" name="initialVersion" title="Initial Version" typ="boolean" visibility="Public"/>
+    <attributes xmi:id="0.29120176130967057" documentation="" description="" name="autoVersion" title="Auto Version" typ="boolean" visibility="Public"/>
+    <attributes xmi:id="0.8083249503667671" documentation="" description="" name="autoVersionOnUpdateProps" title="Auto Version - on update properties only" typ="boolean" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.2433448857856103" documentation="" description="" name="lockable" title="Lockable">
+    <attributes xmi:id="0.7521585961145555" documentation="" description="" name="lockOwner" title="" visibility="Public"/>
+    <attributes xmi:id="0.5222819966025977" documentation="" description="" name="lockType" title="" visibility="Public"/>
+    <attributes xmi:id="0.3809474878447824" documentation="" description="" name="expiryDate" title="" typ="Date" visibility="Public"/>
+    <attributes xmi:id="0.16774765917942647" documentation="" description="" name="lockIsDeep" title="" typ="boolean" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.27849962005047546" documentation="" description="" name="subscribable" title=""/>
+  <aspectSet xmi:id="0.8556337462965413" documentation="" description="" name="classifiable" title="Classifiable"/>
+  <aspectSet xmi:id="0.5353646213384987" documentation="" description="" name="generalclassifiable" title="General Classifiable" generalizations="0.8556337462965413">
+    <attributes xmi:id="0.18437766484490603" documentation="" description="" name="categories" title="Categories" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.3066011510668595" documentation="" description="" name="taggable" title="Taggable" generalizations="0.8556337462965413">
+    <attributes xmi:id="0.46178087703603465" documentation="" description="" name="taggable" title="Tags" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.9640155070476778" documentation="" description="" name="tagscope" title="Tag Scope">
+    <attributes xmi:id="0.66252055626111" documentation="" description="" name="tagScopeCache" title="Tags" typ="Object" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.9425430616951485" documentation="" description="" name="attachable" title="Attachable"/>
+  <aspectSet xmi:id="0.9564052528807366" documentation="" description="" name="emailed" title="Emailed">
+    <attributes xmi:id="0.12038122077970259" documentation="" description="" name="originator" title="Originator" visibility="Public"/>
+    <attributes xmi:id="0.6489669267856352" documentation="" description="" name="addressee" title="Addressee" visibility="Public"/>
+    <attributes xmi:id="0.4697742574419431" documentation="" description="" name="addressees" title="Addressees" visibility="Public"/>
+    <attributes xmi:id="0.4394799190810432" documentation="" description="" name="subjectline" title="Subject" visibility="Public"/>
+    <attributes xmi:id="0.761169853372487" documentation="" description="" name="sentdate" title="Sent Date" typ="Date" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.7952344138653968" documentation="" description="" name="referencesnode" title="References Node">
+    <attributes xmi:id="0.6131377795507639" documentation="" description="" name="noderef" title="Node Reference" typ="Object" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.6263535963678442" documentation="" description="" name="mlDocument" title="Multilingual Document"/>
+  <aspectSet xmi:id="0.4551679142836569" documentation="" description="" name="mlEmptyTranslation" title="Empty Translation"/>
+  <aspectSet xmi:id="0.5388238967183049" documentation="" description="" name="thumbnailed" title="Thumbnailed">
+    <attributes xmi:id="0.21075524374947507" documentation="" description="" name="automaticUpdate" title="Automatic Update" typ="boolean" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.9321932514229557" documentation="" description="" name="storeSelector" title="ContentStore Selector">
+    <attributes xmi:id="0.887803683611001" documentation="" description="" name="storeName" title="Store Name" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.626996379910883" documentation="" description="" name="preferences" title="Preferences">
+    <attributes xmi:id="0.8366754079359238" documentation="" description="" name="preferenceValues" title="" typ="Object" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.882113563374856" documentation="" description="" name="syndication" title="Content syndication">
+    <attributes xmi:id="0.9688852935156502" documentation="" description="" name="published" title="Published" typ="Date" visibility="Public"/>
+    <attributes xmi:id="0.24166725951910617" documentation="" description="" name="updated" title="Updated" typ="Date" visibility="Public"/>
+  </aspectSet>
+</clazz:Model>

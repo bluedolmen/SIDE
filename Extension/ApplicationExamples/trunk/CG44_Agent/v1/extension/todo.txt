@@ -1,0 +1,9 @@
+* copier le fichier alfresco/web-client-config-custom.xml dans :
+	tomcat/shared/classes/alfresco/extension
+* copier le fichier xforms/custom.css dans :
+	tomcat/webapps/xforms/resources/styles
+* copier le fichier facetmap/facetmap.css dans :
+	tomcat/webapps/facetmap/xsl/display
+	
+Facetmap : To Generate
+	http://localhost:8080/facetmap/browseSimple-updateAll.jsp?userName=admin&userpwd=admin

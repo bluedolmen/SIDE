@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.47094978399149645"
+             name="st">
+      <classSet xmi:id="0.0016303883413297804" documentation="" description="" name="site"
+             title="Site"
+             aspects="//@aspectSet.0 ">
+         <generalizations xmi:id="0.12593846685414967" href="cm.dt#//@classSet.1"/>
+         <attributes xmi:id="0.7025470424478677" name="sitePreset" title="Site Preset"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.36621868133321567" name="siteVisibility" title="Site Visibility"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.4593979560850817" documentation="" description="" name="sites"
+             title="Sites"
+             aspects="">
+         <generalizations xmi:id="0.6046614391944853" href="cm.dt#//@classSet.1"/>
+      </classSet>
+      <aspectSet xmi:id="0.7559059930177499" name="siteContainer" title="Site Container"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.12924873540674087" name="componentId" title="Component Id"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.7765828821017503" name="customSiteProperties"
+              title="Custom Site Properties"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.6835923567572123" name="additionalInformation"
+                  title="Additional Site Information"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+   </clazz:Model>

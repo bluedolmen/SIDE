@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_eUFqsBAHEd-QPZneBoCQXA" name="CG44Agent">
+  <classSet xmi:id="_fcgEQBAHEd-QPZneBoCQXA" documentation="" description="" name="Document" title="Document">
+    <attributes xmi:id="_gPLeYBAHEd-QPZneBoCQXA" documentation="" description="" name="Version" title="Version"/>
+    <attributes xmi:id="_gcQ4IBAHEd-QPZneBoCQXA" documentation="" description="" name="Description" title="Description"/>
+    <attributes xmi:id="_gsuWABAHEd-QPZneBoCQXA" documentation="" description="" name="DateNumerisation" title="Date de la numerisation" typ="Date"/>
+    <attributes xmi:id="_iEQJoBAHEd-QPZneBoCQXA" documentation="" description="" name="Categorie" title="Categorie" valueList="_rFReMBAHEd-QPZneBoCQXA"/>
+    <attributes xmi:id="_X0njACAEEd-8qvQk7m7roQ" documentation="" description="" name="Origine" title="Origine" valueList="_GSRtoCAEEd-8qvQk7m7roQ"/>
+    <attributes xmi:id="_wtikYCAEEd-8qvQk7m7roQ" documentation="" description="" name="Nature" title="Nature" valueList="_L8F10CAEEd-8qvQk7m7roQ"/>
+    <attributes xmi:id="_0AWY8CAEEd-8qvQk7m7roQ" documentation="" description="" name="Objet" title="Objet" valueList="_Sq8TcCAEEd-8qvQk7m7roQ"/>
+  </classSet>
+  <classSet xmi:id="_HJUnoBDgEd-eFJrsZcrkww" name="Dossier">
+    <attributes xmi:id="_qeSUMCABEd-8qvQk7m7roQ" documentation="" description="" name="Matricule" title="Matricule">
+      <metainfo xmi:id="_1XlZACABEd-8qvQk7m7roQ" key="required" value="True"/>
+      <metainfo xmi:id="_1XlZASABEd-8qvQk7m7roQ" key="propertySearched" value="True"/>
+    </attributes>
+    <attributes xmi:id="_uuPtgCABEd-8qvQk7m7roQ" documentation="" description="" name="Nom" title="Nom">
+      <metainfo xmi:id="_216YMCABEd-8qvQk7m7roQ" key="propertySearched" value="True"/>
+      <metainfo xmi:id="_216YMSABEd-8qvQk7m7roQ" key="required" value="True"/>
+    </attributes>
+    <attributes xmi:id="_yhCpsCABEd-8qvQk7m7roQ" documentation="" description="" name="Prenom" title="Prénom">
+      <metainfo xmi:id="_3_Ql4CABEd-8qvQk7m7roQ" key="required" value="True"/>
+      <metainfo xmi:id="_3_Ql4SABEd-8qvQk7m7roQ" key="propertySearched" value="True"/>
+    </attributes>
+    <generalizations href="Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
+  </classSet>
+  <enumerationSet xmi:id="_rFReMBAHEd-QPZneBoCQXA" name="Categorie">
+    <literals xmi:id="_TarOECIDEd-R7N33Hlrq_A" value="A" name="A-Recrutement"/>
+    <literals xmi:id="_TarOESIDEd-R7N33Hlrq_A" value="B" name="B-Carriere"/>
+    <literals xmi:id="_TarOEiIDEd-R7N33Hlrq_A" value="C" name="C-Maladie,Maternite,Accident du travail"/>
+    <literals xmi:id="_TarOEyIDEd-R7N33Hlrq_A" value="D" name="D-Absenteisme"/>
+    <literals xmi:id="_TarOFCIDEd-R7N33Hlrq_A" value="E" name="E-Remuneration"/>
+    <literals xmi:id="_TarOFSIDEd-R7N33Hlrq_A" value="F" name="F-Notation"/>
+    <literals xmi:id="_TarOFiIDEd-R7N33Hlrq_A" value="G" name="G-Formation"/>
+    <literals xmi:id="_TarOFyIDEd-R7N33Hlrq_A" value="H" name="H-Retraite"/>
+    <literals xmi:id="_TarOGCIDEd-R7N33Hlrq_A" value="I" name="I-Discipline"/>
+    <literals xmi:id="_TarOGSIDEd-R7N33Hlrq_A" value="J" name="J-Courriers ordinaires"/>
+    <literals xmi:id="_TarOGiIDEd-R7N33Hlrq_A" value="K" name="K-Autres pieces"/>
+  </enumerationSet>
+  <enumerationSet xmi:id="_GSRtoCAEEd-8qvQk7m7roQ" name="Origine">
+    <literals xmi:id="_ho_G4CIDEd-R7N33Hlrq_A" value="Agent" name="Agent"/>
+    <literals xmi:id="_ho_G4SIDEd-R7N33Hlrq_A" value="Employeur" name="Employeur"/>
+    <literals xmi:id="_ho_G4iIDEd-R7N33Hlrq_A" value="Autre" name="Autre"/>
+  </enumerationSet>
+  <enumerationSet xmi:id="_L8F10CAEEd-8qvQk7m7roQ" name="Nature">
+    <literals xmi:id="_dfhXICIDEd-R7N33Hlrq_A" value="A" name="Arrete"/>
+    <literals xmi:id="_dfhXISIDEd-R7N33Hlrq_A" value="B" name="Courrier"/>
+    <literals xmi:id="_dfhXIiIDEd-R7N33Hlrq_A" value="C" name="Attestion, Certificat, Etat"/>
+    <literals xmi:id="_dfhXIyIDEd-R7N33Hlrq_A" value="D" name="Autre"/>
+  </enumerationSet>
+  <enumerationSet xmi:id="_Sq8TcCAEEd-8qvQk7m7roQ" name="Objet">
+    <literals xmi:id="_Xm2TkCIDEd-R7N33Hlrq_A" value="Objet1" name="Objet1"/>
+    <literals xmi:id="_Xm2TkSIDEd-R7N33Hlrq_A" value="Objet2" name="Objet2"/>
+    <literals xmi:id="_Xm2TkiIDEd-R7N33Hlrq_A" value="Objet3" name="Objet3"/>
+  </enumerationSet>
+</clazz:Model>

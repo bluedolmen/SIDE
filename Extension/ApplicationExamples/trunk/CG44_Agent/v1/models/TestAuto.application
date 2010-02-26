@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ASCII"?>
+<app:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:app="http://www.bluexml.com/application/1.0/">
+  <elements xsi:type="app:Configuration" name="TestAuto" description="">
+    <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.view.generator.alfresco.ViewAlfrescoGenerator" id="com.bluexml.side.View.generator.alfresco" metaModelName="KSR300 View" technologyVersionName="Alfresco3.x Labs and Entreprise" technologyName="alfresco" contributorId="com.bluexml.side.View.generator.alfresco" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="SIDE View Generator for Alfresco Share"/>
+    <generatorConfigurations id_techno_version="Facetmap_2.x" impl_class="com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator" id="com.bluexml.side.View.generator.facetmap" metaModelName="KSR300 View" technologyVersionName="Facetmap 2.x" technologyName="Facetmap" contributorId="com.bluexml.side.View.generator.facetmap" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="SIDE Facetmap Generator for Alfresco">
+      <options key="com.bluexml.side.View.generator.facetmap.alfrescoConnector"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" versionMin="1.0.24" versionMax="1.0.24" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.shareFacetMapDashlet" versionMin="1.0.20" versionMax="1.0.20" moduleType="zip" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.facetMap.alfrescoConnector" versionMin="1.0.13" versionMax="1.0.13" moduleType="zip" technologyVersion="Facetmap_2.x"/>
+    </generatorConfigurations>
+    <generatorConfigurations id_techno_version="chiba_1_5.x" impl_class="com.bluexml.side.forms.generator.alfresco.chiba.FormGenerator" id="com.bluexml.side.Form.generator.xforms.chiba" metaModelName="KSR400 Form" technologyVersionName="Chiba 1.5.x" technologyName="xforms" contributorId="com.bluexml.side.Form.generator.xforms.chiba" id_metamodel="http://www.kerblue.org/form/1.0" generatorName="SIDE Chiba Form Generator for Alfresco"/>
+    <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator" id="com.bluexml.side.Portal.generator.alfresco" metaModelName="KSR200 Portal" technologyVersionName="Alfresco3.x Labs and Entreprise" technologyName="alfresco" contributorId="com.bluexml.side.Portal.generator.alfresco" id_metamodel="http://www.kerblue.org/portal/1.0" generatorName="SIDE Alfresco Portal Generator">
+      <options key="com.bluexml.side.Portal.generator.alfresco.doclist"/>
+      <options key="com.bluexml.side.Portal.generator.alfresco.xforms"/>
+      <options key="com.bluexml.side.Portal.generator.alfresco.forms"/>
+      <options key="com.bluexml.side.Portal.generator.alfresco.facetmap"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension" versionMin="1.0.5" versionMax="1.0.5" moduleType="zip" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.shareDoclist" versionMin="1.0.17" versionMax="1.0.17" moduleType="zip" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.doclist" versionMin="1.0.21" versionMax="1.0.21" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.shareSearchResultsExtension" versionMin="1.0.7" versionMax="1.0.7" moduleType="zip" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.framework.alfresco.formProcessor" versionMin="1.0.13" versionMax="1.0.13" moduleType="amp" technologyVersion="alfresco_3.x"/>
+    </generatorConfigurations>
+    <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator" id="com.bluexml.side.Class.generator.alfresco" metaModelName="KSR500 Data" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="alfresco" contributorId="com.bluexml.side.Class.generator.alfresco" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="SIDE Content Model Generator for Alfresco">
+      <options key="alfresco.webscripts.common"/>
+      <options key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript"/>
+      <options key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator"/>
+      <options key="alfresco.webscript.report"/>
+      <options key="alfresco.share.extension"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.model" versionMin="1.0.14" versionMax="1.0.14" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" versionMin="1.1.17" versionMax="1.1.17" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.xforms" versionMin="1.0.45" versionMax="1.0.45" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" versionMin="1.0.24" versionMax="1.0.24" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" versionMin="1.0.56" versionMax="1.0.56" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.upload" versionMin="1.0.15" versionMax="1.0.15" moduleType="amp" technologyVersion="alfresco_3.x"/>
+    </generatorConfigurations>
+    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator" id="com.bluexml.side.Class.generator.documentation" metaModelName="KSR500 Data" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Class.generator.documentation" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="SIDE Class Documentation Generator">
+      <options key="doc.gen.screenshoot"/>
+    </generatorConfigurations>
+    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.form.generator.documentation.FormDocumentationGenerator" id="com.bluexml.side.Form.generator.documentation" metaModelName="KSR400 Form" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Form.generator.documentation" id_metamodel="http://www.kerblue.org/form/1.0" generatorName="SIDE Form Documentation Generator"/>
+    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.view.generator.documentation.ViewDocumentationGenerator" id="com.bluexml.side.View.generator.documentation" metaModelName="KSR300 View" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.View.generator.documentation" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="SIDE View Documentation Generator"/>
+    <generatorConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.workflow.generator.documentation.WorkflowDocumentationGenerator" id="com.bluexml.side.Workflow.generator.documentation" metaModelName="KSR600 Workflow" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Workflow.generator.documentation" id_metamodel="http://www.kerblue.org/workflow/1.0" generatorName="SIDE Workflow Documentation Generator">
+      <options key="doc.gen.screenshoot"/>
+    </generatorConfigurations>
+    <parameters key="generation.options.documentation" value="false"/>
+    <parameters key="generation.option.Skip.Validation" value="false"/>
+    <parameters key="generation.options.clean" value="true"/>
+    <parameters key="generation.options.logPath" value="/CG44_Agent/v1/application/logs"/>
+    <parameters key="generation.options.destinationPath" value="/CG44_Agent/v1/application/out"/>
+    <parameters key="generation.option.offlineMode" value="false"/>
+    <parameters key="alfresco.url" value="http://localhost:8888/alfresco"/>
+    <parameters key="com.bluexml.side.Class.generator.alfresco.module.version" value="1.0"/>
+    <parameters key="alfresco.share.url" value="http://localhost:8888/share"/>
+    <parameters key="com.bluexml.side.View.generator.alfresco.module.version" value="1.0"/>
+    <parameters key="com.bluexml.side.Form.generator.xforms.chiba.webappContext" value="http://localhost:8888/fxforms"/>
+    <parameters key="facetMap.url" value="http://localhost:8888/facetmap"/>
+    <parameters key="com.bluexml.side.Deployer.antDeployer.param.antFile" value="/root/.hudson/jobs/Test_Demo/workspace/testAuto/Ankle/AntDeployer/src/build.xml"/>
+    <parameters key="CATALINA_HOME" value="/root/.hudson/jobs/Test_Demo/workspace/testAuto/Ankle/Alfresco/tomcat"/>
+    <parameters key="com.bluexml.side.Deployer.xforms.webappName" value="xforms"/>
+    <deployerConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.deployer.alfresco.directcopy.AlfrescoDeployer" id="com.bluexml.side.Deployer.alfrescoDirectCopy" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="Alfresco" contributorId="com.bluexml.side.Deployer.alfrescoDirectCopy" deployerName="SIDE Alfresco Direct Deployer">
+      <options key="com.bluexml.side.deployerDirect.alfresco.clean"/>
+    </deployerConfigurations>
+    <deployerConfigurations id_techno_version="chiba_1_5.x" impl_class="com.bluexml.side.deployer.xformsdirectcopy.DeployerXforms" id="com.bluexml.side.Deployer.xformsDirectCopy" technologyVersionName="Chiba 1.5.x" technologyName="XForms" contributorId="com.bluexml.side.Deployer.xformsDirectCopy" deployerName="SIDE Chiba X-Forms Direct Deployer">
+      <options key="com.bluexml.side.Deployer.xformsDirectCopy.clean"/>
+    </deployerConfigurations>
+    <deployerConfigurations id_techno_version="ant_1.7.1" impl_class="com.bluexml.side.deployer.antdeployer.ANTDeployer" id="com.bluexml.side.Deployer.antDeployer" technologyVersionName="ANT 1.7.1" technologyName="ANT" contributorId="com.bluexml.side.Deployer.antDeployer" deployerName="ANT Deployer" shared="true"/>
+    <deployerConfigurations id_techno_version="Facetmap_2.x" impl_class="com.bluexml.side.deployer.facetmap.FacetMapDeployer" id="com.bluexml.side.Deployer.facetMap" technologyVersionName="Facetmap 2.x" technologyName="Facet Navigation" contributorId="com.bluexml.side.Deployer.facetMap" deployerName="SIDE Facetmap Deployer">
+      <options key="com.bluexml.side.Deployer.facetMap.clean"/>
+    </deployerConfigurations>
+    <deployerConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Deployer.documentation" deployerName="SIDE Documentation Deployer"/>
+    <deployerConfigurations id_techno_version="freemind" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.freemind" technologyVersionName="FreeMind" technologyName="MindMap" contributorId="com.bluexml.side.Requirements.generator" deployerName="freemind deployer"/>
+    <deployerConfigurations id_techno_version="office_excel" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.excel" technologyVersionName="Excel Document" technologyName="Office Document" contributorId="com.bluexml.side.Requirements.generator" deployerName="excel deployer"/>
+    <deployerConfigurations id_techno_version="webproject_1_0" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.webproject" technologyVersionName="Web Project 1.0" technologyName="Web Project" contributorId="com.bluexml.side.Requirements.generator" deployerName="webproject deployer"/>
+    <deployerConfigurations id_techno_version="opendocument_writer" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.doc" technologyVersionName="Open Document Writer" technologyName="Open Document" contributorId="com.bluexml.side.Requirements.generator" deployerName="doc deployer"/>
+  </elements>
+  <elements xsi:type="app:Model" name="cg44agent.dt" file="/CG44_Agent/v1/models/Data/cg44agent.dt"/>
+  <elements xsi:type="app:Model" name="cg44agent.form" file="/CG44_Agent/v1/models/Form/cg44agent.form"/>
+  <elements xsi:type="app:Model" name="cg4.portal" file="/CG44_Agent/v1/models/Portal/cg4.portal"/>
+  <elements xsi:type="app:Model" name="cg44agent.view" file="/CG44_Agent/v1/models/View/cg44agent.view"/>
+  <elements xsi:type="app:Model" name="search.form" file="/CG44_Agent/v1/models/Form/search.form"/>
+</app:Application>

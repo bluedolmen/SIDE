@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="0.2533054230245124" name="sys">
+  <classSet xmi:id="0.7781428490504174" documentation="" description="" name="base" title="Base" aspects="0.09081982640451425"/>
+  <classSet xmi:id="0.3193790423738073" documentation="" description="" name="descriptor" title="Descriptor" generalizations="0.7781428490504174">
+    <attributes xmi:id="0.4239935414278909" documentation="" description="" name="name" title="" visibility="Public"/>
+    <attributes xmi:id="0.7986069829316388" documentation="" description="" name="versionMajor" title="" visibility="Public"/>
+    <attributes xmi:id="0.12509457785310107" documentation="" description="" name="versionMinor" title="" visibility="Public"/>
+    <attributes xmi:id="0.8755787985454375" documentation="" description="" name="versionRevision" title="" visibility="Public"/>
+    <attributes xmi:id="0.2890820708066587" documentation="" description="" name="versionLabel" title="" visibility="Public"/>
+    <attributes xmi:id="0.5938387101891592" documentation="" description="" name="versionBuild" title="" visibility="Public"/>
+    <attributes xmi:id="0.9063689120069733" documentation="" description="" name="versionSchema" title="" typ="int" visibility="Public"/>
+    <attributes xmi:id="0.9906735628036153" documentation="" description="" name="versionEdition" title="" typ="Object" visibility="Public"/>
+    <attributes xmi:id="0.28933276424485654" documentation="" description="" name="versionProperties" title="" typ="Object" visibility="Public"/>
+  </classSet>
+  <classSet xmi:id="0.6089810092477961" documentation="" description="" name="container" title="Container" generalizations="0.7781428490504174"/>
+  <classSet xmi:id="0.9015984853225332" documentation="" description="" name="store_root" title="Store Root" generalizations="0.6089810092477961" aspects="0.09081982640451425"/>
+  <classSet xmi:id="0.17843050163600582" documentation="" description="" name="reference" title="Reference" generalizations="0.7781428490504174">
+    <attributes xmi:id="0.09990116370664015" documentation="" description="" name="reference" title="" typ="Object" visibility="Public"/>
+  </classSet>
+  <associationSet xmi:id="0.6991910689239393" description="" name="children" title="" associationType="Composition">
+    <firstEnd xmi:id="0.41417331175964867" name="children" title="" cardMax="-1" linkedClass="0.6089810092477961"/>
+    <secondEnd xmi:id="0.8614207879828234" name="children" title="" cardMax="-1" navigable="true" linkedClass="0.7781428490504174"/>
+  </associationSet>
+  <aspectSet xmi:id="0.09081982640451425" documentation="" description="" name="aspect_root" title="Root"/>
+  <aspectSet xmi:id="0.7786094216924615" documentation="" description="" name="referenceable" title="Referenceable">
+    <attributes xmi:id="0.6692873046563838" documentation="" description="" name="store-protocol" title="" visibility="Public"/>
+    <attributes xmi:id="0.05265194614286062" documentation="" description="" name="store-identifier" title="" visibility="Public"/>
+    <attributes xmi:id="0.4945171773100935" documentation="" description="" name="node-uuid" title="" visibility="Public"/>
+    <attributes xmi:id="0.6692413072529486" documentation="" description="" name="node-dbid" title="" typ="long" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.011758451771554213" documentation="" description="" name="incomplete" title="Incomplete"/>
+  <aspectSet xmi:id="0.06848663871757088" documentation="" description="" name="temporary" title="Temporary"/>
+  <aspectSet xmi:id="0.3430018997088857" documentation="" description="" name="archived" title="Archived">
+    <attributes xmi:id="0.16122993065024438" documentation="" description="" name="archivedOriginalParentAssoc" title="" typ="Object" visibility="Public"/>
+    <attributes xmi:id="0.46848212718839355" documentation="" description="" name="archivedBy" title="" visibility="Public"/>
+    <attributes xmi:id="0.0770669953209262" documentation="" description="" name="archivedDate" title="" typ="Date" visibility="Public"/>
+    <attributes xmi:id="0.41962825480646326" documentation="" description="" name="archivedOriginalOwner" title="" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.6415764061571572" documentation="" description="" name="archived-assocs" title="">
+    <attributes xmi:id="0.7796279350283705" documentation="" description="" name="archivedParentAssocs" title="" typ="Object" visibility="Public"/>
+    <attributes xmi:id="0.3618178094031337" documentation="" description="" name="archivedChildAssocs" title="" typ="Object" visibility="Public"/>
+    <attributes xmi:id="0.1906510798631723" documentation="" description="" name="archivedSourceAssocs" title="" typ="Object" visibility="Public"/>
+    <attributes xmi:id="0.3786846011654421" documentation="" description="" name="archivedTargetAssocs" title="" typ="Object" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.4968218831680715" documentation="" description="" name="localized" title="Translation">
+    <attributes xmi:id="0.4073371307875522" documentation="" description="" name="locale" title="Locale" typ="Object" visibility="Public"/>
+  </aspectSet>
+  <aspectSet xmi:id="0.5906760712215341" documentation="" description="" name="indexChildren" title="Cascade Index Children"/>
+</clazz:Model>

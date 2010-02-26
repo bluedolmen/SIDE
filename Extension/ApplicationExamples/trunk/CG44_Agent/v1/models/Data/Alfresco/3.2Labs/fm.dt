@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.6975492285153189"
+             name="fm">
+      <classSet xmi:id="0.8665912881119125" documentation="" description="" name="forums"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.10907227713848244" href="cm.dt#//@classSet.1"/>
+      </classSet>
+      <classSet xmi:id="0.8231281554537695" documentation="" description="" name="forum"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.49666572930464536" href="cm.dt#//@classSet.1"/>
+      </classSet>
+      <classSet xmi:id="0.41202904969098764" documentation="" description="" name="topic"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.7127222336837842" href="cm.dt#//@classSet.1"/>
+      </classSet>
+      <classSet xmi:id="0.1464523730823264" documentation="" description="" name="post"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.5721956367161037" href="cm.dt#//@classSet.2"/>
+      </classSet>
+      <aspectSet xmi:id="0.25236995194262246" name="discussable" title="" description=""
+              documentation=""/>
+      <associationSet xmi:id="0.8794554718285938" name="discussion" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.3118155577902927" name="discussion" title="" cardMax="1"
+                linkedClass="//@aspectSet.0"/>
+         <secondEnd xmi:id="0.6837136039842899" name="discussion" title="" navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.7701267248903582" xsi:type="clazz:Clazz" href="fm.dt#//@classSet.1"/>
+         </secondEnd>
+      </associationSet>
+   </clazz:Model>

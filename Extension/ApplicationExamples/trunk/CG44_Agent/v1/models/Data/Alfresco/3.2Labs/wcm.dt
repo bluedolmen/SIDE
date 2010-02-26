@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.6051065855753914"
+             name="wcm">
+      <classSet xmi:id="0.70843262863603" documentation="" description="" name="avmcontent"
+             title="AVM Content"
+             aspects="">
+         <generalizations xmi:id="0.7401662472485923" href="cm.dt#//@classSet.2"/>
+      </classSet>
+      <classSet xmi:id="0.6222345447001331" documentation="" description=""
+             name="avmplaincontent"
+             title="AVM Plain content"
+             aspects=""
+             generalizations="//@classSet.0"/>
+      <classSet xmi:id="0.47369569023975877" documentation="" description=""
+             name="avmlayeredcontent"
+             title="AVM Layered Content"
+             aspects="">
+         <generalizations xmi:id="0.3409630814508261" href="cm.dt#//@classSet.2"/>
+         <attributes xmi:id="0.5288708977175014" name="avmfileindirection"
+                  title="File Layer Indirection"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.41597952977108965" documentation="" description="" name="avmfolder"
+             title="AVM Folder"
+             aspects="">
+         <generalizations xmi:id="0.8976170438244341" href="cm.dt#//@classSet.1"/>
+      </classSet>
+      <classSet xmi:id="0.979266373144441" documentation="" description=""
+             name="avmplainfolder"
+             title="AVM Plain Folder"
+             aspects=""
+             generalizations="//@classSet.3"/>
+      <classSet xmi:id="0.3491623033903888" documentation="" description=""
+             name="avmlayeredfolder"
+             title="AVM Layered Folder"
+             aspects=""
+             generalizations="//@classSet.3">
+         <attributes xmi:id="0.6468060830977203" name="avmdirindirection"
+                  title="Directory Layer Indirection"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <aspectSet xmi:id="0.7137287368451853" name="reverted"
+              title="Contains a reference to the node that this node was reverted from."
+              description=""
+              documentation="">
+         <attributes xmi:id="0.38119155516128944" name="revertedid"
+                  title="The id of the node this was reverted from."
+                  visibility="Public"
+                  typ="long"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+   </clazz:Model>

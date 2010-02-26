@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.3340222185540441"
+             name="app">
+      <classSet xmi:id="0.5567496465625741" documentation="" description="" name="glossary"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.7476645254064901" href="cm.dt#//@classSet.1"/>
+      </classSet>
+      <classSet xmi:id="0.6955748091221245" documentation="" description=""
+             name="configurations"
+             title="Configurations"
+             aspects="">
+         <generalizations xmi:id="0.7677029033686971" href="cm.dt#//@classSet.6"/>
+      </classSet>
+      <classSet xmi:id="0.32497523401496686" documentation="" description="" name="filelink"
+             title="File Link Object"
+             aspects="">
+         <generalizations xmi:id="0.15473836784728356" href="cm.dt#//@classSet.4"/>
+      </classSet>
+      <classSet xmi:id="0.12959031127446285" documentation="" description="" name="folderlink"
+             title="Folder Link Object"
+             aspects="">
+         <generalizations xmi:id="0.6031626989064346" href="cm.dt#//@classSet.4"/>
+      </classSet>
+      <aspectSet xmi:id="0.24479352930078813" name="uifacets" title="UI Facets" description=""
+              documentation="">
+         <generalizations xmi:id="0.024377025092477633" href="cm.dt#//@aspectSet.0"/>
+         <attributes xmi:id="0.43855054422547657" name="icon" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.6496537971457731" name="inlineeditable" title="Inline Editable"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.6115110892114144" name="editInline" title="Edit Inline"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.9451511822754022" name="workflow" title="Workflow" description=""
+              documentation=""/>
+      <aspectSet xmi:id="0.15215751304948488" name="simpleworkflow" title="" description=""
+              documentation="">
+         <generalizations xmi:id="0.4711954785808644" href="app.dt#//@aspectSet.2"/>
+         <attributes xmi:id="0.7350902682111308" name="approveStep" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.42074951080502754" name="approveFolder" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.6185984458851732" name="approveMove" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.9709907684688709" name="rejectStep" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.8483596204868572" name="rejectFolder" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.18826529645740375" name="rejectMove" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+      <aspectSet xmi:id="0.6763846125767998" name="configurable" title="Configurable"
+              description=""
+              documentation=""/>
+      <associationSet xmi:id="0.7796200238889894" name="configurations" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.08023919943896285" name="configurations" title="" cardMax="1"
+                linkedClass="//@aspectSet.4"/>
+         <secondEnd xmi:id="0.8010297758908363" name="configurations" title="" navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.34233125826230637" xsi:type="clazz:Clazz" href="app.dt#//@classSet.1"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.6588336961087077" name="feedsource" title="Feed Source"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.000969186813782219" name="template" title="Feed Template"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+   </clazz:Model>

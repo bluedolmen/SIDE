@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.15122167778660422"
+             name="bpm">
+      <enumerationSet xmi:id="112527.94365247343" name="allowedPriority">
+         <literals xmi:id="785550.7369994895" name="1"/>
+         <literals xmi:id="658957.7578422251" name="2"/>
+         <literals xmi:id="989815.934897368" name="3"/>
+      </enumerationSet>
+      <enumerationSet xmi:id="739868.5756617016" name="allowedStatus">
+         <literals xmi:id="170303.6099572035" name="Not Yet Started"/>
+         <literals xmi:id="767052.3336277175" name="In Progress"/>
+         <literals xmi:id="307484.0914319478" name="On Hold"/>
+         <literals xmi:id="566456.5995025523" name="Cancelled"/>
+         <literals xmi:id="737246.3544982082" name="Completed"/>
+      </enumerationSet>
+      <classSet xmi:id="0.06957686634131333" documentation="" description="" name="task"
+             title=""
+             aspects="//@aspectSet.0 ">
+         <generalizations xmi:id="0.3345626230725306" href="cm.dt#//@classSet.2"/>
+         <attributes xmi:id="0.1995831360566811" name="taskId" title="" visibility="Public"
+                  typ="long"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.13246872264512854" name="description" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.09281056178115454" name="startDate" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.65532851712792" name="completionDate" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.6055896176571265" name="dueDate" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.15042903621318515" name="status" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""
+                  valueList="739868.5756617016"/>
+         <attributes xmi:id="0.09162724420579826" name="priority" title="" visibility="Public"
+                  typ="int"
+                  description=""
+                  documentation=""
+                  valueList="112527.94365247343"/>
+         <attributes xmi:id="0.8068493065284646" name="percentComplete" title="" visibility="Public"
+                  typ="int"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.9824110048934622" name="comment" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <associationSet xmi:id="0.49920367906240415" name="pooledActors" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.37664996309017584" name="pooledActors" title="" cardMax="1"
+                linkedClass="//@classSet.0"/>
+         <secondEnd xmi:id="0.5833506869776222" name="pooledActors" title="" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.8369730877192327" xsi:type="clazz:Clazz" href="sys.dt#//@classSet.0"/>
+         </secondEnd>
+      </associationSet>
+      <classSet xmi:id="0.5016772418165247" documentation="" description="" name="workflowTask"
+             title=""
+             aspects=""
+             generalizations="//@classSet.0">
+         <attributes xmi:id="0.9234842578211291" name="context" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.08043424934702115" name="outcome" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7629576657366964" name="completedItems" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.27725952444568724" name="packageActionGroup" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.5862042379273985" name="packageItemActionGroup" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.07304792593086262" name="hiddenTransitions" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <associationSet xmi:id="0.6693323682510137" name="package" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.2114111103186883" name="package" title="" cardMax="1"
+                linkedClass="//@classSet.1"/>
+         <secondEnd xmi:id="0.3202734123990758" name="package" title="" navigable="true"
+                 cardMax="1"
+                 linkedClass="//@aspectSet.4"/>
+      </associationSet>
+      <classSet xmi:id="0.5369318087195625" documentation="" description="" name="startTask"
+             title=""
+             aspects=""
+             generalizations="//@classSet.1">
+         <attributes xmi:id="0.37117464342841144" name="workflowDescription" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.9392040187492272" name="workflowDueDate" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.30933990729682237" name="workflowPriority" title=""
+                  visibility="Public"
+                  typ="int"
+                  description=""
+                  documentation=""
+                  valueList="112527.94365247343"/>
+      </classSet>
+      <classSet xmi:id="0.9953328252720498" documentation="" description=""
+             name="workflowDefinition"
+             title="Workflow Process Definition"
+             aspects="">
+         <generalizations xmi:id="0.5217024646953545" href="cm.dt#//@classSet.2"/>
+         <attributes xmi:id="0.644339735322655" name="definitionName" title="Workflow Name"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7858535249955175" name="engineId" title="Workflow Engine Id"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.901101699032235" name="definitionDeployed" title="Workflow Deployed"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <aspectSet xmi:id="0.8380565730005707" name="assignee" title="" description=""
+              documentation=""/>
+      <associationSet xmi:id="0.20649213087221108" name="assignee" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.6372101849632256" name="assignee" title="" cardMax="1"
+                linkedClass="//@aspectSet.0"/>
+         <secondEnd xmi:id="0.44885585323955024" name="assignee" title="" navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.4532624434728869" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.8"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.6175377387021167" name="assignees" title="" description=""
+              documentation=""/>
+      <associationSet xmi:id="0.5971364975550247" name="assignees" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.05271282835635793" name="assignees" title="" cardMax="1"
+                linkedClass="//@aspectSet.1"/>
+         <secondEnd xmi:id="0.012932831304742876" name="assignees" title="" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.13118172781977933" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.8"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.9362858387800131" name="groupAssignee" title="" description=""
+              documentation=""/>
+      <associationSet xmi:id="0.2221682413103616" name="groupAssignee" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.8276543104203979" name="groupAssignee" title="" cardMax="1"
+                linkedClass="//@aspectSet.2"/>
+         <secondEnd xmi:id="0.8106827056863023" name="groupAssignee" title="" navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.08652449905920112" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.9"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.7220132265543592" name="groupAssignees" title="" description=""
+              documentation=""/>
+      <associationSet xmi:id="0.9906343551026568" name="groupAssignees" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.49582532328837237" name="groupAssignees" title="" cardMax="1"
+                linkedClass="//@aspectSet.3"/>
+         <secondEnd xmi:id="0.5601442544864865" name="groupAssignees" title="" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.7117566523220182" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.9"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.8750681861711187" name="workflowPackage" title="" description=""
+              documentation="">
+         <attributes xmi:id="0.7229843030012526" name="isSystemPackage" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.858246278551879" name="workflowDefinitionId" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.02583703659401737" name="workflowDefinitionName" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.8368173459703151" name="workflowInstanceId" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+   </clazz:Model>

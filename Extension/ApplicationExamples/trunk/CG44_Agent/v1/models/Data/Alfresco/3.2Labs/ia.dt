@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.8010695287517431"
+             name="ia">
+      <classSet xmi:id="0.8017980679824009" documentation="" description=""
+             name="calendarEvent"
+             title="Calendar Event"
+             aspects="">
+         <generalizations xmi:id="0.8779805144801628" href="cm.dt#//@classSet.2"/>
+         <attributes xmi:id="0.2653748697446049" name="whatEvent" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.07133668030304241" name="fromDate" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.8643736490861341" name="toDate" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.05138011063318193" name="whereEvent" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.34972494024485745" name="descriptionEvent" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.36049316839584433" name="colorEvent" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.6373448103187762" documentation="" description="" name="calendar"
+             title="Calendar Space"
+             aspects="">
+         <generalizations xmi:id="0.07094346036847665" href="cm.dt#//@classSet.1"/>
+         <attributes xmi:id="0.055586959845011386" name="whatEventDefault" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7742251479161274" name="fromDateDefault" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.5162992012645395" name="toDateDefault" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.9446751005113437" name="whereEventDefault" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.8466681196837549" name="colorEventDefault" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <associationSet xmi:id="0.27221541040628283" name="subscribedCalendarList" title=""
+                   description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.06171829811347718" name="subscribedCalendarList" title=""
+                cardMax="-1"
+                linkedClass="//@classSet.1"/>
+         <secondEnd xmi:id="0.8083302243959808" name="subscribedCalendarList" title=""
+                 navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.1"/>
+      </associationSet>
+   </clazz:Model>

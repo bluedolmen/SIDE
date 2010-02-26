@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="cg4.portal#_5c3koCAHEd-8qvQk7m7roQ"/>
+  <diagrams position="0,0" size="100,100" name="cg4" viewport="268,80">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Portal.modeler.diagram">
+      <element href="cg4.portal#_5c3koCAHEd-8qvQk7m7roQ"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="237,167" size="100,89">
+      <anchorage graphEdge="//@diagrams.0/@contained.4 //@diagrams.0/@contained.11"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_AsAE0CAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="50,166" size="100,89">
+      <anchorage graphEdge="//@diagrams.0/@contained.5 //@diagrams.0/@contained.9"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_DzzjQCAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="380,160" size="100,89">
+      <anchorage graphEdge="//@diagrams.0/@contained.6 //@diagrams.0/@contained.13"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_F5HC4CAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="227,44" size="64,76">
+      <anchorage graphEdge="//@diagrams.0/@contained.4 //@diagrams.0/@contained.5 //@diagrams.0/@contained.6 //@diagrams.0/@contained.20 //@diagrams.0/@contained.26"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_G_CJICAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="UseLayout"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="UseLayout"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="UseLayout"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="66,424" size="64,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.14"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_W5h28CAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="63,293" size="64,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.9 //@diagrams.0/@contained.14"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_ZuJToCAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.8/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_gCp-oCAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="256,298" size="64,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.11 //@diagrams.0/@contained.16"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_jIOocCAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.10/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_l4hl0CAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="431,295" size="64,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.13 //@diagrams.0/@contained.18"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_mVsC8CAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.12/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_qMNBgCAIEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.8/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="isInternalPortlet"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="245,429" size="64,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.16"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_A2ck0CAJEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.10/@anchorage.0 //@diagrams.0/@contained.15/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="isInternalPortlet"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="434,430" size="64,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.18"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_DIsUQCAJEd-8qvQk7m7roQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.17/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="isInternalPortlet"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="481,151" size="100,89">
+      <anchorage graphEdge="//@diagrams.0/@contained.20 //@diagrams.0/@contained.22"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_CSSzcCGYEd-grPsxXhqAnQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.19/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="UseLayout"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="554,290" size="74,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.22 //@diagrams.0/@contained.24"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_F6x9ECGYEd-grPsxXhqAnQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.19/@anchorage.0 //@diagrams.0/@contained.21/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_H02dECGYEd-grPsxXhqAnQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="550,428" size="74,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.24"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_JhlEoCGYEd-grPsxXhqAnQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.21/@anchorage.0 //@diagrams.0/@contained.23/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="isInternalPortlet"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="635,170" size="53,89">
+      <anchorage graphEdge="//@diagrams.0/@contained.26 //@diagrams.0/@contained.28"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_jbHg8CIFEd-R7N33Hlrq_A"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.25/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="UseLayout"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="692,300" size="64,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.28 //@diagrams.0/@contained.30"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_ooJmgCIFEd-R7N33Hlrq_A"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.25/@anchorage.0 //@diagrams.0/@contained.27/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_0gZm4CIFEd-R7N33Hlrq_A"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="690,440" size="64,78">
+      <anchorage graphEdge="//@diagrams.0/@contained.30"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="cg4.portal#_2S--0CIFEd-R7N33Hlrq_A"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.27/@anchorage.0 //@diagrams.0/@contained.29/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="isInternalPortlet"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

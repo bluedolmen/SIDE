@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portal:Portal xmlns:portal="http://www.kerblue.org/portal/1.0" xmlns:form="http://www.kerblue.org/form/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="cg44agent" xmi:id="_5c3koCAHEd-8qvQk7m7roQ" xmi:version="2.0">
+  <pageSet ID="documentLibrary" generate="false" title="" useLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_AsAE0CAIEd-8qvQk7m7roQ">
+    <portlets associationPage="_AsAE0CAIEd-8qvQk7m7roQ" associationPortlet="_jIOocCAIEd-8qvQk7m7roQ" xmi:id="_l4hl0CAIEd-8qvQk7m7roQ">
+      <positionGroup onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_cS7SUCFtEd-grPsxXhqAnQ"/>
+    </portlets>
+  </pageSet>
+  <pageSet ID="document-details" description="" generate="false" title="" useLayout="_G_CJICAIEd-8qvQk7m7roQ" visibility="Private" xmi:id="_DzzjQCAIEd-8qvQk7m7roQ">
+    <portlets associationPage="_DzzjQCAIEd-8qvQk7m7roQ" associationPortlet="_ZuJToCAIEd-8qvQk7m7roQ" xmi:id="_gCp-oCAIEd-8qvQk7m7roQ">
+      <positionGroup onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_b7PyICFtEd-grPsxXhqAnQ"/>
+    </portlets>
+  </pageSet>
+  <pageSet ID="edit-metadata" generate="false" useLayout="_G_CJICAIEd-8qvQk7m7roQ" visibility="Private" xmi:id="_F5HC4CAIEd-8qvQk7m7roQ">
+    <portlets associationPage="_F5HC4CAIEd-8qvQk7m7roQ" associationPortlet="_mVsC8CAIEd-8qvQk7m7roQ" xmi:id="_qMNBgCAIEd-8qvQk7m7roQ">
+      <positionGroup onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_dsefMCFtEd-grPsxXhqAnQ"/>
+    </portlets>
+  </pageSet>
+  <pageSet ID="FacetMap" description="Page with Facet Navigation" title="FacetNavigation" useLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_CSSzcCGYEd-grPsxXhqAnQ">
+    <portlets associationPage="_CSSzcCGYEd-grPsxXhqAnQ" associationPortlet="_F6x9ECGYEd-grPsxXhqAnQ" xmi:id="_H02dECGYEd-grPsxXhqAnQ">
+      <positionGroup onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_IMZaYCGYEd-grPsxXhqAnQ"/>
+    </portlets>
+  </pageSet>
+  <pageSet ID="AdvancedSearch" title="Advanced Search" useLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_jbHg8CIFEd-R7N33Hlrq_A">
+    <portlets associationPage="_jbHg8CIFEd-R7N33Hlrq_A" associationPortlet="_ooJmgCIFEd-R7N33Hlrq_A" xmi:id="_0gZm4CIFEd-R7N33Hlrq_A">
+      <positionGroup onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_06s9QCIFEd-R7N33Hlrq_A"/>
+    </portlets>
+  </pageSet>
+  <layoutSet name="PortalLayout1" xmi:id="_G_CJICAIEd-8qvQk7m7roQ">
+    <columns name="col1" width="100" xmi:id="_bHVo8CFtEd-grPsxXhqAnQ"/>
+  </layoutSet>
+  <portletSet isPortletInternal="_W5h28CAIEd-8qvQk7m7roQ" name="DocumentDetails" xmi:id="_ZuJToCAIEd-8qvQk7m7roQ"/>
+  <portletSet isPortletInternal="_A2ck0CAJEd-8qvQk7m7roQ" name="DocumentLibrary" xmi:id="_jIOocCAIEd-8qvQk7m7roQ"/>
+  <portletSet isPortletInternal="_DIsUQCAJEd-8qvQk7m7roQ" name="edit-metadata-XForm" xmi:id="_mVsC8CAIEd-8qvQk7m7roQ"/>
+  <portletSet isPortletInternal="_JhlEoCGYEd-grPsxXhqAnQ" name="facetMap" xmi:id="_F6x9ECGYEd-grPsxXhqAnQ"/>
+  <portletSet isPortletInternal="_2S--0CIFEd-R7N33Hlrq_A" name="advanced-search" xmi:id="_ooJmgCIFEd-R7N33Hlrq_A"/>
+  <internalPortletSet xmi:id="_W5h28CAIEd-8qvQk7m7roQ">
+    <view href="../view/cg44agent.view#_1jWK0CAGEd-8qvQk7m7roQ" xsi:type="view:ComposedView"/>
+  </internalPortletSet>
+  <internalPortletSet xmi:id="_A2ck0CAJEd-8qvQk7m7roQ">
+    <view href="../view/cg44agent.view#_cBXlYCAGEd-8qvQk7m7roQ" xsi:type="view:ComposedView"/>
+  </internalPortletSet>
+  <internalPortletSet type="Form" xmi:id="_DIsUQCAJEd-8qvQk7m7roQ">
+    <form href="/CG44_Agent/v1/models/Form/cg44agent.form#_UtchQCAFEd-8qvQk7m7roQ" xsi:type="form:ClassFormCollection"/>
+  </internalPortletSet>
+  <internalPortletSet xmi:id="_JhlEoCGYEd-grPsxXhqAnQ">
+    <view href="../view/cg44agent.view#_2vP68CF_Ed-grPsxXhqAnQ" xsi:type="view:FacetMap"/>
+  </internalPortletSet>
+  <internalPortletSet type="Form" xmi:id="_2S--0CIFEd-R7N33Hlrq_A">
+    <form href="/CG44_Agent/v1/models/Form/search.form#_cOAykCFsEd-grPsxXhqAnQ" xsi:type="form:SearchFormCollection"/>
+  </internalPortletSet>
+</portal:Portal>
+

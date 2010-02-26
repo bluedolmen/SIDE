@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.6249297815976641"
+             name="cmis">
+      <enumerationSet xmi:id="915918.6789582461" name="allowedValuesForContentStreamAllowed">
+         <literals xmi:id="257456.97932161926" name="notallowed"/>
+         <literals xmi:id="210797.83007938924" name="allowed"/>
+         <literals xmi:id="213507.11242887843" name="required"/>
+      </enumerationSet>
+      <classSet xmi:id="0.2868052261338362" documentation="" description="" name="object"
+             title=""
+             aspects="">
+         <attributes xmi:id="0.06732351910433476" name="objectId" title="Object Id"
+                  visibility="Public"
+                  typ="Object"
+                  description="The unique object id (a node ref)"
+                  documentation=""/>
+         <attributes xmi:id="0.837239908807176" name="objectTypeId" title="Object Type Id"
+                  visibility="Public"
+                  typ="Object"
+                  description="Id of the object’s type"
+                  documentation=""/>
+         <attributes xmi:id="0.4608035340918927" name="baseTypeId" title="Base Type Id"
+                  visibility="Public"
+                  typ="Object"
+                  description="Id of the base object type for the object"
+                  documentation=""/>
+         <attributes xmi:id="0.33547910220518473" name="createdBy" title="Created by"
+                  visibility="Public"
+                  typ="String"
+                  description="The authority who created this object"
+                  documentation=""/>
+         <attributes xmi:id="0.27306684314379603" name="creationDate" title="Creation Date"
+                  visibility="Public"
+                  typ="Date"
+                  description="The object creation date"
+                  documentation=""/>
+         <attributes xmi:id="0.18283554843126515" name="lastModifiedBy" title="Last Modified By"
+                  visibility="Public"
+                  typ="String"
+                  description="The authority who last modified this object"
+                  documentation=""/>
+         <attributes xmi:id="0.7054144630874752" name="lastModificationDate"
+                  title="Last Modified Date"
+                  visibility="Public"
+                  typ="Date"
+                  description="The date this object was last modified"
+                  documentation=""/>
+         <attributes xmi:id="0.8410233284760481" name="changeToken" title="Change token"
+                  visibility="Public"
+                  typ="String"
+                  description="Change Token"
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.5663360063186427" documentation="" description=""
+             name="filesystemobject"
+             title=""
+             aspects=""
+             generalizations="//@classSet.0">
+         <attributes xmi:id="0.06204724736151801" name="name" title="Name" visibility="Public"
+                  typ="String"
+                  description="Name"
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.9089177947013161" documentation="" description="Document Type"
+             name="document"
+             title="Document"
+             aspects=""
+             generalizations="//@classSet.1">
+         <attributes xmi:id="0.7351185412274175" name="isImmutable" title="Is Immutable"
+                  visibility="Public"
+                  typ="boolean"
+                  description="Is the document immutable?"
+                  documentation=""/>
+         <attributes xmi:id="0.2626840927136005" name="isLatestVersion" title="Is Latest Version"
+                  visibility="Public"
+                  typ="boolean"
+                  description="Is this the latest version of the document?"
+                  documentation=""/>
+         <attributes xmi:id="0.8666488142159859" name="isMajorVersion" title="Is Major Version"
+                  visibility="Public"
+                  typ="boolean"
+                  description="Is this a major version of the document?"
+                  documentation=""/>
+         <attributes xmi:id="0.23720123758943334" name="isLatestMajorVersion"
+                  title="Is Latest Major Version"
+                  visibility="Public"
+                  typ="boolean"
+                  description="Is this the latest major version of the document?"
+                  documentation=""/>
+         <attributes xmi:id="0.7769279531544647" name="versionLabel" title="Version Label"
+                  visibility="Public"
+                  typ="String"
+                  description="The version label"
+                  documentation=""/>
+         <attributes xmi:id="0.8074470705921923" name="versionSeriesId" title="Version series id"
+                  visibility="Public"
+                  typ="Object"
+                  description="The version series id"
+                  documentation=""/>
+         <attributes xmi:id="0.17032291836872537" name="isVersionSeriesCheckedOut"
+                  title="Is Version Series Checked Out"
+                  visibility="Public"
+                  typ="boolean"
+                  description="Is the version series checked out?"
+                  documentation=""/>
+         <attributes xmi:id="0.2508795496803875" name="versionSeriesCheckedOutBy"
+                  title="Version Series Checked Out By"
+                  visibility="Public"
+                  typ="String"
+                  description="The authority who checked out this document version series"
+                  documentation=""/>
+         <attributes xmi:id="0.45243628652689316" name="versionSeriesCheckedOutId"
+                  title="Version Series Checked Out Id"
+                  visibility="Public"
+                  typ="Object"
+                  description="The checked out version series id"
+                  documentation=""/>
+         <attributes xmi:id="0.4513356073646584" name="checkinComment" title="Checkin Comment"
+                  visibility="Public"
+                  typ="String"
+                  description="The checkin comment"
+                  documentation=""/>
+         <attributes xmi:id="0.6184580794802872" name="contentStreamLength"
+                  title="Content Stream Length"
+                  visibility="Public"
+                  typ="int"
+                  description="The length of the content stream"
+                  documentation=""/>
+         <attributes xmi:id="0.15148734046719314" name="contentStreamMimeType"
+                  title="Content Stream MIME Type"
+                  visibility="Public"
+                  typ="String"
+                  description="The content stream MIME type"
+                  documentation=""/>
+         <attributes xmi:id="0.5158755224668158" name="contentStreamFileName"
+                  title="Content Stream Filename"
+                  visibility="Public"
+                  typ="String"
+                  description="The content stream filename"
+                  documentation=""/>
+         <attributes xmi:id="0.08783596687306727" name="contentStreamId" title="Content Stream Id"
+                  visibility="Public"
+                  typ="Object"
+                  description="Id of the stream"
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.03884415620680748" documentation="" description="Folder Type"
+             name="folder"
+             title="Folder"
+             aspects=""
+             generalizations="//@classSet.1">
+         <attributes xmi:id="0.7225161775810327" name="parentId" title="Parent Id"
+                  visibility="Public"
+                  typ="Object"
+                  description="The parent id of the folder"
+                  documentation=""/>
+         <attributes xmi:id="0.2910662166217267" name="path" title="Path" visibility="Public"
+                  typ="String"
+                  description="The fully qualified path to this folder/description"
+                  documentation=""/>
+         <attributes xmi:id="0.2650234728371955" name="allowedChildObjectTypeIds"
+                  title="Allowed Child Object Types Ids"
+                  visibility="Public"
+                  typ="Object"
+                  description="The allowed child object type ids"
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.3622862091302964" documentation="" description="Relationship Type"
+             name="relationship"
+             title="Relationship"
+             aspects=""
+             generalizations="//@classSet.0">
+         <attributes xmi:id="0.7029973133601374" name="sourceId" title="Source Id"
+                  visibility="Public"
+                  typ="Object"
+                  description="The source id for the relationship"
+                  documentation=""/>
+         <attributes xmi:id="0.706947666952413" name="targetId" title="Target Id"
+                  visibility="Public"
+                  typ="Object"
+                  description="The target id for the relationship"
+                  documentation=""/>
+      </classSet>
+      <classSet xmi:id="0.8111504609009055" documentation="" description="Policy Type"
+             name="policy"
+             title="Policy"
+             aspects=""
+             generalizations="//@classSet.0">
+         <attributes xmi:id="0.25172694397730866" name="policyText" title="Policy Text"
+                  visibility="Public"
+                  typ="String"
+                  description="The policy text"
+                  documentation=""/>
+      </classSet>
+   </clazz:Model>

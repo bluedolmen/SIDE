@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.5544973169383877"
+             name="lnk">
+      <classSet xmi:id="0.08764151551485788" documentation="" description="" name="link"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.012882337221681639" href="cm.dt#//@classSet.2"/>
+         <attributes xmi:id="0.5235336353757167" name="title" title="Link Title" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.07054067999389546" name="url" title="Link URL" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+         <attributes xmi:id="0.7314301869922493" name="description" title="Link Description"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </classSet>
+      <aspectSet xmi:id="0.016632148847882666" name="internal" title="Internal Link"
+              description=""
+              documentation="">
+         <attributes xmi:id="0.14581012048949682" name="isInternal" title="Is Internal"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation=""/>
+      </aspectSet>
+   </clazz:Model>
