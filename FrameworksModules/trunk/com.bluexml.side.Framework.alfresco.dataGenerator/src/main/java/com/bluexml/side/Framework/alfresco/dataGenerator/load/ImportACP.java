@@ -5,8 +5,6 @@ package com.bluexml.side.Framework.alfresco.dataGenerator.load;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
 import java.util.List;
 
 import org.alfresco.model.ContentModel;
