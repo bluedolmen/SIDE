@@ -20,6 +20,10 @@ public class InstanceServices {
 	
 	IRandomGenerator alfrescoModelRandomGenerator;
 	
+	/**
+	 * 
+	 * @return the alfrescoModelRandomGenerator instance
+	 */
 	public IRandomGenerator getAlfrescoModelRandomGenerator() {
 		return alfrescoModelRandomGenerator;
 	}
