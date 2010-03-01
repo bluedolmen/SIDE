@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>This job build an Eclipse RCP with SIDE plugins, and SIDE branding.&#xd;
+this includes version for :&#xd;
+* Win32&#xd;
+* Linux x86&#xd;
+* MacOS carbon x86</description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>2</numToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>echo $WORKSPACE
+cd $WORKSPACE
+#svn co http://www.bluexml.com/svn/private/generator/forms/trunk/superpom
+
+SIDEHOME=$WORKSPACE/S-IDE
+#rm -rf $SIDEHOME
+#mkdir -p $SIDEHOME
+cd $SIDEHOME
+#svn co http://www.bluexml.com/svn/private/S-IDE/Deployer
+#svn co http://www.bluexml.com/svn/private/S-IDE/FrameworksModules
+#svn co http://www.bluexml.com/svn/private/S-IDE/Integration
+#svn co http://www.bluexml.com/svn/private/S-IDE/MetaModel 
+#svn co http://www.bluexml.com/svn/private/S-IDE/Util
+svn revert *
+svn update *</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command># configuration
+SIDEHOME=$WORKSPACE/S-IDE
+BUILDERHOME=$WORKSPACE/buildAllMaven
+POM_PATCHER_PROJECT=$SIDEHOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE
+POM_IN=$WORKSPACE/superpom/pom.xml
+MAVENREPO_ARCHIVE=$SIDEHOME/Util/trunk/com.bluexml.side.Util.dependencies/src/com/bluexml/side/util/dependencies/mavenRepository/m2repositoryForSIDE.zip
+
+
+# set constantes
+POM_PATCHER=$POM_PATCHER_PROJECT/target/repositoryBuilderForSIDE-0.0.1-jar-with-dependencies.jar
+WORKDIR=$BUILDERHOME/projects
+POM_OUT=$WORKDIR/pom.xml
+MAVENREPO=$BUILDERHOME/repository
+
+# display all constantes
+echo ==================
+echo SIDEHOME=$SIDEHOME
+echo BUILDERHOME=$BUILDERHOME
+echo WORKDIR=$WORKDIR
+echo POM_PATCHER=$POM_PATCHER
+echo POM_OUT=$POM_OUT
+echo POM_IN=$POM_IN
+echo MAVENREPO=$MAVENREPO
+echo MAVENREPO_ARCHIVE=$MAVENREPO_ARCHIVE
+echo ==================
+
+# install superpom
+cd $WORKSPACE/superpom
+mvn install
+# build patcher jar
+cd $POM_PATCHER_PROJECT
+mvn clean package
+
+
+# clean working directories
+rm -rf $BUILDERHOME/*
+mkdir -p $WORKDIR
+mkdir -p $MAVENREPO
+# copy ressources
+cp $POM_PATCHER $WORKDIR
+cp $POM_IN $POM_OUT
+cd $WORKDIR;
+# patch superpom file (add as dependencies all extension used by side components)
+java -jar $POM_PATCHER $SIDEHOME $POM_OUT
+# build archive of all maven requirements
+mvn dependency:go-offline -P public -Dmaven.repo.local=$MAVENREPO
+cd $MAVENREPO
+if [ -f $MAVENREPO_ARCHIVE ] ; then
+	rm $MAVENREPO_ARCHIVE	
+fi
+zip -r $MAVENREPO_ARCHIVE .
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>SIDE_HOME=$WORKSPACE/S-IDE
+BUILDER_HOME=$SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/productBuilder
+SIDE_BUILDS=$WORKSPACE/dist
+
+WORKDIR=$WORKSPACE/work
+ECLIPSE_BUILDER=/home/webadmin/hudson-home/eclipse/eclipse
+
+ECLIPSE_TOBUILD=$WORKDIR/sources
+echo &quot;==========&quot;
+echo WORKSPACE	=$WORKSPACE 
+echo SIDE_HOME	=$SIDE_HOME
+echo BUILDER_HOME	=$BUILDER_HOME
+echo REPO_BULDER	=$REPO_BULDER
+echo EclipseZIP		=$EclipseZIP
+echo EclipseDeltaPack	=$EclipseDeltaPack
+echo WORKDIR		=$WORKDIR
+echo &quot;==========&quot;
+
+rm -rf $WORKDIR
+mkdir -p $WORKDIR
+
+echo &quot;== copy plugins from SIDE source ==&quot;
+rm -rf $ECLIPSE_TOBUILD
+mkdir -p $ECLIPSE_TOBUILD/plugins
+cp -rf $SIDE_HOME/MetaModel/*/trunk/* $ECLIPSE_TOBUILD/plugins
+cp -rf $SIDE_HOME/Util/trunk/* $ECLIPSE_TOBUILD/plugins
+cp -rf $SIDE_HOME/Deployer/trunk/* $ECLIPSE_TOBUILD/plugins
+cp -rf $SIDE_HOME/Integration/trunk/com.bluexml.side.Integration.eclipse* $ECLIPSE_TOBUILD/plugins
+echo &quot;== copy features from SIDE source ==&quot;
+mkdir -p $ECLIPSE_TOBUILD/features
+for f in `find $SIDE_HOME -type d -name *feature`; do
+     cp -rfv $f $ECLIPSE_TOBUILD/features
+done
+
+echo &quot;== clean previous build ==&quot;
+rm -rf $BUILDER_HOME/dist
+rm -rf $BUILDER_HOME/buildDirectory
+mkdir -p $BUILDER_HOME/dist
+mkdir -p $BUILDER_HOME/buildDirectory
+echo &quot;== run builder ==&quot;
+cd $BUILDER_HOME
+ant pde-build2</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.Mailer>
+      <recipients>dabad@bluexml.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+  </publishers>
+  <buildWrappers/>
+</project>
