@@ -3,6 +3,7 @@ package com.bluexml.xforms.controller.binding;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -21,11 +22,11 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="staticEnumType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="default" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="dummyValue" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="multiple" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="searchEnum" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="readOnly" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="dummyValue" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -39,7 +40,6 @@ import javax.xml.bind.annotation.XmlType;
     "type",
     "staticEnumType",
     "_default",
-    "dummyValue",
     "multiple",
     "searchEnum",
     "readOnly"
@@ -55,11 +55,11 @@ public class FormFieldType
     protected String staticEnumType;
     @XmlElement(name = "default", required = true)
     protected String _default;
-    @XmlElement(required = true)
-    protected String dummyValue;
     protected boolean multiple;
     protected boolean searchEnum;
     protected boolean readOnly;
+    @XmlAttribute
+    protected String dummyValue;
 
     /**
      * Gets the value of the alfrescoName property.
@@ -158,30 +158,6 @@ public class FormFieldType
     }
 
     /**
-     * Gets the value of the dummyValue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDummyValue() {
-        return dummyValue;
-    }
-
-    /**
-     * Sets the value of the dummyValue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDummyValue(String value) {
-        this.dummyValue = value;
-    }
-
-    /**
      * Gets the value of the multiple property.
      * 
      */
@@ -227,6 +203,30 @@ public class FormFieldType
      */
     public void setReadOnly(boolean value) {
         this.readOnly = value;
+    }
+
+    /**
+     * Gets the value of the dummyValue property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDummyValue() {
+        return dummyValue;
+    }
+
+    /**
+     * Sets the value of the dummyValue property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDummyValue(String value) {
+        this.dummyValue = value;
     }
 
 }
