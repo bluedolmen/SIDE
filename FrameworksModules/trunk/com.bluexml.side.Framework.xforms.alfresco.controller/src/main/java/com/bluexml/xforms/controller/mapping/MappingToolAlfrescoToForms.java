@@ -404,7 +404,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			ModelChoiceType modelChoice, String id, String label, AlfrescoTransaction at,
 			Map<String, GenericClass> an, boolean formIsReadOnly) throws ServletException {
 		Node subNode = formInstance.createElement(classTypeToString(modelChoice.getRealClass()));
-		if (modelChoice.isInline()) {
+		if (isInline(modelChoice)) {
 			Node formNode = null;
 			if (StringUtils.trimToNull(id) == null) {
 				formNode = newForm(getFormType(modelChoice.getTarget().get(0).getName()),
@@ -492,7 +492,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			value = safeMapGet(initParams, formFieldType.getAlfrescoName());
 		}
 		if (value == null) { // if no value in uri, have we got a default ?
-			value = formFieldType.getDefault();
+			value = getDefault(formFieldType);
 		}
 		// if applicable, map the value to its type
 		if (StringUtils.trimToNull(value) != null) {
@@ -532,10 +532,11 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			String alfrescoId, boolean formIsReadOnly) throws ServletException {
 		Element formField = formInstance.createElement(formFieldType.getUniqueName());
 
+		boolean applyUserFormat = formIsReadOnly || isReadOnly(formFieldType);
 		if (formFieldType.getType().equals("DateTime")) {
 			String dateValue = getDateFromDateTime(value);
 			String timeValue = getTimeFromDateTime(value);
-			if (formIsReadOnly || formFieldType.isReadOnly()) {
+			if (applyUserFormat) {
 				dateValue = transformDateValueForDisplay(dateValue);
 				timeValue = transformTimeValueForDisplay(timeValue);
 				formField.setTextContent(dateValue + " " + timeValue);
@@ -549,22 +550,21 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			}
 		} else if (formFieldType.getType().equals("Date")) {
 			String dateValue = value;
-			if (formIsReadOnly || formFieldType.isReadOnly()) {
+			if (applyUserFormat) {
 				dateValue = transformDateValueForDisplay(value);
 			}
 			formField.setTextContent(dateValue);
 		} else if (formFieldType.getType().equals("Time")) {
 			String timeValue = value;
-			if (formIsReadOnly || formFieldType.isReadOnly()) {
+			if (applyUserFormat) {
 				transformTimeValueForDisplay(value);
 			}
 			formField.setTextContent(timeValue);
-		} else if (formFieldType.isSearchEnum()) {
-
-			Element idField = formInstance.createElement("MsgId.INT_INSTANCE_SIDEID.getText()");
+		} else if (isSearchEnum(formFieldType)) {
+			Element idField = formInstance.createElement(MsgId.INT_INSTANCE_SIDEID.getText());
 			idField.setTextContent(value);
 			formField.appendChild(idField);
-			Element labelField = formInstance.createElement("BXDSLABEL");
+			Element labelField = formInstance.createElement(MsgId.INT_INSTANCE_SIDELABEL.getText());
 			if (StringUtils.trimToNull(value) != null) {
 				String enumCaption = controller.getEnumCaption(transaction, value);
 				labelField.setTextContent(enumCaption);
@@ -847,8 +847,8 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			String value = null;
 
 			if (attribute == null || attribute.getValue().size() == 0) {
-				value = createXFormsInitialValue(formFieldType.getType(), formFieldType
-						.getDefault(), formFieldType.getStaticEnumType());
+				value = createXFormsInitialValue(formFieldType.getType(), 
+						getDefault(formFieldType), formFieldType.getStaticEnumType());
 			} else {
 				value = convertAlfrescoAttributeToXforms(attribute.getValue(), formFieldType
 						.getType(), formFieldType.getStaticEnumType());

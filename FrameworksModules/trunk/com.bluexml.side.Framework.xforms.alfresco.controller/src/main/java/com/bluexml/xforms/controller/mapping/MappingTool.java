@@ -364,7 +364,7 @@ public class MappingTool {
 						ClassType rc = modelChoice.getRealClass();
 						String completeName = rc.getAlfrescoName().replace("_", ".");
 						if (completeName.equalsIgnoreCase(attrType)) {
-							String value = modelChoice.getFieldSize();
+							String value = mappingToolAlfrescoToForms.getFieldSize(modelChoice);
 							// the name may exist without having a value for field size
 							return ((value == null) ? defaultVal : value);
 						}

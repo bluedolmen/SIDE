@@ -240,8 +240,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	private void processXFormsAssociationCreate(AlfrescoTransaction transaction,
 			Document xformsDocument, AssociationType association, Stack<AssociationType> stack,
 			String targetClassType, Map<String, String> initParams, Element associationElement,
-			boolean formIsReadOnly, boolean isServletRequest) throws 
-			ServletException {
+			boolean formIsReadOnly, boolean isServletRequest) throws ServletException {
 		Node targetValue = null;
 		Node associationClassValue = null;
 		if (association.isInline()) {
@@ -475,9 +474,9 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 		// the value to set eventually
 		String textualValue = null;
 		// there may be a default value
-		String defaultValue = attribute.getDefault();
+		String defaultValue = getDefault(attribute);
 		// #999: enums may be dynamic so don't treat them all as static
-		String staticEnumName = attribute.isDynamicEnum() ? null : attribute.getEnumQName();
+		String staticEnumName = isDynamicEnum(attribute) ? null : attribute.getEnumQName();
 
 		GenericAttribute alfAttribute = findAttribute(attributes, attribute);
 		String type = attribute.getType();
@@ -501,10 +500,13 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 			}
 		}
 
+		// we set the text content depending on the data type, with user format if applicable
+		final boolean applyUserFormat = (isServletRequest == false)
+				&& (formIsReadOnly || isReadOnly(attribute));
 		if (type.equals("DateTime")) {
 			String timeValue = getTimeFromDateTime(textualValue);
 			String dateValue = getDateFromDateTime(textualValue);
-			if ((isServletRequest == false) && (formIsReadOnly || attribute.isReadOnly())) {
+			if (applyUserFormat) {
 				dateValue = transformDateValueForDisplay(dateValue);
 				timeValue = transformTimeValueForDisplay(timeValue);
 				attributeElement.setTextContent(dateValue + " " + timeValue);
@@ -518,13 +520,13 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 			}
 		} else if (type.equals("Date")) {
 			String dateValue = textualValue;
-			if ((isServletRequest == false) && (formIsReadOnly || attribute.isReadOnly())) {
+			if (applyUserFormat) {
 				transformDateValueForDisplay(textualValue);
 			}
 			attributeElement.setTextContent(dateValue);
 		} else if (type.equals("Time")) {
 			String timeValue = textualValue;
-			if ((isServletRequest == false) && (formIsReadOnly || attribute.isReadOnly())) {
+			if (applyUserFormat) {
 				timeValue = transformTimeValueForDisplay(textualValue);
 			}
 			attributeElement.setTextContent(timeValue);

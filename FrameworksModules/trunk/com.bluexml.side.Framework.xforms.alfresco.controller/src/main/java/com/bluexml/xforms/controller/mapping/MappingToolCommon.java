@@ -45,6 +45,7 @@ import com.bluexml.xforms.actions.EnumAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.binding.AspectType;
+import com.bluexml.xforms.controller.binding.AttributeType;
 import com.bluexml.xforms.controller.binding.Batch;
 import com.bluexml.xforms.controller.binding.CanisterType;
 import com.bluexml.xforms.controller.binding.ClassType;
@@ -54,6 +55,7 @@ import com.bluexml.xforms.controller.binding.FormType;
 import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.binding.Mapping;
+import com.bluexml.xforms.controller.binding.ModelChoiceType;
 import com.bluexml.xforms.controller.binding.ObjectFactory;
 import com.bluexml.xforms.controller.binding.SearchFormType;
 import com.bluexml.xforms.controller.binding.ValueType;
@@ -687,8 +689,8 @@ public class MappingToolCommon {
 			return textContent.replace(',', '.');
 		}
 		if (StringUtils.trimToNull(staticEnumType) != null) {
-			String res = StringUtils
-					.trimToEmpty(EnumAction.getEnumValue(staticEnumType, textContent));
+			String res = StringUtils.trimToEmpty(EnumAction.getEnumValue(staticEnumType,
+					textContent));
 			if (res == null) {
 				logger.error("The value '" + textContent
 						+ "' is not a valid for enumeration type '" + staticEnumType
@@ -755,6 +757,108 @@ public class MappingToolCommon {
 		}
 		return (resValue == null) ? "" : resValue;
 	}
+
+	/*
+	 * HELPER FUNCTIONS DUE TO MOVING SOME INFO FROM ELEMENTS TO ATTRIBUTES
+	 */
+
+	protected String getDefault(AttributeType attributeType) {
+		try {
+			return attributeType.getDefault();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	protected String getFieldSize(AttributeType attributeType) {
+		try {
+			return attributeType.getFieldSize();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	protected boolean isDynamicEnum(AttributeType attributeType) {
+		try {
+			return attributeType.isDynamicEnum();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	protected boolean isMultiple(AttributeType attributeType) {
+		try {
+			return attributeType.isMultiple();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	protected boolean isReadOnly(AttributeType attributeType) {
+		try {
+			return attributeType.isReadOnly();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	/* 
+	 * ModelChoiceType
+	 */
+	protected String getFieldSize(ModelChoiceType modelChoiceType) {
+		try {
+			return modelChoiceType.getFieldSize();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	protected boolean isInline(ModelChoiceType modelChoiceType) {
+		try {
+			return modelChoiceType.isInline();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	/* 
+	 * FormFieldType
+	 */
+	protected String getDefault(FormFieldType formFieldType) {
+		try {
+			return formFieldType.getDefault();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	protected boolean isMultiple(FormFieldType formFieldType) {
+		try {
+			return formFieldType.isMultiple();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	protected boolean isReadOnly(FormFieldType formFieldType) {
+		try {
+			return formFieldType.isReadOnly();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	protected boolean isSearchEnum(FormFieldType formFieldType) {
+		try {
+			return formFieldType.isSearchEnum();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	/*
+	 * SUPPORT FOR READ ONLY DATES AND TIMES
+	 */
 
 	/**
 	 * Gets the time from date time.

@@ -102,12 +102,15 @@
 					<xsd:element name="alfrescoName" type="xsd:string" />
 					<xsd:element name="type" type="xsd:string" />
 					<xsd:element minOccurs="0" name="staticEnumType" type="xsd:string" />
-					<xsd:element name="default" type="xsd:string" />
-					<xsd:element name="multiple" type="xsd:boolean" />
-					<xsd:element name="searchEnum" type="xsd:boolean" />
-					<xsd:element name="readOnly" type="xsd:boolean" />
 				</xsd:sequence>
+				<!-- defaults to null -->
+				<xsd:attribute name="default" type="xsd:string" use="optional" />
+				<!-- defaults to null -->
 				<xsd:attribute name="dummyValue" type="xsd:string" use="optional" />
+				<!-- booleans default to false -->
+				<xsd:attribute name="multiple" type="xsd:boolean" use="optional" />
+				<xsd:attribute name="readOnly" type="xsd:boolean" use="optional" />
+				<xsd:attribute name="searchEnum" type="xsd:boolean" use="optional" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -147,11 +150,11 @@
 					<xsd:element name="alfrescoName" type="xsd:string" />
 					<xsd:element name="minBound" type="xsd:int" />
 					<xsd:element name="maxBound" type="xsd:int" />
-					<xsd:element name="inline" type="xsd:boolean" />
 					<xsd:element name="realClass" type="classType" />
 					<xsd:element maxOccurs="unbounded" name="target" type="formType" />
-					<xsd:element name="fieldSize" type="xsd:string" />
 				</xsd:sequence>
+				<xsd:attribute name="inline" type="xsd:boolean" use="optional" />
+				<xsd:attribute name="fieldSize" type="xsd:string" use="optional" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

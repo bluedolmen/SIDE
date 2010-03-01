@@ -385,7 +385,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	private String getModelChoiceId(Element value, ModelChoiceType modelChoiceType,
 			AlfrescoTransaction at) throws ServletException {
 		String id = null;
-		if (modelChoiceType.isInline()) {
+		if (isInline(modelChoiceType)) {
 			id = controller.persistForm(at, modelChoiceType.getTarget().get(0).getName(), DOMUtil
 					.getFirstElement(value));
 		} else {
@@ -489,7 +489,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			attribute.setQualifiedName(alfrescoName);
 			String type = fieldType.getType();
 			String inputTextContent = fieldElement.getTextContent();
-			boolean readOnly = fieldType.isReadOnly();
+			boolean readOnly = isReadOnly(fieldType);
 			if (logger.isTraceEnabled()) {
 				logger.debug("Received value '" + inputTextContent + "' for attribute '"
 						+ alfrescoName + "' with type '" + type + "'. Read-only status '"
@@ -499,13 +499,13 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 
 			//
 			// convert the XForms field value to an attribute (possibly multiple) value
-			if (fieldType.isMultiple()) {
+			if (isMultiple(fieldType)) {
 				convertXformsAttributeToAlfresco(attribute, inputTextContent, type, fieldType
 						.getStaticEnumType());
 			} else {
 				String alfrescoValue = null;
 				// if applicable, take the user format into account
-				if (isAmendable(type, fieldType.isReadOnly(), false)) {
+				if (isAmendable(type, isReadOnly(fieldType), false)) {
 					inputTextContent = getReadOnlyDateOrTimeModifiedValue(type, inputTextContent);
 				}
 				if (type.equals("DateTime")) {
@@ -519,7 +519,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 						time = DOMUtil.getChild(fieldElement, "time").getTextContent();
 					}
 					alfrescoValue = getDateTimeFromDateAndTime(date, time);
-				} else if (fieldType.isSearchEnum()) {
+				} else if (isSearchEnum(fieldType)) {
 					alfrescoValue = DOMUtil.getChild(fieldElement,
 							MsgId.INT_INSTANCE_SIDEID.getText()).getTextContent();
 				} else {
@@ -538,13 +538,13 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 				String destination = fileField.isInRepository() ? MsgId.INT_UPLOAD_DEST_REPO
 						.getText() : MsgId.INT_UPLOAD_DEST_FILE.getText();
 				attribute.setUploadTo(destination);
-				
+
 				// we need a name for the node (in case of upload to the repository)
 				ValueType valueTypeNameAndExt = alfrescoObjectFactory.createValueType();
 				String nameAndExt = fieldElement.getAttribute("file");
 				valueTypeNameAndExt.setValue(nameAndExt);
 				attribute.getValue().add(valueTypeNameAndExt);
-				
+
 				// we also want the MIME type; not needed but it won't hurt
 				ValueType valueTypeMIME = alfrescoObjectFactory.createValueType();
 				String mimetype = fieldElement.getAttribute("type");

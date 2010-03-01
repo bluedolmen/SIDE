@@ -302,11 +302,11 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 		GenericAttribute result = alfrescoObjectFactory.createGenericAttribute();
 		String alfrescoName = attributeType.getAlfrescoName();
 		result.setQualifiedName(alfrescoName);
-		String enumName = attributeType.isDynamicEnum() ? null : attributeType.getEnumQName();
+		String enumName = isDynamicEnum(attributeType) ? null : attributeType.getEnumQName();
 
 		String inputTextContent = child.getTextContent();
 		String type = attributeType.getType();
-		if (attributeType.isMultiple()) {
+		if (isMultiple(attributeType)) {
 			convertXformsAttributeToAlfresco(result, inputTextContent, type, enumName);
 		} else {
 			String value = null;
