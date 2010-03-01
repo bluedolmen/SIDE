@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:SearchFormCollection xmlns:form="http://www.kerblue.org/form/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_cOAykCFsEd-grPsxXhqAnQ" xmi:version="2.0">
-  <forms id="Dossier_Search" label="Recherche d'un dossier" xmi:id="_c4ZMUCFsEd-grPsxXhqAnQ" xsi:type="form:FormSearch">
-    <children id="Prenom" label="Prenom" xmi:id="_iQboACFsEd-grPsxXhqAnQ" xsi:type="form:CharSearchField">
+<form:SearchFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_cOAykCFsEd-grPsxXhqAnQ">
+  <forms xsi:type="form:FormSearch" xmi:id="_c4ZMUCFsEd-grPsxXhqAnQ" label="Recherche d'un dossier" id="Dossier_Search">
+    <children xsi:type="form:CharSearchField" xmi:id="_iQboACFsEd-grPsxXhqAnQ" label="Prenom" id="Prenom">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_yhCpsCABEd-8qvQk7m7roQ"/>
     </children>
-    <children id="Nom" label="Nom" xmi:id="_iQboASFsEd-grPsxXhqAnQ" xsi:type="form:CharSearchField">
+    <children xsi:type="form:CharSearchField" xmi:id="_iQboASFsEd-grPsxXhqAnQ" label="Nom" id="Nom">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_uuPtgCABEd-8qvQk7m7roQ"/>
     </children>
-    <children id="Matricule" label="Matricule" xmi:id="_iQboAiFsEd-grPsxXhqAnQ" xsi:type="form:CharSearchField">
+    <children xsi:type="form:CharSearchField" xmi:id="_iQboAiFsEd-grPsxXhqAnQ" label="Matricule" id="Matricule">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_qeSUMCABEd-8qvQk7m7roQ"/>
     </children>
     <real_class href="/CG44_Agent/v1/models/Data/cg44agent.dt#_HJUnoBDgEd-eFJrsZcrkww"/>
   </forms>
-  <forms id="Document_Search" label="Recherche avancée d'un document" xmi:id="_1bzQsCFsEd-grPsxXhqAnQ" xsi:type="form:FormSearch">
-    <children id="Version" label="Version" xmi:id="_3Xe6QCFsEd-grPsxXhqAnQ" xsi:type="form:CharSearchField">
+  <forms xsi:type="form:FormSearch" xmi:id="_1bzQsCFsEd-grPsxXhqAnQ" label="Recherche avancée d'un document" id="Document_Search">
+    <children xsi:type="form:CharSearchField" xmi:id="_3Xe6QCFsEd-grPsxXhqAnQ" label="Version" id="Version">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
     </children>
-    <children id="Description" label="Description" xmi:id="_3Xe6QSFsEd-grPsxXhqAnQ" xsi:type="form:CharSearchField">
+    <children xsi:type="form:CharSearchField" xmi:id="_3Xe6QSFsEd-grPsxXhqAnQ" label="Description" id="Description">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gcQ4IBAHEd-QPZneBoCQXA"/>
     </children>
-    <children id="DateNumerisation" label="Date de la numerisation" xmi:id="_3Xe6QiFsEd-grPsxXhqAnQ" xsi:type="form:DateSearchField">
+    <children xsi:type="form:DateSearchField" xmi:id="_3Xe6QiFsEd-grPsxXhqAnQ" label="Date de la numerisation" id="DateNumerisation">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gsuWABAHEd-QPZneBoCQXA"/>
     </children>
-    <children id="Categorie" label="Categorie" xmi:id="_3Xe6QyFsEd-grPsxXhqAnQ" xsi:type="form:ChoiceSearchField">
+    <children xsi:type="form:ChoiceSearchField" xmi:id="_3Xe6QyFsEd-grPsxXhqAnQ" label="Categorie" id="Categorie">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_iEQJoBAHEd-QPZneBoCQXA"/>
     </children>
-    <children id="Origine" label="Origine" xmi:id="_3Xe6RCFsEd-grPsxXhqAnQ" xsi:type="form:ChoiceSearchField">
+    <children xsi:type="form:ChoiceSearchField" xmi:id="_3Xe6RCFsEd-grPsxXhqAnQ" label="Origine" id="Origine">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_X0njACAEEd-8qvQk7m7roQ"/>
     </children>
-    <children id="Nature" label="Nature" xmi:id="_3Xe6RSFsEd-grPsxXhqAnQ" xsi:type="form:ChoiceSearchField">
+    <children xsi:type="form:ChoiceSearchField" xmi:id="_3Xe6RSFsEd-grPsxXhqAnQ" label="Nature" id="Nature">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_wtikYCAEEd-8qvQk7m7roQ"/>
     </children>
-    <children id="Objet" label="Objet" xmi:id="_3Xe6RiFsEd-grPsxXhqAnQ" xsi:type="form:ChoiceSearchField">
+    <children xsi:type="form:ChoiceSearchField" xmi:id="_3Xe6RiFsEd-grPsxXhqAnQ" label="Objet" id="Objet">
       <ref href="/CG44_Agent/v1/models/Data/cg44agent.dt#_0AWY8CAEEd-8qvQk7m7roQ"/>
     </children>
     <real_class href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
   </forms>
 </form:SearchFormCollection>
-
