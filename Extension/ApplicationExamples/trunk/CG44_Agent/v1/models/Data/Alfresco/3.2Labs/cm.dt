@@ -2,7 +2,7 @@
 <clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="0.37201408170177275" name="cm">
   <classSet xmi:id="0.7982142734367504" documentation="" description="" name="cmobject" title="Object" aspects="0.9473708660699585">
     <attributes xmi:id="0.38362934909383717" documentation="" description="" name="name" title="Name" visibility="Public"/>
-    <generalizations href="sys.dt#0.7781428490504174"/>
+    <generalizations href="/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/sys.dt#0.7781428490504174"/>
   </classSet>
   <classSet xmi:id="0.6405372130951577" documentation="" description="" name="folder" title="Folder" generalizations="0.7982142734367504"/>
   <classSet xmi:id="0.7536340115887051" documentation="" description="" name="content" title="Content" generalizations="0.7982142734367504">
@@ -22,7 +22,7 @@
   <classSet xmi:id="0.07103012170003697" documentation="" description="" name="savedquery" title="Saved Query" generalizations="0.7536340115887051"/>
   <classSet xmi:id="0.9266359666544088" documentation="" description="" name="systemfolder" title="System Folder" generalizations="0.6405372130951577"/>
   <classSet xmi:id="0.5758440104146785" documentation="" description="" name="authority" title="Alfresco Authority Abstract Type">
-    <generalizations href="sys.dt#0.7781428490504174"/>
+    <generalizations href="/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/sys.dt#0.7781428490504174"/>
   </classSet>
   <classSet xmi:id="0.5720345108377652" documentation="" description="" name="person" title="Person" generalizations="0.5758440104146785">
     <attributes xmi:id="0.6294322832256671" documentation="" description="" name="userName" title="" visibility="Public"/>
@@ -62,10 +62,10 @@
   <classSet xmi:id="0.6187829661415686" documentation="" description="" name="category_root" title="Category Root" generalizations="0.7982142734367504" aspects="0.9473708660699585"/>
   <classSet xmi:id="0.3686214967700078" documentation="" description="" name="category" title="Category" generalizations="0.7982142734367504"/>
   <classSet xmi:id="0.06272241480446061" documentation="" description="" name="mlRoot" title="Multilingual Root">
-    <generalizations href="sys.dt#0.6089810092477961"/>
+    <generalizations href="/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/sys.dt#0.6089810092477961"/>
   </classSet>
   <classSet xmi:id="0.1689757241637747" documentation="" description="" name="mlContainer" title="Multilingual Container" aspects="0.9473708660699585 0.30018804618364936 0.21359250960865273">
-    <generalizations href="sys.dt#0.6089810092477961"/>
+    <generalizations href="/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/sys.dt#0.6089810092477961"/>
   </classSet>
   <classSet xmi:id="0.336731296743378" documentation="" description="" name="thumbnail" title="Thumbnail" generalizations="0.7536340115887051">
     <attributes xmi:id="0.5914306229287851" documentation="" description="" name="thumbnailName" title="Thumbnail Name" visibility="Public"/>
@@ -74,7 +74,7 @@
   <associationSet xmi:id="0.09390696355615025" description="" name="contains" title="" associationType="Composition">
     <firstEnd xmi:id="0.09695331404933394" name="contains" title="" cardMax="-1" linkedClass="0.6405372130951577"/>
     <secondEnd xmi:id="0.6885321309726998" name="contains" title="" cardMax="-1" navigable="true">
-      <linkedClass xsi:type="clazz:Clazz" href="sys.dt#0.7781428490504174"/>
+      <linkedClass xsi:type="clazz:Clazz" href="/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/sys.dt#0.7781428490504174"/>
     </secondEnd>
   </associationSet>
   <associationSet xmi:id="0.34355636651748644" description="" name="avatar" title="">
