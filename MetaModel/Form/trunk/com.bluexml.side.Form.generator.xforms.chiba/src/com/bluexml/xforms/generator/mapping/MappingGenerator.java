@@ -206,21 +206,31 @@ public class MappingGenerator extends AbstractGenerator {
 			attributeType.setEnumQName(ModelTools.getCompleteName(attribute.getValueList()));
 		}
 
+		//
+		// properties stored as attributes if different from the default
 		result = ModelTools.getMetaInfoValue(attribute, "multiple");
 		if (result != null) {
-			isMultiple = (StringUtils.equalsIgnoreCase(result, "true"));
+			if (StringUtils.equalsIgnoreCase(result, "true")) {
+				attributeType.setMultiple(isMultiple);
+			}
 		}
-		attributeType.setMultiple(isMultiple);
 
 		boolean isDisabled = false;
 		result = ModelTools.getMetaInfoValue(attribute, "read-only");
 		if (result != null) {
 			isDisabled = (StringUtils.equalsIgnoreCase(result, "true"));
+			attributeType.setReadOnly(isDisabled);
 		}
-		attributeType.setReadOnly(isDisabled);
 
-		attributeType.setDefault(attribute.getInitialValue());
-		attributeType.setFieldSize(ModelTools.getMetaInfoValue(attribute, "size"));
+		String initialValue = attribute.getInitialValue();
+		if (initialValue != null) {
+			attributeType.setDefault(initialValue);
+		}
+
+		String fieldSize = ModelTools.getMetaInfoValue(attribute, "size");
+		if ((fieldSize != null) && (!fieldSize.equals("0"))) {
+			attributeType.setFieldSize(fieldSize);
+		}
 
 		return attributeType;
 	}
@@ -766,7 +776,7 @@ public class MappingGenerator extends AbstractGenerator {
 				fieldType.setInputs("2");
 			}
 
-			// we set the 'type' attribute for data types whose inputs will be initialized 
+			// we set the 'type' attribute for data types whose inputs will be initialized
 			if (isDateType(typ)) {
 				fieldType.setType(typ.getName());
 			}
@@ -922,13 +932,16 @@ public class MappingGenerator extends AbstractGenerator {
 			formFieldType.setAlfrescoName(attribute.getName()); // FIXME: à vérifier
 		}
 
-		formFieldType.setDefault(field.getInitial());
+		String initialValue = field.getInitial();
+		if (initialValue != null) {
+			formFieldType.setDefault(initialValue); // optional attribute
+		}
 		formFieldType.setMandatory(field.isMandatory());
 
 		if (field instanceof ChoiceField) {
 			ChoiceField choiceField = (ChoiceField) field;
 			if (choiceField.getWidget() == ChoiceWidgetType.LIST_ALL) {
-				formFieldType.setSearchEnum(true);
+				formFieldType.setSearchEnum(true); // optional attribute
 			}
 		}
 		if (ref instanceof Attribute) {
@@ -943,7 +956,9 @@ public class MappingGenerator extends AbstractGenerator {
 
 			result = ModelTools.getMetaInfoValue(attribute, "multiple");
 			if (result != null) {
-				isMultiple = (StringUtils.equalsIgnoreCase(result, "true"));
+				if (StringUtils.equalsIgnoreCase(result, "true")) {
+					formFieldType.setMultiple(isMultiple); // optional attribute
+				}
 			}
 		} else if (ref instanceof com.bluexml.side.workflow.Attribute) {
 			com.bluexml.side.workflow.Attribute attribute = ((com.bluexml.side.workflow.Attribute) ref);
@@ -953,11 +968,14 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 
 		// boolean attributes
+		boolean disabled = field.isDisabled();
+		if (disabled) {
+			formFieldType.setReadOnly(disabled); // optional attribute
+		}
 		formFieldType.setSearchEnum(false);
-		formFieldType.setMultiple(isMultiple);
-		formFieldType.setReadOnly(field.isDisabled());
 
-		formFieldType.setDummyValue(pickDummyValue(formFieldType.getType()));
+		// TODO: remove
+		// formFieldType.setDummyValue(pickDummyValue(formFieldType.getType())); // optional
 		if (field instanceof FileField) {
 			FileFieldType fileFieldType = initFileFieldFromFormField(formFieldType);
 
@@ -1050,6 +1068,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param type
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private String pickDummyValue(String type) {
 		String[] strings = {
 				"alpha",
@@ -1098,9 +1117,18 @@ public class MappingGenerator extends AbstractGenerator {
 		res.setAlfrescoName(formFieldType.getAlfrescoName());
 		res.setType(formFieldType.getType());
 		res.setStaticEnumType(formFieldType.getStaticEnumType());
-		res.setDefault(formFieldType.getDefault());
-		res.setMultiple(formFieldType.isMultiple());
-		res.setSearchEnum(formFieldType.isSearchEnum());
+
+		//
+		// optional attributes
+		if (formFieldType.getDefault() != null) {
+			res.setDefault(formFieldType.getDefault());
+		}
+		try {
+			res.setMultiple(formFieldType.isMultiple());
+			res.setSearchEnum(formFieldType.isSearchEnum());
+		} catch (Exception e) {
+			// nothing to do, these are optional attributes
+		}
 		return res;
 	}
 
