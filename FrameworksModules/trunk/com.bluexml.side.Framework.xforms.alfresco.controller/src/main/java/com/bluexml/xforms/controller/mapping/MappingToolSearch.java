@@ -211,7 +211,13 @@ public class MappingToolSearch extends MappingToolCommon {
 				buf.append("{"); // open field
 
 				buf.append("type:\"");
-				buf.append(refAttribute.getType());
+				String type;
+				if (isEnumerated(fieldType)) {
+					type = MsgId.INT_SEARCH_JSON_TYPE_ENUMS.getText();
+				} else {
+					type = refAttribute.getType();
+				}
+				buf.append(type);
 				buf.append("\"");
 
 				buf.append(",operator:\"");
