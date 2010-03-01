@@ -40,7 +40,7 @@
     <view xsi:type="view:ComposedView" href="../View/cg44agent.view#_cBXlYCAGEd-8qvQk7m7roQ"/>
   </internalPortletSet>
   <internalPortletSet xmi:id="_DIsUQCAJEd-8qvQk7m7roQ" type="Form">
-    <form xsi:type="form:SearchFormCollection" href="/CG44_Agent/v1/models/Form/search.form#_cOAykCFsEd-grPsxXhqAnQ"/>
+    <form xsi:type="form:ClassFormCollection" href="../Form/cg44agent.form#_UtchQCAFEd-8qvQk7m7roQ"/>
   </internalPortletSet>
   <internalPortletSet xmi:id="_JhlEoCGYEd-grPsxXhqAnQ">
     <view xsi:type="view:FacetMap" href="../View/cg44agent.view#_2vP68CF_Ed-grPsxXhqAnQ"/>
