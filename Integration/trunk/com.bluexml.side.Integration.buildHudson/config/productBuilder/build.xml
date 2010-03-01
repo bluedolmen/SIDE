@@ -16,8 +16,12 @@
 		<echo message="builder : ${eclipse.pdebuild.scripts}/productBuild/productBuild.xml"></echo>
 		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" />
 
+		<mkdir dir="${distros}" />
 		<move todir="${distros}">
-			<fileset dir="${buildDirectory}/${buildLabel}" includes="*.zip" />
+			<fileset dir="${buildDirectory}/${buildLabel}">
+				<include name="*.zip"/>
+				<include name="*.tar.gz"/>
+			</fileset>
 		</move>
 	</target>
 
