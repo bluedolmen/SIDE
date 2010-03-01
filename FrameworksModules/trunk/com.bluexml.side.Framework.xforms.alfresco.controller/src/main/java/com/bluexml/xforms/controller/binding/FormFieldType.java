@@ -21,12 +21,12 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="alfrescoName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="staticEnumType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="default" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="multiple" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="searchEnum" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="readOnly" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="default" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="dummyValue" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="multiple" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       &lt;attribute name="readOnly" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       &lt;attribute name="searchEnum" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -38,11 +38,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "formFieldType", propOrder = {
     "alfrescoName",
     "type",
-    "staticEnumType",
-    "_default",
-    "multiple",
-    "searchEnum",
-    "readOnly"
+    "staticEnumType"
 })
 public class FormFieldType
     extends FieldType
@@ -53,13 +49,16 @@ public class FormFieldType
     @XmlElement(required = true)
     protected String type;
     protected String staticEnumType;
-    @XmlElement(name = "default", required = true)
+    @XmlAttribute(name = "default")
     protected String _default;
-    protected boolean multiple;
-    protected boolean searchEnum;
-    protected boolean readOnly;
     @XmlAttribute
     protected String dummyValue;
+    @XmlAttribute
+    protected Boolean multiple;
+    @XmlAttribute
+    protected Boolean readOnly;
+    @XmlAttribute
+    protected Boolean searchEnum;
 
     /**
      * Gets the value of the alfrescoName property.
@@ -158,54 +157,6 @@ public class FormFieldType
     }
 
     /**
-     * Gets the value of the multiple property.
-     * 
-     */
-    public boolean isMultiple() {
-        return multiple;
-    }
-
-    /**
-     * Sets the value of the multiple property.
-     * 
-     */
-    public void setMultiple(boolean value) {
-        this.multiple = value;
-    }
-
-    /**
-     * Gets the value of the searchEnum property.
-     * 
-     */
-    public boolean isSearchEnum() {
-        return searchEnum;
-    }
-
-    /**
-     * Sets the value of the searchEnum property.
-     * 
-     */
-    public void setSearchEnum(boolean value) {
-        this.searchEnum = value;
-    }
-
-    /**
-     * Gets the value of the readOnly property.
-     * 
-     */
-    public boolean isReadOnly() {
-        return readOnly;
-    }
-
-    /**
-     * Sets the value of the readOnly property.
-     * 
-     */
-    public void setReadOnly(boolean value) {
-        this.readOnly = value;
-    }
-
-    /**
      * Gets the value of the dummyValue property.
      * 
      * @return
@@ -227,6 +178,78 @@ public class FormFieldType
      */
     public void setDummyValue(String value) {
         this.dummyValue = value;
+    }
+
+    /**
+     * Gets the value of the multiple property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isMultiple() {
+        return multiple;
+    }
+
+    /**
+     * Sets the value of the multiple property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setMultiple(Boolean value) {
+        this.multiple = value;
+    }
+
+    /**
+     * Gets the value of the readOnly property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isReadOnly() {
+        return readOnly;
+    }
+
+    /**
+     * Sets the value of the readOnly property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setReadOnly(Boolean value) {
+        this.readOnly = value;
+    }
+
+    /**
+     * Gets the value of the searchEnum property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isSearchEnum() {
+        return searchEnum;
+    }
+
+    /**
+     * Sets the value of the searchEnum property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setSearchEnum(Boolean value) {
+        this.searchEnum = value;
     }
 
 }

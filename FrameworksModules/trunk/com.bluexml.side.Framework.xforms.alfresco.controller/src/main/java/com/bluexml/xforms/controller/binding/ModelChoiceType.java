@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -22,11 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="alfrescoName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="minBound" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="maxBound" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="inline" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="realClass" type="{}classType"/>
  *         &lt;element name="target" type="{}formType" maxOccurs="unbounded"/>
- *         &lt;element name="fieldSize" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="inline" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       &lt;attribute name="fieldSize" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -39,10 +40,8 @@ import javax.xml.bind.annotation.XmlType;
     "alfrescoName",
     "minBound",
     "maxBound",
-    "inline",
     "realClass",
-    "target",
-    "fieldSize"
+    "target"
 })
 public class ModelChoiceType
     extends FieldType
@@ -52,12 +51,13 @@ public class ModelChoiceType
     protected String alfrescoName;
     protected int minBound;
     protected int maxBound;
-    protected boolean inline;
     @XmlElement(required = true)
     protected ClassType realClass;
     @XmlElement(required = true)
     protected List<FormType> target;
-    @XmlElement(required = true)
+    @XmlAttribute
+    protected Boolean inline;
+    @XmlAttribute
     protected String fieldSize;
 
     /**
@@ -117,22 +117,6 @@ public class ModelChoiceType
     }
 
     /**
-     * Gets the value of the inline property.
-     * 
-     */
-    public boolean isInline() {
-        return inline;
-    }
-
-    /**
-     * Sets the value of the inline property.
-     * 
-     */
-    public void setInline(boolean value) {
-        this.inline = value;
-    }
-
-    /**
      * Gets the value of the realClass property.
      * 
      * @return
@@ -183,6 +167,30 @@ public class ModelChoiceType
             target = new ArrayList<FormType>();
         }
         return this.target;
+    }
+
+    /**
+     * Gets the value of the inline property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isInline() {
+        return inline;
+    }
+
+    /**
+     * Sets the value of the inline property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setInline(Boolean value) {
+        this.inline = value;
     }
 
     /**
