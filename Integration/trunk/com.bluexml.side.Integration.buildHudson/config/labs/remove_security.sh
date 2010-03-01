@@ -59,7 +59,7 @@ for f in `find $SOURCE_PATH -type f -name "*.java"`; do
 	perl -ni -e 'print unless /SidePreferences.getKeys/' $f
 	
 	
-	if grep -n "public boolean check" $f
+	if grep -n "public boolean check[ ]*(" $f
 	then		
 		# delete every line betwen the pattern 'public boolean check' and '}'
 		perl -pi -e 'if(/public boolean check/../\}/){s/^.*$//s unless /(public boolean check|\})/}' $f		
