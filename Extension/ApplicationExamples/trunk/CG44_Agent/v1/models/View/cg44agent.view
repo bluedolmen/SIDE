@@ -1,161 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<view:ViewCollection xmlns:view="http://www.kerblue.org/view/1.0" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_aoZnUCAGEd-8qvQk7m7roQ" xmi:version="2.0">
-  <views name="Document" xmi:id="_2vP68CF_Ed-grPsxXhqAnQ" xsi:type="view:FacetMap">
-    <children name="Categorie" xmi:id="_rn6asyHuEd-R7N33Hlrq_A" xsi:type="view:TextField">
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_aoZnUCAGEd-8qvQk7m7roQ">
+  <views xsi:type="view:FacetMap" xmi:id="_2vP68CF_Ed-grPsxXhqAnQ" name="Document">
+    <children xsi:type="view:TextField" xmi:id="_rn6asyHuEd-R7N33Hlrq_A" name="Categorie">
       <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_iEQJoBAHEd-QPZneBoCQXA"/>
     </children>
-    <children name="Origine" xmi:id="_rn6atCHuEd-R7N33Hlrq_A" xsi:type="view:TextField">
+    <children xsi:type="view:TextField" xmi:id="_rn6atCHuEd-R7N33Hlrq_A" name="Origine">
       <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_X0njACAEEd-8qvQk7m7roQ"/>
     </children>
-    <children name="Nature" xmi:id="_rn6atSHuEd-R7N33Hlrq_A" xsi:type="view:TextField">
+    <children xsi:type="view:TextField" xmi:id="_rn6atSHuEd-R7N33Hlrq_A" name="Nature">
       <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_wtikYCAEEd-8qvQk7m7roQ"/>
     </children>
-    <children name="Objet" xmi:id="_rn6atiHuEd-R7N33Hlrq_A" xsi:type="view:TextField">
+    <children xsi:type="view:TextField" xmi:id="_rn6atiHuEd-R7N33Hlrq_A" name="Objet">
       <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_0AWY8CAEEd-8qvQk7m7roQ"/>
     </children>
-    <children name="Document" xmi:id="_rn6atyHuEd-R7N33Hlrq_A" xsi:type="view:DataTable">
+    <children xsi:type="view:DataTable" xmi:id="_rn6atyHuEd-R7N33Hlrq_A" name="Document">
       <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
-      <children name="Version" xmi:id="_rn6auCHuEd-R7N33Hlrq_A" xsi:type="view:Col">
-        <children name="Version" xmi:id="_rn6auSHuEd-R7N33Hlrq_A" xsi:type="view:TextField">
+      <children xsi:type="view:Col" xmi:id="_rn6auCHuEd-R7N33Hlrq_A" name="Version">
+        <children xsi:type="view:TextField" xmi:id="_rn6auSHuEd-R7N33Hlrq_A" name="Version">
           <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
         </children>
       </children>
-      <children name="Description" xmi:id="_rn6auiHuEd-R7N33Hlrq_A" xsi:type="view:Col">
-        <children name="Description" xmi:id="_rn6auyHuEd-R7N33Hlrq_A" xsi:type="view:TextField">
+      <children xsi:type="view:Col" xmi:id="_rn6auiHuEd-R7N33Hlrq_A" name="Description">
+        <children xsi:type="view:TextField" xmi:id="_rn6auyHuEd-R7N33Hlrq_A" name="Description">
           <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gcQ4IBAHEd-QPZneBoCQXA"/>
         </children>
       </children>
-      <children name="DateNumerisation" xmi:id="_rn6avCHuEd-R7N33Hlrq_A" xsi:type="view:Col">
-        <children name="DateNumerisation" xmi:id="_rn6avSHuEd-R7N33Hlrq_A" xsi:type="view:DateField">
+      <children xsi:type="view:Col" xmi:id="_rn6avCHuEd-R7N33Hlrq_A" name="DateNumerisation">
+        <children xsi:type="view:DateField" xmi:id="_rn6avSHuEd-R7N33Hlrq_A" name="DateNumerisation">
           <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gsuWABAHEd-QPZneBoCQXA"/>
         </children>
       </children>
-      <children name="Categorie" xmi:id="_rn6aviHuEd-R7N33Hlrq_A" xsi:type="view:Col">
-        <children name="Categorie" xmi:id="_rn6avyHuEd-R7N33Hlrq_A" xsi:type="view:TextField">
+      <children xsi:type="view:Col" xmi:id="_rn6aviHuEd-R7N33Hlrq_A" name="Categorie">
+        <children xsi:type="view:TextField" xmi:id="_rn6avyHuEd-R7N33Hlrq_A" name="Categorie">
           <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_iEQJoBAHEd-QPZneBoCQXA"/>
         </children>
       </children>
-      <children name="Origine" xmi:id="_rn6awCHuEd-R7N33Hlrq_A" xsi:type="view:Col">
-        <children name="Origine" xmi:id="_rn6awSHuEd-R7N33Hlrq_A" xsi:type="view:TextField">
+      <children xsi:type="view:Col" xmi:id="_rn6awCHuEd-R7N33Hlrq_A" name="Origine">
+        <children xsi:type="view:TextField" xmi:id="_rn6awSHuEd-R7N33Hlrq_A" name="Origine">
           <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_X0njACAEEd-8qvQk7m7roQ"/>
         </children>
       </children>
-      <children name="Nature" xmi:id="_rn6awiHuEd-R7N33Hlrq_A" xsi:type="view:Col">
-        <children name="Nature" xmi:id="_rn6awyHuEd-R7N33Hlrq_A" xsi:type="view:TextField">
+      <children xsi:type="view:Col" xmi:id="_rn6awiHuEd-R7N33Hlrq_A" name="Nature">
+        <children xsi:type="view:TextField" xmi:id="_rn6awyHuEd-R7N33Hlrq_A" name="Nature">
           <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_wtikYCAEEd-8qvQk7m7roQ"/>
         </children>
       </children>
-      <children name="Objet" xmi:id="_rn6axCHuEd-R7N33Hlrq_A" xsi:type="view:Col">
-        <children name="Objet" xmi:id="_rn6axSHuEd-R7N33Hlrq_A" xsi:type="view:TextField">
+      <children xsi:type="view:Col" xmi:id="_rn6axCHuEd-R7N33Hlrq_A" name="Objet">
+        <children xsi:type="view:TextField" xmi:id="_rn6axSHuEd-R7N33Hlrq_A" name="Objet">
           <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_0AWY8CAEEd-8qvQk7m7roQ"/>
         </children>
       </children>
-      <viewOf href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA" xsi:type="clazz:Clazz"/>
+      <viewOf xsi:type="clazz:Clazz" href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
     </children>
-    <disabled name="DateNumerisation" xmi:id="_N1EcACH5Ed-R7N33Hlrq_A" xsi:type="view:DateField">
+    <disabled xsi:type="view:DateField" xmi:id="_N1EcACH5Ed-R7N33Hlrq_A" name="DateNumerisation">
       <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gsuWABAHEd-QPZneBoCQXA"/>
     </disabled>
-    <disabled name="Description" xmi:id="_OJE9ICH5Ed-R7N33Hlrq_A" xsi:type="view:TextField">
+    <disabled xsi:type="view:TextField" xmi:id="_OJE9ICH5Ed-R7N33Hlrq_A" name="Description">
       <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gcQ4IBAHEd-QPZneBoCQXA"/>
     </disabled>
-    <disabled name="Version" xmi:id="_PD60wCH5Ed-R7N33Hlrq_A" xsi:type="view:TextField">
+    <disabled xsi:type="view:TextField" xmi:id="_PD60wCH5Ed-R7N33Hlrq_A" name="Version">
       <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
     </disabled>
-    <viewOf href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA" xsi:type="clazz:Clazz"/>
+    <viewOf xsi:type="clazz:Clazz" href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
   </views>
-  <composedViews name="List" xmi:id="_cBXlYCAGEd-8qvQk7m7roQ">
-    <children description="Dossier agent" name="Dossier" xmi:id="_ex9dsCAGEd-8qvQk7m7roQ" xsi:type="view:DataList">
-      <children name="Matricule" xmi:id="_m2OR8CFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+  <composedViews xmi:id="_cBXlYCAGEd-8qvQk7m7roQ" name="List">
+    <children xsi:type="view:DataList" xmi:id="_ex9dsCAGEd-8qvQk7m7roQ" description="Dossier agent" name="Dossier">
+      <children xsi:type="view:TextField" xmi:id="_m2OR8CFtEd-grPsxXhqAnQ" name="Matricule">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_qeSUMCABEd-8qvQk7m7roQ"/>
       </children>
-      <children name="Prenom" xmi:id="_m2OR8iFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_m2OR8iFtEd-grPsxXhqAnQ" name="Prenom">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_yhCpsCABEd-8qvQk7m7roQ"/>
       </children>
-      <children name="Nom" xmi:id="_m2OR8yFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_m2OR8yFtEd-grPsxXhqAnQ" name="Nom">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_uuPtgCABEd-8qvQk7m7roQ"/>
       </children>
-      <disabled name="title" xmi:id="_nq-vsCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <disabled xsi:type="view:TextField" xmi:id="_nq-vsCFtEd-grPsxXhqAnQ" name="title">
         <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.7820772452513156"/>
       </disabled>
-      <disabled name="description" xmi:id="_nq-vsSFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <disabled xsi:type="view:TextField" xmi:id="_nq-vsSFtEd-grPsxXhqAnQ" name="description">
         <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.4825015239967553"/>
       </disabled>
-      <disabled name="name" xmi:id="_n5aNQCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <disabled xsi:type="view:TextField" xmi:id="_n5aNQCFtEd-grPsxXhqAnQ" name="name">
         <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.38362934909383717"/>
       </disabled>
-      <viewOf href="/CG44_Agent/v1/models/Data/cg44agent.dt#_HJUnoBDgEd-eFJrsZcrkww" xsi:type="clazz:Clazz"/>
+      <viewOf xsi:type="clazz:Clazz" href="/CG44_Agent/v1/models/Data/cg44agent.dt#_HJUnoBDgEd-eFJrsZcrkww"/>
     </children>
-    <children description="Document agent" name="Document" xmi:id="_q0mwMCAGEd-8qvQk7m7roQ" xsi:type="view:DataList">
-      <children name="Version" xmi:id="_m2PgECFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+    <children xsi:type="view:DataList" xmi:id="_q0mwMCAGEd-8qvQk7m7roQ" description="Document agent" name="Document">
+      <children xsi:type="view:TextField" xmi:id="_m2PgECFtEd-grPsxXhqAnQ" name="Version">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
       </children>
-      <children name="Description" xmi:id="_m2PgESFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_m2PgESFtEd-grPsxXhqAnQ" name="Description">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gcQ4IBAHEd-QPZneBoCQXA"/>
       </children>
-      <children name="DateNumerisation" xmi:id="_m2PgEiFtEd-grPsxXhqAnQ" xsi:type="view:DateField">
+      <children xsi:type="view:DateField" xmi:id="_m2PgEiFtEd-grPsxXhqAnQ" name="DateNumerisation">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gsuWABAHEd-QPZneBoCQXA"/>
       </children>
-      <children name="Categorie" xmi:id="_m2PgEyFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_m2PgEyFtEd-grPsxXhqAnQ" name="Categorie">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_iEQJoBAHEd-QPZneBoCQXA"/>
       </children>
-      <children name="Origine" xmi:id="_m2PgFCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_m2PgFCFtEd-grPsxXhqAnQ" name="Origine">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_X0njACAEEd-8qvQk7m7roQ"/>
       </children>
-      <children name="Nature" xmi:id="_m2PgFSFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_m2PgFSFtEd-grPsxXhqAnQ" name="Nature">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_wtikYCAEEd-8qvQk7m7roQ"/>
       </children>
-      <children name="Objet" xmi:id="_m2PgFiFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_m2PgFiFtEd-grPsxXhqAnQ" name="Objet">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_0AWY8CAEEd-8qvQk7m7roQ"/>
       </children>
-      <viewOf href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA" xsi:type="clazz:Clazz"/>
+      <viewOf xsi:type="clazz:Clazz" href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
     </children>
   </composedViews>
-  <composedViews name="Detail" xmi:id="_1jWK0CAGEd-8qvQk7m7roQ">
-    <children description="Dossier agent" name="Dossier" xmi:id="_4PLe8CAGEd-8qvQk7m7roQ" xsi:type="view:DataList">
-      <children name="Matricule" xmi:id="_q-OpICFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+  <composedViews xmi:id="_1jWK0CAGEd-8qvQk7m7roQ" name="Detail">
+    <children xsi:type="view:DataList" xmi:id="_4PLe8CAGEd-8qvQk7m7roQ" description="Dossier agent" name="Dossier">
+      <children xsi:type="view:TextField" xmi:id="_q-OpICFtEd-grPsxXhqAnQ" name="Matricule">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_qeSUMCABEd-8qvQk7m7roQ"/>
       </children>
-      <children name="Prenom" xmi:id="_q-OpIiFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_q-OpIiFtEd-grPsxXhqAnQ" name="Prenom">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_yhCpsCABEd-8qvQk7m7roQ"/>
       </children>
-      <children name="Nom" xmi:id="_q-OpIyFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_q-OpIyFtEd-grPsxXhqAnQ" name="Nom">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_uuPtgCABEd-8qvQk7m7roQ"/>
       </children>
-      <disabled name="name" xmi:id="_rRY1sCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <disabled xsi:type="view:TextField" xmi:id="_rRY1sCFtEd-grPsxXhqAnQ" name="name">
         <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.38362934909383717"/>
       </disabled>
-      <disabled name="title" xmi:id="_rolNsCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <disabled xsi:type="view:TextField" xmi:id="_rolNsCFtEd-grPsxXhqAnQ" name="title">
         <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.7820772452513156"/>
       </disabled>
-      <disabled name="description" xmi:id="_rol0wCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <disabled xsi:type="view:TextField" xmi:id="_rol0wCFtEd-grPsxXhqAnQ" name="description">
         <mapTo href="../Data/Alfresco/3.2Labs/cm.dt#0.4825015239967553"/>
       </disabled>
-      <viewOf href="/CG44_Agent/v1/models/Data/cg44agent.dt#_HJUnoBDgEd-eFJrsZcrkww" xsi:type="clazz:Clazz"/>
+      <viewOf xsi:type="clazz:Clazz" href="/CG44_Agent/v1/models/Data/cg44agent.dt#_HJUnoBDgEd-eFJrsZcrkww"/>
     </children>
-    <children description="Document agent" name="Document" xmi:id="_5yj9QCAGEd-8qvQk7m7roQ" xsi:type="view:DataList">
-      <children name="Version" xmi:id="_q-OpJiFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+    <children xsi:type="view:DataList" xmi:id="_5yj9QCAGEd-8qvQk7m7roQ" description="Document agent" name="Document">
+      <children xsi:type="view:TextField" xmi:id="_q-OpJiFtEd-grPsxXhqAnQ" name="Version">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
       </children>
-      <children name="Description" xmi:id="_q-OpJyFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_q-OpJyFtEd-grPsxXhqAnQ" name="Description">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gcQ4IBAHEd-QPZneBoCQXA"/>
       </children>
-      <children name="DateNumerisation" xmi:id="_q-OpKCFtEd-grPsxXhqAnQ" xsi:type="view:DateField">
+      <children xsi:type="view:DateField" xmi:id="_q-OpKCFtEd-grPsxXhqAnQ" name="DateNumerisation">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gsuWABAHEd-QPZneBoCQXA"/>
       </children>
-      <children name="Categorie" xmi:id="_q-OpKSFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_q-OpKSFtEd-grPsxXhqAnQ" name="Categorie">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_iEQJoBAHEd-QPZneBoCQXA"/>
       </children>
-      <children name="Origine" xmi:id="_q-OpKiFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_q-OpKiFtEd-grPsxXhqAnQ" name="Origine">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_X0njACAEEd-8qvQk7m7roQ"/>
       </children>
-      <children name="Nature" xmi:id="_q-OpKyFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_q-OpKyFtEd-grPsxXhqAnQ" name="Nature">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_wtikYCAEEd-8qvQk7m7roQ"/>
       </children>
-      <children name="Objet" xmi:id="_q-OpLCFtEd-grPsxXhqAnQ" xsi:type="view:TextField">
+      <children xsi:type="view:TextField" xmi:id="_q-OpLCFtEd-grPsxXhqAnQ" name="Objet">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_0AWY8CAEEd-8qvQk7m7roQ"/>
       </children>
-      <viewOf href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA" xsi:type="clazz:Clazz"/>
+      <viewOf xsi:type="clazz:Clazz" href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
     </children>
   </composedViews>
 </view:ViewCollection>
-
