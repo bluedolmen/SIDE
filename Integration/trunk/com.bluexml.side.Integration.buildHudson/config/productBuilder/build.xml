@@ -11,7 +11,7 @@
 
 		<property name="buildDirectory" value="${builder}/buildDirectory" />
 		<property name="pluginPath" value="${sideSources}${path.separator}${deltapack}" />
-		<property name="buildTempFolder" value="${buildDirectory}" />
+		<!--property name="buildTempFolder" value="${buildDirectory}" /-->
 		<echoproperties></echoproperties>
 		<echo message="builder : ${eclipse.pdebuild.scripts}/productBuild/productBuild.xml"></echo>
 		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" />
