@@ -22,7 +22,7 @@
       <metainfo xmi:id="_3_Ql4CABEd-8qvQk7m7roQ" key="required" value="True"/>
       <metainfo xmi:id="_3_Ql4SABEd-8qvQk7m7roQ" key="propertySearched" value="True"/>
     </attributes>
-    <generalizations href="/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
+    <generalizations href="platform:/resource/CG44_Agent/v1/models/Data/Alfresco/3.2Labs/cm.dt#0.6405372130951577"/>
   </classSet>
   <enumerationSet xmi:id="_rFReMBAHEd-QPZneBoCQXA" name="Categorie">
     <literals xmi:id="_TarOECIDEd-R7N33Hlrq_A" value="A" name="A-Recrutement"/>
