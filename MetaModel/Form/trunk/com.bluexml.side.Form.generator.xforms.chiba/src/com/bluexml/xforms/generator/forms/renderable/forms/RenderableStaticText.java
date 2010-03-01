@@ -52,7 +52,9 @@ public class RenderableStaticText extends RenderableFormElement<StaticText> {
 			boolean isInIMultRepeater) {
 		String text = (formElement != null) ? formElement.getLabel() : textToDisplay;
 		RenderedStaticText rendered = new RenderedStaticText(text);
-		applyStyle(rendered, formElement.getStyle());
+		if (formElement != null) {
+			applyStyle(rendered, formElement.getStyle());
+		}
 		return rendered;
 	}
 

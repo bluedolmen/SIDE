@@ -8,7 +8,6 @@ import com.bluexml.side.form.NumericalSearchField;
 import com.bluexml.side.form.SearchField;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.renderable.forms.RenderableSearchField;
-import com.bluexml.xforms.generator.forms.renderable.forms.RenderableStaticText;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
@@ -31,7 +30,7 @@ public class RenderableNumericalSearchField extends RenderableSearchField<Numeri
 		// add the elements of the widget
 		add(new RenderableSearchOperators(this));
 		add(new RenderableSearchInput(this, MsgId.INT_INSTANCE_SEARCH_VALUE_LO.getText()));
-		add(new RenderableStaticText(generationManager, null, null, " - "));
+		// add(new RenderableStaticText(generationManager, null, null, " - "));
 		add(new RenderableSearchInput(this, MsgId.INT_INSTANCE_SEARCH_VALUE_HI.getText()));
 	}
 
