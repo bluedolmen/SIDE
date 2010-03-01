@@ -1,52 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<portal:Portal xmlns:portal="http://www.kerblue.org/portal/1.0" xmlns:form="http://www.kerblue.org/form/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="cg44agent" xmi:id="_5c3koCAHEd-8qvQk7m7roQ" xmi:version="2.0">
-  <pageSet ID="documentLibrary" generate="false" title="" useLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_AsAE0CAIEd-8qvQk7m7roQ">
-    <portlets associationPage="_AsAE0CAIEd-8qvQk7m7roQ" associationPortlet="_jIOocCAIEd-8qvQk7m7roQ" xmi:id="_l4hl0CAIEd-8qvQk7m7roQ">
-      <positionGroup onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_cS7SUCFtEd-grPsxXhqAnQ"/>
+<portal:Portal xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmlns:portal="http://www.kerblue.org/portal/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_5c3koCAHEd-8qvQk7m7roQ" name="cg44agent">
+  <pageSet xmi:id="_AsAE0CAIEd-8qvQk7m7roQ" ID="documentLibrary" title="" useLayout="_G_CJICAIEd-8qvQk7m7roQ" generate="false">
+    <portlets xmi:id="_l4hl0CAIEd-8qvQk7m7roQ" associationPortlet="_jIOocCAIEd-8qvQk7m7roQ" associationPage="_AsAE0CAIEd-8qvQk7m7roQ">
+      <positionGroup xmi:id="_cS7SUCFtEd-grPsxXhqAnQ" onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ"/>
     </portlets>
   </pageSet>
-  <pageSet ID="document-details" description="" generate="false" title="" useLayout="_G_CJICAIEd-8qvQk7m7roQ" visibility="Private" xmi:id="_DzzjQCAIEd-8qvQk7m7roQ">
-    <portlets associationPage="_DzzjQCAIEd-8qvQk7m7roQ" associationPortlet="_ZuJToCAIEd-8qvQk7m7roQ" xmi:id="_gCp-oCAIEd-8qvQk7m7roQ">
-      <positionGroup onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_b7PyICFtEd-grPsxXhqAnQ"/>
+  <pageSet xmi:id="_DzzjQCAIEd-8qvQk7m7roQ" description="" ID="document-details" title="" useLayout="_G_CJICAIEd-8qvQk7m7roQ" visibility="Private" generate="false">
+    <portlets xmi:id="_gCp-oCAIEd-8qvQk7m7roQ" associationPortlet="_ZuJToCAIEd-8qvQk7m7roQ" associationPage="_DzzjQCAIEd-8qvQk7m7roQ">
+      <positionGroup xmi:id="_b7PyICFtEd-grPsxXhqAnQ" onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ"/>
     </portlets>
   </pageSet>
-  <pageSet ID="edit-metadata" generate="false" useLayout="_G_CJICAIEd-8qvQk7m7roQ" visibility="Private" xmi:id="_F5HC4CAIEd-8qvQk7m7roQ">
-    <portlets associationPage="_F5HC4CAIEd-8qvQk7m7roQ" associationPortlet="_mVsC8CAIEd-8qvQk7m7roQ" xmi:id="_qMNBgCAIEd-8qvQk7m7roQ">
-      <positionGroup onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_dsefMCFtEd-grPsxXhqAnQ"/>
+  <pageSet xmi:id="_F5HC4CAIEd-8qvQk7m7roQ" ID="edit-metadata" useLayout="_G_CJICAIEd-8qvQk7m7roQ" visibility="Private" generate="false">
+    <portlets xmi:id="_qMNBgCAIEd-8qvQk7m7roQ" associationPortlet="_mVsC8CAIEd-8qvQk7m7roQ" associationPage="_F5HC4CAIEd-8qvQk7m7roQ">
+      <positionGroup xmi:id="_dsefMCFtEd-grPsxXhqAnQ" onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ"/>
     </portlets>
   </pageSet>
-  <pageSet ID="FacetMap" description="Page with Facet Navigation" title="FacetNavigation" useLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_CSSzcCGYEd-grPsxXhqAnQ">
-    <portlets associationPage="_CSSzcCGYEd-grPsxXhqAnQ" associationPortlet="_F6x9ECGYEd-grPsxXhqAnQ" xmi:id="_H02dECGYEd-grPsxXhqAnQ">
-      <positionGroup onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_IMZaYCGYEd-grPsxXhqAnQ"/>
+  <pageSet xmi:id="_CSSzcCGYEd-grPsxXhqAnQ" description="Page with Facet Navigation" ID="FacetMap" title="FacetNavigation" useLayout="_G_CJICAIEd-8qvQk7m7roQ">
+    <portlets xmi:id="_H02dECGYEd-grPsxXhqAnQ" associationPortlet="_F6x9ECGYEd-grPsxXhqAnQ" associationPage="_CSSzcCGYEd-grPsxXhqAnQ">
+      <positionGroup xmi:id="_IMZaYCGYEd-grPsxXhqAnQ" onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ"/>
     </portlets>
   </pageSet>
-  <pageSet ID="AdvancedSearch" title="Advanced Search" useLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_jbHg8CIFEd-R7N33Hlrq_A">
-    <portlets associationPage="_jbHg8CIFEd-R7N33Hlrq_A" associationPortlet="_ooJmgCIFEd-R7N33Hlrq_A" xmi:id="_0gZm4CIFEd-R7N33Hlrq_A">
-      <positionGroup onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ" xmi:id="_06s9QCIFEd-R7N33Hlrq_A"/>
+  <pageSet xmi:id="_jbHg8CIFEd-R7N33Hlrq_A" ID="AdvancedSearch" title="Advanced Search" useLayout="_G_CJICAIEd-8qvQk7m7roQ">
+    <portlets xmi:id="_0gZm4CIFEd-R7N33Hlrq_A" associationPortlet="_ooJmgCIFEd-R7N33Hlrq_A" associationPage="_jbHg8CIFEd-R7N33Hlrq_A">
+      <positionGroup xmi:id="_06s9QCIFEd-R7N33Hlrq_A" onColumn="_bHVo8CFtEd-grPsxXhqAnQ" onLayout="_G_CJICAIEd-8qvQk7m7roQ"/>
     </portlets>
   </pageSet>
-  <layoutSet name="PortalLayout1" xmi:id="_G_CJICAIEd-8qvQk7m7roQ">
-    <columns name="col1" width="100" xmi:id="_bHVo8CFtEd-grPsxXhqAnQ"/>
+  <layoutSet xmi:id="_G_CJICAIEd-8qvQk7m7roQ" name="PortalLayout1">
+    <columns xmi:id="_bHVo8CFtEd-grPsxXhqAnQ" name="col1" width="100"/>
   </layoutSet>
-  <portletSet isPortletInternal="_W5h28CAIEd-8qvQk7m7roQ" name="DocumentDetails" xmi:id="_ZuJToCAIEd-8qvQk7m7roQ"/>
-  <portletSet isPortletInternal="_A2ck0CAJEd-8qvQk7m7roQ" name="DocumentLibrary" xmi:id="_jIOocCAIEd-8qvQk7m7roQ"/>
-  <portletSet isPortletInternal="_DIsUQCAJEd-8qvQk7m7roQ" name="edit-metadata-XForm" xmi:id="_mVsC8CAIEd-8qvQk7m7roQ"/>
-  <portletSet isPortletInternal="_JhlEoCGYEd-grPsxXhqAnQ" name="facetMap" xmi:id="_F6x9ECGYEd-grPsxXhqAnQ"/>
-  <portletSet isPortletInternal="_2S--0CIFEd-R7N33Hlrq_A" name="advanced-search" xmi:id="_ooJmgCIFEd-R7N33Hlrq_A"/>
+  <portletSet xmi:id="_ZuJToCAIEd-8qvQk7m7roQ" name="DocumentDetails" isPortletInternal="_W5h28CAIEd-8qvQk7m7roQ"/>
+  <portletSet xmi:id="_jIOocCAIEd-8qvQk7m7roQ" name="DocumentLibrary" isPortletInternal="_A2ck0CAJEd-8qvQk7m7roQ"/>
+  <portletSet xmi:id="_mVsC8CAIEd-8qvQk7m7roQ" name="edit-metadata-XForm" isPortletInternal="_DIsUQCAJEd-8qvQk7m7roQ"/>
+  <portletSet xmi:id="_F6x9ECGYEd-grPsxXhqAnQ" name="facetMap" isPortletInternal="_JhlEoCGYEd-grPsxXhqAnQ"/>
+  <portletSet xmi:id="_ooJmgCIFEd-R7N33Hlrq_A" name="advanced-search" isPortletInternal="_2S--0CIFEd-R7N33Hlrq_A"/>
   <internalPortletSet xmi:id="_W5h28CAIEd-8qvQk7m7roQ">
-    <view href="../View/cg44agent.view#_1jWK0CAGEd-8qvQk7m7roQ" xsi:type="view:ComposedView"/>
+    <view xsi:type="view:ComposedView" href="../View/cg44agent.view#_1jWK0CAGEd-8qvQk7m7roQ"/>
   </internalPortletSet>
   <internalPortletSet xmi:id="_A2ck0CAJEd-8qvQk7m7roQ">
-    <view href="../View/cg44agent.view#_cBXlYCAGEd-8qvQk7m7roQ" xsi:type="view:ComposedView"/>
+    <view xsi:type="view:ComposedView" href="../View/cg44agent.view#_cBXlYCAGEd-8qvQk7m7roQ"/>
   </internalPortletSet>
-  <internalPortletSet type="Form" xmi:id="_DIsUQCAJEd-8qvQk7m7roQ">
-    <form href="/CG44_Agent/v1/models/Form/cg44agent.form#_UtchQCAFEd-8qvQk7m7roQ" xsi:type="form:ClassFormCollection"/>
+  <internalPortletSet xmi:id="_DIsUQCAJEd-8qvQk7m7roQ" type="Form">
+    <form xsi:type="form:SearchFormCollection" href="/CG44_Agent/v1/models/Form/search.form#_cOAykCFsEd-grPsxXhqAnQ"/>
   </internalPortletSet>
   <internalPortletSet xmi:id="_JhlEoCGYEd-grPsxXhqAnQ">
-    <view href="../View/cg44agent.view#_2vP68CF_Ed-grPsxXhqAnQ" xsi:type="view:FacetMap"/>
+    <view xsi:type="view:FacetMap" href="../View/cg44agent.view#_2vP68CF_Ed-grPsxXhqAnQ"/>
   </internalPortletSet>
-  <internalPortletSet type="Form" xmi:id="_2S--0CIFEd-R7N33Hlrq_A">
-    <form href="/CG44_Agent/v1/models/Form/search.form#_cOAykCFsEd-grPsxXhqAnQ" xsi:type="form:SearchFormCollection"/>
+  <internalPortletSet xmi:id="_2S--0CIFEd-R7N33Hlrq_A" type="Form">
+    <form xsi:type="form:SearchFormCollection" href="/CG44_Agent/v1/models/Form/search.form#_cOAykCFsEd-grPsxXhqAnQ"/>
   </internalPortletSet>
 </portal:Portal>
-
