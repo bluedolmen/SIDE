@@ -1,0 +1,11 @@
+<project name="XForms Generator Worker" default="prepare-compile" basedir=".">
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		<classpath>
+			<!-- Modifier le chemin d'accès -->
+			<fileset dir="/Users/amenel/workspace/Source/lib-xjc" />
+		</classpath>
+	</taskdef>
+	<target name="prepare-compile" description="Compilation du schéma pour obtenir les classes nécessaires à la production du fichier mapping.xml">
+		<xjc schema="xsd/mapping.xsd" destdir="generated-sources" package="com.bluexml.xforms.controller.binding" header="false"/>
+	</target>
+</project>
