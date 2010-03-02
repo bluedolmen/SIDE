@@ -147,7 +147,7 @@ public enum MsgId {
 	// names of action parameters, internal to the actions hierarchy
 	INT_ACT_PARAM_ANY_DATATYPE			("type"),
 	INT_ACT_PARAM_ANY_ID				("id"),
-	INT_ACT_PARAM_ANY_ASSOC			("assoc"),
+	INT_ACT_PARAM_ANY_ASSOC				("assoc"),
 	INT_ACT_PARAM_ENUM_FILTER_DATA		("filterData"),
 	INT_ACT_PARAM_ENUM_FILTER_PARENT	("filterParent"),
 	INT_ACT_PARAM_ENUM_LIMITED			("limited"),
@@ -216,6 +216,8 @@ public enum MsgId {
 	INT_GEN_REDIRECT_URL				("url"),
 	INT_GEN_REVERSED_TAG_KEY			("reversed"),
 	INT_GEN_REVERSED_TAG_VAL_ALFRESCO	("alfresco"),
+	INT_INSTANCE_ENUM_ID				("id"),
+	INT_INSTANCE_ENUM_VALUE				("value"),
 	INT_INSTANCE_SEARCH_OPCODE			("op"),
 	INT_INSTANCE_SEARCH_VALUE			("val"),
 	INT_INSTANCE_SEARCH_VALUE_HI		("hiValue"),
