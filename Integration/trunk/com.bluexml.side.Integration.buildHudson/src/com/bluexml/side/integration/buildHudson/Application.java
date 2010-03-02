@@ -124,7 +124,9 @@ public class Application {
 		// System.out.println("\nCommit des modifications sur le r�pository...");
 		// execBuild("buildSVN", "svnCommit");
 		// }
-
+		
+		execBuildAnt("build","prepare-compile","/var/opt/hudson/jobs/Build_SIDE/buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+		
 				
 		
 		// create maven work folder and launch maven deploy
@@ -253,7 +255,7 @@ public class Application {
 		 */
 
 	}
-
+	
 	/**
 	 * M�thode qui execute la target 'target' du build.xml pass� en
 	 * param�tre Un fichier de log est cr�e: log.txt
@@ -295,6 +297,53 @@ public class Application {
 
 		// building ant script
 		File buildFile = new File(Utils.getBuildPath() + File.separator + build + ".xml");
+		ant.init();
+		ProjectHelper.configureProject(ant, buildFile);
+		ant.executeTarget(target);
+	}
+
+
+	/**
+	 * M�thode qui execute la target 'target' du build.xml pass� en
+	 * param�tre Un fichier de log est cr�e: log.txt
+	 * 
+	 * @param build
+	 *            le build.xml a executer (sans le .xml)
+	 * @param target
+	 *            la target pr�sente dans ce build � �x�cuter
+	 * 
+	 */
+	private static void execBuildAnt(String build, String target, String path) {
+		// Update code
+
+		/*
+		 * pb de outOfmemory sur certaines machines quand utilisation de projet
+		 * ant -> autre piste de solution ci-dessous en lancant en shell: try {
+		 * String cmd="ant"; Process proc=Runtime.getRuntime().exec(tableau);
+		 * 
+		 * Process proc=Runtime.getRuntime().exec("ant build"); InputStream in =
+		 * proc.getInputStream(); BufferedWriter out=new BufferedWriter(new
+		 * FileWriter("titi.dat")); int c; while ((c = in.read()) != -1) {
+		 * out.write((char)c); } in.close(); out.flush(); out.close(); } catch
+		 * (Exception e) { e.printStackTrace(); }
+		 */
+
+		Project ant = new Project();
+
+		// add a listener to see ant's log
+		org.apache.tools.ant.DefaultLogger log = new org.apache.tools.ant.DefaultLogger();
+		try {
+			log.setOutputPrintStream(new PrintStream(new File(path + File.separator + "log" + build + target + ".txt")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		log.setErrorPrintStream(System.err);
+		// log.setOutputPrintStream(System.out);
+		log.setMessageOutputLevel(Project.MSG_ERR);
+		ant.addBuildListener(log);
+
+		// building ant script
+		File buildFile = new File(path + File.separator + build + ".xml");
 		ant.init();
 		ProjectHelper.configureProject(ant, buildFile);
 		ant.executeTarget(target);
