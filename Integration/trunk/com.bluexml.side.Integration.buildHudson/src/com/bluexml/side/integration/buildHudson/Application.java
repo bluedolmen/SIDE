@@ -140,10 +140,10 @@ public class Application {
 			Utils.preTraitement();
 		}
 		// update side.product
-		//Utils.updateProduct();
+		Utils.updateProduct();
 		
 		// get modified files and copy them into svn local copy
-		//Utils.copyToRepository();
+		Utils.copyToRepository();
 
 		// cr�ation du build.xml
 		System.out.println("\n\n- Cr�ation de " + Utils.getBuildPath() + File.separator + "build.xml");

@@ -420,8 +420,10 @@ public class Utils {
 
 				if (!Application.projectsExcluded.contains(projects.get(i))) {
 
-					path = Application.workspace + File.separator + "S-IDE" + File.separator + getProjectPath(projects.get(i)) + File.separator + "trunk";
-
+					//path = Application.workspace + File.separator + "S-IDE" + File.separator + getProjectPath(projects.get(i)) + File.separator + "trunk";
+					
+					path = getRepositoryCopyPath() + File.separator + "S-IDE" + File.separator + getProjectPath(projects.get(i)) + File.separator + "trunk";
+					
 					if (projects.get(i).indexOf("feature") == -1) {
 
 						FileHelper.copyFiles(new File(path + File.separator + projects.get(i)), new File(getBuildDirectory() + File.separator + "plugins" + File.separator + projects.get(i)), true);
@@ -889,7 +891,7 @@ public class Utils {
 		
 		// fin affichage
 
-		copyToRepository();
+		//copyToRepository();
 	}
 
 	public static void updateProduct() {
@@ -1830,7 +1832,12 @@ public class Utils {
 			// copie du site.xml pour l'update site
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "site.xml"), new File(getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "site.xml"), true);
 			System.out.println("\t\t. on " + getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
-
+			
+			// copie du site.xml vers le workspace
+			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "site.xml"), new File(Application.workspace + File.separator + "/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml"), true);
+			System.out.println("\t\t. on " + Application.workspace + File.separator + "/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
+			
+			
 			// copie de la doc
 			System.out.println("\t- Generated Doc copy :");
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "doc"), new File(getFinalDirectory() + File.separator + "doc"), true);
