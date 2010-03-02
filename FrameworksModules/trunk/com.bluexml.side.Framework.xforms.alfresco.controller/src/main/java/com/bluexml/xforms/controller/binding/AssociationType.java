@@ -3,6 +3,7 @@ package com.bluexml.xforms.controller.binding;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -22,9 +23,9 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="caption" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="alfrescoName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="type" type="{}classType"/>
- *         &lt;element name="multiple" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="inline" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="multiple" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       &lt;attribute name="inline" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -38,9 +39,7 @@ import javax.xml.bind.annotation.XmlType;
     "name",
     "caption",
     "alfrescoName",
-    "type",
-    "multiple",
-    "inline"
+    "type"
 })
 public class AssociationType {
 
@@ -54,8 +53,10 @@ public class AssociationType {
     protected String alfrescoName;
     @XmlElement(required = true)
     protected ClassType type;
-    protected boolean multiple;
-    protected boolean inline;
+    @XmlAttribute
+    protected Boolean multiple;
+    @XmlAttribute
+    protected Boolean inline;
 
     /**
      * Gets the value of the package property.
@@ -180,32 +181,48 @@ public class AssociationType {
     /**
      * Gets the value of the multiple property.
      * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
-    public boolean isMultiple() {
+    public Boolean isMultiple() {
         return multiple;
     }
 
     /**
      * Sets the value of the multiple property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
      */
-    public void setMultiple(boolean value) {
+    public void setMultiple(Boolean value) {
         this.multiple = value;
     }
 
     /**
      * Gets the value of the inline property.
      * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
-    public boolean isInline() {
+    public Boolean isInline() {
         return inline;
     }
 
     /**
      * Sets the value of the inline property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
      */
-    public void setInline(boolean value) {
+    public void setInline(Boolean value) {
         this.inline = value;
     }
 

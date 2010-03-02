@@ -3,6 +3,7 @@ package com.bluexml.xforms.controller.binding;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -15,9 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType name="fileFieldType">
  *   &lt;complexContent>
  *     &lt;extension base="{}formFieldType">
- *       &lt;sequence>
- *         &lt;element name="inRepository" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *       &lt;/sequence>
+ *       &lt;attribute name="inRepository" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -26,28 +25,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "fileFieldType", propOrder = {
-    "inRepository"
-})
+@XmlType(name = "fileFieldType")
 public class FileFieldType
     extends FormFieldType
 {
 
-    protected boolean inRepository;
+    @XmlAttribute
+    protected Boolean inRepository;
 
     /**
      * Gets the value of the inRepository property.
      * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
-    public boolean isInRepository() {
+    public Boolean isInRepository() {
         return inRepository;
     }
 
     /**
      * Sets the value of the inRepository property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
      */
-    public void setInRepository(boolean value) {
+    public void setInRepository(Boolean value) {
         this.inRepository = value;
     }
 

@@ -3,6 +3,7 @@ package com.bluexml.xforms.controller.binding;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -20,8 +21,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="package" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="alfrescoName" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="dynamic" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="dynamic" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -33,8 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "enumType", propOrder = {
     "_package",
     "name",
-    "alfrescoName",
-    "dynamic"
+    "alfrescoName"
 })
 public class EnumType {
 
@@ -44,7 +44,8 @@ public class EnumType {
     protected String name;
     @XmlElement(required = true)
     protected String alfrescoName;
-    protected boolean dynamic;
+    @XmlAttribute
+    protected Boolean dynamic;
 
     /**
      * Gets the value of the package property.
@@ -121,16 +122,24 @@ public class EnumType {
     /**
      * Gets the value of the dynamic property.
      * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
-    public boolean isDynamic() {
+    public Boolean isDynamic() {
         return dynamic;
     }
 
     /**
      * Sets the value of the dynamic property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
      */
-    public void setDynamic(boolean value) {
+    public void setDynamic(Boolean value) {
         this.dynamic = value;
     }
 

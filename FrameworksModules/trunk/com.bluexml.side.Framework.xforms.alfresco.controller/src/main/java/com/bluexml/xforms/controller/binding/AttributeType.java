@@ -20,7 +20,6 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="alfrescoName" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="inAlfresco" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="enumQName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -40,7 +39,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "attributeType", propOrder = {
     "name",
     "alfrescoName",
-    "inAlfresco",
     "type",
     "enumQName"
 })
@@ -50,7 +48,6 @@ public class AttributeType {
     protected String name;
     @XmlElement(required = true)
     protected String alfrescoName;
-    protected boolean inAlfresco;
     @XmlElement(required = true)
     protected String type;
     protected String enumQName;
@@ -111,22 +108,6 @@ public class AttributeType {
      */
     public void setAlfrescoName(String value) {
         this.alfrescoName = value;
-    }
-
-    /**
-     * Gets the value of the inAlfresco property.
-     * 
-     */
-    public boolean isInAlfresco() {
-        return inAlfresco;
-    }
-
-    /**
-     * Sets the value of the inAlfresco property.
-     * 
-     */
-    public void setInAlfresco(boolean value) {
-        this.inAlfresco = value;
     }
 
     /**

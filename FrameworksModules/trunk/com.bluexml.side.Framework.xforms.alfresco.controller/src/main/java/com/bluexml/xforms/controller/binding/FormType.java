@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -19,7 +20,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;extension base="{}canisterType">
  *       &lt;sequence>
- *         &lt;element name="contentEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="field" type="{}formFieldType" maxOccurs="unbounded"/>
  *         &lt;element name="virtual" type="{}virtualFieldType" maxOccurs="unbounded"/>
  *         &lt;element name="reference" type="{}referenceType" maxOccurs="unbounded"/>
@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="modelChoice" type="{}modelChoiceType" maxOccurs="unbounded"/>
  *         &lt;element name="realClass" type="{}classType"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="contentEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -36,7 +37,6 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "formType", propOrder = {
-    "contentEnabled",
     "field",
     "virtual",
     "reference",
@@ -48,7 +48,6 @@ public class FormType
     extends CanisterType
 {
 
-    protected boolean contentEnabled;
     @XmlElement(required = true)
     protected List<FormFieldType> field;
     @XmlElement(required = true)
@@ -61,22 +60,8 @@ public class FormType
     protected List<ModelChoiceType> modelChoice;
     @XmlElement(required = true)
     protected ClassType realClass;
-
-    /**
-     * Gets the value of the contentEnabled property.
-     * 
-     */
-    public boolean isContentEnabled() {
-        return contentEnabled;
-    }
-
-    /**
-     * Sets the value of the contentEnabled property.
-     * 
-     */
-    public void setContentEnabled(boolean value) {
-        this.contentEnabled = value;
-    }
+    @XmlAttribute
+    protected Boolean contentEnabled;
 
     /**
      * Gets the value of the field property.
@@ -245,6 +230,30 @@ public class FormType
      */
     public void setRealClass(ClassType value) {
         this.realClass = value;
+    }
+
+    /**
+     * Gets the value of the contentEnabled property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isContentEnabled() {
+        return contentEnabled;
+    }
+
+    /**
+     * Sets the value of the contentEnabled property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setContentEnabled(Boolean value) {
+        this.contentEnabled = value;
     }
 
 }

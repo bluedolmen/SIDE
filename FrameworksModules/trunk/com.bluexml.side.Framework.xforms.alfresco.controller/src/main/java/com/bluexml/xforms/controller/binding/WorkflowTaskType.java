@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -22,12 +23,12 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="taskId" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="dataForm" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="startTask" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="actorId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="pooledActors" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="field" type="{}formFieldType" maxOccurs="unbounded"/>
  *         &lt;element name="modelChoice" type="{}modelChoiceType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="startTask" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -40,7 +41,6 @@ import javax.xml.bind.annotation.XmlType;
     "taskId",
     "dataForm",
     "title",
-    "startTask",
     "actorId",
     "pooledActors",
     "field",
@@ -56,13 +56,14 @@ public class WorkflowTaskType
     protected String dataForm;
     @XmlElement(required = true)
     protected String title;
-    protected boolean startTask;
     protected String actorId;
     protected String pooledActors;
     @XmlElement(required = true)
     protected List<FormFieldType> field;
     @XmlElement(required = true)
     protected List<ModelChoiceType> modelChoice;
+    @XmlAttribute
+    protected Boolean startTask;
 
     /**
      * Gets the value of the taskId property.
@@ -134,22 +135,6 @@ public class WorkflowTaskType
      */
     public void setTitle(String value) {
         this.title = value;
-    }
-
-    /**
-     * Gets the value of the startTask property.
-     * 
-     */
-    public boolean isStartTask() {
-        return startTask;
-    }
-
-    /**
-     * Sets the value of the startTask property.
-     * 
-     */
-    public void setStartTask(boolean value) {
-        this.startTask = value;
     }
 
     /**
@@ -256,6 +241,30 @@ public class WorkflowTaskType
             modelChoice = new ArrayList<ModelChoiceType>();
         }
         return this.modelChoice;
+    }
+
+    /**
+     * Gets the value of the startTask property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isStartTask() {
+        return startTask;
+    }
+
+    /**
+     * Sets the value of the startTask property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setStartTask(Boolean value) {
+        this.startTask = value;
     }
 
 }

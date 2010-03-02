@@ -3,6 +3,7 @@ package com.bluexml.xforms.controller.binding;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -19,9 +20,9 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="uniqueName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="shortName" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="mandatory" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="displayLabel" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="mandatory" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -33,7 +34,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "fieldType", propOrder = {
     "uniqueName",
     "shortName",
-    "mandatory",
     "displayLabel"
 })
 public class FieldType {
@@ -42,9 +42,10 @@ public class FieldType {
     protected String uniqueName;
     @XmlElement(required = true)
     protected String shortName;
-    protected boolean mandatory;
     @XmlElement(required = true)
     protected String displayLabel;
+    @XmlAttribute
+    protected Boolean mandatory;
 
     /**
      * Gets the value of the uniqueName property.
@@ -95,22 +96,6 @@ public class FieldType {
     }
 
     /**
-     * Gets the value of the mandatory property.
-     * 
-     */
-    public boolean isMandatory() {
-        return mandatory;
-    }
-
-    /**
-     * Sets the value of the mandatory property.
-     * 
-     */
-    public void setMandatory(boolean value) {
-        this.mandatory = value;
-    }
-
-    /**
      * Gets the value of the displayLabel property.
      * 
      * @return
@@ -132,6 +117,30 @@ public class FieldType {
      */
     public void setDisplayLabel(String value) {
         this.displayLabel = value;
+    }
+
+    /**
+     * Gets the value of the mandatory property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isMandatory() {
+        return mandatory;
+    }
+
+    /**
+     * Sets the value of the mandatory property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setMandatory(Boolean value) {
+        this.mandatory = value;
     }
 
 }
