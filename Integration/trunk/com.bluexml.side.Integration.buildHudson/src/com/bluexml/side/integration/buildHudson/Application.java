@@ -660,6 +660,8 @@ public class Application {
 							}
 							out += "\t\t\t</fileset>\n";
 						}
+						
+						
 					} // si 'feature' est pr�sent
 					else if (projects[i].indexOf("feature") != -1) {
 						out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + "\">\n";
@@ -690,6 +692,12 @@ public class Application {
 				System.out.println("#### tab=" + tab[0]);
 			}
 		}
+		
+		//fichier site.xml
+		out += "\t\t\t<fileset dir=\"" + "/var/opt/hudson/jobs/Build_SIDE/workspace/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config" + "\">\n";
+		out += "\t\t\t\t<include name=\"site.xml\" />\n";
+		out += "\t\t\t</fileset>\n";
+		
 		out += "\t\t\t</commit>\n";
 		out += "\t\t</svn>\n";
 
