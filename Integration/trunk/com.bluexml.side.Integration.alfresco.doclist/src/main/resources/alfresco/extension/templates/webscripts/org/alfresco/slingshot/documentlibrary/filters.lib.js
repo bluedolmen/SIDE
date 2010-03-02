@@ -242,10 +242,10 @@ var Filters =
 		 var att=properties[prop];
   		 if (att.values.length >0 && att.values[0] != "") {
   			var dataType=att.type.toLowerCase();
-  			var comparator=att.operator;
+  			var comparator=att.operator.toLowerCase();
   			var values=att.values;
   			
-  			propQuery+=" @"+prop;
+  			var propQuery_local=" @"+prop;
   			
   			switch (dataType) {
   			// simple
@@ -271,20 +271,20 @@ var Filters =
 						valuePart="*"+values[0];
 						break;
 					case "empty":
-						valuePart="";
+						// property is not set how to query this ?
 						break;
 					case "is":
 						valuePart=values[0];
 						break;
 					default:
 						break;
-					}
-					propQuery+=":"+valuePart;
+					}					
+					propQuery+=propQuery_local+":"+valuePart;
 					break;
 				case "char":	
 					break;
 				case "boolean":	
-					propQuery+=":"+values[0];
+					propQuery+=propQuery_local+":"+values[0];
 					break;
 			// bounded
 				case "datetime":
@@ -299,26 +299,69 @@ var Filters =
 						case "between":
 							min=values[0];
 							max=values[1];
-							propQuery+=":"+"["+min+" TO "+max+"]";
+							propQuery+=propQuery_local+":"+"["+min+" TO "+max+"]";
 							break;
 						case "before":
 							max=values[0];
-							propQuery+=":"+"["+min+" TO "+max+"]";
+							propQuery+=propQuery_local+":"+"["+min+" TO "+max+"]";
 							break;
 						case "after":
 							min=values[0];
-							propQuery+=":"+"["+min+" TO "+max+"]";
+							propQuery+=propQuery_local+":"+"["+min+" TO "+max+"]";
 							break;
 						case "exactly":
-							propQuery+=":"+values[0];
+							propQuery+=propQuery_local+":"+values[0];
 							break;
 						case "empty":
-							propQuery+=":";
+							// property is not set how to query this ?
 							break;	
 						default:
 							break;
 					}
 					
+					break;
+				case "enums":
+					var query="";
+					switch (comparator) {
+					case "oneof":
+						if (values.length >1) {
+							query=" +(";
+						}
+						for (var c=0;c<values.length;c++) {
+							query+=propQuery_local+":"+values[c];
+							query+=" OR ";
+						}
+					
+						var ind=query.lastIndexOf(" OR ");
+						query=query.substring(0,ind);
+						if (values.length >1) {
+							query+=")";
+						}
+					
+						break;
+					case "allbut":
+						if (values.length >1) {
+							query=" -(";
+						}
+						for (var c=0;c<values.length;c++) {
+							query+=propQuery_local+":"+values[c];
+							query+=" OR ";
+						}
+						var ind=query.lastIndexOf(" OR ");
+						query=query.substring(0,ind);
+						
+						if (values.length >1) {
+							query+=")";
+						}
+						break;
+					case "none":
+						// property is not set how to query this ?
+						break;
+						
+					default:
+						break;
+					}
+					propQuery+=query;
 					break;
 				case "byte":
 				case "int":	
@@ -333,24 +376,24 @@ var Filters =
 					case "between":
 						min=values[0];
 						max=values[1];
-						propQuery+=":"+"["+min+" TO "+max+"]";
+						propQuery+=propQuery_local+":"+"["+min+" TO "+max+"]";
 						break;
 					case "below":
 						max=values[0];
-						propQuery+=":"+"["+min+" TO "+max+"]";
+						propQuery+=propQuery_local+":"+"["+min+" TO "+max+"]";
 						break;
 					case "above":
 						min=values[0];
-						propQuery+=":"+"["+min+" TO "+max+"]";
+						propQuery+=propQuery_local+":"+"["+min+" TO "+max+"]";
 						break;
 					case "exactly":
 						if (value[0].indexOf("\.")) {
 							value[0]=value[0].replace(/([^.]*\.[^.]*)/,'"$1"');
 						}
-						propQuery+=":"+values[0];
+						propQuery+=propQuery_local+":"+values[0];
 						break;
 					case "empty":
-						propQuery+=":";
+						// property is not set how to query this ?
 						break;
 					default:
 						break;
