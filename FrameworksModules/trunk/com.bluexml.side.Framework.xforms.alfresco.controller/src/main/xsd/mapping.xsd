@@ -36,8 +36,8 @@
 			<xsd:element name="package" type="xsd:string" />
 			<xsd:element name="name" type="xsd:string" />
 			<xsd:element name="alfrescoName" type="xsd:string" />
-			<xsd:element name="dynamic" type="xsd:boolean" />
 		</xsd:sequence>
+		<xsd:attribute name="dynamic" type="xsd:boolean" use="optional" />
 	</xsd:complexType>
 	<xsd:complexType name="aspectType">
 		<xsd:sequence>
@@ -51,15 +51,11 @@
 		<xsd:sequence>
 			<xsd:element name="name" type="xsd:string" />
 			<xsd:element name="alfrescoName" type="xsd:string" />
-			<xsd:element name="inAlfresco" type="xsd:boolean" />
 			<xsd:element name="type" type="xsd:string" />
 			<xsd:element minOccurs="0" name="enumQName" type="xsd:string" />
 		</xsd:sequence>
-		<!-- defaults to null -->
 		<xsd:attribute name="default" type="xsd:string" use="optional" />
-		<!-- defaults to 0 -->
 		<xsd:attribute name="fieldSize" type="xsd:string" use="optional" />
-		<!-- booleans default to false -->
 		<xsd:attribute name="dynamicEnum" type="xsd:boolean" use="optional" />
 		<xsd:attribute name="multiple" type="xsd:boolean" use="optional" />
 		<xsd:attribute name="readOnly" type="xsd:boolean" use="optional" />
@@ -71,9 +67,9 @@
 			<xsd:element name="caption" type="xsd:string" />
 			<xsd:element name="alfrescoName" type="xsd:string" />
 			<xsd:element name="type" type="classType" />
-			<xsd:element name="multiple" type="xsd:boolean" />
-			<xsd:element name="inline" type="xsd:boolean" />
 		</xsd:sequence>
+		<xsd:attribute name="multiple" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="inline" type="xsd:boolean" use="optional" />
 	</xsd:complexType>
 	<xsd:complexType name="classType">
 		<xsd:sequence>
@@ -91,9 +87,9 @@
 		<xsd:sequence>
 			<xsd:element name="uniqueName" type="xsd:string" />
 			<xsd:element name="shortName" type="xsd:string" />
-			<xsd:element name="mandatory" type="xsd:boolean" />
 			<xsd:element name="displayLabel" type="xsd:string" />
 		</xsd:sequence>
+		<xsd:attribute name="mandatory" type="xsd:boolean" use="optional" />
 	</xsd:complexType>
 	<xsd:complexType name="formFieldType">
 		<xsd:complexContent>
@@ -103,11 +99,8 @@
 					<xsd:element name="type" type="xsd:string" />
 					<xsd:element minOccurs="0" name="staticEnumType" type="xsd:string" />
 				</xsd:sequence>
-				<!-- defaults to null -->
 				<xsd:attribute name="default" type="xsd:string" use="optional" />
-				<!-- defaults to null -->
 				<xsd:attribute name="dummyValue" type="xsd:string" use="optional" />
-				<!-- booleans default to false -->
 				<xsd:attribute name="multiple" type="xsd:boolean" use="optional" />
 				<xsd:attribute name="readOnly" type="xsd:boolean" use="optional" />
 				<xsd:attribute name="searchEnum" type="xsd:boolean" use="optional" />
@@ -117,9 +110,7 @@
 	<xsd:complexType name="fileFieldType">
 		<xsd:complexContent>
 			<xsd:extension base="formFieldType">
-				<xsd:sequence>
-					<xsd:element name="inRepository" type="xsd:boolean" />
-				</xsd:sequence>
+				<xsd:attribute name="inRepository" type="xsd:boolean" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -138,8 +129,8 @@
 			<xsd:extension base="fieldType">
 				<xsd:sequence>
 					<xsd:element name="label" type="xsd:string" />
-					<xsd:element name="inWorkflow" type="xsd:boolean" />
 				</xsd:sequence>
+				<xsd:attribute name="inWorkflow" type="xsd:boolean" use="optional" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -169,7 +160,6 @@
 		<xsd:complexContent>
 			<xsd:extension base="canisterType">
 				<xsd:sequence>
-					<xsd:element name="contentEnabled" type="xsd:boolean" />
 					<xsd:element maxOccurs="unbounded" name="field" type="formFieldType" />
 					<xsd:element maxOccurs="unbounded" name="virtual" type="virtualFieldType" />
 					<xsd:element maxOccurs="unbounded" name="reference" type="referenceType" />
@@ -177,6 +167,7 @@
 					<xsd:element maxOccurs="unbounded" name="modelChoice" type="modelChoiceType" />
 					<xsd:element name="realClass" type="classType" />
 				</xsd:sequence>
+				<xsd:attribute name="contentEnabled" type="xsd:boolean" use="optional" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -187,12 +178,12 @@
 					<xsd:element name="taskId" type="xsd:string" />
 					<xsd:element name="dataForm" type="xsd:string" />
 					<xsd:element name="title" type="xsd:string" />
-					<xsd:element name="startTask" type="xsd:boolean" />
 					<xsd:element minOccurs="0" name="actorId" type="xsd:string" />
 					<xsd:element minOccurs="0" name="pooledActors" type="xsd:string" />
 					<xsd:element maxOccurs="unbounded" name="field" type="formFieldType" />
 					<xsd:element maxOccurs="unbounded" name="modelChoice" type="modelChoiceType" />
 				</xsd:sequence>
+				<xsd:attribute name="startTask" type="xsd:boolean" use="optional" />
 			</xsd:extension>
 		</xsd:complexContent>
 
