@@ -1834,8 +1834,8 @@ public class Utils {
 			System.out.println("\t\t. on " + getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
 			
 			// copie du site.xml vers le workspace
-			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "site.xml"), new File(Application.workspace + File.separator + "/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml"), true);
-			System.out.println("\t\t. on " + Application.workspace + File.separator + "/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
+			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "site.xml"), new File(Application.workspace + File.separator + "S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml"), true);
+			System.out.println("\t\t. on " + Application.workspace + File.separator + "S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
 			
 			
 			// copie de la doc
