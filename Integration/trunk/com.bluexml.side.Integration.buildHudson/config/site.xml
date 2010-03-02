@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.bluexml.side.Common.core.feature_1.0.149.v15091-20100228.jar" id="com.bluexml.side.Common.core.feature" version="1.0.149.v15091-20100228">
-      <category name="SIDE"/>
-   </feature>
-   <feature url="features/com.bluexml.side.Common.sideForAlfresco.feature_1.0.113.v15091-20100228.jar" id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.113.v15091-20100228">
-      <category name="SIDE"/>
-   </feature>
-   <category-def name="SIDE" label="SIDE">
-      <description>
-         Sustainable IDE for Alfresco, named SIDE/Alfresco, focuses on Business and Development Team of Alfresco partners, specialized in Enterprise Information Management projects developments, who are dissatisfied with usual development tools for Alfresco and are looking for graphical tools to develop in a more efficient way great Alfresco applications.
-      </description>
-   </category-def>
+  <feature url="features/com.bluexml.side.Common.core.feature_1.0.151.v15143-20100302.jar" id="com.bluexml.side.Common.core.feature" version="1.0.151.v15143-20100302">
+    <category name="SIDE" />
+  </feature>
+  <feature url="features/com.bluexml.side.Common.sideForAlfresco.feature_1.0.114.v15129-20100302.jar" id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.114.v15129-20100302">
+    <category name="SIDE" />
+  </feature>
+  <category-def name="SIDE" label="SIDE">
+    <description>Sustainable IDE for Alfresco, named SIDE/Alfresco, focuses on Business and Development Team of Alfresco partners, specialized in Enterprise Information Management projects developments, who are dissatisfied with usual development tools for Alfresco and are looking for graphical tools to develop in a more efficient way great Alfresco applications.</description>
+  </category-def>
 </site>
+
