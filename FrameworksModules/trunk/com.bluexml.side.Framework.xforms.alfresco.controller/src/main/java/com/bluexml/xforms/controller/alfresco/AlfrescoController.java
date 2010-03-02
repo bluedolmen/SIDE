@@ -2804,6 +2804,16 @@ public class AlfrescoController {
 	}
 
 	/**
+	 * Tells whether the task is a start task.
+	 * 
+	 * @param taskType
+	 * @return
+	 */
+	public boolean isStartTask(WorkflowTaskType taskType) {
+		return mappingTool.isStartTask(taskType);
+	}
+
+	/**
 	 * Gets the actual data type for a form. Added because read only forms are distinguished from
 	 * R/W forms using a suffix. Hence the form name in itself cannot be used to designate the
 	 * datatype (or 'form id' to be more precise).

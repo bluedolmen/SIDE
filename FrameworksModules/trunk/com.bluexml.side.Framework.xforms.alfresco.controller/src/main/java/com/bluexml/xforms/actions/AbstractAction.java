@@ -29,7 +29,7 @@ import edu.yale.its.tp.cas.client.filter.CASFilter;
 
 /**
  * The Class AbstractAction.<br>
- * Base of all actions
+ * Base class of all action handlers.
  */
 public abstract class AbstractAction {
 
@@ -87,7 +87,7 @@ public abstract class AbstractAction {
 	protected String pageId;
 
 	/**
-	 * Adds the entry.
+	 * Adds a parameter to the map of parameters.
 	 * 
 	 * @param fragments
 	 *            the fragments
@@ -96,7 +96,7 @@ public abstract class AbstractAction {
 	 * @param index
 	 *            the index
 	 */
-	protected void addEntry(String[] fragments, String name, int index) {
+	protected void registerParameter(String[] fragments, String name, int index) {
 		if (fragments.length > index) {
 			String fragment = fragments[index];
 			if (name.equals(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText())) {
@@ -125,7 +125,7 @@ public abstract class AbstractAction {
 	public abstract void submit() throws ServletException;
 
 	/**
-	 * Checks if is replace all.
+	 * Checks if triggering this action causes all instances to be replaced.
 	 * 
 	 * @return true, if is replace all
 	 */
@@ -136,16 +136,16 @@ public abstract class AbstractAction {
 	/**
 	 * Checks if this action requires the form to be validated first.
 	 * 
-	 * @return true, if it should be checked that mandatory fields are filled
+	 * @return true, if the XForms engine should be checked that mandatory fields are filled
 	 */
 	public boolean isValidateFirst() {
 		return false;
 	}
 
 	/**
-	 * Gets the action name. This is the name by which an action handler declares the urls it should
+	 * Gets the action name. This is the name by which an action handler declares the URLs it should
 	 * be mapped to. <br/>
-	 * e.g. the handler for bxwdswriter://.../get urls should return "get".
+	 * e.g. the handler for "sidewriter://.../get" URLs should return "get".
 	 * 
 	 * @return the action name
 	 */
@@ -163,9 +163,10 @@ public abstract class AbstractAction {
 
 	/**
 	 * Gets the param names. The parameters expected by the action are listed in a specific order.
-	 * The url that maps to the action must respect that order, with params delimited by "/".<br/>
-	 * An action that requires a type and parent must be
-	 * <tt>scheme://.../ACTION_NAME/TYPE/PARENT</tt>.
+	 * The URL that maps to the action must respect that order, with params separated using "/".<br/>
+	 * An action that requires a 'type' and 'parent' parameter would be
+	 * <tt>scheme://.../ACTION_NAME/TYPE/PARENT</tt> so the param names array would be
+	 * <tt>{"type", "parent"}</tt>.
 	 * 
 	 * @return the param names
 	 */
@@ -175,7 +176,8 @@ public abstract class AbstractAction {
 	}
 
 	/**
-	 * Gets the request parameters.
+	 * Gets the request parameters. This function builds a map of parameters for the action.
+	 * Parameters are those declared in {@link #getParamNames()}.
 	 * <p/>
 	 * NOTE: <b>DO NOT</b> use transaction here. Otherwise, it would be null and cause an exception.
 	 * (Amenel)
@@ -205,15 +207,18 @@ public abstract class AbstractAction {
 		navigationPath = NavigationSessionListener.getNavigationPath(sessionId, pageId);
 
 		String[] paramNames = getParamNames();
+
+		// start at 4 because URIs are under the form: scheme://.../ACTION_NAME/
+		// so 0=URI scheme, 1=null; 2=sessionId and pageId, 3=action name
 		int i = 4;
 		for (String paramName : paramNames) {
-			addEntry(fragments, paramName, i);
+			registerParameter(fragments, paramName, i);
 			i++;
 		}
 	}
 
 	/**
-	 * Sets the properties.
+	 * Sets useful properties.
 	 * 
 	 * @param controller
 	 *            the controller
@@ -245,7 +250,9 @@ public abstract class AbstractAction {
 	}
 
 	/**
-	 * Sets the submission default location.
+	 * Sets the submission default location in case no forwarding mechanism is active: the web
+	 * client is redirected to the same page the action was called from. The form is simply
+	 * reloaded.
 	 * 
 	 * @param servletURL
 	 *            the servlet url
@@ -278,8 +285,8 @@ public abstract class AbstractAction {
 	}
 
 	/**
-	 * Loads and executes a user class available in the class path. The class must implement a
-	 * specific method.
+	 * Loads and executes a user class available in the class path. The class must implement and
+	 * expose a specific method.
 	 * 
 	 * @param className
 	 * @return the result of the call as defined by the contract method signature, or null if an
@@ -293,7 +300,8 @@ public abstract class AbstractAction {
 		try {
 			String resultStr = "";
 			Class<?> theClass = Class.forName(className);
-			Method method = theClass.getMethod("run", new Class[] { org.w3c.dom.Node.class,
+			Method method = theClass.getMethod("run", new Class[] {
+					org.w3c.dom.Node.class,
 					java.lang.String.class });
 			String dataId = navigationPath.peekCurrentPage().getDataId();
 			Object result = method.invoke(theClass.newInstance(), new Object[] { node, dataId });
@@ -309,7 +317,8 @@ public abstract class AbstractAction {
 	}
 
 	/**
-	 * Builds the URL for reaching the given form using the servlet URL that triggered the action.
+	 * Builds the URL for reaching the given workflow form using the servlet URL that triggered the
+	 * action.
 	 * 
 	 * @param formName
 	 * @return

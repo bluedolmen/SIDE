@@ -426,6 +426,8 @@ public abstract class AbstractRenderableField extends Renderable {
 		Element element;
 		String elemName;
 		String elemAppearance;
+		String refValueStr = "value";
+		String refIdStr = "id";
 
 		// Top element and its attributes
 		if (selectBean.isMultiple()) {
@@ -438,7 +440,10 @@ public abstract class AbstractRenderableField extends Renderable {
 		} else if (selectBean.getWidgetType() == ChoiceWidgetType.LIST_ALL) {
 			elemAppearance = "compact";
 		} else {
+			// the control is for an enumeration
 			elemAppearance = "minimal";
+			refIdStr = MsgId.INT_INSTANCE_ENUM_ID.getText();
+			refValueStr = MsgId.INT_INSTANCE_ENUM_VALUE.getText();
 		}
 		element = XFormsGenerator.createElement(elemName, XFormsGenerator.NAMESPACE_XFORMS);
 		element.setAttribute("id", getAttributeId());
@@ -458,11 +463,11 @@ public abstract class AbstractRenderableField extends Renderable {
 			itemset.setAttribute("nodeset", "instance('" + enumInstance + "')/item");
 			Element itemLabel = XFormsGenerator.createElement("label",
 					XFormsGenerator.NAMESPACE_XFORMS);
-			itemLabel.setAttribute("ref", "value");
+			itemLabel.setAttribute("ref", refValueStr);
 			itemset.addContent(itemLabel);
 			Element itemValue = XFormsGenerator.createElement("value",
 					XFormsGenerator.NAMESPACE_XFORMS);
-			itemValue.setAttribute("ref", "id");
+			itemValue.setAttribute("ref", refIdStr);
 			itemset.addContent(itemValue);
 			element.addContent(itemset);
 		} else { // #1313

@@ -23,7 +23,7 @@ import com.bluexml.xforms.tools.SortedProperties;
 
 /**
  * The Class I18NAction.<br>
- * Not used yet
+ * @deprecated because another mechanism exists for enabling multi-language feature.
  */
 public class I18NAction extends AbstractReadAction {
 

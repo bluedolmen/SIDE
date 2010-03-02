@@ -109,7 +109,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		typeElement.setTextContent(classTypeToString(getClassType(formType.getRealClass())));
 		rootElement.appendChild(typeElement);
 
-		if (formType.isContentEnabled()) {
+		if (isContentEnabled(formType)) {
 			Element nodeContentElt = doc.createElement(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT
 					.getText());
 			nodeContentElt.setAttribute("file", "");
@@ -293,7 +293,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		typeElement.setTextContent(classTypeToString(getClassType(formType.getRealClass())));
 		rootElement.appendChild(typeElement);
 
-		if (formType.isContentEnabled()) {
+		if (isContentEnabled(formType)) {
 			Element nodeContentElt = formInstance
 					.createElement(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
 			nodeContentElt.setAttribute("file", "");
@@ -589,7 +589,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 				formField.setAttribute("type", "");
 				if (controller.getParamUploadRepoFormatInfo()) {
 					FileFieldType fileFieldType = (FileFieldType) formFieldType;
-					if ((alfrescoId != null) && (fileFieldType.isInRepository())) {
+					if ((alfrescoId != null) && (isInRepository(fileFieldType))) {
 						formField.setTextContent(controller.getWebscriptNodeContentInfo(value));
 					}
 				}

@@ -58,7 +58,6 @@ import com.bluexml.xforms.actions.EditFormAction;
 import com.bluexml.xforms.actions.EnumAction;
 import com.bluexml.xforms.actions.ExecuteAction;
 import com.bluexml.xforms.actions.GetAction;
-import com.bluexml.xforms.actions.I18NAction;
 import com.bluexml.xforms.actions.ListAction;
 import com.bluexml.xforms.actions.SetTypeAction;
 import com.bluexml.xforms.actions.SubmitAction;
@@ -84,7 +83,6 @@ public class NavigationManager {
 			EnumAction.class,
 			ExecuteAction.class,
 			GetAction.class,
-			I18NAction.class,
 			ListAction.class,
 			SubmitAction.class,
 			DeleteAction.class,

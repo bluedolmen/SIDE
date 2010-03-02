@@ -24,7 +24,8 @@ import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class ListAction.<br>
- * Get the list of a specified type with a search query
+ * Get the list of a specified type with a search query. This action is a read and write action
+ * hence its not being under {@link AbstractReadAction} or {@link AbstractWriteAction}.
  */
 public class ListAction extends AbstractAction {
 
@@ -108,7 +109,8 @@ public class ListAction extends AbstractAction {
 	 */
 	@Override
 	protected String[] getParamNames() {
-		return new String[] { MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText(),
+		return new String[] {
+				MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText(),
 				MsgId.INT_ACT_PARAM_LIST_FORMAT.getText(),
 				MsgId.INT_ACT_PARAM_LIST_MAXLENGTH.getText() };
 	}

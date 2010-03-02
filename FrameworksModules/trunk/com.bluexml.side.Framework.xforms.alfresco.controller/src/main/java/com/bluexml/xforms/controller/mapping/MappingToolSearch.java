@@ -123,7 +123,7 @@ public class MappingToolSearch extends MappingToolCommon {
 	}
 
 	/**
-	 * Builds a JSON string for the search options in the node.
+	 * Builds a JSON string for the search options provided by the XForms engine in the node.
 	 * 
 	 * @param formName
 	 * @param instance

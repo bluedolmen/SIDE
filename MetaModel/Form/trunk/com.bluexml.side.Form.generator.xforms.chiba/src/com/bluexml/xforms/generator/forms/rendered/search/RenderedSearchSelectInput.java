@@ -35,7 +35,7 @@ public class RenderedSearchSelectInput extends Rendered {
 		xformsElement.addContent(selElt);
 		selElt.setAttribute("id", selId);
 		inputBind.addLinkedElement(selElt);
-		selElt.setAttribute("appearance", "compact");
+		selElt.setAttribute("appearance", "compact"); // despite "compact", this is an enumeration!
 
 		// deal with the item set (choice options)
 		ModelElementEnumeration modelElementEnum = getModelElementEnumeration(valueList);
@@ -47,11 +47,11 @@ public class RenderedSearchSelectInput extends Rendered {
 		itemset.setAttribute("nodeset", "instance('" + enumInstance + "')/item");
 		Element itemLabel = XFormsGenerator
 				.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
-		itemLabel.setAttribute("ref", "value");
+		itemLabel.setAttribute("ref", MsgId.INT_INSTANCE_ENUM_VALUE.getText());
 		itemset.addContent(itemLabel);
 		Element itemValue = XFormsGenerator
 				.createElement("value", XFormsGenerator.NAMESPACE_XFORMS);
-		itemValue.setAttribute("ref", "id");
+		itemValue.setAttribute("ref", MsgId.INT_INSTANCE_ENUM_ID.getText());
 		itemset.addContent(itemValue);
 		selElt.addContent(itemset);
 	}

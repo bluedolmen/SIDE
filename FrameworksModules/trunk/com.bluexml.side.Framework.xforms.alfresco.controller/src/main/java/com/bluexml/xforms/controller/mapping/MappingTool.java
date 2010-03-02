@@ -447,4 +447,8 @@ public class MappingTool {
 				alfrescoNodes, formIsReadOnly);
 	}
 
+	public boolean isStartTask(WorkflowTaskType taskType) {
+		return mappingToolFormsToAlfresco.isStartTask(taskType);
+	}
+
 }

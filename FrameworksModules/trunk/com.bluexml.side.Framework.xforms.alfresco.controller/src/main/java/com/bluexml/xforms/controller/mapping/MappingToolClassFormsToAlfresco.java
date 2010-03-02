@@ -117,7 +117,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 		targetNode = associationElement;
 
 		if (targetNode != null) {
-			if (associationType.isInline()) {
+			if (isInline(associationType)) {
 				targetId = processSave(transaction, targetNode);
 			} else {
 				Element specificElement = DOMUtil.getChild(targetNode, MsgId.INT_INSTANCE_SIDEID
@@ -227,7 +227,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 		if (associationElement != null) {
 			List<Element> associationElements = DOMUtil.getAllChildren(associationElement);
 			for (int i = 0; i < associationElements.size(); i++) {
-				if (!associationType.isMultiple() || i != (associationElements.size() - 1)) {
+				if (!isMultiple(associationType) || i != (associationElements.size() - 1)) {
 					processAssociation(transaction, associations, associationType,
 							associationElements.get(i));
 				}
@@ -276,12 +276,10 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	private void xformsAttributesToAlfresco(List<Element> children, GenericAttributes attributes,
 			List<AttributeType> xformsAttributes, boolean isServletRequest) {
 		for (AttributeType xformsAttribute : xformsAttributes) {
-			if (xformsAttribute.isInAlfresco()) {
-				Element child = DOMUtil.getOneElementByTagName(children, xformsAttribute.getName());
-				if (child != null) {
-					attributes.getAttribute().add(
-							xformsAttributeToAlfresco(child, xformsAttribute, isServletRequest));
-				}
+			Element child = DOMUtil.getOneElementByTagName(children, xformsAttribute.getName());
+			if (child != null) {
+				attributes.getAttribute().add(
+						xformsAttributeToAlfresco(child, xformsAttribute, isServletRequest));
 			}
 		}
 	}
@@ -378,7 +376,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 			} else {
 				throw new RuntimeException("Unknow type of DOM node element");
 			}
-			
+
 		}
 
 		List<Element> children = DOMUtil.getAllChildren(element);
@@ -403,7 +401,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 					List<Element> associationElements = DOMUtil.getAllChildren(associationElement);
 					for (Element association : associationElements) {
 						processRemoveReference(relementId, elementsToRemove, associationType,
-								association, associationType.isMultiple());
+								association, isMultiple(associationType));
 					}
 				}
 			}
@@ -448,7 +446,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 					eltTargetId.setTextContent("");
 					eltTargetLabel.setTextContent("");
 				}
-			} else if (associationType.isInline()) {
+			} else if (isInline(associationType)) {
 				removeReference(targetNode, relementId);
 			}
 		}

@@ -44,12 +44,16 @@ import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.actions.EnumAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.controller.binding.ActionFieldType;
 import com.bluexml.xforms.controller.binding.AspectType;
+import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.AttributeType;
 import com.bluexml.xforms.controller.binding.Batch;
 import com.bluexml.xforms.controller.binding.CanisterType;
 import com.bluexml.xforms.controller.binding.ClassType;
 import com.bluexml.xforms.controller.binding.EnumType;
+import com.bluexml.xforms.controller.binding.FieldType;
+import com.bluexml.xforms.controller.binding.FileFieldType;
 import com.bluexml.xforms.controller.binding.FormFieldType;
 import com.bluexml.xforms.controller.binding.FormType;
 import com.bluexml.xforms.controller.binding.GenericAttribute;
@@ -762,6 +766,36 @@ public class MappingToolCommon {
 	 * HELPER FUNCTIONS DUE TO MOVING SOME INFO FROM ELEMENTS TO ATTRIBUTES
 	 */
 
+	/*
+	 * ActionFieldType
+	 */
+	protected boolean isInWorkflow(ActionFieldType actionType) {
+		if (actionType.isInWorkflow() == null) {
+			return false;
+		}
+		return actionType.isInWorkflow();
+	}
+	
+	/*
+	 * AssociationType
+	 */
+	protected boolean isInline(AssociationType associationType) {
+		if (associationType.isInline() == null) {
+			return false;
+		}
+		return associationType.isInline();
+	}
+	
+	protected boolean isMultiple(AssociationType associationType) {
+		if (associationType.isMultiple() == null) {
+			return false;
+		}
+		return associationType.isMultiple();
+	}
+	
+	/*
+	 * AttributeType
+	 */
 	protected String getDefault(AttributeType attributeType) {
 		try {
 			return attributeType.getDefault();
@@ -777,32 +811,97 @@ public class MappingToolCommon {
 			return null;
 		}
 	}
-	
+
 	protected boolean isDynamicEnum(AttributeType attributeType) {
-		try {
-			return attributeType.isDynamicEnum();
-		} catch (Exception e) {
+		if (attributeType.isDynamicEnum() == null) {
 			return false;
 		}
+		return attributeType.isDynamicEnum();
 	}
-	
+
 	protected boolean isMultiple(AttributeType attributeType) {
-		try {
-			return attributeType.isMultiple();
-		} catch (Exception e) {
+		if (attributeType.isMultiple() == null) {
 			return false;
 		}
+		return attributeType.isMultiple();
 	}
-	
+
 	protected boolean isReadOnly(AttributeType attributeType) {
-		try {
-			return attributeType.isReadOnly();
-		} catch (Exception e) {
+		if (attributeType.isReadOnly() == null) {
 			return false;
 		}
+		return attributeType.isReadOnly();
+	}
+
+	/*
+	 * EnumType
+	 */
+	protected boolean isDynamic(EnumType enumType) {
+		if (enumType.isDynamic() == null) {
+			return false;
+		}
+		return enumType.isDynamic();
+	}
+
+	/*
+	 * FieldType
+	 */
+	protected boolean isMandatory(FieldType fieldType) {
+		if (fieldType.isMandatory() == null) {
+			return false;
+		}
+		return fieldType.isMandatory();
 	}
 	
-	/* 
+	/*
+	 * FileFieldType
+	 */
+	protected boolean isInRepository(FileFieldType fieldType) {
+		if (fieldType.isInRepository() == null) {
+			return false;
+		}
+		return fieldType.isInRepository();
+	}
+
+	/*
+	 * FormFieldType
+	 */
+	protected String getDefault(FormFieldType formFieldType) {
+		return formFieldType.getDefault();
+	}
+
+	protected boolean isMultiple(FormFieldType formFieldType) {
+		if (formFieldType.isMultiple() == null) {
+			return false;
+		}
+		return formFieldType.isMultiple();
+	}
+
+	protected boolean isReadOnly(FormFieldType formFieldType) {
+		if (formFieldType.isReadOnly() == null) {
+			return false;
+		}
+		return formFieldType.isReadOnly();
+	}
+
+	protected boolean isSearchEnum(FormFieldType formFieldType) {
+		if (formFieldType.isSearchEnum() == null) {
+			return false;
+		}
+		return formFieldType.isSearchEnum();
+	}
+
+	/*
+	 * FormType
+	 */
+	protected boolean isContentEnabled(FormType formType) {
+		if (formType.isContentEnabled() == null) {
+			return false;
+		}
+		return formType.isContentEnabled();
+	}
+
+	/*
 	 * ModelChoiceType
 	 */
 	protected String getFieldSize(ModelChoiceType modelChoiceType) {
@@ -814,46 +913,20 @@ public class MappingToolCommon {
 	}
 	
 	protected boolean isInline(ModelChoiceType modelChoiceType) {
-		try {
-			return modelChoiceType.isInline();
-		} catch (Exception e) {
+		if (modelChoiceType.isInline() == null) {
 			return false;
 		}
+		return modelChoiceType.isInline();
 	}
-	
-	/* 
-	 * FormFieldType
+
+	/*
+	 * WorkflowTaskType
 	 */
-	protected String getDefault(FormFieldType formFieldType) {
-		try {
-			return formFieldType.getDefault();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-	
-	protected boolean isMultiple(FormFieldType formFieldType) {
-		try {
-			return formFieldType.isMultiple();
-		} catch (Exception e) {
+	protected boolean isStartTask(WorkflowTaskType workflowTaskType) {
+		if (workflowTaskType.isStartTask() == null) {
 			return false;
 		}
-	}
-	
-	protected boolean isReadOnly(FormFieldType formFieldType) {
-		try {
-			return formFieldType.isReadOnly();
-		} catch (Exception e) {
-			return false;
-		}
-	}
-	
-	protected boolean isSearchEnum(FormFieldType formFieldType) {
-		try {
-			return formFieldType.isSearchEnum();
-		} catch (Exception e) {
-			return false;
-		}
+		return workflowTaskType.isStartTask();
 	}
 	
 	/*

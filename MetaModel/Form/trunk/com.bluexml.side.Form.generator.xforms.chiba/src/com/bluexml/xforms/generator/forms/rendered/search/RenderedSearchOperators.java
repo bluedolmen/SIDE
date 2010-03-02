@@ -58,11 +58,11 @@ public class RenderedSearchOperators extends Rendered {
 		itemset.setAttribute("nodeset", "instance('" + enumInstance + "')/item");
 		Element itemLabel = XFormsGenerator
 				.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
-		itemLabel.setAttribute("ref", "value");
+		itemLabel.setAttribute("ref", MsgId.INT_INSTANCE_ENUM_VALUE.getText());
 		itemset.addContent(itemLabel);
 		Element itemValue = XFormsGenerator
 				.createElement("value", XFormsGenerator.NAMESPACE_XFORMS);
-		itemValue.setAttribute("ref", "id");
+		itemValue.setAttribute("ref", MsgId.INT_INSTANCE_ENUM_ID.getText());
 		itemset.addContent(itemValue);
 		selElt.addContent(itemset);
 	}

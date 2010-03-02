@@ -535,7 +535,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			// processing by the controller.
 			if (fieldType instanceof FileFieldType) {
 				FileFieldType fileField = (FileFieldType) fieldType;
-				String destination = fileField.isInRepository() ? MsgId.INT_UPLOAD_DEST_REPO
+				String destination = isInRepository(fileField) ? MsgId.INT_UPLOAD_DEST_REPO
 						.getText() : MsgId.INT_UPLOAD_DEST_FILE.getText();
 				attribute.setUploadTo(destination);
 

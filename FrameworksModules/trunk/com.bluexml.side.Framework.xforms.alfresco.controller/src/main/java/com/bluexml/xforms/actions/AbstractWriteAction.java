@@ -3,9 +3,11 @@ package com.bluexml.xforms.actions;
 import org.w3c.dom.Node;
 
 /**
- * The Class AbstractWriteAction.<br>
- * Inner action extends this class, as those actions replace all page. Superclass for actions that
- * are called via writer://... URIs.
+ * Superclass for actions that are called via <tt>writerscheme://...</tt> URIs. Write actions may
+ * replace one instance or all. In practice, at least one instance is replaced. Examples: the action
+ * for the Submit button, or the action for editing an item from selection widgets.
+ * 
+ * @author Amenel
  */
 public abstract class AbstractWriteAction extends AbstractAction {
 

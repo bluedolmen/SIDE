@@ -6,15 +6,9 @@ package com.bluexml.xforms.actions;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
- * ExecuteAction. <br/>
  * Provides support for user defined actions through action buttons. The action must be implemented
  * as a Java class with signature:
- * 
- * <pre>
- * java.lang.String run(org.w3c.dom.Node.class, java.lang.String)
- * </pre>
- * 
- * . <br/>
+ * <code>java.lang.String run(org.w3c.dom.Node.class, java.lang.String)</code>. <br/>
  * 
  * @author Amenel
  * 

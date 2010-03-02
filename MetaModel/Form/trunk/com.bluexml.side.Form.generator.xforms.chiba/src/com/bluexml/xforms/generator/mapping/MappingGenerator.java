@@ -200,7 +200,6 @@ public class MappingGenerator extends AbstractGenerator {
 		AttributeType attributeType = new AttributeType();
 		attributeType.setName(attribute.getName());
 		attributeType.setAlfrescoName(getAlfrescoNameForAttribute(classe, attribute));
-		attributeType.setInAlfresco(true);
 		attributeType.setType(attribute.getTyp().getLiteral());
 		if (attribute.getValueList() != null) {
 			attributeType.setEnumQName(ModelTools.getCompleteName(attribute.getValueList()));
@@ -360,11 +359,16 @@ public class MappingGenerator extends AbstractGenerator {
 			} else {
 				associationType.setType(copyClassType(classType));
 			}
-			associationType.setMultiple(type.getAssociationCardinality().isMultiple());
-			associationType.setInline(type.isInline());
 			String associationName = formGenerator.getAssoQualifiedName(association);
-
 			associationType.setAlfrescoName(associationName);
+
+			if (type.getAssociationCardinality().isMultiple()) {
+				associationType.setMultiple(true); // optional attribute
+			}
+			if (type.isInline()) {
+				associationType.setInline(true); // optional attribute
+			}
+
 			sourceType.getAssociation().add(associationType);
 		}
 	}
@@ -645,7 +649,9 @@ public class MappingGenerator extends AbstractGenerator {
 		enumType.setName(enumeration.getName());
 		String alfrescoName = ModelTools.getCompleteName(enumeration).replace('.', '_');
 		enumType.setAlfrescoName(alfrescoName);
-		enumType.setDynamic(enumeration.getDynamic());
+		if (enumeration.getDynamic()) {
+			enumType.setDynamic(true);
+		}
 		mapping.getEnum().add(enumType);
 	}
 
@@ -696,7 +702,9 @@ public class MappingGenerator extends AbstractGenerator {
 			FormType formType = newFormType(realContainer);
 
 			FormClass formClass = (FormClass) realContainer;
-			formType.setContentEnabled(formClass.isContent_enabled());
+			if (formClass.isContent_enabled()) {
+				formType.setContentEnabled(true);
+			}
 			formType.setRealClass(copyClassType(getClassType(formClass.getReal_class())));
 			processFormElement(formType, realContainer, realContainer, realContainer);
 			mapping.getCanister().add(objectFactory.createForm(formType));
@@ -731,7 +739,7 @@ public class MappingGenerator extends AbstractGenerator {
 				StartState start = ((StartStateImpl) mel);
 				swimlane = start.getInitiator();
 			} else {
-				taskType.setStartTask(false);
+				// taskType.setStartTask(false); // optional attribute so we don't set it
 				TaskNode aTask = (TaskNode) mel;
 				swimlane = aTask.getSwimlane();
 			}
@@ -869,8 +877,6 @@ public class MappingGenerator extends AbstractGenerator {
 		// own properties
 		if (formContainer instanceof FormWorkflow) {
 			actionFieldType.setInWorkflow(true);
-		} else {
-			actionFieldType.setInWorkflow(false);
 		}
 		actionFieldType.setLabel(field.getLabel());
 		// enlist
@@ -936,7 +942,9 @@ public class MappingGenerator extends AbstractGenerator {
 		if (initialValue != null) {
 			formFieldType.setDefault(initialValue); // optional attribute
 		}
-		formFieldType.setMandatory(field.isMandatory());
+		if (field.isMandatory()) {
+			formFieldType.setMandatory(true); // optional attribute
+		}
 
 		if (field instanceof ChoiceField) {
 			ChoiceField choiceField = (ChoiceField) field;
@@ -979,7 +987,9 @@ public class MappingGenerator extends AbstractGenerator {
 		if (field instanceof FileField) {
 			FileFieldType fileFieldType = initFileFieldFromFormField(formFieldType);
 
-			fileFieldType.setInRepository(((FileField) field).isInRepository());
+			if (((FileField) field).isInRepository()) {
+				fileFieldType.setInRepository(true);
+			}
 			fieldTypesList.add(fileFieldType);
 		} else {
 			// check that if mandatory, the field has an initial value

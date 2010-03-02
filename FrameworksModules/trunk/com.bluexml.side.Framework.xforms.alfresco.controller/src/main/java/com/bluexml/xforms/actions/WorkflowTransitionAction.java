@@ -380,7 +380,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		transaction.setLogin(userName);
 
 		// check that the user is authorized. Already done for the initial task so don't redo.
-		if ((taskType.isStartTask() == false) && (validateCurrentUser(taskType) == false)) {
+		if ((controller.isStartTask(taskType) == false) && (validateCurrentUser(taskType) == false)) {
 			navigationPath.setStatusMsg("Transition not followed. User '" + userName
 					+ "' is not a valid actor for this task.");
 			return resultBean;
@@ -536,7 +536,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 */
 	private boolean initializeTask(String formName, WorkflowTaskType taskType,
 			HashMap<QName, Serializable> properties, String processId) throws ServletException {
-		if (taskType.isStartTask()) {
+		if (controller.isStartTask(taskType)) {
 			// check that the user is authorized to start the workflow
 			if (validateCurrentUser(taskType) == false) {
 				navigationPath

@@ -1004,12 +1004,12 @@ public class XFormsGenerator extends AbstractGenerator {
 				Element l = new Element("item");
 
 				// order position for use with multiple selection enum fields
-				Element name = new Element("id");
+				Element name = new Element(MsgId.INT_INSTANCE_ENUM_ID.getText());
 				name.setText(Integer.toString(i));
 				i++;
 				l.addContent(name);
 
-				Element value = new Element("value");
+				Element value = new Element(MsgId.INT_INSTANCE_ENUM_VALUE.getText());
 				value.setText(enumerationLiteral.getName());
 				l.addContent(value);
 

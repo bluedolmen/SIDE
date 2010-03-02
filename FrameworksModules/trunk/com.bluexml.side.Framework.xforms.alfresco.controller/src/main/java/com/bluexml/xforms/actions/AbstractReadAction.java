@@ -5,7 +5,7 @@ package com.bluexml.xforms.actions;
 
 
 /**
- * Superclass for actions that are called via reader://... URIs.
+ * Superclass for actions that are called via <tt>readerscheme://...</tt> URIs.
  * 
  * @author Amenel
  * 

@@ -190,7 +190,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 
 					Node targetValue = null;
 					Node associationClassValue = null;
-					if (association.isInline()) {
+					if (isInline(association)) {
 						targetValue = fillXFormsElementFromIdInline(transaction, xformsDocument,
 								stack, alfrescoTargetId, formIsReadOnly, isServletRequest);
 					} else {
@@ -201,7 +201,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 							targetValue, associationClassValue);
 				}
 				// add empty item if multiple
-				if (association.isMultiple()) {
+				if (isMultiple(association)) {
 					processXFormsAssociationCreate(transaction, xformsDocument, association, stack,
 							targetClassType, initParams, associationElement, formIsReadOnly,
 							isServletRequest);
@@ -243,7 +243,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 			boolean formIsReadOnly, boolean isServletRequest) throws ServletException {
 		Node targetValue = null;
 		Node associationClassValue = null;
-		if (association.isInline()) {
+		if (isInline(association)) {
 			targetValue = fillXFormsAssociationCreateElementInline(transaction, xformsDocument,
 					association, stack, targetClassType, initParams, formIsReadOnly,
 					isServletRequest);
@@ -399,7 +399,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 
 		Element associationElement = xformsDocument.createElement(association.getName());
 		Node subNode = null;
-		if (association.isInline()) {
+		if (isInline(association)) {
 			subNode = fillXFormsElementFromIdInline(transaction, xformsDocument, stack, realInitId,
 					formIsReadOnly, isServletRequest);
 		} else {
