@@ -125,6 +125,12 @@ public class Application {
 		// execBuild("buildSVN", "svnCommit");
 		// }
 		
+		// launch prepare-compile for the project com.bluexml.side.Form.generator.xforms.chiba
+		String pathbuild="/var/opt/hudson/jobs/Build_SIDE/buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba/generated-sources";
+		if (new File(pathbuild).exists()) {
+			FileHelper.deleteFile(new File(pathbuild));
+		}
+		new File(pathbuild).mkdir();
 		execBuildAnt("build","prepare-compile","/var/opt/hudson/jobs/Build_SIDE/buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
 		
 				
@@ -148,15 +154,15 @@ public class Application {
 		Utils.copyToRepository();
 
 		// crï¿½ation du build.xml
-		System.out.println("\n\n- Crï¿½ation de " + Utils.getBuildPath() + File.separator + "build.xml");
+		System.out.println("\n\n- CrŽation de " + Utils.getBuildPath() + File.separator + "build.xml");
 		createFile(getCorpsBuild(), Utils.getBuildPath(), "build.xml");
 
 		// crï¿½ation du buildAuto.product
-		System.out.println("- Crï¿½ation du buildAuto.product");
+		System.out.println("- CrŽation du buildAuto.product");
 		createFile(getCorpsProduct(), Utils.getBuildPath(), "buildAuto.product");
 
 		// Execution du build.xml
-		System.out.println("\nRï¿½alisation du Build sur ...");
+		System.out.println("\nRŽalisation du Build sur ...");
 
 		for (String projet : Utils.getProjects()) {
 			if (!projectsExcluded.contains(projet)) {
