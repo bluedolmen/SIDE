@@ -993,8 +993,7 @@ public class MappingGenerator extends AbstractGenerator {
 			fieldTypesList.add(fileFieldType);
 		} else {
 			// check that if mandatory, the field has an initial value
-			if (formFieldType.isMandatory()
-					&& (StringUtils.trimToNull(formFieldType.getDefault()) == null)) {
+			if (field.isMandatory() && (StringUtils.trimToNull(field.getInitial()) == null)) {
 				monitor.addErrorTextAndLog("Attribute '" + formFieldType.getAlfrescoName()
 						+ "' is mandatory: it should have an initial value!", null, null);
 			}
