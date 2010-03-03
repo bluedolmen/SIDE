@@ -118,8 +118,7 @@
       <version>1.2.2</version>
     </dependency>
     <dependency>
-      <!-- needed for the HTML catalog -->
-      <groupId>xml-resolver</groupId>
+      <groupId>xml-resolver</groupId><!-- needed for the HTML catalog -->
       <artifactId>xml-resolver</artifactId>
       <version>1.2</version>
     </dependency>
@@ -189,9 +188,8 @@
         </executions>
         <configuration>
           <packageName>com.bluexml.xforms.controller.binding</packageName>
-          <directoryName>${project.build.sourceDirectory}</directoryName>
-          <clearOutputDir>false</clearOutputDir>
-          <outputDirectory>${project.build.sourceDirectory}</outputDirectory>
+          <clearOutputDir>true</clearOutputDir>
+          <!-- <outputDirectory>${project.build.sourceDirectory}</outputDirectory> -->
           <!-- Do not validate the schemas -->
           <nv>true</nv>
           <!-- Suppress package info annotation, otherwise each build would mark the working copy as dirty (SVN-wise) -->
