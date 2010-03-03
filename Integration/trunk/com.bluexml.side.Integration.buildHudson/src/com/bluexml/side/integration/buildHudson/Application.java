@@ -126,12 +126,13 @@ public class Application {
 		// }
 		
 		// launch prepare-compile for the project com.bluexml.side.Form.generator.xforms.chiba
-		String pathbuild="/var/opt/hudson/jobs/Build_SIDE/buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba/generated-sources";
+		
+		String pathbuild=workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba/generated-sources";
 		if (new File(pathbuild).exists()) {
 			FileHelper.deleteFile(new File(pathbuild));
 		}
 		new File(pathbuild).mkdir();
-		execBuildAnt("build","prepare-compile","/var/opt/hudson/jobs/Build_SIDE/buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+		execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
 		
 				
 		
