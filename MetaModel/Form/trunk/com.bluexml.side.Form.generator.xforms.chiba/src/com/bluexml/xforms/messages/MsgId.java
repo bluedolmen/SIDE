@@ -130,6 +130,8 @@ public enum MsgId {
 	//
 	// shortcuts for internal strings
 	//
+	// //
+	// names of actions
 	INT_ACT_CODE_CANCEL					("cancel"),
 	INT_ACT_CODE_CREATE_CLASS			("create"),
 	INT_ACT_CODE_CREATE_FORM			("createForm"),
@@ -157,13 +159,14 @@ public enum MsgId {
 	INT_ACT_PARAM_LIST_MAXLENGTH		("maxLength"),
 	INT_ACT_PARAM_LIST_QUERY			("query"),
 	INT_ACT_PARAM_LIST_SIZE				("size"),
+	// form type indicators
 	INT_ACT_SUFFIX_GET_FORM_CLASS		("class"),
 	INT_ACT_SUFFIX_GET_FORM_FORM		("form"),
 	INT_ACT_SUFFIX_GET_FORM_LIST		("list"),
 	INT_ACT_SUFFIX_GET_FORM_SEARCH		("search"),
 	INT_ACT_SUFFIX_GET_FORM_SELECTOR	("selector"),
 	INT_ACT_SUFFIX_GET_FORM_WKFLW		("workflow"),
-	INT_CSS_BLUEXML_AUTOGEN				("bluexml-autogen"),
+	// our custom CSS rule names
 	INT_CSS_HORIZ_LINE					("side_horizontal_line"),
 	INT_CSS_NO_LABEL_FIELD				("side_no_label_field"),
 	INT_CSS_RO_TEXTAREA					("side_ro_textarea"),
@@ -223,8 +226,8 @@ public enum MsgId {
 	INT_INSTANCE_SELECTEDTYPE			("SELECTEDTYPE"),
 	INT_INSTANCE_SELECT_ID				("id"),
 	INT_INSTANCE_SELECT_ITEM			("item"),
-	INT_INSTANCE_SELECT_LABEL			("value"),
-	INT_INSTANCE_SELECT_TYPE			("qname"),
+	INT_INSTANCE_SELECT_LABEL			("label"),
+	INT_INSTANCE_SELECT_TYPE			("type"),
 	INT_INSTANCE_SIDE_DATATYPE			("SIDEDataType"),
 	INT_INSTANCE_SIDE_NODE_CONTENT		("SIDENodeContent"),
 	INT_INSTANCE_SIDEEDIT				("SIDEEDIT"),
@@ -232,6 +235,7 @@ public enum MsgId {
 	INT_INSTANCE_SIDELABEL				("SIDELABEL"),
 	INT_INSTANCE_SIDETYPE				("SIDETYPE"),
 	INT_INSTANCE_WKFLW_NODESET			("workflow"),
+	INT_MSG_ALFRESCO_SERVER_DOWN		("Cannot perform the action: Alfresco server unavailable."),
 	INT_MSGPOOL_NO_MESSAGE_FILE			("INVALID MESSAGE FILE!"),
 	INT_NAMESPACE_BLUEXML_CLASS			("http://www.bluexml.com/model/content"),
 	INT_NAMESPACE_BLUEXML_WORKFLOW		("http://www.bluexml.com/model/workflow"),
