@@ -2,9 +2,7 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
-import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.xforms.messages.MsgPool;
-
+import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementSubmission;
@@ -12,6 +10,8 @@ import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.RenderableSubmit;
 import com.bluexml.xforms.generator.forms.rendered.RenderedParentGroup;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 
 /**
  * The Class RenderableSelectorCreate.
@@ -58,14 +58,20 @@ public class RenderableSelectorCreate extends AbstractRenderableSelectorItem {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		RenderedParentGroup renderedParentGroup = new RenderedParentGroup(renderedParents);
-		if (bean.getCreateEditForm() != null) {
-			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER + "createForm/" + bean.getName()
-					+ "/" + bean.getCreateEditForm());
+		if (bean.getCreateEditFormType().equals(FormTypeRendered.formForm)) {
+			String listForms = "";
+			if (bean.getCreateEditForms() != null) {
+				listForms = bean.getCreateEditForms().get(0);
+			}
+			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER.getText()
+					+ MsgId.INT_ACT_CODE_CREATE_FORM + "/" + bean.getName() + "/" + listForms);
 		} else {
-			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER + "create/" + bean.getName()
-					+ "/" + ModelTools.getCompleteName(bean.getDestinationClass()));
+			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER.getText()
+					+ MsgId.INT_ACT_CODE_CREATE_CLASS + "/" + bean.getName() + "/"
+					+ ModelTools.getCompleteName(bean.getDestinationClass()));
 		}
 		renderedParentGroup.getParent().addModelElementRoot(submissionCreate);
 		return renderedParentGroup;

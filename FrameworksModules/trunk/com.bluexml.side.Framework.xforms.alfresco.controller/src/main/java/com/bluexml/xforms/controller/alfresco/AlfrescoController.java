@@ -61,6 +61,7 @@ import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.AttributeType;
 import com.bluexml.xforms.controller.binding.Batch;
 import com.bluexml.xforms.controller.binding.CanisterType;
+import com.bluexml.xforms.controller.binding.ClassType;
 import com.bluexml.xforms.controller.binding.EnumType;
 import com.bluexml.xforms.controller.binding.FormFieldType;
 import com.bluexml.xforms.controller.binding.FormType;
@@ -204,14 +205,11 @@ public class AlfrescoController {
 	/**
 	 * Loads the properties files and passes them to the appropriate processor for parsing.
 	 * 
-	 * @throws IOException
-	 * @throws Exception
 	 * @return true if both files have been loaded. If any of the files was found neither at the
 	 *         specified location or at the default location, returns false. If true, the files may
 	 *         have been loaded from default locations instead of the given paths.
 	 */
-	public static boolean loadProperties(String formsFilePath, String messagesFilePath)
-			throws IOException, Exception {
+	public static boolean loadProperties(String formsFilePath, String messagesFilePath) {
 
 		//
 		// forms.properties
@@ -220,7 +218,7 @@ public class AlfrescoController {
 			try {
 				File theFile = new File(formsFilePath);
 				InputStream stream = new FileInputStream(theFile);
-				resForms = loadPropertiesFormInit(stream);
+				resForms = loadPropertiesFormsFromStream(stream);
 				// keep the path so that a subsequent reload does not require re-giving the path
 				formsPropertiesPath = formsFilePath;
 			} catch (Exception e) {
@@ -232,10 +230,10 @@ public class AlfrescoController {
 			try {
 				File theFile = new File(formsPropertiesPath);
 				InputStream stream = new FileInputStream(theFile);
-				resForms = loadPropertiesFormInit(stream);
+				resForms = loadPropertiesFormsFromStream(stream);
 			} catch (Exception e) {
-				logger.error("Configuration file 'forms.properties' not found at " + formsFilePath,
-						e);
+				logger.error("Configuration file 'forms.properties' not found at last location "
+						+ formsPropertiesPath, e);
 				resForms = loadPropertiesFormsDefault();
 			}
 		} else {
@@ -251,7 +249,6 @@ public class AlfrescoController {
 			try {
 				File theFile = new File(messagesFilePath);
 				streamMsgs = new FileInputStream(theFile);
-				// keep the path so that a subsequent reload does not require re-giving the path
 				messagesPropertiesPath = messagesFilePath;
 			} catch (Exception e) {
 				logger.error("Configuration file 'messages.properties' not found at '"
@@ -263,7 +260,8 @@ public class AlfrescoController {
 				File theFile = new File(messagesPropertiesPath);
 				streamMsgs = new FileInputStream(theFile);
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.error("Configuration file 'messages.properties' not found at last location "
+						+ messagesPropertiesPath, e);
 				streamMsgs = loadPropertiesMessagesDefaults();
 			}
 		} else {
@@ -288,7 +286,7 @@ public class AlfrescoController {
 		try {
 			File formsFile = new File(new URI(formsURL.toString()));
 			InputStream stream = new FileInputStream(formsFile);
-			return loadPropertiesFormInit(stream);
+			return loadPropertiesFormsFromStream(stream);
 		} catch (URISyntaxException e) {
 			// I don't think this will ever be reached
 			e.printStackTrace();
@@ -325,7 +323,7 @@ public class AlfrescoController {
 	 * @param stream
 	 * @return
 	 */
-	private static boolean loadPropertiesFormInit(InputStream stream) {
+	private static boolean loadPropertiesFormsFromStream(InputStream stream) {
 		Properties config = new Properties();
 		try {
 			config.load(stream);
@@ -462,6 +460,8 @@ public class AlfrescoController {
 				instance = getObjectInstance(transaction, id, new Stack<AssociationType>(),
 						formIsReadOnly, isServletRequest);
 			}
+		} catch (ServletException se) {
+			throw se; // just propagate
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
@@ -1196,6 +1196,9 @@ public class AlfrescoController {
 
 		Document result = requestDocumentFromAlfresco(alfrescoTransaction, parameters,
 				MsgId.INT_WEBSCRIPT_OPCODE_BATCH);
+		if (result == null) {
+			throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
+		}
 		Element idsElement = result.getDocumentElement();
 		NodeList childNodes = idsElement.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {
@@ -1245,6 +1248,9 @@ public class AlfrescoController {
 		parameters.put("query", StringUtils.join(ids, ";"));
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
 				MsgId.INT_WEBSCRIPT_OPCODE_LABELS);
+		if (requestDocument == null) {
+			throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
+		}
 
 		List<String> result = new ArrayList<String>();
 		// List elements = DOMUtil.getChildElements(requestDocument.getDocumentElement());
@@ -1262,6 +1268,9 @@ public class AlfrescoController {
 		parameters.put("query", "enum;" + code);
 		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
 				MsgId.INT_WEBSCRIPT_OPCODE_LABELS);
+		if (requestDocument == null) {
+			throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
+		}
 
 		String result = null;
 		List elements = DOMUtil.getAllChildren(requestDocument.getDocumentElement());
@@ -1312,18 +1321,19 @@ public class AlfrescoController {
 		}
 
 		parameters.put("type", mappingTool.getEnumType(type).getName());
-		Document requestDocument = requestDocumentFromAlfresco(transaction, parameters,
+		Document reqDoc = requestDocumentFromAlfresco(transaction, parameters,
 				MsgId.INT_WEBSCRIPT_OPCODE_ENUM);
-		Element documentElement = requestDocument.getDocumentElement();
+		if (reqDoc == null) {
+			throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
+		}
+		Element docElt = reqDoc.getDocumentElement();
 
-		Element queryElement = requestDocument.createElement("query");
+		Element queryElement = reqDoc.createElement("query");
 		queryElement.setTextContent(StringUtils.trimToEmpty(query));
-		documentElement.appendChild(queryElement);
-		documentElement.appendChild(requestDocument.createElement(MsgId.INT_INSTANCE_SELECTEDID
-				.getText()));
-		documentElement.appendChild(requestDocument.createElement(MsgId.INT_INSTANCE_SELECTEDLABEL
-				.getText()));
-		return requestDocument;
+		docElt.appendChild(queryElement);
+		docElt.appendChild(reqDoc.createElement(MsgId.INT_INSTANCE_SELECTEDID.getText()));
+		docElt.appendChild(reqDoc.createElement(MsgId.INT_INSTANCE_SELECTEDLABEL.getText()));
+		return reqDoc;
 	}
 
 	/**
@@ -1390,6 +1400,7 @@ public class AlfrescoController {
 
 		docElement.appendChild(reqDoc.createElement(MsgId.INT_INSTANCE_SELECTEDID.getText()));
 		docElement.appendChild(reqDoc.createElement(MsgId.INT_INSTANCE_SELECTEDLABEL.getText()));
+		docElement.appendChild(reqDoc.createElement(MsgId.INT_INSTANCE_SELECTEDTYPE.getText()));
 
 		Element maxResultsElement = reqDoc.createElement(MsgId.INT_INSTANCE_SELECTEDMAX.getText());
 		maxResultsElement.setTextContent(maxSize);
@@ -1433,14 +1444,17 @@ public class AlfrescoController {
 		root.appendChild(query);
 
 		for (int i = 0; i < nb; i++) {
-			Element item = doc.createElement("item");
-			Element id = doc.createElement("id");
+			Element item = doc.createElement(MsgId.INT_INSTANCE_SELECT_ITEM.getText());
+			Element id = doc.createElement(MsgId.INT_INSTANCE_SELECT_ID.getText());
 			id.setTextContent("" + i);
-			Element label = doc.createElement("value");
+			Element label = doc.createElement(MsgId.INT_INSTANCE_SELECT_LABEL.getText());
 			label.setTextContent(alfrescoName + "_" + i);
+			Element qname = doc.createElement(MsgId.INT_INSTANCE_SELECT_TYPE.getText());
+			qname.setTextContent("type_" + alfrescoName + "_" + i);
 
 			item.appendChild(id);
 			item.appendChild(label);
+			item.appendChild(qname);
 
 			root.appendChild(item);
 		}
@@ -1470,7 +1484,7 @@ public class AlfrescoController {
 			PostMethod post = requestPost(transaction, parameters, opCode);
 			result = StringUtils.trim(post.getResponseBodyAsString());
 		} catch (ConnectException e) {
-			throw new ServletException("Can't perform actions: the Alfresco server is unreachable.");
+			throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
 		} catch (IOException e) {
 			logger.error(e);
 			throw new ServletException(MsgPool.getMsg(MsgId.MSG_DEFAULT_ERROR_MSG));
@@ -1505,7 +1519,7 @@ public class AlfrescoController {
 			result = synchronizedParse(post.getResponseBodyAsStream()); // #1227
 		} catch (ConnectException e) { // #1234
 			if (!isDebugMode()) {
-				throw new ServletException("The Alfresco server is unavailable.");
+				throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
 			}
 			return null;
 		} catch (Exception e) {
@@ -1843,7 +1857,7 @@ public class AlfrescoController {
 	public boolean isDynamicEnum(String type) {
 		EnumType enumType = mappingTool.getEnumType(type);
 		if (enumType != null) {
-			return enumType.isDynamic();
+			return mappingTool.isDynamic(enumType);
 		}
 		return false; // happens for search operators enums; they don't get into the mapping file
 	}
@@ -1882,7 +1896,8 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Gets the label under which an association is displayed on a specific form.
+	 * Gets the label under which an association is displayed on a specific form. The label is
+	 * indicated for the model choice field in the modeler.
 	 * 
 	 * @param completeAssoName
 	 * @param dataType
@@ -1898,18 +1913,31 @@ public class AlfrescoController {
 	 * reset (i.e. emptied) so that subsequent editions can happen correctly on the same form.
 	 * 
 	 * @param node
-	 * @return the id, or null (this latter case should not happen if setting the id in the instance
-	 *         is done correctly).
+	 * @return the id, or null (this latter case should not happen if the Edit button's action of
+	 *         setting the <edit id> in the instance is done correctly).
 	 */
-	public String getAndResetEditNode(Node node) {
+	public EditNodeBean getEditNodeAndReset(Node node) {
 		Element rootElt = ((Document) node).getDocumentElement();
+		// find the edit id element
 		Element editIdElt = DOMUtil.getElementInDescentByNameNonNull(rootElt,
 				MsgId.INT_INSTANCE_SIDEEDIT.getText());
 		if (editIdElt != null) {
 			String id = editIdElt.getTextContent();
-			editIdElt.setTextContent(null);
-			logger.debug("Getting edit id, found: " + id);
-			return id;
+			editIdElt.setTextContent(null); // <- reset the id. MANDATORY.
+
+			// get the data type // #1510
+			String dataType = null;
+			try {
+				Element parent = (Element) editIdElt.getParentNode();
+				Element typeElt = DOMUtil.getChild(parent, MsgId.INT_INSTANCE_SIDETYPE.getText());
+				if (typeElt != null) {
+					dataType = typeElt.getTextContent();
+				}
+			} catch (Exception e) {
+				// nothing to do
+			}
+			logger.debug("Getting edit id, found: '" + id + "' with data type: '" + dataType + "'");
+			return new EditNodeBean(id, dataType);
 		}
 		logger.error("No id found for node edition.");
 		return null;
@@ -2147,7 +2175,8 @@ public class AlfrescoController {
 	 * Gets the type of a node.
 	 * 
 	 * @param dataId
-	 * @return the QName corresponding to the content type. Returns <b>null</b> if an exception
+	 *            the node's id, with or without the protocol and store.
+	 * @return the QName that corresponds to the content type. Returns <b>null</b> if an exception
 	 *         occurred or if the value is <b>null</b>, which is a hint that either the webscript is
 	 *         not available or the object does not exist.
 	 */
@@ -2157,10 +2186,12 @@ public class AlfrescoController {
 		parameters.put("serviceName", "NodeService");
 		parameters.put("methodName", "getType");
 		Vector<Object> paramList = new Vector<Object>();
+
 		// add parameters to the method in paramList
 		NodeRef noderef = new NodeRef(patchDataId(dataId));
 		paramList.add(noderef);
 		parameters.put("methodParams", xstream.toXML(paramList));
+
 		QName result;
 		try {
 			String requestString = requestString(new AlfrescoTransaction(this), parameters,
@@ -2816,7 +2847,7 @@ public class AlfrescoController {
 	/**
 	 * Gets the actual data type for a form. Added because read only forms are distinguished from
 	 * R/W forms using a suffix. Hence the form name in itself cannot be used to designate the
-	 * datatype (or 'form id' to be more precise).
+	 * datatype (or "form id" to be more precise).
 	 * 
 	 * @param formName
 	 * @return
@@ -2831,7 +2862,8 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Tests authentication credentials with the Alfresco instance defined in the properties file.
+	 * Tests authentication credentials with the current Alfresco instance (defined in the
+	 * properties file or via the appropriate URL parameter).
 	 * 
 	 * @param username
 	 * @param password
@@ -2884,6 +2916,20 @@ public class AlfrescoController {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Gets the local part of the node's type as returned by Alfresco.
+	 * 
+	 * @param dataId
+	 * @return
+	 */
+	public String getNodeType(String dataId) {
+		QName qname = systemGetNodeType(dataId);
+		if (qname == null) {
+			return null;
+		}
+		return qname.getLocalName();
 	}
 
 	/**
@@ -3098,6 +3144,26 @@ public class AlfrescoController {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Finds the first FormClass that supports the given data type.
+	 * 
+	 * @param dataType
+	 * @return
+	 */
+	public FormType getCustomFormForDataType(String dataType) {
+		return mappingTool.getFormTypeWithDataType(dataType);
+	}
+
+	/**
+	 * Finds the first default form that supports the given data type.
+	 * 
+	 * @param dataType
+	 * @return
+	 */
+	public ClassType getDefaultFormForDataType(String dataType) {
+		return mappingTool.getClassTypeWithDataType(dataType);
 	}
 
 }

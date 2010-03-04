@@ -140,7 +140,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * .side.clazz.Clazz, com.bluexml.side.clazz.Aspect, com.bluexml.side.clazz.Clazz)
 	 */
 	public void addAspectForClass(Clazz classe, Aspect aspect, Clazz owner) {
-		AspectType aspectType = new AspectType();
+		AspectType aspectType = objectFactory.createAspectType();
 		aspectType.setName(aspect.getName());
 		aspectType.setPackage(ModelTools.getPackage(aspect));
 		aspectType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(aspect));
@@ -197,7 +197,7 @@ public class MappingGenerator extends AbstractGenerator {
 		boolean isMultiple = false;
 		String result;
 
-		AttributeType attributeType = new AttributeType();
+		AttributeType attributeType = objectFactory.createAttributeType();
 		attributeType.setName(attribute.getName());
 		attributeType.setAlfrescoName(getAlfrescoNameForAttribute(classe, attribute));
 		attributeType.setType(attribute.getTyp().getLiteral());
@@ -252,7 +252,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * .clazz.Aspect)
 	 */
 	public void beginAspect(Aspect aspect) {
-		AspectType aspectType = new AspectType();
+		AspectType aspectType = objectFactory.createAspectType();
 		aspectType.setName(aspect.getName());
 		aspectType.setPackage(ModelTools.getPackage(aspect));
 		aspectType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(aspect));
@@ -267,7 +267,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * .clazz.Clazz, boolean)
 	 */
 	public void beginClasse(Clazz classe, boolean rendered) {
-		ClassType classType = new ClassType();
+		ClassType classType = objectFactory.createClassType();
 		classType.setName(classe.getName());
 		classType.setPackage(ModelTools.getPackage(classe));
 		classType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(classe));
@@ -284,7 +284,7 @@ public class MappingGenerator extends AbstractGenerator {
 		monitor.setTaskName("Generating resources.");
 		mapping = new Mapping();
 
-		GenInfoType genInfoType = new GenInfoType();
+		GenInfoType genInfoType = objectFactory.createGenInfoType();
 		genInfoType.setReadOnlyFormsSuffix(formGenerator.getReadOnlySuffix());
 		genInfoType.setDebugMode(formGenerator.isDebugMode());
 
@@ -346,7 +346,7 @@ public class MappingGenerator extends AbstractGenerator {
 		if (owner == source) {
 			ClassType sourceType = getClassType(source);
 
-			AssociationType associationType = new AssociationType();
+			AssociationType associationType = objectFactory.createAssociationType();
 			associationType.setPackage(ModelTools.getPackage(association));
 			associationType.setCaption(title);
 			associationType.setName(name);
@@ -516,16 +516,16 @@ public class MappingGenerator extends AbstractGenerator {
 				if (element.getValue() instanceof WorkflowTaskType) {
 					WorkflowTaskType taskType = (WorkflowTaskType) element.getValue();
 
-					Element nameElt = doc.createElement(MsgId.INT_GEN_REDIRECT_NAME.getText());
+					Element nameElt = doc.createElement(MsgId.INT_REDIRECTION_NAME.getText());
 					nameElt.setTextContent(taskType.getName());
-					Element urlElt = doc.createElement(MsgId.INT_GEN_REDIRECT_URL.getText());
-					Element autoElt = doc.createElement(MsgId.INT_GEN_REDIRECT_AUTO_ADVANCE
+					Element urlElt = doc.createElement(MsgId.INT_REDIRECTION_URL.getText());
+					Element autoElt = doc.createElement(MsgId.INT_REDIRECTION_AUTO_ADVANCE
 							.getText());
 					autoElt.setTextContent("false");
-					Element addElt = doc.createElement(MsgId.INT_GEN_REDIRECT_ADD_PARAMS.getText());
+					Element addElt = doc.createElement(MsgId.INT_REDIRECTION_ADD_PARAMS.getText());
 					addElt.setTextContent("true");
 
-					Element entryElt = doc.createElement(MsgId.INT_GEN_REDIRECT_ENTRY.getText());
+					Element entryElt = doc.createElement(MsgId.INT_REDIRECTION_ENTRY.getText());
 					entryElt.appendChild(nameElt);
 					entryElt.appendChild(urlElt);
 					entryElt.appendChild(autoElt);
@@ -621,7 +621,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @return the class type
 	 */
 	private ClassType copyClassType(ClassType classType) {
-		ClassType result = new ClassType();
+		ClassType result = objectFactory.createClassType();
 		result.setName(classType.getName());
 		result.setPackage(classType.getPackage());
 		result.setAlfrescoName(classType.getAlfrescoName());
@@ -644,7 +644,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * .clazz.Enumeration)
 	 */
 	public void processEnum(Enumeration enumeration) {
-		EnumType enumType = new EnumType();
+		EnumType enumType = objectFactory.createEnumType();
 		enumType.setPackage(ModelTools.getPackage(enumeration));
 		enumType.setName(enumeration.getName());
 		String alfrescoName = ModelTools.getCompleteName(enumeration).replace('.', '_');
@@ -866,7 +866,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 *             style) is never used anywhere (@Amenel).
 	 */
 	private void processActionField(CanisterType canister, FormContainer formContainer, Field field) {
-		ActionFieldType actionFieldType = new ActionFieldType();
+		ActionFieldType actionFieldType = objectFactory.createActionFieldType();
 
 		// inherited properties
 		actionFieldType.setUniqueName(FormGeneratorsManager.getUniqueName(field));
@@ -896,7 +896,7 @@ public class MappingGenerator extends AbstractGenerator {
 	private void processField(CanisterType canister, FormContainer formContainer, Field field) {
 		String result;
 		boolean isMultiple = false;
-		FormFieldType formFieldType = new FormFieldType();
+		FormFieldType formFieldType = objectFactory.createFormFieldType();
 		List<FormFieldType> fieldTypesList;
 
 		if (canister instanceof WorkflowTaskType) {
@@ -1120,7 +1120,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 */
 	private FileFieldType initFileFieldFromFormField(FormFieldType formFieldType) {
 
-		FileFieldType res = new FileFieldType();
+		FileFieldType res = objectFactory.createFileFieldType();
 		res.setUniqueName(formFieldType.getUniqueName());
 
 		res.setAlfrescoName(formFieldType.getAlfrescoName());
@@ -1156,7 +1156,7 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 
 		FormClass formClass = getFormClass(linkedField);
-		VirtualFieldType virtualFieldType = new VirtualFieldType();
+		VirtualFieldType virtualFieldType = objectFactory.createVirtualFieldType();
 		// inherited properties
 		virtualFieldType.setUniqueName(FormGeneratorsManager.getUniqueName(virtualField));
 		String style = virtualField.getStyle();
@@ -1207,7 +1207,7 @@ public class MappingGenerator extends AbstractGenerator {
 		} else {
 			list = ((FormType) canister).getModelChoice();
 		}
-		ModelChoiceType modelChoiceType = new ModelChoiceType();
+		ModelChoiceType modelChoiceType = objectFactory.createModelChoiceType();
 		processChoiceFieldCommon(formElement, formContainer, modelChoiceType);
 		list.add(modelChoiceType);
 	}
@@ -1226,7 +1226,7 @@ public class MappingGenerator extends AbstractGenerator {
 			Reference reference) {
 		// TODO: update the condition when references become available on FormWorkflow
 		if (canister instanceof FormType) {
-			ReferenceType referenceType = new ReferenceType();
+			ReferenceType referenceType = objectFactory.createReferenceType();
 			processChoiceFieldCommon(reference, formContainer, referenceType);
 			FormType formType = (FormType) canister;
 			formType.getReference().add(referenceType);
@@ -1244,7 +1244,7 @@ public class MappingGenerator extends AbstractGenerator {
 	private FormType newFormType(FormContainer form) {
 		FormContainer realContainer = (FormContainer) formGenerator.getRealObject(form); // #1225
 
-		FormType childFormType = new FormType();
+		FormType childFormType = objectFactory.createFormType();
 		childFormType.setName(realContainer.getId());
 		return childFormType;
 	}

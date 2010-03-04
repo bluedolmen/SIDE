@@ -27,6 +27,9 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 	/** The selector bind label. */
 	private ModelElementBindSimple selectorBindLabel;
 
+	/** The selector bind for data type. */
+	private ModelElementBindSimple selectorBindType;
+	
 	private RenderableSelector selector;
 
 	/**
@@ -34,18 +37,14 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 	 * 
 	 * @param associationBean
 	 *            the association bean
-	 * @param selectorBindId
-	 *            the selector bind id
-	 * @param selectorBindLabel
-	 *            the selector bind label
+	 * @param selector
+	 *            the selector that will provide the binds
 	 */
 	public RenderableSMultipleActionsAddRemove(AssociationBean associationBean,
 			RenderableSelector selector) {
 		super(associationBean);
+
 		this.selector = selector;
-		// this.selectorBindId = selectorBindId;
-		// this.selectorBindLabel = selectorBindLabel;
-		// this.selectorBindNb = selectorBindNb;
 	}
 
 	/*
@@ -74,6 +73,7 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 		
 		this.selectorBindId = selector.getBindId();
 		this.selectorBindLabel = selector.getBindLabel();
+		this.selectorBindType = selector.getBindType();
 
 		RenderedXMLElement rendered = new RenderedXMLElement();
 
@@ -88,6 +88,7 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 			xformsElement.addContent(getTriggerAdd(bindActions, path, rootPath));
 			xformsElement.addContent(XFormsGenerator.createElement("br",
 					XFormsGenerator.NAMESPACE_XHTML));
+			
 			xformsElement.addContent(getTriggerRemove(bindActions, repeaterId));
 			rendered.setXformsElement(xformsElement);
 		}
@@ -171,6 +172,12 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 		setvalueLabel.setAttribute("value", selectorBindLabel.getNodeset());
 		action.addContent(setvalueLabel);
 
+		Element setvalueType = XFormsGenerator.createElement("setvalue",
+				XFormsGenerator.NAMESPACE_XFORMS);
+		setvalueType.setAttribute("ref", pathSIDE + MsgId.INT_INSTANCE_SIDETYPE);
+		setvalueType.setAttribute("value", selectorBindType.getNodeset());
+		action.addContent(setvalueType);
+		
 		trigger.addContent(action);
 		return trigger;
 	}

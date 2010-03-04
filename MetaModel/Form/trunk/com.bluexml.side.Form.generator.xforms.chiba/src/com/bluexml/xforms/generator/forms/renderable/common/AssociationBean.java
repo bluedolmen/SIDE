@@ -1,6 +1,9 @@
 package com.bluexml.xforms.generator.forms.renderable.common;
 
+import java.util.List;
+
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 
 /**
@@ -42,7 +45,7 @@ public class AssociationBean {
 	private Renderable destinationRenderable;
 
 	/** The create edit form. */
-	private String createEditForm = null;
+	private List<String> createEditForms = null;
 
 	/** Display status of action buttons. */
 	private boolean showingActions;
@@ -60,6 +63,9 @@ public class AssociationBean {
 
 	/** Whether at least one element is required. */
 	private boolean mandatory;
+
+	/** The create and edit form type, whether class or form. */
+	private FormTypeRendered createEditFormType;
 
 	/** The format of labels displayed for the association items. */
 	private String formatPattern;
@@ -117,18 +123,18 @@ public class AssociationBean {
 	 * 
 	 * @return the creates the edit form
 	 */
-	public String getCreateEditForm() {
-		return createEditForm;
+	public List<String> getCreateEditForms() {
+		return createEditForms;
 	}
 
 	/**
 	 * Sets the creates the edit form.
 	 * 
-	 * @param createEditForm
-	 *            the new creates the edit form
+	 * @param createEditForms
+	 *            the list of edit forms
 	 */
-	public void setCreateEditForm(String createEditForm) {
-		this.createEditForm = createEditForm;
+	public void setCreateEditForms(List<String> createEditForms) {
+		this.createEditForms = createEditForms;
 	}
 
 	/**
@@ -338,6 +344,20 @@ public class AssociationBean {
 	 */
 	public String getLabelLength() {
 		return labelLength;
+	}
+
+	/**
+	 * @param createEditFormType the createEditFormType to set
+	 */
+	public void setCreateEditFormType(FormTypeRendered createEditFormType) {
+		this.createEditFormType = createEditFormType;
+	}
+
+	/**
+	 * @return the createEditFormType
+	 */
+	public FormTypeRendered getCreateEditFormType() {
+		return createEditFormType;
 	}
 
 }

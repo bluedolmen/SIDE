@@ -73,6 +73,15 @@ public abstract class AbstractRenderableSelectorItem extends AbstractRenderable 
 	}
 
 	/**
+	 * Gets the bind for data type.
+	 * 
+	 * @return the bind 
+	 */
+	public ModelElementBindSimple getBindType() {
+		return renderableAssociationSelectionSelector.getBindType();
+	}
+	
+	/**
 	 * Gets the model element list updater.
 	 * 
 	 * @return the model element list updater

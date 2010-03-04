@@ -11,7 +11,7 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.selector.RenderableSelector;
-import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
+import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
@@ -24,6 +24,9 @@ public class RenderableSSingleActions extends AbstractRenderable {
 
 	/** The selector bind label. */
 	private ModelElementBindSimple selectorBindLabel;
+
+	/** The selector bind for the data type. */
+	private ModelElementBindSimple selectorBindType;
 
 	@SuppressWarnings("unused")
 	private RenderableSelector selector;
@@ -38,13 +41,13 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 * @param selectorBindLabel
 	 *            the selector bind label
 	 */
-	public RenderableSSingleActions(AssociationBean associationBean,
-			ModelElementBindSimple selectorBindId, ModelElementBindSimple selectorBindLabel,
-			RenderableSelector selector) {
+	public RenderableSSingleActions(AssociationBean associationBean, RenderableSelector selector) {
 		super(associationBean);
-		this.selectorBindId = selectorBindId;
-		this.selectorBindLabel = selectorBindLabel;
+
 		this.selector = selector;
+		this.selectorBindId = selector.getBindId();
+		this.selectorBindLabel = selector.getBindLabel();
+		this.selectorBindType = selector.getBindType();
 	}
 
 	/*
@@ -68,21 +71,24 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
 			boolean isInIMultRepeater) {
-		RenderedInput rendered = new RenderedInput();
+		RenderedXMLElement rendered = new RenderedXMLElement();
 
 		ModelElementBindSimple bindId = ((RenderableSSingle) parents.peek()).getSelectedBindId();
 		ModelElementBindSimple bindLabel = ((RenderableSSingle) parents.peek())
 				.getSelectedBindLabel();
+		ModelElementBindSimple bindType = ((RenderableSSingle) parents.peek())
+				.getSelectedBindType();
 
 		if ((getFormGenerator().isInReadOnlyMode() == false) || bean.isDisabled()) { // #1238
 			Element xformsElement = XFormsGenerator.createElement("div",
 					XFormsGenerator.NAMESPACE_XHTML);
 			xformsElement.setAttribute("class", MsgId.INT_CSS_SELECT_TRIGGER_IMG.getText());
 
-			xformsElement.addContent(getTriggerSet(renderedParents, bindId, bindLabel));
+			xformsElement
+					.addContent(getTriggerSelect(renderedParents, bindId, bindLabel, bindType));
 			xformsElement.addContent(XFormsGenerator.createElement("br",
 					XFormsGenerator.NAMESPACE_XHTML));
-			xformsElement.addContent(getTriggerReset(bindId, bindLabel));
+			xformsElement.addContent(getTriggerReset(bindId, bindLabel, bindType));
 			rendered.setXformsElement(xformsElement);
 		}
 		return rendered;
@@ -98,7 +104,8 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 * 
 	 * @return the trigger reset
 	 */
-	private Element getTriggerReset(ModelElementBindSimple bindId, ModelElementBindSimple bindLabel) {
+	private Element getTriggerReset(ModelElementBindSimple bindId,
+			ModelElementBindSimple bindLabel, ModelElementBindSimple bindType) {
 		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_LEFT);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
@@ -114,6 +121,12 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		bindLabel.addLinkedElement(setvalueLabel);
 		setvalueLabel.setText("");
 		action.addContent(setvalueLabel);
+
+		Element setvalueType = XFormsGenerator.createElement("setvalue",
+				XFormsGenerator.NAMESPACE_XFORMS);
+		bindType.addLinkedElement(setvalueType);
+		setvalueType.setText("");
+		action.addContent(setvalueType);
 
 		// if (getBean().getAssociationType() == AssociationType.wkflwProcess) {
 		// // for updating the instances list wrt current process definition
@@ -135,11 +148,13 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 *            the bind id
 	 * @param bindLabel
 	 *            the bind label
+	 * @param bindType
 	 * 
 	 * @return the trigger set
 	 */
-	private Element getTriggerSet(Stack<Rendered> renderedParents, ModelElementBindSimple bindId,
-			ModelElementBindSimple bindLabel) {
+	private Element getTriggerSelect(Stack<Rendered> renderedParents,
+			ModelElementBindSimple bindId, ModelElementBindSimple bindLabel,
+			ModelElementBindSimple bindType) {
 		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_RIGHT);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
@@ -155,6 +170,12 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		bindLabel.addLinkedElement(setvalueLabel);
 		setvalueLabel.setAttribute("value", selectorBindLabel.getNodeset());
 		action.addContent(setvalueLabel);
+
+		Element setvalueType = XFormsGenerator.createElement("setvalue",
+				XFormsGenerator.NAMESPACE_XFORMS);
+		bindType.addLinkedElement(setvalueType);
+		setvalueType.setAttribute("value", selectorBindType.getNodeset());
+		action.addContent(setvalueType);
 
 		// if (getBean().getAssociationType() == AssociationType.wkflwProcess) {
 		// // for updating the instances list wrt current process definition

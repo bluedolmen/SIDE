@@ -23,6 +23,9 @@ import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
+ * Provides the XForms instance document for a search form and deals with the instance once it is
+ * filled by the XForms engine.
+ * 
  * @author Amenel
  * 
  */
@@ -53,9 +56,8 @@ public class MappingToolSearch extends MappingToolCommon {
 		Element formElt = formInstance.createElement(sfType.getName());
 		rootElement.appendChild(formElt);
 
-		ClassType realClassType = resolveClassType(sfType);
 		for (SearchFieldType fieldType : sfType.getField()) {
-			Element topElt = getSearchFieldNode(formInstance, realClassType, fieldType);
+			Element topElt = getSearchFieldNode(formInstance, fieldType);
 			formElt.appendChild(topElt);
 
 		}
@@ -81,11 +83,10 @@ public class MappingToolSearch extends MappingToolCommon {
 	 * Creates and initializes the DOM section for a field.
 	 * 
 	 * @param doc
-	 * @param classType
 	 * @param fieldType
 	 * @return
 	 */
-	private Element getSearchFieldNode(Document doc, ClassType classType, SearchFieldType fieldType) {
+	private Element getSearchFieldNode(Document doc, SearchFieldType fieldType) {
 		String fieldName = fieldType.getName();
 		Element fieldElt = doc.createElement(fieldName);
 
@@ -182,7 +183,7 @@ public class MappingToolSearch extends MappingToolCommon {
 				logger
 						.error("The attribute for search field '"
 								+ fieldName
-								+ "' was not found! This should never happen. The mapping file is not correct.");
+								+ "' was not found! Since this should never happen, the mapping file is most obviously not correct.");
 				throw new ServletException("The processing of this search form could not complete.");
 			}
 

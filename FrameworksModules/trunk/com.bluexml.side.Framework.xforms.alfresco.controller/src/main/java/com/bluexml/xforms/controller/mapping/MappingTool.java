@@ -451,4 +451,16 @@ public class MappingTool {
 		return mappingToolFormsToAlfresco.isStartTask(taskType);
 	}
 
+	public FormType getFormTypeWithDataType(String dataType) {
+		return mappingToolFormsToAlfresco.getFormTypeWithDataType(dataType);
+	}
+
+	public ClassType getClassTypeWithDataType(String dataType) {
+		return mappingToolFormsToAlfresco.getClassTypeWithDataType(dataType);
+	}
+
+	public boolean isDynamic(EnumType enumType) {
+		return mappingToolFormsToAlfresco.isDynamic(enumType);
+	}
+	
 }

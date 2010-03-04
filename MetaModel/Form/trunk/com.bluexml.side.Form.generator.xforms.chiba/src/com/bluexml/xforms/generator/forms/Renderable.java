@@ -326,25 +326,21 @@ public abstract class Renderable {
 	 */
 	protected void applyStyle(Rendered rendered, String style) {
 		if (StringUtils.trimToNull(style) != null) {
-			Element div = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+			Element divStyle = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 			Element nestedElement = rendered.getXformsElement();
-			div.setAttribute("class", style);
-			div.addContent(nestedElement);
+			divStyle.setAttribute("class", style);
+			divStyle.addContent(nestedElement);
 
-			Element divOut = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
-			divOut.setAttribute("class", MsgId.INT_CSS_BLUEXML_AUTOGEN.getText());
-			divOut.addContent(div);
-
-			rendered.setXformsElement(divOut);
+			rendered.setXformsElement(divStyle);
 		}
 	}
 
 	protected String getDynEnumContextString(String id) {
-		return MsgId.INT_GEN_DYN_ENUM_PREFIX + id + MsgId.INT_GEN_DYN_ENUM_PREFIX_CONTEXT;
+		return MsgId.INT_GEN_DYN_ENUM_PREFIX + id + MsgId.INT_GEN_DYN_ENUM_CONTEXT;
 	}
 
 	protected String getDynEnumParentString(String id) {
-		return MsgId.INT_GEN_DYN_ENUM_PREFIX + id + MsgId.INT_GEN_DYN_ENUM_PREFIX_PARENT;
+		return MsgId.INT_GEN_DYN_ENUM_PREFIX + id + MsgId.INT_GEN_DYN_ENUM_PARENT;
 	}
 
 	/**

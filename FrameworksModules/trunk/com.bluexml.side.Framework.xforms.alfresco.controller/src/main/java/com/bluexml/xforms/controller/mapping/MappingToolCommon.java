@@ -72,12 +72,6 @@ import com.bluexml.xforms.messages.MsgPool;
  */
 public class MappingToolCommon {
 
-	/** The Constant TARGET. */
-	public static final String TARGET = "target";
-
-	/** The Constant ASSOCIATION_ITEM. */
-	public static final String ASSOCIATION_ITEM = "associationItem";
-
 	/** The document builder. */
 	protected static DocumentBuilder documentBuilder;
 
@@ -313,6 +307,24 @@ public class MappingToolCommon {
 	}
 
 	/**
+	 * Gets the class type.
+	 * 
+	 * @param dataType
+	 *            a node type as returned by Alfresco
+	 * 
+	 * @return the class type
+	 */
+	public ClassType getClassTypeWithDataType(String dataType) {
+		List<ClassType> clazz = mapping.getClazz();
+		for (ClassType classType : clazz) {
+			if (classType.getAlfrescoName().equals(dataType)) {
+				return classType;
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * Gets the form type that matches the given name.
 	 * 
 	 * @param formName
@@ -327,6 +339,29 @@ public class MappingToolCommon {
 			if (element.getValue() instanceof FormType) {
 				FormType formType = (FormType) element.getValue();
 				if (formType.getName().equals(formName)) {
+					return formType;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the form type that supports the given data type (i.e. whose real class's name matches
+	 * the data type).
+	 * 
+	 * @param formName
+	 *            the form name
+	 * 
+	 * @return the form type
+	 */
+	public FormType getFormTypeWithDataType(String dataType) {
+		List<JAXBElement<? extends CanisterType>> elements = mapping.getCanister();
+
+		for (JAXBElement<? extends CanisterType> element : elements) {
+			if (element.getValue() instanceof FormType) {
+				FormType formType = (FormType) element.getValue();
+				if (formType.getRealClass().getAlfrescoName().equals(dataType)) {
 					return formType;
 				}
 			}
@@ -775,7 +810,7 @@ public class MappingToolCommon {
 		}
 		return actionType.isInWorkflow();
 	}
-	
+
 	/*
 	 * AssociationType
 	 */
@@ -785,14 +820,14 @@ public class MappingToolCommon {
 		}
 		return associationType.isInline();
 	}
-	
+
 	protected boolean isMultiple(AssociationType associationType) {
 		if (associationType.isMultiple() == null) {
 			return false;
 		}
 		return associationType.isMultiple();
 	}
-	
+
 	/*
 	 * AttributeType
 	 */
@@ -852,7 +887,7 @@ public class MappingToolCommon {
 		}
 		return fieldType.isMandatory();
 	}
-	
+
 	/*
 	 * FileFieldType
 	 */
@@ -911,7 +946,7 @@ public class MappingToolCommon {
 			return null;
 		}
 	}
-	
+
 	protected boolean isInline(ModelChoiceType modelChoiceType) {
 		if (modelChoiceType.isInline() == null) {
 			return false;
@@ -928,7 +963,7 @@ public class MappingToolCommon {
 		}
 		return workflowTaskType.isStartTask();
 	}
-	
+
 	/*
 	 * SUPPORT FOR READ ONLY DATES AND TIMES
 	 */

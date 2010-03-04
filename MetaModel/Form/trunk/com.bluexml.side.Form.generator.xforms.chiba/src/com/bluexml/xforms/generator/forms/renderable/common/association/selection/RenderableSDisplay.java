@@ -68,6 +68,7 @@ public class RenderableSDisplay extends AbstractRenderable {
 		Element output = XFormsGenerator.createElement("output", XFormsGenerator.NAMESPACE_XFORMS);
 		bindLabel.addLinkedElement(output);
 		renderedInput.setXformsElement(output);
+		applyStyle(renderedInput, "side_select_selected_item");
 
 		return renderedInput;
 	}

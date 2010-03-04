@@ -25,6 +25,7 @@ public class RenderableSSingle extends AbstractRenderable {
 	private ModelElementBindSimple selectedBindId; 
 	private ModelElementBindSimple selectedBindLabel;
 	private ModelElementBindSimple selectedBindEdit;
+	private ModelElementBindSimple selectedBindType; // #1510
 	//** #1310
 
 	/**
@@ -44,8 +45,7 @@ public class RenderableSSingle extends AbstractRenderable {
 		selectorBindId = selector.getBindId(); // #1156
 
 		if (associationBean.isDisabled() == false) {
-			add(new RenderableSSingleActions(associationBean, selector.getBindId(), selector
-					.getBindLabel(), selector));
+			add(new RenderableSSingleActions(associationBean, selector));
 		}
 		add(new RenderableSDisplay(associationBean));
 		if (associationBean.isShowingActions()) {
@@ -81,10 +81,12 @@ public class RenderableSSingle extends AbstractRenderable {
 		ModelElementBindSimple bindLabel = getSelectedBindLabel();
 		ModelElementBindSimple bindId = getSelectedBindId();
 		ModelElementBindSimple bindEdit = getSelectedBindEdit();
+		ModelElementBindSimple bindType = getSelectedBindType();
 
 		bindLabel.setNodeset(path + MsgId.INT_INSTANCE_SIDELABEL);
 		bindId.setNodeset(path + MsgId.INT_INSTANCE_SIDEID);
 		bindEdit.setNodeset(path + MsgId.INT_INSTANCE_SIDEEDIT);
+		bindType.setNodeset(path + MsgId.INT_INSTANCE_SIDETYPE);
 
 		if (bean.isMandatory()) { // #978
 			// no visual cues here, but useful for causing XForms validation to
@@ -100,6 +102,7 @@ public class RenderableSSingle extends AbstractRenderable {
 		rendered.addModelElement(bindId);
 		rendered.addModelElement(bindLabel);
 		rendered.addModelElement(bindEdit);
+		rendered.addModelElement(bindType);
 
 		return rendered;
 	}
@@ -133,6 +136,16 @@ public class RenderableSSingle extends AbstractRenderable {
 		return selectedBindEdit;
 	}
 
+	/**
+	 * @return the selectedBindType
+	 */
+	public ModelElementBindSimple getSelectedBindType() {
+		if (selectedBindType == null) {
+			selectedBindType = new ModelElementBindSimple("");
+		}
+		return selectedBindType;
+	}
+	
 	/**
 	 * @param selectedBindEdit the selectedBindEdit to set
 	 */

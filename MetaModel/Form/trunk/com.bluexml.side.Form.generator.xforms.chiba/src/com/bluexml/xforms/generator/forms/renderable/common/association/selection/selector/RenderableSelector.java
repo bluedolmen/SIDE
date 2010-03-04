@@ -2,8 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
-import javax.xml.namespace.QName;
-
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -34,6 +32,9 @@ public class RenderableSelector extends AbstractRenderable {
 	/** The bind for max results. */
 	private ModelElementBindSimple bindMaxResults;
 
+	/** The bind for the data type. */
+	private ModelElementBindSimple bindType;
+	
 	/** The instance name. */
 	private String instanceName;
 
@@ -70,18 +71,16 @@ public class RenderableSelector extends AbstractRenderable {
 		instancePath = "instance('" + instanceName + "')/";
 		instanceNodePath = instancePath + "item";
 
-		bindId = new ModelElementBindSimple("");
-		bindLabel = new ModelElementBindSimple("");
-		bindMaxResults = new ModelElementBindSimple("");
-
-		bindId.setType(new QName("string"));
-		bindLabel.setType(new QName("string"));
-		bindMaxResults.setType(new QName("string"));
-		bindMaxResults.setHidden(true);
-
-		bindId.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDID);
-		bindLabel.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL);
-		bindMaxResults.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDMAX);
+//		bindId = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDID);
+//		bindLabel = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL);
+//		bindMaxResults = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDMAX);
+//		bindType = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDTYPE);
+//
+////		bindId.setType(new QName("string"));
+////		bindLabel.setType(new QName("string"));
+////		bindMaxResults.setType(new QName("string"));
+//		bindMaxResults.setHidden(true);
+//		bindType.setHidden(true);
 
 		if (bean.isMandatory()) { // #978
 			// setting bindId's required to true will give the visual cue (a red star under Chiba)
@@ -168,6 +167,18 @@ public class RenderableSelector extends AbstractRenderable {
 		return bindMaxResults;
 	}
 
+	/**
+	 * Gets the bind for the data type.
+	 * 
+	 * @return 
+	 */
+	public ModelElementBindSimple getBindType() {
+		if (bindType == null) {
+			initBinds();
+		}
+		return bindType;
+	}
+	
 	public AbstractModelElementUpdater getModelElementUpdater() {
 		return modelElementUpdater;
 	}
@@ -196,6 +207,7 @@ public class RenderableSelector extends AbstractRenderable {
 		rendered.addModelElementRoot(bindId);
 		rendered.addModelElementRoot(bindLabel);
 		rendered.addModelElementRoot(bindMaxResults);
+		rendered.addModelElementRoot(bindType);
 
 		return rendered;
 	}
@@ -213,19 +225,17 @@ public class RenderableSelector extends AbstractRenderable {
 	 * resetting the constraint.
 	 */
 	public void initBinds() {
-		bindId = new ModelElementBindSimple("");
-		bindLabel = new ModelElementBindSimple("");
-		bindMaxResults = new ModelElementBindSimple("");
+		bindId = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDID);
+		bindLabel = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL);
+		bindMaxResults = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDMAX);
+		bindType = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDTYPE);
 
 		// NONE OF THESE IS REALLY NEEDED
 		// bindId.setType(new QName("string"));
 		// bindLabel.setType(new QName("string"));
 		// bindMaxResults.setType(new QName("string"));
 		// bindMaxResults.setHidden(true);
-
-		bindId.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDID);
-		bindLabel.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL);
-		bindMaxResults.setNodeset(instancePath + MsgId.INT_INSTANCE_SELECTEDMAX);
+		// bindType.setHidden(true);
 
 		if (bean.isMandatory()) {
 			// #978
@@ -253,6 +263,7 @@ public class RenderableSelector extends AbstractRenderable {
 		bindId = null;
 		bindLabel = null;
 		bindMaxResults = null;
+		bindType = null;
 	}
 
 }

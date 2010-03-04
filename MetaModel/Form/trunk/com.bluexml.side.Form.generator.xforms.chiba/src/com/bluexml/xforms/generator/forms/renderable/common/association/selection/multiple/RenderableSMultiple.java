@@ -33,6 +33,7 @@ public class RenderableSMultiple extends AbstractRenderable {
 	private ModelElementBindHolder bindRepeater = null; // #1310
 	private ModelElementBindSimple bindActions = null;
 	private ModelElementBindSimple bindEdit = null;
+	private ModelElementBindSimple bindType = null; // #1510
 
 	/**
 	 * Instantiates a new renderable s multiple.
@@ -88,12 +89,16 @@ public class RenderableSMultiple extends AbstractRenderable {
 		ModelElementBindSimple bindId = new ModelElementBindSimple(MsgId.INT_INSTANCE_SIDEID.getText());
 		ModelElementBindSimple bindEdit = getBindEdit();
 		bindEdit.setNodeset(MsgId.INT_INSTANCE_SIDEEDIT.getText());
+		ModelElementBindSimple bindType = getBindType();
+		bindType.setNodeset(MsgId.INT_INSTANCE_SIDETYPE.getText());
 		
 
 		bindRepeater.addSubBind(bindLabel);
 		bindRepeater.addSubBind(bindId);
 		bindRepeater.addSubBind(bindEdit);
 		setBindEdit(bindEdit);
+		bindRepeater.addSubBind(bindType);
+		setBindType(bindType);
 
 		String nodeSetActions = computeNodeSetActions(path);
 		String nodeSetItems = computeNodeSetItems(path, nodeSetActions);
@@ -165,7 +170,24 @@ public class RenderableSMultiple extends AbstractRenderable {
 	public void setBindEdit(ModelElementBindSimple bindEdit) {
 		this.bindEdit = bindEdit;
 	}
-
+	
+	/**
+	 * @return the bindType
+	 */
+	public ModelElementBindSimple getBindType() {
+		if (bindType == null) {
+			bindType = new ModelElementBindSimple("");
+		}
+		return bindType;
+	}
+	
+	/**
+	 * @param bindType the bindType to set
+	 */
+	public void setBindType(ModelElementBindSimple bindType) {
+		this.bindType = bindType;
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.blueXML.xforms.generator.forms.Renderable#renderEnd(org.blueXML.xforms.generator.forms.Rendered)
 	 */

@@ -7,6 +7,7 @@ import java.util.Stack;
 import org.apache.commons.lang.StringUtils;
 
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.ModelChoiceField;
@@ -53,22 +54,27 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 		properties.setDestinationRenderable(null);
 		properties.setInline(false);
 
-		if (formElement.getTarget().size() > 0) {
-			// we need to get the real object, in case the target form is from another file.
-			FormContainer targetedForm = (FormContainer) getFormGenerator().getRealObject(
-					formElement.getTarget().get(0));
-			if (formElement.getWidget() == ModelChoiceWidgetType.INLINE) {
-				properties.setInline(true);
-				RenderableFormContainer renderableForm = generationManager
-						.getRenderableForm(targetedForm);
-				properties.setDestinationRenderable(renderableForm);
-			}
+		properties.setCreateEditFormType(FormTypeRendered.formForm);
+		int targetsNb = formElement.getTarget().size();
+		if (targetsNb > 0) {
+			// we want to allow several targets in the XHTML file
+			for (FormContainer targetedForm : formElement.getTarget()) {
+				// we need to get the real object, in case the target form is from another file.
+				FormContainer realTargetedForm = (FormContainer) getFormGenerator().getRealObject(
+						targetedForm);
+				if (realTargetedForm instanceof FormClass) {
+					if (formElement.getWidget() == ModelChoiceWidgetType.INLINE) {
+						properties.setInline(true);
+						RenderableFormContainer renderableForm = generationManager
+								.getRenderableForm(realTargetedForm);
+						properties.setDestinationRenderable(renderableForm);
+						properties.addCreateEditFormName(realTargetedForm.getId());
+						break; // only one target allowed if inline
+					}
 
-			properties.setCreateEditFormType(FormTypeRendered.formForm);
-			properties.setCreateEditFormName(targetedForm.getId());
-		} else {
-			properties.setCreateEditFormType(FormTypeRendered.formClass);
-			properties.setCreateEditFormName(null);
+					properties.addCreateEditFormName(realTargetedForm.getId());
+				}
+			}
 		}
 		// add support for hiding/displaying action buttons
 		boolean showingActions = formElement.isShow_actions();
@@ -126,7 +132,8 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		return new RenderedParentGroup(renderedParents);
 	}
 

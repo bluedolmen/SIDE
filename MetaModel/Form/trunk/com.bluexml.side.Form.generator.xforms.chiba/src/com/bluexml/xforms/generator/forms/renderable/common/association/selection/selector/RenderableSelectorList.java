@@ -60,19 +60,35 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 		getBindId().addLinkedElement(select);
 
 		Element label = XFormsGenerator.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
-		label.setText(MsgPool.getMsg(bean.getTitle()));
+		label.setText(bean.getTitle());
 		select.addContent(label);
 
-		Element actionsv = XFormsGenerator
-				.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
-		actionsv.setAttribute("event", "xforms-value-changed", XFormsGenerator.NAMESPACE_EVENTS);
+		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
+		action.setAttribute("event", "xforms-value-changed", XFormsGenerator.NAMESPACE_EVENTS);
+
+		// label
 		Element setvaluelabel = XFormsGenerator.createElement("setvalue",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		setvaluelabel.setAttribute("value", getInstancePath() + "item[id = " + getInstancePath()
-				+ "SELECTEDID]/value");
+		// Target text: "instance('ComBluexmlDemoRhContratDeTravailList')/item[id =
+		// instance('ComBluexmlDemoRhContratDeTravailList')/SELECTEDID]/value"
+		setvaluelabel.setAttribute("value", getInstancePath() + MsgId.INT_INSTANCE_SELECT_ITEM
+				+ "[" + MsgId.INT_INSTANCE_SELECT_ID + " = " + getInstancePath()
+				+ MsgId.INT_INSTANCE_SELECTEDID + "]/" + MsgId.INT_INSTANCE_SELECT_LABEL);
 		getBindLabel().addLinkedElement(setvaluelabel);
-		actionsv.addContent(setvaluelabel);
-		select.addContent(actionsv);
+		action.addContent(setvaluelabel);
+
+		// data type
+		Element setvaluetype = XFormsGenerator.createElement("setvalue",
+				XFormsGenerator.NAMESPACE_XFORMS);
+		// Target text: "instance('ComBluexmlDemoRhContratDeTravailList')/item[id =
+		// instance('ComBluexmlDemoRhContratDeTravailList')/SELECTEDID]/qname"
+		setvaluetype.setAttribute("value", getInstancePath() + MsgId.INT_INSTANCE_SELECT_ITEM + "["
+				+ MsgId.INT_INSTANCE_SELECT_ID + " = " + getInstancePath()
+				+ MsgId.INT_INSTANCE_SELECTEDID + "]/" + MsgId.INT_INSTANCE_SELECT_TYPE);
+		getBindType().addLinkedElement(setvaluetype);
+		action.addContent(setvaluetype);
+
+		select.addContent(action);
 
 		select.setAttribute("appearance", "compact");
 
@@ -81,10 +97,10 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 		itemset.setAttribute("nodeset", getInstanceNodePath());
 		Element labelItem = XFormsGenerator
 				.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
-		labelItem.setAttribute("ref", "value");
+		labelItem.setAttribute("ref", MsgId.INT_INSTANCE_SELECT_LABEL.getText());
 		itemset.addContent(labelItem);
 		Element value = XFormsGenerator.createElement("value", XFormsGenerator.NAMESPACE_XFORMS);
-		value.setAttribute("ref", "id");
+		value.setAttribute("ref", MsgId.INT_INSTANCE_SELECT_ID.getText());
 		itemset.addContent(value);
 		select.addContent(itemset);
 

@@ -2,8 +2,10 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
+import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -59,16 +61,22 @@ public class RenderableSEdit extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		RenderedInput rendered = new RenderedInput();
 
 		ModelElementSubmission submission = new ModelElementSubmission("", "", true, false);
 		submission.setAlwaysActive(false); // #1222
-		if (bean.getCreateEditForm() != null) {
-			submission.setAction(MsgId.INT_URI_SCHEME_WRITER + "editForm/" + bean.getName() + "/"
-					+ bean.getCreateEditForm());
+		if (bean.getCreateEditFormType().equals(FormTypeRendered.formForm)) {
+			String listForms = StringUtils.join(bean.getCreateEditForms(), ','); // #1510
+			if (listForms == null) {
+				listForms = "";
+			}
+			submission.setAction(MsgId.INT_URI_SCHEME_WRITER.getText()
+					+ MsgId.INT_ACT_CODE_EDIT_FORM + "/" + bean.getName() + "/" + listForms);
 		} else {
-			submission.setAction(MsgId.INT_URI_SCHEME_WRITER + "edit/" + bean.getName() + "/"
+			submission.setAction(MsgId.INT_URI_SCHEME_WRITER.getText()
+					+ MsgId.INT_ACT_CODE_EDIT_CLASS + "/" + bean.getName() + "/"
 					+ ModelTools.getCompleteName(bean.getDestinationClass()));
 		}
 
@@ -79,18 +87,16 @@ public class RenderableSEdit extends AbstractRenderable {
 					XFormsGenerator.NAMESPACE_XFORMS);
 			action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
 
-			Element setvalue = XFormsGenerator.createElement("setvalue",
-					XFormsGenerator.NAMESPACE_XFORMS);
-//			setvalue.setAttribute("ref", "instance('minstance')/editedid");
-//			String rootPath = getRootPath(renderedParents);
-//			String instancePathToSIDEID;
-//			if (StringUtils.trimToNull(rootPath) != null) { // we are in a nxn widget
-//				instancePathToSIDEID = "instance('minstance')/" + rootPath ;
-//			} else { // we are in a nx1 widget
-//				instancePathToSIDEID = "instance('minstance')/" + path;
-//			}
-//			setvalue.setAttribute("value", instancePathToSIDEID + MsgId.INT_INSTANCE_SIDEID);
-			
+			// setvalue.setAttribute("ref", "instance('minstance')/editedid");
+			// String rootPath = getRootPath(renderedParents);
+			// String instancePathToSIDEID;
+			// if (StringUtils.trimToNull(rootPath) != null) { // we are in a nxn widget
+			// instancePathToSIDEID = "instance('minstance')/" + rootPath ;
+			// } else { // we are in a nx1 widget
+			// instancePathToSIDEID = "instance('minstance')/" + path;
+			// }
+			// setvalue.setAttribute("value", instancePathToSIDEID + MsgId.INT_INSTANCE_SIDEID);
+
 			Renderable parent = parents.peek();
 			ModelElementBindSimple bindEdit;
 			if (parent instanceof RenderableSMultipleDisplay) {
@@ -100,10 +106,11 @@ public class RenderableSEdit extends AbstractRenderable {
 			} else { // we're in a Nx1 widget
 				bindEdit = ((RenderableSSingle) parent).getSelectedBindEdit();
 			}
-			bindEdit.addLinkedElement(setvalue);
-			setvalue.setAttribute("value", "../" + MsgId.INT_INSTANCE_SIDEEDIT);
-
-			action.addContent(setvalue);
+			Element setvalueEdit = XFormsGenerator.createElement("setvalue",
+					XFormsGenerator.NAMESPACE_XFORMS);
+			bindEdit.addLinkedElement(setvalueEdit);
+			setvalueEdit.setAttribute("value", "../" + MsgId.INT_INSTANCE_SIDEID);
+			action.addContent(setvalueEdit);
 
 			Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
 			submission.addLinkedElement(send);

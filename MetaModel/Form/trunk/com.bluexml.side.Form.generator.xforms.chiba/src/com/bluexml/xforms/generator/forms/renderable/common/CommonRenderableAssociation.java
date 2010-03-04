@@ -2,7 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.common;
 
 import java.util.Stack;
 
-import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.renderable.common.association.inline.RenderableIMultiple;
@@ -11,14 +10,13 @@ import com.bluexml.xforms.generator.forms.renderable.common.association.selectio
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.selector.RenderableSelector;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.unique.RenderableSSingle;
 import com.bluexml.xforms.generator.forms.rendered.RenderedGroup;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class CommonRenderableAssociation. Représente un aiguilleur vers le type adéquat de widget,
  * en fonction des propriétés 'inline' et 'multiple'.
- * @JavaFormatter("off")
  */
 public class CommonRenderableAssociation extends Renderable {
-
 	/** The title. */
 	@SuppressWarnings("unused")
 	private String title;
@@ -46,9 +44,8 @@ public class CommonRenderableAssociation extends Renderable {
 		associationBean.setTitle(properties.getAssocTitle());
 		associationBean.setHint(properties.getHint());
 		associationBean.setDestinationRenderable(properties.getDestinationRenderable());
-		if (properties.getCreateEditFormType().equals(FormTypeRendered.formForm)) {
-			associationBean.setCreateEditForm(properties.getCreateEditFormName());
-		}
+		associationBean.setCreateEditFormType(properties.getCreateEditFormType());
+		associationBean.setCreateEditForms(properties.getCreateEditFormName());
 		associationBean.setHiBound(properties.getHiBound());
 
 		// hide or display action buttons
@@ -61,7 +58,7 @@ public class CommonRenderableAssociation extends Renderable {
 
 		associationBean.setFormatPattern(properties.getFormatPattern());
 		associationBean.setLabelLength(properties.getLabelLength());
-		
+
 		if (properties.isInline()) {
 			if (properties.isMultiple()) {
 				add(new RenderableIMultiple(associationBean));
@@ -87,7 +84,9 @@ public class CommonRenderableAssociation extends Renderable {
 	@Override
 	public Path getPath(String parentPath, Stack<Renderable> parents,
 			Stack<Rendered> renderedParents) {
-		return new Path(PathType.relativePath, name + "/associationItem/");
+
+		String path = name + "/" + MsgId.INT_INSTANCE_ASSOCIATION_ITEM + "/";
+		return new Path(PathType.relativePath, path);
 	}
 
 	/*
@@ -97,7 +96,8 @@ public class CommonRenderableAssociation extends Renderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		return new RenderedGroup(null, name);
 	}
 

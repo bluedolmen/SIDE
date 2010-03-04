@@ -720,9 +720,6 @@ public class XFormsGenerator extends AbstractGenerator {
 				isContentEnabled = ((FormClass) formContainer).isContent_enabled();
 				formTypeRendered = FormTypeRendered.formForm;
 				logPrefix = "FormClass";
-				// } else if (formContainer instanceof SearchForm) {
-				// formTypeRendered = FormTypeRendered.formSearch;
-				// logPrefix = "FormSearch";
 			} else if (formContainer instanceof FormSearch) {
 				formGenerator.setSearchCapable(true);
 				formTypeRendered = FormTypeRendered.formSearch;

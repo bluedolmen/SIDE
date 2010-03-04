@@ -45,7 +45,7 @@ public class RenderableChoiceInputSearch extends Renderable {
 
 		AssociationBean associationBean = new AssociationBean();
 
-		associationBean.setCreateEditForm(null);
+		associationBean.setCreateEditForms(null);
 		associationBean.setDestinationRenderable(null);
 		associationBean.setDestinationSelect(selectBean);
 		associationBean.setName(FormGeneratorsManager.getUniqueName(choiceField));

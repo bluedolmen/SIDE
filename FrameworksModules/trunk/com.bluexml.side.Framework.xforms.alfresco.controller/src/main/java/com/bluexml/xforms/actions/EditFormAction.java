@@ -1,6 +1,15 @@
 package com.bluexml.xforms.actions;
 
+import java.util.Arrays;
+
+import javax.servlet.ServletException;
+
+import org.apache.commons.lang.StringUtils;
+
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
+import com.bluexml.xforms.controller.alfresco.EditNodeBean;
+import com.bluexml.xforms.controller.binding.ClassType;
+import com.bluexml.xforms.controller.binding.FormType;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.controller.navigation.PageInfoBean;
 import com.bluexml.xforms.messages.MsgId;
@@ -36,19 +45,104 @@ public class EditFormAction extends AbstractEditAction {
 	}
 
 	/**
-	 * Edits the.
+	 * Edits the item that's active among the items selected on a selection widget.
+	 * 
+	 * @throws ServletException
 	 */
-	protected void edit() {
+	protected void edit() throws ServletException {
 		// retrieve id
 		AlfrescoController alfController = AlfrescoController.getInstance();
-		String dataId = alfController.getAndResetEditNode(node);
+		EditNodeBean editBean = alfController.getEditNodeAndReset(node);
+		if (editBean == null) {
+			throw new ServletException("No edit id found in the form instance.");
+		}
+		String dataId = editBean.getDataId();
 
-		PageInfoBean bean = new PageInfoBean();
-		bean.formType = FormTypeEnum.FORM;
-		bean.formName = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
-		bean.dataType = AlfrescoController.getInstance().getDataTypeFromFormName(bean.formName);
-		bean.dataId = dataId;
-		bean.language = navigationPath.peekCurrentPage().getLanguage();
-		navigationPath.setCurrentPage(bean);
+		PageInfoBean pageBean = new PageInfoBean();
+		String targetForms = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
+		pageBean.dataId = dataId;
+		pageBean.language = navigationPath.peekCurrentPage().getLanguage();
+
+		// set the form type, form name and data type
+		resolvePageInfo(pageBean, editBean, targetForms);
+
+		navigationPath.setCurrentPage(pageBean);
+	}
+
+	/**
+	 * Finds the appropriate form for the object being edited and sets some page info.
+	 * 
+	 * @param pageBean
+	 * @param editBean
+	 * @param targetForms
+	 *            the comma separated list of target forms, initially added in the modeler and
+	 *            written in the XHTML template
+	 * @throws ServletException
+	 */
+	private void resolvePageInfo(PageInfoBean pageBean, EditNodeBean editBean, String targetForms)
+			throws ServletException {
+		String[] forms = StringUtils.split(targetForms, ',');
+		boolean found = false;
+		if (forms == null) {
+			found = resolvePageInfoClass(pageBean, editBean);
+		} else {
+			found = resolvePageInfoForm(pageBean, editBean, forms);
+		}
+		if (found == false) {
+			throw new ServletException("No generated form able to edit this object was found.");
+		}
+	}
+
+	/**
+	 * 
+	 * @param pageBean
+	 * @param editBean
+	 * @return true if a default form was found
+	 */
+	private boolean resolvePageInfoClass(PageInfoBean pageBean, EditNodeBean editBean) {
+		// look for a default form that supports the data type and return its name
+		ClassType classType = controller.getDefaultFormForDataType(editBean.getDataType());
+		if (classType != null) {
+			pageBean.formType = FormTypeEnum.CLASS;
+			pageBean.formName = classType.getPackage() + "." + classType.getName();
+			pageBean.dataType = pageBean.dataType;
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @param pageBean
+	 * @param editBean
+	 * @param forms
+	 * @return true if a customized form was found
+	 */
+	private boolean resolvePageInfoForm(PageInfoBean pageBean, EditNodeBean editBean, String[] forms) {
+		String editDataType = editBean.getDataType();
+
+		// look for the form in the list of target forms that supports the edit node's data type
+		for (String formName : Arrays.asList(forms)) {
+			FormType formType = controller.getFormType(formName);
+			if (formType != null) {
+				if (editDataType.equals(formType.getRealClass().getAlfrescoName())) {
+					pageBean.formType = FormTypeEnum.FORM;
+					pageBean.formName = formName;
+					pageBean.dataType = formName;
+					return true;
+				}
+			}
+		}
+
+		// look for a customized form that supports it and return its name
+		FormType formType = controller.getCustomFormForDataType(editDataType);
+		if (formType != null) {
+			pageBean.formType = FormTypeEnum.FORM;
+			pageBean.formName = formType.getRealClass().getAlfrescoName();
+			pageBean.dataType = pageBean.dataType;
+			return true;
+		}
+
+		return resolvePageInfoClass(pageBean, editBean);
 	}
 }

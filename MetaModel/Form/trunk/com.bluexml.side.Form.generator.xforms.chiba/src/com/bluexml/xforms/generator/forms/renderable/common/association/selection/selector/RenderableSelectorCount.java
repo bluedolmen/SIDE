@@ -2,6 +2,7 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
+import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 import org.jdom.Element;
 
@@ -29,6 +30,7 @@ public class RenderableSelectorCount extends AbstractRenderableSelectorItem {
 		RenderedXMLElement rendered = new RenderedXMLElement();
 
 		Element div = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+		div.setAttribute("class", MsgId.INT_CSS_SELECT_OUTPUT_ZONE.getText());
 
 		Element outputReturned = XFormsGenerator.createElement("output",
 				XFormsGenerator.NAMESPACE_XFORMS);

@@ -1,5 +1,8 @@
 package com.bluexml.xforms.generator.forms.renderable.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -48,25 +51,25 @@ public class AssociationProperties {
 	/** The mandatory/required property. See the setter method. */
 	private boolean mandatory;
 
-	/** The create edit form type. */
+	/** The create and edit form type, whether class or form. */
 	private FormTypeRendered createEditFormType;
 
 	/** The create edit form name. */
-	private String createEditFormName;
+	private List<String> createEditFormNames = null; // #1510
 
 	private String formatPattern;
 	
 	private String labelLength;
 
 	/**
-	 * Instantiates a new association properties. Used in formForm's (via ModelChoiceField's)
+	 * Used in formForm's (via RenderableModelChoiceField's)
 	 */
 	public AssociationProperties() {
 		super();
 	}
 
 	/**
-	 * Instantiates a new association properties. Used in formClass's (via addAssociation)
+	 * Used in formClass's (via addAssociation)
 	 * 
 	 * @param destination
 	 *            the destination
@@ -97,7 +100,7 @@ public class AssociationProperties {
 		this.hiBound = hiBound;
 		this.loBound = loBound;
 		this.createEditFormType = FormTypeRendered.formClass;
-		this.createEditFormName = null;
+		this.createEditFormNames = null;
 		this.showingActions = true;
 		this.fieldSize = "0";
 		this.disabled = false;
@@ -233,8 +236,8 @@ public class AssociationProperties {
 	 * 
 	 * @return the creates the edit form name
 	 */
-	public String getCreateEditFormName() {
-		return createEditFormName;
+	public List<String> getCreateEditFormName() {
+		return createEditFormNames;
 	}
 
 	/**
@@ -243,8 +246,11 @@ public class AssociationProperties {
 	 * @param createEditFormName
 	 *            the new creates the edit form name
 	 */
-	public void setCreateEditFormName(String createEditFormName) {
-		this.createEditFormName = createEditFormName;
+	public void addCreateEditFormName(String createEditFormName) {
+		if (this.createEditFormNames == null) {
+			this.createEditFormNames = new ArrayList<String>();
+		}
+		this.createEditFormNames.add(createEditFormName);
 	}
 
 	/**
