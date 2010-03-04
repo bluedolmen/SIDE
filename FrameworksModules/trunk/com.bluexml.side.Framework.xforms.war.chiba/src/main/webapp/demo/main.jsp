@@ -102,7 +102,9 @@
 <%	
 	for (Vector<String> v : Util.getDefinitions(alfrescohost,user)) {
 		if (v.elementAt(4).startsWith("jbpm$wfbx")) {
-			String url = Util.getStartTaskName(Util.class.getResourceAsStream("/mapping.xml"), v.elementAt(4));
+			// String url = Util.getStartTaskName(Util.class.getResourceAsStream("/mapping.xml"), v.elementAt(4));
+			// the mapping.xml file is private to the controller. Better use the API.
+			String url = Util.getStartTaskName(v.elementAt(4));
 			url = xforms+"xforms?type="+url+"&amp;formType=wkflw&amp;userName="+user+"&amp;successPage=demo/confirmation.jsp&amp;failurePage=demo/error.jsp";
 %>
 		<tr>
@@ -144,7 +146,7 @@
 			<th/>
 		</tr>
 <%	
-	for (Vector<String> v : Util.getPooledTasks(Util.class.getResourceAsStream("/mapping.xml"),alfrescohost,user)) {
+	for (Vector<String> v : Util.getPooledTasks(alfrescohost,user)) {
 		String  url = xforms+"xforms?type="+v.elementAt(3)+"&amp;taskId="+v.elementAt(0)+"&amp;formType=wkflw&amp;userName="+user+"&amp;workflowInstanceId="+v.elementAt(5)+"&amp;id="+v.elementAt(4)+"&amp;successPage=demo/confirmation.jsp&amp;failurePage=demo/error.jsp";
 %>
 		<tr>
