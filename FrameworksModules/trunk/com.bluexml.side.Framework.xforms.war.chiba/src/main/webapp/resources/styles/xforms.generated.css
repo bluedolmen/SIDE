@@ -86,17 +86,21 @@ div.side_select_widget,div.side_select_search_zone {
 }
 
 div.side_select_widget .submit { /* the create button*/
-	margin-left: 10px;
+	margin-left: 170px;
+}
+
+div.side_select_widget label {
+	font-weight: bold;
 }
 
 div.side_select_search_zone label {
-	padding-right: 5px;
+	font-weight: normal;
 }
 
-div.side_select_widget label,div.side_select_search_zone label {
-	display: none;
-	width: 0px;
+div.side_select_output_zone label {
+	width: 75px;
 }
+
 
 /*
  * SEARCH WIDGETS
