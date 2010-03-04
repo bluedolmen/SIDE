@@ -60,7 +60,7 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 		getBindId().addLinkedElement(select);
 
 		Element label = XFormsGenerator.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
-		label.setText(bean.getTitle());
+		label.setText(MsgPool.getMsg(MsgId.MSG_FIELD_LABEL_FORMAT, bean.getTitle()));
 		select.addContent(label);
 
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
