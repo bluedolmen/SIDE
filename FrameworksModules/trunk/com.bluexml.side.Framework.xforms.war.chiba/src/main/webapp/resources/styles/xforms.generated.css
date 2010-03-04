@@ -101,6 +101,9 @@ div.side_select_output_zone label {
 	width: 75px;
 }
 
+div.side_select_selected_item label {
+	width: auto;
+}
 
 /*
  * SEARCH WIDGETS
