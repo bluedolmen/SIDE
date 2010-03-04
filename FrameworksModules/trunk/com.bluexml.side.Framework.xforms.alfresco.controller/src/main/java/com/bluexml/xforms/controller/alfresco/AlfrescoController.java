@@ -3117,23 +3117,23 @@ public class AlfrescoController {
 
 		// we won't check the tag name for the root element
 		Element root = document.getDocumentElement();
-		List<Element> entries = DOMUtil.getChildren(root, MsgId.INT_GEN_REDIRECT_ENTRY.getText());
+		List<Element> entries = DOMUtil.getChildren(root, MsgId.INT_REDIRECTION_ENTRY.getText());
 		// for each entry of the file, store the info
 		for (Element entry : entries) {
-			Element nameElt = DOMUtil.getChild(entry, MsgId.INT_GEN_REDIRECT_NAME.getText());
+			Element nameElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_NAME.getText());
 			if (nameElt == null) {
 				// get rid of everything previously read
 				targetTable = new HashMap<String, RedirectionBean>();
 				return false;
 			}
 			formName = nameElt.getTextContent();
-			Element urlElt = DOMUtil.getChild(entry, MsgId.INT_GEN_REDIRECT_URL.getText());
+			Element urlElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_URL.getText());
 			url = urlElt.getTextContent();
 			Element autoElt = DOMUtil
-					.getChild(entry, MsgId.INT_GEN_REDIRECT_AUTO_ADVANCE.getText());
+					.getChild(entry, MsgId.INT_REDIRECTION_AUTO_ADVANCE.getText());
 			autoAdvance = StringUtils.equals(autoElt.getTextContent(), "true");
 
-			Element addElt = DOMUtil.getChild(entry, MsgId.INT_GEN_REDIRECT_ADD_PARAMS.getText());
+			Element addElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_ADD_PARAMS.getText());
 			addParams = StringUtils.equals(addElt.getTextContent(), "true");
 			RedirectionBean bean = new RedirectionBean(url, autoAdvance, addParams);
 
