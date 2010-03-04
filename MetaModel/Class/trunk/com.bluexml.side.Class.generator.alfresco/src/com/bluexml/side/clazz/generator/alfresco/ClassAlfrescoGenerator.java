@@ -98,9 +98,9 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/html/alfrescoGenerator_template_result_get.mt");
 
 				// Template Json
-				// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_json.mt");
-				// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_result_post.mt");
-				// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_result_get.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_json.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_result_post.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_result_get.mt");
 
 				// Templates RSS
 				// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/rss/alfrescoGenerator_template_rss.mt");

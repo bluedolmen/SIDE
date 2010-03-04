@@ -42,7 +42,13 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<#if child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?is_sequence>
 		"<%eContainer().getQualifiedName()%>_<%name%>":"<#list child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"] as key>${key} </#list>",
 		<#else/>
-		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]<%if (typ.toString().equalsIgnoreCase("date")){%>?date<%}%>!""}",
+		<%if (typ.toString().equalsIgnoreCase("date")){%>
+		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?date!""}",
+		<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
+		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?datetime!""}",
+		<%}else{%>
+		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string!""}",
+		<%}%>
 		</#if>
 	<#else/>
 		"<%eContainer().getQualifiedName()%>_<%name%>":"",
