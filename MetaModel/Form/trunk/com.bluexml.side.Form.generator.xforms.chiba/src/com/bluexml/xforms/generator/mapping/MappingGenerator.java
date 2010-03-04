@@ -472,27 +472,6 @@ public class MappingGenerator extends AbstractGenerator {
 				}
 			}
 
-			pw.println("\n/* Styles for aligning the labels*/");
-			int count = 0;
-			for (String elt : CSSCollector) {
-				if (StringUtils.trimToNull(elt) != null) {
-					if (!(elt.charAt(0) == '#')) {
-						count++;
-						String line = "." + MsgId.INT_CSS_BLUEXML_AUTOGEN + " > ." + elt
-								+ " > div label" + (count == nbClasses ? " {" : ",");
-						pw.println(line);
-					}
-				}
-			}
-			if (count > 0) {
-				pw.println("\twidth: 120px;");
-				pw.println("\theight: 1em;");
-				pw.println("\toverflow: hidden;");
-				pw.println("\ttext-align: right;");
-				pw.println("}");
-				pw.println();
-			}
-
 			pw.close();
 		}
 	}
