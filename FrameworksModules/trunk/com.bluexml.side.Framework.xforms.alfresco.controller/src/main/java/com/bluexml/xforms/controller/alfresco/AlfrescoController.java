@@ -3221,9 +3221,6 @@ public class AlfrescoController {
 				return false;
 			}
 
-			if (stream == null) {
-				return false;
-			}
 		} else {
 			redirectXmlPath = filePath;
 		}
