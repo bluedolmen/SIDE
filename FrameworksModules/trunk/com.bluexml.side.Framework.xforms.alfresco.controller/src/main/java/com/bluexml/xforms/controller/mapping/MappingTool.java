@@ -462,5 +462,9 @@ public class MappingTool {
 	public boolean isDynamic(EnumType enumType) {
 		return mappingToolFormsToAlfresco.isDynamic(enumType);
 	}
-	
+
+	public String getWorkflowStartTaskFormName(String namespacePrefix) {
+		return mappingToolFormsToAlfresco.getWorkflowStartTaskFormName(namespacePrefix);
+	}
+
 }

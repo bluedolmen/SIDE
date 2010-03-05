@@ -361,6 +361,11 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			ModelChoiceType modelChoice, AlfrescoTransaction at, Map<String, GenericClass> an,
 			boolean formIsReadOnly) throws ServletException {
 		Element modelChoiceReference = formInstance.createElement(modelChoice.getUniqueName());
+		int maxBound = modelChoice.getMaxBound();
+		if (maxBound != 1) {
+			modelChoiceReference.setAttribute("bound", "" + maxBound);
+		}
+
 		newFormModelChoiceItem(formInstance, modelChoice, modelChoiceReference, at, an,
 				formIsReadOnly);
 		formElement.appendChild(modelChoiceReference);
@@ -699,8 +704,11 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			List<GenericAssociation> associations, ModelChoiceType modelChoice,
 			boolean formIsReadOnly) throws ServletException {
 		Element modelChoiceReference = formInstance.createElement(modelChoice.getUniqueName());
-		modelChoiceReference.setAttribute("maxBound", "" + modelChoice.getMaxBound());
-		
+		int maxBound = modelChoice.getMaxBound();
+		if (maxBound != 1) {
+			modelChoiceReference.setAttribute("bound", "" + maxBound);
+		}
+
 		String alfrescoName = modelChoice.getAlfrescoName();
 		List<GenericAssociation> matched = getAssociationAndRemove(alfrescoName, associations);
 		for (GenericAssociation association : matched) {

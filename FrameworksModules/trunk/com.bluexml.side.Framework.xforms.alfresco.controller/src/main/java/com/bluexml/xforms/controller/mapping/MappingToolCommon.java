@@ -323,7 +323,7 @@ public class MappingToolCommon {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gets the form type that matches the given name.
 	 * 
@@ -396,7 +396,7 @@ public class MappingToolCommon {
 	 * "Evaluation_Demarrage" includes process "Evaluation" and task "Demarrage".
 	 * 
 	 * @param refName
-	 *            the name to test against
+	 *            the name to test against, e.g. "wfbxwfTest:Start"
 	 * @param byId
 	 *            if true, the task id from mapping.xml is tested. Otherwise, the name is tested.
 	 * @return the form type that matches
@@ -438,6 +438,32 @@ public class MappingToolCommon {
 				for (FormFieldType field : fields) {
 					if (StringUtils.equals(field.getUniqueName(), fieldName)) {
 						return taskType;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets (from the mapping) the name of the form that is the start task for the given definition
+	 * name.<br/>
+	 * e.g. "wfTest" returns "wfTest_Start" knowing the start task is named "Start".
+	 * 
+	 * @param namespacePrefix
+	 *            the name to test against
+	 * @return the name of the start task
+	 */
+	public String getWorkflowStartTaskFormName(String namespacePrefix) {
+		List<JAXBElement<? extends CanisterType>> elements = mapping.getCanister();
+
+		for (JAXBElement<? extends CanisterType> element : elements) {
+			if (element.getValue() instanceof WorkflowTaskType) {
+				WorkflowTaskType taskType = (WorkflowTaskType) element.getValue();
+				if (isStartTask(taskType)) {
+					String formName = taskType.getName();
+					if (formName.startsWith(namespacePrefix + "_")) {
+						return formName;
 					}
 				}
 			}

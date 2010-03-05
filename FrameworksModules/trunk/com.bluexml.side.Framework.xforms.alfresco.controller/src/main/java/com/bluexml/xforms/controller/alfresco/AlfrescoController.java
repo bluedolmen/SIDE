@@ -222,7 +222,7 @@ public class AlfrescoController {
 				// keep the path so that a subsequent reload does not require re-giving the path
 				formsPropertiesPath = formsFilePath;
 			} catch (Exception e) {
-				logger.error("Configuration file 'forms.properties' not found at '" + formsFilePath
+				logger.warn("Configuration file 'forms.properties' not found at '" + formsFilePath
 						+ "'. Will use defaults.", e);
 				resForms = loadPropertiesFormsDefault();
 			}
@@ -232,7 +232,7 @@ public class AlfrescoController {
 				InputStream stream = new FileInputStream(theFile);
 				resForms = loadPropertiesFormsFromStream(stream);
 			} catch (Exception e) {
-				logger.error("Configuration file 'forms.properties' not found at last location "
+				logger.warn("Configuration file 'forms.properties' not found at last location "
 						+ formsPropertiesPath, e);
 				resForms = loadPropertiesFormsDefault();
 			}
@@ -251,7 +251,7 @@ public class AlfrescoController {
 				streamMsgs = new FileInputStream(theFile);
 				messagesPropertiesPath = messagesFilePath;
 			} catch (Exception e) {
-				logger.error("Configuration file 'messages.properties' not found at '"
+				logger.warn("Configuration file 'messages.properties' not found at '"
 						+ messagesFilePath + "'. Will use defaults.", e);
 				streamMsgs = loadPropertiesMessagesDefaults();
 			}
@@ -1545,7 +1545,7 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Request post. Pont vers le webscript XForms sous Alfresco.
+	 * Request post. Bridget to our XForms webscript under Alfresco. //$$ TRACE LOG
 	 * 
 	 * @param parameters
 	 *            the parameters
@@ -1565,11 +1565,13 @@ public class AlfrescoController {
 	 */
 	private PostMethod requestPost(AlfrescoTransaction transaction, Map<String, String> parameters,
 			MsgId opCode) throws IOException {
-		logger.debug("Alfresco request " + opCode);
-		logger.debug("Parameters : ");
-		Set<Entry<String, String>> entrySet2 = parameters.entrySet();
-		for (Entry<String, String> entry2 : entrySet2) {
-			logger.debug(entry2.getKey() + " = " + entry2.getValue());
+		if (logger.isTraceEnabled()) {
+			logger.debug("Alfresco request: " + opCode);
+			logger.debug("Parameters : ");
+			Set<Entry<String, String>> entrySet2 = parameters.entrySet();
+			for (Entry<String, String> entry2 : entrySet2) {
+				logger.debug(entry2.getKey() + " = " + entry2.getValue());
+			}
 		}
 
 		PostMethod post = new PostMethod(ALFRESCO_XFORMS_URL + opCode);
@@ -1589,8 +1591,10 @@ public class AlfrescoController {
 
 		executeMethod(post, false);
 
-		logger.debug("Response : ");
-		logger.debug(StringUtils.trim(post.getResponseBodyAsString()));
+		if (logger.isTraceEnabled()) {
+			logger.debug("Response : ");
+			logger.debug(StringUtils.trim(post.getResponseBodyAsString()));
+		}
 
 		return post;
 	}
@@ -2481,6 +2485,31 @@ public class AlfrescoController {
 	}
 
 	/**
+	 * Returns the form name for a task based on the full task id.<br/>
+	 * Added for the demo webapp.
+	 * 
+	 * @param fullTaskId
+	 *            e.g. "wfbxwfTest:T1"
+	 * @return
+	 */
+	public String getWorkflowFormNameByTaskId(String fullTaskId) {
+		// String prefix = "jbpm$";
+		// int pos = fullTaskId.indexOf(prefix);
+		// if (pos != 0) {
+		// logger.error("Wrong call: the task id '" + fullTaskId
+		// + "'does not have the correct format");
+		// return "";
+		// }
+		String taskId = fullTaskId;
+		WorkflowTaskType taskType = mappingTool.getWorkflowTaskType(taskId, true);
+		if (taskType == null) {
+			logger.error("No task definition in the mapping for task '" + taskId + "'");
+			return "";
+		}
+		return taskType.getName();
+	}
+
+	/**
 	 * Returns the mapping entry for the task that contains the field whose alfrescoName matches.
 	 * 
 	 * @param fieldName
@@ -2554,7 +2583,7 @@ public class AlfrescoController {
 	 *            (e.g. "jbpm$wfbxEvaluation:Evaluation")
 	 * @return the local name of the process (e.g. "wfbxEvaluation")
 	 */
-	public static String workflowExtractNamespaceName(String name) {
+	public static String workflowExtractNamespacePrefix(String name) {
 		int start = name.indexOf(BLUEXML_WORKFLOW_PREFIX);
 		int end = name.indexOf(':');
 		if ((start == -1) || (end == -1) || (end < start)) {
@@ -2619,15 +2648,22 @@ public class AlfrescoController {
 	/**
 	 * Gives the name of the form that corresponds to a task name.<br/>
 	 * e.g. "wfbxEvaluation:Annotation" --> "Evaluation_Annotation"<br/>
+	 * e.g. "jbpm$wfbxEvaluation:Annotation" --> "Evaluation_Annotation"<br/>
 	 * 
 	 * @param processName
 	 * @return the form name.
 	 */
 	public static String workflowBuildFormNameFromTask(String taskName) {
-		if (taskName.indexOf(BLUEXML_WORKFLOW_PREFIX) != 0) {
-			return null;
+		String searchString = BLUEXML_WORKFLOW_PREFIX;
+
+		if (taskName.indexOf(searchString) != 0) {
+			searchString = "jbpm$" + BLUEXML_WORKFLOW_PREFIX; // the demo webapp uses this format
+			if (taskName.indexOf(searchString) != 0) {
+				return null;
+			}
 		}
-		String substr = taskName.substring(BLUEXML_WORKFLOW_PREFIX.length());
+
+		String substr = taskName.substring(searchString.length());
 		return substr.replace(':', '_');
 	}
 
@@ -2639,6 +2675,24 @@ public class AlfrescoController {
 	 */
 	public static String workflowBuildNamespaceURI(String processName) {
 		return MsgId.INT_NAMESPACE_BLUEXML_WORKFLOW + "/" + processName + "/1.0";
+	}
+
+	/**
+	 * Retrieves (from the mapping file) the name/id of a form that implements the start task for a
+	 * workflow definition name.<br/>
+	 * Added for the demo webapp.
+	 * 
+	 * @param workflowDefName
+	 *            e.g. jbpm$wfbxwfTest:wfTest
+	 * @return the id of a form, e.g. "wfTest_Start"
+	 */
+	public String getWorkflowStartTaskFormName(String workflowDefName) {
+		String prefix = workflowExtractNamespacePrefix(workflowDefName);
+
+		// we get "wfbxwfTest" but we want "wfTest"
+		prefix = prefix.substring(BLUEXML_WORKFLOW_PREFIX.length());
+
+		return mappingTool.getWorkflowStartTaskFormName(prefix);
 	}
 
 	/**
@@ -3129,8 +3183,7 @@ public class AlfrescoController {
 			formName = nameElt.getTextContent();
 			Element urlElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_URL.getText());
 			url = urlElt.getTextContent();
-			Element autoElt = DOMUtil
-					.getChild(entry, MsgId.INT_REDIRECTION_AUTO_ADVANCE.getText());
+			Element autoElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_AUTO_ADVANCE.getText());
 			autoAdvance = StringUtils.equals(autoElt.getTextContent(), "true");
 
 			Element addElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_ADD_PARAMS.getText());

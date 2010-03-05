@@ -360,13 +360,13 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * 
 	 * @return false if exception or can't do the transition. Otherwise true.
 	 * @throws ServletException
-	 * @throws ServletException
 	 */
 	private TransitionResultBean submitWork() throws ServletException {
 		TransitionResultBean resultBean = new TransitionResultBean();
 		HashMap<QName, Serializable> properties = new HashMap<QName, Serializable>();
 		currentPage = navigationPath.peekCurrentPage();
 
+		
 		// check the transition although should never throw up... normally.
 		String transitionToTake = requestParameters.get(TRANSITION_NAME);
 		if (StringUtils.trimToEmpty(transitionToTake).equals(StringUtils.EMPTY)) {
@@ -456,7 +456,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			return resultBean;
 		}
 
-		// set assignment for next task if any
+		// set assignment for next task(s) if any
 		return reassignWorkflow(transaction);
 	}
 
@@ -699,6 +699,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		String taskTypeName = taskType.getName();
 		String taskTypeId = taskType.getTaskId();
 
+		
 		Element root;
 		if (node instanceof Document) {
 			root = ((Document) node).getDocumentElement();

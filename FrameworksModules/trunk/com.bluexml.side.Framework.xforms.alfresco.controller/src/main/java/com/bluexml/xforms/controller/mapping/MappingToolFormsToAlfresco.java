@@ -225,6 +225,10 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			// change the references list if references become supported in FormWorkflow's
 			collectAssocs(transaction, rootElt, taskType.getModelChoice(),
 					new ArrayList<ReferenceType>(), alfClass);
+			
+			// set the name of the form as qualified name: in case the worfklow form has FileFields
+			// that upload to the filesystem, the name will serve as a directory name.
+			alfClass.setQualifiedName(formName);
 		}
 		return alfClass;
 	}
