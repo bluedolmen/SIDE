@@ -106,7 +106,6 @@ public class XFormsWork implements RunAsWork<String> {
 
 	private class DoWorkInTransaction implements RetryingTransactionCallback<String> {
 
-		
 		/**
 		 * 
 		 */
@@ -353,12 +352,16 @@ public class XFormsWork implements RunAsWork<String> {
 		sb.append(">");
 	}
 
-	private void appendResult(StringBuffer xmlResult, String id, String value) {
+	private void appendResult(StringBuffer xmlResult, String id, String value, String qname) {
 		xmlResult.append("<item><id>");
 		xmlResult.append(StringEscapeUtils.escapeXml(id));
 		xmlResult.append("</id><value>");
 		xmlResult.append(StringEscapeUtils.escapeXml(value));
-		xmlResult.append("</value></item>\n");
+		xmlResult.append("</value><qname>");
+		if (qname != null) {
+			xmlResult.append(StringEscapeUtils.escapeXml(qname));
+		}
+		xmlResult.append("</qname></item>\n");
 	}
 
 	/**
@@ -374,7 +377,7 @@ public class XFormsWork implements RunAsWork<String> {
 
 		if (query.startsWith("enum;")) {
 			String[] ids = query.split(";");
-			appendResult(xmlResult, ids[1], getLitteralTranslation(ids[1]));
+			appendResult(xmlResult, ids[1], getLitteralTranslation(ids[1]), null);
 		} else {
 			String[] ids = query.split(";");
 			for (String id : ids) {
@@ -383,7 +386,7 @@ public class XFormsWork implements RunAsWork<String> {
 				// but not sure...
 				// "value" is dependent on the model (changes should propagate)
 				String nodeName = resolveNodeName(nodeRef, "value");
-				appendResult(xmlResult, nodeRef.toString(), nodeName);
+				appendResult(xmlResult, nodeRef.toString(), nodeName, null);
 			}
 		}
 
@@ -427,7 +430,7 @@ public class XFormsWork implements RunAsWork<String> {
 				if (StringUtils.trimToNull(code) == null) {
 					value = resultSet.getString("UUID");
 				}
-				appendResult(xmlResult, code, value);
+				appendResult(xmlResult, code, value, null);
 			}
 			SQLRequester.closeQuery(resultSet);
 		} catch (SQLException e) {
@@ -488,7 +491,8 @@ public class XFormsWork implements RunAsWork<String> {
 			if (maxLength > 0) {
 				nodeName = StringUtils.left(nodeName, maxLength);
 			}
-			appendResult(xmlResult, nodeRef.toString(), nodeName);
+			QName qname = serviceRegistry.getNodeService().getType(nodeRef); // #1510
+			appendResult(xmlResult, nodeRef.toString(), nodeName, qname.getLocalName());
 		}
 
 		xmlResult.append("</results>");
