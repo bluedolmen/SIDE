@@ -994,6 +994,39 @@ public class MappingToolCommon {
 		return workflowTaskType.isStartTask();
 	}
 
+	/**
+	 * Tells whether an AttributeType refers to a file field with upload to file system.
+	 * 
+	 * @param xformsAttribute
+	 *            the object to test
+	 * @return the status
+	 */
+	public boolean isFileContent(AttributeType xformsAttribute) {
+		return (xformsAttribute.getName().endsWith("content"));
+	}
+
+	/**
+	 * Tells whether an AttributeType refers to a file field with upload to the repository.
+	 * 
+	 * @param xformsAttribute
+	 *            the object to test
+	 * @return the status
+	 */
+	public boolean isRepositoryContent(AttributeType xformsAttribute) {
+		return (xformsAttribute.getName().endsWith("repositoryContent"));
+	}
+
+	/**
+	 * Tells whether an AttributeType refers to a file upload field.
+	 * 
+	 * @param xformsAttribute
+	 *            the object to test
+	 * @return the status
+	 */
+	public boolean isFileField(AttributeType xformsAttribute) {
+		return (isRepositoryContent(xformsAttribute) || isFileContent(xformsAttribute));
+	}
+
 	/*
 	 * SUPPORT FOR READ ONLY DATES AND TIMES
 	 */

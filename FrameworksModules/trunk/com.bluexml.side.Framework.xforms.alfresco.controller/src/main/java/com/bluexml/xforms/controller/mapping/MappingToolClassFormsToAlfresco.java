@@ -312,7 +312,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 			if (logger.isTraceEnabled()) {
 				logger.debug("Received value '" + inputTextContent + "' for attribute '"
 						+ alfrescoName + "' with type '" + type + "'. Read-only status '"
-						+ readOnly + "'. isFileField: " + controller.isFileField(attributeType)
+						+ readOnly + "'. isFileField: " + isFileField(attributeType)
 						+ " . isServletRequest: " + isServletRequest);
 			}
 			if (isAmendable(type, attributeType.isReadOnly(), isServletRequest)) {
@@ -336,7 +336,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 			ValueType valueType = alfrescoObjectFactory.createValueType();
 			valueType.setValue(value);
 			result.getValue().add(valueType);
-			if (controller.isRepositoryContent(attributeType)) {
+			if (isRepositoryContent(attributeType)) {
 				// we need a name for the node when uploaded in the repository
 				ValueType valueTypeNameAndExt = alfrescoObjectFactory.createValueType();
 				String nameAndExt = child.getAttribute("file");

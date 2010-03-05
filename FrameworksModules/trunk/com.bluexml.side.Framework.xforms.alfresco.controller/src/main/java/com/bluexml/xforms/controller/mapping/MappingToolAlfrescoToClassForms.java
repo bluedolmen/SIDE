@@ -560,7 +560,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 			attributeElement.setTextContent(textualValue);
 		}
 
-		if (controller.isFileField(attribute)) {
+		if (isFileField(attribute)) {
 			attributeElement.setAttribute("file", "");
 			attributeElement.setAttribute("type", "");
 		}

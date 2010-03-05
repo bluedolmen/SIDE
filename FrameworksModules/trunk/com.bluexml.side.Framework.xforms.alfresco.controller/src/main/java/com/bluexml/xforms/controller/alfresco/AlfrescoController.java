@@ -25,9 +25,7 @@ import java.util.Vector;
 import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -57,7 +55,6 @@ import org.xml.sax.SAXException;
 import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.alfresco.agents.SystemAgent;
 import com.bluexml.xforms.controller.binding.AssociationType;
-import com.bluexml.xforms.controller.binding.AttributeType;
 import com.bluexml.xforms.controller.binding.Batch;
 import com.bluexml.xforms.controller.binding.CanisterType;
 import com.bluexml.xforms.controller.binding.ClassType;
@@ -66,10 +63,8 @@ import com.bluexml.xforms.controller.binding.FormFieldType;
 import com.bluexml.xforms.controller.binding.FormType;
 import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
-import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.controller.mapping.MappingTool;
-import com.bluexml.xforms.controller.mapping.MappingToolCommon;
 import com.bluexml.xforms.controller.mapping.RepoContentInfoBean;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
@@ -184,7 +179,7 @@ public class AlfrescoController {
 
 		// statically load properties
 		try {
-			loadMappingXml();
+			instance.loadMappingXml();
 			loadProperties(formsPropertiesPath, messagesPropertiesPath);
 			loadRedirectionTable(null);
 		} catch (Exception e) {
@@ -200,11 +195,8 @@ public class AlfrescoController {
 	 * 
 	 * @throws Exception
 	 */
-	private static void loadMappingXml() throws Exception {
-		URL url = AlfrescoController.class.getResource("/mapping.xml");
-		File file = new File(new URI(url.toString()));
-		InputStream mappingStream = new FileInputStream(file);
-		instance.unmarshallMapping(mappingStream);
+	private void loadMappingXml() throws Exception {
+		mappingTool.loadMappingXml();
 	}
 
 	/**
@@ -431,7 +423,6 @@ public class AlfrescoController {
 	/** The mapping tool. */
 	private MappingTool mappingTool;
 
-	
 	//
 	//
 	// SystemAgent
@@ -519,32 +510,6 @@ public class AlfrescoController {
 	// MappingAgent
 	//
 	//
-	
-	/**
-	 * Unmarshalls the mapping from the given stream.
-	 * 
-	 * @param mapping
-	 *            the mapping
-	 * 
-	 * @throws Exception
-	 *             the exception
-	 */
-	private void unmarshallMapping(InputStream mapping) throws Exception {
-		try {
-			JAXBContext jaxbContext = JAXBContext
-					.newInstance("com.bluexml.xforms.controller.binding");
-			Unmarshaller mappingUnmarshaller = jaxbContext.createUnmarshaller();
-			Mapping mappingInstance = (Mapping) mappingUnmarshaller.unmarshal(mapping);
-			mappingTool = new MappingTool(mappingInstance, this);
-		} catch (JAXBException e) {
-			if (logger.isErrorEnabled()) {
-				logger.error(e);
-			}
-			throw new RuntimeException(e);
-		} finally {
-			mapping.close();
-		}
-	}
 
 	/**
 	 * Creates or loads the instance for a default class form.
@@ -573,8 +538,8 @@ public class AlfrescoController {
 		this.initParameters = initParams;
 		try {
 			if (id == null) {
-				instance = createClassFormInstance(transaction, type, initParams,
-						new Stack<AssociationType>(), formIsReadOnly, isServletRequest);
+				instance = createClassFormInstance(transaction, type, initParams, formIsReadOnly,
+						isServletRequest);
 			} else {
 				instance = getObjectInstance(transaction, id, new Stack<AssociationType>(),
 						formIsReadOnly, isServletRequest);
@@ -1090,8 +1055,8 @@ public class AlfrescoController {
 		// read the old class
 		GenericClass oldClass = null;
 		try {
-			oldClass = MappingToolCommon.unmarshal(readObjectFromRepository(transaction, alfClass
-					.getId()));
+			oldClass = MappingTool
+					.unmarshal(readObjectFromRepository(transaction, alfClass.getId()));
 		} catch (JAXBException e) {
 			throw new ServletException(e);
 		}
@@ -1147,7 +1112,9 @@ public class AlfrescoController {
 		for (RepoContentInfoBean bean : list) {
 			GenericAttribute attribute = bean.getAttribute();
 			if (attribute != null) {
-				// if (attri
+				if (attribute.getQualifiedName().equals(qname)) {
+					return bean;
+				}
 			}
 		}
 		return null;
@@ -1324,7 +1291,7 @@ public class AlfrescoController {
 	public void executeBatch(AlfrescoTransaction alfrescoTransaction, Batch batch)
 			throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
-		parameters.put("datas", MappingToolCommon.marshal(batch));
+		parameters.put("datas", MappingTool.marshal(batch));
 
 		Map<String, String> ids = new HashMap<String, String>();
 
@@ -1836,10 +1803,10 @@ public class AlfrescoController {
 	 *             the alfresco controller exception
 	 */
 	public Document createClassFormInstance(AlfrescoTransaction transaction, String type,
-			Map<String, String> initParams, Stack<AssociationType> stack, boolean formIsReadOnly,
-			boolean isServletRequest) throws ServletException {
-		return mappingTool.createClassFormsInstance(transaction, type, initParams, stack,
-				formIsReadOnly, isServletRequest);
+			Map<String, String> initParams, boolean formIsReadOnly, boolean isServletRequest)
+			throws ServletException {
+		return mappingTool.createClassFormsInstance(transaction, type, initParams, formIsReadOnly,
+				isServletRequest);
 	}
 
 	/**
@@ -2008,39 +1975,6 @@ public class AlfrescoController {
 			return mappingTool.isDynamic(enumType);
 		}
 		return false; // happens for search operators enums; they don't get into the mapping file
-	}
-
-	/**
-	 * Tells whether an AttributeType refers to a file field with upload to file system.
-	 * 
-	 * @param xformsAttribute
-	 *            the object to test
-	 * @return the status
-	 */
-	public boolean isFileContent(AttributeType xformsAttribute) {
-		return (xformsAttribute.getName().endsWith("content"));
-	}
-
-	/**
-	 * Tells whether an AttributeType refers to a file field with upload to the repository.
-	 * 
-	 * @param xformsAttribute
-	 *            the object to test
-	 * @return the status
-	 */
-	public boolean isRepositoryContent(AttributeType xformsAttribute) {
-		return (xformsAttribute.getName().endsWith("repositoryContent"));
-	}
-
-	/**
-	 * Tells whether an AttributeType refers to a file upload field.
-	 * 
-	 * @param xformsAttribute
-	 *            the object to test
-	 * @return the status
-	 */
-	public boolean isFileField(AttributeType xformsAttribute) {
-		return (isRepositoryContent(xformsAttribute) || isFileContent(xformsAttribute));
 	}
 
 	/**
@@ -2936,7 +2870,7 @@ public class AlfrescoController {
 	 */
 	public boolean performDynamicReload() {
 		try {
-			AlfrescoController.loadMappingXml();
+			mappingTool.loadMappingXml();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -3190,5 +3124,4 @@ public class AlfrescoController {
 		return mappingTool.getClassTypeWithDataType(dataType);
 	}
 
-	
 }

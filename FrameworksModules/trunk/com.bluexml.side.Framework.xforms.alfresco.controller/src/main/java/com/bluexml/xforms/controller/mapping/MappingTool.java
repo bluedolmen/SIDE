@@ -1,13 +1,23 @@
 package com.bluexml.xforms.controller.mapping;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 import javax.servlet.ServletException;
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,6 +26,7 @@ import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.binding.AspectType;
 import com.bluexml.xforms.controller.binding.AssociationType;
+import com.bluexml.xforms.controller.binding.Batch;
 import com.bluexml.xforms.controller.binding.CanisterType;
 import com.bluexml.xforms.controller.binding.ClassType;
 import com.bluexml.xforms.controller.binding.EnumType;
@@ -36,6 +47,9 @@ import com.bluexml.xforms.messages.MsgId;
  */
 public class MappingTool {
 
+	/** The logger. */
+	protected static Log logger = LogFactory.getLog(MappingTool.class);
+
 	/** The mapping tool impl alfresco to x forms. */
 	private MappingToolAlfrescoToClassForms mappingToolImplAlfrescoToXForms;
 
@@ -53,6 +67,26 @@ public class MappingTool {
 
 	private Mapping mapping;
 
+	public void loadMappingXml() throws Exception {
+		URL url = AlfrescoController.class.getResource("/mapping.xml");
+		File file = new File(new URI(url.toString()));
+		InputStream mappingStream = new FileInputStream(file);
+		try {
+			JAXBContext jaxbContext = JAXBContext
+					.newInstance("com.bluexml.xforms.controller.binding");
+			Unmarshaller mappingUnmarshaller = jaxbContext.createUnmarshaller();
+			Mapping mappingInstance = (Mapping) mappingUnmarshaller.unmarshal(mappingStream);
+			this.mapping = mappingInstance;
+		} catch (JAXBException e) {
+			if (logger.isErrorEnabled()) {
+				logger.error(e);
+			}
+			throw new RuntimeException(e);
+		} finally {
+			mappingStream.close();
+		}
+	}
+
 	/**
 	 * Instantiates a new mapping tool impl.
 	 * 
@@ -60,10 +94,11 @@ public class MappingTool {
 	 *            the mapping
 	 * @param controller
 	 *            the controller
+	 * @throws Exception
 	 */
-	public MappingTool(Mapping mapping, AlfrescoController controller) {
+	public MappingTool(AlfrescoController controller) throws Exception {
 		super();
-		this.mapping = mapping;
+		loadMappingXml();
 		mappingToolImplAlfrescoToXForms = new MappingToolAlfrescoToClassForms(mapping, controller);
 		mappingToolImplXFormsToAlfresco = new MappingToolClassFormsToAlfresco(mapping, controller);
 		mappingToolAlfrescoToForms = new MappingToolAlfrescoToForms(mapping, controller);
@@ -80,8 +115,6 @@ public class MappingTool {
 	 *            the type
 	 * @param initParams
 	 *            the init params
-	 * @param stack
-	 *            the stack
 	 * @param formIsReadOnly
 	 * 
 	 * @return the document
@@ -90,10 +123,10 @@ public class MappingTool {
 	 *             the alfresco controller exception
 	 */
 	public Document createClassFormsInstance(AlfrescoTransaction transaction, String type,
-			Map<String, String> initParams, Stack<AssociationType> stack, boolean formIsReadOnly,
-			boolean isServletRequest) throws ServletException {
+			Map<String, String> initParams, boolean formIsReadOnly, boolean isServletRequest)
+			throws ServletException {
 		return mappingToolImplAlfrescoToXForms.createClassFormsInstance(transaction, type,
-				initParams, stack, formIsReadOnly, isServletRequest);
+				initParams, new Stack<AssociationType>(), formIsReadOnly, isServletRequest);
 	}
 
 	/**
@@ -405,6 +438,30 @@ public class MappingTool {
 			}
 		}
 		return ""; // normally, we should never get here (unless there are multiple violations)
+	}
+
+	public static String marshal(Batch batch) throws ServletException {
+		return MappingToolCommon.marshal(batch);
+	}
+
+	public static synchronized GenericClass unmarshal(Document alfrescoNode) throws JAXBException {
+		return MappingToolCommon.unmarshal(alfrescoNode);
+	}
+
+	/**
+	 * Checks if is an enumeration is dynamic.
+	 * 
+	 * @param type
+	 *            the type
+	 * 
+	 * @return true, if is dynamic enum
+	 */
+	public boolean isDynamicEnum(String type) {
+		EnumType enumType = getEnumType(type);
+		if (enumType != null) {
+			return isDynamic(enumType);
+		}
+		return false; // happens for search operators enums; they don't get into the mapping file
 	}
 
 	/**
