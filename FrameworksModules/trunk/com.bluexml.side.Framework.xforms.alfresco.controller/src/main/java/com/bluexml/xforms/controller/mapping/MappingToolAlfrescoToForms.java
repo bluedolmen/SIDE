@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -32,6 +34,9 @@ import com.bluexml.xforms.messages.MsgId;
  * The Class MappingToolAlfrescoToForms.
  */
 public class MappingToolAlfrescoToForms extends MappingToolCommon {
+
+	/** The logger. */
+	protected static Log logger = LogFactory.getLog(MappingToolAlfrescoToForms.class);
 
 	/**
 	 * Instantiates a new mapping tool alfresco to forms.
@@ -248,7 +253,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	}
 
 	/**
-	 * Initialize a totally empty form instance. No object id is given.
+	 * Initialize a totally empty form instance. No object id is given. //$$ TRACE LOG
 	 * 
 	 * @param formName
 	 *            the form name
@@ -316,9 +321,6 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	private Element newForm(FormType formType, Document formInstance, AlfrescoTransaction at,
 			Map<String, GenericClass> an, Map<String, String> initParams, boolean formIsReadOnly)
 			throws ServletException {
-		if (logger.isTraceEnabled()) {
-			logger.debug("Creating new form instance section");
-		}
 		Element formElement = formInstance.createElement(formType.getName());
 
 		/*
@@ -477,7 +479,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	/**
 	 * Creates a new field with, possibly, an initial value. The priority order is first, an init
 	 * param from the uri, tied to the field's unique name, then the init param for its reference
-	 * Alfresco attribute, and finally the init value from the form model.
+	 * Alfresco attribute, and finally the init value from the form model. //$$ TRACE LOG
 	 * 
 	 * @param formInstance
 	 *            the form instance

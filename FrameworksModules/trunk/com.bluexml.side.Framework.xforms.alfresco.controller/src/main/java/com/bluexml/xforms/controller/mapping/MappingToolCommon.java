@@ -602,19 +602,21 @@ public class MappingToolCommon {
 	 *            the messages
 	 */
 	public void logXML(Node node, String... messages) {
-		for (String message : messages) {
-			logger.debug(message);
-		}
-		if (node != null) {
-			Source xmlSource = new DOMSource(node);
-			StringWriter sw = new StringWriter();
-			Result outputTarget = new StreamResult(sw);
-			try {
-				documentTransformer.transform(xmlSource, outputTarget);
-			} catch (TransformerException e) {
-				logger.error(e);
+		if (logger.isDebugEnabled()) {
+			for (String message : messages) {
+				logger.debug(message);
 			}
-			logger.debug(sw.toString());
+			if (node != null) {
+				Source xmlSource = new DOMSource(node);
+				StringWriter sw = new StringWriter();
+				Result outputTarget = new StreamResult(sw);
+				try {
+					documentTransformer.transform(xmlSource, outputTarget);
+				} catch (TransformerException e) {
+					logger.error(e);
+				}
+				logger.debug(sw.toString());
+			}
 		}
 	}
 
@@ -757,9 +759,11 @@ public class MappingToolCommon {
 			String res = StringUtils.trimToEmpty(EnumAction.getEnumValue(staticEnumType,
 					textContent));
 			if (res == null) {
-				logger.error("The value '" + textContent
-						+ "' is not a valid for enumeration type '" + staticEnumType
-						+ "'; will be overriden");
+				if (logger.isErrorEnabled()) {
+					logger.error("The value '" + textContent
+							+ "' is not a valid for enumeration type '" + staticEnumType
+							+ "'; will be overriden");
+				}
 				res = "1"; // inspired by #941: always initialize enums
 			}
 			return res;

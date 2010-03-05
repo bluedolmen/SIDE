@@ -151,15 +151,16 @@ public class NavigationManager {
 		List<Class<?>> classes = new ArrayList<Class<?>>(ACTIONS.length);
 		classes.addAll(Arrays.asList(ACTIONS));
 
-		InputStream actionsXmlStream = NavigationManager.class.getResourceAsStream("/actions.xml");
-		if (actionsXmlStream != null) {
-			try {
-				Document actionsDocument = documentBuilder.parse(actionsXmlStream);
-				addActions(actionsDocument, classes);
-			} catch (Exception e) {
-				logger.error(e);
-			}
-		}
+		// InputStream actionsXmlStream =
+		// NavigationManager.class.getResourceAsStream("/actions.xml");
+		// if (actionsXmlStream != null) {
+		// try {
+		// Document actionsDocument = documentBuilder.parse(actionsXmlStream);
+		// addActions(actionsDocument, classes);
+		// } catch (Exception e) {
+		// logger.error(e);
+		// }
+		// }
 
 		actions = new TreeMap<String, Class<? extends AbstractAction>>();
 
@@ -168,7 +169,9 @@ public class NavigationManager {
 				AbstractAction abstractAction = (AbstractAction) classAction.newInstance();
 				actions.put(abstractAction.getActionName(), abstractAction.getClass());
 			} catch (Exception e) {
-				logger.error(e);
+				if (logger.isErrorEnabled()) {
+					logger.error("Error while registering actions", e);
+				}
 			}
 		}
 	}
@@ -180,7 +183,9 @@ public class NavigationManager {
 	 *            the actions document
 	 * @param classes
 	 *            the classes
+	 * @deprecated
 	 */
+	@SuppressWarnings("unused")
 	private void addActions(Document actionsDocument, List<Class<?>> classes) {
 		NodeList actionNodes = actionsDocument.getDocumentElement().getChildNodes();
 		for (int i = 0; i < actionNodes.getLength(); i++) {
@@ -207,7 +212,9 @@ public class NavigationManager {
 							Class<?> actionClassName = Class.forName(className);
 							classes.add(actionClassName);
 						} catch (Exception e) {
-							logger.error(e);
+							if (logger.isErrorEnabled()) {
+								logger.error(e);
+							}
 						}
 					}
 
@@ -224,8 +231,10 @@ public class NavigationManager {
 	 *            the messages
 	 */
 	private void log(String... messages) {
-		for (String message : messages) {
-			logger.debug(message);
+		if (logger.isDebugEnabled()) {
+			for (String message : messages) {
+				logger.debug(message);
+			}
 		}
 	}
 
@@ -238,17 +247,19 @@ public class NavigationManager {
 	 *            the messages
 	 */
 	private void logXML(Node node, String... messages) {
-		log(messages);
-		if (node != null) {
-			Source xmlSource = new DOMSource(node);
-			StringWriter sw = new StringWriter();
-			Result outputTarget = new StreamResult(sw);
-			try {
-				documentTransformer.transform(xmlSource, outputTarget);
-			} catch (TransformerException e) {
-				logger.error(e);
+		if (logger.isDebugEnabled()) {
+			log(messages);
+			if (node != null) {
+				Source xmlSource = new DOMSource(node);
+				StringWriter sw = new StringWriter();
+				Result outputTarget = new StreamResult(sw);
+				try {
+					documentTransformer.transform(xmlSource, outputTarget);
+				} catch (TransformerException e) {
+					logger.error(e);
+				}
+				logger.debug(sw.toString());
 			}
-			logger.debug(sw.toString());
 		}
 	}
 
@@ -481,14 +492,20 @@ public class NavigationManager {
 	 */
 	private String registerSessionURL(HttpServletRequest req, String sessionId) {
 		String curServletURL = NavigationSessionListener.getServletURL(sessionId);
-		logger.debug("--> probing session id '" + sessionId + "' for url: " + curServletURL);
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> looking up session id '" + sessionId + "' for url: " + curServletURL);
+		}
 		if (curServletURL == null) {
 			curServletURL = req.getRequestURL().toString();
 			if (NavigationSessionListener.registerServletURL(sessionId, curServletURL)) {
-				logger.info("Registered session '" + sessionId + "' for url: " + curServletURL);
+				if (logger.isInfoEnabled()) {
+					logger.info("Registered session '" + sessionId + "' for url: " + curServletURL);
+				}
 			} else {
-				logger.info("FAILED to register session '" + sessionId + "' for url: "
-						+ curServletURL);
+				if (logger.isInfoEnabled()) {
+					logger.info("FAILED to register session '" + sessionId + "' for url: "
+							+ curServletURL);
+				}
 			}
 		}
 		return curServletURL;
@@ -523,7 +540,9 @@ public class NavigationManager {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("Couldn't load all configuration files.", e);
+			if (logger.isErrorEnabled()) {
+				logger.error("Couldn't load all configuration files.", e);
+			}
 			return 0;
 		}
 		return -1;
@@ -976,7 +995,9 @@ public class NavigationManager {
 						sourceFile = new File(location);
 					} catch (Exception e) {
 						sourceFile = null;
-						logger.error(e);
+						if (logger.isErrorEnabled()) {
+							logger.error(e);
+						}
 					}
 				} else {
 					sourceFile = new File(AlfrescoController.UPLOAD_DIRECTORY, location);
@@ -985,7 +1006,9 @@ public class NavigationManager {
 				try {
 					in = new FileInputStream(sourceFile);
 				} catch (FileNotFoundException e) {
-					logger.error(e);
+					if (logger.isErrorEnabled()) {
+						logger.error(e);
+					}
 				}
 
 			}
@@ -1006,21 +1029,27 @@ public class NavigationManager {
 				out.write(bytes, 0, bytesRead);
 			}
 		} catch (Exception e) {
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				logger.error(e);
+			}
 		} finally {
 
 			if (in != null) {
 				try {
 					in.close();
 				} catch (IOException e) {
-					logger.error(e);
+					if (logger.isErrorEnabled()) {
+						logger.error(e);
+					}
 				}
 			}
 			if (out != null) {
 				try {
 					out.close();
 				} catch (IOException e) {
-					logger.error(e);
+					if (logger.isErrorEnabled()) {
+						logger.error(e);
+					}
 				}
 			}
 		}

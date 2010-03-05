@@ -12,6 +12,8 @@ import java.util.Map.Entry;
 import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -34,6 +36,9 @@ import com.bluexml.xforms.messages.MsgId;
  * The Class MappingToolImplAlfrescoToXForms.
  */
 public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
+
+	/** The logger. */
+	protected static Log logger = LogFactory.getLog(MappingToolAlfrescoToClassForms.class);
 
 	/**
 	 * Instantiates a new mapping tool impl alfresco to x forms.
@@ -427,7 +432,9 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 						.asList(new String[] { realInitId }));
 				label = captions.get(0);
 			} catch (Exception e) {
-				logger.error(e);
+				if (logger.isErrorEnabled()) {
+					logger.error("Caught exception while requesting captions", e);
+				}
 			}
 
 			subNode = fillXFormsElementNonInline(xformsDocument, targetClassType, realInitId,
@@ -756,7 +763,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 			Document alfrescoNode, Stack<AssociationType> stack, boolean formIsReadOnly,
 			boolean isServletRequest) throws ServletException {
 		logXML(alfrescoNode, "transformAlfrescoToXForms", "input");
-		
+
 		if (alfrescoNode == null) {
 			return null;
 		}
@@ -775,7 +782,9 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 			fillXFormsDocument(transaction, xformsDocument, alfrescoClass, realType, null, stack,
 					formIsReadOnly, isServletRequest);
 		} catch (Exception e) {
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				logger.error(e);
+			}
 			throw new ServletException(e);
 		}
 

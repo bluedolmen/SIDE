@@ -83,7 +83,9 @@ public class ListAction extends AbstractAction {
 		try {
 			documentTransformer.transform(xmlSource, outputTarget);
 		} catch (TransformerException e) {
-			logger.error("Failed to convert the list document into a string", e);
+			if (logger.isErrorEnabled()) {
+				logger.error("Failed to convert the list document into a string", e);
+			}
 			throw new ServletException(MsgId.MSG_DEFAULT_ERROR_MSG.getText());
 		}
 
@@ -139,7 +141,9 @@ public class ListAction extends AbstractAction {
 				// format = StringEscapeUtils.escapeXml(format);
 			}
 		} catch (UnsupportedEncodingException e) {
-			logger.fatal("Unsupported encoding scheme");
+			if (logger.isFatalEnabled()) {
+				logger.fatal("Unsupported encoding scheme");
+			}
 			throw new RuntimeException("Unsupported encoding scheme");
 		}
 

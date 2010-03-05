@@ -308,10 +308,15 @@ public abstract class AbstractAction {
 			resultStr = (String) result;
 			return resultStr;
 		} catch (ClassCastException cce) {
-			logger.warn("Returned result is not of type java.lang.String; will be ignored.", cce);
+			if (logger.isWarnEnabled()) {
+				logger.warn("Returned result is not of type java.lang.String; will be ignored.",
+						cce);
+			}
 			return null;
 		} catch (Exception e) {
-			logger.error("An error occurred when invoking class '" + className + "'", e);
+			if (logger.isErrorEnabled()) {
+				logger.error("An error occurred when invoking class '" + className + "'", e);
+			}
 			return null;
 		}
 	}

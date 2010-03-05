@@ -38,8 +38,10 @@ public class AlfrescoWebscriptException extends ServletException {
 			ByteArrayInputStream bis = new ByteArrayInputStream(result.getBytes());
 			analyzeError(AlfrescoController.getInstance().synchronizedParse(bis)); // #1227
 		} catch (Exception e) {
-			logger.error("Failed to parse Exception :");
-			logger.error(result);
+			if (logger.isErrorEnabled()) {
+				logger.error("Failed to parse Exception :");
+				logger.error(result);
+			}
 		}
 	}
 
@@ -58,9 +60,11 @@ public class AlfrescoWebscriptException extends ServletException {
 		Element exceptionElement = parse.getDocumentElement();
 		analyzeError(exceptionElement);
 		if (gotCauseMessage == false) {
-			// we don't want the user to see the exception message
+			// we don't want the user to see the exception message so use sth more user-friendly
 			sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_DEFAULT_ERROR_MSG));
-			logger.error(errorMessage);
+			if (logger.isErrorEnabled()) {
+				logger.error(errorMessage);
+			}
 		}
 		cause = sb.toString();
 	}
@@ -74,7 +78,9 @@ public class AlfrescoWebscriptException extends ServletException {
 					String assoName = getAssociationName(message, 0);
 					// assoName should never trim to null ! if it is, algorithm problem!
 					if (StringUtils.trimToNull(assoName) == null) {
-						logger.error("Caught an unknown integrity violation: " + message);
+						if (logger.isErrorEnabled()) {
+							logger.error("Caught an unknown integrity violation: " + message);
+						}
 						sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_DEFAULT_ERROR_MSG));
 					} else {
 						sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_INTEGRITY_VIOLATION,

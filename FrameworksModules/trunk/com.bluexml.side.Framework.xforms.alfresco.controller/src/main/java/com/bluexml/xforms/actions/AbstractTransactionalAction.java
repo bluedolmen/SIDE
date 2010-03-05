@@ -37,7 +37,7 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 
 				// all went OK, we may delete the temporary files if any
 				deleteUploadedFiles(transaction.getTempFileNames(), true);
-				
+
 				// update the status message
 				if (getActionName() == MsgId.INT_ACT_CODE_SUBMIT.getText()) {
 					if (curPage.getDataId() == null) { // CREATE
@@ -64,7 +64,9 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 				navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_DELETE_FAILURE) + " "
 						+ e.toString());
 			}
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				logger.error(e);
+			}
 			throw e;
 		}
 		// redirect the client to the appropriate page
@@ -84,13 +86,14 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 		for (String nodeId : list) {
 			delTrans.queueDelete(nodeId);
 		}
-		
+
 		// run the transaction
 		try {
 			delTrans.executeBatch();
 		} catch (ServletException e) {
-			logger.error("Deletion of files uploaded to repository failed.");
-			e.printStackTrace();
+			if (logger.isErrorEnabled()) {
+				logger.error("Deletion of files uploaded to repository failed.", e);
+			}
 		}
 	}
 
@@ -106,7 +109,9 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 				File sourceFile = new File(fileName);
 				sourceFile.delete();
 			} catch (SecurityException io) {
-				logger.error(io);
+				if (logger.isErrorEnabled()) {
+					logger.error(io);
+				}
 			}
 		}
 	}

@@ -285,7 +285,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	}
 
 	/**
-	 * Xforms attribute to alfresco.
+	 * Xforms attribute to alfresco. //$$ TRACE LOG
 	 * 
 	 * @param child
 	 *            the child
@@ -331,9 +331,6 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 				value = getDateTimeFromDateAndTime(date, time);
 			} else {
 				value = convertXformsAttributeToAlfresco(inputTextContent, type, enumName);
-			}
-			if (controller.isFileField(attributeType)) {
-				logger.debug("Attribute " + alfrescoName + " is a FileField");
 			}
 			result.getValue().clear();
 			ValueType valueType = alfrescoObjectFactory.createValueType();

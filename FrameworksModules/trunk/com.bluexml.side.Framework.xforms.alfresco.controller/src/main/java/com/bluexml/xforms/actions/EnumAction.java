@@ -157,7 +157,9 @@ public class EnumAction extends AbstractReadAction {
 		try {
 			getStaticEnum(type);
 		} catch (ServletException e) {
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				logger.error(e);
+			}
 		}
 		return enumValues.get(type).get(key);
 	}
@@ -166,7 +168,9 @@ public class EnumAction extends AbstractReadAction {
 		try {
 			getStaticEnum(type);
 		} catch (ServletException e) {
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				logger.error(e);
+			}
 		}
 		return enumKeys.get(type).get(value);
 	}

@@ -366,7 +366,6 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		HashMap<QName, Serializable> properties = new HashMap<QName, Serializable>();
 		currentPage = navigationPath.peekCurrentPage();
 
-		
 		// check the transition although should never throw up... normally.
 		String transitionToTake = requestParameters.get(TRANSITION_NAME);
 		if (StringUtils.trimToEmpty(transitionToTake).equals(StringUtils.EMPTY)) {
@@ -416,8 +415,9 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		try {
 			action.submit();
 		} catch (Exception e) {
-			logger.error("Data auto-save at workflow: error when saving the data form.");
-			e.printStackTrace();
+			if (logger.isErrorEnabled()) {
+				logger.error("Auto-save at workflow: error when saving the data form.", e);
+			}
 			return resultBean;
 		}
 
@@ -692,14 +692,13 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @param node
 	 * @param taskTypeName
 	 * @return null in case of exception
-	 * @throws ServletException 
+	 * @throws ServletException
 	 */
 	private GenericClass collectTaskProperties(HashMap<QName, Serializable> properties, Node node,
 			WorkflowTaskType taskType, String processId) throws ServletException {
 		String taskTypeName = taskType.getName();
 		String taskTypeId = taskType.getTaskId();
 
-		
 		Element root;
 		if (node instanceof Document) {
 			root = ((Document) node).getDocumentElement();

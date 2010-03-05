@@ -45,7 +45,9 @@ public class MsgPool {
 			}
 			pool.load(inputStream);
 		} catch (Exception e) {
-			logger.error("Error opening the message file.");
+			if (logger.isErrorEnabled()) {
+				logger.error("Error opening the message file.");
+			}
 		}
 		
 		// close the stream if applicable
@@ -53,7 +55,9 @@ public class MsgPool {
 			try {
 				inputStream.close();
 			} catch (IOException e) {
-				logger.error("Failed to close the message file. Continuing anyway.");
+				if (logger.isErrorEnabled()) {
+					logger.error("Failed to close the message file. Continuing anyway.");
+				}
 				e.printStackTrace();
 			}
 		}
@@ -111,7 +115,9 @@ public class MsgPool {
 		if (hasProperty(theKey) == true) {
 			return "";
 		}
-		logger.warn("Message not found for key: " + theKey);
+		if (logger.isWarnEnabled()) {
+			logger.warn("Message not found for key: " + theKey);
+		}
 		if (StringUtils.equals(theKey, MsgId.MSG_KEY_NOT_FOUND.getText())) {
 			return MsgId.INT_MSGPOOL_NO_MESSAGE_FILE.getText();
 		}

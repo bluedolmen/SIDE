@@ -79,7 +79,9 @@ public class GetAction extends AbstractReadAction {
 		try {
 			docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
-			logger.error("Failed to obtain a document builder", e);
+			if (logger.isErrorEnabled()) {
+				logger.error("Failed to obtain a document builder", e);
+			}
 			return null;
 		}
 		Document instance = docBuilder.newDocument();

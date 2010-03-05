@@ -169,7 +169,9 @@ public class AlfrescoController {
 			docBuilder.setEntityResolver(resolver);
 			// ** #1330
 		} catch (Exception e) {
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				logger.error(e);
+			}
 			throw new RuntimeException(e);
 		}
 
@@ -185,7 +187,9 @@ public class AlfrescoController {
 			loadProperties(formsPropertiesPath, messagesPropertiesPath);
 			loadRedirectionTable(null);
 		} catch (Exception e) {
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				logger.error(e);
+			}
 			throw new RuntimeException(e);
 		}
 	}
@@ -222,8 +226,10 @@ public class AlfrescoController {
 				// keep the path so that a subsequent reload does not require re-giving the path
 				formsPropertiesPath = formsFilePath;
 			} catch (Exception e) {
-				logger.warn("Configuration file 'forms.properties' not found at '" + formsFilePath
-						+ "'. Will use defaults.", e);
+				if (logger.isWarnEnabled()) {
+					logger.warn("Configuration file 'forms.properties' not found at '"
+							+ formsFilePath + "'. Will use defaults.", e);
+				}
 				resForms = loadPropertiesFormsDefault();
 			}
 		} else if (StringUtils.trimToNull(formsPropertiesPath) != null) { // reusing previous path
@@ -232,8 +238,10 @@ public class AlfrescoController {
 				InputStream stream = new FileInputStream(theFile);
 				resForms = loadPropertiesFormsFromStream(stream);
 			} catch (Exception e) {
-				logger.warn("Configuration file 'forms.properties' not found at last location "
-						+ formsPropertiesPath, e);
+				if (logger.isWarnEnabled()) {
+					logger.warn("Configuration file 'forms.properties' not found at last location "
+							+ formsPropertiesPath, e);
+				}
 				resForms = loadPropertiesFormsDefault();
 			}
 		} else {
@@ -251,8 +259,10 @@ public class AlfrescoController {
 				streamMsgs = new FileInputStream(theFile);
 				messagesPropertiesPath = messagesFilePath;
 			} catch (Exception e) {
-				logger.warn("Configuration file 'messages.properties' not found at '"
-						+ messagesFilePath + "'. Will use defaults.", e);
+				if (logger.isWarnEnabled()) {
+					logger.warn("Configuration file 'messages.properties' not found at '"
+							+ messagesFilePath + "'. Will use defaults.", e);
+				}
 				streamMsgs = loadPropertiesMessagesDefaults();
 			}
 		} else if (StringUtils.trimToNull(messagesPropertiesPath) != null) {
@@ -260,8 +270,11 @@ public class AlfrescoController {
 				File theFile = new File(messagesPropertiesPath);
 				streamMsgs = new FileInputStream(theFile);
 			} catch (Exception e) {
-				logger.error("Configuration file 'messages.properties' not found at last location "
-						+ messagesPropertiesPath, e);
+				if (logger.isWarnEnabled()) {
+					logger.error(
+							"Configuration file 'messages.properties' not found at last location "
+									+ messagesPropertiesPath, e);
+				}
 				streamMsgs = loadPropertiesMessagesDefaults();
 			}
 		} else {
@@ -291,7 +304,10 @@ public class AlfrescoController {
 			// I don't think this will ever be reached
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			logger.error("Configuration file 'forms.properties' not found in WEB-INF/classes.", e);
+			if (logger.isErrorEnabled()) {
+				logger.error("Configuration file 'forms.properties' not found in WEB-INF/classes.",
+						e);
+			}
 		}
 		return false;
 	}
@@ -300,8 +316,10 @@ public class AlfrescoController {
 		// get the default file
 		URL msgURL = AlfrescoController.class.getResource("/messages.properties");
 		if (msgURL == null) {
-			logger
-					.error("Configuration file 'messages.properties' not found in WEB-INF/classes. Null URL received from system.");
+			if (logger.isErrorEnabled()) {
+				logger
+						.error("Configuration file 'messages.properties' not found in WEB-INF/classes. Null URL received from system.");
+			}
 			return null;
 		}
 		try {
@@ -311,8 +329,12 @@ public class AlfrescoController {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			logger.error("Configuration file 'messages.properties' not found in WEB-INF/classes.",
-					e);
+			if (logger.isErrorEnabled()) {
+				logger
+						.error(
+								"Configuration file 'messages.properties' not found in WEB-INF/classes.",
+								e);
+			}
 		}
 		return null;
 	}
@@ -330,7 +352,9 @@ public class AlfrescoController {
 			instance.initConfig(config);
 			return true;
 		} catch (Exception e) {
-			logger.error("Failed in loading and initializing 'forms.properties'.", e);
+			if (logger.isErrorEnabled()) {
+				logger.error("Failed in loading and initializing 'forms.properties'.", e);
+			}
 			return false;
 		}
 	}
@@ -420,7 +444,9 @@ public class AlfrescoController {
 			Mapping mappingInstance = (Mapping) mappingUnmarshaller.unmarshal(mapping);
 			mappingTool = new MappingTool(mappingInstance, this);
 		} catch (JAXBException e) {
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				logger.error(e);
+			}
 			throw new RuntimeException(e);
 		} finally {
 			mapping.close();
@@ -607,8 +633,10 @@ public class AlfrescoController {
 			int value = Integer.parseInt(property);
 			MAX_RESULTS = value;
 		} catch (NumberFormatException e) {
-			logger.error("Can't parse the value '" + property + "' for key '"
-					+ MsgId.KEY_MAX_RESULTS + "'. Will revert to the default value.", e);
+			if (logger.isErrorEnabled()) {
+				logger.error("Can't parse the value '" + property + "' for key '"
+						+ MsgId.KEY_MAX_RESULTS + "'. Will revert to the default value.", e);
+			}
 			MAX_RESULTS = 50;
 		}
 
@@ -630,8 +658,11 @@ public class AlfrescoController {
 			int depth = Integer.parseInt(property);
 			UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH = depth;
 		} catch (NumberFormatException e) {
-			logger.error("Can't parse the value '" + property + "' for key '"
-					+ MsgId.KEY_UPLOAD_DIR_PATH_DEPTH + "'. Will revert to the default value.", e);
+			if (logger.isErrorEnabled()) {
+				logger.error("Can't parse the value '" + property + "' for key '"
+						+ MsgId.KEY_UPLOAD_DIR_PATH_DEPTH + "'. Will revert to the default value.",
+						e);
+			}
 			UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH = 3;
 		}
 
@@ -652,12 +683,17 @@ public class AlfrescoController {
 	 */
 	private void checkDirectoryExists(File file, boolean isUploadDir) {
 		if (!file.exists()) {
-			logger.error(file.getAbsolutePath() + " doesn't exist. Will try to create the path.");
+			if (logger.isErrorEnabled()) {
+				logger.error(file.getAbsolutePath()
+						+ " doesn't exist. Will try to create the path.");
+			}
 			if (file.mkdirs() == false) {
 				String dirName = isUploadDir ? "upload" : "temp";
-
-				logger.error("Couldn't create " + file.getAbsolutePath() + ". Will default to '"
-						+ dirName + "' under the webapp's current folder.");
+				if (logger.isErrorEnabled()) {
+					logger.error("Couldn't create " + file.getAbsolutePath()
+							+ ". Will default to '" + dirName
+							+ "' under the webapp's current folder.");
+				}
 				// we need to create the directory under the webapp's folder
 				URL url = AlfrescoController.class.getResource("/mapping.xml");
 				File mappingFile = null;
@@ -678,8 +714,10 @@ public class AlfrescoController {
 						result = TEMP_DIRECTORY.mkdirs();
 					}
 					if (result == false) {
-						logger.error("Couldn't create directory " + dirPath
-								+ ". Uploads will not perform correctly.");
+						if (logger.isErrorEnabled()) {
+							logger.error("Couldn't create directory " + dirPath
+									+ ". Uploads will not perform correctly.");
+						}
 					}
 				} catch (URISyntaxException e) {
 					e.printStackTrace();
@@ -796,7 +834,9 @@ public class AlfrescoController {
 			file = new File(fullFileName);
 
 			if (!file.exists()) {
-				logger.error("The file '" + fullFileName + "' to be uploaded does not exist.");
+				if (logger.isErrorEnabled()) {
+					logger.error("The file '" + fullFileName + "' to be uploaded does not exist.");
+				}
 				throw new ServletException(
 						"The file to upload does not exist. Your session may have expired. Please load and submit the form again.");
 			}
@@ -1040,10 +1080,11 @@ public class AlfrescoController {
 		try { // #1160
 			sourceFile = new File(fileURI);
 		} catch (Exception e) {
-			String message = "XForms Controller: error when processing the file to upload. Check the path: "
-					+ fileURI;
-			logger.error(message);
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				String message = "XForms Controller: error when processing the file to upload. Check the path: "
+						+ fileURI;
+				logger.error(message, e);
+			}
 			return null;
 		}
 
@@ -1390,7 +1431,9 @@ public class AlfrescoController {
 					MsgId.INT_WEBSCRIPT_OPCODE_LIST);
 			// ** #1234
 			if (reqDoc == null) {
-				logger.error("The Alfresco server is unavailable. Returning a dummy list.");
+				if (logger.isErrorEnabled()) {
+					logger.error("The Alfresco server is unavailable. Returning a dummy list.");
+				}
 				setStandaloneMode(true);
 				reqDoc = requestDummyDocumentList(alfTypeName, "0");
 			}
@@ -1486,7 +1529,9 @@ public class AlfrescoController {
 		} catch (ConnectException e) {
 			throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
 		} catch (IOException e) {
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				logger.error("Caught exception while requesting string from Alfresco", e);
+			}
 			throw new ServletException(MsgPool.getMsg(MsgId.MSG_DEFAULT_ERROR_MSG));
 		}
 		if (result != null && result.startsWith("<exception>")) {
@@ -1523,7 +1568,9 @@ public class AlfrescoController {
 			}
 			return null;
 		} catch (Exception e) {
-			logger.error(e);
+			if (logger.isErrorEnabled()) {
+				logger.error("Caught exception while requesting document from Alfresco", e);
+			}
 			throw new ServletException(e);
 		}
 		if (result != null) {
@@ -1623,8 +1670,12 @@ public class AlfrescoController {
 				try {
 					result = Integer.parseInt(resultStr);
 				} catch (NumberFormatException e) {
-					logger.error("Can't parse the value '" + resultStr + "' for parameter '"
-							+ MsgId.PARAM_MAX_RESULTS + "'. Will revert to the previous value.", e);
+					if (logger.isErrorEnabled()) {
+						logger.error(
+								"Can't parse the value '" + resultStr + "' for parameter '"
+										+ MsgId.PARAM_MAX_RESULTS
+										+ "'. Will revert to the previous value.", e);
+					}
 					result = MAX_RESULTS;
 				}
 			}
@@ -1940,10 +1991,15 @@ public class AlfrescoController {
 			} catch (Exception e) {
 				// nothing to do
 			}
-			logger.debug("Getting edit id, found: '" + id + "' with data type: '" + dataType + "'");
+			if (logger.isDebugEnabled()) {
+				logger.debug("Getting edit id, found: '" + id + "' with data type: '" + dataType
+						+ "'");
+			}
 			return new EditNodeBean(id, dataType);
 		}
-		logger.error("No id found for node edition.");
+		if (logger.isErrorEnabled()) {
+			logger.error("No id found for node edition.");
+		}
 		return null;
 	}
 
@@ -2350,7 +2406,9 @@ public class AlfrescoController {
 		paramList.add(instanceId);
 		paths = (List<WorkflowPath>) workflowRequestWrapper(null, "getWorkflowPaths", paramList);
 		if (paths == null) {
-			logger.error(MsgId.INT_ERR_NULL_WKFLW_INSTANCE_PATHS + instanceId);
+			if (logger.isErrorEnabled()) {
+				logger.error(MsgId.INT_ERR_NULL_WKFLW_INSTANCE_PATHS + instanceId);
+			}
 			return result;
 		}
 		// we need to probe all active paths
@@ -2503,7 +2561,9 @@ public class AlfrescoController {
 		String taskId = fullTaskId;
 		WorkflowTaskType taskType = mappingTool.getWorkflowTaskType(taskId, true);
 		if (taskType == null) {
+			if (logger.isErrorEnabled()) {
 			logger.error("No task definition in the mapping for task '" + taskId + "'");
+			}
 			return "";
 		}
 		return taskType.getName();
@@ -2757,18 +2817,24 @@ public class AlfrescoController {
 	 */
 	public boolean patchWorkflowInstance(AlfrescoTransaction transaction, String wkFormName,
 			Document doc, String instanceId) {
+		if (logger.isDebugEnabled()) {
 		logger.debug("Patching workflow instance with Id:'" + instanceId + "', form name: "
 				+ wkFormName);
+		}
 		QName qname;
 		String namespaceURI = null; // to be set once
 		Map<QName, Serializable> properties = null; // to be set once
 
 		if (StringUtils.trimToNull(instanceId) == null) {
+			if (logger.isDebugEnabled()) {
 			logger.debug("  No patching performed: the instanceId is null");
+			}
 			return true;
 		}
 		if (instanceId.equals("null")) {
+			if (logger.isDebugEnabled()) {
 			logger.debug("  No patching performed, invalid instanceId with string 'null'");
+			}
 			return true;
 		}
 		Element root = doc.getDocumentElement();
@@ -3138,7 +3204,9 @@ public class AlfrescoController {
 			}
 			URL url = AlfrescoController.class.getResource("/redirect.xml");
 			if (url == null) {
+				if (logger.isErrorEnabled()) {
 				logger.error("Redirection file not found. Redirection will not be available.");
+				}
 				return false;
 			}
 			File file;

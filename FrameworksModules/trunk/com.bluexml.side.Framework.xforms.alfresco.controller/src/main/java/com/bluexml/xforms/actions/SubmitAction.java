@@ -71,9 +71,11 @@ public class SubmitAction extends AbstractTransactionalAction {
 
 		// if in search mode, a specific processing applies
 		if (isSearching) {
-			logger.debug("Redirecting after search mode or search form");
-			logger.debug(" --> targetURL:'" + submitURL + "'");
-			logger.debug(" --> search string:'" + transactionId + "'");
+			if (logger.isDebugEnabled()) {
+				logger.debug("Redirecting after search mode or search form");
+				logger.debug(" --> targetURL:'" + submitURL + "'");
+				logger.debug(" --> search string:'" + transactionId + "'");
+			}
 			if (StringUtils.trimToNull(submitURL) == null) {
 				throw new ServletException("No next page was provided for this search.");
 			}

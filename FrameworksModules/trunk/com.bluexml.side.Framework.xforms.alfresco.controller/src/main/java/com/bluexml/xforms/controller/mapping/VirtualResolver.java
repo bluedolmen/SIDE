@@ -123,7 +123,9 @@ public class VirtualResolver {
 			try {
 				return BeanUtils.describe(this).toString();
 			} catch (Exception e) {
-				logger.error("Error converting object to String", e);
+				if (logger.isErrorEnabled()) {
+					logger.error("Error converting object to String", e);
+				}
 			}
 			return super.toString();
 		}
@@ -198,7 +200,9 @@ public class VirtualResolver {
 			virtualElementParent.appendChild(clonedValue);
 			value.virtualParent.appendChild(virtualElementParent);
 		} else {
-			logger.error("Invalid value " + value);
+			if (logger.isErrorEnabled()) {
+				logger.error("Invalid value " + value);
+			}
 		}
 	}
 
@@ -223,7 +227,9 @@ public class VirtualResolver {
 				value.realParent.appendChild(clonedVirtual);
 			}
 		} else {
-			logger.error("Invalid value " + value);
+			if (logger.isErrorEnabled()) {
+				logger.error("Invalid value " + value);
+			}
 		}
 	}
 
@@ -284,7 +290,9 @@ public class VirtualResolver {
 					}
 				}
 			} else {
-				logger.error("referenceElement is null");
+				if (logger.isErrorEnabled()) {
+					logger.error("referenceElement is null");
+				}
 			}
 
 		}

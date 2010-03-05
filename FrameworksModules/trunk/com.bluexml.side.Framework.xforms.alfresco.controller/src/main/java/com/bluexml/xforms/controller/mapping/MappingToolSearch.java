@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -30,6 +32,9 @@ import com.bluexml.xforms.messages.MsgId;
  * 
  */
 public class MappingToolSearch extends MappingToolCommon {
+
+	/** The logger. */
+	protected static Log logger = LogFactory.getLog(MappingToolSearch.class);
 
 	/**
 	 * @param mapping
@@ -135,6 +140,9 @@ public class MappingToolSearch extends MappingToolCommon {
 			throws ServletException {
 		SearchFormType sfType = getSearchFormType(formName);
 		if (sfType == null) {
+			if (logger.isErrorEnabled()) {
+				logger.error("No search form found with id '" + formName + "'");
+			}
 			throw new ServletException("The search form '" + formName
 					+ "' was not found in the mapping.xml file.");
 		}
