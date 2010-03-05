@@ -32,8 +32,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.alfresco.service.cmr.repository.NodeRef;
-import org.alfresco.service.cmr.security.AuthorityType;
-import org.alfresco.service.cmr.security.PermissionService;
 import org.alfresco.service.cmr.workflow.WorkflowDefinition;
 import org.alfresco.service.cmr.workflow.WorkflowInstance;
 import org.alfresco.service.cmr.workflow.WorkflowPath;
@@ -57,6 +55,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.bluexml.side.form.utils.DOMUtil;
+import com.bluexml.xforms.controller.alfresco.agents.SystemAgent;
 import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.AttributeType;
 import com.bluexml.xforms.controller.binding.Batch;
@@ -144,6 +143,8 @@ public class AlfrescoController {
 
 	/** Stores redirection info keyed by form names */
 	private static Map<String, RedirectionBean> targetTable = new HashMap<String, RedirectionBean>();
+
+	private SystemAgent systemAgent;
 
 	/** The last initParams we saw. */
 	// <-- not safe in multi-user or production environments
@@ -365,6 +366,9 @@ public class AlfrescoController {
 	private AlfrescoController() {
 		super();
 		// singleton
+
+		// reference the agents
+		systemAgent = new SystemAgent(this, xstream);
 	}
 
 	/**
@@ -427,6 +431,95 @@ public class AlfrescoController {
 	/** The mapping tool. */
 	private MappingTool mappingTool;
 
+	
+	//
+	//
+	// SystemAgent
+	//
+	//
+	/**
+	 * Returns all known groups, including standard Alfresco groups.
+	 * 
+	 * @param asGroups
+	 *            if true, specifies that only groups are returned. If false, only users. To have
+	 *            the full set of users and groups, this function must be called twice.
+	 * @return the set of registered authorities. Returns <b>null</b> if an exception occurred or if
+	 *         the value is <b>null</b> by itself.
+	 */
+	public Set<String> systemGetAllAuthoritiesAsGroupsOrUsers(boolean asGroups) {
+		return systemAgent.getAllAuthoritiesAsGroupsOrUsers(asGroups);
+	}
+
+	/**
+	 * Returns all groups a specific user belongs to, including non immediate parent groups.
+	 * 
+	 * @param userName
+	 *            the name of the user.
+	 * @return the set of groups the user is part of. Returns <b>null</b> if an exception occurred
+	 *         or if the value is <b>null</b> by itself.
+	 */
+	public Set<String> systemGetContainingGroups(String userName) {
+		return systemAgent.getContainingGroups(userName);
+	}
+
+	/**
+	 * Gets the value of a property for a node.
+	 * 
+	 * @param node
+	 *            a node reference
+	 * @param propertyName
+	 * @return the value of the property for the node. Returns <b>null</b> if an exception occurred
+	 *         or if the value is <b>null</b>.
+	 */
+	public String systemGetNodeProperty(NodeRef node, QName propertyName) {
+		return systemAgent.getNodeProperty(node, propertyName);
+	}
+
+	/**
+	 * Returns the node ref for a user identified by name. If no user with that name exists, the
+	 * authority will not be created.
+	 * 
+	 * @param userName
+	 * @return the noderef for the user name. Returns <b>null</b> if an exception occurred or if the
+	 *         value is <b>null</b>.
+	 */
+	public NodeRef systemGetNodeRefForUser(String userName) {
+		return systemAgent.getNodeRefForUser(userName);
+	}
+
+	/**
+	 * Returns the node ref for a user group identified by name.
+	 * 
+	 * @param groupName
+	 *            the group name as can be seen in Alfresco's web client. The system prefix for
+	 *            groups will be prepended before calling the web script.
+	 * @return the noderef for the user group. Returns <b>null</b> if an exception occurred or if
+	 *         the group does not exist.
+	 */
+	public NodeRef systemGetNodeRefForGroup(String groupName) {
+
+		return systemAgent.getNodeRefForGroup(groupName);
+	}
+
+	/**
+	 * Gets the type of a node.
+	 * 
+	 * @param dataId
+	 *            the node's id, with or without the protocol and store.
+	 * @return the QName that corresponds to the content type. Returns <b>null</b> if an exception
+	 *         occurred or if the value is <b>null</b>, which is a hint that either the webscript is
+	 *         not available or the object does not exist.
+	 */
+	public QName systemGetNodeType(String dataId) {
+		return systemAgent.getNodeType(patchDataId(dataId));
+	}
+
+	//
+	//
+	// MappingAgent
+	//
+	//
+	
 	/**
 	 * Unmarshalls the mapping from the given stream.
 	 * 
@@ -1506,7 +1599,7 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Provides a bridge to the webscript, returning a String.
+	 * Provides a bridge to the webscript, returning a String. //$$ NON-API
 	 * 
 	 * @param parameters
 	 *            the parameters
@@ -1520,7 +1613,7 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
-	private String requestString(AlfrescoTransaction transaction, Map<String, String> parameters,
+	public String requestString(AlfrescoTransaction transaction, Map<String, String> parameters,
 			MsgId opCode) throws ServletException {
 		String result = null;
 		try {
@@ -2203,193 +2296,6 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Gets the value of a property for a node.
-	 * 
-	 * @param node
-	 * @param propertyName
-	 * @return the value of the property for the node. Returns <b>null</b> if an exception occurred
-	 *         or if the value is <b>null</b>.
-	 */
-	public String systemGetNodeProperty(NodeRef node, QName propertyName) {
-
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("serviceName", "NodeService");
-		parameters.put("methodName", "getProperty");
-		Vector<Object> paramList = new Vector<Object>();
-		// add parameters to the method in paramList
-		paramList.add(node);
-		paramList.add(propertyName);
-		parameters.put("methodParams", xstream.toXML(paramList));
-		String result;
-		try {
-			result = (String) xstream.fromXML(requestString(new AlfrescoTransaction(this),
-					parameters, MsgId.INT_WEBSCRIPT_OPCODE_SERVICE));
-		} catch (ServletException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return result;
-	}
-
-	/**
-	 * Gets the type of a node.
-	 * 
-	 * @param dataId
-	 *            the node's id, with or without the protocol and store.
-	 * @return the QName that corresponds to the content type. Returns <b>null</b> if an exception
-	 *         occurred or if the value is <b>null</b>, which is a hint that either the webscript is
-	 *         not available or the object does not exist.
-	 */
-	public QName systemGetNodeType(String dataId) {
-
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("serviceName", "NodeService");
-		parameters.put("methodName", "getType");
-		Vector<Object> paramList = new Vector<Object>();
-
-		// add parameters to the method in paramList
-		NodeRef noderef = new NodeRef(patchDataId(dataId));
-		paramList.add(noderef);
-		parameters.put("methodParams", xstream.toXML(paramList));
-
-		QName result;
-		try {
-			String requestString = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
-			result = (QName) xstream.fromXML(requestString);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		return result;
-	}
-
-	/**
-	 * Returns the node ref for a user identified by name. If no user with that name exists, the
-	 * authority will not be created.
-	 * 
-	 * @param userName
-	 * @return the noderef for the user name. Returns <b>null</b> if an exception occurred or if the
-	 *         value is <b>null</b>.
-	 */
-	public NodeRef systemGetNodeRefForUser(String userName) {
-
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("serviceName", "AuthorityDAO");
-		parameters.put("methodName", "getAuthorityNodeRefOrNull");
-		Vector<Object> paramList = new Vector<Object>();
-		// add parameters to the method in paramList
-		paramList.add(userName);
-		parameters.put("methodParams", xstream.toXML(paramList));
-		NodeRef result;
-		try {
-			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
-			result = (NodeRef) xstream.fromXML(resultStr);
-		} catch (ServletException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return result;
-	}
-
-	/**
-	 * Returns the node ref for a user group identified by name.
-	 * 
-	 * @param groupName
-	 *            the group name as can be seen in Alfresco's web client. The system prefix for
-	 *            groups will be prepended before calling the web script.
-	 * @return the noderef for the user group. Returns <b>null</b> if an exception occurred or if
-	 *         the group does not exist.
-	 */
-	public NodeRef systemGetNodeRefForGroup(String groupName) {
-
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("serviceName", "AuthorityDAO");
-		parameters.put("methodName", "getAuthorityNodeRefOrNull");
-		Vector<Object> paramList = new Vector<Object>();
-		// add parameters to the method in paramList
-		paramList.add(PermissionService.GROUP_PREFIX + groupName);
-		parameters.put("methodParams", xstream.toXML(paramList));
-		NodeRef result;
-		try {
-			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
-			result = (NodeRef) xstream.fromXML(resultStr);
-		} catch (ServletException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return result;
-	}
-
-	/**
-	 * Returns all known groups, including standard Alfresco groups.
-	 * 
-	 * @param asGroups
-	 *            if true, specifies that only groups are returned. If false, only users.
-	 * @return the set of registered user groups. Returns <b>null</b> if an exception occurred or if
-	 *         the value is <b>null</b> by itself.
-	 */
-	@SuppressWarnings("unchecked")
-	public Set<String> systemGetAllAuthoritiesAsGroupsOrUsers(boolean asGroups) {
-
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("serviceName", "AuthorityDAO");
-		parameters.put("methodName", "getAllAuthorities");
-		Vector<Object> paramList = new Vector<Object>();
-		// add parameters to the method in paramList
-		if (asGroups) {
-			paramList.add(AuthorityType.GROUP);
-		} else {
-			paramList.add(AuthorityType.USER);
-		}
-		parameters.put("methodParams", xstream.toXML(paramList));
-		Set<String> result;
-		try {
-			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
-			result = (Set<String>) xstream.fromXML(resultStr);
-		} catch (ServletException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return result;
-	}
-
-	/**
-	 * Returns all groups a specific user belongs to, including non immediate parent groups.
-	 * 
-	 * @param userName
-	 *            the name of the user.
-	 * @return the set of groups the user is part of. Returns <b>null</b> if an exception occurred
-	 *         or if the value is <b>null</b> by itself.
-	 */
-	@SuppressWarnings("unchecked")
-	public Set<String> systemGetContainingGroups(String userName) {
-
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("serviceName", "AuthorityDAO");
-		parameters.put("methodName", "getContainingAuthorities");
-		Vector<Object> paramList = new Vector<Object>();
-		// add parameters to the method in paramList
-		paramList.add(AuthorityType.GROUP);
-		paramList.add(userName);
-		paramList.add(false);
-		parameters.put("methodParams", xstream.toXML(paramList));
-		Set<String> result;
-		try {
-			String resultStr = requestString(new AlfrescoTransaction(this), parameters,
-					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
-			result = (Set<String>) xstream.fromXML(resultStr);
-		} catch (ServletException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return result;
-	}
-
-	/**
 	 * Retrieves all in-progress tasks found for the instance. Since several paths may be associated
 	 * with the instance, each active path may provide tasks.
 	 * 
@@ -2562,7 +2468,7 @@ public class AlfrescoController {
 		WorkflowTaskType taskType = mappingTool.getWorkflowTaskType(taskId, true);
 		if (taskType == null) {
 			if (logger.isErrorEnabled()) {
-			logger.error("No task definition in the mapping for task '" + taskId + "'");
+				logger.error("No task definition in the mapping for task '" + taskId + "'");
 			}
 			return "";
 		}
@@ -2815,11 +2721,11 @@ public class AlfrescoController {
 	 * @return false if a lethal exception occurred. True if the normal end of the function was
 	 *         reached, which does not imply anything about the setting of initial values.
 	 */
-	public boolean patchWorkflowInstance(AlfrescoTransaction transaction, String wkFormName,
+	public boolean workflowPatchInstance(AlfrescoTransaction transaction, String wkFormName,
 			Document doc, String instanceId) {
 		if (logger.isDebugEnabled()) {
-		logger.debug("Patching workflow instance with Id:'" + instanceId + "', form name: "
-				+ wkFormName);
+			logger.debug("Patching workflow instance with Id:'" + instanceId + "', form name: "
+					+ wkFormName);
 		}
 		QName qname;
 		String namespaceURI = null; // to be set once
@@ -2827,13 +2733,13 @@ public class AlfrescoController {
 
 		if (StringUtils.trimToNull(instanceId) == null) {
 			if (logger.isDebugEnabled()) {
-			logger.debug("  No patching performed: the instanceId is null");
+				logger.debug("  No patching performed: the instanceId is null");
 			}
 			return true;
 		}
 		if (instanceId.equals("null")) {
 			if (logger.isDebugEnabled()) {
-			logger.debug("  No patching performed, invalid instanceId with string 'null'");
+				logger.debug("  No patching performed, invalid instanceId with string 'null'");
 			}
 			return true;
 		}
@@ -2886,7 +2792,7 @@ public class AlfrescoController {
 	 * @return the name of the data form. If the form is already a data form, its name is returned.
 	 *         If the form is a workflow form, the name of its data form is returned.
 	 */
-	public String getUnderlyingForm(String formName) {
+	public String workflowGetUnderlyingDataForm(String formName) {
 		WorkflowTaskType taskType = getWorkflowTaskType(formName);
 		if (taskType == null) {
 			FormType formType = getFormType(formName);
@@ -2895,7 +2801,7 @@ public class AlfrescoController {
 			}
 			return formType.getName();
 		}
-		return getUnderlyingForm(taskType.getDataForm());
+		return workflowGetUnderlyingDataForm(taskType.getDataForm());
 	}
 
 	/**
@@ -3205,7 +3111,7 @@ public class AlfrescoController {
 			URL url = AlfrescoController.class.getResource("/redirect.xml");
 			if (url == null) {
 				if (logger.isErrorEnabled()) {
-				logger.error("Redirection file not found. Redirection will not be available.");
+					logger.error("Redirection file not found. Redirection will not be available.");
 				}
 				return false;
 			}
@@ -3284,4 +3190,5 @@ public class AlfrescoController {
 		return mappingTool.getClassTypeWithDataType(dataType);
 	}
 
+	
 }
