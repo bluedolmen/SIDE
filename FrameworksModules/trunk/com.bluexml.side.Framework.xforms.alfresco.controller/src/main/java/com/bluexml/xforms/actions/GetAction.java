@@ -126,7 +126,7 @@ public class GetAction extends AbstractReadAction {
 		//
 		// get the instance for the task
 		Document docWkflw = controller.getWorkflowFormInstance(wkFormName);
-		controller.patchWorkflowInstance(transaction, wkFormName, docWkflw, currentPage
+		controller.workflowPatchInstance(transaction, wkFormName, docWkflw, currentPage
 				.getWkflwInstanceId());
 		//
 		// get the instance of the attached data form
