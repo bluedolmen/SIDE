@@ -47,7 +47,7 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>xforms.war.${artifactId}-${version}</finalName>
+    <finalName>xforms.war.${project.artifactId}-${project.version}</finalName>
     <defaultGoal>install</defaultGoal>
     <plugins>
       <plugin>
