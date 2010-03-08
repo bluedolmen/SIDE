@@ -147,8 +147,15 @@ public class AlfrescoTransaction {
 			initializeBatch();
 		}
 		if (batch.getCreateOrUpdateOrDelete().size() > 0) {
-			alfrescoController.executeBatch(this, batch);
+			alfrescoController.executeBatch(this);
 		}
+	}
+
+	/**
+	 * @return the batch
+	 */
+	public Batch getBatch() {
+		return batch;
 	}
 
 	public Map<String, String> getIds() {

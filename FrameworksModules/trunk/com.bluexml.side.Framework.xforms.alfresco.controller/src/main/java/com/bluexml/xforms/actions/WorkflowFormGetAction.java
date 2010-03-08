@@ -13,7 +13,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.bluexml.side.form.utils.DOMUtil;
-import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.controller.navigation.Page;
 
 /**
@@ -34,7 +33,7 @@ import com.bluexml.xforms.controller.navigation.Page;
  * &lt;/workflow&gt;
  * </pre>
  * 
- * @deprecated as of 2010-02-12: this was moved to GetAction.
+ * @deprecated as of 2010-02-12: this was moved to {@link GetAction}.
  * @author Amenel
  */
 public class WorkflowFormGetAction extends AbstractReadAction {
@@ -68,8 +67,7 @@ public class WorkflowFormGetAction extends AbstractReadAction {
 		// get the instance of the attached data form
 		Map<String, String> initParams = currentPage.getInitParams();
 		String dataId = currentPage.getDataId();
-		WorkflowTaskType taskType = controller.getWorkflowTaskType(currentPage.getFormName());
-		String dataFormName = taskType.getDataForm();
+		String dataFormName = controller.getUnderlyingDataFormForWorkflow(wkFormName);
 		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId, initParams, false);
 		//
 		// we need to nest the data form instance under workflow

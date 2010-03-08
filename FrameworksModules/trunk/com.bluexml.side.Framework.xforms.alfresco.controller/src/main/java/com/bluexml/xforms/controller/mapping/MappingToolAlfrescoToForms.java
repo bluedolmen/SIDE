@@ -235,9 +235,10 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @throws ServletException
 	 */
 	public void collectTaskProperties(Document formInstance, Element rootElement,
-			WorkflowTaskType taskType, Map<String, GenericClass> alfrescoNodes,
+			String wkFormName, Map<String, GenericClass> alfrescoNodes,
 			boolean formIsReadOnly) throws ServletException {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(controller);
+		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
 
 		List<FormFieldType> fields = taskType.getField();
 		for (FormFieldType field : fields) {

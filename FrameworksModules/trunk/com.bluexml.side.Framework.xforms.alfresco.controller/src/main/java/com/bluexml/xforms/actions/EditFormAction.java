@@ -8,8 +8,6 @@ import org.apache.commons.lang.StringUtils;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.EditNodeBean;
-import com.bluexml.xforms.controller.binding.ClassType;
-import com.bluexml.xforms.controller.binding.FormType;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.controller.navigation.PageInfoBean;
 import com.bluexml.xforms.messages.MsgId;
@@ -101,10 +99,10 @@ public class EditFormAction extends AbstractEditAction {
 	 */
 	private boolean resolvePageInfoClass(PageInfoBean pageBean, EditNodeBean editBean) {
 		// look for a default form that supports the data type and return its name
-		ClassType classType = controller.getDefaultFormForDataType(editBean.getDataType());
-		if (classType != null) {
+		String classFormName = controller.getDefaultFormForDataType(editBean.getDataType());
+		if (classFormName != null) {
 			pageBean.formType = FormTypeEnum.CLASS;
-			pageBean.formName = classType.getPackage() + "." + classType.getName();
+			pageBean.formName = classFormName;
 			pageBean.dataType = pageBean.dataType;
 			return true;
 		}
@@ -123,9 +121,9 @@ public class EditFormAction extends AbstractEditAction {
 
 		// look for the form in the list of target forms that supports the edit node's data type
 		for (String formName : Arrays.asList(forms)) {
-			FormType formType = controller.getFormType(formName);
-			if (formType != null) {
-				if (editDataType.equals(formType.getRealClass().getAlfrescoName())) {
+			String formClassName = controller.getUnderlyingClassForForm(formName);
+			if (formClassName != null) {
+				if (editDataType.equals(formClassName)) {
 					pageBean.formType = FormTypeEnum.FORM;
 					pageBean.formName = formName;
 					pageBean.dataType = formName;
@@ -135,10 +133,10 @@ public class EditFormAction extends AbstractEditAction {
 		}
 
 		// look for a customized form that supports it and return its name
-		FormType formType = controller.getCustomFormForDataType(editDataType);
-		if (formType != null) {
+		String formName = controller.getCustomFormForDataType(editDataType);
+		if (formName != null) {
 			pageBean.formType = FormTypeEnum.FORM;
-			pageBean.formName = formType.getRealClass().getAlfrescoName();
+			pageBean.formName = formName;
 			pageBean.dataType = pageBean.dataType;
 			return true;
 		}

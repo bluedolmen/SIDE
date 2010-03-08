@@ -24,13 +24,12 @@ import org.w3c.dom.Node;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
 import com.bluexml.xforms.controller.binding.AspectType;
 import com.bluexml.xforms.controller.binding.AssociationType;
-import com.bluexml.xforms.controller.binding.Batch;
 import com.bluexml.xforms.controller.binding.CanisterType;
 import com.bluexml.xforms.controller.binding.ClassType;
 import com.bluexml.xforms.controller.binding.EnumType;
-import com.bluexml.xforms.controller.binding.FormFieldType;
 import com.bluexml.xforms.controller.binding.FormType;
 import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
@@ -440,8 +439,8 @@ public class MappingTool {
 		return ""; // normally, we should never get here (unless there are multiple violations)
 	}
 
-	public static String marshal(Batch batch) throws ServletException {
-		return MappingToolCommon.marshal(batch);
+	public static String marshalBatch(AlfrescoTransaction transaction) throws ServletException {
+		return MappingToolCommon.marshal(transaction.getBatch());
 	}
 
 	public static synchronized GenericClass unmarshal(Document alfrescoNode) throws JAXBException {
@@ -459,7 +458,7 @@ public class MappingTool {
 	public boolean isDynamicEnum(String type) {
 		EnumType enumType = getEnumType(type);
 		if (enumType != null) {
-			return isDynamic(enumType);
+			return mappingToolFormsToAlfresco.isDynamic(enumType);
 		}
 		return false; // happens for search operators enums; they don't get into the mapping file
 	}
@@ -493,35 +492,108 @@ public class MappingTool {
 		return mappingToolAlfrescoToForms.getWorkflowTaskTypeWithField(fieldName);
 	}
 
-	public FormFieldType getFormFieldTypeFromCanister(CanisterType formType, String fieldName) {
-		return mappingToolAlfrescoToForms.getFormFieldTypeFromCanister(formType, fieldName);
+	public String getFormFieldTypeFromCanister(String wkFormName, String fieldName) {
+		return mappingToolAlfrescoToForms.getFormFieldTypeFromCanister(wkFormName, fieldName);
 	}
 
-	public void collectTaskProperties(Document instance, Element taskElt,
-			WorkflowTaskType taskType, Map<String, GenericClass> alfrescoNodes,
-			boolean formIsReadOnly) throws ServletException {
-		mappingToolAlfrescoToForms.collectTaskProperties(instance, taskElt, taskType,
+	public void collectTaskProperties(Document instance, Element taskElt, String wkFormName,
+			Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly)
+			throws ServletException {
+		mappingToolAlfrescoToForms.collectTaskProperties(instance, taskElt, wkFormName,
 				alfrescoNodes, formIsReadOnly);
 	}
 
-	public boolean isStartTask(WorkflowTaskType taskType) {
-		return mappingToolFormsToAlfresco.isStartTask(taskType);
+	public boolean isStartTaskForm(String wkFormName) {
+		return mappingToolFormsToAlfresco.isStartTaskForm(wkFormName);
 	}
 
-	public FormType getFormTypeWithDataType(String dataType) {
+	public String getFormTypeWithDataType(String dataType) {
 		return mappingToolFormsToAlfresco.getFormTypeWithDataType(dataType);
 	}
 
-	public ClassType getClassTypeWithDataType(String dataType) {
+	public String getClassTypeWithDataType(String dataType) {
 		return mappingToolFormsToAlfresco.getClassTypeWithDataType(dataType);
-	}
-
-	public boolean isDynamic(EnumType enumType) {
-		return mappingToolFormsToAlfresco.isDynamic(enumType);
 	}
 
 	public String getWorkflowStartTaskFormName(String namespacePrefix) {
 		return mappingToolFormsToAlfresco.getWorkflowStartTaskFormName(namespacePrefix);
+	}
+
+	public String getUnderlyingClassForForm(String formName) {
+		FormType formType = getFormType(formName);
+		if (formType == null) {
+			return null;
+		}
+		ClassType classType = formType.getRealClass();
+		if (classType == null) {
+			return null;
+		}
+		return classType.getAlfrescoName();
+	}
+
+	public String getUnderlyingClassForWorkflow(String wkFormName) {
+		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
+		if (taskType == null) {
+			return null;
+		}
+		String dataFormName = taskType.getDataForm();
+		return getUnderlyingClassForForm(dataFormName);
+	}
+
+	public String getUnderlyingDataFormForWorkflow(String wkFormName) {
+		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
+		if (taskType == null) {
+			return null;
+		}
+		FormType dataFormType = getFormType(taskType.getDataForm());
+		if (dataFormType == null) {
+			return null;
+		}
+		return dataFormType.getName();
+	}
+
+	public String getWorkflowTaskPooledActorsById(String taskName) {
+		WorkflowTaskType taskType = getWorkflowTaskType(taskName, true);
+		if (taskType == null) {
+			return null;
+		}
+		return taskType.getPooledActors();
+	}
+
+	public String getWorkflowTaskActorIdById(String taskName) {
+		WorkflowTaskType taskType = getWorkflowTaskType(taskName, true);
+		if (taskType == null) {
+			return null;
+		}
+		return taskType.getActorId();
+	}
+
+	public String getTaskNameFromFormName(String wkFormName) {
+		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, true);
+		if (taskType == null) {
+			return null;
+		}
+		return taskType.getName();
+	}
+
+	public WorkflowTaskInfoBean getWorkflowTaskInfoBean(String wkFormName) {
+		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, true);
+		if (taskType == null) {
+			return null;
+		}
+		return new WorkflowTaskInfoBean(taskType.getTaskId(), taskType.getName(), taskType
+				.getActorId(), taskType.getPooledActors(), taskType.getTitle());
+	}
+
+	public String getWorkflowFormNameByTaskId(String taskId) {
+		WorkflowTaskType taskType = getWorkflowTaskType(taskId, true);
+		if (taskType == null) {
+			if (logger.isErrorEnabled()) {
+				logger.error("No task definition in the mapping for task '" + taskId + "'");
+			}
+			return "";
+		}
+		return taskType.getName();
 	}
 
 }

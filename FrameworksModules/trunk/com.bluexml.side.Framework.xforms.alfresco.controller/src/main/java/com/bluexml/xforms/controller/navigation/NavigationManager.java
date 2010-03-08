@@ -63,8 +63,6 @@ import com.bluexml.xforms.actions.SetTypeAction;
 import com.bluexml.xforms.actions.SubmitAction;
 import com.bluexml.xforms.actions.WorkflowTransitionAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.binding.ClassType;
-import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 
@@ -613,17 +611,20 @@ public class NavigationManager {
 		// check that the form is appropriate for the data id
 		if (AlfrescoController.getInstance().getParamCheckMatchDataForm()) {
 			String realFormName = originalDatatype;
-			if (bean.formType == FormTypeEnum.WKFLW) {
-				WorkflowTaskType taskType = controller.getWorkflowTaskType(dataType);
-				realFormName = taskType.getDataForm();
-			}
+//			if (bean.formType == FormTypeEnum.WKFLW) {
+//				WorkflowTaskType taskType = controller.getWorkflowTaskType(dataType);
+//				realFormName = taskType.getDataForm();
+//			}
 			if (dataId != null) {
 				QName contentType = controller.systemGetNodeType(dataId);
 				if (contentType == null) {
 					dataId = null;
 				} else {
-					ClassType classType = controller.getFormType(realFormName).getRealClass();
-					dataType = classType.getAlfrescoName();
+					if (bean.formType == FormTypeEnum.WKFLW) {
+						dataType = controller.getUnderlyingClassForWorkflow(realFormName);
+					} else {
+						dataType = controller.getUnderlyingClassForForm(realFormName);
+					}
 					if (StringUtils.equals(dataType, contentType.getLocalName()) == false) {
 						bean.wrongCallType = true;
 						dataId = null;

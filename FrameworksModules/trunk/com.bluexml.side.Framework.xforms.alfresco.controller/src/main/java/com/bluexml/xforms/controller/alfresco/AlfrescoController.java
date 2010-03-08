@@ -53,17 +53,12 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.bluexml.side.form.utils.DOMUtil;
+import com.bluexml.xforms.actions.GetAction;
 import com.bluexml.xforms.controller.alfresco.agents.SystemAgent;
+import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
 import com.bluexml.xforms.controller.binding.AssociationType;
-import com.bluexml.xforms.controller.binding.Batch;
-import com.bluexml.xforms.controller.binding.CanisterType;
-import com.bluexml.xforms.controller.binding.ClassType;
-import com.bluexml.xforms.controller.binding.EnumType;
-import com.bluexml.xforms.controller.binding.FormFieldType;
-import com.bluexml.xforms.controller.binding.FormType;
 import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
-import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.controller.mapping.MappingTool;
 import com.bluexml.xforms.controller.mapping.RepoContentInfoBean;
 import com.bluexml.xforms.controller.navigation.Page;
@@ -1288,10 +1283,9 @@ public class AlfrescoController {
 		return result;
 	}
 
-	public void executeBatch(AlfrescoTransaction alfrescoTransaction, Batch batch)
-			throws ServletException {
+	public void executeBatch(AlfrescoTransaction alfrescoTransaction) throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
-		parameters.put("datas", MappingTool.marshal(batch));
+		parameters.put("datas", MappingTool.marshalBatch(alfrescoTransaction));
 
 		Map<String, String> ids = new HashMap<String, String>();
 
@@ -1970,11 +1964,7 @@ public class AlfrescoController {
 	 * @return true, if is dynamic enum
 	 */
 	public boolean isDynamicEnum(String type) {
-		EnumType enumType = mappingTool.getEnumType(type);
-		if (enumType != null) {
-			return mappingTool.isDynamic(enumType);
-		}
-		return false; // happens for search operators enums; they don't get into the mapping file
+		return mappingTool.isDynamicEnum(type);
 	}
 
 	/**
@@ -2330,7 +2320,7 @@ public class AlfrescoController {
 	/**
 	 * Returns an instance for workflow forms so that they can be displayed.
 	 * 
-	 * @see com.bluexml.xforms.actions.WorkflowFormGetAction
+	 * @see {@link GetAction}
 	 * @param formName
 	 * @return
 	 * @throws ServletException
@@ -2338,48 +2328,17 @@ public class AlfrescoController {
 	public Document getWorkflowFormInstance(String formName) throws ServletException {
 		Document instance = docBuilder.newDocument();
 
-		WorkflowTaskType taskType = mappingTool.getWorkflowTaskType(formName, false);
 		Map<String, GenericClass> alfrescoNodes = new HashMap<String, GenericClass>();
 
 		Element taskElt = instance.createElement(formName);
 
-		mappingTool.collectTaskProperties(instance, taskElt, taskType, alfrescoNodes, false);
+		mappingTool.collectTaskProperties(instance, taskElt, formName, alfrescoNodes, false);
 
 		Element rootElement = instance.createElement(MsgId.INT_INSTANCE_WKFLW_NODESET.getText());
 		rootElement.appendChild(taskElt);
 
 		instance.appendChild(rootElement);
 		return instance;
-	}
-
-	/**
-	 * Returns the mapping entry for a form based on the form name.
-	 * 
-	 * @param formName
-	 * @return
-	 */
-	public FormType getFormType(String formName) {
-		return mappingTool.getFormType(formName);
-	}
-
-	/**
-	 * Returns the mapping entry for a task based on the form name.
-	 * 
-	 * @param formName
-	 * @return
-	 */
-	public WorkflowTaskType getWorkflowTaskType(String formName) {
-		return mappingTool.getWorkflowTaskType(formName, false);
-	}
-
-	/**
-	 * Returns the mapping entry for a task based on the task id.
-	 * 
-	 * @param taskId
-	 * @return
-	 */
-	public WorkflowTaskType getWorkflowTaskTypeById(String taskId) {
-		return mappingTool.getWorkflowTaskType(taskId, true);
 	}
 
 	/**
@@ -2391,44 +2350,18 @@ public class AlfrescoController {
 	 * @return
 	 */
 	public String getWorkflowFormNameByTaskId(String fullTaskId) {
-		// String prefix = "jbpm$";
-		// int pos = fullTaskId.indexOf(prefix);
-		// if (pos != 0) {
-		// logger.error("Wrong call: the task id '" + fullTaskId
-		// + "'does not have the correct format");
-		// return "";
-		// }
-		String taskId = fullTaskId;
-		WorkflowTaskType taskType = mappingTool.getWorkflowTaskType(taskId, true);
-		if (taskType == null) {
-			if (logger.isErrorEnabled()) {
-				logger.error("No task definition in the mapping for task '" + taskId + "'");
-			}
-			return "";
-		}
-		return taskType.getName();
+		return mappingTool.getWorkflowFormNameByTaskId(fullTaskId);
 	}
 
 	/**
-	 * Returns the mapping entry for the task that contains the field whose alfrescoName matches.
+	 * Returns the Alfresco name for the given field from a specific workflow form.
 	 * 
-	 * @param fieldName
-	 *            the value which alfrescoNameof fields are tested against
-	 * @return
-	 */
-	public WorkflowTaskType getWorkflowTaskTypeWithField(String fieldName) {
-		return mappingTool.getWorkflowTaskTypeWithField(fieldName);
-	}
-
-	/**
-	 * Returns the mapping entry for a specific field from a specific form / workflow.
-	 * 
-	 * @param formType
+	 * @param taskType
 	 * @param fieldName
 	 * @return
 	 */
-	private FormFieldType getFieldFromCanisterType(CanisterType formType, String fieldName) {
-		return mappingTool.getFormFieldTypeFromCanister(formType, fieldName);
+	private String getFieldFromCanisterType(String wkFormName, String fieldName) {
+		return mappingTool.getFormFieldTypeFromCanister(wkFormName, fieldName);
 	}
 
 	/**
@@ -2685,15 +2618,13 @@ public class AlfrescoController {
 		for (Element field : allFields) {
 			String fieldUniqueName = field.getTagName();
 			Serializable fieldValue = null;
-			WorkflowTaskType taskType = getWorkflowTaskTypeWithField(fieldUniqueName);
-			if (taskType != null) {
+			String localName = getFieldFromCanisterType(wkFormName, fieldUniqueName);
+			if (localName != null) {
 				// build the QName
 				if (namespaceURI == null) {
 					String processName = workflowExtractProcessNameFromFormName(wkFormName);
 					namespaceURI = workflowBuildNamespaceURI(processName);
 				}
-				FormFieldType fieldType = getFieldFromCanisterType(taskType, fieldUniqueName);
-				String localName = fieldType.getAlfrescoName();
 				qname = QName.createQName(namespaceURI, localName);
 
 				// read the QName value from the collected properties of the workflow instance
@@ -2716,26 +2647,6 @@ public class AlfrescoController {
 			}
 		}
 		return true;
-	}
-
-	/**
-	 * Returns the real form supporting data entry for any form. If the form is a workflow form,
-	 * returns its data form. Otherwise, returns the given form name.
-	 * 
-	 * @param formName
-	 * @return the name of the data form. If the form is already a data form, its name is returned.
-	 *         If the form is a workflow form, the name of its data form is returned.
-	 */
-	public String workflowGetUnderlyingDataForm(String formName) {
-		WorkflowTaskType taskType = getWorkflowTaskType(formName);
-		if (taskType == null) {
-			FormType formType = getFormType(formName);
-			if (formType == null) {
-				return null;
-			}
-			return formType.getName();
-		}
-		return workflowGetUnderlyingDataForm(taskType.getDataForm());
 	}
 
 	/**
@@ -2800,8 +2711,8 @@ public class AlfrescoController {
 	 * @param taskType
 	 * @return
 	 */
-	public boolean isStartTask(WorkflowTaskType taskType) {
-		return mappingTool.isStartTask(taskType);
+	public boolean isStartTaskForm(String wkFormName) {
+		return mappingTool.isStartTaskForm(wkFormName);
 	}
 
 	/**
@@ -3105,23 +3016,86 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Finds the first FormClass that supports the given data type.
+	 * Provides the id of a FormClass that supports the given data type.
 	 * 
 	 * @param dataType
 	 * @return
 	 */
-	public FormType getCustomFormForDataType(String dataType) {
+	public String getCustomFormForDataType(String dataType) {
 		return mappingTool.getFormTypeWithDataType(dataType);
 	}
 
 	/**
-	 * Finds the first default form that supports the given data type.
+	 * Provides the id of the first default form that supports the given data type.
 	 * 
 	 * @param dataType
 	 * @return
 	 */
-	public ClassType getDefaultFormForDataType(String dataType) {
+	public String getDefaultFormForDataType(String dataType) {
 		return mappingTool.getClassTypeWithDataType(dataType);
 	}
 
+	/**
+	 * Provides the name of the data type supported by the FormClass with the given id.
+	 * 
+	 * @param formName
+	 *            the valid id of a FormClass that has been generated.
+	 * @return the data type as defined in the class model, or <code>null</code> if the form name is
+	 *         unknown.
+	 */
+	public String getUnderlyingClassForForm(String formName) {
+		return mappingTool.getUnderlyingClassForForm(formName);
+	}
+
+	/**
+	 * Provides the name of the data type supported by the data form of the FormWorkflow with the
+	 * given id.
+	 * 
+	 * @param formName
+	 *            the valid id of a FormWorkflow that has been generated.
+	 * @return the data type of the workflow form's data form, as defined in the class model, or
+	 *         <code>null</code> if the form name is unknown.
+	 */
+	public String getUnderlyingClassForWorkflow(String formName) {
+		return mappingTool.getUnderlyingClassForWorkflow(formName);
+	}
+
+	/**
+	 * Provides the id of the data form linked to the given workflow form.
+	 * 
+	 * 
+	 * @param formName
+	 *            the valid id of a FormWorkflow that has been generated.
+	 * @return the id of the data form.
+	 */
+	public String getUnderlyingDataFormForWorkflow(String formName) {
+		return mappingTool.getUnderlyingDataFormForWorkflow(formName);
+	}
+
+	/**
+	 * Provides the pooled actors defined on the form that supports the given task name.
+	 * 
+	 * @param name
+	 *            a task definition name.
+	 * @return the content of the "pooled actors" property.
+	 */
+	public String workflowGetTaskPooledActorsByTaskId(String name) {
+		return mappingTool.getWorkflowTaskPooledActorsById(name);
+	}
+
+	/**
+	 * Provides the actor Id defined on the form that supports the given task name.
+	 * 
+	 * @param name
+	 *            a task definition name.
+	 * @return the content of the "actor id" property.
+	 */
+	public String workflowGetTaskActorIdByTaskId(String name) {
+		return mappingTool.getWorkflowTaskActorIdById(name);
+	}
+
+	public WorkflowTaskInfoBean getWorkflowTaskInfoBean(String wkFormName) {
+		return mappingTool.getWorkflowTaskInfoBean(wkFormName);
+	}
+	
 }

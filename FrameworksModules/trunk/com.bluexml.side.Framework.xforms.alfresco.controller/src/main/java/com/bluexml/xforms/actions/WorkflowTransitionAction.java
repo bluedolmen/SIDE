@@ -32,10 +32,10 @@ import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.alfresco.RedirectionBean;
+import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
 import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.binding.ValueType;
-import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.controller.navigation.NavigationSessionListener;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.controller.navigation.PageInfoBean;
@@ -373,13 +373,14 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		}
 
 		// collect info for use later
-		String formName = currentPage.getFormName();
-		WorkflowTaskType taskType = controller.getWorkflowTaskType(formName);
+		String wkFormName = currentPage.getFormName();
+		WorkflowTaskInfoBean taskBean = controller.getWorkflowTaskInfoBean(wkFormName);
 		userName = getCurrentUserName();
 		transaction.setLogin(userName);
 
 		// check that the user is authorized. Already done for the initial task so don't redo.
-		if ((controller.isStartTask(taskType) == false) && (validateCurrentUser(taskType) == false)) {
+		if ((controller.isStartTaskForm(wkFormName) == false)
+				&& (validateCurrentUser(taskBean) == false)) {
 			navigationPath.setStatusMsg("Transition not followed. User '" + userName
 					+ "' is not a valid actor for this task.");
 			return resultBean;
@@ -388,15 +389,15 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		// get process id; try url params first.
 		String candidateId = currentPage.getInitParams().get(
 				MsgId.PARAM_WORKFLOW_PROCESS_ID.getText());
-		String processId = findProcessId(candidateId, formName);
+		String processId = findProcessId(candidateId, wkFormName);
 		if (processId == null) {
 			navigationPath.setStatusMsg("Could not find the process Id. Giving up.");
 			return resultBean;
 		}
 
 		// add properties from the form fields
-		String formTaskName = AlfrescoController.workflowBuildBlueXMLTaskName(formName);
-		collectTaskProperties(properties, node, taskType, processId);
+		String formTaskName = AlfrescoController.workflowBuildBlueXMLTaskName(wkFormName);
+		collectTaskProperties(properties, node, taskBean, processId);
 
 		// no need to continue if in standalone mode
 		if (AlfrescoController.isStandaloneMode()) {
@@ -422,7 +423,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		}
 
 		// launch a workflow if on a start task form - also set the instance id
-		if (initializeTask(formName, taskType, properties, processId) == false) {
+		if (initializeTask(wkFormName, taskBean, properties, processId) == false) {
 			return resultBean;
 		}
 
@@ -439,7 +440,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 				.getWkflwInstanceId());
 		WorkflowTask task = findRelevantTaskForForm(formTaskName, tasks);
 		if (task == null) {
-			navigationPath.setStatusMsg("Transition not followed. The form '" + formName
+			navigationPath.setStatusMsg("Transition not followed. The form '" + wkFormName
 					+ "' is not consistent with the current task(s) on the workflow instance.");
 			return resultBean;
 		}
@@ -494,18 +495,18 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	/**
 	 * Tells whether the current user is a legitimate actor for this task.
 	 * 
-	 * @param taskType
+	 * @param taskBean
 	 * 
 	 * @return true if the user is the actorId or belongs to the pooled actors
 	 */
-	private boolean validateCurrentUser(WorkflowTaskType taskType) {
-		if (taskType.getActorId() != null) {
-			if (StringUtils.equals(taskType.getActorId(), userName)) {
+	private boolean validateCurrentUser(WorkflowTaskInfoBean taskBean) {
+		if (taskBean.getActorId() != null) {
+			if (StringUtils.equals(taskBean.getActorId(), userName)) {
 				return true;
 			}
 		}
 		// search the registered task actors amongst the user's groups
-		String refPool = taskType.getPooledActors();
+		String refPool = taskBean.getPooledActors();
 		if (refPool == null) {
 			return false;
 		}
@@ -534,11 +535,11 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @return false if any exception or error happens. Otherwise true.
 	 * @throws ServletException
 	 */
-	private boolean initializeTask(String formName, WorkflowTaskType taskType,
+	private boolean initializeTask(String formName, WorkflowTaskInfoBean taskBean,
 			HashMap<QName, Serializable> properties, String processId) throws ServletException {
-		if (controller.isStartTask(taskType)) {
+		if (controller.isStartTaskForm(formName)) {
 			// check that the user is authorized to start the workflow
-			if (validateCurrentUser(taskType) == false) {
+			if (validateCurrentUser(taskBean) == false) {
 				navigationPath
 						.setStatusMsg("Workflow not started. The user is not allowed as initiator of this workflow definition.");
 				return false;
@@ -565,7 +566,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 				}
 				properties.put(WorkflowModel.ASSOC_PACKAGE, wkPackage);
 				properties.put(WorkflowModel.ASSOC_ASSIGNEE, assignee);
-				properties.put(WorkflowModel.PROP_WORKFLOW_DESCRIPTION, taskType.getTitle());
+				properties.put(WorkflowModel.PROP_WORKFLOW_DESCRIPTION, taskBean.getTitle());
 
 				// start a workflow instance and set some useful info
 				WorkflowPath path = controller.workflowStart(transaction, processId, null);
@@ -610,13 +611,14 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			navigationPath.setStatusMsg("Transition completed: the workflow is ended.");
 		} else {
 			for (WorkflowTask task : tasks) {
-				WorkflowTaskType nextTaskType = controller.getWorkflowTaskTypeById(task.name);
-				if (nextTaskType != null) {
+				String actorGroup = controller.workflowGetTaskPooledActorsByTaskId(task.name);
+				String actorUser = controller.workflowGetTaskActorIdByTaskId(task.name);
 
+				if ((StringUtils.trimToNull(actorGroup) != null)
+						|| (StringUtils.trimToNull(actorUser) != null)) {
+					// we got some user(s)/group(s) to assign the task to
 					List<NodeRef> refToActors = new Vector<NodeRef>();
 					properties = new HashMap<QName, Serializable>();
-					String actorGroup = nextTaskType.getPooledActors();
-					String actorUser = nextTaskType.getActorId();
 					if (StringUtils.trimToNull(actorUser) == null
 							&& StringUtils.trimToNull(actorGroup) == null) {
 						navigationPath
@@ -695,9 +697,9 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @throws ServletException
 	 */
 	private GenericClass collectTaskProperties(HashMap<QName, Serializable> properties, Node node,
-			WorkflowTaskType taskType, String processId) throws ServletException {
-		String taskTypeName = taskType.getName();
-		String taskTypeId = taskType.getTaskId();
+			WorkflowTaskInfoBean taskBean, String processId) throws ServletException {
+		String taskTypeName = taskBean.getName();
+		String taskTypeId = taskBean.getId();
 
 		Element root;
 		if (node instanceof Document) {

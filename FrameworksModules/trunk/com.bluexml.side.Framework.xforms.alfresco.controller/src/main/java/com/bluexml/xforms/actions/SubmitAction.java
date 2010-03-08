@@ -165,7 +165,7 @@ public class SubmitAction extends AbstractTransactionalAction {
 			result = controller.persistSearch(formName, node, shortNames);
 			isSearching = true;
 		} else {
-			String datatype = controller.workflowGetUnderlyingDataForm(formName);
+			String datatype = controller.getUnderlyingDataFormForWorkflow(formName);
 			String searchStr = StringUtils.trimToNull(pageInitParams.get(MsgId.PARAM_SEARCH_MODE
 					.getText()));
 			isSearching = StringUtils.equals(searchStr, "true");

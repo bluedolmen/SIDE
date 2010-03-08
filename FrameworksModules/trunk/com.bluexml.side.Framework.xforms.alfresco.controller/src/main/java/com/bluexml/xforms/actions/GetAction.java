@@ -14,7 +14,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.bluexml.side.form.utils.DOMUtil;
-import com.bluexml.xforms.controller.binding.WorkflowTaskType;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
@@ -23,7 +22,7 @@ import com.bluexml.xforms.messages.MsgId;
  * The Class GetAction.<br>
  * Returns the main instance for a form (the form is determined through the "datatype" field of the
  * current page).<br/>
- * Supports: class forms, FormClass, FormSearch. <br/>
+ * Supports: class forms, FormClass, FormWorkflow, FormSearch. <br/>
  * 
  */
 public class GetAction extends AbstractReadAction {
@@ -132,8 +131,7 @@ public class GetAction extends AbstractReadAction {
 		// get the instance of the attached data form
 		Map<String, String> initParams = currentPage.getInitParams();
 		String dataId = currentPage.getDataId();
-		WorkflowTaskType taskType = controller.getWorkflowTaskType(currentPage.getFormName());
-		String dataFormName = taskType.getDataForm();
+		String dataFormName = controller.getUnderlyingDataFormForWorkflow(wkFormName);
 		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId,
 				initParams, false);
 		//

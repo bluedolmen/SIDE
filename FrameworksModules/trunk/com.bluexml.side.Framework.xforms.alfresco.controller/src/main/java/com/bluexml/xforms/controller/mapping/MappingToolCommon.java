@@ -307,18 +307,18 @@ public class MappingToolCommon {
 	}
 
 	/**
-	 * Gets the class type.
+	 * Gets the id of a form that supports the given data type.
 	 * 
 	 * @param dataType
 	 *            a node type as returned by Alfresco
 	 * 
-	 * @return the class type
+	 * @return the class type, under the form [package].[class name]
 	 */
-	public ClassType getClassTypeWithDataType(String dataType) {
+	public String getClassTypeWithDataType(String dataType) {
 		List<ClassType> clazz = mapping.getClazz();
 		for (ClassType classType : clazz) {
 			if (classType.getAlfrescoName().equals(dataType)) {
-				return classType;
+				return classType.getPackage() + "." + classType.getName();
 			}
 		}
 		return null;
@@ -355,14 +355,14 @@ public class MappingToolCommon {
 	 * 
 	 * @return the form type
 	 */
-	public FormType getFormTypeWithDataType(String dataType) {
+	public String getFormTypeWithDataType(String dataType) {
 		List<JAXBElement<? extends CanisterType>> elements = mapping.getCanister();
 
 		for (JAXBElement<? extends CanisterType> element : elements) {
 			if (element.getValue() instanceof FormType) {
 				FormType formType = (FormType) element.getValue();
 				if (formType.getRealClass().getAlfrescoName().equals(dataType)) {
-					return formType;
+					return formType.getName();
 				}
 			}
 		}
@@ -398,7 +398,8 @@ public class MappingToolCommon {
 	 * @param refName
 	 *            the name to test against, e.g. "wfbxwfTest:Start"
 	 * @param byId
-	 *            if true, the task id from mapping.xml is tested. Otherwise, the name is tested.
+	 *            if true, the task id from mapping.xml is tested. Otherwise, the form name is
+	 *            tested.
 	 * @return the form type that matches
 	 */
 	public WorkflowTaskType getWorkflowTaskType(String refName, boolean byId) {
@@ -472,45 +473,25 @@ public class MappingToolCommon {
 	}
 
 	/**
-	 * Gets a form field type for a specific form.
+	 * Gets the Alfresco name of the form field whose 'uniqueName' matches the given field name in
+	 * the task form.
 	 * 
 	 * @param formName
-	 *            the form name
+	 *            the id of the workflow form
 	 * @param fieldName
 	 *            the field name
 	 * 
-	 * @return the form field type
-	 * @deprecated
+	 * @return the Alfresco name of the form field
 	 */
-	public FormFieldType getFormFieldType(String formName, String fieldName) {
-		CanisterType canisterType = getFormType(formName);
-		if (canisterType == null) {
-			canisterType = getWorkflowTaskType(formName, false);
-		}
-		return getFormFieldTypeFromCanister(canisterType, fieldName);
-	}
-
-	/**
-	 * Gets the form field type whose 'uniqueName' matches the given field name.
-	 * 
-	 * @param formType
-	 *            the form type
-	 * @param fieldName
-	 *            the field name
-	 * 
-	 * @return the form field type
-	 */
-	public FormFieldType getFormFieldTypeFromCanister(CanisterType formType, String fieldName) {
+	public String getFormFieldTypeFromCanister(String formName, String fieldName) {
 		List<FormFieldType> fields = null;
-		if (formType instanceof FormType) {
-			fields = ((FormType) formType).getField();
-		} else if (formType instanceof WorkflowTaskType) {
-			fields = ((WorkflowTaskType) formType).getField();
-		}
+		WorkflowTaskType taskType = getWorkflowTaskType(formName, false);
+		fields = taskType.getField();
+
 		if (fields != null) {
 			for (FormFieldType formFieldType : fields) {
 				if (formFieldType.getUniqueName().equals(fieldName)) {
-					return formFieldType;
+					return formFieldType.getAlfrescoName();
 				}
 			}
 		}
@@ -994,6 +975,10 @@ public class MappingToolCommon {
 		return workflowTaskType.isStartTask();
 	}
 
+	/*
+	 * 
+	 */
+
 	/**
 	 * Tells whether an AttributeType refers to a file field with upload to file system.
 	 * 
@@ -1025,6 +1010,20 @@ public class MappingToolCommon {
 	 */
 	public boolean isFileField(AttributeType xformsAttribute) {
 		return (isRepositoryContent(xformsAttribute) || isFileContent(xformsAttribute));
+	}
+
+	/**
+	 * Tells whether the workflow form whose name is given supports a start task.
+	 * 
+	 * @param wkFormName
+	 * @return false if either the workflow form does not exist or it is not a start task.
+	 */
+	protected boolean isStartTaskForm(String wkFormName) {
+		WorkflowTaskType workflowTaskType = getWorkflowTaskType(wkFormName, false);
+		if (workflowTaskType == null) {
+			return false;
+		}
+		return isStartTask(workflowTaskType);
 	}
 
 	/*
