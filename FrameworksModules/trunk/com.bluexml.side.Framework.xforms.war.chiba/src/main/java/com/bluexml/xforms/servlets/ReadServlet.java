@@ -43,8 +43,7 @@ public class ReadServlet extends AbstractServlet {
 	 * javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 		read(req, resp);
 	}
 
@@ -73,8 +72,8 @@ public class ReadServlet extends AbstractServlet {
 
 		try {
 			AlfrescoTransaction transaction = createTransaction(controller);
-			Document node = controller.getInstanceClass(transaction, dataType, dataId, null, false,
-					idAsServlet);
+			Document node = controller.getMappingAgent().getInstanceClass(transaction, dataType,
+					dataId, false, idAsServlet);
 			Source xmlSource = new DOMSource(node);
 			Result outputTarget = new StreamResult(resp.getOutputStream());
 			documentTransformer.transform(xmlSource, outputTarget);

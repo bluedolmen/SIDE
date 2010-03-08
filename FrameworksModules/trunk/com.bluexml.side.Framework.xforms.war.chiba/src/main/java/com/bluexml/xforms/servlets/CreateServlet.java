@@ -8,6 +8,7 @@ import org.w3c.dom.Node;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.controller.beans.PersistFormResultBean;
 
 /**
  * The Class CreateServlet. via GET method @ http://HostAndPort/xforms/create?...<br>
@@ -17,21 +18,25 @@ public class CreateServlet extends AbstractServlet {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1433772962163231503L;
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 		create(req, resp);
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 		create(req, resp);
 	}
 
@@ -46,13 +51,14 @@ public class CreateServlet extends AbstractServlet {
 	 * @throws ServletException
 	 *             the servlet exception
 	 */
-	protected void create(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException {
+	protected void create(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 		AlfrescoController controller = AlfrescoController.getInstance();
 		try {
 			Node node = getDocumentReq(req);
 			AlfrescoTransaction transaction = createTransaction(controller);
-			String result = controller.persistClass(transaction, node, true);
+			PersistFormResultBean resultBean = controller.getMappingAgent().persistClass(
+					transaction, node, true);
+			String result = resultBean.getResultStr();
 			transaction.executeBatch();
 			result = transaction.getIds().get(result);
 			resp.getOutputStream().write(result.getBytes());
@@ -61,7 +67,9 @@ public class CreateServlet extends AbstractServlet {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.servlet.GenericServlet#init()
 	 */
 	@Override
@@ -69,7 +77,5 @@ public class CreateServlet extends AbstractServlet {
 		super.init();
 		System.out.println("BlueXML XForms - CreateServlet initialized.");
 	}
-
-	
 
 }
