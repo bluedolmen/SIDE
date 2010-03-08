@@ -1,5 +1,6 @@
 package com.bluexml.xforms.controller.mapping;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.w3c.dom.Node;
 import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.controller.beans.FileUploadInfoBean;
 import com.bluexml.xforms.controller.binding.AssociationActions;
 import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.ClassType;
@@ -594,7 +596,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * 
 	 * @return null if no repository content file name was detected
 	 */
-	public RepoContentInfoBean getNodeContentInfo(AlfrescoTransaction transaction,
+	public FileUploadInfoBean getNodeContentInfo(AlfrescoTransaction transaction,
 			GenericClass alfClass) {
 		GenericAttribute contentAttribute = getNodeContentAttribute(alfClass);
 		if (contentAttribute != null) {
@@ -602,7 +604,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			String name = contentAttribute.getValue().get(1).getValue();
 			String type = contentAttribute.getValue().get(2).getValue();
 
-			return new RepoContentInfoBean(path, name, type, contentAttribute, controller
+			return new FileUploadInfoBean(path, name, type, contentAttribute, controller
 					.getParamUploadRepoAppendSuffix());
 		}
 		return null;

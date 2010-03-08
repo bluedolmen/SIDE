@@ -24,6 +24,7 @@ import org.w3c.dom.Node;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.controller.beans.FileUploadInfoBean;
 import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
 import com.bluexml.xforms.controller.binding.AspectType;
 import com.bluexml.xforms.controller.binding.AssociationType;
@@ -138,7 +139,7 @@ public class MappingTool {
 	 * 
 	 * @return the content file name
 	 */
-	public List<RepoContentInfoBean> getUploadBeansFilesystem(AlfrescoTransaction transaction,
+	public List<FileUploadInfoBean> getUploadBeansFilesystem(AlfrescoTransaction transaction,
 			GenericClass alfClass) {
 		return mappingToolImplXFormsToAlfresco.getFileUploadBeans(transaction, alfClass,
 				MsgId.INT_UPLOAD_DEST_FILE.getText(), MsgId.INT_SUFFIX_UPLOAD_FILE.getText());
@@ -154,7 +155,7 @@ public class MappingTool {
 	 * 
 	 * @return the bean, or null if no repository content file exists in the class
 	 */
-	public List<RepoContentInfoBean> getUploadBeansRepo(AlfrescoTransaction transaction,
+	public List<FileUploadInfoBean> getUploadBeansRepo(AlfrescoTransaction transaction,
 			GenericClass alfClass) {
 		return mappingToolImplXFormsToAlfresco.getFileUploadBeans(transaction, alfClass,
 				MsgId.INT_UPLOAD_DEST_REPO.getText(), MsgId.INT_SUFFIX_UPLOAD_REPO.getText());
@@ -170,7 +171,7 @@ public class MappingTool {
 	 * 
 	 * @return the bean, or null if no repository content file exists in the class
 	 */
-	public RepoContentInfoBean getNodeContentInfo(AlfrescoTransaction transaction,
+	public FileUploadInfoBean getNodeContentInfo(AlfrescoTransaction transaction,
 			GenericClass alfClass) {
 		return mappingToolFormsToAlfresco.getNodeContentInfo(transaction, alfClass);
 	}

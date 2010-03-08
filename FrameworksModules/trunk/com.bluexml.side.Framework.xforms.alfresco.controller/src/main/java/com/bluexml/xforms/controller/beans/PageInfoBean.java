@@ -1,10 +1,13 @@
 /**
  * 
  */
-package com.bluexml.xforms.controller.navigation;
+package com.bluexml.xforms.controller.beans;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.bluexml.xforms.controller.navigation.FormTypeEnum;
+import com.bluexml.xforms.controller.navigation.Page;
 
 /**
  * Bean for keeping page-specific info.<br/>
@@ -29,7 +32,7 @@ public class PageInfoBean {
 	public FormTypeEnum formType;
 	public String formName; // e.g. Person_RO
 	public String dataType; // e.g. Person
-	Map<String, String> initParams;
+	public Map<String, String> initParams;
 	/** true if the form was called to display an object whose type does not match the form */
 	public boolean wrongCallType;
 

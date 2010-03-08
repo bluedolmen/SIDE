@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.bluexml.xforms.controller.mapping;
+package com.bluexml.xforms.controller.beans;
 
 import com.bluexml.xforms.controller.binding.GenericAttribute;
 
@@ -9,7 +9,7 @@ import com.bluexml.xforms.controller.binding.GenericAttribute;
  * @author Amenel
  * 
  */
-public class RepoContentInfoBean {
+public class FileUploadInfoBean {
 	/** Complete path (including name and extension) on the file system */
 	private String path;
 
@@ -24,7 +24,7 @@ public class RepoContentInfoBean {
 
 	private boolean shouldAppendSuffix;
 
-	public RepoContentInfoBean(String path, String name, String mimetype, GenericAttribute attr,
+	public FileUploadInfoBean(String path, String name, String mimetype, GenericAttribute attr,
 			boolean shouldAppendSuffix) {
 		super();
 		this.path = path;

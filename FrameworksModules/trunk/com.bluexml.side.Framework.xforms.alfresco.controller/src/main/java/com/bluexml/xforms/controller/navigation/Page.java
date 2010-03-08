@@ -5,6 +5,8 @@ import java.util.TreeMap;
 
 import org.w3c.dom.Document;
 
+import com.bluexml.xforms.controller.beans.PageInfoBean;
+
 /**
  * The Class Page. Holds some data about pages served to users. No significant processing is done
  * here.

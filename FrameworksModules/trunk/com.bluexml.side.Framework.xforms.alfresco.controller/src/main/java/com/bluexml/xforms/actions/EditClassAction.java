@@ -3,9 +3,9 @@ package com.bluexml.xforms.actions;
 import javax.servlet.ServletException;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.alfresco.EditNodeBean;
+import com.bluexml.xforms.controller.beans.EditNodeBean;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
-import com.bluexml.xforms.controller.navigation.PageInfoBean;
+import com.bluexml.xforms.controller.beans.PageInfoBean;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 

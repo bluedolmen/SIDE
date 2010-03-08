@@ -60,7 +60,9 @@ import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.mapping.MappingTool;
-import com.bluexml.xforms.controller.mapping.RepoContentInfoBean;
+import com.bluexml.xforms.controller.beans.FileUploadInfoBean;
+import com.bluexml.xforms.controller.beans.EditNodeBean;
+import com.bluexml.xforms.controller.beans.RedirectionBean;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
@@ -981,9 +983,9 @@ public class AlfrescoController {
 		String mimeType = null;
 
 		// content file(s); these will be saved to the server's filesystem
-		List<RepoContentInfoBean> fileBeans = mappingTool.getUploadBeansFilesystem(transaction,
+		List<FileUploadInfoBean> fileBeans = mappingTool.getUploadBeansFilesystem(transaction,
 				alfClass);
-		for (RepoContentInfoBean infoBean : fileBeans) {
+		for (FileUploadInfoBean infoBean : fileBeans) {
 			fileName = infoBean.getPath();
 			if (fileName.startsWith("file:")) {
 				String type = alfClass.getQualifiedName();
@@ -993,8 +995,8 @@ public class AlfrescoController {
 		}
 
 		// repository content file(s); these will be directly uploaded to the repository
-		List<RepoContentInfoBean> repoBeans = mappingTool.getUploadBeansRepo(transaction, alfClass);
-		for (RepoContentInfoBean infoBean : repoBeans) {
+		List<FileUploadInfoBean> repoBeans = mappingTool.getUploadBeansRepo(transaction, alfClass);
+		for (FileUploadInfoBean infoBean : repoBeans) {
 			fileName = null;
 			fileName = infoBean.getName();
 			filePath = infoBean.getPath();
@@ -1012,7 +1014,7 @@ public class AlfrescoController {
 		}
 
 		// node content file; there's at most one instance of this.
-		RepoContentInfoBean nodeInfoBean = mappingTool.getNodeContentInfo(transaction, alfClass);
+		FileUploadInfoBean nodeInfoBean = mappingTool.getNodeContentInfo(transaction, alfClass);
 		if (nodeInfoBean != null) {
 			fileName = nodeInfoBean.getName();
 			filePath = nodeInfoBean.getPath();
@@ -1042,10 +1044,10 @@ public class AlfrescoController {
 	 */
 	private void uploadProcessOnUpdate(AlfrescoTransaction transaction, GenericClass alfClass)
 			throws ServletException {
-		List<RepoContentInfoBean> previousFileContentInfo;
-		List<RepoContentInfoBean> previousRepoContentInfo;
-		List<RepoContentInfoBean> newFileContentInfo;
-		List<RepoContentInfoBean> newRepoContentInfo;
+		List<FileUploadInfoBean> previousFileContentInfo;
+		List<FileUploadInfoBean> previousRepoContentInfo;
+		List<FileUploadInfoBean> newFileContentInfo;
+		List<FileUploadInfoBean> newRepoContentInfo;
 
 		// read the old class
 		GenericClass oldClass = null;
@@ -1063,8 +1065,8 @@ public class AlfrescoController {
 		//
 		// enqueue files/nodes to be deleted
 		String fileName;
-		RepoContentInfoBean oldBean;
-		for (RepoContentInfoBean newBean : newFileContentInfo) {
+		FileUploadInfoBean oldBean;
+		for (FileUploadInfoBean newBean : newFileContentInfo) {
 			fileName = newBean.getPath();
 			if (fileName != null && fileName.startsWith("file:")) { // value is being replaced
 				String qualifiedName = newBean.getAttribute().getQualifiedName();
@@ -1076,7 +1078,7 @@ public class AlfrescoController {
 				}
 			}
 		}
-		for (RepoContentInfoBean newBean : newRepoContentInfo) {
+		for (FileUploadInfoBean newBean : newRepoContentInfo) {
 			fileName = newBean.getPath();
 			if (fileName != null && fileName.startsWith("file:")) {
 				String qualifiedName = newBean.getAttribute().getQualifiedName();
@@ -1100,11 +1102,11 @@ public class AlfrescoController {
 	 * @param qname
 	 * @return the bean or null if not found
 	 */
-	private RepoContentInfoBean uploadFindBean(List<RepoContentInfoBean> list, String qname) {
+	private FileUploadInfoBean uploadFindBean(List<FileUploadInfoBean> list, String qname) {
 		if (list == null) {
 			return null;
 		}
-		for (RepoContentInfoBean bean : list) {
+		for (FileUploadInfoBean bean : list) {
 			GenericAttribute attribute = bean.getAttribute();
 			if (attribute != null) {
 				if (attribute.getQualifiedName().equals(qname)) {

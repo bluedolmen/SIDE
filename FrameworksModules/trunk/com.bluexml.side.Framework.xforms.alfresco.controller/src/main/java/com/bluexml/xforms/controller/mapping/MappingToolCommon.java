@@ -1,5 +1,6 @@
 package com.bluexml.xforms.controller.mapping;
 
+
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
@@ -44,6 +45,7 @@ import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.actions.EnumAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.controller.beans.FileUploadInfoBean;
 import com.bluexml.xforms.controller.binding.ActionFieldType;
 import com.bluexml.xforms.controller.binding.AspectType;
 import com.bluexml.xforms.controller.binding.AssociationType;
@@ -1152,9 +1154,9 @@ public class MappingToolCommon {
 	 *            the suffix that, when found in attribute names, denotes an upload field/attribute
 	 * @return null if no repository content file name was detected
 	 */
-	public List<RepoContentInfoBean> getFileUploadBeans(AlfrescoTransaction transaction,
+	public List<FileUploadInfoBean> getFileUploadBeans(AlfrescoTransaction transaction,
 			GenericClass alfClass, String uploadDestination, String suffix) {
-		List<RepoContentInfoBean> list = new ArrayList<RepoContentInfoBean>();
+		List<FileUploadInfoBean> list = new ArrayList<FileUploadInfoBean>();
 		List<GenericAttribute> attributes = alfClass.getAttributes().getAttribute();
 
 		for (GenericAttribute attribute : attributes) {
@@ -1164,7 +1166,7 @@ public class MappingToolCommon {
 				String name = attribute.getValue().get(1).getValue();
 				String type = attribute.getValue().get(2).getValue();
 
-				list.add(new RepoContentInfoBean(path, name, type, attribute, controller
+				list.add(new FileUploadInfoBean(path, name, type, attribute, controller
 						.getParamUploadRepoAppendSuffix()));
 			}
 		}

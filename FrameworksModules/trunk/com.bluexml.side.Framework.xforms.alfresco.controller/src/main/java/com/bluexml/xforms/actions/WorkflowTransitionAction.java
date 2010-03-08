@@ -31,14 +31,14 @@ import org.w3c.dom.Node;
 import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
-import com.bluexml.xforms.controller.alfresco.RedirectionBean;
+import com.bluexml.xforms.controller.beans.RedirectionBean;
 import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
 import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.binding.ValueType;
 import com.bluexml.xforms.controller.navigation.NavigationSessionListener;
 import com.bluexml.xforms.controller.navigation.Page;
-import com.bluexml.xforms.controller.navigation.PageInfoBean;
+import com.bluexml.xforms.controller.beans.PageInfoBean;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 

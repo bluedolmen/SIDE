@@ -2,7 +2,7 @@ package com.bluexml.xforms.actions;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
-import com.bluexml.xforms.controller.navigation.PageInfoBean;
+import com.bluexml.xforms.controller.beans.PageInfoBean;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 

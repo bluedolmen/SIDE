@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.bluexml.xforms.controller.alfresco;
+package com.bluexml.xforms.controller.beans;
 
 /**
  * @author Amenel

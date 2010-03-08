@@ -63,6 +63,7 @@ import com.bluexml.xforms.actions.SetTypeAction;
 import com.bluexml.xforms.actions.SubmitAction;
 import com.bluexml.xforms.actions.WorkflowTransitionAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
+import com.bluexml.xforms.controller.beans.PageInfoBean;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 
