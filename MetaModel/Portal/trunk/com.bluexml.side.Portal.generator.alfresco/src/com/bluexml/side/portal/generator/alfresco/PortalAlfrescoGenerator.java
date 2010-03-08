@@ -10,13 +10,16 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
+import com.bluexml.side.util.security.SecurityHelper;
+import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
-
+	public static String GENERATOR_CODE = "CODE_GED_G_P_ALFRESCO_SHARE_30"; //$NON-NLS-1$
+	
 	static String GENERATOR_PARAM_SHAREURL = "alfresco.share.url";
 	static String GENERATOR_PARAM_FACETMAPURL = "facetMap.url";
 	static String GENERATOR_PARAM_XFORMURL = "com.bluexml.side.Form.generator.xforms.chiba.webappContext";
-
+	
 	private static String MMUri = "http://www.kerblue.org/portal/1.0";
 	static String GENERATOR_OPTIONS_DOCLIST = "com.bluexml.side.Portal.generator.alfresco.doclist";
 	static String GENERATOR_OPTIONS_FORMS = "com.bluexml.side.Portal.generator.alfresco.forms";
@@ -36,7 +39,7 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	public boolean check() {
-		return true;
+		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
 	}
 
 	@Override
