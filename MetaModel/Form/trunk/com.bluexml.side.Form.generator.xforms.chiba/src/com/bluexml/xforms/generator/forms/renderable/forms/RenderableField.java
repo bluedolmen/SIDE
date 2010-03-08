@@ -32,7 +32,7 @@ import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.field.AbstractRenderableField;
-import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableActionField;
+import com.bluexml.xforms.generator.forms.renderable.forms.RenderableActionField;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableChoiceInput;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableChoiceInputWorkflow;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableDateTimeInput;

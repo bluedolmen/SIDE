@@ -1,4 +1,4 @@
-package com.bluexml.xforms.generator.forms.renderable.forms.field;
+package com.bluexml.xforms.generator.forms.renderable.forms;
 
 import java.util.Stack;
 
