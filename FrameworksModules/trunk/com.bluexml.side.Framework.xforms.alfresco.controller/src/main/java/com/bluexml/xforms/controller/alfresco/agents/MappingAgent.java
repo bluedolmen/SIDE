@@ -1,4 +1,4 @@
-package com.bluexml.xforms.controller.mapping;
+package com.bluexml.xforms.controller.alfresco.agents;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,6 +38,12 @@ import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.ModelChoiceType;
 import com.bluexml.xforms.controller.binding.SearchFormType;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
+import com.bluexml.xforms.controller.mapping.MappingToolAlfrescoToClassForms;
+import com.bluexml.xforms.controller.mapping.MappingToolAlfrescoToForms;
+import com.bluexml.xforms.controller.mapping.MappingToolClassFormsToAlfresco;
+import com.bluexml.xforms.controller.mapping.MappingToolCommon;
+import com.bluexml.xforms.controller.mapping.MappingToolFormsToAlfresco;
+import com.bluexml.xforms.controller.mapping.MappingToolSearch;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
 
@@ -45,10 +51,10 @@ import com.bluexml.xforms.messages.MsgId;
  * The Class MappingTool.<br>
  * Delegates operations to instances of MappingToolCommon
  */
-public class MappingTool {
+public class MappingAgent {
 
 	/** The logger. */
-	protected static Log logger = LogFactory.getLog(MappingTool.class);
+	protected static Log logger = LogFactory.getLog(MappingAgent.class);
 
 	/** The mapping tool impl alfresco to x forms. */
 	private MappingToolAlfrescoToClassForms mappingToolImplAlfrescoToXForms;
@@ -96,7 +102,7 @@ public class MappingTool {
 	 *            the controller
 	 * @throws Exception
 	 */
-	public MappingTool(AlfrescoController controller) throws Exception {
+	public MappingAgent(AlfrescoController controller) throws Exception {
 		super();
 		loadMappingXml();
 		mappingToolImplAlfrescoToXForms = new MappingToolAlfrescoToClassForms(mapping, controller);

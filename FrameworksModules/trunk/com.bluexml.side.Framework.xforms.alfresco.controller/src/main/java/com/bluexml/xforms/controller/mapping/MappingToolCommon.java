@@ -84,7 +84,7 @@ public class MappingToolCommon {
 	protected static ObjectFactory alfrescoObjectFactory = new ObjectFactory();
 
 	/** The logger. */
-	protected static Log logger = LogFactory.getLog(MappingTool.class);
+	protected static Log logger = LogFactory.getLog(MappingToolCommon.class);
 
 	/** The number types. */
 	protected static List<String> numberTypes = Arrays.asList("byte", "double", "float", "int",
@@ -884,7 +884,7 @@ public class MappingToolCommon {
 	/*
 	 * EnumType
 	 */
-	protected boolean isDynamic(EnumType enumType) {
+	public boolean isDynamic(EnumType enumType) { // public for MappingAgent
 		if (enumType.isDynamic() == null) {
 			return false;
 		}
@@ -952,7 +952,7 @@ public class MappingToolCommon {
 	/*
 	 * ModelChoiceType
 	 */
-	protected String getFieldSize(ModelChoiceType modelChoiceType) {
+	public String getFieldSize(ModelChoiceType modelChoiceType) { // public for MappingAgent
 		try {
 			return modelChoiceType.getFieldSize();
 		} catch (Exception e) {
@@ -1020,7 +1020,7 @@ public class MappingToolCommon {
 	 * @param wkFormName
 	 * @return false if either the workflow form does not exist or it is not a start task.
 	 */
-	protected boolean isStartTaskForm(String wkFormName) {
+	public boolean isStartTaskForm(String wkFormName) {
 		WorkflowTaskType workflowTaskType = getWorkflowTaskType(wkFormName, false);
 		if (workflowTaskType == null) {
 			return false;

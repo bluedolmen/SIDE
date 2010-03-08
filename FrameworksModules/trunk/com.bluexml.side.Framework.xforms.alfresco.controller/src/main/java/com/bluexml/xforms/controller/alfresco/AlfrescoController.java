@@ -54,15 +54,14 @@ import org.xml.sax.SAXException;
 
 import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.actions.GetAction;
-import com.bluexml.xforms.controller.alfresco.agents.SystemAgent;
+import com.bluexml.xforms.controller.alfresco.agents.*;
+import com.bluexml.xforms.controller.beans.EditNodeBean;
+import com.bluexml.xforms.controller.beans.FileUploadInfoBean;
+import com.bluexml.xforms.controller.beans.RedirectionBean;
 import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
 import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.GenericAttribute;
 import com.bluexml.xforms.controller.binding.GenericClass;
-import com.bluexml.xforms.controller.mapping.MappingTool;
-import com.bluexml.xforms.controller.beans.FileUploadInfoBean;
-import com.bluexml.xforms.controller.beans.EditNodeBean;
-import com.bluexml.xforms.controller.beans.RedirectionBean;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
@@ -193,7 +192,7 @@ public class AlfrescoController {
 	 * @throws Exception
 	 */
 	private void loadMappingXml() throws Exception {
-		mappingTool.loadMappingXml();
+		mappingAgent.loadMappingXml();
 	}
 
 	/**
@@ -418,7 +417,7 @@ public class AlfrescoController {
 	protected Properties config = null;
 
 	/** The mapping tool. */
-	private MappingTool mappingTool;
+	private MappingAgent mappingAgent;
 
 	//
 	//
@@ -595,7 +594,7 @@ public class AlfrescoController {
 	 */
 	public Document getInstanceSearch(Page currentPage, String formName,
 			Map<String, String> initParams) {
-		return mappingTool.getInstanceSearch(currentPage, formName, initParams);
+		return mappingAgent.getInstanceSearch(currentPage, formName, initParams);
 	}
 
 	/**
@@ -618,7 +617,7 @@ public class AlfrescoController {
 			throws ServletException {
 		Document alfrescoNode = readObjectFromRepository(transaction, id);
 
-		return mappingTool.transformAlfrescoToClassForms(transaction, alfrescoNode, stack,
+		return mappingAgent.transformAlfrescoToClassForms(transaction, alfrescoNode, stack,
 				formIsReadOnly, isServletRequest);
 	}
 
@@ -792,7 +791,7 @@ public class AlfrescoController {
 	 */
 	public String persistSearch(String formName, Node instance, boolean shortPropertyNames)
 			throws ServletException {
-		return mappingTool.transformSearchForm(formName, instance, shortPropertyNames);
+		return mappingAgent.transformSearchForm(formName, instance, shortPropertyNames);
 	}
 
 	/**
@@ -811,7 +810,7 @@ public class AlfrescoController {
 	 */
 	public String persistClass(AlfrescoTransaction transaction, Node instance,
 			boolean isServletRequest) throws ServletException {
-		GenericClass alfClass = mappingTool.transformClassFormsToAlfresco(transaction, instance,
+		GenericClass alfClass = mappingAgent.transformClassFormsToAlfresco(transaction, instance,
 				isServletRequest);
 		if (alfClass.getId() == null) {
 			alfClass.setId(saveObject(transaction, alfClass));
@@ -983,7 +982,7 @@ public class AlfrescoController {
 		String mimeType = null;
 
 		// content file(s); these will be saved to the server's filesystem
-		List<FileUploadInfoBean> fileBeans = mappingTool.getUploadBeansFilesystem(transaction,
+		List<FileUploadInfoBean> fileBeans = mappingAgent.getUploadBeansFilesystem(transaction,
 				alfClass);
 		for (FileUploadInfoBean infoBean : fileBeans) {
 			fileName = infoBean.getPath();
@@ -991,11 +990,11 @@ public class AlfrescoController {
 				String type = alfClass.getQualifiedName();
 				fileName = uploadMoveFileToDir(type, fileName, transaction);
 			}
-			mappingTool.setFileUploadFileName(fileName, infoBean.getAttribute());
+			mappingAgent.setFileUploadFileName(fileName, infoBean.getAttribute());
 		}
 
 		// repository content file(s); these will be directly uploaded to the repository
-		List<FileUploadInfoBean> repoBeans = mappingTool.getUploadBeansRepo(transaction, alfClass);
+		List<FileUploadInfoBean> repoBeans = mappingAgent.getUploadBeansRepo(transaction, alfClass);
 		for (FileUploadInfoBean infoBean : repoBeans) {
 			fileName = null;
 			fileName = infoBean.getName();
@@ -1010,11 +1009,11 @@ public class AlfrescoController {
 					throw new ServletException(MsgPool.getMsg(MsgId.MSG_UPLOAD_FAILED));
 				}
 			}
-			mappingTool.setFileUploadFileName(fileName, attribute);
+			mappingAgent.setFileUploadFileName(fileName, attribute);
 		}
 
 		// node content file; there's at most one instance of this.
-		FileUploadInfoBean nodeInfoBean = mappingTool.getNodeContentInfo(transaction, alfClass);
+		FileUploadInfoBean nodeInfoBean = mappingAgent.getNodeContentInfo(transaction, alfClass);
 		if (nodeInfoBean != null) {
 			fileName = nodeInfoBean.getName();
 			filePath = nodeInfoBean.getPath();
@@ -1052,15 +1051,15 @@ public class AlfrescoController {
 		// read the old class
 		GenericClass oldClass = null;
 		try {
-			oldClass = MappingTool
+			oldClass = MappingAgent
 					.unmarshal(readObjectFromRepository(transaction, alfClass.getId()));
 		} catch (JAXBException e) {
 			throw new ServletException(e);
 		}
-		previousFileContentInfo = mappingTool.getUploadBeansFilesystem(transaction, oldClass);
-		previousRepoContentInfo = mappingTool.getUploadBeansRepo(transaction, oldClass);
-		newFileContentInfo = mappingTool.getUploadBeansFilesystem(transaction, alfClass);
-		newRepoContentInfo = mappingTool.getUploadBeansRepo(transaction, alfClass);
+		previousFileContentInfo = mappingAgent.getUploadBeansFilesystem(transaction, oldClass);
+		previousRepoContentInfo = mappingAgent.getUploadBeansRepo(transaction, oldClass);
+		newFileContentInfo = mappingAgent.getUploadBeansFilesystem(transaction, alfClass);
+		newRepoContentInfo = mappingAgent.getUploadBeansRepo(transaction, alfClass);
 
 		//
 		// enqueue files/nodes to be deleted
@@ -1287,7 +1286,7 @@ public class AlfrescoController {
 
 	public void executeBatch(AlfrescoTransaction alfrescoTransaction) throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
-		parameters.put("datas", MappingTool.marshalBatch(alfrescoTransaction));
+		parameters.put("datas", MappingAgent.marshalBatch(alfrescoTransaction));
 
 		Map<String, String> ids = new HashMap<String, String>();
 
@@ -1417,7 +1416,7 @@ public class AlfrescoController {
 			parameters.put("limit", "true");
 		}
 
-		parameters.put("type", mappingTool.getEnumType(type).getName());
+		parameters.put("type", mappingAgent.getEnumType(type).getName());
 		Document reqDoc = requestDocumentFromAlfresco(transaction, parameters,
 				MsgId.INT_WEBSCRIPT_OPCODE_ENUM);
 		if (reqDoc == null) {
@@ -1461,9 +1460,9 @@ public class AlfrescoController {
 		 * celle indiquée ds forms.properties) ou fixé par la propriété 'field size' dans le
 		 * modeleur. Dans ce cas, SELECTMAX conserve tjrs la valeur de field size.
 		 */
-		String maxSize = mappingTool.getFieldSizeForField(type, "" + getParamMaxResults(),
+		String maxSize = mappingAgent.getFieldSizeForField(type, "" + getParamMaxResults(),
 				lastFormName);
-		alfTypeName = mappingTool.getClassType(type).getAlfrescoName();
+		alfTypeName = mappingAgent.getClassType(type).getAlfrescoName();
 		parameters.put("type", alfTypeName);
 		parameters.put("format", StringUtils.trimToEmpty(format));
 		parameters.put("maxLength", StringUtils.trimToEmpty(maxLength));
@@ -1801,7 +1800,7 @@ public class AlfrescoController {
 	public Document createClassFormInstance(AlfrescoTransaction transaction, String type,
 			Map<String, String> initParams, boolean formIsReadOnly, boolean isServletRequest)
 			throws ServletException {
-		return mappingTool.createClassFormsInstance(transaction, type, initParams, formIsReadOnly,
+		return mappingAgent.createClassFormsInstance(transaction, type, initParams, formIsReadOnly,
 				isServletRequest);
 	}
 
@@ -1832,7 +1831,7 @@ public class AlfrescoController {
 	 */
 	public Document createForm(AlfrescoTransaction transaction, String type,
 			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
-		return mappingTool.newFormInstance(type, transaction, initParams, formIsReadOnly);
+		return mappingAgent.newFormInstance(type, transaction, initParams, formIsReadOnly);
 	}
 
 	/**
@@ -1852,7 +1851,7 @@ public class AlfrescoController {
 	 */
 	public Document loadForm(AlfrescoTransaction transaction, String type, String id,
 			boolean formIsReadOnly) throws ServletException {
-		return mappingTool.createFormInstance(transaction, type, id, formIsReadOnly);
+		return mappingAgent.createFormInstance(transaction, type, id, formIsReadOnly);
 	}
 
 	/**
@@ -1894,7 +1893,7 @@ public class AlfrescoController {
 	 */
 	public String persistFormJSON(AlfrescoTransaction transaction, String formName, Node instance,
 			boolean shortPropertyNames) throws ServletException {
-		return mappingTool.transformsToJSON(transaction, formName, instance, shortPropertyNames);
+		return mappingAgent.transformsToJSON(transaction, formName, instance, shortPropertyNames);
 	}
 
 	/**
@@ -1930,7 +1929,7 @@ public class AlfrescoController {
 	 */
 	private GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
 			Node instance) throws ServletException {
-		return mappingTool.transformsToAlfresco(transaction, formName, instance);
+		return mappingAgent.transformsToAlfresco(transaction, formName, instance);
 	}
 
 	/**
@@ -1942,7 +1941,7 @@ public class AlfrescoController {
 	 *            the element id
 	 */
 	public void removeReference(Document node, String elementId) {
-		mappingTool.removeReference(node, elementId);
+		mappingAgent.removeReference(node, elementId);
 	}
 
 	/**
@@ -1954,7 +1953,7 @@ public class AlfrescoController {
 	 * @return true, if successful
 	 */
 	public boolean hasSubTypes(String dataType) {
-		return mappingTool.hasSubTypes(dataType);
+		return mappingAgent.hasSubTypes(dataType);
 	}
 
 	/**
@@ -1966,7 +1965,7 @@ public class AlfrescoController {
 	 * @return true, if is dynamic enum
 	 */
 	public boolean isDynamicEnum(String type) {
-		return mappingTool.isDynamicEnum(type);
+		return mappingAgent.isDynamicEnum(type);
 	}
 
 	/**
@@ -1979,7 +1978,7 @@ public class AlfrescoController {
 	 * @return
 	 */
 	public String getShortAssociationName(String completeAssoName, String dataType) {
-		return mappingTool.getDisplayLabelFromAssociationName(completeAssoName, dataType);
+		return mappingAgent.getDisplayLabelFromAssociationName(completeAssoName, dataType);
 	}
 
 	/**
@@ -2334,7 +2333,7 @@ public class AlfrescoController {
 
 		Element taskElt = instance.createElement(formName);
 
-		mappingTool.collectTaskProperties(instance, taskElt, formName, alfrescoNodes, false);
+		mappingAgent.collectTaskProperties(instance, taskElt, formName, alfrescoNodes, false);
 
 		Element rootElement = instance.createElement(MsgId.INT_INSTANCE_WKFLW_NODESET.getText());
 		rootElement.appendChild(taskElt);
@@ -2352,7 +2351,7 @@ public class AlfrescoController {
 	 * @return
 	 */
 	public String getWorkflowFormNameByTaskId(String fullTaskId) {
-		return mappingTool.getWorkflowFormNameByTaskId(fullTaskId);
+		return mappingAgent.getWorkflowFormNameByTaskId(fullTaskId);
 	}
 
 	/**
@@ -2363,7 +2362,7 @@ public class AlfrescoController {
 	 * @return
 	 */
 	private String getFieldFromCanisterType(String wkFormName, String fieldName) {
-		return mappingTool.getFormFieldTypeFromCanister(wkFormName, fieldName);
+		return mappingAgent.getFormFieldTypeFromCanister(wkFormName, fieldName);
 	}
 
 	/**
@@ -2527,7 +2526,7 @@ public class AlfrescoController {
 		// we get "wfbxwfTest" but we want "wfTest"
 		prefix = prefix.substring(BLUEXML_WORKFLOW_PREFIX.length());
 
-		return mappingTool.getWorkflowStartTaskFormName(prefix);
+		return mappingAgent.getWorkflowStartTaskFormName(prefix);
 	}
 
 	/**
@@ -2700,11 +2699,11 @@ public class AlfrescoController {
 	 * @return
 	 */
 	public String getReadOnlyFormsSuffix() {
-		return mappingTool.getReadOnlyFormsSuffix();
+		return mappingAgent.getReadOnlyFormsSuffix();
 	}
 
 	public boolean isDebugMode() {
-		return mappingTool.getDebugModeStatus();
+		return mappingAgent.getDebugModeStatus();
 	}
 
 	/**
@@ -2714,7 +2713,7 @@ public class AlfrescoController {
 	 * @return
 	 */
 	public boolean isStartTaskForm(String wkFormName) {
-		return mappingTool.isStartTaskForm(wkFormName);
+		return mappingAgent.isStartTaskForm(wkFormName);
 	}
 
 	/**
@@ -2783,7 +2782,7 @@ public class AlfrescoController {
 	 */
 	public boolean performDynamicReload() {
 		try {
-			mappingTool.loadMappingXml();
+			mappingAgent.loadMappingXml();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -3024,7 +3023,7 @@ public class AlfrescoController {
 	 * @return
 	 */
 	public String getCustomFormForDataType(String dataType) {
-		return mappingTool.getFormTypeWithDataType(dataType);
+		return mappingAgent.getFormTypeWithDataType(dataType);
 	}
 
 	/**
@@ -3034,7 +3033,7 @@ public class AlfrescoController {
 	 * @return
 	 */
 	public String getDefaultFormForDataType(String dataType) {
-		return mappingTool.getClassTypeWithDataType(dataType);
+		return mappingAgent.getClassTypeWithDataType(dataType);
 	}
 
 	/**
@@ -3046,7 +3045,7 @@ public class AlfrescoController {
 	 *         unknown.
 	 */
 	public String getUnderlyingClassForForm(String formName) {
-		return mappingTool.getUnderlyingClassForForm(formName);
+		return mappingAgent.getUnderlyingClassForForm(formName);
 	}
 
 	/**
@@ -3059,7 +3058,7 @@ public class AlfrescoController {
 	 *         <code>null</code> if the form name is unknown.
 	 */
 	public String getUnderlyingClassForWorkflow(String formName) {
-		return mappingTool.getUnderlyingClassForWorkflow(formName);
+		return mappingAgent.getUnderlyingClassForWorkflow(formName);
 	}
 
 	/**
@@ -3071,7 +3070,7 @@ public class AlfrescoController {
 	 * @return the id of the data form.
 	 */
 	public String getUnderlyingDataFormForWorkflow(String formName) {
-		return mappingTool.getUnderlyingDataFormForWorkflow(formName);
+		return mappingAgent.getUnderlyingDataFormForWorkflow(formName);
 	}
 
 	/**
@@ -3082,7 +3081,7 @@ public class AlfrescoController {
 	 * @return the content of the "pooled actors" property.
 	 */
 	public String workflowGetTaskPooledActorsByTaskId(String name) {
-		return mappingTool.getWorkflowTaskPooledActorsById(name);
+		return mappingAgent.getWorkflowTaskPooledActorsById(name);
 	}
 
 	/**
@@ -3093,11 +3092,11 @@ public class AlfrescoController {
 	 * @return the content of the "actor id" property.
 	 */
 	public String workflowGetTaskActorIdByTaskId(String name) {
-		return mappingTool.getWorkflowTaskActorIdById(name);
+		return mappingAgent.getWorkflowTaskActorIdById(name);
 	}
 
 	public WorkflowTaskInfoBean getWorkflowTaskInfoBean(String wkFormName) {
-		return mappingTool.getWorkflowTaskInfoBean(wkFormName);
+		return mappingAgent.getWorkflowTaskInfoBean(wkFormName);
 	}
 	
 }
