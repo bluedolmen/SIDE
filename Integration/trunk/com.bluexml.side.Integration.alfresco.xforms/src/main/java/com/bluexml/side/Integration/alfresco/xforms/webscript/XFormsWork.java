@@ -68,7 +68,6 @@ import com.thoughtworks.xstream.XStream;
 public class XFormsWork implements RunAsWork<String> {
 
 	/** */
-	private static final String SERVICE_RESULT_SUCCESS = "success";
 	private static Log logger = LogFactory.getLog(XFormsWork.class);
 	private static XStream xstream = null;
 
@@ -1013,16 +1012,25 @@ public class XFormsWork implements RunAsWork<String> {
 
 	/**
 	 * Adds a content to a folder that already has the aspect "workflow package".<br/>
+	 * If a valid package node was provided at call time, that same package is returned. Otherwise
+	 * (i.e. if the package is <code>null</code>), a new package is created.<br/>
 	 * Parameters: "content", "package"
 	 * 
-	 * @return any non empty string in case of success, or an empty string otherwise.
+	 * @return the noderef (as a serialized XML string) of the package, or <code>null</code> if the
+	 *         content is not effectively associated with the package when the job to be done is
+	 *         over.
 	 */
 	protected String addInPackage() {
 		String nodeStr = parameters.get("content");
 		String packageStr = parameters.get("package");
 
 		NodeRef noderef = new NodeRef(nodeStr);
-		NodeRef wkPackage = new NodeRef(packageStr);
+		NodeRef wkPackage;
+		if (packageStr == null) { // it's up to us to create the package
+			wkPackage = serviceRegistry.getWorkflowService().createPackage(null);
+		} else { // one was provided
+			wkPackage = new NodeRef(packageStr);
+		}
 
 		NodeService nodeService = serviceRegistry.getNodeService();
 		ChildAssociationRef childAssoc = nodeService.getPrimaryParent(noderef);
@@ -1033,10 +1041,10 @@ public class XFormsWork implements RunAsWork<String> {
 		List<ChildAssociationRef> assocs = nodeService.getChildAssocs(wkPackage);
 		for (ChildAssociationRef asso : assocs) {
 			if (asso.getChildRef().equals(noderef)) {
-				return SERVICE_RESULT_SUCCESS;
+				return xstream.toXML(wkPackage);
 			}
 		}
-		return "";
+		return null;
 	}
 
 	/**
