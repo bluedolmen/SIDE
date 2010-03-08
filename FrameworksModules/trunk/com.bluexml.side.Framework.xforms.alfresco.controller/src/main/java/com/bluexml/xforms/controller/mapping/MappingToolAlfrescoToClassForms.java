@@ -67,8 +67,6 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 * @return the document
 	 * 
 	 * @throws ServletException
-	 *             the controller exception
-	 * @throws ServletException
 	 */
 	public Document createClassFormsInstance(AlfrescoTransaction transaction, String type,
 			Map<String, String> initParams, Stack<AssociationType> stack, boolean formIsReadOnly,
@@ -132,8 +130,6 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 * @param isServletRequest
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	private void fillXFormsAssociationType(AlfrescoTransaction transaction,
 			Document xformsDocument, Element classElement, AssociationType association,
@@ -173,8 +169,6 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 *            the init params
 	 * @param isServletRequest
 	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	private void fillXFormsAssociationRoot(AlfrescoTransaction transaction,
@@ -240,8 +234,6 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 * @param associationElement
 	 *            the association element
 	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	private void processXFormsAssociationCreate(AlfrescoTransaction transaction,
@@ -376,8 +368,6 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 * 
 	 * @return the node
 	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	private Node fillXFormsAssociationCreateElementInline(AlfrescoTransaction transaction,
@@ -586,8 +576,6 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 * @param isServletRequest
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	private void fillXFormsDocument(AlfrescoTransaction transaction, Document xformsDocument,
 			GenericClass alfrescoClass, String type, Map<String, String> initParams,
@@ -757,7 +745,6 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 	 * @return the document
 	 * 
 	 * @throws ServletException
-	 *             the controller exception
 	 */
 	public Document transformAlfrescoToClassForms(AlfrescoTransaction transaction,
 			Document alfrescoNode, Stack<AssociationType> stack, boolean formIsReadOnly,

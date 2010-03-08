@@ -31,6 +31,7 @@ import org.w3c.dom.Node;
 import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.controller.beans.PersistFormResultBean;
 import com.bluexml.xforms.controller.beans.RedirectionBean;
 import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
 import com.bluexml.xforms.controller.binding.GenericAttribute;
@@ -711,7 +712,9 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		Element taskElt = DOMUtil.getChild(root, taskTypeName);
 		GenericClass toCreate;
 		// Assemble a BlueXML Class.xsd object from the instance, dealing with FileFields (#1209)
-		toCreate = controller.persistWorkflow(transaction, taskTypeName, taskElt);
+		PersistFormResultBean resultBean = controller.persistWorkflow(transaction, taskTypeName,
+				taskElt);
+		toCreate = resultBean.getResultClass();
 
 		// add task properties built from the attributes derived from form fields
 		String processName = AlfrescoController

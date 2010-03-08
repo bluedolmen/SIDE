@@ -1,6 +1,5 @@
 package com.bluexml.xforms.controller.mapping;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.beans.FileUploadInfoBean;
+import com.bluexml.xforms.controller.beans.PersistFormResultBean;
 import com.bluexml.xforms.controller.binding.AssociationActions;
 import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.ClassType;
@@ -232,7 +232,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			// change the references list if references become supported in FormWorkflow's
 			collectAssocs(transaction, rootElt, taskType.getModelChoice(),
 					new ArrayList<ReferenceType>(), alfClass);
-			
+
 			// set the name of the form as qualified name: in case the worfklow form has FileFields
 			// that upload to the filesystem, the name will serve as a directory name.
 			alfClass.setQualifiedName(formName);
@@ -397,8 +397,9 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			AlfrescoTransaction at) throws ServletException {
 		String id = null;
 		if (isInline(modelChoiceType)) {
-			id = controller.persistForm(at, modelChoiceType.getTarget().get(0).getName(), DOMUtil
-					.getFirstElement(value));
+			PersistFormResultBean result = controller.persistForm(at, modelChoiceType.getTarget()
+					.get(0).getName(), DOMUtil.getFirstElement(value));
+			id = result.getResultStr();
 		} else {
 			id = getId(value);
 		}
@@ -432,7 +433,9 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 
 			targetElement = DOMUtil.getChild(referenceElement, target.getName());
 
-			targetId = controller.persistForm(transaction, target.getName(), targetElement);
+			PersistFormResultBean result = controller.persistForm(transaction, target.getName(),
+					targetElement);
+			targetId = result.getResultStr();
 			collectAddAssociation(alfClass, targetId, referenceType);
 			i++;
 		}

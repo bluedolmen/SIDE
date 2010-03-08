@@ -3,7 +3,6 @@ package com.bluexml.xforms.controller.alfresco;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -11,7 +10,6 @@ import java.net.ConnectException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.HashMap;
@@ -25,7 +23,6 @@ import java.util.Vector;
 import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
-import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -41,7 +38,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,15 +50,13 @@ import org.xml.sax.SAXException;
 
 import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.actions.GetAction;
-import com.bluexml.xforms.controller.alfresco.agents.*;
+import com.bluexml.xforms.controller.alfresco.agents.MappingAgent;
+import com.bluexml.xforms.controller.alfresco.agents.SystemAgent;
 import com.bluexml.xforms.controller.beans.EditNodeBean;
-import com.bluexml.xforms.controller.beans.FileUploadInfoBean;
+import com.bluexml.xforms.controller.beans.PersistFormResultBean;
 import com.bluexml.xforms.controller.beans.RedirectionBean;
 import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
 import com.bluexml.xforms.controller.binding.AssociationType;
-import com.bluexml.xforms.controller.binding.GenericAttribute;
-import com.bluexml.xforms.controller.binding.GenericClass;
-import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 import com.thoughtworks.xstream.XStream;
@@ -139,13 +133,7 @@ public class AlfrescoController {
 
 	/** The last initParams we saw. */
 	// <-- not safe in multi-user or production environments
-	Map<String, String> initParameters = null;
-
-	/** The last form type we saw. */
-	String lastFormName;
-
-	/** The current upload path, set by getUploadPathInFileSystem */
-	File uploadDir;
+	private Map<String, String> initParameters = null;
 
 	static {
 		// set the document builder and catalogs.
@@ -167,7 +155,11 @@ public class AlfrescoController {
 			throw new RuntimeException(e);
 		}
 
-		instance = new AlfrescoController();
+		try {
+			instance = new AlfrescoController();
+		} catch (Exception e1) {
+			throw new RuntimeException("Failed to create the Alfresco Controller instance.", e1);
+		}
 		messagesPropertiesPath = null;
 		formsPropertiesPath = null;
 		CssUrl = null;
@@ -175,7 +167,7 @@ public class AlfrescoController {
 
 		// statically load properties
 		try {
-			instance.loadMappingXml();
+			// loadMappingXml(); // already done by the mapping agent of the singleton instance
 			loadProperties(formsPropertiesPath, messagesPropertiesPath);
 			loadRedirectionTable(null);
 		} catch (Exception e) {
@@ -187,12 +179,10 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Loads (or reloads) the mapping.xml file.
-	 * 
-	 * @throws Exception
+	 * @return the docBuilder
 	 */
-	private void loadMappingXml() throws Exception {
-		mappingAgent.loadMappingXml();
+	public static DocumentBuilder getDocBuilder() {
+		return docBuilder;
 	}
 
 	/**
@@ -349,17 +339,6 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Instantiates a new alfresco controller.
-	 */
-	private AlfrescoController() {
-		super();
-		// singleton
-
-		// reference the agents
-		systemAgent = new SystemAgent(this, xstream);
-	}
-
-	/**
 	 * Gets the single instance of AlfrescoController.
 	 * 
 	 * @return single instance of AlfrescoController
@@ -418,6 +397,27 @@ public class AlfrescoController {
 
 	/** The mapping tool. */
 	private MappingAgent mappingAgent;
+
+	/**
+	 * Instantiates a new alfresco controller.
+	 * 
+	 * @throws Exception
+	 */
+	private AlfrescoController() throws Exception {
+		super();
+		// singleton
+
+		// reference the agents
+		systemAgent = new SystemAgent(this, xstream);
+		mappingAgent = new MappingAgent(this);
+	}
+
+	/**
+	 * @return the mappingAgent
+	 */
+	public MappingAgent getMappingAgent() {
+		return mappingAgent;
+	}
 
 	//
 	//
@@ -508,7 +508,7 @@ public class AlfrescoController {
 	//
 
 	/**
-	 * Creates or loads the instance for a default class form.
+	 * Creates or loads the XForms instance document for a default class form.
 	 * 
 	 * @param transaction
 	 *            the transaction
@@ -516,8 +516,6 @@ public class AlfrescoController {
 	 *            the content type
 	 * @param id
 	 *            the id
-	 * @param initParams
-	 *            the init params
 	 * @param idAsServlet
 	 *            whether the request comes from a servlet
 	 * 
@@ -527,74 +525,55 @@ public class AlfrescoController {
 	 *             the alfresco controller exception
 	 */
 	public Document getInstanceClass(AlfrescoTransaction transaction, String type, String id,
-			Map<String, String> initParams, boolean formIsReadOnly, boolean isServletRequest)
-			throws ServletException {
-		Document instance = null;
-		// save the initParams
-		this.initParameters = initParams;
-		try {
-			if (id == null) {
-				instance = createClassFormInstance(transaction, type, initParams, formIsReadOnly,
-						isServletRequest);
-			} else {
-				instance = getObjectInstance(transaction, id, new Stack<AssociationType>(),
-						formIsReadOnly, isServletRequest);
-			}
-		} catch (ServletException se) {
-			throw se; // just propagate
-		} catch (Exception e) {
-			throw new ServletException(e);
-		}
-		return instance;
+			boolean formIsReadOnly, boolean isServletRequest) throws ServletException {
+		return mappingAgent.getInstanceClass(transaction, type, id, formIsReadOnly,
+				isServletRequest);
 	}
 
 	/**
-	 * Creates or loads the instance for a FormClass.
+	 * Creates or loads the XForms instance document for a FormClass (a customized form).
 	 * 
 	 * @param transaction
 	 *            the transaction
-	 * @param type
-	 *            the content type
+	 * @param formName
+	 *            the form id
 	 * @param id
 	 *            the id of the object to load. If <b>null</b>, the form is empty (with the
 	 *            exception of default values [from in the model] and initial values [from URL
 	 *            parameters]. If non null, the form is filled with values from the object.
+	 * @param formIsReadOnly
 	 * 
 	 * @return the form
 	 * 
 	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
-	public Document getInstanceForm(AlfrescoTransaction transaction, String type, String id,
-			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
-		Document instance = null;
-		// save some data for later
-		this.initParameters = initParams;
-		this.lastFormName = type;
-		try {
-			if (id == null) {
-				instance = createForm(transaction, type, initParams, formIsReadOnly);
-			} else {
-				instance = loadForm(transaction, type, id, formIsReadOnly);
-			}
-		} catch (Exception e) {
-			throw new ServletException(e);
-		}
-		return instance;
+	public Document getInstanceForm(AlfrescoTransaction transaction, String formName, String id,
+			boolean formIsReadOnly) throws ServletException {
+		return mappingAgent.getInstanceForm(transaction, formName, id, formIsReadOnly);
 	}
 
 	/**
-	 * Gets an XForms instance document for a FormSearch form.
+	 * Returns an XForms instance document for a FormWorkflow.
 	 * 
-	 * @param currentPage
+	 * @see {@link GetAction}
+	 * @param formName
+	 * @return
+	 * @throws ServletException
+	 */
+	public Document getInstanceWorkflow(String formName) throws ServletException {
+		return mappingAgent.getInstanceWorkflow(formName);
+	}
+
+	/**
+	 * Returns an XForms instance document for a FormSearch.
+	 * 
 	 * @param formName
 	 *            the form Id
-	 * @param initParams
 	 * @return
 	 */
-	public Document getInstanceSearch(Page currentPage, String formName,
-			Map<String, String> initParams) {
-		return mappingAgent.getInstanceSearch(currentPage, formName, initParams);
+	public Document getInstanceSearch(String formName) {
+		return mappingAgent.getInstanceSearch(formName);
 	}
 
 	/**
@@ -781,128 +760,6 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Persists a search form: collects the search info on search forms.
-	 * 
-	 * @param transaction
-	 * @param instance
-	 * @param isServletRequest
-	 * @return
-	 * @throws ServletException
-	 */
-	public String persistSearch(String formName, Node instance, boolean shortPropertyNames)
-			throws ServletException {
-		return mappingAgent.transformSearchForm(formName, instance, shortPropertyNames);
-	}
-
-	/**
-	 * Persists a class form: transforms the XForms instance into a GenericClass, and either saves
-	 * or updates a node.
-	 * 
-	 * @param instance
-	 *            the instance
-	 * @param transaction
-	 *            the transaction
-	 * @param isServletRequest
-	 * 
-	 * @return the object id as given by the transaction manager
-	 * 
-	 * @throws ServletException
-	 */
-	public String persistClass(AlfrescoTransaction transaction, Node instance,
-			boolean isServletRequest) throws ServletException {
-		GenericClass alfClass = mappingAgent.transformClassFormsToAlfresco(transaction, instance,
-				isServletRequest);
-		if (alfClass.getId() == null) {
-			alfClass.setId(saveObject(transaction, alfClass));
-		} else {
-			uploadProcessOnUpdate(transaction, alfClass);
-		}
-		return alfClass.getId();
-	}
-
-	/**
-	 * Saves a node. Moves uploaded files to the file system/repository and enqueues the 'save'
-	 * operation in the transaction, returning the id given by the transaction manager. <br/>
-	 * NOTE: The values from the instance <b>must</b> have already been collected.
-	 * 
-	 * @param alfClass
-	 *            the alf class
-	 * @param transaction
-	 *            the transaction
-	 * 
-	 * @return the string
-	 * 
-	 * @throws ServletException
-	 */
-	private String saveObject(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws ServletException {
-		// enqueue the operation
-		transaction.queueSave(alfClass);
-
-		// process file upload fields if any
-		uploadProcessOnSave(transaction, alfClass);
-
-		return alfClass.getId();
-	}
-
-	/**
-	 * Updates a node: enqueues the update operation in the transaction and processes file uploads.
-	 * 
-	 * @param transaction
-	 * @param alfClass
-	 * @return
-	 * @throws ServletException
-	 */
-	private String updateObject(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws ServletException {
-		// enqueue the operation
-		transaction.queueUpdate(alfClass);
-
-		// process file upload fields if any
-		uploadProcessOnUpdate(transaction, alfClass);
-
-		return alfClass.getId();
-	}
-
-	/**
-	 * Attaches the referenced content to a transaction. The attachment is not done if the file name
-	 * is not a valid file URI (which happens when 1-there's no uploaded file and 2-a content has
-	 * been uploaded previously).
-	 * 
-	 * @param transaction
-	 * @param alfClass
-	 * @param fileName
-	 * @param filePath
-	 * @param mimeType
-	 * @param shouldAppendSuffix
-	 * @throws ServletException
-	 *             if the file doesn't exist
-	 */
-	private void uploadAttachContent(AlfrescoTransaction transaction, GenericClass alfClass,
-			String fileName, String filePath, String mimeType, boolean shouldAppendSuffix)
-			throws ServletException {
-		if (filePath != null && filePath.startsWith("file:")) {
-			File file;
-			URI fileURI = URI.create(filePath);
-			String fullFileName = fileURI.getPath();
-			file = new File(fullFileName);
-
-			if (!file.exists()) {
-				if (logger.isErrorEnabled()) {
-					logger.error("The file '" + fullFileName + "' to be uploaded does not exist.");
-				}
-				throw new ServletException(
-						"The file to upload does not exist. Your session may have expired. Please load and submit the form again.");
-			}
-
-			if (file.length() > 0) {
-				transaction.queueAttachContent(alfClass.getId(), fileName, fullFileName, mimeType,
-						shouldAppendSuffix, alfClass.getQualifiedName());
-			}
-		}
-	}
-
-	/**
 	 * Returns the directory for uploading files into the file system. If none given in initParams
 	 * or the directory does not exist, falls back to the value from configuration file.
 	 */
@@ -966,322 +823,36 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Processes all upload fields on initial submission. Moves filesystem uploads to the directory,
-	 * stores repo uploads into the repository and attaches the (possible) node content to the
-	 * transaction. If the transaction fails subsequently, all uploads should be removed.
+	 * Persists a search form: collects the search info on search forms.
 	 * 
 	 * @param transaction
-	 * @param alfClass
-	 * @throws ServletException
+	 * @param instance
+	 * @param isServletRequest
+	 * @return
 	 * @throws ServletException
 	 */
-	private void uploadProcessOnSave(AlfrescoTransaction transaction, GenericClass alfClass)
+	public String persistSearch(String formName, Node instance, boolean shortPropertyNames)
 			throws ServletException {
-		String fileName = null;
-		String filePath = null;
-		String mimeType = null;
-
-		// content file(s); these will be saved to the server's filesystem
-		List<FileUploadInfoBean> fileBeans = mappingAgent.getUploadBeansFilesystem(transaction,
-				alfClass);
-		for (FileUploadInfoBean infoBean : fileBeans) {
-			fileName = infoBean.getPath();
-			if (fileName.startsWith("file:")) {
-				String type = alfClass.getQualifiedName();
-				fileName = uploadMoveFileToDir(type, fileName, transaction);
-			}
-			mappingAgent.setFileUploadFileName(fileName, infoBean.getAttribute());
-		}
-
-		// repository content file(s); these will be directly uploaded to the repository
-		List<FileUploadInfoBean> repoBeans = mappingAgent.getUploadBeansRepo(transaction, alfClass);
-		for (FileUploadInfoBean infoBean : repoBeans) {
-			fileName = null;
-			fileName = infoBean.getName();
-			filePath = infoBean.getPath();
-			mimeType = infoBean.getMimeType();
-			GenericAttribute attribute = infoBean.getAttribute();
-			if (filePath.startsWith("file:")) {
-				String location = getParamUploadPathInRepository();
-				fileName = uploadMoveFileToRepo(transaction, fileName, filePath, location,
-						mimeType, infoBean.isShouldAppendSuffix());
-				if (StringUtils.trimToNull(fileName) == null) {
-					throw new ServletException(MsgPool.getMsg(MsgId.MSG_UPLOAD_FAILED));
-				}
-			}
-			mappingAgent.setFileUploadFileName(fileName, attribute);
-		}
-
-		// node content file; there's at most one instance of this.
-		FileUploadInfoBean nodeInfoBean = mappingAgent.getNodeContentInfo(transaction, alfClass);
-		if (nodeInfoBean != null) {
-			fileName = nodeInfoBean.getName();
-			filePath = nodeInfoBean.getPath();
-			mimeType = nodeInfoBean.getMimeType();
-
-			uploadAttachContent(transaction, alfClass, fileName, filePath, mimeType, nodeInfoBean
-					.isShouldAppendSuffix());
-		}
+		return mappingAgent.transformSearchForm(formName, instance, shortPropertyNames);
 	}
 
 	/**
-	 * Processes the upload files on update: deletes (if relevant) the old files and uploads the new
-	 * ones. The deletions are not actually performed here: files/nodes to be deleted are put in
-	 * queues.<br/>
-	 * <p>
-	 * <b>The file providing the node content is not deleted!</b> Don't know whether we should.
-	 * </p>
+	 * Persists a class form: transforms the XForms instance into a GenericClass, and either saves
+	 * or updates a node.
 	 * 
-	 * @param alfClass
-	 *            the alf class
+	 * @param instance
+	 *            the instance
 	 * @param transaction
 	 *            the transaction
+	 * @param isServletRequest
+	 * 
+	 * @return the object id as given by the transaction manager
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
-	private void uploadProcessOnUpdate(AlfrescoTransaction transaction, GenericClass alfClass)
-			throws ServletException {
-		List<FileUploadInfoBean> previousFileContentInfo;
-		List<FileUploadInfoBean> previousRepoContentInfo;
-		List<FileUploadInfoBean> newFileContentInfo;
-		List<FileUploadInfoBean> newRepoContentInfo;
-
-		// read the old class
-		GenericClass oldClass = null;
-		try {
-			oldClass = MappingAgent
-					.unmarshal(readObjectFromRepository(transaction, alfClass.getId()));
-		} catch (JAXBException e) {
-			throw new ServletException(e);
-		}
-		previousFileContentInfo = mappingAgent.getUploadBeansFilesystem(transaction, oldClass);
-		previousRepoContentInfo = mappingAgent.getUploadBeansRepo(transaction, oldClass);
-		newFileContentInfo = mappingAgent.getUploadBeansFilesystem(transaction, alfClass);
-		newRepoContentInfo = mappingAgent.getUploadBeansRepo(transaction, alfClass);
-
-		//
-		// enqueue files/nodes to be deleted
-		String fileName;
-		FileUploadInfoBean oldBean;
-		for (FileUploadInfoBean newBean : newFileContentInfo) {
-			fileName = newBean.getPath();
-			if (fileName != null && fileName.startsWith("file:")) { // value is being replaced
-				String qualifiedName = newBean.getAttribute().getQualifiedName();
-				oldBean = uploadFindBean(previousFileContentInfo, qualifiedName);
-				if (oldBean != null) {
-					// we need to register as a temp file for deletion in case of success
-					transaction.registerTempFileName(getParamUploadPathInFileSystem()
-							+ File.separator + oldBean.getPath());
-				}
-			}
-		}
-		for (FileUploadInfoBean newBean : newRepoContentInfo) {
-			fileName = newBean.getPath();
-			if (fileName != null && fileName.startsWith("file:")) {
-				String qualifiedName = newBean.getAttribute().getQualifiedName();
-				oldBean = uploadFindBean(previousRepoContentInfo, qualifiedName);
-				if (oldBean != null) {
-					String oldNodeId = oldBean.getPath();
-					transaction.registerTempNodeId(oldNodeId);
-				}
-			}
-		}
-
-		//
-		// set the new version of the object
-		uploadProcessOnSave(transaction, alfClass);
-	}
-
-	/**
-	 * Finds the upload bean with the given attribute qname.
-	 * 
-	 * @param previousFileContentInfo
-	 * @param qname
-	 * @return the bean or null if not found
-	 */
-	private FileUploadInfoBean uploadFindBean(List<FileUploadInfoBean> list, String qname) {
-		if (list == null) {
-			return null;
-		}
-		for (FileUploadInfoBean bean : list) {
-			GenericAttribute attribute = bean.getAttribute();
-			if (attribute != null) {
-				if (attribute.getQualifiedName().equals(qname)) {
-					return bean;
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Moves the uploaded file to a randomly chosen folder under the file system upload directory.
-	 * 
-	 * @param type
-	 *            the type
-	 * @param fileName
-	 *            the file name
-	 * 
-	 * @return the string
-	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
-	 */
-	private String uploadMoveFileToDir(String type, String fileName, AlfrescoTransaction transaction)
-			throws ServletException {
-		URI fileURI = URI.create(fileName);
-		File sourceFile = null;
-		try { // #1160
-			sourceFile = new File(fileURI);
-		} catch (Exception e) {
-			if (logger.isErrorEnabled()) {
-				String message = "XForms Controller: error when processing the file to upload. Check the path: "
-						+ fileURI;
-				logger.error(message, e);
-			}
-			return null;
-		}
-
-		uploadDir = getParamUploadPathInFileSystem();
-		int depth = getParamUploadPathDepth();
-		File targetFile = findNewName(depth, type, sourceFile.getName());
-
-		copyFile(sourceFile, targetFile);
-		String relativePath = targetFile.getAbsolutePath().replace(uploadDir.getAbsolutePath(), "");
-
-		String outputFileName = relativePath.replace('\\', '/');
-		transaction.registerUploadedFileName(outputFileName);
-		transaction.registerTempFileName(sourceFile.getAbsolutePath());
-
-		return outputFileName;
-	}
-
-	/**
-	 * Process repository content. Moves the uploaded file to the given location into the content
-	 * manager.
-	 * 
-	 * @param transaction
-	 * @param fileName
-	 *            the file name, name and extension
-	 * @param filePath
-	 *            the file system complete path to the file to be uploaded. The name and extension
-	 *            may be different from parameter 'fileName'.
-	 * @param location
-	 *            path to a folder in the content management system
-	 * @param shouldAppendSuffix
-	 *            if set to true, an index [e.g. '(1)'] is appended to the filename if the original
-	 *            filename is not available
-	 * @return the string
-	 * @throws ServletException
-	 *             the alfresco controller exception
-	 */
-	private String uploadMoveFileToRepo(AlfrescoTransaction transaction, String fileName,
-			String filePath, String location, String mimetype, boolean shouldAppendSuffix)
-			throws ServletException {
-
-		// collect parameters
-		Map<String, String> parameters = new TreeMap<String, String>();
-		URI fileURI = URI.create(filePath);
-		String fullFileName = fileURI.getPath();
-
-		parameters.put("filename", fileName);
-		parameters.put("filepath", fullFileName);
-		parameters.put("location", location);
-		parameters.put("mimetype", mimetype);
-		parameters.put("suffixappend", "" + shouldAppendSuffix);
-		// call the webscript
-		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_UPLOAD);
-
-		return resultId;
-	}
-
-	/**
-	 * Copies the content of a source file to a target file.
-	 * 
-	 * @param sourceFile
-	 *            the source file
-	 * @param targetFile
-	 *            the target file
-	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
-	 */
-	private void copyFile(File sourceFile, File targetFile) throws ServletException {
-		FileChannel srcChannel = null;
-		FileChannel dstChannel = null;
-		try {
-			try {
-				srcChannel = new FileInputStream(sourceFile).getChannel();
-				dstChannel = new FileOutputStream(targetFile).getChannel();
-				dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
-			} catch (IOException e) {
-				throw new ServletException(e);
-			} finally {
-				if (srcChannel != null)
-					srcChannel.close();
-				if (dstChannel != null)
-					dstChannel.close();
-			}
-		} catch (Exception e) {
-			throw new ServletException(e);
-		}
-	}
-
-	/**
-	 * Finds a new name for an uploaded content. The name includes the content type, the random path
-	 * and the original file name.
-	 * <p/>
-	 * NOTE: uploadDir must have been set.
-	 * 
-	 * @param type
-	 *            the type
-	 * @param fileName
-	 *            the file name
-	 * 
-	 * @return the file
-	 */
-	private File findNewName(int depth, String type, String fileName) {
-		String lFileName = fileName;
-		if (lFileName.contains("\\")) {
-			int lastIndexOf = StringUtils.lastIndexOf(lFileName, '\\');
-			lFileName = StringUtils.substring(lFileName, lastIndexOf + 1);
-		}
-		String rootPath = uploadDir.getAbsolutePath() + File.separator + type;
-
-		String randomPath = RandomStringUtils.randomNumeric(depth);
-		for (int i = 0; i < depth; i++) {
-			rootPath = rootPath + File.separator + randomPath.charAt(i);
-		}
-
-		File root = new File(rootPath);
-
-		File result = new File(root, lFileName);
-		if (result.exists()) {
-			int dotPos = lFileName.lastIndexOf(".");
-
-			String fileNameWihoutExtension = null;
-			String fileNameExtension = null;
-
-			if (dotPos == -1) {
-				fileNameWihoutExtension = lFileName;
-			} else {
-				fileNameWihoutExtension = lFileName.substring(0, dotPos);
-				fileNameExtension = lFileName.substring(dotPos + 1);
-			}
-			int i = 0;
-			do {
-				String newFileName = fileNameWihoutExtension + "-" + i;
-				if (fileNameExtension != null) {
-					newFileName = newFileName + "." + fileNameExtension;
-				}
-				result = new File(root, newFileName);
-				i++;
-			} while (result.exists());
-		}
-		result.getParentFile().mkdirs();
-		return result;
+	public PersistFormResultBean persistClass(AlfrescoTransaction transaction, Node instance,
+			boolean isServletRequest) throws ServletException {
+		return mappingAgent.persistClass(transaction, instance, isServletRequest);
 	}
 
 	public void executeBatch(AlfrescoTransaction alfrescoTransaction) throws ServletException {
@@ -1461,7 +1032,7 @@ public class AlfrescoController {
 		 * modeleur. Dans ce cas, SELECTMAX conserve tjrs la valeur de field size.
 		 */
 		String maxSize = mappingAgent.getFieldSizeForField(type, "" + getParamMaxResults(),
-				lastFormName);
+				transaction.getFormId());
 		alfTypeName = mappingAgent.getClassType(type).getAlfrescoName();
 		parameters.put("type", alfTypeName);
 		parameters.put("format", StringUtils.trimToEmpty(format));
@@ -1578,8 +1149,12 @@ public class AlfrescoController {
 	public String requestString(AlfrescoTransaction transaction, Map<String, String> parameters,
 			MsgId opCode) throws ServletException {
 		String result = null;
+		AlfrescoTransaction lTransaction = transaction;
+		if (lTransaction == null) {
+			lTransaction = new AlfrescoTransaction(this);
+		}
 		try {
-			PostMethod post = requestPost(transaction, parameters, opCode);
+			PostMethod post = requestPost(lTransaction, parameters, opCode);
 			result = StringUtils.trim(post.getResponseBodyAsString());
 		} catch (ConnectException e) {
 			throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
@@ -1637,7 +1212,8 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * @param post
+	 * @param is
+	 *            the input stream to parse from
 	 * @return
 	 * @throws IOException
 	 * @throws SAXException
@@ -1780,31 +1356,6 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Creates the instance for a class form.
-	 * 
-	 * @param type
-	 *            the type
-	 * @param initParams
-	 *            the init params
-	 * @param stack
-	 *            the stack
-	 * @param transaction
-	 *            the transaction
-	 * @param formIsReadOnly
-	 * 
-	 * @return the document
-	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
-	 */
-	public Document createClassFormInstance(AlfrescoTransaction transaction, String type,
-			Map<String, String> initParams, boolean formIsReadOnly, boolean isServletRequest)
-			throws ServletException {
-		return mappingAgent.createClassFormsInstance(transaction, type, initParams, formIsReadOnly,
-				isServletRequest);
-	}
-
-	/**
 	 * Enqueues a delete operation for the current transaction.
 	 * 
 	 * @param nodeRef
@@ -1814,44 +1365,6 @@ public class AlfrescoController {
 	 */
 	public void delete(AlfrescoTransaction transaction, String nodeRef) {
 		transaction.queueDelete(nodeRef);
-	}
-
-	/**
-	 * Creates an empty form with no link with an existing object.
-	 * 
-	 * @param type
-	 *            Name of the content type.
-	 * @param transaction
-	 *            the transaction
-	 * 
-	 * @return the document
-	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
-	 */
-	public Document createForm(AlfrescoTransaction transaction, String type,
-			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
-		return mappingAgent.newFormInstance(type, transaction, initParams, formIsReadOnly);
-	}
-
-	/**
-	 * Load form.
-	 * 
-	 * @param type
-	 *            the type
-	 * @param id
-	 *            the id
-	 * @param transaction
-	 *            the transaction
-	 * 
-	 * @return the document
-	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
-	 */
-	public Document loadForm(AlfrescoTransaction transaction, String type, String id,
-			boolean formIsReadOnly) throws ServletException {
-		return mappingAgent.createFormInstance(transaction, type, id, formIsReadOnly);
 	}
 
 	/**
@@ -1869,20 +1382,14 @@ public class AlfrescoController {
 	 * 
 	 * @throws ServletException
 	 */
-	public String persistForm(AlfrescoTransaction transaction, String type, Node instance)
-			throws ServletException {
-		GenericClass alfClass = this.transformsToAlfresco(transaction, type, instance);
-		if (alfClass.getId() == null) {
-			alfClass.setId(saveObject(transaction, alfClass));
-		} else {
-			updateObject(transaction, alfClass);
-		}
-		return alfClass.getId();
+	public PersistFormResultBean persistForm(AlfrescoTransaction transaction, String type,
+			Node instance) throws ServletException {
+		return mappingAgent.persistForm(transaction, type, instance);
 	}
 
 	/**
 	 * Returns the data on the form in a specific JSON format. This is to be used with forms other
-	 * than FormSearch'es when called in search mode. If the form is a FormSearch, use
+	 * than FormSearch's when called in search mode. If the form is a FormSearch, use
 	 * {@link #persistSearch(AlfrescoTransaction, Node, boolean)}
 	 * 
 	 * @param transaction
@@ -1908,28 +1415,9 @@ public class AlfrescoController {
 	 * @return
 	 * @throws ServletException
 	 */
-	public GenericClass persistWorkflow(AlfrescoTransaction transaction, String taskTypeName,
-			Node taskElt) throws ServletException {
-		GenericClass transformed = transformsToAlfresco(transaction, taskTypeName, taskElt);
-
-		// #1209: we must support FileFields on workflow forms so we also simulate a queuing
-		saveObject(transaction, transformed);
-		return transformed;
-	}
-
-	/**
-	 * Transforms the XForms instance into a GenericClass. Extracted from persistForm to provide an
-	 * access to workflow actions.
-	 * 
-	 * @param transaction
-	 * @param formName
-	 * @param instance
-	 * @return
-	 * @throws ServletException
-	 */
-	private GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
-			Node instance) throws ServletException {
-		return mappingAgent.transformsToAlfresco(transaction, formName, instance);
+	public PersistFormResultBean persistWorkflow(AlfrescoTransaction transaction,
+			String taskTypeName, Node taskElt) throws ServletException {
+		return mappingAgent.persistWorkflow(transaction, taskTypeName, taskElt);
 	}
 
 	/**
@@ -2130,20 +1618,14 @@ public class AlfrescoController {
 	public NodeRef workflowCreatePackage(AlfrescoTransaction transaction, String nodeToAdd,
 			String userName) throws ServletException {
 
-		// TODO: merge the two call: the createPackage should be done by the webscript (for
-		// instance, if the 'package' parameter is null)
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("container", (String) null);
-		NodeRef wkPackage = (NodeRef) workflowRequestCall(transaction, "createPackage", params);
-		// but here, we call the webscript directly
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("content", nodeToAdd);
-		parameters.put("package", wkPackage.toString());
+		// parameters.put("package", (String) null); // do not set a null value
 		transaction.setLogin(userName);
 		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_PACKAGE);
 
 		if (StringUtils.trimToNull(resultId) != null) {
-			return wkPackage;
+			return (NodeRef) xstream.fromXML(resultId);
 		}
 		return null;
 	}
@@ -2316,30 +1798,6 @@ public class AlfrescoController {
 		WorkflowDefinition workflowRequest = (WorkflowDefinition) workflowRequestWrapper(null,
 				methodName, params);
 		return workflowRequest;
-	}
-
-	/**
-	 * Returns an instance for workflow forms so that they can be displayed.
-	 * 
-	 * @see {@link GetAction}
-	 * @param formName
-	 * @return
-	 * @throws ServletException
-	 */
-	public Document getWorkflowFormInstance(String formName) throws ServletException {
-		Document instance = docBuilder.newDocument();
-
-		Map<String, GenericClass> alfrescoNodes = new HashMap<String, GenericClass>();
-
-		Element taskElt = instance.createElement(formName);
-
-		mappingAgent.collectTaskProperties(instance, taskElt, formName, alfrescoNodes, false);
-
-		Element rootElement = instance.createElement(MsgId.INT_INSTANCE_WKFLW_NODESET.getText());
-		rootElement.appendChild(taskElt);
-
-		instance.appendChild(rootElement);
-		return instance;
 	}
 
 	/**
@@ -2523,7 +1981,7 @@ public class AlfrescoController {
 	public String getWorkflowStartTaskFormName(String workflowDefName) {
 		String prefix = workflowExtractNamespacePrefix(workflowDefName);
 
-		// we get "wfbxwfTest" but we want "wfTest"
+		// we got "wfbxwfTest" but we want "wfTest"
 		prefix = prefix.substring(BLUEXML_WORKFLOW_PREFIX.length());
 
 		return mappingAgent.getWorkflowStartTaskFormName(prefix);
@@ -2764,10 +2222,9 @@ public class AlfrescoController {
 	 */
 	public String getWebscriptHelp() {
 		String result;
-		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
 		Map<String, String> parameters = new HashMap<String, String>();
 		try {
-			result = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_HELP);
+			result = requestString(null, parameters, MsgId.INT_WEBSCRIPT_OPCODE_HELP);
 		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
@@ -2823,12 +2280,11 @@ public class AlfrescoController {
 			return "";
 		}
 		String request;
-		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("nodeId", nodeId);
 
 		try {
-			request = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_NODE_INFO);
+			request = requestString(null, parameters, MsgId.INT_WEBSCRIPT_OPCODE_NODE_INFO);
 		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
@@ -3098,5 +2554,5 @@ public class AlfrescoController {
 	public WorkflowTaskInfoBean getWorkflowTaskInfoBean(String wkFormName) {
 		return mappingAgent.getWorkflowTaskInfoBean(wkFormName);
 	}
-	
+
 }

@@ -4,7 +4,6 @@
 package com.bluexml.xforms.actions;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -60,15 +59,14 @@ public class WorkflowFormGetAction extends AbstractReadAction {
 		String wkFormName = currentPage.getFormName();
 		//
 		// get the instance for the task
-		Document docWkflw = controller.getWorkflowFormInstance(wkFormName);
+		Document docWkflw = controller.getInstanceWorkflow(wkFormName);
 		controller.workflowPatchInstance(transaction, wkFormName, docWkflw, currentPage
 				.getWkflwInstanceId());
 		//
 		// get the instance of the attached data form
-		Map<String, String> initParams = currentPage.getInitParams();
 		String dataId = currentPage.getDataId();
 		String dataFormName = controller.getUnderlyingDataFormForWorkflow(wkFormName);
-		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId, initParams, false);
+		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId, false);
 		//
 		// we need to nest the data form instance under workflow
 		Element wkDocElt = docWkflw.getDocumentElement();

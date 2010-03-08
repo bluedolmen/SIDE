@@ -235,8 +235,8 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @throws ServletException
 	 */
 	public void collectTaskProperties(Document formInstance, Element rootElement,
-			String wkFormName, Map<String, GenericClass> alfrescoNodes,
-			boolean formIsReadOnly) throws ServletException {
+			String wkFormName, Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly)
+			throws ServletException {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(controller);
 		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
 
@@ -840,7 +840,6 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param alfrescoClass
 	 *            the alfresco class
 	 * @param transaction
-	 * 
 	 * @return the form fields
 	 * @throws ServletException
 	 */
@@ -854,7 +853,6 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			attributesMap.put(attribute.getQualifiedName(), attribute);
 		}
 		for (FormFieldType formFieldType : fields) {
-			// TODO: switch entre workflow et classe
 			GenericAttribute attribute = attributesMap.get(formFieldType.getAlfrescoName());
 			String value = null;
 

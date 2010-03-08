@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.bluexml.xforms.controller.beans.PersistFormResultBean;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.controller.navigation.NavigationPath;
 import com.bluexml.xforms.controller.navigation.Page;
@@ -160,10 +161,14 @@ public class SubmitAction extends AbstractTransactionalAction {
 
 		// persist instance
 		if (type == FormTypeEnum.CLASS) {
-			result = controller.persistClass(transaction, node, false);
+			PersistFormResultBean resultBean = controller.persistClass(transaction, node, false);
+			result = resultBean.getResultStr();
 		} else if (type == FormTypeEnum.SEARCH) {
 			result = controller.persistSearch(formName, node, shortNames);
 			isSearching = true;
+		} else if (type == FormTypeEnum.FORM) {
+			PersistFormResultBean resultBean = controller.persistForm(transaction,formName, node);
+			result = resultBean.getResultStr();
 		} else {
 			String datatype = controller.getUnderlyingDataFormForWorkflow(formName);
 			String searchStr = StringUtils.trimToNull(pageInitParams.get(MsgId.PARAM_SEARCH_MODE
@@ -173,7 +178,9 @@ public class SubmitAction extends AbstractTransactionalAction {
 			if (isSearching) {
 				result = controller.persistFormJSON(transaction, datatype, node, shortNames);
 			} else {
-				result = controller.persistForm(transaction, datatype, node);
+				PersistFormResultBean resultBean = controller.persistForm(transaction, datatype,
+						node);
+				result = resultBean.getResultStr();
 			}
 		}
 		return result;

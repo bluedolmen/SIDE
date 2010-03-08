@@ -3,8 +3,6 @@
  */
 package com.bluexml.xforms.controller.mapping;
 
-import java.util.Map;
-
 import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
@@ -21,7 +19,6 @@ import com.bluexml.xforms.controller.binding.ClassType;
 import com.bluexml.xforms.controller.binding.Mapping;
 import com.bluexml.xforms.controller.binding.SearchFieldType;
 import com.bluexml.xforms.controller.binding.SearchFormType;
-import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
@@ -47,13 +44,10 @@ public class MappingToolSearch extends MappingToolCommon {
 	/**
 	 * Builds the XForms instance document for a search form.
 	 * 
-	 * @param currentPage
 	 * @param formName
-	 * @param initParams
 	 * @return
 	 */
-	public Document getInstanceSearch(Page currentPage, String formName,
-			Map<String, String> initParams) {
+	public Document getInstanceSearch(String formName) {
 		Document formInstance = documentBuilder.newDocument();
 		Element rootElement = formInstance.createElement("root");
 		SearchFormType sfType = getSearchFormType(formName);

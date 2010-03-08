@@ -1,6 +1,5 @@
 package com.bluexml.xforms.controller.mapping;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
@@ -46,6 +45,7 @@ import com.bluexml.xforms.actions.EnumAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.beans.FileUploadInfoBean;
+import com.bluexml.xforms.controller.beans.PersistFormResultBean;
 import com.bluexml.xforms.controller.binding.ActionFieldType;
 import com.bluexml.xforms.controller.binding.AspectType;
 import com.bluexml.xforms.controller.binding.AssociationType;
@@ -1116,7 +1116,8 @@ public class MappingToolCommon {
 		// this item has to be updated or saved
 		String targetId = null;
 		try {
-			targetId = controller.persistClass(transaction, targetNode, false);
+			PersistFormResultBean result = controller.persistClass(transaction, targetNode, false);
+			targetId = result.getResultStr();
 		} catch (ServletException e) {
 			throw new RuntimeException(e);
 		}

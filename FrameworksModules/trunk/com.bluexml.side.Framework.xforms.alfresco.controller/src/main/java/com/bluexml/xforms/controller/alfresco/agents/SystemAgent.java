@@ -13,7 +13,6 @@ import org.alfresco.service.cmr.security.PermissionService;
 import org.alfresco.service.namespace.QName;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.messages.MsgId;
 import com.thoughtworks.xstream.XStream;
 
@@ -57,7 +56,7 @@ public class SystemAgent {
 		parameters.put("methodParams", xstream.toXML(paramList));
 		Set<String> result;
 		try {
-			String resultStr = controller.requestString(new AlfrescoTransaction(controller), parameters,
+			String resultStr = controller.requestString(null, parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (Set<String>) xstream.fromXML(resultStr);
 		} catch (ServletException e) {
@@ -86,7 +85,7 @@ public class SystemAgent {
 		parameters.put("methodParams", xstream.toXML(paramList));
 		Set<String> result;
 		try {
-			String resultStr = controller.requestString(new AlfrescoTransaction(controller), parameters,
+			String resultStr = controller.requestString(null, parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (Set<String>) xstream.fromXML(resultStr);
 		} catch (ServletException e) {
@@ -113,8 +112,8 @@ public class SystemAgent {
 		parameters.put("methodParams", xstream.toXML(paramList));
 		String result;
 		try {
-			result = (String) xstream.fromXML(controller.requestString(new AlfrescoTransaction(
-					controller), parameters, MsgId.INT_WEBSCRIPT_OPCODE_SERVICE));
+			result = (String) xstream.fromXML(controller.requestString(null, parameters,
+					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE));
 		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
@@ -138,8 +137,8 @@ public class SystemAgent {
 		parameters.put("methodParams", xstream.toXML(paramList));
 		NodeRef result;
 		try {
-			String resultStr = controller.requestString(new AlfrescoTransaction(controller),
-					parameters, MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
+			String resultStr = controller.requestString(null, parameters,
+					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (NodeRef) xstream.fromXML(resultStr);
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -163,8 +162,8 @@ public class SystemAgent {
 		parameters.put("methodParams", xstream.toXML(paramList));
 		NodeRef result;
 		try {
-			String resultStr = controller.requestString(new AlfrescoTransaction(controller),
-					parameters, MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
+			String resultStr = controller.requestString(null, parameters,
+					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (NodeRef) xstream.fromXML(resultStr);
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -193,8 +192,8 @@ public class SystemAgent {
 
 		QName result;
 		try {
-			String requestString = controller.requestString(new AlfrescoTransaction(controller),
-					parameters, MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
+			String requestString = controller.requestString(null, parameters,
+					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (QName) xstream.fromXML(requestString);
 		} catch (Exception e) {
 			e.printStackTrace();

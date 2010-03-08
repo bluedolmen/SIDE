@@ -1,7 +1,6 @@
 package com.bluexml.xforms.actions;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.xml.parsers.DocumentBuilder;
@@ -36,7 +35,6 @@ public class GetAction extends AbstractReadAction {
 	public Node resolve() throws ServletException {
 		Page currentPage = navigationPath.peekCurrentPage();
 		String formName = currentPage.getFormName();
-		Map<String, String> initParams = currentPage.getInitParams();
 		String dataId = currentPage.getDataId();
 		FormTypeEnum formType = currentPage.getFormType();
 		Document node = currentPage.getNode();
@@ -47,17 +45,16 @@ public class GetAction extends AbstractReadAction {
 		boolean formIsReadOnly = (currentPage.getDataType() != currentPage.getFormName());
 		if (StringUtils.trimToNull(dataId) != null || node == null) {
 			if (formType == FormTypeEnum.FORM) {
-				node = controller.getInstanceForm(transaction, formName, dataId, initParams,
-						formIsReadOnly);
+				node = controller.getInstanceForm(transaction, formName, dataId, formIsReadOnly);
 			} else if (formType == FormTypeEnum.CLASS) {
-				node = controller.getInstanceClass(transaction, formName, dataId, initParams,
-						formIsReadOnly, false);
+				node = controller.getInstanceClass(transaction, formName, dataId, formIsReadOnly,
+						false);
 			} else if (formType == FormTypeEnum.WKFLW) {
 				node = getInstanceWorkflow(currentPage, formName);
 			} else if ((formType == FormTypeEnum.LIST) || (formType == FormTypeEnum.SELECTOR)) {
 				return getInstanceListOrSelector(formName, formType);
 			} else if (formType == FormTypeEnum.SEARCH) {
-				node = controller.getInstanceSearch(currentPage, formName, initParams);
+				node = controller.getInstanceSearch(formName);
 			}
 		}
 
@@ -124,16 +121,14 @@ public class GetAction extends AbstractReadAction {
 			throws ServletException {
 		//
 		// get the instance for the task
-		Document docWkflw = controller.getWorkflowFormInstance(wkFormName);
+		Document docWkflw = controller.getInstanceWorkflow(wkFormName);
 		controller.workflowPatchInstance(transaction, wkFormName, docWkflw, currentPage
 				.getWkflwInstanceId());
 		//
 		// get the instance of the attached data form
-		Map<String, String> initParams = currentPage.getInitParams();
 		String dataId = currentPage.getDataId();
 		String dataFormName = controller.getUnderlyingDataFormForWorkflow(wkFormName);
-		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId,
-				initParams, false);
+		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId, false);
 		//
 		// we need to nest the data form instance under workflow
 		Element wkDocElt = docWkflw.getDocumentElement();

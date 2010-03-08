@@ -16,6 +16,7 @@ import com.bluexml.xforms.controller.binding.GenericDelete;
 import com.bluexml.xforms.controller.binding.GenericUpdate;
 import com.bluexml.xforms.controller.binding.ObjectFactory;
 import com.bluexml.xforms.controller.binding.ServiceRequestSource;
+import com.bluexml.xforms.controller.navigation.Page;
 
 public class AlfrescoTransaction {
 
@@ -29,8 +30,11 @@ public class AlfrescoTransaction {
 	private Batch batch;
 	private Map<String, String> ids = null;
 
+	private Page page = null;
+
 	/** the name of the form's */
-	private String formId = null; // #1212
+	@SuppressWarnings("unused")
+	private String formId = null; // #1212 // TODO: delete this because already provided by the page
 
 	/** name(s) of file(s) uploaded to the file store, to be deleted in case of error */
 	private ArrayList<String> uploadedFileNames = null; // #1278
@@ -166,19 +170,21 @@ public class AlfrescoTransaction {
 		this.ids = ids;
 	}
 
+	public Map<String, String> getInitParams() {
+		if (page != null) {
+			return page.getInitParams();
+		}
+		return null;
+	}
+	
 	/**
 	 * @return the form name for this transaction
 	 */
 	public String getFormId() {
-		return formId;
-	}
-
-	/**
-	 * @param formId
-	 *            the form name to set
-	 */
-	public void setFormId(String formId) {
-		this.formId = formId;
+		if (page != null) {
+			return page.getFormName();
+		}
+		return null;
 	}
 
 	/**
@@ -251,6 +257,20 @@ public class AlfrescoTransaction {
 			uploadedNodes = new ArrayList<String>();
 		}
 		this.uploadedNodes.add(nodeId);
+	}
+
+	/**
+	 * @return the page
+	 */
+	public Page getPage() {
+		return page;
+	}
+
+	/**
+	 * @param page the page to set
+	 */
+	public void setPage(Page page) {
+		this.page = page;
 	}
 
 }

@@ -238,6 +238,7 @@ public abstract class AbstractAction {
 		this.uri = uri;
 		this.transaction = new AlfrescoTransaction(controller);
 		this.transaction.setLogin(transactionLogin);
+		this.transaction.setPage(navigationPath.peekCurrentPage());
 	}
 
 	/**
