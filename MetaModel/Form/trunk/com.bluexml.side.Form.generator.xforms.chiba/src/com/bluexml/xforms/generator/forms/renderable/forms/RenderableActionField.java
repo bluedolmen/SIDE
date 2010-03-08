@@ -2,11 +2,14 @@ package com.bluexml.xforms.generator.forms.renderable.forms;
 
 import java.util.Stack;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.bluexml.xforms.messages.MsgId;
 
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.FormElement;
+import com.bluexml.side.workflow.Transition;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -18,7 +21,7 @@ public class RenderableActionField extends Renderable {
 
 	private ModelElementSubmission submission;
 	private String label;
-	
+
 	private final boolean DEFAULT_VALIDATE_FIRST = true;
 
 	public RenderableActionField(XFormsGenerator generationManager, FormElement parent,
@@ -33,18 +36,15 @@ public class RenderableActionField extends Renderable {
 		ModelElement mel = formElement.getRef();
 		mel = (ModelElement) generationManager.getFormGenerator().getRealObject(mel);
 		String actionName;
-		// Operation theOp;
-		// String infixe = (mel instanceof Transition) ? WORKFLOW_ACTION
-		// : USER_ACTION;
-		// if (mel instanceof Operation) {
-		// theOp = (Operation) mel;
-		// actionName = theOp.getName();
-		// } else {
-		// actionName = formElement.getId();
-		// }
-		// FIXME: differentiate user actions (when they become available) from workflow actions
-		String infixe = MsgId.INT_ACT_CODE_WRKFLW_TRANSITION.getText();
-		actionName = formElement.getId();
+		String infixe;
+
+		if ((mel != null) && (mel instanceof Transition)) { // this is a workflow transition button
+			actionName = formElement.getId();
+			infixe = MsgId.INT_ACT_CODE_WRKFLW_TRANSITION.getText();
+		} else { // this is a user-added action button
+			actionName = StringUtils.trim(formElement.getAction_handler());
+			infixe = MsgId.INT_ACT_CODE_EXECUTE.getText();
+		}
 		label = formElement.getLabel();
 		submission = new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER + infixe + "/"
 				+ actionName, label, true, DEFAULT_VALIDATE_FIRST);
@@ -60,7 +60,8 @@ public class RenderableActionField extends Renderable {
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 
 		RenderedParentGroup renderedParentGroup = new RenderedParentGroup(renderedParents);
 		renderedParentGroup.getParent().addModelElement(submission);
