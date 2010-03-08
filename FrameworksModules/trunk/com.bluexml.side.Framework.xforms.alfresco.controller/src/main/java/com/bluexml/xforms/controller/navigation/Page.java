@@ -66,25 +66,25 @@ public class Page {
 	 */
 	public Page(PageInfoBean bean) {
 		super();
-		this.formType = bean.formType;
-		this.formName = bean.formName;
-		this.dataType = bean.dataType;
+		this.formType = bean.getFormType();
+		this.formName = bean.getFormName();
+		this.dataType = bean.getDataType();
 		this.dataTypeSet = false;
-		this.dataId = bean.dataId;
-		this.template = bean.templateId;
-		if (bean.initParams != null) {
-			this.initParams = bean.initParams;
+		this.dataId = bean.getDataId();
+		this.template = bean.getTemplateId();
+		if (bean.getInitParams() != null) {
+			this.initParams = bean.getInitParams();
 		} else {
 			this.initParams = new TreeMap<String, String>();
 		}
-		this.language = bean.language;
-		this.wkflwProcessId = bean.processId;
-		this.wkflwInstanceId = bean.instanceId;
-		this.showSubmitButtons = bean.showSubmits;
-		this.wrongCallType = bean.wrongCallType;
-		this.showCancel = bean.showCancel;
-		this.showDelete = bean.showDelete;
-		this.showValidate = bean.showValidate;
+		this.language = bean.getLanguage();
+		this.wkflwProcessId = bean.getProcessId();
+		this.wkflwInstanceId = bean.getInstanceId();
+		this.showSubmitButtons = bean.isShowSubmits();
+		this.wrongCallType = bean.isWrongCallType();
+		this.showCancel = bean.isShowCancel();
+		this.showDelete = bean.isShowDelete();
+		this.showValidate = bean.isShowValidate();
 	}
 
 	/**

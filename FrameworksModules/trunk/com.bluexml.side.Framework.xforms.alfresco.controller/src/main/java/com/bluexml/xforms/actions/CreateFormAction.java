@@ -1,8 +1,7 @@
 package com.bluexml.xforms.actions;
 
-import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.controller.beans.PageInfoBean;
+import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 
@@ -40,10 +39,10 @@ public class CreateFormAction extends AbstractCreateAction {
 		String inputDataType = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
 		// push new page
 		PageInfoBean bean = new PageInfoBean();
-		bean.formType = FormTypeEnum.FORM;
-		bean.formName = inputDataType;
-		bean.dataType = AlfrescoController.getInstance().getDataTypeFromFormName(bean.formName);
-		bean.language = navigationPath.peekCurrentPage().getLanguage();
+		bean.setFormType(FormTypeEnum.FORM);
+		bean.setFormName(inputDataType);
+		bean.setDataType(controller.getDataTypeFromFormName(bean.getFormName()));
+		bean.setLanguage(navigationPath.peekCurrentPage().getLanguage());
 		navigationPath.setCurrentPage(bean);
 	}
 

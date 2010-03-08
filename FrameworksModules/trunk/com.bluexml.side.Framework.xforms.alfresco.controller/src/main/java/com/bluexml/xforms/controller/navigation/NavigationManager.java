@@ -586,7 +586,7 @@ public class NavigationManager {
 		if (StringUtils.equals(paramFormType, MsgId.INT_FORMTYPE_WKFLW.getText())) {
 			formType = FormTypeEnum.WKFLW;
 		}
-		bean.formType = formType;
+		bean.setFormType(formType);
 
 		// type-related
 		String originalDatatype = req.getParameter(MsgId.PARAM_DATA_TYPE.getText());
@@ -602,15 +602,16 @@ public class NavigationManager {
 		if (dataType == null) {
 			throw new ServletException("type cannot be null");
 		}
-		bean.formName = dataType;
+		bean.setFormName(dataType);
 		// #1222
-		bean.dataType = AlfrescoController.getInstance().getDataTypeFromFormName(bean.formName);
-		bean.wrongCallType = false;
+		AlfrescoController controller = AlfrescoController.getInstance();
+		bean.setDataType(controller.getDataTypeFromFormName(bean.getFormName()));
+		bean.setWrongCallType(false);
 
 		String dataId = StringUtils.trimToNull(req.getParameter(MsgId.INT_ACT_PARAM_ANY_ID
 				.getText()));
 		// check that the form is appropriate for the data id
-		if (AlfrescoController.getInstance().getParamCheckMatchDataForm()) {
+		if (controller.getParamCheckMatchDataForm()) {
 			String realFormName = originalDatatype;
 //			if (bean.formType == FormTypeEnum.WKFLW) {
 //				WorkflowTaskType taskType = controller.getWorkflowTaskType(dataType);
@@ -621,26 +622,26 @@ public class NavigationManager {
 				if (contentType == null) {
 					dataId = null;
 				} else {
-					if (bean.formType == FormTypeEnum.WKFLW) {
+					if (bean.getFormType() == FormTypeEnum.WKFLW) {
 						dataType = controller.getUnderlyingClassForWorkflow(realFormName);
 					} else {
 						dataType = controller.getUnderlyingClassForForm(realFormName);
 					}
 					if (StringUtils.equals(dataType, contentType.getLocalName()) == false) {
-						bean.wrongCallType = true;
+						bean.setWrongCallType(true);
 						dataId = null;
 					}
 				}
 			}
 		}
 
-		bean.dataId = AlfrescoController.patchDataId(dataId);
-		bean.templateId = StringUtils.trimToNull(req.getParameter(TEMPLATE_ID));
-		bean.language = req.getParameter(MsgId.PARAM_LANGUAGE.getText());
-		bean.processId = req.getParameter(MsgId.PARAM_WORKFLOW_PROCESS_ID.getText());
-		bean.instanceId = req.getParameter(MsgId.PARAM_WORKFLOW_INSTANCE_ID.getText());
+		bean.setDataId(AlfrescoController.patchDataId(dataId));
+		bean.setTemplateId(StringUtils.trimToNull(req.getParameter(TEMPLATE_ID)));
+		bean.setLanguage(req.getParameter(MsgId.PARAM_LANGUAGE.getText()));
+		bean.setProcessId(req.getParameter(MsgId.PARAM_WORKFLOW_PROCESS_ID.getText()));
+		bean.setInstanceId(req.getParameter(MsgId.PARAM_WORKFLOW_INSTANCE_ID.getText()));
 
-		bean.initParams = getInitParams(req);
+		bean.setInitParams(getInitParams(req));
 
 		// deal with submit buttons
 		String submitParam;
@@ -648,25 +649,25 @@ public class NavigationManager {
 		submitParam = req.getParameter(MsgId.PARAM_SHOW_SUBMITS.getText());
 		if ((StringUtils.trimToNull(submitParam) != null)
 				&& (StringUtils.equalsIgnoreCase(submitParam, "false"))) {
-			bean.showSubmits = false;
+			bean.setShowSubmits(false);
 		}
 		//
 		submitParam = req.getParameter(MsgId.PARAM_SHOW_CANCEL.getText());
 		if ((StringUtils.trimToNull(submitParam) != null)
 				&& (StringUtils.equalsIgnoreCase(submitParam, "false"))) {
-			bean.showCancel = false;
+			bean.setShowCancel(false);
 		}
 		//
 		submitParam = req.getParameter(MsgId.PARAM_SHOW_DELETE.getText());
 		if ((StringUtils.trimToNull(submitParam) != null)
 				&& (StringUtils.equalsIgnoreCase(submitParam, "false"))) {
-			bean.showDelete = false;
+			bean.setShowDelete(false);
 		}
 		//
 		submitParam = req.getParameter(MsgId.PARAM_SHOW_VALIDATE.getText());
 		if ((StringUtils.trimToNull(submitParam) != null)
 				&& (StringUtils.equalsIgnoreCase(submitParam, "false"))) {
-			bean.showValidate = false;
+			bean.setShowValidate(false);
 		}
 
 		return bean;

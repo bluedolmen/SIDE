@@ -36,7 +36,7 @@ public class NavigationPath {
 	 *            the page information bean
 	 */
 	public void setCurrentPage(PageInfoBean bean) {
-		assert bean.formType != FormTypeEnum.BOTH;
+		assert bean.getFormType() != FormTypeEnum.BOTH;
 		Page currentPage = new Page(bean);
 		pushPage(currentPage);
 	}

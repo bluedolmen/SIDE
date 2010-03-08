@@ -58,8 +58,8 @@ public class EditFormAction extends AbstractEditAction {
 
 		PageInfoBean pageBean = new PageInfoBean();
 		String targetForms = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
-		pageBean.dataId = dataId;
-		pageBean.language = navigationPath.peekCurrentPage().getLanguage();
+		pageBean.setDataId(dataId);
+		pageBean.setLanguage(navigationPath.peekCurrentPage().getLanguage());
 
 		// set the form type, form name and data type
 		resolvePageInfo(pageBean, editBean, targetForms);
@@ -101,9 +101,9 @@ public class EditFormAction extends AbstractEditAction {
 		// look for a default form that supports the data type and return its name
 		String classFormName = controller.getDefaultFormForDataType(editBean.getDataType());
 		if (classFormName != null) {
-			pageBean.formType = FormTypeEnum.CLASS;
-			pageBean.formName = classFormName;
-			pageBean.dataType = pageBean.dataType;
+			pageBean.setFormType(FormTypeEnum.CLASS);
+			pageBean.setFormName(classFormName);
+			pageBean.setDataType(pageBean.getFormName());
 			return true;
 		}
 		return false;
@@ -124,9 +124,9 @@ public class EditFormAction extends AbstractEditAction {
 			String formClassName = controller.getUnderlyingClassForForm(formName);
 			if (formClassName != null) {
 				if (editDataType.equals(formClassName)) {
-					pageBean.formType = FormTypeEnum.FORM;
-					pageBean.formName = formName;
-					pageBean.dataType = formName;
+					pageBean.setFormType(FormTypeEnum.FORM);
+					pageBean.setFormName(formName);
+					pageBean.setDataType(formName);
 					return true;
 				}
 			}
@@ -135,9 +135,9 @@ public class EditFormAction extends AbstractEditAction {
 		// look for a customized form that supports it and return its name
 		String formName = controller.getCustomFormForDataType(editDataType);
 		if (formName != null) {
-			pageBean.formType = FormTypeEnum.FORM;
-			pageBean.formName = formName;
-			pageBean.dataType = pageBean.dataType;
+			pageBean.setFormType(FormTypeEnum.FORM);
+			pageBean.setFormName(formName);
+			pageBean.setDataType(pageBean.getFormName());
 			return true;
 		}
 

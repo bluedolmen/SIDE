@@ -4,8 +4,8 @@ import javax.servlet.ServletException;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.beans.EditNodeBean;
-import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.controller.beans.PageInfoBean;
+import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 
@@ -59,11 +59,11 @@ public class EditClassAction extends AbstractEditAction {
 			throw new ServletException("");
 		}
 		PageInfoBean bean = new PageInfoBean();
-		bean.formType = FormTypeEnum.CLASS;
-		bean.formName = realDataType;
-		bean.dataType = AlfrescoController.getInstance().getDataTypeFromFormName(bean.formName);
-		bean.dataId = dataId;
-		bean.language = navigationPath.peekCurrentPage().getLanguage();
+		bean.setFormType(FormTypeEnum.CLASS);
+		bean.setFormName(realDataType);
+		bean.setDataType(controller.getDataTypeFromFormName(bean.getFormName()));
+		bean.setDataId(dataId);
+		bean.setLanguage(navigationPath.peekCurrentPage().getLanguage());
 		navigationPath.setCurrentPage(bean);
 	}
 
