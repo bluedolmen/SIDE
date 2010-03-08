@@ -833,7 +833,7 @@ public class AlfrescoController {
 	 */
 	public String persistSearch(String formName, Node instance, boolean shortPropertyNames)
 			throws ServletException {
-		return mappingAgent.transformSearchForm(formName, instance, shortPropertyNames);
+		return mappingAgent.persistSearch(formName, instance, shortPropertyNames);
 	}
 
 	/**
@@ -987,7 +987,7 @@ public class AlfrescoController {
 			parameters.put("limit", "true");
 		}
 
-		parameters.put("type", mappingAgent.getEnumType(type).getName());
+		parameters.put("type", mappingAgent.getEnumTypeName(type));
 		Document reqDoc = requestDocumentFromAlfresco(transaction, parameters,
 				MsgId.INT_WEBSCRIPT_OPCODE_ENUM);
 		if (reqDoc == null) {
@@ -1033,7 +1033,7 @@ public class AlfrescoController {
 		 */
 		String maxSize = mappingAgent.getFieldSizeForField(type, "" + getParamMaxResults(),
 				transaction.getFormId());
-		alfTypeName = mappingAgent.getClassType(type).getAlfrescoName();
+		alfTypeName = mappingAgent.getClassTypeAlfrescoName(type);
 		parameters.put("type", alfTypeName);
 		parameters.put("format", StringUtils.trimToEmpty(format));
 		parameters.put("maxLength", StringUtils.trimToEmpty(maxLength));
@@ -1270,8 +1270,8 @@ public class AlfrescoController {
 		executeMethod(post, false);
 
 		if (logger.isTraceEnabled()) {
-			logger.debug("Response : ");
-			logger.debug(StringUtils.trim(post.getResponseBodyAsString()));
+			logger.trace("Response : ");
+			logger.trace(StringUtils.trim(post.getResponseBodyAsString()));
 		}
 
 		return post;
@@ -1400,7 +1400,7 @@ public class AlfrescoController {
 	 */
 	public String persistFormJSON(AlfrescoTransaction transaction, String formName, Node instance,
 			boolean shortPropertyNames) throws ServletException {
-		return mappingAgent.transformsToJSON(transaction, formName, instance, shortPropertyNames);
+		return mappingAgent.persistFormToJSON(transaction, formName, instance, shortPropertyNames);
 	}
 
 	/**
@@ -1801,12 +1801,11 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Returns the form name for a task based on the full task id.<br/>
-	 * Added for the demo webapp.
+	 * Returns the form name for a task based on the full task id.
 	 * 
 	 * @param fullTaskId
 	 *            e.g. "wfbxwfTest:T1"
-	 * @return
+	 * @return the id of the workflow form that can be used for the task
 	 */
 	public String getWorkflowFormNameByTaskId(String fullTaskId) {
 		return mappingAgent.getWorkflowFormNameByTaskId(fullTaskId);
@@ -1819,8 +1818,8 @@ public class AlfrescoController {
 	 * @param fieldName
 	 * @return
 	 */
-	private String getFieldFromCanisterType(String wkFormName, String fieldName) {
-		return mappingAgent.getFormFieldTypeFromCanister(wkFormName, fieldName);
+	private String getWorkflowFieldAlfrescoName(String wkFormName, String fieldName) {
+		return mappingAgent.getWorkflowFieldAlfrescoName(wkFormName, fieldName);
 	}
 
 	/**
@@ -1970,9 +1969,8 @@ public class AlfrescoController {
 	}
 
 	/**
-	 * Retrieves (from the mapping file) the name/id of a form that implements the start task for a
-	 * workflow definition name.<br/>
-	 * Added for the demo webapp.
+	 * Retrieves the name/id of a form that implements the start task for a workflow definition
+	 * name.<br/>
 	 * 
 	 * @param workflowDefName
 	 *            e.g. jbpm$wfbxwfTest:wfTest
@@ -2077,7 +2075,7 @@ public class AlfrescoController {
 		for (Element field : allFields) {
 			String fieldUniqueName = field.getTagName();
 			Serializable fieldValue = null;
-			String localName = getFieldFromCanisterType(wkFormName, fieldUniqueName);
+			String localName = getWorkflowFieldAlfrescoName(wkFormName, fieldUniqueName);
 			if (localName != null) {
 				// build the QName
 				if (namespaceURI == null) {
@@ -2478,8 +2476,8 @@ public class AlfrescoController {
 	 * @param dataType
 	 * @return
 	 */
-	public String getCustomFormForDataType(String dataType) {
-		return mappingAgent.getFormTypeWithDataType(dataType);
+	public String getCustomFormForDatatype(String dataType) {
+		return mappingAgent.getCustomFormForDatatype(dataType);
 	}
 
 	/**
@@ -2488,8 +2486,8 @@ public class AlfrescoController {
 	 * @param dataType
 	 * @return
 	 */
-	public String getDefaultFormForDataType(String dataType) {
-		return mappingAgent.getClassTypeWithDataType(dataType);
+	public String getDefaultFormForDatatype(String dataType) {
+		return mappingAgent.getDefaultFormForDatatype(dataType);
 	}
 
 	/**
@@ -2532,25 +2530,32 @@ public class AlfrescoController {
 	/**
 	 * Provides the pooled actors defined on the form that supports the given task name.
 	 * 
-	 * @param name
+	 * @param taskName
 	 *            a task definition name.
 	 * @return the content of the "pooled actors" property.
 	 */
-	public String workflowGetTaskPooledActorsByTaskId(String name) {
-		return mappingAgent.getWorkflowTaskPooledActorsById(name);
+	public String getTaskPooledActorsByTaskId(String taskName) {
+		return mappingAgent.getWorkflowTaskPooledActorsById(taskName);
 	}
 
 	/**
 	 * Provides the actor Id defined on the form that supports the given task name.
 	 * 
-	 * @param name
+	 * @param taskName
 	 *            a task definition name.
 	 * @return the content of the "actor id" property.
 	 */
-	public String workflowGetTaskActorIdByTaskId(String name) {
-		return mappingAgent.getWorkflowTaskActorIdById(name);
+	public String getTaskActorIdByTaskId(String taskName) {
+		return mappingAgent.getWorkflowTaskActorIdById(taskName);
 	}
 
+	/**
+	 * Provides a pool of information about the form whose name is given.
+	 * 
+	 * @param wkFormName
+	 *            the id of a valid workflow form.
+	 * @return the information bean.
+	 */
 	public WorkflowTaskInfoBean getWorkflowTaskInfoBean(String wkFormName) {
 		return mappingAgent.getWorkflowTaskInfoBean(wkFormName);
 	}

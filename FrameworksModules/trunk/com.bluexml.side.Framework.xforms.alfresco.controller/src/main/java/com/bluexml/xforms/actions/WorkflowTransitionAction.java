@@ -612,8 +612,8 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			navigationPath.setStatusMsg("Transition completed: the workflow is ended.");
 		} else {
 			for (WorkflowTask task : tasks) {
-				String actorGroup = controller.workflowGetTaskPooledActorsByTaskId(task.name);
-				String actorUser = controller.workflowGetTaskActorIdByTaskId(task.name);
+				String actorGroup = controller.getTaskPooledActorsByTaskId(task.name);
+				String actorUser = controller.getTaskActorIdByTaskId(task.name);
 
 				if ((StringUtils.trimToNull(actorGroup) != null)
 						|| (StringUtils.trimToNull(actorUser) != null)) {

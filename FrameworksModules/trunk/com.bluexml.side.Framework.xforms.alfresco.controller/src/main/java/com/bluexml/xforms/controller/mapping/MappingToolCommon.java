@@ -316,7 +316,7 @@ public class MappingToolCommon {
 	 * 
 	 * @return the class type, under the form [package].[class name]
 	 */
-	public String getClassTypeWithDataType(String dataType) {
+	public String getDefaultFormForDatatype(String dataType) {
 		List<ClassType> clazz = mapping.getClazz();
 		for (ClassType classType : clazz) {
 			if (classType.getAlfrescoName().equals(dataType)) {
@@ -349,15 +349,15 @@ public class MappingToolCommon {
 	}
 
 	/**
-	 * Gets the form type that supports the given data type (i.e. whose real class's name matches
-	 * the data type).
+	 * Gets the name of the form type that supports the given data type (i.e. whose real class's
+	 * name matches the data type).
 	 * 
 	 * @param formName
 	 *            the form name
 	 * 
 	 * @return the form type
 	 */
-	public String getFormTypeWithDataType(String dataType) {
+	public String getCustomFormForDatatype(String dataType) {
 		List<JAXBElement<? extends CanisterType>> elements = mapping.getCanister();
 
 		for (JAXBElement<? extends CanisterType> element : elements) {
@@ -485,7 +485,7 @@ public class MappingToolCommon {
 	 * 
 	 * @return the Alfresco name of the form field
 	 */
-	public String getFormFieldTypeFromCanister(String formName, String fieldName) {
+	public String getWorkflowFieldAlfrescoName(String formName, String fieldName) {
 		List<FormFieldType> fields = null;
 		WorkflowTaskType taskType = getWorkflowTaskType(formName, false);
 		fields = taskType.getField();

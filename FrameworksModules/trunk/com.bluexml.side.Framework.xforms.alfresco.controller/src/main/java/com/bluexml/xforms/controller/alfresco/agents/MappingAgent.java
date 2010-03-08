@@ -34,7 +34,6 @@ import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.beans.FileUploadInfoBean;
 import com.bluexml.xforms.controller.beans.PersistFormResultBean;
 import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
-import com.bluexml.xforms.controller.binding.AspectType;
 import com.bluexml.xforms.controller.binding.AssociationType;
 import com.bluexml.xforms.controller.binding.CanisterType;
 import com.bluexml.xforms.controller.binding.ClassType;
@@ -140,7 +139,7 @@ public class MappingAgent {
 	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
-	public Document createClassFormsInstance(AlfrescoTransaction transaction, String type,
+	private Document createClassFormsInstance(AlfrescoTransaction transaction, String type,
 			boolean formIsReadOnly, boolean isServletRequest) throws ServletException {
 		return mappingToolImplAlfrescoToXForms.createClassFormsInstance(transaction, type,
 				transaction.getInitParams(), new Stack<AssociationType>(), formIsReadOnly,
@@ -157,7 +156,7 @@ public class MappingAgent {
 	 * 
 	 * @return the content file name
 	 */
-	public List<FileUploadInfoBean> getUploadBeansFilesystem(AlfrescoTransaction transaction,
+	private List<FileUploadInfoBean> getUploadBeansFilesystem(AlfrescoTransaction transaction,
 			GenericClass alfClass) {
 		return mappingToolImplXFormsToAlfresco.getFileUploadBeans(transaction, alfClass,
 				MsgId.INT_UPLOAD_DEST_FILE.getText(), MsgId.INT_SUFFIX_UPLOAD_FILE.getText());
@@ -173,7 +172,7 @@ public class MappingAgent {
 	 * 
 	 * @return the bean, or null if no repository content file exists in the class
 	 */
-	public List<FileUploadInfoBean> getUploadBeansRepo(AlfrescoTransaction transaction,
+	private List<FileUploadInfoBean> getUploadBeansRepo(AlfrescoTransaction transaction,
 			GenericClass alfClass) {
 		return mappingToolImplXFormsToAlfresco.getFileUploadBeans(transaction, alfClass,
 				MsgId.INT_UPLOAD_DEST_REPO.getText(), MsgId.INT_SUFFIX_UPLOAD_REPO.getText());
@@ -189,7 +188,7 @@ public class MappingAgent {
 	 * 
 	 * @return the bean, or null if no repository content file exists in the class
 	 */
-	public FileUploadInfoBean getNodeContentInfo(AlfrescoTransaction transaction,
+	private FileUploadInfoBean getNodeContentInfo(AlfrescoTransaction transaction,
 			GenericClass alfClass) {
 		return mappingToolFormsToAlfresco.getNodeContentInfo(transaction, alfClass);
 	}
@@ -202,7 +201,7 @@ public class MappingAgent {
 	 * @param fileName
 	 *            the file name
 	 */
-	public void setFileUploadFileName(String fileName, GenericAttribute attr) {
+	private void setFileUploadFileName(String fileName, GenericAttribute attr) {
 		mappingToolImplXFormsToAlfresco.setFileUploadFileName(fileName, attr);
 	}
 
@@ -240,14 +239,14 @@ public class MappingAgent {
 	 * 
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
 	 */
-	public GenericClass transformClassFormsToAlfresco(AlfrescoTransaction transaction, Node node,
+	private GenericClass transformClassFormsToAlfresco(AlfrescoTransaction transaction, Node node,
 			boolean isServletRequest) {
 		return mappingToolImplXFormsToAlfresco.transformClassFormsToAlfresco(transaction, node,
 				isServletRequest);
 	}
 
 	/**
-	 * Removes the reference.
+	 * Removes references to the given id from the document.
 	 * 
 	 * @param node
 	 *            the node
@@ -285,7 +284,7 @@ public class MappingAgent {
 	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
-	public Document createFormInstance(AlfrescoTransaction transaction, String formName,
+	private Document createFormInstance(AlfrescoTransaction transaction, String formName,
 			boolean formIsReadOnly) throws ServletException {
 		return mappingToolAlfrescoToForms.newFormInstance(formName, transaction, transaction
 				.getInitParams(), formIsReadOnly);
@@ -308,29 +307,6 @@ public class MappingAgent {
 		return mappingToolAlfrescoToForms.getFormInstance(transaction, type, id, formIsReadOnly);
 	}
 
-	public Document getInstanceSearch(String formName) {
-		return mappingToolSearch.getInstanceSearch(formName);
-	}
-
-	/**
-	 * New form instance.
-	 * 
-	 * @param formName
-	 *            the form name
-	 * @param transaction
-	 * @param formIsReadOnly
-	 * 
-	 * @return the document
-	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
-	 */
-	public Document newFormInstance(String formName, AlfrescoTransaction transaction,
-			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
-		return mappingToolAlfrescoToForms.newFormInstance(formName, transaction, initParams,
-				formIsReadOnly);
-	}
-
 	/**
 	 * Transform forms to alfresco. Builds a GenericClass for a form from the given node. Extracted
 	 * from persistForm to provide an access to workflow actions.
@@ -346,67 +322,45 @@ public class MappingAgent {
 	 * 
 	 * @throws ServletException
 	 */
-	public GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
+	private GenericClass transformsToAlfresco(AlfrescoTransaction transaction, String formName,
 			Node formNode) throws ServletException {
 		return mappingToolFormsToAlfresco.transformsToAlfresco(transaction, formName, formNode);
-	}
-
-	/**
-	 * Transforms the instance into a JSON string for the given form id.
-	 * 
-	 * @param transaction
-	 * @param alfrescoController
-	 * @param formName
-	 * @param instance
-	 * @return
-	 * @throws ServletException
-	 */
-	public String transformsToJSON(AlfrescoTransaction transaction, String formName, Node instance,
-			boolean shortPropertyNames) throws ServletException {
-		return mappingToolFormsToAlfresco.transformsToJSON(transaction, formName, instance,
-				shortPropertyNames);
-	}
-
-	/**
-	 * Transforms the instance to the format for searches wrt the given form id.
-	 * 
-	 * @param formName
-	 *            the id of the search form
-	 * @param instance
-	 * @return
-	 * @throws ServletException
-	 */
-	public String transformSearchForm(String formName, Node instance, boolean shortPropertyNames)
-			throws ServletException {
-		return mappingToolSearch.transformSearchForm(formName, instance, shortPropertyNames);
 	}
 
 	/**
 	 * Gets the class type.
 	 * 
 	 * @param type
-	 *            the type
+	 *            the type, under the form package + "." + name
 	 * 
 	 * @return the class type
 	 */
-	public ClassType getClassType(String type) {
+	private ClassType getClassType(String type) {
 		return mappingToolImplAlfrescoToXForms.getClassType(type);
 	}
 
-	/**
-	 * Gets the aspect type.
-	 * 
-	 * @param aspectType
-	 *            the aspect type
-	 * 
-	 * @return the aspect type
-	 */
-	public AspectType getAspectType(AspectType aspectType) {
-		return mappingToolImplAlfrescoToXForms.getAspectType(aspectType);
+	private EnumType getEnumType(String type) {
+		return mappingToolImplAlfrescoToXForms.getEnumType(type);
 	}
 
-	public EnumType getEnumType(String type) {
-		return mappingToolImplAlfrescoToXForms.getEnumType(type);
+	/**
+	 * Provides the Alfresco name for a class data type.
+	 * 
+	 * @param type
+	 *            the type, under the form package + "." + name
+	 * @return
+	 */
+	public String getClassTypeAlfrescoName(String type) {
+		return mappingToolImplAlfrescoToXForms.getClassType(type).getAlfrescoName();
+	}
+
+	/**
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public String getEnumTypeName(String type) {
+		return mappingToolImplAlfrescoToXForms.getEnumType(type).getName();
 	}
 
 	/**
@@ -472,14 +426,28 @@ public class MappingAgent {
 				}
 			}
 		}
-		return ""; // normally, we should never get here (unless there are multiple violations)
+		return ""; // normally, we should not get here (unless there are multiple violations)
 	}
 
+	/**
+	 * Marshalls the batch queue of the given transaction into a string.
+	 * 
+	 * @param transaction
+	 * @return
+	 * @throws ServletException
+	 */
 	public static String marshalBatch(AlfrescoTransaction transaction) throws ServletException {
 		return MappingToolCommon.marshal(transaction.getBatch());
 	}
 
-	public static synchronized GenericClass unmarshal(Document alfrescoNode) throws JAXBException {
+	/**
+	 * Unmarshalls a document based on classes generated from the xsd files.
+	 * 
+	 * @param alfrescoNode
+	 * @return
+	 * @throws JAXBException
+	 */
+	private static synchronized GenericClass unmarshal(Document alfrescoNode) throws JAXBException {
 		return MappingToolCommon.unmarshal(alfrescoNode);
 	}
 
@@ -512,27 +480,31 @@ public class MappingAgent {
 		return mapping.getGenInfo().isDebugMode();
 	}
 
-	public FormType getFormType(String refName) {
+	private FormType getFormType(String refName) {
 		return mappingToolAlfrescoToForms.getFormType(refName);
 	}
 
-	public SearchFormType getSearchType(String refName) {
+	@SuppressWarnings("unused")
+	@Deprecated
+	private SearchFormType getSearchType(String refName) {
 		return mappingToolAlfrescoToForms.getSearchFormType(refName);
 	}
 
-	public WorkflowTaskType getWorkflowTaskType(String refName, boolean byId) {
+	private WorkflowTaskType getWorkflowTaskType(String refName, boolean byId) {
 		return mappingToolAlfrescoToForms.getWorkflowTaskType(refName, byId);
 	}
 
-	public WorkflowTaskType getWorkflowTaskTypeWithField(String fieldName) {
+	@SuppressWarnings("unused")
+	@Deprecated
+	private WorkflowTaskType getWorkflowTaskTypeWithField(String fieldName) {
 		return mappingToolAlfrescoToForms.getWorkflowTaskTypeWithField(fieldName);
 	}
 
-	public String getFormFieldTypeFromCanister(String wkFormName, String fieldName) {
-		return mappingToolAlfrescoToForms.getFormFieldTypeFromCanister(wkFormName, fieldName);
+	public String getWorkflowFieldAlfrescoName(String wkFormName, String fieldName) {
+		return mappingToolAlfrescoToForms.getWorkflowFieldAlfrescoName(wkFormName, fieldName);
 	}
 
-	public void collectTaskProperties(Document instance, Element taskElt, String wkFormName,
+	private void collectTaskProperties(Document instance, Element taskElt, String wkFormName,
 			Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly)
 			throws ServletException {
 		mappingToolAlfrescoToForms.collectTaskProperties(instance, taskElt, wkFormName,
@@ -543,18 +515,35 @@ public class MappingAgent {
 		return mappingToolFormsToAlfresco.isStartTaskForm(wkFormName);
 	}
 
-	public String getFormTypeWithDataType(String dataType) {
-		return mappingToolFormsToAlfresco.getFormTypeWithDataType(dataType);
+	public String getCustomFormForDatatype(String dataType) {
+		return mappingToolFormsToAlfresco.getCustomFormForDatatype(dataType);
 	}
 
-	public String getClassTypeWithDataType(String dataType) {
-		return mappingToolFormsToAlfresco.getClassTypeWithDataType(dataType);
+	public String getDefaultFormForDatatype(String dataType) {
+		return mappingToolFormsToAlfresco.getDefaultFormForDatatype(dataType);
 	}
 
+	/**
+	 * Retrieves (from the mapping file) the name/id of a form that implements the start task for a
+	 * workflow definition name.<br/>
+	 * Added for the demo webapp.
+	 * 
+	 * @param workflowDefName
+	 *            e.g. jbpm$wfbxwfTest:wfTest
+	 * @return the id of a form, e.g. "wfTest_Start"
+	 */
 	public String getWorkflowStartTaskFormName(String namespacePrefix) {
 		return mappingToolFormsToAlfresco.getWorkflowStartTaskFormName(namespacePrefix);
 	}
 
+	/**
+	 * Provides the name of the data type supported by the FormClass with the given id.
+	 * 
+	 * @param formName
+	 *            the valid id of a FormClass that has been generated.
+	 * @return the data type as defined in the class model, or <code>null</code> if the form name is
+	 *         unknown.
+	 */
 	public String getUnderlyingClassForForm(String formName) {
 		FormType formType = getFormType(formName);
 		if (formType == null) {
@@ -567,6 +556,15 @@ public class MappingAgent {
 		return classType.getAlfrescoName();
 	}
 
+	/**
+	 * Provides the name of the data type supported by the data form of the FormWorkflow with the
+	 * given id.
+	 * 
+	 * @param formName
+	 *            the valid id of a FormWorkflow that has been generated.
+	 * @return the data type of the workflow form's data form, as defined in the class model, or
+	 *         <code>null</code> if the form name is unknown.
+	 */
 	public String getUnderlyingClassForWorkflow(String wkFormName) {
 		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
 		if (taskType == null) {
@@ -576,6 +574,14 @@ public class MappingAgent {
 		return getUnderlyingClassForForm(dataFormName);
 	}
 
+	/**
+	 * Provides the id of the data form linked to the given workflow form.
+	 * 
+	 * 
+	 * @param formName
+	 *            the valid id of a FormWorkflow that has been generated.
+	 * @return the id of the data form.
+	 */
 	public String getUnderlyingDataFormForWorkflow(String wkFormName) {
 		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
 		if (taskType == null) {
@@ -588,6 +594,13 @@ public class MappingAgent {
 		return dataFormType.getName();
 	}
 
+	/**
+	 * Provides the pooled actors defined on the form that supports the given task name.
+	 * 
+	 * @param name
+	 *            a task definition name.
+	 * @return the content of the "pooled actors" property.
+	 */
 	public String getWorkflowTaskPooledActorsById(String taskName) {
 		WorkflowTaskType taskType = getWorkflowTaskType(taskName, true);
 		if (taskType == null) {
@@ -596,6 +609,13 @@ public class MappingAgent {
 		return taskType.getPooledActors();
 	}
 
+	/**
+	 * Provides the actor Id defined on the form that supports the given task name.
+	 * 
+	 * @param name
+	 *            a task definition name.
+	 * @return the content of the "actor id" property.
+	 */
 	public String getWorkflowTaskActorIdById(String taskName) {
 		WorkflowTaskType taskType = getWorkflowTaskType(taskName, true);
 		if (taskType == null) {
@@ -604,7 +624,9 @@ public class MappingAgent {
 		return taskType.getActorId();
 	}
 
-	public String getTaskNameFromFormName(String wkFormName) {
+	@SuppressWarnings("unused")
+	@Deprecated
+	private String getTaskNameFromFormName(String wkFormName) {
 		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
 		if (taskType == null) {
 			return null;
@@ -612,6 +634,13 @@ public class MappingAgent {
 		return taskType.getName();
 	}
 
+	/**
+	 * Provides a pool of information about the form whose name is given.
+	 * 
+	 * @param wkFormName
+	 *            the id of a valid workflow form.
+	 * @return the information bean.
+	 */
 	public WorkflowTaskInfoBean getWorkflowTaskInfoBean(String wkFormName) {
 		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
 		if (taskType == null) {
@@ -621,6 +650,14 @@ public class MappingAgent {
 				.getActorId(), taskType.getPooledActors(), taskType.getTitle());
 	}
 
+	/**
+	 * Returns the form name for a task based on the full task id.<br/>
+	 * Added for the demo webapp.
+	 * 
+	 * @param fullTaskId
+	 *            e.g. "wfbxwfTest:T1"
+	 * @return the id of the workflow form that can be used for the task
+	 */
 	public String getWorkflowFormNameByTaskId(String taskId) {
 		WorkflowTaskType taskType = getWorkflowTaskType(taskId, true);
 		if (taskType == null) {
@@ -630,6 +667,35 @@ public class MappingAgent {
 			return "";
 		}
 		return taskType.getName();
+	}
+
+	/**
+	 * Persists a default form: transforms the XForms instance into a GenericClass, and either saves
+	 * or updates a node.
+	 * 
+	 * @param instance
+	 *            the instance
+	 * @param transaction
+	 *            the transaction
+	 * @param isServletRequest
+	 * 
+	 * @return the object id as given by the transaction manager
+	 * 
+	 * @throws ServletException
+	 */
+	public PersistFormResultBean persistClass(AlfrescoTransaction transaction, Node instance,
+			boolean isServletRequest) throws ServletException {
+		GenericClass alfClass = transformClassFormsToAlfresco(transaction, instance,
+				isServletRequest);
+		if (alfClass.getId() == null) {
+			alfClass.setId(saveObject(transaction, alfClass));
+		} else {
+			uploadProcessOnUpdate(transaction, alfClass);
+		}
+		PersistFormResultBean resultBean = new PersistFormResultBean();
+		resultBean.setResultStr(alfClass.getId());
+
+		return resultBean;
 	}
 
 	/**
@@ -662,6 +728,36 @@ public class MappingAgent {
 	}
 
 	/**
+	 * Transforms a FormClass instance into a JSON string for the given form id.
+	 * 
+	 * @param transaction
+	 * @param alfrescoController
+	 * @param formName
+	 * @param instance
+	 * @return
+	 * @throws ServletException
+	 */
+	public String persistFormToJSON(AlfrescoTransaction transaction, String formName,
+			Node instance, boolean shortPropertyNames) throws ServletException {
+		return mappingToolFormsToAlfresco.transformsToJSON(transaction, formName, instance,
+				shortPropertyNames);
+	}
+
+	/**
+	 * Transforms the instance to the format for searches wrt the given form id.
+	 * 
+	 * @param formName
+	 *            the id of the search form
+	 * @param instance
+	 * @return
+	 * @throws ServletException
+	 */
+	public String persistSearch(String formName, Node instance, boolean shortPropertyNames)
+			throws ServletException {
+		return mappingToolSearch.transformSearchForm(formName, instance, shortPropertyNames);
+	}
+
+	/**
 	 * Builds a GenericClass object from the instance of a workflow and processes the possible
 	 * upload fields.
 	 * 
@@ -682,35 +778,6 @@ public class MappingAgent {
 
 		PersistFormResultBean resultBean = new PersistFormResultBean();
 		resultBean.setResultClass(transformed);
-
-		return resultBean;
-	}
-
-	/**
-	 * Persists a class form: transforms the XForms instance into a GenericClass, and either saves
-	 * or updates a node.
-	 * 
-	 * @param instance
-	 *            the instance
-	 * @param transaction
-	 *            the transaction
-	 * @param isServletRequest
-	 * 
-	 * @return the object id as given by the transaction manager
-	 * 
-	 * @throws ServletException
-	 */
-	public PersistFormResultBean persistClass(AlfrescoTransaction transaction, Node instance,
-			boolean isServletRequest) throws ServletException {
-		GenericClass alfClass = transformClassFormsToAlfresco(transaction, instance,
-				isServletRequest);
-		if (alfClass.getId() == null) {
-			alfClass.setId(saveObject(transaction, alfClass));
-		} else {
-			uploadProcessOnUpdate(transaction, alfClass);
-		}
-		PersistFormResultBean resultBean = new PersistFormResultBean();
-		resultBean.setResultStr(alfClass.getId());
 
 		return resultBean;
 	}
@@ -808,6 +875,16 @@ public class MappingAgent {
 
 		instance.appendChild(rootElement);
 		return instance;
+	}
+
+	/**
+	 * Returns an XForms instance document for a FormSearch.
+	 * 
+	 * @param formName
+	 * @return
+	 */
+	public Document getInstanceSearch(String formName) {
+		return mappingToolSearch.getInstanceSearch(formName);
 	}
 
 	/**

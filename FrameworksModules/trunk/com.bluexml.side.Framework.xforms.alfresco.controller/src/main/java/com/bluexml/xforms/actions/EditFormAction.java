@@ -99,7 +99,7 @@ public class EditFormAction extends AbstractEditAction {
 	 */
 	private boolean resolvePageInfoClass(PageInfoBean pageBean, EditNodeBean editBean) {
 		// look for a default form that supports the data type and return its name
-		String classFormName = controller.getDefaultFormForDataType(editBean.getDataType());
+		String classFormName = controller.getDefaultFormForDatatype(editBean.getDataType());
 		if (classFormName != null) {
 			pageBean.setFormType(FormTypeEnum.CLASS);
 			pageBean.setFormName(classFormName);
@@ -133,7 +133,7 @@ public class EditFormAction extends AbstractEditAction {
 		}
 
 		// look for a customized form that supports it and return its name
-		String formName = controller.getCustomFormForDataType(editDataType);
+		String formName = controller.getCustomFormForDatatype(editDataType);
 		if (formName != null) {
 			pageBean.setFormType(FormTypeEnum.FORM);
 			pageBean.setFormName(formName);
