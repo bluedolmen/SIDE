@@ -1005,7 +1005,7 @@ public class MappingAgent {
 			mimeType = infoBean.getMimeType();
 			GenericAttribute attribute = infoBean.getAttribute();
 			if (filePath.startsWith("file:")) {
-				String location = controller.getParamUploadPathInRepository();
+				String location = controller.getParamUploadPathInRepository(transaction.getInitParams());
 				fileName = uploadMoveFileToRepo(transaction, fileName, filePath, location,
 						mimeType, infoBean.isShouldAppendSuffix());
 				if (StringUtils.trimToNull(fileName) == null) {
@@ -1075,7 +1075,8 @@ public class MappingAgent {
 				oldBean = uploadFindBean(previousFileContentInfo, qualifiedName);
 				if (oldBean != null) {
 					// we need to register as a temp file for deletion in case of success
-					transaction.registerTempFileName(controller.getParamUploadPathInFileSystem()
+					transaction.registerTempFileName(controller
+							.getParamUploadPathInFileSystem(transaction.getInitParams())
 							+ File.separator + oldBean.getPath());
 				}
 			}
@@ -1147,8 +1148,8 @@ public class MappingAgent {
 			return null;
 		}
 
-		currentUploadDir = controller.getParamUploadPathInFileSystem();
-		int depth = controller.getParamUploadPathDepth();
+		currentUploadDir = controller.getParamUploadPathInFileSystem(transaction.getInitParams());
+		int depth = controller.getParamUploadPathDepth(transaction.getInitParams());
 		File targetFile = findNewName(depth, type, sourceFile.getName());
 
 		copyFile(sourceFile, targetFile);

@@ -9,6 +9,7 @@ import org.w3c.dom.Node;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.beans.PersistFormResultBean;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class CreateServlet. via GET method @ http://HostAndPort/xforms/create?...<br>
@@ -55,7 +56,8 @@ public class CreateServlet extends AbstractServlet {
 		AlfrescoController controller = AlfrescoController.getInstance();
 		try {
 			Node node = getDocumentReq(req);
-			AlfrescoTransaction transaction = createTransaction(controller);
+			String userName = req.getParameter(MsgId.PARAM_USER_NAME.getText());
+			AlfrescoTransaction transaction = createTransaction(controller, userName);
 			PersistFormResultBean resultBean = controller.getMappingAgent().persistClass(
 					transaction, node, true);
 			String result = resultBean.getResultStr();

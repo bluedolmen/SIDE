@@ -490,7 +490,8 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 */
 	private String getCurrentUserName() {
 		userName = currentPage.getInitParams().get(MsgId.PARAM_USER_NAME.getText());
-		return (userName != null) ? userName : controller.getParamLoginUserName();
+		return (userName != null) ? userName : controller.getParamLoginUserName(transaction
+				.getInitParams());
 	}
 
 	/**

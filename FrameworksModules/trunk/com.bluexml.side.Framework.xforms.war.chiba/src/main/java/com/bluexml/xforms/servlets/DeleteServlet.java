@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class DeleteServlet. via GET method @ http://HostAndPort/xforms/delete?...<br>
@@ -52,9 +53,8 @@ public class DeleteServlet extends AbstractServlet {
 		try {
 			String dataId = StringUtils.trimToNull(req.getParameter(DATA_ID));
 			dataId = AlfrescoController.patchDataId(dataId);
-			AlfrescoTransaction transaction = new AlfrescoTransaction(
-					controller);
-			transaction.setLogin(controller.getParamLoginUserName());
+			String userName = req.getParameter(MsgId.PARAM_USER_NAME.getText());
+			AlfrescoTransaction transaction = createTransaction(controller, userName);
 			controller.delete(transaction, dataId);
 			transaction.executeBatch();
 		} catch (Exception e) {

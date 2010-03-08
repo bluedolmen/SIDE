@@ -608,7 +608,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			String type = contentAttribute.getValue().get(2).getValue();
 
 			return new FileUploadInfoBean(path, name, type, contentAttribute, controller
-					.getParamUploadRepoAppendSuffix());
+					.getParamUploadRepoAppendSuffix(transaction.getInitParams()));
 		}
 		return null;
 	}

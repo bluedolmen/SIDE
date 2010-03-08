@@ -568,6 +568,9 @@ public class NavigationManager {
 	private PageInfoBean collectPageInfo(HttpServletRequest req) throws ServletException {
 		PageInfoBean bean = new PageInfoBean();
 
+		// init params
+		bean.setInitParams(getInitParams(req));
+		
 		// form type
 		FormTypeEnum formType = FormTypeEnum.CLASS; // <-- default type
 		String paramFormType = req.getParameter(MsgId.PARAM_FORM_TYPE.getText());
@@ -611,7 +614,7 @@ public class NavigationManager {
 		String dataId = StringUtils.trimToNull(req.getParameter(MsgId.INT_ACT_PARAM_ANY_ID
 				.getText()));
 		// check that the form is appropriate for the data id
-		if (controller.getParamCheckMatchDataForm()) {
+		if (controller.getParamCheckMatchDataForm(bean.getInitParams())) {
 			String realFormName = originalDatatype;
 //			if (bean.formType == FormTypeEnum.WKFLW) {
 //				WorkflowTaskType taskType = controller.getWorkflowTaskType(dataType);
@@ -640,8 +643,6 @@ public class NavigationManager {
 		bean.setLanguage(req.getParameter(MsgId.PARAM_LANGUAGE.getText()));
 		bean.setProcessId(req.getParameter(MsgId.PARAM_WORKFLOW_PROCESS_ID.getText()));
 		bean.setInstanceId(req.getParameter(MsgId.PARAM_WORKFLOW_INSTANCE_ID.getText()));
-
-		bean.setInitParams(getInitParams(req));
 
 		// deal with submit buttons
 		String submitParam;

@@ -13,6 +13,7 @@ import org.w3c.dom.Document;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class ReadServlet. via GET method @ http://HostAndPort/xforms/read?...<br>
@@ -71,7 +72,8 @@ public class ReadServlet extends AbstractServlet {
 		boolean idAsServlet = !StringUtils.equals(skipIdStr, "false");
 
 		try {
-			AlfrescoTransaction transaction = createTransaction(controller);
+			String userName = req.getParameter(MsgId.PARAM_USER_NAME.getText());
+			AlfrescoTransaction transaction = createTransaction(controller, userName);
 			Document node = controller.getMappingAgent().getInstanceClass(transaction, dataType,
 					dataId, false, idAsServlet);
 			Source xmlSource = new DOMSource(node);

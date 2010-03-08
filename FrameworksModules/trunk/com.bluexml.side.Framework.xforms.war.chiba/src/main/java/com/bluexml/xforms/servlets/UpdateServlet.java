@@ -9,6 +9,7 @@ import org.w3c.dom.Node;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class UpdateServlet. via GET method @ http://HostAndPort/xforms/update?...<br>
@@ -55,9 +56,8 @@ public class UpdateServlet extends AbstractServlet {
 			String skipIdStr = StringUtils.trimToNull(req.getParameter(ID_AS_SERVLET));
 			boolean idAsServlet = !StringUtils.equals(skipIdStr, "false");
 
-			AlfrescoTransaction transaction = new AlfrescoTransaction(
-					controller);
-			transaction.setLogin(controller.getParamLoginUserName());
+			String userName = req.getParameter(MsgId.PARAM_USER_NAME.getText());
+			AlfrescoTransaction transaction = createTransaction(controller, userName);
 			controller.persistClass(transaction, node, idAsServlet);
 			transaction.executeBatch();
 		} catch (Exception e) {

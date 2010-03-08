@@ -1,6 +1,8 @@
 package com.bluexml.xforms.servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import org.xml.sax.SAXException;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class AbstractServlet.
@@ -48,9 +51,13 @@ public abstract class AbstractServlet extends HttpServlet {
 	}
 
 	protected AlfrescoTransaction createTransaction(
-			AlfrescoController controller) {
+			AlfrescoController controller, String userName) {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(controller);
-		transaction.setLogin(controller.getParamLoginUserName());
+		
+		Map<String, String> simulatedParams = new HashMap<String, String>();
+		simulatedParams.put(MsgId.PARAM_USER_NAME.getText(), userName);
+		
+		transaction.setLogin(controller.getParamLoginUserName(simulatedParams));
 		return transaction;
 	}
 

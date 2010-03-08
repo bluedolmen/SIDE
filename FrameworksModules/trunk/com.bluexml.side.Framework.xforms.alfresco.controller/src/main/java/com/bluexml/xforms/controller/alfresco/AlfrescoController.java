@@ -133,7 +133,7 @@ public class AlfrescoController {
 
 	/** The last initParams we saw. */
 	// <-- not safe in multi-user or production environments
-	private Map<String, String> initParameters = null;
+	// private Map<String, String> initParams = null;
 
 	static {
 		// set the document builder and catalogs.
@@ -762,12 +762,14 @@ public class AlfrescoController {
 	/**
 	 * Returns the directory for uploading files into the file system. If none given in initParams
 	 * or the directory does not exist, falls back to the value from configuration file.
+	 * 
+	 * @param initParams
 	 */
-	public File getParamUploadPathInFileSystem() {
+	public File getParamUploadPathInFileSystem(Map<String, String> initParams) {
 
 		String result = null;
-		if (initParameters != null) {
-			result = initParameters.get(MsgId.PARAM_UPLOAD_DIRECTORY.getText());
+		if (initParams != null) {
+			result = initParams.get(MsgId.PARAM_UPLOAD_DIRECTORY.getText());
 		}
 		if (StringUtils.trimToNull(result) == null) {
 			return UPLOAD_DIRECTORY;
@@ -779,20 +781,22 @@ public class AlfrescoController {
 	/**
 	 * Returns a path for uploading files into the repository. If none given in initParams, falls
 	 * back to the value from the configuration file.
+	 * 
+	 * @param initParams
 	 */
-	public String getParamUploadPathInRepository() {
+	public String getParamUploadPathInRepository(Map<String, String> initParams) {
 
 		String result = null;
-		if (initParameters != null) {
-			result = initParameters.get(MsgId.PARAM_UPLOAD_REPOSITORY.getText());
+		if (initParams != null) {
+			result = initParams.get(MsgId.PARAM_UPLOAD_REPOSITORY.getText());
 		}
 		return (result != null) ? result : UPLOAD_REPOSITORY;
 	}
 
-	public boolean getParamUploadRepoAppendSuffix() {
+	public boolean getParamUploadRepoAppendSuffix(Map<String, String> initParams) {
 		String paramStr = null;
-		if (initParameters != null) {
-			paramStr = initParameters.get(MsgId.PARAM_UPLOAD_REPOSITORY_APPEND.getText());
+		if (initParams != null) {
+			paramStr = initParams.get(MsgId.PARAM_UPLOAD_REPOSITORY_APPEND.getText());
 		}
 		if (StringUtils.trimToNull(paramStr) != null) {
 			return !(StringUtils.equals(paramStr, "false"));
@@ -800,10 +804,10 @@ public class AlfrescoController {
 		return UPLOAD_REPOSITORY_APPEND;
 	}
 
-	public boolean getParamUploadRepoFormatInfo() {
+	public boolean getParamUploadRepoFormatInfo(Map<String, String> initParams) {
 		String paramStr = null;
-		if (initParameters != null) {
-			paramStr = initParameters.get(MsgId.PARAM_UPLOAD_REPOSITORY_FORMAT.getText());
+		if (initParams != null) {
+			paramStr = initParams.get(MsgId.PARAM_UPLOAD_REPOSITORY_FORMAT.getText());
 		}
 		if (StringUtils.trimToNull(paramStr) != null) {
 			return !(StringUtils.equals(paramStr, "false"));
@@ -811,10 +815,10 @@ public class AlfrescoController {
 		return UPLOAD_REPOSITORY_FORMAT_INFO;
 	}
 
-	public boolean getParamCheckMatchDataForm() {
+	public boolean getParamCheckMatchDataForm(Map<String, String> initParams) {
 		String paramStr = null;
-		if (initParameters != null) {
-			paramStr = initParameters.get(MsgId.PARAM_CHECK_MATCH_DATA_FORM.getText());
+		if (initParams != null) {
+			paramStr = initParams.get(MsgId.PARAM_CHECK_MATCH_DATA_FORM.getText());
 		}
 		if (StringUtils.trimToNull(paramStr) != null) {
 			return !(StringUtils.equals(paramStr, "false"));
@@ -1031,8 +1035,8 @@ public class AlfrescoController {
 		 * celle indiquée ds forms.properties) ou fixé par la propriété 'field size' dans le
 		 * modeleur. Dans ce cas, SELECTMAX conserve tjrs la valeur de field size.
 		 */
-		String maxSize = mappingAgent.getFieldSizeForField(type, "" + getParamMaxResults(),
-				transaction.getFormId());
+		String maxSize = mappingAgent.getFieldSizeForField(type, ""
+				+ getParamMaxResults(transaction.getInitParams()), transaction.getFormId());
 		alfTypeName = mappingAgent.getClassTypeAlfrescoName(type);
 		parameters.put("type", alfTypeName);
 		parameters.put("format", StringUtils.trimToEmpty(format));
@@ -1259,7 +1263,7 @@ public class AlfrescoController {
 		}
 
 		if (StringUtils.trimToNull(transaction.getLogin()) == null) {
-			post.setParameter("username", getParamLoginUserName());
+			post.setParameter("username", getParamLoginUserName(transaction.getInitParams()));
 		} else {
 			post.setParameter("username", transaction.getLogin());
 		}
@@ -1277,26 +1281,26 @@ public class AlfrescoController {
 		return post;
 	}
 
-	public String getParamLoginUserName() {
+	public String getParamLoginUserName(Map<String, String> initParams) {
 		String result = null;
-		if (initParameters != null) {
-			result = initParameters.get(MsgId.PARAM_USER_NAME.getText());
+		if (initParams != null) {
+			result = initParams.get(MsgId.PARAM_USER_NAME.getText());
 		}
 		return (StringUtils.trimToNull(result) == null) ? USER_NAME : result;
 	}
 
-	public String getParamLoginUserPswd() {
+	public String getParamLoginUserPswd(Map<String, String> initParams) {
 		String result = null;
-		if (initParameters != null) {
-			result = initParameters.get(MsgId.PARAM_USER_PSWD.getText());
+		if (initParams != null) {
+			result = initParams.get(MsgId.PARAM_USER_PSWD.getText());
 		}
 		return (StringUtils.trimToNull(result) == null) ? USER_PSWD : result;
 	}
 
-	public int getParamMaxResults() {
+	public int getParamMaxResults(Map<String, String> initParams) {
 		int result = MAX_RESULTS;
-		if (initParameters != null) {
-			String resultStr = initParameters.get(MsgId.PARAM_MAX_RESULTS.getText());
+		if (initParams != null) {
+			String resultStr = initParams.get(MsgId.PARAM_MAX_RESULTS.getText());
 			if (StringUtils.trimToNull(resultStr) != null) {
 				try {
 					result = Integer.parseInt(resultStr);
@@ -1318,13 +1322,15 @@ public class AlfrescoController {
 	 * Provides the number of directory levels into which filesystem uploads should be randomly
 	 * distributed.
 	 * 
+	 * @param initParams
+	 * 
 	 * @return
 	 */
-	public int getParamUploadPathDepth() {
+	public int getParamUploadPathDepth(Map<String, String> initParams) {
 
 		String result = null;
-		if (initParameters != null) {
-			result = initParameters.get(MsgId.PARAM_UPLOAD_DEPTH.getText());
+		if (initParams != null) {
+			result = initParams.get(MsgId.PARAM_UPLOAD_DEPTH.getText());
 		}
 		if (StringUtils.trimToNull(result) == null) {
 			return UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH;

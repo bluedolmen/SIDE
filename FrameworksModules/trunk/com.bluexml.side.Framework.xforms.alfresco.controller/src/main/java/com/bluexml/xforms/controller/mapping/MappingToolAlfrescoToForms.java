@@ -599,7 +599,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			if (formFieldType instanceof FileFieldType) {
 				formField.setAttribute("file", "");
 				formField.setAttribute("type", "");
-				if (controller.getParamUploadRepoFormatInfo()) {
+				if (controller.getParamUploadRepoFormatInfo(transaction.getInitParams())) {
 					FileFieldType fileFieldType = (FileFieldType) formFieldType;
 					if ((alfrescoId != null) && (isInRepository(fileFieldType))) {
 						formField.setTextContent(controller.getWebscriptNodeContentInfo(value));

@@ -1168,7 +1168,7 @@ public class MappingToolCommon {
 				String type = attribute.getValue().get(2).getValue();
 
 				list.add(new FileUploadInfoBean(path, name, type, attribute, controller
-						.getParamUploadRepoAppendSuffix()));
+						.getParamUploadRepoAppendSuffix(transaction.getInitParams())));
 			}
 		}
 
