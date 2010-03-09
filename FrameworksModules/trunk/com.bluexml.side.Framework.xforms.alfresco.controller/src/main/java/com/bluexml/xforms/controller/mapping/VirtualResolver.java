@@ -183,8 +183,8 @@ public class VirtualResolver {
 	 */
 	public void prepareXFormsToAlfresco(Element source, String formName) {
 		if (logger.isTraceEnabled()) {
+			mappingTool.logXML(source, "prepareXFormsToAlfresco", "input");
 		}
-		mappingTool.logXML(source, "prepareXFormsToAlfresco", "input");
 		collectValues(source, formName);
 		for (Value value : values) {
 			propagateVirtualField(value);
