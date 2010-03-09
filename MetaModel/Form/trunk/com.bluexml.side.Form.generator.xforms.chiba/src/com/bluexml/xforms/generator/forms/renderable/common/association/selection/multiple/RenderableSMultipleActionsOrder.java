@@ -12,6 +12,7 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
 import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableSMultipleActionsOrder.
@@ -57,6 +58,8 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 			repeaterId = renderedParents.peek().getOptionalData();
 			Element xformsElement = XFormsGenerator.createElement("div",
 					XFormsGenerator.NAMESPACE_XHTML);
+			xformsElement.setAttribute("class", MsgId.INT_CSS_SELECT_TRIGGER_IMG.getText());
+
 			ModelElementBindSimple bindActions = ((RenderableSMultiple) parents.peek())
 					.getBindActions();
 			String rootPath = isInIMultRepeater ? getRootPath(renderedParents) : null;
