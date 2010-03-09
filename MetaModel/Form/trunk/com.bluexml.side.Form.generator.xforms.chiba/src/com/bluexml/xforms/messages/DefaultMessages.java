@@ -141,7 +141,6 @@ public class DefaultMessages {
 			"search.operator.above=Above",
 			"search.operator.below=Below",
 			"",
-			"selection.list.label=Select",
 			"selection.list.show.all.results=Show all",
 			"selection.list.search.label=Search items:",
 			"#",

@@ -85,7 +85,6 @@ public enum MsgId {
 	MSG_SEARCH_OPERATOR_ONEOF		("search.operator.oneOf"),
 	MSG_SEARCH_OPERATOR_SIZE		("search.operator.size"),
 	MSG_SEARCH_OPERATOR_STARTSWITH	("search.operator.startsWith"),
-	MSG_SELECT_LIST_LABEL			("selection.list.label"),
 	MSG_SELECT_LIST_SEARCH_LABEL	("selection.list.search.label"),
 	MSG_SELECT_LIST_SHOW_ALL		("selection.list.show.all.results"),
 	MSG_SESSION_TIMED_OUT			("session.timed.out"),
