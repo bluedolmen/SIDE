@@ -9,4 +9,9 @@ import com.bluexml.side.clazz.service.alfresco.AttributeServices
 <%getNamedModelElementQName()%>
 <%script type="common.NamedModelElement" name="getPrefixedQualifiedName"%>
 <%getPrefixedQName()%>
-
+<%script type="common.NamedModelElement" name="getFolder" description="Get the folder to export" %>
+<%if (getRootContainer().name != null && getRootContainer().name.length() > 0){%>
+<%getRootContainer().name%><%}else{%>
+tmp<%}%>
+<%script type="clazz.ClassModelElement" name="getNameSpace"%>
+<%getNamespaceURI()%>

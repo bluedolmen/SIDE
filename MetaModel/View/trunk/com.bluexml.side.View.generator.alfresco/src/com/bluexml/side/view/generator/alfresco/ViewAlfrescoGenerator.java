@@ -31,6 +31,21 @@ public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		// doclist
 		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/doclistView/doclist_ftl.mt");
 
+		//data webscripts
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/alfrescoGenerator_template_def_get.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/alfrescoGenerator_template_def_post.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/alfrescoGenerator_template_js_get.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/alfrescoGenerator_template_js_post.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/json/alfrescoGenerator_template_json.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/json/alfrescoGenerator_template_result_get.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/json/alfrescoGenerator_template_result_post.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/xml/alfrescoGenerator_template_xml.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/xml/alfrescoGenerator_template_result_get.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/xml/alfrescoGenerator_template_result_post.mt");
+		//result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/rss/alfrescoGenerator_template_rss.mt");
+		//result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/rss/alfrescoGenerator_template_result_get.mt");
+		//result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/rss/alfrescoGenerator_template_result_post.mt");
+		
 		// services :
 		monitor.getLog().addServiceLog("Alfresco Share Views", "Share Document Library", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCOSHARE_URL) + "/page/site/yourSiteUrl/documentlibrary");
 
