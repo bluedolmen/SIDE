@@ -1,5 +1,5 @@
 <project name="XForms Generator Worker" default="prepare-compile" basedir=".">
-	<property file="build.properties" />
+	<property file="build.${user.name}.properties" />
 	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
 		<classpath>
 			<!-- Modifier le chemin d'accès -->
