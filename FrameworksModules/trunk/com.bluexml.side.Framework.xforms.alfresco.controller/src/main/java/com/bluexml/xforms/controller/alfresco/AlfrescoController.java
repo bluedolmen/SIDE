@@ -129,11 +129,13 @@ public class AlfrescoController {
 	/** Stores redirection info keyed by form names */
 	private static Map<String, RedirectionBean> targetTable = new HashMap<String, RedirectionBean>();
 
+	/** The config. */
+	protected Properties config = null;
+
+
+	private MappingAgent mappingAgent;
 	private SystemAgent systemAgent;
 
-	/** The last initParams we saw. */
-	// <-- not safe in multi-user or production environments
-	// private Map<String, String> initParams = null;
 
 	static {
 		// set the document builder and catalogs.
@@ -392,12 +394,6 @@ public class AlfrescoController {
 		ALFRESCO_URL = alfresco_url;
 	}
 
-	/** The config. */
-	protected Properties config = null;
-
-	/** The mapping tool. */
-	private MappingAgent mappingAgent;
-
 	/**
 	 * Instantiates a new alfresco controller.
 	 * 
@@ -410,13 +406,6 @@ public class AlfrescoController {
 		// reference the agents
 		systemAgent = new SystemAgent(this, xstream);
 		mappingAgent = new MappingAgent(this);
-	}
-
-	/**
-	 * @return the mappingAgent
-	 */
-	public MappingAgent getMappingAgent() {
-		return mappingAgent;
 	}
 
 	//
@@ -506,6 +495,13 @@ public class AlfrescoController {
 	// MappingAgent
 	//
 	//
+
+	/**
+	 * @return the mappingAgent
+	 */
+	public MappingAgent getMappingAgent() {
+		return mappingAgent;
+	}
 
 	/**
 	 * Creates or loads the XForms instance document for a default class form.
@@ -1148,7 +1144,6 @@ public class AlfrescoController {
 	 * @return the string
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
 	 */
 	public String requestString(AlfrescoTransaction transaction, Map<String, String> parameters,
 			MsgId opCode) throws ServletException {
