@@ -2,7 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.lists;
 
 import java.util.Stack;
 
-
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
@@ -12,6 +11,7 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementInstanceList;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementUpdaterList;
 import com.bluexml.xforms.generator.forms.rendered.RenderedGroup;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
 
 public class RenderableClassList extends Renderable {
 
@@ -25,8 +25,9 @@ public class RenderableClassList extends Renderable {
 		this.classe = classe;
 
 		modelElementListUpdater = new ModelElementUpdaterList(classe, "instanceList", "", "0");
-		modelElementBindHolder = new ModelElementBindHolder("instance('instanceList')/item");
-		bindLabel = new ModelElementBindSimple("value");
+		modelElementBindHolder = new ModelElementBindHolder("instance('instanceList')/"
+				+ MsgId.INT_INSTANCE_SELECT_ITEM);
+		bindLabel = new ModelElementBindSimple(MsgId.INT_INSTANCE_SELECT_LABEL.getText());
 		modelElementBindHolder.addSubBind(bindLabel);
 
 		add(new RenderableListSearcher(this));
@@ -42,12 +43,14 @@ public class RenderableClassList extends Renderable {
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		RenderedGroup renderedGroup = new RenderedGroup("Liste des " + ModelTools.getTitle(classe),
 				"list");
 		renderedGroup.addModelElement(modelElementListUpdater);
 		renderedGroup.addModelElement(modelElementBindHolder);
-		renderedGroup.addModelElement(new ModelElementInstanceList(classe, "instanceList", "", "0"));
+		renderedGroup
+				.addModelElement(new ModelElementInstanceList(classe, "instanceList", "", "0"));
 		return renderedGroup;
 	}
 
