@@ -611,47 +611,57 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		if (tasks.size() == 0) {
 			// the workflow is completed, no more tasks are available
 			navigationPath.setStatusMsg("Transition completed: the workflow is ended.");
-		} else {
-			for (WorkflowTask task : tasks) {
-				String actorGroup = controller.getTaskPooledActorsByTaskId(task.name);
-				String actorUser = controller.getTaskActorIdByTaskId(task.name);
-
-				if ((StringUtils.trimToNull(actorGroup) != null)
-						|| (StringUtils.trimToNull(actorUser) != null)) {
-					// we got some user(s)/group(s) to assign the task to
-					List<NodeRef> refToActors = new Vector<NodeRef>();
-					properties = new HashMap<QName, Serializable>();
-					if (StringUtils.trimToNull(actorUser) == null
-							&& StringUtils.trimToNull(actorGroup) == null) {
-						navigationPath
-								.setStatusMsg("Transition followed but an invalid task assignment information prevents reassigning the workflow. All tasks must have either 'actorId' or 'pooledActors' specified.");
-						return result;
-					}
-					if (StringUtils.trimToNull(actorGroup) != null) {
-						addActor(refToActors, controller.systemGetNodeRefForGroup(actorGroup));
-					}
-					if (StringUtils.trimToNull(actorUser) != null) {
-						addActor(refToActors, controller.systemGetNodeRefForUser(actorUser));
-					}
-					if (refToActors.size() == 0) {
-						navigationPath
-								.setStatusMsg("Transition followed but no user/group (actorId/pooledActors) for the next task is known to Alfresco.");
-						return result;
-					}
-					//
-					properties.put(WorkflowModel.ASSOC_POOLED_ACTORS, (Serializable) refToActors);
-					controller.workflowUpdateTask(transaction, task.id, properties);
-				}
-			}
-			String nextTasksTitles = buildNextTasksTitles(tasks);
-			String infixe = "tasks are";
-			if (tasks.size() == 1) {
-				infixe = "task is";
-			}
-			result.setTasks(tasks);
-			navigationPath.setStatusMsg("Transition successfully followed: next " + infixe + " '"
-					+ nextTasksTitles + "'. " + suffixMsg);
+			result.setSuccess(true);
+			return result;
 		}
+		for (WorkflowTask task : tasks) {
+			String pooledActors = controller.getTaskPooledActorsByTaskId(task.name);
+			String actorIds = controller.getTaskActorIdByTaskId(task.name);
+
+			if ((StringUtils.trimToNull(pooledActors) != null)
+					|| (StringUtils.trimToNull(actorIds) != null)) {
+				// we got some user(s)/group(s) to assign the task to
+
+				// the list of users/groups allowed to manage the task
+				List<NodeRef> refToActors = new Vector<NodeRef>();
+				properties = new HashMap<QName, Serializable>();
+				if (StringUtils.trimToNull(actorIds) == null
+						&& StringUtils.trimToNull(pooledActors) == null) {
+					navigationPath
+							.setStatusMsg("Transition followed but an invalid task assignment information prevents reassigning the workflow. All tasks must have either 'actorId' or 'pooledActors' specified.");
+					return result;
+				}
+				if (StringUtils.trimToNull(pooledActors) != null) {
+					// #1514: support for multiple groups/users via comma-separated list
+					String[] actors = StringUtils.split(pooledActors, ",");
+					for (String anActor : actors) {
+						addActor(refToActors, controller.systemGetNodeRefForGroup(anActor));
+					}
+				}
+				if (StringUtils.trimToNull(actorIds) != null) {
+					String[] actors = StringUtils.split(actorIds, ",");
+					for (String anActor : actors) {
+						addActor(refToActors, controller.systemGetNodeRefForUser(anActor));
+					}
+				}
+				if (refToActors.size() == 0) {
+					navigationPath
+							.setStatusMsg("Transition followed but no user/group (actorId/pooledActors) for the next task is known to Alfresco.");
+					return result;
+				}
+				//
+				properties.put(WorkflowModel.ASSOC_POOLED_ACTORS, (Serializable) refToActors);
+				controller.workflowUpdateTask(transaction, task.id, properties);
+			}
+		}
+		String nextTasksTitles = buildNextTasksTitles(tasks);
+		String infixe = "tasks are";
+		if (tasks.size() == 1) {
+			infixe = "task is";
+		}
+		result.setTasks(tasks);
+		navigationPath.setStatusMsg("Transition successfully followed: next " + infixe + " '"
+				+ nextTasksTitles + "'. " + suffixMsg);
 		result.setSuccess(true);
 		return result;
 	}
