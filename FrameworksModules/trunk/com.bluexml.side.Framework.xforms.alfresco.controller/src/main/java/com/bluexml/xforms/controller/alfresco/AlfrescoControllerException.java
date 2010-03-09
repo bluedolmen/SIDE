@@ -2,6 +2,7 @@ package com.bluexml.xforms.controller.alfresco;
 
 /**
  * The Class ControllerException.
+ * @deprecated
  */
 public class AlfrescoControllerException extends Exception {
 
