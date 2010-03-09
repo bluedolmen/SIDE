@@ -1121,13 +1121,22 @@ public interface ViewPackage extends EPackage {
 	int ABSTRACT_VIEW_OF__VIEW_OF = ABSTRACT_VIEW_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Generate Webscript</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT = ABSTRACT_VIEW_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Abstract View Of</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_VIEW_OF_FEATURE_COUNT = ABSTRACT_VIEW_FEATURE_COUNT + 1;
+	int ABSTRACT_VIEW_OF_FEATURE_COUNT = ABSTRACT_VIEW_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -1263,6 +1272,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_DATA_TABLE__VIEW_OF = ABSTRACT_VIEW_OF__VIEW_OF;
+
+	/**
+	 * The feature id for the '<em><b>Generate Webscript</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__GENERATE_WEBSCRIPT = ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT;
 
 	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
@@ -1823,6 +1841,15 @@ public interface ViewPackage extends EPackage {
 	int DATA_LIST__VIEW_OF = ABSTRACT_DATA_TABLE__VIEW_OF;
 
 	/**
+	 * The feature id for the '<em><b>Generate Webscript</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_LIST__GENERATE_WEBSCRIPT = ABSTRACT_DATA_TABLE__GENERATE_WEBSCRIPT;
+
+	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2048,6 +2075,15 @@ public interface ViewPackage extends EPackage {
 	int DATA_TABLE__VIEW_OF = ABSTRACT_DATA_TABLE__VIEW_OF;
 
 	/**
+	 * The feature id for the '<em><b>Generate Webscript</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__GENERATE_WEBSCRIPT = ABSTRACT_DATA_TABLE__GENERATE_WEBSCRIPT;
+
+	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2246,6 +2282,15 @@ public interface ViewPackage extends EPackage {
 	int FACET_MAP__VIEW_OF = ABSTRACT_VIEW_OF__VIEW_OF;
 
 	/**
+	 * The feature id for the '<em><b>Generate Webscript</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__GENERATE_WEBSCRIPT = ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT;
+
+	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2424,6 +2469,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TREE__VIEW_OF = ABSTRACT_VIEW_OF__VIEW_OF;
+
+	/**
+	 * The feature id for the '<em><b>Generate Webscript</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TREE__GENERATE_WEBSCRIPT = ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT;
 
 	/**
 	 * The feature id for the '<em><b>Sorting</b></em>' containment reference.
@@ -6320,6 +6374,17 @@ public interface ViewPackage extends EPackage {
 	EReference getAbstractViewOf_ViewOf();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.AbstractViewOf#isGenerateWebscript <em>Generate Webscript</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Generate Webscript</em>'.
+	 * @see com.bluexml.side.view.AbstractViewOf#isGenerateWebscript()
+	 * @see #getAbstractViewOf()
+	 * @generated
+	 */
+	EAttribute getAbstractViewOf_GenerateWebscript();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.Actionable <em>Actionable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7169,6 +7234,14 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_VIEW_OF__VIEW_OF = eINSTANCE.getAbstractViewOf_ViewOf();
+
+		/**
+		 * The meta object literal for the '<em><b>Generate Webscript</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT = eINSTANCE.getAbstractViewOf_GenerateWebscript();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.ActionableImpl <em>Actionable</em>}' class.

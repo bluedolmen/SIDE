@@ -67,6 +67,7 @@
     </genClasses>
     <genClasses ecoreClass="View.ecore#//AbstractViewOf">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference View.ecore#//AbstractViewOf/viewOf"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//AbstractViewOf/generateWebscript"/>
     </genClasses>
     <genClasses image="false" ecoreClass="View.ecore#//AbstractDataTable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractDataTable/haveRowActions"/>

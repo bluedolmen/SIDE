@@ -1237,6 +1237,15 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAbstractViewOf_GenerateWebscript() {
+		return (EAttribute)abstractViewOfEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getActionable() {
 		return actionableEClass;
 	}
@@ -1359,6 +1368,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		abstractViewOfEClass = createEClass(ABSTRACT_VIEW_OF);
 		createEReference(abstractViewOfEClass, ABSTRACT_VIEW_OF__VIEW_OF);
+		createEAttribute(abstractViewOfEClass, ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT);
 
 		abstractDataTableEClass = createEClass(ABSTRACT_DATA_TABLE);
 		createEReference(abstractDataTableEClass, ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS);
@@ -1587,6 +1597,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		initEClass(abstractViewOfEClass, AbstractViewOf.class, "AbstractViewOf", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractViewOf_ViewOf(), theClazzPackage.getAbstractClass(), null, "viewOf", null, 0, 1, AbstractViewOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractViewOf_GenerateWebscript(), ecorePackage.getEBoolean(), "generateWebscript", null, 0, 1, AbstractViewOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractDataTableEClass, AbstractDataTable.class, "AbstractDataTable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractDataTable_HaveRowActions(), theCommonPackage.getOperationComponent(), null, "haveRowActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

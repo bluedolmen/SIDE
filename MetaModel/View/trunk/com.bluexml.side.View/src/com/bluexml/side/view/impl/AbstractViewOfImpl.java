@@ -26,6 +26,7 @@ import com.bluexml.side.view.ViewPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.view.impl.AbstractViewOfImpl#getViewOf <em>View Of</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractViewOfImpl#isGenerateWebscript <em>Generate Webscript</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,6 +42,25 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	 * @ordered
 	 */
 	protected AbstractClass viewOf;
+
+	/**
+	 * The default value of the '{@link #isGenerateWebscript() <em>Generate Webscript</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isGenerateWebscript()
+	 * @_generated
+	 * @ordered
+	 */
+	protected static final boolean GENERATE_WEBSCRIPT_EDEFAULT = true;
+	/**
+	 * The cached value of the '{@link #isGenerateWebscript() <em>Generate Webscript</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isGenerateWebscript()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean generateWebscript = GENERATE_WEBSCRIPT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,12 +124,35 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isGenerateWebscript() {
+		return generateWebscript;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGenerateWebscript(boolean newGenerateWebscript) {
+		boolean oldGenerateWebscript = generateWebscript;
+		generateWebscript = newGenerateWebscript;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT, oldGenerateWebscript, generateWebscript));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF:
 				if (resolve) return getViewOf();
 				return basicGetViewOf();
+			case ViewPackage.ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT:
+				return isGenerateWebscript();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -124,6 +167,9 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF:
 				setViewOf((AbstractClass)newValue);
+				return;
+			case ViewPackage.ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT:
+				setGenerateWebscript((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -140,6 +186,9 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 			case ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF:
 				setViewOf((AbstractClass)null);
 				return;
+			case ViewPackage.ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT:
+				setGenerateWebscript(GENERATE_WEBSCRIPT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -154,8 +203,26 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF:
 				return viewOf != null;
+			case ViewPackage.ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT:
+				return generateWebscript != GENERATE_WEBSCRIPT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (generateWebscript: ");
+		result.append(generateWebscript);
+		result.append(')');
+		return result.toString();
 	}
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

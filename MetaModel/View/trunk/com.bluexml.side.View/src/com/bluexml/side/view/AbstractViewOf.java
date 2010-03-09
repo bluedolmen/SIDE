@@ -18,6 +18,7 @@ import com.bluexml.side.common.ModelElement;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.view.AbstractViewOf#getViewOf <em>View Of</em>}</li>
+ *   <li>{@link com.bluexml.side.view.AbstractViewOf#isGenerateWebscript <em>Generate Webscript</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,5 +52,31 @@ public interface AbstractViewOf extends AbstractView {
 	 * @generated
 	 */
 	void setViewOf(AbstractClass value);
+
+	/**
+	 * Returns the value of the '<em><b>Generate Webscript</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Generate Webscript</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Generate Webscript</em>' attribute.
+	 * @see #setGenerateWebscript(boolean)
+	 * @see com.bluexml.side.view.ViewPackage#getAbstractViewOf_GenerateWebscript()
+	 * @model
+	 * @generated
+	 */
+	boolean isGenerateWebscript();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.view.AbstractViewOf#isGenerateWebscript <em>Generate Webscript</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Generate Webscript</em>' attribute.
+	 * @see #isGenerateWebscript()
+	 * @generated
+	 */
+	void setGenerateWebscript(boolean value);
 
 } // AbstractViewOf
