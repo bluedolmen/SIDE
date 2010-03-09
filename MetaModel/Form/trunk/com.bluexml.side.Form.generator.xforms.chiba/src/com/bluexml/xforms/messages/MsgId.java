@@ -168,12 +168,10 @@ public enum MsgId {
 	INT_ACT_SUFFIX_GET_FORM_WKFLW		("workflow"),
 	// our custom CSS rule names
 	INT_CSS_HORIZ_LINE					("side_horizontal_line"),
-	INT_CSS_NO_LABEL_FIELD				("side_no_label_field"),
 	INT_CSS_RO_TEXTAREA					("side_ro_textarea"),
 	INT_CSS_SEARCH_FIELD				("side_search_field"),
 	INT_CSS_SEARCH_OPERATOR				("side_search_operator"),
 	INT_CSS_SEARCH_VALUE				("side_search_value"),
-	INT_CSS_SELECT_LIST_ZONE			("side_select_list_zone"),
 	INT_CSS_SELECT_OUTPUT_ZONE			("side_select_output_zone"),
 	INT_CSS_SELECT_SEARCH_ZONE			("side_select_search_zone"),
 	INT_CSS_SELECT_TRIGGER_IMG			("side_select_trigger_img"),
