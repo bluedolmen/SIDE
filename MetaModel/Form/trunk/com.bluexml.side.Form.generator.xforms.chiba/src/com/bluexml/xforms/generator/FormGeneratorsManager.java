@@ -522,6 +522,16 @@ public class FormGeneratorsManager {
 							"This page links to a demo webapp we provide to you so that you may easily test the integration of workflows with forms. The server, port and webapp context should be adapted as needed.",
 							"http://localhost:8080/xforms/demo/index.jsp");
 		}
+		genLogger
+				.addServiceLog(
+						"Default generated stylesheet",
+						"This file contains the definitions for the default appearance of the generated forms. The file is provided as a reference; in case you need to adapt the styles, a better approach is to override/redefine the relevant styles in the custom file.",
+						"http://localhost:8080/xforms/resources/styles/xforms.generated.css");
+		genLogger
+				.addServiceLog(
+						"Custom CSS definitions",
+						"Modify this file in case the stylesheets have to to be customized or changed. The modifications will be used since this file is already loaded by all generated forms.",
+						"http://localhost:8080/xforms/resources/styles/custom.css");
 		genLogger.addText("End of generation.");
 	}
 
