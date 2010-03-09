@@ -6,14 +6,13 @@ package com.bluexml.xforms.generator.forms;
 import com.bluexml.xforms.messages.MsgId;
 
 public enum FormTypeRendered {
-
 		// NOTE: the rendering procedure adds actions in reverse order!
 		formClass(
 				new FormSubmissionActions[] { FormSubmissionActions.Submit, FormSubmissionActions.Delete, FormSubmissionActions.Cancel }, 
 				"",
 				MsgId.INT_DIRECTORY_FORM_CLASSES.getText(), 
-				"Class forms", 
-				"default forms based on data diagrams"),
+				"Default forms", 
+				"based on data models"),
 		formClassSubClassSelector(
 				new FormSubmissionActions[] { FormSubmissionActions.SetType, FormSubmissionActions.Cancel }, 
 				MsgId.INT_SUFFIX_FILENAME_SELECTORS.getText(), 
