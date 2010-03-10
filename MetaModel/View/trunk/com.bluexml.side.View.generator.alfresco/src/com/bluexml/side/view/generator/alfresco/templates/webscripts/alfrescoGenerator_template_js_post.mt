@@ -25,7 +25,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (generateWebscript){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%name%>/<%name%>.post.js<%}%>
+<%if (generateWebscript) {%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%name%>/<%name%>.post.js<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 var myNode = null;
 if (argsM["nodeRef"] != null) {
@@ -39,16 +39,8 @@ if (argsM["nodeRef"] != null) {
 }
 
 if (myNode != null) {
-<%for (viewOf.getLinkedClasses()){%>
-<%if (viewOf.getFolder() == viewOf..getRootContainer().name){%>
   model.<%viewOf.getQualifiedName()%>_list = myNode.childrenByXPath("./*[subtypeOf('<%viewOf.getFolder()%>:<%viewOf.getQualifiedName()%>')]");
-<%}%>
-<%}%>
 } else {
-<%for (viewOf.getLinkedClasses()){%>
-<%if (viewOf.getFolder() == viewOf.getRootContainer().name){%>
   var lucene="TYPE:\"{<%viewOf.getNameSpace()%>}<%viewOf.getQualifiedName()%>\"";
   model.<%viewOf.getQualifiedName()%>_list = search.luceneSearch(lucene);
-<%}%>
-<%}%>
 }

@@ -39,16 +39,8 @@ if (argsM["nodeRef"] != null) {
 }
 
 if (myNode != null) {
-<%for (viewOf.getLinkedClasses()){%>
-<%if (viewOf.getFolder() == viewOf..getRootContainer().name){%>
   model.<%viewOf.getQualifiedName()%>_list = myNode.childrenByXPath("./*[subtypeOf('<%viewOf.getFolder()%>:<%viewOf.getQualifiedName()%>')]");
-<%}%>
-<%}%>
 } else {
-<%for (viewOf.getLinkedClasses()){%>
-<%if (viewOf.getFolder() == viewOf.getRootContainer().name){%>
   var lucene="TYPE:\"{<%viewOf.getNameSpace()%>}<%viewOf.getQualifiedName()%>\"";
   model.<%viewOf.getQualifiedName()%>_list = search.luceneSearch(lucene);
-<%}%>
-<%}%>
 }
