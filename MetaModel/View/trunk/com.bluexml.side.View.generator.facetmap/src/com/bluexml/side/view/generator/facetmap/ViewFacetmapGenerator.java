@@ -84,7 +84,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnavContent-generation.mt"); //$NON-NLS-1$
 		
 		// results
-		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-content-basicresults-generation.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-content-results-generation.mt"); //$NON-NLS-1$
 		return templates;
 	}
 

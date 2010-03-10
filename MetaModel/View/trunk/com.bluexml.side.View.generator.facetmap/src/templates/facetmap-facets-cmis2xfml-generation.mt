@@ -59,7 +59,7 @@ child::entry/<% cmisPath() %>
 		<xsl:variable name="idDoc" select="substring(child::id[1],10)"/>  
 		<%-- Use the fields of the innerview in the facetmap and te suffix and prefis to make the title --%>   
 		<resource
-			title="<%for (getInnerView().getFields()){%><%if (prefix !=null){%><%prefix%><%}%>{<% getFieldCmisPath() %>}<%if (suffix !=null){%><%suffix%><%}%>, <%}%>"
+			title="<%for (getInnerView().getFields()){%><%if (prefix !=null){%><%prefix%><%}%>{<% getFieldCmisPath() %>}<%if (suffix !=null){%><%suffix%><%}%>#<%}%>"
 			href="{$idDoc}">
 		<%-- Get all the fields of the facetmap and insert for each a piece of xsl that tests if
 		the element is empty.
