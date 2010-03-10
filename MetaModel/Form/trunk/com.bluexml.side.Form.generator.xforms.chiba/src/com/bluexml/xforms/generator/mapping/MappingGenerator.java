@@ -746,44 +746,43 @@ public class MappingGenerator extends AbstractGenerator {
 	 */
 	private void processSearchField(CanisterType formType, FormContainer formContainer,
 			SearchField searchField) {
-		if (formContainer instanceof FormSearch) {
-			SearchFieldType fieldType = objectFactory.createSearchFieldType();
-			// name
-			fieldType.setName(searchField.getId());
-
-			// default operator
-			String defaultOp = formGenerator.getSearchFieldDefaultOperator(searchField);
-			fieldType.setPick(defaultOp);
-
-			// number of UI input controls
-			Attribute attribute = (Attribute) formGenerator.getRealObject(searchField.getRef());
-			DataType typ = attribute.getTyp();
-			if (isDateType(typ)) {
-				fieldType.setInputs("2");
-			} else if (isNumericType(typ)) {
-				fieldType.setInputs("2");
-			}
-
-			// we set the 'type' attribute for data types whose inputs will be initialized
-			if (isDateType(typ)) {
-				fieldType.setType(typ.getName());
-			}
-			// enums need special processing by the controller at runtime so let's be courteous
-			if (attribute.getValueList() != null) {
-				fieldType.setEnum(ModelTools.getCompleteName(attribute.getValueList()));
-			}
-
-			// style
-			String style = searchField.getStyle();
-			if (style != null) {
-				CSSCollector.add(style);
-			}
-
-			((SearchFormType) formType).getField().add(fieldType);
-		} else {
+		if (!(formContainer instanceof FormSearch)) {
 			throw new RuntimeException("Search fields are allowed only on FormSearch objects. '"
 					+ formContainer.getLabel() + "' is not a FormSearch.");
 		}
+		SearchFieldType fieldType = objectFactory.createSearchFieldType();
+		// name
+		fieldType.setName(searchField.getId());
+
+		// default operator
+		String defaultOp = formGenerator.getSearchFieldDefaultOperator(searchField);
+		fieldType.setPick(defaultOp);
+
+		// number of UI input controls
+		Attribute attribute = (Attribute) formGenerator.getRealObject(searchField.getRef());
+		DataType typ = attribute.getTyp();
+		if (isDateType(typ)) {
+			fieldType.setInputs("2");
+		} else if (isNumericType(typ)) {
+			fieldType.setInputs("2");
+		}
+
+		// we set the 'type' attribute for data types whose inputs will be initialized
+		if (isDateType(typ)) {
+			fieldType.setType(typ.getName());
+		}
+		// enums need special processing by the controller at runtime so let's be courteous
+		if (attribute.getValueList() != null) {
+			fieldType.setEnum(ModelTools.getCompleteName(attribute.getValueList()));
+		}
+
+		// style
+		String style = searchField.getStyle();
+		if (style != null) {
+			CSSCollector.add(style);
+		}
+
+		((SearchFormType) formType).getField().add(fieldType);
 	}
 
 	private boolean isDateType(DataType typ) {
@@ -915,7 +914,7 @@ public class MappingGenerator extends AbstractGenerator {
 			formFieldType.setAlfrescoName(alfrescoName);
 		} else {
 			com.bluexml.side.workflow.Attribute attribute = (com.bluexml.side.workflow.Attribute) ref;
-			formFieldType.setAlfrescoName(attribute.getName()); // FIXME: à vérifier
+			formFieldType.setAlfrescoName(attribute.getName());
 		}
 
 		String initialValue = field.getInitial();
@@ -929,6 +928,8 @@ public class MappingGenerator extends AbstractGenerator {
 		if (field instanceof ChoiceField) {
 			ChoiceField choiceField = (ChoiceField) field;
 			if (choiceField.getWidget() == ChoiceWidgetType.LIST_ALL) {
+				// FIXME: why would the widget determine where the captions of the enum literals are
+				// fetched from ?
 				formFieldType.setSearchEnum(true); // optional attribute
 			}
 		}
@@ -960,7 +961,6 @@ public class MappingGenerator extends AbstractGenerator {
 		if (disabled) {
 			formFieldType.setReadOnly(disabled); // optional attribute
 		}
-		formFieldType.setSearchEnum(false);
 
 		// TODO: remove
 		// formFieldType.setDummyValue(pickDummyValue(formFieldType.getType())); // optional
@@ -1249,11 +1249,8 @@ public class MappingGenerator extends AbstractGenerator {
 		modelChoiceType.setDisplayLabel(modelChoiceField.getLabel()); // #1212
 
 		if (modelChoiceField.getWidget() == ModelChoiceWidgetType.INLINE) {
-			modelChoiceType.setInline(true);
-		} else {
-			modelChoiceType.setInline(false);
+			modelChoiceType.setInline(true); // optional attribute
 		}
-		modelChoiceType.setInline(false);
 		modelChoiceType.setMaxBound(modelChoiceField.getMax_bound());
 		modelChoiceType.setMinBound(modelChoiceField.getMin_bound());
 		modelChoiceType.setUniqueName(FormGeneratorsManager.getUniqueName(modelChoiceField));
@@ -1269,10 +1266,11 @@ public class MappingGenerator extends AbstractGenerator {
 				modelChoiceType.getTarget().add(childFormType);
 			}
 		}
+
 		// field size
-		String lsize = "" + modelChoiceField.getField_size();
-		if (StringUtils.trimToNull(lsize) != null) {
-			modelChoiceType.setFieldSize(lsize);
+		if (modelChoiceField.getField_size() > 0) {
+			String lsize = "" + modelChoiceField.getField_size();
+			modelChoiceType.setFieldSize(StringUtils.trim(lsize));
 		}
 
 	}
