@@ -50,14 +50,14 @@ version="1.0">
 			<%}%>
 			<%-- View operation --%>
 			<%if (name == "view"){%>
-					<xsl:attribute name="href">../share/page/site/test/document-details?nodeRef=workspace://SpacesStore/<xsl:value-of select="@href"/></xsl:attribute>
+					<xsl:attribute name="href">../share/page/site/<xsl:value-of select="substring-after($community, '&amp;community=')"/>/document-details?nodeRef=workspace://SpacesStore/<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/eye.png" class="imgIcon"/>
 			<%}%>
 			<%-- Edit operation --%>
 			<%if (name == "edit"){%>
-					<xsl:attribute name="href">../share/page/site/test/edit-metadata?nodeRef=workspace://SpacesStore/<xsl:value-of select="@href"/></xsl:attribute>
+					<xsl:attribute name="href">../share/page/site/<xsl:value-of select="substring-after($community, '&amp;community=')"/>/edit-metadata?nodeRef=workspace://SpacesStore/<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/edit.png" class="imgIcon"/>
-			<%}%>
+			<%}%>			
 			</a>
         <%}%>
     	<xsl:value-of select="@name"/>

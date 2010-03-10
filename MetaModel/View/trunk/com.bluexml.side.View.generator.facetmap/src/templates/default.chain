@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="ASCII"?>
 <chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
   <repository>
-    <files xsi:type="chain:Model" path="/com.bluexml.side.Class.generator.facetmap/RessourcesTest/MainRH.clazz"/>
-    <files xsi:type="chain:Folder" path="/com.bluexml.side.Class.generator.facetmap"/>
-    <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.facetmap/log.txt"/>
-    <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/class/1.0"/>
-    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-facets-cmis2xfml-generation.mt"/>
-    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis-generation.mt"/>
-    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-facets-buildproperties-generation.mt"/>
-    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-facets-xslbasicfacets-generation.mt"/>
-    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-facets-xslrightnav-generation.mt"/>
-    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-propertyfile-generation.mt"/>
+    <files xsi:type="chain:Model" path="/bigTest/models/My.view"/>
+    <files xsi:type="chain:Folder" path="/com.bluexml.side.View.generator.facetmap/src/templates"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.View.generator.facetmap/src/templates/default.log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/view/1.0"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-content-basicresults-generation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-facets-buildproperties-generation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-facets-cmis2xfml-generation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-facets-sql2xfml-generation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-facets-xslbasicfacets-generation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-facets-xslglobal-generation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-facets-xslrightnav-generation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-facets-xslrightnavContent-generation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-propertyfile-generation.mt"/>
   </repository>
   <actions>
-    <actions xsi:type="chain:Generate" documentation="Generation de cmis2xfml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
-    <actions xsi:type="chain:Generate" documentation="G&#xe9;n&#xe9;ration de la requette CMIS" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
-    <actions xsi:type="chain:Generate" documentation="G&#xe9;n&#xe9;ration basicfacets" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.7" folder="//@repository/@files.1"/>
-    <actions xsi:type="chain:Generate" documentation="G&#xe9;n&#xe9;ration de la xsl de pr&#xe9;sentation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.8" folder="//@repository/@files.1"/>
-    <actions xsi:type="chain:Generate" documentation="G&#xe9;n&#xe9;ration du fichier de propri&#xe9;t&#xe9; facetmap" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.9" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="facetmap-content-basicresults-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="facetmap-facets-buildproperties-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="facetmap-facets-cmis2xfml-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.6" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="facetmap-facets-sql2xfml-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.7" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="facetmap-facets-xslbasicfacets-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.8" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="facetmap-facets-xslglobal-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.9" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="facetmap-facets-xslrightnav-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.10" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="facetmap-facets-xslrightnavContent-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.11" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="facetmap-propertyfile-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.12" folder="//@repository/@files.1"/>
   </actions>
 </chain:Chain>
