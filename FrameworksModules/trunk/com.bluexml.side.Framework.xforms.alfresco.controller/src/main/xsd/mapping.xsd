@@ -103,6 +103,7 @@
 				<xsd:attribute name="dummyValue" type="xsd:string" use="optional" />
 				<xsd:attribute name="multiple" type="xsd:boolean" use="optional" />
 				<xsd:attribute name="readOnly" type="xsd:boolean" use="optional" />
+				<!--  I still don't see the purpose of "searchEnum" @Amenel -->
 				<xsd:attribute name="searchEnum" type="xsd:boolean" use="optional" />
 			</xsd:extension>
 		</xsd:complexContent>
