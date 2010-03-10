@@ -1129,7 +1129,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "SourceNull", "self.firstEnd.linkedClass->notEmpty()",
 			 "TargetNull", "self.secondEnd.linkedClass->notEmpty()",
 			 "AtLeastOneNavigableEdge", "(firstEnd.navigable or secondEnd.navigable)",
-			 "ClassCantBeReferencedbyTwoSameNameAssociation", "self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1",
+			 "ClassCantBeReferencedbyTwoSameNameAssociation", "if (self.getSource()->first().oclIsTypeOf(Aspect)) then Association.allInstances()->select(a | a.getSource() = self.getSource())->asSet()->select(a:Association|a.name = self.name)->size() = 1 else self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1 endif",
 			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )",
 			 "twoWayNavigation", "(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name <> \'\' and self.secondEnd.name <> \'\')",
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
