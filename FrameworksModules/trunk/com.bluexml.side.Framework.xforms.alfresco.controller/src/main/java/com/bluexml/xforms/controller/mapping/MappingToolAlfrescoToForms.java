@@ -665,6 +665,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			}
 
 			formElement.appendChild(nodeContentElt);
+			logger.debug("  appended content field '" + nodeContentElt.getNodeName() + "'");
 		}
 	}
 
