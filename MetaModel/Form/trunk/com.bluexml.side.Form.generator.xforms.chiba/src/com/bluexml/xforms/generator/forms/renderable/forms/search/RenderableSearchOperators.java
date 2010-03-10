@@ -8,6 +8,7 @@ import java.util.Stack;
 import javax.xml.namespace.QName;
 
 import com.bluexml.side.form.SearchField;
+import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
@@ -16,7 +17,10 @@ import com.bluexml.xforms.generator.forms.rendered.search.RenderedSearchOperator
 import com.bluexml.xforms.messages.MsgId;
 
 /**
- * A generic element (rendered as a combobox) for the list of operators of a search field.
+ * A generic element (rendered as a combobox) for the list of operators of a search field.<br/>
+ * The contents of the list of operators is an enumeration shared by all instances of this class
+ * that have the same set of operators. The responsibility of managing these enumerations is
+ * delegated to {@link FormGeneratorsManager}.
  * 
  * @author Amenel
  * 

@@ -829,10 +829,6 @@ public class FormGeneratorsManager {
 		}
 		currentGenerator.beginClasse(classe, rendered);
 
-		// Clazz parent = ModelTools.getParent(classe);
-		// boolean hasParent = (parent != null);
-		// currentGenerator.addIdForClass(classe, "BXDSID", hasParent);
-
 		Map<Aspect, Clazz> allClassAspects = ModelTools.getClassAspects(classe);
 		Set<Entry<Aspect, Clazz>> aspectEntrySet = allClassAspects.entrySet();
 		for (Entry<Aspect, Clazz> entry : aspectEntrySet) {
@@ -962,12 +958,13 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Gets the real classe.
+	 * Gets the real object pointed by the given object in case this one is a proxy. If it's not a
+	 * proxy, the given object is returned as is.
 	 * 
-	 * @param classe
-	 *            the classe
+	 * @param object
+	 *            a model element
 	 * 
-	 * @return the real classe
+	 * @return the resolved object
 	 */
 	public EObject getRealObject(EObject object) {
 		EObject realObject = object;
@@ -1016,8 +1013,7 @@ public class FormGeneratorsManager {
 	 */
 	public String getAlfrescoName(Clazz refClass, ModelElement refModelElement) {
 		Clazz real_class = (Clazz) getRealObject(refClass);
-		// FIXME: ds les wkflw forms, le choicefield n'a pas un nom
-		// d'association
+		// FIXME: ds les wkflw forms, le choicefield n'a pas un nom d'association
 		if (refModelElement == null) {
 			// this happens for choice fields in wkflw forms
 			return getClassQualifiedName(real_class);
@@ -1204,14 +1200,16 @@ public class FormGeneratorsManager {
 
 	/**
 	 * Provides a unique id for the set of search operators defined in a search field. If an
-	 * equivalent set already exists, its id is returned. Otherwise, this set is registered with a
-	 * new id that's returned.
+	 * equivalent set already exists, its id is returned. Otherwise, the new set is registered with
+	 * a new id that's returned.
 	 * 
 	 * @param searchField
 	 * @return the id, a zero padded sequence number starting from 1
 	 */
 	public String getSearchOperatorsListId(SearchField searchField) {
 		String resultId;
+
+		// get list of operators and default operator
 		SearchFieldDataBean sfDataBean = getSearchFieldDataBean(searchField);
 
 		// test whether the list already exists
@@ -1221,13 +1219,18 @@ public class FormGeneratorsManager {
 		if (resultId != null) {
 			return resultId;
 		}
-		// if not, register the list and return id
+		// if not, register the list and return its id
 		Formatter formatter = new Formatter();
 		resultId = formatter.format("%06d", operatorsEnumsMap.keySet().size() + 1).toString();
 		operatorsEnumsMap.put(resultId, sfDataBean.listOp);
 		return resultId;
 	}
 
+	/**
+	 * 
+	 * @param searchField
+	 * @return
+	 */
 	public String getSearchFieldDefaultOperator(SearchField searchField) {
 		SearchFieldDataBean sfDataBean = getSearchFieldDataBean(searchField);
 		return sfDataBean.defaultOp;
@@ -1241,8 +1244,8 @@ public class FormGeneratorsManager {
 	 */
 	private SearchFieldDataBean getSearchFieldDataBean(SearchField searchField) {
 		//
-		// the values must be kept in sync with names in the metamodel. The value chosen as default
-		// for a type should also be the same default in the controller.
+		// the values must be kept in sync with names in the metamodel. The value indicated here as
+		// default for a type should also be the same default in the controller.
 
 		// the id/name of the default op specified in the search field
 		String fieldOp = null;
@@ -1343,10 +1346,6 @@ public class FormGeneratorsManager {
 	 * @return the matching operator
 	 */
 	private SearchOperator getOperatorFromPool(String refId) {
-		// String refId = refId;
-		// if (refId.equals("all")) {
-		// refId = "oneOf";
-		// }
 		for (SearchOperator op : operatorPool) {
 			if (op.getId().equals(refId)) {
 				return op;
@@ -1362,6 +1361,7 @@ public class FormGeneratorsManager {
 	 * @param opList
 	 *            the list to check
 	 * @return the registration key, or null if the list is not registered.
+	 * @see {@link #getSearchOperatorsListId(SearchField)} for details about the key (or id).
 	 */
 	private String testOperatorList(List<SearchOperator> opList) {
 		for (String key : operatorsEnumsMap.keySet()) {

@@ -738,6 +738,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * 
 	 * @param formType
 	 *            placeholder for a form (should be of the appropriate mapping type for search
+	 *            forms, i.e. if the modeler did his job of restraining search fields to search
 	 *            forms)
 	 * @param formContainer
 	 *            SHOULD be a FormSearch

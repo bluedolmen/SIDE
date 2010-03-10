@@ -580,7 +580,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Writes the file that will provide, at runtime, a specific set of operators.
+	 * Writes the file that will provide a specific set of operators at runtime.
 	 * 
 	 * @param opKey
 	 *            the identifier for the set of operators
@@ -624,7 +624,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * 
+	 * Writes the description files into the directories of each form type that's been generated.
 	 */
 	private void renderDescriptionFiles() {
 		Element root = new Element("root");
