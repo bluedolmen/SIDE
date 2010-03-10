@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<template-instance>
+	<template-type>com/bluexml/side/view/extjs/grid</template-type>
+	<properties>
+		<hasBreadcrumb>true</hasBreadcrumb>
+		<hasTreeview>false</hasTreeview>
+		<hasPackager>true</hasPackager>
+	</properties>
+</template-instance>
