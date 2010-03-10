@@ -111,16 +111,6 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		typeElement.setTextContent(classTypeToString(getClassType(formType.getRealClass())));
 		rootElement.appendChild(typeElement);
 
-		appendFieldForContent(formType, doc, formElement, alfrescoId);
-//		if (isContentEnabled(formType)) {
-//			Element nodeContentElt = doc.createElement(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT
-//					.getText());
-//			nodeContentElt.setAttribute("file", "");
-//			nodeContentElt.setAttribute("type", "");
-//			String contentInfo = controller.getWebscriptNodeContentInfo(alfrescoId);
-//			nodeContentElt.setTextContent(contentInfo);
-//			rootElement.appendChild(nodeContentElt);
-//		}
 	}
 
 	/**
@@ -336,7 +326,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		for (ReferenceType referenceType : references) {
 			newFormReference(formInstance, formElement, referenceType, at, an, formIsReadOnly);
 		}
-		
+
 		appendFieldForContent(formType, formInstance, formElement, null);
 
 		return formElement;
@@ -653,9 +643,14 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	}
 
 	/**
+	 * Adds a DOM node for the implicit file content upload field, in case the form is content
+	 * enabled. If the instance refers to a live repository object, the content info is fetched.
+	 * 
 	 * @param formType
 	 * @param formInstance
 	 * @param formElement
+	 * @param alfrescoId
+	 *            the full node id
 	 */
 	private void appendFieldForContent(FormType formType, Document formInstance,
 			Element formElement, String alfrescoId) {
