@@ -111,15 +111,16 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		typeElement.setTextContent(classTypeToString(getClassType(formType.getRealClass())));
 		rootElement.appendChild(typeElement);
 
-		if (isContentEnabled(formType)) {
-			Element nodeContentElt = doc.createElement(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT
-					.getText());
-			nodeContentElt.setAttribute("file", "");
-			nodeContentElt.setAttribute("type", "");
-			String contentInfo = controller.getWebscriptNodeContentInfo(alfrescoId);
-			nodeContentElt.setTextContent(contentInfo);
-			rootElement.appendChild(nodeContentElt);
-		}
+		appendFieldForContent(formType, doc, formElement, alfrescoId);
+//		if (isContentEnabled(formType)) {
+//			Element nodeContentElt = doc.createElement(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT
+//					.getText());
+//			nodeContentElt.setAttribute("file", "");
+//			nodeContentElt.setAttribute("type", "");
+//			String contentInfo = controller.getWebscriptNodeContentInfo(alfrescoId);
+//			nodeContentElt.setTextContent(contentInfo);
+//			rootElement.appendChild(nodeContentElt);
+//		}
 	}
 
 	/**
@@ -293,14 +294,6 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		typeElement.setTextContent(classTypeToString(getClassType(formType.getRealClass())));
 		rootElement.appendChild(typeElement);
 
-		if (isContentEnabled(formType)) {
-			Element nodeContentElt = formInstance
-					.createElement(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
-			nodeContentElt.setAttribute("file", "");
-			nodeContentElt.setAttribute("type", "");
-			rootElement.appendChild(nodeContentElt);
-		}
-
 		formInstance.appendChild(rootElement);
 		return formInstance;
 	}
@@ -343,6 +336,9 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		for (ReferenceType referenceType : references) {
 			newFormReference(formInstance, formElement, referenceType, at, an, formIsReadOnly);
 		}
+		
+		appendFieldForContent(formType, formInstance, formElement, null);
+
 		return formElement;
 	}
 
@@ -651,7 +647,30 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		idField.setTextContent(alfrescoId);
 		formElement.appendChild(idField);
 
+		appendFieldForContent(formType, formInstance, formElement, alfrescoId);
+
 		return formElement;
+	}
+
+	/**
+	 * @param formType
+	 * @param formInstance
+	 * @param formElement
+	 */
+	private void appendFieldForContent(FormType formType, Document formInstance,
+			Element formElement, String alfrescoId) {
+		if (isContentEnabled(formType)) {
+			Element nodeContentElt = formInstance
+					.createElement(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
+			nodeContentElt.setAttribute("file", "");
+			nodeContentElt.setAttribute("type", "");
+			if (alfrescoId != null) {
+				String contentInfo = controller.getWebscriptNodeContentInfo(alfrescoId);
+				nodeContentElt.setTextContent(contentInfo);
+			}
+
+			formElement.appendChild(nodeContentElt);
+		}
 	}
 
 	/**

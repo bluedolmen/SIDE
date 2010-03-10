@@ -22,14 +22,6 @@ import com.bluexml.xforms.messages.MsgId;
 public class RenderableFileInputForContent extends Renderable {
 	ModelElementBindSimple meb;
 
-	/**
-	 * 
-	 */
-	public RenderableFileInputForContent() {
-		meb = new ModelElementBindSimple(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
-		meb.setType(new QName("anyURI"));
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -51,6 +43,8 @@ public class RenderableFileInputForContent extends Renderable {
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
 			boolean isInIMultRepeater) {
+		meb = new ModelElementBindSimple(path + MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
+		meb.setType(new QName("anyURI"));
 		return new RenderedFileInputForContent(meb);
 	}
 
