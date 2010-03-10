@@ -124,53 +124,42 @@ public class XFormsWork implements RunAsWork<String> {
 			// if (queryType == XFormsWebscript.XFormsQueryType.update) {
 			// result = update();
 			// }
-			if (queryType == XFormsWebscript.XFormsQueryType.delete) {
-				result = delete();
-			}
 			if (queryType == XFormsWebscript.XFormsQueryType.read) {
 				result = read();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.nodeinfo) {
-				result = nodeInfo();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.list) {
+			} else if (queryType == XFormsWebscript.XFormsQueryType.list) {
 				result = list();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.labels) {
-				result = labels();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.enum_) {
-				result = enum_();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.batch) {
+			} else if (queryType == XFormsWebscript.XFormsQueryType.batch) {
 				result = batch();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.workflow) {
+			} else if (queryType == XFormsWebscript.XFormsQueryType.workflow) {
 				result = wfManage();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.addToPackage) {
+			} else if (queryType == XFormsWebscript.XFormsQueryType.addToPackage) {
 				result = addInPackage();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.upload) {
+			} else if (queryType == XFormsWebscript.XFormsQueryType.nodeinfo) {
+				result = nodeInfo();
+			} else if (queryType == XFormsWebscript.XFormsQueryType.upload) {
 				result = upload();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.service) {
+			} else if (queryType == XFormsWebscript.XFormsQueryType.service) {
 				result = service();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.createPath) {
+			} else if (queryType == XFormsWebscript.XFormsQueryType.createPath) {
 				result = createPath();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.auth) {
+			} else if (queryType == XFormsWebscript.XFormsQueryType.labels) {
+				result = labels();
+			} else if (queryType == XFormsWebscript.XFormsQueryType.enum_) {
+				result = enum_();
+			} else if (queryType == XFormsWebscript.XFormsQueryType.auth) {
 				result = authenticate();
-			}
-			if (queryType == XFormsWebscript.XFormsQueryType.help) {
+			} else if (queryType == XFormsWebscript.XFormsQueryType.delete) {
+				result = delete();
+			} else if (queryType == XFormsWebscript.XFormsQueryType.help) {
 				result = help();
 			}
 			dataLayer.setInTransaction(false);
 
-			logger.debug("XFormsWork (opcode " + queryType + "): returning: ****");
+			logger
+					.debug("BlueXML XForms webscript worker (opcode '" + queryType
+							+ "'). Returning:");
 			logger.debug(result);
-			logger.debug("***************************");
+			logger.debug(">-----------<");
 
 			return result;
 		}

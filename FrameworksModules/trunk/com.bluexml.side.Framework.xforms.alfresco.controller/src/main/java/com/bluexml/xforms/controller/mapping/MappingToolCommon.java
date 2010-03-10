@@ -150,7 +150,9 @@ public class MappingToolCommon {
 	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
-	public static String marshal(GenericClass alfrescoClass) throws ServletException {
+	@SuppressWarnings("unused")
+	@Deprecated
+	private static String marshal(GenericClass alfrescoClass) throws ServletException {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		try {
 			marshal(alfrescoClass, os);
@@ -166,6 +168,13 @@ public class MappingToolCommon {
 		return datas;
 	}
 
+	/**
+	 * Marshalls the batch operations into a string.
+	 * 
+	 * @param batch
+	 * @return
+	 * @throws ServletException
+	 */
 	public static String marshal(Batch batch) throws ServletException {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		try {
@@ -173,7 +182,14 @@ public class MappingToolCommon {
 		} catch (JAXBException e) {
 			throw new ServletException(e);
 		}
-		String datas = os.toString();
+		String datas = "";
+		try {
+			datas = os.toString("UTF-8"); // #1295
+		} catch (UnsupportedEncodingException e) {
+			String message = "UTF-8 encoding is unsupported.";
+			logger.error(message, e);
+			throw new ServletException(message);
+		}
 		return datas;
 	}
 

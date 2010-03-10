@@ -28,8 +28,12 @@ import org.alfresco.web.scripts.WebScriptRequest;
 import org.alfresco.web.scripts.WebScriptResponse;
 import org.alfresco.web.scripts.servlet.WebScriptServletRequest;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class XFormsWebscript extends AbstractWebScript {
+
+	private static Log logger = LogFactory.getLog(XFormsWebscript.class);
 
 	private Map<String, List<QName>> subTypesMapCache = new HashMap<String, List<QName>>();
 	private Map<QName, QName> parentsMapCache = null;
@@ -41,7 +45,7 @@ public class XFormsWebscript extends AbstractWebScript {
 	private RetryingTransactionHelper transactionHelper;
 	private AuthorityDAO authorityDAO;
 	private StoreRef storeRef = new StoreRef("workspace://SpacesStore");
-	
+
 	public enum XFormsQueryType {
 			delete,
 			upload,
@@ -145,7 +149,8 @@ public class XFormsWebscript extends AbstractWebScript {
 	}
 
 	/**
-	 * @param authorityDAO the authorityDAO to set
+	 * @param authorityDAO
+	 *            the authorityDAO to set
 	 */
 	public void setAuthorityDAO(AuthorityDAO authorityDAO) {
 		this.authorityDAO = authorityDAO;
@@ -172,12 +177,16 @@ public class XFormsWebscript extends AbstractWebScript {
 				username = "admin";
 			}
 			webscriptresponse.setContentType("text/xml");
+			String contentEncoding = "UTF-8";
+			webscriptresponse.setContentEncoding(contentEncoding);
 
 			dictionaryService = serviceRegistry.getDictionaryService();
 			namespacePrefixResolver = serviceRegistry.getNamespaceService();
-			
+
 			XFormsQueryType queryType = getQueryType(webscriptrequest);
+
 			Map<String, String> parameters = getParameters(webscriptrequest);
+			
 			String result = AuthenticationUtil.runAs(new XFormsWork(this, queryType, parameters,
 					getServiceRegistry()), username);
 

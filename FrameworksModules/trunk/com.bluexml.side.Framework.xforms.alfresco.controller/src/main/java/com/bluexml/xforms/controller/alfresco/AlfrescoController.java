@@ -132,10 +132,8 @@ public class AlfrescoController {
 	/** The config. */
 	protected Properties config = null;
 
-
 	private MappingAgent mappingAgent;
 	private SystemAgent systemAgent;
-
 
 	static {
 		// set the document builder and catalogs.
@@ -1243,7 +1241,7 @@ public class AlfrescoController {
 	private PostMethod requestPost(AlfrescoTransaction transaction, Map<String, String> parameters,
 			MsgId opCode) throws IOException {
 		if (logger.isTraceEnabled()) {
-			logger.debug("Alfresco request: " + opCode);
+			logger.debug("Calling the webscript on Alfresco with request: " + opCode);
 			logger.debug("Parameters : ");
 			Set<Entry<String, String>> entrySet2 = parameters.entrySet();
 			for (Entry<String, String> entry2 : entrySet2) {
@@ -1265,6 +1263,8 @@ public class AlfrescoController {
 
 		post.setParameter("serviceCallerId", "XFormsController");
 		post.setParameter("serviceCallerVersion", "2.0.0");
+		post.addRequestHeader("Content-Type", PostMethod.FORM_URL_ENCODED_CONTENT_TYPE
+				+ "; charset=UTF-8");
 
 		executeMethod(post, false);
 
