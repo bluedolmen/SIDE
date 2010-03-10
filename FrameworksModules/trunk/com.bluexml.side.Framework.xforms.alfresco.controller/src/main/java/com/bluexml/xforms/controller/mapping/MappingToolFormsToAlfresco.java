@@ -77,34 +77,6 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 
 		GenericClass result = persistFormElement(transaction, formName, rootElt);
 
-		// if applicable, append an attribute that will keep info about the node content
-		Element nodeContentElt = DOMUtil.getChild(formNode, MsgId.INT_INSTANCE_SIDE_NODE_CONTENT
-				.getText());
-		if (nodeContentElt != null) {
-			GenericAttribute contentAttr = alfrescoObjectFactory.createGenericAttribute();
-			contentAttr.setQualifiedName(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
-			contentAttr.setSkipMe("true");
-
-			ValueType pathValue = alfrescoObjectFactory.createValueType();
-			ValueType nameValue = alfrescoObjectFactory.createValueType();
-			ValueType mimeValue = alfrescoObjectFactory.createValueType();
-
-			String path = nodeContentElt.getTextContent();
-			pathValue.setValue(path);
-
-			String nameAndExt = nodeContentElt.getAttribute("file");
-			nameValue.setValue(nameAndExt);
-
-			String mimetype = nodeContentElt.getAttribute("type");
-			mimeValue.setValue(mimetype);
-
-			contentAttr.getValue().add(pathValue);
-			contentAttr.getValue().add(nameValue);
-			contentAttr.getValue().add(mimeValue);
-
-			// append the attribute for content
-			result.getAttributes().getAttribute().add(contentAttr);
-		}
 		return result;
 	}
 
@@ -194,7 +166,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	 * @param formName
 	 *            the form name
 	 * @param rootElt
-	 *            the element
+	 *            the relevant root element. Normally, its node name is the form name.
 	 * 
 	 * @return the com.bluexml.xforms.controller.alfresco.binding. class
 	 * 
@@ -209,7 +181,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 		alfClass.setAssociations(createAssociations);
 
 		FormType formType = getFormType(formName);
-		if (formType != null) {
+		if (formType != null) { // this is a FormClass
 			ClassType classType = getClassType(formType.getRealClass());
 
 			List<Element> children = DOMUtil.getAllChildren(rootElt);
@@ -225,8 +197,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			collectFields(formName, rootElt, formType.getField(), alfClass);
 			collectAssocs(transaction, rootElt, formType.getModelChoice(), formType.getReference(),
 					alfClass);
-		} else {
-			// dealing with a Form Workflow
+		} else { // dealing with a FormWorkflow
 			WorkflowTaskType taskType = getWorkflowTaskType(formName, false);
 			collectFields(formName, rootElt, taskType.getField(), alfClass);
 			// change the references list if references become supported in FormWorkflow's
@@ -567,6 +538,35 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			}
 
 			alfClass.getAttributes().getAttribute().add(attribute);
+		}
+		
+		// if applicable, append the implicit attribute that will keep info about the node content
+		Element nodeContentElt = DOMUtil.getChild(rootElt, MsgId.INT_INSTANCE_SIDE_NODE_CONTENT
+				.getText());
+		if (nodeContentElt != null) {
+			GenericAttribute contentAttr = alfrescoObjectFactory.createGenericAttribute();
+			contentAttr.setQualifiedName(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
+			contentAttr.setSkipMe("true"); // <-- this is MANDATORY!
+
+			ValueType pathValue = alfrescoObjectFactory.createValueType();
+			ValueType nameValue = alfrescoObjectFactory.createValueType();
+			ValueType mimeValue = alfrescoObjectFactory.createValueType();
+
+			String path = nodeContentElt.getTextContent();
+			pathValue.setValue(path);
+
+			String nameAndExt = nodeContentElt.getAttribute("file");
+			nameValue.setValue(nameAndExt);
+
+			String mimetype = nodeContentElt.getAttribute("type");
+			mimeValue.setValue(mimetype);
+
+			contentAttr.getValue().add(pathValue);
+			contentAttr.getValue().add(nameValue);
+			contentAttr.getValue().add(mimeValue);
+
+			// append the attribute for content
+			alfClass.getAttributes().getAttribute().add(contentAttr);
 		}
 	}
 
