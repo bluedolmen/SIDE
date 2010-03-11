@@ -408,7 +408,7 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 			String targetClassType, String initId, String targetType, boolean formIsReadOnly,
 			boolean isServletRequest) {
 		String realInitId = initId;
-		realInitId = AlfrescoController.patchDataId(realInitId);
+		realInitId = controller.patchDataId(realInitId);
 
 		Element associationElement = xformsDocument.createElement(association.getName());
 		Node subNode = null;

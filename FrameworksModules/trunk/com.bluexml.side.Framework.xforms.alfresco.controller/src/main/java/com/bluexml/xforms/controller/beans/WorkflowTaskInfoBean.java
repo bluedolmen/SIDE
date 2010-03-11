@@ -3,14 +3,20 @@
  */
 package com.bluexml.xforms.controller.beans;
 
+import com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI;
+
 /**
+ * Bean for providing a set of information on a workflow form. Use this to combine several calls to
+ * {@link AlfrescoControllerAPI}.
+ * 
  * @author Amenel
  * 
  */
 public class WorkflowTaskInfoBean {
 
-	private String id;
-	private String name;
+	private String taskId;
+	private String formName;
+	private String dataFormName;
 	private String actorId;
 	private String pooledActors;
 	private String title;
@@ -21,10 +27,11 @@ public class WorkflowTaskInfoBean {
 	 * @param actorId
 	 * @param pooledActors
 	 */
-	public WorkflowTaskInfoBean(String id, String name, String actorId, String pooledActors,
+	public WorkflowTaskInfoBean(String taskId, String name, String dataForm, String actorId, String pooledActors,
 			String title) {
-		this.id = id;
-		this.name = name;
+		this.taskId = taskId;
+		this.formName = name;
+		this.dataFormName = dataForm;
 		this.actorId = actorId;
 		this.pooledActors = pooledActors;
 		this.title = title;
@@ -34,14 +41,14 @@ public class WorkflowTaskInfoBean {
 	 * @return the id
 	 */
 	public String getId() {
-		return id;
+		return taskId;
 	}
 
 	/**
 	 * @return the name
 	 */
-	public String getName() {
-		return name;
+	public String getFormName() {
+		return formName;
 	}
 
 	/**
@@ -63,6 +70,13 @@ public class WorkflowTaskInfoBean {
 	 */
 	public String getTitle() {
 		return title;
+	}
+
+	/**
+	 * @return the dataFormName
+	 */
+	public String getDataFormName() {
+		return dataFormName;
 	}
 
 }

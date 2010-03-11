@@ -325,6 +325,18 @@ public class MappingToolCommon {
 	}
 
 	/**
+	 * Gets the complete name of a class type.
+	 * 
+	 * @param classType
+	 *            the type
+	 * 
+	 * @return the complete name of the type, under the form package + "." + name 
+	 */
+	public String getClassTypeCompleteName(ClassType classType) {
+		return classTypeToString(classType);
+	}
+	
+	/**
 	 * Gets the id of a form that supports the given data type.
 	 * 
 	 * @param dataType
@@ -410,11 +422,11 @@ public class MappingToolCommon {
 	}
 
 	/**
-	 * Gets (from the mapping) the WorkflowTaskType object that matches the name. Example:
-	 * "Evaluation_Demarrage" includes process "Evaluation" and task "Demarrage".
+	 * Gets (from the mapping) the WorkflowTaskType object that matches the name.
 	 * 
 	 * @param refName
-	 *            the name to test against, e.g. "wfbxwfTest:Start"
+	 *            the name to test against, either a task id (e.g. "wfbxwfTest:Start") or a form
+	 *            name (e.g. "wfTest_Start")
 	 * @param byId
 	 *            if true, the task id from mapping.xml is tested. Otherwise, the form name is
 	 *            tested.
@@ -1153,7 +1165,7 @@ public class MappingToolCommon {
 		Element idElt = DOMUtil.getOneElementByTagName(children, MsgId.INT_INSTANCE_SIDEID
 				.getText());
 		if (idElt != null) {
-			result = AlfrescoController.patchDataId(StringUtils.trimToNull(idElt.getTextContent()));
+			result = controller.patchDataId(StringUtils.trimToNull(idElt.getTextContent()));
 		}
 		return result;
 	}

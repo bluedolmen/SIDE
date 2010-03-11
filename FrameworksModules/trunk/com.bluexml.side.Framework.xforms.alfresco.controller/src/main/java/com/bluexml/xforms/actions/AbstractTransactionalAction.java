@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
-import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
@@ -23,7 +22,7 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 	@Override
 	public void submit() throws ServletException {
 
-		if (AlfrescoController.isStandaloneMode()) {
+		if (controller.isInStandaloneMode()) {
 			String msg = "The Alfresco Controller is in standalone mode. Some actions are unavailable";
 			navigationPath.setStatusMsg(msg);
 			throw new ServletException(msg);

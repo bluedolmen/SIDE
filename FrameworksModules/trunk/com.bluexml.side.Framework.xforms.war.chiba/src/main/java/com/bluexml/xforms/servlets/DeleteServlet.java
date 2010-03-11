@@ -52,7 +52,7 @@ public class DeleteServlet extends AbstractServlet {
 		AlfrescoController controller = AlfrescoController.getInstance();
 		try {
 			String dataId = StringUtils.trimToNull(req.getParameter(DATA_ID));
-			dataId = AlfrescoController.patchDataId(dataId);
+			dataId = controller.patchDataId(dataId);
 			String userName = req.getParameter(MsgId.PARAM_USER_NAME.getText());
 			AlfrescoTransaction transaction = createTransaction(controller, userName);
 			controller.delete(transaction, dataId);

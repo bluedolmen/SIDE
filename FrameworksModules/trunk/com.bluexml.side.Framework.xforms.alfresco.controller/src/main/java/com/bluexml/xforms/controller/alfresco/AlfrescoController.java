@@ -49,7 +49,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.bluexml.side.form.utils.DOMUtil;
-import com.bluexml.xforms.actions.GetAction;
 import com.bluexml.xforms.controller.alfresco.agents.MappingAgent;
 import com.bluexml.xforms.controller.alfresco.agents.SystemAgent;
 import com.bluexml.xforms.controller.beans.EditNodeBean;
@@ -64,7 +63,7 @@ import com.thoughtworks.xstream.XStream;
 /**
  * The Class AlfrescoController.
  */
-public class AlfrescoController {
+public class AlfrescoController implements AlfrescoControllerAPI {
 
 	/** The upload base directory in the file system. */
 	public static File UPLOAD_DIRECTORY = null;
@@ -169,7 +168,6 @@ public class AlfrescoController {
 		try {
 			// loadMappingXml(); // already done by the mapping agent of the singleton instance
 			loadProperties(formsPropertiesPath, messagesPropertiesPath);
-			loadRedirectionTable(null);
 		} catch (Exception e) {
 			if (logger.isErrorEnabled()) {
 				logger.error(e);
@@ -347,15 +345,17 @@ public class AlfrescoController {
 		return instance;
 	}
 
-	/**
-	 * Patch data id. Adds "workspace://SpacesStore/" as a prefix to dataId.
-	 * 
-	 * @param dataId
-	 *            the data id
-	 * 
-	 * @return the string
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String patchDataId(String dataId) {
+	public AlfrescoControllerAPI getController() {
+		return this;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public String patchDataId(String dataId) {
 		String result = null;
 		if (dataId != null) {
 			if (!dataId.startsWith("workspace://SpacesStore/")) {
@@ -367,33 +367,29 @@ public class AlfrescoController {
 		return result;
 	}
 
-	/**
-	 * Removes the prefix from a full data id.
-	 * 
-	 * @param dataId
-	 * @return the hex code part of the id
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String unpatchDataId(String dataId) {
+	public String unpatchDataId(String dataId) {
 		return dataId.substring(dataId.lastIndexOf('/') + 1);
 	}
 
-	/**
-	 * @return the URL to the Alfresco host
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String getAlfrescoUrl() {
+	public String getAlfrescoUrl() {
 		return ALFRESCO_URL;
 	}
 
-	/**
-	 * @param alfresco_url
-	 *            the URL to the Alfresco host to set
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static void setAlfrescoUrl(String alfresco_url) {
+	public void setAlfrescoUrl(String alfresco_url) {
 		ALFRESCO_URL = alfresco_url;
 	}
 
 	/**
-	 * Instantiates a new alfresco controller.
+	 * Instantiates a new Alfresco controller.
 	 * 
 	 * @throws Exception
 	 */
@@ -404,6 +400,8 @@ public class AlfrescoController {
 		// reference the agents
 		systemAgent = new SystemAgent(this, xstream);
 		mappingAgent = new MappingAgent(this);
+
+		loadRedirectionTable(null);
 	}
 
 	//
@@ -411,78 +409,45 @@ public class AlfrescoController {
 	// SystemAgent
 	//
 	//
-	/**
-	 * Returns all known groups, including standard Alfresco groups.
-	 * 
-	 * @param asGroups
-	 *            if true, specifies that only groups are returned. If false, only users. To have
-	 *            the full set of users and groups, this function must be called twice.
-	 * @return the set of registered authorities. Returns <b>null</b> if an exception occurred or if
-	 *         the value is <b>null</b> by itself.
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public Set<String> systemGetAllAuthoritiesAsGroupsOrUsers(boolean asGroups) {
 		return systemAgent.getAllAuthoritiesAsGroupsOrUsers(asGroups);
 	}
 
-	/**
-	 * Returns all groups a specific user belongs to, including non immediate parent groups.
-	 * 
-	 * @param userName
-	 *            the name of the user.
-	 * @return the set of groups the user is part of. Returns <b>null</b> if an exception occurred
-	 *         or if the value is <b>null</b> by itself.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public Set<String> systemGetContainingGroups(String userName) {
 		return systemAgent.getContainingGroups(userName);
 	}
 
-	/**
-	 * Gets the value of a property for a node.
-	 * 
-	 * @param node
-	 *            a node reference
-	 * @param propertyName
-	 * @return the value of the property for the node. Returns <b>null</b> if an exception occurred
-	 *         or if the value is <b>null</b>.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String systemGetNodeProperty(NodeRef node, QName propertyName) {
 		return systemAgent.getNodeProperty(node, propertyName);
 	}
 
-	/**
-	 * Returns the node ref for a user identified by name. If no user with that name exists, the
-	 * authority will not be created.
-	 * 
-	 * @param userName
-	 * @return the noderef for the user name. Returns <b>null</b> if an exception occurred or if the
-	 *         value is <b>null</b>.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public NodeRef systemGetNodeRefForUser(String userName) {
 		return systemAgent.getNodeRefForUser(userName);
 	}
 
-	/**
-	 * Returns the node ref for a user group identified by name.
-	 * 
-	 * @param groupName
-	 *            the group name as can be seen in Alfresco's web client. The system prefix for
-	 *            groups will be prepended before calling the web script.
-	 * @return the noderef for the user group. Returns <b>null</b> if an exception occurred or if
-	 *         the group does not exist.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public NodeRef systemGetNodeRefForGroup(String groupName) {
 
 		return systemAgent.getNodeRefForGroup(groupName);
 	}
 
-	/**
-	 * Gets the type of a node.
-	 * 
-	 * @param dataId
-	 *            the node's id, with or without the protocol and store.
-	 * @return the QName that corresponds to the content type. Returns <b>null</b> if an exception
-	 *         occurred or if the value is <b>null</b>, which is a hint that either the webscript is
-	 *         not available or the object does not exist.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public QName systemGetNodeType(String dataId) {
 		return systemAgent.getNodeType(patchDataId(dataId));
@@ -506,10 +471,10 @@ public class AlfrescoController {
 	 * 
 	 * @param transaction
 	 *            the transaction
-	 * @param type
+	 * @param formName
 	 *            the content type
-	 * @param id
-	 *            the id
+	 * @param dataId
+	 *            the node id
 	 * @param idAsServlet
 	 *            whether the request comes from a servlet
 	 * 
@@ -518,9 +483,10 @@ public class AlfrescoController {
 	 * @throws ServletException
 	 *             the alfresco controller exception
 	 */
-	public Document getInstanceClass(AlfrescoTransaction transaction, String type, String id,
-			boolean formIsReadOnly, boolean isServletRequest) throws ServletException {
-		return mappingAgent.getInstanceClass(transaction, type, id, formIsReadOnly,
+	public Document getInstanceClass(AlfrescoTransaction transaction, String formName,
+			String dataId, boolean formIsReadOnly, boolean isServletRequest)
+			throws ServletException {
+		return mappingAgent.getInstanceClass(transaction, formName, dataId, formIsReadOnly,
 				isServletRequest);
 	}
 
@@ -547,24 +513,16 @@ public class AlfrescoController {
 		return mappingAgent.getInstanceForm(transaction, formName, id, formIsReadOnly);
 	}
 
-	/**
-	 * Returns an XForms instance document for a FormWorkflow.
-	 * 
-	 * @see {@link GetAction}
-	 * @param formName
-	 * @return
-	 * @throws ServletException
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
+
 	public Document getInstanceWorkflow(String formName) throws ServletException {
 		return mappingAgent.getInstanceWorkflow(formName);
 	}
 
-	/**
-	 * Returns an XForms instance document for a FormSearch.
-	 * 
-	 * @param formName
-	 *            the form Id
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public Document getInstanceSearch(String formName) {
 		return mappingAgent.getInstanceSearch(formName);
@@ -820,6 +778,67 @@ public class AlfrescoController {
 		return CHECK_MATCH_DATA_FORM;
 	}
 
+	public String getParamLoginUserName(Map<String, String> initParams) {
+		String result = null;
+		if (initParams != null) {
+			result = initParams.get(MsgId.PARAM_USER_NAME.getText());
+		}
+		return (StringUtils.trimToNull(result) == null) ? USER_NAME : result;
+	}
+
+	public String getParamLoginUserPswd(Map<String, String> initParams) {
+		String result = null;
+		if (initParams != null) {
+			result = initParams.get(MsgId.PARAM_USER_PSWD.getText());
+		}
+		return (StringUtils.trimToNull(result) == null) ? USER_PSWD : result;
+	}
+
+	public int getParamMaxResults(Map<String, String> initParams) {
+		int result = MAX_RESULTS;
+		if (initParams != null) {
+			String resultStr = initParams.get(MsgId.PARAM_MAX_RESULTS.getText());
+			if (StringUtils.trimToNull(resultStr) != null) {
+				try {
+					result = Integer.parseInt(resultStr);
+				} catch (NumberFormatException e) {
+					if (logger.isErrorEnabled()) {
+						logger.error(
+								"Can't parse the value '" + resultStr + "' for parameter '"
+										+ MsgId.PARAM_MAX_RESULTS
+										+ "'. Will revert to the previous value.", e);
+					}
+					result = MAX_RESULTS;
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Provides the number of directory levels into which filesystem uploads should be randomly
+	 * distributed.
+	 * 
+	 * @param initParams
+	 * 
+	 * @return
+	 */
+	public int getParamUploadPathDepth(Map<String, String> initParams) {
+
+		String result = null;
+		if (initParams != null) {
+			result = initParams.get(MsgId.PARAM_UPLOAD_DEPTH.getText());
+		}
+		if (StringUtils.trimToNull(result) == null) {
+			return UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH;
+		}
+		try {
+			return Integer.parseInt(result);
+		} catch (NumberFormatException e) {
+			return UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH;
+		}
+	}
+
 	/**
 	 * Persists a search form: collects the search info on search forms.
 	 * 
@@ -851,6 +870,59 @@ public class AlfrescoController {
 	public PersistFormResultBean persistClass(AlfrescoTransaction transaction, Node instance,
 			boolean isServletRequest) throws ServletException {
 		return mappingAgent.persistClass(transaction, instance, isServletRequest);
+	}
+
+	/**
+	 * Persists a FormClass: transforms the XForms instance into a GenericClass, and either saves or
+	 * updates a node.
+	 * 
+	 * @param type
+	 *            the type
+	 * @param instance
+	 *            the instance
+	 * @param transaction
+	 *            the transaction
+	 * 
+	 * @return the temporary id assigned to the class
+	 * 
+	 * @throws ServletException
+	 */
+	public PersistFormResultBean persistForm(AlfrescoTransaction transaction, String type,
+			Node instance) throws ServletException {
+		return mappingAgent.persistForm(transaction, type, instance);
+	}
+
+	/**
+	 * Returns the data on the form in a specific JSON format. This is to be used with forms other
+	 * than FormSearch's when called in search mode. If the form is a FormSearch, use
+	 * {@link #persistSearch(AlfrescoTransaction, Node, boolean)}
+	 * 
+	 * @param transaction
+	 * @param formName
+	 * @param instance
+	 * @return a JSON string
+	 * @throws ServletException
+	 */
+	public String persistFormJSON(AlfrescoTransaction transaction, String formName, Node instance,
+			boolean shortPropertyNames) throws ServletException {
+		return mappingAgent.persistFormToJSON(transaction, formName, instance, shortPropertyNames);
+	}
+
+	/**
+	 * Builds a GenericClass object from the instance of a workflow and processes the possible
+	 * upload fields.
+	 * 
+	 * @param transaction
+	 * @param taskTypeName
+	 *            the id of the workflow form
+	 * @param taskElt
+	 *            the root element containing the workflow properties
+	 * @return
+	 * @throws ServletException
+	 */
+	public PersistFormResultBean persistWorkflow(AlfrescoTransaction transaction,
+			String taskTypeName, Node taskElt) throws ServletException {
+		return mappingAgent.persistWorkflow(transaction, taskTypeName, taskElt);
 	}
 
 	public void executeBatch(AlfrescoTransaction alfrescoTransaction) throws ServletException {
@@ -1048,7 +1120,7 @@ public class AlfrescoController {
 		}
 
 		Document reqDoc;
-		if (isStandaloneMode()) {
+		if (isInStandaloneMode()) {
 			reqDoc = requestDummyDocumentList(alfTypeName, maxLength);
 		} else {
 			reqDoc = requestDocumentFromAlfresco(transaction, parameters,
@@ -1180,8 +1252,6 @@ public class AlfrescoController {
 	 * @return the document
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	private Document requestDocumentFromAlfresco(AlfrescoTransaction transaction,
 			Map<String, String> parameters, MsgId opCode) throws ServletException {
@@ -1190,7 +1260,7 @@ public class AlfrescoController {
 			PostMethod post = requestPost(transaction, parameters, opCode);
 			result = synchronizedParse(post.getResponseBodyAsStream()); // #1227
 		} catch (ConnectException e) { // #1234
-			if (!isDebugMode()) {
+			if (!isInDebugMode()) {
 				throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
 			}
 			return null;
@@ -1211,7 +1281,7 @@ public class AlfrescoController {
 	/**
 	 * @param is
 	 *            the input stream to parse from
-	 * @return
+	 * @return the document built from the stream
 	 * @throws IOException
 	 * @throws SAXException
 	 */
@@ -1276,67 +1346,6 @@ public class AlfrescoController {
 		return post;
 	}
 
-	public String getParamLoginUserName(Map<String, String> initParams) {
-		String result = null;
-		if (initParams != null) {
-			result = initParams.get(MsgId.PARAM_USER_NAME.getText());
-		}
-		return (StringUtils.trimToNull(result) == null) ? USER_NAME : result;
-	}
-
-	public String getParamLoginUserPswd(Map<String, String> initParams) {
-		String result = null;
-		if (initParams != null) {
-			result = initParams.get(MsgId.PARAM_USER_PSWD.getText());
-		}
-		return (StringUtils.trimToNull(result) == null) ? USER_PSWD : result;
-	}
-
-	public int getParamMaxResults(Map<String, String> initParams) {
-		int result = MAX_RESULTS;
-		if (initParams != null) {
-			String resultStr = initParams.get(MsgId.PARAM_MAX_RESULTS.getText());
-			if (StringUtils.trimToNull(resultStr) != null) {
-				try {
-					result = Integer.parseInt(resultStr);
-				} catch (NumberFormatException e) {
-					if (logger.isErrorEnabled()) {
-						logger.error(
-								"Can't parse the value '" + resultStr + "' for parameter '"
-										+ MsgId.PARAM_MAX_RESULTS
-										+ "'. Will revert to the previous value.", e);
-					}
-					result = MAX_RESULTS;
-				}
-			}
-		}
-		return result;
-	}
-
-	/**
-	 * Provides the number of directory levels into which filesystem uploads should be randomly
-	 * distributed.
-	 * 
-	 * @param initParams
-	 * 
-	 * @return
-	 */
-	public int getParamUploadPathDepth(Map<String, String> initParams) {
-
-		String result = null;
-		if (initParams != null) {
-			result = initParams.get(MsgId.PARAM_UPLOAD_DEPTH.getText());
-		}
-		if (StringUtils.trimToNull(result) == null) {
-			return UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH;
-		}
-		try {
-			return Integer.parseInt(result);
-		} catch (NumberFormatException e) {
-			return UPLOAD_DIRECTORY_RANDOM_PATH_DEPTH;
-		}
-	}
-
 	/**
 	 * Executes an HTTP method.
 	 * 
@@ -1366,59 +1375,6 @@ public class AlfrescoController {
 	 */
 	public void delete(AlfrescoTransaction transaction, String nodeRef) {
 		transaction.queueDelete(nodeRef);
-	}
-
-	/**
-	 * Persists a FormClass: transforms the XForms instance into a GenericClass, and either saves or
-	 * updates a node.
-	 * 
-	 * @param type
-	 *            the type
-	 * @param instance
-	 *            the instance
-	 * @param transaction
-	 *            the transaction
-	 * 
-	 * @return the temporary id assigned to the class
-	 * 
-	 * @throws ServletException
-	 */
-	public PersistFormResultBean persistForm(AlfrescoTransaction transaction, String type,
-			Node instance) throws ServletException {
-		return mappingAgent.persistForm(transaction, type, instance);
-	}
-
-	/**
-	 * Returns the data on the form in a specific JSON format. This is to be used with forms other
-	 * than FormSearch's when called in search mode. If the form is a FormSearch, use
-	 * {@link #persistSearch(AlfrescoTransaction, Node, boolean)}
-	 * 
-	 * @param transaction
-	 * @param formName
-	 * @param instance
-	 * @return a JSON string
-	 * @throws ServletException
-	 */
-	public String persistFormJSON(AlfrescoTransaction transaction, String formName, Node instance,
-			boolean shortPropertyNames) throws ServletException {
-		return mappingAgent.persistFormToJSON(transaction, formName, instance, shortPropertyNames);
-	}
-
-	/**
-	 * Builds a GenericClass object from the instance of a workflow and processes the possible
-	 * upload fields.
-	 * 
-	 * @param transaction
-	 * @param taskTypeName
-	 *            the id of the workflow form
-	 * @param taskElt
-	 *            the root element containing the workflow properties
-	 * @return
-	 * @throws ServletException
-	 */
-	public PersistFormResultBean persistWorkflow(AlfrescoTransaction transaction,
-			String taskTypeName, Node taskElt) throws ServletException {
-		return mappingAgent.persistWorkflow(transaction, taskTypeName, taskElt);
 	}
 
 	/**
@@ -1463,7 +1419,7 @@ public class AlfrescoController {
 	 * 
 	 * @param completeAssoName
 	 * @param dataType
-	 *            the form id, i.e. a class/name or form/name in the mapping.xml file
+	 *            the form id, i.e. a class name or form name in the mapping.xml file
 	 * @return
 	 */
 	public String getShortAssociationName(String completeAssoName, String dataType) {
@@ -1687,7 +1643,7 @@ public class AlfrescoController {
 		}
 		String sresult;
 
-		if (AlfrescoController.isStandaloneMode()) {
+		if (isInStandaloneMode()) {
 			return null;
 		}
 
@@ -1703,13 +1659,8 @@ public class AlfrescoController {
 		return result;
 	}
 
-	/**
-	 * Retrieves all in-progress tasks found for the instance. Since several paths may be associated
-	 * with the instance, each active path may provide tasks.
-	 * 
-	 * @param path
-	 * @return the list (possibly empty if exception) of in-progress tasks.
-	 * @throws ServletException
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	@SuppressWarnings("unchecked")
 	public List<WorkflowTask> workflowGetCurrentTasks(String instanceId) {
@@ -1748,13 +1699,8 @@ public class AlfrescoController {
 		return result;
 	}
 
-	/**
-	 * Retrieves a specific task definition for a given process Id.
-	 * 
-	 * @param processDefId
-	 * @param task
-	 *            the task to search for in the definition
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public WorkflowTaskDefinition workflowGetTaskDefinition(String processDefId, String task) {
 
@@ -1767,9 +1713,9 @@ public class AlfrescoController {
 		return null;
 	}
 
-	//
-	// BRIDGE FUNCTIONS for accessing the WorkflowService API
-	//
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
 	@SuppressWarnings("unchecked")
 	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId) {
 		String methodName = "getTaskDefinitions";
@@ -1780,6 +1726,9 @@ public class AlfrescoController {
 		return workflowRequest;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
 	@SuppressWarnings("unchecked")
 	public List<WorkflowInstance> workflowGetWorkflowsForContent(String refStr, boolean onlyActive) {
 		NodeRef nodeRef = new NodeRef(refStr);
@@ -1792,6 +1741,9 @@ public class AlfrescoController {
 		return workflowRequest;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
 	public WorkflowDefinition workflowGetWorkflowById(String defId) {
 		String methodName = "getDefinitionById";
 		List<Object> params = new ArrayList<Object>();
@@ -1801,12 +1753,8 @@ public class AlfrescoController {
 		return workflowRequest;
 	}
 
-	/**
-	 * Returns the form name for a task based on the full task id.
-	 * 
-	 * @param fullTaskId
-	 *            e.g. "wfbxwfTest:T1"
-	 * @return the id of the workflow form that can be used for the task
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String getWorkflowFormNameByTaskId(String fullTaskId) {
 		return mappingAgent.getWorkflowFormNameByTaskId(fullTaskId);
@@ -1815,7 +1763,7 @@ public class AlfrescoController {
 	/**
 	 * Returns the Alfresco name for the given field from a specific workflow form.
 	 * 
-	 * @param taskType
+	 * @param wkFormName
 	 * @param fieldName
 	 * @return
 	 */
@@ -1823,14 +1771,8 @@ public class AlfrescoController {
 		return mappingAgent.getWorkflowFieldAlfrescoName(wkFormName, fieldName);
 	}
 
-	/**
-	 * Creates a folder. Currently unused but left available as an access point to a webscript
-	 * operation.
-	 * 
-	 * @param folderPath
-	 * @param userName
-	 * @return
-	 * @throws ServletException
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String createPathInRepository(String folderPath, String userName)
 			throws ServletException {
@@ -1846,36 +1788,24 @@ public class AlfrescoController {
 		return resultId;
 	}
 
-	/**
-	 * Gets the task name from the form name.
-	 * 
-	 * @param formName
-	 * @return the name of the process (e.g. "Evaluation_Demarrage" -> "Demarrage")
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String workflowExtractTaskNameFromFormName(String formName) {
+	public String workflowExtractTaskNameFromFormName(String formName) {
 		return formName.substring(formName.indexOf("_") + 1);
 	}
 
-	/**
-	 * Gets the process name from the form name.<br/>
-	 * NOTE: a duplicate of this function is also defined in MappingGenerator
-	 * 
-	 * @param formName
-	 * @return the name of the process (e.g. "Evaluation_Demarrage" -> "Evaluation")
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String workflowExtractProcessNameFromFormName(String formName) {
+	public String workflowExtractProcessNameFromFormName(String formName) {
 		return formName.substring(0, formName.indexOf("_"));
 	}
 
-	/**
-	 * Returns the namespace part of a generated workflow from a WorkflowDefinition.name. In case
-	 * the process was not defined through the workflow modeler, the parameter is returned as is.
-	 * 
-	 * @param name
-	 *            (e.g. "jbpm$wfbxEvaluation:Evaluation")
-	 * @return the local name of the process (e.g. "wfbxEvaluation")
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String workflowExtractNamespacePrefix(String name) {
+	public String workflowExtractNamespacePrefix(String name) {
 		int start = name.indexOf(BLUEXML_WORKFLOW_PREFIX);
 		int end = name.indexOf(':');
 		if ((start == -1) || (end == -1) || (end < start)) {
@@ -1885,14 +1815,10 @@ public class AlfrescoController {
 		return prefix;
 	}
 
-	/**
-	 * Tells whether a workflow definition fits the definition name of processes generated via the
-	 * modeler.
-	 * 
-	 * @param name
-	 * @return true if the definition name is a candidate.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static boolean workflowIsBlueXMLDefinition(String name) {
+	public boolean workflowIsBlueXMLDefinition(String name) {
 		int start = name.indexOf(BLUEXML_WORKFLOW_PREFIX);
 		int end = name.indexOf(':');
 		if (start == -1 || end == -1 || (end < start)) {
@@ -1903,49 +1829,31 @@ public class AlfrescoController {
 		return StringUtils.endsWith(prefix, processName);
 	}
 
-	/**
-	 * Gets the process name from WorkflowDefinition name.
-	 * 
-	 * @param name
-	 * @return the local name of the process (e.g. "jbpm$wf:review" -> "review")
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String workflowExtractProcessNameFromDefName(String name) {
+	public String workflowExtractProcessNameFromDefName(String name) {
 		return name.substring(name.indexOf(':') + 1);
 	}
 
-	/**
-	 * Gives the name under which a process is known by the workflow engine under Alfresco. <br/>
-	 * Used when reacting to a workflow transition action. <br/>
-	 * e.g. "Evaluation" --> "jbpm$wfbxEvaluation:Evaluation"
-	 * 
-	 * @param processName
-	 * @return the process definition as should be found in WorkflowDefinition.name.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String workflowBuildBlueXMLDefinitionName(String processName) {
+	public String workflowBuildBlueXMLDefinitionName(String processName) {
 		return "jbpm$" + BLUEXML_WORKFLOW_PREFIX + processName + ":" + processName;
 	}
 
-	/**
-	 * Gives the name under which a task is defined in the process definition model. <br/>
-	 * e.g. "Evaluation_Annotation" --> "wfbxEvaluation:Annotation"<br/>
-	 * NOTE: a duplicate of this function is also defined in MappingGenerator
-	 * 
-	 * @param formName
-	 * @return the task name as should be found in the generated model.xml or processDefintion.xml.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String workflowBuildBlueXMLTaskName(String formName) {
+	public String workflowBuildBlueXMLTaskName(String formName) {
 		return BLUEXML_WORKFLOW_PREFIX + formName.replace('_', ':');
 	}
 
-	/**
-	 * Gives the name of the form that corresponds to a task name.<br/>
-	 * e.g. "wfbxEvaluation:Annotation" --> "Evaluation_Annotation"<br/>
-	 * e.g. "jbpm$wfbxEvaluation:Annotation" --> "Evaluation_Annotation"<br/>
-	 * 
-	 * @param processName
-	 * @return the form name.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String workflowBuildFormNameFromTask(String taskName) {
+	public String workflowBuildFormNameFromTask(String taskName) {
 		String searchString = BLUEXML_WORKFLOW_PREFIX;
 
 		if (taskName.indexOf(searchString) != 0) {
@@ -1959,23 +1867,15 @@ public class AlfrescoController {
 		return substr.replace(':', '_');
 	}
 
-	/**
-	 * Builds the namespace URI for workflow models generated with SIDE.
-	 * 
-	 * @param processName
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String workflowBuildNamespaceURI(String processName) {
+	public String workflowBuildNamespaceURI(String processName) {
 		return MsgId.INT_NAMESPACE_BLUEXML_WORKFLOW + "/" + processName + "/1.0";
 	}
 
-	/**
-	 * Retrieves the name/id of a form that implements the start task for a workflow definition
-	 * name.<br/>
-	 * 
-	 * @param workflowDefName
-	 *            e.g. jbpm$wfbxwfTest:wfTest
-	 * @return the id of a form, e.g. "wfTest_Start"
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String getWorkflowStartTaskFormName(String workflowDefName) {
 		String prefix = workflowExtractNamespacePrefix(workflowDefName);
@@ -1986,11 +1886,8 @@ public class AlfrescoController {
 		return mappingAgent.getWorkflowStartTaskFormName(prefix);
 	}
 
-	/**
-	 * Gets a list of in-progress workflow tasks for a user.
-	 * 
-	 * @param userName
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	@SuppressWarnings("unchecked")
 	public List<WorkflowTask> workflowGetPooledTasks(String userName) {
@@ -2002,11 +1899,8 @@ public class AlfrescoController {
 		return workflowRequest;
 	}
 
-	/**
-	 * Gets the WorkflowTask object for the given task id.
-	 * 
-	 * @param taskId
-	 * @return the requested task object, or <b>null</b> if not found
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public WorkflowTask workflowGetTaskById(String taskId) {
 		String methodName = "getTaskById";
@@ -2017,11 +1911,8 @@ public class AlfrescoController {
 		return workflowRequest;
 	}
 
-	/**
-	 * Gets the contents of the workflow package for the given task id.
-	 * 
-	 * @param taskId
-	 * @return the list of items associated with the task's workflow package
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	@SuppressWarnings("unchecked")
 	public List<NodeRef> workflowGetPackageContents(String taskId) {
@@ -2107,69 +1998,57 @@ public class AlfrescoController {
 		return true;
 	}
 
-	/**
-	 * Sets the controller in or out of the stand alone mode.
-	 * 
-	 * @param standaloneMode
-	 *            the standalone status to set: true=ON and false=OFF.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static void setStandaloneMode(boolean standaloneMode) {
+	public void setStandaloneMode(boolean standaloneMode) { 
 		AlfrescoController.standaloneMode = standaloneMode;
 	}
 
-	/**
-	 * Tells whether the controller is in stand alone mode. In which case, the Alfresco server is
-	 * considered unavailable and all reads and writes are either simulated or disabled.
-	 * 
-	 * @return the standaloneMode
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static boolean isStandaloneMode() {
+	public boolean isInStandaloneMode() {
 		return standaloneMode;
 	}
 
-	/**
-	 * Sets a CSS file URL that will be added in the head section of all forms at serving time. The
-	 * URL applies from the moment it is set. In other words, setting it for one form sets it for
-	 * all subsequent forms until the URL is changed.
-	 * 
-	 * @param cssUrl
-	 *            the cssUrl to set
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static void setCssUrl(String cssUrl) {
+	public void setCssUrl(String cssUrl) {
 		CssUrl = cssUrl;
 	}
 
-	/**
-	 * Gets the URL for the CSS file that was previously set.
-	 * 
-	 * @return the cssUrl
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static String getCssUrl() {
+	public String getCssUrl() {
 		return CssUrl;
 	}
 
 	/**
 	 * Gets the suffix appended to read only forms. <br/>
-	 * In the BxDS version, that suffix is configured at generation time and stored in the mapping
-	 * file. Here (in SIDE) we don't have (yet) any means to do the same.
+	 * NOTE: In the BxDS version, that suffix is configured at generation time and stored in the
+	 * mapping file. Here (in SIDE) we don't have (yet) any means to do the same.
 	 * 
-	 * @return
+	 * @return the suffix appended to names of read-write forms to produce the names of the
+	 *         read-only versions of the same forms.
 	 */
 	public String getReadOnlyFormsSuffix() {
 		return mappingAgent.getReadOnlyFormsSuffix();
 	}
 
-	public boolean isDebugMode() {
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public boolean isInDebugMode() {
 		return mappingAgent.getDebugModeStatus();
 	}
 
-	/**
-	 * Tells whether the task is a start task.
-	 * 
-	 * @param taskType
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public boolean isStartTaskForm(String wkFormName) {
+	public boolean isStartTaskForm(String wkFormName) { // PUBLIC-API
 		return mappingAgent.isStartTaskForm(wkFormName);
 	}
 
@@ -2179,26 +2058,21 @@ public class AlfrescoController {
 	 * datatype (or "form id" to be more precise).
 	 * 
 	 * @param formName
-	 * @return
+	 * @return the id of the read-write version of the form
 	 */
 	public String getDataTypeFromFormName(String formName) {
 		String underlyingDataType = formName;
-		String readOnlyFormsSuffix = AlfrescoController.getInstance().getReadOnlyFormsSuffix();
+		String readOnlyFormsSuffix = getReadOnlyFormsSuffix();
 		if (StringUtils.endsWith(formName, readOnlyFormsSuffix)) {
 			underlyingDataType = StringUtils.removeEnd(formName, readOnlyFormsSuffix);
 		}
 		return underlyingDataType;
 	}
 
-	/**
-	 * Tests authentication credentials with the current Alfresco instance (defined in the
-	 * properties file or via the appropriate URL parameter).
-	 * 
-	 * @param username
-	 * @param password
-	 * @return true if the authentication succeeded, false otherwise or in case of exception.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public boolean authenticate(String username, String password) {
+	public boolean authenticate(String username, String password) { // PUBLIC-API
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("username", username);
@@ -2214,12 +2088,10 @@ public class AlfrescoController {
 		return StringUtils.equalsIgnoreCase(result, "success");
 	}
 
-	/**
-	 * Gets the string that the webscript's help operation provides.
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getWebscriptHelp() {
+	public String getWebscriptHelp() { // PUBLIC-API
 		String result;
 		Map<String, String> parameters = new HashMap<String, String>();
 		try {
@@ -2231,28 +2103,23 @@ public class AlfrescoController {
 		return result;
 	}
 
-	/**
-	 * Dynamically reloads all static (class-related) info (such as the mapping.xml file).
-	 * 
-	 * @return false if an exception occurred
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public boolean performDynamicReload() {
+	public boolean performDynamicReload() { // PUBLIC-API
 		try {
 			mappingAgent.loadMappingXml();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error while loading the dynamic reload", e);
 			return false;
 		}
 		return true;
 	}
 
-	/**
-	 * Gets the local part of the node's type as returned by Alfresco.
-	 * 
-	 * @param dataId
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getNodeType(String dataId) {
+	public String getNodeType(String dataId) { // PUBLIC-API
 		QName qname = systemGetNodeType(dataId);
 		if (qname == null) {
 			return null;
@@ -2260,21 +2127,21 @@ public class AlfrescoController {
 		return qname.getLocalName();
 	}
 
-	/**
-	 * Retrieves some information about the content of an existing node and provides a user-readable
-	 * version of the collected info if the node has a defined content. <br/>
-	 * For now, gets:
-	 * <ul>
-	 * <li>node name as displayed via a web client</li>
-	 * <li>the localized content size, as number of bytes and readable file size. e.g. "7 614 525
-	 * bytes (7.26 MB)"</li>
-	 * </ul>
-	 * 
-	 * @param nodeId
-	 *            the full node Id (including protocol and workspace)
-	 * @return the info about a content, or null if an exception occured or empty if no content
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getWebscriptNodeContentInfo(String nodeId) {
+	public String getNodeTypeFull(String dataId) { // PUBLIC-API
+		QName qname = systemGetNodeType(dataId);
+		if (qname == null) {
+			return null;
+		}
+		return qname.toString();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public String getWebscriptNodeContentInfo(String nodeId) { // PUBLIC-API
 		if (StringUtils.trimToNull(nodeId) == null) {
 			return "";
 		}
@@ -2371,22 +2238,17 @@ public class AlfrescoController {
 	// REDIRECTION
 	//
 
-	/**
-	 * Returns the redirection bean for a specific workflow form.
-	 * 
-	 * @param formName
-	 *            the name of the form (e.g. Evaluation_Demarrage)
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public RedirectionBean workflowGetRedirectionBean(String formName) {
 		return targetTable.get(formName);
 	}
 
-	/**
-	 * Loads the redirection table for workflow forms. Other types of forms are not covered.
-	 * 
-	 * @return true if the file was successfully loaded, false otherwise.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public static boolean loadRedirectionTable(String filePath) {
+	public boolean loadRedirectionTable(String filePath) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Reading redirection configuration file.");
 		}
@@ -2471,58 +2333,40 @@ public class AlfrescoController {
 		return true;
 	}
 
-	/**
-	 * Provides the id of a FormClass that supports the given data type.
-	 * 
-	 * @param dataType
-	 * @return
+	//
+	// PUBLIC API
+	//
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String getCustomFormForDatatype(String dataType) {
 		return mappingAgent.getCustomFormForDatatype(dataType);
 	}
 
-	/**
-	 * Provides the id of the first default form that supports the given data type.
-	 * 
-	 * @param dataType
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String getDefaultFormForDatatype(String dataType) {
 		return mappingAgent.getDefaultFormForDatatype(dataType);
 	}
 
-	/**
-	 * Provides the name of the data type supported by the FormClass with the given id.
-	 * 
-	 * @param formName
-	 *            the valid id of a FormClass that has been generated.
-	 * @return the data type as defined in the class model, or <code>null</code> if the form name is
-	 *         unknown.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String getUnderlyingClassForForm(String formName) {
 		return mappingAgent.getUnderlyingClassForForm(formName);
 	}
 
-	/**
-	 * Provides the name of the data type supported by the data form of the FormWorkflow with the
-	 * given id.
-	 * 
-	 * @param formName
-	 *            the valid id of a FormWorkflow that has been generated.
-	 * @return the data type of the workflow form's data form, as defined in the class model, or
-	 *         <code>null</code> if the form name is unknown.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String getUnderlyingClassForWorkflow(String formName) {
 		return mappingAgent.getUnderlyingClassForWorkflow(formName);
 	}
 
-	/**
-	 * Provides the id of the data form linked to the given workflow form.
-	 * 
-	 * 
-	 * @param formName
-	 *            the valid id of a FormWorkflow that has been generated.
-	 * @return the id of the data form.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String getUnderlyingDataFormForWorkflow(String formName) {
 		return mappingAgent.getUnderlyingDataFormForWorkflow(formName);
@@ -2534,6 +2378,7 @@ public class AlfrescoController {
 	 * @param taskName
 	 *            a task definition name.
 	 * @return the content of the "pooled actors" property.
+	 * @deprecated
 	 */
 	public String getTaskPooledActorsByTaskId(String taskName) {
 		return mappingAgent.getWorkflowTaskPooledActorsById(taskName);
@@ -2545,20 +2390,91 @@ public class AlfrescoController {
 	 * @param taskName
 	 *            a task definition name.
 	 * @return the content of the "actor id" property.
+	 * @deprecated
 	 */
 	public String getTaskActorIdByTaskId(String taskName) {
 		return mappingAgent.getWorkflowTaskActorIdById(taskName);
 	}
 
-	/**
-	 * Provides a pool of information about the form whose name is given.
-	 * 
-	 * @param wkFormName
-	 *            the id of a valid workflow form.
-	 * @return the information bean.
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public WorkflowTaskInfoBean getWorkflowTaskInfoBean(String wkFormName) {
 		return mappingAgent.getWorkflowTaskInfoBean(wkFormName);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public WorkflowTaskInfoBean getWorkflowTaskInfoBeanByTaskId(String taskId) {
+		return mappingAgent.getWorkflowTaskInfoBeanById(taskId);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public List<String> getAllCustomForms() {
+		return mappingAgent.getAllCustomForms();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public List<String> getAllDefaultForms() {
+		return mappingAgent.getAllDefaultForms();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public List<String> getAllSearchForms() {
+		return mappingAgent.getAllSearchForms();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public List<String> getAllWorkflowForms() {
+		return mappingAgent.getAllWorkflowForms();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public Document getInstanceForm(String userName, String formName, String id,
+			boolean formIsReadOnly) throws ServletException {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
+		transaction.setLogin(userName);
+		
+		return getInstanceForm(transaction, formName, id, formIsReadOnly);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public boolean isCustomForm(String formName) {
+		return mappingAgent.isCustomForm(formName);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public boolean isDefaultForm(String formName) {
+		return mappingAgent.isDefaultForm(formName);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public boolean isSearchForm(String formName) {
+		return mappingAgent.isSearchForm(formName);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public boolean isWorkflowForm(String formName) {
+		return mappingAgent.isWorkflowForm(formName);
 	}
 
 }

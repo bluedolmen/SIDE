@@ -2,9 +2,8 @@ package com.bluexml.xforms.actions;
 
 import javax.servlet.ServletException;
 
-import com.bluexml.xforms.controller.alfresco.AlfrescoController;
-import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.side.form.utils.DOMUtil;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class SetTypeAction.<br>
@@ -39,7 +38,7 @@ public class SetTypeAction extends AbstractWriteAction {
 	 */
 	@Override
 	public void submit() throws ServletException {
-		if (AlfrescoController.isStandaloneMode()) {
+		if (controller.isInStandaloneMode()) {
 			String msg = "The Alfresco Controller is in standalone mode. Some actions are unavailable";
 			navigationPath.setStatusMsg(msg);
 			throw new ServletException(msg);

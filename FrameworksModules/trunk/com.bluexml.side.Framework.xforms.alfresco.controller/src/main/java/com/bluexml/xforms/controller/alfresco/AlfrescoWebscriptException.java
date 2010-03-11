@@ -36,13 +36,20 @@ public class AlfrescoWebscriptException extends ServletException {
 		super("");
 		try {
 			ByteArrayInputStream bis = new ByteArrayInputStream(result.getBytes());
-			analyzeError(AlfrescoController.getInstance().synchronizedParse(bis)); // #1227
+			analyzeError(getController().synchronizedParse(bis)); // #1227
 		} catch (Exception e) {
 			if (logger.isErrorEnabled()) {
 				logger.error("Failed to parse Exception :");
 				logger.error(result);
 			}
 		}
+	}
+
+	/**
+	 * @return
+	 */
+	private AlfrescoController getController() {
+		return AlfrescoController.getInstance();
 	}
 
 	public AlfrescoWebscriptException(Document result, AlfrescoTransaction transaction) {
@@ -146,8 +153,7 @@ public class AlfrescoWebscriptException extends ServletException {
 			return "";
 		}
 		result = message.substring(pos1 + 1, pos2); // we get the complete name
-		result = AlfrescoController.getInstance().getShortAssociationName(result,
-				transaction.getFormId());
+		result = getController().getShortAssociationName(result, transaction.getFormId());
 		if (StringUtils.trimToNull(result) == null) {
 			return getAssociationName(message, pos2 + 1);
 		}

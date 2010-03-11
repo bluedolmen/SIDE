@@ -66,7 +66,7 @@ public class ReadServlet extends AbstractServlet {
 			dataType = dataType.replace('_', '.');
 		}
 		String dataId = StringUtils.trimToNull(req.getParameter(DATA_ID));
-		dataId = AlfrescoController.patchDataId(dataId);
+		dataId = controller.patchDataId(dataId);
 
 		String skipIdStr = StringUtils.trimToNull(req.getParameter(ID_AS_SERVLET));
 		boolean idAsServlet = !StringUtils.equals(skipIdStr, "false");

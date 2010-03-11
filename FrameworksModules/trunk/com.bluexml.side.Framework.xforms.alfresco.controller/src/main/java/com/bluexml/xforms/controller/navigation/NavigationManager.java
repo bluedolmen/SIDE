@@ -283,7 +283,7 @@ public class NavigationManager {
 		HttpSession session = req.getSession(true);
 		String sessionId = session.getId();
 
-		controller = AlfrescoController.getInstance();
+		controller = getController();
 
 		String testStr = StringUtils.trimToNull(req.getParameter(MsgId.PARAM_SERVE_TEST_PAGE
 				.getText()));
@@ -345,10 +345,10 @@ public class NavigationManager {
 			}
 			// deal with standalone mode
 			if (StringUtils.equals(req.getParameter(MsgId.PARAM_STANDALONE.getText()), "true")) {
-				AlfrescoController.setStandaloneMode(true);
+				controller.setStandaloneMode(true);
 			}
 			if (StringUtils.equals(req.getParameter(MsgId.PARAM_STANDALONE.getText()), "false")) {
-				AlfrescoController.setStandaloneMode(false);
+				controller.setStandaloneMode(false);
 			}
 
 			PageInfoBean pageInfo = collectPageInfo(req);
@@ -420,7 +420,7 @@ public class NavigationManager {
 		Element docElt = doc.getDocumentElement();
 
 		// add CSS file if one is provided
-		if (StringUtils.trimToNull(AlfrescoController.getCssUrl()) != null) {
+		if (StringUtils.trimToNull(controller.getCssUrl()) != null) {
 			Element head = DOMUtil.getChild(docElt, "xhtml:head");
 			Element css = doc.createElementNS("http://www.w3.org/1999/xhtml", "link");
 			css.setAttribute("rel", "stylesheet");
@@ -527,7 +527,7 @@ public class NavigationManager {
 			}
 
 			String redirectPath = req.getParameter(MsgId.PARAM_REDIRECTOR_CONFIG_FILE.getText());
-			if (AlfrescoController.loadRedirectionTable(redirectPath) == false) {
+			if (controller.loadRedirectionTable(redirectPath) == false) {
 				return 2;
 			}
 			if (fromInitCall) {
@@ -535,7 +535,7 @@ public class NavigationManager {
 				this.setCssUrl(req);
 				String host = req.getParameter(MsgId.PARAM_ALFRESCO_HOST.getText());
 				if (StringUtils.trimToNull(host) != null) {
-					AlfrescoController.setAlfrescoUrl(host);
+					controller.setAlfrescoUrl(host);
 				}
 			}
 		} catch (Exception e) {
@@ -552,9 +552,7 @@ public class NavigationManager {
 	 */
 	private void setCssUrl(HttpServletRequest req) {
 		String curCssUrl = StringUtils.trimToNull(req.getParameter(MsgId.PARAM_CSS_FILE.getText()));
-		if (curCssUrl != null) {
-			AlfrescoController.setCssUrl(curCssUrl);
-		}
+		controller.setCssUrl(StringUtils.trimToNull(curCssUrl));
 	}
 
 	/**
@@ -570,7 +568,7 @@ public class NavigationManager {
 
 		// init params
 		bean.setInitParams(getInitParams(req));
-		
+
 		// form type
 		FormTypeEnum formType = FormTypeEnum.CLASS; // <-- default type
 		String paramFormType = req.getParameter(MsgId.PARAM_FORM_TYPE.getText());
@@ -607,7 +605,7 @@ public class NavigationManager {
 		}
 		bean.setFormName(dataType);
 		// #1222
-		AlfrescoController controller = AlfrescoController.getInstance();
+		AlfrescoController controller = getController();
 		bean.setDataType(controller.getDataTypeFromFormName(bean.getFormName()));
 		bean.setWrongCallType(false);
 
@@ -616,10 +614,10 @@ public class NavigationManager {
 		// check that the form is appropriate for the data id
 		if (controller.getParamCheckMatchDataForm(bean.getInitParams())) {
 			String realFormName = originalDatatype;
-//			if (bean.formType == FormTypeEnum.WKFLW) {
-//				WorkflowTaskType taskType = controller.getWorkflowTaskType(dataType);
-//				realFormName = taskType.getDataForm();
-//			}
+			// if (bean.formType == FormTypeEnum.WKFLW) {
+			// WorkflowTaskType taskType = controller.getWorkflowTaskType(dataType);
+			// realFormName = taskType.getDataForm();
+			// }
 			if (dataId != null) {
 				QName contentType = controller.systemGetNodeType(dataId);
 				if (contentType == null) {
@@ -638,7 +636,7 @@ public class NavigationManager {
 			}
 		}
 
-		bean.setDataId(AlfrescoController.patchDataId(dataId));
+		bean.setDataId(controller.patchDataId(dataId));
 		bean.setTemplateId(StringUtils.trimToNull(req.getParameter(TEMPLATE_ID)));
 		bean.setLanguage(req.getParameter(MsgId.PARAM_LANGUAGE.getText()));
 		bean.setProcessId(req.getParameter(MsgId.PARAM_WORKFLOW_PROCESS_ID.getText()));

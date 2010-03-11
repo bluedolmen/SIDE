@@ -124,7 +124,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 						.getText());
 				if (specificElement != null) {
 					targetId = StringUtils.trimToNull(specificElement.getTextContent());
-					targetId = AlfrescoController.patchDataId(targetId);
+					targetId = controller.patchDataId(targetId);
 				}
 			}
 		}
@@ -362,7 +362,7 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 *            the element id
 	 */
 	public void removeReference(Node node, String elementId) {
-		String relementId = AlfrescoController.patchDataId(elementId);
+		String relementId = controller.patchDataId(elementId);
 
 		Element element = null;
 		if (node instanceof Document) {
@@ -455,9 +455,13 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 	 * @param dataType
 	 *            the data type
 	 * 
-	 * @return true, if successful
+	 * @return true, if successful and the datatype actually has some subtypes.
 	 */
 	public boolean hasSubTypes(String dataType) {
-		return (getClassType(dataType).getSubClass().size() > 0);
+		ClassType classType = getClassType(dataType);
+		if (classType == null) {
+			return false;
+		}
+		return (classType.getSubClass().size() > 0);
 	}
 }

@@ -29,8 +29,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.bluexml.side.form.utils.DOMUtil;
-import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
+import com.bluexml.xforms.controller.beans.PageInfoBean;
 import com.bluexml.xforms.controller.beans.PersistFormResultBean;
 import com.bluexml.xforms.controller.beans.RedirectionBean;
 import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
@@ -39,7 +39,6 @@ import com.bluexml.xforms.controller.binding.GenericClass;
 import com.bluexml.xforms.controller.binding.ValueType;
 import com.bluexml.xforms.controller.navigation.NavigationSessionListener;
 import com.bluexml.xforms.controller.navigation.Page;
-import com.bluexml.xforms.controller.beans.PageInfoBean;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 
@@ -131,7 +130,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	@Override
 	public void submit() throws ServletException {
 
-		if (AlfrescoController.isStandaloneMode()) {
+		if (controller.isInStandaloneMode()) {
 			String msg = "The Alfresco Controller is in standalone mode. Some actions are unavailable";
 			navigationPath.setStatusMsg(msg);
 			throw new ServletException(msg);
@@ -249,7 +248,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 				// if autoAdvancing, get the next form from the tasks
 				if (resultBean.getTasks() != null && (resultBean.getTasks().size() > 0)) {
 					WorkflowTask nextTask = resultBean.getTasks().get(0);
-					nextFormName = AlfrescoController.workflowBuildFormNameFromTask(nextTask.name);
+					nextFormName = controller.workflowBuildFormNameFromTask(nextTask.name);
 					location = buildNextFormUrl(nextFormName, initParams, URLsuffix, true);
 					super.redirectClient(location);
 					return;
@@ -397,11 +396,11 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		}
 
 		// add properties from the form fields
-		String formTaskName = AlfrescoController.workflowBuildBlueXMLTaskName(wkFormName);
+		String formTaskName = controller.workflowBuildBlueXMLTaskName(wkFormName);
 		collectTaskProperties(properties, node, taskBean, processId);
 
 		// no need to continue if in standalone mode
-		if (AlfrescoController.isStandaloneMode()) {
+		if (controller.isInStandaloneMode()) {
 			navigationPath
 					.setStatusMsg("The Alfresco Controller is in standalone mode. Workflow actions are not available.");
 			return resultBean;
@@ -615,8 +614,9 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			return result;
 		}
 		for (WorkflowTask task : tasks) {
-			String pooledActors = controller.getTaskPooledActorsByTaskId(task.name);
-			String actorIds = controller.getTaskActorIdByTaskId(task.name);
+			WorkflowTaskInfoBean taskBean = controller.getWorkflowTaskInfoBeanByTaskId(task.name);
+			String pooledActors = taskBean.getPooledActors();
+			String actorIds = taskBean.getActorId();
 
 			if ((StringUtils.trimToNull(pooledActors) != null)
 					|| (StringUtils.trimToNull(actorIds) != null)) {
@@ -710,7 +710,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 */
 	private GenericClass collectTaskProperties(HashMap<QName, Serializable> properties, Node node,
 			WorkflowTaskInfoBean taskBean, String processId) throws ServletException {
-		String taskTypeName = taskBean.getName();
+		String taskTypeName = taskBean.getFormName();
 		String taskTypeId = taskBean.getId();
 
 		Element root;
@@ -728,9 +728,8 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		toCreate = resultBean.getResultClass();
 
 		// add task properties built from the attributes derived from form fields
-		String processName = AlfrescoController
-				.workflowExtractProcessNameFromFormName(taskTypeName);
-		String namespaceURI = AlfrescoController.workflowBuildNamespaceURI(processName);
+		String processName = controller.workflowExtractProcessNameFromFormName(taskTypeName);
+		String namespaceURI = controller.workflowBuildNamespaceURI(processName);
 		WorkflowTaskDefinition taskDef;
 		taskDef = controller.workflowGetTaskDefinition(processId, taskTypeId);
 		if (taskDef == null) {
@@ -774,11 +773,11 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			return candidateProcessId;
 		}
 
-		String processName = AlfrescoController.workflowExtractProcessNameFromFormName(formName);
+		String processName = controller.workflowExtractProcessNameFromFormName(formName);
 
 		String methodName = "getDefinitionByName";
 		List<Object> methodParameters = new ArrayList<Object>();
-		methodParameters.add(AlfrescoController.workflowBuildBlueXMLDefinitionName(processName));
+		methodParameters.add(controller.workflowBuildBlueXMLDefinitionName(processName));
 		WorkflowDefinition def = (WorkflowDefinition) controller.workflowRequestWrapper(
 				transaction, methodName, methodParameters);
 		return (def != null) ? def.id : null;

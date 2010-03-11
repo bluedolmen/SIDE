@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -484,8 +485,6 @@ public class MappingAgent {
 		return mappingToolAlfrescoToForms.getFormType(refName);
 	}
 
-	@SuppressWarnings("unused")
-	@Deprecated
 	private SearchFormType getSearchType(String refName) {
 		return mappingToolAlfrescoToForms.getSearchFormType(refName);
 	}
@@ -647,7 +646,25 @@ public class MappingAgent {
 			return null;
 		}
 		return new WorkflowTaskInfoBean(taskType.getTaskId(), taskType.getName(), taskType
-				.getActorId(), taskType.getPooledActors(), taskType.getTitle());
+				.getDataForm(), taskType.getActorId(), taskType.getPooledActors(), taskType
+				.getTitle());
+	}
+
+	/**
+	 * Provides a pool of information about the form that supports the given task id.
+	 * 
+	 * @param taskId
+	 *            the id of a task.
+	 * @return the information bean.
+	 */
+	public WorkflowTaskInfoBean getWorkflowTaskInfoBeanById(String taskId) {
+		WorkflowTaskType taskType = getWorkflowTaskType(taskId, true);
+		if (taskType == null) {
+			return null;
+		}
+		return new WorkflowTaskInfoBean(taskType.getTaskId(), taskType.getName(), taskType
+				.getDataForm(), taskType.getActorId(), taskType.getPooledActors(), taskType
+				.getTitle());
 	}
 
 	/**
@@ -1005,7 +1022,8 @@ public class MappingAgent {
 			mimeType = infoBean.getMimeType();
 			GenericAttribute attribute = infoBean.getAttribute();
 			if (filePath.startsWith("file:")) {
-				String location = controller.getParamUploadPathInRepository(transaction.getInitParams());
+				String location = controller.getParamUploadPathInRepository(transaction
+						.getInitParams());
 				fileName = uploadMoveFileToRepo(transaction, fileName, filePath, location,
 						mimeType, infoBean.isShouldAppendSuffix());
 				if (StringUtils.trimToNull(fileName) == null) {
@@ -1288,6 +1306,95 @@ public class MappingAgent {
 		}
 		result.getParentFile().mkdirs();
 		return result;
+	}
+
+	/**
+	 * Gets the name of all custom forms available in the mapping file.
+	 * 
+	 * @return the list
+	 */
+	public List<String> getAllCustomForms() {
+		List<JAXBElement<? extends CanisterType>> elements = mapping.getCanister();
+
+		List<String> result = new ArrayList<String>();
+		for (JAXBElement<? extends CanisterType> element : elements) {
+			if (element.getValue() instanceof FormType) {
+				FormType elt = (FormType) element.getValue();
+				result.add(elt.getName());
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Gets the name of all custom forms available in the mapping file.
+	 * 
+	 * @return the list
+	 */
+	public List<String> getAllDefaultForms() {
+		List<ClassType> classes = mapping.getClazz();
+
+		List<String> result = new ArrayList<String>();
+		for (ClassType clazz : classes) {
+			result.add(mappingToolAlfrescoToForms.getClassTypeCompleteName(clazz));
+		}
+		return result;
+	}
+
+	/**
+	 * Gets the name of all custom forms available in the mapping file.
+	 * 
+	 * @return the list
+	 */
+	public List<String> getAllSearchForms() {
+		List<JAXBElement<? extends CanisterType>> elements = mapping.getCanister();
+
+		List<String> result = new ArrayList<String>();
+		for (JAXBElement<? extends CanisterType> element : elements) {
+			if (element.getValue() instanceof SearchFormType) {
+				SearchFormType elt = (SearchFormType) element.getValue();
+				result.add(elt.getName());
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Gets the name of all custom forms available in the mapping file.
+	 * 
+	 * @return the list
+	 */
+	public List<String> getAllWorkflowForms() {
+		List<JAXBElement<? extends CanisterType>> elements = mapping.getCanister();
+
+		List<String> result = new ArrayList<String>();
+		for (JAXBElement<? extends CanisterType> element : elements) {
+			if (element.getValue() instanceof WorkflowTaskType) {
+				WorkflowTaskType elt = (WorkflowTaskType) element.getValue();
+				result.add(elt.getName());
+			}
+		}
+		return result;
+	}
+
+	public boolean isCustomForm(String formName) {
+		FormType form = getFormType(formName);
+		return (form != null);
+	}
+
+	public boolean isDefaultForm(String formName) {
+		ClassType form = getClassType(formName);
+		return (form != null);
+	}
+
+	public boolean isSearchForm(String formName) {
+		SearchFormType form = getSearchType(formName);
+		return (form != null);
+	}
+
+	public boolean isWorkflowForm(String formName) {
+		WorkflowTaskType form = getWorkflowTaskType(formName, false);
+		return (form != null);
 	}
 
 }
