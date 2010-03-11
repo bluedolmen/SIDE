@@ -2,7 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.forms.group;
 
 import java.util.Stack;
 
-
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
@@ -20,6 +19,7 @@ import com.bluexml.xforms.generator.forms.rendered.RenderedParentGroup;
  */
 public class RenderableGroup<G extends FormGroup> extends RenderableFormElement<G> {
 
+	private String styleClass = null;
 	/**
 	 * Instantiates a new renderable group.
 	 * 
@@ -68,7 +68,8 @@ public class RenderableGroup<G extends FormGroup> extends RenderableFormElement<
 			rendered = new RenderedDiv(XFormsGenerator.getId(formElement.getId()));
 		} else {
 			rendered = new RenderedGroup(formElement.getLabel(), XFormsGenerator.getId(formElement
-					.getId()));
+					.getId()), styleClass);
+//			applyStyle(rendered, MsgId.INT_CSS_FORM_TITLE.getText());
 		}
 		return rendered;
 	}
@@ -81,6 +82,20 @@ public class RenderableGroup<G extends FormGroup> extends RenderableFormElement<
 	@Override
 	public void compute() {
 		addFormElements(formElement.getChildren());
+	}
+
+	/**
+	 * @param styleClass the styleClass to set
+	 */
+	protected void setStyleClass(String styleClass) {
+		this.styleClass = styleClass;
+	}
+
+	/**
+	 * @return the styleClass
+	 */
+	protected String getStyleClass() {
+		return styleClass;
 	}
 
 }

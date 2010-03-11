@@ -166,6 +166,7 @@ public enum MsgId {
 	INT_ACT_SUFFIX_GET_FORM_SELECTOR	("selector"),
 	INT_ACT_SUFFIX_GET_FORM_WKFLW		("workflow"),
 	// our custom CSS rule names
+	INT_CSS_FORM_TITLE					("side_form_title"),
 	INT_CSS_HORIZ_LINE					("side_horizontal_line"),
 	INT_CSS_RO_TEXTAREA					("side_ro_textarea"),
 	INT_CSS_SEARCH_FIELD				("side_search_field"),

@@ -6,6 +6,7 @@ import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.rendered.RenderedGroup;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableXGroup.
@@ -49,7 +50,10 @@ public class RenderableXGroup extends Renderable {
 	 */
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
-		return new RenderedGroup(title, XFormsGenerator.getId("xgroup"));
+		RenderedGroup renderedGroup = new RenderedGroup(title, XFormsGenerator.getId("xgroup"), null);
+		applyStyle(renderedGroup, MsgId.INT_CSS_FORM_TITLE.getText());
+		
+		return renderedGroup;
 	}
 
 }

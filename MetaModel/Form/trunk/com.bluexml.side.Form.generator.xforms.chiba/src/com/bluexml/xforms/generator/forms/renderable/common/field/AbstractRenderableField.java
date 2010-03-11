@@ -516,7 +516,7 @@ public abstract class AbstractRenderableField extends Renderable {
 	 */
 	protected Element getFileElement(ModelElementBindSimple meb, String slabel, MsgId previewer) {
 		Element element;
-		element = XFormsGenerator.createXFormsGroup(slabel);
+		element = XFormsGenerator.createXFormsGroup(slabel, null);
 		element.setAttribute("id", attributeId + "_global");
 
 		if (previewer.equals(MsgId.INT_FILEFIELD_PREVIEW_IMAGE)) {

@@ -215,12 +215,16 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * 
 	 * @param label
 	 *            the label
+	 * @param style the CSS class if applicable. May be <code>null</code>.
 	 * 
 	 * @return the element
 	 */
-	public static Element createXFormsGroup(String label) {
+	public static Element createXFormsGroup(String label, String style) {
 		Element group = XFormsGenerator.createElementWithLabel("group", NAMESPACE_XFORMS, label);
 		group.setAttribute("appearance", "full");
+		if (style != null) {
+			group.setAttribute("class", style);
+		}
 		return group;
 	}
 

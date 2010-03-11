@@ -98,7 +98,7 @@ public class CommonRenderableAssociation extends Renderable {
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
 			boolean isInIMultRepeater) {
-		return new RenderedGroup(null, name);
+		return new RenderedGroup(null, name, null);
 	}
 
 }

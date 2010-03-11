@@ -27,7 +27,7 @@ public class RenderedFileInputForContent extends Rendered {
 		Element element;
 		String attributeId = MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText();
 		element = XFormsGenerator.createXFormsGroup(MsgPool
-				.getMsg(MsgId.MSG_UPLOAD_CONTENT_GROUP_LABEL));
+				.getMsg(MsgId.MSG_UPLOAD_CONTENT_GROUP_LABEL), null);
 		element.setAttribute("id", attributeId + "_global");
 
 		//

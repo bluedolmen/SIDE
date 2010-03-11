@@ -18,10 +18,11 @@ public class RenderedGroup extends Rendered {
 	 *            the label
 	 * @param id
 	 *            the id
+	 * @param style TODO
 	 */
-	public RenderedGroup(String label, String id) {
+	public RenderedGroup(String label, String id, String style) {
 		super();
-		xformsElement = XFormsGenerator.createXFormsGroup(label);
+		xformsElement = XFormsGenerator.createXFormsGroup(label, style);
 		xformsElement.setAttribute("id", XFormsGenerator.getId(id));
 	}
 

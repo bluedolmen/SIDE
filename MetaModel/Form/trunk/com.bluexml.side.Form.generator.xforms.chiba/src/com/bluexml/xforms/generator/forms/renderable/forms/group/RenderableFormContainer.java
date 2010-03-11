@@ -8,6 +8,7 @@ import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
+import com.bluexml.xforms.messages.MsgId;
 
 public class RenderableFormContainer extends RenderableGroup<FormContainer> {
 
@@ -16,6 +17,7 @@ public class RenderableFormContainer extends RenderableGroup<FormContainer> {
 		super(generationManager, parent, form);
 		//
 		setInWorkflowForm(form instanceof FormWorkflow);
+		setStyleClass(MsgId.INT_CSS_FORM_TITLE.getText());
 	}
 
 	/*

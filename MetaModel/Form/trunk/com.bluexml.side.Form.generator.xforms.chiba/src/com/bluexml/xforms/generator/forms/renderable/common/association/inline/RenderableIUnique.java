@@ -66,7 +66,7 @@ public class RenderableIUnique extends AbstractRenderable {
 				groupTitle = bean.getTitle();
 			}
 			rendered = new RenderedGroup(groupTitle, ModelTools.getCompleteNameJAXB(bean
-					.getDestinationClass()));
+					.getDestinationClass()), null);
 			if (returnToLine) {
 				rendered.setReturnToLine(true);
 			}
