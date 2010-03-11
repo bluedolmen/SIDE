@@ -1109,7 +1109,7 @@ public class MappingGenerator extends AbstractGenerator {
 
 		//
 		// optional attributes
-		if (formFieldType.getDefault() != null) {
+		if (StringUtils.trimToNull(formFieldType.getDefault()) != null) {
 			res.setDefault(formFieldType.getDefault());
 		}
 		try {
