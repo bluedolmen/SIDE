@@ -1315,7 +1315,13 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			logger.debug("Parameters : ");
 			Set<Entry<String, String>> entrySet2 = parameters.entrySet();
 			for (Entry<String, String> entry2 : entrySet2) {
-				logger.debug(entry2.getKey() + " = " + entry2.getValue());
+				String value = entry2.getValue();
+				if (value == null) {
+					value = "<null string>";
+				} else if (value.equals("")) {
+					value="<empty string>";
+				}
+				logger.debug(entry2.getKey() + " = " + value);
 			}
 		}
 
