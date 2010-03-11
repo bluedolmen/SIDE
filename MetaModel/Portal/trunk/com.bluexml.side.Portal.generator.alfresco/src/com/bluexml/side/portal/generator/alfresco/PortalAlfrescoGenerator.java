@@ -77,6 +77,7 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.head.ftl.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.html.ftl.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.js.mt");
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.css.mt");
 		}
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_XFORMS)) {
 			// XForm portlet

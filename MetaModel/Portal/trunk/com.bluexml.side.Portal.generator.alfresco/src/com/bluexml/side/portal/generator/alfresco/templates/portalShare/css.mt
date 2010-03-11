@@ -20,23 +20,3 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 {
    margin-left: -50em;
 }
-#frame1_<%nGet("css_name").substring(nGet("css_name").lastIndexOf("-") +1)%>
-{
-	width:35%;
-	height:600px;
-	margin:0;
-	padding:0;
-	border-width:0;
-	border-style:none;
-	align:left;
-}
-#frame2_<%nGet("css_name").substring(nGet("css_name").lastIndexOf("-") +1)%>
-{
-	width:45%;
-	height:600px;
-	margin:0;
-	padding:0;
-	border-width:0;
-	border-style:none;
-	align:left;
-}
