@@ -28,12 +28,10 @@ import org.alfresco.web.scripts.WebScriptRequest;
 import org.alfresco.web.scripts.WebScriptResponse;
 import org.alfresco.web.scripts.servlet.WebScriptServletRequest;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class XFormsWebscript extends AbstractWebScript {
 
-	private static Log logger = LogFactory.getLog(XFormsWebscript.class);
+	// private static Log logger = LogFactory.getLog(XFormsWebscript.class);
 
 	private Map<String, List<QName>> subTypesMapCache = new HashMap<String, List<QName>>();
 	private Map<QName, QName> parentsMapCache = null;
@@ -186,7 +184,7 @@ public class XFormsWebscript extends AbstractWebScript {
 			XFormsQueryType queryType = getQueryType(webscriptrequest);
 
 			Map<String, String> parameters = getParameters(webscriptrequest);
-			
+
 			String result = AuthenticationUtil.runAs(new XFormsWork(this, queryType, parameters,
 					getServiceRegistry()), username);
 

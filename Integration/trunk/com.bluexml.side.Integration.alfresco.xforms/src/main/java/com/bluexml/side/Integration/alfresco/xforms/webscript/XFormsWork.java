@@ -341,11 +341,12 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	private void appendResult(StringBuffer xmlResult, String id, String value, String qname) {
+		// the tag names used here must be in sync with the one defined in the XForms controller
 		xmlResult.append("<item><id>");
 		xmlResult.append(StringEscapeUtils.escapeXml(id));
-		xmlResult.append("</id><value>");
+		xmlResult.append("</id><label>");
 		xmlResult.append(StringEscapeUtils.escapeXml(value));
-		xmlResult.append("</value><qname>");
+		xmlResult.append("</label><qname>");
 		if (qname != null) {
 			xmlResult.append(StringEscapeUtils.escapeXml(qname));
 		}
@@ -1142,23 +1143,19 @@ public class XFormsWork implements RunAsWork<String> {
 		return searcher;
 	}
 
+	/**
+	 * Builds a search string with a type clause and one clause per search value.
+	 * 
+	 * @param type
+	 * @param searchedValues
+	 * @return
+	 */
 	private StringBuilder getLuceneQuery(String type, List<String> searchedValues) {
-		StringBuilder sb = new StringBuilder();
-		boolean first = true;
-		for (String strRequest : searchedValues) {
-			if (!first) {
-				sb.append(" AND ");
-			}
-			sb.append(getLuceneQuery(type, strRequest));
-			first = false;
-		}
-		return sb;
-	}
-
-	// %%
-	private StringBuilder getLuceneQuery(String type, String strRequest) {
 		StringBuilder query = new StringBuilder();
+
 		List<QName> subTypes = formsWebscript.getSubTypes(type);
+
+		// the type clause
 		query.append("(");
 		for (Iterator<QName> iterator = subTypes.iterator(); iterator.hasNext();) {
 			QName name = iterator.next();
@@ -1170,24 +1167,58 @@ public class XFormsWork implements RunAsWork<String> {
 			}
 		}
 		query.append(")");
-		if (strRequest != null && !"".equals(strRequest)) {
-			String escapedRequest = QueryParser.escape(strRequest);
-			Set<QName> attributesArray = getSearchableAttributes(subTypes.get(0));
+
+		// add one clause per significant search value
+		for (String strRequest : searchedValues) {
+			StringBuilder clause = getLuceneClauseForSearchValue(subTypes.get(0), strRequest);
+			if (clause.length() > 0) {
+				query.append(" AND ");
+				query.append(clause);
+			}
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("Built Lucene query: -->" + query + "<--");
+		}
+
+		return query;
+	}
+
+	/**
+	 * Gets a search string fragment in which search criteria match the given type's searchable
+	 * attributes with the search keyword.
+	 * 
+	 * @param mainTypeQName
+	 *            the type of nodes being searched
+	 * @param keyword
+	 *            the search keyword
+	 * @return the search string fragment surrounded by parentheses, or empty string if no
+	 *         searchable attributes are found.
+	 */
+	private StringBuilder getLuceneClauseForSearchValue(QName mainTypeQName, String keyword) {
+		StringBuilder query = new StringBuilder();
+
+		if (StringUtils.trimToNull(keyword) != null) {
+			String escapedRequest = QueryParser.escape(keyword);
+			Set<QName> attributesArray = getSearchableAttributes(mainTypeQName);
 
 			Iterator<QName> it = attributesArray.iterator();
-			query.append(" AND (");
-			while (it.hasNext()) {
-				String attribute = it.next().toString();
-				appendAttribute(query, attribute);
-				query.append("*").append(escapedRequest).append("*");
-				query.append(" OR ");
-				appendAttribute(query, attribute);
-				query.append("\"").append(escapedRequest).append("\"");
-				if (it.hasNext()) {
+
+			if (it.hasNext()) { // at least one searchable attribute before returning non-empty
+				query.append("(");
+				while (it.hasNext()) {
+					String attribute = it.next().toString();
+					appendAttribute(query, attribute);
+					query.append("*").append(escapedRequest).append("*");
 					query.append(" OR ");
+					appendAttribute(query, attribute);
+					query.append("\"").append(escapedRequest).append("\"");
+					if (it.hasNext()) {
+						query.append(" OR ");
+					}
 				}
+				query.append(")");
 			}
-			query.append(")");
 		}
 		return query;
 	}
@@ -1198,6 +1229,13 @@ public class XFormsWork implements RunAsWork<String> {
 		query.append(":");
 	}
 
+	/**
+	 * Gets the set of searchable attributes for the given type. If the set does not exist, it will
+	 * be computed and registered in a cache.
+	 * 
+	 * @param type
+	 * @return the set
+	 */
 	private synchronized Set<QName> getSearchableAttributes(QName type) {
 		Set<QName> result = searchableAttributesCache.get(type);
 		if (result == null) {
@@ -1207,10 +1245,20 @@ public class XFormsWork implements RunAsWork<String> {
 		return result;
 	}
 
+	/**
+	 * Collects all searchable properties for a given type, whether they a defined in the type or in
+	 * a related aspects or in a parent type or in one the parent's aspects.
+	 * 
+	 * @param pCurrentType
+	 *            the type to start from. It is the bottom-most type in the hierarchy of collected
+	 *            types.
+	 * @return the set of searchable attributes
+	 */
 	private Set<QName> computeSearchableAttributes(QName pCurrentType) {
 		QName currentType = pCurrentType;
 		List<QName> classTypes = new ArrayList<QName>();
 
+		// we collect the hierarchy of parent classes
 		while (currentType.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 			classTypes.add(currentType);
 			TypeDefinition nodeRefTypeDefinition = serviceRegistry.getDictionaryService().getType(
@@ -1219,8 +1267,10 @@ public class XFormsWork implements RunAsWork<String> {
 			currentType = parentType;
 		}
 
+		// the list of searchable properties from all types in the hierarchy
 		Map<QName, PropertyDefinition> typeProperties = new HashMap<QName, PropertyDefinition>();
 
+		// we look into the definition of each collected type for the searchable properties
 		for (QName type : classTypes) {
 			TypeDefinition typeDefinition = serviceRegistry.getDictionaryService().getType(type);
 			addSearchableAttributes(typeProperties, typeDefinition.getProperties());
@@ -1231,6 +1281,14 @@ public class XFormsWork implements RunAsWork<String> {
 		return typeProperties.keySet();
 	}
 
+	/**
+	 * Filters the definition properties and adds the seachable ones to the selection.
+	 * 
+	 * @param typeProperties
+	 *            the selection (of searchable properties) that is being built
+	 * @param properties
+	 *            the properties from the type dictionary definition
+	 */
 	private void addSearchableAttributes(Map<QName, PropertyDefinition> typeProperties,
 			Map<QName, PropertyDefinition> properties) {
 		Set<Entry<QName, PropertyDefinition>> propertiesEntrySet = properties.entrySet();
