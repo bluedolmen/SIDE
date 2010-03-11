@@ -14,7 +14,7 @@
     <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-facets-xslrightnav-generation.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-facets-xslrightnavContent-generation.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/facetmap-propertyfile-generation.mt"/>
-    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/str.split.template.xsl.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.facetmap/src/templates/xml-grid_content.js.mt"/>
   </repository>
   <actions>
     <actions xsi:type="chain:Generate" documentation="facetmap-content-results-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
@@ -26,6 +26,6 @@
     <actions xsi:type="chain:Generate" documentation="facetmap-facets-xslrightnav-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.10" folder="//@repository/@files.1"/>
     <actions xsi:type="chain:Generate" documentation="facetmap-facets-xslrightnavContent-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.11" folder="//@repository/@files.1"/>
     <actions xsi:type="chain:Generate" documentation="facetmap-propertyfile-generation" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.12" folder="//@repository/@files.1"/>
-    <actions xsi:type="chain:Generate" documentation="exsltString" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.13" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="extJs" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.13" folder="//@repository/@files.1"/>
   </actions>
 </chain:Chain>

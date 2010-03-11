@@ -13,7 +13,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
   version="1.0">
   <xsl:output method="html" />
   
-  <xsl:include href="includes/basic-Global.xsl"/>
+  <%if (getInnerView().filter("DataList")){%><xsl:include href="includes/basic-Global.xsl"/><%}%>
   <xsl:include href="includes/basic_<%name%>-Results.xsl"/>
   
   <xsl:template match="selection">
