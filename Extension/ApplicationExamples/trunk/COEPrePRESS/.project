@@ -2,10 +2,14 @@
 <projectDescription>
 	<name>COEPrePRESS</name>
 	<comment></comment>
-	<projects>
-	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>com.bluexml.side.integration.eclipse.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>com.bluexml.side.integration.eclipse.nature.activatedBuilder</nature>
 	</natures>
 </projectDescription>
