@@ -19,7 +19,8 @@ import com.bluexml.xforms.generator.tools.ModelTools;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
- * The Class RenderableSelector.
+ * The left column of a selection widget, consisting of selection list, count outputs, search input
+ * and Create button.
  */
 public class RenderableSelector extends AbstractRenderable {
 
@@ -34,7 +35,7 @@ public class RenderableSelector extends AbstractRenderable {
 
 	/** The bind for the data type. */
 	private ModelElementBindSimple bindType;
-	
+
 	/** The instance name. */
 	private String instanceName;
 
@@ -71,16 +72,17 @@ public class RenderableSelector extends AbstractRenderable {
 		instancePath = "instance('" + instanceName + "')/";
 		instanceNodePath = instancePath + "item";
 
-//		bindId = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDID);
-//		bindLabel = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL);
-//		bindMaxResults = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDMAX);
-//		bindType = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDTYPE);
-//
-////		bindId.setType(new QName("string"));
-////		bindLabel.setType(new QName("string"));
-////		bindMaxResults.setType(new QName("string"));
-//		bindMaxResults.setHidden(true);
-//		bindType.setHidden(true);
+		// bindId = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDID);
+		// bindLabel = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL);
+		// bindMaxResults = new ModelElementBindSimple(instancePath +
+		// MsgId.INT_INSTANCE_SELECTEDMAX);
+		// bindType = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDTYPE);
+		//
+		// // bindId.setType(new QName("string"));
+		// // bindLabel.setType(new QName("string"));
+		// // bindMaxResults.setType(new QName("string"));
+		// bindMaxResults.setHidden(true);
+		// bindType.setHidden(true);
 
 		if (bean.isMandatory()) { // #978
 			// setting bindId's required to true will give the visual cue (a red star under Chiba)
@@ -170,7 +172,7 @@ public class RenderableSelector extends AbstractRenderable {
 	/**
 	 * Gets the bind for the data type.
 	 * 
-	 * @return 
+	 * @return
 	 */
 	public ModelElementBindSimple getBindType() {
 		if (bindType == null) {
@@ -178,7 +180,7 @@ public class RenderableSelector extends AbstractRenderable {
 		}
 		return bindType;
 	}
-	
+
 	public AbstractModelElementUpdater getModelElementUpdater() {
 		return modelElementUpdater;
 	}
