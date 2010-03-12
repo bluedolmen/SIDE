@@ -50,18 +50,19 @@ public class MappingToolSearch extends MappingToolCommon {
 	public Document getInstanceSearch(String formName) {
 		Document formInstance = documentBuilder.newDocument();
 		Element rootElement = formInstance.createElement("root");
+		formInstance.appendChild(rootElement);
+
 		SearchFormType sfType = getSearchFormType(formName);
+		if (sfType != null) {
+			Element formElt = formInstance.createElement(sfType.getName());
+			rootElement.appendChild(formElt);
 
-		Element formElt = formInstance.createElement(sfType.getName());
-		rootElement.appendChild(formElt);
-
-		for (SearchFieldType fieldType : sfType.getField()) {
-			Element topElt = getSearchFieldNode(formInstance, fieldType);
-			formElt.appendChild(topElt);
-
+			for (SearchFieldType fieldType : sfType.getField()) {
+				Element topElt = getSearchFieldNode(formInstance, fieldType);
+				formElt.appendChild(topElt);
+			}
 		}
 
-		formInstance.appendChild(rootElement);
 		return formInstance;
 	}
 

@@ -86,7 +86,7 @@ public class MappingAgent {
 	/** The current upload path, set by getParamUploadPathInFileSystem */
 	private File currentUploadDir;
 
-	public void loadMappingXml() throws Exception {
+	public void loadMappingXml(boolean failIfError) throws Exception {
 		URL url = AlfrescoController.class.getResource("/mapping.xml");
 		File file = new File(new URI(url.toString()));
 		InputStream mappingStream = new FileInputStream(file);
@@ -98,9 +98,11 @@ public class MappingAgent {
 			this.mapping = mappingInstance;
 		} catch (JAXBException e) {
 			if (logger.isErrorEnabled()) {
-				logger.error(e);
+				logger.error("Error loading the mapping file", e);
 			}
-			throw new RuntimeException(e);
+			if (failIfError) {
+				throw new RuntimeException(e);
+			}
 		} finally {
 			mappingStream.close();
 		}
@@ -117,7 +119,7 @@ public class MappingAgent {
 	 */
 	public MappingAgent(AlfrescoController controller) throws Exception {
 		super();
-		loadMappingXml();
+		loadMappingXml(true); // we need the first loading to fail in case of error
 		this.controller = controller;
 		mappingToolImplAlfrescoToXForms = new MappingToolAlfrescoToClassForms(mapping, controller);
 		mappingToolImplXFormsToAlfresco = new MappingToolClassFormsToAlfresco(mapping, controller);
@@ -282,11 +284,9 @@ public class MappingAgent {
 	 * 
 	 * @return the document
 	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
 	 */
 	private Document createFormInstance(AlfrescoTransaction transaction, String formName,
-			boolean formIsReadOnly) throws ServletException {
+			boolean formIsReadOnly) {
 		return mappingToolAlfrescoToForms.newFormInstance(formName, transaction, transaction
 				.getInitParams(), formIsReadOnly);
 	}
@@ -504,8 +504,7 @@ public class MappingAgent {
 	}
 
 	private void collectTaskProperties(Document instance, Element taskElt, String wkFormName,
-			Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly)
-			throws ServletException {
+			Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly) {
 		mappingToolAlfrescoToForms.collectTaskProperties(instance, taskElt, wkFormName,
 				alfrescoNodes, formIsReadOnly);
 	}
@@ -875,22 +874,21 @@ public class MappingAgent {
 	 * 
 	 * @see {@link GetAction}
 	 * @param formName
-	 * @return
-	 * @throws ServletException
+	 * @return the instance document, which is never <code>null</code>.
 	 */
-	public Document getInstanceWorkflow(String formName) throws ServletException {
+	public Document getInstanceWorkflow(String formName) {
+
+		// DOM structure
 		Document instance = AlfrescoController.getDocBuilder().newDocument();
-
-		Map<String, GenericClass> alfrescoNodes = new HashMap<String, GenericClass>();
-
 		Element taskElt = instance.createElement(formName);
-
-		collectTaskProperties(instance, taskElt, formName, alfrescoNodes, false);
-
 		Element rootElement = instance.createElement(MsgId.INT_INSTANCE_WKFLW_NODESET.getText());
 		rootElement.appendChild(taskElt);
-
 		instance.appendChild(rootElement);
+
+		// fill the instance with the properties values
+		Map<String, GenericClass> alfrescoNodes = new HashMap<String, GenericClass>();
+		collectTaskProperties(instance, taskElt, formName, alfrescoNodes, false);
+
 		return instance;
 	}
 

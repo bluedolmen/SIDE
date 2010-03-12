@@ -219,27 +219,27 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param formInstance
 	 *            the document from which nodes will be created
 	 * @param rootElement
-	 *            the parent node to expand
+	 *            the parent node to be filled in
 	 * @param taskType
 	 *            the definition of the task from the mapping
 	 * @param nodeName
-	 * @throws ServletException
 	 */
 	public void collectTaskProperties(Document formInstance, Element rootElement,
-			String wkFormName, Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly)
-			throws ServletException {
+			String wkFormName, Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly) {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(controller);
 		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
 
-		List<FormFieldType> fields = taskType.getField();
-		for (FormFieldType field : fields) {
-			newFormField(formInstance, rootElement, field, transaction, null, formIsReadOnly);
-		}
+		if (taskType != null) {
+			List<FormFieldType> fields = taskType.getField();
+			for (FormFieldType field : fields) {
+				newFormField(formInstance, rootElement, field, transaction, null, formIsReadOnly);
+			}
 
-		List<ModelChoiceType> modelChoices = taskType.getModelChoice();
-		for (ModelChoiceType modelChoice : modelChoices) {
-			newFormModelChoice(formInstance, rootElement, modelChoice, transaction, alfrescoNodes,
-					formIsReadOnly);
+			List<ModelChoiceType> modelChoices = taskType.getModelChoice();
+			for (ModelChoiceType modelChoice : modelChoices) {
+				newFormModelChoice(formInstance, rootElement, modelChoice, transaction,
+						alfrescoNodes, formIsReadOnly);
+			}
 		}
 
 	}
@@ -254,10 +254,9 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * 
 	 * @return the document
 	 * 
-	 * @throws ServletException
 	 */
 	public Document newFormInstance(String formName, AlfrescoTransaction at,
-			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
+			Map<String, String> initParams, boolean formIsReadOnly) {
 		FormType formType = getFormType(formName);
 		if (logger.isTraceEnabled()) {
 			logger.debug("Creating new form instance document for the controller; form: "
@@ -300,11 +299,9 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param transaction
 	 * 
 	 * @return the element
-	 * @throws ServletException
 	 */
 	private Element newForm(FormType formType, Document formInstance, AlfrescoTransaction at,
-			Map<String, GenericClass> an, Map<String, String> initParams, boolean formIsReadOnly)
-			throws ServletException {
+			Map<String, GenericClass> an, Map<String, String> initParams, boolean formIsReadOnly) {
 		Element formElement = formInstance.createElement(formType.getName());
 
 		/*
@@ -344,11 +341,10 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param at
 	 * @param an
 	 * @param formIsReadOnly
-	 * @throws ServletException
 	 */
 	private void newFormModelChoice(Document formInstance, Element formElement,
 			ModelChoiceType modelChoice, AlfrescoTransaction at, Map<String, GenericClass> an,
-			boolean formIsReadOnly) throws ServletException {
+			boolean formIsReadOnly) {
 		Element modelChoiceReference = formInstance.createElement(modelChoice.getUniqueName());
 		int maxBound = modelChoice.getMaxBound();
 		if (maxBound != 1) {
@@ -362,7 +358,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 
 	private void newFormModelChoiceItem(Document formInstance, ModelChoiceType modelChoice,
 			Element modelChoiceReference, AlfrescoTransaction at, Map<String, GenericClass> an,
-			boolean formIsReadOnly) throws ServletException {
+			boolean formIsReadOnly) {
 		addModelChoiceItem(formInstance, modelChoiceReference, modelChoice, "", "", "", at, an,
 				formIsReadOnly);
 	}
@@ -388,23 +384,28 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param an
 	 * @param formIsReadOnly
 	 *            whether the form whose instance is being provided is read only
-	 * @throws ServletException
 	 */
 	private void addModelChoiceItem(Document formInstance, Element modelChoiceReference,
 			ModelChoiceType modelChoice, String id, String label, String nodeDataType,
-			AlfrescoTransaction at, Map<String, GenericClass> an, boolean formIsReadOnly)
-			throws ServletException {
+			AlfrescoTransaction at, Map<String, GenericClass> an, boolean formIsReadOnly) {
 		Node subNode = formInstance.createElement(MsgId.INT_INSTANCE_ASSOCIATION_ITEM.getText());
 		if (isInline(modelChoice)) {
 			Node formNode = null;
 			if (StringUtils.trimToNull(id) == null) {
 				formNode = newForm(getFormType(modelChoice.getTarget().get(0).getName()),
 						formInstance, at, an, null, formIsReadOnly);
+				subNode.appendChild(formNode);
 			} else {
-				formNode = getForm(at, getFormType(modelChoice.getTarget().get(0).getName()), id,
-						an, formInstance, formIsReadOnly);
+				try {
+					formNode = getForm(at, getFormType(modelChoice.getTarget().get(0).getName()),
+							id, an, formInstance, formIsReadOnly);
+					subNode.appendChild(formNode);
+				} catch (ServletException e) {
+					logger.error("Error getting the instance section for model choice '"
+							+ modelChoice.getDisplayLabel() + "' supporting association '"
+							+ modelChoice.getAlfrescoName() + "'", e);
+				}
 			}
-			subNode.appendChild(formNode);
 		} else {
 			Element eltId = formInstance.createElement(MsgId.INT_INSTANCE_SIDEID.getText());
 			eltId.setTextContent(id);
@@ -439,11 +440,10 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param at
 	 * @param an
 	 * @param formIsReadOnly
-	 * @throws ServletException
 	 */
 	private void newFormReference(Document formInstance, Element formElement,
 			ReferenceType referenceType, AlfrescoTransaction at, Map<String, GenericClass> an,
-			boolean formIsReadOnly) throws ServletException {
+			boolean formIsReadOnly) {
 		Element formReference = formInstance.createElement(referenceType.getUniqueName());
 		List<FormType> targets = referenceType.getTarget();
 		int i = 0;
@@ -457,7 +457,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 
 	private void newFormReferenceTarget(Document formInstance, ReferenceType referenceType,
 			Element formReference, int i, FormType formType, AlfrescoTransaction at,
-			Map<String, GenericClass> an, boolean formIsReadOnly) throws ServletException {
+			Map<String, GenericClass> an, boolean formIsReadOnly) {
 		Element elementTarget = newForm(getFormType(formType.getName()), formInstance, at, an,
 				null, formIsReadOnly);
 		formReference.appendChild(elementTarget);
@@ -475,11 +475,10 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param formFieldType
 	 *            the form field type
 	 * @param transaction
-	 * @throws ServletException
 	 */
 	private void newFormField(Document formInstance, Element formElement,
 			FormFieldType formFieldType, AlfrescoTransaction transaction,
-			Map<String, String> initParams, boolean formIsReadOnly) throws ServletException {
+			Map<String, String> initParams, boolean formIsReadOnly) {
 		if (logger.isTraceEnabled()) {
 			logger.debug("  setting value for new form field '" + formFieldType.getUniqueName()
 					+ "' with alfresco name '" + formFieldType.getAlfrescoName() + "'");
@@ -523,11 +522,10 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 *            the value
 	 * @param transaction
 	 * @param alfrescoId
-	 * @throws ServletException
 	 */
 	private void addFormFieldValue(Document formInstance, Element formElement,
 			FormFieldType formFieldType, String value, AlfrescoTransaction transaction,
-			String alfrescoId, boolean formIsReadOnly) throws ServletException {
+			String alfrescoId, boolean formIsReadOnly) {
 		Element formField = formInstance.createElement(formFieldType.getUniqueName());
 
 		boolean applyUserFormat = formIsReadOnly || isReadOnly(formFieldType);
@@ -564,8 +562,13 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			formField.appendChild(idField);
 			Element labelField = formInstance.createElement(MsgId.INT_INSTANCE_SIDELABEL.getText());
 			if (StringUtils.trimToNull(value) != null) {
-				String enumCaption = controller.getEnumCaption(transaction, value);
-				labelField.setTextContent(enumCaption);
+				String enumCaption;
+				try {
+					enumCaption = controller.getEnumCaption(transaction, value);
+					labelField.setTextContent(enumCaption);
+				} catch (ServletException e) {
+					logger.error("Error getting an enum caption", e);
+				}
 			} else {
 				labelField.setTextContent("");
 			}
@@ -588,7 +591,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 				if (controller.getParamUploadRepoFormatInfo(transaction.getInitParams())) {
 					FileFieldType fileFieldType = (FileFieldType) formFieldType;
 					if ((alfrescoId != null) && (isInRepository(fileFieldType))) {
-						formField.setTextContent(controller.getWebscriptNodeContentInfo(value));
+						formField.setTextContent(controller.getNodeContentInfo(value));
 					}
 				}
 			}
@@ -660,7 +663,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			nodeContentElt.setAttribute("file", "");
 			nodeContentElt.setAttribute("type", "");
 			if (alfrescoId != null) {
-				String contentInfo = controller.getWebscriptNodeContentInfo(alfrescoId);
+				String contentInfo = controller.getNodeContentInfo(alfrescoId);
 				nodeContentElt.setTextContent(contentInfo);
 			}
 
@@ -687,12 +690,10 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param formIsReadOnly
 	 * 
 	 * @return the form model choices
-	 * @throws ServletException
 	 */
 	private void getFormModelChoices(AlfrescoTransaction transaction,
 			Map<String, GenericClass> alfrescoNodes, Document formInstance, Element formElement,
-			List<ModelChoiceType> modelChoices, GenericClass alfrescoClass, boolean formIsReadOnly)
-			throws ServletException {
+			List<ModelChoiceType> modelChoices, GenericClass alfrescoClass, boolean formIsReadOnly) {
 		List<GenericAssociation> associations = new ArrayList<GenericAssociation>(alfrescoClass
 				.getAssociations().getAssociation());
 		for (ModelChoiceType modelChoice : modelChoices) {
@@ -715,12 +716,11 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param formIsReadOnly
 	 * 
 	 * @return the form model choice
-	 * @throws ServletException
 	 */
 	private void getFormModelChoice(AlfrescoTransaction transaction,
 			Map<String, GenericClass> alfrescoNodes, Document formInstance, Element formElement,
 			List<GenericAssociation> associations, ModelChoiceType modelChoice,
-			boolean formIsReadOnly) throws ServletException {
+			boolean formIsReadOnly) {
 		Element modelChoiceReference = formInstance.createElement(modelChoice.getUniqueName());
 		int maxBound = modelChoice.getMaxBound();
 		if (maxBound != 1) {
@@ -749,7 +749,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			Map<String, GenericClass> alfrescoNodes, Document formInstance,
 			Element modelChoiceReference, ModelChoiceType modelChoice,
 			GenericClassReference target, GenericClassReference associationClass,
-			boolean formIsReadOnly) throws ServletException {
+			boolean formIsReadOnly) {
 		addModelChoiceItem(formInstance, modelChoiceReference, modelChoice, target.getValue(),
 				target.getLabel(), target.getQualifiedName(), transaction, alfrescoNodes,
 				formIsReadOnly);
@@ -856,12 +856,10 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 *            the alfresco class
 	 * @param transaction
 	 * @return the form fields
-	 * @throws ServletException
 	 */
 	private void getFormFields(Document formInstance, Element formElement,
 			List<FormFieldType> fields, GenericClass alfrescoClass,
-			AlfrescoTransaction transaction, String alfrescoId, boolean formIsReadOnly)
-			throws ServletException {
+			AlfrescoTransaction transaction, String alfrescoId, boolean formIsReadOnly) {
 		List<GenericAttribute> attributes = alfrescoClass.getAttributes().getAttribute();
 		Map<String, GenericAttribute> attributesMap = new HashMap<String, GenericAttribute>();
 		for (GenericAttribute attribute : attributes) {

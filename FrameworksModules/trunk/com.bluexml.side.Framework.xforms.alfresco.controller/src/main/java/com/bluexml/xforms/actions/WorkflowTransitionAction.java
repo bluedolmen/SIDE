@@ -729,7 +729,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 
 		// add task properties built from the attributes derived from form fields
 		String processName = controller.workflowExtractProcessNameFromFormName(taskTypeName);
-		String namespaceURI = controller.workflowBuildNamespaceURI(processName);
+		String namespaceURI = controller.getWorkflowNamespaceURI(processName);
 		WorkflowTaskDefinition taskDef;
 		taskDef = controller.workflowGetTaskDefinition(processId, taskTypeId);
 		if (taskDef == null) {

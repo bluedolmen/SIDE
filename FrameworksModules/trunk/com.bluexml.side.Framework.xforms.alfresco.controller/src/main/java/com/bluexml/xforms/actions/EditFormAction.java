@@ -121,7 +121,7 @@ public class EditFormAction extends AbstractEditAction {
 
 		// look for the form in the list of target forms that supports the edit node's data type
 		for (String formName : Arrays.asList(forms)) {
-			String formClassName = controller.getUnderlyingClassForForm(formName);
+			String formClassName = controller.getUnderlyingTypeForForm(formName);
 			if (formClassName != null) {
 				if (editDataType.equals(formClassName)) {
 					pageBean.setFormType(FormTypeEnum.FORM);

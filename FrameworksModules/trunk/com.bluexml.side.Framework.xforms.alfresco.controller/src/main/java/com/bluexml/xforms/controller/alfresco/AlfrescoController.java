@@ -481,7 +481,6 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @return the class
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
 	 */
 	public Document getInstanceClass(AlfrescoTransaction transaction, String formName,
 			String dataId, boolean formIsReadOnly, boolean isServletRequest)
@@ -506,7 +505,6 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @return the form
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
 	 */
 	public Document getInstanceForm(AlfrescoTransaction transaction, String formName, String id,
 			boolean formIsReadOnly) throws ServletException {
@@ -516,8 +514,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-
-	public Document getInstanceWorkflow(String formName) throws ServletException {
+	public Document getInstanceWorkflow(String formName) {
 		return mappingAgent.getInstanceWorkflow(formName);
 	}
 
@@ -556,18 +553,18 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * Reads an object form Alfresco.
 	 * 
 	 * @param transaction
-	 *            the transaction
-	 * @param id
+	 *            the transaction.
+	 * @param dataId
 	 *            the id
 	 * 
 	 * @return the document
 	 * 
 	 * @throws ServletException
 	 */
-	public Document readObjectFromRepository(AlfrescoTransaction transaction, String id)
+	public Document readObjectFromRepository(AlfrescoTransaction transaction, String dataId)
 			throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
-		parameters.put("objectId", id);
+		parameters.put("objectId", dataId);
 		return requestDocumentFromAlfresco(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_READ);
 	}
 
@@ -1290,7 +1287,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	}
 
 	/**
-	 * Request post. Bridget to our XForms webscript under Alfresco. //$$ TRACE LOG
+	 * Request post. Bridge to our XForms webscript under Alfresco. //$$ TRACE LOG
 	 * 
 	 * @param parameters
 	 *            the parameters
@@ -1319,7 +1316,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 				if (value == null) {
 					value = "<null string>";
 				} else if (value.equals("")) {
-					value="<empty string>";
+					value = "<empty string>";
 				}
 				logger.debug(entry2.getKey() + " = " + value);
 			}
@@ -1798,6 +1795,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String workflowExtractTaskNameFromFormName(String formName) {
+		// e.g. "Evaluation_Demarrage" -> "Demarrage"
 		return formName.substring(formName.indexOf("_") + 1);
 	}
 
@@ -1805,6 +1803,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String workflowExtractProcessNameFromFormName(String formName) {
+		// e.g. "Evaluation_Demarrage" -> "Evaluation"
 		return formName.substring(0, formName.indexOf("_"));
 	}
 
@@ -1846,6 +1845,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String workflowBuildBlueXMLDefinitionName(String processName) {
+		// Used when reacting to a workflow transition action.
+		// e.g. "Evaluation" --> "jbpm$wfbxEvaluation:Evaluation"
 		return "jbpm$" + BLUEXML_WORKFLOW_PREFIX + processName + ":" + processName;
 	}
 
@@ -1853,6 +1854,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String workflowBuildBlueXMLTaskName(String formName) {
+		// e.g. "Evaluation_Annotation" --> "wfbxEvaluation:Annotation"<br/>
+		// NOTE: a duplicate of this function is also defined in MappingGenerator
 		return BLUEXML_WORKFLOW_PREFIX + formName.replace('_', ':');
 	}
 
@@ -1860,6 +1863,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String workflowBuildFormNameFromTask(String taskName) {
+		// e.g. "wfbxEvaluation:Annotation" --> "Evaluation_Annotation"<br/>
+		// e.g. "jbpm$wfbxEvaluation:Annotation" --> "Evaluation_Annotation"<br/>
 		String searchString = BLUEXML_WORKFLOW_PREFIX;
 
 		if (taskName.indexOf(searchString) != 0) {
@@ -1876,7 +1881,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String workflowBuildNamespaceURI(String processName) {
+	public String getWorkflowNamespaceURI(String processName) {
 		return MsgId.INT_NAMESPACE_BLUEXML_WORKFLOW + "/" + processName + "/1.0";
 	}
 
@@ -1900,8 +1905,13 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		String methodName = "getPooledTasks";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(userName);
-		List<WorkflowTask> workflowRequest = (List<WorkflowTask>) workflowRequestWrapper(null,
-				methodName, methodParameters);
+		
+		// use the user name for the transaction.
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
+		transaction.setLogin(userName);
+		
+		List<WorkflowTask> workflowRequest = (List<WorkflowTask>) workflowRequestWrapper(
+				transaction, methodName, methodParameters);
 		return workflowRequest;
 	}
 
@@ -1978,7 +1988,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 				// build the QName
 				if (namespaceURI == null) {
 					String processName = workflowExtractProcessNameFromFormName(wkFormName);
-					namespaceURI = workflowBuildNamespaceURI(processName);
+					namespaceURI = getWorkflowNamespaceURI(processName);
 				}
 				qname = QName.createQName(namespaceURI, localName);
 
@@ -2007,7 +2017,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public void setStandaloneMode(boolean standaloneMode) { 
+	public void setStandaloneMode(boolean standaloneMode) {
 		AlfrescoController.standaloneMode = standaloneMode;
 	}
 
@@ -2114,7 +2124,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 */
 	public boolean performDynamicReload() { // PUBLIC-API
 		try {
-			mappingAgent.loadMappingXml();
+			mappingAgent.loadMappingXml(false);
 		} catch (Exception e) {
 			logger.error("Error while loading the dynamic reload", e);
 			return false;
@@ -2147,7 +2157,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getWebscriptNodeContentInfo(String nodeId) { // PUBLIC-API
+	public String getNodeContentInfo(String nodeId) { // PUBLIC-API
 		if (StringUtils.trimToNull(nodeId) == null) {
 			return "";
 		}
@@ -2258,23 +2268,27 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Reading redirection configuration file.");
 		}
-		InputStream stream = null;
+
+		String actualFilePath = ""; // the path where the stream is successfully open
+		FileInputStream stream = null;
 		if (StringUtils.trimToNull(filePath) != null) {
 			try {
-				File file = new File(filePath);
+				actualFilePath = filePath;
+				File file = new File(actualFilePath);
 				stream = new FileInputStream(file);
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+				e.printStackTrace(); // continue anyway
 			}
 		}
 
 		if (stream == null) {
 			if (StringUtils.trimToNull(redirectXmlPath) != null) {
 				try {
-					File file = new File(redirectXmlPath);
+					actualFilePath = redirectXmlPath;
+					File file = new File(actualFilePath);
 					stream = new FileInputStream(file);
 				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+					e.printStackTrace(); // continue anyway
 				}
 			}
 			URL url = AlfrescoController.class.getResource("/redirect.xml");
@@ -2286,7 +2300,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			}
 			File file;
 			try {
-				file = new File(new URI(url.toString()));
+				URI fileURI = new URI(url.toString());
+				file = new File(fileURI);
+				actualFilePath = fileURI.getSchemeSpecificPart();
 				stream = new FileInputStream(file);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -2309,33 +2325,47 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			return false;
 		}
 
+		HashMap<String, RedirectionBean> localTable = new HashMap<String, RedirectionBean>();
+
 		// we won't check the tag name for the root element
 		Element root = document.getDocumentElement();
 		List<Element> entries = DOMUtil.getChildren(root, MsgId.INT_REDIRECTION_ENTRY.getText());
 		// for each entry of the file, store the info
 		for (Element entry : entries) {
 			Element nameElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_NAME.getText());
-			if (nameElt == null) {
-				// get rid of everything previously read
-				targetTable = new HashMap<String, RedirectionBean>();
-				return false;
+			if (nameElt != null) {
+				try {
+					formName = nameElt.getTextContent();
+					Element urlElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_URL.getText());
+					url = urlElt.getTextContent();
+					Element autoElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_AUTO_ADVANCE
+							.getText());
+					autoAdvance = StringUtils.equals(autoElt.getTextContent(), "true");
+
+					Element addElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_ADD_PARAMS
+							.getText());
+					addParams = StringUtils.equals(addElt.getTextContent(), "true");
+					RedirectionBean bean = new RedirectionBean(url, autoAdvance, addParams);
+
+					localTable.put(formName, bean);
+				} catch (NullPointerException ne) {
+					logger.error(
+							"Caught a null pointer exception while loading the redirection file at '"
+									+ actualFilePath
+									+ "'. The file is probably not correctly formatted.", ne);
+					return false;
+				}
+			} else {
+				// // get rid of everything previously read
+				// targetTable = new HashMap<String, RedirectionBean>();
+				// return false;
 			}
-			formName = nameElt.getTextContent();
-			Element urlElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_URL.getText());
-			url = urlElt.getTextContent();
-			Element autoElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_AUTO_ADVANCE.getText());
-			autoAdvance = StringUtils.equals(autoElt.getTextContent(), "true");
-
-			Element addElt = DOMUtil.getChild(entry, MsgId.INT_REDIRECTION_ADD_PARAMS.getText());
-			addParams = StringUtils.equals(addElt.getTextContent(), "true");
-			RedirectionBean bean = new RedirectionBean(url, autoAdvance, addParams);
-
-			targetTable.put(formName, bean);
 		}
 		if (logger.isDebugEnabled()) {
 			logger.debug("Redirection configuration file successfully read.");
 		}
 
+		targetTable = localTable;
 		return true;
 	}
 
@@ -2360,14 +2390,14 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getUnderlyingClassForForm(String formName) {
+	public String getUnderlyingTypeForForm(String formName) {
 		return mappingAgent.getUnderlyingClassForForm(formName);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getUnderlyingClassForWorkflow(String formName) {
+	public String getUnderlyingTypeForWorkflow(String formName) {
 		return mappingAgent.getUnderlyingClassForWorkflow(formName);
 	}
 
@@ -2376,30 +2406,6 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 */
 	public String getUnderlyingDataFormForWorkflow(String formName) {
 		return mappingAgent.getUnderlyingDataFormForWorkflow(formName);
-	}
-
-	/**
-	 * Provides the pooled actors defined on the form that supports the given task name.
-	 * 
-	 * @param taskName
-	 *            a task definition name.
-	 * @return the content of the "pooled actors" property.
-	 * @deprecated
-	 */
-	public String getTaskPooledActorsByTaskId(String taskName) {
-		return mappingAgent.getWorkflowTaskPooledActorsById(taskName);
-	}
-
-	/**
-	 * Provides the actor Id defined on the form that supports the given task name.
-	 * 
-	 * @param taskName
-	 *            a task definition name.
-	 * @return the content of the "actor id" property.
-	 * @deprecated
-	 */
-	public String getTaskActorIdByTaskId(String taskName) {
-		return mappingAgent.getWorkflowTaskActorIdById(taskName);
 	}
 
 	/* (non-Javadoc)
@@ -2451,8 +2457,29 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			boolean formIsReadOnly) throws ServletException {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
 		transaction.setLogin(userName);
-		
+
 		return getInstanceForm(transaction, formName, id, formIsReadOnly);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public Document getInstanceClass(String userName, String formName, String dataId,
+			boolean formIsReadOnly, boolean applyUserFormats) throws ServletException {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
+		transaction.setLogin(userName);
+
+		return getInstanceClass(transaction, formName, dataId, formIsReadOnly, applyUserFormats);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public Document readObjectFromRepository(String userName, String dataId)
+			throws ServletException {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
+		transaction.setLogin(userName);
+		return readObjectFromRepository(transaction, dataId);
 	}
 
 	/* (non-Javadoc)

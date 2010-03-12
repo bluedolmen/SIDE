@@ -624,9 +624,9 @@ public class NavigationManager {
 					dataId = null;
 				} else {
 					if (bean.getFormType() == FormTypeEnum.WKFLW) {
-						dataType = controller.getUnderlyingClassForWorkflow(realFormName);
+						dataType = controller.getUnderlyingTypeForWorkflow(realFormName);
 					} else {
-						dataType = controller.getUnderlyingClassForForm(realFormName);
+						dataType = controller.getUnderlyingTypeForForm(realFormName);
 					}
 					if (StringUtils.equals(dataType, contentType.getLocalName()) == false) {
 						bean.setWrongCallType(true);
