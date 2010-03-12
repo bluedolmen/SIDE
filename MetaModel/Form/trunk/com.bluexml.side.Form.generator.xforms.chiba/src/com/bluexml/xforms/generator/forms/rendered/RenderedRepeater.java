@@ -29,10 +29,12 @@ public class RenderedRepeater extends Rendered {
 	 *            the repeat id
 	 */
 	public RenderedRepeater(ModelElementBindHolder parentBind, String repeatId) {
-		xformsElement = XFormsGenerator.createElement("repeat", XFormsGenerator.NAMESPACE_XFORMS);
-		xformsElement.setAttribute("id", repeatId);
-		parentBind.addLinkedElement(this.xformsElement);
-		xformsElement.setAttribute("appearance", "full");
+		Element repElt = XFormsGenerator.createElement("repeat", XFormsGenerator.NAMESPACE_XFORMS);
+		repElt.setAttribute("id", repeatId);
+		parentBind.addLinkedElement(repElt);
+		repElt.setAttribute("appearance", "full");
+
+		xformsElement = repElt;
 		this.parentBind = parentBind;
 		this.repeatId = repeatId;
 	}

@@ -214,6 +214,15 @@ public class RenderableSelector extends AbstractRenderable {
 		return rendered;
 	}
 
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.forms.Renderable#getDivStyle()
+	 */
+	@Override
+	public String getDivStyle() {
+		return MsgId.INT_CSS_SELECT_LIST.getText();
+	}
+
 	/**
 	 * We need to add this function so that nested forms (following the additional feature of #1225)
 	 * continue to perform as needed in #978, meaning "so that mandatory selection widgets have

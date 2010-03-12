@@ -58,7 +58,6 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 			repeaterId = renderedParents.peek().getOptionalData();
 			Element xformsElement = XFormsGenerator.createElement("div",
 					XFormsGenerator.NAMESPACE_XHTML);
-			xformsElement.setAttribute("class", MsgId.INT_CSS_SELECT_TRIGGER_IMG.getText());
 
 			ModelElementBindSimple bindActions = ((RenderableSMultiple) parents.peek())
 					.getBindActions();
@@ -70,6 +69,14 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 			rendered.setXformsElement(xformsElement);
 		}
 		return rendered;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.forms.Renderable#getDivStyle()
+	 */
+	@Override
+	public String getDivStyle() {
+		return MsgId.INT_CSS_SELECT_TRIGGER_IMG.getText();
 	}
 
 	/**

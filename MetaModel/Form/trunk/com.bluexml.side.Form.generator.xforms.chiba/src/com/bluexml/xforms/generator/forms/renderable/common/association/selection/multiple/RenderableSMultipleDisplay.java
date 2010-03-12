@@ -10,6 +10,7 @@ import com.bluexml.xforms.generator.forms.renderable.common.association.Abstract
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.RenderableSDisplay;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.RenderableSEdit;
 import com.bluexml.xforms.generator.forms.rendered.RenderedRepeater;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableSMultipleDisplay.
@@ -61,4 +62,13 @@ public class RenderableSMultipleDisplay extends AbstractRenderable {
 		return renderedRepeater;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.forms.Renderable#getDivStyle()
+	 */
+	@Override
+	public String getDivStyle() {
+		return MsgId.INT_CSS_SELECT_SELECTED_ITEMS.getText();
+	}
+
+	
 }

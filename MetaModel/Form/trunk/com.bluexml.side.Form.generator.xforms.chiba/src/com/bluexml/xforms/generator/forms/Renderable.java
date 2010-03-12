@@ -88,6 +88,9 @@ public abstract class Renderable {
 
 	private boolean inWorkflowForm;
 
+	/** A style for the surrounding div*/
+	private String divStyle = null;
+	
 	/**
 	 * Instantiates a new renderable.
 	 */
@@ -381,6 +384,20 @@ public abstract class Renderable {
 	 */
 	public boolean isInlineMultipleRepeater() {
 		return false;
+	}
+
+	/**
+	 * @param divStyle the divStyle to set
+	 */
+	protected void setDivStyle(String divStyle) {
+		this.divStyle = divStyle;
+	}
+
+	/**
+	 * @return the divStyle
+	 */
+	public String getDivStyle() {
+		return divStyle;
 	}
 
 }

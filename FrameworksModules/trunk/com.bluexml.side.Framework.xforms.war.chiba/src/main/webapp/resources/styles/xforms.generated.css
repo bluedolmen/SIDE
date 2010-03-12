@@ -28,14 +28,41 @@
 }
 
 .full-group {
-	background: #EEE;
-	border: none;
+	background: none repeat scroll 0 0 transparent;
+	border: medium none;
 	overflow: auto;
+}
+
+.label {
+	color: #515D6B;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+}
+
+.submit {
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+	color: #000000;
+	padding: 0 5px;
+}
+
+span.submit .value {
+	cursor: pointer;
+	font: 98% arial, helvetica, clean, sans-serif;
 }
 
 .full-group div {
 	display: block;
 	padding: 5px;
+}
+
+/* keep the Dojo tabs to their initial look*/
+div.dojoTabLabels-top {
+	padding: 0px;
+}
+
+div.dojoTab {
+	padding: 0 0 0 9px;
 }
 
 .full-group label {
@@ -97,6 +124,18 @@ div.side_select_widget label {
 	font-weight: bold;
 }
 
+div.side_select_list select {
+	min-width: 150px;
+}
+
+div.side_select_selected_items {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #DDD;
+	min-width: 150px;
+	min-height: 8px;
+}
+
 div.side_select_search_zone label {
 	font-weight: normal;
 }
@@ -142,8 +181,16 @@ div.side_search_field {
  *
  */
 	/* make the text in read-only textareas visible when in inline multiple forms */
-div.bxds_ro_textarea span.mediatype-text-html {
+div.side_ro_textarea span.mediatype-text-html {
 	background: #A7BCFC;
+}
+
+.side_form_title>.group-label {
+	background: none repeat scroll 0 0 #E3EAEC;
+	border: medium none;
+	overflow: auto;
+	font-size: 120%;
+	color: #515D6B;
 }
 
 div.side_jsp_footer {
@@ -173,6 +220,12 @@ side_xforms_line {
 #side_status_bar {
 	min-height: 1em;
 	font-weight: bold;
+}
+
+div#submitButtons .group-label {
+	background: none repeat scroll 0 0 transparent;
+	border: medium none;
+	overflow: auto;
 }
 
 #submitButtons {

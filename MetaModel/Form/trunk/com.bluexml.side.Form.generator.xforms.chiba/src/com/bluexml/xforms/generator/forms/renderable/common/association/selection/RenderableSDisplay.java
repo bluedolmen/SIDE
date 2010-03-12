@@ -15,6 +15,7 @@ import com.bluexml.xforms.generator.forms.renderable.common.association.selectio
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.multiple.RenderableSMultipleDisplay;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.unique.RenderableSSingle;
 import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableSDisplay.
@@ -51,7 +52,8 @@ public class RenderableSDisplay extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		RenderedInput renderedInput = new RenderedInput();
 
 		ModelElementBindSimple bindLabel = null;
@@ -68,8 +70,17 @@ public class RenderableSDisplay extends AbstractRenderable {
 		Element output = XFormsGenerator.createElement("output", XFormsGenerator.NAMESPACE_XFORMS);
 		bindLabel.addLinkedElement(output);
 		renderedInput.setXformsElement(output);
-		applyStyle(renderedInput, "side_select_selected_item");
 
 		return renderedInput;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.forms.Renderable#getDivStyle()
+	 */
+	@Override
+	public String getDivStyle() {
+		return MsgId.INT_CSS_SELECT_SELECTED_ITEMS.getText();
+	}
+	
+	
 }

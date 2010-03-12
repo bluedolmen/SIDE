@@ -21,12 +21,13 @@ import com.bluexml.xforms.messages.MsgId;
 public class RenderableSSingle extends AbstractRenderable {
 
 	private ModelElementBindSimple selectorBindId; // #1156
-	//** #1310
-	private ModelElementBindSimple selectedBindId; 
+	// ** #1310
+	private ModelElementBindSimple selectedBindId;
 	private ModelElementBindSimple selectedBindLabel;
 	private ModelElementBindSimple selectedBindEdit;
 	private ModelElementBindSimple selectedBindType; // #1510
-	//** #1310
+
+	// ** #1310
 
 	/**
 	 * Instantiates a new renderable s single.
@@ -73,7 +74,8 @@ public class RenderableSSingle extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		Rendered rendered = new RenderedLine();
 		Element div = rendered.getXformsElement();
 		div.setAttribute("class", MsgId.INT_CSS_SELECT_WIDGET.getText());
@@ -93,10 +95,10 @@ public class RenderableSSingle extends AbstractRenderable {
 			// fail if nothing is selected
 			bindId.setRequired(true);
 			bindLabel.setRequired(true);
-			//** #1156
+			// ** #1156
 			String constraint = "instance('minstance')/" + bindId.getNodeset() + " ne ''";
-			selectorBindId.setConstraint(constraint); 
-			//** #1156
+			selectorBindId.setConstraint(constraint);
+			// ** #1156
 		}
 
 		rendered.addModelElement(bindId);
@@ -106,6 +108,7 @@ public class RenderableSSingle extends AbstractRenderable {
 
 		return rendered;
 	}
+
 	/**
 	 * @return the selectedBindId
 	 */
@@ -145,9 +148,10 @@ public class RenderableSSingle extends AbstractRenderable {
 		}
 		return selectedBindType;
 	}
-	
+
 	/**
-	 * @param selectedBindEdit the selectedBindEdit to set
+	 * @param selectedBindEdit
+	 *            the selectedBindEdit to set
 	 */
 	public void setSelectedBindEdit(ModelElementBindSimple selectedBindEdit) {
 		this.selectedBindEdit = selectedBindEdit;

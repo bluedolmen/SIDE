@@ -82,7 +82,6 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		if ((getFormGenerator().isInReadOnlyMode() == false) || bean.isDisabled()) { // #1238
 			Element xformsElement = XFormsGenerator.createElement("div",
 					XFormsGenerator.NAMESPACE_XHTML);
-			xformsElement.setAttribute("class", MsgId.INT_CSS_SELECT_TRIGGER_IMG.getText());
 
 			xformsElement
 					.addContent(getTriggerSelect(renderedParents, bindId, bindLabel, bindType));
@@ -92,6 +91,15 @@ public class RenderableSSingleActions extends AbstractRenderable {
 			rendered.setXformsElement(xformsElement);
 		}
 		return rendered;
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.forms.Renderable#getDivStyle()
+	 */
+	@Override
+	public String getDivStyle() {
+		return MsgId.INT_CSS_SELECT_TRIGGER_IMG.getText();
 	}
 
 	/**

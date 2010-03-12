@@ -1,5 +1,6 @@
 package com.bluexml.xforms.generator.forms.rendered;
 
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -42,11 +43,19 @@ public class RenderedLine extends Rendered {
 		if (renderedElement != null) {
 			Element lineElement = XFormsGenerator.createElement("div",
 					XFormsGenerator.NAMESPACE_XHTML);
+
+			String style;
 			if (rendered.isReturnToLine()) {
-				lineElement.setAttribute("class", "xformstdclear");
+				style = "xformstdclear";
 			} else {
-				lineElement.setAttribute("class", "xformstdleft");
+				style = "xformstdleft";
 			}
+			String childStyle = StringUtils.trimToNull(renderable.getDivStyle());
+			if (childStyle != null) {
+				style += " " + childStyle;
+			}
+			lineElement.setAttribute("class", style);
+
 			lineElement.addContent(renderedElement);
 			xformsElement.addContent(lineElement);
 		}
