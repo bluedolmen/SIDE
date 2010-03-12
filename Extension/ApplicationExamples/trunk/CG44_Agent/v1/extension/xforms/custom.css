@@ -1,26 +1,102 @@
-/* ***************************************************************************** */
-/* *** custom CSS *** */
-
-.group{
-    padding:10px;
-    margin:10px;
-    background:#eeeeee;
+/* BlueXML SIDE - XForms component
+ * Custom stylesheets.
+ */
+/* TextArea inputs when rendered as outputs (i.e. when they have a read-only status */
+side_ro_textarea {
+	
 }
 
-.group div{
-    display:block;
+/* The whole search field, including the operator combobox  and all inputs and select lists */
+side_search_field {
+	
 }
 
-.full-group label {
-	float:left;
-	width:200px;
+/* The label and operator combobox of a search field */
+side_search_operator {
+	
 }
 
-.full-group .value {
-	margin-left:20px;
-	width:200px;
+/* The section of a selection widget that contains the number of items and the show all link */
+side_select_output_zone {
+	
 }
 
-.input label, .textarea label, .full-group label {
-	height:15px;
+/* The section of a selection widget that contains */
+side_select_search_zone {
+	
+}
+
+/* The div that contains a pair of buttons (left/right, add/remove, up/down) in selection widgets*/
+side_select_trigger_img {
+	
+}
+
+/* The whole selection widget*/
+side_select_widget {
+	
+}
+
+/* A convenient generic style for static text*/
+side_static_text {
+	
+}
+
+/* The section of file upload widgets where information about the file is displayed*/
+side_upload_filename {
+	
+}
+
+/* The section of file upload widgets where a preview of the uploaded file is displayed*/
+side_upload_preview {
+	
+}
+
+/* The whole file upload widget*/
+side_upload_widget {
+	
+}
+
+/* The text in the status bar*/
+side_status_bar {
+	
+}
+
+/* The horizontal lines that help simulate the status bar*/
+side_horizontal_line {
+	
+}
+
+
+
+.full-group  {
+background:none repeat scroll 0 0 transparent;
+border:medium none;
+overflow:auto;
+}
+.label {
+color:#515D6B;
+font-family:Arial,sans-serif;
+font-weight:bold;
+}
+.submit {
+font-family:Arial,sans-serif;
+font-weight:bold;
+color:#000000;
+padding:0 5px;
+}
+.value {
+cursor:pointer;
+font:98% arial,helvetica,clean,sans-serif;
+}
+.group-label {
+background:none repeat scroll 0 0 #E3EAEC;
+border:medium none;
+overflow:auto;
+font-size:120%;
+color:#515D6B;
+}
+div#submitButtons .group-label {
+background:none repeat scroll 0 0 transparent;
+border:medium none;
+overflow:auto;
 }
