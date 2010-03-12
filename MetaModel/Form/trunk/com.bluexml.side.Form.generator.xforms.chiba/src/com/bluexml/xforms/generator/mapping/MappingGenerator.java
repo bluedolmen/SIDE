@@ -479,6 +479,17 @@ public class MappingGenerator extends AbstractGenerator {
 	/**
 	 * Writes a skeleton of the redirection file filled with default values. The file is not created
 	 * if no workflow forms were generated.
+	 * <p/>
+	 * The format is:
+	 * 
+	 * <pre>
+	 * &lt;entry&gt;
+	 *     &lt;name&gt;FORM_NAME&lt;/name&gt;
+	 *     &lt;url&gt;URL&lt;/url&gt;
+	 *     &lt;auto&gt;false&lt;/auto&gt;
+	 *     &lt;addParams&gt;true&lt;/addParams&gt;
+	 * &lt;/entry&gt;
+	 *</pre>
 	 * 
 	 * @throws IOException
 	 */
