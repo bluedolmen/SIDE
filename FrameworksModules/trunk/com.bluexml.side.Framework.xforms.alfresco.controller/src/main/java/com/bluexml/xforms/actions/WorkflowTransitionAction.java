@@ -711,7 +711,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	private GenericClass collectTaskProperties(HashMap<QName, Serializable> properties, Node node,
 			WorkflowTaskInfoBean taskBean, String processId) throws ServletException {
 		String taskTypeName = taskBean.getFormName();
-		String taskTypeId = taskBean.getId();
+		String taskTypeId = taskBean.getTaskId();
 
 		Element root;
 		if (node instanceof Document) {
