@@ -28,6 +28,5 @@ select search form
 </select>
 </p>
 
-<iframe id="xformSearch" src=""
-style="width: 600px; height: 600px;border:none;"></iframe>
+<iframe id="xformSearch" src=""></iframe>
 

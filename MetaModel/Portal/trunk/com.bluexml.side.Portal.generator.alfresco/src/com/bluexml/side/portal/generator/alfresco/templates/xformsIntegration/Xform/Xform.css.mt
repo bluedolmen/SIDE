@@ -6,18 +6,10 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 
 <%-- Templates creation --%>
 <%script type="Portal" name="createTemplates"%>
-<%getProperty("alf.share.paths.core.webapp.app-components-root")%>/facetMap/facetMap.css
+<%getProperty("alf.share.paths.core.webapp.app-components-root")%>/Xform/Xform.css
 <%script type="Portal" name="alfrescoGenerator" file="<%createTemplates%>" post="trim()"%>
-#facetsContainer {
-	width: 300px;
-	height: 1000px;
-	border: none;
-}
-
-#resultsContainer {
+#xformEdit {
 	width: 900px;
-	height: 600px;
-	border: none;
-	position: absolute;
-	margin :8px;
+	height: 1000px;
+	border:none;
 }

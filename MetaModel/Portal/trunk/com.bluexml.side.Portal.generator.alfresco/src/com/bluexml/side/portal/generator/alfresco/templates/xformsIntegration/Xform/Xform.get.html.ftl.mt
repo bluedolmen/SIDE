@@ -21,7 +21,7 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 <#if<%}else{%>
 <#elseif<%}%> form.type == "<%filter("form.FormClass").real_class.getPrefixedQName()%>" >
 <iframe src="<%getXFORMURL()%>/xforms?type=<%id%>&id=${nodeRef}&formType=form&nextPageSubmit=<%getSHAREURL()%>/edit-metadataCallBack.html"
-style="width: 600px; height: 600px;border:none;"></iframe>
+ id="xformEdit"></iframe>
 <%if (current() == current("PortletInternal").form.forms.nLast()){%>
 </#if>
 <%}%>
