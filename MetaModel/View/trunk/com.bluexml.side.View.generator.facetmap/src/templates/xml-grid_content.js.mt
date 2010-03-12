@@ -46,7 +46,7 @@ var doc = document.getElementById("data");
            	{header: "<%mapTo.filter("clazz.Attribute").getLabel()%>", width: 160, dataIndex: '<%mapTo.filter("clazz.Attribute").getNamedModelElementQName()%>', sortable: true}<%if (i() < current("FacetMap").getInnerView().getFields().nSize() -1){%>,<%}%>
         <%}%>
         ],
-        renderTo:'example-grid',
+        renderTo:'extjs-grid',
         width:'auto',
         height:200
     });

@@ -23,15 +23,15 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 		<script type="text/javascript" src="/facetmap/ext-3.1.1/ext-all.js"><xsl:comment></xsl:comment></script>
 
 		<script type="text/javascript" src="/facetmap/xsl/display/includes/xml-grid_<%name%>.js"><xsl:comment></xsl:comment></script>
-		<link rel="stylesheet" type="text/css" href="/facetmap/ext-3.1.1/examples/grid/grid-examples.css" />
+		<!--link rel="stylesheet" type="text/css" href="/facetmap/ext-3.1.1/examples/grid/grid-examples.css" /-->
 
 		<!-- Common Styles for the examples -->
-		<link rel="stylesheet" type="text/css" href="/facetmap/ext-3.1.1/examples/shared/examples.css" />
+		<!--link rel="stylesheet" type="text/css" href="/facetmap/ext-3.1.1/examples/shared/examples.css" /-->
 
-		<script type="text/javascript" src="/facetmap/ext-3.1.1/examples/shared/examples.js"><xsl:comment></xsl:comment></script>
+		<!--script type="text/javascript" src="/facetmap/ext-3.1.1/examples/shared/examples.js"><xsl:comment></xsl:comment></script-->
 		<!-- EXAMPLES -->
 
-		<div id="example-grid"></div>
+		<div id="extjs-grid"></div>
 
 		<div style="display: none;">
 			<Items id="data">
