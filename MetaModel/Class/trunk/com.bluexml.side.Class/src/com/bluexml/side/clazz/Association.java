@@ -23,11 +23,12 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.clazz.Association#getAssociationType <em>Association Type</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getFirstEnd <em>First End</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getSecondEnd <em>Second End</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.Association#isOrdered <em>Ordered</em>}</li>
  * </ul>
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAssociation()
- * @model annotation="http://www.bluexml.com/OCL reflexiveAssociationMustHaveRole='if (self.firstEnd.oclIsTypeOf(Clazz) and self.secondEnd.oclIsTypeOf(Clazz)) then\n( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))\nelse\ntrue\nendif' MinAndMaxTarget='( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )' MinAndMaxSource='( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' SourceNull='self.firstEnd.linkedClass->notEmpty()' TargetNull='self.secondEnd.linkedClass->notEmpty()' AtLeastOneNavigableEdge='(firstEnd.navigable or secondEnd.navigable)' ClassCantBeReferencedbyTwoSameNameAssociation='self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1' IfAggregationOrCompositionThenUnidirectionalAssociation='(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )' twoWayNavigation='(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name <> \'\' and self.secondEnd.name <> \'\')' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true'"
+ * @model annotation="http://www.bluexml.com/OCL reflexiveAssociationMustHaveRole='if (self.firstEnd.oclIsTypeOf(Clazz) and self.secondEnd.oclIsTypeOf(Clazz)) then\n( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))\nelse\ntrue\nendif' MinAndMaxTarget='( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )' MinAndMaxSource='( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' SourceNull='self.firstEnd.linkedClass->notEmpty()' TargetNull='self.secondEnd.linkedClass->notEmpty()' AtLeastOneNavigableEdge='(firstEnd.navigable or secondEnd.navigable)' ClassCantBeReferencedbyTwoSameNameAssociation='if (self.getSource()->first().oclIsTypeOf(Aspect)) then\r\tAssociation.allInstances()->select(a | a.getSource() = self.getSource())->asSet()->select(a:Association|a.name = self.name)->size() = 1\relse\r\tself.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1\rendif' IfAggregationOrCompositionThenUnidirectionalAssociation='(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )' twoWayNavigation='(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name <> \'\' and self.secondEnd.name <> \'\')' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='reflexiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation doubleNavigable noSpecialChracters' warning='twoWayNavigation'"
  * @generated
  */
@@ -118,6 +119,32 @@ public interface Association extends TitledNamedClassModelElement {
 	 * @generated
 	 */
 	void setSecondEnd(AssociationEnd value);
+
+	/**
+	 * Returns the value of the '<em><b>Ordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ordered</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ordered</em>' attribute.
+	 * @see #setOrdered(boolean)
+	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociation_Ordered()
+	 * @model
+	 * @generated
+	 */
+	boolean isOrdered();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.clazz.Association#isOrdered <em>Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ordered</em>' attribute.
+	 * @see #isOrdered()
+	 * @generated
+	 */
+	void setOrdered(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

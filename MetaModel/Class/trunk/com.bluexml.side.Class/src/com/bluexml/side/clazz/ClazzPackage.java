@@ -762,13 +762,22 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION__SECOND_END = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__ORDERED = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Association</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int ASSOCIATION_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -1755,6 +1764,17 @@ public interface ClazzPackage extends EPackage {
 	EReference getAssociation_SecondEnd();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#isOrdered <em>Ordered</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ordered</em>'.
+	 * @see com.bluexml.side.clazz.Association#isOrdered()
+	 * @see #getAssociation()
+	 * @generated
+	 */
+	EAttribute getAssociation_Ordered();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Attribute <em>Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2228,6 +2248,14 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ASSOCIATION__SECOND_END = eINSTANCE.getAssociation_SecondEnd();
+
+		/**
+		 * The meta object literal for the '<em><b>Ordered</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSOCIATION__ORDERED = eINSTANCE.getAssociation_Ordered();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.AttributeImpl <em>Attribute</em>}' class.

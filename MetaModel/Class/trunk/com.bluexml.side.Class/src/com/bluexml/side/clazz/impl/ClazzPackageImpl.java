@@ -370,6 +370,15 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAssociation_Ordered() {
+		return (EAttribute)associationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAttribute() {
 		return attributeEClass;
 	}
@@ -674,6 +683,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEAttribute(associationEClass, ASSOCIATION__ASSOCIATION_TYPE);
 		createEReference(associationEClass, ASSOCIATION__FIRST_END);
 		createEReference(associationEClass, ASSOCIATION__SECOND_END);
+		createEAttribute(associationEClass, ASSOCIATION__ORDERED);
 
 		attributeEClass = createEClass(ATTRIBUTE);
 		createEAttribute(attributeEClass, ATTRIBUTE__TYP);
@@ -840,6 +850,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEAttribute(getAssociation_AssociationType(), this.getAssociationType(), "associationType", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociation_FirstEnd(), this.getAssociationEnd(), null, "firstEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociation_SecondEnd(), this.getAssociationEnd(), null, "secondEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssociation_Ordered(), ecorePackage.getEBoolean(), "ordered", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(associationEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAssociation(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1129,7 +1140,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "SourceNull", "self.firstEnd.linkedClass->notEmpty()",
 			 "TargetNull", "self.secondEnd.linkedClass->notEmpty()",
 			 "AtLeastOneNavigableEdge", "(firstEnd.navigable or secondEnd.navigable)",
-			 "ClassCantBeReferencedbyTwoSameNameAssociation", "if (self.getSource()->first().oclIsTypeOf(Aspect)) then Association.allInstances()->select(a | a.getSource() = self.getSource())->asSet()->select(a:Association|a.name = self.name)->size() = 1 else self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1 endif",
+			 "ClassCantBeReferencedbyTwoSameNameAssociation", "if (self.getSource()->first().oclIsTypeOf(Aspect)) then\r\tAssociation.allInstances()->select(a | a.getSource() = self.getSource())->asSet()->select(a:Association|a.name = self.name)->size() = 1\relse\r\tself.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1\rendif",
 			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )",
 			 "twoWayNavigation", "(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name <> \'\' and self.secondEnd.name <> \'\')",
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"

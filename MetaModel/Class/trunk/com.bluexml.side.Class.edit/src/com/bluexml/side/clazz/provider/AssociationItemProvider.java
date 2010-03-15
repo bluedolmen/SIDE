@@ -64,6 +64,7 @@ public class AssociationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addAssociationTypePropertyDescriptor(object);
+			addOrderedPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -86,6 +87,28 @@ public class AssociationItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Ordered feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOrderedPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Association_ordered_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Association_ordered_feature", "_UI_Association_type"),
+				 ClazzPackage.Literals.ASSOCIATION__ORDERED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -159,6 +182,7 @@ public class AssociationItemProvider
 
 		switch (notification.getFeatureID(Association.class)) {
 			case ClazzPackage.ASSOCIATION__ASSOCIATION_TYPE:
+			case ClazzPackage.ASSOCIATION__ORDERED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ClazzPackage.ASSOCIATION__FIRST_END:

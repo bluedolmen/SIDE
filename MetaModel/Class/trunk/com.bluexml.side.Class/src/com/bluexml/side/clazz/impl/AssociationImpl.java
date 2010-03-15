@@ -48,6 +48,7 @@ import org.eclipse.ocl.expressions.OCLExpression;
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getAssociationType <em>Association Type</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getFirstEnd <em>First End</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getSecondEnd <em>Second End</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#isOrdered <em>Ordered</em>}</li>
  * </ul>
  * </p>
  *
@@ -93,6 +94,26 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * @ordered
 	 */
 	protected AssociationEnd secondEnd;
+
+	/**
+	 * The default value of the '{@link #isOrdered() <em>Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ORDERED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOrdered() <em>Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean ordered = ORDERED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -218,6 +239,27 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION__SECOND_END, newSecondEnd, newSecondEnd));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isOrdered() {
+		return ordered;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOrdered(boolean newOrdered) {
+		boolean oldOrdered = ordered;
+		ordered = newOrdered;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION__ORDERED, oldOrdered, ordered));
 	}
 
 	/**
@@ -434,6 +476,8 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 				return getFirstEnd();
 			case ClazzPackage.ASSOCIATION__SECOND_END:
 				return getSecondEnd();
+			case ClazzPackage.ASSOCIATION__ORDERED:
+				return isOrdered();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -454,6 +498,9 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 				return;
 			case ClazzPackage.ASSOCIATION__SECOND_END:
 				setSecondEnd((AssociationEnd)newValue);
+				return;
+			case ClazzPackage.ASSOCIATION__ORDERED:
+				setOrdered((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -476,6 +523,9 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 			case ClazzPackage.ASSOCIATION__SECOND_END:
 				setSecondEnd((AssociationEnd)null);
 				return;
+			case ClazzPackage.ASSOCIATION__ORDERED:
+				setOrdered(ORDERED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -494,6 +544,8 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 				return firstEnd != null;
 			case ClazzPackage.ASSOCIATION__SECOND_END:
 				return secondEnd != null;
+			case ClazzPackage.ASSOCIATION__ORDERED:
+				return ordered != ORDERED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -510,6 +562,8 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (associationType: ");
 		result.append(associationType);
+		result.append(", ordered: ");
+		result.append(ordered);
 		result.append(')');
 		return result.toString();
 	}
