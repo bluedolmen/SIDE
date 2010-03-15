@@ -11,6 +11,7 @@ import org.jdom.Element;
 
 import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableFormContainer;
+import com.bluexml.xforms.generator.forms.rendered.RenderedLine;
 import com.bluexml.xforms.generator.forms.rendered.RenderedRepeater;
 import com.bluexml.xforms.generator.forms.rendered.RenderedTabContainer;
 import com.bluexml.xforms.messages.MsgId;
@@ -88,9 +89,12 @@ public abstract class Renderable {
 
 	private boolean inWorkflowForm;
 
-	/** A style for the surrounding div*/
+	/**
+	 * A style for the surrounding div when this renderable is included as a child in a
+	 * {@link RenderedLine}
+	 */
 	private String divStyle = null;
-	
+
 	/**
 	 * Instantiates a new renderable.
 	 */
@@ -329,7 +333,8 @@ public abstract class Renderable {
 	 */
 	protected void applyStyle(Rendered rendered, String style) {
 		if (StringUtils.trimToNull(style) != null) {
-			Element divStyle = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+			Element divStyle = XFormsGenerator
+					.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 			Element nestedElement = rendered.getXformsElement();
 			divStyle.setAttribute("class", style);
 			divStyle.addContent(nestedElement);
@@ -387,7 +392,8 @@ public abstract class Renderable {
 	}
 
 	/**
-	 * @param divStyle the divStyle to set
+	 * @param divStyle
+	 *            the divStyle to set
 	 */
 	protected void setDivStyle(String divStyle) {
 		this.divStyle = divStyle;

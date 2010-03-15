@@ -123,4 +123,13 @@ public class RenderableSEdit extends AbstractRenderable {
 
 		return rendered;
 	}
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.generator.forms.Renderable#getDivStyle()
+	 */
+	@Override
+	public String getDivStyle() {
+		return MsgId.INT_CSS_SELECT_TRIGGER_BUTTON.getText();
+	}
+	
+
 }

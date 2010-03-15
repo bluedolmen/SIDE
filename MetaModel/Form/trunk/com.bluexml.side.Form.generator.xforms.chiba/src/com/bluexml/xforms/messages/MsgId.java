@@ -175,7 +175,9 @@ public enum MsgId {
 	INT_CSS_SELECT_LIST					("side_select_list"),
 	INT_CSS_SELECT_OUTPUT_ZONE			("side_select_output_zone"),
 	INT_CSS_SELECT_SEARCH_ZONE			("side_select_search_zone"),
-	INT_CSS_SELECT_SELECTED_ITEMS		("side_select_selected_items"),
+	INT_CSS_SELECT_SELECTED_ITEM		("side_select_selected_item"), // Nx1 widget
+	INT_CSS_SELECT_SELECTED_ITEMS		("side_select_selected_items"), // NxN widget
+	INT_CSS_SELECT_TRIGGER_BUTTON		("side_select_trigger_button"),
 	INT_CSS_SELECT_TRIGGER_IMG			("side_select_trigger_img"),
 	INT_CSS_SELECT_WIDGET				("side_select_widget"),
 	INT_CSS_STATIC_TEXT					("side_static_text"),

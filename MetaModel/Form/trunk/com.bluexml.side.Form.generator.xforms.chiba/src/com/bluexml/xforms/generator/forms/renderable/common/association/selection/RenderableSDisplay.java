@@ -79,7 +79,7 @@ public class RenderableSDisplay extends AbstractRenderable {
 	 */
 	@Override
 	public String getDivStyle() {
-		return MsgId.INT_CSS_SELECT_SELECTED_ITEMS.getText();
+		return MsgId.INT_CSS_SELECT_SELECTED_ITEM.getText();
 	}
 	
 	
