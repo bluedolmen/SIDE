@@ -672,7 +672,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_B3zttZuPEd68JO4ATwwBpA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_B30UwJuPEd68JO4ATwwBpA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//FormGroupPresentationType/Tabbed"/>
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//FormGroupPresentationType/tabbed"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_B30UwZuPEd68JO4ATwwBpA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_B30UwpuPEd68JO4ATwwBpA" type="2006">

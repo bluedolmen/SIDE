@@ -462,7 +462,7 @@
         <details key="documentation" value="Definition: The 'vertical' value displays elements in a vertical way. The label of the form group will not appear."/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="Tabbed" value="3">
+    <eLiterals name="tabbed" value="3">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'Tabbed' option displays elements in a tab."/>
       </eAnnotations>

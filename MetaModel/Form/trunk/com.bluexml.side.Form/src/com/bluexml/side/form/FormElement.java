@@ -36,7 +36,7 @@ import com.bluexml.side.clazz.ClassModelElement;
  * @see com.bluexml.side.form.FormPackage#getFormElement()
  * @model abstract="true"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='noSpecialCharacters validRef'"
- *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.id.regexMatch(\'[\\w]*\') = true' validRef='if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.getAllAttributes()->excludes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif'"
+ *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.id.regexMatch(\'[\\w]*\') = true' validRef='if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif'"
  * @generated
  */
 public interface FormElement extends ModelElement {

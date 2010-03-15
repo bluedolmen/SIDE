@@ -61,7 +61,7 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	TABBED(3, "Tabbed", "Tabbed"), /**
+	TABBED(3, "tabbed", "tabbed"), /**
 	 * The '<em><b>Borderless</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -137,7 +137,7 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * Definition: The 'Tabbed' option displays elements in a tab.
 	 * <!-- end-model-doc -->
 	 * @see #TABBED
-	 * @model name="Tabbed"
+	 * @model name="tabbed"
 	 * @generated
 	 * @ordered
 	 */
