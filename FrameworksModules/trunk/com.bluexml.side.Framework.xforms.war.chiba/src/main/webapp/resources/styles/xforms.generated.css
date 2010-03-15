@@ -85,7 +85,7 @@ div.dojoTab {
 
 .input label,.textarea label,.full-group label {
 	height: 1.3em;
-	width: 150px;
+	width: 180px;
 	padding-right: 5px;
 	text-align: right;
 	margin-top: 4px;
@@ -120,20 +120,31 @@ div.side_select_widget .submit { /* the create button*/
 	margin-left: 170px;
 }
 
-div.side_select_widget label {
-	font-weight: bold;
-}
-
 div.side_select_list select {
-	min-width: 150px;
+	width: 320px;
+	overflow-x: scroll;
+	overflow: -moz-scrollbars-horizontal;
 }
 
-div.side_select_selected_items {
+div.side_select_selected_items,div.side_select_selected_item {
 	border-style: solid;
 	border-width: 1px;
 	border-color: #DDD;
 	min-width: 150px;
-	min-height: 8px;
+	margin-top: 12px;
+	margin-left: 10px;
+}
+
+div.side_select_selected_items label {
+	display: none;
+}
+
+div.side_select_selected_item label {
+	display: none;
+}
+
+div.side_select_trigger_button {
+	padding-top: 15px;
 }
 
 div.side_select_search_zone label {
@@ -141,7 +152,7 @@ div.side_select_search_zone label {
 }
 
 div.side_select_output_zone label {
-	width: 75px;
+	width: 90px;
 }
 
 div.side_select_selected_item label {
