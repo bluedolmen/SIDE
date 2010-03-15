@@ -995,6 +995,13 @@ public class MappingToolCommon {
 		return modelChoiceType.isInline();
 	}
 
+	protected boolean isOrdered(ModelChoiceType modelChoiceType) {
+		if (modelChoiceType.isOrdered() == null) {
+			return false;
+		}
+		return modelChoiceType.isOrdered();
+	}
+	
 	/*
 	 * WorkflowTaskType
 	 */

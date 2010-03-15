@@ -145,6 +145,7 @@
 					<xsd:element name="realClass" type="classType" />
 					<xsd:element maxOccurs="unbounded" name="target" type="formType" />
 				</xsd:sequence>
+				<xsd:attribute name="ordered" type="xsd:boolean" use="optional" />
 				<xsd:attribute name="inline" type="xsd:boolean" use="optional" />
 				<xsd:attribute name="fieldSize" type="xsd:string" use="optional" />
 			</xsd:extension>

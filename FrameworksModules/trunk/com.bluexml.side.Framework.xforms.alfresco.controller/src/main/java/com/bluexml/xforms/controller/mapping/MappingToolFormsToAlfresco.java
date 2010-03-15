@@ -433,6 +433,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 		GenericAssociation association = alfrescoObjectFactory.createGenericAssociation();
 		association.setQualifiedName(associationAlfrescoName);
 		association.setAction(AssociationActions.ADD);
+		association.setOrdered(isOrdered(modelChoiceType));
 
 		GenericClassReference alfTarget = alfrescoObjectFactory.createGenericClassReference();
 		alfTarget.setQualifiedName(targetAlfrescoName);

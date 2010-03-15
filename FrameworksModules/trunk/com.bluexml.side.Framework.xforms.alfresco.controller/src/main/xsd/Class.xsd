@@ -56,6 +56,7 @@
 		</xs:sequence>
 		<xs:attribute name="qualifiedName" use="required" />
 		<xs:attribute name="action" type="AssociationActions" />
+		<xs:attribute name="ordered" type="xs:boolean" />
 	</xs:complexType>
 	<xs:complexType name="GenericClassReference">
 		<xs:simpleContent>
@@ -70,7 +71,7 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="DELETE"></xs:enumeration>
 			<xs:enumeration value="DELETE_ALL"></xs:enumeration>
-			<xs:enumeration value="ADD_DELETE_OTHER"></xs:enumeration>
+			<!--			<xs:enumeration value="ADD_DELETE_OTHER"></xs:enumeration>-->
 			<xs:enumeration value="ADD"></xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
