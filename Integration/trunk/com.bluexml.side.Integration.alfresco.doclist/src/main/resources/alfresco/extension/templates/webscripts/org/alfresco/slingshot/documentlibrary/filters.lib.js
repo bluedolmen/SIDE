@@ -258,16 +258,16 @@ var Filters =
 					case "icontains":
 						valuePart="*"+values[0]+"*";
 						break;
-					case "startsWith":
+					case "startswith":
 						valuePart=values[0]+"*";
 						break;
-					case "istartsWith":
+					case "istartswith":
 						valuePart=values[0]+"*";
 						break;
-					case "endsWith":
+					case "endswith":
 						valuePart="*"+values[0];
 						break;
-					case "iendsWith":
+					case "iendswith":
 						valuePart="*"+values[0];
 						break;
 					case "empty":
