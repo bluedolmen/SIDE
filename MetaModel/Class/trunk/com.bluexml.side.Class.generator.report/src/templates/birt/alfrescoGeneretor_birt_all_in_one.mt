@@ -63,12 +63,12 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
     </parameters>
     <data-sources>
     	<oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="Data Source all" id="100">
-            <property name="FILELIST"><%getAlfrescoURL()%>/service/com/bluexml/side/contentType/all.xml</property>
+            <property name="FILELIST"><%getAlfrescoURL()%>/service/com/bluexml/side/contentType/all.xml?guest=true</property>
         </oda-data-source>
     <%for (getAllClasses()){%>
         <oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="Data Source <%name%>" id="10<%i()+1%>">
             <text-property name="displayName"></text-property>
-            <property name="FILELIST"><%getAlfrescoURL()%>/service/com/bluexml/side/contentType/<%getQualifiedName()%>.xml</property>
+            <property name="FILELIST"><%getAlfrescoURL()%>/service/com/bluexml/side/contentType/<%getQualifiedName()%>.xml?guest=true</property>
         </oda-data-source>
     <%}%>
     </data-sources>
@@ -891,7 +891,7 @@ table0#-TNAME-#table0#:#[/records/items/item]#:#{size;STRING;/size},{createdDate
                     </cell>
                 </row>
         </grid>
-		<grid id="31">
+		<!--grid id="31">
             <property name="width">100%</property>
             <list-property name="visibility">
                 <structure>
@@ -963,7 +963,7 @@ retour;</expression>
                     </data>
                 </cell>
             </row>
-        </grid>
+        </grid-->
         <grid id="44">
             <property name="width">100%</property>
             <list-property name="visibility">

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
 import com.bluexml.side.util.generator.packager.WarPatchPackager;
@@ -19,7 +20,7 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 	public static String MMUri = "http://www.kerblue.org/class/1.0"; //$NON-NLS-1$
 	public static String BIRT_WEBAPP_KEY = "birt.webapp"; //$NON-NLS-1$
 	public static final String CONFIGURATION_PARAMETER_ALFRESCO_HOME = "alfresco.url"; //$NON-NLS-1$
-
+	public static String GENERATOR_PARAMETER_WEBSCRIPT_REPORT_RUNAS = "alfresco.report.runas"; //$NON-NLS-1$
 
 	public ReportGenerator(){
 		techVersion = "Birt_2.3.x"; //$NON-NLS-1$
@@ -90,6 +91,15 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 		IFile package_ = pkger.buildPackage();
 		pkgs.add(package_);
 		return pkgs;
+	}
+	
+	public String getRunasforReport(EObject o) {
+		String result = getGenerationParameter(GENERATOR_PARAMETER_WEBSCRIPT_REPORT_RUNAS);
+		if (result == null || result.equals("")) {
+			result = "admin";
+			System.out.println(GENERATOR_PARAMETER_WEBSCRIPT_REPORT_RUNAS+", default value used :"+result);
+		}
+		return result;
 	}
 
 }

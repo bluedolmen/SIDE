@@ -12,6 +12,11 @@
             <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco">
               <optionRef optionId="alfresco.webscript.report" />
             </mustBeChecked>
+            <configurationParameter
+                  documentation="account to use when getting documents from alfresco"
+                  key="alfresco.report.runas"
+                  label="report as">
+            </configurationParameter>
           </generatorVersion>
         </technologyVersion>
       </technology>
