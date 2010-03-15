@@ -13,6 +13,7 @@ import org.alfresco.service.cmr.security.PermissionService;
 import org.alfresco.service.namespace.QName;
 
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
+import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.messages.MsgId;
 import com.thoughtworks.xstream.XStream;
 
@@ -41,7 +42,8 @@ public class SystemAgent {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Set<String> getAllAuthoritiesAsGroupsOrUsers(boolean asGroups) {
+	public Set<String> getAllAuthoritiesAsGroupsOrUsers(AlfrescoTransaction transaction,
+			boolean asGroups) {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("serviceName", "AuthorityDAO");
@@ -56,7 +58,7 @@ public class SystemAgent {
 		parameters.put("methodParams", xstream.toXML(paramList));
 		Set<String> result;
 		try {
-			String resultStr = controller.requestString(null, parameters,
+			String resultStr = controller.requestString(transaction, parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (Set<String>) xstream.fromXML(resultStr);
 		} catch (ServletException e) {
@@ -72,7 +74,7 @@ public class SystemAgent {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Set<String> getContainingGroups(String userName) {
+	public Set<String> getContainingGroups(AlfrescoTransaction transaction,String userName) {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("serviceName", "AuthorityDAO");
@@ -85,7 +87,7 @@ public class SystemAgent {
 		parameters.put("methodParams", xstream.toXML(paramList));
 		Set<String> result;
 		try {
-			String resultStr = controller.requestString(null, parameters,
+			String resultStr = controller.requestString(transaction, parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (Set<String>) xstream.fromXML(resultStr);
 		} catch (ServletException e) {
@@ -101,7 +103,7 @@ public class SystemAgent {
 	 * @param propertyName
 	 * @return
 	 */
-	public String getNodeProperty(NodeRef node, QName propertyName) {
+	public String getNodeProperty(AlfrescoTransaction transaction, NodeRef node, QName propertyName) {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("serviceName", "NodeService");
 		parameters.put("methodName", "getProperty");
@@ -112,7 +114,7 @@ public class SystemAgent {
 		parameters.put("methodParams", xstream.toXML(paramList));
 		String result;
 		try {
-			result = (String) xstream.fromXML(controller.requestString(null, parameters,
+			result = (String) xstream.fromXML(controller.requestString(transaction, parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE));
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -126,7 +128,7 @@ public class SystemAgent {
 	 * @param groupName
 	 * @return
 	 */
-	public NodeRef getNodeRefForGroup(String groupName) {
+	public NodeRef getNodeRefForGroup(AlfrescoTransaction transaction,String groupName) {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("serviceName", "AuthorityDAO");
@@ -137,7 +139,7 @@ public class SystemAgent {
 		parameters.put("methodParams", xstream.toXML(paramList));
 		NodeRef result;
 		try {
-			String resultStr = controller.requestString(null, parameters,
+			String resultStr = controller.requestString(transaction, parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (NodeRef) xstream.fromXML(resultStr);
 		} catch (ServletException e) {
@@ -152,7 +154,7 @@ public class SystemAgent {
 	 * @param userName
 	 * @return
 	 */
-	public NodeRef getNodeRefForUser(String userName) {
+	public NodeRef getNodeRefForUser(AlfrescoTransaction transaction,String userName) {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("serviceName", "AuthorityDAO");
 		parameters.put("methodName", "getAuthorityNodeRefOrNull");
@@ -162,7 +164,7 @@ public class SystemAgent {
 		parameters.put("methodParams", xstream.toXML(paramList));
 		NodeRef result;
 		try {
-			String resultStr = controller.requestString(null, parameters,
+			String resultStr = controller.requestString(transaction, parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (NodeRef) xstream.fromXML(resultStr);
 		} catch (ServletException e) {
@@ -178,7 +180,7 @@ public class SystemAgent {
 	 *            a full node Id (with protocol and store)
 	 * @return
 	 */
-	public QName getNodeType(String dataId) {
+	public QName getNodeType(AlfrescoTransaction transaction, String dataId) {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("serviceName", "NodeService");
@@ -192,7 +194,7 @@ public class SystemAgent {
 
 		QName result;
 		try {
-			String requestString = controller.requestString(null, parameters,
+			String requestString = controller.requestString(transaction, parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_SERVICE);
 			result = (QName) xstream.fromXML(requestString);
 		} catch (Exception e) {

@@ -410,47 +410,31 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	//
 	//
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public Set<String> systemGetAllAuthoritiesAsGroupsOrUsers(boolean asGroups) {
-		return systemAgent.getAllAuthoritiesAsGroupsOrUsers(asGroups);
+	public Set<String> systemGetAllAuthoritiesAsGroupsOrUsers(AlfrescoTransaction transaction,
+			boolean asGroups) {
+		return systemAgent.getAllAuthoritiesAsGroupsOrUsers(transaction, asGroups);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public Set<String> systemGetContainingGroups(String userName) {
-		return systemAgent.getContainingGroups(userName);
+	public Set<String> systemGetContainingGroups(AlfrescoTransaction transaction, String userName) {
+		return systemAgent.getContainingGroups(transaction, userName);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public String systemGetNodeProperty(NodeRef node, QName propertyName) {
-		return systemAgent.getNodeProperty(node, propertyName);
+	public String systemGetNodeProperty(AlfrescoTransaction transaction, NodeRef node,
+			QName propertyName) {
+		return systemAgent.getNodeProperty(transaction, node, propertyName);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public NodeRef systemGetNodeRefForUser(String userName) {
-		return systemAgent.getNodeRefForUser(userName);
+	public NodeRef systemGetNodeRefForUser(AlfrescoTransaction transaction, String userName) {
+		return systemAgent.getNodeRefForUser(transaction, userName);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public NodeRef systemGetNodeRefForGroup(String groupName) {
+	public NodeRef systemGetNodeRefForGroup(AlfrescoTransaction transaction, String groupName) {
 
-		return systemAgent.getNodeRefForGroup(groupName);
+		return systemAgent.getNodeRefForGroup(transaction, groupName);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public QName systemGetNodeType(String dataId) {
-		return systemAgent.getNodeType(patchDataId(dataId));
+	public QName systemGetNodeType(AlfrescoTransaction transaction, String dataId) {
+		return systemAgent.getNodeType(transaction, patchDataId(dataId));
 	}
 
 	//
@@ -501,8 +485,10 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 *            exception of default values [from in the model] and initial values [from URL
 	 *            parameters]. If non null, the form is filled with values from the object.
 	 * @param formIsReadOnly
+	 *            whether the form is read only, which has an influence on the rendering of some
+	 *            fields
 	 * 
-	 * @return the form
+	 * @return the form instance
 	 * 
 	 * @throws ServletException
 	 */
@@ -511,11 +497,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		return mappingAgent.getInstanceForm(transaction, formName, id, formIsReadOnly);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public Document getInstanceWorkflow(String formName) {
-		return mappingAgent.getInstanceWorkflow(formName);
+	public Document getInstanceWorkflow(AlfrescoTransaction transaction, String formName) {
+		return mappingAgent.getInstanceWorkflow(transaction, formName);
 	}
 
 	/* (non-Javadoc)
@@ -579,15 +562,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		String fsPath;
 		this.config = config;
 
-		// user name and password
+		// user name and password. We don't provide hard coded defaults for these.
 		USER_NAME = config.getProperty(MsgId.KEY_USER_NAME.getText());
-		if (StringUtils.trimToNull(USER_NAME) == null) {
-			USER_NAME = "admin";
-		}
 		USER_PSWD = config.getProperty(MsgId.KEY_USER_PSWD.getText());
-		if (StringUtils.trimToNull(USER_PSWD) == null) {
-			USER_PSWD = "admin";
-		}
 
 		// temp dir for file system uploads
 		fsPath = config.getProperty(MsgId.KEY_TEMP_DIRECTORY.getText());
@@ -596,7 +573,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		}
 		TEMP_DIRECTORY = new File(fsPath);
 
-		// file system archive folder for uploads, if none, default to current folder
+		// file system archive folder for uploads. If none, default to predefined folder.
 		fsPath = config.getProperty(MsgId.KEY_UPLOAD_DIRECTORY.getText());
 		if (StringUtils.trimToNull(fsPath) == null) {
 			fsPath = "/tmp/uploads"; // TODO: check on all platforms
@@ -775,7 +752,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		return CHECK_MATCH_DATA_FORM;
 	}
 
-	public String getParamLoginUserName(Map<String, String> initParams) {
+	public String getParamUserName(Map<String, String> initParams) {
 		String result = null;
 		if (initParams != null) {
 			result = initParams.get(MsgId.PARAM_USER_NAME.getText());
@@ -783,7 +760,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		return (StringUtils.trimToNull(result) == null) ? USER_NAME : result;
 	}
 
-	public String getParamLoginUserPswd(Map<String, String> initParams) {
+	public String getParamUserPswd(Map<String, String> initParams) {
 		String result = null;
 		if (initParams != null) {
 			result = initParams.get(MsgId.PARAM_USER_PSWD.getText());
@@ -972,8 +949,6 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @return the captions
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	@SuppressWarnings("all")
 	public List<String> getCaptions(AlfrescoTransaction transaction, List<String> ids)
@@ -1032,8 +1007,6 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @return the enum
 	 * 
 	 * @throws ServletException
-	 *             the alfresco controller exception
-	 * @throws ServletException
 	 */
 	public Node getDynamicEnum(AlfrescoTransaction transaction, String type, String filterParent,
 			String filterData, String query, boolean limit) throws ServletException {
@@ -1083,8 +1056,6 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * 
 	 * @return the list
 	 * 
-	 * @throws ServletException
-	 *             the alfresco controller exception
 	 * @throws ServletException
 	 */
 	public Node getList(AlfrescoTransaction transaction, String type, String query,
@@ -1215,12 +1186,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	public String requestString(AlfrescoTransaction transaction, Map<String, String> parameters,
 			MsgId opCode) throws ServletException {
 		String result = null;
-		AlfrescoTransaction lTransaction = transaction;
-		if (lTransaction == null) {
-			lTransaction = new AlfrescoTransaction(this);
-		}
 		try {
-			PostMethod post = requestPost(lTransaction, parameters, opCode);
+			PostMethod post = requestPost(transaction, parameters, opCode);
 			result = StringUtils.trim(post.getResponseBodyAsString());
 		} catch (ConnectException e) {
 			throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
@@ -1228,7 +1195,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			if (logger.isErrorEnabled()) {
 				logger.error("Caught exception while requesting string from Alfresco", e);
 			}
-			throw new ServletException(MsgPool.getMsg(MsgId.MSG_DEFAULT_ERROR_MSG));
+			throw new ServletException(MsgPool.getMsg(MsgId.MSG_ERROR_DEFAULT_MSG));
 		}
 		if (result != null && result.startsWith("<exception>")) {
 			throw new AlfrescoWebscriptException(result);
@@ -1261,11 +1228,13 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 				throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
 			}
 			return null;
+		} catch (ServletException se) {
+			throw se;
 		} catch (Exception e) {
 			if (logger.isErrorEnabled()) {
 				logger.error("Caught exception while requesting document from Alfresco", e);
 			}
-			throw new ServletException(e);
+			throw new ServletException(MsgPool.getMsg(MsgId.MSG_ERROR_DEFAULT_MSG));
 		}
 		if (result != null) {
 			if (StringUtils.equalsIgnoreCase("exception", result.getDocumentElement().getTagName())) {
@@ -1302,11 +1271,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 *             Signals that an I/O exception has occurred.
 	 * @throws HttpException
 	 *             the http exception
-	 * @throws ServletException
 	 * @throws IOException
+	 * @throws ServletException
 	 */
 	private PostMethod requestPost(AlfrescoTransaction transaction, Map<String, String> parameters,
-			MsgId opCode) throws IOException {
+			MsgId opCode) throws IOException, ServletException {
 		if (logger.isTraceEnabled()) {
 			logger.debug("Calling the webscript on Alfresco with request: " + opCode);
 			logger.debug("Parameters : ");
@@ -1322,17 +1291,33 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			}
 		}
 
+		//
+		// security: enforce use of possible access controls on the Alfresco side.
+		if (transaction == null) {
+			throw new ServletException("A transaction is required for webscript requests.");
+		}
+		String legitimateLogin = transaction.getLogin();
+		if (legitimateLogin == null) {
+			legitimateLogin = getParamUserName(transaction.getPage().getInitParams());
+		}
+		if (StringUtils.trimToNull(legitimateLogin) == null) {
+			throw new ServletException(
+					"Cannot complete the action: a user name is required for webscript requests.");
+		}
+
+		//
 		PostMethod post = new PostMethod(ALFRESCO_XFORMS_URL + opCode);
 		Set<Entry<String, String>> entrySet = parameters.entrySet();
 		for (Entry<String, String> entry : entrySet) {
 			post.setParameter(entry.getKey(), entry.getValue());
 		}
 
-		if (StringUtils.trimToNull(transaction.getLogin()) == null) {
-			post.setParameter("username", getParamLoginUserName(transaction.getInitParams()));
-		} else {
-			post.setParameter("username", transaction.getLogin());
-		}
+		// if (StringUtils.trimToNull(transaction.getLogin()) == null) {
+		// post.setParameter("username", getParamLoginUserName(transaction.getInitParams()));
+		// } else {
+		// post.setParameter("username", transaction.getLogin());
+		// }
+		post.setParameter("username", transaction.getLogin());
 
 		post.setParameter("serviceCallerId", "XFormsController");
 		post.setParameter("serviceCallerVersion", "2.0.0");
@@ -1575,13 +1560,13 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @return the new package
 	 * @throws ServletException
 	 */
-	public NodeRef workflowCreatePackage(AlfrescoTransaction transaction, String nodeToAdd,
-			String userName) throws ServletException {
+	public NodeRef workflowCreatePackage(AlfrescoTransaction transaction, String nodeToAdd)
+			throws ServletException {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("content", nodeToAdd);
 		// parameters.put("package", (String) null); // do not set a null value
-		transaction.setLogin(userName);
+
 		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_PACKAGE);
 
 		if (StringUtils.trimToNull(resultId) != null) {
@@ -1595,7 +1580,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * from the list into a map, and creating a transaction if none is given.<br/>
 	 * 
 	 * @param transaction
-	 *            a transaction object. May be null.
+	 *            a transaction object. May NOT be null.
 	 * @param methodName
 	 *            the name of the method to call, case-sensitive.
 	 * @param methodParameters
@@ -1612,11 +1597,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			i++;
 		}
 
-		AlfrescoTransaction realTransaction = transaction;
-		if (realTransaction == null) {
-			realTransaction = new AlfrescoTransaction(this);
-		}
-		return workflowRequestCall(realTransaction, methodName, parameterMaps);
+		return workflowRequestCall(transaction, methodName, parameterMaps);
 	}
 
 	/**
@@ -1662,17 +1643,14 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
 	@SuppressWarnings("unchecked")
-	public List<WorkflowTask> workflowGetCurrentTasks(String instanceId) {
+	public List<WorkflowTask> workflowGetCurrentTasks(String instanceId, AlfrescoTransaction trans) {
 		List<WorkflowTask> result = new Vector<WorkflowTask>();
 		// get the paths from the instance id, which should exist
 		List<WorkflowPath> paths = null;
 		ArrayList<Object> paramList = new ArrayList<Object>();
 		paramList.add(instanceId);
-		paths = (List<WorkflowPath>) workflowRequestWrapper(null, "getWorkflowPaths", paramList);
+		paths = (List<WorkflowPath>) workflowRequestWrapper(trans, "getWorkflowPaths", paramList);
 		if (paths == null) {
 			if (logger.isErrorEnabled()) {
 				logger.error(MsgId.INT_ERR_NULL_WKFLW_INSTANCE_PATHS + instanceId);
@@ -1702,12 +1680,10 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public WorkflowTaskDefinition workflowGetTaskDefinition(String processDefId, String task) {
+	public WorkflowTaskDefinition workflowGetTaskDefinition(String processDefId, String task,
+			AlfrescoTransaction trans) {
 
-		List<WorkflowTaskDefinition> taskDefs = workflowGetTaskDefinitions(processDefId);
+		List<WorkflowTaskDefinition> taskDefs = workflowGetTaskDefinitions(processDefId, trans);
 		for (WorkflowTaskDefinition taskDef : taskDefs) {
 			if (StringUtils.equals(taskDef.id, task)) {
 				return taskDef;
@@ -1716,24 +1692,20 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
 	@SuppressWarnings("unchecked")
-	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId) {
+	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId,
+			AlfrescoTransaction trans) {
 		String methodName = "getTaskDefinitions";
 		List<Object> params = new ArrayList<Object>();
 		params.add(processDefId);
 		List<WorkflowTaskDefinition> workflowRequest = (List<WorkflowTaskDefinition>) workflowRequestWrapper(
-				null, methodName, params);
+				trans, methodName, params);
 		return workflowRequest;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
 	@SuppressWarnings("unchecked")
-	public List<WorkflowInstance> workflowGetWorkflowsForContent(String refStr, boolean onlyActive) {
+	public List<WorkflowInstance> workflowGetWorkflowsForContent(String refStr, boolean onlyActive,
+			AlfrescoTransaction trans) {
 		NodeRef nodeRef = new NodeRef(refStr);
 		String methodName = "getWorkflowsForContent";
 		List<Object> params = new ArrayList<Object>();
@@ -1744,14 +1716,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		return workflowRequest;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public WorkflowDefinition workflowGetWorkflowById(String defId) {
+	public WorkflowDefinition workflowGetWorkflowById(String defId, AlfrescoTransaction trans) {
 		String methodName = "getDefinitionById";
 		List<Object> params = new ArrayList<Object>();
 		params.add(defId);
-		WorkflowDefinition workflowRequest = (WorkflowDefinition) workflowRequestWrapper(null,
+		WorkflowDefinition workflowRequest = (WorkflowDefinition) workflowRequestWrapper(trans,
 				methodName, params);
 		return workflowRequest;
 	}
@@ -1784,8 +1753,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("path", folderPath);
 		// call the webscript
-		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
-		transaction.setLogin(userName);
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+
 		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_MKDIR);
 
 		return resultId;
@@ -1844,7 +1813,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String workflowBuildBlueXMLDefinitionName(String processName) {
+	public String getWorkflowBlueXMLDefinitionName(String processName) {
 		// Used when reacting to a workflow transition action.
 		// e.g. "Evaluation" --> "jbpm$wfbxEvaluation:Evaluation"
 		return "jbpm$" + BLUEXML_WORKFLOW_PREFIX + processName + ":" + processName;
@@ -1853,7 +1822,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String workflowBuildBlueXMLTaskName(String formName) {
+	public String getWorkflowBlueXMLTaskName(String formName) {
 		// e.g. "Evaluation_Annotation" --> "wfbxEvaluation:Annotation"<br/>
 		// NOTE: a duplicate of this function is also defined in MappingGenerator
 		return BLUEXML_WORKFLOW_PREFIX + formName.replace('_', ':');
@@ -1862,7 +1831,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String workflowBuildFormNameFromTask(String taskName) {
+	public String getWorkflowFormNameFromTask(String taskName) {
 		// e.g. "wfbxEvaluation:Annotation" --> "Evaluation_Annotation"<br/>
 		// e.g. "jbpm$wfbxEvaluation:Annotation" --> "Evaluation_Annotation"<br/>
 		String searchString = BLUEXML_WORKFLOW_PREFIX;
@@ -1897,45 +1866,32 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		return mappingAgent.getWorkflowStartTaskFormName(prefix);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
 	@SuppressWarnings("unchecked")
-	public List<WorkflowTask> workflowGetPooledTasks(String userName) {
+	public List<WorkflowTask> workflowGetPooledTasks(String userName, AlfrescoTransaction trans) {
 		String methodName = "getPooledTasks";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(userName);
-		
-		// use the user name for the transaction.
-		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
-		transaction.setLogin(userName);
-		
-		List<WorkflowTask> workflowRequest = (List<WorkflowTask>) workflowRequestWrapper(
-				transaction, methodName, methodParameters);
+
+		List<WorkflowTask> workflowRequest = (List<WorkflowTask>) workflowRequestWrapper(trans,
+				methodName, methodParameters);
 		return workflowRequest;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public WorkflowTask workflowGetTaskById(String taskId) {
+	public WorkflowTask workflowGetTaskById(String taskId, AlfrescoTransaction trans) {
 		String methodName = "getTaskById";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(taskId);
-		WorkflowTask workflowRequest = (WorkflowTask) workflowRequestWrapper(null, methodName,
+		WorkflowTask workflowRequest = (WorkflowTask) workflowRequestWrapper(trans, methodName,
 				methodParameters);
 		return workflowRequest;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
 	@SuppressWarnings("unchecked")
-	public List<NodeRef> workflowGetPackageContents(String taskId) {
+	public List<NodeRef> workflowGetPackageContents(String taskId, AlfrescoTransaction trans) {
 		String methodName = "getPackageContents";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(taskId);
-		List<NodeRef> workflowRequest = (List<NodeRef>) workflowRequestWrapper(null, methodName,
+		List<NodeRef> workflowRequest = (List<NodeRef>) workflowRequestWrapper(trans, methodName,
 				methodParameters);
 		return workflowRequest;
 	}
@@ -2089,7 +2045,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public boolean authenticate(String username, String password) { // PUBLIC-API
-		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, username);
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("username", username);
 		parameters.put("password", password);
@@ -2104,14 +2060,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		return StringUtils.equalsIgnoreCase(result, "success");
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public String getWebscriptHelp() { // PUBLIC-API
+	public String getWebscriptHelp(AlfrescoTransaction transaction) {
 		String result;
 		Map<String, String> parameters = new HashMap<String, String>();
 		try {
-			result = requestString(null, parameters, MsgId.INT_WEBSCRIPT_OPCODE_HELP);
+			result = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_HELP);
 		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
@@ -2135,8 +2088,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getNodeType(String dataId) { // PUBLIC-API
-		QName qname = systemGetNodeType(dataId);
+	public String getNodeType(String dataId, String userName) { // PUBLIC-API
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+		transaction.setLogin(userName);
+
+		QName qname = systemGetNodeType(transaction, dataId);
 		if (qname == null) {
 			return null;
 		}
@@ -2146,18 +2102,18 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getNodeTypeFull(String dataId) { // PUBLIC-API
-		QName qname = systemGetNodeType(dataId);
+	public String getNodeTypeFull(String dataId, String userName) { // PUBLIC-API
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+		transaction.setLogin(userName);
+
+		QName qname = systemGetNodeType(transaction, dataId);
 		if (qname == null) {
 			return null;
 		}
 		return qname.toString();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public String getNodeContentInfo(String nodeId) { // PUBLIC-API
+	public String getNodeContentInfo(AlfrescoTransaction transaction, String nodeId) {
 		if (StringUtils.trimToNull(nodeId) == null) {
 			return "";
 		}
@@ -2166,7 +2122,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		parameters.put("nodeId", nodeId);
 
 		try {
-			request = requestString(null, parameters, MsgId.INT_WEBSCRIPT_OPCODE_NODE_INFO);
+			request = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_NODE_INFO);
 		} catch (ServletException e) {
 			e.printStackTrace();
 			return null;
@@ -2257,7 +2213,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public RedirectionBean workflowGetRedirectionBean(String formName) {
+	public RedirectionBean getWorkflowRedirectionBean(String formName) {
 		return targetTable.get(formName);
 	}
 
@@ -2455,8 +2411,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 */
 	public Document getInstanceForm(String userName, String formName, String id,
 			boolean formIsReadOnly) throws ServletException {
-		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
-		transaction.setLogin(userName);
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
 		return getInstanceForm(transaction, formName, id, formIsReadOnly);
 	}
@@ -2466,8 +2421,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 */
 	public Document getInstanceClass(String userName, String formName, String dataId,
 			boolean formIsReadOnly, boolean applyUserFormats) throws ServletException {
-		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
-		transaction.setLogin(userName);
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
 		return getInstanceClass(transaction, formName, dataId, formIsReadOnly, applyUserFormats);
 	}
@@ -2475,10 +2429,19 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
+	public Document getInstanceWorkflow(String userName, String formName) {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+
+		return getInstanceWorkflow(transaction, formName);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
 	public Document readObjectFromRepository(String userName, String dataId)
 			throws ServletException {
-		AlfrescoTransaction transaction = new AlfrescoTransaction(this);
-		transaction.setLogin(userName);
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+
 		return readObjectFromRepository(transaction, dataId);
 	}
 
@@ -2508,6 +2471,153 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 */
 	public boolean isWorkflowForm(String formName) {
 		return mappingAgent.isWorkflowForm(formName);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public List<WorkflowTask> workflowGetCurrentTasks(String instanceId, String userName) {
+		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
+
+		return workflowGetCurrentTasks(instanceId, trans);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public List<NodeRef> workflowGetPackageContents(String taskId, String userName) {
+		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
+
+		return workflowGetPackageContents(taskId, trans);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public List<WorkflowTask> workflowGetPooledTasks(String managerUserName, String userName) {
+		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
+
+		return workflowGetPooledTasks(userName, trans);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public WorkflowTask workflowGetTaskById(String taskId, String userName) {
+		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
+
+		return workflowGetTaskById(taskId, trans);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public WorkflowTaskDefinition workflowGetTaskDefinition(String processDefId, String task,
+			String userName) {
+		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
+
+		return workflowGetTaskDefinition(processDefId, task, trans);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId,
+			String userName) {
+		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
+
+		return workflowGetTaskDefinitions(processDefId, trans);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public WorkflowDefinition workflowGetWorkflowById(String defId, String userName) {
+		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
+
+		return workflowGetWorkflowById(defId, trans);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public List<WorkflowInstance> workflowGetWorkflowsForContent(String refStr, boolean onlyActive,
+			String userName) {
+		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
+
+		return workflowGetWorkflowsForContent(refStr, onlyActive, trans);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public String getNodeContentInfo(String nodeId, String userName) {
+		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
+
+		return getNodeContentInfo(trans, nodeId);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public String getWebscriptHelp(String userName) {
+		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
+
+		return getWebscriptHelp(trans);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public Set<String> systemGetAllAuthoritiesAsGroupsOrUsers(boolean asGroups, String userName) {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+
+		return systemGetAllAuthoritiesAsGroupsOrUsers(transaction, asGroups);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public Set<String> systemGetContainingGroups(String specificUserName, String userName) {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+
+		return systemGetContainingGroups(transaction, userName);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public String systemGetNodeProperty(NodeRef node, QName propertyName, String userName) {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+
+		return systemGetNodeProperty(transaction, node, propertyName);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public NodeRef systemGetNodeRefForGroup(String groupName, String userName) {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+
+		return systemGetNodeRefForGroup(transaction, groupName);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public NodeRef systemGetNodeRefForUser(String specificUserName, String userName) {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+
+		return systemGetNodeRefForUser(transaction, userName);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
+	 */
+	public QName systemGetNodeType(String dataId, String userName) {
+		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
+
+		return systemGetNodeType(transaction, dataId);
 	}
 
 }

@@ -86,7 +86,7 @@ public class ListAction extends AbstractAction {
 			if (logger.isErrorEnabled()) {
 				logger.error("Failed to convert the list document into a string", e);
 			}
-			throw new ServletException(MsgId.MSG_DEFAULT_ERROR_MSG.getText());
+			throw new ServletException(MsgId.MSG_ERROR_DEFAULT_MSG.getText());
 		}
 
 		ByteArrayInputStream pis = new ByteArrayInputStream(pos.toByteArray());

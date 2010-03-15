@@ -28,13 +28,20 @@ import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
  * <li>User name parameters refer to legitimate registered Alfresco users. There will be no
  * authentication performed so the caller <em>must</em> have verified the authentication credentials
  * before making the call to the function in question as, except for
- * {@link #authenticate(String, String)}, no password parameter is supported.</li>
+ * {@link #authenticate(String, String)}, no password parameter is supported. In most instances, the
+ * user name is used to impersonate a registered user.</li>
  * <li>There is no notion of persistence attached to communications with the Alfresco server. All
  * communications are unit-communications. Thus, sessions, timeouts, keep-alives and all such
  * concepts are irrelevant.
  * <li>All ServletException's are thrown by functions whose offered functionality involves a
  * communication with the Alfresco server. An exception being thrown means that the functionality is
- * hindered in some way on the server side (server unreachable, invalid object id, etc.).</li>
+ * hindered in some way on the server side (server unreachable, invalid object id, unauthorized
+ * access, etc.).</li>
+ * <li>Some of the workflow-related functions are prefixed with <em>getWorkflow</em> and others are
+ * prefixed with <em>workflowGet</em>. Those starting with <em>getWorkflow</em> are somehow "local"
+ * in that they don't use the Alfresco API but provide information about workflow forms and tasks as
+ * can be foun in the models. Those starting with <em>workflowGet</em> imply using Alfresco's API in
+ * some way (whether calling a function or using a type).
  * </ul>
  * 
  * @see also {@link RedirectionBean}, {@link WorkflowTaskInfoBean}
@@ -173,24 +180,27 @@ public interface AlfrescoControllerAPI {
 	/**
 	 * Returns an XForms instance document for a FormWorkflow.
 	 * 
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @param formName
+	 *            the id of a generated workflow form
 	 * @return the workflow form instance document. A <code>null</code> value is never returned.
 	 * @throws ServletException
 	 */
-	public Document getInstanceWorkflow(String formName);
+	public Document getInstanceWorkflow(String userName, String formName);
 
 	/**
 	 * Gets, on behalf of a user, a document filled with the properties of an existing repository
 	 * object.
 	 * 
-	 * @param userName
-	 *            the name of a registered Alfresco user.
 	 * @param dataId
 	 *            the node id of an object that exists in the repository
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return a document containing all properties (including system properties) of the object.
 	 * @throws ServletException
 	 */
-	public Document readObjectFromRepository(String userName, String dataId)
+	public Document readObjectFromRepository(String dataId, String userName)
 			throws ServletException;
 
 	/**
@@ -198,20 +208,24 @@ public interface AlfrescoControllerAPI {
 	 * 
 	 * @param dataId
 	 *            the node id, with or without the protocol and store.
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the local name, or <code>null</code> if the node does not exist or an exception
 	 *         occurred
 	 */
-	public String getNodeType(String dataId);
+	public String getNodeType(String dataId, String userName);
 
 	/**
 	 * Gets the full node type as returned by Alfresco, i.e. including namespace URI and local part.
 	 * 
 	 * @param dataId
 	 *            the node id, with or without the protocol and store.
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the node type, or <code>null</code> if the node does not exist or an exception
 	 *         occurred
 	 */
-	public String getNodeTypeFull(String dataId);
+	public String getNodeTypeFull(String dataId, String userName);
 
 	/**
 	 * Tells whether a custom form with the given id exists.
@@ -265,7 +279,7 @@ public interface AlfrescoControllerAPI {
 	 *            the name of the form (e.g. Evaluation_Demarrage)
 	 * @see {@link RedirectionBean}
 	 */
-	public RedirectionBean workflowGetRedirectionBean(String formName);
+	public RedirectionBean getWorkflowRedirectionBean(String formName);
 
 	/**
 	 * Loads the redirection configuration from the file path. If the path is invalid, the previous
@@ -377,18 +391,23 @@ public interface AlfrescoControllerAPI {
 	 * 
 	 * @param nodeId
 	 *            the full node Id (including protocol and store)
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
+	 * 
 	 * @return the info about a content formatted as indicated by the relevant format in
 	 *         messages.properties, or <code>null</code> if an exception occurred, or empty if no
 	 *         content is associated with the node.
 	 */
-	public String getNodeContentInfo(String nodeId);
+	public String getNodeContentInfo(String nodeId, String userName);
 
 	/**
 	 * Gets the string that the webscript's help operation provides.
 	 * 
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the string, as provided by the web script
 	 */
-	public String getWebscriptHelp();
+	public String getWebscriptHelp(String userName);
 
 	/**
 	 * Tests authentication credentials with the current Alfresco host (defined in the properties
@@ -430,20 +449,24 @@ public interface AlfrescoControllerAPI {
 	 *            if true, specifies that only groups, including standard Alfresco groups, are
 	 *            returned. If false, only users. To have the full set of users and groups, this
 	 *            function must be called twice.
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the set of registered authorities. Returns <b>null</b> if an exception occurred or if
 	 *         the value is <b>null</b> by itself.
 	 */
-	public Set<String> systemGetAllAuthoritiesAsGroupsOrUsers(boolean asGroups);
+	public Set<String> systemGetAllAuthoritiesAsGroupsOrUsers(boolean asGroups, String userName);
 
 	/**
 	 * Returns all groups a specific user belongs to, including non immediate parent groups.
 	 * 
+	 * @param specificUserName
+	 *            the name of the specific user.
 	 * @param userName
-	 *            the name of the user.
-	 * @return the set of groups the user is part of. Returns <b>null</b> if an exception occurred
-	 *         or if the value is <b>null</b> by itself.
+	 *            the login name of a user to be impersonated with the Alfresco server
+	 * @return the set of groups the specific user is part of. Returns <b>null</b> if an exception
+	 *         occurred or if the value is <b>null</b> by itself.
 	 */
-	public Set<String> systemGetContainingGroups(String userName);
+	public Set<String> systemGetContainingGroups(String specificUserName, String userName);
 
 	/**
 	 * Gets the value of a property for a node.
@@ -452,21 +475,25 @@ public interface AlfrescoControllerAPI {
 	 *            a node reference
 	 * @param propertyName
 	 *            the qualified name of the property
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the value of the property for the node. Returns <b>null</b> if an exception occurred
 	 *         or if the value is <b>null</b>.
 	 */
-	public String systemGetNodeProperty(NodeRef node, QName propertyName);
+	public String systemGetNodeProperty(NodeRef node, QName propertyName, String userName);
 
 	/**
 	 * Returns the node ref for a user identified by name. If no user with that name exists, the
 	 * corresponding authority will not be created.
 	 * 
-	 * @param userName
+	 * @param specificUserName
 	 *            the name of the user.
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the noderef for the user name. Returns <b>null</b> if an exception occurred or if the
 	 *         value returned by Alfresco is <b>null</b>.
 	 */
-	public NodeRef systemGetNodeRefForUser(String userName);
+	public NodeRef systemGetNodeRefForUser(String specificUserName, String userName);
 
 	/**
 	 * Returns the node ref for a user group identified by name.
@@ -474,10 +501,12 @@ public interface AlfrescoControllerAPI {
 	 * @param groupName
 	 *            the group name as can be seen in Alfresco's web client. The system prefix for
 	 *            groups will be automatically prepended before calling the web script.
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the noderef for the user group. Returns <b>null</b> if an exception occurred or if
 	 *         the group does not exist.
 	 */
-	public NodeRef systemGetNodeRefForGroup(String groupName);
+	public NodeRef systemGetNodeRefForGroup(String groupName, String userName);
 
 	/**
 	 * Gets the type of a node as a QName. See the companion {@link #getNodeTypeFull(String)} for a
@@ -485,11 +514,13 @@ public interface AlfrescoControllerAPI {
 	 * 
 	 * @param dataId
 	 *            the node's id, with or without the protocol and store.
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the QName that corresponds to the node's content type. Returns <b>null</b> if an
 	 *         exception occurred or if the value is <b>null</b>, which is a hint that either the
 	 *         Alfresco server is not available or the object does not exist.
 	 */
-	public QName systemGetNodeType(String dataId);
+	public QName systemGetNodeType(String dataId, String userName);
 
 	//
 	//
@@ -502,9 +533,12 @@ public interface AlfrescoControllerAPI {
 	 * 
 	 * @param processDefId
 	 *            the id of a process
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the list of task definitions
 	 */
-	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId);
+	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId,
+			String userName);
 
 	/**
 	 * Gets the list of workflow instances that apply to a node and meet the required status.
@@ -514,28 +548,23 @@ public interface AlfrescoControllerAPI {
 	 * @param onlyActive
 	 *            the status that returned workflows must be in. <code>true</code> means "active",
 	 *            <code>false</code> means "completed"
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the list of workflow instances
 	 */
-	public List<WorkflowInstance> workflowGetWorkflowsForContent(String refStr, boolean onlyActive);
+	public List<WorkflowInstance> workflowGetWorkflowsForContent(String refStr, boolean onlyActive,
+			String userName);
 
 	/**
 	 * Gets the workflow definition for the given workflow id
 	 * 
 	 * @param defId
 	 *            the workflow definition id
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the definition, as returned by the Alfresco API
 	 */
-	public WorkflowDefinition workflowGetWorkflowById(String defId);
-
-	/**
-	 * Returns the form name for a task, based on the full task id.
-	 * 
-	 * @param fullTaskId
-	 *            the task id as generated by the BlueXML workflow generator, e.g. "wfbxwfTest:T1"
-	 * @return the id of the workflow form that can be used for the task, or <code>null</code> if no
-	 *         such form exists
-	 */
-	public String getWorkflowFormNameByTaskId(String fullTaskId);
+	public WorkflowDefinition workflowGetWorkflowById(String defId, String userName);
 
 	/**
 	 * Gets the task name from the form name.
@@ -567,6 +596,15 @@ public interface AlfrescoControllerAPI {
 	public String workflowExtractNamespacePrefix(String name);
 
 	/**
+	 * Gets the process name from WorkflowDefinition name.
+	 * 
+	 * @param name
+	 *            a process definition name
+	 * @return the local name of the process (e.g. "jbpm$wf:review" -> "review")
+	 */
+	public String workflowExtractProcessNameFromDefName(String name);
+
+	/**
 	 * Tells whether a workflow definition fits the definition name of processes generated via the
 	 * BlueXML workflow modeler and generator.
 	 * 
@@ -577,15 +615,6 @@ public interface AlfrescoControllerAPI {
 	public boolean workflowIsBlueXMLDefinition(String name);
 
 	/**
-	 * Gets the process name from WorkflowDefinition name.
-	 * 
-	 * @param name
-	 *            a process definition name
-	 * @return the local name of the process (e.g. "jbpm$wf:review" -> "review")
-	 */
-	public String workflowExtractProcessNameFromDefName(String name);
-
-	/**
 	 * Gives the name under which a process is known by the workflow engine under Alfresco. <br/>
 	 * This matches the name construction rules that are used by the BlueXML workflow generator.
 	 * 
@@ -593,7 +622,7 @@ public interface AlfrescoControllerAPI {
 	 *            a process definition name
 	 * @return the process definition as should be found in WorkflowDefinition.name.
 	 */
-	public String workflowBuildBlueXMLDefinitionName(String name);
+	public String getWorkflowBlueXMLDefinitionName(String name);
 
 	/**
 	 * Gives the name under which a task is defined in the process definition model. <br/>
@@ -603,7 +632,7 @@ public interface AlfrescoControllerAPI {
 	 *            the id of a workflow form
 	 * @return the task name as should be found in the generated model.xml or processDefintion.xml.
 	 */
-	public String workflowBuildBlueXMLTaskName(String formName);
+	public String getWorkflowBlueXMLTaskName(String formName);
 
 	/**
 	 * Gives the name of the form that corresponds to a task name.
@@ -613,7 +642,17 @@ public interface AlfrescoControllerAPI {
 	 *            or "jbpm$wfbxEvaluation:Annotation"
 	 * @return the id of a workflow form
 	 */
-	public String workflowBuildFormNameFromTask(String taskName);
+	public String getWorkflowFormNameFromTask(String taskName);
+
+	/**
+	 * Returns the form name for a task, based on the full task id.
+	 * 
+	 * @param fullTaskId
+	 *            the task id as generated by the BlueXML workflow generator, e.g. "wfbxwfTest:T1"
+	 * @return the id of the workflow form that can be used for the task, or <code>null</code> if no
+	 *         such form exists
+	 */
+	public String getWorkflowFormNameByTaskId(String fullTaskId);
 
 	/**
 	 * Builds the namespace URI for workflow models generated with SIDE.<br/>
@@ -626,8 +665,7 @@ public interface AlfrescoControllerAPI {
 	public String getWorkflowNamespaceURI(String processName);
 
 	/**
-	 * Retrieves the name/id of a form that implements the start task for a workflow definition
-	 * name.<br/>
+	 * Retrieves the name/id of a form that implements the start task of a workflow definition name.<br/>
 	 * 
 	 * @param workflowDefName
 	 *            the definition name as provided by {@link WorkflowService#getDefinitions()}, e.g.
@@ -639,29 +677,35 @@ public interface AlfrescoControllerAPI {
 	/**
 	 * Gets a list of in-progress workflow tasks for a user.
 	 * 
+	 * @param managerUserName
+	 *            the login name of the user whose tasks are being fetched
 	 * @param userName
-	 *            the login name of the user
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the list
 	 */
-	public List<WorkflowTask> workflowGetPooledTasks(String userName);
+	public List<WorkflowTask> workflowGetPooledTasks(String managerUserName, String userName);
 
 	/**
 	 * Gets the WorkflowTask object for the given task id.
 	 * 
 	 * @param taskId
 	 *            the task id
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the requested task object, or <b>null</b> if not found
 	 */
-	public WorkflowTask workflowGetTaskById(String taskId);
+	public WorkflowTask workflowGetTaskById(String taskId, String userName);
 
 	/**
 	 * Gets the contents of the workflow package for the given task id.
 	 * 
 	 * @param taskId
 	 *            the task id
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the list of items associated with the task's workflow package
 	 */
-	public List<NodeRef> workflowGetPackageContents(String taskId);
+	public List<NodeRef> workflowGetPackageContents(String taskId, String userName);
 
 	/**
 	 * Retrieves a specific task definition for a given process Id.
@@ -670,9 +714,12 @@ public interface AlfrescoControllerAPI {
 	 *            the id of a process, e.g. "jbpm$6"
 	 * @param task
 	 *            the id of a task to search for in the definition, e.g. "wfbxdemande:Accepter"
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return
 	 */
-	public WorkflowTaskDefinition workflowGetTaskDefinition(String processDefId, String task);
+	public WorkflowTaskDefinition workflowGetTaskDefinition(String processDefId, String task,
+			String userName);
 
 	/**
 	 * Retrieves all in-progress tasks found for the instance. Since several paths may be associated
@@ -680,10 +727,12 @@ public interface AlfrescoControllerAPI {
 	 * 
 	 * @param instanceId
 	 *            the id of a live workflow instance
+	 * @param userName
+	 *            the login name of a user to be impersonated with the Alfresco server
 	 * @return the list (possibly empty if an exception occurred) of in-progress tasks.
 	 * @throws ServletException
 	 */
-	public List<WorkflowTask> workflowGetCurrentTasks(String instanceId);
+	public List<WorkflowTask> workflowGetCurrentTasks(String instanceId, String userName);
 
 	//
 	// General

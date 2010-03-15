@@ -52,12 +52,12 @@ public abstract class AbstractServlet extends HttpServlet {
 
 	protected AlfrescoTransaction createTransaction(
 			AlfrescoController controller, String userName) {
-		AlfrescoTransaction transaction = new AlfrescoTransaction(controller);
+		AlfrescoTransaction transaction = new AlfrescoTransaction(controller, userName);
 		
 		Map<String, String> simulatedParams = new HashMap<String, String>();
 		simulatedParams.put(MsgId.PARAM_USER_NAME.getText(), userName);
 		
-		transaction.setLogin(controller.getParamLoginUserName(simulatedParams));
+		transaction.setLogin(controller.getParamUserName(simulatedParams));
 		return transaction;
 	}
 

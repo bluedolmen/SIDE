@@ -503,9 +503,9 @@ public class MappingAgent {
 		return mappingToolAlfrescoToForms.getWorkflowFieldAlfrescoName(wkFormName, fieldName);
 	}
 
-	private void collectTaskProperties(Document instance, Element taskElt, String wkFormName,
+	private void collectTaskProperties(AlfrescoTransaction transaction, Document instance, Element taskElt, String wkFormName,
 			Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly) {
-		mappingToolAlfrescoToForms.collectTaskProperties(instance, taskElt, wkFormName,
+		mappingToolAlfrescoToForms.collectTaskProperties(transaction, instance, taskElt, wkFormName,
 				alfrescoNodes, formIsReadOnly);
 	}
 
@@ -872,11 +872,13 @@ public class MappingAgent {
 	/**
 	 * Returns an instance for workflow forms so that they can be displayed.
 	 * 
+	 * @param transaction
+	 * @param formName
 	 * @see {@link GetAction}
 	 * @param formName
 	 * @return the instance document, which is never <code>null</code>.
 	 */
-	public Document getInstanceWorkflow(String formName) {
+	public Document getInstanceWorkflow(AlfrescoTransaction transaction, String formName) {
 
 		// DOM structure
 		Document instance = AlfrescoController.getDocBuilder().newDocument();
@@ -887,7 +889,7 @@ public class MappingAgent {
 
 		// fill the instance with the properties values
 		Map<String, GenericClass> alfrescoNodes = new HashMap<String, GenericClass>();
-		collectTaskProperties(instance, taskElt, formName, alfrescoNodes, false);
+		collectTaskProperties(transaction, instance, taskElt, formName, alfrescoNodes, false);
 
 		return instance;
 	}

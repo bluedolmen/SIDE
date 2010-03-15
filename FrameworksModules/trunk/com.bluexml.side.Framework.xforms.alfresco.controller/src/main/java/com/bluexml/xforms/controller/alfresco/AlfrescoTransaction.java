@@ -48,11 +48,11 @@ public class AlfrescoTransaction {
 	/** id(s) of old node(s) on update, to be deleted in case of success */
 	private ArrayList<String> tempNodeIds = null;
 
-	public AlfrescoTransaction(AlfrescoController alfrescoController) {
+	public AlfrescoTransaction(AlfrescoController alfrescoController, String userName) {
 		super();
 		this.alfrescoController = alfrescoController;
 		this.batch = objectFactory.createBatch();
-		this.login = null;
+		this.login = userName;
 	}
 
 	public String getLogin() {

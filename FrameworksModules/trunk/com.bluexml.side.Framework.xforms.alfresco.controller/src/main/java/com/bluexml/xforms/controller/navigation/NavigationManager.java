@@ -63,6 +63,7 @@ import com.bluexml.xforms.actions.SetTypeAction;
 import com.bluexml.xforms.actions.SubmitAction;
 import com.bluexml.xforms.actions.WorkflowTransitionAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
+import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.beans.PageInfoBean;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
@@ -519,6 +520,7 @@ public class NavigationManager {
 	 * @throws Exception
 	 */
 	private int loadConfiguration(HttpServletRequest req, boolean fromInitCall) {
+		int result = -1;
 		try {
 			String formsPath = req.getParameter(MsgId.PARAM_PROPERTIES_FILE_FORMS.getText());
 			String msgPath = req.getParameter(MsgId.PARAM_PROPERTIES_FILE_MESSAGES.getText());
@@ -528,7 +530,7 @@ public class NavigationManager {
 
 			String redirectPath = req.getParameter(MsgId.PARAM_REDIRECTOR_CONFIG_FILE.getText());
 			if (controller.loadRedirectionTable(redirectPath) == false) {
-				return 2;
+				result = 2; // continue anyway cause some projects may not use workflows 
 			}
 			if (fromInitCall) {
 				// we'll also deal with CSS, alfrescoHost
@@ -544,7 +546,7 @@ public class NavigationManager {
 			}
 			return 0;
 		}
-		return -1;
+		return result;
 	}
 
 	/**
@@ -619,7 +621,10 @@ public class NavigationManager {
 			// realFormName = taskType.getDataForm();
 			// }
 			if (dataId != null) {
-				QName contentType = controller.systemGetNodeType(dataId);
+				String userName = controller.getParamUserName(bean.getInitParams());
+				AlfrescoTransaction transaction = new AlfrescoTransaction(controller, userName);
+				
+				QName contentType = controller.systemGetNodeType(transaction, dataId);
 				if (contentType == null) {
 					dataId = null;
 				} else {

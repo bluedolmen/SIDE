@@ -48,7 +48,10 @@ public enum MsgId {
 	// keys for messages in the messages.properties file; user-changeable
 	//
 	MSG_ASSOC_MANDATORY				("association.is.mandatory"),
-	MSG_DEFAULT_ERROR_MSG			("default.error.msg"), 
+	MSG_ERROR_ACCESS_DENIED			("error.access.denied"), 
+	MSG_ERROR_DEFAULT_MSG			("error.default.msg"), 
+	MSG_ERROR_INTEGRITY_VIOLATION	("error.integrity.violation"),
+	MSG_ERROR_WKFLW_START_FAILURE	("error.workflow.start.failure"),
 	MSG_FIELD_LABEL_FORMAT			("field.label.format"),
 	MSG_FIELD_MANDATORY				("field.is.mandatory"),
 	MSG_FILE_FIELD_FILENAME_TEMP	("file.field.filename.temporary"),
@@ -56,7 +59,6 @@ public enum MsgId {
 	MSG_FILL_MANDATORY_FIELDS		("fill.mandatory.fields"),
 	MSG_FORMAT_DATE_OUTPUT			("format.date.output"),
 	MSG_FORMAT_TIME_OUTPUT			("format.time.output"),
-	MSG_INTEGRITY_VIOLATION			("integrity.violation"),
 	MSG_INVALID_REGEX_FORMAT		("invalid.regex.format"),
 	MSG_KEY_NOT_FOUND				("key.not.found"),
 	MSG_LENGTH_BETWEEN				("length.between.min.and.max"),
@@ -102,15 +104,6 @@ public enum MsgId {
 	MSG_UPLOAD_CONTENT_REPO_FORMAT	("upload.node.content.repository.format"),
 	MSG_UPLOAD_CONTENT_REPO_INFO	("upload.node.content.repository.info"),
 	MSG_UPLOAD_FAILED				("upload.to.repository.failure"),
-	MSG_WKFLW_ERROR_START_FAILURE	("workflow.error.start.failure"),
-	MSG_WKFLW_ERROR_SUBMIT_DATA		("workflow.error.submit.data"),
-	MSG_WKFLW_GLOBAL_GROUP			("workflow.selection.global.group"),
-	MSG_WKFLW_INSTANCE_GROUP		("workflow.selection.instance.group"),
-	MSG_WKFLW_INSTANCE_WIDGET_TITLE	("workflow.instance.widget.title"),
-	MSG_WKFLW_PROCESS_GROUP			("workflow.selection.process.group"),
-	MSG_WKFLW_PROCESS_WIDGET_TITLE	("workflow.process.widget.title"),
-	MSG_WKFLW_SECTION_LABEL			("workflow.section.label"),
-	MSG_WKFLW_SEL_PAGE_TITLE		("workflow.selection.page.title"),
 	// captions for buttons; user-changeable
 	//
 	CAPTION_BUTTON_CANCEL			("caption.button.cancel"),

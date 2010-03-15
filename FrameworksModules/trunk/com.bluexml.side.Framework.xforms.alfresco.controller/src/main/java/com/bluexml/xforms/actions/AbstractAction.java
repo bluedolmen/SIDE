@@ -13,6 +13,7 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.chiba.xml.xforms.core.Submission;
@@ -78,7 +79,7 @@ public abstract class AbstractAction {
 	/** The transaction. */
 	protected AlfrescoTransaction transaction;
 
-	protected String transactionLogin;
+	protected String transactionLogin = null;
 
 	/** The session id. */
 	protected String sessionId;
@@ -209,7 +210,7 @@ public abstract class AbstractAction {
 		String[] paramNames = getParamNames();
 
 		// start at 4 because URIs are under the form: scheme://.../ACTION_NAME/
-		// so 0=URI scheme, 1=null; 2=sessionId and pageId, 3=action name
+		// so 0=URI scheme, 1=null (or empty string); 2=sessionId and pageId, 3=action name
 		int i = 4;
 		for (String paramName : paramNames) {
 			registerParameter(fragments, paramName, i);
@@ -236,9 +237,13 @@ public abstract class AbstractAction {
 		getRequestParameters(fragments);
 		this.controller = controller;
 		this.uri = uri;
-		this.transaction = new AlfrescoTransaction(controller);
-		this.transaction.setLogin(transactionLogin);
+		this.transaction = new AlfrescoTransaction(controller, transactionLogin);
+
 		this.transaction.setPage(navigationPath.peekCurrentPage());
+		if (StringUtils.trimToNull(transactionLogin) == null) { // no CAS receipt was available
+			Map<String, String> initParams = transaction.getPage().getInitParams();
+			transaction.setLogin(controller.getParamUserName(initParams));
+		}
 	}
 
 	/**

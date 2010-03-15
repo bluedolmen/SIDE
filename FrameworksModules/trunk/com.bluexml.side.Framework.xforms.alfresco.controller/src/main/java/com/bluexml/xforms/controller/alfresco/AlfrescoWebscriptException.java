@@ -68,7 +68,7 @@ public class AlfrescoWebscriptException extends ServletException {
 		analyzeError(exceptionElement);
 		if (gotCauseMessage == false) {
 			// we don't want the user to see the exception message so use sth more user-friendly
-			sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_DEFAULT_ERROR_MSG));
+			sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_ERROR_DEFAULT_MSG));
 			if (logger.isErrorEnabled()) {
 				logger.error(errorMessage);
 			}
@@ -81,26 +81,38 @@ public class AlfrescoWebscriptException extends ServletException {
 		for (Entry<String, Element> entry : elements) {
 			if (StringUtils.equals(entry.getKey(), "message")) {
 				String message = entry.getValue().getTextContent();
-				if (message.contains("integrity violation")) {
+
+				//
+				if (StringUtils.containsIgnoreCase(message, "integrity violation")) {
 					String assoName = getAssociationName(message, 0);
 					// assoName should never trim to null ! if it is, algorithm problem!
 					if (StringUtils.trimToNull(assoName) == null) {
 						if (logger.isErrorEnabled()) {
 							logger.error("Caught an unknown integrity violation: " + message);
 						}
-						sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_DEFAULT_ERROR_MSG));
+						sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_ERROR_DEFAULT_MSG));
 					} else {
-						sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_INTEGRITY_VIOLATION,
+						sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_ERROR_INTEGRITY_VIOLATION,
 								assoName));
 					}
 					gotCauseMessage = true;
 					return;
 				}
+
+				//
 				// if (message.contains("Unicity Checking Error")) {
 				// sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_UNICITY_VIOLATION));
 				// gotCauseMessage = true;
 				// return;
 				// }
+
+				//
+				if (StringUtils.containsIgnoreCase(message, "access denied")) {
+					sb = new StringBuilder(MsgPool.getMsg(MsgId.MSG_ERROR_ACCESS_DENIED));
+					gotCauseMessage = true;
+					return;
+				}
+
 				errorMessage = message;
 				sb.append(message);
 				sb.append("\n\r");

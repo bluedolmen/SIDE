@@ -80,8 +80,7 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 			return;
 		}
 		// enqueue all ids in a new transaction
-		AlfrescoTransaction delTrans = new AlfrescoTransaction(controller);
-		delTrans.setLogin(transaction.getLogin());
+		AlfrescoTransaction delTrans = new AlfrescoTransaction(controller, transaction.getLogin());
 		for (String nodeId : list) {
 			delTrans.queueDelete(nodeId);
 		}

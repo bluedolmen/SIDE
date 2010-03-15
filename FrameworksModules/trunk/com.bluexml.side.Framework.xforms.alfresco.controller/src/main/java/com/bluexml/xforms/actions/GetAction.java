@@ -121,7 +121,7 @@ public class GetAction extends AbstractReadAction {
 			throws ServletException {
 		//
 		// get the instance for the task
-		Document docWkflw = controller.getInstanceWorkflow(wkFormName);
+		Document docWkflw = controller.getInstanceWorkflow(transaction, wkFormName);
 		controller.workflowPatchInstance(transaction, wkFormName, docWkflw, currentPage
 				.getWkflwInstanceId());
 		//

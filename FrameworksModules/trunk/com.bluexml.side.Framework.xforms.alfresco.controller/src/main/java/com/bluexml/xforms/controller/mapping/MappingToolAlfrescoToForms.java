@@ -215,6 +215,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	/**
 	 * Appends instance elements for each of the task's properties below the root element of the
 	 * instance depending on the definition of the task when designing the form.
+	 * @param transaction 
 	 * 
 	 * @param formInstance
 	 *            the document from which nodes will be created
@@ -224,9 +225,8 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 *            the definition of the task from the mapping
 	 * @param nodeName
 	 */
-	public void collectTaskProperties(Document formInstance, Element rootElement,
+	public void collectTaskProperties(AlfrescoTransaction transaction, Document formInstance, Element rootElement,
 			String wkFormName, Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly) {
-		AlfrescoTransaction transaction = new AlfrescoTransaction(controller);
 		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
 
 		if (taskType != null) {
@@ -324,7 +324,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			newFormReference(formInstance, formElement, referenceType, at, an, formIsReadOnly);
 		}
 
-		appendFieldForContent(formType, formInstance, formElement, null);
+		appendFieldForContent(at, formType, formInstance, formElement, null);
 
 		return formElement;
 	}
@@ -591,7 +591,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 				if (controller.getParamUploadRepoFormatInfo(transaction.getInitParams())) {
 					FileFieldType fileFieldType = (FileFieldType) formFieldType;
 					if ((alfrescoId != null) && (isInRepository(fileFieldType))) {
-						formField.setTextContent(controller.getNodeContentInfo(value));
+						formField.setTextContent(controller.getNodeContentInfo(transaction, value));
 					}
 				}
 			}
@@ -640,7 +640,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 		idField.setTextContent(alfrescoId);
 		formElement.appendChild(idField);
 
-		appendFieldForContent(formType, formInstance, formElement, alfrescoId);
+		appendFieldForContent(transaction, formType, formInstance, formElement, alfrescoId);
 
 		return formElement;
 	}
@@ -655,15 +655,15 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 * @param alfrescoId
 	 *            the full node id
 	 */
-	private void appendFieldForContent(FormType formType, Document formInstance,
-			Element formElement, String alfrescoId) {
+	private void appendFieldForContent(AlfrescoTransaction transaction, FormType formType,
+			Document formInstance, Element formElement, String alfrescoId) {
 		if (isContentEnabled(formType)) {
 			Element nodeContentElt = formInstance
 					.createElement(MsgId.INT_INSTANCE_SIDE_NODE_CONTENT.getText());
 			nodeContentElt.setAttribute("file", "");
 			nodeContentElt.setAttribute("type", "");
 			if (alfrescoId != null) {
-				String contentInfo = controller.getNodeContentInfo(alfrescoId);
+				String contentInfo = controller.getNodeContentInfo(transaction, alfrescoId);
 				nodeContentElt.setTextContent(contentInfo);
 			}
 
