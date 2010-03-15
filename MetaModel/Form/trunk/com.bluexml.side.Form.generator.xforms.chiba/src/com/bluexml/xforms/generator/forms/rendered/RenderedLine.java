@@ -71,6 +71,7 @@ public class RenderedLine extends Rendered {
 	@Override
 	public void renderEnd(Renderable renderable) {
 		super.renderEnd(renderable);
+		// this is for simulating a "carriage return/new line", whatever the styles of children.
 		Element lineElement = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		lineElement.setAttribute("class", "xformstdclear");
 		xformsElement.addContent(lineElement);
