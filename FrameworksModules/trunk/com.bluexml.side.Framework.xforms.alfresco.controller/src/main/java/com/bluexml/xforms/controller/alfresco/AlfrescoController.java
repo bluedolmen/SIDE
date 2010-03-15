@@ -1258,12 +1258,12 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Request post. Bridge to our XForms webscript under Alfresco. //$$ TRACE LOG
 	 * 
+	 * @param transaction
+	 *            the transaction. MANDATORY and NEVER <code>null</code>
 	 * @param parameters
 	 *            the parameters
 	 * @param opCode
-	 *            the opCode
-	 * @param transaction
-	 *            the transaction
+	 *            the code for the webscript operation being called.
 	 * 
 	 * @return the post method
 	 * 
@@ -1271,7 +1271,6 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 *             Signals that an I/O exception has occurred.
 	 * @throws HttpException
 	 *             the http exception
-	 * @throws IOException
 	 * @throws ServletException
 	 */
 	private PostMethod requestPost(AlfrescoTransaction transaction, Map<String, String> parameters,
