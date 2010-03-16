@@ -1265,8 +1265,15 @@ public class MappingGenerator extends AbstractGenerator {
 		modelChoiceType.setMaxBound(modelChoiceField.getMax_bound());
 		modelChoiceType.setMinBound(modelChoiceField.getMin_bound());
 		modelChoiceType.setUniqueName(FormGeneratorsManager.getUniqueName(modelChoiceField));
-		String alfrescoName = formGenerator.getAlfrescoName(modelChoiceField.getReal_class(),
-				modelChoiceField.getRef()); // #980
+		ModelElement ref = modelChoiceField.getRef();
+		
+		// #980
+		String alfrescoName = formGenerator.getAlfrescoName(modelChoiceField.getReal_class(), ref); 
+		
+		Association asso = (Association) formGenerator.getRealObject(ref);
+		if (asso.isOrdered()) {
+			modelChoiceType.setOrdered(true);
+		}
 		modelChoiceType.setAlfrescoName(alfrescoName);
 		modelChoiceType.setRealClass(copyClassType(getClassType(modelChoiceField.getReal_class())));
 
