@@ -25,6 +25,8 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String GENERATOR_OPTIONS_UNICITY = "alfresco.unicity"; //$NON-NLS-1$
 	public static String GENERATOR_OPTIONS_WEBSCRIPT_REPORT = "alfresco.webscript.report"; //$NON-NLS-1$
 	
+	public static String GENERATOR_PARAMETER_WEBSCRIPT_REPORT_RUNAS = "alfresco.report.runas"; //$NON-NLS-1$
+	
 	// public static String GENERATOR_OPTIONS_DEFAULTFORMS =
 	// "class.alfrescoShare.defaultForms";
 	public static String GENERATOR_OPTIONS_SQL_EXTENSION = "com.bluexml.side.Class.generator.alfresco.sql"; //$NON-NLS-1$
@@ -168,7 +170,16 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public String getModuleIdService(EObject ob, String modelId) throws Exception {
 		return buildModuleProperties(modelId).getProperty("module.id"); //$NON-NLS-1$
 	}
-
+	
+	public String getRunasforReport(EObject o) {
+		String result = getGenerationParameter(GENERATOR_PARAMETER_WEBSCRIPT_REPORT_RUNAS);
+		if (result == null || result.equals("")) {
+			result = "admin";
+			System.out.println(GENERATOR_PARAMETER_WEBSCRIPT_REPORT_RUNAS+", default value used :"+result);
+		}
+		return result;
+	}
+	
 	/**
 	 * This method check if the user have the license to use this generator.
 	 * 

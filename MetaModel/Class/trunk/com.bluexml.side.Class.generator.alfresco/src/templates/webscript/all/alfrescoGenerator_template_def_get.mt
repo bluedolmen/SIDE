@@ -23,6 +23,7 @@ import templates.servicesTemplates.Association
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
+import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
@@ -46,6 +47,6 @@ minutes	:<br/>
   </description>
   <url>/com/bluexml/side/contentType/all?nodeRef={nodeRef}&amp;years={years}&amp;months={months}&amp;days={days}&amp;hours={hours}&amp;minutes={minutes}</url>
   <format default="json">any</format>
-  <authentication>guest</authentication>
+  <authentication runas="<%getRunasforReport()%>">guest</authentication>
   <family>SIDE</family>
 </webscript>
