@@ -428,16 +428,21 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		}
 
 		// there's no point in continuing without a workflow instance Id
-		if (StringUtils.trimToNull(currentPage.getWkflwInstanceId()) == null) {
+		String wkflwInstanceId = currentPage.getWkflwInstanceId();
+		if (StringUtils.trimToNull(wkflwInstanceId) == null) {
 			navigationPath
 					.setStatusMsg("Transition not followed. No workflow instance id is available.");
-
 			return resultBean;
 		}
 
 		// check that an active task for the workflow instance is consistent with the current form
-		List<WorkflowTask> tasks = controller.workflowGetCurrentTasks(currentPage
-				.getWkflwInstanceId(), transaction);
+		List<WorkflowTask> tasks = controller.workflowGetCurrentTasks(wkflwInstanceId, transaction);
+		if (tasks.size() == 0) {
+			navigationPath
+					.setStatusMsg("Transition not followed. No tasks were found for instance id '"
+							+ wkflwInstanceId + "'.");
+			return resultBean;
+		}
 		WorkflowTask task = findRelevantTaskForForm(formTaskName, tasks);
 		if (task == null) {
 			navigationPath.setStatusMsg("Transition not followed. The form '" + wkFormName
