@@ -161,14 +161,14 @@ public class VirtualResolver {
 	 *            the form name
 	 */
 	public void prepareAlfrescoToXForms(Element source, String formName) {
-		if (logger.isTraceEnabled()) {
+		if (logger.isDebugEnabled()) {
 			mappingTool.logXML(source, "prepareAlfrescoToXForms", "input");
 		}
 		collectValues(source, formName);
 		for (Value value : values) {
 			appendVirtualField(value);
 		}
-		if (logger.isTraceEnabled()) {
+		if (logger.isDebugEnabled()) {
 			mappingTool.logXML(source, "prepareAlfrescoToXForms", "output");
 		}
 	}
@@ -182,14 +182,14 @@ public class VirtualResolver {
 	 *            the form name
 	 */
 	public void prepareXFormsToAlfresco(Element source, String formName) {
-		if (logger.isTraceEnabled()) {
+		if (logger.isDebugEnabled()) {
 			mappingTool.logXML(source, "prepareXFormsToAlfresco", "input");
 		}
 		collectValues(source, formName);
 		for (Value value : values) {
 			propagateVirtualField(value);
 		}
-		if (logger.isTraceEnabled()) {
+		if (logger.isDebugEnabled()) {
 			mappingTool.logXML(source, "prepareXFormsToAlfresco", "output");
 		}
 	}

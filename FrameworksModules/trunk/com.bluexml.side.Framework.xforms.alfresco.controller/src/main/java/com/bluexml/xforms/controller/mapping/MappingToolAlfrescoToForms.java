@@ -215,7 +215,8 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	/**
 	 * Appends instance elements for each of the task's properties below the root element of the
 	 * instance depending on the definition of the task when designing the form.
-	 * @param transaction 
+	 * 
+	 * @param transaction
 	 * 
 	 * @param formInstance
 	 *            the document from which nodes will be created
@@ -225,8 +226,9 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	 *            the definition of the task from the mapping
 	 * @param nodeName
 	 */
-	public void collectTaskProperties(AlfrescoTransaction transaction, Document formInstance, Element rootElement,
-			String wkFormName, Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly) {
+	public void collectTaskProperties(AlfrescoTransaction transaction, Document formInstance,
+			Element rootElement, String wkFormName, Map<String, GenericClass> alfrescoNodes,
+			boolean formIsReadOnly) {
 		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
 
 		if (taskType != null) {
@@ -258,7 +260,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	public Document newFormInstance(String formName, AlfrescoTransaction at,
 			Map<String, String> initParams, boolean formIsReadOnly) {
 		FormType formType = getFormType(formName);
-		if (logger.isTraceEnabled()) {
+		if (loggertrace.isTraceEnabled()) {
 			logger.debug("Creating new form instance document for the controller; form: "
 					+ formName + ", read-only status: " + formIsReadOnly + ", formType found: "
 					+ formType.getName());
@@ -479,7 +481,7 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 	private void newFormField(Document formInstance, Element formElement,
 			FormFieldType formFieldType, AlfrescoTransaction transaction,
 			Map<String, String> initParams, boolean formIsReadOnly) {
-		if (logger.isTraceEnabled()) {
+		if (loggertrace.isTraceEnabled()) {
 			logger.debug("  setting value for new form field '" + formFieldType.getUniqueName()
 					+ "' with alfresco name '" + formFieldType.getAlfrescoName() + "'");
 		}
@@ -668,7 +670,9 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 			}
 
 			formElement.appendChild(nodeContentElt);
-			logger.debug("  appended content field '" + nodeContentElt.getNodeName() + "'");
+			if (loggertrace.isTraceEnabled()) {
+				logger.debug("  appended content field '" + nodeContentElt.getNodeName() + "'");
+			}
 		}
 	}
 

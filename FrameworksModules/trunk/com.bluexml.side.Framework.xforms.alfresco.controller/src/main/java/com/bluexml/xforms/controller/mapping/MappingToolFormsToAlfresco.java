@@ -476,7 +476,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 			String type = fieldType.getType();
 			String inputTextContent = fieldElement.getTextContent();
 			boolean readOnly = isReadOnly(fieldType);
-			if (logger.isTraceEnabled()) {
+			if (loggertrace.isTraceEnabled()) {
 				logger.debug("Received value '" + inputTextContent + "' for attribute '"
 						+ alfrescoName + "' with type '" + type + "'. Read-only status '"
 						+ readOnly + "'. isFileField: " + (fieldType instanceof FileFieldType)

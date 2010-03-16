@@ -43,20 +43,23 @@
     <category name="org.chiba">
         <priority value="ERROR"/>
     </category>
-    <category name="com.bluexml.xforms.actions">
-        <priority value="ERROR"/>
-    </category>
     <category name="com.bluexml.xforms.controller.alfresco.AlfrescoController">
-        <priority value="ERROR"/>
+        <priority value="DEBUG"/>
+    </category>
+    <category name="com.bluexml.xforms.controller.alfresco.AlfrescoController.trace">
+        <priority value="OFF"/>
     </category>
     <category name="com.bluexml.xforms.controller.mapping">
-        <priority value="ERROR"/>
+        <priority value="DEBUG"/>
+    </category>
+    <category name="com.bluexml.xforms.controller.mapping.trace">
+        <priority value="OFF"/>
     </category>
     <category name="com.bluexml.xforms.controller.mapping.VirtualResolver">
         <priority value="ERROR"/>
     </category>
     <category name="com.bluexml.xforms.controller.navigation.NavigationManager">
-        <priority value="ERROR"/>
+        <priority value="DEBUG"/>
     </category>
     <category name="org.chiba.agent.web.session.impl">
         <priority value="ERROR"/>

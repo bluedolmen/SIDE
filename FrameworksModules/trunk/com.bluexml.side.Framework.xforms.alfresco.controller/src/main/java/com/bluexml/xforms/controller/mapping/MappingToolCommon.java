@@ -74,6 +74,8 @@ import com.bluexml.xforms.messages.MsgPool;
  */
 public class MappingToolCommon {
 
+	private static final String TRACE_LOGGER_CATEGORY = "com.bluexml.xforms.controller.mapping.trace";
+
 	/** The document builder. */
 	protected static DocumentBuilder documentBuilder;
 
@@ -85,6 +87,9 @@ public class MappingToolCommon {
 
 	/** The logger. */
 	protected static Log logger = LogFactory.getLog(MappingToolCommon.class);
+
+	/** Trace logging detector. DO NO OUTPUT LOGS USING THIS. */
+	protected static Log loggertrace = LogFactory.getLog(TRACE_LOGGER_CATEGORY);
 
 	/** The number types. */
 	protected static List<String> numberTypes = Arrays.asList("byte", "double", "float", "int",
@@ -330,12 +335,12 @@ public class MappingToolCommon {
 	 * @param classType
 	 *            the type
 	 * 
-	 * @return the complete name of the type, under the form package + "." + name 
+	 * @return the complete name of the type, under the form package + "." + name
 	 */
 	public String getClassTypeCompleteName(ClassType classType) {
 		return classTypeToString(classType);
 	}
-	
+
 	/**
 	 * Gets the id of a form that supports the given data type.
 	 * 
@@ -1001,7 +1006,7 @@ public class MappingToolCommon {
 		}
 		return modelChoiceType.isOrdered();
 	}
-	
+
 	/*
 	 * WorkflowTaskType
 	 */

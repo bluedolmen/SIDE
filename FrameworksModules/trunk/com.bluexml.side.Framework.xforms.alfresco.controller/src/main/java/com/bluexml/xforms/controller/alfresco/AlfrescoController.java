@@ -108,6 +108,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/** The logger. */
 	protected static Log logger = LogFactory.getLog(AlfrescoController.class);
 
+	/** We'll use this only as a marker for trace enabled status, not as an actual logger. */
+	protected static Log loggertrace = LogFactory.getLog(AlfrescoController.class + ".trace");
+
 	/** The doc builder. */
 	private static DocumentBuilder docBuilder = null;
 
@@ -1275,9 +1278,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 */
 	private PostMethod requestPost(AlfrescoTransaction transaction, Map<String, String> parameters,
 			MsgId opCode) throws IOException, ServletException {
-		if (logger.isTraceEnabled()) {
-			logger.debug("Calling the webscript on Alfresco with request: " + opCode);
-			logger.debug("Parameters : ");
+		if (loggertrace.isTraceEnabled()) {
+			logger.trace("Calling the webscript on Alfresco with request: " + opCode);
+			logger.trace("Parameters : ");
 			Set<Entry<String, String>> entrySet2 = parameters.entrySet();
 			for (Entry<String, String> entry2 : entrySet2) {
 				String value = entry2.getValue();
@@ -1286,13 +1289,14 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 				} else if (value.equals("")) {
 					value = "<empty string>";
 				}
-				logger.debug(entry2.getKey() + " = " + value);
+				logger.trace(entry2.getKey() + " = " + value);
 			}
 		}
 
 		//
 		// security: enforce use of possible access controls on the Alfresco side.
 		if (transaction == null) {
+			logger.error("Null transaction.");
 			throw new ServletException("A transaction is required for webscript requests.");
 		}
 		String legitimateLogin = transaction.getLogin();
@@ -1300,6 +1304,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			legitimateLogin = getParamUserName(transaction.getPage().getInitParams());
 		}
 		if (StringUtils.trimToNull(legitimateLogin) == null) {
+			logger.error("No user name in the transaction.");
 			throw new ServletException(
 					"Cannot complete the action: a user name is required for webscript requests.");
 		}
@@ -1325,9 +1330,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 
 		executeMethod(post, false);
 
-		if (logger.isTraceEnabled()) {
+		if (loggertrace.isTraceEnabled()) {
 			logger.trace("Response : ");
-			logger.trace(StringUtils.trim(post.getResponseBodyAsString()));
+			logger.trace(post.getResponseBodyAsString());
 		}
 
 		return post;
@@ -1663,7 +1668,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 				List<WorkflowTask> tasks = null;
 				ArrayList<Object> params = new ArrayList<Object>();
 				params.add(path.id);
-				tasks = (List<WorkflowTask>) workflowRequestWrapper(null,
+				tasks = (List<WorkflowTask>) workflowRequestWrapper(trans,
 						"getTasksForWorkflowPath", params);
 				if (tasks == null) {
 					return result;
@@ -1880,6 +1885,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		String methodName = "getTaskById";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(taskId);
+
 		WorkflowTask workflowRequest = (WorkflowTask) workflowRequestWrapper(trans, methodName,
 				methodParameters);
 		return workflowRequest;
@@ -1890,6 +1896,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		String methodName = "getPackageContents";
 		List<Object> methodParameters = new ArrayList<Object>();
 		methodParameters.add(taskId);
+
 		List<NodeRef> workflowRequest = (List<NodeRef>) workflowRequestWrapper(trans, methodName,
 				methodParameters);
 		return workflowRequest;
