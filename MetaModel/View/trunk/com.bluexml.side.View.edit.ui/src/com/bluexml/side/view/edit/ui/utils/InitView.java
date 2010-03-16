@@ -34,7 +34,7 @@ public class InitView {
 	public static Command init(AbstractViewOf av, EditingDomain domain) {
 		kindOfList = 0;
 		CompoundCommand cmd = new CompoundCommand();
-		;
+
 		if (av.getViewOf() != null) {
 			boolean doWork = true;
 			if (av.getChildren().size() > 0 || av.getDisabled().size() > 0) {
@@ -46,7 +46,8 @@ public class InitView {
 				}
 				if (av.getDisabled().size() > 0) {
 					Command delCmd = DeleteCommand.create(domain, av.getDisabled());
-					// TODO : find a better way, tried with RemoveCommand and
+					// TODO : find a better way, tried with RemoveCommand
+					// and
 					// DeleteCommand
 					if (delCmd.canExecute()) {
 						cmd.append(delCmd);
@@ -72,14 +73,22 @@ public class InitView {
 							c.add(subList);
 						}
 					}
-					cmd.append(AddCommand.create(domain, av, ViewPackage.eINSTANCE.getFieldContainer_Children(), c));
-//					av.setName(cl.getName() + " (" + ViewUtils.getTypeAsString(av) + ")");
-					av.setName(cl.getName());
+					if (c.size() > 0) {
+						cmd.append(AddCommand.create(domain, av, ViewPackage.eINSTANCE.getFieldContainer_Children(), c));
+						av.setName(cl.getName());
+					} else {
+						av.setName("REMOVE ME, "+cl.getName()+" do not have attributes");
+						UIUtils.showError("No Attribute", cl.getName()+" do not have attributes\n delete this view");
+						return null;
+					}
+					// av.setName(cl.getName() + " (" +
+					// ViewUtils.getTypeAsString(av) + ")");
 				}
 			}
 		} else {
 			UIUtils.showError("No Class defined", "No class have been defined. \n" + "Choose one and run Initiliaze again.");
 		}
+
 		return cmd;
 	}
 
