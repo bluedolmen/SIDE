@@ -128,7 +128,7 @@ public class ClazzUpdateCommand extends Command {
 		// }
 
 		if (view == null) {
-			if (_view.length() > 0) {
+			if (_view != null && _view.length() > 0) {
 				view = CommonFactoryImpl.init().createComment();
 				view.setValue(_view);
 				classe.getComments().add(view);
