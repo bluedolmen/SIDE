@@ -37,7 +37,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 				<index enabled="true">
 		                 <atomic>true</atomic>
 		                 <stored>false</stored>
-		                 <tokenised>true</tokenised>
+		                 <tokenised>false</tokenised>
 		        </index>
 			</property>						
 			
@@ -48,7 +48,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		              <index enabled="true">
 		                 <atomic>true</atomic>
 		                 <stored>false</stored>
-		                 <tokenised>true</tokenised>
+		                 <tokenised>false</tokenised>
 		              </index>
 			</property>
 		</properties>
