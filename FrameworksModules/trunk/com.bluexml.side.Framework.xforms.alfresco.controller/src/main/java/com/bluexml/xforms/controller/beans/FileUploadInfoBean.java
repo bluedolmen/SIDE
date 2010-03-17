@@ -22,6 +22,10 @@ public class FileUploadInfoBean {
 	/** The attribute that provided the path, name and mimetype */
 	private GenericAttribute attribute;
 
+	/**
+	 * if set to true, requests an index to be appended to the filename if the original filename is
+	 * not available, e.g "base.ext" becomes "base(1).ext" or "base(2).ext", etc.
+	 */
 	private boolean shouldAppendSuffix;
 
 	public FileUploadInfoBean(String path, String name, String mimetype, GenericAttribute attr,
@@ -63,7 +67,7 @@ public class FileUploadInfoBean {
 	}
 
 	/**
-	 * @return the shouldAppendSuffix
+	 * @return the shouldAppendSuffix status
 	 */
 	public boolean isShouldAppendSuffix() {
 		return shouldAppendSuffix;
