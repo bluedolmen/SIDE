@@ -1,0 +1,249 @@
+/* BlueXML SIDE - XForms component
+ * Default stylesheet.
+ */
+.xformstdleft {
+	float: left;
+}
+
+.xformstdclear {
+	clear: both;
+}
+
+#chiba-logo {
+	display: none;
+}
+
+#copyright {
+	display: none;
+}
+
+.group {
+	padding: 3px;
+	margin: 3px;
+	background: #ffffff;
+}
+
+.minimal-group {
+	padding: 3px;
+}
+
+.full-group {
+	background: none repeat scroll 0 0 transparent;
+	border: medium none;
+}
+
+.label {
+	color: #515D6B;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+}
+
+.submit {
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+	color: #000000;
+	padding: 0 5px;
+}
+
+span.submit .value {
+	cursor: pointer;
+	font: 98% arial, helvetica, clean, sans-serif;
+}
+
+.full-group div {
+	display: block;
+	padding: 5px;
+}
+
+/* keep the Dojo tabs to their initial look*/
+div.dojoTabLabels-top {
+	padding: 0px;
+}
+
+div.dojoTab {
+	padding: 0 0 0 9px;
+}
+
+.full-group label {
+	width: auto;
+	vertical-align: middle;
+	float: left;
+}
+
+.group-label {
+	font-weight: bold;
+}
+
+.full-repeat {
+	border: thin solid #EEEEEE;
+}
+
+.input,.textarea,.select1,.select,div.xformstdclear {
+	margin-left: 10px;
+}
+
+.input label,.textarea label,.full-group label {
+	height: 1.3em;
+	width: 180px;
+	padding-right: 5px;
+	text-align: right;
+	margin-top: 4px;
+	overflow: hidden;
+}
+
+/* align (vertically) bottom line of readonly fields' label with the text*/
+div.xformstdclear label {
+	margin-top: 0px;
+}
+
+/*
+ * FILE UPLOAD WIDGET
+ */
+div.side_upload_filename span {
+	font-size: 8pt;
+	margin-left: 2px;
+}
+
+div.upload div {
+	padding: 0px;
+}
+
+/*
+ * SELECTION WIDGETS
+ */
+div.side_select_widget,div.side_select_search_zone {
+	padding-left: 0px;
+}
+
+div.side_select_widget .submit { /* the create button*/
+	margin-left: 195px;
+}
+
+div.side_select_list select {
+	width: 320px;
+	overflow-x: scroll;
+	overflow: -moz-scrollbars-horizontal;
+}
+
+div.side_select_selected_items,div.side_select_selected_item {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #DDD;
+	min-width: 150px;
+	margin-top: 12px;
+	margin-left: 10px;
+}
+
+div.side_select_selected_items label {
+	display: none;
+}
+
+div.side_select_selected_item label {
+	display: none;
+}
+
+div.side_select_trigger_button {
+	padding-top: 15px;
+}
+
+div.side_select_search_zone label {
+	font-weight: normal;
+}
+
+div.side_select_output_zone label {
+	width: 90px;
+}
+
+div.side_select_selected_item label {
+	width: auto;
+}
+
+/*
+ * SEARCH WIDGETS
+ */
+div.side_search_value label {
+	display: none;
+	width: 0px;
+}
+
+div.side_search_value,div.side_search_operator {
+	float: left;
+	padding: 0px;
+}
+
+div.side_search_value select {
+	min-width: 150px;
+}
+
+div.side_search_value div.xsd-boolean {
+	margin-left: 0px;
+}
+
+div.side_search_operator select {
+	width: 200px;
+}
+
+div.side_search_field {
+	clear: both;
+}
+
+/*
+ *
+ */
+	/* make the text in read-only textareas visible when in inline multiple forms */
+div.side_ro_textarea span.mediatype-text-html {
+	background: #A7BCFC;
+}
+
+.side_form_title>.group-label {
+	background: none repeat scroll 0 0 #E3EAEC;
+	border: medium none;
+	overflow: auto;
+	font-size: 120%;
+	color: #515D6B;
+}
+
+div.side_jsp_footer {
+	text-align: center;
+	width: 100%;
+	border-top: solid 1px #AAA;
+	font-size: 14px;
+	vertical-align: middle;
+	min-height: 1.5em;
+}
+
+div.side_jsp_using {
+	text-align: right;
+	width: 100%;
+	border-top: solid 1px #AAA;
+	font-size: 12px;
+}
+
+a.side_jsp_using:link,a.side_jsp_footer:link {
+	color: #6FF;
+}
+
+side_xforms_line {
+	visibility: hidden;
+}
+
+#side_status_bar {
+	min-height: 1em;
+	font-weight: bold;
+}
+
+div#submitButtons .group-label {
+	background: none repeat scroll 0 0 transparent;
+	border: medium none;
+	overflow: auto;
+}
+
+#submitButtons {
+	text-align: right;
+}
+
+#submitButtons.full-group {
+	text-align: right;
+	background: #fff;
+	overflow: visible;
+}

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.bluexml</groupId>
+    <artifactId>superpom</artifactId>
+    <version>1.10</version>
+  </parent>
+  <groupId>com.bluexml.side.Framework.xforms.alfresco</groupId>
+  <artifactId>controller</artifactId>
+  <version>1.0.80</version>
+  <name>XForms controller</name>
+  <description>This module provides controller allowing conversion to and from XForm XML and Alfresco custom webscript.
+		It uses generated files : forms and mapping</description>
+  <inceptionYear>2009</inceptionYear>
+  <organization>
+    <name>BlueXML</name>
+    <url>http://www.bluexml.com/</url>
+  </organization>
+  <contributors>
+    <contributor>
+      <name>Gabriel Landais</name>
+      <organization>BlueXML</organization>
+      <organizationUrl>http://www.bluexml.com</organizationUrl>
+      <roles>
+        <role>Original developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Amenel VOGLOZIN</name>
+      <email>avoglozin@bluexml.com</email>
+      <organization>BlueXML</organization>
+      <organizationUrl>http://www.bluexml.com</organizationUrl>
+      <roles>
+        <role>Developer &amp; maintainer</role>
+      </roles>
+    </contributor>
+  </contributors>
+  <dependencies>
+    <dependency>
+      <groupId>com.bluexml.side.Form</groupId>
+      <artifactId>XFormsUtils</artifactId>
+      <version>[1.0.1,)</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.8.0</version>
+    </dependency>
+    <dependency>
+      <!-- required for using DOMUtil -->
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+      <version>2.8.0</version>
+    </dependency>
+    <dependency>
+      <groupId>cas</groupId>
+      <artifactId>casclient</artifactId>
+      <version>2.1.1</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>commons-httpclient</groupId>
+      <artifactId>commons-httpclient</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.chiba</groupId>
+      <artifactId>chiba-core</artifactId>
+      <version>1.5.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.chiba</groupId>
+      <artifactId>chiba-web-jar</artifactId>
+      <version>2.3.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.1.3</version>
+    </dependency>
+    <!-- Classes needed to deserialize Alfresco WF responses -->
+    <dependency>
+      <groupId>org.alfresco</groupId>
+      <artifactId>alfresco-repository</artifactId>
+      <version>3.2r2</version>
+      <classifier>community</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.alfresco</groupId>
+      <artifactId>alfresco-core</artifactId>
+      <version>3.2r2</version>
+      <classifier>community</classifier>
+    </dependency>
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>1.5.2</version>
+    </dependency>
+    <dependency>
+      <groupId>xpp3</groupId>
+      <artifactId>xpp3_min</artifactId>
+      <version>1.1.3.4.O</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>xml-resolver</groupId>
+      <!-- needed for the HTML catalog -->
+      <artifactId>xml-resolver</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <!-- required for using DOMUtil -->
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <!-- required for using DOMUtil -->
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.0.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jibx</groupId>
+      <artifactId>jibx-run</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring</artifactId>
+      <version>2.0.2</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>xforms.controller-${project.version}</finalName>
+    <plugins>
+      <!--			<plugin>-->
+      <!--				<groupId>org.apache.maven.plugins</groupId>-->
+      <!--				<artifactId>maven-dependency-plugin</artifactId>-->
+      <!--				<executions>-->
+      <!--					<execution>-->
+      <!--						<id>copy-dependencies</id>-->
+      <!--						<phase>package</phase>-->
+      <!--						<goals>-->
+      <!--							<goal>copy-dependencies</goal>-->
+      <!--						</goals>-->
+      <!--						<configuration>-->
+      <!--							<overWriteReleases>false</overWriteReleases>-->
+      <!--							<overWriteSnapshots>false</overWriteSnapshots>-->
+      <!--							<overWriteIfNewer>true</overWriteIfNewer>-->
+      <!--							<stripVersion>false</stripVersion>-->
+      <!--						</configuration>-->
+      <!--					</execution>-->
+      <!--				</executions>-->
+      <!--			</plugin>-->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxb2-maven-plugin</artifactId>
+        <version>1.3</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>xjc</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <packageName>com.bluexml.xforms.controller.binding</packageName>
+          <clearOutputDir>true</clearOutputDir>
+          <!-- <outputDirectory>${project.build.sourceDirectory}</outputDirectory> -->
+          <!-- Do not validate the schemas -->
+          <nv>true</nv>
+          <!-- Suppress package info annotation, otherwise each build would mark the working copy as dirty (SVN-wise) -->
+          <arguments>-no-header</arguments>
+          <target>2.0</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+

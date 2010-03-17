@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<nodes>
+	<node>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_prenom">
+			Pierre
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}creator">
+			admin
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_age">
+			22
+		</property>
+		
+		<property name="{http://www.alfresco.org/model/content/1.0}author">
+			
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}store-protocol">
+			workspace
+		</property>
+		<property name="{http://www.alfresco.org/model/application/1.0}editInline">
+			true
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_mobilite">
+			Oui
+		</property>
+		
+		<property name="{http://www.alfresco.org/model/content/1.0}title">
+			test
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}node-uuid">
+			5014f059-2adc-4fce-adfd-4404ebe36417
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}modifier">
+			admin
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}name">
+			
+			test
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_permisB">
+			B
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}modified">
+			12 août 2009
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}store-identifier">
+			SpacesStore
+		</property>
+		
+		<property name="{http://www.alfresco.org/model/content/1.0}created">
+			12 août 2009
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_nom">
+			BERTRAND
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}node-dbid">
+			483
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}description">
+			
+			
+		</property>
+		
+		
+		
+	</node>
+	<node>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_prenom">
+			Eric
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}creator">
+			admin
+		</property>
+		
+		<property name="{http://www.alfresco.org/model/content/1.0}author">
+			
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_age">
+			28
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}store-protocol">
+			workspace
+		</property>
+		<property name="{http://www.alfresco.org/model/application/1.0}editInline">
+			true
+		</property>
+		
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_mobilite">
+			Oui
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}title">
+			test2
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}node-uuid">
+			266b5048-f977-4d89-94f7-65b9e83e3e6b
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}modifier">
+			
+			admin
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}name">
+			test2
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_permisB">
+			
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}modified">
+			12 août 2009
+		</property>
+		
+		<property name="{http://www.alfresco.org/model/content/1.0}created">
+			12 août 2009
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}store-identifier">
+			SpacesStore
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_nom">
+			Cambray
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}node-dbid">
+			
+			484
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}description">
+			
+		</property>
+		
+		
+		
+	</node>
+	<node>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_prenom">
+			Michael
+		</property>
+		
+		<property name="{http://www.alfresco.org/model/content/1.0}creator">
+			admin
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}author">
+			
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_age">
+			26
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}store-protocol">
+			workspace
+		</property>
+		
+		<property name="{http://www.alfresco.org/model/application/1.0}editInline">
+			true
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_mobilite">
+			Oui
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}title">
+			
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}node-uuid">
+			dfed7762-a5e2-4ab8-970b-bbb6269a3f9e
+		</property>
+		
+		<property name="{http://www.alfresco.org/model/content/1.0}modifier">
+			admin
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}name">
+			test3
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_permisB">
+			BB
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}modified">
+			
+			12 août 2009
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}created">
+			12 août 2009
+		</property>
+		<property name="{http://www.alfresco.org/model/system/1.0}store-identifier">
+			SpacesStore
+		</property>
+		<property name="{http://www.bluexml.com/model/content/com/1.0}com_bluexml_demo_rh_Personne_nom">
+			TRAN
+		</property>
+		
+		<property name="{http://www.alfresco.org/model/system/1.0}node-dbid">
+			498
+		</property>
+		<property name="{http://www.alfresco.org/model/content/1.0}description">
+			
+		</property>
+		
+		
+		
+	</node>
+</nodes>

@@ -1,0 +1,87 @@
+<!-- FacetMap Servlet configuration -->
+<!--         Version: 1.0           -->
+<!--      http://facetmap.com       -->
+
+<!--
+  This file configures FacetMap to run as a Java Servlet, in a
+  Servlet Container program such as Tomcat, iPlanet, Weblogic, etc.
+  Many configuration settings are done here, in <context-param>
+  elements. You can configure FacetMap to your own needs by
+  changing the <param-value> for each setting. Each setting
+  is documented separately below.
+-->
+
+<!DOCTYPE web-app 
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" 
+    "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+
+<web-app>
+    <display-name>FacetMap</display-name>
+    <description>FacetMap for Servlet containers. See http://facetmap.com to learn more.</description>
+
+<!--
+  These context-param elements are only provided as hard defaults
+  for Facetmap configuration parameters. Typically you change these
+  values in WEB-INF/configuration.properties instead of changing
+  them here. For parameter definitions and a web interface to change
+  them, see servletParameters.jsp .
+-->
+
+    <context-param>
+      <param-name>map</param-name>
+      <param-value>map.xml</param-value>
+    </context-param>
+
+    <context-param>
+      <param-name>log4jConfigFile</param-name>
+      <param-value>logProperties.txt</param-value>
+    </context-param>
+
+    <context-param>
+      <param-name>workDirectory</param-name>
+      <param-value>/tmp/facetmap</param-value>
+    </context-param>
+
+<!--
+  This element initializes FacetMap. There's usually no need to
+  change this, unless you have and want to use a different FacetMap
+  engine.
+-->
+  
+    <servlet>
+        <servlet-name>facetmap</servlet-name>
+        <servlet-class>com.facetmap.simple.SimpleFacetmapServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>BrowseXml</servlet-name> 
+        <servlet-class>com.facetmap.servlet.BrowseXmlServlet</servlet-class> 
+    </servlet>
+
+<!--
+  The following elements allow you to run FacetMap without having the
+  Java JDK installed. If you wish to edit the JSP pages or write your
+  own JSP pages, you will need to delete everything between here and
+  the marker "End Page Mappings". If you do delete them, be sure you
+  have the JDK, not the JRE, installed on your machine.
+-->
+    <!-- JSPC_WEBINC goes here -->
+<!--
+  End Page Mappings
+-->
+
+    <servlet-mapping>
+        <servlet-name>BrowseXml</servlet-name> 
+        <url-pattern>/browse.xml</url-pattern> 
+    </servlet-mapping>
+
+<!--
+  Define the default session timeout for your application,
+  in minutes. FacetMap itself uses no session state.
+-->
+    <session-config>
+      <session-timeout>30</session-timeout>    <!-- 30 minutes -->
+    </session-config>
+
+</web-app>
