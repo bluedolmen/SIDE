@@ -1390,14 +1390,19 @@ public class DataLayer implements DataLayerInterface {
 			if (applyName) {
 				if (shouldAppendSuffix) {
 					String currentName = filename;
-					int idx = 0;
+					String baseName = getFileNamePart(filename);
+					String ext = getExtensionPart(filename);
+					int idx = 1; // we'll consider "base.ext" equivalent to "base(1).ext"
 					while (idx < 1000) { // is there any need to go beyond
 						try {
 							serviceRegistry.getFileFolderService().rename(newNode, currentName);
 							break;
 						} catch (FileExistsException e) {
 							idx++;
-							currentName = filename + " (" + idx + ")";
+							currentName = baseName + "(" + idx + ")";
+							if (ext != null) {
+								currentName += "." + ext;
+							}
 						} catch (org.alfresco.service.cmr.model.FileNotFoundException e) {
 							logger.debug("Failed to rename: the node to rename does not exist!", e);
 							return FAILURE;
@@ -1420,6 +1425,40 @@ public class DataLayer implements DataLayerInterface {
 		return FAILURE;
 	}
 
+	/**
+	 * 
+	 * @param filename
+	 * @return
+	 */
+	private String getFileNamePart(String filename) {
+		int pos = filename.lastIndexOf('.');
+		if (pos == -1) {
+			return filename;
+		}
+		return filename.substring(0, pos);
+	}
+
+	/**
+	 * 
+	 * @param filename
+	 * @return
+	 */
+	private String getExtensionPart(String filename) {
+		int pos = filename.lastIndexOf('.');
+		if (pos == -1) {
+			return null;
+		}
+		int length = filename.length();
+		
+		//
+		pos = pos + 1;
+
+		if (pos  == length) {
+			return "";
+		}
+		return filename.substring(pos, length);
+	}
+	
 	/**
 	 * Writes the content of a file into a node. The file is read as a binary file.
 	 * 
