@@ -5,6 +5,7 @@ package com.bluexml.xforms.controller.beans;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.controller.navigation.Page;
@@ -20,21 +21,38 @@ import com.bluexml.xforms.controller.navigation.Page;
  */
 public class PageInfoBean {
 
+	private FormTypeEnum formType;
+	
+	/** The actual prefix in the name of the XHTML template*/
+	private String formName; // e.g. Person_RO
+	
+	/** The underlying datatype, i.e. the id of the form. */
+	private String dataType; // e.g. Person
+	
+	/** The set of parameters the page was called with*/
+	private Map<String, String> initParams;
+	
 	private String templateId;
+	
+	/** The id of the object being edited.*/
 	private String dataId;
+	
+	/** The language for this page, if applicable */
 	private String language;
+	/**
+	 * the definition id of the current workflow if the workflow is not started or the workflow
+	 * instance id if the workflow is started
+	 */
 	private String processId;
+	/** the id of the current task for the current workflow */
 	private String instanceId;
 	private boolean showSubmits;
 	private boolean showCancel;
 	private boolean showDelete;
 	private boolean showValidate;
-	private FormTypeEnum formType;
-	private String formName; // e.g. Person_RO
-	private String dataType; // e.g. Person
-	private Map<String, String> initParams;
 	/** true if the form was called to display an object whose type does not match the form */
 	private boolean wrongCallType;
+
 
 	/**
 	 * 
@@ -52,7 +70,7 @@ public class PageInfoBean {
 		this.formType = FormTypeEnum.BOTH;
 		this.formName = null;
 		this.dataType = null;
-		this.initParams = null;
+		this.initParams = new TreeMap<String, String>();
 		this.wrongCallType = false;
 	}
 

@@ -1,62 +1,23 @@
 package com.bluexml.xforms.controller.navigation;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.w3c.dom.Document;
 
 import com.bluexml.xforms.controller.beans.PageInfoBean;
 
 /**
- * The Class Page. Holds some data about pages served to users. No significant processing is done
- * here.
+ * The Class Page. Holds some data about pages served to users. Performs no significant processing.
+ * 
  */
 public class Page {
-
-	/** The form type. */
-	private FormTypeEnum formType;
-
-	/** The underlying datatype. */
-	private String dataType;
-
-	/** The form name. */
-	private String formName;
+	private PageInfoBean pageBean;
 
 	/** The data type set. */
 	private boolean dataTypeSet;
 
-	/** The data id. */
-	private String dataId;
-
-	/** The language for this page, if applicable */
-	private String language;
-
 	/** The node. */
 	private Document node;
-
-	/** The init params. */
-	private Map<String, String> initParams;
-
-	/** The template. */
-	private String template;
-
-	private boolean showSubmitButtons;
-	private boolean showCancel;
-	private boolean showDelete;
-	private boolean showValidate;
-
-	private boolean wrongCallType;
-
-	private String cssUrl;
-
-	/**
-	 * the definition id of the current workflow if the workflow is not started or the workflow
-	 * instance id if the workflow is started
-	 */
-	private String wkflwProcessId;
-
-	/** the id of the current task for the current workflow */
-	private String wkflwInstanceId;
 
 	/**
 	 * Instantiates a new page.
@@ -64,66 +25,14 @@ public class Page {
 	 * @param bean
 	 *            the page information bean
 	 */
-	public Page(PageInfoBean bean) {
+	public Page(PageInfoBean pageBean) {
 		super();
-		this.formType = bean.getFormType();
-		this.formName = bean.getFormName();
-		this.dataType = bean.getDataType();
-		this.dataTypeSet = false;
-		this.dataId = bean.getDataId();
-		this.template = bean.getTemplateId();
-		if (bean.getInitParams() != null) {
-			this.initParams = bean.getInitParams();
-		} else {
-			this.initParams = new TreeMap<String, String>();
-		}
-		this.language = bean.getLanguage();
-		this.wkflwProcessId = bean.getProcessId();
-		this.wkflwInstanceId = bean.getInstanceId();
-		this.showSubmitButtons = bean.isShowSubmits();
-		this.wrongCallType = bean.isWrongCallType();
-		this.showCancel = bean.isShowCancel();
-		this.showDelete = bean.isShowDelete();
-		this.showValidate = bean.isShowValidate();
+		this.pageBean = pageBean;
 	}
 
-	/**
-	 * Gets the form type.
-	 * 
-	 * @return the form type
-	 */
-	public FormTypeEnum getFormType() {
-		return formType;
-	}
-
-	/**
-	 * Sets the form type.
-	 * 
-	 * @param type
-	 *            the new form type
-	 */
-	public void setFormType(FormTypeEnum type) {
-		this.formType = type;
-	}
-
-	/**
-	 * Gets the form name.
-	 * 
-	 * @return the form name
-	 */
-	public String getFormName() {
-		return formName;
-	}
-
-	/**
-	 * Sets the form name.
-	 * 
-	 * @param formName
-	 *            the new form name
-	 */
-	public void setFormName(String formName) {
-		this.formName = formName;
-	}
+	//
+	// LOCALLY MANAGED
+	//
 
 	/**
 	 * Checks if is data type set.
@@ -145,44 +54,6 @@ public class Page {
 	}
 
 	/**
-	 * Gets the data id.
-	 * 
-	 * @return the data id
-	 */
-	public String getDataId() {
-		return dataId;
-	}
-
-	/**
-	 * Sets the data id.
-	 * 
-	 * @param dataId
-	 *            the new data id
-	 */
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
-	}
-
-	/**
-	 * Gets the template.
-	 * 
-	 * @return the template
-	 */
-	public String getTemplate() {
-		return template;
-	}
-
-	/**
-	 * Sets the template.
-	 * 
-	 * @param template
-	 *            the new template
-	 */
-	public void setTemplate(String template) {
-		this.template = template;
-	}
-
-	/**
 	 * Gets the node.
 	 * 
 	 * @return the node
@@ -201,13 +72,93 @@ public class Page {
 		this.node = node;
 	}
 
+	//
+	// DELEGATED
+	//
+
+	/**
+	 * Gets the form type.
+	 * 
+	 * @return the form type
+	 */
+	public FormTypeEnum getFormType() {
+		return pageBean.getFormType();
+	}
+
+	/**
+	 * Sets the form type.
+	 * 
+	 * @param formType
+	 *            the new form type
+	 */
+	public void setFormType(FormTypeEnum formType) {
+		pageBean.setFormType(formType);
+	}
+
+	/**
+	 * Gets the form name.
+	 * 
+	 * @return the form name
+	 */
+	public String getFormName() {
+		return pageBean.getFormName();
+	}
+
+	/**
+	 * Sets the form name.
+	 * 
+	 * @param formName
+	 *            the new form name
+	 */
+	public void setFormName(String formName) {
+		pageBean.setFormName(formName);
+	}
+
+	/**
+	 * Gets the data id.
+	 * 
+	 * @return the data id
+	 */
+	public String getDataId() {
+		return pageBean.getDataId();
+	}
+
+	/**
+	 * Sets the data id.
+	 * 
+	 * @param dataId
+	 *            the new data id
+	 */
+	public void setDataId(String dataId) {
+		pageBean.setDataId(dataId);
+	}
+
+	/**
+	 * Gets the template.
+	 * 
+	 * @return the template
+	 */
+	public String getTemplate() {
+		return pageBean.getTemplateId();
+	}
+
+	/**
+	 * Sets the template.
+	 * 
+	 * @param template
+	 *            the new template
+	 */
+	public void setTemplate(String template) {
+		pageBean.setTemplateId(template);
+	}
+
 	/**
 	 * Gets the inits the params.
 	 * 
 	 * @return the inits the params
 	 */
 	public Map<String, String> getInitParams() {
-		return initParams;
+		return pageBean.getInitParams();
 	}
 
 	/**
@@ -217,14 +168,14 @@ public class Page {
 	 *            the init params
 	 */
 	public void setInitParams(Map<String, String> initParams) {
-		this.initParams = initParams;
+		pageBean.setInitParams(initParams);
 	}
 
 	/**
 	 * @return the language
 	 */
 	public String getLanguage() {
-		return language;
+		return pageBean.getLanguage();
 	}
 
 	/**
@@ -232,14 +183,14 @@ public class Page {
 	 *            the language to set
 	 */
 	public void setLanguage(String language) {
-		this.language = language;
+		pageBean.setLanguage(language);
 	}
 
 	/**
 	 * @return the showSubmitButtons
 	 */
 	public boolean isShowSubmitButtons() {
-		return showSubmitButtons;
+		return pageBean.isShowSubmits();
 	}
 
 	/**
@@ -247,14 +198,14 @@ public class Page {
 	 *            the showSubmitButtons to set
 	 */
 	public void setShowSubmitButtons(boolean showSubmitButtons) {
-		this.showSubmitButtons = showSubmitButtons;
+		pageBean.setShowSubmits(showSubmitButtons);
 	}
 
 	/**
 	 * @return the showCancel
 	 */
 	public boolean isShowCancel() {
-		return showCancel;
+		return pageBean.isShowCancel();
 	}
 
 	/**
@@ -262,14 +213,14 @@ public class Page {
 	 *            the showCancel to set
 	 */
 	public void setShowCancel(boolean showCancel) {
-		this.showCancel = showCancel;
+		pageBean.setShowCancel(showCancel);
 	}
 
 	/**
 	 * @return the showDelete
 	 */
 	public boolean isShowDelete() {
-		return showDelete;
+		return pageBean.isShowDelete();
 	}
 
 	/**
@@ -277,14 +228,14 @@ public class Page {
 	 *            the showDelete to set
 	 */
 	public void setShowDelete(boolean showDelete) {
-		this.showDelete = showDelete;
+		pageBean.setShowDelete(showDelete);
 	}
 
 	/**
 	 * @return the showValidate
 	 */
 	public boolean isShowValidate() {
-		return showValidate;
+		return pageBean.isShowValidate();
 	}
 
 	/**
@@ -292,14 +243,14 @@ public class Page {
 	 *            the showValidate to set
 	 */
 	public void setShowValidate(boolean showValidate) {
-		this.showValidate = showValidate;
+		pageBean.setShowValidate(showValidate);
 	}
 
 	/**
 	 * @return the wkflwProcessId
 	 */
 	public String getWkflwProcessId() {
-		return wkflwProcessId;
+		return pageBean.getProcessId();
 	}
 
 	/**
@@ -307,14 +258,14 @@ public class Page {
 	 *            the wkflwProcessId to set
 	 */
 	public void setWkflwProcessId(String wkflwProcessId) {
-		this.wkflwProcessId = wkflwProcessId;
+		pageBean.setProcessId(wkflwProcessId);
 	}
 
 	/**
 	 * @return the wkflwInstanceId
 	 */
 	public String getWkflwInstanceId() {
-		return wkflwInstanceId;
+		return pageBean.getInstanceId();
 	}
 
 	/**
@@ -322,7 +273,7 @@ public class Page {
 	 *            the wkflwInstanceId to set
 	 */
 	public void setWkflwInstanceId(String wkflwInstanceId) {
-		this.wkflwInstanceId = wkflwInstanceId;
+		pageBean.setInstanceId(wkflwInstanceId);
 	}
 
 	/**
@@ -330,29 +281,14 @@ public class Page {
 	 *            the wrongCallType to set
 	 */
 	public void setWrongCallType(boolean wrongCallType) {
-		this.wrongCallType = wrongCallType;
+		pageBean.setWrongCallType(wrongCallType);
 	}
 
 	/**
 	 * @return the wrongCallType
 	 */
 	public boolean isWrongCallType() {
-		return wrongCallType;
-	}
-
-	/**
-	 * @param cSSUrl
-	 *            the cSSUrl to set
-	 */
-	public void setCssUrl(String cssUrl) {
-		this.cssUrl = cssUrl;
-	}
-
-	/**
-	 * @return the URL to the additional CSS file
-	 */
-	public String getCssUrl() {
-		return cssUrl;
+		return pageBean.isWrongCallType();
 	}
 
 	/**
@@ -360,14 +296,14 @@ public class Page {
 	 *            the dataType to set
 	 */
 	public void setDataType(String dataType) {
-		this.dataType = dataType;
+		pageBean.setDataType(dataType);
 	}
 
 	/**
 	 * @return the dataType
 	 */
 	public String getDataType() {
-		return dataType;
+		return pageBean.getDataType();
 	}
 
 }

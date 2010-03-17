@@ -328,6 +328,12 @@ public enum MsgId {
 	PARAM_STANDALONE("standalone"),
 	/** originally for passing the status msg to client URL, now also considered as an input*/
 	PARAM_STATUS_MSG("statusMsg"),
+	/** 
+	 * a suffix which, when appended to a form name, allows selecting a different form. e.g. if the 
+	 * form id given in the URL is "Person" and a template "admin" is provided, the form definition 
+	 * will be read from "Person_admin.xhtml" instead of reading it from "Person.xhtml".
+	 */
+	PARAM_TEMPLATE("template"),
 	PARAM_USER_NAME("userName"),
 	PARAM_USER_PSWD("userPswd"),
 	PARAM_UPLOAD_DEPTH("uploadDepth"),

@@ -426,7 +426,7 @@ public class NavigationManager {
 			Element css = doc.createElementNS("http://www.w3.org/1999/xhtml", "link");
 			css.setAttribute("rel", "stylesheet");
 			css.setAttribute("type", "text/css");
-			css.setAttribute("href", currentPage.getCssUrl());
+			css.setAttribute("href", controller.getCssUrl());
 			head.appendChild(css);
 		}
 		// hide buttons if applicable
@@ -642,7 +642,7 @@ public class NavigationManager {
 		}
 
 		bean.setDataId(controller.patchDataId(dataId));
-		bean.setTemplateId(StringUtils.trimToNull(req.getParameter(TEMPLATE_ID)));
+		bean.setTemplateId(req.getParameter(TEMPLATE_ID));
 		bean.setLanguage(req.getParameter(MsgId.PARAM_LANGUAGE.getText()));
 		bean.setProcessId(req.getParameter(MsgId.PARAM_WORKFLOW_PROCESS_ID.getText()));
 		bean.setInstanceId(req.getParameter(MsgId.PARAM_WORKFLOW_INSTANCE_ID.getText()));

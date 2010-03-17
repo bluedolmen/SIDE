@@ -32,12 +32,12 @@ public class NavigationPath {
 	/**
 	 * Creates a new page with the info given, and pushes it on top of the page stack.
 	 * 
-	 * @param bean
+	 * @param pageBean
 	 *            the page information bean
 	 */
-	public void setCurrentPage(PageInfoBean bean) {
-		assert bean.getFormType() != FormTypeEnum.BOTH;
-		Page currentPage = new Page(bean);
+	public void setCurrentPage(PageInfoBean pageBean) {
+		assert pageBean.getFormType() != FormTypeEnum.BOTH;
+		Page currentPage = new Page(pageBean);
 		pushPage(currentPage);
 	}
 
