@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.feature" label="SIDE Core Components" version="1.0.164.v15585-20100316" provider-name="blueXML">
+<feature id="com.bluexml.side.Common.core.feature" label="SIDE Core Components" version="1.0.165.v15632-20100317" provider-name="blueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized
 frameworks like Alfresco. This feature gathers common tools for
 SIDE modelers.</description>
@@ -626,14 +626,14 @@ copy of the Program in return for a fee.
 
                      END OF TERMS AND CONDITIONS</license>
   <includes id="com.bluexml.side.Application.feature" version="1.0.121.v14213-20100209" />
-  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.82.v15585-20100316" />
+  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.83.v15632-20100317" />
   <includes id="com.bluexml.side.Common.feature" version="1.0.30.v14213-20100209" />
   <includes id="com.bluexml.side.Form.feature" version="1.0.95.v15585-20100316" />
   <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.35.v14213-20100209" />
   <includes id="com.bluexml.side.Requirements.feature" version="1.0.90.v14527-20100216" />
-  <includes id="com.bluexml.side.View.feature" version="1.0.53.v15544-20100314" />
+  <includes id="com.bluexml.side.View.feature" version="1.0.54.v15632-20100317" />
   <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.84.v14213-20100209" />
-  <includes id="com.bluexml.side.Util.feature" version="1.0.207.v15585-20100316" />
+  <includes id="com.bluexml.side.Util.feature" version="1.0.208.v15632-20100317" />
   <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.31.v14213-20100209" />
   <plugin id="com.bluexml.side.Integration.eclipse.branding" download-size="0" install-size="0" version="1.0.41.v15544-20100314" unpack="false" />
   <plugin id="com.bluexml.side.Integration.eclipse.builder" download-size="0" install-size="0" version="1.0.33.v15014-20100226" unpack="false" />
