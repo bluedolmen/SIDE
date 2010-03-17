@@ -100,6 +100,7 @@ function main()
       }),
       query = filterParams.query;
 
+   logger.log("###### Lucene Search query :"+query);
    // Query and sort the list before trimming to page chunks below
    allAssets = search.luceneSearch(query, filterParams.sortBy, filterParams.sortByAscending, filterParams.limitResults ? filterParams.limitResults : 0);
 

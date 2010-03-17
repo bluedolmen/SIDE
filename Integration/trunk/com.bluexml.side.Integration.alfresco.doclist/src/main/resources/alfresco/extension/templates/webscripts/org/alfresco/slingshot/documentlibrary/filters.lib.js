@@ -154,20 +154,17 @@ var Filters =
         	 properties=searchObj.properties;
         	 type=searchObj.type;
         	 var logicalOperator=" AND ";
-			 if (logicalOperator.toLowerCase() == "or") {
+			 if (searchObj.operator.toLowerCase() == "or") {
 				 logicalOperator=" OR ";
 			 }
         	 var query='+TYPE:"'+type+'"';
         	 var propQuery="";
         	 
-        	 /*for (var prop in properties) {
-        		 if (properties[prop] != "") {
-        			 propQuery+="@"+prop;
-        			 propQuery+=":"+properties[prop];        		 
-        			 propQuery+=operator;
-        		 }
-        	 }
-        	 */
+        	 /*
+				 * for (var prop in properties) { if (properties[prop] != "") {
+				 * propQuery+="@"+prop; propQuery+=":"+properties[prop];
+				 * propQuery+=operator; } }
+				 */
         	 propQuery= Filters.parseAdvancedSearch(searchObj);
         	 
         	 if (propQuery !=="") {
@@ -212,26 +209,22 @@ var Filters =
 	   const suportedTypes= simpleFieldTypes.concat(boundedFieldTypes);
 	   const unsuportedTypes=["time","object"];
 	   
-	   /*json ={type:"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document",
-			   operator:"and",
-			   fields:{
-			   	"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Libelle":{
-			   		type:"String",
-			   		operator:"contains",
-			   		values:["ssd"]},
-			   	"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Numero":{type:"String",operator:"is",values:[""]},
-			   	"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Observation":{type:"String",operator:"istartsWith",values:[""]},
-			   	"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_DateNumerisation":{
-			   		type:"DateTime",
-			   		operator:"between",
-			   		values:["2010-02-24T12:26:14.144+01:00","2010-02-24T12:26:14.161+01:00"]},
-			   	"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Auteur":{type:"String",operator:"is",values:[""]}
-			   }
-			  };
-		*/
+	   /*
+		 * json
+		 * ={type:"{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document",
+		 * operator:"and", fields:{
+		 * "{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Libelle":{
+		 * type:"String", operator:"contains", values:["ssd"]},
+		 * "{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Numero":{type:"String",operator:"is",values:[""]},
+		 * "{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Observation":{type:"String",operator:"istartsWith",values:[""]},
+		 * "{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_DateNumerisation":{
+		 * type:"DateTime", operator:"between",
+		 * values:["2010-02-24T12:26:14.144+01:00","2010-02-24T12:26:14.161+01:00"]},
+		 * "{http://www.bluexml.com/model/content/DigitizationProcess/1.0}com_bluexml_side_models_liste_Document_Auteur":{type:"String",operator:"is",values:[""]} } };
+		 */
 	   var type=json.type;
 	   var logicalOperator=" AND ";
-	   if (logicalOperator.toLowerCase() == "or") {
+	   if (json.operator.toLowerCase() == "or") {
 		   logicalOperator=" OR ";
 	   }
 	   var properties=json.fields;
@@ -250,7 +243,7 @@ var Filters =
   			switch (dataType) {
   			// simple
 				case "string":
-					var valuePart="";
+					var valuePart="";					
 					switch (comparator) {
 					case "contains":
 						valuePart="*"+values[0]+"*";
@@ -279,7 +272,7 @@ var Filters =
 					default:
 						break;
 					}					
-					propQuery+=propQuery_local+":"+valuePart;
+					propQuery+=propQuery_local+":"+'"'+valuePart+'"';
 					break;
 				case "char":	
 					break;
@@ -328,7 +321,7 @@ var Filters =
 							query=" +(";
 						}
 						for (var c=0;c<values.length;c++) {
-							query+=propQuery_local+":"+values[c];
+							query+=propQuery_local+":"+'"'+values[c]+'"';
 							query+=" OR ";
 						}
 					
@@ -344,7 +337,7 @@ var Filters =
 							query=" -(";
 						}
 						for (var c=0;c<values.length;c++) {
-							query+=propQuery_local+":"+values[c];
+							query+=propQuery_local+":"+'"'+values[c]+'"';
 							query+=" OR ";
 						}
 						var ind=query.lastIndexOf(" OR ");
