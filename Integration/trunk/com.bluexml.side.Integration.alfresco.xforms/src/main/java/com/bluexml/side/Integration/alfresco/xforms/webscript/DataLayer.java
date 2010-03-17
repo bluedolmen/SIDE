@@ -313,7 +313,7 @@ public class DataLayer implements DataLayerInterface {
 
 		NodeRef parent = createPath(lwhere);
 		NodeRef newNode = null;
-		
+
 		QName lassocQName = assocQName;
 		if (lassocQName == null) {
 			lassocQName = QName.createQName(ALF_CONTENT_URI + parent.getId());
@@ -533,8 +533,7 @@ public class DataLayer implements DataLayerInterface {
 			throw new TypeConversionException(
 					"The property value is not compatible with the type defined for the property: \n"
 							+ "   property: " + (propertyDef == null ? "unknown" : propertyDef)
-							+ "\n" + "   value: " + value + "\n" + "   value type: "
-							+ classe, e);
+							+ "\n" + "   value: " + value + "\n" + "   value type: " + classe, e);
 		}
 	}
 
@@ -1386,6 +1385,7 @@ public class DataLayer implements DataLayerInterface {
 			resultId = StringEscapeUtils.escapeXml(newNode.toString());
 			logger.debug(" File '" + filename + "' (size: " + sizeUploaded + ") uploaded to node: "
 					+ resultId);
+
 			// set the node name
 			if (applyName) {
 				if (shouldAppendSuffix) {
@@ -1393,7 +1393,7 @@ public class DataLayer implements DataLayerInterface {
 					String baseName = getFileNamePart(filename);
 					String ext = getExtensionPart(filename);
 					int idx = 1; // we'll consider "base.ext" equivalent to "base(1).ext"
-					while (idx < 1000) { // is there any need to go beyond
+					while (idx < 1000) { // is there any need to go beyond this ?
 						try {
 							serviceRegistry.getFileFolderService().rename(newNode, currentName);
 							break;
@@ -1407,6 +1407,9 @@ public class DataLayer implements DataLayerInterface {
 							logger.debug("Failed to rename: the node to rename does not exist!", e);
 							return FAILURE;
 						}
+						// TODO: automatically rename previous versions to extend their index when
+						// the renaming finally succeeds ? i.e. if (1)..(9) exist and the renaming
+						// succeeds at (10), should we rename (1) into (01), (2) into (02), etc. ?
 					}
 				} else {
 					try {
@@ -1449,16 +1452,16 @@ public class DataLayer implements DataLayerInterface {
 			return null;
 		}
 		int length = filename.length();
-		
+
 		//
 		pos = pos + 1;
 
-		if (pos  == length) {
+		if (pos == length) {
 			return "";
 		}
 		return filename.substring(pos, length);
 	}
-	
+
 	/**
 	 * Writes the content of a file into a node. The file is read as a binary file.
 	 * 
