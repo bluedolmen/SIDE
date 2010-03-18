@@ -20,7 +20,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side.Integration.alfresco</groupId>
   <artifactId>shareFacetMapDashlet</artifactId>
-  <version>1.0.22</version>
+  <version>1.0.23</version>
   <name>Dashlets Alfresco share</name>
   <description>including facetmap in alfresco share</description>
   <packaging>zip</packaging>
@@ -39,7 +39,7 @@
     <dependency>
       <groupId>com.bluexml.side.Integration.alfresco</groupId>
       <artifactId>shareDoclist</artifactId>
-      <version>1.0.19</version>
+      <version>1.0.20</version>
       <type>zip</type>
     </dependency>
   </dependencies>
