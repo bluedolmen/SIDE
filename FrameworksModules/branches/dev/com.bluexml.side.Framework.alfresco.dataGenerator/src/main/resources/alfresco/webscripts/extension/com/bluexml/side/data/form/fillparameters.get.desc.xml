@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<webscript>
-    <shortname>Register parameters for Random Data Generator Service</shortname>
-    <description>This service offers the parametrization of the Random Data Generator Service</description>
-    <url>/data/form/fillparameters</url>
-    <format default="html">argument</format>
-    <authentication>guest</authentication>
-    <transaction>required</transaction>
-</webscript>

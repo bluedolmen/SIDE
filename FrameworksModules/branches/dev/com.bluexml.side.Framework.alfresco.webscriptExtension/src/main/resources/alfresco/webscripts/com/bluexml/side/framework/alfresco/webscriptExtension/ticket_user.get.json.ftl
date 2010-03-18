@@ -1,4 +1,0 @@
-{
-"userName":"${username}",
-"ticket":"${ticket}"
-}

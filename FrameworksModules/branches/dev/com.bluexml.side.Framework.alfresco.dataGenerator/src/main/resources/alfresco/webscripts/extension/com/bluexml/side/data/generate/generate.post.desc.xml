@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<webscript>
-    <shortname>Generate Random Model Data</shortname>
-    <description></description>
-    <url>/data/generate/generate</url>
-    <format default="html">argument</format>
-    <authentication>none</authentication>
-    <transaction>required</transaction>
-</webscript>

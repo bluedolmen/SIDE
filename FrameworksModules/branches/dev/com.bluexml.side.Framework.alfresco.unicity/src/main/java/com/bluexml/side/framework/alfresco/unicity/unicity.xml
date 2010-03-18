@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<unicity>
-	<type qname="com_bluexml_sem_crm_Entreprise">
-		<attribute qname="com_bluexml_sem_crm_Entreprise_SIREN"/>		
-	</type>
-</unicity>
