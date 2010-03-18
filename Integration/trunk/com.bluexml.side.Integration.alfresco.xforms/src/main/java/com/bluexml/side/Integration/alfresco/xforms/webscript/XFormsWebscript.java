@@ -189,7 +189,7 @@ public class XFormsWebscript extends AbstractWebScript {
 					getServiceRegistry()), username);
 
 			OutputStream outputStream = webscriptresponse.getOutputStream();
-			outputStream.write(result.getBytes());
+			outputStream.write(result.getBytes("UTF-8"));
 		}
 	}
 
