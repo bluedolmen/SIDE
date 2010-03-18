@@ -839,7 +839,7 @@ public class DataLayer implements DataLayerInterface {
 			serializer.asDOMSerializer();
 			serializer.serialize(doc.getDocumentElement());
 
-			stringBuilder = new StringBuilder(stream.toString());
+			stringBuilder = new StringBuilder(stream.toString("UTF-8")); //# 1295
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
