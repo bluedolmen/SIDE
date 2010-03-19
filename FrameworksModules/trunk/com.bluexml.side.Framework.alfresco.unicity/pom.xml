@@ -30,7 +30,7 @@
 		below as the AMP module version. Instead we use the
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
-  <version>1.0.33</version>
+  <version>1.0.34</version>
   <description>module for manage unicity on side content types (see unicity attribute meta in side)</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -167,7 +167,7 @@
     <dependency>
       <groupId>com.bluexml.side.Integration.alfresco</groupId>
       <artifactId>xforms</artifactId>
-      <version>1.0.52</version>
+      <version>1.0.53</version>
       <type>amp</type>
     </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
