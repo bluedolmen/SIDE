@@ -223,8 +223,7 @@ a.side_jsp_using:link,a.side_jsp_footer:link {
 	color: #6FF;
 }
 
-side_xforms_line {
-	visibility: hidden;
+.side_horizontal_line {
 }
 
 #side_status_bar {
