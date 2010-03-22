@@ -3,8 +3,13 @@
  */
 package com.bluexml.xforms.controller.beans;
 
+import com.bluexml.xforms.messages.MsgPool;
+
 /**
- * Bean for providing a set of information on a workflow form.
+ * Bean for providing a set of information on a workflow form.<br/>
+ * NOTE: If the title is a reference to a key in messages.properties, the reference is resolved when
+ * creating the bean. Subsequent calls to {@link #getTitle()} are guaranteed to return the resolved
+ * message.
  * 
  * @author Amenel
  * 
@@ -29,6 +34,9 @@ public class WorkflowTaskInfoBean {
 		this.actorId = actorId;
 		this.pooledActors = pooledActors;
 		this.title = title;
+		if ((title != null) && (title.charAt(0) == '#') && (title.indexOf("##") != 0)) {
+			this.title = MsgPool.getMsg(title.substring(1));
+		}
 	}
 
 	/**

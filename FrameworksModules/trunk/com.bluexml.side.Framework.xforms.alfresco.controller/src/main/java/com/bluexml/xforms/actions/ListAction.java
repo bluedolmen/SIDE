@@ -114,7 +114,8 @@ public class ListAction extends AbstractAction {
 		return new String[] {
 				MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText(),
 				MsgId.INT_ACT_PARAM_LIST_FORMAT.getText(),
-				MsgId.INT_ACT_PARAM_LIST_MAXLENGTH.getText() };
+				MsgId.INT_ACT_PARAM_LIST_MAXLENGTH.getText(),
+				MsgId.INT_ACT_PARAM_LIST_IDENTIFIER.getText() };
 	}
 
 	/**
@@ -132,8 +133,9 @@ public class ListAction extends AbstractAction {
 		String maxResults = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_SIZE.getText());
 		String format = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_FORMAT.getText());
 		String maxLength = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_MAXLENGTH.getText());
+		String identifier = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_IDENTIFIER.getText());
 		// "format" was partially decoded so we need to re encode the format pattern, since it
-		// will be transmitted again via URL to the webscript where it'll have to be decoded again.
+		// will be transmitted again via URL to the webscript where it WON'T be decoded again.
 		try {
 			if (StringUtils.trimToNull(format) != null) {
 				format = URLDecoder.decode(format, "UTF-8");
@@ -147,7 +149,8 @@ public class ListAction extends AbstractAction {
 			throw new RuntimeException("Unsupported encoding scheme");
 		}
 
-		return controller.getList(transaction, dataType, query, maxResults, format, maxLength);
+		return controller.getList(transaction, dataType, query, maxResults, format, maxLength,
+				identifier);
 	}
 
 }

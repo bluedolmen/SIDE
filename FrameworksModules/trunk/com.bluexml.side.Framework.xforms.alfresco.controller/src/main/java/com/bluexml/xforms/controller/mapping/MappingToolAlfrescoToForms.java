@@ -558,6 +558,18 @@ public class MappingToolAlfrescoToForms extends MappingToolCommon {
 				transformTimeValueForDisplay(value);
 			}
 			formField.setTextContent(timeValue);
+		} else if (isSelectionCapable(formFieldType)) {
+			Element selItemElt = formInstance.createElement(MsgId.INT_INSTANCE_ASSOCIATION_ITEM
+					.getText());
+			Element idElt = formInstance.createElement(MsgId.INT_INSTANCE_SIDEID.getText());
+			Element labelElt = formInstance.createElement(MsgId.INT_INSTANCE_SIDELABEL.getText());
+			Element typeElt = formInstance.createElement(MsgId.INT_INSTANCE_SIDETYPE.getText());
+
+			selItemElt.appendChild(idElt); // TODO: initialize using the 'value' variable
+			selItemElt.appendChild(labelElt);
+			selItemElt.appendChild(typeElt);
+
+			formField.appendChild(selItemElt);
 		} else if (isSearchEnum(formFieldType)) {
 			Element idField = formInstance.createElement(MsgId.INT_INSTANCE_SIDEID.getText());
 			idField.setTextContent(value);

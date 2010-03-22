@@ -128,6 +128,9 @@ public class GetAction extends AbstractReadAction {
 		// get the instance of the attached data form
 		String dataId = currentPage.getDataId();
 		String dataFormName = controller.getUnderlyingDataFormForWorkflow(wkFormName);
+		if (dataFormName == null) {
+			return docWkflw;
+		}
 		Document docForm = controller.getInstanceForm(transaction, dataFormName, dataId, false);
 		//
 		// we need to nest the data form instance under workflow

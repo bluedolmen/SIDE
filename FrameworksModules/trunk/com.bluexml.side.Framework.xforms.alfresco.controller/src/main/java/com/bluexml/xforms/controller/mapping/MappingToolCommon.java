@@ -972,6 +972,13 @@ public class MappingToolCommon {
 		return formFieldType.isSearchEnum();
 	}
 
+	protected boolean isSelectionCapable(FormFieldType formFieldType) {
+		if (formFieldType.isSelectionCapable() == null) {
+			return false;
+		}
+		return formFieldType.isSelectionCapable();
+	}
+	
 	/*
 	 * FormType
 	 */

@@ -508,6 +508,10 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 				} else if (isSearchEnum(fieldType)) {
 					alfrescoValue = DOMUtil.getChild(fieldElement,
 							MsgId.INT_INSTANCE_SIDEID.getText()).getTextContent();
+				}
+				if (isSelectionCapable(fieldType)) {
+					alfrescoValue = DOMUtil.getElementInDescentByName(fieldElement,
+							MsgId.INT_INSTANCE_SIDEID.getText()).getTextContent();
 				} else {
 					alfrescoValue = convertXformsAttributeToAlfresco(inputTextContent, type,
 							fieldType.getStaticEnumType());
@@ -540,7 +544,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 
 			alfClass.getAttributes().getAttribute().add(attribute);
 		}
-		
+
 		// if applicable, append the implicit attribute that will keep info about the node content
 		Element nodeContentElt = DOMUtil.getChild(rootElt, MsgId.INT_INSTANCE_SIDE_NODE_CONTENT
 				.getText());

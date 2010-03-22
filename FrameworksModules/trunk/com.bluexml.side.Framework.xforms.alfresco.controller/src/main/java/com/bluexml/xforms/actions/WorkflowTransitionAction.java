@@ -56,8 +56,6 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 
 	private String userName;
 
-	private String suffixMsg = "";
-
 	private class TransitionResultBean {
 		private boolean success;
 		private List<WorkflowTask> tasks;
@@ -408,18 +406,22 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 
 		// check that there's some repository content to associate with the workflow package
 		// # 1299: try to save the data form. In case of initial task, this will provide a data id.
-		// in all cases, currentPage.getDataId() returns a valid id. Certified :-)
-		SubmitAction action = new SubmitAction();
-		action.setProperties(controller, uri);
-		action.setSubmitProperties(this.result, submission, node, NavigationSessionListener
-				.getServletURL(action.getSessionId()));
-		try {
-			action.submit();
-		} catch (Exception e) {
-			if (logger.isErrorEnabled()) {
-				logger.error("Auto-save at workflow: error when saving the data form.", e);
+		// In all cases, currentPage.getDataId() returns a valid id. Certified :-)
+		String dataForm = controller.getUnderlyingDataFormForWorkflow(wkFormName);
+		if (dataForm != null) { // #1284
+			SubmitAction action = new SubmitAction();
+			action.setProperties(controller, uri);
+			action.setSubmitProperties(this.result, submission, node, NavigationSessionListener
+					.getServletURL(action.getSessionId()));
+			try {
+				action.submit();
+			} catch (Exception e) {
+				navigationPath.setStatusMsg("Could not save the data form.");
+				if (logger.isErrorEnabled()) {
+					logger.error("Auto-save at workflow: error when saving the data form.", e);
+				}
+				return resultBean;
 			}
-			return resultBean;
 		}
 
 		// launch a workflow if on a start task form - also set the instance id
@@ -463,7 +465,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		}
 
 		// set assignment for next task(s) if any
-		return reassignWorkflow(transaction);
+		return reassignWorkflow(transaction, properties);
 	}
 
 	/**
@@ -507,6 +509,9 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 */
 	private boolean validateCurrentUser(WorkflowTaskInfoBean taskBean) {
 		if (taskBean.getActorId() != null) {
+			if (taskBean.getActorId().equals("initiator")) { // #1531
+				return true;
+			}
 			if (StringUtils.equals(taskBean.getActorId(), userName)) {
 				return true;
 			}
@@ -590,7 +595,6 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 				currentPage.setWkflwInstanceId(instance.id);
 			}
 			currentPage.setWkflwProcessId(processId);
-			suffixMsg = "Instance id: " + currentPage.getWkflwInstanceId();
 		}
 		return true;
 	}
@@ -601,8 +605,10 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * This updating is COMPULSORY: Alfresco will not do it automatically as one could expect.
 	 * 
 	 * @param transaction
+	 * @param taskProperties
 	 */
-	private TransitionResultBean reassignWorkflow(AlfrescoTransaction transaction) {
+	private TransitionResultBean reassignWorkflow(AlfrescoTransaction transaction,
+			HashMap<QName, Serializable> taskProperties) {
 		TransitionResultBean result = new TransitionResultBean();
 		HashMap<QName, Serializable> properties;
 		List<WorkflowTask> tasks;
@@ -640,6 +646,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 					// #1514: support for multiple groups/users via comma-separated list
 					String[] actors = StringUtils.split(pooledActors, ",");
 					for (String anActor : actors) {
+						anActor = resolveActorId(anActor, taskProperties);
 						NodeRef nodeRef = controller.systemGetNodeRefForGroup(transaction, anActor);
 						addActor(refToActors, nodeRef);
 					}
@@ -647,6 +654,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 				if (StringUtils.trimToNull(actorIds) != null) {
 					String[] actors = StringUtils.split(actorIds, ",");
 					for (String anActor : actors) {
+						anActor = resolveActorId(anActor, taskProperties);
 						NodeRef nodeRef = controller.systemGetNodeRefForUser(transaction, anActor);
 						addActor(refToActors, nodeRef);
 					}
@@ -662,15 +670,48 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			}
 		}
 		String nextTasksTitles = buildNextTasksTitles(tasks);
-		String infixe = "tasks are";
-		if (tasks.size() == 1) {
-			infixe = "task is";
-		}
+		navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_WORKFLOW_SUCCESS,
+				nextTasksTitles, currentPage.getWkflwInstanceId()));
 		result.setTasks(tasks);
-		navigationPath.setStatusMsg("Transition successfully followed: next " + infixe + " '"
-				+ nextTasksTitles + "'. " + suffixMsg);
 		result.setSuccess(true);
 		return result;
+	}
+
+	/**
+	 * Resolves the actorId using the indirection format supported by Alfresco in workflow
+	 * definitions.
+	 * 
+	 * @param actorId
+	 *            e.g. "#{wfbxifremer_user1}"
+	 * @param properties
+	 * @return
+	 */
+	private String resolveActorId(String actorId, HashMap<QName, Serializable> properties) {
+		// #1532: support for expressions in actorId/pooledActors
+		// 
+		int pos = actorId.indexOf("#{");
+		if (pos != 0) {
+			return actorId;
+		}
+		pos += 2;
+		int posEnd = actorId.indexOf("}", pos);
+		if (posEnd == -1) {
+			return actorId;
+		}
+
+		String expr = actorId.substring(pos, posEnd);
+		pos = expr.indexOf('_');
+		if (pos == -1) {
+			return actorId;
+		}
+		String property = expr.substring(pos + 1);
+		for (QName qname : properties.keySet()) {
+			if (qname.getLocalName().endsWith(property)) {
+				Serializable serializable = properties.get(qname);
+				return serializable.toString();
+			}
+		}
+		return actorId;
 	}
 
 	/**

@@ -561,7 +561,7 @@ public class MappingAgent {
 	 * @param formName
 	 *            the valid id of a FormWorkflow that has been generated.
 	 * @return the data type of the workflow form's data form, as defined in the class model, or
-	 *         <code>null</code> if the form name is unknown.
+	 *         <code>null</code> if the workflow form name is unknown or no data form is defined.
 	 */
 	public String getUnderlyingClassForWorkflow(String wkFormName) {
 		WorkflowTaskType taskType = getWorkflowTaskType(wkFormName, false);
@@ -569,6 +569,9 @@ public class MappingAgent {
 			return null;
 		}
 		String dataFormName = taskType.getDataForm();
+		if (dataFormName == null) {
+			return null;
+		}
 		return getUnderlyingClassForForm(dataFormName);
 	}
 
@@ -585,10 +588,11 @@ public class MappingAgent {
 		if (taskType == null) {
 			return null;
 		}
-		FormType dataFormType = getFormType(taskType.getDataForm());
-		if (dataFormType == null) {
+		String dataForm = taskType.getDataForm();
+		if (dataForm == null) {
 			return null;
 		}
+		FormType dataFormType = getFormType(dataForm);
 		return dataFormType.getName();
 	}
 

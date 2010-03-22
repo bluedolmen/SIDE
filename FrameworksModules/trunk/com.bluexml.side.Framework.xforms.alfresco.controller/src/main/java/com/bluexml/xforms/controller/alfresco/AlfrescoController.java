@@ -1047,22 +1047,33 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	}
 
 	/**
-	 * Gets the list. Cette fonction est appelée une première fois pour fournir l'instance, et
-	 * chaque fois qu'on tape dans la zone de recherche.
+	 * Gets the result set for the list action by calling the webscript. This function is called
+	 * when a form is loaded (to provide the initial item set), and (if incremental) each time a
+	 * character is entered in the search input.
 	 * 
 	 * @param transaction
 	 *            the transaction
 	 * @param type
-	 *            the type
+	 *            the content type to search
+	 * @param query
+	 *            the search keyword string
+	 * @param maxResults
+	 *            the max number of items allowed in the result set
 	 * @param format
 	 *            the pattern for formatting labels of the list items
-	 * 
+	 * @param maxLength
+	 *            the length at which labels computed using the format are truncated<br/>
+	 * @param identifier
+	 *            the local name of a property whose value will be used as the id of results. If
+	 *            <code>null</code>, the noderef id is used. If non-<code>null</code>, SHOULD be an
+	 *            actual identifier guaranteed to be unique in the value set<br/>
 	 * @return the list
 	 * 
 	 * @throws ServletException
 	 */
 	public Node getList(AlfrescoTransaction transaction, String type, String query,
-			String maxResults, String format, String maxLength) throws ServletException {
+			String maxResults, String format, String maxLength, String identifier)
+			throws ServletException {
 		Map<String, String> parameters = new TreeMap<String, String>();
 
 		String alfTypeName = null;
@@ -1074,10 +1085,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		 */
 		String maxSize = mappingAgent.getFieldSizeForField(type, ""
 				+ getParamMaxResults(transaction.getInitParams()), transaction.getFormId());
-		alfTypeName = mappingAgent.getClassTypeAlfrescoName(type);
+		alfTypeName = (identifier == null ? mappingAgent.getClassTypeAlfrescoName(type) : type);
 		parameters.put("type", alfTypeName);
 		parameters.put("format", StringUtils.trimToEmpty(format));
 		parameters.put("maxLength", StringUtils.trimToEmpty(maxLength));
+		parameters.put("identifier", identifier);
 
 		String q = StringUtils.trimToNull(query);
 		if (q != null) {
@@ -1568,7 +1580,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			throws ServletException {
 
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("content", nodeToAdd);
+		if (nodeToAdd != null) { // #1284: workflows without attached data form
+			parameters.put("content", nodeToAdd);
+		}
 		// parameters.put("package", (String) null); // do not set a null value
 
 		String resultId = requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_PACKAGE);
