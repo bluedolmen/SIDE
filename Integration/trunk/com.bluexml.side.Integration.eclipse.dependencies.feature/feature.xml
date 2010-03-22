@@ -986,70 +986,70 @@
          id="org.eclipse.equinox.p2.reconciler.dropins"
          download-size="0"
          install-size="0"
-         version="1.0.100.v20090520-1905"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.equinox.app"
          download-size="0"
          install-size="0"
-         version="1.2.0.v20090520-1800"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.equinox.common"
          download-size="0"
          install-size="0"
-         version="3.5.1.R35x_v20090807-1100"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.equinox.concurrent"
          download-size="0"
          install-size="0"
-         version="1.0.1.R35x_v20100209"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.equinox.p2.directorywatcher"
          download-size="0"
          install-size="0"
-         version="1.0.100.v20090525"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.equinox.p2.touchpoint.eclipse"
          download-size="0"
          install-size="0"
-         version="1.0.101.R35x_20090820-1821"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.equinox.preferences"
          download-size="0"
          install-size="0"
-         version="3.2.300.v20090520-1800"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.equinox.registry"
          download-size="0"
          install-size="0"
-         version="3.4.100.v20090520-1800"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.equinox.security"
          download-size="0"
          install-size="0"
-         version="1.0.100.v20090520-1800"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.equinox.security.macosx"
          download-size="0"
          install-size="0"
-         version="1.100.0.v20090520-1800"
+         version="0.0.0"
          fragment="true"
          unpack="false"/>
 
@@ -1057,21 +1057,21 @@
          id="org.eclipse.equinox.simpleconfigurator"
          download-size="0"
          install-size="0"
-         version="1.0.101.R35x_v20090807-1100"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.osgi"
          download-size="0"
          install-size="0"
-         version="3.5.1.R35x_v20090827"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.osgi.services"
          download-size="0"
          install-size="0"
-         version="3.2.0.v20090520-1800"
+         version="0.0.0"
          unpack="false"/>
 
 
