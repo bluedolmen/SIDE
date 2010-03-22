@@ -10,6 +10,8 @@ import java.lang.reflect.Method;
 import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -340,12 +342,20 @@ public class XFormsWork implements RunAsWork<String> {
 		sb.append(">");
 	}
 
-	private void appendResult(StringBuffer xmlResult, String id, String value, String qname) {
-		// the tag names used here must be in sync with the one defined in the XForms controller
+	/**
+	 * 
+	 * @param xmlResult
+	 * @param id
+	 * @param label
+	 * @param qname
+	 *            the actual datatype of the node being added to the results list.
+	 */
+	private void appendResult(StringBuffer xmlResult, String id, String label, String qname) {
+		// the tag names used here must be in sync with the ones defined in the XForms controller
 		xmlResult.append("<item><id>");
 		xmlResult.append(StringEscapeUtils.escapeXml(id));
 		xmlResult.append("</id><label>");
-		xmlResult.append(StringEscapeUtils.escapeXml(value));
+		xmlResult.append(StringEscapeUtils.escapeXml(label));
 		xmlResult.append("</label><qname>");
 		if (qname != null) {
 			xmlResult.append(StringEscapeUtils.escapeXml(qname));
@@ -374,7 +384,7 @@ public class XFormsWork implements RunAsWork<String> {
 				// Amenel: I suspect id refers to LitteralTranslation objects
 				// but not sure...
 				// "value" is dependent on the model (changes should propagate)
-				String nodeName = resolveNodeName(nodeRef, "value");
+				String nodeName = resolveNodeName(nodeRef, "value", false);
 				appendResult(xmlResult, nodeRef.toString(), nodeName, null);
 			}
 		}
@@ -432,84 +442,235 @@ public class XFormsWork implements RunAsWork<String> {
 	/**
 	 * Parameters: <br/>
 	 * "type": the data type to search <br/>
-	 * "query": the filter string<br/>
-	 * "format": the format pattern for the label of objects "maxLength": the length at which labels
-	 * are truncated
+	 * "query": the search keyword string<br/>
+	 * "queryFilter": an additional search keyword string<br/>
+	 * "format": the format pattern for the label of objects<br/>
+	 * "maxLength": the length at which labels computed using the format are truncated<br/>
+	 * "maxResults": the max number of items allowed in the result set<br/>
+	 * "identifier": the local name of a property whose value will be used as the id of results.
+	 * Quite obviously, that field MUST 1- be non-null, 2- be an actual identifier (i.e. no value is
+	 * duplicated in the value set)<br/>
+	 * "filterAssoc" // TODO
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	protected String list() throws Exception {
+		class ResultBean { // #1406
+			public String id;
+			public String label;
+			public String qname;
+
+			ResultBean(String nodeId, String nodeLabel, String nodeQName) {
+				this.id = nodeId;
+				this.label = nodeLabel;
+				this.qname = nodeQName;
+			}
+
+		}
+
+		// collect parameters
 		String type = parameters.get("type");
+		String identifier = parameters.get("identifier"); // #1529
 		String format = parameters.get("format");
+		// URL-decode the format pattern
+		if (StringUtils.trimToNull(format) != null) {
+			try {
+				format = URLDecoder.decode(format, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				logger.error("UTF-8 is unsupported. Format is defaulted to 'uuid'");
+				format = "uuid";
+			}
+		}
+
+		int maxResults = 10; // arbitrary default value
+		String maxParam = parameters.get("maxResults");
+		try {
+			maxResults = Integer.parseInt(maxParam);
+		} catch (NumberFormatException ne) {
+			logger.error("'list' op: wrong number in parameter 'maxResults' (" + maxParam + ")");
+		}
+
+		int maxLength = 0; // arbitrary default value
+		String lengthParam = parameters.get("maxLength");
+		try {
+			maxLength = Integer.parseInt(lengthParam);
+		} catch (NumberFormatException nfe) {
+			logger.error("'list' op: wrong number in parameter 'maxLength' (" + lengthParam + ")");
+		}
+		// ** #1310
+		// String filterAssoc = parameters.get("filterAssoc"); // TODO: implement
+		// boolean applyFilter = (StringUtils.trimToNull(filterAssoc) != null);
+		// ** #1310
 
 		List<String> searchedValues = new ArrayList<String>();
 		String query = parameters.get("query");
-		searchedValues.add(query);
+		if (StringUtils.trimToNull(query) != null) {
+			searchedValues.add(query);
+		}
+
 		String queryFilter = parameters.get("queryFilter");
 		if (StringUtils.trimToNull(queryFilter) != null) {
 			searchedValues.add(queryFilter);
 		}
 
-		int maxResults = Integer.parseInt(parameters.get("maxResults"));
-		int maxLength = Integer.parseInt(parameters.get("maxLength"));
+		// perform the search
+		ResultSet luceneResultSet = getResultSet(type, searchedValues, maxResults);
+		int luceneResultLength = luceneResultSet.length();
+
+		//
+		// collect items and apply filtering and/or limiting. Node names/labels are also computed.
+		//
+
+		// configure the filtering/limiting
+		int effectivelyReturned = 0;
+		int filteredOut = 0;
+		QName identifierQName = null;
+		boolean includeSystemProperties = false;
+		int returnAtMost;
+		if (maxResults > 0) {
+			returnAtMost = Math.min(luceneResultLength, maxResults);
+		} else {
+			returnAtMost = luceneResultLength;
+		}
+		if (identifier != null) {
+			identifierQName = resolveIdentifierQName(identifier, type);
+			includeSystemProperties = true;
+		}
+
+		// collect items and apply filtering and/or limiting
+		List<ResultBean> resultBeanList = new ArrayList<ResultBean>(returnAtMost);
+		for (int i = 0; i < returnAtMost; i++) {
+			NodeRef nodeRef = luceneResultSet.getNodeRef(i);
+			String label = resolveNodeName(nodeRef, format, includeSystemProperties);
+			if (maxLength > 0) {
+				label = StringUtils.left(label, maxLength);
+			}
+			QName qname = serviceRegistry.getNodeService().getType(nodeRef); // #1510
+			String id;
+			if (identifier == null) {
+				id = nodeRef.toString();
+			} else {
+				id = resolveIdentifierValue(nodeRef, identifierQName);
+			}
+			String qnameStr = qname.toPrefixString(formsWebscript.getNamespacePrefixResolver());
+			ResultBean aBean = new ResultBean(id, label, qnameStr);
+			boolean isAddableBean = true;
+			if (includeSystemProperties) {
+				// for system datatypes, search the label (in case indexing is off for that type)
+				if ((query != null) && (aBean.label.contains(query) == false)) {
+					isAddableBean = false;
+					filteredOut++;
+				}
+			}
+			if (isAddableBean) {
+				resultBeanList.add(aBean);
+				effectivelyReturned++;
+			}
+		}
+
+		//
+		// sort the result list by node name. #1406
+		Collections.sort(resultBeanList, new Comparator<ResultBean>() {
+			public int compare(ResultBean o1, ResultBean o2) {
+				return o1.label.compareTo(o2.label);
+			}
+		});
+
+		//
+		// write all results in the items string buffer
+		StringBuffer itemsBuf = new StringBuffer("");
+		for (ResultBean aBean : resultBeanList) {
+			appendResult(itemsBuf, aBean.id, aBean.label, aBean.qname);
+		}
 
 		StringBuffer xmlResult = new StringBuffer("");
 		xmlResult.append("<results>\n");
-
-		ResultSet luceneResultSet = getResultSet(type, searchedValues, maxResults);
-		int n = luceneResultSet.length();
-
-		xmlResult.append("<query><count>").append(n).append("</count>\n");
-
-		xmlResult.append("<maxResults>").append(maxResults).append("</maxResults>\n");
-
-		if (maxResults > 0) {
-			n = Math.min(luceneResultSet.length(), maxResults);
-		}
-
-		xmlResult.append("<returned>").append(n).append("</returned>");
-
-		xmlResult.append("<query>").append(StringUtils.trimToEmpty(query)).append("</query>\n");
-
+		xmlResult.append("<query>\n");
+		xmlResult.append("  <count>").append(luceneResultLength).append("</count>\n");
+		xmlResult.append("  <maxResults>").append(maxResults).append("</maxResults>\n");
+		xmlResult.append("  <returned>").append(effectivelyReturned).append("</returned>\n");
+		xmlResult.append("  <filteredOut>").append(filteredOut).append("</filteredOut>\n");
+		xmlResult.append("  <query>").append(StringUtils.trimToEmpty(query)).append("</query>\n");
 		xmlResult.append("</query>\n");
-
-		for (int i = 0; i < n; i++) {
-			NodeRef nodeRef = luceneResultSet.getNodeRef(i);
-			String nodeName = resolveNodeName(nodeRef, format);
-			if (maxLength > 0) {
-				nodeName = StringUtils.left(nodeName, maxLength);
-			}
-			QName qname = serviceRegistry.getNodeService().getType(nodeRef); // #1510
-			appendResult(xmlResult, nodeRef.toString(), nodeName, qname.getLocalName());
-		}
+		xmlResult.append(itemsBuf);
 
 		xmlResult.append("</results>");
 		return xmlResult.toString();
 	}
 
-	private ResultSet getResultSet(String type, List<String> searchedValues, int maxResults) {
-		return getUnsecureLuceneSearcher().query(
-				createSearchParameters(type, searchedValues, maxResults));
+	/**
+	 * Returns the qname of the property whose local name matches the identifier.
+	 * 
+	 * @param identifier
+	 *            a non-<code>null</code> string that SHOULD be the local name of one the node's
+	 *            properties as can be found in the type definition.
+	 * @param type
+	 *            the node type whose definition should contain the identifier
+	 */
+	private QName resolveIdentifierQName(String identifier, String type) { // #1529
+		List<QName> listQNames = formsWebscript.getSubTypes(type);
+		if ((listQNames != null) && (listQNames.size() != 0)) {
+			QName qname = listQNames.get(0);
+			TypeDefinition typeDef = serviceRegistry.getDictionaryService().getType(qname);
+			Map<QName, PropertyDefinition> properties = typeDef.getProperties();
+
+			for (QName property : properties.keySet()) {
+				if (property.getLocalName().equalsIgnoreCase(identifier)) {
+					if (logger.isDebugEnabled()) {
+						logger.debug("Resolved qname '" + property + "'for identifier '"
+								+ identifier + "'");
+					}
+					return property;
+				}
+			}
+		}
+
+		logger.error("Failed in resolving identifier qname. identifier ='" + identifier
+				+ "', datatype='" + type + "'");
+		return null;
 	}
 
 	/**
+	 * Provides the value of the node's identifier property.
 	 * 
 	 * @param nodeRef
-	 * @param formatPattern
+	 *            an existing node
+	 * @param identifierQName
+	 *            the qname of a node property
 	 * @return
 	 */
-	private String resolveNodeName(NodeRef nodeRef, String formatPattern) {
-		String format = formatPattern;
-		if (StringUtils.trimToNull(format) != null) {
-			try {
-				format = URLDecoder.decode(format, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-				return nodeRef.getId();
-			}
+	private String resolveIdentifierValue(NodeRef nodeRef, QName identifierQName) { // #1529
+		if (identifierQName == null) {
+			return "";
 		}
-		return dataLayer.getLabelForNode(nodeRef, format);
+		Serializable value = serviceRegistry.getNodeService().getProperty(nodeRef, identifierQName);
+
+		if (value == null) {
+			return "";
+		}
+
+		return value.toString();
+	}
+
+	/**
+	 * Provides the label (i.e. user-readable form) for the node.
+	 * 
+	 * @param nodeRef
+	 * @param format
+	 *            the URL-decoded format pattern
+	 * @param includeSystemProperties
+	 *            if <code>true</code>, system properties are also considered, in addition to
+	 *            properties from the data models.
+	 * @return
+	 */
+	private String resolveNodeName(NodeRef nodeRef, String format, boolean includeSystemProperties) {
+		return dataLayer.getLabelForNode(nodeRef, format, includeSystemProperties);
+	}
+
+	private ResultSet getResultSet(String type, List<String> searchedValues, int maxResults) {
+		return getUnsecureLuceneSearcher().query(
+				createSearchParameters(type, searchedValues, maxResults));
 	}
 
 	private String getSQLQuery(String type, String parent, String context, String query,
@@ -1014,15 +1175,19 @@ public class XFormsWork implements RunAsWork<String> {
 		String nodeStr = parameters.get("content");
 		String packageStr = parameters.get("package");
 
-		NodeRef noderef = new NodeRef(nodeStr);
 		NodeRef wkPackage;
 		if (packageStr == null) { // it's up to us to create the package
 			wkPackage = serviceRegistry.getWorkflowService().createPackage(null);
 		} else { // one was provided
 			wkPackage = new NodeRef(packageStr);
 		}
+		String resultXStreamedPackage = xstream.toXML(wkPackage);
 
+		if (nodeStr == null) { // #1284: workflows may have no attached data
+			return resultXStreamedPackage;
+		}
 		NodeService nodeService = serviceRegistry.getNodeService();
+		NodeRef noderef = new NodeRef(nodeStr);
 		ChildAssociationRef childAssoc = nodeService.getPrimaryParent(noderef);
 		nodeService
 				.addChild(wkPackage, noderef, ContentModel.ASSOC_CONTAINS, childAssoc.getQName());
@@ -1031,7 +1196,7 @@ public class XFormsWork implements RunAsWork<String> {
 		List<ChildAssociationRef> assocs = nodeService.getChildAssocs(wkPackage);
 		for (ChildAssociationRef asso : assocs) {
 			if (asso.getChildRef().equals(noderef)) {
-				return xstream.toXML(wkPackage);
+				return resultXStreamedPackage;
 			}
 		}
 		return null;

@@ -21,6 +21,7 @@ import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.cmr.repository.StoreRef;
+import org.alfresco.service.namespace.NamespaceException;
 import org.alfresco.service.namespace.NamespacePrefixResolver;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.web.scripts.AbstractWebScript;
@@ -28,10 +29,12 @@ import org.alfresco.web.scripts.WebScriptRequest;
 import org.alfresco.web.scripts.WebScriptResponse;
 import org.alfresco.web.scripts.servlet.WebScriptServletRequest;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class XFormsWebscript extends AbstractWebScript {
 
-	// private static Log logger = LogFactory.getLog(XFormsWebscript.class);
+	private static Log logger = LogFactory.getLog(XFormsWebscript.class);
 
 	private Map<String, List<QName>> subTypesMapCache = new HashMap<String, List<QName>>();
 	private Map<QName, QName> parentsMapCache = null;
@@ -83,10 +86,39 @@ public class XFormsWebscript extends AbstractWebScript {
 		return list;
 	}
 
+	/**
+	 * Gets, from the given collection, the qname that matches the type.
+	 * 
+	 * @param type
+	 *            the type to find (since #1529, may contain a namespace prefix).
+	 * @param allTypes
+	 *            the collection of types
+	 * @return the qname that was found, <code>null</code> if prefix or type unknown.
+	 */
 	private QName getQName(String type, Collection<QName> allTypes) {
-		for (QName name : allTypes) {
-			if (name.getLocalName().equals(type)) {
-				return name;
+		int pos = type.indexOf(':');
+		if (pos == -1) { // no namespace prefix, this is a BlueXML generated type
+			for (QName name : allTypes) {
+				if (name.getLocalName().equals(type)) {
+					return name;
+				}
+			}
+		} else { // #1529
+			// this is a stranger type, so the namespace URI must also match
+			String prefix = type.substring(0, pos);
+			String localName = type.substring(pos + 1);
+			String namespaceURI;
+			try {
+				namespaceURI = namespacePrefixResolver.getNamespaceURI(prefix);
+			} catch (NamespaceException e) {
+				logger.error("Caught a NamespaceException. Prefix '" + prefix + "' is unknown.");
+				return null;
+			}
+			for (QName qname : allTypes) {
+				if (qname.getNamespaceURI().equals(namespaceURI)
+						&& qname.getLocalName().equals(localName)) {
+					return qname;
+				}
 			}
 		}
 		return null;

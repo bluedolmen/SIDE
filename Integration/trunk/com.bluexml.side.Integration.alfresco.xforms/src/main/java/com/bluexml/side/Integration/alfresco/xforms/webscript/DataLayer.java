@@ -839,7 +839,7 @@ public class DataLayer implements DataLayerInterface {
 			serializer.asDOMSerializer();
 			serializer.serialize(doc.getDocumentElement());
 
-			stringBuilder = new StringBuilder(stream.toString("UTF-8")); //# 1295
+			stringBuilder = new StringBuilder(stream.toString("UTF-8")); // # 1295
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -871,7 +871,7 @@ public class DataLayer implements DataLayerInterface {
 			QName associationName = asso.getTypeQName();
 			if (associationName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 				NodeRef childRef = asso.getChildRef();
-				String targetLabel = getLabelForNode(childRef, FormatPattern.ALLTEXT.get());
+				String targetLabel = getLabelForNode(childRef, FormatPattern.ALLTEXT.get(), false);
 				associations.add(new AssociationBean(associationName.getLocalName(), childRef
 						.toString(), targetLabel, AssociationBean.AssoType.Composition, nodeService
 						.getType(childRef).getLocalName()));
@@ -898,7 +898,7 @@ public class DataLayer implements DataLayerInterface {
 			QName associationName = asso.getTypeQName();
 			if (associationName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 				NodeRef childRef = asso.getTargetRef();
-				String targetLabel = getLabelForNode(childRef, FormatPattern.ALLTEXT.get());
+				String targetLabel = getLabelForNode(childRef, FormatPattern.ALLTEXT.get(), false);
 				associations.add(new AssociationBean(associationName.getLocalName(), childRef
 						.toString(), targetLabel, nodeService.getType(childRef).getLocalName()));
 			}
@@ -912,9 +912,12 @@ public class DataLayer implements DataLayerInterface {
 	 *            the pattern for formatting the label for the node. Contains references to
 	 *            properties of the node or of an association. This text is taken "as-is", with no
 	 *            decoding, encoding, escaping or unescaping done.
+	 * @param includeSystemProps
+	 *            if <code>true</code>, system properties are also considered, in addition to
+	 *            properties from the data models.
 	 * @return
 	 */
-	public String getLabelForNode(NodeRef nodeRef, String pattern) {
+	public String getLabelForNode(NodeRef nodeRef, String pattern, boolean includeSystemProps) {
 		String lpattern = pattern;
 		if (StringUtils.trimToNull(lpattern) == null) {
 			lpattern = FormatPattern.ALLTEXT.get();
@@ -922,7 +925,8 @@ public class DataLayer implements DataLayerInterface {
 		if (StringUtils.equals(lpattern, FormatPattern.NONE.get())) {
 			return nodeRef.toString();
 		}
-		Map<QName, Serializable> properties = nodeService.getProperties(nodeRef);
+		// filter to exclude system properties if necessary
+		Map<QName, Serializable> properties = collectProperties(nodeRef, includeSystemProps);
 		Set<QName> names = properties.keySet();
 		//
 		if (StringUtils.equals(lpattern, FormatPattern.FIRST.get())) {
@@ -933,21 +937,27 @@ public class DataLayer implements DataLayerInterface {
 			return getLabelForNodeAll(nodeRef, properties, names);
 		} else {
 			// Interpret the format pattern
-			return getNameForNode(lpattern, nodeRef);
+			return getNameForNode(lpattern, nodeRef, properties, includeSystemProps);
 		}
 	}
 
 	/**
-	 * Builds a label for the given node from values of its properties or associations.
+	 * Builds a label for the given node from values of its properties or associations. The format
+	 * is a list of tokens separated by the view token separator. A token is either a property value
+	 * (the name of the property is directly given as a placeholder for the value) or some static
+	 * text (enclosed in curly braces).
 	 * 
 	 * @param pattern
-	 *            the format pattern
+	 *            the format pattern, in plain text (meaning non URL-encoded)
 	 * @param nodeRef
+	 * @param properties
+	 *            the set of properties from which to find property tokens
+	 * @param includeSystemProps
+	 *            <code>true</code> if the
 	 * @return
 	 */
-	private String getNameForNode(String pattern, NodeRef nodeRef) {
-
-		Map<QName, Serializable> properties = collectProperties(nodeRef);
+	private String getNameForNode(String pattern, NodeRef nodeRef,
+			Map<QName, Serializable> properties, boolean includeSystemProps) {
 		String result = "";
 		String view = pattern;
 
@@ -1036,7 +1046,8 @@ public class DataLayer implements DataLayerInterface {
 				// simple attribute
 				for (QName qname : properties.keySet()) {
 					String key = qname.getLocalName();
-					if (key.endsWith("_" + token)) {
+					if (key.endsWith("_" + token)
+							|| (includeSystemProps == true && (key.endsWith(token)))) {// #1529
 						Serializable value = properties.get(qname);
 						if (value != null && value.toString().length() > 0) {
 							if (lastTokenWasText == false && first == false) {
@@ -1090,15 +1101,20 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Returns the properties of the node that stem from a generation.
+	 * Returns a set of properties of the node.
 	 * 
 	 * @param nodeRef
+	 * @param includeSystemProps if <code>true</code>, system properties are not filtered out.
 	 * @return
 	 */
-	private final Map<QName, Serializable> collectProperties(NodeRef nodeRef) {
+	private final Map<QName, Serializable> collectProperties(NodeRef nodeRef,
+			boolean includeSystemProps) {
 		Map<QName, Serializable> result = new HashMap<QName, Serializable>();
 
 		Map<QName, Serializable> properties = nodeService.getProperties(nodeRef);
+		if (includeSystemProps == true) { // #1529
+			return properties;
+		}
 		Set<QName> qnames = properties.keySet();
 		for (QName qname : qnames) {
 			if (qname.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
