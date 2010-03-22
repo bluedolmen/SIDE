@@ -16,11 +16,22 @@ public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 
 	private String maxLength;
 
+	private String identifier; // #1529
+
 	public ModelElementUpdaterList(Clazz target, String instanceName, String formatPattern,
 			String maxLength) {
 		super(target, instanceName);
 		this.formatPattern = formatPattern;
 		this.maxLength = maxLength;
+		this.identifier = "";
+	}
+
+	public ModelElementUpdaterList(String overridingType, String instanceName,
+			String formatPattern, String labelLength, String identifier) {
+		super(overridingType, instanceName);
+		this.formatPattern = formatPattern;
+		this.maxLength = labelLength;
+		this.identifier = identifier;
 	}
 
 	/*
@@ -34,7 +45,7 @@ public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 				XFormsGenerator.NAMESPACE_XFORMS);
 		submission.setAttribute("action", MsgId.INT_URI_SCHEME_WRITER
 				+ MsgId.INT_ACT_CODE_LIST.getText() + "/" + typeCompleteName + "/"
-				+ StringUtils.trimToEmpty(formatPattern) + "/" + maxLength);
+				+ StringUtils.trimToEmpty(formatPattern) + "/" + maxLength + "/" + identifier);
 		submission.setAttribute("replace", "instance");
 		submission.setAttribute("instance", instanceName);
 		submission.setAttribute("method", "post");

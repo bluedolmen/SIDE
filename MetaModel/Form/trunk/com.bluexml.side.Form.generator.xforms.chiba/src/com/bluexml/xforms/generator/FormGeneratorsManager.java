@@ -49,6 +49,7 @@ import com.bluexml.side.form.ChoiceFieldSearchOperators;
 import com.bluexml.side.form.ChoiceSearchField;
 import com.bluexml.side.form.DateFieldSearchOperators;
 import com.bluexml.side.form.DateSearchField;
+import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FileFieldSearchOperators;
 import com.bluexml.side.form.FileSearchField;
 import com.bluexml.side.form.FormCollection;
@@ -1370,6 +1371,77 @@ public class FormGeneratorsManager {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Tells whether the field will be rendered as a selection widget instead of a text input.
+	 * 
+	 * @param field
+	 * @return
+	 */
+	public boolean isFieldSelectionCapable(Field field) {
+		EList<String> mockup = field.getMockup();
+		if (mockup != null) {
+			String format = getXtensionParameter(mockup, MsgId.MODEL_XTENSION_FORMAT.getText());
+			String type = getXtensionParameter(mockup, MsgId.MODEL_XTENSION_DATATYPE.getText());
+			String id = getXtensionParameter(mockup, MsgId.MODEL_XTENSION_IDENTIFIER.getText());
+			if ((format != null) && (type != null) && (id != null)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Returns the given parameter from the list that carries extension definition parameters. These
+	 * must follow the [parameter name]=[parameter value] format, with no whitespace before the "=".<br/>
+	 * The list is searched for a correctly formated parameter until completely visited. If a
+	 * parameter is defined several times, only the first occurrence will be seen and used.
+	 * 
+	 * @param extension
+	 * @param parameter
+	 * @return the value of the parameter, or <code>null</code> if no correctly formated definition
+	 *         is found.
+	 */
+	private String getXtensionParameter(EList<String> extension, String parameter) {
+		int pos;
+		for (String config : extension) {
+			pos = config.indexOf(parameter);
+			if (pos != -1) {
+				pos = pos + parameter.length();
+				if (config.charAt(pos) == '=') {
+					return config.substring(pos + 1);
+				}
+			}
+		}
+		return null;
+	}
+
+	//
+	//
+	//
+	public String getSelectionCapableFieldFormat(Field field) {
+		EList<String> mockup = field.getMockup();
+
+		return getXtensionParameter(mockup, MsgId.MODEL_XTENSION_FORMAT.getText());
+	}
+
+	public String getSelectionCapableFieldDatatype(Field field) {
+		EList<String> mockup = field.getMockup();
+
+		return getXtensionParameter(mockup, MsgId.MODEL_XTENSION_DATATYPE.getText());
+	}
+
+	public String getSelectionCapableFieldIdentifier(Field field) {
+		EList<String> mockup = field.getMockup();
+
+		return getXtensionParameter(mockup, MsgId.MODEL_XTENSION_IDENTIFIER.getText());
+	}
+
+	public String getSelectionCapableFieldLabelLength(Field field) {
+		EList<String> mockup = field.getMockup();
+
+		return getXtensionParameter(mockup, MsgId.MODEL_XTENSION_LABEL_LENGTH.getText());
 	}
 
 }

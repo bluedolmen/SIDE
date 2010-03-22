@@ -103,7 +103,9 @@ public class RenderableSSingle extends AbstractRenderable {
 
 		rendered.addModelElement(bindId);
 		rendered.addModelElement(bindLabel);
-		rendered.addModelElement(bindEdit);
+		if (bean.isForField() == false) {
+			rendered.addModelElement(bindEdit);
+		}
 		rendered.addModelElement(bindType);
 
 		return rendered;

@@ -26,19 +26,24 @@ public class ModelElementInstanceList extends ModelElement {
 
 	private String maxLength;
 
+	private String identifier; // #1529
+
 	/**
 	 * 
-	 * @param typeEnumCompleteName
+	 * @param overrideType
 	 *            the type enum complete name
 	 * @param instanceName
 	 *            the instance name
+	 * @param identifier
+	 *            TODO
 	 */
-	public ModelElementInstanceList(String typeEnumCompleteName, String instanceName,
-			String formatPattern, String maxLength) {
-		this.typeCompleteName = typeEnumCompleteName;
+	public ModelElementInstanceList(String overrideType, String instanceName, String formatPattern,
+			String maxLength, String identifier) {
+		this.typeCompleteName = overrideType;
 		this.instanceName = instanceName;
 		this.formatPattern = formatPattern;
 		this.maxLength = maxLength;
+		this.identifier = identifier;
 	}
 
 	/**
@@ -55,6 +60,7 @@ public class ModelElementInstanceList extends ModelElement {
 		this.instanceName = instanceName;
 		this.formatPattern = formatPattern;
 		this.maxLength = maxLength;
+		this.identifier = "";
 	}
 
 	/*
@@ -67,7 +73,7 @@ public class ModelElementInstanceList extends ModelElement {
 				XFormsGenerator.NAMESPACE_XFORMS);
 		instance.setAttribute("src", MsgId.INT_URI_SCHEME_READER
 				+ MsgId.INT_ACT_CODE_LIST.getText() + "/" + typeCompleteName + "/"
-				+ StringUtils.trimToEmpty(formatPattern) + "/" + maxLength);
+				+ StringUtils.trimToEmpty(formatPattern) + "/" + maxLength + "/" + identifier);
 		instance.setAttribute("id", instanceName);
 		return instance;
 	}

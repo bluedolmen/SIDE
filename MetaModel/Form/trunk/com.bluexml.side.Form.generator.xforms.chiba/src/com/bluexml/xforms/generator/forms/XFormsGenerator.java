@@ -104,6 +104,11 @@ public class XFormsGenerator extends AbstractGenerator {
 
 	public static final String IMG_UP = "resources/images/orderup.png";
 
+	// ** #1530
+	public static final String IMG_SELECT = "resources/images/fieldselect.png";
+	public static final String IMG_CLEAR = "resources/images/fieldclear.png";
+	// **
+
 	/** The sax builder. */
 	public static SAXBuilder saxBuilder;
 
@@ -215,7 +220,8 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * 
 	 * @param label
 	 *            the label
-	 * @param style the CSS class if applicable. May be <code>null</code>.
+	 * @param style
+	 *            the CSS class if applicable. May be <code>null</code>.
 	 * 
 	 * @return the element
 	 */
@@ -906,22 +912,21 @@ public class XFormsGenerator extends AbstractGenerator {
 				//
 				FormWorkflow FW = ((FormWorkflow) FC);
 				FormClass dataForm = FW.getDataForm();
-				if (dataForm == null) {
-					throw new RuntimeException("Workflow Form '" + FW.getId()
-							+ "' must have a data form.");
-				}
-				RenderableFormContainer attached = searchForForm(dataForm);
-				if (attached == null) {
-					throw new RuntimeException("Workflow Form '" + FW.getId()
-							+ "' has no attached data form. Id of DataForm: " + dataForm.getId());
-				}
-				// TODO: clone the attached renderable
-				if (formGenerator.isRenderDataBeforeWorkflow()) {
-					renderableFC.addFirst(new RenderableHR());
-					renderableFC.addFirst(attached);
-				} else {
-					renderableFC.add(new RenderableHR());
-					renderableFC.add(attached);
+				if (dataForm != null) {
+					RenderableFormContainer attached = searchForForm(dataForm);
+					if (attached == null) {
+						throw new RuntimeException("Workflow Form '" + FW.getId()
+								+ "' has no attached data form. Id of DataForm: "
+								+ dataForm.getId());
+					}
+					// TODO: clone the attached renderable
+					if (formGenerator.isRenderDataBeforeWorkflow()) {
+						renderableFC.addFirst(new RenderableHR());
+						renderableFC.addFirst(attached);
+					} else {
+						renderableFC.add(new RenderableHR());
+						renderableFC.add(attached);
+					}
 				}
 			}
 		}

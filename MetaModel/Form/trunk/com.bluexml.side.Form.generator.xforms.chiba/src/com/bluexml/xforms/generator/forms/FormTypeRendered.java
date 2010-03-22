@@ -45,7 +45,7 @@ public enum FormTypeRendered {
 				"Search forms",
 				""),
 		formWkflw(
-				new FormSubmissionActions[] { FormSubmissionActions.Submit }, 
+				new FormSubmissionActions[] { }, 
 				"", 
 				MsgId.INT_DIRECTORY_FORM_WKFLW.getText(),
 				"Workflow forms",

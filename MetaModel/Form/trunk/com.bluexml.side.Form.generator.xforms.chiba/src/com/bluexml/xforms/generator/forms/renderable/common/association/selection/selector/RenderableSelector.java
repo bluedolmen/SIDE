@@ -57,7 +57,13 @@ public class RenderableSelector extends AbstractRenderable {
 	public RenderableSelector(AssociationBean associationBean) {
 		super(associationBean);
 
-		if (associationBean.getAssociationType() == AssociationType.clazz) {
+		if (associationBean.isForField()) {
+			String overridingType = associationBean.getOverridingType();
+			instanceName = overridingType.replaceAll(":", "_") + bean.getName() + "ListExt";
+			modelElementUpdater = new ModelElementUpdaterList(overridingType, instanceName,
+					associationBean.getFormatPattern(), associationBean.getLabelLength(),
+					associationBean.getIdentifierPropName());
+		} else if (associationBean.getAssociationType() == AssociationType.clazz) {
 			instanceName = ModelTools.getCompleteNameJAXB(associationBean.getDestinationClass())
 					+ "List";
 			modelElementUpdater = new ModelElementUpdaterList(
@@ -197,7 +203,11 @@ public class RenderableSelector extends AbstractRenderable {
 		RenderedDiv rendered = new RenderedDiv(XFormsGenerator.getId("Selector"));
 		initBinds();
 
-		if (bean.getAssociationType() == AssociationType.clazz) {
+		if (bean.isForField()) {
+			rendered.addModelElement(new ModelElementInstanceList(bean.getOverridingType(),
+					instanceName, bean.getFormatPattern(), bean.getLabelLength(), bean
+							.getIdentifierPropName()));
+		} else if (bean.getAssociationType() == AssociationType.clazz) {
 			rendered.addModelElement(new ModelElementInstanceList(bean.getDestinationClass(),
 					instanceName, bean.getFormatPattern(), bean.getLabelLength()));
 		} else {
@@ -213,7 +223,6 @@ public class RenderableSelector extends AbstractRenderable {
 
 		return rendered;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.generator.forms.Renderable#getDivStyle()
@@ -275,6 +284,13 @@ public class RenderableSelector extends AbstractRenderable {
 		bindLabel = null;
 		bindMaxResults = null;
 		bindType = null;
+	}
+
+	/**
+	 * 
+	 */
+	public boolean isForField() {
+		return bean.isForField();
 	}
 
 }

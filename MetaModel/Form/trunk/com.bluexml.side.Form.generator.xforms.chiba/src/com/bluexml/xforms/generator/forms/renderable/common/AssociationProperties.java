@@ -58,8 +58,19 @@ public class AssociationProperties {
 	private List<String> createEditFormNames = null; // #1510
 
 	private String formatPattern;
-	
+
 	private String labelLength;
+	
+	//** #1530
+	/**
+	 * Whether this selection widget is for a field instead of an association. If set,
+	 * showingActions must be reset.
+	 */
+	private boolean isForField; 
+	private String overridingType;
+	/** Local name of the property (from the type definition) used as id*/
+	private String identifierPropName;
+	// ** #1530
 
 	/**
 	 * Used in formForm's (via RenderableModelChoiceField's)
@@ -69,7 +80,9 @@ public class AssociationProperties {
 	}
 
 	/**
-	 * Used in formClass's (via addAssociation)
+	 * Used in formClass's (via addAssociation).
+	 * <p>
+	 * NOTE: several fields are not initialized from the constructor parameters
 	 * 
 	 * @param destination
 	 *            the destination
@@ -86,8 +99,7 @@ public class AssociationProperties {
 	 * @param inline
 	 *            the inline
 	 * @param multiple
-	 *            the multiple NOTE: showingActions is not initialized from the constructor
-	 *            parameters
+	 *            the multiple
 	 */
 	public AssociationProperties(Clazz destination, Renderable destinationRenderable, String name,
 			String assocTitle, boolean inline, int hiBound, int loBound) {
@@ -107,6 +119,9 @@ public class AssociationProperties {
 		this.hint = null;
 		this.formatPattern = "";
 		this.labelLength = "0";
+		this.isForField = false;
+		this.overridingType = null;
+		this.identifierPropName = null;
 	}
 
 	/**
@@ -371,7 +386,8 @@ public class AssociationProperties {
 	}
 
 	/**
-	 * @param labelLength the labelLength to set
+	 * @param labelLength
+	 *            the labelLength to set
 	 */
 	public void setLabelLength(String labelLength) {
 		this.labelLength = labelLength;
@@ -384,5 +400,47 @@ public class AssociationProperties {
 		return labelLength;
 	}
 
+	/**
+	 * @param isForField
+	 *            the isForField to set
+	 */
+	public void setForField(boolean isForField) {
+		this.isForField = isForField;
+	}
+
+	/**
+	 * @return the isForField
+	 */
+	public boolean isForField() {
+		return isForField;
+	}
+
+	/**
+	 * @param overridingType the overridingType to set
+	 */
+	public void setOverridingType(String overridingType) {
+		this.overridingType = overridingType;
+	}
+
+	/**
+	 * @return the overridingType
+	 */
+	public String getOverridingType() {
+		return overridingType;
+	}
+
+	/**
+	 * @param identifierPropName the identifierPropName to set
+	 */
+	public void setIdentifierPropName(String identifierPropName) {
+		this.identifierPropName = identifierPropName;
+	}
+
+	/**
+	 * @return the identifierPropName
+	 */
+	public String getIdentifierPropName() {
+		return identifierPropName;
+	}
 
 }

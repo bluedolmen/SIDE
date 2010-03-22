@@ -73,11 +73,23 @@ public class AssociationBean {
 	/** The length at which to truncate labels. */
 	private String labelLength;
 
+	//** #1530
+	/**
+	 * Whether this selection widget is for a field instead of an association. If set,
+	 * showingActions must be reset.
+	 */
+	private boolean isForField;
+	private String overridingType;
+	/** Local name of the property (from the type definition) used as id*/
+	private String identifierPropName;
+	//** #1530
+
 	public AssociationBean() {
 		super();
 		fieldSize = "0";
 		formatPattern = "";
 		labelLength = "0";
+		isForField = false;
 	}
 
 	/**
@@ -347,7 +359,8 @@ public class AssociationBean {
 	}
 
 	/**
-	 * @param createEditFormType the createEditFormType to set
+	 * @param createEditFormType
+	 *            the createEditFormType to set
 	 */
 	public void setCreateEditFormType(FormTypeRendered createEditFormType) {
 		this.createEditFormType = createEditFormType;
@@ -358,6 +371,52 @@ public class AssociationBean {
 	 */
 	public FormTypeRendered getCreateEditFormType() {
 		return createEditFormType;
+	}
+
+	/**
+	 * @param isForField
+	 *            the isForField to set
+	 */
+	public void setForField(boolean isForField) {
+		this.isForField = isForField;
+		if (isForField) {
+			setShowingActions(false);
+		}
+	}
+
+	/**
+	 * @return the isForField
+	 */
+	public boolean isForField() {
+		return isForField;
+	}
+
+	/**
+	 * @param overridingType the overridingType to set
+	 */
+	public void setOverridingType(String overridingType) {
+		this.overridingType = overridingType;
+	}
+
+	/**
+	 * @return the overridingType
+	 */
+	public String getOverridingType() {
+		return overridingType;
+	}
+
+	/**
+	 * @param identifierPropName the identifierPropName to set
+	 */
+	public void setIdentifierPropName(String identifierPropName) {
+		this.identifierPropName = identifierPropName;
+	}
+
+	/**
+	 * @return the identifierPropName
+	 */
+	public String getIdentifierPropName() {
+		return identifierPropName;
 	}
 
 }

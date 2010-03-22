@@ -58,6 +58,9 @@ public class CommonRenderableAssociation extends Renderable {
 
 		associationBean.setFormatPattern(properties.getFormatPattern());
 		associationBean.setLabelLength(properties.getLabelLength());
+		associationBean.setForField(properties.isForField());
+		associationBean.setOverridingType(properties.getOverridingType());
+		associationBean.setIdentifierPropName(properties.getIdentifierPropName());
 
 		if (properties.isInline()) {
 			if (properties.isMultiple()) {

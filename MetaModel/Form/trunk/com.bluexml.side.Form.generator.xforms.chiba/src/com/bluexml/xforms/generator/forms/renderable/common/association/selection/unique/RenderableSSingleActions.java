@@ -28,7 +28,6 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	/** The selector bind for the data type. */
 	private ModelElementBindSimple selectorBindType;
 
-	@SuppressWarnings("unused")
 	private RenderableSelector selector;
 
 	/**
@@ -93,7 +92,6 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		return rendered;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.generator.forms.Renderable#getDivStyle()
 	 */
@@ -114,7 +112,8 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 */
 	private Element getTriggerReset(ModelElementBindSimple bindId,
 			ModelElementBindSimple bindLabel, ModelElementBindSimple bindType) {
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_LEFT);
+		String img = selector.isForField() ? XFormsGenerator.IMG_CLEAR : XFormsGenerator.IMG_LEFT;
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(img);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
 
@@ -130,11 +129,13 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		setvalueLabel.setText("");
 		action.addContent(setvalueLabel);
 
-		Element setvalueType = XFormsGenerator.createElement("setvalue",
-				XFormsGenerator.NAMESPACE_XFORMS);
-		bindType.addLinkedElement(setvalueType);
-		setvalueType.setText("");
-		action.addContent(setvalueType);
+		if (selector.isForField() == false) {
+			Element setvalueType = XFormsGenerator.createElement("setvalue",
+					XFormsGenerator.NAMESPACE_XFORMS);
+			bindType.addLinkedElement(setvalueType);
+			setvalueType.setText("");
+			action.addContent(setvalueType);
+		}
 
 		// if (getBean().getAssociationType() == AssociationType.wkflwProcess) {
 		// // for updating the instances list wrt current process definition
@@ -163,7 +164,8 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	private Element getTriggerSelect(Stack<Rendered> renderedParents,
 			ModelElementBindSimple bindId, ModelElementBindSimple bindLabel,
 			ModelElementBindSimple bindType) {
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_RIGHT);
+		String img = selector.isForField() ? XFormsGenerator.IMG_SELECT : XFormsGenerator.IMG_RIGHT;
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(img);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
 
@@ -179,12 +181,14 @@ public class RenderableSSingleActions extends AbstractRenderable {
 		setvalueLabel.setAttribute("value", selectorBindLabel.getNodeset());
 		action.addContent(setvalueLabel);
 
-		Element setvalueType = XFormsGenerator.createElement("setvalue",
-				XFormsGenerator.NAMESPACE_XFORMS);
-		bindType.addLinkedElement(setvalueType);
-		setvalueType.setAttribute("value", selectorBindType.getNodeset());
-		action.addContent(setvalueType);
+		if (selector.isForField() == false) {
+			Element setvalueType = XFormsGenerator.createElement("setvalue",
+					XFormsGenerator.NAMESPACE_XFORMS);
+			bindType.addLinkedElement(setvalueType);
+			setvalueType.setAttribute("value", selectorBindType.getNodeset());
+			action.addContent(setvalueType);
 
+		}
 		// if (getBean().getAssociationType() == AssociationType.wkflwProcess) {
 		// // for updating the instances list wrt current process definition
 		// Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);

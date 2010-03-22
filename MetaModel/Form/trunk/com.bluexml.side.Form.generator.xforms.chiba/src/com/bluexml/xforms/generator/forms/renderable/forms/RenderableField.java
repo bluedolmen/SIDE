@@ -1,8 +1,11 @@
 package com.bluexml.xforms.generator.forms.renderable.forms;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
 
 import com.bluexml.side.common.ModelElement;
@@ -31,6 +34,8 @@ import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
+import com.bluexml.xforms.generator.forms.renderable.common.AssociationProperties;
+import com.bluexml.xforms.generator.forms.renderable.common.CommonRenderableAssociation;
 import com.bluexml.xforms.generator.forms.renderable.common.field.AbstractRenderableField;
 import com.bluexml.xforms.generator.forms.renderable.forms.RenderableActionField;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableChoiceInput;
@@ -236,8 +241,6 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 		} else if (formElement instanceof TextField) {
 			renderable = new RenderableTextInput(generationManager, parent, (TextField) formElement);
 		} else if (formElement instanceof CharField) {
-			renderable = new RenderableSimpleInput<CharField>(generationManager, parent,
-					(CharField) formElement, "string");
 			// ** #1313
 			CharField charField = (CharField) formElement;
 			ModelElement ref = (ModelElement) getFormGenerator().getRealObject(charField.getRef());
@@ -246,9 +249,60 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 				if ((elist != null) && (elist.size() > 0)) {
 					renderable = new RenderableChoiceInputWorkflow(generationManager, parent,
 							charField);
+					return renderable;
 				}
 			}
 			// ** #1313
+			if (getFormGenerator().isFieldSelectionCapable(charField)) {
+				// ** #1530
+				String format = getFormGenerator().getSelectionCapableFieldFormat(charField);
+				String type = getFormGenerator().getSelectionCapableFieldDatatype(charField);
+				String idProp = getFormGenerator().getSelectionCapableFieldIdentifier(charField);
+				String labelLength = getFormGenerator().getSelectionCapableFieldLabelLength(
+						charField);
+				if (labelLength == null) {
+					labelLength = "0";
+				}
+
+				AssociationProperties properties = new AssociationProperties();
+
+				// specifics for selection capable fields
+				properties.setForField(true);
+				properties.setOverridingType(type);
+				properties.setIdentifierPropName(idProp);
+				String pattern = format;
+				try {
+					if (StringUtils.trimToNull(pattern) != null) {
+						pattern = URLEncoder.encode(pattern, "UTF-8");
+					}
+				} catch (UnsupportedEncodingException e) {
+					logger.fatal("Unsupported encoding scheme: UTF-8");
+					throw new RuntimeException("Unsupported encoding scheme: UTF-8");
+				}
+				properties.setFormatPattern(pattern);
+				
+				// general properties
+				properties.setShowingActions(false);
+				properties.setLabelLength(labelLength);
+				properties.setDisabled(formElement.isDisabled());
+				properties.setMandatory(formElement.isMandatory());
+				properties.setHint(formElement.getHelp_text());
+				properties.setAssocTitle(charField.getLabel());
+				properties.setDestination(null);
+				properties.setDestinationRenderable(null);
+				properties.setName(FormGeneratorsManager.getUniqueName(formElement));
+				properties.setCreateEditFormType(null);
+				properties.setFieldSize("0");
+				properties.setInline(false);
+				properties.setLoBound(0);
+				properties.setHiBound(1); // <-- TO CHANGE when multiple values are supported
+
+				renderable = new CommonRenderableAssociation(properties);
+				// ** #1530
+			} else {
+				renderable = new RenderableSimpleInput<CharField>(generationManager, parent,
+						(CharField) formElement, "string");
+			}
 		} else if (formElement instanceof ActionField) {
 			renderable = new RenderableActionField(generationManager, parent,
 					(ActionField) formElement);

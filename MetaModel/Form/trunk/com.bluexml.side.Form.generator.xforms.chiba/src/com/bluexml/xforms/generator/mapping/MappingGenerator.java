@@ -717,7 +717,12 @@ public class MappingGenerator extends AbstractGenerator {
 			taskType.setName(formName);
 			taskType.setTaskId(taskId);
 			FormClass attached = formWorkflow.getDataForm();
-			taskType.setDataForm(attached.getId());
+			if (attached != null) {
+				taskType.setDataForm(attached.getId());
+			} else {
+				monitor.addErrorTextAndLog("No data form attached to workflow form '" + formName
+						+ "'", null, null);
+			}
 			taskType.setTitle(formWorkflow.getLabel());
 
 			// set the assignment.
@@ -944,6 +949,7 @@ public class MappingGenerator extends AbstractGenerator {
 				formFieldType.setSearchEnum(true); // optional attribute
 			}
 		}
+
 		if (ref instanceof Attribute) {
 			Attribute attribute = (Attribute) ref;
 			formFieldType.setType(attribute.getTyp().getLiteral());
@@ -967,10 +973,17 @@ public class MappingGenerator extends AbstractGenerator {
 			formFieldType.setType("String");
 		}
 
+		//
 		// boolean attributes
 		boolean disabled = field.isDisabled();
 		if (disabled) {
 			formFieldType.setReadOnly(disabled); // optional attribute
+		}
+
+		// whether the value is entered via a selection widget
+		boolean selectionCapable = formGenerator.isFieldSelectionCapable(field);
+		if (selectionCapable) {
+			formFieldType.setSelectionCapable(true);
 		}
 
 		// TODO: remove
@@ -1119,7 +1132,7 @@ public class MappingGenerator extends AbstractGenerator {
 		res.setStaticEnumType(formFieldType.getStaticEnumType());
 
 		//
-		// optional attributes
+		// optional attributes (FileFields are not selection-capable)
 		if (StringUtils.trimToNull(formFieldType.getDefault()) != null) {
 			res.setDefault(formFieldType.getDefault());
 		}
@@ -1266,10 +1279,10 @@ public class MappingGenerator extends AbstractGenerator {
 		modelChoiceType.setMinBound(modelChoiceField.getMin_bound());
 		modelChoiceType.setUniqueName(FormGeneratorsManager.getUniqueName(modelChoiceField));
 		ModelElement ref = modelChoiceField.getRef();
-		
+
 		// #980
-		String alfrescoName = formGenerator.getAlfrescoName(modelChoiceField.getReal_class(), ref); 
-		
+		String alfrescoName = formGenerator.getAlfrescoName(modelChoiceField.getReal_class(), ref);
+
 		Association asso = (Association) formGenerator.getRealObject(ref);
 		if (asso.isOrdered()) {
 			modelChoiceType.setOrdered(true);

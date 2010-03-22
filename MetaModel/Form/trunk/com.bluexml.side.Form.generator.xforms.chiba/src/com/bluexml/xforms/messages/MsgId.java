@@ -96,6 +96,7 @@ public enum MsgId {
 	MSG_STATUS_DELETE_SUCCESS		("status.message.delete.success"),
 	MSG_STATUS_EDIT_FAILURE			("status.message.edit.failure"),
 	MSG_STATUS_EDIT_SUCCESS			("status.message.edit.success"),
+	MSG_STATUS_WORKFLOW_SUCCESS		("status.message.workflow.success"),
 	MSG_STATUS_EMPTY				("status.message.empty"),
 	MSG_STATUS_ITERATION			("status.message.iteration.postfix"),
 	MSG_UPLOAD_CONTENT_FIELD_LABEL	("upload.node.content.field.label"),
@@ -149,6 +150,7 @@ public enum MsgId {
 	INT_ACT_PARAM_GET_FORMTYPE			("formType"),
 	INT_ACT_PARAM_LIST_FORMAT			("format"),
 	INT_ACT_PARAM_LIST_MAXLENGTH		("maxLength"),
+	INT_ACT_PARAM_LIST_IDENTIFIER		("identifier"),
 	INT_ACT_PARAM_LIST_QUERY			("query"),
 	INT_ACT_PARAM_LIST_SIZE				("size"),
 	// form type indicators
@@ -208,7 +210,7 @@ public enum MsgId {
 	INT_GEN_PREFIX_BIND_FORM			("bind"),
 	INT_GEN_REVERSED_TAG_KEY			("reversed"),
 	INT_GEN_REVERSED_TAG_VAL_ALFRESCO	("alfresco"),
-	INT_INSTANCE_ASSOCIATION_ITEM		("associationItem"),
+	INT_INSTANCE_ASSOCIATION_ITEM		("selectionItem"),
 	INT_INSTANCE_ENUM_ID				("id"),
 	INT_INSTANCE_ENUM_VALUE				("value"),
 	INT_INSTANCE_SEARCH_OPCODE			("op"),
@@ -273,6 +275,13 @@ public enum MsgId {
 	INT_WEBSCRIPT_OPCODE_SERVICE		("service"),
 	INT_WEBSCRIPT_OPCODE_UPLOAD			("upload"),
 	INT_WEBSCRIPT_OPCODE_WORKFLOW		("workflow"),
+	//
+	// strings for interfacing with the extension property of form fields
+	//
+	MODEL_XTENSION_DATATYPE				("datatype"),
+	MODEL_XTENSION_FORMAT				("format"),
+	MODEL_XTENSION_IDENTIFIER			("identifier"),
+	MODEL_XTENSION_LABEL_LENGTH			("labelLength"),
 	//
 	// strings by which we accept parameters in the url
 	//
