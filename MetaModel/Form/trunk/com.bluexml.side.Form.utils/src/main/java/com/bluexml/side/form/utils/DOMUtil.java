@@ -2,7 +2,7 @@
  * 
  */
 package com.bluexml.side.form.utils;
- 
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -85,28 +85,40 @@ public class DOMUtil {
 	 * Logs a DOM node with indentation.
 	 * 
 	 * @param node
+	 * @param printToSystemOut
+	 * @param messages
 	 */
-	public static String logXML(Node node, boolean printToSystemOut) {
-		if (node != null) {
-			Source xmlSource = new DOMSource(node);
-			StringWriter sw = new StringWriter();
-			Result outputTarget = new StreamResult(sw);
-			Transformer docTransf = getDocumentTransformer();
-			if (docTransf == null) {
-				return null;
-			}
-			try {
-				docTransf.transform(xmlSource, outputTarget);
-			} catch (TransformerException e) {
-				logger.error(e);
-			}
-			logger.debug(sw.toString());
-			if (printToSystemOut) {
-				System.out.println(sw.toString());
-			}
-			return sw.toString();
+	public static String logXML(Node node, boolean printToSystemOut, String... messages) {
+		if (node == null) {
+			return null;
 		}
-		return null;
+		Source xmlSource = new DOMSource(node);
+		StringWriter sw = new StringWriter();
+		Result outputTarget = new StreamResult(sw);
+		Transformer docTransf = getDocumentTransformer();
+		if (docTransf == null) {
+			return null;
+		}
+		try {
+			docTransf.transform(xmlSource, outputTarget);
+		} catch (TransformerException e) {
+			logger.error(e);
+			return null;
+		}
+
+		StringBuffer buffer = new StringBuffer();
+		for (String message : messages) {
+			buffer.append("\n");
+			buffer.append(message);
+		}
+		buffer.append("\n");
+		buffer.append(sw.toString());
+
+		logger.debug(buffer.toString());
+		if (printToSystemOut) {
+			System.out.println("XFormsUtils.DOMUtil: " + buffer.toString());
+		}
+		return buffer.toString();
 	}
 
 	/**
