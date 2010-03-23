@@ -41,6 +41,12 @@
         <details key="documentation" value="Definition: a specific style code associated to the field which may be defined in style file like css file to be applied on the field input at runtime.&#xD;&#xA;Constraint/Limit: the semantic of the style code is not defined in the model but is known by the targeted form engine on which will be deployed the generated forms.  In the case of XForms generation on Alfresco, this style code refers a CSS class."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Xtension" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This property serves as both a general-purspose extension point and a convenient way to store some information that doesn't belong anywhere else. The information may be user data or directives for tweaking the form generator."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormCollection" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

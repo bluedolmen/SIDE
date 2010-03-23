@@ -79,6 +79,7 @@ public class FormElementItemProvider
 			addHelp_textPropertyDescriptor(object);
 			addRefPropertyDescriptor(object);
 			addStylePropertyDescriptor(object);
+			addXtensionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -194,6 +195,28 @@ public class FormElementItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Xtension feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addXtensionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FormElement_Xtension_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_Xtension_feature", "_UI_FormElement_type"),
+				 FormPackage.Literals.FORM_ELEMENT__XTENSION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Hidden feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -246,6 +269,7 @@ public class FormElementItemProvider
 			case FormPackage.FORM_ELEMENT__HIDDEN:
 			case FormPackage.FORM_ELEMENT__HELP_TEXT:
 			case FormPackage.FORM_ELEMENT__STYLE:
+			case FormPackage.FORM_ELEMENT__XTENSION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

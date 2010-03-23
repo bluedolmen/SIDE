@@ -7,9 +7,11 @@
 package com.bluexml.side.form.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.common.ModelElement;
@@ -17,6 +19,7 @@ import com.bluexml.side.common.impl.ModelElementImpl;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +34,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getHelp_text <em>Help text</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getStyle <em>Style</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getXtension <em>Xtension</em>}</li>
  * </ul>
  * </p>
  *
@@ -146,6 +150,16 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 	 * @ordered
 	 */
 	protected String style = STYLE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getXtension() <em>Xtension</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getXtension()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> xtension;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -293,6 +307,18 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getXtension() {
+		if (xtension == null) {
+			xtension = new EDataTypeUniqueEList<String>(String.class, this, FormPackage.FORM_ELEMENT__XTENSION);
+		}
+		return xtension;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isHidden() {
 		return hidden;
 	}
@@ -330,6 +356,8 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 				return basicGetRef();
 			case FormPackage.FORM_ELEMENT__STYLE:
 				return getStyle();
+			case FormPackage.FORM_ELEMENT__XTENSION:
+				return getXtension();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -339,6 +367,7 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -359,6 +388,10 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 				return;
 			case FormPackage.FORM_ELEMENT__STYLE:
 				setStyle((String)newValue);
+				return;
+			case FormPackage.FORM_ELEMENT__XTENSION:
+				getXtension().clear();
+				getXtension().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -390,6 +423,9 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 			case FormPackage.FORM_ELEMENT__STYLE:
 				setStyle(STYLE_EDEFAULT);
 				return;
+			case FormPackage.FORM_ELEMENT__XTENSION:
+				getXtension().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -414,6 +450,8 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 				return ref != null;
 			case FormPackage.FORM_ELEMENT__STYLE:
 				return STYLE_EDEFAULT == null ? style != null : !STYLE_EDEFAULT.equals(style);
+			case FormPackage.FORM_ELEMENT__XTENSION:
+				return xtension != null && !xtension.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -438,6 +476,8 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 		result.append(help_text);
 		result.append(", style: ");
 		result.append(style);
+		result.append(", Xtension: ");
+		result.append(xtension);
 		result.append(')');
 		return result.toString();
 	}

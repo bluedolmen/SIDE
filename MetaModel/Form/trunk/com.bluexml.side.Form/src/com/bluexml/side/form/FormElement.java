@@ -7,6 +7,7 @@
 package com.bluexml.side.form;
 
 import com.bluexml.side.common.ModelElement;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.clazz.ClassModelElement;
@@ -30,6 +31,7 @@ import com.bluexml.side.clazz.ClassModelElement;
  *   <li>{@link com.bluexml.side.form.FormElement#getHelp_text <em>Help text</em>}</li>
  *   <li>{@link com.bluexml.side.form.FormElement#getRef <em>Ref</em>}</li>
  *   <li>{@link com.bluexml.side.form.FormElement#getStyle <em>Style</em>}</li>
+ *   <li>{@link com.bluexml.side.form.FormElement#getXtension <em>Xtension</em>}</li>
  * </ul>
  * </p>
  *
@@ -186,6 +188,21 @@ public interface FormElement extends ModelElement {
 	 * @generated
 	 */
 	void setStyle(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Xtension</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This property serves as both a general-purspose extension point and a convenient way to store some information that doesn't belong anywhere else. The information may be user data or directives for tweaking the form generator.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Xtension</em>' attribute list.
+	 * @see com.bluexml.side.form.FormPackage#getFormElement_Xtension()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getXtension();
 
 	/**
 	 * Returns the value of the '<em><b>Hidden</b></em>' attribute.

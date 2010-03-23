@@ -182,13 +182,22 @@ public interface FormPackage extends EPackage {
 	int FORM_ELEMENT__STYLE = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ELEMENT__XTENSION = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 6;
+	int FORM_ELEMENT_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Group</em>}' class.
@@ -606,6 +615,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORM_GROUP__STYLE = FORM_ELEMENT__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_GROUP__XTENSION = FORM_ELEMENT__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1049,6 +1067,15 @@ public interface FormPackage extends EPackage {
 	int FIELD__STYLE = FORM_ELEMENT__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__XTENSION = FORM_ELEMENT__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1220,6 +1247,15 @@ public interface FormPackage extends EPackage {
 	int FORM_CONTAINER__STYLE = FORM_GROUP__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__XTENSION = FORM_GROUP__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1374,6 +1410,15 @@ public interface FormPackage extends EPackage {
 	int FORM_WORKFLOW__STYLE = FORM_CONTAINER__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__XTENSION = FORM_CONTAINER__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1525,6 +1570,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORM_CLASS__STYLE = FORM_CONTAINER__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__XTENSION = FORM_CONTAINER__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1687,6 +1741,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_FIELD__STYLE = FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__XTENSION = FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -1858,6 +1921,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHAR_FIELD__STYLE = FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__XTENSION = FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2047,6 +2119,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_FIELD__STYLE = FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__XTENSION = FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2245,6 +2326,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_TIME_FIELD__STYLE = DATE_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__XTENSION = DATE_FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2455,6 +2545,15 @@ public interface FormPackage extends EPackage {
 	int NUMERICAL_FIELD__STYLE = FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_FIELD__XTENSION = FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2624,6 +2723,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECIMAL_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__XTENSION = NUMERICAL_FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2833,6 +2941,15 @@ public interface FormPackage extends EPackage {
 	int FLOAT_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__XTENSION = NUMERICAL_FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3022,6 +3139,15 @@ public interface FormPackage extends EPackage {
 	int INTEGER_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__XTENSION = NUMERICAL_FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3209,6 +3335,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_CHOICE_FIELD__STYLE = FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__XTENSION = FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -3463,6 +3598,15 @@ public interface FormPackage extends EPackage {
 	int EMAIL_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__XTENSION = CHAR_FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3652,6 +3796,15 @@ public interface FormPackage extends EPackage {
 	int FILE_FIELD__STYLE = FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__XTENSION = FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3832,6 +3985,15 @@ public interface FormPackage extends EPackage {
 	int IMAGE_FIELD__STYLE = FILE_FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__XTENSION = FILE_FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4010,6 +4172,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_FIELD__STYLE = DATE_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__XTENSION = DATE_FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -4210,6 +4381,15 @@ public interface FormPackage extends EPackage {
 	int URL_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__XTENSION = CHAR_FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4406,6 +4586,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int PHONE_NUMBER_FIELD__STYLE = CHAR_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__XTENSION = CHAR_FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -4606,6 +4795,15 @@ public interface FormPackage extends EPackage {
 	int FORM_ASPECT__STYLE = FORM_GROUP__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ASPECT__XTENSION = FORM_GROUP__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4748,6 +4946,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE__STYLE = MODEL_CHOICE_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__XTENSION = MODEL_CHOICE_FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -5002,6 +5209,15 @@ public interface FormPackage extends EPackage {
 	int CHOICE_FIELD__STYLE = FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__XTENSION = FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5207,6 +5423,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int REGEX_FIELD__STYLE = CHAR_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__XTENSION = CHAR_FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -5425,6 +5650,15 @@ public interface FormPackage extends EPackage {
 	int PASSWORD_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__XTENSION = CHAR_FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5614,6 +5848,15 @@ public interface FormPackage extends EPackage {
 	int VIRTUAL_FIELD__STYLE = FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__XTENSION = FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5794,6 +6037,15 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD__STYLE = FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__XTENSION = FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5972,6 +6224,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_FIELD__STYLE = CHAR_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__XTENSION = CHAR_FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -6182,6 +6443,15 @@ public interface FormPackage extends EPackage {
 	int FORM_SEARCH__STYLE = FORM_CONTAINER__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_SEARCH__XTENSION = FORM_CONTAINER__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6352,6 +6622,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATIC_TEXT__STYLE = FORM_ELEMENT__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__XTENSION = FORM_ELEMENT__XTENSION;
 
 	/**
 	 * The number of structural features of the '<em>Static Text</em>' class.
@@ -6590,6 +6869,15 @@ public interface FormPackage extends EPackage {
 	int SEARCH_FIELD__STYLE = FORM_ELEMENT__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__XTENSION = FORM_ELEMENT__XTENSION;
+
+	/**
 	 * The number of structural features of the '<em>Search Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6715,6 +7003,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int NUMERICAL_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__XTENSION = SEARCH_FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
@@ -6862,6 +7159,15 @@ public interface FormPackage extends EPackage {
 	int CHAR_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__XTENSION = SEARCH_FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7005,6 +7311,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__XTENSION = SEARCH_FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
@@ -7152,6 +7467,15 @@ public interface FormPackage extends EPackage {
 	int CHOICE_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__XTENSION = SEARCH_FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7297,6 +7621,15 @@ public interface FormPackage extends EPackage {
 	int FILE_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
 
 	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__XTENSION = SEARCH_FIELD__XTENSION;
+
+	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7440,6 +7773,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__XTENSION = SEARCH_FIELD__XTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
@@ -7643,6 +7985,17 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getFormElement_Style();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.FormElement#getXtension <em>Xtension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Xtension</em>'.
+	 * @see com.bluexml.side.form.FormElement#getXtension()
+	 * @see #getFormElement()
+	 * @generated
+	 */
+	EAttribute getFormElement_Xtension();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormElement#isHidden <em>Hidden</em>}'.
@@ -8905,6 +9258,14 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FORM_ELEMENT__STYLE = eINSTANCE.getFormElement_Style();
+
+		/**
+		 * The meta object literal for the '<em><b>Xtension</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FORM_ELEMENT__XTENSION = eINSTANCE.getFormElement_Xtension();
 
 		/**
 		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
