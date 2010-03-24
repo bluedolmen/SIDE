@@ -1377,14 +1377,14 @@ public class FormGeneratorsManager {
 	 * Tells whether the field will be rendered as a selection widget instead of a text input.
 	 * 
 	 * @param field
-	 * @return
+	 * @return true if required parameters are found in the appropriate property
 	 */
 	public boolean isFieldSelectionCapable(Field field) {
-		EList<String> extensions = field.getXtension();
-		if (extensions != null) {
-			String format = getXtensionParameter(extensions, MsgId.MODEL_XTENSION_FORMAT.getText());
-			String type = getXtensionParameter(extensions, MsgId.MODEL_XTENSION_DATATYPE.getText());
-			String id = getXtensionParameter(extensions, MsgId.MODEL_XTENSION_IDENTIFIER.getText());
+		EList<String> xtension = getFieldXtension(field);
+		if (xtension != null) {
+			String format = getXtensionParameter(xtension, MsgId.MODEL_XTENSION_FORMAT.getText());
+			String type = getXtensionParameter(xtension, MsgId.MODEL_XTENSION_DATATYPE.getText());
+			String id = getXtensionParameter(xtension, MsgId.MODEL_XTENSION_IDENTIFIER.getText());
 			if ((format != null) && (type != null) && (id != null)) {
 				return true;
 			}
@@ -1398,19 +1398,19 @@ public class FormGeneratorsManager {
 	 * The list is searched for a correctly formated parameter until completely visited. If a
 	 * parameter is defined several times, only the first occurrence will be seen and used.
 	 * 
-	 * @param extension
+	 * @param xtension
 	 * @param parameter
 	 * @return the value of the parameter, or <code>null</code> if no correctly formated definition
 	 *         is found.
 	 */
-	private String getXtensionParameter(EList<String> extension, String parameter) {
+	private String getXtensionParameter(EList<String> xtension, String parameter) {
 		int pos;
-		for (String config : extension) {
-			pos = config.indexOf(parameter);
+		for (String configItem : xtension) {
+			pos = configItem.indexOf(parameter);
 			if (pos != -1) {
 				pos = pos + parameter.length();
-				if (config.charAt(pos) == '=') {
-					return config.substring(pos + 1);
+				if (configItem.charAt(pos) == '=') {
+					return configItem.substring(pos + 1);
 				}
 			}
 		}
@@ -1420,28 +1420,32 @@ public class FormGeneratorsManager {
 	//
 	//
 	//
-	public String getSelectionCapableFieldFormat(Field field) {
-		EList<String> mockup = field.getMockup();
+	private EList<String> getFieldXtension(Field field) {
+		return field.getXtension();
+	}
 
-		return getXtensionParameter(mockup, MsgId.MODEL_XTENSION_FORMAT.getText());
+	public String getSelectionCapableFieldFormat(Field field) {
+		EList<String> xtension = getFieldXtension(field);
+
+		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_FORMAT.getText());
 	}
 
 	public String getSelectionCapableFieldDatatype(Field field) {
-		EList<String> mockup = field.getMockup();
+		EList<String> xtension = getFieldXtension(field);
 
-		return getXtensionParameter(mockup, MsgId.MODEL_XTENSION_DATATYPE.getText());
+		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_DATATYPE.getText());
 	}
 
 	public String getSelectionCapableFieldIdentifier(Field field) {
-		EList<String> mockup = field.getMockup();
+		EList<String> xtension = getFieldXtension(field);
 
-		return getXtensionParameter(mockup, MsgId.MODEL_XTENSION_IDENTIFIER.getText());
+		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_IDENTIFIER.getText());
 	}
 
 	public String getSelectionCapableFieldLabelLength(Field field) {
-		EList<String> mockup = field.getMockup();
+		EList<String> xtension = getFieldXtension(field);
 
-		return getXtensionParameter(mockup, MsgId.MODEL_XTENSION_LABEL_LENGTH.getText());
+		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_LABEL_LENGTH.getText());
 	}
 
 }
