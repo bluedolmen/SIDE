@@ -190,6 +190,7 @@
 					<xsd:element maxOccurs="unbounded" name="modelChoice" type="modelChoiceType" />
 				</xsd:sequence>
 				<xsd:attribute name="startTask" type="xsd:boolean" use="optional" />
+				<xsd:attribute name="processTitle" type="xsd:string" use="optional" />
 			</xsd:extension>
 		</xsd:complexContent>
 

@@ -978,7 +978,7 @@ public class MappingToolCommon {
 		}
 		return formFieldType.isSelectionCapable();
 	}
-	
+
 	/*
 	 * FormType
 	 */
@@ -1123,7 +1123,7 @@ public class MappingToolCommon {
 	}
 
 	/**
-	 * Gets, from the given instance, the element whose tag name that matches the given form name.
+	 * Gets, from the given instance, the element whose tag name matches the given form name.
 	 * 
 	 * @param formName
 	 *            the id of the form
@@ -1133,7 +1133,9 @@ public class MappingToolCommon {
 	 */
 	protected Element getRootElement(String formName, Node formNode) {
 		Element element = null;
-		DOMUtil.logXML(formNode, true);
+		if (logger.isDebugEnabled()) {
+			DOMUtil.logXML(formNode, true, ">> looking for root element for form: " + formName);
+		}
 		if (formNode instanceof Document) {
 			Element docElt = ((Document) formNode).getDocumentElement();
 			element = DOMUtil.getChild(docElt, formName);

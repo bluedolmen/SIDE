@@ -153,7 +153,10 @@ public class GetAction extends AbstractReadAction {
 				wkDocElt.appendChild(clone);
 			}
 		}
-		DOMUtil.logXML(docWkflw, false);
+		if (logger.isDebugEnabled()) {
+			DOMUtil.logXML(docWkflw, true, ">> Returning instance document for workflow form: "
+					+ wkFormName);
+		}
 
 		return docWkflw;
 	}

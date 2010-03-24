@@ -117,7 +117,6 @@ public class AlfrescoTransaction {
 		}
 		GenericDelete entry = objectFactory.createGenericDelete();
 		entry.setId(id);
-		entry.setAssocObject(null);
 		batch.getCreateOrUpdateOrDelete().add(entry);
 	}
 

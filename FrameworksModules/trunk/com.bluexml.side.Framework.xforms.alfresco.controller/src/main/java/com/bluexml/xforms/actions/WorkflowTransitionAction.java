@@ -4,7 +4,6 @@
 package com.bluexml.xforms.actions;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,14 +13,8 @@ import java.util.Vector;
 import javax.servlet.ServletException;
 
 import org.alfresco.repo.workflow.WorkflowModel;
-import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.security.PermissionService;
-import org.alfresco.service.cmr.workflow.WorkflowDefinition;
-import org.alfresco.service.cmr.workflow.WorkflowInstance;
-import org.alfresco.service.cmr.workflow.WorkflowPath;
-import org.alfresco.service.cmr.workflow.WorkflowTask;
-import org.alfresco.service.cmr.workflow.WorkflowTaskDefinition;
 import org.alfresco.service.namespace.QName;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
@@ -49,6 +42,11 @@ import com.bluexml.xforms.messages.MsgPool;
  */
 public class WorkflowTransitionAction extends AbstractWriteAction {
 
+	/** The separator for the compound string that contains info about a task */
+	private static final String TASK_SEPARATOR = "{::}";
+
+	private static final int TASK_SEPARATOR_LENGTH = TASK_SEPARATOR.length();
+
 	/** Name of the transition to take. */
 	protected static final String TRANSITION_NAME = "transitionName";
 
@@ -58,7 +56,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 
 	private class TransitionResultBean {
 		private boolean success;
-		private List<WorkflowTask> tasks;
+		private List<String> tasks;
 
 		public TransitionResultBean() {
 			super();
@@ -76,7 +74,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		/**
 		 * @return the tasks
 		 */
-		public List<WorkflowTask> getTasks() {
+		public List<String> getTasks() {
 			return tasks;
 		}
 
@@ -92,7 +90,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		 * @param tasks
 		 *            the tasks to set
 		 */
-		public void setTasks(List<WorkflowTask> tasks) {
+		public void setTasks(List<String> tasks) {
 			this.tasks = tasks;
 		}
 
@@ -245,8 +243,9 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			if (bean.isAutoAdvance()) {
 				// if autoAdvancing, get the next form from the tasks
 				if (resultBean.getTasks() != null && (resultBean.getTasks().size() > 0)) {
-					WorkflowTask nextTask = resultBean.getTasks().get(0);
-					nextFormName = controller.getWorkflowFormNameFromTask(nextTask.name);
+					String taskInfoString = resultBean.getTasks().get(0);
+					String nextTaskName = getNameFromTaskIdNameTitle(taskInfoString);
+					nextFormName = controller.getWorkflowFormNameFromTask(nextTaskName);
 					location = buildNextFormUrl(nextFormName, initParams, URLsuffix, true);
 					super.redirectClient(location);
 					return;
@@ -438,28 +437,29 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		}
 
 		// check that an active task for the workflow instance is consistent with the current form
-		List<WorkflowTask> tasks = controller.workflowGetCurrentTasks(wkflwInstanceId, transaction);
+		List<String> tasks = controller.workflowGetCurrentTasksInfo(transaction, wkflwInstanceId);
 		if (tasks.size() == 0) {
 			navigationPath
 					.setStatusMsg("Transition not followed. No tasks were found for instance id '"
 							+ wkflwInstanceId + "'.");
 			return resultBean;
 		}
-		WorkflowTask task = findRelevantTaskForForm(formTaskName, tasks);
-		if (task == null) {
+		String taskInfoString = findRelevantTaskForForm(formTaskName, tasks);
+		if (taskInfoString == null) {
 			navigationPath.setStatusMsg("Transition not followed. The form '" + wkFormName
 					+ "' is not consistent with the current task(s) on the workflow instance.");
 			return resultBean;
 		}
 
 		// save the task's current state
-		if (controller.workflowUpdateTask(transaction, task.id, properties) == null) {
+		String taskId = getIdFromTaskIdNameTitle(taskInfoString);
+		if (controller.workflowUpdateTask(transaction, taskId, properties) == false) {
 			navigationPath.setStatusMsg("Transition not followed. Failed while updating the task.");
 			return resultBean;
 		}
 
 		// trigger the transition whose button was clicked
-		if (controller.workflowEndTask(transaction, task.id, transitionToTake) == null) {
+		if (controller.workflowEndTask(transaction, taskId, transitionToTake) == false) {
 			navigationPath.setStatusMsg("Transition not followed. Failed while ending the task.");
 			return resultBean;
 		}
@@ -473,17 +473,18 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * 
 	 * @param formTaskName
 	 *            the task name, inferred from a form name
-	 * @param tasks
+	 * @param taskNames
 	 *            a list of active tasks
 	 * @return the relevant task for the form
 	 */
-	private WorkflowTask findRelevantTaskForForm(String formTaskName, List<WorkflowTask> tasks) {
-		if (tasks == null) {
+	private String findRelevantTaskForForm(String formTaskName, List<String> taskNames) {
+		if (taskNames == null) {
 			return null;
 		}
-		for (WorkflowTask task : tasks) {
-			if (StringUtils.equals(formTaskName, task.name)) {
-				return task;
+		for (String taskInfoString : taskNames) {
+			String taskName = getNameFromTaskIdNameTitle(taskInfoString);
+			if (StringUtils.equals(formTaskName, taskName)) {
+				return taskInfoString;
 			}
 		}
 		return null;
@@ -508,25 +509,37 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @return true if the user is the actorId or belongs to the pooled actors
 	 */
 	private boolean validateCurrentUser(WorkflowTaskInfoBean taskBean) {
-		if (taskBean.getActorId() != null) {
-			if (taskBean.getActorId().equals("initiator")) { // #1531
-				return true;
-			}
-			if (StringUtils.equals(taskBean.getActorId(), userName)) {
-				return true;
+		String actorIds = taskBean.getActorId();
+		if (actorIds != null) {
+			// #1514: support for multiple groups/users via comma-separated list
+			String[] actors = StringUtils.split(actorIds, ",");
+			for (String anActor : actors) {
+				anActor = StringUtils.trim(anActor);
+				if (anActor.equals("initiator")) { // #1531
+					return true;
+				}
+				if (StringUtils.equals(anActor, userName)) {
+					return true;
+				}
 			}
 		}
-		// search the registered task actors amongst the user's groups
-		String refPool = taskBean.getPooledActors();
-		if (refPool == null) {
+
+		String pooledActors = taskBean.getPooledActors();
+		if (pooledActors == null) {
 			return false;
 		}
-		Set<String> auths = controller.systemGetContainingGroups(transaction, userName);
-		String refGroup = PermissionService.GROUP_PREFIX + refPool;
-		if (auths != null) {
-			for (String group : auths) {
-				if (StringUtils.equals(group, refGroup)) {
-					return true;
+
+		String[] actors = StringUtils.split(pooledActors, ",");
+		for (String anActor : actors) {
+			anActor = StringUtils.trim(anActor);
+			// search the registered task groups amongst the user's groups
+			Set<String> userGroups = controller.systemGetContainingGroups(transaction, userName);
+			if (userGroups != null) { // <-- can this ever not be so ?
+				String authorizedGroup = PermissionService.GROUP_PREFIX + anActor;
+				for (String aUserGroup : userGroups) {
+					if (StringUtils.equals(aUserGroup, authorizedGroup)) {
+						return true;
+					}
 				}
 			}
 		}
@@ -551,8 +564,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		if (controller.isStartTaskForm(formName)) {
 			// check that the user is authorized to start the workflow
 			if (validateCurrentUser(taskBean) == false) {
-				navigationPath
-						.setStatusMsg("Workflow not started. The user is not allowed as initiator of this workflow definition.");
+				navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_WKFLW_FAIL_INITIATOR));
 				return false;
 			}
 
@@ -563,7 +575,15 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 
 				NodeRef assignee = controller.systemGetNodeRefForUser(transaction, userName);
 				if (assignee == null) {
-					navigationPath.setStatusMsg("Workflow not started. User unknown in Alfresco.");
+					navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_WKFLW_FAIL_USER));
+					return false;
+				}
+
+				// start a workflow instance and set some useful info
+				String instanceId = controller.workflowStart(transaction, processId, null);
+				if (instanceId == null) {
+					navigationPath
+							.setStatusMsg(MsgPool.getMsg(MsgId.MSG_ERROR_WKFLW_START_FAILURE));
 					return false;
 				}
 
@@ -572,27 +592,23 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 						.getDataId());
 				if (wkPackage == null) {
 					navigationPath
-							.setStatusMsg("Workflow not started: could not create the package.");
+							.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_WKFLW_FAIL_PACKAGE));
 					return false;
 				}
 				properties.put(WorkflowModel.ASSOC_PACKAGE, wkPackage);
 				properties.put(WorkflowModel.ASSOC_ASSIGNEE, assignee);
-				properties.put(WorkflowModel.PROP_WORKFLOW_DESCRIPTION, taskBean.getTitle());
 
-				// start a workflow instance and set some useful info
-				WorkflowPath path = controller.workflowStart(transaction, processId, null);
-				if (path == null) {
-					navigationPath
-							.setStatusMsg(MsgPool.getMsg(MsgId.MSG_ERROR_WKFLW_START_FAILURE));
-					return false;
+				String instanceDescription = taskBean.getProcessTitle();
+				if (StringUtils.trimToNull(instanceDescription) == null) {
+					instanceDescription = taskBean.getTitle();
 				}
-				WorkflowInstance instance = path.instance;
-				if (instance == null) {
-					navigationPath
-							.setStatusMsg(MsgPool.getMsg(MsgId.MSG_ERROR_WKFLW_START_FAILURE));
-					return false;
+				if (StringUtils.trimToNull(instanceDescription) == null) {
+					instanceDescription = controller
+							.workflowExtractProcessNameFromFormName(taskBean.getFormName());
 				}
-				currentPage.setWkflwInstanceId(instance.id);
+				properties.put(WorkflowModel.PROP_WORKFLOW_DESCRIPTION, instanceDescription);
+
+				currentPage.setWkflwInstanceId(instanceId);
 			}
 			currentPage.setWkflwProcessId(processId);
 		}
@@ -611,21 +627,23 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			HashMap<QName, Serializable> taskProperties) {
 		TransitionResultBean result = new TransitionResultBean();
 		HashMap<QName, Serializable> properties;
-		List<WorkflowTask> tasks;
-		tasks = controller.workflowGetCurrentTasks(currentPage.getWkflwInstanceId(), transaction);
+		List<String> tasks;
+		tasks = controller.workflowGetCurrentTasksInfo(transaction, currentPage
+				.getWkflwInstanceId());
 		if (tasks == null) {
-			navigationPath
-					.setStatusMsg("Transition followed but couldn't reassign next tasks due to errors on the Alfresco server.");
+			navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_WKFLW_FAIL_SERVER));
 			return result;
 		}
 		if (tasks.size() == 0) {
 			// the workflow is completed, no more tasks are available
-			navigationPath.setStatusMsg("Transition completed: the workflow is ended.");
+			navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_WKFLW_SUCCESS_END));
 			result.setSuccess(true);
 			return result;
 		}
-		for (WorkflowTask task : tasks) {
-			WorkflowTaskInfoBean taskBean = controller.getWorkflowTaskInfoBeanByTaskId(task.name);
+		for (String taskInfoString : tasks) {
+			String taskId = getIdFromTaskIdNameTitle(taskInfoString);
+			String taskName = getNameFromTaskIdNameTitle(taskInfoString);
+			WorkflowTaskInfoBean taskBean = controller.getWorkflowTaskInfoBeanByTaskId(taskName);
 			String pooledActors = taskBean.getPooledActors();
 			String actorIds = taskBean.getActorId();
 
@@ -638,14 +656,15 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 				properties = new HashMap<QName, Serializable>();
 				if (StringUtils.trimToNull(actorIds) == null
 						&& StringUtils.trimToNull(pooledActors) == null) {
-					navigationPath
-							.setStatusMsg("Transition followed but an invalid task assignment information prevents reassigning the workflow. All tasks must have either 'actorId' or 'pooledActors' specified.");
+					navigationPath.setStatusMsg(MsgPool
+							.getMsg(MsgId.MSG_STATUS_WKFLW_FAIL_NO_ACTOR));
 					return result;
 				}
 				if (StringUtils.trimToNull(pooledActors) != null) {
 					// #1514: support for multiple groups/users via comma-separated list
 					String[] actors = StringUtils.split(pooledActors, ",");
 					for (String anActor : actors) {
+						anActor = StringUtils.trim(anActor);
 						anActor = resolveActorId(anActor, taskProperties);
 						NodeRef nodeRef = controller.systemGetNodeRefForGroup(transaction, anActor);
 						addActor(refToActors, nodeRef);
@@ -654,26 +673,67 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 				if (StringUtils.trimToNull(actorIds) != null) {
 					String[] actors = StringUtils.split(actorIds, ",");
 					for (String anActor : actors) {
+						anActor = StringUtils.trim(anActor);
 						anActor = resolveActorId(anActor, taskProperties);
 						NodeRef nodeRef = controller.systemGetNodeRefForUser(transaction, anActor);
 						addActor(refToActors, nodeRef);
 					}
 				}
 				if (refToActors.size() == 0) {
-					navigationPath
-							.setStatusMsg("Transition followed but no user/group (actorId/pooledActors) for the next task is known to Alfresco.");
+					navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_WKFLW_FAIL_ASSIGN));
 					return result;
 				}
 				//
 				properties.put(WorkflowModel.ASSOC_POOLED_ACTORS, (Serializable) refToActors);
-				controller.workflowUpdateTask(transaction, task.id, properties);
+				controller.workflowUpdateTask(transaction, taskId, properties);
 			}
 		}
 		String nextTasksTitles = buildNextTasksTitles(tasks);
-		navigationPath.setStatusMsg(MsgPool.getMsg(MsgId.MSG_STATUS_WORKFLOW_SUCCESS,
-				nextTasksTitles, currentPage.getWkflwInstanceId()));
+		String msg = MsgPool.getMsg(MsgId.MSG_STATUS_WKFLW_SUCCESS, nextTasksTitles, currentPage
+				.getWkflwInstanceId());
+		navigationPath.setStatusMsg(msg);
 		result.setTasks(tasks);
 		result.setSuccess(true);
+		return result;
+	}
+
+	/**
+	 * Gets the id from a task information string as formatted by
+	 * {@link XFormsWork.wfGetCurrentTasks}.
+	 * 
+	 * @param taskInfoString
+	 * @return the id of the task, e.g. "jbpm$64".
+	 */
+	private String getIdFromTaskIdNameTitle(String taskInfoString) { // #1534
+		int pos = taskInfoString.indexOf(TASK_SEPARATOR);
+		String result = taskInfoString.substring(0, pos);
+		return result;
+	}
+
+	/**
+	 * Gets the name from a task information string as formatted by
+	 * {@link XFormsWork.wfGetCurrentTasks}.
+	 * 
+	 * @param taskInfoString
+	 * @return the name of the task, e.g. "wfbxDigitizationProcess:Debut"
+	 */
+	private String getNameFromTaskIdNameTitle(String taskInfoString) { // #1534
+		int pos = taskInfoString.indexOf(TASK_SEPARATOR);
+		int posEnd = taskInfoString.indexOf(TASK_SEPARATOR, pos + TASK_SEPARATOR_LENGTH);
+		String result = taskInfoString.substring(pos + TASK_SEPARATOR_LENGTH, posEnd);
+		return result;
+	}
+
+	/**
+	 * Gets the title from a task information string as formatted by
+	 * {@link XFormsWork.wfGetCurrentTasks}.
+	 * 
+	 * @param taskInfoString
+	 * @return the title of the task, e.g. "Demarrage de la dematerialisation"
+	 */
+	private String getTitleFromTaskIdNameTitle(String taskInfoString) { // #1534
+		int pos = taskInfoString.lastIndexOf(TASK_SEPARATOR);
+		String result = taskInfoString.substring(pos + TASK_SEPARATOR_LENGTH);
 		return result;
 	}
 
@@ -734,14 +794,14 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * @param tasks
 	 * @return a non empty string
 	 */
-	private String buildNextTasksTitles(List<WorkflowTask> tasks) {
+	private String buildNextTasksTitles(List<String> tasks) {
 		String result = "";
 		boolean first = true;
-		for (WorkflowTask task : tasks) {
+		for (String task : tasks) {
 			if (!first) {
 				result += ", ";
 			}
-			result += task.title;
+			result += getTitleFromTaskIdNameTitle(task);
 			first = false;
 		}
 		return result;
@@ -752,7 +812,8 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 * 
 	 * @param properties
 	 * @param node
-	 * @param taskTypeName
+	 * @param taskBean
+	 * @param processId
 	 * @return null in case of exception
 	 * @throws ServletException
 	 */
@@ -778,18 +839,15 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		// add task properties built from the attributes derived from form fields
 		String processName = controller.workflowExtractProcessNameFromFormName(taskTypeName);
 		String namespaceURI = controller.getWorkflowNamespaceURI(processName);
-		WorkflowTaskDefinition taskDef;
-		taskDef = controller.workflowGetTaskDefinition(processId, taskTypeId, transaction);
-		if (taskDef == null) {
-			return null;
-		}
-		Map<QName, PropertyDefinition> propDefs = taskDef.metadata.getProperties();
 		List<GenericAttribute> attributes = toCreate.getAttributes().getAttribute();
 		for (GenericAttribute attribute : attributes) {
 			String localName = attribute.getQualifiedName();
 			QName qname = QName.createQName(namespaceURI, localName);
+			List<String> propDefs = controller.workflowGetTaskPropertiesQNames(transaction,
+					processId, taskTypeId);
+
 			// we need to filter out properties that do not belong with this task
-			if (propDefs.containsKey(qname)) {
+			if (propDefs.contains(qname.toString())) {
 				Serializable value;
 				List<ValueType> allValues = attribute.getValue();
 				if (allValues.size() > 0) {
@@ -813,8 +871,9 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 	 *            the url param the form was called with (if relevant). null if no URL param was
 	 *            given.
 	 * @param formName
-	 *            the name of the workflow form
-	 * @return candidateProcessId if given, the Id for the latest version
+	 *            the name of the workflow form, e.g. "DigitizationProcess_Debut"
+	 * @return candidateProcessId if given. Otherwise, the id for the latest deployed version of the
+	 *         process definition
 	 */
 	private String findProcessId(String candidateProcessId, String formName) {
 		if (StringUtils.trimToNull(candidateProcessId) != null) {
@@ -823,12 +882,8 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 
 		String processName = controller.workflowExtractProcessNameFromFormName(formName);
 
-		String methodName = "getDefinitionByName";
-		List<Object> methodParameters = new ArrayList<Object>();
-		methodParameters.add(controller.getWorkflowBlueXMLDefinitionName(processName));
-		WorkflowDefinition def = (WorkflowDefinition) controller.workflowRequestWrapper(
-				transaction, methodName, methodParameters);
-		return (def != null) ? def.id : null;
+		String definitionName = controller.getWorkflowBlueXMLDefinitionName(processName);
+		return controller.workflowGetIdForProcessDefinition(transaction, definitionName); // $$
 	}
 
 }

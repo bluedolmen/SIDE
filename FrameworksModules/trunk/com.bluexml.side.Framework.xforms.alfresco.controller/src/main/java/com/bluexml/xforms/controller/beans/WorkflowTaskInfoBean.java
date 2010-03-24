@@ -6,7 +6,7 @@ package com.bluexml.xforms.controller.beans;
 import com.bluexml.xforms.messages.MsgPool;
 
 /**
- * Bean for providing a set of information on a workflow form.<br/>
+ * Bean for providing a set of information about a workflow form.<br/>
  * NOTE: If the title is a reference to a key in messages.properties, the reference is resolved when
  * creating the bean. Subsequent calls to {@link #getTitle()} are guaranteed to return the resolved
  * message.
@@ -22,12 +22,13 @@ public class WorkflowTaskInfoBean {
 	private String actorId;
 	private String pooledActors;
 	private String title;
+	private String processTitle; // #1535 // meaningful only for start task forms
 
 	/**
 	 * 
 	 */
 	public WorkflowTaskInfoBean(String taskId, String name, String dataForm, String actorId,
-			String pooledActors, String title) {
+			String pooledActors, String title, String processTitle) {
 		this.taskId = taskId;
 		this.formName = name;
 		this.dataFormName = dataForm;
@@ -37,6 +38,7 @@ public class WorkflowTaskInfoBean {
 		if ((title != null) && (title.charAt(0) == '#') && (title.indexOf("##") != 0)) {
 			this.title = MsgPool.getMsg(title.substring(1));
 		}
+		this.processTitle = processTitle;
 	}
 
 	/**
@@ -79,6 +81,13 @@ public class WorkflowTaskInfoBean {
 	 */
 	public String getDataFormName() {
 		return dataFormName;
+	}
+
+	/**
+	 * @return the processTitle
+	 */
+	public String getProcessTitle() {
+		return processTitle;
 	}
 
 }

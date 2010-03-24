@@ -50,7 +50,6 @@
 	<xs:complexType name="GenericDelete">
 		<xs:sequence>
 			<xs:element name="id" type="xs:string" />
-			<xs:element name="assocObject" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

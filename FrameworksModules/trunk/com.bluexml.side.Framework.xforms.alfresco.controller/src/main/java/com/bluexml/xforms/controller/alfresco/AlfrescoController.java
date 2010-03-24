@@ -65,6 +65,8 @@ import com.thoughtworks.xstream.XStream;
  */
 public class AlfrescoController implements AlfrescoControllerAPI {
 
+	private static final String TRACE_LOGGER_CATEGORY = "com.bluexml.xforms.controller.alfresco.AlfrescoController.trace";
+
 	/** The upload base directory in the file system. */
 	public static File UPLOAD_DIRECTORY = null;
 
@@ -109,7 +111,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	protected static Log logger = LogFactory.getLog(AlfrescoController.class);
 
 	/** We'll use this only as a marker for trace enabled status, not as an actual logger. */
-	protected static Log loggertrace = LogFactory.getLog(AlfrescoController.class + ".trace");
+	protected static Log loggertrace = LogFactory.getLog(TRACE_LOGGER_CATEGORY);
 
 	/** The doc builder. */
 	private static DocumentBuilder docBuilder = null;
@@ -1301,7 +1303,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 				} else if (value.equals("")) {
 					value = "<empty string>";
 				}
-				logger.trace(entry2.getKey() + " = " + value);
+				logger.trace("  " + entry2.getKey() + " = " + value);
 			}
 		}
 
@@ -1474,21 +1476,21 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	// additions for workflows
 	//
 	/**
-	 * Starts a workflow.
+	 * Starts a workflow and returns the instance id.
 	 * 
 	 * @param transaction
 	 *            Alfresco transaction (for login)
 	 * @param workflowDefinitionId
 	 * @param attributes
 	 *            Qualified Alfresco Attributes
-	 * @return The path for the newly created Workflow
+	 * @return the id of the newly created workflow instance, or <code>null</code> if problem.
 	 */
-	public WorkflowPath workflowStart(AlfrescoTransaction transaction, String workflowDefinitionId,
+	public String workflowStart(AlfrescoTransaction transaction, String workflowDefinitionId,
 			Map<QName, Serializable> attributes) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("wfName", workflowDefinitionId);
 		parameters.put("attributes", attributes);
-		return (WorkflowPath) workflowRequestCall(transaction, "wfStart", parameters);
+		return (String) workflowRequestCall(transaction, "wfStart", parameters);
 	}
 
 	/**
@@ -1498,20 +1500,20 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 *            Alfresco transaction (for login)
 	 * @param taskId
 	 *            Task to update
-	 * @param attributes
-	 *            Qualified Alfresco Attributes
-	 * @param add
-	 *            Linked instances to add
-	 * @param remove
-	 *            Linked instances to remove
-	 * @return Updated task
+	 * @param transitionId
+	 *            the id of the transition to follow
+	 * @return the id of the task, or <code>null</code> if a problem occurred
 	 */
-	public WorkflowTask workflowEndTask(AlfrescoTransaction transaction, String taskId,
+	public boolean workflowEndTask(AlfrescoTransaction transaction, String taskId,
 			String transitionId) {
-		ArrayList<Object> paramList = new ArrayList<Object>();
-		paramList.add(taskId);
-		paramList.add(transitionId);
-		return (WorkflowTask) workflowRequestWrapper(transaction, "endTask", paramList);
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("taskId", taskId);
+		parameters.put("transitionId", transitionId);
+		Boolean result = (Boolean) workflowRequestCall(transaction, "wfEnd", parameters);
+		if (result == null) {
+			return false;
+		}
+		return result;
 	}
 
 	/**
@@ -1522,14 +1524,16 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @param properties
 	 * @return
 	 */
-	public WorkflowTask workflowUpdateTask(AlfrescoTransaction transaction, String taskId,
+	public boolean workflowUpdateTask(AlfrescoTransaction transaction, String taskId,
 			Map<QName, Serializable> properties) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("taskId", taskId);
-		parameters.put("attributes", properties);
-		parameters.put("add", null);
-		parameters.put("remove", null);
-		return (WorkflowTask) workflowRequestCall(transaction, "wfUpdate", parameters);
+		parameters.put("properties", properties);
+		Boolean result = (Boolean) workflowRequestCall(transaction, "wfUpdate", parameters);
+		if (result == null) {
+			return false;
+		}
+		return result;
 	}
 
 	/**
@@ -1564,6 +1568,67 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 
 		return (Map<QName, Serializable>) workflowRequestCall(transaction,
 				"wfCollectInstanceProperties", parameters);
+	}
+
+	/**
+	 * Gets selected pieces of information about the currently active tasks for the given instance.
+	 * Each item of the list is a string in which the pieces of info are concatenated and separated
+	 * using a separator string defined in {@link XFormsWork.wfGetCurrentTasks}. e.g. (with
+	 * SEPARATOR="{::}":
+	 * "jbpm$64{::}wfbxDigitizationProcess:Debut{::}Demarrage de la dematerialisation")
+	 * 
+	 * @param transaction
+	 *            Alfresco transaction (for login)
+	 * @param instanceId
+	 *            the id of a currently live workflow instance
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> workflowGetCurrentTasksInfo(AlfrescoTransaction transaction,
+			String instanceId) { // #1534
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("workflowId", instanceId);
+
+		return (List<String>) workflowRequestCall(transaction, "wfGetCurrentTasksIds", parameters);
+	}
+
+	/**
+	 * Gets the id for the latest version of a process.
+	 * 
+	 * @param transaction
+	 *            Alfresco transaction (for login)
+	 * @param processName
+	 *            the workflow definition name
+	 * @return
+	 */
+	public String workflowGetIdForProcessDefinition(AlfrescoTransaction transaction,
+			String processName) { // #1534
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("processName", processName);
+
+		return (String) workflowRequestCall(transaction, "wfGetIdForProcessDefinition", parameters);
+	}
+
+	/**
+	 * Gets the set of properties qualified names a for a task of a process definition.<br/>
+	 * 
+	 * @param transaction
+	 *            Alfresco transaction (for login)
+	 * @param processId
+	 *            the workflow definition name, e.g. "jbpm$105"
+	 * @param taskName
+	 *            the name/id of the task, e.g. "wfbxDigitizationProcess:Debut"
+	 * @return the set, or <code>null</code> if either of the ids was not found
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> workflowGetTaskPropertiesQNames(AlfrescoTransaction transaction,
+			String processId, String taskName) { // #1534
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("processId", processId);
+		parameters.put("taskId", taskName);
+
+		return (List<String>) workflowRequestCall(transaction, "wfGetTaskDefinitionPropertyQNames",
+				parameters);
 	}
 
 	/**
@@ -1662,7 +1727,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<WorkflowTask> workflowGetCurrentTasks(String instanceId, AlfrescoTransaction trans) {
+	private List<WorkflowTask> workflowGetCurrentTasks(String instanceId, AlfrescoTransaction trans) {
 		List<WorkflowTask> result = new Vector<WorkflowTask>();
 		// get the paths from the instance id, which should exist
 		List<WorkflowPath> paths = null;

@@ -650,7 +650,7 @@ public class MappingAgent {
 		}
 		return new WorkflowTaskInfoBean(taskType.getTaskId(), taskType.getName(), taskType
 				.getDataForm(), taskType.getActorId(), taskType.getPooledActors(), taskType
-				.getTitle());
+				.getTitle(), taskType.getProcessTitle());
 	}
 
 	/**
@@ -667,7 +667,7 @@ public class MappingAgent {
 		}
 		return new WorkflowTaskInfoBean(taskType.getTaskId(), taskType.getName(), taskType
 				.getDataForm(), taskType.getActorId(), taskType.getPooledActors(), taskType
-				.getTitle());
+				.getTitle(), taskType.getProcessTitle());
 	}
 
 	/**

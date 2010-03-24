@@ -27,7 +27,7 @@
 			<xs:element maxOccurs="unbounded" name="value" type="ValueType" />
 		</xs:sequence>
 		<xs:attribute name="qualifiedName" use="required" />
-		<!-- whether this is a file upload attribute and if so, to which destination -->
+		<!-- if this maps to a FileField, tells the destination, i.e. "filesystem" or "repository" -->
 		<xs:attribute name="uploadTo" use="optional" />
 		<!-- if set to true, means that the attribute must not be turned into a property -->
 		<xs:attribute name="skipMe" use="optional" />
