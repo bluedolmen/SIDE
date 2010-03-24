@@ -138,7 +138,7 @@
     </dependency>
     <dependency>
       <groupId>com.bluexml.side.Form</groupId>
-      <artifactId>utils</artifactId>
+      <artifactId>XFormsUtils</artifactId>
       <version>1.0.1</version>
     </dependency>
     <!--
@@ -427,13 +427,6 @@
 					This is the alfresco version you're testing the AMP against. Don't
 					remove if you want jetty to be able to deploy a WAR :)
 				-->
-        <dependency>
-          <groupId>org.alfresco</groupId>
-          <artifactId>alfresco</artifactId>
-          <version>3.0Stable</version>
-          <type>war</type>
-          <classifier>labs</classifier>
-        </dependency>
       </dependencies>
     </profile>
   </profiles>
