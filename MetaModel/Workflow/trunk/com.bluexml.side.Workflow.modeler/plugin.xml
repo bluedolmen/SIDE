@@ -55,11 +55,6 @@
       </enabledWhen>
     </page>
   </extension>
-  <extension point="com.bluexml.side.Workflow.modeler.action">
-    <action code="resources/actions/alfresco/sendemail.js" icon="icons/sendEMail.png" name="Send e-mail" technology="Alfresco" />
-    <action code="resources/actions/alfresco/createNewContent.js" icon="icons/document-new.png" name="Create new content" technology="Alfresco" />
-    <action code="resources/actions/alfresco/pdf/importPDF.js" icon="icons/file_acrobat.gif" javaClass="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler" java_class="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler" name="Import PDF" technology="Alfresco" />
-    <action code="resources/actions/alfresco/pdf/exportPDF.js" icon="icons/file_acrobat.gif" javaClass="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler" java_class="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler" name="Export PDF" technology="Alfresco" />
-  </extension>
+
 </plugin>
 
