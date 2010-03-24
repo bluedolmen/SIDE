@@ -50,6 +50,7 @@ import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.SearchField;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.utils.DOMUtil;
+import com.bluexml.side.workflow.Process;
 import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
@@ -726,13 +727,16 @@ public class MappingGenerator extends AbstractGenerator {
 			taskType.setTitle(formWorkflow.getLabel());
 
 			// set the assignment.
-			// we won't check that the reference is indeed a state or node
 			ModelElement mel = formWorkflow.getRef();
 			Swimlane swimlane;
 			if (mel instanceof StartStateImpl) {
 				taskType.setStartTask(true);
 				StartState start = ((StartStateImpl) mel);
 				swimlane = start.getInitiator();
+
+				Process process = (Process) start.eContainer();
+				String processTitle = process.getTitle();
+				taskType.setProcessTitle(processTitle);
 			} else {
 				// taskType.setStartTask(false); // optional attribute so we don't set it
 				TaskNode aTask = (TaskNode) mel;

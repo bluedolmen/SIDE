@@ -1380,11 +1380,11 @@ public class FormGeneratorsManager {
 	 * @return
 	 */
 	public boolean isFieldSelectionCapable(Field field) {
-		EList<String> mockup = field.getMockup();
-		if (mockup != null) {
-			String format = getXtensionParameter(mockup, MsgId.MODEL_XTENSION_FORMAT.getText());
-			String type = getXtensionParameter(mockup, MsgId.MODEL_XTENSION_DATATYPE.getText());
-			String id = getXtensionParameter(mockup, MsgId.MODEL_XTENSION_IDENTIFIER.getText());
+		EList<String> extensions = field.getXtension();
+		if (extensions != null) {
+			String format = getXtensionParameter(extensions, MsgId.MODEL_XTENSION_FORMAT.getText());
+			String type = getXtensionParameter(extensions, MsgId.MODEL_XTENSION_DATATYPE.getText());
+			String id = getXtensionParameter(extensions, MsgId.MODEL_XTENSION_IDENTIFIER.getText());
 			if ((format != null) && (type != null) && (id != null)) {
 				return true;
 			}

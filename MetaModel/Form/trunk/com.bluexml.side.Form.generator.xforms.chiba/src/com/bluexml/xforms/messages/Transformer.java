@@ -63,7 +63,7 @@ public class Transformer {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		String path = "/Users/amenel/workspace/repository/XForms/trunk/examples/xforms/src/main/resources/messages.properties";
+		String path = "/Users/amenel/workspace/repository/XForms/dev/examples/xforms/src/main/resources/messages.properties";
 		FileInputStream is = new FileInputStream(new File(path));
 		new Transformer().convertStreamToString(is);
 	}
