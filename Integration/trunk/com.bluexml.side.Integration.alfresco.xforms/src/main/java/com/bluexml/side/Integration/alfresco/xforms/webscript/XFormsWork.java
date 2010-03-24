@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -48,9 +49,12 @@ import org.alfresco.service.cmr.search.SearchParameters;
 import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.cmr.security.AuthenticationService;
 import org.alfresco.service.cmr.security.AuthorityType;
+import org.alfresco.service.cmr.workflow.WorkflowDefinition;
+import org.alfresco.service.cmr.workflow.WorkflowInstance;
 import org.alfresco.service.cmr.workflow.WorkflowPath;
 import org.alfresco.service.cmr.workflow.WorkflowService;
 import org.alfresco.service.cmr.workflow.WorkflowTask;
+import org.alfresco.service.cmr.workflow.WorkflowTaskDefinition;
 import org.alfresco.service.cmr.workflow.WorkflowTaskQuery;
 import org.alfresco.service.cmr.workflow.WorkflowTaskState;
 import org.alfresco.service.namespace.QName;
@@ -837,23 +841,24 @@ public class XFormsWork implements RunAsWork<String> {
 		String method = parameters.get("method");
 
 		if (StringUtils.equals(method, "wfStart")) {
-			// startWf : need @wfName and @attributes
+			// startWf : need @wfName and @attributes. Return: the instance id
 			String wfName = parameters.get("wfName");
 			Map<QName, Serializable> atts = (Map<QName, Serializable>) xstream.fromXML(parameters
 					.get("attributes"));
-			WorkflowPath res = wfs.startWorkflow(wfName, atts);
-			result = xstream.toXML(res);
+			WorkflowPath path = wfs.startWorkflow(wfName, atts);
+			String instanceId = null;
+			if (path != null) {
+				WorkflowInstance instance = path.instance;
+				instanceId = instance.id;
+			}
+			result = xstream.toXML(instanceId);
 		} else if (StringUtils.equals(method, "wfUpdate")) {
 			// updateWf : need @taskId, @attributes, @add, @remove
-			String taskId = parameters.get("taskId");
-			Map<QName, Serializable> atts = (Map<QName, Serializable>) xstream.fromXML(parameters
-					.get("attributes"));
-			Map<QName, List<NodeRef>> add = (Map<QName, List<NodeRef>>) xstream.fromXML(parameters
-					.get("add"));
-			Map<QName, List<NodeRef>> remove = (Map<QName, List<NodeRef>>) xstream
-					.fromXML(parameters.get("remove"));
-			WorkflowTask res = wfs.updateTask(taskId, atts, add, remove);
-			result = xstream.toXML(res);
+			Boolean resStatus = wfUpdate(wfs);
+			result = xstream.toXML(resStatus);
+		} else if (StringUtils.equals(method, "wfEnd")) {
+			Boolean resStatus = wfEnd(wfs);
+			result = xstream.toXML(resStatus);
 		} else if (StringUtils.equals(method, "wfSignal")) {
 			// signalWf need @pathId and @transitionId
 			String pathId = parameters.get("pathId");
@@ -871,6 +876,15 @@ public class XFormsWork implements RunAsWork<String> {
 			// we need @workflowId, which is an instance id
 			Map<QName, Serializable> properties = wfCollectInstanceProperties(wfs);
 			result = xstream.toXML(properties);
+		} else if (StringUtils.equals(method, "wfGetIdForProcessDefinition")) {// #1534
+			String id = wfGetIdForProcessDefinition(wfs);
+			result = xstream.toXML(id);
+		} else if (StringUtils.equals(method, "wfGetCurrentTasksIds")) {// #1534
+			List<String> resList = wfGetCurrentTasks(wfs);
+			result = xstream.toXML(resList);
+		} else if (StringUtils.equals(method, "wfGetTaskDefinitionPropertyQNames")) {// #1534
+			List<String> res = wfGetTaskDefinitionPropertyQNames(wfs);
+			result = xstream.toXML(res);
 		} else {
 			// calls a generic method
 			// result = serviceMethodCall(wfs, xstream, method);
@@ -920,7 +934,6 @@ public class XFormsWork implements RunAsWork<String> {
 	 * 
 	 * @param target
 	 *            the service interface that is to be called
-	 * @param xstream
 	 * @param method
 	 * @return
 	 */
@@ -953,7 +966,56 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
+	 * Ends a task by following a transition.
+	 * <p/>
+	 * Parameters: <br/>
+	 * "taskId": the task id <br/>
+	 * "properties": the id of the transition to trigger
 	 * 
+	 * @param wfs
+	 * @return true if the task has been ended without problems, false otherwise.
+	 */
+	@SuppressWarnings("unchecked")
+	private boolean wfUpdate(WorkflowService wfs) {
+		String taskId = parameters.get("taskId");
+		String properties = parameters.get("properties");
+		Map<QName, Serializable> props = (Map<QName, Serializable>) xstream.fromXML(properties);
+
+		WorkflowTask res = null;
+		boolean resStatus = true;
+		try {
+			res = wfs.updateTask(taskId, props, null, null);
+		} catch (Exception e) {
+			resStatus = false;
+		}
+		return (res == null ? false : resStatus);
+	}
+
+	/**
+	 * Ends a task by following a transition.
+	 * <p/>
+	 * Parameters: <br/>
+	 * "taskId": the task id <br/>
+	 * "transitionId": the id of the transition to trigger
+	 * 
+	 * @param wfs
+	 * @return true if the task has been ended without problems, false otherwise.
+	 */
+	private boolean wfEnd(WorkflowService wfs) {
+		String taskId = parameters.get("taskId");
+		String transitionId = parameters.get("transitionId");
+
+		boolean resStatus = true;
+		WorkflowTask res = null;
+		try {
+			res = wfs.endTask(taskId, transitionId);
+		} catch (Exception e) {
+			resStatus = false;
+		}
+		return (res == null ? false : resStatus);
+	}
+
+	/**
 	 * Collects all non empty BlueXML properties available on completed (and in-progress) tasks of
 	 * an instanceId.<br/>
 	 * Parameters: "workflowId": the workflow instance id
@@ -994,6 +1056,101 @@ public class XFormsWork implements RunAsWork<String> {
 			}
 		}
 		return properties;
+	}
+
+	/**
+	 * Gets the id of the latest version of a process definition.<br/>
+	 * Parameters: "processName": the name of the workflow as per the definition
+	 * 
+	 * @param wfs
+	 *            the WorkflowService object
+	 * @return the id, or <code>null</code> if an exception occurred.
+	 */
+	private String wfGetIdForProcessDefinition(WorkflowService wfs) {
+		String workflowName = parameters.get("processName");
+
+		WorkflowDefinition def = wfs.getDefinitionByName(workflowName);
+		return (def != null) ? def.id : null;
+	}
+
+	/**
+	 * Gets the set of properties qualified names a for a task of a process definition.<br/>
+	 * Parameters: <br/>
+	 * "processDefId": the process definition id, e.g. "jbpm$105"<br/>
+	 * "taskId": the task id in the process definition, e.g. "wfbxDigitizationProcess:Debut"<br/>
+	 * 
+	 * @param wfs
+	 *            the WorkflowService object
+	 * @return the id, or <code>null</code> if an exception occurred.
+	 */
+	private List<String> wfGetTaskDefinitionPropertyQNames(WorkflowService wfs) {
+		String processDefId = parameters.get("processId");
+		String taskName = parameters.get("taskId");
+
+		// get all definitions
+		List<WorkflowTaskDefinition> taskDefs = wfs.getTaskDefinitions(processDefId);
+		if (taskDefs == null) {
+			return null;
+		}
+
+		// find the task
+		WorkflowTaskDefinition taskDef = null;
+		for (WorkflowTaskDefinition aTaskDef : taskDefs) {
+			if (StringUtils.equals(aTaskDef.id, taskName)) {
+				taskDef = aTaskDef;
+				break;
+			}
+		}
+		if (taskDef == null) {
+			return null;
+		}
+
+		// return prop qnames
+		Map<QName, PropertyDefinition> propDefs = taskDef.metadata.getProperties();
+
+		List<String> qnameList = new ArrayList<String>(propDefs.size());
+		for (QName propQName : propDefs.keySet()) {
+			qnameList.add(propQName.toString());
+		}
+		return qnameList;
+	}
+
+	/**
+	 * Gets selected pieces of information about the tasks whose state is "in-progress" for a
+	 * workflow instance. For each task, the pieces are concatenated in a string (which ends up in
+	 * the list) and separated by a SEPARATOR substring.<br/>
+	 * Current pieces of info returned (<b>IN THAT ORDER</b>): id, name, title.<br/>
+	 * (e.g. with SEPARATOR="{::}":
+	 * "jbpm$64{::}wfbxDigitizationProcess:Debut{::}Demarrage de la dematerialisation")
+	 * <p/>
+	 * Parameters: "workflowId": the workflow instance id
+	 * 
+	 * @param wfs
+	 *            the WorkflowService object
+	 * @return the list, in which each item is formatted.
+	 */
+	private List<String> wfGetCurrentTasks(WorkflowService wfs) {
+		String workflowId = parameters.get("workflowId");
+		List<WorkflowPath> paths = wfs.getWorkflowPaths(workflowId);
+
+		List<String> result = new Vector<String>();
+		// we need to probe all active paths
+		for (WorkflowPath path : paths) {
+			if (path.active) {
+				// get the tasks for the path
+				List<WorkflowTask> tasks = wfs.getTasksForWorkflowPath(path.id);
+				if (tasks == null) {
+					return result;
+				}
+				// add the tasks to complete
+				for (WorkflowTask task : tasks) {
+					if (task.state == WorkflowTaskState.IN_PROGRESS) {
+						result.add(task.id + "{::}" + task.name + "{::}" + task.title);
+					}
+				}
+			}
+		}
+		return result;
 	}
 
 	/**
