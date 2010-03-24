@@ -1089,7 +1089,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		parameters.put("type", alfTypeName);
 		parameters.put("format", StringUtils.trimToEmpty(format));
 		parameters.put("maxLength", StringUtils.trimToEmpty(maxLength));
-		parameters.put("identifier", identifier);
+		parameters.put("identifier", StringUtils.trimToEmpty(identifier));
 
 		String q = StringUtils.trimToNull(query);
 		if (q != null) {
