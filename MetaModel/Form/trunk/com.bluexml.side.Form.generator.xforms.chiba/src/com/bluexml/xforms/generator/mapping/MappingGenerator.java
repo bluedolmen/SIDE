@@ -144,7 +144,7 @@ public class MappingGenerator extends AbstractGenerator {
 		AspectType aspectType = objectFactory.createAspectType();
 		aspectType.setName(aspect.getName());
 		aspectType.setPackage(ModelTools.getPackage(aspect));
-		aspectType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(aspect));
+		aspectType.setAlfrescoName(formGenerator.getClassQualifiedName(aspect));
 		getClassType(classe).getAspect().add(aspectType);
 	}
 
@@ -256,7 +256,7 @@ public class MappingGenerator extends AbstractGenerator {
 		AspectType aspectType = objectFactory.createAspectType();
 		aspectType.setName(aspect.getName());
 		aspectType.setPackage(ModelTools.getPackage(aspect));
-		aspectType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(aspect));
+		aspectType.setAlfrescoName(formGenerator.getClassQualifiedName(aspect));
 		aspectTypes.put(aspect, aspectType);
 		mapping.getAspect().add(aspectType);
 	}
@@ -271,7 +271,7 @@ public class MappingGenerator extends AbstractGenerator {
 		ClassType classType = objectFactory.createClassType();
 		classType.setName(classe.getName());
 		classType.setPackage(ModelTools.getPackage(classe));
-		classType.setAlfrescoName(FormGeneratorsManager.getClassQualifiedName(classe));
+		classType.setAlfrescoName(formGenerator.getClassQualifiedName(classe));
 		classTypes.put(classe, classType);
 		mapping.getClazz().add(classType);
 	}
@@ -1032,8 +1032,7 @@ public class MappingGenerator extends AbstractGenerator {
 		if (noPrefix) {
 			return attribute.getName();
 		}
-		String result = FormGeneratorsManager.getClassQualifiedName(classe) + "_"
-				+ attribute.getName();
+		String result = formGenerator.getClassQualifiedName(classe) + "_" + attribute.getName();
 		return result;
 	}
 

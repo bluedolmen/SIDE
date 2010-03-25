@@ -1,14 +1,14 @@
 package com.bluexml.xforms.generator.forms.modelelement;
 
-import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
- * The Class ModelElementListUpdater.
+ * The Class ModelElementListUpdater. Provides an element of an XForms template's "model" section.
+ * The element will trigger the fetching <em>and replacing</em> of a selection widget's item set.
  */
 public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 
@@ -18,12 +18,18 @@ public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 
 	private String identifier; // #1529
 
-	public ModelElementUpdaterList(Clazz target, String instanceName, String formatPattern,
-			String maxLength) {
-		super(target, instanceName);
+	private String filterAssoc; // #1536
+
+	private boolean isComposition; // #1536
+
+	public ModelElementUpdaterList(Clazz classe, String instanceName, String formatPattern,
+			String maxLength, String filterAssoc, boolean isComposition) {
+		super(classe, instanceName);
 		this.formatPattern = formatPattern;
 		this.maxLength = maxLength;
-		this.identifier = "";
+		this.identifier = ""; // constructor used with Clazz provided. No need for this field.
+		this.filterAssoc = filterAssoc;
+		this.isComposition = isComposition;
 	}
 
 	public ModelElementUpdaterList(String overridingType, String instanceName,
@@ -32,6 +38,8 @@ public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 		this.formatPattern = formatPattern;
 		this.maxLength = labelLength;
 		this.identifier = identifier;
+		this.filterAssoc = null;
+		this.isComposition = false;
 	}
 
 	/*
@@ -44,8 +52,8 @@ public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 		Element submission = XFormsGenerator.createElement("submission",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		submission.setAttribute("action", MsgId.INT_URI_SCHEME_WRITER
-				+ MsgId.INT_ACT_CODE_LIST.getText() + "/" + typeCompleteName + "/"
-				+ StringUtils.trimToEmpty(formatPattern) + "/" + maxLength + "/" + identifier);
+				+ buildListURI(typeCompleteName, formatPattern, maxLength, identifier, filterAssoc,
+						isComposition));
 		submission.setAttribute("replace", "instance");
 		submission.setAttribute("instance", instanceName);
 		submission.setAttribute("method", "post");

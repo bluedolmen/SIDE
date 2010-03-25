@@ -290,7 +290,7 @@ public class FormGeneratorsManager {
 
 	}
 
-	public static String getClassQualifiedName(AbstractClass aClass) {
+	public String getClassQualifiedName(AbstractClass aClass) {
 		String res = aClass.getFullName().replaceAll("\\.", "_");
 		return res;
 	}
@@ -672,16 +672,15 @@ public class FormGeneratorsManager {
 			boolean doublenav = sEnd.isNavigable() && fEnd.isNavigable();
 			AssociationCardinality associationType = getAssociationType(association);
 			// boolean isSubAssociation = isSubAssociation(association);
-			String subAssociationNameTo = null;
-			String subAssociationNameFrom = null;
 
 			if (sEnd.isNavigable()) {
 				boolean isInlineDest = isInline(sEndLinkedClass, associationType, association
 						.getAssociationType());
 				int hiBound = Integer.parseInt(sEnd.getCardMax());
 				int loBound = Integer.parseInt(sEnd.getCardMin());
+				boolean filtered = isAssociationFilterable(sEndLinkedClass, association);
 				AssociationKind associationKindDest = new AssociationKind(associationType,
-						isInlineDest, subAssociationNameTo, simplifyClasses, hiBound, loBound);
+						isInlineDest, simplifyClasses, hiBound, loBound, filtered);
 				addAssociations(associationKindDest, association.getName(), association.getTitle(),
 						fEndLinkedClass, sEndLinkedClass, sEnd.getName(), sEnd.getTitle(),
 						doublenav, association);
@@ -690,10 +689,10 @@ public class FormGeneratorsManager {
 				boolean isInlineSrc = isInline(fEndLinkedClass, associationType.getInverse(),
 						association.getAssociationType());
 				int hiBound = Integer.parseInt(fEnd.getCardMax());
-				int loBound = Integer.parseInt(sEnd.getCardMin());
+				int loBound = Integer.parseInt(fEnd.getCardMin());
+				boolean filtered = isAssociationFilterable(fEndLinkedClass, association);
 				AssociationKind associationKindSrc = new AssociationKind(associationType
-						.getInverse(), isInlineSrc, subAssociationNameFrom, simplifyClasses,
-						hiBound, loBound);
+						.getInverse(), isInlineSrc, simplifyClasses, hiBound, loBound, filtered);
 				addAssociations(associationKindSrc, association.getName(), association.getTitle(),
 						sEndLinkedClass, fEndLinkedClass, fEnd.getName(), fEnd.getTitle(),
 						doublenav, association);
@@ -1446,6 +1445,53 @@ public class FormGeneratorsManager {
 		EList<String> xtension = getFieldXtension(field);
 
 		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_LABEL_LENGTH.getText());
+	}
+
+	/**
+	 * Tells whether an association is to be filtered on the side of the given class. If so, objects
+	 * of that class, when listed on a selection widget as available items are filtered out if they
+	 * already bear an association (i.e. if they are already pointed to using that association). <br/>
+	 * NOTE: not sure this will work for reflexive associations.
+	 * <p/>
+	 * Example association: Person (0..*) <---> (0.. 1) Company.
+	 * <p/>
+	 * On the form for 'Company', the 'real class' property for the ModelChoiceField is 'Person':
+	 * several Person objects can be associated. But because the association reads 'a Person can be
+	 * associated with at most one Company', any Person object already associated should not be
+	 * associated again. So that object must be filtered out: this function returns
+	 * <code>true</code>.
+	 * <p/>
+	 * On the form for 'Person', the 'real class' property for the ModelChoiceField is 'Company':
+	 * only one Company object can be associated. But this time, the association reads 'a Company
+	 * can be associated with several Person', so having a Company object already associated does
+	 * not require that the Company object be filtered out. So return <code>false</code>.
+	 * 
+	 * @param formEltClass
+	 *            the class for the target items (also the 'real class' property of
+	 *            ModelChoiceField's)
+	 * @param asso
+	 * @return true if the maximum multiplicity on the opposite end of the given class is 1.
+	 */
+	public boolean isAssociationFilterable(Clazz formEltClass, Association asso) { // #1536
+		int sourceMaxBound = -1;
+		boolean filtered;
+
+		AssociationEnd srcEnd = (AssociationEnd) getRealObject(asso.getFirstEnd());
+		AssociationEnd targetEnd = (AssociationEnd) getRealObject(srcEnd.getOpposite());
+		AbstractClass srcClass = (AbstractClass) getRealObject(srcEnd.getLinkedClass());
+		AbstractClass targetClass = (AbstractClass) getRealObject(targetEnd.getLinkedClass());
+
+		EObject realClass = getRealObject(formEltClass);
+		// we get the max bound from the end opposite to the one where the class is found
+		if (srcClass.equals(realClass)) {
+			sourceMaxBound = Integer.parseInt(targetEnd.getCardMax());
+		} else if (targetClass.equals(realClass)) {
+			sourceMaxBound = Integer.parseInt(srcEnd.getCardMax());
+		} else {
+			throw new IllegalArgumentException("Uncomparable classes.");
+		}
+		filtered = (sourceMaxBound == 1);
+		return filtered;
 	}
 
 }

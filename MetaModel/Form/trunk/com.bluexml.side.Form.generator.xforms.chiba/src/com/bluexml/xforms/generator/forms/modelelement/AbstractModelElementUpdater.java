@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.jdom.Element;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.xforms.generator.forms.ModelElement;
 import com.bluexml.xforms.generator.tools.ModelTools;
 
@@ -35,6 +36,10 @@ public abstract class AbstractModelElementUpdater extends ModelElement {
 	public AbstractModelElementUpdater(com.bluexml.side.common.ModelElement target,
 			String instanceName) {
 		this(ModelTools.getCompleteName(target), instanceName);
+		if (target instanceof AbstractClass) {
+			this.typeCompleteName = ModelTools.getNamespacePrefix(target) + ":"
+					+ getFormGenerator().getClassQualifiedName((AbstractClass) target);
+		}
 	}
 
 	/**

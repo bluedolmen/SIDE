@@ -308,20 +308,20 @@ public class MappingToolClassFormsToAlfresco extends MappingToolCommon {
 			convertXformsAttributeToAlfresco(result, inputTextContent, type, enumName);
 		} else {
 			String value = null;
-			boolean readOnly = attributeType.isReadOnly();
+			boolean attributeIsReadOnly = isReadOnly(attributeType);
 			if (loggertrace.isTraceEnabled()) {
 				logger.debug("Received value '" + inputTextContent + "' for attribute '"
 						+ alfrescoName + "' with type '" + type + "'. Read-only status '"
-						+ readOnly + "'. isFileField: " + isFileField(attributeType)
+						+ attributeIsReadOnly + "'. isFileField: " + isFileField(attributeType)
 						+ " . isServletRequest: " + isServletRequest);
 			}
-			if (isAmendable(type, attributeType.isReadOnly(), isServletRequest)) {
+			if (isAmendable(type, attributeIsReadOnly, isServletRequest)) {
 				inputTextContent = getReadOnlyDateOrTimeModifiedValue(type, inputTextContent);
 			}
 			if (type.equals(MsgId.INT_TYPE_XSD_DATETIME.getText())) {
 				String date;
 				String time;
-				if (attributeType.isReadOnly()) {
+				if (attributeIsReadOnly) {
 					date = extractDateFromDateTimeModified(inputTextContent);
 					time = extractTimeFromDateTimeModified(inputTextContent);
 				} else {

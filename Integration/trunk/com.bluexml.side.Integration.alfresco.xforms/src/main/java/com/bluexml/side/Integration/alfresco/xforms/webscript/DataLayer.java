@@ -906,12 +906,13 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
+	 * Builds a user-friendly label for a node on the basis of its properties.
 	 * 
 	 * @param nodeRef
 	 * @param pattern
 	 *            the pattern for formatting the label for the node. Contains references to
 	 *            properties of the node or of an association. This text is taken "as-is", with no
-	 *            decoding, encoding, escaping or unescaping done.
+	 *            decoding, encoding, escaping or unescaping done. May be <code>null</code>.
 	 * @param includeSystemProps
 	 *            if <code>true</code>, system properties are also considered, in addition to
 	 *            properties from the data models.
@@ -1104,7 +1105,8 @@ public class DataLayer implements DataLayerInterface {
 	 * Returns a set of properties of the node.
 	 * 
 	 * @param nodeRef
-	 * @param includeSystemProps if <code>true</code>, system properties are not filtered out.
+	 * @param includeSystemProps
+	 *            if <code>true</code>, system properties are not filtered out.
 	 * @return
 	 */
 	private final Map<QName, Serializable> collectProperties(NodeRef nodeRef,
@@ -1504,6 +1506,43 @@ public class DataLayer implements DataLayerInterface {
 			return -1;
 		}
 		return length;
+	}
+
+	/**
+	 * Tells whether this node is referenced (i.e. "pointed to") via a specific association. Normal
+	 * associations (type 'Simple' and 'Aggregation' in the class modeler) and ChildAssociations
+	 * (type 'Composition' in the modeler) are supported.
+	 * 
+	 * @param nodeRef
+	 * @param filterAssoc
+	 *            the qualified name (sequence of packages and local name) of the association
+	 * @param whether
+	 *            the association is a composition
+	 * @return true if an association reference pointing to the node already exists.
+	 */
+	public boolean isRefencenced(NodeRef nodeRef, String filterAssoc, boolean isComposition) {
+		if (isComposition) {
+			List<ChildAssociationRef> toChildAssoList = serviceRegistry.getNodeService()
+					.getParentAssocs(nodeRef);
+			for (ChildAssociationRef assoRef : toChildAssoList) {
+				QName assoTypeQName = assoRef.getTypeQName();
+				if (assoTypeQName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)
+						&& assoTypeQName.getLocalName().equals(filterAssoc)) {
+					return true;
+				}
+			}
+		} else {
+			List<AssociationRef> toList = serviceRegistry.getNodeService().getSourceAssocs(nodeRef,
+					RegexQNamePattern.MATCH_ALL);
+			for (AssociationRef assoRef : toList) {
+				QName assoTypeQName = assoRef.getTypeQName();
+				if (assoTypeQName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)
+						&& assoTypeQName.getLocalName().equals(filterAssoc)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

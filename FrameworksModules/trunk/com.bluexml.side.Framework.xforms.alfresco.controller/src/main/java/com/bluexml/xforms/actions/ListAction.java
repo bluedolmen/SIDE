@@ -20,6 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.bluexml.xforms.controller.beans.ListActionBean;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
@@ -115,7 +116,9 @@ public class ListAction extends AbstractAction {
 				MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText(),
 				MsgId.INT_ACT_PARAM_LIST_FORMAT.getText(),
 				MsgId.INT_ACT_PARAM_LIST_MAXLENGTH.getText(),
-				MsgId.INT_ACT_PARAM_LIST_IDENTIFIER.getText() };
+				MsgId.INT_ACT_PARAM_LIST_IDENTIFIER.getText(),
+				MsgId.INT_ACT_PARAM_LIST_FILTER_ASSOC.getText(),
+				MsgId.INT_ACT_PARAM_LIST_IS_COMPOSITION.getText() };
 	}
 
 	/**
@@ -127,20 +130,24 @@ public class ListAction extends AbstractAction {
 	 *             the exception
 	 */
 	private Node list() throws ServletException {
-		// simply call controller
+		// simply call the controller, after collecting the parameters
 		String dataType = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
 		String query = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_QUERY.getText());
 		String maxResults = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_SIZE.getText());
 		String format = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_FORMAT.getText());
 		String maxLength = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_MAXLENGTH.getText());
 		String identifier = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_IDENTIFIER.getText());
-		// "format" was partially decoded so we need to re encode the format pattern, since it
-		// will be transmitted again via URL to the webscript where it WON'T be decoded again.
+		String filterAssoc = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_FILTER_ASSOC.getText());
+		String compo = requestParameters.get(MsgId.INT_ACT_PARAM_LIST_IS_COMPOSITION.getText());
+
+		// "format" was partially decoded (spaces are still represented using '+', (and maybe some
+		// other characters are still somehow encoded ?)) so we need to re encode the format
+		// pattern, since it will be transmitted again via URL to the webscript where it will be
+		// decoded again.
 		try {
 			if (StringUtils.trimToNull(format) != null) {
 				format = URLDecoder.decode(format, "UTF-8");
 				format = URLEncoder.encode(format, "UTF-8");
-				// format = StringEscapeUtils.escapeXml(format);
 			}
 		} catch (UnsupportedEncodingException e) {
 			if (logger.isFatalEnabled()) {
@@ -149,8 +156,9 @@ public class ListAction extends AbstractAction {
 			throw new RuntimeException("Unsupported encoding scheme");
 		}
 
-		return controller.getList(transaction, dataType, query, maxResults, format, maxLength,
-				identifier);
+		ListActionBean bean = new ListActionBean(dataType, query, maxResults, format, maxLength,
+				identifier, filterAssoc, compo);
+		return controller.getList(transaction, bean);
 	}
 
 }

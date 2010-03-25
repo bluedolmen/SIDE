@@ -6,6 +6,8 @@ import java.util.Stack;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationType;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormContainer;
@@ -21,6 +23,7 @@ import com.bluexml.xforms.generator.forms.renderable.common.AssociationPropertie
 import com.bluexml.xforms.generator.forms.renderable.common.CommonRenderableAssociation;
 import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableFormContainer;
 import com.bluexml.xforms.generator.forms.rendered.RenderedParentGroup;
+import com.bluexml.xforms.generator.tools.ModelTools;
 
 /**
  * The Class RenderableModelChoiceField.
@@ -44,11 +47,14 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 		AssociationProperties properties = new AssociationProperties();
 
 		properties.setAssocTitle(formElement.getLabel());
-		properties.setDestination((Clazz) generationManager.getFormGenerator().getRealObject(
-				formElement.getReal_class()));
+		Clazz formElt_realClass = (Clazz) generationManager.getFormGenerator().getRealObject(
+				formElement.getReal_class());
+		properties.setDestination(formElt_realClass);
+		String defaultFormName = ModelTools.getCompleteName(formElt_realClass);
+		properties.setCreateEditDefaultFormName(defaultFormName);
 		properties.setHiBound(formElement.getMax_bound());
 		properties.setLoBound(formElement.getMin_bound());
-		properties.setName(FormGeneratorsManager.getUniqueName(formElement));
+		properties.setUniqueName(FormGeneratorsManager.getUniqueName(formElement));
 		properties.setHint(formElement.getHelp_text());
 
 		properties.setDestinationRenderable(null);
@@ -99,6 +105,28 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 		}
 		properties.setFormatPattern(pattern);
 		properties.setLabelLength("" + formElement.getLabel_length());
+
+		boolean filtered = false;
+		boolean isComposition = false;
+		Association association = (Association) getFormGenerator().getRealObject(
+				formElement.getRef());
+
+		try {
+			filtered = getFormGenerator().isAssociationFilterable(formElt_realClass, association);
+		} catch (IllegalArgumentException e) {
+			throw new RuntimeException("The class selected on '" + formElement.getLabel()
+					+ "' is not compatible with the association.");
+		}
+		// AssociationType associationType = ;
+		isComposition = (association.getAssociationType() == AssociationType.COMPOSITION);
+
+		if (filtered) {
+			// retrieve the association name
+			String alfrescoName = getFormGenerator()
+					.getAlfrescoName(formElt_realClass, association);
+			properties.setFilterAssoc(alfrescoName);
+		}
+		properties.setComposition(isComposition);
 
 		add(new CommonRenderableAssociation(properties));
 	}

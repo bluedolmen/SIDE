@@ -35,7 +35,7 @@ public class CommonRenderableAssociation extends Renderable {
 	 */
 	public CommonRenderableAssociation(AssociationProperties properties) {
 		super();
-		this.name = properties.getName();
+		this.name = properties.getUniqueName();
 		this.title = properties.getAssocTitle();
 
 		associationBean = new AssociationBean();
@@ -46,6 +46,7 @@ public class CommonRenderableAssociation extends Renderable {
 		associationBean.setDestinationRenderable(properties.getDestinationRenderable());
 		associationBean.setCreateEditFormType(properties.getCreateEditFormType());
 		associationBean.setCreateEditForms(properties.getCreateEditFormName());
+		associationBean.setCreateEditDefaultFormName(properties.getCreateEditDefaultFormName());
 		associationBean.setHiBound(properties.getHiBound());
 
 		// hide or display action buttons
@@ -61,6 +62,8 @@ public class CommonRenderableAssociation extends Renderable {
 		associationBean.setForField(properties.isForField());
 		associationBean.setOverridingType(properties.getOverridingType());
 		associationBean.setIdentifierPropName(properties.getIdentifierPropName());
+		associationBean.setFilterAssoc(properties.getFilterAssoc());
+		associationBean.setComposition(properties.isComposition());
 
 		if (properties.isInline()) {
 			if (properties.isMultiple()) {

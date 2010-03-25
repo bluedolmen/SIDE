@@ -23,7 +23,7 @@ public class AssociationProperties {
 	private Renderable destinationRenderable;
 
 	/** The name. */
-	private String name;
+	private String uniqueName;
 
 	/** The assoc title. */
 	private String assocTitle;
@@ -56,6 +56,9 @@ public class AssociationProperties {
 
 	/** The create edit form name. */
 	private List<String> createEditFormNames = null; // #1510
+	
+	/** The Alfresco name of the target class, for use in case no create/edit form names exist.*/
+	private String createEditDefaultFormName = null;
 
 	private String formatPattern;
 
@@ -71,6 +74,10 @@ public class AssociationProperties {
 	/** Local name of the property (from the type definition) used as id*/
 	private String identifierPropName;
 	// ** #1530
+	// ** #1536
+	private String filterAssoc;
+	private boolean isComposition;
+	// ** #1536
 
 	/**
 	 * Used in formForm's (via RenderableModelChoiceField's)
@@ -106,7 +113,7 @@ public class AssociationProperties {
 		super();
 		this.destination = destination;
 		this.destinationRenderable = destinationRenderable;
-		this.name = name;
+		this.uniqueName = name;
 		this.assocTitle = assocTitle;
 		this.inline = inline;
 		this.hiBound = hiBound;
@@ -167,8 +174,8 @@ public class AssociationProperties {
 	 * 
 	 * @return the name
 	 */
-	public String getName() {
-		return name;
+	public String getUniqueName() {
+		return uniqueName;
 	}
 
 	/**
@@ -177,8 +184,8 @@ public class AssociationProperties {
 	 * @param name
 	 *            the new name
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setUniqueName(String name) {
+		this.uniqueName = name;
 	}
 
 	/**
@@ -441,6 +448,48 @@ public class AssociationProperties {
 	 */
 	public String getIdentifierPropName() {
 		return identifierPropName;
+	}
+
+	/**
+	 * @return the filterAssoc
+	 */
+	public String getFilterAssoc() {
+		return filterAssoc;
+	}
+
+	/**
+	 * @param filterAssoc the filterAssoc to set
+	 */
+	public void setFilterAssoc(String filterAssoc) {
+		this.filterAssoc = filterAssoc;
+	}
+
+	/**
+	 * @return the isComposition
+	 */
+	public boolean isComposition() {
+		return isComposition;
+	}
+
+	/**
+	 * @param isComposition the isComposition to set
+	 */
+	public void setComposition(boolean isComposition) {
+		this.isComposition = isComposition;
+	}
+
+	/**
+	 * @param createEditDefaultFormName the createEditDefaultFormName to set
+	 */
+	public void setCreateEditDefaultFormName(String createEditDefaultFormName) {
+		this.createEditDefaultFormName = createEditDefaultFormName;
+	}
+
+	/**
+	 * @return the createEditDefaultFormName
+	 */
+	public String getCreateEditDefaultFormName() {
+		return createEditDefaultFormName;
 	}
 
 }

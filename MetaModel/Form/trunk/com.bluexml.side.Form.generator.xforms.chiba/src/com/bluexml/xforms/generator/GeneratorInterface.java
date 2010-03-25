@@ -33,6 +33,8 @@ public interface GeneratorInterface {
 
 		private int loBound;
 
+		private boolean filtered;
+
 		/**
 		 * Instantiates a new association kind.
 		 * 
@@ -46,14 +48,14 @@ public interface GeneratorInterface {
 		 *            the alfresco name
 		 */
 		public AssociationKind(AssociationCardinality associationCardinality, boolean inline,
-				String alfrescoName, boolean simplifyClasses, int hiBound, int loBound) {
+				boolean simplifyClasses, int hiBound, int loBound, boolean filtered) {
 			super();
 			this.associationCardinality = associationCardinality;
 			this.inline = inline;
-			this.alfrescoName = alfrescoName;
 			this.simplifyClasses = simplifyClasses;
 			this.hiBound = hiBound;
 			this.loBound = loBound;
+			this.filtered = filtered;
 		}
 
 		/**
@@ -110,25 +112,6 @@ public interface GeneratorInterface {
 			this.loBound = loBound;
 		}
 
-		/**
-		 * Gets the alfresco name.
-		 * 
-		 * @return the alfresco name
-		 */
-		public String getAlfrescoName() {
-			return alfrescoName;
-		}
-
-		/**
-		 * Sets the alfresco name.
-		 * 
-		 * @param alfrescoName
-		 *            the new alfresco name
-		 */
-		public void setAlfrescoName(String alfrescoName) {
-			this.alfrescoName = alfrescoName;
-		}
-
 		/*
 		 * (non-Javadoc)
 		 * 
@@ -144,6 +127,21 @@ public interface GeneratorInterface {
 			sb.append(" - alfrescoName : ");
 			sb.append(alfrescoName);
 			return sb.toString();
+		}
+
+		/**
+		 * @param filtered
+		 *            the filtered to set
+		 */
+		public void setFiltered(boolean filtered) {
+			this.filtered = filtered;
+		}
+
+		/**
+		 * @return the filtered
+		 */
+		public boolean isFiltered() {
+			return filtered;
 		}
 
 	}
@@ -301,7 +299,7 @@ public interface GeneratorInterface {
 	 * @param hasParent
 	 *            the has parent
 	 */
-//	void addIdForClass(Clazz classe, String string, boolean hasParent);
+	// void addIdForClass(Clazz classe, String string, boolean hasParent);
 
 	/**
 	 * Begin aspect.

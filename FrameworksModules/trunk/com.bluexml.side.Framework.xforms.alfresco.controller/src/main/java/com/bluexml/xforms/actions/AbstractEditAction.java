@@ -20,7 +20,8 @@ public abstract class AbstractEditAction extends AbstractWriteAction {
 	protected String[] getParamNames() {
 		return new String[] {
 				MsgId.INT_ACT_PARAM_ANY_ASSOC.getText(),
-				MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText() };
+				MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText(),
+				MsgId.INT_ACT_PARAM_ANY_HINT.getText() };
 	}
 
 	/*

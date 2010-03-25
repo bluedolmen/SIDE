@@ -2,18 +2,20 @@ package com.bluexml.xforms.generator.forms;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.FormGeneratorsManager;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class ModelElement.<br>
  * Represents an element rendered inside the model of a form
  */
 public abstract class ModelElement {
-	
+
 	private static FormGeneratorsManager formGenerator;
-	
+
 	/** The model element. */
 	private Element modelElement;
 
@@ -62,11 +64,30 @@ public abstract class ModelElement {
 	}
 
 	/**
-	 * @param formGenerator the formGenerator to set
+	 * @param formGenerator
+	 *            the formGenerator to set
 	 */
 	public static void setFormGenerator(FormGeneratorsManager formGenerator) {
 		ModelElement.formGenerator = formGenerator;
 	}
 
+	/**
+	 * Builds the path section of the URI for the list action
+	 * 
+	 * @param identifier
+	 * @param maxLength
+	 * @param formatPattern
+	 * @param typeCompleteName
+	 * @return
+	 */
+	protected String buildListURI(String typeCompleteName, String formatPattern, String maxLength,
+			String identifier, String filterAssoc, boolean isComposition) {
+		String result = MsgId.INT_ACT_CODE_LIST.getText() + "/" + typeCompleteName + "/"
+				+ StringUtils.trimToEmpty(formatPattern) + "/" + maxLength + "/"
+				+ StringUtils.trimToEmpty(identifier) + "/" + StringUtils.trimToEmpty(filterAssoc)
+				+ "/";
+		result += isComposition ? "1" : "0";
+		return result;
+	}
 
 }

@@ -19,6 +19,7 @@ import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.clazz.Model;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.clazz.TitledNamedClassModelElement;
 import com.bluexml.side.common.DataType;
@@ -119,7 +120,12 @@ public class ModelTools {
 	}
 
 	/**
-	 * Gets the complete name.
+	 * Gets the complete name of a model element as a {@link #packageConcate(String, String)}
+	 * concatenation of all elements found on the way to the given model element. For instance,
+	 * Model "TestModel" > Package "com" > Package "bluexml" > class "Person" gives the complete
+	 * name "TestModel.com.bluexml.Person".
+	 * <p/>
+	 * To be used when there's a need to uniquely reference a model element.
 	 * 
 	 * @param me
 	 *            the me
@@ -141,6 +147,23 @@ public class ModelTools {
 			result = packageConcate(parentName, ((NamedModelElement) me).getName());
 		}
 		return result;
+	}
+
+	/**
+	 * Gets the namespace prefix, which is normally the name of the top element in the model file.
+	 * It is also the first token in the result returned by {@link #getCompleteName(ModelElement)}.
+	 * 
+	 * @param mel
+	 * @return the namespace prefix
+	 */
+	public static String getNamespacePrefix(ModelElement mel) {
+		if (mel instanceof Model) {
+			return ((NamedModelElement) mel).getName();
+		}
+		if (mel == null) {
+			throw new RuntimeException("Can't get the namespace prefix for a null model element");
+		}
+		return getNamespacePrefix((ModelElement) mel.eContainer());
 	}
 
 	/**

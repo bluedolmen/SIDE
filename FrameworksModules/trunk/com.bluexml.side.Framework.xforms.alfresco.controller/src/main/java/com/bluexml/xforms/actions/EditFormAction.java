@@ -58,6 +58,8 @@ public class EditFormAction extends AbstractEditAction {
 
 		PageInfoBean pageBean = new PageInfoBean();
 		String targetForms = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
+		// String formTypeHint = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_HINT.getText()); 
+		// FIXME: do we need formTypeHint ?
 		pageBean.setDataId(dataId);
 		pageBean.setLanguage(navigationPath.peekCurrentPage().getLanguage());
 

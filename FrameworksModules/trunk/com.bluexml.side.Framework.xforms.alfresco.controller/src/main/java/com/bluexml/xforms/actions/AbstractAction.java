@@ -100,9 +100,6 @@ public abstract class AbstractAction {
 	protected void registerParameter(String[] fragments, String name, int index) {
 		if (fragments.length > index) {
 			String fragment = fragments[index];
-			if (name.equals(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText())) {
-				fragment = fragment.replace('_', '.');
-			}
 			requestParameters.put(name, fragment);
 		}
 	}

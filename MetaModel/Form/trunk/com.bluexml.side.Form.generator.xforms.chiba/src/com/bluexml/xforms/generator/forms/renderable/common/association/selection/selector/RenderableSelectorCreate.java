@@ -65,6 +65,9 @@ public class RenderableSelectorCreate extends AbstractRenderableSelectorItem {
 			String listForms = "";
 			if (bean.getCreateEditForms() != null) {
 				listForms = bean.getCreateEditForms().get(0);
+			} else {
+				listForms = bean.getCreateEditDefaultFormName() + "/"
+						+ MsgId.INT_ACT_SUFFIX_GET_FORM_CLASS;
 			}
 			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER.getText()
 					+ MsgId.INT_ACT_CODE_CREATE_FORM + "/" + bean.getName() + "/" + listForms);

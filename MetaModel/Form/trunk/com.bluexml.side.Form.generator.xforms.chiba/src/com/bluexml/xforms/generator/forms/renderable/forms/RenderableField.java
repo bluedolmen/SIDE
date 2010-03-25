@@ -290,7 +290,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 				properties.setAssocTitle(charField.getLabel());
 				properties.setDestination(null);
 				properties.setDestinationRenderable(null);
-				properties.setName(FormGeneratorsManager.getUniqueName(formElement));
+				properties.setUniqueName(FormGeneratorsManager.getUniqueName(formElement));
 				properties.setCreateEditFormType(null);
 				properties.setFieldSize("0");
 				properties.setInline(false);

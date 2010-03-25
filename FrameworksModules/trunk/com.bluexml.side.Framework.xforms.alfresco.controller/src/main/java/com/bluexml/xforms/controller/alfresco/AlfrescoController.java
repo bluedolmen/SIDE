@@ -52,6 +52,7 @@ import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.alfresco.agents.MappingAgent;
 import com.bluexml.xforms.controller.alfresco.agents.SystemAgent;
 import com.bluexml.xforms.controller.beans.EditNodeBean;
+import com.bluexml.xforms.controller.beans.ListActionBean;
 import com.bluexml.xforms.controller.beans.PersistFormResultBean;
 import com.bluexml.xforms.controller.beans.RedirectionBean;
 import com.bluexml.xforms.controller.beans.WorkflowTaskInfoBean;
@@ -1073,25 +1074,40 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * 
 	 * @throws ServletException
 	 */
-	public Node getList(AlfrescoTransaction transaction, String type, String query,
-			String maxResults, String format, String maxLength, String identifier)
+	public Node getList(AlfrescoTransaction transaction, ListActionBean bean)
 			throws ServletException {
+		String dataType = bean.getDataType();
+		String query = bean.getQuery();
+		String maxResults = bean.getMaxResults();
+		String format = bean.getFormat();
+		String maxLength = bean.getMaxLength();
+		String identifier = bean.getIdentifier();
+		String filterAssoc = bean.getFilterAssoc();
+		String compositionStatus = bean.getCompositionStatus();
 		Map<String, String> parameters = new TreeMap<String, String>();
 
-		String alfTypeName = null;
+		String type = null;
 		/*
 		 * maxSize fixe le nombre d'élements à afficher dans le widget, par défaut, MAX_RESULTS. Ce
 		 * nbre sera réinitialisé par le bouton 'Tout'. Valeurs possibles: MAX_RESULTS ("50" ou
 		 * celle indiquée ds forms.properties) ou fixé par la propriété 'field size' dans le
 		 * modeleur. Dans ce cas, SELECTMAX conserve tjrs la valeur de field size.
 		 */
-		String maxSize = mappingAgent.getFieldSizeForField(type, ""
+		String maxSize = mappingAgent.getFieldSizeForField(dataType, ""
 				+ getParamMaxResults(transaction.getInitParams()), transaction.getFormId());
-		alfTypeName = (identifier == null ? mappingAgent.getClassTypeAlfrescoName(type) : type);
-		parameters.put("type", alfTypeName);
+		type = (identifier == null ? mappingAgent.getClassTypeAlfrescoName(dataType) : dataType);
+
+		parameters.put("type", type);
 		parameters.put("format", StringUtils.trimToEmpty(format));
 		parameters.put("maxLength", StringUtils.trimToEmpty(maxLength));
 		parameters.put("identifier", StringUtils.trimToEmpty(identifier));
+		parameters.put("filterAssoc", StringUtils.trimToEmpty(filterAssoc));
+
+		if (compositionStatus.equals("composition")) {
+			parameters.put("isComposition", "1");
+		} else {
+			parameters.put("isComposition", "0");
+		}
 
 		String q = StringUtils.trimToNull(query);
 		if (q != null) {
@@ -1106,7 +1122,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 
 		Document reqDoc;
 		if (isInStandaloneMode()) {
-			reqDoc = requestDummyDocumentList(alfTypeName, maxLength);
+			reqDoc = requestDummyDocumentList(type, maxLength);
 		} else {
 			reqDoc = requestDocumentFromAlfresco(transaction, parameters,
 					MsgId.INT_WEBSCRIPT_OPCODE_LIST);
@@ -1115,8 +1131,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 				if (logger.isErrorEnabled()) {
 					logger.error("The Alfresco server is unavailable. Returning a dummy list.");
 				}
-				setStandaloneMode(true);
-				reqDoc = requestDummyDocumentList(alfTypeName, "0");
+				// setStandaloneMode(true);
+				reqDoc = requestDummyDocumentList(type, "0");
 			}
 			// ** #1234
 		}
@@ -1237,9 +1253,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	private Document requestDocumentFromAlfresco(AlfrescoTransaction transaction,
 			Map<String, String> parameters, MsgId opCode) throws ServletException {
 		Document result = null;
+		PostMethod post;
+
+		// request the document from the webscript @ Alfresco
 		try {
-			PostMethod post = requestPost(transaction, parameters, opCode);
-			result = synchronizedParse(post.getResponseBodyAsStream()); // #1227
+			post = requestPost(transaction, parameters, opCode);
 		} catch (ConnectException e) { // #1234
 			if (!isInDebugMode()) {
 				throw new ServletException(MsgId.INT_MSG_ALFRESCO_SERVER_DOWN.getText());
@@ -1251,6 +1269,17 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			if (logger.isErrorEnabled()) {
 				logger.error("Caught exception while requesting document from Alfresco", e);
 			}
+			throw new ServletException(MsgPool.getMsg(MsgId.MSG_ERROR_DEFAULT_MSG));
+		}
+
+		// parse the result into a document
+		try {
+			result = synchronizedParse(post.getResponseBodyAsStream());
+		} catch (IOException e) {
+			logger.error("Exception while parsing the document requested from Alfresco", e);
+			throw new ServletException(MsgPool.getMsg(MsgId.MSG_ERROR_DEFAULT_MSG));
+		} catch (SAXException e) {
+			logger.error("Exception while parsing the document requested from Alfresco", e);
 			throw new ServletException(MsgPool.getMsg(MsgId.MSG_ERROR_DEFAULT_MSG));
 		}
 		if (result != null) {
@@ -1268,6 +1297,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @throws IOException
 	 * @throws SAXException
 	 */
+	// #1227
 	synchronized public Document synchronizedParse(InputStream is) throws IOException, SAXException {
 		return docBuilder.parse(is);
 	}

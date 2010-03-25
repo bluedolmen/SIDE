@@ -1,5 +1,7 @@
 package com.bluexml.xforms.actions;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.bluexml.xforms.controller.beans.PageInfoBean;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.messages.MsgId;
@@ -37,9 +39,14 @@ public class CreateFormAction extends AbstractCreateAction {
 	protected void create() {
 		// retrieve data type
 		String inputDataType = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_DATATYPE.getText());
+		String formTypeHint = requestParameters.get(MsgId.INT_ACT_PARAM_ANY_HINT.getText());
 		// push new page
 		PageInfoBean bean = new PageInfoBean();
-		bean.setFormType(FormTypeEnum.FORM);
+		if (StringUtils.equals(formTypeHint, MsgId.INT_ACT_SUFFIX_GET_FORM_CLASS.getText())) {
+			bean.setFormType(FormTypeEnum.CLASS);
+		} else {
+			bean.setFormType(FormTypeEnum.FORM);
+		}
 		bean.setFormName(inputDataType);
 		bean.setDataType(controller.getDataTypeFromFormName(bean.getFormName()));
 		bean.setLanguage(navigationPath.peekCurrentPage().getLanguage());

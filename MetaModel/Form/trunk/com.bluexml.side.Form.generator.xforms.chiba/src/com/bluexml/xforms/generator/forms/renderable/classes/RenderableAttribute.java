@@ -91,7 +91,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field.
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field.
 	 * AbstractRenderableField#getOwner()
 	 */
 	@Override
@@ -102,10 +102,10 @@ public class RenderableAttribute extends AbstractRenderableField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field.
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field.
 	 * AbstractRenderableField#getName()
 	 */
-	@Override
+	@Override 
 	protected String getName() {
 		return attribute.getName();
 	}
@@ -113,7 +113,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field.
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field.
 	 * AbstractRenderableField#getTitle()
 	 */
 	@Override
@@ -124,7 +124,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field.
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field.
 	 * AbstractRenderableField#isRequired()
 	 */
 	@Override
@@ -135,7 +135,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field.
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field.
 	 * AbstractRenderableField#isReadOnly()
 	 */
 	@Override
@@ -147,7 +147,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field. AbstractRenderableField
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field. AbstractRenderableField
 	 * #getCustomElement(com.bluexml.xforms.generator.forms.Rendered,
 	 * com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple, java.lang.String,
 	 * java.util.Stack, java.util.Stack)
@@ -182,7 +182,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field. AbstractRenderableField
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field. AbstractRenderableField
 	 * #applyConstraints(com.bluexml.xforms.generator.forms .modelelement.ModelElementBindSimple)
 	 */
 	@Override
@@ -203,7 +203,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field.
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field.
 	 * AbstractRenderableField#getXsdType()
 	 */
 	@Override
@@ -220,7 +220,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field.
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field.
 	 * AbstractRenderableField#getHint()
 	 */
 	@Override
@@ -231,7 +231,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seecom.bluexml.xforms.generator.forms.renderable.common.field.
+	 * @see com.bluexml.xforms.generator.forms.renderable.common.field.
 	 * AbstractRenderableField#getErrorMessage()
 	 */
 	@Override

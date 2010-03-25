@@ -67,22 +67,28 @@ public class AssociationBean {
 	/** The create and edit form type, whether class or form. */
 	private FormTypeRendered createEditFormType;
 
+	private String createEditDefaultFormName = null;
+
 	/** The format of labels displayed for the association items. */
 	private String formatPattern;
 
 	/** The length at which to truncate labels. */
 	private String labelLength;
 
-	//** #1530
+	// ** #1530
 	/**
 	 * Whether this selection widget is for a field instead of an association. If set,
 	 * showingActions must be reset.
 	 */
 	private boolean isForField;
 	private String overridingType;
-	/** Local name of the property (from the type definition) used as id*/
+	/** Local name of the property (from the type definition) used as id */
 	private String identifierPropName;
-	//** #1530
+	// ** #1530
+	
+	private String filterAssoc;
+	
+	private boolean isComposition;
 
 	public AssociationBean() {
 		super();
@@ -90,6 +96,8 @@ public class AssociationBean {
 		formatPattern = "";
 		labelLength = "0";
 		isForField = false;
+		filterAssoc = null;
+		isComposition = false;
 	}
 
 	/**
@@ -392,7 +400,8 @@ public class AssociationBean {
 	}
 
 	/**
-	 * @param overridingType the overridingType to set
+	 * @param overridingType
+	 *            the overridingType to set
 	 */
 	public void setOverridingType(String overridingType) {
 		this.overridingType = overridingType;
@@ -406,7 +415,8 @@ public class AssociationBean {
 	}
 
 	/**
-	 * @param identifierPropName the identifierPropName to set
+	 * @param identifierPropName
+	 *            the identifierPropName to set
 	 */
 	public void setIdentifierPropName(String identifierPropName) {
 		this.identifierPropName = identifierPropName;
@@ -418,5 +428,50 @@ public class AssociationBean {
 	public String getIdentifierPropName() {
 		return identifierPropName;
 	}
+
+	/**
+	 * @return the filterAssoc
+	 */
+	public String getFilterAssoc() {
+		return filterAssoc;
+	}
+
+	/**
+	 * @param filterAssoc
+	 *            the filterAssoc to set
+	 */
+	public void setFilterAssoc(String filterAssoc) {
+		this.filterAssoc = filterAssoc;
+	}
+
+	/**
+	 * @return the isComposition status
+	 */
+	public boolean isComposition() {
+		return isComposition;
+	}
+
+	/**
+	 * @param isComposition
+	 *            whether the association is a composition
+	 */
+	public void setComposition(boolean isComposition) {
+		this.isComposition = isComposition;
+	}
+
+	/**
+	 * @param createEditDefaultFormName the createEditDefaultFormName to set
+	 */
+	public void setCreateEditDefaultFormName(String createEditDefaultFormName) {
+		this.createEditDefaultFormName = createEditDefaultFormName;
+	}
+
+	/**
+	 * @return the createEditDefaultFormName
+	 */
+	public String getCreateEditDefaultFormName() {
+		return createEditDefaultFormName;
+	}
+
 
 }

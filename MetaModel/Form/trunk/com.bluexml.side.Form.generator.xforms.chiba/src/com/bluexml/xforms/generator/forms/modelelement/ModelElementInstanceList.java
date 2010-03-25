@@ -2,17 +2,17 @@ package com.bluexml.xforms.generator.forms.modelelement;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.xforms.generator.forms.ModelElement;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
- * The Class ModelElementTypeEnum.
+ * The Class ModelElementInstanceList. Provides an element of an XForms template's "model" section.
+ * The element will trigger the fetching of the initial item set of a selection widget.
  */
 public class ModelElementInstanceList extends ModelElement {
 
@@ -28,14 +28,17 @@ public class ModelElementInstanceList extends ModelElement {
 
 	private String identifier; // #1529
 
+	private String filterAssoc; // #1536
+
+	private boolean isComposition; // #1536
+
 	/**
+	 * Constructor specifically for attaching a selection widget to a field.
 	 * 
 	 * @param overrideType
-	 *            the type enum complete name
+	 *            the name of the type to search
 	 * @param instanceName
-	 *            the instance name
-	 * @param identifier
-	 *            TODO
+	 *            the instance name, for identification of the instance by the XForms engine
 	 */
 	public ModelElementInstanceList(String overrideType, String instanceName, String formatPattern,
 			String maxLength, String identifier) {
@@ -44,23 +47,29 @@ public class ModelElementInstanceList extends ModelElement {
 		this.formatPattern = formatPattern;
 		this.maxLength = maxLength;
 		this.identifier = identifier;
+		this.filterAssoc = null;
+		this.isComposition = false;
 	}
 
 	/**
-	 * Instantiates a new model element type enum.
+	 * Initial constructor, for use with associations that target classes defined in model files.
+	 * Instantiates a new model element for lists.
 	 * 
-	 * @param typeEnum
-	 *            the type enum
+	 * @param modelClazz
+	 *            the type of the objects to fetch in the list
 	 * @param instanceName
 	 *            the instance name
 	 */
-	public ModelElementInstanceList(Clazz typeEnum, String instanceName, String formatPattern,
-			String maxLength) {
-		this.typeCompleteName = ModelTools.getCompleteName(typeEnum);
+	public ModelElementInstanceList(Clazz modelClazz, String instanceName, String formatPattern,
+			String maxLength, String filterAssoc, boolean isComposition) {
+		this.typeCompleteName = ModelTools.getNamespacePrefix(modelClazz) + ":"
+				+ getFormGenerator().getClassQualifiedName(modelClazz);
 		this.instanceName = instanceName;
 		this.formatPattern = formatPattern;
 		this.maxLength = maxLength;
 		this.identifier = "";
+		this.filterAssoc = filterAssoc;
+		this.isComposition = isComposition;
 	}
 
 	/*
@@ -72,8 +81,8 @@ public class ModelElementInstanceList extends ModelElement {
 		Element instance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		instance.setAttribute("src", MsgId.INT_URI_SCHEME_READER
-				+ MsgId.INT_ACT_CODE_LIST.getText() + "/" + typeCompleteName + "/"
-				+ StringUtils.trimToEmpty(formatPattern) + "/" + maxLength + "/" + identifier);
+				+ buildListURI(typeCompleteName, formatPattern, maxLength, identifier, filterAssoc,
+						isComposition));
 		instance.setAttribute("id", instanceName);
 		return instance;
 	}

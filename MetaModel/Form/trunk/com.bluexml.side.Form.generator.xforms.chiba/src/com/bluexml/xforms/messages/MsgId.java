@@ -148,6 +148,7 @@ public enum MsgId {
 	INT_ACT_CODE_WRKFLW_TRANSITION		("transition"),
 	// names of action parameters, internal to the actions hierarchy
 	INT_ACT_PARAM_ANY_DATATYPE			("type"),
+	INT_ACT_PARAM_ANY_HINT				("formTypeHint"),
 	INT_ACT_PARAM_ANY_ID				("id"),
 	INT_ACT_PARAM_ANY_ASSOC				("assoc"),
 	INT_ACT_PARAM_ENUM_FILTER_DATA		("filterData"),
@@ -156,8 +157,10 @@ public enum MsgId {
 	INT_ACT_PARAM_ENUM_RAWTYPE			("rawtype"),
 	INT_ACT_PARAM_GET_FORMTYPE			("formType"),
 	INT_ACT_PARAM_LIST_FORMAT			("format"),
-	INT_ACT_PARAM_LIST_MAXLENGTH		("maxLength"),
+	INT_ACT_PARAM_LIST_FILTER_ASSOC		("filterAssoc"),
 	INT_ACT_PARAM_LIST_IDENTIFIER		("identifier"),
+	INT_ACT_PARAM_LIST_IS_COMPOSITION	("isComposition"),
+	INT_ACT_PARAM_LIST_MAXLENGTH		("maxLength"),
 	INT_ACT_PARAM_LIST_QUERY			("query"),
 	INT_ACT_PARAM_LIST_SIZE				("size"),
 	// form type indicators

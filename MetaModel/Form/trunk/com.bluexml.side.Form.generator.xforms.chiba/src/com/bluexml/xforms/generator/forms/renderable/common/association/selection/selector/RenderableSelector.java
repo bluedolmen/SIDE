@@ -51,29 +51,28 @@ public class RenderableSelector extends AbstractRenderable {
 	/**
 	 * Instantiates a new renderable selector.
 	 * 
-	 * @param associationBean
+	 * @param assoBean
 	 *            the association bean
 	 */
-	public RenderableSelector(AssociationBean associationBean) {
-		super(associationBean);
+	public RenderableSelector(AssociationBean assoBean) {
+		super(assoBean);
 
-		if (associationBean.isForField()) {
-			String overridingType = associationBean.getOverridingType();
+		if (assoBean.isForField()) {
+			String overridingType = assoBean.getOverridingType();
 			instanceName = overridingType.replaceAll(":", "_") + bean.getName() + "ListExt";
 			modelElementUpdater = new ModelElementUpdaterList(overridingType, instanceName,
-					associationBean.getFormatPattern(), associationBean.getLabelLength(),
-					associationBean.getIdentifierPropName());
-		} else if (associationBean.getAssociationType() == AssociationType.clazz) {
-			instanceName = ModelTools.getCompleteNameJAXB(associationBean.getDestinationClass())
-					+ "List";
-			modelElementUpdater = new ModelElementUpdaterList(
-					associationBean.getDestinationClass(), instanceName, associationBean
-							.getFormatPattern(), associationBean.getLabelLength());
+					assoBean.getFormatPattern(), assoBean.getLabelLength(), assoBean
+							.getIdentifierPropName());
+		} else if (assoBean.getAssociationType() == AssociationType.clazz) {
+			instanceName = ModelTools.getCompleteNameJAXB(assoBean.getDestinationClass()) + "List";
+			modelElementUpdater = new ModelElementUpdaterList(assoBean.getDestinationClass(),
+					instanceName, assoBean.getFormatPattern(), assoBean.getLabelLength(), assoBean
+							.getFilterAssoc(), assoBean.isComposition());
 		} else {
-			instanceName = ModelTools.getCompleteNameJAXB(associationBean.getDestinationSelect()
+			instanceName = ModelTools.getCompleteNameJAXB(assoBean.getDestinationSelect()
 					.getEnumeration())
 					+ "EnumInstance";
-			modelElementUpdater = new ModelElementUpdaterEnum(associationBean, instanceName);
+			modelElementUpdater = new ModelElementUpdaterEnum(assoBean, instanceName);
 		}
 		instancePath = "instance('" + instanceName + "')/";
 		instanceNodePath = instancePath + "item";
@@ -96,12 +95,12 @@ public class RenderableSelector extends AbstractRenderable {
 			// !!! the constraint will be set by the actions !!!
 		}
 		// for workflows, we don't want anything but the list
-		add(new RenderableSelectorList(associationBean, this));
-		add(new RenderableSelectorCount(associationBean, this));
-		add(new RenderableSelectorSearcher(associationBean, this));
-		if (associationBean.isShowingActions()
-				&& associationBean.getAssociationType() == AssociationBean.AssociationType.clazz) {
-			add(new RenderableSelectorCreate(associationBean, this));
+		add(new RenderableSelectorList(assoBean, this));
+		add(new RenderableSelectorCount(assoBean, this));
+		add(new RenderableSelectorSearcher(assoBean, this));
+		if (assoBean.isShowingActions()
+				&& assoBean.getAssociationType() == AssociationBean.AssociationType.clazz) {
+			add(new RenderableSelectorCreate(assoBean, this));
 		}
 	}
 
@@ -209,7 +208,8 @@ public class RenderableSelector extends AbstractRenderable {
 							.getIdentifierPropName()));
 		} else if (bean.getAssociationType() == AssociationType.clazz) {
 			rendered.addModelElement(new ModelElementInstanceList(bean.getDestinationClass(),
-					instanceName, bean.getFormatPattern(), bean.getLabelLength()));
+					instanceName, bean.getFormatPattern(), bean.getLabelLength(), bean
+							.getFilterAssoc(), bean.isComposition()));
 		} else {
 			rendered.addModelElement(new ModelElementEnumeration(bean.getDestinationSelect(),
 					instanceName));

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationType;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.xforms.generator.GeneratorInterface.AssociationKind;
@@ -149,7 +149,8 @@ public class RenderableClass extends Renderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		if (firstRender) {
 			if (otherAssociationsTab.getChildrenSize() > 0) {
 				addFirst(otherAssociationsTab);
@@ -213,6 +214,12 @@ public class RenderableClass extends Renderable {
 
 		AssociationProperties properties = new AssociationProperties(destination, classBean, name,
 				title, type.isInline(), type.getHiBound(), type.getLoBound());
+		if (type.isFiltered()) {
+			String alfrescoName = getFormGenerator().getAssoQualifiedName(association);
+			properties.setFilterAssoc(alfrescoName);
+		}
+		boolean isComposition = (association.getAssociationType() == AssociationType.COMPOSITION);
+		properties.setComposition(isComposition);
 
 		RenderableAssociation renderableAssociation = new RenderableAssociation(properties,
 				association);

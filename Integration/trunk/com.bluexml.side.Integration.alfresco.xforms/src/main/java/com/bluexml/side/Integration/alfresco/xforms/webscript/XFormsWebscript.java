@@ -76,8 +76,13 @@ public class XFormsWebscript extends AbstractWebScript {
 					parentsMapCache.put(name, parentName);
 				}
 			}
-			list = new ArrayList<QName>();
+
 			QName qType = getQName(type, dictionaryService.getAllTypes());
+			if (qType == null) {
+				return null;
+			}
+
+			list = new ArrayList<QName>();
 			list.add(qType);
 			Set<Entry<QName, QName>> entrySet = parentsMapCache.entrySet();
 			collectChilds(qType, entrySet, list);
@@ -87,39 +92,35 @@ public class XFormsWebscript extends AbstractWebScript {
 	}
 
 	/**
-	 * Gets, from the given collection, the qname that matches the type.
+	 * Gets from the given collection the qname that matches (including namespace prefix) the type.
 	 * 
 	 * @param type
-	 *            the type to find (since #1529, may contain a namespace prefix).
+	 *            the type to find, with a namespace prefix and local name.
 	 * @param allTypes
-	 *            the collection of types
+	 *            a collection of types
 	 * @return the qname that was found, <code>null</code> if prefix or type unknown.
 	 */
 	private QName getQName(String type, Collection<QName> allTypes) {
-		int pos = type.indexOf(':');
-		if (pos == -1) { // no namespace prefix, this is a BlueXML generated type
-			for (QName name : allTypes) {
-				if (name.getLocalName().equals(type)) {
-					return name;
-				}
-			}
-		} else { // #1529
-			// this is a stranger type, so the namespace URI must also match
+		int pos = type.indexOf(':'); // #1529
+		if (pos != -1) {
 			String prefix = type.substring(0, pos);
 			String localName = type.substring(pos + 1);
 			String namespaceURI;
 			try {
 				namespaceURI = namespacePrefixResolver.getNamespaceURI(prefix);
+				for (QName qname : allTypes) {
+					if (qname.getNamespaceURI().equals(namespaceURI)
+							&& qname.getLocalName().equals(localName)) {
+						return qname;
+					}
+				}
 			} catch (NamespaceException e) {
 				logger.error("Caught a NamespaceException. Prefix '" + prefix + "' is unknown.");
-				return null;
 			}
-			for (QName qname : allTypes) {
-				if (qname.getNamespaceURI().equals(namespaceURI)
-						&& qname.getLocalName().equals(localName)) {
-					return qname;
-				}
-			}
+		}
+		logger.error("Did not find the data type: '" + type + "'. Registered types are:");
+		for (QName qname : allTypes) {
+			logger.error(qname.toString());
 		}
 		return null;
 	}

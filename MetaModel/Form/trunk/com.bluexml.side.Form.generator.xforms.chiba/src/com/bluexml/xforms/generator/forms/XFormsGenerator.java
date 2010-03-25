@@ -354,7 +354,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * @param association
 	 *            the association
 	 */
-	public void addAssociation(AssociationKind type, String name, String title, Clazz source,
+	private void addAssociation(AssociationKind type, String name, String title, Clazz source,
 			Clazz destination, boolean doublenav, Association association) {
 		RenderableClass classBeanSource = getClassBean(source);
 		RenderableClass classBeanDestination = getClassBean(destination);

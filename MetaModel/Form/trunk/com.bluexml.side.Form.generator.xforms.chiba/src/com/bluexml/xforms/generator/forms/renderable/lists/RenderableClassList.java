@@ -24,7 +24,8 @@ public class RenderableClassList extends Renderable {
 		super();
 		this.classe = classe;
 
-		modelElementListUpdater = new ModelElementUpdaterList(classe, "instanceList", "", "0");
+		modelElementListUpdater = new ModelElementUpdaterList(classe, "instanceList", "", "0", "",
+				false);
 		modelElementBindHolder = new ModelElementBindHolder("instance('instanceList')/"
 				+ MsgId.INT_INSTANCE_SELECT_ITEM);
 		bindLabel = new ModelElementBindSimple(MsgId.INT_INSTANCE_SELECT_LABEL.getText());
@@ -49,8 +50,8 @@ public class RenderableClassList extends Renderable {
 				"list", null);
 		renderedGroup.addModelElement(modelElementListUpdater);
 		renderedGroup.addModelElement(modelElementBindHolder);
-		renderedGroup
-				.addModelElement(new ModelElementInstanceList(classe, "instanceList", "", "0"));
+		renderedGroup.addModelElement(new ModelElementInstanceList(classe, "instanceList", "", "0",
+				"", false));
 		return renderedGroup;
 	}
 

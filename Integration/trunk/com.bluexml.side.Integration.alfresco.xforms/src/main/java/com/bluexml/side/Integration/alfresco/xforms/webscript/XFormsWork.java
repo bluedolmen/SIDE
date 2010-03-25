@@ -445,36 +445,43 @@ public class XFormsWork implements RunAsWork<String> {
 
 	/**
 	 * Parameters: <br/>
-	 * "type": the data type to search <br/>
-	 * "query": the search keyword string<br/>
-	 * "queryFilter": an additional search keyword string<br/>
-	 * "format": the format pattern for the label of objects<br/>
-	 * "maxLength": the length at which labels computed using the format are truncated<br/>
-	 * "maxResults": the max number of items allowed in the result set<br/>
+	 * "type": the data type to search. This parameter is MANDATORY.<br/>
+	 * "query": the search keyword string. NULL-able.<br/>
+	 * "queryFilter": an additional search keyword string. NULL-able.<br/>
+	 * "format": the format pattern for the label of objects. NULL-able.<br/>
+	 * "maxLength": the length at which labels computed using the format are truncated. NULL-able.<br/>
+	 * "maxResults": the max number of items allowed in the result set. NULL-able.<br/>
 	 * "identifier": the local name of a property whose value will be used as the id of results.
-	 * Quite obviously, that field MUST 1- be non-null, 2- be an actual identifier (i.e. no value is
-	 * duplicated in the value set)<br/>
-	 * "filterAssoc" // TODO
+	 * NULL-able. Quite obviously, that field MUST 1- be non-null, 2- be an actual identifier (i.e.
+	 * no value is duplicated in the value set)<br/>
+	 * "filterAssoc": NULL-able.// TODO <br/>
+	 * "isComposition": if "1" and "filterAssoc" is given, denotes that the association is a
+	 * composition. NULL-able.
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	protected String list() throws Exception {
 		class ResultBean { // #1406
-			public String id;
-			public String label;
-			public String qname;
+			String id;
+			String label;
+			String qname;
 
 			ResultBean(String nodeId, String nodeLabel, String nodeQName) {
 				this.id = nodeId;
 				this.label = nodeLabel;
 				this.qname = nodeQName;
 			}
-
 		}
 
-		// collect parameters
+		//
+		// collect parameters. Some of these are not necessary before the filtering/limiting/sorting
+		// part but for convenience, all parameters are collected with, possibly, some work done
+		// here that will come out as useless, but it makes this function more readable.
 		String type = parameters.get("type");
+		if (StringUtils.trimToNull(type) == null) {
+			return getListOpcodeDefaultResult("<Invalid type>", false);
+		}
 		String identifier = parameters.get("identifier"); // #1529
 		String format = parameters.get("format");
 		// URL-decode the format pattern
@@ -483,7 +490,7 @@ public class XFormsWork implements RunAsWork<String> {
 				format = URLDecoder.decode(format, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				logger.error("UTF-8 is unsupported. Format is defaulted to 'uuid'");
-				format = "uuid";
+				format = null;
 			}
 		}
 
@@ -503,8 +510,10 @@ public class XFormsWork implements RunAsWork<String> {
 			logger.error("'list' op: wrong number in parameter 'maxLength' (" + lengthParam + ")");
 		}
 		// ** #1310
-		// String filterAssoc = parameters.get("filterAssoc"); // TODO: implement
-		// boolean applyFilter = (StringUtils.trimToNull(filterAssoc) != null);
+		String filterAssoc = parameters.get("filterAssoc");
+		boolean applyFilter = (StringUtils.trimToNull(filterAssoc) != null);
+		String isCompositionParam = parameters.get("isComposition");
+		boolean isComposition = StringUtils.equals(isCompositionParam, "1");
 		// ** #1310
 
 		List<String> searchedValues = new ArrayList<String>();
@@ -520,26 +529,36 @@ public class XFormsWork implements RunAsWork<String> {
 
 		// perform the search
 		ResultSet luceneResultSet = getResultSet(type, searchedValues, maxResults);
+		if (luceneResultSet == null) {
+			// result for the pathological case when the type is unknown to Alfresco.
+			return getListOpcodeDefaultResult(query, false);
+		}
 		int luceneResultLength = luceneResultSet.length();
+		if (luceneResultLength == 0) {
+			return getListOpcodeDefaultResult(query, true);
+		}
 
+		//
 		//
 		// collect items and apply filtering and/or limiting. Node names/labels are also computed.
 		//
+		//
 
 		// configure the filtering/limiting
-		int effectivelyReturned = 0;
-		int filteredOut = 0;
-		QName identifierQName = null;
-		boolean includeSystemProperties = false;
 		int returnAtMost;
 		if (maxResults > 0) {
 			returnAtMost = Math.min(luceneResultLength, maxResults);
 		} else {
 			returnAtMost = luceneResultLength;
 		}
-		if (identifier != null) {
+		int effectivelyReturned = 0;
+		int filteredOut = 0;
+		QName identifierQName = null;
+		boolean includeSystemProperties = false;
+
+		if (StringUtils.trimToNull(identifier) != null) {
 			identifierQName = resolveIdentifierQName(identifier, type);
-			includeSystemProperties = true;
+			includeSystemProperties = (identifierQName != null);
 		}
 
 		// collect items and apply filtering and/or limiting
@@ -552,7 +571,7 @@ public class XFormsWork implements RunAsWork<String> {
 			}
 			QName qname = serviceRegistry.getNodeService().getType(nodeRef); // #1510
 			String id;
-			if (identifier == null) {
+			if (identifierQName == null) {
 				id = nodeRef.toString();
 			} else {
 				id = resolveIdentifierValue(nodeRef, identifierQName);
@@ -566,6 +585,15 @@ public class XFormsWork implements RunAsWork<String> {
 					isAddableBean = false;
 					filteredOut++;
 				}
+			} else {
+				// retrieving objects of a standard BlueXML generated type
+				if (applyFilter) {
+					if (dataLayer.isRefencenced(nodeRef, filterAssoc, isComposition) == true) {
+						// do not add if already referenced
+						isAddableBean = false;
+						filteredOut++;
+					}
+				}
 			}
 			if (isAddableBean) {
 				resultBeanList.add(aBean);
@@ -574,7 +602,7 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 
 		//
-		// sort the result list by node name. #1406
+		// sort the result list by computed labels. #1406
 		Collections.sort(resultBeanList, new Comparator<ResultBean>() {
 			public int compare(ResultBean o1, ResultBean o2) {
 				return o1.label.compareTo(o2.label);
@@ -595,10 +623,36 @@ public class XFormsWork implements RunAsWork<String> {
 		xmlResult.append("  <maxResults>").append(maxResults).append("</maxResults>\n");
 		xmlResult.append("  <returned>").append(effectivelyReturned).append("</returned>\n");
 		xmlResult.append("  <filteredOut>").append(filteredOut).append("</filteredOut>\n");
+		xmlResult.append("  <typeFound>true</typeFound>\n");
 		xmlResult.append("  <query>").append(StringUtils.trimToEmpty(query)).append("</query>\n");
 		xmlResult.append("</query>\n");
+
 		xmlResult.append(itemsBuf);
 
+		xmlResult.append("</results>");
+		return xmlResult.toString();
+	}
+
+	/**
+	 * Builds a string for cases when the list operation returns no results.
+	 * 
+	 * @param query
+	 *            the search string that was provided
+	 * @param status
+	 *            whether the data type provided is a legitimate type registered with Alfresco.
+	 * @return
+	 */
+	private String getListOpcodeDefaultResult(String query, boolean status) {
+		StringBuffer xmlResult = new StringBuffer("");
+		xmlResult.append("<results>\n");
+		xmlResult.append("<query>\n");
+		xmlResult.append("  <count>0</count>\n");
+		xmlResult.append("  <maxResults>0</maxResults>\n");
+		xmlResult.append("  <returned>0</returned>\n");
+		xmlResult.append("  <filteredOut>0</filteredOut>\n");
+		xmlResult.append("  <typeFound>").append(status).append("</typeFound>\n");
+		xmlResult.append("  <query>").append(StringUtils.trimToEmpty(query)).append("</query>\n");
+		xmlResult.append("</query>\n");
 		xmlResult.append("</results>");
 		return xmlResult.toString();
 	}
@@ -673,8 +727,12 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	private ResultSet getResultSet(String type, List<String> searchedValues, int maxResults) {
-		return getUnsecureLuceneSearcher().query(
-				createSearchParameters(type, searchedValues, maxResults));
+		SearchParameters searchParameters = createSearchParameters(type, searchedValues, maxResults);
+		if (searchParameters == null) {
+			return null;
+		}
+
+		return getUnsecureLuceneSearcher().query(searchParameters);
 	}
 
 	private String getSQLQuery(String type, String parent, String context, String query,
@@ -1476,6 +1534,12 @@ public class XFormsWork implements RunAsWork<String> {
 		StringBuilder query = new StringBuilder();
 
 		List<QName> subTypes = formsWebscript.getSubTypes(type);
+		if (subTypes == null) {
+			return null;
+		}
+
+		// the searchable attributes
+		Set<QName> attributes = getSearchableAttributes(subTypes.get(0));
 
 		// the type clause
 		query.append("(");
@@ -1492,7 +1556,7 @@ public class XFormsWork implements RunAsWork<String> {
 
 		// add one clause per significant search value
 		for (String strRequest : searchedValues) {
-			StringBuilder clause = getLuceneClauseForSearchValue(subTypes.get(0), strRequest);
+			StringBuilder clause = getLuceneClauseForSearchValue(attributes, strRequest);
 			if (clause.length() > 0) {
 				query.append(" AND ");
 				query.append(clause);
@@ -1500,7 +1564,7 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Built Lucene query: -->" + query + "<--");
+			logger.debug("Built Lucene query: " + query);
 		}
 
 		return query;
@@ -1510,21 +1574,20 @@ public class XFormsWork implements RunAsWork<String> {
 	 * Gets a search string fragment in which search criteria match the given type's searchable
 	 * attributes with the search keyword.
 	 * 
-	 * @param mainTypeQName
-	 *            the type of nodes being searched
+	 * @param attributes
+	 *            the qnames of searchable attributes
 	 * @param keyword
 	 *            the search keyword
 	 * @return the search string fragment surrounded by parentheses, or empty string if no
 	 *         searchable attributes are found.
 	 */
-	private StringBuilder getLuceneClauseForSearchValue(QName mainTypeQName, String keyword) {
+	private StringBuilder getLuceneClauseForSearchValue(Set<QName> attributes, String keyword) {
 		StringBuilder query = new StringBuilder();
 
 		if (StringUtils.trimToNull(keyword) != null) {
 			String escapedRequest = QueryParser.escape(keyword);
-			Set<QName> attributesArray = getSearchableAttributes(mainTypeQName);
 
-			Iterator<QName> it = attributesArray.iterator();
+			Iterator<QName> it = attributes.iterator();
 
 			if (it.hasNext()) { // at least one searchable attribute before returning non-empty
 				query.append("(");
@@ -1629,8 +1692,10 @@ public class XFormsWork implements RunAsWork<String> {
 		return createSearchParameters(getLuceneQuery(type, searchedValues), maxResults);
 	}
 
-	// %%
 	private SearchParameters createSearchParameters(StringBuilder query, int maxResults) {
+		if (query == null) {
+			return null;
+		}
 		// setup search parameters, including limiting the results
 		SearchParameters searchParams = new SearchParameters();
 		searchParams.addStore(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);

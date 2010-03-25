@@ -70,7 +70,8 @@ public class RenderableSEdit extends AbstractRenderable {
 		if (bean.getCreateEditFormType().equals(FormTypeRendered.formForm)) {
 			String listForms = StringUtils.join(bean.getCreateEditForms(), ','); // #1510
 			if (listForms == null) {
-				listForms = "";
+				listForms = bean.getCreateEditDefaultFormName() + "/"
+						+ MsgId.INT_ACT_SUFFIX_GET_FORM_CLASS;
 			}
 			submission.setAction(MsgId.INT_URI_SCHEME_WRITER.getText()
 					+ MsgId.INT_ACT_CODE_EDIT_FORM + "/" + bean.getName() + "/" + listForms);
@@ -123,6 +124,7 @@ public class RenderableSEdit extends AbstractRenderable {
 
 		return rendered;
 	}
+
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.generator.forms.Renderable#getDivStyle()
 	 */
@@ -130,6 +132,5 @@ public class RenderableSEdit extends AbstractRenderable {
 	public String getDivStyle() {
 		return MsgId.INT_CSS_SELECT_TRIGGER_BUTTON.getText();
 	}
-	
 
 }
