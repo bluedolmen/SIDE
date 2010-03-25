@@ -78,6 +78,37 @@ PresentationContext.prototype.handleReplaceAll = function(webcontext) {
     window.open(path, "_self");
 };
 
+PresentationContext._ensureValueNode = function (targetId) { //$$ #1214
+// when (re-)creating input widgets, the 'value' DOM node must exist or an error will happen (#1214)
+//
+    var parent = document.getElementById(targetId);
+    var thevalue = document.getElementById(targetId + "-value");
+    if (thevalue != null) {
+        return;
+    }
+
+    var thealert = null;
+    var idx = 0;
+    while (idx < parent.childNodes.length) {
+        var elt = parent.childNodes[idx];
+        if ((elt.nodeName.toLowerCase() == "span") && (_hasClass(elt, "alert"))) {
+            thealert = elt;
+            break;
+        }
+        idx++;
+    }
+
+    var thespan = document.createElement('span');
+    thespan.setAttribute('id', targetId + "-value");
+    thespan.setAttribute('style', 'white-space: nowrap;');
+    thespan.setAttribute('disabled', 'disabled');
+    if (thealert) {
+        parent.insertBefore(thespan, thealert);
+    } else {
+        parent.appendChild(thespan);
+    }
+}
+ 
 /**
  * Handles chiba-state-changed.
  */
@@ -108,33 +139,19 @@ PresentationContext.prototype.handleStateChanged = function(targetId, targetName
         }
         return;
     }
+//    if (value != null) {
+//        PresentationContext._setControlValue(targetId, value, type);
+//        var tmpColor = dojo.byId(targetId + "-value").style.backgroundColor;
+//        new Effect.Highlight(dojo.byId(targetId + "-value"),{restorecolor:tmpColor});
+//    }
 
-    if (value != null) {
-        PresentationContext._setControlValue(targetId, value, type);
-    //        var tmpColor = dojo.byId(targetId + "-value").style.backgroundColor;
-        //        new Effect.Highlight(dojo.byId(targetId + "-value"),{restorecolor:tmpColor});
-    }
-
-    if (valid != null) {
-        PresentationContext._setValidProperty(target, eval(valid));
-    }
-    if (readonly != null) {
-        PresentationContext._setReadonlyProperty(target, eval(readonly), target);
-    }
-    if (required != null) {
-        PresentationContext._setRequiredProperty(target, eval(required));
-    }
-    if (enabled != null) {
-        PresentationContext._setEnabledProperty(target, eval(enabled));
-    }
-  //    if(type != null){
     //cutting any prefixes if present cause it can't be known beforehand which prefix is actually used for the types
     if (type != null && type.indexOf(":") != -1) {
         type = type.substring(type.indexOf(":") + 1, type.length);
     }
     var tmpControl = dojo.widget.getWidgetById(targetId + "-value");
 
-  //    if(type ==null && getClassComponent(target.className, 1) != "string"){
+    //    if(type ==null && getClassComponent(target.className, 1) != "string"){
     //        type="string";
     //    }
     if (targetName == "output" && (type == undefined || type == "date")) {
@@ -142,8 +159,10 @@ PresentationContext.prototype.handleStateChanged = function(targetId, targetName
     }
     if (!tmpControl) {
         dojo.debug("PresentationContext.prototype.handleStateChanged: Create new " + type + " widget");
+        // PresentationContext._ensureValueNode(targetId);
         switch (type) {
             case "boolean":
+                PresentationContext._ensureValueNode(targetId);
                 dojo.require("chiba.widget.Boolean");
                 if (value != null) {
                     if (value == "false") {
@@ -184,6 +203,7 @@ PresentationContext.prototype.handleStateChanged = function(targetId, targetName
             case "base64Binary":
                 if (targetName == 'output') break;
 
+                PresentationContext._ensureValueNode(targetId);
                 dojo.require("chiba.widget.Upload");
 
                 var uploadWidget = dojo.widget.createWidget("chiba:Upload",
@@ -198,6 +218,7 @@ PresentationContext.prototype.handleStateChanged = function(targetId, targetName
                 break;
 
             case "time":
+                PresentationContext._ensureValueNode(targetId);
                 dojo.require("chiba.widget.DropdownTimePicker");
 
                 var dateWidget = dojo.widget.createWidget("chiba:DropdownTimePicker",
@@ -209,10 +230,12 @@ PresentationContext.prototype.handleStateChanged = function(targetId, targetName
                     datatype:"time"
                 },
                         dojo.byId(targetId + "-value"));
-
+                //$$ #1213
+                PresentationContext._setReadonlyProperty(target, eval(readonly), type); 
                 break;
             case "date":
             case "dateTime":
+                PresentationContext._ensureValueNode(targetId);
                 dojo.require("chiba.widget.DropdownDatePicker");
 
                 var dateWidget = dojo.widget.createWidget("chiba:DropdownDatePicker",
@@ -224,6 +247,9 @@ PresentationContext.prototype.handleStateChanged = function(targetId, targetName
                     datatype:"date"
                 },
                         dojo.byId(targetId + "-value"));
+                //$$ #1213
+                PresentationContext._setReadonlyProperty(target, eval(readonly), type); 
+
 
                 break;
             case "string":
@@ -241,15 +267,18 @@ PresentationContext.prototype.handleStateChanged = function(targetId, targetName
             //other types...
                 dojo.debug("PresentationContext.prototype.handleStateChanged: Unknown type for control:'", type, "'", this, dojo.byId(targetId));
                 break;
-
-
         }
-
+        if ((value != undefined) && (value != null)) {
+            PresentationContext._setControlValue(targetId, value, type);
+        }
     }
      else if (target.className != null && target.className.indexOf("xsd-") != -1 && type != "group") {
         dojo.debug("PresentationContext.prototype.handleStateChanged: Destroy existing widget and create new " + type + " widget");
         var classType = target.className.substring(target.className.indexOf("xsd-"), target.className.length);
         classType = classType.substring(0, classType.indexOf(" "));
+        if (value != null) {
+            PresentationContext._setControlValue(targetId, value, type);
+        }
 
         if(classType != "xsd-"+type){
             tmpControl.destroy();
@@ -344,13 +373,29 @@ PresentationContext.prototype.handleStateChanged = function(targetId, targetName
             }
         }
     }
-    else if (type == "xsd-boolean") {
+    // else if (type == "xsd-boolean") { // $$
+    else if (type == "boolean") { // #1489
         tmpControl.checked = value;
         tmpControl.xfreadonly = readonly;
-    } else if (type == "xsd-date" && value != undefined) {
+        PresentationContext._setControlValue(targetId, value, type);
+    //} else if (type == "xsd-date" && value != undefined) { //$$
+    } else if (type == "date" && value != undefined) { // #1489
         tmpControl.setValue(value);
     }
-
+    //$$ **
+    if (valid != null) {
+        PresentationContext._setValidProperty(target, eval(valid));
+    }
+    if (readonly != null) {
+        PresentationContext._setReadonlyProperty(target, eval(readonly), type);
+    }
+    if (required != null) {
+        PresentationContext._setRequiredProperty(target, eval(required));
+    }
+    if (enabled != null) {
+        PresentationContext._setEnabledProperty(target, eval(enabled));
+    }
+    //$$ **
   //dojo.debug(dojo.byId(targetId).className);
     //dojo.debug(getClassComponent(dojo.byId(targetId).className, 1));
 
@@ -523,7 +568,9 @@ PresentationContext._setReadonlyProperty = function(target, readonly, type) {
         _replaceClass(target, "readonly", "readwrite");
     }
     var targetId = target.getAttribute("id");
-    if (type=="xsd-date" || type=="xsd-dateTime" || type == "xsd-time"  || _hasClass(dojo.byId(target),"xsd-date")) {
+//    if (type=="xsd-date" || type=="xsd-dateTime" || type == "xsd-time"  || _hasClass(dojo.byId(target),"xsd-date")) { // initial
+    //$$ #1213
+    if (type=="date" || type=="dateTime" || type == "time" || type=="xsd-date" || type=="xsd-dateTime" || type == "xsd-time" || _hasClass(dojo.byId(target),"xsd-date")) {
         var tmpWidget = dojo.widget.byId(targetId + "-value");
         if (tmpWidget) {
             tmpWidget.updateReadonly(readonly);
@@ -774,6 +821,24 @@ PresentationContext._setRequiredProperty = function(target, required) {
     if (required) {
         _replaceClass(target, "optional", "required");
 //        new Effect.Pulsate(document.getElementById(target.id + "-label"));
+        //$$ ** #1156
+        var idx = 0;
+        while (idx < target.childNodes.length) {
+            var label = target.childNodes[idx];
+            if (label.nodeName.toLowerCase() == "label") {
+                var children = label.childNodes;
+                if (children.length < 2) {
+                    var thespan = document.createElement('span');
+                    thespan.setAttribute('class', 'required-symbol');
+                    var star = document.createTextNode('*');
+                    thespan.appendChild(star);
+                    label.appendChild(thespan);
+                }
+                break;
+            }
+            idx++;
+        }
+        //$$ ** #1156
     }
     else {
         _replaceClass(target, "required", "optional");
@@ -829,7 +894,7 @@ PresentationContext._setControlValue = function(targetId, value, type) {
     //  dojo.debug("PresentationContext.setControlValue: value= '" + value + "'");
 
     var control = document.getElementById(targetId + "-value");
-    if (control == null) {
+    if (control == null) { 
         alert("value for '" + targetId + "' not found");
         return;
     }
@@ -1438,19 +1503,21 @@ PresentationContext._deleteSelectorItem = function(targetId, originalId, positio
         }
     }
 
-    var deleteItem = items[deleteIndex];
-    if (itemset && itemset.nodeName.toLowerCase() == "optgroup")
-    {
-        var optionIndex = _findIndexOfOption(itemset.parentNode, deleteItem);
-        //find the id of the select tag above
-        var select_id = itemset.parentNode.getAttribute("id");
-        if (_isCloned(select_id))
+    if ((deleteIndex < items.length) && (deleteIndex != -1)) { // #1345
+        var deleteItem = items[deleteIndex];
+        if (itemset && itemset.nodeName.toLowerCase() == "optgroup")
         {
-            _updateSizeOfClone(select_id, "clone-" + select_id, optionIndex);
+            var optionIndex = _findIndexOfOption(itemset.parentNode, deleteItem);
+            //find the id of the select tag above
+            var select_id = itemset.parentNode.getAttribute("id");
+            if (_isCloned(select_id))
+            {
+                _updateSizeOfClone(select_id, "clone-" + select_id, optionIndex);
+            }
         }
+        // delete item
+        itemset.removeChild(deleteItem);
     }
-    // delete item
-    itemset.removeChild(deleteItem);
 };
 
 /**

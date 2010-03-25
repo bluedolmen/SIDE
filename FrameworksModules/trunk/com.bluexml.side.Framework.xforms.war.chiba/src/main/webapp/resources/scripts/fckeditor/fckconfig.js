@@ -105,6 +105,16 @@ FCKConfig.ToolbarSets["Chiba"] = [
     ['OrderedList','UnorderedList']
 ] ;
 
+FCKConfig.ToolbarSets["bluexml"] = [
+    ['Style','-','FontFormat','FontName','FontSize','TextColor','BGColor'],
+    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+    ['OrderedList','UnorderedList'],
+    '/',
+    ['Cut','Copy','Paste'],
+    ['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
+    ['Preview','Source']
+] ;
+
 
 FCKConfig.ContextMenu = ['Generic','Link','Anchor','Image','Flash','Select','Textarea','Checkbox','Radio','TextField','HiddenField','ImageButton','Button','BulletedList','NumberedList','Table','Form'] ;
 

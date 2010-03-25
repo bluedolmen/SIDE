@@ -435,6 +435,30 @@ function _handleServerEvent(context, type, targetId, targetName, properties) {
     }
 }
 
+function getXFormsControlLabel(controlName, hasInnerText) {
+	var node = document.getElementById(controlName + "-label");
+	
+	if (node) {
+		var initialText;
+		var pos;
+		if (hasInnerText) {
+			initialText = node.innerText;
+		} else {
+			initialText = node.textContent;
+		}
+		pos = initialText.lastIndexOf("*");
+		if (pos != -1) { // has required symbol
+			initialText = initialText.substring(0, pos);
+		}
+		pos = initialText.lastIndexOf(" :");
+		if (pos != -1) { 
+			initialText = initialText.substring(0, pos);
+		}
+		return initialText;
+	} else {
+		return ""; // this should never happen... normally.
+	}
+}
 
 var submissionErrors = 0;
 function _highlightFailedRequired(properties) {
@@ -444,27 +468,63 @@ function _highlightFailedRequired(properties) {
         submissionErrors = 0;
     }
 
+    //$$
     // show an alert if the user repeatedly sends incomplete data
     if (submissionErrors >= 1) {
-        alert("Please provide values for all required fields.")
+		//## Collect the names of required fields that have no value
+	    var fields = [];
+	    var labelnames = [];
+	    var namelist = "";
+	    var isFirst = true;
+	    var hasInnerText = (document.getElementsByTagName("body")[0].innerText !== undefined) ? true : false;
+	    
+	    var required = document.getElementsByClassName("required", "chibaform");
+	    
+	    for (var ii = 0,len = required.length; ii < len; ii++) {
+	    	var fieldname = required[ii].id;
+	        var control = $(fieldname);
+		    var value = getXFormsControlValue(control);
+	        if (value === null || value === "") {
+		        var label = getXFormsControlLabel(fieldname, hasInnerText);
+		        if (label === null || label === "") {
+		            // nothing to do
+		        } else {
+		            fields.push(label);
+		            labelnames.push(fieldname + "-label");
+		        }
+		    }
+	    }
+
+	    //## 
+	    if (fields.length > 0) {
+	        namelist = fields.join(", ");
+            alert("Please provide values for all required fields (" + namelist + ").");
+        } else {
+            alert("Please provide values for all required fields.");
+        }
         submissionErrors = 0;
     }
 
-    //lookup all required fields and check if they contain a value
-    var foo = document.getElementsByClassName("required", "chibaform");
-    for (var i = 0,j = foo.length; i < j; i++) {
-        var control = $(foo[i].id);
+	if (fields) {
+		// we've already seen the labels to pulsate so don't lookup again
+		for (var idx = 0; idx < fields.length; idx++) {
+			new Effect.Pulsate($(labelnames[idx]));
+		}
+	} else {
+	    //lookup all required fields and check if they contain a value
+	    var foo = document.getElementsByClassName("required", "chibaform");
+	    for (var i = 0,j = foo.length; i < j; i++) {
+	        var control = $(foo[i].id);
+	        var value = getXFormsControlValue(control);
+	        if (value === null || value === "") {
+	            new Effect.Pulsate($(foo[i].id + "-label"));
+	        }
+	    }
+	}
 
-        var value = getXFormsControlValue(control);
-        if (value == null || value == "") {
-            new Effect.Pulsate($(foo[i].id + "-label"));
-        }
-
-    }
     new Effect.Pulsate(document.getElementById("required-msg"));
     submissionErrors ++;
 }
-
 
 /* help function - still not ready */
 function showHelp(helptext) {
