@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -37,6 +38,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
+import org.osgi.framework.Bundle;
 
 import com.bluexml.side.Workflow.modeler.WorkflowPlugin;
 import com.bluexml.side.workflow.Action;
@@ -185,8 +187,10 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 		composite.setLayout(new GridLayout(1, false));
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
-		javaClass = new Combo(composite, SWT.NULL);
-		javaClass.setItems(new String[] { "org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript" });
+		if (inEnterpriseVersion()) {
+			javaClass = new Combo(composite, SWT.NULL);
+			javaClass.setItems(new String[] { "org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript" });
+		}
 
 		scriptTxt = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL
 				| SWT.BORDER);
@@ -195,6 +199,11 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 		return scriptItem;
 	}
 	
+	private boolean inEnterpriseVersion() {
+		Bundle b = Platform.getBundle("com.bluexml.side.Integration.eclipse.builder");
+		return (b != null);
+	}
+
 	/**
 	 * Initialize the content of the widgets
 	 */
@@ -204,9 +213,11 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 			s = action.getScript().get(0);
 		if (s != null && s.getExpression() != null)
 			scriptTxt.setText(s.getExpression());
-		javaClass.setText("org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
-		if (action.getJavaClass() != null && action.getJavaClass().length() > 0)
-			javaClass.setText(action.getJavaClass().replaceAll("\"", ""));
+		if (inEnterpriseVersion()) {
+			javaClass.setText("org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
+			if (action.getJavaClass() != null && action.getJavaClass().length() > 0)
+				javaClass.setText(action.getJavaClass().replaceAll("\"", ""));
+		}
 	}
 
 	/**
@@ -218,7 +229,13 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 		data = new HashMap<String,Object>();
 		try {
 			data.put(ACTION_SCRIPT, scriptTxt.getText());
-			data.put(ACTION_JAVA_CLASS, javaClass.getText());
+			if (inEnterpriseVersion())
+				data.put(ACTION_JAVA_CLASS, javaClass.getText());
+			else {
+				data.put(ACTION_JAVA_CLASS, "org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
+				if (action.getJavaClass() != null && action.getJavaClass().length() > 0)
+					data.put(ACTION_JAVA_CLASS, action.getJavaClass().replaceAll("\"", ""));
+			}
 			data.put(ACTION_VARIABLE, inputParameters.getData());
 			super.okPressed();
 		} catch (Exception e) {
