@@ -958,8 +958,9 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Gets the real object pointed by the given object in case this one is a proxy. If it's not a
-	 * proxy, the given object is returned as is.
+	 * Gets the real object pointed by the given object in case this one is a proxy (i.e. it
+	 * references a real object that is located in another resource file). If it's not a proxy, the
+	 * given object is returned as is.
 	 * 
 	 * @param object
 	 *            a model element

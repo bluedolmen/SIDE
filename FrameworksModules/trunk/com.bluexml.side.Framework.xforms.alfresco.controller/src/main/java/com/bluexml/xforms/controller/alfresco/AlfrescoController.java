@@ -1056,21 +1056,10 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * 
 	 * @param transaction
 	 *            the transaction
-	 * @param type
-	 *            the content type to search
-	 * @param query
-	 *            the search keyword string
-	 * @param maxResults
-	 *            the max number of items allowed in the result set
-	 * @param format
-	 *            the pattern for formatting labels of the list items
-	 * @param maxLength
-	 *            the length at which labels computed using the format are truncated<br/>
-	 * @param identifier
-	 *            the local name of a property whose value will be used as the id of results. If
-	 *            <code>null</code>, the noderef id is used. If non-<code>null</code>, SHOULD be an
-	 *            actual identifier guaranteed to be unique in the value set<br/>
-	 * @return the list
+	 * @param bean
+	 *            a bean for parameters, will allow us to extend the parameter set without changing
+	 *            the signature
+	 * @return the list document
 	 * 
 	 * @throws ServletException
 	 */
@@ -1099,15 +1088,10 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 
 		parameters.put("type", type);
 		parameters.put("format", StringUtils.trimToEmpty(format));
-		parameters.put("maxLength", StringUtils.trimToEmpty(maxLength));
+		parameters.put("maxLength", maxLength); // always provided in the URI
 		parameters.put("identifier", StringUtils.trimToEmpty(identifier));
 		parameters.put("filterAssoc", StringUtils.trimToEmpty(filterAssoc));
-
-		if (compositionStatus.equals("composition")) {
-			parameters.put("isComposition", "1");
-		} else {
-			parameters.put("isComposition", "0");
-		}
+		parameters.put("isComposition", compositionStatus); // always provided in the URI
 
 		String q = StringUtils.trimToNull(query);
 		if (q != null) {

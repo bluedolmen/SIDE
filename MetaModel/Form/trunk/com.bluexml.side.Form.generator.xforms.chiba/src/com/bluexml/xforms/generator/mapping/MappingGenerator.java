@@ -722,7 +722,7 @@ public class MappingGenerator extends AbstractGenerator {
 				taskType.setDataForm(attached.getId());
 			} else {
 				monitor.addErrorTextAndLog("No data form attached to workflow form '" + formName
-						+ "'", null, null);
+						+ "'. Please check that this is indeed your intent.", null, null);
 			}
 			taskType.setTitle(formWorkflow.getLabel());
 
@@ -744,7 +744,7 @@ public class MappingGenerator extends AbstractGenerator {
 			}
 			if (StringUtils.trimToNull(swimlane.getActorid() + swimlane.getPooledactors()) == null) {
 				throw new RuntimeException("Wrong assignment in form '" + formName
-						+ "'. Needs either 'actorId' or 'pooledActors'");
+						+ "'. Needs either 'actorId' or 'pooledActors'.");
 			}
 			taskType.setActorId(swimlane.getActorid());
 			taskType.setPooledActors(swimlane.getPooledactors());
@@ -913,13 +913,7 @@ public class MappingGenerator extends AbstractGenerator {
 		ModelElement ref = (ModelElement) formGenerator.getRealObject(field.getRef());
 		if (formContainer instanceof FormClass) {
 			FormClass formClass = (FormClass) formContainer;
-			Clazz realClass = null;
-			try {
-				realClass = (Clazz) formGenerator.getRealObject(formClass.getReal_class());
-			} catch (ClassCastException cce) {
-				throw new RuntimeException("The model element in property <Real class> of form '"
-						+ formClass.getId() + "' is not a class.");
-			}
+			Clazz realClass = getRealClassForFormClass(formClass);
 			//
 			// check that the ref'ed attribute is legitimate for this FormClass
 			if (checkClassAttributeInclusion(realClass, ref) == false) {
@@ -1011,6 +1005,22 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
+	 * @param formClass
+	 * @return
+	 * @throws RuntimeException
+	 */
+	private Clazz getRealClassForFormClass(FormClass formClass) throws RuntimeException {
+		Clazz realClass = null;
+		try {
+			realClass = (Clazz) formGenerator.getRealObject(formClass.getReal_class());
+		} catch (ClassCastException cce) {
+			throw new RuntimeException("The model element in property <Real class> of form '"
+					+ formClass.getId() + "' is not a class.");
+		}
+		return realClass;
+	}
+
+	/**
 	 * Computes the name of an attribute as specified in the Alfresco models.
 	 * 
 	 * @param classe
@@ -1038,11 +1048,13 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/**
 	 * Checks that the field reference belongs to the class reference, taking into account
-	 * generalizations. If the attribute is directly included in the class or comes from a parent
-	 * class, then the return value if <em>true</em>.
+	 * generalizations and aspects. If the attribute is directly included in the class or comes from
+	 * a parent class or a linked aspect, then the return value if <em>true</em>.
 	 * 
 	 * @param classRef
+	 *            the class the form is supposed to be based on
 	 * @param fieldRef
+	 *            the element pointed to by the 'ref' property of the form field
 	 * @return false if the field reference is not a class diagram attribute or does not belong to
 	 *         the given class. True otherwise.
 	 */
@@ -1275,9 +1287,6 @@ public class MappingGenerator extends AbstractGenerator {
 
 		modelChoiceType.setDisplayLabel(modelChoiceField.getLabel()); // #1212
 
-		if (modelChoiceField.getWidget() == ModelChoiceWidgetType.INLINE) {
-			modelChoiceType.setInline(true); // optional attribute
-		}
 		modelChoiceType.setMaxBound(modelChoiceField.getMax_bound());
 		modelChoiceType.setMinBound(modelChoiceField.getMin_bound());
 		modelChoiceType.setUniqueName(FormGeneratorsManager.getUniqueName(modelChoiceField));
@@ -1286,27 +1295,61 @@ public class MappingGenerator extends AbstractGenerator {
 		// #980
 		String alfrescoName = formGenerator.getAlfrescoName(modelChoiceField.getReal_class(), ref);
 
-		Association asso = (Association) formGenerator.getRealObject(ref);
-		if (asso.isOrdered()) {
-			modelChoiceType.setOrdered(true);
-		}
 		modelChoiceType.setAlfrescoName(alfrescoName);
 		modelChoiceType.setRealClass(copyClassType(getClassType(modelChoiceField.getReal_class())));
 
 		EList<FormContainer> targets = modelChoiceField.getTarget();
+		int nbAddedTargets = 0;
 		for (FormContainer target : targets) {
 			if (target instanceof FormClass) {
 				FormType childFormType = newFormType(target);
 				modelChoiceType.getTarget().add(childFormType);
+				nbAddedTargets++;
 			}
 		}
 
-		// field size
+		//
+		// optional attributes and applicable verifications
+		//
+		if (modelChoiceField.getWidget() == ModelChoiceWidgetType.INLINE) {
+			modelChoiceType.setInline(true);
+			if (nbAddedTargets == 0) {
+				throw new RuntimeException(
+						"Association '"
+								+ modelChoiceType.getDisplayLabel()
+								+ "' has 'Inline' property set to 'true', which REQUIRES at least one form in the 'Target' property. Please add a target FormClass.");
+			}
+			// the first target cannot be based on an abstract class
+			FormContainer target = modelChoiceField.getTarget().get(0);
+			if (isUnderlyingClassAbstract((FormClass) target)) {
+				throw new RuntimeException("The first form in the 'Target' property of form '"
+						+ modelChoiceType.getDisplayLabel()
+						+ "' MUST NOT be based on an abstract class.");
+			}
+
+		}
+		//
+		Association asso = (Association) formGenerator.getRealObject(ref);
+		if (asso.isOrdered()) {
+			modelChoiceType.setOrdered(true);
+		}
+		//
 		if (modelChoiceField.getField_size() > 0) {
 			String lsize = "" + modelChoiceField.getField_size();
 			modelChoiceType.setFieldSize(StringUtils.trim(lsize));
 		}
 
+	}
+
+	/**
+	 * Tells whether the underlying class of a form is an abstract class.
+	 * 
+	 * @param form
+	 * @return true if the real class is abstract
+	 */
+	private boolean isUnderlyingClassAbstract(FormClass form) {
+		Clazz realClass = getRealClassForFormClass(form);
+		return realClass.isAbstract();
 	}
 
 	/*

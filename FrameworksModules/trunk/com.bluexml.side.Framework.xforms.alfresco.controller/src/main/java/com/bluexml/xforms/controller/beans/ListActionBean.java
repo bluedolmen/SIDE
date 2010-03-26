@@ -10,13 +10,40 @@ package com.bluexml.xforms.controller.beans;
  * 
  */
 public class ListActionBean {
+	/** Namespaceprefix'ed content type to search, e.g. "wagramLeadsMgmt:Contact" or "cm:person" */
 	private String dataType;
+
+	/** Search keywords string */
 	private String query;
+
+	/** Max number of items allowed in the result set */
 	private String maxResults;
+
+	/** Pattern for formatting labels of the list items */
 	private String format;
+
+	/** Length at which labels computed using the format are truncated (if not "0") */
 	private String maxLength;
+
+	/**
+	 * Local name of a property whose value will be used as the id of results. If <code>null</code>,
+	 * the noderef id is used. If non-<code>null</code>, SHOULD be: 1- an actual property of the
+	 * data type being searched, 2- an actual identifier guaranteed to be unique in the value set.
+	 * e.g.: for "cm:person", an identifier field may be "userName".
+	 */
 	private String identifier;
+
+	/**
+	 * The association by which the list is filtered server-side. May be non-<code>null</code>
+	 * depending on the cardinalities in the model. If <code>null</code>, no filtering will occur.
+	 * See FormsGeneratorManager.isAssociationFilterable for an example.
+	 */
 	private String filterAssoc;
+
+	/**
+	 * Whether the filering association is a composition, in which case, the value is "1".
+	 * Otherwise, "0".
+	 */
 	private String compositionStatus;
 
 	/**
