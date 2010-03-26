@@ -231,11 +231,8 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 			data.put(ACTION_SCRIPT, scriptTxt.getText());
 			if (inEnterpriseVersion())
 				data.put(ACTION_JAVA_CLASS, javaClass.getText());
-			else {
+			else
 				data.put(ACTION_JAVA_CLASS, "org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
-				if (action.getJavaClass() != null && action.getJavaClass().length() > 0)
-					data.put(ACTION_JAVA_CLASS, action.getJavaClass().replaceAll("\"", ""));
-			}
 			data.put(ACTION_VARIABLE, inputParameters.getData());
 			super.okPressed();
 		} catch (Exception e) {
