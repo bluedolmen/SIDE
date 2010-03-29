@@ -72,7 +72,7 @@ public class Generate extends DeclarativeWebScript {
 		generator.setNumberOfNodes(Integer.valueOf(numOfContentsParameterValue));
 		generator.setNumberOfOutputArcs(Integer.valueOf(numOfOutPutArcsParameterValue));
 		generator.setScenario(scenarioParameterValue);
-		if (!indexesParameterValue.equals("")){
+		if (!("").equals(indexesParameterValue)){
 			generator.setSavedStartIndexAttribute(Integer.valueOf(indexesParameterValue));
 		}
 		else{
