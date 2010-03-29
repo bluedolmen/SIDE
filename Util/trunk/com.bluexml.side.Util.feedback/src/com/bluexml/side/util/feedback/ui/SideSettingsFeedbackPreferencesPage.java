@@ -44,7 +44,7 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 
 	protected static int MAXIMUM_PERIOD_IN_DAYS = 90;
 
-	protected static int MINIMUM_PERIOD_IN_DAYS = 0;
+	protected static int MINIMUM_PERIOD_IN_DAYS = 7;
 
 	private Label label;
 	private Text lastUploadText;
