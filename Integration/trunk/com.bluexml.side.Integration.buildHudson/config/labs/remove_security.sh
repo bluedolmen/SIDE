@@ -47,6 +47,8 @@ for f in `find $SOURCE_PATH -type d -name ".svn"`; do
 done
 
 
+perl -ni -e 'print unless /com.bluexml.side.Integration.eclipse.builder/' $SOURCE_PATH/S-IDE/MetaModel/Common/trunk/com.bluexml.side.Common.core.feature/feature.xml
+
 
 echo "Process java file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "*.java"`; do
