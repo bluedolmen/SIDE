@@ -38,6 +38,7 @@ cd $BUILD_PATH
 #done
 rm -rf $SOURCE_PATH/S-IDE/Util/trunk/com.bluexml.side.Util.security
 rm -rf $SOURCE_PATH/S-IDE/Experimental
+rm -rf $SOURCE_PATH/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.builder
 
 # delete svn folder
 echo "Delete svn folder"
