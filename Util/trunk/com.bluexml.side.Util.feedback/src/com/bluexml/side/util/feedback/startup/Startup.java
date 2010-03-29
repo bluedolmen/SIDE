@@ -13,7 +13,7 @@ import com.bluexml.side.util.feedback.ui.PopUpDialogBox;
 public class Startup implements IStartup {
 
 	public void earlyStartup() {
-		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+		/*PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				// Get preferences :
 				int pref = FeedbackActivator.getFeedBackPreference();
@@ -41,6 +41,6 @@ public class Startup implements IStartup {
 					FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.LAST_UPDATE_DATE, nowDate.getTime());
 				}
 			}
-		});
+		});*/
 	}
 }
