@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
@@ -38,7 +39,6 @@ import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.Requirements.modeler.actions.engine.MatchEngine;
 import com.bluexml.side.Util.ecore.EResourceUtils;
-import com.bluexml.side.integration.eclipse.builder.SIDEBuilderUtil;
 import com.bluexml.side.requirements.Annotation;
 import com.bluexml.side.requirements.Goal;
 import com.bluexml.side.requirements.Privilege;
@@ -105,7 +105,7 @@ public class BackupSpecification implements IObjectActionDelegate {
 				if (cont) {
 					try {
 						requirements_model.refreshLocal(IResource.DEPTH_ONE, null);
-						IFile backupModel = SIDEBuilderUtil.getBackupModel(requirements_model);
+						IFile backupModel = getBackupModel(requirements_model);
 
 						Resource res = getResource(requirements_model);
 						RequirementsDefinition reqDefs = getDefinition(res);
@@ -141,7 +141,7 @@ public class BackupSpecification implements IObjectActionDelegate {
 							target = target.append(".backup."+nameFile);
 							IResource container = backupModel.getParent(); 
 							if (!container.exists() && container instanceof IFolder)
-								SIDEBuilderUtil.prepareFolder((IFolder) container);
+								prepareFolder((IFolder) container);
 							requirements_model.copy(target, true, null);
 
 							//compute risk
@@ -155,9 +155,26 @@ public class BackupSpecification implements IObjectActionDelegate {
 			}
 		}
 	}
+	
+	 protected void prepareFolder(IFolder folder) throws CoreException
+		{
+			IContainer parent = folder.getParent();
+			if (parent instanceof IFolder)
+				prepareFolder((IFolder) parent);
+			if (!folder.exists())
+				folder.create(true, true, null);
+		}
 
+	protected IFile getBackupModel(IFile file) {
+		IPath path = file.getFullPath().removeFirstSegments(1);
+		IFolder folder = file.getProject().getFolder(".metadata");
+		folder = folder.getFolder(path.removeLastSegments(1));
+		path = folder.getFullPath().append(file.getName());	
+		return file.getProject().getFile(path.removeFirstSegments(1));
+	}
+	
 	private void computeRisk(IFile reqModel, String version) {
-		IFile backupModel = SIDEBuilderUtil.getBackupModel(reqModel);
+		IFile backupModel = getBackupModel(reqModel);
 			
 		try {
 			String fileName = ".analysis." + reqModel.getName();
@@ -258,7 +275,7 @@ public class BackupSpecification implements IObjectActionDelegate {
 	private void initializeAnalysisModel(IFile analysisModel) throws Exception {
 		IResource container = analysisModel.getParent();
 		if (container instanceof IFolder)
-			SIDEBuilderUtil.prepareFolder((IFolder) container);
+			prepareFolder((IFolder) container);
 		
 		RequirementsResourceFactory factory = new RequirementsResourceFactory();
 		RequirementsResource res = (RequirementsResource) factory.createResource(URI.createURI(analysisModel.getFullPath().toString()));

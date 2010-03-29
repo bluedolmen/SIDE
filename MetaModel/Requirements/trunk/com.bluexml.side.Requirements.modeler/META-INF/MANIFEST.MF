@@ -20,7 +20,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  com.bluexml.side.Util.libs,
  com.bluexml.side.Util.ecore,
- com.bluexml.side.Integration.eclipse.builder,
  org.eclipse.emf.compare.match,
  org.eclipse.emf.compare,
  com.bluexml.side.Requirements.editor
