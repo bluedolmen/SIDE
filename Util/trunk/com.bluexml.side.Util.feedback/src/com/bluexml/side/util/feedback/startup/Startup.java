@@ -13,12 +13,22 @@ import com.bluexml.side.util.feedback.ui.PopUpDialogBox;
 public class Startup implements IStartup {
 
 	public void earlyStartup() {
-		/*PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+		
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				// Get preferences :
+				int prefp = FeedbackActivator.getFeedbackUploadPeriodPreference();
+				if (prefp==0){
+					FeedbackActivator.setFeedbackUploadPeriod(7);
+				}
+				
 				int pref = FeedbackActivator.getFeedBackPreference();
-				if (pref == 0 ||
-						pref == FeedbackActivator.FEEDBACK_PREF_NOTNOW ||
+				if (pref == 0 ){
+					FeedbackActivator.setFeedBackPreference(FeedbackActivator.FEEDBACK_PREF_ALWAYS);
+				}
+					
+				if (
+					pref == FeedbackActivator.FEEDBACK_PREF_NOTNOW ||
 							pref == FeedbackActivator.FEEDBACK_PREF_NOW) {
 					// Get last update date
 					Long longDate = FeedbackActivator.getDefault().getPreferenceStore().getLong(FeedbackActivator.LAST_UPDATE_DATE);
@@ -41,6 +51,6 @@ public class Startup implements IStartup {
 					FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.LAST_UPDATE_DATE, nowDate.getTime());
 				}
 			}
-		});*/
+		});
 	}
 }
