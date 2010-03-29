@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Requirements modeler
 Bundle-SymbolicName: com.bluexml.side.Requirements.modeler; singleton:=true
-Bundle-Version: 1.0.49.v14457-20100212
+Bundle-Version: 1.0.50.v15971-20100329
 Bundle-Activator: com.bluexml.side.Requirements.modeler.RequirementsPlugin
 Bundle-Vendor: BlueXML
 Bundle-Localization: plugin
