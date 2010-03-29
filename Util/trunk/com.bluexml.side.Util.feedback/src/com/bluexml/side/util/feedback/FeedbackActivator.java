@@ -35,7 +35,7 @@ public class FeedbackActivator extends AbstractUIPlugin {
 	public static final String TERM_OF_USE = "termOfUse";
 
 	// Default Value
-	public static final int FEEDBACK_DEFAULT_PERIOD_IN_DAY = 5;
+	public static final int FEEDBACK_DEFAULT_PERIOD_IN_DAY = 7;
 	public static final int FEEDBACK_PREF_NEVERSETTED = 0;
 
 	// Possible value Value
