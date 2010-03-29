@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Requirements.feature" label="SIDE Requirement Modeler" version="1.0.90.v14527-20100216" provider-name="BlueXML">
+<feature id="com.bluexml.side.Requirements.feature" label="SIDE Requirement Modeler" version="1.0.91.v15971-20100329" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based graphical modeler of requirement models and includes transformation and interpretation of these models to various human-readable classical formats.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -21,7 +21,7 @@
   <plugin id="com.bluexml.side.Requirements" download-size="0" install-size="0" version="1.0.34.v13286-20100127" unpack="false" />
   <plugin id="com.bluexml.side.Requirements.edit" download-size="0" install-size="0" version="1.0.31.v13286-20100127" unpack="false" />
   <plugin id="com.bluexml.side.Requirements.editor" download-size="0" install-size="0" version="1.0.30.v13286-20100127" unpack="false" />
-  <plugin id="com.bluexml.side.Requirements.modeler" download-size="0" install-size="0" version="1.0.49.v14457-20100212" unpack="false" />
+  <plugin id="com.bluexml.side.Requirements.modeler" download-size="0" install-size="0" version="1.0.50.v15971-20100329" unpack="false" />
   <plugin id="com.bluexml.side.Requirements.generator" download-size="0" install-size="0" version="1.0.42.v14527-20100216" unpack="false" />
 </feature>
 
