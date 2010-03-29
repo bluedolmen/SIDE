@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-  <feature url="features/com.bluexml.side.Common.core.feature_1.0.172.v15927-20100327.jar" id="com.bluexml.side.Common.core.feature" version="1.0.172.v15927-20100327">
+  <feature url="features/com.bluexml.side.Common.core.feature_1.0.173.v15941-20100329.jar" id="com.bluexml.side.Common.core.feature" version="1.0.173.v15941-20100329">
     <category name="SIDE" />
   </feature>
   <feature url="features/com.bluexml.side.Common.sideForAlfresco.feature_1.0.135.v15927-20100327.jar" id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.135.v15927-20100327">
