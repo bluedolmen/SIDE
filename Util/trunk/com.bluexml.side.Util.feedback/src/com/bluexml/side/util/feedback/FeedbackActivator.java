@@ -29,7 +29,7 @@ public class FeedbackActivator extends AbstractUIPlugin {
 	public static final long MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 
 	// Key
-	public static final String FEEDBACK_PREFERENCE = "DoFeedback";
+	public static final String FEEDBACK_PREFERENCE = "1";
 	public static final String FEEDBACK_PERIOD_PREFERENCE = "feedbackPeriod";
 	public static final String LAST_UPDATE_DATE = "lastUpdateDate";
 	public static final String TERM_OF_USE = "termOfUse";
