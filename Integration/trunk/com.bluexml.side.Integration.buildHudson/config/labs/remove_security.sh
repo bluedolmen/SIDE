@@ -46,8 +46,6 @@ for f in `find $SOURCE_PATH -type d -name ".svn"`; do
 	rm -rf $f
 done
 
-#delete 
-perl -ni -e 'print unless /com.bluexml.side.Integration.eclipse.builder/' $SOURCE_PATH/S-IDE/MetaModel/Requirements/trunk/com.bluexml.side.Requirements.modeler/META-INF/MANIFEST.MF
 
 
 echo "Process java file to remove reference to package security"
