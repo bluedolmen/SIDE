@@ -48,7 +48,7 @@ done
 
 
 perl -ni -e 'print unless /com.bluexml.side.Integration.eclipse.builder/' $SOURCE_PATH/S-IDE/MetaModel/Common/trunk/com.bluexml.side.Common.core.feature/feature.xml
-
+perl -p -i -e 's/splash-EE.bmp/splash-LABS.bmp/g' $SOURCE_PATH/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/build.properties
 
 echo "Process java file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "*.java"`; do
