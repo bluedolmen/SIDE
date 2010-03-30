@@ -52,7 +52,7 @@ span.submit .value {
 
 .full-group div {
 	display: block;
-	padding: 5px;
+	padding: 5px 5px 5px 0px;
 }
 
 /* keep the Dojo tabs to their initial look*/
