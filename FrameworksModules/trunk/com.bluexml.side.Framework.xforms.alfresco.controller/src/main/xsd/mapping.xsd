@@ -90,6 +90,7 @@
 			<xsd:element name="displayLabel" type="xsd:string" />
 		</xsd:sequence>
 		<xsd:attribute name="mandatory" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="xtension" type="xsd:string" use="optional" />
 	</xsd:complexType>
 	<xsd:complexType name="formFieldType">
 		<xsd:complexContent>
@@ -152,6 +153,7 @@
 				<xsd:attribute name="ordered" type="xsd:boolean" use="optional" />
 				<xsd:attribute name="inline" type="xsd:boolean" use="optional" />
 				<xsd:attribute name="fieldSize" type="xsd:string" use="optional" />
+				<xsd:attribute name="formatPattern" type="xsd:string" use="optional" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

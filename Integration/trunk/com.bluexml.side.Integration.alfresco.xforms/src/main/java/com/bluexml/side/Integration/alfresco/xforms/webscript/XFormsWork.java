@@ -40,6 +40,7 @@ import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.ContentData;
+import org.alfresco.service.cmr.repository.InvalidNodeRefException;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.repository.StoreRef;
@@ -73,6 +74,7 @@ import com.thoughtworks.xstream.XStream;
 
 public class XFormsWork implements RunAsWork<String> {
 
+	private static final String WEBSCRIPT_SEPARATOR = "{::}";
 	/** */
 	private static Log logger = LogFactory.getLog(XFormsWork.class);
 	private static XStream xstream = null;
@@ -257,17 +259,145 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Builds some information about the content of a node.
+	 * Provides information about one or several nodes. Two modes:
+	 * <ol>
+	 * <li>node content information: returns info about the node content. Parameter: "nodeId"
+	 * <li>object information: returns information about the node. Parameters: "ids", "format"
+	 * </ol>
 	 * <p>
-	 * Parameter: "nodeId": complete (store + workspace) id.
-	 * </p>
+	 * See the individual handler functions for the format of the parameters.
 	 * 
 	 * @return an empty string if any problem or the comma-separated string containing the
 	 *         information built. Currently, {full node id}, {content size in bytes}.
 	 */
 	protected String nodeInfo() {
 		String nodeId = parameters.get("nodeId");
+		if (nodeId != null) {
+			return contentInfo(nodeId);
+		}
 
+		String ids = parameters.get("ids");
+		if (ids != null) {
+			String sharedFormat = parameters.get("format");
+			return nodeObjectInfo(ids, sharedFormat);
+		}
+		String datatype = parameters.get("datatype");
+		String identifier = parameters.get("identifier");
+		if (datatype != null) {
+			String format = parameters.get("format");
+			String labelLength = parameters.get("labelLength");
+			String idValue = parameters.get("id");
+			return resolveObjectInfo(datatype, identifier, format, labelLength, idValue);
+		}
+
+		return "";
+	}
+
+	/**
+	 * Finds the node (of the given datatype) that has the given id value on the identifier property
+	 * and formats its noderef id, label and qname into a string that has the format
+	 * "id{SEPARATOR}label{SEPARATOR}prefixed_qname".
+	 * 
+	 * @param datatype
+	 *            a prefixed content type
+	 * @param identifier
+	 *            the local name of a property present in the datatype's definition
+	 * @param format
+	 *            the pattern for formatting the label
+	 * @param labelLength
+	 *            the length at which to truncate the label that will be computed. If "0", no
+	 *            truncation happens.
+	 * @param idValue
+	 *            the value which, when found on the identifier property, elects the node as the one
+	 *            being looked for.
+	 * @return <code>null</code> if either no identifier property was found or no node was found
+	 *         with the id value on that property. Otherwise, returns the info string for the node.
+	 */
+	private String resolveObjectInfo(String datatype, String identifier, String format,
+			String labelLength, String idValue) {
+		// get the identifier property's qname
+		QName idQName = resolveIdentifierQName(identifier, datatype);
+		if (idQName == null) {
+			return null;
+		}
+
+		// get all objects of the datatype
+		ResultSet luceneResultSet = getResultSet(datatype, new ArrayList<String>(), 0);
+		int nbResults = luceneResultSet.length();
+		NodeRef electedNode = null;
+
+		// test each object against the id value
+		for (int i = 0; i < nbResults; i++) {
+			NodeRef nodeRef = luceneResultSet.getNodeRef(i);
+			String nodeValue = resolveIdentifierValue(nodeRef, idQName);
+			if (StringUtils.equals(nodeValue, idValue)) {
+				electedNode = nodeRef;
+				break;
+			}
+		}
+
+		// build the label for the elected node
+		if (electedNode == null) {
+			return null;
+		}
+		// include system properties as this function is likely to be used for system types
+		String label = dataLayer.getLabelForNode(electedNode, format, true);
+		QName qName = serviceRegistry.getNodeService().getType(electedNode);
+		String objectInfo = electedNode.toString() + WEBSCRIPT_SEPARATOR + label
+				+ WEBSCRIPT_SEPARATOR + qName.toPrefixString();
+		return objectInfo;
+	}
+
+	/**
+	 * Builds a string containing some information about the given ids. The ids should refer to
+	 * objects of the same type because there is only one pattern for formatting the node labels.<br/>
+	 * Currently, each information item contains information related to a node under the format:
+	 * "id{SEPARATOR}label{SEPARATOR}prefixed_qname"
+	 * 
+	 * @param ids
+	 *            a comma-separated list of node ids with protocol and store
+	 * @param format
+	 *            the format pattern for the labels
+	 * @return a comma separated list with the same number of items as the list of node ids.
+	 */
+	private String nodeObjectInfo(String ids, String format) {
+		StringBuffer result = new StringBuffer("");
+
+		String[] splittedIds = StringUtils.split(ids, ',');
+		boolean first = true;
+		if (splittedIds != null) {
+			for (String id : splittedIds) {
+				String objectInfo;
+				try {
+					// get the info for each node
+					NodeRef nodeRef = new NodeRef(id);
+					String label = dataLayer.getLabelForNode(nodeRef, format, false);
+					QName qName = serviceRegistry.getNodeService().getType(nodeRef);
+					String qnameStr = qName.toPrefixString();
+					objectInfo = nodeRef.toString() + WEBSCRIPT_SEPARATOR + label
+							+ WEBSCRIPT_SEPARATOR + qnameStr;
+				} catch (InvalidNodeRefException inre) {
+					objectInfo = "<INVALID ID>";
+				}
+				if (first == false) {
+					result.append(',');
+				}
+				result.append(objectInfo);
+				first = false;
+			}
+		}
+		return result.toString();
+	}
+
+	/**
+	 * Builds some information about the content of a node.
+	 * 
+	 * @param nodeId
+	 *            complete (store + workspace) id
+	 * @return an empty string if any problem or the comma-separated string containing the
+	 *         information built. Currently, {full node id},{content size in bytes}.
+	 */
+	private String contentInfo(String nodeId) {
 		try {
 			String result;
 			NodeRef nodeRef = new NodeRef(nodeId);
@@ -1203,7 +1333,8 @@ public class XFormsWork implements RunAsWork<String> {
 				// add the tasks to complete
 				for (WorkflowTask task : tasks) {
 					if (task.state == WorkflowTaskState.IN_PROGRESS) {
-						result.add(task.id + "{::}" + task.name + "{::}" + task.title);
+						result.add(task.id + WEBSCRIPT_SEPARATOR + task.name + WEBSCRIPT_SEPARATOR
+								+ task.title);
 					}
 				}
 			}

@@ -1380,7 +1380,7 @@ public class FormGeneratorsManager {
 	 * @return true if required parameters are found in the appropriate property
 	 */
 	public boolean isFieldSelectionCapable(Field field) {
-		EList<String> xtension = getFieldXtension(field);
+		EList<String> xtension = getXtension(field);
 		if (xtension != null) {
 			String format = getXtensionParameter(xtension, MsgId.MODEL_XTENSION_FORMAT.getText());
 			String type = getXtensionParameter(xtension, MsgId.MODEL_XTENSION_DATATYPE.getText());
@@ -1395,7 +1395,7 @@ public class FormGeneratorsManager {
 	/**
 	 * Returns the given parameter from the list that carries extension definition parameters. These
 	 * must follow the [parameter name]=[parameter value] format, with no whitespace before the "=".<br/>
-	 * The list is searched for a correctly formated parameter until completely visited. If a
+	 * The list is searched for a correctly formatted parameter until completely visited. If a
 	 * parameter is defined several times, only the first occurrence will be seen and used.
 	 * 
 	 * @param xtension
@@ -1420,30 +1420,50 @@ public class FormGeneratorsManager {
 	//
 	//
 	//
-	private EList<String> getFieldXtension(Field field) {
-		return field.getXtension();
+	private EList<String> getXtension(FormElement formElt) {
+		return formElt.getXtension();
 	}
 
-	public String getSelectionCapableFieldFormat(Field field) {
-		EList<String> xtension = getFieldXtension(field);
+	/**
+	 * Gets the content of the extension field as a comma-separated string.
+	 * 
+	 * @param formElt
+	 * @return the string
+	 */
+	public String getXtensionAsString(FormElement formElt) {
+		EList<String> list = formElt.getXtension();
+		StringBuffer result = new StringBuffer("");
+		boolean first = true;
+		for (String item : list) {
+			if (first == false) {
+				result.append(',');
+			}
+			result.append(item);
+			first = false;
+		}
+		return result.toString();
+	}
+
+	public String getXtensionFormat(FormElement formElt) {
+		EList<String> xtension = getXtension(formElt);
 
 		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_FORMAT.getText());
 	}
 
-	public String getSelectionCapableFieldDatatype(Field field) {
-		EList<String> xtension = getFieldXtension(field);
+	public String getXtensionDatatype(Field field) {
+		EList<String> xtension = getXtension(field);
 
 		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_DATATYPE.getText());
 	}
 
-	public String getSelectionCapableFieldIdentifier(Field field) {
-		EList<String> xtension = getFieldXtension(field);
+	public String getXtensionIdentifier(Field field) {
+		EList<String> xtension = getXtension(field);
 
 		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_IDENTIFIER.getText());
 	}
 
-	public String getSelectionCapableFieldLabelLength(Field field) {
-		EList<String> xtension = getFieldXtension(field);
+	public String getXtensionLabelLength(Field field) {
+		EList<String> xtension = getXtension(field);
 
 		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_LABEL_LENGTH.getText());
 	}
@@ -1471,10 +1491,10 @@ public class FormGeneratorsManager {
 	 *            the class for the target items (also the 'real class' property of
 	 *            ModelChoiceField's)
 	 * @param asso
-	 * @return true if the maximum multiplicity on the opposite end of the given class is 1.
+	 * @return true if the maximum multiplicity on the <b>opposite end</b> of the given class is 1.
 	 */
 	public boolean isAssociationFilterable(Clazz formEltClass, Association asso) { // #1536
-		int sourceMaxBound = -1;
+		int maxBound = -1;
 		boolean filtered;
 
 		AssociationEnd srcEnd = (AssociationEnd) getRealObject(asso.getFirstEnd());
@@ -1485,13 +1505,13 @@ public class FormGeneratorsManager {
 		EObject realClass = getRealObject(formEltClass);
 		// we get the max bound from the end opposite to the one where the class is found
 		if (srcClass.equals(realClass)) {
-			sourceMaxBound = Integer.parseInt(targetEnd.getCardMax());
+			maxBound = Integer.parseInt(targetEnd.getCardMax());
 		} else if (targetClass.equals(realClass)) {
-			sourceMaxBound = Integer.parseInt(srcEnd.getCardMax());
+			maxBound = Integer.parseInt(srcEnd.getCardMax());
 		} else {
 			throw new IllegalArgumentException("Uncomparable classes.");
 		}
-		filtered = (sourceMaxBound == 1);
+		filtered = (maxBound == 1);
 		return filtered;
 	}
 

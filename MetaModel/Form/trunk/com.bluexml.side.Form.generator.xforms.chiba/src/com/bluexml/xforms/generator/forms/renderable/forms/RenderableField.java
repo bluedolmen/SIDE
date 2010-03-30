@@ -255,10 +255,10 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 			// ** #1313
 			if (getFormGenerator().isFieldSelectionCapable(charField)) {
 				// ** #1530
-				String format = getFormGenerator().getSelectionCapableFieldFormat(charField);
-				String type = getFormGenerator().getSelectionCapableFieldDatatype(charField);
-				String idProp = getFormGenerator().getSelectionCapableFieldIdentifier(charField);
-				String labelLength = getFormGenerator().getSelectionCapableFieldLabelLength(
+				String format = getFormGenerator().getXtensionFormat(charField);
+				String type = getFormGenerator().getXtensionDatatype(charField);
+				String idProp = getFormGenerator().getXtensionIdentifier(charField);
+				String labelLength = getFormGenerator().getXtensionLabelLength(
 						charField);
 				if (labelLength == null) {
 					labelLength = "0";

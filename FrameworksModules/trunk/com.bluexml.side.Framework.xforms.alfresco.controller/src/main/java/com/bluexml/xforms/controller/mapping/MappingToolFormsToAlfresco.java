@@ -595,7 +595,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 	}
 
 	/**
-	 * Gets the repository content file name.
+	 * Gets the file info bean about the repository content that may be in the class object.
 	 * 
 	 * @param transaction
 	 *            the login

@@ -76,6 +76,11 @@ public class MappingToolCommon {
 
 	private static final String TRACE_LOGGER_CATEGORY = "com.bluexml.xforms.controller.mapping.trace";
 
+	/** The separator used by the webscript for concatenating pieces of info in the same string */
+	protected final String WEBSCRIPT_SEPARATOR = "{::}";
+
+	protected final int WEBSCRIPT_SEPARATOR_LENGTH = WEBSCRIPT_SEPARATOR.length();
+
 	/** The document builder. */
 	protected static DocumentBuilder documentBuilder;
 
@@ -673,12 +678,12 @@ public class MappingToolCommon {
 	}
 
 	/**
-	 * Sub map.
+	 * Gets a submap, i.e. the map of entries whose keys start with the given prefix.
 	 * 
 	 * @param map
-	 *            the map
+	 *            the initial map
 	 * @param start
-	 *            the start
+	 *            the key prefix
 	 * 
 	 * @return the map< string, string>
 	 */
@@ -934,6 +939,51 @@ public class MappingToolCommon {
 		return fieldType.isMandatory();
 	}
 
+	/**
+	 * Gets the value of the extension key for a given field. The format of the xtension string is
+	 * not checked for correction.
+	 * 
+	 * @param fieldType
+	 *            the mapping description of the field
+	 * @param keyStr
+	 *            the key to look for
+	 * @return the value
+	 */
+	private String getXtension(FieldType fieldType, String keyStr) {
+		String extension = fieldType.getXtension();
+		if (extension == null) {
+			return null;
+		}
+		String[] splitted = StringUtils.split(extension, ',');
+		for (String info : splitted) {
+			int pos = info.indexOf('=');
+			if (pos != -1) {
+				String key = info.substring(0, pos);
+				if (key.equals(keyStr)) {
+					String value = info.substring(pos + 1);
+					return value;
+				}
+			}
+		}
+		return null;
+	}
+
+	protected String getXtensionFormat(FieldType fieldType) {
+		return getXtension(fieldType, MsgId.MODEL_XTENSION_FORMAT.getText());
+	}
+
+	protected String getXtensionIdentifier(FieldType fieldType) {
+		return getXtension(fieldType, MsgId.MODEL_XTENSION_IDENTIFIER.getText());
+	}
+
+	protected String getXtensionDataType(FieldType fieldType) {
+		return getXtension(fieldType, MsgId.MODEL_XTENSION_DATATYPE.getText());
+	}
+
+	protected String getXtensionLabelLength(FieldType fieldType) {
+		return getXtension(fieldType, MsgId.MODEL_XTENSION_LABEL_LENGTH.getText());
+	}
+
 	/*
 	 * FileFieldType
 	 */
@@ -1075,9 +1125,45 @@ public class MappingToolCommon {
 		return isStartTask(workflowTaskType);
 	}
 
-	/*
-	 * SUPPORT FOR READ ONLY DATES AND TIMES
+	/**
+	 * Gets the id from a node information string as formatted by
+	 * {@link XFormsWork.wfGetCurrentTasks}.
+	 * 
+	 * @param nodeInfoString
+	 * @return the id.
 	 */
+	protected String getIdFromObjectInfo(String nodeInfoString) {
+		int pos = nodeInfoString.indexOf(WEBSCRIPT_SEPARATOR);
+		String result = nodeInfoString.substring(0, pos);
+		return result;
+	}
+
+	/**
+	 * Gets the label from a node information string as formatted by
+	 * {@link XFormsWork.wfGetCurrentTasks}.
+	 * 
+	 * @param nodeInfoString
+	 * @return the label.
+	 */
+	protected String getLabelFromObjectInfo(String nodeInfoString) {
+		int pos = nodeInfoString.indexOf(WEBSCRIPT_SEPARATOR);
+		int posEnd = nodeInfoString.indexOf(WEBSCRIPT_SEPARATOR, pos + WEBSCRIPT_SEPARATOR_LENGTH);
+		String result = nodeInfoString.substring(pos + WEBSCRIPT_SEPARATOR_LENGTH, posEnd);
+		return result;
+	}
+
+	/**
+	 * Gets the QName from a node information string as formatted by
+	 * {@link XFormsWork.wfGetCurrentTasks}.
+	 * 
+	 * @param nodeInfoString
+	 * @return the qname.
+	 */
+	protected String getQNameFromObjectInfo(String nodeInfoString) {
+		int pos = nodeInfoString.lastIndexOf(WEBSCRIPT_SEPARATOR);
+		String result = nodeInfoString.substring(pos + WEBSCRIPT_SEPARATOR_LENGTH);
+		return result;
+	}
 
 	/**
 	 * Gets the time from date time.
@@ -1245,6 +1331,10 @@ public class MappingToolCommon {
 			contentAttribute.getValue().add(valueName);
 		}
 	}
+
+	/*
+	 * SUPPORT FOR READ ONLY DATES AND TIMES
+	 */
 
 	/**
 	 * Tells whether the data type and read only status provided indicate a special processing.

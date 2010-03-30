@@ -1184,13 +1184,16 @@ public class DataLayer implements DataLayerInterface {
 		for (QName propertyName : names) {
 			if (propertyName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 				PropertyDefinition propertyDef = dictionaryService.getProperty(propertyName);
-				String propTypeName = propertyDef.getDataType().getJavaClassName();
-				if (StringUtils.equalsIgnoreCase(propTypeName, "java.lang.String")) {
-					propValue = makePropertyValue(propertyDef, properties.get(propertyName));
-					if (propValue != null) {
-						String propStr = propValue.toString();
-						if (StringUtils.trimToNull(propStr) != null) {
-							return propStr;
+				if (propertyDef != null) { // may happen if propertyName was removed from the
+					// current version of the content type
+					String propTypeName = propertyDef.getDataType().getJavaClassName();
+					if (StringUtils.equalsIgnoreCase(propTypeName, "java.lang.String")) {
+						propValue = makePropertyValue(propertyDef, properties.get(propertyName));
+						if (propValue != null) {
+							String propStr = propValue.toString();
+							if (StringUtils.trimToNull(propStr) != null) {
+								return propStr;
+							}
 						}
 					}
 				}
@@ -1213,22 +1216,26 @@ public class DataLayer implements DataLayerInterface {
 			Set<QName> names) {
 		Serializable propValue;
 		String res = "";
-		int nb = 0;
+		boolean first = true;
 		for (QName propertyName : names) {
 			if (propertyName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 				PropertyDefinition propertyDef = dictionaryService.getProperty(propertyName);
-				String propTypeName = propertyDef.getDataType().getJavaClassName();
-				if (StringUtils.equalsIgnoreCase(propTypeName, "java.lang.String")) {
-					propValue = makePropertyValue(propertyDef, properties.get(propertyName));
-					if (propValue != null) {
-						String propStr = propValue.toString();
-						if (StringUtils.trimToNull(propStr) != null) {
-							if (nb > 0) {
-								res += ", ";
+				if (propertyDef != null) { // may happen if propertyName was removed from the
+											// current version of the content type
+					String propTypeName = propertyDef.getDataType().getJavaClassName();
+					if (StringUtils.equalsIgnoreCase(propTypeName, "java.lang.String")) {
+						propValue = makePropertyValue(propertyDef, properties.get(propertyName));
+						if (propValue != null) {
+							String propStr = propValue.toString();
+							if (StringUtils.trimToNull(propStr) != null) {
+								if (first == false) {
+									res += ", ";
+								}
+								res += StringUtils
+										.trimToEmpty(getDisplayLabelForProperty(propertyDef))
+										+ ": " + propStr;
+								first = false;
 							}
-							res += StringUtils.trimToEmpty(getDisplayLabelForProperty(propertyDef))
-									+ ": " + propStr;
-							nb++;
 						}
 					}
 				}
@@ -1254,16 +1261,19 @@ public class DataLayer implements DataLayerInterface {
 		for (QName propertyName : names) {
 			if (propertyName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 				PropertyDefinition propertyDef = dictionaryService.getProperty(propertyName);
-				propValue = makePropertyValue(propertyDef, properties.get(propertyName));
-				if (propValue != null) {
-					String propStr = propValue.toString();
-					if (StringUtils.trimToNull(propStr) != null) {
-						if (nb > 0) {
-							res += ", ";
+				if (propertyDef != null) { // may happen if propertyName was removed from the
+											// current version of the content type
+					propValue = makePropertyValue(propertyDef, properties.get(propertyName));
+					if (propValue != null) {
+						String propStr = propValue.toString();
+						if (StringUtils.trimToNull(propStr) != null) {
+							if (nb > 0) {
+								res += ", ";
+							}
+							res += StringUtils.trimToEmpty(getDisplayLabelForProperty(propertyDef))
+									+ ": " + propStr;
+							nb++;
 						}
-						res += StringUtils.trimToEmpty(getDisplayLabelForProperty(propertyDef))
-								+ ": " + propStr;
-						nb++;
 					}
 				}
 			}

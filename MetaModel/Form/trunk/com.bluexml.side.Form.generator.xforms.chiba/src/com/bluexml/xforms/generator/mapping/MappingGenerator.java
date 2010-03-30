@@ -905,6 +905,8 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 
 		formFieldType.setUniqueName(FormGeneratorsManager.getUniqueName(field));
+		formFieldType.setShortName(field.getId());
+		
 		String style = field.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
@@ -982,10 +984,13 @@ public class MappingGenerator extends AbstractGenerator {
 		boolean selectionCapable = formGenerator.isFieldSelectionCapable(field);
 		if (selectionCapable) {
 			formFieldType.setSelectionCapable(true);
+			//
+			String xtension = formGenerator.getXtensionAsString(field);
+			if (StringUtils.trimToNull(xtension) != null) {
+				formFieldType.setXtension(xtension);
+			}
 		}
 
-		// TODO: remove
-		// formFieldType.setDummyValue(pickDummyValue(formFieldType.getType())); // optional
 		if (field instanceof FileField) {
 			FileFieldType fileFieldType = initFileFieldFromFormField(formFieldType);
 
@@ -1005,6 +1010,9 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
+	 * Gets the real class for a FormClass, with exception throwing in case the linked element is
+	 * not a Clazz object.
+	 * 
 	 * @param formClass
 	 * @return
 	 * @throws RuntimeException
@@ -1021,7 +1029,8 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Computes the name of an attribute as specified in the Alfresco models.
+	 * Computes the name of an attribute as specified in the model files in XML, including native
+	 * Alfresco models.
 	 * 
 	 * @param classe
 	 * @param ref
@@ -1243,12 +1252,15 @@ public class MappingGenerator extends AbstractGenerator {
 	 */
 	private void processReference(CanisterType canister, FormContainer formContainer,
 			Reference reference) {
-		// TODO: update the condition when references become available on FormWorkflow
-		if (canister instanceof FormType) {
+		if ((canister instanceof FormType) || (canister instanceof WorkflowTaskType)) {
 			ReferenceType referenceType = objectFactory.createReferenceType();
 			processChoiceFieldCommon(reference, formContainer, referenceType);
-			FormType formType = (FormType) canister;
-			formType.getReference().add(referenceType);
+
+			if (canister instanceof FormType) {
+				((FormType) canister).getReference().add(referenceType);
+			} else {
+				((WorkflowTaskType) canister).getReference().add(referenceType);
+			}
 		}
 	}
 
@@ -1290,6 +1302,8 @@ public class MappingGenerator extends AbstractGenerator {
 		modelChoiceType.setMaxBound(modelChoiceField.getMax_bound());
 		modelChoiceType.setMinBound(modelChoiceField.getMin_bound());
 		modelChoiceType.setUniqueName(FormGeneratorsManager.getUniqueName(modelChoiceField));
+		String shortName = getAssociationNameForModelChoice(modelChoiceField, formContainer);
+		modelChoiceType.setShortName(shortName);
 		ModelElement ref = modelChoiceField.getRef();
 
 		// #980
@@ -1321,7 +1335,8 @@ public class MappingGenerator extends AbstractGenerator {
 			}
 			// the first target cannot be based on an abstract class
 			FormContainer target = modelChoiceField.getTarget().get(0);
-			if (isUnderlyingClassAbstract((FormClass) target)) {
+			Clazz realClass = getRealClassForFormClass((FormClass) target);
+			if (realClass.isAbstract()) {
 				throw new RuntimeException("The first form in the 'Target' property of form '"
 						+ modelChoiceType.getDisplayLabel()
 						+ "' MUST NOT be based on an abstract class.");
@@ -1338,18 +1353,46 @@ public class MappingGenerator extends AbstractGenerator {
 			String lsize = "" + modelChoiceField.getField_size();
 			modelChoiceType.setFieldSize(StringUtils.trim(lsize));
 		}
-
+		//
+		String formatPattern = modelChoiceField.getFormat_pattern();
+		if (StringUtils.trimToNull(formatPattern) != null) {
+			modelChoiceType.setFormatPattern(formatPattern);
+		}
+		//
+		String xtension = formGenerator.getXtensionAsString(modelChoiceField);
+		if (StringUtils.trimToNull(xtension) != null) {
+			modelChoiceType.setXtension(xtension);
+		}
 	}
 
 	/**
-	 * Tells whether the underlying class of a form is an abstract class.
+	 * Gets the name of the association that a model choice field implements.
 	 * 
+	 * @param modelChoiceField
 	 * @param form
-	 * @return true if the real class is abstract
+	 * @return
 	 */
-	private boolean isUnderlyingClassAbstract(FormClass form) {
-		Clazz realClass = getRealClassForFormClass(form);
-		return realClass.isAbstract();
+	public String getAssociationNameForModelChoice(ModelChoiceField modelChoiceField,
+			FormContainer form) {
+		ModelElement ref = modelChoiceField.getRef();
+		if (ref == null) {
+			throw new RuntimeException(
+					"The 'Ref' property of model choice field '"
+							+ modelChoiceField.getLabel()
+							+ "' on form '"
+							+ form.getLabel()
+							+ "' is not set. Can't continue. Please fix that errror before generating again.");
+		}
+		ModelElement refModelElement = (ModelElement) formGenerator.getRealObject(ref);
+		if (refModelElement instanceof Association) {
+			return ((Association) refModelElement).getName();
+		}
+		throw new RuntimeException(
+				"The 'Ref' property of model choice field '"
+						+ modelChoiceField.getLabel()
+						+ "' on form '"
+						+ form.getLabel()
+						+ "' is not an association. Can't continue. Please fix that errror before generating again.");
 	}
 
 	/*

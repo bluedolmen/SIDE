@@ -305,7 +305,8 @@ public class MappingAgent {
 	 */
 	private Document loadFormInstance(AlfrescoTransaction transaction, String type, String id,
 			boolean formIsReadOnly) throws ServletException {
-		return mappingToolAlfrescoToForms.getFormInstance(transaction, type, id, formIsReadOnly);
+		return mappingToolAlfrescoToForms.getFormInstance(transaction, type, id, transaction
+				.getInitParams(), formIsReadOnly);
 	}
 
 	/**
@@ -503,10 +504,11 @@ public class MappingAgent {
 		return mappingToolAlfrescoToForms.getWorkflowFieldAlfrescoName(wkFormName, fieldName);
 	}
 
-	private void collectTaskProperties(AlfrescoTransaction transaction, Document instance, Element taskElt, String wkFormName,
-			Map<String, GenericClass> alfrescoNodes, boolean formIsReadOnly) {
-		mappingToolAlfrescoToForms.collectTaskProperties(transaction, instance, taskElt, wkFormName,
-				alfrescoNodes, formIsReadOnly);
+	private void collectTaskProperties(AlfrescoTransaction transaction, Document instance,
+			Element taskElt, String wkFormName, Map<String, GenericClass> alfrescoNodes,
+			boolean formIsReadOnly) {
+		mappingToolAlfrescoToForms.collectTaskProperties(transaction, instance, taskElt,
+				wkFormName, alfrescoNodes, formIsReadOnly);
 	}
 
 	public boolean isStartTaskForm(String wkFormName) {

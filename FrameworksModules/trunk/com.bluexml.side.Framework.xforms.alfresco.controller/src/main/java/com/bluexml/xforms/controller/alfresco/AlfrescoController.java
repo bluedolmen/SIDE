@@ -2719,4 +2719,58 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		return systemGetNodeType(transaction, dataId);
 	}
 
+	/**
+	 * Gets the id, label and qname of the ids (complete node ids, with protocol and store) in the
+	 * comma-separated list
+	 * 
+	 * @param transaction
+	 * @param format
+	 *            the (one) pattern for formatting the labels
+	 * @param ids
+	 *            the comma-separated list of ids
+	 * @return
+	 * @throws ServletException
+	 */
+	public String readObjectsInfo(AlfrescoTransaction transaction, String format, String ids)
+			throws ServletException {
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("ids", ids);
+		parameters.put("format", format);
+		return requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_NODE_INFO);
+	}
+
+	/**
+	 * Gets the complete id, label and qname for the node (of the given content type) whose
+	 * identifier property has a specific value. selection-capable form field initialized using a
+	 * URL parameter. For this function to do its job correctly, there should be an object of the
+	 * datatype whose identifier property has the initialization value. Unless specified, the
+	 * parameters MUST NOT be <code>null</code>.
+	 * 
+	 * @param transaction
+	 * @param datatype
+	 *            the prefixed content type name to search.
+	 * @param identifier
+	 *            the local name of a property (in the datatype definition) used as an identifier.
+	 * @param format
+	 *            the pattern for formatting the label. <code>null</code>-able.
+	 * @param labelLength
+	 *            the maximum length allowed for the label. <code>null</code>-able.
+	 * @param value
+	 *            the initialization value, also the value (of the identifier property) to look for.
+	 * @return
+	 * @throws ServletException
+	 */
+	public String resolveObjectInfo(AlfrescoTransaction transaction, String datatype,
+			String identifier, String format, String labelLength, String value)
+			throws ServletException {
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("datatype", datatype);
+		parameters.put("identifier", identifier);
+		parameters.put("format", StringUtils.trimToEmpty(format));
+		parameters.put("id", value);
+		String maxLength = StringUtils.trimToNull(labelLength) == null ? "0" : labelLength;
+		parameters.put("labelLength", maxLength);
+		return requestString(transaction, parameters, MsgId.INT_WEBSCRIPT_OPCODE_NODE_INFO);
+	}
+
 }
