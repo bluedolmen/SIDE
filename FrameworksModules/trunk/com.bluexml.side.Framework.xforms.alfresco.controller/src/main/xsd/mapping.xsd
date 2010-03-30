@@ -190,6 +190,7 @@
 					<xsd:element minOccurs="0" name="pooledActors" type="xsd:string" />
 					<xsd:element maxOccurs="unbounded" name="field" type="formFieldType" />
 					<xsd:element maxOccurs="unbounded" name="modelChoice" type="modelChoiceType" />
+					<xsd:element maxOccurs="unbounded" name="reference" type="referenceType" />
 				</xsd:sequence>
 				<xsd:attribute name="startTask" type="xsd:boolean" use="optional" />
 				<xsd:attribute name="processTitle" type="xsd:string" use="optional" />
