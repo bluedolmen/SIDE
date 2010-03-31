@@ -49,6 +49,7 @@ done
 
 
 perl -ni -e 'print unless /com.bluexml.side.Integration.eclipse.builder/' $SOURCE_PATH/S-IDE/MetaModel/Common/trunk/com.bluexml.side.Common.core.feature/feature.xml
+perl -ni -e 'print unless /com.bluexml.side.Workflow.modeler.actions/' $SOURCE_PATH/S-IDE/MetaModel/Workflow/trunk/com.bluexml.side.Workflow.modeler.feature/feature.xml
 rm $SOURCE_PATH/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/splash.bmp
 cp $SOURCE_PATH/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/splash-LABS.bmp $SOURCE_PATH/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/splash.bmp
 
