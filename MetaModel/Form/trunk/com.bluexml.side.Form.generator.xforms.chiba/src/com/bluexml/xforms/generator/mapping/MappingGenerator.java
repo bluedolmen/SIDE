@@ -1150,7 +1150,7 @@ public class MappingGenerator extends AbstractGenerator {
 
 		FileFieldType res = objectFactory.createFileFieldType();
 		res.setUniqueName(formFieldType.getUniqueName());
-
+		res.setShortName(formFieldType.getShortName());
 		res.setAlfrescoName(formFieldType.getAlfrescoName());
 		res.setType(formFieldType.getType());
 		res.setStaticEnumType(formFieldType.getStaticEnumType());

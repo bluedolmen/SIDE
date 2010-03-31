@@ -259,10 +259,13 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Provides information about one or several nodes. Two modes:
+	 * Provides information about one or several nodes. Modes:
 	 * <ol>
 	 * <li>node content information: returns info about the node content. Parameter: "nodeId"
-	 * <li>object information: returns information about the node. Parameters: "ids", "format"
+	 * <li>objects information: returns information about node(s). Parameters: "ids", "format"
+	 * <li>find object and retrieve information: finds the object that has a specific value in a
+	 * specific property and returns information about the node. Parameters: "datatype",
+	 * "identifier", "id". Optional parameters: "format", "labelLength".
 	 * </ol>
 	 * <p>
 	 * See the individual handler functions for the format of the parameters.
@@ -279,7 +282,7 @@ public class XFormsWork implements RunAsWork<String> {
 		String ids = parameters.get("ids");
 		if (ids != null) {
 			String sharedFormat = parameters.get("format");
-			return nodeObjectInfo(ids, sharedFormat);
+			return nodeObjectsInfo(ids, sharedFormat);
 		}
 		String datatype = parameters.get("datatype");
 		String identifier = parameters.get("identifier");
@@ -299,19 +302,21 @@ public class XFormsWork implements RunAsWork<String> {
 	 * "id{SEPARATOR}label{SEPARATOR}prefixed_qname".
 	 * 
 	 * @param datatype
-	 *            a prefixed content type
+	 *            a prefixed content type, e.g. "cm:person"
 	 * @param identifier
-	 *            the local name of a property present in the datatype's definition
+	 *            the local name of a property present in the datatype's definition, e.g. "userName"
 	 * @param format
-	 *            the pattern for formatting the label
+	 *            the pattern for formatting the label. e.g.
+	 *            "format=firstName@lastName@{ (}@email@{)}"
 	 * @param labelLength
 	 *            the length at which to truncate the label that will be computed. If "0", no
 	 *            truncation happens.
 	 * @param idValue
 	 *            the value which, when found on the identifier property, elects the node as the one
-	 *            being looked for.
+	 *            being looked for. e.g. "johndoe"
 	 * @return <code>null</code> if either no identifier property was found or no node was found
-	 *         with the id value on that property. Otherwise, returns the info string for the node.
+	 *         with the id value on that property. Otherwise, returns the info string for the node,
+	 *         e.g."workspace://SpacesStore/ca151555-95e0-4361-aa4e-0050adb7027d{::}John Doe (johndoe@email.com){::}cm:person"
 	 */
 	private String resolveObjectInfo(String datatype, String identifier, String format,
 			String labelLength, String idValue) {
@@ -342,8 +347,17 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 		// include system properties as this function is likely to be used for system types
 		String label = dataLayer.getLabelForNode(electedNode, format, true);
+
+		String trimmedLabel = label;
+		try {
+			int length = Integer.parseInt(labelLength);
+			trimmedLabel = StringUtils.left(label, length);
+		} catch (Exception e) {
+			// nothing to do, the trimmed label remains the same as the initial label
+		}
 		QName qName = serviceRegistry.getNodeService().getType(electedNode);
-		String objectInfo = electedNode.toString() + WEBSCRIPT_SEPARATOR + label
+
+		String objectInfo = electedNode.toString() + WEBSCRIPT_SEPARATOR + trimmedLabel
 				+ WEBSCRIPT_SEPARATOR + qName.toPrefixString();
 		return objectInfo;
 	}
@@ -360,7 +374,7 @@ public class XFormsWork implements RunAsWork<String> {
 	 *            the format pattern for the labels
 	 * @return a comma separated list with the same number of items as the list of node ids.
 	 */
-	private String nodeObjectInfo(String ids, String format) {
+	private String nodeObjectsInfo(String ids, String format) {
 		StringBuffer result = new StringBuffer("");
 
 		String[] splittedIds = StringUtils.split(ids, ',');
@@ -951,7 +965,22 @@ public class XFormsWork implements RunAsWork<String> {
 
 		List<Element> children = DOMUtil.getAllChildren(batchElement);
 		Map<String, String> created = new HashMap<String, String>();
-
+		String saveToPath = null;
+		// ** #1544
+		String saveToAttribute = batchElement.getAttribute("saveTo");
+		if (StringUtils.trimToNull(saveToAttribute) != null) {
+			parameters.put("path", saveToAttribute);
+			String createdPath = createPath();
+			if (StringUtils.trimToNull(createdPath) != null) {
+				saveToPath = saveToAttribute;
+			} else {
+				logger
+						.error("The target space '"
+								+ saveToAttribute
+								+ "' does not exist and could not be created. Reverting to the default path.");
+			}
+		}
+		// ** #1544
 		String currentId = null;
 		try {
 			for (Element element : children) {
@@ -960,8 +989,7 @@ public class XFormsWork implements RunAsWork<String> {
 					Element toCreate = DOMUtil.getChild(element, "class");
 					String transactionId = toCreate.getAttribute("id");
 					currentId = transactionId; // for faulty id management
-					String path = null;
-					NodeRef result = dataLayer.create(path, toCreate, null);
+					NodeRef result = dataLayer.create(saveToPath, toCreate, null);
 					created.put(transactionId, result.toString());
 				} else if (StringUtils.equals(element.getTagName(), "update")) {
 					Element toUpdate = DOMUtil.getChild(element, "class");

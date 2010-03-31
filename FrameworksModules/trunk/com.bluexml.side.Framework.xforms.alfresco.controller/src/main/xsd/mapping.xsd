@@ -86,10 +86,16 @@
 	<xsd:complexType name="fieldType">
 		<xsd:sequence>
 			<xsd:element name="uniqueName" type="xsd:string" />
+
+			<!-- id du champ dans le modeleur, utile pour les initialisations via paramètres URL -->
 			<xsd:element name="shortName" type="xsd:string" />
+
+			<!-- label du champ dans le modeleur, utile pour les messages d'erreurs utilisateur -->
 			<xsd:element name="displayLabel" type="xsd:string" />
 		</xsd:sequence>
 		<xsd:attribute name="mandatory" type="xsd:boolean" use="optional" />
+
+		<!-- contenu comma-separated de la propriété Xtension-->
 		<xsd:attribute name="xtension" type="xsd:string" use="optional" />
 	</xsd:complexType>
 	<xsd:complexType name="formFieldType">
@@ -150,6 +156,8 @@
 					<xsd:element name="realClass" type="classType" />
 					<xsd:element maxOccurs="unbounded" name="target" type="formType" />
 				</xsd:sequence>
+
+				<!-- Indique si l'ordre sur les objets sélectionnés à droite des widgets doit être conservé-->
 				<xsd:attribute name="ordered" type="xsd:boolean" use="optional" />
 				<xsd:attribute name="inline" type="xsd:boolean" use="optional" />
 				<xsd:attribute name="fieldSize" type="xsd:string" use="optional" />
@@ -212,9 +220,9 @@
 	<xsd:complexType name="searchFieldType">
 		<xsd:sequence>
 			<xsd:element name="name" type="xsd:string" />
-			<!-- no meaning in the following name, just wanted a 4-character token -->
+
+			<!-- the user-chosen default operator. No meaning in the name, just wanted a 4-character token -->
 			<xsd:element name="pick" type="xsd:string" />
-			<!--  -->
 		</xsd:sequence>
 		<!-- if present, gives the total number of UI input controls for the search field -->
 		<xsd:attribute name="inputs" use="optional" />

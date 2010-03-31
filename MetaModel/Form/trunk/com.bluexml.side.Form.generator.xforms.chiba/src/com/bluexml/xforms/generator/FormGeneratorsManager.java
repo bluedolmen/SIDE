@@ -1228,6 +1228,8 @@ public class FormGeneratorsManager {
 	}
 
 	/**
+	 * Gets the default operator for a search field. The operator is either specified in the model
+	 * or forced upon the field.
 	 * 
 	 * @param searchField
 	 * @return

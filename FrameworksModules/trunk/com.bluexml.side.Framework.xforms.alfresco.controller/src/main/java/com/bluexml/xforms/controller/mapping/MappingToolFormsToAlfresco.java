@@ -508,8 +508,7 @@ public class MappingToolFormsToAlfresco extends MappingToolCommon {
 				} else if (isSearchEnum(fieldType)) {
 					alfrescoValue = DOMUtil.getChild(fieldElement,
 							MsgId.INT_INSTANCE_SIDEID.getText()).getTextContent();
-				}
-				if (isSelectionCapable(fieldType)) {
+				} else if (isSelectionCapable(fieldType)) {
 					alfrescoValue = DOMUtil.getElementInDescentByName(fieldElement,
 							MsgId.INT_INSTANCE_SIDEID.getText()).getTextContent();
 				} else {

@@ -333,6 +333,8 @@ public enum MsgId {
 	PARAM_RELOAD_MAPPING_FILE("dynamicReload"),
 	/** whether to reload properties and redirection files*/
 	PARAM_RELOAD_PROPERTIES("reloadProperties"),
+	/** the repository space where to save the data. Default is /app:company_home/app:dictonary/cm:BLUEXMLDATA*/
+	PARAM_SAVE_DATA_TO("saveTo"),
 	/** whether to send a JSON string to */
 	PARAM_SEARCH_MODE("searchMode"),
 	PARAM_SEARCH_USE_SHORT_NAMES("useShortNames"),

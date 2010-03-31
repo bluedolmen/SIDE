@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -17,6 +18,7 @@ import com.bluexml.xforms.controller.binding.GenericUpdate;
 import com.bluexml.xforms.controller.binding.ObjectFactory;
 import com.bluexml.xforms.controller.binding.ServiceRequestSource;
 import com.bluexml.xforms.controller.navigation.Page;
+import com.bluexml.xforms.messages.MsgId;
 
 public class AlfrescoTransaction {
 
@@ -51,7 +53,7 @@ public class AlfrescoTransaction {
 	public AlfrescoTransaction(AlfrescoController alfrescoController, String userName) {
 		super();
 		this.alfrescoController = alfrescoController;
-		this.batch = objectFactory.createBatch();
+		this.batch = null; // we need to nullify this for proper initialization later
 		this.login = userName;
 	}
 
@@ -70,6 +72,14 @@ public class AlfrescoTransaction {
 		requesterId.setId("XFormsController");
 		batch.getCreateOrUpdateOrDelete().add(requesterId);
 		// ** #1365
+		String saveToPath;
+		Map<String, String> params = getInitParams();
+		if (params != null) { // this should always be true
+			saveToPath = params.get(MsgId.PARAM_SAVE_DATA_TO.getText());
+			if (StringUtils.trimToNull(saveToPath) != null) {
+				batch.setSaveTo(saveToPath);
+			}
+		}
 	}
 
 	/**
@@ -81,7 +91,7 @@ public class AlfrescoTransaction {
 	 *            either a node ref or a placeholder id (e.g. 'transactionID-1'). The webscript will
 	 *            figure each case out.
 	 * @param fileName
-	 *            the display name for the node
+	 *            the display name for the node in the Alfresco web client/Explorer
 	 * @param filePath
 	 *            the complete path to the file on the server side
 	 * @param mimeType
@@ -175,7 +185,7 @@ public class AlfrescoTransaction {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @return the form name for this transaction
 	 */
@@ -266,7 +276,8 @@ public class AlfrescoTransaction {
 	}
 
 	/**
-	 * @param page the page to set
+	 * @param page
+	 *            the page to set
 	 */
 	public void setPage(Page page) {
 		this.page = page;
