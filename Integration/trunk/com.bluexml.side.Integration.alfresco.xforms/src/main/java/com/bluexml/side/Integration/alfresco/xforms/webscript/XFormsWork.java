@@ -655,14 +655,14 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 		// ** #1310
 		String filterAssoc = parameters.get("filterAssoc");
-		boolean applyFilter = (StringUtils.trimToNull(filterAssoc) != null);
+		boolean applyFilterAssoc = (StringUtils.trimToNull(filterAssoc) != null);
 		String isCompositionParam = parameters.get("isComposition");
 		boolean isComposition = StringUtils.equals(isCompositionParam, "1");
 		// ** #1310
 
 		List<String> searchedValues = new ArrayList<String>();
-		String query = parameters.get("query");
-		if (StringUtils.trimToNull(query) != null) {
+		String query = StringUtils.trimToNull(parameters.get("query"));
+		if (query != null) {
 			searchedValues.add(query);
 		}
 
@@ -689,22 +689,39 @@ public class XFormsWork implements RunAsWork<String> {
 		//
 
 		// configure the filtering/limiting
-		int returnAtMost;
-		if (maxResults > 0) {
-			returnAtMost = Math.min(luceneResultLength, maxResults);
-		} else {
-			returnAtMost = luceneResultLength;
-		}
-		int effectivelyReturned = 0;
-		int filteredOut = 0;
 		QName identifierQName = null;
 		boolean includeSystemProperties = false;
-
 		if (StringUtils.trimToNull(identifier) != null) {
 			identifierQName = resolveIdentifierQName(identifier, type);
 			includeSystemProperties = (identifierQName != null);
 		}
 
+		/** whether we need to collect all elements before applying the filtering & limiting */
+		boolean collectAllNodes = false;
+		if ((includeSystemProperties) && (query != null)) {
+			// when searching system datatypes, we may have to collect all nodes before filtering
+			// (happens when no property of the datatype is indexed)
+			List<QName> subTypes = formsWebscript.getSubTypes(type);
+			Set<QName> attributes = getSearchableAttributes(subTypes.get(0));
+			if (attributes.size() == 0) {
+				// the datatype is not indexed
+				collectAllNodes = true;
+			}
+		}
+
+		int returnAtMost;
+		if (collectAllNodes == false) {
+			if (maxResults > 0) {
+				returnAtMost = Math.min(luceneResultLength, maxResults);
+			} else {
+				returnAtMost = luceneResultLength;
+			}
+		} else {
+			returnAtMost = luceneResultLength;
+		}
+
+		int effectivelyReturned = 0;
+		int filteredOut = 0;
 		// collect items and apply filtering and/or limiting
 		List<ResultBean> resultBeanList = new ArrayList<ResultBean>(returnAtMost);
 		for (int i = 0; i < returnAtMost; i++) {
@@ -725,13 +742,14 @@ public class XFormsWork implements RunAsWork<String> {
 			boolean isAddableBean = true;
 			if (includeSystemProperties) {
 				// for system datatypes, search the label (in case indexing is off for that type)
-				if ((query != null) && (aBean.label.contains(query) == false)) {
+				if ((collectAllNodes == false) && (query != null)
+						&& (aBean.label.contains(query) == false)) {
 					isAddableBean = false;
 					filteredOut++;
 				}
 			} else {
 				// retrieving objects of a standard BlueXML generated type
-				if (applyFilter) {
+				if (applyFilterAssoc) {
 					if (dataLayer.isRefencenced(nodeRef, filterAssoc, isComposition) == true) {
 						// do not add if already referenced
 						isAddableBean = false;
@@ -755,9 +773,27 @@ public class XFormsWork implements RunAsWork<String> {
 
 		//
 		// write all results in the items string buffer
+		//
 		StringBuffer itemsBuf = new StringBuffer("");
-		for (ResultBean aBean : resultBeanList) {
-			appendResult(itemsBuf, aBean.id, aBean.label, aBean.qname);
+		if (collectAllNodes == true) {
+			// in case all nodes were collected, the filtering and limiting takes place here
+			filteredOut = 0;
+			effectivelyReturned = 0;
+			for (ResultBean aBean : resultBeanList) {
+				if (StringUtils.contains(aBean.label.toLowerCase(), query.toLowerCase()) == false) {
+					filteredOut++;
+				} else {
+					appendResult(itemsBuf, aBean.id, aBean.label, aBean.qname);
+					effectivelyReturned++;
+					if (effectivelyReturned == returnAtMost) {
+						break;
+					}
+				}
+			}
+		} else { // filtering and limiting already happened
+			for (ResultBean aBean : resultBeanList) {
+				appendResult(itemsBuf, aBean.id, aBean.label, aBean.qname);
+			}
 		}
 
 		StringBuffer xmlResult = new StringBuffer("");
