@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.View.generator.alfresco.feature" label="SIDE Alfresco Share View Generator" version="1.0.25.v15544-20100314" provider-name="BlueXML">
+<feature id="com.bluexml.side.View.generator.alfresco.feature" label="SIDE Alfresco Share View Generator" version="1.0.26.v16119-20100401" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of view models on Alfresco share for content type list and detail display.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -16,6 +16,6 @@
     <import plugin="com.bluexml.side.Util.log" />
     <import plugin="com.bluexml.side.Class.service.alfresco" />
   </requires>
-  <plugin id="com.bluexml.side.View.generator.alfresco" download-size="0" install-size="0" version="1.0.25.v15544-20100314" unpack="false" />
+  <plugin id="com.bluexml.side.View.generator.alfresco" download-size="0" install-size="0" version="1.0.26.v16119-20100401" unpack="false" />
 </feature>
 
