@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Startup Display
 Bundle-SymbolicName: com.bluexml.side.Application.startup;singleton:=true
-Bundle-Version: 1.0.11.v13286-20100127
+Bundle-Version: 1.0.12.v16119-20100401
 Bundle-Activator: com.bluexml.side.application.startup.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
