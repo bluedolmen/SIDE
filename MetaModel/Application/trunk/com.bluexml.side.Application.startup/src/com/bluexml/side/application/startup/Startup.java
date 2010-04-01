@@ -27,7 +27,7 @@ public class Startup implements IStartup {
 							index++;
 							url = new URL(commandLineArgs.get(index));
 						} else
-							url = new URL("http://www.bluexml.com/");
+							url = new URL("http://www.side-labs.org/wiki/v/getting-started");
 						PlatformUI.getWorkbench().getBrowserSupport().createBrowser("com.bluexml.side.application.startup").openURL(url);
 					} catch (Exception e) {
 						e.printStackTrace();
