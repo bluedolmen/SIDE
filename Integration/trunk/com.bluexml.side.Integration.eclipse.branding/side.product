@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
-<product name="SIDE Enterprise" uid="sideProduct" id="com.bluexml.side.Integration.eclipse.branding.product" application="org.eclipse.ui.ide.workbench" version="1.0.35" useFeatures="true" includeLaunchers="true">
+<product name="SIDE Enterprise" uid="sideProduct" id="com.bluexml.side.Integration.eclipse.branding.product" application="org.eclipse.ui.ide.workbench" version="1.0.36" useFeatures="true" includeLaunchers="true">
   <aboutInfo>
     <image path="icons/about.gif" />
     <text>SIDE by http://www.bluexml.com</text>
@@ -346,7 +346,7 @@
     <feature id="org.eclipse.platform" version="3.5.1.R35x_v20090910-9gEeG1_FthkNDSP2odXdThaOu9GFDPn83DGB7" />
     <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.0" />
     <feature id="com.bluexml.side.Common.core.feature" version="1.0.182.v16119-20100401" />
-    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.140.v16119-20100401" />
+    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.141.v16140-20100401" />
     <feature id="org.tigris.subversion.clientadapter.feature" version="1.6.8" />
     <feature id="org.tigris.subversion.clientadapter.javahl.feature" version="1.6.9.2" />
     <feature id="org.tigris.subversion.subclipse" version="1.6.9" />
