@@ -1092,6 +1092,9 @@ public class XFormsWork implements RunAsWork<String> {
 
 		String method = parameters.get("method");
 
+		if (method != null) {
+			logger.debug("Workflow worker: received request for method " + method);
+		}
 		if (StringUtils.equals(method, "wfStart")) {
 			// startWf : need @wfName and @attributes. Return: the instance id
 			String wfName = parameters.get("wfName");

@@ -671,7 +671,7 @@ public class MappingToolCommon {
 	 * @return the string
 	 */
 	protected String safeMapGet(Map<String, String> map, String key) {
-		if (map != null) {
+		if ((map != null) && (key != null)) {
 			return map.get(key);
 		}
 		return null;

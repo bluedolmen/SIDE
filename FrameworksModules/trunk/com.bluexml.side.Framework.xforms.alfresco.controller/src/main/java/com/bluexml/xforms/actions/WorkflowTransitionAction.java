@@ -437,6 +437,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		}
 
 		// check that an active task for the workflow instance is consistent with the current form
+		logger.debug("Getting the current tasks for workflow instance with id: " + wkflwInstanceId);
 		List<String> tasks = controller.workflowGetCurrentTasksInfo(transaction, wkflwInstanceId);
 		if (tasks.size() == 0) {
 			navigationPath
@@ -444,6 +445,9 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 							+ wkflwInstanceId + "'.");
 			return resultBean;
 		}
+
+		logger.debug("Finding the relevant tasks for form " + formTaskName + " amongst tasks '"
+				+ tasks + "'");
 		String taskInfoString = findRelevantTaskForForm(formTaskName, tasks);
 		if (taskInfoString == null) {
 			navigationPath.setStatusMsg("Transition not followed. The form '" + wkFormName
@@ -452,6 +456,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		}
 
 		// save the task's current state
+		logger.debug("Updating task " + taskInfoString);
 		String taskId = getIdFromTaskIdNameTitle(taskInfoString);
 		if (controller.workflowUpdateTask(transaction, taskId, properties) == false) {
 			navigationPath.setStatusMsg("Transition not followed. Failed while updating the task.");
@@ -459,12 +464,14 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		}
 
 		// trigger the transition whose button was clicked
+		logger.debug("Ending task " + taskId + " with transition " + transitionToTake);
 		if (controller.workflowEndTask(transaction, taskId, transitionToTake) == false) {
 			navigationPath.setStatusMsg("Transition not followed. Failed while ending the task.");
 			return resultBean;
 		}
 
 		// set assignment for next task(s) if any
+		logger.debug("Reassigning workflow " + wkflwInstanceId);
 		return reassignWorkflow(transaction, properties);
 	}
 
@@ -482,8 +489,10 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			return null;
 		}
 		for (String taskInfoString : taskNames) {
+			logger.debug(">>Testing match against task: " + taskInfoString);
 			String taskName = getNameFromTaskIdNameTitle(taskInfoString);
 			if (StringUtils.equals(formTaskName, taskName)) {
+				logger.debug("  >> Match found for task: " + taskInfoString);
 				return taskInfoString;
 			}
 		}
@@ -612,6 +621,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 			}
 			currentPage.setWkflwProcessId(processId);
 		}
+		logger.debug("Started a workflow instance with id :" + currentPage.getWkflwInstanceId());
 		return true;
 	}
 
@@ -694,6 +704,7 @@ public class WorkflowTransitionAction extends AbstractWriteAction {
 		navigationPath.setStatusMsg(msg);
 		result.setTasks(tasks);
 		result.setSuccess(true);
+		logger.debug("Workflow reassignment of task(s) '" + nextTasksTitles + "' is successful.");
 		return result;
 	}
 
