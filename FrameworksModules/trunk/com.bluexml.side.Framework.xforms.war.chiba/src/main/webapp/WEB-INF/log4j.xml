@@ -43,6 +43,9 @@
     <category name="org.chiba">
         <priority value="ERROR"/>
     </category>
+    <category name="com.bluexml.xforms.actions.WorkflowTransitionAction">
+        <priority value="DEBUG"/>
+    </category>
     <category name="com.bluexml.xforms.controller.alfresco.AlfrescoController">
         <priority value="DEBUG"/>
     </category>
