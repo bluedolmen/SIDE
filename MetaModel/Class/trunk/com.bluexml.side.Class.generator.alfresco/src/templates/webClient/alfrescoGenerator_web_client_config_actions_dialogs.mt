@@ -26,7 +26,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_actions_dialogs" %>
 
-     	<%for (getAllClasses()){%>
+     	<%for (getAllClasses().nSort("name")){%>
      	<%if (metainfo[key.equalsIgnoreCase("simplifyCreation")].nSize()>0 && metainfo[key.equalsIgnoreCase("simplifyCreation")].nFirst().value.equalsIgnoreCase("true")) {%>
     	<dialog name="create_<%getQualifiedName()%>" page="/jsp/content/edit-content-properties.jsp" 
                  managed-bean="CreateTypeDialog"/>

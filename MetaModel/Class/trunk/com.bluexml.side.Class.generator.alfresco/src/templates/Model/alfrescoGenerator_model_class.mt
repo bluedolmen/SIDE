@@ -38,7 +38,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<!-- Generalization -->
 			<%}%>
 			
-			<%for (generalizations){%>
+			<%for (generalizations.nSort("name")){%>
 			    <%if (i() > 0){%>
 			<!-- <parent><%getPrefixedQName()%></parent> -->
 			    <%}else{%>
@@ -61,7 +61,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 			<!-- Properties -->
 			<properties>
-				<%for (attributes){%>
+				<%for (getSortedAttibutes()){%>
 				<property name="<%getPrefixedQName()%>">
 					<%if (title != null) {%>
 					<title> <%title%> </title>
@@ -144,7 +144,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<!-- Aspects -->
 		<%if (aspects.nSize()>0){%>
 			<mandatory-aspects>
-			<%for (aspects){%>
+			<%for (aspects.nSort("name")){%>
 				<aspect><%getPrefixedQName()%></aspect>
 			<%}%>
 			</mandatory-aspects>

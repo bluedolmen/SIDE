@@ -26,7 +26,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_model_aspects" %>
-<%for (getAllAspects()) {%>
+<%for (getAllAspects().nSort("name")) {%>
 <%alfrescoGeneratorModelAspect()%>
 <%}%>
 

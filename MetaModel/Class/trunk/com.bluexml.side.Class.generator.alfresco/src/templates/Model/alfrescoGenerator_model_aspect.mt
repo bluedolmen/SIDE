@@ -36,7 +36,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<%if (attributes.nSize() > 0){%>			
 			<!-- Properties -->
 			<properties>
-				<%for (attributes){%>
+				<%for (getSortedAttibutes()){%>
 				<property name="<%getPrefixedQName()%>">
 
 					<%if (title != null){%>

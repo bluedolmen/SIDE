@@ -26,7 +26,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_actions_nodeType"%>
 
-  	<%for (getAllClasses()){%>
+  	<%for (getAllClasses().nSort("name")){%>
   	<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()==0 && !abstract){%>
   	<config evaluator="node-type" condition="<%getFolder()%>:<%getQualifiedName()%>">
       <actions>

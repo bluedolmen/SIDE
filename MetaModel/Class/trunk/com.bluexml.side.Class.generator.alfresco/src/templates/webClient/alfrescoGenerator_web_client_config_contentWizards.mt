@@ -26,7 +26,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_contentWizards"%>
-		<%for (getAllClasses()){%>
+		<%for (getAllClasses().nSort("name")){%>
 			<%-- We assume that folder type is defined by inheritance with reversed cm.dt model --%>
 			<%if (isFolder() && !abstract){%>	
 			<%}else{%>
@@ -34,7 +34,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 				<%--<type name="<%getFolder()%>:<%getQualifiedName()%>_search" />--%>
 			<%}%>
 		<%}%>
-		<%for (getAllEnumerations()) {%>
+		<%for (getAllEnumerations().nSort("name")) {%>
 		    <%if current("clazz.Enumeration").dynamic {%> 
 		    	<type name="<%getFolder()%>:<%getQualifiedName()%>" />
 		    <%}%>

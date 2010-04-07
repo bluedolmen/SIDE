@@ -26,15 +26,15 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_advancedSearch"%>
 
-				<%for (getAllAspects()) {%>
-					<%for (attributes){%>
+				<%for (getAllAspects().nSort("name")) {%>
+					<%for (getSortedAttibutes()){%>
 						<%if (metainfo[key.startsWith("propertySearched")].nSize()>0){%>
 						<meta-data aspect="<%getFolder()%>:<%eContainer().getQualifiedName()%>" property="<%getFolder()%>:<%getQualifiedName()%>"/>
 						<%}%>
 					<%}%>
 				<%}%>
-				<%for (getAllClasses()) {%>
-					<%for (attributes){%>
+				<%for (getAllClasses().nSort("name")) {%>
+					<%for (getSortedAttibutes()){%>
 						<%if (metainfo[key.startsWith("propertySearched")].nSize()>0){%>
 						<meta-data type="<%getFolder()%>:<%eContainer().getQualifiedName()%>" property="<%getFolder()%>:<%getQualifiedName()%>"/>
 						<%}%>

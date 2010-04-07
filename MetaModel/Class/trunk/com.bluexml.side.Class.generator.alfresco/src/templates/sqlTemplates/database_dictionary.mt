@@ -11,21 +11,21 @@ import templates.servicesTemplates.Association
 
 <%script type="clazz.ClassPackage" name="package" file="<%validatedFileName%>" %>
 # ENUMERATIONS
-<%for  (getAllEnumerations()){%><%if (dynamic){%>
+<%for  (getAllEnumerations().nSort("name")){%><%if (dynamic){%>
 class.name.<%getQualifiedName%>=<%name%>
 class.attribute.name.<%getQualifiedName%>.<%getQualifiedName%>_code=code
 class.attribute.name.<%getQualifiedName%>.<%getQualifiedName%>_label=label
 <%}%><%}%> <%-- END for (enumerationSet) --%>
 
 # ASPECTS
-<%for (getAllAspects()) {%>
+<%for (getAllAspects().nSort("name")) {%>
 aspect.name.<%getQualifiedName%>=<%name%>
 <%}%>
 
 # CLASSES AND ATTRIBUTES
-<%for (getAllClasses()){%>
+<%for (getAllClasses().nSort("name")){%>
 class.name.<%getQualifiedName%>=<%getClassTableName()%>
-<%for (getAllAttributes()){%>
+<%for (getAllSortedAttibutes()){%>
 class.attribute.name.<%current("Clazz").getQualifiedName%>.<%getQualifiedName()%>=<%if (eContainer() != current("Clazz")){%><%eContainer().getClassTableName()%>_<%}%><%name%>
 <%}%>
 class.attribute.name.<%current("Clazz").getQualifiedName%>.node-dbid=id
@@ -43,7 +43,7 @@ class.name.VisibilityContext=VisibilityContext
 class.attribute.name.VisibilityContext.VisibilityContext_value=value
 
 # ASSOCIATIONS
-<%for (getAllAssociations()){%>
+<%for (getAllAssociations().nSort("name")){%>
 #association <%firstEnd.linkedClass.name%>/<%name%>/<%secondEnd.linkedClass.name%>
 
 <%if (secondEnd.navigable){%>

@@ -27,7 +27,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_spaceWizards"%>
 
-		<%for (getAllClasses()){%>
+		<%for (getAllClasses().nSort("name")){%>
 			<%-- We assume that folder type is defined by inheritance with reversed cm.dt model --%>
 			<%if (isFolder() && !abstract){%>
 				<type name="<%getFolder()%>:<%getQualifiedName()%>"/>

@@ -26,8 +26,8 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_createAction" %>
 
-      <%for (getAllPackages().nSort()){%>	      	
-		 <%for (classSet.nSort()){%>		 	
+      <%for (getAllPackages().nSort("name")){%>	      	
+		 <%for (classSet.nSort("name")){%>		 	
 		 <%if (metainfo[key.equalsIgnoreCase("simplifyCreation")].nSize()>0 && metainfo[key.equalsIgnoreCase("simplifyCreation")].nFirst().value.equalsIgnoreCase("true")) {%>
          <action id="create_<%getQualifiedName()%>">
             <permissions>

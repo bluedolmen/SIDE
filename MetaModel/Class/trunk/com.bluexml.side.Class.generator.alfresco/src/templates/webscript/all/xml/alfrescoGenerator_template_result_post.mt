@@ -29,7 +29,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%if (eContainer() == null) {%><%getProperty("alf.paths.extension.side.webscripts")%>/all/all.post.xml.ftl<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 
-<%for (getAllClasses()){%>
+<%for (getAllClasses().nSort("name")){%>
 <#assign recordsCount=<%getQualifiedName%>?size>
 <#if argsM["start"]?exists><#assign start=argsM["start"][0]></#if>
 <#if (start?exists)>
@@ -54,7 +54,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%}%>
 
 	<items>
-	<%for (getAllClasses()){%>
+	<%for (getAllClasses().nSort("name")){%>
 		<item>
 			<type><%getLabel%></type>
 			<totalcount>${records<%getQualifiedName%>Count}</totalcount>

@@ -25,9 +25,9 @@ import templates.servicesTemplates.Common
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='iso-8859-1'?>
 <unicity>
-	<%for (getAllClasses()) {%>
+	<%for (getAllClasses().nSort("name")) {%>
 	<type qname="<%getPrefixedQualifiedName()%>">
-	<%for (getAllAttributes()){%>
+	<%for (getAllSortedAttibutes()){%>
 		<%--<%if (metainfo[key.equalsIgnoreCase("required")].nSize()>0){%>--%>
 		<%if (unique){%>
 		<attribute qname="<%getPrefixedQualifiedName()%>"/>

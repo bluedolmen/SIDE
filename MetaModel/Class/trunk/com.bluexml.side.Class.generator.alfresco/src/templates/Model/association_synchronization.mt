@@ -8,7 +8,7 @@ import templates.servicesTemplates.Common
 <%if (eContainer() == null) {%><%getConfModulePath()%>/association-synchronization.properties<%}%>
 <%script type="clazz.ClassPackage" name="generator" file="<%validatedFilename%>"%>
 
-<%for (getAllAssociations()){%>
+<%for (getAllAssociations().nSort("name")){%>
 <%if (firstEnd.navigable && secondEnd.navigable){%>
 <%getQualifiedName(firstEnd)%>=<%getQualifiedName(secondEnd)%>
 <%}%>

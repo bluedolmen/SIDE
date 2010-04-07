@@ -20,7 +20,7 @@ import templates.servicesTemplates.Common
       </evaluators>
    </plug-ins-->
 
-   <%for (getAllClasses()){%>    
+   <%for (getAllClasses().nSort("name")){%>    
    <%-- TODO: do we need to generate this for abstract classes or not? --%>
    <%--if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0 && !isAbstract){--%>
    
@@ -50,7 +50,7 @@ import templates.servicesTemplates.Common
 <%getFolder()%>:<%getQualifiedName()%>
 
 <%script type="clazz.Clazz" name="getCustomBlueXMLFormConfiguration"%>
-<%for (getAllAttributes()){%>  
+<%for (getAllSortedAttibutes()){%>  
 <show id="<%getFolder()%>:<%getQualifiedName()%>"/>
 <%}%> 
 

@@ -33,11 +33,11 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 <%getFolder()%>_<%name%>model.title=BlueXML Custom Model
 <%getFolder()%>_<%name%>model.description=BlueXML Custom Model
 
-<%for (getAllClasses()){%>
+<%for (getAllClasses().nSort("name")){%>
 #Class' messages : <%getQualifiedName()%>
 <%getFolder()%>_<%current(1).name%>model.type.<%getFolder()%>_<%getQualifiedName()%>.title=<%getLabel()%>
 <%getFolder()%>_<%current(1).name%>model.type.<%getFolder()%>_<%getQualifiedName()%>.description=<%getDescriptionOrName()%>
-	<%for (attributes){%>
+	<%for (getSortedAttibutes()){%>
 <%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
 <%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
 	<%}%>
@@ -49,11 +49,11 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 	<%}%>	
 	
 <%}%>
-<%for (getAllAspects()){%>
+<%for (getAllAspects().nSort("name")){%>
 #Aspect's messages : <%getQualifiedName()%>
 <%getFolder()%>_<%current(1).name%>model.aspect.<%getFolder()%>_<%getQualifiedName()%>.title=<%getLabel()%>
 <%getFolder()%>_<%current(1).name%>model.aspect.<%getFolder()%>_<%getQualifiedName()%>.description=<%getDescriptionOrName()%>
-	<%for (attributes){%>
+	<%for (getSortedAttibutes()){%>
 <%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
 <%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
 	<%}%>

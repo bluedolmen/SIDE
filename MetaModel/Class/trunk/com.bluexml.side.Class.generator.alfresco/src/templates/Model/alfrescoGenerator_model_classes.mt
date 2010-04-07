@@ -29,6 +29,6 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_Classes" %>
-<%for (getAllClasses()) {%>
+<%for (getAllClasses().nSort("name")) {%>
 <%alfrescoGenerator_class()%>
 <%}%>

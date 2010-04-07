@@ -88,13 +88,17 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	        <parameter name="requiresMatch"><value>true</value></parameter>
 	    </constraint>
 		<!-- STARTMMLOOP -->
-	    <%for (getAllEnumerations()) {%>		   
+	    <%for (getAllEnumerations().nSort("name")) {%>		   
 	    <constraint name="<%getFolder()%>:nomenclature:<%getQualifiedName()%>" type="LIST">
             <parameter name="allowedValues">
                 <list>
-                	<%for (literals) {%>
-                    <value><%name%></value>
-                    <%}%>
+			<%for (literals.nSort("name")) {%>
+				<%if (value != null){%>
+					<value><%value%></value>
+				<%}else{%>
+					<value><%name%></value>
+				<%}%>
+			<%}%>
                 </list>
             </parameter>
         </constraint>

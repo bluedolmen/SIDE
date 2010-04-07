@@ -37,7 +37,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<li>icon32:${child.icon32}</li>
 	<li>nodeRef:${child.nodeRef}</li>
 	<li>parent:${child.parent.nodeRef}</li>
-	<%for (getAllAttributes()){%>
+	<%for (getAllSortedAttibutes()){%>
 	<#if (child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?exists)>
 		<#if child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?is_sequence>
 	<li><%eContainer().getQualifiedName()%>_<%name%>:<#list child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"] as key>${key} </#list></li>

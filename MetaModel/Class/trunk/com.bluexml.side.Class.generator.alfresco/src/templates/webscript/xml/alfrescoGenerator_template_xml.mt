@@ -40,7 +40,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<size>${child.size}</size>
 	<createdDate>${child.properties["cm:created"]?datetime}</createdDate>
 	<modifyDate>${child.properties["cm:modified"]?datetime}</modifyDate>
-	<%for (getAllAttributes()){%>
+	<%for (getAllSortedAttibutes()){%>
 	<#if (child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?exists)>
 		<#if child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?is_sequence>
 	<<%getQualifiedName()%>><#list child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"] as key>${key} </#list></<%getQualifiedName()%>>

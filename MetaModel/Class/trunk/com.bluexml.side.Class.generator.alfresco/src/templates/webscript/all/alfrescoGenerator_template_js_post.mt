@@ -30,7 +30,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%if (eContainer() == null) {%><%getProperty("alf.paths.extension.side.webscripts")%>/all/all.post.js<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 
-<%for (getAllClasses()){%>
+<%for (getAllClasses().nSort("name")){%>
 	var lucene="TYPE:\"<%getPrefixedNamespaceQName()%>\"";
     model.records = search.luceneSearch(lucene);
 	model.<%getQualifiedName()%> = model.records;

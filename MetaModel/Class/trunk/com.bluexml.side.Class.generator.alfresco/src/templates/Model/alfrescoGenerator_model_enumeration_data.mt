@@ -29,12 +29,12 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='iso-8859-1'?>
 <root_node>
-<%for (getAllEnumerations()){%>
+<%for (getAllEnumerations().nSort("name")){%>
 <%if (dynamic){%>
 <!-- Enumeration <%name%> -->
 <!-- Enumeration for Static tables -->
 
-<%for (literals){%>
+<%for (literals.nSort("name")){%>
 <Class qualifiedName="<%current("Enumeration").getQualifiedName()%>" id="<%i()%>">
 	<attributes>
 		<attribute qualifiedName="<%current("Enumeration").getQualifiedName()%>_code">
@@ -42,7 +42,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<value><%value%></value>
 			<%}else{%>
 			<value><%name%></value>
-			<%}%>			
+			<%}%>
 		</attribute>	
 		<attribute qualifiedName="<%current("Enumeration").getQualifiedName()%>_label">
 			<value><%name%></value>
@@ -88,7 +88,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		</attribute>
 		<associations>
 			<association qualifiedName="EnumerationType_typeOf_Litteral" type="simple" action="add/replace">
-				<%for (literals){%>
+				<%for (literals.nSort("name")){%>
 					<target qualifiedName="Litteral"><%i()%></target>
 				<%}%> <%-- END for (literals) --%>	
 			</association>

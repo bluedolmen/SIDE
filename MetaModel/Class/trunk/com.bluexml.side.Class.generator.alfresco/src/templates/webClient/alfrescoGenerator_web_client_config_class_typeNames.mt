@@ -26,6 +26,6 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_class_typeNames"%>
 
-			<%for (getAllClasses()) {%>
+			<%for (getAllClasses().nSort("name")) {%>
 			<type name="<%getFolder()%>:<%getQualifiedName()%>"/>
 			<%}%>

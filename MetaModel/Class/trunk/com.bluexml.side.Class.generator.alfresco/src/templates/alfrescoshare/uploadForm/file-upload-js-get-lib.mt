@@ -33,7 +33,7 @@ var contentTypes = getContentTypes().concat(availableContentTypes);
 //--END BLUEXML-PATCH [add custom content types]
 model.contentTypes = contentTypes;
 <%script type="clazz.ClassPackage" name="getCustomContentTypesAsJSON"%>
-<%getAllClasses().push()%>
+<%getAllClasses().nSort("name").push()%>
 <%for (peek()){%>
    <%getContentTypeJSON()%> <%if (i() < peek().nSize() - 1) {%>,<%}%>
 <%}%>

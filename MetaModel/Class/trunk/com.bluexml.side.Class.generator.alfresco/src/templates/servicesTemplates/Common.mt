@@ -54,3 +54,7 @@ config/<%getModulePath()%>
 <%getNamespaceURI()%>
 <%script type="common.NamedModelElement" name="getPrefixedQualifiedName"%>
 <%getPrefixedQName()%>
+<%script type="Clazz" name="getAllSortedAttibutes"%>
+<%getAllAttributes().nSort("name")%>
+<%script type="AbstractClass" name="getSortedAttibutes"%>
+<%attributes.nSort("name")%>

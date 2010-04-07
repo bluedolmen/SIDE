@@ -104,9 +104,9 @@ customize.title=Customize
 customize.header.actions=Actions
 
 ## Custom Types
-<%for (getAllAbstractClasses()){%>
+<%for (getAllAbstractClasses().nSort("name")){%>
 ### <%getFullName()%>
-<%for (attributes){%>
+<%for (getSortedAttibutes()){%>
 <%getQualifiedName%>=<%getLabel()%>
 <%}%>
 <%}%>

@@ -27,7 +27,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_dynamic" %>
 
 <%-- GENERATE THE DECLARATION OF ICON'S SPACES  --%>
-<%for (getAllClasses()){%>
+<%for (getAllClasses().nSort("name")){%>
 	<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0 && !abstract){%>
 <config evaluator="string-compare" condition="<%getFolder()%>:<%getQualifiedName()%> icons">
 	<icons>
@@ -38,10 +38,10 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%}%>
 
 <%-- GENERATE THE PROPERTIES REPRESENTATION OF A CONTENT  --%>
-<%for (getAllClasses()){%>
+<%for (getAllClasses().nSort("name")){%>
 <config evaluator="node-type" condition="<%getFolder()%>:<%getQualifiedName()%>">
 	<property-sheet>
-		<%for (getAllAttributes()){%>
+		<%for (getAllSortedAttibutes()){%>
 		<show-property name="<%getFolder()%>:<%getQualifiedName()%>" <%if (metainfo[key.equalsIgnoreCase("read-only")].nSize()>0) {%>read-only="true"<%}%> />				
 		<%}%>
 		<%for (getAllSourceAssociationEnds()){%>
@@ -56,7 +56,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<%-- <show-property name="versionLabel"/> 2009-08-14 - removed from generation => should be managed through aspect representation ?--%>
 	</property-sheet>
 	<%-- 2009-08-14 removed => useless ???
-	<%for (getAllAttributes()){%>
+	<%for (getAllSortedAttibutes()){%>
 	<property name="<%getFolder()%>:<%getQualifiedName()%>" />
 	<%}%>
 
@@ -65,7 +65,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<%}%>							
 		
 	<%for (current("clazz.ClassPackage").getAllAspects()){%>
-		<%for (attributes){%>
+		<%for (getSortedAttibutes()){%>
 	<property name="<%getFolder()%>:<%getQualifiedName()%>" />
 		<%}%>				
 	<%}%>
@@ -86,7 +86,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%for (getAllAspects()){%>
 <config evaluator="aspect-name" condition="<%getFolder()%>:<%getQualifiedName()%>">
 	<property-sheet>			
-		<%for (attributes){%>
+		<%for (getSortedAttibutes()){%>
 		<show-property name="<%getFolder()%>:<%getQualifiedName()%>" <%if (metainfo[key.equalsIgnoreCase("read-only")].nSize()>0) {%>read-only="true"<%}%> />
 		<%}%>			
 	</property-sheet>

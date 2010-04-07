@@ -26,8 +26,8 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_browseCreateMenu" %>
 
-   			<%for (getAllPackages().nSort()){%>	      	
-				<%for (classSet.nSort("title")){%>	
+   			<%for (getAllPackages().nSort("name")){%>	      	
+				<%for (classSet.nSort("name")){%>	
    			  		<%if (!abstract){%>
    			  			<%if (metainfo[key.equalsIgnoreCase("simplifyCreation")].nSize()>0 && metainfo[key.equalsIgnoreCase("simplifyCreation")].nFirst().value.equalsIgnoreCase("true")) {%>
 	            			<action idref="create_<%getQualifiedName()%>" />
