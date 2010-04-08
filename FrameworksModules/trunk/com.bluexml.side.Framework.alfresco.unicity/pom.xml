@@ -164,12 +164,6 @@
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>com.bluexml.side.Integration.alfresco</groupId>
-      <artifactId>xforms</artifactId>
-      <version>1.0.60</version>
-      <type>amp</type>
-    </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
   <!--
