@@ -97,60 +97,68 @@
 			<classifier>community</classifier>
 		</dependency>
 		<dependency>
-		  <groupId>org.alfresco</groupId>
-		  <artifactId>alfresco-webscript-framework</artifactId>
-		  <version>3.2r2</version>
-		  <classifier>community</classifier>
-		  <scope>provided</scope>
+			<groupId>org.alfresco</groupId>
+			<artifactId>alfresco-webscript-framework</artifactId>
+			<version>3.2r2</version>
+			<classifier>community</classifier>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-		  <groupId>org.alfresco</groupId>
-		  <artifactId>alfresco-core</artifactId>
-		  <version>3.2r2</version>
-		  <classifier>community</classifier>
-		  <scope>provided</scope>
+			<groupId>org.alfresco</groupId>
+			<artifactId>alfresco-core</artifactId>
+			<version>3.2r2</version>
+			<classifier>community</classifier>
+			<scope>provided</scope>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.alfresco</groupId>
+			<artifactId>alfresco-web-client</artifactId>
+			<version>3.2r2</version>
+			<classifier>community</classifier>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.1</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.1</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>1.1-beta-8</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring</artifactId>
-			<version>2.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- Example Jar dependency:  will be properly packed into the AMP /lib directory 
-		<dependency>
-			<groupId>rome</groupId>
-			<artifactId>opensearch</artifactId>
-			<version>0.1</version>
-		</dependency>
-		-->
-		<!-- Example AMP dependency:  will be properly overlayed in the  WAR produced by the integration-test phase in profile 'webapp'
-		<dependency>
-			<groupId>org.alfresco</groupId>
-			<artifactId>recordsmanagement</artifactId>
-			<version>2.1.0</version>
-			<type>amp</type>
-		</dependency>
-		-->
-		<!-- By default archetype assumes mysql for test webapp. Change src/test/properties/<env>/application.properties
-			 FIXME: support in memory db for cleaner and safer test runs
-		 -->
-		 <!--
-		<dependency>
-			<groupId>com.bluexml.side.Integration.alfresco</groupId>
-			<artifactId>model</artifactId>
-			<version>[1.0.1,)</version>
-			<type>amp</type>
-		</dependency>
-		<dependency>
-			<groupId>com.bluexml.side.Integration.alfresco</groupId>
-			<artifactId>model</artifactId>
-			<version>[1.0.1,)</version>
+			<version>2.0.8</version>
 			<type>jar</type>
-			<classifier>classes</classifier>
 			<scope>provided</scope>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
