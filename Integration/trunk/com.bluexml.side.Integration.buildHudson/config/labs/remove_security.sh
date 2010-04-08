@@ -51,6 +51,7 @@ done
 
 perl -p -i -e 's/archivePrefix=SIDE/archivePrefix=SIDE-Labs/g' $SOURCE_PATH/productBuilder/build.webadmin.properties
 perl -p -i -e 's/SIDE Enterprise/SIDE Community Edition/g' $SOURCE_PATH/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product
+perl -p -i -e 's/www.bluexml.com/www.side-labs.org/g' $WORKSPACE/S-IDE/MetaModel/Application/trunk/com.bluexml.side.Application.startup/src/com/bluexml/side/application/startup/Startup.java
 
 perl -ni -e 'print unless /com.bluexml.side.Integration.eclipse.builder/' $SOURCE_PATH/S-IDE/MetaModel/Common/trunk/com.bluexml.side.Common.core.feature/feature.xml
 perl -ni -e 'print unless /com.bluexml.side.Workflow.modeler.actions/' $SOURCE_PATH/S-IDE/MetaModel/Workflow/trunk/com.bluexml.side.Workflow.modeler.feature/feature.xml
