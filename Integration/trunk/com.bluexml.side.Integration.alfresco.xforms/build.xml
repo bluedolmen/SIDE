@@ -1,4 +1,4 @@
-<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.side.Integration.alfresco.sql" default="patchWebapps">
+<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.side.Integration.alfresco.xforms" default="patchWebapps">
 	<property file="build.${user.name}.properties" />
 	<property file="${user.home}/build.properties" />
 	<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.0.10.jar" />
@@ -21,7 +21,7 @@
 		<echo message="==========" />
 		<echo message="patch the web application webapps.home=${webapps.home}" />
 
-		<copy todir="${webapps.home}/alfresco">
+		<copy todir="${webapps.home}/alfresco" failonerror="false">
 			<fileset dir="target/${moduleId}-${mypom.version}/web" id="id">
 				<include name="**/**" />
 			</fileset>
