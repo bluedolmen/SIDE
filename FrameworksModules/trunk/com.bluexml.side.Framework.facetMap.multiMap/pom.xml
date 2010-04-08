@@ -3,8 +3,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side.Framework.facetMap</groupId>
   <artifactId>multiMap</artifactId>
+  <name>facet map extension to manage facetmaps</name>
   <version>1.0.10</version>
-  <name>Dashlets Alfresco share</name>
   <description>including facetmap in alfresco share</description>
   <packaging>zip</packaging>
   <parent>
