@@ -18,7 +18,8 @@ public abstract class AbstractRenamingStrategy {
 	public abstract String renameTable(String tableName);
 		
 	private void checkMetaData() {
-		logger.debug("Checking meta-data for retrieving max length of table names");
+		if (logger.isDebugEnabled())
+			logger.debug("Checking meta-data for retrieving max length of table names");
 		DatabaseMetaData dmd = null;
 		
 		try {
@@ -36,8 +37,8 @@ public abstract class AbstractRenamingStrategy {
 			connection.close();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (logger.isDebugEnabled())
+				logger.debug(e);
 		}
 	}
 	
