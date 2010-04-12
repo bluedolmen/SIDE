@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <metamodel
+            description="Check this to generate data models on leading frameworks.&lt;br&gt; This Data Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce data models and various generators to instantiate these models on leading frameworks."
+            id="http://www.kerblue.org/class/1.0"
+            name="KSR500 Data"
+            url="http://www.kerblue.org/v2/ksr500-class/">
+         <technology
+               description="Check this to generate your Data models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports."
+               id="alfresco"
+               name="Alfresco"
+               url="http://www.alfresco.com">
+            <technologyVersion
+                  description="Check this to generate data models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release."
+                  id="alfresco_3.2E"
+                  version="Alfresco3.2 Enterprise">
+               <generatorVersion
+                     class="com.bluexml.side.clazz.generator.alfresco.enterprise.AlfrescoGenerator"
+                     id="com.bluexml.side.Class.generator.alfresco.enterprise"
+                     version="SIDE Content Model Generator for Alfresco Enterprise">
+                  <configurationParameter
+                        key="com.bluexml.side.Class.generator.alfresco.module.version"
+                        label="Class Module version">
+                  </configurationParameter>
+                  <option
+                        defaultOption="true"
+                        key="alfresco.share.extension.enterprise"
+                        label="Alfresco Share Extension">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Integration.alfresco.upload"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.2E"
+                           versionMax="1.0.15"
+                           versionMin="1.0.15">
+                     </moduleDependence>
+                  </option>
+                  <option
+                        key="alfresco.webscript.report.enterprise"
+                        label="Alfresco Report Webscripts">
+                  </option>
+                  <configurationParameter
+                        documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model."
+                        key="alfresco.url"
+                        label="Alfresco URL">
+                  </configurationParameter>
+                  <option
+                        documentation="Check this option to include the SIDE SQL extension module for Alfresco.&lt;br&gt;This module provides the synchronisation of alfresco data into a relational database.&lt;br&gt; Queries with joins can thus be performed."
+                        key="com.bluexml.side.Class.generator.alfresco.sql.enterprise"
+                        label="Alfresco SQL">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Integration.alfresco.sql"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.2E"
+                           versionMax="1.1.20"
+                           versionMin="1.1.20">
+                     </moduleDependence>
+                  </option>
+                  <moduleDependence
+                        moduleId="com.bluexml.side.Integration.alfresco.model"
+                        moduleType="amp"
+                        technologyVersion="alfresco_3.2E"
+                        versionMax="1.0.14"
+                        versionMin="1.0.14">
+                  </moduleDependence>
+                  <moduleDependence
+                        moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement"
+                        moduleType="amp"
+                        technologyVersion="alfresco_3.2E"
+                        versionMax="1.1.17"
+                        versionMin="1.1.17">
+                  </moduleDependence>
+                  <option
+                        key="alfresco.webscripts.common.enterprise"
+                        label="Alfresco Common Webscripts">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Integration.alfresco.xforms"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.2E"
+                           versionMax="1.0.53"
+                           versionMin="1.0.53">
+                     </moduleDependence>
+                  </option>
+                  <option
+                        documentation="Generates random data regarding the current Alfresco model. The generated ACP can be imported and reused accross various Alfresco installations."
+                        key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator.enterprise"
+                        label="Alfresco Random Data Generator">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Framework.alfresco.dataGenerator"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.2E"
+                           versionMax="1.0.66"
+                           versionMin="1.0.66">
+                     </moduleDependence>
+                  </option>
+                  <option
+                        defaultOption="false"
+                        documentation="additional module to check if created/updated items already exist; in this case the update or creation is forbidden"
+                        key="alfresco.unicity.enterprise"
+                        label="Content Type Uniqueness">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Framework.alfresco.unicity"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.2E"
+                           versionMax="1.0.34"
+                           versionMin="1.0.34">
+                     </moduleDependence>
+                  </option>
+                  <option
+                        defaultOption="false"
+                        key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript.enterprise"
+                        label="Alfresco FacetMap Extension">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.2E"
+                           versionMax="1.0.24"
+                           versionMin="1.0.24">
+                     </moduleDependence>
+                  </option>
+                  <configurationParameter
+                        documentation="account to use when getting documents from alfresco"
+                        key="alfresco.report.runas"
+                        label="report as">
+                  </configurationParameter>
+                  <option
+                        defaultOption="false"
+                        documentation="this api use alfresco web-services-client to contact alfresco and do CRUD actions"
+                        key="com.bluexml.side.Class.generator.alfresco.enterprise.webserviceJavaAPI"
+                        label="generate java API">
+                  </option>
+               </generatorVersion>
+            </technologyVersion>
+         </technology>
+      </metamodel>
+   </extension>
+
+</plugin>
