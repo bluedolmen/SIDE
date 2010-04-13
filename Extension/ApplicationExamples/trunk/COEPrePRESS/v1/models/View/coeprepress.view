@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_MT3mYBGPEd-y1uNXScORgg">
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" xmi:id="_MT3mYBGPEd-y1uNXScORgg" name="coEprepressviews">
   <views xsi:type="view:ComposedView" xmi:id="_W_4gUBGTEd-y1uNXScORgg" name="List">
     <children xsi:type="view:DataList" xmi:id="_W_4gURGTEd-y1uNXScORgg" name="Document">
       <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_XfXV4BDIEd-gpYv8CBAghQ"/>
