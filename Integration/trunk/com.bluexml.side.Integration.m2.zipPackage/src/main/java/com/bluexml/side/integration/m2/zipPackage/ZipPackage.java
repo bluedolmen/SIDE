@@ -113,6 +113,7 @@ public class ZipPackage extends AbstractMojo {
 			getLog().debug("launch ant script");
 			project.executeTarget("package");
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new MojoExecutionException(e.getMessage(), e);
 		}
 		getLog().debug("ant task finished");

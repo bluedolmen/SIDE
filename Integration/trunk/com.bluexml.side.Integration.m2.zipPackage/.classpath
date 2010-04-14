@@ -1,27 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
-	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/ant/ant/1.7.1/ant-1.7.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/ant/ant-launcher/1.7.1/ant-launcher-1.7.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar" sourcepath="M2_REPO/junit/junit/3.8.1/junit-3.8.1-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-archiver/2.4/maven-archiver-2.4.jar" sourcepath="M2_REPO/org/apache/maven/maven-archiver/2.4/maven-archiver-2.4-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-artifact/2.0/maven-artifact-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-artifact/2.0/maven-artifact-2.0-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-artifact-manager/2.0/maven-artifact-manager-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-artifact-manager/2.0/maven-artifact-manager-2.0-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-model/2.0/maven-model-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-model/2.0/maven-model-2.0-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-plugin-api/2.0/maven-plugin-api-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-plugin-api/2.0/maven-plugin-api-2.0-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-profile/2.0/maven-profile-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-profile/2.0/maven-profile-2.0-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-project/2.0/maven-project-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-project/2.0/maven-project-2.0-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-repository-metadata/2.0/maven-repository-metadata-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-repository-metadata/2.0/maven-repository-metadata-2.0-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-archiver/1.0-alpha-11/plexus-archiver-1.0-alpha-11.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-archiver/1.0-alpha-11/plexus-archiver-1.0-alpha-11-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-classworlds/1.2-alpha-6/plexus-classworlds-1.2-alpha-6.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-component-api/1.0-alpha-15/plexus-component-api-1.0-alpha-15.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-component-api/1.0-alpha-15/plexus-component-api-1.0-alpha-15-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-container-default/1.0-alpha-8/plexus-container-default-1.0-alpha-8.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-container-default/1.0-alpha-8/plexus-container-default-1.0-alpha-8-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-interpolation/1.6/plexus-interpolation-1.6.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-interpolation/1.6/plexus-interpolation-1.6-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-io/1.0-alpha-3/plexus-io-1.0-alpha-3.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-io/1.0-alpha-3/plexus-io-1.0-alpha-3-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-utils/1.4.9/plexus-utils-1.4.9.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-alpha-5/wagon-provider-api-1.0-alpha-5.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-alpha-5/wagon-provider-api-1.0-alpha-5-sources.jar"/>
+	<classpathentry kind="src" output="target/classes" path="src/main/java"/>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

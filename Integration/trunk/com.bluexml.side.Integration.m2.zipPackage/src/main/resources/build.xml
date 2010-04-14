@@ -17,6 +17,7 @@
 		<echo message="module id :${module.id}" />
 		<echo message="module version :${module.version}" />
 		<mkdir dir="${classesFolder}" />
+		<mkdir dir="${dependencies}" />
 		<!-- TODO: Insert your custom code -->
 
 		<jar destfile="${module.jar}">
@@ -27,11 +28,11 @@
 		<copy todir="${tmpFolder}">
 			<fileset dir="${resources}" />
 		</copy>
-		<zip destfile="${module.zip}">
+		<zip destfile="${module.zip}" whenempty="skip">
 			<zipfileset dir="${tmpFolder}">
 				<include name="**/*.*" />
 			</zipfileset>
-			<zipfileset dir="${dependencies}" prefix="WEB-INF/lib">
+			<zipfileset dir="${dependencies}" prefix="WEB-INF/lib" >
 				<include name="*.jar" />
 			</zipfileset>
 			<zipfileset file="${module.jar}" prefix="WEB-INF/lib" />
