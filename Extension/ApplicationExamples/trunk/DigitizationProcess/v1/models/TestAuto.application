@@ -52,21 +52,21 @@
     <deployerConfigurations id_techno_version="chiba_1_5.x" impl_class="com.bluexml.side.deployer.xformsdirectcopy.DeployerXforms" id="com.bluexml.side.Deployer.xformsDirectCopy" technologyVersionName="Chiba 1.5.x" technologyName="XForms" contributorId="com.bluexml.side.Deployer.xformsDirectCopy" deployerName="SIDE Chiba X-Forms Direct Deployer">
       <options key="com.bluexml.side.Deployer.xformsDirectCopy.clean"/>
     </deployerConfigurations>
+    <deployerConfigurations id_techno_version="ant_1.7.1" impl_class="com.bluexml.side.deployer.antdeployer.ANTDeployer" id="com.bluexml.side.Deployer.antDeployer" technologyVersionName="ANT 1.7.1" technologyName="ANT" contributorId="com.bluexml.side.Deployer.antDeployer" deployerName="ANT Deployer" shared="true"/>
     <deployerConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.deployer.alfresco.directcopy.AlfrescoDeployer" id="com.bluexml.side.Deployer.alfrescoDirectCopy" technologyVersionName="Alfresco3.x Community Edition" technologyName="Alfresco" contributorId="com.bluexml.side.Deployer.alfrescoDirectCopy" deployerName="SIDE Alfresco Direct Deployer">
       <options key="com.bluexml.side.deployerDirect.alfresco.clean"/>
     </deployerConfigurations>
-    <deployerConfigurations id_techno_version="ant_1.7.1" impl_class="com.bluexml.side.deployer.antdeployer.ANTDeployer" id="com.bluexml.side.Deployer.antDeployer" technologyVersionName="ANT 1.7.1" technologyName="ANT" contributorId="com.bluexml.side.Deployer.antDeployer" deployerName="ANT Deployer" shared="true"/>
     <deployerConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" contributorId="com.bluexml.side.Deployer.documentation" deployerName="SIDE Documentation Deployer"/>
     <deployerConfigurations id_techno_version="freemind" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.freemind" technologyVersionName="FreeMind" technologyName="MindMap" contributorId="com.bluexml.side.Requirements.generator" deployerName="freemind deployer"/>
     <deployerConfigurations id_techno_version="office_excel" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.excel" technologyVersionName="Excel Document" technologyName="Office Document" contributorId="com.bluexml.side.Requirements.generator" deployerName="excel deployer"/>
     <deployerConfigurations id_techno_version="webproject_1_0" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.webproject" technologyVersionName="Web Project 1.0" technologyName="Web Project" contributorId="com.bluexml.side.Requirements.generator" deployerName="webproject deployer"/>
     <deployerConfigurations id_techno_version="opendocument_writer" impl_class="com.bluexml.side.util.deployer.FakeDeployer" id="com.bluexml.side.Requirements.deployer.doc" technologyVersionName="Open Document Writer" technologyName="Open Document" contributorId="com.bluexml.side.Requirements.generator" deployerName="doc deployer"/>
   </elements>
-  <elements xsi:type="app:Model" name="DigitizationProcess.dt" file="/DigitizationProcess_example/v1/models/Data/DigitizationProcess.dt"/>
-  <elements xsi:type="app:Model" name="DigitalizationProcess.data.form" file="/DigitizationProcess_example/v1/models/Form/DigitalizationProcess.data.form"/>
-  <elements xsi:type="app:Model" name="DigitizationProcess.form" file="/DigitizationProcess_example/v1/models/Form/DigitizationProcess.form"/>
-  <elements xsi:type="app:Model" name="advancedSearch.form" file="/DigitizationProcess_example/v1/models/Form/advancedSearch.form"/>
-  <elements xsi:type="app:Model" name="DigitizationProcess.portal" file="/DigitizationProcess_example/v1/models/Portal/DigitizationProcess.portal"/>
-  <elements xsi:type="app:Model" name="DigitizationProcess.view" file="/DigitizationProcess_example/v1/models/View/DigitizationProcess.view"/>
-  <elements xsi:type="app:Model" name="DigitizationProcess.workflow" file="/DigitizationProcess_example/v1/models/Workflow/DigitizationProcess.workflow"/>
+  <elements xsi:type="app:Model" name="DigitizationProcess.dt" file="/DigitizationProcess/v1/models/Data/DigitizationProcess.dt"/>
+  <elements xsi:type="app:Model" name="DigitalizationProcess.data.form" file="/DigitizationProcess/v1/models/Form/DigitalizationProcess.data.form"/>
+  <elements xsi:type="app:Model" name="DigitizationProcess.form" file="/DigitizationProcess/v1/models/Form/DigitizationProcess.form"/>
+  <elements xsi:type="app:Model" name="advancedSearch.form" file="/DigitizationProcess/v1/models/Form/advancedSearch.form"/>
+  <elements xsi:type="app:Model" name="DigitizationProcess.portal" file="/DigitizationProcess/v1/models/Portal/DigitizationProcess.portal"/>
+  <elements xsi:type="app:Model" name="DigitizationProcess.view" file="/DigitizationProcess/v1/models/View/DigitizationProcess.view"/>
+  <elements xsi:type="app:Model" name="DigitizationProcess.workflow" file="/DigitizationProcess/v1/models/Workflow/DigitizationProcess.workflow"/>
 </app:Application>
