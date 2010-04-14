@@ -1,6 +1,8 @@
 package com.bluexml.side.Integration.m2.ampMojo;
 
-import org.alfresco.maven.plugin.amp.Overlay; /*
+import org.alfresco.maven.plugin.amp.Overlay;
+
+/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
