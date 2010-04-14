@@ -57,7 +57,8 @@ public class AssociationSynchronizationPolicy implements
 		
 			if (oppositeAssociationTypeQName != null) {
 				if (! oppositeAssociationInProcess(associationRef)) {
-					logger.debug("Association synchronisation policy, CREATE ASSOCIATION");
+					if (logger.isDebugEnabled())
+						logger.debug("Association synchronisation policy, CREATE ASSOCIATION '" + associationRef.toString() + "'");
 					
 					// Register the association in the transaction
 					setContext(associationRef);
@@ -80,7 +81,8 @@ public class AssociationSynchronizationPolicy implements
 			
 			if (oppositeAssociationTypeQName != null) {
 				if (! oppositeAssociationInProcess(associationRef)) {
-					logger.debug("Association synchronisation policy, DELETE ASSOCIATION");
+					if (logger.isDebugEnabled())
+						logger.debug("Association synchronisation policy, DELETE ASSOCIATION '" + associationRef.toString() + "'");
 					
 					// Register the association in the transaction
 					setContext(associationRef);
