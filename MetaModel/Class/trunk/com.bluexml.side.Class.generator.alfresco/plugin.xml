@@ -5,11 +5,7 @@
     <metamodel description="Check this to generate data models on leading frameworks.&lt;br&gt; This Data Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce data models and various generators to instantiate these models on leading frameworks." id="http://www.kerblue.org/class/1.0" name="KSR500 Data" url="http://www.kerblue.org/v2/ksr500-class/">
       <technology description="Check this to generate your Data models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports." id="alfresco" name="Alfresco" url="http://www.alfresco.com">
         <technologyVersion description="Check this to generate data models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.x" version="Alfresco3.x Community Edition">
-          <generatorVersion
-                class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator"
-                hidden="visible"
-                id="com.bluexml.side.Class.generator.alfresco"
-                version="SIDE Content Model Generator for Alfresco">
+          <generatorVersion class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator" hidden="visible" id="com.bluexml.side.Class.generator.alfresco" version="SIDE Content Model Generator for Alfresco">
             <configurationParameter documentation="Set this value to the version of the generated AMPs, default value is '1.0'.&lt;br&gt;At Alfresco start, the version is displayed in the console and may easily be checked to ensure good production deployment." key="com.bluexml.side.Class.generator.alfresco.module.version" label="Class Module version" />
             <!--<option
                         documentation="Check this option to generate a default view for the document list of the Alfresco Share Document Library page."
@@ -43,7 +39,7 @@
               <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.sql" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.21" versionMax="1.1.21" />
             </option>
             <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.14" versionMax="1.0.14" />
-            <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.17" versionMax="1.1.17" />
+            <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.18" versionMax="1.1.18" />
             <option documentation="Check this option to include the production of the Alfresco's common webscripts in the generation.&lt;br&gt;If not checked, the webscripts are not included in the generated AMPs.&lt;br&gt;" key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
               <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.61" versionMax="1.0.61" />
             </option>
