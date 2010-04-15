@@ -778,6 +778,7 @@ public class ApplicationUtil {
 		tmpFolder.mkdirs();
 		List<com.bluexml.side.util.dependencies.ModuleConstraint> lmc = buildOfflineConfiguration();
 		DependencesManager dm = new DependencesManager(lmc, false);
+		dm.setGeneratorID("prepareForOffline");
 		dm.goOffline(tmpFolder);
 
 	}

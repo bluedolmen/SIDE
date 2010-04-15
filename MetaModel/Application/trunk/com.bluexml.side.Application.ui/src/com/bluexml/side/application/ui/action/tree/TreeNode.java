@@ -96,4 +96,8 @@ public abstract class TreeNode extends TreeElement {
 	public List<CheckConstraints> getMustbeUnchecked() {
 		return mustbeUnchecked;
 	}
+	
+	public String toString() {
+		return getFullId("#");
+	}
 }

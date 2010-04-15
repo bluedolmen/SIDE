@@ -55,12 +55,13 @@ public class Generate extends WorkspaceJob {
 	/*
 	 * Developer mode that use directly local repository instead of embedded one
 	 */
-	public static final String FM_dev = "FM_dev"; 
+	public static final String FM_dev = "FM_dev";
 	/*
-	 * Developer mode that use maven repository servers to update local repository
+	 * Developer mode that use maven repository servers to update local
+	 * repository
 	 */
 	public static final String UPDATE_DEPENDENCIES = "UPDATE_DEPENDENCIES";
-	
+
 	private static int NB_GENERATION_STEP = 3;
 	private static int NB_DEPLOY_STEP = 4;
 	private static int NB_GENERAL_STEP = 2;
