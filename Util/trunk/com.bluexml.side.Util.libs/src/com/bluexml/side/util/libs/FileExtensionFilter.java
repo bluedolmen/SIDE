@@ -3,7 +3,7 @@ package com.bluexml.side.util.libs;
 import java.io.File;
 import java.io.FileFilter;
 
-public class FileExtensionFilter  implements FileFilter {
+public class FileExtensionFilter implements FileFilter {
 	String exts[];
 
 	public FileExtensionFilter(String exts) {
@@ -13,9 +13,13 @@ public class FileExtensionFilter  implements FileFilter {
 	public boolean accept(File file) {
 		boolean ok = true;
 		try {
-			String ext = FileHelper.getFileExt(file);
-			for (String ext_ : exts) {
-				ok &= ext_.equals(ext);
+			if (file.isFile()) {
+				String ext = FileHelper.getFileExt(file);
+				for (String ext_ : exts) {
+					ok &= ext_.equals(ext);
+				}
+			} else {
+				ok = false;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
