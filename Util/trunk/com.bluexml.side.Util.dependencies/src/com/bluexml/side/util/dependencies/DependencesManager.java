@@ -9,12 +9,28 @@ import java.util.Map;
 public class DependencesManager {
 	private boolean offline;
 	private Map<String, List<ModuleConstraint>> contraints = new HashMap<String, List<ModuleConstraint>>();
+	private String generatorID;
 
-	public DependencesManager(List<ModuleConstraint> lmc,boolean offline) {
+	public DependencesManager(List<ModuleConstraint> lmc, boolean offline) {
 		this.offline = offline;
+		this.generatorID = generatorID;
 		for (ModuleConstraint mc : lmc) {
 			addEntry(contraints, mc.getTech_version(), mc);
 		}
+	}
+
+	/**
+	 * @return the generatorID
+	 */
+	public String getGeneratorID() {
+		return generatorID;
+	}
+
+	/**
+	 * @param generatorID the generatorID to set
+	 */
+	public void setGeneratorID(String generatorID) {
+		this.generatorID = generatorID;
 	}
 
 	private void addEntry(Map<String, List<ModuleConstraint>> tech_v_dep, String tech_v, ModuleConstraint mc) {
@@ -75,7 +91,7 @@ public class DependencesManager {
 		for (Map.Entry<String, List<ModuleConstraint>> mc : this.getContraints().entrySet()) {
 			// copy dependencies
 			MavenTmpProject mvp = new MavenTmpProject(workFolder, mc.getKey(), getConstraintsFor(mc.getKey()), offline);
-			mvp.copyAllDependencies(new File(generateFolder, mc.getKey()));
+			mvp.copyAllDependencies(new File(generateFolder, mc.getKey()),generatorID);
 
 		}
 	}
@@ -84,7 +100,7 @@ public class DependencesManager {
 		for (Map.Entry<String, List<ModuleConstraint>> mc : this.getContraints().entrySet()) {
 			// take care of offline mode
 			MavenTmpProject mvp_offline = new MavenTmpProject(workFolder, mc.getKey() + "_offline", getConstraintsFor(mc.getKey()), false);
-			mvp_offline.goOffline();
+			mvp_offline.goOffline(generatorID);
 		}
 	}
 

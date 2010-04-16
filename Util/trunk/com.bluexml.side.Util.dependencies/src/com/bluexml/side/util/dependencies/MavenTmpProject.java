@@ -64,7 +64,7 @@ public class MavenTmpProject {
 	 * @return
 	 * @throws Exception
 	 */
-	private void createProject() throws Exception {
+	private void createProject(String artifactId) throws Exception {
 		pomFile = new File(projectFolder, "pom.xml");
 		InputStream in = this.getClass().getResourceAsStream("model.pom.xml");
 		// copy the default pom to the tmpProject
@@ -79,13 +79,19 @@ public class MavenTmpProject {
 			Element depends = buildPomDependency(n, mc);
 			dependencies.addContent(depends);
 		}
+		
+		// setArtifactId
+		Element artifactIdE = project.getChild("artifactId", n);
+		artifactIdE.setText(artifactId);
+		
+		
 		FileOutputStream os = new FileOutputStream(pomFile);
 		outputter.output(pom, os);
 		os.close();
 	}
 
-	public void copyAllDependencies(File whereTocopy) throws Exception {
-		createProject();
+	public void copyAllDependencies(File whereTocopy,String artifactId) throws Exception {
+		createProject(artifactId);
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("outputDirectory", whereTocopy.getAbsolutePath());
 		params.put("excludeScope", "provided");
@@ -113,8 +119,8 @@ public class MavenTmpProject {
 		return mavenUtil;
 	}
 
-	public void goOffline() throws Exception {
-		createProject();
+	public void goOffline(String artifactId) throws Exception {
+		createProject(artifactId);
 		HashMap<String, String> params = new HashMap<String, String>();
 
 		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:go-offline", params, inline_profiles, false);
