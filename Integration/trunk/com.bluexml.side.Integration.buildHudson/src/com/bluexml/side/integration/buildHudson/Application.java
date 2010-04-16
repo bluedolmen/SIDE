@@ -25,6 +25,7 @@ public class Application {
 	public static String build_number = "";
 	public static String build_id = "";
 	public static String svn_revision = "";
+	public static String rcp = "";
 	public static List<String> projectsExcluded;
 
 	// si au moins un paramï¿½tre n'est pas renseignï¿½, alors on suppose que le
@@ -46,6 +47,7 @@ public class Application {
 		String argument2 = "";
 		String argument3 = "";
 		String argument4 = "";
+		String argument5 = "";
 
 		System.out.println("****************************************");
 		System.out.println("**** Lancement du Build Automatique ****");
@@ -56,6 +58,7 @@ public class Application {
 			argument2 = args[1];
 			argument3 = args[2];
 			argument4 = args[3];
+			argument5 = args[4];
 		} catch (Exception e) {
 			parametre = false;
 		}
@@ -77,11 +80,13 @@ public class Application {
 			build_number = argument2;
 			build_id = argument3;
 			svn_revision = argument4;
+			rcp = argument5;
 			System.out.println("**** Parametre ****");
 			System.out.println("- workspace = " + workspace);
 			System.out.println("- build_number = " + build_number);
 			System.out.println("- build_id = " + build_id);
 			System.out.println("- svn_revision = " + svn_revision);
+			System.out.println("- rcp = " + rcp);
 
 		} else {
 
@@ -89,106 +94,170 @@ public class Application {
 			System.out.println("**** Aucun Parametre ****");
 			System.out.println("- workspace = " + workspace);
 		}
-
-		// if (Application.EnterpriseRelease){
-		projectsExcluded = Utils.getProjects("projectExcluded");
-		// }else{
-		// projectsExcluded = Utils.getProjects("projectLabsExcluded");
-		// }
-
-		System.out.println("\nLancï¿½ le " + Utils.getDate2() + " ï¿½ " + Utils.getTime());
-
-		// crï¿½ation du buildSVN.xml
-		System.out.println("\n- Crï¿½ation de " + Utils.getBuildPath() + File.separator + "buildSVN.xml");
-		createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
-
-		// si on travaille sans Hudson, alors on va rï¿½aliser,
-		// avec ant, le checkout et/ou update
-		if (!parametre) {
-			// Execution du buildSVN.xml
-			System.out.println("\nRï¿½alisation du checkout et du update...");
-			execBuild("buildSVN", "build");
-		}
-
-		// Mise ï¿½ jour des numï¿½ros de version en fonction du fichier de log
-		// System.out.println("\nMise ï¿½ jour des numï¿½ros de version (si besoin)...");
-
-		// si labs, on ne met pas ï¿½ jour les versions des features et on ne
-		// commit pas
-
-		// if (EnterpriseRelease) {
-		Utils.traitementUpdate();
-		// Commit
-		// commit is now done at the end of the complete build when all steps
-		// (till updae-site copy) are ok
-		// System.out.println("\nCommit des modifications sur le rï¿½pository...");
-		// execBuild("buildSVN", "svnCommit");
-		// }
 		
-		// launch prepare-compile for the project com.bluexml.side.Form.generator.xforms.chiba
-		
-		
-		
-		System.out.println("launch prepare-compile on "+ workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
-		execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
-		
+		if (rcp.equals("yes")) {
+			
+			// if (Application.EnterpriseRelease){
+			projectsExcluded = Utils.getProjects("projectExcluded");
+			// }else{
+			// projectsExcluded = Utils.getProjects("projectLabsExcluded");
+			// }
+	
+			System.out.println("\nLancï¿½ le " + Utils.getDate2() + " ï¿½ " + Utils.getTime());
+	
+			
+			// crï¿½ation du buildSVN.xml
+			System.out.println("\n- Crï¿½ation de " + Utils.getBuildPath() + File.separator + "buildSVN.xml");
+			createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
+	
+			// Mise ï¿½ jour des numï¿½ros de version en fonction du fichier de log
+			// System.out.println("\nMise ï¿½ jour des numï¿½ros de version (si besoin)...");
+	
+			// si labs, on ne met pas ï¿½ jour les versions des features et on ne
+			// commit pas
+	
+			
+			Utils.traitementUpdate();
+			
+			
+			// launch prepare-compile for the project com.bluexml.side.Form.generator.xforms.chiba
+			
+			
+			
+			System.out.println("launch prepare-compile on "+ workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+			execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
 				
-		
-		// create maven work folder and launch maven deploy
-		launchShScript("launch_maven.sh");
-
-		// launch script to build repository zip file
-		launchShScript("build_repository_SIDE.sh");
-
-		if (parametre) {
-			// copie du rï¿½pository dans le repertoire de travail (en
-			// sï¿½parant
-			// les plugins et les features)
-			Utils.preTraitement();
-		}
-		// update side.product
-		Utils.updateProduct();
-		
-		// get modified files and copy them into svn local copy
-		Utils.copyToRepository();
-
-		// crï¿½ation du build.xml
-		System.out.println("\n\n- CrŽation de " + Utils.getBuildPath() + File.separator + "build.xml");
-		createFile(getCorpsBuild(), Utils.getBuildPath(), "build.xml");
-
-		// crï¿½ation du buildAuto.product
-		System.out.println("- CrŽation du buildAuto.product");
-		createFile(getCorpsProduct(), Utils.getBuildPath(), "buildAuto.product");
-
-		// Execution du build.xml
-		System.out.println("\nRŽalisation du Build sur ...");
-
-		for (String projet : Utils.getProjects()) {
-			if (!projectsExcluded.contains(projet)) {
-				System.out.println("\t-" + projet);
+			
+			// create maven work folder and launch maven deploy
+			launchShScript("launch_maven.sh");
+	
+	
+			if (parametre) {
+				// copie du rï¿½pository dans le repertoire de travail (en
+				// sï¿½parant
+				// les plugins et les features)
+				Utils.preTraitement();
 			}
-		}
-		for (String projet : Utils.getProjects("projectToVersioned")) {
-			if (!projectsExcluded.contains(projet)) {
-				System.out.println("\t-" + projet);
+			// update side.product
+			Utils.updateProduct();
+			
+			// get modified files and copy them into svn local copy
+			Utils.copyToRepository();
+			
+			for (String projet : Utils.getProjects()) {
+				if (!projectsExcluded.contains(projet)) {
+					System.out.println("\t-" + projet);
+				}
 			}
+			for (String projet : Utils.getProjects("projectToVersioned")) {
+				if (!projectsExcluded.contains(projet)) {
+					System.out.println("\t-" + projet);
+				}
+			}
+			
 		}
+		else {
 
-		execBuild("build", "build");
-
-		// crï¿½ation du site.xml
-		System.out.println("\nUpdate du site.xml");
-		Utils.updateSiteXml();
-
-		// creation de jar pour les plugins qui ne le sont pas
-		createFile(getJarBuilder(), Utils.getBuildPath(), "jarBuilder.xml");
-		execBuild("jarBuilder", "jarBuilder");
-
-		// traitement final
-
-		// Dï¿½placement et suppression des rï¿½pertoires
-		System.out.println("\nDï¿½placement et suppression des rï¿½pertoires");
-		Utils.finalTraitement();
+			// if (Application.EnterpriseRelease){
+			projectsExcluded = Utils.getProjects("projectExcluded");
+			// }else{
+			// projectsExcluded = Utils.getProjects("projectLabsExcluded");
+			// }
+	
+			System.out.println("\nLancï¿½ le " + Utils.getDate2() + " ï¿½ " + Utils.getTime());
+	
+			// crï¿½ation du buildSVN.xml
+			System.out.println("\n- Crï¿½ation de " + Utils.getBuildPath() + File.separator + "buildSVN.xml");
+			createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
+	
+			// si on travaille sans Hudson, alors on va rï¿½aliser,
+			// avec ant, le checkout et/ou update
+			if (!parametre) {
+				// Execution du buildSVN.xml
+				System.out.println("\nRï¿½alisation du checkout et du update...");
+				execBuild("buildSVN", "build");
+			}
+	
+			// Mise ï¿½ jour des numï¿½ros de version en fonction du fichier de log
+			// System.out.println("\nMise ï¿½ jour des numï¿½ros de version (si besoin)...");
+	
+			// si labs, on ne met pas ï¿½ jour les versions des features et on ne
+			// commit pas
+	
+			// if (EnterpriseRelease) {
+			Utils.traitementUpdate();
+			// Commit
+			// commit is now done at the end of the complete build when all steps
+			// (till updae-site copy) are ok
+			// System.out.println("\nCommit des modifications sur le rï¿½pository...");
+			// execBuild("buildSVN", "svnCommit");
+			// }
+			
+			// launch prepare-compile for the project com.bluexml.side.Form.generator.xforms.chiba
+			
+			
+			
+			System.out.println("launch prepare-compile on "+ workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+			execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+			
+					
+			
+			// create maven work folder and launch maven deploy
+			launchShScript("launch_maven.sh");
+	
+			// launch script to build repository zip file
+			launchShScript("build_repository_SIDE.sh");
+	
+			if (parametre) {
+				// copie du rï¿½pository dans le repertoire de travail (en
+				// sï¿½parant
+				// les plugins et les features)
+				Utils.preTraitement();
+			}
+			// update side.product
+			Utils.updateProduct();
+			
+			// get modified files and copy them into svn local copy
+			Utils.copyToRepository();
+	
+			// crï¿½ation du build.xml
+			System.out.println("\n\n- CrŽation de " + Utils.getBuildPath() + File.separator + "build.xml");
+			createFile(getCorpsBuild(), Utils.getBuildPath(), "build.xml");
+	
+			// crï¿½ation du buildAuto.product
+			System.out.println("- CrŽation du buildAuto.product");
+			createFile(getCorpsProduct(), Utils.getBuildPath(), "buildAuto.product");
+	
+			// Execution du build.xml
+			System.out.println("\nRŽalisation du Build sur ...");
+	
+			for (String projet : Utils.getProjects()) {
+				if (!projectsExcluded.contains(projet)) {
+					System.out.println("\t-" + projet);
+				}
+			}
+			for (String projet : Utils.getProjects("projectToVersioned")) {
+				if (!projectsExcluded.contains(projet)) {
+					System.out.println("\t-" + projet);
+				}
+			}
+	
+			execBuild("build", "build");
+	
+			// crï¿½ation du site.xml
+			System.out.println("\nUpdate du site.xml");
+			Utils.updateSiteXml();
+	
+			// creation de jar pour les plugins qui ne le sont pas
+			createFile(getJarBuilder(), Utils.getBuildPath(), "jarBuilder.xml");
+			execBuild("jarBuilder", "jarBuilder");
+	
+			// traitement final
+	
+			// Dï¿½placement et suppression des rï¿½pertoires
+			System.out.println("\nDï¿½placement et suppression des rï¿½pertoires");
+			Utils.finalTraitement();
+		}
 
 		/*
 		 * // Build des projets seul
