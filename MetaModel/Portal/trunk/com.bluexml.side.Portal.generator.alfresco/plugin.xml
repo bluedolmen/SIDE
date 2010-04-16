@@ -5,7 +5,11 @@
     <metamodel description="Check this to generate portal models on leading frameworks.&lt;br&gt; This Portal Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce class models and various generators to instantiate these models on leading frameworks." id="http://www.kerblue.org/portal/1.0" name="KSR200 Portal" url="http://www.kerblue.org/portal/1.0">
       <technology description="Check this to generate your class models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports." id="alfresco" name="Alfresco" url="http://www.alfresco.com">
         <technologyVersion description="Check this to generate class models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.x" version="Alfresco3.x Community Edition">
-          <generatorVersion class="com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator" description="Check this to generate a full deployable Alfresco package containing the newly designed content model and other Alfresco artefacts.&lt;br&gt;The generated packages are standard Alfresco Module package which may be deployed in any Alfresco 3.x instance under the 'amps' directory.&lt;br&gt;SIDE provides the necessary components to deploy these packages through the 'deployer' tab." id="com.bluexml.side.Portal.generator.alfresco" version="SIDE Alfresco Portal Generator">
+          <generatorVersion
+                class="com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator"
+                hidden="visible"
+                id="com.bluexml.side.Portal.generator.alfresco"
+                version="SIDE Alfresco Portal Generator">
             <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.doclist" label="Alfresco Share document library component">
               <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.shareDoclist" moduleType="zip" technologyVersion="alfresco_3.x" versionMin="1.0.20" versionMax="1.0.20" />
               <!--<mustBeUnchecked
