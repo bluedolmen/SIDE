@@ -1,4 +1,5 @@
 package com.bluexml.side.util.generator;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,9 +31,17 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 * generators.
 	 */
 	protected static Map<String, String> generationParameters = new HashMap<String, String>();
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
 	protected static Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
 	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
-	
+
 	protected ComponentMonitor monitor;
 	protected String id;
 	public String TEMP_FOLDER = "tmp";
@@ -40,7 +49,6 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	protected static String techVersion = null;
 	protected DependencesManager dm;
 
-	
 	public ComponentMonitor getMonitor() {
 		return monitor;
 	}
@@ -70,7 +78,8 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		return false;
 	}
 
-	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm,ComponentMonitor monitor) throws Exception {
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm,
+			ComponentMonitor monitor) throws Exception {
 		this.monitor = monitor;
 		generationParameters = generationParameters_;
 		generatorOptions = generatorOptions_;
@@ -78,6 +87,8 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		techVersion = configurationParameters_.get("technologyVersion");
 		id = configurationParameters_.get("generatorId");
 		this.dm = dm;
+
+		this.dm.setGeneratorID(id);
 
 		// check parameters add warning if not set or empty
 		// check generationParameters :
@@ -90,7 +101,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		// configurationParameters.entrySet()) {
 		// if (iterable_element.getValue() != null &&
 		// iterable_element.getValue().length() > 0) {
-		//monitor.getLog().addWarningLog("Configuration Parameter not set",
+		// monitor.getLog().addWarningLog("Configuration Parameter not set",
 		// "this parameter ("+iterable_element.getKey()+") has not been set generation may be corrupted",
 		// "");
 		// }
@@ -118,8 +129,6 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
 		sortie.output(racine, new FileOutputStream(IFileHelper.getFile(IFileHelper.createFile(ff, this.id + "-stamp.xml")))); //$NON-NLS-1$
 	}
-
-	
 
 	/**
 	 * Return the absolute path to the generation target path
