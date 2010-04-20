@@ -16,11 +16,13 @@ public class AlfrescoPackager extends AbstractMultiPackager {
 		this.packagers = new HashMap<String, AbstractPackager>();
 		// construct all packager
 
+		IFolder techVFolder = ((IFolder) folder.getParent().getParent()).getFolder(technoV);
+
 		// AMP packager
-		AmpPackager ampP = new AmpPackager(folder, moduleProperties, technoV);
+		AmpPackager ampP = new AmpPackager(folder, moduleProperties, techVFolder);
 		packagers.put("amp", ampP);
 
-		WarPatchPackager wpackager = new WarPatchPackager(folder, moduleProperties.getProperty("module.id"), technoV, "share");
+		WarPatchPackager wpackager = new WarPatchPackager(folder, moduleProperties.getProperty("module.id"), techVFolder, "share");
 		packagers.put("wpackager", wpackager);
 	}
 

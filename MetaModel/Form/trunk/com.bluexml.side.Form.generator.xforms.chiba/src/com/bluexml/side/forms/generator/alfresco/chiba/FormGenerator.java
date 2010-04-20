@@ -49,21 +49,17 @@ public class FormGenerator extends AbstractGenerator {
 	private List<GeneratorInterface> generators = new ArrayList<GeneratorInterface>();
 
 	@Override
-	public void initialize(Map<String, String> generationParameters_,
-			Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_,
-			DependencesManager dm, ComponentMonitor monitor) throws Exception {
-		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, dm,
-				monitor);
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm,
+			ComponentMonitor monitor) throws Exception {
+		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, dm, monitor);
 
 		this.monitor = monitor;
 
 		successfulInit = false;
 		setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + defaultModelID);
-		File webappFolder = new File(getTemporarySystemFile(), "webapps" + File.separator
-				+ webappName);
+		File webappFolder = new File(getTemporarySystemFile(), "webapps" + File.separator + webappName);
 		xformGenerationFolder = new File(webappFolder.getAbsolutePath() + File.separator + "forms");
-		mappingGenerationFolder = new File(webappFolder.getAbsolutePath() + File.separator
-				+ "WEB-INF" + File.separator + "classes");
+		mappingGenerationFolder = new File(webappFolder.getAbsolutePath() + File.separator + "WEB-INF" + File.separator + "classes");
 
 		FileUtils.forceMkdir(xformGenerationFolder);
 		FileUtils.forceMkdir(mappingGenerationFolder);
@@ -87,15 +83,13 @@ public class FormGenerator extends AbstractGenerator {
 		mappingGenerator.setOutputRedirectFile(generateRedirectFile.getAbsolutePath());
 
 		// deal with messages.properties file
-		String messagesFilePath = generationParameters
-				.get("com.bluexml.side.Form.generator.xforms.chiba.messagesFilePath");
+		String messagesFilePath = generationParameters.get("com.bluexml.side.Form.generator.xforms.chiba.messagesFilePath");
 		if (StringUtils.trimToNull(messagesFilePath) != null) {
 			File file = new File(messagesFilePath);
 			if (file.exists()) {
 				setMessagesFilePath(messagesFilePath);
 			} else {
-				monitor
-						.addWarningText("The specified messages file does not exist. Will generate defaults.");
+				monitor.addWarningText("The specified messages file does not exist. Will generate defaults.");
 				messagesFilePath = null;
 			}
 		}
@@ -107,7 +101,7 @@ public class FormGenerator extends AbstractGenerator {
 				monitor.addWarningText("Could not generate and set the messages file.");
 			}
 		}
-		
+
 		// generate the forms.properties file
 		String filePath = resDir + File.separator + "forms.properties";
 		if (DefaultMessages.generateFormsFile(filePath) == false) {
@@ -115,8 +109,7 @@ public class FormGenerator extends AbstractGenerator {
 		}
 
 		// deal with the webapp address (protocol, host, port, context)
-		webappContext = generationParameters
-				.get("com.bluexml.side.Form.generator.xforms.chiba.webappContext");
+		webappContext = generationParameters.get("com.bluexml.side.Form.generator.xforms.chiba.webappContext");
 		if (StringUtils.trimToNull(webappContext) != null) {
 			// we check that the context is not 'forms'
 			int pos = webappContext.lastIndexOf('/');
@@ -157,16 +150,16 @@ public class FormGenerator extends AbstractGenerator {
 	}
 
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) {
-		return modelsInfo.containsKey(ClazzPackage.eNS_URI)
-				|| modelsInfo.containsKey(FormPackage.eNS_URI);
+		return modelsInfo.containsKey(ClazzPackage.eNS_URI) || modelsInfo.containsKey(FormPackage.eNS_URI);
 	}
 
 	public Collection<IFile> complete() throws Exception {
 		// must build package
 		// build archive from tmp folder
-		WarPatchPackager wpp = new WarPatchPackager(getIFolder(getTemporaryFolder()),
-				buildModuleProperties(defaultModelID).getProperty("module.id"), techVersion,
-				webappName);
+
+		IFolder root = getIFolder(getTemporaryFolder());
+		IFolder techVFolder = ((IFolder) root.getParent().getParent()).getFolder(techVersion);
+		WarPatchPackager wpp = new WarPatchPackager(root, buildModuleProperties(defaultModelID).getProperty("module.id"), techVFolder, webappName);
 
 		IFile chibaPackage = wpp.buildPackage();
 		ArrayList<IFile> result = new ArrayList<IFile>();
@@ -199,8 +192,7 @@ public class FormGenerator extends AbstractGenerator {
 		boolean simplifyClasses = true;
 		boolean renderDataBeforeWorkflow = true;
 		try {
-			FormGeneratorsManager formGenerator = new FormGeneratorsManager(clazzFiles, formsFiles,
-					monitor, simplifyClasses, renderDataBeforeWorkflow, false);
+			FormGeneratorsManager formGenerator = new FormGeneratorsManager(clazzFiles, formsFiles, monitor, simplifyClasses, renderDataBeforeWorkflow, false);
 			formGenerator.generate(generators);
 		} catch (RuntimeException e) {
 			monitor.addErrorTextAndLog("ERROR :" + e.getMessage(), e, "");

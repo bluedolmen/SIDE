@@ -1,32 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-<extension-point id="requirements_interpretation" name="Requirements interpretation" schema="schema/requirements_interpretation.exsd"/>
-
- <extension
-       id="com.bluexml.side.requirements.modeler.transformModel"
-       name="Transform requirements specification"
-       point="org.eclipse.ui.popupMenus">
-    <objectContribution
-          id="com.bluexml.side.requirements.modeler.transformModel"
-          nameFilter="*.requirements"
-          objectClass="org.eclipse.core.resources.IFile">
-       <action
-             class="com.bluexml.side.requirements.transformation.InterpretModel"
-             enablesFor="1"
-             icon="icons/transform.png"
-             id="com.bluexml.side.requirements.modeler.transformModel"
-             label="Transform requirements specification"
-             menubarPath="com.bluexml.side/requirements">
-       </action>
-       <menu
-             id="com.bluexml.side"
-             label="SIDE"
-             path="additions">
-          <groupMarker
-                name="requirements">
-          </groupMarker>
-       </menu>
+  <extension-point id="requirements_interpretation" name="Requirements interpretation" schema="schema/requirements_interpretation.exsd" />
+  <extension id="com.bluexml.side.requirements.modeler.transformModel" name="Transform requirements specification" point="org.eclipse.ui.popupMenus">
+    <objectContribution id="com.bluexml.side.requirements.modeler.transformModel" nameFilter="*.requirements" objectClass="org.eclipse.core.resources.IFile">
+      <action class="com.bluexml.side.requirements.transformation.InterpretModel" enablesFor="1" icon="icons/transform.png" id="com.bluexml.side.requirements.modeler.transformModel" label="Transform requirements specification" menubarPath="com.bluexml.side/requirements" />
+      <menu id="com.bluexml.side" label="SIDE" path="additions">
+        <groupMarker name="requirements" />
+      </menu>
     </objectContribution>
- </extension>
+  </extension>
 </plugin>
+

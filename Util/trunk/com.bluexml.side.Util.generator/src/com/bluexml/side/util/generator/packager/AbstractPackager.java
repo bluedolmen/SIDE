@@ -10,26 +10,29 @@ import com.bluexml.side.util.libs.IFileHelper;
 public abstract class AbstractPackager {
 	protected String workingdir;
 	protected IFolder IworkingDir; // generated folder
-	protected String technoV;
+	protected String technoVPath;
+	protected IFolder ItechnoVPath;
+	
 	
 
-	public AbstractPackager(IFolder folder, String technoV) {
+	public AbstractPackager(IFolder folder, IFolder ItechnoVPath) {
 		this.IworkingDir = folder;
 		this.workingdir = IFileHelper.convertIRessourceToSystemString(folder);
-		this.technoV = technoV;		
+		this.ItechnoVPath = ItechnoVPath;
+		this.technoVPath = IFileHelper.convertIRessourceToSystemString(ItechnoVPath);
 	}
 
 	abstract public IFile buildPackage() throws Exception;
+
 	abstract protected String getPackageFileName();
-	
-	
+
 	protected String getPackagePath() {
 		// get technoV from extension point tree
 		return getTechnoPath() + File.separator + getPackageFileName();
 	}
 
 	protected String getTechnoPath() {
-		return File.separator + ".." + File.separator + ".." + File.separator + technoV;
+		return technoVPath;
 	}
 
 	public String getWorkingdir() {
@@ -37,13 +40,16 @@ public abstract class AbstractPackager {
 	}
 
 	protected File getPackageFile() {
-		File container = new File(getWorkingdir() + getTechnoPath());
+		System.out.println("AbstractPackager.getPackageFile()");
+		System.out.println(getTechnoPath());
+		File container = new File(getTechnoPath());
 		container.mkdirs();
-		return new File(getWorkingdir() + getPackagePath());
+		return new File(getPackagePath());
 	}
 
 	protected IFile getPackageIFile() {
-		return IFileHelper.getIFile(this.IworkingDir.toString().replaceFirst("[^/]*/", "/") + getPackagePath());
+		return ItechnoVPath.getFile(getPackageFileName());
+//		return IFileHelper.getIFile(this.IworkingDir.toString().replaceFirst("[^/]*/", "/") + getPackagePath());
 	}
 
 	protected File getWorkingFolder() {
@@ -51,6 +57,5 @@ public abstract class AbstractPackager {
 	}
 
 	abstract protected File getFolderToPackage();
-	
-	
+
 }

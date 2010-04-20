@@ -13,8 +13,8 @@ public class JavaProjectPackager extends AbstractPackager {
 	String projectName;
 	String modelID;
 
-	public JavaProjectPackager(IFolder folder, String technoV, String modelID, String projectName) {
-		super(folder, technoV + File.separator + techVersion);
+	public JavaProjectPackager(IFolder folder, IFolder technoV, String modelID, String projectName) {
+		super(folder, technoV);
 		this.projectName = projectName;
 		this.modelID = modelID;
 	}

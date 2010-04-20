@@ -1,179 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
-         point="com.bluexml.side.Requirements.transformation.requirements_interpretation">
-      <interpretation
-            category="Mind Map/FreeMind"
-            label="List of agents : FreeMind">
-         <transformation
-               asm="src/mindmap/transformation/agentList/RWM2AgentList.asm"
-               input_metamodel_name="RWM"
-               input_model_name="IN"
-               output_metamodel_name="MindMap"
-               output_model_name="OUT"
-               target_MM="src/mindmap/mindmap.ecore">
-         </transformation>
-         <templateGeneration
-               mtFile="src/mindmap/generation/freemind/freemind.mt">
-         </templateGeneration>
-      </interpretation>
-      <interpretation
-            category="Mind Map/FreeMind"
-            label="List of goals : FreeMind">
-         <transformation
-               asm="src/mindmap/transformation/goalList/RWM2GoalList.asm"
-               input_metamodel_name="RWM"
-               input_model_name="IN"
-               output_metamodel_name="MindMap"
-               output_model_name="OUT"
-               target_MM="src/mindmap/mindmap.ecore">
-         </transformation>
-         <templateGeneration
-               mtFile="src/mindmap/generation/freemind/freemind.mt">
-         </templateGeneration>
-      </interpretation>
-      <interpretation
-            category="Mind Map/FreeMind"
-            label="List of entities : FreeMind">
-         <transformation
-               asm="src/mindmap/transformation/entityList/RWM2EntityList.asm"
-               input_metamodel_name="RWM"
-               input_model_name="IN"
-               output_metamodel_name="MindMap"
-               output_model_name="OUT"
-               target_MM="src/mindmap/mindmap.ecore">
-         </transformation>
-         <templateGeneration
-               mtFile="src/mindmap/generation/freemind/freemind.mt">
-         </templateGeneration>
-      </interpretation>
-      <interpretation
-            category="Mind Map/FreeMind"
-            label="List of entities by agent : FreeMind">
-         <transformation
-               asm="src/mindmap/transformation/entityListByAgent/RWM2EntityListByAgent.asm"
-               input_metamodel_name="RWM"
-               input_model_name="IN"
-               output_metamodel_name="MindMap"
-               output_model_name="OUT"
-               target_MM="src/mindmap/mindmap.ecore">
-         </transformation>
-         <templateGeneration
-               mtFile="src/mindmap/generation/freemind/freemind.mt">
-         </templateGeneration>
-      </interpretation>
-      <interpretation
-            category="Mind Map/FreeMind"
-            label="List of goals by agent : FreeMind">
-         <transformation
-               asm="src/mindmap/transformation/goalListByAgent/RWM2GoalListByAgent.asm"
-               input_metamodel_name="RWM"
-               input_model_name="IN"
-               output_metamodel_name="MindMap"
-               output_model_name="OUT"
-               target_MM="src/mindmap/mindmap.ecore">
-         </transformation>
-         <templateGeneration
-               mtFile="src/mindmap/generation/freemind/freemind.mt">
-         </templateGeneration>
-      </interpretation>
-      <interpretation
-            category="BlueXML"
-            label="BlueXML Model">
-         <transformation
-               asm="src/bluexml/transformation/RWM2BlueXML.asm"
-               input_metamodel_name="RWM"
-               input_model_name="IN"
-               new_name="bluexml_model.obl"
-               output_metamodel_name="BLUEXML"
-               output_model_name="OUT"
-               target_MM="src/bluexml/bluexml.ecore">
-         </transformation>
-      </interpretation>
-      <interpretation
-            category="Diagnostic/Spreadhseet"
-            label="Diagnostic">
-         <transformation
-               asm="src/diagnostic/transformation/RWM2Diagnostic.asm"
-               input_metamodel_name="RWM"
-               input_model_name="IN"
-               output_metamodel_name="Diagnostic"
-               output_model_name="OUT"
-               target_MM="src/diagnostic/diagnostic.ecore">
-         </transformation>
-         <templateGeneration
-               mtFile="src/diagnostic/generation/spreadsheet/spreadsheet.mt">
-         </templateGeneration>
-      </interpretation>
-      <interpretation
-            category="Prototype"
-            label="Web Project">
-         <transformation
-               asm="src/webproject/transformation/RWM2WebProject.asm"
-               input_metamodel_name="RWM"
-               input_model_name="IN"
-               output_metamodel_name="WebProject"
-               output_model_name="OUT"
-               target_MM="src/webproject/webproject.ecore">
-         </transformation>
-         <templateGeneration
-               mtFile="src/webproject/generation/data.mt">
-         </templateGeneration>
-         <templateGeneration
-               mtFile="src/webproject/generation/main.mt">
-         </templateGeneration>
-         <templateGeneration
-               mtFile="src/webproject/generation/main_edit.mt">
-         </templateGeneration>
-         <antScript
-               antScript="src/webproject/generation/build-default/">
-         </antScript>
-      </interpretation>
-      <interpretation
-            category="Documentation"
-            label="Cahier des charges">
-         <transformation
-               asm="src/documentation/transformation/RWM2CdCF.asm"
-               input_metamodel_name="RWM"
-               input_model_name="IN"
-               output_metamodel_name="Documentation"
-               output_model_name="OUT"
-               target_MM="src/documentation/documentation.ecore">
-         </transformation>
-         <templateGeneration
-               mtFile="src/documentation/generation/opendocument/content.mt">
-         </templateGeneration>
-         <templateGeneration
-               mtFile="src/documentation/generation/opendocument/manifest.mt">
-         </templateGeneration>
-         <templateGeneration
-               mtFile="src/documentation/generation/opendocument/meta.mt">
-         </templateGeneration>
-         <templateGeneration
-               mtFile="src/documentation/generation/opendocument/mimetype.mt">
-         </templateGeneration>
-         <templateGeneration
-               mtFile="src/documentation/generation/opendocument/styles.mt">
-         </templateGeneration>
-         <antScript
-               antScript="src/documentation/generation/opendocument/build-default/">
-         </antScript>
-      </interpretation>
-      <interpretation
-            category="Risk/Spreadsheet"
-            label="Risk">
-         <transformation
-               asm="src/risk/transformation/RWM2Risk.asm"
-               input_metamodel_name="RWM"
-               input_model_name="IN"
-               output_metamodel_name="RISK"
-               output_model_name="OUT"
-               target_MM="src/risk/risk.ecore">
-         </transformation>
-         <templateGeneration
-               mtFile="src/risk/generation/spreadsheet/spreadsheet.mt">
-         </templateGeneration>
-      </interpretation>
-   </extension>
+  <extension point="com.bluexml.side.Requirements.transformation.requirements_interpretation">
+    <interpretation category="Mind Map/FreeMind" label="List of agents : FreeMind">
+      <transformation asm="src/mindmap/transformation/agentList/RWM2AgentList.asm" input_metamodel_name="RWM" input_model_name="IN" output_metamodel_name="MindMap" output_model_name="OUT" target_MM="src/mindmap/mindmap.ecore" />
+      <templateGeneration mtFile="src/mindmap/generation/freemind/freemind.mt" />
+    </interpretation>
+    <interpretation category="Mind Map/FreeMind" label="List of goals : FreeMind">
+      <transformation asm="src/mindmap/transformation/goalList/RWM2GoalList.asm" input_metamodel_name="RWM" input_model_name="IN" output_metamodel_name="MindMap" output_model_name="OUT" target_MM="src/mindmap/mindmap.ecore" />
+      <templateGeneration mtFile="src/mindmap/generation/freemind/freemind.mt" />
+    </interpretation>
+    <interpretation category="Mind Map/FreeMind" label="List of entities : FreeMind">
+      <transformation asm="src/mindmap/transformation/entityList/RWM2EntityList.asm" input_metamodel_name="RWM" input_model_name="IN" output_metamodel_name="MindMap" output_model_name="OUT" target_MM="src/mindmap/mindmap.ecore" />
+      <templateGeneration mtFile="src/mindmap/generation/freemind/freemind.mt" />
+    </interpretation>
+    <interpretation category="Mind Map/FreeMind" label="List of entities by agent : FreeMind">
+      <transformation asm="src/mindmap/transformation/entityListByAgent/RWM2EntityListByAgent.asm" input_metamodel_name="RWM" input_model_name="IN" output_metamodel_name="MindMap" output_model_name="OUT" target_MM="src/mindmap/mindmap.ecore" />
+      <templateGeneration mtFile="src/mindmap/generation/freemind/freemind.mt" />
+    </interpretation>
+    <interpretation category="Mind Map/FreeMind" label="List of goals by agent : FreeMind">
+      <transformation asm="src/mindmap/transformation/goalListByAgent/RWM2GoalListByAgent.asm" input_metamodel_name="RWM" input_model_name="IN" output_metamodel_name="MindMap" output_model_name="OUT" target_MM="src/mindmap/mindmap.ecore" />
+      <templateGeneration mtFile="src/mindmap/generation/freemind/freemind.mt" />
+    </interpretation>
+    <interpretation category="BlueXML" label="BlueXML Model">
+      <transformation asm="src/bluexml/transformation/RWM2BlueXML.asm" input_metamodel_name="RWM" input_model_name="IN" new_name="bluexml_model.obl" output_metamodel_name="BLUEXML" output_model_name="OUT" target_MM="src/bluexml/bluexml.ecore" />
+    </interpretation>
+    <interpretation category="Diagnostic/Spreadhseet" label="Diagnostic">
+      <transformation asm="src/diagnostic/transformation/RWM2Diagnostic.asm" input_metamodel_name="RWM" input_model_name="IN" output_metamodel_name="Diagnostic" output_model_name="OUT" target_MM="src/diagnostic/diagnostic.ecore" />
+      <templateGeneration mtFile="src/diagnostic/generation/spreadsheet/spreadsheet.mt" />
+    </interpretation>
+    <interpretation category="Prototype" label="Web Project">
+      <transformation asm="src/webproject/transformation/RWM2WebProject.asm" input_metamodel_name="RWM" input_model_name="IN" output_metamodel_name="WebProject" output_model_name="OUT" target_MM="src/webproject/webproject.ecore" />
+      <templateGeneration mtFile="src/webproject/generation/data.mt" />
+      <templateGeneration mtFile="src/webproject/generation/main.mt" />
+      <templateGeneration mtFile="src/webproject/generation/main_edit.mt" />
+      <antScript antScript="src/webproject/generation/build-default/" />
+    </interpretation>
+    <interpretation category="Documentation" label="Cahier des charges">
+      <transformation asm="src/documentation/transformation/RWM2CdCF.asm" input_metamodel_name="RWM" input_model_name="IN" output_metamodel_name="Documentation" output_model_name="OUT" target_MM="src/documentation/documentation.ecore" />
+      <templateGeneration mtFile="src/documentation/generation/opendocument/content.mt" />
+      <templateGeneration mtFile="src/documentation/generation/opendocument/manifest.mt" />
+      <templateGeneration mtFile="src/documentation/generation/opendocument/meta.mt" />
+      <templateGeneration mtFile="src/documentation/generation/opendocument/mimetype.mt" />
+      <templateGeneration mtFile="src/documentation/generation/opendocument/styles.mt" />
+      <antScript antScript="src/documentation/generation/opendocument/build-default/" />
+    </interpretation>
+    <interpretation category="Risk/Spreadsheet" label="Risk">
+      <transformation asm="src/risk/transformation/RWM2Risk.asm" input_metamodel_name="RWM" input_model_name="IN" output_metamodel_name="RISK" output_model_name="OUT" target_MM="src/risk/risk.ecore" />
+      <templateGeneration mtFile="src/risk/generation/spreadsheet/spreadsheet.mt" />
+    </interpretation>
+  </extension>
 </plugin>
+

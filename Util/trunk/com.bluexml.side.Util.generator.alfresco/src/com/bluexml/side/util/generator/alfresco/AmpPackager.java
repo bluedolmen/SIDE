@@ -22,8 +22,8 @@ public class AmpPackager extends AbstractPackager {
 	private Map<String, File> mapper;
 	protected Properties moduleProperties;
 
-	public AmpPackager(IFolder folder, Properties moduleProperties, String technoV) {
-		super(folder, technoV);
+	public AmpPackager(IFolder folder, Properties moduleProperties, IFolder ItechnoVPath) {
+		super(folder, ItechnoVPath);
 		this.moduleProperties = moduleProperties;
 		mapper = createAMPSkelleton();
 	}

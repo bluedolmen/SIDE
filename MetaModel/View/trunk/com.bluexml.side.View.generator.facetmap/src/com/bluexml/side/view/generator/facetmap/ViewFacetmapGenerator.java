@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
@@ -46,7 +47,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 
 	public ViewFacetmapGenerator() {
 		techVersion = "Facetmap_2.x"; //$NON-NLS-1$
-		versionProperty="";
+		versionProperty = "";
 		this.setTEMP_FOLDER(getTechVersion());
 	}
 
@@ -82,7 +83,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslglobal-generation.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnavContent-generation.mt"); //$NON-NLS-1$
-		
+
 		// results
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-content-results-generation.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/xml-grid_content.js.mt"); //$NON-NLS-1$
@@ -105,7 +106,11 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 	@Override
 	public Collection<IFile> buildPackages(String modelId) throws Exception {
 		Collection<IFile> pkgs = new ArrayList<IFile>();
-		WarPatchPackager pkger = new WarPatchPackager(IFileHelper.getIFolder(getTemporaryFolder()), buildModuleProperties(modelId).getProperty("module.id"), techVersion, "facetmap");
+
+		IFolder iFolderGene = IFileHelper.getIFolder(getTemporaryFolder());
+		IFolder techVFolder = ((IFolder) iFolderGene.getParent().getParent()).getFolder(techVersion);
+
+		WarPatchPackager pkger = new WarPatchPackager(iFolderGene, buildModuleProperties(modelId).getProperty("module.id"), techVFolder, "facetmap");
 		IFile package_ = pkger.buildPackage();
 		pkgs.add(package_);
 		return pkgs;
