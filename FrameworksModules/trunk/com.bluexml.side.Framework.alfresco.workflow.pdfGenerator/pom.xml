@@ -193,7 +193,7 @@
       <plugin>
         <groupId>com.bluexml.side.Integration.m2</groupId>
         <artifactId>ampMojo</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <extensions>true</extensions>
         <configuration>
           <dependentAmpExcludes>**</dependentAmpExcludes>
