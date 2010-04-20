@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (C) 2007-2009  BlueXML - www.bluexml.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.bluexml.side.dependencies</groupId>
+  <artifactId>tmpProject</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0</version>
+  <name>tmpProject</name>
+  <url>http://www.bluexml.com</url>
+  <dependencies>
+    <dependency>
+      <groupId>com.bluexml.side.Integration.alfresco</groupId>
+      <artifactId>model</artifactId>
+      <version>1.0.14</version>
+      <type>amp</type>
+    </dependency>
+    <dependency>
+      <groupId>com.bluexml.side.Integration.alfresco</groupId>
+      <artifactId>customAssociationManagement</artifactId>
+      <version>1.1.17</version>
+      <type>amp</type>
+    </dependency>
+    <dependency>
+      <groupId>com.bluexml.side.Integration.alfresco</groupId>
+      <artifactId>xforms</artifactId>
+      <version>1.0.60</version>
+      <type>amp</type>
+    </dependency>
+    <dependency>
+      <groupId>com.bluexml.side.Integration.alfresco</groupId>
+      <artifactId>upload</artifactId>
+      <version>1.0.15</version>
+      <type>amp</type>
+    </dependency>
+  </dependencies>
+  <profiles>
+    <profile>
+      <id>public</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>side-releases</id>
+          <url>http://pipin.bluexml.com/nexus/content/repositories/side-releases</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>side-snapshots</id>
+          <url>http://pipin.bluexml.com/nexus/content/repositories/side-snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>central</id>
+          <url>http://pipin.bluexml.com/nexus/content/repositories/central</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <url>http://pipin.bluexml.com/nexus/content/repositories/central</url>
+        </pluginRepository>
+        <pluginRepository>
+          <id>side-snapshots</id>
+          <url>http://pipin.bluexml.com/nexus/content/repositories/side-snapshots</url>
+        </pluginRepository>
+        <pluginRepository>
+          <id>side-releases</id>
+          <url>http://pipin.bluexml.com/nexus/content/repositories/side-releases</url>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+    <profile>
+      <id>offline</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>${settings.localRepository}</url>
+        </repository>
+        <repository>
+          <id>side-releases</id>
+          <url>${settings.localRepository}</url>
+        </repository>
+        <repository>
+          <id>side-snapshots</id>
+          <url>${settings.localRepository}</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <url>${settings.localRepository}</url>
+        </pluginRepository>
+        <pluginRepository>
+          <id>side-releases</id>
+          <url>${settings.localRepository}</url>
+        </pluginRepository>
+        <pluginRepository>
+          <id>side-snapshots</id>
+          <url>${settings.localRepository}</url>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+</project>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>BlueXML XForms webscript for Alfresco</shortname>
+	<url>/xforms/auth</url>
+	<url>/xforms/batch</url>
+	<url>/xforms/delete</url>
+	<url>/xforms/enum</url>
+	<url>/xforms/help</url>
+	<url>/xforms/labels</url>
+	<url>/xforms/list</url>
+	<url>/xforms/mkdir</url>
+	<url>/xforms/nodeinfo</url>
+	<url>/xforms/package</url>
+	<url>/xforms/read</url>
+	<url>/xforms/service</url>
+	<url>/xforms/upload</url>
+	<url>/xforms/workflow</url>
+	<format default="xml">any</format>
+	<authentication>none</authentication>
+	<transaction>none</transaction>
+</webscript>

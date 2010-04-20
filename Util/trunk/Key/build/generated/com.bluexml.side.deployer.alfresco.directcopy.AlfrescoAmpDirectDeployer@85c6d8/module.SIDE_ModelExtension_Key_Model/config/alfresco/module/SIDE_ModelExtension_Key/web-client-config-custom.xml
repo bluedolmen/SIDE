@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<alfresco-config>
+	
+	<config evaluator="string-compare" condition="Content Wizards">
+		<content-types>
+						<type name="Key:com_bluexml_side_util_security_License" />
+						<type name="Key:com_bluexml_side_util_security_Contact" />
+						<type name="Key:com_bluexml_side_util_security_Partnership" />
+
+			
+		</content-types>
+	</config>
+
+	<config evaluator="string-compare" condition="Space Wizards">
+		<folder-types>
+		
+			
+		</folder-types>
+	</config>
+		
+	<config evaluator="string-compare" condition="Action Wizards">
+	    <!-- The list of aspects to show in the add/remove features action -->
+    	<!-- and the has-aspect condition -->	
+		<aspects>
+		
+			
+		</aspects>
+
+		<!-- The list of types shown in the is-subtype condition -->
+		<subtypes>
+						<type name="Key:com_bluexml_side_util_security_License"/>
+					<type name="Key:com_bluexml_side_util_security_Contact"/>
+					<type name="Key:com_bluexml_side_util_security_Partnership"/>
+
+			
+		</subtypes>		
+
+		<!-- The list of content and/or folder types shown in the specialise-type action -->
+		<specialise-types>
+						<type name="Key:com_bluexml_side_util_security_License"/>
+					<type name="Key:com_bluexml_side_util_security_Contact"/>
+					<type name="Key:com_bluexml_side_util_security_Partnership"/>
+
+			
+		</specialise-types>		
+
+	</config>
+	
+	<config evaluator="string-compare" condition="Advanced Search">
+		<advanced-search>
+			<content-types>
+							<type name="Key:com_bluexml_side_util_security_License"/>
+						<type name="Key:com_bluexml_side_util_security_Contact"/>
+						<type name="Key:com_bluexml_side_util_security_Partnership"/>
+
+				
+			</content-types>
+			<custom-properties>
+			
+				
+			</custom-properties>
+		</advanced-search>
+	</config>
+	
+	<config>
+      <client>
+         <simple-search-additional-attributes>
+          
+		 	
+         </simple-search-additional-attributes>
+      </client>
+   </config>
+	
+	<config evaluator="string-compare" condition="Languages" replace="true">
+		<languages>
+			<language locale="fr_FR">French</language>	  		
+	  	</languages>
+  	</config>
+  	
+  	
+	
+	<config evaluator="node-type" condition="Key:com_bluexml_side_util_security_License">
+		<property-sheet>
+			<show-property name="Key:com_bluexml_side_util_security_License_licenseKey"  />				
+			<show-property name="Key:com_bluexml_side_util_security_License_issueDate"  />				
+			<show-property name="Key:com_bluexml_side_util_security_License_duration"  />				
+			<show-property name="Key:com_bluexml_side_util_security_License_generators"  />				
+			
+			<!-- from Alfresco content model -->
+			<show-property name="modified"/>
+			<show-property name="modifier"/>
+			<show-property name="creator"/>
+			<show-property name="created"/>
+		</property-sheet>
+	</config>
+
+	<config evaluator="node-type" condition="Key:com_bluexml_side_util_security_Contact">
+		<property-sheet>
+			<show-property name="cm:person_defaultHomeFolderPath"  />				
+			<show-property name="cm:person_homeFolderProvider"  />				
+			<show-property name="cm:person_instantmsg"  />				
+			<show-property name="cm:person_companyfax"  />				
+			<show-property name="cm:person_skype"  />				
+			<show-property name="cm:person_jobtitle"  />				
+			<show-property name="Key:com_bluexml_side_util_security_Contact_projectDescription"  />				
+			<show-property name="cm:person_firstName"  />				
+			<show-property name="cm:person_companyaddress3"  />				
+			<show-property name="cm:person_homeFolder"  />				
+			<show-property name="cm:person_companytelephone"  />				
+			<show-property name="cm:person_organizationId"  />				
+			<show-property name="cm:person_presenceProvider"  />				
+			<show-property name="cm:person_companyaddress2"  />				
+			<show-property name="cm:person_middleName"  />				
+			<show-property name="cm:person_sizeQuota"  />				
+			<show-property name="cm:person_sizeCurrent"  />				
+			<show-property name="cm:person_mobile"  />				
+			<show-property name="cm:person_companypostcode"  />				
+			<show-property name="cm:person_companyemail"  />				
+			<show-property name="Key:com_bluexml_side_util_security_Contact_projectName"  />				
+			<show-property name="cm:person_userName"  />				
+			<show-property name="cm:person_email"  />				
+			<show-property name="cm:person_telephone"  />				
+			<show-property name="cm:person_persondescription"  />				
+			<show-property name="Key:com_bluexml_side_util_security_Contact_hostID"  />				
+			<show-property name="cm:person_location"  />				
+			<show-property name="cm:person_companyaddress1"  />				
+			<show-property name="cm:person_lastName"  />				
+			<show-property name="cm:person_presenceUsername"  />				
+			<show-property name="cm:person_organization"  />				
+			<show-association name="Key:com_bluexml_side_util_security_Contact_has_com_bluexml_side_util_security_License" />
+			<show-association name="Key:com_bluexml_side_util_security_Contact_is_com_bluexml_side_util_security_Partnership" />
+			
+			<!-- from Alfresco content model -->
+			<show-property name="modified"/>
+			<show-property name="modifier"/>
+			<show-property name="creator"/>
+			<show-property name="created"/>
+		</property-sheet>
+	</config>
+
+	<config evaluator="node-type" condition="Key:com_bluexml_side_util_security_Partnership">
+		<property-sheet>
+			<show-property name="Key:com_bluexml_side_util_security_Partnership_level"  />				
+			<show-property name="Key:com_bluexml_side_util_security_Partnership_startDate"  />				
+			
+			<!-- from Alfresco content model -->
+			<show-property name="modified"/>
+			<show-property name="modifier"/>
+			<show-property name="creator"/>
+			<show-property name="created"/>
+		</property-sheet>
+	</config>
+
+
+
+
+			<config xmlns:xi="http://www.w3.org/2001/XInclude">
+	      <actions>
+	      
+
+	<!--
+	   		<action id="edit_doc_details">
+	            <permissions>
+	               <permission allow="true">Write</permission>
+	            </permissions>
+	            <label-id>edit</label-id>
+	            <image>/images/icons/edit_icon.gif</image>
+	            <action-listener>#{CreateTypeDialog.editProperties}</action-listener>
+	            <params>
+	               <param name="id">#{actionContext.id}</param>
+	            </params>
+	         </action>
+	-->   		  		
+	   		<!-- bug 842
+	   		<action-group id="browse_create_menu">
+	   			      		
+	        </action-group>
+	        -->  
+	     </actions>
+	     
+	     <dialogs>
+	     	     	
+	     </dialogs>
+	  	</config>
+	  		  	<config evaluator="node-type" condition="Key:com_bluexml_side_util_security_License">
+	  	      <actions>
+	  	         <action-group id="document_browse_menu">
+	  	            <show-link>false</show-link>
+	  	            <action idref="cut_node" hide="true" />
+	  	            <action idref="copy_node" hide="true" />
+	  	             <action idref="update_doc" hide="true" />
+	  	            <action idref="cancelcheckout_doc"  hide="true"/>
+	  	            <action idref="approve_doc"  hide="true"/>
+	  	            <action idref="reject_doc"  hide="true"/>
+	  	         </action-group>
+	  	   
+	  	   		<action-group id="document_browse">
+	  	            <show-link>false</show-link>
+	  	            <style-class>inlineAction</style-class>
+	  	            <action idref="edit_doc_http" hide="true" />
+	  	            <action idref="edit_doc_webdav"  hide="true"/>
+	  	            <action idref="edit_doc_cifs"  hide="true"/>
+	  	            <action idref="checkout_doc" hide="true" />
+	  	            <action idref="checkin_doc"  hide="true"/>
+	  	            <!--<action idref="edit_doc_details"/>-->
+	  	            <action idref="details_doc" />
+	  	            <action idref="delete_doc" />
+	  	         </action-group>
+	  			</actions>
+	  	   </config>
+	  	  	<config evaluator="node-type" condition="Key:com_bluexml_side_util_security_Contact">
+	  	      <actions>
+	  	         <action-group id="document_browse_menu">
+	  	            <show-link>false</show-link>
+	  	            <action idref="cut_node" hide="true" />
+	  	            <action idref="copy_node" hide="true" />
+	  	             <action idref="update_doc" hide="true" />
+	  	            <action idref="cancelcheckout_doc"  hide="true"/>
+	  	            <action idref="approve_doc"  hide="true"/>
+	  	            <action idref="reject_doc"  hide="true"/>
+	  	         </action-group>
+	  	   
+	  	   		<action-group id="document_browse">
+	  	            <show-link>false</show-link>
+	  	            <style-class>inlineAction</style-class>
+	  	            <action idref="edit_doc_http" hide="true" />
+	  	            <action idref="edit_doc_webdav"  hide="true"/>
+	  	            <action idref="edit_doc_cifs"  hide="true"/>
+	  	            <action idref="checkout_doc" hide="true" />
+	  	            <action idref="checkin_doc"  hide="true"/>
+	  	            <!--<action idref="edit_doc_details"/>-->
+	  	            <action idref="details_doc" />
+	  	            <action idref="delete_doc" />
+	  	         </action-group>
+	  			</actions>
+	  	   </config>
+	  	  	<config evaluator="node-type" condition="Key:com_bluexml_side_util_security_Partnership">
+	  	      <actions>
+	  	         <action-group id="document_browse_menu">
+	  	            <show-link>false</show-link>
+	  	            <action idref="cut_node" hide="true" />
+	  	            <action idref="copy_node" hide="true" />
+	  	             <action idref="update_doc" hide="true" />
+	  	            <action idref="cancelcheckout_doc"  hide="true"/>
+	  	            <action idref="approve_doc"  hide="true"/>
+	  	            <action idref="reject_doc"  hide="true"/>
+	  	         </action-group>
+	  	   
+	  	   		<action-group id="document_browse">
+	  	            <show-link>false</show-link>
+	  	            <style-class>inlineAction</style-class>
+	  	            <action idref="edit_doc_http" hide="true" />
+	  	            <action idref="edit_doc_webdav"  hide="true"/>
+	  	            <action idref="edit_doc_cifs"  hide="true"/>
+	  	            <action idref="checkout_doc" hide="true" />
+	  	            <action idref="checkin_doc"  hide="true"/>
+	  	            <!--<action idref="edit_doc_details"/>-->
+	  	            <action idref="details_doc" />
+	  	            <action idref="delete_doc" />
+	  	         </action-group>
+	  			</actions>
+	  	   </config>
+
+   
+</alfresco-config>

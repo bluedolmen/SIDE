@@ -1,0 +1,13 @@
+<SIDELog name="doc deployer" id="com.bluexml.side.Requirements.deployer.doc" date="2010-04-19 18:48:35.279 CEST" type="DEPLOYMENT">
+  <logEntry type="WARNING">
+    <date>2010-04-19 18:48:35.279 CEST</date>
+    <name>Paramètre de génération non défini</name>
+    <description>
+      <model>le paramètre alfresco.report.runas n&apos;as pas été définie, il est possible que la génération sont corompue</model>
+    </description>
+  </logEntry>
+  <techno>opendocument</techno>
+  <technoVersion>Open Document Writer</technoVersion>
+  <creator>doc deployer</creator>
+  <models/>
+</SIDELog>

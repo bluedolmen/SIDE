@@ -1,0 +1,443 @@
+<alfresco-config>
+
+   <!--plug-ins>
+      <evaluators>
+           <evaluator id="node-type" class="org.alfresco.web.config.NodeTypeEvaluator" />
+           <evaluator id="aspect-name" class="org.alfresco.web.config.AspectEvaluator" />
+      </evaluators>
+   </plug-ins-->
+
+   
+   <!-- START BlueXML custom form configuration for the cm:authority content type -->   
+   <config evaluator="node-type" condition="cm:authority">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:authority) -->
+	            <!-- END BlueXML custom form configuration (cm:authority) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:authority content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:category content type -->   
+   <config evaluator="node-type" condition="cm:category">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:category) -->
+	            <!-- END BlueXML custom form configuration (cm:category) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:category content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:folder content type -->   
+   <config evaluator="node-type" condition="cm:folder">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:folder) -->
+	            <!-- END BlueXML custom form configuration (cm:folder) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:folder content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:mlContainer content type -->   
+   <config evaluator="node-type" condition="cm:mlContainer">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:mlContainer) -->
+	            <!-- END BlueXML custom form configuration (cm:mlContainer) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:mlContainer content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:authorityContainer content type -->   
+   <config evaluator="node-type" condition="cm:authorityContainer">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:authorityContainer) -->
+	            <!-- END BlueXML custom form configuration (cm:authorityContainer) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:authorityContainer content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:thumbnail content type -->   
+   <config evaluator="node-type" condition="cm:thumbnail">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:thumbnail) -->
+	            <!-- END BlueXML custom form configuration (cm:thumbnail) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:thumbnail content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:dictionaryModel content type -->   
+   <config evaluator="node-type" condition="cm:dictionaryModel">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:dictionaryModel) -->
+	            <!-- END BlueXML custom form configuration (cm:dictionaryModel) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:dictionaryModel content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:savedquery content type -->   
+   <config evaluator="node-type" condition="cm:savedquery">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:savedquery) -->
+	            <!-- END BlueXML custom form configuration (cm:savedquery) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:savedquery content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:zone content type -->   
+   <config evaluator="node-type" condition="cm:zone">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:zone) -->
+	            <!-- END BlueXML custom form configuration (cm:zone) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:zone content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:systemfolder content type -->   
+   <config evaluator="node-type" condition="cm:systemfolder">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:systemfolder) -->
+	            <!-- END BlueXML custom form configuration (cm:systemfolder) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:systemfolder content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:mlRoot content type -->   
+   <config evaluator="node-type" condition="cm:mlRoot">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:mlRoot) -->
+	            <!-- END BlueXML custom form configuration (cm:mlRoot) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:mlRoot content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:category_root content type -->   
+   <config evaluator="node-type" condition="cm:category_root">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:category_root) -->
+	            <!-- END BlueXML custom form configuration (cm:category_root) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:category_root content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:content content type -->   
+   <config evaluator="node-type" condition="cm:content">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:content) -->
+	            <!-- END BlueXML custom form configuration (cm:content) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:content content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:cmobject content type -->   
+   <config evaluator="node-type" condition="cm:cmobject">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:cmobject) -->
+	            <!-- END BlueXML custom form configuration (cm:cmobject) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:cmobject content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:link content type -->   
+   <config evaluator="node-type" condition="cm:link">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:link) -->
+	            <!-- END BlueXML custom form configuration (cm:link) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:link content type -->    
+   
+   <!-- START BlueXML custom form configuration for the cm:person content type -->   
+   <config evaluator="node-type" condition="cm:person">
+   	<forms>
+	      <form>
+	         <field-visibility>
+	            <!-- START default Alfresco form configuration (cm:content) -->
+	            <show id="cm:name" />
+	            <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
+	            <show id="cm:title" />
+	            <show id="cm:description" />
+	            <show id="cm:author" />
+	            <!-- <show id="size" /> TODO: Need to extract from content property -->
+	            <show id="cm:description" />
+	            <show id="cm:creator" />
+	            <show id="cm:created" />
+	            <show id="cm:modifier" />
+	            <show id="cm:modified" />  
+	            <!-- END default Alfresco form configuration (cm:content) -->
+	            
+	            <!-- START BlueXML custom form configuration (cm:person) -->
+	            <!-- END BlueXML custom form configuration (cm:person) -->
+	         </field-visibility>
+	      </form>
+	</forms>          
+   </config>    
+   <!-- END BlueXML custom form configuration for the cm:person content type -->    
+  
+</alfresco-config>

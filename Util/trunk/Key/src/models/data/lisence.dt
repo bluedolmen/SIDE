@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_yu_m8EvDEd-Je-sDrXjJ3g" name="Key">
+  <packageSet xsi:type="clazz:ClassPackage" xmi:id="_2KbMAEvDEd-Je-sDrXjJ3g" name="com">
+    <packageSet xsi:type="clazz:ClassPackage" xmi:id="_OOFZUEvEEd-Je-sDrXjJ3g" name="bluexml">
+      <packageSet xsi:type="clazz:ClassPackage" xmi:id="_SGspoEvEEd-Je-sDrXjJ3g" name="side">
+        <packageSet xsi:type="clazz:ClassPackage" xmi:id="_ZIeqUEvEEd-Je-sDrXjJ3g" name="util">
+          <packageSet xsi:type="clazz:ClassPackage" xmi:id="_hdDvoEvEEd-Je-sDrXjJ3g" name="security">
+            <classSet xmi:id="_-r_noEvHEd-r5obQ8pJ8eA" name="Contact" title="Contact">
+              <attributes xmi:id="_LJ2PcEvIEd-r5obQ8pJ8eA" documentation="" description="" name="projectName" title="projectName">
+                <metainfo xmi:id="_TCWcwEvIEd-r5obQ8pJ8eA" key="required" value="True"/>
+              </attributes>
+              <attributes xmi:id="_Lg3oUEvIEd-r5obQ8pJ8eA" documentation="" description="" name="projectDescription" title="projectDescription"/>
+              <attributes xmi:id="_MCvmUEvIEd-r5obQ8pJ8eA" documentation="" description="" name="hostID" title="hostID">
+                <metainfo xmi:id="_fRCnMEvIEd-r5obQ8pJ8eA" key="required" value="True"/>
+              </attributes>
+              <generalizations href="cm.dt#0.6773626929164297"/>
+            </classSet>
+            <classSet xmi:id="_iNo7MEvIEd-r5obQ8pJ8eA" name="License">
+              <attributes xmi:id="_lRxakEvIEd-r5obQ8pJ8eA" documentation="" description="" name="licenseKey" title="licenseKey"/>
+              <attributes xmi:id="_lhfRkEvIEd-r5obQ8pJ8eA" documentation="" description="" name="issueDate" title="Issue Date" typ="Date"/>
+              <attributes xmi:id="_lwSikEvIEd-r5obQ8pJ8eA" documentation="" description="" name="duration" title="Duration"/>
+              <attributes xmi:id="_YdSXQEvPEd-r5obQ8pJ8eA" documentation="" description="" name="generators" title="generators" valueList="_e0Ux0EvPEd-r5obQ8pJ8eA">
+                <metainfo xmi:id="_KL3qoEvQEd-r5obQ8pJ8eA" key="multiple" value="True"/>
+              </attributes>
+            </classSet>
+            <classSet xmi:id="_ARjI0EvLEd-r5obQ8pJ8eA" documentation="" description="" name="Partnership" title="Partnership">
+              <attributes xmi:id="_DYZlAEvLEd-r5obQ8pJ8eA" documentation="" description="" name="level" title="level" valueList="_SeeMQEvLEd-r5obQ8pJ8eA"/>
+              <attributes xmi:id="_DwMZ8EvLEd-r5obQ8pJ8eA" documentation="" description="" name="startDate" title="Start Date" typ="Date"/>
+            </classSet>
+            <associationSet xmi:id="_stkBQEvJEd-r5obQ8pJ8eA" documentation="" description="" name="has" title="has">
+              <firstEnd xmi:id="_stkBQUvJEd-r5obQ8pJ8eA" name="" title="" linkedClass="_-r_noEvHEd-r5obQ8pJ8eA"/>
+              <secondEnd xmi:id="_stkBQkvJEd-r5obQ8pJ8eA" name="" title="" cardMax="-1" navigable="true" linkedClass="_iNo7MEvIEd-r5obQ8pJ8eA"/>
+            </associationSet>
+            <associationSet xmi:id="_9TeYsEvLEd-r5obQ8pJ8eA" documentation="" description="" name="is" title="is">
+              <firstEnd xmi:id="_9TeYsUvLEd-r5obQ8pJ8eA" name="" title="" linkedClass="_-r_noEvHEd-r5obQ8pJ8eA"/>
+              <secondEnd xmi:id="_9TeYskvLEd-r5obQ8pJ8eA" name="" title="" navigable="true" linkedClass="_ARjI0EvLEd-r5obQ8pJ8eA"/>
+            </associationSet>
+            <enumerationSet xmi:id="_SeeMQEvLEd-r5obQ8pJ8eA" name="LevelOfPartnership">
+              <literals xmi:id="_5hn3sEvLEd-r5obQ8pJ8eA" value="Gold" name="Gold"/>
+              <literals xmi:id="_5hn3sUvLEd-r5obQ8pJ8eA" value="Platinium" name="Platinium"/>
+              <literals xmi:id="_5hn3skvLEd-r5obQ8pJ8eA" value="Diamond" name="Diamond"/>
+            </enumerationSet>
+            <enumerationSet xmi:id="_e0Ux0EvPEd-r5obQ8pJ8eA" name="Generators">
+              <literals xmi:id="__EV8kEvPEd-r5obQ8pJ8eA" value="SideContentModelGeneratorForAlfrescoEntreprise" name="SideContentModelGeneratorForAlfrescoEntreprise"/>
+              <literals xmi:id="__EV8kUvPEd-r5obQ8pJ8eA" value="SideChibaFormGeneratorForAlfrescoEntreprise" name="SideChibaFormGeneratorForAlfrescoEntreprise"/>
+              <literals xmi:id="__EV8kkvPEd-r5obQ8pJ8eA" value="SideViewGeneratorForAlfrescoShareEntreprise" name="SideViewGeneratorForAlfrescoShareEntreprise"/>
+              <literals xmi:id="__EV8k0vPEd-r5obQ8pJ8eA" value="SideWorkflowGeneratorForAlfrescoEntreprise" name="SideWorkflowGeneratorForAlfrescoEntreprise"/>
+              <literals xmi:id="__EV8lEvPEd-r5obQ8pJ8eA" value="SideAlfrescoEntreprisePortalGenerator" name="SideAlfrescoEntreprisePortalGenerator"/>
+            </enumerationSet>
+          </packageSet>
+        </packageSet>
+      </packageSet>
+    </packageSet>
+  </packageSet>
+</clazz:Model>
