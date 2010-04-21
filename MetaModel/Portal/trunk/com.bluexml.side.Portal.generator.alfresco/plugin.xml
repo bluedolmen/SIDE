@@ -5,11 +5,7 @@
     <metamodel description="Check this to generate portal models on leading frameworks.&lt;br&gt; This Portal Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce class models and various generators to instantiate these models on leading frameworks." id="http://www.kerblue.org/portal/1.0" name="KSR200 Portal" url="http://www.kerblue.org/portal/1.0">
       <technology description="Check this to generate your class models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports." id="alfresco" name="Alfresco" url="http://www.alfresco.com">
         <technologyVersion description="Check this to generate class models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.x" version="Alfresco3.x Community Edition">
-          <generatorVersion
-                class="com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator"
-                hidden="visible"
-                id="com.bluexml.side.Portal.generator.alfresco"
-                version="SIDE Alfresco Portal Generator">
+          <generatorVersion class="com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator" hidden="visible" id="com.bluexml.side.Portal.generator.alfresco" version="SIDE Alfresco Portal Generator">
             <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.doclist" label="Alfresco Share document library component">
               <moduleDependence moduleId="com.bluexml.side.Integration.alfresco.shareDoclist" moduleType="zip" technologyVersion="alfresco_3.x" versionMin="1.0.20" versionMax="1.0.20" />
               <!--<mustBeUnchecked
@@ -27,9 +23,9 @@
             <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco">
               <optionRef optionId="alfresco.share.extension" />
             </mustBeChecked>
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension" moduleType="zip" technologyVersion="alfresco_3.x" versionMin="1.0.5" versionMax="1.0.5" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension" moduleType="zip" technologyVersion="alfresco_3.x" versionMin="1.0.6" versionMax="1.0.6" />
             <option defaultOption="false" key="com.bluexml.side.Portal.generator.alfresco.xforms" label="XForms Integration">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareSearchResultsExtension" moduleType="zip" technologyVersion="alfresco_3.x" versionMin="1.0.10" versionMax="1.0.10" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareSearchResultsExtension" moduleType="zip" technologyVersion="alfresco_3.x" versionMin="1.0.11" versionMax="1.0.11" />
             </option>
             <configurationParameter documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploy" key="alfresco.share.url" label="Alfresco share URL" />
             <configurationParameter documentation="Set the address to the webapp context, e.g. http://localhost:8080/xforms.&lt;br/&gt;This option is accessory as it is used for providing service URLs. If not given, default values will be used." key="com.bluexml.side.Form.generator.xforms.chiba.webappContext" label="XForm Webapp URL" />
