@@ -18,7 +18,7 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.bluexml.side.Integration.alfresco</groupId>
+  <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>model</artifactId>
   <packaging>amp</packaging>
   <name>BlueXML S-IDE Alfresco base model</name>
@@ -46,7 +46,7 @@
     <env>local</env>
     <config.target.path>alfresco/module/SIDE_${project.artifactId}</config.target.path>
     <!-- Webapp used to test/develop locally the AMP -->
-    <webapp.name>com.bluexml.side.Integration.alfresco.model-webapp</webapp.name>
+    <webapp.name>com.bluexml.side.Framework.alfresco.model-webapp</webapp.name>
     <!-- 
 			| 
 			| By default the src/test/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
@@ -329,7 +329,7 @@
             <directory>src/test/properties/${env}</directory>
             <targetPath>alfresco/extension</targetPath>
           </testResource>
-          <!-- src/main/config/ is copied into  ==> target/test-classes/alfresco/module/com.bluexml.side.Integration.com.bluexml.side.Integration.alfresco.model to
+          <!-- src/main/config/ is copied into  ==> target/test-classes/alfresco/module/com.bluexml.side.Integration.com.bluexml.side.Framework.alfresco.model to
 						be picked up by the maven-war plugin
 						Best practice tacken from recordsmanagement.amp, is enforced troughout the whole archetype. 
 						This convention is also used for module.properties filtering.

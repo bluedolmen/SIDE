@@ -124,13 +124,13 @@
 		 -->
     <!--
 		<dependency>
-			<groupId>com.bluexml.side.Integration.alfresco</groupId>
+			<groupId>com.bluexml.side.Framework.alfresco</groupId>
 			<artifactId>model</artifactId>
 			<version>[1.0.1,)</version>
 			<type>amp</type>
 		</dependency>
 		<dependency>
-			<groupId>com.bluexml.side.Integration.alfresco</groupId>
+			<groupId>com.bluexml.side.Framework.alfresco</groupId>
 			<artifactId>model</artifactId>
 			<version>[1.0.1,)</version>
 			<type>jar</type>

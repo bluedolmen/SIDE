@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>com.bluexml.side.Integration.alfresco.doclist</name>
+  <name>com.bluexml.side.Framework.alfresco.doclist</name>
   <comment>amp module to enable custom views in AlfrescoShare Document library</comment>
   <projects/>
   <buildSpec>

@@ -8,10 +8,10 @@
     <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator" id="com.bluexml.side.Class.generator.alfresco" metaModelName="KSR500 Data" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="Alfresco" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="S-IDE Content Model Generator for Alfresco 1.0.0">
       <options key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator"/>
       <options key="com.bluexml.side.Class.generator.alfresco.sql"/>
-      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.model" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.model" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
       <moduleContraints moduleId="com.bluexml.side.framework.alfresco.datasGenerator" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.sql" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Framework.alfresco.sql" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
     </generatorConfigurations>
     <parameters key="generation.options.verbose" value="false"/>
     <parameters key="generation.option.Skip.Validation" value="false"/>

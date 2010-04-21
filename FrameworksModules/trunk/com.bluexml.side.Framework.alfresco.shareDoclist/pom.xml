@@ -18,7 +18,7 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.bluexml.side.Integration.alfresco</groupId>
+  <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>shareDoclist</artifactId>
   <name>S-IDE integration module : Alfresco share docList</name>
   <version>1.0.20</version>
@@ -41,13 +41,13 @@
   </build>
   <dependencies>
     <dependency>
-      <groupId>com.bluexml.side.Integration.alfresco</groupId>
+      <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>upload</artifactId>
       <version>1.0.15</version>
       <type>amp</type>
     </dependency>
     <dependency>
-      <groupId>com.bluexml.side.Integration.alfresco</groupId>
+      <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>doclist</artifactId>
       <version>1.0.24</version>
       <type>amp</type>

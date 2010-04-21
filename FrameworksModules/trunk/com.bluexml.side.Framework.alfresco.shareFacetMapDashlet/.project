@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>com.bluexml.side.Integration.alfresco.shareFacetMapDashlet</name>
+	<name>com.bluexml.side.Framework.alfresco.shareFacetMapDashlet</name>
 	<comment>Declares blueXML repositories and define some options</comment>
 	<projects>
 	</projects>

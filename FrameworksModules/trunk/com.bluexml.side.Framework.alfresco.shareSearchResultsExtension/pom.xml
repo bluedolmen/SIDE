@@ -20,7 +20,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.bluexml.side.Integration.alfresco</groupId>
+      <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>shareDoclist</artifactId>
       <version>1.0.20</version>
       <type>zip</type>
