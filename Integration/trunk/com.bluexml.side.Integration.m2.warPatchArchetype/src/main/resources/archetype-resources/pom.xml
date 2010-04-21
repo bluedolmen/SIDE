@@ -5,8 +5,6 @@
 	<groupId>${groupId}</groupId>
 	<artifactId>${artifactId}</artifactId>
 	<version>${version}</version>
-	<name>Dashlets Alfresco share</name>
-	<description>including facetmap in alfresco share</description>
 	<packaging>zip</packaging>
 	<parent>
 		<groupId>org.bluexml</groupId>
