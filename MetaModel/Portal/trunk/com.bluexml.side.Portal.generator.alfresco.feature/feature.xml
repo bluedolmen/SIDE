@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Portal.generator.alfresco.feature" label="SIDE Alfresco Share Portal Generator" version="1.0.43.v16412-20100416" provider-name="BlueXML">
+<feature id="com.bluexml.side.Portal.generator.alfresco.feature" label="SIDE Alfresco Share Portal Generator" version="1.0.44.v16454-20100421" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of portal models on Alfresco share for portal structure deployment.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -17,6 +17,6 @@
     <import plugin="com.bluexml.side.Util.libs" />
     <import plugin="com.bluexml.side.Class.service.alfresco" />
   </requires>
-  <plugin id="com.bluexml.side.Portal.generator.alfresco" download-size="0" install-size="0" version="1.0.48.v16412-20100416" unpack="false" />
+  <plugin id="com.bluexml.side.Portal.generator.alfresco" download-size="0" install-size="0" version="1.0.49.v16454-20100421" unpack="false" />
 </feature>
 
