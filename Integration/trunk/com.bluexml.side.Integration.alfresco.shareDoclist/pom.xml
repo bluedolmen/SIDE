@@ -34,7 +34,7 @@
       <plugin>
         <groupId>com.bluexml.side.Integration.m2</groupId>
         <artifactId>zipPackage</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.12</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>
