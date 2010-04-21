@@ -1,0 +1,48 @@
+<project default="main">
+	<property file="build.${user.name}.properties" />
+
+
+	<target name="main">
+		<!-- by default, check for deltapack co-located with eclipse -->
+
+		<!-- Check that we have a deltapack -->
+		<available property="haveDeltaPack" file="${deltapack}" />
+		<fail unless="haveDeltaPack" message="The deltapack is required to build this product.  Please edit buildProduct.xml or set the &quot;deltapack&quot; property." />
+
+		<property name="buildDirectory" value="${builder}/buildDirectory" />
+		<property name="pluginPath" value="${moreplugins}${path.separator}${sideSources}${path.separator}${deltapack}" />
+		<!--property name="buildTempFolder" value="${buildDirectory}" /-->
+		<echoproperties></echoproperties>
+		<echo message="builder : ${eclipse.pdebuild.scripts}/productBuild/productBuild.xml"></echo>
+		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" />
+
+		<mkdir dir="${distros}" />
+		<move todir="${distros}" overwrite="true" verbose="true">
+			<fileset dir="${buildDirectory}/${buildLabel}">
+				<include name="*.zip"/>
+				<include name="*.tar.gz"/>
+			</fileset>
+		</move>
+	</target>
+
+
+	
+	<target name="pde-build2">
+		<echo message="launcher path :${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar"></echo>
+		<delete file="${logFile}" failonerror="false"/>
+		<record name="${logFile}" loglevel="debug" action="start" />
+		<java fork="true" failonerror="true" jar="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
+			<arg value="-Xmx512m" />
+			<arg value="-Xms512m" />
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-buildfile" />
+			<arg value="build.xml" />
+			<arg value="-Dtimestamp=${timestamp}" />
+			<classpath>
+				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			</classpath>
+		</java>
+		<record name="${logFile}" action="stop" />
+	</target>
+</project>
