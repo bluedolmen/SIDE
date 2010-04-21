@@ -4,8 +4,7 @@
   <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>sharePortalExtension</artifactId>
   <version>1.0.6</version>
-  <name>Dashlets Alfresco share</name>
-  <description>including facetmap in alfresco share</description>
+  <name>com.bluexml.side.Framework.alfresco.sharePortalExtension</name>
   <packaging>zip</packaging>
   <parent>
     <groupId>org.bluexml</groupId>
