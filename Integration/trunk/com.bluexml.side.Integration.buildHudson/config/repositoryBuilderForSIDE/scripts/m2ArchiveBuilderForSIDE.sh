@@ -1,6 +1,7 @@
 # configuration
 WORKSPACE=/Users/davidabad/Workspace2.0
 SIDEHOME=$WORKSPACE/S-IDE
+SIDEHOME_ENTERPRISE=$WORKSPACE/S-IDE_ENTERPRISE
 BUILDERHOME=$WORKSPACE/buildAllMaven
 POM_PATCHER_PROJECT=$SIDEHOME/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/repositoryBuilderForSIDE
 POM_IN=$WORKSPACE/superpom/pom.xml
@@ -39,6 +40,7 @@ cp $POM_PATCHER $WORKDIR
 cp $POM_IN $POM_OUT
 cd $WORKDIR;
 # patch superpom file (add as dependencies all extension used by side components)
+java -jar $POM_PATCHER $SIDEHOME_ENTERPRISE $POM_OUT
 java -jar $POM_PATCHER $SIDEHOME $POM_OUT
 # build archive of all maven requirements
 mvn dependency:go-offline -P public -Dmaven.repo.local=$MAVENREPO

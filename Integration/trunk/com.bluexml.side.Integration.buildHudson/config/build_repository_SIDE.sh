@@ -13,6 +13,7 @@ fi
 
 # configuration
 SIDEHOME=$WORKSPACE/../buildAuto/Ankle/repositoryCopy/S-IDE
+SIDEHOME_ENTERPRISE=$WORKSPACE/../buildAuto/Ankle/repositoryCopy/S-IDE_ENTERPRISE
 BUILDERHOME=$WORKSPACE/../buildAuto/Ankle/buildAllMaven
 POM_PATCHER=$WORKSPACE/../buildAuto/Ankle/repositoryBuilderForSIDE/target/repositoryBuilderForSIDE-0.0.1-jar-with-dependencies.jar
 POM_IN=$WORKSPACE/../../superpom/workspace/superpom/pom.xml
@@ -52,7 +53,10 @@ cp $POM_PATCHER $WORKDIR
 cp $POM_IN $POM_OUT
 cd $WORKDIR;
 # patch superpom file (add as dependencies all extension used by side components)
+
 java -jar $POM_PATCHER $SIDEHOME $POM_OUT
+java -jar $POM_PATCHER $SIDEHOME_ENTERPRISE $POM_OUT
+
 # build archive of all maven requirements
 mvn dependency:go-offline -P public -Dmaven.repo.local=$MAVENREPO
 cd $MAVENREPO
