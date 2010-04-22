@@ -45,7 +45,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	protected ComponentMonitor monitor;
 	protected String id;
 	public String TEMP_FOLDER = "tmp";
-	public static String GENERATOR_CODE = null;
+//	public static String GENERATOR_CODE = null;
 	protected static String techVersion = null;
 	protected DependencesManager dm;
 
