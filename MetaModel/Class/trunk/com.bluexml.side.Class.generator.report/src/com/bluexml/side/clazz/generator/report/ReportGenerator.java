@@ -11,12 +11,9 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
 import com.bluexml.side.util.generator.packager.WarPatchPackager;
 import com.bluexml.side.util.libs.IFileHelper;
-import com.bluexml.side.util.security.SecurityHelper;
-import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class ReportGenerator extends AbstractAcceleoPackageGenerator {
 
-	public static String GENERATOR_CODE = "CODE_GED_G_C_REPORT"; //$NON-NLS-1$
 	public static String GENERATOR_CONFIGURATION_PARAMETER_AUTHOR = "report.author"; //$NON-NLS-1$
 	public static String MMUri = "http://www.kerblue.org/class/1.0"; //$NON-NLS-1$
 	public static String BIRT_WEBAPP_KEY = "birt.webapp"; //$NON-NLS-1$
@@ -41,7 +38,7 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator {
 	}
 
 	public boolean check() {
-		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
+		return true;
 	}
 
 	/**
@@ -94,10 +91,14 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator {
 		Collection<IFile> pkgs = new ArrayList<IFile>();
 		IFolder geneIFolder = IFileHelper.getIFolder(getTemporaryFolder());
 		IFolder techVFolder = ((IFolder) geneIFolder.getParent().getParent()).getFolder(techVersion);
-		WarPatchPackager pkger = new WarPatchPackager(geneIFolder, "SIDE_Birt_" + modelId, techVFolder, "birt");
+		WarPatchPackager pkger = new WarPatchPackager(geneIFolder, getPackageName(modelId), techVFolder, "birt");
 		IFile package_ = pkger.buildPackage();
 		pkgs.add(package_);
 		return pkgs;
+	}
+
+	protected String getPackageName(String modelId) {
+		return "SIDE_Birt_" + modelId;
 	}
 
 	public String getRunasforReport(EObject o) {

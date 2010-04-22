@@ -8,13 +8,10 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.XMLConflictResolver;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
-import com.bluexml.side.util.security.SecurityHelper;
-import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class WorkflowGenerator extends AbstractAlfrescoGenerator {
-	
+
 	public static String ALFRESCO_URL_KEY = "alfresco.url";
-	public static String GENERATOR_CODE = "CODE_GED_G_W_ALFRESCO_3";
 	XMLConflictResolver xmlresolver = null;
 
 	public XMLConflictResolver getXmlresolver() {
@@ -33,15 +30,15 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 
 	@Override
 	protected List<String> getTemplates() {
-		//Compute services
+		// Compute services
 		String alfrescoUrl = generationParameters.get(ALFRESCO_URL_KEY);
 		if (alfrescoUrl != null && alfrescoUrl.length() > 0) {
 			if (!alfrescoUrl.endsWith("/"))
 				alfrescoUrl += "/";
 			String uri = alfrescoUrl + "faces/jsp/admin/workflow-console.jsp";
-			monitor.getLog().addServiceLog("Workflow Console","The Workflow Console is an administrator/developer tool for interacting with workflows.", uri);
+			monitor.getLog().addServiceLog("Workflow Console", "The Workflow Console is an administrator/developer tool for interacting with workflows.", uri);
 		}
-		
+
 		List<String> result = new ArrayList<String>();
 		result.add("/com.bluexml.side.Workflow.generator.alfresco/templates/alfrescoGenerator_context.mt");
 		result.add("/com.bluexml.side.Workflow.generator.alfresco/templates/alfrescoGenerator_jpdl.mt");
@@ -79,7 +76,7 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 	 * @return true if the generator can be used.
 	 */
 	public boolean check() {
-		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
+		return true;
 	}
 
 }

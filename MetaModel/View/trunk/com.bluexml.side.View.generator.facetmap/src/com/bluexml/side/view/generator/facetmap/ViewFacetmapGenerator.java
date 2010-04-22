@@ -30,15 +30,12 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
 import com.bluexml.side.util.generator.packager.WarPatchPackager;
 import com.bluexml.side.util.libs.IFileHelper;
-import com.bluexml.side.util.security.SecurityHelper;
-import com.bluexml.side.util.security.preferences.SidePreferences;
 
 /**
  * @author <a href="mailto:pbertrand@bluexml.com"> Pierre BERTRAND </a>
  * 
  */
 public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
-	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2"; //$NON-NLS-1$
 
 	public static String ALFRESCO_URL_defaultValue = "http://localhost:8080/alfresco"; //$NON-NLS-1$
 
@@ -96,7 +93,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 	 * @see com.bluexml.side.application.security.Checkable#check()
 	 */
 	public boolean check() {
-		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
+		return true;
 	}
 
 	public String getGeneratorParameter(EObject ob, String paramName) throws Exception {

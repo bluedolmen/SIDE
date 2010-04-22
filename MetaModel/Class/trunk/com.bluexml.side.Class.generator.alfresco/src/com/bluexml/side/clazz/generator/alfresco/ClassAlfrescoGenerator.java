@@ -10,8 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.XMLConflictResolver;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
-import com.bluexml.side.util.security.SecurityHelper;
-import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
@@ -30,7 +28,6 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	// public static String GENERATOR_OPTIONS_DEFAULTFORMS =
 	// "class.alfrescoShare.defaultForms";
 	public static String GENERATOR_OPTIONS_SQL_EXTENSION = "com.bluexml.side.Class.generator.alfresco.sql"; //$NON-NLS-1$
-	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_3"; //$NON-NLS-1$
 	public static String WEBSCRIPT_SIDE_FAMILY = "/service/index/family/SIDE"; //$NON-NLS-1$
 	XMLConflictResolver xmlresolver = null;
 
@@ -187,7 +184,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	 */
 	public boolean check() {
 		// return true;
-		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
+		return true;
 	}
 	
 	

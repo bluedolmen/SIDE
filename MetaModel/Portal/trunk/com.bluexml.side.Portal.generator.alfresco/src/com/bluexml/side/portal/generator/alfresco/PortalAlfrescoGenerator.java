@@ -10,16 +10,13 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
-import com.bluexml.side.util.security.SecurityHelper;
-import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
-	public static String GENERATOR_CODE = "CODE_GED_G_P_ALFRESCO_SHARE_30"; //$NON-NLS-1$
-	
+
 	protected static String GENERATOR_PARAM_SHAREURL = "alfresco.share.url";
 	protected static String GENERATOR_PARAM_FACETMAPURL = "facetMap.url";
 	protected static String GENERATOR_PARAM_XFORMURL = "com.bluexml.side.Form.generator.xforms.chiba.webappContext";
-	
+
 	protected static String MMUri = "http://www.kerblue.org/portal/1.0";
 	static String GENERATOR_OPTIONS_DOCLIST = "com.bluexml.side.Portal.generator.alfresco.doclist";
 	static String GENERATOR_OPTIONS_FORMS = "com.bluexml.side.Portal.generator.alfresco.forms";
@@ -39,7 +36,7 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	public boolean check() {
-		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
+		return true;
 	}
 
 	@Override
@@ -56,8 +53,8 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		// if (getGeneratorOptionValue(GENERATOR_OPTIONS_FORMS)) {
 		// see web-framework-config-custom.mt
 		// }
-		
-		// general templates, pages, navigation component 
+
+		// general templates, pages, navigation component
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/presets.mt");
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/page.mt");
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/css.mt");
@@ -69,7 +66,7 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template_js.mt");
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/messages.mt");
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/create-site.get.properties.mt");
-		
+
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_FACETMAP)) {
 			// result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/web-framework-config-custom.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/template.facetMap.xml.mt");
@@ -94,7 +91,7 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/edit-metadata.xml.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/template.edit-metadata-XForm.edit-metadata.xml.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/edit-metadata-mgr.get.html.ftl.mt");
-			
+
 			// searchForms
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/template.XformSearch.advancedSearch.xml.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/searchFormCallBack.html.mt");
@@ -127,6 +124,7 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		}
 		return result;
 	}
+
 	public String getSHAREURL(EObject o) {
 		String result = getGenerationParameter(GENERATOR_PARAM_SHAREURL);
 		if (result == null || result.equals("")) {
@@ -135,7 +133,7 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		}
 		return result;
 	}
-	
+
 	public String getFacetMapURL(EObject o) {
 		String result = getGenerationParameter(GENERATOR_PARAM_FACETMAPURL);
 		if (result == null || result.equals("")) {

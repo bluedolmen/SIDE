@@ -24,8 +24,6 @@ import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.generator.packager.WarPatchPackager;
-import com.bluexml.side.util.security.SecurityHelper;
-import com.bluexml.side.util.security.preferences.SidePreferences;
 import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.GeneratorInterface;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -34,7 +32,6 @@ import com.bluexml.xforms.messages.DefaultMessages;
 import com.bluexml.xforms.messages.MsgPool;
 
 public class FormGenerator extends AbstractGenerator {
-	private static final String GENERATOR_CODE = "CODE_GED_G_F_CHIBA";
 
 	private static final String defaultModelID = "xformsModel";
 	private static final String webappName = "xforms";
@@ -49,8 +46,7 @@ public class FormGenerator extends AbstractGenerator {
 	private List<GeneratorInterface> generators = new ArrayList<GeneratorInterface>();
 
 	@Override
-	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm,
-			ComponentMonitor monitor) throws Exception {
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm, ComponentMonitor monitor) throws Exception {
 		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, dm, monitor);
 
 		this.monitor = monitor;
@@ -146,7 +142,7 @@ public class FormGenerator extends AbstractGenerator {
 	 * @return true if the generator can be used.
 	 */
 	public boolean check() {
-		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
+		return true;
 	}
 
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) {
