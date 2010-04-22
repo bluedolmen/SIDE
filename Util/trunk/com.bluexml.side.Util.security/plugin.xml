@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-  <extension point="org.eclipse.ui.preferencePages">
-    <page category="com.bluexml.side.Application.ui.PreferencePage" class="com.bluexml.side.util.security.preferences.SideSettingsPreferencesPage" id="com.bluexml.side.util.security.preferences.SideSettingsPreferencesPage" name="Licence ID" />
-    <page category="com.bluexml.side.Application.ui.PreferencePage" class="com.bluexml.side.util.security.preferences.SideSettingsKeyPreferencesPage" id="com.bluexml.side.util.security.preferences.SideSettingsKeyPreferencesPage" name="Licence Key" />
-  </extension>
 </plugin>
 
