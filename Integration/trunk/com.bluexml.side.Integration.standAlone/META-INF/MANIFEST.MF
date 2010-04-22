@@ -24,6 +24,7 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
  com.bluexml.side.Util.model.merge;bundle-version="1.0.12",
  fr.obeo.acceleo.gen;bundle-version="2.5.1",
  com.bluexml.side.Util.generator.acceleo;bundle-version="1.0.15",
- com.bluexml.side.Util.componentMonitor;bundle-version="1.0.0"
+ com.bluexml.side.Util.componentMonitor;bundle-version="1.0.0",
+ com.bluexml.side.Util.security.enterprise
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
