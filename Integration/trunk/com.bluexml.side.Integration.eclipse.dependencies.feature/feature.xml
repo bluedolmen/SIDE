@@ -77,7 +77,7 @@
          id="javax.transaction"
          download-size="0"
          install-size="0"
-         version="1.1.1.v200909161740"
+         version="1.1.1.v201002111330"
          fragment="true"
          unpack="false"/>
 
@@ -232,7 +232,7 @@
          id="org.eclipse.draw2d"
          download-size="0"
          install-size="0"
-         version="3.5.1.v20090813-1341"
+         version="3.5.2.v20091126-1908"
          unpack="false"/>
 
    <plugin
@@ -563,7 +563,7 @@
          id="org.eclipse.gef"
          download-size="0"
          install-size="0"
-         version="3.5.0.v20090528-1511"
+         version="3.5.1.v20090910-2020"
          unpack="false"/>
 
    <plugin
@@ -591,56 +591,56 @@
          id="org.eclipse.gmf.runtime.common.ui.services"
          download-size="0"
          install-size="0"
-         version="1.2.0.v20090403-1720"
+         version="1.3.0.v20091126-1420"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.gmf.runtime.common.ui.services.action"
          download-size="0"
          install-size="0"
-         version="1.2.1.v20090825-1800"
+         version="1.3.0.v20091021-2333"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.gmf.runtime.diagram.core"
          download-size="0"
          install-size="0"
-         version="1.2.1.v20090729-2029"
+         version="1.3.0.v20100113-1121"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.gmf.runtime.diagram.ui"
          download-size="0"
          install-size="0"
-         version="1.2.1.v20090825-1647"
+         version="1.3.0.v20100209-2200"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.gmf.runtime.draw2d.ui"
          download-size="0"
          install-size="0"
-         version="1.2.1.v20090825-1800"
+         version="1.3.0.v20100209-2200"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.gmf.runtime.draw2d.ui.render"
          download-size="0"
          install-size="0"
-         version="1.2.1.v20090729-2029"
+         version="1.3.0.v20100113-1121"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.gmf.runtime.draw2d.ui.render.awt"
          download-size="0"
          install-size="0"
-         version="1.2.1.v20090729-2029"
+         version="1.3.0.v20100113-1121"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.gmf.runtime.emf.clipboard.core"
          download-size="0"
          install-size="0"
-         version="1.2.0.v20090403-1720"
+         version="1.3.0.v20100113-1121"
          unpack="false"/>
 
    <plugin
@@ -654,7 +654,7 @@
          id="org.eclipse.gmf.runtime.emf.core"
          download-size="0"
          install-size="0"
-         version="1.2.0.v20090422-1925"
+         version="1.2.2.v20091126-1420"
          unpack="false"/>
 
    <plugin
@@ -682,7 +682,7 @@
          id="org.eclipse.gmf.runtime.notation"
          download-size="0"
          install-size="0"
-         version="1.2.0.v20090521-1925"
+         version="1.2.0.v20091021-2333"
          unpack="false"/>
 
    <plugin
@@ -761,42 +761,42 @@
          id="org.eclipse.m2m.atl.common"
          download-size="0"
          install-size="0"
-         version="3.0.1.v200909220532"
+         version="3.0.2.v201003150627"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.m2m.atl.core"
          download-size="0"
          install-size="0"
-         version="3.0.1.v200909220532"
+         version="3.0.2.v201003150627"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.m2m.atl.core.emf"
          download-size="0"
          install-size="0"
-         version="3.0.1.v200909220532"
+         version="3.0.2.v201003150627"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.m2m.atl.drivers.emf4atl"
          download-size="0"
          install-size="0"
-         version="3.0.1.v200909220532"
+         version="3.0.2.v201003150627"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.m2m.atl.dsls"
          download-size="0"
          install-size="0"
-         version="3.0.1.v200909220532"
+         version="3.0.2.v201003150627"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.m2m.atl.engine.vm"
          download-size="0"
          install-size="0"
-         version="3.0.1.v200909220532"
+         version="3.0.2.v201003150627"
          unpack="false"/>
 
    <plugin
@@ -845,7 +845,7 @@
          id="org.eclipse.persistence.jpa.equinox.weaving"
          download-size="0"
          install-size="0"
-         version="1.1.2.v20090612-r4475"
+         version="1.1.3.v20091002-r5404"
          fragment="true"
          unpack="false"/>
 
@@ -982,5 +982,4 @@
          version="1.1.0.v200806040011"
          unpack="false"/>
 
-  
 </feature>
