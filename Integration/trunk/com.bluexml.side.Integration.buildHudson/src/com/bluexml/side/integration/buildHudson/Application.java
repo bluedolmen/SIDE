@@ -124,8 +124,8 @@ public class Application {
 			
 			
 			
-			System.out.println("launch prepare-compile on "+ workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
-			execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+			//System.out.println("launch prepare-compile on "+ workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+			//execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
 				
 			
 			// create maven work folder and launch maven deploy
