@@ -31,7 +31,14 @@
     <template di="templates/diagram/%name%.portaldi" model="templates/diagram/%name%.portal" name="PortalDiagram" id="com.bluexml.side.Portal.modeler.templates.diagram" editorId="com.bluexml.side.Portal.modeler.editor.PortalEditor" />
   </extension>
   <extension point="org.topcased.modeler.diagrams">
-    <diagram configuration="com.bluexml.side.Portal.modeler.diagram.PdConfiguration" id="com.bluexml.side.Portal.modeler.diagram" name="PortalDiagram" />
+    <diagram
+          configuration="com.bluexml.side.Portal.modeler.diagram.PdConfiguration"
+          id="com.bluexml.side.Portal.modeler.diagram"
+          name="PortalDiagram">
+       <enableFor
+             class="com.bluexml.side.portal.Portal">
+       </enableFor>
+    </diagram>
   </extension>
   <extension point="org.topcased.modeler.topcasedPreferenceInitializer">
     <preferenceInitializer class="com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramTopcasedPreferenceInitializer" editorId="com.bluexml.side.Portal.modeler.editor.PortalEditor" id="com.bluexml.side.Portal.modeler.diagram.preferences.PdTopcasedPreferenceInitializer" />
