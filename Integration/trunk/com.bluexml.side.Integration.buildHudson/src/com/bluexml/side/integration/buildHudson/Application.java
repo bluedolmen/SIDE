@@ -95,6 +95,16 @@ public class Application {
 			System.out.println("- workspace = " + workspace);
 		}
 		
+		String pathprojectSVN = Utils.getRepositoryCopyPath();
+		
+		if (pathprojectSVN.contains("Build_SIDE")) {
+			Utils.SourceSVNName="S-IDE";
+		}
+		else {
+			Utils.SourceSVNName="S-IDE_Enterprise";
+		}
+		
+		
 		if (rcp.equals("yes")) {
 			
 			// if (Application.EnterpriseRelease){
@@ -157,6 +167,8 @@ public class Application {
 			
 		}
 		else {
+			
+			
 
 			// if (Application.EnterpriseRelease){
 			projectsExcluded = Utils.getProjects("projectExcluded");
