@@ -12,24 +12,60 @@
 		<property name="buildDirectory" value="${builder}/buildDirectory" />
 		<property name="pluginPath" value="${moreplugins}${path.separator}${sideSources}${path.separator}${deltapack}" />
 		<!--property name="buildTempFolder" value="${buildDirectory}" /-->
-		<echoproperties></echoproperties>
-		<echo message="builder : ${eclipse.pdebuild.scripts}/productBuild/productBuild.xml"></echo>
+		<echoproperties>
+		</echoproperties>
+		<echo message="builder : ${eclipse.pdebuild.scripts}/productBuild/productBuild.xml">
+		</echo>
 		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" />
 
 		<mkdir dir="${distros}" />
 		<move todir="${distros}" overwrite="true" verbose="true">
 			<fileset dir="${buildDirectory}/${buildLabel}">
-				<include name="*.zip"/>
-				<include name="*.tar.gz"/>
+				<include name="*.zip" />
+				<include name="*.tar.gz" />
 			</fileset>
 		</move>
+		<antcall target="fixExecutalbeBit_MacOS" />
+		<antcall target="fixExecutalbeBit_Linux" />
 	</target>
 
 
-	
-	<target name="pde-build2">
-		<echo message="launcher path :${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar"></echo>
-		<delete file="${logFile}" failonerror="false"/>
+	<target name="fixExecutalbeBit_MacOS">
+		<echo message="Fix executable bit" />
+		<delete dir="${builder}_tmp" includeemptydirs="true" failonerror="false">
+		</delete>
+		<unzip dest="${builder}_tmp" src="${distros}/${buildId}-macosx.carbon.x86.zip">
+		</unzip>
+		<zip destfile="${distros}/${buildId}-macosx.carbon.x86.zip" update="false">
+			<zipfileset prefix="SIDE" dir="${builder}_tmp/SIDE" id="id" filemode="777">
+				<include name="side.app/Contents/MacOS/side" />
+			</zipfileset>
+			<zipfileset prefix="SIDE" dir="${builder}_tmp/SIDE" id="id2">
+				<exclude name="side.app/Contents/MacOS/side" />
+			</zipfileset>
+		</zip>
+	</target>
+	<target name="fixExecutalbeBit_Linux">
+		<echo message="Fix executable bit" />
+		<delete dir="${builder}_tmp" includeemptydirs="true" failonerror="false">
+		</delete>
+		<unzip dest="${builder}_tmp" src="${distros}/${buildId}-linux.gtk.x86.zip">
+		</unzip>
+		<zip destfile="${distros}/${buildId}-linux.gtk.x86.zip" update="false">
+			<zipfileset prefix="SIDE" dir="${builder}_tmp/SIDE" id="id" filemode="777">
+				<include name="side.app/Contents/MacOS/side" />
+			</zipfileset>
+			<zipfileset prefix="SIDE" dir="${builder}_tmp/SIDE" id="id2">
+				<exclude name="side.app/Contents/MacOS/side" />
+			</zipfileset>
+		</zip>
+	</target>
+
+
+	<target name="pde-build2" description="call this target to execute main task using Eclipse antRunner">
+		<echo message="launcher path :${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
+		</echo>
+		<delete file="${logFile}" failonerror="false" />
 		<record name="${logFile}" loglevel="debug" action="start" />
 		<java fork="true" failonerror="true" jar="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
 			<arg value="-Xmx512m" />
