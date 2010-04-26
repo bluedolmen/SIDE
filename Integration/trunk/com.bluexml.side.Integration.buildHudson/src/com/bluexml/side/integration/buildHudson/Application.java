@@ -97,13 +97,11 @@ public class Application {
 		
 		String pathprojectSVN = Utils.getRepositoryCopyPath();
 		
-		if (pathprojectSVN.contains("Build_SIDE")) {
-			Utils.SourceSVNName="S-IDE";
-		}
+		
 		if (pathprojectSVN.contains("Build_RCP_Enterprise")) {
-			Utils.SourceSVNName="S-IDE";
+			Utils.SourceSVNName="S-IDE_Enterprise";
 		}
-		if (pathprojectSVN.contains("Build_RCP_Community")) {
+		else {
 			Utils.SourceSVNName="S-IDE";
 		}
 		
