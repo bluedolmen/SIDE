@@ -711,11 +711,11 @@ public class Application {
 
 				// si le mot 'feature' n'est pas pr�sent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1)
-					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + "S-IDE/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${pluginsPath}" + File.separator
+					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.SourceSVNName+"/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${pluginsPath}" + File.separator
 							+ projects[i] + "\" />\n";
 				// si 'feature' est pr�sent
 				else if (projects[i].indexOf("feature") != -1)
-					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + "S-IDE/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${featuresPath}" + File.separator
+					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.SourceSVNName+"/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${featuresPath}" + File.separator
 							+ projects[i] + "\" />\n";
 
 				out += "\t\t</svn>\n";
@@ -811,7 +811,7 @@ public class Application {
 		Utils.listefichierpom = new ArrayList();
 		// String pathproject = Utils.getBuildPath() + File.separator +
 		// Utils.repositoryCopy;
-		String pathproject = workspace + "/S-IDE";
+		String pathproject = workspace + "/"+Utils.SourceSVNName;
 
 		Utils.findFile(new File(pathproject + "/Integration/trunk"), "pom.xml");
 		Utils.findFile(new File(pathproject + "/FrameworksModules/trunk"), "pom.xml");
