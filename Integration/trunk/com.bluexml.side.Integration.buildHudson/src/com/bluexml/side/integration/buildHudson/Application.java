@@ -100,8 +100,11 @@ public class Application {
 		if (pathprojectSVN.contains("Build_SIDE")) {
 			Utils.SourceSVNName="S-IDE";
 		}
-		else {
-			Utils.SourceSVNName="S-IDE_Enterprise";
+		if (pathprojectSVN.contains("Build_RCP_Enterprise")) {
+			Utils.SourceSVNName="S-IDE";
+		}
+		if (pathprojectSVN.contains("Build_RCP_Community")) {
+			Utils.SourceSVNName="S-IDE";
 		}
 		
 		
