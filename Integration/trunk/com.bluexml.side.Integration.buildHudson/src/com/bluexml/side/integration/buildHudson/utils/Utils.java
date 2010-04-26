@@ -34,6 +34,7 @@ public class Utils {
 	private static String revisionNumber;
 	public static ArrayList<String> listefichierpom = new ArrayList<String>();
 	public static String repositoryCopy = "repositoryCopy";
+	public static String SourceSVNName="";
 
 	/**
 	 * M�thode qui ouvre le fichier de proprerties
@@ -422,7 +423,7 @@ public class Utils {
 
 					//path = Application.workspace + File.separator + "S-IDE" + File.separator + getProjectPath(projects.get(i)) + File.separator + "trunk";
 					
-					path = getRepositoryCopyPath() + File.separator + "S-IDE" + File.separator + getProjectPath(projects.get(i)) + File.separator + "trunk";
+					path = getRepositoryCopyPath() + File.separator + SourceSVNName + File.separator + getProjectPath(projects.get(i)) + File.separator + "trunk";
 					
 					if (projects.get(i).indexOf("feature") == -1) {
 
@@ -521,7 +522,11 @@ public class Utils {
 		String pathproject = getRepositoryCopyPath();
 
 		listefichierpom = new ArrayList();
-		findFile(new File(pathproject + "/S-IDE/"), "pom.xml");
+		
+		
+		findFile(new File(pathproject + "/"+SourceSVNName+"/"), "pom.xml");
+		
+		
 
 		// si on ne force pas la mise a jour du num�ro de version
 		if ("".equals(getForceNumberVersion())) {
@@ -575,7 +580,7 @@ public class Utils {
 								if (ligne.indexOf("Integration") > -1 || ligne.indexOf("FrameworksModules") > -1) {
 									for (String valeur : listefichierpom) {
 										String valeurf = valeur;
-										String[] tab = valeurf.split("/S-IDE/");
+										String[] tab = valeurf.split("/"+SourceSVNName+"/");
 										String[] tab2 = tab[1].split("/pom.xml");
 										if (ligne.indexOf(tab2[0]) > -1) {
 											if (!listeProjetPoms.contains(valeur))
@@ -645,7 +650,7 @@ public class Utils {
 			System.out.println("\nListe des poms modifi�es: ");
 			for (String pom : listeProjetPoms) {
 				String valeurf = pom;
-				String[] tab = valeurf.split("/S-IDE/");
+				String[] tab = valeurf.split("/"+SourceSVNName+"/");
 				System.out.println("\t- " + tab[1] + ": " + getVersionNumberPom(pom));
 			}
 
@@ -715,7 +720,7 @@ public class Utils {
 			System.out.println("\nListe des poms modifi�es suite mis a jour module: ");
 			for (String pom : listePomsModuleDepencies) {
 				String valeurf = pom;
-				String[] tab = valeurf.split("/S-IDE/");
+				String[] tab = valeurf.split("/"+SourceSVNName+"/");
 				System.out.println("\t- " + tab[1] + ": " + getVersionNumberPom(pom));
 			}
 		}
@@ -814,7 +819,7 @@ public class Utils {
 				System.out.println("\nListe des poms modifi�es suite mis a jour module: ");
 				for (String pom : listePomsModuleDepencies1) {
 					String valeurf = pom;
-					String[] tab = valeurf.split("/S-IDE/");
+					String[] tab = valeurf.split("/"+SourceSVNName+"/");
 					System.out.println("\t- " + tab[1] + ": " + getVersionNumberPom(pom));
 				}
 			}
@@ -933,7 +938,7 @@ public class Utils {
 
 		}
 		if (Application.parametre) {
-			path = path + File.separator + "S-IDE" + File.separator + getProjectPath(projectName) + File.separator + "trunk" + File.separator + projectName;
+			path = path + File.separator + SourceSVNName + File.separator + getProjectPath(projectName) + File.separator + "trunk" + File.separator + projectName;
 		} else {
 			if (projectName.indexOf("feature") == -1) {
 
@@ -1834,8 +1839,8 @@ public class Utils {
 			System.out.println("\t\t. on " + getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
 			
 			// copie du site.xml vers le workspace
-			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "site.xml"), new File(Application.workspace + File.separator + "S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml"), true);
-			System.out.println("\t\t. on " + Application.workspace + File.separator + "S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
+			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "site.xml"), new File(Application.workspace + File.separator + SourceSVNName+"/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml"), true);
+			System.out.println("\t\t. on " + Application.workspace + File.separator + SourceSVNName+"/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
 			
 			
 			// copie de la doc
@@ -2050,7 +2055,7 @@ public class Utils {
 			tmp[3] = "Utils";
 		}
 
-		String path = Application.workspace + File.separator + "S-IDE" + File.separator + tmp[3] + File.separator + "trunk";
+		String path = Application.workspace + File.separator + SourceSVNName + File.separator + tmp[3] + File.separator + "trunk";
 
 		String fileFeaturePath = path + File.separator + featureName + File.separator + "feature.xml";
 
