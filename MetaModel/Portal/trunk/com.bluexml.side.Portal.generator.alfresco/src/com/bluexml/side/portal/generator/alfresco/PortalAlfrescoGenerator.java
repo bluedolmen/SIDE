@@ -46,6 +46,17 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 	@Override
 	protected List<String> getTemplates() {
+		
+		List<String> result = getCommonsTemplates();
+
+		// shared resources
+		// includes of GENERATOR_OPTIONS_FORMS and GENERATOR_OPTIONS_FACETMAP
+		// options
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/shared/web-framework-config-custom.mt");
+		return result;
+	}
+
+	protected List<String> getCommonsTemplates() {
 		List<String> result = new ArrayList<String>();
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_DOCLIST)) {
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/documentLibrary/DocumentLibraryPortletView.ftl.mt");
@@ -102,16 +113,11 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.properties.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.css.mt");
 		}
-
-		// shared resources
-		// includes of GENERATOR_OPTIONS_FORMS and GENERATOR_OPTIONS_FACETMAP
-		// options
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/shared/web-framework-config-custom.mt");
 		return result;
 	}
 
 	public static boolean getGeneratorOptionValue(EObject o, String key) {
-		System.out.println("options :" + AbstractGenerator.generatorOptions.values());
+		System.err.println("PortalAlfrescoGenerator GET: " + key + " " + AbstractGenerator.generatorOptions);
 
 		return getGeneratorOptionValue(key);
 	}
