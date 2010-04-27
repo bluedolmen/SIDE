@@ -73,17 +73,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			//}
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SHARE_EXTENSION)) {
-				// generator for alfresco Share web application
-				// upload configuration
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload-js-get-patch.mt"); //$NON-NLS-1$
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/html-upload-js-get-patch.mt"); //$NON-NLS-1$
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload.get.html.ftl.mt"); //$NON-NLS-1$
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/defaultdocListView/documentlist.get.properties.mt"); //$NON-NLS-1$
-
-				// add forms/details management
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/custom-web-framework-application-context.mt"); //$NON-NLS-1$
-				// defaults forms
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt"); //$NON-NLS-1$
+				result.addAll(getShareExtensionTemplates());
 			}
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_WEBSCRIPT_REPORT)) {
@@ -137,6 +127,22 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			classTemplates = result;
 		}
 		return classTemplates;
+	}
+
+	protected List<String> getShareExtensionTemplates() {
+		List<String> result = new ArrayList<String>();
+		// generator for alfresco Share web application
+		// upload configuration
+		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload-js-get-patch.mt"); //$NON-NLS-1$
+		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/html-upload-js-get-patch.mt"); //$NON-NLS-1$
+		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload.get.html.ftl.mt"); //$NON-NLS-1$
+		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/defaultdocListView/documentlist.get.properties.mt"); //$NON-NLS-1$
+
+		// add forms/details management
+		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/custom-web-framework-application-context.mt"); //$NON-NLS-1$
+		// defaults forms
+		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt"); //$NON-NLS-1$
+		return result;
 	}
 
 	public void setClassTemplates(List<String> classTemplates) {
