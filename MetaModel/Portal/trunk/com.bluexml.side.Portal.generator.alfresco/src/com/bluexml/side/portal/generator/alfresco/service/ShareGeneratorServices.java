@@ -56,7 +56,6 @@ public class ShareGeneratorServices {
 	}
 
 	public static String getPublicPageList(Portal p) {
-		String result ="";
 		EList<Page> l=p.getPageSet();
 		List<String> rt = new ArrayList<String>();
 		for (Page page : l) {
