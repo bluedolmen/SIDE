@@ -60,7 +60,7 @@ public class AttributeServices {
 		if (node instanceof Attribute) {
 			Attribute object = (Attribute) node;
 			if (object.getTyp() == DataType.BOOLEAN) {
-				return "?boolean";
+				return "?string";
 			} else if (object.getTyp() == DataType.BYTE) {
 				return "?int";
 			} else if (object.getTyp() == DataType.CHAR) {
