@@ -31,6 +31,7 @@ import com.bluexml.side.portal.PortletType;
 import com.bluexml.side.portal.PortletTypeAttributeType;
 import com.bluexml.side.portal.PositionGroup;
 import com.bluexml.side.portal.isChildPage;
+import com.bluexml.side.portal.util.PortalValidator;
 import com.bluexml.side.portal.widthUnit;
 
 import com.bluexml.side.view.ViewPackage;
@@ -40,6 +41,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -237,6 +239,15 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 
 		// Initialize created meta-data
 		thePortalPackage.initializePackageContents();
+
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(thePortalPackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return PortalValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		thePortalPackage.freeze();
@@ -1095,6 +1106,93 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.bluexml.com/OCL
+		createOCLAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.bluexml.com/OCL</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createOCLAnnotations() {
+		String source = "http://www.bluexml.com/OCL";		
+		addAnnotation
+		  (portletEClass, 
+		   source, 
+		   new String[] {
+			 "haveType", "not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined())"
+		   });			
+		addAnnotation
+		  (portletTypeEClass, 
+		   source, 
+		   new String[] {
+			 "haveIdentifier", "not (self.id.oclIsUndefined() or self.name.oclIsUndefined())"
+		   });			
+		addAnnotation
+		  (portletInternalEClass, 
+		   source, 
+		   new String[] {
+			 "haveType", "not self.type.oclIsUndefined()",
+			 "isConsistent", "not (self.form.oclIsUndefined() and self.view.oclIsUndefined())"
+		   });			
+		addAnnotation
+		  (havePortletEClass, 
+		   source, 
+		   new String[] {
+			 "isvalide", "not (self.associationPage.oclIsUndefined() or self.associationPortlet.oclIsUndefined())"
+		   });			
+		addAnnotation
+		  (instanciatePortletTypeEClass, 
+		   source, 
+		   new String[] {
+			 "haveType", "not self.portletType.oclIsUndefined()"
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";			
+		addAnnotation
+		  (portletEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "haveType"
+		   });			
+		addAnnotation
+		  (portletTypeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "haveIdentifier"
+		   });			
+		addAnnotation
+		  (portletInternalEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "haveType"
+		   });			
+		addAnnotation
+		  (havePortletEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "isvalide"
+		   });			
+		addAnnotation
+		  (instanciatePortletTypeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "haveType"
+		   });
 	}
 
 } //PortalPackageImpl

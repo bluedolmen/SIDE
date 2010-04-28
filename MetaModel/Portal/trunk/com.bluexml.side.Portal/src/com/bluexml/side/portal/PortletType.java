@@ -24,7 +24,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.portal.PortalPackage#getPortletType()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL haveIdentifier='not (self.id.oclIsUndefined() or self.name.oclIsUndefined())'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='haveIdentifier'"
  * @generated
  */
 public interface PortletType extends PortalModelElement {

@@ -44,12 +44,24 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//widthUnit"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Portlet" eSuperTypes="#//PortalModelElement">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="haveType" value="not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined())"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="haveType"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="isPortletInternal" eType="#//PortletInternal"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="isInstanceOfPortletType"
         eType="#//InstanciatePortletType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortletType" eSuperTypes="#//PortalModelElement">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="haveIdentifier" value="not (self.id.oclIsUndefined() or self.name.oclIsUndefined())"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="haveIdentifier"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="haveAttribute" upperBound="-1"
@@ -58,6 +70,13 @@
         defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortletInternal" eSuperTypes="#//PortalModelElement">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="haveType" value="not self.type.oclIsUndefined()"/>
+      <details key="isConsistent" value="not (self.form.oclIsUndefined() and self.view.oclIsUndefined())"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="haveType"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//InternalPortletType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="view" eType="ecore:EClass ../../com.bluexml.side.View/model/View.ecore#//AbstractView"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="form" eType="ecore:EClass ../../com.bluexml.side.Form/model/Forms.ecore#//FormCollection"/>
@@ -83,6 +102,12 @@
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HavePortlet">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="isvalide" value="not (self.associationPage.oclIsUndefined() or self.associationPortlet.oclIsUndefined())"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="isvalide"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationPortlet" eType="#//Portlet"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationPage" eType="#//Page"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="positionGroup" upperBound="-1"
@@ -102,6 +127,12 @@
     <eLiterals name="DateTime" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstanciatePortletType">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="haveType" value="not self.portletType.oclIsUndefined()"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="haveType"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="portletType" eType="#//PortletType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
         eType="#//PortletAttributeInstance" containment="true"/>

@@ -26,7 +26,8 @@ import com.bluexml.side.view.AbstractView;
  * </p>
  *
  * @see com.bluexml.side.portal.PortalPackage#getPortletInternal()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL haveType='not self.type.oclIsUndefined()' isConsistent='not (self.form.oclIsUndefined() and self.view.oclIsUndefined())'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='haveType'"
  * @generated
  */
 public interface PortletInternal extends PortalModelElement {

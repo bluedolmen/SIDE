@@ -24,7 +24,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.bluexml.side.portal.PortalPackage#getInstanciatePortletType()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL haveType='not self.portletType.oclIsUndefined()'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='haveType'"
  * @generated
  */
 public interface InstanciatePortletType extends EObject {

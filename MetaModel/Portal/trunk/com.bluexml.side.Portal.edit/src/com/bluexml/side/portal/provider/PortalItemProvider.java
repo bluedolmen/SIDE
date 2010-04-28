@@ -202,6 +202,11 @@ public class PortalItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 FormFactory.eINSTANCE.createSearchFormCollection()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
 				 ViewFactory.eINSTANCE.createViewCollection()));
 
 		newChildDescriptors.add

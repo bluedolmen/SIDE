@@ -25,7 +25,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.bluexml.side.portal.PortalPackage#getHavePortlet()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL isvalide='not (self.associationPage.oclIsUndefined() or self.associationPortlet.oclIsUndefined())'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isvalide'"
  * @generated
  */
 public interface HavePortlet extends EObject {
