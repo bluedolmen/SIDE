@@ -19,6 +19,8 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see com.bluexml.side.view.ViewPackage#getAbstractView()
  * @model abstract="true"
+ *        annotation="http://www.bluexml.com/OCL noSameName='AbstractView.allInstances().name -> select( t : String | self.name = t) ->size() = 1'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='noSameName'"
  * @generated
  */
 public interface AbstractView extends FieldContainer {

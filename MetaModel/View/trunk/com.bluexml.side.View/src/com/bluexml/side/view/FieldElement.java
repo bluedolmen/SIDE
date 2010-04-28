@@ -8,6 +8,7 @@ package com.bluexml.side.view;
 
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -133,5 +134,14 @@ public interface FieldElement extends Stylable, NamedModelElement {
 	 * @generated
 	 */
 	void setHidden(boolean value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL description='return the root model element (viewCollection)' body='ViewCollection.allInstances()'"
+	 * @generated
+	 */
+	EList<ViewCollection> getViewCollection();
 		
 } // FieldElement

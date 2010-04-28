@@ -26,6 +26,7 @@ import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 import com.bluexml.side.view.edit.ui.utils.model.ClassUtils;
+import com.bluexml.side.view.edit.ui.utils.model.ViewUtils;
 
 public class InitView {
 
@@ -75,10 +76,10 @@ public class InitView {
 					}
 					if (c.size() > 0) {
 						cmd.append(AddCommand.create(domain, av, ViewPackage.eINSTANCE.getFieldContainer_Children(), c));
-						av.setName(cl.getName());
+						av.setName(cl.getName() + "_" + ViewUtils.getTypeAsString(av));
 					} else {
-						av.setName("REMOVE ME, "+cl.getName()+" do not have attributes");
-						UIUtils.showError("No Attribute", cl.getName()+" do not have attributes\n delete this view");
+						av.setName("REMOVE ME, " + cl.getName() + " do not have attributes");
+						UIUtils.showError("No Attribute", cl.getName() + " do not have attributes\n delete this view");
 						return null;
 					}
 					// av.setName(cl.getName() + " (" +

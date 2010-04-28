@@ -128,6 +128,14 @@ public class ViewValidator extends EObjectValidator {
 	private static Constraint fieldElement_noSpecialCharactersInvOCL;
 
 	/**
+	 * The parsed OCL expression for the definition of the '<em>noSameName</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint abstractView_noSameNameInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>noFieldMapped</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -367,7 +375,47 @@ public class ViewValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractView, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFieldElement_noSpecialCharacters(abstractView, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractView_noSameName(abstractView, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the noSameName constraint of '<em>Abstract View</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAbstractView_noSameName(AbstractView abstractView, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (abstractView_noSameNameInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ViewPackage.Literals.ABSTRACT_VIEW);
+
+			EAnnotation ocl = ViewPackage.Literals.ABSTRACT_VIEW.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("noSameName");
+
+			try {
+				abstractView_noSameNameInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(abstractView_noSameNameInvOCL);
+
+		if (!query.check(abstractView)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( ViewPackage.Literals.ABSTRACT_VIEW.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"noSameName")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSameName", getObjectLabel(abstractView, context) }),
+						 new Object[] { abstractView }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -384,6 +432,7 @@ public class ViewValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractDataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractDataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFieldElement_noSpecialCharacters(abstractDataTable, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractView_noSameName(abstractDataTable, diagnostics, context);
 		return result;
 	}
 
@@ -463,6 +512,7 @@ public class ViewValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dataList, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(dataList, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFieldElement_noSpecialCharacters(dataList, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractView_noSameName(dataList, diagnostics, context);
 		return result;
 	}
 
@@ -480,6 +530,7 @@ public class ViewValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(dataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFieldElement_noSpecialCharacters(dataTable, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractView_noSameName(dataTable, diagnostics, context);
 		return result;
 	}
 
@@ -497,6 +548,7 @@ public class ViewValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(facetMap, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(facetMap, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFieldElement_noSpecialCharacters(facetMap, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractView_noSameName(facetMap, diagnostics, context);
 		return result;
 	}
 
@@ -514,6 +566,7 @@ public class ViewValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(tree, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(tree, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFieldElement_noSpecialCharacters(tree, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractView_noSameName(tree, diagnostics, context);
 		return result;
 	}
 
@@ -531,6 +584,7 @@ public class ViewValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(composedView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(composedView, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFieldElement_noSpecialCharacters(composedView, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractView_noSameName(composedView, diagnostics, context);
 		return result;
 	}
 
@@ -964,6 +1018,7 @@ public class ViewValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractViewOf, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractViewOf, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFieldElement_noSpecialCharacters(abstractViewOf, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractView_noSameName(abstractViewOf, diagnostics, context);
 		return result;
 	}
 

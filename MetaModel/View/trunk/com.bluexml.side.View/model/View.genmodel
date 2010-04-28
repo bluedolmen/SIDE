@@ -46,6 +46,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//ViewCollection/views"/>
       <genFeatures property="None" children="true" createChild="true" propertySortChoices="true"
           ecoreFeature="ecore:EReference View.ecore#//ViewCollection/composedViews"/>
+      <genOperations ecoreOperation="View.ecore#//ViewCollection/getAllViews"/>
     </genClasses>
     <genClasses image="false" ecoreClass="View.ecore#//FieldContainer">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//FieldContainer/children"/>

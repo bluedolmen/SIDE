@@ -109,15 +109,15 @@ public class ViewUtils {
 	public static String getTypeAsString(AbstractView av) {
 		String name = "";
 		if (av instanceof DataList) {
-			name = "Data List";
+			name = "DataList";
 		} else if (av instanceof Tree) {
 			name = "Tree";
 		} else if (av instanceof FacetMap) {
 			name = "FacetMap";
 		} else if (av instanceof DataTable) {
-			name = "Data Table";
+			name = "DataTable";
 		} else if (av instanceof ComposedView) {
-			name = "Composed View";
+			name = "ComposedView";
 		}
 		return name;
 	}

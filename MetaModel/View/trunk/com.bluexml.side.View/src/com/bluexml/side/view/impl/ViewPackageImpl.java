@@ -1573,6 +1573,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEReference(getViewCollection_Views(), this.getAbstractView(), null, "views", null, 0, -1, ViewCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewCollection_ComposedViews(), this.getComposedView(), null, "composedViews", null, 0, -1, ViewCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(viewCollectionEClass, this.getAbstractView(), "getAllViews", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(fieldContainerEClass, FieldContainer.class, "FieldContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFieldContainer_Children(), this.getFieldElement(), null, "children", null, 0, -1, FieldContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFieldContainer_Disabled(), this.getFieldElement(), null, "disabled", null, 0, -1, FieldContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1582,6 +1584,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEAttribute(getFieldElement_Prefix(), ecorePackage.getEString(), "prefix", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFieldElement_Suffix(), ecorePackage.getEString(), "suffix", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFieldElement_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(fieldElementEClass, this.getViewCollection(), "getViewCollection", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(abstractViewEClass, AbstractView.class, "AbstractView", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1763,7 +1767,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createDocumentationAnnotations() {
-		String source = "http://www.topcased.org/documentation";													
+		String source = "http://www.topcased.org/documentation";																	
 		addAnnotation
 		  (getAbstractDataTable_HaveRowActions(), 
 		   source, 
@@ -1791,13 +1795,33 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createOCLAnnotations() {
-		String source = "http://www.bluexml.com/OCL";				
+		String source = "http://www.bluexml.com/OCL";		
+		addAnnotation
+		  (viewCollectionEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "description", "method to get all instances of AbstractView",
+			 "body", "AbstractView.allInstances()"
+		   });				
 		addAnnotation
 		  (fieldElementEClass, 
 		   source, 
 		   new String[] {
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
-		   });				
+		   });			
+		addAnnotation
+		  (fieldElementEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "description", "return the root model element (viewCollection)",
+			 "body", "ViewCollection.allInstances()"
+		   });			
+		addAnnotation
+		  (abstractViewEClass, 
+		   source, 
+		   new String[] {
+			 "noSameName", "AbstractView.allInstances().name -> select( t : String | self.name = t) ->size() = 1"
+		   });			
 		addAnnotation
 		  (abstractViewEClass.getEOperations().get(0), 
 		   source, 
@@ -1862,13 +1886,19 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";					
+		String source = "http://www.eclipse.org/emf/2002/Ecore";						
 		addAnnotation
 		  (fieldElementEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "noSpecialCharacters"
-		   });																			
+		   });					
+		addAnnotation
+		  (abstractViewEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "noSameName"
+		   });																		
 		addAnnotation
 		  (fieldEClass, 
 		   source, 
