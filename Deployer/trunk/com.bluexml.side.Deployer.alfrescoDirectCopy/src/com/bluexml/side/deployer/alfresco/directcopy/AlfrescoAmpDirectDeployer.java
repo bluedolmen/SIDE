@@ -11,7 +11,6 @@ import java.util.Properties;
 import com.bluexml.side.util.componentmonitor.MonitorWriter;
 import com.bluexml.side.util.deployer.war.DirectWebAppsDeployer;
 import com.bluexml.side.util.libs.FileHelper;
-import com.bluexml.side.util.libs.zip.TrueZipHelper;
 
 import de.schlichtherle.io.FileInputStream;
 
