@@ -813,6 +813,8 @@ public class ApplicationUtil {
 	 * Save data in XML file
 	 */
 	public static void saveData(IFile model, Application appModel) {
+		streamline(appModel);		
+		
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("application", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 		resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI, ApplicationPackage.eINSTANCE);
@@ -827,6 +829,26 @@ public class ApplicationUtil {
 			model.refreshLocal(-1, null);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	private static void streamline(Application appModel) {
+		// streamline application model
+		List<ModelElement> elements = appModel.getElements();
+		for (ModelElement modelElement : elements) {
+			if (modelElement instanceof Configuration) {
+				Configuration config = (Configuration) modelElement;
+				EList<ConfigurationParameters> l =config.getParameters();
+				List<ConfigurationParameters> toRemove = new ArrayList<ConfigurationParameters>();
+				for (ConfigurationParameters configurationParameters : l) {
+					if (configurationParameters.getValue() == null | configurationParameters.getValue().equals("")) {
+						
+						toRemove.add(configurationParameters);
+					}
+				}
+				// remove "empty" parameters bug #1501				
+				l.removeAll(toRemove);
+			}
 		}
 	}
 }
