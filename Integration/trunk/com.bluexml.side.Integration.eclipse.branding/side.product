@@ -43,6 +43,7 @@
       </win>
    </launcher>
 
+
    <vm>
       <linux>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</linux>
       <macos>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/OSGi%Minimum-1.0</macos>
@@ -367,6 +368,9 @@
       <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.0"/>
       <feature id="com.bluexml.side.Common.core.feature" version="1.0.189.v16454-20100421"/>
       <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.150.v16454-20100421"/>
+      <feature id="org.eclipse.team.svn" version="0.7.8.I20091023-1300"/>
+      <feature id="org.polarion.eclipse.team.svn.connector" version="2.2.1.I20091009-1900"/>
+      <feature id="org.polarion.eclipse.team.svn.connector.svnkit16" version="2.2.1.I20091009-1900"/>
    </features>
 
    <configurations>
