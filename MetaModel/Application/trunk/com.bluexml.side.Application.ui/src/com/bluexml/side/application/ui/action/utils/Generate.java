@@ -3,6 +3,7 @@ package com.bluexml.side.application.ui.action.utils;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -103,7 +104,7 @@ public class Generate extends WorkspaceJob {
 		return imgDesc;
 	}
 
-	protected Action getReservationCompletedAction() {
+	protected Action getCompletedAction() {
 		return new Action("Open Report") {
 			public void run() {
 				ApplicationUtil.browseTo("file://" + IFileHelper.getIFolder(logPath).getRawLocation().toFile().getAbsolutePath() + fileSeparator + LogSave.LOG_HTML_FILE_NAME); //$NON-NLS-1$
@@ -244,16 +245,16 @@ public class Generate extends WorkspaceJob {
 		} catch (MustBeStopped e1) {
 			generalMonitor.addErrorText(e1.getMessage());
 			monitor.subTask(e1.getMessage());
-			setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
+			setProperty(IProgressConstants.ACTION_PROPERTY, getCompletedAction());
 			return new Status(Status.CANCEL, Activator.PLUGIN_ID, e1.getMessage());
 		} catch (Exception e2) {
 			fatalError(e2);
-			setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
+			setProperty(IProgressConstants.ACTION_PROPERTY, getCompletedAction());
 			generalMonitor.addErrorText(Activator.Messages.getString("Generate_0")); //$NON-NLS-1$
 			return new Status(Status.ERROR, Activator.PLUGIN_ID, e2.getMessage(), e2);
 		}
 		monitor.done();
-		setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
+		setProperty(IProgressConstants.ACTION_PROPERTY, getCompletedAction());
 		return new Status(Status.OK, Activator.PLUGIN_ID, Activator.Messages.getString("Generate_1"));
 	}
 
@@ -308,11 +309,10 @@ public class Generate extends WorkspaceJob {
 		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_OFFLINE));
 	}
 
-	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters,
-			final Map<String, String> generationParameters) throws MustBeStopped, Exception {
+	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws MustBeStopped, Exception {
 
 		// Clean if needed :
-		if (doClean) {
+		if (doClean && checkFolders(modelsInfo)) {
 			try {
 				generalMonitor.subTask(Activator.Messages.getString("Generate.16")); //$NON-NLS-1$
 				clean();
@@ -388,6 +388,25 @@ public class Generate extends WorkspaceJob {
 		refreshFolders();
 	}
 
+	private boolean checkFolders(final HashMap<String, List<IFile>> modelsInfo) {
+		// http://bugs.bluexml.net/show_bug.cgi?id=1450
+//		System.err.println("logPath:" + logPath);
+//		System.err.println("genePath:" + genPath);
+		
+		for (List<IFile> mo : modelsInfo.values()) {
+			for (IFile iFile : mo) {
+				boolean modelsInLogPath = iFile.getFullPath().toOSString().contains(logPath);
+				boolean contains = iFile.getFullPath().toOSString().contains(genPath);
+//				System.err.println("check :" + iFile.getFullPath().toOSString() + " " + modelsInLogPath + " " + contains);
+				if (modelsInLogPath || contains) {
+					generalMonitor.addWarningText("Beware clean operation cancled because models are includes in log or generation path ");
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	private void clean() throws CoreException {
 		IFileHelper.deleteFolderContent(IFileHelper.getIFolder(logPath));
 		IFileHelper.deleteFolderContent(IFileHelper.getIFolder(genPath));
@@ -412,8 +431,7 @@ public class Generate extends WorkspaceJob {
 		return null;
 	}
 
-	private boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters,
-			final Map<String, String> generationParameters) throws MustBeStopped, Exception {
+	private boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws MustBeStopped, Exception {
 
 		// For all generator version we will call generation method
 		boolean error = false;
@@ -545,8 +563,7 @@ public class Generate extends WorkspaceJob {
 		return error;
 	}
 
-	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters,
-			final Map<String, String> generationParameters) throws MustBeStopped, Exception {
+	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws MustBeStopped, Exception {
 		boolean error = false;
 
 		List<DeployerConfiguration> ldeployers = configuration.getDeployerConfigurations();
@@ -575,8 +592,7 @@ public class Generate extends WorkspaceJob {
 		return error;
 	}
 
-	private boolean launchDeployer(DeployerConfiguration depConf, Configuration configuration, Map<String, String> configurationParameters, Map<String, String> generationParameters)
-			throws MustBeStopped, Exception {
+	private boolean launchDeployer(DeployerConfiguration depConf, Configuration configuration, Map<String, String> configurationParameters, Map<String, String> generationParameters) throws MustBeStopped, Exception {
 
 		checkUserRequest();
 		boolean error = false;
