@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
   <repository>
-    <files xsi:type="chain:Model" path="/bigTest/models/MainRH.dt"/>
-    <files xsi:type="chain:Folder" path="/com.bluexml.side.Class.generator.alfresco/src/templates/webscript"/>
+    <files xsi:type="chain:Model" path="/com.bluexml.side.Class.generator.alfresco/modelTest/testModelJPA.dt"/>
+    <files xsi:type="chain:Folder" path="/com.bluexml.side.Class.generator.alfresco/generated"/>
     <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.alfresco/src/templates/webscript/default.log.txt"/>
     <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/class/1.0"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco/src/templates/webscript/xml/alfrescoGenerator_template_result_get.mt"/>

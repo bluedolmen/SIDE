@@ -10,7 +10,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%>webapps/birt/Content_type_report.rptdesign<%}%>
+<%if (eContainer() == null) {%>webapps/birt/Content_type_report_<%name%>.rptdesign<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGeneretor_birt_allInOne" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
@@ -63,12 +63,12 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
     </parameters>
     <data-sources>
     	<oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="Data Source all" id="100">
-            <property name="FILELIST"><%getAlfrescoURL()%>/service/com/bluexml/side/contentType/all.xml?guest=true</property>
+            <property name="FILELIST"><%getAlfrescoURL()%>/service/com/bluexml/side/contentType/<%name%>/all.xml?guest=true</property>
         </oda-data-source>
     <%for (getAllClasses()){%>
         <oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="Data Source <%name%>" id="10<%i()+1%>">
             <text-property name="displayName"></text-property>
-            <property name="FILELIST"><%getAlfrescoURL()%>/service/com/bluexml/side/contentType/<%getQualifiedName()%>.xml?guest=true</property>
+            <property name="FILELIST"><%getAlfrescoURL()%>/service/com/bluexml/side/contentType/<%getFolder()%>/<%getQualifiedName()%>.xml?guest=true</property>
         </oda-data-source>
     <%}%>
     </data-sources>

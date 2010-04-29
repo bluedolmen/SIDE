@@ -26,7 +26,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="clazz.Clazz" name="validatedFilename"%>
-<%getProperty("alf.paths.extension.side.webscripts")%>/<%getQualifiedName().replaceAll("_","/")%>/<%getQualifiedName()%>.get.js
+<%getProperty("alf.paths.extension.side.webscripts")%>/<%getFolder()%>/<%getQualifiedName().replaceAll("_","/")%>/<%getQualifiedName()%>.get.js
 <%script type="clazz.Clazz" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 var myNode = null;
 if (argsM["nodeRef"] != null) {

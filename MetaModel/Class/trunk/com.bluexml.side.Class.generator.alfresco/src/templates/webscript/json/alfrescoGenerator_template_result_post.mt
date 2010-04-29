@@ -26,7 +26,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="clazz.Clazz" name="validatedFilename"%>
-<%getProperty("alf.paths.extension.side.webscripts")%>/<%getQualifiedName().replaceAll("_","/")%>/<%getQualifiedName()%>.post.json.ftl
+<%getProperty("alf.paths.extension.side.webscripts")%>/<%getFolder()%>/<%getQualifiedName().replaceAll("_","/")%>/<%getQualifiedName()%>.post.json.ftl
 <%script type="clazz.Clazz" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <#assign recordsCount=records?size>
 <#if argsM["start"]?exists><#assign start=argsM["start"][0]></#if>

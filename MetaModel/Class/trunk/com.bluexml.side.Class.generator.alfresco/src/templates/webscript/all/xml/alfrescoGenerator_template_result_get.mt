@@ -26,7 +26,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%><%getProperty("alf.paths.extension.side.webscripts")%>/all/all.get.xml.ftl<%}%>
+<%if (eContainer() == null) {%><%getProperty("alf.paths.extension.side.webscripts")%>/<%name%>/all/all.get.xml.ftl<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 
 <%for (getAllClasses().nSort("name")){%>

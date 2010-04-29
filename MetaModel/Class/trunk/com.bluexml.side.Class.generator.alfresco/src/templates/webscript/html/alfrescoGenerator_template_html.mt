@@ -26,7 +26,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="clazz.Clazz" name="validatedFilename"%>
-<%getProperty("alf.paths.extension.side.webscripts")%>/<%getQualifiedName().replaceAll("_","/")%>/html/<%getQualifiedName()%>.ftl
+<%getProperty("alf.paths.extension.side.webscripts")%>/<%getFolder()%>/<%getQualifiedName().replaceAll("_","/")%>/html/<%getQualifiedName()%>.ftl
 <%script type="clazz.Clazz" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <ul>
 	<li>id:${child.id}</li>

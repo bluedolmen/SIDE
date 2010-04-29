@@ -27,7 +27,7 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 %>
 
 <%script type="clazz.Clazz" name="validatedFilename"%>
-<%getProperty("alf.paths.extension.side.webscripts")%>/<%getQualifiedName().replaceAll("_","/")%>/<%getQualifiedName()%>.get.desc.xml
+<%getProperty("alf.paths.extension.side.webscripts")%>/<%getFolder()%>/<%getQualifiedName().replaceAll("_","/")%>/<%getQualifiedName()%>.get.desc.xml
 <%script type="clazz.Clazz" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <webscript>
@@ -46,7 +46,7 @@ minutes	:<br/>
 ]]>
   </description>
   <description>Get <%getLabel()%>s</description>
-  <url>/com/bluexml/side/contentType/<%getQualifiedName()%>?nodeRef={nodeRef}&amp;years={years}&amp;months={months}&amp;days={days}&amp;hours={hours}&amp;minutes={minutes}</url>
+  <url>/com/bluexml/side/contentType/<%getFolder()%>/<%getQualifiedName()%>?nodeRef={nodeRef}&amp;years={years}&amp;months={months}&amp;days={days}&amp;hours={hours}&amp;minutes={minutes}</url>
   <format default="json">any</format>
   <authentication runas="<%getRunasforReport()%>">guest</authentication>
   <family>SIDE</family>
