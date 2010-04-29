@@ -224,7 +224,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		// Scan for technology
 		if (!omitedObject.contains(Technology.class) && config.getName().equalsIgnoreCase("technology")) {
 			Technology t = new Technology(config, (Metamodel) parent, root);
-			String fullId = t.getFullId();
+//			String fullId = t.getFullId();
 			if (!technologySet.containsKey(t) || (rootSet != technologySet && parent != technologySet.get(t).getParent())) {
 				technologySet.put(t, t);
 				// System.err.println("\t\t + Add techno " + fullId);
@@ -238,7 +238,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		// Scan for technology version
 		if (!omitedObject.contains(TechnologyVersion.class) && config.getName().equalsIgnoreCase("technologyVersion")) {
 			TechnologyVersion tv = new TechnologyVersion(config, (Technology) parent, root);
-			String fullId = tv.getFullId();
+//			String fullId = tv.getFullId();
 			if (!technologyVersionSet.containsKey(tv) || (rootSet != technologyVersionSet && parent != technologyVersionSet.get(tv).getParent())) {
 				technologyVersionSet.put(tv, tv);
 				// System.err.println("\t\t\t + Add technoVersion " + fullId);
@@ -257,7 +257,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 					gv.setToHidde(true);
 					toCheck.add(gv);
 				}
-				String fullId = gv.getFullId() + " desc:" + gv.getDescription();
+//				String fullId = gv.getFullId() + " desc:" + gv.getDescription();
 				if (!generatorSet.containsKey(gv) || (rootSet != technologyVersionSet && parent != generatorSet.get(gv).getParent())) {
 					generatorSet.put(gv, gv);
 					// System.err.println("\t\t\t\t + Add Generator " + fullId);
@@ -371,8 +371,8 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	}
 
 	/**
-	 * Initialise les éléments de l'arbre en les checkant sur la clé. Si
-	 * l'élément est invalide il sera desactivé
+	 * Initialise les ï¿½lï¿½ments de l'arbre en les checkant sur la clï¿½. Si
+	 * l'ï¿½lï¿½ment est invalide il sera desactivï¿½
 	 */
 	public void initializeFromKey() {
 

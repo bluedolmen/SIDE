@@ -1486,6 +1486,9 @@ public class ApplicationDialog extends Dialog {
 	 * Action for Close, Save and Launch
 	 */
 	protected void buttonPressed(int buttonId) {
+		// fix lot of trouble change focus to fire lostFocus event,
+		// this close editor for parameters, logText, detinationText
+		buttonBar.setFocus();
 		if (generatorParameterCellModifier != null) {
 			// only for some OS that do not unselect cell Editor before fire
 			// this event, so we record changes manually
