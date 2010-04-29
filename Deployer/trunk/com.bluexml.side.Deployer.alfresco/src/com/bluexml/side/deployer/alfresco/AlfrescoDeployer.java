@@ -7,8 +7,7 @@ import com.bluexml.side.util.deployer.AbstractMultiDeployer;
 public class AlfrescoDeployer extends AbstractMultiDeployer {
 
 	public AlfrescoDeployer() {
-		super("com.bluexml.side.deployer.alfresco.clean","com.bluexml.side.deployer.alfresco.logChanges");
-		
+		super("com.bluexml.side.deployer.alfresco.clean", "com.bluexml.side.deployer.alfresco.logChanges");
 
 		AMPDeployer ampDep = new AMPDeployer();
 		addDeployer(ampDep);
@@ -34,7 +33,7 @@ public class AlfrescoDeployer extends AbstractMultiDeployer {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	public boolean check() {
 		return true;
 	}

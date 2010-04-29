@@ -1,5 +1,6 @@
 package com.bluexml.side.deployer.alfresco;
 
+import com.bluexml.side.util.deployer.war.Activator;
 import com.bluexml.side.util.deployer.war.WarDeployer;
 
 public class ShareDeployer extends WarDeployer {
@@ -15,6 +16,15 @@ public class ShareDeployer extends WarDeployer {
 
 	public boolean check() {
 		return true;
+	}
+
+	@Override
+	public void deploy() throws Exception {
+		try {
+			super.deploy();
+		} catch (Exception e) {
+			monitor.addWarningTextAndLog(Activator.Messages.getString("ShareDeployer.01"), null);
+		}
 	}
 
 }
