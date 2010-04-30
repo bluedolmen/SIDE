@@ -53,11 +53,11 @@
 		<unzip dest="${builder}_tmp" src="${distros}/${buildId}-macosx.carbon.x86.zip">
 		</unzip>
 		<zip destfile="${distros}/${buildId}-macosx.carbon.x86.zip" update="false">
-			<zipfileset prefix="SIDE" dir="${builder}_tmp/SIDE" id="id" filemode="777">
-				<include name="side.app/Contents/MacOS/side" />
+			<zipfileset prefix="${archivePrefix}" dir="${builder}_tmp/${archivePrefix}" id="id" filemode="777">
+				<include name="${launcherName}.app/Contents/MacOS/${launcherName}" />
 			</zipfileset>
-			<zipfileset prefix="SIDE" dir="${builder}_tmp/SIDE" id="id2">
-				<exclude name="side.app/Contents/MacOS/side" />
+			<zipfileset prefix="${archivePrefix}" dir="${builder}_tmp/${archivePrefix}" id="id2">
+				<exclude name="${launcherName}.app/Contents/MacOS/${launcherName}" />
 			</zipfileset>
 		</zip>
 	</target>
@@ -68,11 +68,11 @@
 		<unzip dest="${builder}_tmp" src="${distros}/${buildId}-linux.gtk.x86.zip">
 		</unzip>
 		<zip destfile="${distros}/${buildId}-linux.gtk.x86.zip" update="false">
-			<zipfileset prefix="SIDE" dir="${builder}_tmp/SIDE" id="id" filemode="777">
-				<include name="side.app/Contents/MacOS/side" />
+			<zipfileset prefix="${archivePrefix}" dir="${builder}_tmp/${archivePrefix}" id="id" filemode="777">
+				<include name="${launcherName}" />
 			</zipfileset>
-			<zipfileset prefix="SIDE" dir="${builder}_tmp/SIDE" id="id2">
-				<exclude name="side.app/Contents/MacOS/side" />
+			<zipfileset prefix="${archivePrefix}" dir="${builder}_tmp/${archivePrefix}" id="id2">
+				<exclude name="${launcherName}" />
 			</zipfileset>
 		</zip>
 	</target>
