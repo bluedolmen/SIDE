@@ -75,6 +75,14 @@ public class PortalValidator extends EObjectValidator {
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
 	/**
+	 * The parsed OCL expression for the definition of the '<em>portalNameEmpty</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint portal_portalNameEmptyInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>haveType</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,7 +208,54 @@ public class PortalValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePortal(Portal portal, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(portal, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(portal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(portal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(portal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(portal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(portal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(portal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(portal, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePortal_portalNameEmpty(portal, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the portalNameEmpty constraint of '<em>Portal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePortal_portalNameEmpty(Portal portal, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (portal_portalNameEmptyInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(PortalPackage.Literals.PORTAL);
+
+			EAnnotation ocl = PortalPackage.Literals.PORTAL.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("portalNameEmpty");
+
+			try {
+				portal_portalNameEmptyInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(portal_portalNameEmptyInvOCL);
+
+		if (!query.check(portal)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( PortalPackage.Literals.PORTAL.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"portalNameEmpty")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "portalNameEmpty", getObjectLabel(portal, context) }),
+						 new Object[] { portal }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

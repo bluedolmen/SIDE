@@ -25,7 +25,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.portal.PortalPackage#getPortal()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL portalNameEmpty='not (self.name.oclIsUndefined() or self.name =\'\')'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='portalNameEmpty'"
  * @generated
  */
 public interface Portal extends com.bluexml.side.common.Package {

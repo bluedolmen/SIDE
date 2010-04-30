@@ -1123,6 +1123,12 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	protected void createOCLAnnotations() {
 		String source = "http://www.bluexml.com/OCL";		
 		addAnnotation
+		  (portalEClass, 
+		   source, 
+		   new String[] {
+			 "portalNameEmpty", "not (self.name.oclIsUndefined() or self.name =\'\')"
+		   });			
+		addAnnotation
 		  (portletEClass, 
 		   source, 
 		   new String[] {
@@ -1132,7 +1138,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		  (portletTypeEClass, 
 		   source, 
 		   new String[] {
-			 "haveIdentifier", "not (self.id.oclIsUndefined() or self.name.oclIsUndefined())"
+			 "haveIdentifier", "not (self.id.oclIsUndefined() or self.id = \'\' or self.name.oclIsUndefined() or self.name. = \'\')"
 		   });			
 		addAnnotation
 		  (portletInternalEClass, 
@@ -1163,6 +1169,12 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 */
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";			
+		addAnnotation
+		  (portalEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "portalNameEmpty"
+		   });			
 		addAnnotation
 		  (portletEClass, 
 		   source, 
