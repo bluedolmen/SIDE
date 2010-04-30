@@ -111,6 +111,11 @@ div.upload div {
 /*
  * SELECTION WIDGETS
  */
+div.side_select_widget .invalid > .alert {
+	margin-left: 42px;
+	margin-top: 40px;
+}
+
 div.side_select_widget,div.side_select_search_zone {
 	padding-left: 0px;
 }
