@@ -641,8 +641,10 @@ public class MappingToolAlfrescoToClassForms extends MappingToolCommon {
 		Set<Entry<String, AspectType>> aspectsEntrySet = aspects.entrySet();
 		for (Entry<String, AspectType> entry : aspectsEntrySet) {
 			AspectType aspect = entry.getValue();
-			fillXFormsAspect(xformsDocument, classElement, aspect, alfrescoAttributes, subMap(
-					initParams, aspect.getName()), formIsReadOnly, isServletRequest);
+			if (aspect != null) { // aspects from Alfresco models yield a null here
+				fillXFormsAspect(xformsDocument, classElement, aspect, alfrescoAttributes, subMap(
+						initParams, aspect.getName()), formIsReadOnly, isServletRequest);
+			}
 		}
 		Set<Entry<String, AssociationType>> associationsEntrySet = associations.entrySet();
 		for (Entry<String, AssociationType> entry : associationsEntrySet) {

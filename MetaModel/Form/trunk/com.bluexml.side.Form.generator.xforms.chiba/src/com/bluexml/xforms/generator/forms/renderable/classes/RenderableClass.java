@@ -194,6 +194,7 @@ public class RenderableClass extends Renderable {
 	 * 
 	 * @param destination
 	 *            the destination
+	 * @param destination
 	 * @param classBean
 	 *            the class bean
 	 * @param name
@@ -209,13 +210,13 @@ public class RenderableClass extends Renderable {
 	 * @param associationClasseBean
 	 *            the association classe bean
 	 */
-	public void addAssociation(Clazz destination, RenderableClass classBean, String name,
-			String title, AssociationKind type, Association association) {
+	public void addAssociation(Clazz source, Clazz destination, RenderableClass classBean,
+			String name, String title, AssociationKind type, Association association) {
 
 		AssociationProperties properties = new AssociationProperties(destination, classBean, name,
 				title, type.isInline(), type.getHiBound(), type.getLoBound());
 		if (type.isFiltered()) {
-			String alfrescoName = getFormGenerator().getAssoQualifiedName(association);
+			String alfrescoName = getFormGenerator().getAssoQualifiedName(association, source);
 			properties.setFilterAssoc(alfrescoName);
 		}
 		boolean isComposition = (association.getAssociationType() == AssociationType.COMPOSITION);

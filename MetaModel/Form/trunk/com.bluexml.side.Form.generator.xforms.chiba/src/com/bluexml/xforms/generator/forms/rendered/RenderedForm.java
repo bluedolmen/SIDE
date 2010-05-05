@@ -44,7 +44,7 @@ public class RenderedForm extends Rendered {
 		Element modelInstance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		modelInstance.setAttribute("id", "minstance");
-		
+
 		// build the URI for the Get action
 		MsgId getAction = MsgId.INT_ACT_CODE_GET_FORM;
 		String suffix = "";
@@ -74,6 +74,9 @@ public class RenderedForm extends Rendered {
 		stringBuffer.append("dojo.require(\"dojo.widget.LayoutContainer\");");
 		stringBuffer.append("dojo.require(\"dojo.widget.TabContainer\");");
 		stringBuffer.append("dojo.require(\"dojo.widget.ContentPane\");");
+		// uncomment when using a more recent version of Dojo than the 0.4 in Chiba 2.3
+		// stringBuffer.append("dojo.require(\"dojo.parser\");");
+
 		tabContainerScript.setText(stringBuffer.toString());
 		head.addContent(tabContainerScript);
 

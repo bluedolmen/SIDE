@@ -57,21 +57,25 @@ public class RenderableSelector extends AbstractRenderable {
 	public RenderableSelector(AssociationBean assoBean) {
 		super(assoBean);
 
+		String idStr;
 		if (assoBean.isForField()) {
 			String overridingType = assoBean.getOverridingType();
-			instanceName = overridingType.replaceAll(":", "_") + bean.getName() + "ListExt";
+			idStr = overridingType.replaceAll(":", "_") + bean.getName() + "ListExt";
+			instanceName = XFormsGenerator.getId(idStr); // #1523
 			modelElementUpdater = new ModelElementUpdaterList(overridingType, instanceName,
 					assoBean.getFormatPattern(), assoBean.getLabelLength(), assoBean
 							.getIdentifierPropName());
 		} else if (assoBean.getAssociationType() == AssociationType.clazz) {
-			instanceName = ModelTools.getCompleteNameJAXB(assoBean.getDestinationClass()) + "List";
+			idStr = ModelTools.getCompleteNameJAXB(assoBean.getDestinationClass()) + "List";
+			instanceName = XFormsGenerator.getId(idStr);
 			modelElementUpdater = new ModelElementUpdaterList(assoBean.getDestinationClass(),
 					instanceName, assoBean.getFormatPattern(), assoBean.getLabelLength(), assoBean
 							.getFilterAssoc(), assoBean.isComposition());
 		} else {
-			instanceName = ModelTools.getCompleteNameJAXB(assoBean.getDestinationSelect()
-					.getEnumeration())
+			idStr = ModelTools
+					.getCompleteNameJAXB(assoBean.getDestinationSelect().getEnumeration())
 					+ "EnumInstance";
+			instanceName = XFormsGenerator.getId(idStr);
 			modelElementUpdater = new ModelElementUpdaterEnum(assoBean, instanceName);
 		}
 		instancePath = "instance('" + instanceName + "')/";
@@ -89,11 +93,6 @@ public class RenderableSelector extends AbstractRenderable {
 		// bindMaxResults.setHidden(true);
 		// bindType.setHidden(true);
 
-		if (bean.isMandatory()) { // #978
-			// setting bindId's required to true will give the visual cue (a red star under Chiba)
-			bindId.setRequired(true);
-			// !!! the constraint will be set by the actions !!!
-		}
 		// for workflows, we don't want anything but the list
 		add(new RenderableSelectorList(assoBean, this));
 		add(new RenderableSelectorCount(assoBean, this));
@@ -149,9 +148,7 @@ public class RenderableSelector extends AbstractRenderable {
 	 * @return the bind id
 	 */
 	public ModelElementBindSimple getBindId() {
-		if (bindId == null) {
-			initBinds();
-		}
+		initBinds();
 		return bindId;
 	}
 
@@ -161,9 +158,7 @@ public class RenderableSelector extends AbstractRenderable {
 	 * @return the bind label
 	 */
 	public ModelElementBindSimple getBindLabel() {
-		if (bindLabel == null) {
-			initBinds();
-		}
+		initBinds();
 		return bindLabel;
 	}
 
@@ -171,6 +166,7 @@ public class RenderableSelector extends AbstractRenderable {
 	 * @return the bindMaxResults
 	 */
 	public ModelElementBindSimple getBindMaxResults() {
+		initBinds();
 		return bindMaxResults;
 	}
 
@@ -180,9 +176,7 @@ public class RenderableSelector extends AbstractRenderable {
 	 * @return
 	 */
 	public ModelElementBindSimple getBindType() {
-		if (bindType == null) {
-			initBinds();
-		}
+		initBinds();
 		return bindType;
 	}
 
@@ -245,6 +239,9 @@ public class RenderableSelector extends AbstractRenderable {
 	 * resetting the constraint.
 	 */
 	public void initBinds() {
+		if (bindId != null) {
+			return;
+		}
 		bindId = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDID);
 		bindLabel = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL);
 		bindMaxResults = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDMAX);

@@ -81,8 +81,14 @@ public abstract class AbstractRenderableField extends Renderable {
 			}
 		} else {
 			meb = new ModelElementBindSimple(path);
-			meb.setType(new QName(xsdType));
 			applyConstraints(meb);
+			if (xsdType.equals("anyType")) {
+				meb.setType(new QName("string"));
+				// let's hide the anyType objects, since XForms doesn't deal with that
+				setHidden(meb, true); 
+			} else {
+				meb.setType(new QName(xsdType));
+			}
 		}
 		rendered.addModelElement(meb);
 
@@ -494,8 +500,7 @@ public abstract class AbstractRenderableField extends Renderable {
 	private ModelElementEnumeration getModelElementEnumeration(SelectBean selectBean) {
 
 		if (selectBean == null) {
-			System.err.println("SelectBean is null!");
-			return null;
+			throw new RuntimeException("SelectBean is null!");
 		}
 		String enumInstance = ModelTools.toJAXB(ModelTools.getCompleteName(selectBean
 				.getEnumeration()))

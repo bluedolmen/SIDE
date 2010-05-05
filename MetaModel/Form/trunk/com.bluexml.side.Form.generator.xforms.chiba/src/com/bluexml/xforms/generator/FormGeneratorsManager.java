@@ -302,9 +302,10 @@ public class FormGeneratorsManager {
 	 * the names.
 	 * 
 	 * @param asso
+	 * @param classAsSource the class being used as the source for the association
 	 * @return
 	 */
-	public String getAssoQualifiedName(Association asso) {
+	public String getAssoQualifiedName(Association asso, Clazz classAsSource) {
 		StringBuffer res = new StringBuffer(128);
 		// ** #979, #1273
 		AssociationEnd srcEnd = (AssociationEnd) getRealObject(asso.getFirstEnd());
@@ -313,6 +314,15 @@ public class FormGeneratorsManager {
 		AbstractClass srcClass = (AbstractClass) getRealObject(srcEnd.getLinkedClass());
 		AbstractClass targetClass = (AbstractClass) getRealObject(targetEnd.getLinkedClass());
 		// ** #979, #1273
+
+		// #1549: we need to exchange the association ends so that the final name is correct
+		boolean doublenav = srcEnd.isNavigable() && targetEnd.isNavigable();
+
+		if (doublenav && (classAsSource.equals(targetClass))) {
+			AbstractClass tempClass = targetClass;
+			targetClass = srcClass;
+			srcClass = tempClass;
+		}
 		// definition in Acceleo template used for writing this function
 		// <%args(0).linkedClass.getQualifiedName()%>_<%name%><%if
 		// (args(0).getOpposite().name !=
@@ -1025,7 +1035,7 @@ public class FormGeneratorsManager {
 
 		AssociationInfo associationInfo = findAssocation(real_class, modelElement);
 		if (associationInfo != null) {
-			result = getAssoQualifiedName(associationInfo.realAssociation);
+			result = getAssoQualifiedName(associationInfo.realAssociation, real_class);
 		} else {
 			AbstractClass classe = null;
 			for (AbstractClass abstractClass : allClasses) {
@@ -1472,9 +1482,9 @@ public class FormGeneratorsManager {
 
 	/**
 	 * Tells whether an association is to be filtered on the side of the given class. If so, objects
-	 * of that class, when listed on a selection widget as available items are filtered out if they
+	 * of that class, when listed on a selection widget as available items, are filtered out if they
 	 * already bear an association (i.e. if they are already pointed to using that association). <br/>
-	 * NOTE: not sure this will work for reflexive associations.
+	 * NOTE: not sure this will work correctly for reflexive associations.
 	 * <p/>
 	 * Example association: Person (0..*) <---> (0.. 1) Company.
 	 * <p/>
@@ -1487,7 +1497,7 @@ public class FormGeneratorsManager {
 	 * On the form for 'Person', the 'real class' property for the ModelChoiceField is 'Company':
 	 * only one Company object can be associated. But this time, the association reads 'a Company
 	 * can be associated with several Person', so having a Company object already associated does
-	 * not require that the Company object be filtered out. So return <code>false</code>.
+	 * not require that the Company object be filtered out. So, return <code>false</code>.
 	 * 
 	 * @param formEltClass
 	 *            the class for the target items (also the 'real class' property of

@@ -34,7 +34,9 @@ public class RenderableActionField extends Renderable {
 		 * Dans tous les cas, "Envoyer à la relecture" est le texte affiché sur le bouton.
 		 */
 		ModelElement mel = formElement.getRef();
-		mel = (ModelElement) generationManager.getFormGenerator().getRealObject(mel);
+		if (mel != null) {
+			mel = (ModelElement) generationManager.getFormGenerator().getRealObject(mel);
+		}
 		String actionName;
 		String infixe;
 

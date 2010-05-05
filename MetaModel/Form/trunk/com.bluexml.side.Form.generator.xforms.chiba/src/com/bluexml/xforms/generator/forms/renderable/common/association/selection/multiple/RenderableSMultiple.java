@@ -28,7 +28,7 @@ public class RenderableSMultiple extends AbstractRenderable {
 	/** The renderable association selection multiple display. */
 	private RenderableSMultipleDisplay renderableAssoSelMultDisplay;
 
-	private ModelElementBindSimple selectorBindId; // #1156
+	private RenderableSelector selector; // #1156
 
 	private ModelElementBindHolder bindRepeater = null; // #1310
 	private ModelElementBindSimple bindActions = null;
@@ -49,6 +49,7 @@ public class RenderableSMultiple extends AbstractRenderable {
 		super(associationBean);
 
 		add(selector);
+		this.selector = selector;
 		if (associationBean.isDisabled() == false) {
 			renderableAssoSelMultActionsAddRemove = new RenderableSMultipleActionsAddRemove(
 					associationBean, selector);
@@ -125,8 +126,8 @@ public class RenderableSMultiple extends AbstractRenderable {
 				String pathShortened = path.charAt(pos) == '/' ? path.substring(0, pos) : path;
 				String constraint = "instance('minstance')/" + pathShortened + "[1]/"
 						+ bindId.getNodeset() + " ne ''";
-				if (StringUtils.contains(selectorBindId.getConstraint(), constraint) == false) {
-					selectorBindId.setConstraint(constraint);
+				if (StringUtils.contains(selector.getBindId().getConstraint(), constraint) == false) {
+					selector.getBindId().setConstraint(constraint);
 				}
 			}
 		}

@@ -175,8 +175,8 @@ public class DataLayer implements DataLayerInterface {
 		String associationsAction = (String) entry.get("associationsAction");
 		boolean deleteAllAssociations = StringUtils.equals(associationsAction, "replace");
 		// update associations
-		updateAssociations(nodeToUpdate, nodeTypeQName, (List<AssociationBean>) entry
-				.get("associations"), deleteAllAssociations);
+		List<AssociationBean> list = (List<AssociationBean>) entry.get("associations");
+		updateAssociations(nodeToUpdate, nodeTypeQName, list, deleteAllAssociations);
 		return nodeToUpdate;
 	}
 
@@ -1221,7 +1221,7 @@ public class DataLayer implements DataLayerInterface {
 			if (propertyName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 				PropertyDefinition propertyDef = dictionaryService.getProperty(propertyName);
 				if (propertyDef != null) { // may happen if propertyName was removed from the
-											// current version of the content type
+					// current version of the content type
 					String propTypeName = propertyDef.getDataType().getJavaClassName();
 					if (StringUtils.equalsIgnoreCase(propTypeName, "java.lang.String")) {
 						propValue = makePropertyValue(propertyDef, properties.get(propertyName));
@@ -1262,7 +1262,7 @@ public class DataLayer implements DataLayerInterface {
 			if (propertyName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 				PropertyDefinition propertyDef = dictionaryService.getProperty(propertyName);
 				if (propertyDef != null) { // may happen if propertyName was removed from the
-											// current version of the content type
+					// current version of the content type
 					propValue = makePropertyValue(propertyDef, properties.get(propertyName));
 					if (propValue != null) {
 						String propStr = propValue.toString();

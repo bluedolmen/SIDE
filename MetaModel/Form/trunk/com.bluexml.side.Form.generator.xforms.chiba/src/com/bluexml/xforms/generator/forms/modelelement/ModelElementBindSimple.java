@@ -90,7 +90,8 @@ public class ModelElementBindSimple extends ModelElement {
 					.equalsIgnoreCase(MsgId.INT_TYPE_XSD_TIME.getText()))
 					&& isReadOnly()) {
 				typeStr = "string";
-				type = new QName("string"); // not much use in setting the type, just to be coherent
+				// there is not much use in setting the 'type' field, we do it just to be coherent.
+				type = new QName("string"); 
 			}
 			//** #1280
 			bindElement.setAttribute("type", typeStr);

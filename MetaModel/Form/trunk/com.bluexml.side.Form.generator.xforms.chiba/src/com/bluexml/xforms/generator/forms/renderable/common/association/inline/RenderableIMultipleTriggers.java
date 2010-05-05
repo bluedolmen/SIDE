@@ -57,6 +57,13 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 
 		action.addContent(insertAction);
 
+		// uncomment when using a more recent version of Dojo than the 0.4 in Chiba 2.3. See the 
+		// companion comment in RenderedForm.java
+		// Element updateAction = XFormsGenerator.createElement("load",
+		// XFormsGenerator.NAMESPACE_XFORMS);
+		// updateAction.setAttribute("resource", "javascript:dojo.parser.parse()");
+		// action.addContent(updateAction);
+
 		add.addContent(action);
 		return add;
 	}
@@ -107,9 +114,11 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		RenderedInput input = new RenderedInput();
-		ModelElementBindSimple bindActions = ((RenderableIMultiple) parents.peek()).getBindActions();
+		ModelElementBindSimple bindActions = ((RenderableIMultiple) parents.peek())
+				.getBindActions();
 		String repeaterId = renderedParents.peek().getOptionalData();
 		Element addButton = createAdd(bindActions, repeaterId);
 		Element deleteButton = createDelete(bindActions, repeaterId);

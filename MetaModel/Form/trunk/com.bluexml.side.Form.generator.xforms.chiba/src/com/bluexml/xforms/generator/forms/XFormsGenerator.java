@@ -359,8 +359,8 @@ public class XFormsGenerator extends AbstractGenerator {
 		RenderableClass classBeanSource = getClassBean(source);
 		RenderableClass classBeanDestination = getClassBean(destination);
 		try {
-			classBeanSource.addAssociation(destination, classBeanDestination, name, title, type,
-					association);
+			classBeanSource.addAssociation(source, destination, classBeanDestination, name, title,
+					type, association);
 		} catch (NullPointerException e) {
 			// nothing to do if in dev mode
 			if (formGenerator.isDebugMode() == false) {

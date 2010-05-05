@@ -227,7 +227,9 @@ public class ModelTools {
 			case DataType.DATE_VALUE: // '\n'
 				return "date";
 			case DataType.OBJECT_VALUE: // '\013'
-				return "anyType";
+				// some Alfresco models have elements that fall into this case, e.g. 'homeFolder' on
+				// cm:Person
+				return "anyType"; // 'anyType' is not supported by Chiba, will have to be rewritten
 			case DataType.DATE_TIME_VALUE: // '\f'
 				return "dateTime";
 			case DataType.TIME_VALUE: // '\r'

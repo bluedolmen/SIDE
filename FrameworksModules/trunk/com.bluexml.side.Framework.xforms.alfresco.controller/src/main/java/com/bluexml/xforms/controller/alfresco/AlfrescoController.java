@@ -1159,10 +1159,18 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 		Element returned = doc.createElement("returned");
 		returned.setTextContent("" + nb);
 
+		Element filteredOut = doc.createElement("filteredOut");
+		filteredOut.setTextContent("0");
+		
+		Element typeFound = doc.createElement("typeFound");
+		typeFound.setTextContent("simulated");
+		
 		Element subquery = doc.createElement("query");
 		query.appendChild(count);
 		query.appendChild(maxResults);
 		query.appendChild(returned);
+		query.appendChild(filteredOut);
+		query.appendChild(typeFound);
 		query.appendChild(subquery);
 
 		root.appendChild(query);
@@ -1306,21 +1314,6 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 */
 	private PostMethod requestPost(AlfrescoTransaction transaction, Map<String, String> parameters,
 			MsgId opCode) throws IOException, ServletException {
-		if (loggertrace.isTraceEnabled()) {
-			logger.trace("Calling the webscript on Alfresco with request: " + opCode);
-			logger.trace("Parameters : ");
-			Set<Entry<String, String>> entrySet2 = parameters.entrySet();
-			for (Entry<String, String> entry2 : entrySet2) {
-				String value = entry2.getValue();
-				if (value == null) {
-					value = "<null string>";
-				} else if (value.equals("")) {
-					value = "<empty string>";
-				}
-				logger.trace("  " + entry2.getKey() + " = " + value);
-			}
-		}
-
 		//
 		// security: enforce use of possible access controls on the Alfresco side.
 		if (transaction == null) {
@@ -1335,6 +1328,24 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			logger.error("No user name in the transaction.");
 			throw new ServletException(
 					"Cannot complete the action: a user name is required for webscript requests.");
+		}
+
+		//
+		// log some info
+		if (loggertrace.isTraceEnabled()) {
+			logger.trace("Calling the webscript for user '" + legitimateLogin + "' with request: "
+					+ opCode);
+			logger.trace("Parameters : ");
+			Set<Entry<String, String>> entrySet2 = parameters.entrySet();
+			for (Entry<String, String> entry2 : entrySet2) {
+				String value = entry2.getValue();
+				if (value == null) {
+					value = "<null string>";
+				} else if (value.equals("")) {
+					value = "<empty string>";
+				}
+				logger.trace("  " + entry2.getKey() + " = " + value);
+			}
 		}
 
 		//

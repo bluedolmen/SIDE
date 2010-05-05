@@ -360,7 +360,7 @@ public class MappingGenerator extends AbstractGenerator {
 			} else {
 				associationType.setType(copyClassType(classType));
 			}
-			String associationName = formGenerator.getAssoQualifiedName(association);
+			String associationName = formGenerator.getAssoQualifiedName(association, owner);
 			associationType.setAlfrescoName(associationName);
 
 			if (type.getAssociationCardinality().isMultiple()) {
@@ -906,7 +906,7 @@ public class MappingGenerator extends AbstractGenerator {
 
 		formFieldType.setUniqueName(FormGeneratorsManager.getUniqueName(field));
 		formFieldType.setShortName(field.getId());
-		
+
 		String style = field.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
@@ -1048,11 +1048,40 @@ public class MappingGenerator extends AbstractGenerator {
 				}
 			}
 		}
+
+		// this happens for native Alfresco models, or any model element with the appropriate tags
 		if (noPrefix) {
 			return attribute.getName();
 		}
-		String result = formGenerator.getClassQualifiedName(classe) + "_" + attribute.getName();
-		return result;
+
+		// #1547: inherited attributes names must be mapped to the appropriate parent class
+		EObject container = ((EObject) ref).eContainer();
+		ModelElement realContainer = (ModelElement) formGenerator.getRealObject(container);
+		if (classe.equals(realContainer)) {
+			return formGenerator.getClassQualifiedName(classe) + "_" + attribute.getName();
+		}
+
+		// the attribute may be in a parent class or in an aspect
+		if (classe instanceof Clazz) {
+			Clazz classRef = (Clazz) classe;
+			for (Clazz parentClass : classRef.getGeneralizations()) {
+				Clazz realParentClass = (Clazz) formGenerator.getRealObject(parentClass);
+				if (realParentClass.equals(realContainer)) {
+					return getAlfrescoNameForAttribute(realParentClass, attribute);
+				}
+			}
+			for (Aspect aspect : classRef.getAspects()) {
+				Aspect realAspect = (Aspect) formGenerator.getRealObject(aspect);
+				if (realAspect.equals(realContainer)) {
+					return getAlfrescoNameForAttribute(realAspect, attribute);
+				}
+			}
+		} else {
+			// pathological case
+			throw new RuntimeException("Can't determine the Alfresco name of attribute '"
+					+ attribute.getName() + "' (" + attribute.getTitle() + ")");
+		}
+		return null;
 	}
 
 	/**
@@ -1283,36 +1312,41 @@ public class MappingGenerator extends AbstractGenerator {
 	/**
 	 * Process choice field common.
 	 * 
-	 * @param modelChoiceField
+	 * @param modelChoice
 	 *            the model choice field
 	 * @param modelChoiceType
 	 *            the model choice type
 	 * @param formClass
 	 *            the form class
 	 */
-	private void processChoiceFieldCommon(ModelChoiceField modelChoiceField,
+	private void processChoiceFieldCommon(ModelChoiceField modelChoice,
 			FormContainer formContainer, ModelChoiceType modelChoiceType) {
-		String style = modelChoiceField.getStyle();
+		String style = modelChoice.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
 		}
 
-		modelChoiceType.setDisplayLabel(modelChoiceField.getLabel()); // #1212
+		modelChoiceType.setDisplayLabel(modelChoice.getLabel()); // #1212
 
-		modelChoiceType.setMaxBound(modelChoiceField.getMax_bound());
-		modelChoiceType.setMinBound(modelChoiceField.getMin_bound());
-		modelChoiceType.setUniqueName(FormGeneratorsManager.getUniqueName(modelChoiceField));
-		String shortName = getAssociationNameForModelChoice(modelChoiceField, formContainer);
+		modelChoiceType.setMaxBound(modelChoice.getMax_bound());
+		modelChoiceType.setMinBound(modelChoice.getMin_bound());
+		modelChoiceType.setUniqueName(FormGeneratorsManager.getUniqueName(modelChoice));
+
+		// this checks that the Ref is an association
+		String shortName = getAssociationNameForModelChoice(modelChoice, formContainer);
 		modelChoiceType.setShortName(shortName);
-		ModelElement ref = modelChoiceField.getRef();
 
+		Association asso = (Association) formGenerator.getRealObject(modelChoice.getRef());
+
+		FormClass formClass = (FormClass) formContainer;
 		// #980
-		String alfrescoName = formGenerator.getAlfrescoName(modelChoiceField.getReal_class(), ref);
+		Clazz realClass = (Clazz) formGenerator.getRealObject(formClass.getReal_class());
+		String alfrescoName = formGenerator.getAssoQualifiedName(asso, realClass);
 
 		modelChoiceType.setAlfrescoName(alfrescoName);
-		modelChoiceType.setRealClass(copyClassType(getClassType(modelChoiceField.getReal_class())));
+		modelChoiceType.setRealClass(copyClassType(getClassType(realClass)));
 
-		EList<FormContainer> targets = modelChoiceField.getTarget();
+		EList<FormContainer> targets = modelChoice.getTarget();
 		int nbAddedTargets = 0;
 		for (FormContainer target : targets) {
 			if (target instanceof FormClass) {
@@ -1325,7 +1359,7 @@ public class MappingGenerator extends AbstractGenerator {
 		//
 		// optional attributes and applicable verifications
 		//
-		if (modelChoiceField.getWidget() == ModelChoiceWidgetType.INLINE) {
+		if (modelChoice.getWidget() == ModelChoiceWidgetType.INLINE) {
 			modelChoiceType.setInline(true);
 			if (nbAddedTargets == 0) {
 				throw new RuntimeException(
@@ -1334,9 +1368,9 @@ public class MappingGenerator extends AbstractGenerator {
 								+ "' has 'Inline' property set to 'true', which REQUIRES at least one form in the 'Target' property. Please add a target FormClass.");
 			}
 			// the first target cannot be based on an abstract class
-			FormContainer target = modelChoiceField.getTarget().get(0);
-			Clazz realClass = getRealClassForFormClass((FormClass) target);
-			if (realClass.isAbstract()) {
+			FormContainer target = modelChoice.getTarget().get(0);
+			Clazz realClassForTarget = getRealClassForFormClass((FormClass) target);
+			if (realClassForTarget.isAbstract()) {
 				throw new RuntimeException("The first form in the 'Target' property of form '"
 						+ modelChoiceType.getDisplayLabel()
 						+ "' MUST NOT be based on an abstract class.");
@@ -1344,22 +1378,21 @@ public class MappingGenerator extends AbstractGenerator {
 
 		}
 		//
-		Association asso = (Association) formGenerator.getRealObject(ref);
 		if (asso.isOrdered()) {
 			modelChoiceType.setOrdered(true);
 		}
 		//
-		if (modelChoiceField.getField_size() > 0) {
-			String lsize = "" + modelChoiceField.getField_size();
+		if (modelChoice.getField_size() > 0) {
+			String lsize = "" + modelChoice.getField_size();
 			modelChoiceType.setFieldSize(StringUtils.trim(lsize));
 		}
 		//
-		String formatPattern = modelChoiceField.getFormat_pattern();
+		String formatPattern = modelChoice.getFormat_pattern();
 		if (StringUtils.trimToNull(formatPattern) != null) {
 			modelChoiceType.setFormatPattern(formatPattern);
 		}
 		//
-		String xtension = formGenerator.getXtensionAsString(modelChoiceField);
+		String xtension = formGenerator.getXtensionAsString(modelChoice);
 		if (StringUtils.trimToNull(xtension) != null) {
 			modelChoiceType.setXtension(xtension);
 		}

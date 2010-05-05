@@ -186,6 +186,7 @@ public class XFormsWork implements RunAsWork<String> {
 				readOnly = true;
 			}
 			RetryingTransactionHelper transactionHelper = formsWebscript.getTransactionHelper();
+			transactionHelper.setMaxRetries(2);
 			result = transactionHelper.doInTransaction(new DoWorkInTransaction(), readOnly,
 					requiresNew);
 		} catch (Exception e) {

@@ -70,7 +70,7 @@ public class AssociationProperties {
 	 * showingActions must be reset.
 	 */
 	private boolean isForField; 
-	private String overridingType;
+	private String overridingType = null;
 	/** Local name of the property (from the type definition) used as id*/
 	private String identifierPropName;
 	// ** #1530
