@@ -24,12 +24,12 @@
 		<echo message="==========" />
 		<echo message="patch the web application webapps.home=${symbol_dollar}{webapps.home}" />
 
-		<copy todir="${symbol_dollar}{webapps.home}/alfresco">
+		<copy todir="${symbol_dollar}{webapps.home}/alfresco" overwrite="true" failonerror="false" verbose="true">
 			<fileset dir="target/${symbol_dollar}{moduleId}-${symbol_dollar}{mypom.version}/web" id="id">
 				<include name="**/**" />
 			</fileset>
 		</copy>
-		<copy todir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/classes">
+		<copy todir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/classes" overwrite="true" failonerror="false" verbose="true">
 			<fileset dir="target/${symbol_dollar}{moduleId}-${symbol_dollar}{mypom.version}/config" id="id">
 				<include name="**/**" />
 			</fileset>
@@ -39,13 +39,13 @@
 				<include name="${symbol_dollar}{moduleId}-*.jar" />
 			</fileset>
 		</delete>
-		<copy todir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/lib">
+		<copy todir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/lib" overwrite="true" failonerror="false" verbose="true">
 			<fileset dir="target/${symbol_dollar}{moduleId}-${symbol_dollar}{mypom.version}/lib" id="id">
 				<include name="**/**" />
 			</fileset>
 		</copy>
 
-		<copy todir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/classes/${symbol_dollar}{mypom.properties.config.target.path}">
+		<copy todir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/classes/${symbol_dollar}{mypom.properties.config.target.path}" overwrite="true" failonerror="false" verbose="true">
 			<fileset dir="target/${symbol_dollar}{moduleId}-${symbol_dollar}{mypom.version}" id="id">
 				<include name="module.properties" />
 			</fileset>
