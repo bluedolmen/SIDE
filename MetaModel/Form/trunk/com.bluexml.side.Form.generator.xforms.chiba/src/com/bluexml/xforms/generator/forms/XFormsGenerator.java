@@ -96,17 +96,17 @@ public class XFormsGenerator extends AbstractGenerator {
 
 	public static final String IMG_REMOVE = "resources/images/remove.png";
 
-	public static final String IMG_RIGHT = "resources/images/right.gif";
+	public static final String IMG_RIGHT = "resources/images/right.png";
 
-	public static final String IMG_LEFT = "resources/images/left.gif";
+	public static final String IMG_LEFT = "resources/images/left.png";
 
-	public static final String IMG_DOWN = "resources/images/orderdown.png";
+	public static final String IMG_DOWN = "resources/images/down.png";
 
-	public static final String IMG_UP = "resources/images/orderup.png";
+	public static final String IMG_UP = "resources/images/up.png";
 
 	// ** #1530
-	public static final String IMG_SELECT = "resources/images/fieldselect.png";
-	public static final String IMG_CLEAR = "resources/images/fieldclear.png";
+	public static final String IMG_SELECT = IMG_ADD;
+	public static final String IMG_CLEAR = IMG_REMOVE;
 	// **
 
 	/** The sax builder. */
