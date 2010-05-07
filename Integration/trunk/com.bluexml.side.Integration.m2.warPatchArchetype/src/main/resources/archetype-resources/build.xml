@@ -24,7 +24,7 @@
 		<echo message="==========" />
 		<echo message="patch the web application webapps.home=${symbol_dollar}{webapps.home}" />
 
-		<delete verbose="true">
+		<delete verbose="true" quiet="true">
 			<fileset dir="${symbol_dollar}{webapps.home}/${symbol_dollar}{webappName}/WEB-INF/lib">
 				<include name="${symbol_dollar}{moduleId}-*.jar" />
 			</fileset>
