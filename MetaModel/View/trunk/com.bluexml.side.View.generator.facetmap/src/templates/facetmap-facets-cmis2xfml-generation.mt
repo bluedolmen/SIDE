@@ -9,7 +9,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 
 <%-- get the correct path to the cmis element when you got a FieldElement --%>
 <%script type="view.FieldElement" name="cmisPath"%>	
-cmisra:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@propertyDefinitionId='<% current("FacetMap").viewOf.filter("Clazz").getRootContainer().name%>:<%mapTo.filter("Attribute").getFullName().replaceAll("\.","_")%>']/cmis:value
+cmisra:object/cmis:properties/cmis:property<%mapTo.filter("Attribute").getCMISAttributeType()%>[@propertyDefinitionId='<% current("FacetMap").viewOf.filter("Clazz").getRootContainer().name%>:<%mapTo.filter("Attribute").getFullName().replaceAll("\.","_")%>']/cmis:value
 
 <%script type="view.FieldElement" name="getFieldCmisPath"%>	
 child::<% cmisPath() %>
@@ -80,3 +80,30 @@ child::entry/<% cmisPath() %>
     </xsl:template>
     
 </xsl:stylesheet>
+<%script type="Attribute" name="getCMISAttributeType" post="trim()" %>
+<%if (typ == "int"){%>Integer<%}else{%>
+<%if (typ == "boolean"){%>Boolean<%}else{%>
+<%if (typ == "byte"){%>String<%}else{%>
+<%if (typ == "char"){%>String<%}else{%>
+<%if (typ == "double"){%>Decimal<%}else{%>
+<%if (typ == "float"){%>Decimal<%}else{%>
+<%if (typ == "long"){%>Integer<%}else{%>
+<%if (typ == "short"){%>Integer<%}else{%>
+<%if (typ == "String"){%>String<%}else{%>
+<%if (typ == "Date"){%>DateTime<%}else{%>
+<%if (typ == "Object"){%>String<%}else{%>
+<%if (typ == "DateTime"){%>DateTime<%}else{%>
+<%if (typ == "Time"){%>DateTime<%}else{%>
+<%}%>
+<%}%>
+<%}%>
+<%}%>
+<%}%>
+<%}%>
+<%}%>
+<%}%>
+<%}%>
+<%}%>
+<%}%>
+<%}%>
+<%}%>
