@@ -20,15 +20,12 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 <?xml version='1.0' encoding='UTF-8'?>
 <component>
    <scope>template</scope>
-   <region-id>facetmap</region-id>
+   <region-id>advanced-search</region-id>
    <source-id><%associationPage.ID%></source-id>
    <url>/components/XformSearch</url>
-   <properties>
-   		
+   <properties>   		
    		<%if (associationPortlet.isPortletInternal != null && associationPortlet.isPortletInternal.form != null){%>
 			<searchForm>[<%for (associationPortlet.isPortletInternal.form.forms){%>'<%id%>'<%if (current("HavePortlet").associationPortlet.isPortletInternal.form.forms.nLast() !=current()){%>,<%}%><%}%>]</searchForm>
    		<%}%>
-   		
-   		
    </properties>
 </component>

@@ -45,15 +45,13 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 		<%for (associationPortlet){%>
 			<%if (isPortletInternal != null && (isPortletInternal.view != null || isPortletInternal.form != null)){%>
 				<%for (isPortletInternal.view){%>
-					<%if (current("Portlet").name.toLowerCase() =="facetmap"){%>
-						<%if (getGeneratorOptionValue("com.bluexml.side.Portal.generator.alfresco.forms") && current("view.FacetMap")){%>
-			<@region scope="template" id="facetmap" protected=true/>
+						<%if (current("view.FacetMap")){%>
+			<@region scope="template" id="<%current("portal.Portlet").name%>" protected=true/>
 						<%}%>
-					<%}%>
 				<%}%>
 				<%for (isPortletInternal.form){%>
 					<%if (current("Portlet").name.toLowerCase() =="advanced-search"){%>
-						<%if (current("form.FormCollection")){%>
+						<%if (current("form.SearchFormCollection")){%>
 			<@region scope="template" id="advanced-search" protected=true/>
 						<%}%>
 					<%}%>
