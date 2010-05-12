@@ -39,7 +39,7 @@ foreach my $nom ( @LesFichiers ) {
 
 #======================================================
 # Nombre d'arguments : 1
-# Argument(s)        : un r√©pertoire ($repertoire)
+# Argument(s)        : un répertoire ($repertoire)
 # Retourne           : Tableau de fichier (@fichiers)
 #======================================================
 sub ListersFichiers {
@@ -48,7 +48,7 @@ sub ListersFichiers {
   
   my @fichiers;
   
-  # Ouverture d'un r√©pertoire
+  # Ouverture d'un répertoire
   opendir (my $FhRep, $repertoire) or die "impossible d'ouvrir le répertoire $repertoire\n";
   
   # Liste fichiers et répertoire sauf (. et ..)
@@ -90,7 +90,7 @@ sub Filter {
 			}
 		}
 		closedir(RPT);
-		print "filter : true for $rep\n";
+		print "found for deletion : $rep\n";
 		return "true";		
 	} else {
 		return "false";

@@ -91,6 +91,7 @@
 			<arg value="-buildfile" />
 			<arg value="build.xml" />
 			<arg value="-Dtimestamp=${timestamp}" />
+			<arg value="-Dworkspace=${workspace}"/>
 			<classpath>
 				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
 			</classpath>
