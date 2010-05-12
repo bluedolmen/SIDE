@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.bluexml.side.Portal; singleton:=true
-Bundle-Version: 1.0.27.v16454-20100421
+Bundle-Version: 1.0.28.v16823-20100512
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
