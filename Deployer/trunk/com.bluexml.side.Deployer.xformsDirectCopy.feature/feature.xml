@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Deployer.xformsDirectCopy.feature" label="SIDE Direct xForm Deployer Feature" version="1.0.19.v16454-20100421" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Deployer.xformsDirectCopy.feature" label="SIDE Direct xForm Deployer Feature" version="1.0.20.v16823-20100512" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -10,6 +10,6 @@
     <import plugin="com.bluexml.side.Application" />
     <import plugin="org.eclipse.core.runtime" />
   </requires>
-  <plugin id="com.bluexml.side.Deployer.xformsDirectCopy" download-size="0" install-size="0" version="1.0.17.v16454-20100421" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.xformsDirectCopy" download-size="0" install-size="0" version="1.0.18.v16823-20100512" unpack="false" />
 </feature>
 
