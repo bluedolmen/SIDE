@@ -1,29 +1,32 @@
 #! /usr/bin/perl;
 use File::Copy;
 #================================================
-# delete folders which don't include a file called $pom
+# delete folders which don't include a file/directory called $pom
+# search my be recursive 
 # 
 #================================================
+if ($ARGV[0] eq '') {
+	print "usage : perl delete_folder.pl <file/directory name> [recursive]\n";
+	print "   <file/directory name> : file or directory name to search\n";
+	print "   [recursive]           : optional parameter default false no recursion\n";
+}
+
 
 my $Repertoire = ".";
 $pom=$ARGV[0];
+$recursive="false";
+if ($ARGV[1] eq "recursive") {
+	$recursive="true";
+	print "recursive is on\n";
+}
 
-my @LesFichiers = ListersFichiers($Repertoire);
-open (POMF,">>$pom") or die "Cannot open the file $pom";
+my @LesFichiers = ListersFichiers($Repertoire,$recursive);
 
 
 foreach my $nom ( @LesFichiers ) {
 	$delete="true";
 	$rep=$nom;
 	
-	#recherche des repertoire contant le fichier $pom
-	opendir(RPT,"$rep") or die "Can not open the folder $rep";
-	while($file_name=readdir(RPT)){
-		if ($file_name eq $pom){
-			$delete="false";
-		}
-	}
-	closedir(RPT);
 	
 	#supprime les repertoire ne contenant pas de fichier $pom
 	if ($delete eq "true") {
@@ -32,20 +35,6 @@ foreach my $nom ( @LesFichiers ) {
 		
 		
 	}
-	#else {
-                #@nomrepertoire=split(/\./,$rep);
-                #$rep =~ s/.*\.(.+)$/$1/;
-                #$taille = $#nomrepertoire-1;
-                #$repracine=$nomrepertoire[$taille];
-                #if (!( -d "$repracine")) {
-                #    mkdir ("$repracine",0755) || die ("Err. Cr. répertoire \n");
-                #}
-                #mkdir ("$repracine/$rep",0755) || die ("Err. Cr. répertoire \n");
-                #move ("$nom","$repracine/$rep") or die("Impossible de copier $repertoire1 $!");
-				#rename("$nom", "$rep") || die "Fail $!";
-	#}
-
-
 }
 
 #======================================================
@@ -54,33 +43,56 @@ foreach my $nom ( @LesFichiers ) {
 # Retourne           : Tableau de fichier (@fichiers)
 #======================================================
 sub ListersFichiers {
-  my ( $repertoire ) = @_;
+  my ( $repertoire ) = @_[0];
+  my ( $recur ) = @_[1];
+  
   my @fichiers;
   
   # Ouverture d'un r√©pertoire
-  opendir (my $FhRep, $repertoire) 
-    or die "impossible d'ouvrir le r√©pertoire $repertoire\n";
+  opendir (my $FhRep, $repertoire) or die "impossible d'ouvrir le répertoire $repertoire\n";
   
-  # Liste fichiers et r√©pertoire sauf (. et ..)
+  # Liste fichiers et répertoire sauf (. et ..)
   my @Contenu = grep { !/^\.\.?$/ } readdir($FhRep);
   
-  # Fermeture du r√©pertoire
+  # Fermeture du répertoire
   closedir ($FhRep);
   
-  # On r√©cup√®re tous les fichiers
+  # On récupère tous les fichiers
   foreach my $nom ( @Contenu ) {
     # Fichiers
     
-    if ( -d "$repertoire/$nom") {
-      push ( @fichiers, "$repertoire/$nom" );  
+    if ( -d "$repertoire/$nom" && Filter("$repertoire/$nom", $pom) eq "true") {
+      push ( @fichiers, "$repertoire/$nom" );
     }
     # Repertoires
-    #elsif ( -d "$repertoire/$nom") {
-      # recursivit√©
-    #  push ( @fichiers, ListersFichiers("$repertoire/$nom") );
-    #}
+    elsif ( -d "$repertoire/$nom" && $recur eq "true") {
+      # recursivité
+      push ( @fichiers, ListersFichiers("$repertoire/$nom") );
+    }
   }
   
   return @fichiers;
 }
 
+sub Filter {
+	my ( $rep ) = @_[0];
+	my ( $pom ) = @_[1];
+#	print "start $rep $pom \n";
+	if ($rep!~/$pom/) {
+		#recherche des repertoire contant le fichier $pom
+		opendir(RPT,"$rep") or die "Can not open the folder $rep";
+		while($file_name=readdir(RPT)){
+			if ($file_name eq $pom){
+				closedir(RPT);
+				return "false";			
+			} else {
+			
+			}
+		}
+		closedir(RPT);
+		print "filter : true for $rep\n";
+		return "true";		
+	} else {
+		return "false";
+	}
+}
