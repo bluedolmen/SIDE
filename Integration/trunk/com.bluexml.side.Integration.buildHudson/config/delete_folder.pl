@@ -67,7 +67,7 @@ sub ListersFichiers {
     # Repertoires
     elsif ( -d "$repertoire/$nom" && $recur eq "true") {
       # recursivité
-      push ( @fichiers, ListersFichiers("$repertoire/$nom") );
+      push ( @fichiers, ListersFichiers("$repertoire/$nom", $recur) );
     }
   }
   
