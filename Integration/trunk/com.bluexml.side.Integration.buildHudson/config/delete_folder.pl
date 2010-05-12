@@ -20,22 +20,21 @@ if ($ARGV[1] eq "recursive") {
 	print "recursive is on\n";
 }
 
+print "delete_folder job start\n";
 my @LesFichiers = ListersFichiers($Repertoire,$recursive);
 
 
 foreach my $nom ( @LesFichiers ) {
 	$delete="true";
-	$rep=$nom;
-	
+	$rep=$nom;	
 	
 	#supprime les repertoire ne contenant pas de fichier $pom
 	if ($delete eq "true") {
 		use File::Path;
 		rmtree([$rep],0,1) or "Can not delete the folder $rep";
-		
-		
 	}
 }
+print "delete_folder job end\n"
 
 #======================================================
 # Nombre d'arguments : 1
