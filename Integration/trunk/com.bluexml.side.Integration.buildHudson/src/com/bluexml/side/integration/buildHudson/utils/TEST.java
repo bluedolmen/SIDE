@@ -1,8 +1,6 @@
 package com.bluexml.side.integration.buildHudson.utils;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class TEST {
 

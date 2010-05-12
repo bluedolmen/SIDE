@@ -6,10 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +26,8 @@ public class Application {
 	public static String rcp = "";
 	public static List<String> projectsExcluded;
 
-	// si au moins un param�tre n'est pas renseign�, alors on suppose que le
-	// build est lanc� sans hudson
+	// si au moins un paramètre n'est pas renseigné, alors on suppose que le
+	// build est lancé sans hudson
 	public static boolean parametre = true;
 
 	// indique si on build la version enterprise ou labs
@@ -70,7 +68,7 @@ public class Application {
 				e.printStackTrace();
 			}
 
-			// Si des param�tres sont en entr�e
+			// Si des paramétres sont en entrée
 		} else if (parametre) {
 			// if ("-labs".equals(argument1)) {
 			// EnterpriseRelease = false;
@@ -114,17 +112,17 @@ public class Application {
 			// projectsExcluded = Utils.getProjects("projectLabsExcluded");
 			// }
 	
-			System.out.println("\nLanc� le " + Utils.getDate2() + " � " + Utils.getTime());
+			System.out.println("\nLancé le " + Utils.getDate2() + " é " + Utils.getTime());
 	
 			
-			// cr�ation du buildSVN.xml
-			System.out.println("\n- Cr�ation de " + Utils.getBuildPath() + File.separator + "buildSVN.xml");
+			// création du buildSVN.xml
+			System.out.println("\n- Création de " + Utils.getBuildPath() + File.separator + "buildSVN.xml");
 			createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
 	
-			// Mise � jour des num�ros de version en fonction du fichier de log
-			// System.out.println("\nMise � jour des num�ros de version (si besoin)...");
+			// Mise é jour des numéros de version en fonction du fichier de log
+			// System.out.println("\nMise é jour des numéros de version (si besoin)...");
 	
-			// si labs, on ne met pas � jour les versions des features et on ne
+			// si labs, on ne met pas é jour les versions des features et on ne
 			// commit pas
 	
 			
@@ -144,8 +142,8 @@ public class Application {
 	
 	
 			if (parametre) {
-				// copie du r�pository dans le repertoire de travail (en
-				// s�parant
+				// copie du répository dans le repertoire de travail (en
+				// séparant
 				// les plugins et les features)
 				Utils.preTraitement();
 			}
@@ -177,24 +175,24 @@ public class Application {
 			// projectsExcluded = Utils.getProjects("projectLabsExcluded");
 			// }
 	
-			System.out.println("\nLanc� le " + Utils.getDate2() + " � " + Utils.getTime());
+			System.out.println("\nLancé le " + Utils.getDate2() + " é " + Utils.getTime());
 	
-			// cr�ation du buildSVN.xml
-			System.out.println("\n- Cr�ation de " + Utils.getBuildPath() + File.separator + "buildSVN.xml");
+			// création du buildSVN.xml
+			System.out.println("\n- Création de " + Utils.getBuildPath() + File.separator + "buildSVN.xml");
 			createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
 	
-			// si on travaille sans Hudson, alors on va r�aliser,
+			// si on travaille sans Hudson, alors on va réaliser,
 			// avec ant, le checkout et/ou update
 			if (!parametre) {
 				// Execution du buildSVN.xml
-				System.out.println("\nR�alisation du checkout et du update...");
+				System.out.println("\nRéalisation du checkout et du update...");
 				execBuild("buildSVN", "build");
 			}
 	
-			// Mise � jour des num�ros de version en fonction du fichier de log
-			// System.out.println("\nMise � jour des num�ros de version (si besoin)...");
+			// Mise é jour des numéros de version en fonction du fichier de log
+			// System.out.println("\nMise é jour des numéros de version (si besoin)...");
 	
-			// si labs, on ne met pas � jour les versions des features et on ne
+			// si labs, on ne met pas é jour les versions des features et on ne
 			// commit pas
 	
 			// if (EnterpriseRelease) {
@@ -202,7 +200,7 @@ public class Application {
 			// Commit
 			// commit is now done at the end of the complete build when all steps
 			// (till updae-site copy) are ok
-			// System.out.println("\nCommit des modifications sur le r�pository...");
+			// System.out.println("\nCommit des modifications sur le répository...");
 			// execBuild("buildSVN", "svnCommit");
 			// }
 			
@@ -222,8 +220,8 @@ public class Application {
 			launchShScript("build_repository_SIDE.sh");
 	
 			if (parametre) {
-				// copie du r�pository dans le repertoire de travail (en
-				// s�parant
+				// copie du répository dans le repertoire de travail (en
+				// séparant
 				// les plugins et les features)
 				Utils.preTraitement();
 			}
@@ -233,16 +231,16 @@ public class Application {
 			// get modified files and copy them into svn local copy
 			Utils.copyToRepository();
 	
-			// cr�ation du build.xml
-			System.out.println("\n\n- Cr�ation de " + Utils.getBuildPath() + File.separator + "build.xml");
+			// création du build.xml
+			System.out.println("\n\n- Création de " + Utils.getBuildPath() + File.separator + "build.xml");
 			createFile(getCorpsBuild(), Utils.getBuildPath(), "build.xml");
 	
-			// cr�ation du buildAuto.product
-			System.out.println("- Cr�ation du buildAuto.product");
+			// création du buildAuto.product
+			System.out.println("- Création du buildAuto.product");
 			createFile(getCorpsProduct(), Utils.getBuildPath(), "buildAuto.product");
 	
 			// Execution du build.xml
-			System.out.println("\nR�alisation du Build sur ...");
+			System.out.println("\nRéalisation du Build sur ...");
 	
 			for (String projet : Utils.getProjects()) {
 				if (!projectsExcluded.contains(projet)) {
@@ -257,7 +255,7 @@ public class Application {
 	
 			execBuild("build", "build");
 	
-			// cr�ation du site.xml
+			// création du site.xml
 			System.out.println("\nUpdate du site.xml");
 			Utils.updateSiteXml();
 	
@@ -267,8 +265,8 @@ public class Application {
 	
 			// traitement final
 	
-			// D�placement et suppression des r�pertoires
-			System.out.println("\nD�placement et suppression des r�pertoires");
+			// Déplacement et suppression des répertoires
+			System.out.println("\nDéplacement et suppression des répertoires");
 			Utils.finalTraitement();
 		}
 
@@ -282,7 +280,7 @@ public class Application {
 	}
 
 	/**
-	 * M�thode qui execute lance un script sh
+	 * Méthode qui execute lance un script sh
 	 * 
 	 * @param script
 	 *            nom du script
@@ -344,13 +342,13 @@ public class Application {
 	}
 	
 	/**
-	 * M�thode qui execute la target 'target' du build.xml pass� en
-	 * param�tre Un fichier de log est cr�e: log.txt
+	 * Méthode qui execute la target 'target' du build.xml passé en
+	 * paramétre Un fichier de log est crée: log.txt
 	 * 
 	 * @param build
 	 *            le build.xml a executer (sans le .xml)
 	 * @param target
-	 *            la target pr�sente dans ce build � �x�cuter
+	 *            la target présente dans ce build é éxécuter
 	 * 
 	 */
 	private static void execBuild(String build, String target) {
@@ -391,13 +389,13 @@ public class Application {
 
 
 	/**
-	 * M�thode qui execute la target 'target' du build.xml pass� en
-	 * param�tre Un fichier de log est cr�e: log.txt
+	 * Méthode qui execute la target 'target' du build.xml passé en
+	 * paramétre Un fichier de log est crée: log.txt
 	 * 
 	 * @param build
 	 *            le build.xml a executer (sans le .xml)
 	 * @param target
-	 *            la target pr�sente dans ce build � �x�cuter
+	 *            la target présente dans ce build é éxécuter
 	 * 
 	 */
 	private static void execBuildAnt(String build, String target, String path) {
@@ -437,7 +435,7 @@ public class Application {
 	}
 
 	/**
-	 * Cr�er le fichier build.xml pour chaque projet
+	 * Créer le fichier build.xml pour chaque projet
 	 */
 	private static void createFile(String corps, String folderName, String fileName) {
 		File file = new File(folderName + File.separator + fileName);
@@ -458,7 +456,7 @@ public class Application {
 	}
 
 	/**
-	 * Retourne le corps du fichier build.xml pour le projet donn�
+	 * Retourne le corps du fichier build.xml pour le projet donné
 	 */
 	public static String getCorpsBuild() {
 		List<String> l = new ArrayList<String>();
@@ -626,9 +624,9 @@ public class Application {
 	}
 
 	/**
-	 * @deprecated <i> Plus utilis� car maintenant on traite et on modifie
+	 * @deprecated <i> Plus utilisé car maintenant on traite et on modifie
 	 *             directement le fichier<br/>
-	 *             (utiliser la m�thode updateSiteXML de la classe Utils)</i><br/>
+	 *             (utiliser la méthode updateSiteXML de la classe Utils)</i><br/>
 	 * <br/>
 	 *             Retourne le corps du site.xml
 	 * 
@@ -710,11 +708,11 @@ public class Application {
 			if (!finalListDirectories.contains(projects[i])) {
 				out += "\t\t<svn>\n";
 
-				// si le mot 'feature' n'est pas pr�sent dans le nom du projet
+				// si le mot 'feature' n'est pas présent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1)
 					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.SourceSVNName+"/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${pluginsPath}" + File.separator
 							+ projects[i] + "\" />\n";
-				// si 'feature' est pr�sent
+				// si 'feature' est présent
 				else if (projects[i].indexOf("feature") != -1)
 					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.SourceSVNName+"/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${featuresPath}" + File.separator
 							+ projects[i] + "\" />\n";
@@ -741,10 +739,10 @@ public class Application {
 		out += "\t\t<svn>\n";
 		for (int i = 0; i < projects.length; i++) {
 
-			// si le mot 'feature' n'est pas pr�sent dans le nom du projet
+			// si le mot 'feature' n'est pas présent dans le nom du projet
 			if (projects[i].indexOf("feature") == -1)
 				out += "\t\t\t<update dir=\"${buildDirectory}_CO" + File.separator + "plugins" + File.separator + projects[i] + "\" recurse=\"yes\"/>\n";
-			// si 'feature' est pr�sent
+			// si 'feature' est présent
 			else if (projects[i].indexOf("feature") != -1)
 				out += "\t\t\t<update dir=\"${buildDirectory}_CO" + File.separator + "features" + File.separator + projects[i] + "\" recurse=\"yes\"/>\n";
 		}
@@ -778,7 +776,7 @@ public class Application {
 			for (int i = 0; i < projects.length; i++) {
 
 				if (projects[i].length() > 0) {
-					// si le mot 'feature' n'est pas pr�sent dans le nom du
+					// si le mot 'feature' n'est pas présent dans le nom du
 					// projet
 					if (projects[i].indexOf("feature") == -1) {
 						out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + File.separator + "META-INF\">\n";
@@ -798,7 +796,7 @@ public class Application {
 						}
 						
 						
-					} // si 'feature' est pr�sent
+					} // si 'feature' est présent
 					else if (projects[i].indexOf("feature") != -1) {
 						out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + "\">\n";
 						out += "\t\t\t\t<include name=\"feature.xml\" />\n";
@@ -872,7 +870,7 @@ public class Application {
 		out += "\t\t<javadoc destdir=\"${buildDir}" + File.separator + "${codeName}" + File.separator + "doc" + File.separator + Utils.getCodeName() + File.separator + "Javadoc\">\n";
 
 		for (int i = 0; i < projects.length; i++) {
-			// si le mot 'feature' n'est pas pr�sent dans le nom du projet
+			// si le mot 'feature' n'est pas présent dans le nom du projet
 			if (!projectsExcluded.contains(projects[i])) {
 				if (projects[i].indexOf("feature") == -1) {
 					out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + "\">\n";
@@ -930,7 +928,7 @@ public class Application {
 
 		out += "\t<target name=\"jarBuilder\" depends=\"\" description=\"description\">\n";
 
-		// On va parcourir les plugins, et si des plugins n'ont pas �t�s mis
+		// On va parcourir les plugins, et si des plugins n'ont pas étés mis
 		// en
 		// jar on le fait manuelement
 		File pluginRep = new File(Utils.getBuildDirectory() + File.separator + Utils.getBuildLabel() + File.separator + Utils.getArchivePrefix() + File.separator + "plugins");
