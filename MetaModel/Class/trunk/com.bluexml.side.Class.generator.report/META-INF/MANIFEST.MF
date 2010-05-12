@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Birt Report Generator
 Bundle-SymbolicName: com.bluexml.side.Class.generator.report;singleton:=true
-Bundle-Version: 1.0.33.v16454-20100421
+Bundle-Version: 1.0.34.v16823-20100512
 Bundle-Activator: com.bluexml.side.clazz.generator.report.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
