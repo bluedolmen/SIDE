@@ -328,6 +328,7 @@ public class Utils {
 				// XML
 				document = sxb.build(new File(getPathToLocalCopy(projectName) + File.separator + "feature.xml"));
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
 			// On initialise un nouvel élément racine avec l'élément
