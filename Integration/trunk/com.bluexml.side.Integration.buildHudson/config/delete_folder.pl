@@ -34,7 +34,7 @@ foreach my $nom ( @LesFichiers ) {
 		rmtree([$rep],0,1) or "Can not delete the folder $rep";
 	}
 }
-print "delete_folder job end\n"
+print "delete_folder job end\n";
 
 #======================================================
 # Nombre d'arguments : 1
