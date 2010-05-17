@@ -4,7 +4,6 @@
 	<property name="pluginPath" value="${moreplugins}${path.separator}${sideSources}${path.separator}${deltapack}" />
 	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpath="../lib/xmltask.jar" />
 
-
 	<target name="main">
 		<!-- by default, check for deltapack co-located with eclipse -->
 
@@ -19,8 +18,8 @@
 
 
 	<!-- - - - - - - - - - - - - - - - - - 
-		          target: fixArchives                      
-		         - - - - - - - - - - - - - - - - - -->
+          target: fixArchives                      
+         - - - - - - - - - - - - - - - - - -->
 	<target name="fixArchives">
 		<mkdir dir="${distros}" />
 		<move todir="${distros}" overwrite="true" verbose="true">
@@ -78,7 +77,7 @@
 	</target>
 
 
-	<target name="pde-build2">
+	<target name="pde-build2" description="call this target to execute main task using Eclipse antRunner">
 		<echo message="launcher path :${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
 		</echo>
 		<delete file="${logFile}" failonerror="false" />

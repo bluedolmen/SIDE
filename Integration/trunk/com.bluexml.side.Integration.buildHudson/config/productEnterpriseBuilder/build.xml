@@ -10,7 +10,6 @@
 		<!-- Check that we have a deltapack -->
 		<available property="haveDeltaPack" file="${deltapack}" />
 		<fail unless="haveDeltaPack" message="The deltapack is required to build this product.  Please edit buildProduct.xml or set the &quot;deltapack&quot; property." />
-
 		<echoproperties />
 		<echo message="builder : ${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" />
 		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" />
@@ -91,6 +90,7 @@
 			<arg value="-buildfile" />
 			<arg value="build.xml" />
 			<arg value="-Dtimestamp=${timestamp}" />
+			<arg value="-Dworkspace=${workspace}"/>
 			<classpath>
 				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
 			</classpath>
