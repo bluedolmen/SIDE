@@ -139,16 +139,33 @@ public class Utils {
 	 * @return
 	 */
 	public static String getProjectPath(String projectName) {
-		String property = ouvrirFichier("build.properties").getProperty("project");
 		String path = "";
+
+		String property = ouvrirFichier("build.properties").getProperty("project");
 		if ((property != null) && (property.length() > 0)) {
 			String[] projects = property.split(",");
 			for (int i = 0; i < projects.length; i++) {
 				if (projects[i].split("&")[1].equals(projectName)) {
 					path = projects[i].split("&")[0];
+					return Application.SIDE_Core + File.separator + path + File.separator + "trunk" + File.separator + projectName;
 				}
 			}
 		}
+
+		// We search in enterprise projects
+		if (path.length() == 0) {
+			property = ouvrirFichier("build.properties").getProperty("project.enterprise");
+			if ((property != null) && (property.length() > 0)) {
+				String[] projects = property.split(",");
+				for (int i = 0; i < projects.length; i++) {
+					if (projects[i].split("&")[1].equals(projectName)) {
+						path = projects[i].split("&")[0];
+						return Application.SIDE_Enterprise + File.separator + path + File.separator + "trunk" + File.separator + projectName;
+					}
+				}
+			}
+		}
+
 		// We search in versioned projects
 		if (path.length() == 0) {
 			property = ouvrirFichier("build.properties").getProperty("projectToVersioned");
@@ -161,6 +178,7 @@ public class Utils {
 				}
 			}
 		}
+
 		return path;
 	}
 
@@ -426,16 +444,16 @@ public class Utils {
 					// File.separator + getProjectPath(projects.get(i)) +
 					// File.separator + "trunk";
 
-					path = getRepositoryCopyPath() + File.separator + SourceSVNName + File.separator + getProjectPath(projects.get(i)) + File.separator + "trunk";
+					path = getRepositoryCopyPath() + File.separator + getProjectPath(projects.get(i));
 
 					if (projects.get(i).indexOf("feature") == -1) {
 
-						FileHelper.copyFiles(new File(path + File.separator + projects.get(i)), new File(getBuildDirectory() + File.separator + "plugins" + File.separator + projects.get(i)), true);
+						FileHelper.copyFiles(new File(path), new File(getBuildDirectory() + File.separator + "plugins" + File.separator + projects.get(i)), true);
 					}
 
 					else {
 
-						FileHelper.copyFiles(new File(path + File.separator + projects.get(i)), new File(getBuildDirectory() + File.separator + "features" + File.separator + projects.get(i)), true);
+						FileHelper.copyFiles(new File(path), new File(getBuildDirectory() + File.separator + "features" + File.separator + projects.get(i)), true);
 						updateCopyrightLicence(projects.get(i), getBuildDirectory() + File.separator + "features");
 					}
 				}
@@ -942,15 +960,9 @@ public class Utils {
 
 		}
 		if (Application.parametre) {
-			if (projectName.equals("com.bluexml.side.Util.dependencies")) {
-				path = path + File.separator + Application.SIDE_Core + File.separator + getProjectPath(projectName) + File.separator + "trunk" + File.separator + projectName;
-			} else {
-				path = path + File.separator + SourceSVNName + File.separator + getProjectPath(projectName) + File.separator + "trunk" + File.separator + projectName;
-			}
-
+			path = path + File.separator + getProjectPath(projectName);
 		} else {
 			if (projectName.indexOf("feature") == -1) {
-
 				path = path + File.separator + "plugins" + File.separator + projectName;
 			} else {
 				path = path + File.separator + "features" + File.separator + projectName;

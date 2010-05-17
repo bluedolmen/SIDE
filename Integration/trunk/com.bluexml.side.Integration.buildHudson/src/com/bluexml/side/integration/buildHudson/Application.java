@@ -696,10 +696,10 @@ public class Application {
 
 				// si le mot 'feature' n'est pas présent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1)
-					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.SourceSVNName + "/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${pluginsPath}" + File.separator + projects[i] + "\" />\n";
+					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.getProjectPath(projects[i]) + "\" destPath=\"${pluginsPath}" + File.separator + projects[i] + "\" />\n";
 				// si 'feature' est présent
 				else if (projects[i].indexOf("feature") != -1)
-					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.SourceSVNName + "/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${featuresPath}" + File.separator + projects[i] + "\" />\n";
+					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.getProjectPath(projects[i]) + "\" destPath=\"${featuresPath}" + File.separator + projects[i] + "\" />\n";
 
 				out += "\t\t</svn>\n";
 			}
