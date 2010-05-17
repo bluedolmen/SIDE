@@ -34,7 +34,7 @@ public class Utils {
 	private static String revisionNumber;
 	public static ArrayList<String> listefichierpom = new ArrayList<String>();
 	public static String repositoryCopy = "repositoryCopy";
-	public static String SourceSVNName="";
+	public static String SourceSVNName = "";
 
 	/**
 	 * Méthode qui ouvre le fichier de proprerties
@@ -421,10 +421,12 @@ public class Utils {
 
 				if (!Application.projectsExcluded.contains(projects.get(i))) {
 
-					//path = Application.workspace + File.separator + "S-IDE" + File.separator + getProjectPath(projects.get(i)) + File.separator + "trunk";
-					
+					// path = Application.workspace + File.separator + "S-IDE" +
+					// File.separator + getProjectPath(projects.get(i)) +
+					// File.separator + "trunk";
+
 					path = getRepositoryCopyPath() + File.separator + SourceSVNName + File.separator + getProjectPath(projects.get(i)) + File.separator + "trunk";
-					
+
 					if (projects.get(i).indexOf("feature") == -1) {
 
 						FileHelper.copyFiles(new File(path + File.separator + projects.get(i)), new File(getBuildDirectory() + File.separator + "plugins" + File.separator + projects.get(i)), true);
@@ -487,8 +489,8 @@ public class Utils {
 
 	/**
 	 * Cette méthode analyse le fichier de log (il changera en fonction de
-	 * l'utilisation de Hudson ou non) et regarde si des updates ont été
-	 * fait et ainsi, changer le numéro de version du projet concerné
+	 * l'utilisation de Hudson ou non) et regarde si des updates ont été fait et
+	 * ainsi, changer le numéro de version du projet concerné
 	 */
 	public static void traitementUpdate() {
 
@@ -522,11 +524,8 @@ public class Utils {
 		String pathproject = getRepositoryCopyPath();
 
 		listefichierpom = new ArrayList();
-		
-		
-		findFile(new File(pathproject + "/"+SourceSVNName+"/"), "pom.xml");
-		
-		
+
+		findFile(new File(pathproject + "/" + SourceSVNName + "/"), "pom.xml");
 
 		// si on ne force pas la mise a jour du numéro de version
 		if ("".equals(getForceNumberVersion())) {
@@ -574,13 +573,12 @@ public class Utils {
 
 						if (update) {
 
-							if ((ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ')
-									&& (ligne.charAt(1) == ' ' || ligne.charAt(1) == 'U' || ligne.charAt(1) == 'A' || ligne.charAt(1) == 'D') && update) {
+							if ((ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ') && (ligne.charAt(1) == ' ' || ligne.charAt(1) == 'U' || ligne.charAt(1) == 'A' || ligne.charAt(1) == 'D') && update) {
 
 								if (ligne.indexOf("Integration") > -1 || ligne.indexOf("FrameworksModules") > -1) {
 									for (String valeur : listefichierpom) {
 										String valeurf = valeur;
-										String[] tab = valeurf.split("/"+SourceSVNName+"/");
+										String[] tab = valeurf.split("/" + SourceSVNName + "/");
 										String[] tab2 = tab[1].split("/pom.xml");
 										if (ligne.indexOf(tab2[0]) > -1) {
 											if (!listeProjetPoms.contains(valeur))
@@ -650,7 +648,7 @@ public class Utils {
 			System.out.println("\nListe des poms modifiées: ");
 			for (String pom : listeProjetPoms) {
 				String valeurf = pom;
-				String[] tab = valeurf.split("/"+SourceSVNName+"/");
+				String[] tab = valeurf.split("/" + SourceSVNName + "/");
 				System.out.println("\t- " + tab[1] + ": " + getVersionNumberPom(pom));
 			}
 
@@ -720,7 +718,7 @@ public class Utils {
 			System.out.println("\nListe des poms modifiées suite mis a jour module: ");
 			for (String pom : listePomsModuleDepencies) {
 				String valeurf = pom;
-				String[] tab = valeurf.split("/"+SourceSVNName+"/");
+				String[] tab = valeurf.split("/" + SourceSVNName + "/");
 				System.out.println("\t- " + tab[1] + ": " + getVersionNumberPom(pom));
 			}
 		}
@@ -819,7 +817,7 @@ public class Utils {
 				System.out.println("\nListe des poms modifiées suite mis a jour module: ");
 				for (String pom : listePomsModuleDepencies1) {
 					String valeurf = pom;
-					String[] tab = valeurf.split("/"+SourceSVNName+"/");
+					String[] tab = valeurf.split("/" + SourceSVNName + "/");
 					System.out.println("\t- " + tab[1] + ": " + getVersionNumberPom(pom));
 				}
 			}
@@ -893,10 +891,9 @@ public class Utils {
 			}
 		}
 
-		
 		// fin affichage
 
-		//copyToRepository();
+		// copyToRepository();
 	}
 
 	public static void updateProduct() {
@@ -904,8 +901,14 @@ public class Utils {
 		// mise é jour du fichier side.product (utilisé pour la creation des
 		// RCP)
 		// String repo = Utils.getRepositoryCopyPath();
-		// File product = new File(repo + "/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product");
-		String brandingPath=Utils.getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding");
+		// File product = new File(repo +
+		// "/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product");
+		String brandingPath = "";
+		if (SourceSVNName.equals(Application.SIDE_Enterprise)) {
+			brandingPath = Utils.getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding.enterprise");
+		} else {
+			brandingPath = Utils.getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding");
+		}
 		File product = new File(brandingPath + "/side.product");
 		File plugin_featureRepo = new File(Utils.getBuildDirectory());
 		boolean sideProductChanges = Utils.updateProduct(product, plugin_featureRepo);
@@ -938,7 +941,12 @@ public class Utils {
 
 		}
 		if (Application.parametre) {
-			path = path + File.separator + SourceSVNName + File.separator + getProjectPath(projectName) + File.separator + "trunk" + File.separator + projectName;
+			if (projectName.equals("com.bluexml.side.Util.dependencies")) {
+				path = path + File.separator + Application.SIDE_Core + File.separator + getProjectPath(projectName) + File.separator + "trunk" + File.separator + projectName;
+			} else {
+				path = path + File.separator + SourceSVNName + File.separator + getProjectPath(projectName) + File.separator + "trunk" + File.separator + projectName;
+			}
+
 		} else {
 			if (projectName.indexOf("feature") == -1) {
 
@@ -1658,8 +1666,8 @@ public class Utils {
 
 	/**
 	 * Met a jour le site.xml en fonction des features. Si une feature n'est pas
-	 * présente dans le site.xml, elle est ajoutée et placée dans la
-	 * catégorie 'other' (retourné par la méthode getNewCategory() )
+	 * présente dans le site.xml, elle est ajoutée et placée dans la catégorie
+	 * 'other' (retourné par la méthode getNewCategory() )
 	 * 
 	 */
 	public static void updateSiteXml() {
@@ -1794,8 +1802,7 @@ public class Utils {
 			// copie de l'update site
 			System.out.println("\t- Update Site copy under <Revision number>-<build number> :");
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "features"), finalFeatures, true);
-			System.out
-					.println("\t\t. on " + finalFeatures + " from " + getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "features DONE");
+			System.out.println("\t\t. on " + finalFeatures + " from " + getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "features DONE");
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "plugins"), finalPlugins, true);
 			System.out.println("\t\t. on " + finalPlugins + " from " + getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "plugins DONE");
 
@@ -1825,24 +1832,19 @@ public class Utils {
 
 			// copie de l'update site
 			System.out.println("\t- Update Site copy :");
-			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "features"), new File(getUpdateSiteDir()
-					+ File.separator + getCodeName() + File.separator + "features"), true);
-			System.out.println("\t\t. on " + getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "features from " + getBuildDirectory() + File.separator + getBuildLabel()
-					+ File.separator + getArchivePrefix() + File.separator + "features DONE");
-			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "plugins"), new File(getUpdateSiteDir()
-					+ File.separator + getCodeName() + File.separator + "plugins"), true);
-			System.out.println("\t\t. on " + getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "plugins from " + getBuildDirectory() + File.separator + getBuildLabel()
-					+ File.separator + getArchivePrefix() + File.separator + "plugins DONE");
+			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "features"), new File(getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "features"), true);
+			System.out.println("\t\t. on " + getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "features from " + getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "features DONE");
+			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "plugins"), new File(getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "plugins"), true);
+			System.out.println("\t\t. on " + getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "plugins from " + getBuildDirectory() + File.separator + getBuildLabel() + File.separator + getArchivePrefix() + File.separator + "plugins DONE");
 
 			// copie du site.xml pour l'update site
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "site.xml"), new File(getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "site.xml"), true);
 			System.out.println("\t\t. on " + getUpdateSiteDir() + File.separator + getCodeName() + File.separator + "site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
-			
+
 			// copie du site.xml vers le workspace
-			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "site.xml"), new File(Application.workspace + File.separator + SourceSVNName+"/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml"), true);
-			System.out.println("\t\t. on " + Application.workspace + File.separator + SourceSVNName+"/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
-			
-			
+			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "site.xml"), new File(Application.workspace + File.separator + SourceSVNName + "/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml"), true);
+			System.out.println("\t\t. on " + Application.workspace + File.separator + SourceSVNName + "/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/site.xml from " + getBuildPath() + File.separator + "site.xml DONE");
+
 			// copie de la doc
 			System.out.println("\t- Generated Doc copy :");
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "doc"), new File(getFinalDirectory() + File.separator + "doc"), true);
@@ -1854,10 +1856,8 @@ public class Utils {
 
 			// copie des logs (pour la compilation de chaque projet)
 			System.out.println("\t- Logs copy :");
-			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator + getBuildLabel() + File.separator + "compilelogs"), new File(getFinalDirectory() + File.separator + "logs"
-					+ File.separator + getCodeName() + File.separator + "compilelogs"), true);
-			System.out.println("\t\t. on " + getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName() + File.separator + "compilelogs from " + getBuildDirectory()
-					+ File.separator + getBuildLabel() + File.separator + "compilelogs DONE");
+			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator + getBuildLabel() + File.separator + "compilelogs"), new File(getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName() + File.separator + "compilelogs"), true);
+			System.out.println("\t\t. on " + getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName() + File.separator + "compilelogs from " + getBuildDirectory() + File.separator + getBuildLabel() + File.separator + "compilelogs DONE");
 
 			// copie des fichiers de log (pour tout le traitement)
 			/*
@@ -1867,19 +1867,14 @@ public class Utils {
 			 * File.separator + "logs" + File.separator + getCodeName() +
 			 * File.separator + "logCommit.txt"), true); }
 			 */
-			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "logbuildbuild.txt"), new File(getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName()
-					+ File.separator + "logBuild.txt"), true);
-			System.out.println("\t\t. on " + getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName() + File.separator + "logBuild.txt from " + getBuildPath() + File.separator
-					+ "logbuildbuild.txt DONE");
+			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "logbuildbuild.txt"), new File(getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName() + File.separator + "logBuild.txt"), true);
+			System.out.println("\t\t. on " + getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName() + File.separator + "logBuild.txt from " + getBuildPath() + File.separator + "logbuildbuild.txt DONE");
 
-			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "logjarBuilderjarBuilder.txt"), new File(getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName()
-					+ File.separator + "logBuildJar.txt"), true);
-			System.out.println("\t\t. on " + getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName() + File.separator + "logBuildJar.txt from " + getBuildPath()
-					+ File.separator + "logjarBuilderjarBuilder.txt DONE");
+			FileHelper.copyFiles(new File(getBuildPath() + File.separator + "logjarBuilderjarBuilder.txt"), new File(getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName() + File.separator + "logBuildJar.txt"), true);
+			System.out.println("\t\t. on " + getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName() + File.separator + "logBuildJar.txt from " + getBuildPath() + File.separator + "logjarBuilderjarBuilder.txt DONE");
 
 			if (!Application.parametre) {
-				FileHelper.copyFiles(new File(getBuildPath() + File.separator + "logbuildSVNbuild.txt"), new File(getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName()
-						+ File.separator + "logSVN.txt"), true);
+				FileHelper.copyFiles(new File(getBuildPath() + File.separator + "logbuildSVNbuild.txt"), new File(getFinalDirectory() + File.separator + "logs" + File.separator + getCodeName() + File.separator + "logSVN.txt"), true);
 			}
 
 			// copie des fichiers compilés
@@ -1892,10 +1887,10 @@ public class Utils {
 			for (int i = 0; i < projects.size(); i++) {
 				if (projects.get(i).indexOf("feature") == -1) {
 					if (new File(getBuildDirectory() + File.separator + "plugins" + File.separator + projects.get(i) + File.separator + "@dot").exists()) {
-						FileHelper.copyFiles(new File(getBuildDirectory() + File.separator + "plugins" + File.separator + projects.get(i) + File.separator + "@dot"), new File(getFinalDirectory()
-								+ File.separator + "bin" + File.separator + getCodeName() + File.separator + projects.get(i)), true);
-						System.out.println("\t\t. on " + getFinalDirectory() + File.separator + "bin" + File.separator + getCodeName() + File.separator + projects.get(i) + " from "
-								+ getBuildDirectory() + File.separator + "plugins" + File.separator + projects.get(i) + File.separator + "@dot DONE");
+						FileHelper.copyFiles(new File(getBuildDirectory() + File.separator + "plugins" + File.separator + projects.get(i) + File.separator + "@dot"), new File(getFinalDirectory() + File.separator + "bin" + File.separator + getCodeName() + File.separator
+								+ projects.get(i)), true);
+						System.out.println("\t\t. on " + getFinalDirectory() + File.separator + "bin" + File.separator + getCodeName() + File.separator + projects.get(i) + " from " + getBuildDirectory() + File.separator + "plugins" + File.separator + projects.get(i)
+								+ File.separator + "@dot DONE");
 					}
 				}
 			}
@@ -1950,8 +1945,8 @@ public class Utils {
 	}
 
 	/**
-	 * Remplace, pour la feature donnée, le texte du copyright et de la
-	 * licence (ainsi que leur url) par rapport au fichier indiqué dans le
+	 * Remplace, pour la feature donnée, le texte du copyright et de la licence
+	 * (ainsi que leur url) par rapport au fichier indiqué dans le
 	 * build.properties
 	 * 
 	 * @param featureName
@@ -2041,8 +2036,8 @@ public class Utils {
 	}
 
 	/**
-	 * Remplace, pour la feature donnée, le texte du copyright et de la
-	 * licence (ainsi que leur url) par rapport au fichier indiqué dans le
+	 * Remplace, pour la feature donnée, le texte du copyright et de la licence
+	 * (ainsi que leur url) par rapport au fichier indiqué dans le
 	 * build.properties
 	 * 
 	 * @param featureName
@@ -2240,12 +2235,12 @@ public class Utils {
 
 			if (changes) {
 				Attribute version = productDoc.getRootElement().getAttribute("version");
-				String oldVersion=version.getValue();
+				String oldVersion = version.getValue();
 				String[] pattern = getNumVersionPattern();
 				String newversion = updatepom(version.getValue().split("\\."), pattern);
 				version.setValue(newversion);
-				System.out.println("sideProduct version :"+oldVersion);
-				System.out.println("sideProduct new version :"+newversion);
+				System.out.println("sideProduct version :" + oldVersion);
+				System.out.println("sideProduct new version :" + newversion);
 				// save changes
 				saveXMLFile(product, productDoc);
 			}

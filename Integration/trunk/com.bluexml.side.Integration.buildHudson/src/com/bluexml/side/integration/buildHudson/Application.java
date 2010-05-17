@@ -18,6 +18,8 @@ import com.bluexml.side.integration.buildHudson.utils.FileHelper;
 import com.bluexml.side.integration.buildHudson.utils.Utils;
 
 public class Application {
+	public static final String SIDE_Core = "S-IDE";
+	public static final String SIDE_Enterprise = "S-IDE_Enterprise";
 
 	public static String workspace = "";
 	public static String build_number = "";
@@ -92,55 +94,47 @@ public class Application {
 			System.out.println("**** Aucun Parametre ****");
 			System.out.println("- workspace = " + workspace);
 		}
-		
+
 		String pathprojectSVN = Utils.getRepositoryCopyPath();
-		
-		
+
 		if (pathprojectSVN.contains("Build_RCP_Enterprise")) {
-			Utils.SourceSVNName="S-IDE_Enterprise";
+			Utils.SourceSVNName = SIDE_Enterprise;
+		} else {
+			Utils.SourceSVNName = SIDE_Core;
 		}
-		else {
-			Utils.SourceSVNName="S-IDE";
-		}
-		
-		
+
 		if (rcp.equals("yes")) {
-			
+
 			// if (Application.EnterpriseRelease){
 			projectsExcluded = Utils.getProjects("projectExcluded");
 			// }else{
 			// projectsExcluded = Utils.getProjects("projectLabsExcluded");
 			// }
-	
+
 			System.out.println("\nLancé le " + Utils.getDate2() + " é " + Utils.getTime());
-	
-			
+
 			// création du buildSVN.xml
 			System.out.println("\n- Création de " + Utils.getBuildPath() + File.separator + "buildSVN.xml");
 			createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
-	
+
 			// Mise é jour des numéros de version en fonction du fichier de log
 			// System.out.println("\nMise é jour des numéros de version (si besoin)...");
-	
+
 			// si labs, on ne met pas é jour les versions des features et on ne
 			// commit pas
-	
-			
+
 			Utils.traitementUpdate();
-			
-			
-			// launch prepare-compile for the project com.bluexml.side.Form.generator.xforms.chiba
-			
-			
-			
-			//System.out.println("launch prepare-compile on "+ workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
-			//execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
-				
-			
+
+			// launch prepare-compile for the project
+			// com.bluexml.side.Form.generator.xforms.chiba
+
+			// System.out.println("launch prepare-compile on "+
+			// workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+			// execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+
 			// create maven work folder and launch maven deploy
 			launchShScript("launch_maven.sh");
-	
-	
+
 			if (parametre) {
 				// copie du répository dans le repertoire de travail (en
 				// séparant
@@ -149,10 +143,10 @@ public class Application {
 			}
 			// update side.product
 			Utils.updateProduct();
-			
+
 			// get modified files and copy them into svn local copy
 			Utils.copyToRepository();
-			
+
 			for (String projet : Utils.getProjects()) {
 				if (!projectsExcluded.contains(projet)) {
 					System.out.println("\t-" + projet);
@@ -163,24 +157,21 @@ public class Application {
 					System.out.println("\t-" + projet);
 				}
 			}
-			
-		}
-		else {
-			
-			
+
+		} else {
 
 			// if (Application.EnterpriseRelease){
 			projectsExcluded = Utils.getProjects("projectExcluded");
 			// }else{
 			// projectsExcluded = Utils.getProjects("projectLabsExcluded");
 			// }
-	
+
 			System.out.println("\nLancé le " + Utils.getDate2() + " é " + Utils.getTime());
-	
+
 			// création du buildSVN.xml
 			System.out.println("\n- Création de " + Utils.getBuildPath() + File.separator + "buildSVN.xml");
 			createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
-	
+
 			// si on travaille sans Hudson, alors on va réaliser,
 			// avec ant, le checkout et/ou update
 			if (!parametre) {
@@ -188,37 +179,35 @@ public class Application {
 				System.out.println("\nRéalisation du checkout et du update...");
 				execBuild("buildSVN", "build");
 			}
-	
+
 			// Mise é jour des numéros de version en fonction du fichier de log
 			// System.out.println("\nMise é jour des numéros de version (si besoin)...");
-	
+
 			// si labs, on ne met pas é jour les versions des features et on ne
 			// commit pas
-	
+
 			// if (EnterpriseRelease) {
 			Utils.traitementUpdate();
 			// Commit
-			// commit is now done at the end of the complete build when all steps
+			// commit is now done at the end of the complete build when all
+			// steps
 			// (till updae-site copy) are ok
 			// System.out.println("\nCommit des modifications sur le répository...");
 			// execBuild("buildSVN", "svnCommit");
 			// }
-			
-			// launch prepare-compile for the project com.bluexml.side.Form.generator.xforms.chiba
-			
-			
-			
-			System.out.println("launch prepare-compile on "+ workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
-			execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
-			
-					
-			
+
+			// launch prepare-compile for the project
+			// com.bluexml.side.Form.generator.xforms.chiba
+
+			System.out.println("launch prepare-compile on " + workspace + "/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+			execBuildAnt("build", "prepare-compile", workspace + "/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
+
 			// create maven work folder and launch maven deploy
 			launchShScript("launch_maven.sh");
-	
+
 			// launch script to build repository zip file
 			launchShScript("build_repository_SIDE.sh");
-	
+
 			if (parametre) {
 				// copie du répository dans le repertoire de travail (en
 				// séparant
@@ -227,21 +216,21 @@ public class Application {
 			}
 			// update side.product
 			Utils.updateProduct();
-			
+
 			// get modified files and copy them into svn local copy
 			Utils.copyToRepository();
-	
+
 			// création du build.xml
 			System.out.println("\n\n- Création de " + Utils.getBuildPath() + File.separator + "build.xml");
 			createFile(getCorpsBuild(), Utils.getBuildPath(), "build.xml");
-	
+
 			// création du buildAuto.product
 			System.out.println("- Création du buildAuto.product");
 			createFile(getCorpsProduct(), Utils.getBuildPath(), "buildAuto.product");
-	
+
 			// Execution du build.xml
 			System.out.println("\nRéalisation du Build sur ...");
-	
+
 			for (String projet : Utils.getProjects()) {
 				if (!projectsExcluded.contains(projet)) {
 					System.out.println("\t-" + projet);
@@ -252,19 +241,19 @@ public class Application {
 					System.out.println("\t-" + projet);
 				}
 			}
-	
+
 			execBuild("build", "build");
-	
+
 			// création du site.xml
 			System.out.println("\nUpdate du site.xml");
 			Utils.updateSiteXml();
-	
+
 			// creation de jar pour les plugins qui ne le sont pas
 			createFile(getJarBuilder(), Utils.getBuildPath(), "jarBuilder.xml");
 			execBuild("jarBuilder", "jarBuilder");
-	
+
 			// traitement final
-	
+
 			// Déplacement et suppression des répertoires
 			System.out.println("\nDéplacement et suppression des répertoires");
 			Utils.finalTraitement();
@@ -340,10 +329,10 @@ public class Application {
 		 */
 
 	}
-	
+
 	/**
-	 * Méthode qui execute la target 'target' du build.xml passé en
-	 * paramétre Un fichier de log est crée: log.txt
+	 * Méthode qui execute la target 'target' du build.xml passé en paramétre Un
+	 * fichier de log est crée: log.txt
 	 * 
 	 * @param build
 	 *            le build.xml a executer (sans le .xml)
@@ -387,10 +376,9 @@ public class Application {
 		ant.executeTarget(target);
 	}
 
-
 	/**
-	 * Méthode qui execute la target 'target' du build.xml passé en
-	 * paramétre Un fichier de log est crée: log.txt
+	 * Méthode qui execute la target 'target' du build.xml passé en paramétre Un
+	 * fichier de log est crée: log.txt
 	 * 
 	 * @param build
 	 *            le build.xml a executer (sans le .xml)
@@ -496,7 +484,7 @@ public class Application {
 		out += "\t\t\t<record name=\"build_pde-build_debug.log\" loglevel=\"debug\" action=\"start\"/>\n";
 		// out +=
 		// "\t\t\t<chmod dir=\"${buildName}\" perm=\"777\" includes=\"*/**\"/>\n";
-		
+
 		out += "\t\t\t<java classname=\"org.eclipse.equinox.launcher.Main\" fork=\"true\" failonerror=\"true\">\n";
 		out += "\t\t\t\t<arg value=\"-Xmx512m\"/>\n";
 		out += "\t\t\t\t<arg value=\"-Xms512m\"/>\n";
@@ -528,8 +516,7 @@ public class Application {
 
 		for (int i = 0; i < projects.length; i++) {
 			if (projects[i].indexOf("feature") != -1) {
-				out += "\t\t<jar destfile=\"${buildDirectory}/${buildLabel}/${archivePrefix}/features/" + projects[i] + "_" + Utils.getVersionNumber(projects[i])
-						+ ".jar\" basedir=\"${buildDirectory}/features/" + projects[i] + "\" />\n";
+				out += "\t\t<jar destfile=\"${buildDirectory}/${buildLabel}/${archivePrefix}/features/" + projects[i] + "_" + Utils.getVersionNumber(projects[i]) + ".jar\" basedir=\"${buildDirectory}/features/" + projects[i] + "\" />\n";
 				out += "\t\t<delete dir=\"${buildDirectory}/${buildLabel}/${archivePrefix}/features/" + projects[i] + "\" />\n\n";
 			}
 		}
@@ -649,8 +636,7 @@ public class Application {
 		out += "<site>\n\n";
 		for (int i = 0; i < projects.length; i++) {
 			if (projects[i].indexOf("feature") != -1) {
-				out += "\t<feature url=\"features/" + projects[i] + "_" + Utils.getVersionNumber(projects[i]) + ".jar\" id=\"" + projects[i] + "\" version=\"" + Utils.getVersionNumber(projects[i])
-						+ "\">\n";
+				out += "\t<feature url=\"features/" + projects[i] + "_" + Utils.getVersionNumber(projects[i]) + ".jar\" id=\"" + projects[i] + "\" version=\"" + Utils.getVersionNumber(projects[i]) + "\">\n";
 				String[] branche = projects[i].split("\\.");
 				out += "\t\t<category name=\"SIDE " + branche[3] + "\"/>\n";
 				out += "\t</feature>\n\n";
@@ -710,12 +696,10 @@ public class Application {
 
 				// si le mot 'feature' n'est pas présent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1)
-					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.SourceSVNName+"/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${pluginsPath}" + File.separator
-							+ projects[i] + "\" />\n";
+					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.SourceSVNName + "/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${pluginsPath}" + File.separator + projects[i] + "\" />\n";
 				// si 'feature' est présent
 				else if (projects[i].indexOf("feature") != -1)
-					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.SourceSVNName+"/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${featuresPath}" + File.separator
-							+ projects[i] + "\" />\n";
+					out += "\t\t\t<checkout url=\"" + Utils.getRepository() + Utils.SourceSVNName + "/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i] + "\" destPath=\"${featuresPath}" + File.separator + projects[i] + "\" />\n";
 
 				out += "\t\t</svn>\n";
 			}
@@ -794,8 +778,7 @@ public class Application {
 							}
 							out += "\t\t\t</fileset>\n";
 						}
-						
-						
+
 					} // si 'feature' est présent
 					else if (projects[i].indexOf("feature") != -1) {
 						out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + "\">\n";
@@ -810,7 +793,7 @@ public class Application {
 		Utils.listefichierpom = new ArrayList();
 		// String pathproject = Utils.getBuildPath() + File.separator +
 		// Utils.repositoryCopy;
-		String pathproject = workspace + "/"+Utils.SourceSVNName;
+		String pathproject = workspace + "/" + Utils.SourceSVNName;
 
 		Utils.findFile(new File(pathproject + "/Integration/trunk"), "pom.xml");
 		Utils.findFile(new File(pathproject + "/FrameworksModules/trunk"), "pom.xml");
@@ -826,12 +809,12 @@ public class Application {
 				System.out.println("#### tab=" + tab[0]);
 			}
 		}
-		
-		//fichier site.xml
+
+		// fichier site.xml
 		out += "\t\t\t<fileset dir=\"" + "/var/opt/hudson/jobs/Build_SIDE/workspace/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config" + "\">\n";
 		out += "\t\t\t\t<include name=\"site.xml\" />\n";
 		out += "\t\t\t</fileset>\n";
-		
+
 		out += "\t\t\t</commit>\n";
 		out += "\t\t</svn>\n";
 
@@ -938,8 +921,7 @@ public class Application {
 			if (!projectsExcluded.contains(file.getName())) {
 				if (file.isDirectory()) {
 
-					out += "\t\t<jar destfile=\"" + file.getAbsolutePath() + ".jar\" basedir=\"" + file.getAbsolutePath() + "\" manifest=\"" + file.getAbsolutePath() + File.separator + "META-INF"
-							+ File.separator + "MANIFEST.MF\"/>\n";
+					out += "\t\t<jar destfile=\"" + file.getAbsolutePath() + ".jar\" basedir=\"" + file.getAbsolutePath() + "\" manifest=\"" + file.getAbsolutePath() + File.separator + "META-INF" + File.separator + "MANIFEST.MF\"/>\n";
 
 					out += "\t\t<delete dir=\"" + file.getAbsolutePath() + "\" />";
 				}
