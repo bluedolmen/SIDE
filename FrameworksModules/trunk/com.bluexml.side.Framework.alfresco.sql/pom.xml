@@ -30,7 +30,7 @@
   In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
-  <version>1.1.22</version>
+  <version>1.1.23</version>
   <description>This module provides a replicate relational database that enables users to perform SQL queries with joins</description>
   <properties>
     <!--Default for which src/main/properties/<env>/application.properties is loaded. NB: 
