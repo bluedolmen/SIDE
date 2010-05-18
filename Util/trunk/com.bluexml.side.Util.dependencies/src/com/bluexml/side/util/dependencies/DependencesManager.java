@@ -13,7 +13,6 @@ public class DependencesManager {
 
 	public DependencesManager(List<ModuleConstraint> lmc, boolean offline) {
 		this.offline = offline;
-		this.generatorID = generatorID;
 		for (ModuleConstraint mc : lmc) {
 			addEntry(contraints, mc.getTech_version(), mc);
 		}
