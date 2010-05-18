@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Form.feature" label="SIDE Web Form Modeler" version="1.0.106.v16823-20100512" provider-name="BlueXML">
+<feature id="com.bluexml.side.Form.feature" label="SIDE Web Form Modeler" version="1.0.107.v16927-20100518" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based tree modeler of web form models.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -42,7 +42,7 @@
   </requires>
   <plugin id="com.bluexml.side.Form" download-size="0" install-size="0" version="1.0.69.v15881-20100325" unpack="false" />
   <plugin id="com.bluexml.side.Form.edit" download-size="0" install-size="0" version="1.0.56.v15881-20100325" unpack="false" />
-  <plugin id="com.bluexml.side.Form.edit.ui" download-size="0" install-size="0" version="1.0.64.v16823-20100512" unpack="false" />
+  <plugin id="com.bluexml.side.Form.edit.ui" download-size="0" install-size="0" version="1.0.65.v16927-20100518" unpack="false" />
   <plugin id="com.bluexml.side.Form.editor" download-size="0" install-size="0" version="1.0.37.v14313-20100210" unpack="false" />
   <plugin id="com.bluexml.side.Form.generator.documentation" download-size="0" install-size="0" version="1.0.22.v13637-20100201" unpack="false" />
 </feature>
