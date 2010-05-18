@@ -35,12 +35,21 @@ public class Utils {
 	public static ArrayList<String> listefichierpom = new ArrayList<String>();
 	public static String repositoryCopy = "repositoryCopy";
 	public static String SourceSVNName = "";
+	public static Properties buildProperties = new Properties();
+
+	public static Properties getBuildProperties() {
+		return buildProperties;
+	}
+
+	public static void setBuildProperties(Properties buildProperties) {
+		Utils.buildProperties = buildProperties;
+	}
 
 	/**
 	 * Méthode qui ouvre le fichier de proprerties
 	 * 
 	 */
-	public static Properties ouvrirFichier(String fichier) {
+	public static Properties openProperties(String fichier) {
 		String[] filePart = fichier.split("\\.");
 		String fileName = filePart[0];
 		String userName = System.getenv("USER");
@@ -86,7 +95,7 @@ public class Utils {
 	 * Retourne la liste des projets
 	 */
 	public static List<String> getProjects(String properties) {
-		String property = ouvrirFichier("build.properties").getProperty(properties);
+		String property = getBuildProperties().getProperty(properties);
 		List<String> l = new ArrayList<String>();
 		if ((property != null) && (property.length() > 0)) {
 			String[] projects = property.split(",");
@@ -120,7 +129,7 @@ public class Utils {
 	 * @return
 	 */
 	public static String getVersionedProjectPath(String projectName) {
-		String[] projects = ouvrirFichier("build.properties").getProperty("projectToVersioned").split(",");
+		String[] projects = getBuildProperties().getProperty("projectToVersioned").split(",");
 
 		String path = "";
 		for (int i = 0; i < projects.length; i++) {
@@ -141,7 +150,7 @@ public class Utils {
 	public static String getProjectPath(String projectName) {
 		String path = "";
 
-		String property = ouvrirFichier("build.properties").getProperty("project");
+		String property = getBuildProperties().getProperty("project");
 		if ((property != null) && (property.length() > 0)) {
 			String[] projects = property.split(",");
 			for (int i = 0; i < projects.length; i++) {
@@ -154,7 +163,7 @@ public class Utils {
 
 		// We search in enterprise projects
 		if (path.length() == 0) {
-			property = ouvrirFichier("build.properties").getProperty("project.enterprise");
+			property = getBuildProperties().getProperty("project.enterprise");
 			if ((property != null) && (property.length() > 0)) {
 				String[] projects = property.split(",");
 				for (int i = 0; i < projects.length; i++) {
@@ -168,7 +177,7 @@ public class Utils {
 
 		// We search in versioned projects
 		if (path.length() == 0) {
-			property = ouvrirFichier("build.properties").getProperty("projectToVersioned");
+			property = getBuildProperties().getProperty("projectToVersioned");
 			if ((property != null) && (property.length() > 0)) {
 				String[] projects = property.split(",");
 				for (int i = 0; i < projects.length; i++) {
@@ -187,28 +196,28 @@ public class Utils {
 	 */
 	public static String getBuildPath() {
 
-		return ouvrirFichier("build.properties").getProperty("buildDir") + File.separator + getCodeName();
+		return getBuildProperties().getProperty("buildDir") + File.separator + getCodeName();
 	}
 
 	/**
 	 * return the buildDirectory: /home/stager/buildAuto/Ankle/workingCopy
 	 */
 	public static String getBuildDirectory() {
-		return getBuildPath() + File.separator + ouvrirFichier("build.properties").getProperty("buildName");
+		return getBuildPath() + File.separator + getBuildProperties().getProperty("buildName");
 	}
 
 	/**
 	 * Retourne le repository: http://svn.bluexml.com/svn/bluexml/com/
 	 */
 	public static String getRepository() {
-		return ouvrirFichier("build.properties").getProperty("repository");
+		return getBuildProperties().getProperty("repository");
 	}
 
 	/**
 	 * Retourne le nom de code: Ankle
 	 */
 	public static String getCodeName() {
-		return ouvrirFichier("build.properties").getProperty("codeName");
+		return getBuildProperties().getProperty("codeName");
 	}
 
 	/**
@@ -216,35 +225,35 @@ public class Utils {
 	 */
 	public static String getEclipseHome() {
 
-		return ouvrirFichier("build.properties").getProperty("eclipseLocation");
+		return getBuildProperties().getProperty("eclipseLocation");
 	}
 
 	/**
 	 * Retourne la version du launcher : 1.0.101.R34x_v20081125.jar
 	 */
 	public static String getLauncherVersion() {
-		return "org.eclipse.equinox.launcher_" + ouvrirFichier("build.properties").getProperty("equinoxLauncherPluginVersion") + ".jar";
+		return "org.eclipse.equinox.launcher_" + getBuildProperties().getProperty("equinoxLauncherPluginVersion") + ".jar";
 	}
 
 	/**
 	 * return the final directory: /home/stager/share/SIDE
 	 */
 	public static String getFinalDirectory() {
-		return ouvrirFichier("build.properties").getProperty("finalDirectory");
+		return getBuildProperties().getProperty("finalDirectory");
 	}
 
 	/**
 	 * return the Build Label: I.UpdateSite
 	 */
 	public static String getBuildLabel() {
-		return ouvrirFichier("build.properties").getProperty("buildType") + "." + ouvrirFichier("build.properties").getProperty("buildId");
+		return getBuildProperties().getProperty("buildType") + "." + getBuildProperties().getProperty("buildId");
 	}
 
 	/**
 	 * Return the name of the Update-Site: Update-Site
 	 */
 	public static String getArchivePrefix() {
-		return ouvrirFichier("build.properties").getProperty("archivePrefix");
+		return getBuildProperties().getProperty("archivePrefix");
 	}
 
 	/**
@@ -252,7 +261,7 @@ public class Utils {
 	 * (void for no change)
 	 */
 	public static String getForceNumberVersion() {
-		return ouvrirFichier("build.properties").getProperty("forceNumberVersion");
+		return getBuildProperties().getProperty("forceNumberVersion");
 	}
 
 	/**
@@ -260,49 +269,49 @@ public class Utils {
 	 * gtk.linux.x86_1.0.101.R34x_v20080805
 	 */
 	public static String getEquinoxLauncherDirectoryVersion() {
-		return ouvrirFichier("build.properties").getProperty("equinoxLauncherDirectoryVersion");
+		return getBuildProperties().getProperty("equinoxLauncherDirectoryVersion");
 	}
 
 	/**
 	 * Return the new category for the site.xml : Other
 	 */
 	public static String getNewCategory() {
-		return ouvrirFichier("build.properties").getProperty("newCategory");
+		return getBuildProperties().getProperty("newCategory");
 	}
 
 	/**
 	 * Return the path to the Public Update site: /home/stager/share/SIDE-Final
 	 */
 	public static String getPublicUpdateSiteDirectory() {
-		return ouvrirFichier("build.properties").getProperty("publicUpdateSiteDirectory");
+		return getBuildProperties().getProperty("publicUpdateSiteDirectory");
 	}
 
 	/**
 	 * Return the license URL: http://url.to.license.com
 	 */
 	public static String getlicenseURL() {
-		return ouvrirFichier("build.properties").getProperty("licenseURL");
+		return getBuildProperties().getProperty("licenseURL");
 	}
 
 	/**
 	 * Return the license text file: /home/stager/buildAuto/license.txt
 	 */
 	public static String getLicenseText() {
-		return loadFile(new File(ouvrirFichier("build.properties").getProperty("licensePath")));
+		return loadFile(new File(getBuildProperties().getProperty("licensePath")));
 	}
 
 	/**
 	 * Return the copyright URL: http://url.to.copyright.com
 	 */
 	public static String getCopyrightURL() {
-		return ouvrirFichier("build.properties").getProperty("copyrightURL");
+		return getBuildProperties().getProperty("copyrightURL");
 	}
 
 	/**
 	 * Return the copyright text file: /home/stager/buildAuto/copyright.txt
 	 */
 	public static String getCopyrightText() {
-		return loadFile(new File(ouvrirFichier("build.properties").getProperty("copyrightPath")));
+		return loadFile(new File(getBuildProperties().getProperty("copyrightPath")));
 	}
 
 	/**
@@ -333,7 +342,7 @@ public class Utils {
 		// En fonction du type du projet (feature ou plugin)
 		// on ira regarder soit dans le MANIFEST ou alors dans le feature.xml
 		if (projectName.indexOf("feature") == -1) {
-			version = ouvrirFichier(getPathToLocalCopy(projectName) + File.separator + "META-INF" + File.separator + "MANIFEST.MF").getProperty("Bundle-Version");
+			version = openProperties(getPathToLocalCopy(projectName) + File.separator + "META-INF" + File.separator + "MANIFEST.MF").getProperty("Bundle-Version");
 		} else {
 			org.jdom.Document document = null;
 			org.jdom.Element racine;
@@ -1374,7 +1383,7 @@ public class Utils {
 
 				// on récupére dans un tableau les 3 numéros de version du
 				// projet
-				String[] number = ouvrirFichier(filePluginPath).getProperty("Bundle-Version").split("\\.");
+				String[] number = openProperties(filePluginPath).getProperty("Bundle-Version").split("\\.");
 
 				String ligne = "";
 				try {
@@ -1607,7 +1616,7 @@ public class Utils {
 	}
 
 	private static String[] getNumVersionPattern() {
-		String[] pattern = ouvrirFichier("build.properties").getProperty("number-pattern").split("\\.");
+		String[] pattern = getBuildProperties().getProperty("number-pattern").split("\\.");
 		return pattern;
 	}
 
@@ -1953,7 +1962,7 @@ public class Utils {
 		// if (!Application.EnterpriseRelease) {
 		// updateSiteDir = "updateSiteDirLabs";
 		// }
-		return ouvrirFichier("build.properties").getProperty(updateSiteDir);
+		return getBuildProperties().getProperty(updateSiteDir);
 
 	}
 

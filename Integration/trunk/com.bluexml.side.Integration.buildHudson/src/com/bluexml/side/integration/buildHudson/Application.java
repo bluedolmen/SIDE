@@ -26,6 +26,8 @@ public class Application {
 	public static String build_id = "";
 	public static String svn_revision = "";
 	public static String rcp = "";
+	
+
 	public static List<String> projectsExcluded;
 
 	// si au moins un paramètre n'est pas renseigné, alors on suppose que le
@@ -48,7 +50,7 @@ public class Application {
 		String argument3 = "";
 		String argument4 = "";
 		String argument5 = "";
-
+		String argument6 = "";
 		System.out.println("****************************************");
 		System.out.println("**** Lancement du Build Automatique ****");
 		System.out.println("****************************************");
@@ -59,6 +61,7 @@ public class Application {
 			argument3 = args[2];
 			argument4 = args[3];
 			argument5 = args[4];
+			argument6 = args[5];
 		} catch (Exception e) {
 			parametre = false;
 		}
@@ -81,13 +84,15 @@ public class Application {
 			build_id = argument3;
 			svn_revision = argument4;
 			rcp = argument5;
+			Utils.setBuildProperties(Utils.openProperties(argument6));
+
 			System.out.println("**** Parametre ****");
 			System.out.println("- workspace = " + workspace);
 			System.out.println("- build_number = " + build_number);
 			System.out.println("- build_id = " + build_id);
 			System.out.println("- svn_revision = " + svn_revision);
 			System.out.println("- rcp = " + rcp);
-
+			System.out.println("- propertiesFile = " + argument6);
 		} else {
 
 			workspace = Utils.getBuildDirectory();
