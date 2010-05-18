@@ -39,16 +39,18 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<created>${child.properties["cm:created"]?datetime}</created>
 	<modified>${child.properties["cm:modified"]?datetime}</modified>
 	<%for (getFields()[mapTo.eClass().name.equalsIgnoreCase("Attribute")]){%>
-	<#if (child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"]?exists)>
-		<#if child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"]?is_sequence>
-		<_<%name%>><#list child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"] as key>${key} </#list></_<%name%>>
+	<% mapTo.getRootContainer().name.put("modelId") %>
+	<%if (get("modelId")=="cm") {%><% mapTo.name.put("qName") %><%}else{%><% mapTo.getQualifiedName().put("qName") %><%}%>
+	<#if (child.properties["<%get("modelId")%>:<%get("qName")%>"]?exists)>
+		<#if child.properties["<%get("modelId")%>:<%get("qName")%>"]?is_sequence>
+		<_<%name%>><#list child.properties["<%get("modelId")%>:<%get("qName")%>"] as key>${key} </#list></_<%name%>>
 		<#else/>
 		<%if (mapTo.typ.toString().equalsIgnoreCase("date")){%>
-		<_<%name%>>${child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"]?date!""}</_<%name%>>
+		<_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?date!""}</_<%name%>>
 		<%}else if (mapTo.typ.toString().equalsIgnoreCase("datetime")){%>
-		<_<%name%>>${child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"]?datetime!""}</_<%name%>>
+		<_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?datetime!""}</_<%name%>>
 		<%}else{%>
-		<_<%name%>>${child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"]?string!""}</_<%name%>>
+		<_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string!""}</_<%name%>>
 		<%}%>
 		</#if>
 	<#else/>

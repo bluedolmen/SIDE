@@ -28,16 +28,18 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 {
 	<%for (getFields()[mapTo.eClass().name.equalsIgnoreCase("Attribute")]){%>
-	<#if (child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"]?exists)>
-		<#if child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"]?is_sequence>
-		"_<%name%>":"<#list child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"] as key>${key} </#list>",
+	<% mapTo.getRootContainer().name.put("modelId") %>
+	<%if (get("modelId")=="cm") {%><% mapTo.name.put("qName") %><%}else{%><% mapTo.getQualifiedName().put("qName") %><%}%>
+	<#if (child.properties["<%get("modelId")%>:<%get("qName")%>"]?exists)>
+		<#if child.properties["<%get("modelId")%>:<%get("qName")%>"]?is_sequence>
+		"_<%name%>":"<#list child.properties["<%get("modelId")%>:<%get("qName")%>"] as key>${key} </#list>",
 		<#else/>
 		<%if (mapTo.typ.toString().equalsIgnoreCase("date")){%>
-		"_<%name%>":"${child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"]?date!""}",
+		"_<%name%>":"${child.properties["<%get("modelId")%>:<%get("qName")%>"]?date!""}",
 		<%}else if (mapTo.typ.toString().equalsIgnoreCase("datetime")){%>
-		"_<%name%>":"${child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"]?datetime!""}",
+		"_<%name%>":"${child.properties["<%get("modelId")%>:<%get("qName")%>"]?datetime!""}",
 		<%}else{%>
-		"_<%name%>":"${child.properties["<%current("AbstractViewOf").viewOf.getFolder()%>:<%mapTo.getQualifiedName()%>"]?string!""}",
+		"_<%name%>":"${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string!""}",
 		<%}%>
 		</#if>
 	<#else/>
