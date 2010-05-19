@@ -138,7 +138,7 @@ public class Application {
 			// execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
 
 			// create maven work folder and launch maven deploy
-			// launchShScript("launch_maven.sh");
+			launchShScript("launch_maven.sh");
 
 			if (parametre) {
 				// copie du répository dans le repertoire de travail (en
@@ -208,10 +208,10 @@ public class Application {
 			execBuildAnt("build", "prepare-compile", workspace + "/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
 
 			// create maven work folder and launch maven deploy
-			// launchShScript("launch_maven.sh");
+			launchShScript("launch_maven.sh");
 
 			// launch script to build repository zip file
-			// launchShScript("build_repository_SIDE.sh");
+			launchShScript("build_repository_SIDE.sh");
 
 			if (parametre) {
 				// copie du répository dans le repertoire de travail (en
