@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Chiba XForms Generator
 Bundle-SymbolicName: com.bluexml.side.Form.generator.xforms.chiba;singleton:=true
-Bundle-Version: 1.0.149.v17013-20100519
+Bundle-Version: 1.0.150.v17039-20100519
 Bundle-Vendor: BlueXML
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: com.bluexml.side.Util.libs,
