@@ -50,7 +50,7 @@
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.45" versionMax="1.0.45" />
             </option>
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" label="Alfresco FacetMap Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.27" versionMax="1.0.27" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.28" versionMax="1.0.28" />
             </option>
             <configurationParameter documentation="account to use when getting documents from alfresco" key="alfresco.report.runas" label="report as" />
           </generatorVersion>
