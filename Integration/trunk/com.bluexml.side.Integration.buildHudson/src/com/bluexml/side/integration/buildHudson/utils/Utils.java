@@ -14,8 +14,10 @@ import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.jdom.Attribute;
@@ -30,12 +32,17 @@ import com.bluexml.side.integration.buildHudson.Application;
 
 public class Utils {
 
+	
 	private static ArrayList<String> listeFeatureModif = new ArrayList<String>();
 	private static String revisionNumber;
 	public static ArrayList<String> listefichierpom = new ArrayList<String>();
 	public static String repositoryCopy = "repositoryCopy";
 	public static String SourceSVNName = "";
 	public static Properties buildProperties = new Properties();
+
+	public static Map<String, String> updatedPlugins = new HashMap<String, String>();
+	public static Map<String, String> updatedFeatures = new HashMap<String, String>();
+	public static Map<String, String> updatedPoms = new HashMap<String, String>();
 
 	public static Properties getBuildProperties() {
 		return buildProperties;
@@ -148,36 +155,14 @@ public class Utils {
 	 * @return
 	 */
 	public static String getProjectPath(String projectName) {
-		String path = "";
+		String path = getCommunityProject(projectName);
 
-		String property = getBuildProperties().getProperty("project");
-		if ((property != null) && (property.length() > 0)) {
-			String[] projects = property.split(",");
-			for (int i = 0; i < projects.length; i++) {
-				if (projects[i].split("&")[1].equals(projectName)) {
-					path = projects[i].split("&")[0];
-					return Application.SIDE_Core + File.separator + path + File.separator + "trunk" + File.separator + projectName;
-				}
-			}
-		}
-
-		// We search in enterprise projects
 		if (path.length() == 0) {
-			property = getBuildProperties().getProperty("project.enterprise");
-			if ((property != null) && (property.length() > 0)) {
-				String[] projects = property.split(",");
-				for (int i = 0; i < projects.length; i++) {
-					if (projects[i].split("&")[1].equals(projectName)) {
-						path = projects[i].split("&")[0];
-						return Application.SIDE_Enterprise + File.separator + path + File.separator + "trunk" + File.separator + projectName;
-					}
-				}
-			}
+			path = getEnterpriseProjectPath(projectName);
 		}
-
-		// We search in versioned projects
+		// We search in versioned projects this is used
 		if (path.length() == 0) {
-			property = getBuildProperties().getProperty("projectToVersioned");
+			String property = getBuildProperties().getProperty("projectToVersioned");
 			if ((property != null) && (property.length() > 0)) {
 				String[] projects = property.split(",");
 				for (int i = 0; i < projects.length; i++) {
@@ -189,6 +174,45 @@ public class Utils {
 		}
 
 		return path;
+	}
+
+	private static String getCommunityProject(String projectName) {
+		String path = "";
+		String property = getCommunityProjectProperty();
+		if ((property != null) && (property.length() > 0)) {
+			String[] projects = property.split(",");
+			for (int i = 0; i < projects.length; i++) {
+				if (projects[i].split("&")[1].equals(projectName)) {
+					path = projects[i].split("&")[0];
+					return Application.SIDE_Core + File.separator + path + File.separator + "trunk" + File.separator + projectName;
+				}
+			}
+		}
+		return path;
+	}
+
+	private static String getCommunityProjectProperty() {
+		return getBuildProperties().getProperty("project");
+	}
+
+	private static String getEnterpriseProjectPath(String projectName) {
+		String path = "";
+		// We search in enterprise projects
+		String property = getEnterpriseProjectProperty();
+		if ((property != null) && (property.length() > 0)) {
+			String[] projects = property.split(",");
+			for (int i = 0; i < projects.length; i++) {
+				if (projects[i].split("&")[1].equals(projectName)) {
+					path = projects[i].split("&")[0];
+					return Application.SIDE_Enterprise + File.separator + path + File.separator + "trunk" + File.separator + projectName;
+				}
+			}
+		}
+		return path;
+	}
+
+	private static String getEnterpriseProjectProperty() {
+		return getBuildProperties().getProperty("project.enterprise");
 	}
 
 	/**
@@ -377,7 +401,6 @@ public class Utils {
 	 * @return le numéro de version pour un projet donné
 	 */
 	public static String getVersionNumberPom(String projectName) {
-		String version = "";
 
 		// En fonction du type du projet (feature ou plugin)
 		// on ira regarder soit dans le MANIFEST ou alors dans le feature.xml
@@ -529,6 +552,7 @@ public class Utils {
 
 		List<String> projects = new ArrayList<String>();
 		projects.addAll(getProjects("project"));
+		projects.addAll(getProjects("project.enterprise"));
 		projects.addAll(getProjects("projectToVersioned"));
 
 		for (int i = 0; i < projects.size(); i++) {
@@ -551,7 +575,7 @@ public class Utils {
 
 		String pathproject = getRepositoryCopyPath();
 
-		listefichierpom = new ArrayList();
+		listefichierpom = new ArrayList<String>();
 
 		findFile(new File(pathproject + "/" + SourceSVNName + "/"), "pom.xml");
 
@@ -564,8 +588,9 @@ public class Utils {
 
 			// ouverture d'un flux du fichier
 			try {
-				BufferedReader ficTexte = new BufferedReader(new FileReader(new File(getPathToLog())));
-
+				File log = new File(getPathToLog());
+				BufferedReader ficTexte = new BufferedReader(new FileReader(log));
+				System.out.println("###### search for updated project from svn log " + log);
 				if (ficTexte == null) {
 					throw new FileNotFoundException("Fichier non trouvé");
 				}
@@ -575,7 +600,7 @@ public class Utils {
 
 					// condition d'arret de la lecture du log
 					// on arrete la lecture lorsque se lance le build
-					if (ligne.startsWith("************")) {
+					if (ligne.startsWith(Application.buildStartLine)) {
 						end = true;
 					}
 
@@ -584,7 +609,7 @@ public class Utils {
 						if (ligne.startsWith("+ svn update")) {
 							update = true;
 						}
-						if (ligne.indexOf("Checking out " + Utils.getRepository()) != -1) {
+						if (ligne.indexOf("Checking out " + Utils.getRepository()) == -1) {
 							update = true;
 						}
 					} else {
@@ -636,6 +661,8 @@ public class Utils {
 				e1.getMessage();
 			}
 
+			System.out.println("Update project versions");
+
 			// Add all projects to version
 			for (String p : projectsToVersioned) {
 				if (!listeProjet.contains(p))
@@ -677,7 +704,10 @@ public class Utils {
 			for (String pom : listeProjetPoms) {
 				String valeurf = pom;
 				String[] tab = valeurf.split("/" + SourceSVNName + "/");
-				System.out.println("\t- " + tab[1] + ": " + getVersionNumberPom(pom));
+				String moduleId = tab[1];
+				String versionNumberPom = getVersionNumberPom(pom);
+				System.out.println("\t- " + moduleId + ": " + versionNumberPom);
+				updatedPoms.put(moduleId, versionNumberPom);
 			}
 
 			if (listePlugin.indexOf("com.bluexml.side.Util.dependencies") == -1) {
@@ -747,7 +777,10 @@ public class Utils {
 			for (String pom : listePomsModuleDepencies) {
 				String valeurf = pom;
 				String[] tab = valeurf.split("/" + SourceSVNName + "/");
-				System.out.println("\t- " + tab[1] + ": " + getVersionNumberPom(pom));
+				String moduleId = tab[1];
+				String versionNumberPom = getVersionNumberPom(pom);
+				System.out.println("\t- " + moduleId + ": " + versionNumberPom);
+				updatedPoms.put(moduleId, versionNumberPom);
 			}
 		}
 
@@ -846,7 +879,10 @@ public class Utils {
 				for (String pom : listePomsModuleDepencies1) {
 					String valeurf = pom;
 					String[] tab = valeurf.split("/" + SourceSVNName + "/");
-					System.out.println("\t- " + tab[1] + ": " + getVersionNumberPom(pom));
+					String moduleId = tab[1];
+					String versionNumberPom = getVersionNumberPom(pom);
+					System.out.println("\t- " + moduleId + ": " + versionNumberPom);
+					updatedPoms.put(moduleId, versionNumberPom);
 				}
 			}
 
@@ -908,29 +944,36 @@ public class Utils {
 			System.out.println("\nListe des plugins modifiés: ");
 			// On parcours la liste des plugins et on les met a jour
 			for (String plugin : listePlugin) {
-				System.out.println("\t- " + plugin + ": " + getVersionNumber(plugin));
+				String versionNumber = getVersionNumber(plugin);
+				System.out.println("\t- " + plugin + ": " + versionNumber);
+				updatedPlugins.put(plugin, versionNumber);
 			}
 		}
 
 		if (listeFeatureModif.size() != 0) {
 			System.out.println("\nListe des features modifiées: ");
 			for (String feature : listeFeatureModif) {
-				System.out.println("\t- " + feature + ": " + getVersionNumber(feature));
+				String versionNumber = getVersionNumber(feature);
+				System.out.println("\t- " + feature + ": " + versionNumber);
+				updatedFeatures.put(feature, versionNumber);
 			}
 		}
 
 		// fin affichage
 
 		// copyToRepository();
+
+		// log updated projects
+//		try {
+//			serializeUpdatedProjects();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
 	}
 
 	public static void updateProduct() {
-		// update side.product
-		// mise é jour du fichier side.product (utilisé pour la creation des
-		// RCP)
-		// String repo = Utils.getRepositoryCopyPath();
-		// File product = new File(repo +
-		// "/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product");
 		String brandingPath = "";
 		if (SourceSVNName.equals(Application.SIDE_Enterprise)) {
 			brandingPath = Utils.getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding.enterprise");
@@ -984,7 +1027,7 @@ public class Utils {
 	 * Copy the repository
 	 */
 	public static void copyFromRepository() {
-
+		System.out.println("Utils.copyFromRepository() start");
 		String from = "";
 		if (Application.parametre) {
 			from = Application.workspace;
@@ -1000,12 +1043,12 @@ public class Utils {
 			}
 
 			new File(getBuildPath() + File.separator + repositoryCopy).mkdir();
-
+			System.out.println("From " + from + " to " + to);
 			FileHelper.copyFiles(new File(from), new File(to), true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("Utils.copyFromRepository() stop");
 	}
 
 	public static void copyToRepository() {
@@ -1498,17 +1541,22 @@ public class Utils {
 				List<?> listIncludedFeatures = racine.getChildren("includes");
 
 				i = listIncludedFeatures.iterator();
+				System.out.println("Utils.updateVersionNumber() current feature " + projectName);
 				while (i.hasNext()) {
 					Element currentNode = (Element) i.next();
 					oldVersionNumber = currentNode.getAttributeValue("version");
-
+					String inculdedFeatureId = currentNode.getAttributeValue("id");
+					System.out.println("scan included feature :" + inculdedFeatureId + " : " + oldVersionNumber);
 					// check version of features
-					if (!oldVersionNumber.equals(getVersionNumber(currentNode.getAttributeValue("id")))) {
+
+					String newVersionNumber = getVersionNumber(inculdedFeatureId);
+					if (!oldVersionNumber.equals(newVersionNumber)) {
 						// modify the included features
-						currentNode.setAttribute("version", getVersionNumber(currentNode.getAttributeValue("id")));
+						currentNode.setAttribute("version", newVersionNumber);
 
 						// feature is modified
 						featureAModifier = true;
+						System.out.println("update included feature version from " + oldVersionNumber + " to " + newVersionNumber);
 					}
 				}
 
@@ -1524,9 +1572,9 @@ public class Utils {
 						}
 						racine.setAttribute("version", update(number, pattern));
 					}
-				} else
+				} else {
 					racine.setAttribute("version", update(number, getForceNumberVersion().split("\\.")));
-
+				}
 				// Enregistrement du fichier
 				try {
 					XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
@@ -2289,4 +2337,49 @@ public class Utils {
 		doc = builder.build(xmlFile);
 		return doc;
 	}
+
+//	private static void serializeUpdatedProjects() throws Exception {
+//		System.out.println("Utils.serializeUpdatedProjects() start");
+//		String path = getPathToLog();
+//
+//		serializeMap(updatedPoms, new File(path + ".updatedPoms.properties"));
+//		serializeMap(updatedPlugins, new File(path + ".updatedPlugins.properties"));
+//		serializeMap(updatedFeatures, new File(path + ".updatedFeatures.properties"));
+//		System.out.println("Utils.serializeUpdatedProjects() end");
+//	}
+//
+//	private static void serializeMap(Map<String, String> map, File f) throws Exception {
+//		Properties prop = new Properties();
+//		if (f.exists()) {
+//			System.out.println("Utils.serializeMap() delete " + f);
+//			f.delete();
+//		}
+//		System.out.println("Utils.serializeMap() create");
+//		f.getParentFile().mkdirs();
+//		f.createNewFile();
+//		System.out.println("Utils.serializeMap() reccord " + map);
+//		for (Map.Entry<String, String> ent : map.entrySet()) {
+//			prop.setProperty(ent.getKey(), ent.getValue());
+//		}
+//		prop.store(new FileOutputStream(f), "");
+//
+//	}
+//
+//	private static void checkCoreFeatures() {
+//		if (SourceSVNName.equals(Application.SIDE_Enterprise)) {
+//			// must check for updated Core features (done by SIDE Community
+//			// builder)
+//			File lastCommunityBuild = new File(buildProperties.getProperty("communityLastBuildPath"));
+//			File updatedCoreFeatures = new File(lastCommunityBuild, "log.updatedFeatures.properties");
+//			Properties features = openProperties(updatedCoreFeatures.getAbsolutePath());
+//			Set<Object> keys = features.keySet();
+//			for (Object object : keys) {
+//				String featureId = (String) object;
+//				String newVersion = features.getProperty(featureId);
+//				// search for features that includes this one
+//				List<String> projects = getProjects("project.enterprise");
+//
+//			}
+//		}
+//	}
 }

@@ -18,6 +18,7 @@ import com.bluexml.side.integration.buildHudson.utils.FileHelper;
 import com.bluexml.side.integration.buildHudson.utils.Utils;
 
 public class Application {
+	public static final String buildStartLine = "****************************************";
 	public static final String SIDE_Core = "S-IDE";
 	public static final String SIDE_Enterprise = "S-IDE_Enterprise";
 
@@ -26,7 +27,6 @@ public class Application {
 	public static String build_id = "";
 	public static String svn_revision = "";
 	public static String rcp = "";
-	
 
 	public static List<String> projectsExcluded;
 
@@ -51,7 +51,7 @@ public class Application {
 		String argument4 = "";
 		String argument5 = "";
 		String argument6 = "";
-		System.out.println("****************************************");
+		System.out.println(buildStartLine);
 		System.out.println("**** Lancement du Build Automatique ****");
 		System.out.println("****************************************");
 
@@ -138,7 +138,7 @@ public class Application {
 			// execBuildAnt("build","prepare-compile",workspace+"/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
 
 			// create maven work folder and launch maven deploy
-			launchShScript("launch_maven.sh");
+			// launchShScript("launch_maven.sh");
 
 			if (parametre) {
 				// copie du répository dans le repertoire de travail (en
@@ -208,10 +208,10 @@ public class Application {
 			execBuildAnt("build", "prepare-compile", workspace + "/../buildAuto/Ankle/repositoryCopy/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.generator.xforms.chiba");
 
 			// create maven work folder and launch maven deploy
-			launchShScript("launch_maven.sh");
+			// launchShScript("launch_maven.sh");
 
 			// launch script to build repository zip file
-			launchShScript("build_repository_SIDE.sh");
+			// launchShScript("build_repository_SIDE.sh");
 
 			if (parametre) {
 				// copie du répository dans le repertoire de travail (en
