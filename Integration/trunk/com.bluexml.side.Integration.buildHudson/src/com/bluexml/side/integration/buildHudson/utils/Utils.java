@@ -32,7 +32,6 @@ import com.bluexml.side.integration.buildHudson.Application;
 
 public class Utils {
 
-	
 	private static ArrayList<String> listeFeatureModif = new ArrayList<String>();
 	private static String revisionNumber;
 	public static ArrayList<String> listefichierpom = new ArrayList<String>();
@@ -964,12 +963,12 @@ public class Utils {
 		// copyToRepository();
 
 		// log updated projects
-//		try {
-//			serializeUpdatedProjects();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// try {
+		// serializeUpdatedProjects();
+		// } catch (Exception e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 
 	}
 
@@ -2273,36 +2272,48 @@ public class Utils {
 
 				// search in repos this feature
 
-				File features = new File(plugin_featureRepo, "features");
-				for (File featureDir : features.listFiles()) {
-					if (featureDir.isDirectory()) {
-						// get feature.xml
-						File featureFile = new File(featureDir, "feature.xml");
-						Document featureDoc = buildJdomDocument(featureFile);
-						Element featureEl = featureDoc.getRootElement();
-						String id_ = null;
-						String version_ = "";
-						Attribute att_ = featureEl.getAttribute("id");
-						if (att_ != null) {
-							id_ = att_.getValue();
-						}
-						att_ = featureEl.getAttribute("version");
-						if (att_ != null) {
-							version_ = att_.getValue();
-						}
+				String projectPath = getPathToLocalCopy(id);
+				File featureFile = new File(projectPath + File.separator + "feature.xml");
+				Document featureDoc = buildJdomDocument(featureFile);
+				Element featureEl = featureDoc.getRootElement();
+				String id_ = null;
+				String version_ = "";
+				Attribute att_ = featureEl.getAttribute("id");
+				if (att_ != null) {
+					id_ = att_.getValue();
+				}
+				att_ = featureEl.getAttribute("version");
+				if (att_ != null) {
+					version_ = att_.getValue();
+				}
 
-						if (id_.equals(id)) {
-							// feature found in repository
-							if (!version_.equals(version)) {
-								// update feature version in .product
-								attVersion.setValue(version_);
-								changes = true;
-							}
-						}
+				if (id_.equals(id)) {
+					// feature found in repository
+					if (!version_.equals(version)) {
+						// update feature version in .product
+						attVersion.setValue(version_);
+						changes = true;
 					}
 				}
-			}
 
+				/*
+				 * File features = new File(plugin_featureRepo, "features"); for
+				 * (File featureDir : features.listFiles()) { if
+				 * (featureDir.isDirectory()) { // get feature.xml File
+				 * featureFile = new File(featureDir, "feature.xml"); Document
+				 * featureDoc = buildJdomDocument(featureFile); Element
+				 * featureEl = featureDoc.getRootElement(); String id_ = null;
+				 * String version_ = ""; Attribute att_ =
+				 * featureEl.getAttribute("id"); if (att_ != null) { id_ =
+				 * att_.getValue(); } att_ = featureEl.getAttribute("version");
+				 * if (att_ != null) { version_ = att_.getValue(); }
+				 * 
+				 * if (id_.equals(id)) { // feature found in repository if
+				 * (!version_.equals(version)) { // update feature version in
+				 * .product attVersion.setValue(version_); changes = true; } } }
+				 * }
+				 */
+			}
 			if (changes) {
 				Attribute version = productDoc.getRootElement().getAttribute("version");
 				String oldVersion = version.getValue();
@@ -2338,48 +2349,54 @@ public class Utils {
 		return doc;
 	}
 
-//	private static void serializeUpdatedProjects() throws Exception {
-//		System.out.println("Utils.serializeUpdatedProjects() start");
-//		String path = getPathToLog();
-//
-//		serializeMap(updatedPoms, new File(path + ".updatedPoms.properties"));
-//		serializeMap(updatedPlugins, new File(path + ".updatedPlugins.properties"));
-//		serializeMap(updatedFeatures, new File(path + ".updatedFeatures.properties"));
-//		System.out.println("Utils.serializeUpdatedProjects() end");
-//	}
-//
-//	private static void serializeMap(Map<String, String> map, File f) throws Exception {
-//		Properties prop = new Properties();
-//		if (f.exists()) {
-//			System.out.println("Utils.serializeMap() delete " + f);
-//			f.delete();
-//		}
-//		System.out.println("Utils.serializeMap() create");
-//		f.getParentFile().mkdirs();
-//		f.createNewFile();
-//		System.out.println("Utils.serializeMap() reccord " + map);
-//		for (Map.Entry<String, String> ent : map.entrySet()) {
-//			prop.setProperty(ent.getKey(), ent.getValue());
-//		}
-//		prop.store(new FileOutputStream(f), "");
-//
-//	}
-//
-//	private static void checkCoreFeatures() {
-//		if (SourceSVNName.equals(Application.SIDE_Enterprise)) {
-//			// must check for updated Core features (done by SIDE Community
-//			// builder)
-//			File lastCommunityBuild = new File(buildProperties.getProperty("communityLastBuildPath"));
-//			File updatedCoreFeatures = new File(lastCommunityBuild, "log.updatedFeatures.properties");
-//			Properties features = openProperties(updatedCoreFeatures.getAbsolutePath());
-//			Set<Object> keys = features.keySet();
-//			for (Object object : keys) {
-//				String featureId = (String) object;
-//				String newVersion = features.getProperty(featureId);
-//				// search for features that includes this one
-//				List<String> projects = getProjects("project.enterprise");
-//
-//			}
-//		}
-//	}
+	// private static void serializeUpdatedProjects() throws Exception {
+	// System.out.println("Utils.serializeUpdatedProjects() start");
+	// String path = getPathToLog();
+	//
+	// serializeMap(updatedPoms, new File(path + ".updatedPoms.properties"));
+	// serializeMap(updatedPlugins, new File(path +
+	// ".updatedPlugins.properties"));
+	// serializeMap(updatedFeatures, new File(path +
+	// ".updatedFeatures.properties"));
+	// System.out.println("Utils.serializeUpdatedProjects() end");
+	// }
+	//
+	// private static void serializeMap(Map<String, String> map, File f) throws
+	// Exception {
+	// Properties prop = new Properties();
+	// if (f.exists()) {
+	// System.out.println("Utils.serializeMap() delete " + f);
+	// f.delete();
+	// }
+	// System.out.println("Utils.serializeMap() create");
+	// f.getParentFile().mkdirs();
+	// f.createNewFile();
+	// System.out.println("Utils.serializeMap() reccord " + map);
+	// for (Map.Entry<String, String> ent : map.entrySet()) {
+	// prop.setProperty(ent.getKey(), ent.getValue());
+	// }
+	// prop.store(new FileOutputStream(f), "");
+	//
+	// }
+	//
+	// private static void checkCoreFeatures() {
+	// if (SourceSVNName.equals(Application.SIDE_Enterprise)) {
+	// // must check for updated Core features (done by SIDE Community
+	// // builder)
+	// File lastCommunityBuild = new
+	// File(buildProperties.getProperty("communityLastBuildPath"));
+	// File updatedCoreFeatures = new File(lastCommunityBuild,
+	// "log.updatedFeatures.properties");
+	// Properties features =
+	// openProperties(updatedCoreFeatures.getAbsolutePath());
+	// Set<Object> keys = features.keySet();
+	// for (Object object : keys) {
+	// String featureId = (String) object;
+	// String newVersion = features.getProperty(featureId);
+	// // search for features that includes this one
+	// List<String> projects = getProjects("project.enterprise");
+	//
+	// }
+	// }
+	// }
 }
