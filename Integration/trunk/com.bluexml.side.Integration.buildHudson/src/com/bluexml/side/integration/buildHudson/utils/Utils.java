@@ -2301,7 +2301,7 @@ public class Utils {
 						}
 					}
 				} else {
-					System.out.println("[-] project not found my be platform provided :"+id);
+					System.out.println("[-] the project could not be found, maybe it's provided by platform :"+id);
 				}
 
 				/*
