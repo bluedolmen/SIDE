@@ -103,9 +103,9 @@ public class Application {
 		String pathprojectSVN = Utils.getRepositoryCopyPath();
 
 		if (pathprojectSVN.contains("Build_RCP_Enterprise")) {
-			Utils.SourceSVNName = SIDE_Enterprise;
+			Utils.setSourceSVNName(SIDE_Enterprise);
 		} else {
-			Utils.SourceSVNName = SIDE_Core;
+			Utils.setSourceSVNName(SIDE_Core);
 		}
 
 		if (rcp.equals("yes")) {
@@ -116,7 +116,7 @@ public class Application {
 			// projectsExcluded = Utils.getProjects("projectLabsExcluded");
 			// }
 
-			System.out.println("\nLancé le " + Utils.getDate2() + " é " + Utils.getTime());
+			System.out.println("\nLancé le " + Utils.getDate2() + " à " + Utils.getTime());
 
 			// création du buildSVN.xml
 			System.out.println("\n- Création de " + Utils.getBuildPath() + File.separator + "buildSVN.xml");
@@ -293,7 +293,7 @@ public class Application {
 
 		try {
 
-			String SIDE_path = Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
+			String SIDE_path = Utils.getBuildPath() + File.separator + Utils.getRepositoryCopy();
 			System.out.println("." + Utils.getBuildPath() + File.separator + script + " " + workspace + " " + SIDE_path);
 
 			p = r.exec(Utils.getBuildPath() + File.separator + script + " " + workspace + " " + SIDE_path);
@@ -795,17 +795,17 @@ public class Application {
 		}
 
 		// fichier pom.xml
-		Utils.listefichierpom = new ArrayList();
+		
 		// String pathproject = Utils.getBuildPath() + File.separator +
 		// Utils.repositoryCopy;
-		String pathproject = workspace + "/" + Utils.SourceSVNName;
+		String pathproject = workspace + "/" + Utils.getSourceSVNName();
 
 		Utils.findFile(new File(pathproject + "/Integration/trunk"), "pom.xml");
 		Utils.findFile(new File(pathproject + "/FrameworksModules/trunk"), "pom.xml");
-		System.out.println("#### Utils.listefichierpom.size()=" + Utils.listefichierpom.size());
-		System.out.println("#### Utils.listefichierpom=" + Utils.listefichierpom);
-		if (Utils.listefichierpom.size() != 0) {
-			for (String pom : Utils.listefichierpom) {
+		System.out.println("#### Utils.listefichierpom.size()=" + Utils.getListefichierpom().size());
+		System.out.println("#### Utils.listefichierpom=" + Utils.getListefichierpom());
+		if (Utils.getListefichierpom().size() != 0) {
+			for (String pom : Utils.getListefichierpom()) {
 				String[] tab = pom.split("/pom.xml");
 
 				out += "\t\t\t<fileset dir=\"" + tab[0] + "\">\n";

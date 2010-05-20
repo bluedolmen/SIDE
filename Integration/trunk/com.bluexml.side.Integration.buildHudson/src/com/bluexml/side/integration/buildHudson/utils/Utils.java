@@ -34,16 +34,29 @@ public class Utils {
 
 	private static ArrayList<String> listeFeatureModif = new ArrayList<String>();
 	private static String revisionNumber;
-	public static ArrayList<String> listefichierpom = new ArrayList<String>();
-	public static String repositoryCopy = "repositoryCopy";
-	public static String SourceSVNName = "";
-	public static Properties buildProperties = new Properties();
+	private static ArrayList<String> listefichierpom = new ArrayList<String>();
 
-	public static Map<String, String> updatedPlugins = new HashMap<String, String>();
-	public static Map<String, String> updatedFeatures = new HashMap<String, String>();
-	public static Map<String, String> updatedPoms = new HashMap<String, String>();
+	public static ArrayList<String> getListefichierpom() {
+		return listefichierpom;
+	}
 
-	public static Properties getBuildProperties() {
+	private static String repositoryCopy = "repositoryCopy";
+	private static String SourceSVNName = "";
+	private static Properties buildProperties = new Properties();
+
+	public static String getSourceSVNName() {
+		return SourceSVNName;
+	}
+
+	public static void setSourceSVNName(String sourceSVNName) {
+		SourceSVNName = sourceSVNName;
+	}
+
+	private static Map<String, String> updatedPlugins = new HashMap<String, String>();
+	private static Map<String, String> updatedFeatures = new HashMap<String, String>();
+	private static Map<String, String> updatedPoms = new HashMap<String, String>();
+
+	private static Properties getBuildProperties() {
 		return buildProperties;
 	}
 
@@ -95,7 +108,7 @@ public class Utils {
 	 */
 	public static List<String> getProjects() {
 		List<String> projects = getProjects("project");
-		projects.addAll(getProjects("project.enterprise"));
+//		projects.addAll(getProjects("project.enterprise"));
 		return projects;
 	}
 
@@ -127,25 +140,6 @@ public class Utils {
 	 */
 	public static List<String> getVersionedProjects() {
 		return getProjects("projectToVersioned");
-	}
-
-	/**
-	 * Retourne le chemin pour un projet donné (par exemple
-	 * MetaModel/Application pour le projet com.bluexml.side.Application
-	 * 
-	 * @param projectName
-	 * @return
-	 */
-	public static String getVersionedProjectPath(String projectName) {
-		String[] projects = getBuildProperties().getProperty("projectToVersioned").split(",");
-
-		String path = "";
-		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].split("&")[1].equals(projectName)) {
-				path = projects[i].split("&")[0];
-			}
-		}
-		return path;
 	}
 
 	/**
@@ -246,21 +240,6 @@ public class Utils {
 	}
 
 	/**
-	 * Retourne le chemin du eclipse: /home/stager/buildAuto/eclipse
-	 */
-	public static String getEclipseHome() {
-
-		return getBuildProperties().getProperty("eclipseLocation");
-	}
-
-	/**
-	 * Retourne la version du launcher : 1.0.101.R34x_v20081125.jar
-	 */
-	public static String getLauncherVersion() {
-		return "org.eclipse.equinox.launcher_" + getBuildProperties().getProperty("equinoxLauncherPluginVersion") + ".jar";
-	}
-
-	/**
 	 * return the final directory: /home/stager/share/SIDE
 	 */
 	public static String getFinalDirectory() {
@@ -285,57 +264,42 @@ public class Utils {
 	 * Return the Version Number to force the change of each number version
 	 * (void for no change)
 	 */
-	public static String getForceNumberVersion() {
+	private static String getForceNumberVersion() {
 		return getBuildProperties().getProperty("forceNumberVersion");
 	}
 
 	/**
-	 * Return the equinox launcher directory version:
-	 * gtk.linux.x86_1.0.101.R34x_v20080805
-	 */
-	public static String getEquinoxLauncherDirectoryVersion() {
-		return getBuildProperties().getProperty("equinoxLauncherDirectoryVersion");
-	}
-
-	/**
-	 * Return the new category for the site.xml : Other
-	 */
-	public static String getNewCategory() {
-		return getBuildProperties().getProperty("newCategory");
-	}
-
-	/**
-	 * Return the path to the Public Update site: /home/stager/share/SIDE-Final
+	 * Return the path to the private Update site: /home/stager/share/SIDE-Final
 	 */
 	public static String getPublicUpdateSiteDirectory() {
-		return getBuildProperties().getProperty("publicUpdateSiteDirectory");
+		return getBuildProperties().getProperty("privateUpdateSiteDirectory");
 	}
 
 	/**
 	 * Return the license URL: http://url.to.license.com
 	 */
-	public static String getlicenseURL() {
+	private static String getlicenseURL() {
 		return getBuildProperties().getProperty("licenseURL");
 	}
 
 	/**
 	 * Return the license text file: /home/stager/buildAuto/license.txt
 	 */
-	public static String getLicenseText() {
+	private static String getLicenseText() {
 		return loadFile(new File(getBuildProperties().getProperty("licensePath")));
 	}
 
 	/**
 	 * Return the copyright URL: http://url.to.copyright.com
 	 */
-	public static String getCopyrightURL() {
+	private static String getCopyrightURL() {
 		return getBuildProperties().getProperty("copyrightURL");
 	}
 
 	/**
 	 * Return the copyright text file: /home/stager/buildAuto/copyright.txt
 	 */
-	public static String getCopyrightText() {
+	private static String getCopyrightText() {
 		return loadFile(new File(getBuildProperties().getProperty("copyrightPath")));
 	}
 
@@ -343,7 +307,7 @@ public class Utils {
 	 * Retourne le numéro de version en fonction de l'utilisation de hudson ou
 	 * non
 	 */
-	public static String getRevisionNumber() {
+	private static String getRevisionNumber() {
 		String number = "";
 		if (Application.parametre) {
 			number = Application.svn_revision;
@@ -401,7 +365,7 @@ public class Utils {
 	 *            le nom du projet
 	 * @return le numéro de version pour un projet donné
 	 */
-	public static String getVersionNumberPom(String projectName) {
+	private static String getVersionNumberPom(String projectName) {
 
 		// En fonction du type du projet (feature ou plugin)
 		// on ira regarder soit dans le MANIFEST ou alors dans le feature.xml
@@ -501,7 +465,7 @@ public class Utils {
 	/**
 	 * Return the path to the svn log (with or without hudson)
 	 */
-	public static String getPathToLog() {
+	private static String getPathToLog() {
 		String path = "";
 
 		// Si on utilise Hudson
@@ -512,7 +476,7 @@ public class Utils {
 			// fin, on va donc le supprimer du chemin et ajouter 'builds' a la
 			// place et le numéro de build
 			path = Application.workspace.substring(0, Application.workspace.length() - "workspace".length());
-			path = path + "builds" + File.separator + Application.build_number + File.separator + "log";
+			path = path + "builds" + File.separator + Application.build_number + File.separator + "svnUpdate.log";
 
 		} else {
 
@@ -992,7 +956,7 @@ public class Utils {
 	}
 
 	public static String getRepositoryCopyPath() {
-		String pathproject = getBuildPath() + File.separator + repositoryCopy;
+		String pathproject = getBuildPath() + File.separator + getRepositoryCopy();
 		return pathproject;
 	}
 
@@ -1002,8 +966,8 @@ public class Utils {
 	 */
 	public static String getPathToLocalCopy(String projectName) {
 		String path = "";
-		if (new File(getBuildPath() + File.separator + repositoryCopy).exists()) {
-			path = getBuildPath() + File.separator + repositoryCopy;
+		if (new File(getBuildPath() + File.separator + getRepositoryCopy()).exists()) {
+			path = getBuildPath() + File.separator + getRepositoryCopy();
 		} else {
 			if (Application.parametre) {
 				path = Application.workspace;
@@ -1027,7 +991,7 @@ public class Utils {
 	/**
 	 * Copy the repository
 	 */
-	public static void copyFromRepository() {
+	private static void copyFromRepository() {
 		System.out.println("Utils.copyFromRepository() start");
 		String from = "";
 		if (Application.parametre) {
@@ -1043,7 +1007,7 @@ public class Utils {
 				FileHelper.deleteFile(new File(to));
 			}
 
-			new File(getBuildPath() + File.separator + repositoryCopy).mkdir();
+			new File(getBuildPath() + File.separator + getRepositoryCopy()).mkdir();
 			System.out.println("From " + from + " to " + to);
 			FileHelper.copyFiles(new File(from), new File(to), true);
 		} catch (IOException e) {
@@ -1079,7 +1043,7 @@ public class Utils {
 	 * 
 	 * @param projectName
 	 */
-	public static boolean updatePomModuleDependencies(String element, String module, String version) {
+	private static boolean updatePomModuleDependencies(String element, String module, String version) {
 
 		boolean modifie = false;
 
@@ -1209,7 +1173,7 @@ public class Utils {
 	 * 
 	 * @param projectName
 	 */
-	public static boolean updatePluginModuleDependencies(String element, String module, String version) {
+	private static boolean updatePluginModuleDependencies(String element, String module, String version) {
 
 		boolean modifie = false;
 		// chemin vers le plugin.xml
@@ -1413,7 +1377,7 @@ public class Utils {
 	 * 
 	 * @param projectName
 	 */
-	public static void updateVersionNumber(String projectName) {
+	private static void updateVersionNumber(String projectName) {
 
 		if (projectName.length() > 0) {
 			String[] pattern = getNumVersionPattern();
@@ -1596,7 +1560,7 @@ public class Utils {
 	 * 
 	 * @param projectName
 	 */
-	public static void updateVersionNumberPom(String projectName) {
+	private static void updateVersionNumberPom(String projectName) {
 
 		String[] pattern = getNumVersionPattern();
 
@@ -1678,7 +1642,7 @@ public class Utils {
 	 *            un tableau avec les 3 éléments du pattern
 	 * @return Le numéro de version sous la forme 1.0.12
 	 */
-	public static String update(String[] number, String[] pattern) {
+	private static String update(String[] number, String[] pattern) {
 
 		boolean change = false;
 
@@ -1711,7 +1675,7 @@ public class Utils {
 	 *            un tableau avec les 3 éléments du pattern
 	 * @return Le numéro de version sous la forme 1.0.12
 	 */
-	public static String updatepom(String[] number, String[] pattern) {
+	private static String updatepom(String[] number, String[] pattern) {
 
 		boolean change = false;
 
@@ -2022,7 +1986,7 @@ public class Utils {
 	 * 
 	 * @param featureName
 	 */
-	public static void updateCopyrightLicence(String featureName, String path) {
+	private static void updateCopyrightLicence(String featureName, String path) {
 
 		// String[] tmp = featureName.split("\\.");
 
@@ -2113,7 +2077,7 @@ public class Utils {
 	 * 
 	 * @param featureName
 	 */
-	public static void updateCopyrightLicence(String featureName) {
+	private static void updateCopyrightLicence(String featureName) {
 
 		String[] tmp = featureName.split("\\.");
 
@@ -2203,7 +2167,7 @@ public class Utils {
 	 *            Le fichier a retourner
 	 * @return Le contenu du fichier
 	 */
-	public static String loadFile(File f) {
+	private static String loadFile(File f) {
 		StringWriter out = null;
 		try {
 			BufferedInputStream in = new BufferedInputStream(new FileInputStream(f));
@@ -2226,7 +2190,7 @@ public class Utils {
 	 * 
 	 * @return the current Date
 	 */
-	public static String getDate() {
+	private static String getDate() {
 		return new SimpleDateFormat("yyyyMMdd").format(new Date());
 	}
 
@@ -2248,7 +2212,7 @@ public class Utils {
 		return new SimpleDateFormat("HH:mm:ss").format(new Date());
 	}
 
-	public static boolean updateProduct(File product, File plugin_featureRepo) {
+	static boolean updateProduct(File product, File plugin_featureRepo) {
 		System.out.println("  Product to update :" + product);
 		System.out.println("  Pluginq/Features Repository :" + plugin_featureRepo);
 
@@ -2273,12 +2237,12 @@ public class Utils {
 				}
 
 				// search in repos this feature
-				System.out.println("Utils.updateProduct() search included feature "+id);
+				System.out.println("Utils.updateProduct() search included feature " + id);
 				if (getProjects().contains(id)) {
 					String projectPath = getPathToLocalCopy(id);
 
 					File featureFile = new File(projectPath + File.separator + "feature.xml");
-					
+
 					Document featureDoc = buildJdomDocument(featureFile);
 					Element featureEl = featureDoc.getRootElement();
 					String id_ = null;
@@ -2291,7 +2255,7 @@ public class Utils {
 					if (att_ != null) {
 						version_ = att_.getValue();
 					}
-					System.out.println("\t oldVersion "+version+" newVersion "+version_);
+					System.out.println("\t oldVersion " + version + " newVersion " + version_);
 					if (id_.equals(id)) {
 						// feature found in repository
 						if (!version_.equals(version)) {
@@ -2301,26 +2265,9 @@ public class Utils {
 						}
 					}
 				} else {
-					System.out.println("[-] the project could not be found, maybe it's provided by platform :"+id);
+					System.out.println("[-] the project could not be found, maybe it's provided by platform :" + id);
 				}
 
-				/*
-				 * File features = new File(plugin_featureRepo, "features"); for
-				 * (File featureDir : features.listFiles()) { if
-				 * (featureDir.isDirectory()) { // get feature.xml File
-				 * featureFile = new File(featureDir, "feature.xml"); Document
-				 * featureDoc = buildJdomDocument(featureFile); Element
-				 * featureEl = featureDoc.getRootElement(); String id_ = null;
-				 * String version_ = ""; Attribute att_ =
-				 * featureEl.getAttribute("id"); if (att_ != null) { id_ =
-				 * att_.getValue(); } att_ = featureEl.getAttribute("version");
-				 * if (att_ != null) { version_ = att_.getValue(); }
-				 * 
-				 * if (id_.equals(id)) { // feature found in repository if
-				 * (!version_.equals(version)) { // update feature version in
-				 * .product attVersion.setValue(version_); changes = true; } } }
-				 * }
-				 */
 			}
 			if (changes) {
 				Attribute version = productDoc.getRootElement().getAttribute("version");
@@ -2341,7 +2288,7 @@ public class Utils {
 		return changes;
 	}
 
-	public static void saveXMLFile(File xml, Document dom) throws FileNotFoundException, IOException {
+	private static void saveXMLFile(File xml, Document dom) throws FileNotFoundException, IOException {
 		org.jdom.output.XMLOutputter out = new XMLOutputter();
 		Format format = Format.getPrettyFormat();
 		out.setFormat(format);
@@ -2350,61 +2297,19 @@ public class Utils {
 		outStream.close();
 	}
 
-	public static Document buildJdomDocument(File xmlFile) throws Exception {
+	private static Document buildJdomDocument(File xmlFile) throws Exception {
 		Document doc;
 		org.jdom.input.SAXBuilder builder = new SAXBuilder();
 		doc = builder.build(xmlFile);
 		return doc;
 	}
 
-	// private static void serializeUpdatedProjects() throws Exception {
-	// System.out.println("Utils.serializeUpdatedProjects() start");
-	// String path = getPathToLog();
-	//
-	// serializeMap(updatedPoms, new File(path + ".updatedPoms.properties"));
-	// serializeMap(updatedPlugins, new File(path +
-	// ".updatedPlugins.properties"));
-	// serializeMap(updatedFeatures, new File(path +
-	// ".updatedFeatures.properties"));
-	// System.out.println("Utils.serializeUpdatedProjects() end");
-	// }
-	//
-	// private static void serializeMap(Map<String, String> map, File f) throws
-	// Exception {
-	// Properties prop = new Properties();
-	// if (f.exists()) {
-	// System.out.println("Utils.serializeMap() delete " + f);
-	// f.delete();
-	// }
-	// System.out.println("Utils.serializeMap() create");
-	// f.getParentFile().mkdirs();
-	// f.createNewFile();
-	// System.out.println("Utils.serializeMap() reccord " + map);
-	// for (Map.Entry<String, String> ent : map.entrySet()) {
-	// prop.setProperty(ent.getKey(), ent.getValue());
-	// }
-	// prop.store(new FileOutputStream(f), "");
-	//
-	// }
-	//
-	// private static void checkCoreFeatures() {
-	// if (SourceSVNName.equals(Application.SIDE_Enterprise)) {
-	// // must check for updated Core features (done by SIDE Community
-	// // builder)
-	// File lastCommunityBuild = new
-	// File(buildProperties.getProperty("communityLastBuildPath"));
-	// File updatedCoreFeatures = new File(lastCommunityBuild,
-	// "log.updatedFeatures.properties");
-	// Properties features =
-	// openProperties(updatedCoreFeatures.getAbsolutePath());
-	// Set<Object> keys = features.keySet();
-	// for (Object object : keys) {
-	// String featureId = (String) object;
-	// String newVersion = features.getProperty(featureId);
-	// // search for features that includes this one
-	// List<String> projects = getProjects("project.enterprise");
-	//
-	// }
-	// }
-	// }
+	public static void setRepositoryCopy(String repositoryCopy) {
+		Utils.repositoryCopy = repositoryCopy;
+	}
+
+	public static String getRepositoryCopy() {
+		return repositoryCopy;
+	}
+
 }
