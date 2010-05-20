@@ -2300,6 +2300,8 @@ public class Utils {
 							changes = true;
 						}
 					}
+				} else {
+					System.out.println("[-] project not found my be platform provided :"+id);
 				}
 
 				/*
