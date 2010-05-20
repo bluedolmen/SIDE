@@ -108,7 +108,7 @@ public class Utils {
 	 */
 	public static List<String> getProjects() {
 		List<String> projects = getProjects("project");
-//		projects.addAll(getProjects("project.enterprise"));
+		projects.addAll(getProjects("project.enterprise"));
 		return projects;
 	}
 
