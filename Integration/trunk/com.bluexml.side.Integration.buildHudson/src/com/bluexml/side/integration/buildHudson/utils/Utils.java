@@ -94,7 +94,9 @@ public class Utils {
 	 * Retourne la liste des projets
 	 */
 	public static List<String> getProjects() {
-		return getProjects("project");
+		List<String> projects = getProjects("project");
+		projects.addAll(getProjects("project.enterprise"));
+		return projects;
 	}
 
 	/**
@@ -2271,28 +2273,32 @@ public class Utils {
 				}
 
 				// search in repos this feature
+				System.out.println("Utils.updateProduct() search included feature "+id);
+				if (getProjects().contains(id)) {
+					String projectPath = getPathToLocalCopy(id);
 
-				String projectPath = getPathToLocalCopy(id);
-				File featureFile = new File(projectPath + File.separator + "feature.xml");
-				Document featureDoc = buildJdomDocument(featureFile);
-				Element featureEl = featureDoc.getRootElement();
-				String id_ = null;
-				String version_ = "";
-				Attribute att_ = featureEl.getAttribute("id");
-				if (att_ != null) {
-					id_ = att_.getValue();
-				}
-				att_ = featureEl.getAttribute("version");
-				if (att_ != null) {
-					version_ = att_.getValue();
-				}
-
-				if (id_.equals(id)) {
-					// feature found in repository
-					if (!version_.equals(version)) {
-						// update feature version in .product
-						attVersion.setValue(version_);
-						changes = true;
+					File featureFile = new File(projectPath + File.separator + "feature.xml");
+					
+					Document featureDoc = buildJdomDocument(featureFile);
+					Element featureEl = featureDoc.getRootElement();
+					String id_ = null;
+					String version_ = "";
+					Attribute att_ = featureEl.getAttribute("id");
+					if (att_ != null) {
+						id_ = att_.getValue();
+					}
+					att_ = featureEl.getAttribute("version");
+					if (att_ != null) {
+						version_ = att_.getValue();
+					}
+					System.out.println("\t oldVersion "+version+" newVersion "+version_);
+					if (id_.equals(id)) {
+						// feature found in repository
+						if (!version_.equals(version)) {
+							// update feature version in .product
+							attVersion.setValue(version_);
+							changes = true;
+						}
 					}
 				}
 
