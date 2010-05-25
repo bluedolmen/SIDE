@@ -10,7 +10,7 @@
 	<groupId>com.bluexml.side.Form</groupId>
 	<artifactId>XFormsUtils</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>BlueXML XForms Utils</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
