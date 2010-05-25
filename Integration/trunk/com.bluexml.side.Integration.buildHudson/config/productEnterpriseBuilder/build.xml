@@ -1,4 +1,4 @@
-<project default="main">
+<project default="main" name="Enterprise RCP Builder">
 	<property file="build.${user.name}.properties" />
 	<property name="buildDirectory" value="${builder}/buildDirectory" />
 	<property name="pluginPath" value="${moreplugins}${path.separator}${sideSources}${path.separator}${deltapack}" />

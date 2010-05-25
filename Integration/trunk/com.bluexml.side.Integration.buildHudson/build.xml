@@ -28,10 +28,11 @@
 	<target name="compress" description="Compression target" depends="compile">
 		<jar jarfile="Build.jar" basedir="bin">
 			<manifest>
-				<attribute name="Main-Class" value="com.bluexml.side.integration.buildHudson.Application" />
-				<attribute name="Class-Path" value="lib/ant-launcher.jar lib/jdom.jar lib/svnant.jar lib/tools.jar lib/ant.jar lib/svnClientAdapter.jar lib/svnjavahl.jar lib/jaxen-1.1.1.jar" />
+				<attribute name="Main-Class" value="com.bluexml.side.integration.buildHudson.ProjectVersionUpdater" />
+				<!--attribute name="Main-Class" value="com.bluexml.side.integration.buildHudson.Application" /-->
+				<attribute name="Class-Path" value=". lib/ant-launcher.jar lib/jdom.jar lib/svnant.jar lib/tools.jar lib/ant.jar lib/svnClientAdapter.jar lib/svnjavahl.jar lib/jaxen-1.1.1.jar lib/log4j-1.2.12.jar" />
 			</manifest>
-			<fileset dir="src"/>
+			<fileset dir="src" />
 		</jar>
 	</target>
 </project>

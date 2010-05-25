@@ -1,0 +1,561 @@
+package com.bluexml.side.integration.buildHudson.utils;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
+
+import org.jdom.Document;
+import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
+
+
+import com.bluexml.side.integration.buildHudson.ProjectVersionUpdater;
+
+public class BuilderUtils {
+	private Properties buildProperties;
+	private String workspace;
+	private String revisionNumber;
+	private String build_number;
+	private String sourceSVNName;
+
+	public BuilderUtils(Properties buildProperties, String workspace, String build_number, String revisionNumber) {
+		this.buildProperties = buildProperties;
+		this.workspace = workspace;
+		this.build_number = build_number;
+		this.revisionNumber = revisionNumber;
+
+	}
+
+	public void setSourceSVNName(String sourceSVNName) {
+		this.sourceSVNName = sourceSVNName;
+	}
+
+	public String getSourceSVNName() {
+		return sourceSVNName;
+	}
+
+	private Properties getBuildProperties() {
+		return buildProperties;
+	}
+
+	/**
+	 * Méthode qui execute lance un script sh
+	 * 
+	 * @param script
+	 *            nom du script
+	 * @throws Exception
+	 */
+	public static void launchShScript(String scriptFilePath, String baseDir, String[] args) throws Exception {
+
+		Runtime r = Runtime.getRuntime();
+		Process p;
+		BufferedReader is; // reader for output of process
+		String line;
+
+		String command = "";
+		File script = new File(scriptFilePath);
+		if (script.exists() && script.isFile()) {
+
+			command += script.getAbsolutePath();
+			command += " ";
+			for (String string : args) {
+				command += string;
+				command += " ";
+			}
+			File dir = null;
+			if (baseDir != null) {
+				dir = new File(baseDir);
+				if (!dir.exists()) {
+					throw new Exception("launchingScript baseDir not found");
+				}
+			}
+			r.exec(command, null, dir);
+			p = r.exec(command);
+
+			is = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+			while ((line = is.readLine()) != null) {
+				System.out.println(line);
+			}
+			System.out.flush();
+			try {
+				p.waitFor(); // wait for process to complete
+			} catch (InterruptedException e) {
+				System.err.println(e); // "Can'tHappen"
+			}
+			System.err.println("Process done, exit status was " + p.exitValue());
+
+			if (p.exitValue() != 0) {
+				System.exit(1);
+			}
+		} else {
+			throw new Exception("Script not found !" + script);
+		}
+
+	}
+
+	/**
+	 * Créer le fichier build.xml pour chaque projet
+	 */
+	public static void createFile(String corps, String folderName, String fileName) {
+		File file = new File(folderName + File.separator + fileName);
+		PrintWriter writer = null;
+		try {
+			System.out.println("Create File:" + file);
+			file.createNewFile();
+
+			writer = new PrintWriter(new FileWriter(file));
+			writer.println(corps);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		writer.flush();
+		writer.close();
+	}
+
+	public static String[] toArray(List<String> l) {
+		String[] array = new String[l.size()];
+		int i = 0;
+		for (String string : l) {
+			array[i] = string;
+			i++;
+		}
+		return array;
+	}
+
+	/**
+	 * Méthode qui ouvre le fichier de proprerties
+	 * 
+	 */
+	public static Properties openProperties(String fichier) {
+		String[] filePart = fichier.split("\\.");
+		String fileName = filePart[0];
+		String userName = System.getenv("USER");
+		String userPropertyFile = fileName + "." + userName + "." + filePart[1];
+
+		File props = new File(userPropertyFile);
+		if (!props.exists()) {
+			props = new File(fichier);
+		}
+		FileInputStream fileStream = null;
+		Properties properties = null;
+
+		try {
+			fileStream = new FileInputStream(props);
+
+			properties = new Properties();
+
+			properties.load(fileStream);
+			// System.out.println("Properties File loaded :" +
+			// props.getAbsolutePath());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fileStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return properties;
+	}
+
+	/**
+	 * Return the current Date
+	 * 
+	 * @return the current Date
+	 */
+	public static String getFormatedDate(Date date) {
+		return new SimpleDateFormat("dd/MM/yyyy").format(date);
+	}
+
+	/**
+	 * Return the current Time
+	 * 
+	 * @return the current Time
+	 */
+	public static String getTime(Date date) {
+		return new SimpleDateFormat("HH:mm:ss").format(date);
+	}
+
+	public String getRepositoryCopyPath() {
+		String pathproject = getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy;
+		return pathproject;
+	}
+
+	/**
+	 * return the buildDirectory: /home/stager/buildAuto/Ankle/workingCopy
+	 */
+	public String getBuildDirectory() {
+		return getBuildPath() + File.separator + getBuildProperties().getProperty("buildName");
+	}
+
+	/**
+	 * Return the Build Path: /home/stager/buildAuto/Ankle
+	 */
+	public String getBuildPath() {
+
+		return getBuildProperties().getProperty("buildDir") + File.separator + getCodeName();
+	}
+
+	/**
+	 * Retourne le nom de code: Ankle
+	 */
+	public String getCodeName() {
+		return getBuildProperties().getProperty("codeName");
+	}
+
+	/**
+	 * Retourne la liste des projets
+	 */
+	public List<String> getProjects(String properties) {
+		String property = getBuildProperties().getProperty(properties);
+		List<String> l = new ArrayList<String>();
+		if ((property != null) && (property.length() > 0)) {
+			String[] projects = property.split(",");
+
+			if (projects.length > 0) {
+				for (int i = 0; i < projects.length; i++) {
+					String projectName = projects[i].split("&")[1];
+					projectName.trim().replaceAll("\n", "");
+					if (projectName.length() > 0) {
+						l.add(projectName);
+					}
+				}
+			}
+		}
+
+		return l;
+	}
+
+	/**
+	 * Retourne la liste des projets
+	 */
+	public List<String> getProjects() {
+		List<String> projects = getProjects("project");
+		projects.addAll(getProjects("project.enterprise"));
+		return projects;
+	}
+	
+	public List<String> getEnterpriseProjects() {
+		List<String> projects = getProjects("project.enterprise");
+		return projects;
+	}
+	
+	public List<String> getCommunityProjects() {
+		List<String> projects = getProjects("project");
+		return projects;
+	}
+
+	public List<String> findFile(File f, String s) {
+		List<String> listefichierpom = new ArrayList<String>();
+		boolean stopfind = false;
+		if (f.getName().equals(s) && !(f.getPath().indexOf("src") > -1) && !(f.getPath().indexOf("config") > -1)) {
+			listefichierpom.add(f.getPath());
+			stopfind = true;
+		}
+
+		File[] liste_fils = f.listFiles();
+		if (liste_fils != null && stopfind == false) {
+			for (int i = 0; i < liste_fils.length; i++) {
+				listefichierpom.addAll(findFile(liste_fils[i], s));
+			}
+		}
+		return listefichierpom;
+	}
+
+	/**
+	 * update list of modified project (poms, features, plugins)
+	 * 
+	 * @param listeProjetPomsAll
+	 * @param listeProjetPomsModif
+	 * @param end
+	 * @param listeProjetModif
+	 * @param update
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public void readSvnLog(List<String> listeProjetPomsAll, List<String> listeProjetPomsModif, List<String> listeProjetModif) throws FileNotFoundException, IOException {
+		boolean update = false;
+		boolean end = false;
+		String ligne;
+		String modif;
+		File log = new File(getPathToLog());
+		BufferedReader ficTexte = new BufferedReader(new FileReader(log));
+		System.out.println("###### search for updated project from svn log " + log);
+		if (ficTexte == null) {
+			throw new FileNotFoundException("Fichier non trouvé");
+		}
+
+		// Analyse et copie de chaque ligne
+		while ((ligne = ficTexte.readLine()) != null && !end) {
+
+			// condition d'arret de la lecture du log
+			// on arrete la lecture lorsque se lance le build
+			if (ligne.startsWith(ProjectVersionUpdater.buildStartLine)) {
+				end = true;
+			}
+
+			// condition pour ne pas traiter les logs du checkout
+			if (ligne.startsWith("+ svn update")) {
+				update = true;
+			}
+			if (ligne.indexOf("Checking out " + Utils.getRepository()) == -1) {
+				update = true;
+			}
+
+			if (!"".equals(ligne) && !end) {
+
+				if (ligne.indexOf("At revision") != -1) {
+					String revisionNumber = ligne.substring("At revision".length(), ligne.length()).trim();
+				}
+
+				if (update) {
+
+					if ((ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ') && (ligne.charAt(1) == ' ' || ligne.charAt(1) == 'U' || ligne.charAt(1) == 'A' || ligne.charAt(1) == 'D') && update) {
+
+						if (ligne.indexOf("Integration") > -1 || ligne.indexOf("FrameworksModules") > -1) {
+							for (String valeur : listeProjetPomsAll) {
+								String valeurf = valeur;
+								String[] tab = valeurf.split("/" + sourceSVNName + "/");
+								String[] tab2 = tab[1].split("/pom.xml");
+								if (ligne.indexOf(tab2[0]) > -1) {
+									if (!listeProjetPomsModif.contains(valeur))
+										listeProjetPomsModif.add(valeur);
+								}
+							}
+						}
+
+						modif = ligne.substring(2, ligne.length());
+						modif.trim();
+						String[] proj = modif.split(File.separator);
+
+						for (int i = 0; i < proj.length; i++) {
+							if (!listeProjetModif.contains(proj[i])) {
+								listeProjetModif.add(proj[i]);
+							}
+						}
+					}
+				}
+
+			}
+		}
+	}
+
+	/**
+	 * Return the path to the svn log (with or without hudson)
+	 */
+	public String getPathToLog() {
+		String path = "";
+
+		path = workspace.substring(0, workspace.length() - ProjectVersionUpdater.workspaceFolderName.length());
+		path = path + "builds" + File.separator + build_number + File.separator + ProjectVersionUpdater.svnLog;
+
+		return path;
+	}
+
+	/**
+	 * Copy the repository
+	 */
+	public void copyFromRepository() {
+		System.out.println("Utils.copyFromRepository() start");
+		String from = "";
+		from = workspace;
+		String to = getRepositoryCopyPath();
+		try {
+			if (new File(to).exists()) {
+				FileHelper.deleteFile(new File(to));
+			}
+			new File(getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy).mkdir();
+			System.out.println("From " + from + " to " + to);
+			FileHelper.copyFiles(new File(from), new File(to), true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Utils.copyFromRepository() stop");
+	}
+
+	public String[] getNumVersionPattern() {
+		String[] pattern = getBuildProperties().getProperty("number-pattern").split("\\.");
+		return pattern;
+	}
+
+	/**
+	 * Retourne le chemin vers la copie locale du projet en fonction de
+	 * l'utilisation de hudson ou non
+	 */
+	public String getPathToLocalCopy(String projectName) {
+		String path = "";
+		if (new File(getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy).exists()) {
+			path = getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy;
+		} else {
+			path = workspace;
+		}
+
+		path = path + File.separator + getProjectPath(projectName);
+
+		return path;
+	}
+
+	/**
+	 * Retourne le chemin pour un projet donné (par exemple
+	 * MetaModel/Application pour le projet com.bluexml.side.Application
+	 * 
+	 * @param projectName
+	 * @return
+	 */
+	public String getProjectPath(String projectName) {
+		String path = getCommunityProject(projectName);
+
+		if (path.length() == 0) {
+			path = getEnterpriseProjectPath(projectName);
+		}
+
+		return path;
+	}
+
+	private String getCommunityProject(String projectName) {
+		String path = "";
+		String property = getCommunityProjectProperty();
+		if ((property != null) && (property.length() > 0)) {
+			String[] projects = property.split(",");
+			for (int i = 0; i < projects.length; i++) {
+				if (projects[i].split("&")[1].equals(projectName)) {
+					path = projects[i].split("&")[0];
+					return ProjectVersionUpdater.SIDE_Core + File.separator + path + File.separator + "trunk" + File.separator + projectName;
+				}
+			}
+		}
+		return path;
+	}
+
+	private String getCommunityProjectProperty() {
+		return getBuildProperties().getProperty("project");
+	}
+
+	private String getEnterpriseProjectPath(String projectName) {
+		String path = "";
+		// We search in enterprise projects
+		String property = getEnterpriseProjectProperty();
+		if ((property != null) && (property.length() > 0)) {
+			String[] projects = property.split(",");
+			for (int i = 0; i < projects.length; i++) {
+				if (projects[i].split("&")[1].equals(projectName)) {
+					path = projects[i].split("&")[0];
+					return ProjectVersionUpdater.SIDE_Enterprise + File.separator + path + File.separator + "trunk" + File.separator + projectName;
+				}
+			}
+		}
+		return path;
+	}
+
+	private String getEnterpriseProjectProperty() {
+		return getBuildProperties().getProperty("project.enterprise");
+	}
+
+	/**
+	 * Return the Version Number to force the change of each number version
+	 * (void for no change)
+	 */
+	public String getForceNumberVersion() {
+		return getBuildProperties().getProperty("forceNumberVersion");
+	}
+
+	/**
+	 * change le numéro de version en fonction du pattern
+	 * 
+	 * @param number
+	 *            un tableau des 3 numéro de version
+	 * @param pattern
+	 *            un tableau avec les 3 éléments du pattern
+	 * @return Le numéro de version sous la forme 1.0.12
+	 */
+	public String update(String[] number, String[] pattern) {
+
+		boolean change = false;
+
+		for (int i = 0; i < 3; i++) {
+			// test si l'élément est un nombre si une exception est levée,
+			// l'élément n'est pas un nombre
+			try {
+				Integer.valueOf(pattern[i]);
+				number[i] = pattern[i];
+			} catch (NumberFormatException e) {
+				if (change)
+					number[i] = "0";
+				else {
+					if (pattern[i].equals("u")) {
+						change = true;
+						number[i] = String.valueOf(Integer.valueOf(number[i]) + 1);
+					}
+				}
+			}
+		}
+		return number[0] + "." + number[1] + "." + number[2] + ".v" + revisionNumber + "-" + getDate();
+	}
+
+	/**
+	 * Return the current Date
+	 * 
+	 * @return the current Date
+	 */
+	private static String getDate() {
+		return new SimpleDateFormat("yyyyMMdd").format(new Date());
+	}
+
+	public String getFeatureXMLFile(String projectName) {
+		return getPathToLocalCopy(projectName) + File.separator + "feature.xml";
+	}
+
+	public void copyToRepository() throws Exception {
+		String to = workspace;
+		
+		String from = getRepositoryCopyPath();
+		System.out.println("BuilderUtils.copyToRepository() start "+from+" to "+to);
+		FileHelper.copyFiles(new File(from), new File(to), true);
+	}
+
+	public static Document buildJdomDocument(File xmlFile) throws Exception {
+		Document doc;
+		org.jdom.input.SAXBuilder builder = new SAXBuilder();
+		doc = builder.build(xmlFile);
+		return doc;
+	}
+
+	public static void saveXMLFile(File xml, Document dom) throws FileNotFoundException, IOException {
+		org.jdom.output.XMLOutputter out = new XMLOutputter();
+		Format format = Format.getPrettyFormat();
+		out.setFormat(format);
+		FileOutputStream outStream = new FileOutputStream(xml);
+		out.output(dom, outStream);
+		outStream.close();
+	}
+
+	public File getProductFile() {
+		String brandingPath = "";
+		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
+			brandingPath = getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding.enterprise");
+		} else {
+			brandingPath = getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding");
+		}
+		File product = new File(brandingPath + "/side.product");
+		return product;
+	}
+}
