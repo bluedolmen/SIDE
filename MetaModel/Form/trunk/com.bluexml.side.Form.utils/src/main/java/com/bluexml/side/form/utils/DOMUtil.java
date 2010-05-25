@@ -3,6 +3,7 @@
  */
 package com.bluexml.side.form.utils;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -65,14 +66,19 @@ public class DOMUtil {
 	}
 
 	/**
-	 * Gets a DocumentBuilder object. If non existent, the object is created.
+	 * Gets a namespace aware non-validating DocumentBuilder object. If non existent, the object is
+	 * created.
 	 * 
 	 * @return
 	 */
 	public static DocumentBuilder getDocumentBuilder() {
 		if (documentBuilder == null) {
 			try {
-				documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+				docBuilderFactory.setNamespaceAware(true); // @since 1.0.2
+				docBuilderFactory.setValidating(false); // @since 1.0.2
+
+				documentBuilder = docBuilderFactory.newDocumentBuilder();
 			} catch (ParserConfigurationException e) {
 				e.printStackTrace();
 				return null;
@@ -187,6 +193,47 @@ public class DOMUtil {
 		try {
 			DocumentBuilder docBuilder = getDocumentBuilder();
 			document = docBuilder.parse(stream);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return document;
+	}
+
+	/**
+	 * Returns a new document built from the input stream.
+	 * 
+	 * @param text
+	 *            the document content to be parsed.
+	 * @return
+	 * @since 1.0.2
+	 */
+	public static Document getDocumentFromString(String text) {
+		Document document;
+		try {
+			DocumentBuilder docBuilder = getDocumentBuilder();
+			InputStream is = new ByteArrayInputStream(text.getBytes("UTF-8"));
+			document = docBuilder.parse(is);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return document;
+	}
+
+	/**
+	 * Returns a new document built from the input stream.
+	 * 
+	 * @param uri
+	 *            a URI to the document's content.
+	 * @return
+	 * @since 1.0.2
+	 */
+	public static Document getDocumentFromURI(String uri) {
+		Document document;
+		try {
+			DocumentBuilder docBuilder = getDocumentBuilder();
+			document = docBuilder.parse(uri);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
