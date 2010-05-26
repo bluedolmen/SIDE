@@ -21,19 +21,19 @@ cd $WORKSPACE/../buildAuto/Ankle/maven_workspace
 perl delete_folder.pl pom.xml
 cp $WORKSPACE/superpom/pom.xml .
 
+echo "update superpom"
 perl -pi -le 'print "<modules>" if $. == 12' pom.xml
 perl -pi -le 'print "</modules>" if $. == 13' pom.xml
-    
 for s in `ls -d */ `; do
-        repertoire=$s
-	name=`expr match "$repertoire" '\([a-zA-Z0-9.]*\)'`
-     	res="<module>$name</module>"
+    repertoire=$s
+	name=`perl -e '"'$repertoire'"=~/([a-zA-Z0-9.]*)/; print $1';`
+  	res="<module>$name</module>"
+  	echo $repertoire $name $res
 	perl -pi -le 'print "'$res'" if $. == 13' pom.xml
 done
-
+echo "superpom patched"
 echo "Maven deploy start"
 mvn clean deploy -e -P public > log_maven.log
-
 echo "Maven deploy done"
 
 sleep 5m
