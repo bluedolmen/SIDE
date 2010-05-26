@@ -19,7 +19,7 @@ chmod -R 755 $WORKSPACE/../buildAuto/Ankle/maven_workspace
 cp $WORKSPACE/../buildAuto/Ankle/delete_folder.pl $WORKSPACE/../buildAuto/Ankle/maven_workspace
 cd $WORKSPACE/../buildAuto/Ankle/maven_workspace
 perl delete_folder.pl pom.xml
-cp $WORKSPACE/../../superpom/workspace/superpom/pom.xml .
+cp $WORKSPACE/superpom/pom.xml .
 
 perl -pi -le 'print "<modules>" if $. == 12' pom.xml
 perl -pi -le 'print "</modules>" if $. == 13' pom.xml
