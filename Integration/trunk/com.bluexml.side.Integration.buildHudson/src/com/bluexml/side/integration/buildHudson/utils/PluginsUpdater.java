@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -21,6 +22,7 @@ import org.jdom.output.XMLOutputter;
 import org.jdom.xpath.XPath;
 
 public class PluginsUpdater {
+	private Logger logger = Logger.getLogger(getClass());
 	BuilderUtils bu;
 	List<String> plugins2update = new ArrayList<String>();
 	List<String> pluginsUpdated = new ArrayList<String>();
@@ -52,12 +54,12 @@ public class PluginsUpdater {
 
 		int c = 0;
 		do {
-			System.out.println("PluginsUpdater.checkAndUpdate() occurance #" + c);
+			logger.debug("PluginsUpdater.checkAndUpdate() occurance #" + c);
 			oldPlugins2update = new ArrayList<String>(plugins2update);
 			markPlugins();
 			c++;
 		} while (!plugins2update.equals(oldPlugins2update));
-		System.out.println("PluginsUpdater.checkAndUpdate() Updates DONE in " + c + " iteration");
+		logger.debug("PluginsUpdater.checkAndUpdate() Updates DONE in " + c + " iteration");
 
 		fixPluginsVersion();
 		allFixed = true;
@@ -65,7 +67,7 @@ public class PluginsUpdater {
 	}
 
 	private void markPlugins() throws Exception {
-		System.out.println("PluginsUpdater.markPlugins()");
+		logger.debug("PluginsUpdater.markPlugins()");
 		List<String> plugins = new ArrayList<String>(pluginsList);
 		plugins.removeAll(pluginsListReadOnly);
 		plugins.removeAll(plugins2update);
@@ -75,7 +77,7 @@ public class PluginsUpdater {
 			if (pluginDoc != null) {
 				boolean changes = updatePluginModuleDependencies(pluginDoc, false);
 				if (changes) {
-					System.out.println("PluginsUpdater.markPlugins() mark " + pluginId);
+					logger.debug("PluginsUpdater.markPlugins() mark " + pluginId);
 					plugins2update.add(pluginId);
 				} else {
 					// up to date
@@ -90,7 +92,7 @@ public class PluginsUpdater {
 	}
 
 	private void fixPluginsVersion() throws Exception {
-		System.out.println("PluginsUpdater.fixPluginsVersion()");
+		logger.debug("PluginsUpdater.fixPluginsVersion()");
 		for (String plugin : plugins2update) {
 			// fix plugin verion
 			updateVersion(plugin);
@@ -135,7 +137,7 @@ public class PluginsUpdater {
 			if (!oldVersionMin.equals(version) || !oldVersionMax.equals(version)) {
 				courantmoduleDependence1.setAttribute("versionMax", version);
 				courantmoduleDependence1.setAttribute("versionMin", version);
-				System.out.println("PluginsUpdater.updatePluginModuleDependencies() " + moduleId + ":" + oldVersionMax + " -> " + version);
+				logger.debug("PluginsUpdater.updatePluginModuleDependencies() " + moduleId + ":" + oldVersionMax + " -> " + version);
 				modifie = true;
 			}
 		}
@@ -160,7 +162,7 @@ public class PluginsUpdater {
 			document = sxb.build(pluginFile);
 		} catch (FileNotFoundException e) {
 			// plugin.xml could not exist for most plugins
-			System.out.println("warn " + pluginFile + " not found");
+			logger.debug("warn " + pluginFile + " not found");
 		}
 		return document;
 	}

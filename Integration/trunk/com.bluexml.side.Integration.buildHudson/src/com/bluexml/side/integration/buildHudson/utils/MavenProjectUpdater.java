@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -19,6 +20,7 @@ import org.jdom.output.XMLOutputter;
 import org.jdom.xpath.XPath;
 
 public class MavenProjectUpdater {
+	private Logger logger = Logger.getLogger(getClass());
 	static Namespace ns = Namespace.getNamespace("http://maven.apache.org/POM/4.0.0");
 	BuilderUtils bu;
 	List<String> pom2update = new ArrayList<String>();
@@ -46,7 +48,7 @@ public class MavenProjectUpdater {
 			String currentmodule = getModuleIdFromPomPath(pom);
 			pomsPathList.put(currentmodule, pom);
 		}
-		System.out.println("MavenProjectUpdater.MavenProjectUpdater() pomsList " + pomsPathList.keySet());
+		logger.debug("MavenProjectUpdater.MavenProjectUpdater() pomsList " + pomsPathList.keySet());
 		for (String pom : pom2update) {
 			String currentmodule = getModuleIdFromPomPath(pom);
 			this.pom2update.add(currentmodule);
@@ -66,20 +68,20 @@ public class MavenProjectUpdater {
 		// some feature could be forgotten so search one more time
 		// if no changes so job's done
 		List<String> oldPoms2update;
-		System.out.println("MavenProjectUpdater.checkAndUpdateAllFeatures() checkAllPoms");
+		logger.debug("MavenProjectUpdater.checkAndUpdateAllFeatures() checkAllPoms");
 		int c = 0;
 		do {
-			System.out.println("\tMavenProjectUpdater.checkAndUpdateAllFeatures()");
+			logger.debug("\tMavenProjectUpdater.checkAndUpdateAllFeatures()");
 			oldPoms2update = new ArrayList<String>(pom2update);
 			// maybe we could find more feature to mark
-			// System.out.println("|||| before " + oldPoms2update.size());
+			// logger.debug("|||| before " + oldPoms2update.size());
 			markProjects();
-			// System.out.println("|||| before " + oldPoms2update.size());
-			// System.out.println("|||| before feature2update" +
+			// logger.debug("|||| before " + oldPoms2update.size());
+			// logger.debug("|||| before feature2update" +
 			// pom2update.size());
 			c++;
 		} while (!pom2update.equals(oldPoms2update));
-		System.out.println("MavenProjectUpdater.checkAndUpdateAllFeatures() Updates poms DONE in " + c + " iteration");
+		logger.debug("MavenProjectUpdater.checkAndUpdateAllFeatures() Updates poms DONE in " + c + " iteration");
 		/**
 		 * TEST we change index of a referred pom to test the update
 		 */
@@ -97,7 +99,7 @@ public class MavenProjectUpdater {
 		module.removeAll(pom2update);
 		if (module.size() > 0) {
 			for (String id : module) {
-				System.out.println("MavenProjectUpdater.markProjects() Check mvn project :" + id);
+				logger.debug("MavenProjectUpdater.markProjects() Check mvn project :" + id);
 
 				boolean marked = false;
 
@@ -109,26 +111,28 @@ public class MavenProjectUpdater {
 				pomsVersions.put(id, version.getTextTrim());
 
 				Element dependencies = root.getChild("dependencies", ns);
-				List<?> listdependencies = dependencies.getChildren("dependency", ns);
+				if (dependencies != null) {
+					List<?> listdependencies = dependencies.getChildren("dependency", ns);
 
-				for (Object object : listdependencies) {
-					Element current = (Element) object;
-					marked |= mustBeMarked(current);
-				}
-				if (update_mavenplugins) {
-					// mark to update if a plugin is marked
-					XPath xpa = XPath.newInstance("/project//plugin");
-					List<?> plugins = xpa.selectNodes(doc.getRootElement());
-					for (Object object : plugins) {
+					for (Object object : listdependencies) {
 						Element current = (Element) object;
 						marked |= mustBeMarked(current);
 					}
-				}
+					if (update_mavenplugins) {
+						// mark to update if a plugin is marked
+						XPath xpa = XPath.newInstance("/project//plugin");
+						List<?> plugins = xpa.selectNodes(doc.getRootElement());
+						for (Object object : plugins) {
+							Element current = (Element) object;
+							marked |= mustBeMarked(current);
+						}
+					}
 
-				if (marked) {
-					// marked for update
-					pom2update.add(id);
-					System.out.println("\tMavenProjectUpdater.markProjects() marked for update" + id);
+					if (marked) {
+						// marked for update
+						pom2update.add(id);
+						logger.debug("\tMavenProjectUpdater.markProjects() marked for update" + id);
+					}
 				}
 			}
 		}
@@ -153,11 +157,11 @@ public class MavenProjectUpdater {
 	}
 
 	private void updateMarkedModules() throws Exception {
-		System.out.println("MavenProjectUpdater.updateMarkedModules() Start");
+		logger.debug("MavenProjectUpdater.updateMarkedModules() Start");
 		for (String module : pom2update) {
-			System.out.println("\tMavenProjectUpdater.markProjects() update mvn project :" + module);
+			logger.debug("\tMavenProjectUpdater.markProjects() update mvn project :" + module);
 			String pomPath = getPomPath(module);
-			System.out.println("\tMavenProjectUpdater.markProjects() update mvn project :" + pomPath);
+			logger.debug("\tMavenProjectUpdater.markProjects() update mvn project :" + pomPath);
 			File pom_xml = new File(pomPath);
 			Document doc = new SAXBuilder().build(pom_xml);
 			Element root = doc.getRootElement();
@@ -169,11 +173,11 @@ public class MavenProjectUpdater {
 			String[] number = oldVersionNumber.split("\\.");
 			String newVersion = updatepom(number, pattern);
 			version.setText(newVersion);
-			System.out.println("\tMavenProjectUpdater.updateMarkedModules() update version " + oldVersionNumber + " -> " + newVersion);
+			logger.debug("\tMavenProjectUpdater.updateMarkedModules() update version " + oldVersionNumber + " -> " + newVersion);
 			// update dependencies
 			Element dependencies = root.getChild("dependencies", ns);
 			List<?> listdependencies = dependencies.getChildren("dependency", ns);
-			System.out.println("\tMavenProjectUpdater.updateMarkedModules() update dependencies");
+			logger.debug("\tMavenProjectUpdater.updateMarkedModules() update dependencies");
 			for (Object object : listdependencies) {
 				Element current = (Element) object;
 				updateRef(pattern, current);
@@ -203,9 +207,9 @@ public class MavenProjectUpdater {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println();
+
 		}
-		System.out.println("MavenProjectUpdater.updateMarkedModules() Ended");
+		logger.debug("MavenProjectUpdater.updateMarkedModules() Ended");
 	}
 
 	private void updateRef(String[] pattern, Element current) throws JDOMException, IOException {
@@ -217,7 +221,7 @@ public class MavenProjectUpdater {
 
 		// check if this module is marked
 		if (isMarked(moduleId)) {
-			// System.out.println("\t\tMavenProjectUpdater.updateMarkedModules() update ref"
+			// logger.debug("\t\tMavenProjectUpdater.updateMarkedModules() update ref"
 			// + moduleId);
 			// compute newVersion, must start from reading the pom
 			// because
@@ -226,7 +230,7 @@ public class MavenProjectUpdater {
 			// svn the pom have 1.1.1 becaus many build fail occurs
 			String pomPath2 = getPomPath(moduleId);
 			File pom_xmlDep = new File(pomPath2);
-			// System.out.println("\t\tMavenProjectUpdater.updateMarkedModules() update ref"
+			// logger.debug("\t\tMavenProjectUpdater.updateMarkedModules() update ref"
 			// + pomPath2);
 			Document docDep = new SAXBuilder().build(pom_xmlDep);
 			Element rootDep = docDep.getRootElement();
@@ -240,15 +244,15 @@ public class MavenProjectUpdater {
 			if (pomUpdated.contains(moduleId)) {
 				// version is already updated
 				current_version.setText(oldVersionNumberDep);
-				System.out.println("MavenProjectUpdater.updateRef() ref already updated");
+				logger.debug("MavenProjectUpdater.updateRef() ref already updated");
 			} else {
 				// version is not updated yet so we compute it
 				String[] numberDep = oldVersionNumberDep.split("\\.");
 				current_version.setText(updatepom(numberDep, pattern));
-				System.out.println("MavenProjectUpdater.updateRef() ref not yet updated");
+				logger.debug("MavenProjectUpdater.updateRef() ref not yet updated");
 			}
 			String versiontrim = current_version.getTextTrim();
-			System.out.println("\t\tMavenProjectUpdater.updateMarkedModules() update ref " + moduleId + " version:" + current_oldVersionNumber + " -> " + versiontrim);
+			logger.debug("\t\tMavenProjectUpdater.updateMarkedModules() update ref " + moduleId + " version:" + current_oldVersionNumber + " -> " + versiontrim);
 
 		}
 	}

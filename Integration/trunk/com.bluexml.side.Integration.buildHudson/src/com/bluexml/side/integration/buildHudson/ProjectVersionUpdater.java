@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-
 import com.bluexml.side.integration.buildHudson.utils.BuilderUtils;
 import com.bluexml.side.integration.buildHudson.utils.FeatureUpdater;
 import com.bluexml.side.integration.buildHudson.utils.MavenProjectUpdater;
@@ -24,7 +22,6 @@ public class ProjectVersionUpdater {
 	private String build_number = "";
 	private String build_id = "";
 	private String svn_revision = "";
-	private String rcp = "";
 	private Properties conf;
 
 	private String propertiesFile;
@@ -54,21 +51,30 @@ public class ProjectVersionUpdater {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		if (args.length < 5) {
+			System.out.println("Usage : java -jar Builder.jar <workspace> <build_number> <build_id> <svn_revision> <propertiesFilePath> [skipCopyToRepo]");
+			System.out.println("\t<workspace>          : workspace folder, folder contains S-IDE ...");
+			System.out.println("\t<build_number>       : Hudson build number");
+			System.out.println("\t<build_id>           : identifier like yyyy-MM-dd_HH-mm-ss");
+			System.out.println("\t<svn_revision>       : the svn revision number");
+			System.out.println("\t<propertiesFilePath> : file path of properties file to use");
+			System.out.println("\t[skipCopyToRepo]     : optional, disable last action that copy modified files into svn local copy (mainly for testing)");
+		}
 
 		// get Parameters
 		String workspace = args[0];
 		String build_number = args[1];
 		String build_id = args[2];
 		String svn_revision = args[3];
-		String rcp = args[4];
-		String propertiesFilePath = args[5];
+		String propertiesFilePath = args[4];
 
 		// initialize Builder
-		ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, rcp, propertiesFilePath);
-		if (args.length == 7 && args[6].equals("skipCopyToRepo")) {
+		ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, propertiesFilePath);
+		if (args.length == 6 && args[5].equals("skipCopyToRepo")) {
 			builder.skipCopyToRepo = true;
 		}
 		try {
+			// launch version updater
 			builder.build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -76,12 +82,11 @@ public class ProjectVersionUpdater {
 		}
 	}
 
-	public ProjectVersionUpdater(String workspace, String build_number, String build_id, String svn_revision, String rcp, String propertiesFilePath) {
+	public ProjectVersionUpdater(String workspace, String build_number, String build_id, String svn_revision, String propertiesFilePath) {
 		this.workspace = workspace;
 		this.build_number = build_number;
 		this.build_id = build_id;
 		this.svn_revision = svn_revision;
-		this.rcp = rcp;
 		this.propertiesFile = propertiesFilePath;
 		this.conf = BuilderUtils.openProperties(propertiesFilePath);
 		this.bu = new BuilderUtils(conf, workspace, build_number, svn_revision);
@@ -105,8 +110,8 @@ public class ProjectVersionUpdater {
 		System.out.println("- build_number = " + build_number);
 		System.out.println("- build_id = " + build_id);
 		System.out.println("- svn_revision = " + svn_revision);
-		System.out.println("- rcp = " + rcp);
 		System.out.println("- propertiesFile = " + propertiesFile);
+		System.out.println("- sourceSVNName = " + sourceSVNName);
 
 		// build process
 
@@ -122,6 +127,7 @@ public class ProjectVersionUpdater {
 		List<String> listePlugin = new ArrayList<String>();
 		List<String> listePluginModif = new ArrayList<String>();
 
+		List<String> listeFeature = new ArrayList<String>();
 		List<String> listeFeatureModif = new ArrayList<String>();
 
 		List<String> projects = new ArrayList<String>();
@@ -135,16 +141,23 @@ public class ProjectVersionUpdater {
 		}
 		String pathproject = bu.getRepositoryCopyPath();
 
+		// copy svn repository to a working folder
+		bu.copyFromRepository();
+		
 		// get All poms
-		listeProjetPoms = bu.findFile(new File(pathproject + "/" + sourceSVNName + "/"), "pom.xml");
+		System.out.println("Search maven2 projects :");
+		File searchFrom = new File(pathproject + "/" + sourceSVNName + "/");
+		System.out.println("from "+searchFrom);
+		
+		listeProjetPoms = BuilderUtils.findFile(searchFrom, "pom.xml");
 		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
-			bu.findFile(new File(pathproject + "/" + Application.SIDE_Core + "/"), "pom.xml");
+			BuilderUtils.findFile(new File(pathproject + "/" + Application.SIDE_Core + "/"), "pom.xml");
 		}
 
+		// read svn log to list modified projects
 		bu.readSvnLog(listeProjetPoms, listeProjetPomsModif, listeProjet);
-
-		bu.copyFromRepository();
-		// on parcours la liste des projets qui ont été modifié
+		
+		// dispatch modified project according to project type (plugin or feature)
 		for (String element : listeProjet) {
 			if (listeProjetReels.contains(element)) {
 				// on met tous les plugins modifiés dans un tableau
@@ -157,46 +170,52 @@ public class ProjectVersionUpdater {
 				}
 			}
 		}
-		System.out.println("FeatureUpdater.main() projects :" + listeProjet);
-		System.out.println("FeatureUpdater.main() lpoms :" + listeProjetPoms.size());
-		System.out.println("FeatureUpdater.main() lpomsSVNUpdated :" + listeProjetPomsModif);
-
-		ArrayList<String> featuresList = new ArrayList<String>();
+		
+		// dispatch all project according to project type (plugin or feature)
 		for (int i = 0; i < projects.size(); i++) {
 			if (projects.get(i).indexOf("feature") != -1) {
-				featuresList.add(projects.get(i));
+				listeFeature.add(projects.get(i));
 			} else {
 				listePlugin.add(projects.get(i));
 			}
 		}
+		// lists initializing done.
+		
+		System.out.println(" Found :");
+		System.out.println(" plugins :" + listePlugin.size());
+		System.out.println(" Features :" + listeFeature.size());
+		System.out.println(" poms :" + listeProjetPoms.size());
+		System.out.println(" project updated (svn) :");
+		System.out.println(" plugins :" + listePluginModif.size());
+		System.out.println(" Features :" + listeFeatureModif.size());
+		System.out.println(" poms :" + listeProjetPomsModif.size());
+		
+		// launch maven project updater
 		MavenProjectUpdater mpu = new MavenProjectUpdater(listeProjetPoms, listeProjetPomsModif, bu);
-
-		System.out.println("MavenProjectUpdater.main() mvn projects :");
-		for (String string : listeProjetPoms) {
-			System.out.println("\t- " + string);
-		}
 		mpu.checkAndUpdateAllPoms();
-		System.out.println("MavenProjectUpdater.main() listNewVersions :");
+		System.out.println("Updated Maven2 projects :");
 		for (Map.Entry<String, String> entry : mpu.getPomsNewsVersion().entrySet()) {
-			System.out.println("\t- " + entry.getKey() + ":" + entry.getValue());
+			System.out.println("\t- " + entry.getKey() + " : " + entry.getValue());
 		}
 
-		System.out.println("PluginsUpdater.main() Update Plugins");
+		// launch plugin project updater
 		PluginsUpdater pu = new PluginsUpdater(listePlugin, listePluginModif, bu.getProjects("project"), mpu, bu);
 		pu.checkAndUpdate();
-		System.out.println("MavenProjectUpdater.main() Plugins :");
+		System.out.println("Updated Plugins :");
 		for (Map.Entry<String, String> entry : pu.getPluginsNewVersion().entrySet()) {
-			System.out.println("\t- " + entry.getKey() + ":" + entry.getValue());
+			System.out.println("\t- " + entry.getKey() + " : " + entry.getValue());
 		}
 
-		FeatureUpdater fu = new FeatureUpdater(featuresList, listeFeatureModif, bu.getProjects("project"), pu, bu);
-
+		// launch feature project updater
+		FeatureUpdater fu = new FeatureUpdater(listeFeature, listeFeatureModif, bu.getProjects("project"), pu, bu);
 		fu.checkAndUpdateAllFeatures();
-		System.out.println("MavenProjectUpdater.main() Features :");
+		System.out.println("Updated Features :");
 		for (Map.Entry<String, String> entry : fu.getFeaturesNewsVersion().entrySet()) {
-			System.out.println("\t- " + entry.getKey() + ":" + entry.getValue());
+			System.out.println("\t- " + entry.getKey() + " : " + entry.getValue());
 		}
 
+		
+		// launch product updater
 		ProductUpdater produ = new ProductUpdater(fu, bu);
 		boolean sideProductChanges = produ.updateProduct();
 		if (sideProductChanges) {
@@ -204,6 +223,9 @@ public class ProjectVersionUpdater {
 		} else {
 			System.out.println("- side.product no changes " + produ.getNewVersion());
 		}
+		
+		// project version update done.
+		
 		if (!skipCopyToRepo) {
 			// get modified files and copy them into svn local copy
 			bu.copyToRepository();

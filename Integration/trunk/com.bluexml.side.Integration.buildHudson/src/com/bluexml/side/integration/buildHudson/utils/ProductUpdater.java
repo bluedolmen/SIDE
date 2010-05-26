@@ -3,12 +3,14 @@ package com.bluexml.side.integration.buildHudson.utils;
 import java.io.File;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.xpath.XPath;
 
 public class ProductUpdater {
+	private Logger logger = Logger.getLogger(getClass());
 	BuilderUtils bu;
 	FeatureUpdater fu;
 	String newVersion = "";
@@ -54,7 +56,7 @@ public class ProductUpdater {
 			newVersion = MavenProjectUpdater.updatepom(version.getValue().split("\\."), pattern);
 
 			version.setValue(newVersion);
-			System.out.println("sideProduct version :" + oldVersion + " -> " + newVersion);
+			logger.debug("sideProduct version :" + oldVersion + " -> " + newVersion);
 			// save changes
 			BuilderUtils.saveXMLFile(product, productDoc);
 		} else {

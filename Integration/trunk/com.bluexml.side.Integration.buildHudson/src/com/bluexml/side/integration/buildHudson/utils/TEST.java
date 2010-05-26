@@ -1,6 +1,8 @@
 package com.bluexml.side.integration.buildHudson.utils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TEST {
 
@@ -8,14 +10,14 @@ public class TEST {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(Utils.getBuildPath());
-		String workspace = "/Users/davidabad/.hudson/jobs/SIDE_Enterprise_Product_Builder/workspace";
-		String workspace_2 = "/Users/davidabad/Workspace2.0";
-		File product =new File(workspace_2+"/S-IDE/Integration/trunk/com.bluexml.side.Integration.eclipse.branding/side.product");
-		File plugin_featureRepo = new File(workspace+"/sources");
-		boolean changes = Utils.updateProduct(product, plugin_featureRepo);
-		System.out.println(product+"changes :"+changes);
-		
+		List<String> listeProjetPoms = new ArrayList<String>();
+		File f = new File("/Users/davidabad/.hudson/jobs/Build_RCP_Community_TEST/buildAuto/Ankle/repositoryCopy/S-IDE");
+		listeProjetPoms = BuilderUtils.findFile(f, "pom.xml");
+
+		for (String string : listeProjetPoms) {
+			System.out.println(string);
+		}
+		System.out.println("poms :"+listeProjetPoms.size());
 	}
 
 }

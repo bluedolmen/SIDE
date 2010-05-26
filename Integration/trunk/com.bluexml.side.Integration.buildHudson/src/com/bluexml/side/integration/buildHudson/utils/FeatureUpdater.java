@@ -60,7 +60,7 @@ public class FeatureUpdater {
 		features_.removeAll(feature2update);
 		if (features_.size() > 0) {
 			for (String id : features_) {
-				System.out.println("FeatureUpdater.checkFeatures() Check feature :" + id);
+				logger.debug("FeatureUpdater.checkFeatures() Check feature :" + id);
 				boolean marked = false;
 				// this feature is not still marked for update
 				// get feature file
@@ -85,11 +85,11 @@ public class FeatureUpdater {
 
 					String newVersionNumber = pu.getPluginVersion(pluginId);
 
-					System.out.println("\tFeatureUpdater.checkFeatures() plugin:" + pluginId);
+					logger.debug("\tFeatureUpdater.checkFeatures() plugin:" + pluginId);
 					System.err.println("compare versions old:" + oldVersionNumber + "/" + newVersionNumber);
 
 					if (!oldVersionNumber.equals(newVersionNumber)) {
-						System.out.println("\tUtils.updateVersionNumber() feature to update because plugin updated : " + pluginId);
+						logger.debug("\tUtils.updateVersionNumber() feature to update because plugin updated : " + pluginId);
 						marked = true;
 						// break;
 					}
@@ -105,14 +105,14 @@ public class FeatureUpdater {
 						Element currentNode = (Element) object;
 						String oldVersionNumber = currentNode.getAttributeValue("version");
 						String inculdedFeatureId = currentNode.getAttributeValue("id");
-						System.out.println("\tscan included feature :" + inculdedFeatureId + " : " + oldVersionNumber);
+						logger.debug("\tscan included feature :" + inculdedFeatureId + " : " + oldVersionNumber);
 						// check version of features
 
 						String newVersionNumber = getFeatureVersion(inculdedFeatureId);
 
 						System.err.println("compare versions old:" + oldVersionNumber + "/" + newVersionNumber);
 						if (!oldVersionNumber.equals(newVersionNumber)) {
-							System.out.println("\tFeatureUpdater.checkFeatures() feature marked beacause found included marked feature " + inculdedFeatureId);
+							logger.debug("\tFeatureUpdater.checkFeatures() feature marked beacause found included marked feature " + inculdedFeatureId);
 							marked = true;
 							// break;
 						}
@@ -120,7 +120,7 @@ public class FeatureUpdater {
 				}
 
 				if (marked) {
-					System.out.println("FeatureUpdater.checkFeatures() MARKED " + id);
+					logger.debug("FeatureUpdater.checkFeatures() MARKED " + id);
 					feature2update.add(id);
 				}
 			}
@@ -130,7 +130,7 @@ public class FeatureUpdater {
 
 	private void updateMarkedFeatures() throws Exception {
 		for (String feature : feature2update) {
-			System.out.println("FeatureUpdater.updateMarkedFeatures() UPDATE " + feature);
+			logger.debug("FeatureUpdater.updateMarkedFeatures() UPDATE " + feature);
 			File featureXMLFile = new File(bu.getFeatureXMLFile(feature));
 			Document document = new SAXBuilder().build(featureXMLFile);
 			Element root = document.getRootElement();
@@ -142,7 +142,7 @@ public class FeatureUpdater {
 			root.setAttribute("version", newVersion);
 			featuresNewsVersion.put(feature, newVersion);
 			// update plugins version
-			System.out.println("FeatureUpdater.updateMarkedFeatures() Update plugins Refs");
+			logger.debug("FeatureUpdater.updateMarkedFeatures() Update plugins Refs");
 			List<?> listPlugins = root.getChildren("plugin");
 			for (Object object : listPlugins) {
 				Element courant = (Element) object;
@@ -152,12 +152,12 @@ public class FeatureUpdater {
 				if (!oldVersionNumber.equals(newVersionNumber)) {
 					courant.setAttribute("version", newVersionNumber);
 					// on indique que le numéro de feature doit changer
-					System.out.println("\t\tFeatureUpdater.updateMarkedFeatures() update plugin ref " + pluginId + ":" + oldVersionNumber + " -> " + newVersionNumber);
+					logger.debug("\t\tFeatureUpdater.updateMarkedFeatures() update plugin ref " + pluginId + ":" + oldVersionNumber + " -> " + newVersionNumber);
 				}
 			}
 
 			// update included features version
-			System.out.println("FeatureUpdater.updateMarkedFeatures() Update features Refs");
+			logger.debug("FeatureUpdater.updateMarkedFeatures() Update features Refs");
 			List<?> listIncludedFeatures = root.getChildren("includes");
 			for (Object object : listIncludedFeatures) {
 				Element currentNode = (Element) object;
@@ -166,7 +166,7 @@ public class FeatureUpdater {
 				String newVersionNumber = getFeatureVersion(inculdedFeatureId);
 				if (!oldVersionNumber.equals(newVersionNumber)) {
 					currentNode.setAttribute("version", newVersionNumber);
-					System.out.println("\t\tFeatureUpdater.updateMarkedFeatures() update feature ref " + inculdedFeatureId + ":" + oldVersionNumber + " -> " + newVersionNumber);
+					logger.debug("\t\tFeatureUpdater.updateMarkedFeatures() update feature ref " + inculdedFeatureId + ":" + oldVersionNumber + " -> " + newVersionNumber);
 				}
 			}
 
@@ -188,19 +188,16 @@ public class FeatureUpdater {
 		// some feature could be forgotten so search one more time
 		// if no changes so job's done
 		List<String> oldFeature2update;
-		System.out.println("#####FeatureUpdater.checkAndUpdateAllFeatures() checkAllFeatures");
+		logger.debug("FeatureUpdater.checkAndUpdateAllFeatures() checkAllFeatures");
 		int c = 0;
 		do {
-			System.out.println("@@FeatureUpdater.checkAndUpdateAllFeatures()");
+			logger.debug("FeatureUpdater.checkAndUpdateAllFeatures() occurance #" + c);
 			oldFeature2update = new ArrayList<String>(feature2update);
 			// maybe we could find more feature to mark
-			System.err.println("|||| before" + oldFeature2update.size());
 			checkFeatures();
-			System.err.println("|||| before" + oldFeature2update.size());
-			System.err.println("|||| before feature2update" + feature2update.size());
 			c++;
 		} while (!feature2update.equals(oldFeature2update));
-		System.out.println("#####FeatureUpdater.checkAndUpdateAllFeatures() Updates features DONE in " + c);
+		logger.debug("FeatureUpdater.checkAndUpdateAllFeatures() Updates features DONE in " + c);
 		updateMarkedFeatures();
 	}
 

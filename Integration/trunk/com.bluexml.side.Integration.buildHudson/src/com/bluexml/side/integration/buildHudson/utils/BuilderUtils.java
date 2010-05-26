@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
@@ -25,6 +26,7 @@ import org.jdom.output.XMLOutputter;
 import com.bluexml.side.integration.buildHudson.ProjectVersionUpdater;
 
 public class BuilderUtils {
+	private static Logger logger = Logger.getLogger(BuilderUtils.class);
 	private Properties buildProperties;
 	private String workspace;
 	private String revisionNumber;
@@ -36,7 +38,6 @@ public class BuilderUtils {
 		this.workspace = workspace;
 		this.build_number = build_number;
 		this.revisionNumber = revisionNumber;
-
 	}
 
 	public void setSourceSVNName(String sourceSVNName) {
@@ -88,7 +89,7 @@ public class BuilderUtils {
 			is = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 			while ((line = is.readLine()) != null) {
-				System.out.println(line);
+				logger.debug(line);
 			}
 			System.out.flush();
 			try {
@@ -114,7 +115,7 @@ public class BuilderUtils {
 		File file = new File(folderName + File.separator + fileName);
 		PrintWriter writer = null;
 		try {
-			System.out.println("Create File:" + file);
+			logger.debug("Create File:" + file);
 			file.createNewFile();
 
 			writer = new PrintWriter(new FileWriter(file));
@@ -161,7 +162,7 @@ public class BuilderUtils {
 			properties = new Properties();
 
 			properties.load(fileStream);
-			// System.out.println("Properties File loaded :" +
+			// logger.debug("Properties File loaded :" +
 			// props.getAbsolutePath());
 
 		} catch (IOException e) {
@@ -264,7 +265,8 @@ public class BuilderUtils {
 		return projects;
 	}
 
-	public List<String> findFile(File f, String s) {
+	public static List<String> findFile(File f, String s) {
+		//logger.debug("BuilderUtils.findFile() baseDir:"+f+" fileName:"+s);
 		List<String> listefichierpom = new ArrayList<String>();
 		boolean stopfind = false;
 		if (f.getName().equals(s) && !(f.getPath().indexOf("src") > -1) && !(f.getPath().indexOf("config") > -1)) {
@@ -299,7 +301,7 @@ public class BuilderUtils {
 		String modif;
 		File log = new File(getPathToLog());
 		BufferedReader ficTexte = new BufferedReader(new FileReader(log));
-		System.out.println("###### search for updated project from svn log " + log);
+		logger.debug("###### search for updated project from svn log " + log);
 		if (ficTexte == null) {
 			throw new FileNotFoundException("Fichier non trouvé");
 		}
@@ -375,7 +377,7 @@ public class BuilderUtils {
 	 * Copy the repository
 	 */
 	public void copyFromRepository() {
-		System.out.println("Utils.copyFromRepository() start");
+		logger.info("Utils.copyFromRepository() start");
 		String from = "";
 		from = workspace;
 		String to = getRepositoryCopyPath();
@@ -384,12 +386,12 @@ public class BuilderUtils {
 				FileHelper.deleteFile(new File(to));
 			}
 			new File(getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy).mkdir();
-			System.out.println("From " + from + " to " + to);
+			logger.debug("From " + from + " to " + to);
 			FileHelper.copyFiles(new File(from), new File(to), true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Utils.copyFromRepository() stop");
+		logger.info("Utils.copyFromRepository() done");
 	}
 
 	public String[] getNumVersionPattern() {
@@ -525,10 +527,9 @@ public class BuilderUtils {
 	}
 
 	public void copyToRepository() throws Exception {
-		String to = workspace;
-		
+		String to = workspace;		
 		String from = getRepositoryCopyPath();
-		System.out.println("BuilderUtils.copyToRepository() start "+from+" to "+to);
+		logger.info("BuilderUtils.copyToRepository() start "+from+" to "+to);
 		FileHelper.copyFiles(new File(from), new File(to), true);
 	}
 
