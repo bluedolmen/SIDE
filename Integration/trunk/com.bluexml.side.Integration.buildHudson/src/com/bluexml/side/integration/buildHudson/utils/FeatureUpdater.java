@@ -161,12 +161,21 @@ public class FeatureUpdater {
 			List<?> listIncludedFeatures = root.getChildren("includes");
 			for (Object object : listIncludedFeatures) {
 				Element currentNode = (Element) object;
-				String oldVersionNumber = currentNode.getAttributeValue("version");
+				String oldVersionNumberRef = currentNode.getAttributeValue("version");
 				String inculdedFeatureId = currentNode.getAttributeValue("id");
-				String newVersionNumber = getFeatureVersion(inculdedFeatureId);
-				if (!oldVersionNumber.equals(newVersionNumber)) {
-					currentNode.setAttribute("version", newVersionNumber);
-					logger.debug("\t\tFeatureUpdater.updateMarkedFeatures() update feature ref " + inculdedFeatureId + ":" + oldVersionNumber + " -> " + newVersionNumber);
+
+				String newVersionRef;
+				String versionFromFS = getFeatureVersion(inculdedFeatureId);
+				if (feature2update.contains(inculdedFeatureId)) {
+					if (featureUpdated.contains(inculdedFeatureId)) {
+						newVersionRef = versionFromFS;
+					} else {
+						// not yet updated (but marked)
+						String[] numberRef = versionFromFS.split("\\.");
+						newVersionRef = bu.update(numberRef, pattern);
+					}
+					currentNode.setAttribute("version", newVersionRef);
+					logger.debug("\t\tFeatureUpdater.updateMarkedFeatures() update feature ref " + inculdedFeatureId + ":" + oldVersionNumberRef + " -> " + newVersionRef);
 				}
 			}
 
@@ -179,6 +188,7 @@ public class FeatureUpdater {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			featureUpdated.add(feature);
 		}
 	}
 
@@ -196,6 +206,8 @@ public class FeatureUpdater {
 			// maybe we could find more feature to mark
 			checkFeatures();
 			c++;
+			logger.debug("before :" + oldFeature2update.size());
+			logger.debug("after :" + feature2update.size());
 		} while (!feature2update.equals(oldFeature2update));
 		logger.debug("FeatureUpdater.checkAndUpdateAllFeatures() Updates features DONE in " + c);
 		updateMarkedFeatures();

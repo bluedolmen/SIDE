@@ -194,7 +194,7 @@ public class ProjectVersionUpdater {
 		System.out.println(" poms :" + listeProjetPoms.size());
 		System.out.println(" project updated (svn) :");
 		System.out.println(" plugins :" + listePluginModif.size());
-		System.out.println(" Features :" + listeFeatureModif.size());
+		System.out.println(" Features :" + listeFeatureModif);
 		System.out.println(" poms :" + listeProjetPomsModif.size());
 
 		if (listeFeature.size() == 0 || listePlugin.size() == 0 || listeProjetPoms.size() == 0) {

@@ -102,7 +102,14 @@ public class PluginsUpdater {
 				updatePluginModuleDependencies(pluginDoc, true);
 			}
 			// TODO fix plugins depenencies
-
+			
+			// get dependencies
+			
+			// check if marked
+			// check if in pluginUpdeted
+			// so update ref
+			
+			
 			pluginsUpdated.add(plugin);
 
 		}
