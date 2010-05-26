@@ -22,7 +22,6 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-
 import com.bluexml.side.integration.buildHudson.ProjectVersionUpdater;
 
 public class BuilderUtils {
@@ -127,16 +126,6 @@ public class BuilderUtils {
 
 		writer.flush();
 		writer.close();
-	}
-
-	public static String[] toArray(List<String> l) {
-		String[] array = new String[l.size()];
-		int i = 0;
-		for (String string : l) {
-			array[i] = string;
-			i++;
-		}
-		return array;
 	}
 
 	/**
@@ -254,19 +243,19 @@ public class BuilderUtils {
 		projects.addAll(getProjects("project.enterprise"));
 		return projects;
 	}
-	
+
 	public List<String> getEnterpriseProjects() {
 		List<String> projects = getProjects("project.enterprise");
 		return projects;
 	}
-	
+
 	public List<String> getCommunityProjects() {
 		List<String> projects = getProjects("project");
 		return projects;
 	}
 
 	public static List<String> findFile(File f, String s) {
-		//logger.debug("BuilderUtils.findFile() baseDir:"+f+" fileName:"+s);
+		// logger.debug("BuilderUtils.findFile() baseDir:"+f+" fileName:"+s);
 		List<String> listefichierpom = new ArrayList<String>();
 		boolean stopfind = false;
 		if (f.getName().equals(s) && !(f.getPath().indexOf("src") > -1) && !(f.getPath().indexOf("config") > -1)) {
@@ -295,10 +284,9 @@ public class BuilderUtils {
 	 * @throws IOException
 	 */
 	public void readSvnLog(List<String> listeProjetPomsAll, List<String> listeProjetPomsModif, List<String> listeProjetModif) throws FileNotFoundException, IOException {
-		boolean update = false;
-		boolean end = false;
 		String ligne;
 		String modif;
+		// this file contains only svn command output
 		File log = new File(getPathToLog());
 		BufferedReader ficTexte = new BufferedReader(new FileReader(log));
 		logger.debug("###### search for updated project from svn log " + log);
@@ -307,56 +295,43 @@ public class BuilderUtils {
 		}
 
 		// Analyse et copie de chaque ligne
-		while ((ligne = ficTexte.readLine()) != null && !end) {
+		while ((ligne = ficTexte.readLine()) != null) {
 
-			// condition d'arret de la lecture du log
-			// on arrete la lecture lorsque se lance le build
-			if (ligne.startsWith(ProjectVersionUpdater.buildStartLine)) {
-				end = true;
-			}
-
-			// condition pour ne pas traiter les logs du checkout
-			if (ligne.startsWith("+ svn update")) {
-				update = true;
-			}
-			if (ligne.indexOf("Checking out " + Utils.getRepository()) == -1) {
-				update = true;
-			}
-
-			if (!"".equals(ligne) && !end) {
+			if (!"".equals(ligne)) {
 
 				if (ligne.indexOf("At revision") != -1) {
 					String revisionNumber = ligne.substring("At revision".length(), ligne.length()).trim();
+					logger.debug("Updated at rev :" + revisionNumber);
 				}
 
-				if (update) {
+				if ((ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ') && (ligne.charAt(1) == ' ' || ligne.charAt(1) == 'U' || ligne.charAt(1) == 'A' || ligne.charAt(1) == 'D')) {
 
-					if ((ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ') && (ligne.charAt(1) == ' ' || ligne.charAt(1) == 'U' || ligne.charAt(1) == 'A' || ligne.charAt(1) == 'D') && update) {
-
-						if (ligne.indexOf("Integration") > -1 || ligne.indexOf("FrameworksModules") > -1) {
-							for (String valeur : listeProjetPomsAll) {
-								String valeurf = valeur;
-								String[] tab = valeurf.split("/" + sourceSVNName + "/");
-								String[] tab2 = tab[1].split("/pom.xml");
-								if (ligne.indexOf(tab2[0]) > -1) {
-									if (!listeProjetPomsModif.contains(valeur))
-										listeProjetPomsModif.add(valeur);
+					if (ligne.indexOf("Integration") > -1 || ligne.indexOf("FrameworksModules") > -1) {
+						for (String id : listeProjetPomsAll) {
+							String valeurf = id;
+							String[] tab = valeurf.split("/" + sourceSVNName + "/");
+							String[] tab2 = tab[1].split("/pom.xml");
+							if (ligne.indexOf(tab2[0]) > -1) {
+								if (!listeProjetPomsModif.contains(id)) {
+									listeProjetPomsModif.add(id);
+									logger.debug("found an updated maven project : " + id);
 								}
 							}
 						}
+					}
 
-						modif = ligne.substring(2, ligne.length());
-						modif.trim();
-						String[] proj = modif.split(File.separator);
+					modif = ligne.substring(2, ligne.length());
+					modif.trim();
+					String[] proj = modif.split(File.separator);
 
-						for (int i = 0; i < proj.length; i++) {
-							if (!listeProjetModif.contains(proj[i])) {
-								listeProjetModif.add(proj[i]);
-							}
+					for (int i = 0; i < proj.length; i++) {
+						String id = proj[i];
+						if (!listeProjetModif.contains(id)) {
+							listeProjetModif.add(id);
+							logger.debug("found an updated eclipse project (plugin or feature): " + id);
 						}
 					}
 				}
-
 			}
 		}
 	}
@@ -527,9 +502,9 @@ public class BuilderUtils {
 	}
 
 	public void copyToRepository() throws Exception {
-		String to = workspace;		
+		String to = workspace;
 		String from = getRepositoryCopyPath();
-		logger.info("BuilderUtils.copyToRepository() start "+from+" to "+to);
+		logger.info("BuilderUtils.copyToRepository() start " + from + " to " + to);
 		FileHelper.copyFiles(new File(from), new File(to), true);
 	}
 

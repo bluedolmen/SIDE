@@ -12,9 +12,15 @@ import com.bluexml.side.integration.buildHudson.utils.FeatureUpdater;
 import com.bluexml.side.integration.buildHudson.utils.MavenProjectUpdater;
 import com.bluexml.side.integration.buildHudson.utils.PluginsUpdater;
 import com.bluexml.side.integration.buildHudson.utils.ProductUpdater;
+import com.bluexml.side.integration.buildHudson.utils.SVNCommandGenerator;
 
 public class ProjectVersionUpdater {
+	/**
+	 * options
+	 */
 	public boolean skipCopyToRepo = false;
+	public boolean generateSVNCommit = true;
+
 	/**
 	 * parameters
 	 */
@@ -143,12 +149,12 @@ public class ProjectVersionUpdater {
 
 		// copy svn repository to a working folder
 		bu.copyFromRepository();
-		
+
 		// get All poms
 		System.out.println("Search maven2 projects :");
 		File searchFrom = new File(pathproject + "/" + sourceSVNName + "/");
-		System.out.println("from "+searchFrom);
-		
+		System.out.println("from " + searchFrom);
+
 		listeProjetPoms = BuilderUtils.findFile(searchFrom, "pom.xml");
 		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
 			BuilderUtils.findFile(new File(pathproject + "/" + Application.SIDE_Core + "/"), "pom.xml");
@@ -156,8 +162,9 @@ public class ProjectVersionUpdater {
 
 		// read svn log to list modified projects
 		bu.readSvnLog(listeProjetPoms, listeProjetPomsModif, listeProjet);
-		
-		// dispatch modified project according to project type (plugin or feature)
+
+		// dispatch modified project according to project type (plugin or
+		// feature)
 		for (String element : listeProjet) {
 			if (listeProjetReels.contains(element)) {
 				// on met tous les plugins modifiés dans un tableau
@@ -170,7 +177,7 @@ public class ProjectVersionUpdater {
 				}
 			}
 		}
-		
+
 		// dispatch all project according to project type (plugin or feature)
 		for (int i = 0; i < projects.size(); i++) {
 			if (projects.get(i).indexOf("feature") != -1) {
@@ -180,7 +187,7 @@ public class ProjectVersionUpdater {
 			}
 		}
 		// lists initializing done.
-		
+
 		System.out.println(" Found :");
 		System.out.println(" plugins :" + listePlugin.size());
 		System.out.println(" Features :" + listeFeature.size());
@@ -189,7 +196,12 @@ public class ProjectVersionUpdater {
 		System.out.println(" plugins :" + listePluginModif.size());
 		System.out.println(" Features :" + listeFeatureModif.size());
 		System.out.println(" poms :" + listeProjetPomsModif.size());
-		
+
+		if (listeFeature.size() == 0 || listePlugin.size() == 0 || listeProjetPoms.size() == 0) {
+			// something wrong
+			throw new Exception("Updater Stoped ! please check configuration somes projects could not be found in repository");
+		}
+
 		// launch maven project updater
 		MavenProjectUpdater mpu = new MavenProjectUpdater(listeProjetPoms, listeProjetPomsModif, bu);
 		mpu.checkAndUpdateAllPoms();
@@ -214,7 +226,6 @@ public class ProjectVersionUpdater {
 			System.out.println("\t- " + entry.getKey() + " : " + entry.getValue());
 		}
 
-		
 		// launch product updater
 		ProductUpdater produ = new ProductUpdater(fu, bu);
 		boolean sideProductChanges = produ.updateProduct();
@@ -223,12 +234,18 @@ public class ProjectVersionUpdater {
 		} else {
 			System.out.println("- side.product no changes " + produ.getNewVersion());
 		}
-		
+
 		// project version update done.
-		
+
 		if (!skipCopyToRepo) {
 			// get modified files and copy them into svn local copy
 			bu.copyToRepository();
+		}
+		
+		if (generateSVNCommit) {
+			// generate ant script to commit changes
+			SVNCommandGenerator svnCg = new SVNCommandGenerator(bu, launchDate, listeProjetPomsModif, listePluginModif, listeFeatureModif);
+			svnCg.createAntFile();
 		}
 	}
 
