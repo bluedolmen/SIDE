@@ -111,13 +111,17 @@ public class FeatureUpdater {
 						logger.debug("\tscan included feature :" + inculdedFeatureId + " : " + oldVersionNumber);
 						// check version of features
 
-						String newVersionNumber = getFeatureVersion(inculdedFeatureId);
-
-						System.err.println("compare versions old:" + oldVersionNumber + "/" + newVersionNumber);
-						if (!oldVersionNumber.equals(newVersionNumber)) {
+						if (feature2update.contains(inculdedFeatureId)) {
 							logger.debug("\tFeatureUpdater.checkFeatures() feature marked beacause found included marked feature " + inculdedFeatureId);
 							marked = true;
-							// break;
+						} else {
+							String newVersionNumber = getFeatureVersion(inculdedFeatureId);
+							logger.debug("compare versions old:" + oldVersionNumber + "/" + newVersionNumber);
+							if (!oldVersionNumber.equals(newVersionNumber)) {
+								logger.debug("\tFeatureUpdater.checkFeatures() feature marked beacause found included feature with bad version" + inculdedFeatureId);
+								marked = true;
+								// break;
+							}
 						}
 					}
 				}

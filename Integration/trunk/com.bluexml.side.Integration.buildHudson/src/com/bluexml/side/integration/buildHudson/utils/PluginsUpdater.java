@@ -147,7 +147,7 @@ public class PluginsUpdater {
 			if (!oldVersionMin.equals(version) || !oldVersionMax.equals(version)) {
 				courantmoduleDependence1.setAttribute("versionMax", version);
 				courantmoduleDependence1.setAttribute("versionMin", version);
-				logger.debug("\t\tPluginsUpdater.updatePluginModuleDependencies() " + moduleId + ":" + oldVersionMax + " -> " + version);
+				logger.debug("\t\tupdate  " + moduleId + ":" + oldVersionMax + " -> " + version);
 				modifie = true;
 			}
 		}
