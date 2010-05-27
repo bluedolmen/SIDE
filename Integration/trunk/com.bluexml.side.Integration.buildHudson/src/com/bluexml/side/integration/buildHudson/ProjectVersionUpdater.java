@@ -214,6 +214,14 @@ public class ProjectVersionUpdater {
 			System.out.println("\t- " + entry.getKey() + " : " + entry.getValue());
 		}
 
+		if (mpu.getPomsNewsVersion().size() > 0) {
+			// maven2 project updated, so must update plugin that contains dependencies
+			String dependenciesPluginId="com.bluexml.side.Util.dependencies";			
+			if (!listePluginModif.contains(dependenciesPluginId)) {
+				listePluginModif.add(dependenciesPluginId);
+			}
+		}
+		
 		// launch plugin project updater
 		PluginsUpdater pu = new PluginsUpdater(listePlugin, listePluginModif, bu.getProjects("project"), mpu, bu);
 		pu.checkAndUpdate();

@@ -113,25 +113,30 @@ public class MavenProjectUpdater {
 				Element dependencies = root.getChild("dependencies", ns);
 				if (dependencies != null) {
 					List<?> listdependencies = dependencies.getChildren("dependency", ns);
-
+					logger.debug("\t search in project dependencies");
 					for (Object object : listdependencies) {
 						Element current = (Element) object;
-						marked |= mustBeMarked(current);
+						if (mustBeMarked(current)) {
+							marked = true;
+						}
 					}
 					if (update_mavenplugins) {
 						// mark to update if a plugin is marked
+						logger.debug("\t search in project plugin");
 						XPath xpa = XPath.newInstance("/project//plugin");
 						List<?> plugins = xpa.selectNodes(doc.getRootElement());
 						for (Object object : plugins) {
 							Element current = (Element) object;
-							marked |= mustBeMarked(current);
+							if (mustBeMarked(current)) {
+								marked = true;
+							}
 						}
 					}
 
 					if (marked) {
 						// marked for update
 						pom2update.add(id);
-						logger.debug("\tMavenProjectUpdater.markProjects() marked for update" + id);
+						logger.debug("\tMavenProjectUpdater.markProjects() marked for update " + id);
 					}
 				}
 			}
@@ -143,15 +148,24 @@ public class MavenProjectUpdater {
 		Element artifactId = current.getChild("artifactId", ns);
 		String moduleId = groupId.getTextTrim() + "." + artifactId.getTextTrim();
 		if (!pomsPathList.containsKey(moduleId)) {
+			// this project is not in our sources
 			return false;
 		} else if (!isMarked(moduleId)) {
+			// project not marked
 			// must compare version number
 			Element version_dep = current.getChild("version", ns);
 			String depVersionNumber = version_dep.getTextTrim();
 			// get version from file
 			String versionFromFile = getMavenProjectVersion(moduleId);
-			return !depVersionNumber.equals(versionFromFile);
+			if (!depVersionNumber.equals(versionFromFile)) {
+				return true;
+			} else {
+				return false;
+			}
+
 		} else {
+			logger.debug("must be marked because " + moduleId + " is marked");
+			// project is marked
 			return true;
 		}
 	}

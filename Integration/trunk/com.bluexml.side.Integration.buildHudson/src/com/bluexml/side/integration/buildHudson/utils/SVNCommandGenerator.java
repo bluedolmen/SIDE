@@ -59,51 +59,58 @@ public class SVNCommandGenerator {
 		out += "\t\t\ttarget: svnCommit\n";
 		out += "\t================================= -->\n\n";
 		out += "\t<target name=\"svnCommit\" depends=\"\" description=\"description\">\n";
-		out += "\t\t<svn username=\"build-auto\" password=\"build.auto\">\n";
-		out += "\t\t\t<commit message=\"buildAuto du " + BuilderUtils.getFormatedDate(launchDate) + "\">\n";
 
-		// fichier pom.xml
-		for (String pom : this.listeProjetPomsModif) {
-			String[] tab = pom.split("/pom.xml");
+		if (listeFeatureModif.size() > 0 || listePluginModif.size() > 0 || listeProjetPomsModif.size() > 0) {
 
-			out += "\t\t\t<fileset dir=\"" + tab[0] + "\">\n";
-			out += "\t\t\t\t<include name=\"pom.xml\" />\n";
-			out += "\t\t\t</fileset>\n";
-			logger.debug("reccord " + tab[0] + " for commit");
-		}
+			out += "\t\t<svn username=\"build-auto\" password=\"build.auto\">\n";
+			out += "\t\t\t<commit message=\"buildAuto du " + BuilderUtils.getFormatedDate(launchDate) + "\">\n";
 
-		// plugins
-		for (String pluginId : this.listePluginModif) {
-			out += "\t\t\t<fileset dir=\"" + bu.getPathToLocalCopy(pluginId) + File.separator + "META-INF\">\n";
-			out += "\t\t\t\t<include name=\"MANIFEST.MF\" />\n";
-			out += "\t\t\t</fileset>\n";
+			// fichier pom.xml
+			for (String pom : this.listeProjetPomsModif) {
+				String[] tab = pom.split("/pom.xml");
 
-			String fileFeaturePath = bu.getPathToLocalCopy(pluginId) + File.separator + "plugin.xml";
+				out += "\t\t\t<fileset dir=\"" + tab[0] + "\">\n";
+				out += "\t\t\t\t<include name=\"pom.xml\" />\n";
+				out += "\t\t\t</fileset>\n";
+				logger.debug("reccord " + tab[0] + " for commit");
+			}
 
-			boolean exists = (new File(fileFeaturePath)).exists();
-			if (exists) {
-				logger.debug("reccord " + pluginId + " for commit");
-				out += "\t\t\t<fileset dir=\"" + bu.getPathToLocalCopy(pluginId) + "\">\n";
-				out += "\t\t\t\t<include name=\"plugin.xml\" />\n";
-				if (pluginId.endsWith("branding")) {
-					// product
-					out += "\t\t\t\t<include name=\"side.product\" />\n";
+			// plugins
+			for (String pluginId : this.listePluginModif) {
+				out += "\t\t\t<fileset dir=\"" + bu.getPathToLocalCopy(pluginId) + File.separator + "META-INF\">\n";
+				out += "\t\t\t\t<include name=\"MANIFEST.MF\" />\n";
+				out += "\t\t\t</fileset>\n";
+
+				String fileFeaturePath = bu.getPathToLocalCopy(pluginId) + File.separator + "plugin.xml";
+
+				boolean exists = (new File(fileFeaturePath)).exists();
+				if (exists) {
+					logger.debug("reccord " + pluginId + " for commit");
+					out += "\t\t\t<fileset dir=\"" + bu.getPathToLocalCopy(pluginId) + "\">\n";
+					out += "\t\t\t\t<include name=\"plugin.xml\" />\n";
+					if (pluginId.endsWith("branding")) {
+						// product
+						out += "\t\t\t\t<include name=\"side.product\" />\n";
+					}
+					out += "\t\t\t</fileset>\n";
 				}
+			}
+
+			// features
+			for (String featureId : this.listeFeatureModif) {
+				logger.debug("reccord " + featureId + " for commit");
+				out += "\t\t\t<fileset dir=\"" + bu.getPathToLocalCopy(featureId) + "\">\n";
+				out += "\t\t\t\t<include name=\"feature.xml\" />\n";
 				out += "\t\t\t</fileset>\n";
 			}
+
+			out += "\t\t\t</commit>\n";
+			out += "\t\t</svn>\n";
+
+		} else {
+			out += "\t\t<echo message=\"nothing to commit\" />\n";
+
 		}
-
-		// features
-		for (String featureId : this.listeFeatureModif) {
-			logger.debug("reccord " + featureId + " for commit");
-			out += "\t\t\t<fileset dir=\"" + bu.getPathToLocalCopy(featureId) + "\">\n";
-			out += "\t\t\t\t<include name=\"feature.xml\" />\n";
-			out += "\t\t\t</fileset>\n";
-		}
-
-		out += "\t\t\t</commit>\n";
-		out += "\t\t</svn>\n";
-
 		out += "\t</target>\n";
 		return out;
 	}
