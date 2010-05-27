@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 public class SVNCommandGenerator {
+	private Logger logger = Logger.getLogger(getClass());
 	BuilderUtils bu;
 	Date launchDate;
 	List<String> listeProjetPomsModif = new ArrayList<String>();
@@ -21,11 +24,10 @@ public class SVNCommandGenerator {
 		bu.getProductFile();
 	}
 
-	
 	public void createAntFile() {
 		BuilderUtils.createFile(getCorpsSVN(), bu.getBuildPath(), "buildSVN.xml");
 	}
-	
+
 	/**
 	 * Retourne le corps du fichier buildSVN.xml
 	 */
@@ -42,9 +44,6 @@ public class SVNCommandGenerator {
 		out += "\t</path>\n";
 		out += "\t<taskdef resource=\"svntask.properties\" classpathref=\"project.classpath.ant\" />\n";
 
-		
-
-		
 		out += getTargetSvnCommit();
 
 		out += "</project>\n";
@@ -70,7 +69,7 @@ public class SVNCommandGenerator {
 			out += "\t\t\t<fileset dir=\"" + tab[0] + "\">\n";
 			out += "\t\t\t\t<include name=\"pom.xml\" />\n";
 			out += "\t\t\t</fileset>\n";
-			System.out.println("#### tab=" + tab[0]);
+			logger.debug("reccord " + tab[0] + " for commit");
 		}
 
 		// plugins
@@ -83,6 +82,7 @@ public class SVNCommandGenerator {
 
 			boolean exists = (new File(fileFeaturePath)).exists();
 			if (exists) {
+				logger.debug("reccord " + pluginId + " for commit");
 				out += "\t\t\t<fileset dir=\"" + bu.getPathToLocalCopy(pluginId) + "\">\n";
 				out += "\t\t\t\t<include name=\"plugin.xml\" />\n";
 				if (pluginId.endsWith("branding")) {
@@ -95,6 +95,7 @@ public class SVNCommandGenerator {
 
 		// features
 		for (String featureId : this.listeFeatureModif) {
+			logger.debug("reccord " + featureId + " for commit");
 			out += "\t\t\t<fileset dir=\"" + bu.getPathToLocalCopy(featureId) + "\">\n";
 			out += "\t\t\t\t<include name=\"feature.xml\" />\n";
 			out += "\t\t\t</fileset>\n";

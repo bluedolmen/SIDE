@@ -31,12 +31,14 @@ public class BuilderUtils {
 	private String revisionNumber;
 	private String build_number;
 	private String sourceSVNName;
+	private boolean useRepositoryCopy;
 
-	public BuilderUtils(Properties buildProperties, String workspace, String build_number, String revisionNumber) {
+	public BuilderUtils(Properties buildProperties, String workspace, String build_number, String revisionNumber, boolean useRepositoryCopy) {
 		this.buildProperties = buildProperties;
 		this.workspace = workspace;
 		this.build_number = build_number;
 		this.revisionNumber = revisionNumber;
+		this.useRepositoryCopy = useRepositoryCopy;
 	}
 
 	public void setSourceSVNName(String sourceSVNName) {
@@ -185,7 +187,10 @@ public class BuilderUtils {
 		return new SimpleDateFormat("HH:mm:ss").format(date);
 	}
 
-	public String getRepositoryCopyPath() {
+	public String getRepositoryCopyPath() throws Exception {
+		if (!useRepositoryCopy) {
+			throw new Exception("RepositoryCopy is disable, do not use it !");
+		}
 		String pathproject = getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy;
 		return pathproject;
 	}
@@ -350,8 +355,9 @@ public class BuilderUtils {
 
 	/**
 	 * Copy the repository
+	 * @throws Exception 
 	 */
-	public void copyFromRepository() {
+	public void copyFromRepository() throws Exception {
 		logger.info("Utils.copyFromRepository() start");
 		String from = "";
 		from = workspace;
@@ -380,7 +386,7 @@ public class BuilderUtils {
 	 */
 	public String getPathToLocalCopy(String projectName) {
 		String path = "";
-		if (new File(getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy).exists()) {
+		if (useRepositoryCopy) {
 			path = getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy;
 		} else {
 			path = workspace;

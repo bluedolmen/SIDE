@@ -15,12 +15,13 @@ import com.bluexml.side.integration.buildHudson.utils.ProductUpdater;
 import com.bluexml.side.integration.buildHudson.utils.SVNCommandGenerator;
 
 public class ProjectVersionUpdater {
+	
 	/**
 	 * options
 	 */
 	public boolean skipCopyToRepo = false;
 	public boolean generateSVNCommit = true;
-
+	public boolean useRepositoryCopy = true;
 	/**
 	 * parameters
 	 */
@@ -75,7 +76,7 @@ public class ProjectVersionUpdater {
 		String propertiesFilePath = args[4];
 
 		// initialize Builder
-		ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, propertiesFilePath);
+		ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, propertiesFilePath, false);
 		if (args.length == 6 && args[5].equals("skipCopyToRepo")) {
 			builder.skipCopyToRepo = true;
 		}
@@ -88,16 +89,17 @@ public class ProjectVersionUpdater {
 		}
 	}
 
-	public ProjectVersionUpdater(String workspace, String build_number, String build_id, String svn_revision, String propertiesFilePath) {
+	public ProjectVersionUpdater(String workspace, String build_number, String build_id, String svn_revision, String propertiesFilePath, boolean useRepositoryCopy) {
 		this.workspace = workspace;
 		this.build_number = build_number;
 		this.build_id = build_id;
 		this.svn_revision = svn_revision;
 		this.propertiesFile = propertiesFilePath;
 		this.conf = BuilderUtils.openProperties(propertiesFilePath);
-		this.bu = new BuilderUtils(conf, workspace, build_number, svn_revision);
+		this.bu = new BuilderUtils(conf, workspace, build_number, svn_revision, useRepositoryCopy);
+		this.useRepositoryCopy = useRepositoryCopy;
 		// set computed parameters
-		String pathprojectSVN = bu.getRepositoryCopyPath();
+		String pathprojectSVN = getUsedWorkspace();
 		if (pathprojectSVN.contains("Build_RCP_Enterprise")) {
 			sourceSVNName = SIDE_Enterprise;
 		} else {
@@ -145,10 +147,12 @@ public class ProjectVersionUpdater {
 				listeProjetReels.add(projects.get(i));
 			}
 		}
-		String pathproject = bu.getRepositoryCopyPath();
+		String pathproject = getUsedWorkspace();
 
 		// copy svn repository to a working folder
-		bu.copyFromRepository();
+		if (useRepositoryCopy) {
+			bu.copyFromRepository();
+		}
 
 		// get All poms
 		System.out.println("Search maven2 projects :");
@@ -237,16 +241,31 @@ public class ProjectVersionUpdater {
 
 		// project version update done.
 
-		if (!skipCopyToRepo) {
+		if (useRepositoryCopy && !skipCopyToRepo) {
 			// get modified files and copy them into svn local copy
 			bu.copyToRepository();
 		}
-		
+
 		if (generateSVNCommit) {
 			// generate ant script to commit changes
 			SVNCommandGenerator svnCg = new SVNCommandGenerator(bu, launchDate, listeProjetPomsModif, listePluginModif, listeFeatureModif);
 			svnCg.createAntFile();
 		}
+	}
+
+	public String getUsedWorkspace() {
+		String path = null;
+		if (useRepositoryCopy) {
+			try {
+				path = bu.getRepositoryCopyPath();
+			} catch (Exception e) {
+				// can't happen
+				e.printStackTrace();
+			}
+		} else {
+			path = workspace;
+		}
+		return path;
 	}
 
 }
