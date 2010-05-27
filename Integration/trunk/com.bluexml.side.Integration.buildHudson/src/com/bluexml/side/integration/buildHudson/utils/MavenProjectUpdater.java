@@ -294,6 +294,9 @@ public class MavenProjectUpdater {
 		} else {
 			// must read xml file
 			String path = pomsPathList.get(project);
+			if (path == null) {
+				throw new Exception("Maven project "+project+" not found please check moduleId");
+			}
 			File pom_xml = new File(path);
 			Document doc = new SAXBuilder().build(pom_xml);
 			Element root = doc.getRootElement();
