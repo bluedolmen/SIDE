@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.bluexml.side.integration.buildHudson.updaters.FeatureUpdater;
+import com.bluexml.side.integration.buildHudson.updaters.MavenProjectUpdater;
+import com.bluexml.side.integration.buildHudson.updaters.PluginsUpdater;
+import com.bluexml.side.integration.buildHudson.updaters.ProductUpdater;
 import com.bluexml.side.integration.buildHudson.utils.BuilderUtils;
-import com.bluexml.side.integration.buildHudson.utils.FeatureUpdater;
-import com.bluexml.side.integration.buildHudson.utils.MavenProjectUpdater;
-import com.bluexml.side.integration.buildHudson.utils.PluginsUpdater;
-import com.bluexml.side.integration.buildHudson.utils.ProductUpdater;
 import com.bluexml.side.integration.buildHudson.utils.SVNCommandGenerator;
 
 public class ProjectVersionUpdater {

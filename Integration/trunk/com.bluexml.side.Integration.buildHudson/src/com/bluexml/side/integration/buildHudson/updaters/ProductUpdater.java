@@ -1,4 +1,4 @@
-package com.bluexml.side.integration.buildHudson.utils;
+package com.bluexml.side.integration.buildHudson.updaters;
 
 import java.io.File;
 import java.util.List;
@@ -8,6 +8,8 @@ import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.xpath.XPath;
+
+import com.bluexml.side.integration.buildHudson.utils.BuilderUtils;
 
 public class ProductUpdater {
 	private Logger logger = Logger.getLogger(getClass());

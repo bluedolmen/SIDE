@@ -1,4 +1,4 @@
-package com.bluexml.side.integration.buildHudson.utils;
+package com.bluexml.side.integration.buildHudson.updaters;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +15,8 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+
+import com.bluexml.side.integration.buildHudson.utils.BuilderUtils;
 
 public class FeatureUpdater {
 	private Logger logger = Logger.getLogger(getClass());

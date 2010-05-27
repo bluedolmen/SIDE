@@ -1,4 +1,4 @@
-package com.bluexml.side.integration.buildHudson.utils;
+package com.bluexml.side.integration.buildHudson.updaters;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,6 +20,8 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.jdom.xpath.XPath;
+
+import com.bluexml.side.integration.buildHudson.utils.BuilderUtils;
 
 public class PluginsUpdater {
 	private Logger logger = Logger.getLogger(getClass());
