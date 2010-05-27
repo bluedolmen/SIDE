@@ -206,7 +206,7 @@ public class FeatureUpdater {
 		// if no changes so job's done
 		List<String> oldFeature2update;
 		logger.debug("FeatureUpdater.checkAndUpdateAllFeatures() checkAllFeatures");
-		int c = 0;
+		int c = 1;
 		do {
 			logger.debug("FeatureUpdater.checkAndUpdateAllFeatures() occurance #" + c);
 			oldFeature2update = new ArrayList<String>(feature2update);

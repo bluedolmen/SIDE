@@ -54,7 +54,7 @@ public class PluginsUpdater {
 	public void checkAndUpdate() throws Exception {
 		List<String> oldPlugins2update;
 
-		int c = 0;
+		int c = 1;
 		do {
 			logger.debug("PluginsUpdater.checkAndUpdate() occurance #" + c);
 			oldPlugins2update = new ArrayList<String>(plugins2update);

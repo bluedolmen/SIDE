@@ -48,7 +48,7 @@ public class MavenProjectUpdater {
 			String currentmodule = getModuleIdFromPomPath(pom);
 			pomsPathList.put(currentmodule, pom);
 		}
-		logger.debug("MavenProjectUpdater.MavenProjectUpdater() pomsList " + pomsPathList.keySet());
+		logger.debug("MavenProjectUpdater() pomsList " + pomsPathList.keySet());
 		for (String pom : pom2update) {
 			String currentmodule = getModuleIdFromPomPath(pom);
 			this.pom2update.add(currentmodule);
@@ -68,27 +68,16 @@ public class MavenProjectUpdater {
 		// some feature could be forgotten so search one more time
 		// if no changes so job's done
 		List<String> oldPoms2update;
-		logger.debug("MavenProjectUpdater.checkAndUpdateAllFeatures() checkAllPoms");
-		int c = 0;
+		logger.debug("checkAndUpdateAllPoms() checkAllPoms");
+		int c = 1;
 		do {
-			logger.debug("\tMavenProjectUpdater.checkAndUpdateAllFeatures()");
+			logger.debug("\tcheckAndUpdateAllPoms() iteration #" + c);
 			oldPoms2update = new ArrayList<String>(pom2update);
-			// maybe we could find more feature to mark
-			// logger.debug("|||| before " + oldPoms2update.size());
 			markProjects();
-			// logger.debug("|||| before " + oldPoms2update.size());
-			// logger.debug("|||| before feature2update" +
-			// pom2update.size());
 			c++;
 		} while (!pom2update.equals(oldPoms2update));
-		logger.debug("MavenProjectUpdater.checkAndUpdateAllFeatures() Updates poms DONE in " + c + " iteration");
-		/**
-		 * TEST we change index of a referred pom to test the update
-		 */
-		// String tomove =
-		// "com.bluexml.side.Framework.alfresco.shareDoclistEnterprise";
-		// pom2update.remove(tomove);
-		// pom2update.add(tomove);
+		logger.debug("checkAndUpdateAllPoms() Updates poms DONE in " + c + " iteration");
+		
 		updateMarkedModules();
 		updateDone = true;
 	}
@@ -99,7 +88,7 @@ public class MavenProjectUpdater {
 		module.removeAll(pom2update);
 		if (module.size() > 0) {
 			for (String id : module) {
-				logger.debug("MavenProjectUpdater.markProjects() Check mvn project :" + id);
+				logger.debug("markProjects() Check mvn project :" + id);
 
 				boolean marked = false;
 
@@ -113,7 +102,7 @@ public class MavenProjectUpdater {
 				Element dependencies = root.getChild("dependencies", ns);
 				if (dependencies != null) {
 					List<?> listdependencies = dependencies.getChildren("dependency", ns);
-					logger.debug("\t search in project dependencies");
+					logger.debug("\tsearch in project dependencies");
 					for (Object object : listdependencies) {
 						Element current = (Element) object;
 						if (mustBeMarked(current)) {
@@ -122,7 +111,7 @@ public class MavenProjectUpdater {
 					}
 					if (update_mavenplugins) {
 						// mark to update if a plugin is marked
-						logger.debug("\t search in project plugin");
+						logger.debug("\tsearch in project plugin");
 						XPath xpa = XPath.newInstance("/project//plugin");
 						List<?> plugins = xpa.selectNodes(doc.getRootElement());
 						for (Object object : plugins) {
@@ -158,13 +147,14 @@ public class MavenProjectUpdater {
 			// get version from file
 			String versionFromFile = getMavenProjectVersion(moduleId);
 			if (!depVersionNumber.equals(versionFromFile)) {
+				logger.debug("\t\tmust be marked because " + moduleId + " version mistmatch :" + depVersionNumber + " insted of " + versionFromFile);
 				return true;
 			} else {
 				return false;
 			}
 
 		} else {
-			logger.debug("must be marked because " + moduleId + " is marked");
+			logger.debug("\t\tmust be marked because " + moduleId + " is marked");
 			// project is marked
 			return true;
 		}
@@ -258,15 +248,15 @@ public class MavenProjectUpdater {
 			if (pomUpdated.contains(moduleId)) {
 				// version is already updated
 				current_version.setText(oldVersionNumberDep);
-				logger.debug("MavenProjectUpdater.updateRef() ref already updated");
+				logger.debug("\t\tupdateRef() ref already updated");
 			} else {
 				// version is not updated yet so we compute it
 				String[] numberDep = oldVersionNumberDep.split("\\.");
 				current_version.setText(updatepom(numberDep, pattern));
-				logger.debug("MavenProjectUpdater.updateRef() ref not yet updated");
+				logger.debug("\t\tupdateRef() ref not yet updated");
 			}
 			String versiontrim = current_version.getTextTrim();
-			logger.debug("\t\tMavenProjectUpdater.updateMarkedModules() update ref " + moduleId + " version:" + current_oldVersionNumber + " -> " + versiontrim);
+			logger.debug("\t\tupdateMarkedModules() update ref " + moduleId + " version:" + current_oldVersionNumber + " -> " + versiontrim);
 
 		}
 	}
@@ -295,7 +285,7 @@ public class MavenProjectUpdater {
 			// must read xml file
 			String path = pomsPathList.get(project);
 			if (path == null) {
-				throw new Exception("Maven project "+project+" not found please check moduleId");
+				throw new Exception("Maven project " + project + " not found please check moduleId");
 			}
 			File pom_xml = new File(path);
 			Document doc = new SAXBuilder().build(pom_xml);

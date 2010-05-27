@@ -78,6 +78,7 @@ public class ProjectVersionUpdater {
 		boolean skipCopyToRepo = false;
 		if (args.length == 6 && args[5].equals("skipCopyToRepo")) {
 			skipCopyToRepo = true;
+			
 		}
 		// initialize Builder
 		ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, propertiesFilePath, skipCopyToRepo);
