@@ -148,7 +148,7 @@ public class ProjectVersionUpdater {
 		List<String> projects = new ArrayList<String>();
 		projects.addAll(bu.getProjects("project"));
 		if (isEnterpriseBuild()) {
-			// add Enterprise proejcts
+			// add Enterprise projects
 			projects.addAll(bu.getProjects("project.enterprise"));
 		}
 		for (int i = 0; i < projects.size(); i++) {
