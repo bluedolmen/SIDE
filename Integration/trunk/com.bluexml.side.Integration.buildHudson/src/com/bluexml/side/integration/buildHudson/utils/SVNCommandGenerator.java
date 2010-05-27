@@ -31,7 +31,7 @@ public class SVNCommandGenerator {
 	 */
 	private String getCorpsSVN() {
 		String out = "<?xml version=\"1.0\"?>\n";
-		out += "<project name=\"build\" default=\"build\">\n";
+		out += "<project name=\"build\" default=\"svnCommit\">\n";
 		out += "\t<property file=\"build.properties\" />\n";
 		out += "\t<property name=\"antLib\" value=\"" + bu.getBuildPath() + File.separator + "lib\" />\n\n";
 		out += "\t<!-- load the svn task -->\n";
@@ -42,12 +42,9 @@ public class SVNCommandGenerator {
 		out += "\t</path>\n";
 		out += "\t<taskdef resource=\"svntask.properties\" classpathref=\"project.classpath.ant\" />\n";
 
-		out += "\n\t<target name=\"build\" depends=\"clean, svnCO, svnUD\" />\n";
+		
 
-		out += "\n\t<target name=\"clean\">\n";
-		out += "\t\t<delete dir=\"${buildDirectory}\" />\n";
-		out += "\t</target>\n";
-
+		
 		out += getTargetSvnCommit();
 
 		out += "</project>\n";
