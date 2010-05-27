@@ -19,9 +19,9 @@ public class ProjectVersionUpdater {
 	/**
 	 * options
 	 */
-	public boolean skipCopyToRepo = false;
+	public boolean skipCopyToRepo = true;
 	public boolean generateSVNCommit = true;
-	public boolean useRepositoryCopy = true;
+	public boolean useRepositoryCopy = false;
 	public boolean forceProductUpdate = true;
 	/**
 	 * parameters
@@ -75,12 +75,13 @@ public class ProjectVersionUpdater {
 		String build_id = args[2];
 		String svn_revision = args[3];
 		String propertiesFilePath = args[4];
-
-		// initialize Builder
-		ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, propertiesFilePath, false);
+		boolean skipCopyToRepo = false;
 		if (args.length == 6 && args[5].equals("skipCopyToRepo")) {
-			builder.skipCopyToRepo = true;
+			skipCopyToRepo = true;
 		}
+		// initialize Builder
+		ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, propertiesFilePath, skipCopyToRepo);
+
 		try {
 			// launch version updater
 			builder.build();
@@ -90,15 +91,19 @@ public class ProjectVersionUpdater {
 		}
 	}
 
-	public ProjectVersionUpdater(String workspace, String build_number, String build_id, String svn_revision, String propertiesFilePath, boolean useRepositoryCopy) {
+	public ProjectVersionUpdater(String workspace, String build_number, String build_id, String svn_revision, String propertiesFilePath, boolean skipCopyToRepo) {
 		this.workspace = workspace;
 		this.build_number = build_number;
 		this.build_id = build_id;
 		this.svn_revision = svn_revision;
 		this.propertiesFile = propertiesFilePath;
 		this.conf = BuilderUtils.openProperties(propertiesFilePath);
+		if (skipCopyToRepo) {
+			this.useRepositoryCopy = true;
+			this.skipCopyToRepo = true;
+		}
 		this.bu = new BuilderUtils(conf, workspace, build_number, svn_revision, useRepositoryCopy);
-		this.useRepositoryCopy = useRepositoryCopy;
+
 		// set computed parameters
 		String pathprojectSVN = getUsedWorkspace();
 		if (pathprojectSVN.contains("Build_RCP_Enterprise")) {
@@ -121,7 +126,7 @@ public class ProjectVersionUpdater {
 		System.out.println("- svn_revision = " + svn_revision);
 		System.out.println("- propertiesFile = " + propertiesFile);
 		System.out.println("- sourceSVNName = " + sourceSVNName);
-
+		System.out.println("- skipCopyToRepo = " + skipCopyToRepo);
 		// build process
 
 		System.out.println("\nLancé le " + BuilderUtils.getFormatedDate(launchDate) + " à " + BuilderUtils.getTime(launchDate));
@@ -141,8 +146,10 @@ public class ProjectVersionUpdater {
 
 		List<String> projects = new ArrayList<String>();
 		projects.addAll(bu.getProjects("project"));
-		projects.addAll(bu.getProjects("project.enterprise"));
-
+		if (isEnterpriseBuild()) {
+			// add Enterprise proejcts
+			projects.addAll(bu.getProjects("project.enterprise"));
+		}
 		for (int i = 0; i < projects.size(); i++) {
 			if (projects.get(i).length() > 0) {
 				listeProjetReels.add(projects.get(i));
@@ -161,7 +168,8 @@ public class ProjectVersionUpdater {
 		System.out.println("from " + searchFrom);
 
 		listeProjetPoms = BuilderUtils.findFile(searchFrom, "pom.xml");
-		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
+		if (isEnterpriseBuild()) {
+			// just to have Core project in full list
 			BuilderUtils.findFile(new File(pathproject + "/" + Application.SIDE_Core + "/"), "pom.xml");
 		}
 
@@ -223,19 +231,18 @@ public class ProjectVersionUpdater {
 				listePluginModif.add(dependenciesPluginId);
 			}
 		}
-		
-		
+
 		if (forceProductUpdate) {
 			/**
-			 * side.product must be updated so dranding too, this to avoid cycle in update :
-			 * t0 side.product updated and commited
-			 * t1 scan svnlog branding is changed, marked for update ...
+			 * side.product must be updated so dranding too, this to avoid cycle
+			 * in update : t0 side.product updated and commited t1 scan svnlog
+			 * branding is changed, marked for update ...
 			 */
 			String brandingPluginId = "";
-			if (sourceSVNName.equals(SIDE_Core)) {
-				brandingPluginId = "com.bluexml.side.Integration.eclipse.branding";
-			} else {
+			if (isEnterpriseBuild()) {
 				brandingPluginId = "com.bluexml.side.Integration.eclipse.branding.enterprise";
+			} else {
+				brandingPluginId = "com.bluexml.side.Integration.eclipse.branding";
 			}
 			if (!listePluginModif.contains(brandingPluginId)) {
 				listePluginModif.add(brandingPluginId);
@@ -243,7 +250,13 @@ public class ProjectVersionUpdater {
 		}
 
 		// launch plugin project updater
-		PluginsUpdater pu = new PluginsUpdater(listePlugin, listePluginModif, bu.getProjects("project"), mpu, bu);
+
+		PluginsUpdater pu = null;
+		if (isEnterpriseBuild()) {
+			pu = new PluginsUpdater(listePlugin, listePluginModif, bu.getProjects("project"), mpu, bu);
+		} else {
+			pu = new PluginsUpdater(listePlugin, listePluginModif, null, mpu, bu);
+		}
 		pu.checkAndUpdate();
 		System.out.println("Updated Plugins :");
 		for (Map.Entry<String, String> entry : pu.getPluginsNewVersion().entrySet()) {
@@ -251,7 +264,13 @@ public class ProjectVersionUpdater {
 		}
 
 		// launch feature project updater
-		FeatureUpdater fu = new FeatureUpdater(listeFeature, listeFeatureModif, bu.getProjects("project"), pu, bu);
+		FeatureUpdater fu = null;
+		if (isEnterpriseBuild()) {
+			fu = new FeatureUpdater(listeFeature, listeFeatureModif, bu.getProjects("project"), pu, bu);
+		} else {
+			fu = new FeatureUpdater(listeFeature, listeFeatureModif, null, pu, bu);
+		}
+
 		fu.checkAndUpdateAllFeatures();
 		System.out.println("Updated Features :");
 		for (Map.Entry<String, String> entry : fu.getFeaturesNewsVersion().entrySet()) {
@@ -294,6 +313,10 @@ public class ProjectVersionUpdater {
 			path = workspace;
 		}
 		return path;
+	}
+
+	public boolean isEnterpriseBuild() {
+		return sourceSVNName.equals(SIDE_Enterprise);
 	}
 
 }

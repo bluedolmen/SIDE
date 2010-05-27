@@ -50,7 +50,9 @@ public class FeatureUpdater {
 		this.bu = bu;
 		this.featuresList = featuresList;
 		this.feature2update = features2update;
-		this.featuresListReadOnly = featuresListReadOnly;
+		if (featuresListReadOnly != null) {
+			this.featuresListReadOnly = featuresListReadOnly;
+		}
 		this.pu = pu;
 	}
 
@@ -58,6 +60,7 @@ public class FeatureUpdater {
 		List<String> features_ = new ArrayList<String>(featuresList);
 		features_.removeAll(featuresListReadOnly);
 		features_.removeAll(feature2update);
+		logger.debug("features to check :" + features_);
 		if (features_.size() > 0) {
 			for (String id : features_) {
 				logger.debug("FeatureUpdater.checkFeatures() Check feature :" + id);
@@ -86,7 +89,7 @@ public class FeatureUpdater {
 					String newVersionNumber = pu.getPluginVersion(pluginId);
 
 					logger.debug("\tFeatureUpdater.checkFeatures() plugin:" + pluginId);
-					System.err.println("compare versions old:" + oldVersionNumber + "/" + newVersionNumber);
+					logger.debug("\tcompare versions old:" + oldVersionNumber + "/" + newVersionNumber);
 
 					if (!oldVersionNumber.equals(newVersionNumber)) {
 						logger.debug("\tUtils.updateVersionNumber() feature to update because plugin updated : " + pluginId);

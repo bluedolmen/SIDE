@@ -45,7 +45,9 @@ public class PluginsUpdater {
 		this.bu = bu;
 		this.plugins2update = plugins2update;
 		this.pluginsList = pluginsList;
-		this.pluginsListReadOnly = pluginsListReadOnly;
+		if (pluginsListReadOnly != null) {
+			this.pluginsListReadOnly = pluginsListReadOnly;
+		}
 		this.mpu = mpu;
 	}
 
@@ -72,6 +74,7 @@ public class PluginsUpdater {
 		plugins.removeAll(pluginsListReadOnly);
 		plugins.removeAll(plugins2update);
 		for (String pluginId : plugins) {
+			logger.debug("\tcheck plugin " + pluginId);
 			// mark if have module dependency updated (maven project)
 			Document pluginDoc = getPluginDoc(pluginId);
 			if (pluginDoc != null) {
@@ -102,14 +105,13 @@ public class PluginsUpdater {
 				updatePluginModuleDependencies(pluginDoc, true);
 			}
 			// TODO fix plugins depenencies
-			
+
 			// get dependencies
-			
+
 			// check if marked
 			// check if in pluginUpdeted
 			// so update ref
-			
-			
+
 			pluginsUpdated.add(plugin);
 
 		}
@@ -125,7 +127,7 @@ public class PluginsUpdater {
 	 * @throws
 	 */
 	private boolean updatePluginModuleDependencies(Document plugin, boolean applyChanges) throws Exception {
-
+		logger.debug("PluginsUpdater.updatePluginModuleDependencies()");
 		boolean modifie = false;
 		Document document = plugin;
 		URI path = new URI(document.getBaseURI());
@@ -140,11 +142,12 @@ public class PluginsUpdater {
 			String moduleId = courantmoduleDependence1.getAttributeValue("moduleId");
 			String oldVersionMin = courantmoduleDependence1.getAttributeValue("versionMin");
 			String oldVersionMax = courantmoduleDependence1.getAttributeValue("versionMax");
+			logger.debug("\t\tcheck module :" + moduleId);
 			String version = mpu.getMavenProjectVersion(moduleId);
 			if (!oldVersionMin.equals(version) || !oldVersionMax.equals(version)) {
 				courantmoduleDependence1.setAttribute("versionMax", version);
 				courantmoduleDependence1.setAttribute("versionMin", version);
-				logger.debug("PluginsUpdater.updatePluginModuleDependencies() " + moduleId + ":" + oldVersionMax + " -> " + version);
+				logger.debug("\t\tPluginsUpdater.updatePluginModuleDependencies() " + moduleId + ":" + oldVersionMax + " -> " + version);
 				modifie = true;
 			}
 		}
