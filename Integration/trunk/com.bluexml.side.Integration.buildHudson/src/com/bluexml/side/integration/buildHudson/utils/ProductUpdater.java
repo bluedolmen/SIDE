@@ -13,15 +13,17 @@ public class ProductUpdater {
 	private Logger logger = Logger.getLogger(getClass());
 	BuilderUtils bu;
 	FeatureUpdater fu;
+	boolean forceUpdate;
 	String newVersion = "";
 
 	public String getNewVersion() {
 		return newVersion;
 	}
 
-	public ProductUpdater(FeatureUpdater fu, BuilderUtils bu) {
+	public ProductUpdater(FeatureUpdater fu, BuilderUtils bu, boolean forceUpdate) {
 		this.bu = bu;
 		this.fu = fu;
+		this.forceUpdate = forceUpdate;
 	}
 
 	public boolean updateProduct() throws Exception {
@@ -51,7 +53,7 @@ public class ProductUpdater {
 		}
 		Attribute version = productDoc.getRootElement().getAttribute("version");
 		String oldVersion = version.getValue();
-		if (changes) {
+		if (changes || forceUpdate) {
 			String[] pattern = bu.getNumVersionPattern();
 			newVersion = MavenProjectUpdater.updatepom(version.getValue().split("\\."), pattern);
 

@@ -15,13 +15,14 @@ import com.bluexml.side.integration.buildHudson.utils.ProductUpdater;
 import com.bluexml.side.integration.buildHudson.utils.SVNCommandGenerator;
 
 public class ProjectVersionUpdater {
-	
+
 	/**
 	 * options
 	 */
 	public boolean skipCopyToRepo = false;
 	public boolean generateSVNCommit = true;
 	public boolean useRepositoryCopy = true;
+	public boolean forceProductUpdate = true;
 	/**
 	 * parameters
 	 */
@@ -215,13 +216,32 @@ public class ProjectVersionUpdater {
 		}
 
 		if (mpu.getPomsNewsVersion().size() > 0) {
-			// maven2 project updated, so must update plugin that contains dependencies
-			String dependenciesPluginId="com.bluexml.side.Util.dependencies";			
+			// maven2 project updated, so must update plugin that contains
+			// dependencies
+			String dependenciesPluginId = "com.bluexml.side.Util.dependencies";
 			if (!listePluginModif.contains(dependenciesPluginId)) {
 				listePluginModif.add(dependenciesPluginId);
 			}
 		}
 		
+		
+		if (forceProductUpdate) {
+			/**
+			 * side.product must be updated so dranding too, this to avoid cycle in update :
+			 * t0 side.product updated and commited
+			 * t1 scan svnlog branding is changed, marked for update ...
+			 */
+			String brandingPluginId = "";
+			if (sourceSVNName.equals(SIDE_Core)) {
+				brandingPluginId = "com.bluexml.side.Integration.eclipse.branding";
+			} else {
+				brandingPluginId = "com.bluexml.side.Integration.eclipse.branding.enterprise";
+			}
+			if (!listePluginModif.contains(brandingPluginId)) {
+				listePluginModif.add(brandingPluginId);
+			}
+		}
+
 		// launch plugin project updater
 		PluginsUpdater pu = new PluginsUpdater(listePlugin, listePluginModif, bu.getProjects("project"), mpu, bu);
 		pu.checkAndUpdate();
@@ -239,7 +259,7 @@ public class ProjectVersionUpdater {
 		}
 
 		// launch product updater
-		ProductUpdater produ = new ProductUpdater(fu, bu);
+		ProductUpdater produ = new ProductUpdater(fu, bu, forceProductUpdate);
 		boolean sideProductChanges = produ.updateProduct();
 		if (sideProductChanges) {
 			System.out.println("- side.product updated " + produ.getNewVersion());
