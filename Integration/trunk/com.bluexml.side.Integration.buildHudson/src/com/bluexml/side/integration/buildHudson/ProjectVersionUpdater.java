@@ -19,7 +19,7 @@ public class ProjectVersionUpdater {
 	/**
 	 * options
 	 */
-	public boolean skipCopyToRepo = true;
+	public boolean skipCopyToRepo = false;
 	public boolean generateSVNCommit = true;
 	public boolean useRepositoryCopy = false;
 	public boolean forceProductUpdate = true;
@@ -78,7 +78,6 @@ public class ProjectVersionUpdater {
 		boolean skipCopyToRepo = false;
 		if (args.length == 6 && args[5].equals("skipCopyToRepo")) {
 			skipCopyToRepo = true;
-			
 		}
 		// initialize Builder
 		ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, propertiesFilePath, skipCopyToRepo);
@@ -102,6 +101,9 @@ public class ProjectVersionUpdater {
 		if (skipCopyToRepo) {
 			this.useRepositoryCopy = true;
 			this.skipCopyToRepo = true;
+		} else {
+			this.useRepositoryCopy = false;
+			this.skipCopyToRepo = false;
 		}
 		this.bu = new BuilderUtils(conf, workspace, build_number, svn_revision, useRepositoryCopy);
 
