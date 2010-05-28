@@ -1,0 +1,5 @@
+<webscript>
+  <shortname>iframe Component</shortname>
+  <description>Component that add an iframe</description>
+  <url>/components/iframe</url>
+</webscript>
