@@ -16,6 +16,7 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.jdom.xpath.XPath;
 
+import com.bluexml.side.integration.buildHudson.ProjectVersionUpdater;
 import com.bluexml.side.integration.buildHudson.utils.BuilderUtils;
 
 public class MavenProjectUpdater {
@@ -183,7 +184,7 @@ public class MavenProjectUpdater {
 			logger.debug("\tMavenProjectUpdater.updateMarkedModules() update dependencies");
 			for (Object object : listdependencies) {
 				Element current = (Element) object;
-				updateRef(pattern, current);
+				updateRef(module, pattern, current);
 
 			}
 			if (update_mavenplugins) {
@@ -193,7 +194,7 @@ public class MavenProjectUpdater {
 				List<?> plugins = xpa.selectNodes(doc.getRootElement());
 				for (Object object : plugins) {
 					Element current = (Element) object;
-					updateRef(pattern, current);
+					updateRef(module, pattern, current);
 				}
 			}
 
@@ -210,7 +211,7 @@ public class MavenProjectUpdater {
 		logger.debug("MavenProjectUpdater.updateMarkedModules() Ended");
 	}
 
-	private void updateRef(String[] pattern, Element current) throws Exception {
+	private void updateRef(String parent, String[] pattern, Element current) throws Exception {
 		Element groupId = current.getChild("groupId", ns);
 		Element artifactId = current.getChild("artifactId", ns);
 		Element current_version = current.getChild("version", ns);
@@ -248,6 +249,11 @@ public class MavenProjectUpdater {
 			}
 
 		} else {
+			if (moduleId.contains(ProjectVersionUpdater.bluexmlPackage)) {
+				logger.warn("Bad feature reference in " + parent + " ref to bad feature " + moduleId);
+			} else {
+				logger.debug("included feature skipped :" + moduleId);
+			}
 			logger.debug("module skipped :" + moduleId);
 		}
 	}

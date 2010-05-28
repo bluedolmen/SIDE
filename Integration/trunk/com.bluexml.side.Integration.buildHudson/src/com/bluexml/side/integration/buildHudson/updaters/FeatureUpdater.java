@@ -16,6 +16,7 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+import com.bluexml.side.integration.buildHudson.ProjectVersionUpdater;
 import com.bluexml.side.integration.buildHudson.utils.BuilderUtils;
 
 public class FeatureUpdater {
@@ -201,7 +202,12 @@ public class FeatureUpdater {
 					}
 
 				} else {
-					logger.debug("included feature skipped :" + inculdedFeatureId);
+					if (inculdedFeatureId.contains(ProjectVersionUpdater.bluexmlPackage)) {
+						logger.warn("Bad feature reference in " + feature + " ref to bad feature " + inculdedFeatureId);
+					} else {
+						logger.debug("included feature skipped :" + inculdedFeatureId);
+					}
+
 				}
 
 			}

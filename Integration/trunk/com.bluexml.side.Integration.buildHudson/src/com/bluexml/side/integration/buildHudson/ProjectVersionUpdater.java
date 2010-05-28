@@ -49,6 +49,7 @@ public class ProjectVersionUpdater {
 	public static final String repositoryCopy = "repositoryCopy";
 	public static final String workspaceFolderName = "workspace";
 	public static final String svnLog = "svnUpdate.log";
+	public static final String bluexmlPackage="com.bluexml";
 
 	/**
 	 * attributes
@@ -229,7 +230,12 @@ public class ProjectVersionUpdater {
 		if (mpu.getPomsNewsVersion().size() > 0) {
 			// maven2 project updated, so must update plugin that contains
 			// dependencies
-			String dependenciesPluginId = "com.bluexml.side.Util.dependencies";
+			String dependenciesPluginId = "";
+			if (isEnterpriseBuild()) {
+				dependenciesPluginId = "com.bluexml.side.Util.dependencies.repository.enterprise";
+			} else {
+				dependenciesPluginId = "com.bluexml.side.Util.dependencies.repository";
+			}
 			if (!listePluginModif.contains(dependenciesPluginId)) {
 				listePluginModif.add(dependenciesPluginId);
 			}
@@ -237,7 +243,7 @@ public class ProjectVersionUpdater {
 
 		if (forceProductUpdate) {
 			/**
-			 * side.product must be updated so dranding too, this to avoid cycle
+			 * side.product must be updated so branding too, this to avoid cycle
 			 * in update : t0 side.product updated and commited t1 scan svnlog
 			 * branding is changed, marked for update ...
 			 */
