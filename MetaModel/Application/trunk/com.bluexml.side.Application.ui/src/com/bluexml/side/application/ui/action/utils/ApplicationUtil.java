@@ -54,6 +54,7 @@ import com.bluexml.side.application.ui.action.tree.ImplNode;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.libs.FileHelper;
+import com.bluexml.side.util.libs.eclipse.ExtensionPointUtils;
 import com.bluexml.side.util.security.Checkable;
 
 public class ApplicationUtil {
@@ -419,7 +420,7 @@ public class ApplicationUtil {
 		// com.bluexml.side.util.dependencies.ModuleConstraint
 		for (IConfigurationElement config_exp : contributions) {
 			String nodeName = APPLICATION_CONSTRAINTS;
-			List<IConfigurationElement> matchs = getIConfigurationElementsByName(config_exp, nodeName);
+			List<IConfigurationElement> matchs = ExtensionPointUtils.getIConfigurationElementsByName(config_exp, nodeName);
 			for (IConfigurationElement configurationElement : matchs) {
 				String moduleId = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID);
 				String moduleType = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULETYPE);
@@ -690,7 +691,7 @@ public class ApplicationUtil {
 			} else {
 				nodeName = "deployerVersion";
 			}
-			List<IConfigurationElement> matchs = getIConfigurationElementBy(config_exp, nodeName, query);
+			List<IConfigurationElement> matchs = ExtensionPointUtils.getIConfigurationElementBy(config_exp, nodeName, query);
 			if (matchs.size() == 1) {
 				return matchs.get(0);
 			} else if (matchs.size() > 1) {
@@ -700,69 +701,7 @@ public class ApplicationUtil {
 		return null;
 	}
 
-	/**
-	 * search in extension fragment that match with given name and a set of
-	 * attributes
-	 * 
-	 * @param parent
-	 * @param nodeName
-	 * @param parametersMatchs
-	 * @return
-	 */
-	public static List<IConfigurationElement> getIConfigurationElementBy(IConfigurationElement parent, String nodeName, Map<String, String> parametersMatchs) {
-		List<IConfigurationElement> l = getIConfigurationElementsByName(parent, nodeName);
-		ArrayList<IConfigurationElement> result = new ArrayList<IConfigurationElement>();
-		for (IConfigurationElement configurationElement : l) {
-			if (parametersMatchs(configurationElement, parametersMatchs)) {
-				result.add(configurationElement);
-			}
-		}
-		return result;
-	}
-
-	/**
-	 * return a list of extension fragment that match with the given name
-	 * 
-	 * @param parent
-	 * @param name
-	 * @return
-	 */
-	public static List<IConfigurationElement> getIConfigurationElementsByName(IConfigurationElement parent, String name) {
-		ArrayList<IConfigurationElement> l = new ArrayList<IConfigurationElement>();
-		if (parent.getName().equals(name)) {
-			l.add(parent);
-		}
-		for (IConfigurationElement configurationElement : parent.getChildren()) {
-			List<IConfigurationElement> ll = getIConfigurationElementsByName(configurationElement, name);
-			l.addAll(ll);
-		}
-		return l;
-	}
-
-	/**
-	 * test if the given extension fragment match with all attributes values
-	 * 
-	 * @param node
-	 * @param parametersMatchs
-	 * @return
-	 */
-	public static boolean parametersMatchs(IConfigurationElement node, Map<String, String> parametersMatchs) {
-		Set<String> g = new HashSet<String>();
-		String[] attrs = node.getAttributeNames();
-		for (String string : attrs) {
-			g.add(string);
-		}
-		boolean okSubSet = g.containsAll(parametersMatchs.keySet());
-		if (!okSubSet) {
-			return false;
-		}
-		for (Map.Entry<String, String> match : parametersMatchs.entrySet()) {
-			if (!node.getAttribute(match.getKey()).equals(match.getValue())) {
-				return false;
-			}
-		}
-		return true;
-	}
+	
 
 	/**
 	 * build a tmp project containning all dependencies and use mvn
