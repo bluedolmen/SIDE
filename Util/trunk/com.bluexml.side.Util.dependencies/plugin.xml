@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="com_bluexml_side_framework_module_repository" name="Embeded Repository" schema="schema/com_bluexml_side_framework_module_repository.exsd"/>
+</plugin>
