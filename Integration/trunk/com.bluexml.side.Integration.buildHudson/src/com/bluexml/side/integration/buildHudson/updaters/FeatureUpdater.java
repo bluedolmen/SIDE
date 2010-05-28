@@ -172,43 +172,44 @@ public class FeatureUpdater {
 				Element currentNode = (Element) object;
 				String oldVersionNumberRef = currentNode.getAttributeValue("version");
 				String inculdedFeatureId = currentNode.getAttributeValue("id");
+				if (featuresList.contains(inculdedFeatureId)) {
 
-				String newVersionRef = null;
-				String versionFromFS = getFeatureVersion(inculdedFeatureId);
-				boolean changed = false;
-				if (feature2update.contains(inculdedFeatureId)) {
-					if (featureUpdated.contains(inculdedFeatureId)) {
+					String newVersionRef = null;
+					String versionFromFS = getFeatureVersion(inculdedFeatureId);
+					boolean changed = false;
+					if (feature2update.contains(inculdedFeatureId)) {
+						if (featureUpdated.contains(inculdedFeatureId)) {
+							newVersionRef = versionFromFS;
+						} else {
+							// not yet updated (but marked)
+							String[] numberRef = versionFromFS.split("\\.");
+							newVersionRef = bu.update(numberRef, pattern);
+						}
+						changed = true;
+					} else if (!oldVersionNumberRef.equals(versionFromFS)) {
+						// not marked but could not have good version number
+						// (mainly
+						// if CRP Enterprise and reference to Core element)
+						// bad version detected, so Fix it
 						newVersionRef = versionFromFS;
-					} else {
-						// not yet updated (but marked)
-						String[] numberRef = versionFromFS.split("\\.");
-						newVersionRef = bu.update(numberRef, pattern);
+						changed = true;
 					}
-					changed = true;
-				} else if (!oldVersionNumberRef.equals(versionFromFS)) {
-					// not marked but could not have good version number (mainly
-					// if CRP Enterprise and reference to Core element)
-					// bad version detected, so Fix it
-					newVersionRef = versionFromFS;
-					changed = true;
-				}
 
-				if (changed) {
-					currentNode.setAttribute("version", newVersionRef);
-					logger.debug("\t\tFeatureUpdater.updateMarkedFeatures() update feature ref " + inculdedFeatureId + ":" + oldVersionNumberRef + " -> " + newVersionRef);
+					if (changed) {
+						currentNode.setAttribute("version", newVersionRef);
+						logger.debug("\t\tFeatureUpdater.updateMarkedFeatures() update feature ref " + inculdedFeatureId + ":" + oldVersionNumberRef + " -> " + newVersionRef);
+					}
+
+				} else {
+					logger.debug("included feature skipped :" + inculdedFeatureId);
 				}
 
 			}
-
 			// Enregistrement du fichier
-			try {
-				XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-				sortie.output(document, new FileOutputStream(featureXMLFile));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+
+			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+			sortie.output(document, new FileOutputStream(featureXMLFile));
+
 			featureUpdated.add(feature);
 		}
 	}

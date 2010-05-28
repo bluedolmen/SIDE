@@ -216,34 +216,39 @@ public class MavenProjectUpdater {
 		Element current_version = current.getChild("version", ns);
 		String current_oldVersionNumberRef = current_version.getTextTrim();
 		String moduleId = groupId.getTextTrim() + "." + artifactId.getTextTrim();
+		if (pomsPathList.keySet().contains(moduleId)) {
 
-		String moduleFSVersion = getMavenProjectVersion(moduleId);
+			String moduleFSVersion = getMavenProjectVersion(moduleId);
 
-		boolean changed = false;
-		String newVersionRef = "";
+			boolean changed = false;
+			String newVersionRef = "";
 
-		// check if this module is marked
-		if (isMarked(moduleId)) {
-			if (pomUpdated.contains(moduleId)) {
-				// version is already updated
+			// check if this module is marked
+			if (isMarked(moduleId)) {
+				if (pomUpdated.contains(moduleId)) {
+					// version is already updated
+					newVersionRef = moduleFSVersion;
+					logger.debug("\t\tupdateRef() ref already updated");
+				} else {
+					// version is not updated yet so we compute it
+					String[] numberDep = moduleFSVersion.split("\\.");
+					newVersionRef = updatepom(numberDep, pattern);
+					logger.debug("\t\tupdateRef() ref not yet updated");
+				}
+				changed = true;
+			} else if (!current_oldVersionNumberRef.equals(moduleFSVersion)) {
+				// ref not marked but bad version number, so fix it
 				newVersionRef = moduleFSVersion;
-				logger.debug("\t\tupdateRef() ref already updated");
-			} else {
-				// version is not updated yet so we compute it
-				String[] numberDep = moduleFSVersion.split("\\.");
-				newVersionRef = updatepom(numberDep, pattern);
-				logger.debug("\t\tupdateRef() ref not yet updated");
+				changed = true;
 			}
-			changed = true;
-		} else if (!current_oldVersionNumberRef.equals(moduleFSVersion)) {
-			// ref not marked but bad version number, so fix it
-			newVersionRef = moduleFSVersion;
-			changed = true;
-		}
 
-		if (changed) {
-			current_version.setText(newVersionRef);
-			logger.debug("\t\tupdateMarkedModules() update ref " + moduleId + " version:" + current_oldVersionNumberRef + " -> " + newVersionRef);
+			if (changed) {
+				current_version.setText(newVersionRef);
+				logger.debug("\t\tupdateMarkedModules() update ref " + moduleId + " version:" + current_oldVersionNumberRef + " -> " + newVersionRef);
+			}
+
+		} else {
+			logger.debug("module skipped :" + moduleId);
 		}
 	}
 
