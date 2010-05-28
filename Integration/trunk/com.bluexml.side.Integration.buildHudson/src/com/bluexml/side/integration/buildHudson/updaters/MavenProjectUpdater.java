@@ -79,7 +79,7 @@ public class MavenProjectUpdater {
 			c++;
 		} while (!pom2update.equals(oldPoms2update));
 		logger.debug("checkAndUpdateAllPoms() Updates poms DONE in " + c + " iteration");
-		
+
 		updateMarkedModules();
 		updateDone = true;
 	}
@@ -218,48 +218,40 @@ public class MavenProjectUpdater {
 		logger.debug("MavenProjectUpdater.updateMarkedModules() Ended");
 	}
 
-	private void updateRef(String[] pattern, Element current) throws JDOMException, IOException {
+	private void updateRef(String[] pattern, Element current) throws Exception {
 		Element groupId = current.getChild("groupId", ns);
 		Element artifactId = current.getChild("artifactId", ns);
 		Element current_version = current.getChild("version", ns);
-		String current_oldVersionNumber = current_version.getTextTrim();
+		String current_oldVersionNumberRef = current_version.getTextTrim();
 		String moduleId = groupId.getTextTrim() + "." + artifactId.getTextTrim();
+
+		String moduleFSVersion = getMavenProjectVersion(moduleId);
+
+		boolean changed = false;
+		String newVersionRef = "";
 
 		// check if this module is marked
 		if (isMarked(moduleId)) {
-			// logger.debug("\t\tMavenProjectUpdater.updateMarkedModules() update ref"
-			// + moduleId);
-			// compute newVersion, must start from reading the pom
-			// because
-			// oldVersion +1 do not matchs case oldversion = 1.0.0 but
-			// in
-			// svn the pom have 1.1.1 becaus many build fail occurs
-			String pomPath2 = getPomPath(moduleId);
-			File pom_xmlDep = new File(pomPath2);
-			// logger.debug("\t\tMavenProjectUpdater.updateMarkedModules() update ref"
-			// + pomPath2);
-			Document docDep = new SAXBuilder().build(pom_xmlDep);
-			Element rootDep = docDep.getRootElement();
-			// update version
-			// if dependencies has already updated just read version or
-			// compute it
-
-			Element versionDep = rootDep.getChild("version", ns);
-			String oldVersionNumberDep = versionDep.getTextTrim();
-
 			if (pomUpdated.contains(moduleId)) {
 				// version is already updated
-				current_version.setText(oldVersionNumberDep);
+				newVersionRef = moduleFSVersion;
 				logger.debug("\t\tupdateRef() ref already updated");
 			} else {
 				// version is not updated yet so we compute it
-				String[] numberDep = oldVersionNumberDep.split("\\.");
-				current_version.setText(updatepom(numberDep, pattern));
+				String[] numberDep = moduleFSVersion.split("\\.");
+				newVersionRef = updatepom(numberDep, pattern);
 				logger.debug("\t\tupdateRef() ref not yet updated");
 			}
-			String versiontrim = current_version.getTextTrim();
-			logger.debug("\t\tupdateMarkedModules() update ref " + moduleId + " version:" + current_oldVersionNumber + " -> " + versiontrim);
+			changed = true;
+		} else if (!current_oldVersionNumberRef.equals(moduleFSVersion)) {
+			// ref not marked but bad version number, so fix it
+			newVersionRef = moduleFSVersion;
+			changed = true;
+		}
 
+		if (changed) {
+			current_version.setText(newVersionRef);
+			logger.debug("\t\tupdateMarkedModules() update ref " + moduleId + " version:" + current_oldVersionNumberRef + " -> " + newVersionRef);
 		}
 	}
 
@@ -285,7 +277,7 @@ public class MavenProjectUpdater {
 			return version;
 		} else {
 			// must read xml file
-			String path = pomsPathList.get(project);
+			String path = getPomPath(project);
 			if (path == null) {
 				throw new Exception("Maven project " + project + " not found please check moduleId");
 			}
