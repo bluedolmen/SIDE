@@ -66,6 +66,10 @@ import com.thoughtworks.xstream.XStream;
  */
 public class AlfrescoController implements AlfrescoControllerAPI {
 
+	private static final String EMPTY_STRING = "<empty string>";
+
+	private static final String NULL_STRING = "<null string>";
+
 	private static final String TRACE_LOGGER_CATEGORY = "com.bluexml.xforms.controller.alfresco.AlfrescoController.trace";
 
 	/** The upload base directory in the file system. */
@@ -377,7 +381,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
 	public String unpatchDataId(String dataId) {
-		return dataId.substring(dataId.lastIndexOf('/') + 1);
+		int pos = dataId.lastIndexOf('/');
+		if (pos == -1) {
+			return null;
+		}
+		return dataId.substring(pos + 1);
 	}
 
 	/* (non-Javadoc)
@@ -390,8 +398,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public void setAlfrescoUrl(String alfresco_url) {
-		ALFRESCO_URL = alfresco_url;
+	public void setAlfrescoUrl(String alfrescoUrl) {
+		ALFRESCO_URL = alfrescoUrl;
 	}
 
 	/**
@@ -440,7 +448,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	}
 
 	public QName systemGetNodeType(AlfrescoTransaction transaction, String dataId) {
-		return systemAgent.getNodeType(transaction, patchDataId(dataId));
+		return systemAgent.getNodeType(transaction, dataId);
 	}
 
 	//
@@ -459,14 +467,10 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Creates or loads the XForms instance document for a default class form.
 	 * 
-	 * @param transaction
-	 *            the transaction
-	 * @param formName
-	 *            the content type
-	 * @param dataId
-	 *            the node id
-	 * @param idAsServlet
-	 *            whether the request comes from a servlet
+	 * @param transaction the transaction
+	 * @param formName the content type
+	 * @param dataId the node id
+	 * @param idAsServlet whether the request comes from a servlet
 	 * 
 	 * @return the class
 	 * 
@@ -482,17 +486,13 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Creates or loads the XForms instance document for a FormClass (a customized form).
 	 * 
-	 * @param transaction
-	 *            the transaction
-	 * @param formName
-	 *            the form id
-	 * @param id
-	 *            the id of the object to load. If <b>null</b>, the form is empty (with the
-	 *            exception of default values [from in the model] and initial values [from URL
-	 *            parameters]. If non null, the form is filled with values from the object.
-	 * @param formIsReadOnly
-	 *            whether the form is read only, which has an influence on the rendering of some
-	 *            fields
+	 * @param transaction the transaction
+	 * @param formName the form id
+	 * @param id the id of the object to load. If <b>null</b>, the form is empty (with the exception
+	 *            of default values [from in the model] and initial values [from URL parameters]. If
+	 *            non null, the form is filled with values from the object.
+	 * @param formIsReadOnly whether the form is read only, which has an influence on the rendering
+	 *            of some fields
 	 * 
 	 * @return the form instance
 	 * 
@@ -517,12 +517,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Gets the XForms instance document for an object.
 	 * 
-	 * @param transaction
-	 *            the transaction
-	 * @param id
-	 *            the id
-	 * @param stack
-	 *            the stack
+	 * @param transaction the transaction
+	 * @param id the id
+	 * @param stack the stack
 	 * @param isServletRequest
 	 * 
 	 * @return the element
@@ -541,10 +538,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Reads an object form Alfresco.
 	 * 
-	 * @param transaction
-	 *            the transaction.
-	 * @param dataId
-	 *            the id
+	 * @param transaction the transaction.
+	 * @param dataId the id
 	 * 
 	 * @return the document
 	 * 
@@ -561,8 +556,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * Initializes configuration elements by interpreting the configuration properties file.<br/>
 	 * NOTE: the properties file has already been read.
 	 * 
-	 * @param config
-	 *            the properties from the configuration file
+	 * @param config the properties from the configuration file
 	 */
 	public void initConfig(Properties config) {
 		String fsPath;
@@ -642,8 +636,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * Checks whether a directory (from the configuration file) exists. If not, attempts to create
 	 * the paths. If that fails, creates a path under the webapp's folder.
 	 * 
-	 * @param file
-	 *            the file
+	 * @param file the file
 	 * @param isUploadDir
 	 */
 	private void checkDirectoryExists(File file, boolean isUploadDir) {
@@ -837,10 +830,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * Persists a class form: transforms the XForms instance into a GenericClass, and either saves
 	 * or updates a node.
 	 * 
-	 * @param instance
-	 *            the instance
-	 * @param transaction
-	 *            the transaction
+	 * @param instance the instance
+	 * @param transaction the transaction
 	 * @param isServletRequest
 	 * 
 	 * @return the object id as given by the transaction manager
@@ -856,12 +847,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * Persists a FormClass: transforms the XForms instance into a GenericClass, and either saves or
 	 * updates a node.
 	 * 
-	 * @param type
-	 *            the type
-	 * @param instance
-	 *            the instance
-	 * @param transaction
-	 *            the transaction
+	 * @param type the type
+	 * @param instance the instance
+	 * @param transaction the transaction
 	 * 
 	 * @return the temporary id assigned to the class
 	 * 
@@ -893,10 +881,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * upload fields.
 	 * 
 	 * @param transaction
-	 * @param taskTypeName
-	 *            the id of the workflow form
-	 * @param taskElt
-	 *            the root element containing the workflow properties
+	 * @param taskTypeName the id of the workflow form
+	 * @param taskElt the root element containing the workflow properties
 	 * @return
 	 * @throws ServletException
 	 */
@@ -947,10 +933,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Gets the captions.
 	 * 
-	 * @param ids
-	 *            the ids
-	 * @param transaction
-	 *            the transaction
+	 * @param ids the ids
+	 * @param transaction the transaction
 	 * 
 	 * @return the captions
 	 * 
@@ -1000,14 +984,10 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Gets the enum.
 	 * 
-	 * @param transaction
-	 *            the transaction
-	 * @param type
-	 *            the type
-	 * @param filterParent
-	 *            the filter parent
-	 * @param filterData
-	 *            the filter data
+	 * @param transaction the transaction
+	 * @param type the type
+	 * @param filterParent the filter parent
+	 * @param filterData the filter data
 	 * @param query
 	 * 
 	 * @return the enum
@@ -1054,10 +1034,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * when a form is loaded (to provide the initial item set), and (if incremental) each time a
 	 * character is entered in the search input.
 	 * 
-	 * @param transaction
-	 *            the transaction
-	 * @param bean
-	 *            a bean for parameters, will allow us to extend the parameter set without changing
+	 * @param transaction the transaction
+	 * @param bean a bean for parameters, will allow us to extend the parameter set without changing
 	 *            the signature
 	 * @return the list document
 	 * 
@@ -1161,10 +1139,10 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 
 		Element filteredOut = doc.createElement("filteredOut");
 		filteredOut.setTextContent("0");
-		
+
 		Element typeFound = doc.createElement("typeFound");
 		typeFound.setTextContent("simulated");
-		
+
 		Element subquery = doc.createElement("query");
 		query.appendChild(count);
 		query.appendChild(maxResults);
@@ -1197,12 +1175,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Provides a bridge to the webscript, returning a String. //$$ NON-API
 	 * 
-	 * @param parameters
-	 *            the parameters
-	 * @param opCode
-	 *            the opCode
-	 * @param transaction
-	 *            the transaction
+	 * @param parameters the parameters
+	 * @param opCode the opCode
+	 * @param transaction the transaction
 	 * 
 	 * @return the string
 	 * 
@@ -1231,12 +1206,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Provides a bridge to the webscript, returning a Document.
 	 * 
-	 * @param transaction
-	 *            the transaction
-	 * @param parameters
-	 *            the parameters
-	 * @param opCode
-	 *            the opCode
+	 * @param transaction the transaction
+	 * @param parameters the parameters
+	 * @param opCode the opCode
 	 * 
 	 * @return the document
 	 * 
@@ -1283,8 +1255,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	}
 
 	/**
-	 * @param is
-	 *            the input stream to parse from
+	 * @param is the input stream to parse from
 	 * @return the document built from the stream
 	 * @throws IOException
 	 * @throws SAXException
@@ -1297,19 +1268,14 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Request post. Bridge to our XForms webscript under Alfresco. //$$ TRACE LOG
 	 * 
-	 * @param transaction
-	 *            the transaction. MANDATORY and NEVER <code>null</code>
-	 * @param parameters
-	 *            the parameters
-	 * @param opCode
-	 *            the code for the webscript operation being called.
+	 * @param transaction the transaction. MANDATORY and NEVER <code>null</code>
+	 * @param parameters the parameters
+	 * @param opCode the code for the webscript operation being called.
 	 * 
 	 * @return the post method
 	 * 
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws HttpException
-	 *             the http exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws HttpException the http exception
 	 * @throws ServletException
 	 */
 	private PostMethod requestPost(AlfrescoTransaction transaction, Map<String, String> parameters,
@@ -1340,9 +1306,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			for (Entry<String, String> entry2 : entrySet2) {
 				String value = entry2.getValue();
 				if (value == null) {
-					value = "<null string>";
+					value = NULL_STRING;
 				} else if (value.equals("")) {
-					value = "<empty string>";
+					value = EMPTY_STRING;
 				}
 				logger.trace("  " + entry2.getKey() + " = " + value);
 			}
@@ -1371,7 +1337,14 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 
 		if (loggertrace.isTraceEnabled()) {
 			logger.trace("Response : ");
-			logger.trace(post.getResponseBodyAsString());
+			String responseBodyAsString = post.getResponseBodyAsString();
+			if (responseBodyAsString == null) {
+				logger.trace(NULL_STRING);
+			} else if (responseBodyAsString.equals("")) {
+				logger.trace(EMPTY_STRING);
+			} else {
+				logger.trace(responseBodyAsString);
+			}
 		}
 
 		return post;
@@ -1380,15 +1353,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Executes an HTTP method.
 	 * 
-	 * @param method
-	 *            the method
-	 * @param hasTicket
-	 *            the has ticket
+	 * @param method the method
+	 * @param hasTicket the has ticket
 	 * 
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws HttpException
-	 *             the http exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws HttpException the http exception
 	 */
 	private void executeMethod(HttpMethodBase method, boolean hasTicket) throws IOException,
 			HttpException {
@@ -1399,10 +1368,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Enqueues a delete operation for the current transaction.
 	 * 
-	 * @param nodeRef
-	 *            the node ref
-	 * @param transaction
-	 *            the transaction
+	 * @param nodeRef the node ref
+	 * @param transaction the transaction
 	 */
 	public void delete(AlfrescoTransaction transaction, String nodeRef) {
 		transaction.queueDelete(nodeRef);
@@ -1411,10 +1378,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Removes the reference.
 	 * 
-	 * @param node
-	 *            the node
-	 * @param elementId
-	 *            the element id
+	 * @param node the node
+	 * @param elementId the element id
 	 */
 	public void removeReference(Document node, String elementId) {
 		mappingAgent.removeReference(node, elementId);
@@ -1423,8 +1388,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Checks whether a datatype has sub types.
 	 * 
-	 * @param dataType
-	 *            the data type
+	 * @param dataType the data type
 	 * 
 	 * @return true, if successful
 	 */
@@ -1435,8 +1399,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Checks if is an enumeration is dynamic.
 	 * 
-	 * @param type
-	 *            the type
+	 * @param type the type
 	 * 
 	 * @return true, if is dynamic enum
 	 */
@@ -1449,8 +1412,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * indicated for the model choice field in the modeler.
 	 * 
 	 * @param completeAssoName
-	 * @param dataType
-	 *            the form id, i.e. a class name or form name in the mapping.xml file
+	 * @param dataType the form id, i.e. a class name or form name in the mapping.xml file
 	 * @return
 	 */
 	public String getShortAssociationName(String completeAssoName, String dataType) {
@@ -1503,11 +1465,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Starts a workflow and returns the instance id.
 	 * 
-	 * @param transaction
-	 *            Alfresco transaction (for login)
+	 * @param transaction Alfresco transaction (for login)
 	 * @param workflowDefinitionId
-	 * @param attributes
-	 *            Qualified Alfresco Attributes
+	 * @param attributes Qualified Alfresco Attributes
 	 * @return the id of the newly created workflow instance, or <code>null</code> if problem.
 	 */
 	public String workflowStart(AlfrescoTransaction transaction, String workflowDefinitionId,
@@ -1521,12 +1481,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Ends a task by following the given transition.
 	 * 
-	 * @param transaction
-	 *            Alfresco transaction (for login)
-	 * @param taskId
-	 *            Task to update
-	 * @param transitionId
-	 *            the id of the transition to follow
+	 * @param transaction Alfresco transaction (for login)
+	 * @param taskId Task to update
+	 * @param transitionId the id of the transition to follow
 	 * @return the id of the task, or <code>null</code> if a problem occurred
 	 */
 	public boolean workflowEndTask(AlfrescoTransaction transaction, String taskId,
@@ -1564,10 +1521,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Cancels a workflow.
 	 * 
-	 * @param transaction
-	 *            Alfresco transaction (for login)
-	 * @param workflowId
-	 *            Id of the workflow to cancel
+	 * @param transaction Alfresco transaction (for login)
+	 * @param workflowId Id of the workflow to cancel
 	 * @return The updated instance
 	 */
 	public WorkflowInstance workflowCancel(AlfrescoTransaction transaction, String workflowId) {
@@ -1579,10 +1534,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Collects all non empty properties available on an instanceId.
 	 * 
-	 * @param transaction
-	 *            Alfresco transaction (for login)
-	 * @param instanceId
-	 *            the workflow instance Id
+	 * @param transaction Alfresco transaction (for login)
+	 * @param instanceId the workflow instance Id
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -1602,10 +1555,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * SEPARATOR="{::}":
 	 * "jbpm$64{::}wfbxDigitizationProcess:Debut{::}Demarrage de la dematerialisation")
 	 * 
-	 * @param transaction
-	 *            Alfresco transaction (for login)
-	 * @param instanceId
-	 *            the id of a currently live workflow instance
+	 * @param transaction Alfresco transaction (for login)
+	 * @param instanceId the id of a currently live workflow instance
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -1620,10 +1571,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Gets the id for the latest version of a process.
 	 * 
-	 * @param transaction
-	 *            Alfresco transaction (for login)
-	 * @param processName
-	 *            the workflow definition name
+	 * @param transaction Alfresco transaction (for login)
+	 * @param processName the workflow definition name
 	 * @return
 	 */
 	public String workflowGetIdForProcessDefinition(AlfrescoTransaction transaction,
@@ -1637,12 +1586,9 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Gets the set of properties qualified names a for a task of a process definition.<br/>
 	 * 
-	 * @param transaction
-	 *            Alfresco transaction (for login)
-	 * @param processId
-	 *            the workflow definition name, e.g. "jbpm$105"
-	 * @param taskName
-	 *            the name/id of the task, e.g. "wfbxDigitizationProcess:Debut"
+	 * @param transaction Alfresco transaction (for login)
+	 * @param processId the workflow definition name, e.g. "jbpm$105"
+	 * @param taskName the name/id of the task, e.g. "wfbxDigitizationProcess:Debut"
 	 * @return the set, or <code>null</code> if either of the ids was not found
 	 */
 	@SuppressWarnings("unchecked")
@@ -1661,8 +1607,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * that workflow package so that a call to WorkflowService.getWorkflowsForContent for that
 	 * content links to the workflow for which the created package is the package.
 	 * 
-	 * @param transaction
-	 *            Alfresco transaction (for login)
+	 * @param transaction Alfresco transaction (for login)
 	 * @return the new package
 	 * @throws ServletException
 	 */
@@ -1687,13 +1632,10 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * Calls a method of org.alfresco.service.cmr.workflowWorkflowService, putting the parameters
 	 * from the list into a map, and creating a transaction if none is given.<br/>
 	 * 
-	 * @param transaction
-	 *            a transaction object. May NOT be null.
-	 * @param methodName
-	 *            the name of the method to call, case-sensitive.
-	 * @param methodParameters
-	 *            a list containing the method parameters in the order of the function's signature.
-	 *            CANNOT BE NULL.
+	 * @param transaction a transaction object. May NOT be null.
+	 * @param methodName the name of the method to call, case-sensitive.
+	 * @param methodParameters a list containing the method parameters in the order of the
+	 *            function's signature. CANNOT BE NULL.
 	 * @return an object of the return type of the function that was called.
 	 */
 	public Object workflowRequestWrapper(AlfrescoTransaction transaction, String methodName,
@@ -1711,12 +1653,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/**
 	 * Executes a workflow request on Alfresco by calling the webscript.
 	 * 
-	 * @param transaction
-	 *            Alfresco transaction (for login)
-	 * @param methodName
-	 *            Method to call (mapped to a method in WorkflowService). <b>Case-sensitive</b>.
-	 * @param methodParameters
-	 *            Parameters needed by the method (same types as declared in WorkflowService)
+	 * @param transaction Alfresco transaction (for login)
+	 * @param methodName Method to call (mapped to a method in WorkflowService).
+	 *            <b>Case-sensitive</b>.
+	 * @param methodParameters Parameters needed by the method (same types as declared in
+	 *            WorkflowService)
 	 * @return The deserialized Object or null if exception
 	 */
 	private Object workflowRequestCall(AlfrescoTransaction transaction, String methodName,
@@ -1752,8 +1693,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<WorkflowTask> workflowGetCurrentTasks(String instanceId, AlfrescoTransaction trans) {
-		List<WorkflowTask> result = new Vector<WorkflowTask>();
+	private List<String> workflowGetCurrentTasks(String instanceId, AlfrescoTransaction trans) {
+		List<String> result = new Vector<String>();
 		// get the paths from the instance id, which should exist
 		List<WorkflowPath> paths = null;
 		ArrayList<Object> paramList = new ArrayList<Object>();
@@ -1780,7 +1721,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 				// add the tasks to complete
 				for (WorkflowTask task : tasks) {
 					if (task.state == WorkflowTaskState.IN_PROGRESS) {
-						result.add(task);
+						result.add(task.id);
 					}
 				}
 			}
@@ -1791,37 +1732,39 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	public WorkflowTaskDefinition workflowGetTaskDefinition(String processDefId, String task,
 			AlfrescoTransaction trans) {
 
-		List<WorkflowTaskDefinition> taskDefs = workflowGetTaskDefinitions(processDefId, trans);
-		for (WorkflowTaskDefinition taskDef : taskDefs) {
-			if (StringUtils.equals(taskDef.id, task)) {
-				return taskDef;
-			}
-		}
-		return null;
+//		List<WorkflowTaskDefinition> taskDefs = workflowGetTaskDefinitions(processDefId, trans);
+//		for (WorkflowTaskDefinition taskDef : taskDefs) {
+//			if (StringUtils.equals(taskDef.id, task)) {
+//				return taskDef;
+//			}
+//		}
+//		return null;
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("processDefId", processDefId);
+		parameters.put("task", "" + task);
+
+		return (WorkflowTaskDefinition) workflowRequestCall(trans, "wfGetTaskDefinition", parameters);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId,
-			AlfrescoTransaction trans) {
-		String methodName = "getTaskDefinitions";
-		List<Object> params = new ArrayList<Object>();
-		params.add(processDefId);
-		List<WorkflowTaskDefinition> workflowRequest = (List<WorkflowTaskDefinition>) workflowRequestWrapper(
-				trans, methodName, params);
-		return workflowRequest;
-	}
+//	@SuppressWarnings("unchecked")
+//	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId,
+//			AlfrescoTransaction trans) {
+//		String methodName = "getTaskDefinitions";
+//		List<Object> params = new ArrayList<Object>();
+//		params.add(processDefId);
+//		List<WorkflowTaskDefinition> workflowRequest = (List<WorkflowTaskDefinition>) workflowRequestWrapper(
+//				trans, methodName, params);
+//		return workflowRequest;
+//	}
 
 	@SuppressWarnings("unchecked")
-	public List<WorkflowInstance> workflowGetWorkflowsForContent(String refStr, boolean onlyActive,
+	public List<String> workflowGetWorkflowsForContent(String refStr, boolean onlyActive,
 			AlfrescoTransaction trans) {
-		NodeRef nodeRef = new NodeRef(refStr);
-		String methodName = "getWorkflowsForContent";
-		List<Object> params = new ArrayList<Object>();
-		params.add(nodeRef);
-		params.add(onlyActive);
-		List<WorkflowInstance> workflowRequest = (List<WorkflowInstance>) workflowRequestWrapper(
-				null, methodName, params);
-		return workflowRequest;
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("nodeId", refStr);
+		parameters.put("onlyActive", "" + onlyActive);
+
+		return (List<String>) workflowRequestCall(trans, "wfGetWorkflowsForContent", parameters);
 	}
 
 	public WorkflowDefinition workflowGetWorkflowById(String defId, AlfrescoTransaction trans) {
@@ -1854,7 +1797,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String createPathInRepository(String folderPath, String userName)
+	public String createPathInRepository(String userName, String folderPath)
 			throws ServletException {
 
 		// collect parameters
@@ -1921,10 +1864,10 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getWorkflowBlueXMLDefinitionName(String processName) {
+	public String getWorkflowBlueXMLDefinitionName(String name) {
 		// Used when reacting to a workflow transition action.
 		// e.g. "Evaluation" --> "jbpm$wfbxEvaluation:Evaluation"
-		return "jbpm$" + BLUEXML_WORKFLOW_PREFIX + processName + ":" + processName;
+		return "jbpm$" + BLUEXML_WORKFLOW_PREFIX + name + ":" + name;
 	}
 
 	/* (non-Javadoc)
@@ -1975,14 +1918,12 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<WorkflowTask> workflowGetPooledTasks(String userName, AlfrescoTransaction trans) {
-		String methodName = "getPooledTasks";
-		List<Object> methodParameters = new ArrayList<Object>();
-		methodParameters.add(userName);
+	public List<String> workflowGetPooledTasks(String userName, AlfrescoTransaction trans) {
 
-		List<WorkflowTask> workflowRequest = (List<WorkflowTask>) workflowRequestWrapper(trans,
-				methodName, methodParameters);
-		return workflowRequest;
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("userName", userName);
+
+		return (List<String>) workflowRequestCall(trans, "wfGetPooledTasks", parameters);
 	}
 
 	public WorkflowTask workflowGetTaskById(String taskId, AlfrescoTransaction trans) {
@@ -1996,26 +1937,21 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<NodeRef> workflowGetPackageContents(String taskId, AlfrescoTransaction trans) {
-		String methodName = "getPackageContents";
-		List<Object> methodParameters = new ArrayList<Object>();
-		methodParameters.add(taskId);
+	public List<String> workflowGetPackageContents(String taskId, AlfrescoTransaction trans) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("taskId", taskId);
 
-		List<NodeRef> workflowRequest = (List<NodeRef>) workflowRequestWrapper(trans, methodName,
-				methodParameters);
-		return workflowRequest;
+		return (List<String>) workflowRequestCall(trans, "wfGetPackageContents", parameters);
+
 	}
 
 	/**
 	 * Sets initial values for workflow fields from BlueXML properties (stored in the repository) of
 	 * the workflow instance.
 	 * 
-	 * @param wkFormName
-	 *            the name of the workflow form to display
-	 * @param doc
-	 *            the XForms instance
-	 * @param instanceId
-	 *            the workflow instance Id (previously provided by Alfresco)
+	 * @param wkFormName the name of the workflow form to display
+	 * @param doc the XForms instance
+	 * @param instanceId the workflow instance Id (previously provided by Alfresco)
 	 * @return false if a lethal exception occurred. True if the normal end of the function was
 	 *         reached, which does not imply anything about the setting of initial values.
 	 */
@@ -2198,11 +2134,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getNodeType(String dataId, String userName) { // PUBLIC-API
+	public String getNodeType(String userName, String dataId) { // PUBLIC-API
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 		transaction.setLogin(userName);
 
-		QName qname = systemGetNodeType(transaction, dataId);
+		QName qname = systemGetNodeType(transaction, patchDataId(dataId));
 		if (qname == null) {
 			return null;
 		}
@@ -2212,7 +2148,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getNodeTypeFull(String dataId, String userName) { // PUBLIC-API
+	public String getNodeTypeFull(String userName, String dataId) { // PUBLIC-API
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 		transaction.setLogin(userName);
 
@@ -2519,11 +2455,11 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public Document getInstanceForm(String userName, String formName, String id,
+	public Document getInstanceForm(String userName, String formName, String dataId,
 			boolean formIsReadOnly) throws ServletException {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
-		return getInstanceForm(transaction, formName, id, formIsReadOnly);
+		return getInstanceForm(transaction, formName, patchDataId(dataId), formIsReadOnly);
 	}
 
 	/* (non-Javadoc)
@@ -2533,7 +2469,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			boolean formIsReadOnly, boolean applyUserFormats) throws ServletException {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
-		return getInstanceClass(transaction, formName, dataId, formIsReadOnly, applyUserFormats);
+		return getInstanceClass(transaction, formName, patchDataId(dataId), formIsReadOnly,
+				applyUserFormats);
 	}
 
 	/* (non-Javadoc)
@@ -2552,7 +2489,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 			throws ServletException {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
-		return readObjectFromRepository(transaction, dataId);
+		return readObjectFromRepository(transaction, patchDataId(dataId));
 	}
 
 	/* (non-Javadoc)
@@ -2586,7 +2523,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public List<WorkflowTask> workflowGetCurrentTasks(String instanceId, String userName) {
+	public List<String> workflowGetCurrentTasks(String userName, String instanceId) {
 		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
 
 		return workflowGetCurrentTasks(instanceId, trans);
@@ -2595,7 +2532,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public List<NodeRef> workflowGetPackageContents(String taskId, String userName) {
+	public List<String> workflowGetPackageContents(String userName, String taskId) {
 		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
 
 		return workflowGetPackageContents(taskId, trans);
@@ -2604,16 +2541,16 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public List<WorkflowTask> workflowGetPooledTasks(String managerUserName, String userName) {
+	public List<String> workflowGetPooledTasks(String userName, String managerUserName) {
 		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
 
-		return workflowGetPooledTasks(userName, trans);
+		return workflowGetPooledTasks(managerUserName, trans);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public WorkflowTask workflowGetTaskById(String taskId, String userName) {
+	public WorkflowTask workflowGetTaskById(String userName, String taskId) {
 		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
 
 		return workflowGetTaskById(taskId, trans);
@@ -2622,8 +2559,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public WorkflowTaskDefinition workflowGetTaskDefinition(String processDefId, String task,
-			String userName) {
+	public WorkflowTaskDefinition workflowGetTaskDefinition(String userName, String processDefId,
+			String task) {
 		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
 
 		return workflowGetTaskDefinition(processDefId, task, trans);
@@ -2632,17 +2569,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public List<WorkflowTaskDefinition> workflowGetTaskDefinitions(String processDefId,
-			String userName) {
-		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
-
-		return workflowGetTaskDefinitions(processDefId, trans);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
-	 */
-	public WorkflowDefinition workflowGetWorkflowById(String defId, String userName) {
+	public WorkflowDefinition workflowGetWorkflowById(String userName, String defId) {
 		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
 
 		return workflowGetWorkflowById(defId, trans);
@@ -2651,20 +2578,20 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public List<WorkflowInstance> workflowGetWorkflowsForContent(String refStr, boolean onlyActive,
-			String userName) {
+	public List<String> workflowGetWorkflowsForContent(String userName, String nodeId,
+			boolean onlyActive) {
 		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
 
-		return workflowGetWorkflowsForContent(refStr, onlyActive, trans);
+		return workflowGetWorkflowsForContent(patchDataId(nodeId), onlyActive, trans);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String getNodeContentInfo(String nodeId, String userName) {
+	public String getNodeContentInfo(String userName, String nodeId) {
 		AlfrescoTransaction trans = new AlfrescoTransaction(this, userName);
 
-		return getNodeContentInfo(trans, nodeId);
+		return getNodeContentInfo(trans, patchDataId(nodeId));
 	}
 
 	/* (non-Javadoc)
@@ -2679,7 +2606,7 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public Set<String> systemGetAllAuthoritiesAsGroupsOrUsers(boolean asGroups, String userName) {
+	public Set<String> systemGetAllAuthoritiesAsGroupsOrUsers(String userName, boolean asGroups) {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
 		return systemGetAllAuthoritiesAsGroupsOrUsers(transaction, asGroups);
@@ -2688,46 +2615,68 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public Set<String> systemGetContainingGroups(String specificUserName, String userName) {
+	public Set<String> systemGetContainingGroups(String userName, String specificUserName) {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
-		return systemGetContainingGroups(transaction, userName);
+		return systemGetContainingGroups(transaction, specificUserName);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public String systemGetNodeProperty(NodeRef node, QName propertyName, String userName) {
+	public String systemGetNodeProperty(String userName, String propertyName, String nodeId) {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
-		return systemGetNodeProperty(transaction, node, propertyName);
+		NodeRef node;
+
+		int posProtocolStoreSep = nodeId.indexOf(':');
+		int posStoreIdSep = nodeId.indexOf("://");
+		if (posProtocolStoreSep == -1 && posStoreIdSep == -1) {
+			node = new NodeRef(patchDataId(nodeId));
+		} else {
+			node = new NodeRef(nodeId);
+		}
+		QName propertyQName = QName.createQName(propertyName);
+		return systemGetNodeProperty(transaction, node, propertyQName);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public NodeRef systemGetNodeRefForGroup(String groupName, String userName) {
+	public String systemGetNodeRefForGroup(String userName, String groupName) {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
-		return systemGetNodeRefForGroup(transaction, groupName);
+		NodeRef nodeRef = systemGetNodeRefForGroup(transaction, groupName);
+		if (nodeRef == null) {
+			return null;
+		}
+		return nodeRef.toString();
 	}
 
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public NodeRef systemGetNodeRefForUser(String specificUserName, String userName) {
+	public String systemGetNodeRefForUser(String userName, String specificUserName) {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
-		return systemGetNodeRefForUser(transaction, userName);
+		NodeRef nodeRef = systemGetNodeRefForUser(transaction, specificUserName);
+		if (nodeRef == null) {
+			return null;
+		}
+		return nodeRef.toString();
 	}
 
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.controller.alfresco.AlfrescoControllerAPI
 	 */
-	public QName systemGetNodeType(String dataId, String userName) {
+	public String systemGetNodeType(String userName, String dataId) {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(this, userName);
 
-		return systemGetNodeType(transaction, dataId);
+		QName qname = systemGetNodeType(transaction, dataId);
+		if (qname == null) {
+			return null;
+		}
+		return qname.toString();
 	}
 
 	/**
@@ -2735,10 +2684,8 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * comma-separated list
 	 * 
 	 * @param transaction
-	 * @param format
-	 *            the (one) pattern for formatting the labels
-	 * @param ids
-	 *            the comma-separated list of ids
+	 * @param format the (one) pattern for formatting the labels
+	 * @param ids the comma-separated list of ids
 	 * @return
 	 * @throws ServletException
 	 */
@@ -2758,16 +2705,13 @@ public class AlfrescoController implements AlfrescoControllerAPI {
 	 * parameters MUST NOT be <code>null</code>.
 	 * 
 	 * @param transaction
-	 * @param datatype
-	 *            the prefixed content type name to search.
-	 * @param identifier
-	 *            the local name of a property (in the datatype definition) used as an identifier.
-	 * @param format
-	 *            the pattern for formatting the label. <code>null</code>-able.
-	 * @param labelLength
-	 *            the maximum length allowed for the label. <code>null</code>-able.
-	 * @param value
-	 *            the initialization value, also the value (of the identifier property) to look for.
+	 * @param datatype the prefixed content type name to search.
+	 * @param identifier the local name of a property (in the datatype definition) used as an
+	 *            identifier.
+	 * @param format the pattern for formatting the label. <code>null</code>-able.
+	 * @param labelLength the maximum length allowed for the label. <code>null</code>-able.
+	 * @param value the initialization value, also the value (of the identifier property) to look
+	 *            for.
 	 * @return
 	 * @throws ServletException
 	 */

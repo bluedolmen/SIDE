@@ -42,6 +42,11 @@
       <artifactId>XFormsUtils</artifactId>
       <version>[1.0.1,)</version>
     </dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.4</version>
+		</dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>

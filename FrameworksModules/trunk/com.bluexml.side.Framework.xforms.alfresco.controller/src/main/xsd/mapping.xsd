@@ -82,6 +82,7 @@
 			<xsd:element minOccurs="0" name="parentClass" type="classType" />
 			<xsd:element maxOccurs="unbounded" name="subClass" type="classType" />
 		</xsd:sequence>
+		<xsd:attribute name="rendered" type="xsd:boolean" use="optional" />
 	</xsd:complexType>
 	<xsd:complexType name="fieldType">
 		<xsd:sequence>
