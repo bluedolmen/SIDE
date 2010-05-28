@@ -1,9 +1,7 @@
 package com.bluexml.side.integration.buildHudson.updaters;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +10,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
@@ -205,14 +202,9 @@ public class MavenProjectUpdater {
 			pomsNewsVersion.put(module, newVersion);
 			pomsVersions.put(module, version.getTextTrim());
 			// save changes
-			try {
-				XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-				sortie.output(doc, new FileOutputStream(pom_xml));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+
+			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+			sortie.output(doc, new FileOutputStream(pom_xml));
 
 		}
 		logger.debug("MavenProjectUpdater.updateMarkedModules() Ended");
