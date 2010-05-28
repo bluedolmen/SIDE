@@ -152,7 +152,7 @@
     </dependency>
     <dependency>
       <groupId>com.bluexml.side.Form</groupId>
-      <artifactId>utils</artifactId>
+      <artifactId>XformsUtils</artifactId>
       <version>[1.0.1,)</version>
       <type>jar</type>
       <scope>provided</scope>
