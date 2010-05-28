@@ -173,11 +173,13 @@ public enum MsgId {
 	// our custom CSS rule names
 	INT_CSS_FORM_TITLE					("side_form_title"),
 	INT_CSS_HORIZ_LINE					("side_horizontal_line"),
+	INT_CSS_INLINE_TRIGGERS				("side_imultiple_triggers"),
 	INT_CSS_RO_TEXTAREA					("side_ro_textarea"),
 	INT_CSS_SEARCH_FIELD				("side_search_field"),
 	INT_CSS_SEARCH_OPERATOR				("side_search_operator"),
 	INT_CSS_SEARCH_VALUE				("side_search_value"),
 	INT_CSS_SELECT_LIST					("side_select_list"),
+	INT_CSS_SELECT_BUTTONS_ZONE			("side_select_buttons_zone"),
 	INT_CSS_SELECT_OUTPUT_ZONE			("side_select_output_zone"),
 	INT_CSS_SELECT_SEARCH_ZONE			("side_select_search_zone"),
 	INT_CSS_SELECT_SELECTED_ITEM		("side_select_selected_item"), // Nx1 widget
@@ -314,6 +316,8 @@ public enum MsgId {
 	 * processing of that call, persistent parameters are set to the given values if applicable.
 	 */
 	PARAM_INIT_CALL("init"),
+	/** parameter for accessing the AlfrescoControllerAPI via Javascript*/
+	PARAM_JAVASCRIPT_CALL("jscall"),
 	PARAM_LANGUAGE ("language"),
 	/** output param for redirection; indicates which workflow form the redirection comes from*/ 
 	PARAM_LEAVING_FORM("leavingForm"),
