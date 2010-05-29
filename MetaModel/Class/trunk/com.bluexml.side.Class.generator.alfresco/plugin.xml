@@ -41,13 +41,13 @@
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.16" versionMax="1.0.16" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.22" versionMax="1.1.22" />
             <option documentation="Check this option to include the production of the Alfresco's common webscripts in the generation.&lt;br&gt;If not checked, the webscripts are not included in the generated AMPs.&lt;br&gt;" key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.63" versionMax="1.0.63" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.64" versionMax="1.0.64" />
             </option>
             <option documentation="Generates random data regarding the current Alfresco model. The generated ACP can be imported and reused accross various Alfresco installations." key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator" label="Alfresco Random Data Generator">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.80" versionMax="1.0.80" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.79" versionMax="1.0.79" />
             </option>
             <option defaultOption="false" documentation="additional module to check if created/updated items already exist; in this case the update or creation is forbidden" key="alfresco.unicity" label="Content Type Uniqueness">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.47" versionMax="1.0.47" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.46" versionMax="1.0.46" />
             </option>
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" label="Alfresco FacetMap Extension">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.29" versionMax="1.0.29" />
