@@ -30,18 +30,8 @@
             <configurationParameter documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploy" key="alfresco.share.url" label="Alfresco share URL" />
             <configurationParameter documentation="Set the address to the webapp context, e.g. http://localhost:8080/xforms.&lt;br/&gt;This option is accessory as it is used for providing service URLs. If not given, default values will be used." key="com.bluexml.side.Form.generator.xforms.chiba.webappContext" label="XForm Webapp URL" />
             <configurationParameter documentation="The URL to reach facetMap web application (for exemple http://localhost:8080/facetmap)" key="facetMap.url" label="FacetMap URL" />
-            <option
-                  defaultOption="false"
-                  documentation="add share component to include custom iframe in pages"
-                  key="com.bluexml.side.Portal.generator.alfresco.iframe"
-                  label="iframe integration">
-               <moduleDependence
-                     moduleId="com.bluexml.side.Framework.alfresco.shareIframe"
-                     moduleType="zip"
-                     technologyVersion="alfresco_3.x"
-                     versionMax="1.0.0"
-                     versionMin="1.0.0">
-               </moduleDependence>
+            <option defaultOption="false" documentation="add share component to include custom iframe in pages" key="com.bluexml.side.Portal.generator.alfresco.iframe" label="iframe integration">
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareIframe" moduleType="zip" technologyVersion="alfresco_3.x" versionMax="1.0.1" versionMin="1.0.1" />
             </option>
           </generatorVersion>
         </technologyVersion>
