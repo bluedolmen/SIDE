@@ -14,6 +14,7 @@ import org.jdom.output.XMLOutputter;
 import org.jdom.xpath.XPath;
 
 import com.bluexml.side.util.dependencies.ModuleConstraint;
+import com.bluexml.side.util.dependencies.ModuleVersion;
 
 public class Builder {
 
@@ -131,7 +132,12 @@ public class Builder {
 		ModuleConstraint McForMavenDependeciesPlugins = new ModuleConstraint("org.apache.maven.plugins.maven-dependency-plugin", null, "maven-plugin", "2.0", "2.0");
 
 		res.add(McForMavenDependeciesPlugins);
-		ModuleConstraint McForMavenDependeciesPlugins2 = new ModuleConstraint("xml-apis.xml-apis", null, "jar", "1.0.b2", "1.0.b2");
+		ModuleVersion min = new ModuleVersion();
+		min.setQualifier("1.0.b2");
+		ModuleVersion max = new ModuleVersion();
+		min.setQualifier("1.0.b2");
+		ModuleConstraint McForMavenDependeciesPlugins2 = new ModuleConstraint("xml-apis.xml-apis", null, "jar", min, max);
+
 		res.add(McForMavenDependeciesPlugins2);
 
 		try {

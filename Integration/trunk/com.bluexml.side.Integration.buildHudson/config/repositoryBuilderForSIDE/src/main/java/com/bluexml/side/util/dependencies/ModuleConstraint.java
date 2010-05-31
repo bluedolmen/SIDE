@@ -37,8 +37,9 @@ public class ModuleConstraint {
 		}
 	}
 
-	public ModuleConstraint(String id, String moduleType, ModuleVersion versionNumMin, ModuleVersion versionNumMax) {
+	public ModuleConstraint(String id, String tech_version, String moduleType, ModuleVersion versionNumMin, ModuleVersion versionNumMax) {
 		setGroupAndArtifactId(id);
+		this.tech_version = tech_version;
 		this.moduleType = moduleType;
 		this.versionMin = versionNumMin;
 		this.versionMax = versionNumMax;
@@ -100,7 +101,7 @@ public class ModuleConstraint {
 	}
 
 	public String toString() {
-		return this.groupId+":"+this.artifactId + " :" + getVersionRange();
+		return this.groupId + ":" + this.artifactId + " :" + getVersionRange();
 	}
 
 	public String getVersionRange() {
