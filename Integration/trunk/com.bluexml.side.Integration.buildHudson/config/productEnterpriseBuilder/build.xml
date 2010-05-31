@@ -5,6 +5,9 @@
 	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpath="../lib/xmltask.jar" />
 
 	<target name="main">
+		<!-- clean prevous build -->
+		<delete dir="${distros}" />
+		<mkdir dir="${distros}" />
 		<!-- by default, check for deltapack co-located with eclipse -->
 
 		<!-- Check that we have a deltapack -->
@@ -90,7 +93,7 @@
 			<arg value="-buildfile" />
 			<arg value="build.xml" />
 			<arg value="-Dtimestamp=${timestamp}" />
-			<arg value="-Dworkspace=${workspace}"/>
+			<arg value="-Dworkspace=${workspace}" />
 			<classpath>
 				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
 			</classpath>
