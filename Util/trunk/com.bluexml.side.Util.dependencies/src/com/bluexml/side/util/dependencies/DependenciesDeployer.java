@@ -36,19 +36,17 @@ public class DependenciesDeployer {
 				String path = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_PATH);
 				String className = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_ACTIVATOR);
 				String bundle = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_PLUID);
-				
-				System.out.println("deploy repository :"+moduleId);
-				System.out.println("deploy className :"+className);
-				
+
+				System.out.println("deploy repository :" + moduleId);
+				System.out.println("deploy className :" + className);
+
 				Class<?> c = ExtensionPointUtils.getGeneratorInstance(bundle, className);
-				
+				System.out.println("DependenciesDeployer.deploy() get Stream from :" + path);
 				InputStream stream = c.getResourceAsStream(path);
 
 				deployRepository(stream);
 			}
 		}
-
-		
 
 	}
 
@@ -65,7 +63,7 @@ public class DependenciesDeployer {
 		File tmpZip = File.createTempFile("side_repo", ".zip");
 		tmpZip.deleteOnExit();
 		FileHelper.writeStreamInFile(tmpZip, stream);
-
+		System.out.println("file to unzip :" + tmpZip + ":" + tmpZip.length() + " b");
 		TrueZipHelper tzh = new TrueZipHelper("zip");
 		tzh.copyFiles(tmpZip, repository, true);
 	}
