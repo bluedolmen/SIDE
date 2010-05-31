@@ -129,16 +129,10 @@ public class Builder {
 
 		// add default dependencies to allow dependency maven plugin to be used
 		// later
-		ModuleConstraint McForMavenDependeciesPlugins = new ModuleConstraint("org.apache.maven.plugins.maven-dependency-plugin", null, "maven-plugin", "2.0", "2.0");
-
-		res.add(McForMavenDependeciesPlugins);
-		ModuleVersion min = new ModuleVersion();
-		min.setQualifier("1.0.b2");
-		ModuleVersion max = new ModuleVersion();
-		min.setQualifier("1.0.b2");
-		ModuleConstraint McForMavenDependeciesPlugins2 = new ModuleConstraint("xml-apis.xml-apis", null, "jar", min, max);
-
-		res.add(McForMavenDependeciesPlugins2);
+//		ModuleConstraint McForMavenDependeciesPlugins = new ModuleConstraint("org.apache.maven.plugins.maven-dependency-plugin", null, "maven-plugin", "2.0", "2.0");
+//
+//		res.add(McForMavenDependeciesPlugins);
+		
 
 		try {
 			Document pom = buildJdomDocument(pomFile);
