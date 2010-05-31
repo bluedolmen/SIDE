@@ -1138,7 +1138,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		  (portletTypeEClass, 
 		   source, 
 		   new String[] {
-			 "haveIdentifier", "not (self.id.oclIsUndefined() or self.id = \'\' or self.name.oclIsUndefined() or self.name. = \'\')"
+			 "haveIdentifier", "not (self.id.oclIsUndefined() or self.id = \'\' or self.name.oclIsUndefined() or self.name = \'\')"
 		   });			
 		addAnnotation
 		  (portletInternalEClass, 

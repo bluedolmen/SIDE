@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.portal.PortalPackage#getPortletType()
- * @model annotation="http://www.bluexml.com/OCL haveIdentifier='not (self.id.oclIsUndefined() or self.id = \'\' or self.name.oclIsUndefined() or self.name. = \'\')'"
+ * @model annotation="http://www.bluexml.com/OCL haveIdentifier='not (self.id.oclIsUndefined() or self.id = \'\' or self.name.oclIsUndefined() or self.name = \'\')'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='haveIdentifier'"
  * @generated
  */
