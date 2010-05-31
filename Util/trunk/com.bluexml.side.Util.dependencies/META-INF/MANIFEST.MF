@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Generation Deployment Dependencies Controller
 Bundle-SymbolicName: com.bluexml.side.Util.dependencies;singleton:=true
-Bundle-Version: 1.0.115.v17184-20100529
+Bundle-Version: 1.0.116.v17294-20100531
 Bundle-Activator: com.bluexml.side.util.dependencies.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
