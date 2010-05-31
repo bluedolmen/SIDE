@@ -28,7 +28,7 @@ public class Builder {
 			// search <moduleDependency>.*<moduleDependency>
 			try {
 				Document pluginXML = buildJdomDocument(file);
-				System.out.println("Scanning File :"+file);
+				System.out.println("Scanning File :" + file);
 				XPath xpa = XPath.newInstance("//moduleDependence");
 				List<?> lmd = xpa.selectNodes(pluginXML.getRootElement());
 				for (Object object : lmd) {
@@ -123,14 +123,17 @@ public class Builder {
 			System.out.println("Usage :");
 			System.out.println("repositoryBuilderForSIDE.jar <pluginsSRCHome> <pom.xml>");
 		}
-		
+
 		List<ModuleConstraint> res = Builder.getModulesConstraint(rootPlugins);
 
-		// add default dependencies to allow dependency maven plugin to be used later
-		ModuleConstraint McForMavenDependeciesPlugins = new ModuleConstraint("org.apache.maven.plugins.maven-dependency-plugin",null,"maven-plugin","2.0","2.0");
-		
+		// add default dependencies to allow dependency maven plugin to be used
+		// later
+		ModuleConstraint McForMavenDependeciesPlugins = new ModuleConstraint("org.apache.maven.plugins.maven-dependency-plugin", null, "maven-plugin", "2.0", "2.0");
+
 		res.add(McForMavenDependeciesPlugins);
-		
+		ModuleConstraint McForMavenDependeciesPlugins2 = new ModuleConstraint("xml-apis.xml-apis", null, "jar", "1.0.b2", "1.0.b2");
+		res.add(McForMavenDependeciesPlugins2);
+
 		try {
 			Document pom = buildJdomDocument(pomFile);
 			// search existing dependencies node
