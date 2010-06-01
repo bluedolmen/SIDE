@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Workflow Modeler
 Bundle-SymbolicName: com.bluexml.side.Workflow.modeler;singleton:=true
-Bundle-Version: 1.0.46.v15927-20100327
+Bundle-Version: 1.0.47.v17374-20100601
 Bundle-Activator: com.bluexml.side.Workflow.modeler.WorkflowPlugin
 Bundle-Vendor: BlueXML
 Require-Bundle: org.topcased.modeler,
