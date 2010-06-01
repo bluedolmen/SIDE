@@ -22,4 +22,5 @@ perl -pi -le 'print "      <scope>compile</scope>" if $. == 18' pom.xml
 perl -pi -le 'print "   </dependency>" if $. == 19' pom.xml
 perl -pi -le 'print "</dependencies>" if $. == 20' pom.xml
 echo mvn dependency:go-offline -P public -Dmaven.repo.local=$REPOSITORY
+mvn dependency:go-offline -P public -Dmaven.repo.local=$REPOSITORY
 echo " job's done"
