@@ -111,7 +111,26 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 <%}%>
 
 <%for (endstate){%>
-	<end-state name="<%name%>"/>
+	<end-state name="<%name%>">
+		<%for (event){%>
+		<event type="<%type%>">
+			<%for (action){%>
+			<action class="<%javaClass.replaceAll("\"","")%>">
+				<%for (script) {%>
+					<script>
+						<%for (variable){%>
+							<variable name="<%name%>" access="<%access%>"/>
+						<%}%>
+						<expression>
+						<%expression%>
+						</expression>
+					</script>
+				<%}%>
+			</action>
+			<%}%>
+		</event>
+		<%}%>	
+	</end-state>
 <%}%>
 
 <%for (tasknode){%>
