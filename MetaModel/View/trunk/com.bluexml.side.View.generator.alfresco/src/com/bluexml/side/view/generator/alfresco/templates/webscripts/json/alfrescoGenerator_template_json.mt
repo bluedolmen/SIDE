@@ -53,5 +53,6 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	"icon16":"${child.icon16}",
 	"icon32":"${child.icon32}",
 	"nodeRef":"${child.nodeRef}",
-	"parent":"${child.parent.nodeRef}"
+	"parent":"${child.parent.nodeRef}",
+	"size":"${child.size}"
 }<#if child_has_next>,</#if>
