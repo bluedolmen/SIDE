@@ -16,8 +16,11 @@ package com.bluexml.side.Workflow.modeler.diagram.commands;
 
 import org.eclipse.gef.EditDomain;
 import org.topcased.modeler.commands.CreateTypedEdgeCommand;
+import org.topcased.modeler.commands.DeleteGraphElementCommand;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
+import org.topcased.modeler.di.model.GraphNode;
+import org.topcased.modeler.utils.Utils;
 
 /**
  * actions edge creation command
@@ -50,10 +53,19 @@ public class actionsEdgeCreationCommand extends CreateTypedEdgeCommand {
 	}
 
 	/**
-	 * @generated
+	 * @_generated
 	 */
 	protected void redoModel() {
-		//TODO add specific code if super method is not sufficient
+		//remove previous link
+		if (getTarget() instanceof GraphNode) {
+			GraphElement node = getTarget();
+			for (GraphEdge edge : Utils.getTargetEdges(node))
+				if (getEdge() != edge) {
+					DeleteGraphElementCommand command = new DeleteGraphElementCommand(edge, true);
+					command.execute();
+				}
+		}
+		
 		super.redoModel();
 	}
 
