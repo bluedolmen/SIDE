@@ -5,14 +5,15 @@ if [ $# -eq 2 ]; then
   WORKSPACE=$1
   REPOSITORY_COPY=$2
 else
-  echo "Usage: launch_maven.sh WORKSPACE"
+  echo "Usage: launch_maven.sh WORKSPACE REPOSITORY_COPY"
   echo "       with WORKSPACE =  workspace path of the buildHuson project"
+  echo "       with REPOSITORY_COPY =  workspace path of SIDE sources (certainly equals to WORKSPACE)"
   exit -2
 fi
 
 cp -R $REPOSITORY_COPY/S-IDE/Integration/trunk/* $WORKSPACE/../buildAuto/Ankle/maven_workspace
 cp -R $REPOSITORY_COPY/S-IDE/FrameworksModules/trunk/* $WORKSPACE/../buildAuto/Ankle/maven_workspace
-cp -R $REPOSITORY_COPY/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.utils $WORKSPACE/../buildAuto/Ankle/maven_workspace
+cp -R $REPOSITORY_COPY/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.XFormsUtils $WORKSPACE/../buildAuto/Ankle/maven_workspace
 chmod -R 755 $WORKSPACE/../buildAuto/Ankle/maven_workspace
 
 
