@@ -26,7 +26,18 @@ import com.bluexml.side.integration.buildHudson.ProjectVersionUpdater;
 
 public class BuilderUtils {
 	private static Logger logger = Logger.getLogger(BuilderUtils.class);
+
 	private Properties buildProperties;
+	// properties
+	private static final String buildName = "buildName";
+	private static final String buildDir = "buildDir";
+	private static final String codeName = "codeName";
+	private static final String project = "project";
+	private static final String project_enterprise = "project.enterprise";
+	private static final String forceNumberVersion = "forceNumberVersion";
+	private static final String number_pattern = "number-pattern";
+	
+	
 	private String workspace;
 	private String revisionNumber;
 	private String build_number;
@@ -199,7 +210,7 @@ public class BuilderUtils {
 	 * return the buildDirectory: /home/stager/buildAuto/Ankle/workingCopy
 	 */
 	public String getBuildDirectory() {
-		return getBuildPath() + File.separator + getBuildProperties().getProperty("buildName");
+		return getBuildPath() + File.separator + getBuildProperties().getProperty(buildName);
 	}
 
 	/**
@@ -207,14 +218,14 @@ public class BuilderUtils {
 	 */
 	public String getBuildPath() {
 
-		return getBuildProperties().getProperty("buildDir") + File.separator + getCodeName();
+		return getBuildProperties().getProperty(buildDir) + File.separator + getCodeName();
 	}
 
 	/**
 	 * Retourne le nom de code: Ankle
 	 */
 	public String getCodeName() {
-		return getBuildProperties().getProperty("codeName");
+		return getBuildProperties().getProperty(codeName);
 	}
 
 	/**
@@ -244,18 +255,18 @@ public class BuilderUtils {
 	 * Retourne la liste des projets
 	 */
 	public List<String> getProjects() {
-		List<String> projects = getProjects("project");
-		projects.addAll(getProjects("project.enterprise"));
+		List<String> projects = getProjects(project);
+		projects.addAll(getProjects(project_enterprise));
 		return projects;
 	}
 
 	public List<String> getEnterpriseProjects() {
-		List<String> projects = getProjects("project.enterprise");
+		List<String> projects = getProjects(project_enterprise);
 		return projects;
 	}
 
 	public List<String> getCommunityProjects() {
-		List<String> projects = getProjects("project");
+		List<String> projects = getProjects(project);
 		return projects;
 	}
 
@@ -355,7 +366,8 @@ public class BuilderUtils {
 
 	/**
 	 * Copy the repository
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	public void copyFromRepository() throws Exception {
 		logger.info("Utils.copyFromRepository() start");
@@ -376,7 +388,7 @@ public class BuilderUtils {
 	}
 
 	public String[] getNumVersionPattern() {
-		String[] pattern = getBuildProperties().getProperty("number-pattern").split("\\.");
+		String[] pattern = getBuildProperties().getProperty(number_pattern).split("\\.");
 		return pattern;
 	}
 
@@ -430,7 +442,7 @@ public class BuilderUtils {
 	}
 
 	private String getCommunityProjectProperty() {
-		return getBuildProperties().getProperty("project");
+		return getBuildProperties().getProperty(project);
 	}
 
 	private String getEnterpriseProjectPath(String projectName) {
@@ -450,7 +462,7 @@ public class BuilderUtils {
 	}
 
 	private String getEnterpriseProjectProperty() {
-		return getBuildProperties().getProperty("project.enterprise");
+		return getBuildProperties().getProperty(project_enterprise);
 	}
 
 	/**
@@ -458,7 +470,7 @@ public class BuilderUtils {
 	 * (void for no change)
 	 */
 	public String getForceNumberVersion() {
-		return getBuildProperties().getProperty("forceNumberVersion");
+		return getBuildProperties().getProperty(forceNumberVersion);
 	}
 
 	/**
