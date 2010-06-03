@@ -1,9 +1,7 @@
 package com.bluexml.side.integration.buildHudson.updaters;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
