@@ -29,7 +29,6 @@ public class BuilderUtils {
 
 	private Properties buildProperties;
 	// properties
-	private static final String buildName = "buildName";
 	private static final String buildDir = "buildDir";
 	private static final String codeName = "codeName";
 	private static final String project = "project";
@@ -205,19 +204,12 @@ public class BuilderUtils {
 		String pathproject = getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy;
 		return pathproject;
 	}
-
-	/**
-	 * return the buildDirectory: /home/stager/buildAuto/Ankle/workingCopy
-	 */
-	public String getBuildDirectory() {
-		return getBuildPath() + File.separator + getBuildProperties().getProperty(buildName);
-	}
+	
 
 	/**
 	 * Return the Build Path: /home/stager/buildAuto/Ankle
 	 */
 	public String getBuildPath() {
-
 		return getBuildProperties().getProperty(buildDir) + File.separator + getCodeName();
 	}
 

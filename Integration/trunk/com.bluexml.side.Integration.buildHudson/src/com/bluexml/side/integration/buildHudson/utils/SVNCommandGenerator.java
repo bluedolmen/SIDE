@@ -88,7 +88,7 @@ public class SVNCommandGenerator {
 					logger.debug("reccord " + pluginId + " for commit");
 					out += "\t\t\t<fileset dir=\"" + bu.getPathToLocalCopy(pluginId) + "\">\n";
 					out += "\t\t\t\t<include name=\"plugin.xml\" />\n";
-					if (pluginId.endsWith("branding")) {
+					if (pluginId.contains("branding")) {
 						// product
 						out += "\t\t\t\t<include name=\"side.product\" />\n";
 					}
