@@ -49,10 +49,10 @@
          unpack="false"/>
 
    <plugin
-         id="com.bluexml.side.Class.generator.alfresco.communityExtension"
+         id="com.bluexml.side.Class.generator.alfresco.extension.sideCommunity"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
