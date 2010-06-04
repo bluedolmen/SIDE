@@ -1650,6 +1650,13 @@ public class ApplicationDialog extends Dialog {
 					errorMsg.setText(""); //$NON-NLS-1$
 				}
 				// System.out.println("HandlerEvent P2");
+			} else if (el instanceof OptionComponant) {
+				canCheck = ApplicationUtil.checkElementOptionValidity(el);
+				if (!canCheck) {
+					errorMsg.setText(Activator.Messages.getString("ApplicationDialog.100")); //$NON-NLS-1$
+				} else {
+					errorMsg.setText(""); //$NON-NLS-1$
+				}
 			} else {
 				errorMsg.setText(""); //$NON-NLS-1$
 			}
@@ -1795,7 +1802,8 @@ public class ApplicationDialog extends Dialog {
 			ImplNode node = (ImplNode) item;
 			Collection<TreeNode> options = node.getChildren();
 			for (TreeNode treeNode : options) {
-				if (((OptionComponant) treeNode).isDefault()) {
+				OptionComponant optionComponant = (OptionComponant) treeNode;
+				if (optionComponant.isDefault() && ApplicationUtil.checkElementOptionValidity(optionComponant)) {
 					treeNode.setChecked(true);
 					tv.update(treeNode, null);
 				}

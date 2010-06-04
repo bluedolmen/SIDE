@@ -17,6 +17,8 @@ import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
+	
+
 	public static String MMUri;
 	protected static String GENERATOR_OPTIONS_SCREENSHOOT = "doc.gen.screenshoot";
 
@@ -87,7 +89,10 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 	public boolean check() {
 		return true;
 	}
-
+	
+	public boolean checkOption(String optionID) {
+		return true;
+	}
 	public static boolean includeScreenShoot() {
 		return includeScreenShoot(null);
 	}

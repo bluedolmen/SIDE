@@ -32,4 +32,8 @@ public class FakeDeployer extends Deployer {
 		return true;
 	}
 
+	public boolean checkOption(String optionID) {
+		return true;
+	}
+
 }

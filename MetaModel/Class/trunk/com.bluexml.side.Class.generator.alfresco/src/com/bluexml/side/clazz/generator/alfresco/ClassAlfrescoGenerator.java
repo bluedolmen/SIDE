@@ -189,7 +189,10 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	 * @return true if the generator can be used.
 	 */
 	public boolean check() {
-		// return true;
+		return true;
+	}
+
+	public boolean checkOption(String optionID) {
 		return true;
 	}
 	

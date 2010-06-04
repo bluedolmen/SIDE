@@ -43,6 +43,8 @@ public class ClassUtils {
 		// Special case for DataTable
 		if (view instanceof DataTable) {
 			Col col = ViewFactory.eINSTANCE.createCol();
+			System.out.println("try to add :"+f);
+			System.out.println("in "+col.getChildren());
 			col.getChildren().add(f);
 			col.setName(f.getName());
 			result = col;
@@ -99,7 +101,8 @@ public class ClassUtils {
 			// Short Field
 				field = ViewFactory.eINSTANCE.createIntegerField();
 			} else {
-				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
+				EcorePlugin.INSTANCE.log("No field available for use default" + att.getTyp());
+				field = ViewFactory.eINSTANCE.createTextField();
 			}
 			if (field != null) {
 				field.setName(att.getName());

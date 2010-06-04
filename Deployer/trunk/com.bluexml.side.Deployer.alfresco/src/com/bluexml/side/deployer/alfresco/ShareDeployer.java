@@ -12,11 +12,7 @@ public class ShareDeployer extends WarDeployer {
 	@Override
 	protected void postProcess(java.io.File fileToDeploy) throws Exception {
 
-	}
-
-	public boolean check() {
-		return true;
-	}
+	}	
 
 	@Override
 	public void deploy() throws Exception {

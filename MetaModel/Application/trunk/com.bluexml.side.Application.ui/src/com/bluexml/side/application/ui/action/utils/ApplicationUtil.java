@@ -51,6 +51,7 @@ import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.tree.Deployer;
 import com.bluexml.side.application.ui.action.tree.Generator;
 import com.bluexml.side.application.ui.action.tree.ImplNode;
+import com.bluexml.side.application.ui.action.tree.OptionComponant;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.libs.FileHelper;
@@ -393,6 +394,40 @@ public class ApplicationUtil {
 				gen = Platform.getBundle(iN.getContributorId()).loadClass(iN.getLaunchClass());
 				Checkable gener = gen.newInstance();
 				return gener.check();
+			} else {
+				throw new Exception("Error : " + iN.getId() + " isn't found as a plugin. Check your extension file.");
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Check if the element given is active in the key
+	 * 
+	 * @param el
+	 *            : the element
+	 * @return true if valid, false if not
+	 */
+	@SuppressWarnings("unchecked")
+	public static Boolean checkElementOptionValidity(TreeElement el) {
+		// If the element is a component and not valid we don't enable it
+		try {
+			OptionComponant option = ((OptionComponant) el);
+			String optionID  = option.getFullId();
+			ImplNode iN = (ImplNode)option.getParent();
+			Class<Checkable> gen;
+			if (Platform.getBundle(iN.getContributorId()) != null) {
+				gen = Platform.getBundle(iN.getContributorId()).loadClass(iN.getLaunchClass());
+				Checkable gener = gen.newInstance();
+				return gener.check() && gener.checkOption(optionID);
 			} else {
 				throw new Exception("Error : " + iN.getId() + " isn't found as a plugin. Check your extension file.");
 			}

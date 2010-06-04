@@ -165,10 +165,6 @@ public abstract class WarDeployer extends Deployer {
 		}
 
 	}
-
-	public boolean check() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+	
 
 }

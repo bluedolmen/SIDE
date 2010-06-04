@@ -225,6 +225,10 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		return true;
 	}
 
+	public boolean checkOption(String optionID) {
+		return true;
+	}
+
 	/**
 	 * use DependencesManager to get files required by the generated package and
 	 * copy them in the technology version folder

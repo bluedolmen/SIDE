@@ -34,7 +34,4 @@ public class AlfrescoDeployer extends AbstractMultiDeployer {
 
 	}
 	
-	public boolean check() {
-		return true;
-	}
 }

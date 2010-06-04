@@ -95,16 +95,7 @@ public class AMPDeployer extends WarDeployer {
 			monitor.addErrorTextAndLog(Activator.Messages.getString("AMPDeployer.13"), e, null); //$NON-NLS-1$
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * This method check if the user have the license to use this deployer.
-	 * 
-	 * @return true if the deployer can be used.
-	 */
-	public boolean check() {
-		return true;
-	}
+	}	
 
 	@Override
 	protected void postProcess(File fileToDeploy) throws Exception {

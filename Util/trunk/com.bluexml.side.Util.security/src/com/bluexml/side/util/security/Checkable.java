@@ -12,4 +12,6 @@ public interface Checkable {
 	 * @return true if the component can be used.
 	 */
 	public abstract boolean check();
+	
+	public abstract boolean checkOption(String optionID);
 }

@@ -237,5 +237,11 @@ public abstract class Deployer implements Checkable {
 		}
 	}
 	
+	public boolean check() {
+		return true;
+	}
+	public boolean checkOption(String optionID) {
+		return true;
+	}
 	
 }
