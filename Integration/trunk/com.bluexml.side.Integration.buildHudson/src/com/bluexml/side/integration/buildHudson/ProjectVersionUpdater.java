@@ -49,7 +49,7 @@ public class ProjectVersionUpdater {
 	public static final String repositoryCopy = "repositoryCopy";
 	public static final String workspaceFolderName = "workspace";
 	public static final String svnLog = "svnUpdate.log";
-	public static final String bluexmlPackage="com.bluexml";
+	public static final String bluexmlPackage = "com.bluexml";
 
 	/**
 	 * attributes
@@ -60,35 +60,35 @@ public class ProjectVersionUpdater {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if (args.length < 5) {
-			System.out.println("Usage : java -jar Builder.jar <workspace> <build_number> <build_id> <svn_revision> <propertiesFilePath> [skipCopyToRepo]");
-			System.out.println("\t<workspace>          : workspace folder, folder contains S-IDE ...");
-			System.out.println("\t<build_number>       : Hudson build number");
-			System.out.println("\t<build_id>           : identifier like yyyy-MM-dd_HH-mm-ss");
-			System.out.println("\t<svn_revision>       : the svn revision number");
-			System.out.println("\t<propertiesFilePath> : file path of properties file to use");
-			System.out.println("\t[skipCopyToRepo]     : optional, disable last action that copy modified files into svn local copy (mainly for testing)");
-		}
-
-		// get Parameters
-		String workspace = args[0];
-		String build_number = args[1];
-		String build_id = args[2];
-		String svn_revision = args[3];
-		String propertiesFilePath = args[4];
-		boolean skipCopyToRepo = false;
-		if (args.length == 6 && args[5].equals("skipCopyToRepo")) {
-			skipCopyToRepo = true;
-		}
-		// initialize Builder
-		ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, propertiesFilePath, skipCopyToRepo);
-
 		try {
+			if (args.length < 5) {
+				System.out.println("Usage : java -jar Builder.jar <workspace> <build_number> <build_id> <svn_revision> <propertiesFilePath> [skipCopyToRepo]");
+				System.out.println("\t<workspace>          : workspace folder, folder contains S-IDE ...");
+				System.out.println("\t<build_number>       : Hudson build number");
+				System.out.println("\t<build_id>           : identifier like yyyy-MM-dd_HH-mm-ss");
+				System.out.println("\t<svn_revision>       : the svn revision number");
+				System.out.println("\t<propertiesFilePath> : file path of properties file to use");
+				System.out.println("\t[skipCopyToRepo]     : optional, disable last action that copy modified files into svn local copy (mainly for testing)");
+			}
+
+			// get Parameters
+			String workspace = args[0];
+			String build_number = args[1];
+			String build_id = args[2];
+			String svn_revision = args[3];
+			String propertiesFilePath = args[4];
+			boolean skipCopyToRepo = false;
+			if (args.length == 6 && args[5].equals("skipCopyToRepo")) {
+				skipCopyToRepo = true;
+			}
+			// initialize Builder
+			ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, propertiesFilePath, skipCopyToRepo);
+
 			// launch version updater
 			builder.build();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(-1);
 		}
 	}
 
