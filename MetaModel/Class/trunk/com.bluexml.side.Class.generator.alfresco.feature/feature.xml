@@ -1,31 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Class.generator.alfresco.feature" label="SIDE Alfresco Content Type Generator" version="1.0.147.v17184-20100529" provider-name="BlueXML">
-  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of data models on Alfresco for content type, views and forms extensions.</description>
-  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
-  <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <requires>
-    <import plugin="org.eclipse.ui" />
-    <import plugin="org.eclipse.core.runtime" />
-    <import plugin="org.eclipse.ocl" />
-    <import plugin="org.eclipse.ocl.ecore" />
-    <import plugin="org.eclipse.core.resources" />
-    <import plugin="com.bluexml.side.Util.ecore" />
-    <import plugin="com.bluexml.side.Util.libs" />
-    <import plugin="com.bluexml.side.Util.metaModel.validate" />
-    <import plugin="com.bluexml.side.Util.generator.acceleo" />
-    <import plugin="com.bluexml.side.Util.generator.alfresco" />
-    <import plugin="com.bluexml.side.Util.generator" />
-    <import plugin="com.bluexml.side.Application" />
-    <import plugin="com.bluexml.side.Util.security" />
-    <import plugin="com.bluexml.side.Util.log" />
-    <import plugin="com.bluexml.side.Common" />
-    <import plugin="com.bluexml.side.Util.componentMonitor" />
-    <import plugin="fr.obeo.acceleo.gen" />
-    <import plugin="com.bluexml.side.Class" />
-    <import plugin="com.bluexml.side.Class.modeler" />
-    <import plugin="com.bluexml.side.Util.dependencies" />
-    <import plugin="com.bluexml.side.Class.service.alfresco" />
-  </requires>
-  <plugin id="com.bluexml.side.Class.generator.alfresco" download-size="0" install-size="0" version="1.0.148.v17184-20100529" unpack="false" />
-</feature>
+<feature
+      id="com.bluexml.side.Class.generator.alfresco.feature"
+      label="SIDE Alfresco Content Type Generator"
+      version="1.0.147.v17184-20100529"
+      provider-name="BlueXML">
 
+   <description url="http://www.bluexml.com">
+      SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of data models on Alfresco for content type, views and forms extensions.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ocl"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Util.ecore"/>
+      <import plugin="com.bluexml.side.Util.libs"/>
+      <import plugin="com.bluexml.side.Util.metaModel.validate"/>
+      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
+      <import plugin="com.bluexml.side.Util.generator.alfresco"/>
+      <import plugin="com.bluexml.side.Util.generator"/>
+      <import plugin="com.bluexml.side.Application"/>
+      <import plugin="com.bluexml.side.Util.security"/>
+      <import plugin="com.bluexml.side.Util.log"/>
+      <import plugin="com.bluexml.side.Common"/>
+      <import plugin="com.bluexml.side.Util.componentMonitor"/>
+      <import plugin="fr.obeo.acceleo.gen"/>
+      <import plugin="com.bluexml.side.Class"/>
+      <import plugin="com.bluexml.side.Class.modeler"/>
+      <import plugin="com.bluexml.side.Util.dependencies"/>
+      <import plugin="com.bluexml.side.Class.service.alfresco"/>
+   </requires>
+
+   <plugin
+         id="com.bluexml.side.Class.generator.alfresco"
+         download-size="0"
+         install-size="0"
+         version="1.0.148.v17184-20100529"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Class.generator.alfresco.communityExtension"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+</feature>
