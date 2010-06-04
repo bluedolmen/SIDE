@@ -4,7 +4,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
@@ -14,7 +13,6 @@ import com.bluexml.side.requirements.generator.TransformModel;
 
 public class ExportSIDEModels implements IObjectActionDelegate {
 
-	private Shell shell;
 	private ISelection _selection;
 	
 	private static String ASM_FILE = "/interpretation/side/transformation/Reqs2SIDE.asm";
@@ -30,7 +28,7 @@ public class ExportSIDEModels implements IObjectActionDelegate {
 	 * @see IObjectActionDelegate#setActivePart(IAction, IWorkbenchPart)
 	 */
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-		shell = targetPart.getSite().getShell();
+		targetPart.getSite().getShell();
 	}
 
 	/**
