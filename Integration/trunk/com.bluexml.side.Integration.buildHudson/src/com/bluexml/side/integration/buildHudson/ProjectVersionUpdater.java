@@ -136,17 +136,17 @@ public class ProjectVersionUpdater {
 		System.out.println("\nLancé le " + BuilderUtils.getFormatedDate(launchDate) + " à " + BuilderUtils.getTime(launchDate));
 
 		// define projects lists
-		List<String> listeProjet = new ArrayList<String>();
-		List<String> listeProjetReels = new ArrayList<String>();
+		List<String> projectList = new ArrayList<String>();
+		List<String> projectRealList = new ArrayList<String>();
 
-		List<String> listeProjetPoms = new ArrayList<String>();
-		List<String> listeProjetPomsModif = new ArrayList<String>();
+		List<String> projetPomsList = new ArrayList<String>();
+		List<String> projectPoms2Update = new ArrayList<String>();
 
-		List<String> listePlugin = new ArrayList<String>();
-		List<String> listePluginModif = new ArrayList<String>();
+		List<String> pluginsList = new ArrayList<String>();
+		List<String> plugins2UpdateList = new ArrayList<String>();
 
-		List<String> listeFeature = new ArrayList<String>();
-		List<String> listeFeatureModif = new ArrayList<String>();
+		List<String> featuresList = new ArrayList<String>();
+		List<String> features2UpdateList = new ArrayList<String>();
 
 		List<String> projects = new ArrayList<String>();
 		projects.addAll(bu.getProjects("project"));
@@ -156,7 +156,7 @@ public class ProjectVersionUpdater {
 		}
 		for (int i = 0; i < projects.size(); i++) {
 			if (projects.get(i).length() > 0) {
-				listeProjetReels.add(projects.get(i));
+				projectRealList.add(projects.get(i));
 			}
 		}
 		String pathproject = getUsedWorkspace();
@@ -171,23 +171,23 @@ public class ProjectVersionUpdater {
 		File searchFrom = new File(pathproject + "/" + sourceSVNName + "/");
 		System.out.println("from " + searchFrom);
 
-		listeProjetPoms = BuilderUtils.findFile(searchFrom, "pom.xml");
+		projetPomsList = BuilderUtils.findFile(searchFrom, "pom.xml");
 		
 
 		// read svn log to list modified projects
-		bu.readSvnLog(listeProjetPoms, listeProjetPomsModif, listeProjet);
+		bu.readSvnLog(projetPomsList, projectPoms2Update, projectList);
 
 		// dispatch modified project according to project type (plugin or
 		// feature)
-		for (String element : listeProjet) {
-			if (listeProjetReels.contains(element)) {
+		for (String element : projectList) {
+			if (projectRealList.contains(element)) {
 				// on met tous les plugins modifiés dans un tableau
 				if (element.indexOf("feature") == -1) {
-					listePluginModif.add(element);
+					plugins2UpdateList.add(element);
 				}
 				// et tous les features dans un autre
 				else {
-					listeFeatureModif.add(element);
+					features2UpdateList.add(element);
 				}
 			}
 		}
@@ -195,23 +195,23 @@ public class ProjectVersionUpdater {
 		// dispatch all project according to project type (plugin or feature)
 		for (int i = 0; i < projects.size(); i++) {
 			if (projects.get(i).indexOf("feature") != -1) {
-				listeFeature.add(projects.get(i));
+				featuresList.add(projects.get(i));
 			} else {
-				listePlugin.add(projects.get(i));
+				pluginsList.add(projects.get(i));
 			}
 		}
 		// lists initializing done.
 
 		System.out.println(" Found :");
-		System.out.println(" plugins :" + listePlugin.size());
-		System.out.println(" Features :" + listeFeature.size());
-		System.out.println(" poms :" + listeProjetPoms.size());
+		System.out.println(" plugins :" + pluginsList.size());
+		System.out.println(" Features :" + featuresList.size());
+		System.out.println(" poms :" + projetPomsList.size());
 		System.out.println(" project updated (svn) :");
-		System.out.println(" plugins :" + listePluginModif.size());
-		System.out.println(" Features :" + listeFeatureModif);
-		System.out.println(" poms :" + listeProjetPomsModif.size());
+		System.out.println(" plugins :" + plugins2UpdateList.size());
+		System.out.println(" Features :" + features2UpdateList);
+		System.out.println(" poms :" + projectPoms2Update.size());
 
-		if (listeFeature.size() == 0 || listePlugin.size() == 0 || listeProjetPoms.size() == 0) {
+		if (featuresList.size() == 0 || pluginsList.size() == 0 || projetPomsList.size() == 0) {
 			// something wrong
 			throw new Exception("Updater Stoped ! please check configuration somes projects could not be found in repository");
 		}
@@ -222,8 +222,10 @@ public class ProjectVersionUpdater {
 		if (isEnterpriseBuild()) {
 			// just to have Core project in full list
 			corePoms = BuilderUtils.findFile(new File(pathproject + "/" + Application.SIDE_Core + "/"), "pom.xml");
+			// add them to poms list
+			projetPomsList.addAll(corePoms);
 		}
-		MavenProjectUpdater mpu = new MavenProjectUpdater(listeProjetPoms, listeProjetPomsModif,corePoms, bu);
+		MavenProjectUpdater mpu = new MavenProjectUpdater(projetPomsList, projectPoms2Update,corePoms, bu);
 		mpu.checkAndUpdateAllPoms();
 		System.out.println("Updated Maven2 projects :");
 		for (Map.Entry<String, String> entry : mpu.getPomsNewsVersion().entrySet()) {
@@ -239,8 +241,8 @@ public class ProjectVersionUpdater {
 			} else {
 				dependenciesPluginId = "com.bluexml.side.Util.dependencies.repository";
 			}
-			if (!listePluginModif.contains(dependenciesPluginId)) {
-				listePluginModif.add(dependenciesPluginId);
+			if (!plugins2UpdateList.contains(dependenciesPluginId)) {
+				plugins2UpdateList.add(dependenciesPluginId);
 			}
 		}
 
@@ -256,8 +258,8 @@ public class ProjectVersionUpdater {
 			} else {
 				brandingPluginId = "com.bluexml.side.Integration.eclipse.branding";
 			}
-			if (!listePluginModif.contains(brandingPluginId)) {
-				listePluginModif.add(brandingPluginId);
+			if (!plugins2UpdateList.contains(brandingPluginId)) {
+				plugins2UpdateList.add(brandingPluginId);
 			}
 		}
 
@@ -265,9 +267,9 @@ public class ProjectVersionUpdater {
 
 		PluginsUpdater pu = null;
 		if (isEnterpriseBuild()) {
-			pu = new PluginsUpdater(listePlugin, listePluginModif, bu.getProjects("project"), mpu, bu);
+			pu = new PluginsUpdater(pluginsList, plugins2UpdateList, bu.getProjects("project"), mpu, bu);
 		} else {
-			pu = new PluginsUpdater(listePlugin, listePluginModif, null, mpu, bu);
+			pu = new PluginsUpdater(pluginsList, plugins2UpdateList, null, mpu, bu);
 		}
 		pu.checkAndUpdate();
 		System.out.println("Updated Plugins :");
@@ -278,9 +280,9 @@ public class ProjectVersionUpdater {
 		// launch feature project updater
 		FeatureUpdater fu = null;
 		if (isEnterpriseBuild()) {
-			fu = new FeatureUpdater(listeFeature, listeFeatureModif, bu.getProjects("project"), pu, bu);
+			fu = new FeatureUpdater(featuresList, features2UpdateList, bu.getProjects("project"), pu, bu);
 		} else {
-			fu = new FeatureUpdater(listeFeature, listeFeatureModif, null, pu, bu);
+			fu = new FeatureUpdater(featuresList, features2UpdateList, null, pu, bu);
 		}
 
 		fu.checkAndUpdateAllFeatures();
@@ -307,7 +309,7 @@ public class ProjectVersionUpdater {
 
 		if (generateSVNCommit) {
 			// generate ant script to commit changes
-			SVNCommandGenerator svnCg = new SVNCommandGenerator(bu, launchDate, listeProjetPomsModif, listePluginModif, listeFeatureModif);
+			SVNCommandGenerator svnCg = new SVNCommandGenerator(bu, launchDate, projectPoms2Update, plugins2UpdateList, features2UpdateList);
 			svnCg.createAntFile();
 		}
 	}
