@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Alfresco Deployer
 Bundle-SymbolicName: com.bluexml.side.Deployer.alfresco;singleton:=true
-Bundle-Version: 1.0.54.v17634-20100605
+Bundle-Version: 1.0.55.v17652-20100607
 Bundle-Activator: com.bluexml.side.deployer.alfresco.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
