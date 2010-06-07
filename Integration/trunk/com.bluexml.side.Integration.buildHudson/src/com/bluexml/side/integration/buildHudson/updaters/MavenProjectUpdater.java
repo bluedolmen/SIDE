@@ -25,7 +25,10 @@ public class MavenProjectUpdater {
 	BuilderUtils bu;
 	List<String> pom2update = new ArrayList<String>();
 	List<String> pomUpdated = new ArrayList<String>();
+	List<String> pomsListReadOnly = new ArrayList<String>();
+
 	Map<String, String> pomsPathList = new HashMap<String, String>();
+
 	Map<String, String> pomsNewsVersion = new HashMap<String, String>();
 
 	public Map<String, String> getPomsNewsVersion() {
@@ -42,11 +45,17 @@ public class MavenProjectUpdater {
 	 */
 	boolean update_mavenplugins = true;
 
-	public MavenProjectUpdater(List<String> pomsList, List<String> pom2update, BuilderUtils bu) {
+	public MavenProjectUpdater(List<String> pomsList, List<String> pom2update, List<String> pomsListReadOnly, BuilderUtils bu) {
 		this.bu = bu;
 		for (String pom : pomsList) {
 			String currentmodule = getModuleIdFromPomPath(pom);
 			pomsPathList.put(currentmodule, pom);
+		}
+		if (pomsListReadOnly != null) {
+			for (String pom : pomsListReadOnly) {
+				String currentmodule = getModuleIdFromPomPath(pom);
+				this.pomsListReadOnly.add(currentmodule);
+			}
 		}
 		logger.debug("MavenProjectUpdater() pomsList " + pomsPathList.keySet());
 		for (String pom : pom2update) {
@@ -83,11 +92,13 @@ public class MavenProjectUpdater {
 	}
 
 	private void markProjects() throws Exception {
-		List<String> module = new ArrayList<String>(pomsPathList.keySet());
-
-		module.removeAll(pom2update);
-		if (module.size() > 0) {
-			for (String id : module) {
+		List<String> modules = new ArrayList<String>(pomsPathList.keySet());
+		// remove project only used for references
+		modules.removeAll(pomsListReadOnly);
+		// remove already marked for update
+		modules.removeAll(pom2update);
+		if (modules.size() > 0) {
+			for (String id : modules) {
 				logger.debug("markProjects() Check mvn project :" + id);
 
 				boolean marked = false;

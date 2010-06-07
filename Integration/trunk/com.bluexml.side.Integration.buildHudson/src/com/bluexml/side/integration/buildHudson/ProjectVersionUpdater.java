@@ -172,10 +172,7 @@ public class ProjectVersionUpdater {
 		System.out.println("from " + searchFrom);
 
 		listeProjetPoms = BuilderUtils.findFile(searchFrom, "pom.xml");
-		if (isEnterpriseBuild()) {
-			// just to have Core project in full list
-			BuilderUtils.findFile(new File(pathproject + "/" + Application.SIDE_Core + "/"), "pom.xml");
-		}
+		
 
 		// read svn log to list modified projects
 		bu.readSvnLog(listeProjetPoms, listeProjetPomsModif, listeProjet);
@@ -220,7 +217,13 @@ public class ProjectVersionUpdater {
 		}
 
 		// launch maven project updater
-		MavenProjectUpdater mpu = new MavenProjectUpdater(listeProjetPoms, listeProjetPomsModif, bu);
+		// get projects from Core repository
+		List<String> corePoms=null;
+		if (isEnterpriseBuild()) {
+			// just to have Core project in full list
+			corePoms = BuilderUtils.findFile(new File(pathproject + "/" + Application.SIDE_Core + "/"), "pom.xml");
+		}
+		MavenProjectUpdater mpu = new MavenProjectUpdater(listeProjetPoms, listeProjetPomsModif,corePoms, bu);
 		mpu.checkAndUpdateAllPoms();
 		System.out.println("Updated Maven2 projects :");
 		for (Map.Entry<String, String> entry : mpu.getPomsNewsVersion().entrySet()) {
