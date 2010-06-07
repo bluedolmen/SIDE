@@ -1645,6 +1645,9 @@ public class ApplicationDialog extends Dialog {
 			if (el instanceof ImplNode) {
 				canCheck = ApplicationUtil.checkElementValidity(el);
 				if (!canCheck) {
+					el.setChecked(false);
+					disableAllSubElements(item);
+					tv.update(el, null);
 					errorMsg.setText(Activator.Messages.getString("ApplicationDialog.99")); //$NON-NLS-1$
 				} else {
 					errorMsg.setText(""); //$NON-NLS-1$
@@ -1653,6 +1656,9 @@ public class ApplicationDialog extends Dialog {
 			} else if (el instanceof OptionComponant) {
 				canCheck = ApplicationUtil.checkElementOptionValidity(el);
 				if (!canCheck) {
+					el.setChecked(false);
+					disableAllSubElements(item);
+					tv.update(el, null);					
 					errorMsg.setText(Activator.Messages.getString("ApplicationDialog.100")); //$NON-NLS-1$
 				} else {
 					errorMsg.setText(""); //$NON-NLS-1$

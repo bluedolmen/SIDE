@@ -421,7 +421,7 @@ public class ApplicationUtil {
 		// If the element is a component and not valid we don't enable it
 		try {
 			OptionComponant option = ((OptionComponant) el);
-			String optionID  = option.getFullId();
+			String optionID= option.getId();
 			ImplNode iN = (ImplNode)option.getParent();
 			Class<Checkable> gen;
 			if (Platform.getBundle(iN.getContributorId()) != null) {

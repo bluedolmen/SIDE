@@ -389,14 +389,16 @@ public class Generate extends WorkspaceJob {
 
 	private boolean checkFolders(final HashMap<String, List<IFile>> modelsInfo) {
 		// http://bugs.bluexml.net/show_bug.cgi?id=1450
-//		System.err.println("logPath:" + logPath);
-//		System.err.println("genePath:" + genPath);
-		
+		// System.err.println("logPath:" + logPath);
+		// System.err.println("genePath:" + genPath);
+
 		for (List<IFile> mo : modelsInfo.values()) {
 			for (IFile iFile : mo) {
 				boolean modelsInLogPath = iFile.getFullPath().toOSString().contains(logPath);
 				boolean contains = iFile.getFullPath().toOSString().contains(genPath);
-//				System.err.println("check :" + iFile.getFullPath().toOSString() + " " + modelsInLogPath + " " + contains);
+				// System.err.println("check :" +
+				// iFile.getFullPath().toOSString() + " " + modelsInLogPath +
+				// " " + contains);
 				if (modelsInLogPath || contains) {
 					generalMonitor.addWarningText("Beware clean operation cancled because models are includes in log or generation path ");
 					return false;
@@ -500,8 +502,20 @@ public class Generate extends WorkspaceJob {
 
 					this.componentMonitor.taskDone(Activator.Messages.getString("Generate.8")); //$NON-NLS-1$
 					if (generator.check()) {
+						// check options
+						for (Map.Entry<String, Boolean> opt : generatorOptions.entrySet()) {
+							if (opt.getValue()) {
+								String option = generator.getId()+"_"+opt.getKey();
+								if (!generator.checkOption(option)) {
+									this.componentMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.45", opt.getKey()), null, null); //$NON-NLS-1$ //$NON-NLS-2$
+									this.componentMonitor.skipTasks(NB_GENERATION_STEP);
+									error = true;
+								}
+							}
+						}
+
 						// The first one
-						if (modelsInfo.size() > 0) {
+						if (!error && modelsInfo.size() > 0) {
 							// Generate
 							try {
 								this.componentMonitor.beginTask(Activator.Messages.getString("Generate.33", name)); //$NON-NLS-1$
