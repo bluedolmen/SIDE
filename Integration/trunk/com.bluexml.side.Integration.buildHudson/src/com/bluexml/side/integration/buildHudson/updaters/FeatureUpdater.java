@@ -80,22 +80,21 @@ public class FeatureUpdater {
 
 				for (Object object : listPlugins) {
 					Element courant = (Element) object;
-
-					// sauvegarde du numéro de version
-					String oldVersionNumber = courant.getAttributeValue("version");
-
-					// on regarde si le numéro de version du plugin a changé
 					String pluginId = courant.getAttributeValue("id");
 
-					String newVersionNumber = pu.getPluginVersion(pluginId);
+					if (bu.getProjects().contains(pluginId)) {
+						// only SIDE project
+						String oldVersionNumber = courant.getAttributeValue("version");
+						String newVersionNumber = pu.getPluginVersion(pluginId);
 
-					logger.debug("\tFeatureUpdater.checkFeatures() plugin:" + pluginId);
-					logger.debug("\tcompare versions old:" + oldVersionNumber + "/" + newVersionNumber);
+						logger.debug("\tFeatureUpdater.checkFeatures() plugin:" + pluginId);
+						logger.debug("\tcompare versions old:" + oldVersionNumber + "/" + newVersionNumber);
 
-					if (!oldVersionNumber.equals(newVersionNumber)) {
-						logger.debug("\tUtils.updateVersionNumber() feature to update because plugin updated : " + pluginId);
-						marked = true;
-						// break;
+						if (!oldVersionNumber.equals(newVersionNumber)) {
+							logger.debug("\tUtils.updateVersionNumber() feature to update because plugin updated : " + pluginId);
+							marked = true;
+							// break;
+						}
 					}
 				}
 
@@ -107,21 +106,26 @@ public class FeatureUpdater {
 
 					for (Object object : listIncludedFeatures) {
 						Element currentNode = (Element) object;
-						String oldVersionNumber = currentNode.getAttributeValue("version");
 						String inculdedFeatureId = currentNode.getAttributeValue("id");
-						logger.debug("\tscan included feature :" + inculdedFeatureId + " : " + oldVersionNumber);
-						// check version of features
 
-						if (feature2update.contains(inculdedFeatureId)) {
-							logger.debug("\tFeatureUpdater.checkFeatures() feature marked beacause found included marked feature " + inculdedFeatureId);
-							marked = true;
-						} else {
-							String newVersionNumber = getFeatureVersion(inculdedFeatureId);
-							logger.debug("compare versions old:" + oldVersionNumber + "/" + newVersionNumber);
-							if (!oldVersionNumber.equals(newVersionNumber)) {
-								logger.debug("\tFeatureUpdater.checkFeatures() feature marked beacause found included feature with bad version" + inculdedFeatureId);
+						if (bu.getProjects().contains(inculdedFeatureId)) {
+
+							String oldVersionNumber = currentNode.getAttributeValue("version");
+
+							logger.debug("\tscan included feature :" + inculdedFeatureId + " : " + oldVersionNumber);
+							// check version of features
+
+							if (feature2update.contains(inculdedFeatureId)) {
+								logger.debug("\tFeatureUpdater.checkFeatures() feature marked beacause found included marked feature " + inculdedFeatureId);
 								marked = true;
-								// break;
+							} else {
+								String newVersionNumber = getFeatureVersion(inculdedFeatureId);
+								logger.debug("compare versions old:" + oldVersionNumber + "/" + newVersionNumber);
+								if (!oldVersionNumber.equals(newVersionNumber)) {
+									logger.debug("\tFeatureUpdater.checkFeatures() feature marked beacause found included feature with bad version" + inculdedFeatureId);
+									marked = true;
+									// break;
+								}
 							}
 						}
 					}

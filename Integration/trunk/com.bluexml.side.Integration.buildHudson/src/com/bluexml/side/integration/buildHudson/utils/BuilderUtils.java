@@ -35,8 +35,7 @@ public class BuilderUtils {
 	private static final String project_enterprise = "project.enterprise";
 	private static final String forceNumberVersion = "forceNumberVersion";
 	private static final String number_pattern = "number-pattern";
-	
-	
+
 	private String workspace;
 	private String revisionNumber;
 	private String build_number;
@@ -165,15 +164,9 @@ public class BuilderUtils {
 			properties.load(fileStream);
 			// logger.debug("Properties File loaded :" +
 			// props.getAbsolutePath());
-
+			fileStream.close();
 		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				fileStream.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			logger.error("Error opening file " + props, e);
 		}
 
 		return properties;
@@ -204,7 +197,6 @@ public class BuilderUtils {
 		String pathproject = getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy;
 		return pathproject;
 	}
-	
 
 	/**
 	 * Return the Build Path: /home/stager/buildAuto/Ankle
@@ -544,7 +536,7 @@ public class BuilderUtils {
 		File product = new File(brandingPath + "/side.product");
 		return product;
 	}
-	
+
 	public File getCategoryFile() {
 		String brandingPath = "";
 		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
@@ -555,6 +547,5 @@ public class BuilderUtils {
 		File product = new File(brandingPath + "/category.xml");
 		return product;
 	}
-	
-	
+
 }

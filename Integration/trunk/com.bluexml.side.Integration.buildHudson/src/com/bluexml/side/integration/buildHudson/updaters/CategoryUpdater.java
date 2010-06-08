@@ -32,21 +32,24 @@ public class CategoryUpdater {
 		for (Object object : lmd) {
 			Element el = (Element) object;
 			String featureId = el.getAttributeValue("id");
-			String featureVersion = el.getAttributeValue("version");
-			String featureUrl = el.getAttributeValue("url");
+			if (bu.getProjects().contains(featureId)) {
+				String featureVersion = el.getAttributeValue("version");
+				String featureUrl = el.getAttributeValue("url");
 
-			String newVersion = fu.getFeatureVersion(featureId);
-			String newUrl = "features/" + featureId + "_" + newVersion + ".jar";
+				String newVersion = fu.getFeatureVersion(featureId);
+				String newUrl = "features/" + featureId + "_" + newVersion + ".jar";
 
-			if (!featureVersion.equals(newVersion)) {
-				logger.debug("update " + featureId + " version:" + featureVersion + " -> " + newVersion);
-				logger.debug("update " + featureId + " url:" + featureUrl + " -> " + newUrl);
-				// update ref
-				el.setAttribute("version", newVersion);
-				el.setAttribute("url", newUrl);
-				changes = true;
+				if (!featureVersion.equals(newVersion)) {
+					logger.debug("update " + featureId + " version:" + featureVersion + " -> " + newVersion);
+					logger.debug("update " + featureId + " url:" + featureUrl + " -> " + newUrl);
+					// update ref
+					el.setAttribute("version", newVersion);
+					el.setAttribute("url", newUrl);
+					changes = true;
+				}
+			} else {
+				logger.trace("CategoryUpdater.updateCategory() skipped feature :" + featureId);
 			}
-
 		}
 		if (changes) {
 			// save file
