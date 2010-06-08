@@ -527,7 +527,7 @@
          var uriDocList = Alfresco.constants.PROXY_URI + "slingshot/doclib/doclist/";
          this.widgets.dataSource = new YAHOO.util.DataSource(uriDocList);
          this.widgets.dataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
-         /* S-IDE modified schema */
+         /* SIDE modified schema */
          this.widgets.dataSource.responseSchema =
          {
             resultsList: "items",
@@ -830,7 +830,7 @@
                      desc += '<span class="item"><em>' + me.msg("details.size") + '</em> ' + Alfresco.util.formatFileSize(record.size) + '</span>';
                      desc += '</div><div class="detail">';
                      desc += '<span class="item"><em>' + me.msg("details.description") + '</em> ' + $links($html(description)) + '</span>';
-                     /** S-IDE **/
+                     /** SIDE **/
                      // customProperties
                      var customProp = oRecord.getData("customProperties");           
                      for (var x in customProp) {
@@ -851,7 +851,7 @@
                      desc += '<span class="item"><em>' + me.msg("details.size") + '</em> ' + Alfresco.util.formatFileSize(record.size) + '</span>';
                      desc += '</div><div class="detail">';
                      desc += '<span class="item"><em>' + me.msg("details.description") + '</em> ' + $links($html(description)) + '</span>';
-                     /** S-IDE **/
+                     /** SIDE **/
                      // customProperties
                      var customProp = oRecord.getData("customProperties");                   
                      for (var x in customProp) {

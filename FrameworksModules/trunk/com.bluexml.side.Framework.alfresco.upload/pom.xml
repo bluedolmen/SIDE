@@ -19,7 +19,7 @@
   <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>upload</artifactId>
   <packaging>amp</packaging>
-  <name>S-IDE integration module : Alfresco share upload</name>
+  <name>SIDE integration module : Alfresco share upload</name>
   <parent>
     <groupId>org.bluexml</groupId>
     <artifactId>superpom</artifactId>
@@ -132,7 +132,7 @@
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
   <version>1.0.17</version>
-  <description>this module contains S-IDE extension to extends Alfresco to support custom type on Alfresco Share</description>
+  <description>this module contains SIDE extension to extends Alfresco to support custom type on Alfresco Share</description>
   <!--
 		The scm is required for the buildnumber-maven-plugin which is required
 		for AMP version numbering

@@ -21,7 +21,7 @@
   <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>model</artifactId>
   <packaging>amp</packaging>
-  <name>BlueXML S-IDE Alfresco base model</name>
+  <name>BlueXML SIDE Alfresco base model</name>
   <parent>
     <groupId>org.bluexml</groupId>
     <artifactId>superpom</artifactId>
@@ -35,7 +35,7 @@
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
   <version>1.0.16</version>
-  <description>This module defines the base type of the generated S-IDE models</description>
+  <description>This module defines the base type of the generated SIDE models</description>
   <repositories />
   <pluginRepositories />
   <properties>
