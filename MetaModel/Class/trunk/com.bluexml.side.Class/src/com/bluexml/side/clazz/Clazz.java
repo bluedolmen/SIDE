@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: a class or data defines a category of instance of objects which shares exactly the same set of attributes. In ECM applications, a class relates to a content type.  S-IDE Data model describes data structure for persistence through class and attributes and keeps notation close to UML class diagram to reduce learning curve.
+ * Definition: a class or data defines a category of instance of objects which shares exactly the same set of attributes. In ECM applications, a class relates to a content type.  SIDE Data model describes data structure for persistence through class and attributes and keeps notation close to UML class diagram to reduce learning curve.
  * Constraints: the fully qualified name of a class is compose of the successive names of the containing package and the attribute name of the class. This fully qualified name must be unique in your application. For instance, 'org.bluexml.library.mediaVideo' identifies the class mediaVideo contains in the 'library' package, itself contains in the 'bluexml' package, itself contains in the 'org' package.
  * Example: in an Alfresco application the predefined 'cm:content' is modelized as a class.
  * <!-- end-model-doc -->

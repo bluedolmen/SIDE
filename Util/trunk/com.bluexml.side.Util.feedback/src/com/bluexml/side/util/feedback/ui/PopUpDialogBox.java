@@ -179,7 +179,7 @@ public class PopUpDialogBox extends Dialog {
 
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("S-IDE Feedback");
+		newShell.setText("SIDE Feedback");
 	}
 
 }

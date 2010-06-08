@@ -24,7 +24,7 @@ public class FeedbackSender {
 
 	public static void doSend() {
 		if (FeedbackActivator.getFeedbackTermOfUseAccepted()) {
-			Job job = new Job("Sending S-IDE feedback data.") {
+			Job job = new Job("Sending SIDE feedback data.") {
 				protected IStatus run(IProgressMonitor monitor) {
 			           if (FeedbackSender.send())
 			        	   return Status.OK_STATUS;

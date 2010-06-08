@@ -2,7 +2,7 @@
 <?xml-stylesheet type='text/xsl' href='stylesheet/log2html.xsl'?>
 <logRoot>
   <null/>
-  <SIDELog name="S-IDE Alfresco Workflow Generator"
+  <SIDELog name="SIDE Alfresco Workflow Generator"
     id="com.bluexml.side.Workflow.generator.alfresco" date="2009-07-28 12:55:07.470 CEST"
     type="GENERATION">
     <logEntry type="SERVICE">
@@ -65,7 +65,7 @@
     <metaModel>KSR600 Workflow</metaModel>
     <techno>Alfresco-jBPM</techno>
     <technoVersion>Alfresco3.x Labs and Entreprise</technoVersion>
-    <creator>S-IDE Alfresco Workflow Generator</creator>
+    <creator>SIDE Alfresco Workflow Generator</creator>
   </SIDELog>
   <documentation/>
 </logRoot>

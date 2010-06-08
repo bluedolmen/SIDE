@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-model-doc -->
  * Definition: an enumeration represents a list of values which may be associated to a class property.
  * Example: the list of languages associated to the property 'language' of a book.
- * Deprecated: the link'depends of' was used in previous release of S-IDE to model a relation between enumeration like between a department list and a country list; this link has been kept for compatibility reason but is no more useful at the data level and is now managed between fields of Form model as a management rule.
+ * Deprecated: the link'depends of' was used in previous release of SIDE to model a relation between enumeration like between a department list and a country list; this link has been kept for compatibility reason but is no more useful at the data level and is now managed between fields of Form model as a management rule.
  * <!-- end-model-doc -->
  *
  * <p>

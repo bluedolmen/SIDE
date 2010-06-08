@@ -3,7 +3,7 @@
 <plugin>
   <extension point="org.eclipse.ui.popupMenus">
     <objectContribution id="com.bluexml.side.Class.edit.ui.contribution1" nameFilter="*.dt" objectClass="org.eclipse.core.resources.IFile">
-      <menu id="com.bluexml.side.Class.edit.ui.editor.menu1" label="S-IDE" path="additions">
+      <menu id="com.bluexml.side.Class.edit.ui.editor.menu1" label="SIDE" path="additions">
         <separator name="group1" />
       </menu>
       <action class="com.bluexml.side.clazz.edit.ui.actions.InitializeFormModel" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Class.edit.ui..editor.newAction" label="Initialize Form Model" menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1" />

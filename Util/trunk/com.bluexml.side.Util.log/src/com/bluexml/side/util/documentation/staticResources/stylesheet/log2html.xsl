@@ -24,7 +24,7 @@
                 <div id="container">
                     <div id="header">
                         <div id="title">
-                            <h1>S-IDE : MDA report procedure.</h1>
+                            <h1>SIDE : MDA report procedure.</h1>
                         </div>
                     </div>
                     <div id="menu">
