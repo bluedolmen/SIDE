@@ -60,8 +60,8 @@ public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		Properties props = new Properties();
 		props.put("module.id", "SIDE_ViewExtension_" + modelId);
 		props.put("module.version", getVersioNumber());
-		props.put("module.title", "S-IDE view extension");
-		props.put("module.description", "this module contains S-IDE generated extension to extends Alfresco view,\n build at " + sdf.format(now));
+		props.put("module.title", "SIDE view extension");
+		props.put("module.description", "this module contains SIDE generated extension to extends Alfresco view,\n build at " + sdf.format(now));
 		return props;
 	}
 

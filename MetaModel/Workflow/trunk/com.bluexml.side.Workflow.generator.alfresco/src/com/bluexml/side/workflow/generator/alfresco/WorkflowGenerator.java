@@ -52,8 +52,8 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 		Properties props = new Properties();
 		props.put("module.id", "SIDE_WorkflowExtension_" + rootPackage);
 		props.put("module.version", getVersioNumber());
-		props.put("module.title", "S-IDE workflow extension");
-		props.put("module.description", "this module contains S-IDE generated extension to add new workflow");
+		props.put("module.title", "SIDE workflow extension");
+		props.put("module.description", "this module contains SIDE generated extension to add new workflow");
 
 		return props;
 	}
