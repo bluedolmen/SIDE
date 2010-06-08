@@ -288,7 +288,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 		mainPage.setDescription(Activator.Messages.getString("Wizard.7")); //$NON-NLS-1$
 		this.addPage(mainPage);
 
-		// Page on model choice and S-IDE options
+		// Page on model choice and SIDE options
 		optionsPage = new WizardModelOptionsPage(Activator.Messages.getString("Wizard.8")); //$NON-NLS-1$
 		optionsPage.setTitle(Activator.Messages.getString("Wizard.9")); //$NON-NLS-1$
 		optionsPage.setDescription(Activator.Messages.getString("Wizard.10")); //$NON-NLS-1$

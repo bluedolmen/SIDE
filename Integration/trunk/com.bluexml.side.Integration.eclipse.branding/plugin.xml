@@ -45,7 +45,7 @@
    
    <extension
          id="wizard"
-         name="S-IDE project"
+         name="SIDE project"
          point="org.eclipse.ui.newWizards">
       <wizard
             category="com.bluexml.side.Intregation.eclipse.branding.category"
@@ -54,29 +54,29 @@
             hasPages="true"
             icon="icons/newProject.png"
             id="com.bluexml.side.Integration.eclipse.branding.wizard"
-            name="S-IDE Project"
+            name="SIDE Project"
             project="true">
       </wizard>
       <category
             id="com.bluexml.side.Intregation.eclipse.branding.category"
-            name="S-IDE">
+            name="SIDE">
       </category>
       <category
             id="com.bluexml.side.Intregation.eclipse.branding.category.example"
-            name="S-IDE Example Project"
+            name="SIDE Example Project"
             parentCategory="com.bluexml.side.Intregation.eclipse.branding.category">
       </category>
    </extension>
    
       <extension
          id="perspective"
-         name="S-IDE Perpective"
+         name="SIDE Perpective"
          point="org.eclipse.ui.perspectives">
       <perspective
             class="com.bluexml.side.Integration.eclipse.branding.Perspective"
             icon="icons/perspective_icon.png"
             id="com.bluexml.side.Integration.eclipse.branding.perspective"
-            name="S-IDE Modeling">
+            name="SIDE Modeling">
       </perspective>
    </extension>
 </plugin>
