@@ -91,6 +91,7 @@ public class SVNCommandGenerator {
 					if (pluginId.contains("branding")) {
 						// product
 						out += "\t\t\t\t<include name=\"side.product\" />\n";
+						out += "\t\t\t\t<include name=\"category.xml\" />\n";
 					}
 					out += "\t\t\t</fileset>\n";
 				}

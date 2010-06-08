@@ -544,4 +544,17 @@ public class BuilderUtils {
 		File product = new File(brandingPath + "/side.product");
 		return product;
 	}
+	
+	public File getCategoryFile() {
+		String brandingPath = "";
+		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
+			brandingPath = getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding.enterprise");
+		} else {
+			brandingPath = getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding");
+		}
+		File product = new File(brandingPath + "/category.xml");
+		return product;
+	}
+	
+	
 }

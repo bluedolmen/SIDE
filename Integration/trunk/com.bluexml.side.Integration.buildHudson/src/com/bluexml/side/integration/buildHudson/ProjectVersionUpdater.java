@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.bluexml.side.integration.buildHudson.updaters.CategoryUpdater;
 import com.bluexml.side.integration.buildHudson.updaters.FeatureUpdater;
 import com.bluexml.side.integration.buildHudson.updaters.MavenProjectUpdater;
 import com.bluexml.side.integration.buildHudson.updaters.PluginsUpdater;
@@ -172,7 +173,6 @@ public class ProjectVersionUpdater {
 		System.out.println("from " + searchFrom);
 
 		projetPomsList = BuilderUtils.findFile(searchFrom, "pom.xml");
-		
 
 		// read svn log to list modified projects
 		bu.readSvnLog(projetPomsList, projectPoms2Update, projectList);
@@ -218,14 +218,14 @@ public class ProjectVersionUpdater {
 
 		// launch maven project updater
 		// get projects from Core repository
-		List<String> corePoms=null;
+		List<String> corePoms = null;
 		if (isEnterpriseBuild()) {
 			// just to have Core project in full list
 			corePoms = BuilderUtils.findFile(new File(pathproject + "/" + Application.SIDE_Core + "/"), "pom.xml");
 			// add them to poms list
 			projetPomsList.addAll(corePoms);
 		}
-		MavenProjectUpdater mpu = new MavenProjectUpdater(projetPomsList, projectPoms2Update,corePoms, bu);
+		MavenProjectUpdater mpu = new MavenProjectUpdater(projetPomsList, projectPoms2Update, corePoms, bu);
 		mpu.checkAndUpdateAllPoms();
 		System.out.println("Updated Maven2 projects :");
 		for (Map.Entry<String, String> entry : mpu.getPomsNewsVersion().entrySet()) {
@@ -300,6 +300,13 @@ public class ProjectVersionUpdater {
 			System.out.println("- side.product no changes " + produ.getNewVersion());
 		}
 
+		CategoryUpdater catUp = new CategoryUpdater(fu, bu);
+		boolean categoryChanges = catUp.updateCategory();
+		if (categoryChanges) {
+			System.out.println("- category.xml updated");
+		} else {
+			System.out.println("- category.xml no changes");
+		}
 		// project version update done.
 
 		if (useRepositoryCopy && !skipCopyToRepo) {
