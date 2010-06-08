@@ -5,7 +5,7 @@
     <editor class="com.bluexml.side.Portal.modeler.editor.PortalEditor" icon="icons/Portal.gif" default="true" name="Portal Modeler" id="com.bluexml.side.Portal.modeler.editor.PortalEditor" contributorClass="com.bluexml.side.Portal.modeler.actions.PortalEditorActionBarContributor" extensions="portaldi" />
   </extension>
   <extension point="org.eclipse.ui.newWizards">
-    <wizard icon="icons/Portal.gif" class="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams" category="com.bluexml.side.modeler.category.ID" name="Side Portal Diagram" id="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams">
+    <wizard icon="icons/Portal.gif" class="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams" category="com.bluexml.side.modeler.category.ID" name="SIDE Portal Diagram" id="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams">
       <selection class="org.eclipse.core.resources.IResource" />
     </wizard>
   </extension>

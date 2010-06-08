@@ -6,7 +6,7 @@
     <editor class="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor" icon="icons/Editor.gif" default="true" name="Workflow modeler" id="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor" contributorClass="com.bluexml.side.Workflow.modeler.actions.WorkflowEditorActionBarContributor" extensions="workflowdi" />
   </extension>
   <extension point="org.eclipse.ui.newWizards">
-    <wizard icon="icons/Editor.gif" class="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams" category="com.bluexml.side.modeler.category.ID" name="Side Workflow Diagram" id="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams">
+    <wizard icon="icons/Editor.gif" class="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams" category="com.bluexml.side.modeler.category.ID" name="SIDE Workflow Diagram" id="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams">
       <selection class="org.eclipse.core.resources.IResource" />
     </wizard>
   </extension>

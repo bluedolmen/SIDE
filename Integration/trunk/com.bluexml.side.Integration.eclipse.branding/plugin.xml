@@ -48,7 +48,7 @@
          name="SIDE project"
          point="org.eclipse.ui.newWizards">
       <wizard
-            category="com.bluexml.side.Intregation.eclipse.branding.category"
+            category="com.bluexml.side.modeler.category.ID"
             class="com.bluexml.side.Integration.eclipse.branding.Wizard"
             finalPerspective="com.bluexml.side.Integration.eclipse.branding.perspective"
             hasPages="true"
@@ -58,13 +58,13 @@
             project="true">
       </wizard>
       <category
-            id="com.bluexml.side.Intregation.eclipse.branding.category"
+            id="com.bluexml.side.modeler.category.ID"
             name="SIDE">
       </category>
       <category
             id="com.bluexml.side.Intregation.eclipse.branding.category.example"
             name="SIDE Example Project"
-            parentCategory="com.bluexml.side.Intregation.eclipse.branding.category">
+            parentCategory="com.bluexml.side.modeler.category.ID">
       </category>
    </extension>
    

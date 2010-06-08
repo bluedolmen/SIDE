@@ -5,7 +5,7 @@
     <editor class="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor" icon="icons/Requirements.gif" default="true" name="Requirements modeler" id="com.bluexml.side.Requirements.modeler.editor.RequirementsEditor" contributorClass="com.bluexml.side.Requirements.modeler.actions.RequirementsEditorActionBarContributor" extensions="requirementsdi" />
   </extension>
   <extension point="org.eclipse.ui.newWizards">
-    <wizard icon="icons/Requirements.gif" class="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams" category="com.bluexml.side.modeler.category.ID" name="Side Requirements Diagram" id="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams">
+    <wizard icon="icons/Requirements.gif" class="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams" category="com.bluexml.side.modeler.category.ID" name="SIDE Requirements Diagram" id="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams">
       <selection class="org.eclipse.core.resources.IResource" />
     </wizard>
   </extension>

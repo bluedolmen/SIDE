@@ -5,7 +5,7 @@
     <editor class="com.bluexml.side.Class.modeler.editor.ClazzEditor" icon="icons/Clazz.gif" default="true" name="Data Modeler" id="com.bluexml.side.Class.modeler.editor.ClazzEditor" contributorClass="com.bluexml.side.Class.modeler.actions.ClazzEditorActionBarContributor" extensions="dtdi" />
   </extension>
   <extension point="org.eclipse.ui.newWizards">
-    <wizard icon="icons/Clazz.gif" class="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams" category="com.bluexml.side.modeler.category.ID" name="Side Data Diagram" id="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams">
+    <wizard icon="icons/Clazz.gif" class="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams" category="com.bluexml.side.modeler.category.ID" name="SIDE Data Diagram" id="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams">
       <selection class="org.eclipse.core.resources.IResource" />
     </wizard>
   </extension>
