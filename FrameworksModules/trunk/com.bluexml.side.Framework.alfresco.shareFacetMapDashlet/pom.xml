@@ -36,12 +36,6 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.bluexml.side.Framework.alfresco</groupId>
-      <artifactId>shareDoclist</artifactId>
-      <version>1.0.22</version>
-      <type>zip</type>
-    </dependency>
   </dependencies>
   <build>
     <resources>
