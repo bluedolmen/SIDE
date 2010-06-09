@@ -1,384 +1,363 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
-
-<product name="SIDE Labs" uid="sideProduct" id="com.bluexml.side.Integration.eclipse.branding.product" application="org.eclipse.ui.ide.workbench" version="1.0.66" useFeatures="true" includeLaunchers="true">
-
-   <aboutInfo>
-      <image path="icons/about.gif"/>
-      <text>
-         SIDE by http://www.bluexml.com
-      </text>
-   </aboutInfo>
-
-   <configIni use="default">
-   </configIni>
-
-   <launcherArgs>
-      <programArgsMac>-startup
+<product name="SIDE Labs" uid="sideProduct" id="com.bluexml.side.Integration.eclipse.branding.product" application="org.eclipse.ui.ide.workbench" version="1.0.67" useFeatures="true" includeLaunchers="true">
+  <aboutInfo>
+    <image path="icons/about.gif" />
+    <text>SIDE by http://www.bluexml.com</text>
+  </aboutInfo>
+  <configIni use="default" />
+  <launcherArgs>
+    <programArgsMac>-startup
 ../../../plugins/org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar
 --launcher.library
 ../../../plugins/org.eclipse.equinox.launcher.carbon.macosx_1.0.200.v20090520-1835</programArgsMac>
-      <vmArgsMac>-XstartOnFirstThread
+    <vmArgsMac>-XstartOnFirstThread
 			-Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
-   </launcherArgs>
-
-   <windowImages i16="icons/alt_window_16.gif" i32="icons/alt_window_32.gif"/>
-
-   <splash
-      location="com.bluexml.side.Integration.eclipse.branding"
-      startupProgressRect="5,275,445,15"
-      startupMessageRect="11,252,445,20"
-      startupForegroundColor="FFFFFF" />
-   <launcher name="side">
-      <linux icon="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_32.xpm"/>
-      <macosx icon="/com.bluexml.side.Integration.eclipse.branding/icons/atl_window.icns"/>
-      <solaris/>
-      <win useIco="false">
-         <ico path="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_32.ico"/>
-         <bmp
-            winSmallHigh="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_16_32b.bmp"
-            winSmallLow="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_16.bmp"
-            winMediumHigh="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_32_32b.bmp"
-            winMediumLow="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_32.bmp"/>
-      </win>
-   </launcher>
-
-   <vm>
-      <linux>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</linux>
-      <macos>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/OSGi%Minimum-1.0</macos>
-      <solaris>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</solaris>
-      <windows>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</windows>
-   </vm>
-
-   <plugins>
-      <plugin id="com.bluexml.side.Application"/>
-      <plugin id="com.bluexml.side.Application.edit"/>
-      <plugin id="com.bluexml.side.Application.editor"/>
-      <plugin id="com.bluexml.side.Application.startup"/>
-      <plugin id="com.bluexml.side.Application.ui"/>
-      <plugin id="com.bluexml.side.Class"/>
-      <plugin id="com.bluexml.side.Class.edit"/>
-      <plugin id="com.bluexml.side.Class.edit.ui"/>
-      <plugin id="com.bluexml.side.Class.editor"/>
-      <plugin id="com.bluexml.side.Class.generator.alfresco"/>
-      <plugin id="com.bluexml.side.Class.generator.documentation"/>
-      <plugin id="com.bluexml.side.Class.generator.report"/>
-      <plugin id="com.bluexml.side.Class.modeler"/>
-      <plugin id="com.bluexml.side.Class.service.alfresco"/>
-      <plugin id="com.bluexml.side.Common"/>
-      <plugin id="com.bluexml.side.Common.edit"/>
-      <plugin id="com.bluexml.side.Deployer.alfresco"/>
-      <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy"/>
-      <plugin id="com.bluexml.side.Deployer.antDeployer"/>
-      <plugin id="com.bluexml.side.Deployer.documentation"/>
-      <plugin id="com.bluexml.side.Deployer.facetMap"/>
-      <plugin id="com.bluexml.side.Deployer.report"/>
-      <plugin id="com.bluexml.side.Deployer.xforms"/>
-      <plugin id="com.bluexml.side.Deployer.xformsDirectCopy"/>
-      <plugin id="com.bluexml.side.Form"/>
-      <plugin id="com.bluexml.side.Form.edit"/>
-      <plugin id="com.bluexml.side.Form.edit.ui"/>
-      <plugin id="com.bluexml.side.Form.editor"/>
-      <plugin id="com.bluexml.side.Form.generator.documentation"/>
-      <plugin id="com.bluexml.side.Form.generator.xforms.chiba"/>
-      <plugin id="com.bluexml.side.Form.generator.xforms.maven"/>
-      <plugin id="com.bluexml.side.Integration.eclipse.branding"/>
-      <plugin id="com.bluexml.side.Integration.eclipse.builder"/>
-      <plugin id="com.bluexml.side.Portal"/>
-      <plugin id="com.bluexml.side.Portal.edit"/>
-      <plugin id="com.bluexml.side.Portal.editor"/>
-      <plugin id="com.bluexml.side.Portal.generator.alfresco"/>
-      <plugin id="com.bluexml.side.Portal.modeler"/>
-      <plugin id="com.bluexml.side.Requirements"/>
-      <plugin id="com.bluexml.side.Requirements.edit"/>
-      <plugin id="com.bluexml.side.Requirements.editor"/>
-      <plugin id="com.bluexml.side.Requirements.generator"/>
-      <plugin id="com.bluexml.side.Requirements.modeler"/>
-      <plugin id="com.bluexml.side.Util.componentMonitor"/>
-      <plugin id="com.bluexml.side.Util.dependencies"/>
-      <plugin id="com.bluexml.side.Util.deployer"/>
-      <plugin id="com.bluexml.side.Util.deployer.war"/>
-      <plugin id="com.bluexml.side.Util.ecore"/>
-      <plugin id="com.bluexml.side.Util.feedback"/>
-      <plugin id="com.bluexml.side.Util.generator"/>
-      <plugin id="com.bluexml.side.Util.generator.acceleo"/>
-      <plugin id="com.bluexml.side.Util.generator.alfresco"/>
-      <plugin id="com.bluexml.side.Util.generator.documentation"/>
-      <plugin id="com.bluexml.side.Util.libs"/>
-      <plugin id="com.bluexml.side.Util.log"/>
-      <plugin id="com.bluexml.side.Util.metaModel.validate"/>
-      <plugin id="com.bluexml.side.Util.model.merge"/>
-      <plugin id="com.bluexml.side.Util.security"/>
-      <plugin id="com.bluexml.side.View"/>
-      <plugin id="com.bluexml.side.View.edit"/>
-      <plugin id="com.bluexml.side.View.edit.ui"/>
-      <plugin id="com.bluexml.side.View.editor"/>
-      <plugin id="com.bluexml.side.View.generator.alfresco"/>
-      <plugin id="com.bluexml.side.View.generator.documentation"/>
-      <plugin id="com.bluexml.side.View.generator.facetmap"/>
-      <plugin id="com.bluexml.side.Workflow"/>
-      <plugin id="com.bluexml.side.Workflow.edit"/>
-      <plugin id="com.bluexml.side.Workflow.edit.ui"/>
-      <plugin id="com.bluexml.side.Workflow.editor"/>
-      <plugin id="com.bluexml.side.Workflow.generator.alfresco"/>
-      <plugin id="com.bluexml.side.Workflow.generator.documentation"/>
-      <plugin id="com.bluexml.side.Workflow.modeler"/>
-      <plugin id="com.ibm.icu"/>
-      <plugin id="fr.obeo.acceleo.chain"/>
-      <plugin id="fr.obeo.acceleo.ecore"/>
-      <plugin id="fr.obeo.acceleo.ecore.ui"/>
-      <plugin id="fr.obeo.acceleo.gen"/>
-      <plugin id="fr.obeo.acceleo.gen.profiler"/>
-      <plugin id="fr.obeo.acceleo.template"/>
-      <plugin id="fr.obeo.acceleo.tools"/>
-      <plugin id="fr.obeo.acceleo.tools.ui"/>
-      <plugin id="javax.transaction" fragment="true"/>
-      <plugin id="javax.xml"/>
-      <plugin id="net.sourceforge.lpg.lpgjavaruntime"/>
-      <plugin id="org.antlr.runtime"/>
-      <plugin id="org.apache.ant"/>
-      <plugin id="org.apache.batik.bridge"/>
-      <plugin id="org.apache.batik.css"/>
-      <plugin id="org.apache.batik.dom"/>
-      <plugin id="org.apache.batik.dom.svg"/>
-      <plugin id="org.apache.batik.ext.awt"/>
-      <plugin id="org.apache.batik.parser"/>
-      <plugin id="org.apache.batik.pdf"/>
-      <plugin id="org.apache.batik.svggen"/>
-      <plugin id="org.apache.batik.transcoder"/>
-      <plugin id="org.apache.batik.util"/>
-      <plugin id="org.apache.batik.util.gui"/>
-      <plugin id="org.apache.batik.xml"/>
-      <plugin id="org.apache.commons.lang"/>
-      <plugin id="org.apache.lucene"/>
-      <plugin id="org.apache.xerces"/>
-      <plugin id="org.apache.xml.resolver"/>
-      <plugin id="org.apache.xml.serializer"/>
-      <plugin id="org.eclipse.ant.core"/>
-      <plugin id="org.eclipse.ant.ui"/>
-      <plugin id="org.eclipse.compare"/>
-      <plugin id="org.eclipse.compare.core"/>
-      <plugin id="org.eclipse.core.commands"/>
-      <plugin id="org.eclipse.core.contenttype"/>
-      <plugin id="org.eclipse.core.databinding"/>
-      <plugin id="org.eclipse.core.databinding.beans"/>
-      <plugin id="org.eclipse.core.databinding.observable"/>
-      <plugin id="org.eclipse.core.databinding.property"/>
-      <plugin id="org.eclipse.core.expressions"/>
-      <plugin id="org.eclipse.core.filebuffers"/>
-      <plugin id="org.eclipse.core.filesystem"/>
-      <plugin id="org.eclipse.core.filesystem.hpux.PA_RISC" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.hpux.ia64_32" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.ppc" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.qnx.x86" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.core.jobs"/>
-      <plugin id="org.eclipse.core.net"/>
-      <plugin id="org.eclipse.core.net.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.core.net.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.core.net.win32.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.core.resources"/>
-      <plugin id="org.eclipse.core.resources.compatibility" fragment="true"/>
-      <plugin id="org.eclipse.core.resources.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.core.runtime"/>
-      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
-      <plugin id="org.eclipse.core.variables"/>
-      <plugin id="org.eclipse.debug.core"/>
-      <plugin id="org.eclipse.debug.ui"/>
-      <plugin id="org.eclipse.draw2d"/>
-      <plugin id="org.eclipse.ecf"/>
-      <plugin id="org.eclipse.ecf.filetransfer"/>
-      <plugin id="org.eclipse.ecf.identity"/>
-      <plugin id="org.eclipse.ecf.provider.filetransfer"/>
-      <plugin id="org.eclipse.ecf.provider.filetransfer.ssl" fragment="true"/>
-      <plugin id="org.eclipse.ecf.ssl" fragment="true"/>
-      <plugin id="org.eclipse.emf"/>
-      <plugin id="org.eclipse.emf.codegen"/>
-      <plugin id="org.eclipse.emf.codegen.ecore"/>
-      <plugin id="org.eclipse.emf.codegen.ecore.ui"/>
-      <plugin id="org.eclipse.emf.common"/>
-      <plugin id="org.eclipse.emf.common.ui"/>
-      <plugin id="org.eclipse.emf.compare"/>
-      <plugin id="org.eclipse.emf.compare.diff"/>
-      <plugin id="org.eclipse.emf.compare.match"/>
-      <plugin id="org.eclipse.emf.converter"/>
-      <plugin id="org.eclipse.emf.ecore"/>
-      <plugin id="org.eclipse.emf.ecore.change"/>
-      <plugin id="org.eclipse.emf.ecore.edit"/>
-      <plugin id="org.eclipse.emf.ecore.editor"/>
-      <plugin id="org.eclipse.emf.ecore.xmi"/>
-      <plugin id="org.eclipse.emf.edit"/>
-      <plugin id="org.eclipse.emf.edit.ui"/>
-      <plugin id="org.eclipse.emf.transaction"/>
-      <plugin id="org.eclipse.emf.validation"/>
-      <plugin id="org.eclipse.emf.workspace"/>
-      <plugin id="org.eclipse.epf.common"/>
-      <plugin id="org.eclipse.epf.common.ui"/>
-      <plugin id="org.eclipse.epf.richtext"/>
-      <plugin id="org.eclipse.equinox.app"/>
-      <plugin id="org.eclipse.equinox.common"/>
-      <plugin id="org.eclipse.equinox.frameworkadmin"/>
-      <plugin id="org.eclipse.equinox.frameworkadmin.equinox"/>
-      <plugin id="org.eclipse.equinox.p2.artifact.repository"/>
-      <plugin id="org.eclipse.equinox.p2.core"/>
-      <plugin id="org.eclipse.equinox.p2.director"/>
-      <plugin id="org.eclipse.equinox.p2.engine"/>
-      <plugin id="org.eclipse.equinox.p2.exemplarysetup"/>
-      <plugin id="org.eclipse.equinox.p2.garbagecollector"/>
-      <plugin id="org.eclipse.equinox.p2.jarprocessor"/>
-      <plugin id="org.eclipse.equinox.p2.metadata"/>
-      <plugin id="org.eclipse.equinox.p2.metadata.repository"/>
-      <plugin id="org.eclipse.equinox.p2.publisher"/>
-      <plugin id="org.eclipse.equinox.p2.repository"/>
-      <plugin id="org.eclipse.equinox.p2.ui"/>
-      <plugin id="org.eclipse.equinox.p2.updatechecker"/>
-      <plugin id="org.eclipse.equinox.p2.updatesite"/>
-      <plugin id="org.eclipse.equinox.preferences"/>
-      <plugin id="org.eclipse.equinox.registry"/>
-      <plugin id="org.eclipse.equinox.security"/>
-      <plugin id="org.eclipse.equinox.security.macosx" fragment="true"/>
-      <plugin id="org.eclipse.equinox.security.ui"/>
-      <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.equinox.simpleconfigurator"/>
-      <plugin id="org.eclipse.equinox.simpleconfigurator.manipulator"/>
-      <plugin id="org.eclipse.gef"/>
-      <plugin id="org.eclipse.gmf.runtime.common.core"/>
-      <plugin id="org.eclipse.gmf.runtime.common.ui"/>
-      <plugin id="org.eclipse.gmf.runtime.common.ui.action"/>
-      <plugin id="org.eclipse.gmf.runtime.common.ui.services"/>
-      <plugin id="org.eclipse.gmf.runtime.common.ui.services.action"/>
-      <plugin id="org.eclipse.gmf.runtime.diagram.core"/>
-      <plugin id="org.eclipse.gmf.runtime.diagram.ui"/>
-      <plugin id="org.eclipse.gmf.runtime.draw2d.ui"/>
-      <plugin id="org.eclipse.gmf.runtime.draw2d.ui.render"/>
-      <plugin id="org.eclipse.gmf.runtime.draw2d.ui.render.awt"/>
-      <plugin id="org.eclipse.gmf.runtime.emf.clipboard.core"/>
-      <plugin id="org.eclipse.gmf.runtime.emf.commands.core"/>
-      <plugin id="org.eclipse.gmf.runtime.emf.core"/>
-      <plugin id="org.eclipse.gmf.runtime.emf.type.core"/>
-      <plugin id="org.eclipse.gmf.runtime.emf.ui"/>
-      <plugin id="org.eclipse.gmf.runtime.gef.ui"/>
-      <plugin id="org.eclipse.gmf.runtime.notation"/>
-      <plugin id="org.eclipse.help"/>
-      <plugin id="org.eclipse.jdt.compiler.apt" fragment="true"/>
-      <plugin id="org.eclipse.jdt.compiler.tool" fragment="true"/>
-      <plugin id="org.eclipse.jdt.core"/>
-      <plugin id="org.eclipse.jdt.core.manipulation"/>
-      <plugin id="org.eclipse.jdt.debug"/>
-      <plugin id="org.eclipse.jdt.debug.ui"/>
-      <plugin id="org.eclipse.jdt.junit"/>
-      <plugin id="org.eclipse.jdt.junit.runtime"/>
-      <plugin id="org.eclipse.jdt.launching"/>
-      <plugin id="org.eclipse.jdt.ui"/>
-      <plugin id="org.eclipse.jface"/>
-      <plugin id="org.eclipse.jface.databinding"/>
-      <plugin id="org.eclipse.jface.text"/>
-      <plugin id="org.eclipse.ltk.core.refactoring"/>
-      <plugin id="org.eclipse.ltk.ui.refactoring"/>
-      <plugin id="org.eclipse.m2m.atl.common"/>
-      <plugin id="org.eclipse.m2m.atl.core"/>
-      <plugin id="org.eclipse.m2m.atl.core.emf"/>
-      <plugin id="org.eclipse.m2m.atl.drivers.emf4atl"/>
-      <plugin id="org.eclipse.m2m.atl.dsls"/>
-      <plugin id="org.eclipse.m2m.atl.engine.vm"/>
-      <plugin id="org.eclipse.ocl"/>
-      <plugin id="org.eclipse.ocl.ecore"/>
-      <plugin id="org.eclipse.osgi"/>
-      <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.pde.build"/>
-      <plugin id="org.eclipse.pde.core"/>
-      <plugin id="org.eclipse.pde.runtime"/>
-      <plugin id="org.eclipse.pde.ui"/>
-      <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
-      <plugin id="org.eclipse.search"/>
-      <plugin id="org.eclipse.swt"/>
-      <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
-      <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
-      <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.s390" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.s390x" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.aix.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.hpux.PA_RISC" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.hpux.ia64_32" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.swt.photon.qnx.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.wpf.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.team.core"/>
-      <plugin id="org.eclipse.team.ui"/>
-      <plugin id="org.eclipse.text"/>
-      <plugin id="org.eclipse.ui"/>
-      <plugin id="org.eclipse.ui.carbon" fragment="true"/>
-      <plugin id="org.eclipse.ui.cheatsheets"/>
-      <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
-      <plugin id="org.eclipse.ui.console"/>
-      <plugin id="org.eclipse.ui.editors"/>
-      <plugin id="org.eclipse.ui.externaltools"/>
-      <plugin id="org.eclipse.ui.forms"/>
-      <plugin id="org.eclipse.ui.ide"/>
-      <plugin id="org.eclipse.ui.ide.application"/>
-      <plugin id="org.eclipse.ui.intro"/>
-      <plugin id="org.eclipse.ui.navigator"/>
-      <plugin id="org.eclipse.ui.navigator.resources"/>
-      <plugin id="org.eclipse.ui.views"/>
-      <plugin id="org.eclipse.ui.views.log"/>
-      <plugin id="org.eclipse.ui.views.properties.tabbed"/>
-      <plugin id="org.eclipse.ui.win32" fragment="true"/>
-      <plugin id="org.eclipse.ui.workbench"/>
-      <plugin id="org.eclipse.ui.workbench.texteditor"/>
-      <plugin id="org.eclipse.update.configurator"/>
-      <plugin id="org.eclipse.update.core"/>
-      <plugin id="org.eclipse.update.core.linux" fragment="true"/>
-      <plugin id="org.eclipse.update.core.win32" fragment="true"/>
-      <plugin id="org.junit"/>
-      <plugin id="org.sat4j.core"/>
-      <plugin id="org.sat4j.pb"/>
-      <plugin id="org.topcased.draw2d"/>
-      <plugin id="org.topcased.facilities"/>
-      <plugin id="org.topcased.model.management"/>
-      <plugin id="org.topcased.modeler"/>
-      <plugin id="org.topcased.modeler.di"/>
-      <plugin id="org.topcased.modeler.diagrams"/>
-      <plugin id="org.topcased.modeler.export"/>
-      <plugin id="org.topcased.modeler.graphconf"/>
-      <plugin id="org.topcased.tabbedproperties"/>
-      <plugin id="org.topcased.validation.core"/>
-      <plugin id="org.topcased.validation.ui"/>
-      <plugin id="org.w3c.css.sac"/>
-      <plugin id="org.w3c.dom.events"/>
-      <plugin id="org.w3c.dom.smil"/>
-      <plugin id="org.w3c.dom.svg"/>
-   </plugins>
-
-   <features>
-      <feature id="org.eclipse.platform" version="3.5.1.R35x_v20090910-9gEeG1_FthkNDSP2odXdThaOu9GFDPn83DGB7"/>
-      <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.0"/>
-      <feature id="com.bluexml.side.Common.core.feature" version="1.0.205.v17780-20100608"/>
-      <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.162.v17780-20100608"/>
-      <feature id="org.eclipse.team.svn" version="0.7.8.I20091023-1300"/>
-      <feature id="org.polarion.eclipse.team.svn.connector" version="2.2.1.I20091009-1900"/>
-      <feature id="org.polarion.eclipse.team.svn.connector.svnkit16" version="2.2.1.I20091009-1900"/>
-   </features>
-
-   <configurations>
-      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
-      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
-      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
-      <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="4" />
-      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
-      <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
-   </configurations>
-
+  </launcherArgs>
+  <windowImages i16="icons/alt_window_16.gif" i32="icons/alt_window_32.gif" />
+  <splash location="com.bluexml.side.Integration.eclipse.branding" startupProgressRect="5,275,445,15" startupMessageRect="11,252,445,20" startupForegroundColor="FFFFFF" />
+  <launcher name="side">
+    <linux icon="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_32.xpm" />
+    <macosx icon="/com.bluexml.side.Integration.eclipse.branding/icons/atl_window.icns" />
+    <solaris />
+    <win useIco="false">
+      <ico path="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_32.ico" />
+      <bmp winSmallHigh="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_16_32b.bmp" winSmallLow="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_16.bmp" winMediumHigh="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_32_32b.bmp" winMediumLow="/com.bluexml.side.Integration.eclipse.branding/icons/alt_window_32.bmp" />
+    </win>
+  </launcher>
+  <vm>
+    <linux>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</linux>
+    <macos>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/OSGi%Minimum-1.0</macos>
+    <solaris>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</solaris>
+    <windows>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</windows>
+  </vm>
+  <plugins>
+    <plugin id="com.bluexml.side.Application" />
+    <plugin id="com.bluexml.side.Application.edit" />
+    <plugin id="com.bluexml.side.Application.editor" />
+    <plugin id="com.bluexml.side.Application.startup" />
+    <plugin id="com.bluexml.side.Application.ui" />
+    <plugin id="com.bluexml.side.Class" />
+    <plugin id="com.bluexml.side.Class.edit" />
+    <plugin id="com.bluexml.side.Class.edit.ui" />
+    <plugin id="com.bluexml.side.Class.editor" />
+    <plugin id="com.bluexml.side.Class.generator.alfresco" />
+    <plugin id="com.bluexml.side.Class.generator.documentation" />
+    <plugin id="com.bluexml.side.Class.generator.report" />
+    <plugin id="com.bluexml.side.Class.modeler" />
+    <plugin id="com.bluexml.side.Class.service.alfresco" />
+    <plugin id="com.bluexml.side.Common" />
+    <plugin id="com.bluexml.side.Common.edit" />
+    <plugin id="com.bluexml.side.Deployer.alfresco" />
+    <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy" />
+    <plugin id="com.bluexml.side.Deployer.antDeployer" />
+    <plugin id="com.bluexml.side.Deployer.documentation" />
+    <plugin id="com.bluexml.side.Deployer.facetMap" />
+    <plugin id="com.bluexml.side.Deployer.report" />
+    <plugin id="com.bluexml.side.Deployer.xforms" />
+    <plugin id="com.bluexml.side.Deployer.xformsDirectCopy" />
+    <plugin id="com.bluexml.side.Form" />
+    <plugin id="com.bluexml.side.Form.edit" />
+    <plugin id="com.bluexml.side.Form.edit.ui" />
+    <plugin id="com.bluexml.side.Form.editor" />
+    <plugin id="com.bluexml.side.Form.generator.documentation" />
+    <plugin id="com.bluexml.side.Form.generator.xforms.chiba" />
+    <plugin id="com.bluexml.side.Form.generator.xforms.maven" />
+    <plugin id="com.bluexml.side.Integration.eclipse.branding" />
+    <plugin id="com.bluexml.side.Integration.eclipse.builder" />
+    <plugin id="com.bluexml.side.Portal" />
+    <plugin id="com.bluexml.side.Portal.edit" />
+    <plugin id="com.bluexml.side.Portal.editor" />
+    <plugin id="com.bluexml.side.Portal.generator.alfresco" />
+    <plugin id="com.bluexml.side.Portal.modeler" />
+    <plugin id="com.bluexml.side.Requirements" />
+    <plugin id="com.bluexml.side.Requirements.edit" />
+    <plugin id="com.bluexml.side.Requirements.editor" />
+    <plugin id="com.bluexml.side.Requirements.generator" />
+    <plugin id="com.bluexml.side.Requirements.modeler" />
+    <plugin id="com.bluexml.side.Util.componentMonitor" />
+    <plugin id="com.bluexml.side.Util.dependencies" />
+    <plugin id="com.bluexml.side.Util.deployer" />
+    <plugin id="com.bluexml.side.Util.deployer.war" />
+    <plugin id="com.bluexml.side.Util.ecore" />
+    <plugin id="com.bluexml.side.Util.feedback" />
+    <plugin id="com.bluexml.side.Util.generator" />
+    <plugin id="com.bluexml.side.Util.generator.acceleo" />
+    <plugin id="com.bluexml.side.Util.generator.alfresco" />
+    <plugin id="com.bluexml.side.Util.generator.documentation" />
+    <plugin id="com.bluexml.side.Util.libs" />
+    <plugin id="com.bluexml.side.Util.log" />
+    <plugin id="com.bluexml.side.Util.metaModel.validate" />
+    <plugin id="com.bluexml.side.Util.model.merge" />
+    <plugin id="com.bluexml.side.Util.security" />
+    <plugin id="com.bluexml.side.View" />
+    <plugin id="com.bluexml.side.View.edit" />
+    <plugin id="com.bluexml.side.View.edit.ui" />
+    <plugin id="com.bluexml.side.View.editor" />
+    <plugin id="com.bluexml.side.View.generator.alfresco" />
+    <plugin id="com.bluexml.side.View.generator.documentation" />
+    <plugin id="com.bluexml.side.View.generator.facetmap" />
+    <plugin id="com.bluexml.side.Workflow" />
+    <plugin id="com.bluexml.side.Workflow.edit" />
+    <plugin id="com.bluexml.side.Workflow.edit.ui" />
+    <plugin id="com.bluexml.side.Workflow.editor" />
+    <plugin id="com.bluexml.side.Workflow.generator.alfresco" />
+    <plugin id="com.bluexml.side.Workflow.generator.documentation" />
+    <plugin id="com.bluexml.side.Workflow.modeler" />
+    <plugin id="com.ibm.icu" />
+    <plugin id="fr.obeo.acceleo.chain" />
+    <plugin id="fr.obeo.acceleo.ecore" />
+    <plugin id="fr.obeo.acceleo.ecore.ui" />
+    <plugin id="fr.obeo.acceleo.gen" />
+    <plugin id="fr.obeo.acceleo.gen.profiler" />
+    <plugin id="fr.obeo.acceleo.template" />
+    <plugin id="fr.obeo.acceleo.tools" />
+    <plugin id="fr.obeo.acceleo.tools.ui" />
+    <plugin id="javax.transaction" fragment="true" />
+    <plugin id="javax.xml" />
+    <plugin id="net.sourceforge.lpg.lpgjavaruntime" />
+    <plugin id="org.antlr.runtime" />
+    <plugin id="org.apache.ant" />
+    <plugin id="org.apache.batik.bridge" />
+    <plugin id="org.apache.batik.css" />
+    <plugin id="org.apache.batik.dom" />
+    <plugin id="org.apache.batik.dom.svg" />
+    <plugin id="org.apache.batik.ext.awt" />
+    <plugin id="org.apache.batik.parser" />
+    <plugin id="org.apache.batik.pdf" />
+    <plugin id="org.apache.batik.svggen" />
+    <plugin id="org.apache.batik.transcoder" />
+    <plugin id="org.apache.batik.util" />
+    <plugin id="org.apache.batik.util.gui" />
+    <plugin id="org.apache.batik.xml" />
+    <plugin id="org.apache.commons.lang" />
+    <plugin id="org.apache.lucene" />
+    <plugin id="org.apache.xerces" />
+    <plugin id="org.apache.xml.resolver" />
+    <plugin id="org.apache.xml.serializer" />
+    <plugin id="org.eclipse.ant.core" />
+    <plugin id="org.eclipse.ant.ui" />
+    <plugin id="org.eclipse.compare" />
+    <plugin id="org.eclipse.compare.core" />
+    <plugin id="org.eclipse.core.commands" />
+    <plugin id="org.eclipse.core.contenttype" />
+    <plugin id="org.eclipse.core.databinding" />
+    <plugin id="org.eclipse.core.databinding.beans" />
+    <plugin id="org.eclipse.core.databinding.observable" />
+    <plugin id="org.eclipse.core.databinding.property" />
+    <plugin id="org.eclipse.core.expressions" />
+    <plugin id="org.eclipse.core.filebuffers" />
+    <plugin id="org.eclipse.core.filesystem" />
+    <plugin id="org.eclipse.core.filesystem.hpux.PA_RISC" fragment="true" />
+    <plugin id="org.eclipse.core.filesystem.hpux.ia64_32" fragment="true" />
+    <plugin id="org.eclipse.core.filesystem.linux.ppc" fragment="true" />
+    <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true" />
+    <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true" />
+    <plugin id="org.eclipse.core.filesystem.macosx" fragment="true" />
+    <plugin id="org.eclipse.core.filesystem.qnx.x86" fragment="true" />
+    <plugin id="org.eclipse.core.filesystem.solaris.sparc" fragment="true" />
+    <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true" />
+    <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true" />
+    <plugin id="org.eclipse.core.jobs" />
+    <plugin id="org.eclipse.core.net" />
+    <plugin id="org.eclipse.core.net.linux.x86" fragment="true" />
+    <plugin id="org.eclipse.core.net.win32.x86" fragment="true" />
+    <plugin id="org.eclipse.core.net.win32.x86_64" fragment="true" />
+    <plugin id="org.eclipse.core.resources" />
+    <plugin id="org.eclipse.core.resources.compatibility" fragment="true" />
+    <plugin id="org.eclipse.core.resources.win32.x86" fragment="true" />
+    <plugin id="org.eclipse.core.runtime" />
+    <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true" />
+    <plugin id="org.eclipse.core.variables" />
+    <plugin id="org.eclipse.debug.core" />
+    <plugin id="org.eclipse.debug.ui" />
+    <plugin id="org.eclipse.draw2d" />
+    <plugin id="org.eclipse.ecf" />
+    <plugin id="org.eclipse.ecf.filetransfer" />
+    <plugin id="org.eclipse.ecf.identity" />
+    <plugin id="org.eclipse.ecf.provider.filetransfer" />
+    <plugin id="org.eclipse.ecf.provider.filetransfer.ssl" fragment="true" />
+    <plugin id="org.eclipse.ecf.ssl" fragment="true" />
+    <plugin id="org.eclipse.emf" />
+    <plugin id="org.eclipse.emf.codegen" />
+    <plugin id="org.eclipse.emf.codegen.ecore" />
+    <plugin id="org.eclipse.emf.codegen.ecore.ui" />
+    <plugin id="org.eclipse.emf.common" />
+    <plugin id="org.eclipse.emf.common.ui" />
+    <plugin id="org.eclipse.emf.compare" />
+    <plugin id="org.eclipse.emf.compare.diff" />
+    <plugin id="org.eclipse.emf.compare.match" />
+    <plugin id="org.eclipse.emf.converter" />
+    <plugin id="org.eclipse.emf.ecore" />
+    <plugin id="org.eclipse.emf.ecore.change" />
+    <plugin id="org.eclipse.emf.ecore.edit" />
+    <plugin id="org.eclipse.emf.ecore.editor" />
+    <plugin id="org.eclipse.emf.ecore.xmi" />
+    <plugin id="org.eclipse.emf.edit" />
+    <plugin id="org.eclipse.emf.edit.ui" />
+    <plugin id="org.eclipse.emf.transaction" />
+    <plugin id="org.eclipse.emf.validation" />
+    <plugin id="org.eclipse.emf.workspace" />
+    <plugin id="org.eclipse.epf.common" />
+    <plugin id="org.eclipse.epf.common.ui" />
+    <plugin id="org.eclipse.epf.richtext" />
+    <plugin id="org.eclipse.equinox.app" />
+    <plugin id="org.eclipse.equinox.common" />
+    <plugin id="org.eclipse.equinox.frameworkadmin" />
+    <plugin id="org.eclipse.equinox.frameworkadmin.equinox" />
+    <plugin id="org.eclipse.equinox.p2.artifact.repository" />
+    <plugin id="org.eclipse.equinox.p2.core" />
+    <plugin id="org.eclipse.equinox.p2.director" />
+    <plugin id="org.eclipse.equinox.p2.engine" />
+    <plugin id="org.eclipse.equinox.p2.exemplarysetup" />
+    <plugin id="org.eclipse.equinox.p2.garbagecollector" />
+    <plugin id="org.eclipse.equinox.p2.jarprocessor" />
+    <plugin id="org.eclipse.equinox.p2.metadata" />
+    <plugin id="org.eclipse.equinox.p2.metadata.repository" />
+    <plugin id="org.eclipse.equinox.p2.publisher" />
+    <plugin id="org.eclipse.equinox.p2.repository" />
+    <plugin id="org.eclipse.equinox.p2.ui" />
+    <plugin id="org.eclipse.equinox.p2.updatechecker" />
+    <plugin id="org.eclipse.equinox.p2.updatesite" />
+    <plugin id="org.eclipse.equinox.preferences" />
+    <plugin id="org.eclipse.equinox.registry" />
+    <plugin id="org.eclipse.equinox.security" />
+    <plugin id="org.eclipse.equinox.security.macosx" fragment="true" />
+    <plugin id="org.eclipse.equinox.security.ui" />
+    <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true" />
+    <plugin id="org.eclipse.equinox.simpleconfigurator" />
+    <plugin id="org.eclipse.equinox.simpleconfigurator.manipulator" />
+    <plugin id="org.eclipse.gef" />
+    <plugin id="org.eclipse.gmf.runtime.common.core" />
+    <plugin id="org.eclipse.gmf.runtime.common.ui" />
+    <plugin id="org.eclipse.gmf.runtime.common.ui.action" />
+    <plugin id="org.eclipse.gmf.runtime.common.ui.services" />
+    <plugin id="org.eclipse.gmf.runtime.common.ui.services.action" />
+    <plugin id="org.eclipse.gmf.runtime.diagram.core" />
+    <plugin id="org.eclipse.gmf.runtime.diagram.ui" />
+    <plugin id="org.eclipse.gmf.runtime.draw2d.ui" />
+    <plugin id="org.eclipse.gmf.runtime.draw2d.ui.render" />
+    <plugin id="org.eclipse.gmf.runtime.draw2d.ui.render.awt" />
+    <plugin id="org.eclipse.gmf.runtime.emf.clipboard.core" />
+    <plugin id="org.eclipse.gmf.runtime.emf.commands.core" />
+    <plugin id="org.eclipse.gmf.runtime.emf.core" />
+    <plugin id="org.eclipse.gmf.runtime.emf.type.core" />
+    <plugin id="org.eclipse.gmf.runtime.emf.ui" />
+    <plugin id="org.eclipse.gmf.runtime.gef.ui" />
+    <plugin id="org.eclipse.gmf.runtime.notation" />
+    <plugin id="org.eclipse.help" />
+    <plugin id="org.eclipse.jdt.compiler.apt" fragment="true" />
+    <plugin id="org.eclipse.jdt.compiler.tool" fragment="true" />
+    <plugin id="org.eclipse.jdt.core" />
+    <plugin id="org.eclipse.jdt.core.manipulation" />
+    <plugin id="org.eclipse.jdt.debug" />
+    <plugin id="org.eclipse.jdt.debug.ui" />
+    <plugin id="org.eclipse.jdt.junit" />
+    <plugin id="org.eclipse.jdt.junit.runtime" />
+    <plugin id="org.eclipse.jdt.launching" />
+    <plugin id="org.eclipse.jdt.ui" />
+    <plugin id="org.eclipse.jface" />
+    <plugin id="org.eclipse.jface.databinding" />
+    <plugin id="org.eclipse.jface.text" />
+    <plugin id="org.eclipse.ltk.core.refactoring" />
+    <plugin id="org.eclipse.ltk.ui.refactoring" />
+    <plugin id="org.eclipse.m2m.atl.common" />
+    <plugin id="org.eclipse.m2m.atl.core" />
+    <plugin id="org.eclipse.m2m.atl.core.emf" />
+    <plugin id="org.eclipse.m2m.atl.drivers.emf4atl" />
+    <plugin id="org.eclipse.m2m.atl.dsls" />
+    <plugin id="org.eclipse.m2m.atl.engine.vm" />
+    <plugin id="org.eclipse.ocl" />
+    <plugin id="org.eclipse.ocl.ecore" />
+    <plugin id="org.eclipse.osgi" />
+    <plugin id="org.eclipse.osgi.services" />
+    <plugin id="org.eclipse.pde.build" />
+    <plugin id="org.eclipse.pde.core" />
+    <plugin id="org.eclipse.pde.runtime" />
+    <plugin id="org.eclipse.pde.ui" />
+    <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true" />
+    <plugin id="org.eclipse.search" />
+    <plugin id="org.eclipse.swt" />
+    <plugin id="org.eclipse.swt.carbon.macosx" fragment="true" />
+    <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true" />
+    <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true" />
+    <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true" />
+    <plugin id="org.eclipse.swt.gtk.linux.s390" fragment="true" />
+    <plugin id="org.eclipse.swt.gtk.linux.s390x" fragment="true" />
+    <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true" />
+    <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true" />
+    <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true" />
+    <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true" />
+    <plugin id="org.eclipse.swt.motif.aix.ppc" fragment="true" />
+    <plugin id="org.eclipse.swt.motif.hpux.PA_RISC" fragment="true" />
+    <plugin id="org.eclipse.swt.motif.hpux.ia64_32" fragment="true" />
+    <plugin id="org.eclipse.swt.motif.linux.x86" fragment="true" />
+    <plugin id="org.eclipse.swt.motif.solaris.sparc" fragment="true" />
+    <plugin id="org.eclipse.swt.photon.qnx.x86" fragment="true" />
+    <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true" />
+    <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true" />
+    <plugin id="org.eclipse.swt.wpf.win32.x86" fragment="true" />
+    <plugin id="org.eclipse.team.core" />
+    <plugin id="org.eclipse.team.ui" />
+    <plugin id="org.eclipse.text" />
+    <plugin id="org.eclipse.ui" />
+    <plugin id="org.eclipse.ui.carbon" fragment="true" />
+    <plugin id="org.eclipse.ui.cheatsheets" />
+    <plugin id="org.eclipse.ui.cocoa" fragment="true" />
+    <plugin id="org.eclipse.ui.console" />
+    <plugin id="org.eclipse.ui.editors" />
+    <plugin id="org.eclipse.ui.externaltools" />
+    <plugin id="org.eclipse.ui.forms" />
+    <plugin id="org.eclipse.ui.ide" />
+    <plugin id="org.eclipse.ui.ide.application" />
+    <plugin id="org.eclipse.ui.intro" />
+    <plugin id="org.eclipse.ui.navigator" />
+    <plugin id="org.eclipse.ui.navigator.resources" />
+    <plugin id="org.eclipse.ui.views" />
+    <plugin id="org.eclipse.ui.views.log" />
+    <plugin id="org.eclipse.ui.views.properties.tabbed" />
+    <plugin id="org.eclipse.ui.win32" fragment="true" />
+    <plugin id="org.eclipse.ui.workbench" />
+    <plugin id="org.eclipse.ui.workbench.texteditor" />
+    <plugin id="org.eclipse.update.configurator" />
+    <plugin id="org.eclipse.update.core" />
+    <plugin id="org.eclipse.update.core.linux" fragment="true" />
+    <plugin id="org.eclipse.update.core.win32" fragment="true" />
+    <plugin id="org.junit" />
+    <plugin id="org.sat4j.core" />
+    <plugin id="org.sat4j.pb" />
+    <plugin id="org.topcased.draw2d" />
+    <plugin id="org.topcased.facilities" />
+    <plugin id="org.topcased.model.management" />
+    <plugin id="org.topcased.modeler" />
+    <plugin id="org.topcased.modeler.di" />
+    <plugin id="org.topcased.modeler.diagrams" />
+    <plugin id="org.topcased.modeler.export" />
+    <plugin id="org.topcased.modeler.graphconf" />
+    <plugin id="org.topcased.tabbedproperties" />
+    <plugin id="org.topcased.validation.core" />
+    <plugin id="org.topcased.validation.ui" />
+    <plugin id="org.w3c.css.sac" />
+    <plugin id="org.w3c.dom.events" />
+    <plugin id="org.w3c.dom.smil" />
+    <plugin id="org.w3c.dom.svg" />
+  </plugins>
+  <features>
+    <feature id="org.eclipse.platform" version="3.5.1.R35x_v20090910-9gEeG1_FthkNDSP2odXdThaOu9GFDPn83DGB7" />
+    <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.0" />
+    <feature id="com.bluexml.side.Common.core.feature" version="1.0.205.v17780-20100608" />
+    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.163.v17841-20100609" />
+    <feature id="org.eclipse.team.svn" version="0.7.8.I20091023-1300" />
+    <feature id="org.polarion.eclipse.team.svn.connector" version="2.2.1.I20091009-1900" />
+    <feature id="org.polarion.eclipse.team.svn.connector.svnkit16" version="2.2.1.I20091009-1900" />
+  </features>
+  <configurations>
+    <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
+    <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+    <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
+    <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="4" />
+    <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+    <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
+  </configurations>
 </product>
+
