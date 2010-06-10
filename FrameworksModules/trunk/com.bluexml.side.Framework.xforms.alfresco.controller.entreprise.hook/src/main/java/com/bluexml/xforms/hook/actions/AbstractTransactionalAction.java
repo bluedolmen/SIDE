@@ -14,7 +14,7 @@ import com.bluexml.xforms.messages.MsgPool;
 
 public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 
-	boolean isSearching = false; // #1465
+	private boolean isSearching = false; // #1465
 
 	protected abstract void prepareSubmit() throws ServletException;
 
@@ -32,7 +32,7 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 		Page curPage = navigationPath.peekCurrentPage();
 		try {
 			prepareSubmit();
-			if (!isSearching) {
+			if (!isSearching()) {
 				transaction.executeBatch();
 
 				// all went OK, we may delete the temporary files if any
@@ -113,6 +113,20 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param isSearching the isSearching to set
+	 */
+	public void setSearching(boolean isSearching) {
+		this.isSearching = isSearching;
+	}
+
+	/**
+	 * @return the isSearching
+	 */
+	public boolean isSearching() {
+		return isSearching;
 	}
 
 }
