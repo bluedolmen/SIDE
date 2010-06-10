@@ -1,4 +1,4 @@
-package com.bluexml.xforms.actions;
+package com.bluexml.xforms.hook.actions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import com.bluexml.xforms.actions.AbstractWriteAction;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.controller.navigation.Page;
 import com.bluexml.xforms.messages.MsgId;
