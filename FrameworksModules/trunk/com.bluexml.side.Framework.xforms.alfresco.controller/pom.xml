@@ -205,5 +205,36 @@
       </plugin>
     </plugins>
   </build>
+	<profiles>
+		<profile>
+			<id>entreprise</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
+					<artifactId>entreprise</artifactId>
+					<version>1.0.0</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<finalName>${project.artifactId}-${project.version}</finalName>
+			</build>
+		</profile>
+		<profile>
+			<id>labs</id>
+			<dependencies>
+				<dependency>
+					<groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
+					<artifactId>labs</artifactId>
+					<version>1.0.0</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<finalName>${project.artifactId}</finalName>
+			</build>
+		</profile>
+	</profiles>
 </project>
 
