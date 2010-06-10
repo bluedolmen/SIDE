@@ -2,19 +2,30 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
 >
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
-	<artifactId>entreprise</artifactId>
+	<parent>
+		<groupId>org.bluexml</groupId>
+		<artifactId>superpom</artifactId>
+		<version>1.10</version>
+	</parent>
+	<groupId>com.bluexml.side.Framework.xforms.alfresco.controller.entreprise</groupId>
+	<artifactId>hook</artifactId>
 	<version>1.0.0</version>
+	<name>XForms Controller hook for SIDE Entreprise</name>
+	<inceptionYear>2009</inceptionYear>
+	<organization>
+		<name>BlueXML</name>
+		<url>http://www.bluexml.com/</url>
+	</organization>
 	<dependencies>
 		<dependency>
-			<groupId>com.bluexml.side.Framework.xforms.alfresco</groupId>
-			<artifactId>controller</artifactId>
+			<groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
+			<artifactId>entreprise</artifactId>
 			<version>1.0.92</version>
 			<type>jar</type>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>controller-handler-e</finalName>
+		<finalName>controller-${artifactid}</finalName>
 	</build>
 </project>
