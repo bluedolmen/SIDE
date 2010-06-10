@@ -8,6 +8,7 @@ import org.w3c.dom.Element;
 
 import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.navigation.Page;
+import com.bluexml.xforms.hook.actions.AbstractTransactionalAction;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 

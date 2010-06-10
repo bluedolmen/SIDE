@@ -12,6 +12,7 @@ import com.bluexml.xforms.controller.beans.PersistFormResultBean;
 import com.bluexml.xforms.controller.navigation.FormTypeEnum;
 import com.bluexml.xforms.controller.navigation.NavigationPath;
 import com.bluexml.xforms.controller.navigation.Page;
+import com.bluexml.xforms.hook.actions.AbstractTransactionalAction;
 import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.xforms.messages.MsgPool;
 
@@ -71,7 +72,7 @@ public class SubmitAction extends AbstractTransactionalAction {
 				.getText()));
 
 		// if in search mode, a specific processing applies
-		if (isSearching) {
+		if (isSearching()) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Redirecting after search mode or search form");
 				logger.debug(" --> targetURL:'" + submitURL + "'");
@@ -165,7 +166,7 @@ public class SubmitAction extends AbstractTransactionalAction {
 			result = resultBean.getResultStr();
 		} else if (type == FormTypeEnum.SEARCH) {
 			result = controller.persistSearch(formName, node, shortNames);
-			isSearching = true;
+			setSearching(true);
 		} else if (type == FormTypeEnum.FORM) {
 			PersistFormResultBean resultBean = controller.persistForm(transaction,formName, node);
 			result = resultBean.getResultStr();
@@ -173,9 +174,9 @@ public class SubmitAction extends AbstractTransactionalAction {
 			String datatype = controller.getUnderlyingDataFormForWorkflow(formName);
 			String searchStr = StringUtils.trimToNull(pageInitParams.get(MsgId.PARAM_SEARCH_MODE
 					.getText()));
-			isSearching = StringUtils.equals(searchStr, "true");
+			setSearching(StringUtils.equals(searchStr, "true"));
 
-			if (isSearching) {
+			if (isSearching()) {
 				result = controller.persistFormJSON(transaction, datatype, node, shortNames);
 			} else {
 				PersistFormResultBean resultBean = controller.persistForm(transaction, datatype,
