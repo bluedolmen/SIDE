@@ -14,7 +14,7 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 	public void submit() throws ServletException {
 
 		if (controller.isInStandaloneMode()) {
-			String msg = "The Alfresco Controller is in standalone mode. Some actions are unavailable";
+			String msg = "The Alfresco Controller has no write capability.";
 			navigationPath.setStatusMsg(msg);
 			throw new ServletException(msg);
 		}
