@@ -1,6 +1,8 @@
-package com.bluexml.xforms.actions;
+package com.bluexml.xforms.hook.actions;
 
 import javax.servlet.ServletException;
+
+import com.bluexml.xforms.actions.AbstractWriteAction;
 
 public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 
