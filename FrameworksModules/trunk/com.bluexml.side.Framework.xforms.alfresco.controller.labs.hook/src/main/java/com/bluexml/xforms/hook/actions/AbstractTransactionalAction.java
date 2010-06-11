@@ -23,4 +23,18 @@ public abstract class AbstractTransactionalAction extends AbstractWriteAction {
 
 	}
 
+	/**
+	 * @return the isSearching
+	 */
+	public boolean isSearching() {
+		return isSearching;
+	}
+
+	/**
+	 * @param isSearching the isSearching to set
+	 */
+	public void setSearching(boolean isSearching) {
+		this.isSearching = isSearching;
+	}
+
 }
