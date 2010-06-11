@@ -39,12 +39,6 @@
     </contributor>
   </contributors>
   <dependencies>
-	<dependency>
-		<groupId>com.bluexml.side.Framework.xforms.alfresco.controller.labs</groupId>
-		<artifactId>hook</artifactId>
-		<version>1.0.0</version>
-		<scope>compile</scope>
-	</dependency>
     <dependency>
       <groupId>com.bluexml.side.Form</groupId>
       <artifactId>XFormsUtils</artifactId>
