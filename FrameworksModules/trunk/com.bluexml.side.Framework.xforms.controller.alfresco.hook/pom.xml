@@ -7,8 +7,8 @@
 		<artifactId>superpom</artifactId>
 		<version>1.10</version>
 	</parent>
-	<groupId>com.bluexml.side.Framework.xforms.alfresco.controller.entreprise</groupId>
-	<artifactId>hook</artifactId>
+	<groupId>com.bluexml.side.Framework.xforms.controller</groupId>
+	<artifactId>controller</artifactId>
 	<version>1.0.0</version>
 	<name>XForms Controller hook for SIDE Entreprise</name>
 	<inceptionYear>2009</inceptionYear>

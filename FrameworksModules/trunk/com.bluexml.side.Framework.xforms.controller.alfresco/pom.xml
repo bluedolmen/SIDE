@@ -8,8 +8,8 @@
 		<artifactId>superpom</artifactId>
 		<version>1.10</version>
 	</parent>
-	<groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
-	<artifactId>entreprise</artifactId>
+	<groupId>com.bluexml.side.Framework.xforms.controller</groupId>
+	<artifactId>alfresco</artifactId>
 	<version>1.0.92</version>
 	<name>XForms controller</name>
 	<description>This module provides controller allowing conversion to and from XForm XML and Alfresco custom webscript.
