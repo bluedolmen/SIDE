@@ -5,7 +5,7 @@
 <booleanAttribute key="org.eclipse.ant.uiSET_INPUTHANDLER" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${project}"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/com.bluexml.side.Form.generator.xforms.chiba/build-xsdClassGeneration.xml"/>
+<listEntry value="/com.bluexml.side.Form.generator.xforms.worker/build-xsdClassGeneration.xml"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
@@ -13,9 +13,9 @@
 <booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.ant.ui.AntClasspathProvider"/>
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="true"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="com.bluexml.side.Form.generator.xforms.chiba"/>
-<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:/com.bluexml.side.Form.generator.xforms.chiba/build-xsdClassGeneration.xml}"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="com.bluexml.side.Form.generator.xforms.worker"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:/com.bluexml.side.Form.generator.xforms.worker/build-xsdClassGeneration.xml}"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_RUN_BUILD_KINDS" value="incremental,auto,clean"/>
 <booleanAttribute key="org.eclipse.ui.externaltools.ATTR_TRIGGERS_CONFIGURED" value="true"/>
-<stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="${workspace_loc:/com.bluexml.side.Form.generator.xforms.chiba}"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="${workspace_loc:/com.bluexml.side.Form.generator.xforms.worker}"/>
 </launchConfiguration>
