@@ -19,13 +19,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
-			<artifactId>entreprise</artifactId>
+			<artifactId>labs</artifactId>
 			<version>1.0.92</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>controller-handler-l</finalName>
+		<finalName>controller-${artifactId}</finalName>
 	</build>
 </project>

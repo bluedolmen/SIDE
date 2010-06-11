@@ -26,6 +26,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>controller-${artifactid}</finalName>
+		<finalName>controller-${artifactId}</finalName>
 	</build>
 </project>
