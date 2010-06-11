@@ -32,6 +32,7 @@ public class RenderableGroup<G extends FormGroup> extends RenderableFormElement<
 	 */
 	public RenderableGroup(XFormsGenerator generationManager, FormElement parent, G group) {
 		super(generationManager, parent, group);
+		styleClass = group.getStyle();
 	}
 
 	/*
