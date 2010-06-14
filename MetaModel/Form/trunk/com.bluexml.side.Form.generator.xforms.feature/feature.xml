@@ -14,7 +14,7 @@
     <import plugin="com.bluexml.side.Util.dependencies" />
     <import plugin="com.bluexml.side.Util.componentMonitor" />
   </requires>
-  <plugin id="com.bluexml.side.Form.generator.xforms.chiba" download-size="0" install-size="0" version="1.0.151.v17184-20100529" unpack="false" />
+  <plugin id="com.bluexml.side.Form.generator.xforms.worker" download-size="0" install-size="0" version="1.0.151.v17184-20100529" unpack="false" />
   <plugin id="com.bluexml.side.Form.generator.xforms.maven" download-size="0" install-size="0" version="1.0.27.v13286-20100127" unpack="false" />
 </feature>
 

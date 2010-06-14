@@ -22,7 +22,6 @@ Bundle-ClassPath: .,
  lib/com.bluexml.side.Form.utils-1.0.1.jar
 Export-Package: .,
  com.bluexml.side.forms.generator.alfresco.chiba,
- com.bluexml.xforms.controller.binding,
  com.bluexml.xforms.generator,
  com.bluexml.xforms.generator.forms,
  com.bluexml.xforms.generator.forms.modelelement,
