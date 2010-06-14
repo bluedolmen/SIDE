@@ -379,7 +379,8 @@ public class BuilderUtils {
 	/**
 	 * Retourne le chemin vers la copie locale du projet en fonction de
 	 * l'utilisation de hudson ou non
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	public String getPathToLocalCopy(String projectName) throws Exception {
 		String path = "";
@@ -400,15 +401,16 @@ public class BuilderUtils {
 	 * 
 	 * @param projectName
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public String getProjectPath(String projectName) throws Exception {
 		String path = getCommunityProject(projectName);
 
 		if (path.length() == 0) {
 			path = getEnterpriseProjectPath(projectName);
-		} else {
-			throw new Exception("Project not found :"+projectName);
+		}
+		if (path.length() == 0) {
+			throw new Exception("Project not found :" + projectName);
 		}
 
 		return path;
@@ -457,8 +459,13 @@ public class BuilderUtils {
 	 * Return the Version Number to force the change of each number version
 	 * (void for no change)
 	 */
-	public String getForceNumberVersion() {
-		return getBuildProperties().getProperty(forceNumberVersion);
+	public boolean getForceNumberVersion() {
+		boolean booleanValue = false;
+		String value = getBuildProperties().getProperty(forceNumberVersion).trim();
+		if (value != null && !value.equals("")) {
+			booleanValue = Boolean.parseBoolean(value);
+		}
+		return booleanValue;
 	}
 
 	/**

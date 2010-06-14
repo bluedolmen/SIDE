@@ -203,12 +203,9 @@ public class PluginsUpdater {
 				// version
 				// si on ne force pas la mise a jour du numéro de
 				// version
-				String newVersion = "";
-				if ("".equals(bu.getForceNumberVersion())) {
-					newVersion = bu.update(number, pattern);
-				} else {
-					newVersion = bu.update(number, bu.getForceNumberVersion().split("\\."));
-				}
+				
+				String newVersion = bu.update(number, pattern);
+				
 				ligne += " " + newVersion;
 				pluginsNewVersion.put(pluginId, newVersion);
 				pluginsVersions.put(pluginId, newVersion);

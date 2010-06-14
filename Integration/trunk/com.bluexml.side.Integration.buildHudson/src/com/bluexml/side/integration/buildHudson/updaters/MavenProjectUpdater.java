@@ -189,15 +189,19 @@ public class MavenProjectUpdater {
 			String newVersion = updatepom(number, pattern);
 			version.setText(newVersion);
 			logger.debug("\tMavenProjectUpdater.updateMarkedModules() update version " + oldVersionNumber + " -> " + newVersion);
+			
 			// update dependencies
 			Element dependencies = root.getChild("dependencies", ns);
-			List<?> listdependencies = dependencies.getChildren("dependency", ns);
-			logger.debug("\tMavenProjectUpdater.updateMarkedModules() update dependencies");
-			for (Object object : listdependencies) {
-				Element current = (Element) object;
-				updateRef(module, pattern, current);
+			if (dependencies != null) {
+				List<?> listdependencies = dependencies.getChildren("dependency", ns);
+				logger.debug("\tMavenProjectUpdater.updateMarkedModules() update dependencies");
+				for (Object object : listdependencies) {
+					Element current = (Element) object;
+					updateRef(module, pattern, current);
 
+				}
 			}
+
 			if (update_mavenplugins) {
 				// update plugins
 				// mark to update if a plugin is marked

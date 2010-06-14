@@ -29,7 +29,6 @@ public class ProjectVersionUpdater {
 	 */
 	private String workspace = "";
 	private String build_number = "";
-	private String build_id = "";
 	private String svn_revision = "";
 	private Properties conf;
 
@@ -62,11 +61,10 @@ public class ProjectVersionUpdater {
 	 */
 	public static void main(String[] args) {
 		try {
-			if (args.length < 5) {
-				System.out.println("Usage : java -jar Builder.jar <workspace> <build_number> <build_id> <svn_revision> <propertiesFilePath> [skipCopyToRepo]");
+			if (args.length < 4) {
+				System.out.println("Usage : java -jar Builder.jar <workspace> <build_number> <svn_revision> <propertiesFilePath> [skipCopyToRepo]");
 				System.out.println("\t<workspace>          : workspace folder, folder contains S-IDE ...");
 				System.out.println("\t<build_number>       : Hudson build number");
-				System.out.println("\t<build_id>           : identifier like yyyy-MM-dd_HH-mm-ss");
 				System.out.println("\t<svn_revision>       : the svn revision number");
 				System.out.println("\t<propertiesFilePath> : file path of properties file to use");
 				System.out.println("\t[skipCopyToRepo]     : optional, disable last action that copy modified files into svn local copy (mainly for testing)");
@@ -75,15 +73,14 @@ public class ProjectVersionUpdater {
 			// get Parameters
 			String workspace = args[0];
 			String build_number = args[1];
-			String build_id = args[2];
-			String svn_revision = args[3];
-			String propertiesFilePath = args[4];
+			String svn_revision = args[2];
+			String propertiesFilePath = args[3];
 			boolean skipCopyToRepo = false;
-			if (args.length == 6 && args[5].equals("skipCopyToRepo")) {
+			if (args.length == 5 && args[4].equals("skipCopyToRepo")) {
 				skipCopyToRepo = true;
 			}
 			// initialize Builder
-			ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, build_id, svn_revision, propertiesFilePath, skipCopyToRepo);
+			ProjectVersionUpdater builder = new ProjectVersionUpdater(workspace, build_number, svn_revision, propertiesFilePath, skipCopyToRepo);
 
 			// launch version updater
 			builder.build();
@@ -93,10 +90,9 @@ public class ProjectVersionUpdater {
 		}
 	}
 
-	public ProjectVersionUpdater(String workspace, String build_number, String build_id, String svn_revision, String propertiesFilePath, boolean skipCopyToRepo) {
+	public ProjectVersionUpdater(String workspace, String build_number, String svn_revision, String propertiesFilePath, boolean skipCopyToRepo) {
 		this.workspace = workspace;
 		this.build_number = build_number;
-		this.build_id = build_id;
 		this.svn_revision = svn_revision;
 		this.propertiesFile = propertiesFilePath;
 		this.conf = BuilderUtils.openProperties(propertiesFilePath);
@@ -127,11 +123,12 @@ public class ProjectVersionUpdater {
 		System.out.println("**** Parametre ****");
 		System.out.println("- workspace = " + workspace);
 		System.out.println("- build_number = " + build_number);
-		System.out.println("- build_id = " + build_id);
 		System.out.println("- svn_revision = " + svn_revision);
+		System.out.println("- launchDate = " + launchDate);
 		System.out.println("- propertiesFile = " + propertiesFile);
 		System.out.println("- sourceSVNName = " + sourceSVNName);
 		System.out.println("- skipCopyToRepo = " + skipCopyToRepo);
+		System.out.println("- ForceNumberVersion = " + bu.getForceNumberVersion());
 		// build process
 
 		System.out.println("\nLancé le " + BuilderUtils.getFormatedDate(launchDate) + " à " + BuilderUtils.getTime(launchDate));
@@ -174,9 +171,16 @@ public class ProjectVersionUpdater {
 
 		projetPomsList = BuilderUtils.findFile(searchFrom, "pom.xml");
 
-		// read svn log to list modified projects
-		bu.readSvnLog(projetPomsList, projectPoms2Update, projectList);
-
+		if (bu.getForceNumberVersion()) {
+			// all projects must be updated, no need to check svn logs
+			// all poms
+			projectPoms2Update.addAll(projetPomsList);
+			// all Eclipse projects
+			projectList.addAll(projectRealList);
+		} else {
+			// read svn log to list modified projects
+			bu.readSvnLog(projetPomsList, projectPoms2Update, projectList);
+		}
 		// dispatch modified project according to project type (plugin or
 		// feature)
 		for (String element : projectList) {
@@ -227,7 +231,7 @@ public class ProjectVersionUpdater {
 		}
 		MavenProjectUpdater mpu = new MavenProjectUpdater(projetPomsList, projectPoms2Update, corePoms, bu);
 		mpu.checkAndUpdateAllPoms();
-		System.out.println("Updated Maven2 projects :");
+		System.out.println("Updated Maven2 projects :" + mpu.getPomsNewsVersion().size());
 		for (Map.Entry<String, String> entry : mpu.getPomsNewsVersion().entrySet()) {
 			System.out.println("\t- " + entry.getKey() + " : " + entry.getValue());
 		}
@@ -272,7 +276,7 @@ public class ProjectVersionUpdater {
 			pu = new PluginsUpdater(pluginsList, plugins2UpdateList, null, mpu, bu);
 		}
 		pu.checkAndUpdate();
-		System.out.println("Updated Plugins :");
+		System.out.println("Updated Plugins :" + pu.getPluginsNewVersion().size());
 		for (Map.Entry<String, String> entry : pu.getPluginsNewVersion().entrySet()) {
 			System.out.println("\t- " + entry.getKey() + " : " + entry.getValue());
 		}
@@ -286,7 +290,7 @@ public class ProjectVersionUpdater {
 		}
 
 		fu.checkAndUpdateAllFeatures();
-		System.out.println("Updated Features :");
+		System.out.println("Updated Features :" + fu.getFeaturesNewsVersion().size());
 		for (Map.Entry<String, String> entry : fu.getFeaturesNewsVersion().entrySet()) {
 			System.out.println("\t- " + entry.getKey() + " : " + entry.getValue());
 		}
@@ -319,6 +323,15 @@ public class ProjectVersionUpdater {
 			SVNCommandGenerator svnCg = new SVNCommandGenerator(bu, launchDate, projectPoms2Update, plugins2UpdateList, features2UpdateList);
 			svnCg.createAntFile();
 		}
+
+		System.out.println("=========== Summary ================");
+		System.out.println("\t- Updated Maven2 projects :" + mpu.getPomsNewsVersion().size() + " / " + projetPomsList.size());
+		System.out.println("\t- Updated Plugins :" + pu.getPluginsNewVersion().size() + " / " + pluginsList.size());
+		System.out.println("\t- Updated Features :" + fu.getFeaturesNewsVersion().size() + " / " + featuresList.size());
+		System.out.println("\t- side.product updated ?" + sideProductChanges);
+		System.out.println("\t- category.xml updated ?" + categoryChanges);
+		System.out.println("====================================");
+
 	}
 
 	public String getUsedWorkspace() {
