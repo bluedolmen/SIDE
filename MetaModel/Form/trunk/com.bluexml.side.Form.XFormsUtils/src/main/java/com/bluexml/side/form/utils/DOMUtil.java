@@ -187,6 +187,7 @@ public class DOMUtil {
 	 * @param stream
 	 *            the stream providing the document's content.
 	 * @return
+	 * @since 1.0.2
 	 */
 	public static Document getDocumentFromStream(InputStream stream) {
 		Document document;
