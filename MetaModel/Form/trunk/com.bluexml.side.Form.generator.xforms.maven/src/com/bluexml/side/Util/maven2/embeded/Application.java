@@ -1,4 +1,4 @@
-package com.bluexml.side.form.generator.xforms.maven;
+package com.bluexml.side.Util.maven2.embeded;
  
 public class Application {
 

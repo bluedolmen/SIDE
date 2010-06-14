@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: SIDE XForms Maven Repository
-Bundle-SymbolicName: com.bluexml.side.Form.generator.xforms.maven;singleton:=true
+Bundle-Name: SIDE Maven2 Embeded
+Bundle-SymbolicName: com.bluexml.side.Util.maven2.embeded;singleton:=true
 Bundle-Version: 1.0.27.v13286-20100127
 Bundle-Vendor: BlueXML
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
