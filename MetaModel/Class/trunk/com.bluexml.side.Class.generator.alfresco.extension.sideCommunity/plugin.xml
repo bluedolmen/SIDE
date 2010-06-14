@@ -31,17 +31,17 @@
                   </option>
                   -->
             <option defaultOption="true" documentation="Check this option to include the production of the Alfresco Share's module extension in the generation.&lt;br&gt;If not checked, the extension modules are not included in the generated AMPs.&lt;br&gt;SIDE provides extension modules to Alfresco Share in order to view and edit all the metadata of the newly generated content model." key="alfresco.share.extension" label="Alfresco Share Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.upload" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.18" versionMax="1.0.18" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.upload" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.19" versionMax="1.0.19" />
             </option>
             <option documentation="Check this option to include the production of the Alfresco's report webscripts in the generation.&lt;br&gt;If not checked, the webscripts report are not included in the generated AMPs.&lt;br&gt;SIDE allows to configure the Alfresco's report webscripts with the newly designed content types of the data model." key="alfresco.webscript.report" label="Alfresco Report Webscripts" />
             <configurationParameter documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.17" versionMax="1.0.17" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.23" versionMax="1.1.23" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.18" versionMax="1.0.18" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.24" versionMax="1.1.24" />
             <option documentation="Check this option to include the production of the Alfresco's common webscripts in the generation.&lt;br&gt;If not checked, the webscripts are not included in the generated AMPs.&lt;br&gt;" key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.64" versionMax="1.0.64" />
             </option>
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" label="Alfresco FacetMap Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.29" versionMax="1.0.29" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.30" versionMax="1.0.30" />
             </option>
             <configurationParameter documentation="account to use when getting documents from alfresco" key="alfresco.report.runas" label="report as" />
           </generatorVersion>
