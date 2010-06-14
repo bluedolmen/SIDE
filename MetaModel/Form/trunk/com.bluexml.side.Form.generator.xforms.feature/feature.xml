@@ -1,39 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Form.generator.xforms.feature"
-      label="SIDE XForms Chiba Generator"
-      version="1.0.155.v17184-20100529"
-      provider-name="BlueXML">
-
-   <description url="http://www.bluexml.com">
-      SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of form models on XForms Chiba and Alfresco for web form editing.
-   </description>
-
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
-
-   <requires>
-      <import plugin="com.bluexml.side.Util.generator"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="com.bluexml.side.Util.libs"/>
-      <import plugin="com.bluexml.side.Class"/>
-      <import plugin="com.bluexml.side.Form"/>
-      <import plugin="com.bluexml.side.Util.security"/>
-      <import plugin="com.bluexml.side.Util.dependencies"/>
-      <import plugin="com.bluexml.side.Util.componentMonitor"/>
-   </requires>
-
-   <plugin
-         id="com.bluexml.side.Form.generator.xforms.worker"
-         download-size="0"
-         install-size="0"
-         version="1.0.151.v17184-20100529"
-         unpack="false"/>
-
+<feature id="com.bluexml.side.Form.generator.xforms.feature" label="SIDE XForms Chiba Generator" version="1.0.156.v18019-20100614" provider-name="BlueXML">
+  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of form models on XForms Chiba and Alfresco for web form editing.</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <requires>
+    <import plugin="com.bluexml.side.Util.generator" />
+    <import plugin="org.eclipse.core.resources" />
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="com.bluexml.side.Util.libs" />
+    <import plugin="com.bluexml.side.Class" />
+    <import plugin="com.bluexml.side.Form" />
+    <import plugin="com.bluexml.side.Util.security" />
+    <import plugin="com.bluexml.side.Util.dependencies" />
+    <import plugin="com.bluexml.side.Util.componentMonitor" />
+  </requires>
+  <plugin id="com.bluexml.side.Form.generator.xforms.worker" download-size="0" install-size="0" version="1.0.152.v18019-20100614" unpack="false" />
 </feature>
+
