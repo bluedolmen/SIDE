@@ -3,7 +3,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Model Merging
 Bundle-SymbolicName: com.bluexml.side.Util.model.merge
-Bundle-Version: 1.0.24.v14404-20100212
+Bundle-Version: 1.0.25.v18019-20100614
 Bundle-Activator: com.bluexml.side.util.model.merge.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
