@@ -379,8 +379,9 @@ public class BuilderUtils {
 	/**
 	 * Retourne le chemin vers la copie locale du projet en fonction de
 	 * l'utilisation de hudson ou non
+	 * @throws Exception 
 	 */
-	public String getPathToLocalCopy(String projectName) {
+	public String getPathToLocalCopy(String projectName) throws Exception {
 		String path = "";
 		if (useRepositoryCopy) {
 			path = getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy;
@@ -399,12 +400,15 @@ public class BuilderUtils {
 	 * 
 	 * @param projectName
 	 * @return
+	 * @throws Exception 
 	 */
-	public String getProjectPath(String projectName) {
+	public String getProjectPath(String projectName) throws Exception {
 		String path = getCommunityProject(projectName);
 
 		if (path.length() == 0) {
 			path = getEnterpriseProjectPath(projectName);
+		} else {
+			throw new Exception("Project not found :"+projectName);
 		}
 
 		return path;
@@ -499,7 +503,7 @@ public class BuilderUtils {
 		return new SimpleDateFormat("yyyyMMdd").format(new Date());
 	}
 
-	public String getFeatureXMLFile(String projectName) {
+	public String getFeatureXMLFile(String projectName) throws Exception {
 		return getPathToLocalCopy(projectName) + File.separator + "feature.xml";
 	}
 
@@ -526,7 +530,7 @@ public class BuilderUtils {
 		outStream.close();
 	}
 
-	public File getProductFile() {
+	public File getProductFile() throws Exception {
 		String brandingPath = "";
 		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
 			brandingPath = getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding.enterprise");
@@ -537,7 +541,7 @@ public class BuilderUtils {
 		return product;
 	}
 
-	public File getCategoryFile() {
+	public File getCategoryFile() throws Exception {
 		String brandingPath = "";
 		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
 			brandingPath = getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding.enterprise");

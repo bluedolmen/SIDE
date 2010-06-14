@@ -227,7 +227,7 @@ public class PluginsUpdater {
 		new File(filePluginPath + ".txt").renameTo(new File(filePluginPath));
 	}
 
-	public String getPluginVersion(String pluginId) {
+	public String getPluginVersion(String pluginId) throws Exception {
 		String version = pluginsVersions.get(pluginId);
 		if (allFixed && version != null) {
 			return version;

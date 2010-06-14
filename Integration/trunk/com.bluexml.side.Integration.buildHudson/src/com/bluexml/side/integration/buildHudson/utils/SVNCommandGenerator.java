@@ -15,7 +15,7 @@ public class SVNCommandGenerator {
 	List<String> listePluginModif = new ArrayList<String>();
 	List<String> listeFeatureModif = new ArrayList<String>();
 
-	public SVNCommandGenerator(BuilderUtils bu, Date launchDate, List<String> listeProjetPomsModif, List<String> listePluginModif, List<String> listeFeatureModif) {
+	public SVNCommandGenerator(BuilderUtils bu, Date launchDate, List<String> listeProjetPomsModif, List<String> listePluginModif, List<String> listeFeatureModif) throws Exception {
 		this.bu = bu;
 		this.launchDate = launchDate;
 		this.listeFeatureModif = listeFeatureModif;
@@ -24,14 +24,15 @@ public class SVNCommandGenerator {
 		bu.getProductFile();
 	}
 
-	public void createAntFile() {
+	public void createAntFile() throws Exception {
 		BuilderUtils.createFile(getCorpsSVN(), bu.getBuildPath(), "buildSVN.xml");
 	}
 
 	/**
 	 * Retourne le corps du fichier buildSVN.xml
+	 * @throws Exception 
 	 */
-	private String getCorpsSVN() {
+	private String getCorpsSVN() throws Exception {
 		String out = "<?xml version=\"1.0\"?>\n";
 		out += "<project name=\"build\" default=\"svnCommit\">\n";
 		out += "\t<property file=\"build.properties\" />\n";
@@ -52,8 +53,9 @@ public class SVNCommandGenerator {
 
 	/**
 	 * Retourne le corps de la target svnUD
+	 * @throws Exception 
 	 */
-	private String getTargetSvnCommit() {
+	private String getTargetSvnCommit() throws Exception {
 
 		String out = "\n\t<!-- ================================= \n";
 		out += "\t\t\ttarget: svnCommit\n";
