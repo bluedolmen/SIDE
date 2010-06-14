@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
->
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.bluexml</groupId>
-		<artifactId>superpom</artifactId>
-		<version>1.10</version>
-	</parent>
-	<groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
-	<artifactId>labs</artifactId>
-	<version>1.0.92</version>
-	<name>XForms controller</name>
-	<description>This module provides controller allowing conversion to and from XForm XML and Alfresco custom webscript.
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.bluexml</groupId>
+    <artifactId>superpom</artifactId>
+    <version>1.10</version>
+  </parent>
+  <groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
+  <artifactId>labs</artifactId>
+  <version>1.0.93</version>
+  <name>XForms controller</name>
+  <description>This module provides controller allowing conversion to and from XForm XML and Alfresco custom webscript.
 		It uses generated files : forms and mapping</description>
-	<inceptionYear>2009</inceptionYear>
-	<organization>
-		<name>BlueXML</name>
-		<url>http://www.bluexml.com/</url>
-	</organization>
-	<contributors>
-		<contributor>
-			<name>Gabriel Landais</name>
-			<organization>BlueXML</organization>
-			<organizationUrl>http://www.bluexml.com</organizationUrl>
-			<roles>
-				<role>Original developer</role>
-			</roles>
-		</contributor>
-		<contributor>
-			<name>Amenel VOGLOZIN</name>
-			<email>avoglozin@bluexml.com</email>
-			<organization>BlueXML</organization>
-			<organizationUrl>http://www.bluexml.com</organizationUrl>
-			<roles>
-				<role>Developer &amp; maintainer</role>
+  <inceptionYear>2009</inceptionYear>
+  <organization>
+    <name>BlueXML</name>
+    <url>http://www.bluexml.com/</url>
+  </organization>
+  <contributors>
+    <contributor>
+      <name>Gabriel Landais</name>
+      <organization>BlueXML</organization>
+      <organizationUrl>http://www.bluexml.com</organizationUrl>
+      <roles>
+        <role>Original developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Amenel VOGLOZIN</name>
+      <email>avoglozin@bluexml.com</email>
+      <organization>BlueXML</organization>
+      <organizationUrl>http://www.bluexml.com</organizationUrl>
+      <roles>
+        <role>Developer &amp; maintainer</role>
       </roles>
     </contributor>
   </contributors>
@@ -42,7 +40,7 @@
     <dependency>
       <groupId>com.bluexml.side.Form</groupId>
       <artifactId>XFormsUtils</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
