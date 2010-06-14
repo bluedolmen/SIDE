@@ -252,4 +252,14 @@
 		</login-config>
 		
 	-->
+    <!-- 
+    The BlueXML modifications to the original web.xml are:
+    - replace the Chiba XFormsFilter filter with the XFormsFilter in bluexml package
+    - add filter and filter-mapping for the CAS filter in package controller.cas.CASFilter
+    - replace "<url-pattern>/forms/*</url-pattern>" with "<servlet-name>BlueXFormsServlet</servlet-name>" in the filter-mapping for XFormsFilter
+    - add NavigationSessionListener as a listener
+    - add servlets and their servlet-mapping: BlueXFormsServlet, FileImageServlet, CreateServlet, ReadServlet, UpdateServlet, DeleteServlet, JsApiServlet
+    - replace index.html with index.jsp as welcome file
+    - set a session timeout
+     -->
 </web-app>
