@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-	version="2.4">
+	version="2.4"
+>
 	<display-name>Chiba</display-name>
 
 	<context-param>
@@ -11,23 +11,18 @@
 	</context-param>
 
 	<!--
-		This is an example mapping for ChibaServlet that can be used in applications that like to
-		use a Servlet to process XForms. This was the standard approach up to version 2.1 which introduced
-		the XFormsFilter.
-		<servlet>
-		<servlet-name>XFormsServlet</servlet-name>
+		This is an example mapping for ChibaServlet that can be used in applications that like to use a
+		Servlet to process XForms. This was the standard approach up to version 2.1 which introduced the
+		XFormsFilter. <servlet> <servlet-name>XFormsServlet</servlet-name>
 		<servlet-class>org.chiba.agent.web.servlet.ChibaServlet</servlet-class>
-		
-		<load-on-startup>1</load-on-startup>
-		</servlet>
+
+		<load-on-startup>1</load-on-startup> </servlet>
 	-->
 
 	<!--  XForms Filter -->
 	<filter>
 		<filter-name>XFormsFilter</filter-name>
-		<filter-class>
-			com.bluexml.xforms.chiba.XFormsFilter
-		</filter-class>
+		<filter-class>com.bluexml.xforms.chiba.XFormsFilter</filter-class>
 		<init-param>
 			<param-name>scripted</param-name>
 			<param-value>true</param-value>
@@ -37,9 +32,7 @@
 	<!-- Authentication filter -->
 	<filter>
 		<filter-name>CAS Filter</filter-name>
-		<filter-class>
-			com.bluexml.xforms.controller.cas.CASFilter
-		</filter-class>
+		<filter-class>com.bluexml.xforms.controller.cas.CASFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -47,11 +40,11 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!--  XForms filter mapping
-		maps the XFormsFilter to a specified Servlet or url-pattern. This example uses a
-		url-pattern that matches all document under the forms directory. Other examples would be:
-		- <url-pattern>*.xhtml</url-pattern> to match all xhtml files
-		- <servlet-name>XFormsRequest</servlet-name> to match all requests to Servlet XFormsRequest
+	<!--
+		XForms filter mapping maps the XFormsFilter to a specified Servlet or url-pattern. This example
+		uses a url-pattern that matches all document under the forms directory. Other examples would be: -
+		<url-pattern>*.xhtml</url-pattern> to match all xhtml files -
+		<servlet-name>XFormsRequest</servlet-name> to match all requests to Servlet XFormsRequest
 	-->
 	<filter-mapping>
 		<filter-name>XFormsFilter</filter-name>
@@ -59,16 +52,12 @@
 	</filter-mapping>
 
 	<listener>
-		<listener-class>
-			com.bluexml.xforms.controller.navigation.NavigationSessionListener
-		</listener-class>
+		<listener-class>com.bluexml.xforms.controller.navigation.NavigationSessionListener</listener-class>
 	</listener>
 
 	<!--
-		alternative mapping if binding the Filter to a servlet.
-		<filter-mapping>
-		<filter-name>XFormsFilter</filter-name>
-		<servlet-name>XFormsRequest</servlet-name>
+		alternative mapping if binding the Filter to a servlet. <filter-mapping>
+		<filter-name>XFormsFilter</filter-name> <servlet-name>XFormsRequest</servlet-name>
 		</filter-mapping>
 	-->
 	<servlet>
@@ -82,81 +71,58 @@
 
 		<!--
 			This entry may be uncommented to use relative paths in the served html-forms. Remember change the
-			chiba.forms.uri.relative parameter of XFormsServlet as well.
-			<init-param>
-			<param-name>overridePath</param-name>
-			<param-value>Flux</param-value>
-			</init-param>
+			chiba.forms.uri.relative parameter of XFormsServlet as well. <init-param>
+			<param-name>overridePath</param-name> <param-value>Flux</param-value> </init-param>
 		-->
 	</servlet>
 
 	<!--
-		This is an example servlet that can be used in conjunction with XFormsFilter by
-		attaching the filter to this Servlet. This only parses the requested form document
-		and passes the DOM along as a request attribute that will be picked up by the XFormsFilter.
-		<servlet>
+		This is an example servlet that can be used in conjunction with XFormsFilter by attaching the
+		filter to this Servlet. This only parses the requested form document and passes the DOM along as a
+		request attribute that will be picked up by the XFormsFilter. <servlet>
 		<servlet-name>XFormsRequest</servlet-name>
-		<servlet-class>org.chiba.agent.web.servlet.XFormsRequestServlet</servlet-class>
-		</servlet>
+		<servlet-class>org.chiba.agent.web.servlet.XFormsRequestServlet</servlet-class> </servlet>
 	-->
 
 	<servlet>
 		<servlet-name>FluxHelper</servlet-name>
-		<servlet-class>
-			org.chiba.agent.web.flux.FluxHelperServlet
-		</servlet-class>
+		<servlet-class>org.chiba.agent.web.flux.FluxHelperServlet</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>PlainHtml</servlet-name>
-		<servlet-class>
-			org.chiba.agent.web.servlet.PlainHtmlServlet
-		</servlet-class>
+		<servlet-class>org.chiba.agent.web.servlet.PlainHtmlServlet</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>ViewServlet</servlet-name>
-		<servlet-class>
-			org.chiba.agent.web.servlet.ViewServlet
-		</servlet-class>
+		<servlet-class>org.chiba.agent.web.servlet.ViewServlet</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>BlueXFormsServlet</servlet-name>
-		<servlet-class>
-			com.bluexml.xforms.controller.XFormsServlet
-		</servlet-class>
+		<servlet-class>com.bluexml.xforms.controller.XFormsServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>FileImageServlet</servlet-name>
-		<servlet-class>
-			com.bluexml.xforms.controller.ImageServlet
-		</servlet-class>
+		<servlet-class>com.bluexml.xforms.controller.ImageServlet</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>CreateServlet</servlet-name>
-		<servlet-class>
-			com.bluexml.xforms.servlets.CreateServlet
-		</servlet-class>
+		<servlet-class>com.bluexml.xforms.servlets.CreateServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>ReadServlet</servlet-name>
-		<servlet-class>
-			com.bluexml.xforms.servlets.ReadServlet
-		</servlet-class>
+		<servlet-class>com.bluexml.xforms.servlets.ReadServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>UpdateServlet</servlet-name>
-		<servlet-class>
-			com.bluexml.xforms.servlets.UpdateServlet
-		</servlet-class>
+		<servlet-class>com.bluexml.xforms.servlets.UpdateServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>DeleteServlet</servlet-name>
-		<servlet-class>
-			com.bluexml.xforms.servlets.DeleteServlet
-		</servlet-class>
+		<servlet-class>com.bluexml.xforms.servlets.DeleteServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>BlueXFormsServlet</servlet-name>
@@ -183,6 +149,11 @@
 		<servlet-name>DeleteServlet</servlet-name>
 		<url-pattern>/delete</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>JavascriptApiServlet</servlet-name>
+		<servlet-class>com.bluexml.xforms.servlets.JsApiServlet</servlet-class>
+	</servlet>
+
 
 	<servlet-mapping>
 		<servlet-name>Flux</servlet-name>
@@ -196,15 +167,10 @@
 
 	<!--
 		Umcomment the respective entries when using ChibaServlet or XFormsRequestServlet.
-		
-		<servlet-mapping>
-		<servlet-name>XFormsServlet</servlet-name>
-		<url-pattern>/XFormsServlet</url-pattern>
-		</servlet-mapping>
-		
-		<servlet-mapping>
-		<servlet-name>XFormsRequest</servlet-name>
-		<url-pattern>/xfrequest</url-pattern>
+
+		<servlet-mapping> <servlet-name>XFormsServlet</servlet-name>
+		<url-pattern>/XFormsServlet</url-pattern> </servlet-mapping> <servlet-mapping>
+		<servlet-name>XFormsRequest</servlet-name> <url-pattern>/xfrequest</url-pattern>
 		</servlet-mapping>
 	-->
 	<servlet-mapping>
@@ -228,38 +194,22 @@
 
 
 	<!--
-		<security-constraint>
-		<web-resource-collection>
-		<web-resource-name>Chiba Member Area</web-resource-name>
-		<url-pattern>/jsp/*</url-pattern>
-		<http-method>DELETE</http-method>
-		<http-method>GET</http-method>
-		<http-method>POST</http-method>
-		<http-method>PUT</http-method>
-		</web-resource-collection>
-		<auth-constraint>
-		<role-name>tomcat</role-name>
-		<role-name>role1</role-name>
-		</auth-constraint>
-		</security-constraint>
-		<login-config>
-		<auth-method>FORM</auth-method>
-		<realm-name>Example Form-Based Authentication Area</realm-name>
-		<form-login-config>
-		<form-login-page>/login.jsp</form-login-page>
-		<form-error-page>/login_error.jsp</form-error-page>
-		</form-login-config>
-		</login-config>
-		
+		<security-constraint> <web-resource-collection> <web-resource-name>Chiba Member
+		Area</web-resource-name> <url-pattern>/jsp/*</url-pattern> <http-method>DELETE</http-method>
+		<http-method>GET</http-method> <http-method>POST</http-method> <http-method>PUT</http-method>
+		</web-resource-collection> <auth-constraint> <role-name>tomcat</role-name>
+		<role-name>role1</role-name> </auth-constraint> </security-constraint> <login-config>
+		<auth-method>FORM</auth-method> <realm-name>Example Form-Based Authentication Area</realm-name>
+		<form-login-config> <form-login-page>/login.jsp</form-login-page>
+		<form-error-page>/login_error.jsp</form-error-page> </form-login-config> </login-config>
 	-->
-    <!-- 
-    The BlueXML modifications to the original web.xml are:
-    - replace the Chiba XFormsFilter filter with the XFormsFilter in bluexml package
-    - add filter and filter-mapping for the CAS filter in package controller.cas.CASFilter
-    - replace "<url-pattern>/forms/*</url-pattern>" with "<servlet-name>BlueXFormsServlet</servlet-name>" in the filter-mapping for XFormsFilter
-    - add NavigationSessionListener as a listener
-    - add servlets and their servlet-mapping: BlueXFormsServlet, FileImageServlet, CreateServlet, ReadServlet, UpdateServlet, DeleteServlet, JsApiServlet
-    - replace index.html with index.jsp as welcome file
-    - set a session timeout
-     -->
+	<!--
+		The BlueXML modifications to the original web.xml are: - replace the Chiba XFormsFilter filter
+		with the XFormsFilter in bluexml package - add filter and filter-mapping for the CAS filter in
+		package controller.cas.CASFilter - replace "<url-pattern>/forms/*</url-pattern>" with
+		"<servlet-name>BlueXFormsServlet</servlet-name>" in the filter-mapping for XFormsFilter - add
+		NavigationSessionListener as a listener - add servlets and their servlet-mapping:
+		BlueXFormsServlet, FileImageServlet, CreateServlet, ReadServlet, UpdateServlet, DeleteServlet,
+		JsApiServlet - replace index.html with index.jsp as welcome file - set a session timeout
+	-->
 </web-app>
