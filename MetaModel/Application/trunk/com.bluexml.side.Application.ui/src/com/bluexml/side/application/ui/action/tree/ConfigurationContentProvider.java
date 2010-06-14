@@ -158,6 +158,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		// Now we hide branches of the tree without generator or deployer leaf
 		cleanupTree(rootSet);
 		initializeFromKey();
+//		printTree();
 
 	}
 
@@ -389,19 +390,19 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		for (TreeNode mm : metamodelSet.values()) {
 			printTree_(mm, 0);
 		}
-		System.err.println("Tech");
-		for (TreeNode mm : technologySet.values()) {
-			printTree_(mm, 0);
-		}
-		System.err.println("technologyVersion");
-		for (TreeNode mm : technologyVersionSet.values()) {
-			printTree_(mm, 0);
-		}
-
-		System.err.println("generator");
-		for (TreeNode mm : generatorSet.values()) {
-			printTree_(mm, 0);
-		}
+//		System.err.println("Tech");
+//		for (TreeNode mm : technologySet.values()) {
+//			printTree_(mm, 0);
+//		}
+//		System.err.println("technologyVersion");
+//		for (TreeNode mm : technologyVersionSet.values()) {
+//			printTree_(mm, 0);
+//		}
+//
+//		System.err.println("generator");
+//		for (TreeNode mm : generatorSet.values()) {
+//			printTree_(mm, 0);
+//		}
 
 	}
 
