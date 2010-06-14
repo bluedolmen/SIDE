@@ -18,32 +18,32 @@
       <import plugin="com.bluexml.side.Util.libs"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="com.bluexml.side.Util.security"/>
+      <import plugin="com.bluexml.side.Util.log"/>
       <import plugin="com.bluexml.side.Application"/>
+      <import plugin="com.bluexml.side.Util.componentMonitor"/>
+      <import plugin="com.bluexml.side.Util.deployer"/>
       <import plugin="org.eclipse.emf"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.topcased.modeler"/>
+      <import plugin="org.topcased.modeler.export"/>
       <import plugin="org.eclipse.ui"/>
+      <import plugin="com.bluexml.side.Util.dependencies"/>
       <import plugin="fr.obeo.acceleo.chain"/>
       <import plugin="fr.obeo.acceleo.gen"/>
       <import plugin="com.bluexml.side.Util.generator"/>
       <import plugin="com.bluexml.side.Common"/>
       <import plugin="com.bluexml.side.Util.ecore"/>
       <import plugin="com.bluexml.side.Util.model.merge"/>
+      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.swt"/>
       <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="org.eclipse.emf.common"/>
-      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
-      <import plugin="org.eclipse.swt"/>
-      <import plugin="com.bluexml.side.Util.log"/>
-      <import plugin="com.bluexml.side.Util.componentMonitor"/>
-      <import plugin="com.bluexml.side.Util.deployer"/>
-      <import plugin="org.topcased.modeler"/>
-      <import plugin="org.topcased.modeler.export"/>
-      <import plugin="com.bluexml.side.Form.generator.xforms.maven"/>
-      <import plugin="com.bluexml.side.Util.dependencies"/>
-      <import plugin="com.bluexml.side.Application"/>
       <import plugin="org.eclipse.ui.forms"/>
-      <import plugin="com.bluexml.side.Common"/>
+      <import plugin="com.bluexml.side.Requirements"/>
+      <import plugin="org.apache.ant"/>
+      <import plugin="com.bluexml.side.Util.feedback"/>
    </requires>
 
    <plugin
