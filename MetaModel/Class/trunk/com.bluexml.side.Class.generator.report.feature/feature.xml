@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Class.generator.report.feature" label="SIDE Birt Report Generator" version="1.0.34.v17780-20100608" provider-name="BlueXML">
+<feature id="com.bluexml.side.Class.generator.report.feature" label="SIDE Birt Report Generator" version="1.0.35.v18019-20100614" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of data models on Birt and Alfresco for content type reporting.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -22,6 +22,6 @@
     <import plugin="com.bluexml.side.Util.componentMonitor" />
     <import plugin="com.bluexml.side.Util.log" />
   </requires>
-  <plugin id="com.bluexml.side.Class.generator.report" download-size="0" install-size="0" version="1.0.36.v17780-20100608" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.report" download-size="0" install-size="0" version="1.0.37.v18019-20100614" unpack="false" />
 </feature>
 
