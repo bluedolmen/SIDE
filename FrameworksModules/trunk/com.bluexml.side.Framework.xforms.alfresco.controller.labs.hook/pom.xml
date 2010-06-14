@@ -1,31 +1,31 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
->
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.bluexml</groupId>
-		<artifactId>superpom</artifactId>
-		<version>1.10</version>
-	</parent>
-	<groupId>com.bluexml.side.Framework.xforms.alfresco.controller.labs</groupId>
-	<artifactId>hook</artifactId>
-	<version>1.0.0</version>
-	<name>XForms Controller hook for SIDE Labs</name>
-	<inceptionYear>2009</inceptionYear>
-	<organization>
-		<name>BlueXML</name>
-		<url>http://www.bluexml.com/</url>
-	</organization>
-	<dependencies>
-		<dependency>
-			<groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
-			<artifactId>labs</artifactId>
-			<version>1.0.92</version>
-			<type>jar</type>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
-	<build>
-		<finalName>controller-${artifactId}</finalName>
-	</build>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.bluexml</groupId>
+    <artifactId>superpom</artifactId>
+    <version>1.10</version>
+  </parent>
+  <groupId>com.bluexml.side.Framework.xforms.alfresco.controller.labs</groupId>
+  <artifactId>hook</artifactId>
+  <version>1.0.1</version>
+  <name>XForms Controller hook for SIDE Labs</name>
+  <inceptionYear>2009</inceptionYear>
+  <organization>
+    <name>BlueXML</name>
+    <url>http://www.bluexml.com/</url>
+  </organization>
+  <dependencies>
+    <dependency>
+      <groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
+      <artifactId>labs</artifactId>
+      <version>1.0.93</version>
+      <type>jar</type>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>controller-${artifactId}</finalName>
+  </build>
 </project>
+
