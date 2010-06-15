@@ -99,6 +99,7 @@
 		<servlet-class>org.chiba.agent.web.servlet.ViewServlet</servlet-class>
 	</servlet>
 
+	<!-- BlueXML servlets -->
 	<servlet>
 		<servlet-name>BlueXFormsServlet</servlet-name>
 		<servlet-class>com.bluexml.xforms.controller.XFormsServlet</servlet-class>
@@ -124,6 +125,11 @@
 		<servlet-name>DeleteServlet</servlet-name>
 		<servlet-class>com.bluexml.xforms.servlets.DeleteServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>JavascriptApiServlet</servlet-name>
+		<servlet-class>com.bluexml.xforms.servlets.JsApiServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>BlueXFormsServlet</servlet-name>
 		<url-pattern>/xforms</url-pattern>
@@ -132,7 +138,6 @@
 		<servlet-name>FileImageServlet</servlet-name>
 		<url-pattern>/file</url-pattern>
 	</servlet-mapping>
-
 	<servlet-mapping>
 		<servlet-name>CreateServlet</servlet-name>
 		<url-pattern>/create</url-pattern>
@@ -149,10 +154,11 @@
 		<servlet-name>DeleteServlet</servlet-name>
 		<url-pattern>/delete</url-pattern>
 	</servlet-mapping>
-	<servlet>
+	<servlet-mapping>
 		<servlet-name>JavascriptApiServlet</servlet-name>
-		<servlet-class>com.bluexml.xforms.servlets.JsApiServlet</servlet-class>
-	</servlet>
+		<url-pattern>/js</url-pattern>
+	</servlet-mapping>
+	<!-- end of BlueXML servlets -->
 
 
 	<servlet-mapping>
