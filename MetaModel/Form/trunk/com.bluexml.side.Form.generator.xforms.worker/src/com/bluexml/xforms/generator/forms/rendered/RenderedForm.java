@@ -80,9 +80,12 @@ public class RenderedForm extends Rendered {
 		tabContainerScript.setText(stringBuffer.toString());
 		head.addContent(tabContainerScript);
 
+		addCustomJS(head);
+
 		addCSS(head, MsgId.INT_GEN_PLACEHOLDER_CONTEXT_PATH
 				+ "/resources/styles/xforms.generated.css");
 		addCSS(head, MsgId.INT_GEN_PLACEHOLDER_CONTEXT_PATH + "/resources/styles/custom.css");
+
 
 		xformsElement.addContent(head);
 		body = XFormsGenerator.createElement("body", XFormsGenerator.NAMESPACE_XHTML);
@@ -106,6 +109,25 @@ public class RenderedForm extends Rendered {
 		head.addContent(customCSS);
 	}
 
+	/**
+	 * Adds a link to the custom.js script file.
+	 * 
+	 * @param head
+	 *            the head element of the page
+	 */
+	private void addCustomJS(Element head) {
+		Element linkFile = XFormsGenerator.createElement("script", XFormsGenerator.NAMESPACE_XHTML);
+		linkFile.setAttribute("type", "text/javascript");
+		linkFile.setAttribute("src", "resources/scripts/custom.js");
+		head.addContent(linkFile);
+
+		Element execNow = XFormsGenerator.createElement("script", XFormsGenerator.NAMESPACE_XHTML);
+		execNow.setAttribute("type", "text/javascript");
+		String code="window.addEvent('domReady', side.init());";
+		execNow.setText(code);
+		head.addContent(execNow);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
