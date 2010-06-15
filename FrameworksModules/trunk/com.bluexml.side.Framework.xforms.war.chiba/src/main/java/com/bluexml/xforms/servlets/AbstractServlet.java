@@ -6,15 +6,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 
-import org.chiba.xml.dom.DOMUtil;
 import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
 
+import com.bluexml.side.form.utils.DOMUtil;
 import com.bluexml.xforms.controller.alfresco.AlfrescoController;
 import com.bluexml.xforms.controller.alfresco.AlfrescoTransaction;
 import com.bluexml.xforms.messages.MsgId;
@@ -42,21 +40,19 @@ public abstract class AbstractServlet extends HttpServlet {
 	protected static Transformer documentTransformer;
 	static {
 		try {
-			documentTransformer = TransformerFactory.newInstance()
-					.newTransformer();
+			documentTransformer = TransformerFactory.newInstance().newTransformer();
 			documentTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	protected AlfrescoTransaction createTransaction(
-			AlfrescoController controller, String userName) {
+	protected AlfrescoTransaction createTransaction(AlfrescoController controller, String userName) {
 		AlfrescoTransaction transaction = new AlfrescoTransaction(controller, userName);
-		
+
 		Map<String, String> simulatedParams = new HashMap<String, String>();
 		simulatedParams.put(MsgId.PARAM_USER_NAME.getText(), userName);
-		
+
 		transaction.setLogin(controller.getParamUserName(simulatedParams));
 		return transaction;
 	}
@@ -69,21 +65,16 @@ public abstract class AbstractServlet extends HttpServlet {
 	 * 
 	 * @return the document req
 	 * 
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws SAXException
-	 *             the SAX exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	protected Node getDocumentReq(HttpServletRequest req)
-			throws ParserConfigurationException, SAXException, IOException {
+	protected Node getDocumentReq(HttpServletRequest req) throws IOException {
 		Node node = null;
 		String dataNode = req.getParameter(DATA_NODE);
 		if (dataNode == null) {
-			node = DOMUtil.parseInputStream(req.getInputStream(), true, false);
+			node = DOMUtil.getDocumentFromStream(req.getInputStream());
 		} else {
-			node = DOMUtil.parseString(dataNode, true, false);
+			node = DOMUtil.getDocumentFromString(dataNode);
 		}
 		return node;
 	}
