@@ -61,7 +61,7 @@
     <plugin id="com.bluexml.side.Form.edit.ui" />
     <plugin id="com.bluexml.side.Form.editor" />
     <plugin id="com.bluexml.side.Form.generator.documentation" />
-    <plugin id="com.bluexml.side.Form.generator.xforms.chiba" />
+    <plugin id="com.bluexml.side.Form.generator.xforms.worker" />
     <plugin id="com.bluexml.side.Form.generator.xforms.maven" />
     <plugin id="com.bluexml.side.Integration.eclipse.branding" />
     <plugin id="com.bluexml.side.Integration.eclipse.builder" />

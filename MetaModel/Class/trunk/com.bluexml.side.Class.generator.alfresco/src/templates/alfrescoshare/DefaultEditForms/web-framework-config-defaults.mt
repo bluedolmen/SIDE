@@ -34,7 +34,7 @@ import templates.servicesTemplates.Common
 	            <!-- END default Alfresco form configuration (cm:content) -->
 	            
 	            <!-- START BlueXML custom form configuration (<%getContentType()%>) -->
-	            <%--getCustomBlueXMLFormConfiguration()--%>
+	            <%getCustomBlueXMLFormConfiguration()%>
 	            <!-- END BlueXML custom form configuration (<%getContentType()%>) -->
 	         </field-visibility>
 	      </form>
