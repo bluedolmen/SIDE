@@ -36,6 +36,7 @@ import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.Activator;
+import com.bluexml.side.application.ui.SWTResourceManager;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.Generate;
 import com.bluexml.side.util.componentmonitor.ComponentMonitor;
@@ -51,7 +52,7 @@ import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterf
 import com.bluexml.side.util.documentation.LogSave;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 import com.bluexml.side.util.libs.IFileHelper;
-import com.bluexml.side.util.security.preferences.SWTResourceManager;
+
 
 public class GeneratePopUp extends Dialog {
 
