@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
   <artifactId>labs</artifactId>
-  <version>1.0.93</version>
+  <version>1.0.94</version>
   <name>XForms controller</name>
   <description>This module provides controller allowing conversion to and from XForm XML and Alfresco custom webscript.
 		It uses generated files : forms and mapping</description>
@@ -40,7 +40,7 @@
     <dependency>
       <groupId>com.bluexml.side.Form</groupId>
       <artifactId>XFormsUtils</artifactId>
-      <version>1.0.3</version>
+      <version>1.0.4</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
