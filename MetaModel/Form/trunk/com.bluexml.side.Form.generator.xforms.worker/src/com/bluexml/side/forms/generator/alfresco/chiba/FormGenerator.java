@@ -160,6 +160,12 @@ public class FormGenerator extends AbstractGenerator {
 		IFile chibaPackage = wpp.buildPackage();
 		ArrayList<IFile> result = new ArrayList<IFile>();
 		result.add(chibaPackage);
+		
+		
+		
+		// add resources to match with package dependencies
+		addDependences();
+		
 		return result;
 	}
 
