@@ -8,7 +8,7 @@
           <generatorVersion class="com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator" description="Check this to generate a full deployable Alfresco package containing your generated advanced workflows.&lt;br&gt;The generated packages are standard Alfresco Module package which may be deployed in any Alfresco 3.x instance.&lt;br&gt;SIDE provides the necessary components to deploy these packages through the 'deployer' tab." id="com.bluexml.side.Workflow.generator.alfresco" version="SIDE Workflow Generator for Alfresco">
             <configurationParameter documentation="Set this value to the version of the generated AMPs, default value is '1.0'.&lt;br&gt;At Alfresco start, the version is displayed in the console and may easily be checked to ensure good production deployment." key="com.bluexml.side.Workflow.generator.alfresco.module.version" label="Workflow Module version" />
             <configurationParameter documentation="Set this value to the URL of the Alfresco instance on which have been generated and deployed new content types from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.33" versionMax="1.0.33" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.34" versionMax="1.0.34" />
           </generatorVersion>
         </technologyVersion>
       </technology>
