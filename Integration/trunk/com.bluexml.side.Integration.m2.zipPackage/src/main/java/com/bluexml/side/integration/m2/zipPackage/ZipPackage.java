@@ -3,6 +3,8 @@ package com.bluexml.side.integration.m2.zipPackage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.Map;
+import java.util.Properties;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -99,6 +101,13 @@ public class ZipPackage extends AbstractMojo {
 		logger.setOutputPrintStream(System.out);
 		project.addBuildListener(logger);
 
+		Properties props = getProject().getProperties();
+		getLog().info("Properties :"+getProject().getArtifact().getFile());
+		for (Map.Entry<Object, Object> iterable_element : props.entrySet()) {
+			getLog().info(iterable_element.getKey() + " : " + iterable_element.getValue());
+
+		}
+
 		project.setProperty("ant.file", getBuildFile().getAbsolutePath());
 		project.setUserProperty("module.version", getProject().getVersion());
 		project.setUserProperty("module.title", getProject().getName());
@@ -106,9 +115,9 @@ public class ZipPackage extends AbstractMojo {
 		project.setUserProperty("module.id", getProject().getArtifactId());
 		project.setUserProperty("baseDir", getProject().getBasedir().toString());
 		project.setBaseDir(getProject().getBasedir());
-		
+
 		ProjectHelper.configureProject(project, getBuildFile());
-		
+
 		try {
 			getLog().debug("launch ant script");
 			project.executeTarget("package");
@@ -150,7 +159,7 @@ public class ZipPackage extends AbstractMojo {
 		File custFile = new File(outputDirectory, archiveName);
 		getLog().debug("Artifact : " + custFile.getName());
 		project.getArtifact().setFile(custFile);
-		getLog().debug("Artifact Type : "+project.getArtifact().getType());
+		getLog().debug("Artifact Type : " + project.getArtifact().getType());
 		// create the classes to be attached if necessary
 		getLog().debug("attachement ? : " + isAttachClasses());
 		if (isAttachClasses()) {
