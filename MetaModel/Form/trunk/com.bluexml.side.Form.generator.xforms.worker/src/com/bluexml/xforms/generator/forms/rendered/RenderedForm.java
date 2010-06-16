@@ -86,7 +86,6 @@ public class RenderedForm extends Rendered {
 				+ "/resources/styles/xforms.generated.css");
 		addCSS(head, MsgId.INT_GEN_PLACEHOLDER_CONTEXT_PATH + "/resources/styles/custom.css");
 
-
 		xformsElement.addContent(head);
 		body = XFormsGenerator.createElement("body", XFormsGenerator.NAMESPACE_XHTML);
 		xformsElement.addContent(body);
@@ -123,11 +122,18 @@ public class RenderedForm extends Rendered {
 
 		Element execNow = XFormsGenerator.createElement("script", XFormsGenerator.NAMESPACE_XHTML);
 		execNow.setAttribute("type", "text/javascript");
-		String code="window.addEvent('domReady', side.init());";
-		execNow.setText(code);
+		StringBuffer code = new StringBuffer("\n");
+		code.append("if (window.addEventListener) { ");
+		code.append("window.addEventListener('load', side.init, false); ");
+		code.append("} else if (document.addEventListener) { ");
+		code.append("document.addEventListener('load', side.init, false); ");
+		code.append("} else if (window.attachEvent) { ");
+		code.append("window.attachEvent('onLoad', side.init); ");
+		code.append("}");
+		execNow.setText(code.toString());
 		head.addContent(execNow);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
