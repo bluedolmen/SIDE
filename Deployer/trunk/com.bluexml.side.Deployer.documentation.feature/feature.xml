@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Deployer.documentation.feature" label="SIDE Documentation Deployer" version="1.0.36.v18019-20100614" provider-name="BlueXML">
+<feature id="com.bluexml.side.Deployer.documentation.feature" label="SIDE Documentation Deployer" version="1.0.37.v18194-20100616" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the deployment of generated or developed extensions on specialized
 frameworks like Alfresco. This feature allows to deploy the generated Documentation of models.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <plugin id="com.bluexml.side.Deployer.documentation" download-size="0" install-size="0" version="1.0.31.v18019-20100614" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.documentation" download-size="0" install-size="0" version="1.0.32.v18194-20100616" unpack="false" />
 </feature>
 
