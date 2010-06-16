@@ -16,9 +16,9 @@
 		Those classes delegate work to controller then.</description>
   <dependencies>
     <dependency>
-      <groupId>com.bluexml.side.Framework.xforms.controller</groupId>
-      <artifactId>alfrescoEnterprise</artifactId>
-      <version>1.0.93</version>
+      <groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
+      <artifactId>labs</artifactId>
+      <version>1.0.94</version>
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
