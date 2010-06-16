@@ -17,8 +17,8 @@
   <dependencies>
     <dependency>
       <groupId>com.bluexml.side.Framework.xforms.controller</groupId>
-      <artifactId>alfrescoEntreprise</artifactId>
-      <version>1.0.92</version>
+      <artifactId>alfrescoEnterprise</artifactId>
+      <version>1.0.93</version>
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
