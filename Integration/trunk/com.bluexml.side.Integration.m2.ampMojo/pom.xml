@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Integration.m2</groupId>
   <artifactId>ampMojo</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>1.0.11</version>
+  <version>1.0.12</version>
   <name>amp-mojo Maven Mojo</name>
   <url>http://maven.apache.org</url>
   <parent>
