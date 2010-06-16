@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form:WorkflowFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_rTUAQFg_Ed-RycqdLzm2Bg" description="licenseKeyQuery" name="licenseKeyQuery">
+  <forms xsi:type="form:FormWorkflow" xmi:id="_muv5cFzgEd-_wPWcFZV8HQ" description="" label="start" id="licenseQuery_start">
+    <ref href="../workflow/licenseKeyManagement.workflow#_1imWcFeJEd-bCtLOdKek7g"/>
+    <children xsi:type="form:CharField" xmi:id="_muv5cVzgEd-_wPWcFZV8HQ" label="typeEvaluationKey" id="typeEvaluationKey">
+      <ref href="../workflow/licenseKeyManagement.workflow#_nCR4gFm2Ed-jOfBZTg8wXw"/>
+    </children>
+    <children xsi:type="form:CharField" xmi:id="_A6UIgG12Ed-vEaearzKnog" label="nbPreviousQueries" id="nbPreviousQueries">
+      <ref href="../workflow/licenseKeyManagement.workflow#_9DpOYW10Ed-vEaearzKnog"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_muv5clzgEd-_wPWcFZV8HQ" label="goAskEvaluationKey" id="goAskEvaluationKey">
+      <ref href="../workflow/licenseKeyManagement.workflow#_MHIgsFm2Ed-jOfBZTg8wXw"/>
+    </children>
+    <DataForm href="licenseKeyManagement.form#_i8WW0GMrEd-_bfTjU4gzow"/>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_muv5c1zgEd-_wPWcFZV8HQ" label="validateKeyQueryPrototype" id="licenseQuery_validateKeyQueryPrototype">
+    <ref href="../workflow/licenseKeyManagement.workflow#_TTI0YFm2Ed-jOfBZTg8wXw"/>
+    <children xsi:type="form:CharField" xmi:id="_muv5dFzgEd-_wPWcFZV8HQ" label="validatedKeyQueryPrototype" id="validatedKeyQueryPrototype">
+      <ref href="../workflow/licenseKeyManagement.workflow#_tIo9UFm3Ed-jOfBZTg8wXw"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_muv5dVzgEd-_wPWcFZV8HQ" label="goDecideGenerateKeyPrototype" id="goDecideGenerateKeyPrototype">
+      <ref href="../workflow/licenseKeyManagement.workflow#_gShxEFm4Ed-jOfBZTg8wXw"/>
+    </children>
+  </forms>
+  <forms xsi:type="form:FormWorkflow" xmi:id="_muv5dlzgEd-_wPWcFZV8HQ" label="validateKeyQuerySIDE" id="licenseQuery_validateKeyQuerySIDE">
+    <ref href="../workflow/licenseKeyManagement.workflow#_OgJxEFm3Ed-jOfBZTg8wXw"/>
+    <children xsi:type="form:CharField" xmi:id="_muv5d1zgEd-_wPWcFZV8HQ" label="validatedKeyQuerySIDE" id="validatedKeyQuerySIDE">
+      <ref href="../workflow/licenseKeyManagement.workflow#_vViSsFm3Ed-jOfBZTg8wXw"/>
+    </children>
+    <children xsi:type="form:ActionField" xmi:id="_muv5eFzgEd-_wPWcFZV8HQ" label="goDecideGenerateKeySIDE" id="goDecideGenerateKeySIDE">
+      <ref href="../workflow/licenseKeyManagement.workflow#_Ge364Fm6Ed-jOfBZTg8wXw"/>
+    </children>
+  </forms>
+  <linked_process href="../workflow/licenseKeyManagement.workflow#_SL3msFLZEd-i6vpttZrofQ"/>
+</form:WorkflowFormCollection>

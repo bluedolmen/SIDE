@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<root>
+	<mail_config>
+		<protocol>smtp</protocol>
+		<host>smtp.gmail.com</host>
+		<port>587</port>
+		<username>loiselc@gmail.com</username>
+		<password>Clifford</password>
+		<authentication>true</authentication>
+		<templates_path>/com/bluexml/side/util/security/license/resources/templates/</templates_path>
+	</mail_config>
+</root>

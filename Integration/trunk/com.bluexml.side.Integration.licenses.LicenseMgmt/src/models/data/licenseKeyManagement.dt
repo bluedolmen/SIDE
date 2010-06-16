@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_SJYTYFLZEd-i6vpttZrofQ" name="licenseKeyManagement">
+  <packageSet xsi:type="clazz:ClassPackage" xmi:id="_SJYTYVLZEd-i6vpttZrofQ" name="com">
+    <packageSet xsi:type="clazz:ClassPackage" xmi:id="_SJYTYlLZEd-i6vpttZrofQ" name="bluexml">
+      <packageSet xsi:type="clazz:ClassPackage" xmi:id="_SJYTY1LZEd-i6vpttZrofQ" name="side">
+        <packageSet xsi:type="clazz:ClassPackage" xmi:id="_SJYTZFLZEd-i6vpttZrofQ" name="util">
+          <packageSet xsi:type="clazz:ClassPackage" xmi:id="_SJYTZVLZEd-i6vpttZrofQ" name="security">
+            <packageSet xsi:type="clazz:ClassPackage" xmi:id="_SJYTZlLZEd-i6vpttZrofQ" name="license">
+              <classSet xmi:id="_1QuQkFLZEd-i6vpttZrofQ" documentation="" description="license" name="license" title="license">
+                <attributes xmi:id="_I6iv0FLaEd-i6vpttZrofQ" documentation="" description="licenseKey" name="licenseKey" title="licenseKey">
+                  <metainfo xmi:id="_OmuaEFLbEd-i6vpttZrofQ" key="required" value="True"/>
+                </attributes>
+                <attributes xmi:id="_JOOg0FLaEd-i6vpttZrofQ" documentation="" description="licenseIssueDate" name="licenseIssueDate" title="licenseIssueDate" typ="Date"/>
+                <attributes xmi:id="_Jh0yQFLaEd-i6vpttZrofQ" documentation="" description="licenseDuration" name="licenseDuration" title="licenseDuration"/>
+                <attributes xmi:id="_J9RYIFLaEd-i6vpttZrofQ" documentation="" description="licenseGenerators" name="licenseGenerators" title="licenseGenerators" valueList="_e8wmsGMpEd-_bfTjU4gzow">
+                  <metainfo xmi:id="_aLwvUGNJEd-_bfTjU4gzow" key="multiple" value="True"/>
+                  <metainfo xmi:id="_aLxWYGNJEd-_bfTjU4gzow" key="required" value="True"/>
+                </attributes>
+                <attributes xmi:id="_rCTl8VwHEd-dfIgB_h9Owg" documentation="" description="licenseType" name="licenseType" title="licenseType" valueList="_xPPCQFwHEd-dfIgB_h9Owg">
+                  <metainfo xmi:id="_6n8eEFwHEd-dfIgB_h9Owg" key="required" value="True"/>
+                </attributes>
+              </classSet>
+              <classSet xmi:id="_LrKPoGMoEd-_bfTjU4gzow" documentation="" description="query" name="query" title="query">
+                <attributes xmi:id="_QQ7g4GMoEd-_bfTjU4gzow" documentation="" description="email" name="email" title="email">
+                  <metainfo xmi:id="_abmlIGMoEd-_bfTjU4gzow" key="email" value="True"/>
+                  <metainfo xmi:id="_abmlIWMoEd-_bfTjU4gzow" key="required" value="True"/>
+                </attributes>
+                <attributes xmi:id="_QmVwMGMoEd-_bfTjU4gzow" documentation="" description="codesComp" name="codesComp" title="codesComp" valueList="_e8wmsGMpEd-_bfTjU4gzow">
+                  <metainfo xmi:id="_ccY-4GMtEd-_bfTjU4gzow" key="multiple" value="True"/>
+                  <metainfo xmi:id="_ccZl8GMtEd-_bfTjU4gzow" key="required" value="True"/>
+                </attributes>
+                <attributes xmi:id="_SlEGsGMoEd-_bfTjU4gzow" documentation="" description="idCompte" name="idCompte" title="idCompte">
+                  <metainfo xmi:id="_1dihcGMoEd-_bfTjU4gzow" key="required" value="True"/>
+                </attributes>
+                <attributes xmi:id="_vwQOgGMoEd-_bfTjU4gzow" documentation="" description="idMach" name="idMach" title="idMach">
+                  <metainfo xmi:id="_31lW4GMoEd-_bfTjU4gzow" key="required" value="True"/>
+                </attributes>
+                <attributes xmi:id="_wGdIAGMoEd-_bfTjU4gzow" documentation="" description="format" name="format" title="format" valueList="_8LYScGMoEd-_bfTjU4gzow"/>
+              </classSet>
+              <associationSet xmi:id="_KfIE4GMpEd-_bfTjU4gzow" documentation="" description="" name="associated" title="associated">
+                <firstEnd xmi:id="_KfIr8GMpEd-_bfTjU4gzow" name="" title="" navigable="true" linkedClass="_LrKPoGMoEd-_bfTjU4gzow"/>
+                <secondEnd xmi:id="_KfIr8WMpEd-_bfTjU4gzow" name="" title="" linkedClass="_1QuQkFLZEd-i6vpttZrofQ"/>
+              </associationSet>
+              <enumerationSet xmi:id="_xPPCQFwHEd-dfIgB_h9Owg" name="keyTypeList">
+                <literals xmi:id="_wGrYYGNSEd-_bfTjU4gzow" value="Prototype" name="Prototype"/>
+                <literals xmi:id="_wGrYYWNSEd-_bfTjU4gzow" value="SIDE" name="SIDE"/>
+              </enumerationSet>
+              <enumerationSet xmi:id="_8LYScGMoEd-_bfTjU4gzow" name="formatList">
+                <literals xmi:id="_WIyCEGNJEd-_bfTjU4gzow" value="html" name="html"/>
+                <literals xmi:id="_WIyCEWNJEd-_bfTjU4gzow" value="plain" name="plain"/>
+              </enumerationSet>
+              <enumerationSet xmi:id="_e8wmsGMpEd-_bfTjU4gzow" name="codesCompList">
+                <literals xmi:id="_ICzGwG15Ed-vEaearzKnog" value="CODE_GED_G_C_ALFRESCO_3" name="Alfresco Content Model Component"/>
+                <literals xmi:id="_ICzGwW15Ed-vEaearzKnog" value="CODE_GED_G_W_ALFRESCO_3" name="Alfresco Workflow Model Component"/>
+                <literals xmi:id="_ICzGwm15Ed-vEaearzKnog" value="CODE_GED_G_P_ALFRESCO_SHARE_30" name="Alfresco Share Portal Model Component"/>
+                <literals xmi:id="_ICzGw215Ed-vEaearzKnog" value="CODE_GED_G_P_LIFERAY_511" name="Liferay Portal Model Component"/>
+                <literals xmi:id="_ICzGxG15Ed-vEaearzKnog" value="CODE_GED_G_F_CHIBA" name="XForms Model Component"/>
+                <literals xmi:id="_ICzGxW15Ed-vEaearzKnog" value="CODE_GED_G_C_FACETMAP_2" name="Facetmap Model Component"/>
+                <literals xmi:id="_ICzGxm15Ed-vEaearzKnog" value="CODE_GED_G_V_ALFRESCO_3" name="Alfresco View Model Component"/>
+                <literals xmi:id="_ICzGx215Ed-vEaearzKnog" value="CODE_GED_G_C_REPORT" name="Alfresco Report Component"/>
+              </enumerationSet>
+            </packageSet>
+          </packageSet>
+        </packageSet>
+      </packageSet>
+    </packageSet>
+  </packageSet>
+</clazz:Model>
