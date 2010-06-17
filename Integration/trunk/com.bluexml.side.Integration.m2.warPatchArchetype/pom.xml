@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side.Integration.m2</groupId>
   <artifactId>warPatchArchetype</artifactId>
-  <version>1.0.26</version>
+  <version>1.0.27</version>
   <name>Archetype - com.bluexml.side.Integration.maven2WarPatchArchetype</name>
   <description>this archetype can be use to create new warPatch project</description>
   <url>http://www.bluexml.com</url>
