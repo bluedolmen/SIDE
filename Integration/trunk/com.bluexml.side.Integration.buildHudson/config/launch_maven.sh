@@ -14,17 +14,19 @@ fi
 if [ -f launch_maven_subProcess.sh ]; then
 	chmod +x launch_maven_subProcess.sh
 	mkdir -p $WORKSPACE/../buildAuto/Ankle/maven_mojo_workspace
-	chmod -R 755 $WORKSPACE/../buildAuto/Ankle/maven_mojo_workspace
 	cp -R $REPOSITORY_COPY/S-IDE/Integration/trunk/* $WORKSPACE/../buildAuto/Ankle/maven_mojo_workspace
+	chmod -R 755 $WORKSPACE/../buildAuto/Ankle/maven_mojo_workspace	
 	
 	echo "deploy mojos"
 	./launch_maven_subProcess.sh $WORKSPACE maven_mojo_workspace
 	
 	mkdir -p $WORKSPACE/../buildAuto/Ankle/maven_workspace
-	chmod -R 755 $WORKSPACE/../buildAuto/Ankle/maven_workspace
+
 	cp -R $REPOSITORY_COPY/S-IDE/FrameworksModules/trunk/* $WORKSPACE/../buildAuto/Ankle/maven_workspace
 	cp -R $REPOSITORY_COPY/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form.XFormsUtils $WORKSPACE/../buildAuto/Ankle/maven_workspace
-	echo "deploy other m2 projects"
+	chmod -R 755 $WORKSPACE/../buildAuto/Ankle/maven_workspace
+	
+	echo "deploy other m2 projects"	
 	./launch_maven_subProcess.sh $WORKSPACE maven_workspace
 
 else
