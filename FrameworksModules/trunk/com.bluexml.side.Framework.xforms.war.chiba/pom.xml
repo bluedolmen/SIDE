@@ -20,8 +20,9 @@
 		<dependency>
 			<groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
 			<artifactId>labs</artifactId>
-			<version>1.0.94</version>
+			<version>1.0.95</version>
 			<type>jar</type>
+			<classifier>classes</classifier>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
