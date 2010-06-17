@@ -34,7 +34,7 @@
   In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
-  <version>1.0.19</version>
+  <version>1.0.20</version>
   <description>This module defines the base type of the generated SIDE models</description>
   <repositories />
   <pluginRepositories />
