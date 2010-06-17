@@ -5,8 +5,9 @@
 
 	<property name="classesFolder" value="${extensionFolder}/classes" />
 	<property name="dependencies" value="${extensionFolder}/dependency" />
-	<property name="module.jar" value="${extensionFolder}/${module.id}-${module.version}-classes.jar" />
-	<property name="module.zip" value="${extensionFolder}/${module.id}-${module.version}.zip" />
+	
+	<property name="module.jar" value="${extensionFolder}/${finalName}-classes.jar" />
+	<property name="module.zip" value="${extensionFolder}/${finalName}.zip" />
 
 
 

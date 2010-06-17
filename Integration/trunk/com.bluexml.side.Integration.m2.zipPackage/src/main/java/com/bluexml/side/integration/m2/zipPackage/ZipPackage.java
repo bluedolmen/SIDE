@@ -49,12 +49,12 @@ public class ZipPackage extends AbstractMojo {
 	private String mOutputDirectory;
 
 	/**
-	 * The name of the generated AMP.
+	 * The name of the generated package.
 	 * 
 	 * @parameter expression="${project.build.finalName}"
 	 * @required
 	 */
-	private String mAmpName;
+	private String mFinalName;
 	/**
 	 * The maven project.
 	 * 
@@ -114,6 +114,7 @@ public class ZipPackage extends AbstractMojo {
 		project.setUserProperty("module.description", getProject().getDescription());
 		project.setUserProperty("module.id", getProject().getArtifactId());
 		project.setUserProperty("baseDir", getProject().getBasedir().toString());
+		project.setUserProperty("finalName", getFinalName());
 		project.setBaseDir(getProject().getBasedir());
 
 		ProjectHelper.configureProject(project, getBuildFile());
@@ -180,7 +181,7 @@ public class ZipPackage extends AbstractMojo {
 	}
 
 	protected File getTargetClassesFile() {
-		File targetFile = getTargetFile(new File(getOutputDirectory()), getAmpName(), getClassesClassifier(), "jar");
+		File targetFile = getTargetFile(new File(getOutputDirectory()), getFinalName(), getClassesClassifier(), "jar");
 		return targetFile;
 	}
 
@@ -211,14 +212,14 @@ public class ZipPackage extends AbstractMojo {
 	}
 
 	/**
-	 * get the the internal value for the <code>ampName</code> property.
+	 * get the the internal value for the <code>finalName</code> property.
 	 * <p>
-	 * The <code>ampName</code> property
+	 * The <code>finalName</code> property
 	 * 
-	 * @return Returns the internal value for the ampName property.
+	 * @return Returns the internal value for the finalName property.
 	 */
-	protected String getAmpName() {
-		return this.mAmpName;
+	protected String getFinalName() {
+		return this.mFinalName;
 	}
 
 	protected static File getTargetFile(File basedir, String finalName, String classifier, String type) {

@@ -168,7 +168,7 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		<!-- finalName>xforms.controller-${project.version}</finalName> -->
+		<finalName>xforms.controller-${project.version}</finalName>
 		<plugins>
 			<!--			<plugin>-->
 			<!--				<groupId>org.apache.maven.plugins</groupId>-->
