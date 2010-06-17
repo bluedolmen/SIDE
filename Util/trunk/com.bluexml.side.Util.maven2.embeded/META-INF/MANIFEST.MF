@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Maven2 Embeded
 Bundle-SymbolicName: com.bluexml.side.Util.maven2.embeded;singleton:=true
-Bundle-Version: 1.0.29.v18194-20100616
+Bundle-Version: 1.0.30.v18401-20100617
 Bundle-Vendor: BlueXML
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.codehaus.plexus.component.factory,org.apache.maven
