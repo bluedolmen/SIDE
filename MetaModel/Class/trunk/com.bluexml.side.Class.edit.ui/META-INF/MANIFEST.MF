@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ui Plug-in
 Bundle-SymbolicName: com.bluexml.side.Class.edit.ui;singleton:=true
-Bundle-Version: 1.0.19.v18194-20100616
+Bundle-Version: 1.0.20.v18401-20100617
 Bundle-Activator: com.bluexml.side.clazz.edit.ui.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.gmf.runtime.emf.core,
