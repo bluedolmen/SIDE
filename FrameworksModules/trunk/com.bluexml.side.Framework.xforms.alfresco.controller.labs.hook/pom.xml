@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.bluexml.side.Framework.xforms.alfresco.controller.labs</groupId>
   <artifactId>hook</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <name>XForms Controller hook for SIDE Labs</name>
   <inceptionYear>2009</inceptionYear>
   <organization>
@@ -19,7 +19,7 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.xforms.alfresco.controller</groupId>
       <artifactId>labs</artifactId>
-      <version>1.0.95</version>
+      <version>1.0.96</version>
       <classifier>classes</classifier>
       <scope>provided</scope>
     </dependency>
