@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Deployer.report.feature" label="SIDE Birt Report Deployer" version="1.0.29.v18194-20100616" provider-name="BlueXML">
+<feature id="com.bluexml.side.Deployer.report.feature" label="SIDE Birt Report Deployer" version="1.0.30.v18401-20100617" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the deployment of generated or developed extensions on specialized
 frameworks like Alfresco. This feature allows to deploy extensions on Birt instances.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
@@ -15,6 +15,6 @@ frameworks like Alfresco. This feature allows to deploy extensions on Birt insta
     <import plugin="com.bluexml.side.Util.log" />
     <import plugin="com.bluexml.side.Util.deployer.war" />
   </requires>
-  <plugin id="com.bluexml.side.Deployer.report" download-size="0" install-size="0" version="1.0.27.v18194-20100616" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.report" download-size="0" install-size="0" version="1.0.28.v18401-20100617" unpack="false" />
 </feature>
 
