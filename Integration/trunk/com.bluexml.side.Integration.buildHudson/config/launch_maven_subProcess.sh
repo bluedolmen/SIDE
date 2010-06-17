@@ -29,7 +29,7 @@ for s in `ls -d */ `; do
 done
 echo "superpom patched"
 echo "Maven deploy start"
-mvn clean deploy -e -P public > tee log_maven.log
+mvn clean deploy -e -P public > log_maven.log
 echo "Maven deploy done"
 
 sleep 5m
