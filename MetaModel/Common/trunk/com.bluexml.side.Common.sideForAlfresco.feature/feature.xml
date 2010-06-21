@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.sideForAlfresco.feature" label="SIDE for Alfresco" version="1.0.169.v18583-20100619" provider-name="blueXML" plugin="com.bluexml.side.Integration.eclipse.branding">
+<feature id="com.bluexml.side.Common.sideForAlfresco.feature" label="SIDE for Alfresco" version="1.0.170.v18610-20100621" provider-name="blueXML" plugin="com.bluexml.side.Integration.eclipse.branding">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature gathers common tools for SIDE modelers.</description>
   <copyright url="http://www.bluexml.com">(c) Copyright BlueXML. 2007, 2009.  All rights reserved.</copyright>
   <license url="http://www.bluexml.com">GNU GENERAL PUBLIC LICENSE
@@ -635,6 +635,6 @@ copy of the Program in return for a fee.
   <includes id="com.bluexml.side.View.generator.alfresco.feature" version="1.0.43.v18401-20100617" />
   <includes id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.67.v18401-20100617" />
   <includes id="com.bluexml.side.Workflow.generator.alfresco.feature" version="1.0.70.v18401-20100617" />
-  <includes id="com.bluexml.side.Util.dependencies.repository.feature" version="1.0.11.v18583-20100619" />
+  <includes id="com.bluexml.side.Util.dependencies.repository.feature" version="1.0.12.v18610-20100621" />
 </feature>
 
