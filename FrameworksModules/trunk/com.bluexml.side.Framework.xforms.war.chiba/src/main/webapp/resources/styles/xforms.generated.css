@@ -111,9 +111,14 @@ div.upload div {
 /*
  * SELECTION WIDGETS
  */
-div.side_select_widget .invalid > .alert {
-	margin-left: 42px;
-	margin-top: 40px;
+div.side_select_widget .invalid>.alert {
+	margin-left: 32px;
+	margin-top: 48px;
+}
+
+div.side_select_widget div {
+	/* the many divs nested in the selection widget leave too much blank space*/
+	padding: 0px;
 }
 
 div.side_select_widget,div.side_select_search_zone {
@@ -121,7 +126,7 @@ div.side_select_widget,div.side_select_search_zone {
 }
 
 div.side_select_widget .submit { /* the create button*/
-	margin-left: 195px;
+	margin-left: 190px;
 }
 
 div.side_select_list select {
@@ -130,13 +135,22 @@ div.side_select_list select {
 	overflow: -moz-scrollbars-horizontal;
 }
 
-div.side_select_selected_items,div.side_select_selected_item {
+div.side_select_selected_items,div.side_select_selected_item,div.side_input_multiple_items
+	{
 	border-style: solid;
 	border-width: 1px;
 	border-color: #DDD;
 	min-width: 150px;
-	margin-top: 12px;
+	min-height: 1em;
 	margin-left: 10px;
+	margin-right: 10px;
+}
+
+div.side_select_widget div.side_select_output_zone,div.side_select_widget div.side_select_search_zone
+	{
+	/* for some reason, this is needed to have the label and input of the search zone on the same line*/
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 div.side_select_selected_items label {
@@ -161,6 +175,49 @@ div.side_select_output_zone label {
 
 div.side_select_selected_item label {
 	width: auto;
+}
+
+div.side_select_widget div.side_select_trigger_img {
+	margin-left: 5px;
+}
+
+div.side_select_widget div.side_select_trigger_img img {
+	/* adds some space between the vertically stacked icons*/
+	margin-bottom: 8px;
+}
+
+/*
+ * WIDGETS FOR FIELDS WITH THE 'MULTIPLE' PROPERTY
+ */
+div.side_input_multiple .invalid>.alert {
+	margin-left: 230px;
+}
+
+div.side_input_multiple_items {
+	margin-top: 4px;
+	margin-left: 0px;
+}
+
+div.side_input_multiple_items,div.side_input_multiple_items div {
+	padding: 0px;
+}
+
+div.side_input_multiple_items label {
+	display: none;
+}
+
+div.side_input_multiple img {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+div.side_input_multiple div.xformstdclear {
+	padding: 0px;
+}
+
+div.side_multiple_enum select {
+	min-height: 5em;
+	min-width: 150px;
 }
 
 /*
@@ -200,6 +257,11 @@ div.side_ro_textarea span.mediatype-text-html {
 	background: #A7BCFC;
 }
 
+.side_class_form_title>.group-label {
+	display: none;
+	
+}
+
 .side_form_title>.group-label {
 	background: none repeat scroll 0 0 #E3EAEC;
 	border: medium none;
@@ -229,6 +291,7 @@ a.side_jsp_using:link,a.side_jsp_footer:link {
 }
 
 .side_horizontal_line {
+	
 }
 
 #side_status_bar {
