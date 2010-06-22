@@ -209,10 +209,10 @@ public class Builder {
 		// write header
 		String header = "#!/bin/bash\n";
 		header += "if [ $# -eq 1 ]; then" + "\n";
-		header += "  REPOSITORY=$1" + "\n";
+		header += "  MAVENREPO=$1" + "\n";
 		header += "else" + "\n";
-		header += "  echo \"Usage: patcher.sh REPOSITORY\"" + "\n";
-		header += "  echo \"       with REPOSITORY = maven.repo.local absolute path\"" + "\n";
+		header += "  echo \"Usage: patcher.sh MAVENREPO\"" + "\n";
+		header += "  echo \"       with MAVENREPO = maven.repo.local absolute path\"" + "\n";
 		header += "  exit -2" + "\n";
 		header += "fi" + "\n";
 		fw.write(header);
