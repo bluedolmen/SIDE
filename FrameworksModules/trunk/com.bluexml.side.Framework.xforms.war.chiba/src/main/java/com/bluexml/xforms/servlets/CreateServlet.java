@@ -59,7 +59,7 @@ public class CreateServlet extends AbstractServlet {
 			String userName = req.getParameter(MsgId.PARAM_USER_NAME.getText());
 			AlfrescoTransaction transaction = createTransaction(controller, userName);
 			PersistFormResultBean resultBean = controller.getMappingAgent().persistClass(
-					transaction, node, true);
+					transaction, node, true, null);
 			String result = resultBean.getResultStr();
 			transaction.executeBatch();
 			result = transaction.getIds().get(result);

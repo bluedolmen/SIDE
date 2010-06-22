@@ -58,7 +58,7 @@ public class UpdateServlet extends AbstractServlet {
 
 			String userName = req.getParameter(MsgId.PARAM_USER_NAME.getText());
 			AlfrescoTransaction transaction = createTransaction(controller, userName);
-			controller.persistClass(transaction, node, idAsServlet);
+			controller.persistClass(transaction, node, idAsServlet, null);
 			transaction.executeBatch();
 		} catch (Exception e) {
 			throw new ServletException(e);
