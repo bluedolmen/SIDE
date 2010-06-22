@@ -105,8 +105,8 @@ public class XFormsGenerator extends AbstractGenerator {
 	public static final String IMG_UP = "resources/images/up.png";
 
 	// ** #1530
-	public static final String IMG_SELECT = IMG_ADD;
-	public static final String IMG_CLEAR = IMG_REMOVE;
+	public static final String IMG_SELECT = "resources/images/select.png";
+	public static final String IMG_CLEAR = "resources/images/clear.png";
 	// **
 
 	/** The sax builder. */
@@ -1144,7 +1144,9 @@ public class XFormsGenerator extends AbstractGenerator {
 		// if form class, wrap the renderable in a group
 		Renderable realRenderable = renderable;
 		if (formType == FormTypeRendered.formClass) {
-			realRenderable = new RenderableXGroup(renderable, title);
+			realRenderable = new RenderableXGroup(renderable, title, null);
+			realRenderable = new RenderableXGroup(realRenderable, "",
+					MsgId.INT_CSS_FORM_TITLE_CLASS.getText());
 		}
 
 		// if applicable, show the content upload field

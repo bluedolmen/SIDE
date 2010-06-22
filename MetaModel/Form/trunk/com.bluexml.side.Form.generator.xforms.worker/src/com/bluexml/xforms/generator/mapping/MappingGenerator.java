@@ -195,7 +195,6 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @return the attribute type
 	 */
 	private AttributeType processAttribute(AbstractClass classe, Attribute attribute) {
-		boolean isMultiple = false;
 		String result;
 
 		AttributeType attributeType = objectFactory.createAttributeType();
@@ -211,7 +210,7 @@ public class MappingGenerator extends AbstractGenerator {
 		result = ModelTools.getMetaInfoValue(attribute, "multiple");
 		if (result != null) {
 			if (StringUtils.equalsIgnoreCase(result, "true")) {
-				attributeType.setMultiple(isMultiple);
+				attributeType.setMultiple(true);
 			}
 		}
 
@@ -894,7 +893,6 @@ public class MappingGenerator extends AbstractGenerator {
 	 */
 	private void processField(CanisterType canister, FormContainer formContainer, Field field) {
 		String result;
-		boolean isMultiple = false;
 		FormFieldType formFieldType = objectFactory.createFormFieldType();
 		List<FormFieldType> fieldTypesList;
 
@@ -963,7 +961,7 @@ public class MappingGenerator extends AbstractGenerator {
 			result = ModelTools.getMetaInfoValue(attribute, "multiple");
 			if (result != null) {
 				if (StringUtils.equalsIgnoreCase(result, "true")) {
-					formFieldType.setMultiple(isMultiple); // optional attribute
+					formFieldType.setMultiple(true); // optional attribute
 				}
 			}
 		} else if (ref instanceof com.bluexml.side.workflow.Attribute) {
@@ -1170,7 +1168,8 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Initializes a FileFieldType with info from a FormFieldType
+	 * Initializes a FileFieldType with info from a FormFieldType. The 'multiple' property with
+	 * value 'true' is not supported.
 	 * 
 	 * @param formFieldType
 	 * @return a FileFieldType object that has the same info as the parameter

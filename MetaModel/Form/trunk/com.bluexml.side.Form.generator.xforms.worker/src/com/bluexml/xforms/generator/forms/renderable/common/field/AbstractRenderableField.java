@@ -85,7 +85,7 @@ public abstract class AbstractRenderableField extends Renderable {
 			if (xsdType.equals("anyType")) {
 				meb.setType(new QName("string"));
 				// let's hide the anyType objects, since XForms doesn't deal with that
-				setHidden(meb, true); 
+				setHidden(meb, true);
 			} else {
 				meb.setType(new QName(xsdType));
 			}
@@ -312,12 +312,13 @@ public abstract class AbstractRenderableField extends Renderable {
 	}
 
 	/**
-	 * Adds the hint, alert and help elements.
+	 * Adds the hint, alert and help elements. Must be called after
+	 * {@link #applyConstraints(ModelElementBindSimple)} because of the lengths.
 	 * 
 	 * @param input
 	 *            the input
 	 */
-	private void addHintAndMessages(Element input) {
+	protected void addHintAndMessages(Element input) {
 		String hint = getHint();
 
 		if (StringUtils.trimToNull(hint) != null) {
@@ -441,6 +442,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		} else {
 			elemName = "select1";
 		}
+		element = XFormsGenerator.createElement(elemName, XFormsGenerator.NAMESPACE_XFORMS);
 		if (selectBean.getWidgetType() == ChoiceWidgetType.INLINE) {
 			elemAppearance = "full";
 		} else if (selectBean.getWidgetType() == ChoiceWidgetType.LIST_ALL) {
@@ -450,8 +452,10 @@ public abstract class AbstractRenderableField extends Renderable {
 			elemAppearance = "minimal";
 			refIdStr = MsgId.INT_INSTANCE_ENUM_ID.getText();
 			refValueStr = MsgId.INT_INSTANCE_ENUM_VALUE.getText();
+			if (selectBean.isMultiple()) {
+				element.setAttribute("class", "side_multiple_enum");
+			}
 		}
-		element = XFormsGenerator.createElement(elemName, XFormsGenerator.NAMESPACE_XFORMS);
 		element.setAttribute("id", getAttributeId());
 		element.addContent(getLabelElement(selectBean.getLabel()));
 		selectBean.getModelElementBindSimple().addLinkedElement(element);
@@ -745,8 +749,8 @@ public abstract class AbstractRenderableField extends Renderable {
 			realMinLength = sMinLength;
 		}
 
-		maxLength = realMaxLength;
-		minLength = realMinLength;
+		setMaxLength(realMaxLength);
+		setMinLength(realMinLength);
 
 		if (realMinLength != null && realMaxLength != null) {
 			constraint = realMinLength + " <= string-length(.) and string-length(.) <= "

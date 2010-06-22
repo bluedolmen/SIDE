@@ -16,6 +16,9 @@ public class RenderableXGroup extends Renderable {
 	/** The title. */
 	private String title;
 
+	/** The CSS class. */
+	private String style;
+
 	/**
 	 * Instantiates a new renderable x group.
 	 * 
@@ -23,11 +26,13 @@ public class RenderableXGroup extends Renderable {
 	 *            the renderable
 	 * @param title
 	 *            the title
+	 * @param style TODO
 	 */
-	public RenderableXGroup(Renderable renderable, String title) {
+	public RenderableXGroup(Renderable renderable, String title, String style) {
 		super();
 		add(renderable);
 		this.title = title;
+		this.style = style;
 	}
 
 	/*
@@ -49,10 +54,12 @@ public class RenderableXGroup extends Renderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
-		RenderedGroup renderedGroup = new RenderedGroup(title, XFormsGenerator.getId("xgroup"), null);
-		applyStyle(renderedGroup, MsgId.INT_CSS_FORM_TITLE.getText());
-		
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
+		String realStyle = (style == null) ? MsgId.INT_CSS_FORM_TITLE.getText() : style;
+		RenderedGroup renderedGroup = new RenderedGroup(title, XFormsGenerator.getId("xgroup"),
+				realStyle);
+
 		return renderedGroup;
 	}
 

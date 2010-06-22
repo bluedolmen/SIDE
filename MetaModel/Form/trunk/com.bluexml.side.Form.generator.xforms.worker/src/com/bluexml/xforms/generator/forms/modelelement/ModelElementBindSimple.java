@@ -46,8 +46,12 @@ public class ModelElementBindSimple extends ModelElement {
 	// if true, this item's "readonly" attribute is never set to "true"
 	private boolean isRepeaterRootBind = false; // #1241
 
-	// #1223-related: do not add a constraint for widgets even if required is set to true
-	private boolean isAnAssociation;
+	// #1223-related: do not add a constraint for widgets even if 'required' is set to true
+	private boolean isAnAssociation = false;
+
+	// #1420: multiple inputs need a special case for the 'required' expression. This reference
+	// is meant to be the nodeset to the item, not the value, e.g. "Company/field_41/item"
+	private String multipleInputReference = null;
 
 	/**
 	 * Instantiates a new model element bind simple.
@@ -83,23 +87,32 @@ public class ModelElementBindSimple extends ModelElement {
 		bindElement.setAttribute("nodeset", nodeset);
 		bindElement.setAttribute("id", bindId);
 		if (type != null) {
-			//** #1280
+			// ** #1280
 			String typeStr = type.toString();
 			if ((typeStr.equalsIgnoreCase(MsgId.INT_TYPE_XSD_DATE.getText())
 					|| typeStr.equalsIgnoreCase(MsgId.INT_TYPE_XSD_DATETIME.getText()) || typeStr
 					.equalsIgnoreCase(MsgId.INT_TYPE_XSD_TIME.getText()))
 					&& isReadOnly()) {
 				typeStr = "string";
-				// there is not much use in setting the 'type' field, we do it just to be coherent.
-				type = new QName("string"); 
+				// there is not much use in setting the 'type' field, we do it for being consistent.
+				type = new QName("string");
 			}
-			//** #1280
+			// ** #1280
 			bindElement.setAttribute("type", typeStr);
 		}
 		if (isRequired()) {
-			bindElement.setAttribute("required", "true()");
-			if (isAnAssociation() == false) {
-				setConstraint("(. ne '')");
+			String ref = getMultipleInputReference();
+			if (ref != null) { // this bind is for an input with multiple values 
+				//** #1420
+				String reqExpr = "instance('minstance')/" + ref + "[1]/";
+				reqExpr = reqExpr + MsgId.INT_INSTANCE_INPUT_MULT_VALUE + " eq ''";
+				bindElement.setAttribute("required", reqExpr);
+				//** #1420
+			} else {
+				bindElement.setAttribute("required", "true()");
+				if (isAnAssociation() == false) {
+					setConstraint("(. ne '')");
+				}
 			}
 		} else {
 			// if (getLengthConstraint() != null) {
@@ -146,9 +159,9 @@ public class ModelElementBindSimple extends ModelElement {
 			int posEnd = nodeset.indexOf("')]", posStart + 1);
 			if (posEnd == -1) {
 				// TODO: output message
-//				if (logger.isErrorEnabled()) {
-//					logger.error("Error when parsing a nodeset for repeater name");
-//				}
+				// if (logger.isErrorEnabled()) {
+				// logger.error("Error when parsing a nodeset for repeater name");
+				// }
 			} else {
 				String lvalue = nodeset.substring(posStart + 1, posEnd + 2);
 				String rvalue = nodeset.substring(0, posStart);
@@ -295,7 +308,7 @@ public class ModelElementBindSimple extends ModelElement {
 					}
 				}
 			}
-			
+
 		}
 		return false;
 	}
@@ -386,6 +399,21 @@ public class ModelElementBindSimple extends ModelElement {
 	 */
 	public void setAnAssociation(boolean isAnAssociation) {
 		this.isAnAssociation = isAnAssociation;
+	}
+
+	/**
+	 * @param multipleInputReference
+	 *            the multipleInputReference to set
+	 */
+	public void setMultipleInputReference(String multipleInputReference) {
+		this.multipleInputReference = multipleInputReference;
+	}
+
+	/**
+	 * @return the multipleInputReference
+	 */
+	private String getMultipleInputReference() {
+		return multipleInputReference;
 	}
 
 }

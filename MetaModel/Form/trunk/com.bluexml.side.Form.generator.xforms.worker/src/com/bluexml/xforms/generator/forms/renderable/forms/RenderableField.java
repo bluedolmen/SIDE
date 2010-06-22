@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
 
+import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
@@ -46,9 +47,11 @@ import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableMailI
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderablePasswordInput;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableRegexInput;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableSimpleInput;
+import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableSimpleInputMultiple;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableTextInput;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableURLInput;
 import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
+import com.bluexml.xforms.generator.tools.ModelTools;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
@@ -241,7 +244,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 		} else if (formElement instanceof TextField) {
 			renderable = new RenderableTextInput(generationManager, parent, (TextField) formElement);
 		} else if (formElement instanceof CharField) {
-			// ** #1313
+			// ** #1313: support for 'allowed values' of workflow fields
 			CharField charField = (CharField) formElement;
 			ModelElement ref = (ModelElement) getFormGenerator().getRealObject(charField.getRef());
 			if (ref instanceof Attribute) {
@@ -254,12 +257,11 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 			}
 			// ** #1313
 			if (getFormGenerator().isFieldSelectionCapable(charField)) {
-				// ** #1530
+				// ** #1530: support for selection widgets on standard text inputs.
 				String format = getFormGenerator().getXtensionFormat(charField);
 				String type = getFormGenerator().getXtensionDatatype(charField);
 				String idProp = getFormGenerator().getXtensionIdentifier(charField);
-				String labelLength = getFormGenerator().getXtensionLabelLength(
-						charField);
+				String labelLength = getFormGenerator().getXtensionLabelLength(charField);
 				if (labelLength == null) {
 					labelLength = "0";
 				}
@@ -280,7 +282,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 					throw new RuntimeException("Unsupported encoding scheme: UTF-8");
 				}
 				properties.setFormatPattern(pattern);
-				
+
 				// general properties
 				properties.setShowingActions(false);
 				properties.setLabelLength(labelLength);
@@ -300,6 +302,27 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 				renderable = new CommonRenderableAssociation(properties);
 				// ** #1530
 			} else {
+				// ** 1420: support for 'multiple' property set to 'true' on standard text inputs
+				com.bluexml.side.clazz.Attribute refAttr;
+				try {
+					refAttr = (com.bluexml.side.clazz.Attribute) formElement.getRef();
+					String multipleStr = ModelTools.getMetaInfoValue(refAttr, "multiple");
+					Enumeration enumQname = refAttr.getValueList();
+					if (multipleStr != null) {
+						if (StringUtils.equalsIgnoreCase(multipleStr, "true")
+								&& (enumQname == null)) {
+							renderable = new RenderableSimpleInputMultiple<Field>(
+									generationManager, parent, formElement, "string");
+							return renderable;
+						}
+					}
+				} catch (ClassCastException cce) {
+					if ((formElement.getRef() instanceof Attribute) == false) {
+						throw new RuntimeException("The form element '" + formElement.getId()
+								+ "' has a reference that should be an attribute.");
+					}
+				}
+				// ** 1420
 				renderable = new RenderableSimpleInput<CharField>(generationManager, parent,
 						(CharField) formElement, "string");
 			}
@@ -318,7 +341,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 	 */
 	@Override
 	protected String getErrorMessage() {
-		String result = "";
+		String result = super.getErrorMessage();
 		// getError_messages() is defined in Field, extended by F so all is OK
 		Map<String, String> msgMap = formElement.getError_messages();
 
