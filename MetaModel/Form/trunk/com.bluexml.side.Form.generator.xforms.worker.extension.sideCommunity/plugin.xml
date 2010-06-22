@@ -14,7 +14,7 @@
             <mustBeChecked pluginId="com.bluexml.side.Portal.generator.alfresco">
               <optionRef optionId="com.bluexml.side.Portal.generator.alfresco.xforms" />
             </mustBeChecked>
-            <moduleDependence moduleId="com.bluexml.side.Framework.xforms.alfresco.controller.labs" moduleType="zip" technologyVersion="chiba_1_5.x" versionMax="1.0.98" versionMin="1.0.98" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.xforms.alfresco.controller.labs" moduleType="zip" technologyVersion="chiba_1_5.x" versionMax="1.0.99" versionMin="1.0.99" />
           </generatorVersion>
         </technologyVersion>
       </technology>
