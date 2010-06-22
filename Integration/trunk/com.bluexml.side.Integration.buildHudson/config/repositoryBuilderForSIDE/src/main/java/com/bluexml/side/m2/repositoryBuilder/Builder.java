@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -89,7 +90,7 @@ public class Builder {
 				String output2 = args[4];
 				applyOptionalJob(rootPlugins, option2, output2);
 			case 3:
-				// only one option activated				
+				// only one option activated
 				String option = args[1];
 				String output = args[2];
 				applyOptionalJob(rootPlugins, option, output);
@@ -118,12 +119,26 @@ public class Builder {
 			System.out.println("graph dot file generated :" + filePath);
 		} else if (option.equals("-patchPom")) {
 			List<ModuleConstraint> res = Builder.getModulesConstraint(rootPlugins);
+			// add dependency plugin used by SIDE
+			ModuleConstraint McForMavenDependeciesPlugins = new ModuleConstraint("org.apache.maven.plugins.maven-dependency-plugin", null, "maven-plugin", "2.0", "2.0");
+			res.add(McForMavenDependeciesPlugins);
+			
 			File file = new File(filePath);
 			if (!file.exists()) {
 				System.err.println("File do not exist :" + file);
 			}
-			writePomFile(file, res);
-			System.out.println("pom Patched");
+			List<File> poms = new ArrayList<File>();
+			for (ModuleConstraint moduleConstraint : res) {
+				File destFile = new File(file.getParent(), res.indexOf(moduleConstraint) + "_.pom");
+				FileUtils.copyFile(file, destFile);
+				List<ModuleConstraint> res_ = new ArrayList<ModuleConstraint>();
+				res_.add(moduleConstraint);
+				writePomFile(destFile, res_);
+				System.out.println("pom Patched" + destFile);
+				poms.add(destFile);
+			}
+			// write pom.sh script that call go-offline for each patched poms
+			Builder.writeShellScript(new File(file.getParent(), "pom.sh"), poms);
 		}
 	}
 
@@ -183,4 +198,31 @@ public class Builder {
 		outStream.close();
 	}
 
+	private static void writeShellScript(File script, List<File> poms) throws Exception {
+		// create file
+		if (!script.exists()) {
+			script.createNewFile();
+		}
+
+		FileWriter fw = new FileWriter(script);
+
+		// write header
+		String header = "#!/bin/bash\n";
+		header += "if [ $# -eq 1 ]; then" + "\n";
+		header += "  REPOSITORY=$1" + "\n";
+		header += "else" + "\n";
+		header += "  echo \"Usage: patcher.sh REPOSITORY\"" + "\n";
+		header += "  echo \"       with REPOSITORY = maven.repo.local absolute path\"" + "\n";
+		header += "  exit -2" + "\n";
+		header += "fi" + "\n";
+		fw.write(header);
+
+		for (File file : poms) {
+			fw.write("mvn dependency:go-offline -P public -f " + file.getAbsolutePath() + " -Dmaven.repo.local=$MAVENREPO\n");
+		}
+
+		// save close
+		fw.flush();
+		fw.close();
+	}
 }
