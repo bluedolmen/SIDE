@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Workflow.modeler.feature" label="SIDE Workflow Modeler" version="1.0.91.v18401-20100617" provider-name="BlueXML">
+<feature id="com.bluexml.side.Workflow.modeler.feature" label="SIDE Workflow Modeler" version="1.0.92.v18663-20100622" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based graphical modeler of workflow models.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -38,12 +38,12 @@
     <import plugin="com.bluexml.side.Form.edit.ui" />
     <import plugin="com.bluexml.side.Util.ecore" />
   </requires>
-  <plugin id="com.bluexml.side.Workflow" download-size="0" install-size="0" version="1.0.60.v18401-20100617" unpack="false" />
-  <plugin id="com.bluexml.side.Workflow.edit" download-size="0" install-size="0" version="1.0.44.v18401-20100617" unpack="false" />
-  <plugin id="com.bluexml.side.Workflow.editor" download-size="0" install-size="0" version="1.0.38.v18401-20100617" unpack="false" />
-  <plugin id="com.bluexml.side.Workflow.modeler" download-size="0" install-size="0" version="1.0.51.v18401-20100617" unpack="false" />
-  <plugin id="com.bluexml.side.Workflow.generator.documentation" download-size="0" install-size="0" version="1.0.21.v18401-20100617" unpack="false" />
-  <plugin id="com.bluexml.side.Workflow.edit.ui" download-size="0" install-size="0" version="1.0.17.v18401-20100617" unpack="false" />
-  <plugin id="com.bluexml.side.Workflow.modeler.actions" download-size="0" install-size="0" version="1.0.4.v18401-20100617" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow" download-size="0" install-size="0" version="1.0.61.v18663-20100622" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.edit" download-size="0" install-size="0" version="1.0.45.v18663-20100622" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.editor" download-size="0" install-size="0" version="1.0.39.v18663-20100622" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.modeler" download-size="0" install-size="0" version="1.0.52.v18663-20100622" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.generator.documentation" download-size="0" install-size="0" version="1.0.22.v18663-20100622" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.edit.ui" download-size="0" install-size="0" version="1.0.18.v18663-20100622" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.modeler.actions" download-size="0" install-size="0" version="1.0.5.v18663-20100622" unpack="false" />
 </feature>
 
