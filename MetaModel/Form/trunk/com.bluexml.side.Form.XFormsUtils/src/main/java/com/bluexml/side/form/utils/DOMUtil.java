@@ -321,7 +321,7 @@ public class DOMUtil {
 	 * @param name
 	 *            the required tag name, possibly including namespace prefix and local name
 	 * 
-	 * @return the list of the relevant children
+	 * @return the list of the relevant children. Never <code>null</code>.
 	 */
 	public static List<Element> getChildren(Element rootElement, String name) {
 		List<Element> result = new ArrayList<Element>();
