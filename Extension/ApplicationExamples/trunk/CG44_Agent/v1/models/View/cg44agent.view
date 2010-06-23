@@ -13,7 +13,7 @@
     <children xsi:type="view:TextField" xmi:id="_rn6atiHuEd-R7N33Hlrq_A" name="Objet">
       <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_0AWY8CAEEd-8qvQk7m7roQ"/>
     </children>
-    <children xsi:type="view:DataTable" xmi:id="_rn6atyHuEd-R7N33Hlrq_A" name="Document">
+    <children xsi:type="view:DataTable" xmi:id="_rn6atyHuEd-R7N33Hlrq_A" name="Document3">
       <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
       <children xsi:type="view:Col" xmi:id="_rn6auCHuEd-R7N33Hlrq_A" name="Version">
         <children xsi:type="view:TextField" xmi:id="_rn6auSHuEd-R7N33Hlrq_A" name="Version">
@@ -64,7 +64,7 @@
     <viewOf xsi:type="clazz:Clazz" href="/CG44_Agent/v1/models/Data/cg44agent.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
   </views>
   <composedViews xmi:id="_cBXlYCAGEd-8qvQk7m7roQ" name="List">
-    <children xsi:type="view:DataList" xmi:id="_ex9dsCAGEd-8qvQk7m7roQ" description="Dossier agent" name="Dossier">
+    <children xsi:type="view:DataList" xmi:id="_ex9dsCAGEd-8qvQk7m7roQ" description="Dossier agent" name="Dossier1">
       <children xsi:type="view:TextField" xmi:id="_m2OR8CFtEd-grPsxXhqAnQ" name="Matricule">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_qeSUMCABEd-8qvQk7m7roQ"/>
       </children>
@@ -85,7 +85,7 @@
       </disabled>
       <viewOf xsi:type="clazz:Clazz" href="/CG44_Agent/v1/models/Data/cg44agent.dt#_HJUnoBDgEd-eFJrsZcrkww"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_q0mwMCAGEd-8qvQk7m7roQ" description="Document agent" name="Document">
+    <children xsi:type="view:DataList" xmi:id="_q0mwMCAGEd-8qvQk7m7roQ" description="Document agent" name="Document1">
       <children xsi:type="view:TextField" xmi:id="_m2PgECFtEd-grPsxXhqAnQ" name="Version">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
       </children>
@@ -111,7 +111,7 @@
     </children>
   </composedViews>
   <composedViews xmi:id="_1jWK0CAGEd-8qvQk7m7roQ" name="Detail">
-    <children xsi:type="view:DataList" xmi:id="_4PLe8CAGEd-8qvQk7m7roQ" description="Dossier agent" name="Dossier">
+    <children xsi:type="view:DataList" xmi:id="_4PLe8CAGEd-8qvQk7m7roQ" description="Dossier agent" name="Dossier2">
       <children xsi:type="view:TextField" xmi:id="_q-OpICFtEd-grPsxXhqAnQ" name="Matricule">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_qeSUMCABEd-8qvQk7m7roQ"/>
       </children>
@@ -132,7 +132,7 @@
       </disabled>
       <viewOf xsi:type="clazz:Clazz" href="/CG44_Agent/v1/models/Data/cg44agent.dt#_HJUnoBDgEd-eFJrsZcrkww"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_5yj9QCAGEd-8qvQk7m7roQ" description="Document agent" name="Document">
+    <children xsi:type="view:DataList" xmi:id="_5yj9QCAGEd-8qvQk7m7roQ" description="Document agent" name="Document2">
       <children xsi:type="view:TextField" xmi:id="_q-OpJiFtEd-grPsxXhqAnQ" name="Version">
         <mapTo href="/CG44_Agent/v1/models/Data/cg44agent.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
       </children>
