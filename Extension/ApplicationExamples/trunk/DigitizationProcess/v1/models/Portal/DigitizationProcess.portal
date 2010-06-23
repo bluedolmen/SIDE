@@ -35,8 +35,8 @@
   <portletSet xmi:id="_wMvfQABZEd-pVYKNSGS_OQ" name="facetMap" isPortletInternal="_u0X-IABZEd-pVYKNSGS_OQ"/>
   <portletSet xmi:id="_gmJHYABlEd-pVYKNSGS_OQ" name="edit-metadata-XForm" isPortletInternal="_qShtIABlEd-pVYKNSGS_OQ"/>
   <portletSet xmi:id="_emmjwBAXEd-G74-FPfFl5A" name="advanced-search" isPortletInternal="_lvNlMBAXEd-G74-FPfFl5A"/>
-  <portletSetType xmi:id="_yvn5oOM3Ed6qNvjsNi40SA" name="PortletType1"/>
-  <portletSetType xmi:id="_tu5j0ABZEd-pVYKNSGS_OQ" name="PortletType2"/>
+  <portletSetType xmi:id="_yvn5oOM3Ed6qNvjsNi40SA" id="12" name="PortletType1"/>
+  <portletSetType xmi:id="_tu5j0ABZEd-pVYKNSGS_OQ" id="13" name="PortletType2"/>
   <internalPortletSet xmi:id="_zu6MYOM3Ed6qNvjsNi40SA">
     <view xsi:type="view:ComposedView" href="../View/DigitizationProcess.view#_8cHFsOM6Ed6qNvjsNi40SA"/>
   </internalPortletSet>
