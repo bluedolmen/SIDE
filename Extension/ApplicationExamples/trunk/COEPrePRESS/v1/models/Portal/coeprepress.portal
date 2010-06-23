@@ -23,8 +23,8 @@
   <portletSet xmi:id="_eH4ZkOM3Ed6qNvjsNi40SA" name="DocumentDetails" isPortletInternal="_zu6MYOM3Ed6qNvjsNi40SA"/>
   <portletSet xmi:id="_jMx20OM3Ed6qNvjsNi40SA" name="DocumentLibrary" isPortletInternal="_4uHRUOM3Ed6qNvjsNi40SA"/>
   <portletSet xmi:id="_gmJHYABlEd-pVYKNSGS_OQ" name="edit-metadata-XForm" isPortletInternal="_qShtIABlEd-pVYKNSGS_OQ"/>
-  <portletSetType xmi:id="_yvn5oOM3Ed6qNvjsNi40SA" name="PortletType1"/>
-  <portletSetType xmi:id="_tu5j0ABZEd-pVYKNSGS_OQ" name="PortletType2"/>
+  <portletSetType xmi:id="_yvn5oOM3Ed6qNvjsNi40SA" id="12" name="PortletType1"/>
+  <portletSetType xmi:id="_tu5j0ABZEd-pVYKNSGS_OQ" id="13" name="PortletType2"/>
   <internalPortletSet xmi:id="_zu6MYOM3Ed6qNvjsNi40SA">
     <view xsi:type="view:ComposedView" href="../View/coeprepress.view#_NSYdEBGPEd-y1uNXScORgg"/>
   </internalPortletSet>

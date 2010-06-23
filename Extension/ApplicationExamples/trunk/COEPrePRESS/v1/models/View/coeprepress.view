@@ -33,34 +33,34 @@
     </children>
   </views>
   <composedViews xmi:id="_NSYdEBGPEd-y1uNXScORgg" name="Detail">
-    <children xsi:type="view:DataList" xmi:id="_N3sJkBGPEd-y1uNXScORgg" name="Document">
+    <children xsi:type="view:DataList" xmi:id="_N3sJkBGPEd-y1uNXScORgg" name="Document1">
       <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_XfXV4BDIEd-gpYv8CBAghQ"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_X7Hg4BGQEd-y1uNXScORgg" name="Demande">
-      <children xsi:type="view:TextField" xmi:id="_ZsA2wBGQEd-y1uNXScORgg" name="Version">
+    <children xsi:type="view:DataList" xmi:id="_X7Hg4BGQEd-y1uNXScORgg" name="Demande1">
+      <children xsi:type="view:TextField" xmi:id="_ZsA2wBGQEd-y1uNXScORgg" name="Version1">
         <mapTo href="../Data/coeprepress.dt#_gPLeYBAHEd-QPZneBoCQXA"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_ZsA2wRGQEd-y1uNXScORgg" name="Description">
+      <children xsi:type="view:TextField" xmi:id="_ZsA2wRGQEd-y1uNXScORgg" name="Description1">
         <mapTo href="../Data/coeprepress.dt#_gcQ4IBAHEd-QPZneBoCQXA"/>
       </children>
-      <children xsi:type="view:DateField" xmi:id="_ZsA2whGQEd-y1uNXScORgg" name="DateDemande">
+      <children xsi:type="view:DateField" xmi:id="_ZsA2whGQEd-y1uNXScORgg" name="DateDemande1">
         <mapTo href="../Data/coeprepress.dt#_gsuWABAHEd-QPZneBoCQXA"/>
       </children>
-      <children xsi:type="view:DateField" xmi:id="_ZsA2wxGQEd-y1uNXScORgg" name="DateReponse">
+      <children xsi:type="view:DateField" xmi:id="_ZsA2wxGQEd-y1uNXScORgg" name="DateReponse1">
         <mapTo href="../Data/coeprepress.dt#_hNKwoBAHEd-QPZneBoCQXA"/>
       </children>
-      <children xsi:type="view:DateField" xmi:id="_ZsA2xBGQEd-y1uNXScORgg" name="DateDispo">
+      <children xsi:type="view:DateField" xmi:id="_ZsA2xBGQEd-y1uNXScORgg" name="DateDispo1">
         <mapTo href="../Data/coeprepress.dt#_hYX7EBAHEd-QPZneBoCQXA"/>
       </children>
-      <children xsi:type="view:TextField" xmi:id="_ZsA2xRGQEd-y1uNXScORgg" name="Statut">
+      <children xsi:type="view:TextField" xmi:id="_ZsA2xRGQEd-y1uNXScORgg" name="Statut1">
         <mapTo href="../Data/coeprepress.dt#_iEQJoBAHEd-QPZneBoCQXA"/>
       </children>
       <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_fcgEQBAHEd-QPZneBoCQXA"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_aqcN4BGQEd-y1uNXScORgg" name="Projet">
+    <children xsi:type="view:DataList" xmi:id="_aqcN4BGQEd-y1uNXScORgg" name="Projet1">
       <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_HJUnoBDgEd-eFJrsZcrkww"/>
     </children>
-    <children xsi:type="view:DataList" xmi:id="_dfGG0BGQEd-y1uNXScORgg" name="Publication">
+    <children xsi:type="view:DataList" xmi:id="_dfGG0BGQEd-y1uNXScORgg" name="Publication1">
       <viewOf xsi:type="clazz:Clazz" href="../Data/coeprepress.dt#_OAlaYBDgEd-eFJrsZcrkww"/>
     </children>
   </composedViews>
