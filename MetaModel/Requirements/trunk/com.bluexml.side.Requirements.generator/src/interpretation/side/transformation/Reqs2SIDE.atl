@@ -190,7 +190,7 @@ rule createChildForm(privileges : Set(Reqs!Privilege), entity : Reqs!Entity, ent
 			activeRelationships->collect(r | r.source)->union(activeRelationships->collect(r | r.target))->reject(e | e = entity)
 		in let subFormClass : Sequence(DataForm!FormClass) =
 			referencedEntities->collect(e | thisModule.createForm(privileges, e, entities->reject(e | e = entity)))
-		in let listFields : Sequence(DataForm!Reference) =
+		in let listFields : Sequence(DataForm!ModelChoiceField) =
 			subFormClass->collect(formClass | thisModule.createReference(formClass, activeRelationships->select(r | Set{r.source.name, r.target.name}->includesAll(Set{entity.name, formClass.real_class.title}))->first()))
 		
 		in let attributePrivileges : Sequence(Reqs!Privilege) = 
@@ -205,12 +205,12 @@ rule createChildForm(privileges : Set(Reqs!Privilege), entity : Reqs!Entity, ent
 }
 
 rule createReference(formClass : DataForm!FormClass, relationship : Reqs!Relationship) {
-	to reference : DataForm!Reference (
+	to reference : DataForm!ModelChoiceField (
 		id <- 'reference_'+thisModule.generateId().toString(),
 		target <- formClass,
 		ref <- relationship,
 		real_class <- formClass.real_class,
-		--widget <- #Inline,
+		widget <- #Inline,
 		min_bound <- 0,
 		max_bound <- -1
 	)
