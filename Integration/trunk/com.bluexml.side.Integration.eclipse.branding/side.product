@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
-<product name="SIDE Labs" uid="sideProduct" id="com.bluexml.side.Integration.eclipse.branding.product" application="org.eclipse.ui.ide.workbench" version="1.0.78" useFeatures="true" includeLaunchers="true">
+<product name="SIDE Labs" uid="sideProduct" id="com.bluexml.side.Integration.eclipse.branding.product" application="org.eclipse.ui.ide.workbench" version="1.0.79" useFeatures="true" includeLaunchers="true">
   <aboutInfo>
     <image path="icons/about.gif" />
     <text>SIDE by http://www.bluexml.com</text>
@@ -346,7 +346,7 @@
     <feature id="org.eclipse.platform" version="3.5.1.R35x_v20090910-9gEeG1_FthkNDSP2odXdThaOu9GFDPn83DGB7" />
     <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.0" />
     <feature id="com.bluexml.side.Common.core.feature" version="1.0.209.v18663-20100622" />
-    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.173.v18663-20100622" />
+    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.174.v18806-20100623" />
     <feature id="org.eclipse.team.svn" version="0.7.8.I20091023-1300" />
     <feature id="org.polarion.eclipse.team.svn.connector" version="2.2.1.I20091009-1900" />
     <feature id="org.polarion.eclipse.team.svn.connector.svnkit16" version="2.2.1.I20091009-1900" />
