@@ -589,7 +589,27 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Parameters: <br/>
+	 * Provides the items to be listed in a selection widget. Returns an XML string with root
+	 * '&lt;results&gt;':<br>
+	 * <ul>
+	 * <li>query (appears once)</li>
+	 * <ul>
+	 * <li>count: the total number of objects available in the Lucene result set</li>
+	 * <li>maxResults: if non-zero, sets the maximum number of objects requested by the client.
+	 * Returned as received.</li>
+	 * <li>returned: the number of result items returned to the client</li>
+	 * <li>filteredOut: if a filtering association was given, tells the number of items that have
+	 * been filtered out because they already have a reference on that association.</li>
+	 * <li>typeFound: if <code>false</code>, the type is unknown to Alfresco</li>
+	 * <li>query: a string to filter the items. The value returned is the TrimToEmpty'ed version of
+	 * the value that was received.</li>
+	 * </ul>
+	 * <li>item (number of occurrences is 0..*)</li>
+	 * <ul>
+	 * <li>id: the complete Alfresco id, including protocol and workspace</li>
+	 * <li>value: the display label for the item</li>
+	 * </ul>
+	 * </ul> Parameters: <br/>
 	 * "type": the data type to search. This parameter is MANDATORY.<br/>
 	 * "query": the search keyword string. NULL-able.<br/>
 	 * "queryFilter": an additional search keyword string. NULL-able.<br/>
@@ -599,7 +619,9 @@ public class XFormsWork implements RunAsWork<String> {
 	 * "identifier": the local name of a property whose value will be used as the id of results.
 	 * NULL-able. Quite obviously, that field MUST 1- be non-null, 2- be an actual identifier (i.e.
 	 * no value is duplicated in the value set)<br/>
-	 * "filterAssoc": NULL-able.// TODO <br/>
+	 * "filterAssoc": the qualified name of an association by which it will be determined whether
+	 * nodes are referenced. If present, nodes that are already pointed to by that association will
+	 * be filtered out of the results. NULL-able.<br/>
 	 * "isComposition": if "1" and "filterAssoc" is given, denotes that the association is a
 	 * composition. NULL-able.
 	 * 
@@ -634,7 +656,7 @@ public class XFormsWork implements RunAsWork<String> {
 			try {
 				format = URLDecoder.decode(format, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
-				logger.error("UTF-8 is unsupported. Format is defaulted to 'uuid'");
+				logger.error("UTF-8 is unsupported. Format is defaulted to 'uuid'.");
 				format = null;
 			}
 		}
@@ -781,7 +803,8 @@ public class XFormsWork implements RunAsWork<String> {
 			filteredOut = 0;
 			effectivelyReturned = 0;
 			for (ResultBean aBean : resultBeanList) {
-				if (StringUtils.contains(aBean.label.toLowerCase(), query.toLowerCase()) == false) {
+				if ((query != null)
+						&& StringUtils.contains(aBean.label.toLowerCase(), query.toLowerCase()) == false) {
 					filteredOut++;
 				} else {
 					appendResult(itemsBuf, aBean.id, aBean.label, aBean.qname);
@@ -1032,8 +1055,17 @@ public class XFormsWork implements RunAsWork<String> {
 					Element toUpdate = DOMUtil.getChild(element, "class");
 					String nodeId = toUpdate.getAttribute("id");
 					currentId = nodeId; // for faulty id management
-					NodeRef result = dataLayer.update(nodeId, toUpdate);
-					created.put(nodeId, result.toString());
+					// ** #1421
+					String massAttr = toUpdate.getAttribute("massTagging");
+					boolean isMassTagging = StringUtils.equals(massAttr, "true");
+					if (isMassTagging) {
+						String result = dataLayer.updateMassTagging(nodeId, toUpdate);
+						created.put("massTagging", result.toString());
+						// ** #1421
+					} else {
+						NodeRef result = dataLayer.update(nodeId, toUpdate);
+						created.put(nodeId, result.toString());
+					}
 				} else if (StringUtils.equals(element.getTagName(), "delete")) {
 					dataLayer.delete(element.getTextContent());
 				} else if (StringUtils.equals(element.getTagName(), "requester")) {
@@ -1325,8 +1357,19 @@ public class XFormsWork implements RunAsWork<String> {
 	private String wfGetIdForProcessDefinition(WorkflowService wfs) {
 		String workflowName = parameters.get("processName");
 
+		logger.debug("Asking Alfresco for the id of process '" + workflowName + "'");
 		WorkflowDefinition def = wfs.getDefinitionByName(workflowName);
-		return (def != null) ? def.id : null;
+		String result = (def != null) ? def.id : null;
+		if (result == null) {
+			List<WorkflowDefinition> defList = wfs.getAllDefinitions();
+			logger.debug("No process definition id returned by Alfresco. Listing definitions:");
+			for (WorkflowDefinition defItem : defList) {
+				logger.debug("  Name: " + defItem.name + "; id: " + defItem.id + "; version: "
+						+ defItem.version);
+			}
+		}
+		logger.debug(">>Returning '" + result + "'");
+		return result;
 	}
 
 	/**

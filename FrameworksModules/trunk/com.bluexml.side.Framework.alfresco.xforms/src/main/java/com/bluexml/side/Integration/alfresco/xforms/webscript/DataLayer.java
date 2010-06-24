@@ -158,19 +158,23 @@ public class DataLayer implements DataLayerInterface {
 	 */
 	@SuppressWarnings("unchecked")
 	public NodeRef update(String nodeId, Element what) throws Exception {
-		NodeRef nodeToUpdate = new NodeRef(nodeId);
 		XmlParser parser = new XmlParser();
 		// get Map representation of the object
 		Map<String, Object> entry = null;
 		entry = parser.parse(this, what);
+
 		// resolve QualifiedName to QName
 		String datatype = (String) entry.get("dataType");
 		QName nodeTypeQName = getDataTypeQName(datatype);
+
 		// build the map that contains attribute values
 		Map<QName, Serializable> properties = buildAttributesMap((Map<String, Object>) entry
 				.get("attributes"), nodeTypeQName, true);
+
 		// update properties
+		NodeRef nodeToUpdate = new NodeRef(nodeId);
 		updateProperties(nodeToUpdate, properties);
+
 		// delete previous associations?
 		String associationsAction = (String) entry.get("associationsAction");
 		boolean deleteAllAssociations = StringUtils.equals(associationsAction, "replace");
@@ -178,6 +182,40 @@ public class DataLayer implements DataLayerInterface {
 		List<AssociationBean> list = (List<AssociationBean>) entry.get("associations");
 		updateAssociations(nodeToUpdate, nodeTypeQName, list, deleteAllAssociations);
 		return nodeToUpdate;
+	}
+
+	/**
+	 * Mass tagging. Implements applying the same set of properties to several nodes.
+	 */
+	@SuppressWarnings("unchecked")
+	public String updateMassTagging(String nodeIds, Element what) throws Exception {
+		XmlParser parser = new XmlParser();
+		// get Map representation of the object
+		Map<String, Object> entry = null;
+		entry = parser.parse(this, what);
+
+		// resolve QualifiedName to QName
+		String datatype = (String) entry.get("dataType");
+		QName nodeTypeQName = getDataTypeQName(datatype);
+
+		// build the map that contains attribute values
+		Map<QName, Serializable> properties = buildAttributesMap((Map<String, Object>) entry
+				.get("attributes"), nodeTypeQName, true);
+
+		//
+		StringBuffer result = new StringBuffer("");
+		String[] ids = StringUtils.split(nodeIds, ',');
+		for (String nodeId : ids) {
+			try {
+				// update properties
+				NodeRef nodeToUpdate = new NodeRef(nodeId);
+				updateProperties(nodeToUpdate, properties);
+				result.append(nodeToUpdate.toString());
+			} catch (Exception e) {
+				logger.error("Error when updating object " + nodeId, e);
+			}
+		}
+		return result.toString();
 	}
 
 	/*
