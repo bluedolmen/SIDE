@@ -90,6 +90,8 @@ public class AssociationBean {
 	
 	private boolean isComposition;
 
+	private String style; // #1600
+
 	public AssociationBean() {
 		super();
 		fieldSize = "0";
@@ -471,6 +473,20 @@ public class AssociationBean {
 	 */
 	public String getCreateEditDefaultFormName() {
 		return createEditDefaultFormName;
+	}
+
+	/**
+	 * @param style the style to set
+	 */
+	public void setStyle(String style) {
+		this.style = style;
+	}
+
+	/**
+	 * @return the style
+	 */
+	public String getStyle() {
+		return style;
 	}
 
 

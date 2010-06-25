@@ -2,6 +2,8 @@ package com.bluexml.xforms.generator.forms.renderable.common;
 
 import java.util.Stack;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.renderable.common.association.inline.RenderableIMultiple;
@@ -43,6 +45,7 @@ public class CommonRenderableAssociation extends Renderable {
 		associationBean.setName(name);
 		associationBean.setTitle(properties.getAssocTitle());
 		associationBean.setHint(properties.getHint());
+		associationBean.setStyle(properties.getStyle());
 		associationBean.setDestinationRenderable(properties.getDestinationRenderable());
 		associationBean.setCreateEditFormType(properties.getCreateEditFormType());
 		associationBean.setCreateEditForms(properties.getCreateEditFormName());
@@ -104,7 +107,8 @@ public class CommonRenderableAssociation extends Renderable {
 	@Override
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
 			boolean isInIMultRepeater) {
-		return new RenderedGroup(null, name, null);
+		String style = associationBean.getStyle(); // #1600
+		return new RenderedGroup(null, name, style);
 	}
 
 }

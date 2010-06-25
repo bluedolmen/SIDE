@@ -67,17 +67,20 @@ public class AssociationProperties {
 	//** #1530
 	/**
 	 * Whether this selection widget is for a field instead of an association. If set,
-	 * showingActions must be reset.
+	 * showingActions must be reset (i.e. set to false).
 	 */
 	private boolean isForField; 
 	private String overridingType = null;
 	/** Local name of the property (from the type definition) used as id*/
 	private String identifierPropName;
 	// ** #1530
+
 	// ** #1536
 	private String filterAssoc;
 	private boolean isComposition;
 	// ** #1536
+	
+	private String style; // #1600
 
 	/**
 	 * Used in formForm's (via RenderableModelChoiceField's)
@@ -129,6 +132,7 @@ public class AssociationProperties {
 		this.isForField = false;
 		this.overridingType = null;
 		this.identifierPropName = null;
+		this.style = null;
 	}
 
 	/**
@@ -490,6 +494,20 @@ public class AssociationProperties {
 	 */
 	public String getCreateEditDefaultFormName() {
 		return createEditDefaultFormName;
+	}
+
+	/**
+	 * @param style the style to set
+	 */
+	public void setStyle(String style) {
+		this.style = style;
+	}
+
+	/**
+	 * @return the style
+	 */
+	public String getStyle() {
+		return style;
 	}
 
 }

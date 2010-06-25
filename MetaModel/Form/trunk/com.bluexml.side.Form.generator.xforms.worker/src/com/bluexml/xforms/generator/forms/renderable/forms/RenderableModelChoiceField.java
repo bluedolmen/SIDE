@@ -56,6 +56,7 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 		properties.setLoBound(formElement.getMin_bound());
 		properties.setUniqueName(FormGeneratorsManager.getUniqueName(formElement));
 		properties.setHint(formElement.getHelp_text());
+		properties.setStyle(formElement.getStyle());
 
 		properties.setDestinationRenderable(null);
 		properties.setInline(false);

@@ -15,9 +15,14 @@ public class RenderableFormContainer extends RenderableGroup<FormContainer> {
 	public RenderableFormContainer(XFormsGenerator generationManager, FormElement parent,
 			FormContainer form) {
 		super(generationManager, parent, form);
-		//
+
 		setInWorkflowForm(form instanceof FormWorkflow);
-		setStyleClass(MsgId.INT_CSS_FORM_TITLE.getText());
+
+		String style = MsgId.INT_CSS_FORM_TITLE.getText();
+		if (form.getStyle() != null) { // #1600
+			style = style + " " + form.getStyle();
+		}
+		setStyleClass(style);
 	}
 
 	/*

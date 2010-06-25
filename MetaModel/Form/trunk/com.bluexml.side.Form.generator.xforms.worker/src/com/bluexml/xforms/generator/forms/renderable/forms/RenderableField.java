@@ -289,6 +289,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 				properties.setDisabled(formElement.isDisabled());
 				properties.setMandatory(formElement.isMandatory());
 				properties.setHint(formElement.getHelp_text());
+				properties.setStyle(formElement.getStyle());
 				properties.setAssocTitle(charField.getLabel());
 				properties.setDestination(null);
 				properties.setDestinationRenderable(null);

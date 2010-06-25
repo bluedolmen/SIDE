@@ -66,6 +66,8 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 				XFormsGenerator.NAMESPACE_XFORMS);
 		setvalue.setAttribute("ref", getInstancePath() + "query/maxResults");
 		setvalue.setAttribute("value", getInstancePath() + "SELECTMAX");
+		String ifCondition = "string-length(" + getInstancePath() + "query/query" + ") > 2";
+		action.setAttribute("if", ifCondition);
 		action.addContent(setvalue);
 
 		Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
