@@ -9,7 +9,7 @@
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.33" versionMax="1.0.33" />
             <configurationParameter documentation="Set this value to the URL of the Alfresco instance on which have been generated and deployed new content types from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
             <configurationParameter documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploye the 2 new Facet navigation components (menu and results list)." key="alfresco.share.url" label="Alfresco share URL" />
-            <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco">
+            <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise">
               <optionRef optionId="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" />
             </mustBeChecked>
             <mustBeChecked pluginId="com.bluexml.side.Portal.generator.alfresco">

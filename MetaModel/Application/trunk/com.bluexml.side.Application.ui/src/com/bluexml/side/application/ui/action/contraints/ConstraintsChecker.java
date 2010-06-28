@@ -20,7 +20,7 @@ public class ConstraintsChecker {
 
 		if (el instanceof TreeNode) {
 
-			Map<String, List<TreeItem>> map = buildConstraintsMap(el);
+			Map<String, List<TreeItem>> map = buildConstraintsMap((TreeNode) el);
 			List<TreeItem> mustBeChecked = map.get("mustBeChecked");
 			List<TreeItem> mustBeUnchecked = map.get("mustBeUnchecked");
 
@@ -52,7 +52,7 @@ public class ConstraintsChecker {
 			if (mustBeChecked != null && mustBeChecked.size() > 0) {
 				msgmChecked = "following options must be checked :\n";
 				for (TreeItem treeItem : mustBeChecked) {
-					msgmChecked += treeItem.getText()+"\n";
+					msgmChecked += treeItem.getText() + "\n";
 				}
 			}
 			String msgmUnChecked = "";
@@ -60,7 +60,7 @@ public class ConstraintsChecker {
 			if (mustBeUnChecked != null && mustBeUnChecked.size() > 0) {
 				msgmUnChecked = "following options must be unchecked :\n";
 				for (TreeItem treeItem : mustBeUnChecked) {
-					msgmUnChecked += treeItem.getText()+"\n";
+					msgmUnChecked += treeItem.getText() + "\n";
 				}
 			}
 			message += msgmChecked + "\n" + msgmUnChecked + "\n";
@@ -70,28 +70,43 @@ public class ConstraintsChecker {
 		return -1;
 	}
 
-	private static Map<String, List<TreeItem>> buildConstraintsMap(TreeElement el) {
+	private static Map<String, List<TreeItem>> buildConstraintsMap(TreeNode el) {
+		System.out.println("ConstraintsChecker.buildConstraintsMap() :"+el.getId());
 		Map<String, List<TreeItem>> map = new HashMap<String, List<TreeItem>>();
-		TreeNode op = (TreeNode) el;
-		List<CheckConstraints> tocheck = op.getMustbechecked();
+		List<CheckConstraints> tocheck = el.getMustbechecked();
 		List<TreeItem> mustBeChecked = new ArrayList<TreeItem>();
 		map.put("mustBeChecked", mustBeChecked);
 		for (CheckConstraints be : tocheck) {
 			List<String> ids = be.getOptionsIds();
 			for (String id : ids) {
 				TreeItem it = el.getRoot().getOptionTreeItemById(id);
-				mustBeChecked.add(it);
+				if (it != null) {
+					System.out.println("Ok " + id + " found in treeView");
+					mustBeChecked.add(it);
+				} else {
+					// option not found
+					System.err.println("Error " + id + " not found in treeView");
+				}
+
 			}
 		}
 
-		List<CheckConstraints> toUncheck = op.getMustbeUnchecked();
+		List<CheckConstraints> toUncheck = el.getMustbeUnchecked();
 		List<TreeItem> mustBeUnchecked = new ArrayList<TreeItem>();
 		map.put("mustBeUnchecked", mustBeUnchecked);
 		for (CheckConstraints be : toUncheck) {
 			List<String> ids = be.getOptionsIds();
 			for (String id : ids) {
 				TreeItem it = el.getRoot().getOptionTreeItemById(id);
-				mustBeUnchecked.add(it);
+				if (it != null) {
+					mustBeUnchecked.add(it);
+					System.out.println("Ok " + id + " found in treeView");
+				} else {
+					// option not found
+					System.err.println("Error " + id + " not found in treeView");
+
+				}
+
 			}
 		}
 		return map;
