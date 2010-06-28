@@ -925,6 +925,11 @@ public class MappingGenerator extends AbstractGenerator {
 								+ "' has a bad <Ref> property: either the model element is not an attribute or the attribute belongs to another class.");
 			}
 			String alfrescoName = getAlfrescoNameForAttribute(realClass, ref);
+			if (alfrescoName == null) {
+				throw new RuntimeException("Couldn't compute the Alfresco name for field '"
+						+ field.getLabel() + "' with Ref to attribute '"
+						+ ((Attribute) ref).getName() + "'");
+			}
 			formFieldType.setAlfrescoName(alfrescoName);
 		} else {
 			com.bluexml.side.workflow.Attribute attribute = (com.bluexml.side.workflow.Attribute) ref;
@@ -1059,7 +1064,7 @@ public class MappingGenerator extends AbstractGenerator {
 			return formGenerator.getClassQualifiedName(classe) + "_" + attribute.getName();
 		}
 
-		// the attribute may be in a parent class or in an aspect
+		// the attribute may be in a parent class or in an aspect of either base or parent classes
 		if (classe instanceof Clazz) {
 			Clazz classRef = (Clazz) classe;
 			for (Clazz parentClass : classRef.getGeneralizations()) {
@@ -1068,7 +1073,7 @@ public class MappingGenerator extends AbstractGenerator {
 					return getAlfrescoNameForAttribute(realParentClass, attribute);
 				}
 			}
-			for (Aspect aspect : classRef.getAspects()) {
+			for (Aspect aspect : ModelTools.getClassAspects(classRef).keySet()) {
 				Aspect realAspect = (Aspect) formGenerator.getRealObject(aspect);
 				if (realAspect.equals(realContainer)) {
 					return getAlfrescoNameForAttribute(realAspect, attribute);
