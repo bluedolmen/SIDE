@@ -42,8 +42,6 @@ import com.bluexml.side.util.componentmonitor.headless.LabelHeadLess;
 import com.bluexml.side.util.componentmonitor.headless.StyledTextHeadless;
 import com.bluexml.side.util.componentmonitor.headless.progressBarHeadLess;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
-import com.bluexml.side.util.libs.SystemInfoGetter;
-import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class ApplicationStarter implements IApplication {
 	static final String CONFIGURATION_KEY = "configuration";
@@ -62,10 +60,6 @@ public class ApplicationStarter implements IApplication {
 	public Object start(IApplicationContext context) throws Exception {
 
 		arguments = (String[]) context.getArguments().get("application.args");
-
-		if (securityServices() == 0) {
-			return EXIT_OK;
-		}
 
 		System.out.println("Start !!!!!!!!!!");
 		long time1 = System.currentTimeMillis();
@@ -104,7 +98,7 @@ public class ApplicationStarter implements IApplication {
 		return EXIT_OK;
 	}
 
-	private void generate(File fileAP) {
+	protected void generate(File fileAP) {
 		Map<String, Object> conf = loadConfiguration(fileAP, arguments[1]);
 		Configuration configuration = (Configuration) conf.get(CONFIGURATION_KEY);
 
@@ -141,23 +135,6 @@ public class ApplicationStarter implements IApplication {
 		}
 		System.out.println("### Generate Done");
 
-	}
-
-	private int securityServices() {
-		//System.out.println("args[0] :" + arguments[0]);
-		if (arguments[0].toString().contains("getHostID")) {
-			//System.out.println("hostID :" + SystemInfoGetter.getHostWithHash());
-			System.out.println(SystemInfoGetter.getHostWithHash());
-		} else if (arguments[0].toString().contains("setLicense")) {
-			System.out.println("previous license :" + SidePreferences.getKey());
-			SidePreferences.setKey(arguments[1].toString());
-			System.out.println("license recorded :" + SidePreferences.getKey());
-		} else if (arguments[0].toString().contains("getLicense")) {
-			System.out.println("recorded license :" + SidePreferences.getKey());
-		} else {
-			return -1;
-		}
-		return 0;
 	}
 
 	protected Map<String, Object> loadConfiguration(File filePath, String name) {
