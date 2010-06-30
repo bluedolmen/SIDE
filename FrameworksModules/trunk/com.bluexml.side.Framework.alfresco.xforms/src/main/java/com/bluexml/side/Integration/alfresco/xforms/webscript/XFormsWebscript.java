@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.alfresco.repo.search.impl.lucene.ADMLuceneIndexerAndSearcherFactory;
 import org.alfresco.repo.security.authentication.AuthenticationUtil;
 import org.alfresco.repo.security.authority.AuthorityDAO;
@@ -27,7 +25,6 @@ import org.alfresco.service.namespace.QName;
 import org.alfresco.web.scripts.AbstractWebScript;
 import org.alfresco.web.scripts.WebScriptRequest;
 import org.alfresco.web.scripts.WebScriptResponse;
-import org.alfresco.web.scripts.servlet.WebScriptServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -196,34 +193,34 @@ public class XFormsWebscript extends AbstractWebScript {
 
 	public void execute(WebScriptRequest webscriptrequest, WebScriptResponse webscriptresponse)
 			throws IOException {
-		WebScriptServletRequest webScriptServletRequest = (WebScriptServletRequest) webscriptrequest;
-		HttpServletRequest httpServletRequest = webScriptServletRequest.getHttpServletRequest();
-		String remoteAddr = httpServletRequest.getRemoteAddr();
-		String localAddr = httpServletRequest.getLocalAddr();
-		if (StringUtils.equalsIgnoreCase(remoteAddr, "127.0.0.1")
-				|| StringUtils.equalsIgnoreCase(remoteAddr, localAddr)) {
-			String username = webscriptrequest.getParameter("username");
-			// FIXME temp patch
-			if (StringUtils.trimToNull(username) == null) {
-				username = "admin";
-			}
-			webscriptresponse.setContentType("text/xml");
-			String contentEncoding = "UTF-8";
-			webscriptresponse.setContentEncoding(contentEncoding);
+		// WebScriptServletRequest webScriptServletRequest = (WebScriptServletRequest) webscriptrequest;
+		// HttpServletRequest httpServletRequest = webScriptServletRequest.getHttpServletRequest();
+		// String remoteAddr = httpServletRequest.getRemoteAddr();
+		// String localAddr = httpServletRequest.getLocalAddr();
+		// if (StringUtils.equalsIgnoreCase(remoteAddr, "127.0.0.1")
+		// || StringUtils.equalsIgnoreCase(remoteAddr, localAddr)) {
 
-			dictionaryService = serviceRegistry.getDictionaryService();
-			namespacePrefixResolver = serviceRegistry.getNamespaceService();
-
-			XFormsQueryType queryType = getQueryType(webscriptrequest);
-
-			Map<String, String> parameters = getParameters(webscriptrequest);
-
-			String result = AuthenticationUtil.runAs(new XFormsWork(this, queryType, parameters,
-					getServiceRegistry()), username);
-
-			OutputStream outputStream = webscriptresponse.getOutputStream();
-			outputStream.write(result.getBytes("UTF-8"));
+		String username = webscriptrequest.getParameter("username");
+		if (StringUtils.trimToNull(username) == null) {
+			throw new RuntimeException("No user name provided.");
 		}
+		webscriptresponse.setContentType("text/xml");
+		String contentEncoding = "UTF-8";
+		webscriptresponse.setContentEncoding(contentEncoding);
+
+		dictionaryService = serviceRegistry.getDictionaryService();
+		namespacePrefixResolver = serviceRegistry.getNamespaceService();
+
+		XFormsQueryType queryType = getQueryType(webscriptrequest);
+
+		Map<String, String> parameters = getParameters(webscriptrequest);
+
+		String result = AuthenticationUtil.runAs(new XFormsWork(this, queryType, parameters,
+				getServiceRegistry()), username);
+
+		OutputStream outputStream = webscriptresponse.getOutputStream();
+		outputStream.write(result.getBytes("UTF-8"));
+		// }
 	}
 
 	private Map<String, String> getParameters(WebScriptRequest webscriptrequest) {
