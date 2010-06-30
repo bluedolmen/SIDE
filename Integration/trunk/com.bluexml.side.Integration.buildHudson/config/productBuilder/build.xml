@@ -45,6 +45,9 @@
 		<move tofile="${distros}/${newBuildId}-win32.win32.x86.zip" file="${distros}/${buildId}-win32.win32.x86.zip" />
 		<move tofile="${distros}/${newBuildId}-linux.gtk.x86.zip" file="${distros}/${buildId}-linux.gtk.x86.zip" />
 		<move tofile="${distros}/${newBuildId}-macosx.carbon.x86.zip" file="${distros}/${buildId}-macosx.carbon.x86.zip" />
+		<record name="${distros}/buildID.txt" loglevel="info" action="start" />
+		<echo level="info" message="${newBuildId}" />
+		<record name="${distros}/buildID.txt" action="stop" />
 	</target>
 
 
@@ -93,7 +96,7 @@
 			<arg value="-buildfile" />
 			<arg value="build.xml" />
 			<arg value="-Dtimestamp=${timestamp}" />
-			<arg value="-Dworkspace=${workspace}"/>
+			<arg value="-Dworkspace=${workspace}" />
 			<classpath>
 				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
 			</classpath>
