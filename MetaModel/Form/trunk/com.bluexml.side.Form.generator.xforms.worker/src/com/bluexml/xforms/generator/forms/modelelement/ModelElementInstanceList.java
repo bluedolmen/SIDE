@@ -2,11 +2,13 @@ package com.bluexml.xforms.generator.forms.modelelement;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.xforms.generator.forms.ModelElement;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
+import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.tools.ModelTools;
 import com.bluexml.xforms.messages.MsgId;
 
@@ -32,24 +34,11 @@ public class ModelElementInstanceList extends ModelElement {
 
 	private boolean isComposition; // #1536
 
-	/**
-	 * Constructor specifically for attaching a selection widget to a field.
-	 * 
-	 * @param overrideType
-	 *            the name of the type to search
-	 * @param instanceName
-	 *            the instance name, for identification of the instance by the XForms engine
-	 */
-	public ModelElementInstanceList(String overrideType, String instanceName, String formatPattern,
-			String maxLength, String identifier) {
-		this.typeCompleteName = overrideType;
-		this.instanceName = instanceName;
-		this.formatPattern = formatPattern;
-		this.maxLength = maxLength;
-		this.identifier = identifier;
-		this.filterAssoc = null;
-		this.isComposition = false;
-	}
+	private boolean isForSearch; // #1536
+
+	private String luceneQuery;
+
+	private String dataSourceUri;
 
 	/**
 	 * Initial constructor, for use with associations that target classes defined in model files.
@@ -60,16 +49,45 @@ public class ModelElementInstanceList extends ModelElement {
 	 * @param instanceName
 	 *            the instance name
 	 */
-	public ModelElementInstanceList(Clazz modelClazz, String instanceName, String formatPattern,
-			String maxLength, String filterAssoc, boolean isComposition) {
+	public ModelElementInstanceList(AssociationBean bean, String instanceName) {
+		Clazz modelClazz = bean.getDestinationClass();
 		this.typeCompleteName = ModelTools.getNamespacePrefix(modelClazz) + ":"
 				+ getFormGenerator().getClassQualifiedName(modelClazz);
 		this.instanceName = instanceName;
-		this.formatPattern = formatPattern;
-		this.maxLength = maxLength;
+
+		initFields(bean);
+
 		this.identifier = "";
-		this.filterAssoc = filterAssoc;
-		this.isComposition = isComposition;
+	}
+
+	/**
+	 * Constructor specifically for attaching a selection widget to a selection-capable field.
+	 * 
+	 * @param instanceName
+	 *            the instance name, for identification of the instance by the XForms engine
+	 */
+	public ModelElementInstanceList(String overridingType, String instanceName, AssociationBean bean) {
+		this.typeCompleteName = bean.getOverridingType();
+		this.instanceName = instanceName;
+
+		initFields(bean);
+
+		this.filterAssoc = null;
+		this.isComposition = false;
+		this.identifier = bean.getIdentifierPropName();
+	}
+
+	/**
+	 * @param bean
+	 */
+	private void initFields(AssociationBean bean) {
+		this.formatPattern = bean.getFormatPattern();
+		this.maxLength = bean.getLabelLength();
+		this.filterAssoc = bean.getFilterAssoc();
+		this.isComposition = bean.isComposition();
+		this.isForSearch = bean.isInFeatureSearchMode();
+		this.luceneQuery = bean.getLuceneQuery();
+		this.dataSourceUri = StringUtils.trimToNull(bean.getDataSourceUri());
 	}
 
 	/*
@@ -80,9 +98,16 @@ public class ModelElementInstanceList extends ModelElement {
 	public Element getModelElement() {
 		Element instance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		instance.setAttribute("src", MsgId.INT_URI_SCHEME_READER
-				+ buildListURI(typeCompleteName, formatPattern, maxLength, identifier, filterAssoc,
-						isComposition));
+		String sourceURI;
+		if (dataSourceUri == null) {
+			sourceURI = MsgId.INT_URI_SCHEME_READER
+					+ buildListActionUriFragment(typeCompleteName, formatPattern, maxLength,
+							identifier, filterAssoc, isComposition, isForSearch, luceneQuery);
+		} else {
+			sourceURI = dataSourceUri;
+		}
+
+		instance.setAttribute("src", sourceURI);
 		instance.setAttribute("id", instanceName);
 		return instance;
 	}

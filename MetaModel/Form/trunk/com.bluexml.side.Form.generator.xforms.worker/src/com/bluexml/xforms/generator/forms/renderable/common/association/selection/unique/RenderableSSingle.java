@@ -78,7 +78,8 @@ public class RenderableSSingle extends AbstractRenderable {
 			boolean isInIMultRepeater) {
 		Rendered rendered = new RenderedLine();
 		Element div = rendered.getXformsElement();
-		div.setAttribute("class", MsgId.INT_CSS_SELECT_WIDGET.getText());
+
+		div.setAttribute("class", getWidgetStyle());
 
 		ModelElementBindSimple bindLabel = getSelectedBindLabel();
 		ModelElementBindSimple bindId = getSelectedBindId();

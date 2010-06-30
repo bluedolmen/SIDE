@@ -302,7 +302,8 @@ public class FormGeneratorsManager {
 	 * the names.
 	 * 
 	 * @param asso
-	 * @param classAsSource the class being used as the source for the association
+	 * @param classAsSource
+	 *            the class being used as the source for the association
 	 * @return
 	 */
 	public String getAssoQualifiedName(Association asso, Clazz classAsSource) {
@@ -1417,12 +1418,16 @@ public class FormGeneratorsManager {
 	 */
 	private String getXtensionParameter(EList<String> xtension, String parameter) {
 		int pos;
-		for (String configItem : xtension) {
-			pos = configItem.indexOf(parameter);
-			if (pos != -1) {
-				pos = pos + parameter.length();
-				if (configItem.charAt(pos) == '=') {
-					return configItem.substring(pos + 1);
+		if (parameter != null) {
+			String lowCaseParam = parameter.toLowerCase();
+			for (String configItem : xtension) {
+				configItem = configItem.toLowerCase();
+				pos = configItem.indexOf(lowCaseParam);
+				if (pos != -1) {
+					pos = pos + lowCaseParam.length();
+					if (configItem.charAt(pos) == '=') {
+						return configItem.substring(pos + 1);
+					}
 				}
 			}
 		}
@@ -1432,6 +1437,12 @@ public class FormGeneratorsManager {
 	//
 	//
 	//
+
+	/**
+	 * Gets the contents of the Xtension property of a field as a list of string objects.
+	 * 
+	 * @return the list
+	 */
 	private EList<String> getXtension(FormElement formElt) {
 		return formElt.getXtension();
 	}
@@ -1478,6 +1489,38 @@ public class FormGeneratorsManager {
 		EList<String> xtension = getXtension(field);
 
 		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_LABEL_LENGTH.getText());
+	}
+
+	public String getXtensionDataSourceUri(Field field) {
+		EList<String> xtension = getXtension(field);
+
+		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_DATA_SOURCE_URI.getText());
+	}
+
+	public String getXtensionFeatureMode(Field field) {
+		EList<String> xtension = getXtension(field);
+
+		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_FEATURE_MODE.getText());
+	}
+
+	public String getXtensionLuceneQuery(Field field) {
+		EList<String> xtension = getXtension(field);
+
+		return getXtensionParameter(xtension, MsgId.MODEL_XTENSION_LUCENE_QUERY.getText());
+	}
+
+	public boolean getXtensionNoAutoSearch(Field field) {
+		EList<String> xtension = getXtension(field);
+
+		String str = getXtensionParameter(xtension, MsgId.MODEL_XTENSION_NO_AUTO_SEARCH.getText());
+		return StringUtils.equalsIgnoreCase(str, "true");
+	}
+
+	public boolean getXtensionNoStatsOutput(Field field) {
+		EList<String> xtension = getXtension(field);
+
+		String str = getXtensionParameter(xtension, MsgId.MODEL_XTENSION_NO_STATS_OUTPUT.getText());
+		return StringUtils.equalsIgnoreCase(str, "true");
 	}
 
 	/**

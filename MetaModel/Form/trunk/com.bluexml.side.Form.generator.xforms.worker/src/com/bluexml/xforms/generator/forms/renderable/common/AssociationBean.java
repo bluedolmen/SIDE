@@ -2,9 +2,12 @@ package com.bluexml.xforms.generator.forms.renderable.common;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class AssociationBean.
@@ -85,12 +88,19 @@ public class AssociationBean {
 	/** Local name of the property (from the type definition) used as id */
 	private String identifierPropName;
 	// ** #1530
-	
+
 	private String filterAssoc;
-	
+
 	private boolean isComposition;
 
 	private String style; // #1600
+
+	// Xtension-defined (for associations)
+	private String dataSourceUri;
+	private String featureMode;
+	private String luceneQuery;
+	private boolean noAutoSearch;
+	private boolean noStatsOutput;
 
 	public AssociationBean() {
 		super();
@@ -462,7 +472,8 @@ public class AssociationBean {
 	}
 
 	/**
-	 * @param createEditDefaultFormName the createEditDefaultFormName to set
+	 * @param createEditDefaultFormName
+	 *            the createEditDefaultFormName to set
 	 */
 	public void setCreateEditDefaultFormName(String createEditDefaultFormName) {
 		this.createEditDefaultFormName = createEditDefaultFormName;
@@ -476,7 +487,8 @@ public class AssociationBean {
 	}
 
 	/**
-	 * @param style the style to set
+	 * @param style
+	 *            the style to set
 	 */
 	public void setStyle(String style) {
 		this.style = style;
@@ -489,5 +501,95 @@ public class AssociationBean {
 		return style;
 	}
 
+	/**
+	 * @return the dataSourceUri
+	 */
+	public String getDataSourceUri() {
+		return dataSourceUri;
+	}
+
+	/**
+	 * @param dataSourceUri
+	 *            the dataSourceUri to set
+	 */
+	public void setDataSourceUri(String dataSourceUri) {
+		this.dataSourceUri = dataSourceUri;
+	}
+
+	/**
+	 * @param featureMode
+	 *            the featureMode to set
+	 */
+	public void setFeatureMode(String featureMode) {
+		this.featureMode = featureMode;
+	}
+
+	/**
+	 * Tests the feature mode for search.
+	 * 
+	 * @return <code>true</code> if the feature mode matches the string for search mode.
+	 */
+	public boolean isInFeatureSearchMode() {
+		return StringUtils.equalsIgnoreCase(featureMode, MsgId.MODEL_XTENSION_FEATURE_MODE_SEARCH
+				.getText());
+	}
+
+	/**
+	 * Tests the feature mode for filter.
+	 * 
+	 * @return <code>true</code> if the feature mode matches the string for filter mode.
+	 */
+	public boolean isInFeatureFilterMode() {
+		boolean result = StringUtils.equalsIgnoreCase(featureMode,
+				MsgId.MODEL_XTENSION_FEATURE_MODE_FILTER.getText());
+		// this mode is the default mode so we force it if none is defined
+		result = result || (isInFeatureSearchMode() == false);
+		return result;
+	}
+
+	/**
+	 * @return the luceneQuery
+	 */
+	public String getLuceneQuery() {
+		return luceneQuery;
+	}
+
+	/**
+	 * @param luceneQuery
+	 *            the luceneQuery to set
+	 */
+	public void setLuceneQuery(String luceneQuery) {
+		this.luceneQuery = luceneQuery;
+	}
+
+	/**
+	 * @return the noAutoSearch
+	 */
+	public boolean isNoAutoSearch() {
+		return noAutoSearch;
+	}
+
+	/**
+	 * @param noAutoSearch
+	 *            the noAutoSearch to set
+	 */
+	public void setNoAutoSearch(boolean noAutoSearch) {
+		this.noAutoSearch = noAutoSearch;
+	}
+
+	/**
+	 * @return the noStatsOutput
+	 */
+	public boolean isNoStatsOutput() {
+		return noStatsOutput;
+	}
+
+	/**
+	 * @param noStatsOutput
+	 *            the noStatsOutput to set
+	 */
+	public void setNoStatsOutput(boolean noStatsOutput) {
+		this.noStatsOutput = noStatsOutput;
+	}
 
 }

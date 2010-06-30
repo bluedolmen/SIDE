@@ -107,7 +107,7 @@ public class RenderableSMultiple extends AbstractRenderable {
 		rendered.setOptionalData(XFormsGenerator.getId(bean.getName() + "Repeater"));
 		
 		Element div = rendered.getXformsElement();
-		div.setAttribute("class", MsgId.INT_CSS_SELECT_WIDGET.getText());
+		div.setAttribute("class", getWidgetStyle());
 		
 		// e.g.: Paragraphe1310/field_12/modelcyvel.Video (usual suffix is [position()!=last()])
 		bindActions.setNodeset(nodeSetActions);

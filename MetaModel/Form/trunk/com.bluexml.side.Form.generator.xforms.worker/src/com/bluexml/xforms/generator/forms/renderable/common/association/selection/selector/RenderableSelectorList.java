@@ -69,7 +69,7 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 		// label
 		Element setvaluelabel = XFormsGenerator.createElement("setvalue",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		// Target text: "instance('ComBluexmlDemoRhContratDeTravailList')/item[id =
+		// Example target text: "instance('ComBluexmlDemoRhContratDeTravailList')/item[id =
 		// instance('ComBluexmlDemoRhContratDeTravailList')/SELECTEDID]/value"
 		setvaluelabel.setAttribute("value", getInstancePath() + MsgId.INT_INSTANCE_SELECT_ITEM
 				+ "[" + MsgId.INT_INSTANCE_SELECT_ID + " = " + getInstancePath()
@@ -80,7 +80,7 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 		// data type
 		Element setvaluetype = XFormsGenerator.createElement("setvalue",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		// Target text: "instance('ComBluexmlDemoRhContratDeTravailList')/item[id =
+		// Example target text: "instance('ComBluexmlDemoRhContratDeTravailList')/item[id =
 		// instance('ComBluexmlDemoRhContratDeTravailList')/SELECTEDID]/qname"
 		setvaluetype.setAttribute("value", getInstancePath() + MsgId.INT_INSTANCE_SELECT_ITEM + "["
 				+ MsgId.INT_INSTANCE_SELECT_ID + " = " + getInstancePath()
@@ -107,8 +107,8 @@ public class RenderableSelectorList extends AbstractRenderableSelectorItem {
 		if (bean.isMandatory()) {
 			// set the hint/help message
 			String hintMsg = bean.getHint();
-			// we set hint/help only when a hint message is specified and when
-			// the related messages in the properties file are not both empty
+			
+			// we set hint/help only when a hint message is specified
 			if (StringUtils.trimToNull(hintMsg) != null) {
 				Element hintElt = XFormsGenerator.createElement("hint",
 						XFormsGenerator.NAMESPACE_XFORMS);

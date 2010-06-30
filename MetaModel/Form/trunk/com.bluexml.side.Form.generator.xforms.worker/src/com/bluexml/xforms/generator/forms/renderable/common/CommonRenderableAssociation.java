@@ -2,8 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.common;
 
 import java.util.Stack;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.renderable.common.association.inline.RenderableIMultiple;
@@ -20,7 +18,6 @@ import com.bluexml.xforms.messages.MsgId;
  */
 public class CommonRenderableAssociation extends Renderable {
 	/** The title. */
-	@SuppressWarnings("unused")
 	private String title;
 
 	/** The association bean. */
@@ -43,7 +40,7 @@ public class CommonRenderableAssociation extends Renderable {
 		associationBean = new AssociationBean();
 		associationBean.setDestinationClass(properties.getDestination());
 		associationBean.setName(name);
-		associationBean.setTitle(properties.getAssocTitle());
+		associationBean.setTitle(title);
 		associationBean.setHint(properties.getHint());
 		associationBean.setStyle(properties.getStyle());
 		associationBean.setDestinationRenderable(properties.getDestinationRenderable());
@@ -67,6 +64,13 @@ public class CommonRenderableAssociation extends Renderable {
 		associationBean.setIdentifierPropName(properties.getIdentifierPropName());
 		associationBean.setFilterAssoc(properties.getFilterAssoc());
 		associationBean.setComposition(properties.isComposition());
+
+		// custom configuration parameters
+		associationBean.setDataSourceUri(properties.getDataSourceUri());
+		associationBean.setFeatureMode(properties.getFeatureMode());
+		associationBean.setLuceneQuery(properties.getLuceneQuery());
+		associationBean.setNoAutoSearch(properties.isNoAutoSearch());
+		associationBean.setNoStatsOutput(properties.isNoStatsOutput());
 
 		if (properties.isInline()) {
 			if (properties.isMultiple()) {

@@ -2,6 +2,7 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
+import com.bluexml.xforms.generator.forms.ModelElement;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -63,14 +64,12 @@ public class RenderableSelector extends AbstractRenderable {
 			idStr = overridingType.replaceAll(":", "_") + bean.getName() + "ListExt";
 			instanceName = XFormsGenerator.getId(idStr); // #1523
 			modelElementUpdater = new ModelElementUpdaterList(overridingType, instanceName,
-					assoBean.getFormatPattern(), assoBean.getLabelLength(), assoBean
-							.getIdentifierPropName());
+					assoBean);
 		} else if (assoBean.getAssociationType() == AssociationType.clazz) {
 			idStr = ModelTools.getCompleteNameJAXB(assoBean.getDestinationClass()) + "List";
 			instanceName = XFormsGenerator.getId(idStr);
 			modelElementUpdater = new ModelElementUpdaterList(assoBean.getDestinationClass(),
-					instanceName, assoBean.getFormatPattern(), assoBean.getLabelLength(), assoBean
-							.getFilterAssoc(), assoBean.isComposition());
+					instanceName, assoBean);
 		} else {
 			idStr = ModelTools
 					.getCompleteNameJAXB(assoBean.getDestinationSelect().getEnumeration())
@@ -94,9 +93,23 @@ public class RenderableSelector extends AbstractRenderable {
 		// bindType.setHidden(true);
 
 		// for workflows, we don't want anything but the list
-		add(new RenderableSelectorList(assoBean, this));
-		add(new RenderableSelectorCount(assoBean, this));
-		add(new RenderableSelectorSearcher(assoBean, this));
+		RenderableSelectorSearcher searcher = new RenderableSelectorSearcher(assoBean, this);
+		RenderableSelectorList itemList = new RenderableSelectorList(assoBean, this);
+
+		if (assoBean.isInFeatureSearchMode()) {
+			add(searcher);
+		}
+
+		add(itemList);
+		if (assoBean.isNoStatsOutput() == false) {
+			RenderableSelectorCount statsOutput = new RenderableSelectorCount(assoBean, this);
+			add(statsOutput);
+		}
+
+		if (assoBean.isInFeatureFilterMode()) {
+			add(searcher);
+		}
+
 		if (assoBean.isShowingActions()
 				&& assoBean.getAssociationType() == AssociationBean.AssociationType.clazz) {
 			add(new RenderableSelectorCreate(assoBean, this));
@@ -196,18 +209,18 @@ public class RenderableSelector extends AbstractRenderable {
 		RenderedDiv rendered = new RenderedDiv(XFormsGenerator.getId("Selector"));
 		initBinds();
 
+		ModelElement modelElementInit;
 		if (bean.isForField()) {
-			rendered.addModelElement(new ModelElementInstanceList(bean.getOverridingType(),
-					instanceName, bean.getFormatPattern(), bean.getLabelLength(), bean
-							.getIdentifierPropName()));
+			modelElementInit = new ModelElementInstanceList(bean.getOverridingType(), instanceName,
+					bean);
 		} else if (bean.getAssociationType() == AssociationType.clazz) {
-			rendered.addModelElement(new ModelElementInstanceList(bean.getDestinationClass(),
-					instanceName, bean.getFormatPattern(), bean.getLabelLength(), bean
-							.getFilterAssoc(), bean.isComposition()));
+			modelElementInit = new ModelElementInstanceList(bean, instanceName);
 		} else {
-			rendered.addModelElement(new ModelElementEnumeration(bean.getDestinationSelect(),
-					instanceName));
+			modelElementInit = new ModelElementEnumeration(bean.getDestinationSelect(),
+					instanceName);
 		}
+
+		rendered.addModelElement(modelElementInit);
 		rendered.addModelElement(modelElementUpdater);
 
 		rendered.addModelElementRoot(bindId);

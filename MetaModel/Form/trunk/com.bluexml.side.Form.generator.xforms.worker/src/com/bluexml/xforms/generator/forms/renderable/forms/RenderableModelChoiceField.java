@@ -58,9 +58,6 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 		properties.setHint(formElement.getHelp_text());
 		properties.setStyle(formElement.getStyle());
 
-		properties.setDestinationRenderable(null);
-		properties.setInline(false);
-
 		properties.setCreateEditFormType(FormTypeRendered.formForm);
 		int targetsNb = formElement.getTarget().size();
 		if (targetsNb > 0) {
@@ -128,6 +125,14 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 			properties.setFilterAssoc(alfrescoName);
 		}
 		properties.setComposition(isComposition);
+
+		// custom configuration parameters
+		FormGeneratorsManager formGenerator = getFormGenerator();
+		properties.setDataSourceUri(formGenerator.getXtensionDataSourceUri(formElement));
+		properties.setFeatureMode(formGenerator.getXtensionFeatureMode(formElement));
+		properties.setLuceneQuery(formGenerator.getXtensionLuceneQuery(formElement));
+		properties.setNoAutoSearch(formGenerator.getXtensionNoAutoSearch(formElement));
+		properties.setNoStatsOutput(formGenerator.getXtensionNoStatsOutput(formElement));
 
 		add(new CommonRenderableAssociation(properties));
 	}

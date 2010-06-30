@@ -59,6 +59,14 @@ public class RenderableChoiceInputSearch extends Renderable {
 		}
 		associationBean.setMandatory(choiceField.isMandatory());
 
+		// custom configuration parameters
+		FormGeneratorsManager formGenerator = getFormGenerator();
+		associationBean.setDataSourceUri(formGenerator.getXtensionDataSourceUri(choiceField));
+		associationBean.setFeatureMode(formGenerator.getXtensionFeatureMode(choiceField));
+		associationBean.setLuceneQuery(formGenerator.getXtensionLuceneQuery(choiceField));
+		associationBean.setNoAutoSearch(formGenerator.getXtensionNoAutoSearch(choiceField));
+		associationBean.setNoStatsOutput(formGenerator.getXtensionNoStatsOutput(choiceField));
+
 		RenderableSelector selector = new RenderableSelector(associationBean);
 		add(new RenderableSSingle(associationBean, selector));
 		throw new RuntimeException("This class is deprecated");

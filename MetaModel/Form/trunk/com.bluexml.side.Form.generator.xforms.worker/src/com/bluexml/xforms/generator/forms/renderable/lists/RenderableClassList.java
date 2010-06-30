@@ -9,6 +9,7 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindHolder;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementInstanceList;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementUpdaterList;
+import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.rendered.RenderedGroup;
 import com.bluexml.xforms.generator.tools.ModelTools;
 import com.bluexml.xforms.messages.MsgId;
@@ -23,9 +24,9 @@ public class RenderableClassList extends Renderable {
 	public RenderableClassList(Clazz classe) {
 		super();
 		this.classe = classe;
-
-		modelElementListUpdater = new ModelElementUpdaterList(classe, "instanceList", "", "0", "",
-				false);
+		AssociationBean bean = new AssociationBean();
+		
+		modelElementListUpdater = new ModelElementUpdaterList(classe, "instanceList", bean);
 		modelElementBindHolder = new ModelElementBindHolder("instance('instanceList')/"
 				+ MsgId.INT_INSTANCE_SELECT_ITEM);
 		bindLabel = new ModelElementBindSimple(MsgId.INT_INSTANCE_SELECT_LABEL.getText());
@@ -50,8 +51,10 @@ public class RenderableClassList extends Renderable {
 				"list", null);
 		renderedGroup.addModelElement(modelElementListUpdater);
 		renderedGroup.addModelElement(modelElementBindHolder);
-		renderedGroup.addModelElement(new ModelElementInstanceList(classe, "instanceList", "", "0",
-				"", false));
+
+		AssociationBean bean = new AssociationBean();
+		bean.setDestinationClass(classe);
+		renderedGroup.addModelElement(new ModelElementInstanceList(bean, "instanceList"));
 		return renderedGroup;
 	}
 

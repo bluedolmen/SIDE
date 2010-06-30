@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class AbstractRenderable.
@@ -22,15 +23,6 @@ public abstract class AbstractRenderable extends Renderable {
 	public AbstractRenderable(AssociationBean bean) {
 		super();
 		this.bean = bean;
-	}
-
-	/**
-	 * Gets the bean.
-	 * 
-	 * @return the bean
-	 */
-	public AssociationBean getBean() {
-		return bean;
 	}
 
 	/**
@@ -58,5 +50,20 @@ public abstract class AbstractRenderable extends Renderable {
 		String nodeSetItems = nodeSetActions + "[position()!=last()]";
 		return nodeSetItems;
 	}
+
+	/**
+	 * Returns the appropriate CSS class for the selection widget.
+	 */
+	protected String getWidgetStyle() {
+		String style = MsgId.INT_CSS_SELECT_WIDGET.getText();
+		if (bean.isInFeatureFilterMode()) {
+			style += " " + MsgId.INT_CSS_SELECT_FEATURE_FILTER;
+		}
+		if (bean.isInFeatureSearchMode()) {
+			style += " " + MsgId.INT_CSS_SELECT_FEATURE_SEARCH;
+		}
+		return style;
+	}
+
 
 }

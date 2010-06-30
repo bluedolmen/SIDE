@@ -1,14 +1,16 @@
 package com.bluexml.xforms.generator.forms.modelelement;
 
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
+import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class ModelElementListUpdater. Provides an element of an XForms template's "model" section.
- * The element will trigger the fetching <em>and replacing</em> of a selection widget's item set.
+ * The element will trigger the fetching <em>and replacing</em> of a selection widget's item list.
  */
 public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 
@@ -22,24 +24,46 @@ public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 
 	private boolean isComposition; // #1536
 
-	public ModelElementUpdaterList(Clazz classe, String instanceName, String formatPattern,
-			String maxLength, String filterAssoc, boolean isComposition) {
+	private String luceneQuery;
+
+	private String dataSourceUri;
+
+	/**
+	 * If <code>true</code>, the widget this model element is for is in search mode. Which implies
+	 * that the widget should load as empty.
+	 */
+	private boolean isForSearch;
+
+	/** Constructor for normal associations. */
+	public ModelElementUpdaterList(Clazz classe, String instanceName, AssociationBean bean) {
 		super(classe, instanceName);
-		this.formatPattern = formatPattern;
-		this.maxLength = maxLength;
+
+		initFields(bean);
+
 		this.identifier = ""; // constructor used with Clazz provided. No need for this field.
-		this.filterAssoc = filterAssoc;
-		this.isComposition = isComposition;
 	}
 
-	public ModelElementUpdaterList(String overridingType, String instanceName,
-			String formatPattern, String labelLength, String identifier) {
+	/** Constructor for selection-capable text inputs. */
+	public ModelElementUpdaterList(String overridingType, String instanceName, AssociationBean bean) {
 		super(overridingType, instanceName);
-		this.formatPattern = formatPattern;
-		this.maxLength = labelLength;
-		this.identifier = identifier;
+
+		initFields(bean);
+
 		this.filterAssoc = null;
 		this.isComposition = false;
+	}
+
+	/**
+	 * @param bean
+	 */
+	private void initFields(AssociationBean bean) {
+		this.formatPattern = bean.getFormatPattern();
+		this.maxLength = bean.getLabelLength();
+		this.filterAssoc = bean.getFilterAssoc();
+		this.isComposition = bean.isComposition();
+		this.isForSearch = bean.isInFeatureSearchMode();
+		this.luceneQuery = bean.getLuceneQuery();
+		this.dataSourceUri = StringUtils.trimToNull(bean.getDataSourceUri());
 	}
 
 	/*
@@ -51,9 +75,15 @@ public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 	public Element getModelElement() {
 		Element submission = XFormsGenerator.createElement("submission",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		submission.setAttribute("action", MsgId.INT_URI_SCHEME_WRITER
-				+ buildListURI(typeCompleteName, formatPattern, maxLength, identifier, filterAssoc,
-						isComposition));
+		String sourceURI;
+		if (dataSourceUri == null) {
+			sourceURI = MsgId.INT_URI_SCHEME_WRITER
+					+ buildListActionUriFragment(typeCompleteName, formatPattern, maxLength,
+							identifier, filterAssoc, isComposition, isForSearch, luceneQuery);
+		} else {
+			sourceURI = dataSourceUri;
+		}
+		submission.setAttribute("action", sourceURI);
 		submission.setAttribute("replace", "instance");
 		submission.setAttribute("instance", instanceName);
 		submission.setAttribute("method", "post");

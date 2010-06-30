@@ -1,5 +1,7 @@
 package com.bluexml.xforms.generator.forms;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -80,14 +82,29 @@ public abstract class ModelElement {
 	 * @param typeCompleteName
 	 * @return
 	 */
-	protected String buildListURI(String typeCompleteName, String formatPattern, String maxLength,
-			String identifier, String filterAssoc, boolean isComposition) {
-		String result = MsgId.INT_ACT_CODE_LIST.getText() + "/" + typeCompleteName + "/"
-				+ StringUtils.trimToEmpty(formatPattern) + "/" + maxLength + "/"
-				+ StringUtils.trimToEmpty(identifier) + "/" + StringUtils.trimToEmpty(filterAssoc)
-				+ "/";
-		result += isComposition ? "1" : "0";
-		return result;
+	protected String buildListActionUriFragment(String typeCompleteName, String formatPattern,
+			String maxLength, String identifier, String filterAssoc, boolean isComposition,
+			boolean isForSearchMode, String luceneQuery) {
+		StringBuffer result = new StringBuffer(MsgId.INT_ACT_CODE_LIST.getText() + "/");
+		result.append(typeCompleteName).append("/");
+		result.append(StringUtils.trimToEmpty(formatPattern)).append("/");
+		result.append(maxLength).append("/");
+		result.append(StringUtils.trimToEmpty(identifier)).append("/");
+		result.append(StringUtils.trimToEmpty(filterAssoc)).append("/");
+		result.append(isComposition ? "1" : "0").append("/");
+		result.append(isForSearchMode ? "1" : "0").append("/");
+		String queryEncoded = StringUtils.trimToEmpty(luceneQuery);
+		try {
+			// encoded twice (because of our using the "/" as a param separator in URIs) so that the
+			// user doesn't have to encode "/" as "%252F"
+			queryEncoded = URLEncoder.encode(queryEncoded, "UTF-8");
+			queryEncoded = URLEncoder.encode(queryEncoded, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			queryEncoded = "";
+		}
+		result.append(queryEncoded).append("/");
+		return result.toString();
 	}
 
 }

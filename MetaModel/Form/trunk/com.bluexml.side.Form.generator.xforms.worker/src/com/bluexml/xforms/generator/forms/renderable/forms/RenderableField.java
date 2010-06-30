@@ -291,14 +291,17 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 				properties.setHint(formElement.getHelp_text());
 				properties.setStyle(formElement.getStyle());
 				properties.setAssocTitle(charField.getLabel());
-				properties.setDestination(null);
-				properties.setDestinationRenderable(null);
 				properties.setUniqueName(FormGeneratorsManager.getUniqueName(formElement));
-				properties.setCreateEditFormType(null);
-				properties.setFieldSize("0");
-				properties.setInline(false);
 				properties.setLoBound(0);
 				properties.setHiBound(1); // <-- TO CHANGE when multiple values are supported
+
+				// custom configuration parameters
+				FormGeneratorsManager formGenerator = getFormGenerator();
+				properties.setDataSourceUri(formGenerator.getXtensionDataSourceUri(formElement));
+				properties.setFeatureMode(formGenerator.getXtensionFeatureMode(formElement));
+				properties.setLuceneQuery(formGenerator.getXtensionLuceneQuery(formElement));
+				properties.setNoAutoSearch(formGenerator.getXtensionNoAutoSearch(formElement));
+				properties.setNoStatsOutput(formGenerator.getXtensionNoStatsOutput(formElement));
 
 				renderable = new CommonRenderableAssociation(properties);
 				// ** #1530
