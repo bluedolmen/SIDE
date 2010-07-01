@@ -50,6 +50,7 @@ import com.bluexml.side.form.ChoiceSearchField;
 import com.bluexml.side.form.DateFieldSearchOperators;
 import com.bluexml.side.form.DateSearchField;
 import com.bluexml.side.form.Field;
+import com.bluexml.side.form.FileField;
 import com.bluexml.side.form.FileFieldSearchOperators;
 import com.bluexml.side.form.FileSearchField;
 import com.bluexml.side.form.FormCollection;
@@ -59,6 +60,7 @@ import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.NumericalFieldSearchOperators;
 import com.bluexml.side.form.NumericalSearchField;
 import com.bluexml.side.form.SearchField;
+import com.bluexml.side.form.TextField;
 import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
 import com.bluexml.side.workflow.WorkflowPackage;
 import com.bluexml.xforms.generator.GeneratorInterface.AssociationCardinality;
@@ -1387,7 +1389,28 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Tells whether the field will be rendered as a selection widget instead of a text input.
+	 * Tells whether the field can be rendered as a multiple input. <br/>
+	 * Centralizes the determination of this capability.
+	 * 
+	 * @param field
+	 * @return true if required parameters are found in the appropriate property
+	 */
+	public boolean isFieldMultipleCapable(Field field) {
+		ModelElement ref = (ModelElement) getRealObject(field.getRef());
+		Attribute attribute = (Attribute) ref;
+		String result = ModelTools.getMetaInfoValue(attribute, "multiple");
+		Enumeration enumQname = attribute.getValueList();
+		boolean neverMultiple = ((field instanceof TextField) && (field instanceof FileField));
+
+		if (StringUtils.equalsIgnoreCase(result, "true") && !neverMultiple && (enumQname != null)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Tells whether the field will be rendered as a selection widget instead of a text input.<br/>
+	 * Centralizes the determination of this capability.
 	 * 
 	 * @param field
 	 * @return true if required parameters are found in the appropriate property

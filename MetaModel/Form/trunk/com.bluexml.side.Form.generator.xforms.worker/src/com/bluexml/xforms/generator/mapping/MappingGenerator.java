@@ -222,7 +222,7 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 
 		String initialValue = attribute.getInitialValue();
-		if (initialValue != null) {
+		if (StringUtils.trimToNull(initialValue) != null) {
 			attributeType.setDefault(initialValue);
 		}
 
@@ -892,7 +892,6 @@ public class MappingGenerator extends AbstractGenerator {
 	 *            the form class
 	 */
 	private void processField(CanisterType canister, FormContainer formContainer, Field field) {
-		String result;
 		FormFieldType formFieldType = objectFactory.createFormFieldType();
 		List<FormFieldType> fieldTypesList;
 
@@ -937,7 +936,7 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 
 		String initialValue = field.getInitial();
-		if (initialValue != null) {
+		if (StringUtils.trimToNull(initialValue) != null) {
 			formFieldType.setDefault(initialValue); // optional attribute
 		}
 		if (field.isMandatory()) {
@@ -963,11 +962,9 @@ public class MappingGenerator extends AbstractGenerator {
 				}
 			}
 
-			result = ModelTools.getMetaInfoValue(attribute, "multiple");
-			if (result != null) {
-				if (StringUtils.equalsIgnoreCase(result, "true")) {
-					formFieldType.setMultiple(true); // optional attribute
-				}
+			boolean canBeMultiple = formGenerator.isFieldMultipleCapable(field);
+			if (canBeMultiple) {
+				formFieldType.setMultiple(true); // optional attribute
 			}
 		} else if (ref instanceof com.bluexml.side.workflow.Attribute) {
 			com.bluexml.side.workflow.Attribute attribute = ((com.bluexml.side.workflow.Attribute) ref);
@@ -1194,7 +1191,7 @@ public class MappingGenerator extends AbstractGenerator {
 			res.setDefault(formFieldType.getDefault());
 		}
 		try {
-			res.setMultiple(formFieldType.isMultiple());
+			// res.setMultiple(formFieldType.isMultiple()); // not supported on file fields
 			res.setSearchEnum(formFieldType.isSearchEnum());
 		} catch (Exception e) {
 			// nothing to do, these are optional attributes

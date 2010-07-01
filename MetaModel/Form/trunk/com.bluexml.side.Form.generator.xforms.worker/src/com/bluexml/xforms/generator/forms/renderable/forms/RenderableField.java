@@ -8,7 +8,6 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
 
-import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
@@ -38,7 +37,6 @@ import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationProperties;
 import com.bluexml.xforms.generator.forms.renderable.common.CommonRenderableAssociation;
 import com.bluexml.xforms.generator.forms.renderable.common.field.AbstractRenderableField;
-import com.bluexml.xforms.generator.forms.renderable.forms.RenderableActionField;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableChoiceInput;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableChoiceInputWorkflow;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableDateTimeInput;
@@ -51,7 +49,6 @@ import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableSimpl
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableTextInput;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableURLInput;
 import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
-import com.bluexml.xforms.generator.tools.ModelTools;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
@@ -307,18 +304,11 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 				// ** #1530
 			} else {
 				// ** 1420: support for 'multiple' property set to 'true' on standard text inputs
-				com.bluexml.side.clazz.Attribute refAttr;
 				try {
-					refAttr = (com.bluexml.side.clazz.Attribute) formElement.getRef();
-					String multipleStr = ModelTools.getMetaInfoValue(refAttr, "multiple");
-					Enumeration enumQname = refAttr.getValueList();
-					if (multipleStr != null) {
-						if (StringUtils.equalsIgnoreCase(multipleStr, "true")
-								&& (enumQname == null)) {
-							renderable = new RenderableSimpleInputMultiple<Field>(
-									generationManager, parent, formElement, "string");
-							return renderable;
-						}
+					if (getFormGenerator().isFieldMultipleCapable(formElement)) {
+						renderable = new RenderableSimpleInputMultiple<Field>(generationManager,
+								parent, formElement, "string");
+						return renderable;
 					}
 				} catch (ClassCastException cce) {
 					if ((formElement.getRef() instanceof Attribute) == false) {
