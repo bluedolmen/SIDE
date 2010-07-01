@@ -97,6 +97,7 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 		}
 
 		Element div = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+		// align right side with the right side of the item list
 		div.setAttribute("class", "xformstdright");
 		div.addContent(input);
 		if (!usingAutoSearch) {
