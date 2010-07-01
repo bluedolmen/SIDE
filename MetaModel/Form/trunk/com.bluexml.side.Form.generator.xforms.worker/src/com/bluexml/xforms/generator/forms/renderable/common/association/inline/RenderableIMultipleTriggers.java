@@ -12,6 +12,8 @@ import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
 import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 
 /**
  * The Class RenderableIMultipleTriggers.
@@ -39,9 +41,10 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 	 * @return the element
 	 */
 	private Element createAdd(ModelElementBindSimple bind, String repeaterId) {
+		String label = MsgPool.getMsg(MsgId.MSG_TRIGGER_INLINE_MULTIPLE_ADD, ModelTools
+				.getTitle(bean.getDestinationClass()));
 		Element add = XFormsGenerator.createElementWithLabel("trigger",
-				XFormsGenerator.NAMESPACE_XFORMS, "Ajouter "
-						+ ModelTools.getTitle(bean.getDestinationClass()));
+				XFormsGenerator.NAMESPACE_XFORMS, label);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		if (bean.getHiBound() > 1) {
 			String maxcount = Integer.toString(bean.getHiBound() + 1);
@@ -57,8 +60,9 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 
 		action.addContent(insertAction);
 
-		// uncomment when using a more recent version of Dojo than the 0.4 in Chiba 2.3. See the 
-		// companion comment in RenderedForm.java
+		// Uncomment when using a more recent version of Dojo than the 0.4 in Chiba 2.3. See the
+		// companion comment in RenderedForm.java. It will allow for correct rendering of tabs in 
+		// inline forms
 		// Element updateAction = XFormsGenerator.createElement("load",
 		// XFormsGenerator.NAMESPACE_XFORMS);
 		// updateAction.setAttribute("resource", "javascript:dojo.parser.parse()");
@@ -75,12 +79,22 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 	 *            the bind
 	 * @param repeaterId
 	 *            the repeater id
+	 * @param path
 	 * 
 	 * @return the element
 	 */
-	private Element createDelete(ModelElementBindSimple bind, String repeaterId) {
+	private Element createDelete(ModelElementBindSimple bind, String repeaterId, String path) {
+		String label = MsgPool.getMsg(MsgId.MSG_TRIGGER_INLINE_MULTIPLE_DELETE, ModelTools
+				.getTitle(bean.getDestinationClass()));
 		Element delete = XFormsGenerator.createElementWithLabel("trigger",
-				XFormsGenerator.NAMESPACE_XFORMS, "Supprimer");
+				XFormsGenerator.NAMESPACE_XFORMS, label);
+
+		//** #1650
+		String shortenedPath = path.substring(0, path.length() - 1); // path has a trailing '/'
+		String refCondition = "self::node()[" + shortenedPath + "[2]]";
+		delete.setAttribute("ref", refCondition); // hides the Delete trigger if no inline form
+		//** #1650
+
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 
 		Element deleteAction = XFormsGenerator.createElement("delete",
@@ -121,7 +135,7 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 				.getBindActions();
 		String repeaterId = renderedParents.peek().getOptionalData();
 		Element addButton = createAdd(bindActions, repeaterId);
-		Element deleteButton = createDelete(bindActions, repeaterId);
+		Element deleteButton = createDelete(bindActions, repeaterId, path);
 		Element divButtons = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		divButtons.setAttribute("class", ModelTools.getCompleteNameJAXB(bean.getDestinationClass())
 				+ "_triggers");
