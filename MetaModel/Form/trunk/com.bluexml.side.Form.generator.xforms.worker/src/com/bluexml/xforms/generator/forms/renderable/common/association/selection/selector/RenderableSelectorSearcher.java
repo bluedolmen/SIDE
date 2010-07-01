@@ -56,6 +56,9 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 		boolean usingAutoSearch = (bean.isNoAutoSearch() == false);
 
 		Element input = XFormsGenerator.createElement("input", XFormsGenerator.NAMESPACE_XFORMS);
+		input.setAttribute("id", XFormsGenerator.getId("searchInput"));
+		input.setAttribute("incremental", "true");
+		input.setAttribute("ref", getInstancePath() + "query/query");
 
 		Element label = XFormsGenerator.createElement("label", XFormsGenerator.NAMESPACE_XFORMS);
 		if (bean.isInFeatureFilterMode()) {
@@ -65,16 +68,16 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 			label.setText(MsgPool.getMsg(MsgId.MSG_SELECT_LIST_SEARCH_LABEL));
 		}
 		input.addContent(label);
-		input.setAttribute("id", XFormsGenerator.getId("searchInput"));
-		input.setAttribute("incremental", "true");
-		input.setAttribute("ref", getInstancePath() + "query/query");
+
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "xforms-value-changed", XFormsGenerator.NAMESPACE_EVENTS);
+		action.setAttribute("if", "string-length(.) > 2"); // start searching at 3 characters
+		input.addContent(action);
+
 		Element setvalue = XFormsGenerator.createElement("setvalue",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		setvalue.setAttribute("ref", getInstancePath() + "query/maxResults");
 		setvalue.setAttribute("value", getInstancePath() + "SELECTMAX");
-		action.setAttribute("if", "string-length(.) > 2"); // start searching at 3 characters
 		action.addContent(setvalue);
 
 		Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
@@ -93,27 +96,22 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 			trigger.addContent(actionTrigger);
 		}
 
-		input.addContent(action);
-
 		Element div = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
-		div.setAttribute("class", MsgId.INT_CSS_SELECT_SEARCH_ZONE.getText());
-
+		div.setAttribute("class", "xformstdright");
+		div.addContent(input);
 		if (!usingAutoSearch) {
 			div.addContent(trigger);
 
 			// set style in order to keep the search button on the same horizontal line as the input
-			trigger.setAttribute("class", "xformstdright");
+			input.setAttribute("class", "xformstdleft");
 		}
-		input.setAttribute("class", "xformstdright");
-		div.addContent(input);
 
-		// need this to align the filter on the right side of the containing div
-		Element divLineBreaker = XFormsGenerator.createElement("div",
-				XFormsGenerator.NAMESPACE_XHTML);
-		divLineBreaker.setAttribute("class", "xformstdclear");
-		div.addContent(divLineBreaker);
+		Element outerDiv = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+		outerDiv.setAttribute("class", MsgId.INT_CSS_SELECT_SEARCH_ZONE.getText());
+		outerDiv.addContent(div);
 
-		rendered.setXformsElement(div);
+		rendered.setXformsElement(outerDiv);
+
 		return rendered;
 	}
 
