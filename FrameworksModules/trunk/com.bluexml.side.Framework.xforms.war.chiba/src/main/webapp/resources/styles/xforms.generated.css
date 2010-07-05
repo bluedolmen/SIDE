@@ -95,9 +95,13 @@ div.dojoTab {
 	overflow: hidden;
 }
 
-/* align (vertically) bottom line of readonly fields' label with the text*/
 div.xformstdclear label {
+/* align (vertically) bottom line of readonly fields' label with the text*/
 	margin-top: 0px;
+}
+
+div.side_datetime_time label {
+	display: none;
 }
 
 /*
@@ -140,8 +144,7 @@ div.xformstdclear label {
 }
 
 .side_select_selected_items,.side_select_selected_item,.side_input_multiple_items
-	{
-	/* make a visible container for the elements to be selected.*/
+	{ /* make a visible container for the elements to be selected.*/
 	border-style: solid;
 	border-width: 1px;
 	border-color: #DDD;
@@ -151,8 +154,7 @@ div.xformstdclear label {
 }
 
 div.side_select_output_zone,.side_select_feature_search select,.side_select_search_zone,.side_select_widget .submit
-	{
-	/* vertical space between elements non-first elements*/
+	{ /* vertical space between elements non-first elements*/
 	margin-top: 5px;
 }
 
@@ -237,7 +239,6 @@ div.side_select_output_zone,.side_select_feature_search select,.side_select_sear
  */
 .side_search_value label {
 	display: none;
-	width: 0px;
 }
 
 .side_search_value,.side_search_operator {
