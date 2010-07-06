@@ -687,9 +687,13 @@ public class MappingGenerator extends AbstractGenerator {
 		FormContainer realContainer = form;
 
 		realContainer = (FormContainer) formGenerator.getRealObject(form); // #1225
+		String xtension = StringUtils.trimToNull(formGenerator.getXtensionAsString(form)); // #1656
 
 		if (realContainer instanceof FormClass) {
 			FormType formType = newFormType(realContainer);
+			if (xtension != null) {
+				formType.setXtension(xtension);
+			}
 
 			FormClass formClass = (FormClass) realContainer;
 			if (formClass.isContent_enabled()) {
@@ -700,6 +704,10 @@ public class MappingGenerator extends AbstractGenerator {
 			mapping.getCanister().add(objectFactory.createForm(formType));
 		} else if (realContainer instanceof FormSearch) {
 			SearchFormType sfType = objectFactory.createSearchFormType();
+			if (xtension != null) {
+				sfType.setXtension(xtension);
+			}
+
 			sfType.setName(realContainer.getId());
 			FormSearch formSearch = (FormSearch) realContainer;
 			String operator = formSearch.getCombinationOperator().getName();
@@ -708,9 +716,12 @@ public class MappingGenerator extends AbstractGenerator {
 			processFormElement(sfType, realContainer, realContainer, realContainer);
 			mapping.getCanister().add(objectFactory.createSearch(sfType));
 		} else if (realContainer instanceof FormWorkflow) {
-			FormWorkflow formWorkflow = ((FormWorkflow) realContainer);
-
 			WorkflowTaskType taskType = objectFactory.createWorkflowTaskType();
+			if (xtension != null) {
+				taskType.setXtension(xtension);
+			}
+
+			FormWorkflow formWorkflow = ((FormWorkflow) realContainer);
 			String formName = formWorkflow.getId();
 			String taskId = workflowBuildBlueXMLTaskName(formName);
 
@@ -1077,9 +1088,9 @@ public class MappingGenerator extends AbstractGenerator {
 				}
 			}
 		} else {
-			// pathological case
 			throw new RuntimeException("Can't determine the Alfresco name of attribute '"
-					+ attribute.getName() + "' (" + attribute.getTitle() + ")");
+					+ attribute.getName() + "' (" + attribute.getTitle()
+					+ ") because the container object is not a Clazz");
 		}
 		return null;
 	}
