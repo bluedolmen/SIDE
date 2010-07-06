@@ -383,7 +383,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		Element globaldiv = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 
 		Element dateDiv = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
-		dateDiv.setAttribute("class", "xformstdleft");
+		dateDiv.setAttribute("class", "xformstdleft " + MsgId.INT_CSS_DATETIME_DATE);
 
 		Element inputDate = XFormsGenerator
 				.createElement("input", XFormsGenerator.NAMESPACE_XFORMS);
@@ -394,7 +394,7 @@ public abstract class AbstractRenderableField extends Renderable {
 		dateDiv.addContent(inputDate);
 
 		Element timeDiv = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
-		dateDiv.setAttribute("class", "xformstdleft");
+		timeDiv.setAttribute("class", "xformstdleft " + MsgId.INT_CSS_DATETIME_TIME);
 
 		Element inputTime = XFormsGenerator
 				.createElement("input", XFormsGenerator.NAMESPACE_XFORMS);
