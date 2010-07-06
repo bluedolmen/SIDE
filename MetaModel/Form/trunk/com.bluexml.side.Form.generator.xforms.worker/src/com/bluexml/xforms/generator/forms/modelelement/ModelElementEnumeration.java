@@ -51,7 +51,7 @@ public class ModelElementEnumeration extends ModelElement {
 				XFormsGenerator.NAMESPACE_XFORMS);
 		String dataSourceURI = MsgId.INT_URI_SCHEME_READER + "enum/" + getParameters();
 
-		if (StringUtils.trimToNull(selectBean.getDataSourceUri()) != null) { // #1650
+		if (StringUtils.trimToNull(selectBean.getDataSourceUri()) != null) { // #1660
 			dataSourceURI = selectBean.getDataSourceUri();
 		}
 

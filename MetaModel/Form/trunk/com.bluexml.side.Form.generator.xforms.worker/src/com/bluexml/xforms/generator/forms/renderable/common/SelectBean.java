@@ -48,7 +48,7 @@ public class SelectBean {
 	/** For choosing the UI rendering, combobox, list or radiobuttons/checkboxes */
 	private ChoiceWidgetType widgetType;
 
-	private String dataSourceUri; // #1650
+	private String dataSourceUri; // #1660
 
 	public SelectBean(ModelElementBindSimple meb, String slabel, Enumeration valueList,
 			boolean isMultiple) {

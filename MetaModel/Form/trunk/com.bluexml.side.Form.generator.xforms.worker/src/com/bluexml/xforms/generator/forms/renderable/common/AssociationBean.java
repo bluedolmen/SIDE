@@ -95,7 +95,7 @@ public class AssociationBean {
 
 	private String style; // #1600
 
-	// Xtension-defined (for associations) #1650
+	// Xtension-defined (for associations) #1660
 	private String dataSourceUri;
 	private String featureMode;
 	private String luceneQuery;
