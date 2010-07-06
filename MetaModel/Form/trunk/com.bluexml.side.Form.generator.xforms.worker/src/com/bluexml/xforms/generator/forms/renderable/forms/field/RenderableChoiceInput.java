@@ -97,6 +97,8 @@ public class RenderableChoiceInput extends RenderableField<ChoiceField> {
 		selectBean.setLimited(false);
 		selectBean.setWidgetType(formElement.getWidget());
 		selectBean.setWorkflowEnum(enumTypeIsWorkflow);
+		selectBean.setDataSourceUri(getFormGenerator().getXtensionDataSourceUri(formElement));
+
 		return getSelectElement(rendered, selectBean);
 	}
 

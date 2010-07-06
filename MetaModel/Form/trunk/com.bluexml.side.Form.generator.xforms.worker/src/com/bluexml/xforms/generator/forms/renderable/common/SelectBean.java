@@ -48,6 +48,8 @@ public class SelectBean {
 	/** For choosing the UI rendering, combobox, list or radiobuttons/checkboxes */
 	private ChoiceWidgetType widgetType;
 
+	private String dataSourceUri; // #1650
+
 	public SelectBean(ModelElementBindSimple meb, String slabel, Enumeration valueList,
 			boolean isMultiple) {
 		super();
@@ -62,6 +64,7 @@ public class SelectBean {
 		setWidgetType(ChoiceWidgetType.SHOW_ONE);
 		setWorkflowEnum(false);
 		setAllowedValues(null);
+		setDataSourceUri(null);
 	}
 
 	/**
@@ -244,6 +247,20 @@ public class SelectBean {
 	 */
 	public void setOperatorType(String operatorType) {
 		this.operatorType = operatorType;
+	}
+
+	/**
+	 * @param dataSourceUri the dataSourceUri to set
+	 */
+	public void setDataSourceUri(String dataSourceUri) {
+		this.dataSourceUri = dataSourceUri;
+	}
+
+	/**
+	 * @return the dataSourceUri
+	 */
+	public String getDataSourceUri() {
+		return dataSourceUri;
 	}
 
 }

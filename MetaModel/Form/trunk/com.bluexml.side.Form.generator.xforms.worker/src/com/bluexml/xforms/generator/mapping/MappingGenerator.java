@@ -971,6 +971,14 @@ public class MappingGenerator extends AbstractGenerator {
 					formFieldType.setStaticEnumType(ModelTools.getCompleteName(attribute
 							.getValueList()));
 				}
+
+				// for now, setting the xtension depends on data source being present
+				String xtensionDataSourceUri = formGenerator.getXtensionDataSourceUri(field);
+				if (StringUtils.trimToNull(xtensionDataSourceUri) != null) {
+					String xtension = formGenerator.getXtensionAsString(field);
+					formFieldType.setXtension(xtension);
+				}
+
 			}
 
 			boolean canBeMultiple = formGenerator.isFieldMultipleCapable(field);
