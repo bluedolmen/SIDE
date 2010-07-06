@@ -55,6 +55,7 @@ import com.bluexml.xforms.messages.MsgId;
  */
 public class XFormsGenerator extends AbstractGenerator {
 
+	@Deprecated
 	class IntGroupImpl extends FormGroupImpl {
 		String id;
 		String label;

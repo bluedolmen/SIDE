@@ -1474,7 +1474,7 @@ public class FormGeneratorsManager {
 	 * Gets the content of the extension field as a comma-separated string.
 	 * 
 	 * @param formElt
-	 * @return the string
+	 * @return the string, never <code>null</code>.
 	 */
 	public String getXtensionAsString(FormElement formElt) {
 		EList<String> list = formElt.getXtension();
