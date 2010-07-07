@@ -5,12 +5,13 @@ Icons are from the Crystal and Nuvola projects, both under the GNU Lesser Genera
 add:Crystal:edit_add.png
 clear: Crystal:restart.png
 clear2: Nuvola:trashcan_full.png
+deselect:Nuvola:button_cancel.png
 down:Crystal:2downarrow.png
 left:Crystal:2leftarrow.png
 right:Crystal:2rightarrow.png
 remove:Crystal:edit_remove.png
 search:nuvola:viewmag.png
-select:Crystal:ok.png
+select:Nuvola:button_ok.png
 select2:Crystal:finish.png
 up:Crystal:2uparrow.png
 
