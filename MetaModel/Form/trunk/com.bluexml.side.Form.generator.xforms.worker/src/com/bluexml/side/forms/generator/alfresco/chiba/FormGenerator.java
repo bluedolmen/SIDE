@@ -55,14 +55,15 @@ public class FormGenerator extends AbstractGenerator {
 		setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + defaultModelID);
 		File webappFolder = new File(getTemporarySystemFile(), "webapps" + File.separator + webappName);
 		xformGenerationFolder = new File(webappFolder.getAbsolutePath() + File.separator + "forms");
-		mappingGenerationFolder = new File(webappFolder.getAbsolutePath() + File.separator + "WEB-INF" + File.separator + "classes");
+		String classesPathname = webappFolder.getAbsolutePath() + File.separator + "WEB-INF" + File.separator + "classes";
+		mappingGenerationFolder = new File(classesPathname);
 
 		FileUtils.forceMkdir(xformGenerationFolder);
 		FileUtils.forceMkdir(mappingGenerationFolder);
 
 		String baseDir = xformGenerationFolder.getAbsolutePath();
 		String resDir = mappingGenerationFolder.getAbsolutePath();
-		String defaultsDir = getTemporarySystemFile() + File.separator + "defaults";
+		
 
 		File generateMappingFile = new File(resDir + File.separator + "mapping.xml");
 		File generateRedirectFile = new File(resDir + File.separator + "redirect.xml");
@@ -90,7 +91,7 @@ public class FormGenerator extends AbstractGenerator {
 			}
 		}
 		if (StringUtils.trimToNull(messagesFilePath) == null) {
-			String filePath = defaultsDir + File.separator + "messages.properties";
+			String filePath = classesPathname + File.separator + "messages.properties";
 			if (DefaultMessages.generateMessagesFile(filePath)) {
 				setMessagesFilePath(filePath);
 			} else {
