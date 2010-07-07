@@ -260,7 +260,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 				String idProp = getFormGenerator().getXtensionIdentifier(charField);
 				String labelLength = getFormGenerator().getXtensionLabelLength(charField);
 				if (labelLength == null) {
-					labelLength = "0";
+					labelLength = "" + charField.getMax_length();
 				}
 
 				AssociationProperties properties = new AssociationProperties();
