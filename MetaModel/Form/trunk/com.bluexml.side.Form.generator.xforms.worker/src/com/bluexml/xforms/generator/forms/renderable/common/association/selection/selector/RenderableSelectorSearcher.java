@@ -71,7 +71,6 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "xforms-value-changed", XFormsGenerator.NAMESPACE_EVENTS);
-		action.setAttribute("if", "string-length(.) > 2"); // start searching at 3 characters
 		input.addContent(action);
 
 		Element setvalue = XFormsGenerator.createElement("setvalue",
@@ -86,6 +85,8 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_SEARCH);
 
 		if (usingAutoSearch) {
+			// start searching at 3 characters (if using auto search - condition added wrt #1666)
+			action.setAttribute("if", "(string-length(.) > 2) or (. eq '')"); // #1666
 			action.addContent(send);
 		} else {
 			Element actionTrigger = XFormsGenerator.createElement("action",
