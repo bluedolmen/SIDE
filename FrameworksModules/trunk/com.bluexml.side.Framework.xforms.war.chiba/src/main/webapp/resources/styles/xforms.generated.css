@@ -196,7 +196,8 @@ div.side_select_output_zone,.side_select_feature_search select,.side_select_sear
 
 .side_select_widget .side_select_trigger_img img {
 	/* adds some space between the vertically stacked icons*/
-	margin-bottom: 8px;
+	margin-bottom: 4px;
+	margin-top: 4px;
 }
 
 /*
