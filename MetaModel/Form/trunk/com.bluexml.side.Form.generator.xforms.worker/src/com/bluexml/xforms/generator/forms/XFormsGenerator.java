@@ -107,8 +107,9 @@ public class XFormsGenerator extends AbstractGenerator {
 
 	// ** #1530
 	public static final String IMG_SELECT = "resources/images/select.png";
-	public static final String IMG_CLEAR = "resources/images/clear.png";
+	public static final String IMG_DESELECT = "resources/images/deselect.png";
 	// **
+	public static final String IMG_CLEAR = "resources/images/clear.png";
 	public static final String IMG_SEARCH = "resources/images/search.png";
 
 	/** The sax builder. */
