@@ -1,13 +1,11 @@
 package com.bluexml.xforms.generator.forms.modelelement;
 
-import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.SelectBean;
-import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
 
 public class ModelElementUpdaterEnum extends AbstractModelElementUpdater {
 
@@ -18,21 +16,21 @@ public class ModelElementUpdaterEnum extends AbstractModelElementUpdater {
 		this.associationBean = associationBean;
 	}
 
-	private String getParameters() {
-		SelectBean selectBean = associationBean.getDestinationSelect();
-		StringBuffer sb = new StringBuffer(ModelTools.getCompleteName(selectBean.getEnumeration()));
-		sb.append("/");
-		sb.append(StringUtils.trimToEmpty(selectBean.getEnumParent()));
-		sb.append("/");
-		sb.append(StringUtils.trimToEmpty(selectBean.getEnumContext()));
-		sb.append("/");
-		if (selectBean.isLimited()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		return sb.toString();
-	}
+	// private String getParameters() {
+	// SelectBean selectBean = associationBean.getDestinationSelect();
+	// StringBuffer sb = new StringBuffer(ModelTools.getCompleteName(selectBean.getEnumeration()));
+	// sb.append("/");
+	// sb.append(StringUtils.trimToEmpty(selectBean.getEnumParent()));
+	// sb.append("/");
+	// sb.append(StringUtils.trimToEmpty(selectBean.getEnumContext()));
+	// sb.append("/");
+	// if (selectBean.isLimited()) {
+	// sb.append("1");
+	// } else {
+	// sb.append("0");
+	// }
+	// return sb.toString();
+	// }
 
 	/*
 	 * (non-Javadoc)
@@ -43,7 +41,11 @@ public class ModelElementUpdaterEnum extends AbstractModelElementUpdater {
 	public Element getModelElement() {
 		Element submission = XFormsGenerator.createElement("submission",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		submission.setAttribute("action", MsgId.INT_URI_SCHEME_WRITER + "enum/" + getParameters());
+		// submission.setAttribute("action", MsgId.INT_URI_SCHEME_WRITER + "enum/" +
+		// getParameters());
+		SelectBean selectBean = associationBean.getDestinationSelect();
+		submission.setAttribute("action", MsgId.INT_URI_SCHEME_WRITER + "enum?"
+				+ buildEnumActionUriFragment(selectBean)); // #1637
 		submission.setAttribute("replace", "instance");
 		submission.setAttribute("instance", instanceName);
 		submission.setAttribute("method", "post");

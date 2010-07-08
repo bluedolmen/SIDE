@@ -112,7 +112,8 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 */
 	private Element getTriggerReset(ModelElementBindSimple bindId,
 			ModelElementBindSimple bindLabel, ModelElementBindSimple bindType) {
-		String img = selector.isForField() ? XFormsGenerator.IMG_CLEAR : XFormsGenerator.IMG_LEFT;
+		String img = selector.isForField() ? XFormsGenerator.IMG_DESELECT
+				: XFormsGenerator.IMG_LEFT;
 		Element trigger = XFormsGenerator.createTriggerWithLabelImage(img);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);

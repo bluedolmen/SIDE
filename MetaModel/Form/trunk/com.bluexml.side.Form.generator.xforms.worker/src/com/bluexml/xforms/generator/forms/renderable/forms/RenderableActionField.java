@@ -48,8 +48,11 @@ public class RenderableActionField extends Renderable {
 			infixe = MsgId.INT_ACT_CODE_EXECUTE.getText();
 		}
 		label = formElement.getLabel();
-		submission = new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER + infixe + "/"
-				+ actionName, label, true, DEFAULT_VALIDATE_FIRST);
+		// submission = new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER + infixe + "/"
+		// + actionName, label, true, DEFAULT_VALIDATE_FIRST);
+		String action = MsgId.INT_URI_SCHEME_WRITER + infixe + "?" + MsgId.INT_ACT_PARAM_EXEC_ACTION
+				+ "=" + actionName;
+		submission = new ModelElementSubmission(action, label, true, DEFAULT_VALIDATE_FIRST);
 		RenderableSubmit button = new RenderableSubmit(submission, label, false);
 		add(button);
 	}

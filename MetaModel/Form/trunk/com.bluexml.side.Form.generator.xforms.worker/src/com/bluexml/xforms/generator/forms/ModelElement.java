@@ -3,11 +3,14 @@ package com.bluexml.xforms.generator.forms;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Vector;
 
 import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.FormGeneratorsManager;
+import com.bluexml.xforms.generator.forms.renderable.common.SelectBean;
+import com.bluexml.xforms.generator.tools.ModelTools;
 import com.bluexml.xforms.messages.MsgId;
 
 /**
@@ -85,14 +88,14 @@ public abstract class ModelElement {
 	protected String buildListActionUriFragment(String typeCompleteName, String formatPattern,
 			String maxLength, String identifier, String filterAssoc, boolean isComposition,
 			boolean isForSearchMode, String luceneQuery) {
-		StringBuffer result = new StringBuffer(MsgId.INT_ACT_CODE_LIST.getText() + "/");
-		result.append(typeCompleteName).append("/");
-		result.append(StringUtils.trimToEmpty(formatPattern)).append("/");
-		result.append(maxLength).append("/");
-		result.append(StringUtils.trimToEmpty(identifier)).append("/");
-		result.append(StringUtils.trimToEmpty(filterAssoc)).append("/");
-		result.append(isComposition ? "1" : "0").append("/");
-		result.append(isForSearchMode ? "1" : "0").append("/");
+		// StringBuffer result = new StringBuffer(MsgId.INT_ACT_CODE_LIST.getText() + "/");
+		// result.append(typeCompleteName).append("/");
+		// result.append(StringUtils.trimToEmpty(formatPattern)).append("/");
+		// result.append(maxLength).append("/");
+		// result.append(StringUtils.trimToEmpty(identifier)).append("/");
+		// result.append(StringUtils.trimToEmpty(filterAssoc)).append("/");
+		// result.append(isComposition ? "1" : "0").append("/");
+		// result.append(isForSearchMode ? "1" : "0").append("/");
 		String queryEncoded = StringUtils.trimToEmpty(luceneQuery);
 		try {
 			// encoded twice (because of our using the "/" as a param separator in URIs) so that the
@@ -103,8 +106,72 @@ public abstract class ModelElement {
 			e.printStackTrace();
 			queryEncoded = "";
 		}
-		result.append(queryEncoded).append("/");
-		return result.toString();
+		// result.append(queryEncoded).append("/");
+		// return result.toString();
+		String result = MsgId.INT_ACT_CODE_LIST.getText() + "?";
+
+		List<MsgId> param = new Vector<MsgId>(8);
+		List<String> value = new Vector<String>(8);
+		String isCompStr = isComposition ? "1" : "0";
+		String isSearchStr = isForSearchMode ? "1" : "0";
+
+		param.add(MsgId.INT_ACT_PARAM_ANY_DATATYPE);
+		value.add(typeCompleteName);
+		param.add(MsgId.INT_ACT_PARAM_LIST_FORMAT);
+		value.add(formatPattern);
+		param.add(MsgId.INT_ACT_PARAM_LIST_MAXLENGTH);
+		value.add(maxLength);
+		param.add(MsgId.INT_ACT_PARAM_LIST_IDENTIFIER);
+		value.add(identifier);
+		param.add(MsgId.INT_ACT_PARAM_LIST_FILTER_ASSOC);
+		value.add(filterAssoc);
+		param.add(MsgId.INT_ACT_PARAM_LIST_IS_COMPOSITION);
+		value.add(isCompStr);
+		param.add(MsgId.INT_ACT_PARAM_LIST_IS_SEARCH_MODE);
+		value.add(isSearchStr);
+		param.add(MsgId.INT_ACT_PARAM_LIST_LUCENE_QUERY);
+		value.add(queryEncoded);
+
+		for (int i = 0; i < param.size(); i++) {
+			if (i > 0) {
+				result += "&";
+			}
+			result += param.get(i) + "=" + StringUtils.trimToEmpty(value.get(i));
+		}
+		return result;
+	}
+
+	protected String buildEnumActionUriFragment(SelectBean selectBean) {
+		String enumName;
+		if (selectBean.getEnumeration() != null) {
+			enumName = ModelTools.getCompleteName(selectBean.getEnumeration());
+		} else {
+			enumName = selectBean.getOperatorType();
+		}
+		// StringBuffer sb = new StringBuffer(enumName);
+		// sb.append("/");
+		// sb.append(StringUtils.trimToEmpty(selectBean.getEnumParent()));
+		// sb.append("/");
+		// sb.append(StringUtils.trimToEmpty(selectBean.getEnumContext()));
+		// sb.append("/");
+		// if (selectBean.isLimited()) {
+		// sb.append("1");
+		// } else {
+		// sb.append("0");
+		// }
+		String parent = selectBean.getEnumParent();
+		String context = selectBean.getEnumContext();
+		String limit = selectBean.isLimited() ? "1" : "0";
+
+		StringBuffer sb = new StringBuffer();
+		sb.append(MsgId.INT_ACT_PARAM_ENUM_RAWTYPE + "=" + enumName);
+		sb.append("&" + MsgId.INT_ACT_PARAM_ENUM_FILTER_PARENT + "="
+				+ StringUtils.trimToEmpty(parent));
+		sb.append("&" + MsgId.INT_ACT_PARAM_ENUM_FILTER_DATA + "="
+				+ StringUtils.trimToEmpty(context));
+		sb.append("&" + MsgId.INT_ACT_PARAM_ENUM_LIMITED + "=" + limit);
+
+		return sb.toString();
 	}
 
 }

@@ -62,19 +62,29 @@ public class RenderableSelectorCreate extends AbstractRenderableSelectorItem {
 			boolean isInIMultRepeater) {
 		RenderedParentGroup renderedParentGroup = new RenderedParentGroup(renderedParents);
 		if (bean.getCreateEditFormType().equals(FormTypeRendered.formForm)) {
-			String listForms = "";
+			// String listForms = "";
+			String listForms = MsgId.INT_ACT_PARAM_ANY_DATATYPE + "="; // #1637
 			if (bean.getCreateEditForms() != null) {
-				listForms = bean.getCreateEditForms().get(0);
+				listForms += bean.getCreateEditForms().get(0);
 			} else {
-				listForms = bean.getCreateEditDefaultFormName() + "/"
-						+ MsgId.INT_ACT_SUFFIX_GET_FORM_CLASS;
+				listForms += bean.getCreateEditDefaultFormName() + "&"
+						+ MsgId.INT_ACT_PARAM_ANY_HINT + "=" + MsgId.INT_ACT_SUFFIX_GET_FORM_CLASS;
 			}
-			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER.getText()
-					+ MsgId.INT_ACT_CODE_CREATE_FORM + "/" + bean.getName() + "/" + listForms);
+			// String action = MsgId.INT_URI_SCHEME_WRITER.getText() +
+			// MsgId.INT_ACT_CODE_CREATE_FORM
+			// + "/" + bean.getName() + "/" + listForms;
+			String action = MsgId.INT_URI_SCHEME_WRITER.getText() + MsgId.INT_ACT_CODE_CREATE_FORM
+					+ "?" + MsgId.INT_ACT_PARAM_ANY_ASSOC + "=" + bean.getName() + "&" + listForms;
+			submissionCreate.setAction(action);
 		} else {
-			submissionCreate.setAction(MsgId.INT_URI_SCHEME_WRITER.getText()
-					+ MsgId.INT_ACT_CODE_CREATE_CLASS + "/" + bean.getName() + "/"
-					+ ModelTools.getCompleteName(bean.getDestinationClass()));
+			// String action = MsgId.INT_URI_SCHEME_WRITER.getText()
+			// + MsgId.INT_ACT_CODE_CREATE_CLASS + "/" + bean.getName() + "/"
+			// + ModelTools.getCompleteName(bean.getDestinationClass());
+			String action = MsgId.INT_URI_SCHEME_WRITER.getText() + MsgId.INT_ACT_CODE_CREATE_CLASS
+					+ "?" + MsgId.INT_ACT_PARAM_ANY_ASSOC + "=" + bean.getName() + "&"
+					+ MsgId.INT_ACT_PARAM_ANY_DATATYPE + "="
+					+ ModelTools.getCompleteName(bean.getDestinationClass());
+			submissionCreate.setAction(action);
 		}
 		renderedParentGroup.getParent().addModelElementRoot(submissionCreate);
 		return renderedParentGroup;

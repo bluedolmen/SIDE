@@ -61,8 +61,11 @@ public class RenderedForm extends Rendered {
 		} else if (formType.equals(FormTypeRendered.formSearch)) {
 			suffix = MsgId.INT_ACT_SUFFIX_GET_FORM_SEARCH.getText();
 		}
-		String source = MsgId.INT_URI_SCHEME_READER + getAction.getText() + "/" + suffix;
+		// String source = MsgId.INT_URI_SCHEME_READER + getAction.getText() + "/" + suffix;
+		String source = MsgId.INT_URI_SCHEME_READER + getAction.getText() + "?"
+				+ MsgId.INT_ACT_PARAM_GET_FORMTYPE + "=" + suffix; // #1637
 		modelInstance.setAttribute("src", source);
+
 		model.addContent(modelInstance);
 
 		head.addContent(model);

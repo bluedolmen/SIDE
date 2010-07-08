@@ -3,13 +3,12 @@ package com.bluexml.xforms.generator.forms.modelelement;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.ModelElement;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.renderable.common.SelectBean;
-import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class ModelElementEnumeration.
@@ -49,7 +48,9 @@ public class ModelElementEnumeration extends ModelElement {
 	public Element getModelElement() {
 		Element enumsInstance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);
-		String dataSourceURI = MsgId.INT_URI_SCHEME_READER + "enum/" + getParameters();
+		// String dataSourceURI = MsgId.INT_URI_SCHEME_READER + "enum/" + getParameters();
+		String dataSourceURI = MsgId.INT_URI_SCHEME_READER + "enum?"
+				+ buildEnumActionUriFragment(selectBean);
 
 		if (StringUtils.trimToNull(selectBean.getDataSourceUri()) != null) { // #1660
 			dataSourceURI = selectBean.getDataSourceUri();
@@ -58,27 +59,6 @@ public class ModelElementEnumeration extends ModelElement {
 		enumsInstance.setAttribute("src", dataSourceURI);
 		enumsInstance.setAttribute("id", enumInstanceName);
 		return enumsInstance;
-	}
-
-	private String getParameters() {
-		String enumName;
-		if (selectBean.getEnumeration() != null) {
-			enumName = ModelTools.getCompleteName(selectBean.getEnumeration());
-		} else {
-			enumName = selectBean.getOperatorType();
-		}
-		StringBuffer sb = new StringBuffer(enumName);
-		sb.append("/");
-		sb.append(StringUtils.trimToEmpty(selectBean.getEnumParent()));
-		sb.append("/");
-		sb.append(StringUtils.trimToEmpty(selectBean.getEnumContext()));
-		sb.append("/");
-		if (selectBean.isLimited()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		return sb.toString();
 	}
 
 	/*

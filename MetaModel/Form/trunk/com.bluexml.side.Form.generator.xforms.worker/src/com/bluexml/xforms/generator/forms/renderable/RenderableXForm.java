@@ -48,9 +48,12 @@ public class RenderableXForm extends Renderable {
 		this.formType = formType;
 		submissions = new ArrayList<ModelElementSubmission>();
 		for (FormSubmissionActions anAction : classActions) {
-			submissions.add(new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER.getText()
-					+ anAction.getName() + "/", MsgPool.getMsg(anAction.getCaption()), anAction
-					.isReplaceAll(), anAction.isValidateFirst()));
+			// String action = MsgId.INT_URI_SCHEME_WRITER.getText() + anAction.getName() + "/";
+			String action = MsgId.INT_URI_SCHEME_WRITER.getText() + anAction.getName(); // #1637
+			String caption = MsgPool.getMsg(anAction.getCaption());
+			ModelElementSubmission submission = new ModelElementSubmission(action, caption,
+					anAction.isReplaceAll(), anAction.isValidateFirst());
+			submissions.add(submission);
 		}
 		add(renderable);
 		RenderableSubmits renderableSubmits = new RenderableSubmits(submissions);

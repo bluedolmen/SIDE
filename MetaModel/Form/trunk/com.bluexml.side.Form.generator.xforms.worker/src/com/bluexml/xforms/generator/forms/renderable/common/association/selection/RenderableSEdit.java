@@ -70,15 +70,29 @@ public class RenderableSEdit extends AbstractRenderable {
 		if (bean.getCreateEditFormType().equals(FormTypeRendered.formForm)) {
 			String listForms = StringUtils.join(bean.getCreateEditForms(), ','); // #1510
 			if (listForms == null) {
-				listForms = bean.getCreateEditDefaultFormName() + "/"
-						+ MsgId.INT_ACT_SUFFIX_GET_FORM_CLASS;
+				// listForms = bean.getCreateEditDefaultFormName() + "/"
+				// + MsgId.INT_ACT_SUFFIX_GET_FORM_CLASS;
+				// #1637
+				listForms = MsgId.INT_ACT_PARAM_ANY_DATATYPE + "="
+						+ bean.getCreateEditDefaultFormName() + "&" + MsgId.INT_ACT_PARAM_ANY_HINT
+						+ "=" + MsgId.INT_ACT_SUFFIX_GET_FORM_CLASS;
 			}
-			submission.setAction(MsgId.INT_URI_SCHEME_WRITER.getText()
-					+ MsgId.INT_ACT_CODE_EDIT_FORM + "/" + bean.getName() + "/" + listForms);
+			// String action = MsgId.INT_URI_SCHEME_WRITER.getText() + MsgId.INT_ACT_CODE_EDIT_FORM
+			// + "/" + bean.getName() + "/" + listForms;
+			// #1637
+			String action = MsgId.INT_URI_SCHEME_WRITER.getText() + MsgId.INT_ACT_CODE_EDIT_FORM
+					+ "?" + MsgId.INT_ACT_PARAM_ANY_ASSOC + "=" + bean.getName() + "&" + listForms;
+			submission.setAction(action);
 		} else {
-			submission.setAction(MsgId.INT_URI_SCHEME_WRITER.getText()
-					+ MsgId.INT_ACT_CODE_EDIT_CLASS + "/" + bean.getName() + "/"
-					+ ModelTools.getCompleteName(bean.getDestinationClass()));
+			// String action = MsgId.INT_URI_SCHEME_WRITER.getText() + MsgId.INT_ACT_CODE_EDIT_CLASS
+			// + "/" + bean.getName() + "/"
+			// + ModelTools.getCompleteName(bean.getDestinationClass());
+			// #1637
+			String action = MsgId.INT_URI_SCHEME_WRITER.getText() + MsgId.INT_ACT_CODE_EDIT_CLASS
+					+ "?" + MsgId.INT_ACT_PARAM_ANY_ASSOC + "=" + bean.getName() + "&"
+					+ MsgId.INT_ACT_PARAM_ANY_DATATYPE + "="
+					+ ModelTools.getCompleteName(bean.getDestinationClass());
+			submission.setAction(action);
 		}
 
 		if (getFormGenerator().isInReadOnlyMode() == false) { // #1238
