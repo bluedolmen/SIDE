@@ -57,8 +57,13 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 		bind.addLinkedElement(insertAction);
 		insertAction.setAttribute("at", "last()");
 		insertAction.setAttribute("position", "after");
-
 		action.addContent(insertAction);
+
+		Element sideUpdateAction = XFormsGenerator.createElement("script",
+				XFormsGenerator.NAMESPACE_XHTML);
+		sideUpdateAction.setAttribute("type", "text/javascript");
+		sideUpdateAction.setText("side.updateUI();");
+		action.addContent(sideUpdateAction);
 
 		// Uncomment when using a more recent version of Dojo than the 0.4 in Chiba 2.3. See the
 		// companion comment in RenderedForm.java. It will allow for correct rendering of tabs in 

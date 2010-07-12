@@ -82,6 +82,10 @@ div.dojoTab {
 	border: thin solid #EEEEEE;
 }
 
+.repeat-index .value {
+	background: none repeat scroll 0 0 transparent;
+}
+
 .input,.textarea,.select1,.select,div.xformstdclear {
 	margin-left: 10px;
 }
@@ -96,7 +100,7 @@ div.dojoTab {
 }
 
 div.xformstdclear label {
-/* align (vertically) bottom line of readonly fields' label with the text*/
+	/* align (vertically) bottom line of readonly fields' label with the text*/
 	margin-top: 0px;
 }
 
@@ -121,7 +125,7 @@ div.side_datetime_time label {
  */
 .side_select_widget .invalid>.alert {
 	margin-left: 32px;
-	margin-top: 48px;
+	margin-top: 54px;
 }
 
 .side_select_widget div {
@@ -198,6 +202,54 @@ div.side_select_output_zone,.side_select_feature_search select,.side_select_sear
 	/* adds some space between the vertically stacked icons*/
 	margin-bottom: 4px;
 	margin-top: 4px;
+}
+
+/*
+ * CUSTOM SELECTION WIDGETS
+ */
+.customWidget { /* align with form fields*/
+	margin-left: 10px;
+}
+
+.customWidgetLabel {
+	float: left;
+}
+
+.customWidgetOutput {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #DDD;
+	min-width: 150px;
+	min-height: 1.3em;
+	float: left;
+}
+
+.customWidgetOutput div {
+	padding: 0px;
+}
+
+.customWidgetOpen {
+	
+}
+
+.customWidgetOpen span {
+	margin-left: 10px;
+}
+
+.customWidgetClose {
+	
+}
+
+.customWidgetClose span {
+	margin-left: 10px;
+}
+
+div.ghost {
+	display: none;
+}
+
+.alive {
+	display: block;
 }
 
 /*
