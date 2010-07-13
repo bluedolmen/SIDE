@@ -45,6 +45,7 @@ import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.cmr.security.AuthenticationService;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.service.namespace.RegexQNamePattern;
+import org.alfresco.util.ISO9075;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -230,8 +231,28 @@ public class DataLayer implements DataLayerInterface {
 		// STORE_REF_WORKSPACE_SPACESSTORE
 		// NodeRef root = nodeService.getRootNode(Repository.getStoreRef());
 		NodeRef root = nodeService.getRootNode(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);
+		String encodedXpath = xpath;
+		//** #1544
+		if (encodedXpath.indexOf(' ') != -1) {
+			String[] fragments = xpath.split("/");
+			String prefix;
+			String local;
+			int pos;
+
+			for (int i = 0; i < fragments.length; i++) {
+				pos = fragments[i].indexOf(':');
+				if (pos > 1) {
+
+					prefix = fragments[i].substring(0, pos);
+					local = fragments[i].substring(pos + 1);
+					fragments[i] = prefix + ":" + ISO9075.encode(local);
+				}
+			}
+			encodedXpath = StringUtils.join(fragments, "/");
+		}
+		//** #1544
 		ResultSet result = serviceRegistry.getSearchService().query(root.getStoreRef(),
-				SearchService.LANGUAGE_XPATH, xpath);
+				SearchService.LANGUAGE_XPATH, encodedXpath);
 		return result.getNodeRefs();
 	}
 
