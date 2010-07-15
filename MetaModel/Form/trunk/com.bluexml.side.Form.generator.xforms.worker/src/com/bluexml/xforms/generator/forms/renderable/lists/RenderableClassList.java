@@ -20,11 +20,12 @@ public class RenderableClassList extends Renderable {
 	private ModelElementUpdaterList modelElementListUpdater;
 	private ModelElementBindHolder modelElementBindHolder;
 	private ModelElementBindSimple bindLabel;
+	private AssociationBean bean;
 
 	public RenderableClassList(Clazz classe) {
 		super();
 		this.classe = classe;
-		AssociationBean bean = new AssociationBean();
+		bean = new AssociationBean();
 		
 		modelElementListUpdater = new ModelElementUpdaterList(classe, "instanceList", bean);
 		modelElementBindHolder = new ModelElementBindHolder("instance('instanceList')/"
@@ -36,6 +37,7 @@ public class RenderableClassList extends Renderable {
 		add(new RenderableList(this));
 		add(new RenderableListCreate(this));
 
+		bean.setDestinationClass(classe);
 	}
 
 	@Override
@@ -52,8 +54,6 @@ public class RenderableClassList extends Renderable {
 		renderedGroup.addModelElement(modelElementListUpdater);
 		renderedGroup.addModelElement(modelElementBindHolder);
 
-		AssociationBean bean = new AssociationBean();
-		bean.setDestinationClass(classe);
 		renderedGroup.addModelElement(new ModelElementInstanceList(bean, "instanceList"));
 		return renderedGroup;
 	}
