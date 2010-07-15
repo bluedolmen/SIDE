@@ -17,7 +17,7 @@ import com.bluexml.xforms.generator.forms.renderable.common.association.selectio
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.unique.RenderableSSingle;
 import com.bluexml.xforms.generator.forms.rendered.RenderedParentGroup;
 
-@Deprecated
+@Deprecated // this class is unused in the rest of the code
 public class RenderableChoiceInputSearch extends Renderable {
 
 	private ChoiceField choiceField;
