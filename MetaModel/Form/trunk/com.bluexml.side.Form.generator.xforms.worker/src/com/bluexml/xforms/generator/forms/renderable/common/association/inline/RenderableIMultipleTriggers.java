@@ -64,14 +64,9 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 		sideUpdateAction.setAttribute("type", "text/javascript");
 		sideUpdateAction.setText("side.updateUI();");
 		action.addContent(sideUpdateAction);
-
-		// Uncomment when using a more recent version of Dojo than the 0.4 in Chiba 2.3. See the
+		// Applicable when using a more recent version of Dojo than the 0.4 in Chiba 2.3. See the
 		// companion comment in RenderedForm.java. It will allow for correct rendering of tabs in 
-		// inline forms
-		// Element updateAction = XFormsGenerator.createElement("load",
-		// XFormsGenerator.NAMESPACE_XFORMS);
-		// updateAction.setAttribute("resource", "javascript:dojo.parser.parse()");
-		// action.addContent(updateAction);
+		// inline forms. What's to be done then is to add dojo.parser.parse() in the script tag.
 
 		add.addContent(action);
 		return add;
