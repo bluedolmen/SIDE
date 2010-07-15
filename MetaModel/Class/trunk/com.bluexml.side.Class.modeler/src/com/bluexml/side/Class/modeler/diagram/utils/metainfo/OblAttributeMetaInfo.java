@@ -219,7 +219,8 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		c.setConstraintType(DataType.OBJECT);
 		c.setKey("propertySearched");
 		c.setValueType(boolean.class);
-		c.setValue("true");
+		//c.setValue("true");
+		c.setDefaultValueBoolean(true);
 		allMetaInfos.add(c);
 
 		c = fact.createMetaInfo();
