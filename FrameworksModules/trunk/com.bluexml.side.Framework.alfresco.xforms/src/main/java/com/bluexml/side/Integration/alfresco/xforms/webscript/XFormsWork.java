@@ -342,6 +342,8 @@ public class XFormsWork implements RunAsWork<String> {
 			}
 		}
 
+		luceneResultSet.close();
+
 		// build the label for the elected node
 		if (electedNode == null) {
 			return null;
@@ -643,6 +645,18 @@ public class XFormsWork implements RunAsWork<String> {
 			}
 		}
 
+		logger.debug("Initialization of system time: " + System.nanoTime());
+		Timer globalTimer = new Timer();
+		Timer luceneTimer = new Timer();
+		Timer noderefLuceneTimer = new Timer();
+		Timer noderefTimer = new Timer();
+		Timer labelTimer = new Timer();
+		Timer qnameTimer = new Timer();
+		Timer filteringTimer = new Timer();
+		Timer referenceTimer = new Timer();
+		Timer sortTimer = new Timer();
+
+		globalTimer.start();
 		//
 		// collect parameters. Some of these are not necessary before the filtering/limiting/sorting
 		// part but for convenience, all parameters are collected with, possibly, some work done
@@ -717,7 +731,9 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 
 		// perform the search
+		luceneTimer.start();
 		ResultSet luceneResultSet = getResultSet(type, searchedValues, maxResults, userLuceneQuery);
+		luceneTimer.stop();
 		if (luceneResultSet == null) {
 			// result for the pathological case when the type is unknown to Alfresco.
 			return getListOpcodeDefaultResult(query, false);
@@ -768,13 +784,23 @@ public class XFormsWork implements RunAsWork<String> {
 		int effectivelyReturned = 0;
 		int filteredOut = 0;
 		// collect items and apply filtering and/or limiting
+		filteringTimer.start();
 		List<ResultBean> resultBeanList = new ArrayList<ResultBean>(returnAtMost);
+		noderefLuceneTimer.start();
+		List<NodeRef> resultSet = luceneResultSet.getNodeRefs();
+		noderefLuceneTimer.stop();
+		luceneResultSet.close();
 		for (int i = 0; i < returnAtMost; i++) {
-			NodeRef nodeRef = luceneResultSet.getNodeRef(i);
+			noderefTimer.start();
+			NodeRef nodeRef = resultSet.get(i);
+			noderefTimer.stop();
+			labelTimer.start();
 			String label = resolveNodeName(nodeRef, format, includeSystemProperties);
+			labelTimer.stop();
 			if (maxLength > 0) {
 				label = StringUtils.left(label, maxLength);
 			}
+			qnameTimer.start();
 			QName qname = serviceRegistry.getNodeService().getType(nodeRef); // #1510
 			String id;
 			if (identifierQName == null) {
@@ -783,6 +809,7 @@ public class XFormsWork implements RunAsWork<String> {
 				id = resolveIdentifierValue(nodeRef, identifierQName);
 			}
 			String qnameStr = qname.toPrefixString(formsWebscript.getNamespacePrefixResolver());
+			qnameTimer.stop();
 			ResultBean aBean = new ResultBean(id, label, qnameStr);
 			boolean isAddableBean = true; // whether the result will be added to the item list
 			if (includeSystemProperties) {
@@ -795,11 +822,13 @@ public class XFormsWork implements RunAsWork<String> {
 			} else {
 				// retrieving objects of a standard BlueXML generated type
 				if (applyFilterAssoc) {
+					referenceTimer.start();
 					if (dataLayer.isRefencenced(nodeRef, filterAssoc, isComposition) == true) {
 						// do not add if already referenced via the filtering association
 						isAddableBean = false;
 						filteredOut++;
 					}
+					referenceTimer.stop();
 				}
 			}
 			if (isAddableBean) {
@@ -807,14 +836,17 @@ public class XFormsWork implements RunAsWork<String> {
 				effectivelyReturned++;
 			}
 		}
+		filteringTimer.stop();
 
 		//
 		// sort the result list by computed labels. #1406
+		sortTimer.start();
 		Collections.sort(resultBeanList, new Comparator<ResultBean>() {
 			public int compare(ResultBean o1, ResultBean o2) {
 				return o1.label.compareTo(o2.label);
 			}
 		});
+		sortTimer.stop();
 
 		//
 		// write all results in the items string buffer
@@ -856,6 +888,20 @@ public class XFormsWork implements RunAsWork<String> {
 		xmlResult.append(itemsBuf);
 
 		xmlResult.append("</results>");
+
+		globalTimer.stop();
+		logger.debug(">>><<< Timing:");
+		logger.debug("Total : " + globalTimer.getTotalTime() + " ns.");
+		logger.debug(" Lucene : " + luceneTimer.getTotalTime() + " ns.");
+		logger.debug(" Filtering : " + filteringTimer.getTotalTime() + " ns.");
+		logger.debug("  Nref Lucene : " + noderefLuceneTimer.getTotalTime() + " ns.");
+		logger.debug("  Nref SIDE: " + noderefTimer.getTotalTime() + " ns.");
+		logger.debug("  Labels : " + labelTimer.getTotalTime() + " ns.");
+		logger.debug("  QName : " + qnameTimer.getTotalTime() + " ns.");
+		logger.debug("  Ref? : " + referenceTimer.getTotalTime() + " ns.");
+		logger.debug(" Sort : " + sortTimer.getTotalTime() + " ns.");
+		logger.debug(">>><<<");
+
 		return xmlResult.toString();
 	}
 
