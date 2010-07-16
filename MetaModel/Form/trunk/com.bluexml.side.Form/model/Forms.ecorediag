@@ -784,6 +784,10 @@
         <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ModelChoiceWidgetType/Inline"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_B33_I5uPEd68JO4ATwwBpA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_w29X8ZDHEd-zUardNqYAfA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ModelChoiceWidgetType/ItemSelector"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_w29X8pDHEd-zUardNqYAfA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_B33YFZuPEd68JO4ATwwBpA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_B33YFpuPEd68JO4ATwwBpA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_B33YF5uPEd68JO4ATwwBpA"/>

@@ -43,7 +43,15 @@ public enum ModelChoiceWidgetType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	INLINE(1, "Inline", "Inline");
+	INLINE(1, "Inline", "Inline"), /**
+	 * The '<em><b>Item Selector</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ITEM_SELECTOR_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ITEM_SELECTOR(2, "ItemSelector", "ItemSelector");
 
 	/**
 	 * The '<em><b>Select</b></em>' literal value.
@@ -74,6 +82,21 @@ public enum ModelChoiceWidgetType implements Enumerator {
 	public static final int INLINE_VALUE = 1;
 
 	/**
+	 * The '<em><b>Item Selector</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Item Selector</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #ITEM_SELECTOR
+	 * @model name="ItemSelector"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ITEM_SELECTOR_VALUE = 2;
+
+	/**
 	 * An array of all the '<em><b>Model Choice Widget Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +106,7 @@ public enum ModelChoiceWidgetType implements Enumerator {
 		new ModelChoiceWidgetType[] {
 			SELECT,
 			INLINE,
+			ITEM_SELECTOR,
 		};
 
 	/**
@@ -135,6 +159,7 @@ public enum ModelChoiceWidgetType implements Enumerator {
 		switch (value) {
 			case SELECT_VALUE: return SELECT;
 			case INLINE_VALUE: return INLINE;
+			case ITEM_SELECTOR_VALUE: return ITEM_SELECTOR;
 		}
 		return null;
 	}

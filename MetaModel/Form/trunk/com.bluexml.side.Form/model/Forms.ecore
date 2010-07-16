@@ -537,6 +537,7 @@
         <details key="documentation" value="The form designed for the target class or target form is included in the parent form. Associated items can be defined directly from the currently displayed form."/>
       </eAnnotations>
     </eLiterals>
+    <eLiterals name="ItemSelector" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormSearch" eSuperTypes="#//FormContainer #//ClassReference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinationOperator" eType="#//CombinationOperators"/>

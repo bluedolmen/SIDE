@@ -2079,6 +2079,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEEnum(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.class, "ModelChoiceWidgetType");
 		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.SELECT);
 		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.INLINE);
+		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.ITEM_SELECTOR);
 
 		initEEnum(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.class, "CharFieldSearchOperators");
 		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.CONTAINS);
