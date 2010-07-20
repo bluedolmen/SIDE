@@ -40,13 +40,11 @@ public abstract class AbstractRenderable extends Renderable {
 	/**
 	 * Compute node set items.
 	 * 
-	 * @param path
-	 *            the path
 	 * @param nodeSetActions 
 	 * 
 	 * @return the string
 	 */
-	protected String computeNodeSetItems(String path, String nodeSetActions) {
+	protected String computeNodeSetItems(String nodeSetActions) {
 		String nodeSetItems = nodeSetActions + "[position()!=last()]";
 		return nodeSetItems;
 	}

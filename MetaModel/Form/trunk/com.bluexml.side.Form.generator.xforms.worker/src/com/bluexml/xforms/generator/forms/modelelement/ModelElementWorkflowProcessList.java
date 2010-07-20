@@ -12,8 +12,9 @@ import com.bluexml.xforms.generator.forms.XFormsGenerator;
 
 /**
  * @author Amenel
- * 
+ * @deprecated
  */
+@Deprecated
 public class ModelElementWorkflowProcessList extends ModelElement {
 
 	/*
@@ -21,6 +22,7 @@ public class ModelElementWorkflowProcessList extends ModelElement {
 	 * 
 	 * @see com.bluexml.xforms.generator.forms.ModelElement#getModelElement()
 	 */
+	@Override
 	public Element getModelElement() {
 		Element instance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);

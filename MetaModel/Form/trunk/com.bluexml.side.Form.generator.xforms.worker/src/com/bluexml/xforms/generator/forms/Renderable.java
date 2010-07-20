@@ -253,7 +253,7 @@ public abstract class Renderable {
 		}
 
 		renderedParents.pop();
-		rendered.renderEnd(this);
+		rendered.renderEnd();
 		renderEnd(rendered);
 
 		parents.pop();
@@ -283,7 +283,7 @@ public abstract class Renderable {
 	 * @param rendered
 	 *            the rendered
 	 */
-	public void renderEnd(Rendered rendered) {
+	public void renderEnd(@SuppressWarnings("unused") Rendered rendered) {
 		// nothing by default
 	}
 
@@ -295,14 +295,14 @@ public abstract class Renderable {
 	 * 
 	 * @return true, if successful
 	 */
-	protected boolean shouldRender(Stack<Renderable> parents) {
+	protected boolean shouldRender(@SuppressWarnings("unused") Stack<Renderable> parents) {
 		return true;
 	}
 
 	/**
 	 * Gets the root path.<br>
 	 * Retrieves the path from where we can access directly to the data.<br>
-	 * This is used for association class.
+	 * This is used for association class or anywhere there's a repeater.
 	 * 
 	 * @param renderedParents
 	 *            the rendered parents

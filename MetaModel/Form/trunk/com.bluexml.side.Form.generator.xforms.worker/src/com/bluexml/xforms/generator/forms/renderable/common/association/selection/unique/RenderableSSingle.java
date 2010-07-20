@@ -43,14 +43,17 @@ public class RenderableSSingle extends AbstractRenderable {
 		super(associationBean);
 
 		add(selector);
+		selector.setParent(this);
 		selectorBindId = selector.getBindId(); // #1156
 
-		if (associationBean.isDisabled() == false) {
-			add(new RenderableSSingleActions(associationBean, selector));
-		}
-		add(new RenderableSDisplay(associationBean));
-		if (associationBean.isShowingActions()) {
-			add(new RenderableSEdit(associationBean, false));
+		if (associationBean.isItemSelector()) {
+			if (associationBean.isDisabled() == false) {
+				add(new RenderableSSingleActions(associationBean, selector));
+			}
+			add(new RenderableSDisplay(associationBean));
+			if (associationBean.isShowingActions()) {
+				add(new RenderableSEdit(associationBean, false));
+			}
 		}
 
 	}
@@ -81,33 +84,42 @@ public class RenderableSSingle extends AbstractRenderable {
 
 		div.setAttribute("class", getWidgetStyle());
 
-		ModelElementBindSimple bindLabel = getSelectedBindLabel();
 		ModelElementBindSimple bindId = getSelectedBindId();
-		ModelElementBindSimple bindEdit = getSelectedBindEdit();
-		ModelElementBindSimple bindType = getSelectedBindType();
 
-		bindLabel.setNodeset(path + MsgId.INT_INSTANCE_SIDELABEL);
-		bindId.setNodeset(path + MsgId.INT_INSTANCE_SIDEID);
-		bindEdit.setNodeset(path + MsgId.INT_INSTANCE_SIDEEDIT);
-		bindType.setNodeset(path + MsgId.INT_INSTANCE_SIDETYPE);
-
-		if (bean.isMandatory()) { // #978
-			// no visual cues here, but useful for causing XForms validation to
-			// fail if nothing is selected
-			bindId.setRequired(true);
-			bindLabel.setRequired(true);
-			// ** #1156
-			String constraint = "instance('minstance')/" + bindId.getNodeset() + " ne ''";
-			selectorBindId.setConstraint(constraint);
-			// ** #1156
+		String idPath = path.substring(0, path.length() - 1);
+		if (bean.isItemSelector()) {
+			idPath += "/" + MsgId.INT_INSTANCE_SIDEID;
 		}
+		bindId.setNodeset(idPath);
 
 		rendered.addModelElement(bindId);
-		rendered.addModelElement(bindLabel);
-		if (bean.isForField() == false) {
-			rendered.addModelElement(bindEdit);
+
+		if (bean.isItemSelector()) {
+			ModelElementBindSimple bindLabel = getSelectedBindLabel();
+			ModelElementBindSimple bindEdit = getSelectedBindEdit();
+			ModelElementBindSimple bindType = getSelectedBindType();
+			bindLabel.setNodeset(path + MsgId.INT_INSTANCE_SIDELABEL);
+			bindEdit.setNodeset(path + MsgId.INT_INSTANCE_SIDEEDIT);
+			bindType.setNodeset(path + MsgId.INT_INSTANCE_SIDETYPE);
+
+			if (bean.isMandatory()) { // #978
+				// no visual cues here, but useful for causing XForms validation to fail if nothing 
+				// is selected
+				// for plain select widget, this is done in RenderableSelectorList.
+				bindId.setRequired(true);
+				bindLabel.setRequired(true);
+				// ** #1156
+				String constraint = "instance('minstance')/" + bindId.getNodeset() + " ne ''";
+				selectorBindId.setConstraint(constraint);
+				// ** #1156
+			}
+
+			rendered.addModelElement(bindLabel);
+			if (bean.isForField() == false) {
+				rendered.addModelElement(bindEdit);
+			}
+			rendered.addModelElement(bindType);
 		}
-		rendered.addModelElement(bindType);
 
 		return rendered;
 	}

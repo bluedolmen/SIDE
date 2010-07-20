@@ -80,6 +80,7 @@ public class ModelElementBindSimple extends ModelElement {
 	 * 
 	 * @see org.green.xforms.generator.forms.ModelElement#getModelElement()
 	 */
+	@Override
 	public Element getModelElement() {
 		String bindId = XFormsGenerator.getId(MsgId.INT_GEN_PREFIX_BIND_FORM.getText());
 		Element bindElement = XFormsGenerator.createElement("bind",

@@ -6,7 +6,6 @@ import org.apache.commons.lang.StringUtils;
 
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.form.ChoiceField;
-import com.bluexml.side.form.FormElement;
 import com.bluexml.xforms.generator.FormGeneratorsManager;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
@@ -17,13 +16,13 @@ import com.bluexml.xforms.generator.forms.renderable.common.association.selectio
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.unique.RenderableSSingle;
 import com.bluexml.xforms.generator.forms.rendered.RenderedParentGroup;
 
-@Deprecated // this class is unused in the rest of the code
+@Deprecated
+// this class is unused in the rest of the code
 public class RenderableChoiceInputSearch extends Renderable {
 
 	private ChoiceField choiceField;
 
-	public RenderableChoiceInputSearch(XFormsGenerator generationManager, FormElement parent,
-			ChoiceField choiceField) {
+	public RenderableChoiceInputSearch(XFormsGenerator generationManager, ChoiceField choiceField) {
 		super();
 		this.choiceField = choiceField;
 		addSelector(generationManager, choiceField);
@@ -75,11 +74,13 @@ public class RenderableChoiceInputSearch extends Renderable {
 	@Override
 	public Path getPath(String parentPath, Stack<Renderable> parents,
 			Stack<Rendered> renderedParents) {
-		return new Path(PathType.relativePath, FormGeneratorsManager.getUniqueName(choiceField) + "/");
+		return new Path(PathType.relativePath, FormGeneratorsManager.getUniqueName(choiceField)
+				+ "/");
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		return new RenderedParentGroup(renderedParents);
 	}
 

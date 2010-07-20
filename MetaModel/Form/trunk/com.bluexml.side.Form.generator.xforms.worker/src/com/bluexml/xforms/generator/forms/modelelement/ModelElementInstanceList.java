@@ -63,10 +63,16 @@ public class ModelElementInstanceList extends ModelElement {
 	/**
 	 * Constructor specifically for attaching a selection widget to a selection-capable field.
 	 * 
+	 * @param overridingType
+	 *            the overriding type. Not necessary since it's available via the bean, but we use
+	 *            it to distinguish the constructors from one another.
 	 * @param instanceName
 	 *            the instance name, for identification of the instance by the XForms engine
+	 * @param bean
+	 *            the association bean
 	 */
-	public ModelElementInstanceList(String overridingType, String instanceName, AssociationBean bean) {
+	public ModelElementInstanceList(@SuppressWarnings("unused") String overridingType,
+			String instanceName, AssociationBean bean) {
 		this.typeCompleteName = bean.getOverridingType();
 		this.instanceName = instanceName;
 
@@ -95,6 +101,7 @@ public class ModelElementInstanceList extends ModelElement {
 	 * 
 	 * @see com.bluexml.xforms.generator.forms.ModelElement#getModelElement()
 	 */
+	@Override
 	public Element getModelElement() {
 		Element instance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);

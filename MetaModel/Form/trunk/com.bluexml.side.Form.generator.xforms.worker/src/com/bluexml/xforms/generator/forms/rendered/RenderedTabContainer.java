@@ -24,7 +24,8 @@ public class RenderedTabContainer extends Rendered {
 	 * @param showTabs
 	 *            the show tabs
 	 */
-	public RenderedTabContainer(String divId, String label, boolean showTabs) {
+	public RenderedTabContainer(String divId, @SuppressWarnings("unused") String label,
+			boolean showTabs) {
 		super();
 		this.showTabs = showTabs;
 		xformsElement = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);

@@ -169,7 +169,7 @@ public class RenderedForm extends Rendered {
 	 * .generator.forms.Renderable)
 	 */
 	@Override
-	public void renderEnd(Renderable renderable) {
+	public void renderEnd() {
 		List<ModelElement> allModelElements = new ArrayList<ModelElement>(getModelElements());
 		List<ModelElement> allModelElementsClean = new ArrayList<ModelElement>();
 		// filterModelElements(allModelElements);

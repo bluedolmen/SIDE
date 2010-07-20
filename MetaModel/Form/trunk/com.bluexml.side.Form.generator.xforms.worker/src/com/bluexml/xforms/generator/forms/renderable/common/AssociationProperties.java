@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.messages.MsgId;
@@ -116,6 +117,8 @@ public class AssociationProperties {
 	/** Whether the stats output is rendered on the form.*/
 	private boolean noStatsOutput;
 	
+	private ModelChoiceWidgetType widgetType;
+
 	/**
 	 * Used in formForm's (via RenderableModelChoiceField and RenderableField)
 	 */
@@ -171,6 +174,7 @@ public class AssociationProperties {
 		this.luceneQuery = null;
 		this.noAutoSearch = false;
 		this.noStatsOutput = false;
+		this.setWidgetType(ModelChoiceWidgetType.SELECT);
 	}
 
 	/**
@@ -641,6 +645,20 @@ public class AssociationProperties {
 	 */
 	public boolean isNoStatsOutput() {
 		return noStatsOutput;
+	}
+
+	/**
+	 * @param widgetType the widgetType to set
+	 */
+	public void setWidgetType(ModelChoiceWidgetType widgetType) {
+		this.widgetType = widgetType;
+	}
+
+	/**
+	 * @return the widgetType
+	 */
+	public ModelChoiceWidgetType getWidgetType() {
+		return widgetType;
 	}
 
 }

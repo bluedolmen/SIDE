@@ -40,7 +40,7 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 	 * 
 	 * @return the element
 	 */
-	private Element createAdd(ModelElementBindSimple bind, String repeaterId) {
+	private Element createAdd(ModelElementBindSimple bind) {
 		String label = MsgPool.getMsg(MsgId.MSG_TRIGGER_INLINE_MULTIPLE_ADD, ModelTools
 				.getTitle(bean.getDestinationClass()));
 		Element add = XFormsGenerator.createElementWithLabel("trigger",
@@ -134,7 +134,7 @@ public class RenderableIMultipleTriggers extends AbstractRenderable {
 		ModelElementBindSimple bindActions = ((RenderableIMultiple) parents.peek())
 				.getBindActions();
 		String repeaterId = renderedParents.peek().getOptionalData();
-		Element addButton = createAdd(bindActions, repeaterId);
+		Element addButton = createAdd(bindActions);
 		Element deleteButton = createDelete(bindActions, repeaterId, path);
 		Element divButtons = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
 		divButtons.setAttribute("class", ModelTools.getCompleteNameJAXB(bean.getDestinationClass())

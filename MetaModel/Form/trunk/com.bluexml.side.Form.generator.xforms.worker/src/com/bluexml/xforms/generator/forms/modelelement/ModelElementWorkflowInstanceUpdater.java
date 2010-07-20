@@ -11,6 +11,7 @@ import com.bluexml.xforms.generator.forms.XFormsGenerator;
  * @author Amenel
  * @deprecated
  */
+@Deprecated
 public class ModelElementWorkflowInstanceUpdater extends AbstractModelElementUpdater {
 
 	public ModelElementWorkflowInstanceUpdater() {

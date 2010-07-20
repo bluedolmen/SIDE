@@ -25,7 +25,7 @@ public class UpdateServlet extends AbstractServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException {
-		update(req, resp);
+		update(req);
 	}
 
 	/* (non-Javadoc)
@@ -34,7 +34,7 @@ public class UpdateServlet extends AbstractServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException {
-		update(req, resp);
+		update(req);
 	}
 
 	/**
@@ -42,13 +42,10 @@ public class UpdateServlet extends AbstractServlet {
 	 * 
 	 * @param req
 	 *            the req
-	 * @param resp
-	 *            the resp
-	 * 
 	 * @throws ServletException
 	 *             the servlet exception
 	 */
-	protected void update(HttpServletRequest req, HttpServletResponse resp)
+	protected void update(HttpServletRequest req)
 			throws ServletException {
 		AlfrescoController controller = AlfrescoController.getInstance();
 		try {

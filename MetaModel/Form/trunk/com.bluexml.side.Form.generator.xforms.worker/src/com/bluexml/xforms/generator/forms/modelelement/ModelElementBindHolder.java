@@ -54,6 +54,7 @@ public class ModelElementBindHolder extends ModelElementBindSimple {
 	 * 
 	 * @see com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple#getModelElement()
 	 */
+	@Override
 	public Element getModelElement() {
 		Element modelElementHolder = super.getModelElement();
 		for (ModelElementBindSimple modelElementBindSimple : subBinds) {

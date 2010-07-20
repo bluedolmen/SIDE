@@ -78,7 +78,7 @@ public class RenderableIMultiple extends AbstractRenderable {
 		// ** #1310
 
 		String nodeSetActions = computeNodeSetActions(finalPath);
-		String nodeSetItems = computeNodeSetItems(finalPath, nodeSetActions);
+		String nodeSetItems = computeNodeSetItems(nodeSetActions);
 
 		// the bind used by actions: e.g. Article1310/field_2/modelcyvel.Paragraphe
 		ModelElementBindSimple bindActions = getBindActions();

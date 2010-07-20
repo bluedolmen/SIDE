@@ -65,6 +65,8 @@ public class CommonRenderableAssociation extends Renderable {
 		associationBean.setFilterAssoc(properties.getFilterAssoc());
 		associationBean.setComposition(properties.isComposition());
 
+		associationBean.setWidgetType(properties.getWidgetType());
+
 		// custom configuration parameters
 		associationBean.setDataSourceUri(properties.getDataSourceUri());
 		associationBean.setFeatureMode(properties.getFeatureMode());

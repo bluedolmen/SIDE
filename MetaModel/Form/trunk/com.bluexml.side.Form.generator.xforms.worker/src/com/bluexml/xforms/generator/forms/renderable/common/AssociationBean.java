@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.messages.MsgId;
@@ -102,6 +103,8 @@ public class AssociationBean {
 	private boolean noAutoSearch;
 	private boolean noStatsOutput;
 
+	private ModelChoiceWidgetType widgetType;
+
 	public AssociationBean() {
 		super();
 		fieldSize = "0";
@@ -110,6 +113,7 @@ public class AssociationBean {
 		isForField = false;
 		filterAssoc = null;
 		isComposition = false;
+		setWidgetType(ModelChoiceWidgetType.SELECT);
 	}
 
 	/**
@@ -330,7 +334,7 @@ public class AssociationBean {
 	 * @return whether the association is multiple
 	 */
 	public boolean isMultiple() {
-		return (getHiBound() > 1);
+		return (getHiBound() > 1 || getHiBound() == -1);
 	}
 
 	/**
@@ -590,6 +594,31 @@ public class AssociationBean {
 	 */
 	public void setNoStatsOutput(boolean noStatsOutput) {
 		this.noStatsOutput = noStatsOutput;
+	}
+
+	/**
+	 * @param widgetType
+	 *            the widgetType to set
+	 */
+	public void setWidgetType(ModelChoiceWidgetType widgetType) {
+		this.widgetType = widgetType;
+	}
+
+	/**
+	 * @return the widgetType
+	 */
+	public ModelChoiceWidgetType getWidgetType() {
+		return widgetType;
+	}
+
+	/**
+	 * Tells whether the association is rendered as an item selector (i.e. as an extended widget).
+	 * 
+	 * @return <code>true</code> if the widget type is "item selector".
+	 */
+	public boolean isItemSelector() { // #1677
+		// return true;
+		return (widgetType.equals(ModelChoiceWidgetType.ITEM_SELECTOR) || isForField());
 	}
 
 }

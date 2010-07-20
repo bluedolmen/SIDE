@@ -72,18 +72,16 @@ public class RenderableSSingleActions extends AbstractRenderable {
 			boolean isInIMultRepeater) {
 		RenderedXMLElement rendered = new RenderedXMLElement();
 
-		ModelElementBindSimple bindId = ((RenderableSSingle) parents.peek()).getSelectedBindId();
-		ModelElementBindSimple bindLabel = ((RenderableSSingle) parents.peek())
-				.getSelectedBindLabel();
-		ModelElementBindSimple bindType = ((RenderableSSingle) parents.peek())
-				.getSelectedBindType();
+		RenderableSSingle rSingle = (RenderableSSingle) parents.peek();
+		ModelElementBindSimple bindId = rSingle.getSelectedBindId();
+		ModelElementBindSimple bindLabel = rSingle.getSelectedBindLabel();
+		ModelElementBindSimple bindType = rSingle.getSelectedBindType();
 
 		if ((getFormGenerator().isInReadOnlyMode() == false) || bean.isDisabled()) { // #1238
 			Element xformsElement = XFormsGenerator.createElement("div",
 					XFormsGenerator.NAMESPACE_XHTML);
 
-			xformsElement
-					.addContent(getTriggerSelect(renderedParents, bindId, bindLabel, bindType));
+			xformsElement.addContent(getTriggerSelect(bindId, bindLabel, bindType));
 			xformsElement.addContent(XFormsGenerator.createElement("br",
 					XFormsGenerator.NAMESPACE_XHTML));
 			xformsElement.addContent(getTriggerReset(bindId, bindLabel, bindType));
@@ -162,9 +160,8 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	 * 
 	 * @return the trigger set
 	 */
-	private Element getTriggerSelect(Stack<Rendered> renderedParents,
-			ModelElementBindSimple bindId, ModelElementBindSimple bindLabel,
-			ModelElementBindSimple bindType) {
+	private Element getTriggerSelect(ModelElementBindSimple bindId,
+			ModelElementBindSimple bindLabel, ModelElementBindSimple bindType) {
 		String img = selector.isForField() ? XFormsGenerator.IMG_SELECT : XFormsGenerator.IMG_RIGHT;
 		Element trigger = XFormsGenerator.createTriggerWithLabelImage(img);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);

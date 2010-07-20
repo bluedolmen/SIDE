@@ -24,7 +24,7 @@ public class DeleteServlet extends AbstractServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException {
-		delete(req, resp);
+		delete(req);
 	}
 
 	/* (non-Javadoc)
@@ -33,7 +33,7 @@ public class DeleteServlet extends AbstractServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException {
-		delete(req, resp);
+		delete(req);
 	}
 
 	/**
@@ -41,13 +41,10 @@ public class DeleteServlet extends AbstractServlet {
 	 * 
 	 * @param req
 	 *            the req
-	 * @param resp
-	 *            the resp
-	 * 
 	 * @throws ServletException
 	 *             the servlet exception
 	 */
-	protected void delete(HttpServletRequest req, HttpServletResponse resp)
+	protected void delete(HttpServletRequest req)
 			throws ServletException {
 		AlfrescoController controller = AlfrescoController.getInstance();
 		try {

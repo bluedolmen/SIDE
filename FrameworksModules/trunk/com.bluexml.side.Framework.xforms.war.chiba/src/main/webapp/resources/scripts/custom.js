@@ -231,7 +231,10 @@ function _selectionWidgetClose (/* DOM Node */ element /* the input in "close" b
 }
 
 function _replaceSelectionWidgets() {
-	// replaces all selection widgets with outputs
+	// replaces all **extended** selection widgets with outputs
+	// WARNING: the purpose of this function (and all others directly or indirectly called) is to
+	// illustrate a possibility of replacing a generated widget with a custom one. It will make the 
+	// form not work if run on associations that are rendered as simple select lists.
 
 	var widgets = _getDivsByClass("side_select_widget");
 	for ( var i = 0; i < widgets.length; i++) {
@@ -261,7 +264,7 @@ function _replaceSelectionWidgets() {
 			openSpan.id = baseId + "-openSpan";
 			openInput.id = baseId + "-openInput";
 			openInput.setAttribute("type", "button");
-			openInput.setAttribute("value", "Click to choose items");
+			openInput.setAttribute("value", "Choose items");
 			openInput.setAttribute("onclick" , "_selectionWidgetOpen(this);");
 	
 			openDiv.appendChild(openSpan);
@@ -289,10 +292,8 @@ function _replaceSelectionWidgets() {
 			closeSpan.id = baseId + "-closeSpan";
 			closeInput.id = baseId + "-closeInput";
 			closeInput.setAttribute("type", "button");
-			closeInput.setAttribute("value", "Close the selection panel");
+			closeInput.setAttribute("value", "Close");
 	
-			// closeInput.className = "value";
-			
 			closeDiv.appendChild(closeSpan);
 			closeSpan.appendChild(closeInput);
 	
@@ -317,15 +318,14 @@ function _replaceSelectionWidgets() {
  * PLEASE LEAVE THE 'side' NAMESPACE STRUCTURE UNTOUCHED
  * 
  * 
- * You may comment out the lines to _replaceSelectionWidgets() but the function names in 'side' must
- * remain.
+ * You may comment out lines but the function names in 'side' must remain as defined.
  */
 var side = {};
 
 side.init = function() {
 	// called on the DOMReady event
 
-	_replaceSelectionWidgets();
+	// _replaceSelectionWidgets();
 };
 
 side.updateUI = function() {

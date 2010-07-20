@@ -31,6 +31,7 @@ public class RenderableSMultiple extends AbstractRenderable {
 	private RenderableSelector selector; // #1156
 
 	private ModelElementBindHolder bindRepeater = null; // #1310
+	/** The bind that references the field's node in the main form instance */
 	private ModelElementBindSimple bindActions = null;
 	private ModelElementBindSimple bindEdit = null;
 	private ModelElementBindSimple bindType = null; // #1510
@@ -50,15 +51,18 @@ public class RenderableSMultiple extends AbstractRenderable {
 
 		add(selector);
 		this.selector = selector;
-		if (associationBean.isDisabled() == false) {
-			renderableAssoSelMultActionsAddRemove = new RenderableSMultipleActionsAddRemove(
-					associationBean, selector);
-			add(renderableAssoSelMultActionsAddRemove);
-		}
-		renderableAssoSelMultDisplay = new RenderableSMultipleDisplay(associationBean);
-		add(renderableAssoSelMultDisplay);
-		if (associationBean.isDisabled() == false) {
-			add(new RenderableSMultipleActionsOrder(associationBean));
+		this.selector.setParent(this);
+		if (associationBean.isItemSelector()) {
+			if (associationBean.isDisabled() == false) {
+				renderableAssoSelMultActionsAddRemove = new RenderableSMultipleActionsAddRemove(
+						associationBean, selector);
+				add(renderableAssoSelMultActionsAddRemove);
+			}
+			renderableAssoSelMultDisplay = new RenderableSMultipleDisplay(associationBean);
+			add(renderableAssoSelMultDisplay);
+			if (associationBean.isDisabled() == false) {
+				add(new RenderableSMultipleActionsOrder(associationBean));
+			}
 		}
 
 	}
@@ -82,17 +86,19 @@ public class RenderableSMultiple extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		ModelElementBindHolder bindRepeater = getBindRepeater();
 		ModelElementBindSimple bindActions = getBindActions();
 
-		ModelElementBindSimple bindLabel = new ModelElementBindSimple(MsgId.INT_INSTANCE_SIDELABEL.getText());
-		ModelElementBindSimple bindId = new ModelElementBindSimple(MsgId.INT_INSTANCE_SIDEID.getText());
+		ModelElementBindSimple bindLabel = new ModelElementBindSimple(MsgId.INT_INSTANCE_SIDELABEL
+				.getText());
+		ModelElementBindSimple bindId = new ModelElementBindSimple(MsgId.INT_INSTANCE_SIDEID
+				.getText());
 		ModelElementBindSimple bindEdit = getBindEdit();
 		bindEdit.setNodeset(MsgId.INT_INSTANCE_SIDEEDIT.getText());
 		ModelElementBindSimple bindType = getBindType();
 		bindType.setNodeset(MsgId.INT_INSTANCE_SIDETYPE.getText());
-		
 
 		bindRepeater.addSubBind(bindLabel);
 		bindRepeater.addSubBind(bindId);
@@ -102,38 +108,42 @@ public class RenderableSMultiple extends AbstractRenderable {
 		setBindType(bindType);
 
 		String nodeSetActions = computeNodeSetActions(path);
-		String nodeSetItems = computeNodeSetItems(path, nodeSetActions);
 		Rendered rendered = new RenderedLine();
 		rendered.setOptionalData(XFormsGenerator.getId(bean.getName() + "Repeater"));
-		
+
 		Element div = rendered.getXformsElement();
 		div.setAttribute("class", getWidgetStyle());
-		
+
 		// e.g.: Paragraphe1310/field_12/modelcyvel.Video (usual suffix is [position()!=last()])
 		bindActions.setNodeset(nodeSetActions);
 		bindActions.setRepeaterRootBind(true); // #1241
 
-		bindRepeater.setNodeset(nodeSetItems);
-		rendered.addModelElement(bindRepeater);
-		rendered.addModelElement(bindActions);
+		if (bean.isItemSelector()) {
+			String nodeSetItems = computeNodeSetItems(nodeSetActions);
+			bindRepeater.setNodeset(nodeSetItems);
+			rendered.addModelElement(bindRepeater);
 
-		if (getFormGenerator().isInReadOnlyMode() == false) {
-			if (bean.isMandatory()) { // #978
-				bindId.setRequired(true);
-				bindLabel.setRequired(true);
+			if (getFormGenerator().isInReadOnlyMode() == false) {
+				// for plain select widget, this is done in RenderableSelectorList
+				if (bean.isMandatory()) { // #978
+					bindId.setRequired(true);
+					bindLabel.setRequired(true);
 
-				int pos = path.length() - 1;
-				String pathShortened = path.charAt(pos) == '/' ? path.substring(0, pos) : path;
-				String constraint = "instance('minstance')/" + pathShortened + "[1]/"
-						+ bindId.getNodeset() + " ne ''";
-				if (StringUtils.contains(selector.getBindId().getConstraint(), constraint) == false) {
-					selector.getBindId().setConstraint(constraint);
+					int pos = path.length() - 1;
+					String pathShortened = path.charAt(pos) == '/' ? path.substring(0, pos) : path;
+					String constraint = "instance('minstance')/" + pathShortened + "[1]/"
+							+ bindId.getNodeset() + " ne ''";
+					if (StringUtils.contains(selector.getBindId().getConstraint(), constraint) == false) {
+						selector.getBindId().setConstraint(constraint);
+					}
 				}
 			}
 		}
-		
+		rendered.addModelElement(bindActions);
+
 		return rendered;
 	}
+
 	/**
 	 * 
 	 * @return the bind holder for the repeated items
@@ -166,12 +176,13 @@ public class RenderableSMultiple extends AbstractRenderable {
 	}
 
 	/**
-	 * @param bindEdit the bindEdit to set
+	 * @param bindEdit
+	 *            the bindEdit to set
 	 */
 	public void setBindEdit(ModelElementBindSimple bindEdit) {
 		this.bindEdit = bindEdit;
 	}
-	
+
 	/**
 	 * @return the bindType
 	 */
@@ -181,14 +192,15 @@ public class RenderableSMultiple extends AbstractRenderable {
 		}
 		return bindType;
 	}
-	
+
 	/**
-	 * @param bindType the bindType to set
+	 * @param bindType
+	 *            the bindType to set
 	 */
 	public void setBindType(ModelElementBindSimple bindType) {
 		this.bindType = bindType;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.blueXML.xforms.generator.forms.Renderable#renderEnd(org.blueXML.xforms.generator.forms.Rendered)
 	 */

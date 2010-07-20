@@ -838,7 +838,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 *            either a FormClass or FormWorkflow object
 	 */
 	private void processFormElement(CanisterType canister, FormContainer formContainer,
-			FormElement parent, FormElement formElement) {
+			@SuppressWarnings("unused") FormElement parent, FormElement formElement) {
 		if (formElement instanceof FormGroup) {
 			FormGroup formGroup = (FormGroup) formElement;
 			EList<FormElement> children = formGroup.getChildren();
@@ -874,6 +874,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @deprecated I don't see any motive in this function since the info kept here (except for the
 	 *             style) is never used anywhere (@Amenel).
 	 */
+	@Deprecated
 	private void processActionField(CanisterType canister, FormContainer formContainer, Field field) {
 		ActionFieldType actionFieldType = objectFactory.createActionFieldType();
 
@@ -1396,6 +1397,9 @@ public class MappingGenerator extends AbstractGenerator {
 						+ "' MUST NOT be based on an abstract class.");
 			}
 
+		}
+		if (modelChoice.getWidget().equals(ModelChoiceWidgetType.ITEM_SELECTOR)) {
+			modelChoiceType.setExtendedWidget(true);
 		}
 		//
 		if (asso.isOrdered()) {

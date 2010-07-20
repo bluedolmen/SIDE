@@ -88,6 +88,7 @@ public class ModelElementSubmission extends ModelElement {
 	 * 
 	 * @see com.bluexml.xforms.generator.forms.ModelElement#getModelElement()
 	 */
+	@Override
 	public Element getModelElement() {
 		Element submission = XFormsGenerator.createElement("submission",
 				XFormsGenerator.NAMESPACE_XFORMS);

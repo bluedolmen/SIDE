@@ -358,7 +358,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	 *            the association
 	 */
 	private void addAssociation(AssociationKind type, String name, String title, Clazz source,
-			Clazz destination, boolean doublenav, Association association) {
+			Clazz destination, Association association) {
 		RenderableClass classBeanSource = getClassBean(source);
 		RenderableClass classBeanDestination = getClassBean(destination);
 		try {
@@ -382,7 +382,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	 */
 	public void addAssociation(AssociationKind type, String name, String title, Clazz source,
 			Clazz destination, String role, boolean doublenav, Association association, Clazz owner) {
-		addAssociation(type, name, title, source, destination, doublenav, association);
+		addAssociation(type, name, title, source, destination, association);
 	}
 
 	/*
@@ -415,18 +415,6 @@ public class XFormsGenerator extends AbstractGenerator {
 	 */
 	public void addAttributeForClass(Clazz classe, Attribute attribute, Clazz owner) {
 		addAttributeForClass(classe, attribute);
-	}
-
-	/**
-	 * Adds the id for class.
-	 * 
-	 * @param classe
-	 *            the classe
-	 * @param string
-	 *            the string
-	 */
-	public void addIdForClass(Clazz classe, String string) {
-		// nothing
 	}
 
 	/*
@@ -1070,7 +1058,7 @@ public class XFormsGenerator extends AbstractGenerator {
 			if (!classe.isAbstract()) {
 				RenderableClass parentClass = classes.get(parentClasse);
 				if (parentClass != null) {
-					parentClass.addSubClass(classe, classes.get(classe));
+					parentClass.addSubClass(classe);
 				} else {
 					monitor.addErrorTextAndLog("No classType found for class '" + classe.getLabel()
 							+ "'. Please add the containing model to the generation project.",

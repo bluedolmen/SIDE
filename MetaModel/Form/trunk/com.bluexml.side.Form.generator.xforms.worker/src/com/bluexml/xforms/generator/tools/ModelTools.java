@@ -551,7 +551,7 @@ public class ModelTools {
 	 * 
 	 * @return the levels
 	 */
-	private static int getLevels(AbstractClass ac) {
+	static int getLevels(AbstractClass ac) {
 		int result = 0;
 		if (ac instanceof Clazz) {
 			Clazz c = (Clazz) ac;
@@ -574,7 +574,6 @@ public class ModelTools {
 	 */
 	public static void sortClasses(List<AbstractClass> abstractClasses) {
 		Collections.sort(abstractClasses, new Comparator<AbstractClass>() {
-			@SuppressWarnings("synthetic-access")
 			public int compare(AbstractClass o1, AbstractClass o2) {
 				return getLevels(o1) - getLevels(o2);
 			}

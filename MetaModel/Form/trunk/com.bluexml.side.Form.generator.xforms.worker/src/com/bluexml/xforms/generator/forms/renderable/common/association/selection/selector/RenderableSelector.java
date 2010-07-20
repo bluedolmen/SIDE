@@ -49,6 +49,9 @@ public class RenderableSelector extends AbstractRenderable {
 	/** The model element list updater. */
 	private AbstractModelElementUpdater modelElementUpdater;
 
+	/** The parent renderable */
+	private AbstractRenderable parent;
+
 	/**
 	 * Instantiates a new renderable selector.
 	 * 
@@ -58,24 +61,24 @@ public class RenderableSelector extends AbstractRenderable {
 	public RenderableSelector(AssociationBean assoBean) {
 		super(assoBean);
 
+		parent = null;
+
 		String idStr;
-		if (assoBean.isForField()) {
-			String overridingType = assoBean.getOverridingType();
+		if (bean.isForField()) {
+			String overridingType = bean.getOverridingType();
 			idStr = overridingType.replaceAll(":", "_") + bean.getName() + "ListExt";
 			instanceName = XFormsGenerator.getId(idStr); // #1523
-			modelElementUpdater = new ModelElementUpdaterList(overridingType, instanceName,
-					assoBean);
-		} else if (assoBean.getAssociationType() == AssociationType.clazz) {
-			idStr = ModelTools.getCompleteNameJAXB(assoBean.getDestinationClass()) + "List";
+			modelElementUpdater = new ModelElementUpdaterList(overridingType, instanceName, bean);
+		} else if (bean.getAssociationType() == AssociationType.clazz) {
+			idStr = ModelTools.getCompleteNameJAXB(bean.getDestinationClass()) + "List";
 			instanceName = XFormsGenerator.getId(idStr);
-			modelElementUpdater = new ModelElementUpdaterList(assoBean.getDestinationClass(),
-					instanceName, assoBean);
+			modelElementUpdater = new ModelElementUpdaterList(bean.getDestinationClass(),
+					instanceName, bean);
 		} else {
-			idStr = ModelTools
-					.getCompleteNameJAXB(assoBean.getDestinationSelect().getEnumeration())
+			idStr = ModelTools.getCompleteNameJAXB(bean.getDestinationSelect().getEnumeration())
 					+ "EnumInstance";
 			instanceName = XFormsGenerator.getId(idStr);
-			modelElementUpdater = new ModelElementUpdaterEnum(assoBean, instanceName);
+			modelElementUpdater = new ModelElementUpdaterEnum(bean, instanceName);
 		}
 		instancePath = "instance('" + instanceName + "')/";
 		instanceNodePath = instancePath + "item";
@@ -93,26 +96,28 @@ public class RenderableSelector extends AbstractRenderable {
 		// bindType.setHidden(true);
 
 		// for workflows, we don't want anything but the list
-		RenderableSelectorSearcher searcher = new RenderableSelectorSearcher(assoBean, this);
-		RenderableSelectorList itemList = new RenderableSelectorList(assoBean, this);
+		RenderableSelectorSearcher searcher = new RenderableSelectorSearcher(bean, this);
+		RenderableSelectorList itemList = new RenderableSelectorList(bean, this);
 
-		if (assoBean.isInFeatureSearchMode()) {
+		if (bean.isInFeatureSearchMode() && bean.isItemSelector()) {
 			add(searcher);
 		}
 
 		add(itemList);
-		if (assoBean.isNoStatsOutput() == false) {
-			RenderableSelectorCount statsOutput = new RenderableSelectorCount(assoBean, this);
-			add(statsOutput);
-		}
+		if (bean.isItemSelector()) {
+			if (bean.isNoStatsOutput() == false) {
+				RenderableSelectorCount statsOutput = new RenderableSelectorCount(bean, this);
+				add(statsOutput);
+			}
 
-		if (assoBean.isInFeatureFilterMode()) {
-			add(searcher);
-		}
+			if (bean.isInFeatureFilterMode()) {
+				add(searcher);
+			}
 
-		if (assoBean.isShowingActions()
-				&& assoBean.getAssociationType() == AssociationBean.AssociationType.clazz) {
-			add(new RenderableSelectorCreate(assoBean, this));
+			if (bean.isShowingActions()
+					&& bean.getAssociationType() == AssociationBean.AssociationType.clazz) {
+				add(new RenderableSelectorCreate(bean, this));
+			}
 		}
 	}
 
@@ -221,13 +226,17 @@ public class RenderableSelector extends AbstractRenderable {
 		}
 
 		rendered.addModelElement(modelElementInit);
-		rendered.addModelElement(modelElementUpdater);
 
-		rendered.addModelElementRoot(bindId);
-		rendered.addModelElementRoot(bindLabel);
-		rendered.addModelElementRoot(bindMaxResults);
-		rendered.addModelElementRoot(bindType);
+		if (bean.isItemSelector()) {
+			rendered.addModelElement(modelElementUpdater);
+		}
 
+		if (bean.isItemSelector()) {
+			rendered.addModelElementRoot(bindId);
+			rendered.addModelElementRoot(bindLabel);
+			rendered.addModelElementRoot(bindMaxResults);
+			rendered.addModelElementRoot(bindType);
+		}
 		return rendered;
 	}
 
@@ -266,10 +275,10 @@ public class RenderableSelector extends AbstractRenderable {
 		// bindMaxResults.setType(new QName("string"));
 		// bindMaxResults.setHidden(true);
 		// bindType.setHidden(true);
-
 		if (bean.isMandatory()) {
 			// #978
-			// setting bindId's required to true will give the visual cue (a red star under Chiba)
+			// setting bindId's required to true will give the visual cue (a red star under
+			// Chiba)
 			bindId.setRequired(true);
 			bindId.setAnAssociation(true);
 			// !!! the constraint will be set by the actions (RenderableSSingleActions or
@@ -301,6 +310,21 @@ public class RenderableSelector extends AbstractRenderable {
 	 */
 	public boolean isForField() {
 		return bean.isForField();
+	}
+
+	/**
+	 * @param parent
+	 *            the parent to set
+	 */
+	public void setParent(AbstractRenderable parent) {
+		this.parent = parent;
+	}
+
+	/**
+	 * @return the parent
+	 */
+	public AbstractRenderable getParent() {
+		return parent;
 	}
 
 }

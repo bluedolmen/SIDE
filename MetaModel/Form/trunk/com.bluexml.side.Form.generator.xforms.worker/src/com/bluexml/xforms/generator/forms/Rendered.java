@@ -70,9 +70,9 @@ public abstract class Rendered {
 	 * @param rendered
 	 *            the rendered
 	 * @param renderable
-	 *            the renderable
+	 *            the renderable that has been rendered
 	 */
-	public void addRendered(Rendered rendered, Renderable renderable) {
+	public void addRendered(Rendered rendered, @SuppressWarnings("unused") Renderable renderable) {
 		modelElements.addAll(rendered.modelElements);
 		getChildren().add(rendered);
 	}
@@ -180,7 +180,7 @@ public abstract class Rendered {
 	 * @param renderable
 	 *            the renderable
 	 */
-	public void renderEnd(Renderable renderable) {
+	public void renderEnd() {
 		if (getBindHolder() != null) {
 			getBindHolderStack().pop();
 		}

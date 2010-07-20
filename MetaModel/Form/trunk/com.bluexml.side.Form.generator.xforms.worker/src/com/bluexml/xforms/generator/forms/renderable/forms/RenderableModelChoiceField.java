@@ -57,6 +57,7 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 		properties.setUniqueName(FormGeneratorsManager.getUniqueName(formElement));
 		properties.setHint(formElement.getHelp_text());
 		properties.setStyle(formElement.getStyle());
+		properties.setWidgetType(formElement.getWidget());
 
 		properties.setCreateEditFormType(FormTypeRendered.formForm);
 		int targetsNb = formElement.getTarget().size();

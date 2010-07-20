@@ -80,7 +80,7 @@ public class RenderableClass extends Renderable {
 	 * @param classBean
 	 *            the class bean
 	 */
-	public void addSubClass(Clazz subClass, RenderableClass classBean) {
+	public void addSubClass(Clazz subClass) {
 		subClasses.add(subClass);
 	}
 

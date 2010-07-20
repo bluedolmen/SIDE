@@ -4,11 +4,8 @@ import java.util.Stack;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.bluexml.xforms.messages.MsgId;
-
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;
-import com.bluexml.side.form.FormElement;
 import com.bluexml.side.workflow.Transition;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
@@ -16,6 +13,7 @@ import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementSubmission;
 import com.bluexml.xforms.generator.forms.renderable.common.RenderableSubmit;
 import com.bluexml.xforms.generator.forms.rendered.RenderedParentGroup;
+import com.bluexml.xforms.messages.MsgId;
 
 public class RenderableActionField extends Renderable {
 
@@ -24,8 +22,7 @@ public class RenderableActionField extends Renderable {
 
 	private final boolean DEFAULT_VALIDATE_FIRST = true;
 
-	public RenderableActionField(XFormsGenerator generationManager, FormElement parent,
-			ActionField formElement) {
+	public RenderableActionField(XFormsGenerator generationManager, ActionField formElement) {
 
 		super();
 		/*
@@ -50,8 +47,8 @@ public class RenderableActionField extends Renderable {
 		label = formElement.getLabel();
 		// submission = new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER + infixe + "/"
 		// + actionName, label, true, DEFAULT_VALIDATE_FIRST);
-		String action = MsgId.INT_URI_SCHEME_WRITER + infixe + "?" + MsgId.INT_ACT_PARAM_EXEC_ACTION
-				+ "=" + actionName;
+		String action = MsgId.INT_URI_SCHEME_WRITER + infixe + "?"
+				+ MsgId.INT_ACT_PARAM_EXEC_ACTION + "=" + actionName;
 		submission = new ModelElementSubmission(action, label, true, DEFAULT_VALIDATE_FIRST);
 		RenderableSubmit button = new RenderableSubmit(submission, label, false);
 		add(button);

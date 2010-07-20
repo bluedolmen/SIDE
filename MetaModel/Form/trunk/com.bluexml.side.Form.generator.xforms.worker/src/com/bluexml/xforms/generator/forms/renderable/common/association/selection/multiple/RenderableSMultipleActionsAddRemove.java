@@ -29,7 +29,7 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 
 	/** The selector bind for data type. */
 	private ModelElementBindSimple selectorBindType;
-	
+
 	private RenderableSelector selector;
 
 	/**
@@ -67,10 +67,12 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
+			boolean isInIMultRepeater) {
 		// FIXME root path
-		ModelElementBindSimple bindActions = ((RenderableSMultiple) parents.peek()).getBindActions();
-		
+		ModelElementBindSimple bindActions = ((RenderableSMultiple) parents.peek())
+				.getBindActions();
+
 		this.selectorBindId = selector.getBindId();
 		this.selectorBindLabel = selector.getBindLabel();
 		this.selectorBindType = selector.getBindType();
@@ -87,14 +89,13 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 			xformsElement.addContent(getTriggerAdd(bindActions, path, rootPath));
 			xformsElement.addContent(XFormsGenerator.createElement("br",
 					XFormsGenerator.NAMESPACE_XHTML));
-			
+
 			xformsElement.addContent(getTriggerRemove(bindActions, repeaterId));
 			rendered.setXformsElement(xformsElement);
 		}
 		return rendered;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see com.bluexml.xforms.generator.forms.Renderable#getDivStyle()
 	 */
@@ -150,8 +151,7 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 		// <xf:action ev:event="DOMActivate"
 		// if="(instance('ComBluexmlDataRubriqueListInstance1')/SELECTEDID ne '') and not(parentchildOf[com.bluexml.data.Rubrique/BXDSID = instance('ComBluexmlDataRubriqueListInstance1')/SELECTEDID])">
 		String selectorNodeset = selectorBindId.getNodeset();
-		String realActionsNodeset = StringUtils.trimToEmpty(rootPath)
-		+ bindActions.getNodeset();
+		String realActionsNodeset = StringUtils.trimToEmpty(rootPath) + bindActions.getNodeset();
 		String iftest = "(" + selectorNodeset + " ne '') " + "and not(" + realActionsNodeset + "["
 				+ path + MsgId.INT_INSTANCE_SIDEID + " = " + selectorNodeset + "])";
 		if (bean.getHiBound() > 1) {
@@ -185,7 +185,7 @@ public class RenderableSMultipleActionsAddRemove extends AbstractRenderable {
 		setvalueType.setAttribute("ref", pathSIDE + MsgId.INT_INSTANCE_SIDETYPE);
 		setvalueType.setAttribute("value", selectorBindType.getNodeset());
 		action.addContent(setvalueType);
-		
+
 		trigger.addContent(action);
 		return trigger;
 	}

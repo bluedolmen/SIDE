@@ -4,6 +4,8 @@ import com.bluexml.xforms.generator.forms.modelelement.AbstractModelElementUpdat
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
+import com.bluexml.xforms.generator.forms.renderable.common.association.selection.multiple.RenderableSMultiple;
+import com.bluexml.xforms.generator.forms.renderable.common.association.selection.unique.RenderableSSingle;
 
 /**
  * The Class AbstractRenderableSelectorItem.
@@ -75,12 +77,29 @@ public abstract class AbstractRenderableSelectorItem extends AbstractRenderable 
 	/**
 	 * Gets the bind for data type.
 	 * 
-	 * @return the bind 
+	 * @return the bind
 	 */
 	public ModelElementBindSimple getBindType() {
 		return renderableAssociationSelectionSelector.getBindType();
 	}
-	
+
+	/**
+	 * Gets the bind for data type.
+	 * 
+	 * @return the bind
+	 */
+	public ModelElementBindSimple getFieldBind() {
+		AbstractRenderable parent = renderableAssociationSelectionSelector.getParent();
+		if (bean.isMultiple()) {
+			return ((RenderableSMultiple) parent).getBindActions();
+		}
+		if (parent instanceof RenderableSSingle) {
+		return ((RenderableSSingle) parent).getSelectedBindId();
+		}
+		System.out.println("");
+		return null;
+	}
+
 	/**
 	 * Gets the model element list updater.
 	 * 

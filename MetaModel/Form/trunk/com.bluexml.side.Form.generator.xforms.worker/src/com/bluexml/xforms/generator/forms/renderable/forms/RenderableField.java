@@ -321,8 +321,7 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 						(CharField) formElement, "string");
 			}
 		} else if (formElement instanceof ActionField) {
-			renderable = new RenderableActionField(generationManager, parent,
-					(ActionField) formElement);
+			renderable = new RenderableActionField(generationManager, (ActionField) formElement);
 		}
 		return renderable;
 	}

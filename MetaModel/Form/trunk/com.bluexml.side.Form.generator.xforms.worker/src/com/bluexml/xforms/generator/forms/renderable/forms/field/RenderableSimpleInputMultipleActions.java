@@ -86,10 +86,12 @@ public class RenderableSimpleInputMultipleActions extends Renderable {
 	 * Adds the button for adding the text currently in the input field to the list of values.
 	 * 
 	 * @param path
+	 *            the path in the lowest containing parent
 	 * @param rootPath
+	 *            the path from the top-most container, with references to all relevant repeaters
 	 * @return
 	 */
-	private Element getTriggerAdd(String path, String rootPath) {
+	private Element getTriggerAdd(@SuppressWarnings("unused") String path, String rootPath) {
 
 		ModelElementBindSimple inputBind = parent.getInputBind();
 		ModelElementBindSimple storeBind = parent.getStoreBind();

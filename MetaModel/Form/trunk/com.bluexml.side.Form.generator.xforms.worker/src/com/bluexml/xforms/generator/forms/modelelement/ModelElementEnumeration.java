@@ -45,6 +45,7 @@ public class ModelElementEnumeration extends ModelElement {
 	 * 
 	 * @see com.bluexml.xforms.generator.forms.ModelElement#getModelElement()
 	 */
+	@Override
 	public Element getModelElement() {
 		Element enumsInstance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);
