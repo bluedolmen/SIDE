@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import com.bluexml.side.form.ActionField;
+import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormPackage;
 
 /**
@@ -107,6 +108,10 @@ public class ActionFieldItemProvider
 	@Override
 	public String getText(Object object) {
 		String label = ((ActionField)object).getId();
+		if (((Field)object).getLabel() != null && ((Field)object).getLabel().length() > 0) {
+			label = ((Field)object).getLabel();
+		}
+
 		return label == null || label.length() == 0 ?
 			getString("_UI_ActionField_type") :
 			label + " (button)";
