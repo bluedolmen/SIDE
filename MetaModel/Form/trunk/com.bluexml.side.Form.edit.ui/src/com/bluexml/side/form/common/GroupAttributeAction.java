@@ -26,6 +26,7 @@ import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.SearchField;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.common.utils.InternalModification;
 
@@ -48,7 +49,8 @@ public class GroupAttributeAction extends Action implements
 		selectedObjects = new ArrayList<EObject>();
 		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
-			if (object instanceof Field || object instanceof FormAspect) {
+			if (object instanceof Field || object instanceof FormAspect || object instanceof SearchField) { 
+				// fix for #1641: added SearchField to the if condition
 				selectedObjects.add((EObject) object);
 			} else {
 				return false;
