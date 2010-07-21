@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
@@ -19,7 +18,6 @@ import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.common.Operation;
 import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormAspect;
@@ -29,11 +27,9 @@ import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.ModelChoiceField;
-import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.common.utils.FieldTransformation;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.common.utils.InternalModification;
-import com.bluexml.side.workflow.State;
 
 public class ClassSynchronizationUtils {
 

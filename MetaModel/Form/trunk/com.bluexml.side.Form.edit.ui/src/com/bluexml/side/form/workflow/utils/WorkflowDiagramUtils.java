@@ -2,8 +2,8 @@ package com.bluexml.side.form.workflow.utils;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.bluexml.side.common.DataType;
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;

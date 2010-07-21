@@ -17,13 +17,12 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.common.DataType;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.EnumerationLiteral;
 import com.bluexml.side.common.Comment;
+import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
-import com.bluexml.side.common.Operation;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.common.Stereotype;
@@ -31,8 +30,8 @@ import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormElement;
-import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.ModelChoiceField;
 
 public class ClassDiagramUtils {
 

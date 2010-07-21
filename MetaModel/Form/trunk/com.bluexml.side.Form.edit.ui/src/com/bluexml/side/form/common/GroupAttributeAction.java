@@ -1,7 +1,6 @@
 package com.bluexml.side.form.common;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
-import org.eclipse.emf.edit.command.MoveCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.jface.action.Action;
@@ -27,7 +25,6 @@ import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.SearchField;
-import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.common.utils.InternalModification;
 
 public class GroupAttributeAction extends Action implements
@@ -66,7 +63,6 @@ public class GroupAttributeAction extends Action implements
 		doAction(selectedObjects);
 	}
 
-	@SuppressWarnings("unchecked")
 	private void doAction(List<EObject> l) {
 		InternalModification.dontMoveToDisabled();
 		CompoundCommand cc = new CompoundCommand();

@@ -15,7 +15,6 @@ import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.FormWorkflow;
-import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.util.libs.ui.UIUtils;
 import com.bluexml.side.workflow.Attribute;
