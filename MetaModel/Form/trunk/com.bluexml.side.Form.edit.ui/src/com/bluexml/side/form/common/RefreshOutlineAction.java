@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.internal.resources.ResourceException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -53,16 +54,14 @@ import fr.obeo.acceleo.gen.IGenFilter;
 import fr.obeo.acceleo.gen.template.eval.LaunchManager;
 import fr.obeo.acceleo.tools.resources.Resources;
 
-public class RefreshOutlineAction extends Action implements
-		ISelectionChangedListener {
+public class RefreshOutlineAction extends Action implements ISelectionChangedListener {
 
 	protected URI fileURI;
 	protected EObject selectedObject;
 
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof IStructuredSelection) {
-			setEnabled(updateSelection((IStructuredSelection) event
-					.getSelection()));
+			setEnabled(updateSelection((IStructuredSelection) event.getSelection()));
 		} else {
 			setEnabled(false);
 		}
@@ -74,7 +73,7 @@ public class RefreshOutlineAction extends Action implements
 			Object object = objects.next();
 			if (object instanceof FormContainer) {
 				selectedObject = (FormContainer) object;
-				XMIResource xmiRessource = (XMIResource)((EObject)object).eResource();
+				XMIResource xmiRessource = (XMIResource) ((EObject) object).eResource();
 				if (xmiRessource != null) {
 					fileURI = xmiRessource.getURI();
 				}
@@ -87,19 +86,12 @@ public class RefreshOutlineAction extends Action implements
 	}
 
 	/**
-	 * public boolean updateSelection(IStructuredSelection selection) {
-		fileURI = null;
-		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
-			Object object = objects.next();
-			if (object instanceof XMIResource) {
-				fileURI = ((XMIResource) object).getURI();
-			} else {
-				return false;
-			}
-		}
-
-		return (fileURI != null);
-	}
+	 * public boolean updateSelection(IStructuredSelection selection) { fileURI = null; for
+	 * (Iterator<?> objects = selection.iterator(); objects.hasNext();) { Object object =
+	 * objects.next(); if (object instanceof XMIResource) { fileURI = ((XMIResource)
+	 * object).getURI(); } else { return false; } }
+	 * 
+	 * return (fileURI != null); }
 	 */
 
 	@Override
@@ -108,13 +100,15 @@ public class RefreshOutlineAction extends Action implements
 		try {
 			doAction(fileURI);
 		} catch (Exception e) {
-			MessageDialog.openError(null, e.getMessage(), "Error during outline generation, see log for details.");
+			MessageDialog.openError(null, e.getMessage(),
+					"Error during outline generation, see log for details.");
 			EcorePlugin.INSTANCE.log(e);
 		}
 	}
 
 	private static final IGenFilter genFilter = new IGenFilter() {
-		public boolean filter(java.io.File script, IFile targetFile, EObject object) throws CoreException {
+		public boolean filter(java.io.File script, IFile targetFile, EObject object)
+				throws CoreException {
 			return true;
 		}
 	};
@@ -123,8 +117,8 @@ public class RefreshOutlineAction extends Action implements
 	private void doAction(URI uri) throws CoreException, FactoryException, IOException {
 		if (uri != null) {
 			if (selectedObject != null)
-				OutlineViewService.setNameOfSelectedForm(((FormContainer)selectedObject).getId());
-			
+				OutlineViewService.setNameOfSelectedForm(((FormContainer) selectedObject).getId());
+
 			IFile output_file = doGeneration(uri);
 			InputStream is = output_file.getContents();
 			BufferedInputStream bis = new BufferedInputStream(is);
@@ -134,26 +128,34 @@ public class RefreshOutlineAction extends Action implements
 			while (dis.available() != 0) {
 				content += dis.readLine();
 			}
-			OutlineHTMLView v = (OutlineHTMLView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("com.bluexml.view.OutlineHTMLView");
+			OutlineHTMLView v = (OutlineHTMLView) PlatformUI.getWorkbench()
+					.getActiveWorkbenchWindow().getActivePage().showView(
+							"com.bluexml.view.OutlineHTMLView");
 			v.setContent(content);
 
-			doClean();
+			try {
+				doClean();
+			} catch (ResourceException re) {
+				// nothing to do, this exception is neither blocking nor disturbing
+				// try catch added to fix #1186
+			}
 		}
 	}
 
-	public void doClean() throws CoreException {		
+	public void doClean() throws CoreException {
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IProject myproject = myWorkspaceRoot.getProject(".form");
 		myproject.delete(true, new NullProgressMonitor());
 	}
-	
+
 	public IFile doGeneration(URI uri) throws CoreException, FactoryException, IOException {
 		String metamodelURI = "http://www.kerblue.org/form/1.0";
 
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
-				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().saveAllEditors(true);
-			};
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+						.saveAllEditors(true);
+			}
 		});
 		// References to files in the project
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
@@ -181,15 +183,15 @@ public class RefreshOutlineAction extends Action implements
 		// Model file
 		Model model = ChainFactory.eINSTANCE.createModel();
 		EFactory.eAdd(repository, "files", model);
- 		IFile modelPath = (IFile) myWorkspaceRoot.findMember(uri.path().substring(10));
- 		if (modelPath == null)
- 			modelPath = (IFile) myWorkspaceRoot.findMember(uri.path());
+		IFile modelPath = (IFile) myWorkspaceRoot.findMember(uri.path().substring(10));
+		if (modelPath == null)
+			modelPath = (IFile) myWorkspaceRoot.findMember(uri.path());
 		EFactory.eSet(model, "path", modelPath.getFullPath().toString());
 
 		// Target folder
 		Folder folder = ChainFactory.eINSTANCE.createFolder();
 
-		//IPath outputPath = new Path(modelPath.getFullPath().toString()+".out");
+		// IPath outputPath = new Path(modelPath.getFullPath().toString()+".out");
 		IPath outputPath = tmpProject.getFullPath().append("out");
 		EFactory.eAdd(repository, "files", folder);
 		EFactory.eSet(folder, "path", outputPath.toString());
@@ -197,7 +199,9 @@ public class RefreshOutlineAction extends Action implements
 		// Log
 		Log log = ChainFactory.eINSTANCE.createLog();
 		EFactory.eAdd(repository, "files", log);
-		EFactory.eSet(log, "path", modelPath.getFullPath().removeLastSegments(1).append(modelPath.getFullPath().removeFileExtension().lastSegment() + ".log.txt").toString());
+		EFactory.eSet(log, "path", modelPath.getFullPath().removeLastSegments(1).append(
+				modelPath.getFullPath().removeFileExtension().lastSegment() + ".log.txt")
+				.toString());
 
 		// Metamodel file
 		EmfMetamodel pim = ChainFactory.eINSTANCE.createEmfMetamodel();
@@ -206,7 +210,8 @@ public class RefreshOutlineAction extends Action implements
 
 		List<String> templates = new ArrayList<String>();
 
-		templates.add("/com.bluexml.side.Form.edit.ui/com/bluexml/side/form/editor/views/default.mt");
+		templates
+				.add("/com.bluexml.side.Form.edit.ui/com/bluexml/side/form/editor/views/default.mt");
 
 		for (String templateFile : templates) {
 			// Generator
@@ -229,7 +234,8 @@ public class RefreshOutlineAction extends Action implements
 		IFile fchain = tmpProject.getFile("form.chain");
 		URI chainURI = Resources.createPlatformResourceURI(fchain.getFullPath().toString());
 		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
+				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 		Resource chainResource = resourceSet.createResource(chainURI);
 		chainResource.getContents().add(chain);
 		chain.setFile(fchain);
@@ -237,12 +243,12 @@ public class RefreshOutlineAction extends Action implements
 
 		chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", true));
 
-		//Update Outline View
+		// Update Outline View
 		IFolder output_folder = (IFolder) myWorkspaceRoot.findMember(outputPath);
 		IFile output_file = (IFile) output_folder.members()[0];
 		return output_file;
 	}
-	
+
 	@Override
 	public String getText() {
 		return "Refresh Outline";
