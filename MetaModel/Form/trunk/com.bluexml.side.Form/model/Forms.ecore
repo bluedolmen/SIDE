@@ -529,7 +529,7 @@
     </eAnnotations>
     <eLiterals name="Select" literal="Select">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="This option allows selecting the associated items using a selection list. Associated items are considered existent although they may still be created."/>
+        <details key="documentation" value="This option allows selecting the associated items using a selection list widget. The items in the list always exist. The widget does not allow any advanced action like editing or creating items."/>
       </eAnnotations>
     </eLiterals>
     <eLiterals name="Inline" value="1" literal="Inline">
@@ -537,7 +537,11 @@
         <details key="documentation" value="The form designed for the target class or target form is included in the parent form. Associated items can be defined directly from the currently displayed form."/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="ItemSelector" value="2"/>
+    <eLiterals name="ItemSelector" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This option allows selecting the associated items using an extended widget (the &quot;item selector&quot;) consisting of a selection list and additional actions that are not available in the other widgets. The items displayed in the list always exist."/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormSearch" eSuperTypes="#//FormContainer #//ClassReference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinationOperator" eType="#//CombinationOperators"/>
