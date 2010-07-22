@@ -81,7 +81,7 @@ public class RenderableSelector extends AbstractRenderable {
 			modelElementUpdater = new ModelElementUpdaterEnum(bean, instanceName);
 		}
 		instancePath = "instance('" + instanceName + "')/";
-		instanceNodePath = instancePath + "item";
+		instanceNodePath = instancePath + MsgId.INT_INSTANCE_SELECT_ITEM;
 
 		// bindId = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDID);
 		// bindLabel = new ModelElementBindSimple(instancePath + MsgId.INT_INSTANCE_SELECTEDLABEL);

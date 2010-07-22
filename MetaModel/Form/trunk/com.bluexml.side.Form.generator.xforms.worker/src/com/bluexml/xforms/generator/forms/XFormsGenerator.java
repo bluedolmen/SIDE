@@ -596,13 +596,13 @@ public class XFormsGenerator extends AbstractGenerator {
 		Document documentEnums = new Document(racineEnums);
 
 		for (SearchOperator operator : opList) {
-			Element l = new Element("item");
+			Element l = new Element(MsgId.INT_INSTANCE_SELECT_ITEM.getText());
 
-			Element name = new Element("id");
+			Element name = new Element(MsgId.INT_INSTANCE_ENUM_ID.getText());
 			name.setText(operator.getId());
 			l.addContent(name);
 
-			Element value = new Element("value");
+			Element value = new Element(MsgId.INT_INSTANCE_ENUM_VALUE.getText());
 			value.setText(operator.getLabel());
 			l.addContent(value);
 
@@ -992,6 +992,8 @@ public class XFormsGenerator extends AbstractGenerator {
 	 */
 	public void processEnum(Enumeration enumeration) {
 		int i = 1;
+
+		// writes static enums into XML files, associating the enum value with a collision-free id
 		if (!enumeration.getDynamic()) {
 			formTypesToDescribe.add(FormTypeRendered.formEnum);
 			Element racineEnums = new Element("enums");
@@ -999,7 +1001,7 @@ public class XFormsGenerator extends AbstractGenerator {
 
 			EList<EnumerationLiteral> literals = enumeration.getLiterals();
 			for (EnumerationLiteral enumerationLiteral : literals) {
-				Element l = new Element("item");
+				Element l = new Element(MsgId.INT_INSTANCE_SELECT_ITEM.getText());
 
 				// order position for use with multiple selection enum fields
 				Element idElt = new Element(MsgId.INT_INSTANCE_ENUM_ID.getText());

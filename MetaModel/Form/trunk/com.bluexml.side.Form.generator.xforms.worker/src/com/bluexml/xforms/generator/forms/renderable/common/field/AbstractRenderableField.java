@@ -482,8 +482,8 @@ public abstract class AbstractRenderableField extends Renderable {
 			element.addContent(itemset);
 		} else { // #1313
 			for (String itemText : selectBean.getAllowedValues()) {
-				Element item = XFormsGenerator.createElement("item",
-						XFormsGenerator.NAMESPACE_XFORMS);
+				Element item = XFormsGenerator.createElement(MsgId.INT_INSTANCE_SELECT_ITEM
+						.getText(), XFormsGenerator.NAMESPACE_XFORMS);
 				Element label = XFormsGenerator.createElement("label",
 						XFormsGenerator.NAMESPACE_XFORMS);
 				Element value = XFormsGenerator.createElement("value",

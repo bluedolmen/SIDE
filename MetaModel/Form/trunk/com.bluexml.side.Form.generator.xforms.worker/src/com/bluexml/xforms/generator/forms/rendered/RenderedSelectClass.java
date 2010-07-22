@@ -55,8 +55,8 @@ public class RenderedSelectClass extends Rendered {
 	 */
 	public void addCases(List<Clazz> classesList) {
 		for (Clazz classe : classesList) {
-			Element classItem = XFormsGenerator.createElement("item",
-					XFormsGenerator.NAMESPACE_XFORMS);
+			Element classItem = XFormsGenerator.createElement(MsgId.INT_INSTANCE_SELECT_ITEM
+					.getText(), XFormsGenerator.NAMESPACE_XFORMS);
 
 			Element label = XFormsGenerator.createElementWithContent("label",
 					XFormsGenerator.NAMESPACE_XFORMS, ModelTools.getTitle(classe));

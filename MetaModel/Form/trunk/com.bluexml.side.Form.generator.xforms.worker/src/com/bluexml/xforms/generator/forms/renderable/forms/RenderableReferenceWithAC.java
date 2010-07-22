@@ -11,6 +11,7 @@ import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableFormContainer;
 import com.bluexml.xforms.generator.forms.rendered.RenderedDiv;
 
+@Deprecated
 public class RenderableReferenceWithAC extends RenderableFormElement<Reference> {
 
 	private int index;
