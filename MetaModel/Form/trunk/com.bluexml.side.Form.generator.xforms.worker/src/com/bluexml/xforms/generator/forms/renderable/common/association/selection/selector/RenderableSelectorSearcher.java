@@ -82,7 +82,8 @@ public class RenderableSelectorSearcher extends AbstractRenderableSelectorItem {
 		Element send = XFormsGenerator.createElement("send", XFormsGenerator.NAMESPACE_XFORMS);
 		getModelElementUpdater().addLinkedElement(send);
 
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_SEARCH);
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_SEARCH,
+				"Launch search");
 
 		if (usingAutoSearch) {
 			// start searching at 3 characters (if using auto search - condition added wrt #1666)

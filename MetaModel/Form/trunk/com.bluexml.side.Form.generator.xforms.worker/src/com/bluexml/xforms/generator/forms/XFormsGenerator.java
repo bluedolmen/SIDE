@@ -206,13 +206,14 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * 
 	 * @return the element
 	 */
-	public static Element createTriggerWithLabelImage(String image) {
+	public static Element createTriggerWithLabelImage(String image, String altText) {
 		Element element = createElement("trigger", NAMESPACE_XFORMS);
 		element.setAttribute("appearance", "minimal");
 		Element labelElement = createElement("label", NAMESPACE_XFORMS);
 		Element imageElement = createElement("img", NAMESPACE_XHTML);
 		imageElement.setAttribute("border", "0");
 		imageElement.setAttribute("src", image);
+		imageElement.setAttribute("alt", altText);
 		labelElement.addContent(imageElement);
 		element.addContent(labelElement);
 		return element;

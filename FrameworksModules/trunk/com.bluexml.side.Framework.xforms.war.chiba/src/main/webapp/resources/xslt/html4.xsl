@@ -218,7 +218,7 @@
                     </script>
                 <!-- copy inline javascript -->
                 <xsl:for-each select="xhtml:script">
-                    <script>
+                    <script type="text/javascript">
                         <xsl:choose>
                             <xsl:when test="@src">
                                 <xsl:attribute name="type">
@@ -383,7 +383,7 @@
             </xsl:attribute>
             <xsl:attribute name="onSubmit">return submitFunction();</xsl:attribute>
 
-            <xsl:attribute name="method">POST</xsl:attribute>
+            <xsl:attribute name="method">post</xsl:attribute>
             <xsl:attribute name="enctype">application/x-www-form-urlencoded</xsl:attribute>
             <xsl:if test="$uses-upload">
                 <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>
@@ -417,7 +417,7 @@
                 </xsl:choose>
             </xsl:attribute>
             <xsl:attribute name="onSubmit">return submitFunction();</xsl:attribute>
-            <xsl:attribute name="method">POST</xsl:attribute>
+            <xsl:attribute name="method">post</xsl:attribute>
             <xsl:attribute name="enctype">application/x-www-form-urlencoded</xsl:attribute>
             <xsl:if test="$uses-upload">
                 <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>

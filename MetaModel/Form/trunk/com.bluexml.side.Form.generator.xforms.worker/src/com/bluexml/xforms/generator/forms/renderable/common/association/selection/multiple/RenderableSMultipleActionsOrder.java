@@ -90,7 +90,7 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 	 * @return the trigger up
 	 */
 	private Element getTriggerUp(ModelElementBindSimple bindActions, String rootPath) {
-		return getTriggerMove(bindActions, true, XFormsGenerator.IMG_UP, rootPath);
+		return getTriggerMove(bindActions, true, XFormsGenerator.IMG_UP, "Move up", rootPath);
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 	 * @return the trigger down
 	 */
 	private Element getTriggerDown(ModelElementBindSimple bindActions, String rootPath) {
-		return getTriggerMove(bindActions, false, XFormsGenerator.IMG_DOWN, rootPath);
+		return getTriggerMove(bindActions, false, XFormsGenerator.IMG_DOWN, "Move down", rootPath);
 	}
 
 	/**
@@ -124,9 +124,9 @@ public class RenderableSMultipleActionsOrder extends AbstractRenderable {
 	 * @return the trigger move
 	 */
 	private Element getTriggerMove(ModelElementBindSimple bindActions, boolean moveUp,
-			String image, String rootPath) {
+			String image, String altText, String rootPath) {
 
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage(image);
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(image, altText);
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 
 		String realActionsNodeset = "instance('minstance')/" + StringUtils.trimToEmpty(rootPath)

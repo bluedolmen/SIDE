@@ -112,7 +112,7 @@ public class RenderableSSingleActions extends AbstractRenderable {
 			ModelElementBindSimple bindLabel, ModelElementBindSimple bindType) {
 		String img = selector.isForField() ? XFormsGenerator.IMG_DESELECT
 				: XFormsGenerator.IMG_LEFT;
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage(img);
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(img, "Remove item");
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
 
@@ -163,7 +163,7 @@ public class RenderableSSingleActions extends AbstractRenderable {
 	private Element getTriggerSelect(ModelElementBindSimple bindId,
 			ModelElementBindSimple bindLabel, ModelElementBindSimple bindType) {
 		String img = selector.isForField() ? XFormsGenerator.IMG_SELECT : XFormsGenerator.IMG_RIGHT;
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage(img);
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(img, "Select item");
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
 

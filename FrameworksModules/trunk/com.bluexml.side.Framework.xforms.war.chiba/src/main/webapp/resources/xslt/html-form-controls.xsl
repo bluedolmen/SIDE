@@ -50,7 +50,7 @@
 						<xsl:otherwise>chiba:DropdownDatePicker</xsl:otherwise>
 					</xsl:choose>
 				</xsl:variable>
-				<input id="{concat($id,'-value')}" type="text" name="{$name}" value="" readonly="" class="value">
+				<input id="{concat($id,'-value')}" type="text" name="{$name}" value="" readonly="false" class="value">
                     <xsl:if test="string-length($navindex) != 0">
                         <xsl:attribute name="tabindex">
                             <xsl:value-of select="$navindex"/>
@@ -1050,7 +1050,7 @@
 	</xsl:template>
 
     <xsl:template name="build-items-itemset">
-		<optgroup id="{@id}">
+		<optgroup id="{@id}" label="">
 			<xsl:for-each select="xforms:item">
 				<xsl:call-template name="build-items-item"/>
 			</xsl:for-each>

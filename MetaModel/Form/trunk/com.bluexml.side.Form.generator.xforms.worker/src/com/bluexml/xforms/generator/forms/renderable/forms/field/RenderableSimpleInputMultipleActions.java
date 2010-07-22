@@ -68,7 +68,8 @@ public class RenderableSimpleInputMultipleActions extends Renderable {
 		ModelElementBindSimple inputBind = parent.getInputBind();
 		String inputNodeset = inputBind.getNodeset();
 
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_CLEAR);
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_CLEAR,
+				"Clear input");
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 
 		action.setAttribute("event", "DOMActivate", XFormsGenerator.NAMESPACE_EVENTS);
@@ -103,7 +104,8 @@ public class RenderableSimpleInputMultipleActions extends Renderable {
 			inputNodeset = "instance('minstance')/" + inputNodeset;
 		}
 
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_ADD);
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_ADD,
+				"Add item");
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 
 		// <xf:action ev:event="DOMActivate"
@@ -137,7 +139,8 @@ public class RenderableSimpleInputMultipleActions extends Renderable {
 	 * @return
 	 */
 	private Element getTriggerRemove(String rootPath) {
-		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_REMOVE);
+		Element trigger = XFormsGenerator.createTriggerWithLabelImage(XFormsGenerator.IMG_REMOVE,
+				"Remove item");
 		Element action = XFormsGenerator.createElement("action", XFormsGenerator.NAMESPACE_XFORMS);
 
 		String repeaterId = parent.getRepeaterId();
