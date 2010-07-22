@@ -76,12 +76,12 @@ public class XFormsWork implements RunAsWork<String> {
 
 	private static final String WEBSCRIPT_SEPARATOR = "{::}";
 	/** */
-	private static Log logger = LogFactory.getLog(XFormsWork.class);
+	static Log logger = LogFactory.getLog(XFormsWork.class);
 	private static XStream xstream = null;
 
 	private final XFormsWebscript formsWebscript;
-	private final XFormsQueryType queryType;
-	private final DataLayer dataLayer;
+	final XFormsQueryType queryType;
+	final DataLayer dataLayer;
 	private final Map<String, String> parameters;
 	private final ServiceRegistry serviceRegistry;
 
@@ -92,7 +92,7 @@ public class XFormsWork implements RunAsWork<String> {
 
 	// Variable used to return the id of the Class which is suspected to
 	// generate a problem (exception)
-	private String faultyId = null;
+	String faultyId = null;
 
 	/*
 	 * public XFormsWork(XFormsWebscript formsWebscript, XFormsQueryType queryType, BrowseBean
@@ -120,7 +120,6 @@ public class XFormsWork implements RunAsWork<String> {
 			super();
 		}
 
-		@SuppressWarnings("synthetic-access")
 		public String execute() throws Throwable {
 			String result = null;
 			faultyId = null; // reset faultyId on each execution

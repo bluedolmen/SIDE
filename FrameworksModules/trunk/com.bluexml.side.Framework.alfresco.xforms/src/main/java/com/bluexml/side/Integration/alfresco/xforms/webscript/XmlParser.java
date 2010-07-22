@@ -26,7 +26,7 @@ public class XmlParser {
 		return e.getAttribute("qualifiedName");
 	}
 
-	public Map<String, Object> parse(DataLayer dataLayer, Element element) throws Exception {
+	public Map<String, Object> parse(Element element) throws Exception {
 		Map<String, Object> objectModel = new HashMap<String, Object>();
 
 		String qualifiedName = getQualifiedName(element);

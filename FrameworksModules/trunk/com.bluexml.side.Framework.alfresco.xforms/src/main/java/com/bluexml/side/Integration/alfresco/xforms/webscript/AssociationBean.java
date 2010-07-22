@@ -127,6 +127,7 @@ public class AssociationBean {
 		this.assoType = assoType;
 	}
 
+	@Override
 	public String toString() {
 		String st = "AssociationBean :{";
 		st += "";

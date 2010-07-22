@@ -132,7 +132,7 @@ public class DataLayer implements DataLayerInterface {
 
 		// parse the object to get a Map representation of it
 		Map<String, Object> entry = null;
-		entry = parser.parse(this, what);
+		entry = parser.parse(what);
 
 		// resolve QualifiedName to QName
 		QName nodeTypeQName = getDataTypeQName((String) entry.get("dataType"));
@@ -162,7 +162,7 @@ public class DataLayer implements DataLayerInterface {
 		XmlParser parser = new XmlParser();
 		// get Map representation of the object
 		Map<String, Object> entry = null;
-		entry = parser.parse(this, what);
+		entry = parser.parse(what);
 
 		// resolve QualifiedName to QName
 		String datatype = (String) entry.get("dataType");
@@ -193,7 +193,7 @@ public class DataLayer implements DataLayerInterface {
 		XmlParser parser = new XmlParser();
 		// get Map representation of the object
 		Map<String, Object> entry = null;
-		entry = parser.parse(this, what);
+		entry = parser.parse(what);
 
 		// resolve QualifiedName to QName
 		String datatype = (String) entry.get("dataType");

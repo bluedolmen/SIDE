@@ -11,12 +11,12 @@ import java.sql.ResultSet;
  */
 public class SQLRequester {
 
-	public static ResultSet executeQuery(String query) {
+	public static ResultSet executeQuery(@SuppressWarnings("unused") String query) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static void closeQuery(ResultSet resultSet) {
+	public static void closeQuery(@SuppressWarnings("unused") ResultSet resultSet) {
 		// TODO Auto-generated method stub
 
 	}
