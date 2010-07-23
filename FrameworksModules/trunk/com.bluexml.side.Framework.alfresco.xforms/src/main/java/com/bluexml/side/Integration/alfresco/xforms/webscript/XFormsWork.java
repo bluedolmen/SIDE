@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URLDecoder;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -33,6 +34,7 @@ import org.alfresco.repo.security.authentication.AuthenticationUtil.RunAsWork;
 import org.alfresco.repo.security.authority.AuthorityDAO;
 import org.alfresco.repo.transaction.RetryingTransactionHelper;
 import org.alfresco.repo.transaction.RetryingTransactionHelper.RetryingTransactionCallback;
+import org.alfresco.repo.workflow.WorkflowModel;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
@@ -1243,6 +1245,8 @@ public class XFormsWork implements RunAsWork<String> {
 		} else if (StringUtils.equals(method, "wfGetTaskDefinitionPropertyQNames")) {// #1534
 			List<String> res = wfGetTaskDefinitionPropertyQNames(wfs);
 			result = xstream.toXML(res);
+		} else if (StringUtils.equals(method, "wfGetInstanceHistory")) {// #1069
+			result = wfGetInstanceHistory(wfs);
 		} else {
 			// calls a generic method
 			// result = serviceMethodCall(wfs, xstream, method);
@@ -1415,6 +1419,51 @@ public class XFormsWork implements RunAsWork<String> {
 			}
 		}
 		return properties;
+	}
+
+	/**
+	 * Gets some history information id of the latest version of a process definition.<br/>
+	 * Parameters: "workflowId": the workflow instance id
+	 * 
+	 * @param wfs
+	 *            the WorkflowService object
+	 * @return a json string with information about the past tasks.
+	 */
+	private String wfGetInstanceHistory(WorkflowService wfs) {
+		String workflowId = parameters.get("workflowId");
+
+		// build a query to get all completed tasks for the workflow instance id
+		WorkflowTaskQuery queryCompleted = new WorkflowTaskQuery();
+		queryCompleted.setProcessId(workflowId);
+		queryCompleted.setTaskState(WorkflowTaskState.COMPLETED);
+		List<WorkflowTask> tasksComplete = wfs.queryTasks(queryCompleted);
+
+		StringBuffer result = new StringBuffer("tasks:[");
+		boolean first = true;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+		for (WorkflowTask task : tasksComplete) {
+			if (!first) {
+				result.append(',');
+			}
+			Map<QName, Serializable> taskProps = task.properties;
+			StringBuffer taskBuffer = new StringBuffer("");
+
+			// add whatever properties are necessary
+			String name = (String) taskProps.get(WorkflowModel.TYPE_TASK);
+			String id = (String) taskProps.get(WorkflowModel.PROP_TASK_ID);
+			Serializable startDate = taskProps.get(WorkflowModel.PROP_START_DATE);
+			Serializable endDate =  taskProps.get(WorkflowModel.PROP_COMPLETION_DATE);
+
+			taskBuffer.append("name:\"").append(name).append("\"");
+			taskBuffer.append(",id:\"").append(id).append("\"");
+			taskBuffer.append(",startDate:\"").append(formatter.format(startDate)).append("\"");
+			taskBuffer.append(",endDate:\"").append(formatter.format(endDate)).append("\"");
+			
+			result.append(taskBuffer);
+			first = false;
+		}
+		result.append(']');
+		return result.toString();
 	}
 
 	/**
