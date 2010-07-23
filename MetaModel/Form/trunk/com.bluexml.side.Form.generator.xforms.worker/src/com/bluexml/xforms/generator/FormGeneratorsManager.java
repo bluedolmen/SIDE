@@ -1429,8 +1429,8 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Returns the given parameter from the list that carries extension definition parameters. These
-	 * must follow the [parameter name]=[parameter value] format, with no whitespace before the "=".<br/>
+	 * Returns the given parameter from the list that carries extension parameters. These must
+	 * follow the [parameter name]=[parameter value] format, with no whitespace before the "=".<br/>
 	 * The list is searched for a correctly formatted parameter until completely visited. If a
 	 * parameter is defined several times, only the first occurrence will be seen and used.
 	 * 
@@ -1443,13 +1443,16 @@ public class FormGeneratorsManager {
 		int pos;
 		if (parameter != null) {
 			String lowCaseParam = parameter.toLowerCase();
+			int paramLength = lowCaseParam.length();
+
 			for (String configItem : xtension) {
-				configItem = configItem.toLowerCase();
-				pos = configItem.indexOf(lowCaseParam);
-				if (pos != -1) {
-					pos = pos + lowCaseParam.length();
-					if (configItem.charAt(pos) == '=') {
-						return configItem.substring(pos + 1);
+				if (configItem != null) {
+					pos = configItem.toLowerCase().indexOf(lowCaseParam);
+					if (pos != -1) {
+						pos = pos + paramLength;
+						if (configItem.charAt(pos) == '=') {
+							return configItem.substring(pos + 1);
+						}
 					}
 				}
 			}
