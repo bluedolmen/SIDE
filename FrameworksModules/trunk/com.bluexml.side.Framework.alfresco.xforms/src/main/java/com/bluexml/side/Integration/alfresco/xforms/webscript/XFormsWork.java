@@ -1454,10 +1454,12 @@ public class XFormsWork implements RunAsWork<String> {
 			Serializable startDate = taskProps.get(WorkflowModel.PROP_START_DATE);
 			Serializable endDate =  taskProps.get(WorkflowModel.PROP_COMPLETION_DATE);
 
+			taskBuffer.append("task:{");
 			taskBuffer.append("name:\"").append(name).append("\"");
 			taskBuffer.append(",id:\"").append(id).append("\"");
 			taskBuffer.append(",startDate:\"").append(formatter.format(startDate)).append("\"");
 			taskBuffer.append(",endDate:\"").append(formatter.format(endDate)).append("\"");
+			taskBuffer.append("}");
 			
 			result.append(taskBuffer);
 			first = false;
