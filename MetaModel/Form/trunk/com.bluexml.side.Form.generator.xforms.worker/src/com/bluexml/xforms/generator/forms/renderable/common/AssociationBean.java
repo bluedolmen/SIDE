@@ -96,8 +96,9 @@ public class AssociationBean {
 
 	private String style; // #1600
 
-	// Xtension-defined (for associations) #1660
-	private String dataSourceUri;
+	// Xtension-defined (for associations)
+	private String dataSourceUri; // #1660
+	// no bugzilla reference for the other Xtension defined below
 	private String featureMode;
 	private String luceneQuery;
 	private boolean noAutoSearch;
