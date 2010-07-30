@@ -11,12 +11,12 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 
-public class ExcelGenerator extends RequirementsGenerator {
+public class AnalysisGenerator extends RequirementsGenerator {
 
 	private static String MM_URI = "http://www.kerblue.org/requirements/1.0";
 	private static String KEY_RISKANALYSIS = "com.bluexml.side.Requirements.generator.office.excel.riskAnalysis";
 	private static String KEY_DIAGNOSTIC = "com.bluexml.side.Requirements.generator.office.excel.diagnostic";
-	
+
 	@Override
 	protected String getMetamodelURI() {
 		return MM_URI;
@@ -26,18 +26,22 @@ public class ExcelGenerator extends RequirementsGenerator {
 	protected List<String> getTemplates(String keyGenerator) {
 		List<String> l = new ArrayList<String>();
 		if (keyGenerator.equals(KEY_RISKANALYSIS))
-			l.add("/"+PLUGIN_ID+"/src/interpretation/risk/generation/spreadsheet/spreadsheet.mt");	
+			l.add("/" + PLUGIN_ID
+					+ "/src/interpretation/risk/generation/html/html.mt");
 		if (keyGenerator.equals(KEY_DIAGNOSTIC))
-			l.add("/"+PLUGIN_ID+"/src/interpretation/diagnostic/generation/spreadsheet/spreadsheet.mt");	
+			l
+					.add("/"
+							+ PLUGIN_ID
+							+ "/src/interpretation/diagnostic/generation/spreadsheet/spreadsheet.mt");
 		return l;
 	}
 
 	@Override
 	public Collection<IFile> complete() throws Exception {
-		//Nothing to do
+		// Nothing to do
 		return null;
 	}
-	
+
 	@Override
 	protected Map<String, String> getInputModels(String keyGenerator) {
 		Map<String, String> result = new HashMap<String, String>();
@@ -58,7 +62,11 @@ public class ExcelGenerator extends RequirementsGenerator {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List<String> getANTScripts(String keyGenerator) {
-		return Collections.EMPTY_LIST;
+		if (keyGenerator.equals(KEY_RISKANALYSIS))
+			return Collections
+					.singletonList("src/interpretation/risk/generation/html/build-default/");
+		else
+			return Collections.EMPTY_LIST;
 	}
 
 	@Override
@@ -82,12 +90,12 @@ public class ExcelGenerator extends RequirementsGenerator {
 	@Override
 	protected Set<String> getTransformation() {
 		Set<String> l = new HashSet<String>();
-		
+
 		if (generatorOptions.keySet().contains(KEY_RISKANALYSIS))
 			l.add(KEY_RISKANALYSIS);
 		if (generatorOptions.keySet().contains(KEY_DIAGNOSTIC))
 			l.add(KEY_DIAGNOSTIC);
-		
+
 		return l;
 	}
 

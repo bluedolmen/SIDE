@@ -14,10 +14,10 @@
           </generatorVersion>
         </technologyVersion>
       </technology>
-      <technology id="office" name="Office Document">
-        <technologyVersion id="office_excel" version="Excel Document">
-          <generatorVersion class="com.bluexml.side.requirements.generator.ExcelGenerator" id="com.bluexml.side.Requirements.generator.excel" version="Excel Generator">
-            <option key="com.bluexml.side.Requirements.generator.office.excel.riskAnalysis" label="Risk analysis" />
+      <technology id="office" name="Analysis Document">
+        <technologyVersion id="office_excel" version="Analysis Document">
+          <generatorVersion class="com.bluexml.side.requirements.generator.AnalysisGenerator" id="com.bluexml.side.Requirements.generator.excel" version="Analysis Document Generator">
+            <option key="com.bluexml.side.Requirements.generator.office.excel.riskAnalysis" label="Risk" />
             <option key="com.bluexml.side.Requirements.generator.office.excel.diagnostic" label="Diagnostic" />
           </generatorVersion>
         </technologyVersion>
