@@ -1,4 +1,4 @@
--- @atlcompiler atl2006
+ -- @atlcompiler atl2006
 module RWM2WebProject; -- Module Template
 create OUT : WebProject from IN : RWM;
 
