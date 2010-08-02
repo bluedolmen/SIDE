@@ -19,6 +19,7 @@
         		<include name="**/*.php"/>
         		<include name="**/*.png"/>
         		<include name="**/*.jpg"/>
+        		<include name="**/*.gif"/>
         		<include name="**/*.html"/>
         		<include name="**/*.txt"/>
         		<include name="**/*.xml"/>
