@@ -32,7 +32,7 @@ public class AnalysisGenerator extends RequirementsGenerator {
 			l
 					.add("/"
 							+ PLUGIN_ID
-							+ "/src/interpretation/diagnostic/generation/spreadsheet/spreadsheet.mt");
+							+ "/src/interpretation/diagnostic/generation/html/json.mt");
 		return l;
 	}
 
@@ -59,14 +59,10 @@ public class AnalysisGenerator extends RequirementsGenerator {
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected List<String> getANTScripts(String keyGenerator) {
-		if (keyGenerator.equals(KEY_RISKANALYSIS))
-			return Collections
-					.singletonList("src/interpretation/risk/generation/html/build-default/");
-		else
-			return Collections.EMPTY_LIST;
+		return Collections
+					.singletonList("src/interpretation/commonportal/build-default/");
 	}
 
 	@Override
