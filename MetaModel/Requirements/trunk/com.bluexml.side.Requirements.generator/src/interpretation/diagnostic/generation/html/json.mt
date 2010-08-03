@@ -1,7 +1,7 @@
 <%
 metamodel http://www.bluexml.com/rwm/diagnostic/1.0/
 %>
-<%script type="Diagnostic.Diagnostic" name="Problem" file="analysis/problem.json"%>
+<%script type="Diagnostic.Diagnostic" name="Problem" file="webtool/data/analysis/problem.json"%>
 {
 	"diagnostic":[
       <%for (problem){%>

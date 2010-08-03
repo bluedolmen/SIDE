@@ -1,7 +1,7 @@
 <%
 metamodel http://www.bluexml.com/rwm/risk/1.0/
 %>
-<%script type="Risk.Diagnostic" name="Diagnostic" file="analysis/diagnostic.json"%>
+<%script type="Risk.Diagnostic" name="Diagnostic" file="webtool/data/analysis/diagnostic.json"%>
 {
 	"diagnostic":[
       <%for (estimation){%>

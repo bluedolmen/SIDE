@@ -12,7 +12,7 @@
           target: default              
          ================================= -->
     <target name="default">
-        <copy todir="${generated_dir}/analysis/"  overwrite="true">
+        <copy todir="${generated_dir}/webtool/"  overwrite="true">
         	<fileset dir =".">
         		<include name="**/*.css"/>
         		<include name="**/*.js"/>

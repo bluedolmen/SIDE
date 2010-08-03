@@ -41,9 +41,11 @@ public class WebProjectGenerator extends RequirementsGenerator {
 	@Override
 	protected List<String> getTemplates(String keyGenerator) {
 		List<String> l = new ArrayList<String>();
-		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/data.mt");	
+		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/json-agents.mt");	
+		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/json-goals.mt");	
+		/*l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/data.mt");	
 		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/main_edit.mt");	
-		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/main.mt");	
+		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/main.mt");*/	
 		return l;
 	}
 
@@ -69,7 +71,7 @@ public class WebProjectGenerator extends RequirementsGenerator {
 
 	@Override
 	protected List<String> getANTScripts(String keyGenerator) {
-		return Collections.singletonList("src/interpretation/webproject/generation/build-default/");
+		return Collections.singletonList("src/interpretation/commonportal/build-default/");
 	}
 
 	@Override
