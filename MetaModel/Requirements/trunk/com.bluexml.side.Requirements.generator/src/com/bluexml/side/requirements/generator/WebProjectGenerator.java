@@ -43,9 +43,11 @@ public class WebProjectGenerator extends RequirementsGenerator {
 		List<String> l = new ArrayList<String>();
 		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/json-agents.mt");	
 		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/json-goals.mt");	
-		/*l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/data.mt");	
+		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/data.mt");	
+		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/data-page.mt");	
+		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/page-info.mt");	
 		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/main_edit.mt");	
-		l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/main.mt");*/	
+		/*l.add("/"+PLUGIN_ID+"/src/interpretation/webproject/generation/main.mt");*/	
 		return l;
 	}
 
