@@ -2,7 +2,7 @@
 metamodel http://www.bluexml.com/rwm/webproject/1.0/
 %>
 <%script type="WebProject.Component" name="dataPage_component_update_namefile"%>
-<%if ((canCreate)||(canUpdate)){%><%eContainer().eContainer().name%>/edit_<%table.name%>_<%eContainer().name%><%}%>
+<%if ((canCreate)||(canUpdate)){%>webtool/data/prototype/page/edit_<%table.name%>_<%eContainer().name%><%}%>
 <%-- condition can_update or can_create --%>
 <%script type="WebProject.Component" name="dataPage_component" file="<%dataPage_component_update_namefile%>"%>
 <html>
@@ -12,7 +12,7 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 	</head>
 	<body class="body">
 		<? 
-			require("./mysql/mysql_util.php");
+			require("../../../mysql/mysql_util.php");
 		?>
 		<div id="data" class="box">
 			<h2><%name%></h2>

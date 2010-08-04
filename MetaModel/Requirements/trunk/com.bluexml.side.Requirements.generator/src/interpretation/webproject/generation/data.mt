@@ -6,7 +6,7 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 <%-- RELATIONAL SCHEMA                                                 --%>
 <%--                                                                   --%>
 <%-----------------------------------------------------------------------%>
-<%script type="WebProject.Schema" name="RelationalSchema" file="<%eContainer().name%>/schema.sql"%>
+<%script type="WebProject.Schema" name="RelationalSchema" file="webtool/data/prototype/sql/schema.sql"%>
 -- Script generated
 -- Database : reqs_prototype
 

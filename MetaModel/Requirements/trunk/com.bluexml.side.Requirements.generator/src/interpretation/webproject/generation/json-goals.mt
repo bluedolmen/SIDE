@@ -1,9 +1,10 @@
 <%
 metamodel http://www.bluexml.com/rwm/webproject/1.0/
+import com.bluexml.side.requirements.generator.services.StringEscapeUtilsService
 %>
 <%script type="WebProject.GoalPage" name="goalPage" file="webtool/data/prototype/<%id%>.json"%>
 [{
-	text: 'Goals',
+	text:'Goals',
 	expanded: true,
 	children: [
 		<%for (items){%>
@@ -13,13 +14,15 @@ metamodel http://www.bluexml.com/rwm/webproject/1.0/
 }]
 <%script type="WebProject.GoalItem" name="goalItem"%>
 {
-	text:'<%label%>',
+	text:"<%escapeHtml(label)%>",
 	id:'<%page.id%>',
-	goTo:'<%page.name%>',
-	<%if (sub.nSize() == 0){%>leaf:true
-	<%}else{%>children: [
+	<%if (page.eClass().name == "DataPage") {%>	goTo:'<%page.name%>',
+	<%}else{%>	goTo:'',
+	<%}%>
+	<%if (sub.nSize() == 0){%>	leaf:true
+	<%}else{%>	children: [
 		<%for (sub){%>
-		<%goalItem%><%if (current() != current("GoalItem").sub.nLast()){%>,<%}%>
+		<%goalItem%><%if (current() != current(1).sub.nLast()){%>,<%}%>
 		<%}%>
 	]<%}%>
 }

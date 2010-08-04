@@ -109,12 +109,7 @@ rule goalWithPrivileges {
     to dataPage : WebProject!DataPage (
         id <- s.id,
 		comment<-Sequence{s.documentation.format(),s.synopsis.format()},
-    	title <-
-			if (s.responsible.size() > 0) then 
-				s.name + '(' + s.responsible.first().name + ')'
-			else
-				s.name
-			endif,
+    	title <- s.name,
         name <- s.__xmiID__+'.php',
         components <- 
         	if (s.privilegeGroup <> OclUndefined) then
