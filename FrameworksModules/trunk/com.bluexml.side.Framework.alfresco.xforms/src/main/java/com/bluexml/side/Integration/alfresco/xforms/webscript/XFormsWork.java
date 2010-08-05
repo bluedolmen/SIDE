@@ -75,7 +75,9 @@ import com.bluexml.side.form.utils.DOMUtil;
 import com.thoughtworks.xstream.XStream;
 
 public class XFormsWork implements RunAsWork<String> {
-
+	// bug #1685 allow to search on system properties
+	private static final boolean FORCE_SYSTEM_PROPERTIES_RESOLUTION = true;
+	
 	private static final String WEBSCRIPT_SEPARATOR = "{::}";
 	/** */
 	static Log logger = LogFactory.getLog(XFormsWork.class);
@@ -97,14 +99,16 @@ public class XFormsWork implements RunAsWork<String> {
 	String faultyId = null;
 
 	/*
-	 * public XFormsWork(XFormsWebscript formsWebscript, XFormsQueryType queryType, BrowseBean
-	 * browseBean, DataLayer dataLayer, Map<String, String> parameters) { super();
-	 * this.formsWebscript = formsWebscript; this.queryType = queryType; this.browseBean =
+	 * public XFormsWork(XFormsWebscript formsWebscript, XFormsQueryType
+	 * queryType, BrowseBean
+	 * browseBean, DataLayer dataLayer, Map<String, String> parameters) {
+	 * super();
+	 * this.formsWebscript = formsWebscript; this.queryType = queryType;
+	 * this.browseBean =
 	 * browseBean; this.dataLayer = dataLayer; this.parameters = parameters; }
 	 */
 
-	public XFormsWork(XFormsWebscript formsWebscript, XFormsQueryType queryType,
-			Map<String, String> parameters, ServiceRegistry serviceRegistry) {
+	public XFormsWork(XFormsWebscript formsWebscript, XFormsQueryType queryType, Map<String, String> parameters, ServiceRegistry serviceRegistry) {
 		super();
 		this.formsWebscript = formsWebscript;
 		this.queryType = queryType;
@@ -133,6 +137,8 @@ public class XFormsWork implements RunAsWork<String> {
 			// if (queryType == XFormsWebscript.XFormsQueryType.update) {
 			// result = update();
 			// }
+
+			logger.debug("queryType :" + queryType);
 			if (queryType == XFormsWebscript.XFormsQueryType.read) {
 				result = read();
 			} else if (queryType == XFormsWebscript.XFormsQueryType.list) {
@@ -164,9 +170,7 @@ public class XFormsWork implements RunAsWork<String> {
 			}
 			dataLayer.setInTransaction(false);
 
-			logger
-					.debug("BlueXML XForms webscript worker (opcode '" + queryType
-							+ "'). Returning:");
+			logger.debug("BlueXML XForms webscript worker (opcode '" + queryType + "'). Returning:");
 			logger.debug(result);
 			logger.debug(">-----------<");
 
@@ -180,16 +184,12 @@ public class XFormsWork implements RunAsWork<String> {
 		try {
 			boolean readOnly = false;
 			boolean requiresNew = true;
-			if (queryType == XFormsWebscript.XFormsQueryType.read
-					|| queryType == XFormsWebscript.XFormsQueryType.labels
-					|| queryType == XFormsWebscript.XFormsQueryType.enum_
-					|| queryType == XFormsWebscript.XFormsQueryType.list) {
+			if (queryType == XFormsWebscript.XFormsQueryType.read || queryType == XFormsWebscript.XFormsQueryType.labels || queryType == XFormsWebscript.XFormsQueryType.enum_ || queryType == XFormsWebscript.XFormsQueryType.list) {
 				readOnly = true;
 			}
 			RetryingTransactionHelper transactionHelper = formsWebscript.getTransactionHelper();
 			transactionHelper.setMaxRetries(2);
-			result = transactionHelper.doInTransaction(new DoWorkInTransaction(), readOnly,
-					requiresNew);
+			result = transactionHelper.doInTransaction(new DoWorkInTransaction(), readOnly, requiresNew);
 		} catch (Exception e) {
 			logger.error(e, e);
 			StringBuffer sb = new StringBuffer();
@@ -245,7 +245,8 @@ public class XFormsWork implements RunAsWork<String> {
 	 * Parameters: "username", "password".
 	 * <p/>
 	 * 
-	 * @return "success" if successful, "failure" if an exception occurred or the auth failed.
+	 * @return "success" if successful, "failure" if an exception occurred or
+	 *         the auth failed.
 	 */
 	protected String authenticate() {
 		AuthenticationService authService = serviceRegistry.getAuthenticationService();
@@ -263,17 +264,22 @@ public class XFormsWork implements RunAsWork<String> {
 	/**
 	 * Provides information about one or several nodes. Modes:
 	 * <ol>
-	 * <li>node content information: returns info about the node content. Parameter: "nodeId"
-	 * <li>objects information: returns information about node(s). Parameters: "ids", "format"
-	 * <li>find object and retrieve information: finds the object that has a specific value in a
-	 * specific property and returns information about the node. Parameters: "datatype",
-	 * "identifier", "id". Optional parameters: "format", "labelLength".
+	 * <li>node content information: returns info about the node content.
+	 * Parameter: "nodeId"
+	 * <li>objects information: returns information about node(s). Parameters:
+	 * "ids", "format"
+	 * <li>find object and retrieve information: finds the object that has a
+	 * specific value in a specific property and returns information about the
+	 * node. Parameters: "datatype", "identifier", "id". Optional parameters:
+	 * "format", "labelLength".
 	 * </ol>
 	 * <p>
 	 * See the individual handler functions for the format of the parameters.
 	 * 
-	 * @return an empty string if any problem or the comma-separated string containing the
-	 *         information built. Currently, {full node id}, {content size in bytes}.
+	 * @return an empty string if any problem or the comma-separated string
+	 *         containing the
+	 *         information built. Currently, {full node id}, {content size in
+	 *         bytes}.
 	 */
 	protected String nodeInfo() {
 		String nodeId = parameters.get("nodeId");
@@ -288,40 +294,55 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 		String datatype = parameters.get("datatype");
 		String identifier = parameters.get("identifier");
+		
+		// configure the filtering/limiting
+		QName identifierQName = null;
+		boolean includeSystemProperties = FORCE_SYSTEM_PROPERTIES_RESOLUTION;
+		if (StringUtils.trimToNull(identifier) != null) {
+			identifierQName = resolveIdentifierQName(identifier, datatype);
+			includeSystemProperties = (identifierQName != null);
+		}		
+		
 		if (datatype != null) {
 			String format = parameters.get("format");
 			String labelLength = parameters.get("labelLength");
 			String idValue = parameters.get("id");
-			return resolveObjectInfo(datatype, identifier, format, labelLength, idValue);
+			return resolveObjectInfo(datatype, identifier, format, labelLength, idValue,includeSystemProperties);
 		}
 
 		return "";
 	}
 
 	/**
-	 * Finds the node (of the given datatype) that has the given id value on the identifier property
-	 * and formats its noderef id, label and qname into a string that has the format
+	 * Finds the node (of the given datatype) that has the given id value on the
+	 * identifier property
+	 * and formats its noderef id, label and qname into a string that has the
+	 * format
 	 * "id{SEPARATOR}label{SEPARATOR}prefixed_qname".
 	 * 
 	 * @param datatype
 	 *            a prefixed content type, e.g. "cm:person"
 	 * @param identifier
-	 *            the local name of a property present in the datatype's definition, e.g. "userName"
+	 *            the local name of a property present in the datatype's
+	 *            definition, e.g. "userName"
 	 * @param format
 	 *            the pattern for formatting the label. e.g.
 	 *            "format=firstName@lastName@{ (}@email@{)}"
 	 * @param labelLength
-	 *            the length at which to truncate the label that will be computed. If "0", no
+	 *            the length at which to truncate the label that will be
+	 *            computed. If "0", no
 	 *            truncation happens.
 	 * @param idValue
-	 *            the value which, when found on the identifier property, elects the node as the one
+	 *            the value which, when found on the identifier property, elects
+	 *            the node as the one
 	 *            being looked for. e.g. "johndoe"
-	 * @return <code>null</code> if either no identifier property was found or no node was found
-	 *         with the id value on that property. Otherwise, returns the info string for the node,
+	 * @return <code>null</code> if either no identifier property was found or
+	 *         no node was found
+	 *         with the id value on that property. Otherwise, returns the info
+	 *         string for the node,
 	 *         e.g."workspace://SpacesStore/ca151555-95e0-4361-aa4e-0050adb7027d{::}John Doe (johndoe@email.com){::}cm:person"
 	 */
-	private String resolveObjectInfo(String datatype, String identifier, String format,
-			String labelLength, String idValue) {
+	private String resolveObjectInfo(String datatype, String identifier, String format, String labelLength, String idValue,boolean includeSystemProperties) {
 		// get the identifier property's qname
 		QName idQName = resolveIdentifierQName(identifier, datatype);
 		if (idQName == null) {
@@ -329,7 +350,7 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 
 		// get all objects of the datatype
-		ResultSet luceneResultSet = getResultSet(datatype, new ArrayList<String>(), 0, null);
+		ResultSet luceneResultSet = getResultSet(datatype, new ArrayList<String>(), 0, null,includeSystemProperties);
 		int nbResults = luceneResultSet.length();
 		NodeRef electedNode = null;
 
@@ -361,22 +382,25 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 		QName qName = serviceRegistry.getNodeService().getType(electedNode);
 
-		String objectInfo = electedNode.toString() + WEBSCRIPT_SEPARATOR + trimmedLabel
-				+ WEBSCRIPT_SEPARATOR + qName.toPrefixString();
+		String objectInfo = electedNode.toString() + WEBSCRIPT_SEPARATOR + trimmedLabel + WEBSCRIPT_SEPARATOR + qName.toPrefixString();
 		return objectInfo;
 	}
 
 	/**
-	 * Builds a string containing some information about the given ids. The ids should refer to
-	 * objects of the same type because there is only one pattern for formatting the node labels.<br/>
-	 * Currently, each information item contains information related to a node under the format:
+	 * Builds a string containing some information about the given ids. The ids
+	 * should refer to
+	 * objects of the same type because there is only one pattern for formatting
+	 * the node labels.<br/>
+	 * Currently, each information item contains information related to a node
+	 * under the format:
 	 * "id{SEPARATOR}label{SEPARATOR}prefixed_qname"
 	 * 
 	 * @param ids
 	 *            a comma-separated list of node ids with protocol and store
 	 * @param format
 	 *            the format pattern for the labels
-	 * @return a comma separated list with the same number of items as the list of node ids.
+	 * @return a comma separated list with the same number of items as the list
+	 *         of node ids.
 	 */
 	private String nodeObjectsInfo(String ids, String format) {
 		StringBuffer result = new StringBuffer("");
@@ -392,8 +416,7 @@ public class XFormsWork implements RunAsWork<String> {
 					String label = dataLayer.getLabelForNode(nodeRef, format, false);
 					QName qName = serviceRegistry.getNodeService().getType(nodeRef);
 					String qnameStr = qName.toPrefixString();
-					objectInfo = nodeRef.toString() + WEBSCRIPT_SEPARATOR + label
-							+ WEBSCRIPT_SEPARATOR + qnameStr;
+					objectInfo = nodeRef.toString() + WEBSCRIPT_SEPARATOR + label + WEBSCRIPT_SEPARATOR + qnameStr;
 				} catch (InvalidNodeRefException inre) {
 					objectInfo = "<INVALID ID>";
 				}
@@ -412,17 +435,17 @@ public class XFormsWork implements RunAsWork<String> {
 	 * 
 	 * @param nodeId
 	 *            complete (store + workspace) id
-	 * @return an empty string if any problem or the comma-separated string containing the
-	 *         information built. Currently, {full node id},{content size in bytes}.
+	 * @return an empty string if any problem or the comma-separated string
+	 *         containing the
+	 *         information built. Currently, {full node id},{content size in
+	 *         bytes}.
 	 */
 	private String contentInfo(String nodeId) {
 		try {
 			String result;
 			NodeRef nodeRef = new NodeRef(nodeId);
-			Serializable name = this.serviceRegistry.getNodeService().getProperty(nodeRef,
-					ContentModel.PROP_NAME);
-			Serializable content = this.serviceRegistry.getNodeService().getProperty(nodeRef,
-					ContentModel.PROP_CONTENT);
+			Serializable name = this.serviceRegistry.getNodeService().getProperty(nodeRef, ContentModel.PROP_NAME);
+			Serializable content = this.serviceRegistry.getNodeService().getProperty(nodeRef, ContentModel.PROP_CONTENT);
 			if (content == null) {
 				return "";
 			}
@@ -495,12 +518,12 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * 
 	 * @param xmlResult
 	 * @param id
 	 * @param label
 	 * @param qname
-	 *            the actual datatype of the node being added to the results list.
+	 *            the actual datatype of the node being added to the results
+	 *            list.
 	 */
 	private void appendResult(StringBuffer xmlResult, String id, String label, String qname) {
 		// the tag names used here must be in sync with the ones defined in the XForms controller
@@ -516,7 +539,6 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -554,7 +576,6 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	protected String enum_() {
@@ -566,8 +587,7 @@ public class XFormsWork implements RunAsWork<String> {
 		String slimit = parameters.get("limit");
 		boolean limit = StringUtils.equals(slimit, "true");
 
-		java.sql.ResultSet resultSet = SQLRequester.executeQuery(getSQLQuery(type, parent, context,
-				query, limit));
+		java.sql.ResultSet resultSet = SQLRequester.executeQuery(getSQLQuery(type, parent, context, query, limit));
 
 		String code = null;
 		String value = null;
@@ -592,20 +612,23 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Provides the items to be listed in a selection widget. Returns an XML string with root
+	 * Provides the items to be listed in a selection widget. Returns an XML
+	 * string with root
 	 * '&lt;results&gt;':<br>
 	 * <ul>
 	 * <li>query (appears once)</li>
 	 * <ul>
-	 * <li>count: the total number of objects available in the Lucene result set</li>
-	 * <li>maxResults: if non-zero, sets the maximum number of objects requested by the client.
-	 * Returned as received.</li>
+	 * <li>count: the total number of objects available in the Lucene result set
+	 * </li>
+	 * <li>maxResults: if non-zero, sets the maximum number of objects requested
+	 * by the client. Returned as received.</li>
 	 * <li>returned: the number of result items returned to the client</li>
-	 * <li>filteredOut: if a filtering association was given, tells the number of items that have
-	 * been filtered out because they already have a reference on that association.</li>
+	 * <li>filteredOut: if a filtering association was given, tells the number
+	 * of items that have been filtered out because they already have a
+	 * reference on that association.</li>
 	 * <li>typeFound: if <code>false</code>, the type is unknown to Alfresco.</li>
-	 * <li>query: a string to filter the items. The value returned is the TrimToEmpty'ed version of
-	 * the value that was received.</li>
+	 * <li>query: a string to filter the items. The value returned is the
+	 * TrimToEmpty'ed version of the value that was received.</li>
 	 * </ul>
 	 * <li>item (number of occurrences is 0..*)</li>
 	 * <ul>
@@ -617,18 +640,27 @@ public class XFormsWork implements RunAsWork<String> {
 	 * "query": the search keyword string. NULL-able.<br/>
 	 * "queryFilter": an additional search keyword string. NULL-able.<br/>
 	 * "format": the format pattern for the label of objects. NULL-able.<br/>
-	 * "maxLength": the length at which labels computed using the format are truncated. NULL-able.<br/>
-	 * "maxResults": the max number of items allowed in the result set. NULL-able.<br/>
-	 * "identifier": the local name of a property whose value will be used as the id of results.
-	 * NULL-able. Quite obviously, that field MUST 1- be non-null, 2- be an actual identifier (i.e.
+	 * "maxLength": the length at which labels computed using the format are
+	 * truncated. NULL-able.<br/>
+	 * "maxResults": the max number of items allowed in the result set.
+	 * NULL-able.<br/>
+	 * "identifier": the local name of a property whose value will be used as
+	 * the id of results.
+	 * NULL-able. Quite obviously, that field MUST 1- be non-null, 2- be an
+	 * actual identifier (i.e.
 	 * no value is duplicated in the value set)<br/>
-	 * "filterAssoc": the qualified name of an association by which it will be determined whether
-	 * nodes are referenced. If present, nodes that are already pointed to by that association will
+	 * "filterAssoc": the qualified name of an association by which it will be
+	 * determined whether
+	 * nodes are referenced. If present, nodes that are already pointed to by
+	 * that association will
 	 * be filtered out of the results. NULL-able.<br/>
-	 * "isComposition": if "1" and "filterAssoc" is given, denotes that the association is a
+	 * "isComposition": if "1" and "filterAssoc" is given, denotes that the
+	 * association is a
 	 * composition. NULL-able.<br/>
-	 * "isSearchMode": if "1", an empty item list will be returned on an empty "query". NULL-able.<br/>
-	 * "luceneQuery": a Lucene query that overrides the one that's normally built here. NULL-able.<br/>
+	 * "isSearchMode": if "1", an empty item list will be returned on an empty
+	 * "query". NULL-able.<br/>
+	 * "luceneQuery": a Lucene query that overrides the one that's normally
+	 * built here. NULL-able.<br/>
 	 * 
 	 * @return
 	 * @throws Exception
@@ -731,9 +763,18 @@ public class XFormsWork implements RunAsWork<String> {
 			}
 		}
 
+		// configure the filtering/limiting
+		QName identifierQName = null;
+		boolean includeSystemProperties = FORCE_SYSTEM_PROPERTIES_RESOLUTION;
+		if (StringUtils.trimToNull(identifier) != null) {
+			identifierQName = resolveIdentifierQName(identifier, type);
+			includeSystemProperties = (identifierQName != null);
+		}
+		
+		
 		// perform the search
 		luceneTimer.start();
-		ResultSet luceneResultSet = getResultSet(type, searchedValues, maxResults, userLuceneQuery);
+		ResultSet luceneResultSet = getResultSet(type, searchedValues, maxResults, userLuceneQuery,includeSystemProperties);
 		luceneTimer.stop();
 		if (luceneResultSet == null) {
 			// result for the pathological case when the type is unknown to Alfresco.
@@ -749,22 +790,18 @@ public class XFormsWork implements RunAsWork<String> {
 		// collect items and apply filtering and/or limiting. Node names/labels are also computed.
 		//
 		//
+		
 
-		// configure the filtering/limiting
-		QName identifierQName = null;
-		boolean includeSystemProperties = false;
-		if (StringUtils.trimToNull(identifier) != null) {
-			identifierQName = resolveIdentifierQName(identifier, type);
-			includeSystemProperties = (identifierQName != null);
-		}
-
-		/** whether we need to collect all elements before applying the filtering & limiting */
+		/**
+		 * whether we need to collect all elements before applying the filtering
+		 * & limiting
+		 */
 		boolean collectAllNodes = false;
 		if ((includeSystemProperties) && (query != null)) {
 			// when searching system datatypes (e.g. "cm:permson"), we may have to collect all nodes
 			// before filtering (happens when no property of the datatype is indexed)
 			List<QName> subTypes = formsWebscript.getSubTypes(type);
-			Set<QName> attributes = getSearchableAttributes(subTypes.get(0));
+			Set<QName> attributes = getSearchableAttributes(subTypes.get(0), includeSystemProperties);
 			if (attributes.size() == 0) {
 				// the datatype is not indexed
 				collectAllNodes = true;
@@ -815,8 +852,7 @@ public class XFormsWork implements RunAsWork<String> {
 			boolean isAddableBean = true; // whether the result will be added to the item list
 			if (includeSystemProperties) {
 				// for system datatypes, search the label (in case indexing is off for that type)
-				if ((collectAllNodes == false) && (query != null)
-						&& (aBean.label.contains(query) == false)) {
+				if ((collectAllNodes == false) && (query != null) && (aBean.label.contains(query) == false)) {
 					isAddableBean = false;
 					filteredOut++;
 				}
@@ -858,8 +894,7 @@ public class XFormsWork implements RunAsWork<String> {
 			filteredOut = 0;
 			effectivelyReturned = 0;
 			for (ResultBean aBean : resultBeanList) {
-				if ((query != null)
-						&& StringUtils.contains(aBean.label.toLowerCase(), query.toLowerCase()) == false) {
+				if ((query != null) && StringUtils.contains(aBean.label.toLowerCase(), query.toLowerCase()) == false) {
 					filteredOut++;
 				} else {
 					appendResult(itemsBuf, aBean.id, aBean.label, aBean.qname);
@@ -912,7 +947,8 @@ public class XFormsWork implements RunAsWork<String> {
 	 * @param query
 	 *            the search string that was provided
 	 * @param status
-	 *            whether the data type provided is a legitimate type registered with Alfresco. Was
+	 *            whether the data type provided is a legitimate type registered
+	 *            with Alfresco. Was
 	 *            added for debug purposes.
 	 * @return
 	 */
@@ -932,10 +968,12 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Returns the qname of the property whose local name matches the identifier.
+	 * Returns the qname of the property whose local name matches the
+	 * identifier.
 	 * 
 	 * @param identifier
-	 *            a non-<code>null</code> string that SHOULD be the local name of one the node's
+	 *            a non-<code>null</code> string that SHOULD be the local name
+	 *            of one the node's
 	 *            properties as can be found in the type definition.
 	 * @param type
 	 *            the node type whose definition should contain the identifier
@@ -950,16 +988,14 @@ public class XFormsWork implements RunAsWork<String> {
 			for (QName property : properties.keySet()) {
 				if (property.getLocalName().equalsIgnoreCase(identifier)) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Resolved qname '" + property + "'for identifier '"
-								+ identifier + "'");
+						logger.debug("Resolved qname '" + property + "'for identifier '" + identifier + "'");
 					}
 					return property;
 				}
 			}
 		}
 
-		logger.error("Failed in resolving identifier qname. identifier ='" + identifier
-				+ "', datatype='" + type + "'");
+		logger.error("Failed in resolving identifier qname. identifier ='" + identifier + "', datatype='" + type + "'");
 		return null;
 	}
 
@@ -992,7 +1028,8 @@ public class XFormsWork implements RunAsWork<String> {
 	 * @param format
 	 *            the URL-decoded format pattern
 	 * @param includeSystemProperties
-	 *            if <code>true</code>, system properties are also considered, in addition to
+	 *            if <code>true</code>, system properties are also considered,
+	 *            in addition to
 	 *            properties from the data models.
 	 * @return
 	 */
@@ -1000,10 +1037,8 @@ public class XFormsWork implements RunAsWork<String> {
 		return dataLayer.getLabelForNode(nodeRef, format, includeSystemProperties);
 	}
 
-	private ResultSet getResultSet(String type, List<String> searchedValues, int maxResults,
-			String userLuceneQuery) {
-		SearchParameters searchParameters = createSearchParameters(type, searchedValues,
-				maxResults, userLuceneQuery);
+	private ResultSet getResultSet(String type, List<String> searchedValues, int maxResults, String userLuceneQuery,boolean includeSystemProperties) {
+		SearchParameters searchParameters = createSearchParameters(type, searchedValues, maxResults, userLuceneQuery, includeSystemProperties);
 		if (searchParameters == null) {
 			return null;
 		}
@@ -1011,8 +1046,7 @@ public class XFormsWork implements RunAsWork<String> {
 		return getUnsecureLuceneSearcher().query(searchParameters);
 	}
 
-	private String getSQLQuery(String type, String parent, String context, String query,
-			boolean limit) {
+	private String getSQLQuery(String type, String parent, String context, String query, boolean limit) {
 
 		String rparent = StringUtils.trimToNull(parent);
 		String rcontext = StringUtils.trimToNull(context);
@@ -1020,8 +1054,7 @@ public class XFormsWork implements RunAsWork<String> {
 
 		StringBuffer sql_query = new StringBuffer("");
 		sql_query.append("SELECT distinct L.uuid as UUID, L.code as CODE, LT.value as VALUE");
-		sql_query
-				.append(" FROM Litteral L, LitteralTranslation LT, EnumerationType ET, Litteral_translated_LitteralTranslation LTL, EnumerationType_typeOf_Litteral ETL");
+		sql_query.append(" FROM Litteral L, LitteralTranslation LT, EnumerationType ET, Litteral_translated_LitteralTranslation LTL, EnumerationType_typeOf_Litteral ETL");
 		if (rparent != null) {
 			sql_query.append(", Litteral LP, Litteral_parent_Litteral LPL");
 		}
@@ -1060,8 +1093,7 @@ public class XFormsWork implements RunAsWork<String> {
 	private String getSQLQueryLitteral(String code) {
 		StringBuffer sql_query = new StringBuffer("");
 		sql_query.append("SELECT LT.value as VALUE");
-		sql_query
-				.append(" FROM Litteral L, LitteralTranslation LT, Litteral_translated_LitteralTranslation LTL");
+		sql_query.append(" FROM Litteral L, LitteralTranslation LT, Litteral_translated_LitteralTranslation LTL");
 		sql_query.append(" WHERE L.code = '");
 		sql_query.append(code);
 		sql_query.append("'");
@@ -1106,10 +1138,7 @@ public class XFormsWork implements RunAsWork<String> {
 			if (StringUtils.trimToNull(createdPath) != null) {
 				saveToPath = saveToAttribute;
 			} else {
-				logger
-						.error("The target space '"
-								+ saveToAttribute
-								+ "' does not exist and could not be created. Reverting to the default path.");
+				logger.error("The target space '" + saveToAttribute + "' does not exist and could not be created. Reverting to the default path.");
 			}
 		}
 		// ** #1544
@@ -1161,13 +1190,13 @@ public class XFormsWork implements RunAsWork<String> {
 					} catch (Exception e) {
 						receiver = created.get(target);
 					}
-					dataLayer.attachContent(receiver, filename, filepath, mimetype, contentType,
-							shouldAppendSuffix);
+					dataLayer.attachContent(receiver, filename, filepath, mimetype, contentType, shouldAppendSuffix);
 				}
 			}
 		} catch (RuntimeException e) {
 			/*
-			 * this exception catching enables to retrieve the faulty id which will be an additional
+			 * this exception catching enables to retrieve the faulty id which
+			 * will be an additional
 			 * information that will be given to user
 			 */
 			this.faultyId = currentId;
@@ -1180,11 +1209,13 @@ public class XFormsWork implements RunAsWork<String> {
 
 	/**
 	 * Service provider for managing workflows. <br/>
-	 * Required parameters: "method": an identifier for the service being asked for.<br/>
+	 * Required parameters: "method": an identifier for the service being asked
+	 * for.<br/>
 	 * Optional parameters: service-specific. See their code.
 	 * <p>
-	 * Services indicated via "method" are either calls to helper functions of ours (prefixed with
-	 * "wf" e.g. "wfCollectInstanceProperties") or direct calls to WorkflowService functions.
+	 * Services indicated via "method" are either calls to helper functions of
+	 * ours (prefixed with "wf" e.g. "wfCollectInstanceProperties") or direct
+	 * calls to WorkflowService functions.
 	 * </p>
 	 * 
 	 * @return the XML-serialized version of the call result.
@@ -1203,8 +1234,7 @@ public class XFormsWork implements RunAsWork<String> {
 		if (StringUtils.equals(method, "wfStart")) {
 			// startWf : need @wfName and @attributes. Return: the instance id
 			String wfName = parameters.get("wfName");
-			Map<QName, Serializable> atts = (Map<QName, Serializable>) xstream.fromXML(parameters
-					.get("attributes"));
+			Map<QName, Serializable> atts = (Map<QName, Serializable>) xstream.fromXML(parameters.get("attributes"));
 			WorkflowPath path = wfs.startWorkflow(wfName, atts);
 			String instanceId = null;
 			if (path != null) {
@@ -1266,8 +1296,7 @@ public class XFormsWork implements RunAsWork<String> {
 					if (parameterType.isInstance("a")) { // String params are not XStream'ed
 						methodParameters[i] = sparameter;
 					} else { // non-String params MUST be XStream'ed
-						methodParameters[i] = (sparameter == null) ? null : xstream
-								.fromXML(sparameter);
+						methodParameters[i] = (sparameter == null) ? null : xstream.fromXML(sparameter);
 					}
 					i++;
 				}
@@ -1335,7 +1364,8 @@ public class XFormsWork implements RunAsWork<String> {
 	 * "properties": the id of the transition to trigger
 	 * 
 	 * @param wfs
-	 * @return true if the task has been ended without problems, false otherwise.
+	 * @return true if the task has been ended without problems, false
+	 *         otherwise.
 	 */
 	@SuppressWarnings("unchecked")
 	private boolean wfUpdate(WorkflowService wfs) {
@@ -1362,7 +1392,8 @@ public class XFormsWork implements RunAsWork<String> {
 	 * "transitionId": the id of the transition to trigger
 	 * 
 	 * @param wfs
-	 * @return true if the task has been ended without problems, false otherwise.
+	 * @return true if the task has been ended without problems, false
+	 *         otherwise.
 	 */
 	private boolean wfEnd(WorkflowService wfs) {
 		String taskId = parameters.get("taskId");
@@ -1379,7 +1410,8 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Collects all non empty BlueXML properties available on completed (and in-progress) tasks of
+	 * Collects all non empty BlueXML properties available on completed (and
+	 * in-progress) tasks of
 	 * an instanceId.<br/>
 	 * Parameters: "workflowId": the workflow instance id
 	 * 
@@ -1402,8 +1434,7 @@ public class XFormsWork implements RunAsWork<String> {
 		queryToDo.setTaskState(WorkflowTaskState.IN_PROGRESS);
 		List<WorkflowTask> tasksToDo = wfs.queryTasks(queryToDo);
 		// merge both lists
-		List<WorkflowTask> tasks = new ArrayList<WorkflowTask>(tasksToDo.size()
-				+ tasksComplete.size());
+		List<WorkflowTask> tasks = new ArrayList<WorkflowTask>(tasksToDo.size() + tasksComplete.size());
 		tasks.addAll(tasksComplete);
 		tasks.addAll(tasksToDo);
 		// get the relevant properties
@@ -1422,7 +1453,8 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Gets some history information id of the latest version of a process definition.<br/>
+	 * Gets some history information id of the latest version of a process
+	 * definition.<br/>
 	 * Parameters: "workflowId": the workflow instance id
 	 * 
 	 * @param wfs
@@ -1452,7 +1484,7 @@ public class XFormsWork implements RunAsWork<String> {
 			String name = (String) taskProps.get(WorkflowModel.TYPE_TASK);
 			String id = (String) taskProps.get(WorkflowModel.PROP_TASK_ID);
 			Serializable startDate = taskProps.get(WorkflowModel.PROP_START_DATE);
-			Serializable endDate =  taskProps.get(WorkflowModel.PROP_COMPLETION_DATE);
+			Serializable endDate = taskProps.get(WorkflowModel.PROP_COMPLETION_DATE);
 
 			taskBuffer.append("task:{");
 			taskBuffer.append("name:\"").append(name).append("\"");
@@ -1460,7 +1492,7 @@ public class XFormsWork implements RunAsWork<String> {
 			taskBuffer.append(",startDate:\"").append(formatter.format(startDate)).append("\"");
 			taskBuffer.append(",endDate:\"").append(formatter.format(endDate)).append("\"");
 			taskBuffer.append("}");
-			
+
 			result.append(taskBuffer);
 			first = false;
 		}
@@ -1486,8 +1518,7 @@ public class XFormsWork implements RunAsWork<String> {
 			List<WorkflowDefinition> defList = wfs.getAllDefinitions();
 			logger.debug("No process definition id returned by Alfresco. Listing definitions:");
 			for (WorkflowDefinition defItem : defList) {
-				logger.debug("  Name: " + defItem.name + "; id: " + defItem.id + "; version: "
-						+ defItem.version);
+				logger.debug("  Name: " + defItem.name + "; id: " + defItem.id + "; version: " + defItem.version);
 			}
 		}
 		logger.debug(">>Returning '" + result + "'");
@@ -1495,10 +1526,12 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Gets the set of properties qualified names a for a task of a process definition.<br/>
+	 * Gets the set of properties qualified names a for a task of a process
+	 * definition.<br/>
 	 * Parameters: <br/>
 	 * "processDefId": the process definition id, e.g. "jbpm$105"<br/>
-	 * "taskId": the task id in the process definition, e.g. "wfbxDigitizationProcess:Debut"<br/>
+	 * "taskId": the task id in the process definition, e.g.
+	 * "wfbxDigitizationProcess:Debut"<br/>
 	 * 
 	 * @param wfs
 	 *            the WorkflowService object
@@ -1537,12 +1570,16 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Gets selected pieces of information about the tasks whose state is "in-progress" for a
-	 * workflow instance. For each task, the pieces are concatenated in a string (which ends up in
+	 * Gets selected pieces of information about the tasks whose state is
+	 * "in-progress" for a
+	 * workflow instance. For each task, the pieces are concatenated in a string
+	 * (which ends up in
 	 * the list) and separated by a SEPARATOR substring.<br/>
 	 * Current pieces of info returned (<b>IN THAT ORDER</b>): id, name, title.<br/>
 	 * (e.g. with SEPARATOR="{::}":
-	 * "jbpm$64{::}wfbxDigitizationProcess:Debut{::}Demarrage de la dematerialisation")
+	 * 
+	 * "jbpm$64{::}wfbxDigitizationProcess:Debut{::}Demarrage de la dematerialisation"
+	 * )
 	 * <p/>
 	 * Parameters: "workflowId": the workflow instance id
 	 * 
@@ -1566,8 +1603,7 @@ public class XFormsWork implements RunAsWork<String> {
 				// add the tasks to complete
 				for (WorkflowTask task : tasks) {
 					if (task.state == WorkflowTaskState.IN_PROGRESS) {
-						result.add(task.id + WEBSCRIPT_SEPARATOR + task.name + WEBSCRIPT_SEPARATOR
-								+ task.title);
+						result.add(task.id + WEBSCRIPT_SEPARATOR + task.name + WEBSCRIPT_SEPARATOR + task.title);
 					}
 				}
 			}
@@ -1576,19 +1612,21 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Provides access to either the Alfresco service registry's services or Alfresco's beans.
+	 * Provides access to either the Alfresco service registry's services or
+	 * Alfresco's beans.
 	 * <p/>
-	 * Parameters: "serviceName", "methodName", and "methodParams" (list of parameters specific to
-	 * the method being called).
+	 * Parameters: "serviceName", "methodName", and "methodParams" (list of
+	 * parameters specific to the method being called).
 	 * <p/>
-	 * Currently supported services/beans (<b>CASE SENSITIVE</b>): NodeService, DictionaryService,
-	 * PersonService, AuthorityDAO. <br/>
-	 * See the service-specific call functions for supported methods (which are also <b>CASE
-	 * SENSITIVE</b>). Parameters to these functions must be of the right types and the list of
-	 * parameters <b>MUST</b> have been xstreamed to XML at call time since it will be xstreamed
-	 * from XML here.
+	 * Currently supported services/beans (<b>CASE SENSITIVE</b>): NodeService,
+	 * DictionaryService, PersonService, AuthorityDAO. <br/>
+	 * See the service-specific call functions for supported methods (which are
+	 * also <b>CASE SENSITIVE</b>). Parameters to these functions must be of the
+	 * right types and the list of parameters <b>MUST</b> have been xstreamed to
+	 * XML at call time since it will be xstreamed from XML here.
 	 * 
-	 * @return the result of the call to the service's method, xstreamed to XML (even if the result
+	 * @return the result of the call to the service's method, xstreamed to XML
+	 *         (even if the result
 	 *         is a String), or null if an exception occurred.
 	 */
 	@SuppressWarnings("unchecked")
@@ -1619,15 +1657,15 @@ public class XFormsWork implements RunAsWork<String> {
 
 	/**
 	 * Executes and returns the result of a AuthorityDAO method. <br/>
-	 * Supported methods: getAuthorityNodeRefOrNull, getAllAuthorities, getContainingAuthorities.
+	 * Supported methods: getAuthorityNodeRefOrNull, getAllAuthorities,
+	 * getContainingAuthorities.
 	 * 
 	 * @param methodName
 	 * @param methodParams
 	 * @return
 	 * @throws SecurityException
 	 */
-	private Object callAuthorityDAO(String methodName, List<Object> methodParams)
-			throws SecurityException {
+	private Object callAuthorityDAO(String methodName, List<Object> methodParams) throws SecurityException {
 		AuthorityDAO authorityDAO = formsWebscript.getAuthorityDAO();
 		Object[] paramArray = methodParams.toArray();
 		if (StringUtils.equals(methodName, "getAuthorityNodeRefOrNull")) {
@@ -1648,7 +1686,8 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Executes and returns the result of a DictionaryService method. Supported methods: getType.
+	 * Executes and returns the result of a DictionaryService method. Supported
+	 * methods: getType.
 	 * 
 	 * @param methodName
 	 * @param methodParams
@@ -1659,9 +1698,7 @@ public class XFormsWork implements RunAsWork<String> {
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
 	 */
-	private Object callDictionaryService(String methodName, List<Object> methodParams)
-			throws SecurityException, NoSuchMethodException, IllegalArgumentException,
-			IllegalAccessException, InvocationTargetException {
+	private Object callDictionaryService(String methodName, List<Object> methodParams) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		DictionaryService theService = serviceRegistry.getDictionaryService();
 		Class<?> theClass = theService.getClass();
 		Object[] paramArray = methodParams.toArray();
@@ -1685,15 +1722,12 @@ public class XFormsWork implements RunAsWork<String> {
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
 	 */
-	private Object callNodeService(String methodName, List<Object> methodParams)
-			throws SecurityException, NoSuchMethodException, IllegalArgumentException,
-			IllegalAccessException, InvocationTargetException {
+	private Object callNodeService(String methodName, List<Object> methodParams) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		NodeService theService = serviceRegistry.getNodeService();
 		Class<?> theClass = theService.getClass();
 		Object[] paramArray = methodParams.toArray();
 		if (StringUtils.equals(methodName, "getProperty")) {
-			Method method = theClass.getMethod(methodName,
-					new Class[] { NodeRef.class, QName.class });
+			Method method = theClass.getMethod(methodName, new Class[] { NodeRef.class, QName.class });
 			NodeRef ref = (NodeRef) paramArray[0];
 			QName qname = (QName) paramArray[1];
 			return method.invoke(theService, new Object[] { ref, qname });
@@ -1741,13 +1775,17 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Adds a content to a folder that already has the aspect "workflow package".<br/>
-	 * If a valid package node was provided at call time, that same package is returned. Otherwise
+	 * Adds a content to a folder that already has the aspect
+	 * "workflow package".<br/>
+	 * If a valid package node was provided at call time, that same package is
+	 * returned. Otherwise
 	 * (i.e. if the package is <code>null</code>), a new package is created.<br/>
 	 * Parameters: "content", "package"
 	 * 
-	 * @return the noderef (as a serialized XML string) of the package, or <code>null</code> if the
-	 *         content is not effectively associated with the package when the job to be done is
+	 * @return the noderef (as a serialized XML string) of the package, or
+	 *         <code>null</code> if the
+	 *         content is not effectively associated with the package when the
+	 *         job to be done is
 	 *         over.
 	 */
 	protected String addInPackage() {
@@ -1768,8 +1806,7 @@ public class XFormsWork implements RunAsWork<String> {
 		NodeService nodeService = serviceRegistry.getNodeService();
 		NodeRef noderef = new NodeRef(nodeStr);
 		ChildAssociationRef childAssoc = nodeService.getPrimaryParent(noderef);
-		nodeService
-				.addChild(wkPackage, noderef, ContentModel.ASSOC_CONTAINS, childAssoc.getQName());
+		nodeService.addChild(wkPackage, noderef, ContentModel.ASSOC_CONTAINS, childAssoc.getQName());
 
 		// check that the association is effective
 		List<ChildAssociationRef> assocs = nodeService.getChildAssocs(wkPackage);
@@ -1782,16 +1819,21 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Uploads an existing file to the repository at a specific location. Parameters: "filename"
-	 * (name+extension), filepath (complete filesystem path, including filename and extension),
-	 * "location" (path in the repository), "mimetype", "suffixAppend" (whether existing filenames
-	 * should be appended with a number if not available, e.g. 'filename.ext' becomes 'filename
+	 * Uploads an existing file to the repository at a specific location.
+	 * Parameters: "filename"
+	 * (name+extension), filepath (complete filesystem path, including filename
+	 * and extension),
+	 * "location" (path in the repository), "mimetype", "suffixAppend" (whether
+	 * existing filenames
+	 * should be appended with a number if not available, e.g. 'filename.ext'
+	 * becomes 'filename
 	 * (1).ext'. DEFAULTS to true)
 	 * <p/>
 	 * The file system path must be a valid path (not an escaped URL)<br/>
 	 * .
 	 * 
-	 * @return the node ref (protocol, store and id) to the newly created node, or empty string if
+	 * @return the node ref (protocol, store and id) to the newly created node,
+	 *         or empty string if
 	 *         any errors occur (e.g. the parent folder does not exist).
 	 */
 	protected String upload() {
@@ -1831,15 +1873,12 @@ public class XFormsWork implements RunAsWork<String> {
 		parent = results.get(0);
 		// set node type and other qnames
 		QName assocTypeQName = ContentModel.ASSOC_CONTAINS;
-		QName assocQName = QName.createQName("{http://www.alfresco.org/model/content/1.0}"
-				+ filename);
+		QName assocQName = QName.createQName("{http://www.alfresco.org/model/content/1.0}" + filename);
 		QName nodeTypeQName = ContentModel.PROP_CONTENT;
 		// create the node
-		newNode = serviceRegistry.getNodeService().createNode(parent, assocTypeQName, assocQName,
-				nodeTypeQName).getChildRef();
+		newNode = serviceRegistry.getNodeService().createNode(parent, assocTypeQName, assocQName, nodeTypeQName).getChildRef();
 
-		return dataLayer.uploadContentToNode(newNode, filename, filepath, mimeType, nodeTypeQName,
-				true, shouldAppendSuffix);
+		return dataLayer.uploadContentToNode(newNode, filename, filepath, mimeType, nodeTypeQName, true, shouldAppendSuffix);
 	}
 
 	private void createdToXML(StringBuffer sb, Map<String, String> created) {
@@ -1857,8 +1896,7 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	private void replaceIds(Element element, Map<String, String> created) {
-		if (StringUtils.equals(element.getTagName(), "target")
-				|| StringUtils.equals(element.getTagName(), "associationClass")) {
+		if (StringUtils.equals(element.getTagName(), "target") || StringUtils.equals(element.getTagName(), "associationClass")) {
 			String newId = created.get(element.getTextContent());
 			if (newId != null) {
 				element.setTextContent(newId);
@@ -1876,11 +1914,9 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	private LuceneSearcher getUnsecureLuceneSearcher() {
-		LuceneIndexer indexer = formsWebscript.getIndexerAndSearcherFactory().getIndexer(
-				formsWebscript.getStoreRef());
+		LuceneIndexer indexer = formsWebscript.getIndexerAndSearcherFactory().getIndexer(formsWebscript.getStoreRef());
 		LuceneConfig config = formsWebscript.getIndexerAndSearcherFactory();
-		ADMLuceneSearcherImpl searcher = ADMLuceneSearcherImpl.getSearcher(formsWebscript
-				.getStoreRef(), indexer, config);
+		ADMLuceneSearcherImpl searcher = ADMLuceneSearcherImpl.getSearcher(formsWebscript.getStoreRef(), indexer, config);
 		searcher.setTenantService(formsWebscript.getTenantService());
 		searcher.setDictionaryService(serviceRegistry.getDictionaryService());
 		searcher.setNamespacePrefixResolver(formsWebscript.getNamespacePrefixResolver());
@@ -1888,14 +1924,15 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Builds a search string with a type clause and one clause per search value.
+	 * Builds a search string with a type clause and one clause per search
+	 * value.
 	 * 
 	 * @param type
 	 * @param searchedValues
 	 * @param userLuceneQuery
 	 * @return
 	 */
-	private String getLuceneQuery(String type, List<String> searchedValues, String userLuceneQuery) {
+	private String getLuceneQuery(String type, List<String> searchedValues, String userLuceneQuery, boolean includeSystemProperties) {
 		StringBuilder query = new StringBuilder();
 
 		List<QName> subTypes = formsWebscript.getSubTypes(type);
@@ -1904,7 +1941,7 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 
 		// the searchable attributes
-		Set<QName> attributes = getSearchableAttributes(subTypes.get(0));
+		Set<QName> attributes = getSearchableAttributes(subTypes.get(0), includeSystemProperties);
 
 		if (userLuceneQuery != null) { // #1556
 			query.append(userLuceneQuery);
@@ -1942,14 +1979,16 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Gets a search string fragment in which search criteria match the given type's searchable
+	 * Gets a search string fragment in which search criteria match the given
+	 * type's searchable
 	 * attributes with the search keyword.
 	 * 
 	 * @param attributes
 	 *            the qnames of searchable attributes
 	 * @param keyword
 	 *            the search keyword
-	 * @return the search string fragment surrounded by parentheses, or empty string if no
+	 * @return the search string fragment surrounded by parentheses, or empty
+	 *         string if no
 	 *         searchable attributes are found.
 	 */
 	private StringBuilder getLuceneClauseForSearchValue(Set<QName> attributes, String keyword) {
@@ -1986,39 +2025,41 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Gets the set of searchable attributes for the given type. If the set does not exist, it will
+	 * Gets the set of searchable attributes for the given type. If the set does
+	 * not exist, it will
 	 * be computed and registered in a cache.
 	 * 
 	 * @param type
 	 * @return the set
 	 */
-	private synchronized Set<QName> getSearchableAttributes(QName type) {
+	private synchronized Set<QName> getSearchableAttributes(QName type, boolean includeSystemProps) {
 		Set<QName> result = searchableAttributesCache.get(type);
 		if (result == null) {
-			result = computeSearchableAttributes(type);
+			result = computeSearchableAttributes(type, includeSystemProps);
 			searchableAttributesCache.put(type, result);
 		}
 		return result;
 	}
 
 	/**
-	 * Collects all searchable properties for a given type, whether they a defined in the type or in
+	 * Collects all searchable properties for a given type, whether they a
+	 * defined in the type or in
 	 * a related aspects or in a parent type or in one the parent's aspects.
 	 * 
 	 * @param pCurrentType
-	 *            the type to start from. It is the bottom-most type in the hierarchy of collected
+	 *            the type to start from. It is the bottom-most type in the
+	 *            hierarchy of collected
 	 *            types.
 	 * @return the set of searchable attributes
 	 */
-	private Set<QName> computeSearchableAttributes(QName pCurrentType) {
+	private Set<QName> computeSearchableAttributes(QName pCurrentType, boolean includeSystemProps) {
 		QName currentType = pCurrentType;
 		List<QName> classTypes = new ArrayList<QName>();
 
 		// we collect the hierarchy of parent classes
-		while (currentType.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
+		while (currentType != null && (currentType.getNamespaceURI().startsWith(BLUEXML_MODEL_URI) || includeSystemProps)) {
 			classTypes.add(currentType);
-			TypeDefinition nodeRefTypeDefinition = serviceRegistry.getDictionaryService().getType(
-					currentType);
+			TypeDefinition nodeRefTypeDefinition = serviceRegistry.getDictionaryService().getType(currentType);
 			QName parentType = nodeRefTypeDefinition.getParentName();
 			currentType = parentType;
 		}
@@ -2029,38 +2070,37 @@ public class XFormsWork implements RunAsWork<String> {
 		// we look into the definition of each collected type for the searchable properties
 		for (QName type : classTypes) {
 			TypeDefinition typeDefinition = serviceRegistry.getDictionaryService().getType(type);
-			addSearchableAttributes(typeProperties, typeDefinition.getProperties());
+			addSearchableAttributes(typeProperties, typeDefinition.getProperties(), includeSystemProps);
 			for (AspectDefinition ad : typeDefinition.getDefaultAspects()) {
-				addSearchableAttributes(typeProperties, ad.getProperties());
+				addSearchableAttributes(typeProperties, ad.getProperties(), includeSystemProps);
 			}
 		}
 		return typeProperties.keySet();
 	}
 
 	/**
-	 * Filters the definition properties and adds the seachable ones to the selection.
+	 * Filters the definition properties and adds the seachable ones to the
+	 * selection.
 	 * 
 	 * @param typeProperties
 	 *            the selection (of searchable properties) that is being built
 	 * @param properties
 	 *            the properties from the type dictionary definition
 	 */
-	private void addSearchableAttributes(Map<QName, PropertyDefinition> typeProperties,
-			Map<QName, PropertyDefinition> properties) {
+	private void addSearchableAttributes(Map<QName, PropertyDefinition> typeProperties, Map<QName, PropertyDefinition> properties, boolean includeSystemProperties) {
 		Set<Entry<QName, PropertyDefinition>> propertiesEntrySet = properties.entrySet();
 		for (Entry<QName, PropertyDefinition> entry : propertiesEntrySet) {
 			PropertyDefinition value = entry.getValue();
 			QName key = entry.getKey();
-			if (value.isIndexed() && key.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
+			if (value.isIndexed() && (key.getNamespaceURI().startsWith(BLUEXML_MODEL_URI) || includeSystemProperties)) {
 				typeProperties.put(key, value);
 			}
 		}
 	}
 
 	// %% changed visibility to private
-	private SearchParameters createSearchParameters(String type, List<String> searchedValues,
-			int maxResults, String userLuceneQuery) {
-		String luceneQuery = getLuceneQuery(type, searchedValues, userLuceneQuery);
+	private SearchParameters createSearchParameters(String type, List<String> searchedValues, int maxResults, String userLuceneQuery, boolean includeSystemProperties) {
+		String luceneQuery = getLuceneQuery(type, searchedValues, userLuceneQuery, includeSystemProperties);
 		return createSearchParameters(luceneQuery, maxResults);
 	}
 
