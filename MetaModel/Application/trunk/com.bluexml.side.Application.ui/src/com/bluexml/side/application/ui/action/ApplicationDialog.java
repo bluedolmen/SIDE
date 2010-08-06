@@ -62,6 +62,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -141,7 +142,7 @@ public class ApplicationDialog extends Dialog {
 	private Button skipValidationButton;
 	private Text destinationText;
 	private Text logText;
-	private org.eclipse.swt.widgets.List list;
+	private org.eclipse.swt.widgets.List modelList;
 	private GeneratorParameterContentProvider generatorParameterContentProvider;
 	private GeneratorParameterLabelProvider generatorParameterLabelProvider;
 	private GeneratorParameterCellModifier generatorParameterCellModifier;
@@ -241,11 +242,11 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	private void refreshModelPropertiesTable() {
-		if (list.getSelection().length == 1) {
+		if (modelList.getSelection().length == 1) {
 			modelPropertiesTable.setVisible(true);
-			int[] selections = list.getSelectionIndices();
+			int[] selections = modelList.getSelectionIndices();
 			if (selections.length == 1) {
-				String modelPath = list.getItem(selections[0]);
+				String modelPath = modelList.getItem(selections[0]);
 				Model m = getModelByFilePath(modelPath);
 				modelPropertiesTable.removeAll();
 				EPackage metaModel = null;
@@ -722,7 +723,7 @@ public class ApplicationDialog extends Dialog {
 				fileName = file.getName();
 				if (filePath != null) {
 					// Add to list
-					list.add(filePath);
+					modelList.add(filePath);
 					ApplicationDialog.modificationMade();
 					// Register it
 					Model model = ApplicationFactory.eINSTANCE.createModel();
@@ -768,22 +769,22 @@ public class ApplicationDialog extends Dialog {
 		addModelButton.setText(Activator.Messages.getString("ApplicationDialog.20")); //$NON-NLS-1$
 		addModelButton.setBounds(10, 175, 130, 25);
 
-		list = new org.eclipse.swt.widgets.List(composite_3, SWT.BORDER);
-		list.addListener(SWT.Selection, new Listener() {
+		modelList = new org.eclipse.swt.widgets.List(composite_3, SWT.BORDER | SWT.V_SCROLL);
+		modelList.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				refreshModelPropertiesTable();
 			}
 		});
-		list.setBounds(10, 38, 444, 115);
-
+		modelList.setBounds(10, 38, 444, 115);
+		
 		final Button removeModelButton = new Button(composite_3, SWT.NONE);
 		removeModelButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				int select = list.getSelectionIndex();
+				int select = modelList.getSelectionIndex();
 				if (select != -1) {
 					ApplicationDialog.modificationMade();
-					removeModel(list.getSelection());
-					list.remove(select);
+					removeModel(modelList.getSelection());
+					modelList.remove(select);
 				}
 				modelPropertiesTable.setVisible(false);
 			}
@@ -1061,7 +1062,7 @@ public class ApplicationDialog extends Dialog {
 		for (ModelElement elem : application.getElements()) {
 			if (elem instanceof Model) {
 				Model model = (Model) elem;
-				list.add(model.getFile());
+				modelList.add(model.getFile());
 			}
 		}
 		// Component thaht shows the description in the top right of the scree
