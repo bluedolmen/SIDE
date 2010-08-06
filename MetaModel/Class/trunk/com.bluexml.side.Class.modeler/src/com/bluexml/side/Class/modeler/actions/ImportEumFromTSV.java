@@ -104,7 +104,7 @@ public class ImportEumFromTSV extends WorkbenchPartAction {
 
 		selectedObject = null;
 		// Recompute the command according to the current selection
-		if (selection.getFirstElement() instanceof EMFGraphNodeEditPart) {
+		if (selection.getFirstElement() instanceof EnumerationEditPart) {
 			editPart = (EnumerationEditPart) selection.getFirstElement();
 			if (editPart.getEObject() instanceof Enumeration) {
 				selectedObject = (Enumeration) editPart.getEObject();
