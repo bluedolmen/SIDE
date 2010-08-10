@@ -6,7 +6,7 @@ create OUT : MindMap from IN : RWM;
 helper context String def : normalize() : String =
 	self.regexReplaceAll('<([a-zA-Z0-9]*)>(.*)</\\1>','$2').regexReplaceAll('<([a-zA-Z0-9]*)>','')
 	    .regexReplaceAll('&lt;([a-zA-Z0-9]*)>(.*)&lt;/\\1>','$2').regexReplaceAll('&lt;([a-zA-Z0-9]*)>','')
-		.regexReplaceAll('\\\\(.)','$1');
+		.regexReplaceAll('\\\\(.)','$1').regexReplaceAll('&','&amp;').regexReplaceAll('"','&quot;');
 
 rule definition {
   from s: RWM!RequirementsDefinition
@@ -15,16 +15,14 @@ rule definition {
   	),
 	t_node : MindMap!Node (
 		text <- 'Liste des agents',
-		sub <- RWM!Agent->allInstances(),
-		folded <- false
+		sub <- RWM!Agent->allInstances()
 	)
 }
 
 rule agent {
 	from s : RWM!Agent
 	to t : MindMap!Node (
-		text <- s.name,
-		folded <- true
+		text <- s.name
 	)
 }
 
@@ -40,9 +38,9 @@ rule agentWithDescription extends agent {
 			else
 				''
 			endif,
-		font <- Sequence{font_italic}
+		presentation <- font_italic
 	),
-	font_italic : MindMap!Font (
+	font_italic : MindMap!NodePresentation (
 		bold <- false,
 		italic <- true,
 		size <- 10,

@@ -62,13 +62,13 @@ public interface mindmapFactory extends EFactory {
 	ArrowLink createArrowLink();
 
 	/**
-	 * Returns a new object of class '<em>Font</em>'.
+	 * Returns a new object of class '<em>Node Presentation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Font</em>'.
+	 * @return a new object of class '<em>Node Presentation</em>'.
 	 * @generated
 	 */
-	Font createFont();
+	NodePresentation createNodePresentation();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -88,8 +88,8 @@ public class mindmapAdapterFactory extends AdapterFactoryImpl {
 				return createArrowLinkAdapter();
 			}
 			@Override
-			public Adapter caseFont(Font object) {
-				return createFontAdapter();
+			public Adapter caseNodePresentation(NodePresentation object) {
+				return createNodePresentationAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -168,16 +168,16 @@ public class mindmapAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Font <em>Font</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation <em>Node Presentation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Font
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation
 	 * @generated
 	 */
-	public Adapter createFontAdapter() {
+	public Adapter createNodePresentationAdapter() {
 		return null;
 	}
 

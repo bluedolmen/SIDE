@@ -6,22 +6,20 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.MindMap.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.MindMap.ArrowLink;
-import com.bluexml.side.requirements.generator.metamodel.MindMap.Font;
-import com.bluexml.side.requirements.generator.metamodel.MindMap.Map;
-import com.bluexml.side.requirements.generator.metamodel.MindMap.Maps;
-import com.bluexml.side.requirements.generator.metamodel.MindMap.Node;
-import com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapFactory;
-import com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
+
+import com.bluexml.side.requirements.generator.metamodel.MindMap.ArrowLink;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Map;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Maps;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Node;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapFactory;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,7 +61,7 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass fontEClass = null;
+	private EClass nodePresentationEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -179,16 +177,7 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNode_Arrowlink() {
-		return (EReference)nodeEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNode_Font() {
+	public EReference getNode_Presentation() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -197,26 +186,8 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNode_BackgroundColor() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNode_Color() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNode_Folded() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(3);
+	public EReference getNode_Arrowlink() {
+		return (EReference)nodeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -225,7 +196,7 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 	 * @generated
 	 */
 	public EAttribute getNode_Text() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)nodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -234,7 +205,7 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 	 * @generated
 	 */
 	public EReference getNode_Sub() {
-		return (EReference)nodeEClass.getEStructuralFeatures().get(5);
+		return (EReference)nodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -243,7 +214,7 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 	 * @generated
 	 */
 	public EAttribute getNode_Id() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)nodeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -271,6 +242,78 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 	 */
 	public EReference getArrowLink_Destination() {
 		return (EReference)arrowLinkEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNodePresentation() {
+		return nodePresentationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNodePresentation_Bold() {
+		return (EAttribute)nodePresentationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNodePresentation_Italic() {
+		return (EAttribute)nodePresentationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNodePresentation_Name() {
+		return (EAttribute)nodePresentationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNodePresentation_Size() {
+		return (EAttribute)nodePresentationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNodePresentation_BackgroundColor() {
+		return (EAttribute)nodePresentationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNodePresentation_Color() {
+		return (EAttribute)nodePresentationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNodePresentation_Folded() {
+		return (EAttribute)nodePresentationEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -314,51 +357,6 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFont() {
-		return fontEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFont_Bold() {
-		return (EAttribute)fontEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFont_Italic() {
-		return (EAttribute)fontEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFont_Name() {
-		return (EAttribute)fontEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFont_Size() {
-		return (EAttribute)fontEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public mindmapFactory getmindmapFactory() {
 		return (mindmapFactory)getEFactoryInstance();
 	}
@@ -389,10 +387,7 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 		createEReference(mapEClass, MAP__NODE);
 
 		nodeEClass = createEClass(NODE);
-		createEReference(nodeEClass, NODE__FONT);
-		createEAttribute(nodeEClass, NODE__BACKGROUND_COLOR);
-		createEAttribute(nodeEClass, NODE__COLOR);
-		createEAttribute(nodeEClass, NODE__FOLDED);
+		createEReference(nodeEClass, NODE__PRESENTATION);
 		createEAttribute(nodeEClass, NODE__TEXT);
 		createEReference(nodeEClass, NODE__SUB);
 		createEAttribute(nodeEClass, NODE__ID);
@@ -406,11 +401,14 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 		createEAttribute(arrowLinkEClass, ARROW_LINK__STARTINCLINATION);
 		createEReference(arrowLinkEClass, ARROW_LINK__DESTINATION);
 
-		fontEClass = createEClass(FONT);
-		createEAttribute(fontEClass, FONT__BOLD);
-		createEAttribute(fontEClass, FONT__ITALIC);
-		createEAttribute(fontEClass, FONT__NAME);
-		createEAttribute(fontEClass, FONT__SIZE);
+		nodePresentationEClass = createEClass(NODE_PRESENTATION);
+		createEAttribute(nodePresentationEClass, NODE_PRESENTATION__BOLD);
+		createEAttribute(nodePresentationEClass, NODE_PRESENTATION__ITALIC);
+		createEAttribute(nodePresentationEClass, NODE_PRESENTATION__NAME);
+		createEAttribute(nodePresentationEClass, NODE_PRESENTATION__SIZE);
+		createEAttribute(nodePresentationEClass, NODE_PRESENTATION__BACKGROUND_COLOR);
+		createEAttribute(nodePresentationEClass, NODE_PRESENTATION__COLOR);
+		createEAttribute(nodePresentationEClass, NODE_PRESENTATION__FOLDED);
 	}
 
 	/**
@@ -453,10 +451,7 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 		initEReference(getMap_Node(), this.getNode(), null, "node", null, 1, 1, Map.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNode_Font(), this.getFont(), null, "font", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_BackgroundColor(), theXMLTypePackage.getString(), "backgroundColor", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_Color(), theXMLTypePackage.getString(), "color", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_Folded(), theXMLTypePackage.getBoolean(), "folded", "true", 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNode_Presentation(), this.getNodePresentation(), null, "presentation", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Text(), theXMLTypePackage.getString(), "text", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_Sub(), this.getNode(), null, "sub", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Id(), ecorePackage.getEString(), "id", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -470,11 +465,14 @@ public class mindmapPackageImpl extends EPackageImpl implements mindmapPackage {
 		initEAttribute(getArrowLink_Startinclination(), theXMLTypePackage.getString(), "startinclination", null, 0, 1, ArrowLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArrowLink_Destination(), this.getNode(), null, "destination", null, 0, 1, ArrowLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(fontEClass, Font.class, "Font", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFont_Bold(), theXMLTypePackage.getBoolean(), "bold", "true", 0, 1, Font.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFont_Italic(), theXMLTypePackage.getBoolean(), "italic", "true", 0, 1, Font.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFont_Name(), theXMLTypePackage.getString(), "name", null, 1, 1, Font.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFont_Size(), theXMLTypePackage.getInt(), "size", null, 1, 1, Font.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(nodePresentationEClass, NodePresentation.class, "NodePresentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNodePresentation_Bold(), theXMLTypePackage.getBoolean(), "bold", "true", 0, 1, NodePresentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNodePresentation_Italic(), theXMLTypePackage.getBoolean(), "italic", "true", 0, 1, NodePresentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNodePresentation_Name(), theXMLTypePackage.getString(), "name", null, 1, 1, NodePresentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNodePresentation_Size(), theXMLTypePackage.getInt(), "size", null, 1, 1, NodePresentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNodePresentation_BackgroundColor(), theXMLTypePackage.getString(), "backgroundColor", null, 0, 1, NodePresentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNodePresentation_Color(), theXMLTypePackage.getString(), "color", null, 0, 1, NodePresentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNodePresentation_Folded(), theXMLTypePackage.getBoolean(), "folded", "true", 0, 1, NodePresentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

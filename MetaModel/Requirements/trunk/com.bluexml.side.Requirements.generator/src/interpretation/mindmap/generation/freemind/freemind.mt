@@ -7,18 +7,18 @@ metamodel http://www.bluexml.com/rwm/mindmap/1.0/
   <%node.PrintNode%>
 </map>
 <%script type="MindMap.Node" name="PrintNode"%>
-<node text="<%text%>" folded="<%folded%>" <%if (id != null) {%>id="<%id%>"<%}%>>
+<node text="<%text%>" folded="<%if (presentation != null){%><%presentation.folded%><%}else{%>true<%}%>" <%if (id != null) {%>id="<%id%>"<%}%>>
   <%for (sub){%>
     <%PrintNode%>
   <%}%>
-  <%for (font){%>
-    <%PrintFont%>
+  <%for (presentation){%>
+    <%PrintPresentation%>
   <%}%>
   <%for (arrowlink){%>
     <%PrintArrowLink%>
   <%}%>
 </node>
-<%script type="MindMap.Font" name="PrintFont"%>
+<%script type="MindMap.NodePresentation" name="PrintPresentation"%>
 <font bold="<%bold%>" italic="<%italic%>" size="<%size%>" name="<%name%>"/>
 <%script type="MindMap.ArrowLink" name="PrintArrowLink"%>
 <arrowlink 

@@ -6,7 +6,7 @@ create OUT : MindMap from IN : RWM;
 helper context String def : normalize() : String =
 	self.regexReplaceAll('<([a-zA-Z0-9]*)>(.*)</\\1>','$2').regexReplaceAll('<([a-zA-Z0-9]*)>','')
 	    .regexReplaceAll('&lt;([a-zA-Z0-9]*)>(.*)&lt;/\\1>','$2').regexReplaceAll('&lt;([a-zA-Z0-9]*)>','')
-		.regexReplaceAll('\\\\(.)','$1');
+		.regexReplaceAll('\\\\(.)','$1').regexReplaceAll('&','&amp;').regexReplaceAll('"','&quot;');
 
 rule definition {
   from s: RWM!RequirementsDefinition
@@ -15,8 +15,7 @@ rule definition {
   	),
 	t_node : MindMap!Node (
 		text <- 'Structure d\'information',
-		sub <- RWM!Entity->allInstances(),
-		folded <- false
+		sub <- RWM!Entity->allInstances()
 	)
 }
 
@@ -26,7 +25,6 @@ rule entity {
 		text <- s.name,
 		sub <- s.attributes,
 		arrowlink <- RWM!RelationShip->allInstances()->select(r | r.source = s),
-		folded <- false,
 		id <- s.__xmiID__
 	)
 }
@@ -38,9 +36,9 @@ rule entityWithDocumentation extends entity {
 	),
 	description : MindMap!Node (
 		text <- s.documentation.normalize(),
-		font <- Sequence{font_italic}
+		presentation <- font_italic
 	),
-	font_italic : MindMap!Font (
+	font_italic : MindMap!NodePresentation (
 		bold <- false,
 		italic <- true,
 		size <- 10,
@@ -51,8 +49,7 @@ rule entityWithDocumentation extends entity {
 rule attribute {
 	from s : RWM!Attribute
 	to t : MindMap!Node (
-		text <- s.name,
-		folded <- true
+		text <- s.name
 	)
 }
 
@@ -63,9 +60,9 @@ rule attributeWithDocumentation extends attribute {
 	),
 	description : MindMap!Node (
 		text <- s.documentation.normalize(),
-		font <- Sequence{font_italic}
+		presentation <- font_italic
 	),
-	font_italic : MindMap!Font (
+	font_italic : MindMap!NodePresentation (
 		bold <- false,
 		italic <- true,
 		size <- 10,

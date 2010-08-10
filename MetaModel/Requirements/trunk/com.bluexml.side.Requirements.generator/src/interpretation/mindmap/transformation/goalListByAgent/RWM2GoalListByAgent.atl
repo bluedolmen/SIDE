@@ -5,7 +5,7 @@ create OUT : MindMap from IN : RWM;
 helper context String def : normalize() : String =
 	self.regexReplaceAll('<([a-zA-Z0-9]*)>(.*)</\\1>','$2').regexReplaceAll('<([a-zA-Z0-9]*)>','')
 	    .regexReplaceAll('&lt;([a-zA-Z0-9]*)>(.*)&lt;/\\1>','$2').regexReplaceAll('&lt;([a-zA-Z0-9]*)>','')
-		.regexReplaceAll('\\\\(.)','$1');
+		.regexReplaceAll('\\\\(.)','$1').regexReplaceAll('&','&amp;').regexReplaceAll('"','&quot;');
 
 rule definition {
   from s: RWM!RequirementsDefinition
@@ -21,16 +21,14 @@ rule agent {
   	),
 	t_node : MindMap!Node (
 	  text <- s.name+' - Objectifs',
-	  sub <- s.isResponsible->collect(goal | thisModule.createNodeFromGoal(goal)),
- 	  folded <- false
+	  sub <- s.isResponsible->collect(goal | thisModule.createNodeFromGoal(goal))
 	)
 }
 
 rule createNodeFromGoal(s : RWM!Goal) {
 	to t : MindMap!Node (
 		text <- s.name,
-		sub <- Sequence{description}->union(s.subgoals->collect(goal | thisModule.createNodeFromGoal(goal))),
-		folded <- true
+		sub <- Sequence{description}->union(s.subgoals->collect(goal | thisModule.createNodeFromGoal(goal)))
 	),
 	description : MindMap!Node (
 		text <- 
@@ -39,9 +37,9 @@ rule createNodeFromGoal(s : RWM!Goal) {
 			else
 				''
 			endif,
-		font <- Sequence{font_italic}
+		presentation <- font_italic
 	),
-	font_italic : MindMap!Font (
+	font_italic : MindMap!NodePresentation (
 		bold <- false,
 		italic <- true,
 		size <- 10,

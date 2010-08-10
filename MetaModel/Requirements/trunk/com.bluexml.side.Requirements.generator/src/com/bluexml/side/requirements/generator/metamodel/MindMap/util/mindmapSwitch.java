@@ -111,9 +111,9 @@ public class mindmapSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case mindmapPackage.FONT: {
-				Font font = (Font)theEObject;
-				T result = caseFont(font);
+			case mindmapPackage.NODE_PRESENTATION: {
+				NodePresentation nodePresentation = (NodePresentation)theEObject;
+				T result = caseNodePresentation(nodePresentation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -182,17 +182,17 @@ public class mindmapSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Font</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Node Presentation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Font</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Node Presentation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFont(Font object) {
+	public T caseNodePresentation(NodePresentation object) {
 		return null;
 	}
 

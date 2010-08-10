@@ -64,7 +64,7 @@ public class mindmapFactoryImpl extends EFactoryImpl implements mindmapFactory {
 			case mindmapPackage.MAP: return createMap();
 			case mindmapPackage.NODE: return createNode();
 			case mindmapPackage.ARROW_LINK: return createArrowLink();
-			case mindmapPackage.FONT: return createFont();
+			case mindmapPackage.NODE_PRESENTATION: return createNodePresentation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -115,9 +115,9 @@ public class mindmapFactoryImpl extends EFactoryImpl implements mindmapFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Font createFont() {
-		FontImpl font = new FontImpl();
-		return font;
+	public NodePresentation createNodePresentation() {
+		NodePresentationImpl nodePresentation = new NodePresentationImpl();
+		return nodePresentation;
 	}
 
 	/**

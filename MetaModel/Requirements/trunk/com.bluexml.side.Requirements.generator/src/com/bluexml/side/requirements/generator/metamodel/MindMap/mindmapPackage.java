@@ -126,40 +126,13 @@ public interface mindmapPackage extends EPackage {
 	int NODE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Font</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Presentation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__FONT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Background Color</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__BACKGROUND_COLOR = 1;
-
-	/**
-	 * The feature id for the '<em><b>Color</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__COLOR = 2;
-
-	/**
-	 * The feature id for the '<em><b>Folded</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__FOLDED = 3;
+	int NODE__PRESENTATION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -168,7 +141,7 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__TEXT = 4;
+	int NODE__TEXT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Sub</b></em>' containment reference list.
@@ -177,7 +150,7 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__SUB = 5;
+	int NODE__SUB = 2;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -186,7 +159,7 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__ID = 6;
+	int NODE__ID = 3;
 
 	/**
 	 * The feature id for the '<em><b>Arrowlink</b></em>' containment reference list.
@@ -195,7 +168,7 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__ARROWLINK = 7;
+	int NODE__ARROWLINK = 4;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -204,7 +177,7 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = 8;
+	int NODE_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.impl.ArrowLinkImpl <em>Arrow Link</em>}' class.
@@ -280,14 +253,14 @@ public interface mindmapPackage extends EPackage {
 	int ARROW_LINK_FEATURE_COUNT = 6;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.impl.FontImpl <em>Font</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.impl.NodePresentationImpl <em>Node Presentation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.impl.FontImpl
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.impl.mindmapPackageImpl#getFont()
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.impl.NodePresentationImpl
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.impl.mindmapPackageImpl#getNodePresentation()
 	 * @generated
 	 */
-	int FONT = 4;
+	int NODE_PRESENTATION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Bold</b></em>' attribute.
@@ -296,7 +269,7 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FONT__BOLD = 0;
+	int NODE_PRESENTATION__BOLD = 0;
 
 	/**
 	 * The feature id for the '<em><b>Italic</b></em>' attribute.
@@ -305,7 +278,7 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FONT__ITALIC = 1;
+	int NODE_PRESENTATION__ITALIC = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -314,7 +287,7 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FONT__NAME = 2;
+	int NODE_PRESENTATION__NAME = 2;
 
 	/**
 	 * The feature id for the '<em><b>Size</b></em>' attribute.
@@ -323,17 +296,43 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FONT__SIZE = 3;
+	int NODE_PRESENTATION__SIZE = 3;
 
 	/**
-	 * The number of structural features of the '<em>Font</em>' class.
+	 * The feature id for the '<em><b>Background Color</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FONT_FEATURE_COUNT = 4;
+	int NODE_PRESENTATION__BACKGROUND_COLOR = 4;
 
+	/**
+	 * The feature id for the '<em><b>Color</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_PRESENTATION__COLOR = 5;
+
+	/**
+	 * The feature id for the '<em><b>Folded</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_PRESENTATION__FOLDED = 6;
+
+	/**
+	 * The number of structural features of the '<em>Node Presentation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_PRESENTATION_FEATURE_COUNT = 7;
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Maps <em>Maps</em>}'.
@@ -388,6 +387,17 @@ public interface mindmapPackage extends EPackage {
 	EClass getNode();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Node#getPresentation <em>Presentation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Presentation</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Node#getPresentation()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EReference getNode_Presentation();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Node#getArrowlink <em>Arrowlink</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -397,50 +407,6 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNode_Arrowlink();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Node#getFont <em>Font</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Font</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Node#getFont()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EReference getNode_Font();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Node#getBackgroundColor <em>Background Color</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Background Color</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Node#getBackgroundColor()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EAttribute getNode_BackgroundColor();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Node#getColor <em>Color</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Color</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Node#getColor()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EAttribute getNode_Color();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Node#isFolded <em>Folded</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Folded</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Node#isFolded()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EAttribute getNode_Folded();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Node#getText <em>Text</em>}'.
@@ -508,6 +474,93 @@ public interface mindmapPackage extends EPackage {
 	EReference getArrowLink_Destination();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation <em>Node Presentation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Node Presentation</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation
+	 * @generated
+	 */
+	EClass getNodePresentation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#isBold <em>Bold</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bold</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#isBold()
+	 * @see #getNodePresentation()
+	 * @generated
+	 */
+	EAttribute getNodePresentation_Bold();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#isItalic <em>Italic</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Italic</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#isItalic()
+	 * @see #getNodePresentation()
+	 * @generated
+	 */
+	EAttribute getNodePresentation_Italic();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#getName()
+	 * @see #getNodePresentation()
+	 * @generated
+	 */
+	EAttribute getNodePresentation_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#getSize <em>Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Size</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#getSize()
+	 * @see #getNodePresentation()
+	 * @generated
+	 */
+	EAttribute getNodePresentation_Size();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#getBackgroundColor <em>Background Color</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Background Color</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#getBackgroundColor()
+	 * @see #getNodePresentation()
+	 * @generated
+	 */
+	EAttribute getNodePresentation_BackgroundColor();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#getColor <em>Color</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Color</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#getColor()
+	 * @see #getNodePresentation()
+	 * @generated
+	 */
+	EAttribute getNodePresentation_Color();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#isFolded <em>Folded</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Folded</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation#isFolded()
+	 * @see #getNodePresentation()
+	 * @generated
+	 */
+	EAttribute getNodePresentation_Folded();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.ArrowLink#getEndarrow <em>Endarrow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -550,60 +603,6 @@ public interface mindmapPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getArrowLink_Startinclination();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Font <em>Font</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Font</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Font
-	 * @generated
-	 */
-	EClass getFont();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Font#isBold <em>Bold</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Bold</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Font#isBold()
-	 * @see #getFont()
-	 * @generated
-	 */
-	EAttribute getFont_Bold();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Font#isItalic <em>Italic</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Italic</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Font#isItalic()
-	 * @see #getFont()
-	 * @generated
-	 */
-	EAttribute getFont_Italic();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Font#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Font#getName()
-	 * @see #getFont()
-	 * @generated
-	 */
-	EAttribute getFont_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.Font#getSize <em>Size</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Size</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.Font#getSize()
-	 * @see #getFont()
-	 * @generated
-	 */
-	EAttribute getFont_Size();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -674,44 +673,20 @@ public interface mindmapPackage extends EPackage {
 		EClass NODE = eINSTANCE.getNode();
 
 		/**
+		 * The meta object literal for the '<em><b>Presentation</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE__PRESENTATION = eINSTANCE.getNode_Presentation();
+
+		/**
 		 * The meta object literal for the '<em><b>Arrowlink</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference NODE__ARROWLINK = eINSTANCE.getNode_Arrowlink();
-
-		/**
-		 * The meta object literal for the '<em><b>Font</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NODE__FONT = eINSTANCE.getNode_Font();
-
-		/**
-		 * The meta object literal for the '<em><b>Background Color</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NODE__BACKGROUND_COLOR = eINSTANCE.getNode_BackgroundColor();
-
-		/**
-		 * The meta object literal for the '<em><b>Color</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NODE__COLOR = eINSTANCE.getNode_Color();
-
-		/**
-		 * The meta object literal for the '<em><b>Folded</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NODE__FOLDED = eINSTANCE.getNode_Folded();
 
 		/**
 		 * The meta object literal for the '<em><b>Text</b></em>' attribute feature.
@@ -764,6 +739,72 @@ public interface mindmapPackage extends EPackage {
 		EReference ARROW_LINK__DESTINATION = eINSTANCE.getArrowLink_Destination();
 
 		/**
+		 * The meta object literal for the '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.impl.NodePresentationImpl <em>Node Presentation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.impl.NodePresentationImpl
+		 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.impl.mindmapPackageImpl#getNodePresentation()
+		 * @generated
+		 */
+		EClass NODE_PRESENTATION = eINSTANCE.getNodePresentation();
+
+		/**
+		 * The meta object literal for the '<em><b>Bold</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE_PRESENTATION__BOLD = eINSTANCE.getNodePresentation_Bold();
+
+		/**
+		 * The meta object literal for the '<em><b>Italic</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE_PRESENTATION__ITALIC = eINSTANCE.getNodePresentation_Italic();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE_PRESENTATION__NAME = eINSTANCE.getNodePresentation_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE_PRESENTATION__SIZE = eINSTANCE.getNodePresentation_Size();
+
+		/**
+		 * The meta object literal for the '<em><b>Background Color</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE_PRESENTATION__BACKGROUND_COLOR = eINSTANCE.getNodePresentation_BackgroundColor();
+
+		/**
+		 * The meta object literal for the '<em><b>Color</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE_PRESENTATION__COLOR = eINSTANCE.getNodePresentation_Color();
+
+		/**
+		 * The meta object literal for the '<em><b>Folded</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE_PRESENTATION__FOLDED = eINSTANCE.getNodePresentation_Folded();
+
+		/**
 		 * The meta object literal for the '<em><b>Endarrow</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -794,48 +835,6 @@ public interface mindmapPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ARROW_LINK__STARTINCLINATION = eINSTANCE.getArrowLink_Startinclination();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.requirements.generator.metamodel.MindMap.impl.FontImpl <em>Font</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.impl.FontImpl
-		 * @see com.bluexml.side.requirements.generator.metamodel.MindMap.impl.mindmapPackageImpl#getFont()
-		 * @generated
-		 */
-		EClass FONT = eINSTANCE.getFont();
-
-		/**
-		 * The meta object literal for the '<em><b>Bold</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FONT__BOLD = eINSTANCE.getFont_Bold();
-
-		/**
-		 * The meta object literal for the '<em><b>Italic</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FONT__ITALIC = eINSTANCE.getFont_Italic();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FONT__NAME = eINSTANCE.getFont_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FONT__SIZE = eINSTANCE.getFont_Size();
 
 	}
 
