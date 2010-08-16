@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_j7FHcKkdEd-PxKjnYTjOJw" type="EcoreTools" name="risk.ecorediag" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_j7FugKkdEd-PxKjnYTjOJw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_j7GVkKkdEd-PxKjnYTjOJw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_j7GVkakdEd-PxKjnYTjOJw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_j7GVmakdEd-PxKjnYTjOJw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="risk.ecore#//Estimation/value"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_j7GVmqkdEd-PxKjnYTjOJw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_j7G8oKkdEd-PxKjnYTjOJw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="risk.ecore#//Estimation/elementType"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_j7G8oakdEd-PxKjnYTjOJw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_j7G8oqkdEd-PxKjnYTjOJw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="risk.ecore#//Estimation/elementName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_j7G8o6kdEd-PxKjnYTjOJw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_j7GVkqkdEd-PxKjnYTjOJw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_j7GVk6kdEd-PxKjnYTjOJw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_j7GVlKkdEd-PxKjnYTjOJw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_j7GVlakdEd-PxKjnYTjOJw" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_j7GVlqkdEd-PxKjnYTjOJw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_j7GVl6kdEd-PxKjnYTjOJw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_j7GVmKkdEd-PxKjnYTjOJw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_j7FugakdEd-PxKjnYTjOJw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="risk.ecore#//Estimation"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_j7FugqkdEd-PxKjnYTjOJw" x="164" y="40"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_j7G8pKkdEd-PxKjnYTjOJw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_j7HjsKkdEd-PxKjnYTjOJw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_j7HjsakdEd-PxKjnYTjOJw" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_j7HjsqkdEd-PxKjnYTjOJw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_j7Hjs6kdEd-PxKjnYTjOJw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_j7HjtKkdEd-PxKjnYTjOJw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_j7HjtakdEd-PxKjnYTjOJw" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_j7HjtqkdEd-PxKjnYTjOJw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_j7Hjt6kdEd-PxKjnYTjOJw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_j7HjuKkdEd-PxKjnYTjOJw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_j7G8pakdEd-PxKjnYTjOJw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="risk.ecore#//Diagnostic"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_j7G8pqkdEd-PxKjnYTjOJw" x="4" y="59"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_j7FHcakdEd-PxKjnYTjOJw"/>
+  <element xmi:type="ecore:EPackage" href="risk.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_j7HjuakdEd-PxKjnYTjOJw" type="3002" source="_j7G8pKkdEd-PxKjnYTjOJw" target="_j7FugKkdEd-PxKjnYTjOJw">
+    <children xmi:type="notation:Node" xmi:id="_j7HjvakdEd-PxKjnYTjOJw" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_j7HjvqkdEd-PxKjnYTjOJw" x="-21" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_j7IKwKkdEd-PxKjnYTjOJw" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_j7IKwakdEd-PxKjnYTjOJw" x="-3" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_j7HjuqkdEd-PxKjnYTjOJw" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_j7Hju6kdEd-PxKjnYTjOJw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="risk.ecore#//Diagnostic/estimation"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_j7HjvKkdEd-PxKjnYTjOJw" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_j7hzYKkdEd-PxKjnYTjOJw" id="(0.9607843137254902,0.3333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_j7hzYakdEd-PxKjnYTjOJw" id="(0.0070921985815602835,0.4074074074074074)"/>
+  </edges>
+</notation:Diagram>
