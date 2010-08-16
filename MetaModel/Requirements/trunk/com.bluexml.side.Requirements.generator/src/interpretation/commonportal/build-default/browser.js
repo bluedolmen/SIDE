@@ -5,7 +5,7 @@ Ext.onReady(function() {
       layout:'fit',
       items:[{
         xtype: 'grouptabpanel',
-  		tabWidth: 130,
+  		tabWidth: 180,
   		activeGroup: 1,
   		items: [{
   			items: [ 
@@ -13,13 +13,13 @@ Ext.onReady(function() {
                   title: 'Analysis',
               }, {
 				title: 'Risk analysis',
-                iconCls: 'x-icon-subscriptions',
+                iconCls: 'x-icon-risk',
                 style: 'padding: 10px;',
 				layout: 'fit',
   				items: [gridRisk]	
   			}, {
   				title: 'Problem analysis',
-                iconCls: 'x-icon-subscriptions',
+                iconCls: 'x-icon-diagnostic',
                 style: 'padding: 10px;',
 				layout: 'fit',
   				items: [gridProblem]
@@ -28,13 +28,13 @@ Ext.onReady(function() {
               expanded: true,
               items: [{
                   title: 'Web Tool',
-                  iconCls: 'x-icon-configuration',
+                  iconCls: 'x-icon-webtool',
                   style: 'padding: 10px;'
               }, {
                   title: 'Go to the tool...',
   				  layout: 'fit',
   				  items: [webtoolPanel],
-                  iconCls: 'x-icon-templates',
+                  iconCls: 'x-icon-webtool-go',
                   style: 'padding: 10px;'
               }]
           }]

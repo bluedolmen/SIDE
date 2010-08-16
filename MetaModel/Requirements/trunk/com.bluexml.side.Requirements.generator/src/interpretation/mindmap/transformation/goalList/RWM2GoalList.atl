@@ -14,7 +14,7 @@ rule definition {
   	),
 	t_node : MindMap!Node (
 		text <- 'Liste des objectifs',
-		sub <- RWM!Goal->allInstances()->select(goal | RWM!Goal->allInstances()->select(g | g.subgoals->includes(goal))->size() = 0)
+		sub <- RWM!Goal->allInstances()->reject(goal | goal.refImmediateComposite().oclIsTypeOf(RWM!Goal))
 	)
 }
 

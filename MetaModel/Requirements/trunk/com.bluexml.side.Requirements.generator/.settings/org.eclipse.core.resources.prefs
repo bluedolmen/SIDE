@@ -1,5 +1,7 @@
-#Tue Aug 10 17:43:27 CEST 2010
+#Mon Aug 16 12:03:47 CEST 2010
 eclipse.preferences.version=1
+encoding//src/interpretation/diagnostic/diagnostic.ecorediag=UTF-8
 encoding//src/interpretation/mindmap/mindmap.ecorediag=UTF-8
+encoding//src/interpretation/risk/risk.ecorediag=UTF-8
 encoding//src/interpretation/webproject/webproject.ecore_diagram=UTF-8
 encoding/<project>=ISO-8859-1

@@ -118,7 +118,7 @@ helper context RWM!Entity def : checkEntityPrivilege_3() : Diagnostic!Problem =
 ------------------------------------------------
 
 helper context RWM!Attribute def : checkAttribute() : Sequence(Diagnostic!Problem) =
-	Sequence{self.checkAttributePrivilege(), self.checkEntityPrivilege_2()};
+	Sequence{self.checkAttributePrivilege(), self.checkAttributePrivilege_2()};
 	
 helper context RWM!Attribute def : checkAttributePrivilege() : Diagnostic!Problem =
 	if (RWM!Privilege->allInstances()->select(p | p.element = self)->size() = 0) then
@@ -127,7 +127,7 @@ helper context RWM!Attribute def : checkAttributePrivilege() : Diagnostic!Proble
 		OclUndefined
 	endif;
 
-helper context RWM!Attribute def : checkEntityPrivilege_2() : Diagnostic!Problem =
+helper context RWM!Attribute def : checkAttributePrivilege_2() : Diagnostic!Problem =
 	if (RWM!Privilege->allInstances()->select(p | p.element = self and p.category = #update)->size() > 1 and 
 	        RWM!Privilege->allInstances()->select(p | p.element = self and p.category = #read)->size() = 0) then
 	   thisModule.createProblem(#critic, self.oclType().toString(),self.name,'Update available on this element but not read.')

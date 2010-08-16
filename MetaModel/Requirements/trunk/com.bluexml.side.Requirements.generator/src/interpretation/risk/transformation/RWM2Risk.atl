@@ -36,23 +36,18 @@ helper def : si_delete_coeff() : Real = 0.5;
 helper context RWM!Goal def : getAllSubGoals() : Sequence(RWM!Goal) =
 	Sequence{self}->union(self.subgoals->collect(goal | goal.getAllSubGoals())->flatten());
 
-helper context RWM!Goal def : parent() : RWM!Goal =
-    self.eContainer();
-
 helper context RWM!Goal def : entitiesByGoal() : Sequence(RWM!Entity) =
-    self.getAllSubGoals()->flatten()->collect(goal | goal.privilegeGroup)->flatten()->select(elt | elt <> OclUndefined)->collect(pGroup | pGroup.privileges)->flatten()->collect(p | p.element)->asSet()->select(e | e.oclIsTypeOf(RWM!Entity));
+    self.privilegeGroup->flatten()->select(elt | elt <> OclUndefined)->collect(pGroup | pGroup.privileges)->flatten()->collect(p | p.element)->asSet()->select(e | e.oclIsTypeOf(RWM!Entity));
 
 helper context RWM!Goal def : attributesByGoal() : Sequence(RWM!Attribute) =
-    self.getAllSubGoals()->flatten()->collect(goal | goal.privilegeGroup)->flatten()->select(elt | elt <> OclUndefined)->collect(pGroup | pGroup.privileges)->flatten()->collect(p | p.element)->asSet()->select(e | e.oclIsTypeOf(RWM!Attribute));
+    self.privilegeGroup->flatten()->select(elt | elt <> OclUndefined)->collect(pGroup | pGroup.privileges)->flatten()->collect(p | p.element)->asSet()->select(e | e.oclIsTypeOf(RWM!Attribute));
 
-helper context RWM!Goal def : unitaryRiskV1 : Real =
-    self.priorityAsDouble / thisModule.maxPriority();
-
-helper context RWM!Goal def : unitaryRiskV2 : Real =
-    let couv : Real =
-        ((self.entitiesByGoal().size() / RWM!Entity->allInstances()->size()) + (self.attributesByGoal().size() / RWM!Attribute->allInstances()->size()))*0.5
+helper context RWM!Goal def : risk : Real =
+    let entityCoverage : Real = self.entitiesByGoal().size() / RWM!Entity->allInstances()->size()
+	in let attributeCoverage : Real = self.attributesByGoal().size() / RWM!Attribute->allInstances()->size()
+	in let goalPriority : Real = self.priorityAsDouble / thisModule.maxPriority()
     in
-    	0.5*(couv + self.unitaryRiskV1);
+    	(entityCoverage + attributeCoverage + goalPriority)/3.0;
 
 helper context RWM!BasicElement def : getPrivileges(nature : RWM!PrivilegeNature) : Sequence(RWM!Privilege) =
     RWM!Privilege->allInstances()->select(p | p.element=self and p.category = nature);
@@ -90,7 +85,7 @@ helper context RWM!Entity def : risk : Real =
     if (raset->size() = 0) then
 		re / rge
     else
-        (re * raset->sum()) / (rge * rga)
+        ((re / rge) + (raset->sum() / rga))/2
      endif;
 		
 helper context RWM!Agent def : risk : Real =
@@ -114,7 +109,7 @@ rule goal {
     to t : RISK!Estimation (
         elementName <- s.name,
         elementType <- 'Goal',
-        value <- s.unitaryRiskV2
+        value <- s.risk
     )
 }
 

@@ -1,3 +1,15 @@
+.x-icon-risk {
+	background-image:url(../images/risk.png);
+}
+
+.x-icon-diagnostic {
+	background-image:url(../images/problem.png);
+}
+
+.x-icon-webtool-go {
+	background-image:url(../images/tool.png);
+}
+
 .box {
 	background: url(../images/bg.png);
 	padding:5px;
