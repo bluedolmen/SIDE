@@ -62,7 +62,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -113,6 +112,8 @@ import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
 @SuppressWarnings("restriction")
 public class ApplicationDialog extends Dialog {
 
+	private static final String GENERATION_DEFAULT_PATH = "build" + File.separator + "generated";
+	private static final String GENERATION_DEFAULT_LOG_PATH = "build" + File.separator + "logs";
 	private Group optionsGroup;
 	private static final int APPLY_ID = IDialogConstants.CLIENT_ID + 2;
 	private static final int GEN_ID = IDialogConstants.CLIENT_ID + 1;
@@ -1286,8 +1287,8 @@ public class ApplicationDialog extends Dialog {
 		addStaticParam(KEY_DOCLEAN, "true", config); //$NON-NLS-1$
 
 		String projectPath = "/" + model.getProject().getName() + "/";
-		addStaticParam(KEY_LOGPATH, projectPath + "log", config); //$NON-NLS-1$
-		addStaticParam(KEY_GENPATH, projectPath + "out", config); //$NON-NLS-1$
+		addStaticParam(KEY_LOGPATH, projectPath + GENERATION_DEFAULT_LOG_PATH, config); //$NON-NLS-1$
+		addStaticParam(KEY_GENPATH, projectPath + GENERATION_DEFAULT_PATH, config); //$NON-NLS-1$
 		addStaticParam(KEY_OFFLINE, "false", config); //$NON-NLS-1$
 	}
 
