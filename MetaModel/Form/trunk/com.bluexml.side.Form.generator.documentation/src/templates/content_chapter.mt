@@ -12,7 +12,7 @@ import com.bluexml.side.util.generator.documentation.services.DocumentationServi
 		Link to class : <%current("FormClass").real_class.getLabel()%>
 	<%}%>
 	<%if (cast("FormWorkflow")){%>
-		Link to workflow : <%current("FormWorkflow").ref.eContainer().evaluate("title")%>
+		Link to workflow : <%filter("FormWorkflow").ref.eContainer().filter("workflow.Process").name%>
 	<%}%>
 
 	<%if (documentation != null){%><%documentation%><%}%>
