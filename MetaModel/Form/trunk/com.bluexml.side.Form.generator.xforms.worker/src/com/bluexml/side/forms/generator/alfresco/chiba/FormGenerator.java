@@ -33,6 +33,10 @@ import com.bluexml.xforms.messages.MsgPool;
 
 public class FormGenerator extends AbstractGenerator {
 
+	public static final String CONFIGURATION_PARAMETER_ALFRESCO_URL = "alfresco.url";
+	public static final String CONFIGURATION_PARAMETER_ALFRESCO_ADMIN_LOGIN = "alfresco.admin.login";
+	public static final String CONFIGURATION_PARAMETER_ALFRESCO_ADMIN_PSW = "alfresco.admin.psw";
+	
 	private static final String defaultModelID = "xformsModel";
 	private static final String webappName = "xforms";
 
@@ -63,7 +67,6 @@ public class FormGenerator extends AbstractGenerator {
 
 		String baseDir = xformGenerationFolder.getAbsolutePath();
 		String resDir = mappingGenerationFolder.getAbsolutePath();
-		
 
 		File generateMappingFile = new File(resDir + File.separator + "mapping.xml");
 		File generateRedirectFile = new File(resDir + File.separator + "redirect.xml");
@@ -101,7 +104,8 @@ public class FormGenerator extends AbstractGenerator {
 
 		// generate the forms.properties file
 		String filePath = resDir + File.separator + "forms.properties";
-		if (DefaultMessages.generateFormsFile(filePath) == false) {
+
+		if (DefaultMessages.generateFormsFile(filePath, generationParameters) == false) {
 			monitor.addWarningText("Could not generate and set the 'forms.properties' file.");
 		}
 
@@ -161,12 +165,10 @@ public class FormGenerator extends AbstractGenerator {
 		IFile chibaPackage = wpp.buildPackage();
 		ArrayList<IFile> result = new ArrayList<IFile>();
 		result.add(chibaPackage);
-		
-		
-		
+
 		// add resources to match with package dependencies
 		addDependences();
-		
+
 		return result;
 	}
 
