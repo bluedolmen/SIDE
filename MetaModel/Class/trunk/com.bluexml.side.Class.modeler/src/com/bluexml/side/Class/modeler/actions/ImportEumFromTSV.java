@@ -12,7 +12,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPart;
-import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 
 import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.diagram.commands.update.EnumerationUpdateCommand;
@@ -23,7 +22,6 @@ import com.bluexml.side.Class.modeler.editor.ClazzEditor;
 import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.EnumerationLiteral;
-import com.bluexml.side.clazz.modeler.Activator;
 import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class ImportEumFromTSV extends WorkbenchPartAction {

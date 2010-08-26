@@ -1,6 +1,7 @@
 package com.bluexml.side.Class.modeler.diagram.actions;
 
 import org.eclipse.gef.ui.actions.WorkbenchPartAction;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -14,6 +15,7 @@ import org.topcased.modeler.utils.Utils;
 import com.bluexml.side.Class.modeler.diagram.edit.EnumerationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.dependsEditPart;
 import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.util.libs.ui.UIUtils;
 
 
 public class DeleteLinkEnumerationDependsAction extends WorkbenchPartAction implements ISelectionChangedListener
@@ -37,7 +39,10 @@ public class DeleteLinkEnumerationDependsAction extends WorkbenchPartAction impl
     protected void init()
     {
         setId(ID);
-        setText("Unlink Depends Of");
+        setText("Delete From Model");
+     // load Eclipse icon
+		ImageDescriptor img = UIUtils.getImage("org.topcased.modeler", "/icons/deleteFromModel.gif"); //$NON-NLS-1$ //$NON-NLS-2$
+		setImageDescriptor(img);
     }
 
     public void run()

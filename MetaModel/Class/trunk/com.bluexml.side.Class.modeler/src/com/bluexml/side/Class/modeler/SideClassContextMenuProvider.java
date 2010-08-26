@@ -34,58 +34,55 @@ import com.bluexml.side.Class.modeler.diagram.edit.hasViewEditPart;
  * 
  * @author jako
  */
-public class SideClassContextMenuProvider extends ModelerContextMenuProvider
-{
-    /**
-     * Constructs a context menu for the specified EditPartViewer and the Actions registered in the ActionRegistry
-     * 
-     * @param viewer the EditPartViewer
-     * @param registry the ActionRegistry
-     */
-    public SideClassContextMenuProvider(EditPartViewer viewer, ActionRegistry registry)
-    {
-        super(viewer, registry);
-    }
+public class SideClassContextMenuProvider extends ModelerContextMenuProvider {
+	/**
+	 * Constructs a context menu for the specified EditPartViewer and the
+	 * Actions registered in the ActionRegistry
+	 * 
+	 * @param viewer
+	 *            the EditPartViewer
+	 * @param registry
+	 *            the ActionRegistry
+	 */
+	public SideClassContextMenuProvider(EditPartViewer viewer, ActionRegistry registry) {
+		super(viewer, registry);
+	}
 
-    /**
-     * Called when the menu is about to show. Construct the context menu by adding actions common to all editparts.
-     * 
-     * @see org.eclipse.gef.ContextMenuProvider#buildContextMenu(org.eclipse.jface.action.IMenuManager)
-     */
-    public void buildContextMenu(IMenuManager manager)
-    {
-        super.buildContextMenu(manager);
-                        
-        // HasAspect
-        if (checkAllElements(getViewer().getSelection(),hasAspectEditPart.class)) {
-        	IAction action = getActionRegistry().getAction(DeleteLinkClassAspectAction.ID);
-            if (action.isEnabled())
-            {
-                manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
-            }
-        }
-        
-        // Depends of
-        if (checkAllElements(getViewer().getSelection(),dependsEditPart.class)) {
-        	IAction action = getActionRegistry().getAction(DeleteLinkEnumerationDependsAction.ID);
-            if (action.isEnabled())
-            {
-                manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
-            }
-        }
-        
-        // Unlink Generalization
-        if (checkAllElements(getViewer().getSelection(),GeneralizationEditPart.class)) {
-        	IAction action = getActionRegistry().getAction(DeleteLinkClassGeneralizationAction.ID);
-            if (action.isEnabled())
-            {
-                manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
-            }
-        }
-    }
+	/**
+	 * Called when the menu is about to show. Construct the context menu by
+	 * adding actions common to all editparts.
+	 * 
+	 * @see org.eclipse.gef.ContextMenuProvider#buildContextMenu(org.eclipse.jface.action.IMenuManager)
+	 */
+	public void buildContextMenu(IMenuManager manager) {
+		super.buildContextMenu(manager);
 
-	private boolean checkAllElements(ISelection selection,
-			Class className) {
+		// HasAspect
+		if (checkAllElements(getViewer().getSelection(), hasAspectEditPart.class)) {
+			IAction action = getActionRegistry().getAction(DeleteLinkClassAspectAction.ID);
+			if (action.isEnabled()) {
+				manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
+			}
+		}
+
+		// Depends of
+		if (checkAllElements(getViewer().getSelection(), dependsEditPart.class)) {
+			IAction action = getActionRegistry().getAction(DeleteLinkEnumerationDependsAction.ID);
+			if (action.isEnabled()) {
+				manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
+			}
+		}
+
+		// Unlink Generalization
+		if (checkAllElements(getViewer().getSelection(), GeneralizationEditPart.class)) {
+			IAction action = getActionRegistry().getAction(DeleteLinkClassGeneralizationAction.ID);
+			if (action.isEnabled()) {
+				manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
+			}
+		}
+	}
+
+	private boolean checkAllElements(ISelection selection, Class className) {
 		if (selection instanceof StructuredSelection) {
 			StructuredSelection ss = (StructuredSelection) selection;
 			for (Object o : ss.toList()) {
