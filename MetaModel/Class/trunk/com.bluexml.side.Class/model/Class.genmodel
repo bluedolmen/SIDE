@@ -65,6 +65,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/associationType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//Association/firstEnd"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//Association/secondEnd"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/ordered"/>
       <genOperations ecoreOperation="Class.ecore#//Association/equalsForMerge">
         <genParameters ecoreParameter="Class.ecore#//Association/equalsForMerge/other"/>
       </genOperations>

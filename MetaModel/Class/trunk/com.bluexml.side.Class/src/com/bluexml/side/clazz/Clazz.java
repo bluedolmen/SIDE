@@ -33,7 +33,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getClazz()
- * @model annotation="http://www.bluexml.com/OCL InheritanceCycle='not self.generalizations.generalizations -> includes(self)'"
+ * @model annotation="http://www.bluexml.com/OCL InheritanceCycle='not self.generalizations ->closure(generalizations)->includes(self)'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ClassWithTwoAttributesSameName InheritanceCycle'"
  * @generated
  */
