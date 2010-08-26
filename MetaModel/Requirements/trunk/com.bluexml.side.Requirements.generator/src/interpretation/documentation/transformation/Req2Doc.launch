@@ -23,16 +23,23 @@
 <mapEntry key="printExecutionTime" value="false"/>
 <mapEntry key="OPTION_DERIVED" value="true"/>
 <mapEntry key="allowInterModelReferences" value="false"/>
+<mapEntry key="OPTION_CONTENT_TYPE" value="false"/>
 <mapEntry key="supportUML2Stereotypes" value="false"/>
 <mapEntry key="step" value="false"/>
 </mapAttribute>
+<listAttribute key="OrderedInput">
+<listEntry value="IN"/>
+</listAttribute>
+<listAttribute key="OrderedOutput">
+<listEntry value="OUT"/>
+</listAttribute>
 <mapAttribute key="Output">
 <mapEntry key="OUT" value="Documentation"/>
 </mapAttribute>
 <mapAttribute key="Path">
-<mapEntry key="OUT" value="/test/cdcf.ecore"/>
-<mapEntry key="Documentation" value="uri:http://www.bluexml.com/rwm/documentation/1.0/"/>
-<mapEntry key="IN" value="/test/wagramLeadsMgmt.requirements"/>
+<mapEntry key="OUT" value="/test bug/out.ecore"/>
+<mapEntry key="Documentation" value="/com.bluexml.side.Requirements.generator/src/interpretation/documentation/documentation.ecore"/>
+<mapEntry key="IN" value="/Wagram/src/models/requirement/wagramLeadsMgmt.requirements"/>
 <mapEntry key="RWM" value="uri:http://www.kerblue.org/requirements/1.0"/>
 </mapAttribute>
 <listAttribute key="Superimpose"/>

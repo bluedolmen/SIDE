@@ -144,22 +144,22 @@ public interface DocumentationPackage extends EPackage {
 	int SECTION__SECTION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SECTION__TITLE = 1;
-
-	/**
 	 * The feature id for the '<em><b>Para</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SECTION__PARA = 2;
+	int SECTION__PARA = 1;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECTION__TITLE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Section</em>' class.
@@ -349,13 +349,31 @@ public interface DocumentationPackage extends EPackage {
 	int INFORMAL_TABLE_VALUE = 9;
 
 	/**
-	 * The feature id for the '<em><b>Tgroup</b></em>' containment reference.
+	 * The feature id for the '<em><b>Cols</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INFORMAL_TABLE_VALUE__TGROUP = PARAGRAPH_VALUE_FEATURE_COUNT + 0;
+	int INFORMAL_TABLE_VALUE__COLS = PARAGRAPH_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Body Rows</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INFORMAL_TABLE_VALUE__BODY_ROWS = PARAGRAPH_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Head Rows</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INFORMAL_TABLE_VALUE__HEAD_ROWS = PARAGRAPH_VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Informal Table Value</em>' class.
@@ -364,109 +382,7 @@ public interface DocumentationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INFORMAL_TABLE_VALUE_FEATURE_COUNT = PARAGRAPH_VALUE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueGroupImpl <em>Informal Table Value Group</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueGroupImpl
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.DocumentationPackageImpl#getInformalTableValueGroup()
-	 * @generated
-	 */
-	int INFORMAL_TABLE_VALUE_GROUP = 10;
-
-	/**
-	 * The feature id for the '<em><b>Cols</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMAL_TABLE_VALUE_GROUP__COLS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Thead</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMAL_TABLE_VALUE_GROUP__THEAD = 1;
-
-	/**
-	 * The feature id for the '<em><b>Tbody</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMAL_TABLE_VALUE_GROUP__TBODY = 2;
-
-	/**
-	 * The number of structural features of the '<em>Informal Table Value Group</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMAL_TABLE_VALUE_GROUP_FEATURE_COUNT = 3;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueHeadImpl <em>Informal Table Value Head</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueHeadImpl
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.DocumentationPackageImpl#getInformalTableValueHead()
-	 * @generated
-	 */
-	int INFORMAL_TABLE_VALUE_HEAD = 11;
-
-	/**
-	 * The feature id for the '<em><b>Rows</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMAL_TABLE_VALUE_HEAD__ROWS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Informal Table Value Head</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMAL_TABLE_VALUE_HEAD_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueBodyImpl <em>Informal Table Value Body</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueBodyImpl
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.DocumentationPackageImpl#getInformalTableValueBody()
-	 * @generated
-	 */
-	int INFORMAL_TABLE_VALUE_BODY = 12;
-
-	/**
-	 * The feature id for the '<em><b>Rows</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMAL_TABLE_VALUE_BODY__ROWS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Informal Table Value Body</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMAL_TABLE_VALUE_BODY_FEATURE_COUNT = 1;
+	int INFORMAL_TABLE_VALUE_FEATURE_COUNT = PARAGRAPH_VALUE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueRowImpl <em>Informal Table Value Row</em>}' class.
@@ -476,7 +392,7 @@ public interface DocumentationPackage extends EPackage {
 	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.DocumentationPackageImpl#getInformalTableValueRow()
 	 * @generated
 	 */
-	int INFORMAL_TABLE_VALUE_ROW = 13;
+	int INFORMAL_TABLE_VALUE_ROW = 10;
 
 	/**
 	 * The feature id for the '<em><b>Entry</b></em>' containment reference list.
@@ -495,35 +411,6 @@ public interface DocumentationPackage extends EPackage {
 	 * @ordered
 	 */
 	int INFORMAL_TABLE_VALUE_ROW_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueEntryImpl <em>Informal Table Value Entry</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueEntryImpl
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.DocumentationPackageImpl#getInformalTableValueEntry()
-	 * @generated
-	 */
-	int INFORMAL_TABLE_VALUE_ENTRY = 14;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMAL_TABLE_VALUE_ENTRY__VALUE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Informal Table Value Entry</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMAL_TABLE_VALUE_ENTRY_FEATURE_COUNT = 1;
-
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.Book <em>Book</em>}'.
@@ -694,17 +581,6 @@ public interface DocumentationPackage extends EPackage {
 	EClass getEmphasisValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.EmphasisValue#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.EmphasisValue#getValue()
-	 * @see #getEmphasisValue()
-	 * @generated
-	 */
-	EAttribute getEmphasisValue_Value();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.EmphasisValue#getRole <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -747,100 +623,37 @@ public interface DocumentationPackage extends EPackage {
 	EClass getInformalTableValue();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue#getTgroup <em>Tgroup</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Tgroup</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue#getTgroup()
-	 * @see #getInformalTableValue()
-	 * @generated
-	 */
-	EReference getInformalTableValue_Tgroup();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup <em>Informal Table Value Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Informal Table Value Group</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup
-	 * @generated
-	 */
-	EClass getInformalTableValueGroup();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup#getCols <em>Cols</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue#getCols <em>Cols</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Cols</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup#getCols()
-	 * @see #getInformalTableValueGroup()
+	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue#getCols()
+	 * @see #getInformalTableValue()
 	 * @generated
 	 */
-	EAttribute getInformalTableValueGroup_Cols();
+	EAttribute getInformalTableValue_Cols();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup#getThead <em>Thead</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue#getBodyRows <em>Body Rows</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Thead</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup#getThead()
-	 * @see #getInformalTableValueGroup()
+	 * @return the meta object for the containment reference list '<em>Body Rows</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue#getBodyRows()
+	 * @see #getInformalTableValue()
 	 * @generated
 	 */
-	EReference getInformalTableValueGroup_Thead();
+	EReference getInformalTableValue_BodyRows();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup#getTbody <em>Tbody</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue#getHeadRows <em>Head Rows</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Tbody</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup#getTbody()
-	 * @see #getInformalTableValueGroup()
+	 * @return the meta object for the containment reference list '<em>Head Rows</em>'.
+	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue#getHeadRows()
+	 * @see #getInformalTableValue()
 	 * @generated
 	 */
-	EReference getInformalTableValueGroup_Tbody();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueHead <em>Informal Table Value Head</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Informal Table Value Head</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueHead
-	 * @generated
-	 */
-	EClass getInformalTableValueHead();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueHead#getRows <em>Rows</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Rows</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueHead#getRows()
-	 * @see #getInformalTableValueHead()
-	 * @generated
-	 */
-	EReference getInformalTableValueHead_Rows();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueBody <em>Informal Table Value Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Informal Table Value Body</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueBody
-	 * @generated
-	 */
-	EClass getInformalTableValueBody();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueBody#getRows <em>Rows</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Rows</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueBody#getRows()
-	 * @see #getInformalTableValueBody()
-	 * @generated
-	 */
-	EReference getInformalTableValueBody_Rows();
+	EReference getInformalTableValue_HeadRows();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueRow <em>Informal Table Value Row</em>}'.
@@ -862,27 +675,6 @@ public interface DocumentationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getInformalTableValueRow_Entry();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueEntry <em>Informal Table Value Entry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Informal Table Value Entry</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueEntry
-	 * @generated
-	 */
-	EClass getInformalTableValueEntry();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueEntry#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueEntry#getValue()
-	 * @see #getInformalTableValueEntry()
-	 * @generated
-	 */
-	EAttribute getInformalTableValueEntry_Value();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1051,14 +843,6 @@ public interface DocumentationPackage extends EPackage {
 		EClass EMPHASIS_VALUE = eINSTANCE.getEmphasisValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMPHASIS_VALUE__VALUE = eINSTANCE.getEmphasisValue_Value();
-
-		/**
 		 * The meta object literal for the '<em><b>Role</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1095,82 +879,28 @@ public interface DocumentationPackage extends EPackage {
 		EClass INFORMAL_TABLE_VALUE = eINSTANCE.getInformalTableValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Tgroup</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INFORMAL_TABLE_VALUE__TGROUP = eINSTANCE.getInformalTableValue_Tgroup();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueGroupImpl <em>Informal Table Value Group</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueGroupImpl
-		 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.DocumentationPackageImpl#getInformalTableValueGroup()
-		 * @generated
-		 */
-		EClass INFORMAL_TABLE_VALUE_GROUP = eINSTANCE.getInformalTableValueGroup();
-
-		/**
 		 * The meta object literal for the '<em><b>Cols</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute INFORMAL_TABLE_VALUE_GROUP__COLS = eINSTANCE.getInformalTableValueGroup_Cols();
+		EAttribute INFORMAL_TABLE_VALUE__COLS = eINSTANCE.getInformalTableValue_Cols();
 
 		/**
-		 * The meta object literal for the '<em><b>Thead</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Body Rows</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INFORMAL_TABLE_VALUE_GROUP__THEAD = eINSTANCE.getInformalTableValueGroup_Thead();
+		EReference INFORMAL_TABLE_VALUE__BODY_ROWS = eINSTANCE.getInformalTableValue_BodyRows();
 
 		/**
-		 * The meta object literal for the '<em><b>Tbody</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Head Rows</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INFORMAL_TABLE_VALUE_GROUP__TBODY = eINSTANCE.getInformalTableValueGroup_Tbody();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueHeadImpl <em>Informal Table Value Head</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueHeadImpl
-		 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.DocumentationPackageImpl#getInformalTableValueHead()
-		 * @generated
-		 */
-		EClass INFORMAL_TABLE_VALUE_HEAD = eINSTANCE.getInformalTableValueHead();
-
-		/**
-		 * The meta object literal for the '<em><b>Rows</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INFORMAL_TABLE_VALUE_HEAD__ROWS = eINSTANCE.getInformalTableValueHead_Rows();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueBodyImpl <em>Informal Table Value Body</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueBodyImpl
-		 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.DocumentationPackageImpl#getInformalTableValueBody()
-		 * @generated
-		 */
-		EClass INFORMAL_TABLE_VALUE_BODY = eINSTANCE.getInformalTableValueBody();
-
-		/**
-		 * The meta object literal for the '<em><b>Rows</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INFORMAL_TABLE_VALUE_BODY__ROWS = eINSTANCE.getInformalTableValueBody_Rows();
+		EReference INFORMAL_TABLE_VALUE__HEAD_ROWS = eINSTANCE.getInformalTableValue_HeadRows();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueRowImpl <em>Informal Table Value Row</em>}' class.
@@ -1189,24 +919,6 @@ public interface DocumentationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference INFORMAL_TABLE_VALUE_ROW__ENTRY = eINSTANCE.getInformalTableValueRow_Entry();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueEntryImpl <em>Informal Table Value Entry</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.InformalTableValueEntryImpl
-		 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.impl.DocumentationPackageImpl#getInformalTableValueEntry()
-		 * @generated
-		 */
-		EClass INFORMAL_TABLE_VALUE_ENTRY = eINSTANCE.getInformalTableValueEntry();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INFORMAL_TABLE_VALUE_ENTRY__VALUE = eINSTANCE.getInformalTableValueEntry_Value();
 
 	}
 

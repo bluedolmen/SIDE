@@ -6,15 +6,24 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Documentation.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.Documentation.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.bluexml.side.requirements.generator.metamodel.Documentation.Book;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationFactory;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.EmphasisValue;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueRow;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.ItemizedListValue;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.ItemizedListValueItem;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.Paragraph;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.Section;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.TextualValue;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.XRefValue;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,11 +78,7 @@ public class DocumentationFactoryImpl extends EFactoryImpl implements Documentat
 			case DocumentationPackage.EMPHASIS_VALUE: return createEmphasisValue();
 			case DocumentationPackage.XREF_VALUE: return createXRefValue();
 			case DocumentationPackage.INFORMAL_TABLE_VALUE: return createInformalTableValue();
-			case DocumentationPackage.INFORMAL_TABLE_VALUE_GROUP: return createInformalTableValueGroup();
-			case DocumentationPackage.INFORMAL_TABLE_VALUE_HEAD: return createInformalTableValueHead();
-			case DocumentationPackage.INFORMAL_TABLE_VALUE_BODY: return createInformalTableValueBody();
 			case DocumentationPackage.INFORMAL_TABLE_VALUE_ROW: return createInformalTableValueRow();
-			case DocumentationPackage.INFORMAL_TABLE_VALUE_ENTRY: return createInformalTableValueEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -174,49 +179,9 @@ public class DocumentationFactoryImpl extends EFactoryImpl implements Documentat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InformalTableValueGroup createInformalTableValueGroup() {
-		InformalTableValueGroupImpl informalTableValueGroup = new InformalTableValueGroupImpl();
-		return informalTableValueGroup;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public InformalTableValueHead createInformalTableValueHead() {
-		InformalTableValueHeadImpl informalTableValueHead = new InformalTableValueHeadImpl();
-		return informalTableValueHead;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public InformalTableValueBody createInformalTableValueBody() {
-		InformalTableValueBodyImpl informalTableValueBody = new InformalTableValueBodyImpl();
-		return informalTableValueBody;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public InformalTableValueRow createInformalTableValueRow() {
 		InformalTableValueRowImpl informalTableValueRow = new InformalTableValueRowImpl();
 		return informalTableValueRow;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public InformalTableValueEntry createInformalTableValueEntry() {
-		InformalTableValueEntryImpl informalTableValueEntry = new InformalTableValueEntryImpl();
-		return informalTableValueEntry;
 	}
 
 	/**

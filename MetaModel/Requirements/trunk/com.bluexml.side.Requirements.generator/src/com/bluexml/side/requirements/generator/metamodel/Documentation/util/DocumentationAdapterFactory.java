@@ -112,24 +112,8 @@ public class DocumentationAdapterFactory extends AdapterFactoryImpl {
 				return createInformalTableValueAdapter();
 			}
 			@Override
-			public Adapter caseInformalTableValueGroup(InformalTableValueGroup object) {
-				return createInformalTableValueGroupAdapter();
-			}
-			@Override
-			public Adapter caseInformalTableValueHead(InformalTableValueHead object) {
-				return createInformalTableValueHeadAdapter();
-			}
-			@Override
-			public Adapter caseInformalTableValueBody(InformalTableValueBody object) {
-				return createInformalTableValueBodyAdapter();
-			}
-			@Override
 			public Adapter caseInformalTableValueRow(InformalTableValueRow object) {
 				return createInformalTableValueRowAdapter();
-			}
-			@Override
-			public Adapter caseInformalTableValueEntry(InformalTableValueEntry object) {
-				return createInformalTableValueEntryAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -292,48 +276,6 @@ public class DocumentationAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup <em>Informal Table Value Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup
-	 * @generated
-	 */
-	public Adapter createInformalTableValueGroupAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueHead <em>Informal Table Value Head</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueHead
-	 * @generated
-	 */
-	public Adapter createInformalTableValueHeadAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueBody <em>Informal Table Value Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueBody
-	 * @generated
-	 */
-	public Adapter createInformalTableValueBodyAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueRow <em>Informal Table Value Row</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -344,20 +286,6 @@ public class DocumentationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInformalTableValueRowAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueEntry <em>Informal Table Value Entry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueEntry
-	 * @generated
-	 */
-	public Adapter createInformalTableValueEntryAdapter() {
 		return null;
 	}
 

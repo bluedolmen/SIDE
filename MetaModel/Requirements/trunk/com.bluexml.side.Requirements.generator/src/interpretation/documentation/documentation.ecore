@@ -15,9 +15,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Section">
     <eStructuralFeatures xsi:type="ecore:EReference" name="section" upperBound="-1"
         eType="#//Section" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="para" upperBound="-1" eType="#//Paragraph"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParagraphValue" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="TextualValue" eSuperTypes="#//ParagraphValue">
@@ -28,8 +28,7 @@
         eType="#//ItemizedListValueItem" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ItemizedListValueItem" eSuperTypes="#//Paragraph"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EmphasisValue" eSuperTypes="#//ParagraphValue">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EmphasisValue" eSuperTypes="#//ParagraphValue #//TextualValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XRefValue" eSuperTypes="#//ParagraphValue">
@@ -37,29 +36,14 @@
         eType="#//Section"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InformalTableValue" eSuperTypes="#//ParagraphValue">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tgroup" lowerBound="1"
-        eType="#//InformalTableValueGroup" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InformalTableValueGroup">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cols" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="thead" eType="#//InformalTableValueHead"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tbody" eType="#//InformalTableValueBody"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InformalTableValueHead">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rows" upperBound="-1" eType="#//InformalTableValueRow"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InformalTableValueBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rows" upperBound="-1" eType="#//InformalTableValueRow"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyRows" upperBound="-1"
+        eType="#//InformalTableValueRow" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headRows" upperBound="-1"
+        eType="#//InformalTableValueRow" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InformalTableValueRow">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entry" upperBound="-1"
-        eType="#//InformalTableValueEntry" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InformalTableValueEntry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="#//TextualValue" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

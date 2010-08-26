@@ -6,14 +6,13 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Documentation.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.EmphasisValue;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.TextualValue;
 
 /**
  * <!-- begin-user-doc -->
@@ -197,6 +196,38 @@ public class EmphasisValueImpl extends ParagraphValueImpl implements EmphasisVal
 				return ROLE_EDEFAULT == null ? role != null : !ROLE_EDEFAULT.equals(role);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == TextualValue.class) {
+			switch (derivedFeatureID) {
+				case DocumentationPackage.EMPHASIS_VALUE__VALUE: return DocumentationPackage.TEXTUAL_VALUE__VALUE;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == TextualValue.class) {
+			switch (baseFeatureID) {
+				case DocumentationPackage.TEXTUAL_VALUE__VALUE: return DocumentationPackage.EMPHASIS_VALUE__VALUE;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

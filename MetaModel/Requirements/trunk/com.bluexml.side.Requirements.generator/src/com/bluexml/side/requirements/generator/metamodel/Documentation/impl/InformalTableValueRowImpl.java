@@ -6,23 +6,19 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Documentation.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage;
-import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueEntry;
-import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueRow;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueRow;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.TextualValue;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,7 +42,7 @@ public class InformalTableValueRowImpl extends EObjectImpl implements InformalTa
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<InformalTableValueEntry> entry;
+	protected EList<TextualValue> entry;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,9 +68,9 @@ public class InformalTableValueRowImpl extends EObjectImpl implements InformalTa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<InformalTableValueEntry> getEntry() {
+	public EList<TextualValue> getEntry() {
 		if (entry == null) {
-			entry = new EObjectContainmentEList<InformalTableValueEntry>(InformalTableValueEntry.class, this, DocumentationPackage.INFORMAL_TABLE_VALUE_ROW__ENTRY);
+			entry = new EObjectContainmentEList<TextualValue>(TextualValue.class, this, DocumentationPackage.INFORMAL_TABLE_VALUE_ROW__ENTRY);
 		}
 		return entry;
 	}
@@ -118,7 +114,7 @@ public class InformalTableValueRowImpl extends EObjectImpl implements InformalTa
 		switch (featureID) {
 			case DocumentationPackage.INFORMAL_TABLE_VALUE_ROW__ENTRY:
 				getEntry().clear();
-				getEntry().addAll((Collection<? extends InformalTableValueEntry>)newValue);
+				getEntry().addAll((Collection<? extends TextualValue>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

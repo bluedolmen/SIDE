@@ -135,6 +135,7 @@ public class DocumentationSwitch<T> {
 			case DocumentationPackage.EMPHASIS_VALUE: {
 				EmphasisValue emphasisValue = (EmphasisValue)theEObject;
 				T result = caseEmphasisValue(emphasisValue);
+				if (result == null) result = caseTextualValue(emphasisValue);
 				if (result == null) result = caseParagraphValue(emphasisValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -153,33 +154,9 @@ public class DocumentationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DocumentationPackage.INFORMAL_TABLE_VALUE_GROUP: {
-				InformalTableValueGroup informalTableValueGroup = (InformalTableValueGroup)theEObject;
-				T result = caseInformalTableValueGroup(informalTableValueGroup);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DocumentationPackage.INFORMAL_TABLE_VALUE_HEAD: {
-				InformalTableValueHead informalTableValueHead = (InformalTableValueHead)theEObject;
-				T result = caseInformalTableValueHead(informalTableValueHead);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DocumentationPackage.INFORMAL_TABLE_VALUE_BODY: {
-				InformalTableValueBody informalTableValueBody = (InformalTableValueBody)theEObject;
-				T result = caseInformalTableValueBody(informalTableValueBody);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case DocumentationPackage.INFORMAL_TABLE_VALUE_ROW: {
 				InformalTableValueRow informalTableValueRow = (InformalTableValueRow)theEObject;
 				T result = caseInformalTableValueRow(informalTableValueRow);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DocumentationPackage.INFORMAL_TABLE_VALUE_ENTRY: {
-				InformalTableValueEntry informalTableValueEntry = (InformalTableValueEntry)theEObject;
-				T result = caseInformalTableValueEntry(informalTableValueEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -338,51 +315,6 @@ public class DocumentationSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Informal Table Value Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Informal Table Value Group</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInformalTableValueGroup(InformalTableValueGroup object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Informal Table Value Head</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Informal Table Value Head</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInformalTableValueHead(InformalTableValueHead object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Informal Table Value Body</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Informal Table Value Body</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInformalTableValueBody(InformalTableValueBody object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Informal Table Value Row</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -394,21 +326,6 @@ public class DocumentationSwitch<T> {
 	 * @generated
 	 */
 	public T caseInformalTableValueRow(InformalTableValueRow object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Informal Table Value Entry</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Informal Table Value Entry</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInformalTableValueEntry(InformalTableValueEntry object) {
 		return null;
 	}
 

@@ -6,12 +6,11 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Documentation.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.ParagraphValue;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

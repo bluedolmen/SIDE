@@ -7,7 +7,6 @@
 package com.bluexml.side.requirements.generator.metamodel.Documentation;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -19,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.Documentation.Section#getSection <em>Section</em>}</li>
- *   <li>{@link com.bluexml.side.requirements.generator.metamodel.Documentation.Section#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.Documentation.Section#getPara <em>Para</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.generator.metamodel.Documentation.Section#getTitle <em>Title</em>}</li>
  * </ul>
  * </p>
  *

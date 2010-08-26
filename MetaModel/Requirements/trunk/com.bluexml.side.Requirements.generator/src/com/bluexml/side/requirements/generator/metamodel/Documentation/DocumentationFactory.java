@@ -107,33 +107,6 @@ public interface DocumentationFactory extends EFactory {
 	InformalTableValue createInformalTableValue();
 
 	/**
-	 * Returns a new object of class '<em>Informal Table Value Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Informal Table Value Group</em>'.
-	 * @generated
-	 */
-	InformalTableValueGroup createInformalTableValueGroup();
-
-	/**
-	 * Returns a new object of class '<em>Informal Table Value Head</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Informal Table Value Head</em>'.
-	 * @generated
-	 */
-	InformalTableValueHead createInformalTableValueHead();
-
-	/**
-	 * Returns a new object of class '<em>Informal Table Value Body</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Informal Table Value Body</em>'.
-	 * @generated
-	 */
-	InformalTableValueBody createInformalTableValueBody();
-
-	/**
 	 * Returns a new object of class '<em>Informal Table Value Row</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -141,15 +114,6 @@ public interface DocumentationFactory extends EFactory {
 	 * @generated
 	 */
 	InformalTableValueRow createInformalTableValueRow();
-
-	/**
-	 * Returns a new object of class '<em>Informal Table Value Entry</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Informal Table Value Entry</em>'.
-	 * @generated
-	 */
-	InformalTableValueEntry createInformalTableValueEntry();
 
 	/**
 	 * Returns the package supported by this factory.

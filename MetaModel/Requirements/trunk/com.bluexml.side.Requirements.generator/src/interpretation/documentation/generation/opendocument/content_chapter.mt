@@ -64,8 +64,8 @@ import com.bluexml.side.requirements.generator.services.DocumentationServices
 </text:p>
 <%script type="Documentation.InformalTableValue" name="content_table"%>
 <table:table table:style-name="Tableau1">
-	<table:table-column table:style-name="Tableau1.A" table:number-columns-repeated="<%tgroup.cols%>" />
-	<%for (tgroup.thead.rows){%>
+	<table:table-column table:style-name="Tableau1.A" table:number-columns-repeated="<%cols%>" />
+	<%for (headRows){%>
 		<table:table-row>
 			 <%for (entry){%>
 			 	<%if (current() == nLast()){%>
@@ -78,7 +78,7 @@ import com.bluexml.side.requirements.generator.services.DocumentationServices
 			 <%}%>
 		</table:table-row>
 	<%}%>
-	<%for (tgroup.tbody.rows){%>
+	<%for (bodyRows){%>
 		<table:table-row>
 			 <%for (entry){%>
 			 	<%if (current() == nLast()){%>

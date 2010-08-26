@@ -6,10 +6,10 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Documentation.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.ItemizedListValueItem;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

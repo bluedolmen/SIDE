@@ -6,25 +6,21 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Documentation.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage;
-import com.bluexml.side.requirements.generator.metamodel.Documentation.Paragraph;
-import com.bluexml.side.requirements.generator.metamodel.Documentation.Section;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.Paragraph;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.Section;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,8 +30,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.SectionImpl#getSection <em>Section</em>}</li>
- *   <li>{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.SectionImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.SectionImpl#getPara <em>Para</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.generator.metamodel.Documentation.impl.SectionImpl#getTitle <em>Title</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,6 +47,16 @@ public class SectionImpl extends EObjectImpl implements Section {
 	 * @ordered
 	 */
 	protected EList<Section> section;
+
+	/**
+	 * The cached value of the '{@link #getPara() <em>Para</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPara()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Paragraph> para;
 
 	/**
 	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
@@ -71,16 +77,6 @@ public class SectionImpl extends EObjectImpl implements Section {
 	 * @ordered
 	 */
 	protected String title = TITLE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getPara() <em>Para</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPara()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Paragraph> para;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,10 +168,10 @@ public class SectionImpl extends EObjectImpl implements Section {
 		switch (featureID) {
 			case DocumentationPackage.SECTION__SECTION:
 				return getSection();
-			case DocumentationPackage.SECTION__TITLE:
-				return getTitle();
 			case DocumentationPackage.SECTION__PARA:
 				return getPara();
+			case DocumentationPackage.SECTION__TITLE:
+				return getTitle();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -193,12 +189,12 @@ public class SectionImpl extends EObjectImpl implements Section {
 				getSection().clear();
 				getSection().addAll((Collection<? extends Section>)newValue);
 				return;
-			case DocumentationPackage.SECTION__TITLE:
-				setTitle((String)newValue);
-				return;
 			case DocumentationPackage.SECTION__PARA:
 				getPara().clear();
 				getPara().addAll((Collection<? extends Paragraph>)newValue);
+				return;
+			case DocumentationPackage.SECTION__TITLE:
+				setTitle((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -215,11 +211,11 @@ public class SectionImpl extends EObjectImpl implements Section {
 			case DocumentationPackage.SECTION__SECTION:
 				getSection().clear();
 				return;
-			case DocumentationPackage.SECTION__TITLE:
-				setTitle(TITLE_EDEFAULT);
-				return;
 			case DocumentationPackage.SECTION__PARA:
 				getPara().clear();
+				return;
+			case DocumentationPackage.SECTION__TITLE:
+				setTitle(TITLE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -235,10 +231,10 @@ public class SectionImpl extends EObjectImpl implements Section {
 		switch (featureID) {
 			case DocumentationPackage.SECTION__SECTION:
 				return section != null && !section.isEmpty();
-			case DocumentationPackage.SECTION__TITLE:
-				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case DocumentationPackage.SECTION__PARA:
 				return para != null && !para.isEmpty();
+			case DocumentationPackage.SECTION__TITLE:
+				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 		}
 		return super.eIsSet(featureID);
 	}

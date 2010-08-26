@@ -7,7 +7,6 @@
 package com.bluexml.side.requirements.generator.metamodel.Documentation;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -29,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface InformalTableValueRow extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Entry</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueEntry}.
+	 * The list contents are of type {@link com.bluexml.side.requirements.generator.metamodel.Documentation.TextualValue}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Entry</em>' containment reference list isn't clear,
@@ -41,6 +40,6 @@ public interface InformalTableValueRow extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<InformalTableValueEntry> getEntry();
+	EList<TextualValue> getEntry();
 
 } // InformalTableValueRow

@@ -6,15 +6,17 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Documentation.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import com.bluexml.side.requirements.generator.metamodel.Documentation.Book;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationFactory;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.EmphasisValue;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue;
-import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueBody;
-import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueEntry;
-import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueGroup;
-import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueHead;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueRow;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.ItemizedListValue;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.ItemizedListValueItem;
@@ -23,13 +25,6 @@ import com.bluexml.side.requirements.generator.metamodel.Documentation.Paragraph
 import com.bluexml.side.requirements.generator.metamodel.Documentation.Section;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.TextualValue;
 import com.bluexml.side.requirements.generator.metamodel.Documentation.XRefValue;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -113,35 +108,7 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass informalTableValueGroupEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass informalTableValueHeadEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass informalTableValueBodyEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass informalTableValueRowEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass informalTableValueEntryEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -273,7 +240,7 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 	 * @generated
 	 */
 	public EAttribute getSection_Title() {
-		return (EAttribute)sectionEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)sectionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -282,7 +249,7 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 	 * @generated
 	 */
 	public EReference getSection_Para() {
-		return (EReference)sectionEClass.getEStructuralFeatures().get(2);
+		return (EReference)sectionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -353,17 +320,8 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmphasisValue_Value() {
-		return (EAttribute)emphasisValueEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getEmphasisValue_Role() {
-		return (EAttribute)emphasisValueEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)emphasisValueEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -398,8 +356,8 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInformalTableValue_Tgroup() {
-		return (EReference)informalTableValueEClass.getEStructuralFeatures().get(0);
+	public EAttribute getInformalTableValue_Cols() {
+		return (EAttribute)informalTableValueEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -407,8 +365,8 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getInformalTableValueGroup() {
-		return informalTableValueGroupEClass;
+	public EReference getInformalTableValue_BodyRows() {
+		return (EReference)informalTableValueEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -416,62 +374,8 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getInformalTableValueGroup_Cols() {
-		return (EAttribute)informalTableValueGroupEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getInformalTableValueGroup_Thead() {
-		return (EReference)informalTableValueGroupEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getInformalTableValueGroup_Tbody() {
-		return (EReference)informalTableValueGroupEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getInformalTableValueHead() {
-		return informalTableValueHeadEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getInformalTableValueHead_Rows() {
-		return (EReference)informalTableValueHeadEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getInformalTableValueBody() {
-		return informalTableValueBodyEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getInformalTableValueBody_Rows() {
-		return (EReference)informalTableValueBodyEClass.getEStructuralFeatures().get(0);
+	public EReference getInformalTableValue_HeadRows() {
+		return (EReference)informalTableValueEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -490,24 +394,6 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 	 */
 	public EReference getInformalTableValueRow_Entry() {
 		return (EReference)informalTableValueRowEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getInformalTableValueEntry() {
-		return informalTableValueEntryEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getInformalTableValueEntry_Value() {
-		return (EAttribute)informalTableValueEntryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -547,8 +433,8 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 
 		sectionEClass = createEClass(SECTION);
 		createEReference(sectionEClass, SECTION__SECTION);
-		createEAttribute(sectionEClass, SECTION__TITLE);
 		createEReference(sectionEClass, SECTION__PARA);
+		createEAttribute(sectionEClass, SECTION__TITLE);
 
 		paragraphValueEClass = createEClass(PARAGRAPH_VALUE);
 
@@ -561,31 +447,18 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 		itemizedListValueItemEClass = createEClass(ITEMIZED_LIST_VALUE_ITEM);
 
 		emphasisValueEClass = createEClass(EMPHASIS_VALUE);
-		createEAttribute(emphasisValueEClass, EMPHASIS_VALUE__VALUE);
 		createEAttribute(emphasisValueEClass, EMPHASIS_VALUE__ROLE);
 
 		xRefValueEClass = createEClass(XREF_VALUE);
 		createEReference(xRefValueEClass, XREF_VALUE__LINKEND);
 
 		informalTableValueEClass = createEClass(INFORMAL_TABLE_VALUE);
-		createEReference(informalTableValueEClass, INFORMAL_TABLE_VALUE__TGROUP);
-
-		informalTableValueGroupEClass = createEClass(INFORMAL_TABLE_VALUE_GROUP);
-		createEAttribute(informalTableValueGroupEClass, INFORMAL_TABLE_VALUE_GROUP__COLS);
-		createEReference(informalTableValueGroupEClass, INFORMAL_TABLE_VALUE_GROUP__THEAD);
-		createEReference(informalTableValueGroupEClass, INFORMAL_TABLE_VALUE_GROUP__TBODY);
-
-		informalTableValueHeadEClass = createEClass(INFORMAL_TABLE_VALUE_HEAD);
-		createEReference(informalTableValueHeadEClass, INFORMAL_TABLE_VALUE_HEAD__ROWS);
-
-		informalTableValueBodyEClass = createEClass(INFORMAL_TABLE_VALUE_BODY);
-		createEReference(informalTableValueBodyEClass, INFORMAL_TABLE_VALUE_BODY__ROWS);
+		createEAttribute(informalTableValueEClass, INFORMAL_TABLE_VALUE__COLS);
+		createEReference(informalTableValueEClass, INFORMAL_TABLE_VALUE__BODY_ROWS);
+		createEReference(informalTableValueEClass, INFORMAL_TABLE_VALUE__HEAD_ROWS);
 
 		informalTableValueRowEClass = createEClass(INFORMAL_TABLE_VALUE_ROW);
 		createEReference(informalTableValueRowEClass, INFORMAL_TABLE_VALUE_ROW__ENTRY);
-
-		informalTableValueEntryEClass = createEClass(INFORMAL_TABLE_VALUE_ENTRY);
-		createEAttribute(informalTableValueEntryEClass, INFORMAL_TABLE_VALUE_ENTRY__VALUE);
 	}
 
 	/**
@@ -620,6 +493,7 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 		itemizedListValueEClass.getESuperTypes().add(this.getParagraphValue());
 		itemizedListValueItemEClass.getESuperTypes().add(this.getParagraph());
 		emphasisValueEClass.getESuperTypes().add(this.getParagraphValue());
+		emphasisValueEClass.getESuperTypes().add(this.getTextualValue());
 		xRefValueEClass.getESuperTypes().add(this.getParagraphValue());
 		informalTableValueEClass.getESuperTypes().add(this.getParagraphValue());
 
@@ -633,8 +507,8 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 
 		initEClass(sectionEClass, Section.class, "Section", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSection_Section(), this.getSection(), null, "section", null, 0, -1, Section.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSection_Title(), ecorePackage.getEString(), "title", null, 1, 1, Section.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSection_Para(), this.getParagraph(), null, "para", null, 0, -1, Section.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSection_Title(), ecorePackage.getEString(), "title", null, 1, 1, Section.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paragraphValueEClass, ParagraphValue.class, "ParagraphValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -647,31 +521,18 @@ public class DocumentationPackageImpl extends EPackageImpl implements Documentat
 		initEClass(itemizedListValueItemEClass, ItemizedListValueItem.class, "ItemizedListValueItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(emphasisValueEClass, EmphasisValue.class, "EmphasisValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEmphasisValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, EmphasisValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmphasisValue_Role(), ecorePackage.getEString(), "role", null, 0, 1, EmphasisValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xRefValueEClass, XRefValue.class, "XRefValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXRefValue_Linkend(), this.getSection(), null, "linkend", null, 1, 1, XRefValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(informalTableValueEClass, InformalTableValue.class, "InformalTableValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInformalTableValue_Tgroup(), this.getInformalTableValueGroup(), null, "tgroup", null, 1, 1, InformalTableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(informalTableValueGroupEClass, InformalTableValueGroup.class, "InformalTableValueGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getInformalTableValueGroup_Cols(), ecorePackage.getEInt(), "cols", null, 0, 1, InformalTableValueGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInformalTableValueGroup_Thead(), this.getInformalTableValueHead(), null, "thead", null, 0, 1, InformalTableValueGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInformalTableValueGroup_Tbody(), this.getInformalTableValueBody(), null, "tbody", null, 0, 1, InformalTableValueGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(informalTableValueHeadEClass, InformalTableValueHead.class, "InformalTableValueHead", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInformalTableValueHead_Rows(), this.getInformalTableValueRow(), null, "rows", null, 0, -1, InformalTableValueHead.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(informalTableValueBodyEClass, InformalTableValueBody.class, "InformalTableValueBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInformalTableValueBody_Rows(), this.getInformalTableValueRow(), null, "rows", null, 0, -1, InformalTableValueBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInformalTableValue_Cols(), ecorePackage.getEInt(), "cols", null, 0, 1, InformalTableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInformalTableValue_BodyRows(), this.getInformalTableValueRow(), null, "bodyRows", null, 0, -1, InformalTableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInformalTableValue_HeadRows(), this.getInformalTableValueRow(), null, "headRows", null, 0, -1, InformalTableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(informalTableValueRowEClass, InformalTableValueRow.class, "InformalTableValueRow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInformalTableValueRow_Entry(), this.getInformalTableValueEntry(), null, "entry", null, 0, -1, InformalTableValueRow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(informalTableValueEntryEClass, InformalTableValueEntry.class, "InformalTableValueEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getInformalTableValueEntry_Value(), ecorePackage.getEString(), "value", null, 0, 1, InformalTableValueEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInformalTableValueRow_Entry(), this.getTextualValue(), null, "entry", null, 0, -1, InformalTableValueRow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

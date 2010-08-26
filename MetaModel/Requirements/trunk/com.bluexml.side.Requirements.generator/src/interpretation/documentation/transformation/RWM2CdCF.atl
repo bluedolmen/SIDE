@@ -295,51 +295,40 @@ rule Member {
 		values <- Sequence{t_para_privileges_value}
 	),
 	t_para_privileges_value:Documentation!InformalTableValue (
-		tgroup <- t_group
-	),
-	t_group:Documentation!InformalTableValueGroup (
 		cols <- 5,
-		thead <- t_thead,
-		tbody <- t_tbody
-	),
-	t_thead:Documentation!InformalTableValueHead (
-		rows <- Sequence {t_row}
+		headRows <- Sequence {t_row},
+		bodyRows <- let allPrivileges : Sequence(RWM!BasicElement) = 
+		             s.isResponsible->collect(goal | goal.getAllSubGoals())->flatten()->collect(goal | goal.privilegeGroup)->excluding(OclUndefined)->flatten()->collect(pGroup | pGroup.privileges)->flatten()
+				in 
+		        	let allPrivilegesElement : Sequence(RWM!BasicElement) = 
+		            	allPrivileges->collect(p | p.element)->flatten()
+					in
+						let 	entities : Sequence(RWM!Entity) = 
+		 					allPrivilegesElement->select(e | e.oclIsTypeOf(RWM!Entity))->
+				            union( allPrivilegesElement->select(e | e.oclIsTypeOf(RWM!Attribute))->collect(e | e.refImmediateComposite()))->
+				            asSet()->asSequence()
+				        in
+				             entities->iterate(entity; all : Sequence(RWM!BasicElement) = Sequence{} | all->append(entity)->union(entity.attributes)->union(RWM!RelationShip->allInstances()->select(r | r.source = entity or r.target = entity)))
+				             ->collect(e | thisModule.Privilege(e,allPrivileges,OclUndefined))
 	),
 	t_row:Documentation!InformalTableValueRow (
 		entry <- Sequence{t_entry_element, t_entry_create, t_entry_read, t_entry_update, t_entry_delete}
 	),
-	t_entry_element:Documentation!InformalTableValueEntry(
+	t_entry_element:Documentation!TextualValue(
 		value <- 'Entité &amp; attribut'
 	), 
-	t_entry_create:Documentation!InformalTableValueEntry(
+	t_entry_create:Documentation!TextualValue(
 		value <- 'Créer'
 	), 
-	t_entry_read:Documentation!InformalTableValueEntry(
+	t_entry_read:Documentation!TextualValue(
 		value <- 'Lire'
 	), 
-	t_entry_update:Documentation!InformalTableValueEntry(
+	t_entry_update:Documentation!TextualValue(
 		value <- 'Mettre a jour'
 	), 
-	t_entry_delete:Documentation!InformalTableValueEntry(
+	t_entry_delete:Documentation!TextualValue(
 		value <- 'Supprimer'
-	),
-	t_tbody:Documentation!InformalTableValueBody (
-		rows <- let allPrivileges : Sequence(RWM!BasicElement) = 
-			              s.isResponsible->collect(goal | goal.getAllSubGoals())->flatten()->collect(goal | goal.privilegeGroup)->excluding(OclUndefined)->flatten()->collect(pGroup | pGroup.privileges)->flatten()
-						in 
-		                let allPrivilegesElement : Sequence(RWM!BasicElement) = 
-			              allPrivileges->collect(p | p.element)->flatten()
-						in
-						  let 	entities : Sequence(RWM!Entity) = 
-		 					allPrivilegesElement->select(e | e.oclIsTypeOf(RWM!Entity))->
-				            union( allPrivilegesElement->select(e | e.oclIsTypeOf(RWM!Attribute))->collect(e | e.refImmediateComposite()))->
-				            asSet()->asSequence()
-				          in
-				             entities->iterate(entity; all : Sequence(RWM!BasicElement) = Sequence{} | all->append(entity)->union(entity.attributes)->union(RWM!RelationShip->allInstances()->select(r | r.source = entity or r.target = entity)))
-				             ->collect(e | thisModule.Privilege(e,allPrivileges,OclUndefined))
 	)
-	do {
-	}
 }
 
 rule Goal {
@@ -440,42 +429,33 @@ rule Goal {
 rule PrivilegeGroup {
 	from s:RWM!PrivilegeGroup(s.privileges.size() > 0)
 	to t:Documentation!InformalTableValue (
-		tgroup <- t_group
-	),
-	t_group:Documentation!InformalTableValueGroup (
 		cols <- 5,
-		thead <- t_thead,
-		tbody <- t_tbody
-	),
-	t_thead:Documentation!InformalTableValueHead (
-		rows <- Sequence {t_row}
-	),
-	t_row:Documentation!InformalTableValueRow (
-		entry <- Sequence{t_entry_element, t_entry_create, t_entry_read, t_entry_update, t_entry_delete}
-	),
-	t_entry_element:Documentation!InformalTableValueEntry(
-		value <- 'Entité &amp; attribut'
-	), 
-	t_entry_create:Documentation!InformalTableValueEntry(
-		value <- 'Créer'
-	), 
-	t_entry_read:Documentation!InformalTableValueEntry(
-		value <- 'Lire'
-	), 
-	t_entry_update:Documentation!InformalTableValueEntry(
-		value <- 'Mettre a jour'
-	), 
-	t_entry_delete:Documentation!InformalTableValueEntry(
-		value <- 'Supprimer'
-	),
-	t_tbody:Documentation!InformalTableValueBody (
-		rows <- let entities : Sequence(RWM!Entity) = 
+		headRows <- Sequence {t_row},
+		bodyRows <- let entities : Sequence(RWM!Entity) = 
 		 		s.privileges->collect(p | p.element)->select(e | e.oclIsTypeOf(RWM!Entity))->
 				union( s.privileges->collect(p | p.element)->select(e | e.oclIsTypeOf(RWM!Attribute))->collect(e | e.refImmediateComposite()) )->
 				asSet()->asSequence()
 				in
 				  entities->iterate(entity; all : Sequence(RWM!BasicElement) = Sequence{} | all->append(entity)->union(entity.attributes)->union(RWM!RelationShip->allInstances()->select(r | r.source = entity or r.target = entity)))
 				  ->collect(e | thisModule.Privilege(e,s.privileges,s.entryPoint))
+	),
+	t_row:Documentation!InformalTableValueRow (
+		entry <- Sequence{t_entry_element, t_entry_create, t_entry_read, t_entry_update, t_entry_delete}
+	),
+	t_entry_element:Documentation!TextualValue(
+		value <- 'Entité &amp; attribut'
+	), 
+	t_entry_create:Documentation!TextualValue(
+		value <- 'Créer'
+	), 
+	t_entry_read:Documentation!TextualValue(
+		value <- 'Lire'
+	), 
+	t_entry_update:Documentation!TextualValue(
+		value <- 'Mettre a jour'
+	), 
+	t_entry_delete:Documentation!TextualValue(
+		value <- 'Supprimer'
 	)
 }
 
@@ -483,7 +463,7 @@ rule Privilege(element : RWM!BasicElement, group : Sequence(RWM!Privilege), entr
 	to t:Documentation!InformalTableValueRow (
 	  entry <- Sequence{t_entry_element, t_entry_create, t_entry_read, t_entry_update, t_entry_delete}
 	),
-	t_entry_element:Documentation!InformalTableValueEntry(
+	t_entry_element:Documentation!TextualValue(
 		value <- if (element.oclIsTypeOf(RWM!Entity)) then
 		           if (element = entryPoint) then
 				     '&gt; '+element.name
@@ -498,28 +478,28 @@ rule Privilege(element : RWM!BasicElement, group : Sequence(RWM!Privilege), entr
 				   endif
 				 endif
 	), 
-	t_entry_create:Documentation!InformalTableValueEntry(
+	t_entry_create:Documentation!TextualValue(
 		value <- if (group->select(p | p.element = element and p.category = #"create")->size() > 0) then
 			       'X'
 			     else
 			       ''
 				 endif
 	), 
-	t_entry_read:Documentation!InformalTableValueEntry(
+	t_entry_read:Documentation!TextualValue(
 		value <- if (group->select(p | p.element = element and p.category = #read)->size() > 0) then
 			       'X'
 			     else
 			       ''
 				 endif
 	), 
-	t_entry_update:Documentation!InformalTableValueEntry(
+	t_entry_update:Documentation!TextualValue(
 		value <- if (group->select(p | p.element = element and p.category = #update)->size() > 0) then
 			       'X'
 			     else
 			       ''
 				 endif
 	), 
-	t_entry_delete:Documentation!InformalTableValueEntry(
+	t_entry_delete:Documentation!TextualValue(
 		value <- if (group->select(p | p.element = element and p.category = #delete)->size() > 0) then
 			       'X'
 			     else
@@ -590,31 +570,22 @@ rule EntityWithAttribute extends Entity {
 		values <- Sequence{t_para_attributs_table}
 	),
 	t_para_attributs_table:Documentation!InformalTableValue (
-		tgroup <- t_group
-	),
-	t_group:Documentation!InformalTableValueGroup (
 		cols <- 3,
-		thead <- t_thead,
-		tbody <- t_tbody
-	),
-	t_thead:Documentation!InformalTableValueHead (
-		rows <- Sequence {t_row}
+		headRows <- Sequence {t_row},
+		bodyRows <- s.attributes
 	),
 	t_row:Documentation!InformalTableValueRow (
 		entry <- Sequence{t_entry_name, t_entry_type,t_entry_description}
 	),
-	t_entry_name:Documentation!InformalTableValueEntry(
+	t_entry_name:Documentation!TextualValue(
 		value <- 'Nom'
 	), 
-	t_entry_type:Documentation!InformalTableValueEntry(
+	t_entry_type:Documentation!TextualValue(
 		value <- 'Type'
 	), 
-	t_entry_description:Documentation!InformalTableValueEntry(
+	t_entry_description:Documentation!TextualValue(
 		value <- 'Description'
-	), 
-	t_tbody:Documentation!InformalTableValueBody (
-		rows <- s.attributes
-	)
+	) 
 }
 
 rule Attribute {
@@ -622,13 +593,13 @@ rule Attribute {
 	to t:Documentation!InformalTableValueRow (
 	  entry <- Sequence{t_entry_name, t_entry_type,t_entry_description}
 	),
-	t_entry_name:Documentation!InformalTableValueEntry(
+	t_entry_name:Documentation!TextualValue(
 		value <- s.name
 	), 
-	t_entry_type:Documentation!InformalTableValueEntry(
+	t_entry_type:Documentation!TextualValue(
 		value <- s."type".toString()
 	), 
-	t_entry_description:Documentation!InformalTableValueEntry(
+	t_entry_description:Documentation!TextualValue(
 		value <-
 			if (s.documentation <> OclUndefined) then
 				s.documentation.normalize()
