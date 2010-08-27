@@ -1820,7 +1820,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		  (abstractViewEClass, 
 		   source, 
 		   new String[] {
-			 "noSameName", "AbstractView.allInstances().name -> select( t : String | self.name = t) ->size() = 1"
+			 "noSameName", "if (self.getContainer().oclIsTypeOf(ViewCollection)) then\r\tViewCollection.allInstances().views ->union(ViewCollection.allInstances().composedViews) -> select( t : AbstractView | self.name = t.name) -> size() = 1\relse\r\tself.getContainer().oclAsType(FieldContainer).children -> select( t : FieldElement | self.name = t.name) -> size() = 1\rendif"
 		   });			
 		addAnnotation
 		  (abstractViewEClass.getEOperations().get(0), 

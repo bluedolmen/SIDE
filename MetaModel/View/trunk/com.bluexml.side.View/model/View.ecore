@@ -25,7 +25,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="disabled" upperBound="-1"
         eType="#//FieldElement" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="list fieldElement that must be displayed"/>
+        <details key="documentation" value="list fieldElement that must be hidden"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -53,7 +53,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractView" abstract="true" eSuperTypes="#//FieldContainer">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="noSameName" value="AbstractView.allInstances().name -> select( t : String | self.name = t) ->size() = 1"/>
+      <details key="noSameName" value="if (self.getContainer().oclIsTypeOf(ViewCollection)) then&#xD;&#x9;ViewCollection.allInstances().views ->union(ViewCollection.allInstances().composedViews) -> select( t : AbstractView | self.name = t.name) -> size() = 1&#xD;else&#xD;&#x9;self.getContainer().oclAsType(FieldContainer).children -> select( t : FieldElement | self.name = t.name) -> size() = 1&#xD;endif"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="noSameName"/>

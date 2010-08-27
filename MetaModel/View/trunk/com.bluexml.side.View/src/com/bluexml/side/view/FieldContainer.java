@@ -47,7 +47,7 @@ public interface FieldContainer extends FieldElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * list fieldElement that must be displayed
+	 * list fieldElement that must be hidden
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Disabled</em>' containment reference list.
 	 * @see com.bluexml.side.view.ViewPackage#getFieldContainer_Disabled()

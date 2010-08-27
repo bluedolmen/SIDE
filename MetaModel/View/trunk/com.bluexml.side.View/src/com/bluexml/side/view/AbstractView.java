@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see com.bluexml.side.view.ViewPackage#getAbstractView()
  * @model abstract="true"
- *        annotation="http://www.bluexml.com/OCL noSameName='AbstractView.allInstances().name -> select( t : String | self.name = t) ->size() = 1'"
+ *        annotation="http://www.bluexml.com/OCL noSameName='if (self.getContainer().oclIsTypeOf(ViewCollection)) then\r\tViewCollection.allInstances().views ->union(ViewCollection.allInstances().composedViews) -> select( t : AbstractView | self.name = t.name) -> size() = 1\relse\r\tself.getContainer().oclAsType(FieldContainer).children -> select( t : FieldElement | self.name = t.name) -> size() = 1\rendif'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='noSameName'"
  * @generated
  */
