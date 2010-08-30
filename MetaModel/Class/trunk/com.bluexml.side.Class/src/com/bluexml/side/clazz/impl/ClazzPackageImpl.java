@@ -1140,7 +1140,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "SourceNull", "self.firstEnd.linkedClass->notEmpty()",
 			 "TargetNull", "self.secondEnd.linkedClass->notEmpty()",
 			 "AtLeastOneNavigableEdge", "(firstEnd.navigable or secondEnd.navigable)",
-			 "ClassCantBeReferencedbyTwoSameNameAssociation", "if (self.getSource()->first().oclIsTypeOf(Aspect)) then\n\tAssociation.allInstances()->select(a | a.getSource() = self.getSource())->asSet()->select(a:Association|a.name = self.name)->size() = 1\nelse\n\tif (not (self.getSource().generalizations -> closure(generalizations)-> union(self.getSource()) ->size() > 0)) then\n\t\tself.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1\n\telse\n\t\t0 = 1\n\tendif\nendif",
+			 "ClassCantBeReferencedbyTwoSameNameAssociation", "if (self.getSource()->first().oclIsTypeOf(Aspect)) then\n\tAssociation.allInstances()->select(a | a.getSource() = self.getSource())->asSet()->select(a:Association|a.name = self.name)->size() = 1\nelse\n\tif (not (self.getSource().generalizations -> closure(generalizations)-> union(self.getSource()) ->size() > 1)) then\n\t\tself.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1\n\telse\n\t\t0 = 1\n\tendif\nendif",
 			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )",
 			 "twoWayNavigation", "(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name <> \'\' and self.secondEnd.name <> \'\')",
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
