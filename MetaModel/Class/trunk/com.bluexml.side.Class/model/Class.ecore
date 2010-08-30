@@ -333,6 +333,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Defintion: the item of an enumeration; it is composed of a name and a value."/>
     </eAnnotations>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="NameNull noSpecialCharacters"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: the value of an item of an enumeration.&#xD;&#xA;Constraints: a single value may be defined for a name.&#xD;&#xA;Example: consider the enumeration mediaType : {(videoType, Video), (paperType, Paper), (audioType, Audio),(numericType, File), ...}; a Video media has the mediaType of name videoType and of value Video."/>

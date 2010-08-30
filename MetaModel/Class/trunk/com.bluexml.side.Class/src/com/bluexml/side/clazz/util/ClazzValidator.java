@@ -186,6 +186,22 @@ public class ClazzValidator extends EObjectValidator {
 	private static Constraint enumeration_enumDynamicAreNotAvailableInvOCL;
 
 	/**
+	 * The parsed OCL expression for the definition of the '<em>NameNull</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint enumerationLiteral_NameNullInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>noSpecialCharacters</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint enumerationLiteral_noSpecialCharactersInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>TwoModelElementWithSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1019,7 +1035,94 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEnumerationLiteral(EnumerationLiteral enumerationLiteral, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(enumerationLiteral, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(enumerationLiteral, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(enumerationLiteral, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(enumerationLiteral, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(enumerationLiteral, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(enumerationLiteral, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(enumerationLiteral, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(enumerationLiteral, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEnumerationLiteral_NameNull(enumerationLiteral, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEnumerationLiteral_noSpecialCharacters(enumerationLiteral, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the NameNull constraint of '<em>Enumeration Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEnumerationLiteral_NameNull(EnumerationLiteral enumerationLiteral, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (enumerationLiteral_NameNullInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ENUMERATION_LITERAL);
+
+			EAnnotation ocl = ClazzPackage.Literals.ENUMERATION_LITERAL.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("NameNull");
+
+			try {
+				enumerationLiteral_NameNullInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(enumerationLiteral_NameNullInvOCL);
+
+		if (!query.check(enumerationLiteral)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( ClazzPackage.Literals.ENUMERATION_LITERAL.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"NameNull")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NameNull", getObjectLabel(enumerationLiteral, context) }),
+						 new Object[] { enumerationLiteral }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the noSpecialCharacters constraint of '<em>Enumeration Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEnumerationLiteral_noSpecialCharacters(EnumerationLiteral enumerationLiteral, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (enumerationLiteral_noSpecialCharactersInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ENUMERATION_LITERAL);
+
+			EAnnotation ocl = ClazzPackage.Literals.ENUMERATION_LITERAL.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("noSpecialCharacters");
+
+			try {
+				enumerationLiteral_noSpecialCharactersInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(enumerationLiteral_noSpecialCharactersInvOCL);
+
+		if (!query.check(enumerationLiteral)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( ClazzPackage.Literals.ENUMERATION_LITERAL.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"noSpecialCharacters")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(enumerationLiteral, context) }),
+						 new Object[] { enumerationLiteral }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

@@ -1190,7 +1190,14 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "enumDynamicAreNotAvailable", "dynamic=false"
-		   });								
+		   });					
+		addAnnotation
+		  (enumerationLiteralEClass, 
+		   source, 
+		   new String[] {
+			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
+		   });						
 		addAnnotation
 		  (aspectEClass.getEOperations().get(0), 
 		   source, 
@@ -1248,7 +1255,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createInternalDocAnnotations() {
-		String source = "InternalDoc";																																																																					
+		String source = "InternalDoc";																																																																							
 		addAnnotation
 		  (classCommentEClass, 
 		   source, 
@@ -1296,7 +1303,13 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "warning", "enumDynamicAreNotAvailable",
 			 "constraints", "enumDynamicAreNotAvailable"
-		   });									
+		   });					
+		addAnnotation
+		  (enumerationLiteralEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "NameNull noSpecialCharacters"
+		   });							
 		addAnnotation
 		  (abstractClassEClass, 
 		   source, 
