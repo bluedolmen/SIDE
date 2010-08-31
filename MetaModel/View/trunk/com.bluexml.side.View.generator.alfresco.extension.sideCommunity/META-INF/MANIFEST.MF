@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Alfresco View Generator SideCommunity
+Bundle-SymbolicName: com.bluexml.side.View.generator.alfresco.extension.sideCommunity
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.view.generator.alfresco.extension.sidecommunity.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.core.runtime,
+ com.bluexml.side.Application,
+ com.bluexml.side.View
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
