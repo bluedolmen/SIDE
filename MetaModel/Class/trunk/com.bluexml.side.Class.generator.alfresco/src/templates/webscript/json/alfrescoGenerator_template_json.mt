@@ -54,7 +54,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		"<%eContainer().getQualifiedName()%>_<%name%>":"",
 	</#if>
 	<%}%>
-		<%for (getAllSourceAssociations()){%>
+	<%for (getAllSourceAssociations()){%>
 		<%if (isSource(current(1))){%>
 			<%if (firstEnd == current(2)){%>
 			"<%secondEnd.getFullName()%>":"<#if child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"] as key><%secondEnd.getFullName().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if>",
