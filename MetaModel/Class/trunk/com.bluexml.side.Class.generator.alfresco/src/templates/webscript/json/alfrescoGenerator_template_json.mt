@@ -43,9 +43,9 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		"<%eContainer().getQualifiedName()%>_<%name%>":"<#list child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"] as key>${key} </#list>",
 		<#else/>
 		<%if (typ.toString().equalsIgnoreCase("date")){%>
-		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?date!""}",
+		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}",
 		<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
-		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?datetime!""}",
+		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}",
 		<%}else{%>
 		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string!""}",
 		<%}%>

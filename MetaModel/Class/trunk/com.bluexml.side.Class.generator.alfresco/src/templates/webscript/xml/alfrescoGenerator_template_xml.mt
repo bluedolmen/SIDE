@@ -46,9 +46,9 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<<%getQualifiedName()%>><#list child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"] as key>${key} </#list></<%getQualifiedName()%>>
 		<#else/>
 		<%if (typ.toString().equalsIgnoreCase("date")){%>
-		<<%getQualifiedName()%>>${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?date!""}</<%getQualifiedName()%>>
+		<<%getQualifiedName()%>>${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?string("yyyy-MM-dd")!""}</<%getQualifiedName()%>>
 		<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
-		<<%getQualifiedName()%>>${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?datetime!""}</<%getQualifiedName()%>>
+		<<%getQualifiedName()%>>${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?string("yyyy-MM-dd'T'HH:mm:ss")!""}</<%getQualifiedName()%>>
 		<%}else{%>
 		<<%getQualifiedName()%>>${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?string!""}</<%getQualifiedName()%>>
 		<%}%>

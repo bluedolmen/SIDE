@@ -26,3 +26,5 @@ metamodel http://www.kerblue.org/class/1.0
 <%if (metainfo[key.equalsIgnoreCase("textarea-cols")].nSize()>0){%>
 <%metainfo[key.equalsIgnoreCase("textarea-cols")].nFirst().value%><%}else{%>
 0<%}%>
+<%script type="clazz.Attribute" name="isMandatory"%>
+<%metainfo[key.equalsIgnoreCase("required")].nSize()>0%>
