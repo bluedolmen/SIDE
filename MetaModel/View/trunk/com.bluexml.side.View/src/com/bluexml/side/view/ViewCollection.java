@@ -62,7 +62,7 @@ public interface ViewCollection extends com.bluexml.side.common.Package {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL description='method to get all instances of AbstractView' body='AbstractView.allInstances()'"
+	 *        annotation="http://www.bluexml.com/OCL description='method to get all instances of AbstractView' body='ViewCollection.allInstances().views ->union(ViewCollection.allInstances().composedViews)'"
 	 * @generated
 	 */
 	EList<AbstractView> getAllViews();

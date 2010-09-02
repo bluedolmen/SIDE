@@ -1801,7 +1801,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "description", "method to get all instances of AbstractView",
-			 "body", "AbstractView.allInstances()"
+			 "body", "ViewCollection.allInstances().views ->union(ViewCollection.allInstances().composedViews)"
 		   });				
 		addAnnotation
 		  (fieldElementEClass, 

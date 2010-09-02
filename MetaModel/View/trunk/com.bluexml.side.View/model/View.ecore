@@ -7,7 +7,7 @@
     <eOperations name="getAllViews" upperBound="-1" eType="#//AbstractView">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="description" value="method to get all instances of AbstractView"/>
-        <details key="body" value="AbstractView.allInstances()"/>
+        <details key="body" value="ViewCollection.allInstances().views ->union(ViewCollection.allInstances().composedViews)"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
