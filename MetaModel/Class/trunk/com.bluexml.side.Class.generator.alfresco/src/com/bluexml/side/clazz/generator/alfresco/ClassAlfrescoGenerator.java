@@ -177,8 +177,9 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public String getRunasforReport(EObject o) {
 		String result = getGenerationParameter(GENERATOR_PARAMETER_WEBSCRIPT_REPORT_RUNAS);
 		if (result == null || result.equals("")) {
-			result = "admin";
-			System.out.println(GENERATOR_PARAMETER_WEBSCRIPT_REPORT_RUNAS+", default value used :"+result);
+			
+		} else {
+			monitor.addWarningTextAndLog(Activator.Messages.getString("ClassAlfrescoGenerator_11"), "");
 		}
 		return result;
 	}
