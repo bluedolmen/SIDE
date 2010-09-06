@@ -32,7 +32,7 @@ webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/
 	<guid>${child.id}</guid>
 	<pubDate>${child.properties["cm:modified"]?date}</pubDate>
 	<description>
-		<%for (viewOf.getAllAttributes()){%>
+		<%for (getAllSortedAttibutes()){%>
 		<#if (child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?exists)>
 			<#if child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?is_sequence>
 		<%getLabel()%>:<#list child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"] as key>${key},</#list>;

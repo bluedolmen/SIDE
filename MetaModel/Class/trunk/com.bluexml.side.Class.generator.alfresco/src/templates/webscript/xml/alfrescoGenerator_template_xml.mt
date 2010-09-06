@@ -57,4 +57,13 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<<%getQualifiedName()%>/>
 	</#if>
 	<%}%>
+	<%for (getAllSourceAssociationEnds()){%>
+		<<%eContainer().getAssociationQName(current("AssociationEnd"))%>>
+		<#if child.<%eContainer().getAssociationVariableName()%>["<%eContainer().getPrefixedURIAssociationQName(current("AssociationEnd"))%>"]?exists>
+		<#list child.<%eContainer().getAssociationVariableName()%>["<%eContainer().getPrefixedURIAssociationQName(current("AssociationEnd"))%>"] as item>
+			<noderef>${item.nodeRef}</noderef>
+		</#list>
+		</#if>
+		</<%eContainer().getAssociationQName(current("AssociationEnd"))%>>
+	<%}%>
 </item>

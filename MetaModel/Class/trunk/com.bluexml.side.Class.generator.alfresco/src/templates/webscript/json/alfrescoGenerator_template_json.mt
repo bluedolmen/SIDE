@@ -54,7 +54,9 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		"<%eContainer().getQualifiedName()%>_<%name%>":"",
 	</#if>
 	<%}%>
-	<%for (getAllSourceAssociations()){%>
+	<%for (getAllSourceAssociationEnds()){%>
+		"<%eContainer().getAssociationQName(current("AssociationEnd"))%>":<#if child.<%eContainer().getAssociationVariableName()%>["<%eContainer().getPrefixedURIAssociationQName(current("AssociationEnd"))%>"]?exists>[<#list child.<%eContainer().getAssociationVariableName()%>["<%eContainer().getPrefixedAssociationQName(current("AssociationEnd"))%>"] as item>"${item.nodeRef}"<#if item_has_next>,</#if></#list>]</#if><%if (i() < current("Clazz").getAllSourceAssociationEnds().nSize() -1){%>, <%}%>
+	<%--
 		<%if (isSource(current(1))){%>
 			<%if (firstEnd == current(2)){%>
 			"<%secondEnd.getFullName()%>":"<#if child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"] as key><%secondEnd.getFullName().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if>",
@@ -68,6 +70,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			"<%firstEnd.getFullName()%>":"<#list <%firstEnd.getQualifiedName()%>_list as object><#if object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"]?exists><#list object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"] as other><#if other.id = child.id><%firstEnd.getFullName().replaceAll("child","object").replaceAll("\n","" )%> <#break></#if></#list></#if></#list>",
 			<%}%>
 		<%}%>
+	--%>
 	<%}%>
 	"alfresco_actions":"<a href=\"javascript:void(0)\" onclick=\"AlfNodeInfoMgr.toggle('workspace://SpacesStore/${child.id}',this);\"><img src='${url.context}/images/icons/popup.gif' border=0/></a>"	
 }<#if child_has_next>,</#if>

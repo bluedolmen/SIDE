@@ -18,34 +18,15 @@ Foundation, Inc., 59 Temple Place, Boston, MA 02111.
 metamodel http://www.kerblue.org/view/1.0
 
 import com.bluexml.side.view.generator.alfresco.templates.services.common
-
+import templates.servicesTemplates.Association
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (generateWebscript){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%name%>/json/<%name%>.ftl<%}%>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%name%>/json/<%name%>.ftl<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 {
-	<%for (getFields()[mapTo.eClass().name.equalsIgnoreCase("Attribute")]){%>
-	<% mapTo.getRootContainer().name.put("modelId") %>
-	<%if (get("modelId")=="cm") {%><% mapTo.name.put("qName") %><%}else{%><% mapTo.getQualifiedName().put("qName") %><%}%>
-	<#if (child.properties["<%get("modelId")%>:<%get("qName")%>"]?exists)>
-		<#if child.properties["<%get("modelId")%>:<%get("qName")%>"]?is_sequence>
-		"_<%name%>":"<#list child.properties["<%get("modelId")%>:<%get("qName")%>"] as key>${key} </#list>",
-		<#else/>
-		<%if (mapTo.typ.toString().equalsIgnoreCase("date")){%>
-		"_<%name%>":"${child.properties["<%get("modelId")%>:<%get("qName")%>"]?date!""}",
-		<%}else if (mapTo.typ.toString().equalsIgnoreCase("datetime")){%>
-		"_<%name%>":"${child.properties["<%get("modelId")%>:<%get("qName")%>"]?datetime!""}",
-		<%}else{%>
-		"_<%name%>":"${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string!""}",
-		<%}%>
-		</#if>
-	<#else/>
-		"_<%name%>":"",
-	</#if>
-	<%}%>
 	"id":"${child.id}",
 	"url":"${child.url}",
 	"downloadUrl":"${child.downloadUrl}",
@@ -54,5 +35,27 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	"icon32":"${child.icon32}",
 	"nodeRef":"${child.nodeRef}",
 	"parent":"${child.parent.nodeRef}",
-	"size":"${child.size}"
+<%for (getAllSortedAttibutes()){%>
+	<%generateAttributeStatement("child")%>,
+<%}%>
+<%for (getFields()[path != null && path.nSize() == 1]){%>
+	<%for (path.filter("clazz.Association")){%>
+		<%getAssociationEnd(current("AbstractViewOf").viewOf.filter("clazz.Clazz")).put("assoEnd")%>
+	"<%getAssociationQName(get("assoEnd"))%>":
+	<#if child.<%getAssociationVariableName()%>["<%getPrefixedURIAssociationQName(get("assoEnd"))%>"]?exists>
+	[	<#list child.<%getAssociationVariableName()%>["<%getPrefixedURIAssociationQName(get("assoEnd"))%>"] as item>
+	{"nodeRef" : "${item.nodeRef}",
+			<%current("Field").mapTo.filter("clazz.Attribute").generateAttributeStatement("item")%>
+	}<#if item_has_next>,</#if>
+		</#list>
+	]
+	<#else/>
+	""
+	</#if>
+	<%}%>
+	,		
+<%}%>
+	
+	"alfresco_actions":"<a href=\"javascript:void(0)\" onclick=\"AlfNodeInfoMgr.toggle('workspace://SpacesStore/${child.id}',this);\"><img src='${url.context}/images/icons/popup.gif' border=0/></a>"	
 }<#if child_has_next>,</#if>
+

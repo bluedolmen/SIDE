@@ -513,5 +513,9 @@ public class AssociationServices {
 	public static String getPrefixedAssociationQName(Association a, AssociationEnd source) throws Exception {
 		return ClassServices.getPrefixe(a) + ":" + getAssociationQName(a, source);
 	}
+	public static String getPrefixedURIAssociationQName(Association a, AssociationEnd source) throws Exception {
+		return "{"+ClassServices.getNamespaceURI(a) + "}" + getAssociationQName(a, source);
+	}
+	
 
 }

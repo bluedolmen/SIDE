@@ -24,7 +24,7 @@ import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (generateWebscript){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%name%>/xml/<%name%>.ftl<%}%>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%name%>/xml/<%name%>.ftl<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <item>
 	<id>${child.id}</id>
@@ -38,23 +38,23 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<size>${child.size}</size>
 	<created>${child.properties["cm:created"]?datetime}</created>
 	<modified>${child.properties["cm:modified"]?datetime}</modified>
-	<%for (getFields()[mapTo.eClass().name.equalsIgnoreCase("Attribute")]){%>
-	<% mapTo.getRootContainer().name.put("modelId") %>
-	<%if (get("modelId")=="cm") {%><% mapTo.name.put("qName") %><%}else{%><% mapTo.getQualifiedName().put("qName") %><%}%>
+	<%for (getAllSortedAttibutes()){%>
+	<% getRootContainer().name.put("modelId") %>
+	<%if (get("modelId")=="cm") {%><% mapTo.name.put("qName") %><%}else{%><% getQualifiedName().put("qName") %><%}%>
 	<#if (child.properties["<%get("modelId")%>:<%get("qName")%>"]?exists)>
 		<#if child.properties["<%get("modelId")%>:<%get("qName")%>"]?is_sequence>
-		<_<%name%>><#list child.properties["<%get("modelId")%>:<%get("qName")%>"] as key>${key} </#list></_<%name%>>
+		<<%eContainer().getQualifiedName()%>_<%name%>><#list child.properties["<%get("modelId")%>:<%get("qName")%>"] as key>${key} </#list></<%eContainer().getQualifiedName()%>_<%name%>>
 		<#else/>
-		<%if (mapTo.typ.toString().equalsIgnoreCase("date")){%>
-		<_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?date!""}</_<%name%>>
-		<%}else if (mapTo.typ.toString().equalsIgnoreCase("datetime")){%>
-		<_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?datetime!""}</_<%name%>>
+		<%if (typ.toString().equalsIgnoreCase("date")){%>
+		<<%eContainer().getQualifiedName()%>_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%eContainer().getQualifiedName()%>_<%name%>>
+		<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
+		<<%eContainer().getQualifiedName()%>_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%eContainer().getQualifiedName()%>_<%name%>>
 		<%}else{%>
-		<_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string!""}</_<%name%>>
+		<<%eContainer().getQualifiedName()%>_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string!""}</<%eContainer().getQualifiedName()%>_<%name%>>
 		<%}%>
 		</#if>
 	<#else/>
-	<_<%name%>/>
+	<<%eContainer().getQualifiedName()%>_<%name%>/>
 	</#if>
 	<%}%>
 </item>
