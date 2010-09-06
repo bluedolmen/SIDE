@@ -47,6 +47,10 @@ minutes	:<br/>
   </description>
   <url>/com/bluexml/side/contentType/<%getFolder()%>/<%getQualifiedName()%>?nodeRef={nodeRef}&amp;years={years}&amp;months={months}&amp;days={days}&amp;hours={hours}&amp;minutes={minutes}</url>
   <format default="json">any</format>
+  <%if (getRunasforReport() != null && getRunasforReport() != ""){%>
   <authentication runas="<%getRunasforReport()%>">guest</authentication>
+  <%}else{%>
+  <authentication>user</authentication>
+  <%}%>
   <family>SIDE</family>
 </webscript>
