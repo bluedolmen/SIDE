@@ -47,7 +47,7 @@
                         <div id="label">Path to store documents in Alfresco: </div>
                         <div id="field">
                                 /app:company_home/       
-                                <input name="alfrescoRepository" type="text" value="app:guest_home/"/>
+                                <input name="alfrescoRepository" type="text" value="app:guest_home"/>
                         </div>                        
 	            </div>
 	            <div id="property">
