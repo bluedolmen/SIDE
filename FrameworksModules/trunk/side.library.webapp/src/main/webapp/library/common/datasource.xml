@@ -1,0 +1,761 @@
+<records>
+	<name>document_common</name>
+	<viewOf>library:com_bluexml_side_library_Document</viewOf>
+	<totalCount>26</totalCount>
+	<items>
+<item>
+	<id>2da1fc48-0b6e-49fe-897c-1a6a710eb0c0</id>
+	<url>/d/d/workspace/SpacesStore/2da1fc48-0b6e-49fe-897c-1a6a710eb0c0/%c2%a0e-Citiz-RH.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/2da1fc48-0b6e-49fe-897c-1a6a710eb0c0/%c2%a0e-Citiz-RH.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/2da1fc48-0b6e-49fe-897c-1a6a710eb0c0</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>2 486 052</size>
+	<created>19 mai 2010 15:17:09</created>
+	<modified>1 juin 2010 16:00:08</modified>
+	
+	<_typeOfDocument/>
+	
+		<_latitude>47,22</_latitude>
+	
+		<_longitude>-1,56</_longitude>
+	
+		<_reference/>
+	
+	<_type/>
+	
+		<_description/>
+	
+		<_name> e-Citiz-RH.pdf</_name>
+	
+		<_title> e-Citiz-RH.pdf</_title>
+</item>
+<item>
+	<id>166aeff1-d540-4978-a65d-6b4e842c3ac3</id>
+	<url>/d/d/workspace/SpacesStore/166aeff1-d540-4978-a65d-6b4e842c3ac3/mon%20fichier.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/166aeff1-d540-4978-a65d-6b4e842c3ac3/mon%20fichier.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/166aeff1-d540-4978-a65d-6b4e842c3ac3</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>124 778</size>
+	<created>18 mai 2010 14:58:52</created>
+	<modified>1 juin 2010 17:30:27</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>48,39</_latitude>
+	
+		<_longitude>-4,49</_longitude>
+	
+		<_reference>A123</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>mon fichier.pdf</_name>
+	
+		<_title>id_rsa_bchevallereau.pub2</_title>
+</item>
+<item>
+	<id>8c9104ed-7f01-48a3-bd21-b59ced3bd7fd</id>
+	<url>/d/d/workspace/SpacesStore/8c9104ed-7f01-48a3-bd21-b59ced3bd7fd/Frais%20Toulouse.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/8c9104ed-7f01-48a3-bd21-b59ced3bd7fd/Frais%20Toulouse.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/8c9104ed-7f01-48a3-bd21-b59ced3bd7fd</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>79 414</size>
+	<created>19 mai 2010 15:16:53</created>
+	<modified>1 juin 2010 17:30:56</modified>
+	
+	<_typeOfDocument/>
+	
+		<_latitude>47,65</_latitude>
+	
+		<_longitude>-2,76</_longitude>
+	
+		<_reference/>
+	
+	<_type/>
+	
+		<_description/>
+	
+		<_name>Frais Toulouse.pdf</_name>
+	
+		<_title>Frais Toulouse.pdf</_title>
+</item>
+<item>
+	<id>22809d20-5697-4676-a173-f5c466a4bf31</id>
+	<url>/d/d/workspace/SpacesStore/22809d20-5697-4676-a173-f5c466a4bf31/frais.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/22809d20-5697-4676-a173-f5c466a4bf31/frais.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/22809d20-5697-4676-a173-f5c466a4bf31</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>70 351</size>
+	<created>19 mai 2010 15:16:53</created>
+	<modified>1 juin 2010 17:35:42</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>51,48</_latitude>
+	
+		<_longitude>-3,18</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>frais.pdf</_name>
+	
+		<_title>frais.pdf</_title>
+</item>
+<item>
+	<id>bc99ef03-5f52-48c8-b3f5-d3e01f2bb473</id>
+	<url>/d/d/workspace/SpacesStore/bc99ef03-5f52-48c8-b3f5-d3e01f2bb473/disque_dur.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/bc99ef03-5f52-48c8-b3f5-d3e01f2bb473/disque_dur.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/bc99ef03-5f52-48c8-b3f5-d3e01f2bb473</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>96 149</size>
+	<created>19 mai 2010 15:16:53</created>
+	<modified>1 juin 2010 17:36:37</modified>
+	
+		<_typeOfDocument>Video</_typeOfDocument>
+	
+		<_latitude>51,51</_latitude>
+	
+		<_longitude>7,46</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Video</_type>
+	
+		<_description/>
+	
+		<_name>disque_dur.pdf</_name>
+	
+		<_title>disque_dur.pdf</_title>
+</item>
+<item>
+	<id>14a32126-3500-4c0f-ab0d-d3f3968fae86</id>
+	<url>/d/d/workspace/SpacesStore/14a32126-3500-4c0f-ab0d-d3f3968fae86/anglais.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/14a32126-3500-4c0f-ab0d-d3f3968fae86/anglais.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/14a32126-3500-4c0f-ab0d-d3f3968fae86</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>490 833</size>
+	<created>19 mai 2010 15:17:00</created>
+	<modified>1 juin 2010 17:37:10</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>53,07</_latitude>
+	
+		<_longitude>8,81</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>anglais.pdf</_name>
+	
+		<_title>anglais.pdf</_title>
+</item>
+<item>
+	<id>a6a1d6bc-aac5-4850-ae8f-74f8555d80b2</id>
+	<url>/d/d/workspace/SpacesStore/a6a1d6bc-aac5-4850-ae8f-74f8555d80b2/ecitiz_moteur-2.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/a6a1d6bc-aac5-4850-ae8f-74f8555d80b2/ecitiz_moteur-2.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/a6a1d6bc-aac5-4850-ae8f-74f8555d80b2</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>280 788</size>
+	<created>19 mai 2010 15:17:09</created>
+	<modified>1 juin 2010 17:37:54</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>49,82</_latitude>
+	
+		<_longitude>6,13</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>ecitiz_moteur-2.pdf</_name>
+	
+		<_title>ecitiz_moteur-2.pdf</_title>
+</item>
+<item>
+	<id>cf208b7a-664c-4e15-86b7-e1d6a21c7052</id>
+	<url>/d/d/workspace/SpacesStore/cf208b7a-664c-4e15-86b7-e1d6a21c7052/ecitiz_studio-2.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/cf208b7a-664c-4e15-86b7-e1d6a21c7052/ecitiz_studio-2.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/cf208b7a-664c-4e15-86b7-e1d6a21c7052</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>323 641</size>
+	<created>19 mai 2010 15:17:09</created>
+	<modified>1 juin 2010 17:40:18</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>48,21</_latitude>
+	
+		<_longitude>16,37</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>ecitiz_studio-2.pdf</_name>
+	
+		<_title>ecitiz_studio-2.pdf</_title>
+</item>
+<item>
+	<id>50cfa8ff-25f3-4b5b-a0ef-b3d43d23eba7</id>
+	<url>/d/d/workspace/SpacesStore/50cfa8ff-25f3-4b5b-a0ef-b3d43d23eba7/ecitiz_accecite-2.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/50cfa8ff-25f3-4b5b-a0ef-b3d43d23eba7/ecitiz_accecite-2.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/50cfa8ff-25f3-4b5b-a0ef-b3d43d23eba7</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>194 798</size>
+	<created>19 mai 2010 15:17:09</created>
+	<modified>1 juin 2010 17:40:59</modified>
+	
+		<_typeOfDocument>Video</_typeOfDocument>
+	
+		<_latitude>49,19</_latitude>
+	
+		<_longitude>16,61</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Video</_type>
+	
+		<_description/>
+	
+		<_name>ecitiz_accecite-2.pdf</_name>
+	
+		<_title>ecitiz_accecite-2.pdf</_title>
+</item>
+<item>
+	<id>1bc148bb-3962-4db5-afd0-7b74db6aed22</id>
+	<url>/d/d/workspace/SpacesStore/1bc148bb-3962-4db5-afd0-7b74db6aed22/CIFRE%20-%20Rapport%20d%27activite.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/1bc148bb-3962-4db5-afd0-7b74db6aed22/CIFRE%20-%20Rapport%20d%27activite.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/1bc148bb-3962-4db5-afd0-7b74db6aed22</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>1 448 749</size>
+	<created>19 mai 2010 15:17:38</created>
+	<modified>1 juin 2010 17:41:33</modified>
+	
+		<_typeOfDocument>Picture</_typeOfDocument>
+	
+		<_latitude>47,07</_latitude>
+	
+		<_longitude>15,44</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Picture</_type>
+	
+		<_description/>
+	
+		<_name>CIFRE - Rapport d'activite.pdf</_name>
+	
+		<_title>CIFRE - Rapport d'activite?.pdf</_title>
+</item>
+<item>
+	<id>abb5ea11-7ad2-416d-b607-9d8e21fea753</id>
+	<url>/d/d/workspace/SpacesStore/abb5ea11-7ad2-416d-b607-9d8e21fea753/Certificat%20de%20scolarite.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/abb5ea11-7ad2-416d-b607-9d8e21fea753/Certificat%20de%20scolarite.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/abb5ea11-7ad2-416d-b607-9d8e21fea753</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>188 447</size>
+	<created>19 mai 2010 15:17:39</created>
+	<modified>1 juin 2010 17:42:15</modified>
+	
+		<_typeOfDocument>Video</_typeOfDocument>
+	
+		<_latitude>48,14</_latitude>
+	
+		<_longitude>11,58</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Video</_type>
+	
+		<_description/>
+	
+		<_name>Certificat de scolarite.pdf</_name>
+	
+		<_title>Certificat de scolarite?.pdf</_title>
+</item>
+<item>
+	<id>a743a2a7-6b61-4924-a97e-7bb3ba71b05d</id>
+	<url>/d/d/workspace/SpacesStore/a743a2a7-6b61-4924-a97e-7bb3ba71b05d/Acceptation_CIFRE.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/a743a2a7-6b61-4924-a97e-7bb3ba71b05d/Acceptation_CIFRE.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/a743a2a7-6b61-4924-a97e-7bb3ba71b05d</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>399 688</size>
+	<created>19 mai 2010 15:17:41</created>
+	<modified>1 juin 2010 17:43:33</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>51,34</_latitude>
+	
+		<_longitude>12,37</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>Acceptation_CIFRE.pdf</_name>
+	
+		<_title>Acceptation_CIFRE.pdf</_title>
+</item>
+<item>
+	<id>e1db1586-0c00-4da1-9263-5abec8413e92</id>
+	<url>/d/d/workspace/SpacesStore/e1db1586-0c00-4da1-9263-5abec8413e92/inscription.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/e1db1586-0c00-4da1-9263-5abec8413e92/inscription.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/e1db1586-0c00-4da1-9263-5abec8413e92</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>72 550</size>
+	<created>19 mai 2010 15:17:44</created>
+	<modified>1 juin 2010 17:44:05</modified>
+	
+		<_typeOfDocument>Video</_typeOfDocument>
+	
+		<_latitude>45,77</_latitude>
+	
+		<_longitude>4,83</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Video</_type>
+	
+		<_description/>
+	
+		<_name>inscription.pdf</_name>
+	
+		<_title>inscription.pdf</_title>
+</item>
+<item>
+	<id>cf1fb722-ba8d-49b8-b5f0-918cc8aa3cad</id>
+	<url>/d/d/workspace/SpacesStore/cf1fb722-ba8d-49b8-b5f0-918cc8aa3cad/criec_2008_benjamin_chevallereau.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/cf1fb722-ba8d-49b8-b5f0-918cc8aa3cad/criec_2008_benjamin_chevallereau.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/cf1fb722-ba8d-49b8-b5f0-918cc8aa3cad</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>1 757 328</size>
+	<created>19 mai 2010 15:17:51</created>
+	<modified>1 juin 2010 17:44:39</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>45,43</_latitude>
+	
+		<_longitude>12,34</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>criec_2008_benjamin_chevallereau.pdf</_name>
+	
+		<_title>criec_2008_benjamin_chevallereau.pdf</_title>
+</item>
+<item>
+	<id>3579dde2-2cd6-499c-b421-4a520e07ab5d</id>
+	<url>/d/d/workspace/SpacesStore/3579dde2-2cd6-499c-b421-4a520e07ab5d/criec_2008_benjamin_chevallereau_resume.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/3579dde2-2cd6-499c-b421-4a520e07ab5d/criec_2008_benjamin_chevallereau_resume.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/3579dde2-2cd6-499c-b421-4a520e07ab5d</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>698 053</size>
+	<created>19 mai 2010 15:17:51</created>
+	<modified>1 juin 2010 17:46:36</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>51,25</_latitude>
+	
+		<_longitude>22,57</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>criec_2008_benjamin_chevallereau_resume.pdf</_name>
+	
+		<_title>criec_2008_benjamin_chevallereau_resume.pdf</_title>
+</item>
+<item>
+	<id>d560d0a6-20eb-4c4c-9e98-b114e5575aa8</id>
+	<url>/d/d/workspace/SpacesStore/d560d0a6-20eb-4c4c-9e98-b114e5575aa8/benjamin_chevallereau.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/d560d0a6-20eb-4c4c-9e98-b114e5575aa8/benjamin_chevallereau.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/d560d0a6-20eb-4c4c-9e98-b114e5575aa8</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>1 375 471</size>
+	<created>19 mai 2010 15:17:56</created>
+	<modified>1 juin 2010 17:47:07</modified>
+	
+		<_typeOfDocument>Picture</_typeOfDocument>
+	
+		<_latitude>54,35</_latitude>
+	
+		<_longitude>18,65</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Picture</_type>
+	
+		<_description/>
+	
+		<_name>benjamin_chevallereau.pdf</_name>
+	
+		<_title>benjamin_chevallereau.pdf</_title>
+</item>
+<item>
+	<id>11929735-ddc1-42dd-8a1b-f6b7412a7fc9</id>
+	<url>/d/d/workspace/SpacesStore/11929735-ddc1-42dd-8a1b-f6b7412a7fc9/Reservation%20TGV.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/11929735-ddc1-42dd-8a1b-f6b7412a7fc9/Reservation%20TGV.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/11929735-ddc1-42dd-8a1b-f6b7412a7fc9</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>339 541</size>
+	<created>19 mai 2010 15:18:00</created>
+	<modified>1 juin 2010 17:47:50</modified>
+	
+		<_typeOfDocument>Picture</_typeOfDocument>
+	
+		<_latitude>48,72</_latitude>
+	
+		<_longitude>21,26</_longitude>
+	
+		<_reference>1</_reference>
+	
+		<_type>Picture</_type>
+	
+		<_description/>
+	
+		<_name>Reservation TGV.pdf</_name>
+	
+		<_title>Re?servation TGV.pdf</_title>
+</item>
+<item>
+	<id>591acdd4-537a-47ac-9ab3-8bc130cdf03a</id>
+	<url>/d/d/workspace/SpacesStore/591acdd4-537a-47ac-9ab3-8bc130cdf03a/CCF.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/591acdd4-537a-47ac-9ab3-8bc130cdf03a/CCF.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/591acdd4-537a-47ac-9ab3-8bc130cdf03a</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>596 248</size>
+	<created>19 mai 2010 15:13:12</created>
+	<modified>1 juin 2010 17:48:22</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>48,1</_latitude>
+	
+		<_longitude>20,8</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>CCF.pdf</_name>
+	
+		<_title>CCF19052010_00001.pdf</_title>
+</item>
+<item>
+	<id>82fa30f4-1c4f-40b2-a27a-18f77d425508</id>
+	<url>/d/d/workspace/SpacesStore/82fa30f4-1c4f-40b2-a27a-18f77d425508/CCF2.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/82fa30f4-1c4f-40b2-a27a-18f77d425508/CCF2.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/82fa30f4-1c4f-40b2-a27a-18f77d425508</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>527 310</size>
+	<created>19 mai 2010 15:13:13</created>
+	<modified>1 juin 2010 17:58:42</modified>
+	
+		<_typeOfDocument>Video</_typeOfDocument>
+	
+		<_latitude>43,3</_latitude>
+	
+		<_longitude>5,38</_longitude>
+	
+		<_reference>123</_reference>
+	
+		<_type>Video</_type>
+	
+		<_description/>
+	
+		<_name>CCF2.pdf</_name>
+	
+		<_title>CCF19052010_00000.pdf</_title>
+</item>
+<item>
+	<id>738ae87d-2a4c-4782-9eca-0bda792ac312</id>
+	<url>/d/d/workspace/SpacesStore/738ae87d-2a4c-4782-9eca-0bda792ac312/Dde_Rmbt_Frais_17_05_2010.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/738ae87d-2a4c-4782-9eca-0bda792ac312/Dde_Rmbt_Frais_17_05_2010.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/738ae87d-2a4c-4782-9eca-0bda792ac312</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>110 158</size>
+	<created>19 mai 2010 15:16:46</created>
+	<modified>1 juin 2010 17:58:58</modified>
+	
+		<_typeOfDocument>Video</_typeOfDocument>
+	
+		<_latitude>41,39</_latitude>
+	
+		<_longitude>2,17</_longitude>
+	
+		<_reference>1234</_reference>
+	
+		<_type>Video</_type>
+	
+		<_description/>
+	
+		<_name>Dde_Rmbt_Frais_17_05_2010.pdf</_name>
+	
+		<_title>Dde_Rmbt_Frais_17_05_2010.pdf</_title>
+</item>
+<item>
+	<id>bf58f4cc-d9c0-4547-9d9b-ed9c9044955c</id>
+	<url>/d/d/workspace/SpacesStore/bf58f4cc-d9c0-4547-9d9b-ed9c9044955c/nbnvbnvbnvn</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/bf58f4cc-d9c0-4547-9d9b-ed9c9044955c/nbnvbnvbnvn</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/_default.gif</icon16>
+	<icon32>/images/filetypes32/_default.gif</icon32>
+	<nodeRef>workspace://SpacesStore/bf58f4cc-d9c0-4547-9d9b-ed9c9044955c</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>56 179</size>
+	<created>19 mai 2010 15:16:46</created>
+	<modified>1 juin 2010 17:59:29</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>43,55</_latitude>
+	
+		<_longitude>-5,66</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>nbnvbnvbnvn</_name>
+	
+		<_title>Amazon.fr - Commande 736-6329352-6688319.pdf</_title>
+</item>
+<item>
+	<id>820a45c8-16c2-41e7-976e-6c04e6f89261</id>
+	<url>/d/d/workspace/SpacesStore/820a45c8-16c2-41e7-976e-6c04e6f89261/coucou</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/820a45c8-16c2-41e7-976e-6c04e6f89261/coucou</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/_default.gif</icon16>
+	<icon32>/images/filetypes32/_default.gif</icon32>
+	<nodeRef>workspace://SpacesStore/820a45c8-16c2-41e7-976e-6c04e6f89261</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>2 465 823</size>
+	<created>19 mai 2010 15:17:09</created>
+	<modified>1 juin 2010 17:59:43</modified>
+	
+		<_typeOfDocument>Video</_typeOfDocument>
+	
+		<_latitude>42,23</_latitude>
+	
+		<_longitude>-8,71</_longitude>
+	
+		<_reference>000</_reference>
+	
+		<_type>Video</_type>
+	
+		<_description/>
+	
+		<_name>coucou</_name>
+	
+		<_title>e-Citiz-Gestion.pdf</_title>
+</item>
+<item>
+	<id>5fc2bfd8-75bb-4105-83fa-7ff7c84fbd4e</id>
+	<url>/d/d/workspace/SpacesStore/5fc2bfd8-75bb-4105-83fa-7ff7c84fbd4e/attestation%20LMDE%202010.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/5fc2bfd8-75bb-4105-83fa-7ff7c84fbd4e/attestation%20LMDE%202010.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/5fc2bfd8-75bb-4105-83fa-7ff7c84fbd4e</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>412 244</size>
+	<created>19 mai 2010 15:13:12</created>
+	<modified>1 juin 2010 18:00:26</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>44,84</_latitude>
+	
+		<_longitude>-0,58</_longitude>
+	
+		<_reference>BCEF</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>attestation LMDE 2010.pdf</_name>
+	
+		<_title>attestation LMDE 2010.pdf</_title>
+</item>
+<item>
+	<id>2c75b030-aa87-4634-9e58-4d99480a246b</id>
+	<url>/d/d/workspace/SpacesStore/2c75b030-aa87-4634-9e58-4d99480a246b/CCI00000.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/2c75b030-aa87-4634-9e58-4d99480a246b/CCI00000.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/2c75b030-aa87-4634-9e58-4d99480a246b</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>568 274</size>
+	<created>19 mai 2010 15:13:12</created>
+	<modified>1 juin 2010 18:00:38</modified>
+	
+		<_typeOfDocument>Video</_typeOfDocument>
+	
+		<_latitude>43,48</_latitude>
+	
+		<_longitude>-1,56</_longitude>
+	
+		<_reference>DBE</_reference>
+	
+		<_type>Video</_type>
+	
+		<_description/>
+	
+		<_name>CCI00000.pdf</_name>
+	
+		<_title>CCI00000.pdf</_title>
+</item>
+<item>
+	<id>3af73983-a2fd-47b7-bea8-b057059200f4</id>
+	<url>/d/d/workspace/SpacesStore/3af73983-a2fd-47b7-bea8-b057059200f4/Reservation%20Hotel.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/3af73983-a2fd-47b7-bea8-b057059200f4/Reservation%20Hotel.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/3af73983-a2fd-47b7-bea8-b057059200f4</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>133 089</size>
+	<created>19 mai 2010 15:18:00</created>
+	<modified>1 juin 2010 18:01:00</modified>
+	
+		<_typeOfDocument>Video</_typeOfDocument>
+	
+		<_latitude>41,92</_latitude>
+	
+		<_longitude>8,74</_longitude>
+	
+		<_reference>A122</_reference>
+	
+		<_type>Video</_type>
+	
+		<_description/>
+	
+		<_name>Reservation Hotel.pdf</_name>
+	
+		<_title>Re?servation Hotel.pdf</_title>
+</item>
+<item>
+	<id>f8941ef4-14cd-4da6-8cd3-bef1d7aa74d0</id>
+	<url>/d/d/workspace/SpacesStore/f8941ef4-14cd-4da6-8cd3-bef1d7aa74d0/mutuelle.pdf</url>
+	<downloadUrl>/d/a/workspace/SpacesStore/f8941ef4-14cd-4da6-8cd3-bef1d7aa74d0/mutuelle.pdf</downloadUrl>
+	<displayPath>/Company Home/Guest Home/dépot</displayPath>
+	<icon16>/images/filetypes/pdf.gif</icon16>
+	<icon32>/images/filetypes32/pdf.gif</icon32>
+	<nodeRef>workspace://SpacesStore/f8941ef4-14cd-4da6-8cd3-bef1d7aa74d0</nodeRef>
+	<parent>workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d</parent>
+	<size>1 123 094</size>
+	<created>19 mai 2010 15:16:17</created>
+	<modified>1 juin 2010 18:01:22</modified>
+	
+		<_typeOfDocument>Textual document</_typeOfDocument>
+	
+		<_latitude>41,9</_latitude>
+	
+		<_longitude>12,48</_longitude>
+	
+		<_reference>ghs</_reference>
+	
+		<_type>Textual document</_type>
+	
+		<_description/>
+	
+		<_name>mutuelle.pdf</_name>
+	
+		<_title>mutuelle.pdf</_title>
+</item>
+	</items>
+</records>

@@ -1,0 +1,56 @@
+[{
+    text:'View',
+    expanded: true,
+    children:[{
+        text:'Simple grid',
+        id:'json-simple-grid',
+        leaf:true
+    },{
+        text:'Simple grid with dojo',
+        id:'dojo/simple-grid',
+        leaf:true
+    },{
+        text:'Editable grid - version 1',
+        id:'json-editable-grid-1',
+        leaf:true
+    },{
+        text:'Editable grid - version 2',
+        id:'json-editable-grid-2',
+        leaf:true
+    },{
+        text:'Paging',
+        id:'json-paging',
+        leaf:true
+    },{
+        text:'Grouping',
+        id:'json-grouping',
+        leaf:true
+    }]
+},{
+    text:'Form',
+    children:[{
+        text:'Upload form',
+        id:'upload-form',
+        url:'/xforms/xforms?type=Document&formType=form&saveTo=/app:company_home/app:guest_home&nextPageSubmit=/library/library/forms/success.jsp&showCancel=false&showDelete=false',
+        leaf:true
+    }]
+},{
+    text:'Other sample',
+    children:[{
+        text:'Tree browser',
+        id:'tree-grid',
+        leaf:true
+    },{
+        text:'Tree browser with preview',
+        id:'tree-grid-preview',
+        leaf:true
+    },{
+        text:'Create new HTML content',
+        id:'upload',
+        leaf:true
+    },{
+        text:'Google Map',
+        id:'gmap',
+        leaf:true
+    }]
+}]

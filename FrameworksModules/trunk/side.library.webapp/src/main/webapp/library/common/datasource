@@ -1,0 +1,710 @@
+
+{
+	"name":"document_common",
+	"viewOf":"library:com_bluexml_side_library_Document",
+	"totalCount":26,
+	"records":[
+{
+	
+			"_typeOfDocument":"",
+	
+		"_latitude":"47,22",
+	
+		"_longitude":"-1,56",
+	
+		"_reference":"",
+	
+		"_type":"",
+	
+		"_description":"",
+	
+		"_name":" e-Citiz-RH.pdf",
+	
+		"_title":" e-Citiz-RH.pdf",
+	"id":"2da1fc48-0b6e-49fe-897c-1a6a710eb0c0",
+	"url":"/d/d/workspace/SpacesStore/2da1fc48-0b6e-49fe-897c-1a6a710eb0c0/%c2%a0e-Citiz-RH.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/2da1fc48-0b6e-49fe-897c-1a6a710eb0c0/%c2%a0e-Citiz-RH.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/2da1fc48-0b6e-49fe-897c-1a6a710eb0c0",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"2 486 052"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"48,39",
+	
+		"_longitude":"-4,49",
+	
+		"_reference":"A123",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"mon fichier.pdf",
+	
+		"_title":"id_rsa_bchevallereau.pub2",
+	"id":"166aeff1-d540-4978-a65d-6b4e842c3ac3",
+	"url":"/d/d/workspace/SpacesStore/166aeff1-d540-4978-a65d-6b4e842c3ac3/mon%20fichier.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/166aeff1-d540-4978-a65d-6b4e842c3ac3/mon%20fichier.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/166aeff1-d540-4978-a65d-6b4e842c3ac3",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"124 778"
+},
+{
+	
+			"_typeOfDocument":"",
+	
+		"_latitude":"47,65",
+	
+		"_longitude":"-2,76",
+	
+		"_reference":"",
+	
+		"_type":"",
+	
+		"_description":"",
+	
+		"_name":"Frais Toulouse.pdf",
+	
+		"_title":"Frais Toulouse.pdf",
+	"id":"8c9104ed-7f01-48a3-bd21-b59ced3bd7fd",
+	"url":"/d/d/workspace/SpacesStore/8c9104ed-7f01-48a3-bd21-b59ced3bd7fd/Frais%20Toulouse.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/8c9104ed-7f01-48a3-bd21-b59ced3bd7fd/Frais%20Toulouse.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/8c9104ed-7f01-48a3-bd21-b59ced3bd7fd",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"79 414"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"51,48",
+	
+		"_longitude":"-3,18",
+	
+		"_reference":"000",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"frais.pdf",
+	
+		"_title":"frais.pdf",
+	"id":"22809d20-5697-4676-a173-f5c466a4bf31",
+	"url":"/d/d/workspace/SpacesStore/22809d20-5697-4676-a173-f5c466a4bf31/frais.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/22809d20-5697-4676-a173-f5c466a4bf31/frais.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/22809d20-5697-4676-a173-f5c466a4bf31",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"70 351"
+},
+{
+	
+			"_typeOfDocument":"Video",
+	
+		"_latitude":"51,51",
+	
+		"_longitude":"7,46",
+	
+		"_reference":"000",
+	
+		"_type":"Video",
+	
+		"_description":"",
+	
+		"_name":"disque_dur.pdf",
+	
+		"_title":"disque_dur.pdf",
+	"id":"bc99ef03-5f52-48c8-b3f5-d3e01f2bb473",
+	"url":"/d/d/workspace/SpacesStore/bc99ef03-5f52-48c8-b3f5-d3e01f2bb473/disque_dur.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/bc99ef03-5f52-48c8-b3f5-d3e01f2bb473/disque_dur.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/bc99ef03-5f52-48c8-b3f5-d3e01f2bb473",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"96 149"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"53,07",
+	
+		"_longitude":"8,81",
+	
+		"_reference":"000",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"anglais.pdf",
+	
+		"_title":"anglais.pdf",
+	"id":"14a32126-3500-4c0f-ab0d-d3f3968fae86",
+	"url":"/d/d/workspace/SpacesStore/14a32126-3500-4c0f-ab0d-d3f3968fae86/anglais.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/14a32126-3500-4c0f-ab0d-d3f3968fae86/anglais.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/14a32126-3500-4c0f-ab0d-d3f3968fae86",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"490 833"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"49,82",
+	
+		"_longitude":"6,13",
+	
+		"_reference":"000",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"ecitiz_moteur-2.pdf",
+	
+		"_title":"ecitiz_moteur-2.pdf",
+	"id":"a6a1d6bc-aac5-4850-ae8f-74f8555d80b2",
+	"url":"/d/d/workspace/SpacesStore/a6a1d6bc-aac5-4850-ae8f-74f8555d80b2/ecitiz_moteur-2.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/a6a1d6bc-aac5-4850-ae8f-74f8555d80b2/ecitiz_moteur-2.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/a6a1d6bc-aac5-4850-ae8f-74f8555d80b2",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"280 788"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"48,21",
+	
+		"_longitude":"16,37",
+	
+		"_reference":"000",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"ecitiz_studio-2.pdf",
+	
+		"_title":"ecitiz_studio-2.pdf",
+	"id":"cf208b7a-664c-4e15-86b7-e1d6a21c7052",
+	"url":"/d/d/workspace/SpacesStore/cf208b7a-664c-4e15-86b7-e1d6a21c7052/ecitiz_studio-2.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/cf208b7a-664c-4e15-86b7-e1d6a21c7052/ecitiz_studio-2.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/cf208b7a-664c-4e15-86b7-e1d6a21c7052",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"323 641"
+},
+{
+	
+			"_typeOfDocument":"Video",
+	
+		"_latitude":"49,19",
+	
+		"_longitude":"16,61",
+	
+		"_reference":"000",
+	
+		"_type":"Video",
+	
+		"_description":"",
+	
+		"_name":"ecitiz_accecite-2.pdf",
+	
+		"_title":"ecitiz_accecite-2.pdf",
+	"id":"50cfa8ff-25f3-4b5b-a0ef-b3d43d23eba7",
+	"url":"/d/d/workspace/SpacesStore/50cfa8ff-25f3-4b5b-a0ef-b3d43d23eba7/ecitiz_accecite-2.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/50cfa8ff-25f3-4b5b-a0ef-b3d43d23eba7/ecitiz_accecite-2.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/50cfa8ff-25f3-4b5b-a0ef-b3d43d23eba7",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"194 798"
+},
+{
+	
+			"_typeOfDocument":"Picture",
+	
+		"_latitude":"47,07",
+	
+		"_longitude":"15,44",
+	
+		"_reference":"000",
+	
+		"_type":"Picture",
+	
+		"_description":"",
+	
+		"_name":"CIFRE - Rapport d'activite.pdf",
+	
+		"_title":"CIFRE - Rapport d'activite?.pdf",
+	"id":"1bc148bb-3962-4db5-afd0-7b74db6aed22",
+	"url":"/d/d/workspace/SpacesStore/1bc148bb-3962-4db5-afd0-7b74db6aed22/CIFRE%20-%20Rapport%20d%27activite.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/1bc148bb-3962-4db5-afd0-7b74db6aed22/CIFRE%20-%20Rapport%20d%27activite.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/1bc148bb-3962-4db5-afd0-7b74db6aed22",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"1 448 749"
+},
+{
+	
+			"_typeOfDocument":"Video",
+	
+		"_latitude":"48,14",
+	
+		"_longitude":"11,58",
+	
+		"_reference":"000",
+	
+		"_type":"Video",
+	
+		"_description":"",
+	
+		"_name":"Certificat de scolarite.pdf",
+	
+		"_title":"Certificat de scolarite?.pdf",
+	"id":"abb5ea11-7ad2-416d-b607-9d8e21fea753",
+	"url":"/d/d/workspace/SpacesStore/abb5ea11-7ad2-416d-b607-9d8e21fea753/Certificat%20de%20scolarite.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/abb5ea11-7ad2-416d-b607-9d8e21fea753/Certificat%20de%20scolarite.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/abb5ea11-7ad2-416d-b607-9d8e21fea753",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"188 447"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"51,34",
+	
+		"_longitude":"12,37",
+	
+		"_reference":"000",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"Acceptation_CIFRE.pdf",
+	
+		"_title":"Acceptation_CIFRE.pdf",
+	"id":"a743a2a7-6b61-4924-a97e-7bb3ba71b05d",
+	"url":"/d/d/workspace/SpacesStore/a743a2a7-6b61-4924-a97e-7bb3ba71b05d/Acceptation_CIFRE.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/a743a2a7-6b61-4924-a97e-7bb3ba71b05d/Acceptation_CIFRE.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/a743a2a7-6b61-4924-a97e-7bb3ba71b05d",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"399 688"
+},
+{
+	
+			"_typeOfDocument":"Video",
+	
+		"_latitude":"45,77",
+	
+		"_longitude":"4,83",
+	
+		"_reference":"000",
+	
+		"_type":"Video",
+	
+		"_description":"",
+	
+		"_name":"inscription.pdf",
+	
+		"_title":"inscription.pdf",
+	"id":"e1db1586-0c00-4da1-9263-5abec8413e92",
+	"url":"/d/d/workspace/SpacesStore/e1db1586-0c00-4da1-9263-5abec8413e92/inscription.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/e1db1586-0c00-4da1-9263-5abec8413e92/inscription.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/e1db1586-0c00-4da1-9263-5abec8413e92",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"72 550"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"45,43",
+	
+		"_longitude":"12,34",
+	
+		"_reference":"000",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"criec_2008_benjamin_chevallereau.pdf",
+	
+		"_title":"criec_2008_benjamin_chevallereau.pdf",
+	"id":"cf1fb722-ba8d-49b8-b5f0-918cc8aa3cad",
+	"url":"/d/d/workspace/SpacesStore/cf1fb722-ba8d-49b8-b5f0-918cc8aa3cad/criec_2008_benjamin_chevallereau.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/cf1fb722-ba8d-49b8-b5f0-918cc8aa3cad/criec_2008_benjamin_chevallereau.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/cf1fb722-ba8d-49b8-b5f0-918cc8aa3cad",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"1 757 328"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"51,25",
+	
+		"_longitude":"22,57",
+	
+		"_reference":"000",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"criec_2008_benjamin_chevallereau_resume.pdf",
+	
+		"_title":"criec_2008_benjamin_chevallereau_resume.pdf",
+	"id":"3579dde2-2cd6-499c-b421-4a520e07ab5d",
+	"url":"/d/d/workspace/SpacesStore/3579dde2-2cd6-499c-b421-4a520e07ab5d/criec_2008_benjamin_chevallereau_resume.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/3579dde2-2cd6-499c-b421-4a520e07ab5d/criec_2008_benjamin_chevallereau_resume.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/3579dde2-2cd6-499c-b421-4a520e07ab5d",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"698 053"
+},
+{
+	
+			"_typeOfDocument":"Picture",
+	
+		"_latitude":"54,35",
+	
+		"_longitude":"18,65",
+	
+		"_reference":"000",
+	
+		"_type":"Picture",
+	
+		"_description":"",
+	
+		"_name":"benjamin_chevallereau.pdf",
+	
+		"_title":"benjamin_chevallereau.pdf",
+	"id":"d560d0a6-20eb-4c4c-9e98-b114e5575aa8",
+	"url":"/d/d/workspace/SpacesStore/d560d0a6-20eb-4c4c-9e98-b114e5575aa8/benjamin_chevallereau.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/d560d0a6-20eb-4c4c-9e98-b114e5575aa8/benjamin_chevallereau.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/d560d0a6-20eb-4c4c-9e98-b114e5575aa8",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"1 375 471"
+},
+{
+	
+			"_typeOfDocument":"Picture",
+	
+		"_latitude":"48,72",
+	
+		"_longitude":"21,26",
+	
+		"_reference":"1",
+	
+		"_type":"Picture",
+	
+		"_description":"",
+	
+		"_name":"Reservation TGV.pdf",
+	
+		"_title":"Re?servation TGV.pdf",
+	"id":"11929735-ddc1-42dd-8a1b-f6b7412a7fc9",
+	"url":"/d/d/workspace/SpacesStore/11929735-ddc1-42dd-8a1b-f6b7412a7fc9/Reservation%20TGV.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/11929735-ddc1-42dd-8a1b-f6b7412a7fc9/Reservation%20TGV.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/11929735-ddc1-42dd-8a1b-f6b7412a7fc9",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"339 541"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"48,1",
+	
+		"_longitude":"20,8",
+	
+		"_reference":"000",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"CCF.pdf",
+	
+		"_title":"CCF19052010_00001.pdf",
+	"id":"591acdd4-537a-47ac-9ab3-8bc130cdf03a",
+	"url":"/d/d/workspace/SpacesStore/591acdd4-537a-47ac-9ab3-8bc130cdf03a/CCF.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/591acdd4-537a-47ac-9ab3-8bc130cdf03a/CCF.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/591acdd4-537a-47ac-9ab3-8bc130cdf03a",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"596 248"
+},
+{
+	
+			"_typeOfDocument":"Video",
+	
+		"_latitude":"43,3",
+	
+		"_longitude":"5,38",
+	
+		"_reference":"123",
+	
+		"_type":"Video",
+	
+		"_description":"",
+	
+		"_name":"CCF2.pdf",
+	
+		"_title":"CCF19052010_00000.pdf",
+	"id":"82fa30f4-1c4f-40b2-a27a-18f77d425508",
+	"url":"/d/d/workspace/SpacesStore/82fa30f4-1c4f-40b2-a27a-18f77d425508/CCF2.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/82fa30f4-1c4f-40b2-a27a-18f77d425508/CCF2.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/82fa30f4-1c4f-40b2-a27a-18f77d425508",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"527 310"
+},
+{
+	
+			"_typeOfDocument":"Video",
+	
+		"_latitude":"41,39",
+	
+		"_longitude":"2,17",
+	
+		"_reference":"1234",
+	
+		"_type":"Video",
+	
+		"_description":"",
+	
+		"_name":"Dde_Rmbt_Frais_17_05_2010.pdf",
+	
+		"_title":"Dde_Rmbt_Frais_17_05_2010.pdf",
+	"id":"738ae87d-2a4c-4782-9eca-0bda792ac312",
+	"url":"/d/d/workspace/SpacesStore/738ae87d-2a4c-4782-9eca-0bda792ac312/Dde_Rmbt_Frais_17_05_2010.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/738ae87d-2a4c-4782-9eca-0bda792ac312/Dde_Rmbt_Frais_17_05_2010.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/738ae87d-2a4c-4782-9eca-0bda792ac312",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"110 158"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"43,55",
+	
+		"_longitude":"-5,66",
+	
+		"_reference":"000",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"nbnvbnvbnvn",
+	
+		"_title":"Amazon.fr - Commande 736-6329352-6688319.pdf",
+	"id":"bf58f4cc-d9c0-4547-9d9b-ed9c9044955c",
+	"url":"/d/d/workspace/SpacesStore/bf58f4cc-d9c0-4547-9d9b-ed9c9044955c/nbnvbnvbnvn",
+	"downloadUrl":"/d/a/workspace/SpacesStore/bf58f4cc-d9c0-4547-9d9b-ed9c9044955c/nbnvbnvbnvn",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/_default.gif",
+	"icon32":"/images/filetypes32/_default.gif",
+	"nodeRef":"workspace://SpacesStore/bf58f4cc-d9c0-4547-9d9b-ed9c9044955c",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"56 179"
+},
+{
+	
+			"_typeOfDocument":"Video",
+	
+		"_latitude":"42,23",
+	
+		"_longitude":"-8,71",
+	
+		"_reference":"000",
+	
+		"_type":"Video",
+	
+		"_description":"",
+	
+		"_name":"coucou",
+	
+		"_title":"e-Citiz-Gestion.pdf",
+	"id":"820a45c8-16c2-41e7-976e-6c04e6f89261",
+	"url":"/d/d/workspace/SpacesStore/820a45c8-16c2-41e7-976e-6c04e6f89261/coucou",
+	"downloadUrl":"/d/a/workspace/SpacesStore/820a45c8-16c2-41e7-976e-6c04e6f89261/coucou",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/_default.gif",
+	"icon32":"/images/filetypes32/_default.gif",
+	"nodeRef":"workspace://SpacesStore/820a45c8-16c2-41e7-976e-6c04e6f89261",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"2 465 823"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"44,84",
+	
+		"_longitude":"-0,58",
+	
+		"_reference":"BCEF",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"attestation LMDE 2010.pdf",
+	
+		"_title":"attestation LMDE 2010.pdf",
+	"id":"5fc2bfd8-75bb-4105-83fa-7ff7c84fbd4e",
+	"url":"/d/d/workspace/SpacesStore/5fc2bfd8-75bb-4105-83fa-7ff7c84fbd4e/attestation%20LMDE%202010.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/5fc2bfd8-75bb-4105-83fa-7ff7c84fbd4e/attestation%20LMDE%202010.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/5fc2bfd8-75bb-4105-83fa-7ff7c84fbd4e",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"412 244"
+},
+{
+	
+			"_typeOfDocument":"Video",
+	
+		"_latitude":"43,48",
+	
+		"_longitude":"-1,56",
+	
+		"_reference":"DBE",
+	
+		"_type":"Video",
+	
+		"_description":"",
+	
+		"_name":"CCI00000.pdf",
+	
+		"_title":"CCI00000.pdf",
+	"id":"2c75b030-aa87-4634-9e58-4d99480a246b",
+	"url":"/d/d/workspace/SpacesStore/2c75b030-aa87-4634-9e58-4d99480a246b/CCI00000.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/2c75b030-aa87-4634-9e58-4d99480a246b/CCI00000.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/2c75b030-aa87-4634-9e58-4d99480a246b",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"568 274"
+},
+{
+	
+			"_typeOfDocument":"Video",
+	
+		"_latitude":"41,92",
+	
+		"_longitude":"8,74",
+	
+		"_reference":"A122",
+	
+		"_type":"Video",
+	
+		"_description":"",
+	
+		"_name":"Reservation Hotel.pdf",
+	
+		"_title":"Re?servation Hotel.pdf",
+	"id":"3af73983-a2fd-47b7-bea8-b057059200f4",
+	"url":"/d/d/workspace/SpacesStore/3af73983-a2fd-47b7-bea8-b057059200f4/Reservation%20Hotel.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/3af73983-a2fd-47b7-bea8-b057059200f4/Reservation%20Hotel.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/3af73983-a2fd-47b7-bea8-b057059200f4",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"133 089"
+},
+{
+	
+			"_typeOfDocument":"Textual document",
+	
+		"_latitude":"41,9",
+	
+		"_longitude":"12,48",
+	
+		"_reference":"ghs",
+	
+		"_type":"Textual document",
+	
+		"_description":"",
+	
+		"_name":"mutuelle.pdf",
+	
+		"_title":"mutuelle.pdf",
+	"id":"f8941ef4-14cd-4da6-8cd3-bef1d7aa74d0",
+	"url":"/d/d/workspace/SpacesStore/f8941ef4-14cd-4da6-8cd3-bef1d7aa74d0/mutuelle.pdf",
+	"downloadUrl":"/d/a/workspace/SpacesStore/f8941ef4-14cd-4da6-8cd3-bef1d7aa74d0/mutuelle.pdf",
+	"displayPath":"/Company Home/Guest Home/dépot",
+	"icon16":"/images/filetypes/pdf.gif",
+	"icon32":"/images/filetypes32/pdf.gif",
+	"nodeRef":"workspace://SpacesStore/f8941ef4-14cd-4da6-8cd3-bef1d7aa74d0",
+	"parent":"workspace://SpacesStore/3d55a6e5-7860-40f6-8785-566e7a9e916d",
+	"size":"1 123 094"
+}
+					]
+}

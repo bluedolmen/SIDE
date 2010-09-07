@@ -1,0 +1,68 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SIDE Library Examples</title>
+
+    <!-- ** CSS ** -->
+    <!-- base library -->
+    <link rel="stylesheet" type="text/css" href="./ext-3.2.1/resources/css/ext-all.css" />
+
+    <!-- page specific -->
+    <link rel="stylesheet" type="text/css" href="./css/browser.css">
+
+    <!-- ** Javascript ** -->
+
+    <script type="text/javascript" src="./library/common/datasource.js"></script>
+    <script type="text/javascript" src="./library/common/authentication.js"></script>
+
+    <!-- ExtJS library: base/adapter -->
+    <script type="text/javascript" src="./ext-3.2.1/adapter/ext/ext-base.js"></script>
+
+    <!-- ExtJS library: all widgets -->
+
+    <script type="text/javascript" src="./ext-3.2.1/ext-all.js"></script>
+    
+    <!-- Dojo library -->
+    
+    <script type="text/javascript" src="dojo-release-1.4.3/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
+
+    <!-- page specific -->
+    <script type="text/javascript" src="library/ux/miframe.js"></script>
+    <script type="text/javascript" src="js/browser.js"></script>
+    
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAQXRNkWhGRXjcufeG1Vuh5RSyx7RdaMOBOyUa4F9slptSKMqjCxRJa_ujJm9c5EswZ0raWqnH7lKD9Q" type="text/javascript"></script>
+    
+
+</head>
+<body>
+    <div id="header"><h1>SIDE Library Browser</h1></div>
+
+    <div style="display:none;">
+
+        <!-- Start page content -->
+        <div id="start-div">
+            <div style="float:left;" ><img src="css/images/layout-icon.gif" /></div>
+            <div style="margin-left:100px;">
+                <h2>Welcome!</h2>
+                <p>There are many sample layouts to choose from that should give you a good head start in building your own
+                application layout.  Just like the combination examples, you can mix and match most layouts as
+                needed, so don't be afraid to experiment!</p>
+
+                <p>Select a layout from the tree to the left to begin.</p>
+            </div>
+        </div>
+
+        <!-- Details content -->
+        <div id="details">
+        	<p>You can view the javascript file here :</p>
+        	<p><a href="" id="file-href" target="_blank"></a></p>
+        </div>
+        
+        <!-- Iframe content -->
+        <div id="container">
+      		<iframe id="containerBody" class="x-panel-body" style="frameBorder:0;width:100%;height:100%;"></iframe>  
+    	</div>
+
+    </div>
+</body>
+</html>
