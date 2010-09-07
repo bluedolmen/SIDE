@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Boston, MA 02111.
 metamodel http://www.kerblue.org/view/1.0
 
 import com.bluexml.side.view.generator.alfresco.templates.services.common
-
+import templates.servicesTemplates.Association
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
@@ -56,5 +56,36 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<#else/>
 	<<%eContainer().getQualifiedName()%>_<%name%>/>
 	</#if>
+	<%}%>
+	<%for (getFields()[path != null && path.nSize() == 1]){%>
+	<%for (path.filter("clazz.Association")){%>
+		<%getAssociationEnd(current("AbstractViewOf").viewOf.filter("clazz.Clazz")).put("assoEnd")%>
+	<<%getAssociationQName(get("assoEnd"))%>>
+	<#if child.<%getAssociationVariableName()%>["<%getPrefixedURIAssociationQName(get("assoEnd"))%>"]?exists>
+		<#list child.<%getAssociationVariableName()%>["<%getPrefixedURIAssociationQName(get("assoEnd"))%>"] as item>
+	<target>
+		<%for (current("Field").mapTo.filter("clazz.Attribute")){%>
+		<nodeRef>${item.nodeRef}</nodeRef>
+		<#if (item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"]?exists)>
+			<#if item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"]?is_sequence>
+			<<%eContainer().getQualifiedName()%>_<%name%>><#list item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"] as key>${key} </#list></<%eContainer().getQualifiedName()%>_<%name%>>
+			<#else/>
+			<%if (typ.toString().equalsIgnoreCase("date")){%>
+			<<%eContainer().getQualifiedName()%>_<%name%>>${item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%eContainer().getQualifiedName()%>_<%name%>>
+			<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
+			<<%eContainer().getQualifiedName()%>_<%name%>>${item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%eContainer().getQualifiedName()%>_<%name%>>
+			<%}else{%>
+			<<%eContainer().getQualifiedName()%>_<%name%>>${item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string!""}</<%eContainer().getQualifiedName()%>_<%name%>>
+			<%}%>
+			</#if>
+		<#else/>
+			<<%eContainer().getQualifiedName()%>_<%name%>></<%eContainer().getQualifiedName()%>_<%name%>>
+		</#if>
+		<%}%>
+	</target>
+		</#list>
+	</#if>
+	</<%getAssociationQName(get("assoEnd"))%>>
+	<%}%>
 	<%}%>
 </item>
