@@ -10,6 +10,7 @@ import org.apache.maven.embedder.DefaultConfiguration;
 import org.apache.maven.embedder.MavenEmbedder;
 import org.apache.maven.execution.DefaultMavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionResult;
+import org.eclipse.core.runtime.internal.adaptor.ContextFinder;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
@@ -24,7 +25,7 @@ public class MavenUtil {
 		archetypeCreateRequest.setGoals(goals);
 		archetypeCreateRequest.setInteractiveMode(false);
 		archetypeCreateRequest.setProperty("basedir", baseDir.getAbsolutePath().toString());
-		
+
 		// set active profile
 		if (profiles != null && !profiles.isEmpty()) {
 			archetypeCreateRequest.addActiveProfiles(profiles);
@@ -39,14 +40,14 @@ public class MavenUtil {
 				archetypeCreateRequest.setProperty(param.getKey(), param.getValue());
 			}
 		}
-		MavenEmbedder embedder = getEmbedder();		
+		MavenEmbedder embedder = getEmbedder();
 		archetypeCreateRequest.setUpdateSnapshots(true);
-		
+
 		//System.out.println("Active profiles :"+archetypeCreateRequest.getActiveProfiles());
 		if (archetypeCreateRequest.getActiveProfiles().size() == 0) {
 			throw new Exception("No active profile found report this bug to SIDE developers team");
 		}
-		
+
 		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
 		return result;
 	}
@@ -86,10 +87,25 @@ public class MavenUtil {
 			// load user configuration file
 			// configuration.setUserSettingsFile( MavenEmbedder.DEFAULT_USER_SETTINGS_FILE );
 
-			configuration.setClassLoader(Thread.currentThread().getContextClassLoader());
+			ClassLoader cl = getContextFinderClassLoader();
+
+			configuration.setClassLoader(cl);
 			embedder = new MavenEmbedder(configuration);
 		}
+
 		return embedder;
+	}
+
+	@SuppressWarnings("restriction")
+	private static ClassLoader getContextFinderClassLoader() {
+		ClassLoader cl0 = Thread.currentThread().getContextClassLoader();
+		ClassLoader cl = null;
+		if (cl0 instanceof ContextFinder) {
+			cl = cl0;
+		} else {
+			cl = new ContextFinder(cl0);
+		}
+		return cl;
 	}
 
 	/**
