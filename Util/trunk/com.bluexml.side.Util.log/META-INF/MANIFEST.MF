@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE MDA Process Reporting
 Bundle-SymbolicName: com.bluexml.side.Util.log
-Bundle-Version: 1.0.34.v18663-20100622
+Bundle-Version: 1.0.35.v20246-20100913
 Bundle-Activator: com.bluexml.side.util.documentation.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
