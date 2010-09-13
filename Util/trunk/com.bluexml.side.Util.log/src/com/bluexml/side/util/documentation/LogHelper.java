@@ -26,17 +26,17 @@ public class LogHelper {
 	LogType logType;
 	String metaModel;
 	String logFileName;
-	
+
 	protected String fileSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
 
 	public LogHelper(final Map<String, String> configurationParameters, LogType logType, String logFileName) {
 		this.logDirectory = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator + configurationParameters.get("configurationName");
-		SIDELog log_ = null;
 		this.logFileName = logFileName;
 		logSate = new Date();
 		this.logType = logType;
 		if (logType.equals(LogType.CONSOLE)) {
-			log_ = new SIDELog("name", "deployerId", "technologyVersionName", "technologyName", "metaModelName", new Date(), logType);
+			this.log = new SIDELog("name", "deployerId", "technologyVersionName", "technologyName", "metaModelName", new Date(), logType);
+			componentId = "namelessComponant";
 		} else {
 			componentTechnoVersionName = configurationParameters.get("technologyVersionName");
 			componentTechnoName = configurationParameters.get("technologyName");
@@ -48,10 +48,10 @@ public class LogHelper {
 				componentId = configurationParameters.get("deployerId");
 				componentName = configurationParameters.get("deployerName");
 			}
+			this.log = new SIDELog(componentName, componentId, componentTechnoVersionName, componentTechnoName, metaModel, logSate, logType);
 		}
 
-		log_ = new SIDELog(componentName, componentId, componentTechnoVersionName, componentTechnoName, metaModel, logSate, logType);
-		this.log = log_;
+		
 	}
 
 	/**

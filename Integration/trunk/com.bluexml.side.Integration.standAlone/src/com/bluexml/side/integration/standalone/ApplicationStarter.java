@@ -44,8 +44,8 @@ import com.bluexml.side.util.componentmonitor.headless.progressBarHeadLess;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class ApplicationStarter implements IApplication {
-	static final String CONFIGURATION_KEY = "configuration";
-	static final String MODELS_KEY = "models";
+	public static final String CONFIGURATION_KEY = "configuration";
+	public static final String MODELS_KEY = "models";
 
 	protected String[] arguments;
 
@@ -98,8 +98,8 @@ public class ApplicationStarter implements IApplication {
 		return EXIT_OK;
 	}
 
-	protected void generate(File fileAP) {
-		Map<String, Object> conf = loadConfiguration(fileAP, arguments[1]);
+	public static Generate getGenerate(File application, String confName) {
+		Map<String, Object> conf = loadConfiguration(application, confName);
 		Configuration configuration = (Configuration) conf.get(CONFIGURATION_KEY);
 
 		// instantiate general monitor
@@ -117,11 +117,41 @@ public class ApplicationStarter implements IApplication {
 				break;
 			}
 		}
+		
 		Monitor generalMonitor = new Monitor(styletext, progressBar, label, otherLogPath, configuration.getName(), fileName);
 
 		ComponentMonitor componentMonitor = new ComponentMonitor(styletext, progressBar2, null, label2, generalMonitor, null, LogType.GENERATION, generalMonitor.getConsoleLog(), fileName);
+
+		Generate gen = new Generate(configuration, (List<Model>) conf.get(MODELS_KEY), generalMonitor, componentMonitor);
+		return gen;
+
+	}
+
+	
+	public static Monitor getHeadlessMonitor(String generatorLog, String configurationName, String fileName) {
+		ProgressBarInterface progressBar = new progressBarHeadLess();
+		LabelInterface label = new LabelHeadLess();		
+		StyledTextInterface styletext = new StyledTextHeadless();
+		Monitor generalMonitor = new Monitor(styletext, progressBar, label, generatorLog, configurationName, fileName);
+		return generalMonitor;
+	}
+	
+	public static ComponentMonitor getHeadlessComponantMonitor(Monitor generalMonitor,String generatorLog, String configurationName, String fileName) {		
+		ProgressBarInterface progressBar2 = new progressBarHeadLess();
+		LabelInterface label2 = new LabelHeadLess();
+		StyledTextInterface styletext = new StyledTextHeadless();
+		if (generalMonitor == null) {
+			ProgressBarInterface progressBar = new progressBarHeadLess();
+			LabelInterface label = new LabelHeadLess();
+			generalMonitor = new Monitor(styletext, progressBar, label, generatorLog, configurationName, fileName);
+		}
+		ComponentMonitor componentMonitor = new ComponentMonitor(styletext, progressBar2, null, label2, generalMonitor, null, LogType.GENERATION, generalMonitor.getConsoleLog(), fileName);
+		return componentMonitor;
+	}
+	
+	protected void generate(File fileAP) {
+		Generate gen = getGenerate(fileAP, arguments[1]);
 		try {
-			Generate gen = new Generate(configuration, (List<Model>) conf.get(MODELS_KEY), generalMonitor, componentMonitor);
 			System.out.println("created, let's run");
 			gen.setHeadless(true);
 			gen.setUser(false);
@@ -137,7 +167,7 @@ public class ApplicationStarter implements IApplication {
 
 	}
 
-	protected Map<String, Object> loadConfiguration(File filePath, String name) {
+	public static Map<String, Object> loadConfiguration(File filePath, String name) {
 		Map<String, Object> extractedConfiguration = new HashMap<String, Object>();
 
 		System.out.println("Start Generate with filePath= " + filePath + " & Name: " + name);
@@ -229,16 +259,18 @@ public class ApplicationStarter implements IApplication {
 			System.out.println("\tupdateApplicationFile : ");
 			ApplicationUtil.updateApplicationFromExtensionPoint(application, file);
 			System.out.println("\tapplication: " + application);
-			
-			
 
 			System.out.println("\tstaticParameters: " + ApplicationDialog.staticFieldsName);
-			Configuration configuration = application.getConfiguration(name);
-			System.out.println("\tconfiguration: " + configuration);
 			List<Model> models = ApplicationUtil.getModels(application);
 			System.out.println("\tmodels: " + models);
-			extractedConfiguration.put(CONFIGURATION_KEY, configuration);
 			extractedConfiguration.put(MODELS_KEY, models);
+			
+			if (name != null) {
+				Configuration configuration = application.getConfiguration(name);
+				System.out.println("\tconfiguration: " + configuration);
+				extractedConfiguration.put(CONFIGURATION_KEY, configuration);
+			}
+
 		} catch (java.lang.NullPointerException e) {
 			System.out.println("NullPointerException  " + e.getMessage());
 			e.printStackTrace();

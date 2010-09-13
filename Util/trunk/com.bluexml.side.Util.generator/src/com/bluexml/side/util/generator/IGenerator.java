@@ -44,6 +44,6 @@ public interface IGenerator {
 	 * @return the list of modified files
 	 * @throws Exception
 	 */
-	public Collection<IFile> complete() throws Exception;
+	public Collection<IFile> complete(Map<String, List<IFile>> models) throws Exception;
 
 }

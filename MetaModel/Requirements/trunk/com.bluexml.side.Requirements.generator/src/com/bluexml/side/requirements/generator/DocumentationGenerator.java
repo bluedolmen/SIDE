@@ -51,8 +51,7 @@ public class DocumentationGenerator extends RequirementsGenerator {
 		return l;
 	}
 
-	@Override
-	public Collection<IFile> complete() throws Exception {
+	public Collection<IFile> complete(Map<String, List<IFile>> models) throws Exception {
 		//Nothing to do
 		return null;
 	}

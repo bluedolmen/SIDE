@@ -4,23 +4,18 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -28,13 +23,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import com.bluexml.side.util.generator.AbstractGenerator;
-import com.bluexml.side.util.generator.ConflitResolverHelper;
+import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.generator.GeneratorException;
 import com.bluexml.side.util.generator.acceleo.chain.CustomCChain;
-import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
-import com.bluexml.side.util.model.merge.MergeUtils;
 
 import fr.obeo.acceleo.chain.ActionSet;
 import fr.obeo.acceleo.chain.ChainFactory;
@@ -50,99 +42,30 @@ import fr.obeo.acceleo.gen.IGenFilter;
 import fr.obeo.acceleo.gen.template.eval.LaunchManager;
 import fr.obeo.acceleo.tools.classloaders.AcceleoClassLoader;
 
-public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
-	protected String mergedFilePath = "mergedFile"; //$NON-NLS-1$
-	protected Map<String, List<IFile>> groupedModels = null;
-	protected List<IFile> generatedFiles;
-	ConflitResolverHelper cresolver;
-	protected final String projectName = ".side_generation"; //$NON-NLS-1$
-	private static final String DEFAULT_ENCODING = "ISO-8859-1"; //$NON-NLS-1$
+public class SimpleAcceleoGenerator {
+	private String projectName = ".simpleGenerator";
+
+	private static final String DEFAULT_ENCODING = "UTF-8"; //$NON-NLS-1$
 	private String fileEncoding = System.getProperty("file.encoding"); //$NON-NLS-1$
-	protected String versionProperty = null;
 
-	/**
-	 * use to give an version number to this generation package
-	 * 
-	 * @return
-	 */
-	public String getVersioNumber() {
-		String vn = getGenerationParameter(versionProperty);
-		if (vn == null || vn.equals("")) { //$NON-NLS-1$
-			vn = "1.0"; //$NON-NLS-1$
+	private String metamodelURI = null;
+
+	private List<String> templates = null;
+
+	private ComponentMonitor monitor = null;
+
+	public SimpleAcceleoGenerator(String metamodelURI, List<String> templates, String projectName, ComponentMonitor monitor) {
+		this.metamodelURI = metamodelURI;
+		this.templates = templates;
+		if (projectName == null) {
+			projectName = ".simpleGenerator";
 		}
-		return vn;
+		this.projectName = projectName;
+		this.monitor = monitor;
 	}
 
-	private static final IGenFilter genFilter = new IGenFilter() {
-		public boolean filter(java.io.File script, IFile targetFile, EObject object) throws CoreException {
-			return true;
-		}
-	};
-
-	abstract protected List<String> getTemplates();
-
-	abstract protected String getMetamodelURI();
-
-	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) {
-		return modelsInfo.containsKey(id_metamodel);
-	}
-
-	/**
-	 * this implementation take care of multi-model
-	 */
-
-	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_metamodel) throws Exception {
-
-		// System.out.println("Generate Map String");
-
-		Collection<IFile> results = new ArrayList<IFile>();
-		if (modelsInfo.get(id_metamodel) != null && modelsInfo.get(id_metamodel).size() > 0) {
-			List<IFile> models = modelsInfo.get(id_metamodel);
-			groupedModels = MergeUtil.groupByRootPackage(models);
-			for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
-				String rootName = l.getKey();
-				List<IFile> models_ = l.getValue();
-				monitor.getLog().addModelsLog(models_);
-				IFile mergedModel = merging(models_);
-				// initialize generator we must change the TEMP_FOLDER
-				// System.out.println("getClass().getName(): " +
-				// getClass().getName());
-				setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName); //$NON-NLS-1$
-				// clean directory before generate, needed if cleaning option is
-				// not enable
-				File wkdir = getTemporarySystemFile();
-				if (wkdir.exists()) {
-					boolean result = FileHelper.deleteFile(wkdir);
-					// update IFolder
-					IFileHelper.refreshFolder(wkdir);
-					if (!result) {
-						monitor.getLog().addWarningLog(Activator.Messages.getString("AbstractAcceleoGenerator_7"), Activator.Messages.getString("AbstractAcceleoGenerator_8"), ""); //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
-					}
-				}
-				// generate
-				results.addAll(generate(mergedModel));
-			}
-		}
-		return results;
-	}
-
-	protected IFile merging(List<IFile> models) throws Exception {
-		if (models.size() == 1) {
-			return models.get(0);
-		} else {
-			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_10"), ""); //$NON-NLS-1$//$NON-NLS-2$
-			// create resource for merged file
-			IPath p = models.get(0).getParent().getFullPath();
-			p = p.append(mergedFilePath + "." + models.get(0).getFileExtension()); //$NON-NLS-1$
-			IFile mergedIFile = IFileHelper.getIFile(p);
-			// do merge
-			MergeUtils.merge(mergedIFile, models, this.getClass().getClassLoader());
-			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_13"), ""); //$NON-NLS-1$//$NON-NLS-2$
-			return mergedIFile;
-		}
-	}
-
-	public Collection<IFile> generate(IFile model) throws Exception {
+	@SuppressWarnings("unchecked")
+	public Collection<IFile> generate(IFile model, String generationPath) throws Exception {
 		AcceleoClassLoader.setPreferredClassLoader(this.getClass().getClassLoader());
 		// System.out.println("Generate IFile model");
 
@@ -195,13 +118,15 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		// System.out.println("folder: " + folder.getPath());
 
 		EFactory.eAdd(repository, "files", folder); //$NON-NLS-1$
-		String generationPath = getTemporaryFolder();
+
 		if (generationPath == null || generationPath.length() == 0) {
 			monitor.getLog().addErrorLog("No Target path setted.", "There is no target path setted for generation.", null); //$NON-NLS-1$ //$NON-NLS-2$
 			throw new Exception("Target path must be setted !"); //$NON-NLS-1$
 		}
-
-		new File(IFileHelper.getSystemFolderPath(generationPath)).mkdirs();
+		if (!new File(generationPath).exists()) {
+			new File(IFileHelper.getSystemFolderPath(generationPath)).mkdirs();
+		}
+		
 		EFactory.eSet(folder, "path", generationPath); //$NON-NLS-1$
 
 		// Log
@@ -214,9 +139,9 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		// Metamodel file
 		EmfMetamodel pim = ChainFactory.eINSTANCE.createEmfMetamodel();
 		EFactory.eAdd(repository, "files", pim); //$NON-NLS-1$
-		EFactory.eSet(pim, "path", getMetamodelURI()); //$NON-NLS-1$
+		EFactory.eSet(pim, "path", metamodelURI); //$NON-NLS-1$
 
-		for (String templateFile : getTemplates()) {
+		for (String templateFile : templates) {
 
 			// System.out.println("Templates: " + templateFile);
 			// Generator
@@ -274,7 +199,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 		// files is generated we must update folder before do anything else
 
-		generatedFiles = (List<IFile>) chain.getGeneratedFiles();
+		List<IFile> generatedFiles = (List<IFile>) chain.getGeneratedFiles();
 		// List<?> generatedFiles = chain.getGeneratedFiles();
 		// System.out.println("log10");
 		for (Object file : generatedFiles) {
@@ -341,24 +266,9 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 	}
 
-	public ConflitResolverHelper getCresolver() {
-		if (cresolver == null) {
-			cresolver = new ConflitResolverHelper(getTargetPath(), getTemporaryFolder());
+	private static final IGenFilter genFilter = new IGenFilter() {
+		public boolean filter(java.io.File script, IFile targetFile, EObject object) throws CoreException {
+			return true;
 		}
-		return cresolver;
-	}
-
-	protected List<IFile> searchForConflict() {
-		return getCresolver().searchForConflict(generatedFiles);
-	}
-
-
-	public static String getProperty(String key, String defaultValue) throws FileNotFoundException, IOException {
-		String result =getGenerationParameter(key);
-		if ( result== null || result.equals("")) {
-			result=defaultValue;
-		}
-		return result;
-	}
-
+	};
 }

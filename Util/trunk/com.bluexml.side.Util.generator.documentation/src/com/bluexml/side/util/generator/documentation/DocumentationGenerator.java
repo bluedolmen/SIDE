@@ -40,7 +40,7 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 		return templates;
 	}
 
-	public Collection<IFile> complete() throws Exception {
+	public Collection<IFile> complete(Map<String, List<IFile>> models) throws Exception {
 		for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
 			String rootName = l.getKey();
 			setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);

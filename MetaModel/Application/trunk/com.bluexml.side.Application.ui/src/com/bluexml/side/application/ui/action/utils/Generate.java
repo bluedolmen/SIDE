@@ -78,6 +78,10 @@ public class Generate extends WorkspaceJob {
 	final private Monitor generalMonitor;
 	private String logPath;
 
+	public String getLogPath() {
+		return logPath;
+	}
+
 	private String genPath;
 	private FeedbackManager feedbackManager = new FeedbackManager();
 	protected String lineSeparator = System.getProperty("line.separator"); //$NON-NLS-1$
@@ -524,7 +528,7 @@ public class Generate extends WorkspaceJob {
 
 						// Complete
 						try {
-							generator.complete();
+							generator.complete(null);
 						} catch (Exception e) {
 							error = true;
 							throw new Exception(Activator.Messages.getString("Generate.61", e.getMessage()), e);

@@ -179,7 +179,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		if (result == null || result.equals("")) {
 			
 		} else {
-			monitor.addWarningTextAndLog(Activator.Messages.getString("ClassAlfrescoGenerator_11"), "");
+			//monitor.addWarningTextAndLog(Activator.Messages.getString("ClassAlfrescoGenerator_11"), "");
 		}
 		return result;
 	}

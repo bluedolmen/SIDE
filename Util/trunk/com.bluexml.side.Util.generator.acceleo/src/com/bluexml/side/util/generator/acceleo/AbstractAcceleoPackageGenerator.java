@@ -13,7 +13,10 @@ public abstract class AbstractAcceleoPackageGenerator extends AbstractAcceleoGen
 
 	abstract public Collection<IFile> buildPackages(String modelId) throws Exception;
 	
-	public Collection<IFile> complete() throws Exception {
+	public Collection<IFile> complete(Map<String, List<IFile>> models) throws Exception {
+		if (models != null && (groupedModels == null ||groupedModels.size() == 0)) {
+			groupedModels = models;
+		}
 		for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
 			String rootName = l.getKey();
 			setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);

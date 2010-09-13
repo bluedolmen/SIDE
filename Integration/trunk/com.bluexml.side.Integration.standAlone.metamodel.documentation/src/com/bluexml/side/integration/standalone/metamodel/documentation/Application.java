@@ -161,7 +161,7 @@ public class Application implements IApplication {
 			System.out.println("| generating : " + modelName);
 			gen.generate(model);
 			System.out.println(" -> completing : " + modelName);
-			gen.complete();
+			gen.complete(null);
 			System.out.print(" --> deploying  : " + modelName);
 			deployer.deploy();
 			System.out.println(" ---> deployed  !");
@@ -208,9 +208,9 @@ public class Application implements IApplication {
 		configurationParameters_.put(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral(), targetPath);
 		configurationParameters_.put(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral(), targetPath + File.separator + ".." + File.separator + "logs");
 		configurationParameters_.put("technologyVersion", techName);
-		// configurationName, est utilisé par le depoyer pour la tache ant de
+		// configurationName, est utilisï¿½ par le depoyer pour la tache ant de
 		// creation d'ODT
-		// il doit etre = à techName
+		// il doit etre = ï¿½ techName
 		configurationParameters_.put("configurationName", techName);
 		return configurationParameters_;
 	}
@@ -220,7 +220,7 @@ public class Application implements IApplication {
 	 * directory
 	 * 
 	 * @param file
-	 *            Le repertoire dans lequel trouver les métaModel
+	 *            Le repertoire dans lequel trouver les mï¿½taModel
 	 * @return
 	 */
 	private File[] getModelFileList(File file) {

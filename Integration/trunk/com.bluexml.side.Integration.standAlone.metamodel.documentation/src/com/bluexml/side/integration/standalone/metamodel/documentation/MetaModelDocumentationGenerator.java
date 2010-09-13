@@ -3,6 +3,7 @@ package com.bluexml.side.integration.standalone.metamodel.documentation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 
@@ -36,7 +37,7 @@ public class MetaModelDocumentationGenerator extends DocumentationGenerator {
 	}
 
 	@Override
-	public Collection<IFile> complete() throws Exception {
+	public Collection<IFile> complete(Map<String, List<IFile>> models) throws Exception {
 		return generatedFiles;
 	}
 

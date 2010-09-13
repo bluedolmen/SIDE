@@ -154,7 +154,7 @@ public class FormGenerator extends AbstractGenerator {
 		return modelsInfo.containsKey(ClazzPackage.eNS_URI) || modelsInfo.containsKey(FormPackage.eNS_URI);
 	}
 
-	public Collection<IFile> complete() throws Exception {
+	public Collection<IFile> complete(Map<String, List<IFile>> models) throws Exception {
 		// must build package
 		// build archive from tmp folder
 
