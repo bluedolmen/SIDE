@@ -15,6 +15,8 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
 
+import com.bluexml.side.util.libs.eclipse.Utils;
+
 public class MavenUtil {
 	private MavenEmbedder embedder;
 
@@ -87,7 +89,7 @@ public class MavenUtil {
 			// load user configuration file
 			// configuration.setUserSettingsFile( MavenEmbedder.DEFAULT_USER_SETTINGS_FILE );
 
-			ClassLoader cl = getContextFinderClassLoader();
+			ClassLoader cl = Utils.getContextFinderClassLoader();
 
 			configuration.setClassLoader(cl);
 			embedder = new MavenEmbedder(configuration);
@@ -96,17 +98,7 @@ public class MavenUtil {
 		return embedder;
 	}
 
-	@SuppressWarnings("restriction")
-	private static ClassLoader getContextFinderClassLoader() {
-		ClassLoader cl0 = Thread.currentThread().getContextClassLoader();
-		ClassLoader cl = null;
-		if (cl0 instanceof ContextFinder) {
-			cl = cl0;
-		} else {
-			cl = new ContextFinder(cl0);
-		}
-		return cl;
-	}
+	
 
 	/**
 	 * get the version number of the dependency in the given pom
