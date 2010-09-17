@@ -2,7 +2,7 @@ package com.bluexml.side.util.libs.eclipse;
 
 import org.eclipse.core.runtime.internal.adaptor.ContextFinder;
 
-public class Utils {
+public class EclipseUtils {
 
 	@SuppressWarnings("restriction")
 	public static ClassLoader getContextFinderClassLoader() {

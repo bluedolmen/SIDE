@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.ProjectHelper;
 import org.eclipse.ant.core.AntRunner;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -22,6 +24,7 @@ import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.ant.AntUtils;
 
 public class DocumentationDeployer extends Deployer {
 
@@ -36,20 +39,80 @@ public class DocumentationDeployer extends Deployer {
 		FileUtils.deleteDirectory(fileToDeploy);
 	}
 
-	@Override
+
 	protected void deployProcess(File fileToDeploy) throws Exception {
 		IContainer src = IFileHelper.getIFolder(fileToDeploy);
 		if (src != null) {
-			IFolder dest = IFileHelper.createFolder(getConfigurationParameters().get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator + getConfigurationParameters().get("configurationName") + File.separator + LogSave.LOG_DOC_FOLDER + File.separator); //$NON-NLS-1$
-			IFileHelper.refreshFolder((IFolder)src);
+			IFolder dest = IFileHelper.createFolder(getConfigurationParameters().get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator
+					+ getConfigurationParameters().get("configurationName") + File.separator + LogSave.LOG_DOC_FOLDER + File.separator); //$NON-NLS-1$
+			IFileHelper.refreshFolder((IFolder) src);
+			Project ant = new Project();
+			org.apache.tools.ant.DefaultLogger log = new org.apache.tools.ant.DefaultLogger();
+			log.setOutputPrintStream(System.out);
+			log.setMessageOutputLevel(Project.MSG_INFO);
+
+			ant.addBuildListener(log);
+			ant.init();
+			
+
+			Map<String, String> properties = new HashMap<String, String>();			
+			File f = getAntBuildFile(dest);
+			
+			if (f != null && f.exists()) {
+				ProjectHelper.configureProject(ant,f);
+				boolean docCreated = false;
+				if (src.getType() == IFile.FOLDER) {
+					List<IFolder> srcFiles = IFileHelper.getAllFolderForFolder((IFolder) src);
+					for (IFolder file : srcFiles) {
+						String name = file.getName();
+						List<IFolder> docFiles = IFileHelper.getAllFolderForFolder(file);
+						for (IFolder file2 : docFiles) {
+							//UIUtils.showAvert("Test", "Test for " + file2.getLocation().toFile().getAbsolutePath());
+							if (file2.getName().equals(DOC_FOLDER_NAME)) {
+								//UIUtils.showAvert("Test", "Ant run for " + file2.getName());
+								
+								properties.put("destDir", dest.getLocation().toFile().getAbsolutePath()); //$NON-NLS-1$
+								properties.put("sourceDir", file.getLocation().toFile().getAbsolutePath()); //$NON-NLS-1$
+								properties.put("docName", name); //$NON-NLS-1$
+
+								//UIUtils.showAvert("Test", "Properties added ");
+								try {
+									AntUtils.setProperties(ant, properties);
+									ant.executeTarget("createODT_file");								
+									docCreated = true;
+								} catch (Exception e) {
+									Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Build run failed.", e)); //$NON-NLS-1$
+								}
+							}
+						}
+					}
+					if (!docCreated) {
+						Activator.getDefault().getLog().log(new Status(Status.INFO, Activator.PLUGIN_ID, "No doc have been generated.")); //$NON-NLS-1$
+					}
+				}
+			} else {
+				Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Build.xml file not found.")); //$NON-NLS-1$
+				throw new Exception("DocumentationDeployer : build.xml file isn't found.");
+			}
+		}
+	}
+
+	@Deprecated
+	protected void deployProcess_(File fileToDeploy) throws Exception {
+		IContainer src = IFileHelper.getIFolder(fileToDeploy);
+		if (src != null) {
+			IFolder dest = IFileHelper.createFolder(getConfigurationParameters().get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator
+					+ getConfigurationParameters().get("configurationName") + File.separator + LogSave.LOG_DOC_FOLDER + File.separator); //$NON-NLS-1$
+			IFileHelper.refreshFolder((IFolder) src);
 			AntRunner runner = new AntRunner();
-			Map<String,String> properties = new HashMap<String, String>();
+
+			Map<String, String> properties = new HashMap<String, String>();
 			runner.addUserProperties(properties);
 			File f = getAntBuildFile(dest);
 			if (f != null && f.exists()) {
 				boolean docCreated = false;
 				if (src.getType() == IFile.FOLDER) {
-					List<IFolder> srcFiles = IFileHelper.getAllFolderForFolder((IFolder)src);
+					List<IFolder> srcFiles = IFileHelper.getAllFolderForFolder((IFolder) src);
 					for (IFolder file : srcFiles) {
 						String name = file.getName();
 						List<IFolder> docFiles = IFileHelper.getAllFolderForFolder(file);
@@ -64,7 +127,9 @@ public class DocumentationDeployer extends Deployer {
 								runner.addUserProperties(properties);
 								//UIUtils.showAvert("Test", "Properties added ");
 								try {
+									
 									runner.run();
+									runner.stop();
 									docCreated = true;
 								} catch (CoreException e) {
 									Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Build run failed.", e)); //$NON-NLS-1$
@@ -88,15 +153,14 @@ public class DocumentationDeployer extends Deployer {
 		String folderSource = "com/bluexml/side/deployer/documentation/"; //$NON-NLS-1$
 		try {
 			moveFile(folderPath, "build.xml", folderSource); //$NON-NLS-1$
-		} catch(Exception e) {
+		} catch (Exception e) {
 			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Error while moving file.", e)); //$NON-NLS-1$
 		}
 		File ant = new File(folderPath + "build.xml");
 		return ant;
 	}
 
-	private static void moveFile(String folderDest, String fileName,
-			String folderSource) throws IOException  {
+	private static void moveFile(String folderDest, String fileName, String folderSource) throws IOException {
 		InputStream in = DocumentationDeployer.class.getClassLoader().getResourceAsStream(folderSource + fileName);
 
 		File dest = new File(folderDest);
@@ -151,4 +215,3 @@ public class DocumentationDeployer extends Deployer {
 	}
 
 }
-

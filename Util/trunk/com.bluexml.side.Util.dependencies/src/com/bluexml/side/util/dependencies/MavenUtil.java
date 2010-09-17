@@ -15,7 +15,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
 
-import com.bluexml.side.util.libs.eclipse.Utils;
+import com.bluexml.side.util.libs.eclipse.EclipseUtils;
 
 public class MavenUtil {
 	private MavenEmbedder embedder;
@@ -89,7 +89,7 @@ public class MavenUtil {
 			// load user configuration file
 			// configuration.setUserSettingsFile( MavenEmbedder.DEFAULT_USER_SETTINGS_FILE );
 
-			ClassLoader cl = Utils.getContextFinderClassLoader();
+			ClassLoader cl = EclipseUtils.getContextFinderClassLoader();
 
 			configuration.setClassLoader(cl);
 			embedder = new MavenEmbedder(configuration);
