@@ -61,7 +61,12 @@ rule createNodeFromAttribute(s : RWM!Attribute) {
 		sub <- Sequence{description}
 	),
 	description : MindMap!Node (
-		text <- s.documentation.normalize(),
+		text <-
+			if s.documentation <> OclUndefined then
+				s.documentation.normalize()
+			else
+				''
+			endif,
 		presentation <- font_italic
 	),
 	font_italic : MindMap!NodePresentation (

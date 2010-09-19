@@ -278,29 +278,37 @@
 		<constant value="font_italic"/>
 		<constant value="a"/>
 		<constant value="createNodeFromAttribute"/>
+		<constant value="42"/>
+		<constant value="45"/>
 		<constant value="60:11-60:12"/>
 		<constant value="60:11-60:17"/>
 		<constant value="60:3-60:17"/>
 		<constant value="61:19-61:30"/>
 		<constant value="61:10-61:31"/>
 		<constant value="61:3-61:31"/>
-		<constant value="64:11-64:12"/>
-		<constant value="64:11-64:26"/>
-		<constant value="64:11-64:38"/>
-		<constant value="64:3-64:38"/>
-		<constant value="65:19-65:30"/>
-		<constant value="65:3-65:30"/>
-		<constant value="68:11-68:16"/>
-		<constant value="68:3-68:16"/>
-		<constant value="69:13-69:17"/>
-		<constant value="69:3-69:17"/>
-		<constant value="70:11-70:13"/>
-		<constant value="70:3-70:13"/>
-		<constant value="71:11-71:22"/>
-		<constant value="71:3-71:22"/>
-		<constant value="74:3-74:4"/>
-		<constant value="74:3-74:5"/>
-		<constant value="73:2-75:3"/>
+		<constant value="65:7-65:8"/>
+		<constant value="65:7-65:22"/>
+		<constant value="65:26-65:38"/>
+		<constant value="65:7-65:38"/>
+		<constant value="68:5-68:7"/>
+		<constant value="66:5-66:6"/>
+		<constant value="66:5-66:20"/>
+		<constant value="66:5-66:32"/>
+		<constant value="65:4-69:9"/>
+		<constant value="64:3-69:9"/>
+		<constant value="70:19-70:30"/>
+		<constant value="70:3-70:30"/>
+		<constant value="73:11-73:16"/>
+		<constant value="73:3-73:16"/>
+		<constant value="74:13-74:17"/>
+		<constant value="74:3-74:17"/>
+		<constant value="75:11-75:13"/>
+		<constant value="75:3-75:13"/>
+		<constant value="76:11-76:22"/>
+		<constant value="76:3-76:22"/>
+		<constant value="79:3-79:4"/>
+		<constant value="79:3-79:5"/>
+		<constant value="78:2-80:3"/>
 	</cp>
 	<field name="1" type="2"/>
 	<field name="3" type="4"/>
@@ -1119,6 +1127,16 @@
 			<getasm/>
 			<load arg="19"/>
 			<get arg="200"/>
+			<push arg="28"/>
+			<push arg="8"/>
+			<new/>
+			<call arg="201"/>
+			<call arg="202"/>
+			<if arg="277"/>
+			<push arg="54"/>
+			<goto arg="278"/>
+			<load arg="19"/>
+			<get arg="200"/>
 			<call arg="205"/>
 			<call arg="30"/>
 			<set arg="139"/>
@@ -1153,36 +1171,42 @@
 			<load arg="29"/>
 		</code>
 		<linenumbertable>
-			<lne id="277" begin="15" end="15"/>
-			<lne id="278" begin="15" end="16"/>
-			<lne id="279" begin="13" end="18"/>
-			<lne id="280" begin="24" end="24"/>
-			<lne id="281" begin="21" end="25"/>
-			<lne id="282" begin="19" end="27"/>
-			<lne id="283" begin="32" end="32"/>
-			<lne id="284" begin="32" end="33"/>
-			<lne id="285" begin="32" end="34"/>
-			<lne id="286" begin="30" end="36"/>
-			<lne id="287" begin="39" end="39"/>
-			<lne id="288" begin="37" end="41"/>
-			<lne id="289" begin="46" end="46"/>
-			<lne id="290" begin="44" end="48"/>
-			<lne id="291" begin="51" end="51"/>
-			<lne id="292" begin="49" end="53"/>
-			<lne id="293" begin="56" end="56"/>
-			<lne id="294" begin="54" end="58"/>
-			<lne id="295" begin="61" end="61"/>
-			<lne id="296" begin="59" end="63"/>
-			<lne id="297" begin="65" end="65"/>
-			<lne id="298" begin="65" end="65"/>
-			<lne id="299" begin="65" end="65"/>
+			<lne id="279" begin="15" end="15"/>
+			<lne id="280" begin="15" end="16"/>
+			<lne id="281" begin="13" end="18"/>
+			<lne id="282" begin="24" end="24"/>
+			<lne id="283" begin="21" end="25"/>
+			<lne id="284" begin="19" end="27"/>
+			<lne id="285" begin="32" end="32"/>
+			<lne id="286" begin="32" end="33"/>
+			<lne id="287" begin="34" end="37"/>
+			<lne id="288" begin="32" end="38"/>
+			<lne id="289" begin="40" end="40"/>
+			<lne id="290" begin="42" end="42"/>
+			<lne id="291" begin="42" end="43"/>
+			<lne id="292" begin="42" end="44"/>
+			<lne id="293" begin="32" end="44"/>
+			<lne id="294" begin="30" end="46"/>
+			<lne id="295" begin="49" end="49"/>
+			<lne id="296" begin="47" end="51"/>
+			<lne id="297" begin="56" end="56"/>
+			<lne id="298" begin="54" end="58"/>
+			<lne id="299" begin="61" end="61"/>
+			<lne id="300" begin="59" end="63"/>
+			<lne id="301" begin="66" end="66"/>
+			<lne id="302" begin="64" end="68"/>
+			<lne id="303" begin="71" end="71"/>
+			<lne id="304" begin="69" end="73"/>
+			<lne id="305" begin="75" end="75"/>
+			<lne id="306" begin="75" end="75"/>
+			<lne id="307" begin="75" end="75"/>
 		</linenumbertable>
 		<localvariabletable>
-			<lve slot="2" name="111" begin="3" end="65"/>
-			<lve slot="3" name="273" begin="7" end="65"/>
-			<lve slot="4" name="274" begin="11" end="65"/>
-			<lve slot="0" name="17" begin="0" end="65"/>
-			<lve slot="1" name="109" begin="0" end="65"/>
+			<lve slot="2" name="111" begin="3" end="75"/>
+			<lve slot="3" name="273" begin="7" end="75"/>
+			<lve slot="4" name="274" begin="11" end="75"/>
+			<lve slot="0" name="17" begin="0" end="75"/>
+			<lve slot="1" name="109" begin="0" end="75"/>
 		</localvariabletable>
 	</operation>
 </asm>
