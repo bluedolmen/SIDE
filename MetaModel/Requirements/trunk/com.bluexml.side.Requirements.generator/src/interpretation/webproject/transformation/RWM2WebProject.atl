@@ -29,7 +29,11 @@ rule ReqDefs {
         title <- s.name,
         name <- 'index.html',
 		id <- s.id,
-		comment<-Sequence{s.documentation.format()},
+		comment<-	if (s.documentation <> OclUndefined) then
+						Sequence{s.documentation.format()}
+					else
+						Sequence{}
+        			endif,
         links <- RWM!Agent->allInstances()->collect(a | thisModule.resolveTemp(a,'link_loginPage'))->
 					union(RWM!Process->allInstances()->collect(a | thisModule.resolveTemp(a,'link_loginPage')))
     )
@@ -108,7 +112,19 @@ rule goalWithPrivileges {
     from s : RWM!Goal (s.privilegeGroup.size() > 0)
     to dataPage : WebProject!DataPage (
         id <- s.id,
-		comment<-Sequence{s.documentation.format(),s.synopsis.format()},
+		comment<-	if (s.documentation <> OclUndefined) then
+						if (s.synopsis <> OclUndefined) then
+							Sequence{s.documentation.format(), s.synopsis.format()}
+						else
+							Sequence{s.documentation.format()}
+						endif
+					else
+						if (s.synopsis <> OclUndefined) then
+							Sequence{s.synopsis.format()}
+						else
+							Sequence{}
+						endif
+        			endif,
     	title <- s.name,
         name <- s.__xmiID__+'.php',
         components <- 
@@ -135,7 +151,19 @@ rule goalWithoutPrivileges {
     from s : RWM!Goal (s.privilegeGroup.size() = 0)
     to dataPage : WebProject!GoalPage (
     	id <- s.id,
-		comment<-Sequence{s.documentation.format(),s.synopsis.format()},
+		comment<-	if (s.documentation <> OclUndefined) then
+						if (s.synopsis <> OclUndefined) then
+							Sequence{s.documentation.format(), s.synopsis.format()}
+						else
+							Sequence{s.documentation.format()}
+						endif
+					else
+						if (s.synopsis <> OclUndefined) then
+							Sequence{s.synopsis.format()}
+						else
+							Sequence{}
+						endif
+        			endif,
         title <- s.name,
         name <- s.__xmiID__+'.html',
         items <- thisModule.createGoalItem(s)
