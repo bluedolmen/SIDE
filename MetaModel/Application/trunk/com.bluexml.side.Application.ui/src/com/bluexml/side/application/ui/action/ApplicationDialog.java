@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.DialogCellEditor;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -108,6 +109,8 @@ import com.bluexml.side.application.ui.action.tree.TreeView;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
 import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
+import com.bluexml.side.application.ui.dialogs.RessourcesSelection;
+import com.bluexml.side.application.ui.dialogs.manageconfiguration.DialogResourceCellEditor;
 
 @SuppressWarnings("restriction")
 public class ApplicationDialog extends Dialog {
@@ -1410,6 +1413,8 @@ public class ApplicationDialog extends Dialog {
 		TextCellEditor textEditor = new TextCellEditor(generatorParameters);
 		editors[1] = (CellEditor) textEditor;
 
+		editors[1] = (CellEditor) new DialogResourceCellEditor(generatorParameters);
+		
 		// Assign the cell editors to the viewer
 		generatorParametersViewer.setCellEditors(editors);
 		// Set the cell modifier for the viewer

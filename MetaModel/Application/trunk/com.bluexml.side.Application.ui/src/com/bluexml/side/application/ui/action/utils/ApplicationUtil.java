@@ -14,10 +14,14 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.variables.IStringVariableManager;
+import org.eclipse.core.variables.VariablesPlugin;
+import org.eclipse.debug.ui.StringVariableSelectionDialog;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
@@ -31,6 +35,7 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
@@ -824,5 +829,16 @@ public class ApplicationUtil {
 				l.removeAll(toRemove);
 			}
 		}
+	}
+	
+	public static String eclipseVariableSubstitution(String exp) throws Exception {
+		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
+		return manager.performStringSubstitution(exp);
+	}
+	
+	public static String getVariable(Shell shell) {
+		StringVariableSelectionDialog dialog = new StringVariableSelectionDialog(shell);
+		dialog.open();
+		return dialog.getVariableExpression();
 	}
 }

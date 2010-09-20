@@ -259,13 +259,15 @@ public class Generate extends WorkspaceJob {
 	/**
 	 * @param configurationParameters
 	 * @param generationParameters
+	 * @throws Exception 
 	 */
-	public void setParameters(Map<String, String> configurationParameters, Map<String, String> generationParameters) {
+	public void setParameters(Map<String, String> configurationParameters, Map<String, String> generationParameters) throws Exception {
+		
 		for (ConfigurationParameters param : configuration.getParameters()) {
 			if (ApplicationDialog.staticFieldsName.contains(param.getKey())) {
-				configurationParameters.put(param.getKey(), param.getValue());
+				configurationParameters.put(param.getKey(), ApplicationUtil.eclipseVariableSubstitution(param.getValue()));
 			} else {
-				generationParameters.put(param.getKey(), param.getValue());
+				generationParameters.put(param.getKey(), ApplicationUtil.eclipseVariableSubstitution(param.getValue()));
 				// Check to know if option have been set, no error but
 				// warning
 				// message
@@ -274,15 +276,17 @@ public class Generate extends WorkspaceJob {
 				}
 			}
 		}
+		// set Generate properties
 		initOptions(configuration, configurationParameters);
+		
 	}
 
 	protected void initOptions(Configuration configuration, Map<String, String> configurationParameters) {
 		logPath = getLogPath(configuration, configurationParameters);
-		genPath = getGenerationPath(configuration, configurationParameters);
-		doDocumentation = getDoDocumentation(configuration, configurationParameters);
-		skipValidation = getSkipValidation(configuration, configurationParameters);
-		doClean = getCleanOption(configuration, configurationParameters);
+		genPath = getGenerationPath(configurationParameters);
+		doDocumentation = getDoDocumentation(configurationParameters);
+		skipValidation = getSkipValidation(configurationParameters);
+		doClean = getCleanOption(configurationParameters);
 	}
 
 	/**
@@ -308,19 +312,19 @@ public class Generate extends WorkspaceJob {
 		return configurationParameters.get(ApplicationDialog.KEY_LOGPATH) + fileSeparator + configuration.getName();
 	}
 
-	protected String getGenerationPath(Configuration configuration, Map<String, String> configurationParameters) {
+	protected String getGenerationPath(Map<String, String> configurationParameters) {
 		return configurationParameters.get(ApplicationDialog.KEY_GENPATH) + fileSeparator;
 	}
 
-	protected boolean getDoDocumentation(Configuration configuration, Map<String, String> configurationParameters) {
+	protected boolean getDoDocumentation(Map<String, String> configurationParameters) {
 		return Boolean.parseBoolean(configurationParameters.get(ApplicationDialog.KEY_DOCUMENTATION));
 	}
 
-	protected boolean getSkipValidation(Configuration configuration, Map<String, String> configurationParameters) {
+	protected boolean getSkipValidation(Map<String, String> configurationParameters) {
 		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_SKIPVALIDATION));
 	}
 
-	protected boolean getCleanOption(Configuration configuration, Map<String, String> configurationParameters) {
+	protected boolean getCleanOption(Map<String, String> configurationParameters) {
 		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_DOCLEAN));
 	}
 
