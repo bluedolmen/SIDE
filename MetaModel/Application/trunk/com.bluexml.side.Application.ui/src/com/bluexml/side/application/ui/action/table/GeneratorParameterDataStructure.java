@@ -15,13 +15,13 @@ public class GeneratorParameterDataStructure {
 		return data;
 	}
 
-	public void addGeneratorParameter(String p_key, String p_label, String p_value, String p_documentation) {
-		GeneratorParameter genParam = new GeneratorParameter(p_key, p_label, p_value, p_documentation);
+	public void addGeneratorParameter(String p_key, String p_label, String p_value, String p_documentation, String p_dataType) {
+		GeneratorParameter genParam = new GeneratorParameter(p_key, p_label, p_value, p_documentation, p_dataType);
 		data.add(genParam);
 	}
 
 	public void addGeneratorParameter(IConfigurationElement elt) {
-		GeneratorParameter genParam = new GeneratorParameter(elt.getAttribute("key"), elt.getAttribute("label"), "", elt.getAttribute("documentation"));
+		GeneratorParameter genParam = new GeneratorParameter(elt.getAttribute("key"), elt.getAttribute("label"), "", elt.getAttribute("documentation"), elt.getAttribute("dataType"));
 		data.add(genParam);
 	}
 

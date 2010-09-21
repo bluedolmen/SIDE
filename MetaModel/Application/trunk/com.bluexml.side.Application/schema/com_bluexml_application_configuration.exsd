@@ -290,6 +290,23 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="dataType" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="String">
+                  </enumeration>
+                  <enumeration value="File">
+                  </enumeration>
+                  <enumeration value="Directory">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
       </complexType>
    </element>
 

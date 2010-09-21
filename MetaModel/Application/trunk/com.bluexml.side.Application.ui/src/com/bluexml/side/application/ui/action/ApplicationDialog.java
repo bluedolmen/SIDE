@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.DialogCellEditor;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -109,7 +108,6 @@ import com.bluexml.side.application.ui.action.tree.TreeView;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
 import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
-import com.bluexml.side.application.ui.dialogs.RessourcesSelection;
 import com.bluexml.side.application.ui.dialogs.manageconfiguration.DialogResourceCellEditor;
 
 @SuppressWarnings("restriction")
@@ -120,7 +118,7 @@ public class ApplicationDialog extends Dialog {
 	private Group optionsGroup;
 	private static final int APPLY_ID = IDialogConstants.CLIENT_ID + 2;
 	private static final int GEN_ID = IDialogConstants.CLIENT_ID + 1;
-//	private Text config_description;
+	//	private Text config_description;
 	private Label errorMsg;
 	private TreeView genOptionsTree;
 	private Tree tree_1;
@@ -156,7 +154,7 @@ public class ApplicationDialog extends Dialog {
 	private TabItem deployementTabItem;
 	private Table modelPropertiesTable;
 	private Button cleanButton;
-//	private Button offlineMode;
+	//	private Button offlineMode;
 	private TabItem modelsTabItem;
 
 	public static String KEY_DOCUMENTATION = StaticConfigurationParameters.GENERATIONOPTIONSDOCUMENTATION.getLiteral();
@@ -165,7 +163,10 @@ public class ApplicationDialog extends Dialog {
 	public static String KEY_LOGPATH = StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral();
 	public static String KEY_GENPATH = StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral();
 	public static String KEY_OFFLINE = StaticConfigurationParameters.GENERATION_OPTION_OFFLINE_MODE.getLiteral();
-	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_DOCUMENTATION, KEY_DOCLEAN, KEY_OFFLINE);
+	public static String FORCE_UPDATE = StaticConfigurationParameters.UPDATE_DEPENDENCIES.getLiteral();
+	public static String MODULE_DEV_MODE = StaticConfigurationParameters.FM_DEV.getLiteral();
+
+	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_DOCUMENTATION, KEY_DOCLEAN, KEY_OFFLINE, FORCE_UPDATE, MODULE_DEV_MODE);
 
 	/**
 	 * Create the dialog
@@ -213,7 +214,7 @@ public class ApplicationDialog extends Dialog {
 			if (configuration != null)
 				if (configuration.getDescription() != null) {
 					configurationList.setToolTipText(configuration.getDescription());
-//					config_description.setText(configuration.getDescription());
+					//					config_description.setText(configuration.getDescription());
 				}
 
 			// Refresh tree
@@ -364,10 +365,10 @@ public class ApplicationDialog extends Dialog {
 			destinationText.setText(updatePathParam.getValue());
 		}
 
-//		ConfigurationParameters offline = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
-//		if (offline != null) {
-//			offlineMode.setSelection(Boolean.parseBoolean(offline.getValue()));
-//		}
+		//		ConfigurationParameters offline = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
+		//		if (offline != null) {
+		//			offlineMode.setSelection(Boolean.parseBoolean(offline.getValue()));
+		//		}
 	}
 
 	/**
@@ -412,7 +413,7 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	/**
-	 * Initialize the table with options for deployement
+	 * Initialize the table with options for deployment
 	 */
 	public void initializeDynamicDeployementParameters() {
 		// List deployer Id used
@@ -604,9 +605,9 @@ public class ApplicationDialog extends Dialog {
 						OptionComponant o = (OptionComponant) tn;
 						for (Option opt : ce.getOptions()) {
 							o.setEnabled(true);
-							ComponantConfiguration parent = (ComponantConfiguration)opt.eContainer();
-							String idOpt= parent.getId()+"_"+opt.getKey();
-							
+							ComponantConfiguration parent = (ComponantConfiguration) opt.eContainer();
+							String idOpt = parent.getId() + "_" + opt.getKey();
+
 							if (idOpt.equals(o.getId())) {
 								o.setChecked(true);
 							}
@@ -780,7 +781,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		modelList.setBounds(10, 38, 444, 115);
-		
+
 		final Button removeModelButton = new Button(composite_3, SWT.NONE);
 		removeModelButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
@@ -823,7 +824,7 @@ public class ApplicationDialog extends Dialog {
 				refreshConfiguration();
 			}
 		});
-		
+
 		// Fill the combo
 		for (ModelElement elt : application.getElements()) {
 			if (elt instanceof Configuration) {
@@ -855,8 +856,7 @@ public class ApplicationDialog extends Dialog {
 		tree_1.setBounds(0, 160, 459, 304);
 		List<Class<?>> omitedClassForGen = new ArrayList<Class<?>>();
 		omitedClassForGen.add(Deployer.class);
-		genOptionsTree.setContentProvider(new ConfigurationContentProvider(Metamodel.class, omitedClassForGen, genOptionsTree, configurationParameters, deployerParameters, genParamConfByGenerator,
-				deployParamConfByGenerator));
+		genOptionsTree.setContentProvider(new ConfigurationContentProvider(Metamodel.class, omitedClassForGen, genOptionsTree, configurationParameters, deployerParameters, genParamConfByGenerator, deployParamConfByGenerator));
 		genOptionsTree.setLabelProvider(new ConfigurationLabelProvider());
 		genOptionsTree.setInput(this);
 		genOptionsTree.expandAll();
@@ -877,8 +877,7 @@ public class ApplicationDialog extends Dialog {
 		});
 
 		logText.setBounds(115, 7, 260, 30);
-		
-		
+
 		final Label logLabel = new Label(composite_1, SWT.NONE);
 		logLabel.setAlignment(SWT.RIGHT);
 		logLabel.setText(Activator.Messages.getString("ApplicationDialog.30")); //$NON-NLS-1$
@@ -1001,22 +1000,22 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 
-//		offlineMode = new Button(composite_1, SWT.CHECK);
-//		offlineMode.setToolTipText(Activator.Messages.getString("ApplicationDialog.53")); //$NON-NLS-1$
-//		offlineMode.setText(Activator.Messages.getString("ApplicationDialog.52")); //$NON-NLS-1$
-//		offlineMode.setBounds(10, 137, 159, 16);
-//		offlineMode.addSelectionListener(new SelectionAdapter() {
-//			public void widgetSelected(final SelectionEvent e) {
-//				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
-//				Button b = (Button) e.getSource();
-//				if (param != null) {
-//					param.setValue(Boolean.toString(b.getSelection()));
-//				} else {
-//					addStaticParam(KEY_OFFLINE, Boolean.toString(b.getSelection()));
-//				}
-//				ApplicationDialog.modificationMade();
-//			}
-//		});
+		//		offlineMode = new Button(composite_1, SWT.CHECK);
+		//		offlineMode.setToolTipText(Activator.Messages.getString("ApplicationDialog.53")); //$NON-NLS-1$
+		//		offlineMode.setText(Activator.Messages.getString("ApplicationDialog.52")); //$NON-NLS-1$
+		//		offlineMode.setBounds(10, 137, 159, 16);
+		//		offlineMode.addSelectionListener(new SelectionAdapter() {
+		//			public void widgetSelected(final SelectionEvent e) {
+		//				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
+		//				Button b = (Button) e.getSource();
+		//				if (param != null) {
+		//					param.setValue(Boolean.toString(b.getSelection()));
+		//				} else {
+		//					addStaticParam(KEY_OFFLINE, Boolean.toString(b.getSelection()));
+		//				}
+		//				ApplicationDialog.modificationMade();
+		//			}
+		//		});
 
 		deployementTabItem = new TabItem(tabFolder, SWT.NONE);
 		deployementTabItem.setText(Activator.Messages.getString("ApplicationDialog.45")); //$NON-NLS-1$
@@ -1027,12 +1026,12 @@ public class ApplicationDialog extends Dialog {
 				if (tabFolder.getSelection().length > 0) {
 					if (tabFolder.getSelection()[0].equals(generationConfigurationTabItem) || tabFolder.getSelection()[0].equals(deployementTabItem)) {
 						optionsGroup.setVisible(true);
-//						config_description.setVisible(true);
+						//						config_description.setVisible(true);
 						documentationText.setBounds(490, 45, 297, 245);
 						refreshOptions();
 					} else {
 						optionsGroup.setVisible(false);
-//						config_description.setVisible(false);
+						//						config_description.setVisible(false);
 						documentationText.setBounds(490, 45, 297, 518);
 						refreshModelPropertiesTable();
 					}
@@ -1053,8 +1052,7 @@ public class ApplicationDialog extends Dialog {
 		List<Class<?>> omitedClassForDeploy = new ArrayList<Class<?>>();
 		omitedClassForDeploy.add(Generator.class);
 		omitedClassForDeploy.add(Metamodel.class);
-		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(Technology.class, omitedClassForDeploy, deployOptionsTree, configurationParameters, deployerParameters,
-				genParamConfByGenerator, deployParamConfByGenerator));
+		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(Technology.class, omitedClassForDeploy, deployOptionsTree, configurationParameters, deployerParameters, genParamConfByGenerator, deployParamConfByGenerator));
 		deployOptionsTree.setLabelProvider(new ConfigurationLabelProvider());
 		deployOptionsTree.setInput(this);
 		deployOptionsTree.expandAll();
@@ -1070,14 +1068,14 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 		// Component thaht shows the description in the top right of the scree
-//		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER | SWT.WRAP);
-//		config_description.setBounds(490, 250, 297, 51);
-//		config_description.setVisible(false);
+		//		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER | SWT.WRAP);
+		//		config_description.setBounds(490, 250, 297, 51);
+		//		config_description.setVisible(false);
 		// Browser that shows informations on the selected component (right)
 		documentationText = new Browser(container, SWT.BORDER);
 		documentationText.setBounds(490, 45, 297, 518);
 		documentationText.setText(buildHelpDocumentationText("")); //$NON-NLS-1$
-		
+
 		final Label listOfConfigurayionsLabel = new Label(container, SWT.NONE);
 		listOfConfigurayionsLabel.setBounds(5, 13, 136, 23);
 		listOfConfigurayionsLabel.setText(Activator.Messages.getString("ApplicationDialog.49")); //$NON-NLS-1$
@@ -1102,7 +1100,7 @@ public class ApplicationDialog extends Dialog {
 							configurationList.setItems(items);
 							configurationList.select(index);
 							configurationList.setToolTipText(config.getDescription());
-//							config_description.setText(config.getDescription());
+							//							config_description.setText(config.getDescription());
 							modificationMade();
 						}
 					}
@@ -1129,8 +1127,6 @@ public class ApplicationDialog extends Dialog {
 		});
 		copyBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/copy.png")); //$NON-NLS-1$
 
-		
-		
 		final Button deleteBt = new Button(container, SWT.NONE);
 		deleteBt.setBounds(475, 10, 48, 26);
 		deleteBt.addSelectionListener(new SelectionAdapter() {
@@ -1254,20 +1250,19 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	private void copyConfiguration() {
-		Configuration config_ =getCurrentConfiguration();
+		Configuration config_ = getCurrentConfiguration();
 		int i = 0;
 
-		String newName=config_.getName();
-		String old = config_.getName().replaceFirst(" \\([0-9]*\\)","");
-		
+		String newName = config_.getName();
+		String old = config_.getName().replaceFirst(" \\([0-9]*\\)", "");
+
 		while (application.getConfiguration(newName) != null) {
 			i++;
-			newName = old+" (" + i + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+			newName = old + " (" + i + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		
+
 		Configuration config = ApplicationUtil.cloneConfiguration(config_);
-		
-		
+
 		config.setName(newName);
 		configurationList.add(newName);
 		configurationList.select(configurationList.getItemCount() - 1);
@@ -1278,7 +1273,7 @@ public class ApplicationDialog extends Dialog {
 		errorMsg.setText(""); //$NON-NLS-1$
 		refreshConfiguration();
 	}
-	
+
 	/**
 	 * Create the static parameters (used for conf init)
 	 * 
@@ -1414,7 +1409,7 @@ public class ApplicationDialog extends Dialog {
 		editors[1] = (CellEditor) textEditor;
 
 		editors[1] = (CellEditor) new DialogResourceCellEditor(generatorParameters);
-		
+
 		// Assign the cell editors to the viewer
 		generatorParametersViewer.setCellEditors(editors);
 		// Set the cell modifier for the viewer
@@ -1665,7 +1660,7 @@ public class ApplicationDialog extends Dialog {
 				if (!canCheck) {
 					el.setChecked(false);
 					disableAllSubElements(item);
-					tv.update(el, null);					
+					tv.update(el, null);
 					errorMsg.setText(Activator.Messages.getString("ApplicationDialog.100")); //$NON-NLS-1$
 				} else {
 					errorMsg.setText(""); //$NON-NLS-1$

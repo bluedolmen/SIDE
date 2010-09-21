@@ -14,7 +14,6 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
@@ -79,6 +78,11 @@ public class ApplicationUtil {
 	public static final String APPLICATION_DEPLOYERVERSION = "deployerVersion";
 
 	public static final String APPLICATION_OPTION = "option";
+
+	public static final String APPLICATION_CONFIGURATION_PARAMETERS = "configurationParameter";
+	public static final String APPLICATION_CONFIGURATION_PARAMETERS_KEY = "key";
+	public static final String APPLICATION_CONFIGURATION_PARAMETERS_DATATYPE = "dataType";
+	public static final String APPLICATION_CONFIGURATION_PARAMETERS_LABEL = "label";
 
 	public static final String APPLICATION_CONSTRAINTS = "moduleDependence";
 	public static final String APPLICATION_CONSTRAINTS_MODULEID = "moduleId";
@@ -413,7 +417,7 @@ public class ApplicationUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Check if the element given is active in the key
 	 * 
@@ -426,8 +430,8 @@ public class ApplicationUtil {
 		// If the element is a component and not valid we don't enable it
 		try {
 			OptionComponant option = ((OptionComponant) el);
-			String optionID= option.getId();
-			ImplNode iN = (ImplNode)option.getParent();
+			String optionID = option.getId();
+			ImplNode iN = (ImplNode) option.getParent();
 			Class<Checkable> gen;
 			if (Platform.getBundle(iN.getContributorId()) != null) {
 				gen = Platform.getBundle(iN.getContributorId()).loadClass(iN.getLaunchClass());
@@ -706,6 +710,60 @@ public class ApplicationUtil {
 		// remove invalid deployerConfiguration
 		config.getDeployerConfigurations().removeAll(deployerConfToremove);
 
+		// check configuration parameters
+		List<ConfigurationParameters> confParams = config.getParameters();
+		List<ConfigurationParameters> confParamsToRemove = new ArrayList<ConfigurationParameters>();
+		for (ConfigurationParameters configurationParameters : confParams) {
+			String id = configurationParameters.getKey();
+			Map<String, String> query = new HashMap<String, String>();
+			query.put("key", id);
+			// search in All SIDE extension
+			IConfigurationElement config_exp = getIConfigurationElement(configurationParameters);
+
+			if (config_exp != null) {
+				// update value
+				configurationParameters.setDataType(config_exp.getAttribute(APPLICATION_CONFIGURATION_PARAMETERS_DATATYPE));
+			} else if (!ApplicationDialog.staticFieldsName.contains(id)) {
+				// parameters is not defined anywhere, maybe not used anymore
+				System.out.println("parameters not defined, listed to be deleted :"+id);
+				confParamsToRemove.add(configurationParameters);
+			}
+		}
+
+		//		config.getParameters().removeAll(confParamsToRemove);
+
+	}
+
+	public static IConfigurationElement getIConfigurationElement(ConfigurationParameters configurationParameters) {
+		IConfigurationElement conf = null;
+		String id = configurationParameters.getKey();
+		Map<String, String> query = new HashMap<String, String>();
+		query.put("key", id);
+		// search in All SIDE extension
+		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSIONPOINT_ID);
+
+		for (IConfigurationElement config_exp : contributions) {
+			List<IConfigurationElement> matchs = ExtensionPointUtils.getIConfigurationElementBy(config_exp, APPLICATION_CONFIGURATION_PARAMETERS, query);
+			if (matchs.size() > 0) {
+				// ok, check if mismatch exists
+				String key = matchs.get(0).getAttribute(APPLICATION_CONFIGURATION_PARAMETERS_KEY);
+				String dataType = matchs.get(0).getAttribute(APPLICATION_CONFIGURATION_PARAMETERS_DATATYPE);
+				String label = matchs.get(0).getAttribute(APPLICATION_CONFIGURATION_PARAMETERS_LABEL);
+				for (IConfigurationElement iConfigurationElement : matchs) {
+					String key_ = iConfigurationElement.getAttribute(APPLICATION_CONFIGURATION_PARAMETERS_KEY);
+					String dataType_ = iConfigurationElement.getAttribute(APPLICATION_CONFIGURATION_PARAMETERS_DATATYPE);
+					String label_ = iConfigurationElement.getAttribute(APPLICATION_CONFIGURATION_PARAMETERS_LABEL);
+					if (dataType != null && key.equals(key_) && label.equals(label_) && dataType.equals(dataType_)) {
+						conf = iConfigurationElement;
+					} else {
+						
+						// some mistake and mismatch in extension
+						System.err.println("SIDE checking Extension : Error in parameters declaration " + key+" contrib :"+iConfigurationElement.getContributor().getName());
+					}
+				}
+			}
+		}
+		return conf;
 	}
 
 	/**
@@ -740,8 +798,6 @@ public class ApplicationUtil {
 		}
 		return null;
 	}
-
-	
 
 	/**
 	 * build a tmp project containning all dependencies and use mvn
@@ -792,8 +848,8 @@ public class ApplicationUtil {
 	 * Save data in XML file
 	 */
 	public static void saveData(IFile model, Application appModel) {
-		streamline(appModel);		
-		
+		streamline(appModel);
+
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("application", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 		resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI, ApplicationPackage.eINSTANCE);
@@ -817,11 +873,11 @@ public class ApplicationUtil {
 		for (ModelElement modelElement : elements) {
 			if (modelElement instanceof Configuration) {
 				Configuration config = (Configuration) modelElement;
-				EList<ConfigurationParameters> l =config.getParameters();
+				EList<ConfigurationParameters> l = config.getParameters();
 				List<ConfigurationParameters> toRemove = new ArrayList<ConfigurationParameters>();
 				for (ConfigurationParameters configurationParameters : l) {
 					if (configurationParameters.getValue() == null | configurationParameters.getValue().equals("")) {
-						
+
 						toRemove.add(configurationParameters);
 					}
 				}
@@ -830,12 +886,12 @@ public class ApplicationUtil {
 			}
 		}
 	}
-	
+
 	public static String eclipseVariableSubstitution(String exp) throws Exception {
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
 		return manager.performStringSubstitution(exp);
 	}
-	
+
 	public static String getVariable(Shell shell) {
 		StringVariableSelectionDialog dialog = new StringVariableSelectionDialog(shell);
 		dialog.open();

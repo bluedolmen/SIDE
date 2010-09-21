@@ -348,6 +348,15 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getConfigurationParameters_DataType() {
+		return (EAttribute)configurationParametersEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDeployerConfiguration() {
 		return deployerConfigurationEClass;
 	}
@@ -576,6 +585,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		configurationParametersEClass = createEClass(CONFIGURATION_PARAMETERS);
 		createEAttribute(configurationParametersEClass, CONFIGURATION_PARAMETERS__KEY);
 		createEAttribute(configurationParametersEClass, CONFIGURATION_PARAMETERS__VALUE);
+		createEAttribute(configurationParametersEClass, CONFIGURATION_PARAMETERS__DATA_TYPE);
 
 		deployerConfigurationEClass = createEClass(DEPLOYER_CONFIGURATION);
 		createEAttribute(deployerConfigurationEClass, DEPLOYER_CONFIGURATION__DEPLOYER_NAME);
@@ -663,6 +673,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		initEClass(configurationParametersEClass, ConfigurationParameters.class, "ConfigurationParameters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConfigurationParameters_Key(), ecorePackage.getEString(), "key", null, 0, 1, ConfigurationParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConfigurationParameters_Value(), ecorePackage.getEString(), "value", null, 0, 1, ConfigurationParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConfigurationParameters_DataType(), ecorePackage.getEString(), "dataType", null, 0, 1, ConfigurationParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(deployerConfigurationEClass, DeployerConfiguration.class, "DeployerConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeployerConfiguration_DeployerName(), ecorePackage.getEString(), "deployerName", null, 0, 1, DeployerConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -690,6 +701,8 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		initEEnum(staticConfigurationParametersEEnum, StaticConfigurationParameters.class, "StaticConfigurationParameters");
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSCLEAN);
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSDOCUMENTATION);
+		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.UPDATE_DEPENDENCIES);
+		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.FM_DEV);
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH);
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH);
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTION_SKIP_VALIDATION);

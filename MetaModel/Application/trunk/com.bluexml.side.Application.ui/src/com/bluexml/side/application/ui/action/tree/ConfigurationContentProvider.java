@@ -157,7 +157,6 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		// printTree();
 		// Now we hide branches of the tree without generator or deployer leaf
 		cleanupTree(rootSet);
-		initializeFromKey();
 //		printTree();
 
 	}
@@ -371,13 +370,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		return toCheck;
 	}
 
-	/**
-	 * Initialise les �l�ments de l'arbre en les checkant sur la cl�. Si
-	 * l'�l�ment est invalide il sera desactiv�
-	 */
-	public void initializeFromKey() {
-
-	}
+	
 
 	public void dispose() {
 	}

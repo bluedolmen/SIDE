@@ -40,6 +40,7 @@
     <genClasses ecoreClass="application.ecore#//ConfigurationParameters">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationParameters/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationParameters/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationParameters/dataType"/>
     </genClasses>
     <genClasses ecoreClass="application.ecore#//DeployerConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//DeployerConfiguration/deployerName"/>

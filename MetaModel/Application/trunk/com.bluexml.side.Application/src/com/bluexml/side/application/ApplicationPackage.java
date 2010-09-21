@@ -532,13 +532,22 @@ public interface ApplicationPackage extends EPackage {
 	int CONFIGURATION_PARAMETERS__VALUE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Data Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION_PARAMETERS__DATA_TYPE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Configuration Parameters</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_PARAMETERS_FEATURE_COUNT = 2;
+	int CONFIGURATION_PARAMETERS_FEATURE_COUNT = 3;
 
 
 	/**
@@ -935,6 +944,17 @@ public interface ApplicationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getConfigurationParameters_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ConfigurationParameters#getDataType <em>Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Data Type</em>'.
+	 * @see com.bluexml.side.application.ConfigurationParameters#getDataType()
+	 * @see #getConfigurationParameters()
+	 * @generated
+	 */
+	EAttribute getConfigurationParameters_DataType();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.application.DeployerConfiguration <em>Deployer Configuration</em>}'.
@@ -1339,6 +1359,14 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONFIGURATION_PARAMETERS__VALUE = eINSTANCE.getConfigurationParameters_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIGURATION_PARAMETERS__DATA_TYPE = eINSTANCE.getConfigurationParameters_DataType();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.impl.DeployerConfigurationImpl <em>Deployer Configuration</em>}' class.

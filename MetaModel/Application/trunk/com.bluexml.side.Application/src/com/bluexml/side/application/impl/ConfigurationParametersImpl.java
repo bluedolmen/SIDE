@@ -23,6 +23,7 @@ import com.bluexml.side.application.ConfigurationParameters;
  * <ul>
  *   <li>{@link com.bluexml.side.application.impl.ConfigurationParametersImpl#getKey <em>Key</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ConfigurationParametersImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ConfigurationParametersImpl#getDataType <em>Data Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,6 +69,26 @@ public class ConfigurationParametersImpl extends EObjectImpl implements Configur
 	 * @ordered
 	 */
 	protected String value = VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDataType() <em>Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DATA_TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDataType() <em>Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String dataType = DATA_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -135,6 +156,27 @@ public class ConfigurationParametersImpl extends EObjectImpl implements Configur
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDataType() {
+		return dataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDataType(String newDataType) {
+		String oldDataType = dataType;
+		dataType = newDataType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ApplicationPackage.CONFIGURATION_PARAMETERS__DATA_TYPE, oldDataType, dataType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -142,6 +184,8 @@ public class ConfigurationParametersImpl extends EObjectImpl implements Configur
 				return getKey();
 			case ApplicationPackage.CONFIGURATION_PARAMETERS__VALUE:
 				return getValue();
+			case ApplicationPackage.CONFIGURATION_PARAMETERS__DATA_TYPE:
+				return getDataType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,6 +203,9 @@ public class ConfigurationParametersImpl extends EObjectImpl implements Configur
 				return;
 			case ApplicationPackage.CONFIGURATION_PARAMETERS__VALUE:
 				setValue((String)newValue);
+				return;
+			case ApplicationPackage.CONFIGURATION_PARAMETERS__DATA_TYPE:
+				setDataType((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -178,6 +225,9 @@ public class ConfigurationParametersImpl extends EObjectImpl implements Configur
 			case ApplicationPackage.CONFIGURATION_PARAMETERS__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case ApplicationPackage.CONFIGURATION_PARAMETERS__DATA_TYPE:
+				setDataType(DATA_TYPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -194,6 +244,8 @@ public class ConfigurationParametersImpl extends EObjectImpl implements Configur
 				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
 			case ApplicationPackage.CONFIGURATION_PARAMETERS__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case ApplicationPackage.CONFIGURATION_PARAMETERS__DATA_TYPE:
+				return DATA_TYPE_EDEFAULT == null ? dataType != null : !DATA_TYPE_EDEFAULT.equals(dataType);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -212,6 +264,8 @@ public class ConfigurationParametersImpl extends EObjectImpl implements Configur
 		result.append(key);
 		result.append(", value: ");
 		result.append(value);
+		result.append(", dataType: ");
+		result.append(dataType);
 		result.append(')');
 		return result.toString();
 	}

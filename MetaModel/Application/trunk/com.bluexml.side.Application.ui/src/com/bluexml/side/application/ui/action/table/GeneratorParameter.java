@@ -7,12 +7,14 @@ public class GeneratorParameter implements Comparable<GeneratorParameter>{
 	private String value;
 	private String label;
 	private String documentation;
+	private String dataType;
 
-	public GeneratorParameter(String key, String label, String value, String documentation) {
+	public GeneratorParameter(String key, String label, String value, String documentation, String dataType) {
 		this.key = key;
 		this.label = label;
 		this.value = value;
 		this.documentation = documentation;
+		this.dataType = dataType;
 	}
 
 	public GeneratorParameter(IConfigurationElement confParam) {
@@ -20,6 +22,8 @@ public class GeneratorParameter implements Comparable<GeneratorParameter>{
 		this.label = confParam.getAttribute("label");
 		this.value = null;
 		this.documentation = confParam.getAttribute("documentation");
+		this.dataType = confParam.getAttribute("dataType");
+		
 	}
 
 	public String getDocumentation() {
@@ -52,6 +56,14 @@ public class GeneratorParameter implements Comparable<GeneratorParameter>{
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public void setDataType(String dataType) {
+		this.dataType = dataType;
+	}
+
+	public String getDataType() {
+		return dataType;
 	}
 
 	public int compareTo(GeneratorParameter o) {

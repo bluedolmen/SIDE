@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.bluexml.side.application.ConfigurationParameters#getKey <em>Key</em>}</li>
  *   <li>{@link com.bluexml.side.application.ConfigurationParameters#getValue <em>Value</em>}</li>
+ *   <li>{@link com.bluexml.side.application.ConfigurationParameters#getDataType <em>Data Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,5 +82,31 @@ public interface ConfigurationParameters extends EObject {
 	 * @generated
 	 */
 	void setValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Data Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Data Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Data Type</em>' attribute.
+	 * @see #setDataType(String)
+	 * @see com.bluexml.side.application.ApplicationPackage#getConfigurationParameters_DataType()
+	 * @model
+	 * @generated
+	 */
+	String getDataType();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.application.ConfigurationParameters#getDataType <em>Data Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Data Type</em>' attribute.
+	 * @see #getDataType()
+	 * @generated
+	 */
+	void setDataType(String value);
 
 } // ConfigurationParameters

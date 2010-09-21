@@ -64,6 +64,7 @@ public class ConfigurationParametersItemProvider
 
 			addKeyPropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
+			addDataTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -113,6 +114,28 @@ public class ConfigurationParametersItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Data Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDataTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ConfigurationParameters_dataType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ConfigurationParameters_dataType_feature", "_UI_ConfigurationParameters_type"),
+				 ApplicationPackage.Literals.CONFIGURATION_PARAMETERS__DATA_TYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns ConfigurationParameters.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -151,6 +174,7 @@ public class ConfigurationParametersItemProvider
 		switch (notification.getFeatureID(ConfigurationParameters.class)) {
 			case ApplicationPackage.CONFIGURATION_PARAMETERS__KEY:
 			case ApplicationPackage.CONFIGURATION_PARAMETERS__VALUE:
+			case ApplicationPackage.CONFIGURATION_PARAMETERS__DATA_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
