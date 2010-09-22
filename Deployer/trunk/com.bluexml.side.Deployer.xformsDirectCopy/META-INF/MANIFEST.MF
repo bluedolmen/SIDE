@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XformsDirectCopy
 Bundle-SymbolicName: com.bluexml.side.Deployer.xformsDirectCopy;singleton:=true
-Bundle-Version: 1.0.22.v18401-20100617
+Bundle-Version: 1.0.23.v20461-20100922
 Bundle-Activator: com.bluexml.side.deployer.xformsdirectcopy.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
