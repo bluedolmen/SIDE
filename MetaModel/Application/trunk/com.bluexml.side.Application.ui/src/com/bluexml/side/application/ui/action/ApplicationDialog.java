@@ -1209,7 +1209,7 @@ public class ApplicationDialog extends Dialog {
 			}
 
 			public void mouseDown(MouseEvent e) {
-				generatorParameterCellModifier.applyDirtyValue();
+//				generatorParameterCellModifier.applyDirtyValue();
 			}
 
 			public void mouseDoubleClick(MouseEvent e) {
@@ -1494,7 +1494,7 @@ public class ApplicationDialog extends Dialog {
 		if (generatorParameterCellModifier != null) {
 			// only for some OS that do not unselect cell Editor before fire
 			// this event, so we record changes manually
-			generatorParameterCellModifier.applyDirtyValue();
+//			generatorParameterCellModifier.applyDirtyValue();
 		}
 		if (buttonId == IDialogConstants.CLOSE_ID) {
 			if (applicationModified) {

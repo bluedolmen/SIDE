@@ -1,5 +1,8 @@
 package com.bluexml.side.application.ui.dialogs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -36,9 +39,9 @@ import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 
 public class RessourcesSelection extends Dialog {
-	public static final String RESOURCE_TYPE_DIRECTORY = "dir";
-	public static final String RESOURCE_TYPE_FILE = "file";
-	public static final String RESOURCE_TYPE_STRING = "string";
+	public static final String RESOURCE_TYPE_DIRECTORY = "Directory";
+	public static final String RESOURCE_TYPE_FILE = "File";
+	public static final String RESOURCE_TYPE_STRING = "String";
 
 	private Text locationField;
 	private String initialValue = "";
@@ -50,15 +53,24 @@ public class RessourcesSelection extends Dialog {
 	private String locationLabel;
 	private String dataType = "";
 
+	private List<ResourceSelectionListener> resourceSelectionListener = new ArrayList<ResourceSelectionListener>();
+
+	public void addResourceSelectionListener(ResourceSelectionListener listener) {
+		resourceSelectionListener.add(listener);
+	}
+
 	public String getResourcePath() {
 		return resourcePath;
 	}
 
-	public RessourcesSelection(Shell parent, String locationLabel, String initialValue, String resource_type) {
+	public RessourcesSelection(Shell parent) {
 		super(parent);
+	}
+
+	public void init(String locationLabel, String initialValue, String resource_type) {
 		this.initialValue = initialValue;
-		this.locationLabel = locationLabel;
 		this.dataType = resource_type;
+		this.locationLabel = locationLabel;
 		this.resourcePath = initialValue;
 	}
 
@@ -303,7 +315,18 @@ public class RessourcesSelection extends Dialog {
 	@Override
 	protected void cancelPressed() {
 		this.resourcePath = initialValue;
+		for (ResourceSelectionListener listener : resourceSelectionListener) {
+			listener.cancel();
+		}
 		super.cancelPressed();
+	}
+
+	@Override
+	protected void okPressed() {
+		for (ResourceSelectionListener listener : resourceSelectionListener) {
+			listener.ok();
+		}
+		super.okPressed();
 	}
 
 }
