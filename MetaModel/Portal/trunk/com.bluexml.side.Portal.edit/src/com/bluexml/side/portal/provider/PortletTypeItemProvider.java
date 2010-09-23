@@ -190,7 +190,7 @@ public class PortletTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PortletType)object).getName();
+		String label = ((PortletType)object).getId();
 		return label == null || label.length() == 0 ?
 			getString("_UI_PortletType_type") :
 			getString("_UI_PortletType_type") + " " + label;

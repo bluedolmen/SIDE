@@ -20,5 +20,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.View.edit,
  com.bluexml.side.Util.metaModel.validate,
  com.bluexml.side.Form.edit,
- com.bluexml.side.Workflow.edit
+ com.bluexml.side.Workflow.edit,
+ org.eclipse.emf.edit.ui
 Eclipse-LazyStart: true

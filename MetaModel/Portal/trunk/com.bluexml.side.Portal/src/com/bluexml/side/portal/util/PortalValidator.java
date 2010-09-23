@@ -97,6 +97,14 @@ public class PortalValidator extends EObjectValidator {
 	 */
 	private static Constraint portletType_haveIdentifierInvOCL;
 	/**
+	 * The parsed OCL expression for the definition of the '<em>unicID</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint portletType_unicIDInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>haveType</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -354,6 +362,7 @@ public class PortalValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(portletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(portletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePortletType_haveIdentifier(portletType, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePortletType_unicID(portletType, diagnostics, context);
 		return result;
 	}
 
@@ -395,6 +404,45 @@ public class PortalValidator extends EObjectValidator {
 		}
 		return true;
 	}
+	/**
+	 * Validates the unicID constraint of '<em>Portlet Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePortletType_unicID(PortletType portletType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (portletType_unicIDInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(PortalPackage.Literals.PORTLET_TYPE);
+
+			EAnnotation ocl = PortalPackage.Literals.PORTLET_TYPE.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("unicID");
+
+			try {
+				portletType_unicIDInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(portletType_unicIDInvOCL);
+
+		if (!query.check(portletType)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( PortalPackage.Literals.PORTLET_TYPE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"unicID")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "unicID", getObjectLabel(portletType, context) }),
+						 new Object[] { portletType }));
+			}
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

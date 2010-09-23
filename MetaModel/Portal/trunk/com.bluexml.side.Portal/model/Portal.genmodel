@@ -8,7 +8,7 @@
   <foreignModel>Portal.ecore</foreignModel>
   <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
   <genPackages prefix="Portal" basePackage="com.bluexml.side" disposableProviderFactory="true"
-      ecorePackage="Portal.ecore#/">
+      contentTypeIdentifier="" ecorePackage="Portal.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Portal.ecore#//widthUnit">
       <genEnumLiterals ecoreEnumLiteral="Portal.ecore#//widthUnit/Percent"/>
       <genEnumLiterals ecoreEnumLiteral="Portal.ecore#//widthUnit/Pixel"/>
@@ -58,13 +58,13 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Portal.ecore#//Portlet/isPortletInternal"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Portal.ecore#//Portlet/isInstanceOfPortletType"/>
     </genClasses>
-    <genClasses ecoreClass="Portal.ecore#//PortletType">
+    <genClasses ecoreClass="Portal.ecore#//PortletType" labelFeature="#//portal/PortletType/id">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//PortletType/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//PortletType/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Portal.ecore#//PortletType/haveAttribute"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//PortletType/instanceable"/>
     </genClasses>
-    <genClasses ecoreClass="Portal.ecore#//PortletInternal">
+    <genClasses ecoreClass="Portal.ecore#//PortletInternal" labelFeature="#//portal/PortletInternal/type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//PortletInternal/type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Portal.ecore#//PortletInternal/view"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Portal.ecore#//PortletInternal/form"/>

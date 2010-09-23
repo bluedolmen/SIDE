@@ -153,11 +153,12 @@ public class PortletInternalItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = crop(((PortletInternal)object).getDocumentation());
+		PortletInternal labelValue = (PortletInternal)object;
+		String label = labelValue == null ? null : Utils.getPortletInternalLabel(labelValue);
 		return label == null || label.length() == 0 ?
 			getString("_UI_PortletInternal_type") :
 			getString("_UI_PortletInternal_type") + " " + label;

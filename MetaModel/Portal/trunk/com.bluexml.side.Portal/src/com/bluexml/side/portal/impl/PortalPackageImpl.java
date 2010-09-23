@@ -1043,7 +1043,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		initEReference(getPortlet_IsInstanceOfPortletType(), this.getInstanciatePortletType(), null, "isInstanceOfPortletType", null, 0, 1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portletTypeEClass, PortletType.class, "PortletType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPortletType_Id(), ecorePackage.getEString(), "id", null, 0, 1, PortletType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPortletType_Id(), ecorePackage.getEString(), "id", "PortletType", 0, 1, PortletType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPortletType_Name(), ecorePackage.getEString(), "name", null, 0, 1, PortletType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPortletType_HaveAttribute(), this.getPortletAttribute(), null, "haveAttribute", null, 0, -1, PortletType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPortletType_Instanceable(), ecorePackage.getEBoolean(), "instanceable", "true", 0, 1, PortletType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1138,7 +1138,8 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		  (portletTypeEClass, 
 		   source, 
 		   new String[] {
-			 "haveIdentifier", "not (self.id.oclIsUndefined() or self.id = \'\' or self.name.oclIsUndefined() or self.name = \'\')"
+			 "haveIdentifier", "not (self.id.oclIsUndefined() or self.id = \'\' or self.name.oclIsUndefined() or self.name = \'\')",
+			 "unicID", "PortletType.allInstances() ->one(x| x.id = self.id)"
 		   });			
 		addAnnotation
 		  (portletInternalEClass, 
@@ -1185,7 +1186,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		  (portletTypeEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "haveIdentifier"
+			 "constraints", "haveIdentifier unicID"
 		   });			
 		addAnnotation
 		  (portletInternalEClass, 

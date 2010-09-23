@@ -15,11 +15,13 @@
 package com.bluexml.side.Portal.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -42,18 +44,22 @@ import com.bluexml.side.Portal.modeler.diagram.dialogs.PortletInternalEditDialog
 import com.bluexml.side.Portal.modeler.diagram.figures.PortletInternalFigure;
 import com.bluexml.side.Portal.modeler.diagram.policies.isInternalPortletEdgeCreationEditPolicy;
 import com.bluexml.side.Portal.modeler.diagram.preferences.PdDiagramPreferenceConstants;
+import com.bluexml.side.form.provider.FormItemProviderAdapterFactory;
+import com.bluexml.side.portal.InternalPortletType;
 import com.bluexml.side.portal.PortletInternal;
+import com.bluexml.side.view.provider.ViewItemProviderAdapterFactory;
 
 /**
  * The PortletInternal object controller
- *
+ * 
  * @generated
  */
 public class PortletInternalEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 *
-	 * @param obj the graph node
+	 * 
+	 * @param obj
+	 *            the graph node
 	 * @generated
 	 */
 	public PortletInternalEditPart(GraphNode obj) {
@@ -62,7 +68,7 @@ public class PortletInternalEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 *
+	 * 
 	 * @generated
 	 */
 	protected void createEditPolicies() {
@@ -144,7 +150,7 @@ public class PortletInternalEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * Set the name of the Page
+	 * Set the name of the PortletInternal
 	 * 
 	 * @see org.topcased.modeler.edit.EMFGraphNodeEditPart#refreshHeaderLabel()
 	 */
@@ -154,15 +160,30 @@ public class PortletInternalEditPart extends EMFGraphNodeEditPart {
 			PortletInternalFigure fig = (PortletInternalFigure) ifig;
 			ILabel lbl = fig.getLabel();
 			PortletInternal pi = (PortletInternal) Utils.getElement(getGraphNode());
-			String textLabel = "";
-			if (pi.getType() != null && pi.getType().toString().length() > 0) {
-				textLabel = pi.getType() + " ";
-			}
-			
+			String textLabel = getPortletInternalLabel(pi);
 			lbl.setText(textLabel);
 
 			lbl.setFont(JFaceResources.getFontRegistry().get("BoldFont"));
 		}
+	}
+
+	/**
+	 * @param pi
+	 * @return
+	 */
+	private String getPortletInternalLabel(PortletInternal pi) {
+		String textLabel = "";
+		if (pi.getType() != null && pi.getType().toString().length() > 0) {
+			if (pi.getType().equals(InternalPortletType.FORM) && pi.getForm() != null) {
+				ILabelProvider labelProvider = new AdapterFactoryLabelProvider(new FormItemProviderAdapterFactory());
+				textLabel += labelProvider.getText(pi.getForm());
+			} else if (pi.getType().equals(InternalPortletType.VIEW) && pi.getView() != null) {
+				ILabelProvider labelProvider = new AdapterFactoryLabelProvider(new ViewItemProviderAdapterFactory());
+				textLabel = pi.getType() + " ";
+				textLabel += labelProvider.getText(pi.getView());
+			}
+		}
+		return textLabel;
 	}
 
 }

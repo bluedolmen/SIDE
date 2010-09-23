@@ -24,13 +24,14 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.portal.PortalPackage#getPortletType()
- * @model annotation="http://www.bluexml.com/OCL haveIdentifier='not (self.id.oclIsUndefined() or self.id = \'\' or self.name.oclIsUndefined() or self.name = \'\')'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='haveIdentifier'"
+ * @model annotation="http://www.bluexml.com/OCL haveIdentifier='not (self.id.oclIsUndefined() or self.id = \'\' or self.name.oclIsUndefined() or self.name = \'\')' unicID='PortletType.allInstances() ->one(x| x.id = self.id)'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='haveIdentifier unicID'"
  * @generated
  */
 public interface PortletType extends PortalModelElement {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * The default value is <code>"PortletType"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
@@ -40,7 +41,7 @@ public interface PortletType extends PortalModelElement {
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
 	 * @see com.bluexml.side.portal.PortalPackage#getPortletType_Id()
-	 * @model
+	 * @model default="PortletType" id="true"
 	 * @generated
 	 */
 	String getId();

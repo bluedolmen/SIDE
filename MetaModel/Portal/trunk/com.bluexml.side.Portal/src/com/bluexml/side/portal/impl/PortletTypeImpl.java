@@ -52,7 +52,7 @@ public class PortletTypeImpl extends PortalModelElementImpl implements PortletTy
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ID_EDEFAULT = null;
+	protected static final String ID_EDEFAULT = "PortletType";
 
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.

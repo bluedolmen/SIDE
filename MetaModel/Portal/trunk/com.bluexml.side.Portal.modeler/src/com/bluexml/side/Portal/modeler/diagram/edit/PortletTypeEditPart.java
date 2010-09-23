@@ -154,7 +154,7 @@ public class PortletTypeEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * Set the name of the Portlet
+	 * Set the name of the PortletType
 	 * 
 	 * @see org.topcased.modeler.edit.EMFGraphNodeEditPart#refreshHeaderLabel()
 	 */
