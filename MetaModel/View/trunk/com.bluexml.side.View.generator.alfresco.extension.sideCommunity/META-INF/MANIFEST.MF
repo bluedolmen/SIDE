@@ -7,6 +7,7 @@ Bundle-Activator: com.bluexml.side.view.generator.alfresco.extension.sidecommuni
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Application,
- com.bluexml.side.View
+ com.bluexml.side.View,
+ com.bluexml.side.View.generator.alfresco;bundle-version="1.0.47"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
