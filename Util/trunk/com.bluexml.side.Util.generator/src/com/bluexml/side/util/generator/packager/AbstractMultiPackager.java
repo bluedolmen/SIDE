@@ -11,8 +11,7 @@ import org.eclipse.core.resources.IFolder;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public abstract class AbstractMultiPackager {
-	protected Map<String, AbstractPackager> packagers;
-	protected Map<String, IFile> packageFiles;
+	private Map<String, AbstractPackager> packagers = new HashMap<String, AbstractPackager>();
 	protected String workingdir;
 	protected IFolder IworkingDir; // generated folder
 	protected Properties moduleProperties;
@@ -30,8 +29,10 @@ public abstract class AbstractMultiPackager {
 		for (Map.Entry<String, AbstractPackager> p : packagers.entrySet()) {
 			if (p.getValue().getFolderToPackage().exists()) {
 				IFile pp = p.getValue().buildPackage();
+				System.out.println("generated package :" + pp);
 				packageFiles_.put(p.getKey(), pp);
 			} else {
+				System.out.println("Warn : package not found " + p.getValue().getFolderToPackage());
 				// INFO : packager skipped
 				if (p.getValue().getPackageFile().exists()) {
 					// delete empty package if exist
@@ -39,22 +40,26 @@ public abstract class AbstractMultiPackager {
 				}
 			}
 		}
-//		if (doClean) {
-//			FileHelper.deleteFile(getWorkingFolder());
-//		}
+		//		if (doClean) {
+		//			FileHelper.deleteFile(getWorkingFolder());
+		//		}
 		return packageFiles_;
 	}
 
-	protected Map<String, IFile> getPackageFiles() {
-		return packageFiles;
-	}
-	
 	public String getWorkingdir() {
 		return workingdir;
 	}
-	
+
 	protected File getWorkingFolder() {
 		return new File(getWorkingdir());
+	}
+
+	protected void addPackager(String key, AbstractPackager pk) throws Exception {
+		if (!packagers.containsKey(key)) {
+			packagers.put(key, pk);
+		} else {
+			throw new Exception("Packager with same key exists please used another key :" + key);
+		}
 	}
 
 }
