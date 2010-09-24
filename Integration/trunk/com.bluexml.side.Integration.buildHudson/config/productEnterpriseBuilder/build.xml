@@ -56,7 +56,7 @@
 		<unzip dest="${builder}_tmp" src="${distros}/${buildId}-macosx.carbon.x86.zip">
 		</unzip>
 		<!-- startup argument is missing and this disable RCP to update so we override the side.ini-->
-		<copy file="side.ini" tofile="${builder}_tmp/${archivePrefix}/${launcherName}.app/Contents/MacOS/${launcherName}.ini" />
+		<copy file="side.ini" tofile="${builder}_tmp/${archivePrefix}/${launcherName}.app/Contents/MacOS/${launcherName}.ini" verbose="true" overwrite="true"/>
 		<zip destfile="${distros}/${buildId}-macosx.carbon.x86.zip" update="false">
 			<zipfileset prefix="${archivePrefix}" dir="${builder}_tmp/${archivePrefix}" id="id" filemode="777">
 				<include name="${launcherName}.app/Contents/MacOS/${launcherName}" />
