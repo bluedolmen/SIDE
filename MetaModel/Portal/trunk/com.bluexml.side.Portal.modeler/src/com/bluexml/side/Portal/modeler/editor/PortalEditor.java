@@ -37,8 +37,8 @@ import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Portal.modeler.PortalPlugin;
-import com.bluexml.side.Portal.modeler.SidePortalContextMenuProvider;
 import com.bluexml.side.Portal.modeler.actions.ShowViewAction;
+import com.bluexml.side.Portal.modeler.diagram.actions.DeleteLinkGeneratedPortel;
 import com.bluexml.side.Portal.modeler.diagram.actions.DeleteLinkPageLayoutAction;
 
 /**
@@ -121,6 +121,10 @@ public class PortalEditor extends Modeler {
         registry.registerAction(deleteLinkToLayout);
         getSelectionActions().add(deleteLinkToLayout.getId());
         
+        DeleteLinkGeneratedPortel deleteGenPort = new DeleteLinkGeneratedPortel(this);
+        registry.registerAction(deleteGenPort);
+        getSelectionActions().add(deleteGenPort.getId());
+        
         IAction action = new ShowViewAction((IWorkbenchPart) this);
 		registry.registerAction(action);
     }
@@ -131,5 +135,8 @@ public class PortalEditor extends Modeler {
         super.configureGraphicalViewer();
         IAction exampleAction = getActionRegistry().getAction(DeleteLinkPageLayoutAction.ID);
         getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) exampleAction);
+        exampleAction = getActionRegistry().getAction(DeleteLinkGeneratedPortel.ID);
+        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) exampleAction);
+        
     }
 }
