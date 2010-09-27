@@ -120,6 +120,14 @@ public class ViewValidator extends EObjectValidator {
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
 	/**
+	 * The parsed OCL expression for the definition of the '<em>nameNotNull</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint viewCollection_nameNotNullInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>noSpecialCharacters</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -285,7 +293,54 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateViewCollection(ViewCollection viewCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(viewCollection, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(viewCollection, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(viewCollection, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(viewCollection, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(viewCollection, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(viewCollection, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(viewCollection, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(viewCollection, diagnostics, context);
+		if (result || diagnostics != null) result &= validateViewCollection_nameNotNull(viewCollection, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the nameNotNull constraint of '<em>Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateViewCollection_nameNotNull(ViewCollection viewCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (viewCollection_nameNotNullInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ViewPackage.Literals.VIEW_COLLECTION);
+
+			EAnnotation ocl = ViewPackage.Literals.VIEW_COLLECTION.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("nameNotNull");
+
+			try {
+				viewCollection_nameNotNullInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(viewCollection_nameNotNullInvOCL);
+
+		if (!query.check(viewCollection)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( ViewPackage.Literals.VIEW_COLLECTION.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"nameNotNull")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "nameNotNull", getObjectLabel(viewCollection, context) }),
+						 new Object[] { viewCollection }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

@@ -22,7 +22,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.view.ViewPackage#getViewCollection()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='nameNotNull'"
+ *        annotation="http://www.bluexml.com/OCL nameNotNull='not self.name.oclIsUndefined() and self.name <> \'\''"
  * @generated
  */
 public interface ViewCollection extends com.bluexml.side.common.Package {

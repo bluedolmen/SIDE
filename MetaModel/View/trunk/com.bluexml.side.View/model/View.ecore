@@ -4,6 +4,12 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="view"
     nsURI="http://www.kerblue.org/view/1.0" nsPrefix="view">
   <eClassifiers xsi:type="ecore:EClass" name="ViewCollection" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="nameNotNull"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="nameNotNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+    </eAnnotations>
     <eOperations name="getAllViews" upperBound="-1" eType="#//AbstractView">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="description" value="method to get all instances of AbstractView"/>

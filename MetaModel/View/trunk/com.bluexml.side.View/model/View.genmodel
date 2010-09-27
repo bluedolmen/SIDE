@@ -58,6 +58,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//FieldElement/prefix"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//FieldElement/suffix"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//FieldElement/hidden"/>
+      <genOperations ecoreOperation="View.ecore#//FieldElement/getViewCollection"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//AbstractView">
       <genOperations ecoreOperation="View.ecore#//AbstractView/getFields"/>
