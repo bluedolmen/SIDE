@@ -28,9 +28,9 @@ public class ImportEumFromTSV extends WorkbenchPartAction {
 	static public String ID = "com.bluexml.side.Class.modeler.actions.importEnumeration"; //$NON-NLS-1$
 	private Enumeration selectedObject;
 	private EnumerationEditPart editPart;
+	
 	public ImportEumFromTSV(IWorkbenchPart part) {
 		super(part);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -47,7 +47,6 @@ public class ImportEumFromTSV extends WorkbenchPartAction {
 	 */
 	@Override
 	public void run() {
-		System.out.println(selectedObject);
 		// display file selection
 		File tsv = SelectFileToImportDialog();
 		EList<EnumerationLiteral> lits = selectedObject.getLiterals();
@@ -118,7 +117,6 @@ public class ImportEumFromTSV extends WorkbenchPartAction {
 		org.eclipse.swt.widgets.FileDialog fsel = new org.eclipse.swt.widgets.FileDialog(Display.getDefault().getActiveShell());
 		fsel.setFilterExtensions(new String[] { "tsv" }); //$NON-NLS-1$
 		filePath = fsel.open();
-		System.out.println(filePath);
 		return new File(filePath);
 	}
 
