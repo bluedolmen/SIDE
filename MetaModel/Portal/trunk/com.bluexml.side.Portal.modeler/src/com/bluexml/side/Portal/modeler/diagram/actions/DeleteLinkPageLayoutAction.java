@@ -7,18 +7,18 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
-import org.topcased.modeler.commands.DeleteGraphElementCommand;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
+import org.topcased.modeler.dialogs.ConfirmationDialog;
+import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Portal.modeler.PortalPlugin;
+import com.bluexml.side.Portal.modeler.diagram.commands.delete.DeleteLinkPageLayoutActionCommand;
 import com.bluexml.side.Portal.modeler.diagram.edit.PageEditPart;
-import com.bluexml.side.Portal.modeler.diagram.edit.PortalLayoutEditPart;
 import com.bluexml.side.Portal.modeler.diagram.edit.UseLayoutEditPart;
 import com.bluexml.side.Portal.modeler.editor.ModelerContextMenuProvider;
-import com.bluexml.side.portal.HavePortlet;
 import com.bluexml.side.portal.Page;
-import com.bluexml.side.portal.PortalLayout;
 import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class DeleteLinkPageLayoutAction extends WorkbenchPartAction implements ISelectionChangedListener {
@@ -46,6 +46,13 @@ public class DeleteLinkPageLayoutAction extends WorkbenchPartAction implements I
 	}
 
 	public void run() {
+		Modeler modeler = (Modeler)getWorkbenchPart();
+		ConfirmationDialog dialog = new ConfirmationDialog(PortalPlugin.getActiveWorkbenchShell(), "Delete From Model", "Are you sure you want to delete these model elements ?", modeler.getPreferenceStore(), "deleteModelActionConfirm");
+        int result = dialog.open();
+        if(result != 0) {
+        	return;
+        }
+		
 		StructuredSelection ss = (StructuredSelection) this.selection;
 		for (Object o : ss.toList()) {
 			if (o instanceof UseLayoutEditPart) {
@@ -53,25 +60,14 @@ public class DeleteLinkPageLayoutAction extends WorkbenchPartAction implements I
 				UseLayoutEditPart useLayout = (UseLayoutEditPart) o;
 				GraphEdge eo = (GraphEdge) useLayout.getModel();
 
-				//Get source and target edit part
+				//Get source edit part
 				PageEditPart pep = (PageEditPart) useLayout.getSource();
-				PortalLayoutEditPart lep = (PortalLayoutEditPart) useLayout.getTarget();
 
-				//Get source and target model element
+				//Get source model element
 				Page p = (Page) Utils.getElement((GraphElement) pep.getModel());
-				PortalLayout l = (PortalLayout) Utils.getElement((GraphElement) lep.getModel());
 
-				//Remove aspect from class
-				p.setUseLayout(null);
-				for (HavePortlet hp : p.getPortlets()) {
-					if (hp.getPositionGroup() != null) {
-						hp.getPositionGroup().removeAll(hp.getPositionGroup());
-					}
-				}
-				
-				//Create delete command and execute it
-				DeleteGraphElementCommand cmd = new DeleteGraphElementCommand(eo, true);
-				useLayout.getViewer().getEditDomain().getCommandStack().execute(cmd);
+				DeleteLinkPageLayoutActionCommand dlpac = new DeleteLinkPageLayoutActionCommand(p, eo);
+				useLayout.getViewer().getEditDomain().getCommandStack().execute(dlpac);
 			}
 		}
 	}
@@ -83,7 +79,6 @@ public class DeleteLinkPageLayoutAction extends WorkbenchPartAction implements I
 	 */
 	protected boolean calculateEnabled() {
 		return ModelerContextMenuProvider.checkAllElements(selection, UseLayoutEditPart.class);
-		//		return true;
 	}
 
 	/**
@@ -94,7 +89,6 @@ public class DeleteLinkPageLayoutAction extends WorkbenchPartAction implements I
 	 * @see ISelectionChangedListener#selectionChanged(SelectionChangedEvent)
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
-		System.out.println("DeleteLinkPageLayoutAction.selectionChanged()");
 		this.selection = event.getSelection();
 	}
 

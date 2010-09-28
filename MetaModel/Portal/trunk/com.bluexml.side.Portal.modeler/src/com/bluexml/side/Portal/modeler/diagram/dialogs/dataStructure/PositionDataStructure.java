@@ -95,7 +95,7 @@ public class PositionDataStructure {
 	 * @param positionGroup
 	 */
 	private void addAll(EList<PositionGroup> positionGroup) {		
-		Iterator itPos = positionGroup.iterator();
+		Iterator<PositionGroup> itPos = positionGroup.iterator();
         while (itPos.hasNext())
         {
         	PositionGroup pos = (PositionGroup) itPos.next();

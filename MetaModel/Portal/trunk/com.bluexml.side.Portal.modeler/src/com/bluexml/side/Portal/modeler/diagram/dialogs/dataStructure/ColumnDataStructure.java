@@ -90,7 +90,7 @@ public class ColumnDataStructure {
 	}
 	
 	public ColumnDataStructure() {				
-		listCol = new ArrayList();        
+		listCol = new ArrayList<ColumnObject>();        
 	}
 	
 	/**
@@ -117,9 +117,9 @@ public class ColumnDataStructure {
      * 
      * @param columns the collection of column to add
      */
-    public void addAll(Collection columns)
+    public void addAll(Collection<Column> columns)
     {
-        Iterator itColumns = columns.iterator();
+        Iterator<Column> itColumns = columns.iterator();
         while (itColumns.hasNext())
         {
         	Column column = (Column) itColumns.next();
@@ -127,7 +127,7 @@ public class ColumnDataStructure {
         }
     }
     
-    public List getData() {
+    public List<ColumnObject> getData() {
     	return listCol;
     }
     

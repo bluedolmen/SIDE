@@ -63,7 +63,7 @@ public class InstancesDataStructure {
 	}
 	
 	private void addAttributes(EList<PortletAttribute> p_attributes){
-		Iterator itAttr = p_attributes.iterator();
+		Iterator<PortletAttribute> itAttr = p_attributes.iterator();
         while (itAttr.hasNext())
         {
         	PortletAttribute attr = (PortletAttribute) itAttr.next();

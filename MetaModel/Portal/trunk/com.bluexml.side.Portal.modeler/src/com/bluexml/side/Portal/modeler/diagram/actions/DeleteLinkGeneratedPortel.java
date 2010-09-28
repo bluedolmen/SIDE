@@ -7,18 +7,19 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
-import org.topcased.modeler.commands.DeleteGraphElementCommand;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
+import org.topcased.modeler.dialogs.ConfirmationDialog;
+import org.topcased.modeler.editor.Modeler;
+import org.topcased.modeler.preferences.ModelerPreferenceConstants;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Portal.modeler.PortalPlugin;
+import com.bluexml.side.Portal.modeler.diagram.commands.delete.DeleteLinkGeneratedPortletCommand;
 import com.bluexml.side.Portal.modeler.diagram.edit.PortletEditPart;
-import com.bluexml.side.Portal.modeler.diagram.edit.PortletInternalEditPart;
 import com.bluexml.side.Portal.modeler.diagram.edit.isInternalPortletEditPart;
 import com.bluexml.side.Portal.modeler.editor.ModelerContextMenuProvider;
-import com.bluexml.side.Portal.modeler.editor.PortalEditor;
 import com.bluexml.side.portal.Portlet;
-import com.bluexml.side.portal.PortletInternal;
 import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class DeleteLinkGeneratedPortel extends WorkbenchPartAction implements ISelectionChangedListener {
@@ -54,32 +55,33 @@ public class DeleteLinkGeneratedPortel extends WorkbenchPartAction implements IS
 	 * @see ISelectionChangedListener#selectionChanged(SelectionChangedEvent)
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
-		System.out.println("DeleteLinkGeneratedPortel.selectionChanged()");
 		this.selection = event.getSelection();
 	}
 
-
 	public void run() {
+		Modeler modeler = (Modeler)getWorkbenchPart();
+		ConfirmationDialog dialog = new ConfirmationDialog(PortalPlugin.getActiveWorkbenchShell(), "Delete From Model", "Are you sure you want to delete these model elements ?", modeler.getPreferenceStore(), ModelerPreferenceConstants.DELETE_MODEL_ACTION_CONFIRM);
+        int result = dialog.open();
+        if(result != 0) {
+        	return;
+        }
+		
 		StructuredSelection ss = (StructuredSelection) this.selection;
 		for (Object o : ss.toList()) {
 			if (o instanceof isInternalPortletEditPart) {
 				//Get edit part and graph element
 				isInternalPortletEditPart link = (isInternalPortletEditPart) o;
 				GraphEdge eo = (GraphEdge) link.getModel();
-				
-				//Get source and target edit part
+
+				//Get source edit part
 				PortletEditPart pep = (PortletEditPart) link.getSource();
-				PortletInternalEditPart pip = (PortletInternalEditPart) link.getTarget();
 				
-				//Get source and target model element
-				Portlet p = (Portlet) Utils.getElement((GraphElement) pep.getModel());
-				PortletInternal pi = (PortletInternal) Utils.getElement((GraphElement) pip.getModel());
+				//Get source model element
+				Portlet portlet = (Portlet) Utils.getElement((GraphElement) pep.getModel());
 				
-				p.setIsPortletInternal(null);
-				
-				//Create delete command and execute it
-				DeleteGraphElementCommand cmd = new DeleteGraphElementCommand(eo, true);
-				link.getViewer().getEditDomain().getCommandStack().execute(cmd);
+				// call command to delete link
+				DeleteLinkGeneratedPortletCommand dlgpc = new DeleteLinkGeneratedPortletCommand(portlet, eo);
+				link.getViewer().getEditDomain().getCommandStack().execute(dlgpc);
 			}
 		}
 

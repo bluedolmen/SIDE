@@ -29,6 +29,12 @@ public class PageEditDialog extends Dialog implements IDialogConstants{
 	public static final String PAGE_DESCRIPTION = "page description";
 	public static final String PAGE_POSITION = "page position";
 	
+	public static final String PAGE_UseLayout ="page layout";
+	public static final String PAGE_Portlets ="page portlets";
+	public static final String PAGE_IsChildPageOf = "page subpages";
+	public static final String PAGE_Visibility = "page visibility";
+	public static final String PAGE_Generate = "page generate";
+	
 	protected Page page;
 	
 	protected Map data;
