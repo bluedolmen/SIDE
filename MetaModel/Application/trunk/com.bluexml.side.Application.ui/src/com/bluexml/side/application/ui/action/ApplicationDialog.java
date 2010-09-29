@@ -176,7 +176,9 @@ public class ApplicationDialog extends Dialog {
 	 */
 	public ApplicationDialog(Shell parentShell, IFile file) {
 		super(parentShell);
-		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS | getDefaultOrientation());
+		//		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS | getDefaultOrientation());
+		setShellStyle(SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | getDefaultOrientation());
+
 		try {
 			URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
 			XMIResource resource = new XMIResourceImpl(uri);
@@ -196,6 +198,7 @@ public class ApplicationDialog extends Dialog {
 		deployerParameters = new HashMap<String, GeneratorParameter>();
 		genParamConfByGenerator = new HashMap<String, List<String>>();
 		deployParamConfByGenerator = new HashMap<String, List<String>>();
+
 	}
 
 	public void refreshConfiguration() {
@@ -1209,7 +1212,7 @@ public class ApplicationDialog extends Dialog {
 			}
 
 			public void mouseDown(MouseEvent e) {
-//				generatorParameterCellModifier.applyDirtyValue();
+				//				generatorParameterCellModifier.applyDirtyValue();
 			}
 
 			public void mouseDoubleClick(MouseEvent e) {
@@ -1494,7 +1497,7 @@ public class ApplicationDialog extends Dialog {
 		if (generatorParameterCellModifier != null) {
 			// only for some OS that do not unselect cell Editor before fire
 			// this event, so we record changes manually
-//			generatorParameterCellModifier.applyDirtyValue();
+			//			generatorParameterCellModifier.applyDirtyValue();
 		}
 		if (buttonId == IDialogConstants.CLOSE_ID) {
 			if (applicationModified) {
@@ -1518,9 +1521,18 @@ public class ApplicationDialog extends Dialog {
 					saveData();
 				}
 			}
-			final GeneratePopUp generationPopUp = new GeneratePopUp(Display.getDefault().getActiveShell(), getCurrentConfiguration());
-			GeneratePopUp.launch(getCurrentConfiguration(), generationPopUp, application, model);
-			close();
+
+			// create local variable to be able to close (and dispose) ApplicationDialog instance before launching GenerationPopup
+			Configuration conf = getCurrentConfiguration();
+			Shell shell = getParentShell();
+			Application applicationModel = ApplicationDialog.application;
+			IFile applicationFile = this.model;
+//			final GeneratePopUp generationPopUp = new GeneratePopUp(shell, conf);
+			final GeneratePopUp generationPopUp = new GeneratePopUp(shell, applicationFile, applicationModel, conf);
+			ApplicationDialog.this.close();
+			generationPopUp.launch();
+//			GeneratePopUp.launch(conf, generationPopUp, application_, model_);
+			
 			return;
 		}
 
@@ -1817,6 +1829,6 @@ public class ApplicationDialog extends Dialog {
 				}
 			}
 		}
-
 	}
+
 }

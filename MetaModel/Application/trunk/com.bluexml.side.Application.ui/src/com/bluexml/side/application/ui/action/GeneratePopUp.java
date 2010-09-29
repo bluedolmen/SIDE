@@ -1,19 +1,11 @@
 package com.bluexml.side.application.ui.action;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.IJobChangeListener;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
@@ -30,7 +22,6 @@ import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.widgets.FormText;
 
 import com.bluexml.side.application.Application;
-import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.Model;
@@ -53,7 +44,6 @@ import com.bluexml.side.util.documentation.LogSave;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 import com.bluexml.side.util.libs.IFileHelper;
 
-
 public class GeneratePopUp extends Dialog {
 
 	IDialogEventListener listener = null;
@@ -63,6 +53,8 @@ public class GeneratePopUp extends Dialog {
 	}
 
 	// model
+	private IFile applicationFile;
+	private Application applicationModel;
 	private Configuration configuration;
 
 	/**
@@ -91,34 +83,15 @@ public class GeneratePopUp extends Dialog {
 	private ComponentMonitor componentMonitor;
 	private Monitor generalMonitor;
 
-	/**
-	 * Create the dialog
-	 * 
-	 * @param parentShell
-	 * @param list
-	 * @param staticFieldsName
-	 * @param configuration
-	 */
-	public GeneratePopUp(Shell parentShell, Configuration p_configuration) {
-		super((Shell) null);
-		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS | getDefaultOrientation());
-		setBlockOnOpen(false);
-		configuration = p_configuration;
-
-	}
-
-	public GeneratePopUp(Shell parentShell, IFile file, String name) throws IOException {
+	public GeneratePopUp(Shell parentShell, IFile applicationFile, Application applicationModel, Configuration p_configuration) {
+		//		super((Shell) null);
 		super(parentShell);
-		URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
-		XMIResource resource = new XMIResourceImpl(uri);
-
-		FileInputStream fi = new FileInputStream(file.getRawLocation().toFile());
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put(ApplicationPackage.eINSTANCE.getNsURI(), ApplicationPackage.eINSTANCE);
-		map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
-		resource.load(fi, map);
-		Application application = (Application) resource.getContents().get(0);
-		configuration = application.getConfiguration(name);
+		this.applicationFile = applicationFile;
+		this.configuration = p_configuration;
+		this.applicationModel = applicationModel;
+		// dialog configuration
+		setShellStyle(SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | getDefaultOrientation());
+		setBlockOnOpen(false);
 
 	}
 
@@ -211,7 +184,6 @@ public class GeneratePopUp extends Dialog {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.dialogs.Dialog#cancelPressed()
 	 */
 	@Override
@@ -265,28 +237,27 @@ public class GeneratePopUp extends Dialog {
 
 	}
 
-	
-	public static void launch(final Configuration configuration, final GeneratePopUp generationPopUp, Application appModel, IFile model) {
+	public void launch() {
 		/*
 		 * update .application with plugin extensions
 		 */
 		try {
-			ApplicationUtil.updateApplicationFromExtensionPoint(appModel, model);
+			ApplicationUtil.updateApplicationFromExtensionPoint(applicationModel, applicationFile);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		generationPopUp.setBlockOnOpen(false);
+		this.setBlockOnOpen(false);
 
-		generationPopUp.open();
+		this.open();
 		Display currentDisp = ApplicationUtil.getDisplay();
 		currentDisp.syncExec(new Runnable() {
 			public void run() {
 				List<Model> models;
 				models = ApplicationUtil.getModels((Application) configuration.eContainer());
-				
+
 				// set job to run
-				final Generate gen = new Generate(configuration, models, generationPopUp.getGeneralMonitor(), generationPopUp.getComponentMonitor());
+				final Generate gen = new Generate(configuration, models, GeneratePopUp.this.getGeneralMonitor(), GeneratePopUp.this.getComponentMonitor());
 				// when job's done dialog must display link to open report html page...
 				gen.addJobChangeListener(new IJobChangeListener() {
 					public void sleeping(IJobChangeEvent event) {
@@ -300,7 +271,7 @@ public class GeneratePopUp extends Dialog {
 
 					public void done(IJobChangeEvent event) {
 						// display link
-						generationPopUp.displayLink();
+						GeneratePopUp.this.displayLink();
 					}
 
 					public void awake(IJobChangeEvent event) {
@@ -311,18 +282,19 @@ public class GeneratePopUp extends Dialog {
 				});
 
 				// manage cancel
-				generationPopUp.addDialogEventListener(new IDialogEventListener() {
+				GeneratePopUp.this.addDialogEventListener(new IDialogEventListener() {
 					public void addButtonPressedListener(int buttonId) {
 						if (buttonId == IDialogConstants.CANCEL_ID) {
 							gen.cancel();
-							generationPopUp.displayLink();
+							GeneratePopUp.this.displayLink();
 						}
 					}
 				});
-				
+
 				// schedule side job
 				gen.schedule();
 			}
 		});
 	}
+
 }

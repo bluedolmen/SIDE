@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.actions.CompoundContributionItem;
@@ -55,7 +56,6 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 	}
 
 	public Menu getMenu(Menu parent) {
-		// System.err.println("getMenu");
 		menu = new Menu(parent);
 
 		try {
@@ -80,22 +80,16 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 						item.addSelectionListener(new SelectionAdapter() {
 							public void widgetSelected(SelectionEvent e) {
 								final GeneratePopUp generationPopUp;
-								try {
-									generationPopUp = new GeneratePopUp(Display.getDefault().getActiveShell(), file, configuration.getName());
+								Shell activeShell = Display.getDefault().getActiveShell();
 
-									GeneratePopUp.launch(configuration, generationPopUp, application, file);
-								} catch (IOException e1) {
-									e1.printStackTrace();
-								}
+								generationPopUp = new GeneratePopUp(activeShell, file, application, configuration);
+
+								generationPopUp.launch();
 							}
-
-							
-
 						});
 					}
 				}
 			}
-			// model = file;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -133,7 +127,5 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 		// System.err.println("getContributionItems");
 		return null;
 	}
-	
-	
 
 }
