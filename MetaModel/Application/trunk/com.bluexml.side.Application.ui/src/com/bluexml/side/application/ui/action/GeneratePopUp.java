@@ -270,8 +270,13 @@ public class GeneratePopUp extends Dialog {
 					}
 
 					public void done(IJobChangeEvent event) {
-						// display link
-						GeneratePopUp.this.displayLink();
+						// display link only if not disposed yet
+						if (GeneratePopUp.this != null && GeneratePopUp.this.getShell() != null) {
+							GeneratePopUp.this.displayLink();
+						} else {
+//							System.err.println("GeneratePopup closed");
+						}
+						
 					}
 
 					public void awake(IJobChangeEvent event) {
