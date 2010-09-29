@@ -22,6 +22,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.progress.IProgressConstants;
 import org.osgi.framework.Bundle;
 
+import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.DeployerConfiguration;
@@ -106,7 +107,7 @@ public class Generate extends WorkspaceJob {
 		// Boolean.TRUE);
 		setProperty(IProgressConstants.KEEPONE_PROPERTY, Boolean.TRUE);
 		setProperty(IProgressConstants.ICON_PROPERTY, getImage());
-		
+
 	}
 
 	private ImageDescriptor getImage() {
@@ -180,7 +181,7 @@ public class Generate extends WorkspaceJob {
 					generalMonitor.getParent().subTask(subTask);
 				}
 			});
-			
+
 			// First we seek the generator parameters, and separate fields
 			// of dynamic fields
 			Map<String, String> configurationParameters = new HashMap<String, String>();
@@ -259,10 +260,10 @@ public class Generate extends WorkspaceJob {
 	/**
 	 * @param configurationParameters
 	 * @param generationParameters
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void setParameters(Map<String, String> configurationParameters, Map<String, String> generationParameters) throws Exception {
-		
+		// load parameters from configuration
 		for (ConfigurationParameters param : configuration.getParameters()) {
 			if (ApplicationDialog.staticFieldsName.contains(param.getKey())) {
 				configurationParameters.put(param.getKey(), ApplicationUtil.eclipseVariableSubstitution(param.getValue()));
@@ -276,9 +277,10 @@ public class Generate extends WorkspaceJob {
 				}
 			}
 		}
+
 		// set Generate properties
 		initOptions(configuration, configurationParameters);
-		
+
 	}
 
 	protected void initOptions(Configuration configuration, Map<String, String> configurationParameters) {
@@ -483,7 +485,6 @@ public class Generate extends WorkspaceJob {
 		String name = elem.getGeneratorName();
 
 		String id_techno_version = elem.getId_techno_version();
-		
 
 		// We get the option for this generator
 		Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
@@ -497,7 +498,6 @@ public class Generate extends WorkspaceJob {
 			// We generate only if there is meta-model available for
 			// the generator
 			if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
-				
 
 				if (generator.check()) {
 					// check options
@@ -594,6 +594,10 @@ public class Generate extends WorkspaceJob {
 		configurationParameters.put("technologyName", elem.getTechnologyName()); //$NON-NLS-1$
 		configurationParameters.put("technologyVersionName", elem.getTechnologyVersionName()); //$NON-NLS-1$
 		configurationParameters.put("configurationName", configuration.getName()); //$NON-NLS-1$
+
+		// manage components parameters default values
+		addDefaultValue4ComponentParameters(elem, generationParameters);
+
 		AbstractGenerator generator = null;
 		String name = elem.getGeneratorName();
 		try {
@@ -634,7 +638,7 @@ public class Generate extends WorkspaceJob {
 		String fileName = "gen_" + generator.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 		componentMonitor.initialize(nbTask, configurationParameters, LogType.GENERATION, fileName);
 		this.componentMonitor.taskDone(Activator.Messages.getString("Generate.8")); //$NON-NLS-1$
-		
+
 		return generator;
 	}
 
@@ -669,7 +673,6 @@ public class Generate extends WorkspaceJob {
 
 	private Deployer getDeployerInstance(DeployerConfiguration depConf) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		String deployerClassName = depConf.getImpl_class();
-		String deployerId = depConf.getId();
 		Bundle plugin = Platform.getBundle(depConf.getContributorId());
 		Class<?> gen;
 		Object genObj = null;
@@ -691,7 +694,6 @@ public class Generate extends WorkspaceJob {
 		checkUserRequest();
 		boolean error = false;
 
-		
 		Deployer deployer = getDeployer(depConf, configuration, configurationParameters, generationParameters);
 		boolean showEndMessage = false;
 		if ((deployer.isDocumentationDeployer() && doDocumentation) || !deployer.isDocumentationDeployer()) {
@@ -750,7 +752,7 @@ public class Generate extends WorkspaceJob {
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
-	public Deployer getDeployer(DeployerConfiguration depConf, Configuration configuration, Map<String, String> configurationParameters, Map<String, String> generationParameters) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public Deployer getDeployer(DeployerConfiguration depConf, Configuration configuration, Map<String, String> configurationParameters, Map<String, String> generationParameters) throws Exception {
 		configurationParameters.put("technologyVersion", depConf.getId_techno_version()); //$NON-NLS-1$
 		configurationParameters.put("deployerName", depConf.getDeployerName()); //$NON-NLS-1$
 		configurationParameters.put("deployerId", depConf.getId()); //$NON-NLS-1$
@@ -758,6 +760,10 @@ public class Generate extends WorkspaceJob {
 		configurationParameters.put("technologyName", depConf.getTechnologyName()); //$NON-NLS-1$
 		configurationParameters.put("technologyVersionName", depConf.getTechnologyVersionName()); //$NON-NLS-1$
 		configurationParameters.put("configurationName", configuration.getName()); //$NON-NLS-1$
+
+		// manage components parameters default values
+
+		addDefaultValue4ComponentParameters(depConf, generationParameters);
 
 		List<Option> options = depConf.getOptions();
 		// We get the option for this generator
@@ -781,6 +787,18 @@ public class Generate extends WorkspaceJob {
 		// deployer initialization
 		deployer.initialize(configurationParameters, generationParameters, deployerOptions, this.componentMonitor);
 		return deployer;
+	}
+
+	protected void addDefaultValue4ComponentParameters(ComponantConfiguration conf, Map<String, String> parameters) throws Exception {
+		// get parameters from extension point
+		// get extPoint component element		
+		Map<String, String> paramsExt = ApplicationUtil.getDefaultParametersValues(conf);
+		for (Map.Entry<String, String> param : paramsExt.entrySet()) {
+			if (!parameters.containsKey(param.getKey())) {
+				// no custom value defined so add default one
+				parameters.put(param.getKey(), param.getValue());
+			}
+		}
 	}
 
 	protected void fatalError(Throwable e) {
@@ -827,7 +845,7 @@ public class Generate extends WorkspaceJob {
 		} catch (Exception e) {
 			e.printStackTrace();
 			generalMonitor.addErrorText(Activator.Messages.getString("Generate_104", e.getMessage())); //$NON-NLS-1$
-			
+
 		}
 		saveFeedBack();
 	}

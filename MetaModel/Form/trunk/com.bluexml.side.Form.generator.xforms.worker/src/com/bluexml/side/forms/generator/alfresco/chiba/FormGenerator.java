@@ -33,9 +33,8 @@ import com.bluexml.xforms.messages.MsgPool;
 
 public class FormGenerator extends AbstractGenerator {
 
+	public static final String COM_BLUEXML_SIDE_FORM_GENERATOR_XFORMS_CHIBA_WEBAPP_CONTEXT = "com.bluexml.side.Form.generator.xforms.chiba.webappContext";
 	public static final String CONFIGURATION_PARAMETER_ALFRESCO_URL = "alfresco.url";
-	public static final String CONFIGURATION_PARAMETER_ALFRESCO_ADMIN_LOGIN = "alfresco.admin.login";
-	public static final String CONFIGURATION_PARAMETER_ALFRESCO_ADMIN_PSW = "alfresco.admin.psw";
 	
 	private static final String defaultModelID = "xformsModel";
 	private static final String webappName = "xforms";
@@ -110,7 +109,7 @@ public class FormGenerator extends AbstractGenerator {
 		}
 
 		// deal with the webapp address (protocol, host, port, context)
-		webappContext = generationParameters.get("com.bluexml.side.Form.generator.xforms.chiba.webappContext");
+		webappContext = generationParameters.get(COM_BLUEXML_SIDE_FORM_GENERATOR_XFORMS_CHIBA_WEBAPP_CONTEXT);
 		if (StringUtils.trimToNull(webappContext) != null) {
 			// we check that the context is not 'forms'
 			int pos = webappContext.lastIndexOf('/');

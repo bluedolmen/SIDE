@@ -59,11 +59,7 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	public String getVersioNumber() {
-		String vn = getGenerationParameter("com.bluexml.side.Workflow.generator.alfresco.module.version");
-		if (vn == null || vn.equals("")) {
-			vn = "1.0";
-		}
-		return vn;
+		return getGenerationParameter("com.bluexml.side.Workflow.generator.alfresco.module.version");
 	}
 
 	public String getModuleIdService(EObject ob, String modelId) throws Exception {

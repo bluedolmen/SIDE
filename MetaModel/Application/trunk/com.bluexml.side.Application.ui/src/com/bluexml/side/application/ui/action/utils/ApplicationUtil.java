@@ -82,6 +82,8 @@ public class ApplicationUtil {
 	public static final String APPLICATION_CONFIGURATION_PARAMETERS = "configurationParameter";
 	public static final String APPLICATION_CONFIGURATION_PARAMETERS_KEY = "key";
 	public static final String APPLICATION_CONFIGURATION_PARAMETERS_DATATYPE = "dataType";
+	public static final String APPLICATION_CONFIGURATION_PARAMETERS_DEFAULTVALUE = "defaultValue";
+	
 	public static final String APPLICATION_CONFIGURATION_PARAMETERS_LABEL = "label";
 
 	public static final String APPLICATION_CONSTRAINTS = "moduleDependence";
@@ -799,6 +801,22 @@ public class ApplicationUtil {
 		return null;
 	}
 
+	public static Map<String,String> getDefaultParametersValues(ComponantConfiguration conf) throws Exception {
+		Map<String, String> params = new HashMap<String, String>();
+		IConfigurationElement config = getIConfigurationElement(conf);
+		// search for parameters
+		IConfigurationElement[] parametersExt = config.getChildren(APPLICATION_CONFIGURATION_PARAMETERS);
+		for (IConfigurationElement iConfigurationElement : parametersExt) {
+			String defaultValue = iConfigurationElement.getAttribute(APPLICATION_CONFIGURATION_PARAMETERS_DEFAULTVALUE);
+			if (defaultValue != null && !defaultValue.equals("")) {
+				String key = iConfigurationElement.getAttribute(APPLICATION_CONFIGURATION_PARAMETERS_KEY);
+				params.put(key, defaultValue);
+			}
+		}
+		
+		return params;
+		
+	}
 	/**
 	 * build a tmp project containning all dependencies and use mvn
 	 * dependency:go-offline to populate local copy (.m2/repository), so SIDE
@@ -877,7 +895,6 @@ public class ApplicationUtil {
 				List<ConfigurationParameters> toRemove = new ArrayList<ConfigurationParameters>();
 				for (ConfigurationParameters configurationParameters : l) {
 					if (configurationParameters.getValue() == null | configurationParameters.getValue().equals("")) {
-
 						toRemove.add(configurationParameters);
 					}
 				}

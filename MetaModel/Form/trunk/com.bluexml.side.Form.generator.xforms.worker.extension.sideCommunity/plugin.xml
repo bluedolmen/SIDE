@@ -13,6 +13,7 @@
                   label="Messages file"/>
             <configurationParameter
                   dataType="String"
+                  defaultValue="http://localhost:8080/xforms"
                   documentation="Set the address to the webapp context, e.g. http://localhost:8080/xforms.&lt;br/&gt;This option is accessory as it is used for providing service URLs. If not given, default values will be used."
                   key="com.bluexml.side.Form.generator.xforms.chiba.webappContext"
                   label="XForm Webapp URL"/>

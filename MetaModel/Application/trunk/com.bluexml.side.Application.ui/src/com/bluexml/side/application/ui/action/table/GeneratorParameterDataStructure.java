@@ -21,7 +21,7 @@ public class GeneratorParameterDataStructure {
 	}
 
 	public void addGeneratorParameter(IConfigurationElement elt) {
-		GeneratorParameter genParam = new GeneratorParameter(elt.getAttribute("key"), elt.getAttribute("label"), "", elt.getAttribute("documentation"), elt.getAttribute("dataType"));
+		GeneratorParameter genParam = new GeneratorParameter(elt);
 		data.add(genParam);
 	}
 

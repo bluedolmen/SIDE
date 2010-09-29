@@ -409,7 +409,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 		for (GeneratorParameter genParam : neededParam.values()) {
-			genParam.setValue(""); //$NON-NLS-1$
+//			genParam.setValue(""); //$NON-NLS-1$
 			dataStructure.addGeneratorParameter(genParam);
 		}
 
@@ -451,10 +451,9 @@ public class ApplicationDialog extends Dialog {
 		}
 		for (GeneratorParameter genParam : neededParam.values()) {
 			if (genParam != null) {
-				genParam.setValue(""); //$NON-NLS-1$
+//				genParam.setValue(""); //$NON-NLS-1$
 				dataStructure.addGeneratorParameter(genParam);
 			}
-
 		}
 	}
 
@@ -492,7 +491,7 @@ public class ApplicationDialog extends Dialog {
 				genParam.setValue(confParam.getValue());
 			}
 		}
-
+ 
 		// Update
 		if (generatorParametersViewer == null) {
 			createTableViewer();

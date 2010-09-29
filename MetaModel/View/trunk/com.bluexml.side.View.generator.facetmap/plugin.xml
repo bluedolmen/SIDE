@@ -10,12 +10,12 @@
             <configurationParameter
                   dataType="String"
                   documentation="Set this value to the URL of the Alfresco instance on which have been generated and deployed new content types from the SIDE data model."
-                  key="alfresco.url"
+                  key="alfresco.url" defaultValue="http://localhost:8080/alfresco"
                   label="Alfresco URL"/>
             <configurationParameter
                   dataType="String"
                   documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploye the 2 new Facet navigation components (menu and results list)."
-                  key="alfresco.share.url"
+                  key="alfresco.share.url" defaultValue="http://localhost:8080/share"
                   label="Alfresco share URL"/>
             <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise">
               <optionRef optionId="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" />

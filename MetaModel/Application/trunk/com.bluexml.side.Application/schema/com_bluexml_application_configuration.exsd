@@ -307,6 +307,13 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                </restriction>
             </simpleType>
          </attribute>
+         <attribute name="defaultValue" type="string" use="default" value="">
+            <annotation>
+               <documentation>
+                  this attribute define a default value used by SIDE components if application model do not contains a value for this configurationParameter
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

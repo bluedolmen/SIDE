@@ -27,10 +27,11 @@
             <configurationParameter
                   dataType="String"
                   documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploy"
-                  key="alfresco.share.url"
+                  key="alfresco.share.url" defaultValue="http://localhost:8080/share"
                   label="Alfresco share URL"/>
             <configurationParameter
                   dataType="String"
+                  defaultValue="http://localhost:8080/facetmap"
                   documentation="The URL to reach facetMap web application (for exemple http://localhost:8080/facetmap)"
                   key="facetMap.url"
                   label="FacetMap URL"/>

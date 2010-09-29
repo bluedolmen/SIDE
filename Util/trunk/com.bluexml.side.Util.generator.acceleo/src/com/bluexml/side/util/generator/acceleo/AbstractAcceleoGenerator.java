@@ -66,11 +66,8 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	 * @return
 	 */
 	public String getVersioNumber() {
-		String vn = getGenerationParameter(versionProperty);
-		if (vn == null || vn.equals("")) { //$NON-NLS-1$
-			vn = "1.0"; //$NON-NLS-1$
-		}
-		return vn;
+		// default value is defined in extension plugin declaration see plugin.xml
+		return getGenerationParameter(versionProperty);
 	}
 
 	private static final IGenFilter genFilter = new IGenFilter() {
