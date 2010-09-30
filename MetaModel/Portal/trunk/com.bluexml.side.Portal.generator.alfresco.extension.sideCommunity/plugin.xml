@@ -38,6 +38,12 @@
             <option defaultOption="false" documentation="add share component to include custom iframe in pages" key="com.bluexml.side.Portal.generator.alfresco.iframe" label="iframe integration">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareIframe" moduleType="zip" technologyVersion="alfresco_3.x" versionMax="1.0.5" versionMin="1.0.5" />
             </option>
+            <configurationParameter
+                  dataType="String"
+                  defaultValue="1.0"
+                  key="com.bluexml.side.Portal.generator.alfresco.module.version"
+                  label="Portal module version">
+            </configurationParameter>
           </generatorVersion>
         </technologyVersion>
       </technology>
