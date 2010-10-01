@@ -23,6 +23,11 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	static String GENERATOR_OPTIONS_FACETMAP = "com.bluexml.side.Portal.generator.alfresco.facetmap";
 	static String GENERATOR_OPTIONS_XFORMS = "com.bluexml.side.Portal.generator.alfresco.xforms";
 
+	
+	public PortalAlfrescoGenerator() {
+		versionProperty = "com.bluexml.side.Portal.generator.alfresco.module.version"; //$NON-NLS-1$
+	}
+	
 	@Override
 	public Properties buildModuleProperties(String modelId) {
 		Date now = new Date();
@@ -117,35 +122,18 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	public static boolean getGeneratorOptionValue(EObject o, String key) {
-		System.err.println("PortalAlfrescoGenerator GET: " + key + " " + AbstractGenerator.generatorOptions);
-
 		return getGeneratorOptionValue(key);
 	}
 
 	public String getXFORMURL(EObject o) {
-		String result = getGenerationParameter(GENERATOR_PARAM_XFORMURL);
-		if (result == null || result.equals("")) {
-			System.out.println("xform url, default value used");
-			result = "http://localhost:8080/xforms";
-		}
-		return result;
+		return getGenerationParameter(GENERATOR_PARAM_XFORMURL);
 	}
 
 	public String getSHAREURL(EObject o) {
-		String result = getGenerationParameter(GENERATOR_PARAM_SHAREURL);
-		if (result == null || result.equals("")) {
-			System.out.println("share url, default value used");
-			result = "http://localhost:8080/share";
-		}
-		return result;
+		return getGenerationParameter(GENERATOR_PARAM_SHAREURL);
 	}
 
 	public String getFacetMapURL(EObject o) {
-		String result = getGenerationParameter(GENERATOR_PARAM_FACETMAPURL);
-		if (result == null || result.equals("")) {
-			System.out.println("facetMap url, default value used");
-			result = "http://localhost:8080/facetmap";
-		}
-		return result;
+		return getGenerationParameter(GENERATOR_PARAM_FACETMAPURL);
 	}
 }
