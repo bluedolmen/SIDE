@@ -65,24 +65,26 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
+import com.bluexml.side.util.libs.IFileHelper;
 
 public class SIDEBuilder extends IncrementalProjectBuilder {
-	
+
 	private List<String> checkedFiles;
 	static private IWorkbenchPage _activePage;
 
 	class SIDEDeltaVisitor implements IResourceDeltaVisitor {
 		/*
 		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.core.resources.IResourceDeltaVisitor#visit(org.eclipse.core.resources.IResourceDelta)
+		 * @see
+		 * org.eclipse.core.resources.IResourceDeltaVisitor#visit(org.eclipse
+		 * .core.resources.IResourceDelta)
 		 */
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			IResource resource = delta.getResource();
 			String previousName = resource.getFullPath().toString();
 			if (delta.getMovedFromPath() != null)
 				previousName = delta.getMovedFromPath().toString();
-			
+
 			switch (delta.getKind()) {
 			case IResourceDelta.ADDED:
 				// handle added resource
@@ -90,7 +92,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 				break;
 			case IResourceDelta.REMOVED:
 				// handle removed resource
-				
+
 				//Delete backup model
 				if (resource instanceof IFile) {
 					IFile file = (IFile) resource;
@@ -98,7 +100,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 					if (backupModel.exists())
 						backupModel.delete(true, null);
 				}
-				
+
 				String path = resource.getFullPath().toString();
 				ModelsDocument doc = null;
 				try {
@@ -113,13 +115,12 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 							for (Model m : doc.getModels().getModelArray()) {
 								if (m.getPath().equals(path))
 									finded = true;
-								else
-									if (!finded)
-										i++;
+								else if (!finded)
+									i++;
 							}
 							if (finded)
 								doc.getModels().removeModel(i);
-							
+
 							//Save the referential
 							SIDEBuilderUtil.prepareFolder((IFolder) referential.getParent());
 							File f = referential.getRawLocation().toFile();
@@ -130,7 +131,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 					}
 				} catch (Exception e) {
 					//Nothing to do
-				}					
+				}
 				break;
 			case IResourceDelta.CHANGED:
 				// handle changed resource
@@ -151,8 +152,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 	}
 
 	class EMFErrorHandler extends DefaultHandler {
-		
-		
+
 		private IFile file;
 
 		public EMFErrorHandler(IFile file) {
@@ -160,8 +160,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		}
 
 		private void addMarker(SAXParseException e, int severity) {
-			SIDEBuilder.this.addMarker(file, e.getMessage(), e
-					.getLineNumber(), severity);
+			SIDEBuilder.this.addMarker(file, e.getMessage(), e.getLineNumber(), severity);
 		}
 
 		public void error(SAXParseException exception) throws SAXException {
@@ -181,8 +180,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 
 	private static final String MARKER_TYPE = "com.bluexml.side.Integration.eclipse.builder.sideProblem";
 
-	private void addMarker(IFile file, String message, int lineNumber,
-			int severity) {
+	private void addMarker(IFile file, String message, int lineNumber, int severity) {
 		try {
 			IMarker marker = file.createMarker(MARKER_TYPE);
 			marker.setAttribute(IMarker.MESSAGE, message);
@@ -198,15 +196,13 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.core.internal.events.InternalBuilder#build(int,
-	 *      java.util.Map, org.eclipse.core.runtime.IProgressMonitor)
+	 * java.util.Map, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
-			throws CoreException {
+	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		IFolder folder = getProject().getFolder(SIDEBuilderConstants.metadataFolder);
 		SIDEBuilderUtil.prepareFolder(folder);
-		
+
 		checkedFiles = new ArrayList<String>();
 		if (kind == FULL_BUILD) {
 			fullBuild(monitor);
@@ -231,14 +227,14 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			//Manage moved elements
 			IPath from = delta.getFullPath();
 			IPath to = delta.getMovedToPath();
-			
+
 			if (from != to) {
 				try {
 					//Delete the backup of from models
 					IFile backupModel = SIDEBuilderUtil.getBackupModel(from);
 					if (backupModel.exists())
 						backupModel.delete(true, null);
-					
+
 					//Try to move the diagram file
 					String fileName = from.lastSegment();
 					fileName = fileName.concat("di");
@@ -247,21 +243,21 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 						IPath _to = to.removeLastSegments(1).append(fileName);
 						diagram.move(_to, true, null);
 					}
-					
+
 					//Try to move the model
 					boolean moveDiagram = false;
 					fileName = from.lastSegment();
 					if (fileName.endsWith("di")) {
 						moveDiagram = true;
 						fileName = from.lastSegment();
-						fileName = fileName.substring(0,fileName.length()-2);
+						fileName = fileName.substring(0, fileName.length() - 2);
 						IFile model = SIDEBuilderUtil.getFile(from.removeLastSegments(1).append(fileName));
 						if (model.exists()) {
 							IPath _to = to.removeLastSegments(1).append(fileName);
 							model.move(_to, true, null);
 						}
 					}
-					
+
 					//Update dependencies
 					ModelsDocument doc = null;
 					IProject p = delta.getResource().getProject();
@@ -278,10 +274,10 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 							IPath _from = from;
 							if (moveDiagram) {
 								fileName = from.lastSegment();
-								fileName = fileName.substring(0,fileName.length()-2);
+								fileName = fileName.substring(0, fileName.length() - 2);
 								_from = from.removeLastSegments(1).append(fileName);
 							}
-							
+
 							if (m.getPath().equals(_from.toString())) {
 								for (Reference ref : m.getReferencedByArray())
 									references.add(ref);
@@ -303,7 +299,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 					for (String file : referencesByFile.keySet()) {
 						IFile f = SIDEBuilderUtil.getFile(new Path(file));
 						deleteMarkers(f);
-						
+
 						//Check if the file is moved at the same moment
 						IResourceDelta foundDelta = null;
 						for (IResourceDelta d : movedFiles)
@@ -312,7 +308,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 							else {
 								if (d.getFullPath() != null && d.getFullPath().lastSegment().endsWith("di")) {
 									fileName = d.getFullPath().lastSegment();
-									fileName = fileName.substring(0,fileName.length()-2);
+									fileName = fileName.substring(0, fileName.length() - 2);
 									if (d.getFullPath().removeLastSegments(1).append(fileName).equals(new Path(file)))
 										foundDelta = d;
 								}
@@ -321,23 +317,23 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 							IPath _to = foundDelta.getMovedToPath();
 							if (_to.lastSegment().endsWith("di")) {
 								fileName = _to.lastSegment();
-								fileName = fileName.substring(0,fileName.length()-2);
+								fileName = fileName.substring(0, fileName.length() - 2);
 								_to = _to.removeLastSegments(1).append(fileName);
 							}
 							f = SIDEBuilderUtil.getFile(_to);
 						}
-						
+
 						if (f.exists()) {
 							List<Reference> refs = referencesByFile.get(file);
 							List<String> ids = new ArrayList<String>();
 							for (Reference ref : refs)
 								ids.add(ref.getUuid());
-							
+
 							IPath _to = to;
 							//Check if we move the diagram
 							if (moveDiagram) {
 								fileName = from.lastSegment();
-								fileName = fileName.substring(0,fileName.length()-2);
+								fileName = fileName.substring(0, fileName.length() - 2);
 								_to = to.removeLastSegments(1).append(fileName);
 							}
 							//Check if we move the file at the same moment
@@ -348,7 +344,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 								else {
 									if (d.getMovedToPath() != null && d.getMovedToPath().lastSegment().endsWith("di")) {
 										fileName = d.getMovedToPath().lastSegment();
-										fileName = fileName.substring(0,fileName.length()-2);
+										fileName = fileName.substring(0, fileName.length() - 2);
 										if (d.getMovedToPath().removeLastSegments(1).append(fileName).equals(_to))
 											foundDelta = d;
 									}
@@ -357,22 +353,21 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 								_to = foundDelta.getMovedToPath();
 								if (_to.lastSegment().endsWith("di")) {
 									fileName = _to.lastSegment();
-									fileName = fileName.substring(0,fileName.length()-2);
+									fileName = fileName.substring(0, fileName.length() - 2);
 									_to = _to.removeLastSegments(1).append(fileName);
 								}
 							}
-							applyModifications(f,_to.toString(), ids, movedFiles);
+							applyModifications(f, _to.toString(), ids, movedFiles);
 						}
 					}
-					
-					
+
 				} catch (Exception e) {
 					//Nothing to do
 					e.printStackTrace();
 				}
 			}
 		}
-		
+
 		//Search children
 		for (IResourceDelta d : delta.getAffectedChildren())
 			manageDifferences(d, movedFiles);
@@ -380,24 +375,24 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 
 	private void applyModifications(IFile f, String newFile, List<String> ids, Collection<IResourceDelta> movedFiles) throws Exception {
 		if (f.getName().endsWith(".application")) {
-			applyModificationsOnApplicationModel(f,newFile,movedFiles);
+			applyModificationsOnApplicationModel(f, newFile, movedFiles);
 		} else {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-	        Document doc = docBuilder.parse (f.getRawLocation().toFile());
-	        
-	        applyModifications(doc.getDocumentElement(), f.getFullPath().toString(), newFile, ids);
-	
-	        //Write xml documents
-	        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-	        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-	        StreamResult result = new StreamResult(new StringWriter());
-	        DOMSource source = new DOMSource(doc);
-	        transformer.transform(source, result);
-	        PrintWriter updates = new PrintWriter(new BufferedWriter(new FileWriter(f.getRawLocation().toFile())), true);
-	        updates.println(result.getWriter().toString());
+			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+			Document doc = docBuilder.parse(f.getRawLocation().toFile());
+
+			applyModifications(doc.getDocumentElement(), f.getFullPath().toString(), newFile, ids);
+
+			//Write xml documents
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			StreamResult result = new StreamResult(new StringWriter());
+			DOMSource source = new DOMSource(doc);
+			transformer.transform(source, result);
+			PrintWriter updates = new PrintWriter(new BufferedWriter(new FileWriter(f.getRawLocation().toFile())), true);
+			updates.println(result.getWriter().toString());
 		}
-		
+
 		//refresh the file
 		f.refreshLocal(IResource.DEPTH_ONE, null);
 	}
@@ -412,7 +407,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			else {
 				if (d.getMovedToPath() != null && d.getMovedToPath().lastSegment().endsWith("di")) {
 					String fileName = d.getMovedToPath().lastSegment();
-					fileName = fileName.substring(0,fileName.length()-2);
+					fileName = fileName.substring(0, fileName.length() - 2);
 					if (d.getMovedToPath().removeLastSegments(1).append(fileName).equals(new Path(newFile)))
 						foundDelta = d;
 				}
@@ -421,11 +416,11 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			from = foundDelta.getFullPath();
 			if (from.lastSegment().endsWith("di")) {
 				String fileName = from.lastSegment();
-				fileName = fileName.substring(0,fileName.length()-2);
+				fileName = fileName.substring(0, fileName.length() - 2);
 				from = from.removeLastSegments(1).append(fileName);
 			}
 		}
-		
+
 		try {
 			//Open the model
 			Resource r = EResourceUtils.openModel(f.getLocation().toString(), new HashMap<Object, Object>());
@@ -434,18 +429,18 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 				EObject o = xmi.getContents().get(0);
 				for (EObject eobj : o.eContents()) {
 					if (eobj.eClass().getName().equalsIgnoreCase("Model")) {
-						Method method = eobj.getClass().getMethod("getFile",  new Class[0]);
+						Method method = eobj.getClass().getMethod("getFile", new Class[0]);
 						String path = method.invoke(eobj, new Object[0]).toString();
 						if (path != null && path.equals(from.toString())) {
 							//The good model is found
-							Class[] paramsType = new Class[] {String.class};
-							method = eobj.getClass().getMethod("setFile",  paramsType);
-							method.invoke(eobj, new Object[] {newFile});
+							Class[] paramsType = new Class[] { String.class };
+							method = eobj.getClass().getMethod("setFile", paramsType);
+							method.invoke(eobj, new Object[] { newFile });
 						}
 					}
 				}
 			}
-			
+
 			//Save the resource
 			EResourceUtils.export(r);
 		} catch (Exception e) {
@@ -457,13 +452,13 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 	private void applyModifications(Element elt, String file, String newFile, List<String> list) {
 		String href = elt.getAttribute("href");
 		if (href != null && href.length() > 0) {
-			String id = href.substring(href.lastIndexOf('#')+1);
+			String id = href.substring(href.lastIndexOf('#') + 1);
 			if (list.contains(id)) {
 				String newId = newFile + '#' + id;
 				elt.setAttribute("href", newId);
 			}
 		}
-		
+
 		//Search in child nodes
 		NodeList childs = elt.getChildNodes();
 		for (int i = 0; i < childs.getLength(); i++)
@@ -471,10 +466,9 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 				applyModifications((Element) childs.item(i), file, newFile, list);
 	}
 
-
 	private Collection<IResourceDelta> getMovedFiles(IResourceDelta delta) {
 		List<IResourceDelta> result = new ArrayList<IResourceDelta>();
-		if (delta.getResource() instanceof IFile) { 
+		if (delta.getResource() instanceof IFile) {
 			if ((delta.getKind() == IResourceDelta.REMOVED) && delta.getMovedFromPath() != delta.getResource().getFullPath())
 				result.add(delta);
 		} else
@@ -492,41 +486,45 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		for (int i = 0; i < SIDEBuilderConstants.availableExtensionsDiagrams.length; ++i)
 			if (resource.getFileExtension() != null && resource.getFileExtension().equalsIgnoreCase(SIDEBuilderConstants.availableExtensionsDiagrams[i]))
 				diagramFile = true;
-		
+
 		if (diagramFile) {
 			IPath p = new Path(resource.getFullPath().removeLastSegments(1).toString());
-			p = p.append(resource.getFullPath().lastSegment().substring(0, resource.getFullPath().lastSegment().length()-2));
+			p = p.append(resource.getFullPath().lastSegment().substring(0, resource.getFullPath().lastSegment().length() - 2));
 			p = p.removeFirstSegments(1);
 			IFile f = resource.getProject().getFile(p);
 			if (f != null && f.exists())
 				check(f);
 		}
-		
+
 		if (resource instanceof IFile && validFile) {
 			IFile file = (IFile) resource;
 
 			deleteMarkers(file);
 			EMFErrorHandler reporter = new EMFErrorHandler(file);
-			
+
 			if (!file.getFullPath().segment(1).equals(SIDEBuilderConstants.metadataFolder)) {
 				check(file);
-				checkLinkedElements(file, previousName);
+
+				//				checkLinkedElements(file, previousName);
+
+				checkLinkedElementsSimple(file, previousName);
+
 				computeReferential(file);
-			
+
 				//Backup the last version
 				backupModel(file);
 			}
 		}
 	}
-	
+
 	private void backupModel(IFile file) {
 		try {
 			if (file.exists()) {
 				IFile backupModel = SIDEBuilderUtil.getBackupModel(file);
-				IResource container = backupModel.getParent(); 
+				IResource container = backupModel.getParent();
 				if (!container.exists() && container instanceof IFolder)
 					SIDEBuilderUtil.prepareFolder((IFolder) container);
-				
+
 				Resource src = EResourceUtils.openModel(file.getLocation().toString(), new HashMap<Object, Object>());
 				Resource target = new XMIResourceImpl(URI.createFileURI(backupModel.getLocation().toString()));
 				target.getContents().addAll(src.getContents());
@@ -547,7 +545,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			checkedFiles.add(model.getFullPath().toString());
 			try {
 				if (!ApplicationUtil.validate(model))
-					addMarker(model, "The model "+model.getName()+" is not valid. Please launch 'Validate' on the top model element of this model.",0,IMarker.SEVERITY_ERROR);
+					addMarker(model, "The model " + model.getName() + " is not valid. Please launch 'Validate' on the top model element of this model.", 0, IMarker.SEVERITY_ERROR);
 			} catch (Exception e) {
 				//Nothing to do
 			}
@@ -591,9 +589,9 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		}
 		if (doc == null)
 			doc = ModelsDocument.Factory.newInstance();
-		
+
 		//Search the good node
-		Map<String,Model> presentModels = new HashMap<String, Model>();
+		Map<String, Model> presentModels = new HashMap<String, Model>();
 		if (doc.getModels() != null) {
 			for (Model m : doc.getModels().getModelArray()) {
 				presentModels.put(m.getPath(), m);
@@ -606,13 +604,13 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			Resource r = EResourceUtils.openModel(file.getLocation().toString(), new HashMap<Object, Object>());
 			if (r instanceof XMIResource) {
 				XMIResource xmi = (XMIResource) r;
-				
+
 				//Specific case with application models
 				if (file.getName().endsWith(".application")) {
 					EObject o = xmi.getContents().get(0);
 					for (EObject eobj : o.eContents()) {
 						if (eobj.eClass().getName().equalsIgnoreCase("Model")) {
-							Method method = eobj.getClass().getMethod("getFile",  new Class[0]);
+							Method method = eobj.getClass().getMethod("getFile", new Class[0]);
 							String path = method.invoke(eobj, new Object[0]).toString();
 							IFile referencedModel = SIDEBuilderUtil.getFile(new Path(path));
 							if (referencedModel.exists()) {
@@ -627,23 +625,23 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 
 								Reference ref = null;
 								for (Reference ref2 : mod.getReferencedByArray()) {
-									String source = EcoreUtil.getURI(eobj).fragment(); 
+									String source = EcoreUtil.getURI(eobj).fragment();
 									if (ref2.getModel().equals(file.getFullPath().toString()) && ref2.getUuid().equals(source))
 										ref = ref2;
 								}
-								
+
 								if (ref == null) {
 									ref = mod.addNewReferencedBy();
 									ref.setModel(file.getFullPath().toString());
 									ref.setUuid(EcoreUtil.getURI(eobj).fragment());
 								}
 							} else {
-								addMarker(file, "The model "+referencedModel.getFullPath().toString()+" does not exist.", -1, IMarker.SEVERITY_ERROR);
+								addMarker(file, "The model " + referencedModel.getFullPath().toString() + " does not exist.", -1, IMarker.SEVERITY_ERROR);
 							}
 						}
 					}
 				}
-				
+
 				Map<EObject, Collection<Setting>> m = EcoreUtil.ProxyCrossReferencer.find(xmi);
 				for (EObject o : m.keySet()) {
 					String path = EcoreUtil.getURI(o).toFileString();
@@ -651,7 +649,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 
 					IProject proj = file.getProject();
 					referencedModel = proj.findMember(path);
-					
+
 					if (referencedModel == null) {
 						IPath ipath = new Path(path);
 						//ipath = ipath.removeFirstSegments(Platform.getLocation().segmentCount());
@@ -661,7 +659,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 							referencedModel = proj.findMember(ipath);
 						}
 					}
-					
+
 					//Try to search model using the absolute path
 					if (referencedModel == null) {
 						IPath ipath = new Path(path);
@@ -674,7 +672,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 							}
 						}
 					}
-					
+
 					if (referencedModel != null) {
 						Model mod;
 						if (presentModels.containsKey(referencedModel.getFullPath().toString()))
@@ -689,11 +687,11 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 						for (Reference ref2 : mod.getReferencedByArray()) {
 							String target = EcoreUtil.getURI(o).fragment();
 							Setting setting = (Setting) m.get(o).toArray()[0];
-							String source = EcoreUtil.getURI(setting.getEObject()).fragment(); 
+							String source = EcoreUtil.getURI(setting.getEObject()).fragment();
 							if (ref2.getModel().equals(file.getFullPath().toString()) && ref2.getUuid().equals(target) && ref2.getSource().equals(source))
 								ref = ref2;
 						}
-						
+
 						if (ref == null) {
 							ref = mod.addNewReferencedBy();
 							ref.setModel(file.getFullPath().toString());
@@ -704,12 +702,12 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 					} else {
 						IPath projectPath = Platform.getLocation().append(proj.getName());
 						if (path.startsWith(projectPath.toString())) {
-							String name = (new Path(path)).removeFirstSegments(projectPath.segmentCount()-1).toString();
-							addMarker(file, "The model "+name+" does not exist.", -1, IMarker.SEVERITY_ERROR);
+							String name = (new Path(path)).removeFirstSegments(projectPath.segmentCount() - 1).toString();
+							addMarker(file, "The model " + name + " does not exist.", -1, IMarker.SEVERITY_ERROR);
 						} else
-							addMarker(file, "The model "+path+" is not managed because it don't exists in this project.", -1, IMarker.SEVERITY_WARNING);
+							addMarker(file, "The model " + path + " is not managed because it don't exists in this project.", -1, IMarker.SEVERITY_WARNING);
 					}
-					
+
 				}
 				//Save the referential
 				IProject p = file.getProject();
@@ -726,6 +724,53 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		}
 	}
 
+	/**
+	 * this implementation search model that link the given model
+	 * and run validation on them
+	 * 
+	 * @param model
+	 * @param previousName
+	 */
+	private void checkLinkedElementsSimple(IFile model, String previousName) {
+		ModelsDocument doc = null;
+		try {
+			IProject p = model.getProject();
+			// get referential.xml file that contains references
+			IResource r = p.findMember(SIDEBuilderConstants.referentialFileName);
+			if ((r != null) && (r instanceof IFile) && r.exists()) {
+				IFile referential = (IFile) r;
+				referential.refreshLocal(0, null);
+				doc = ModelsDocument.Factory.parse(referential.getContents());
+			}
+
+			if ((doc != null) && (doc.getModels() != null)) {
+				for (Model m : doc.getModels().getModelArray()) {
+					List<String> linkedFiles = new ArrayList<String>();
+					IFile iFile = IFileHelper.getIFile(m.getPath());
+					// get references for this model
+					if (iFile.toString().equals(model.toString())) {
+						for (Reference ref : m.getReferencedByArray()) {
+							if (!linkedFiles.contains(ref.getModel())) {
+								// record new reference
+								linkedFiles.add(ref.getModel());
+							}
+						}
+						// run validation for each model that refer to the given model
+						for (String s : linkedFiles) {
+							IFile iFileToValidate = IFileHelper.getIFile(s);
+							deleteMarkers(iFileToValidate);
+							check(iFileToValidate);
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO : use Eclipse logger
+		}
+
+	}
+
+	@Deprecated
 	private void checkLinkedElements(IFile model, String previousName) {
 		ModelsDocument doc = null;
 		try {
@@ -736,7 +781,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 				referential.refreshLocal(0, null);
 				doc = ModelsDocument.Factory.parse(referential.getContents());
 			}
-			
+
 			if (doc != null && doc.getModels() != null) {
 				try {
 					// Loads the new version
@@ -747,7 +792,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 					IFolder folder = model.getProject().getFolder(SIDEBuilderConstants.metadataFolder);
 					folder = folder.getFolder(path.removeLastSegments(1));
 					path = folder.getFullPath().append(model.getName());
-					IFile previous = model.getProject().getFile(path.removeFirstSegments(1)); 
+					IFile previous = model.getProject().getFile(path.removeFirstSegments(1));
 					if (previous.exists()) {
 						final EObject _old = EResourceUtils.openModel(previous.getLocation().toString(), new HashMap<Object, Object>()).getContents().get(0);
 
@@ -776,7 +821,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 
 							if (referencedModel != null) {
 								String modelName = referencedModel.getName();
-								
+
 								for (Model m : doc.getModels().getModelArray()) {
 									List<String> linkedFiles = new ArrayList<String>();
 									if (m.getPath().equals(modelName)) {
@@ -785,7 +830,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 												if (!linkedFiles.contains(ref.getModel()))
 													linkedFiles.add(ref.getModel());
 										}
-										
+
 										for (String s : linkedFiles) {
 											path = new Path(s);
 											IFile file = p.getFile(path.removeFirstSegments(1));
@@ -816,8 +861,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		}
 	}
 
-	protected void fullBuild(final IProgressMonitor monitor)
-			throws CoreException {
+	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
 		try {
 			IFolder folder = getProject().getFolder(SIDEBuilderConstants.metadataFolder);
 			//SIDEBuilderUtil.clearFolder(folder);
@@ -828,22 +872,19 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		}
 	}
 
-	protected void incrementalBuild(IResourceDelta delta,
-			IProgressMonitor monitor) throws CoreException {
-        try {
-           delta.accept(new IResourceDeltaVisitor() {
-              public boolean visit(IResourceDelta delta) {
-                 return true; // visit children too
-              }
-           });
-        } catch (CoreException e) {
-           e.printStackTrace();
-        }
+	protected void incrementalBuild(IResourceDelta delta, IProgressMonitor monitor) throws CoreException {
+		try {
+			delta.accept(new IResourceDeltaVisitor() {
+				public boolean visit(IResourceDelta delta) {
+					return true; // visit children too
+				}
+			});
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 
-		
 		// the visitor does the work.
 		delta.accept(new SIDEDeltaVisitor());
 	}
-	
+
 }
-		
