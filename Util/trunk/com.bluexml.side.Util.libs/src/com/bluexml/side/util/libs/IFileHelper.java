@@ -18,22 +18,22 @@ public class IFileHelper {
 
 	/**
 	 * Return the IFile with the with the given project relative path.
-	 *
+	 * 
 	 * @param path
 	 * @return
 	 */
 	public static IFile getIFile(String path) {
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IFile file = myWorkspaceRoot.getFile(new Path(path));
-//		if (file.exists() || file.getRawLocation().makeAbsolute().toFile().exists()) {
-//			return file;
-//		}
+		//		if (file.exists() || file.getRawLocation().makeAbsolute().toFile().exists()) {
+		//			return file;
+		//		}
 		return file;
 	}
 
 	/**
 	 * Try to convert a file to IFile. If not found return null.
-	 *
+	 * 
 	 * @param toConvert
 	 * @return
 	 */
@@ -60,7 +60,7 @@ public class IFileHelper {
 
 	/**
 	 * Return the IFolder with the with the given project relative path.
-	 *
+	 * 
 	 * @param path
 	 * @return
 	 */
@@ -80,7 +80,7 @@ public class IFileHelper {
 
 	/**
 	 * Delete the folder pointed with the given project relative path.
-	 *
+	 * 
 	 * @param ressource
 	 * @throws CoreException
 	 */
@@ -92,7 +92,7 @@ public class IFileHelper {
 
 	/**
 	 * Delete the given resource if exists.
-	 *
+	 * 
 	 * @param res
 	 * @throws CoreException
 	 */
@@ -104,7 +104,7 @@ public class IFileHelper {
 
 	/**
 	 * Delete the content of the given folder
-	 *
+	 * 
 	 * @param folder
 	 * @throws CoreException
 	 */
@@ -118,7 +118,7 @@ public class IFileHelper {
 
 	/**
 	 * Delete the file pointed with the given project relative path.
-	 *
+	 * 
 	 * @param ressource
 	 * @throws CoreException
 	 */
@@ -132,7 +132,7 @@ public class IFileHelper {
 	 * Create a folder (with given project relative path) in the active
 	 * workspace or return an already created folder. Will create sub folder if
 	 * not found.
-	 *
+	 * 
 	 * @param ressource
 	 * @return
 	 * @throws CoreException
@@ -145,7 +145,7 @@ public class IFileHelper {
 			if (!folder.exists()) {
 				if (folder.getFullPath().segmentCount() > 1) {
 					String parentPath = folder.getFullPath().removeLastSegments(1).toOSString();
-					
+
 					Path parentPathP = new Path(parentPath);
 					IContainer container;
 					if (parentPathP.segmentCount() > 1) {
@@ -165,20 +165,24 @@ public class IFileHelper {
 
 	/**
 	 * Create a file in the given folder
-	 *
+	 * 
 	 * @param folder
 	 * @param fileName
 	 * @throws CoreException
 	 */
-	public static IFile createFile(IFolder folder, String fileName) throws CoreException {
+	public static IFile createFile(IContainer folder, String fileName) throws CoreException {
 		IFile file = null;
-		if (folder.exists()) {
-			IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-			file = myWorkspaceRoot.getFile(new Path(folder.getFullPath() + System.getProperty("file.separator") + fileName));
-			if (!file.exists()) {
-				file.create(null, false, null);
-			}
+
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		file = myWorkspaceRoot.getFile(new Path(folder.getFullPath() + System.getProperty("file.separator") + fileName));
+		if (!folder.exists()) {
+			String parentPath = folder.getFullPath().toOSString();
+			createFolder(parentPath);
 		}
+		if (!file.exists()) {
+			file.create(null, false, null);
+		}
+
 		return file;
 	}
 
@@ -194,7 +198,7 @@ public class IFileHelper {
 
 	/**
 	 * Return the file for resource given.
-	 *
+	 * 
 	 * @param iresource
 	 * @return
 	 */
@@ -205,7 +209,7 @@ public class IFileHelper {
 	/**
 	 * Return all files for a given folder. Iterate over sub folder too (folder
 	 * aren't added)
-	 *
+	 * 
 	 * @param folder
 	 * @return
 	 * @throws Exception
@@ -229,7 +233,7 @@ public class IFileHelper {
 
 	/**
 	 * Return all files for the given folder; won't add file in sub folder.
-	 *
+	 * 
 	 * @param folder
 	 * @return
 	 * @throws Exception
@@ -246,7 +250,7 @@ public class IFileHelper {
 
 	/**
 	 * Return all files for the given folder; won't add file in sub folder.
-	 *
+	 * 
 	 * @param folder
 	 * @return
 	 * @throws Exception
@@ -263,7 +267,7 @@ public class IFileHelper {
 
 	/**
 	 * Refresh the given folder
-	 *
+	 * 
 	 * @param folder
 	 * @throws CoreException
 	 */
@@ -275,7 +279,7 @@ public class IFileHelper {
 
 	/**
 	 * Refresh the given folder using his path
-	 *
+	 * 
 	 * @param folderPath
 	 * @throws CoreException
 	 */
@@ -285,6 +289,7 @@ public class IFileHelper {
 
 	/**
 	 * Refresh the given folder
+	 * 
 	 * @param folderPath
 	 * @throws CoreException
 	 */
@@ -294,7 +299,7 @@ public class IFileHelper {
 
 	/**
 	 * Move the given file to the given folder
-	 *
+	 * 
 	 * @param file
 	 * @param dest
 	 * @throws CoreException
