@@ -894,7 +894,7 @@ public class ApplicationUtil {
 				EList<ConfigurationParameters> l = config.getParameters();
 				List<ConfigurationParameters> toRemove = new ArrayList<ConfigurationParameters>();
 				for (ConfigurationParameters configurationParameters : l) {
-					if (configurationParameters.getValue() == null | configurationParameters.getValue().equals("")) {
+					if (configurationParameters.getValue() == null || configurationParameters.getValue().equals("")) {
 						toRemove.add(configurationParameters);
 					}
 				}

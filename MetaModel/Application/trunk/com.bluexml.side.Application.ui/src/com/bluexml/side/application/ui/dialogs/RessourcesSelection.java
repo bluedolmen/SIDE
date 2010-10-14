@@ -68,7 +68,13 @@ public class RessourcesSelection extends Dialog {
 	}
 
 	public void init(String locationLabel, String initialValue, String resource_type) {
-		this.initialValue = initialValue;
+		if (initialValue != null) {
+			this.initialValue = initialValue;
+		} else {
+			// no default value so initialValue parameter is null
+			// to avoid setting initialValue with value from another field we set it here
+			this.initialValue = "";
+		}
 		this.dataType = resource_type;
 		this.locationLabel = locationLabel;
 		this.resourcePath = initialValue;
@@ -96,6 +102,7 @@ public class RessourcesSelection extends Dialog {
 		group.setLayoutData(gridData);
 
 		locationField = new Text(group, SWT.BORDER);
+
 		locationField.setText(initialValue);
 		gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = IDialogConstants.ENTRY_FIELD_WIDTH;

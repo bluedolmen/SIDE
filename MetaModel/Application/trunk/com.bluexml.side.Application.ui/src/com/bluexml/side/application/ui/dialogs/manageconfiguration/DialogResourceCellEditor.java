@@ -42,7 +42,7 @@ public class DialogResourceCellEditor extends CellEditor {
 			}
 
 			public void mouseDoubleClick(MouseEvent e) {
-				
+
 			}
 		});
 
@@ -85,6 +85,10 @@ public class DialogResourceCellEditor extends CellEditor {
 
 	@Override
 	protected void doSetValue(Object value) {
+		if (value == null) {
+			// the field is empty and without default value
+			value = "";
+		}
 		t.setText((String) value);
 		// initialize ResourceSelection dialog
 		initControl();
