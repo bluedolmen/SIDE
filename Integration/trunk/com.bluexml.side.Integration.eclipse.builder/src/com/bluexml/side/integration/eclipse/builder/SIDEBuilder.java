@@ -65,6 +65,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
+import com.bluexml.side.util.antrunner.AntFileGeneratorAction;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public class SIDEBuilder extends IncrementalProjectBuilder {
@@ -640,6 +641,26 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 							}
 						}
 					}
+					// may execute the build.xml generation but only if one unique application model exist
+					
+					// count sibling application model
+					IResource[] childs = file.getParent().members();
+					int c=0;
+					for (IResource iResource : childs) {
+						if (iResource.getFileExtension().equals("application")) {
+							c++;
+						}
+					}
+					if (c == 1) {
+						// only one application file exist
+						System.out.println("SIDE Builder : update application/build.xml");						
+					} else {
+						// warn before generate
+						System.err.println("SIDE Builder : Warning application/build.xml updated from "+file.getLocation().toOSString());
+					}
+					// maybe execute in a runner
+					
+					AntFileGeneratorAction.generate(file);
 				}
 
 				Map<EObject, Collection<Setting>> m = EcoreUtil.ProxyCrossReferencer.find(xmi);
@@ -766,6 +787,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 			}
 		} catch (Exception e) {
 			// TODO : use Eclipse logger
+			e.printStackTrace();
 		}
 
 	}
