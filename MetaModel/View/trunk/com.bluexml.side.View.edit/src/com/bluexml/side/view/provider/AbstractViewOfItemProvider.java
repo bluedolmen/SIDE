@@ -61,7 +61,6 @@ public class AbstractViewOfItemProvider
 			super.getPropertyDescriptors(object);
 
 			addViewOfPropertyDescriptor(object);
-			addGenerateWebscriptPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -84,28 +83,6 @@ public class AbstractViewOfItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Generate Webscript feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addGenerateWebscriptPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AbstractViewOf_generateWebscript_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractViewOf_generateWebscript_feature", "_UI_AbstractViewOf_type"),
-				 ViewPackage.Literals.ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -145,12 +122,6 @@ public class AbstractViewOfItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(AbstractViewOf.class)) {
-			case ViewPackage.ABSTRACT_VIEW_OF__GENERATE_WEBSCRIPT:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

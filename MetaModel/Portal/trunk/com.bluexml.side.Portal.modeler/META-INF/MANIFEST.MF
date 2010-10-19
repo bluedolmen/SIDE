@@ -28,5 +28,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Workflow.edit,
  com.bluexml.side.View.edit,
  com.bluexml.side.Util.libs,
- com.bluexml.side.View.editor
+ com.bluexml.side.View.editor,
+ com.bluexml.side.Util.ecore,
+ com.bluexml.side.Form.editor
 Eclipse-LazyStart: true

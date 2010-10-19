@@ -1,53 +1,29 @@
 package com.bluexml.side.Class.modeler.actions;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.gef.ui.actions.WorkbenchPartAction;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.FileEditorInput;
-import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 
 import com.bluexml.side.Class.modeler.ClazzImageRegistry;
 import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.editor.ClazzEditor;
+import com.bluexml.side.Util.ecore.modeler.AbstractModelerOpenLinkedObject;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.form.ClassFormCollection;
-import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.ClassReference;
+import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.presentation.FormEditor;
 
-public class ShowFormAction extends WorkbenchPartAction {
-
+public class ShowFormAction extends AbstractModelerOpenLinkedObject {
 	static public String ID = "com.bluexml.side.Class.modeler.actions.showForm"; //$NON-NLS-1$
-	private Clazz selectedObject;
 
 	public ShowFormAction(IWorkbenchPart part) {
-		super(part);
+		super(part, "form", FormCollection.class);
 	}
 
 	@Override
@@ -58,160 +34,72 @@ public class ShowFormAction extends WorkbenchPartAction {
 	}
 
 	@Override
-	public void run() {
-		// Search the good form model
-		// Get project
-		IFile iFile = XMIResource2IFile((XMIResource) selectedObject.eResource());
-		IProject project = iFile.getProject();
-
-		List<ClassFormCollection> wfl = searchFormModel(project);
-		List<FormClass> forms = searchForm(wfl, selectedObject);
-
-		if (forms.size() == 0)
-			MessageDialog.openInformation(null, ClazzPlugin.Messages.getString("ShowFormAction.1"), //$NON-NLS-1$
-					ClazzPlugin.Messages.getString("ShowFormAction.2", project.getName()) //$NON-NLS-1$
-					); //$NON-NLS-1$
-		else {
-			recomputeAndSelect(forms, selectedObject);
-		}
-	}
-
-	private void selectForm(ClassFormCollection wfc, FormEditor editor, Clazz clazz) {
-
-		for (FormContainer fc : wfc.getForms()) {
-			if (fc instanceof FormClass) {
-				FormClass fw = (FormClass) fc;
-				Clazz c = fw.getReal_class();
-
-				if (c.getFullName().equals(clazz.getFullName())) {
-					editor.setSelectionToViewer(Collections.singleton(fw));
-				}
-			}
-		}
-	}
-
-	private void recomputeAndSelect(List<FormClass> forms, Clazz clazz) {
-
-		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(XMIResource2IFile((XMIResource) forms.get(0).eResource()).getName());
-
-		for (FormClass formClass : forms) {
-			IEditorPart editorPart;
-			try {
-				editorPart = page.openEditor(new FileEditorInput(XMIResource2IFile((XMIResource) formClass.eResource())), desc.getId());
-				if (editorPart instanceof FormEditor) {
-					FormEditor editor = (FormEditor) editorPart;
-					TreeViewer treeViewer = (TreeViewer) editor.getViewer();
-					TreeItem item = treeViewer.getTree().getItem(0);
-					item.setExpanded(true);
-					treeViewer.refresh();
-					ClassFormCollection wfc = (ClassFormCollection) item.getItem(0).getData();
-
-					selectForm(wfc, editor, clazz);
-				}
-			} catch (PartInitException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	private List<FormClass> searchForm(List<ClassFormCollection> wfl, Clazz clazz) {
-		List<FormClass> result = new ArrayList<FormClass>();
-		for (ClassFormCollection wfc : wfl) {
-
-			for (FormContainer fc : wfc.getForms()) {
-				if (fc instanceof FormClass) {
-					FormClass fw = (FormClass) fc;
-
-					Clazz c = fw.getReal_class();
-					if (c.getFullName().equals(clazz.getFullName()))
-						result.add(fw);
-				}
-			}
-		}
-		return result;
-	}
-
-	private List<ClassFormCollection> searchFormModel(IProject project) {
-		List<ClassFormCollection> result = new ArrayList<ClassFormCollection>();
-		for (EObject obj : searchFile(project, "form")) { //$NON-NLS-1$
-			if (obj instanceof ClassFormCollection)
-				result.add((ClassFormCollection) obj);
-		}
-		return result;
-	}
-
-	private List<EObject> searchFile(IContainer container, String extension) {
-		List<EObject> result = new ArrayList<EObject>();
-
-		try {
-			for (IResource r : container.members()) {
-				if (r instanceof IContainer)
-					result.addAll(searchFile((IContainer) r, extension));
-				else if (r instanceof IFile) {
-					IFile file = (IFile) r;
-					if (r.getFileExtension().equals(extension))
-						result.add(openModel(file));
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-
 	protected void init() {
 		setId(ID);
 		setText(ClazzPlugin.Messages.getString("ShowFormAction.5")); //$NON-NLS-1$
 		setImageDescriptor(ClazzImageRegistry.getImageDescriptor("FORMMODEL")); //$NON-NLS-1$
 	}
 
-	public void setSelection(ISelection s) {
-		if (!(s instanceof IStructuredSelection)) {
-			return;
-		}
-		IStructuredSelection selection = (IStructuredSelection) s;
+	@Override
+	protected List<EObject> searchEObject() {
+		Clazz clazz = (Clazz) selectedObject;
+		List<EObject> roots = searchRootElements();
+		List<EObject> result = new ArrayList<EObject>();
+		for (EObject wfc_ : roots) {
+			FormCollection wfc = (FormCollection) wfc_;
+			for (FormContainer fc : wfc.getForms()) {
+				if (fc instanceof ClassReference) {
+					ClassReference fw = (ClassReference) fc;
 
-		selectedObject = null;
-		// Recompute the command according to the current selection
-		if (selection.getFirstElement() instanceof EMFGraphNodeEditPart) {
-			EMFGraphNodeEditPart editPart = (EMFGraphNodeEditPart) selection.getFirstElement();
-			if (editPart.getEObject() instanceof Clazz) {
-				selectedObject = (Clazz) editPart.getEObject();
+					Clazz c = fw.getReal_class();
+					if (c.getFullName().equals(clazz.getFullName())) {
+						result.add(fw);
+						System.out.println("match ! record :"+fw);
+					}
+				} else {
+					System.err.println("no matches :" + fc);
+				}
 			}
+		}
+
+		return result;
+	}
+
+	@Override
+	protected void selectEObject(IEditorPart editorPart, List<EObject> elements) {
+		ArrayList<EObject> l = new ArrayList<EObject>();
+		if (editorPart instanceof FormEditor) {
+			FormEditor editor = (FormEditor) editorPart;
+
+			for (EObject eObject : elements) {
+				ClassReference foundedFc = (ClassReference) eObject;
+
+				Clazz clazz = foundedFc.getReal_class();
+				TreeViewer treeViewer = (TreeViewer) editor.getViewer();
+				TreeItem item = treeViewer.getTree().getItem(0);
+				item.setExpanded(true);
+				treeViewer.refresh();
+				FormCollection wfc = (FormCollection) item.getItem(0).getData();
+
+				for (FormContainer fc : wfc.getForms()) {
+					if (fc instanceof ClassReference) {
+						ClassReference fw = (ClassReference) fc;
+						Clazz c = fw.getReal_class();
+
+						if (c.getFullName().equals(clazz.getFullName())) {
+							l.add(fw);
+						}
+					}
+				}
+			}
+			editor.setSelectionToViewer(l);
 		}
 	}
 
-	private EObject openModel(IFile model) throws IOException {
-		ResourceSetImpl set = new ResourceSetImpl();
-		Resource inputResource = set.createResource(URI.createFileURI(model.getRawLocation().toFile().getCanonicalPath()));
-		inputResource.load(null);
-		EList<?> l = inputResource.getContents();
-		return (EObject) l.get(0);
-	}
-
-	private IFile XMIResource2IFile(XMIResource resource) {
-		URI uri = resource.getURI();
-		uri = resource.getResourceSet().getURIConverter().normalize(uri);
-		String scheme = uri.scheme();
-		if ("platform".equals(scheme) && uri.segmentCount() > 1 //$NON-NLS-1$
-				&& "resource".equals(uri.segment(0))) { //$NON-NLS-1$
-			StringBuffer platformResourcePath = new StringBuffer();
-			for (int j = 1, size = uri.segmentCount(); j < size; ++j) {
-				platformResourcePath.append('/');
-				platformResourcePath.append(uri.segment(j));
-			}
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformResourcePath.toString()));
-		} else if ("file".equals(scheme)) { //$NON-NLS-1$
-			StringBuffer platformResourcePath = new StringBuffer();
-			for (int j = ResourcesPlugin.getWorkspace().getRoot().getLocation().segments().length, size = uri.segmentCount(); j < size; ++j) {
-				platformResourcePath.append('/');
-				platformResourcePath.append(uri.segment(j));
-			}
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformResourcePath.toString()));
-		}
-		return null;
+	@Override
+	protected void setMessages() {
+		message1 = ClazzPlugin.Messages.getString("ShowFormAction.1");
+		message2 = ClazzPlugin.Messages.getString("ShowFormAction.2", project.getName());
 	}
 
 }

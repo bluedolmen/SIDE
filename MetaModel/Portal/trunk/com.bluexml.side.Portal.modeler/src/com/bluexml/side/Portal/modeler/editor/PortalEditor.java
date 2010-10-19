@@ -26,7 +26,6 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
@@ -37,13 +36,14 @@ import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Portal.modeler.PortalPlugin;
-import com.bluexml.side.Portal.modeler.actions.ShowViewAction;
 import com.bluexml.side.Portal.modeler.diagram.actions.DeleteLinkGeneratedPortel;
 import com.bluexml.side.Portal.modeler.diagram.actions.DeleteLinkPageLayoutAction;
+import com.bluexml.side.Portal.modeler.diagram.actions.ShowFormAction;
+import com.bluexml.side.Portal.modeler.diagram.actions.ShowViewAction;
 
 /**
  * Generated Model editor
- *
+ * 
  * @generated
  */
 public class PortalEditor extends Modeler {
@@ -54,6 +54,7 @@ public class PortalEditor extends Modeler {
 	 * @see org.topcased.modeler.editor.Modeler#getAdapterFactories()
 	 * @generated
 	 */
+	@Override
 	protected List getAdapterFactories() {
 		List factories = new ArrayList();
 		factories.add(new com.bluexml.side.portal.provider.PortalItemProviderAdapterFactory());
@@ -68,6 +69,7 @@ public class PortalEditor extends Modeler {
 	 * @see org.topcased.modeler.editor.Modeler#getId()
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return EDITOR_ID;
 	}
@@ -76,6 +78,7 @@ public class PortalEditor extends Modeler {
 	 * @see org.topcased.modeler.editor.Modeler#getAdapter(java.lang.Class)
 	 * @generated
 	 */
+	@Override
 	public Object getAdapter(Class type) {
 		if (type == IDocPage.class) {
 			GEFtoEMFCommandStackWrapper stack = new GEFtoEMFCommandStackWrapper(getCommandStack());
@@ -86,9 +89,9 @@ public class PortalEditor extends Modeler {
 
 	/**
 	 * @see org.topcased.modeler.editor.Modeler#getPreferenceStore()
-	 *
 	 * @generated
 	 */
+	@Override
 	public IPreferenceStore getPreferenceStore() {
 		IProject project = (((IFileEditorInput) getEditorInput()).getFile()).getProject();
 
@@ -102,41 +105,53 @@ public class PortalEditor extends Modeler {
 		}
 		return PortalPlugin.getDefault().getPreferenceStore();
 	}
-	
+
 	/**
-     * @see org.topcased.modeler.editor.Modeler#getContextMenuProvider(org.topcased.modeler.editor.ModelerGraphicalViewer)
-     */
-    protected ContextMenuProvider getContextMenuProvider(ModelerGraphicalViewer viewer)
-    {
-        return new ModelerContextMenuProvider(viewer, getActionRegistry());
-    }
-	
+	 * @see org.topcased.modeler.editor.Modeler#getContextMenuProvider(org.topcased.modeler.editor.ModelerGraphicalViewer)
+	 */
 	@Override
-    protected void createActions()
-    {
-        super.createActions();
-        ActionRegistry registry = getActionRegistry();
-        // Delete link between Page and Layout
-        DeleteLinkPageLayoutAction deleteLinkToLayout = new DeleteLinkPageLayoutAction(this);
-        registry.registerAction(deleteLinkToLayout);
-        getSelectionActions().add(deleteLinkToLayout.getId());
-        
-        DeleteLinkGeneratedPortel deleteGenPort = new DeleteLinkGeneratedPortel(this);
-        registry.registerAction(deleteGenPort);
-        getSelectionActions().add(deleteGenPort.getId());
-        
-        IAction action = new ShowViewAction((IWorkbenchPart) this);
-		registry.registerAction(action);
-    }
+	protected ContextMenuProvider getContextMenuProvider(ModelerGraphicalViewer viewer) {
+		return new ModelerContextMenuProvider(viewer, getActionRegistry());
+	}
 
 	@Override
-    protected void configureGraphicalViewer()
-    {
-        super.configureGraphicalViewer();
-        IAction exampleAction = getActionRegistry().getAction(DeleteLinkPageLayoutAction.ID);
-        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) exampleAction);
-        exampleAction = getActionRegistry().getAction(DeleteLinkGeneratedPortel.ID);
-        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) exampleAction);
-        
-    }
+	protected void createActions() {
+		super.createActions();
+		ActionRegistry registry = getActionRegistry();
+		// Delete link between Page and Layout
+		DeleteLinkPageLayoutAction deleteLinkToLayout = new DeleteLinkPageLayoutAction(this);
+		registry.registerAction(deleteLinkToLayout);
+		getSelectionActions().add(deleteLinkToLayout.getId());
+
+		DeleteLinkGeneratedPortel deleteGenPort = new DeleteLinkGeneratedPortel(this);
+		registry.registerAction(deleteGenPort);
+		getSelectionActions().add(deleteGenPort.getId());
+
+		IAction action = new ShowViewAction(this);
+		registry.registerAction(action);
+		getSelectionActions().add(action.getId());
+		
+		IAction actionForm = new ShowFormAction(this);
+		registry.registerAction(actionForm);
+		getSelectionActions().add(actionForm.getId());
+		
+		
+	}
+
+	@Override
+	protected void configureGraphicalViewer() {
+		super.configureGraphicalViewer();
+		IAction exampleAction = getActionRegistry().getAction(DeleteLinkPageLayoutAction.ID);
+		getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) exampleAction);
+		
+		exampleAction = getActionRegistry().getAction(DeleteLinkGeneratedPortel.ID);
+		getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) exampleAction);
+		
+		exampleAction = getActionRegistry().getAction(ShowViewAction.ID);
+		getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) exampleAction);
+		
+		exampleAction = getActionRegistry().getAction(ShowFormAction.ID);
+		getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) exampleAction);
+
+	}
 }

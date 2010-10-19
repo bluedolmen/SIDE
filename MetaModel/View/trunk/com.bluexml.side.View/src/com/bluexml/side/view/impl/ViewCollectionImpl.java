@@ -152,6 +152,43 @@ public class ViewCollectionImpl extends PackageImpl implements ViewCollection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<AbstractView> getAllViewsAndSubViews() {
+		if (getAllViewsAndSubViewsBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.VIEW_COLLECTION.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.VIEW_COLLECTION, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllViewsAndSubViewsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllViewsAndSubViewsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<AbstractView> result = (Collection<AbstractView>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<AbstractView>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllViewsAndSubViews <em>Get All Views And Sub Views</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllViewsAndSubViews
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllViewsAndSubViewsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {

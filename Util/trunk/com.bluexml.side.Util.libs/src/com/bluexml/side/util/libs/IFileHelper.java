@@ -13,6 +13,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
 
 public class IFileHelper {
 
@@ -323,5 +324,24 @@ public class IFileHelper {
 
 	public static IFile getIFile(IPath p) {
 		return ResourcesPlugin.getWorkspace().getRoot().getFile(p);
+	}
+
+	public static IFile URI2IFile(URI uri) {
+		IFile iFile = null;
+		if (uri.isPlatform()) {
+			IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+			String platformString = uri.toPlatformString(true);
+			Path path = new Path(platformString);
+			iFile = myWorkspaceRoot.getFile(path);
+		} else if (uri.scheme() != null && uri.scheme().equals("file")) {
+			String path = uri.path();
+			iFile = IFileHelper.getIFile(new File(path));
+		}
+
+		if (iFile.exists()) {
+			return iFile;
+		}
+
+		return null;
 	}
 }

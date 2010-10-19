@@ -38,6 +38,7 @@ public class ModelInitializationUtils {
 
 	/**
 	 * Save a new model in file.
+	 * 
 	 * @param file
 	 * @param rootObject
 	 * @throws IOException
@@ -45,8 +46,7 @@ public class ModelInitializationUtils {
 	public static void saveModel(File file, EObject rootObject) throws IOException {
 		FileOutputStream os = new FileOutputStream(file);
 		ResourceSetImpl set = new ResourceSetImpl();
-		Resource outputResource = set.createResource(URI.createFileURI(file
-				.getCanonicalPath()));
+		Resource outputResource = set.createResource(URI.createFileURI(file.getCanonicalPath()));
 		outputResource.getContents().add(rootObject);
 		outputResource.save(os, null);
 		os.close();
@@ -54,65 +54,65 @@ public class ModelInitializationUtils {
 
 	/**
 	 * Open the specified model.
+	 * 
 	 * @param model
 	 * @return
 	 * @throws IOException
 	 */
-	public static EList<?> openModel(IFile model) throws IOException {
+	public static EList<EObject> openModel(IFile model) throws IOException {
 		ResourceSetImpl set = new ResourceSetImpl();
-		Resource inputResource = set.createResource(URI
-				.createFileURI(model.getRawLocation().toFile()
-						.getCanonicalPath()));
+		Resource inputResource = set.createResource(URI.createFileURI(model.getRawLocation().toFile().getCanonicalPath()));
 		inputResource.load(null);
-		EList<?> l = inputResource.getContents();
+		EList<EObject> l = inputResource.getContents();
 		return l;
 	}
-
+	
 	public static Resource createDiagramFile(EObject root, String diagramId, String name, IFile diagramFile) throws IOException {
-		 // retrieve the Diagrams and the DiagramInterchange factory singletons
-        DiagramsFactory factory = DiagramsFactory.eINSTANCE;
-        DiagramInterchangeFactory diFactory = DiagramInterchangeFactory.eINSTANCE;
-        // create the EObject of the diagram model
-        Diagrams diagrams = factory.createDiagrams();
-        Diagram rootDiagram = diFactory.createDiagram();
-        EMFSemanticModelBridge emfSemanticModelBridge = diFactory.createEMFSemanticModelBridge();
+		// retrieve the Diagrams and the DiagramInterchange factory singletons
+		DiagramsFactory factory = DiagramsFactory.eINSTANCE;
+		DiagramInterchangeFactory diFactory = DiagramInterchangeFactory.eINSTANCE;
+		// create the EObject of the diagram model
+		Diagrams diagrams = factory.createDiagrams();
+		Diagram rootDiagram = diFactory.createDiagram();
+		EMFSemanticModelBridge emfSemanticModelBridge = diFactory.createEMFSemanticModelBridge();
 
-        // set the properties of the diagrams model
-        diagrams.setModel(root);
-        diagrams.getDiagrams().add(rootDiagram);
+		// set the properties of the diagrams model
+		diagrams.setModel(root);
+		diagrams.getDiagrams().add(rootDiagram);
 
-        // set the properties of the Diagram
-        rootDiagram.setSize(new Dimension(100, 100));
-        rootDiagram.setViewport(new Point(0, 0));
-        rootDiagram.setPosition(new Point(0, 0));
-        rootDiagram.setName(name);
-        rootDiagram.setSemanticModel(emfSemanticModelBridge);
+		// set the properties of the Diagram
+		rootDiagram.setSize(new Dimension(100, 100));
+		rootDiagram.setViewport(new Point(0, 0));
+		rootDiagram.setPosition(new Point(0, 0));
+		rootDiagram.setName(name);
+		rootDiagram.setSemanticModel(emfSemanticModelBridge);
 
-        // set the properties of the SemanticModelBridge
-        emfSemanticModelBridge.setElement(root);
-        emfSemanticModelBridge.setPresentation(diagramId);
+		// set the properties of the SemanticModelBridge
+		emfSemanticModelBridge.setElement(root);
+		emfSemanticModelBridge.setPresentation(diagramId);
 
-        // create the diagram file and add the created model into
-        URI fileURI = URI.createPlatformResourceURI(URI.decode(diagramFile.getFullPath().toString()), false);
-        Resource resource = rsrcSet.createResource(fileURI);
-        resource.getContents().add(diagrams);
+		// create the diagram file and add the created model into
+		URI fileURI = URI.createPlatformResourceURI(URI.decode(diagramFile.getFullPath().toString()), false);
+		Resource resource = rsrcSet.createResource(fileURI);
+		resource.getContents().add(diagrams);
 
-        // Save the resource contents to the file system.
-        resource.save(Collections.EMPTY_MAP);
+		// Save the resource contents to the file system.
+		resource.save(Collections.EMPTY_MAP);
 
-        importObjects(resource, root, diagramFile);
+		importObjects(resource, root, diagramFile);
 
-        return resource;
+		return resource;
 	}
 
 	/**
 	 * Get the extension for a given model plugin
+	 * 
 	 * @param id
 	 * @return
 	 */
 	public static String getExtensionForExtensionId(String id) {
 		String result = ".";
-		if (contributions == null || contributions.length == 0) {
+		if ((contributions == null) || (contributions.length == 0)) {
 			contributions = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.ui.editors");
 		}
 		if (contributions.length > 0) {
@@ -128,46 +128,38 @@ public class ModelInitializationUtils {
 	private static void importObjects(Resource resource, EObject root, IFile diagramFile) {
 		Modeler modeler = openDiagram(resource, diagramFile);
 
-        if (modeler != null)
-        {
-            // Import graphical element
-            final Importer importer = new Importer(modeler, getActiveRoot(modeler).eContents());
+		if (modeler != null) {
+			// Import graphical element
+			final Importer importer = new Importer(modeler, getActiveRoot(modeler).eContents());
 
-            GraphicalViewer viewer = (GraphicalViewer) modeler.getAdapter(GraphicalViewer.class);
-            GraphicalEditPart target = (GraphicalEditPart) viewer.getEditPartRegistry().get(modeler.getActiveDiagram());
+			GraphicalViewer viewer = (GraphicalViewer) modeler.getAdapter(GraphicalViewer.class);
+			GraphicalEditPart target = (GraphicalEditPart) viewer.getEditPartRegistry().get(modeler.getActiveDiagram());
 
-            importer.setTargetEditPart(target);
-            Dimension insets = new Dimension(10, 10);
-            target.getContentPane().translateToAbsolute(insets);
-            importer.setLocation(target.getContentPane().getBounds().getTopLeft().translate(insets));
-        }
+			importer.setTargetEditPart(target);
+			Dimension insets = new Dimension(10, 10);
+			target.getContentPane().translateToAbsolute(insets);
+			importer.setLocation(target.getContentPane().getBounds().getTopLeft().translate(insets));
+		}
 	}
 
-	private static Modeler openDiagram(Resource diagramResource, IFile file)
-    {
-        Modeler modeler = null;
-        if (file != null)
-        {
-            // Open the newly created model
-            try
-            {
-                IEditorPart part = IDE.openEditor(ModelerPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage(), file, true);
-                if (part instanceof Modeler)
-                {
-                    modeler = (Modeler) part;
-                }
-            }
-            catch (PartInitException pie)
-            {
-                modeler = null;
-            }
-        }
+	private static Modeler openDiagram(Resource diagramResource, IFile file) {
+		Modeler modeler = null;
+		if (file != null) {
+			// Open the newly created model
+			try {
+				IEditorPart part = IDE.openEditor(ModelerPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage(), file, true);
+				if (part instanceof Modeler) {
+					modeler = (Modeler) part;
+				}
+			} catch (PartInitException pie) {
+				modeler = null;
+			}
+		}
 
-        return modeler;
-    }
+		return modeler;
+	}
 
-	 private static EObject getActiveRoot(Modeler editor)
-    {
-        return Utils.getElement(editor.getActiveDiagram());
-    }
+	private static EObject getActiveRoot(Modeler editor) {
+		return Utils.getElement(editor.getActiveDiagram());
+	}
 }
