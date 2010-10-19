@@ -115,7 +115,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				);
 			}
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_DataGenerator)) {
-				monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_9"), Activator.Messages.getString("ClassAlfrescoGenerator_10"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL) + "service/data/form/fillparameters"); //$NON-NLS-3$
+				monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_9"), Activator.Messages.getString("ClassAlfrescoGenerator_10"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL) + "/service/data/form/fillparameters"); //$NON-NLS-3$
 			}
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_UNICITY)) {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/unicity/alfrescoGenerator_unicity.mt"); //$NON-NLS-1$
