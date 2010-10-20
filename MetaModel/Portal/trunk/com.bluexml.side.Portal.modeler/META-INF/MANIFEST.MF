@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Portal Modeler
 Bundle-SymbolicName: com.bluexml.side.Portal.modeler; singleton:=true
-Bundle-Version: 1.0.44.v20668-20100929
+Bundle-Version: 1.0.45.v21082-20101020
 Bundle-Activator: com.bluexml.side.Portal.modeler.PortalPlugin
 Bundle-Vendor: BlueXML
 Bundle-Localization: plugin
