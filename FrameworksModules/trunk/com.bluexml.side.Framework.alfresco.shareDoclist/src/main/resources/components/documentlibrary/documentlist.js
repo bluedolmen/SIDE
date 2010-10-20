@@ -825,11 +825,13 @@
                       * Working Copy
                       */
                      desc += '<div class="detail">';
+                     /* only display information from custom properties
                      desc += '<span class="item"><em>' + me.msg("details.checked-out.on") + '</em> ' + Alfresco.util.formatDate(record.modifiedOn) + '</span>';
                      desc += '<span class="item"><em>' + me.msg("details.checked-out.by") + '</em> <a href="' + Alfresco.DocumentList.generateUserProfileUrl(record.modifiedByUser) + '">' + $html(record.modifiedBy) + '</a></span>';
                      desc += '<span class="item"><em>' + me.msg("details.size") + '</em> ' + Alfresco.util.formatFileSize(record.size) + '</span>';
                      desc += '</div><div class="detail">';
                      desc += '<span class="item"><em>' + me.msg("details.description") + '</em> ' + $links($html(description)) + '</span>';
+                     */
                      /** SIDE **/
                      // customProperties
                      var customProp = oRecord.getData("customProperties");           
@@ -845,12 +847,14 @@
                       * Non-Working Copy
                       */
                      desc += '<div class="detail">';
+                     /* only display information from custom properties
                      desc += '<span class="item"><em>' + me.msg("details.modified.on") + '</em> ' + Alfresco.util.formatDate(record.modifiedOn) + '</span>';
                      desc += '<span class="item"><em>' + me.msg("details.modified.by") + '</em> <a href="' + Alfresco.DocumentList.generateUserProfileUrl(record.modifiedByUser) + '">' + $html(record.modifiedBy) + '</a></span>';
                      desc += '<span class="item"><em>' + me.msg("details.version") + '</em> ' + record.version + '</span>';
                      desc += '<span class="item"><em>' + me.msg("details.size") + '</em> ' + Alfresco.util.formatFileSize(record.size) + '</span>';
                      desc += '</div><div class="detail">';
                      desc += '<span class="item"><em>' + me.msg("details.description") + '</em> ' + $links($html(description)) + '</span>';
+                     */
                      /** SIDE **/
                      // customProperties
                      var customProp = oRecord.getData("customProperties");                   
@@ -2295,7 +2299,7 @@
          });
 
          // Filter parameters
-         if (this.options.search.type.length>0) {
+         if (this.options.search.type && this.options.search.type.length>0) {
         	 params += "?filter=metadata";
              // IDE
              // search parameters
@@ -2303,7 +2307,7 @@
              {
                 params += "&search=" + encodeURIComponent(this.options.search.toSource());
              }
-         } else if (this.options.search.fullText.length >0) {
+         } else if (this.options.search.fullText && this.options.search.fullText.length >0) {
         	 params += "?filter=fullTextSearch";
         	 params += "&term="+this.options.search.fullText;
          } else {

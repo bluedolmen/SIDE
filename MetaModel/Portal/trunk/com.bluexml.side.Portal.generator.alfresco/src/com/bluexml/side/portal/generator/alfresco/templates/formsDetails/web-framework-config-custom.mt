@@ -9,14 +9,15 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%if (name.toLowerCase().trim() == "documentdetails" && isPortletInternal != null && isPortletInternal.view != null) {%>
 <%for (isPortletInternal.view.getInnerView()){%>
 <!-- START BlueXML custom form configuration for the <%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%> content type -->   
-   <config evaluator="node-type" condition="<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%>">
+   <config evaluator="node-type" condition="<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%>" replace="true">
    	<forms>
 	      <form>
 	         <field-visibility>
+	         <%--
 	            <!-- START default Alfresco form configuration (cm:content) -->
 	            <%getDefaultAlfrescoContentFormConfiguration()%>  
 	            <!-- END default Alfresco form configuration (cm:content) -->
-	            
+	         --%>
 	            <!-- START BlueXML custom form configuration (<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%>) -->
 	            <%for (children){%>
 					<%if ( mapTo.filter("common.NamedModelElement")){%>

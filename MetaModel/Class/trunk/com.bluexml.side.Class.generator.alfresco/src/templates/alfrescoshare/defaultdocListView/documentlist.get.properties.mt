@@ -54,26 +54,28 @@ actions.description.lockOwner=Locked by you
 actions.description.workingCopyOwner=Checked-out by you
 actions.description.link=Document or Folder link
 
-actions.document.details=Rename...
+actions.document.assign-workflow=Assign Workflow
+actions.document.cancel-editing=Cancel Editing
 actions.document.copy-to=Copy to...
-actions.document.move-to=Move to...
 actions.document.delete=Delete Document
 actions.document.download=Download
 actions.document.download-again=Download
 actions.document.download-original=Download Original
+actions.document.edit-metadata=Edit Metadata
 actions.document.edit-offline=Edit Offline
 actions.document.edit-online=Edit Online
-actions.document.cancel-editing=Cancel Editing
+actions.document.manage-aspects=Manage Aspects
+actions.document.manage-permissions=Manage Permissions
+actions.document.move-to=Move to...
 actions.document.upload-new-version=Upload New Version
-actions.document.assign-workflow=Assign Workflow...
-actions.document.manage-permissions=Manage Permissions...
 actions.link.delete=Delete Link
-actions.folder.details=Rename...
-actions.folder.metadata=View / Edit Metadata
+actions.folder.edit-metadata=Edit Metadata
+actions.folder.view-metadata=View Details
 actions.folder.copy-to=Copy to...
 actions.folder.move-to=Move to...
 actions.folder.delete=Delete Folder
-actions.folder.manage-permissions=Manage Permissions...
+actions.folder.manage-permissions=Manage Permissions
+actions.folder.manage-aspects=Manage Aspects
 actions.more=More...
 
 ## Tips
@@ -81,8 +83,11 @@ tip.locked=Locked by {0} ({1})
 tip.editing=Being edited by you
 tip.lock-owner=Locked by you
 tip.active-workflow=Belongs to {0} active workflows
+tip.favourite-document.add=Add to favorites
+tip.favourite-document.remove=Remove from favorites
 
 ## Pop-up Messages
+message.confirm.delete.title=Delete File
 message.confirm.delete=Are you sure you want to delete '{0}'?
 message.delete.success='{0}' was deleted
 message.delete.failure=Could not delete '{0}'
@@ -94,7 +99,9 @@ message.edit-cancel.failure=Could not cancel editing '{0}'.
 message.loading=Loading the Document Library...
 message.error=Could not access the Document Library
 message.empty=No items
-message.empty.subfolders=No items. Click "Show Folders" to see {0} subfolder(s) here.
+message.empty.subfolders=No items. Click "{0}" to see {1} subfolder(s) here.
+message.empty.subfolders.link=Show Folders
+message.favourite.failure=Could not update favorites list
 
 ## File Upload (upload new version)
 label.filter-description=Same type as {0}

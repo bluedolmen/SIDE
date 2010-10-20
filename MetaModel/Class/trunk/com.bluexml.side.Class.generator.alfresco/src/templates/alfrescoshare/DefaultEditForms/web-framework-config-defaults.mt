@@ -25,17 +25,18 @@ import templates.servicesTemplates.Common
    <%--if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0 && !isAbstract){--%>
    
    <!-- START BlueXML custom form configuration for the <%getContentType()%> content type -->   
-   <config evaluator="node-type" condition="<%getContentType()%>">
+   <config evaluator="node-type" condition="<%getContentType()%>" replace="true">
    	<forms>
 	      <form>
 	         <field-visibility>
 	            <!-- START default Alfresco form configuration (cm:content) -->
 	            <%getDefaultAlfrescoContentFormConfiguration()%>  
 	            <!-- END default Alfresco form configuration (cm:content) -->
-	            
+	            <%--
 	            <!-- START BlueXML custom form configuration (<%getContentType()%>) -->
 	            <%getCustomBlueXMLFormConfiguration()%>
 	            <!-- END BlueXML custom form configuration (<%getContentType()%>) -->
+	            --%>
 	         </field-visibility>
 	      </form>
 	</forms>          
@@ -57,6 +58,7 @@ import templates.servicesTemplates.Common
 <%-- These default values are taken from web-framework-config-commons.xml --%>
 <%script type="clazz.Clazz" name="getDefaultAlfrescoContentFormConfiguration"%>
 <show id="cm:name" />
+<%--
 <!-- <show id="mimetype" /> TODO: Need to extract from content property -->
 <show id="cm:title" />
 <show id="cm:description" />
@@ -67,3 +69,4 @@ import templates.servicesTemplates.Common
 <show id="cm:created" />
 <show id="cm:modifier" />
 <show id="cm:modified" />
+--%>

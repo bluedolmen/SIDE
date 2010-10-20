@@ -47,7 +47,7 @@ public class PresetsManagerExtension extends PresetsManager {
 	}
 
 	/**
-	 * Initialise the presets manager
+	 * Initialize the presets manager
 	 */
 	private void init() {
 		logger.debug("=== SIDE PresetManager loaded ===");
