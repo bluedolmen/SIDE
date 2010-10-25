@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Generator Utilities
 Bundle-SymbolicName: com.bluexml.side.Util.generator
-Bundle-Version: 1.0.67.v20605-20100925
+Bundle-Version: 1.0.68.v21205-20101025
 Bundle-Activator: com.bluexml.side.util.generator.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
