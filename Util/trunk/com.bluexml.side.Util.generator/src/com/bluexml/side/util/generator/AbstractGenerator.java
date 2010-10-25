@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.jdom.Attribute;
@@ -127,7 +128,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		Attribute date = new Attribute("date", new Date().toString()); //$NON-NLS-1$
 		racine.setAttribute(date);
 		XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-		sortie.output(racine, new FileOutputStream(IFileHelper.getFile(IFileHelper.createFile(ff, this.id + "-stamp.xml")))); //$NON-NLS-1$
+		sortie.output(racine, new FileOutputStream(IFileHelper.getFile(IFileHelper.createFile((IContainer)ff, this.id + "-stamp.xml")))); //$NON-NLS-1$
 	}
 
 	/**
