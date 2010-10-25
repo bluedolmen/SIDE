@@ -35,11 +35,11 @@ function getUsers(memberships) {
 	for (userName in memberships) {
 		var membershipRole = memberships[userName];
 		if (userName.match("^GROUP_")) {
-			var group_users = people.getMembers(userName);
+			var group_users = people.getMembers(people.getGroup(userName));
 			users = users.concat(group_users);
 
 		} else {
-			users.push(userName);
+			users.push(people.getPerson(userName));
 		}
 	}
 	return users;
