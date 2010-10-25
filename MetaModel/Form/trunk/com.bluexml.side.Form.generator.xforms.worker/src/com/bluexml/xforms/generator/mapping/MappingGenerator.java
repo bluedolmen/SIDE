@@ -989,6 +989,12 @@ public class MappingGenerator extends AbstractGenerator {
 		} else if (ref instanceof com.bluexml.side.workflow.Attribute) {
 			com.bluexml.side.workflow.Attribute attribute = ((com.bluexml.side.workflow.Attribute) ref);
 			formFieldType.setType(attribute.getTyp().getLiteral());
+			// for now, setting the xtension depends on data source being present
+			String xtensionDataSourceUri = formGenerator.getXtensionDataSourceUri(field);
+			if (StringUtils.trimToNull(xtensionDataSourceUri) != null) {
+				String xtension = formGenerator.getXtensionAsString(field);
+				formFieldType.setXtension(xtension);
+			}
 		} else {
 			formFieldType.setType("String");
 		}
