@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Alfresco Content Type Generator
 Bundle-SymbolicName: com.bluexml.side.Class.generator.alfresco;singleton:=true
-Bundle-Version: 1.0.274.v21175-20101024
+Bundle-Version: 1.0.275.v21185-20101025
 Bundle-Activator: com.bluexml.side.clazz.generator.alfresco.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
