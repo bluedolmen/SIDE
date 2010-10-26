@@ -2,6 +2,7 @@ package com.bluexml.xforms.generator.forms;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -41,7 +42,6 @@ public abstract class ModelElement {
 	 * 
 	 * @param allModelElementsClean
 	 *            the model elements already added
-	 * 
 	 * @return true, if self has already a clone inside provided list
 	 */
 	public abstract boolean hasClone(List<ModelElement> allModelElementsClean);
@@ -83,11 +83,10 @@ public abstract class ModelElement {
 	 * @param maxLength
 	 * @param formatPattern
 	 * @param typeCompleteName
+	 * @param dataSourceUri
 	 * @return
 	 */
-	protected String buildListActionUriFragment(String typeCompleteName, String formatPattern,
-			String maxLength, String identifier, String filterAssoc, boolean isComposition,
-			boolean isForSearchMode, String luceneQuery) {
+	protected String buildListActionUriFragment(String typeCompleteName, String formatPattern, String maxLength, String identifier, String filterAssoc, boolean isComposition, boolean isForSearchMode, String luceneQuery, String dataSourceUri) {
 		// StringBuffer result = new StringBuffer(MsgId.INT_ACT_CODE_LIST.getText() + "/");
 		// result.append(typeCompleteName).append("/");
 		// result.append(StringUtils.trimToEmpty(formatPattern)).append("/");
@@ -110,8 +109,8 @@ public abstract class ModelElement {
 		// return result.toString();
 		String result = MsgId.INT_ACT_CODE_LIST.getText() + "?";
 
-		List<MsgId> param = new Vector<MsgId>(8);
-		List<String> value = new Vector<String>(8);
+		List<MsgId> param = new ArrayList<MsgId>();
+		List<String> value = new ArrayList<String>();
 		String isCompStr = isComposition ? "1" : "0";
 		String isSearchStr = isForSearchMode ? "1" : "0";
 
@@ -131,6 +130,10 @@ public abstract class ModelElement {
 		value.add(isSearchStr);
 		param.add(MsgId.INT_ACT_PARAM_LIST_LUCENE_QUERY);
 		value.add(queryEncoded);
+		if (dataSourceUri != null) {
+			param.add(MsgId.INT_ACT_PARAM_LIST_DATA_SOURCE_URI);
+			value.add(dataSourceUri.replaceAll("&", "@\\$@"));
+		}
 
 		for (int i = 0; i < param.size(); i++) {
 			if (i > 0) {
@@ -165,10 +168,8 @@ public abstract class ModelElement {
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(MsgId.INT_ACT_PARAM_ENUM_RAWTYPE + "=" + enumName);
-		sb.append("&" + MsgId.INT_ACT_PARAM_ENUM_FILTER_PARENT + "="
-				+ StringUtils.trimToEmpty(parent));
-		sb.append("&" + MsgId.INT_ACT_PARAM_ENUM_FILTER_DATA + "="
-				+ StringUtils.trimToEmpty(context));
+		sb.append("&" + MsgId.INT_ACT_PARAM_ENUM_FILTER_PARENT + "=" + StringUtils.trimToEmpty(parent));
+		sb.append("&" + MsgId.INT_ACT_PARAM_ENUM_FILTER_DATA + "=" + StringUtils.trimToEmpty(context));
 		sb.append("&" + MsgId.INT_ACT_PARAM_ENUM_LIMITED + "=" + limit);
 
 		return sb.toString();

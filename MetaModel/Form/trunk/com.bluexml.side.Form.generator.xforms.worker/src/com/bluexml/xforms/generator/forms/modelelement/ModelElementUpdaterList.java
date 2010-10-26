@@ -76,10 +76,10 @@ public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 		Element submission = XFormsGenerator.createElement("submission",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		String sourceURI;
-		if (dataSourceUri == null) {
+		if (dataSourceUri == null || dataSourceUri.contains("alfresco")) {
 			sourceURI = MsgId.INT_URI_SCHEME_WRITER
 					+ buildListActionUriFragment(typeCompleteName, formatPattern, maxLength,
-							identifier, filterAssoc, isComposition, isForSearch, luceneQuery);
+							identifier, filterAssoc, isComposition, isForSearch, luceneQuery, dataSourceUri);
 		} else {
 			sourceURI = dataSourceUri;
 		}

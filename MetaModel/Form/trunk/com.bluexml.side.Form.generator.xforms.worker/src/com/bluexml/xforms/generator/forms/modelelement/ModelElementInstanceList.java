@@ -106,10 +106,10 @@ public class ModelElementInstanceList extends ModelElement {
 		Element instance = XFormsGenerator.createElement("instance",
 				XFormsGenerator.NAMESPACE_XFORMS);
 		String sourceURI;
-		if (dataSourceUri == null) {
+		if (dataSourceUri == null || dataSourceUri.contains("alfresco")) {
 			sourceURI = MsgId.INT_URI_SCHEME_READER
 					+ buildListActionUriFragment(typeCompleteName, formatPattern, maxLength,
-							identifier, filterAssoc, isComposition, isForSearch, luceneQuery);
+							identifier, filterAssoc, isComposition, isForSearch, luceneQuery, dataSourceUri);
 		} else {
 			sourceURI = dataSourceUri;
 		}
