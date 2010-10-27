@@ -362,13 +362,13 @@ public class Generate extends WorkspaceJob {
 		// }
 		// }
 
-		if (generationParameters.containsKey(UPDATE_DEPENDENCIES) && Boolean.parseBoolean(generationParameters.get(UPDATE_DEPENDENCIES))) {
+		if (configurationParameters.containsKey(UPDATE_DEPENDENCIES) && Boolean.parseBoolean(configurationParameters.get(UPDATE_DEPENDENCIES))) {
 			// update from repository servers
 			generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
 			ApplicationUtil.prepareForOffline();
 			generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
 		} else {
-			if (!generationParameters.containsKey(FM_dev) || !Boolean.parseBoolean(generationParameters.get(FM_dev))) {
+			if (!configurationParameters.containsKey(FM_dev) || !Boolean.parseBoolean(configurationParameters.get(FM_dev))) {
 				// update local repository from embedded archive
 				generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
 				DependenciesDeployer.deploy();
