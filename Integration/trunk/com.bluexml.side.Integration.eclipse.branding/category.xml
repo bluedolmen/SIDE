@@ -3,7 +3,7 @@
   <feature url="features/com.bluexml.side.Common.core.feature_1.0.248.v21205-20101025.jar" id="com.bluexml.side.Common.core.feature" version="1.0.248.v21205-20101025">
     <category name="SIDE" />
   </feature>
-  <feature url="features/com.bluexml.side.Common.sideForAlfresco.feature_1.0.290.v21255-20101026.jar" id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.290.v21255-20101026">
+  <feature url="features/com.bluexml.side.Common.sideForAlfresco.feature_1.0.291.v21270-20101027.jar" id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.291.v21270-20101027">
     <category name="SIDE" />
   </feature>
   <category-def name="SIDE" label="SIDE" />
