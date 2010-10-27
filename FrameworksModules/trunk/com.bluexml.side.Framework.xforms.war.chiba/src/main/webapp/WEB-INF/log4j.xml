@@ -41,31 +41,31 @@
         change to WARN in production environments
     -->
     <category name="org.chiba">
-        <priority value="ERROR"/>
+        <level value= "WARN"/>
     </category>
     <category name="com.bluexml.xforms.actions.WorkflowTransitionAction">
-        <priority value="DEBUG"/>
+        <level value="WARN"/>
     </category>
     <category name="com.bluexml.xforms.controller.alfresco.AlfrescoController">
-        <priority value="DEBUG"/>
+        <level value="WARN"/>
     </category>
     <category name="com.bluexml.xforms.controller.alfresco.AlfrescoController.trace">
-        <priority value="OFF"/>
+        <level value="WARN"/>
     </category>
     <category name="com.bluexml.xforms.controller.mapping">
-        <priority value="DEBUG"/>
+        <level value="WARN"/>
     </category>
     <category name="com.bluexml.xforms.controller.mapping.trace">
-        <priority value="OFF"/>
+        <level value="WARN"/>
     </category>
     <category name="com.bluexml.xforms.controller.mapping.VirtualResolver">
-        <priority value="ERROR"/>
+        <level value="WARN"/>
     </category>
     <category name="com.bluexml.xforms.controller.navigation.NavigationManager">
-        <priority value="DEBUG"/>
+        <level value="WARN"/>
     </category>
     <category name="org.chiba.agent.web.session.impl">
-        <priority value="ERROR"/>
+        <level value="WARN"/>
     </category>
 
     <root>
