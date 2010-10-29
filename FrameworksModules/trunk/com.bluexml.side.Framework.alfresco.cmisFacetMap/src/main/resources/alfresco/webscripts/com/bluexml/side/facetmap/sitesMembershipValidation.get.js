@@ -15,7 +15,7 @@ script: {
 		model.validity = false;
 		for ( var c = 0; c < users.length; c++) {
 			var u = users[c];
-			if (u == args["userName"]) {
+			if (u.properties["cm:userName"] == args["userName"]) {
 				model.validity = true;
 				break;
 			}
