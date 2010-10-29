@@ -12,6 +12,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormUI;
 import com.bluexml.side.form.clazz.utils.ClassInitialization;
 
 public class InitializeFormClassAction extends Action implements
@@ -54,7 +55,7 @@ public class InitializeFormClassAction extends Action implements
 
 	@Override
 	public String getText() {
-		return "Initialize form class";
+		return FormUI.Messages.getString("Actions_Initialize");
 	}
 
 	public void setActiveWorkbenchPart(IWorkbenchPart workbenchPart) {
