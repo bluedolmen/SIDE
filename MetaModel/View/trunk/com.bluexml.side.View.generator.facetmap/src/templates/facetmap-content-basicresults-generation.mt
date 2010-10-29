@@ -40,12 +40,7 @@ version="1.0">
     	<%for (getInnerView().filter("Actionable").operations.getOperations()){%>
         	<a>
         		<xsl:attribute name="target">_blank</xsl:attribute>
-        	<%-- Download operation --%>
-        	<%if (name == "download"){%>
-					<xsl:attribute name="href">../share/proxy/alfresco/api/node/content/workspace/SpacesStore/<xsl:value-of select="@href"/>/?a=true</xsl:attribute>
-					<img src="{$icons_url}/disk.png" class="imgIcon"/>
-			<%}%>
-			<%-- View operation --%>
+        	<%-- View operation --%>
 			<%if (name == "view"){%>
 					<xsl:attribute name="href">../share/page/site/<xsl:value-of select="substring-after($community, '&amp;community=')"/>/document-details?nodeRef=workspace://SpacesStore/<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/eye.png" class="imgIcon"/>
@@ -54,10 +49,15 @@ version="1.0">
 			<%if (name == "edit"){%>
 					<xsl:attribute name="href">../share/page/site/<xsl:value-of select="substring-after($community, '&amp;community=')"/>/edit-metadata?nodeRef=workspace://SpacesStore/<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/edit.png" class="imgIcon"/>
+			<%}%>
+        	<%-- Download operation --%>
+        	<%if (name == "download"){%>
+					<xsl:attribute name="href">../share/proxy/alfresco/api/node/content/workspace/SpacesStore/<xsl:value-of select="@href"/>/?a=true</xsl:attribute>
+					<img src="{$icons_url}/disk.png" class="imgIcon"/>
 			<%}%>			
 			</a>
         <%}%>
-    	<xsl:value-of select="@name"/>
+    	<xsl:value-of select="translate(@name,'#',',')"/>
 	</div>
     <xsl:if test="position()!=last()">
       <hr class="hr2" />
