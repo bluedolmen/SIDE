@@ -77,7 +77,7 @@ import com.thoughtworks.xstream.XStream;
 public class XFormsWork implements RunAsWork<String> {
 	// bug #1685 allow to search on system properties
 	private static final boolean FORCE_SYSTEM_PROPERTIES_RESOLUTION = true;
-	
+
 	private static final String WEBSCRIPT_SEPARATOR = "{::}";
 	/** */
 	static Log logger = LogFactory.getLog(XFormsWork.class);
@@ -294,20 +294,20 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 		String datatype = parameters.get("datatype");
 		String identifier = parameters.get("identifier");
-		
+
 		// configure the filtering/limiting
 		QName identifierQName = null;
 		boolean includeSystemProperties = FORCE_SYSTEM_PROPERTIES_RESOLUTION;
 		if (StringUtils.trimToNull(identifier) != null) {
 			identifierQName = resolveIdentifierQName(identifier, datatype);
 			includeSystemProperties = (identifierQName != null);
-		}		
-		
+		}
+
 		if (datatype != null) {
 			String format = parameters.get("format");
 			String labelLength = parameters.get("labelLength");
 			String idValue = parameters.get("id");
-			return resolveObjectInfo(datatype, identifier, format, labelLength, idValue,includeSystemProperties);
+			return resolveObjectInfo(datatype, identifier, format, labelLength, idValue, includeSystemProperties);
 		}
 
 		return "";
@@ -342,7 +342,7 @@ public class XFormsWork implements RunAsWork<String> {
 	 *         string for the node,
 	 *         e.g."workspace://SpacesStore/ca151555-95e0-4361-aa4e-0050adb7027d{::}John Doe (johndoe@email.com){::}cm:person"
 	 */
-	private String resolveObjectInfo(String datatype, String identifier, String format, String labelLength, String idValue,boolean includeSystemProperties) {
+	private String resolveObjectInfo(String datatype, String identifier, String format, String labelLength, String idValue, boolean includeSystemProperties) {
 		// get the identifier property's qname
 		QName idQName = resolveIdentifierQName(identifier, datatype);
 		if (idQName == null) {
@@ -350,7 +350,7 @@ public class XFormsWork implements RunAsWork<String> {
 		}
 
 		// get all objects of the datatype
-		ResultSet luceneResultSet = getResultSet(datatype, new ArrayList<String>(), 0, null,includeSystemProperties);
+		ResultSet luceneResultSet = getResultSet(datatype, new ArrayList<String>(), 0, null, includeSystemProperties);
 		int nbResults = luceneResultSet.length();
 		NodeRef electedNode = null;
 
@@ -770,11 +770,10 @@ public class XFormsWork implements RunAsWork<String> {
 			identifierQName = resolveIdentifierQName(identifier, type);
 			includeSystemProperties = (identifierQName != null);
 		}
-		
-		
+
 		// perform the search
 		luceneTimer.start();
-		ResultSet luceneResultSet = getResultSet(type, searchedValues, maxResults, userLuceneQuery,includeSystemProperties);
+		ResultSet luceneResultSet = getResultSet(type, searchedValues, maxResults, userLuceneQuery, includeSystemProperties);
 		luceneTimer.stop();
 		if (luceneResultSet == null) {
 			// result for the pathological case when the type is unknown to Alfresco.
@@ -790,7 +789,6 @@ public class XFormsWork implements RunAsWork<String> {
 		// collect items and apply filtering and/or limiting. Node names/labels are also computed.
 		//
 		//
-		
 
 		/**
 		 * whether we need to collect all elements before applying the filtering
@@ -1037,7 +1035,7 @@ public class XFormsWork implements RunAsWork<String> {
 		return dataLayer.getLabelForNode(nodeRef, format, includeSystemProperties);
 	}
 
-	private ResultSet getResultSet(String type, List<String> searchedValues, int maxResults, String userLuceneQuery,boolean includeSystemProperties) {
+	private ResultSet getResultSet(String type, List<String> searchedValues, int maxResults, String userLuceneQuery, boolean includeSystemProperties) {
 		SearchParameters searchParameters = createSearchParameters(type, searchedValues, maxResults, userLuceneQuery, includeSystemProperties);
 		if (searchParameters == null) {
 			return null;
@@ -1277,6 +1275,10 @@ public class XFormsWork implements RunAsWork<String> {
 			result = xstream.toXML(res);
 		} else if (StringUtils.equals(method, "wfGetInstanceHistory")) {// #1069
 			result = wfGetInstanceHistory(wfs);
+		} else if (StringUtils.equals(method, "getAssignedTasks")) {//
+			String authority = parameters.get("arg0");
+			String state = parameters.get("arg1");
+			result = xstream.toXML(wfs.getAssignedTasks(authority, WorkflowTaskState.valueOf(state)));
 		} else {
 			// calls a generic method
 			// result = serviceMethodCall(wfs, xstream, method);

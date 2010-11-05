@@ -112,7 +112,7 @@
 			<td style="text-align:center"><%= v.elementAt(1)%></td>
 			<td><%= v.elementAt(2)%></td>
 			<td><%= v.elementAt(3)%></td>
-			<td style="text-align:center"><a href="<%=url%>" class="nyroModal" target="_blank"><img style="vertical-align:middle" src="images/check.gif" alt="launch a new instance"/>Launch a new instance</a></td>
+			<td style="text-align:center">Document :<input type="text" id="documentNodeRef_<%= v.elementAt(0)%>" onChange="" /><a onClick="javascript:updateLink(this,'documentNodeRef_<%= v.elementAt(0)%>')" href="<%=url%>" class="nyroModal" target="_blank" id="link_<%= v.elementAt(0)%>"><img style="vertical-align:middle" src="images/check.gif" alt="launch a new instance"/>Launch</a></td>
 		</tr>
 <%
 		}
@@ -147,6 +147,35 @@
 		</tr>
 <%	
 	for (Vector<String> v : Util.getPooledTasks(alfrescohost,user)) {
+		String  url = xforms+"xforms?type="+v.elementAt(3)+"&amp;taskId="+v.elementAt(0)+"&amp;formType=wkflw&amp;userName="+user+"&amp;workflowInstanceId="+v.elementAt(5)+"&amp;id="+v.elementAt(4)+"&amp;successPage=demo/confirmation.jsp&amp;failurePage=demo/error.jsp";
+%>
+		<tr>
+			<td style="text-align:center"><%= v.elementAt(0)%></td>
+			<td style="text-align:center"><%= v.elementAt(1)%></td>
+			<td style="text-align:center"><%= v.elementAt(2)%></td>
+			<td style="text-align:center"><a href="showTask.jsp?formUrl=<%=url%>" class="nyroModal" target="_blank"><img style="vertical-align:middle" src="images/check.gif" alt=""/>Open this task</a></td>
+		</tr>
+<%
+	}
+%>
+	</table>
+	</div>
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2">
+		<div class="box"><div class="box"><h1><img src="images/pooled_task.png" alt="action"/>  To do tasks</h1></div>
+	<br/>
+	<table class="list-table" id="launchTask">
+		<tr>
+			<th>Instance id</th>
+			<th>Title</th>
+			<th>Description</th>
+			<th/>
+		</tr>
+<%	
+	for (Vector<String> v : Util.getToDoTasks(alfrescohost,user)) {
 		String  url = xforms+"xforms?type="+v.elementAt(3)+"&amp;taskId="+v.elementAt(0)+"&amp;formType=wkflw&amp;userName="+user+"&amp;workflowInstanceId="+v.elementAt(5)+"&amp;id="+v.elementAt(4)+"&amp;successPage=demo/confirmation.jsp&amp;failurePage=demo/error.jsp";
 %>
 		<tr>
@@ -229,7 +258,13 @@
 			$('#launchWorkflow a').nyroModal({minHeight: 400, minWidth: 600});
 			$('#launchTask a').nyroModal({minHeight: 768, minWidth: 1024});
 		})
-
+	function updateLink(link,inputId) {
+		var inputElement = document.getElementById(inputId);
+		if (inputElement.value != null && inputElement.value != '') {
+			link.href += "&id=" + inputElement.value;
+		}
+		 
+	}
 	</script>
 	
 </body>

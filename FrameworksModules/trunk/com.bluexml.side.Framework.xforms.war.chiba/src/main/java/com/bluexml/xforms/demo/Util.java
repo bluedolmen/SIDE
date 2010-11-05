@@ -338,7 +338,57 @@ public class Util {
 					.parse(new ByteArrayInputStream(
 							("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + post
 									.getResponseBodyAsString()).getBytes()));
+			
+			Node root = document.getDocumentElement();
+			root = findNode(root.getChildNodes(), "list");
 
+			for (int i = 0; i < root.getChildNodes().getLength(); i++) {
+				Node n = root.getChildNodes().item(i);
+				if (n.getNodeType() == Element.ELEMENT_NODE) {
+					Vector<String> v = new Vector<String>();
+					String instanceId = findNode(
+							findNode(findNode(n.getChildNodes(), "path").getChildNodes(),
+									"instance").getChildNodes(), "id").getTextContent();
+					String taskId = findNode(n.getChildNodes(), "id").getTextContent();
+					v.add(taskId);
+					v.add(findNode(n.getChildNodes(), "title").getTextContent());
+					v.add(findNode(n.getChildNodes(), "description").getTextContent());
+					String name = findNode(n.getChildNodes(), "name").getTextContent();
+					v.add(getFormName(name));
+					v.add(getContentId(alfrescohost, user, taskId));
+					v.add(instanceId);
+
+					result.add(v);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static Set<Vector<String>> getToDoTasks(String alfrescohost,
+			String user) {
+		Set<Vector<String>> result = new HashSet<Vector<String>>();
+		try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			// the mapping.xml file is private to the controller. Better use the API.
+			// Document mappingDocument = builder.parse(mapping);
+
+			PostMethod post = new PostMethod(alfrescohost + "service/xforms/workflow");
+			post.setParameter("username", user);
+			post.setParameter("method", "getAssignedTasks");
+			post.setParameter("arg0", user);
+			post.setParameter("arg1","IN_PROGRESS");
+			HttpClient client = new HttpClient();
+			client.executeMethod(post);
+
+			Document document = builder
+					.parse(new ByteArrayInputStream(
+							("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + post
+									.getResponseBodyAsString()).getBytes()));
+			
 			Node root = document.getDocumentElement();
 			root = findNode(root.getChildNodes(), "list");
 
