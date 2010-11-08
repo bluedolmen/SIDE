@@ -17,6 +17,7 @@
 		formUrl += "&amp;successPage="+ request.getParameter("successPage");
 		formUrl += "&amp;failurePage="+ request.getParameter("failurePage");
 		formUrl += "&amp;formType="+ request.getParameter("formType");
+		formUrl += "&amp;userName="+ request.getParameter("userName");
 		%>
 	  <frame src="<%=formUrl%>" name="body" marginwidth="0"/>
 	</frameset>
