@@ -63,6 +63,7 @@
 	} else {
 			PostMethod post = new PostMethod(alfrescohost + "service/xforms/read");
 			post.setParameter("objectId", "workspace://SpacesStore/" + uuid);
+			post.setParameter("username",user);
 			HttpClient client = new HttpClient();
 			client.executeMethod(post);
 %>

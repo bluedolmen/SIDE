@@ -13,7 +13,7 @@
 	String xformshost = request.getParameter("xformshost");
 	String formsproperties = request.getParameter("formsproperties");
 	String redirectxml = request.getParameter("redirectxml");
-
+	String documentspace = request.getParameter("documentspace");
 	if (alfrescohost != null) {
 		if (!alfrescohost.endsWith("/"))
 			alfrescohost += "/";
@@ -25,6 +25,11 @@
 			xformshost += "/";
 		session.setAttribute("xformshost", xformshost);
 		out.println("<p class=\"confirmationaccept\">XForms webapp host saved.</p>");
+	}
+	
+	if (documentspace != null) {
+		session.setAttribute("documentspace", documentspace);
+		out.println("<p class=\"confirmationaccept\">Document space saved.</p>");
 	}
 	
 	if (Util.initWebApp(alfrescohost, xformshost, formsproperties, redirectxml)) {

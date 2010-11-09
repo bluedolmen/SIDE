@@ -21,8 +21,9 @@
 	String password = request.getParameter("password");
 	String host = request.getParameter("alfrescohost");
 	String xforms = request.getParameter("xformshost");
+	String documentSpaceStore = request.getParameter("documentspace");
 	if ((name != null) || (password != null)) {
-		if ((host == null) || (name == null) || (password == null) || (host.length() == 0) || (name.length() == 0) || (password.length() == 0)) {
+		if ((host == null) || (name == null) || (password == null) || (host.length() == 0) || (name.length() == 0) || (password.length() == 0) || (documentSpaceStore.length() == 0)) {
 		%>
 			<p class="confirmationerror">All fields must be filled.</p>
 		<%	
@@ -37,6 +38,12 @@
 				session.setAttribute("password", password);
 				session.setAttribute("alfrescohost", host);
 				session.setAttribute("xformshost", xforms);
+				// if default add userlogin
+				String space = documentSpaceStore;
+				if (documentSpaceStore.endsWith("app:user_homes")) {
+					space += "/sys:" + name;
+				}
+				session.setAttribute("documentspace", space);
 		%>
 			<p class="confirmationaccept">Login successfully.</p>
 		<%
@@ -57,6 +64,8 @@
 	    host = "http://localhost:8080/alfresco/";
 	if (xforms == null || xforms.length() == 0)
 	    xforms = "http://localhost:8080/xforms/";
+	if (documentSpaceStore == null || documentSpaceStore.length() == 0)
+		documentSpaceStore = "app:company_home/app:user_homes";
 	%>
 	    	<h1>Welcome</h1>
 	    	<form method="post" action="index.jsp">
@@ -74,6 +83,10 @@
 	    		<tr>
 	    			<td class="form_field">XForms URL :</td><td class="form_input">
 	    				<input type="text" value="<%=xforms%>" name="xformshost" size="40"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td class="form_field">Document space :</td><td class="form_input">
+	    				<input type="text" value="<%=documentSpaceStore%>" name="documentspace" size="40"/></td>
 	    		</tr>
 	    	</table>
 	    	<div>

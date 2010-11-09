@@ -18,6 +18,10 @@
 		formUrl += "&amp;failurePage="+ request.getParameter("failurePage");
 		formUrl += "&amp;formType="+ request.getParameter("formType");
 		formUrl += "&amp;userName="+ request.getParameter("userName");
+		if (request.getParameter("saveTo") != null) {
+			formUrl += "&amp;saveTo="+ request.getParameter("saveTo");	
+		}
+		
 		%>
 	  <frame src="<%=formUrl%>" name="body" marginwidth="0"/>
 	</frameset>

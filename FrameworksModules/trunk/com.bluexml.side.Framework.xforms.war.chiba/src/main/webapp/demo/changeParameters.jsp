@@ -24,7 +24,11 @@
 
 			Chiba URL :<br/>
 			<input type="text" name="xformshost" size="40" value="<%= getParamValue(session, "xformshost") %>"/><br/><br/>
-			<br/>
+			
+			Document space :<br/>
+			<input type="text" name="documentspace" size="40" value="<%= getParamValue(session, "documentspace") %>"/><br/><br/>		
+			
+			<br/>			
 			<input type="submit" value="Submit"/>
 		</form>
 	</div>
