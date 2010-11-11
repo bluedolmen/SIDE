@@ -2,7 +2,7 @@
  * 
  */
 package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action;
- 
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -45,19 +45,19 @@ import com.lowagie.text.DocumentException;
 
 /**
  * @author dchevrier
- *
+ * 
  */
 public class PdfActionHandler extends JBPMSpringActionHandler {
 
 	private static final long serialVersionUID = 1L;
 	private static Log logger = LogFactory.getLog(PdfActionHandler.class);
-	
+
 	private Element script;
 	private FillPDF fillPdf;
 	private FillContent fillContent;
-	
+
 	private ServiceRegistry services;
-	
+
 	public void setFillPdf(FillPDF fillPdf) {
 		this.fillPdf = fillPdf;
 	}
@@ -95,128 +95,103 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 			logger.error("Error :", e);
 		}
 		try {
-			executeActionScript(actionValue,commands);	
+			executeActionScript(actionValue, commands);
 		} catch (ValueActionException e) {
 			logger.error("Error :", e);
-		}
-		  catch (DuplicateInputPdfException e) {
+		} catch (DuplicateInputPdfException e) {
 			logger.error("Error :", e);
-		}
-		  catch (MissingInputPdfKeyException e) {
+		} catch (MissingInputPdfKeyException e) {
 			logger.error("Error :", e);
-		}
-		  catch (IOException e) {
+		} catch (IOException e) {
 			logger.error("Error :", e);
-		}
-		  catch (NoPdfFileException e) {
-				logger.error("Error :", e);
-		}
-		  catch (DuplicateOutputContentException e) {
-				logger.error("Error :", e);
-		}
-		  catch (MissingOutputContentException e) {
-				logger.error("Error :", e);
-		}
-		  catch (NoContentException e) {
-				logger.error("Error :", e);
-		}
-		  catch (InvalidValueOfParameterException e) {
-				logger.error("Error :", e);
-		}
-		  catch (AttributeContentException e) {
-				logger.error("Error :", e);
-		}
-		  catch (InvalidAssociationException e) {
-				logger.error("Error :", e);
-		}
-		  catch (OutputTypeKeyException e) {
-				logger.error("Error :", e);
-		}
-		  catch (InvalidContentException e) {
-				logger.error("Error :", e);
-		}
-		  catch (MissingOutputPathForPDFException e) {
-				logger.error("Error :", e);
-		}
-		  catch (DocumentException e) {
-				logger.error("Error :", e);
-		}
-		  catch (MissingOverridePdfKeyException e) {
-				logger.error("Error :", e);
-		}
-		  catch (FileExistsException e) {
-				logger.error("Error :", e);
-		}
-		  catch (FileNotFoundException e) {
-				logger.error("Error :", e);
-		}
-		  catch (MissingDateFormatException e) {
-				logger.error("Error :", e);
-		}
-		  catch (ParseException e) {
-				logger.error("Error :", e);
-		}
-		  catch (InvalidFormatParameterException e) {
-				logger.error("Error :", e);
+		} catch (NoPdfFileException e) {
+			logger.error("Error :", e);
+		} catch (DuplicateOutputContentException e) {
+			logger.error("Error :", e);
+		} catch (MissingOutputContentException e) {
+			logger.error("Error :", e);
+		} catch (NoContentException e) {
+			logger.error("Error :", e);
+		} catch (InvalidValueOfParameterException e) {
+			logger.error("Error :", e);
+		} catch (AttributeContentException e) {
+			logger.error("Error :", e);
+		} catch (InvalidAssociationException e) {
+			logger.error("Error :", e);
+		} catch (OutputTypeKeyException e) {
+			logger.error("Error :", e);
+		} catch (InvalidContentException e) {
+			logger.error("Error :", e);
+		} catch (MissingOutputPathForPDFException e) {
+			logger.error("Error :", e);
+		} catch (DocumentException e) {
+			logger.error("Error :", e);
+		} catch (MissingOverridePdfKeyException e) {
+			logger.error("Error :", e);
+		} catch (FileExistsException e) {
+			logger.error("Error :", e);
+		} catch (FileNotFoundException e) {
+			logger.error("Error :", e);
+		} catch (MissingDateFormatException e) {
+			logger.error("Error :", e);
+		} catch (ParseException e) {
+			logger.error("Error :", e);
+		} catch (InvalidFormatParameterException e) {
+			logger.error("Error :", e);
+		} catch (InvalidNodeRefException e) {
+			logger.error("Error :", e);
 		}
 	}
 
-	private void executeActionScript(String actionValue, Map<String, String> commands) throws ValueActionException, DuplicateInputPdfException, 
-																							  MissingInputPdfKeyException, IOException, 
-																							  NoPdfFileException, DuplicateOutputContentException, 
-																							  MissingOutputContentException, NoContentException, 
-																							  InvalidValueOfParameterException, AttributeContentException, 
-																							  InvalidAssociationException, OutputTypeKeyException, 
-																							  InvalidContentException, MissingOutputPathForPDFException, 
-																							  DocumentException, MissingOverridePdfKeyException, 
-																							  FileExistsException, FileNotFoundException, MissingDateFormatException,
-																							  InvalidNodeRefException, ParseException, InvalidFormatParameterException {
-		if (actionValue.equals(ConstantsLanguage.ACTION_VALUES[0])){
+	private void executeActionScript(String actionValue, Map<String, String> commands)
+			throws ValueActionException, DuplicateInputPdfException, MissingInputPdfKeyException,
+			IOException, NoPdfFileException, DuplicateOutputContentException, MissingOutputContentException,
+			NoContentException, InvalidValueOfParameterException, AttributeContentException,
+			InvalidAssociationException, OutputTypeKeyException, InvalidContentException,
+			MissingOutputPathForPDFException, DocumentException, MissingOverridePdfKeyException,
+			FileExistsException, FileNotFoundException, MissingDateFormatException, InvalidNodeRefException,
+			ParseException, InvalidFormatParameterException {
+		if (actionValue.equals(ConstantsLanguage.ACTION_VALUES[0])) {
 			fillContent.execute(commands);
-		}
-		else if (actionValue.equals(ConstantsLanguage.ACTION_VALUES[1])){
+		} else if (actionValue.equals(ConstantsLanguage.ACTION_VALUES[1])) {
 			fillPdf.execute(commands);
-		}
-		else{
+		} else {
 			throw new ValueActionException(ValueActionException.BAD_FORMAT);
 		}
 	}
 
-	private String getAction(Map<String,String> commands) throws EmptyKeyActionException {
+	private String getAction(Map<String, String> commands) throws EmptyKeyActionException {
 		String actionValue = null;
-		if (commands.containsKey(ConstantsLanguage.ACTION_KEY)){
+		if (commands.containsKey(ConstantsLanguage.ACTION_KEY)) {
 			actionValue = commands.get(ConstantsLanguage.ACTION_KEY);
-		}
-		else{
+		} else {
 			throw new EmptyKeyActionException(EmptyKeyActionException.EMPTY_KEY);
-		} 
+		}
 		return actionValue;
 	}
 
 	private Map<String, String> getScriptAsKeysValues() throws EmptyScriptException {
-		Map<String,String> commands = new HashMap<String, String>();
+		Map<String, String> commands = new HashMap<String, String>();
 		Element expressionElement = script.element("expression");
 		String expression = null;
-		if (expressionElement != null){
+		if (expressionElement != null) {
 			expression = expressionElement.getTextTrim();
-		}
-		else{
+		} else {
 			throw new EmptyScriptException(EmptyScriptException.EMPTY_SCRIPT);
 		}
-		
-		//Delete comments
+
+		// Delete comments
 		expression = expression.replaceAll("/\\*[^(*/)]*\\*/", "");
-		
+
 		String[] expressions = expression.split(ConstantsLanguage.COMMANDS_SEPARATOR_SPACE);
 		for (int index = 0; index < expressions.length; index++) {
 			String[] keyValue = expressions[index].split(ConstantsLanguage.KEY_VALUE_SEPARATOR);
-			if (index == expressions.length-1){
+			if (index == expressions.length - 1) {
 				keyValue[1] = keyValue[1].split(ConstantsLanguage.COMMANDS_SEPARATOR)[0];
 			}
 			commands.put(keyValue[0].trim(), keyValue[1].trim());
 		}
 		return commands;
 	}
-
 
 }
