@@ -99,6 +99,8 @@ public class ClassDiagramUtils {
 			} else if (att.getTyp().equals(DataType.SHORT)) {
 				// Short Field
 				field = FormFactory.eINSTANCE.createIntegerField();
+			} else if (att.getTyp().equals(DataType.OBJECT)) {
+				field = FormFactory.eINSTANCE.createCharField();
 			} else {
 				EcorePlugin.INSTANCE.log("No field available for "
 						+ att.getTyp());

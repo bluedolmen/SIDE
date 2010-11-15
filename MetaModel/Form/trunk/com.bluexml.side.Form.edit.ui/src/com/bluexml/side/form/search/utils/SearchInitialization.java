@@ -29,7 +29,6 @@ import com.bluexml.side.util.libs.ui.UIUtils;
 
 /**
  * @author Amenel
- * 
  */
 public class SearchInitialization {
 
@@ -41,8 +40,7 @@ public class SearchInitialization {
 		if (form.getReal_class() != null) {
 			boolean doWork = true;
 			if (form.getChildren().size() > 0) {
-				doWork = UIUtils.showConfirmation("Form already set",
-						"This search form has already been set. Do you really want to overwrite?");
+				doWork = UIUtils.showConfirmation("Form already set", "This search form has already been set. Do you really want to overwrite?");
 			}
 
 			if (doWork) {
@@ -56,20 +54,19 @@ public class SearchInitialization {
 				Collection<FormElement> children = getSearchChildrenFromClazz(form);
 				// add the children
 				if (children.size() > 0) {
-					Command addCmd = AddCommand.create(domain, form, FormPackage.eINSTANCE
-							.getFormGroup_Children(), children);
+					Command addCmd = AddCommand.create(domain, form, FormPackage.eINSTANCE.getFormGroup_Children(), children);
 					cmd.append(addCmd);
 				}
 			}
 		} else {
-			UIUtils.showError("No Data Form defined", "No data form has been defined. \n"
-					+ "Please choose one and run Initialize again.");
+			UIUtils.showError("No Data Form defined", "No data form has been defined. \n" + "Please choose one and run Initialize again.");
 		}
 		return cmd;
 	}
 
 	/**
-	 * Sets the properties of the search form that may be inferred from the attachment link.
+	 * Sets the properties of the search form that may be inferred from the
+	 * attachment link.
 	 * 
 	 * @param form
 	 * @param domain
@@ -86,12 +83,10 @@ public class SearchInitialization {
 			String label = (classLabel.length() > 0 ? classLabel : className);
 
 			if (form.getLabel() == null || form.getLabel().length() == 0) {
-				cc.append(SetCommand.create(domain, form, FormPackage.eINSTANCE
-						.getFormElement_Label(), label + SUFFIX_LABEL));
+				cc.append(SetCommand.create(domain, form, FormPackage.eINSTANCE.getFormElement_Label(), label + SUFFIX_LABEL));
 			}
 			if (form.getId() == null || form.getId().length() == 0) {
-				cc.append(SetCommand.create(domain, form,
-						FormPackage.eINSTANCE.getFormElement_Id(), className + SUFFIX_NAME));
+				cc.append(SetCommand.create(domain, form, FormPackage.eINSTANCE.getFormElement_Id(), className + SUFFIX_NAME));
 			}
 		}
 		return cc;
@@ -99,7 +94,7 @@ public class SearchInitialization {
 
 	private static Collection<FormElement> getSearchChildrenFromClazz(FormSearch form) {
 		form.getChildren().removeAll(form.getChildren()); // <-- this is MANDATORY !
-		Clazz cl = form.getReal_class(); 
+		Clazz cl = form.getReal_class();
 		Collection<FormElement> fields = new ArrayList<FormElement>();
 
 		if (cl != null) {
@@ -141,7 +136,8 @@ public class SearchInitialization {
 	}
 
 	/**
-	 * Provides a search field of the type that corresponds to the type of the given attribute.
+	 * Provides a search field of the type that corresponds to the type of the
+	 * given attribute.
 	 * <p/>
 	 * Types <em>NOT</em> supported: Time, Boolean
 	 * <p/>
@@ -153,8 +149,7 @@ public class SearchInitialization {
 	private static SearchField getSearchFieldForAttribute(Attribute att) {
 		SearchField field = null;
 		if (att != null) {
-			Map<String, String> metaInfoMap = ClassDiagramUtils.InitializeMetaInfo(att
-					.getMetainfo());
+			Map<String, String> metaInfoMap = ClassDiagramUtils.InitializeMetaInfo(att.getMetainfo());
 			if (att.getValueList() != null) {
 				// Choice Field
 				field = FormFactory.eINSTANCE.createChoiceSearchField();
@@ -190,6 +185,8 @@ public class SearchInitialization {
 			} else if (att.getTyp().equals(DataType.BYTE)) {
 				// Byte Field
 				field = FormFactory.eINSTANCE.createNumericalSearchField();
+			} else if (att.getTyp().equals(DataType.OBJECT)) {
+				field = FormFactory.eINSTANCE.createCharSearchField();
 			} else {
 				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
 			}
