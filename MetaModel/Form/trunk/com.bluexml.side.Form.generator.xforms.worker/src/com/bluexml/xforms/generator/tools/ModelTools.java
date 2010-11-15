@@ -3,6 +3,7 @@ package com.bluexml.xforms.generator.tools;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -39,7 +40,6 @@ public class ModelTools {
 	 * 
 	 * @param resource
 	 *            the resource
-	 * 
 	 * @return the model
 	 */
 	public static com.bluexml.side.common.Package getModel(Resource resource) {
@@ -58,7 +58,6 @@ public class ModelTools {
 	 * 
 	 * @param resource
 	 *            the resource
-	 * 
 	 * @return the form collection
 	 */
 	public static FormCollection getFormCollection(Resource resource) {
@@ -74,7 +73,6 @@ public class ModelTools {
 	 *            the parent
 	 * @param name
 	 *            the name
-	 * 
 	 * @return the string
 	 */
 	public static String packageConcate(String parent, String name) {
@@ -89,7 +87,6 @@ public class ModelTools {
 	 * 
 	 * @param me
 	 *            the me
-	 * 
 	 * @return the package
 	 */
 	public static String getPackage(ModelElement me) {
@@ -110,7 +107,6 @@ public class ModelTools {
 	 * 
 	 * @param me
 	 *            the me
-	 * 
 	 * @return the complete name
 	 */
 	public static String getCompleteName(FormContainer me) {
@@ -120,16 +116,17 @@ public class ModelTools {
 	}
 
 	/**
-	 * Gets the complete name of a model element as a {@link #packageConcate(String, String)}
-	 * concatenation of all elements found on the way to the given model element. For instance,
-	 * Model "TestModel" > Package "com" > Package "bluexml" > class "Person" gives the complete
+	 * Gets the complete name of a model element as a
+	 * {@link #packageConcate(String, String)} concatenation of all elements
+	 * found on the way to the given model element. For instance,
+	 * Model "TestModel" > Package "com" > Package "bluexml" > class "Person"
+	 * gives the complete
 	 * name "TestModel.com.bluexml.Person".
 	 * <p/>
 	 * To be used when there's a need to uniquely reference a model element.
 	 * 
 	 * @param me
 	 *            the me
-	 * 
 	 * @return the complete name
 	 */
 	public static String getCompleteName(ModelElement me) {
@@ -140,8 +137,7 @@ public class ModelTools {
 		if (me instanceof NamedModelElement) {
 			EObject parent = me.eContainer();
 			String parentName = "";
-			if (parent instanceof NamedModelElement
-					|| parent instanceof TitledNamedClassModelElement) {
+			if (parent instanceof NamedModelElement || parent instanceof TitledNamedClassModelElement) {
 				parentName = getCompleteName((ModelElement) parent);
 			}
 			result = packageConcate(parentName, ((NamedModelElement) me).getName());
@@ -150,8 +146,10 @@ public class ModelTools {
 	}
 
 	/**
-	 * Gets the namespace prefix, which is normally the name of the top element in the model file.
-	 * It is also the first token in the result returned by {@link #getCompleteName(ModelElement)}.
+	 * Gets the namespace prefix, which is normally the name of the top element
+	 * in the model file.
+	 * It is also the first token in the result returned by
+	 * {@link #getCompleteName(ModelElement)}.
 	 * 
 	 * @param mel
 	 * @return the namespace prefix
@@ -171,7 +169,6 @@ public class ModelTools {
 	 * 
 	 * @param classe
 	 *            the classe
-	 * 
 	 * @return the complete name jaxb
 	 */
 	public static String getCompleteNameJAXB(ModelElement classe) {
@@ -184,7 +181,6 @@ public class ModelTools {
 	 * 
 	 * @param completeName
 	 *            the complete name
-	 * 
 	 * @return the string
 	 */
 	public static String toJAXB(String completeName) {
@@ -201,39 +197,38 @@ public class ModelTools {
 	 * 
 	 * @param value
 	 *            the value
-	 * 
 	 * @return the string
 	 */
 	public static String toXSDType(DataType value) {
 		switch (value.getValue()) {
-			case DataType.BOOLEAN_VALUE: // '\0'
-				return "boolean";
-			case DataType.BYTE_VALUE: // '\001'
-				return "byte";
-			case DataType.CHAR_VALUE: // '\002'
-				return "string";
-			case DataType.DOUBLE_VALUE: // '\003'
-				return "double";
-			case DataType.FLOAT_VALUE: // '\004'
-				return "float";
-			case DataType.INT_VALUE: // '\005'
-				return "integer";
-			case DataType.LONG_VALUE: // '\006'
-				return "long";
-			case DataType.SHORT_VALUE: // '\007'
-				return "short";
-			case DataType.STRING_VALUE: // '\b'
-				return "string";
-			case DataType.DATE_VALUE: // '\n'
-				return "date";
-			case DataType.OBJECT_VALUE: // '\013'
-				// some Alfresco models have elements that fall into this case, e.g. 'homeFolder' on
-				// cm:Person
-				return "anyType"; // 'anyType' is not supported by Chiba, will have to be rewritten
-			case DataType.DATE_TIME_VALUE: // '\f'
-				return "dateTime";
-			case DataType.TIME_VALUE: // '\r'
-				return "time";
+		case DataType.BOOLEAN_VALUE: // '\0'
+			return "boolean";
+		case DataType.BYTE_VALUE: // '\001'
+			return "byte";
+		case DataType.CHAR_VALUE: // '\002'
+			return "string";
+		case DataType.DOUBLE_VALUE: // '\003'
+			return "double";
+		case DataType.FLOAT_VALUE: // '\004'
+			return "float";
+		case DataType.INT_VALUE: // '\005'
+			return "integer";
+		case DataType.LONG_VALUE: // '\006'
+			return "long";
+		case DataType.SHORT_VALUE: // '\007'
+			return "short";
+		case DataType.STRING_VALUE: // '\b'
+			return "string";
+		case DataType.DATE_VALUE: // '\n'
+			return "date";
+		case DataType.OBJECT_VALUE: // '\013'
+			// some Alfresco models have elements that fall into this case, e.g. 'homeFolder' on
+			// cm:Person
+			return "anyType"; // 'anyType' is not supported by Chiba, will have to be rewritten
+		case DataType.DATE_TIME_VALUE: // '\f'
+			return "dateTime";
+		case DataType.TIME_VALUE: // '\r'
+			return "time";
 		}
 		return null;
 	}
@@ -243,7 +238,6 @@ public class ModelTools {
 	 * 
 	 * @param models
 	 *            the models
-	 * 
 	 * @return the enums
 	 */
 	public static List<Enumeration> getAllEnums(List<Package> models) {
@@ -277,12 +271,25 @@ public class ModelTools {
 	 * 
 	 * @param p
 	 *            the p
-	 * 
 	 * @return the aspects
 	 */
 	public static List<Aspect> getAllAspects(Package p) {
 		List<Aspect> aspects = new ArrayList<Aspect>();
-		collectAspects(p, aspects);
+		//		collectAspects(p, aspects);
+		Map<String, Aspect> map = new HashMap<String, Aspect>();
+
+		if (p instanceof ClassPackage) {
+
+			EList<Aspect> allClassesFromEveryWhere = ((ClassPackage) p).getAllAspectsFromEveryWhere();
+			for (Aspect clazz : allClassesFromEveryWhere) {
+				// may be class already added from another model, so we use map to avoid double
+				if (!map.containsKey(clazz.getFullName())) {
+					map.put(clazz.getFullName(), clazz);
+				}
+			}
+		}
+
+		aspects.addAll(map.values());
 		return aspects;
 	}
 
@@ -291,14 +298,27 @@ public class ModelTools {
 	 * 
 	 * @param models
 	 *            the models
-	 * 
 	 * @return the all aspects
 	 */
 	public static List<Aspect> getAllAspects(List<Package> models) {
 		List<Aspect> aspects = new ArrayList<Aspect>();
+		//		for (Package p : models) {
+		//			collectAspects(p, aspects);
+		//		}
+		Map<String, Aspect> map = new HashMap<String, Aspect>();
 		for (Package p : models) {
-			collectAspects(p, aspects);
+			if (p instanceof ClassPackage) {
+
+				EList<Aspect> allClassesFromEveryWhere = ((ClassPackage) p).getAllAspectsFromEveryWhere();
+				for (Aspect clazz : allClassesFromEveryWhere) {
+					// may be class already added from another model, so we use map to avoid double
+					if (!map.containsKey(clazz.getFullName())) {
+						map.put(clazz.getFullName(), clazz);
+					}
+				}
+			}
 		}
+		aspects.addAll(map.values());
 		return aspects;
 	}
 
@@ -325,7 +345,6 @@ public class ModelTools {
 	 * 
 	 * @param oblClasse
 	 *            the obl classe
-	 * 
 	 * @return the class aspects
 	 */
 	public static Map<Aspect, Clazz> getClassAspects(Clazz oblClasse) {
@@ -360,12 +379,10 @@ public class ModelTools {
 	 * 
 	 * @param oblClasse
 	 *            the obl classe
-	 * 
 	 * @return the class attributes
 	 */
 	public static Map<Attribute, Clazz> getClassAttributes(Clazz oblClasse) {
-		Map<Attribute, Clazz> attributes = new TreeMap<Attribute, Clazz>(
-				AttributeComparator.INSTANCE);
+		Map<Attribute, Clazz> attributes = new TreeMap<Attribute, Clazz>(AttributeComparator.INSTANCE);
 		collectAttributes(oblClasse, attributes);
 		return attributes;
 	}
@@ -396,7 +413,6 @@ public class ModelTools {
 	 * 
 	 * @param models
 	 *            the models
-	 * 
 	 * @return the all associations
 	 */
 	public static List<Association> getAllAssociations(List<Package> models) {
@@ -430,7 +446,6 @@ public class ModelTools {
 	 * 
 	 * @param oblClasse
 	 *            the obl classe
-	 * 
 	 * @return the parent
 	 */
 	public static Clazz getParent(Clazz oblClasse) {
@@ -449,14 +464,25 @@ public class ModelTools {
 	 * 
 	 * @param models
 	 *            the models
-	 * 
 	 * @return the classes
 	 */
 	public static List<Clazz> getAllClasses(List<Package> models) {
+
 		List<Clazz> classes = new ArrayList<Clazz>();
+		Map<String, Clazz> map = new HashMap<String, Clazz>();
 		for (Package p : models) {
-			collectClasses(p, classes);
+			if (p instanceof ClassPackage) {
+
+				EList<Clazz> allClassesFromEveryWhere = ((ClassPackage) p).getAllClassesFromEveryWhere();
+				for (Clazz clazz : allClassesFromEveryWhere) {
+					// may be class already added from another model, so we use map to avoid double
+					if (!map.containsKey(clazz.getFullName())) {
+						map.put(clazz.getFullName(), clazz);
+					}
+				}
+			}
 		}
+		classes.addAll(map.values());
 		return classes;
 	}
 
@@ -485,7 +511,6 @@ public class ModelTools {
 	 *            the association
 	 * @param inverse
 	 *            the inverse
-	 * 
 	 * @return the association field
 	 */
 	public static String getAssociationField(Association association, boolean inverse) {
@@ -528,15 +553,13 @@ public class ModelTools {
 	 *            the attribute
 	 * @param property
 	 *            the property
-	 * 
 	 * @return true, if is property
 	 */
 	public static boolean isProperty(Attribute attribute, String property) {
 		boolean result = false;
 		EList<MetaInfo> metas = attribute.getMetainfo();
 		for (MetaInfo metaInfo : metas) {
-			if (metaInfo.getKey().equals(property)
-					&& (StringUtils.equalsIgnoreCase("True", metaInfo.getValue()))) {
+			if (metaInfo.getKey().equals(property) && (StringUtils.equalsIgnoreCase("True", metaInfo.getValue()))) {
 				result = true;
 			}
 		}
@@ -548,7 +571,6 @@ public class ModelTools {
 	 * 
 	 * @param ac
 	 *            the ac
-	 * 
 	 * @return the levels
 	 */
 	static int getLevels(AbstractClass ac) {
@@ -585,7 +607,6 @@ public class ModelTools {
 	 * 
 	 * @param abstractClass
 	 *            the abstract class
-	 * 
 	 * @return the title
 	 */
 	public static String getTitle(AbstractClass abstractClass) {
@@ -603,7 +624,6 @@ public class ModelTools {
 	 * 
 	 * @param attribute
 	 *            the attribute
-	 * 
 	 * @return the title
 	 */
 	public static String getTitle(Attribute attribute) {
@@ -623,7 +643,6 @@ public class ModelTools {
 	 *            the sub classe
 	 * @param classe
 	 *            the classe
-	 * 
 	 * @return true, if is generalization of
 	 */
 	public static boolean isGeneralizationOf(Clazz subClasse, Clazz classe) {
@@ -650,7 +669,6 @@ public class ModelTools {
 	 * 
 	 * @param formCollections
 	 *            the form collections
-	 * 
 	 * @return all forms, whatever the subclasses of FormContainer
 	 */
 	public static List<FormContainer> getAllForms(List<FormCollection> formCollections) {
@@ -667,15 +685,15 @@ public class ModelTools {
 	 * 
 	 * @param formCollections
 	 *            the form collections
-	 * 
 	 * @return the all forms
 	 */
 	/**
-	 * 
 	 * @param attribute
 	 * @param key
-	 * @return The value of <b>case-insensitive</b> metainfo "key" for "attribute", or null if "key"
-	 *         is not present, or empty string if "key" is present but has no value.
+	 * @return The value of <b>case-insensitive</b> metainfo "key" for
+	 *         "attribute", or null if "key"
+	 *         is not present, or empty string if "key" is present but has no
+	 *         value.
 	 */
 	public static String getMetaInfoValue(Attribute attribute, String key) {
 		String result = null;

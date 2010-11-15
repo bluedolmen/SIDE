@@ -197,9 +197,11 @@ public class FormGenerator extends AbstractGenerator {
 		boolean renderDataBeforeWorkflow = true;
 		try {
 			FormGeneratorsManager formGenerator = new FormGeneratorsManager(clazzFiles, formsFiles, monitor, simplifyClasses, renderDataBeforeWorkflow, false);
+			// formGenerator.setDebugMode(true);
 			formGenerator.generate(generators);
 		} catch (RuntimeException e) {
 			monitor.addErrorTextAndLog("ERROR :" + e.getMessage(), e, "");
+			e.printStackTrace();
 		}
 		return new ArrayList<IFile>();
 	}

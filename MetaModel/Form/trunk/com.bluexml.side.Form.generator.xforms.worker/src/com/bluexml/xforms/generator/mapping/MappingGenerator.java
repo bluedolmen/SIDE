@@ -93,9 +93,7 @@ public class MappingGenerator extends AbstractGenerator {
 
 	static {
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(
-					"com.bluexml.xforms.controller.binding", MappingGenerator.class
-							.getClassLoader());
+			JAXBContext jaxbContext = JAXBContext.newInstance("com.bluexml.xforms.controller.binding", MappingGenerator.class.getClassLoader());
 			mappingMarshaller = jaxbContext.createMarshaller();
 			mappingMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		} catch (Exception e) {
@@ -110,12 +108,10 @@ public class MappingGenerator extends AbstractGenerator {
 	private Mapping mapping;
 
 	/** The aspect types. */
-	private Map<Aspect, AspectType> aspectTypes = new TreeMap<Aspect, AspectType>(
-			AspectComparator.INSTANCE);
+	private Map<Aspect, AspectType> aspectTypes = new TreeMap<Aspect, AspectType>(AspectComparator.INSTANCE);
 
 	/** The class types. */
-	private Map<Clazz, ClassType> classTypes = new TreeMap<Clazz, ClassType>(
-			ClasseComparator.INSTANCE);
+	private Map<Clazz, ClassType> classTypes = new TreeMap<Clazz, ClassType>(ClasseComparator.INSTANCE);
 
 	/** The file for outputting the list of CSS classes defined in the models. */
 	private File CSSFile;
@@ -136,9 +132,11 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#addAspectForClass(com.bluexml
-	 * .side.clazz.Clazz, com.bluexml.side.clazz.Aspect, com.bluexml.side.clazz.Clazz)
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#addAspectForClass(com
+	 * .bluexml
+	 * .side.clazz.Clazz, com.bluexml.side.clazz.Aspect,
+	 * com.bluexml.side.clazz.Clazz)
 	 */
 	public void addAspectForClass(Clazz classe, Aspect aspect, Clazz owner) {
 		AspectType aspectType = objectFactory.createAspectType();
@@ -150,8 +148,9 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#addAttributeForAspect(com.
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#addAttributeForAspect
+	 * (com.
 	 * bluexml.side.clazz.Aspect, com.bluexml.side.clazz.Attribute)
 	 */
 	public void addAttributeForAspect(Aspect aspect, Attribute attribute) {
@@ -164,7 +163,6 @@ public class MappingGenerator extends AbstractGenerator {
 	 * 
 	 * @param aspect
 	 *            the aspect
-	 * 
 	 * @return the aspect type
 	 */
 	private AspectType getAspectType(Aspect aspect) {
@@ -176,12 +174,15 @@ public class MappingGenerator extends AbstractGenerator {
 	 * 
 	 * @param classe
 	 *            the classe
-	 * 
 	 * @return the class type
 	 */
 	private ClassType getClassType(Clazz classe) {
 		Clazz realClasse = (Clazz) formGenerator.getRealObject(classe);
-		return classTypes.get(realClasse);
+		ClassType classType = classTypes.get(realClasse);
+		if (classType == null) {
+		System.err.println("Bad missing class in classTypes :"+realClasse);
+		}
+		return classType;
 	}
 
 	/**
@@ -191,7 +192,6 @@ public class MappingGenerator extends AbstractGenerator {
 	 *            the classe
 	 * @param attribute
 	 *            the attribute
-	 * 
 	 * @return the attribute type
 	 */
 	private AttributeType processAttribute(AbstractClass classe, Attribute attribute) {
@@ -201,6 +201,13 @@ public class MappingGenerator extends AbstractGenerator {
 		attributeType.setName(attribute.getName());
 		attributeType.setAlfrescoName(getAlfrescoNameForAttribute(classe, attribute));
 		attributeType.setType(attribute.getTyp().getLiteral());
+		
+		if (classe instanceof Clazz) {
+			attributeType.setClassType(copyClassType(getClassType((Clazz)classe)));
+		} else if (classe instanceof Aspect) {
+			attributeType.setAspectType(copyAspectType(getAspectType((Aspect)classe)));
+		}
+
 		if (attribute.getValueList() != null) {
 			attributeType.setEnumQName(ModelTools.getCompleteName(attribute.getValueList()));
 		}
@@ -234,11 +241,21 @@ public class MappingGenerator extends AbstractGenerator {
 		return attributeType;
 	}
 
+	private AspectType copyAspectType(AspectType aspectType) {
+		AspectType result = objectFactory.createAspectType();
+		result.setName(aspectType.getName());
+		result.setPackage(aspectType.getPackage());
+		result.setAlfrescoName(aspectType.getAlfrescoName());
+		return result;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#addAttributeForClass(com.bluexml
-	 * .side.clazz.Clazz, com.bluexml.side.clazz.Attribute, com.bluexml.side.clazz.Clazz)
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#addAttributeForClass(
+	 * com.bluexml
+	 * .side.clazz.Clazz, com.bluexml.side.clazz.Attribute,
+	 * com.bluexml.side.clazz.Clazz)
 	 */
 	public void addAttributeForClass(Clazz classe, Attribute attribute, Clazz owner) {
 		AttributeType asAttributeType = processAttribute(owner, attribute);
@@ -247,8 +264,9 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginAspect(com.bluexml.side
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#beginAspect(com.bluexml
+	 * .side
 	 * .clazz.Aspect)
 	 */
 	public void beginAspect(Aspect aspect) {
@@ -262,8 +280,9 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginClasse(com.bluexml.side
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#beginClasse(com.bluexml
+	 * .side
 	 * .clazz.Clazz, boolean)
 	 */
 	public void beginClasse(Clazz classe, boolean rendered) {
@@ -277,7 +296,6 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginGeneration()
 	 */
 	public void beginGeneration() {
@@ -299,7 +317,6 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginListAspects()
 	 */
 	public void beginListAspects() {
@@ -308,8 +325,8 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginListAssociations()
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#beginListAssociations()
 	 */
 	public void beginListAssociations() {
 		// nothing
@@ -317,7 +334,6 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginListClasses()
 	 */
 	public void beginListClasses() {
@@ -326,7 +342,6 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginListEnums()
 	 */
 	public void beginListEnums() {
@@ -335,14 +350,16 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
+	 * @see
 	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#addAssociation(org.blueXML
-	 * .xforms.generator.GeneratorInterface.AssociationKind, java.lang.String, java.lang.String,
-	 * com.bluexml.side.clazz.Clazz, com.bluexml.side.clazz.Clazz, java.lang.String, boolean,
+	 * com.bluexml.xforms.generator.GeneratorInterface#addAssociation(org.blueXML
+	 * .xforms.generator.GeneratorInterface.AssociationKind, java.lang.String,
+	 * java.lang.String,
+	 * com.bluexml.side.clazz.Clazz, com.bluexml.side.clazz.Clazz,
+	 * java.lang.String, boolean,
 	 * com.bluexml.side.clazz.Association, com.bluexml.side.clazz.Clazz)
 	 */
-	public void addAssociation(AssociationKind type, String name, String title, Clazz source,
-			Clazz destination, String role, boolean doublenav, Association association, Clazz owner) {
+	public void addAssociation(AssociationKind type, String name, String title, Clazz source, Clazz destination, String role, boolean doublenav, Association association, Clazz owner) {
 		if (owner == source) {
 			ClassType sourceType = getClassType(source);
 
@@ -352,10 +369,7 @@ public class MappingGenerator extends AbstractGenerator {
 			associationType.setName(name);
 			ClassType classType = getClassType(destination);
 			if (classType == null) {
-				monitor.addErrorTextAndLog("No classType found for class '"
-						+ destination.getLabel()
-						+ "'. Please add the containing model to the generation project.", null,
-						null);
+				monitor.addErrorTextAndLog("No classType found for class '" + destination.getLabel() + "'. Please add the containing model to the generation project.", null, null);
 			} else {
 				associationType.setType(copyClassType(classType));
 			}
@@ -375,8 +389,9 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#endAspect(com.bluexml.side
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#endAspect(com.bluexml
+	 * .side
 	 * .clazz.Aspect)
 	 */
 	public void endAspect(Aspect aspect) {
@@ -385,8 +400,9 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#endClasse(com.bluexml.side .clazz.Clazz)
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#endClasse(com.bluexml
+	 * .side .clazz.Clazz)
 	 */
 	public void endClasse(Clazz classe) {
 		// nothing
@@ -394,12 +410,12 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#endGeneration()
 	 */
 	/**
 	 * Writes all generated files. <br/>
-	 * NOTE: the enumeration files for search operators are written by the template generator.
+	 * NOTE: the enumeration files for search operators are written by the
+	 * template generator.
 	 */
 	public void endGeneration() {
 		// mapping file
@@ -419,14 +435,14 @@ public class MappingGenerator extends AbstractGenerator {
 		try {
 			writeSkeletonRedirector();
 		} catch (IOException e) {
-			monitor.addErrorTextAndLog("File error while trying to write the redirection file.", e,
-					null);
+			monitor.addErrorTextAndLog("File error while trying to write the redirection file.", e, null);
 		}
 		monitor.addText("Finished generating resources.");
 	}
 
 	/**
-	 * Writes a dictionary of all user-given styles in a file. If no styles were indicated, the file
+	 * Writes a dictionary of all user-given styles in a file. If no styles were
+	 * indicated, the file
 	 * is not created.
 	 * 
 	 * @throws IOException
@@ -477,7 +493,8 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Writes a skeleton of the redirection file filled with default values. The file is not created
+	 * Writes a skeleton of the redirection file filled with default values. The
+	 * file is not created
 	 * if no workflow forms were generated.
 	 * <p/>
 	 * The format is:
@@ -509,8 +526,7 @@ public class MappingGenerator extends AbstractGenerator {
 					Element nameElt = doc.createElement(MsgId.INT_REDIRECTION_NAME.getText());
 					nameElt.setTextContent(taskType.getName());
 					Element urlElt = doc.createElement(MsgId.INT_REDIRECTION_URL.getText());
-					Element autoElt = doc.createElement(MsgId.INT_REDIRECTION_AUTO_ADVANCE
-							.getText());
+					Element autoElt = doc.createElement(MsgId.INT_REDIRECTION_AUTO_ADVANCE.getText());
 					autoElt.setTextContent("false");
 					Element addElt = doc.createElement(MsgId.INT_REDIRECTION_ADD_PARAMS.getText());
 					addElt.setTextContent("true");
@@ -540,7 +556,6 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#endListAspects()
 	 */
 	public void endListAspects() {
@@ -549,8 +564,8 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#endListAssociations()
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#endListAssociations()
 	 */
 	public void endListAssociations() {
 		// nothing
@@ -558,7 +573,6 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#endListClasses()
 	 */
 	public void endListClasses() {
@@ -607,7 +621,6 @@ public class MappingGenerator extends AbstractGenerator {
 	 * 
 	 * @param classType
 	 *            the class type
-	 * 
 	 * @return the class type
 	 */
 	private ClassType copyClassType(ClassType classType) {
@@ -620,7 +633,6 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#endListEnums()
 	 */
 	public void endListEnums() {
@@ -629,8 +641,9 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#processEnum(com.bluexml.side
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#processEnum(com.bluexml
+	 * .side
 	 * .clazz.Enumeration)
 	 */
 	public void processEnum(Enumeration enumeration) {
@@ -680,8 +693,9 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginForm(com.bluexml.side .form.Form)
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#beginForm(com.bluexml
+	 * .side .form.Form)
 	 */
 	public void beginForm(FormContainer form) {
 		FormContainer realContainer = form;
@@ -731,8 +745,7 @@ public class MappingGenerator extends AbstractGenerator {
 			if (attached != null) {
 				taskType.setDataForm(attached.getId());
 			} else {
-				monitor.addErrorTextAndLog("No data form attached to workflow form '" + formName
-						+ "'. Please check that this is indeed your intent.", null, null);
+				monitor.addErrorTextAndLog("No data form attached to workflow form '" + formName + "'. Please check that this is indeed your intent.", null, null);
 			}
 			taskType.setTitle(formWorkflow.getLabel());
 
@@ -753,8 +766,7 @@ public class MappingGenerator extends AbstractGenerator {
 				swimlane = aTask.getSwimlane();
 			}
 			if (StringUtils.trimToNull(swimlane.getActorid() + swimlane.getPooledactors()) == null) {
-				throw new RuntimeException("Wrong assignment in form '" + formName
-						+ "'. Needs either 'actorId' or 'pooledActors'.");
+				throw new RuntimeException("Wrong assignment in form '" + formName + "'. Needs either 'actorId' or 'pooledActors'.");
 			}
 			taskType.setActorId(swimlane.getActorid());
 			taskType.setPooledActors(swimlane.getPooledactors());
@@ -765,20 +777,19 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * 
 	 * @param formType
-	 *            placeholder for a form (should be of the appropriate mapping type for search
-	 *            forms, i.e. if the modeler did his job of restraining search fields to search
+	 *            placeholder for a form (should be of the appropriate mapping
+	 *            type for search
+	 *            forms, i.e. if the modeler did his job of restraining search
+	 *            fields to search
 	 *            forms)
 	 * @param formContainer
 	 *            SHOULD be a FormSearch
 	 * @param searchField
 	 */
-	private void processSearchField(CanisterType formType, FormContainer formContainer,
-			SearchField searchField) {
+	private void processSearchField(CanisterType formType, FormContainer formContainer, SearchField searchField) {
 		if (!(formContainer instanceof FormSearch)) {
-			throw new RuntimeException("Search fields are allowed only on FormSearch objects. '"
-					+ formContainer.getLabel() + "' is not a FormSearch.");
+			throw new RuntimeException("Search fields are allowed only on FormSearch objects. '" + formContainer.getLabel() + "' is not a FormSearch.");
 		}
 		SearchFieldType fieldType = objectFactory.createSearchFieldType();
 		// name
@@ -820,9 +831,7 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	private boolean isNumericType(DataType typ) {
-		return typ.equals(DataType.BYTE) || typ.equals(DataType.LONG) || typ.equals(DataType.INT)
-				|| typ.equals(DataType.SHORT) || typ.equals(DataType.DOUBLE)
-				|| typ.equals(DataType.FLOAT);
+		return typ.equals(DataType.BYTE) || typ.equals(DataType.LONG) || typ.equals(DataType.INT) || typ.equals(DataType.SHORT) || typ.equals(DataType.DOUBLE) || typ.equals(DataType.FLOAT);
 	}
 
 	/**
@@ -837,8 +846,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param formContainer
 	 *            either a FormClass or FormWorkflow object
 	 */
-	private void processFormElement(CanisterType canister, FormContainer formContainer,
-			@SuppressWarnings("unused") FormElement parent, FormElement formElement) {
+	private void processFormElement(CanisterType canister, FormContainer formContainer, @SuppressWarnings("unused") FormElement parent, FormElement formElement) {
 		if (formElement instanceof FormGroup) {
 			FormGroup formGroup = (FormGroup) formElement;
 			EList<FormElement> children = formGroup.getChildren();
@@ -871,7 +879,8 @@ public class MappingGenerator extends AbstractGenerator {
 	 *            the form container: FormClass or FormWorkflow
 	 * @param field
 	 *            the field
-	 * @deprecated I don't see any motive in this function since the info kept here (except for the
+	 * @deprecated I don't see any motive in this function since the info kept
+	 *             here (except for the
 	 *             style) is never used anywhere (@Amenel).
 	 */
 	@Deprecated
@@ -928,18 +937,11 @@ public class MappingGenerator extends AbstractGenerator {
 			//
 			// check that the ref'ed attribute is legitimate for this FormClass
 			if (checkClassAttributeInclusion(realClass, ref) == false) {
-				throw new RuntimeException(
-						"The field '"
-								+ field.getLabel()
-								+ "' on form '"
-								+ formClass.getId()
-								+ "' has a bad <Ref> property: either the model element is not an attribute or the attribute belongs to another class.");
+				throw new RuntimeException("The field '" + field.getLabel() + "' on form '" + formClass.getId() + "' has a bad <Ref> property: either the model element is not an attribute or the attribute belongs to another class.");
 			}
 			String alfrescoName = getAlfrescoNameForAttribute(realClass, ref);
 			if (alfrescoName == null) {
-				throw new RuntimeException("Couldn't compute the Alfresco name for field '"
-						+ field.getLabel() + "' with Ref to attribute '"
-						+ ((Attribute) ref).getName() + "'");
+				throw new RuntimeException("Couldn't compute the Alfresco name for field '" + field.getLabel() + "' with Ref to attribute '" + ((Attribute) ref).getName() + "'");
 			}
 			formFieldType.setAlfrescoName(alfrescoName);
 		} else {
@@ -969,8 +971,7 @@ public class MappingGenerator extends AbstractGenerator {
 			formFieldType.setType(attribute.getTyp().getLiteral());
 			if (attribute.getValueList() != null) {
 				if (!attribute.getValueList().getDynamic()) {
-					formFieldType.setStaticEnumType(ModelTools.getCompleteName(attribute
-							.getValueList()));
+					formFieldType.setStaticEnumType(ModelTools.getCompleteName(attribute.getValueList()));
 				}
 
 				// for now, setting the xtension depends on data source being present
@@ -1027,8 +1028,7 @@ public class MappingGenerator extends AbstractGenerator {
 		} else {
 			// check that if mandatory, the field has an initial value
 			if (field.isMandatory() && (StringUtils.trimToNull(field.getInitial()) == null)) {
-				monitor.addErrorTextAndLog("Attribute '" + formFieldType.getAlfrescoName()
-						+ "' is mandatory: it should have an initial value!", null, null);
+				monitor.addErrorTextAndLog("Attribute '" + formFieldType.getAlfrescoName() + "' is mandatory: it should have an initial value!", null, null);
 			}
 			fieldTypesList.add(formFieldType);
 		}
@@ -1036,7 +1036,8 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Gets the real class for a FormClass, with exception throwing in case the linked element is
+	 * Gets the real class for a FormClass, with exception throwing in case the
+	 * linked element is
 	 * not a Clazz object.
 	 * 
 	 * @param formClass
@@ -1048,14 +1049,14 @@ public class MappingGenerator extends AbstractGenerator {
 		try {
 			realClass = (Clazz) formGenerator.getRealObject(formClass.getReal_class());
 		} catch (ClassCastException cce) {
-			throw new RuntimeException("The model element in property <Real class> of form '"
-					+ formClass.getId() + "' is not a class.");
+			throw new RuntimeException("The model element in property <Real class> of form '" + formClass.getId() + "' is not a class.");
 		}
 		return realClass;
 	}
 
 	/**
-	 * Computes the name of an attribute as specified in the model files in XML, including native
+	 * Computes the name of an attribute as specified in the model files in XML,
+	 * including native
 	 * Alfresco models.
 	 * 
 	 * @param classe
@@ -1103,23 +1104,25 @@ public class MappingGenerator extends AbstractGenerator {
 				}
 			}
 		} else {
-			throw new RuntimeException("Can't determine the Alfresco name of attribute '"
-					+ attribute.getName() + "' (" + attribute.getTitle()
-					+ ") because the container object is not a Clazz");
+			throw new RuntimeException("Can't determine the Alfresco name of attribute '" + attribute.getName() + "' (" + attribute.getTitle() + ") because the container object is not a Clazz");
 		}
 		return null;
 	}
 
 	/**
-	 * Checks that the field reference belongs to the class reference, taking into account
-	 * generalizations and aspects. If the attribute is directly included in the class or comes from
-	 * a parent class or a linked aspect, then the return value if <em>true</em>.
+	 * Checks that the field reference belongs to the class reference, taking
+	 * into account
+	 * generalizations and aspects. If the attribute is directly included in the
+	 * class or comes from
+	 * a parent class or a linked aspect, then the return value if <em>true</em>
+	 * .
 	 * 
 	 * @param classRef
 	 *            the class the form is supposed to be based on
 	 * @param fieldRef
 	 *            the element pointed to by the 'ref' property of the form field
-	 * @return false if the field reference is not a class diagram attribute or does not belong to
+	 * @return false if the field reference is not a class diagram attribute or
+	 *         does not belong to
 	 *         the given class. True otherwise.
 	 */
 	private boolean checkClassAttributeInclusion(Clazz classRef, ModelElement fieldRef) {
@@ -1162,17 +1165,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 */
 	@SuppressWarnings("unused")
 	private String pickDummyValue(String type) {
-		String[] strings = {
-				"alpha",
-				"beta",
-				"gamma",
-				"delta",
-				"kappa",
-				"sigma",
-				"zeta",
-				"omega",
-				"everything",
-				"something" };
+		String[] strings = { "alpha", "beta", "gamma", "delta", "kappa", "sigma", "zeta", "omega", "everything", "something" };
 		if (type.equalsIgnoreCase("Date")) {
 			return null;
 		}
@@ -1196,7 +1189,8 @@ public class MappingGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Initializes a FileFieldType with info from a FormFieldType. The 'multiple' property with
+	 * Initializes a FileFieldType with info from a FormFieldType. The
+	 * 'multiple' property with
 	 * value 'true' is not supported.
 	 * 
 	 * @param formFieldType
@@ -1261,7 +1255,6 @@ public class MappingGenerator extends AbstractGenerator {
 	 * 
 	 * @param field
 	 *            the field
-	 * 
 	 * @return the form class
 	 */
 	private FormClass getFormClass(Field field) {
@@ -1283,8 +1276,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param formClass
 	 *            the form class
 	 */
-	private void processChoiceField(CanisterType canister, FormContainer formContainer,
-			ModelChoiceField formElement) {
+	private void processChoiceField(CanisterType canister, FormContainer formContainer, ModelChoiceField formElement) {
 		List<ModelChoiceType> list = null;
 		if (canister instanceof WorkflowTaskType) {
 			list = ((WorkflowTaskType) canister).getModelChoice();
@@ -1306,8 +1298,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param formClass
 	 *            the form class
 	 */
-	private void processReference(CanisterType canister, FormContainer formContainer,
-			Reference reference) {
+	private void processReference(CanisterType canister, FormContainer formContainer, Reference reference) {
 		if ((canister instanceof FormType) || (canister instanceof WorkflowTaskType)) {
 			ReferenceType referenceType = objectFactory.createReferenceType();
 			processChoiceFieldCommon(reference, formContainer, referenceType);
@@ -1325,7 +1316,6 @@ public class MappingGenerator extends AbstractGenerator {
 	 * 
 	 * @param formContainer
 	 *            the form container object
-	 * 
 	 * @return the form type
 	 */
 	private FormType newFormType(FormContainer form) {
@@ -1346,8 +1336,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param formClass
 	 *            the form class
 	 */
-	private void processChoiceFieldCommon(ModelChoiceField modelChoice,
-			FormContainer formContainer, ModelChoiceType modelChoiceType) {
+	private void processChoiceFieldCommon(ModelChoiceField modelChoice, FormContainer formContainer, ModelChoiceType modelChoiceType) {
 		String style = modelChoice.getStyle();
 		if (style != null) {
 			CSSCollector.add(style);
@@ -1389,18 +1378,13 @@ public class MappingGenerator extends AbstractGenerator {
 		if (modelChoice.getWidget() == ModelChoiceWidgetType.INLINE) {
 			modelChoiceType.setInline(true);
 			if (nbAddedTargets == 0) {
-				throw new RuntimeException(
-						"Association '"
-								+ modelChoiceType.getDisplayLabel()
-								+ "' has 'Inline' property set to 'true', which REQUIRES at least one form in the 'Target' property. Please add a target FormClass.");
+				throw new RuntimeException("Association '" + modelChoiceType.getDisplayLabel() + "' has 'Inline' property set to 'true', which REQUIRES at least one form in the 'Target' property. Please add a target FormClass.");
 			}
 			// the first target cannot be based on an abstract class
 			FormContainer target = modelChoice.getTarget().get(0);
 			Clazz realClassForTarget = getRealClassForFormClass((FormClass) target);
 			if (realClassForTarget.isAbstract()) {
-				throw new RuntimeException("The first form in the 'Target' property of form '"
-						+ modelChoiceType.getDisplayLabel()
-						+ "' MUST NOT be based on an abstract class.");
+				throw new RuntimeException("The first form in the 'Target' property of form '" + modelChoiceType.getDisplayLabel() + "' MUST NOT be based on an abstract class.");
 			}
 
 		}
@@ -1435,32 +1419,20 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param form
 	 * @return
 	 */
-	public String getAssociationNameForModelChoice(ModelChoiceField modelChoiceField,
-			FormContainer form) {
+	public String getAssociationNameForModelChoice(ModelChoiceField modelChoiceField, FormContainer form) {
 		ModelElement ref = modelChoiceField.getRef();
 		if (ref == null) {
-			throw new RuntimeException(
-					"The 'Ref' property of model choice field '"
-							+ modelChoiceField.getLabel()
-							+ "' on form '"
-							+ form.getLabel()
-							+ "' is not set. Can't continue. Please fix that errror before generating again.");
+			throw new RuntimeException("The 'Ref' property of model choice field '" + modelChoiceField.getLabel() + "' on form '" + form.getLabel() + "' is not set. Can't continue. Please fix that errror before generating again.");
 		}
 		ModelElement refModelElement = (ModelElement) formGenerator.getRealObject(ref);
 		if (refModelElement instanceof Association) {
 			return ((Association) refModelElement).getName();
 		}
-		throw new RuntimeException(
-				"The 'Ref' property of model choice field '"
-						+ modelChoiceField.getLabel()
-						+ "' on form '"
-						+ form.getLabel()
-						+ "' is not an association. Can't continue. Please fix that errror before generating again.");
+		throw new RuntimeException("The 'Ref' property of model choice field '" + modelChoiceField.getLabel() + "' on form '" + form.getLabel() + "' is not an association. Can't continue. Please fix that errror before generating again.");
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#beginListForms()
 	 */
 	public void beginListForms() {
@@ -1469,8 +1441,9 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.GeneratorInterface#endForm(com.bluexml.side.form .Form)
+	 * @see
+	 * com.bluexml.xforms.generator.GeneratorInterface#endForm(com.bluexml.side
+	 * .form .Form)
 	 */
 	public void endForm(FormContainer form) {
 		// nothing
@@ -1478,7 +1451,6 @@ public class MappingGenerator extends AbstractGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.GeneratorInterface#endListForms()
 	 */
 	public void endListForms() {

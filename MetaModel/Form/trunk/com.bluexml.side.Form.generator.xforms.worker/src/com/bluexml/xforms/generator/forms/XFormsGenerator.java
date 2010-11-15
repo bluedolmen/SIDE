@@ -446,6 +446,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	public void beginClasse(Clazz classe, boolean rendered) {
 		RenderableClass classeBean = null;
 		classeBean = new RenderableClass(classe, rendered);
+		System.err.println("################## (XForm Generator l 449) parse Class :"+classe.getName());
 		classes.put(classe, classeBean);
 	}
 
