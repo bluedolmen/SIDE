@@ -198,6 +198,8 @@ public class FormGenerator extends AbstractGenerator {
 		try {
 			FormGeneratorsManager formGenerator = new FormGeneratorsManager(clazzFiles, formsFiles, monitor, simplifyClasses, renderDataBeforeWorkflow, false);
 			// formGenerator.setDebugMode(true);
+			formGenerator.setGenerateReadOnlyForms(true);
+			formGenerator.setReadOnlySuffix("RO");
 			formGenerator.generate(generators);
 		} catch (RuntimeException e) {
 			monitor.addErrorTextAndLog("ERROR :" + e.getMessage(), e, "");
