@@ -45,20 +45,7 @@ public class XFormsWebscript extends AbstractWebScript {
 	private StoreRef storeRef = new StoreRef("workspace://SpacesStore");
 
 	public enum XFormsQueryType {
-			delete,
-			upload,
-			service,
-			workflow,
-			read,
-			list,
-			enum_,
-			labels,
-			createPath,
-			addToPackage,
-			auth,
-			help,
-			nodeinfo,
-			batch;
+		delete, upload, service, workflow, read, list, enum_, labels, createPath, addToPackage, auth, help, nodeinfo, batch;
 	}
 
 	public synchronized List<QName> getSubTypes(String type) {
@@ -89,13 +76,15 @@ public class XFormsWebscript extends AbstractWebScript {
 	}
 
 	/**
-	 * Gets from the given collection the qname that matches (including namespace prefix) the type.
+	 * Gets from the given collection the qname that matches (including
+	 * namespace prefix) the type.
 	 * 
 	 * @param type
 	 *            the type to find, with a namespace prefix and local name.
 	 * @param allTypes
 	 *            a collection of types
-	 * @return the qname that was found, <code>null</code> if prefix or type unknown.
+	 * @return the qname that was found, <code>null</code> if prefix or type
+	 *         unknown.
 	 */
 	private QName getQName(String type, Collection<QName> allTypes) {
 		int pos = type.indexOf(':'); // #1529
@@ -106,8 +95,7 @@ public class XFormsWebscript extends AbstractWebScript {
 			try {
 				namespaceURI = namespacePrefixResolver.getNamespaceURI(prefix);
 				for (QName qname : allTypes) {
-					if (qname.getNamespaceURI().equals(namespaceURI)
-							&& qname.getLocalName().equals(localName)) {
+					if (qname.getNamespaceURI().equals(namespaceURI) && qname.getLocalName().equals(localName)) {
 						return qname;
 					}
 				}
@@ -151,8 +139,7 @@ public class XFormsWebscript extends AbstractWebScript {
 		return indexerAndSearcherFactory;
 	}
 
-	public void setIndexerAndSearcherFactory(
-			ADMLuceneIndexerAndSearcherFactory indexerAndSearcherFactory) {
+	public void setIndexerAndSearcherFactory(ADMLuceneIndexerAndSearcherFactory indexerAndSearcherFactory) {
 		this.indexerAndSearcherFactory = indexerAndSearcherFactory;
 	}
 
@@ -191,8 +178,7 @@ public class XFormsWebscript extends AbstractWebScript {
 		return authorityDAO;
 	}
 
-	public void execute(WebScriptRequest webscriptrequest, WebScriptResponse webscriptresponse)
-			throws IOException {
+	public void execute(WebScriptRequest webscriptrequest, WebScriptResponse webscriptresponse) throws IOException {
 		// WebScriptServletRequest webScriptServletRequest = (WebScriptServletRequest) webscriptrequest;
 		// HttpServletRequest httpServletRequest = webScriptServletRequest.getHttpServletRequest();
 		// String remoteAddr = httpServletRequest.getRemoteAddr();
@@ -215,8 +201,7 @@ public class XFormsWebscript extends AbstractWebScript {
 
 		Map<String, String> parameters = getParameters(webscriptrequest);
 
-		String result = AuthenticationUtil.runAs(new XFormsWork(this, queryType, parameters,
-				getServiceRegistry()), username);
+		String result = AuthenticationUtil.runAs(new XFormsWork(this, queryType, parameters, getServiceRegistry()), username);
 
 		OutputStream outputStream = webscriptresponse.getOutputStream();
 		outputStream.write(result.getBytes("UTF-8"));

@@ -14,11 +14,11 @@ import org.w3c.dom.Element;
 import com.bluexml.side.form.utils.DOMUtil;
 
 /**
- * Builds a map of standard properties for an object. Taken from BxDS dataLayer module.
+ * Builds a map of standard properties for an object. Taken from BxDS dataLayer
+ * module.
  * This uses the definition in Class.xsd
  * 
  * @author Amenel
- * 
  */
 public class XmlParser {
 
@@ -49,8 +49,7 @@ public class XmlParser {
 					} else if (value.size() > 1) {
 						List<String> values = new ArrayList<String>(value.size());
 						for (Element valueElement : value) {
-							String stringValue = StringUtils.trimToEmpty(valueElement
-									.getTextContent());
+							String stringValue = StringUtils.trimToEmpty(valueElement.getTextContent());
 							values.add(stringValue);
 						}
 						attrs.put(attributeName, values);

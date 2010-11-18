@@ -10,17 +10,18 @@ import org.w3c.dom.Element;
 
 /**
  * @author Amenel
- * 
  */
 public interface DataLayerInterface {
 
 	/**
-	 * Uploads the content of a file to a node, possibly leaving the node name unchanged.
+	 * Uploads the content of a file to a node, possibly leaving the node name
+	 * unchanged.
 	 * 
 	 * @param receiver
 	 *            complete id (protocol, store and id) of the receiver node
 	 * @param filename
-	 *            the name under which the node is seen in the repository. If empty or null, the
+	 *            the name under which the node is seen in the repository. If
+	 *            empty or null, the
 	 *            node name property is not changed.
 	 * @param filepath
 	 *            complete filesystem path to the file that provides the content
@@ -29,15 +30,17 @@ public interface DataLayerInterface {
 	 * @param contentType
 	 *            the content type as seen by the class generator
 	 * @param shouldAppendSuffix
-	 *            if set to true, requests an index [e.g. '(1)'] to be appended to the filename if
-	 *            the original filename is not available. <b>DEFAULTS to true</b>. Needs to be
+	 *            if set to true, requests an index [e.g. '(1)'] to be appended
+	 *            to the filename if
+	 *            the original filename is not available. <b>DEFAULTS to
+	 *            true</b>. Needs to be
 	 *            explicitly set to false to prevent the renaming.
-	 * @return true if the content of the has been successfully reassigned. False in case the
+	 * @return true if the content of the has been successfully reassigned.
+	 *         False in case the
 	 *         provider has no content.
 	 * @throws Exception
 	 */
-	public boolean attachContent(String receiver, String filename, String filepath,
-			String mimeType, String contentType, boolean shouldAppendSuffix) throws Exception;
+	public boolean attachContent(String receiver, String filename, String filepath, String mimeType, String contentType, boolean shouldAppendSuffix) throws Exception;
 
 	/**
 	 * Create a node with the specified properties.
@@ -45,7 +48,8 @@ public interface DataLayerInterface {
 	 * @param where
 	 *            the parent folder
 	 * @param what
-	 *            the DOM tree describing the node properties, compliant with Class.xsd
+	 *            the DOM tree describing the node properties, compliant with
+	 *            Class.xsd
 	 * @param nodeName
 	 *            the future name of the node
 	 * @return the noderef to the new object
@@ -53,10 +57,12 @@ public interface DataLayerInterface {
 	public NodeRef create(String where, Element what, String id) throws Exception;
 
 	/**
-	 * Create (or get if already created) the specified path. Non-existent folders are created.
+	 * Create (or get if already created) the specified path. Non-existent
+	 * folders are created.
 	 * 
 	 * @param where
-	 *            the path to create, e.g. /app:company_home/app:dictionary/cm:NORTH/cm:Europe
+	 *            the path to create, e.g.
+	 *            /app:company_home/app:dictionary/cm:NORTH/cm:Europe
 	 * @return the noderef to the deepest folder
 	 * @throws Exception
 	 */
@@ -68,7 +74,6 @@ public interface DataLayerInterface {
 	 * @param objectId
 	 *            the full node id including store and protocol, e.g.
 	 *            "workspace://SpacesStore/286a1ddc-8aff-11de-9631-c5360495d0b8"
-	 * 
 	 */
 	public void delete(String objectId);
 
@@ -77,7 +82,8 @@ public interface DataLayerInterface {
 	 * 
 	 * @param objectId
 	 *            the full node reference, including protocol and store
-	 * @return an XML representation of the object (Class.xsd-compliant) serialized into a String
+	 * @return an XML representation of the object (Class.xsd-compliant)
+	 *         serialized into a String
 	 */
 	public String read(String objectId);
 
@@ -94,7 +100,8 @@ public interface DataLayerInterface {
 	 * Update a node and set the given properties.
 	 * 
 	 * @param nodeId
-	 *            the full id of the object to update, including protocol and store.
+	 *            the full id of the object to update, including protocol and
+	 *            store.
 	 * @param what
 	 *            the new properties
 	 * @return the noderef to the updated object

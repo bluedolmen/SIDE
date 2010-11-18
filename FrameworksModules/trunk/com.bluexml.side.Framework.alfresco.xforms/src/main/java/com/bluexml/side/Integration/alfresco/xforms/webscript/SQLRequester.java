@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 
 /**
  * @author Amenel
- * 
  */
 public class SQLRequester {
 

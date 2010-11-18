@@ -59,11 +59,11 @@ import org.w3c.dom.Element;
 
 /**
  * Adapted from BxDS dataLayer module.<br/>
- * Amendments are essentially commenting, javadoc-ing and deletion of sections not used by
+ * Amendments are essentially commenting, javadoc-ing and deletion of sections
+ * not used by
  * AlfrescoController.
  * 
  * @author Amenel
- * 
  */
 public class DataLayer implements DataLayerInterface {
 
@@ -84,14 +84,14 @@ public class DataLayer implements DataLayerInterface {
 
 	// format enum for generated properties: affects the BlueXML URI namespace only
 	public enum FormatPattern {
-			// use the uuid
-			NONE("UUID"),
-			// the first text field is used for the label
-			FIRST("FIRST"),
-			// all text fields
-			ALLTEXT("ALLTEXT"),
-			// all fields, including dates and numerical ones.
-			ALL("ALL");
+		// use the uuid
+		NONE("UUID"),
+		// the first text field is used for the label
+		FIRST("FIRST"),
+		// all text fields
+		ALLTEXT("ALLTEXT"),
+		// all fields, including dates and numerical ones.
+		ALL("ALL");
 
 		private final String associatedKeyText;
 
@@ -121,9 +121,10 @@ public class DataLayer implements DataLayerInterface {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#create(java.lang
+	 * 
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#
+	 * create(java.lang
 	 * .String, org.w3c.dom.Element, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
@@ -138,23 +139,21 @@ public class DataLayer implements DataLayerInterface {
 		QName nodeTypeQName = getDataTypeQName((String) entry.get("dataType"));
 
 		// build attribute values
-		Map<QName, Serializable> properties = buildAttributesMap((Map<String, Object>) entry
-				.get("attributes"), nodeTypeQName, false);
+		Map<QName, Serializable> properties = buildAttributesMap((Map<String, Object>) entry.get("attributes"), nodeTypeQName, false);
 		QName assocTypeQName = ContentModel.ASSOC_CONTAINS;
 		// create the node
-		NodeRef newNode = createNode(where, assocTypeQName, null, nodeTypeQName, nodeName,
-				properties);
+		NodeRef newNode = createNode(where, assocTypeQName, null, nodeTypeQName, nodeName, properties);
 		// create the associations
-		createAssociations(newNode, nodeTypeQName, (List<AssociationBean>) entry
-				.get("associations"));
+		createAssociations(newNode, nodeTypeQName, (List<AssociationBean>) entry.get("associations"));
 		return newNode;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#update(java.lang
+	 * 
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#
+	 * update(java.lang
 	 * .String, org.w3c.dom.Element)
 	 */
 	@SuppressWarnings("unchecked")
@@ -169,8 +168,7 @@ public class DataLayer implements DataLayerInterface {
 		QName nodeTypeQName = getDataTypeQName(datatype);
 
 		// build the map that contains attribute values
-		Map<QName, Serializable> properties = buildAttributesMap((Map<String, Object>) entry
-				.get("attributes"), nodeTypeQName, true);
+		Map<QName, Serializable> properties = buildAttributesMap((Map<String, Object>) entry.get("attributes"), nodeTypeQName, true);
 
 		// update properties
 		NodeRef nodeToUpdate = new NodeRef(nodeId);
@@ -186,7 +184,8 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Mass tagging. Implements applying the same set of properties to several nodes.
+	 * Mass tagging. Implements applying the same set of properties to several
+	 * nodes.
 	 */
 	@SuppressWarnings("unchecked")
 	public String updateMassTagging(String nodeIds, Element what) throws Exception {
@@ -200,8 +199,7 @@ public class DataLayer implements DataLayerInterface {
 		QName nodeTypeQName = getDataTypeQName(datatype);
 
 		// build the map that contains attribute values
-		Map<QName, Serializable> properties = buildAttributesMap((Map<String, Object>) entry
-				.get("attributes"), nodeTypeQName, true);
+		Map<QName, Serializable> properties = buildAttributesMap((Map<String, Object>) entry.get("attributes"), nodeTypeQName, true);
 
 		//
 		StringBuffer result = new StringBuffer("");
@@ -221,9 +219,10 @@ public class DataLayer implements DataLayerInterface {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#request(java.lang
+	 * 
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#
+	 * request(java.lang
 	 * .String)
 	 */
 	public List<NodeRef> request(String xpath) throws Exception {
@@ -251,22 +250,21 @@ public class DataLayer implements DataLayerInterface {
 			encodedXpath = StringUtils.join(fragments, "/");
 		}
 		//** #1544
-		ResultSet result = serviceRegistry.getSearchService().query(root.getStoreRef(),
-				SearchService.LANGUAGE_XPATH, encodedXpath);
+		ResultSet result = serviceRegistry.getSearchService().query(root.getStoreRef(), SearchService.LANGUAGE_XPATH, encodedXpath);
 		return result.getNodeRefs();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#deleteNode(java
+	 * 
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#
+	 * deleteNode(java
 	 * .lang.String)
 	 */
 	public void delete(String objectId) {
 		NodeRef nodeRef = new NodeRef(objectId);
-		List<ChildAssociationRef> assos = this.serviceRegistry.getNodeService().getChildAssocs(
-				nodeRef);
+		List<ChildAssociationRef> assos = this.serviceRegistry.getNodeService().getChildAssocs(nodeRef);
 		for (ChildAssociationRef asso : assos) {
 			QName associationName = asso.getTypeQName();
 			if (associationName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
@@ -279,9 +277,10 @@ public class DataLayer implements DataLayerInterface {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#read(java.lang.
+	 * 
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#
+	 * read(java.lang.
 	 * String)
 	 */
 	public String read(String objectId) {
@@ -295,7 +294,8 @@ public class DataLayer implements DataLayerInterface {
 	 * 
 	 * @param objectId
 	 *            the full node reference
-	 * @return a DOM representation of the object, including all properties and associations.
+	 * @return a DOM representation of the object, including all properties and
+	 *         associations.
 	 */
 	private Document readAsDocument(String objectId) {
 		NodeRef nodeRef = new NodeRef(objectId);
@@ -315,8 +315,7 @@ public class DataLayer implements DataLayerInterface {
 			convertedproperties.put(propertyName, convertedValue);
 		}
 
-		Document resultDocument = XmlBuilder.buildEntry(type, objectId, convertedproperties,
-				getAllAssociations(nodeRef));
+		Document resultDocument = XmlBuilder.buildEntry(type, objectId, convertedproperties, getAllAssociations(nodeRef));
 		return resultDocument;
 	}
 
@@ -336,8 +335,7 @@ public class DataLayer implements DataLayerInterface {
 		QName assocTypeQName = ContentModel.ASSOC_CONTAINS;
 		QName assocQName = QName.createQName(ALF_CONTENT_URI + nodeName);
 		QName nodeTypeQName = QName.createQName(ALF_CONTENT_URI + "folder");
-		NodeRef result = createNode(lparentPath, assocTypeQName, assocQName, nodeTypeQName,
-				nodeName, null);
+		NodeRef result = createNode(lparentPath, assocTypeQName, assocQName, nodeTypeQName, nodeName, null);
 		return result;
 	}
 
@@ -359,9 +357,7 @@ public class DataLayer implements DataLayerInterface {
 	 * @return
 	 * @throws Exception
 	 */
-	private NodeRef createNode(String where, QName assocTypeQName, QName assocQName,
-			QName nodeTypeQName, String nodeName, Map<QName, Serializable> properties)
-			throws Exception {
+	private NodeRef createNode(String where, QName assocTypeQName, QName assocQName, QName nodeTypeQName, String nodeName, Map<QName, Serializable> properties) throws Exception {
 		String lwhere = where;
 		if (lwhere == null) {
 			lwhere = getDefaultNodePath(nodeTypeQName);
@@ -378,11 +374,9 @@ public class DataLayer implements DataLayerInterface {
 			lassocQName = QName.createQName(ALF_CONTENT_URI + parent.getId());
 		}
 		if (properties != null) {
-			newNode = nodeService.createNode(parent, assocTypeQName, lassocQName, nodeTypeQName,
-					properties).getChildRef();
+			newNode = nodeService.createNode(parent, assocTypeQName, lassocQName, nodeTypeQName, properties).getChildRef();
 		} else {
-			newNode = nodeService.createNode(parent, assocTypeQName, lassocQName, nodeTypeQName)
-					.getChildRef();
+			newNode = nodeService.createNode(parent, assocTypeQName, lassocQName, nodeTypeQName).getChildRef();
 		}
 		// set NodeName
 		if (nodeName != null) {
@@ -398,9 +392,10 @@ public class DataLayer implements DataLayerInterface {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#createPath(java
+	 * 
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#
+	 * createPath(java
 	 * .lang.String)
 	 */
 	public NodeRef createPath(String where) throws Exception {
@@ -428,7 +423,8 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Returns the first QName (among available types) whose local name matches the data type name.
+	 * Returns the first QName (among available types) whose local name matches
+	 * the data type name.
 	 * 
 	 * @param dataTypeName
 	 * @return
@@ -446,7 +442,8 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Returns the first QName (among available properties from all registered (and live ?) models)
+	 * Returns the first QName (among available properties from all registered
+	 * (and live ?) models)
 	 * whose local name matches the property name.
 	 * 
 	 * @param propertyName
@@ -464,8 +461,10 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Returns the first QName (among associations defined for the specified type) whose local name
-	 * matches the association name. Since we are constrained to a type, there will be, most
+	 * Returns the first QName (among associations defined for the specified
+	 * type) whose local name
+	 * matches the association name. Since we are constrained to a type, there
+	 * will be, most
 	 * probably, only one such QName.
 	 * 
 	 * @param type
@@ -492,20 +491,17 @@ public class DataLayer implements DataLayerInterface {
 	 * @return
 	 * @throws Exception
 	 */
-	private Map<QName, Serializable> buildAttributesMap(Map<String, Object> attributesMap,
-			QName nodeTypeQName, boolean isUpdating) throws Exception {
+	private Map<QName, Serializable> buildAttributesMap(Map<String, Object> attributesMap, QName nodeTypeQName, boolean isUpdating) throws Exception {
 		final String CREATOR = ALF_CONTENT_URI + "creator";
 		final String CREATED = ALF_CONTENT_URI + "created";
 
-		Map<QName, PropertyDefinition> properties = dictionaryService.getType(nodeTypeQName)
-				.getProperties();
+		Map<QName, PropertyDefinition> properties = dictionaryService.getType(nodeTypeQName).getProperties();
 		//
 		// build mandatory properties with default values
 		Map<QName, Serializable> mandatoryProperties = new HashMap<QName, Serializable>();
 		// #1296: if updating, the object exists and all mandatory props are set, so skip this step
 		if (!isUpdating) {
-			mandatoryProperties.put(QName.createQName(CREATOR), authenticationService
-					.getCurrentUserName());
+			mandatoryProperties.put(QName.createQName(CREATOR), authenticationService.getCurrentUserName());
 			mandatoryProperties.put(QName.createQName(CREATED), new Date());
 			for (QName propQName : properties.keySet()) {
 				PropertyDefinition def = properties.get(propQName);
@@ -523,10 +519,8 @@ public class DataLayer implements DataLayerInterface {
 			// TODO : BEWARE of Multi-valued fields
 			if (resolvedName != null) {
 				// build attribute object ton convert him to write type
-				PropertyDefinition propertyDef = dictionaryService.getProperty(nodeTypeQName,
-						resolvedName);
-				Serializable value = makePropertyValue(propertyDef, (Serializable) attributesMap
-						.get(attName));
+				PropertyDefinition propertyDef = dictionaryService.getProperty(nodeTypeQName, resolvedName);
+				Serializable value = makePropertyValue(propertyDef, (Serializable) attributesMap.get(attName));
 				resultMap.put(resolvedName, value);
 			} else {
 				logger.error("Attribute Not Found :" + attName);
@@ -546,7 +540,6 @@ public class DataLayer implements DataLayerInterface {
 
 	/**
 	 * Extracted from AbstractNodeService.<-- original DataLayer comment <br/>
-	 * 
 	 * 
 	 * @param propertyDef
 	 * @param pValue
@@ -575,10 +568,7 @@ public class DataLayer implements DataLayerInterface {
 			} else if (!isMultiValued && (value instanceof Collection)) {
 				// we only allow this case if the property type is ANY
 				if (!propertyTypeQName.equals(DataTypeDefinition.ANY)) {
-					throw new DictionaryException(
-							"A single-valued property of this type may not be a collection: \n"
-									+ "   Property: " + propertyDef + "\n" + "   Type: "
-									+ propertyTypeQName + "\n" + "   Value: " + value);
+					throw new DictionaryException("A single-valued property of this type may not be a collection: \n" + "   Property: " + propertyDef + "\n" + "   Type: " + propertyTypeQName + "\n" + "   Value: " + value);
 				}
 			}
 		}
@@ -589,15 +579,13 @@ public class DataLayer implements DataLayerInterface {
 			if (value != null) {
 				classe = value.getClass().toString();
 			}
-			throw new TypeConversionException(
-					"The property value is not compatible with the type defined for the property: \n"
-							+ "   property: " + (propertyDef == null ? "unknown" : propertyDef)
-							+ "\n" + "   value: " + value + "\n" + "   value type: " + classe, e);
+			throw new TypeConversionException("The property value is not compatible with the type defined for the property: \n" + "   property: " + (propertyDef == null ? "unknown" : propertyDef) + "\n" + "   value: " + value + "\n" + "   value type: " + classe, e);
 		}
 	}
 
 	/**
-	 * Determines whether the value is legal for the given type by trying to convert the value to
+	 * Determines whether the value is legal for the given type by trying to
+	 * convert the value to
 	 * the type. If not, an exception is thrown.
 	 * 
 	 * @param type
@@ -631,7 +619,6 @@ public class DataLayer implements DataLayerInterface {
 	 *            <li>target : the target NodeRef</li>
 	 *            <li>targetQualifiedName : the target qualified name</li>
 	 *            </ul>
-	 * 
 	 * @return
 	 */
 	private NodeRef createAssociations(NodeRef nodeRef, QName source, List<AssociationBean> list) {
@@ -642,18 +629,17 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Creates a single association originating from a node. Depending on the information in the
+	 * Creates a single association originating from a node. Depending on the
+	 * information in the
 	 * bean, creates a child or simple association.
 	 * 
 	 * @param nodeRef
 	 * @param source
 	 * @param associationBean
 	 */
-	private synchronized void createAssociation(NodeRef nodeRef, QName source,
-			AssociationBean associationBean) {
+	private synchronized void createAssociation(NodeRef nodeRef, QName source, AssociationBean associationBean) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("createAssociation : NodeRef =" + nodeRef + " NodeType=" + source
-					+ " AssoBean=" + associationBean);
+			logger.debug("createAssociation : NodeRef =" + nodeRef + " NodeType=" + source + " AssoBean=" + associationBean);
 		}
 		// extract datas from assos Map
 		QName targetQualifiedName = getDataTypeQName(associationBean.getTargetQualifiedName());
@@ -690,13 +676,10 @@ public class DataLayer implements DataLayerInterface {
 	 *            the child node
 	 * @return false if an exception occurred
 	 */
-	private boolean createChildAssociation(QName assoType, NodeRef nodeRef,
-			QName targetQualifiedName, NodeRef targetNodeRef) {
-		ChildAssociationRef assoc = new ChildAssociationRef(assoType, nodeRef, targetQualifiedName,
-				targetNodeRef, false, -1);
+	private boolean createChildAssociation(QName assoType, NodeRef nodeRef, QName targetQualifiedName, NodeRef targetNodeRef) {
+		ChildAssociationRef assoc = new ChildAssociationRef(assoType, nodeRef, targetQualifiedName, targetNodeRef, false, -1);
 		try {
-			this.nodeService.addChild(assoc.getParentRef(), assoc.getChildRef(), assoc
-					.getTypeQName(), assoc.getTypeQName());
+			this.nodeService.addChild(assoc.getParentRef(), assoc.getChildRef(), assoc.getTypeQName(), assoc.getTypeQName());
 		} catch (AssociationExistsException e) {
 			logger.warn(e.getMessage());
 			return false;
@@ -705,7 +688,8 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Creates a simple association of the specified type between the node and the target.
+	 * Creates a simple association of the specified type between the node and
+	 * the target.
 	 * 
 	 * @param nodeRef
 	 * @param assoType
@@ -715,8 +699,7 @@ public class DataLayer implements DataLayerInterface {
 	private boolean createSimpleAssociation(NodeRef nodeRef, QName assoType, NodeRef targetNodeRef) {
 		AssociationRef assoc = new AssociationRef(nodeRef, assoType, targetNodeRef);
 		try {
-			this.nodeService.createAssociation(assoc.getSourceRef(), assoc.getTargetRef(), assoc
-					.getTypeQName());
+			this.nodeService.createAssociation(assoc.getSourceRef(), assoc.getTargetRef(), assoc.getTypeQName());
 		} catch (AssociationExistsException e) {
 			logger.error(e.getMessage(), e);
 			return false;
@@ -754,8 +737,7 @@ public class DataLayer implements DataLayerInterface {
 	 * @return
 	 * @throws Exception
 	 */
-	private NodeRef updateAssociations(NodeRef nodeRef, QName nodeType, List<AssociationBean> list,
-			boolean deleteAllAssociations) throws Exception {
+	private NodeRef updateAssociations(NodeRef nodeRef, QName nodeType, List<AssociationBean> list, boolean deleteAllAssociations) throws Exception {
 		logger.debug("UpdateAssociations");
 		if (deleteAllAssociations) {
 			// remove all associations of any Type !!
@@ -772,8 +754,7 @@ public class DataLayer implements DataLayerInterface {
 		} else {
 			for (AssociationBean associationBean : list) {
 				try {
-					QName assoType = getAssociationQName(nodeType, associationBean
-							.getAssociationName());
+					QName assoType = getAssociationQName(nodeType, associationBean.getAssociationName());
 					AssociationBean.Actions ca = associationBean.getAction();
 
 					if (ca.equals(AssociationBean.Actions.ADD)) {
@@ -795,7 +776,8 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Removes all associations of a specified association type where the node is either the source
+	 * Removes all associations of a specified association type where the node
+	 * is either the source
 	 * or the parent.
 	 * 
 	 * @param nodeRef
@@ -817,16 +799,17 @@ public class DataLayer implements DataLayerInterface {
 			List<ChildAssociationRef> assos = null;
 			assos = nodeService.getChildAssocs(nodeRef);
 			for (ChildAssociationRef asso : assos) {
-				ChildAssociationRef childAssocRef = new ChildAssociationRef(assoQName, asso
-						.getParentRef(), assoQName, asso.getChildRef(), false, -1);
+				ChildAssociationRef childAssocRef = new ChildAssociationRef(assoQName, asso.getParentRef(), assoQName, asso.getChildRef(), false, -1);
 				nodeService.removeChildAssociation(childAssocRef);
 			}
 		}
 	}
 
 	/**
-	 * Removes all associations that are valid for a specific data type, including inherited
-	 * associations. Any previous associations involving the node as parent or source are removed.
+	 * Removes all associations that are valid for a specific data type,
+	 * including inherited
+	 * associations. Any previous associations involving the node as parent or
+	 * source are removed.
 	 * Assocs as target or child are kept.
 	 * 
 	 * @param nodeRef
@@ -851,7 +834,8 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Removes the single association where this node is the source and the target has the id
+	 * Removes the single association where this node is the source and the
+	 * target has the id
 	 * carried by the bean.
 	 * 
 	 * @param nodeRef
@@ -859,26 +843,21 @@ public class DataLayer implements DataLayerInterface {
 	 * @param associationBean
 	 */
 	private void removeAssociation(NodeRef nodeRef, QName nodeType, AssociationBean associationBean) {
-		logger.debug("RemoveAssociation : NodeRef =" + nodeRef + " NodeType=" + nodeType
-				+ " AssoBean=" + associationBean);
+		logger.debug("RemoveAssociation : NodeRef =" + nodeRef + " NodeType=" + nodeType + " AssoBean=" + associationBean);
 		QName assoType = getAssociationQName(nodeType, associationBean.getAssociationName());
-		AssociationRef asso = new AssociationRef(nodeRef, assoType, new NodeRef(associationBean
-				.getTargetId()));
+		AssociationRef asso = new AssociationRef(nodeRef, assoType, new NodeRef(associationBean.getTargetId()));
 		deleteSimpleAssociation(asso);
 	}
 
 	/**
-	 * 
 	 * @param asso
 	 *            the association to delete
 	 */
 	private void deleteSimpleAssociation(AssociationRef asso) {
-		nodeService
-				.removeAssociation(asso.getSourceRef(), asso.getTargetRef(), asso.getTypeQName());
+		nodeService.removeAssociation(asso.getSourceRef(), asso.getTargetRef(), asso.getTypeQName());
 	}
 
 	/**
-	 * 
 	 * @param doc
 	 * @return
 	 */
@@ -931,25 +910,24 @@ public class DataLayer implements DataLayerInterface {
 			if (associationName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 				NodeRef childRef = asso.getChildRef();
 				String targetLabel = getLabelForNode(childRef, FormatPattern.ALLTEXT.get(), false);
-				associations.add(new AssociationBean(associationName.getLocalName(), childRef
-						.toString(), targetLabel, AssociationBean.AssoType.Composition, nodeService
-						.getType(childRef).getLocalName()));
+				associations.add(new AssociationBean(associationName.getLocalName(), childRef.toString(), targetLabel, AssociationBean.AssoType.Composition, nodeService.getType(childRef).getLocalName()));
 			}
 		}
 		return associations;
 	}
 
 	/**
-	 * Adds the associations (other than child assocs) that match the given association name. Only
-	 * those in the BlueXML namespace are added. Assocs may be multiple: several associated items
+	 * Adds the associations (other than child assocs) that match the given
+	 * association name. Only
+	 * those in the BlueXML namespace are added. Assocs may be multiple: several
+	 * associated items
 	 * with the same qname.
 	 * 
 	 * @param nodeRef
 	 * @param directAssociation
 	 * @param associations
 	 */
-	private void addAssociations(NodeRef nodeRef, QName directAssociation,
-			List<AssociationBean> associations) {
+	private void addAssociations(NodeRef nodeRef, QName directAssociation, List<AssociationBean> associations) {
 
 		List<AssociationRef> assos = nodeService.getTargetAssocs(nodeRef, directAssociation);
 		// there may be multiple items in the list if the assoc is multiple
@@ -958,8 +936,7 @@ public class DataLayer implements DataLayerInterface {
 			if (associationName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 				NodeRef childRef = asso.getTargetRef();
 				String targetLabel = getLabelForNode(childRef, FormatPattern.ALLTEXT.get(), false);
-				associations.add(new AssociationBean(associationName.getLocalName(), childRef
-						.toString(), targetLabel, nodeService.getType(childRef).getLocalName()));
+				associations.add(new AssociationBean(associationName.getLocalName(), childRef.toString(), targetLabel, nodeService.getType(childRef).getLocalName()));
 			}
 		}
 	}
@@ -969,11 +946,15 @@ public class DataLayer implements DataLayerInterface {
 	 * 
 	 * @param nodeRef
 	 * @param pattern
-	 *            the pattern for formatting the label for the node. Contains references to
-	 *            properties of the node or of an association. This text is taken "as-is", with no
-	 *            decoding, encoding, escaping or unescaping done. May be <code>null</code>.
+	 *            the pattern for formatting the label for the node. Contains
+	 *            references to
+	 *            properties of the node or of an association. This text is
+	 *            taken "as-is", with no
+	 *            decoding, encoding, escaping or unescaping done. May be
+	 *            <code>null</code>.
 	 * @param includeSystemProps
-	 *            if <code>true</code>, system properties are also considered, in addition to
+	 *            if <code>true</code>, system properties are also considered,
+	 *            in addition to
 	 *            properties from the data models.
 	 * @return
 	 */
@@ -1002,9 +983,12 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Builds a label for the given node from values of its properties or associations. The format
-	 * is a list of tokens separated by the view token separator. A token is either a property value
-	 * (the name of the property is directly given as a placeholder for the value) or some static
+	 * Builds a label for the given node from values of its properties or
+	 * associations. The format
+	 * is a list of tokens separated by the view token separator. A token is
+	 * either a property value
+	 * (the name of the property is directly given as a placeholder for the
+	 * value) or some static
 	 * text (enclosed in curly braces).
 	 * 
 	 * @param pattern
@@ -1016,8 +1000,7 @@ public class DataLayer implements DataLayerInterface {
 	 *            <code>true</code> if the
 	 * @return
 	 */
-	private String getNameForNode(String pattern, NodeRef nodeRef,
-			Map<QName, Serializable> properties, boolean includeSystemProps) {
+	private String getNameForNode(String pattern, NodeRef nodeRef, Map<QName, Serializable> properties, boolean includeSystemProps) {
 		String result = "";
 		String view = pattern;
 
@@ -1070,26 +1053,21 @@ public class DataLayer implements DataLayerInterface {
 						} else {
 							if (attribute != null) {
 								Map<String, List<AssociationRef>> nodeAssos = collectAssociations(nodeRef);
-								String associationFirstPartName = nodeType.toString() + "_"
-										+ association;
+								String associationFirstPartName = nodeType.toString() + "_" + association;
 
-								String associationName = getAssociationNameStartingBy(
-										associationFirstPartName, nodeAssos);
+								String associationName = getAssociationNameStartingBy(associationFirstPartName, nodeAssos);
 
 								if (associationName.length() > 0) {
 									List<?> assocs = nodeAssos.get(associationName);
 									for (Object o : assocs) {
 										if (o instanceof AssociationRef) {
 											AssociationRef ref = (AssociationRef) o;
-											Map<QName, Serializable> targetProperties = nodeService
-													.getProperties(ref.getTargetRef());
-											QName targetType = nodeService.getType(ref
-													.getTargetRef());
+											Map<QName, Serializable> targetProperties = nodeService.getProperties(ref.getTargetRef());
+											QName targetType = nodeService.getType(ref.getTargetRef());
 											if (lastTokenWasText == false) {
 												result += " ";
 											}
-											result += getPropertyValue(targetProperties,
-													targetType, attribute);
+											result += getPropertyValue(targetProperties, targetType, attribute);
 											lastTokenWasText = false;
 											first = false;
 										}
@@ -1098,16 +1076,14 @@ public class DataLayer implements DataLayerInterface {
 							}
 						}
 					} else {
-						logger.error("The class " + clazz + " is not appropriate for this node ('"
-								+ nodeRef.toString() + "').");
+						logger.error("The class " + clazz + " is not appropriate for this node ('" + nodeRef.toString() + "').");
 					}
 				}
 			} else {
 				// simple attribute
 				for (QName qname : properties.keySet()) {
 					String key = qname.getLocalName();
-					if (key.endsWith("_" + token)
-							|| (includeSystemProps == true && (key.endsWith(token)))) {// #1529
+					if (key.endsWith("_" + token) || (includeSystemProps == true && (key.endsWith(token)))) {// #1529
 						Serializable value = properties.get(qname);
 						if (value != null && value.toString().length() > 0) {
 							if (lastTokenWasText == false && first == false) {
@@ -1140,8 +1116,7 @@ public class DataLayer implements DataLayerInterface {
 	private final Map<String, List<AssociationRef>> collectAssociations(NodeRef nodeRef) {
 		Map<String, List<AssociationRef>> result = new HashMap<String, List<AssociationRef>>();
 
-		List<AssociationRef> assocs = nodeService.getTargetAssocs(nodeRef,
-				RegexQNamePattern.MATCH_ALL);
+		List<AssociationRef> assocs = nodeService.getTargetAssocs(nodeRef, RegexQNamePattern.MATCH_ALL);
 		for (AssociationRef assocRef : assocs) {
 			QName typeQName = assocRef.getTypeQName();
 			String assocName = typeQName.toString();
@@ -1168,8 +1143,7 @@ public class DataLayer implements DataLayerInterface {
 	 *            if <code>true</code>, system properties are not filtered out.
 	 * @return
 	 */
-	private final Map<QName, Serializable> collectProperties(NodeRef nodeRef,
-			boolean includeSystemProps) {
+	private final Map<QName, Serializable> collectProperties(NodeRef nodeRef, boolean includeSystemProps) {
 		Map<QName, Serializable> result = new HashMap<QName, Serializable>();
 
 		Map<QName, Serializable> properties = nodeService.getProperties(nodeRef);
@@ -1187,7 +1161,6 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * 
 	 * @param associationFirstPartName
 	 * @param map
 	 * @return
@@ -1212,8 +1185,7 @@ public class DataLayer implements DataLayerInterface {
 	 * @param attributeName
 	 * @return
 	 */
-	private String getPropertyValue(Map<QName, Serializable> targetProperties, QName targetType,
-			String attributeName) {
+	private String getPropertyValue(Map<QName, Serializable> targetProperties, QName targetType, String attributeName) {
 		String name = targetType.toString() + "_" + attributeName;
 		QName qname = QName.createQName(name);
 		if (targetProperties.containsKey(qname)) {
@@ -1223,22 +1195,22 @@ public class DataLayer implements DataLayerInterface {
 			return "";
 		}
 		if (dictionaryService.getType(targetType).getParentName() != null) {
-			return getPropertyValue(targetProperties, dictionaryService.getType(targetType)
-					.getParentName(), attributeName);
+			return getPropertyValue(targetProperties, dictionaryService.getType(targetType).getParentName(), attributeName);
 		}
 		return "";
 	}
 
 	/**
-	 * Gets the value of the first non-null textual property in the BlueXML namespace.
+	 * Gets the value of the first non-null textual property in the BlueXML
+	 * namespace.
 	 * 
 	 * @param nodeRef
 	 * @param properties
 	 * @param names
-	 * @return The first text property value, or the node id if no textual property is found.
+	 * @return The first text property value, or the node id if no textual
+	 *         property is found.
 	 */
-	private String getLabelForNodeFirst(NodeRef nodeRef, Map<QName, Serializable> properties,
-			Set<QName> names) {
+	private String getLabelForNodeFirst(NodeRef nodeRef, Map<QName, Serializable> properties, Set<QName> names) {
 		Serializable propValue;
 		for (QName propertyName : names) {
 			if (propertyName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
@@ -1262,7 +1234,8 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Gets a label built from all non-null text fields found amongst the properties in the BlueXML
+	 * Gets a label built from all non-null text fields found amongst the
+	 * properties in the BlueXML
 	 * namespace. Each value is prefixed with the property's title. e.g.
 	 * "First Name: John, Last Name: Doe, Hometown: Here-and-There".
 	 * 
@@ -1271,8 +1244,7 @@ public class DataLayer implements DataLayerInterface {
 	 * @param names
 	 * @return the computed label, or the node id if the label is empty.
 	 */
-	private String getLabelForNodeAllText(NodeRef nodeRef, Map<QName, Serializable> properties,
-			Set<QName> names) {
+	private String getLabelForNodeAllText(NodeRef nodeRef, Map<QName, Serializable> properties, Set<QName> names) {
 		Serializable propValue;
 		String res = "";
 		boolean first = true;
@@ -1290,9 +1262,7 @@ public class DataLayer implements DataLayerInterface {
 								if (first == false) {
 									res += ", ";
 								}
-								res += StringUtils
-										.trimToEmpty(getDisplayLabelForProperty(propertyDef))
-										+ ": " + propStr;
+								res += StringUtils.trimToEmpty(getDisplayLabelForProperty(propertyDef)) + ": " + propStr;
 								first = false;
 							}
 						}
@@ -1304,16 +1274,16 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Gets a label built from all non-null properties in the BlueXML namespace. Similar to
-	 * {@link #getLabelForNodeAllText(Map, Set)} except there's no restriction to textual fields.
+	 * Gets a label built from all non-null properties in the BlueXML namespace.
+	 * Similar to {@link #getLabelForNodeAllText(Map, Set)} except there's no
+	 * restriction to textual fields.
 	 * 
 	 * @param nodeRef
 	 * @param properties
 	 * @param names
 	 * @return the computed label, or the node id if the label is empty.
 	 */
-	private String getLabelForNodeAll(NodeRef nodeRef, Map<QName, Serializable> properties,
-			Set<QName> names) {
+	private String getLabelForNodeAll(NodeRef nodeRef, Map<QName, Serializable> properties, Set<QName> names) {
 		Serializable propValue;
 		String res = "";
 		int nb = 0;
@@ -1329,8 +1299,7 @@ public class DataLayer implements DataLayerInterface {
 							if (nb > 0) {
 								res += ", ";
 							}
-							res += StringUtils.trimToEmpty(getDisplayLabelForProperty(propertyDef))
-									+ ": " + propStr;
+							res += StringUtils.trimToEmpty(getDisplayLabelForProperty(propertyDef)) + ": " + propStr;
 							nb++;
 						}
 					}
@@ -1344,7 +1313,8 @@ public class DataLayer implements DataLayerInterface {
 	 * Computes a label for a property definition in a BlueXML model.
 	 * 
 	 * @param propertyDef
-	 * @return the title set in the model, or the name (in case no title was defined)
+	 * @return the title set in the model, or the name (in case no title was
+	 *         defined)
 	 */
 	private String getDisplayLabelForProperty(PropertyDefinition propertyDef) {
 		String res = propertyDef.getTitle();
@@ -1415,20 +1385,19 @@ public class DataLayer implements DataLayerInterface {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#attachContent(java
+	 * 
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#
+	 * attachContent(java
 	 * .lang.String, java.lang.String)
 	 */
-	public boolean attachContent(String receiver, String filename, String filepath,
-			String mimeType, String contentType, boolean shouldAppendSuffix) throws Exception {
+	public boolean attachContent(String receiver, String filename, String filepath, String mimeType, String contentType, boolean shouldAppendSuffix) throws Exception {
 		NodeRef newNode = new NodeRef(receiver);
 		QName nodeTypeQName = QName.createQName(BLUEXML_MODEL_URI + "1.0", contentType);
 
 		boolean applyName = (StringUtils.trimToNull(filename) != null);
 
-		String resultId = uploadContentToNode(newNode, filename, filepath, mimeType, nodeTypeQName,
-				applyName, shouldAppendSuffix);
+		String resultId = uploadContentToNode(newNode, filename, filepath, mimeType, nodeTypeQName, applyName, shouldAppendSuffix);
 		if (StringUtils.trimToNull(resultId) == null) {
 			return false;
 		}
@@ -1439,8 +1408,10 @@ public class DataLayer implements DataLayerInterface {
 	 * @param newNode
 	 *            an existing node
 	 * @param filename
-	 *            the display name that should be set on the node if the content writing succeeds.
-	 *            NO GUARANTEE is given about whether the name is indeed applied.
+	 *            the display name that should be set on the node if the content
+	 *            writing succeeds.
+	 *            NO GUARANTEE is given about whether the name is indeed
+	 *            applied.
 	 * @param filepath
 	 * @param mimeType
 	 * @param nodeTypeQName
@@ -1448,15 +1419,15 @@ public class DataLayer implements DataLayerInterface {
 	 * @param applyName
 	 *            if false, there will be no attempt to set the file name
 	 * @param shouldAppendSuffix
-	 *            if the renaming is activated, an index [e.g. '(1)'] may be appended to the
+	 *            if the renaming is activated, an index [e.g. '(1)'] may be
+	 *            appended to the
 	 *            filename. There will be no failure due to an unavailable name.
-	 * @return the node ref (protocol, store and id) to the node, or empty string if exception.
+	 * @return the node ref (protocol, store and id) to the node, or empty
+	 *         string if exception.
 	 */
-	public String uploadContentToNode(NodeRef newNode, String filename, String filepath,
-			String mimeType, QName nodeTypeQName, boolean applyName, boolean shouldAppendSuffix) {
+	public String uploadContentToNode(NodeRef newNode, String filename, String filepath, String mimeType, QName nodeTypeQName, boolean applyName, boolean shouldAppendSuffix) {
 		String resultId, FAILURE = "";
-		ContentWriter writer = serviceRegistry.getContentService().getWriter(newNode,
-				nodeTypeQName, false);
+		ContentWriter writer = serviceRegistry.getContentService().getWriter(newNode, nodeTypeQName, false);
 
 		// set MIME type property
 		writer.setMimetype(mimeType);
@@ -1465,13 +1436,11 @@ public class DataLayer implements DataLayerInterface {
 		long sizeUploaded = writeFileContentIntoNode(filepath, writer);
 		if (sizeUploaded != -1) {
 			// set other properties
-			Map<QName, Serializable> properties = this.serviceRegistry.getNodeService()
-					.getProperties(newNode);
+			Map<QName, Serializable> properties = this.serviceRegistry.getNodeService().getProperties(newNode);
 			properties.put(ContentModel.PROP_CONTENT, writer.getContentData());
 			this.serviceRegistry.getNodeService().setProperties(newNode, properties);
 			resultId = StringEscapeUtils.escapeXml(newNode.toString());
-			logger.debug(" File '" + filename + "' (size: " + sizeUploaded + ") uploaded to node: "
-					+ resultId);
+			logger.debug(" File '" + filename + "' (size: " + sizeUploaded + ") uploaded to node: " + resultId);
 
 			// set the node name
 			if (applyName) {
@@ -1516,7 +1485,6 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * 
 	 * @param filename
 	 * @return
 	 */
@@ -1529,7 +1497,6 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * 
 	 * @param filename
 	 * @return
 	 */
@@ -1550,7 +1517,8 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Writes the content of a file into a node. The file is read as a binary file.
+	 * Writes the content of a file into a node. The file is read as a binary
+	 * file.
 	 * 
 	 * @param filename
 	 *            the name of the node
@@ -1559,9 +1527,11 @@ public class DataLayer implements DataLayerInterface {
 	 * @param location
 	 *            address of a folder in the content repository
 	 * @param writer
-	 *            the appropriate content writer to the node. <b>Must have been already gotten from
+	 *            the appropriate content writer to the node. <b>Must have been
+	 *            already gotten from
 	 *            the content service.</b>
-	 * @return the length in bytes of the uploaded content if no exception was thrown during the
+	 * @return the length in bytes of the uploaded content if no exception was
+	 *         thrown during the
 	 *         process, -1 otherwise
 	 */
 	private long writeFileContentIntoNode(String filepath, ContentWriter writer) {
@@ -1578,35 +1548,35 @@ public class DataLayer implements DataLayerInterface {
 	}
 
 	/**
-	 * Tells whether this node is referenced (i.e. "pointed to") via a specific association. Normal
-	 * associations (type 'Simple' and 'Aggregation' in the class modeler) and ChildAssociations
+	 * Tells whether this node is referenced (i.e. "pointed to") via a specific
+	 * association. Normal
+	 * associations (type 'Simple' and 'Aggregation' in the class modeler) and
+	 * ChildAssociations
 	 * (type 'Composition' in the modeler) are supported.
 	 * 
 	 * @param nodeRef
 	 * @param filterAssoc
-	 *            the qualified name (sequence of packages and local name) of the association
+	 *            the qualified name (sequence of packages and local name) of
+	 *            the association
 	 * @param whether
 	 *            the association is a composition
-	 * @return true if an association reference pointing to the node already exists.
+	 * @return true if an association reference pointing to the node already
+	 *         exists.
 	 */
 	public boolean isRefencenced(NodeRef nodeRef, String filterAssoc, boolean isComposition) {
 		if (isComposition) {
-			List<ChildAssociationRef> toChildAssoList = serviceRegistry.getNodeService()
-					.getParentAssocs(nodeRef);
+			List<ChildAssociationRef> toChildAssoList = serviceRegistry.getNodeService().getParentAssocs(nodeRef);
 			for (ChildAssociationRef assoRef : toChildAssoList) {
 				QName assoTypeQName = assoRef.getTypeQName();
-				if (assoTypeQName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)
-						&& assoTypeQName.getLocalName().equals(filterAssoc)) {
+				if (assoTypeQName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI) && assoTypeQName.getLocalName().equals(filterAssoc)) {
 					return true;
 				}
 			}
 		} else {
-			List<AssociationRef> toList = serviceRegistry.getNodeService().getSourceAssocs(nodeRef,
-					RegexQNamePattern.MATCH_ALL);
+			List<AssociationRef> toList = serviceRegistry.getNodeService().getSourceAssocs(nodeRef, RegexQNamePattern.MATCH_ALL);
 			for (AssociationRef assoRef : toList) {
 				QName assoTypeQName = assoRef.getTypeQName();
-				if (assoTypeQName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)
-						&& assoTypeQName.getLocalName().equals(filterAssoc)) {
+				if (assoTypeQName.getNamespaceURI().startsWith(BLUEXML_MODEL_URI) && assoTypeQName.getLocalName().equals(filterAssoc)) {
 					return true;
 				}
 			}

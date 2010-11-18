@@ -1,21 +1,20 @@
 package com.bluexml.side.Integration.alfresco.xforms.webscript;
-  
+
 /**
  * Taken from BxDS dataLayer module.
  * 
  * @author Amenel
- * 
  */
 public class AssociationBean {
 	public enum Actions {
-			// delete listed associations and keep the others (same type or not)
-			DELETE(0, "delete"),
-			// delete all associations of this type
-			DELETE_ALL(1, "deleteAllAssoOfThisType"),
-			// delete all associations of this type and add listed ones
-			ADD_DELETE_OTHER(2, "add/deleteOther"),
-			// add listed associations
-			ADD(3, "add");
+		// delete listed associations and keep the others (same type or not)
+		DELETE(0, "delete"),
+		// delete all associations of this type
+		DELETE_ALL(1, "deleteAllAssoOfThisType"),
+		// delete all associations of this type and add listed ones
+		ADD_DELETE_OTHER(2, "add/deleteOther"),
+		// add listed associations
+		ADD(3, "add");
 		String literal;
 		int value;
 
@@ -34,8 +33,7 @@ public class AssociationBean {
 	}
 
 	public static enum AssoType {
-			Simple,
-			Composition;
+		Simple, Composition;
 	}
 
 	private String associationName;
@@ -55,8 +53,7 @@ public class AssociationBean {
 		this.targetId = targetId;
 	}
 
-	public AssociationBean(String associationName, String targetId, String targetLabel,
-			String targetQualifiedName) {
+	public AssociationBean(String associationName, String targetId, String targetLabel, String targetQualifiedName) {
 		super();
 		this.associationName = associationName;
 		this.targetId = targetId;
@@ -65,8 +62,7 @@ public class AssociationBean {
 		this.targetQualifiedName = targetQualifiedName;
 	}
 
-	public AssociationBean(String associationName, String targetId, String targetLabel,
-			AssoType assoType, String targetQualifiedName) {
+	public AssociationBean(String associationName, String targetId, String targetLabel, AssoType assoType, String targetQualifiedName) {
 		super();
 		this.associationName = associationName;
 		this.targetId = targetId;

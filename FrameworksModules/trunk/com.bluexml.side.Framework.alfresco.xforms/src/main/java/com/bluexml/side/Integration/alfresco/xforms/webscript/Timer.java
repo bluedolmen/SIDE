@@ -7,7 +7,6 @@ package com.bluexml.side.Integration.alfresco.xforms.webscript;
  * Raw cumulative timer for debugging.
  * 
  * @author Amenel
- * 
  */
 public class Timer {
 

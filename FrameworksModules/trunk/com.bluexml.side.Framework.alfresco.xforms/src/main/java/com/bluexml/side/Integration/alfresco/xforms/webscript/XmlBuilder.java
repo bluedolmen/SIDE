@@ -21,11 +21,11 @@ import org.w3c.dom.Element;
 import com.bluexml.side.Integration.alfresco.xforms.webscript.AssociationBean.AssoType;
 
 /**
- * Builds an XML representation of an object from its properties and associations.<br/>
+ * Builds an XML representation of an object from its properties and
+ * associations.<br/>
  * Taken from BxDS dataLayer module. Stripped down to the necessary.
  * 
  * @author Amenel
- * 
  */
 public class XmlBuilder {
 	static final String ENTRY_ASSOCIATION_NODE = "association";
@@ -42,8 +42,7 @@ public class XmlBuilder {
 	static final String ENTRY_QUALIFIEDNAME = "qualifiedName";
 	static final String ENTRY_ROOTNODE = "Class";
 
-	public static Document buildEntry(QName type, String objectId,
-			Map<QName, Serializable> properties, List<AssociationBean> list) {
+	public static Document buildEntry(QName type, String objectId, Map<QName, Serializable> properties, List<AssociationBean> list) {
 		// Document entry = new Document();
 		DocumentBuilder documentBuilder = null;
 		try {
@@ -74,8 +73,7 @@ public class XmlBuilder {
 			if (value != null) {
 				Element att = null;
 				if (value instanceof Collection) {
-					att = buildAttributeCollection(doc, entry.getKey().getLocalName(),
-							(Collection<?>) value);
+					att = buildAttributeCollection(doc, entry.getKey().getLocalName(), (Collection<?>) value);
 				} else {
 					att = buildAttribute(doc, entry.getKey().getLocalName(), value.toString());
 				}
@@ -85,8 +83,7 @@ public class XmlBuilder {
 		return attributesE;
 	}
 
-	private static Element buildAttributeCollection(Document doc, String localName,
-			Collection<?> values) {
+	private static Element buildAttributeCollection(Document doc, String localName, Collection<?> values) {
 		Element attribute = doc.createElement(ENTRY_ATTRIBUTE_NODE);
 		attribute.setAttribute(ENTRY_QUALIFIEDNAME, localName);
 		for (Object value : values) {
