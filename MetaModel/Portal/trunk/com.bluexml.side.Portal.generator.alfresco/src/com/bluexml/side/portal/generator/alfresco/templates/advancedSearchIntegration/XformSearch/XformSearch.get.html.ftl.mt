@@ -23,7 +23,7 @@ select search form
 <select id="selectSearchForm" onchange="javascript:selectXFormSearch(this);">
 <option value="">Select a search form :</option>
 <#list searchForms as item>
-<option value="${item}">${item}</option>
+<option value="${item.id}">${item.label}</option>
 </#list>
 </select>
 </p>

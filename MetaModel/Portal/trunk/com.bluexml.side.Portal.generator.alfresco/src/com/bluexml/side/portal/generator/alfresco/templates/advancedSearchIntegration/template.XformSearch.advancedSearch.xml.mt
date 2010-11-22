@@ -25,7 +25,7 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
    <url>/components/XformSearch</url>
    <properties>   		
    		<%if (associationPortlet.isPortletInternal != null && associationPortlet.isPortletInternal.form != null){%>
-			<searchForm>[<%for (associationPortlet.isPortletInternal.form.forms){%>'<%id%>'<%if (current("HavePortlet").associationPortlet.isPortletInternal.form.forms.nLast() !=current()){%>,<%}%><%}%>]</searchForm>
+			<searchForm>[<%for (associationPortlet.isPortletInternal.form.forms){%>{id:'<%id%>',label:'<%label%>'}<%if (current("HavePortlet").associationPortlet.isPortletInternal.form.forms.nLast() !=current()){%>,<%}%><%}%>]</searchForm>
    		<%}%>
    </properties>
 </component>
