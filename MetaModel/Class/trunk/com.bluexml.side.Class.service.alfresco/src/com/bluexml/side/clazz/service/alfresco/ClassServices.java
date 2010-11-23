@@ -189,4 +189,27 @@ public class ClassServices {
 		}
 		return is;
 	}
+	
+	public static boolean isChildOfCmContent(Clazz c) throws Exception {		
+		List<Clazz> l = c.getInheritedClasses();
+		for (Clazz clazz : l) {
+			String prefixedname = getPrefixedQName(clazz);
+			if (prefixedname.equals("cm:content")) {
+				return true;
+			}
+		}
+		return false;		
+	}
+	
+	public static boolean isChildOfAlfrescoClazz(Clazz c) throws Exception {		
+		List<Clazz> l = c.getInheritedClasses();
+		for (Clazz clazz : l) {			
+			if (CommonServices.isNativeModel(clazz)) {
+				return true;
+			}
+		}
+		return false;		
+	}
+	
+	
 }
