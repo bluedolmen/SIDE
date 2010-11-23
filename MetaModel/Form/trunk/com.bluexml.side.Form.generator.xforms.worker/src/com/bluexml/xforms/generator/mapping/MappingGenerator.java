@@ -1068,7 +1068,7 @@ public class MappingGenerator extends AbstractGenerator {
 
 		Attribute attribute = (Attribute) ref;
 		for (Tag tag : attribute.getTags()) {
-			if (tag.getKey().equals(MsgId.INT_GEN_REVERSED_TAG_KEY.getText())) {
+			if (tag.getKey().contains(MsgId.INT_GEN_REVERSED_TAG_KEY.getText())) {
 				if (tag.getValue().contains(MsgId.INT_GEN_REVERSED_TAG_VAL_ALFRESCO.getText())) {
 					noPrefix = true;
 					break;
