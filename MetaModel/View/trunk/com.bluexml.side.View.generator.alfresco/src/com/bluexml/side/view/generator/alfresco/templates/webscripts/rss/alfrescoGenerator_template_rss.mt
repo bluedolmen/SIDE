@@ -33,11 +33,11 @@ webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/
 	<pubDate>${child.properties["cm:modified"]?date}</pubDate>
 	<description>
 		<%for (getAllSortedAttibutes()){%>
-		<#if (child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?exists)>
-			<#if child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?is_sequence>
-		<%getLabel()%>:<#list child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"] as key>${key},</#list>;
+		<#if (child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?exists)>
+			<#if child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?is_sequence>
+		<%getLabel()%>:<#list child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"] as key>${key},</#list>;
 			<#else/>
-		<%getLabel()%>:${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]<%if (typ.toString().equalsIgnoreCase("date")){%>?date<%}%>!""};
+		<%getLabel()%>:${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]<%if (typ.toString().equalsIgnoreCase("date")){%>?date<%}%>!""};
 			</#if>
 		</#if>
 		<%}%>

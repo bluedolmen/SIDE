@@ -35,11 +35,11 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<pubDate>${child.properties["cm:modified"]?date}</pubDate>
 	<description>
 		<%for (getAllSortedAttibutes()){%>
-		<#if (child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?exists)>
-			<#if child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?is_sequence>
-		<%getLabel()%>:<#list child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"] as key>${key},</#list>;
+		<#if (child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?exists)>
+			<#if child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?is_sequence>
+		<%getLabel()%>:<#list child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"] as key>${key},</#list>;
 			<#else/>
-		<%getLabel()%>:${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]<%if (typ.toString().equalsIgnoreCase("date")){%>?date<%}%>!""};
+		<%getLabel()%>:${child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]<%if (typ.toString().equalsIgnoreCase("date")){%>?date<%}%>!""};
 			</#if>
 		</#if>
 		<%}%>

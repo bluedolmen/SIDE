@@ -38,20 +38,20 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		"nodeRef":"${child.nodeRef}",
 		"parent":"${child.parent.nodeRef}",
 	<%for (getAllSortedAttibutes()){%>
-	<#if (child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?exists)>
-		<#if child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?is_sequence>
-		"<%eContainer().getQualifiedName()%>_<%name%>":"<#list child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"] as key>${key} </#list>",
+	<#if (child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?exists)>
+		<#if child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?is_sequence>
+		"<%getQualifiedName()%>":"<#list child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"] as key>${key} </#list>",
 		<#else/>
 		<%if (typ.toString().equalsIgnoreCase("date")){%>
-		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}",
+		"<%getQualifiedName()%>":"${child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}",
 		<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
-		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}",
+		"<%getQualifiedName()%>":"${child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}",
 		<%}else{%>
-		"<%eContainer().getQualifiedName()%>_<%name%>":"${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string!""}",
+		"<%getQualifiedName()%>":"${child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?string!""}",
 		<%}%>
 		</#if>
 	<#else/>
-		"<%eContainer().getQualifiedName()%>_<%name%>":"",
+		"<%getQualifiedName()%>":"",
 	</#if>
 	<%}%>
 	<%for (getAllSourceAssociationEnds()){%>

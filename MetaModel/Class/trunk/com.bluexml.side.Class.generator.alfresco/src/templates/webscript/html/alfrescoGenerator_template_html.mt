@@ -38,28 +38,28 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<li>nodeRef:${child.nodeRef}</li>
 	<li>parent:${child.parent.nodeRef}</li>
 	<%for (getAllSortedAttibutes()){%>
-	<#if (child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?exists)>
-		<#if child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]?is_sequence>
-	<li><%eContainer().getQualifiedName()%>_<%name%>:<#list child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"] as key>${key} </#list></li>
+	<#if (child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?exists)>
+		<#if child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?is_sequence>
+	<li><%getQualifiedName()%>:<#list child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"] as key>${key} </#list></li>
 		<#else/>
-	<li><%eContainer().getQualifiedName()%>_<%name%>:${child.properties["<%current(1).getFolder()%>:<%eContainer().getQualifiedName()%>_<%name%>"]<%if (typ.toString().equalsIgnoreCase("date")){%>?date<%}%>!""}</li>
+	<li><%getQualifiedName()%>:${child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]<%if (typ.toString().equalsIgnoreCase("date")){%>?date<%}%>!""}</li>
 		</#if>
 	<#else/>
-	<li><%eContainer().getQualifiedName()%>_<%name%>:</li>
+	<li><%getQualifiedName()%>:</li>
 	</#if>
 	<%}%>
 	<%for (getAllSourceAssociations()){%>
 		<%if (isSource(current(1))){%>
 			<%if (firstEnd == current(2)){%>
-	<li><%secondEnd.getFullName()%>:<#if child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"] as key><%secondEnd.getFullName().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if></li>
+	<li><%secondEnd.getFullName()%>:<#if child.<%getAssociationVariableName()%>["<%getRootContainer().name%>:<%getQualifiedName(firstEnd)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"] as key><%secondEnd.getFullName().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if></li>
 			<%}else{%>
-	<li><%firstEnd.getFullName()%>:<#if child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(secondEnd)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(secondEnd)%>"] as key><%firstEnd.getFullName().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if></li>
+	<li><%firstEnd.getFullName()%>:<#if child.<%getAssociationVariableName()%>["<%getRootContainer().name%>:<%getQualifiedName(secondEnd)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(secondEnd)%>"] as key><%firstEnd.getFullName().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if></li>
 			<%}%>
 		<%}else{%>
 			<%if (firstEnd == current(2)){%>
-	<li><%secondEnd.getFullName()%>:<#list <%secondEnd.getQualifiedName()%>_list as object><#if object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(secondEnd)%>"]?exists><#list object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(secondEnd)%>"] as other><#if other.id = child.id><%secondEnd.getFullName().replaceAll("child","object").replaceAll("\n","" )%> <#break></#if></#list></#if></#list></li>
+	<li><%secondEnd.getFullName()%>:<#list <%secondEnd.getQualifiedName()%>_list as object><#if object.<%getAssociationVariableName()%>["<%getRootContainer().name%>:<%getQualifiedName(secondEnd)%>"]?exists><#list object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(secondEnd)%>"] as other><#if other.id = child.id><%secondEnd.getFullName().replaceAll("child","object").replaceAll("\n","" )%> <#break></#if></#list></#if></#list></li>
 			<%}else{%>
-	<li><%firstEnd.getFullName()%>:<#list <%firstEnd.getQualifiedName()%>_list as object><#if object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"]?exists><#list object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"] as other><#if other.id = child.id><%firstEnd.getFullName().replaceAll("child","object").replaceAll("\n","" )%> <#break></#if></#list></#if></#list></li>
+	<li><%firstEnd.getFullName()%>:<#list <%firstEnd.getQualifiedName()%>_list as object><#if object.<%getAssociationVariableName()%>["<%getRootContainer().name%>:<%getQualifiedName(firstEnd)%>"]?exists><#list object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"] as other><#if other.id = child.id><%firstEnd.getFullName().replaceAll("child","object").replaceAll("\n","" )%> <#break></#if></#list></#if></#list></li>
 			<%}%>
 		<%}%>
 	<%}%>

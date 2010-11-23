@@ -40,21 +40,21 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<modified>${child.properties["cm:modified"]?datetime}</modified>
 	<%for (getAllSortedAttibutes()){%>
 	<% getRootContainer().name.put("modelId") %>
-	<%if (get("modelId")=="cm") {%><% mapTo.name.put("qName") %><%}else{%><% getQualifiedName().put("qName") %><%}%>
+	<%if (get("modelId")=="cm") {%><% name.put("qName") %><%}else{%><% getQualifiedName().put("qName") %><%}%>
 	<#if (child.properties["<%get("modelId")%>:<%get("qName")%>"]?exists)>
 		<#if child.properties["<%get("modelId")%>:<%get("qName")%>"]?is_sequence>
-		<<%eContainer().getQualifiedName()%>_<%name%>><#list child.properties["<%get("modelId")%>:<%get("qName")%>"] as key>${key} </#list></<%eContainer().getQualifiedName()%>_<%name%>>
+		<<%getQualifiedName()%>><#list child.properties["<%get("modelId")%>:<%get("qName")%>"] as key>${key} </#list></<%getQualifiedName()%>>
 		<#else/>
 		<%if (typ.toString().equalsIgnoreCase("date")){%>
-		<<%eContainer().getQualifiedName()%>_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%eContainer().getQualifiedName()%>_<%name%>>
+		<<%getQualifiedName()%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%getQualifiedName()%>>
 		<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
-		<<%eContainer().getQualifiedName()%>_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%eContainer().getQualifiedName()%>_<%name%>>
+		<<%getQualifiedName()%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%getQualifiedName()%>>
 		<%}else{%>
-		<<%eContainer().getQualifiedName()%>_<%name%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string!""}</<%eContainer().getQualifiedName()%>_<%name%>>
+		<<%getQualifiedName()%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string!""}</<%getQualifiedName()%>>
 		<%}%>
 		</#if>
 	<#else/>
-	<<%eContainer().getQualifiedName()%>_<%name%>/>
+	<<%getQualifiedName()%>/>
 	</#if>
 	<%}%>
 	<%for (getFields()[path != null && path.nSize() == 1]){%>
@@ -66,20 +66,20 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<target>
 		<%for (current("Field").mapTo.filter("clazz.Attribute")){%>
 		<nodeRef>${item.nodeRef}</nodeRef>
-		<#if (item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"]?exists)>
-			<#if item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"]?is_sequence>
-			<<%eContainer().getQualifiedName()%>_<%name%>><#list item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"] as key>${key} </#list></<%eContainer().getQualifiedName()%>_<%name%>>
+		<#if (item.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?exists)>
+			<#if item.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?is_sequence>
+			<<%getQualifiedName()%>><#list item.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"] as key>${key} </#list></<%getQualifiedName()%>>
 			<#else/>
 			<%if (typ.toString().equalsIgnoreCase("date")){%>
-			<<%eContainer().getQualifiedName()%>_<%name%>>${item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%eContainer().getQualifiedName()%>_<%name%>>
+			<<%getQualifiedName()%>>${item.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%getQualifiedName()%>>
 			<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
-			<<%eContainer().getQualifiedName()%>_<%name%>>${item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%eContainer().getQualifiedName()%>_<%name%>>
+			<<%getQualifiedName()%>>${item.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%getQualifiedName()%>>
 			<%}else{%>
-			<<%eContainer().getQualifiedName()%>_<%name%>>${item.properties["<%getRootContainer().name%>:<%eContainer().getQualifiedName()%>_<%name%>"]?string!""}</<%eContainer().getQualifiedName()%>_<%name%>>
+			<<%getQualifiedName()%>>${item.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?string!""}</<%getQualifiedName()%>>
 			<%}%>
 			</#if>
 		<#else/>
-			<<%eContainer().getQualifiedName()%>_<%name%>></<%eContainer().getQualifiedName()%>_<%name%>>
+			<<%getQualifiedName()%>></<%getQualifiedName()%>>
 		</#if>
 		<%}%>
 	</target>
