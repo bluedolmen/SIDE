@@ -1,0 +1,1309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.5323188884144263"
+             name="cm">
+      <classSet xmi:id="0.7275801302775032" documentation="" description="" name="cmobject"
+             title="Object"
+             aspects="//@aspectSet.0 ">
+         <generalizations xmi:id="0.8729645122695504" href="sys.dt#//@classSet.0"/>
+         <tags xmi:id="0.5482834335115012" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.8844832369927897" key="prefix" value="cm"/>
+         <attributes xmi:id="0.5123200195697553" name="name" title="Name" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.15252614709845003" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.5129091148460437" key="prefix" value="cm"/>
+         </attributes>
+      </classSet>
+      <classSet xmi:id="0.7633069628703171" documentation="" description="" name="folder"
+             title="Folder"
+             aspects=""
+             generalizations="//@classSet.0">
+         <tags xmi:id="0.06609127174860197" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.01765525996013695" key="prefix" value="cm"/>
+      </classSet>
+      <associationSet xmi:id="0.6434838295369185" name="contains" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.214696816018061" name="contains" title="" cardMax="-1"
+                linkedClass="//@classSet.1"/>
+         <secondEnd xmi:id="0.15490528444227059" name="contains" title="" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.17979802731041605" xsi:type="clazz:Clazz" href="sys.dt#//@classSet.0"/>
+         </secondEnd>
+      </associationSet>
+      <classSet xmi:id="0.9886847385671249" documentation="" description="" name="content"
+             title="Content"
+             aspects=""
+             generalizations="//@classSet.0">
+         <tags xmi:id="0.8668719336351752" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.8193257101917049" key="prefix" value="cm"/>
+         <attributes xmi:id="0.3038677798244712" name="content" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.09303353752336174" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.8888563079294541" key="prefix" value="cm"/>
+         </attributes>
+      </classSet>
+      <classSet xmi:id="0.4446070596756819" documentation="" description=""
+             name="dictionaryModel"
+             title="Dictionary Model"
+             aspects=""
+             generalizations="//@classSet.2">
+         <tags xmi:id="0.11480550714154492" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.6681248513324213" key="prefix" value="cm"/>
+         <attributes xmi:id="0.001767843551156334" name="modelName" title="Model name"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5331427687273799" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.15924693437267523" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.12279571948096812" name="modelDescription" title="Description"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.568080413062887" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.27593308082242696" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.9549925550964208" name="modelAuthor" title="Author"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5884972385030018" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.3943883271629598" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.6066970768691757" name="modelPublishedDate" title="Published Date"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.38695403345230606" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.8036682347455243" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.7748023613365571" name="modelVersion" title="Version"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.540416998972898" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.1154762409630935" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.9797001593422318" name="modelActive" title="Model Active"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.47495994063510505" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.24751752864414556" key="prefix" value="cm"/>
+         </attributes>
+      </classSet>
+      <classSet xmi:id="0.4514115093804637" documentation="" description="" name="link"
+             title="Link Object"
+             aspects=""
+             generalizations="//@classSet.0">
+         <tags xmi:id="0.5611214093735607" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.8107320225140462" key="prefix" value="cm"/>
+         <attributes xmi:id="0.4955462088464453" name="destination" title="Link Destination"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.6220485534278344" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.6139183270958442" key="prefix" value="cm"/>
+         </attributes>
+      </classSet>
+      <classSet xmi:id="0.7110620415919713" documentation="" description="" name="savedquery"
+             title="Saved Query"
+             aspects=""
+             generalizations="//@classSet.2">
+         <tags xmi:id="0.8021357251842369" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.6029757333260063" key="prefix" value="cm"/>
+      </classSet>
+      <classSet xmi:id="0.4284490340687528" documentation="" description="" name="systemfolder"
+             title="System Folder"
+             aspects=""
+             generalizations="//@classSet.1">
+         <tags xmi:id="0.6709727744234169" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.8861924068722088" key="prefix" value="cm"/>
+      </classSet>
+      <classSet xmi:id="0.7231843532346997" documentation="" description="" name="authority"
+             title="Alfresco Authority Abstract Type"
+             aspects="">
+         <generalizations xmi:id="0.8071956448473591" href="sys.dt#//@classSet.0"/>
+         <tags xmi:id="0.7986296172519288" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.7786699206459271" key="prefix" value="cm"/>
+      </classSet>
+      <classSet xmi:id="0.06419446537678142" documentation="" description="" name="person"
+             title="Person"
+             aspects=""
+             generalizations="//@classSet.7">
+         <tags xmi:id="0.4226391431448405" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.7394493132994368" key="prefix" value="cm"/>
+         <attributes xmi:id="0.2599505050990294" name="userName" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.26871229146357634" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.5768304990080672" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.12059538844637352" name="homeFolder" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.12777079206399533" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.750304883109106" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.6717705496102853" name="firstName" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.300802951769224" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.16779281199884677" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.4528041106153713" name="lastName" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.708500190886469" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.6333270738049309" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.5983353127671333" name="middleName" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.24662864384150074" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.17284160692349015" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.15391025337232422" name="email" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.19144417305805883" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.768939448650664" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.737020405053937" name="organizationId" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5910166259853814" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.23439489349909148" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.01552021596255504" name="homeFolderProvider" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.30893719485554416" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.8621815565860924" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.988884617142801" name="defaultHomeFolderPath" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.27450174993499554" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.09464657062297221" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.7681771081627347" name="presenceProvider" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.32958412302712736" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.05552456943647921" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.5046405862738316" name="presenceUsername" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.425795483116549" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.7993858050296484" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.5126618742458939" name="organization" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.9308225000647624" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.09040388109497388" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.4055962798320346" name="jobtitle" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.48540061733841233" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.6485959166119832" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.4110258418645536" name="location" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.09948722259067078" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.6892054920825464" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.3572834522550563" name="persondescription" title=""
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.8335561191571857" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.03103193921093672" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.7756668337991691" name="telephone" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.16212802459822317" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.8218168519641111" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.35131872049814894" name="mobile" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.951960671168705" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.12241916083725324" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.8015151542982432" name="companyaddress1" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.547047003849319" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.6003247473074985" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.8428254381616481" name="companyaddress2" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.24876343157878034" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.03467543979542764" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.8704817200379918" name="companyaddress3" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.9688035201063065" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.14267540554143654" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.016206012806903147" name="companypostcode" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5314171296303104" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.8619932219344312" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.08065224488500256" name="companytelephone" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.40425140482425126" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.4636456414381288" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.17779696869123995" name="companyfax" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7153248623697962" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.9609476604708669" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.049076914575068686" name="companyemail" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5448814975223901" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.8137202315765761" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.6634380985265375" name="skype" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.372817477510094" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.05512789816142727" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.16207060394602202" name="instantmsg" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7080679706390812" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.5897230186542947" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.8125962859066846" name="sizeCurrent" title="" visibility="Public"
+                  typ="long"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7437866167929014" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.4960942494568704" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.028240743016536896" name="sizeQuota" title="" visibility="Public"
+                  typ="long"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.36135929819778567" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.10346634485950312" key="prefix" value="cm"/>
+         </attributes>
+      </classSet>
+      <associationSet xmi:id="0.4056281690455753" name="avatar" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.6050593437455407" name="avatar" title="" cardMax="1"
+                linkedClass="//@classSet.8"/>
+         <secondEnd xmi:id="0.41459855020431047" name="avatar" title="" navigable="true"
+                 cardMax="1"
+                 linkedClass="//@classSet.2"/>
+      </associationSet>
+      <classSet xmi:id="0.5764146117151602" documentation="" description=""
+             name="authorityContainer"
+             title="Alfresco Authority Type"
+             aspects=""
+             generalizations="//@classSet.7">
+         <tags xmi:id="0.14769298906147754" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.9063091764213925" key="prefix" value="cm"/>
+         <attributes xmi:id="0.941146853695326" name="authorityName" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.11099749680092452" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.028692781447288485" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.8545333945770969" name="authorityDisplayName" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.3306979614902833" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.7402593317242746" key="prefix" value="cm"/>
+         </attributes>
+      </classSet>
+      <associationSet xmi:id="0.4972526905163578" name="member" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.2253760721502479" name="member" title="" cardMax="-1"
+                linkedClass="//@classSet.9"/>
+         <secondEnd xmi:id="0.05519499601085398" name="member" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.7"/>
+      </associationSet>
+      <classSet xmi:id="0.36958077410984735" documentation="" description="" name="zone"
+             title="Alfresco Authentication Zone Type"
+             aspects=""
+             generalizations="//@classSet.0">
+         <tags xmi:id="0.9403048143198052" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.4039105005601489" key="prefix" value="cm"/>
+      </classSet>
+      <associationSet xmi:id="0.9714475862841465" name="inZone" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.4387578219898468" name="inZone" title="" cardMax="-1"
+                linkedClass="//@classSet.10"/>
+         <secondEnd xmi:id="0.8114579382529679" name="inZone" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.7"/>
+      </associationSet>
+      <classSet xmi:id="0.6777575504932756" documentation="" description=""
+             name="category_root"
+             title="Category Root"
+             aspects="//@aspectSet.0 "
+             generalizations="//@classSet.0">
+         <tags xmi:id="0.16881669903917007" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.18973391455214517" key="prefix" value="cm"/>
+      </classSet>
+      <associationSet xmi:id="0.8241038656560972" name="categories" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.0526200077424237" name="categories" title="" cardMax="-1"
+                linkedClass="//@classSet.11"/>
+         <secondEnd xmi:id="0.05584553411595594" name="categories" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.12"/>
+      </associationSet>
+      <classSet xmi:id="0.7253177546368251" documentation="" description="" name="category"
+             title="Category"
+             aspects=""
+             generalizations="//@classSet.0">
+         <tags xmi:id="0.12237639557175184" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.04558582731460925" key="prefix" value="cm"/>
+      </classSet>
+      <associationSet xmi:id="0.20100361918911025" name="subcategories" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.7795722825023628" name="subcategories" title="" cardMax="-1"
+                linkedClass="//@classSet.12"/>
+         <secondEnd xmi:id="0.05499361313403628" name="subcategories" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.12"/>
+      </associationSet>
+      <classSet xmi:id="0.16252976568016808" documentation="" description="" name="mlRoot"
+             title="Multilingual Root"
+             aspects="">
+         <generalizations xmi:id="0.2952502480621161" href="sys.dt#//@classSet.2"/>
+         <tags xmi:id="0.13716076931548649" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.4201782951434019" key="prefix" value="cm"/>
+      </classSet>
+      <associationSet xmi:id="0.7981689070852009" name="mlContainer" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.4879129287363213" name="mlContainer" title="" cardMax="1"
+                linkedClass="//@classSet.13"/>
+         <secondEnd xmi:id="0.9367881568558772" name="mlContainer" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@classSet.14"/>
+      </associationSet>
+      <classSet xmi:id="0.8242647283123785" documentation="" description="" name="mlContainer"
+             title="Multilingual Container"
+             aspects="//@aspectSet.0  //@aspectSet.1  //@aspectSet.2 ">
+         <generalizations xmi:id="0.1108050887389821" href="sys.dt#//@classSet.2"/>
+         <tags xmi:id="0.2624150966866097" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.672977028772059" key="prefix" value="cm"/>
+      </classSet>
+      <associationSet xmi:id="0.10226472958006849" name="mlChild" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.01851278375477816" name="mlChild" title="" cardMax="1"
+                linkedClass="//@classSet.14"/>
+         <secondEnd xmi:id="0.9646765699061818" name="mlChild" title="" navigable="true"
+                 cardMax="-1"
+                 linkedClass="//@aspectSet.29"/>
+      </associationSet>
+      <classSet xmi:id="0.5707693888895439" documentation="" description="" name="thumbnail"
+             title="Thumbnail"
+             aspects=""
+             generalizations="//@classSet.2">
+         <tags xmi:id="0.5855798652866583" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.8395083303558374" key="prefix" value="cm"/>
+         <attributes xmi:id="0.07454921104831536" name="thumbnailName" title="Thumbnail Name"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.14954684948686758" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.37021050575151104" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.2566625804305205" name="contentPropertyName"
+                  title="Thumbnailed Content Property Name"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.31943976345150105" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.21501332925325123" key="prefix" value="cm"/>
+         </attributes>
+      </classSet>
+      <aspectSet xmi:id="0.6382264669908889" name="titled" title="Titled" description=""
+              documentation="">
+         <tags xmi:id="0.22459557014776776" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.7693100538466027" key="prefix" value="cm"/>
+         <attributes xmi:id="0.2224861205383578" name="title" title="Title" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5159286266474986" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.15751876453213798" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.12353468534292378" name="description" title="Description"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.9399925230465542" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.9140440450270901" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.23696641083853132" name="auditable" title="Auditable" description=""
+              documentation="">
+         <tags xmi:id="0.5026347612234462" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.6062711993965252" key="prefix" value="cm"/>
+         <attributes xmi:id="0.2884619781969364" name="created" title="Created" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.9607846682252945" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.19169566104893143" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.32662819882268157" name="creator" title="Creator" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.28443190717653566" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.11822330293234484" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.9473158113494742" name="modified" title="Modified"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.2787001691674609" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.7828086217433542" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.2207016221664132" name="modifier" title="Modifier"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.6762221113983359" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.41052799832001907" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.9538438171113891" name="accessed" title="Accessed"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.043796610172825434" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.5212276952337427" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.7049461236407986" name="transformable" title="Transformable"
+              description=""
+              documentation="">
+         <tags xmi:id="0.5421873201190975" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.34322798451487" key="prefix" value="cm"/>
+      </aspectSet>
+      <associationSet xmi:id="0.648995428138802" name="formats" title="Formats" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.7571441292255595" name="formats" title="Formats" cardMax="1"
+                linkedClass="//@aspectSet.2"/>
+         <secondEnd xmi:id="0.7561756424170066" name="formats" title="Formats" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.9960915431435999" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.2"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.32411076228284197" name="templatable" title="Templatable"
+              description=""
+              documentation="">
+         <tags xmi:id="0.3663590740891298" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.8151489753115384" key="prefix" value="cm"/>
+         <attributes xmi:id="0.7883182167834211" name="template" title="Template"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.17525624415229213" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.07800809719777768" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.4204523636848667" name="webscriptable" title="Webscriptable"
+              description=""
+              documentation="">
+         <tags xmi:id="0.8203135242260025" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.9118183870579034" key="prefix" value="cm"/>
+         <attributes xmi:id="0.1291727625693626" name="webscript" title="Webscript"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.15894065781771283" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.03495828103228815" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.1330481497811009" name="projectsummary" title="Project Summary"
+              description=""
+              documentation="">
+         <tags xmi:id="0.04819840061909575" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.12222061254511385" key="prefix" value="cm"/>
+         <attributes xmi:id="0.6856277759941944" name="summaryWebscript"
+                  title="Project Summary Webscript"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.2869336670080146" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.2382722529687724" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.830528300561471" name="complianceable" title="Complianceable"
+              description=""
+              documentation="">
+         <tags xmi:id="0.6566137707480703" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.28223410415853434" key="prefix" value="cm"/>
+         <attributes xmi:id="0.23519739645946347" name="removeAfter" title="Remove After"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.88705302944229" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.42430979312067674" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.7346621925093855" name="ownable" title="Ownable" description=""
+              documentation="">
+         <tags xmi:id="0.97117908373462" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.6566842829841323" key="prefix" value="cm"/>
+         <attributes xmi:id="0.10474672953793884" name="owner" title="Owner" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.33699188357054544" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.2992936089625088" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.6625707654854339" name="author" title="Author" description=""
+              documentation="">
+         <tags xmi:id="0.47154275064284623" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.3829068829219344" key="prefix" value="cm"/>
+         <attributes xmi:id="0.23740974177137786" name="author" title="Author" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.3245463134588592" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.04805760723318753" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.04569486789644572" name="dublincore" title="Dublin Core"
+              description=""
+              documentation="">
+         <generalizations xmi:id="0.8756855330735899" href="cm.dt#//@aspectSet.0"/>
+         <tags xmi:id="0.1253901137023159" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.37851812868395907" key="prefix" value="cm"/>
+         <attributes xmi:id="0.6154310500130262" name="publisher" title="Publisher"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.658364055179922" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.2840536046717401" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.3651086279075608" name="contributor" title="Contributor"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5320841420765533" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.7984435843008156" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.5393999889097617" name="type" title="Type" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.12149579274366551" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.7170163306605437" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.9128994803895712" name="identifier" title="Identifier"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7036668618785076" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.13798477353527172" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.40163862343683154" name="dcsource" title="Source" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5764859563557233" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.23177592115486656" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.6794797872997385" name="coverage" title="Coverage"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.37952130000773665" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.3837479782148764" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.1707781904385901" name="rights" title="Rights" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.2446484119249731" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.3670488863445739" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.28172519472687096" name="subject" title="Subject" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5031373489942785" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.6031662084960298" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.9477473548279648" name="basable" title="Basable" description=""
+              documentation="">
+         <tags xmi:id="0.38993092539681906" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.07821715196277867" key="prefix" value="cm"/>
+      </aspectSet>
+      <associationSet xmi:id="0.3976443165469774" name="basis" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.3967014918827365" name="basis" title="" cardMax="-1"
+                linkedClass="//@aspectSet.10"/>
+         <secondEnd xmi:id="0.25954109107084034" name="basis" title="" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.03825410853434996" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.2"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.5478191826902777" name="partable" title="Partable" description=""
+              documentation="">
+         <tags xmi:id="0.5340178645362957" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.5403293447561922" key="prefix" value="cm"/>
+      </aspectSet>
+      <associationSet xmi:id="0.8882592915430465" name="parts" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.7268107865150227" name="parts" title="" cardMax="-1"
+                linkedClass="//@aspectSet.11"/>
+         <secondEnd xmi:id="0.6400796653803287" name="parts" title="" navigable="true" cardMax="-1">
+            <linkedClass xmi:id="0.3217367438268147" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.2"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.13370852451972726" name="referencing" title="Referencing"
+              description=""
+              documentation="">
+         <tags xmi:id="0.9927312942850595" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.38037703804503986" key="prefix" value="cm"/>
+      </aspectSet>
+      <associationSet xmi:id="0.9935648036612704" name="references" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.715543328147898" name="references" title="" cardMax="-1"
+                linkedClass="//@aspectSet.12"/>
+         <secondEnd xmi:id="0.2536535472846545" name="references" title="" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.6339868687161405" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.2"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.33213369541302784" name="replaceable" title="Replacable"
+              description=""
+              documentation="">
+         <tags xmi:id="0.3089193346693042" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.6199248695951203" key="prefix" value="cm"/>
+      </aspectSet>
+      <associationSet xmi:id="0.09731455605424999" name="replaces" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.6593477051440004" name="replaces" title="" cardMax="-1"
+                linkedClass="//@aspectSet.13"/>
+         <secondEnd xmi:id="0.920303338102367" name="replaces" title="" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.8550383116928761" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.2"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.5434991325849611" name="effectivity" title="Effectivity"
+              description=""
+              documentation="">
+         <tags xmi:id="0.3449624326177043" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.11693356297446389" key="prefix" value="cm"/>
+         <attributes xmi:id="0.07475013979940937" name="from" title="Effective From"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.6579225585352981" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.6264492228870712" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.6533221162854596" name="to" title="Effective To" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5638586446482322" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.4415530011173695" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.706204570324723" name="summarizable" title="Summarizable"
+              description=""
+              documentation="">
+         <tags xmi:id="0.22139295313814766" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.08103660777466604" key="prefix" value="cm"/>
+         <attributes xmi:id="0.2763907017224302" name="summary" title="Summary" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.3524528221051306" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.5440119630077744" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.3043350185465604" name="countable" title="Countable" description=""
+              documentation="">
+         <tags xmi:id="0.8810746038649665" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.7780430573406844" key="prefix" value="cm"/>
+         <attributes xmi:id="0.056080742593548116" name="hits" title="" visibility="Public"
+                  typ="int"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.13345400693733733" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.5497461202395714" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.40044198262095865" name="counter" title="" visibility="Public"
+                  typ="int"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.9730290588503552" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.4096015462593827" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.26355677459735105" name="copiedfrom" title="Copied From"
+              description=""
+              documentation="">
+         <tags xmi:id="0.19657632958284543" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.633455246719932" key="prefix" value="cm"/>
+         <attributes xmi:id="0.23973882671338054" name="source" title="" visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.4917440459301845" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.7577801332150882" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.6208280256047944" name="workingcopy" title="Working Copy"
+              description=""
+              documentation="">
+         <tags xmi:id="0.5192364650346858" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.757990022495355" key="prefix" value="cm"/>
+         <attributes xmi:id="0.8229531144730492" name="workingCopyOwner" title=""
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.3185768160053555" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.43544293432376413" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.3378157476541024" name="workingCopyMode" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.022139093174718183" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.23356250031951886" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.7043929252122886" name="versionable" title="Versionable"
+              description=""
+              documentation="">
+         <tags xmi:id="0.7740537759979407" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.7980836106314368" key="prefix" value="cm"/>
+         <attributes xmi:id="0.6348336597477163" name="versionLabel" title="Version Label"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.04386030475812408" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.2499797745871336" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.9899324399023438" name="initialVersion" title="Initial Version"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7977381492289196" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.9181858963232241" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.24347415937268913" name="autoVersion" title="Auto Version"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.36108394788074827" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.4178735684304854" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.9037883960749687" name="autoVersionOnUpdateProps"
+                  title="Auto Version - on update properties only"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.30062268299962436" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.43230967382685337" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.5650243881545131" name="lockable" title="Lockable" description=""
+              documentation="">
+         <tags xmi:id="0.11899173702475385" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.21345455090393184" key="prefix" value="cm"/>
+         <attributes xmi:id="0.34160939088467546" name="lockOwner" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.8841473487395273" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.03778002543869674" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.3640559368549323" name="lockType" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.09386791985248266" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.6186311989018947" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.6643167406293417" name="expiryDate" title="" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5060850412074203" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.4862333329921059" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.4304703402556772" name="lockIsDeep" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.48354240969169215" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.7947547077185787" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.19923695463198987" name="subscribable" title="" description=""
+              documentation="">
+         <tags xmi:id="0.9226568239549295" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.8228905842810161" key="prefix" value="cm"/>
+      </aspectSet>
+      <associationSet xmi:id="0.44763724173126485" name="subscribedBy" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.029027640468269666" name="subscribedBy" title="" cardMax="-1"
+                linkedClass="//@aspectSet.21"/>
+         <secondEnd xmi:id="0.2310081481644536" name="subscribedBy" title="" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.2611393227293083" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.8"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.021185092955681384" name="classifiable" title="Classifiable"
+              description=""
+              documentation="">
+         <tags xmi:id="0.0026941722395718015" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.04581328778448979" key="prefix" value="cm"/>
+      </aspectSet>
+      <aspectSet xmi:id="0.5026413139124143" name="generalclassifiable"
+              title="General Classifiable"
+              description=""
+              documentation="">
+         <generalizations xmi:id="0.9216505694026165" href="cm.dt#//@aspectSet.22"/>
+         <tags xmi:id="0.16650116271662851" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.9480931025786009" key="prefix" value="cm"/>
+         <attributes xmi:id="0.6986528025080058" name="categories" title="Categories"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.43412603650098003" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.16596553830020477" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.0009352066982146745" name="taggable" title="Taggable" description=""
+              documentation="">
+         <generalizations xmi:id="0.5422077408818697" href="cm.dt#//@aspectSet.22"/>
+         <tags xmi:id="0.24971625631414596" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.3470521996405177" key="prefix" value="cm"/>
+         <attributes xmi:id="0.12327748195729671" name="taggable" title="Tags" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5889603972073602" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.19839209119944368" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.9993687800724829" name="tagscope" title="Tag Scope" description=""
+              documentation="">
+         <tags xmi:id="0.8916788877026686" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.16364584517093728" key="prefix" value="cm"/>
+         <attributes xmi:id="0.6538654711801168" name="tagScopeCache" title="Tags"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5350914958792209" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.06502967594159048" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.9002847186523308" name="attachable" title="Attachable" description=""
+              documentation="">
+         <tags xmi:id="0.8668632250453876" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.8514551233119568" key="prefix" value="cm"/>
+      </aspectSet>
+      <associationSet xmi:id="0.3078174390746946" name="attachments" title="" description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.4339851578992636" name="attachments" title="" cardMax="-1"
+                linkedClass="//@aspectSet.26"/>
+         <secondEnd xmi:id="0.3044674512788169" name="attachments" title="" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.8599919032447767" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.0"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.29947985408112876" name="emailed" title="Emailed" description=""
+              documentation="">
+         <tags xmi:id="0.013170852932251065" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.9257282051988615" key="prefix" value="cm"/>
+         <attributes xmi:id="0.18230593517075466" name="originator" title="Originator"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.6605382598139863" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.833291591377327" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.2075444860965623" name="addressee" title="Addressee"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.3100208266087793" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.9006210699025775" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.7065484782793184" name="addressees" title="Addressees"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.6498473970287838" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.10564017417855698" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.8991494576881226" name="subjectline" title="Subject"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.2768928161138241" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.43540933101507273" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.3814119745450836" name="sentdate" title="Sent Date"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.2663722848384066" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.36553462012265525" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.8971415493144906" name="referencesnode" title="References Node"
+              description=""
+              documentation="">
+         <tags xmi:id="0.4348894163426378" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.3006009744462218" key="prefix" value="cm"/>
+         <attributes xmi:id="0.1894224369313906" name="noderef" title="Node Reference"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.45453182520220625" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.8427324778236137" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.15690930852167462" name="mlDocument" title="Multilingual Document"
+              description=""
+              documentation="">
+         <tags xmi:id="0.13363348359878502" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.7209127530324598" key="prefix" value="cm"/>
+      </aspectSet>
+      <aspectSet xmi:id="0.5183960678394022" name="mlEmptyTranslation" title="Empty Translation"
+              description=""
+              documentation="">
+         <tags xmi:id="0.27322703496768375" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.47833938798239994" key="prefix" value="cm"/>
+      </aspectSet>
+      <aspectSet xmi:id="0.5545406571263017" name="thumbnailed" title="Thumbnailed"
+              description=""
+              documentation="">
+         <tags xmi:id="0.024701636290861972" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.061670251724187386" key="prefix" value="cm"/>
+         <attributes xmi:id="0.981989241280532" name="automaticUpdate" title="Automatic Update"
+                  visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.929003615868657" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.39889171959964687" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <associationSet xmi:id="0.3661159447913366" name="thumbnails" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.5045785231470437" name="thumbnails" title="" cardMax="-1"
+                linkedClass="//@aspectSet.31"/>
+         <secondEnd xmi:id="0.6322667165779909" name="thumbnails" title="" navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.2956175136944721" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.15"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.2114413468826366" name="storeSelector" title="ContentStore Selector"
+              description=""
+              documentation="">
+         <tags xmi:id="0.9183486410882815" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.968701294368681" key="prefix" value="cm"/>
+         <attributes xmi:id="0.08241132131519935" name="storeName" title="Store Name"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.9255137410327484" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.39798896316646926" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.8347341926865643" name="preferences" title="Preferences"
+              description=""
+              documentation="">
+         <tags xmi:id="0.632547931560136" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.8019297399406734" key="prefix" value="cm"/>
+         <attributes xmi:id="0.8083890960787727" name="preferenceValues" title=""
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7662921948981563" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.9517996309802624" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+      <associationSet xmi:id="0.08966751996934363" name="preferenceImage" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.3152162281472436" name="preferenceImage" title="" cardMax="1"
+                linkedClass="//@aspectSet.33"/>
+         <secondEnd xmi:id="0.8150055215386274" name="preferenceImage" title="" navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.4484415824892979" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.2"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.24522923511139239" name="syndication" title="Content syndication"
+              description=""
+              documentation="">
+         <tags xmi:id="0.5320688156015566" key="reversedURI"
+            value="http://www.alfresco.org/model/content/1.0"/>
+         <tags xmi:id="0.40017385866568034" key="prefix" value="cm"/>
+         <attributes xmi:id="0.6099662656956307" name="published" title="Published"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.06351525177488881" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.4876843070079855" key="prefix" value="cm"/>
+         </attributes>
+         <attributes xmi:id="0.6047868271738698" name="updated" title="Updated" visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.08531600025040997" key="reversedURI"
+               value="http://www.alfresco.org/model/content/1.0"/>
+            <tags xmi:id="0.5155854994306345" key="prefix" value="cm"/>
+         </attributes>
+      </aspectSet>
+   </clazz:Model>

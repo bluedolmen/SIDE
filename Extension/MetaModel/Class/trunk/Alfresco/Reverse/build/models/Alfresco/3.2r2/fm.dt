@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.5695680428292861"
+             name="fm">
+      <classSet xmi:id="0.6604967690189439" documentation="" description="" name="forums"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.6866440574294697" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.051530198024704155" key="reversedURI"
+            value="http://www.alfresco.org/model/forum/1.0"/>
+         <tags xmi:id="0.371130118804773" key="prefix" value="fm"/>
+      </classSet>
+      <classSet xmi:id="0.8659841285267174" documentation="" description="" name="forum"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.8586443793422232" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.36252487901927555" key="reversedURI"
+            value="http://www.alfresco.org/model/forum/1.0"/>
+         <tags xmi:id="0.1307131363914883" key="prefix" value="fm"/>
+      </classSet>
+      <classSet xmi:id="0.4601843751919713" documentation="" description="" name="topic"
+             title=""
+             aspects="">
+         <generalizations xmi:id="0.5366568152087898" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.507157551659914" key="reversedURI"
+            value="http://www.alfresco.org/model/forum/1.0"/>
+         <tags xmi:id="0.19149049813474506" key="prefix" value="fm"/>
+      </classSet>
+      <classSet xmi:id="0.72347981324613" documentation="" description="" name="post" title=""
+             aspects="">
+         <generalizations xmi:id="0.6077640391464505" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.18538440177304394" key="reversedURI"
+            value="http://www.alfresco.org/model/forum/1.0"/>
+         <tags xmi:id="0.7483340545595144" key="prefix" value="fm"/>
+      </classSet>
+      <aspectSet xmi:id="0.18737486122361158" name="discussable" title="" description=""
+              documentation="">
+         <tags xmi:id="0.033378190148618314" key="reversedURI"
+            value="http://www.alfresco.org/model/forum/1.0"/>
+         <tags xmi:id="0.7536287331847127" key="prefix" value="fm"/>
+      </aspectSet>
+      <associationSet xmi:id="0.1588791940374915" name="discussion" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmi:id="0.3101900608844176" name="discussion" title="" cardMax="1"
+                linkedClass="//@aspectSet.0"/>
+         <secondEnd xmi:id="0.761300481017066" name="discussion" title="" navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.5510493493060029" xsi:type="clazz:Clazz" href="fm.dt#//@classSet.1"/>
+         </secondEnd>
+      </associationSet>
+   </clazz:Model>

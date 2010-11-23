@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.6358468515992753"
+             name="imap">
+      <classSet xmi:id="0.20281344646737698" documentation="" description="" name="imapFolder"
+             title="IMAP Folder"
+             aspects="">
+         <generalizations xmi:id="0.040781614550486345" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.22302477997365877" key="reversedURI"
+            value="http://www.alfresco.org/model/imap/1.0"/>
+         <tags xmi:id="0.5206042262787868" key="prefix" value="imap"/>
+         <attributes xmi:id="0.35571182298558024" name="nonSubscribed" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.09495922320551864" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.45448233983521535" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.7920477229461721" name="selectable" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.49906825471788185" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.5747751511824201" key="prefix" value="imap"/>
+         </attributes>
+      </classSet>
+      <classSet xmi:id="0.3469885474550721" documentation="" description="" name="imapAttach"
+             title="Attachment to the IMAP message"
+             aspects="">
+         <generalizations xmi:id="0.2002424021579633" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.4398263376363466" key="reversedURI"
+            value="http://www.alfresco.org/model/imap/1.0"/>
+         <tags xmi:id="0.4694520178530739" key="prefix" value="imap"/>
+         <attributes xmi:id="0.5260574717526159" name="attachID" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.43085487645098974" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.9625858026753121" key="prefix" value="imap"/>
+         </attributes>
+      </classSet>
+      <classSet xmi:id="0.18083463200452565" documentation="" description="" name="imapBody"
+             title="Body of the IMAP message"
+             aspects="">
+         <generalizations xmi:id="0.9489225280869916" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.004267214724066437" key="reversedURI"
+            value="http://www.alfresco.org/model/imap/1.0"/>
+         <tags xmi:id="0.6557081771328007" key="prefix" value="imap"/>
+      </classSet>
+      <aspectSet xmi:id="0.28237925565607036" name="imapContent" title="IMAP File"
+              description=""
+              documentation="">
+         <generalizations xmi:id="0.2980558504323425" href="imap.dt#//@aspectSet.1"/>
+         <tags xmi:id="0.19236143515588766" key="reversedURI"
+            value="http://www.alfresco.org/model/imap/1.0"/>
+         <tags xmi:id="0.8296550528552309" key="prefix" value="imap"/>
+         <attributes xmi:id="0.07829927027474037" name="messageFrom" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7920090193514423" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.09631583806297872" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.531495970569534" name="messageTo" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.4543530533415515" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.22268733309580402" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.17035552969058676" name="messageCc" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.027686420467485595" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.668986281310494" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.03695962354325355" name="messageSubject" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.8992515360704529" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.026631259792956774" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.6720172258155418" name="messageId" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.3205441129171194" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.04146415933666259" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.3432120530074616" name="threadIndex" title="" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.2577804548608721" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.6133998439597437" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.8351778048512888" name="dateReceived" title="Date Received"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.6693716975659527" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.8606206763970639" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.5883929295674323" name="dateSent" title="Date Sent"
+                  visibility="Public"
+                  typ="Date"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.831076540265791" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.6080133921038375" key="prefix" value="imap"/>
+         </attributes>
+      </aspectSet>
+      <associationSet xmi:id="0.08285520691444381" name="attachment" title="Attachment"
+                   description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.7587951418693264" name="attachment" title="Attachment" cardMax="1"
+                linkedClass="//@aspectSet.0"/>
+         <secondEnd xmi:id="0.5635602298834631" name="attachment" title="Attachment"
+                 navigable="true"
+                 cardMax="-1">
+            <linkedClass xmi:id="0.15188474091170645" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.0"/>
+         </secondEnd>
+      </associationSet>
+      <associationSet xmi:id="0.10880005682287697" name="attachmentsFolder"
+                   title="Attachments Folder"
+                   description=""
+                   associationType="Direct">
+         <firstEnd xmi:id="0.5452117285464175" name="attachmentsFolder" title="Attachments Folder"
+                cardMax="1"
+                linkedClass="//@aspectSet.0"/>
+         <secondEnd xmi:id="0.10120376586901503" name="attachmentsFolder"
+                 title="Attachments Folder"
+                 navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.3447826567410538" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.0"/>
+         </secondEnd>
+      </associationSet>
+      <aspectSet xmi:id="0.0031810762490864786" name="flaggable" title="" description=""
+              documentation="">
+         <tags xmi:id="0.22882486706586425" key="reversedURI"
+            value="http://www.alfresco.org/model/imap/1.0"/>
+         <tags xmi:id="0.6276127133635759" key="prefix" value="imap"/>
+         <attributes xmi:id="0.9493281453414342" name="flagAnswered" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5182283123924207" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.5453772063221918" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.595430534935782" name="flagDeleted" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.563724041333811" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.44097824570303656" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.9331101358141825" name="flagDraft" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.669104060323004" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.77932368860533" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.7007851054989748" name="flagSeen" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.7379096373226514" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.6261155863353057" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.6515012603212292" name="flagRecent" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.42676903112175457" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.00020201683950282767" key="prefix" value="imap"/>
+         </attributes>
+         <attributes xmi:id="0.6217411542480283" name="flagFlagged" title="" visibility="Public"
+                  typ="boolean"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.9682300049883651" key="reversedURI"
+               value="http://www.alfresco.org/model/imap/1.0"/>
+            <tags xmi:id="0.8959054721461989" key="prefix" value="imap"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.8006809504128731" name="nonSubscribed" title="" description=""
+              documentation="">
+         <tags xmi:id="0.7389967673223548" key="reversedURI"
+            value="http://www.alfresco.org/model/imap/1.0"/>
+         <tags xmi:id="0.5439373892201786" key="prefix" value="imap"/>
+      </aspectSet>
+      <aspectSet xmi:id="0.8446867167941592" name="nonselectable" title="" description=""
+              documentation="">
+         <tags xmi:id="0.5257360619133093" key="reversedURI"
+            value="http://www.alfresco.org/model/imap/1.0"/>
+         <tags xmi:id="0.5432850460694562" key="prefix" value="imap"/>
+      </aspectSet>
+   </clazz:Model>

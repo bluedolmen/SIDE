@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.8969954013201823"
+             name="st">
+      <classSet xmi:id="0.9537806184233306" documentation="" description="" name="site"
+             title="Site"
+             aspects="//@aspectSet.0 ">
+         <generalizations xmi:id="0.036802329164862035" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.3812267867325283" key="reversedURI"
+            value="http://www.alfresco.org/model/site/1.0"/>
+         <tags xmi:id="0.5846880121570138" key="prefix" value="st"/>
+         <attributes xmi:id="0.698403067540804" name="sitePreset" title="Site Preset"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.3230382103760854" key="reversedURI"
+               value="http://www.alfresco.org/model/site/1.0"/>
+            <tags xmi:id="0.9416907683060235" key="prefix" value="st"/>
+         </attributes>
+         <attributes xmi:id="0.36267105903554164" name="siteVisibility" title="Site Visibility"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.1915259611353003" key="reversedURI"
+               value="http://www.alfresco.org/model/site/1.0"/>
+            <tags xmi:id="0.2019411166533559" key="prefix" value="st"/>
+         </attributes>
+      </classSet>
+      <classSet xmi:id="0.8407270651494654" documentation="" description="" name="sites"
+             title="Sites"
+             aspects="">
+         <generalizations xmi:id="0.18535133042046614" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.144795443307844" key="reversedURI"
+            value="http://www.alfresco.org/model/site/1.0"/>
+         <tags xmi:id="0.7633757959430496" key="prefix" value="st"/>
+      </classSet>
+      <aspectSet xmi:id="0.0930014829407323" name="siteContainer" title="Site Container"
+              description=""
+              documentation="">
+         <tags xmi:id="0.4898072669373318" key="reversedURI"
+            value="http://www.alfresco.org/model/site/1.0"/>
+         <tags xmi:id="0.37671355336281254" key="prefix" value="st"/>
+         <attributes xmi:id="0.5147245296294243" name="componentId" title="Component Id"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.278213913771831" key="reversedURI"
+               value="http://www.alfresco.org/model/site/1.0"/>
+            <tags xmi:id="0.0192277173385742" key="prefix" value="st"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmi:id="0.9648404347308087" name="customSiteProperties"
+              title="Custom Site Properties"
+              description=""
+              documentation="">
+         <tags xmi:id="0.18714129817152225" key="reversedURI"
+            value="http://www.alfresco.org/model/site/1.0"/>
+         <tags xmi:id="0.8959834788915481" key="prefix" value="st"/>
+         <attributes xmi:id="0.7792864938838514" name="additionalInformation"
+                  title="Additional Site Information"
+                  visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.6711679070542493" key="reversedURI"
+               value="http://www.alfresco.org/model/sitecustomproperty/1.0"/>
+            <tags xmi:id="0.543653164991927" key="prefix" value="stcp"/>
+         </attributes>
+      </aspectSet>
+   </clazz:Model>

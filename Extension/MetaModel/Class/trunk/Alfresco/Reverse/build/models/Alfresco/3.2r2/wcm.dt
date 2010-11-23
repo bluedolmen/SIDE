@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:version="2.0"
+             xmi:id="0.3862973358962557"
+             name="wcm">
+      <classSet xmi:id="0.0026738243649632176" documentation="" description=""
+             name="avmcontent"
+             title="AVM Content"
+             aspects="">
+         <generalizations xmi:id="0.7438635773332612" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.9034385632482841" key="reversedURI"
+            value="http://www.alfresco.org/model/wcmmodel/1.0"/>
+         <tags xmi:id="0.4409511878496404" key="prefix" value="wcm"/>
+      </classSet>
+      <classSet xmi:id="0.5925616263156827" documentation="" description=""
+             name="avmplaincontent"
+             title="AVM Plain content"
+             aspects=""
+             generalizations="//@classSet.0">
+         <tags xmi:id="0.005827617214343883" key="reversedURI"
+            value="http://www.alfresco.org/model/wcmmodel/1.0"/>
+         <tags xmi:id="0.4055303443388546" key="prefix" value="wcm"/>
+      </classSet>
+      <classSet xmi:id="0.23021669910536002" documentation="" description=""
+             name="avmlayeredcontent"
+             title="AVM Layered Content"
+             aspects="">
+         <generalizations xmi:id="0.7015927460600558" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.9755250022423023" key="reversedURI"
+            value="http://www.alfresco.org/model/wcmmodel/1.0"/>
+         <tags xmi:id="0.4626644335604926" key="prefix" value="wcm"/>
+         <attributes xmi:id="0.8749193584295353" name="avmfileindirection"
+                  title="File Layer Indirection"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.9299360183831" key="reversedURI"
+               value="http://www.alfresco.org/model/wcmmodel/1.0"/>
+            <tags xmi:id="0.8511171579645015" key="prefix" value="wcm"/>
+         </attributes>
+      </classSet>
+      <classSet xmi:id="0.2079546666636053" documentation="" description="" name="avmfolder"
+             title="AVM Folder"
+             aspects="">
+         <generalizations xmi:id="0.796450531578304" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.9230311185721005" key="reversedURI"
+            value="http://www.alfresco.org/model/wcmmodel/1.0"/>
+         <tags xmi:id="0.3740749710923126" key="prefix" value="wcm"/>
+      </classSet>
+      <classSet xmi:id="0.8249819406199225" documentation="" description=""
+             name="avmplainfolder"
+             title="AVM Plain Folder"
+             aspects=""
+             generalizations="//@classSet.3">
+         <tags xmi:id="0.6512103464296607" key="reversedURI"
+            value="http://www.alfresco.org/model/wcmmodel/1.0"/>
+         <tags xmi:id="0.3491195881433289" key="prefix" value="wcm"/>
+      </classSet>
+      <classSet xmi:id="0.13675657438057154" documentation="" description=""
+             name="avmlayeredfolder"
+             title="AVM Layered Folder"
+             aspects=""
+             generalizations="//@classSet.3">
+         <tags xmi:id="0.930339765838902" key="reversedURI"
+            value="http://www.alfresco.org/model/wcmmodel/1.0"/>
+         <tags xmi:id="0.0018676827714636524" key="prefix" value="wcm"/>
+         <attributes xmi:id="0.4950399476615438" name="avmdirindirection"
+                  title="Directory Layer Indirection"
+                  visibility="Public"
+                  typ="Object"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5640737817818197" key="reversedURI"
+               value="http://www.alfresco.org/model/wcmmodel/1.0"/>
+            <tags xmi:id="0.40197381511295815" key="prefix" value="wcm"/>
+         </attributes>
+      </classSet>
+      <aspectSet xmi:id="0.029911793531336217" name="reverted"
+              title="Contains a reference to the node that this node was reverted from."
+              description=""
+              documentation="">
+         <tags xmi:id="0.9031692507779785" key="reversedURI"
+            value="http://www.alfresco.org/model/wcmmodel/1.0"/>
+         <tags xmi:id="0.5499902702404587" key="prefix" value="wcm"/>
+         <attributes xmi:id="0.33449855854492416" name="revertedid"
+                  title="The id of the node this was reverted from."
+                  visibility="Public"
+                  typ="long"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.6418200927788158" key="reversedURI"
+               value="http://www.alfresco.org/model/wcmmodel/1.0"/>
+            <tags xmi:id="0.996806880115396" key="prefix" value="wcm"/>
+         </attributes>
+      </aspectSet>
+   </clazz:Model>
