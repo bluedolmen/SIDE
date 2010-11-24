@@ -24,7 +24,7 @@ import org.topcased.draw2d.figures.ComposedLabel;
 import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.draw2d.figures.Label;
 
-import com.bluexml.side.Workflow.modeler.diagram.figures.colorScaler.GreyScale;
+import com.bluexml.side.Workflow.modeler.diagram.figures.colorScaler.YellowScaler;
 
 /**
  * @generated
@@ -59,7 +59,7 @@ public class TaskNodeFigure extends org.topcased.draw2d.figures.ClassFigure {
 	@Override
 	protected void paintFigure(Graphics graphics) {
 		super.paintFigure(graphics);
-		ColorScaleUtil.paintFigure(graphics, this, new GreyScale());
+		ColorScaleUtil.paintFigure(graphics, this, new YellowScaler());
 	}
 
 }

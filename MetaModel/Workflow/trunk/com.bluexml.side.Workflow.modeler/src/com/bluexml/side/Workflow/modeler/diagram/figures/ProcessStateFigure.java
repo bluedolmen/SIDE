@@ -24,6 +24,8 @@ import org.topcased.draw2d.figures.ComposedLabel;
 import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.draw2d.figures.Label;
 
+import com.bluexml.side.Workflow.modeler.diagram.figures.colorScaler.TurquoiseScaler;
+import com.bluexml.side.Workflow.modeler.diagram.figures.colorScaler.PurpleScaler;
 import com.bluexml.side.Workflow.modeler.diagram.figures.colorScaler.GreyScale;
 
 /**
@@ -59,7 +61,7 @@ public class ProcessStateFigure extends org.topcased.draw2d.figures.ClassFigure 
 	@Override
 	protected void paintFigure(Graphics graphics) {
 		super.paintFigure(graphics);
-		ColorScaleUtil.paintFigure(graphics, this, new GreyScale());
+		ColorScaleUtil.paintFigure(graphics, this, new PurpleScaler());
 	}
 
 }
