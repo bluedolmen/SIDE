@@ -6,27 +6,27 @@
              xmlns:xmi="http://www.omg.org/XMI"
              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
              xmi:version="2.0"
-             xmi:id="0.21919944021215299"
+             xmi:id="0.3962549352519571"
              name="emailserver">
-      <aspectSet xmi:id="0.3930053769949585" name="emailed" title="Emailed" description=""
+      <aspectSet xmi:id="0.8737548521926886" name="emailed" title="Emailed" description=""
               documentation="">
-         <generalizations xmi:id="0.4228854204772079" href="cm.dt#//@aspectSet.27"/>
-         <tags xmi:id="0.20327576238774436" key="reversedURI"
+         <tags xmi:id="0.7576718314774339" key="reversedURI"
             value="http://www.alfresco.org/model/emailserver/1.0"/>
-         <tags xmi:id="0.5498368352070284" key="prefix" value="emailserver"/>
+         <tags xmi:id="0.23286956519306334" key="prefix" value="emailserver"/>
       </aspectSet>
-      <aspectSet xmi:id="0.8126743502134209" name="aliasable" title="Email Alias" description=""
+      <aspectSet xmi:id="0.12308188167455214" name="aliasable" title="Email Alias"
+              description=""
               documentation="">
-         <tags xmi:id="0.2139465387692847" key="reversedURI"
+         <tags xmi:id="0.22008081161546644" key="reversedURI"
             value="http://www.alfresco.org/model/emailserver/1.0"/>
-         <tags xmi:id="0.2776139931025845" key="prefix" value="emailserver"/>
-         <attributes xmi:id="0.8870370507062679" name="alias" title="Alias" visibility="Public"
+         <tags xmi:id="0.7154876835598272" key="prefix" value="emailserver"/>
+         <attributes xmi:id="0.08224689912457428" name="alias" title="Alias" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.4329443121520612" key="reversedURI"
+            <tags xmi:id="0.16169799580943123" key="reversedURI"
                value="http://www.alfresco.org/model/emailserver/1.0"/>
-            <tags xmi:id="0.5790434501968563" key="prefix" value="emailserver"/>
+            <tags xmi:id="0.6932142677216409" key="prefix" value="emailserver"/>
          </attributes>
       </aspectSet>
    </clazz:Model>

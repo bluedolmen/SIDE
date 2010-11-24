@@ -6,74 +6,74 @@
              xmlns:xmi="http://www.omg.org/XMI"
              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
              xmi:version="2.0"
-             xmi:id="0.8969954013201823"
+             xmi:id="0.9661641166630459"
              name="st">
-      <classSet xmi:id="0.9537806184233306" documentation="" description="" name="site"
+      <classSet xmi:id="0.1877221575533662" documentation="" description="" name="site"
              title="Site"
              aspects="//@aspectSet.0 ">
-         <generalizations xmi:id="0.036802329164862035" href="cm.dt#//@classSet.1"/>
-         <tags xmi:id="0.3812267867325283" key="reversedURI"
+         <generalizations xmi:id="0.9567533826186556" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.6190779968942608" key="reversedURI"
             value="http://www.alfresco.org/model/site/1.0"/>
-         <tags xmi:id="0.5846880121570138" key="prefix" value="st"/>
-         <attributes xmi:id="0.698403067540804" name="sitePreset" title="Site Preset"
+         <tags xmi:id="0.028464658168722345" key="prefix" value="st"/>
+         <attributes xmi:id="0.8879126185235231" name="sitePreset" title="Site Preset"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.3230382103760854" key="reversedURI"
+            <tags xmi:id="0.1379497584928222" key="reversedURI"
                value="http://www.alfresco.org/model/site/1.0"/>
-            <tags xmi:id="0.9416907683060235" key="prefix" value="st"/>
+            <tags xmi:id="0.7234125312664825" key="prefix" value="st"/>
          </attributes>
-         <attributes xmi:id="0.36267105903554164" name="siteVisibility" title="Site Visibility"
+         <attributes xmi:id="0.32727481558454974" name="siteVisibility" title="Site Visibility"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.1915259611353003" key="reversedURI"
+            <tags xmi:id="0.8001852880192234" key="reversedURI"
                value="http://www.alfresco.org/model/site/1.0"/>
-            <tags xmi:id="0.2019411166533559" key="prefix" value="st"/>
+            <tags xmi:id="0.08299062384752087" key="prefix" value="st"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.8407270651494654" documentation="" description="" name="sites"
+      <classSet xmi:id="0.7524210991020983" documentation="" description="" name="sites"
              title="Sites"
              aspects="">
-         <generalizations xmi:id="0.18535133042046614" href="cm.dt#//@classSet.1"/>
-         <tags xmi:id="0.144795443307844" key="reversedURI"
+         <generalizations xmi:id="0.7154653534563651" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.15651163599310602" key="reversedURI"
             value="http://www.alfresco.org/model/site/1.0"/>
-         <tags xmi:id="0.7633757959430496" key="prefix" value="st"/>
+         <tags xmi:id="0.39534509028589615" key="prefix" value="st"/>
       </classSet>
-      <aspectSet xmi:id="0.0930014829407323" name="siteContainer" title="Site Container"
+      <aspectSet xmi:id="0.2270860710626612" name="siteContainer" title="Site Container"
               description=""
               documentation="">
-         <tags xmi:id="0.4898072669373318" key="reversedURI"
+         <tags xmi:id="0.6657269870574412" key="reversedURI"
             value="http://www.alfresco.org/model/site/1.0"/>
-         <tags xmi:id="0.37671355336281254" key="prefix" value="st"/>
-         <attributes xmi:id="0.5147245296294243" name="componentId" title="Component Id"
+         <tags xmi:id="0.25717945821800026" key="prefix" value="st"/>
+         <attributes xmi:id="0.7861262619745208" name="componentId" title="Component Id"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.278213913771831" key="reversedURI"
+            <tags xmi:id="0.2565164471748105" key="reversedURI"
                value="http://www.alfresco.org/model/site/1.0"/>
-            <tags xmi:id="0.0192277173385742" key="prefix" value="st"/>
+            <tags xmi:id="0.2718429648142313" key="prefix" value="st"/>
          </attributes>
       </aspectSet>
-      <aspectSet xmi:id="0.9648404347308087" name="customSiteProperties"
+      <aspectSet xmi:id="0.29974229178692524" name="customSiteProperties"
               title="Custom Site Properties"
               description=""
               documentation="">
-         <tags xmi:id="0.18714129817152225" key="reversedURI"
+         <tags xmi:id="0.16227655085282133" key="reversedURI"
             value="http://www.alfresco.org/model/site/1.0"/>
-         <tags xmi:id="0.8959834788915481" key="prefix" value="st"/>
-         <attributes xmi:id="0.7792864938838514" name="additionalInformation"
+         <tags xmi:id="0.9890617113216543" key="prefix" value="st"/>
+         <attributes xmi:id="0.4045991163857796" name="additionalInformation"
                   title="Additional Site Information"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.6711679070542493" key="reversedURI"
+            <tags xmi:id="0.316471489775457" key="reversedURI"
                value="http://www.alfresco.org/model/sitecustomproperty/1.0"/>
-            <tags xmi:id="0.543653164991927" key="prefix" value="stcp"/>
+            <tags xmi:id="0.8736168042258069" key="prefix" value="stcp"/>
          </attributes>
       </aspectSet>
    </clazz:Model>

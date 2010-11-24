@@ -6,844 +6,840 @@
              xmlns:xmi="http://www.omg.org/XMI"
              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
              xmi:version="2.0"
-             xmi:id="0.00858406304204884"
+             xmi:id="0.5949236899595655"
              name="wca">
-      <enumerationSet xmi:id="554550.7567479818" name="deploytypes">
-         <literals xmi:id="836539.9747103656" name="alfresco"/>
-         <literals xmi:id="409162.4970695529" name="file"/>
+      <enumerationSet xmi:id="372041.8880299945" name="deploytypes">
+         <literals xmi:id="834588.7686836852" name="alfresco"/>
+         <literals xmi:id="381995.5211558299" name="file"/>
       </enumerationSet>
-      <enumerationSet xmi:id="835959.1537257157" name="deployservertypes">
-         <literals xmi:id="72339.00271642301" name="live"/>
-         <literals xmi:id="668602.8098155739" name="test"/>
+      <enumerationSet xmi:id="733052.0466201155" name="deployservertypes">
+         <literals xmi:id="15194.556963742834" name="live"/>
+         <literals xmi:id="691037.5131486325" name="test"/>
       </enumerationSet>
-      <classSet xmi:id="0.8144804011782495" documentation="" description="" name="webfolder"
+      <classSet xmi:id="0.8893199690152064" documentation="" description="" name="webfolder"
              title="WCM Web Project Folder"
              aspects="">
-         <generalizations xmi:id="0.7339747379877093" href="wcm.dt#//@classSet.3"/>
-         <tags xmi:id="0.6105230028345382" key="reversedURI"
+         <generalizations xmi:id="0.7847860422633566" href="wcm.dt#//@classSet.3"/>
+         <tags xmi:id="0.027636756445969746" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.6088497502657859" key="prefix" value="wca"/>
-         <attributes xmi:id="0.5671868775552236" name="avmstore" title="AVM Store Root"
+         <tags xmi:id="0.24524210737302077" key="prefix" value="wca"/>
+         <attributes xmi:id="0.12423862031430177" name="avmstore" title="AVM Store Root"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.48028775256095857" key="reversedURI"
+            <tags xmi:id="0.7394688855353893" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.8330569794371128" key="prefix" value="wca"/>
+            <tags xmi:id="0.9661094697765389" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.924045028044596" name="defaultwebapp" title="Default Webapp"
+         <attributes xmi:id="0.5375729499399228" name="defaultwebapp" title="Default Webapp"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.3364002624878848" key="reversedURI"
+            <tags xmi:id="0.4578799709979805" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.6929513211233883" key="prefix" value="wca"/>
+            <tags xmi:id="0.3307215721774803" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.924933827857686" name="deployto" title="Deploy To"
+         <attributes xmi:id="0.026170138776320906" name="deployto" title="Deploy To"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.29869006957428146" key="reversedURI"
+            <tags xmi:id="0.6147487160812837" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.26972704006112147" key="prefix" value="wca"/>
+            <tags xmi:id="0.037117577623594356" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.10429284822290286" name="selecteddeployto"
+         <attributes xmi:id="0.6820699955649314" name="selecteddeployto"
                   title="Servers Selected For Deployment"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.6648945121708117" key="reversedURI"
+            <tags xmi:id="0.5761028126774546" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.29294592047341395" key="prefix" value="wca"/>
+            <tags xmi:id="0.8379797199928788" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.544193596638827" name="selecteddeployversion"
+         <attributes xmi:id="0.9239322950633652" name="selecteddeployversion"
                   title="Snapshot Version Selected For Deployment"
                   visibility="Public"
                   typ="int"
                   description=""
                   documentation="">
-            <tags xmi:id="0.4814530017581842" key="reversedURI"
+            <tags xmi:id="0.1448299808810728" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.8491820341690065" key="prefix" value="wca"/>
+            <tags xmi:id="0.05808165500699913" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.3345608828104535" name="issource" title="Used as a template website"
+         <attributes xmi:id="0.9211651326221614" name="issource" title="Used as a template website"
                   visibility="Public"
                   typ="boolean"
                   description=""
                   documentation="">
-            <tags xmi:id="0.0409428705923347" key="reversedURI"
+            <tags xmi:id="0.8284225075527214" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.3806276480037334" key="prefix" value="wca"/>
+            <tags xmi:id="0.20779734128005167" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.5338999373388228" name="previewprovidername" title="Preview Provider"
+         <attributes xmi:id="0.24966020429947522" name="previewprovidername"
+                  title="Preview Provider"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.2917089555898428" key="reversedURI"
+            <tags xmi:id="0.23738250808437045" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.1469004221079575" key="prefix" value="wca"/>
+            <tags xmi:id="0.8411324606492628" key="prefix" value="wca"/>
          </attributes>
       </classSet>
-      <associationSet xmi:id="0.2745941924017363" name="webuser" title="" description=""
+      <associationSet xmi:id="0.5897354224367433" name="webuser" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.08013661394311988" name="webuser" title="" cardMax="1"
+         <firstEnd xmi:id="0.6804169231840755" name="webuser" title="" cardMax="1"
                 linkedClass="//@classSet.0"/>
-         <secondEnd xmi:id="0.4168083368991008" name="webuser" title="" navigable="true"
+         <secondEnd xmi:id="0.6164787437509242" name="webuser" title="" navigable="true"
                  cardMax="-1"
                  linkedClass="//@classSet.1"/>
       </associationSet>
-      <associationSet xmi:id="0.21884077962701143" name="webform" title="" description=""
+      <associationSet xmi:id="0.9502516276857567" name="webform" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.9768925040788312" name="webform" title="" cardMax="1"
+         <firstEnd xmi:id="0.013347672369213748" name="webform" title="" cardMax="1"
                 linkedClass="//@classSet.0"/>
-         <secondEnd xmi:id="0.7838684464729637" name="webform" title="" navigable="true"
+         <secondEnd xmi:id="0.20659475961924567" name="webform" title="" navigable="true"
                  cardMax="-1"
                  linkedClass="//@classSet.2"/>
       </associationSet>
-      <associationSet xmi:id="0.7258039257193865" name="webworkflowdefaults" title="" description=""
+      <associationSet xmi:id="0.197391354987018" name="webworkflowdefaults" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.5587614323351129" name="webworkflowdefaults" title="" cardMax="1"
+         <firstEnd xmi:id="0.41537112037940915" name="webworkflowdefaults" title="" cardMax="1"
                 linkedClass="//@classSet.0"/>
-         <secondEnd xmi:id="0.7010702269046183" name="webworkflowdefaults" title=""
+         <secondEnd xmi:id="0.7033686192323005" name="webworkflowdefaults" title=""
                  navigable="true"
                  cardMax="-1"
                  linkedClass="//@classSet.5"/>
       </associationSet>
-      <associationSet xmi:id="0.9517561108306765" name="deploymentreport" title="" description=""
+      <associationSet xmi:id="0.3608311871859684" name="deploymentreport" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.6830614859046631" name="deploymentreport" title="" cardMax="1"
+         <firstEnd xmi:id="0.8958996183353225" name="deploymentreport" title="" cardMax="1"
                 linkedClass="//@classSet.0"/>
-         <secondEnd xmi:id="0.8441984874197187" name="deploymentreport" title="" navigable="true"
+         <secondEnd xmi:id="0.2618654363173252" name="deploymentreport" title="" navigable="true"
                  cardMax="-1"
                  linkedClass="//@classSet.10"/>
       </associationSet>
-      <associationSet xmi:id="0.5396903163968662" name="deploymentserver" title="" description=""
+      <associationSet xmi:id="0.3516012939667883" name="deploymentserver" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.6443004493429114" name="deploymentserver" title="" cardMax="1"
+         <firstEnd xmi:id="0.11458206113436364" name="deploymentserver" title="" cardMax="1"
                 linkedClass="//@classSet.0"/>
-         <secondEnd xmi:id="0.39893515596350293" name="deploymentserver" title="" navigable="true"
+         <secondEnd xmi:id="0.7018254153475382" name="deploymentserver" title="" navigable="true"
                  cardMax="-1"
                  linkedClass="//@classSet.8"/>
       </associationSet>
-      <associationSet xmi:id="0.8330949753697406" name="deploymentattempt" title="" description=""
+      <associationSet xmi:id="0.2586011440162296" name="deploymentattempt" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.6253391728139974" name="deploymentattempt" title="" cardMax="1"
+         <firstEnd xmi:id="0.14817507084008474" name="deploymentattempt" title="" cardMax="1"
                 linkedClass="//@classSet.0"/>
-         <secondEnd xmi:id="0.9494251307190132" name="deploymentattempt" title="" navigable="true"
+         <secondEnd xmi:id="0.11760103567204261" name="deploymentattempt" title="" navigable="true"
                  cardMax="-1"
                  linkedClass="//@classSet.9"/>
       </associationSet>
-      <classSet xmi:id="0.41523406761413406" documentation="" description="" name="webuser"
+      <classSet xmi:id="0.32927386578434537" documentation="" description="" name="webuser"
              title="Website User Information"
              aspects="">
-         <generalizations xmi:id="0.8200582782592821" href="sys.dt#//@classSet.0"/>
-         <tags xmi:id="0.7446611486208123" key="reversedURI"
+         <generalizations xmi:id="0.7465569192347368" href="sys.dt#//@classSet.0"/>
+         <tags xmi:id="0.49099264343849935" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.5724054739696961" key="prefix" value="wca"/>
-         <attributes xmi:id="0.5532282120461404" name="username" title="" visibility="Public"
+         <tags xmi:id="0.3118440304151875" key="prefix" value="wca"/>
+         <attributes xmi:id="0.7093239543277005" name="username" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7593210788433398" key="reversedURI"
+            <tags xmi:id="0.5970713959778202" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.7164857516562302" key="prefix" value="wca"/>
+            <tags xmi:id="0.15428077585282174" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.732164446537934" name="role" title="" visibility="Public"
+         <attributes xmi:id="0.05642568252357849" name="role" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.2294972627253412" key="reversedURI"
+            <tags xmi:id="0.43665011903901507" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.189445679914654" key="prefix" value="wca"/>
+            <tags xmi:id="0.39581938359394886" key="prefix" value="wca"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.416401940935492" documentation="" description="" name="webform"
+      <classSet xmi:id="0.022354035440478648" documentation="" description="" name="webform"
              title="Website Web Form"
              aspects="//@aspectSet.0  //@aspectSet.1 ">
-         <generalizations xmi:id="0.8393075660377112" href="sys.dt#//@classSet.0"/>
-         <tags xmi:id="0.10684054105534446" key="reversedURI"
+         <generalizations xmi:id="0.5457630530005133" href="sys.dt#//@classSet.0"/>
+         <tags xmi:id="0.5598757371398765" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.09578862154711532" key="prefix" value="wca"/>
-         <attributes xmi:id="0.9326734688914806" name="formname" title="" visibility="Public"
+         <tags xmi:id="0.6722486124737903" key="prefix" value="wca"/>
+         <attributes xmi:id="0.9761468750790436" name="formname" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.19787107126755143" key="reversedURI"
+            <tags xmi:id="0.3547992232137519" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.9406300869346746" key="prefix" value="wca"/>
+            <tags xmi:id="0.04002974677687987" key="prefix" value="wca"/>
          </attributes>
       </classSet>
-      <associationSet xmi:id="0.6289692616289505" name="webformtemplate" title="" description=""
+      <associationSet xmi:id="0.6240926562544913" name="webformtemplate" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.9721778778147974" name="webformtemplate" title="" cardMax="1"
+         <firstEnd xmi:id="0.1577638811894928" name="webformtemplate" title="" cardMax="1"
                 linkedClass="//@classSet.2"/>
-         <secondEnd xmi:id="0.02060872018701365" name="webformtemplate" title="" navigable="true"
+         <secondEnd xmi:id="0.4032075047155034" name="webformtemplate" title="" navigable="true"
                  cardMax="-1"
                  linkedClass="//@classSet.3"/>
       </associationSet>
-      <associationSet xmi:id="0.0054030027104712275" name="workflowdefaults" title="" description=""
+      <associationSet xmi:id="0.7922981928518732" name="workflowdefaults" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.16106187582885012" name="workflowdefaults" title="" cardMax="1"
+         <firstEnd xmi:id="0.32270844531329135" name="workflowdefaults" title="" cardMax="1"
                 linkedClass="//@classSet.2"/>
-         <secondEnd xmi:id="0.30009155074906024" name="workflowdefaults" title="" navigable="true"
+         <secondEnd xmi:id="0.6322441811715761" name="workflowdefaults" title="" navigable="true"
                  cardMax="1"
                  linkedClass="//@classSet.4"/>
       </associationSet>
-      <classSet xmi:id="0.3767439468735254" documentation="" description=""
+      <classSet xmi:id="0.4947347488267544" documentation="" description=""
              name="webformtemplate"
              title="Website Web Form Template"
              aspects="//@aspectSet.0 ">
-         <generalizations xmi:id="0.5421533993913878" href="sys.dt#//@classSet.0"/>
-         <tags xmi:id="0.5059581865202405" key="reversedURI"
+         <generalizations xmi:id="0.47333261020121653" href="sys.dt#//@classSet.0"/>
+         <tags xmi:id="0.8273692072276383" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.6933313020147756" key="prefix" value="wca"/>
-         <attributes xmi:id="0.3014664174569899" name="baserenderingenginetemplatename" title=""
+         <tags xmi:id="0.4159304233862916" key="prefix" value="wca"/>
+         <attributes xmi:id="0.8583498610178684" name="baserenderingenginetemplatename" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.25369797101096647" key="reversedURI"
+            <tags xmi:id="0.0796974842412912" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.25632309578312895" key="prefix" value="wca"/>
+            <tags xmi:id="0.9852770262859036" key="prefix" value="wca"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.6153027971391563" documentation="" description=""
+      <classSet xmi:id="0.9472789807203973" documentation="" description=""
              name="workflowdefaults"
              title="Workflow Defaults"
              aspects="">
-         <generalizations xmi:id="0.18805240563760084" href="sys.dt#//@classSet.0"/>
-         <tags xmi:id="0.9936538127341022" key="reversedURI"
+         <generalizations xmi:id="0.7946218290202446" href="sys.dt#//@classSet.0"/>
+         <tags xmi:id="0.9826093937496996" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.09679354702535248" key="prefix" value="wca"/>
-         <attributes xmi:id="0.5782948893479178" name="workflowname" title="" visibility="Public"
+         <tags xmi:id="0.9489414794953416" key="prefix" value="wca"/>
+         <attributes xmi:id="0.3386424491918337" name="workflowname" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7563416150986486" key="reversedURI"
+            <tags xmi:id="0.6137588727268128" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.44398061371995756" key="prefix" value="wca"/>
+            <tags xmi:id="0.239940812920033" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.6415466527426011" name="workflowdefaultproperties" title=""
+         <attributes xmi:id="0.6037041862239306" name="workflowdefaultproperties" title=""
                   visibility="Public"
                   typ="Object"
                   description=""
                   documentation="">
-            <tags xmi:id="0.9498982400444894" key="reversedURI"
+            <tags xmi:id="0.16650148366529804" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.3454027610361333" key="prefix" value="wca"/>
+            <tags xmi:id="0.5409986256308692" key="prefix" value="wca"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.7567038830574114" documentation="" description=""
+      <classSet xmi:id="0.8985316619918743" documentation="" description=""
              name="webworkflowdefaults"
              title="Web Workflow Defaults"
              aspects="//@aspectSet.0 "
              generalizations="//@classSet.4">
-         <tags xmi:id="0.8140897541668349" key="reversedURI"
+         <tags xmi:id="0.16557142706066563" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.7811148488449713" key="prefix" value="wca"/>
+         <tags xmi:id="0.13281811955588796" key="prefix" value="wca"/>
       </classSet>
-      <classSet xmi:id="0.013573374785322168" documentation="" description=""
+      <classSet xmi:id="0.16054680347622874" documentation="" description=""
              name="renditionproperties"
              title="Properties for renditions"
              aspects="//@aspectSet.0 ">
-         <generalizations xmi:id="0.8473495138263581" href="sys.dt#//@classSet.0"/>
-         <tags xmi:id="0.03810183262867062" key="reversedURI"
+         <generalizations xmi:id="0.5281722181690739" href="sys.dt#//@classSet.0"/>
+         <tags xmi:id="0.18314986891128882" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.08636563300898359" key="prefix" value="wca"/>
-         <attributes xmi:id="0.9456599387653467" name="mimetypeforrendition"
+         <tags xmi:id="0.661627836673073" key="prefix" value="wca"/>
+         <attributes xmi:id="0.27101963412698293" name="mimetypeforrendition"
                   title="Mimetype for generated assets"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.27078463405621767" key="reversedURI"
+            <tags xmi:id="0.4131911265356082" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.5403823445554609" key="prefix" value="wca"/>
+            <tags xmi:id="0.05736384796104532" key="prefix" value="wca"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.8893907063974186" documentation="" description="" name="formfolder"
+      <classSet xmi:id="0.3826832208355727" documentation="" description="" name="formfolder"
              title="XForms Capture Form Folder"
              aspects="">
-         <generalizations xmi:id="0.964936333878008" href="cm.dt#//@classSet.1"/>
-         <tags xmi:id="0.3845728157556364" key="reversedURI"
+         <generalizations xmi:id="0.7333532047960695" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.6684029230326389" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.8804396551082698" key="prefix" value="wca"/>
+         <tags xmi:id="0.9787644641656086" key="prefix" value="wca"/>
       </classSet>
-      <classSet xmi:id="0.264077191740409" documentation="" description=""
+      <classSet xmi:id="0.4979073510061538" documentation="" description=""
              name="deploymentserver"
              title="Website Deployment Server"
              aspects="">
-         <generalizations xmi:id="0.5266800787607185" href="sys.dt#//@classSet.0"/>
-         <tags xmi:id="0.8106169501578891" key="reversedURI"
+         <generalizations xmi:id="0.0064006647855958665" href="sys.dt#//@classSet.0"/>
+         <tags xmi:id="0.043239088947342075" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.41597837905086543" key="prefix" value="wca"/>
-         <attributes xmi:id="0.5455379207746837" name="deploytype" title="Deployment Type"
+         <tags xmi:id="0.8746244172475572" key="prefix" value="wca"/>
+         <attributes xmi:id="0.22661001425623395" name="deploytype" title="Deployment Type"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation=""
-                  valueList="554550.7567479818">
-            <tags xmi:id="0.43033746654545235" key="reversedURI"
+                  valueList="372041.8880299945">
+            <tags xmi:id="0.5859462167128062" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.04277612752817328" key="prefix" value="wca"/>
+            <tags xmi:id="0.3312078809926684" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.7895208812691688" name="deployservertype"
+         <attributes xmi:id="0.5566449504360224" name="deployservertype"
                   title="Deployment Server Type"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation=""
-                  valueList="835959.1537257157">
-            <tags xmi:id="0.864303469883051" key="reversedURI"
+                  valueList="733052.0466201155">
+            <tags xmi:id="0.8818658540768326" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.6290102961029179" key="prefix" value="wca"/>
+            <tags xmi:id="0.4896220086436114" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.41630763211955035" name="deployserverhost" title="Host"
+         <attributes xmi:id="0.11139764036386413" name="deployserverhost" title="Host"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.6786256405305161" key="reversedURI"
+            <tags xmi:id="0.7649839545074606" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.16527940582147094" key="prefix" value="wca"/>
+            <tags xmi:id="0.6431479966028063" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.9378081531306928" name="deployserverport" title="Port"
+         <attributes xmi:id="0.26322295172928567" name="deployserverport" title="Port"
                   visibility="Public"
                   typ="int"
                   description=""
                   documentation="">
-            <tags xmi:id="0.5543986522080057" key="reversedURI"
+            <tags xmi:id="0.014559330903556766" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.9906405623098972" key="prefix" value="wca"/>
+            <tags xmi:id="0.21544757869383713" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.913159169956976" name="deployservername" title="Display Name"
+         <attributes xmi:id="0.759256733257602" name="deployservername" title="Display Name"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.1467122394628494" key="reversedURI"
+            <tags xmi:id="0.7231711393300629" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.8377169404732361" key="prefix" value="wca"/>
+            <tags xmi:id="0.8283736210533306" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.4026569760529557" name="deployservergroup" title="Display Name"
+         <attributes xmi:id="0.07406992779074895" name="deployservergroup" title="Display Name"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7572723641914874" key="reversedURI"
+            <tags xmi:id="0.7407778445516059" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.028947952410097955" key="prefix" value="wca"/>
+            <tags xmi:id="0.7953899873277956" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.4048233998612688" name=" deployserveradaptername"
+         <attributes xmi:id="0.5348289017493388" name=" deployserveradaptername"
                   title="Deployment Server Adapter Name"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.6483060798898919" key="reversedURI"
+            <tags xmi:id="0.5069386079789556" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.5313874829473033" key="prefix" value="wca"/>
+            <tags xmi:id="0.08275048428421106" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.0024651208881648623" name="deployserverusername" title="Username"
+         <attributes xmi:id="0.3626062907101847" name="deployserverusername" title="Username"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.6844533979444803" key="reversedURI"
+            <tags xmi:id="0.8072065108213232" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.23526598341493787" key="prefix" value="wca"/>
+            <tags xmi:id="0.08300670616622463" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.09777654367585897" name="deployserverpassword" title="Password"
+         <attributes xmi:id="0.19591972937082636" name="deployserverpassword" title="Password"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.749976266499974" key="reversedURI"
+            <tags xmi:id="0.9901052044816903" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.4850882886432606" key="prefix" value="wca"/>
+            <tags xmi:id="0.5849894101794341" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.340824649034137" name="deployserverurl" title="Runtime URL"
+         <attributes xmi:id="0.8437642490623384" name="deployserverurl" title="Runtime URL"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7098889726068925" key="reversedURI"
+            <tags xmi:id="0.5188945935922837" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.9321050418483136" key="prefix" value="wca"/>
+            <tags xmi:id="0.7642221198869931" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.22290226644513877" name="deployservertarget" title="Deploy Target"
+         <attributes xmi:id="0.0920819613248246" name="deployservertarget" title="Deploy Target"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.4775702160250421" key="reversedURI"
+            <tags xmi:id="0.7960255851195797" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.7642703438342315" key="prefix" value="wca"/>
+            <tags xmi:id="0.23372720734446428" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.2385482111003896" name="deploysourcepath" title="Source Path"
+         <attributes xmi:id="0.2483624369036368" name="deploysourcepath" title="Source Path"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.956083665858476" key="reversedURI"
+            <tags xmi:id="0.06704752730667396" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.14725640722346534" key="prefix" value="wca"/>
+            <tags xmi:id="0.4327211552240172" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.039901337185533015" name="deployexcludes" title="Excludes"
+         <attributes xmi:id="0.6138744104619073" name="deployexcludes" title="Excludes"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.41375647560500706" key="reversedURI"
+            <tags xmi:id="0.7380984602150864" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.5116941626700098" key="prefix" value="wca"/>
+            <tags xmi:id="0.033641671803323225" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.10811838176487087" name="deployserverallocatedto"
-                  title="Allocated To"
+         <attributes xmi:id="0.6414659703591251" name="deployserverallocatedto" title="Allocated To"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7819208616351269" key="reversedURI"
+            <tags xmi:id="0.7961981632205888" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.5664907988749041" key="prefix" value="wca"/>
+            <tags xmi:id="0.5799000120536443" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.14064328858053432" name="deployonapproval" title="Deploy On Approval"
+         <attributes xmi:id="0.15573889730797918" name="deployonapproval" title="Deploy On Approval"
                   visibility="Public"
                   typ="boolean"
                   description=""
                   documentation="">
-            <tags xmi:id="0.06938952995136227" key="reversedURI"
+            <tags xmi:id="0.021808638958693227" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.2767364148263348" key="prefix" value="wca"/>
+            <tags xmi:id="0.6876067414534913" key="prefix" value="wca"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.026712306142073317" documentation="" description=""
+      <classSet xmi:id="0.3073139028635635" documentation="" description=""
              name="deploymentattempt"
              title="Website Deployment Attempt"
              aspects="">
-         <generalizations xmi:id="0.8170196393021859" href="sys.dt#//@classSet.0"/>
-         <tags xmi:id="0.5964975234958984" key="reversedURI"
+         <generalizations xmi:id="0.5928211330254154" href="sys.dt#//@classSet.0"/>
+         <tags xmi:id="0.19944891560500655" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.8868142665606406" key="prefix" value="wca"/>
-         <attributes xmi:id="0.2486158902168797" name="deployattemptid" title="Deploy Attempt ID"
+         <tags xmi:id="0.792133706564874" key="prefix" value="wca"/>
+         <attributes xmi:id="0.7439143580622912" name="deployattemptid" title="Deploy Attempt ID"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.5099343319292476" key="reversedURI"
+            <tags xmi:id="0.3005163702213486" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.7613936826429581" key="prefix" value="wca"/>
+            <tags xmi:id="0.19934370773927101" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.8659803704616347" name="deployattempttype" title="Attempt Type"
+         <attributes xmi:id="0.9756970986807834" name="deployattempttype" title="Attempt Type"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation=""
-                  valueList="835959.1537257157">
-            <tags xmi:id="0.7752186189977063" key="reversedURI"
+                  valueList="733052.0466201155">
+            <tags xmi:id="0.024104965713607762" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.4991962927142505" key="prefix" value="wca"/>
+            <tags xmi:id="0.9052464997536599" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.6046966047290113" name="deployattemptstore" title="Attempt Type"
+         <attributes xmi:id="0.31950424346535444" name="deployattemptstore" title="Attempt Type"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.6598525864314716" key="reversedURI"
+            <tags xmi:id="0.5734766249801821" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.07776599684932195" key="prefix" value="wca"/>
+            <tags xmi:id="0.6908601673742465" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.08055306971098408" name="deployattemptversion"
+         <attributes xmi:id="0.6228632518544945" name="deployattemptversion"
                   title="Snapshot Version Deployed"
                   visibility="Public"
                   typ="int"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7898077649293124" key="reversedURI"
+            <tags xmi:id="0.23342068624622925" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.8110636763182759" key="prefix" value="wca"/>
+            <tags xmi:id="0.7887919544247332" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.16232063678250208" name="deployattemptservers"
+         <attributes xmi:id="0.6437524018631219" name="deployattemptservers"
                   title="Servers Deployed To"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.8118946637545035" key="reversedURI"
+            <tags xmi:id="0.1882218706568921" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.923882629675843" key="prefix" value="wca"/>
+            <tags xmi:id="0.24143252693159367" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.03522327205562936" name="deployattempttime"
+         <attributes xmi:id="0.0325603611283416" name="deployattempttime"
                   title="Time Of Deploy Attempt"
                   visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.19624925094789758" key="reversedURI"
+            <tags xmi:id="0.7311182689157588" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.788732458621247" key="prefix" value="wca"/>
+            <tags xmi:id="0.4159623002540106" key="prefix" value="wca"/>
          </attributes>
       </classSet>
-      <associationSet xmi:id="0.8965184881406696" name="deploymentreports" title="" description=""
+      <associationSet xmi:id="0.6899960190042795" name="deploymentreports" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.5111068760186416" name="deploymentreports" title="" cardMax="1"
+         <firstEnd xmi:id="0.7088574328229929" name="deploymentreports" title="" cardMax="1"
                 linkedClass="//@classSet.9"/>
-         <secondEnd xmi:id="0.04892580846177541" name="deploymentreports" title="" navigable="true"
+         <secondEnd xmi:id="0.20697587591054" name="deploymentreports" title="" navigable="true"
                  cardMax="-1"
                  linkedClass="//@classSet.10"/>
       </associationSet>
-      <classSet xmi:id="0.30542885920598284" documentation="" description=""
+      <classSet xmi:id="0.3223378857954674" documentation="" description=""
              name="deploymentreport"
              title="Website Deployment Report"
              aspects="">
-         <generalizations xmi:id="0.24424563924255205" href="cm.dt#//@classSet.2"/>
-         <tags xmi:id="0.9373478231224823" key="reversedURI"
+         <generalizations xmi:id="0.5826832872562324" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.9648000057561958" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.5638197965974276" key="prefix" value="wca"/>
-         <attributes xmi:id="0.6580675778116256" name="deployserver" title="Server Deployed To"
+         <tags xmi:id="0.10631218550114674" key="prefix" value="wca"/>
+         <attributes xmi:id="0.7037520363742796" name="deployserver" title="Server Deployed To"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.9873859431774719" key="reversedURI"
+            <tags xmi:id="0.31787984947085823" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.4479485879251056" key="prefix" value="wca"/>
+            <tags xmi:id="0.09191532175216555" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.5832405420430935" name="deployversion"
+         <attributes xmi:id="0.8316179716943329" name="deployversion"
                   title="Snapshot Version Deployed"
                   visibility="Public"
                   typ="int"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7755185851905585" key="reversedURI"
+            <tags xmi:id="0.6897335092045059" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.6055689133508264" key="prefix" value="wca"/>
+            <tags xmi:id="0.30553042497503136" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.05021561247749773" name="deploystarttime" title="Time Deploy Started"
+         <attributes xmi:id="0.5913563109149738" name="deploystarttime" title="Time Deploy Started"
                   visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.23235983431511908" key="reversedURI"
+            <tags xmi:id="0.8890551317789945" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.8271656095054593" key="prefix" value="wca"/>
+            <tags xmi:id="0.06640150817694113" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.8191722898408731" name="deployendtime" title="Time Deploy Finished"
+         <attributes xmi:id="0.9389158114335133" name="deployendtime" title="Time Deploy Finished"
                   visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.8512617600660243" key="reversedURI"
+            <tags xmi:id="0.39676788779165373" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.7357366270004244" key="prefix" value="wca"/>
+            <tags xmi:id="0.7643992886515553" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.9489284977541236" name="deploysuccessful"
+         <attributes xmi:id="0.10104160122680494" name="deploysuccessful"
                   title="Deployment Successful"
                   visibility="Public"
                   typ="boolean"
                   description=""
                   documentation="">
-            <tags xmi:id="0.6261803262659895" key="reversedURI"
+            <tags xmi:id="0.027326306892101693" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.9730092135510778" key="prefix" value="wca"/>
+            <tags xmi:id="0.3863041932233129" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.08741955309908955" name="deployfailedreason" title="Failure Reason"
+         <attributes xmi:id="0.38690834747669756" name="deployfailedreason" title="Failure Reason"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7536262305079796" key="reversedURI"
+            <tags xmi:id="0.18923465111703186" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.6074300004530188" key="prefix" value="wca"/>
+            <tags xmi:id="0.331629786845122" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.7206645950380285" name="deployservernameused"
+         <attributes xmi:id="0.10924287657512122" name="deployservernameused"
                   title="Server Display Name"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.22480376902061272" key="reversedURI"
+            <tags xmi:id="0.49352534460279296" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.3473912564313556" key="prefix" value="wca"/>
+            <tags xmi:id="0.8930499916582981" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.8579414460873116" name="deployserverusernameused"
+         <attributes xmi:id="0.2871157865601517" name="deployserverusernameused"
                   title="Username Used"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.26592752453903246" key="reversedURI"
+            <tags xmi:id="0.6028367984182136" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.9667712626918369" key="prefix" value="wca"/>
+            <tags xmi:id="0.47633203695632487" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.1607588991295995" name="deployservertargetused" title="Target Used"
+         <attributes xmi:id="0.8421358238308739" name="deployservertargetused" title="Target Used"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.02800584100290604" key="reversedURI"
+            <tags xmi:id="0.3466292969219992" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.8337324179930611" key="prefix" value="wca"/>
+            <tags xmi:id="0.28148957792139173" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.8682443355576422" name="deploysourcepathused"
+         <attributes xmi:id="0.9729269601704718" name="deploysourcepathused"
                   title="Source Path Used"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.021220595808005283" key="reversedURI"
+            <tags xmi:id="0.5291090234361768" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.8649304219379513" key="prefix" value="wca"/>
+            <tags xmi:id="0.6318911861936585" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.14011286744822582" name="deployexcludesused" title="Excludes Used"
+         <attributes xmi:id="0.1430365150878682" name="deployexcludesused" title="Excludes Used"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.3161339977701093" key="reversedURI"
+            <tags xmi:id="0.5424103388316656" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.5434431681384339" key="prefix" value="wca"/>
+            <tags xmi:id="0.24646729690337454" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.33481673207544094" name="deployserverurlused"
-                  title="Source Path Used"
+         <attributes xmi:id="0.7420345861076384" name="deployserverurlused" title="Source Path Used"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.618816570828793" key="reversedURI"
+            <tags xmi:id="0.9558575094141499" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.6457667720333027" key="prefix" value="wca"/>
+            <tags xmi:id="0.2589150140012376" key="prefix" value="wca"/>
          </attributes>
       </classSet>
-      <aspectSet xmi:id="0.09402049540538093" name="webapp" title="Webapp" description=""
+      <aspectSet xmi:id="0.2843170469645552" name="webapp" title="Webapp" description=""
               documentation="">
-         <tags xmi:id="0.8734749892393077" key="reversedURI"
+         <tags xmi:id="0.6357698081198307" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.7955883034508732" key="prefix" value="wca"/>
+         <tags xmi:id="0.6657442099963182" key="prefix" value="wca"/>
       </aspectSet>
-      <aspectSet xmi:id="0.7922245118700576" name="filenamepattern" title="Filename Pattern"
+      <aspectSet xmi:id="0.9501313805925866" name="filenamepattern" title="Filename Pattern"
               description=""
               documentation="">
-         <tags xmi:id="0.2995383368973651" key="reversedURI"
+         <tags xmi:id="0.03653038528852148" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.5665539186686672" key="prefix" value="wca"/>
-         <attributes xmi:id="0.021576821757698372" name="filenamepattern" title=""
-                  visibility="Public"
+         <tags xmi:id="0.47722274535217835" key="prefix" value="wca"/>
+         <attributes xmi:id="0.9928888883949128" name="filenamepattern" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.007633600905204152" key="reversedURI"
+            <tags xmi:id="0.11003117694414755" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.30989675545440487" key="prefix" value="wca"/>
+            <tags xmi:id="0.8475149465665023" key="prefix" value="wca"/>
          </attributes>
       </aspectSet>
-      <aspectSet xmi:id="0.09119180797056337" name="outputpathpattern"
+      <aspectSet xmi:id="0.2153749664522323" name="outputpathpattern"
               title="Output Path Pattern"
               description=""
               documentation="">
-         <tags xmi:id="0.6611115587278601" key="reversedURI"
+         <tags xmi:id="0.07705761840846947" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.47329158095963675" key="prefix" value="wca"/>
-         <attributes xmi:id="0.8032486701592892" name="outputpathpattern" title=""
+         <tags xmi:id="0.22300381963483062" key="prefix" value="wca"/>
+         <attributes xmi:id="0.27260117362409186" name="outputpathpattern" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.06497155390388398" key="reversedURI"
+            <tags xmi:id="0.453166031167885" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.7441331722077477" key="prefix" value="wca"/>
+            <tags xmi:id="0.07295603625670422" key="prefix" value="wca"/>
          </attributes>
       </aspectSet>
-      <aspectSet xmi:id="0.2146206497052725" name="form" title="XForms Form" description=""
+      <aspectSet xmi:id="0.35087561121292643" name="form" title="XForms Form" description=""
               documentation="">
-         <tags xmi:id="0.024577483567005398" key="reversedURI"
+         <tags xmi:id="0.9221208736835187" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.04268839724297324" key="prefix" value="wca"/>
-         <attributes xmi:id="0.039851556375402275" name="xmlschemarootelementname"
+         <tags xmi:id="0.8547019059262593" key="prefix" value="wca"/>
+         <attributes xmi:id="0.7979906908166385" name="xmlschemarootelementname"
                   title="Schema Root Element Name"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.5872891246852044" key="reversedURI"
+            <tags xmi:id="0.35479108210357113" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.9868503998183065" key="prefix" value="wca"/>
+            <tags xmi:id="0.21257233874984272" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.7774161182830411" name="xmlschema" title="Schema" visibility="Public"
+         <attributes xmi:id="0.9376456300531953" name="xmlschema" title="Schema" visibility="Public"
                   typ="Object"
                   description=""
                   documentation="">
-            <tags xmi:id="0.4857438408026421" key="reversedURI"
+            <tags xmi:id="0.89107514577322" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.7444434277202491" key="prefix" value="wca"/>
+            <tags xmi:id="0.05069289250674203" key="prefix" value="wca"/>
          </attributes>
       </aspectSet>
-      <associationSet xmi:id="0.33184827088099755" name="renderingenginetemplates"
+      <associationSet xmi:id="0.15783682710482538" name="renderingenginetemplates"
                    title="Form Data Renderers"
                    description=""
                    associationType="Direct">
-         <firstEnd xmi:id="0.519583918342581" name="renderingenginetemplates"
+         <firstEnd xmi:id="0.6027497699446925" name="renderingenginetemplates"
                 title="Form Data Renderers"
                 cardMax="1"
                 linkedClass="//@aspectSet.3"/>
-         <secondEnd xmi:id="0.9147940901164504" name="renderingenginetemplates"
+         <secondEnd xmi:id="0.4538244942010352" name="renderingenginetemplates"
                  title="Form Data Renderers"
                  navigable="true"
                  cardMax="-1">
-            <linkedClass xmi:id="0.9178448938409318" xsi:type="clazz:Aspect"
+            <linkedClass xmi:id="0.9301444401785331" xsi:type="clazz:Aspect"
                       href="wca.dt#//@aspectSet.4"/>
          </secondEnd>
       </associationSet>
-      <associationSet xmi:id="0.24718687865152134" name="formworkflowdefaults" title=""
-                   description=""
+      <associationSet xmi:id="0.7992319814172983" name="formworkflowdefaults" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.06625257833245735" name="formworkflowdefaults" title="" cardMax="1"
+         <firstEnd xmi:id="0.16362227061477053" name="formworkflowdefaults" title="" cardMax="1"
                 linkedClass="//@aspectSet.3"/>
-         <secondEnd xmi:id="0.06391516481351689" name="formworkflowdefaults" title=""
+         <secondEnd xmi:id="0.8144275479003381" name="formworkflowdefaults" title=""
                  navigable="true"
                  cardMax="1">
-            <linkedClass xmi:id="0.049807096251651584" xsi:type="clazz:Clazz"
-                      href="wca.dt#//@classSet.4"/>
+            <linkedClass xmi:id="0.8174977148124595" xsi:type="clazz:Clazz" href="wca.dt#//@classSet.4"/>
          </secondEnd>
       </associationSet>
-      <aspectSet xmi:id="0.26670865954376277" name="renderingenginetemplate"
+      <aspectSet xmi:id="0.995257785460966" name="renderingenginetemplate"
               title="A Rendering Engine"
               description=""
               documentation="">
-         <tags xmi:id="0.9925051217249845" key="reversedURI"
+         <tags xmi:id="0.9572010816300666" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.9177827322487037" key="prefix" value="wca"/>
-         <attributes xmi:id="0.2981808802884851" name="parentrenderingenginename" title="Type"
+         <tags xmi:id="0.8796816405887063" key="prefix" value="wca"/>
+         <attributes xmi:id="0.9799162807700299" name="parentrenderingenginename" title="Type"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7433378862823827" key="reversedURI"
+            <tags xmi:id="0.07021108325911318" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.9978440862668596" key="prefix" value="wca"/>
+            <tags xmi:id="0.839044746715591" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.5448499529608753" name="formsource" title="Form Source"
+         <attributes xmi:id="0.5221196629156003" name="formsource" title="Form Source"
                   visibility="Public"
                   typ="Object"
                   description=""
                   documentation="">
-            <tags xmi:id="0.20323630230400902" key="reversedURI"
+            <tags xmi:id="0.7585211068716046" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.276656149497461" key="prefix" value="wca"/>
+            <tags xmi:id="0.2554151142204746" key="prefix" value="wca"/>
          </attributes>
       </aspectSet>
-      <associationSet xmi:id="0.5827135089501542" name="renditionproperties"
+      <associationSet xmi:id="0.9974296987664016" name="renditionproperties"
                    title="Rendition Properties"
                    description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.7161010719863835" name="renditionproperties"
+         <firstEnd xmi:id="0.5868547441857993" name="renditionproperties"
                 title="Rendition Properties"
                 cardMax="1"
                 linkedClass="//@aspectSet.4"/>
-         <secondEnd xmi:id="0.8531414602681141" name="renditionproperties"
+         <secondEnd xmi:id="0.746934952122881" name="renditionproperties"
                  title="Rendition Properties"
                  navigable="true"
                  cardMax="-1">
-            <linkedClass xmi:id="0.40186973207170906" xsi:type="clazz:Clazz" href="wca.dt#//@classSet.6"/>
+            <linkedClass xmi:id="0.9476305978636702" xsi:type="clazz:Clazz" href="wca.dt#//@classSet.6"/>
          </secondEnd>
       </associationSet>
-      <aspectSet xmi:id="0.33374084884130417" name="forminstancedata"
+      <aspectSet xmi:id="0.5563776422198331" name="forminstancedata"
               title="XML file generated by a form"
               description=""
               documentation="">
-         <tags xmi:id="0.7621403950371337" key="reversedURI"
+         <tags xmi:id="0.39671310760864564" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.21384082144992556" key="prefix" value="wca"/>
-         <attributes xmi:id="0.40250368332940933" name="parentformname"
+         <tags xmi:id="0.9077589212006734" key="prefix" value="wca"/>
+         <attributes xmi:id="0.5562852727990779" name="parentformname"
                   title="Form that generated this asset"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.9410201815031183" key="reversedURI"
+            <tags xmi:id="0.3801186840752956" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.32050300992697967" key="prefix" value="wca"/>
+            <tags xmi:id="0.08442081279244529" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.8994858222093783" name="originalparentpath"
+         <attributes xmi:id="0.7880220421086636" name="originalparentpath"
                   title="The original parent path when this form instance data was created - used for regenerating accurately."
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.19607195400165145" key="reversedURI"
+            <tags xmi:id="0.1144794865490919" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.6967349297720795" key="prefix" value="wca"/>
+            <tags xmi:id="0.3401297155433296" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.8526120249756332" name="renditions"
+         <attributes xmi:id="0.687055942222548" name="renditions"
                   title="Renditions of this form instance data"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.05117371930504311" key="reversedURI"
+            <tags xmi:id="0.1714035109125327" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.8601372371299733" key="prefix" value="wca"/>
+            <tags xmi:id="0.8882949554243162" key="prefix" value="wca"/>
          </attributes>
       </aspectSet>
-      <aspectSet xmi:id="0.6316445839507131" name="rendition"
+      <aspectSet xmi:id="0.060769267775762636" name="rendition"
               title="Output file generated by a rendering engine template"
               description=""
               documentation="">
-         <tags xmi:id="0.06859673541354516" key="reversedURI"
+         <tags xmi:id="0.7006722610396341" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.6646007421367104" key="prefix" value="wca"/>
-         <attributes xmi:id="0.5155872359070016" name="parentrenderingenginetemplate"
+         <tags xmi:id="0.08803379507822795" key="prefix" value="wca"/>
+         <attributes xmi:id="0.9347550131561265" name="parentrenderingenginetemplate"
                   title="Form data renderer that generated this asset"
                   visibility="Public"
                   typ="Object"
                   description=""
                   documentation="">
-            <tags xmi:id="0.634436919367951" key="reversedURI"
+            <tags xmi:id="0.8206637651937763" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.6882245671650181" key="prefix" value="wca"/>
+            <tags xmi:id="0.7119465363096177" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.6613379997131988" name="parentrenditionproperties"
+         <attributes xmi:id="0.09193999014910004" name="parentrenditionproperties"
                   title="Rendition properties used for this rendition"
                   visibility="Public"
                   typ="Object"
                   description=""
                   documentation="">
-            <tags xmi:id="0.9646196125837964" key="reversedURI"
+            <tags xmi:id="0.9308543097632402" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.8686731737959548" key="prefix" value="wca"/>
+            <tags xmi:id="0.854382217212943" key="prefix" value="wca"/>
          </attributes>
-         <attributes xmi:id="0.2874892391836197" name="primaryforminstancedata"
+         <attributes xmi:id="0.7988963841021568" name="primaryforminstancedata"
                   title="Primary XML Asset used to generate this asset"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.2337901162170164" key="reversedURI"
+            <tags xmi:id="0.11170749870318786" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.6928405283836092" key="prefix" value="wca"/>
+            <tags xmi:id="0.6243965115965395" key="prefix" value="wca"/>
          </attributes>
       </aspectSet>
-      <aspectSet xmi:id="0.5530308259709185" name="expires"
+      <aspectSet xmi:id="0.7725697548844543" name="expires"
               title="Content that has or can expire"
               description=""
               documentation="">
-         <tags xmi:id="0.33293642340515794" key="reversedURI"
+         <tags xmi:id="0.6241611787626509" key="reversedURI"
             value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-         <tags xmi:id="0.5104978455778179" key="prefix" value="wca"/>
-         <attributes xmi:id="0.5880465590478141" name="expirationDate" title="Expiration Date"
+         <tags xmi:id="0.9816883584514955" key="prefix" value="wca"/>
+         <attributes xmi:id="0.9419490316799431" name="expirationDate" title="Expiration Date"
                   visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7027746501633264" key="reversedURI"
+            <tags xmi:id="0.198592797955653" key="reversedURI"
                value="http://www.alfresco.org/model/wcmappmodel/1.0"/>
-            <tags xmi:id="0.8895971594387138" key="prefix" value="wca"/>
+            <tags xmi:id="0.5320338974706" key="prefix" value="wca"/>
          </attributes>
       </aspectSet>
    </clazz:Model>

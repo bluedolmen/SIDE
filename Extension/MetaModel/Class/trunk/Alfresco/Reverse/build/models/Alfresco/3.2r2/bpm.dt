@@ -6,347 +6,351 @@
              xmlns:xmi="http://www.omg.org/XMI"
              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
              xmi:version="2.0"
-             xmi:id="0.7500052143800804"
+             xmi:id="0.2172692626265713"
              name="bpm">
-      <enumerationSet xmi:id="408069.4580100844" name="allowedPriority">
-         <literals xmi:id="853951.2882823637" name="1"/>
-         <literals xmi:id="481287.34027441114" name="2"/>
-         <literals xmi:id="784491.0073054326" name="3"/>
+      <enumerationSet xmi:id="551053.1606044273" name="allowedPriority">
+         <literals xmi:id="331726.4707748618" name="1"/>
+         <literals xmi:id="238419.45209328475" name="2"/>
+         <literals xmi:id="929252.7154993155" name="3"/>
       </enumerationSet>
-      <enumerationSet xmi:id="913840.3543947841" name="allowedStatus">
-         <literals xmi:id="820800.300526575" name="Not Yet Started"/>
-         <literals xmi:id="152314.98859058" name="In Progress"/>
-         <literals xmi:id="265631.8262702776" name="On Hold"/>
-         <literals xmi:id="258110.40536926533" name="Cancelled"/>
-         <literals xmi:id="507434.6349060671" name="Completed"/>
+      <enumerationSet xmi:id="325597.45980210154" name="allowedStatus">
+         <literals xmi:id="551344.0486495909" name="Not Yet Started"/>
+         <literals xmi:id="574827.8650094949" name="In Progress"/>
+         <literals xmi:id="204888.36563059298" name="On Hold"/>
+         <literals xmi:id="761710.820745194" name="Cancelled"/>
+         <literals xmi:id="309053.31980782555" name="Completed"/>
       </enumerationSet>
-      <classSet xmi:id="0.633540642255966" documentation="" description="" name="task" title=""
+      <classSet xmi:id="0.5669270794610897" documentation="" description="" name="task"
+             title=""
              aspects="//@aspectSet.0 ">
-         <generalizations xmi:id="0.7443209124304161" href="cm.dt#//@classSet.2"/>
-         <tags xmi:id="0.9152394548840836" key="reversedURI"
+         <generalizations xmi:id="0.8649077976094346" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.5216791198713883" key="reversedURI"
             value="http://www.alfresco.org/model/bpm/1.0"/>
-         <tags xmi:id="0.6645451587097972" key="prefix" value="bpm"/>
-         <attributes xmi:id="0.8160847044733067" name="taskId" title="" visibility="Public"
+         <tags xmi:id="0.006831798891753227" key="prefix" value="bpm"/>
+         <attributes xmi:id="0.38841238719078075" name="taskId" title="" visibility="Public"
                   typ="long"
                   description=""
                   documentation="">
-            <tags xmi:id="0.5238852300977104" key="reversedURI"
+            <tags xmi:id="0.2946183359058294" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.054649077516874534" key="prefix" value="bpm"/>
+            <tags xmi:id="0.9537638510648755" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.5757303569454502" name="description" title="" visibility="Public"
+         <attributes xmi:id="0.8102060900874027" name="description" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.09267151054991063" key="reversedURI"
+            <tags xmi:id="0.13206033043358145" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.4692005967246875" key="prefix" value="bpm"/>
+            <tags xmi:id="0.5880897846030131" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.019698493943278717" name="startDate" title="" visibility="Public"
+         <attributes xmi:id="0.7877482704298989" name="startDate" title="" visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.9492839711116151" key="reversedURI"
+            <tags xmi:id="0.2166394155984681" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.15897344155497395" key="prefix" value="bpm"/>
+            <tags xmi:id="0.9997001811563309" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.27644744445280645" name="completionDate" title="" visibility="Public"
+         <attributes xmi:id="0.7599579483871256" name="completionDate" title="" visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.4145784096313665" key="reversedURI"
+            <tags xmi:id="0.028357000630125917" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.17774306650993144" key="prefix" value="bpm"/>
+            <tags xmi:id="0.955771944094206" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.8971095347132485" name="dueDate" title="" visibility="Public"
+         <attributes xmi:id="0.8801984887666101" name="dueDate" title="" visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.6840067962793944" key="reversedURI"
+            <tags xmi:id="0.011569131353194484" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.32977086503620767" key="prefix" value="bpm"/>
+            <tags xmi:id="0.6682830359830232" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.8758721552461746" name="status" title="" visibility="Public"
+         <attributes xmi:id="0.14427395408321209" name="status" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation=""
-                  valueList="913840.3543947841">
-            <tags xmi:id="0.29030313430790455" key="reversedURI"
+                  valueList="325597.45980210154">
+            <tags xmi:id="0.47088244490470155" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.7231600559048925" key="prefix" value="bpm"/>
+            <tags xmi:id="0.2618238874370019" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.6438497314966022" name="priority" title="" visibility="Public"
+         <attributes xmi:id="0.8240026608118399" name="priority" title="" visibility="Public"
                   typ="int"
                   description=""
                   documentation=""
-                  valueList="408069.4580100844">
-            <tags xmi:id="0.866546763817215" key="reversedURI"
+                  valueList="551053.1606044273">
+            <tags xmi:id="0.1698299574463935" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.9905560728014617" key="prefix" value="bpm"/>
+            <tags xmi:id="0.5323985267990856" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.2566691669492479" name="percentComplete" title="" visibility="Public"
+         <attributes xmi:id="0.28296007549455293" name="percentComplete" title=""
+                  visibility="Public"
                   typ="int"
                   description=""
                   documentation="">
-            <tags xmi:id="0.5278731246966276" key="reversedURI"
+            <tags xmi:id="0.03525308545922845" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.07404025438902018" key="prefix" value="bpm"/>
+            <tags xmi:id="0.736778989555955" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.11529675795936922" name="comment" title="" visibility="Public"
+         <attributes xmi:id="0.957823065007257" name="comment" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7339796177875917" key="reversedURI"
+            <tags xmi:id="0.8176487616369258" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.24834548363083553" key="prefix" value="bpm"/>
+            <tags xmi:id="0.7629936997741223" key="prefix" value="bpm"/>
          </attributes>
       </classSet>
-      <associationSet xmi:id="0.10550579565040541" name="pooledActors" title="" description=""
+      <associationSet xmi:id="0.870194862808947" name="pooledActors" title="" description=""
                    associationType="Direct">
-         <firstEnd xmi:id="0.08431279037668671" name="pooledActors" title="" cardMax="1"
+         <firstEnd xmi:id="0.08391161832464245" name="pooledActors" title="" cardMax="1"
                 linkedClass="//@classSet.0"/>
-         <secondEnd xmi:id="0.3037010217339936" name="pooledActors" title="" navigable="true"
+         <secondEnd xmi:id="0.9961588950687893" name="pooledActors" title="" navigable="true"
                  cardMax="-1">
-            <linkedClass xmi:id="0.11570377983499025" xsi:type="clazz:Clazz" href="sys.dt#//@classSet.0"/>
+            <linkedClass xmi:id="0.5708665986522382" xsi:type="clazz:Clazz" href="sys.dt#//@classSet.0"/>
          </secondEnd>
       </associationSet>
-      <classSet xmi:id="0.6539848428671932" documentation="" description="" name="workflowTask"
+      <classSet xmi:id="0.44569740408978054" documentation="" description=""
+             name="workflowTask"
              title=""
              aspects=""
              generalizations="//@classSet.0">
-         <tags xmi:id="0.8248788351568905" key="reversedURI"
+         <tags xmi:id="0.07569452194023896" key="reversedURI"
             value="http://www.alfresco.org/model/bpm/1.0"/>
-         <tags xmi:id="0.16718526441832626" key="prefix" value="bpm"/>
-         <attributes xmi:id="0.9575084745514858" name="context" title="" visibility="Public"
+         <tags xmi:id="0.22097976441432843" key="prefix" value="bpm"/>
+         <attributes xmi:id="0.08161757920651613" name="context" title="" visibility="Public"
                   typ="Object"
                   description=""
                   documentation="">
-            <tags xmi:id="0.24006243501435987" key="reversedURI"
+            <tags xmi:id="0.9890439974365228" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.47084312871786693" key="prefix" value="bpm"/>
+            <tags xmi:id="0.2751961979087555" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.3314356976823368" name="outcome" title="" visibility="Public"
+         <attributes xmi:id="0.4411730507692393" name="outcome" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.8089969653096009" key="reversedURI"
+            <tags xmi:id="0.5626342950007804" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.22432901820509166" key="prefix" value="bpm"/>
+            <tags xmi:id="0.07255800015470815" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.7605368805657232" name="completedItems" title="" visibility="Public"
+         <attributes xmi:id="0.12087597341064915" name="completedItems" title="" visibility="Public"
                   typ="Object"
                   description=""
                   documentation="">
-            <tags xmi:id="0.725245194771301" key="reversedURI"
+            <tags xmi:id="0.3998588612941736" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.6083836146797053" key="prefix" value="bpm"/>
+            <tags xmi:id="0.9137030387479529" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.4690968838504901" name="packageActionGroup" title=""
+         <attributes xmi:id="0.6247089693693569" name="packageActionGroup" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.6987228361086018" key="reversedURI"
+            <tags xmi:id="0.6164588977345788" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.9793746494067966" key="prefix" value="bpm"/>
+            <tags xmi:id="0.0056230342087998375" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.5602665095445614" name="packageItemActionGroup" title=""
+         <attributes xmi:id="0.9052815586972762" name="packageItemActionGroup" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.5053589618507919" key="reversedURI"
+            <tags xmi:id="0.8646672489845857" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.6894002693141595" key="prefix" value="bpm"/>
+            <tags xmi:id="0.3561447443137331" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.03974805749986121" name="hiddenTransitions" title=""
+         <attributes xmi:id="0.4522662525565265" name="hiddenTransitions" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.4877286472593254" key="reversedURI"
+            <tags xmi:id="0.7470303690552803" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.5697666517839397" key="prefix" value="bpm"/>
+            <tags xmi:id="0.3754129351782237" key="prefix" value="bpm"/>
          </attributes>
       </classSet>
-      <associationSet xmi:id="0.26913607233272585" name="package" title="" description=""
+      <associationSet xmi:id="0.7977544434663272" name="package" title="" description=""
                    associationType="Direct">
-         <firstEnd xmi:id="0.18205363824415444" name="package" title="" cardMax="1"
+         <firstEnd xmi:id="0.09119748076247047" name="package" title="" cardMax="1"
                 linkedClass="//@classSet.1"/>
-         <secondEnd xmi:id="0.9321970072892731" name="package" title="" navigable="true"
+         <secondEnd xmi:id="0.4540399064583862" name="package" title="" navigable="true"
                  cardMax="1"
                  linkedClass="//@aspectSet.4"/>
       </associationSet>
-      <classSet xmi:id="0.4164423088747585" documentation="" description="" name="startTask"
+      <classSet xmi:id="0.03698766458214464" documentation="" description="" name="startTask"
              title=""
              aspects=""
              generalizations="//@classSet.1">
-         <tags xmi:id="0.7746923781776693" key="reversedURI"
+         <tags xmi:id="0.8161926195979171" key="reversedURI"
             value="http://www.alfresco.org/model/bpm/1.0"/>
-         <tags xmi:id="0.9268054666445059" key="prefix" value="bpm"/>
-         <attributes xmi:id="0.9798497596401271" name="workflowDescription" title=""
+         <tags xmi:id="0.34690783562673444" key="prefix" value="bpm"/>
+         <attributes xmi:id="0.02213707305489432" name="workflowDescription" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.3797309413990001" key="reversedURI"
+            <tags xmi:id="0.15573510113547673" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.7640730041865004" key="prefix" value="bpm"/>
+            <tags xmi:id="0.5666760860826346" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.8158331961063594" name="workflowDueDate" title="" visibility="Public"
+         <attributes xmi:id="0.15834336095853696" name="workflowDueDate" title=""
+                  visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7943384329326018" key="reversedURI"
+            <tags xmi:id="0.12384918212607265" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.7665352628510587" key="prefix" value="bpm"/>
+            <tags xmi:id="0.14588362734034832" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.7767128355948116" name="workflowPriority" title=""
+         <attributes xmi:id="0.34049798241047036" name="workflowPriority" title=""
                   visibility="Public"
                   typ="int"
                   description=""
                   documentation=""
-                  valueList="408069.4580100844">
-            <tags xmi:id="0.004332134407867838" key="reversedURI"
+                  valueList="551053.1606044273">
+            <tags xmi:id="0.5276281999128307" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.6178187368610502" key="prefix" value="bpm"/>
+            <tags xmi:id="0.8930492881298167" key="prefix" value="bpm"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.29066662793823606" documentation="" description=""
+      <classSet xmi:id="0.5465833779610737" documentation="" description=""
              name="workflowDefinition"
              title="Workflow Process Definition"
              aspects="">
-         <generalizations xmi:id="0.06638540958803152" href="cm.dt#//@classSet.2"/>
-         <tags xmi:id="0.14701981501294392" key="reversedURI"
+         <generalizations xmi:id="0.40566739039838784" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.7624722634550076" key="reversedURI"
             value="http://www.alfresco.org/model/bpm/1.0"/>
-         <tags xmi:id="0.5657596841206827" key="prefix" value="bpm"/>
-         <attributes xmi:id="0.9266840398508159" name="definitionName" title="Workflow Name"
+         <tags xmi:id="0.37900156796990303" key="prefix" value="bpm"/>
+         <attributes xmi:id="0.9905162449426748" name="definitionName" title="Workflow Name"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.2695056176472179" key="reversedURI"
+            <tags xmi:id="0.7905852906572957" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.11260936604519989" key="prefix" value="bpm"/>
+            <tags xmi:id="0.9097305266172863" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.8857276228396725" name="engineId" title="Workflow Engine Id"
+         <attributes xmi:id="0.4194712679696463" name="engineId" title="Workflow Engine Id"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.2569820078135696" key="reversedURI"
+            <tags xmi:id="0.9794567488665514" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.5818564241596341" key="prefix" value="bpm"/>
+            <tags xmi:id="0.5909870391838551" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.6477236464690375" name="definitionDeployed" title="Workflow Deployed"
+         <attributes xmi:id="0.6949639204736581" name="definitionDeployed" title="Workflow Deployed"
                   visibility="Public"
                   typ="boolean"
                   description=""
                   documentation="">
-            <tags xmi:id="0.4763184161059154" key="reversedURI"
+            <tags xmi:id="0.007758849013316693" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.11342739149350389" key="prefix" value="bpm"/>
+            <tags xmi:id="0.9676683650931058" key="prefix" value="bpm"/>
          </attributes>
       </classSet>
-      <aspectSet xmi:id="0.9083693567100075" name="assignee" title="" description=""
+      <aspectSet xmi:id="0.658702897097214" name="assignee" title="" description=""
               documentation="">
-         <tags xmi:id="0.22953887263825945" key="reversedURI"
+         <tags xmi:id="0.006484188630240584" key="reversedURI"
             value="http://www.alfresco.org/model/bpm/1.0"/>
-         <tags xmi:id="0.36963724562977285" key="prefix" value="bpm"/>
+         <tags xmi:id="0.709963155274694" key="prefix" value="bpm"/>
       </aspectSet>
-      <associationSet xmi:id="0.07363446424054043" name="assignee" title="" description=""
+      <associationSet xmi:id="0.30577825869411" name="assignee" title="" description=""
                    associationType="Direct">
-         <firstEnd xmi:id="0.6234406721922745" name="assignee" title="" cardMax="1"
+         <firstEnd xmi:id="0.4653576002594787" name="assignee" title="" cardMax="1"
                 linkedClass="//@aspectSet.0"/>
-         <secondEnd xmi:id="0.9958596608689343" name="assignee" title="" navigable="true"
+         <secondEnd xmi:id="0.5922484879171946" name="assignee" title="" navigable="true"
                  cardMax="1">
-            <linkedClass xmi:id="0.5692024001139319" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.8"/>
+            <linkedClass xmi:id="0.3264738935947099" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.8"/>
          </secondEnd>
       </associationSet>
-      <aspectSet xmi:id="0.16200609645961983" name="assignees" title="" description=""
+      <aspectSet xmi:id="0.055781052066982695" name="assignees" title="" description=""
               documentation="">
-         <tags xmi:id="0.033366412018219216" key="reversedURI"
+         <tags xmi:id="0.5249506688512446" key="reversedURI"
             value="http://www.alfresco.org/model/bpm/1.0"/>
-         <tags xmi:id="0.8219925201412597" key="prefix" value="bpm"/>
+         <tags xmi:id="0.17410184771442994" key="prefix" value="bpm"/>
       </aspectSet>
-      <associationSet xmi:id="0.1048758030213015" name="assignees" title="" description=""
+      <associationSet xmi:id="0.7856390683702464" name="assignees" title="" description=""
                    associationType="Direct">
-         <firstEnd xmi:id="0.9269585447589538" name="assignees" title="" cardMax="1"
+         <firstEnd xmi:id="0.5520801615220298" name="assignees" title="" cardMax="1"
                 linkedClass="//@aspectSet.1"/>
-         <secondEnd xmi:id="0.3678311170334856" name="assignees" title="" navigable="true"
+         <secondEnd xmi:id="0.006329699408314515" name="assignees" title="" navigable="true"
                  cardMax="-1">
-            <linkedClass xmi:id="0.32569776051665855" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.8"/>
+            <linkedClass xmi:id="0.6262486341843447" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.8"/>
          </secondEnd>
       </associationSet>
-      <aspectSet xmi:id="0.4173994308799611" name="groupAssignee" title="" description=""
+      <aspectSet xmi:id="0.20774801745405969" name="groupAssignee" title="" description=""
               documentation="">
-         <tags xmi:id="0.9182859692446623" key="reversedURI"
+         <tags xmi:id="0.8539827086887256" key="reversedURI"
             value="http://www.alfresco.org/model/bpm/1.0"/>
-         <tags xmi:id="0.14398658456788027" key="prefix" value="bpm"/>
+         <tags xmi:id="0.06988843379899001" key="prefix" value="bpm"/>
       </aspectSet>
-      <associationSet xmi:id="0.8246646798941336" name="groupAssignee" title="" description=""
+      <associationSet xmi:id="0.21346694094649343" name="groupAssignee" title="" description=""
                    associationType="Direct">
-         <firstEnd xmi:id="0.21734391709864098" name="groupAssignee" title="" cardMax="1"
+         <firstEnd xmi:id="0.18391647052974802" name="groupAssignee" title="" cardMax="1"
                 linkedClass="//@aspectSet.2"/>
-         <secondEnd xmi:id="0.47241030837849174" name="groupAssignee" title="" navigable="true"
+         <secondEnd xmi:id="0.9118223953039026" name="groupAssignee" title="" navigable="true"
                  cardMax="1">
-            <linkedClass xmi:id="0.04450873124685839" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.9"/>
+            <linkedClass xmi:id="0.022392732749001998" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.9"/>
          </secondEnd>
       </associationSet>
-      <aspectSet xmi:id="0.04536869958593481" name="groupAssignees" title="" description=""
+      <aspectSet xmi:id="0.13946268913806237" name="groupAssignees" title="" description=""
               documentation="">
-         <tags xmi:id="0.7767514413244697" key="reversedURI"
+         <tags xmi:id="0.5771550231925885" key="reversedURI"
             value="http://www.alfresco.org/model/bpm/1.0"/>
-         <tags xmi:id="0.6283004469213059" key="prefix" value="bpm"/>
+         <tags xmi:id="0.3518920737711899" key="prefix" value="bpm"/>
       </aspectSet>
-      <associationSet xmi:id="0.03012183933278456" name="groupAssignees" title="" description=""
+      <associationSet xmi:id="0.5996568066001704" name="groupAssignees" title="" description=""
                    associationType="Direct">
-         <firstEnd xmi:id="0.687833029959782" name="groupAssignees" title="" cardMax="1"
+         <firstEnd xmi:id="0.8168928395348133" name="groupAssignees" title="" cardMax="1"
                 linkedClass="//@aspectSet.3"/>
-         <secondEnd xmi:id="0.2064821081623206" name="groupAssignees" title="" navigable="true"
+         <secondEnd xmi:id="0.5718477796298217" name="groupAssignees" title="" navigable="true"
                  cardMax="-1">
-            <linkedClass xmi:id="0.9431347127839828" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.9"/>
+            <linkedClass xmi:id="0.2746255260321281" xsi:type="clazz:Clazz" href="cm.dt#//@classSet.9"/>
          </secondEnd>
       </associationSet>
-      <aspectSet xmi:id="0.2674314482443718" name="workflowPackage" title="" description=""
+      <aspectSet xmi:id="0.5588634198502156" name="workflowPackage" title="" description=""
               documentation="">
-         <tags xmi:id="0.7877316845906193" key="reversedURI"
+         <tags xmi:id="0.33797025741894626" key="reversedURI"
             value="http://www.alfresco.org/model/bpm/1.0"/>
-         <tags xmi:id="0.6482494993422108" key="prefix" value="bpm"/>
-         <attributes xmi:id="0.9543189823147332" name="isSystemPackage" title="" visibility="Public"
+         <tags xmi:id="0.27306345573631974" key="prefix" value="bpm"/>
+         <attributes xmi:id="0.3559764777883341" name="isSystemPackage" title="" visibility="Public"
                   typ="boolean"
                   description=""
                   documentation="">
-            <tags xmi:id="0.5945083866021754" key="reversedURI"
+            <tags xmi:id="0.29064128025239" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.18543464384390274" key="prefix" value="bpm"/>
+            <tags xmi:id="0.5981951605744363" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.46755725309225715" name="workflowDefinitionId" title=""
+         <attributes xmi:id="0.8885660884561692" name="workflowDefinitionId" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.04326177267903242" key="reversedURI"
+            <tags xmi:id="0.8436995013565108" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.6695183094751507" key="prefix" value="bpm"/>
+            <tags xmi:id="0.3455834727905137" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.31101015851070946" name="workflowDefinitionName" title=""
+         <attributes xmi:id="0.40564139109686626" name="workflowDefinitionName" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.4722258289623017" key="reversedURI"
+            <tags xmi:id="0.41408837974108625" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.4963476694364648" key="prefix" value="bpm"/>
+            <tags xmi:id="0.7482465346619059" key="prefix" value="bpm"/>
          </attributes>
-         <attributes xmi:id="0.6517922693535693" name="workflowInstanceId" title=""
+         <attributes xmi:id="0.6107112476818876" name="workflowInstanceId" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.924862999887235" key="reversedURI"
+            <tags xmi:id="0.6943580901761399" key="reversedURI"
                value="http://www.alfresco.org/model/bpm/1.0"/>
-            <tags xmi:id="0.9009241499210421" key="prefix" value="bpm"/>
+            <tags xmi:id="0.7863756329083059" key="prefix" value="bpm"/>
          </attributes>
       </aspectSet>
    </clazz:Model>

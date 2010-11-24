@@ -6,124 +6,122 @@
              xmlns:xmi="http://www.omg.org/XMI"
              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
              xmi:version="2.0"
-             xmi:id="0.6298380287347137"
+             xmi:id="0.6422495275117623"
              name="ia">
-      <classSet xmi:id="0.25008564885152373" documentation="" description=""
-             name="calendarEvent"
+      <classSet xmi:id="0.36845749618002" documentation="" description="" name="calendarEvent"
              title="Calendar Event"
              aspects="">
-         <generalizations xmi:id="0.41560179860718194" href="cm.dt#//@classSet.2"/>
-         <tags xmi:id="0.42709880814714407" key="reversedURI"
+         <generalizations xmi:id="0.6528305544895404" href="cm.dt#//@classSet.2"/>
+         <tags xmi:id="0.6687035713693318" key="reversedURI"
             value="http://www.alfresco.org/model/calendar"/>
-         <tags xmi:id="0.947968292328744" key="prefix" value="ia"/>
-         <attributes xmi:id="0.23937472650952996" name="whatEvent" title="" visibility="Public"
+         <tags xmi:id="0.0030683469600190083" key="prefix" value="ia"/>
+         <attributes xmi:id="0.6240647573219653" name="whatEvent" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.749892502019657" key="reversedURI"
+            <tags xmi:id="0.17707642949818758" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.7059182396052843" key="prefix" value="ia"/>
+            <tags xmi:id="0.39001878156462333" key="prefix" value="ia"/>
          </attributes>
-         <attributes xmi:id="0.4372996319167256" name="fromDate" title="" visibility="Public"
+         <attributes xmi:id="0.9596401636155848" name="fromDate" title="" visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.09539069950474977" key="reversedURI"
+            <tags xmi:id="0.8968626541181751" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.19346907460858243" key="prefix" value="ia"/>
+            <tags xmi:id="0.5628368859229933" key="prefix" value="ia"/>
          </attributes>
-         <attributes xmi:id="0.055327748589478754" name="toDate" title="" visibility="Public"
+         <attributes xmi:id="0.0715458103558766" name="toDate" title="" visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.2654217537782425" key="reversedURI"
+            <tags xmi:id="0.6378749164783877" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.2251936354548194" key="prefix" value="ia"/>
+            <tags xmi:id="0.13671058521946444" key="prefix" value="ia"/>
          </attributes>
-         <attributes xmi:id="0.47813670395951613" name="whereEvent" title="" visibility="Public"
+         <attributes xmi:id="0.762454259370741" name="whereEvent" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.7070362251617208" key="reversedURI"
+            <tags xmi:id="0.6436502509109602" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.3483930089630105" key="prefix" value="ia"/>
+            <tags xmi:id="0.03809905894984922" key="prefix" value="ia"/>
          </attributes>
-         <attributes xmi:id="0.38243978492624975" name="descriptionEvent" title=""
+         <attributes xmi:id="0.5489608987290278" name="descriptionEvent" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.17651673257874523" key="reversedURI"
+            <tags xmi:id="0.8494116390853478" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.6892331490050713" key="prefix" value="ia"/>
+            <tags xmi:id="0.28094218714472896" key="prefix" value="ia"/>
          </attributes>
-         <attributes xmi:id="0.4788426934493295" name="colorEvent" title="" visibility="Public"
+         <attributes xmi:id="0.5235574277201577" name="colorEvent" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.24759720680519048" key="reversedURI"
+            <tags xmi:id="0.8896188374059123" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.6644465965796303" key="prefix" value="ia"/>
+            <tags xmi:id="0.5571415401606994" key="prefix" value="ia"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.8100602293741689" documentation="" description="" name="calendar"
+      <classSet xmi:id="0.7650503718482385" documentation="" description="" name="calendar"
              title="Calendar Space"
              aspects="">
-         <generalizations xmi:id="0.9654497341602076" href="cm.dt#//@classSet.1"/>
-         <tags xmi:id="0.8262167254558707" key="reversedURI"
+         <generalizations xmi:id="0.5507413304289958" href="cm.dt#//@classSet.1"/>
+         <tags xmi:id="0.22694560172210632" key="reversedURI"
             value="http://www.alfresco.org/model/calendar"/>
-         <tags xmi:id="0.20036230527940646" key="prefix" value="ia"/>
-         <attributes xmi:id="0.39933904101580187" name="whatEventDefault" title=""
+         <tags xmi:id="0.8885943460017857" key="prefix" value="ia"/>
+         <attributes xmi:id="0.4221918651449561" name="whatEventDefault" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.024550991125351418" key="reversedURI"
+            <tags xmi:id="0.23031817820148903" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.27246616774901944" key="prefix" value="ia"/>
+            <tags xmi:id="0.25657109137900425" key="prefix" value="ia"/>
          </attributes>
-         <attributes xmi:id="0.3316548152472123" name="fromDateDefault" title="" visibility="Public"
+         <attributes xmi:id="0.829190056656999" name="fromDateDefault" title="" visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.435782342996742" key="reversedURI"
+            <tags xmi:id="0.5766081937387323" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.485921357124094" key="prefix" value="ia"/>
+            <tags xmi:id="0.6716962517373313" key="prefix" value="ia"/>
          </attributes>
-         <attributes xmi:id="0.9804878547632202" name="toDateDefault" title="" visibility="Public"
+         <attributes xmi:id="0.004253271861633046" name="toDateDefault" title="" visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.04990579827024999" key="reversedURI"
+            <tags xmi:id="0.13815877054664272" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.43789355870491375" key="prefix" value="ia"/>
+            <tags xmi:id="0.9111334289545299" key="prefix" value="ia"/>
          </attributes>
-         <attributes xmi:id="0.7273068379482954" name="whereEventDefault" title=""
+         <attributes xmi:id="0.8347660689679867" name="whereEventDefault" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.302740778316399" key="reversedURI"
+            <tags xmi:id="0.15374161080601156" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.8600725068387682" key="prefix" value="ia"/>
+            <tags xmi:id="0.0419098085573022" key="prefix" value="ia"/>
          </attributes>
-         <attributes xmi:id="0.028985256813467752" name="colorEventDefault" title=""
+         <attributes xmi:id="0.7326058865280765" name="colorEventDefault" title=""
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.13608114700851714" key="reversedURI"
+            <tags xmi:id="0.7891169458655453" key="reversedURI"
                value="http://www.alfresco.org/model/calendar"/>
-            <tags xmi:id="0.05234010429804248" key="prefix" value="ia"/>
+            <tags xmi:id="0.29677192412063913" key="prefix" value="ia"/>
          </attributes>
       </classSet>
-      <associationSet xmi:id="0.20310515174905153" name="subscribedCalendarList" title=""
+      <associationSet xmi:id="0.40795006786060495" name="subscribedCalendarList" title=""
                    description=""
                    associationType="Direct">
-         <firstEnd xmi:id="0.40022394115725946" name="subscribedCalendarList" title=""
-                cardMax="-1"
+         <firstEnd xmi:id="0.9025292809519057" name="subscribedCalendarList" title="" cardMax="-1"
                 linkedClass="//@classSet.1"/>
-         <secondEnd xmi:id="0.8114352576097964" name="subscribedCalendarList" title=""
+         <secondEnd xmi:id="0.864036108874172" name="subscribedCalendarList" title=""
                  navigable="true"
                  cardMax="-1"
                  linkedClass="//@classSet.1"/>

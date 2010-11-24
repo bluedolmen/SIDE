@@ -6,155 +6,155 @@
              xmlns:xmi="http://www.omg.org/XMI"
              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
              xmi:version="2.0"
-             xmi:id="0.0406211301536048"
+             xmi:id="0.6821913097001291"
              name="jcr">
-      <classSet xmi:id="0.9307629654663835" documentation="" description="" name="base"
+      <classSet xmi:id="0.13983293825539378" documentation="" description="" name="base"
              title=""
              aspects="">
-         <generalizations xmi:id="0.8284924434510198" href="sys.dt#//@classSet.0"/>
-         <tags xmi:id="0.44035724746015226" key="reversedURI"
+         <generalizations xmi:id="0.7965220892713522" href="sys.dt#//@classSet.0"/>
+         <tags xmi:id="0.1150459381629847" key="reversedURI"
             value="http://www.jcp.org/jcr/nt/1.0"/>
-         <tags xmi:id="0.6238736114536692" key="prefix" value="nt"/>
-         <attributes xmi:id="0.22569709011475003" name="primaryType" title="" visibility="Public"
+         <tags xmi:id="0.038997563349395525" key="prefix" value="nt"/>
+         <attributes xmi:id="0.1524290596065928" name="primaryType" title="" visibility="Public"
                   typ="Object"
                   description=""
                   documentation="">
-            <tags xmi:id="0.5076597726564035" key="reversedURI"
+            <tags xmi:id="0.1160337449926917" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.9965562990137107" key="prefix" value="jcr"/>
+            <tags xmi:id="0.17797357689896376" key="prefix" value="jcr"/>
          </attributes>
-         <attributes xmi:id="0.09837676421455033" name="mixinTypes" title="" visibility="Public"
+         <attributes xmi:id="0.4378704819651462" name="mixinTypes" title="" visibility="Public"
                   typ="Object"
                   description=""
                   documentation="">
-            <tags xmi:id="0.4959435737843513" key="reversedURI"
+            <tags xmi:id="0.5339463540811158" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.0039283792288679065" key="prefix" value="jcr"/>
+            <tags xmi:id="0.1505277400368641" key="prefix" value="jcr"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.021908976645844014" documentation="" description=""
+      <classSet xmi:id="0.030538288050429907" documentation="" description=""
              name="hierarchyNode"
              title=""
              aspects=""
              generalizations="//@classSet.0">
-         <tags xmi:id="0.03559269423394007" key="reversedURI"
+         <tags xmi:id="0.08917401532984093" key="reversedURI"
             value="http://www.jcp.org/jcr/nt/1.0"/>
-         <tags xmi:id="0.6863887637125318" key="prefix" value="nt"/>
-         <attributes xmi:id="0.7224390028587565" name="created" title="" visibility="Public"
+         <tags xmi:id="0.28037047762343625" key="prefix" value="nt"/>
+         <attributes xmi:id="0.016733279796824596" name="created" title="" visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.13948572691639582" key="reversedURI"
+            <tags xmi:id="0.41224585084490106" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.8057906667746569" key="prefix" value="jcr"/>
+            <tags xmi:id="0.5194796828399656" key="prefix" value="jcr"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.45926645117650167" documentation="" description="" name="file"
+      <classSet xmi:id="0.3756639973468935" documentation="" description="" name="file"
              title=""
              aspects=""
              generalizations="//@classSet.1">
-         <tags xmi:id="0.9298917992353356" key="reversedURI"
+         <tags xmi:id="0.7564916506405969" key="reversedURI"
             value="http://www.jcp.org/jcr/nt/1.0"/>
-         <tags xmi:id="0.7685496831643799" key="prefix" value="nt"/>
+         <tags xmi:id="0.9999692112812314" key="prefix" value="nt"/>
       </classSet>
-      <associationSet xmi:id="0.3572137357609131" name="content" title="" description=""
+      <associationSet xmi:id="0.27423063781181933" name="content" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.8609885409257111" name="content" title="" cardMax="-1"
+         <firstEnd xmi:id="0.32895281244517116" name="content" title="" cardMax="-1"
                 linkedClass="//@classSet.2"/>
-         <secondEnd xmi:id="0.5461495526607919" name="content" title="" navigable="true"
+         <secondEnd xmi:id="0.37636723416803675" name="content" title="" navigable="true"
                  cardMax="1"
                  linkedClass="//@classSet.0"/>
       </associationSet>
-      <classSet xmi:id="0.9343665779176659" documentation="" description="" name="folder"
+      <classSet xmi:id="0.908794654467957" documentation="" description="" name="folder"
              title=""
              aspects=""
              generalizations="//@classSet.1">
-         <tags xmi:id="0.047103407682372644" key="reversedURI"
+         <tags xmi:id="0.11062182480114247" key="reversedURI"
             value="http://www.jcp.org/jcr/nt/1.0"/>
-         <tags xmi:id="0.19040811314738748" key="prefix" value="nt"/>
+         <tags xmi:id="0.13803284398751914" key="prefix" value="nt"/>
       </classSet>
-      <associationSet xmi:id="0.7527285675811304" name="contains" title="" description=""
+      <associationSet xmi:id="0.030261006579943572" name="contains" title="" description=""
                    associationType="Composition">
-         <firstEnd xmi:id="0.08414965181729717" name="contains" title="" cardMax="-1"
+         <firstEnd xmi:id="0.2945575138669254" name="contains" title="" cardMax="-1"
                 linkedClass="//@classSet.3"/>
-         <secondEnd xmi:id="0.8224644316987407" name="contains" title="" navigable="true"
+         <secondEnd xmi:id="0.19256798175689593" name="contains" title="" navigable="true"
                  cardMax="-1"
                  linkedClass="//@classSet.1"/>
       </associationSet>
-      <classSet xmi:id="0.9242581885345609" documentation="" description="" name="resource"
+      <classSet xmi:id="0.8163122084367301" documentation="" description="" name="resource"
              title=""
              aspects="//@aspectSet.0 "
              generalizations="//@classSet.0">
-         <tags xmi:id="0.9743604083811207" key="reversedURI"
+         <tags xmi:id="0.75777683769549" key="reversedURI"
             value="http://www.jcp.org/jcr/nt/1.0"/>
-         <tags xmi:id="0.13646502384672354" key="prefix" value="nt"/>
-         <attributes xmi:id="0.5728655370625585" name="encoding" title="" visibility="Public"
+         <tags xmi:id="0.03746779686219315" key="prefix" value="nt"/>
+         <attributes xmi:id="0.39045080477259275" name="encoding" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.11898590440531809" key="reversedURI"
+            <tags xmi:id="0.15643710992837334" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.45484621249089197" key="prefix" value="jcr"/>
+            <tags xmi:id="0.9850360980412766" key="prefix" value="jcr"/>
          </attributes>
-         <attributes xmi:id="0.32052452589818936" name="mimeType" title="" visibility="Public"
+         <attributes xmi:id="0.35048415258352594" name="mimeType" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.5332368592987338" key="reversedURI"
+            <tags xmi:id="0.03540718033687851" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.052928909884326636" key="prefix" value="jcr"/>
+            <tags xmi:id="0.8462329417082197" key="prefix" value="jcr"/>
          </attributes>
-         <attributes xmi:id="0.34471460866388015" name="data" title="" visibility="Public"
+         <attributes xmi:id="0.944831366195289" name="data" title="" visibility="Public"
                   typ="Object"
                   description=""
                   documentation="">
-            <tags xmi:id="0.9721444335200727" key="reversedURI"
+            <tags xmi:id="0.4266026139106527" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.20153767404411949" key="prefix" value="jcr"/>
+            <tags xmi:id="0.3812411042488869" key="prefix" value="jcr"/>
          </attributes>
-         <attributes xmi:id="0.9987571901937029" name="lastModified" title="" visibility="Public"
+         <attributes xmi:id="0.4012240577237405" name="lastModified" title="" visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.9457334361399187" key="reversedURI"
+            <tags xmi:id="0.2794556257190477" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.3447504252154103" key="prefix" value="jcr"/>
+            <tags xmi:id="0.9159840342315495" key="prefix" value="jcr"/>
          </attributes>
       </classSet>
-      <aspectSet xmi:id="0.35433337730868475" name="referenceable" title="" description=""
+      <aspectSet xmi:id="0.5866115705615201" name="referenceable" title="" description=""
               documentation="">
-         <tags xmi:id="0.9233294129239912" key="reversedURI"
+         <tags xmi:id="0.6328791179198306" key="reversedURI"
             value="http://www.jcp.org/jcr/mix/1.0"/>
-         <tags xmi:id="0.5161141087743127" key="prefix" value="mix"/>
-         <attributes xmi:id="0.666660267909106" name="uuid" title="" visibility="Public"
+         <tags xmi:id="0.3522382084700145" key="prefix" value="mix"/>
+         <attributes xmi:id="0.1068522582148812" name="uuid" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.39273368950341603" key="reversedURI"
+            <tags xmi:id="0.24596941420979168" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.6005907114589786" key="prefix" value="jcr"/>
+            <tags xmi:id="0.5328617540371118" key="prefix" value="jcr"/>
          </attributes>
       </aspectSet>
-      <aspectSet xmi:id="0.8302870018028847" name="lockable" title="" description=""
+      <aspectSet xmi:id="0.21276444347579027" name="lockable" title="" description=""
               documentation="">
-         <tags xmi:id="0.12997758668089499" key="reversedURI"
+         <tags xmi:id="0.17335248837994843" key="reversedURI"
             value="http://www.jcp.org/jcr/mix/1.0"/>
-         <tags xmi:id="0.43180866238861393" key="prefix" value="mix"/>
-         <attributes xmi:id="0.09286424627238421" name="lockOwner" title="" visibility="Public"
+         <tags xmi:id="0.3697863074532831" key="prefix" value="mix"/>
+         <attributes xmi:id="0.52094851685096" name="lockOwner" title="" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.5084150334976691" key="reversedURI"
+            <tags xmi:id="0.7359511071626322" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.23178155968939218" key="prefix" value="jcr"/>
+            <tags xmi:id="0.7490675704266927" key="prefix" value="jcr"/>
          </attributes>
-         <attributes xmi:id="0.25851314696715566" name="lockIsDeep" title="" visibility="Public"
+         <attributes xmi:id="0.24293970717894642" name="lockIsDeep" title="" visibility="Public"
                   typ="boolean"
                   description=""
                   documentation="">
-            <tags xmi:id="0.8068659816171276" key="reversedURI"
+            <tags xmi:id="0.9779096773787301" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.9833517722340898" key="prefix" value="jcr"/>
+            <tags xmi:id="0.18659499721445472" key="prefix" value="jcr"/>
          </attributes>
       </aspectSet>
    </clazz:Model>
