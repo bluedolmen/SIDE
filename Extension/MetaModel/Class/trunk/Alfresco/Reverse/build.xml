@@ -37,9 +37,10 @@
 	<import file="src/build/aggregate.xml" />
 	<import file="src/build/reverse.xml" />
 	<import file="src/build/decompose.xml" />
+	<import file="src/build/delete_duplicate_enum.xml" />
 		
 	<target name="reverse" description="Reverses the Alfresco model to SIDE 2.0"
-			depends="initialize,well_formation,reverse-all-2.0,resolve,produce">
+			depends="initialize,well_formation,reverse-all-2.0,del_duplicate_enum,resolve,produce">
     </target>
 
 </project>
