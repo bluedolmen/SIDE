@@ -26,9 +26,10 @@ public class RenderableActionField extends Renderable {
 
 		super();
 		/*
-		 * Ds un wrkflw, une transition de name "Relire" et de label "Envoyer à la relecture" nous
-		 * donne un id="transition/Relire". En dehors d'un workflow, l'id du bouton est "Relire".
-		 * Dans tous les cas, "Envoyer à la relecture" est le texte affiché sur le bouton.
+		 * Ds un wrkflw, une transition de name "Relire" et de label
+		 * "Envoyer à la relecture" nous donne un id="transition/Relire". En
+		 * dehors d'un workflow, l'id du bouton est "Relire". Dans tous les cas,
+		 * "Envoyer à la relecture" est le texte affiché sur le bouton.
 		 */
 		ModelElement mel = formElement.getRef();
 		if (mel != null) {
@@ -37,33 +38,36 @@ public class RenderableActionField extends Renderable {
 		String actionName;
 		String infixe;
 
-		if ((mel != null) && (mel instanceof Transition)) { // this is a workflow transition button
+		if ((mel != null) && (mel instanceof Transition)) { // this is a
+			// workflow
+			// transition button
 			actionName = formElement.getId();
 			infixe = MsgId.INT_ACT_CODE_WRKFLW_TRANSITION.getText();
+		} else if (formElement.getId().equals(MsgId.INT_ACT_CODE_WRKFLW_SAVE.getText())) {
+			actionName = "save"; // not used
+			infixe = MsgId.INT_ACT_CODE_WRKFLW_SAVE.getText();
 		} else { // this is a user-added action button
 			actionName = StringUtils.trim(formElement.getAction_handler());
 			infixe = MsgId.INT_ACT_CODE_EXECUTE.getText();
 		}
 		label = formElement.getLabel();
-		// submission = new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER + infixe + "/"
+		// submission = new ModelElementSubmission(MsgId.INT_URI_SCHEME_WRITER +
+		// infixe + "/"
 		// + actionName, label, true, DEFAULT_VALIDATE_FIRST);
-		String action = MsgId.INT_URI_SCHEME_WRITER + infixe + "?"
-				+ MsgId.INT_ACT_PARAM_EXEC_ACTION + "=" + actionName;
+		String action = MsgId.INT_URI_SCHEME_WRITER + infixe + "?" + MsgId.INT_ACT_PARAM_EXEC_ACTION + "=" + actionName;
 		submission = new ModelElementSubmission(action, label, true, DEFAULT_VALIDATE_FIRST);
 		RenderableSubmit button = new RenderableSubmit(submission, label, false);
 		add(button);
 	}
 
 	@Override
-	public Path getPath(String parentPath, Stack<Renderable> parents,
-			Stack<Rendered> renderedParents) {
+	public Path getPath(String parentPath, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
 
 		return ROOT_RELATIVE;
 	}
 
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
-			boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 
 		RenderedParentGroup renderedParentGroup = new RenderedParentGroup(renderedParents);
 		renderedParentGroup.getParent().addModelElement(submission);
