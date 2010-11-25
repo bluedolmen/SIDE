@@ -11,7 +11,6 @@
 		</xsl:copy>
 	</xsl:template>
 
-
 	<xsl:template match="@valueList">
 		<xsl:if test=".!=''">		
 			<xsl:variable name="value" select="."/>
