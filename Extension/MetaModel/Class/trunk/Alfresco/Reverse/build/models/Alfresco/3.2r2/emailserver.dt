@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:clazz="http://www.kerblue.org/class/1.0"
              xmlns:xmi="http://www.omg.org/XMI"
              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
              xmi:version="2.0"
-             xmi:id="0.3962549352519571"
+             xmi:id="0.3716742947797701"
              name="emailserver">
-      <aspectSet xmi:id="0.8737548521926886" name="emailed" title="Emailed" description=""
+      <aspectSet xmi:id="0.8676814152051868" name="emailed" title="Emailed" description=""
               documentation="">
-         <tags xmi:id="0.7576718314774339" key="reversedURI"
+         <tags xmi:id="0.14474857015607523" key="reversedURI"
             value="http://www.alfresco.org/model/emailserver/1.0"/>
-         <tags xmi:id="0.23286956519306334" key="prefix" value="emailserver"/>
+         <tags xmi:id="0.7318028591225434" key="prefix" value="emailserver"/>
       </aspectSet>
-      <aspectSet xmi:id="0.12308188167455214" name="aliasable" title="Email Alias"
-              description=""
+      <aspectSet xmi:id="0.6630445355894279" name="aliasable" title="Email Alias" description=""
               documentation="">
-         <tags xmi:id="0.22008081161546644" key="reversedURI"
+         <tags xmi:id="0.13054357061728306" key="reversedURI"
             value="http://www.alfresco.org/model/emailserver/1.0"/>
-         <tags xmi:id="0.7154876835598272" key="prefix" value="emailserver"/>
-         <attributes xmi:id="0.08224689912457428" name="alias" title="Alias" visibility="Public"
+         <tags xmi:id="0.8137434175316791" key="prefix" value="emailserver"/>
+         <attributes xmi:id="0.010216517773230294" name="alias" title="Alias" visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.16169799580943123" key="reversedURI"
+            <tags xmi:id="0.3945053817728411" key="reversedURI"
                value="http://www.alfresco.org/model/emailserver/1.0"/>
-            <tags xmi:id="0.6932142677216409" key="prefix" value="emailserver"/>
+            <tags xmi:id="0.08597268526959734" key="prefix" value="emailserver"/>
          </attributes>
       </aspectSet>
    </clazz:Model>

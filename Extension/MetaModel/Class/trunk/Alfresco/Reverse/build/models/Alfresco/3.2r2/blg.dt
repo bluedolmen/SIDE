@@ -1,143 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<clazz:Model xmlns:math="java:java.lang.Math" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<clazz:Model xmlns:math="java:java.lang.Math" xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:clazz="http://www.kerblue.org/class/1.0"
              xmlns:xmi="http://www.omg.org/XMI"
              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
              xmi:version="2.0"
-             xmi:id="0.6420241932143621"
+             xmi:id="0.8503580747668051"
              name="blg">
-      <aspectSet xmi:id="0.18212449660476293" name="blogDetails" title="Blog Details"
+      <aspectSet xmi:id="0.19915700122199687" name="blogDetails" title="Blog Details"
               description=""
               documentation="">
-         <tags xmi:id="0.5831800972335056" key="reversedURI"
+         <tags xmi:id="0.7827509811034679" key="reversedURI"
             value="http://www.alfresco.org/model/blogintegration/1.0"/>
-         <tags xmi:id="0.8140847861492421" key="prefix" value="blg"/>
-         <attributes xmi:id="0.311384716857927" name="blogImplementation" title="Blog Type"
+         <tags xmi:id="0.40498036164687956" key="prefix" value="blg"/>
+         <attributes xmi:id="0.8753974778310715" name="blogImplementation" title="Blog Type"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.8070456868925173" key="reversedURI"
+            <tags xmi:id="0.188142034340395" key="reversedURI"
                value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.999293730745387" key="prefix" value="blg"/>
+            <tags xmi:id="0.2313497056498186" key="prefix" value="blg"/>
          </attributes>
-         <attributes xmi:id="0.4735601277551036" name="id" title="Blog Identifier"
+         <attributes xmi:id="0.7653173782224117" name="id" title="Blog Identifier"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.24929854740712043" key="reversedURI"
+            <tags xmi:id="0.17255280325772748" key="reversedURI"
                value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.22833458785637029" key="prefix" value="blg"/>
+            <tags xmi:id="0.1687788470873023" key="prefix" value="blg"/>
          </attributes>
-         <attributes xmi:id="0.0043231780618118165" name="name" title="Blog Name"
+         <attributes xmi:id="0.6732511432818588" name="name" title="Blog Name" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.5061853778231673" key="reversedURI"
+               value="http://www.alfresco.org/model/blogintegration/1.0"/>
+            <tags xmi:id="0.1025118672141152" key="prefix" value="blg"/>
+         </attributes>
+         <attributes xmi:id="0.23728800496518732" name="description" title="Blog Description"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.3440922924379545" key="reversedURI"
+            <tags xmi:id="0.01820544655593881" key="reversedURI"
                value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.5777722303112263" key="prefix" value="blg"/>
+            <tags xmi:id="0.3019804368845651" key="prefix" value="blg"/>
          </attributes>
-         <attributes xmi:id="0.4644253566916895" name="description" title="Blog Description"
+         <attributes xmi:id="0.2632549822531993" name="url" title="Blog URL" visibility="Public"
+                  typ="String"
+                  description=""
+                  documentation="">
+            <tags xmi:id="0.013181762190835666" key="reversedURI"
+               value="http://www.alfresco.org/model/blogintegration/1.0"/>
+            <tags xmi:id="0.30880210265013064" key="prefix" value="blg"/>
+         </attributes>
+         <attributes xmi:id="0.7015447060538706" name="userName" title="Blog User Name"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.027483236951200474" key="reversedURI"
+            <tags xmi:id="0.6808329870811534" key="reversedURI"
                value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.6063488532878855" key="prefix" value="blg"/>
+            <tags xmi:id="0.9999412253969776" key="prefix" value="blg"/>
          </attributes>
-         <attributes xmi:id="0.05378545976332483" name="url" title="Blog URL" visibility="Public"
-                  typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.1259500271460966" key="reversedURI"
-               value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.5158191978761166" key="prefix" value="blg"/>
-         </attributes>
-         <attributes xmi:id="0.06659114844940506" name="userName" title="Blog User Name"
+         <attributes xmi:id="0.3625824492055545" name="password" title="Blog User Password"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.9208165893957885" key="reversedURI"
+            <tags xmi:id="0.295223330412985" key="reversedURI"
                value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.6685779181858043" key="prefix" value="blg"/>
-         </attributes>
-         <attributes xmi:id="0.1889099725753972" name="password" title="Blog User Password"
-                  visibility="Public"
-                  typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.8781859561498172" key="reversedURI"
-               value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.1751601132120436" key="prefix" value="blg"/>
+            <tags xmi:id="0.45363345598289784" key="prefix" value="blg"/>
          </attributes>
       </aspectSet>
-      <aspectSet xmi:id="0.06669735953991807" name="blogPost" title="Blog Post" description=""
+      <aspectSet xmi:id="0.4921459418278936" name="blogPost" title="Blog Post" description=""
               documentation="">
-         <tags xmi:id="0.837956320182588" key="reversedURI"
+         <tags xmi:id="0.710123909114763" key="reversedURI"
             value="http://www.alfresco.org/model/blogintegration/1.0"/>
-         <tags xmi:id="0.04902590926828698" key="prefix" value="blg"/>
-         <attributes xmi:id="0.2789271380432268" name="postId" title="Blog post identifier"
+         <tags xmi:id="0.6469561105735978" key="prefix" value="blg"/>
+         <attributes xmi:id="0.21405740674988039" name="postId" title="Blog post identifier"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.8971057246019568" key="reversedURI"
+            <tags xmi:id="0.881503705306405" key="reversedURI"
                value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.7973361101807315" key="prefix" value="blg"/>
+            <tags xmi:id="0.6017096439802085" key="prefix" value="blg"/>
          </attributes>
-         <attributes xmi:id="0.0741226673723735" name="published" title="Blog published"
+         <attributes xmi:id="0.0064489290888423145" name="published" title="Blog published"
                   visibility="Public"
                   typ="boolean"
                   description=""
                   documentation="">
-            <tags xmi:id="0.45806491462541543" key="reversedURI"
+            <tags xmi:id="0.502974037536853" key="reversedURI"
                value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.49863205447766845" key="prefix" value="blg"/>
+            <tags xmi:id="0.5159855359338797" key="prefix" value="blg"/>
          </attributes>
-         <attributes xmi:id="0.7762796860049734" name="link" title="Blog post link"
+         <attributes xmi:id="0.03976746886324478" name="link" title="Blog post link"
                   visibility="Public"
                   typ="String"
                   description=""
                   documentation="">
-            <tags xmi:id="0.28751921891831667" key="reversedURI"
+            <tags xmi:id="0.6963530832169577" key="reversedURI"
                value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.986427017502981" key="prefix" value="blg"/>
+            <tags xmi:id="0.040015981802790535" key="prefix" value="blg"/>
          </attributes>
-         <attributes xmi:id="0.9566239007946935" name="posted" title="Date posted"
+         <attributes xmi:id="0.9742793272668928" name="posted" title="Date posted"
                   visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.9541376330846483" key="reversedURI"
+            <tags xmi:id="0.635082170769396" key="reversedURI"
                value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.6888012299141384" key="prefix" value="blg"/>
+            <tags xmi:id="0.8555131823577607" key="prefix" value="blg"/>
          </attributes>
-         <attributes xmi:id="0.2758709299112736" name="lastUpdate" title="Date last updated"
+         <attributes xmi:id="0.91672328964437" name="lastUpdate" title="Date last updated"
                   visibility="Public"
                   typ="Date"
                   description=""
                   documentation="">
-            <tags xmi:id="0.15048856990109638" key="reversedURI"
+            <tags xmi:id="0.7320326767686968" key="reversedURI"
                value="http://www.alfresco.org/model/blogintegration/1.0"/>
-            <tags xmi:id="0.1147847232859539" key="prefix" value="blg"/>
+            <tags xmi:id="0.5818556661559924" key="prefix" value="blg"/>
          </attributes>
       </aspectSet>
-      <associationSet xmi:id="0.06686958438557478" name="blogDetails" title="Blog details"
+      <associationSet xmi:id="0.9117271550374291" name="blogDetails" title="Blog details"
                    description=""
                    associationType="Direct">
-         <firstEnd xmi:id="0.16755512011794582" name="blogDetails" title="Blog details"
+         <firstEnd xmi:id="0.9397394674029073" name="blogDetails" title="Blog details"
                 cardMax="-1"
                 linkedClass="//@aspectSet.1"/>
-         <secondEnd xmi:id="0.9979856029335795" name="blogDetails" title="Blog details"
+         <secondEnd xmi:id="0.7168642595207909" name="blogDetails" title="Blog details"
                  navigable="true"
                  cardMax="1">
-            <linkedClass xmi:id="0.12402322744177485" xsi:type="clazz:Aspect"
+            <linkedClass xmi:id="0.20000958449325945" xsi:type="clazz:Aspect"
                       href="blg.dt#//@aspectSet.0"/>
          </secondEnd>
       </associationSet>
