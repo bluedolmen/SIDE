@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="duplicate-enum" basedir="../.." default="del_duplicate_enum">
+
+	<import file="../../build.xml" />
+	
+	<target name="del_duplicate_enum">
+		<xslt in="${export.dir}/${models}.dt"
+			  style="${xsl.dir}/delete_duplicate_enum.xsl"
+			  out="${export.dir}/${models}.xml">
+			</xslt>
+	</target>
+	
+</project>
