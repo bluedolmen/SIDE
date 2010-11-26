@@ -27,6 +27,7 @@ public class WorkflowInitialization {
 
 	/**
 	 * Launch initialization from a Workflow Form Collection
+	 * 
 	 * @param fc
 	 * @param domain
 	 * @return
@@ -36,8 +37,8 @@ public class WorkflowInitialization {
 		Process p = fc.getLinked_process();
 		if (p != null) {
 			boolean doWork = true;
-			if(fc.getForms().size() > 0) {
-				doWork = UIUtils.showConfirmation("Workflow already set","This Workflow Form Collection has already been set. Do you want to overwrite it?");
+			if (fc.getForms().size() > 0) {
+				doWork = UIUtils.showConfirmation("Workflow already set", "This Workflow Form Collection has already been set. Do you want to overwrite it?");
 			}
 
 			if (doWork) {
@@ -56,21 +57,21 @@ public class WorkflowInitialization {
 
 				// For each task we create a form
 				for (State s : l) {
-					FormWorkflow fw = createTaskForForm(p,s);
+					FormWorkflow fw = createTaskForForm(p, s);
 					fw.setRef(s);
 					lf.add(fw);
 				}
 				cmd.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormCollection_Forms(), lf));
 			}
 		} else {
-			UIUtils.showError("No Process defined","No Process has been defined. \n"
-					+ "Choose one and run Initialize again.");
+			UIUtils.showError("No Process defined", "No Process has been defined. \n" + "Choose one and run Initialize again.");
 		}
 		return cmd;
 	}
 
 	/**
 	 * Return a form a Task
+	 * 
 	 * @param p
 	 * @param s
 	 * @return
@@ -88,10 +89,10 @@ public class WorkflowInitialization {
 				//if (a.getAllowedValues().size() == 0) { 
 				// @Amenel: ModelChoiceFields are not supported in workflow forms (yet). Fields with
 				// an allowed values list must remain a CharField since there's no class associated.
-					Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
-					if (f != null) {
-						fw.getChildren().add(f);
-					}
+				Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
+				if (f != null) {
+					fw.getChildren().add(f);
+				}
 				// } else {
 				// ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
 				// f.setId(a.getName());
@@ -116,21 +117,31 @@ public class WorkflowInitialization {
 					}
 
 					// Commented : add the form class instead of model choice field
-					/*FormClass fc = FormFactory.eINSTANCE.createFormClass();
-					fc.setReal_class(c);
-					fc.getChildren().addAll(ClassInitialization.getChildForFormClassFromClazz(fc));
-					fw.getChildren().add(fc);*/
+					/*
+					 * FormClass fc = FormFactory.eINSTANCE.createFormClass();
+					 * fc.setReal_class(c);
+					 * fc.getChildren().addAll(ClassInitialization.
+					 * getChildForFormClassFromClazz(fc));
+					 * fw.getChildren().add(fc);
+					 */
 				}
 			}
 
 			// Same for Transition
 			for (Transition t : ut.getTransition()) {
-				 ActionField af = WorkflowDiagramUtils.getOperationForTransition(t);
-				 if (af != null) {
-					 fw.getChildren().add(af);
-				 }
+				ActionField af = WorkflowDiagramUtils.getOperationForTransition(t);
+				if (af != null) {
+					fw.getChildren().add(af);
+				}
 			}
 
+			// add save button bug #1787
+
+			ActionField save = FormFactory.eINSTANCE.createActionField();
+			save.setId("wrkflw_save");
+			save.setLabel("save");
+			fw.getChildren().add(save);
+			
 
 		}
 		return fw;

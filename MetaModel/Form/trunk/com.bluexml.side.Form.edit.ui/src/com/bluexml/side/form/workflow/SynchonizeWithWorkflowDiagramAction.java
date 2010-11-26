@@ -16,15 +16,13 @@ import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.form.workflow.utils.WorkflowSynchronizationUtils;
 
-public class SynchonizeWithWorkflowDiagramAction  extends Action implements
-ISelectionChangedListener {
+public class SynchonizeWithWorkflowDiagramAction extends Action implements ISelectionChangedListener {
 	protected EObject selectedObject;
 	private EditingDomain domain;
 
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof IStructuredSelection) {
-			setEnabled(updateSelection((IStructuredSelection) event
-					.getSelection()));
+			setEnabled(updateSelection((IStructuredSelection) event.getSelection()));
 		} else {
 			setEnabled(false);
 		}
@@ -47,12 +45,12 @@ ISelectionChangedListener {
 	@Override
 	public void run() {
 		super.run();
-		doAction((FormCollection)selectedObject);
+		doAction((FormCollection) selectedObject);
 	}
-	
+
 	private void doAction(FormCollection fc) {
 		if (fc instanceof WorkflowFormCollection) {
-			Command c = WorkflowSynchronizationUtils.synchronizeProcess((WorkflowFormCollection)fc, domain);
+			Command c = WorkflowSynchronizationUtils.synchronizeProcess((WorkflowFormCollection) fc, domain);
 			domain.getCommandStack().execute(c);
 		}
 	}

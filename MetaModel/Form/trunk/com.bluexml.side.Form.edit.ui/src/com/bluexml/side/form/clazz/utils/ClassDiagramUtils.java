@@ -37,21 +37,18 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Will return the field corresponding to the attribute
-	 *
+	 * 
 	 * @param att
 	 * @return
 	 */
 	public static Field getFieldForAttribute(Attribute att) {
 		Field field = null;
 		if (att != null) {
-			Map<String, String> metaInfoMap = InitializeMetaInfo(att
-					.getMetainfo());
+			Map<String, String> metaInfoMap = InitializeMetaInfo(att.getMetainfo());
 			// Choice Field
 			if (att.getValueList() != null) {
 				field = FormFactory.eINSTANCE.createChoiceField();
-				if (metaInfoMap.containsKey("multiple")
-						&& metaInfoMap.get("multiple") != null
-						&& metaInfoMap.get("multiple").equals("True")) {
+				if (metaInfoMap.containsKey("multiple") && metaInfoMap.get("multiple") != null && metaInfoMap.get("multiple").equals("True")) {
 					((ChoiceField) field).setMultiple(true);
 				}
 			} else if (att.getTyp().equals(DataType.STRING)) {
@@ -61,15 +58,11 @@ public class ClassDiagramUtils {
 				} else {
 					// Char Field
 					field = FormFactory.eINSTANCE.createCharField();
-					if (metaInfoMap.containsKey("max-length")
-							&& metaInfoMap.get("max-length") != null) {
-						((CharField) field).setMax_length(Integer
-								.parseInt(metaInfoMap.get("max-length")));
+					if (metaInfoMap.containsKey("max-length") && metaInfoMap.get("max-length") != null) {
+						((CharField) field).setMax_length(Integer.parseInt(metaInfoMap.get("max-length")));
 					}
-					if (metaInfoMap.containsKey("min-length")
-							&& metaInfoMap.get("min-length") != null) {
-						((CharField) field).setMin_length(Integer
-								.parseInt(metaInfoMap.get("min-length")));
+					if (metaInfoMap.containsKey("min-length") && metaInfoMap.get("min-length") != null) {
+						((CharField) field).setMin_length(Integer.parseInt(metaInfoMap.get("min-length")));
 					}
 				}
 				// Date Time Field
@@ -102,8 +95,7 @@ public class ClassDiagramUtils {
 			} else if (att.getTyp().equals(DataType.OBJECT)) {
 				field = FormFactory.eINSTANCE.createCharField();
 			} else {
-				EcorePlugin.INSTANCE.log("No field available for "
-						+ att.getTyp());
+				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
 			}
 
 			if (field == null) {
@@ -119,11 +111,9 @@ public class ClassDiagramUtils {
 				if (att.getMockup().size() > 0) {
 					field.getMockup().addAll(att.getMockup());
 				}
-				field.setHidden(Boolean.parseBoolean(metaInfoMap
-								.get("hidden")));
+				field.setHidden(Boolean.parseBoolean(metaInfoMap.get("hidden")));
 				field.setHelp_text(att.getDescription());
-				field.setMandatory(Boolean.parseBoolean(metaInfoMap
-						.get("required")));
+				field.setMandatory(Boolean.parseBoolean(metaInfoMap.get("required")));
 				field.setInitial(att.getInitialValue());
 				field.setId(att.getName());
 			}
@@ -143,8 +133,8 @@ public class ClassDiagramUtils {
 	}
 
 	/**
-	 * Transform an association into a model choice field 
-	 *
+	 * Transform an association into a model choice field
+	 * 
 	 * @param ass
 	 * @param useSource
 	 * @return
@@ -169,11 +159,11 @@ public class ClassDiagramUtils {
 			f.setLabel(ass.getName());
 		}
 		if (useSource) {
-			Clazz linkedClass = (Clazz)ass.getFirstEnd().getLinkedClass();
+			Clazz linkedClass = (Clazz) ass.getFirstEnd().getLinkedClass();
 			f.setReal_class(linkedClass);
 			f.setFormat_pattern(getViewForClass(linkedClass));
 		} else {
-			Clazz linkedClass = (Clazz)ass.getSecondEnd().getLinkedClass();
+			Clazz linkedClass = (Clazz) ass.getSecondEnd().getLinkedClass();
 			f.setReal_class(linkedClass);
 			f.setFormat_pattern(getViewForClass(linkedClass));
 		}
@@ -186,14 +176,12 @@ public class ClassDiagramUtils {
 			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
 		}
 
-
-
 		return f;
 	}
 
 	/**
 	 * Return Association Name
-	 *
+	 * 
 	 * @param ass
 	 * @param useSource
 	 * @return
@@ -210,7 +198,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Return inherited Clazzs from a class
-	 *
+	 * 
 	 * @param cl
 	 * @return
 	 */
@@ -227,9 +215,8 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Internal class, used in order to have sorted list of Clazz
-	 *
+	 * 
 	 * @author Eric
-	 *
 	 */
 	public static class ClazzComparator implements Comparator<Clazz> {
 
@@ -244,7 +231,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Return all sub Clazzs
-	 *
+	 * 
 	 * @param cl
 	 * @return
 	 */
@@ -257,8 +244,7 @@ public class ClassDiagramUtils {
 			Collection<Clazz> generalisations = getInheritedClazzs(c);
 			for (Clazz gc : generalisations) {
 				if (!inheritings.containsKey(gc)) {
-					inheritings.put(gc, new TreeSet<Clazz>(
-							new ClazzComparator()));
+					inheritings.put(gc, new TreeSet<Clazz>(new ClazzComparator()));
 				}
 				inheritings.get(gc).add(c);
 			}
@@ -267,10 +253,8 @@ public class ClassDiagramUtils {
 		return inheritings.get(cl);
 	}
 
-	public static Map<String, String> InitializeMetaInfo(
-			EList<MetaInfo> metainfo) {
-		Map<String, String> metaInfoMap = new HashMap<String, String>(metainfo
-				.size());
+	public static Map<String, String> InitializeMetaInfo(EList<MetaInfo> metainfo) {
+		Map<String, String> metaInfoMap = new HashMap<String, String>(metainfo.size());
 		for (MetaInfo m : metainfo) {
 			metaInfoMap.put(m.getKey(), m.getValue());
 		}
@@ -279,12 +263,11 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Return a collection of choices for an Enumeration
-	 *
+	 * 
 	 * @param list
 	 * @return
 	 */
-	public static Collection<? extends String> getChoices(
-			EList<EnumerationLiteral> list) {
+	public static Collection<? extends String> getChoices(EList<EnumerationLiteral> list) {
 		List<String> choicesList = new ArrayList<String>();
 		for (EnumerationLiteral enumerationLiteral : list) {
 			choicesList.add(enumerationLiteral.getName());
@@ -294,7 +277,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Return all instanceable Clazzs that inherit from the current class
-	 *
+	 * 
 	 * @param c
 	 * @return
 	 */
@@ -317,7 +300,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Get all class from the model
-	 *
+	 * 
 	 * @param c
 	 * @return
 	 */
@@ -334,7 +317,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Get all package
-	 *
+	 * 
 	 * @param c
 	 * @return
 	 */
@@ -345,7 +328,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Returns the root package
-	 *
+	 * 
 	 * @param elt
 	 * @return
 	 */
@@ -369,7 +352,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Returns all children packages of the given package.
-	 *
+	 * 
 	 * @param p
 	 * @return
 	 */
@@ -390,12 +373,11 @@ public class ClassDiagramUtils {
 	/**
 	 * Return a hashmap with all child of the given Clazzs (attributes, aspects,
 	 * operation, associations)
-	 *
+	 * 
 	 * @param listClazz
 	 * @return
 	 */
-	public static HashMap<String, ModelElement> getClazzChild(
-			Collection<Clazz> listClazz) {
+	public static HashMap<String, ModelElement> getClazzChild(Collection<Clazz> listClazz) {
 		HashMap<String, ModelElement> listChild = new HashMap<String, ModelElement>();
 		for (Clazz cl : listClazz) {
 			// TODO use OCL method
@@ -406,15 +388,11 @@ public class ClassDiagramUtils {
 				}
 			}
 			for (Association ass : cl.getAllSourceAssociations()) {
-				if (ass.getFirstEnd().getLinkedClass().equals(cl)
-						&& ass.getSecondEnd().isNavigable()) {
-					listChild.put(ClassDiagramUtils.getAssociationName(ass,
-							false), ass);
+				if (ass.getFirstEnd().getLinkedClass().equals(cl) && ass.getSecondEnd().isNavigable()) {
+					listChild.put(ClassDiagramUtils.getAssociationName(ass, false), ass);
 				}
-				if (ass.getSecondEnd().getLinkedClass().equals(cl)
-						&& ass.getFirstEnd().isNavigable()) {
-					listChild.put(ClassDiagramUtils.getAssociationName(ass,
-							true), ass);
+				if (ass.getSecondEnd().getLinkedClass().equals(cl) && ass.getFirstEnd().isNavigable()) {
+					listChild.put(ClassDiagramUtils.getAssociationName(ass, true), ass);
 				}
 			}
 			for (Attribute att : cl.getAllAttributes()) {

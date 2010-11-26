@@ -44,22 +44,21 @@ public class WorkflowSynchronizationUtils {
 	 * @param domain
 	 * @return
 	 */
-	public static Command synchronizeProcess(WorkflowFormCollection p_fc,
-			EditingDomain p_domain) {
+	public static Command synchronizeProcess(WorkflowFormCollection p_fc, EditingDomain p_domain) {
 		cc = new CompoundCommand();
 		fc = p_fc;
 		domain = p_domain;
 		formList = null;
 		attributeList = new HashMap<FormWorkflow, Map<String, FormElement>>();
 		ArrayList<String> taskList = new ArrayList<String>();
-		
+
 		InternalModification.dontMoveToDisabled();
 
 		Process p = fc.getLinked_process();
 		StartState st = p.getStartstate();
 		Command c = null;
 		taskList.add(st.getName());
-		
+
 		// We manage all add and update
 		c = synchronizeTask(p, st);
 		if (c != null && c.canExecute()) {
@@ -70,7 +69,7 @@ public class WorkflowSynchronizationUtils {
 			c = null;
 			c = synchronizeTask(p, t);
 			taskList.add(t.getName());
-			if (c != null  && c.canExecute()) {
+			if (c != null && c.canExecute()) {
 				cc.append(c);
 			}
 		}
@@ -78,8 +77,8 @@ public class WorkflowSynchronizationUtils {
 		// We manage all task delete
 		for (FormContainer f : fc.getForms()) {
 			String key = "";
-			if (f.getId() != null && f.getId().length() >p.getName().length()+1)
-				key = f.getId().substring(p.getName().length()+1);
+			if (f.getId() != null && f.getId().length() > p.getName().length() + 1)
+				key = f.getId().substring(p.getName().length() + 1);
 			if (!taskList.contains(key)) {
 				Command cmd = RemoveCommand.create(domain, f);
 				if (cmd.canExecute()) {
@@ -94,8 +93,8 @@ public class WorkflowSynchronizationUtils {
 
 	/**
 	 * Will synchronize the given task with the form
-	 * @param p 
 	 * 
+	 * @param p
 	 * @param st
 	 * @return
 	 */
@@ -105,7 +104,7 @@ public class WorkflowSynchronizationUtils {
 			buildFormsList();
 		}
 		// Does the form exists for this task?
-		String key = p.getName()+"_"+st.getName();
+		String key = p.getName() + "_" + st.getName();
 		if (formList.containsKey(key)) {
 			FormWorkflow f = formList.get(key);
 			// If yes, we check for modification
@@ -126,7 +125,7 @@ public class WorkflowSynchronizationUtils {
 				}
 				attList.add(t.getName());
 			}
-			
+
 			// Same with class link :
 			for (Clazz cl : st.getClazz()) {
 				Command clCmd = synchronizeClazzLink(cl, f);
@@ -135,15 +134,13 @@ public class WorkflowSynchronizationUtils {
 				}
 				attList.add(cl.getName());
 			}
-			
+
 			// We decide to keep all attributes contained by user task
 			for (FormElement fe : f.getFields()) {
-				if (	((fe.getRef() == null)
-						&&(fe instanceof Field))
-								||
-						((fe.getRef() instanceof Attribute) && 
-						!(((State) ((Attribute) fe.getRef()).eContainer()).eContainer().equals(p)))) {
-					
+				boolean deleteIfnoRefExceptIfSave = (fe.getRef() == null) && (fe instanceof Field) && (!fe.getId().equals("wrkflw_save"));
+				
+				if (deleteIfnoRefExceptIfSave || ((fe.getRef() instanceof Attribute) && !(((State) ((Attribute) fe.getRef()).eContainer()).eContainer().equals(p)))) {
+
 					Command cmd = DeleteCommand.create(domain, fe);
 					if (cmd.canExecute()) {
 						cc.append(cmd);
@@ -153,13 +150,10 @@ public class WorkflowSynchronizationUtils {
 		} else {
 			// If no, we add it
 			FormWorkflow fw = WorkflowInitialization.createTaskForForm(p, st);
-			c = AddCommand.create(domain, fc, FormPackage.eINSTANCE
-					.getFormCollection_Forms(), fw);
+			c = AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormCollection_Forms(), fw);
 		}
-		return c; 
+		return c;
 	}
-
-	
 
 	/**
 	 * Will synchronize the given attribute with the field
@@ -186,11 +180,12 @@ public class WorkflowSynchronizationUtils {
 			Field fi = WorkflowDiagramUtils.getFieldForAttribute(a);
 			c = AddCommand.create(domain, f, FormPackage.eINSTANCE.getFormGroup_Children(), fi);
 		}
-		return c; 
+		return c;
 	}
-	
+
 	/**
 	 * Will synchronize the given transition with the field
+	 * 
 	 * @param t
 	 * @param f
 	 * @return
@@ -206,11 +201,12 @@ public class WorkflowSynchronizationUtils {
 			Field fi = WorkflowDiagramUtils.getOperationForTransition(t);
 			c = AddCommand.create(domain, f, FormPackage.eINSTANCE.getFormGroup_Children(), fi);
 		}
-		return c; 
+		return c;
 	}
-	
+
 	/**
 	 * Will synchronize the given clazz link with the model choice field
+	 * 
 	 * @param cl
 	 * @param f
 	 * @return
@@ -226,7 +222,7 @@ public class WorkflowSynchronizationUtils {
 			Field fi = WorkflowDiagramUtils.getFieldForClazzLink(cl);
 			c = AddCommand.create(domain, f, FormPackage.eINSTANCE.getFormGroup_Children(), fi);
 		}
-		return c; 
+		return c;
 	}
 
 	/**

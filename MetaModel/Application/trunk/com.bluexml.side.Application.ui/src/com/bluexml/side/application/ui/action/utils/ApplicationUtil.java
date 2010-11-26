@@ -60,6 +60,7 @@ import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.eclipse.ExtensionPointUtils;
+import com.bluexml.side.util.libs.ecore.EcoreHelper;
 import com.bluexml.side.util.security.Checkable;
 
 public class ApplicationUtil {
@@ -343,22 +344,7 @@ public class ApplicationUtil {
 		}
 	}
 
-	/**
-	 * Launch validation on given EObject
-	 * 
-	 * @param eo
-	 * @return
-	 */
-	public static boolean validate(EObject eo) {
-		boolean result = true;
-		Diagnostician diag = new Diagnostician();
-		BasicDiagnostic diagnostics = diag.createDefaultDiagnostic(eo);
-		diag.validate(eo, diagnostics);
-		if (diagnostics.getSeverity() == Diagnostic.ERROR) {
-			result = false;
-		}
-		return result;
-	}
+	
 
 	public static boolean validate(IFile modelFile) throws Exception {
 		Resource loadedModel = null;
@@ -377,7 +363,7 @@ public class ApplicationUtil {
 			loadedModel = EResourceUtils.openModel(fullPath, null, rs);
 			EObject te = getRootElement(loadedModel);
 			if (te != null) {
-				return validate(te);
+				return EcoreHelper.validate(te);
 			} else {
 				throw new IOException(System.getProperty("line.separator") + "No root element found in " + modelFile.getFullPath() + ". Model empty?");
 			}
