@@ -24,9 +24,7 @@ import org.topcased.draw2d.figures.ComposedLabel;
 import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.draw2d.figures.Label;
 
-import com.bluexml.side.Workflow.modeler.diagram.figures.colorScaler.TurquoiseScaler;
 import com.bluexml.side.Workflow.modeler.diagram.figures.colorScaler.PurpleScaler;
-import com.bluexml.side.Workflow.modeler.diagram.figures.colorScaler.GreyScale;
 
 /**
  * @generated
