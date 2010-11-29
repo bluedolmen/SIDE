@@ -27,7 +27,7 @@ var doc = document.getElementById("data");
                // set up the fields mapping into the xml doc
                // The first needs mapping, the others are very basic
                <%for (getInnerView().getFields()){%>
-               	'<%mapTo.filter("clazz.Attribute").getNamedModelElementQName()%>'<%if (i() < current("FacetMap").getInnerView().getFields().nSize() -1){%>,<%}%>
+               	'<%mapTo.filter("clazz.Attribute").getPrefixedQName("_")%>'<%if (i() < current("FacetMap").getInnerView().getFields().nSize() -1){%>,<%}%>
                <%}%>
            ])
     });
@@ -38,7 +38,7 @@ var doc = document.getElementById("data");
         store: store,
         columns: [
         <%for (getInnerView().getFields()){%>
-           	{header: "<%mapTo.filter("clazz.Attribute").getLabel()%>", width: 160, dataIndex: '<%mapTo.filter("clazz.Attribute").getNamedModelElementQName()%>', sortable: true}<%if (i() < current("FacetMap").getInnerView().getFields().nSize() -1){%>,<%}%>
+           	{header: "<%mapTo.filter("clazz.Attribute").getLabel()%>", width: 160, dataIndex: '<%mapTo.filter("clazz.Attribute").getPrefixedQName("_")%>', sortable: true}<%if (i() < current("FacetMap").getInnerView().getFields().nSize() -1){%>,<%}%>
         <%}%>
         ],
         renderTo:'extjs-grid',

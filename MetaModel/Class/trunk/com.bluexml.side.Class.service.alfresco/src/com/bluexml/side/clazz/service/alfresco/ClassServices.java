@@ -19,16 +19,12 @@ package com.bluexml.side.clazz.service.alfresco;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.value.VisualTypeComponent_Enum;
 import com.bluexml.side.clazz.Association;
-import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.Model;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.MetaInfo;
-import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Stereotype;
 
 public class ClassServices {
@@ -40,7 +36,8 @@ public class ClassServices {
 		if (hasAspects) {
 			return true;
 		}
-		return cl.getAllInheritedAttributes().size() != cl.getAllInheritedClassAndAspectAttributes().size();
+		return cl.getAllInheritedAttributes().size() != cl
+				.getAllInheritedClassAndAspectAttributes().size();
 	}
 
 	public List<Association> getAllAssociationsByClass(Clazz cl) {
@@ -54,7 +51,11 @@ public class ClassServices {
 			if (obj instanceof MetaInfo) {
 				MetaInfo mi = (MetaInfo) obj;
 				if (mi.getKey().equalsIgnoreCase("visual-component")) {
-					return mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.HorizontalTab.toString()) || mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.VerticalTab.toString());
+					return mi.getValue().equalsIgnoreCase(
+							VisualTypeComponent_Enum.HorizontalTab.toString())
+							|| mi.getValue().equalsIgnoreCase(
+									VisualTypeComponent_Enum.VerticalTab
+											.toString());
 				}
 			}
 		}
@@ -66,7 +67,8 @@ public class ClassServices {
 			if (obj instanceof MetaInfo) {
 				MetaInfo mi = (MetaInfo) obj;
 				if (mi.getKey().equalsIgnoreCase("visual-component")) {
-					return mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.Separator.toString());
+					return mi.getValue().equalsIgnoreCase(
+							VisualTypeComponent_Enum.Separator.toString());
 				}
 			}
 		}
@@ -78,7 +80,8 @@ public class ClassServices {
 			if (obj instanceof MetaInfo) {
 				MetaInfo mi = (MetaInfo) obj;
 				if (mi.getKey().equalsIgnoreCase("visual-component")) {
-					return mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.VerticalTab.toString());
+					return mi.getValue().equalsIgnoreCase(
+							VisualTypeComponent_Enum.VerticalTab.toString());
 				}
 			}
 		}
@@ -124,11 +127,15 @@ public class ClassServices {
 						if (s.getName().equalsIgnoreCase("view")) {
 							String view = c.getValue();
 							if (view.contains("\n")) {
-								String firstLine = view.substring(0, view.lastIndexOf("\n") - 1);
+								String firstLine = view.substring(0, view
+										.lastIndexOf("\n") - 1);
 								if (firstLine.startsWith("@actionsFile@")) {
-									String othersLines = view.substring(firstLine.length() + 2);
+									String othersLines = view
+											.substring(firstLine.length() + 2);
 									if (othersLines.contains("\n")) {
-										String secondLine = othersLines.substring(0, view.lastIndexOf("\n") - 1);
+										String secondLine = othersLines
+												.substring(0, view
+														.lastIndexOf("\n") - 1);
 										resultLine = secondLine;
 									} else {
 										resultLine = othersLines;
@@ -145,71 +152,40 @@ public class ClassServices {
 		}
 		return resultLine.replaceAll("\\s", "");
 	}
-	public static String getPrefixedQName(NamedModelElement node,String separator) throws Exception {
-		return getPrefixe(node) + separator + CommonServices.getNamedModelElementQName(node);
-	}
-	public static String getPrefixedQName(NamedModelElement node) throws Exception {
-		return getPrefixedQName(node, ":");
-	}
 
-	public static String getPrefixe(EObject node) throws Exception {
-		String prefix = "";
-		EObject root = CommonServices.getRootContainer(node);
-		if (root instanceof Model) {
-			prefix = ((Model) root).getName();
-		} else if (root instanceof ClassPackage) {
-			// ensure retro compatibility
-			prefix = ((ClassPackage) root).getName();
-		} else {
-			throw new Exception("Missing RootPackage object !!");
-		}
-
-		return prefix;
-	}
-
-	public static String getNamespaceURI(EObject node) throws Exception {
-		return "http://www.bluexml.com/model/content/" + getPrefixe(node) + "/1.0";
-	}
-
-	public static String getPrefixedNamespaceQName(NamedModelElement node) throws Exception {
-		return "{" + getNamespaceURI(node) + "}" + CommonServices.getNamedModelElementQName(node);
-	}
-	
-	public static boolean isFolder(Clazz clazz){
+	public static boolean isFolder(Clazz clazz) {
 		boolean is = false;
-		if (clazz.getGeneralizations().size() > 0){
-			for (Clazz cl : clazz.getGeneralizations()){
-				if (("cm:folder").equals("cm:" + cl.getName())){
+		if (clazz.getGeneralizations().size() > 0) {
+			for (Clazz cl : clazz.getGeneralizations()) {
+				if (("cm:folder").equals("cm:" + cl.getName())) {
 					return true;
-				}
-				else{
+				} else {
 					return isFolder(cl);
 				}
-			} 
+			}
 		}
 		return is;
 	}
-	
-	public static boolean isChildOfCmContent(Clazz c) throws Exception {		
+
+	public static boolean isChildOfCmContent(Clazz c) throws Exception {
 		List<Clazz> l = c.getInheritedClasses();
 		for (Clazz clazz : l) {
-			String prefixedname = getPrefixedQName(clazz);
+			String prefixedname = CommonServices.getPrefixedQName(clazz);
 			if (prefixedname.equals("cm:content")) {
 				return true;
 			}
 		}
-		return false;		
+		return false;
 	}
-	
-	public static boolean isChildOfAlfrescoClazz(Clazz c) throws Exception {		
+
+	public static boolean isChildOfAlfrescoClazz(Clazz c) throws Exception {
 		List<Clazz> l = c.getInheritedClasses();
-		for (Clazz clazz : l) {			
+		for (Clazz clazz : l) {
 			if (CommonServices.isNativeModel(clazz)) {
 				return true;
 			}
 		}
-		return false;		
+		return false;
 	}
-	
-	
+
 }

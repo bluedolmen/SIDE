@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.ClassPackage;
+import com.bluexml.side.clazz.Model;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Tag;
@@ -22,7 +23,7 @@ public class CommonServices {
 		// return StringHelper.getJavaQName(fullName, "\\.");
 	}
 
-	static EObject getRootContainer(EObject o) {
+	public static EObject getRootContainer(EObject o) {
 		if (o.eContainer() != null) {
 			return getRootContainer(o.eContainer());
 		} else {
@@ -35,12 +36,10 @@ public class CommonServices {
 		for (Tag tag : ts) {
 			String key = tag.getKey();
 			String value = tag.getValue();
-			System.err.println("key "+key);
 			if (key.contains("reversed") && value.contains("alfresco")) {
 				return true;
 			}
 		}
-		System.out.println("not native");
 		return false;
 	}
 	
@@ -77,5 +76,36 @@ public class CommonServices {
 			}
 		}
 		return false;
+	}
+	
+	
+	public static String getPrefixedQName(NamedModelElement node,String separator) throws Exception {
+		return getPrefixe(node) + separator + CommonServices.getNamedModelElementQName(node);
+	}
+	public static String getPrefixedQName(NamedModelElement node) throws Exception {
+		return getPrefixedQName(node, ":");
+	}
+
+	public static String getPrefixe(EObject node) throws Exception {
+		String prefix = "";
+		EObject root = CommonServices.getRootContainer(node);
+		if (root instanceof Model) {
+			prefix = ((Model) root).getName();
+		} else if (root instanceof ClassPackage) {
+			// ensure retro compatibility
+			prefix = ((ClassPackage) root).getName();
+		} else {
+			throw new Exception("Missing RootPackage object !!");
+		}
+
+		return prefix;
+	}
+
+	public static String getNamespaceURI(EObject node) throws Exception {
+		return "http://www.bluexml.com/model/content/" + getPrefixe(node) + "/1.0";
+	}
+
+	public static String getPrefixedNamespaceQName(NamedModelElement node) throws Exception {
+		return "{" + getNamespaceURI(node) + "}" + CommonServices.getNamedModelElementQName(node);
 	}
 }

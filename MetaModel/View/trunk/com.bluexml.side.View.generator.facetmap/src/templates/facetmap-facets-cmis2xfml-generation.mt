@@ -2,6 +2,8 @@
 <%
 metamodel http://www.kerblue.org/view/1.0
 import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
+import com.bluexml.side.view.generator.facetmap.services.FacetMapService
+import com.bluexml.side.clazz.service.alfresco.CommonServices
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
@@ -9,7 +11,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 
 <%-- get the correct path to the cmis element when you got a FieldElement --%>
 <%script type="view.FieldElement" name="cmisPath"%>	
-cmisra:object/cmis:properties/cmis:property<%mapTo.filter("Attribute").getCMISAttributeType()%>[@propertyDefinitionId='<% current("FacetMap").viewOf.filter("Clazz").getRootContainer().name%>:<%mapTo.filter("Attribute").getFullName().replaceAll("\.","_")%>']/cmis:value
+cmisra:object/cmis:properties/cmis:property<%mapTo.filter("Attribute").getCMISAttributeType()%>[@propertyDefinitionId='<% mapTo.filter("Attribute").getCMISPropertyId()%>']/cmis:value
 
 <%script type="view.FieldElement" name="getFieldCmisPath"%>	
 child::<% cmisPath() %>
@@ -19,12 +21,12 @@ child::entry/<% cmisPath() %>
 
 <%script type="view.FacetMap" name="taxonomy"%>
 		<%for (getFields()){%>
-			<taxonomy title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" root-heading-title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" facetid="<%mapTo.filter("Attribute").getFullName()%>">
-				    <heading id="<%mapTo.filter("TitledNamedClassModelElement").getLabel()%> is null" title="<%mapTo.filter("TitledNamedClassModelElement").getLabel()%> is null"/> 
-				    <xsl:for-each select="<% getFieldCmisPathWithEntry() %>">          
-				        <heading id="{text()}" title="{text()}"/>             
-				    </xsl:for-each> 
-				</taxonomy>
+			<taxonomy title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" root-heading-title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" facetid="<%mapTo.filter("Attribute").getPrefixedQName("_")%>">
+			    <heading id="<%mapTo.filter("TitledNamedClassModelElement").getLabel()%> is null" title="<%mapTo.filter("TitledNamedClassModelElement").getLabel()%> is null"/> 
+			    <xsl:for-each select="<% getFieldCmisPathWithEntry() %>">          
+			        <heading id="{text()}" title="{text()}"/>             
+			    </xsl:for-each> 
+			</taxonomy>
 		<%}%>
 	
 <%script type="view.FacetMap" name="ressource"%>
