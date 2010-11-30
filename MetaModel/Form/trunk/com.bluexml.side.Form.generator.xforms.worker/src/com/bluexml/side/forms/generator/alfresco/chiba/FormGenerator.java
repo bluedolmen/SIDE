@@ -35,7 +35,7 @@ public class FormGenerator extends AbstractGenerator {
 
 	public static final String COM_BLUEXML_SIDE_FORM_GENERATOR_XFORMS_CHIBA_WEBAPP_CONTEXT = "com.bluexml.side.Form.generator.xforms.chiba.webappContext";
 	public static final String CONFIGURATION_PARAMETER_ALFRESCO_URL = "alfresco.url";
-	
+
 	private static final String defaultModelID = "xformsModel";
 	private static final String webappName = "xforms";
 
@@ -122,7 +122,7 @@ public class FormGenerator extends AbstractGenerator {
 			pos = webappContext.lastIndexOf('/');
 			String context = webappContext.substring(pos + 1, len);
 			if (context.equals("forms")) {
-				monitor.addErrorText("The context of your webapp SHOULD NOT be 'forms'!");
+				throw new Exception("The context of your webapp SHOULD NOT be 'forms'!");				
 			}
 		}
 		successfulInit = true;
@@ -130,13 +130,14 @@ public class FormGenerator extends AbstractGenerator {
 
 	/**
 	 * @param filePath
+	 * @throws Exception
 	 */
-	private void setMessagesFilePath(String filePath) {
+	private void setMessagesFilePath(String filePath) throws Exception {
 		try {
 			messagesFile = new File(filePath);
 			MsgPool.setMessagesFile(messagesFile.getAbsolutePath());
 		} catch (Exception e) {
-			monitor.addErrorText("Problem opening the messages file.");
+			throw new Exception("Problem opening the messages file. caused :" + e.getMessage(), e);
 		}
 	}
 
@@ -202,8 +203,8 @@ public class FormGenerator extends AbstractGenerator {
 			formGenerator.setReadOnlySuffix("RO");
 			formGenerator.generate(generators);
 		} catch (RuntimeException e) {
-			monitor.addErrorTextAndLog("ERROR :" + e.getMessage(), e, "");
-			e.printStackTrace();
+			// Fix #1748
+			throw new Exception(e);
 		}
 		return new ArrayList<IFile>();
 	}
