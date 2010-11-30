@@ -37,7 +37,7 @@ public interface NodeService {
 	 * Create an association between a sourceRef and a targetRef NodeRefs given the type name (typeQName)
 	 * of the association.
 	 */
-	public void createAssociation(NodeRef sourceRef, NodeRef targetRef, QName typeQName); 
+	public void createAssociation(NodeRef sourceRef, NodeRef targetRef, QName typeQName, String childAssocName); 
 	
 	/*
 	 * Remove an association between a sourceRef and a targetRef NodeRefs given the type name (typeQName)

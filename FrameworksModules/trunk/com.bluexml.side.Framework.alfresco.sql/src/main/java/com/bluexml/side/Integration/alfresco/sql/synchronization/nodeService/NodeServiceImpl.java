@@ -53,6 +53,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	
 	private Collection<NodeRef> synchronizedNodes = new ArrayList<NodeRef>();
 	private Collection<AssociationRef> synchronizedAssociations = new ArrayList<AssociationRef>();
+	private Collection<ChildAssociationRef> synchronizedChildAssociations = new ArrayList<ChildAssociationRef>();
 	
 	/**
 	 * @return the synchronizedAssociations
@@ -67,6 +68,20 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	public void setSynchronizedAssociations(
 			Collection<AssociationRef> synchronizedAssociations) {
 		this.synchronizedAssociations = synchronizedAssociations;
+	}
+	
+	/**
+	 * @return the synchronizedChildAssociations
+	 */
+	public Collection<ChildAssociationRef> getSynchronizedChildAssociations() {
+		return synchronizedChildAssociations;
+	}
+	
+	/**
+	 * @param synchronizedChildAssociations the synchronizedChildAssociations to set
+	 */
+	public void setSynchronizedChildAssociations(Collection<ChildAssociationRef> synchronizedChildAssociations) {
+		this.synchronizedChildAssociations = synchronizedChildAssociations;
 	}
 
 	private void createCore(NodeRef nodeRef) {
@@ -217,7 +232,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	}
 
 
-	public void createAssociation(NodeRef sourceNodeRef, NodeRef targetNodeRef, QName typeQName) {
+	public void createAssociation(NodeRef sourceNodeRef, NodeRef targetNodeRef, QName typeQName, String childAssocName) {
 		
 		if (!isSynchronized(sourceNodeRef)){
 			createCore(sourceNodeRef);
@@ -242,8 +257,13 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		
 		if (executeSQLQuery(sql_query) > 0) {
 			invokeOnCreateAssociation(sourceNodeRef, targetNodeRef, typeQName);
-			AssociationRef assocRef = new AssociationRef(sourceNodeRef, typeQName, targetNodeRef);
-			synchronizedAssociations.add(assocRef);
+			if (!"".equals(childAssocName)){
+				ChildAssociationRef childAssocRef = new ChildAssociationRef(childAssocName);
+				synchronizedChildAssociations.add(childAssocRef);
+			} else {
+				AssociationRef assocRef = new AssociationRef(sourceNodeRef, typeQName, targetNodeRef);
+				synchronizedAssociations.add(assocRef);
+			}
 		}
 	}
 
@@ -282,7 +302,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getSourceRef().getStoreRef()) &&
 					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getTargetRef().getStoreRef())
 				) {
-				createAssociation(assoc.getSourceRef(), assoc.getTargetRef(), assoc.getTypeQName());
+				createAssociation(assoc.getSourceRef(), assoc.getTargetRef(), assoc.getTypeQName(), "");
 			}
 		}
 		
@@ -297,7 +317,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getParentRef().getStoreRef()) &&
 					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getChildRef().getStoreRef())
 				) {
-				createAssociation(assoc.getParentRef(), assoc.getChildRef(), assoc.getTypeQName());
+				createAssociation(assoc.getParentRef(), assoc.getChildRef(), assoc.getTypeQName(), assoc.toString());
 			}
 		}
 		
