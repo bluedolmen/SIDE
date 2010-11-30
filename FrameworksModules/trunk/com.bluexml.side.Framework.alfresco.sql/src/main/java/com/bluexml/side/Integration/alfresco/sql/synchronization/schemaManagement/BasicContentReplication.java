@@ -109,13 +109,13 @@ public class BasicContentReplication implements ContentReplication {
 	private void addAssociation(AssociationRef associationRef) {
 		if (logger.isDebugEnabled())
 			logger.debug("Replicating association " + associationRef);
-		synchroNodeService.createAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
+		synchroNodeService.createAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName(), "");
 	}
 	
 	private void addChildAssociation(ChildAssociationRef associationRef) {
 		if (logger.isDebugEnabled())
 			logger.debug("Replicating child association " + associationRef);
-		synchroNodeService.createAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
+		synchroNodeService.createAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName(), associationRef.toString());
 	}
 	
 	/*
