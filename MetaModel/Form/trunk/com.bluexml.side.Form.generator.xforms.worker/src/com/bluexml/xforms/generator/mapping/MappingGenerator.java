@@ -180,7 +180,7 @@ public class MappingGenerator extends AbstractGenerator {
 		Clazz realClasse = (Clazz) formGenerator.getRealObject(classe);
 		ClassType classType = classTypes.get(realClasse);
 		if (classType == null) {
-		System.err.println("Bad missing class in classTypes :"+realClasse);
+			System.err.println("Bad missing class in classTypes :" + realClasse);
 		}
 		return classType;
 	}
@@ -201,11 +201,11 @@ public class MappingGenerator extends AbstractGenerator {
 		attributeType.setName(attribute.getName());
 		attributeType.setAlfrescoName(getAlfrescoNameForAttribute(classe, attribute));
 		attributeType.setType(attribute.getTyp().getLiteral());
-		
+
 		if (classe instanceof Clazz) {
-			attributeType.setClassType(copyClassType(getClassType((Clazz)classe)));
+			attributeType.setClassType(copyClassType(getClassType((Clazz) classe)));
 		} else if (classe instanceof Aspect) {
-			attributeType.setAspectType(copyAspectType(getAspectType((Aspect)classe)));
+			attributeType.setAspectType(copyAspectType(getAspectType((Aspect) classe)));
 		}
 
 		if (attribute.getValueList() != null) {
@@ -941,7 +941,10 @@ public class MappingGenerator extends AbstractGenerator {
 			}
 			String alfrescoName = getAlfrescoNameForAttribute(realClass, ref);
 			if (alfrescoName == null) {
-				throw new RuntimeException("Couldn't compute the Alfresco name for field '" + field.getLabel() + "' with Ref to attribute '" + ((Attribute) ref).getName() + "'");
+				
+				String message = "Couldn't compute the Alfresco name for field '" + field.getLabel() + "' with Ref to attribute '" + ((Attribute) ref).getFullName() + "' on Form :" + formClass.getId();
+				
+				throw new RuntimeException(message);
 			}
 			formFieldType.setAlfrescoName(alfrescoName);
 		} else {
@@ -1091,7 +1094,7 @@ public class MappingGenerator extends AbstractGenerator {
 		// the attribute may be in a parent class or in an aspect of either base or parent classes
 		if (classe instanceof Clazz) {
 			Clazz classRef = (Clazz) classe;
-			for (Clazz parentClass : classRef.getGeneralizations()) {
+			for (Clazz parentClass : classRef.getInheritedClasses()) {
 				Clazz realParentClass = (Clazz) formGenerator.getRealObject(parentClass);
 				if (realParentClass.equals(realContainer)) {
 					return getAlfrescoNameForAttribute(realParentClass, attribute);
