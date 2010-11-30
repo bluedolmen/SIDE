@@ -46,9 +46,9 @@
 			<th>Name</th>
 			<th/>
 		</tr>	
-		<%	
+		<%--	
 		for (Vector<String> v : Util.showAvailableContentWithWorklowId(alfrescohost,user,password,request.getParameter("workflowInstanceId"))) {
-		%>
+		
 		<tr>
 			<td style="text-align:center"><img src="<%=v.elementAt(2)%>"/></td>
 			<td style="text-align:center"><%=v.elementAt(0)%></td>
@@ -66,7 +66,7 @@
 		</tr>
 		<%
 		}
-		%>
+		--%>
 	</table>
 	<script type="text/javascript">
 		parent.parent.location.reload();
