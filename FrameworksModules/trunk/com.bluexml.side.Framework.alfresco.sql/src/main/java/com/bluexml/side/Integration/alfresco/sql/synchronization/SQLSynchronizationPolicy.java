@@ -135,7 +135,7 @@ public class SQLSynchronizationPolicy implements
 		Collection<AssociationRef> synchronizedAssocs = synchroNodeServiceImpl.getSynchronizedAssociations();
 		if (filterer.accept(associationRef) && !synchronizedAssocs.contains(associationRef)) {
 			logger.debug("Synchronization policy, CREATE ASSOCIATION");
-			synchroNodeService.createAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
+			synchroNodeService.createAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName(), "");
 		}
 	}
 	
@@ -148,15 +148,15 @@ public class SQLSynchronizationPolicy implements
 
 	public void onCreateChildAssociation(ChildAssociationRef associationRef,
 			boolean isNewNode) {
-		if (filterer.accept(associationRef)) {
+		Collection<ChildAssociationRef> synchronizedChildAssocs = synchroNodeServiceImpl.getSynchronizedChildAssociations();
+		if (filterer.accept(associationRef) && !synchronizedChildAssocs.contains(associationRef)) {
 			logger.debug("Synchronization policy, CREATE CHILD ASSOCIATION");
-			synchroNodeService.createAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
+			synchroNodeService.createAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName(), associationRef.toString());
 		}
 	}
 
 	public void onDeleteChildAssociation(ChildAssociationRef associationRef) {
 		if (filterer.accept(associationRef)) {
-
 			logger.debug("Synchronization policy, DELETE CHILD ASSOCIATION");
 			synchroNodeService.deleteAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
 		}
