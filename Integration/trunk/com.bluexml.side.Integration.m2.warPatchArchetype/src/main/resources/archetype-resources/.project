@@ -1,5 +1,5 @@
 <projectDescription>
-	<name>com.bluexml.side.Integration.alfresco.${artifactId}</name>
+	<name>${groupId}.${artifactId}</name>
 	<comment></comment>
 	<projects>
 	</projects>
