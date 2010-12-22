@@ -19,9 +19,6 @@
   </forms>
   <forms xsi:type="form:FormWorkflow" xmi:id="_HoTlBdUcEd6dMKXYFUnZ5g" label="ProcessMail" id="DigitizationProcess_ProcessMail">
     <ref href="../Workflow/DigitizationProcess.workflow#_30TTEdRSEd6mvv4ISlOk-Q"/>
-    <children xsi:type="form:TextField" xmi:id="_u9k58NXGEd6FW7J925m8sQ" label="Manager comment" id="Comment" disabled="true">
-      <ref href="../Workflow/DigitizationProcess.workflow#_30TTH9RSEd6mvv4ISlOk-Q"/>
-    </children>
     <children xsi:type="form:ActionField" xmi:id="_HoTlBtUcEd6dMKXYFUnZ5g" label="Request the approval on update" id="ApprovalRequest">
       <ref href="../Workflow/DigitizationProcess.workflow#_30TTEtRSEd6mvv4ISlOk-Q"/>
     </children>
