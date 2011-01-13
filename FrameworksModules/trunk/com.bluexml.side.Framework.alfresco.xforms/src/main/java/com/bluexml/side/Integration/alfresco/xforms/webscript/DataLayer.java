@@ -521,6 +521,9 @@ public class DataLayer implements DataLayerInterface {
 				// build attribute object ton convert him to write type
 				PropertyDefinition propertyDef = dictionaryService.getProperty(nodeTypeQName, resolvedName);
 				Serializable value = makePropertyValue(propertyDef, (Serializable) attributesMap.get(attName));
+				if (value instanceof String) {
+					value = new String(((String)value).getBytes("UTF-8"),"UTF-8");
+				}				
 				resultMap.put(resolvedName, value);
 			} else {
 				logger.error("Attribute Not Found :" + attName);
