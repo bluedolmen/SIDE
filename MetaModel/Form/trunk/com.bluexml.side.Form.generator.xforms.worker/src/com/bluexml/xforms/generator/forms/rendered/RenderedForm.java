@@ -35,14 +35,19 @@ public class RenderedForm extends Rendered {
 		xformsElement = XFormsGenerator.createElement("html", XFormsGenerator.NAMESPACE_XHTML);
 		Element head = XFormsGenerator.createElement("head", XFormsGenerator.NAMESPACE_XHTML);
 
-		Element titleElement = XFormsGenerator.createElementWithContent("title",
-				XFormsGenerator.NAMESPACE_XHTML, title);
+		Element titleElement = XFormsGenerator.createElementWithContent("title", XFormsGenerator.NAMESPACE_XHTML, title);
+		head.addContent(titleElement);
+
+		// add meta to force IE >7 to work with IE8 renderer
+		Element ie8Element = XFormsGenerator.createElement("meta", XFormsGenerator.NAMESPACE_XHTML);
+		// http-equiv="X-UA-Compatible" content="IE=8"
+		ie8Element.setAttribute("http-equiv", "X-UA-Compatible");
+		ie8Element.setAttribute("content", "IE=8");
 		head.addContent(titleElement);
 
 		model = XFormsGenerator.createElement("model", XFormsGenerator.NAMESPACE_XFORMS);
 		model.setAttribute("id", MsgId.INT_GEN_ID_OBJECTMODEL.getText());
-		Element modelInstance = XFormsGenerator.createElement("instance",
-				XFormsGenerator.NAMESPACE_XFORMS);
+		Element modelInstance = XFormsGenerator.createElement("instance", XFormsGenerator.NAMESPACE_XFORMS);
 		modelInstance.setAttribute("id", "minstance");
 
 		// build the URI for the Get action
@@ -62,16 +67,14 @@ public class RenderedForm extends Rendered {
 			suffix = MsgId.INT_ACT_SUFFIX_GET_FORM_SEARCH.getText();
 		}
 		// String source = MsgId.INT_URI_SCHEME_READER + getAction.getText() + "/" + suffix;
-		String source = MsgId.INT_URI_SCHEME_READER + getAction.getText() + "?"
-				+ MsgId.INT_ACT_PARAM_GET_FORMTYPE + "=" + suffix; // #1637
+		String source = MsgId.INT_URI_SCHEME_READER + getAction.getText() + "?" + MsgId.INT_ACT_PARAM_GET_FORMTYPE + "=" + suffix; // #1637
 		modelInstance.setAttribute("src", source);
 
 		model.addContent(modelInstance);
 
 		head.addContent(model);
 
-		Element tabContainerScript = XFormsGenerator.createElement("script",
-				XFormsGenerator.NAMESPACE_XHTML);
+		Element tabContainerScript = XFormsGenerator.createElement("script", XFormsGenerator.NAMESPACE_XHTML);
 		tabContainerScript.setAttribute("type", "text/javascript");
 		StringBuffer stringBuffer = new StringBuffer("");
 		stringBuffer.append("dojo.require(\"dojo.widget.LayoutContainer\");");
@@ -85,8 +88,7 @@ public class RenderedForm extends Rendered {
 
 		addCustomJS(head);
 
-		addCSS(head, MsgId.INT_GEN_PLACEHOLDER_CONTEXT_PATH
-				+ "/resources/styles/xforms.generated.css");
+		addCSS(head, MsgId.INT_GEN_PLACEHOLDER_CONTEXT_PATH + "/resources/styles/xforms.generated.css");
 		addCSS(head, MsgId.INT_GEN_PLACEHOLDER_CONTEXT_PATH + "/resources/styles/custom.css");
 
 		xformsElement.addContent(head);
@@ -139,8 +141,9 @@ public class RenderedForm extends Rendered {
 
 	/*
 	 * (non-Javadoc)
+	 * @see
 	 * 
-	 * @see com.bluexml.xforms.generator.forms.Rendered#addRendered(com.bluexml.xforms
+	 * com.bluexml.xforms.generator.forms.Rendered#addRendered(com.bluexml.xforms
 	 * .generator.forms.Rendered, com.bluexml.xforms.generator.forms.Renderable)
 	 */
 	@Override
@@ -154,7 +157,6 @@ public class RenderedForm extends Rendered {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.xforms.generator.forms.Rendered#isHolder()
 	 */
 	@Override
@@ -164,8 +166,8 @@ public class RenderedForm extends Rendered {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.forms.Rendered#renderEnd(com.bluexml.xforms
+	 * @see
+	 * com.bluexml.xforms.generator.forms.Rendered#renderEnd(com.bluexml.xforms
 	 * .generator.forms.Renderable)
 	 */
 	@Override
