@@ -43,7 +43,7 @@ public class RenderedForm extends Rendered {
 		// http-equiv="X-UA-Compatible" content="IE=8"
 		ie8Element.setAttribute("http-equiv", "X-UA-Compatible");
 		ie8Element.setAttribute("content", "IE=8");
-		head.addContent(titleElement);
+		head.addContent(ie8Element);
 
 		model = XFormsGenerator.createElement("model", XFormsGenerator.NAMESPACE_XFORMS);
 		model.setAttribute("id", MsgId.INT_GEN_ID_OBJECTMODEL.getText());
