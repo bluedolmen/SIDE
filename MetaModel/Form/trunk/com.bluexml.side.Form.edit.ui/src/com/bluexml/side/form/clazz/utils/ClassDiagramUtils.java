@@ -141,11 +141,19 @@ public class ClassDiagramUtils {
 	 */
 	public static FormElement transformAssociationIntoModelChoiceField(Association ass, Clazz srcClazz) {
 		ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
-
-		// Modification since add of FirstEnd and SecondEnd : TODO : check if all case are OK. Or rewrite method.
-		boolean useSource = true;
-		if (ass.getFirstEnd().getLinkedClass().equals(srcClazz)) {
-			useSource = false;
+		// we needs to get the target type
+		
+		// if useSource = true, FirstEnd is used as destination (target) 
+		boolean useSource = false;
+		Clazz first_linkedClass = (Clazz) ass.getFirstEnd().getLinkedClass();
+		Clazz second_linkedClass = (Clazz) ass.getSecondEnd().getLinkedClass();
+		
+		
+		EList<Clazz> descendants = first_linkedClass.getDescendants();
+		boolean equals = first_linkedClass.equals(srcClazz);
+		boolean contains = descendants.contains(srcClazz);
+		if (!(contains || equals)) {
+			useSource = true;
 		}
 
 		String id = getAssociationName(ass, useSource);
@@ -159,11 +167,11 @@ public class ClassDiagramUtils {
 			f.setLabel(ass.getName());
 		}
 		if (useSource) {
-			Clazz linkedClass = (Clazz) ass.getFirstEnd().getLinkedClass();
+			Clazz linkedClass = (Clazz) first_linkedClass;
 			f.setReal_class(linkedClass);
 			f.setFormat_pattern(getViewForClass(linkedClass));
 		} else {
-			Clazz linkedClass = (Clazz) ass.getSecondEnd().getLinkedClass();
+			Clazz linkedClass = (Clazz) second_linkedClass;
 			f.setReal_class(linkedClass);
 			f.setFormat_pattern(getViewForClass(linkedClass));
 		}
