@@ -31,9 +31,3 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 <%}%>
 
 <%}%>
-
-
-
-
-
-

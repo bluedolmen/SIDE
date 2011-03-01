@@ -100,7 +100,7 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/Xform/Xform.get.js.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/Xform/Xform.get.properties.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/Xform/Xform.css.mt");
-			// callback page (redirect to share page before editing)
+			// callback page (redirect to share page after editing)
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/edit-metadataCallBack.html.mt");
 			// override edit-metadata page template
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/templates-edit-metadataXForm.ftl.mt");
