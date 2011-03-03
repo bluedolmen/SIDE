@@ -158,15 +158,6 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )' description='get all Clazz that inherit from this Clazz'"
-	 * @generated
-	 */
-	EList<Clazz> getDescendants();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
 	 *        annotation="http://www.bluexml.com/OCL body='self.attributes -> asSet() -> union(self.getAspectAttributes())'"
 	 * @generated
 	 */
@@ -194,10 +185,10 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getAllInheritedAttributes() -> union(self.getClassAndAspectAttributes())'"
+	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )'"
 	 * @generated
 	 */
-	EList<Attribute> getAllSubTypes();
+	EList<Clazz> getAllSubTypes();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -333,5 +324,14 @@ public interface Clazz extends AbstractClass {
 	 * @generated
 	 */
 	EList<Attribute> getAllAttributesWithoutAspectsAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances() ->select(e:Clazz|e.generalizations() ->includes(self) )'"
+	 * @generated
+	 */
+	EList<Clazz> getSubTypes();
 		
 } // Clazz

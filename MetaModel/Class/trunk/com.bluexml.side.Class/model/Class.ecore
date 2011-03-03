@@ -85,12 +85,6 @@
         <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getDescendants" upperBound="-1" eType="#//Clazz">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )"/>
-        <details key="description" value="get all Clazz that inherit from this Clazz"/>
-      </eAnnotations>
-    </eOperations>
     <eOperations name="getClassAndAspectAttributes" upperBound="-1" eType="#//Attribute">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.attributes -> asSet() -> union(self.getAspectAttributes())"/>
@@ -106,9 +100,9 @@
         <details key="body" value="self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.attributes ->asSet()))"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getAllSubTypes" upperBound="-1" eType="#//Attribute">
+    <eOperations name="getAllSubTypes" upperBound="-1" eType="#//Clazz">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getAllInheritedAttributes() -> union(self.getClassAndAspectAttributes())"/>
+        <details key="body" value="Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllInheritedClassAndAspectAttributes" upperBound="-1" eType="#//Attribute">
@@ -198,6 +192,11 @@
     <eOperations name="getAllAttributesWithoutAspectsAttributes" upperBound="-1" eType="#//Attribute">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.getAllInheritedAttributes()->union(self.attributes)"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getSubTypes" upperBound="-1" eType="#//Clazz">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="Clazz.allInstances() ->select(e:Clazz|e.generalizations() ->includes(self) )"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"

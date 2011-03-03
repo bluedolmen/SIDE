@@ -262,45 +262,9 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Clazz> getDescendants() {
-		if (getDescendantsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(1);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getDescendantsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDescendantsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getDescendants <em>Get Descendants</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDescendants
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getDescendantsBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Attribute> getClassAndAspectAttributes() {
 		if (getClassAndAspectAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(2);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(1);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -336,7 +300,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Clazz> getInheritedClasses() {
 		if (getInheritedClassesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(3);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(2);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -372,7 +336,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Attribute> getAspectAttributes() {
 		if (getAspectAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(4);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(3);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -406,9 +370,9 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Attribute> getAllSubTypes() {
+	public EList<Clazz> getAllSubTypes() {
 		if (getAllSubTypesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(5);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(4);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -424,8 +388,8 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllSubTypesBodyOCL);
 	
 		@SuppressWarnings("unchecked")
-		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Attribute>(result.size(), result.toArray());
+		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
 	
 	}
 
@@ -444,7 +408,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Attribute> getAllInheritedClassAndAspectAttributes() {
 		if (getAllInheritedClassAndAspectAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(6);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(5);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -480,7 +444,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Attribute> getAllInheritedAttributes() {
 		if (getAllInheritedAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(7);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(6);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -516,7 +480,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Association> getSourceAssociations() {
 		if (getSourceAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(8);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(7);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -552,7 +516,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public boolean isSource(Association asso) {
 		if (isSourceBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(9);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(8);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -590,7 +554,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public boolean isTarget(Association asso) {
 		if (isTargetBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(10);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(9);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -628,7 +592,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Association> getTargetAssociations() {
 		if (getTargetAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(11);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(10);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -664,7 +628,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Association> getAllSourceAssociations() {
 		if (getAllSourceAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(12);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(11);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -700,7 +664,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Association> getAllTargetAssociations() {
 		if (getAllTargetAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(13);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(12);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -736,7 +700,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Clazz> getLinkedClasses() {
 		if (getLinkedClassesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(14);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(13);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -772,7 +736,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<AssociationEnd> getAllSourceAssociationEnds() {
 		if (getAllSourceAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(15);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(14);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -809,7 +773,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<AssociationEnd> getAllTargetAssociationEnds() {
 		if (getAllTargetAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(16);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(15);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -846,7 +810,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<AssociationEnd> getSourceAssociationEnds() {
 		if (getSourceAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(17);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(16);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -883,7 +847,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<AssociationEnd> getTargetAssociationEnds() {
 		if (getTargetAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(18);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(17);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -920,7 +884,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Aspect> getAllAspects() {
 		if (getAllAspectsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(19);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(18);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -957,7 +921,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Attribute> getAllAttributesWithoutAspectsAttributes() {
 		if (getAllAttributesWithoutAspectsAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(20);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(19);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -986,6 +950,43 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAttributesWithoutAspectsAttributesBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Clazz> getSubTypes() {
+		if (getSubTypesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(20);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getSubTypesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getSubTypesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getSubTypes <em>Get Sub Types</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubTypes
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getSubTypesBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

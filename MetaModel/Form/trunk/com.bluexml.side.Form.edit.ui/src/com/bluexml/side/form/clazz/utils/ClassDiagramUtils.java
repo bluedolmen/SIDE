@@ -149,7 +149,7 @@ public class ClassDiagramUtils {
 		Clazz second_linkedClass = (Clazz) ass.getSecondEnd().getLinkedClass();
 		
 		
-		EList<Clazz> descendants = first_linkedClass.getDescendants();
+		EList<Clazz> descendants = first_linkedClass.getAllSubTypes();
 		boolean equals = first_linkedClass.equals(srcClazz);
 		boolean contains = descendants.contains(srcClazz);
 		if (!(contains || equals)) {

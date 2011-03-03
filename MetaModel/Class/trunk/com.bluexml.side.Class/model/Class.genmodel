@@ -29,6 +29,7 @@
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllAssociations"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllAbstractClasses"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllClassesFromEveryWhere"/>
+      <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllAspectsFromEveryWhere"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Clazz">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//Clazz/operations"/>
@@ -37,7 +38,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Clazz/abstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Clazz/deprecated"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllAttributes"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getDescendants"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getClassAndAspectAttributes"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getInheritedClasses"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAspectAttributes"/>
