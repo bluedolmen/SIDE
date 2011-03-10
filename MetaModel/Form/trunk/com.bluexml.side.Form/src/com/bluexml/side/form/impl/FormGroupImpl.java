@@ -232,6 +232,43 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<FormGroup> getAllSubGroups() {
+		if (getAllSubGroupsBodyOCL == null) {
+			EOperation eOperation = FormPackage.Literals.FORM_GROUP.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(FormPackage.Literals.FORM_GROUP, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllSubGroupsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllSubGroupsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<FormGroup> result = (Collection<FormGroup>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<FormGroup>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllSubGroups <em>Get All Sub Groups</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllSubGroups
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllSubGroupsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {

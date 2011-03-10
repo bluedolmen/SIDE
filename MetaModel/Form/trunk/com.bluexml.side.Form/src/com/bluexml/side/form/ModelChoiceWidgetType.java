@@ -58,7 +58,7 @@ public enum ModelChoiceWidgetType implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * This option allows selecting the associated items using a selection list. Associated items are considered existent although they may still be created.
+	 * This option allows selecting the associated items using a selection list widget. The items in the list always exist. The widget does not allow any advanced action like editing or creating items.
 	 * <!-- end-model-doc -->
 	 * @see #SELECT
 	 * @model name="Select"
@@ -89,6 +89,9 @@ public enum ModelChoiceWidgetType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This option allows selecting the associated items using an extended widget (the "item selector") consisting of a selection list and additional actions that are not available in the other widgets. The items displayed in the list always exist.
+	 * <!-- end-model-doc -->
 	 * @see #ITEM_SELECTOR
 	 * @model name="ItemSelector"
 	 * @generated
