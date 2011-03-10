@@ -57,7 +57,7 @@
 			which is typically environment independent
 		-->
     <env>local</env>
-    <config.target.path>alfresco/module/SIDE_cmisFacetMap</config.target.path>
+    <config.target.path>alfresco/module/SIDE_${project.artifactId}</config.target.path>
     <!-- Webapp used to test/develop locally the AMP -->
     <webapp.name>SIDE_cmisFacetMap-webapp</webapp.name>
     <!--

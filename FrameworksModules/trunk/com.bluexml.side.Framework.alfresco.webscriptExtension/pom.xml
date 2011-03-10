@@ -55,7 +55,7 @@
 			jetty run deployment, does not impact AMP behavior which is typically environment independent
 		-->
     <env>local</env>
-    <config.target.path>alfresco/module/SIDE_webscriptExtension</config.target.path>
+    <config.target.path>alfresco/module/SIDE_${project.artifactId}</config.target.path>
     <!-- Webapp used to test/develop locally the AMP -->
     <webapp.name>SIDE_webscriptExtension-webapp</webapp.name>
     <!-- 
