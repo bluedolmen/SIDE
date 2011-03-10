@@ -796,7 +796,10 @@ public class Generate extends WorkspaceJob {
 		for (Map.Entry<String, String> param : paramsExt.entrySet()) {
 			if (!parameters.containsKey(param.getKey())) {
 				// no custom value defined so add default one
+				System.out.println("use default value for " + param.getKey() + " value :" + param.getValue());
 				parameters.put(param.getKey(), param.getValue());
+			} else {
+				System.out.println("use custom value for " + param.getKey() + " value :" + param.getValue());
 			}
 		}
 	}
