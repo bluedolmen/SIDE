@@ -7,10 +7,10 @@
         <technologyVersion description="Check this to generate data models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.x" version="Alfresco3.x Community Edition">
           <generatorVersion class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator" hidden="visible" id="com.bluexml.side.Class.generator.alfresco" version="SIDE Content Model Generator for Alfresco">
             <option key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.77" versionMin="1.0.77" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.78" versionMin="1.0.78" />
             </option>
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" label="Alfresco FacetMap Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.35" versionMin="1.0.35" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.36" versionMin="1.0.36" />
             </option>
             <configurationParameter dataType="String" key="com.bluexml.side.Class.generator.alfresco.module.version" defaultValue="1.0" label="Class Module version" />
             <option defaultOption="true" documentation="Check this option to include the production of the Alfresco Share's module extension in the generation.&lt;br&gt;If not checked, the extension modules are not included in the generated AMPs.&lt;br&gt;SIDE provides extension modules to Alfresco Share in order to view and edit all the metadata of the newly generated content model." key="alfresco.share.extension" label="Alfresco Share Extension">
