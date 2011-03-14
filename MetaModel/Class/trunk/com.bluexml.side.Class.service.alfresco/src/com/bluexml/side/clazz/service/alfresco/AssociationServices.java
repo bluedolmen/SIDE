@@ -41,8 +41,7 @@ public class AssociationServices {
 
 	}
 
-	public static AssociationEnd getOppositeAssociationEnd(Association a,
-			Clazz c) {
+	public static AssociationEnd getOppositeAssociationEnd(Association a, Clazz c) {
 		return a.getAssociationEnd(c).get(0).getOpposite();
 	}
 
@@ -66,8 +65,7 @@ public class AssociationServices {
 	 * @return
 	 */
 	public static boolean isInnerAssociation(Association a) {
-		return getTopPackage(a.getFirstEnd().getLinkedClass()) == getTopPackage(a
-				.getSecondEnd().getLinkedClass());
+		return getTopPackage(a.getFirstEnd().getLinkedClass()) == getTopPackage(a.getSecondEnd().getLinkedClass());
 	}
 
 	/**
@@ -78,8 +76,7 @@ public class AssociationServices {
 	 * @return
 	 */
 	public static boolean isAssociationBetweenClazzs(Association a) {
-		return a.getFirstEnd().getLinkedClass().eClass().getName() == "Clazz"
-				&& a.getSecondEnd().getLinkedClass().eClass().getName() == "Clazz";
+		return a.getFirstEnd().getLinkedClass().eClass().getName() == "Clazz" && a.getSecondEnd().getLinkedClass().eClass().getName() == "Clazz";
 	}
 
 	public static boolean isContainment(Association a) {
@@ -98,35 +95,27 @@ public class AssociationServices {
 	}
 
 	public boolean isMandatorySrc(Association a, ClassModelElement elt) {
-		if (a.getSecondEnd().isNavigable()
-				&& a.getFirstEnd().getLinkedClass() == elt) {
+		if (a.getSecondEnd().isNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
 			return Integer.valueOf(a.getFirstEnd().getCardMin()) > 0;
-		} else if (a.getFirstEnd().isNavigable()
-				&& a.getSecondEnd().getLinkedClass() == elt) {
+		} else if (a.getFirstEnd().isNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
 			return Integer.valueOf(a.getSecondEnd().getCardMin()) > 0;
 		}
 		return false;
 	}
 
 	public boolean isManySrc(Association a, ClassModelElement elt) {
-		if (a.getSecondEnd().isNavigable()
-				&& a.getFirstEnd().getLinkedClass() == elt) {
-			return Integer.valueOf(a.getFirstEnd().getCardMax()) > 1
-					|| Integer.valueOf(a.getFirstEnd().getCardMax()) == -1;
-		} else if (a.getFirstEnd().isNavigable()
-				&& a.getSecondEnd().getLinkedClass() == elt) {
-			return Integer.valueOf(a.getSecondEnd().getCardMax()) > 1
-					|| Integer.valueOf(a.getSecondEnd().getCardMax()) == -1;
+		if (a.getSecondEnd().isNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
+			return Integer.valueOf(a.getFirstEnd().getCardMax()) > 1 || Integer.valueOf(a.getFirstEnd().getCardMax()) == -1;
+		} else if (a.getFirstEnd().isNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
+			return Integer.valueOf(a.getSecondEnd().getCardMax()) > 1 || Integer.valueOf(a.getSecondEnd().getCardMax()) == -1;
 		}
 		return false;
 	}
 
 	public boolean isMandatoryTarget(Association a, ClassModelElement elt) {
-		if (a.getSecondEnd().isNavigable()
-				&& a.getFirstEnd().getLinkedClass() == elt) {
+		if (a.getSecondEnd().isNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
 			return Integer.valueOf(a.getSecondEnd().getCardMin()) > 0;
-		} else if (a.getFirstEnd().isNavigable()
-				&& a.getSecondEnd().getLinkedClass() == elt) {
+		} else if (a.getFirstEnd().isNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
 			return Integer.valueOf(a.getFirstEnd().getCardMin()) > 0;
 		}
 		return false;
@@ -134,23 +123,19 @@ public class AssociationServices {
 
 	public boolean isManyTarget(Association a, ClassModelElement elt) {
 		if (a.getFirstEnd().getLinkedClass() == elt) {
-			return Integer.valueOf(a.getSecondEnd().getCardMax()) > 1
-					|| Integer.valueOf(a.getSecondEnd().getCardMax()) == -1;
+			return Integer.valueOf(a.getSecondEnd().getCardMax()) > 1 || Integer.valueOf(a.getSecondEnd().getCardMax()) == -1;
 		} else if (a.getSecondEnd().getLinkedClass() == elt) {
-			return Integer.valueOf(a.getFirstEnd().getCardMax()) > 1
-					|| Integer.valueOf(a.getFirstEnd().getCardMax()) == -1;
+			return Integer.valueOf(a.getFirstEnd().getCardMax()) > 1 || Integer.valueOf(a.getFirstEnd().getCardMax()) == -1;
 		}
 		return false;
 	}
 
 	/**
-	 * 
 	 * @param a
 	 * @param elt
 	 * @return
 	 */
-	public AbstractClass getTarget(Association a, ClassModelElement elt)
-			throws Exception {
+	public AbstractClass getTarget(Association a, ClassModelElement elt) throws Exception {
 		if (a.getFirstEnd().getLinkedClass().equals(elt)) {
 			if (a.getSecondEnd().getLinkedClass() instanceof Aspect) {
 				Aspect aspect = (Aspect) a.getSecondEnd().getLinkedClass();
@@ -180,8 +165,7 @@ public class AssociationServices {
 					return getTarget(a, parents.get(0));
 				}
 			}
-			throw new Exception(
-					"bad ClassModelElement, must be source or destination");
+			throw new Exception("bad ClassModelElement, must be source or destination");
 		}
 		return null;
 	}
@@ -198,10 +182,8 @@ public class AssociationServices {
 	 * @return
 	 * @throws Exception
 	 */
-	public static AbstractClass getRealSource(Association a,
-			ClassModelElement elt) throws Exception {
-		if (a.getFirstEnd().getLinkedClass().equals(elt)
-				&& a.getSecondEnd().getLinkedClass().equals(elt)) {
+	public static AbstractClass getRealSource(Association a, ClassModelElement elt) throws Exception {
+		if (a.getFirstEnd().getLinkedClass().equals(elt) && a.getSecondEnd().getLinkedClass().equals(elt)) {
 			if (a.getFirstEnd().isNavigable() || a.getSecondEnd().isNavigable()) {
 				return (AbstractClass) elt;
 			}
@@ -225,8 +207,7 @@ public class AssociationServices {
 					return getRealSource(a, parents.get(0));
 				}
 			}
-			throw new Exception(
-					"bad ClassModelElement, must be source or destination");
+			throw new Exception("bad ClassModelElement, must be source or destination");
 		}
 		return null;
 	}
@@ -247,22 +228,17 @@ public class AssociationServices {
 	 * @return
 	 */
 	public static String getAssociationName(Association a, ClassModelElement e) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// return getName(a, e, false);
 	}
 
-	public static String getQualifiedNameReverse(Association a,
-			ClassModelElement e) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public static String getQualifiedNameReverse(Association a, ClassModelElement e) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// return getName(a, e, true);
 	}
 
-	public static String getName(Association a, ClassModelElement e,
-			boolean reverse) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public static String getName(Association a, ClassModelElement e, boolean reverse) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// String associationName = "";
 		// if (e instanceof Clazz) {
 		// Clazz c = (Clazz) e;
@@ -292,10 +268,8 @@ public class AssociationServices {
 	 * @param c
 	 * @return
 	 */
-	public static String constructAssociationName(Association a, Clazz c,
-			boolean reverse) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public static String constructAssociationName(Association a, Clazz c, boolean reverse) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// String associationName = "";
 		//
 		// associationName = c.getFullName().replace(".", "_") + "_" +
@@ -319,31 +293,23 @@ public class AssociationServices {
 		// return associationName;
 	}
 
-	public String getNameForClassAssociationAC(Clazz c, Association assoc,
-			Clazz a) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public String getNameForClassAssociationAC(Clazz c, Association assoc, Clazz a) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// return getNameForClassAssociationAC(c,assoc, a, false);
 	}
 
-	public String getNameForClassAssociationAC(Association assoc, Clazz c,
-			Clazz a) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public String getNameForClassAssociationAC(Association assoc, Clazz c, Clazz a) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// return getNameForClassAssociationAC(c,assoc, a, false);
 	}
 
-	public String getNameForClassAssociationACReverse(Clazz c,
-			Association assoc, Clazz a) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public String getNameForClassAssociationACReverse(Clazz c, Association assoc, Clazz a) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// return getNameForClassAssociationAC(c,assoc, a, true);
 	}
 
-	public String getNameForClassAssociationACReverse(Association assoc,
-			Clazz c, Clazz a) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public String getNameForClassAssociationACReverse(Association assoc, Clazz c, Clazz a) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// return getNameForClassAssociationAC(c,assoc, a, true);
 	}
 
@@ -355,10 +321,8 @@ public class AssociationServices {
 	 * @param a
 	 * @return
 	 */
-	public String getNameForClassAssociationAC(Clazz c, Association assoc,
-			Clazz a, boolean reverse) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public String getNameForClassAssociationAC(Clazz c, Association assoc, Clazz a, boolean reverse) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// String associationName = "";
 		//
 		// associationName = a.getFullName().replace(".", "_") + "_" +
@@ -379,17 +343,13 @@ public class AssociationServices {
 		// return associationName;
 	}
 
-	public String getNameForClassAssociationCB(Clazz c, Association assoc,
-			Clazz b) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public String getNameForClassAssociationCB(Clazz c, Association assoc, Clazz b) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// return getNameForClassAssociationCB(assoc, c, b, false);
 	}
 
-	public String getNameForClassAssociationCB(Association assoc, Clazz c,
-			Clazz b) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public String getNameForClassAssociationCB(Association assoc, Clazz c, Clazz b) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// return getNameForClassAssociationCB(assoc, c, b, false);
 	}
 
@@ -401,10 +361,8 @@ public class AssociationServices {
 	 * @param b
 	 * @return
 	 */
-	public String getNameForClassAssociationCB(Association assoc, Clazz c,
-			Clazz b, boolean reverse) {
-		throw new UnsupportedOperationException(
-				"This method has been deprecated since Alfresco version 3.x");
+	public String getNameForClassAssociationCB(Association assoc, Clazz c, Clazz b, boolean reverse) {
+		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
 		// String associationName = "";
 		//
 		// associationName = c.getFullName().replace(".", "_") + "_" +
@@ -430,13 +388,11 @@ public class AssociationServices {
 		// return associationName;
 	}
 
-	public String getRoleOrTitle(Association a, ClassModelElement e)
-			throws Exception {
+	public String getRoleOrTitle(Association a, ClassModelElement e) throws Exception {
 		return getRoleOrTitle(a, e, false);
 	}
 
-	public String getRoleOrTitleReverse(Association a, ClassModelElement e)
-			throws Exception {
+	public String getRoleOrTitleReverse(Association a, ClassModelElement e) throws Exception {
 		return getRoleOrTitle(a, e, true);
 	}
 
@@ -448,12 +404,10 @@ public class AssociationServices {
 	 *            , element
 	 * @return
 	 */
-	public String getRoleOrTitle(Association a, ClassModelElement e,
-			boolean reverse) throws Exception {
+	public String getRoleOrTitle(Association a, ClassModelElement e, boolean reverse) throws Exception {
 		String title = "";
 		// If e is destination, check if there is a role title
-		if (a.getSecondEnd().getLinkedClass() == e
-				|| a.getFirstEnd().getLinkedClass() == e) {
+		if (a.getSecondEnd().getLinkedClass() == e || a.getFirstEnd().getLinkedClass() == e) {
 			if (e instanceof Clazz) {
 				Clazz c = (Clazz) e;
 				title = constructTitleFromRole(a, c, reverse);
@@ -464,8 +418,7 @@ public class AssociationServices {
 				Clazz c = (Clazz) e;
 				Collection<Clazz> s = c.getInheritedClasses();
 				for (Clazz Clazz : s) {
-					if (a.getFirstEnd().getLinkedClass() == Clazz
-							|| a.getSecondEnd().getLinkedClass() == Clazz) {
+					if (a.getFirstEnd().getLinkedClass() == Clazz || a.getSecondEnd().getLinkedClass() == Clazz) {
 						title = constructTitleFromRole(a, Clazz, reverse);
 					}
 				}
@@ -524,9 +477,7 @@ public class AssociationServices {
 		} else if (a.getSecondEnd().getLinkedClass().equals(e)) {
 			return a.getSecondEnd().getName();
 		} else {
-			throw new Exception(
-					"Bad ClassModelElement, not found in this association :"
-							+ a);
+			throw new Exception("Bad ClassModelElement, not found in this association :" + a);
 		}
 	}
 
@@ -540,8 +491,7 @@ public class AssociationServices {
 	 *         ""){%>_<%args(0).getOpposite().name
 	 *         %><%}%>_<%args(0).getOpposite().linkedClass.getQualifiedName()%>
 	 */
-	public static String getAssociationQName(Association a,
-			AssociationEnd source) {
+	public static String getAssociationQName(Association a, AssociationEnd source) {
 		String sname = "";
 		if (source.getOpposite().getName() != null)
 			sname = source.getOpposite().getName();
@@ -559,16 +509,12 @@ public class AssociationServices {
 		return CommonServices.convertFullNameToQualifiedName(qname.toString());
 	}
 
-	public static String getPrefixedAssociationQName(Association a,
-			AssociationEnd source) throws Exception {
-		return CommonServices.getPrefixe(a) + ":"
-				+ getAssociationQName(a, source);
+	public static String getPrefixedAssociationQName(Association a, AssociationEnd source) throws Exception {
+		return CommonServices.getPrefixe(a) + ":" + getAssociationQName(a, source);
 	}
 
-	public static String getPrefixedURIAssociationQName(Association a,
-			AssociationEnd source) throws Exception {
-		return "{" + CommonServices.getNamespaceURI(a) + "}"
-				+ getAssociationQName(a, source);
+	public static String getPrefixedURIAssociationQName(Association a, AssociationEnd source) throws Exception {
+		return "{" + CommonServices.getNamespaceURI(a) + "}" + getAssociationQName(a, source);
 	}
 
 }
