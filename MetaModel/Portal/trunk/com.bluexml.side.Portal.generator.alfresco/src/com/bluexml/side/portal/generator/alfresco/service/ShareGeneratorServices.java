@@ -60,7 +60,7 @@ public class ShareGeneratorServices {
 		List<String> rt = new ArrayList<String>();
 		for (Page page : l) {
 			if (page.getVisibility().equals(Visibility.PUBLIC)) {
-				rt.add("{\"pageId\":\""+page.getID()+"\"}");
+				rt.add("{\"pageId\":\""+page.getID().toLowerCase()+"\"}");
 			}
 		}
 		

@@ -10,7 +10,7 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 <%if (associationPortlet.isPortletInternal != null && associationPortlet.isPortletInternal.view != null){%>
 <%for (associationPortlet.isPortletInternal.view){%>
 	<%if (current("view.FacetMap")){%>
-<%getProperty("alf.share.paths.web-ext.components")%>/template.<%current("HavePortlet").associationPortlet.name%>.<%current("HavePortlet").associationPage.ID%>.xml
+<%getProperty("alf.share.paths.web-ext.components")%>/template.<%current("HavePortlet").associationPortlet.name%>.<%current("HavePortlet").associationPage.ID.toLowerCase()%>.xml
 	<%}%>
 <%}%>
 <%}%>
@@ -20,7 +20,7 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 <component>
    <scope>template</scope>
    <region-id><%associationPortlet.name%></region-id>
-   <source-id><%associationPage.ID%></source-id>
+   <source-id><%associationPage.ID.toLowerCase()%></source-id>
    <url>/components/facetMap</url>
    <properties>
       <facetName><%associationPortlet.isPortletInternal.view.name%></facetName>

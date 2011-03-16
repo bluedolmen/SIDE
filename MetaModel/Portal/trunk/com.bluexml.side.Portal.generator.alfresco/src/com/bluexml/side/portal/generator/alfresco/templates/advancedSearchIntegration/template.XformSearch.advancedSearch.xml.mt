@@ -11,7 +11,7 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 <%if (associationPortlet.isPortletInternal != null && associationPortlet.isPortletInternal.form != null){%>
 <%for (associationPortlet.isPortletInternal.form){%>
 	<%if (current("HavePortlet").associationPortlet.name.toLowerCase() =="advanced-search" && current("HavePortlet").associationPortlet.isFormPortlet()){%>
-<%getProperty("alf.share.paths.web-ext.components")%>/template.advanced-search.<%current("HavePortlet").associationPage.ID%>.xml
+<%getProperty("alf.share.paths.web-ext.components")%>/template.advanced-search.<%current("HavePortlet").associationPage.ID.toLowerCase()%>.xml
 	<%}%>
 <%}%>
 <%}%>
@@ -21,7 +21,7 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 <component>
    <scope>template</scope>
    <region-id>advanced-search</region-id>
-   <source-id><%associationPage.ID%></source-id>
+   <source-id><%associationPage.ID.toLowerCase()%></source-id>
    <url>/components/XformSearch</url>
    <properties>   		
    		<%if (associationPortlet.isPortletInternal != null && associationPortlet.isPortletInternal.form != null){%>

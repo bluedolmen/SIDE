@@ -8,7 +8,6 @@ import java.util.Properties;
 
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
 
 public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
