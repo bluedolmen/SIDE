@@ -16,25 +16,18 @@ package com.bluexml.side.Workflow.modeler.diagram.figures;
 
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.swt.graphics.Image;
-import org.topcased.draw2d.figures.ILabel;
-import org.topcased.draw2d.figures.ILabelFigure;
 
 /**
  * @_generated
  */
-public class SwimlaneFigure extends ImageWithLabelFigure implements ILabelFigure {
+public class SwimlaneFigure extends ImageWithLabelFigure {
 	/**
 	 * Constructor
-	 *
+	 * 
 	 * @_generated
 	 */
 	public SwimlaneFigure() {
-		super(new Image(null, SwimlaneFigure.class
-				.getResourceAsStream("img/agent.png")), PositionConstants.TOP);
-	}
-
-	public ILabel getLabel() {
-		return label;
+		super(new Image(null, SwimlaneFigure.class.getResourceAsStream("img/agent.png")), PositionConstants.TOP);
 	}
 
 }

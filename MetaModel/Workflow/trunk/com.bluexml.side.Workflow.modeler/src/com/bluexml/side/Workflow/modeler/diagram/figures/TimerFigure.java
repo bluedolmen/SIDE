@@ -14,18 +14,21 @@
  ******************************************************************************/
 package com.bluexml.side.Workflow.modeler.diagram.figures;
 
+import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.swt.graphics.Image;
+
+
 /**
- * @generated
+ * @_generated
  */
-public class TimerFigure extends
-		org.topcased.draw2d.figures.ContainerWithInnerLabel {
+public class TimerFigure extends ImageWithLabelFigure {
 	/**
 	 * Constructor
 	 *
-	 * @generated
+	 * @_generated
 	 */
 	public TimerFigure() {
-		super();
+		super(new Image(null, TimerFigure.class.getResourceAsStream("img/ktimer_50x50.png")), PositionConstants.TOP);
 	}
 
 }
