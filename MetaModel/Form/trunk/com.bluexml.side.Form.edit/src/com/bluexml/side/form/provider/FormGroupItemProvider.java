@@ -7,7 +7,6 @@
 package com.bluexml.side.form.provider;
 
 
-import com.bluexml.side.form.FormFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,7 +19,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
-import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -37,9 +35,9 @@ import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.StaticText;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.common.utils.InternalModification;
 

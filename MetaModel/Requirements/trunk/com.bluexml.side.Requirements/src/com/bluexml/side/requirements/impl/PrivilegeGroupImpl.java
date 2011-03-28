@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.requirements.Entity;
 import com.bluexml.side.requirements.Privilege;
 import com.bluexml.side.requirements.PrivilegeGroup;

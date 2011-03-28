@@ -19,11 +19,11 @@ package org.alfresco.maven.plugin.amp.util;
  * under the License.
  */
 
-import org.apache.maven.project.MavenProject;
-import org.codehaus.plexus.util.introspection.ReflectionValueExtractor;
-
 import java.util.AbstractMap;
 import java.util.Set;
+
+import org.apache.maven.project.MavenProject;
+import org.codehaus.plexus.util.introspection.ReflectionValueExtractor;
 
 /**
  * @version $Id: ReflectionProperties.java 565036 2007-08-12 10:26:14Z snicoll $

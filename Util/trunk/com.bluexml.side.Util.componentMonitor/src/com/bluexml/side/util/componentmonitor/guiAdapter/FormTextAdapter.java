@@ -1,11 +1,11 @@
 package com.bluexml.side.util.componentmonitor.guiAdapter;
 
-import com.bluexml.side.util.componentmonitor.headLessinterface.FormTextInterface;
-import com.bluexml.side.util.libs.ui.UIUtils;
-
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.widgets.FormText;
+
+import com.bluexml.side.util.componentmonitor.headLessinterface.FormTextInterface;
+import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class FormTextAdapter implements FormTextInterface {
 

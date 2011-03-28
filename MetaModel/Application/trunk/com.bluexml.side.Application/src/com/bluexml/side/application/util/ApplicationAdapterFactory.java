@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.application.util;
 
-import com.bluexml.side.application.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -21,6 +20,7 @@ import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
+import com.bluexml.side.application.ModuleConstraint;
 import com.bluexml.side.application.Option;
 
 /**

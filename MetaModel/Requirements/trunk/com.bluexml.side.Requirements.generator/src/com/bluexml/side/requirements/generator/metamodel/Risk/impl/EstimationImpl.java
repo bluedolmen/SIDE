@@ -6,15 +6,13 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Risk.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.Risk.Estimation;
-import com.bluexml.side.requirements.generator.metamodel.Risk.RiskPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.bluexml.side.requirements.generator.metamodel.Risk.Estimation;
+import com.bluexml.side.requirements.generator.metamodel.Risk.RiskPackage;
 
 /**
  * <!-- begin-user-doc -->

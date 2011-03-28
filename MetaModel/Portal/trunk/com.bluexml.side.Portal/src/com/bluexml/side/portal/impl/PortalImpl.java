@@ -6,8 +6,17 @@
  */
 package com.bluexml.side.portal.impl;
 
-import com.bluexml.side.common.impl.PackageImpl;
+import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.ecore.OCL;
+
+import com.bluexml.side.common.impl.PackageImpl;
 import com.bluexml.side.portal.Page;
 import com.bluexml.side.portal.Portal;
 import com.bluexml.side.portal.PortalLayout;
@@ -16,19 +25,6 @@ import com.bluexml.side.portal.Portlet;
 import com.bluexml.side.portal.PortletInternal;
 import com.bluexml.side.portal.PortletType;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->

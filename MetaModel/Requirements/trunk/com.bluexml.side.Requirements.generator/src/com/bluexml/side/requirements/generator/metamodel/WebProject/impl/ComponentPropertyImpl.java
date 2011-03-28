@@ -6,15 +6,13 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.WebProject.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.WebProject.ComponentProperty;
-import com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.bluexml.side.requirements.generator.metamodel.WebProject.ComponentProperty;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectPackage;
 
 /**
  * <!-- begin-user-doc -->

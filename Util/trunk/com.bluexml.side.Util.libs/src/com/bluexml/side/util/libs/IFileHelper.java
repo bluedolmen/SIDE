@@ -272,7 +272,7 @@ public class IFileHelper {
 	 * @param folder
 	 * @throws CoreException
 	 */
-	public static void refreshFolder(IFolder folder) throws CoreException {
+	public static void refreshFolder(IContainer folder) throws CoreException {
 		if (folder.exists()) {
 			folder.refreshLocal(IResource.DEPTH_INFINITE, null);
 		}

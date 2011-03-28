@@ -6,14 +6,13 @@
  */
 package com.bluexml.side.form;
 
-import com.bluexml.side.common.CommonPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import com.bluexml.side.form.impl.FormPackageImpl;
+import com.bluexml.side.common.CommonPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -14,6 +14,7 @@ import java.util.TreeSet;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
@@ -29,7 +30,6 @@ import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.Field;
-import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.ModelChoiceField;
 
@@ -139,17 +139,16 @@ public class ClassDiagramUtils {
 	 * @param useSource
 	 * @return
 	 */
-	public static FormElement transformAssociationIntoModelChoiceField(Association ass, Clazz srcClazz) {
+	public static ModelChoiceField transformAssociationIntoModelChoiceField(Association ass, AbstractClass srcClazz) {
 		ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
 		// we needs to get the target type
-		
+
 		// if useSource = true, FirstEnd is used as destination (target) 
 		boolean useSource = false;
-		Clazz first_linkedClass = (Clazz) ass.getFirstEnd().getLinkedClass();
-		Clazz second_linkedClass = (Clazz) ass.getSecondEnd().getLinkedClass();
-		
-		
-		EList<Clazz> descendants = first_linkedClass.getAllSubTypes();
+		AbstractClass first_linkedClass = ass.getFirstEnd().getLinkedClass();
+		AbstractClass second_linkedClass = ass.getSecondEnd().getLinkedClass();
+
+		EList<AbstractClass> descendants = first_linkedClass.getAllSubTypes();
 		boolean equals = first_linkedClass.equals(srcClazz);
 		boolean contains = descendants.contains(srcClazz);
 		if (!(contains || equals)) {
@@ -167,11 +166,11 @@ public class ClassDiagramUtils {
 			f.setLabel(ass.getName());
 		}
 		if (useSource) {
-			Clazz linkedClass = (Clazz) first_linkedClass;
+			AbstractClass linkedClass = first_linkedClass;
 			f.setReal_class(linkedClass);
 			f.setFormat_pattern(getViewForClass(linkedClass));
 		} else {
-			Clazz linkedClass = (Clazz) second_linkedClass;
+			AbstractClass linkedClass = second_linkedClass;
 			f.setReal_class(linkedClass);
 			f.setFormat_pattern(getViewForClass(linkedClass));
 		}
@@ -210,25 +209,23 @@ public class ClassDiagramUtils {
 	 * @param cl
 	 * @return
 	 */
-	public static Collection<Clazz> getInheritedClazzs(Clazz cl) {
-		Collection<Clazz> listClazz = new ArrayList<Clazz>();
+	public static Collection<AbstractClass> getInheritedClazzs(AbstractClass cl) {
+		Collection<AbstractClass> listClazz = new ArrayList<AbstractClass>();
 		listClazz.add(cl);
-		for (Clazz c : cl.getGeneralizations()) {
-			listClazz.addAll(getInheritedClazzs((Clazz) c));
-		}
+		listClazz.addAll(cl.getInheritedClasses());
 		return listClazz;
 	}
 
-	protected static Map<Clazz, SortedSet<Clazz>> inheritings = null;
+	protected static Map<AbstractClass, SortedSet<AbstractClass>> inheritings = null;
 
 	/**
 	 * Internal class, used in order to have sorted list of Clazz
 	 * 
 	 * @author Eric
 	 */
-	public static class ClazzComparator implements Comparator<Clazz> {
+	public static class ClazzComparator implements Comparator<AbstractClass> {
 
-		public int compare(Clazz c1, Clazz c2) {
+		public int compare(AbstractClass c1, AbstractClass c2) {
 			String name1, name2;
 			name1 = c1.getLabel();
 			name2 = c2.getLabel();
@@ -243,16 +240,16 @@ public class ClassDiagramUtils {
 	 * @param cl
 	 * @return
 	 */
-	public static SortedSet<Clazz> getDescendantClazzs(Clazz cl) {
+	public static SortedSet<AbstractClass> getDescendantClazzs(AbstractClass cl) {
 		// if (inheritings == null) {
-		SortedSet<Clazz> allClazzs = getAllClazzs(cl);
-		inheritings = new HashMap<Clazz, SortedSet<Clazz>>();
+		SortedSet<AbstractClass> allClazzs = getAllClazzs(cl);
+		inheritings = new HashMap<AbstractClass, SortedSet<AbstractClass>>();
 
-		for (Clazz c : allClazzs) {
-			Collection<Clazz> generalisations = getInheritedClazzs(c);
-			for (Clazz gc : generalisations) {
+		for (AbstractClass c : allClazzs) {
+			Collection<AbstractClass> generalisations = getInheritedClazzs(c);
+			for (AbstractClass gc : generalisations) {
 				if (!inheritings.containsKey(gc)) {
-					inheritings.put(gc, new TreeSet<Clazz>(new ClazzComparator()));
+					inheritings.put(gc, new TreeSet<AbstractClass>(new ClazzComparator()));
 				}
 				inheritings.get(gc).add(c);
 			}
@@ -289,16 +286,16 @@ public class ClassDiagramUtils {
 	 * @param c
 	 * @return
 	 */
-	public static Set<Clazz> getClazzsForExpand(Clazz c) {
-		Collection<Clazz> allClazzs = ClassDiagramUtils.getAllClazzs(c);
-		Map<Clazz, Set<Clazz>> inheritings = new HashMap<Clazz, Set<Clazz>>();
+	public static Set<AbstractClass> getClazzsForExpand(Clazz c) {
+		Collection<AbstractClass> allClazzs = ClassDiagramUtils.getAllClazzs(c);
+		Map<AbstractClass, Set<AbstractClass>> inheritings = new HashMap<AbstractClass, Set<AbstractClass>>();
 		// We iterate on each Clazzs of the model
-		for (Clazz clazz : allClazzs) {
-			Collection<Clazz> generalisations = getInheritedClazzs(clazz);
+		for (AbstractClass clazz : allClazzs) {
+			Collection<AbstractClass> generalisations = getInheritedClazzs(clazz);
 			// We iterate on
-			for (Clazz gc : generalisations) {
+			for (AbstractClass gc : generalisations) {
 				if (!inheritings.containsKey(gc)) {
-					inheritings.put(gc, new HashSet<Clazz>());
+					inheritings.put(gc, new HashSet<AbstractClass>());
 				}
 				inheritings.get(gc).add(clazz);
 			}
@@ -312,8 +309,8 @@ public class ClassDiagramUtils {
 	 * @param c
 	 * @return
 	 */
-	public static SortedSet<Clazz> getAllClazzs(Clazz c) {
-		SortedSet<Clazz> s = new TreeSet<Clazz>(new ClazzComparator());
+	public static SortedSet<AbstractClass> getAllClazzs(AbstractClass c) {
+		SortedSet<AbstractClass> s = new TreeSet<AbstractClass>(new ClazzComparator());
 		List<ClassPackage> l = findAllPackage(c);
 		for (ClassPackage p2 : l) {
 			EList<Clazz> Clazzs = p2.getClassSet();
@@ -329,7 +326,7 @@ public class ClassDiagramUtils {
 	 * @param c
 	 * @return
 	 */
-	public static List<ClassPackage> findAllPackage(Clazz c) {
+	public static List<ClassPackage> findAllPackage(AbstractClass c) {
 		ClassPackage root = getRootPackage(c);
 		return getAllChildrens(root);
 	}
@@ -413,7 +410,7 @@ public class ClassDiagramUtils {
 		return listChild;
 	}
 
-	public static String getViewForClass(Clazz clazz) {
+	public static String getViewForClass(AbstractClass clazz) {
 		String result = null;
 		for (Object o : clazz.getComments()) {
 			Comment c = (Comment) o;

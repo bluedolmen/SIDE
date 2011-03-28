@@ -21,8 +21,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.ui.StringVariableSelectionDialog;
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -30,7 +28,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.swt.widgets.Display;
@@ -38,6 +35,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
+import com.bluexml.side.Util.ecore.autofix.ClassFixer;
+import com.bluexml.side.Util.ecore.autofix.Fixer;
+import com.bluexml.side.Util.ecore.autofix.FormFixer;
+import com.bluexml.side.Util.ecore.autofix.ProtectedStatement;
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationFactory;
 import com.bluexml.side.application.ApplicationPackage;
@@ -84,7 +85,7 @@ public class ApplicationUtil {
 	public static final String APPLICATION_CONFIGURATION_PARAMETERS_KEY = "key";
 	public static final String APPLICATION_CONFIGURATION_PARAMETERS_DATATYPE = "dataType";
 	public static final String APPLICATION_CONFIGURATION_PARAMETERS_DEFAULTVALUE = "defaultValue";
-	
+
 	public static final String APPLICATION_CONFIGURATION_PARAMETERS_LABEL = "label";
 
 	public static final String APPLICATION_CONSTRAINTS = "moduleDependence";
@@ -210,18 +211,16 @@ public class ApplicationUtil {
 
 			IFile file = getIFileForModel(model);
 
-			EPackage metaModel = getMetaModelForModel(model);
-
-			if (metaModel != null) {
-				if (!result.containsKey(metaModel.getNsURI())) {
-					result.put(metaModel.getNsURI(), new ArrayList<IFile>());
-				}
-
-				if (file.exists()) {
+			if (file.exists()) {
+				EPackage metaModel = getMetaModelForModel(model);
+				if (metaModel != null) {
+					if (!result.containsKey(metaModel.getNsURI())) {
+						result.put(metaModel.getNsURI(), new ArrayList<IFile>());
+					}
 					result.get(metaModel.getNsURI()).add(file);
-				} else {
-					throw new IOException(System.getProperty("line.separator") + "No model found at " + file.getFullPath());
 				}
+			} else {
+				throw new IOException(System.getProperty("line.separator") + "No model found at " + file.getFullPath());
 			}
 		}
 		return result;
@@ -250,13 +249,26 @@ public class ApplicationUtil {
 	 * @throws IOException
 	 */
 	public static Resource getResourceForModel(Model model) throws Exception {
-		ResourceSet rs = getRessourceSetForModel(model);
+		final ResourceSet rs = getRessourceSetForModel(model);
 		IFile file = getIFileForModel(model);
-		String fullPath = file.getRawLocation().toOSString();
 		Resource loadedModel;
+
+		// define job that can be autoFixed
+		ProtectedStatement job = new ProtectedStatement() {
+			public Resource execute(File model) throws Exception {
+				return EResourceUtils.openModel(model.getAbsolutePath(), null, rs);
+			}
+		};
+
+		Fixer ff = new Fixer(job, file);
+		ff.registerFixer(new FormFixer());
+		ff.registerFixer(new ClassFixer());
+
 		try {
-			loadedModel = EResourceUtils.openModel(fullPath, null, rs);
+			loadedModel = (Resource) ff.run();
 		} catch (IOException e) {
+			System.err.println("Unable to open model. Now we try some corrections");
+
 			IOException ioe = new IOException(System.getProperty("line.separator") + "Error with file " + file.getName() + " (check that it's a correct model file) [" + e.getMessage() + "]");
 			ioe.setStackTrace(e.getStackTrace());
 			throw ioe;
@@ -343,8 +355,6 @@ public class ApplicationUtil {
 			return eo;
 		}
 	}
-
-	
 
 	public static boolean validate(IFile modelFile) throws Exception {
 		Resource loadedModel = null;
@@ -713,7 +723,7 @@ public class ApplicationUtil {
 				configurationParameters.setDataType(config_exp.getAttribute(APPLICATION_CONFIGURATION_PARAMETERS_DATATYPE));
 			} else if (!ApplicationDialog.staticFieldsName.contains(id)) {
 				// parameters is not defined anywhere, maybe not used anymore
-				System.out.println("parameters not defined, listed to be deleted :"+id);
+				System.out.println("parameters not defined, listed to be deleted :" + id);
 				confParamsToRemove.add(configurationParameters);
 			}
 		}
@@ -744,9 +754,9 @@ public class ApplicationUtil {
 					if (dataType != null && key.equals(key_) && label.equals(label_) && dataType.equals(dataType_)) {
 						conf = iConfigurationElement;
 					} else {
-						
+
 						// some mistake and mismatch in extension
-						System.err.println("SIDE checking Extension : Error in parameters declaration " + key+" contrib :"+iConfigurationElement.getContributor().getName());
+						System.err.println("SIDE checking Extension : Error in parameters declaration " + key + " contrib :" + iConfigurationElement.getContributor().getName());
 					}
 				}
 			}
@@ -787,7 +797,7 @@ public class ApplicationUtil {
 		return null;
 	}
 
-	public static Map<String,String> getDefaultParametersValues(ComponantConfiguration conf) throws Exception {
+	public static Map<String, String> getDefaultParametersValues(ComponantConfiguration conf) throws Exception {
 		Map<String, String> params = new HashMap<String, String>();
 		IConfigurationElement config = getIConfigurationElement(conf);
 		// search for parameters
@@ -799,10 +809,11 @@ public class ApplicationUtil {
 				params.put(key, defaultValue);
 			}
 		}
-		
+
 		return params;
-		
+
 	}
+
 	/**
 	 * build a tmp project containning all dependencies and use mvn
 	 * dependency:go-offline to populate local copy (.m2/repository), so SIDE

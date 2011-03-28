@@ -6,22 +6,18 @@
  */
 package com.bluexml.side.requirements.impl;
 
-import com.bluexml.side.requirements.Annotation;
-import com.bluexml.side.requirements.AnnotationStatus;
-import com.bluexml.side.requirements.RequirementsPackage;
-
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.ocl.ecore.OCL;
+
+import com.bluexml.side.requirements.Annotation;
+import com.bluexml.side.requirements.AnnotationStatus;
+import com.bluexml.side.requirements.RequirementsPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

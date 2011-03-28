@@ -1,14 +1,14 @@
 package org.alfresco.maven.plugin.amp.packaging;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.alfresco.maven.plugin.amp.Overlay;
 import org.apache.maven.archiver.MavenArchiver;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.alfresco.maven.plugin.amp.Overlay;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.ManifestException;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Handles the classes directory that needs to be packaged in the web application.

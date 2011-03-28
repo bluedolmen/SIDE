@@ -6,13 +6,13 @@
  */
 package com.bluexml.side.clazz;
 
-import com.bluexml.side.common.CommonPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
+import com.bluexml.side.common.CommonPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -388,7 +388,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAbstractClass()
 	 * @generated
 	 */
-	int ABSTRACT_CLASS = 8;
+	int ABSTRACT_CLASS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -481,13 +481,22 @@ public interface ClazzPackage extends EPackage {
 	int ABSTRACT_CLASS__ATTRIBUTES = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Generalizations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASS__GENERALIZATIONS = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CLASS_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int ABSTRACT_CLASS_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.ClazzImpl <em>Clazz</em>}' class.
@@ -497,7 +506,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getClazz()
 	 * @generated
 	 */
-	int CLAZZ = 2;
+	int CLAZZ = 3;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -590,6 +599,15 @@ public interface ClazzPackage extends EPackage {
 	int CLAZZ__ATTRIBUTES = ABSTRACT_CLASS__ATTRIBUTES;
 
 	/**
+	 * The feature id for the '<em><b>Generalizations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLAZZ__GENERALIZATIONS = ABSTRACT_CLASS__GENERALIZATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -599,22 +617,13 @@ public interface ClazzPackage extends EPackage {
 	int CLAZZ__OPERATIONS = ABSTRACT_CLASS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Generalizations</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLAZZ__GENERALIZATIONS = ABSTRACT_CLASS_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Aspects</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLAZZ__ASPECTS = ABSTRACT_CLASS_FEATURE_COUNT + 2;
+	int CLAZZ__ASPECTS = ABSTRACT_CLASS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -623,7 +632,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLAZZ__ABSTRACT = ABSTRACT_CLASS_FEATURE_COUNT + 3;
+	int CLAZZ__ABSTRACT = ABSTRACT_CLASS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
@@ -632,7 +641,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLAZZ__DEPRECATED = ABSTRACT_CLASS_FEATURE_COUNT + 4;
+	int CLAZZ__DEPRECATED = ABSTRACT_CLASS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Clazz</em>' class.
@@ -641,7 +650,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLAZZ_FEATURE_COUNT = ABSTRACT_CLASS_FEATURE_COUNT + 5;
+	int CLAZZ_FEATURE_COUNT = ABSTRACT_CLASS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.AssociationImpl <em>Association</em>}' class.
@@ -651,7 +660,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAssociation()
 	 * @generated
 	 */
-	int ASSOCIATION = 3;
+	int ASSOCIATION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -787,7 +796,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAttribute()
 	 * @generated
 	 */
-	int ATTRIBUTE = 4;
+	int ATTRIBUTE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -941,7 +950,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getEnumeration()
 	 * @generated
 	 */
-	int ENUMERATION = 5;
+	int ENUMERATION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1050,7 +1059,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getEnumerationLiteral()
 	 * @generated
 	 */
-	int ENUMERATION_LITERAL = 6;
+	int ENUMERATION_LITERAL = 7;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1096,7 +1105,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAspect()
 	 * @generated
 	 */
-	int ASPECT = 7;
+	int ASPECT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1195,7 +1204,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASPECT__GENERALIZATIONS = ABSTRACT_CLASS_FEATURE_COUNT + 0;
+	int ASPECT__GENERALIZATIONS = ABSTRACT_CLASS__GENERALIZATIONS;
 
 	/**
 	 * The number of structural features of the '<em>Aspect</em>' class.
@@ -1204,7 +1213,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASPECT_FEATURE_COUNT = ABSTRACT_CLASS_FEATURE_COUNT + 1;
+	int ASPECT_FEATURE_COUNT = ABSTRACT_CLASS_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.ClassCommentImpl <em>Class Comment</em>}' class.
@@ -1561,13 +1570,22 @@ public interface ClazzPackage extends EPackage {
 	int MODEL__ENUMERATION_SET = CLASS_PACKAGE__ENUMERATION_SET;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__NAMESPACE = CLASS_PACKAGE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_FEATURE_COUNT = CLASS_PACKAGE_FEATURE_COUNT + 0;
+	int MODEL_FEATURE_COUNT = CLASS_PACKAGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}' enum.
@@ -1675,17 +1693,6 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClazz_Operations();
-
-	/**
-	 * Returns the meta object for the reference list '{@link com.bluexml.side.clazz.Clazz#getGeneralizations <em>Generalizations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Generalizations</em>'.
-	 * @see com.bluexml.side.clazz.Clazz#getGeneralizations()
-	 * @see #getClazz()
-	 * @generated
-	 */
-	EReference getClazz_Generalizations();
 
 	/**
 	 * Returns the meta object for the reference list '{@link com.bluexml.side.clazz.Clazz#getAspects <em>Aspects</em>}'.
@@ -1947,17 +1954,6 @@ public interface ClazzPackage extends EPackage {
 	EClass getAspect();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.bluexml.side.clazz.Aspect#getGeneralizations <em>Generalizations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Generalizations</em>'.
-	 * @see com.bluexml.side.clazz.Aspect#getGeneralizations()
-	 * @see #getAspect()
-	 * @generated
-	 */
-	EReference getAspect_Generalizations();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.AbstractClass <em>Abstract Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1977,6 +1973,17 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractClass_Attributes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.clazz.AbstractClass#getGeneralizations <em>Generalizations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Generalizations</em>'.
+	 * @see com.bluexml.side.clazz.AbstractClass#getGeneralizations()
+	 * @see #getAbstractClass()
+	 * @generated
+	 */
+	EReference getAbstractClass_Generalizations();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.TitledNamedClassModelElement <em>Titled Named Class Model Element</em>}'.
@@ -2072,6 +2079,17 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Model#getNamespace <em>Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Namespace</em>'.
+	 * @see com.bluexml.side.clazz.Model#getNamespace()
+	 * @see #getModel()
+	 * @generated
+	 */
+	EAttribute getModel_Namespace();
 
 	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}'.
@@ -2182,14 +2200,6 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLAZZ__OPERATIONS = eINSTANCE.getClazz_Operations();
-
-		/**
-		 * The meta object literal for the '<em><b>Generalizations</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLAZZ__GENERALIZATIONS = eINSTANCE.getClazz_Generalizations();
 
 		/**
 		 * The meta object literal for the '<em><b>Aspects</b></em>' reference list feature.
@@ -2394,14 +2404,6 @@ public interface ClazzPackage extends EPackage {
 		EClass ASPECT = eINSTANCE.getAspect();
 
 		/**
-		 * The meta object literal for the '<em><b>Generalizations</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASPECT__GENERALIZATIONS = eINSTANCE.getAspect_Generalizations();
-
-		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.AbstractClassImpl <em>Abstract Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2418,6 +2420,14 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_CLASS__ATTRIBUTES = eINSTANCE.getAbstractClass_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Generalizations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_CLASS__GENERALIZATIONS = eINSTANCE.getAbstractClass_Generalizations();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.TitledNamedClassModelElementImpl <em>Titled Named Class Model Element</em>}' class.
@@ -2498,6 +2508,14 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MODEL = eINSTANCE.getModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL__NAMESPACE = eINSTANCE.getModel_Namespace();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}' enum.

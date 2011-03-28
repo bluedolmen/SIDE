@@ -13,6 +13,7 @@ import com.bluexml.side.Class.modeler.ClazzImageRegistry;
 import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.editor.ClazzEditor;
 import com.bluexml.side.Util.ecore.modeler.AbstractModelerOpenLinkedObject;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.FormCollection;
@@ -51,7 +52,7 @@ public class ShowFormAction extends AbstractModelerOpenLinkedObject {
 				if (fc instanceof ClassReference) {
 					ClassReference fw = (ClassReference) fc;
 
-					Clazz c = fw.getReal_class();
+					AbstractClass c = fw.getReal_class();
 					if (c.getFullName().equals(clazz.getFullName())) {
 						result.add(fw);
 						System.out.println("match ! record :"+fw);
@@ -74,7 +75,7 @@ public class ShowFormAction extends AbstractModelerOpenLinkedObject {
 			for (EObject eObject : elements) {
 				ClassReference foundedFc = (ClassReference) eObject;
 
-				Clazz clazz = foundedFc.getReal_class();
+				AbstractClass clazz = foundedFc.getReal_class();
 				TreeViewer treeViewer = (TreeViewer) editor.getViewer();
 				TreeItem item = treeViewer.getTree().getItem(0);
 				item.setExpanded(true);
@@ -84,7 +85,7 @@ public class ShowFormAction extends AbstractModelerOpenLinkedObject {
 				for (FormContainer fc : wfc.getForms()) {
 					if (fc instanceof ClassReference) {
 						ClassReference fw = (ClassReference) fc;
-						Clazz c = fw.getReal_class();
+						AbstractClass c = fw.getReal_class();
 
 						if (c.getFullName().equals(clazz.getFullName())) {
 							l.add(fw);

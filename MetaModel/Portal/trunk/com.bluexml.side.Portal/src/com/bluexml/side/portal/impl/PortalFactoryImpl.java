@@ -6,16 +6,32 @@
  */
 package com.bluexml.side.portal.impl;
 
-import com.bluexml.side.portal.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.bluexml.side.portal.Column;
+import com.bluexml.side.portal.Group;
+import com.bluexml.side.portal.HavePortlet;
+import com.bluexml.side.portal.InstanciatePortletType;
+import com.bluexml.side.portal.InternalPortletType;
+import com.bluexml.side.portal.Page;
+import com.bluexml.side.portal.Portal;
+import com.bluexml.side.portal.PortalFactory;
+import com.bluexml.side.portal.PortalLayout;
+import com.bluexml.side.portal.PortalPackage;
+import com.bluexml.side.portal.Portlet;
+import com.bluexml.side.portal.PortletAttribute;
+import com.bluexml.side.portal.PortletAttributeInstance;
+import com.bluexml.side.portal.PortletInternal;
+import com.bluexml.side.portal.PortletType;
+import com.bluexml.side.portal.PortletTypeAttributeType;
+import com.bluexml.side.portal.PositionGroup;
+import com.bluexml.side.portal.isChildPage;
+import com.bluexml.side.portal.widthUnit;
 
 /**
  * <!-- begin-user-doc -->

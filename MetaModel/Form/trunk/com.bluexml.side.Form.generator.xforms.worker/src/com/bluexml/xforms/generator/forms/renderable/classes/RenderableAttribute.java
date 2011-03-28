@@ -3,8 +3,6 @@ package com.bluexml.xforms.generator.forms.renderable.classes;
 import java.util.Stack;
 
 import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.xforms.messages.MsgPool;
 import org.jdom.Element;
 
 import com.bluexml.side.clazz.AbstractClass;
@@ -16,6 +14,8 @@ import com.bluexml.xforms.generator.forms.renderable.common.SelectBean;
 import com.bluexml.xforms.generator.forms.renderable.common.field.AbstractRenderableField;
 import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 
 /**
  * The Class RenderableAttribute.

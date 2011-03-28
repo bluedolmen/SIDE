@@ -3,7 +3,7 @@ package com.bluexml.xforms.generator.forms.renderable.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -19,7 +19,7 @@ import com.bluexml.xforms.messages.MsgId;
 public class AssociationProperties {
 
 	/** The destination. */
-	private Clazz destination;
+	private AbstractClass destination;
 
 	/** The destination renderable. */
 	private Renderable destinationRenderable;
@@ -133,7 +133,7 @@ public class AssociationProperties {
 	 * NOTE: several fields are not initialized from the constructor parameters
 	 * 
 	 */
-	public AssociationProperties(Clazz destination, Renderable destinationRenderable, String name,
+	public AssociationProperties(AbstractClass destination, Renderable destinationRenderable, String name,
 			String assocTitle, boolean inline, int hiBound, int loBound) {
 		super();
 		initDefaults();
@@ -182,7 +182,7 @@ public class AssociationProperties {
 	 * 
 	 * @return the destination
 	 */
-	public Clazz getDestination() {
+	public AbstractClass getDestination() {
 		return destination;
 	}
 
@@ -192,7 +192,7 @@ public class AssociationProperties {
 	 * @param destination
 	 *            the new destination
 	 */
-	public void setDestination(Clazz destination) {
+	public void setDestination(AbstractClass destination) {
 		this.destination = destination;
 	}
 

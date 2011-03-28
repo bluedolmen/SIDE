@@ -7,16 +7,29 @@
 package com.bluexml.side.clazz.util;
 
 import com.bluexml.side.clazz.*;
-
-import com.bluexml.side.common.Comment;
-import com.bluexml.side.common.Container;
-import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.common.NamedModelElement;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.clazz.AbstractClass;
+import com.bluexml.side.clazz.Aspect;
+import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationEnd;
+import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.ClassComment;
+import com.bluexml.side.clazz.ClassModelElement;
+import com.bluexml.side.clazz.ClassPackage;
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.clazz.EnumerationLiteral;
+import com.bluexml.side.clazz.Model;
+import com.bluexml.side.clazz.TitledNamedClassModelElement;
+import com.bluexml.side.common.Comment;
+import com.bluexml.side.common.Container;
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -108,6 +121,17 @@ public class ClazzSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ClazzPackage.ABSTRACT_CLASS: {
+				AbstractClass abstractClass = (AbstractClass)theEObject;
+				T result = caseAbstractClass(abstractClass);
+				if (result == null) result = caseTitledNamedClassModelElement(abstractClass);
+				if (result == null) result = caseContainer(abstractClass);
+				if (result == null) result = caseNamedModelElement(abstractClass);
+				if (result == null) result = caseClassModelElement(abstractClass);
+				if (result == null) result = caseModelElement(abstractClass);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ClazzPackage.CLAZZ: {
 				Clazz clazz = (Clazz)theEObject;
 				T result = caseClazz(clazz);
@@ -163,17 +187,6 @@ public class ClazzSwitch<T> {
 				if (result == null) result = caseNamedModelElement(aspect);
 				if (result == null) result = caseClassModelElement(aspect);
 				if (result == null) result = caseModelElement(aspect);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ClazzPackage.ABSTRACT_CLASS: {
-				AbstractClass abstractClass = (AbstractClass)theEObject;
-				T result = caseAbstractClass(abstractClass);
-				if (result == null) result = caseTitledNamedClassModelElement(abstractClass);
-				if (result == null) result = caseContainer(abstractClass);
-				if (result == null) result = caseNamedModelElement(abstractClass);
-				if (result == null) result = caseClassModelElement(abstractClass);
-				if (result == null) result = caseModelElement(abstractClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

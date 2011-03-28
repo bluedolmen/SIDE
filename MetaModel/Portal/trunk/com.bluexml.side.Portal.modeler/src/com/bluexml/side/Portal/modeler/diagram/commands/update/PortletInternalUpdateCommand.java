@@ -6,7 +6,6 @@ import org.eclipse.gef.commands.Command;
 
 import com.bluexml.side.Portal.modeler.diagram.dialogs.PortletInternalEditDialog;
 import com.bluexml.side.form.FormCollection;
-import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.portal.InternalPortletType;
 import com.bluexml.side.portal.PortletInternal;
 import com.bluexml.side.view.AbstractView;

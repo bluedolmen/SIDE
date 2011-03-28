@@ -38,9 +38,7 @@ import com.bluexml.side.form.DateTimeField;
 import com.bluexml.side.form.DecimalField;
 import com.bluexml.side.form.EmailField;
 import com.bluexml.side.form.Field;
-import com.bluexml.side.form.FieldSearchOperators;
 import com.bluexml.side.form.FileField;
-import com.bluexml.side.form.FileFieldPreviewType;
 import com.bluexml.side.form.FileFieldSearchOperators;
 import com.bluexml.side.form.FileSearchField;
 import com.bluexml.side.form.FloatField;
@@ -67,9 +65,7 @@ import com.bluexml.side.form.PhoneNumberField;
 import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.RegexField;
 import com.bluexml.side.form.SearchField;
-import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.SearchFormCollection;
-import com.bluexml.side.form.SearchOperatorConfiguration;
 import com.bluexml.side.form.StaticText;
 import com.bluexml.side.form.TextField;
 import com.bluexml.side.form.TextWidgetType;
@@ -2013,7 +2009,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getRegexField_Regex(), ecorePackage.getEString(), "regex", null, 0, 1, RegexField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classReferenceEClass, ClassReference.class, "ClassReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassReference_Real_class(), theClazzPackage.getClazz(), null, "real_class", null, 0, 1, ClassReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassReference_Real_class(), theClazzPackage.getAbstractClass(), null, "real_class", null, 0, 1, ClassReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(passwordFieldEClass, PasswordField.class, "PasswordField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2210,7 +2206,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "noSpecialCharacters", "self.id.regexMatch(\'[\\w]*\') = true",
-			 "validRef", "if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif"
+			 "validRef", "if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.oclAsType(clazz::Clazz).getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif"
 		   });											
 		addAnnotation
 		  (formGroupEClass.getEOperations().get(0), 

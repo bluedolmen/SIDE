@@ -3,6 +3,7 @@ package com.bluexml.side.application.ui.action.tree;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import com.bluexml.side.util.dependencies.ModuleConstraint;
 public abstract class TreeNode extends TreeElement {
 	

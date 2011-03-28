@@ -6,9 +6,9 @@
  */
 package com.bluexml.side.clazz;
 
-import com.bluexml.side.common.OperationComponent;
-
 import org.eclipse.emf.common.util.EList;
+
+import com.bluexml.side.common.OperationComponent;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.Clazz#getOperations <em>Operations</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Clazz#getGeneralizations <em>Generalizations</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Clazz#getAspects <em>Aspects</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Clazz#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Clazz#isDeprecated <em>Deprecated</em>}</li>
@@ -53,22 +52,6 @@ public interface Clazz extends AbstractClass {
 	 * @generated
 	 */
 	EList<OperationComponent> getOperations();
-
-	/**
-	 * Returns the value of the '<em><b>Generalizations</b></em>' reference list.
-	 * The list contents are of type {@link com.bluexml.side.clazz.Clazz}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Generalizations</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Generalizations</em>' reference list.
-	 * @see com.bluexml.side.clazz.ClazzPackage#getClazz_Generalizations()
-	 * @model
-	 * @generated
-	 */
-	EList<Clazz> getGeneralizations();
 
 	/**
 	 * Returns the value of the '<em><b>Aspects</b></em>' reference list.
@@ -167,16 +150,7 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.generalizations  ->  asSet()  -> iterate(e:Clazz;result :Set(Clazz)= Set{}| result -> including(e) -> union(e.getInheritedClasses()))'"
-	 * @generated
-	 */
-	EList<Clazz> getInheritedClasses();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.attributes ->asSet()))'"
+	 *        annotation="http://www.bluexml.com/OCL body='self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.getAllAttributesWithoutAspectsAttributes() ->asSet()))'"
 	 * @generated
 	 */
 	EList<Attribute> getAspectAttributes();
@@ -185,16 +159,7 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )'"
-	 * @generated
-	 */
-	EList<Clazz> getAllSubTypes();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() ->asSet() ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.getClassAndAspectAttributes() ->asSet()))' description='search attributes than is describe in inherited classes (with Aspects)'"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() ->asSet().oclAsType(Clazz) ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.getClassAndAspectAttributes() ->asSet()))' description='search attributes than is describe in inherited classes (with Aspects)'"
 	 * @generated
 	 */
 	EList<Attribute> getAllInheritedClassAndAspectAttributes();
@@ -203,115 +168,16 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() ->collect(c | c.attributes) -> flatten()' description='get all attributes including the inherited ones (excluding aspects)'"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses()->asSet().oclAsType(Clazz).aspects'"
 	 * @generated
 	 */
-	EList<Attribute> getAllInheritedAttributes();
+	EList<Aspect> getAllInheritedAspects();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='Association.allInstances() ->select(c:Association|self.isSource(c))' description='search association where this clazz is source'"
-	 * @generated
-	 */
-	EList<Association> getSourceAssociations();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model required="true" assoRequired="true"
-	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.secondEnd.navigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.navigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
-	 * @generated
-	 */
-	boolean isSource(Association asso);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model required="true" assoRequired="true"
-	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.firstEnd.navigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.navigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
-	 * @generated
-	 */
-	boolean isTarget(Association asso);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='Association.allInstances() ->select(c:Association|self.isTarget(c))' description='search association where this clazz is target'"
-	 * @generated
-	 */
-	EList<Association> getTargetAssociations();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() -> including(self) ->iterate(e:Clazz;result:Set(Association)=Set{}|result->union(e.getSourceAssociations()))' description='search association where this clazz is source'"
-	 * @generated
-	 */
-	EList<Association> getAllSourceAssociations();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() -> including(self) ->iterate(e:Clazz;result:Set(Association)=Set{}|result->union(e.getTargetAssociations()))' description='search associations where this clazz is source or one of inheritedClass'"
-	 * @generated
-	 */
-	EList<Association> getAllTargetAssociations();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getAllSourceAssociations().getTarget() ->asOrderedSet()'"
-	 * @generated
-	 */
-	EList<Clazz> getLinkedClasses();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='AssociationEnd.allInstances() -> select (ae | ae.linkedClass.oclIsTypeOf(Clazz) and ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass.oclAsType(Clazz)) )' description='returns association ends where this clazz is source including inherited associations (association ends cannot link to aspects)'"
-	 * @generated
-	 */
-	EList<AssociationEnd> getAllSourceAssociationEnds();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='AssociationEnd.allInstances() -> select (ae | ae.navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )' description='returns association ends where this clazz is target including inherited associations (association ends cannot link to aspects)'"
-	 * @generated
-	 */
-	EList<AssociationEnd> getAllTargetAssociationEnds();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and ae.linkedClass = self )' description='returns association ends where this clazz is source'"
-	 * @generated
-	 */
-	EList<AssociationEnd> getSourceAssociationEnds();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='AssociationEnd.allInstances() -> select (ae | ae.navigable and ae.linkedClass = self)' description='returns association ends where this clazz is target'"
-	 * @generated
-	 */
-	EList<AssociationEnd> getTargetAssociationEnds();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.aspects->asSet()->union(self.getInheritedClasses()->asSet().aspects)'"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getHasAspects() -> union(self.getAllInheritedAspects())'"
 	 * @generated
 	 */
 	EList<Aspect> getAllAspects();
@@ -320,18 +186,27 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getAllInheritedAttributes()->union(self.attributes)'"
+	 *        annotation="http://www.bluexml.com/OCL body='self.aspects -> asSet() -> union(self.aspects.getInheritedClasses().oclAsType(Aspect) -> asSet()) ->asOrderedSet()'"
 	 * @generated
 	 */
-	EList<Attribute> getAllAttributesWithoutAspectsAttributes();
+	EList<Aspect> getHasAspects();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances() ->select(e:Clazz|e.generalizations() ->includes(self) )'"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() -> including(self) -> union(self.getAllAspects()) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getSourceAssociations()))' description='search association where this AbstractClass is source'"
 	 * @generated
 	 */
-	EList<Clazz> getSubTypes();
+	EList<Association> getAllSourceAssociationsIncludingAspect();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() -> including(self) -> union(self.getAllAspects()) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getTargetAssociations()))' description='search associations where this AbstractClass is source or one of inheritedClass'"
+	 * @generated
+	 */
+	EList<Association> getAllTargetAssociationsIncludingAspect();
 		
 } // Clazz

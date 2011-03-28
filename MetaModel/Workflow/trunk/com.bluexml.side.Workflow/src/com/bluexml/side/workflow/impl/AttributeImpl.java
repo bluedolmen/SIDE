@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.workflow.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -18,7 +20,6 @@ import com.bluexml.side.common.impl.ModelElementImpl;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.WorkflowPackage;
-import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->

@@ -36,7 +36,7 @@ import com.bluexml.side.form.ClassFormCollection;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.clazz.utils.ClassInitialization;
-import com.bluexml.side.form.presentation.FormEditor;;
+import com.bluexml.side.form.presentation.FormEditor;
 
 public class InitializeFormModel implements IObjectActionDelegate {
 

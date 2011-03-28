@@ -37,6 +37,7 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.EnumerationLiteral;
+import com.bluexml.side.clazz.Model;
 import com.bluexml.side.clazz.TitledNamedClassModelElement;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
@@ -194,14 +195,6 @@ public class ClazzValidator extends EObjectValidator {
 	private static Constraint enumerationLiteral_NameNullInvOCL;
 
 	/**
-	 * The parsed OCL expression for the definition of the '<em>noSpecialCharacters</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint enumerationLiteral_noSpecialCharactersInvOCL;
-
-	/**
 	 * The parsed OCL expression for the definition of the '<em>TwoModelElementWithSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -266,6 +259,8 @@ public class ClazzValidator extends EObjectValidator {
 				return validateClassModelElement((ClassModelElement)value, diagnostics, context);
 			case ClazzPackage.CLASS_PACKAGE:
 				return validateClassPackage((ClassPackage)value, diagnostics, context);
+			case ClazzPackage.ABSTRACT_CLASS:
+				return validateAbstractClass((AbstractClass)value, diagnostics, context);
 			case ClazzPackage.CLAZZ:
 				return validateClazz((Clazz)value, diagnostics, context);
 			case ClazzPackage.ASSOCIATION:
@@ -278,8 +273,6 @@ public class ClazzValidator extends EObjectValidator {
 				return validateEnumerationLiteral((EnumerationLiteral)value, diagnostics, context);
 			case ClazzPackage.ASPECT:
 				return validateAspect((Aspect)value, diagnostics, context);
-			case ClazzPackage.ABSTRACT_CLASS:
-				return validateAbstractClass((AbstractClass)value, diagnostics, context);
 			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT:
 				return validateTitledNamedClassModelElement((TitledNamedClassModelElement)value, diagnostics, context);
 			case ClazzPackage.CLASS_COMMENT:
@@ -1043,7 +1036,6 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(enumerationLiteral, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(enumerationLiteral, diagnostics, context);
 		if (result || diagnostics != null) result &= validateEnumerationLiteral_NameNull(enumerationLiteral, diagnostics, context);
-		if (result || diagnostics != null) result &= validateEnumerationLiteral_noSpecialCharacters(enumerationLiteral, diagnostics, context);
 		return result;
 	}
 
@@ -1079,45 +1071,6 @@ public class ClazzValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NameNull", getObjectLabel(enumerationLiteral, context) }),
-						 new Object[] { enumerationLiteral }));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the noSpecialCharacters constraint of '<em>Enumeration Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateEnumerationLiteral_noSpecialCharacters(EnumerationLiteral enumerationLiteral, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (enumerationLiteral_noSpecialCharactersInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(ClazzPackage.Literals.ENUMERATION_LITERAL);
-
-			EAnnotation ocl = ClazzPackage.Literals.ENUMERATION_LITERAL.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("noSpecialCharacters");
-
-			try {
-				enumerationLiteral_noSpecialCharactersInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(enumerationLiteral_noSpecialCharactersInvOCL);
-
-		if (!query.check(enumerationLiteral)) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						((doThrowError( ClazzPackage.Literals.ENUMERATION_LITERAL.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"noSpecialCharacters")? Diagnostic.ERROR : Diagnostic.WARNING),
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(enumerationLiteral, context) }),
 						 new Object[] { enumerationLiteral }));
 			}
 			return false;
@@ -1345,7 +1298,41 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAssociationEnd(AssociationEnd associationEnd, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(associationEnd, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(associationEnd, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(associationEnd, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(associationEnd, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(associationEnd, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(associationEnd, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(associationEnd, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(associationEnd, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAssociationEnd_noSpecialChracters(associationEnd, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the noSpecialChracters constraint of '<em>Association End</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAssociationEnd_noSpecialChracters(AssociationEnd associationEnd, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialChracters", getObjectLabel(associationEnd, context) }),
+						 new Object[] { associationEnd }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

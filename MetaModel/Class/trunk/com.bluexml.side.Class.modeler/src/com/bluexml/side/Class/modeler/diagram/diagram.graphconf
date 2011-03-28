@@ -242,7 +242,7 @@
     </edge>
     <edge
         presentation="default"
-        defaultForegroundColor="0,0,0"
+        defaultForegroundColor="255,0,255"
         defaultFont="Lucida Grande-regular-11"
         defaultRouter="ObliqueRouter"
         lineWidth="1"

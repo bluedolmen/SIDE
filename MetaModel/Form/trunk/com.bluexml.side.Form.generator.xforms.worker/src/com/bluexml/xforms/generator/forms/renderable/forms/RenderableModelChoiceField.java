@@ -6,9 +6,9 @@ import java.util.Stack;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationType;
-import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
@@ -40,15 +40,13 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 	 * @param formElement
 	 *            the form element
 	 */
-	public RenderableModelChoiceField(XFormsGenerator generationManager, FormElement parent,
-			ModelChoiceField formElement) {
+	public RenderableModelChoiceField(XFormsGenerator generationManager, FormElement parent, ModelChoiceField formElement) {
 		super(generationManager, parent, formElement);
 
 		AssociationProperties properties = new AssociationProperties();
 
 		properties.setAssocTitle(formElement.getLabel());
-		Clazz formElt_realClass = (Clazz) generationManager.getFormGenerator().getRealObject(
-				formElement.getReal_class());
+		AbstractClass formElt_realClass = (AbstractClass) generationManager.getFormGenerator().getRealObject(formElement.getReal_class());
 		properties.setDestination(formElt_realClass);
 		String defaultFormName = ModelTools.getCompleteName(formElt_realClass);
 		properties.setCreateEditDefaultFormName(defaultFormName);
@@ -65,13 +63,11 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 			// we want to allow several targets in the XHTML file
 			for (FormContainer targetedForm : formElement.getTarget()) {
 				// we need to get the real object, in case the target form is from another file.
-				FormContainer realTargetedForm = (FormContainer) getFormGenerator().getRealObject(
-						targetedForm);
+				FormContainer realTargetedForm = (FormContainer) getFormGenerator().getRealObject(targetedForm);
 				if (realTargetedForm instanceof FormClass) {
 					if (formElement.getWidget() == ModelChoiceWidgetType.INLINE) {
 						properties.setInline(true);
-						RenderableFormContainer renderableForm = generationManager
-								.getRenderableForm(realTargetedForm);
+						RenderableFormContainer renderableForm = generationManager.getRenderableForm(realTargetedForm);
 						properties.setDestinationRenderable(renderableForm);
 						properties.addCreateEditFormName(realTargetedForm.getId());
 						break; // only one target allowed if inline
@@ -107,22 +103,19 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 
 		boolean filtered = false;
 		boolean isComposition = false;
-		Association association = (Association) getFormGenerator().getRealObject(
-				formElement.getRef());
+		Association association = (Association) getFormGenerator().getRealObject(formElement.getRef());
 
 		try {
 			filtered = getFormGenerator().isAssociationFilterable(formElt_realClass, association);
 		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("The class selected on '" + formElement.getLabel()
-					+ "' is not compatible with the association.");
+			throw new RuntimeException("The class selected on '" + formElement.getLabel() + "' is not compatible with the association.");
 		}
 		// AssociationType associationType = ;
 		isComposition = (association.getAssociationType() == AssociationType.COMPOSITION);
 
 		if (filtered) {
 			// retrieve the association name
-			String alfrescoName = getFormGenerator()
-					.getAlfrescoName(formElt_realClass, association);
+			String alfrescoName = getFormGenerator().getAlfrescoName(formElt_realClass, association);
 			properties.setFilterAssoc(alfrescoName);
 		}
 		properties.setComposition(isComposition);
@@ -140,8 +133,9 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.forms.renderable.forms.RenderableFormElement #compute()
+	 * @see
+	 * com.bluexml.xforms.generator.forms.renderable.forms.RenderableFormElement
+	 * #compute()
 	 */
 	@Override
 	public void compute() {
@@ -150,25 +144,25 @@ public class RenderableModelChoiceField extends RenderableFormElement<ModelChoic
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.forms.Renderable#getPath(java.lang.String, java.util.Stack,
+	 * @see
+	 * com.bluexml.xforms.generator.forms.Renderable#getPath(java.lang.String,
+	 * java.util.Stack,
 	 * java.util.Stack)
 	 */
 	@Override
-	public Path getPath(String parentPath, Stack<Renderable> parents,
-			Stack<Rendered> renderedParents) {
+	public Path getPath(String parentPath, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
 		return ROOT_RELATIVE;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.bluexml.xforms.generator.forms.Renderable#render(java.lang.String, java.util.Stack,
+	 * @see
+	 * com.bluexml.xforms.generator.forms.Renderable#render(java.lang.String,
+	 * java.util.Stack,
 	 * java.util.Stack)
 	 */
 	@Override
-	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents,
-			boolean isInIMultRepeater) {
+	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents, boolean isInIMultRepeater) {
 		return new RenderedParentGroup(renderedParents);
 	}
 

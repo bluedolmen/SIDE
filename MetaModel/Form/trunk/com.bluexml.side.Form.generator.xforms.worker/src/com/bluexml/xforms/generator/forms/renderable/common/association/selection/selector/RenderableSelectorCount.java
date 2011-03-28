@@ -2,8 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
-import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.xforms.messages.MsgPool;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -11,6 +9,8 @@ import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 
 public class RenderableSelectorCount extends AbstractRenderableSelectorItem {
 

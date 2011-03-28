@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
 
+import org.alfresco.maven.plugin.amp.Overlay;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.resolver.filter.ScopeArtifactFilter;
-import org.alfresco.maven.plugin.amp.Overlay;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.StringUtils;
 

@@ -6,21 +6,18 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.WebProject.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.WebProject.GoalItem;
-import com.bluexml.side.requirements.generator.metamodel.WebProject.GoalPage;
-import com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.bluexml.side.requirements.generator.metamodel.WebProject.GoalItem;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.GoalPage;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectPackage;
 
 /**
  * <!-- begin-user-doc -->

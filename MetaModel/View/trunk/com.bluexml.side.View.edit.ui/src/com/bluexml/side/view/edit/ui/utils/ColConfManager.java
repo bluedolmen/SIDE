@@ -3,17 +3,14 @@ package com.bluexml.side.view.edit.ui.utils;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
-import com.bluexml.side.common.Operation;
 import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.view.Col;
 import com.bluexml.side.view.Filtering;
 import com.bluexml.side.view.Sorting;
 import com.bluexml.side.view.Styling;
-import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 
 public class ColConfManager {

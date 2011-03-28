@@ -7,7 +7,6 @@
 package com.bluexml.side.workflow.provider;
 
 
-import com.bluexml.side.clazz.ClazzFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,6 +24,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.provider.PackageItemProvider;
 import com.bluexml.side.workflow.WorkflowFactory;

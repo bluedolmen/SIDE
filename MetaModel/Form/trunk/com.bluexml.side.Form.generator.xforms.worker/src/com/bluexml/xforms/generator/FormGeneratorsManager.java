@@ -86,10 +86,8 @@ public class FormGeneratorsManager {
 		// Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("workflow",
 		// new WorkflowFactoryImpl());
 
-		EPackage.Registry.INSTANCE.put(org.eclipse.emf.ecore.EcorePackage.eNS_URI,
-				org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(org.eclipse.ocl.ecore.EcorePackage.eNS_URI,
-				org.eclipse.ocl.ecore.EcorePackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(org.eclipse.emf.ecore.EcorePackage.eNS_URI, org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(org.eclipse.ocl.ecore.EcorePackage.eNS_URI, org.eclipse.ocl.ecore.EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(ClazzPackage.eNS_URI, ClazzPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(FormPackage.eNS_URI, FormPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(WorkflowPackage.eNS_URI, WorkflowPackage.eINSTANCE);
@@ -129,7 +127,10 @@ public class FormGeneratorsManager {
 	/** The set of all operators that are available. */
 	private ArrayList<SearchOperator> operatorPool;
 
-	/** The register of <b>sorted</b> lists of operators that were specified in search forms. */
+	/**
+	 * The register of <b>sorted</b> lists of operators that were specified in
+	 * search forms.
+	 */
 	private Map<String, List<SearchOperator>> operatorsEnumsMap = new HashMap<String, List<SearchOperator>>();
 
 	/** The classes. */
@@ -166,10 +167,10 @@ public class FormGeneratorsManager {
 	private GeneratorInterface currentGenerator;
 
 	/** The sub classes. */
-	private Map<Clazz, Set<Clazz>> subClasses;
+	private Map<AbstractClass, Set<AbstractClass>> subClasses;
 
 	/** The parent classes. */
-	private Map<Clazz, Clazz> parentClasses;
+	private Map<AbstractClass, AbstractClass> parentClasses;
 
 	/** The alfresco name stereotype. */
 	private Stereotype alfrescoNameStereotype;
@@ -180,7 +181,10 @@ public class FormGeneratorsManager {
 	/** The monitor through which messages will be output. */
 	private CoreInterface genLogger;
 
-	/** if true, associations are rendered as model choice fields instead of inline forms */
+	/**
+	 * if true, associations are rendered as model choice fields instead of
+	 * inline forms
+	 */
 	private boolean simplifyClasses;
 
 	/** Layout of workflow forms */
@@ -192,17 +196,22 @@ public class FormGeneratorsManager {
 
 	private boolean generateLogListForms;
 
-	/** whether the generation is in read only mode. Normally true during the second pass. */
+	/**
+	 * whether the generation is in read only mode. Normally true during the
+	 * second pass.
+	 */
 	private boolean inReadOnlyMode;
 
 	/**
-	 * true if at least one workflow form was generated. Used at post-generation time, notably for
+	 * true if at least one workflow form was generated. Used at post-generation
+	 * time, notably for
 	 * outputting a URL for the demo webapp.
 	 */
 	private boolean workflowCapable;
 
 	/**
-	 * true if at least one search form was generated. Used at generation time for determining
+	 * true if at least one search form was generated. Used at generation time
+	 * for determining
 	 * whether to write search operators enumerations.
 	 */
 	private boolean searchCapable;
@@ -210,7 +219,10 @@ public class FormGeneratorsManager {
 	/** Name of the form being processed. For error messages. */
 	private String currentForm;
 
-	/** If true, some messages that are usually not displayed are sent to the monitor. */
+	/**
+	 * If true, some messages that are usually not displayed are sent to the
+	 * monitor.
+	 */
 	private boolean debugMode = false;
 
 	/**
@@ -279,8 +291,7 @@ public class FormGeneratorsManager {
 		 * @param reverse
 		 *            the reverse
 		 */
-		public AssociationInfo(Association realAssociation, Clazz source, Clazz destination,
-				String sourceRole, String destinationRole, boolean reverse) {
+		public AssociationInfo(Association realAssociation, Clazz source, Clazz destination, String sourceRole, String destinationRole, boolean reverse) {
 			super();
 			this.realAssociation = realAssociation;
 			this.source = source;
@@ -298,9 +309,11 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Builds the association name in the same way as the generator when producing the model.xml
+	 * Builds the association name in the same way as the generator when
+	 * producing the model.xml
 	 * file.<br/>
-	 * NOTE: this is prone to discrepancies and obsolescence w.r.t the generator's way of building
+	 * NOTE: this is prone to discrepancies and obsolescence w.r.t the
+	 * generator's way of building
 	 * the names.
 	 * 
 	 * @param asso
@@ -308,7 +321,7 @@ public class FormGeneratorsManager {
 	 *            the class being used as the source for the association
 	 * @return
 	 */
-	public String getAssoQualifiedName(Association asso, Clazz classAsSource) {
+	public String getAssoQualifiedName(Association asso, AbstractClass classAsSource) {
 		StringBuffer res = new StringBuffer(128);
 		// ** #979, #1273
 		AssociationEnd srcEnd = (AssociationEnd) getRealObject(asso.getFirstEnd());
@@ -382,8 +395,7 @@ public class FormGeneratorsManager {
 	 *            the kerblueforms
 	 * @param simplifyClasses
 	 */
-	public FormGeneratorsManager(File[] obls, File[] kerblueforms, CoreInterface monitor,
-			boolean simplifyClasses, boolean renderDataBeforeWorkflow, boolean asMavenPlugin) {
+	public FormGeneratorsManager(File[] obls, File[] kerblueforms, CoreInterface monitor, boolean simplifyClasses, boolean renderDataBeforeWorkflow, boolean asMavenPlugin) {
 		super();
 		if (asMavenPlugin) {
 			initEcoreFactories();
@@ -414,8 +426,7 @@ public class FormGeneratorsManager {
 					}
 					Resource resource = EResourceUtils.openModel(currentFile, null);
 					Package model = ModelTools.getModel(resource);
-					classModels.put(EcoreUtil.getURI(model).trimFragment(), new PackageInfo(model,
-							true));
+					classModels.put(EcoreUtil.getURI(model).trimFragment(), new PackageInfo(model, true));
 				}
 			}
 
@@ -425,8 +436,7 @@ public class FormGeneratorsManager {
 					if (isDebugMode()) {
 						genLogger.addText("Opening file '" + currentFile);
 					}
-					Resource resource = EResourceUtils.openModel(
-							kerblueFormsFile.getAbsolutePath(), null);
+					Resource resource = EResourceUtils.openModel(kerblueFormsFile.getAbsolutePath(), null);
 					addClassModels(resource);
 					FormCollection formCollection = ModelTools.getFormCollection(resource);
 					formCollections.add(formCollection);
@@ -446,15 +456,13 @@ public class FormGeneratorsManager {
 	 * 
 	 * @param resource
 	 *            the resource
-	 * 
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @throws Exception
 	 *             the exception
 	 */
 	private void addClassModels(Resource resource) throws IOException, Exception {
-		Map<EObject, Collection<Setting>> references = EcoreUtil.ExternalCrossReferencer
-				.find(resource);
+		Map<EObject, Collection<Setting>> references = EcoreUtil.ExternalCrossReferencer.find(resource);
 		Set<Entry<EObject, Collection<Setting>>> referencesEntrySet = references.entrySet();
 		for (Entry<EObject, Collection<Setting>> reference : referencesEntrySet) {
 			EObject referencedObject = reference.getKey();
@@ -524,28 +532,16 @@ public class FormGeneratorsManager {
 			}
 		}
 		genLogger.addText("XForms Generation completed successfully");
-		genLogger
-				.addServiceLog(
-						"List of generated forms",
-						"This page provides an easy access to the forms, with default parameters. The server, port and webapp context should be adapted as needed.",
-						"http://localhost:8080/xforms/resources/jsp/forms.jsp");
+		genLogger.addServiceLog("List of generated forms", "This page provides an easy access to the forms, with default parameters. The server, port and webapp context should be adapted as needed.", "http://localhost:8080/xforms/resources/jsp/forms.jsp");
 		if (isWorkflowCapable()) {
-			genLogger
-					.addServiceLog(
-							"Demo webapp",
-							"This page links to a demo webapp we provide to you so that you may easily test the integration of workflows with forms. The server, port and webapp context should be adapted as needed.",
-							"http://localhost:8080/xforms/demo/index.jsp");
+			genLogger.addServiceLog("Demo webapp", "This page links to a demo webapp we provide to you so that you may easily test the integration of workflows with forms. The server, port and webapp context should be adapted as needed.",
+					"http://localhost:8080/xforms/demo/index.jsp");
 		}
-		genLogger
-				.addServiceLog(
-						"Default generated stylesheet",
-						"This file contains the definitions for the default appearance of the generated forms. The file is provided as a reference; in case you need to adapt the styles, a better approach is to override/redefine the relevant styles in the custom file.",
-						"http://localhost:8080/xforms/resources/styles/xforms.generated.css");
-		genLogger
-				.addServiceLog(
-						"Custom CSS definitions",
-						"Modify this file in case the stylesheets have to to be customized or changed. The modifications will be used since this file is already loaded by all generated forms.",
-						"http://localhost:8080/xforms/resources/styles/custom.css");
+		genLogger.addServiceLog("Default generated stylesheet",
+				"This file contains the definitions for the default appearance of the generated forms. The file is provided as a reference; in case you need to adapt the styles, a better approach is to override/redefine the relevant styles in the custom file.",
+				"http://localhost:8080/xforms/resources/styles/xforms.generated.css");
+		genLogger.addServiceLog("Custom CSS definitions", "Modify this file in case the stylesheets have to to be customized or changed. The modifications will be used since this file is already loaded by all generated forms.",
+				"http://localhost:8080/xforms/resources/styles/custom.css");
 		genLogger.addText("End of generation.");
 	}
 
@@ -560,14 +556,15 @@ public class FormGeneratorsManager {
 	 * @param allClassesReal
 	 *            the all classes real
 	 */
-	private void computeSubClasses(List<Clazz> allClassesReal) {
-		subClasses = new TreeMap<Clazz, Set<Clazz>>(ClasseComparator.INSTANCE);
-		parentClasses = new TreeMap<Clazz, Clazz>(ClasseComparator.INSTANCE);
-		for (Clazz classe : allClassesReal) {
-			EList<Clazz> generalizations = classe.getGeneralizations();
-			for (Clazz generalization : generalizations) {
+	private void computeSubClasses(List<?> allClassesReal) {
+		subClasses = new TreeMap<AbstractClass, Set<AbstractClass>>(ClasseComparator.INSTANCE);
+		parentClasses = new TreeMap<AbstractClass, AbstractClass>(ClasseComparator.INSTANCE);
+		for (Object abs : allClassesReal) {
+			AbstractClass classe = (AbstractClass) abs;
+			EList<AbstractClass> generalizations = classe.getGeneralizations();
+			for (AbstractClass generalization : generalizations) {
 				if (generalization != null) {
-					Clazz parentClasse = generalization;
+					AbstractClass parentClasse = generalization;
 					addSubClass(classe, parentClasse);
 					parentClasses.put(classe, parentClasse);
 				}
@@ -583,10 +580,10 @@ public class FormGeneratorsManager {
 	 * @param parentClasse
 	 *            the parent classe
 	 */
-	private void addSubClass(Clazz classe, Clazz parentClasse) {
-		Set<Clazz> subSet = subClasses.get(parentClasse);
+	private void addSubClass(AbstractClass classe, AbstractClass parentClasse) {
+		Set<AbstractClass> subSet = subClasses.get(parentClasse);
 		if (subSet == null) {
-			subSet = new TreeSet<Clazz>(ClasseComparator.INSTANCE);
+			subSet = new TreeSet<AbstractClass>(ClasseComparator.INSTANCE);
 			subClasses.put(parentClasse, subSet);
 		}
 		subSet.add(classe);
@@ -597,7 +594,6 @@ public class FormGeneratorsManager {
 	 * 
 	 * @param association
 	 *            the association
-	 * 
 	 * @return the association type
 	 */
 	private AssociationCardinality getAssociationType(Association association) {
@@ -623,7 +619,6 @@ public class FormGeneratorsManager {
 	 * 
 	 * @param max
 	 *            the max
-	 * 
 	 * @return true, if is many
 	 */
 	private boolean isMany(String max) {
@@ -687,32 +682,23 @@ public class FormGeneratorsManager {
 			// boolean isSubAssociation = isSubAssociation(association);
 
 			if (sEnd.isNavigable()) {
-				boolean isInlineDest = isInline(sEndLinkedClass, associationType, association
-						.getAssociationType());
+				boolean isInlineDest = isInline(sEndLinkedClass, associationType, association.getAssociationType());
 				int hiBound = Integer.parseInt(sEnd.getCardMax());
 				int loBound = Integer.parseInt(sEnd.getCardMin());
 				boolean filtered = isAssociationFilterable(sEndLinkedClass, association);
-				AssociationKind associationKindDest = new AssociationKind(associationType,
-						isInlineDest, simplifyClasses, hiBound, loBound, filtered);
-				addAssociations(associationKindDest, association.getName(), association.getTitle(),
-						fEndLinkedClass, sEndLinkedClass, sEnd.getName(), sEnd.getTitle(),
-						doublenav, association);
+				AssociationKind associationKindDest = new AssociationKind(associationType, isInlineDest, simplifyClasses, hiBound, loBound, filtered);
+				addAssociations(associationKindDest, association.getName(), association.getTitle(), fEndLinkedClass, sEndLinkedClass, sEnd.getName(), sEnd.getTitle(), doublenav, association);
 			}
 			if (fEnd.isNavigable()) {
-				boolean isInlineSrc = isInline(fEndLinkedClass, associationType.getInverse(),
-						association.getAssociationType());
+				boolean isInlineSrc = isInline(fEndLinkedClass, associationType.getInverse(), association.getAssociationType());
 				int hiBound = Integer.parseInt(fEnd.getCardMax());
 				int loBound = Integer.parseInt(fEnd.getCardMin());
 				boolean filtered = isAssociationFilterable(fEndLinkedClass, association);
-				AssociationKind associationKindSrc = new AssociationKind(associationType
-						.getInverse(), isInlineSrc, simplifyClasses, hiBound, loBound, filtered);
-				addAssociations(associationKindSrc, association.getName(), association.getTitle(),
-						sEndLinkedClass, fEndLinkedClass, fEnd.getName(), fEnd.getTitle(),
-						doublenav, association);
+				AssociationKind associationKindSrc = new AssociationKind(associationType.getInverse(), isInlineSrc, simplifyClasses, hiBound, loBound, filtered);
+				addAssociations(associationKindSrc, association.getName(), association.getTitle(), sEndLinkedClass, fEndLinkedClass, fEnd.getName(), fEnd.getTitle(), doublenav, association);
 			}
 		} else {
-			genLogger.addText("Ignoring association '" + assoCompleteName
-					+ "' both ends must be classes to be supported.");
+			genLogger.addText("Ignoring association '" + assoCompleteName + "' both ends must be classes to be supported.");
 		}
 	}
 
@@ -725,20 +711,17 @@ public class FormGeneratorsManager {
 	 *            the association type
 	 * @param associationType2
 	 *            the association type2
-	 * 
 	 * @return true, if is inline
 	 */
-	private boolean isInline(Clazz target, AssociationCardinality associationType,
-			AssociationType associationType2) {
+	private boolean isInline(Clazz target, AssociationCardinality associationType, AssociationType associationType2) {
 		boolean isInline = true;
-		if (associationType == AssociationCardinality.manyToMany
-				|| associationType == AssociationCardinality.manyToOne) {
+		if (associationType == AssociationCardinality.manyToMany || associationType == AssociationCardinality.manyToOne) {
 			isInline = false;
 		}
 		if (associationType2 == AssociationType.AGGREGATION) {
 			isInline = false;
 		}
-		Set<Clazz> subClassesDest = subClasses.get(target);
+		Set<AbstractClass> subClassesDest = subClasses.get(target);
 		if (subClassesDest != null && subClassesDest.size() > 0) {
 			isInline = false;
 		}
@@ -767,17 +750,13 @@ public class FormGeneratorsManager {
 	 * @param association
 	 *            the association
 	 */
-	private void addAssociations(AssociationKind type, String name, String title, Clazz source,
-			Clazz destination, String role, String roleTitle, boolean doublenav,
-			Association association) {
-		addAssociationForClasse(type, name, title, source, destination, role, roleTitle, doublenav,
-				association, source);
+	private void addAssociations(AssociationKind type, String name, String title, Clazz source, Clazz destination, String role, String roleTitle, boolean doublenav, Association association) {
+		addAssociationForClasse(type, name, title, source, destination, role, roleTitle, doublenav, association, source);
 		for (AbstractClass abstractClass : allClasses) {
 			if (abstractClass instanceof Clazz) {
 				Clazz classe = (Clazz) abstractClass;
 				if (ModelTools.isGeneralizationOf(classe, source)) {
-					addAssociationForClasse(type, name, title, source, destination, role,
-							roleTitle, doublenav, association, classe);
+					addAssociationForClasse(type, name, title, source, destination, role, roleTitle, doublenav, association, classe);
 				}
 			}
 		}
@@ -807,9 +786,7 @@ public class FormGeneratorsManager {
 	 * @param subClasse
 	 *            the sub classe
 	 */
-	private void addAssociationForClasse(AssociationKind type, String name, String title,
-			Clazz source, Clazz destination, String role, String roleTitle, boolean doublenav,
-			Association association, Clazz subClasse) {
+	private void addAssociationForClasse(AssociationKind type, String name, String title, Clazz source, Clazz destination, String role, String roleTitle, boolean doublenav, Association association, Clazz subClasse) {
 		String finalName = name;
 		if (StringUtils.trimToNull(role) != null) {
 			finalName = finalName + StringUtils.trimToNull(role);
@@ -823,8 +800,7 @@ public class FormGeneratorsManager {
 		} else if (StringUtils.trimToNull(role) != null) {
 			finalTitle = finalTitle + " (" + role + ")";
 		}
-		currentGenerator.addAssociation(type, finalName, finalTitle, subClasse, destination, role,
-				doublenav, association, source);
+		currentGenerator.addAssociation(type, finalName, finalTitle, subClasse, destination, role, doublenav, association, source);
 	}
 
 	/**
@@ -848,9 +824,9 @@ public class FormGeneratorsManager {
 			currentGenerator.addAspectForClass(classe, entry.getKey(), entry.getValue());
 		}
 
-		Map<Attribute, Clazz> allClassAttributes = ModelTools.getClassAttributes(classe);
-		Set<Entry<Attribute, Clazz>> attributesEntrySet = allClassAttributes.entrySet();
-		for (Entry<Attribute, Clazz> entry : attributesEntrySet) {
+		Map<Attribute, AbstractClass> allClassAttributes = ModelTools.getClassAttributes(classe);
+		Set<Entry<Attribute, AbstractClass>> attributesEntrySet = allClassAttributes.entrySet();
+		for (Entry<Attribute, AbstractClass> entry : attributesEntrySet) {
 			currentGenerator.addAttributeForClass(classe, entry.getKey(), entry.getValue());
 		}
 
@@ -916,18 +892,20 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Finds the association that points to a class for a given model element. For subclasses,
-	 * retrieves the association that points to/from the provided source including if linked to a
-	 * parent class. If the source is not relevant for the model element, returns null.
+	 * Finds the association that points to a class for a given model element.
+	 * For subclasses,
+	 * retrieves the association that points to/from the provided source
+	 * including if linked to a
+	 * parent class. If the source is not relevant for the model element,
+	 * returns null.
 	 * 
 	 * @param source
 	 *            the source
 	 * @param modelElement
 	 *            the model element, typically a ModelChoiceField
-	 * 
 	 * @return the association info
 	 */
-	public AssociationInfo findAssocation(Clazz source, ModelElement modelElement) {
+	public AssociationInfo findAssocation(AbstractClass source, ModelElement modelElement) {
 		AssociationInfo result = null;
 		String sourceName = ModelTools.getCompleteName(source);
 		for (Association association : allAssociations) {
@@ -951,12 +929,10 @@ public class FormGeneratorsManager {
 				String roleSrc = firstEnd.getName();
 				String roleTarget = secondEnd.getName();
 				if (assoSourceName.equals(sourceName) && elementEquals(association, modelElement)) {
-					return new AssociationInfo(association, assoSource, assoTarget, roleSrc,
-							roleTarget, false);
+					return new AssociationInfo(association, assoSource, assoTarget, roleSrc, roleTarget, false);
 				}
 				if (assoTargetName.equals(sourceName) && elementEquals(association, modelElement)) {
-					return new AssociationInfo(association, assoSource, assoTarget, roleSrc,
-							roleTarget, true); // #980
+					return new AssociationInfo(association, assoSource, assoTarget, roleSrc, roleTarget, true); // #980
 				}
 			} else {
 				throw new RuntimeException(MsgId.INT_EXC_ASSOCIATION_ENDS.getText());
@@ -966,18 +942,18 @@ public class FormGeneratorsManager {
 	}
 
 	private boolean elementEquals(ModelElement association, ModelElement modelElement) {
-		return StringUtils.equals(ModelTools.getCompleteName(association), ModelTools
-				.getCompleteName(modelElement));
+		return StringUtils.equals(ModelTools.getCompleteName(association), ModelTools.getCompleteName(modelElement));
 	}
 
 	/**
-	 * Gets the real object pointed by the given object in case this one is a proxy (i.e. it
-	 * references a real object that is located in another resource file). If it's not a proxy, the
+	 * Gets the real object pointed by the given object in case this one is a
+	 * proxy (i.e. it
+	 * references a real object that is located in another resource file). If
+	 * it's not a proxy, the
 	 * given object is returned as is.
 	 * 
 	 * @param object
 	 *            a model element
-	 * 
 	 * @return the resolved object
 	 */
 	public EObject getRealObject(EObject object) {
@@ -1022,11 +998,10 @@ public class FormGeneratorsManager {
 	 *            the referenced class, for getting the real_class
 	 * @param modelElement
 	 *            the model element
-	 * 
 	 * @return the field alfresco name
 	 */
-	public String getAlfrescoName(Clazz refClass, ModelElement refModelElement) {
-		Clazz real_class = (Clazz) getRealObject(refClass);
+	public String getAlfrescoName(AbstractClass refClass, ModelElement refModelElement) {
+		AbstractClass real_class = (AbstractClass) getRealObject(refClass);
 		// FIXME: ds les wkflw forms, le choicefield n'a pas un nom d'association
 		if (refModelElement == null) {
 			// this happens for choice fields in wkflw forms
@@ -1068,8 +1043,7 @@ public class FormGeneratorsManager {
 								attributes = aspect.getAttributes();
 								for (Attribute attribute : attributes) {
 									if (elementEquals(attribute, modelElement)) {
-										result = getClassQualifiedName(aspect) + "_"
-												+ attribute.getName();
+										result = getClassQualifiedName(aspect) + "_" + attribute.getName();
 										return result; // $$
 									}
 								}
@@ -1213,8 +1187,10 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Provides a unique id for the set of search operators defined in a search field. If an
-	 * equivalent set already exists, its id is returned. Otherwise, the new set is registered with
+	 * Provides a unique id for the set of search operators defined in a search
+	 * field. If an
+	 * equivalent set already exists, its id is returned. Otherwise, the new set
+	 * is registered with
 	 * a new id that's returned.
 	 * 
 	 * @param searchField
@@ -1241,7 +1217,8 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Gets the default operator for a search field. The operator is either specified in the model
+	 * Gets the default operator for a search field. The operator is either
+	 * specified in the model
 	 * or forced upon the field.
 	 * 
 	 * @param searchField
@@ -1253,10 +1230,12 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Computes the list of operators for a search field and defines a default operator.
+	 * Computes the list of operators for a search field and defines a default
+	 * operator.
 	 * 
 	 * @param searchField
-	 * @return the bean that is computed. Default operator is always filled. List may be empty.
+	 * @return the bean that is computed. Default operator is always filled.
+	 *         List may be empty.
 	 */
 	private SearchFieldDataBean getSearchFieldDataBean(SearchField searchField) {
 		//
@@ -1371,13 +1350,15 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Tests for the presence of the given list amongst the registered lists. We just test whether a
+	 * Tests for the presence of the given list amongst the registered lists. We
+	 * just test whether a
 	 * registered list 'equals' this one.
 	 * 
 	 * @param opList
 	 *            the list to check
 	 * @return the registration key, or null if the list is not registered.
-	 * @see {@link #getSearchOperatorsListId(SearchField)} for details about the key (or id).
+	 * @see {@link #getSearchOperatorsListId(SearchField)} for details about the
+	 *      key (or id).
 	 */
 	private String testOperatorList(List<SearchOperator> opList) {
 		for (String key : operatorsEnumsMap.keySet()) {
@@ -1409,7 +1390,8 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Tells whether the field will be rendered as a selection widget instead of a text input.<br/>
+	 * Tells whether the field will be rendered as a selection widget instead of
+	 * a text input.<br/>
 	 * Centralizes the determination of this capability.
 	 * 
 	 * @param field
@@ -1429,14 +1411,19 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Returns the given parameter from the list that carries extension parameters. These must
-	 * follow the [parameter name]=[parameter value] format, with no whitespace before the "=".<br/>
-	 * The list is searched for a correctly formatted parameter until completely visited. If a
-	 * parameter is defined several times, only the first occurrence will be seen and used.
+	 * Returns the given parameter from the list that carries extension
+	 * parameters. These must
+	 * follow the [parameter name]=[parameter value] format, with no whitespace
+	 * before the "=".<br/>
+	 * The list is searched for a correctly formatted parameter until completely
+	 * visited. If a
+	 * parameter is defined several times, only the first occurrence will be
+	 * seen and used.
 	 * 
 	 * @param xtension
 	 * @param parameter
-	 * @return the value of the parameter, or <code>null</code> if no correctly formated definition
+	 * @return the value of the parameter, or <code>null</code> if no correctly
+	 *         formated definition
 	 *         is found.
 	 */
 	private String getXtensionParameter(EList<String> xtension, String parameter) {
@@ -1465,7 +1452,8 @@ public class FormGeneratorsManager {
 	//
 
 	/**
-	 * Gets the contents of the Xtension property of a field as a list of string objects.
+	 * Gets the contents of the Xtension property of a field as a list of string
+	 * objects.
 	 * 
 	 * @return the list
 	 */
@@ -1550,31 +1538,39 @@ public class FormGeneratorsManager {
 	}
 
 	/**
-	 * Tells whether an association is to be filtered on the side of the given class. If so, objects
-	 * of that class, when listed on a selection widget as available items, are filtered out if they
-	 * already bear an association (i.e. if they are already pointed to using that association). <br/>
+	 * Tells whether an association is to be filtered on the side of the given
+	 * class. If so, objects
+	 * of that class, when listed on a selection widget as available items, are
+	 * filtered out if they
+	 * already bear an association (i.e. if they are already pointed to using
+	 * that association). <br/>
 	 * NOTE: not sure this will work correctly for reflexive associations.
 	 * <p/>
 	 * Example association: Person (0..*) <---> (0.. 1) Company.
 	 * <p/>
-	 * On the form for 'Company', the 'real class' property for the ModelChoiceField is 'Person':
-	 * several Person objects can be associated. But because the association reads 'a Person can be
-	 * associated with at most one Company', any Person object already associated should not be
-	 * associated again. So that object must be filtered out: this function returns
-	 * <code>true</code>.
+	 * On the form for 'Company', the 'real class' property for the
+	 * ModelChoiceField is 'Person': several Person objects can be associated.
+	 * But because the association reads 'a Person can be associated with at
+	 * most one Company', any Person object already associated should not be
+	 * associated again. So that object must be filtered out: this function
+	 * returns <code>true</code>.
 	 * <p/>
-	 * On the form for 'Person', the 'real class' property for the ModelChoiceField is 'Company':
-	 * only one Company object can be associated. But this time, the association reads 'a Company
-	 * can be associated with several Person', so having a Company object already associated does
-	 * not require that the Company object be filtered out. So, return <code>false</code>.
+	 * On the form for 'Person', the 'real class' property for the
+	 * ModelChoiceField is 'Company': only one Company object can be associated.
+	 * But this time, the association reads 'a Company can be associated with
+	 * several Person', so having a Company object already associated does not
+	 * require that the Company object be filtered out. So, return
+	 * <code>false</code>.
 	 * 
 	 * @param formEltClass
-	 *            the class for the target items (also the 'real class' property of
+	 *            the class for the target items (also the 'real class' property
+	 *            of
 	 *            ModelChoiceField's)
 	 * @param asso
-	 * @return true if the maximum multiplicity on the <b>opposite end</b> of the given class is 1.
+	 * @return true if the maximum multiplicity on the <b>opposite end</b> of
+	 *         the given class is 1.
 	 */
-	public boolean isAssociationFilterable(Clazz formEltClass, Association asso) { // #1536
+	public boolean isAssociationFilterable(AbstractClass formEltClass, Association asso) { // #1536
 		int maxBound = -1;
 		boolean filtered;
 

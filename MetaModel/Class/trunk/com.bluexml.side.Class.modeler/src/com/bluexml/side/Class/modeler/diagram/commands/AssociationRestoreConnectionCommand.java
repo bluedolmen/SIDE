@@ -20,14 +20,12 @@ import org.w3c.dom.Comment;
 import com.bluexml.side.Class.modeler.diagram.CdSimpleObjectConstants;
 import com.bluexml.side.clazz.Association;
 
-
 /**
  * Classe restore connection command
  * 
  * @generated
  */
-public class AssociationRestoreConnectionCommand extends
-		AbstractRestoreConnectionCommand {
+public class AssociationRestoreConnectionCommand extends AbstractRestoreConnectionCommand {
 	/**
 	 * @param part
 	 *            the EditPart that is restored
@@ -47,16 +45,11 @@ public class AssociationRestoreConnectionCommand extends
 		EObject eltObject = Utils.getElement(elt);
 
 		if (eltObject instanceof Association) {
-			Iterator itDiagContents = getModeler().getActiveDiagram()
-					.eAllContents();
+			Iterator<?> itDiagContents = getModeler().getActiveDiagram().eAllContents();
 			while (itDiagContents.hasNext()) {
 				Object obj = itDiagContents.next();
 				// FIXME Change the way to handle EList GraphNodes
-				if (obj instanceof GraphElement
-						&& DIUtils
-								.getProperty(
-										(GraphElement) obj,
-										ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID) == null) {
+				if (obj instanceof GraphElement && DIUtils.getProperty((GraphElement) obj, ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID) == null) {
 					boolean autoRef = obj.equals(elt);
 					GraphElement elt2 = (GraphElement) obj;
 					EObject eltObject2 = Utils.getElement(elt2);
@@ -81,19 +74,15 @@ public class AssociationRestoreConnectionCommand extends
 	 *            the target element
 	 * @generated
 	 */
-	private void createisCommentedFromAssociationToComment(GraphElement srcElt,
-			GraphElement targetElt) {
+	private void createisCommentedFromAssociationToComment(GraphElement srcElt, GraphElement targetElt) {
 		Association sourceObject = (Association) Utils.getElement(srcElt);
 		Comment targetObject = (Comment) Utils.getElement(targetElt);
 
 		if (sourceObject.getComments().contains(targetObject)) {
 			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt,
-					CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED).size() == 0) {
-				GraphEdge edge = Utils
-						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED);
-				isCommentedEdgeCreationCommand cmd = new isCommentedEdgeCreationCommand(
-						null, edge, srcElt, false);
+			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED).size() == 0) {
+				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED);
+				isCommentedEdgeCreationCommand cmd = new isCommentedEdgeCreationCommand(null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);
 			}

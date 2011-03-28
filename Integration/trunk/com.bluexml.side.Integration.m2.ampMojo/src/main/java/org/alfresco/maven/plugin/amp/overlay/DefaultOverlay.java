@@ -19,8 +19,8 @@ package org.alfresco.maven.plugin.amp.overlay;
  * under the License.
  */
 
-import org.apache.maven.artifact.Artifact;
 import org.alfresco.maven.plugin.amp.Overlay;
+import org.apache.maven.artifact.Artifact;
 
 /**
  * A default overlay implementation based on an {@link Artifact}.

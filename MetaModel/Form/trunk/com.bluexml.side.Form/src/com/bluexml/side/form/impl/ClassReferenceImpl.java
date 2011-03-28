@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
@@ -40,7 +40,7 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	 * @generated
 	 * @ordered
 	 */
-	protected Clazz real_class;
+	protected AbstractClass real_class;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -66,10 +66,10 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz getReal_class() {
+	public AbstractClass getReal_class() {
 		if (real_class != null && real_class.eIsProxy()) {
 			InternalEObject oldReal_class = (InternalEObject)real_class;
-			real_class = (Clazz)eResolveProxy(oldReal_class);
+			real_class = (AbstractClass)eResolveProxy(oldReal_class);
 			if (real_class != oldReal_class) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.CLASS_REFERENCE__REAL_CLASS, oldReal_class, real_class));
@@ -83,7 +83,7 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz basicGetReal_class() {
+	public AbstractClass basicGetReal_class() {
 		return real_class;
 	}
 
@@ -92,8 +92,8 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReal_class(Clazz newReal_class) {
-		Clazz oldReal_class = real_class;
+	public void setReal_class(AbstractClass newReal_class) {
+		AbstractClass oldReal_class = real_class;
 		real_class = newReal_class;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CLASS_REFERENCE__REAL_CLASS, oldReal_class, real_class));
@@ -123,7 +123,7 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.CLASS_REFERENCE__REAL_CLASS:
-				setReal_class((Clazz)newValue);
+				setReal_class((AbstractClass)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -138,7 +138,7 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FormPackage.CLASS_REFERENCE__REAL_CLASS:
-				setReal_class((Clazz)null);
+				setReal_class((AbstractClass)null);
 				return;
 		}
 		super.eUnset(featureID);

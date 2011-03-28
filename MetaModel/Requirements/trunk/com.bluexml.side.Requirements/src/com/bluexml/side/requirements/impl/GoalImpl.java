@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.requirements.Agent;
 import com.bluexml.side.requirements.Goal;
 import com.bluexml.side.requirements.GoalStep;

@@ -15,5 +15,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
- com.bluexml.side.Common.edit;visibility:=reexport
+ com.bluexml.side.Common.edit;visibility:=reexport,
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.ecore
 Bundle-ActivationPolicy: lazy

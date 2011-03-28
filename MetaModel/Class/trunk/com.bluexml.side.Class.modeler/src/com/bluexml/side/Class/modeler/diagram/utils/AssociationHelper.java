@@ -24,9 +24,9 @@ import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Class.modeler.diagram.edit.AssociationEditPart;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationEnd;
-import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzFactory;
 
 public class AssociationHelper {
@@ -135,8 +135,8 @@ public class AssociationHelper {
 		GraphElement src = Utils.getSource((GraphEdge) epart.getModel());
 		GraphElement trg = Utils.getTarget((GraphEdge) epart.getModel());
 
-		Clazz sourceObject = (Clazz) Utils.getElement(src);
-		Clazz targetObject = (Clazz) Utils.getElement(trg);
+		AbstractClass sourceObject = (AbstractClass) Utils.getElement(src);
+		AbstractClass targetObject = (AbstractClass) Utils.getElement(trg);
 		
 		// set firstEnd
 		AssociationEnd fe = asso.getFirstEnd();		

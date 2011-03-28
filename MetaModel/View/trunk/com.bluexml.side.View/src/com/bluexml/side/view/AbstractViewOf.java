@@ -7,7 +7,6 @@
 package com.bluexml.side.view;
 
 import com.bluexml.side.clazz.AbstractClass;
-import com.bluexml.side.common.ModelElement;
 
 /**
  * <!-- begin-user-doc -->

@@ -8,7 +8,7 @@ package com.bluexml.side.form;
 
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.AbstractClass;
 
 
 
@@ -48,12 +48,12 @@ public interface ClassReference extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Real class</em>' reference.
-	 * @see #setReal_class(Clazz)
+	 * @see #setReal_class(AbstractClass)
 	 * @see com.bluexml.side.form.FormPackage#getClassReference_Real_class()
 	 * @model
 	 * @generated
 	 */
-	Clazz getReal_class();
+	AbstractClass getReal_class();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.form.ClassReference#getReal_class <em>Real class</em>}' reference.
@@ -63,6 +63,6 @@ public interface ClassReference extends EObject {
 	 * @see #getReal_class()
 	 * @generated
 	 */
-	void setReal_class(Clazz value);
+	void setReal_class(AbstractClass value);
 
 } // ClassReference

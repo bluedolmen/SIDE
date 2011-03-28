@@ -6,12 +6,23 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Documentation.util;
 
-import com.bluexml.side.requirements.generator.metamodel.Documentation.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.requirements.generator.metamodel.Documentation.Book;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.DocumentationPackage;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.EmphasisValue;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValue;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.InformalTableValueRow;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.ItemizedListValue;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.ItemizedListValueItem;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.Paragraph;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.ParagraphValue;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.Section;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.TextualValue;
+import com.bluexml.side.requirements.generator.metamodel.Documentation.XRefValue;
 
 /**
  * <!-- begin-user-doc -->

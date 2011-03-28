@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.form;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

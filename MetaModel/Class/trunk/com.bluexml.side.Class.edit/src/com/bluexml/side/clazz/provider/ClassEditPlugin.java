@@ -6,11 +6,10 @@
  */
 package com.bluexml.side.clazz.provider;
 
-import com.bluexml.side.common.provider.CommonEditPlugin;
-
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
+
+import com.bluexml.side.common.provider.CommonEditPlugin;
 
 /**
  * This is the central singleton for the Class edit plugin.

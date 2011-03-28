@@ -16,8 +16,6 @@
  ******************************************************************************/
 package com.bluexml.side.clazz.service.alfresco;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -160,7 +158,7 @@ public class AssociationServices {
 				// TODO : check if multi-Generalizations is available in
 				// Alfresco
 				Clazz Clazz = ((Clazz) elt);
-				EList<Clazz> parents = Clazz.getGeneralizations();
+				EList<AbstractClass> parents = Clazz.getGeneralizations();
 				if (parents.size() > 0) {
 					return getTarget(a, parents.get(0));
 				}
@@ -202,7 +200,7 @@ public class AssociationServices {
 				// TODO : check if multi-Generalizations is available in
 				// Alfresco
 				Clazz Clazz = ((Clazz) elt);
-				EList<Clazz> parents = Clazz.getGeneralizations();
+				EList<AbstractClass> parents = Clazz.getGeneralizations();
 				if (parents.size() > 0) {
 					return getRealSource(a, parents.get(0));
 				}
@@ -416,8 +414,8 @@ public class AssociationServices {
 			// We must find the parent class
 			if (e instanceof Clazz) {
 				Clazz c = (Clazz) e;
-				Collection<Clazz> s = c.getInheritedClasses();
-				for (Clazz Clazz : s) {
+				EList<AbstractClass> s = c.getInheritedClasses();
+				for (AbstractClass Clazz : s) {
 					if (a.getFirstEnd().getLinkedClass() == Clazz || a.getSecondEnd().getLinkedClass() == Clazz) {
 						title = constructTitleFromRole(a, Clazz, reverse);
 					}
@@ -441,12 +439,12 @@ public class AssociationServices {
 	 * Give the association title, get the role, title, ...
 	 * 
 	 * @param a
-	 * @param c
+	 * @param clazz
 	 * @return
 	 */
-	public String constructTitleFromRole(Association a, Clazz c, boolean reverse) {
+	public String constructTitleFromRole(Association a, AbstractClass clazz, boolean reverse) {
 		String title = "";
-		if (a.getSecondEnd().getLinkedClass() == c && reverse) {
+		if (a.getSecondEnd().getLinkedClass() == clazz && reverse) {
 			if (a.getFirstEnd().getTitle() != null) {
 				title = a.getFirstEnd().getTitle();
 			} else {
@@ -457,7 +455,7 @@ public class AssociationServices {
 				}
 			}
 			// If e is target, check if there is a role title
-		} else if (a.getFirstEnd().getLinkedClass() == c) {
+		} else if (a.getFirstEnd().getLinkedClass() == clazz) {
 			if (a.getSecondEnd().getTitle() != null) {
 				title = a.getSecondEnd().getTitle();
 			} else {
@@ -516,5 +514,38 @@ public class AssociationServices {
 	public static String getPrefixedURIAssociationQName(Association a, AssociationEnd source) throws Exception {
 		return "{" + CommonServices.getNamespaceURI(a) + "}" + getAssociationQName(a, source);
 	}
+/**
+ * /**
+	 * service to compute association name
+	 * 
+	 * @param a
+	 * @param source
+	 * @return the association alfresco QName
+	 *
+	public static String getAssociationQName(Association a, AssociationEnd source) {
+		// "srcfullName-(assoName,role)-targetfullName"
+		String srcfullName = source.getLinkedClass().getFullName();
+		String assoName = a.getName();
 
+		String role = "";
+		if (source.getOpposite().getName() != null) {
+			role = source.getOpposite().getName();
+		}
+		String targetfullName = source.getOpposite().getLinkedClass().getFullName();
+
+		StringBuffer qname = new StringBuffer();
+
+		qname.append(srcfullName);
+		qname.append("-");
+		qname.append("(");
+		qname.append(assoName);
+		qname.append(",");
+		qname.append(role);
+		qname.append(")");
+		qname.append("-");
+		qname.append(targetfullName);
+
+		return CommonServices.convertFullNameToQualifiedName(qname.toString());
+	}
+ */
 }

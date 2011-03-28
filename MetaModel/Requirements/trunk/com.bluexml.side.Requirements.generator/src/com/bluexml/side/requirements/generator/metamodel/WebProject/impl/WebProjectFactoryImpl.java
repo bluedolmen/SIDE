@@ -6,16 +6,29 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.WebProject.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.WebProject.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.bluexml.side.requirements.generator.metamodel.WebProject.Component;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.ComponentAttribute;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.ComponentRelationShip;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.DataPage;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.Field;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.FramePage;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.GoalItem;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.GoalPage;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.Link;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.LoginPage;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.Project;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.Schema;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.Table;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectFactory;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectPackage;
+import com.bluexml.side.requirements.generator.metamodel.WebProject.dataType;
 
 /**
  * <!-- begin-user-doc -->

@@ -1,11 +1,11 @@
 package org.alfresco.maven.plugin.amp.util;
 
-import com.thoughtworks.xstream.XStream;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Serializes {@link AmpStructure} back and forth.

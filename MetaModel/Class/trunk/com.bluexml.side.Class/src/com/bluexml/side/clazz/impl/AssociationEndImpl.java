@@ -6,32 +6,25 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import com.bluexml.side.clazz.AbstractClass;
-import com.bluexml.side.clazz.AssociationEnd;
-import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.ClazzPackage;
-
-import com.bluexml.side.common.Comment;
-import com.bluexml.side.common.CommonPackage;
-
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
-
 import org.eclipse.ocl.ecore.OCL;
-
 import org.eclipse.ocl.expressions.OCLExpression;
+
+import com.bluexml.side.clazz.AbstractClass;
+import com.bluexml.side.clazz.AssociationEnd;
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.common.Comment;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '

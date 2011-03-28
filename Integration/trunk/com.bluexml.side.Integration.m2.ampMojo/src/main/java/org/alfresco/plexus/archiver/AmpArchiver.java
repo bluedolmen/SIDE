@@ -2,7 +2,9 @@ package org.alfresco.plexus.archiver;
 
 import java.io.File;
 import java.io.IOException;
-import org.codehaus.plexus.archiver.*;
+
+import org.codehaus.plexus.archiver.ArchiveEntry;
+import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.archiver.zip.ZipOutputStream;
 

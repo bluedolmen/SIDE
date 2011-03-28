@@ -6,9 +6,10 @@
  */
 package com.bluexml.side.workflow;
 
+import org.eclipse.emf.common.util.EList;
+
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.ModelElement;
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

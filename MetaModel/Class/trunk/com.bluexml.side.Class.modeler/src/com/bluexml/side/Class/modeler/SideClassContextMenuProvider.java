@@ -22,12 +22,10 @@ import org.topcased.modeler.editor.ModelerContextMenuProvider;
 
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassGeneralizationAction;
-
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkEnumerationDependsAction;
 import com.bluexml.side.Class.modeler.diagram.edit.GeneralizationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.dependsEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;
-import com.bluexml.side.Class.modeler.diagram.edit.hasViewEditPart;
 
 /**
  * Provide a Context Menu for the SAM Editor with customized actions

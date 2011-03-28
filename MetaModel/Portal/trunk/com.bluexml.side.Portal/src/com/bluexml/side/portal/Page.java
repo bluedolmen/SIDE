@@ -6,8 +6,9 @@
  */
 package com.bluexml.side.portal;
 
-import com.bluexml.side.common.Visibility;
 import org.eclipse.emf.common.util.EList;
+
+import com.bluexml.side.common.Visibility;
 
 /**
  * <!-- begin-user-doc -->

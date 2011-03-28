@@ -5,8 +5,6 @@ import java.util.Stack;
 import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
-import com.bluexml.xforms.messages.MsgId;
-
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -16,6 +14,7 @@ import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.generator.forms.renderable.common.association.AbstractRenderable;
 import com.bluexml.xforms.generator.forms.renderable.common.association.selection.selector.RenderableSelector;
 import com.bluexml.xforms.generator.forms.rendered.RenderedLine;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableSMultiple.

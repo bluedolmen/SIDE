@@ -156,7 +156,7 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances()  ->  asSet()  -> iterate(e:Clazz;result :Set(Clazz)= Set{}| result -> including(e) -> union(e.getInheritedClasses()))'"
+	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances() -> asSet() -> union(Clazz.allInstances().getInheritedClasses() ->asSet().oclAsType(Clazz)) -> asSet()'"
 	 * @generated
 	 */
 	EList<Clazz> getAllClassesFromEveryWhere();

@@ -6,16 +6,51 @@
  */
 package com.bluexml.side.view.impl;
 
-import com.bluexml.side.view.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.bluexml.side.view.ActionField;
+import com.bluexml.side.view.Actionable;
+import com.bluexml.side.view.BooleanField;
+import com.bluexml.side.view.Col;
+import com.bluexml.side.view.ComposedView;
+import com.bluexml.side.view.DataList;
+import com.bluexml.side.view.DataTable;
+import com.bluexml.side.view.DateField;
+import com.bluexml.side.view.DateTimeField;
+import com.bluexml.side.view.EmailField;
+import com.bluexml.side.view.FacetDisplayType;
+import com.bluexml.side.view.FacetMap;
+import com.bluexml.side.view.FieldGroup;
+import com.bluexml.side.view.FileField;
+import com.bluexml.side.view.Filtering;
+import com.bluexml.side.view.FloatField;
+import com.bluexml.side.view.Halign;
+import com.bluexml.side.view.HtmlField;
+import com.bluexml.side.view.ImageField;
+import com.bluexml.side.view.IntegerField;
+import com.bluexml.side.view.LoadingType;
+import com.bluexml.side.view.PaginationStyle;
+import com.bluexml.side.view.Paging;
+import com.bluexml.side.view.PasswordField;
+import com.bluexml.side.view.PhoneNumberField;
+import com.bluexml.side.view.SelectField;
+import com.bluexml.side.view.SelectWidgetType;
+import com.bluexml.side.view.SortOrder;
+import com.bluexml.side.view.Sorting;
+import com.bluexml.side.view.Styling;
+import com.bluexml.side.view.TextField;
+import com.bluexml.side.view.TimeField;
+import com.bluexml.side.view.Tree;
+import com.bluexml.side.view.URLField;
+import com.bluexml.side.view.ViewCollection;
+import com.bluexml.side.view.ViewFactory;
+import com.bluexml.side.view.ViewPackage;
+import com.bluexml.side.view.WidgetTextType;
 
 /**
  * <!-- begin-user-doc -->

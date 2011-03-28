@@ -45,21 +45,25 @@ import com.bluexml.side.Class.modeler.diagram.commands.update.AspectUpdateComman
 import com.bluexml.side.Class.modeler.diagram.dialogs.AspectEditDialog;
 import com.bluexml.side.Class.modeler.diagram.figures.AspectFigure;
 import com.bluexml.side.Class.modeler.diagram.policies.AspectLayoutEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.policies.AssociationEdgeCreationEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.policies.GeneralizationEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.hasAspectEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.includeEdgeCreationEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.policies.isAssociationClassEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.clazz.Aspect;
 
 /**
  * The Aspect object controller
- *
+ * 
  * @generated
  */
 public class AspectEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 *
-	 * @param obj the graph node
+	 * 
+	 * @param obj
+	 *            the graph node
 	 * @generated
 	 */
 	public AspectEditPart(GraphNode obj) {
@@ -68,7 +72,7 @@ public class AspectEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 *
+	 * 
 	 * @generated
 	 */
 	protected void createEditPolicies() {
@@ -77,6 +81,12 @@ public class AspectEditPart extends EMFGraphNodeEditPart {
 		installEditPolicy(CdEditPolicyConstants.INCLUDE_EDITPOLICY, new includeEdgeCreationEditPolicy());
 
 		installEditPolicy(CdEditPolicyConstants.HASASPECT_EDITPOLICY, new hasAspectEdgeCreationEditPolicy());
+
+		installEditPolicy(CdEditPolicyConstants.ASSOCIATION_EDITPOLICY, new AssociationEdgeCreationEditPolicy());
+
+		installEditPolicy(CdEditPolicyConstants.ISASSOCIATIONCLASS_EDITPOLICY, new isAssociationClassEdgeCreationEditPolicy());
+
+		installEditPolicy(CdEditPolicyConstants.GENERALIZATION_EDITPOLICY, new GeneralizationEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY, new RestoreEditPolicy() {
 			protected Command getRestoreConnectionsCommand(RestoreConnectionsRequest request) {

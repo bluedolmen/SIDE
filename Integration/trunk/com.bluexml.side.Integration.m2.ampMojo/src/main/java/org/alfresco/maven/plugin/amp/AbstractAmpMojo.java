@@ -19,6 +19,15 @@ package org.alfresco.maven.plugin.amp;
  * under the License.
  */
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
 import org.alfresco.maven.plugin.amp.overlay.OverlayManager;
 import org.alfresco.maven.plugin.amp.packaging.AmpPackagingContext;
 import org.alfresco.maven.plugin.amp.packaging.AmpPackagingTask;
@@ -31,8 +40,6 @@ import org.alfresco.maven.plugin.amp.util.AmpStructureSerializer;
 import org.alfresco.maven.plugin.amp.util.CompositeMap;
 import org.alfresco.maven.plugin.amp.util.PropertyUtils;
 import org.alfresco.maven.plugin.amp.util.ReflectionProperties;
-
-
 import org.apache.maven.archiver.MavenArchiveConfiguration;
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
@@ -43,15 +50,6 @@ import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.archiver.manager.ArchiverManager;
 import org.codehaus.plexus.util.StringUtils;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 
 public abstract class AbstractAmpMojo extends AbstractMojo
 {

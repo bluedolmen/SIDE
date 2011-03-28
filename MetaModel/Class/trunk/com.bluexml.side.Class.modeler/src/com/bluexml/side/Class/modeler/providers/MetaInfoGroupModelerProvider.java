@@ -9,7 +9,6 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
 import com.bluexml.side.common.CommonPackage;
-import com.bluexml.side.common.CommonPackage;
 
 /**
  * This is the item provider adpater for a {@link com.bluexml.side.common.MetaInfoGroup} object.

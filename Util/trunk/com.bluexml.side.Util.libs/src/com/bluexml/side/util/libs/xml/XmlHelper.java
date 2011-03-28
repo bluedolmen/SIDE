@@ -7,11 +7,16 @@ import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
+import org.xml.sax.SAXException;
 
 public class XmlHelper {
 
@@ -35,14 +40,18 @@ public class XmlHelper {
 		FileWriter fwriter = new FileWriter(f);
 		outputer.output(doc, fwriter);
 	}
-	
-/**
- * Use this method to include a Document into another one
- * @param base the document where include
- * @param toInclude the document to include
- * @param keepRoot true if the root
- * @return
- */
+
+	/**
+	 * Use this method to include a Document into another one
+	 * 
+	 * @param base
+	 *            the document where include
+	 * @param toInclude
+	 *            the document to include
+	 * @param keepRoot
+	 *            true if the root
+	 * @return
+	 */
 	public static Document includeDocument(Document base, Document toInclude, boolean keepRoot) {
 		if (keepRoot) {
 			base.getRootElement().addContent(toInclude.getRootElement().detach());
@@ -58,5 +67,21 @@ public class XmlHelper {
 			}
 		}
 		return base;
+	}
+	
+	/**
+	 * @param src
+	 * @return
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	public static org.w3c.dom.Document buildW3cDocument(String src) throws ParserConfigurationException, SAXException, IOException {
+		DocumentBuilderFactory fabriqueD = DocumentBuilderFactory.newInstance();
+		DocumentBuilder constructeur;
+		constructeur = fabriqueD.newDocumentBuilder();
+		File fileXml = new File(src);
+		org.w3c.dom.Document document = constructeur.parse(fileXml);
+		return document;
 	}
 }

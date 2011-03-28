@@ -16,11 +16,6 @@ package com.bluexml.side.Class.modeler.diagram.utils.metainfo;
 
 import java.util.ArrayList;
 
-import com.bluexml.side.Class.modeler.diagram.utils.metainfo.value.VisualTypeComponent_Enum;
-import com.bluexml.side.common.CommonFactory;
-import com.bluexml.side.common.MetaInfo;
-import com.bluexml.side.common.impl.CommonFactoryImpl;
-
 
 
 public class OblClassMetaInfo extends OblTypeMetaInfo {

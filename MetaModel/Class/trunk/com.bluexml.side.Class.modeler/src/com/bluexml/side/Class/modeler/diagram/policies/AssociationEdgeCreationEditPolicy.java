@@ -29,12 +29,14 @@ import com.bluexml.side.clazz.Association;
 
 /**
  * Association edge creation
- *
+ * 
  * @generated
  */
 public class AssociationEdgeCreationEditPolicy extends AbstractEdgeCreationEditPolicy {
 	/**
-	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#createCommand(org.eclipse.gef.EditDomain, org.topcased.modeler.di.model.GraphEdge, org.topcased.modeler.di.model.GraphElement)
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#createCommand(org.eclipse.gef.EditDomain,
+	 *      org.topcased.modeler.di.model.GraphEdge,
+	 *      org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
 	protected CreateTypedEdgeCommand createCommand(EditDomain domain, GraphEdge edge, GraphElement source) {
@@ -51,28 +53,39 @@ public class AssociationEdgeCreationEditPolicy extends AbstractEdgeCreationEditP
 
 	/**
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkSource(org.topcased.modeler.di.model.GraphElement)
-	 * @generated
+	 * @_generated
 	 */
 	protected boolean checkSource(GraphElement source) {
 		EObject object = Utils.getElement(source);
-		if (object instanceof com.bluexml.side.clazz.Clazz) {
+
+		boolean allowClazz = object instanceof com.bluexml.side.clazz.Clazz;
+		boolean allowAspect = object instanceof com.bluexml.side.clazz.Aspect;
+		if (allowClazz || allowAspect) {
 			return true;
 		}
 		return false;
 	}
 
 	/**
-	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkTargetForSource(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
-	 * @generated
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkTargetForSource(org.topcased.modeler.di.model.GraphElement,
+	 *      org.topcased.modeler.di.model.GraphElement)
+	 * @_generated
 	 */
 	protected boolean checkTargetForSource(GraphElement source, GraphElement target) {
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Clazz) {
-			return true;
-		}
-		return false;
+		return isAllowed(sourceObject, targetObject);
+	}
+
+	private boolean isAllowed(EObject sourceObject, EObject targetObject) {
+		boolean allowClassToClass = sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Clazz;
+		boolean allowClassToAspect = sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Aspect;
+
+		boolean allowAspectToAspect = sourceObject instanceof com.bluexml.side.clazz.Aspect && targetObject instanceof com.bluexml.side.clazz.Aspect;
+		boolean allowAspectToClass = sourceObject instanceof com.bluexml.side.clazz.Aspect && targetObject instanceof com.bluexml.side.clazz.Clazz;
+
+		return allowClassToClass || allowClassToAspect || allowAspectToAspect || allowAspectToClass;
 	}
 
 	/**
@@ -84,14 +97,15 @@ public class AssociationEdgeCreationEditPolicy extends AbstractEdgeCreationEditP
 	}
 
 	/**
-	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#getSourceTargetData(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
-	 * @generated
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#getSourceTargetData(org.topcased.modeler.di.model.GraphElement,
+	 *      org.topcased.modeler.di.model.GraphElement)
+	 * @_generated
 	 */
 	protected SourceTargetData getSourceTargetData(GraphElement source, GraphElement target) {
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Clazz) {
+		if (isAllowed(sourceObject, targetObject)) {
 			return new SourceTargetData(false, true, SourceTargetData.DIAGRAM, "com.bluexml.side.clazz.ClassPackage", "associationSet", "firstEndClazz", "secondEndClazz", "associations", null, "associations", null);
 		}
 		return null;

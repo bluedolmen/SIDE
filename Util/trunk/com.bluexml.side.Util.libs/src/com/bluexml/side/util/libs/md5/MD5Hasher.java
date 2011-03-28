@@ -2,7 +2,8 @@ package com.bluexml.side.util.libs.md5;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.security.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class MD5Hasher {
 	

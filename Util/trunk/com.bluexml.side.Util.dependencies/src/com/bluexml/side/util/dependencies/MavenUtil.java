@@ -10,7 +10,6 @@ import org.apache.maven.embedder.DefaultConfiguration;
 import org.apache.maven.embedder.MavenEmbedder;
 import org.apache.maven.execution.DefaultMavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionResult;
-import org.eclipse.core.runtime.internal.adaptor.ContextFinder;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;

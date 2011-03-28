@@ -6,9 +6,9 @@
  */
 package com.bluexml.side.clazz;
 
-import com.bluexml.side.common.ModelElement;
-
 import org.eclipse.emf.common.util.EList;
+
+import com.bluexml.side.common.ModelElement;
 
 /**
  * <!-- begin-user-doc -->

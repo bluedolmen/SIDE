@@ -3,7 +3,6 @@ package com.bluexml.xforms.generator.forms.rendered;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.FormTypeRendered;
@@ -11,6 +10,7 @@ import com.bluexml.xforms.generator.forms.ModelElement;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderedForm.

@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormPackage;
@@ -54,7 +54,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * @generated
 	 * @ordered
 	 */
-	protected Clazz real_class;
+	protected AbstractClass real_class;
 
 	/**
 	 * The default value of the '{@link #getMin_bound() <em>Min bound</em>}' attribute.
@@ -220,10 +220,10 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz getReal_class() {
+	public AbstractClass getReal_class() {
 		if (real_class != null && real_class.eIsProxy()) {
 			InternalEObject oldReal_class = (InternalEObject)real_class;
-			real_class = (Clazz)eResolveProxy(oldReal_class);
+			real_class = (AbstractClass)eResolveProxy(oldReal_class);
 			if (real_class != oldReal_class) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS, oldReal_class, real_class));
@@ -237,7 +237,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz basicGetReal_class() {
+	public AbstractClass basicGetReal_class() {
 		return real_class;
 	}
 
@@ -246,8 +246,8 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReal_class(Clazz newReal_class) {
-		Clazz oldReal_class = real_class;
+	public void setReal_class(AbstractClass newReal_class) {
+		AbstractClass oldReal_class = real_class;
 		real_class = newReal_class;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS, oldReal_class, real_class));
@@ -444,7 +444,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
-				setReal_class((Clazz)newValue);
+				setReal_class((AbstractClass)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 				setMin_bound((Integer)newValue);
@@ -485,7 +485,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
-				setReal_class((Clazz)null);
+				setReal_class((AbstractClass)null);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 				setMin_bound(MIN_BOUND_EDEFAULT);

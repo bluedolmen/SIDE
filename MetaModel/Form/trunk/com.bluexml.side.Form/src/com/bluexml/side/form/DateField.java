@@ -7,6 +7,7 @@
 package com.bluexml.side.form;
 
 import java.util.Date;
+
 import org.eclipse.emf.common.util.EList;
 
 /**

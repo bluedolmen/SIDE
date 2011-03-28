@@ -7,9 +7,6 @@
 package com.bluexml.side.form.provider;
 
 
-import com.bluexml.side.clazz.ClazzFactory;
-import com.bluexml.side.common.CommonPackage;
-import com.bluexml.side.common.provider.ModelElementItemProvider;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,9 +26,9 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.bluexml.side.common.provider.ModelElementItemProvider;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormPackage;

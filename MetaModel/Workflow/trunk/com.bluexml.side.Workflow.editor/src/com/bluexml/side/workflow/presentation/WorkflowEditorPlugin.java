@@ -6,14 +6,12 @@
  */
 package com.bluexml.side.workflow.presentation;
 
+import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.ui.EclipseUIPlugin;
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import com.bluexml.side.clazz.provider.ClassEditPlugin;
 import com.bluexml.side.common.provider.CommonEditPlugin;
-
-import org.eclipse.emf.common.EMFPlugin;
-
-import org.eclipse.emf.common.ui.EclipseUIPlugin;
-
-import org.eclipse.emf.common.util.ResourceLocator;
 
 /**
  * This is the central singleton for the Workflow editor plugin.

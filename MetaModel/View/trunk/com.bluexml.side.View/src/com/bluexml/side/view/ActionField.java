@@ -6,9 +6,9 @@
  */
 package com.bluexml.side.view;
 
-import com.bluexml.side.common.OperationComponent;
-
 import org.eclipse.emf.common.util.EList;
+
+import com.bluexml.side.common.OperationComponent;
 
 /**
  * <!-- begin-user-doc -->

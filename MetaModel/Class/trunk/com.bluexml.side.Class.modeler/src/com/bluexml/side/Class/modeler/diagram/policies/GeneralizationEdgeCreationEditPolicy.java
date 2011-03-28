@@ -59,7 +59,7 @@ public class GeneralizationEdgeCreationEditPolicy extends AbstractEdgeCreationEd
 	 */
 	protected boolean checkSource(GraphElement source) {
 		EObject object = Utils.getElement(source);
-		if (object instanceof com.bluexml.side.clazz.Clazz) {
+		if (object instanceof com.bluexml.side.clazz.AbstractClass) {
 			return true;
 		}
 		return false;
@@ -73,7 +73,7 @@ public class GeneralizationEdgeCreationEditPolicy extends AbstractEdgeCreationEd
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Clazz) {
+		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Clazz || sourceObject instanceof com.bluexml.side.clazz.Aspect && targetObject instanceof com.bluexml.side.clazz.Aspect) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
@@ -97,7 +97,7 @@ public class GeneralizationEdgeCreationEditPolicy extends AbstractEdgeCreationEd
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Clazz) {
+		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Clazz || sourceObject instanceof com.bluexml.side.clazz.Aspect && targetObject instanceof com.bluexml.side.clazz.Aspect) {
 			return new SourceTargetData(false, false, SourceTargetData.NONE, null, null, null, null, null, "generalizations", null, null);
 		}
 		return null;

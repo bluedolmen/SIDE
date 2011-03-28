@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.view;
 
-import com.bluexml.side.common.OperationComponent;
 
 /**
  * <!-- begin-user-doc -->

@@ -19,6 +19,9 @@ package org.alfresco.maven.plugin.amp;
  * under the License.
  */
 
+import java.io.File;
+import java.io.IOException;
+
 import org.alfresco.plexus.archiver.AmpArchiver;
 import org.apache.maven.archiver.MavenArchiver;
 import org.apache.maven.artifact.Artifact;
@@ -28,10 +31,6 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProjectHelper;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.ManifestException;
-import org.codehaus.plexus.archiver.zip.ZipArchiver;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Build a amp/webapp.

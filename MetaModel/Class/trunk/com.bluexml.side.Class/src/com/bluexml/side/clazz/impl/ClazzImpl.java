@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
@@ -29,7 +28,6 @@ import org.eclipse.ocl.expressions.OCLExpression;
 
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
-import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
@@ -44,7 +42,6 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#getOperations <em>Operations</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#getGeneralizations <em>Generalizations</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#getAspects <em>Aspects</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#isDeprecated <em>Deprecated</em>}</li>
@@ -63,16 +60,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @ordered
 	 */
 	protected EList<OperationComponent> operations;
-
-	/**
-	 * The cached value of the '{@link #getGeneralizations() <em>Generalizations</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getGeneralizations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Clazz> generalizations;
 
 	/**
 	 * The cached value of the '{@link #getAspects() <em>Aspects</em>}' reference list.
@@ -153,18 +140,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			operations = new EObjectContainmentEList<OperationComponent>(OperationComponent.class, this, ClazzPackage.CLAZZ__OPERATIONS);
 		}
 		return operations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Clazz> getGeneralizations() {
-		if (generalizations == null) {
-			generalizations = new EObjectResolvingEList<Clazz>(Clazz.class, this, ClazzPackage.CLAZZ__GENERALIZATIONS);
-		}
-		return generalizations;
 	}
 
 	/**
@@ -298,45 +273,9 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Clazz> getInheritedClasses() {
-		if (getInheritedClassesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(2);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getInheritedClassesBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getInheritedClassesBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getInheritedClasses <em>Get Inherited Classes</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInheritedClasses
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getInheritedClassesBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Attribute> getAspectAttributes() {
 		if (getAspectAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(3);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(2);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -370,45 +309,9 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Clazz> getAllSubTypes() {
-		if (getAllSubTypesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(4);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getAllSubTypesBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllSubTypesBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllSubTypes <em>Get All Sub Types</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAllSubTypes
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getAllSubTypesBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Attribute> getAllInheritedClassAndAspectAttributes() {
 		if (getAllInheritedClassAndAspectAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(5);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(3);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -442,440 +345,37 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Attribute> getAllInheritedAttributes() {
-		if (getAllInheritedAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(6);
+	public EList<Aspect> getAllInheritedAspects() {
+		if (getAllInheritedAspectsBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(4);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String body = ocl.getDetails().get("body");
 			
 			try {
-				getAllInheritedAttributesBodyOCL = helper.createQuery(body);
+				getAllInheritedAspectsBodyOCL = helper.createQuery(body);
 			} catch (ParserException e) {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllInheritedAttributesBodyOCL);
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllInheritedAspectsBodyOCL);
 	
 		@SuppressWarnings("unchecked")
-		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Attribute>(result.size(), result.toArray());
+		Collection<Aspect> result = (Collection<Aspect>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Aspect>(result.size(), result.toArray());
 	
 	}
 
 	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllInheritedAttributes <em>Get All Inherited Attributes</em>}' operation.
+	 * The parsed OCL expression for the body of the '{@link #getAllInheritedAspects <em>Get All Inherited Aspects</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAllInheritedAttributes
+	 * @see #getAllInheritedAspects
 	 * @generated
 	 */
-	private static OCLExpression<EClassifier> getAllInheritedAttributesBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Association> getSourceAssociations() {
-		if (getSourceAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(7);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getSourceAssociationsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getSourceAssociationsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Association> result = (Collection<Association>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Association>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getSourceAssociations <em>Get Source Associations</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSourceAssociations
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getSourceAssociationsBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSource(Association asso) {
-		if (isSourceBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(8);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				isSourceBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(isSourceBodyOCL);
-	 
-		EvaluationEnvironment<?, ?, ?, ?, ?> evalEnv = query.getEvaluationEnvironment();
-		
-		evalEnv.add("asso", asso);
-	  
-		return ((Boolean) query.evaluate(this)).booleanValue();
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #isSource <em>Is Source</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSource
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> isSourceBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isTarget(Association asso) {
-		if (isTargetBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(9);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				isTargetBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(isTargetBodyOCL);
-	 
-		EvaluationEnvironment<?, ?, ?, ?, ?> evalEnv = query.getEvaluationEnvironment();
-		
-		evalEnv.add("asso", asso);
-	  
-		return ((Boolean) query.evaluate(this)).booleanValue();
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #isTarget <em>Is Target</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isTarget
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> isTargetBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Association> getTargetAssociations() {
-		if (getTargetAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(10);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getTargetAssociationsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getTargetAssociationsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Association> result = (Collection<Association>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Association>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getTargetAssociations <em>Get Target Associations</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTargetAssociations
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getTargetAssociationsBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Association> getAllSourceAssociations() {
-		if (getAllSourceAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(11);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getAllSourceAssociationsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllSourceAssociationsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Association> result = (Collection<Association>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Association>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllSourceAssociations <em>Get All Source Associations</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAllSourceAssociations
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getAllSourceAssociationsBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Association> getAllTargetAssociations() {
-		if (getAllTargetAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(12);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getAllTargetAssociationsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllTargetAssociationsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Association> result = (Collection<Association>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Association>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllTargetAssociations <em>Get All Target Associations</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAllTargetAssociations
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getAllTargetAssociationsBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Clazz> getLinkedClasses() {
-		if (getLinkedClassesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(13);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getLinkedClassesBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getLinkedClassesBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getLinkedClasses <em>Get Linked Classes</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLinkedClasses
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getLinkedClassesBodyOCL;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<AssociationEnd> getAllSourceAssociationEnds() {
-		if (getAllSourceAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(14);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getAllSourceAssociationEndsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllSourceAssociationEndsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<AssociationEnd> result = (Collection<AssociationEnd>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<AssociationEnd>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllSourceAssociationEnds <em>Get All Source Association Ends</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAllSourceAssociationEnds
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getAllSourceAssociationEndsBodyOCL;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<AssociationEnd> getAllTargetAssociationEnds() {
-		if (getAllTargetAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(15);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getAllTargetAssociationEndsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllTargetAssociationEndsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<AssociationEnd> result = (Collection<AssociationEnd>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<AssociationEnd>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllTargetAssociationEnds <em>Get All Target Association Ends</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAllTargetAssociationEnds
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getAllTargetAssociationEndsBodyOCL;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<AssociationEnd> getSourceAssociationEnds() {
-		if (getSourceAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(16);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getSourceAssociationEndsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getSourceAssociationEndsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<AssociationEnd> result = (Collection<AssociationEnd>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<AssociationEnd>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getSourceAssociationEnds <em>Get Source Association Ends</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSourceAssociationEnds
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getSourceAssociationEndsBodyOCL;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<AssociationEnd> getTargetAssociationEnds() {
-		if (getTargetAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(17);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getTargetAssociationEndsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getTargetAssociationEndsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<AssociationEnd> result = (Collection<AssociationEnd>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<AssociationEnd>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getTargetAssociationEnds <em>Get Target Association Ends</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTargetAssociationEnds
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getTargetAssociationEndsBodyOCL;
+	private static OCLExpression<EClassifier> getAllInheritedAspectsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -884,7 +384,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Aspect> getAllAspects() {
 		if (getAllAspectsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(18);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(7);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -919,74 +419,111 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Attribute> getAllAttributesWithoutAspectsAttributes() {
-		if (getAllAttributesWithoutAspectsAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(19);
+	public EList<Aspect> getHasAspects() {
+		if (getHasAspectsBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(8);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String body = ocl.getDetails().get("body");
 			
 			try {
-				getAllAttributesWithoutAspectsAttributesBodyOCL = helper.createQuery(body);
+				getHasAspectsBodyOCL = helper.createQuery(body);
 			} catch (ParserException e) {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllAttributesWithoutAspectsAttributesBodyOCL);
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getHasAspectsBodyOCL);
 	
 		@SuppressWarnings("unchecked")
-		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Attribute>(result.size(), result.toArray());
+		Collection<Aspect> result = (Collection<Aspect>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Aspect>(result.size(), result.toArray());
 	
 	}
 
 	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllAttributesWithoutAspectsAttributes <em>Get All Attributes Without Aspects Attributes</em>}' operation.
+	 * The parsed OCL expression for the body of the '{@link #getHasAspects <em>Get Has Aspects</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAllAttributesWithoutAspectsAttributes
+	 * @see #getHasAspects
 	 * @generated
 	 */
-	private static OCLExpression<EClassifier> getAllAttributesWithoutAspectsAttributesBodyOCL;
+	private static OCLExpression<EClassifier> getHasAspectsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Clazz> getSubTypes() {
-		if (getSubTypesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(20);
+	public EList<Association> getAllSourceAssociationsIncludingAspect() {
+		if (getAllSourceAssociationsIncludingAspectBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(5);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String body = ocl.getDetails().get("body");
 			
 			try {
-				getSubTypesBodyOCL = helper.createQuery(body);
+				getAllSourceAssociationsIncludingAspectBodyOCL = helper.createQuery(body);
 			} catch (ParserException e) {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getSubTypesBodyOCL);
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllSourceAssociationsIncludingAspectBodyOCL);
 	
 		@SuppressWarnings("unchecked")
-		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
+		Collection<Association> result = (Collection<Association>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Association>(result.size(), result.toArray());
 	
 	}
 
 	/**
-	 * The parsed OCL expression for the body of the '{@link #getSubTypes <em>Get Sub Types</em>}' operation.
+	 * The parsed OCL expression for the body of the '{@link #getAllSourceAssociationsIncludingAspect <em>Get All Source Associations Including Aspect</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSubTypes
+	 * @see #getAllSourceAssociationsIncludingAspect
 	 * @generated
 	 */
-	private static OCLExpression<EClassifier> getSubTypesBodyOCL;
+	private static OCLExpression<EClassifier> getAllSourceAssociationsIncludingAspectBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Association> getAllTargetAssociationsIncludingAspect() {
+		if (getAllTargetAssociationsIncludingAspectBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(6);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllTargetAssociationsIncludingAspectBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllTargetAssociationsIncludingAspectBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Association> result = (Collection<Association>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Association>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllTargetAssociationsIncludingAspect <em>Get All Target Associations Including Aspect</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllTargetAssociationsIncludingAspect
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllTargetAssociationsIncludingAspectBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1012,8 +549,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 		switch (featureID) {
 			case ClazzPackage.CLAZZ__OPERATIONS:
 				return getOperations();
-			case ClazzPackage.CLAZZ__GENERALIZATIONS:
-				return getGeneralizations();
 			case ClazzPackage.CLAZZ__ASPECTS:
 				return getAspects();
 			case ClazzPackage.CLAZZ__ABSTRACT:
@@ -1036,10 +571,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			case ClazzPackage.CLAZZ__OPERATIONS:
 				getOperations().clear();
 				getOperations().addAll((Collection<? extends OperationComponent>)newValue);
-				return;
-			case ClazzPackage.CLAZZ__GENERALIZATIONS:
-				getGeneralizations().clear();
-				getGeneralizations().addAll((Collection<? extends Clazz>)newValue);
 				return;
 			case ClazzPackage.CLAZZ__ASPECTS:
 				getAspects().clear();
@@ -1066,9 +597,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			case ClazzPackage.CLAZZ__OPERATIONS:
 				getOperations().clear();
 				return;
-			case ClazzPackage.CLAZZ__GENERALIZATIONS:
-				getGeneralizations().clear();
-				return;
 			case ClazzPackage.CLAZZ__ASPECTS:
 				getAspects().clear();
 				return;
@@ -1092,8 +620,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 		switch (featureID) {
 			case ClazzPackage.CLAZZ__OPERATIONS:
 				return operations != null && !operations.isEmpty();
-			case ClazzPackage.CLAZZ__GENERALIZATIONS:
-				return generalizations != null && !generalizations.isEmpty();
 			case ClazzPackage.CLAZZ__ASPECTS:
 				return aspects != null && !aspects.isEmpty();
 			case ClazzPackage.CLAZZ__ABSTRACT:

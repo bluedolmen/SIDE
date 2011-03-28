@@ -21,9 +21,9 @@ import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.Model;
-import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.clazz.TitledNamedClassModelElement;
 import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Package;
@@ -366,10 +366,11 @@ public class ModelTools {
 		for (Aspect aspect : ownClassAspects) {
 			aspects.put(aspect, oblClasse);
 		}
-		EList<Clazz> generalizations = oblClasse.getGeneralizations();
-		for (Clazz generalization : generalizations) {
-			if (generalization != null) {
-				collectAspects(generalization, aspects);
+		EList<AbstractClass> generalizations = oblClasse.getGeneralizations();
+		
+		for (AbstractClass generalization : generalizations) {
+			if (generalization != null && generalization instanceof Clazz) {
+				collectAspects((Clazz)generalization, aspects);
 			}
 		}
 	}
@@ -381,8 +382,8 @@ public class ModelTools {
 	 *            the obl classe
 	 * @return the class attributes
 	 */
-	public static Map<Attribute, Clazz> getClassAttributes(Clazz oblClasse) {
-		Map<Attribute, Clazz> attributes = new TreeMap<Attribute, Clazz>(AttributeComparator.INSTANCE);
+	public static Map<Attribute, AbstractClass> getClassAttributes(Clazz oblClasse) {
+		Map<Attribute, AbstractClass> attributes = new TreeMap<Attribute, AbstractClass>(AttributeComparator.INSTANCE);
 		collectAttributes(oblClasse, attributes);
 		return attributes;
 	}
@@ -395,13 +396,13 @@ public class ModelTools {
 	 * @param attributes
 	 *            the attributes
 	 */
-	private static void collectAttributes(Clazz oblClasse, Map<Attribute, Clazz> attributes) {
+	private static void collectAttributes(AbstractClass oblClasse, Map<Attribute, AbstractClass> attributes) {
 		EList<Attribute> ownAttributes = oblClasse.getAttributes();
 		for (Attribute attribute : ownAttributes) {
 			attributes.put(attribute, oblClasse);
 		}
-		EList<Clazz> generalizations = oblClasse.getGeneralizations();
-		for (Clazz generalization : generalizations) {
+		EList<AbstractClass> generalizations = oblClasse.getGeneralizations();
+		for (AbstractClass generalization : generalizations) {
 			if (generalization != null) {
 				collectAttributes(generalization, attributes);
 			}
@@ -448,10 +449,10 @@ public class ModelTools {
 	 *            the obl classe
 	 * @return the parent
 	 */
-	public static Clazz getParent(Clazz oblClasse) {
-		Clazz parent = null;
-		EList<Clazz> generalizations = oblClasse.getGeneralizations();
-		for (Clazz generalization : generalizations) {
+	public static AbstractClass getParent(Clazz oblClasse) {
+		AbstractClass parent = null;
+		EList<AbstractClass> generalizations = oblClasse.getGeneralizations();
+		for (AbstractClass generalization : generalizations) {
 			if (generalization != null) {
 				parent = generalization;
 			}
@@ -577,7 +578,7 @@ public class ModelTools {
 		int result = 0;
 		if (ac instanceof Clazz) {
 			Clazz c = (Clazz) ac;
-			EList<Clazz> generalizations = c.getGeneralizations();
+			EList<AbstractClass> generalizations = c.getGeneralizations();
 			if (generalizations.size() > 0) {
 				ModelElement target = c.getGeneralizations().get(0);
 				if (target instanceof AbstractClass) {
@@ -645,13 +646,13 @@ public class ModelTools {
 	 *            the classe
 	 * @return true, if is generalization of
 	 */
-	public static boolean isGeneralizationOf(Clazz subClasse, Clazz classe) {
+	public static boolean isGeneralizationOf(AbstractClass subClasse, Clazz classe) {
 		boolean result = false;
 
-		EList<Clazz> generalizations = subClasse.getGeneralizations();
-		for (Clazz generalization : generalizations) {
+		EList<AbstractClass> generalizations = subClasse.getGeneralizations();
+		for (AbstractClass generalization : generalizations) {
 			if (generalization != null) {
-				Clazz parentClasse = generalization;
+				AbstractClass parentClasse = generalization;
 				if (parentClasse == classe) {
 					result = true;
 				} else {

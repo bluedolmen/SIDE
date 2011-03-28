@@ -11,8 +11,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Privilege;
 import com.bluexml.side.requirements.PrivilegeNature;

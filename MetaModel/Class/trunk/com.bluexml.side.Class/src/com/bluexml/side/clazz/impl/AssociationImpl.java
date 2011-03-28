@@ -6,37 +6,30 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import com.bluexml.side.clazz.Association;
-import com.bluexml.side.clazz.AssociationEnd;
-import com.bluexml.side.clazz.AssociationType;
-import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.ClazzPackage;
-
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
-
 import org.eclipse.ocl.ecore.OCL;
-
 import org.eclipse.ocl.expressions.OCLExpression;
+
+import com.bluexml.side.clazz.AbstractClass;
+import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationEnd;
+import com.bluexml.side.clazz.AssociationType;
+import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -339,7 +332,7 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Clazz> getSource() {
+	public EList<AbstractClass> getSource() {
 		if (getSourceBodyOCL == null) {
 			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION.getEOperations().get(2);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
@@ -357,8 +350,8 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getSourceBodyOCL);
 	
 		@SuppressWarnings("unchecked")
-		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
+		Collection<AbstractClass> result = (Collection<AbstractClass>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<AbstractClass>(result.size(), result.toArray());
 	
 	}
 
@@ -375,7 +368,7 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Clazz> getTarget() {
+	public EList<AbstractClass> getTarget() {
 		if (getTargetBodyOCL == null) {
 			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION.getEOperations().get(3);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
@@ -393,8 +386,8 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getTargetBodyOCL);
 	
 		@SuppressWarnings("unchecked")
-		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
+		Collection<AbstractClass> result = (Collection<AbstractClass>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<AbstractClass>(result.size(), result.toArray());
 	
 	}
 
@@ -411,7 +404,7 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AssociationEnd> getAssociationEnd(Clazz clazz) {
+	public EList<AssociationEnd> getAssociationEnd(AbstractClass clazz) {
 		if (getAssociationEndBodyOCL == null) {
 			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION.getEOperations().get(4);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();

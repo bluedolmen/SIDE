@@ -17,6 +17,8 @@ metamodel http://www.kerblue.org/class/1.0
 import templates.servicesTemplates.Common
 import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
+import templates.Model.alfrescoGenerator_model_abstractClass
+
 import com.bluexml.side.clazz.service.alfresco.ClassServices
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
@@ -26,67 +28,5 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%script type="clazz.Aspect" name="alfrescoGeneratorModelAspect" %>
 	
 		<aspect name="<%getPrefixedQName()%>">
-			<%if (title != null){%>
-			<title><%title%></title>
-			<%}%>
-			<%if (description != null){%>
-			<description> <% description %> </description>
-			<%}%>
-			
-		<%if (attributes.nSize() > 0){%>			
-			<!-- Properties -->
-			<properties>
-				<%for (getSortedAttibutes()){%>
-				<property name="<%getPrefixedQName()%>">
-
-					<%if (title != null){%>
-					<title> <%title%> </title>
-					<%}%>
-					<%if (description != null){%>
-					<description> <%description%> </description>
-					<%}%>
-					<type><%getPropertyType()%></type>
-					<%if (metainfo[key.equalsIgnoreCase("required")].nSize()>0){%>
-					<mandatory>true</mandatory>
-					<%}%>
-					<%if (initialValue != null){%>
-					<default><%initialValue%></default>
-					<%}%>					
-		              <index enabled="true">
-		                 <atomic>true</atomic>
-		                 <stored>false</stored>
-		                 <tokenised>false</tokenised>
-		              </index>					
-					<constraints>
-					<%if (metainfo[key.equalsIgnoreCase("email")].nSize()>0){%>
-						<constraint ref="bxds:constraint:mail"/>
-					<%}%>					
-					
-					<%if (valueList) {%>
-
-						<%if (!valueList.dynamic){%>
-							<constraint ref="<%getPrefixe()%>:nomenclature:<%valueList.getQualifiedName()%>"/>
-						<%}else{%>
-							<constraint ref="<%getPrefixe()%>:enum:<%valueList.getQualifiedName()%>"/>
-						<%}%>
-
-					<%}%>
-					
-					<%if (metainfo[key.endsWith("-length")].nSize()>0) {%>
-		                 <constraint type="LENGTH">
-        		            <parameter name="minLength"><value><%metainfo[key.equalsIgnoreCase("min-length")].nFirst().value%></value></parameter>
-                		    <parameter name="maxLength"><value><%metainfo[key.equalsIgnoreCase("max-length")].nFirst().value%></value></parameter>
-		                 </constraint>
-					<%}%>
-					<%if (metainfo[key.equalsIgnoreCase("regular-expression")].nSize()>0) {%>
-		                 <constraint type="REGEX">
-        		            <parameter name="expression"><value><%metainfo[key.equalsIgnoreCase("regular-expression")].nFirst().value%></value></parameter>
-                		    <parameter name="requiresMatch"><value>true</value></parameter>
-		                 </constraint>
-					<%}%>
-					</constraints>
-				</property>
-				<%}%>
-			</properties>			
-			<%}%>
+<%alfrescoGenerator_abstractClass()%>
 		</aspect>

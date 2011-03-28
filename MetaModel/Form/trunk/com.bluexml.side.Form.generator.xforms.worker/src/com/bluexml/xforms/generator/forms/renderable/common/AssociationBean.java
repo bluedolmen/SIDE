@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -31,7 +31,7 @@ public class AssociationBean {
 	private AssociationType associationType;
 
 	/** The destination. */
-	private Clazz destinationClass = null;
+	private AbstractClass destinationClass = null;
 
 	/** The destination enumeration. */
 	private SelectBean destinationSelect = null;
@@ -198,7 +198,7 @@ public class AssociationBean {
 	 * 
 	 * @return the destination class
 	 */
-	public Clazz getDestinationClass() {
+	public AbstractClass getDestinationClass() {
 		return destinationClass;
 	}
 
@@ -216,7 +216,7 @@ public class AssociationBean {
 	 * @param destinationClass
 	 *            the new destination class
 	 */
-	public void setDestinationClass(Clazz destinationClass) {
+	public void setDestinationClass(AbstractClass destinationClass) {
 		this.destinationClass = destinationClass;
 		this.associationType = AssociationType.clazz;
 	}

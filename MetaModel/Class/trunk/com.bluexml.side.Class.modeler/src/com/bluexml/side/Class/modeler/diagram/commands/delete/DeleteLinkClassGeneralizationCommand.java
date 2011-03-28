@@ -4,16 +4,16 @@ import org.eclipse.gef.commands.Command;
 import org.topcased.modeler.commands.DeleteGraphElementCommand;
 import org.topcased.modeler.di.model.GraphEdge;
 
-import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.AbstractClass;
 
 public class DeleteLinkClassGeneralizationCommand extends Command {
 	GraphEdge eo;
-	Clazz clazz1;
-	Clazz clazz2;
+	AbstractClass clazz1;
+	AbstractClass clazz2;
 
 	DeleteGraphElementCommand cmd;
 
-	public DeleteLinkClassGeneralizationCommand(GraphEdge eo, Clazz clazz1, Clazz clazz2) {
+	public DeleteLinkClassGeneralizationCommand(GraphEdge eo, AbstractClass clazz1, AbstractClass clazz2) {
 		this.eo = eo;
 		this.clazz1 = clazz1;
 		this.clazz2 = clazz2;

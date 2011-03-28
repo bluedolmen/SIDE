@@ -28,9 +28,9 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.ConstraintsDataStructure.C
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.OblClassMetaInfo;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.impl.CommonFactoryImpl;
 

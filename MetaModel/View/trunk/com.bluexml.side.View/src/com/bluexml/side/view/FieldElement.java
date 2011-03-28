@@ -6,9 +6,10 @@
  */
 package com.bluexml.side.view;
 
+import org.eclipse.emf.common.util.EList;
+
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

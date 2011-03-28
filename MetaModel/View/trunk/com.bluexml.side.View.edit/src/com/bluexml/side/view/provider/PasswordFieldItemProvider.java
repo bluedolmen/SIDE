@@ -19,8 +19,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import com.bluexml.side.view.PasswordField;
-
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.view.PasswordField} object.
  * <!-- begin-user-doc -->

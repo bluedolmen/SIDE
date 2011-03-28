@@ -6,16 +6,13 @@
  */
 package com.bluexml.side.workflow.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.common.impl.PackageImpl;
-
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-
 import com.bluexml.side.workflow.WfPackage;
 import com.bluexml.side.workflow.WorkflowPackage;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->

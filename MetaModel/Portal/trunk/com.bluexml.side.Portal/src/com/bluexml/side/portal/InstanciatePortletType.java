@@ -7,7 +7,6 @@
 package com.bluexml.side.portal;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

@@ -10,8 +10,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.requirements.Entity;
 import com.bluexml.side.requirements.RelationShip;
 import com.bluexml.side.requirements.RequirementsPackage;

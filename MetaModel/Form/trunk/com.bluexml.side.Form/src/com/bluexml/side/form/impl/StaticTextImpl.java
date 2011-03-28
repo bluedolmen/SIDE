@@ -6,18 +6,12 @@
  */
 package com.bluexml.side.form.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.StaticText;
-
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->

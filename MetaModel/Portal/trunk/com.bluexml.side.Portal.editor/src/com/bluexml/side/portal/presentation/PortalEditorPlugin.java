@@ -6,18 +6,15 @@
  */
 package com.bluexml.side.portal.presentation;
 
+import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.ui.EclipseUIPlugin;
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import com.bluexml.side.clazz.provider.ClassEditPlugin;
-
 import com.bluexml.side.common.provider.CommonEditPlugin;
-
 import com.bluexml.side.form.provider.FormsEditPlugin;
 import com.bluexml.side.view.provider.ViewEditPlugin;
 import com.bluexml.side.workflow.provider.WorkflowEditPlugin;
-import org.eclipse.emf.common.EMFPlugin;
-
-import org.eclipse.emf.common.ui.EclipseUIPlugin;
-
-import org.eclipse.emf.common.util.ResourceLocator;
 
 /**
  * This is the central singleton for the Portal editor plugin.

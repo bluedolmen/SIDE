@@ -6,14 +6,14 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Diagnostic.util;
 
-import com.bluexml.side.requirements.generator.metamodel.Diagnostic.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Diagnostic;
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.DiagnosticPackage;
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Problem;
 
 /**
  * <!-- begin-user-doc -->

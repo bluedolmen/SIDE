@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.common.impl;
 
+import static com.bluexml.side.common.CommonPackage.CONTAINER;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -13,13 +15,11 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.CommonPackage;
-import com.bluexml.side.common.Container;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
@@ -33,7 +33,6 @@ import com.bluexml.side.common.Parameter;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.Tag;
 import com.bluexml.side.common.Visibility;
-import com.bluexml.side.common.util.CommonValidator;
 
 /**
  * <!-- begin-user-doc -->

@@ -29,6 +29,7 @@ import org.topcased.modeler.diagrams.model.Diagrams;
 import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.presentation.ClazzEditor;
@@ -36,15 +37,13 @@ import com.bluexml.side.common.Package;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormUI;
 
-public class ShowLinkedClassAction extends Action implements
-		ISelectionChangedListener {
+public class ShowLinkedClassAction extends Action implements ISelectionChangedListener {
 
 	protected EObject selectedObject;
 
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof IStructuredSelection) {
-			setEnabled(updateSelection((IStructuredSelection) event
-					.getSelection()));
+			setEnabled(updateSelection((IStructuredSelection) event.getSelection()));
 		} else {
 			setEnabled(false);
 		}
@@ -71,22 +70,18 @@ public class ShowLinkedClassAction extends Action implements
 	}
 
 	private void doAction(FormClass form) {
-		Clazz clazz = form.getReal_class();
+		AbstractClass clazz = form.getReal_class();
 		if (clazz != null) {
 			XMIResource r = (XMIResource) clazz.eResource();
 			IFile file = XMIResource2IFile(r);
-			IFile diagramFile = file.getParent().getFile(
-					new Path(file.getName() + "di"));
+			IFile diagramFile = file.getParent().getFile(new Path(file.getName() + "di"));
 
 			if (diagramFile.exists()) {
-				IWorkbenchPage page = PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow().getActivePage();
-				IEditorDescriptor desc = PlatformUI.getWorkbench()
-						.getEditorRegistry().getDefaultEditor(diagramFile.getName());
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(diagramFile.getName());
 				try {
-					IEditorPart editor = page.openEditor(new FileEditorInput(
-							diagramFile), desc.getId());
-					
+					IEditorPart editor = page.openEditor(new FileEditorInput(diagramFile), desc.getId());
+
 					if (editor instanceof Modeler) {
 						Modeler modeler = (Modeler) editor;
 						selectDiagramElement(modeler.getDiagrams(), modeler, clazz);
@@ -96,17 +91,13 @@ public class ShowLinkedClassAction extends Action implements
 				}
 
 			} else {
-				IWorkbenchPage page = PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow().getActivePage();
-				IEditorDescriptor desc = PlatformUI.getWorkbench()
-						.getEditorRegistry().getDefaultEditor(file.getName());
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
 				try {
-					IEditorPart editor = page.openEditor(new FileEditorInput(
-							file), desc.getId());
+					IEditorPart editor = page.openEditor(new FileEditorInput(file), desc.getId());
 					if (editor instanceof ClazzEditor) {
 						ClazzEditor cEditor = (ClazzEditor) editor;
-						TreeViewer treeViewer = (TreeViewer) cEditor
-								.getViewer();
+						TreeViewer treeViewer = (TreeViewer) cEditor.getViewer();
 						TreeItem item = treeViewer.getTree().getItem(0);
 						item.setExpanded(true);
 						treeViewer.refresh();
@@ -120,13 +111,11 @@ public class ShowLinkedClassAction extends Action implements
 			}
 
 		} else {
-			MessageDialog.openError(null, FormUI.Messages
-					.getString("ShowLinkedClass_1"), FormUI.Messages
-					.getString("ShowLinkedClass_2"));
+			MessageDialog.openError(null, FormUI.Messages.getString("ShowLinkedClass_1"), FormUI.Messages.getString("ShowLinkedClass_2"));
 		}
 	}
 
-	private void selectDiagramElement(Diagrams diagrams, Modeler modeler, Clazz clazz) {
+	private void selectDiagramElement(Diagrams diagrams, Modeler modeler, AbstractClass clazz) {
 		for (Diagram diagram : diagrams.getDiagrams()) {
 			for (DiagramElement el : diagram.getContained()) {
 				if (el instanceof GraphElement) {
@@ -145,12 +134,14 @@ public class ShowLinkedClassAction extends Action implements
 		}
 	}
 
-	private void selectClass(Package p, ClazzEditor cEditor, Clazz clazz) {
+	private void selectClass(Package p, ClazzEditor cEditor, AbstractClass clazz) {
 		if (p instanceof ClassPackage) {
 			ClassPackage cp = (ClassPackage) p;
-			for (Clazz cl : cp.getAllClasses())
-				if (cl.getFullName().equals(clazz.getFullName()))
+			for (Clazz cl : cp.getAllClasses()) {
+				if (cl.getFullName().equals(clazz.getFullName())) {
 					cEditor.setSelectionToViewer(Collections.singleton(cl));
+				}
+			}
 		}
 	}
 
@@ -158,24 +149,20 @@ public class ShowLinkedClassAction extends Action implements
 		URI uri = resource.getURI();
 		uri = resource.getResourceSet().getURIConverter().normalize(uri);
 		String scheme = uri.scheme();
-		if ("platform".equals(scheme) && uri.segmentCount() > 1 //$NON-NLS-1$
-				&& "resource".equals(uri.segment(0))) { //$NON-NLS-1$
+		if ("platform".equals(scheme) && (uri.segmentCount() > 1) && "resource".equals(uri.segment(0))) {
 			StringBuffer platformResourcePath = new StringBuffer();
 			for (int j = 1, size = uri.segmentCount(); j < size; ++j) {
 				platformResourcePath.append('/');
 				platformResourcePath.append(uri.segment(j));
 			}
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(
-					new Path(platformResourcePath.toString()));
+			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformResourcePath.toString()));
 		} else if ("file".equals(scheme)) { //$NON-NLS-1$
 			StringBuffer platformResourcePath = new StringBuffer();
-			for (int j = ResourcesPlugin.getWorkspace().getRoot().getLocation()
-					.segments().length, size = uri.segmentCount(); j < size; ++j) {
+			for (int j = ResourcesPlugin.getWorkspace().getRoot().getLocation().segments().length, size = uri.segmentCount(); j < size; ++j) {
 				platformResourcePath.append('/');
 				platformResourcePath.append(uri.segment(j));
 			}
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(
-					new Path(platformResourcePath.toString()));
+			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformResourcePath.toString()));
 		}
 		return null;
 	}

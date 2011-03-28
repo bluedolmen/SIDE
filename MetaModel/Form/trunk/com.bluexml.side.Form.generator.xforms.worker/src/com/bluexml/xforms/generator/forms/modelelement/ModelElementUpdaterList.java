@@ -3,7 +3,7 @@ package com.bluexml.xforms.generator.forms.modelelement;
 import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
-import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationBean;
 import com.bluexml.xforms.messages.MsgId;
@@ -35,8 +35,8 @@ public class ModelElementUpdaterList extends AbstractModelElementUpdater {
 	private boolean isForSearch;
 
 	/** Constructor for normal associations. */
-	public ModelElementUpdaterList(Clazz classe, String instanceName, AssociationBean bean) {
-		super(classe, instanceName);
+	public ModelElementUpdaterList(AbstractClass abstractClass, String instanceName, AssociationBean bean) {
+		super(abstractClass, instanceName);
 
 		initFields(bean);
 

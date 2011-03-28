@@ -6,19 +6,18 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Diagnostic.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Diagnostic;
-import com.bluexml.side.requirements.generator.metamodel.Diagnostic.DiagnosticFactory;
-import com.bluexml.side.requirements.generator.metamodel.Diagnostic.DiagnosticPackage;
-import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Problem;
-import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Severity;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Diagnostic;
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.DiagnosticFactory;
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.DiagnosticPackage;
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Problem;
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Severity;
 
 /**
  * <!-- begin-user-doc -->

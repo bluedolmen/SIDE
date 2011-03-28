@@ -40,10 +40,10 @@ public class ClassSynchronizationUtils {
 		cc = new CompoundCommand();
 		InternalModification.dontMoveToDisabled();
 		if (fc.getReal_class() != null) {
-			Clazz cl = fc.getReal_class();
+			AbstractClass cl = fc.getReal_class();
 
 			Collection<FormElement> cToDelete = new ArrayList<FormElement>();
-			Collection<Clazz> listClazz = ClassDiagramUtils.getInheritedClazzs(cl);
+			Collection<AbstractClass> listClazz = ClassDiagramUtils.getInheritedClazzs(cl);
 			HashMap<String, FormElement> formChild = FormDiagramUtils.getFormChild(fc);
 			//			HashMap<String, ModelElement> ClazzChild = ClassDiagramUtils.getClazzChild(listClazz);
 
@@ -79,54 +79,62 @@ public class ClassSynchronizationUtils {
 		return cc;
 	}
 
-	protected static Command getAddCommand(FormClass fc, EditingDomain domain, Collection<Clazz> listClazz, HashMap<String, FormElement> formChild) {
+	protected static Command getAddCommand(FormClass fc, EditingDomain domain, Collection<AbstractClass> listClazz, HashMap<String, FormElement> formChild) {
 		Collection<FormElement> cToAdd = new ArrayList<FormElement>();
 		Collection<FormElement> cToDel = new ArrayList<FormElement>();
-		for (Clazz clazz : listClazz) {
+		for (AbstractClass abclazz : listClazz) {
 			// Attributes
-			for (Attribute att : clazz.getAttributes()) {
+			for (Attribute att : abclazz.getAllAttributesWithoutAspectsAttributes()) {
 				getCommandForAttribute(domain, formChild, att, fc);
 			}
 
-			// Aspects
-			for (Aspect asp : clazz.getAspects()) {
-				if (formChild.containsKey(asp.getName())) {
-					// Modification
+			if (abclazz instanceof Clazz) {
+				Clazz clazz = (Clazz) abclazz;
+				// Aspects
+				for (Aspect asp : clazz.getAspects()) {
+					if (formChild.containsKey(asp.getName())) {
+						// Modification
 
-					for (Attribute att : asp.getAttributes()) {
-						getCommandForAttribute(domain, formChild, att, (FormGroup) formChild.get(asp.getName()));
-					}
-				} else {
-					// Add
+						for (Attribute att : asp.getAllAttributesWithoutAspectsAttributes()) {
+							getCommandForAttribute(domain, formChild, att, (FormGroup) formChild.get(asp.getName()));
+						}
+					} else {
+						// Add
 
-					FormAspect fa = FormFactory.eINSTANCE.createFormAspect();
-					fa.setId(asp.getName());
-					fa.setRef(asp);
-					fa.setLabel(asp.getLabel());
-					Collection<Field> cf = new ArrayList<Field>();
-					for (Attribute att : asp.getAttributes()) {
-						Field field = ClassDiagramUtils.getFieldForAttribute(att);
-						cf.add(field);
+						FormAspect fa = FormFactory.eINSTANCE.createFormAspect();
+						fa.setId(asp.getName());
+						fa.setRef(asp);
+						fa.setLabel(asp.getLabel());
+						Collection<Field> cf = new ArrayList<Field>();
+						for (Attribute att : asp.getAttributes()) {
+							Field field = ClassDiagramUtils.getFieldForAttribute(att);
+							cf.add(field);
+						}
+						// manage associations defined for aspects
+						for (Association ass : asp.getAllSourceAssociations()) {
+							cf.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass, asp));
+						}
+						fa.getChildren().addAll(cf);
+						cToAdd.add(fa);
 					}
-					fa.getChildren().addAll(cf);
-					cToAdd.add(fa);
+
 				}
-
+				// Operations :
+				for (OperationComponent op : clazz.getOperations()) {
+					if (!formChild.containsKey(op.getName())) {
+						Field field = ClassDiagramUtils.getFieldForOperation(op);
+						cToAdd.add(field);
+					}
+				}
 			}
 
 			// Associations :
 
-			for (Association ass : clazz.getSourceAssociations()) {
-				getCommandsForAssociation(fc, domain, formChild, clazz, ass);
+			for (Association ass : abclazz.getSourceAssociations()) {
+				getCommandsForAssociation(fc, domain, formChild, abclazz, ass);
 			}
 
-			// Operations :
-			for (OperationComponent op : clazz.getOperations()) {
-				if (!formChild.containsKey(op.getName())) {
-					Field field = ClassDiagramUtils.getFieldForOperation(op);
-					cToAdd.add(field);
-				}
-			}
+			
 		}
 		if (cToAdd.size() > 0) {
 			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), cToAdd));
@@ -138,7 +146,7 @@ public class ClassSynchronizationUtils {
 		return cc;
 	}
 
-	private static void getCommandsForAssociation(FormClass fc, EditingDomain domain, HashMap<String, FormElement> formChild, Clazz clazz, Association ass) {
+	private static void getCommandsForAssociation(FormClass fc, EditingDomain domain, HashMap<String, FormElement> formChild, AbstractClass clazz, Association ass) {
 		// SOURCE
 		String associationId = "";
 		if (ass.getFirstEnd().getLinkedClass().equals(clazz) && ass.getSecondEnd().isNavigable()) {

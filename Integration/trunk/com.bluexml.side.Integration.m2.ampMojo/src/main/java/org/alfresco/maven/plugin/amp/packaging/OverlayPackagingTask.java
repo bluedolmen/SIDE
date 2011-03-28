@@ -19,13 +19,13 @@ package org.alfresco.maven.plugin.amp.packaging;
  * under the License.
  */
 
-import org.apache.maven.plugin.MojoExecutionException;
-import org.alfresco.maven.plugin.amp.Overlay;
-import org.alfresco.maven.plugin.amp.util.PathSet;
-import org.codehaus.plexus.util.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
+
+import org.alfresco.maven.plugin.amp.Overlay;
+import org.alfresco.maven.plugin.amp.util.PathSet;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.codehaus.plexus.util.FileUtils;
 
 /**
  * Handles an overlay.

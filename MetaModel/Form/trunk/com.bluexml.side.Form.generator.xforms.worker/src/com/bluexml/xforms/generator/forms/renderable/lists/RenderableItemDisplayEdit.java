@@ -2,7 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.lists;
 
 import java.util.Stack;
 
-import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.Renderable;
@@ -11,6 +10,7 @@ import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementSubmission;
 import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
 
 public class RenderableItemDisplayEdit extends Renderable {
 

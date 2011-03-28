@@ -19,12 +19,12 @@ package org.alfresco.maven.plugin.amp.util;
  * under the License.
  */
 
+import java.util.Properties;
+
 import org.apache.maven.artifact.Artifact;
 import org.codehaus.plexus.util.interpolation.ObjectBasedValueSource;
 import org.codehaus.plexus.util.interpolation.RegexBasedInterpolator;
 import org.codehaus.plexus.util.interpolation.ValueSource;
-
-import java.util.Properties;
 
 /**
  * Utilities used to evaluate expression.

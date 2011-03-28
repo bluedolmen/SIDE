@@ -1,11 +1,11 @@
 package org.alfresco.maven.plugin.amp.packaging;
 
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-import org.alfresco.maven.plugin.amp.util.AmpStructureSerializer;
-
 import java.io.File;
 import java.io.IOException;
+
+import org.alfresco.maven.plugin.amp.util.AmpStructureSerializer;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 
 /**
  * Saves the webapp structure cache.

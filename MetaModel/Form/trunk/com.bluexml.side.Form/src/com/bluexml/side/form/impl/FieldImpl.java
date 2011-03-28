@@ -6,29 +6,25 @@
  */
 package com.bluexml.side.form.impl;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormPackage;
-import com.bluexml.side.form.SearchOperatorConfiguration;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->

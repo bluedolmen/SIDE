@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.xml.namespace.QName;
 
-import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.side.clazz.Clazz;
@@ -12,6 +11,7 @@ import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderedSelectClass.

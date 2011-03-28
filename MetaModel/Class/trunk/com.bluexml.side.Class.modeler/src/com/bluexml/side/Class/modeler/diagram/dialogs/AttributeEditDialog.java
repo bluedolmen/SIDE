@@ -45,12 +45,11 @@ import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.diagram.helper.MetaInfoHelper;
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.OblAttributeMetaInfo;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.common.DataType;
 import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.clazz.provider.ClazzItemProviderAdapterFactory;
+import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
-import com.bluexml.side.common.Visibility;
-import com.bluexml.side.clazz.provider.ClazzItemProviderAdapterFactory;
 
 public class AttributeEditDialog extends Dialog implements IDialogConstants {
 	/** The ID of the property name */

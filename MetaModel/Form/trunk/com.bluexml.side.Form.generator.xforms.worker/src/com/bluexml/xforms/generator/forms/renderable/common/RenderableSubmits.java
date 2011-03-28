@@ -3,12 +3,11 @@ package com.bluexml.xforms.generator.forms.renderable.common;
 import java.util.List;
 import java.util.Stack;
 
-import com.bluexml.xforms.messages.MsgId;
-
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementSubmission;
 import com.bluexml.xforms.generator.forms.rendered.RenderedGroup;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableSubmits.

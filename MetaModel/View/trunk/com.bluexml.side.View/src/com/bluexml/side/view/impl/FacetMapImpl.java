@@ -7,18 +7,6 @@
 package com.bluexml.side.view.impl;
 
 
-import com.bluexml.side.common.Comment;
-import com.bluexml.side.common.CommonPackage;
-import com.bluexml.side.common.Container;
-import com.bluexml.side.common.MetaInfo;
-import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.common.NamedModelElement;
-import com.bluexml.side.common.OperationComponent;
-import com.bluexml.side.common.Stereotype;
-import com.bluexml.side.common.Tag;
-import com.bluexml.side.view.AbstractView;
-import com.bluexml.side.view.AbstractViewOf;
-import com.bluexml.side.view.Actionable;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -31,22 +19,17 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
 
+import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.view.Actionable;
 import com.bluexml.side.view.FacetDisplayType;
 import com.bluexml.side.view.FacetMap;
-import com.bluexml.side.view.Field;
-import com.bluexml.side.view.FieldContainer;
 import com.bluexml.side.view.FieldElement;
-import com.bluexml.side.view.Stylable;
-import com.bluexml.side.view.Styling;
 import com.bluexml.side.view.Paginable;
 import com.bluexml.side.view.Paging;
 import com.bluexml.side.view.ViewPackage;

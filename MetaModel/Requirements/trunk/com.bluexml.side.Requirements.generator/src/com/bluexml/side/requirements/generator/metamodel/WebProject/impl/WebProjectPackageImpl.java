@@ -6,6 +6,13 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.WebProject.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import com.bluexml.side.requirements.generator.metamodel.WebProject.Component;
 import com.bluexml.side.requirements.generator.metamodel.WebProject.ComponentAttribute;
 import com.bluexml.side.requirements.generator.metamodel.WebProject.ComponentProperty;
@@ -24,14 +31,6 @@ import com.bluexml.side.requirements.generator.metamodel.WebProject.Table;
 import com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectFactory;
 import com.bluexml.side.requirements.generator.metamodel.WebProject.WebProjectPackage;
 import com.bluexml.side.requirements.generator.metamodel.WebProject.dataType;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

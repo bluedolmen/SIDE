@@ -14,6 +14,7 @@ import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
@@ -76,7 +77,7 @@ public class SearchInitialization {
 		CompoundCommand cc = new CompoundCommand();
 
 		// get the attached model element
-		Clazz realClass = form.getReal_class();
+		AbstractClass realClass = form.getReal_class();
 		if (realClass != null) {
 			String className = realClass.getName();
 			String classLabel = realClass.getLabel();
@@ -94,42 +95,44 @@ public class SearchInitialization {
 
 	private static Collection<FormElement> getSearchChildrenFromClazz(FormSearch form) {
 		form.getChildren().removeAll(form.getChildren()); // <-- this is MANDATORY !
-		Clazz cl = form.getReal_class();
+		AbstractClass cl = form.getReal_class();
 		Collection<FormElement> fields = new ArrayList<FormElement>();
 
 		if (cl != null) {
-			Clazz clazz = cl;
 
-			for (Attribute att : clazz.getAllAttributesWithoutAspectsAttributes()) {
+			for (Attribute att : cl.getAllAttributesWithoutAspectsAttributes()) {
 				SearchField field = null;
 				field = getSearchFieldForAttribute(att);
 				if (field != null) {
 					fields.add(field);
 				}
 			}
-
-			// Aspects
-			for (Aspect aspect : clazz.getAllAspects()) {
-				FormAspect fa = FormFactory.eINSTANCE.createFormAspect();
-				fa.setRef(aspect);
-				fa.setId(aspect.getName());
-				fa.setLabel(aspect.getLabel());
-				Collection<SearchField> aspectFields = new ArrayList<SearchField>();
-				for (Attribute att : aspect.getAttributes()) {
-					SearchField field = getSearchFieldForAttribute(att);
-					if (field != null) {
-						aspectFields.add(field);
+			if (cl instanceof Clazz) {
+				Clazz clazz = (Clazz) cl;
+				// Aspects
+				for (Aspect aspect : clazz.getAllAspects()) {
+					FormAspect fa = FormFactory.eINSTANCE.createFormAspect();
+					fa.setRef(aspect);
+					fa.setId(aspect.getName());
+					fa.setLabel(aspect.getLabel());
+					Collection<SearchField> aspectFields = new ArrayList<SearchField>();
+					for (Attribute att : aspect.getAttributes()) {
+						SearchField field = getSearchFieldForAttribute(att);
+						if (field != null) {
+							aspectFields.add(field);
+						}
 					}
+					if (aspectFields.size() > 0 || fa.getChildren() != null) {
+						fa.getChildren().addAll(aspectFields);
+					}
+					fields.add(fa);
 				}
-				if (aspectFields.size() > 0 || fa.getChildren() != null) {
-					fa.getChildren().addAll(aspectFields);
-				}
-				fields.add(fa);
+				// we don't search using operations
+				
 			}
-
 			// we don't search using associations
 
-			// we don't search using operations
+			
 		}
 
 		return fields;

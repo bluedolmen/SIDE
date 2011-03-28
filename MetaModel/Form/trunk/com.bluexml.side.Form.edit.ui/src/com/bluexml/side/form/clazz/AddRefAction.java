@@ -15,6 +15,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormFactory;
@@ -23,15 +24,14 @@ import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.clazz.utils.ClassInitialization;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
 
-public class AddRefAction extends Action implements
-ISelectionChangedListener {
+public class AddRefAction extends Action implements ISelectionChangedListener {
 
 	protected EObject selectedObject;
 	private EditingDomain domain;
-	private Clazz c;
+	private AbstractClass c;
 	private Reference ref;
 
-	public AddRefAction(Clazz p_c, Reference p_ref) {
+	public AddRefAction(AbstractClass p_c, Reference p_ref) {
 		super();
 		c = p_c;
 		ref = p_ref;
@@ -39,8 +39,7 @@ ISelectionChangedListener {
 
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof IStructuredSelection) {
-			setEnabled(updateSelection((IStructuredSelection) event
-					.getSelection()));
+			setEnabled(updateSelection((IStructuredSelection) event.getSelection()));
 		} else {
 			setEnabled(false);
 		}
@@ -66,7 +65,6 @@ ISelectionChangedListener {
 		doAction();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void doAction() {
 		if (c != null && ref != null) {
 			//FormContainer form =  FormFactory.eINSTANCE.createFormClass();
@@ -84,7 +82,8 @@ ISelectionChangedListener {
 			} else {
 				formClass.setLabel(c.getName());
 				//form.setName(c.getName() + " ref from " + ((FormClass)ref.eContainer()).getLabel() + " (" + ref.getLabel() + ")");
-			};
+			}
+			;
 			Command setCmd = AddCommand.create(domain, ref, FormPackage.eINSTANCE.getModelChoiceField_Target(), formClass);
 			//ref.getTarget().add(formClass);
 			// Commands :
@@ -102,8 +101,10 @@ ISelectionChangedListener {
 	@Override
 	public String getText() {
 		String label = ((c.getTitle() != null && c.getTitle().length() > 0) ? c.getTitle() : c.getName());
-		if (c.isAbstract()) {
-			label += " (Abstract Type)";
+		if (c instanceof Clazz) {
+			if (((Clazz) c).isAbstract()) {
+				label += " (Abstract Type)";
+			}
 		}
 		return label;
 	}

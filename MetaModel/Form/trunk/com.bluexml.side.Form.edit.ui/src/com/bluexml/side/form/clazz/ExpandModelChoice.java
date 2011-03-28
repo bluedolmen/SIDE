@@ -18,6 +18,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormContainer;
@@ -32,15 +33,14 @@ import com.bluexml.side.form.common.utils.FieldTransformation;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.common.utils.InternalModification;
 
-public class ExpandModelChoice extends Action implements
-ISelectionChangedListener {
+public class ExpandModelChoice extends Action implements ISelectionChangedListener {
 
 	protected EObject selectedObject;
 	private EditingDomain domain;
-	private Clazz c;
+	private AbstractClass c;
 	ModelChoiceField mcf;
 
-	public ExpandModelChoice(Clazz p_c, ModelChoiceField p_mcf) {
+	public ExpandModelChoice(AbstractClass p_c, ModelChoiceField p_mcf) {
 		super();
 		c = p_c;
 		mcf = p_mcf;
@@ -48,8 +48,7 @@ ISelectionChangedListener {
 
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof IStructuredSelection) {
-			setEnabled(updateSelection((IStructuredSelection) event
-					.getSelection()));
+			setEnabled(updateSelection((IStructuredSelection) event.getSelection()));
 		} else {
 			setEnabled(false);
 		}
@@ -81,7 +80,7 @@ ISelectionChangedListener {
 			Reference ref = FormFactory.eINSTANCE.createReference();
 			FieldTransformation.transform(mcf, ref);
 
-			FormContainer form = createFormForRealClass(c,mcf);
+			FormContainer form = createFormForRealClass(c, mcf);
 			FormClass formClass = (FormClass) form;
 			ref.getTarget().add(formClass);
 
@@ -98,11 +97,11 @@ ISelectionChangedListener {
 
 			// Commands :
 			// Delete Model Choice Field
-			Command delCmd = RemoveCommand.create(domain, (Object)mcf);
+			Command delCmd = RemoveCommand.create(domain, (Object) mcf);
 			cc.append(delCmd);
 
 			// Add the reference
-			Command addRefCmd = AddCommand.create(domain, mcf.eContainer(), FormPackage.eINSTANCE.getFormGroup_Children(), ref, ((FormGroup)mcf.eContainer()).getChildren().lastIndexOf(mcf));
+			Command addRefCmd = AddCommand.create(domain, mcf.eContainer(), FormPackage.eINSTANCE.getFormGroup_Children(), ref, ((FormGroup) mcf.eContainer()).getChildren().lastIndexOf(mcf));
 			cc.append(addRefCmd);
 
 			cc.append(ClassInitialization.initializeClass(formClass, domain));
@@ -112,7 +111,7 @@ ISelectionChangedListener {
 
 	}
 
-	protected FormContainer createFormForRealClass(Clazz p_class, ModelChoiceField p_mcf) {
+	protected FormContainer createFormForRealClass(AbstractClass p_class, ModelChoiceField p_mcf) {
 		//FormContainer form =  FormFactory.eINSTANCE.createFormContainer();
 		FormClass formClass = FormFactory.eINSTANCE.createFormClass();
 		//form.setRoot(formClass);
@@ -129,17 +128,18 @@ ISelectionChangedListener {
 		} else {
 			formClass.setLabel(p_class.getName());
 			//form.setName(p_class.getName() + " ref from " + ((FormGroup)p_mcf.eContainer()).getLabel() + " (" + p_mcf.getLabel() + ")");
-		};
+		}
+		;
 		return formClass;
 	}
-
-
 
 	@Override
 	public String getText() {
 		String label = ((c.getTitle() != null && c.getTitle().length() > 0) ? c.getTitle() : c.getName());
-		if (c.isAbstract()) {
-			label += " (Abstract Type)";
+		if (c instanceof Clazz) {
+			if (((Clazz) c).isAbstract()) {
+				label += " (Abstract Type)";
+			}
 		}
 		return label;
 	}

@@ -6,24 +6,21 @@
  */
 package com.bluexml.side.requirements.impl;
 
-import com.bluexml.side.requirements.Goal;
-import com.bluexml.side.requirements.GoalStep;
-import com.bluexml.side.requirements.RequirementsPackage;
-
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.ecore.OCL;
+
+import com.bluexml.side.requirements.Goal;
+import com.bluexml.side.requirements.GoalStep;
+import com.bluexml.side.requirements.RequirementsPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

@@ -28,7 +28,8 @@ import com.bluexml.side.common.Comment;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAssociationEnd()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.name.regexMatch(\'[\\w\\(\\),]*\') = true'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='noSpecialChracters'"
  * @generated
  */
 public interface AssociationEnd extends TitledNamedClassModelElement, Comment {

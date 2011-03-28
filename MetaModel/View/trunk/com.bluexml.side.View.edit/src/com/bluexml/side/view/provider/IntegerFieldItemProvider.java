@@ -19,8 +19,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import com.bluexml.side.view.IntegerField;
-
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.view.IntegerField} object.
  * <!-- begin-user-doc -->

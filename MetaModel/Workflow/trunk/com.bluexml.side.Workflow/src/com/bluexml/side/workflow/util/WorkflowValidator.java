@@ -7,6 +7,8 @@
 package com.bluexml.side.workflow.util;
 
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -46,8 +48,6 @@ import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WfPackage;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * <!-- begin-user-doc -->

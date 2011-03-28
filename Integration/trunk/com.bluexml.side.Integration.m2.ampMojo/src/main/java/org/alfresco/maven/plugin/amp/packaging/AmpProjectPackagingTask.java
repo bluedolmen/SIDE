@@ -1,17 +1,15 @@
 package org.alfresco.maven.plugin.amp.packaging;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.alfresco.maven.plugin.amp.Overlay;
 import org.alfresco.maven.plugin.amp.util.PathSet;
-
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.StringUtils;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Handles the project own resources, that is:
@@ -194,7 +192,7 @@ public class AmpProjectPackagingTask
         throws MojoExecutionException
     {
         ArtifactsPackagingTask task = new ArtifactsPackagingTask( context.getProject().getArtifacts() );
-        context.getLog().info("DEBUG ¤¤ CALL handleArtifacts/performPackaging");
+        context.getLog().info("DEBUG ï¿½ï¿½ CALL handleArtifacts/performPackaging");
         task.performPackaging( context );
     }
 

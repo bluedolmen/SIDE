@@ -2,7 +2,6 @@ package com.bluexml.side.deployer.alfresco.directcopy;
 
 import java.io.File;
 
-
 import com.bluexml.side.util.deployer.war.DirectWebAppsDeployer;
 
 public class AlfrescoShareDirectDeployer extends DirectWebAppsDeployer {

@@ -6,12 +6,14 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Diagnostic.util;
 
-import com.bluexml.side.requirements.generator.metamodel.Diagnostic.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Diagnostic;
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.DiagnosticPackage;
+import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Problem;
 
 /**
  * <!-- begin-user-doc -->

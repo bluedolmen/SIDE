@@ -31,36 +31,45 @@
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllClassesFromEveryWhere"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllAspectsFromEveryWhere"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="Class.ecore#//AbstractClass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//AbstractClass/attributes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//AbstractClass/generalizations"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/equalsForMerge">
+        <genParameters ecoreParameter="Class.ecore#//AbstractClass/equalsForMerge/other"/>
+      </genOperations>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getInheritedClasses"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getSubTypes"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getAllSubTypes"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getAllInheritedAttributes"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getAllAttributesWithoutAspectsAttributes"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getSourceAssociations"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/isSource">
+        <genParameters ecoreParameter="Class.ecore#//AbstractClass/isSource/asso"/>
+      </genOperations>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/isTarget">
+        <genParameters ecoreParameter="Class.ecore#//AbstractClass/isTarget/asso"/>
+      </genOperations>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getTargetAssociations"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getSourceAssociationEnds"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getTargetAssociationEnds"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getAllSourceAssociations"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getAllTargetAssociations"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getLinkedClasses"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getAllSourceAssociationEnds"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/getAllTargetAssociationEnds"/>
+    </genClasses>
     <genClasses ecoreClass="Class.ecore#//Clazz">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//Clazz/operations"/>
-      <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//Clazz/generalizations"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Clazz/aspects"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Clazz/abstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Clazz/deprecated"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllAttributes"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getClassAndAspectAttributes"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getInheritedClasses"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAspectAttributes"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getAllSubTypes"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllInheritedClassAndAspectAttributes"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getAllInheritedAttributes"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getSourceAssociations"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/isSource">
-        <genParameters ecoreParameter="Class.ecore#//Clazz/isSource/asso"/>
-      </genOperations>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/isTarget">
-        <genParameters ecoreParameter="Class.ecore#//Clazz/isTarget/asso"/>
-      </genOperations>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getTargetAssociations"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getAllSourceAssociations"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getAllTargetAssociations"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getLinkedClasses"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getAllSourceAssociationEnds"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getAllTargetAssociationEnds"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getSourceAssociationEnds"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getTargetAssociationEnds"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllAspects"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getAllAttributesWithoutAspectsAttributes"/>
+      <genOperations ecoreOperation="Class.ecore#//Clazz/getAllSourceAssociationsIncludingAspect"/>
+      <genOperations ecoreOperation="Class.ecore#//Clazz/getAllTargetAssociationsIncludingAspect"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Association">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/associationType"/>
@@ -96,15 +105,8 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//EnumerationLiteral/enum"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Aspect">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Aspect/generalizations"/>
       <genOperations ecoreOperation="Class.ecore#//Aspect/equalsForMerge">
         <genParameters ecoreParameter="Class.ecore#//Aspect/equalsForMerge/other"/>
-      </genOperations>
-    </genClasses>
-    <genClasses image="false" ecoreClass="Class.ecore#//AbstractClass">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//AbstractClass/attributes"/>
-      <genOperations ecoreOperation="Class.ecore#//AbstractClass/equalsForMerge">
-        <genParameters ecoreParameter="Class.ecore#//AbstractClass/equalsForMerge/other"/>
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="Class.ecore#//TitledNamedClassModelElement">

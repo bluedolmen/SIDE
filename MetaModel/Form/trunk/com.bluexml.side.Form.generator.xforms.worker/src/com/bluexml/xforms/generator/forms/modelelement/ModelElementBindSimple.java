@@ -6,11 +6,11 @@ import java.util.List;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.ModelElement;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class ModelElementBindSimple.

@@ -2,7 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.classes;
 
 import java.util.Stack;
 
-
 import com.bluexml.side.clazz.Association;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.renderable.common.AssociationProperties;

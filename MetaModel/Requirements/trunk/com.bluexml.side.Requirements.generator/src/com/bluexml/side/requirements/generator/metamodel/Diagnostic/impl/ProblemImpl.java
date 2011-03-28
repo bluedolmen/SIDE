@@ -6,16 +6,14 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Diagnostic.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import com.bluexml.side.requirements.generator.metamodel.Diagnostic.DiagnosticPackage;
 import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Problem;
 import com.bluexml.side.requirements.generator.metamodel.Diagnostic.Severity;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

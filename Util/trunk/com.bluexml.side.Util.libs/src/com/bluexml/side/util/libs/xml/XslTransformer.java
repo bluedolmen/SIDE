@@ -18,15 +18,12 @@ package com.bluexml.side.util.libs.xml;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -38,9 +35,7 @@ import org.jdom.transform.JDOMResult;
 import org.w3c.dom.Document;
 
 /**
- * 
  * @author pbertrand
- * 
  */
 public class XslTransformer {
 
@@ -57,15 +52,11 @@ public class XslTransformer {
 	 * @param result
 	 *            Result file (path)
 	 * @return A reference on the result file
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static Result transform(String src, String xsl, String result) throws Exception {
 		// get resources
-		DocumentBuilderFactory fabriqueD = DocumentBuilderFactory.newInstance();
-		DocumentBuilder constructeur;
-		constructeur = fabriqueD.newDocumentBuilder();
-		File fileXml = new File(src);
-		Document document = constructeur.parse(fileXml);
+		Document document = XmlHelper.buildW3cDocument(src);
 		Source source = new DOMSource(document);
 		File fileHtml = new File(result);
 		Result resultat = new StreamResult(fileHtml);
@@ -81,20 +72,49 @@ public class XslTransformer {
 		return resultat;
 	}
 
-	public static Result transform(Document document, String xsl, String result) throws Exception {
+	
+
+	public static Result transform(Document doc, File xslName, File htmlName) throws Exception {
 		// get resources
-		File fileHtml = new File(result);
-		Result resultat = new StreamResult(fileHtml);
-		Source source = new DOMSource(document);
+
+		Result resultat = new StreamResult(htmlName);
+		Source source = new DOMSource(doc);
 
 		// set transformer
 		TransformerFactory fabriqueT = net.sf.saxon.TransformerFactoryImpl.newInstance();
-		StreamSource stylesource = new StreamSource(new File(xsl));
+		StreamSource stylesource = new StreamSource(xslName);
 		Transformer transformer = fabriqueT.newTransformer(stylesource);
 
 		// Transformation
 		transformer.transform(source, resultat);
 		return resultat;
+
+	}
+
+	public static Result transform(Document doc, InputStream xslName, OutputStream htmlName) throws Exception {
+		// get resources
+
+		Result resultat = new StreamResult(htmlName);
+		Source source = new DOMSource(doc);
+
+		// set transformer
+		TransformerFactory fabriqueT = net.sf.saxon.TransformerFactoryImpl.newInstance();
+		StreamSource stylesource = new StreamSource(xslName);
+		Transformer transformer = fabriqueT.newTransformer(stylesource);
+
+		// Transformation
+		transformer.transform(source, resultat);
+		xslName.close();
+		htmlName.close();
+		return resultat;
+
+	}
+
+	public static Result transform(Document document, String xsl, String result) throws Exception {
+		// get resources
+		File file = new File(xsl);
+		File fileHtml = new File(result);
+		return transform(document, file, fileHtml);
 	}
 
 	public static void transform(org.jdom.Document doc, File xslName, File htmlName) throws Exception {
@@ -111,4 +131,5 @@ public class XslTransformer {
 
 	}
 
+	
 }

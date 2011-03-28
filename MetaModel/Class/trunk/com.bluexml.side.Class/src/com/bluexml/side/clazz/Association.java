@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAssociation()
- * @model annotation="http://www.bluexml.com/OCL reflexiveAssociationMustHaveRole='if (self.firstEnd.oclIsTypeOf(Clazz) and self.secondEnd.oclIsTypeOf(Clazz)) then\n( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))\nelse\ntrue\nendif' MinAndMaxTarget='( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )' MinAndMaxSource='( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' SourceNull='self.firstEnd.linkedClass->notEmpty()' TargetNull='self.secondEnd.linkedClass->notEmpty()' AtLeastOneNavigableEdge='(firstEnd.navigable or secondEnd.navigable)' ClassCantBeReferencedbyTwoSameNameAssociation='if (self.getSource()->first().oclIsTypeOf(Aspect)) then\n\tAssociation.allInstances()->select(a | a.getSource() = self.getSource())->asSet()->select(a:Association|a.name = self.name)->size() = 1\nelse\n\tif (not (self.getSource().generalizations ->closure(generalizations)->intersection(self.getSource()) ->size() >0)) then\n\t\tself.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1\n\telse\n\t\t0 = 1\n\tendif\nendif' IfAggregationOrCompositionThenUnidirectionalAssociation='(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )' twoWayNavigation='(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name <> \'\' and self.secondEnd.name <> \'\')' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true'"
+ * @model annotation="http://www.bluexml.com/OCL reflexiveAssociationMustHaveRole='if (self.firstEnd.oclIsTypeOf(Clazz) and self.secondEnd.oclIsTypeOf(Clazz)) then\n( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))\nelse\ntrue\nendif' MinAndMaxTarget='( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )' MinAndMaxSource='( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' SourceNull='self.firstEnd.linkedClass->notEmpty()' TargetNull='self.secondEnd.linkedClass->notEmpty()' AtLeastOneNavigableEdge='(firstEnd.navigable or secondEnd.navigable)' ClassCantBeReferencedbyTwoSameNameAssociation='if (self.getSource()->first().oclIsTypeOf(Aspect)) then\n\tAssociation.allInstances()->select(a | a.getSource() = self.getSource())->asSet()->select(a:Association|a.name = self.name)->size() = 1\nelse\n\tif (not (self.getSource().generalizations ->closure(generalizations)->intersection(self.getSource()) ->size() >0)) then\n\t\tself.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1\n\telse\n\t\t0 = 1\n\tendif\nendif' IfAggregationOrCompositionThenUnidirectionalAssociation='(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )' twoWayNavigation='(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name <> \'\' and self.secondEnd.name <> \'\')' noSpecialCharacters='self.name.regexMatch(\'[\\w\\(\\),]*\') = true'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='reflexiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation doubleNavigable noSpecialChracters' warning='twoWayNavigation'"
  * @generated
  */
@@ -170,7 +170,7 @@ public interface Association extends TitledNamedClassModelElement {
 	 *        annotation="http://www.bluexml.com/OCL body='if (self.firstEnd.navigable and self.secondEnd.navigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.firstEnd.navigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.secondEnd.navigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif' description='get source Clazz'"
 	 * @generated
 	 */
-	EList<Clazz> getSource();
+	EList<AbstractClass> getSource();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -179,7 +179,7 @@ public interface Association extends TitledNamedClassModelElement {
 	 *        annotation="http://www.bluexml.com/OCL body='if (self.firstEnd.navigable and self.secondEnd.navigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.secondEnd.navigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.firstEnd.navigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif' description='get source Clazz'"
 	 * @generated
 	 */
-	EList<Clazz> getTarget();
+	EList<AbstractClass> getTarget();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -188,6 +188,6 @@ public interface Association extends TitledNamedClassModelElement {
 	 *        annotation="http://www.bluexml.com/OCL body='Sequence{self.firstEnd,self.secondEnd} -> select(ae | ae.linkedClass = clazz)\n' description='returns the association end for which the parameter class (clazz) is linked to'"
 	 * @generated
 	 */
-	EList<AssociationEnd> getAssociationEnd(Clazz clazz);
+	EList<AssociationEnd> getAssociationEnd(AbstractClass clazz);
 		
 } // Association

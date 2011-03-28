@@ -14,11 +14,8 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.commands;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -30,6 +27,7 @@ import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Class.modeler.diagram.CdSimpleObjectConstants;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.ClassComment;
@@ -66,7 +64,7 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 
 				EObject eObjectTgt = Utils.getElement(graphElementTgt);
 
-				if (eObjectTgt instanceof Clazz) {
+				if (eObjectTgt instanceof AbstractClass) {
 					if (autoRef) {
 						createAssociationFromClazzToClazz_Associations(graphElementSrc, graphElementSrc);
 					} else {
@@ -98,18 +96,10 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						
+
 					}
 				}
-				if (eObjectTgt instanceof Aspect) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createincludeFromClazzToAspect(graphElementSrc, graphElementTgt);
-					}
-				}
-				
+
 				if (eObjectTgt instanceof Clazz) {
 					if (autoRef) {
 						// autoRef not allowed
@@ -134,20 +124,22 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 	}
 
 	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
+	 * @param srcElt
+	 *            the source element
+	 * @param targetElt
+	 *            the target element
 	 * @_generated
 	 */
 	private void createAssociationFromClazzToClazz_Associations(GraphElement srcElt, GraphElement targetElt) {
-		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
-		Clazz targetObject = (Clazz) Utils.getElement(targetElt);
+		AbstractClass sourceObject = (AbstractClass) Utils.getElement(srcElt);
+		AbstractClass targetObject = (AbstractClass) Utils.getElement(targetElt);
 
-		EList edgeObjectList = ((com.bluexml.side.clazz.ClassPackage) Utils.getDiagramModelObject(srcElt)).getAssociationSet();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+		EList<?> edgeObjectList = ((com.bluexml.side.clazz.ClassPackage) Utils.getDiagramModelObject(srcElt)).getAssociationSet();
+		for (Iterator<?> it = edgeObjectList.iterator(); it.hasNext();) {
 			Object obj = it.next();
 			if (obj instanceof Association) {
 				Association edgeObject = (Association) obj;
-				
+
 				if (edgeObject.getFirstEnd().getLinkedClass().equals(sourceObject) && edgeObject.getSecondEnd().getLinkedClass().equals(targetObject)) {
 					// check if the relation does not exists yet
 					List<GraphEdge> existing = getExistingEdges(srcElt, targetElt, Association.class);
@@ -167,8 +159,10 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 	}
 
 	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
+	 * @param srcElt
+	 *            the source element
+	 * @param targetElt
+	 *            the target element
 	 * @generated
 	 */
 	private void createisCommentedFromClazzToClassComment(GraphElement srcElt, GraphElement targetElt) {
@@ -185,8 +179,6 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 			}
 		}
 	}
-
-	
 
 	/**
 	 * @param srcElt
@@ -210,32 +202,11 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 		}
 	}
 
-	
-
 	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createincludeFromClazzToAspect(GraphElement srcElt, GraphElement targetElt) {
-		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
-		Aspect targetObject = (Aspect) Utils.getElement(targetElt);
-
-		if (sourceObject.getAspects().contains(targetObject)) {
-			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_INCLUDE).size() == 0) {
-				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_INCLUDE);
-				includeEdgeCreationCommand cmd = new includeEdgeCreationCommand(null, edge, srcElt, false);
-				cmd.setTarget(targetElt);
-				add(cmd);
-			}
-		}
-	}
-
-
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
+	 * @param srcElt
+	 *            the source element
+	 * @param targetElt
+	 *            the target element
 	 * @generated
 	 */
 	private void createGeneralizationFromClazzToClazz(GraphElement srcElt, GraphElement targetElt) {
@@ -254,8 +225,10 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 	}
 
 	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
+	 * @param srcElt
+	 *            the source element
+	 * @param targetElt
+	 *            the target element
 	 * @generated
 	 */
 	private void createhasAspectFromClazzToAspect(GraphElement srcElt, GraphElement targetElt) {

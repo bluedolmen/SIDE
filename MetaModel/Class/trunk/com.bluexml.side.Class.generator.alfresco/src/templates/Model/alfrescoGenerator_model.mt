@@ -29,9 +29,9 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 
-<%script type="clazz.ClassPackage" name="validatedFilename"%>
+<%script type="clazz.Model" name="validatedFilename"%>
 <%if (eContainer() == null) {%><%getConfModulePath()%>/model/model.xml<%}%>
-<%script type="clazz.ClassPackage" name="generator" file="<%validatedFilename%>"%>
+<%script type="clazz.Model" name="generator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='iso-8859-1'?>
 
 <model name="<%name%>:model" xmlns="http://www.alfresco.org/model/dictionary/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -58,7 +58,10 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<namespaces>
 		
 		<!-- STARTMMLOOP -->
-		<namespace uri="http://www.bluexml.com/model/content/<%name%>/1.0" prefix="<%name%>" />
+		<namespace uri="<%if (namespace != null && namespace != ""){%><%namespace%>" prefix="<%name%>" />
+		 <%}else{%>http://www.bluexml.com/model/content/<%name%>/1.0" prefix="<%name%>" />
+		 <%}%>
+		 
 		<!-- ENDMMLOOP -->
 	</namespaces>
 	

@@ -3,10 +3,9 @@
  */
 package com.bluexml.xforms.generator.forms.rendered;
 
-import com.bluexml.xforms.messages.MsgId;
-
 import com.bluexml.xforms.generator.forms.Rendered;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * @author Amenel

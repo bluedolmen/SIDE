@@ -27,6 +27,7 @@ import org.topcased.draw2d.figures.Label;
 import org.topcased.modeler.ModelerColorConstants;
 
 import com.bluexml.side.Class.modeler.diagram.figure.ColorScaleUtil;
+import com.bluexml.side.Class.modeler.diagram.figure.colorScaler.YellowScaler;
 
 /**
  * @generated
@@ -117,7 +118,7 @@ public class ClazzFigure extends org.topcased.draw2d.figures.ClassFigure {
 	@Override
 	protected void paintFigure(Graphics graphics) {
 		super.paintFigure(graphics);
-		ColorScaleUtil.paintFigure(graphics, this);
+		ColorScaleUtil.paintFigure(graphics, this, new YellowScaler());
 	}
 
 }

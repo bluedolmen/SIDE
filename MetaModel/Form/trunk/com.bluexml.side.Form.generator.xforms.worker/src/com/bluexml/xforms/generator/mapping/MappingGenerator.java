@@ -30,8 +30,10 @@ import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.clazz.service.alfresco.CommonServices;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Tag;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.ChoiceField;
@@ -172,12 +174,12 @@ public class MappingGenerator extends AbstractGenerator {
 	/**
 	 * Gets the class type.
 	 * 
-	 * @param classe
+	 * @param parentClasse
 	 *            the classe
 	 * @return the class type
 	 */
-	private ClassType getClassType(Clazz classe) {
-		Clazz realClasse = (Clazz) formGenerator.getRealObject(classe);
+	private ClassType getClassType(AbstractClass parentClasse) {
+		Clazz realClasse = (Clazz) formGenerator.getRealObject(parentClasse);
 		ClassType classType = classTypes.get(realClasse);
 		if (classType == null) {
 			System.err.println("Bad missing class in classTypes :" + realClasse);
@@ -257,7 +259,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * .side.clazz.Clazz, com.bluexml.side.clazz.Attribute,
 	 * com.bluexml.side.clazz.Clazz)
 	 */
-	public void addAttributeForClass(Clazz classe, Attribute attribute, Clazz owner) {
+	public void addAttributeForClass(Clazz classe, Attribute attribute, AbstractClass owner) {
 		AttributeType asAttributeType = processAttribute(owner, attribute);
 		getClassType(classe).getAttribute().add(asAttributeType);
 	}
@@ -589,18 +591,18 @@ public class MappingGenerator extends AbstractGenerator {
 	/**
 	 * Adds the generalizations.
 	 * 
-	 * @param leafClasse
+	 * @param parentClasse2
 	 *            the leaf classe
 	 * @param classe
 	 *            the classe
 	 * @param level
 	 *            the level
 	 */
-	private void addGeneralizations(Clazz leafClasse, Clazz classe, int level) {
-		EList<Clazz> generalizations = leafClasse.getGeneralizations();
-		for (Clazz generalization : generalizations) {
+	private void addGeneralizations(AbstractClass parentClasse2, Clazz classe, int level) {
+		EList<AbstractClass> generalizations = parentClasse2.getGeneralizations();
+		for (AbstractClass generalization : generalizations) {
 			if (generalization != null) {
-				Clazz parentClasse = generalization;
+				AbstractClass parentClasse = generalization;
 				ClassType classType = getClassType(classe);
 				ClassType parentClassType = getClassType(parentClasse);
 				if (parentClassType != null) {
@@ -846,7 +848,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param formContainer
 	 *            either a FormClass or FormWorkflow object
 	 */
-	private void processFormElement(CanisterType canister, FormContainer formContainer, @SuppressWarnings("unused") FormElement parent, FormElement formElement) {
+	private void processFormElement(CanisterType canister, FormContainer formContainer, FormElement parent, FormElement formElement) {
 		if (formElement instanceof FormGroup) {
 			FormGroup formGroup = (FormGroup) formElement;
 			EList<FormElement> children = formGroup.getChildren();
@@ -941,9 +943,9 @@ public class MappingGenerator extends AbstractGenerator {
 			}
 			String alfrescoName = getAlfrescoNameForAttribute(realClass, ref);
 			if (alfrescoName == null) {
-				
+
 				String message = "Couldn't compute the Alfresco name for field '" + field.getLabel() + "' with Ref to attribute '" + ((Attribute) ref).getFullName() + "' on Form :" + formClass.getId();
-				
+
 				throw new RuntimeException(message);
 			}
 			formFieldType.setAlfrescoName(alfrescoName);
@@ -1084,32 +1086,8 @@ public class MappingGenerator extends AbstractGenerator {
 			return attribute.getName();
 		}
 
-		// #1547: inherited attributes names must be mapped to the appropriate parent class
-		EObject container = ((EObject) ref).eContainer();
-		ModelElement realContainer = (ModelElement) formGenerator.getRealObject(container);
-		if (classe.equals(realContainer)) {
-			return formGenerator.getClassQualifiedName(classe) + "_" + attribute.getName();
-		}
-
-		// the attribute may be in a parent class or in an aspect of either base or parent classes
-		if (classe instanceof Clazz) {
-			Clazz classRef = (Clazz) classe;
-			for (Clazz parentClass : classRef.getInheritedClasses()) {
-				Clazz realParentClass = (Clazz) formGenerator.getRealObject(parentClass);
-				if (realParentClass.equals(realContainer)) {
-					return getAlfrescoNameForAttribute(realParentClass, attribute);
-				}
-			}
-			for (Aspect aspect : ModelTools.getClassAspects(classRef).keySet()) {
-				Aspect realAspect = (Aspect) formGenerator.getRealObject(aspect);
-				if (realAspect.equals(realContainer)) {
-					return getAlfrescoNameForAttribute(realAspect, attribute);
-				}
-			}
-		} else {
-			throw new RuntimeException("Can't determine the Alfresco name of attribute '" + attribute.getName() + "' (" + attribute.getTitle() + ") because the container object is not a Clazz");
-		}
-		return null;
+		// ... please to use common behaviors to compute so common needs !
+		return CommonServices.getNamedModelElementQName((NamedModelElement) ref);
 	}
 
 	/**
@@ -1142,15 +1120,15 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 
 		// the field ref's container may be a superclass of the class ref
-		for (Clazz parentClass : classRef.getGeneralizations()) {
+		for (AbstractClass parentClass : classRef.getGeneralizations()) {
 			Clazz realParentClass = (Clazz) formGenerator.getRealObject(parentClass);
 			if (checkClassAttributeInclusion(realParentClass, fieldRef)) {
 				return true;
 			}
 		}
 
-		// the field ref's container may be one of the class' aspects
-		for (Aspect aspect : classRef.getAspects()) {
+		// the field ref's container may be one of the class' aspects (include generalization between aspects)
+		for (Aspect aspect : classRef.getAllAspects()) {
 			Aspect realAspect = (Aspect) formGenerator.getRealObject(aspect);
 			if (realAspect.equals(realContainer)) {
 				return true;

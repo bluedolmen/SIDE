@@ -6,26 +6,12 @@
  */
 package com.bluexml.side.form.impl;
 
-import com.bluexml.side.form.FormPackage;
-import com.bluexml.side.form.FormSearch;
-import com.bluexml.side.form.FormSearch;
-import com.bluexml.side.form.SearchFormCollection;
-
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.ocl.ecore.OCL;
+
+import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.SearchFormCollection;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

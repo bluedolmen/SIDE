@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.clazz;
 
-import org.eclipse.emf.common.util.EList;
 
 
 /**
@@ -20,34 +19,12 @@ import org.eclipse.emf.common.util.EList;
  * Constraints: the fully qualified name of an aspect is compose of the successive names of the containing package and the attribute name of the aspect. This fully qualified name must be unique in your application. For instance, 'org.bluexml.library.revision' identifies the aspect Revision contains in the 'library' package, itself contains in the 'bluexml' package, itself contains in the 'org' package.
  * <!-- end-model-doc -->
  *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link com.bluexml.side.clazz.Aspect#getGeneralizations <em>Generalizations</em>}</li>
- * </ul>
- * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAspect()
  * @model
  * @generated
  */
 public interface Aspect extends AbstractClass {
-	/**
-	 * Returns the value of the '<em><b>Generalizations</b></em>' reference list.
-	 * The list contents are of type {@link com.bluexml.side.clazz.Aspect}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Generalizations</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Generalizations</em>' reference list.
-	 * @see com.bluexml.side.clazz.ClazzPackage#getAspect_Generalizations()
-	 * @model
-	 * @generated
-	 */
-	EList<Aspect> getGeneralizations();
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

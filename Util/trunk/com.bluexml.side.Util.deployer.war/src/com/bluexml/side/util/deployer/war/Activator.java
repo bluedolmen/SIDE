@@ -2,6 +2,7 @@ package com.bluexml.side.util.deployer.war;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
+
 import com.bluexml.side.util.libs.Messages;
 /**
  * The activator class controls the plug-in life cycle

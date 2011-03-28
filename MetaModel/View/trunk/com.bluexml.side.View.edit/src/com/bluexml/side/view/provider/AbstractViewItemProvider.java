@@ -20,7 +20,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import com.bluexml.side.view.AbstractView;
-import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 
 /**

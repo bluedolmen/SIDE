@@ -27,16 +27,14 @@ import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.SearchField;
 import com.bluexml.side.form.common.utils.InternalModification;
 
-public class GroupAttributeAction extends Action implements
-		ISelectionChangedListener {
+public class GroupAttributeAction extends Action implements ISelectionChangedListener {
 
 	protected List<EObject> selectedObjects;
 	private EditingDomain domain;
 
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof IStructuredSelection) {
-			setEnabled(updateSelection((IStructuredSelection) event
-					.getSelection()));
+			setEnabled(updateSelection((IStructuredSelection) event.getSelection()));
 		} else {
 			setEnabled(false);
 		}
@@ -46,7 +44,7 @@ public class GroupAttributeAction extends Action implements
 		selectedObjects = new ArrayList<EObject>();
 		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
-			if (object instanceof Field || object instanceof FormAspect || object instanceof SearchField) { 
+			if (object instanceof Field || object instanceof FormAspect || object instanceof SearchField) {
 				// fix for #1641: added SearchField to the if condition
 				selectedObjects.add((EObject) object);
 			} else {
@@ -67,10 +65,21 @@ public class GroupAttributeAction extends Action implements
 		InternalModification.dontMoveToDisabled();
 		CompoundCommand cc = new CompoundCommand();
 
-		FormElement fe = (FormElement) l.get(0).eContainer();
-		int index = ((FormGroup)fe).getChildren().lastIndexOf(l.get(0));
+		FormGroup fe = (FormGroup) l.get(0).eContainer();
+		int index = fe.getChildren().lastIndexOf(l.get(0));
 		FormGroup newGroup = FormFactory.eINSTANCE.createFormGroup();
 		newGroup.setLabel("New group");
+		// id must be unique for this level
+		newGroup.setId("newGroupId");
+		int index_g = getIndexOfGroup(newGroup, fe);
+		int i = 0;
+		while (index_g != -1) {
+			i++;
+			newGroup.setId("newGroupId" + i);
+			newGroup.setLabel("New group " + i);
+			index_g = getIndexOfGroup(newGroup, fe);
+		}
+
 		//newGroup.getChildren().addAll((Collection<? extends FormElement>) l);
 		//AddCommand.create(domain, newGroup, FormPackage.eINSTANCE.getFormGroup_Children(), l);
 		Command addCmd = AddCommand.create(domain, fe, FormPackage.eINSTANCE.getFormGroup_Children(), newGroup, index);
@@ -82,6 +91,15 @@ public class GroupAttributeAction extends Action implements
 
 		domain.getCommandStack().execute(cc);
 		InternalModification.moveToDisabled();
+	}
+
+	private int getIndexOfGroup(FormGroup g, FormGroup parent) {
+		for (FormElement item : parent.getChildren()) {
+			if (item.getId().equals(g.getId())) {
+				return parent.getChildren().indexOf(item);
+			}
+		}
+		return -1;
 	}
 
 	@Override

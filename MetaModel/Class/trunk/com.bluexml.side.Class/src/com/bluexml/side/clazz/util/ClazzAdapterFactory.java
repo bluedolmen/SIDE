@@ -7,18 +7,29 @@
 package com.bluexml.side.clazz.util;
 
 import com.bluexml.side.clazz.*;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.emf.ecore.EObject;
 
+import com.bluexml.side.clazz.AbstractClass;
+import com.bluexml.side.clazz.Aspect;
+import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationEnd;
+import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.ClassComment;
+import com.bluexml.side.clazz.ClassModelElement;
+import com.bluexml.side.clazz.ClassPackage;
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.clazz.EnumerationLiteral;
+import com.bluexml.side.clazz.Model;
+import com.bluexml.side.clazz.TitledNamedClassModelElement;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.Container;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
-
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -85,6 +96,10 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 				return createClassPackageAdapter();
 			}
 			@Override
+			public Adapter caseAbstractClass(AbstractClass object) {
+				return createAbstractClassAdapter();
+			}
+			@Override
 			public Adapter caseClazz(Clazz object) {
 				return createClazzAdapter();
 			}
@@ -107,10 +122,6 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAspect(Aspect object) {
 				return createAspectAdapter();
-			}
-			@Override
-			public Adapter caseAbstractClass(AbstractClass object) {
-				return createAbstractClassAdapter();
 			}
 			@Override
 			public Adapter caseTitledNamedClassModelElement(TitledNamedClassModelElement object) {

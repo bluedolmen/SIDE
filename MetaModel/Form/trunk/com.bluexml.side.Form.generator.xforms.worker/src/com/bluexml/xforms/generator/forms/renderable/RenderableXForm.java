@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import com.bluexml.xforms.generator.forms.FormSubmissionActions;
 import com.bluexml.xforms.generator.forms.FormTypeRendered;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;
-import com.bluexml.xforms.generator.forms.FormSubmissionActions;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementSubmission;
 import com.bluexml.xforms.generator.forms.renderable.common.RenderableSubmits;
 import com.bluexml.xforms.generator.forms.rendered.RenderedForm;

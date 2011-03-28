@@ -73,7 +73,7 @@ public class isAssociationClassEdgeCreationEditPolicy extends AbstractEdgeCreati
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Association && targetObject instanceof com.bluexml.side.clazz.Clazz) {
+		if (sourceObject instanceof com.bluexml.side.clazz.Association && (targetObject instanceof com.bluexml.side.clazz.AbstractClass)) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
@@ -97,7 +97,7 @@ public class isAssociationClassEdgeCreationEditPolicy extends AbstractEdgeCreati
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Association && targetObject instanceof com.bluexml.side.clazz.Clazz) {
+		if (sourceObject instanceof com.bluexml.side.clazz.Association && targetObject instanceof com.bluexml.side.clazz.AbstractClass) {
 			return new SourceTargetData(false, false, SourceTargetData.NONE, null, null, null, null, null, "associationsClass", null, null);
 		}
 		return null;

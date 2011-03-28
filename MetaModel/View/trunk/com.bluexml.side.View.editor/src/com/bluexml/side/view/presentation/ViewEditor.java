@@ -124,9 +124,9 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
+import com.bluexml.side.clazz.provider.ClazzItemProviderAdapterFactory;
 import com.bluexml.side.common.provider.CommonItemProviderAdapterFactory;
 import com.bluexml.side.view.provider.ViewItemProviderAdapterFactory;
-import com.bluexml.side.clazz.provider.ClazzItemProviderAdapterFactory;
 
 
 /**

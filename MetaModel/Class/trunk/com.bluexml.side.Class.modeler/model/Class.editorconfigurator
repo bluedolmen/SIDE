@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/0.10" xmi:id="_zVIHUHcBEdyUwq_XzqQQrw" name="Class Modeler" projectName="com.bluexml.side.Class.modeler" pluginVersion="2.0.0.v200702151548" provider="BlueXML" forceOverwrite="true" copyrightText="">
-  <genModel href="../../com.bluexml.side.Class/model/Class.genmodel#/"/>
+<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/0.10" xmi:id="_zVIHUHcBEdyUwq_XzqQQrw" name="SIDE Data Modeler" projectName="com.bluexml.side.Class.modeler" pluginVersion="1.0.63.v21082-20101020" provider="BlueXML" forceOverwrite="true" copyrightText="">
+  <genModel href="/com.bluexml.side.Class/model/Class.genmodel#/"/>
 </editorconfigurator:EditorConfiguration>

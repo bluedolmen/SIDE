@@ -2,7 +2,6 @@ package com.bluexml.xforms.generator.forms.renderable.forms.group;
 
 import java.util.Stack;
 
-
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.xforms.generator.forms.Renderable;

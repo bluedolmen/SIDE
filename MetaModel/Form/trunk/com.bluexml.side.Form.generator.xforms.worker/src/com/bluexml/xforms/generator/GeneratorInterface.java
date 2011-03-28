@@ -1,5 +1,6 @@
 package com.bluexml.xforms.generator;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
@@ -287,7 +288,7 @@ public interface GeneratorInterface {
 	 * @param owner
 	 *            the owner
 	 */
-	void addAttributeForClass(Clazz classe, Attribute attribute, Clazz owner);
+	void addAttributeForClass(Clazz classe, Attribute attribute, AbstractClass owner);
 
 	/**
 	 * Adds the id for class.

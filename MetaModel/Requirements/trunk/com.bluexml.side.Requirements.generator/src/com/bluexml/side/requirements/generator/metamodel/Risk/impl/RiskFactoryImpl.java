@@ -6,15 +6,16 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.Risk.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.Risk.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.bluexml.side.requirements.generator.metamodel.Risk.Diagnostic;
+import com.bluexml.side.requirements.generator.metamodel.Risk.Estimation;
+import com.bluexml.side.requirements.generator.metamodel.Risk.RiskFactory;
+import com.bluexml.side.requirements.generator.metamodel.Risk.RiskPackage;
 
 /**
  * <!-- begin-user-doc -->

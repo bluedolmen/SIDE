@@ -6,23 +6,19 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.MindMap.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.MindMap.Map;
-import com.bluexml.side.requirements.generator.metamodel.MindMap.Maps;
-import com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Map;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Maps;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapPackage;
 
 /**
  * <!-- begin-user-doc -->

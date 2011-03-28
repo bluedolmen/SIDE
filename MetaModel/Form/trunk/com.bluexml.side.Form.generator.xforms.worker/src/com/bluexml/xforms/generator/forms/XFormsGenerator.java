@@ -21,6 +21,7 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
@@ -414,7 +415,7 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * @see com.bluexml.xforms.generator.DataGenerator#addAttributeForClass(com.bluexml
 	 * .side.clazz.Clazz, com.bluexml.side.clazz.Attribute, com.bluexml.side.clazz.Clazz)
 	 */
-	public void addAttributeForClass(Clazz classe, Attribute attribute, Clazz owner) {
+	public void addAttributeForClass(Clazz classe, Attribute attribute, AbstractClass owner) {
 		addAttributeForClass(classe, attribute);
 	}
 
@@ -1050,15 +1051,15 @@ public class XFormsGenerator extends AbstractGenerator {
 	 * Adds the generalizations/specializations. The information collected is useful for building
 	 * the selector forms.
 	 * 
-	 * @param leafClasse
+	 * @param parentClasse2
 	 *            the leaf classe
 	 * @param classe
 	 *            the classe
 	 */
-	private void addGeneralizations(Clazz leafClasse, Clazz classe) {
-		EList<Clazz> generalizations = leafClasse.getGeneralizations();
-		for (Clazz generalization : generalizations) {
-			Clazz parentClasse = generalization;
+	private void addGeneralizations(AbstractClass parentClasse2, Clazz classe) {
+		EList<AbstractClass> generalizations = parentClasse2.getGeneralizations();
+		for (AbstractClass generalization : generalizations) {
+			AbstractClass parentClasse = generalization;
 			if (!classe.isAbstract()) {
 				RenderableClass parentClass = classes.get(parentClasse);
 				if (parentClass != null) {

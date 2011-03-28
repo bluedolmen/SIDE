@@ -6,17 +6,30 @@
  */
 package com.bluexml.side.portal.util;
 
-import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.common.NamedModelElement;
-
-import com.bluexml.side.portal.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.portal.AbstractPortletAttributes;
+import com.bluexml.side.portal.Column;
+import com.bluexml.side.portal.Group;
+import com.bluexml.side.portal.HavePortlet;
+import com.bluexml.side.portal.InstanciatePortletType;
+import com.bluexml.side.portal.Page;
+import com.bluexml.side.portal.Portal;
+import com.bluexml.side.portal.PortalLayout;
+import com.bluexml.side.portal.PortalModelElement;
+import com.bluexml.side.portal.PortalPackage;
+import com.bluexml.side.portal.Portlet;
+import com.bluexml.side.portal.PortletAttribute;
+import com.bluexml.side.portal.PortletAttributeInstance;
+import com.bluexml.side.portal.PortletInternal;
+import com.bluexml.side.portal.PortletType;
+import com.bluexml.side.portal.PositionGroup;
+import com.bluexml.side.portal.isChildPage;
 
 /**
  * <!-- begin-user-doc -->

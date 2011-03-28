@@ -8,8 +8,8 @@ package com.bluexml.side.requirements.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.requirements.ModelElement;
 import com.bluexml.side.requirements.RequirementsPackage;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;

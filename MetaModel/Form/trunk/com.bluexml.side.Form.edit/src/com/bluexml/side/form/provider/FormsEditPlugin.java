@@ -6,10 +6,10 @@
  */
 package com.bluexml.side.form.provider;
 
-import com.bluexml.side.clazz.provider.ClassEditPlugin;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import com.bluexml.side.clazz.provider.ClassEditPlugin;
 import com.bluexml.side.common.provider.CommonEditPlugin;
 import com.bluexml.side.workflow.provider.WorkflowEditPlugin;
 

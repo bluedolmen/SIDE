@@ -6,10 +6,6 @@
  */
 package com.bluexml.side.common.impl;
 
-import com.bluexml.side.common.CommonPackage;
-import com.bluexml.side.common.Stereotype;
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -19,6 +15,10 @@ import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
+
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Stereotype;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

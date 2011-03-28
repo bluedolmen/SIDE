@@ -6,15 +6,19 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.MindMap.impl;
 
-import com.bluexml.side.requirements.generator.metamodel.MindMap.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.bluexml.side.requirements.generator.metamodel.MindMap.ArrowLink;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Map;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Maps;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Node;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapFactory;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapPackage;
 
 /**
  * <!-- begin-user-doc -->

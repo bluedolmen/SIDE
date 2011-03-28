@@ -7,8 +7,6 @@
 package com.bluexml.side.portal;
 
 import com.bluexml.side.form.FormCollection;
-import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.view.AbstractView;
 
 /**

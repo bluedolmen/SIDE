@@ -7,15 +7,27 @@
 package com.bluexml.side.clazz.impl;
 
 import com.bluexml.side.clazz.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.bluexml.side.clazz.Aspect;
+import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationEnd;
+import com.bluexml.side.clazz.AssociationType;
+import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.ClassComment;
+import com.bluexml.side.clazz.ClassModelElement;
+import com.bluexml.side.clazz.ClassPackage;
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.ClazzFactory;
+import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.clazz.EnumerationLiteral;
+import com.bluexml.side.clazz.Model;
 
 /**
  * <!-- begin-user-doc -->

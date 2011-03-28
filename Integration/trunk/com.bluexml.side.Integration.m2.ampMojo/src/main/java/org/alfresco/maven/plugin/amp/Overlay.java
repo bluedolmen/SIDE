@@ -19,11 +19,11 @@ package org.alfresco.maven.plugin.amp;
  * under the License.
  */
 
-import org.apache.maven.artifact.Artifact;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.maven.artifact.Artifact;
 
 /**
  * An overlay is a skeleton war added to another war project in order to inject a

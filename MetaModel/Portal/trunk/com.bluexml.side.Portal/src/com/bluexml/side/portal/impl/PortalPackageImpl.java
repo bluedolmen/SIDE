@@ -6,10 +6,15 @@
  */
 package com.bluexml.side.portal.impl;
 
-import com.bluexml.side.clazz.ClazzPackage;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import com.bluexml.side.common.CommonPackage;
-
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.portal.AbstractPortletAttributes;
 import com.bluexml.side.portal.Column;
@@ -31,18 +36,9 @@ import com.bluexml.side.portal.PortletType;
 import com.bluexml.side.portal.PortletTypeAttributeType;
 import com.bluexml.side.portal.PositionGroup;
 import com.bluexml.side.portal.isChildPage;
-import com.bluexml.side.portal.util.PortalValidator;
 import com.bluexml.side.portal.widthUnit;
-
+import com.bluexml.side.portal.util.PortalValidator;
 import com.bluexml.side.view.ViewPackage;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

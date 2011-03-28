@@ -6,10 +6,6 @@
  */
 package com.bluexml.side.portal.util;
 
-import com.bluexml.side.portal.*;
-
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -17,20 +13,37 @@ import java.util.Map;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.eclipse.emf.ecore.util.EObjectValidator;
-
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
-
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCL;
+
+import com.bluexml.side.portal.AbstractPortletAttributes;
+import com.bluexml.side.portal.Column;
+import com.bluexml.side.portal.Group;
+import com.bluexml.side.portal.HavePortlet;
+import com.bluexml.side.portal.InstanciatePortletType;
+import com.bluexml.side.portal.InternalPortletType;
+import com.bluexml.side.portal.Page;
+import com.bluexml.side.portal.Portal;
+import com.bluexml.side.portal.PortalLayout;
+import com.bluexml.side.portal.PortalModelElement;
+import com.bluexml.side.portal.PortalPackage;
+import com.bluexml.side.portal.Portlet;
+import com.bluexml.side.portal.PortletAttribute;
+import com.bluexml.side.portal.PortletAttributeInstance;
+import com.bluexml.side.portal.PortletInternal;
+import com.bluexml.side.portal.PortletType;
+import com.bluexml.side.portal.PortletTypeAttributeType;
+import com.bluexml.side.portal.PositionGroup;
+import com.bluexml.side.portal.isChildPage;
+import com.bluexml.side.portal.widthUnit;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

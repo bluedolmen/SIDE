@@ -3,7 +3,6 @@ package com.bluexml.xforms.generator.forms.renderable.classes;
 import java.util.List;
 import java.util.Stack;
 
-
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;

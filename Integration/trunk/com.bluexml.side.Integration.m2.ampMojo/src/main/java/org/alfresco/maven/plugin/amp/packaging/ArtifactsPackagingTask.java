@@ -1,15 +1,15 @@
 package org.alfresco.maven.plugin.amp.packaging;
 
-import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.resolver.filter.ScopeArtifactFilter;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.alfresco.maven.plugin.amp.Overlay;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import org.alfresco.maven.plugin.amp.Overlay;
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.resolver.filter.ScopeArtifactFilter;
+import org.apache.maven.plugin.MojoExecutionException;
 
 /**
  * Handles the artifacts that needs to be packaged in the web application.
@@ -51,11 +51,11 @@ public class ArtifactsPackagingTask extends AbstractAmpPackagingTask {
 					
 					String type = artifact.getType();
 					context.getLog().info("--------------------------------------------------------------");
-					context.getLog().info("DEBUG ¤¤ = artifact groupId="+artifact.getGroupId());
-					context.getLog().info("DEBUG ¤¤ = artifact artifactId="+artifact.getArtifactId());
-					context.getLog().info("DEBUG ¤¤ = artifact Version="+artifact.getVersion());
-					context.getLog().info("DEBUG ¤¤ = artifact Type="+type);
-					context.getLog().info("DEBUG ¤¤ = artifact Scope="+artifact.getScope());
+					context.getLog().info("DEBUG ï¿½ï¿½ = artifact groupId="+artifact.getGroupId());
+					context.getLog().info("DEBUG ï¿½ï¿½ = artifact artifactId="+artifact.getArtifactId());
+					context.getLog().info("DEBUG ï¿½ï¿½ = artifact Version="+artifact.getVersion());
+					context.getLog().info("DEBUG ï¿½ï¿½ = artifact Type="+type);
+					context.getLog().info("DEBUG ï¿½ï¿½ = artifact Scope="+artifact.getScope());
 					context.getLog().info("--------------------------------------------------------------");
 					if ("tld".equals(type)) {
 						// copyFile( id, context, artifact.getFile(), TLD_PATH +
@@ -65,10 +65,10 @@ public class ArtifactsPackagingTask extends AbstractAmpPackagingTask {
 						// SERVICES_PATH + targetFileName );
 					} else if ("jar".equals(type) || "ejb".equals(type) || "ejb-client".equals(type) || "test-jar".equals(type)) {
 						if (artifact.getScope().equals(Artifact.SCOPE_PROVIDED)) {
-							context.getLog().info("DEBUG ¤¤ = Artifact Scope="+Artifact.SCOPE_PROVIDED+",so associated ressource will not included");
+							context.getLog().info("DEBUG ï¿½ï¿½ = Artifact Scope="+Artifact.SCOPE_PROVIDED+",so associated ressource will not included");
 						} else {
 							copyFile(id, context, artifact.getFile(), LIB_PATH + targetFileName);
-							context.getLog().info("DEBUG ¤¤ = Artifact adding  " + artifact.getId() + " to AMP in " + LIB_PATH);
+							context.getLog().info("DEBUG ï¿½ï¿½ = Artifact adding  " + artifact.getId() + " to AMP in " + LIB_PATH);
 						}
 						
 					} else if ("par".equals(type)) {

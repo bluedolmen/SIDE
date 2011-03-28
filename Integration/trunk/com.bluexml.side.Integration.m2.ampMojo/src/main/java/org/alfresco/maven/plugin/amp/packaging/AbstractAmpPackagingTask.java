@@ -19,23 +19,6 @@ package org.alfresco.maven.plugin.amp.packaging;
  * under the License.
  */
 
-import org.apache.maven.artifact.Artifact;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.alfresco.maven.plugin.amp.AbstractAmpMojo;
-
-import org.alfresco.maven.plugin.amp.util.MappingUtils;
-import org.alfresco.maven.plugin.amp.util.PathSet;
-import org.alfresco.maven.plugin.amp.util.AmpStructure;
-
-
-import org.codehaus.plexus.archiver.ArchiverException;
-import org.codehaus.plexus.archiver.UnArchiver;
-import org.codehaus.plexus.archiver.manager.NoSuchArchiverException;
-import org.codehaus.plexus.util.DirectoryScanner;
-import org.codehaus.plexus.util.FileUtils;
-import org.codehaus.plexus.util.IOUtil;
-import org.codehaus.plexus.util.InterpolationFilterReader;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -45,6 +28,20 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.Iterator;
 import java.util.Map;
+
+import org.alfresco.maven.plugin.amp.AbstractAmpMojo;
+import org.alfresco.maven.plugin.amp.util.AmpStructure;
+import org.alfresco.maven.plugin.amp.util.MappingUtils;
+import org.alfresco.maven.plugin.amp.util.PathSet;
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.codehaus.plexus.archiver.ArchiverException;
+import org.codehaus.plexus.archiver.UnArchiver;
+import org.codehaus.plexus.archiver.manager.NoSuchArchiverException;
+import org.codehaus.plexus.util.DirectoryScanner;
+import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.IOUtil;
+import org.codehaus.plexus.util.InterpolationFilterReader;
 
 /**
  * @author Stephane Nicoll

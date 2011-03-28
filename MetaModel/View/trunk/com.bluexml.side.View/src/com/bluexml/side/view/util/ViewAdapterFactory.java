@@ -6,19 +6,58 @@
  */
 package com.bluexml.side.view.util;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.emf.ecore.EObject;
+
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
-
-import com.bluexml.side.view.*;
-
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
-import org.eclipse.emf.ecore.EObject;
+import com.bluexml.side.view.AbstractDataTable;
+import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.AbstractViewOf;
+import com.bluexml.side.view.ActionField;
+import com.bluexml.side.view.Actionable;
+import com.bluexml.side.view.BooleanField;
+import com.bluexml.side.view.Col;
+import com.bluexml.side.view.ComposedView;
+import com.bluexml.side.view.DataList;
+import com.bluexml.side.view.DataTable;
+import com.bluexml.side.view.DataTableElement;
+import com.bluexml.side.view.DateField;
+import com.bluexml.side.view.DateTimeField;
+import com.bluexml.side.view.Editable;
+import com.bluexml.side.view.EmailField;
+import com.bluexml.side.view.FacetMap;
+import com.bluexml.side.view.Field;
+import com.bluexml.side.view.FieldContainer;
+import com.bluexml.side.view.FieldElement;
+import com.bluexml.side.view.FieldGroup;
+import com.bluexml.side.view.FileField;
+import com.bluexml.side.view.Filterable;
+import com.bluexml.side.view.Filtering;
+import com.bluexml.side.view.FloatField;
+import com.bluexml.side.view.HtmlField;
+import com.bluexml.side.view.ImageField;
+import com.bluexml.side.view.IntegerField;
+import com.bluexml.side.view.Movable;
+import com.bluexml.side.view.Paginable;
+import com.bluexml.side.view.Paging;
+import com.bluexml.side.view.PasswordField;
+import com.bluexml.side.view.PhoneNumberField;
+import com.bluexml.side.view.SelectField;
+import com.bluexml.side.view.Sortable;
+import com.bluexml.side.view.Sorting;
+import com.bluexml.side.view.Stylable;
+import com.bluexml.side.view.Styling;
+import com.bluexml.side.view.TextField;
+import com.bluexml.side.view.TimeField;
+import com.bluexml.side.view.Tree;
+import com.bluexml.side.view.URLField;
+import com.bluexml.side.view.ViewCollection;
+import com.bluexml.side.view.ViewPackage;
 
 /**
  * <!-- begin-user-doc -->

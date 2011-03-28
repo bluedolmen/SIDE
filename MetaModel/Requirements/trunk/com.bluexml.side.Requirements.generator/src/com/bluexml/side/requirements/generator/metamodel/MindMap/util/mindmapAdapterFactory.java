@@ -6,14 +6,17 @@
  */
 package com.bluexml.side.requirements.generator.metamodel.MindMap.util;
 
-import com.bluexml.side.requirements.generator.metamodel.MindMap.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.requirements.generator.metamodel.MindMap.ArrowLink;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Map;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Maps;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.Node;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.NodePresentation;
+import com.bluexml.side.requirements.generator.metamodel.MindMap.mindmapPackage;
 
 /**
  * <!-- begin-user-doc -->

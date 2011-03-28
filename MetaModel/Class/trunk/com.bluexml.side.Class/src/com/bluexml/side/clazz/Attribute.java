@@ -6,9 +6,10 @@
  */
 package com.bluexml.side.clazz;
 
+import org.eclipse.emf.common.util.EList;
+
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.Visibility;
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
