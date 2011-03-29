@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Requirements Generator
 Bundle-SymbolicName: com.bluexml.side.Requirements.generator;singleton:=true
-Bundle-Version: 1.0.60.v20402-20100920
+Bundle-Version: 1.0.61.v24063-20110329
 Bundle-Activator: com.bluexml.side.requirements.generator.Activator
 Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
