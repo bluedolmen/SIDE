@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.feature" label="SIDE Core Components" version="1.0.261.v23905-20110317" provider-name="blueXML">
+<feature id="com.bluexml.side.Common.core.feature" label="SIDE Core Components" version="1.0.262.v24063-20110329" provider-name="blueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized
 frameworks like Alfresco. This feature gathers common tools for
 SIDE modelers.</description>
@@ -625,15 +625,15 @@ Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
 
                      END OF TERMS AND CONDITIONS</license>
-  <includes id="com.bluexml.side.Application.feature" version="1.0.156.v23623-20110311" />
-  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.109.v23866-20110315" />
-  <includes id="com.bluexml.side.Common.feature" version="1.0.36.v18663-20100622" />
-  <includes id="com.bluexml.side.Form.feature" version="1.0.124.v23623-20110311" />
-  <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.50.v21082-20101020" />
-  <includes id="com.bluexml.side.Requirements.feature" version="1.0.110.v20402-20100920" />
-  <includes id="com.bluexml.side.View.feature" version="1.0.70.v21451-20101103" />
-  <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.95.v23905-20110317" />
-  <includes id="com.bluexml.side.Util.feature" version="1.0.258.v22102-20101127" />
+  <includes id="com.bluexml.side.Application.feature" version="1.0.157.v24063-20110329" />
+  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.110.v24063-20110329" />
+  <includes id="com.bluexml.side.Common.feature" version="1.0.37.v24063-20110329" />
+  <includes id="com.bluexml.side.Form.feature" version="1.0.125.v24063-20110329" />
+  <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.51.v24063-20110329" />
+  <includes id="com.bluexml.side.Requirements.feature" version="1.0.111.v24063-20110329" />
+  <includes id="com.bluexml.side.View.feature" version="1.0.71.v24063-20110329" />
+  <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.96.v24063-20110329" />
+  <includes id="com.bluexml.side.Util.feature" version="1.0.259.v24063-20110329" />
   <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.39.v20372-20100918" />
   <plugin id="com.bluexml.side.Integration.standAlone" download-size="0" install-size="0" version="1.0.46.v20246-20100913" unpack="false" />
 </feature>
