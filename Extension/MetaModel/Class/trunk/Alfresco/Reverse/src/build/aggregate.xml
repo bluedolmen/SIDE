@@ -25,25 +25,17 @@
 		<delete file="${models.src.dir}/${model.dir}/${models}.xml" />
 	</target>
 	
-	<target name="aggregate_aspects">
-		<xslt basedir="${models.src.dir}/${model.dir}"
-			  includes="*.xml"
-			  excludes="allModels.xml,models.xml"
-			  style="${xsl.dir}/aggregate_properties.xsl"
-			  destdir="${temp.dir}"/>
-	</target>
-	
 	<target name="concat" description="Aggregate the Alfresco Models">
 		<concat destfile="${models.src.dir}/${model.dir}/${models}.xml" append="true" fixlastline="yes">
-			<fileset dir="${temp.dir}" 
-					 includes="*.html" excludes="allModels.html,models.html"/>
+			<fileset dir="${models.src.dir}/${model.dir}" 
+					 includes="*.xml" excludes="allModels.xml,models.xml"/>
 		</concat>
 	</target>
+	
 	
 	<target name="well_formation" depends="clean_models" description="Well form the aggregated models">
 		<echo message="&lt;models&gt;" file="${models.src.dir}/${model.dir}/${models}.xml" append="true"/>
 		
-		<antcall target="aggregate_aspects"/>
 		<antcall target="concat"/>
 		
 		<replace file="${models.src.dir}/${model.dir}/${models}.xml" token='&lt;?xml version="1.0" encoding="UTF-8"?&gt;' value=""/>
