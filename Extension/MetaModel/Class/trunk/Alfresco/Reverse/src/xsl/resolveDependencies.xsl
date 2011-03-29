@@ -61,8 +61,8 @@
 			</xsl:attribute>
 		</xsl:for-each>
 	</xsl:template>
-	
-	
+
+
 	<xsl:template name="construct_aspects">
 		<xsl:param name="index" />
 		<xsl:param name="items" />
@@ -98,8 +98,16 @@
 
 	<xsl:template match="attributes[contains(@name, '_')]/@name">
 		<xsl:for-each select="parent::node()">
-			<xsl:attribute name="name"
+			<xsl:variable name="newName"
 				select="substring-after(@name, concat(../@name,'_'))" />
+			<xsl:choose>
+				<xsl:when test="$newName != ''">
+					<xsl:attribute name="name" select="$newName" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="name" select="@name" />
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:for-each>
 	</xsl:template>
 
@@ -110,12 +118,11 @@
 
 	<xsl:template match="associationSet/@name">
 		<xsl:variable name="assonames"
-			select="my:getAssoNames(parent::node(),//classSet/@name | //aspectSet/@name)" />
+			select="my:getAssoNames(parent::node(), //classSet/@name | //aspectSet/@name)" />
 		<xsl:for-each select="parent::node()">
 			<xsl:attribute name="name" select="$assonames/@name" />
 		</xsl:for-each>
 	</xsl:template>
-
 
 
 	<xsl:function name="my:getAssoNames">

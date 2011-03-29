@@ -7,9 +7,13 @@
 	<xsl:template match="clazz:Model[./packageSet]">
 		<xsl:element name="clazz:Model">
 			<xsl:copy-of select="@*" />
-			<xsl:call-template name="copyPackages">
-				<xsl:with-param name="context" select="packageSet[1]" />
-			</xsl:call-template>
+			<xsl:for-each-group select="packageSet" group-by="@path">
+				<xsl:call-template name="copyPackages">
+					<xsl:with-param name="context" select="." />
+				</xsl:call-template>
+			</xsl:for-each-group>
+
+			<xsl:apply-templates select="*[name() != 'packageSet']" />
 		</xsl:element>
 	</xsl:template>
 
@@ -32,7 +36,7 @@
 	<xsl:template match="/">
 		<xsl:apply-templates select="child::node()" />
 	</xsl:template>
-	
+
 	<!-- standard copy template -->
 	<xsl:template match="@*|node()">
 		<xsl:copy>

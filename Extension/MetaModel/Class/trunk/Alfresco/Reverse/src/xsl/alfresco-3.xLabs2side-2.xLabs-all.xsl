@@ -109,24 +109,18 @@
 
 	<xsl:template match="d:type">
 		<xsl:param name="current_model" />
-
-
-
 		<classSet xmi:id="{math:random()}" documentation="{d:documentation/text()}"
 			description="{d:description/text()}" name="{substring-after(@name,':')}"
 			title="{normalize-space(d:title/text())}">
+
 			<xsl:call-template name="has_aspects">
 				<xsl:with-param name="current_model" select="$current_model" />
 			</xsl:call-template>
-			<xsl:apply-templates select="d:parent">
+
+			<xsl:call-template name="parent">
 				<xsl:with-param name="current_model" select="$current_model" />
-				<xsl:with-param name="type">
-					classSet
-				</xsl:with-param>
-			</xsl:apply-templates>
-
-			
-
+				<xsl:with-param name="type" select="'classSet'" />
+			</xsl:call-template>
 
 			<xsl:variable name="prefix" select="substring-before(@name,':')" />
 			<xsl:variable name="uri">
@@ -136,19 +130,27 @@
 			</xsl:variable>
 			<tags xmi:id="{math:random()}" key="reversedURI" value="{$uri}" />
 			<tags xmi:id="{math:random()}" key="prefix" value="{$prefix}" />
+
+			<!-- manage external ref as elements instead of attribute -->
+
+			<xsl:call-template name="parent_extra">
+				<xsl:with-param name="current_model" select="$current_model" />
+				<xsl:with-param name="type" select="'classSet'" />
+			</xsl:call-template>
+
+			<xsl:call-template name="has_aspects_extra">
+				<xsl:with-param name="current_model" select="$current_model" />
+			</xsl:call-template>
+
 			<xsl:apply-templates select="d:properties/d:property" />
 		</classSet>
 		<xsl:apply-templates
 			select="d:associations/d:child-association|d:associations/d:association">
 			<xsl:with-param name="current_model" select="$current_model" />
-			<xsl:with-param name="source_type">
-				classSet
-			</xsl:with-param>
+			<xsl:with-param name="source_type" select="'classSet'" />
 			<xsl:with-param name="source_position" select="position()-1"></xsl:with-param>
 		</xsl:apply-templates>
 	</xsl:template>
-
-
 
 
 	<xsl:template name="has_aspects">
@@ -162,13 +164,35 @@
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:choose>
-			<xsl:when test="count(d:mandatory-aspects/d:aspect) = count($toto)">
+			<xsl:when
+				test="count(d:mandatory-aspects/d:aspect) = count($toto//*[name() ='d:aspect'])">
 				<!-- use attribute -->
 				<xsl:attribute name="aspects">
 					<xsl:for-each select="d:mandatory-aspects/d:aspect">
 						<xsl:call-template name="add_aspects_attribute" />
 					</xsl:for-each>
 				</xsl:attribute>
+			</xsl:when>
+			<xsl:otherwise>
+
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="has_aspects_extra">
+		<xsl:param name="current_model" />
+		<xsl:variable name="toto">
+			<xsl:for-each select="d:mandatory-aspects/d:aspect">
+				<xsl:call-template name="my:isExternalAspect">
+					<xsl:with-param name="currentModel" select="$current_model" />
+					<xsl:with-param name="aspectName" select="normalize-space(text())" />
+				</xsl:call-template>
+			</xsl:for-each>
+		</xsl:variable>
+		<xsl:choose>
+			<xsl:when
+				test="count(d:mandatory-aspects/d:aspect) = count($toto//*[name() ='d:aspect'])">
+
 			</xsl:when>
 			<xsl:otherwise>
 				<!-- external -->
@@ -189,21 +213,25 @@
 			select="//d:model[@name=$currentModel]/d:aspects/d:aspect[@name=$aspectName]" />
 	</xsl:template>
 
-	<xsl:template match="d:parent">
+	<xsl:template name="parent">
 		<xsl:param name="current_model" />
 		<xsl:param name="type" />
-		<xsl:variable name="parent_name" select="normalize-space(text())" />
+		<xsl:variable name="parent_name" select="normalize-space(d:parent/text())" />
 
 		<xsl:for-each
 			select="//d:model[@name=$current_model]/d:types/d:type[@name=$parent_name]">
-			<xsl:variable name="position" select="count(preceding-sibling::*)" />
 			<xsl:attribute name="generalizations" select="$parent_name"></xsl:attribute>
 		</xsl:for-each>
 		<xsl:for-each
 			select="//d:model[@name=$current_model]/d:aspects/d:aspect[@name=$parent_name]">
-			<xsl:variable name="position" select="count(preceding-sibling::*)" />
 			<xsl:attribute name="generalizations" select="$parent_name"></xsl:attribute>
 		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template name="parent_extra">
+		<xsl:param name="current_model" />
+		<xsl:param name="type" />
+		<xsl:variable name="parent_name" select="normalize-space(d:parent/text())" />
 		<xsl:if
 			test="not(//d:model[@name=$current_model]/d:types/d:type[@name=$parent_name]) and not(//d:model[@name=$current_model]/d:aspects/d:aspect[@name=$parent_name])">
 			<xsl:call-template name="find_ext_ref_generalizations">
@@ -245,11 +273,12 @@
 		<aspectSet xmi:id="{math:random()}" name="{substring-after(@name,':')}"
 			title="{normalize-space(d:title/text())}" description="{d:description/text()}"
 			documentation="{d:documentation/text()}">
-			<xsl:apply-templates select="d:parent">
-				<xsl:with-param name="type">
-					aspectSet
-				</xsl:with-param>
-			</xsl:apply-templates>
+
+			<xsl:call-template name="parent">
+				<xsl:with-param name="current_model" select="$current_model" />
+				<xsl:with-param name="type" select="'classSet'" />
+			</xsl:call-template>
+
 			<xsl:variable name="prefix" select="substring-before(@name,':')" />
 			<xsl:variable name="uri">
 				<xsl:call-template name="get_uri">
@@ -258,6 +287,12 @@
 			</xsl:variable>
 			<tags xmi:id="{math:random()}" key="reversedURI" value="{$uri}" />
 			<tags xmi:id="{math:random()}" key="prefix" value="{$prefix}" />
+			
+			<xsl:call-template name="parent_extra">
+				<xsl:with-param name="current_model" select="$current_model" />
+				<xsl:with-param name="type" select="'classSet'" />
+			</xsl:call-template>
+			
 			<xsl:apply-templates select="d:properties/d:property" />
 		</aspectSet>
 		<xsl:apply-templates
