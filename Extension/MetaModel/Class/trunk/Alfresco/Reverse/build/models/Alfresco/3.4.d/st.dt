@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:my="http://bluexml.com"
+             xmlns:math="java:java.lang.Math"
+             xmi:version="2.0"
+             xmi:id="0.4036038286440997"
+             name="st"
+             namespace="http://www.alfresco.org/model/site/1.0">
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.9827901151928538"
+             documentation=""
+             description=""
+             name="site"
+             title="Site">
+         <tags xmi:id="0.07895496908963795" key="reversedURI"
+            value="http://www.alfresco.org/model/site/1.0"/>
+         <tags xmi:id="0.24592042348405185" key="prefix" value="st"/>
+         <generalizations xsi:type="clazz:Clazz" xmi:id="0.02920534324272872"
+                       href="cm.dt#0.15912493628385316"/>
+         <aspects xsi:type="clazz:Aspect" xmi:id="0.2859124526663065"
+               href="cm.dt#0.6508015603881048"/>
+         <attributes xmi:id="0.5288779336013364" name="sitePreset" visibility="Public"
+                  title="Site Preset"
+                  documentation=""
+                  typ="String"
+                  description="">
+            <tags xmi:id="0.07133535543475888" key="reversedURI"
+               value="http://www.alfresco.org/model/site/1.0"/>
+            <tags xmi:id="0.005518105950526375" key="prefix" value="st"/>
+         </attributes>
+         <attributes xmi:id="0.1360072600156207" name="siteVisibility" visibility="Public"
+                  title="Site Visibility"
+                  documentation=""
+                  typ="String"
+                  description="">
+            <tags xmi:id="0.32764026581268946" key="reversedURI"
+               value="http://www.alfresco.org/model/site/1.0"/>
+            <tags xmi:id="0.40807820264081685" key="prefix" value="st"/>
+         </attributes>
+      </classSet>
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.6840103403246088"
+             documentation=""
+             description=""
+             name="sites"
+             title="Sites"
+             aspects="">
+         <tags xmi:id="0.6675803058174099" key="reversedURI"
+            value="http://www.alfresco.org/model/site/1.0"/>
+         <tags xmi:id="0.796652761947513" key="prefix" value="st"/>
+         <generalizations xsi:type="clazz:Clazz" xmi:id="0.5990333644607528"
+                       href="cm.dt#0.15912493628385316"/>
+      </classSet>
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.9252919335173725"
+              name="siteContainer"
+              title="Site Container"
+              description=""
+              documentation="">
+         <tags xmi:id="0.7350589856800194" key="reversedURI"
+            value="http://www.alfresco.org/model/site/1.0"/>
+         <tags xmi:id="0.8780669787649735" key="prefix" value="st"/>
+         <attributes xmi:id="0.3375243303127362" name="componentId" visibility="Public"
+                  title="Component Id"
+                  documentation=""
+                  typ="String"
+                  description="">
+            <tags xmi:id="0.5081183446093361" key="reversedURI"
+               value="http://www.alfresco.org/model/site/1.0"/>
+            <tags xmi:id="0.8456423030407378" key="prefix" value="st"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.6169780534212714"
+              name="customSiteProperties"
+              title="Custom Site Properties"
+              description=""
+              documentation="">
+         <tags xmi:id="0.674952925780109" key="reversedURI"
+            value="http://www.alfresco.org/model/site/1.0"/>
+         <tags xmi:id="0.9256748733620478" key="prefix" value="st"/>
+         <attributes xmi:id="0.19458760716000734" name="additionalInformation" visibility="Public"
+                  title="Additional Site Information"
+                  documentation=""
+                  typ="String"
+                  description="">
+            <tags xmi:id="0.6382837962490632" key="reversedURI"
+               value="http://www.alfresco.org/model/sitecustomproperty/1.0"/>
+            <tags xmi:id="0.7881785991016438" key="prefix" value="stcp"/>
+         </attributes>
+      </aspectSet>
+   </clazz:Model>

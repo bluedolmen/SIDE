@@ -22,9 +22,9 @@
 	<import file="../../build.xml" />
 	
 	<target name="resolve" description="Resolve ids dependencies">
-			<xslt in="${export.dir}/${models}.dt"
+			<xslt in="${temp.dir}/${model.dir}/${models}.dt"
 				  style="${xsl.dir}/resolveDependencies.xsl"
-				  out="${export.dir}/${models}.xml"
+				  out="${temp.dir}/${model.dir}/${models}.xml"
 				  classpath="${saxon.dir}/saxon9.jar">
 			</xslt>
 		</target>
@@ -32,7 +32,7 @@
 
 	<target name="produce" description="Produce all the SIDE models">
 		<xslt classpath="${saxon.dir}/saxon9.jar"
-			  basedir = "${export.dir}"
+			  basedir = "${temp.dir}/${model.dir}"
 			  includes="${models}.xml"
 			  style="${xsl.dir}/decompose.xsl" 
 			  destdir="${export.dir}"/>	

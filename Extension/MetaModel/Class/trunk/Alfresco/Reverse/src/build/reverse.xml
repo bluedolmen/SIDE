@@ -28,9 +28,9 @@
 	</target>
 
 	<target name="reverse-all-2.0" description="Transform models.xml to global SIDE model">
-		<xslt in="${models.src.dir}/${model.dir}/${models}.xml"
+		<xslt in="${temp.dir}/${model.dir}/${models}.xml"
 			  style="${xsl.dir}/alfresco-3.xLabs2side-2.xLabs-all.xsl"
-			  out="${export.dir}/${models}.dt"
+			  out="${temp.dir}/${model.dir}/${models}.dt"
 			  classpath="${saxon.dir}/saxon9.jar"/>
 	</target>
 	

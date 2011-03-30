@@ -18,36 +18,30 @@
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <project name="aggregate" basedir="../.." default="well_formation">
-	
+
 	<import file="../../build.xml" />
-	
+
 	<target name="clean_models" description="Delete models to use append method">
 		<delete file="${models.src.dir}/${model.dir}/${models}.xml" />
 	</target>
-	
+
 	<target name="concat" description="Aggregate the Alfresco Models">
-		<concat destfile="${models.src.dir}/${model.dir}/${models}.xml" append="true" fixlastline="yes">
-			<fileset dir="${models.src.dir}/${model.dir}" 
-					 includes="*.xml" excludes="allModels.xml,models.xml"/>
+		<concat destfile="${temp.dir}/${model.dir}/${models}.xml" append="true" fixlastline="yes">
+			<fileset dir="${models.src.dir}/${model.dir}" includes="*.xml" excludes="allModels.xml,models.xml" />
 		</concat>
 	</target>
-	
-	
+
+
 	<target name="well_formation" depends="clean_models" description="Well form the aggregated models">
-		<echo message="&lt;models&gt;" file="${models.src.dir}/${model.dir}/${models}.xml" append="true"/>
+		<echo message="&lt;models&gt;" file="${temp.dir}/${model.dir}/${models}.xml" append="true" />
+		<replace includes="*.xml" excludes="allModels.xml,models.xml" dir="${models.src.dir}/${model.dir}" token='&lt;?xml version="1.0" encoding="UTF-8"?&gt;' value="" />
+		<replace includes="*.xml" excludes="allModels.xml,models.xml" dir="${models.src.dir}/${model.dir}" token="&lt;!DOCTYPE permissions &gt;" value="" />
+
+		<antcall target="concat" />
 		
-		<antcall target="concat"/>
-		
-		<replace file="${models.src.dir}/${model.dir}/${models}.xml" token='&lt;?xml version="1.0" encoding="UTF-8"?&gt;' value=""/>
-		<replace file="${models.src.dir}/${model.dir}/${models}.xml" token="&lt;?xml version='1.0' encoding='UTF-8'?&gt;" value=""/>
-		<replace file="${models.src.dir}/${model.dir}/${models}.xml" token="&lt;!DOCTYPE permissions &gt;" value=""/>
-		<replace file="${models.src.dir}/${model.dir}/${models}.xml" 
-				 token="&lt;models&gt;" 
-				 value='&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE permissions &gt;&lt;models&gt;'/>
-		
-		<echo message="&lt;/models&gt;" file="${models.src.dir}/${model.dir}/models.xml" append="true"/>
+		<echo message="&lt;/models&gt;" file="${temp.dir}/${model.dir}/models.xml" append="true" />
 	</target>
-	
-	
-	
+
+
+
 </project>

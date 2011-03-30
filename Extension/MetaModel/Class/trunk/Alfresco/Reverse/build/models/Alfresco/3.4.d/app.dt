@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:my="http://bluexml.com"
+             xmlns:math="java:java.lang.Math"
+             xmi:version="2.0"
+             xmi:id="0.43953076220117815"
+             name="app"
+             namespace="http://www.alfresco.org/model/application/1.0">
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.35982281944149086"
+             documentation=""
+             description=""
+             name="glossary"
+             title=""
+             aspects="">
+         <tags xmi:id="0.9628815749236268" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+         <tags xmi:id="0.047045212826648086" key="prefix" value="app"/>
+         <generalizations xsi:type="clazz:Clazz" xmi:id="0.007372262047031342"
+                       href="cm.dt#0.15912493628385316"/>
+      </classSet>
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.005513022830749836"
+             documentation=""
+             description=""
+             name="configurations"
+             title="Configurations"
+             aspects="">
+         <tags xmi:id="0.030226788281008665" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+         <tags xmi:id="0.48173039122368044" key="prefix" value="app"/>
+         <generalizations xsi:type="clazz:Clazz" xmi:id="0.5432365967015123"
+                       href="cm.dt#0.7496559006319495"/>
+      </classSet>
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.7332665957211506"
+             documentation=""
+             description=""
+             name="filelink"
+             title="File Link Object"
+             aspects="">
+         <tags xmi:id="0.5526493591811721" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+         <tags xmi:id="0.033625971595559356" key="prefix" value="app"/>
+         <generalizations xsi:type="clazz:Clazz" xmi:id="0.16041432401273015"
+                       href="cm.dt#0.9739539031473705"/>
+      </classSet>
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.41068556597356487"
+             documentation=""
+             description=""
+             name="folderlink"
+             title="Folder Link Object"
+             aspects="">
+         <tags xmi:id="0.5923356873292847" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+         <tags xmi:id="0.3142622232499386" key="prefix" value="app"/>
+         <generalizations xsi:type="clazz:Clazz" xmi:id="0.3249245461100837"
+                       href="cm.dt#0.9739539031473705"/>
+      </classSet>
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.03412230218803758"
+              name="uifacets"
+              title="UI Facets"
+              description=""
+              documentation="">
+         <tags xmi:id="0.6104750460676157" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+         <tags xmi:id="0.6038895859397654" key="prefix" value="app"/>
+         <generalizations xsi:type="clazz:Aspect" xmi:id="0.8899420271479298"
+                       href="cm.dt#0.6508015603881048"/>
+         <attributes xmi:id="0.414974046143757" name="icon" visibility="Public" title=""
+                  documentation=""
+                  typ="String"
+                  description="">
+            <tags xmi:id="0.8795121004906338" key="reversedURI"
+               value="http://www.alfresco.org/model/application/1.0"/>
+            <tags xmi:id="0.44209144123404176" key="prefix" value="app"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.5164065183661589"
+              name="inlineeditable"
+              title="Inline Editable"
+              description=""
+              documentation="">
+         <tags xmi:id="0.04055785660587119" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+         <tags xmi:id="0.15262928239342222" key="prefix" value="app"/>
+         <attributes xmi:id="0.7358270917116542" name="editInline" visibility="Public"
+                  title="Edit Inline"
+                  documentation=""
+                  typ="boolean"
+                  description="">
+            <tags xmi:id="0.04539588238440184" key="reversedURI"
+               value="http://www.alfresco.org/model/application/1.0"/>
+            <tags xmi:id="0.3863302385396409" key="prefix" value="app"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.1662952037017713"
+              name="workflow"
+              title="Workflow"
+              description=""
+              documentation="">
+         <tags xmi:id="0.988329458078739" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+         <tags xmi:id="0.9474161652916898" key="prefix" value="app"/>
+      </aspectSet>
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.21109778851869665"
+              name="simpleworkflow"
+              title=""
+              description=""
+              documentation=""
+              generalizations="0.1662952037017713">
+         <tags xmi:id="0.8144105151189452" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+         <tags xmi:id="0.3352886179796173" key="prefix" value="app"/>
+         <attributes xmi:id="0.18958103487590505" name="approveStep" visibility="Public" title=""
+                  documentation=""
+                  typ="String"
+                  description="">
+            <tags xmi:id="0.5279987903215917" key="reversedURI"
+               value="http://www.alfresco.org/model/application/1.0"/>
+            <tags xmi:id="0.25152791678223985" key="prefix" value="app"/>
+         </attributes>
+         <attributes xmi:id="0.5640116550443534" name="approveFolder" visibility="Public" title=""
+                  documentation=""
+                  typ="Object"
+                  description="">
+            <tags xmi:id="0.7337241287800993" key="reversedURI"
+               value="http://www.alfresco.org/model/application/1.0"/>
+            <tags xmi:id="0.01141780454250596" key="prefix" value="app"/>
+         </attributes>
+         <attributes xmi:id="0.7578188497868585" name="approveMove" visibility="Public" title=""
+                  documentation=""
+                  typ="boolean"
+                  description="">
+            <tags xmi:id="0.1867557448546865" key="reversedURI"
+               value="http://www.alfresco.org/model/application/1.0"/>
+            <tags xmi:id="0.40680784234233713" key="prefix" value="app"/>
+         </attributes>
+         <attributes xmi:id="0.5736285202010899" name="rejectStep" visibility="Public" title=""
+                  documentation=""
+                  typ="String"
+                  description="">
+            <tags xmi:id="0.9299038192555599" key="reversedURI"
+               value="http://www.alfresco.org/model/application/1.0"/>
+            <tags xmi:id="0.9411901467173976" key="prefix" value="app"/>
+         </attributes>
+         <attributes xmi:id="0.06956209466269414" name="rejectFolder" visibility="Public" title=""
+                  documentation=""
+                  typ="Object"
+                  description="">
+            <tags xmi:id="0.7248430294103911" key="reversedURI"
+               value="http://www.alfresco.org/model/application/1.0"/>
+            <tags xmi:id="0.6493592865410427" key="prefix" value="app"/>
+         </attributes>
+         <attributes xmi:id="0.7989501605267713" name="rejectMove" visibility="Public" title=""
+                  documentation=""
+                  typ="boolean"
+                  description="">
+            <tags xmi:id="0.8501075520162557" key="reversedURI"
+               value="http://www.alfresco.org/model/application/1.0"/>
+            <tags xmi:id="0.1164779203250379" key="prefix" value="app"/>
+         </attributes>
+      </aspectSet>
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.32465942967343564"
+              name="configurable"
+              title="Configurable"
+              description=""
+              documentation="">
+         <tags xmi:id="0.6775037559010934" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+         <tags xmi:id="0.7063875143271968" key="prefix" value="app"/>
+      </aspectSet>
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.8109961547513808"
+              name="feedsource"
+              title="Feed Source"
+              description=""
+              documentation="">
+         <tags xmi:id="0.10094259372438963" key="reversedURI"
+            value="http://www.alfresco.org/model/application/1.0"/>
+         <tags xmi:id="0.7430061285766981" key="prefix" value="app"/>
+         <attributes xmi:id="0.45001950188251283" name="template" visibility="Public"
+                  title="Feed Template"
+                  documentation=""
+                  typ="Object"
+                  description="">
+            <tags xmi:id="0.51772170829478" key="reversedURI"
+               value="http://www.alfresco.org/model/application/1.0"/>
+            <tags xmi:id="0.22935589899109665" key="prefix" value="app"/>
+         </attributes>
+      </aspectSet>
+      <associationSet xmi:id="0.3598311854022903" name="configurations" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+                xmi:id="0.10250555398781025"
+                name=""
+                title=""
+                cardMax="1"
+                linkedClass="0.32465942967343564"/>
+         <secondEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                 xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+                 xmi:id="0.5710601120408807"
+                 name=""
+                 title=""
+                 navigable="true"
+                 cardMax="1">
+            <linkedClass xmi:id="0.7345535225185961" xsi:type="clazz:Clazz"
+                      href="app.dt#0.005513022830749836"/>
+         </secondEnd>
+         <tags xmi:id="0.4564194161242978" key="simpleAssoName" value="true"/>
+      </associationSet>
+   </clazz:Model>

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:my="http://bluexml.com"
+             xmlns:math="java:java.lang.Math"
+             xmi:version="2.0"
+             xmi:id="0.20290157407393417"
+             name="cmis"
+             namespace="http://www.alfresco.org/model/cmis/1.0/cs01">
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.3539146670076512"
+             documentation=""
+             description=""
+             name="object"
+             title=""
+             aspects="">
+         <tags xmi:id="0.28770045208713124" key="reversedURI"
+            value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+         <tags xmi:id="0.5658605227296531" key="prefix" value="cmis"/>
+         <attributes xmi:id="0.40748805858159787" name="objectId" visibility="Public"
+                  title="Object Id"
+                  documentation=""
+                  typ="Object"
+                  description="The unique object id (a node ref)">
+            <tags xmi:id="0.20521112285793508" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.4632262452186642" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.7248832991109833" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.9509000408832858" name="objectTypeId" visibility="Public"
+                  title="Object Type Id"
+                  documentation=""
+                  typ="Object"
+                  description="Id of the object’s type">
+            <tags xmi:id="0.6961420798337318" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.6267980120442083" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.11599666785894747" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.7936451553205129" name="baseTypeId" visibility="Public"
+                  title="Base Type Id"
+                  documentation=""
+                  typ="Object"
+                  description="Id of the base object type for the object">
+            <tags xmi:id="0.9491652590211346" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.43194533793660894" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.6225686068705503" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.038980418607844625" name="createdBy" visibility="Public"
+                  title="Created by"
+                  documentation=""
+                  typ="String"
+                  description="The authority who created this object">
+            <tags xmi:id="0.393669576060798" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.9861745315467045" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.6302366356375219" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.03983995556216524" name="creationDate" visibility="Public"
+                  title="Creation Date"
+                  documentation=""
+                  typ="DateTime"
+                  description="The object creation date">
+            <tags xmi:id="0.4715926748455357" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.259310938859977" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.696562938348977" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.9668972362201124" name="lastModifiedBy" visibility="Public"
+                  title="Last Modified By"
+                  documentation=""
+                  typ="String"
+                  description="The authority who last modified this object">
+            <tags xmi:id="0.9607267081534064" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.6308382018093008" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.6479019875790012" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.8985130995439538" name="lastModificationDate" visibility="Public"
+                  title="Last Modified Date"
+                  documentation=""
+                  typ="DateTime"
+                  description="The date this object was last modified">
+            <tags xmi:id="0.12387263408715543" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.32370185015241715" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.10314530597255578" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.5379470008230138" name="changeToken" visibility="Public"
+                  title="Change token"
+                  documentation=""
+                  typ="String"
+                  description="Change Token">
+            <tags xmi:id="0.5140739122688559" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.28942658731869164" key="prefix" value="cmis"/>
+         </attributes>
+      </classSet>
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.7492028084032537"
+             documentation=""
+             description=""
+             name="filesystemobject"
+             title=""
+             aspects=""
+             generalizations="0.3539146670076512">
+         <tags xmi:id="0.30871617895387093" key="reversedURI"
+            value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+         <tags xmi:id="0.5444803914770707" key="prefix" value="cmis"/>
+         <attributes xmi:id="0.8330304772123215" name="name" visibility="Public" title="Name"
+                  documentation=""
+                  typ="String"
+                  description="Name">
+            <tags xmi:id="0.1745258219685718" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.6307458355378607" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.865963900731282" key="propertySearched" value="True"/>
+         </attributes>
+      </classSet>
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.8961011895346659"
+             documentation=""
+             description="Document Type"
+             name="document"
+             title="Document"
+             aspects=""
+             generalizations="0.7492028084032537">
+         <tags xmi:id="0.7046717616853593" key="reversedURI"
+            value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+         <tags xmi:id="0.6379607895005626" key="prefix" value="cmis"/>
+         <attributes xmi:id="0.18642723271903228" name="isImmutable" visibility="Public"
+                  title="Is Immutable"
+                  documentation=""
+                  typ="boolean"
+                  description="Is the document immutable?">
+            <tags xmi:id="0.45253243668438026" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.47785633399041705" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.46222710254613586" name="isLatestVersion" visibility="Public"
+                  title="Is Latest Version"
+                  documentation=""
+                  typ="boolean"
+                  description="Is this the latest version of the document?">
+            <tags xmi:id="0.4128182144542384" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.9138022290710456" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.9486338427656006" name="isMajorVersion" visibility="Public"
+                  title="Is Major Version"
+                  documentation=""
+                  typ="boolean"
+                  description="Is this a major version of the document?">
+            <tags xmi:id="0.4790600426457382" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.9001815276386996" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.7893063823641578" name="isLatestMajorVersion" visibility="Public"
+                  title="Is Latest Major Version"
+                  documentation=""
+                  typ="boolean"
+                  description="Is this the latest major version of the document?">
+            <tags xmi:id="0.11429209758246384" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.5872722861098661" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.15165048618716226" name="versionLabel" visibility="Public"
+                  title="Version Label"
+                  documentation=""
+                  typ="String"
+                  description="The version label">
+            <tags xmi:id="0.10214418255593816" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.021243008198171265" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.6777442582720218" name="versionSeriesId" visibility="Public"
+                  title="Version series id"
+                  documentation=""
+                  typ="Object"
+                  description="The version series id">
+            <tags xmi:id="0.5291019617923503" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.22188588345881521" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.5276361285610307" name="isVersionSeriesCheckedOut"
+                  visibility="Public"
+                  title="Is Version Series Checked Out"
+                  documentation=""
+                  typ="boolean"
+                  description="Is the version series checked out?">
+            <tags xmi:id="0.9357565462819363" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.4062675221515796" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.8432339999040351" name="versionSeriesCheckedOutBy"
+                  visibility="Public"
+                  title="Version Series Checked Out By"
+                  documentation=""
+                  typ="String"
+                  description="The authority who checked out this document version series">
+            <tags xmi:id="0.8736169243462282" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.5168315356045039" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.7244142347774958" name="versionSeriesCheckedOutId"
+                  visibility="Public"
+                  title="Version Series Checked Out Id"
+                  documentation=""
+                  typ="Object"
+                  description="The checked out version series id">
+            <tags xmi:id="0.8131240907064636" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.34209730096778024" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.43778994051047293" name="checkinComment" visibility="Public"
+                  title="Checkin Comment"
+                  documentation=""
+                  typ="String"
+                  description="The checkin comment">
+            <tags xmi:id="0.09527937296283817" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.38869260525564053" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.180601200665492" name="contentStreamLength" visibility="Public"
+                  title="Content Stream Length"
+                  documentation=""
+                  typ="long"
+                  description="The length of the content stream">
+            <tags xmi:id="0.23273502101663313" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.4367624427073228" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.29467267463998426" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.9986932897794978" name="contentStreamMimeType" visibility="Public"
+                  title="Content Stream MIME Type"
+                  documentation=""
+                  typ="String"
+                  description="The content stream MIME type">
+            <tags xmi:id="0.037935790903875" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.6239498962839932" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.6411615849634187" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.05569407461254561" name="contentStreamFileName" visibility="Public"
+                  title="Content Stream Filename"
+                  documentation=""
+                  typ="String"
+                  description="The content stream filename">
+            <tags xmi:id="0.2900876370939337" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.7913664554431332" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.3613362259832156" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.20983010203342445" name="contentStreamId" visibility="Public"
+                  title="Content Stream Id"
+                  documentation=""
+                  typ="Object"
+                  description="Id of the stream">
+            <tags xmi:id="0.1491872614158446" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.731918751139637" key="prefix" value="cmis"/>
+         </attributes>
+      </classSet>
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.3335757329367697"
+             documentation=""
+             description="Folder Type"
+             name="folder"
+             title="Folder"
+             aspects=""
+             generalizations="0.7492028084032537">
+         <tags xmi:id="0.8126632936996429" key="reversedURI"
+            value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+         <tags xmi:id="0.0902659202228333" key="prefix" value="cmis"/>
+         <attributes xmi:id="0.30381640918915465" name="parentId" visibility="Public"
+                  title="Parent Id"
+                  documentation=""
+                  typ="Object"
+                  description="The parent id of the folder">
+            <tags xmi:id="0.7635834907066353" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.5015888112643555" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.8474836301675773" key="propertySearched" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.8788262741822328" name="path" visibility="Public" title="Path"
+                  documentation=""
+                  typ="String"
+                  description="The fully qualified path to this folder/description">
+            <tags xmi:id="0.7194831406579875" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.6683858114548881" key="prefix" value="cmis"/>
+         </attributes>
+         <attributes xmi:id="0.039593887540279704" name="allowedChildObjectTypeIds"
+                  visibility="Public"
+                  title="Allowed Child Object Types Ids"
+                  documentation=""
+                  typ="Object"
+                  description="The allowed child object type ids">
+            <tags xmi:id="0.6435358560118934" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.9364965477740509" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.36325129106674126" key="multiple" value="True"/>
+         </attributes>
+      </classSet>
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.35754714980311075"
+             documentation=""
+             description="Relationship Type"
+             name="relationship"
+             title="Relationship"
+             aspects=""
+             generalizations="0.7492028084032537">
+         <tags xmi:id="0.9998724833125486" key="reversedURI"
+            value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+         <tags xmi:id="0.1376938076539097" key="prefix" value="cmis"/>
+         <attributes xmi:id="0.5314421098648279" name="sourceId" visibility="Public"
+                  title="Source Id"
+                  documentation=""
+                  typ="Object"
+                  description="The source id for the relationship">
+            <tags xmi:id="0.1530083942469167" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.4019444003157574" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.15343914564523253" key="required" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.7735958085471607" name="targetId" visibility="Public"
+                  title="Target Id"
+                  documentation=""
+                  typ="Object"
+                  description="The target id for the relationship">
+            <tags xmi:id="0.6308222269641491" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.7133413832752696" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.06453807975760606" key="required" value="True"/>
+         </attributes>
+      </classSet>
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.27099607053211594"
+             documentation=""
+             description="Policy Type"
+             name="policy"
+             title="Policy"
+             aspects=""
+             generalizations="0.3539146670076512">
+         <tags xmi:id="0.6189671926921398" key="reversedURI"
+            value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+         <tags xmi:id="0.5723514010900244" key="prefix" value="cmis"/>
+         <attributes xmi:id="0.4427256408421322" name="policyText" visibility="Public"
+                  title="Policy Text"
+                  documentation=""
+                  typ="String"
+                  description="The policy text">
+            <tags xmi:id="0.12349401271008464" key="reversedURI"
+               value="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+            <tags xmi:id="0.06629764241701175" key="prefix" value="cmis"/>
+            <metainfo xmi:id="0.31212176647731893" key="required" value="True"/>
+         </attributes>
+      </classSet>
+      <enumerationSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                   xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+                   xmi:id="996456.6263324879"
+                   name="allowedValuesForContentStreamAllowed">
+         <literals xmi:id="794988.328705641" name="notallowed"/>
+         <literals xmi:id="184668.74347708805" name="allowed"/>
+         <literals xmi:id="397533.5909242543" name="required"/>
+      </enumerationSet>
+   </clazz:Model>
