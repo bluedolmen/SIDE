@@ -34,8 +34,8 @@
 
 	<target name="well_formation" depends="clean_models" description="Well form the aggregated models">
 		<echo message="&lt;models&gt;" file="${temp.dir}/${model.dir}/${models}.xml" append="true" />
-		<replace includes="*.xml" excludes="allModels.xml,models.xml" dir="${models.src.dir}/${model.dir}" token='&lt;?xml version="1.0" encoding="UTF-8"?&gt;' value="" />
-		<replace includes="*.xml" excludes="allModels.xml,models.xml" dir="${models.src.dir}/${model.dir}" token="&lt;!DOCTYPE permissions &gt;" value="" />
+		<replace summary="true" includes="*.xml" excludes="allModels.xml,models.xml" dir="${models.src.dir}/${model.dir}" token='&lt;?xml version="1.0" encoding="UTF-8"?&gt;' value="" />
+		<replace summary="true" includes="*.xml" excludes="allModels.xml,models.xml" dir="${models.src.dir}/${model.dir}" token="&lt;!DOCTYPE permissions &gt;" value="" />
 
 		<antcall target="concat" />
 		
