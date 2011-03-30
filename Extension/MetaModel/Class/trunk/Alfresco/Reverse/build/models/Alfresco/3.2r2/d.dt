@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<clazz:Model xmlns:math="java:java.lang.Math" xmlns:clazz="http://www.kerblue.org/class/1.0"
-             xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<clazz:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:xmi="http://www.omg.org/XMI"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:my="http://bluexml.com"
+             xmlns:math="java:java.lang.Math"
              xmi:version="2.0"
-             xmi:id="0.9704633670557649"
-             name="d"/>
+             xmi:id="0.9635406660159201"
+             name="d"
+             namespace="http://www.alfresco.org/model/dictionary/1.0"/>

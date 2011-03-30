@@ -31,7 +31,7 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
     <bean id="<%getModuleIdService(name)%>.dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="SIDEdictionaryBootstrap">
         <property name="models">
             <list>
-                <value><%getModulePath()%>/model/model.xml</value>
+                <value><%getModulePath()%>/model/<%name%>Model.xml</value>
             </list>
         </property>
 		<property name="labels">

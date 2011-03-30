@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xmi="http://www.omg.org/XMI"
-	xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:my="http://bluexml.com">
+	xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:my="http://bluexml.com"
+	xmlns:math="java:java.lang.Math">
 
 	<xsl:output method="xml" encoding="UTF-8" indent="yes" />
 
@@ -116,12 +117,19 @@
 	</xsl:template>
 
 
-	<xsl:template match="associationSet/@name">
+	<xsl:template match="associationSet">
 		<xsl:variable name="assonames"
-			select="my:getAssoNames(parent::node(), //classSet/@name | //aspectSet/@name)" />
-		<xsl:for-each select="parent::node()">
+			select="my:getAssoNames(., //classSet | //aspectSet)" />
+		<xsl:element name="{name()}">
+			<xsl:apply-templates select="@*" />
 			<xsl:attribute name="name" select="$assonames/@name" />
-		</xsl:for-each>
+			<xsl:apply-templates select="*" />
+			<xsl:if test="$assonames/@source = '' or $assonames/@target = ''">
+				<tags xmi:id="{math:random()}" key="simpleAssoName" value="true" />
+			</xsl:if>
+			<!--			<xsl:copy-of select="$assonames" />-->
+		</xsl:element>
+
 	</xsl:template>
 
 
@@ -132,8 +140,9 @@
 		<xsl:variable name="source">
 			<xsl:for-each select="$context">
 				<xsl:choose>
-					<xsl:when test="starts-with($asso/@name, .)">
-						<xsl:value-of select="." />
+					<xsl:when
+						test="starts-with($asso/@name, @name) and contains($asso/@name, '_')">
+						<xsl:value-of select="@name" />
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="''" />
@@ -144,8 +153,9 @@
 		<xsl:variable name="target">
 			<xsl:for-each select="$context">
 				<xsl:choose>
-					<xsl:when test="ends-with($asso/@name, .)">
-						<xsl:value-of select="." />
+					<xsl:when
+						test="ends-with($asso/@name, @name) and contains($asso/@name, '_')">
+						<xsl:value-of select="@name" />
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="''" />
@@ -177,7 +187,7 @@
 			</xsl:choose>
 		</xsl:variable>
 
-		<names name="{$assoName}" source="{$source/text()}" target="{$target/text()}" />
+		<names name="{$assoName}" source="{$source}" target="{$target}" />
 
 	</xsl:function>
 

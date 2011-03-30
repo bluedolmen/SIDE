@@ -30,7 +30,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 
 <%script type="clazz.Model" name="validatedFilename"%>
-<%if (eContainer() == null) {%><%getConfModulePath()%>/model/model.xml<%}%>
+<%if (eContainer() == null) {%><%getConfModulePath()%>/model/<%name%>Model.xml<%}%>
 <%script type="clazz.Model" name="generator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='iso-8859-1'?>
 

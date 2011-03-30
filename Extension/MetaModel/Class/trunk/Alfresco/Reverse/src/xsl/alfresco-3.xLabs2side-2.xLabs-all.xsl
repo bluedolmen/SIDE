@@ -287,12 +287,12 @@
 			</xsl:variable>
 			<tags xmi:id="{math:random()}" key="reversedURI" value="{$uri}" />
 			<tags xmi:id="{math:random()}" key="prefix" value="{$prefix}" />
-			
+
 			<xsl:call-template name="parent_extra">
 				<xsl:with-param name="current_model" select="$current_model" />
 				<xsl:with-param name="type" select="'classSet'" />
 			</xsl:call-template>
-			
+
 			<xsl:apply-templates select="d:properties/d:property" />
 		</aspectSet>
 		<xsl:apply-templates
@@ -332,6 +332,12 @@
 			<xsl:attribute name="description"
 				select="normalize-space(d:description/text())" />
 			<xsl:attribute name="valueList" select="normalize-space($value_list)" />
+
+			<xsl:if test="./d:default and normalize-space(./d:default/text()) != ''">
+				<xsl:attribute name="initialValue"
+					select="normalize-space(./d:default/text())" />
+			</xsl:if>
+
 			<tags xmi:id="{math:random()}" key="reversedURI" value="{$uri}" />
 			<tags xmi:id="{math:random()}" key="prefix" value="{$prefix}" />
 			<xsl:if
@@ -342,6 +348,29 @@
 				<metainfo xmi:id="{math:random()}" key="propertySearched"
 					value="True" />
 			</xsl:if>
+			<xsl:if
+				test="./d:multiple and normalize-space(./d:multiple/text()) = 'true'">
+				<metainfo xmi:id="{math:random()}" key="multiple" value="True" />
+			</xsl:if>
+
+			<!-- contraints -->
+			<xsl:for-each select="d:constraints/d:constraint">
+				<xsl:choose>
+					<xsl:when test="@type = 'LENGTH'">
+						<metainfo xmi:id="{math:random()}" key="min-length"
+							value="{normalize-space(parameter[@name='minLength']/value/text())}" />
+						<metainfo xmi:id="{math:random()}" key="max-length"
+							value="{normalize-space(parameter[@name='maxLength']/value/text())}" />
+					</xsl:when>
+					<xsl:when test="@type = 'REGEX'">
+						<metainfo xmi:id="{math:random()}" key="regular-expression"
+							value="{normalize-space(parameter[@name='expression']/value/text())}" />
+					</xsl:when>
+					<xsl:when test="ends-with(@ref, 'constraint:mail')">
+						<metainfo xmi:id="{math:random()}" key="email" value="true" />
+					</xsl:when>
+				</xsl:choose>
+			</xsl:for-each>
 		</xsl:element>
 
 	</xsl:template>

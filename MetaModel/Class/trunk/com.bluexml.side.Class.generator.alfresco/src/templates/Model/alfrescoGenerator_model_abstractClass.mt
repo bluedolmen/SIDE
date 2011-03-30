@@ -30,13 +30,9 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<title><%title%></title>
 			<%}%>
 			<%if (description != null){%>
-			<description> <% description %> </description>
-			<%}%>
-			<%if (generalizations.nSize()>0){%>
-			
-			<!-- Generalization -->
-			<%}%>
-			
+			<description><%description%></description>
+			<%}%>					
+			<!-- Generalization -->						
 			<%for (generalizations.nSort("name")){%>
 			    <%if (i() > 0){%>
 			<!-- <parent><%getPrefixedQName()%></parent> -->
@@ -44,29 +40,23 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
             <parent><%getPrefixedQName()%></parent>			    
 			    <%}%>
 			<%}%>
-			<%if (generalizations.nSize() == 0){%>
+			<%if (generalizations.nSize() == 0 && !isReversed()){%>
 				<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0){%>
 			<parent>cm:folder</parent>
 			 	<%}else{%>
 			<parent>bxcm:content</parent>
 				<%}%>
-			<%}else{%>
-				<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0){%>
-			<!-- <parent>cm:folder</parent> -->
-				<%}%>
 			<%}%>
-			
 			<%if (attributes.nSize() > 0){%>
-
 			<!-- Properties -->
 			<properties>
 				<%for (getSortedAttibutes()){%>
 				<property name="<%getPrefixedQName()%>">
 					<%if (title != null) {%>
-					<title> <%title%> </title>
+					<title><%title%></title>
 					<%}%>
 					<%if (description != null) {%>
-					<description> <%description%> </description>
+					<description><%description%></description>
 					<%}%>
 					<type><%getPropertyType()%></type>
 					<%if (metainfo[key.equalsIgnoreCase("required")].nSize()>0){%>
@@ -118,13 +108,10 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 				<%}%>
 			</properties>
 			<%}%>
-
-
 			<!-- Associations -->
 			<associations>
 			<%for (getSourceAssociationEnds()){%>
-				<<%eContainer().getAssociationType()%> name="<%eContainer().getPrefixedAssociationQName(current("AssociationEnd"))%>">							
-
+				<<%eContainer().getAssociationType()%> name="<%eContainer().getPrefixedAssociationQName(current("AssociationEnd"))%>">
 					<title><%getRoleOrTitleFromSource()%></title>
 					<source>
 						<mandatory><%if (isMandatory()){%>true<%}else{%>false<%}%></mandatory>
@@ -132,7 +119,6 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 						<%if (name != null && name != ""){%>
 						<role><%name%></role>
 						<%}%>
-						
 					</source>
 					<target>
 						<class><%getOpposite().linkedClass.getPrefixedQName()%></class>

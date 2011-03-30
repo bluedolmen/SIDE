@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<clazz:Model xmlns:math="java:java.lang.Math" xmlns:clazz="http://www.kerblue.org/class/1.0"
-             xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<clazz:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:xmi="http://www.omg.org/XMI"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:my="http://bluexml.com"
+             xmlns:math="java:java.lang.Math"
              xmi:version="2.0"
-             xmi:id="0.3716742947797701"
-             name="emailserver">
-      <aspectSet xmi:id="0.8676814152051868" name="emailed" title="Emailed" description=""
+             xmi:id="0.14490553032743414"
+             name="emailserver"
+             namespace="http://www.alfresco.org/model/emailserver/1.0">
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.07101847722186039"
+              name="emailed"
+              title="Emailed"
+              description=""
               documentation="">
-         <tags xmi:id="0.14474857015607523" key="reversedURI"
+         <tags xmi:id="0.9294222901653871" key="reversedURI"
             value="http://www.alfresco.org/model/emailserver/1.0"/>
-         <tags xmi:id="0.7318028591225434" key="prefix" value="emailserver"/>
+         <tags xmi:id="0.7531587868582271" key="prefix" value="emailserver"/>
+         <generalizations xsi:type="clazz:Aspect" xmi:id="0.4282766790558665"
+                       href="cm.dt#0.4253162989855517"/>
       </aspectSet>
-      <aspectSet xmi:id="0.6630445355894279" name="aliasable" title="Email Alias" description=""
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.4645471180326014"
+              name="aliasable"
+              title="Email Alias"
+              description=""
               documentation="">
-         <tags xmi:id="0.13054357061728306" key="reversedURI"
+         <tags xmi:id="0.42056588994999833" key="reversedURI"
             value="http://www.alfresco.org/model/emailserver/1.0"/>
-         <tags xmi:id="0.8137434175316791" key="prefix" value="emailserver"/>
-         <attributes xmi:id="0.010216517773230294" name="alias" title="Alias" visibility="Public"
+         <tags xmi:id="0.20665220540394147" key="prefix" value="emailserver"/>
+         <attributes xmi:id="0.8517303648990086" name="alias" visibility="Public" title="Alias"
+                  documentation=""
                   typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.3945053817728411" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.8390674121405847" key="reversedURI"
                value="http://www.alfresco.org/model/emailserver/1.0"/>
-            <tags xmi:id="0.08597268526959734" key="prefix" value="emailserver"/>
+            <tags xmi:id="0.8836628105749291" key="prefix" value="emailserver"/>
          </attributes>
       </aspectSet>
    </clazz:Model>

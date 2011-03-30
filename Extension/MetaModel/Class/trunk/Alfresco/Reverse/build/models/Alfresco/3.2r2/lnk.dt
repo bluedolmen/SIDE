@@ -1,60 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<clazz:Model xmlns:math="java:java.lang.Math" xmlns:clazz="http://www.kerblue.org/class/1.0"
-             xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<clazz:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:xmi="http://www.omg.org/XMI"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:my="http://bluexml.com"
+             xmlns:math="java:java.lang.Math"
              xmi:version="2.0"
-             xmi:id="0.29518139377349195"
-             name="lnk">
-      <classSet xmi:id="0.8384087176679177" documentation="" description="" name="link"
+             xmi:id="0.2968016630319721"
+             name="lnk"
+             namespace="http://www.alfresco.org/model/linksmodel/1.0">
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.5563040490777901"
+             documentation=""
+             description=""
+             name="link"
              title=""
              aspects="">
-         <generalizations xmi:id="0.6573336462024665" href="cm.dt#//@classSet.2"/>
-         <tags xmi:id="0.676023317474784" key="reversedURI"
+         <tags xmi:id="0.5919260741463875" key="reversedURI"
             value="http://www.alfresco.org/model/linksmodel/1.0"/>
-         <tags xmi:id="0.22787820141864668" key="prefix" value="lnk"/>
-         <attributes xmi:id="0.6650420272106453" name="title" title="Link Title" visibility="Public"
+         <tags xmi:id="0.9480083578819825" key="prefix" value="lnk"/>
+         <generalizations xsi:type="clazz:Clazz" xmi:id="0.1739242251688604"
+                       href="cm.dt#0.7393328283048377"/>
+         <attributes xmi:id="0.2265010115130628" name="title" visibility="Public" title="Link Title"
+                  documentation=""
                   typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.7230788313755403" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.568829722692852" key="reversedURI"
                value="http://www.alfresco.org/model/linksmodel/1.0"/>
-            <tags xmi:id="0.019842263763197532" key="prefix" value="lnk"/>
+            <tags xmi:id="0.8674320816275806" key="prefix" value="lnk"/>
          </attributes>
-         <attributes xmi:id="0.379243419354128" name="url" title="Link URL" visibility="Public"
+         <attributes xmi:id="0.8885004871230071" name="url" visibility="Public" title="Link URL"
+                  documentation=""
                   typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.5363846034388003" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.32595836480283724" key="reversedURI"
                value="http://www.alfresco.org/model/linksmodel/1.0"/>
-            <tags xmi:id="0.7529689405681582" key="prefix" value="lnk"/>
+            <tags xmi:id="0.8752372789185938" key="prefix" value="lnk"/>
          </attributes>
-         <attributes xmi:id="0.8991741350456358" name="description" title="Link Description"
-                  visibility="Public"
+         <attributes xmi:id="0.09924206040039596" name="description" visibility="Public"
+                  title="Link Description"
+                  documentation=""
                   typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.4744429450889389" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.6619136609369133" key="reversedURI"
                value="http://www.alfresco.org/model/linksmodel/1.0"/>
-            <tags xmi:id="0.8529397663119173" key="prefix" value="lnk"/>
+            <tags xmi:id="0.5962065638902138" key="prefix" value="lnk"/>
          </attributes>
       </classSet>
-      <aspectSet xmi:id="0.1927403244823016" name="internal" title="Internal Link"
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.5911096764488436"
+              name="internal"
+              title="Internal Link"
               description=""
               documentation="">
-         <tags xmi:id="0.5103206535887497" key="reversedURI"
+         <tags xmi:id="0.7201769391932249" key="reversedURI"
             value="http://www.alfresco.org/model/linksmodel/1.0"/>
-         <tags xmi:id="0.19859400678166939" key="prefix" value="lnk"/>
-         <attributes xmi:id="0.09613399088944652" name="isInternal" title="Is Internal"
-                  visibility="Public"
+         <tags xmi:id="0.09050706728794866" key="prefix" value="lnk"/>
+         <attributes xmi:id="0.3581068621595215" name="isInternal" visibility="Public"
+                  title="Is Internal"
+                  documentation=""
                   typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.25579137463934665" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.3203300421557741" key="reversedURI"
                value="http://www.alfresco.org/model/linksmodel/1.0"/>
-            <tags xmi:id="0.14833111467296511" key="prefix" value="lnk"/>
+            <tags xmi:id="0.8390403536485189" key="prefix" value="lnk"/>
+            <metainfo xmi:id="0.049905310405101266" key="required" value="True"/>
          </attributes>
       </aspectSet>
    </clazz:Model>

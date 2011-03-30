@@ -36,6 +36,7 @@ import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.clazz.service.alfresco.AssociationServices;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.Package;
@@ -321,13 +322,12 @@ public class FormGeneratorsManager {
 	 *            the class being used as the source for the association
 	 * @return
 	 */
-	public String getAssoQualifiedName(Association asso, AbstractClass classAsSource) {
-		StringBuffer res = new StringBuffer(128);
+	public String getAssoQualifiedName(Association asso, AbstractClass classAsSource) {		
 		// ** #979, #1273
 		AssociationEnd srcEnd = (AssociationEnd) getRealObject(asso.getFirstEnd());
 		AssociationEnd targetEnd = (AssociationEnd) getRealObject(srcEnd.getOpposite());
 		// @Amenel: not sure whether linked classes may be proxies but getRealObject won't hurt
-		AbstractClass srcClass = (AbstractClass) getRealObject(srcEnd.getLinkedClass());
+		
 		AbstractClass targetClass = (AbstractClass) getRealObject(targetEnd.getLinkedClass());
 		// ** #979, #1273
 
@@ -335,25 +335,12 @@ public class FormGeneratorsManager {
 		boolean doublenav = srcEnd.isNavigable() && targetEnd.isNavigable();
 
 		if (doublenav && (classAsSource.equals(targetClass))) {
-			AbstractClass tempClass = targetClass;
-			targetClass = srcClass;
-			srcClass = tempClass;
+			AssociationEnd tempClass = targetEnd;
+			targetEnd = srcEnd;
+			srcEnd = tempClass;
 		}
-		// definition in Acceleo template used for writing this function
-		// <%args(0).linkedClass.getQualifiedName()%>_<%name%><%if
-		// (args(0).getOpposite().name !=
-		// ""){%>_<%args(0).getOpposite().name%><%}%>_<%args(0).getOpposite().linkedClass.getQualifiedName()%>
-		res.append(getClassQualifiedName(srcClass));
-		res.append("_");
-		res.append(asso.getName());
-		if (targetEnd.getName() != "") {
-			res.append("_");
-			res.append(targetEnd.getName());
-		}
-		res.append("_");
-		res.append(getClassQualifiedName(targetClass));
-
-		return res.toString();
+		// use the AssociationService as all other alfresco generator
+		return AssociationServices.getAssociationQName(asso, srcEnd);
 	}
 
 	/**

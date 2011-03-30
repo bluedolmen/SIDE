@@ -31,17 +31,7 @@ public class CommonServices {
 		}
 	}
 
-	public static boolean isNativeModel(ModelElement element) {		
-		List<Tag> ts = element.getTags();
-		for (Tag tag : ts) {
-			String key = tag.getKey();
-			String value = tag.getValue();
-			if (key.contains("reversed") && value.contains("alfresco")) {
-				return true;
-			}
-		}
-		return false;
-	}
+	
 	
 	public static String getPrefixFromTag(ModelElement element) {		
 		List<Tag> ts = element.getTags();
@@ -54,6 +44,20 @@ public class CommonServices {
 		}
 		return "";
 	}
+	
+	public static boolean isNativeModel(ModelElement element) {		
+		List<Tag> ts = element.getTags();
+		for (Tag tag : ts) {
+			String key = tag.getKey();
+			String value = tag.getValue();
+			if (key.contains("reversedURI") && value.contains("alfresco")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 	
 	public static String getNsURIFromTag(ModelElement element) {		
 		List<Tag> ts = element.getTags();
@@ -71,7 +75,7 @@ public class CommonServices {
 		List<Tag> ts = element.getTags();
 		for (Tag tag : ts) {
 			String key = tag.getKey();
-			if (key.contains("reversed")) {
+			if (key.contains("reversedURI")) {
 				return true;
 			}
 		}
@@ -95,6 +99,7 @@ public class CommonServices {
 			// ensure retro compatibility
 			prefix = ((ClassPackage) root).getName();
 		} else {
+//			prefix="Missing_RootPackage";
 			throw new Exception("Missing RootPackage object !!");
 		}
 

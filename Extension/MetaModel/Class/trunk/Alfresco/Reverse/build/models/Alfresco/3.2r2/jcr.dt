@@ -1,159 +1,235 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<clazz:Model xmlns:math="java:java.lang.Math" xmlns:clazz="http://www.kerblue.org/class/1.0"
-             xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<clazz:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:xmi="http://www.omg.org/XMI"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmlns:clazz="http://www.kerblue.org/class/1.0"
+             xmlns:my="http://bluexml.com"
+             xmlns:math="java:java.lang.Math"
              xmi:version="2.0"
-             xmi:id="0.3801137758074552"
-             name="jcr">
-      <classSet xmi:id="0.0991773923862399" documentation="" description="" name="base"
+             xmi:id="0.20816126644480948"
+             name="jcr"
+             namespace="http://www.jcp.org/jcr/1.0">
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.495510193878291"
+             documentation=""
+             description=""
+             name="base"
              title=""
              aspects="">
-         <generalizations xmi:id="0.16766751874330743" href="sys.dt#//@classSet.0"/>
-         <tags xmi:id="0.5693171560127854" key="reversedURI"
+         <tags xmi:id="0.726725269893653" key="reversedURI"
             value="http://www.jcp.org/jcr/nt/1.0"/>
-         <tags xmi:id="0.4359307638572528" key="prefix" value="nt"/>
-         <attributes xmi:id="0.9655628001140558" name="primaryType" title="" visibility="Public"
+         <tags xmi:id="0.3780753683816448" key="prefix" value="nt"/>
+         <generalizations xsi:type="clazz:Clazz" xmi:id="0.9395317435571864"
+                       href="sys.dt#0.7130187201524218"/>
+         <attributes xmi:id="0.036217719441264506" name="primaryType" visibility="Public" title=""
+                  documentation=""
                   typ="Object"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.7898419089913641" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.6738382161744952" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.3767615444926792" key="prefix" value="jcr"/>
+            <tags xmi:id="0.6081125625256194" key="prefix" value="jcr"/>
+            <metainfo xmi:id="0.3508937360073232" key="required" value="True"/>
          </attributes>
-         <attributes xmi:id="0.2122653283620507" name="mixinTypes" title="" visibility="Public"
+         <attributes xmi:id="0.2807167367420722" name="mixinTypes" visibility="Public" title=""
+                  documentation=""
                   typ="Object"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.6493627542641007" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.02938151873381345" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.2913759840766271" key="prefix" value="jcr"/>
+            <tags xmi:id="0.328179039372997" key="prefix" value="jcr"/>
+            <metainfo xmi:id="0.4548010964215322" key="multiple" value="True"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.005993819099938347" documentation="" description=""
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.6976054899174267"
+             documentation=""
+             description=""
              name="hierarchyNode"
              title=""
              aspects=""
-             generalizations="//@classSet.0">
-         <tags xmi:id="0.7859545790564089" key="reversedURI"
+             generalizations="">
+         <tags xmi:id="0.27806964473179585" key="reversedURI"
             value="http://www.jcp.org/jcr/nt/1.0"/>
-         <tags xmi:id="0.9145549134072892" key="prefix" value="nt"/>
-         <attributes xmi:id="0.292230199688327" name="created" title="" visibility="Public"
+         <tags xmi:id="0.7827711390741939" key="prefix" value="nt"/>
+         <attributes xmi:id="0.12064889553177793" name="created" visibility="Public" title=""
+                  documentation=""
                   typ="Date"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.7999779089087327" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.9073709599850661" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.5792404678035951" key="prefix" value="jcr"/>
+            <tags xmi:id="0.02988682042437818" key="prefix" value="jcr"/>
          </attributes>
       </classSet>
-      <classSet xmi:id="0.07399218190333912" documentation="" description="" name="file"
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.9490280968505895"
+             documentation=""
+             description=""
+             name="file"
              title=""
              aspects=""
-             generalizations="//@classSet.1">
-         <tags xmi:id="0.8817748703896969" key="reversedURI"
+             generalizations="">
+         <tags xmi:id="0.02157164047407023" key="reversedURI"
             value="http://www.jcp.org/jcr/nt/1.0"/>
-         <tags xmi:id="0.34272019207396887" key="prefix" value="nt"/>
+         <tags xmi:id="0.10341218315559031" key="prefix" value="nt"/>
       </classSet>
-      <associationSet xmi:id="0.07789483622307314" name="content" title="" description=""
-                   associationType="Composition">
-         <firstEnd xmi:id="0.7300690476823437" name="content" title="" cardMax="-1"
-                linkedClass="//@classSet.2"/>
-         <secondEnd xmi:id="0.9319799041257468" name="content" title="" navigable="true"
-                 cardMax="1"
-                 linkedClass="//@classSet.0"/>
-      </associationSet>
-      <classSet xmi:id="0.04720143823669942" documentation="" description="" name="folder"
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.49807736309470363"
+             documentation=""
+             description=""
+             name="folder"
              title=""
              aspects=""
-             generalizations="//@classSet.1">
-         <tags xmi:id="0.10755380754757293" key="reversedURI"
+             generalizations="">
+         <tags xmi:id="0.5585389911644014" key="reversedURI"
             value="http://www.jcp.org/jcr/nt/1.0"/>
-         <tags xmi:id="0.1434901760371936" key="prefix" value="nt"/>
+         <tags xmi:id="0.11660119087083443" key="prefix" value="nt"/>
       </classSet>
-      <associationSet xmi:id="0.3032407087969142" name="contains" title="" description=""
-                   associationType="Composition">
-         <firstEnd xmi:id="0.6190460396894103" name="contains" title="" cardMax="-1"
-                linkedClass="//@classSet.3"/>
-         <secondEnd xmi:id="0.9496643141093569" name="contains" title="" navigable="true"
-                 cardMax="-1"
-                 linkedClass="//@classSet.1"/>
-      </associationSet>
-      <classSet xmi:id="0.16803804143940404" documentation="" description="" name="resource"
+      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fo="http://www.w3.org/1999/XSL/Format"
+             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+             xmi:id="0.8795880725755997"
+             documentation=""
+             description=""
+             name="resource"
              title=""
-             aspects="//@aspectSet.0 "
-             generalizations="//@classSet.0">
-         <tags xmi:id="0.43762190906725384" key="reversedURI"
+             generalizations="">
+         <tags xmi:id="0.14837571412453088" key="reversedURI"
             value="http://www.jcp.org/jcr/nt/1.0"/>
-         <tags xmi:id="0.9886103223638467" key="prefix" value="nt"/>
-         <attributes xmi:id="0.7942653729807737" name="encoding" title="" visibility="Public"
+         <tags xmi:id="0.5149208980372331" key="prefix" value="nt"/>
+         <aspects xsi:type="clazz:Aspect" xmi:id="0.6298506237894056" href="mix.dt#"/>
+         <attributes xmi:id="0.8580308154282017" name="encoding" visibility="Public" title=""
+                  documentation=""
                   typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.850369163034459" key="reversedURI" value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.25324578183161617" key="prefix" value="jcr"/>
-         </attributes>
-         <attributes xmi:id="0.7934295525586148" name="mimeType" title="" visibility="Public"
-                  typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.8988975050102308" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.6118101977660244" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.8612511706474154" key="prefix" value="jcr"/>
+            <tags xmi:id="0.7116232862212118" key="prefix" value="jcr"/>
          </attributes>
-         <attributes xmi:id="0.8287472169586871" name="data" title="" visibility="Public"
+         <attributes xmi:id="0.7717685585154141" name="mimeType" visibility="Public" title=""
+                  documentation=""
+                  typ="String"
+                  description="">
+            <tags xmi:id="0.27079040010979816" key="reversedURI"
+               value="http://www.jcp.org/jcr/1.0"/>
+            <tags xmi:id="0.1340900934767152" key="prefix" value="jcr"/>
+            <metainfo xmi:id="0.6166266246275898" key="required" value="True"/>
+         </attributes>
+         <attributes xmi:id="0.7729218997997674" name="data" visibility="Public" title=""
+                  documentation=""
                   typ="Object"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.3884713376890595" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.7951429831636381" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.35125402119099514" key="prefix" value="jcr"/>
+            <tags xmi:id="0.3040439533117495" key="prefix" value="jcr"/>
+            <metainfo xmi:id="0.08006029162325379" key="required" value="True"/>
+            <metainfo xmi:id="0.8829324472862125" key="propertySearched" value="True"/>
          </attributes>
-         <attributes xmi:id="0.8982860926839973" name="lastModified" title="" visibility="Public"
+         <attributes xmi:id="0.5130149830775897" name="lastModified" visibility="Public" title=""
+                  documentation=""
                   typ="Date"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.0981630410730957" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.47649198854511243" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.66340052044473" key="prefix" value="jcr"/>
+            <tags xmi:id="0.48965725923017833" key="prefix" value="jcr"/>
+            <metainfo xmi:id="0.9065521797906566" key="required" value="True"/>
          </attributes>
       </classSet>
-      <aspectSet xmi:id="0.5177574471512147" name="referenceable" title="" description=""
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.3168176175599817"
+              name="referenceable"
+              title=""
+              description=""
               documentation="">
-         <tags xmi:id="0.0800476139445584" key="reversedURI"
+         <tags xmi:id="0.7589161743241293" key="reversedURI"
             value="http://www.jcp.org/jcr/mix/1.0"/>
-         <tags xmi:id="0.6643180687345079" key="prefix" value="mix"/>
-         <attributes xmi:id="0.6540688756961984" name="uuid" title="" visibility="Public"
+         <tags xmi:id="0.18424695764058507" key="prefix" value="mix"/>
+         <attributes xmi:id="0.6001867843953638" name="uuid" visibility="Public" title=""
+                  documentation=""
                   typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.10106587827405178" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.5824067522240203" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.1376932541070065" key="prefix" value="jcr"/>
+            <tags xmi:id="0.886601089652704" key="prefix" value="jcr"/>
+            <metainfo xmi:id="0.6415300712740807" key="required" value="True"/>
          </attributes>
       </aspectSet>
-      <aspectSet xmi:id="0.8827161284376742" name="lockable" title="" description=""
+      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:fo="http://www.w3.org/1999/XSL/Format"
+              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+              xmi:id="0.5286216055779269"
+              name="lockable"
+              title=""
+              description=""
               documentation="">
-         <tags xmi:id="0.04970050779164614" key="reversedURI"
+         <tags xmi:id="0.28095103608282335" key="reversedURI"
             value="http://www.jcp.org/jcr/mix/1.0"/>
-         <tags xmi:id="0.2265832034077686" key="prefix" value="mix"/>
-         <attributes xmi:id="0.9024949614627691" name="lockOwner" title="" visibility="Public"
+         <tags xmi:id="0.7891323587222767" key="prefix" value="mix"/>
+         <attributes xmi:id="0.13389050530900015" name="lockOwner" visibility="Public" title=""
+                  documentation=""
                   typ="String"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.5681395536391657" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.24196547337764074" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.21775163208831338" key="prefix" value="jcr"/>
+            <tags xmi:id="0.4720001024660496" key="prefix" value="jcr"/>
          </attributes>
-         <attributes xmi:id="0.131368434260013" name="lockIsDeep" title="" visibility="Public"
+         <attributes xmi:id="0.05445998330066337" name="lockIsDeep" visibility="Public" title=""
+                  documentation=""
                   typ="boolean"
-                  description=""
-                  documentation="">
-            <tags xmi:id="0.18636461899423662" key="reversedURI"
+                  description="">
+            <tags xmi:id="0.3946342132624622" key="reversedURI"
                value="http://www.jcp.org/jcr/1.0"/>
-            <tags xmi:id="0.03260549973494509" key="prefix" value="jcr"/>
+            <tags xmi:id="0.23927396594081385" key="prefix" value="jcr"/>
          </attributes>
       </aspectSet>
+      <associationSet xmi:id="0.4846268240837206" name="content" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+                xmi:id="0.47247094996166017"
+                name=""
+                title=""
+                cardMax="-1"
+                linkedClass=""/>
+         <secondEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                 xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+                 xmi:id="0.8162475649826807"
+                 name=""
+                 title=""
+                 navigable="true"
+                 cardMax="1"
+                 linkedClass=""/>
+         <tags xmi:id="0.04232434890159886" key="simpleAssoName" value="true"/>
+      </associationSet>
+      <associationSet xmi:id="0.7669335576170973" name="contains" title="" description=""
+                   associationType="Composition">
+         <firstEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+                xmi:id="0.3234086801048943"
+                name=""
+                title=""
+                cardMax="-1"
+                linkedClass=""/>
+         <secondEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                 xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
+                 xmi:id="0.3065344532405966"
+                 name=""
+                 title=""
+                 navigable="true"
+                 cardMax="-1"
+                 linkedClass=""/>
+         <tags xmi:id="0.2834773259928032" key="simpleAssoName" value="true"/>
+      </associationSet>
    </clazz:Model>
