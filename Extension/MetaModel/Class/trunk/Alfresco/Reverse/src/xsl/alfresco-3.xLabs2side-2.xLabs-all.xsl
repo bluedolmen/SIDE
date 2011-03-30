@@ -411,10 +411,12 @@
 					<xsl:otherwise>Direct</xsl:otherwise>
 				</xsl:choose>
 			</xsl:attribute>
+            <xsl:variable name="srcRole" select="substring-after(d:source/d:role/text(), ':')" />
+            <xsl:variable name="tgRole" select="substring-after(d:target/d:role/text(), ':')" />
 			<xsl:element name="firstEnd">
 				<xsl:attribute name="xmi:id" select="math:random()" />
-				<xsl:attribute name="name" select="d:source/d:role/text()" />
-				<xsl:attribute name="title" select="d:source/d:role/text()" />
+				<xsl:attribute name="name" select="$srcRole" />
+				<xsl:attribute name="title" select="$srcRole" />
 				<xsl:choose>
 					<xsl:when test="normalize-space(d:source/d:many/text()) = 'true'">
 						<xsl:attribute name="cardMax">-1</xsl:attribute>
@@ -427,8 +429,8 @@
 			</xsl:element>
 			<xsl:element name="secondEnd">
 				<xsl:attribute name="xmi:id" select="math:random()" />
-				<xsl:attribute name="name" select="d:target/d:role/text()" />
-				<xsl:attribute name="title" select="d:target/d:role/text()" />
+				<xsl:attribute name="name" select="$tgRole" />
+				<xsl:attribute name="title" select="$tgRole" />
 				<xsl:attribute name="navigable">true</xsl:attribute>
 				<xsl:choose>
 					<xsl:when test="normalize-space(d:target/d:many/text()) = 'true'">

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:dd="http://www.alfresco.org/model/dictionary/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.alfresco.org/model/dictionary/1.0" version="0.1">
+
+   <xs:annotation>
+      <xs:documentation>Alfresco Data Dictionary Schema for Alfresco M2Model
+      </xs:documentation>
+   </xs:annotation>
+
+   <xs:element name="model">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" name="description" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="author" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="published" type="xs:date"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="version" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="imports">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element maxOccurs="unbounded" minOccurs="1" name="import">
+                        <xs:complexType>
+                           <xs:attributeGroup ref="dd:namespaceDefinition"/>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="namespaces">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element maxOccurs="unbounded" minOccurs="1" name="namespace">
+                        <xs:complexType>
+                           <xs:attributeGroup ref="dd:namespaceDefinition"/>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="data-types">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element maxOccurs="unbounded" minOccurs="1" name="data-type">
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:group ref="dd:TextualDescription"/>
+                              <xs:element maxOccurs="1" minOccurs="0" name="analyser-class"/>
+                              <xs:element maxOccurs="1" minOccurs="0" name="java-class"/>
+                           </xs:sequence>
+                           <xs:attributeGroup ref="dd:name"/>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element> 
+            <xs:element maxOccurs="1" minOccurs="0" name="constraints">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element maxOccurs="unbounded" minOccurs="1" name="constraint" type="dd:constraint"/>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="types">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element maxOccurs="unbounded" minOccurs="1" name="type" type="dd:type"/>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="aspects">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element maxOccurs="unbounded" minOccurs="1" name="aspect" type="dd:aspect"/>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+    </xs:sequence>
+         <xs:attributeGroup ref="dd:name"/>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:complexType name="class">
+      <xs:sequence>
+         <xs:group ref="dd:TextualDescription"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="parent" type="xs:string"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="archive" type="xs:boolean"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="includedInSuperTypeQuery" type="xs:boolean"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="properties">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="property" type="dd:property"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element maxOccurs="1" minOccurs="0" name="associations">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="association" type="dd:association"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="child-association" type="dd:childAssociation"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         
+         <xs:element maxOccurs="1" minOccurs="0" name="overrides">
+            <xs:complexType>
+               <xs:sequence>
+                   <xs:element maxOccurs="unbounded" minOccurs="1" name="property" type="dd:propertyOverride"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+
+         <xs:element maxOccurs="1" minOccurs="0" name="mandatory-aspects">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="1" name="aspect" type="xs:string"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+      <xs:attributeGroup ref="dd:name"/>
+   </xs:complexType>
+
+   <xs:complexType name="property">
+      <xs:sequence>
+         <xs:group ref="dd:TextualDescription"/>
+         <xs:element name="type" type="xs:string"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="protected" type="xs:boolean"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="mandatory" type="dd:mandatoryDef">
+         </xs:element>
+         <xs:element maxOccurs="1" minOccurs="0" name="multiple" type="xs:boolean"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="default" type="xs:anyType"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="index">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="1" minOccurs="0" name="atomic" type="xs:boolean"/>
+                  <xs:element maxOccurs="1" minOccurs="0" name="stored" type="xs:boolean"/>
+                  <xs:element maxOccurs="1" minOccurs="0" name="tokenised">
+                        <xs:simpleType>
+                           <xs:restriction base="xs:string">
+                              <xs:enumeration value="true"/>
+                              <xs:enumeration value="false"/>
+                              <xs:enumeration value="both"/>
+                           </xs:restriction>
+                        </xs:simpleType>
+                     </xs:element>
+               </xs:sequence>
+               <xs:attribute name="enabled" type="xs:boolean" use="required"/>
+            </xs:complexType>
+         </xs:element>
+
+         <xs:element maxOccurs="1" minOccurs="0" name="constraints">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="1" name="constraint" type="dd:constraint"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+      <xs:attributeGroup ref="dd:name"/>
+   </xs:complexType>
+
+   <xs:complexType name="type">
+      <xs:complexContent>
+         <xs:extension base="dd:class">
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+
+
+   <xs:complexType name="aspect">
+      <xs:complexContent>
+         <xs:extension base="dd:class"/>
+      </xs:complexContent>
+   </xs:complexType>
+   
+    <xs:complexType name="constraint"> 
+       <xs:annotation>
+         <xs:documentation>Constraint for Alfresco M2Model
+         </xs:documentation>
+        </xs:annotation>  
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="parameter" type="dd:namedValue">
+                   <xs:annotation>
+         <xs:documentation>Parameter for Alfresco M2Model
+         </xs:documentation>
+        </xs:annotation>  
+         </xs:element>
+      </xs:sequence>   
+      <xs:attribute name="type" use="optional">
+         <xs:simpleType>
+            <xs:restriction base="xs:string">
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+                    
+      <xs:attribute name="ref" type="xs:string" use="optional"/>
+      <xs:attribute name="name" type="xs:string" use="optional"/>
+   </xs:complexType>
+
+   <xs:complexType name="namedValue">
+      <xs:choice>
+         <xs:element maxOccurs="1" minOccurs="0" name="value" type="xs:string"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="list">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="value" type="xs:string"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:choice>
+      <xs:attributeGroup ref="dd:name"/>
+   </xs:complexType>
+
+   <xs:complexType name="association">
+      <xs:sequence>
+         <xs:group ref="dd:TextualDescription"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="source">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="1" minOccurs="0" name="role" type="xs:string"/>
+                  <xs:element maxOccurs="1" minOccurs="0" name="mandatory" type="xs:boolean"/>
+                  <xs:element maxOccurs="1" minOccurs="0" name="many" type="xs:boolean"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="target">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="1" minOccurs="1" name="class" type="xs:string"/>
+                  <xs:element maxOccurs="1" minOccurs="0" name="role" type="xs:string"/>
+                  <xs:element maxOccurs="1" minOccurs="0" name="mandatory" type="dd:mandatoryDef"/>
+                  <xs:element maxOccurs="1" minOccurs="0" name="many" type="xs:boolean"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+      <xs:attributeGroup ref="dd:name"/>
+   </xs:complexType>
+
+   <xs:complexType name="childAssociation">
+      <xs:complexContent>
+         <xs:extension base="dd:association">
+            <xs:sequence>
+               <xs:element maxOccurs="1" minOccurs="0" name="child-name" type="xs:string"/>
+               <xs:element maxOccurs="1" minOccurs="0" name="duplicate" type="xs:boolean"/>
+               <xs:element maxOccurs="1" minOccurs="0" name="propagateTimestamps" type="xs:boolean"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="propertyOverride">
+      <xs:sequence>
+         <xs:element maxOccurs="1" minOccurs="0" name="mandatory" type="xs:boolean"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="default" type="xs:string"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="constraints">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="1" name="constraint" type="dd:constraint"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+      <xs:attributeGroup ref="dd:name"/>
+   </xs:complexType>
+
+   <xs:attributeGroup name="namespaceDefinition">
+      <xs:attribute name="uri" type="xs:string" use="required"/>
+      <xs:attribute name="prefix" type="xs:string" use="required"/>
+   </xs:attributeGroup>
+
+   <xs:attributeGroup name="name">
+      <xs:attribute name="name" type="xs:string" use="required"/>
+   </xs:attributeGroup>
+
+   <xs:group name="TextualDescription">
+      <xs:sequence>
+         <xs:element maxOccurs="1" minOccurs="0" name="title" type="xs:string"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="description" type="xs:string"/>
+      </xs:sequence>
+   </xs:group>
+   
+   <xs:complexType mixed="true" name="mandatoryDef">
+      <xs:attribute name="enforced" type="xs:boolean" use="optional"/>     
+   </xs:complexType>
+
+</xs:schema>

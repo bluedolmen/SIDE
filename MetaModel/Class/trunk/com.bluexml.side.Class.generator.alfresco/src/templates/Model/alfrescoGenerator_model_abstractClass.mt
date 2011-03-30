@@ -79,11 +79,17 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		            <%}else{%>					
 					  <index enabled="false"/>
 					<%}%>
+					
+					<%if (metainfo[key.equalsIgnoreCase("email")].nSize() > 0
+					 || valueList != null
+					 || metainfo[key.endsWith("-length")].nSize()>0
+					 || metainfo[key.equalsIgnoreCase("regular-expression")].nSize()>0){%>
 					<constraints>
+					
 					<%if (metainfo[key.equalsIgnoreCase("email")].nSize()>0){%>
 						<constraint ref="<%getFolder()%>:constraint:mail"/>
 					<%}%>
-					<%if valueList {%>
+					<%if (valueList) {%>
 						<%--<%if (!valueList.dynamic){%>--%>
 							<constraint ref="<%getFolder()%>:nomenclature:<%valueList.getQualifiedName()%>"/>
 						<%--<%}else{%>
@@ -104,30 +110,34 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		                 </constraint>
 					<%}%>
 					</constraints>
+					<%}%>
 				</property>
 				<%}%>
 			</properties>
 			<%}%>
+			
+			<%if (getSourceAssociationEnds().nSize() > 0){%>
 			<!-- Associations -->
 			<associations>
 			<%for (getSourceAssociationEnds()){%>
 				<<%eContainer().getAssociationType()%> name="<%eContainer().getPrefixedAssociationQName(current("AssociationEnd"))%>">
 					<title><%getRoleOrTitleFromSource()%></title>
 					<source>
-						<mandatory><%if (isMandatory()){%>true<%}else{%>false<%}%></mandatory>
-						<many><%if (isMany()){%>true<%}else{%>false<%}%></many>
 						<%if (name != null && name != ""){%>
-						<role><%name%></role>
+						<role><%getPrefixe()%>:<%name%></role>
 						<%}%>
+						<mandatory><%if (isMandatory()){%>true<%}else{%>false<%}%></mandatory>
+						<many><%if (isMany()){%>true<%}else{%>false<%}%></many>						
 					</source>
 					<target>
 						<class><%getOpposite().linkedClass.getPrefixedQName()%></class>
-						<mandatory><%if (getOpposite().isMandatory()){%>true<%}else{%>false<%}%></mandatory>
-						<many><%if (getOpposite().isMany()){%>true<%}else{%>false<%}%></many>
 						<%if (getOpposite().name != null && getOpposite().name != ""){%>
-						<role><%getOpposite().name%></role>
+						<role><%getPrefixe()%>:<%getOpposite().name%></role>
 						<%}%>
+						<mandatory><%if (getOpposite().isMandatory()){%>true<%}else{%>false<%}%></mandatory>
+						<many><%if (getOpposite().isMany()){%>true<%}else{%>false<%}%></many>						
 					</target>
 				</<%eContainer().getAssociationType()%>>							
 			<%}%>
-			</associations>
+			</associations>			
+			<%}%>
