@@ -1,33 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<form:SearchFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" xmi:id="_IsGl4BAYEd-G74-FPfFl5A" name="advancedSearchForms">
-  <forms xsi:type="form:FormSearch" xmi:id="_MBJVcEsREeCprq1iMsAtRw" label="Agent (search)" id="Agent_Search">
-    <children xsi:type="form:CharSearchField" xmi:id="_XGuiwEsREeCprq1iMsAtRw" label="Name" id="Name">
+<?xml version="1.0" encoding="UTF-8"?><form:SearchFormCollection xmlns:form="http://www.kerblue.org/form/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="advancedSearchForms" xmi:id="_IsGl4BAYEd-G74-FPfFl5A" xmi:version="2.0">
+  <forms id="Agent_Search" label="Agent (search)" xmi:id="_MBJVcEsREeCprq1iMsAtRw" xsi:type="form:FormSearch">
+    <children id="Name" label="Name" xmi:id="_XGuiwEsREeCprq1iMsAtRw" xsi:type="form:CharSearchField">
       <ref href="../Data/DigitizationProcess.dt#_06S1h9RREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="form:CharSearchField" xmi:id="_XGuiwUsREeCprq1iMsAtRw" label="Firstname" id="Firstname">
+    <children id="Firstname" label="Firstname" xmi:id="_XGuiwUsREeCprq1iMsAtRw" xsi:type="form:CharSearchField">
       <ref href="../Data/DigitizationProcess.dt#_06S1itRREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="form:CharSearchField" xmi:id="_XGuiwksREeCprq1iMsAtRw" label="Reference Number" id="ReferenceNumber">
+    <children id="ReferenceNumber" label="Reference Number" xmi:id="_XGuiwksREeCprq1iMsAtRw" xsi:type="form:CharSearchField">
       <ref href="../Data/DigitizationProcess.dt#_06S1jdRREd6d24BtuZ-cgQ"/>
     </children>
-    <real_class href="../Data/DigitizationProcess.dt#_06S1hdRREd6d24BtuZ-cgQ"/>
+    <real_class xmlns:clazz="http://www.kerblue.org/class/1.0" xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06S1hdRREd6d24BtuZ-cgQ"/>
   </forms>
-  <forms xsi:type="form:FormSearch" xmi:id="_MiFfUEsREeCprq1iMsAtRw" label="Document (search)" id="Document_Search">
-    <children xsi:type="form:CharSearchField" xmi:id="_XsF5oEsREeCprq1iMsAtRw" label="Document Title" id="Title">
+  <forms id="Document_Search" label="Document (search)" xmi:id="_MiFfUEsREeCprq1iMsAtRw" xsi:type="form:FormSearch">
+    <children id="Title" label="Document Title" xmi:id="_XsF5oEsREeCprq1iMsAtRw" xsi:type="form:CharSearchField">
       <ref href="../Data/DigitizationProcess.dt#_06OkHdRREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="form:CharSearchField" xmi:id="_XsF5oUsREeCprq1iMsAtRw" label="file number" id="Number">
+    <children id="Number" label="file number" xmi:id="_XsF5oUsREeCprq1iMsAtRw" xsi:type="form:CharSearchField">
       <ref href="../Data/DigitizationProcess.dt#_06OkItRREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="form:CharSearchField" xmi:id="_XsF5oksREeCprq1iMsAtRw" label="Observation" id="Observation">
+    <children id="Observation" label="Observation" xmi:id="_XsF5oksREeCprq1iMsAtRw" xsi:type="form:CharSearchField">
       <ref href="../Data/DigitizationProcess.dt#_06OkJdRREd6d24BtuZ-cgQ"/>
     </children>
-    <children xsi:type="form:DateSearchField" xmi:id="_XsF5o0sREeCprq1iMsAtRw" label="Digitization Date" id="DigitizationDate">
+    <children id="DigitizationDate" label="Digitization Date" xmi:id="_XsF5o0sREeCprq1iMsAtRw" xsi:type="form:DateSearchField">
       <ref href="../Data/DigitizationProcess.dt#_81Z8gNWyEd6Ay6xwhgeFBA"/>
     </children>
-    <children xsi:type="form:CharSearchField" xmi:id="_XsF5pEsREeCprq1iMsAtRw" label="Author" id="Author">
+    <children id="Author" label="Author" xmi:id="_XsF5pEsREeCprq1iMsAtRw" xsi:type="form:CharSearchField">
       <ref href="../Data/DigitizationProcess.dt#_Ib5egNWzEd6Ay6xwhgeFBA"/>
     </children>
-    <real_class href="../Data/DigitizationProcess.dt#_06OkG9RREd6d24BtuZ-cgQ"/>
+    <real_class xmlns:clazz="http://www.kerblue.org/class/1.0" xsi:type="clazz:Clazz" href="../Data/DigitizationProcess.dt#_06OkG9RREd6d24BtuZ-cgQ"/>
   </forms>
 </form:SearchFormCollection>
