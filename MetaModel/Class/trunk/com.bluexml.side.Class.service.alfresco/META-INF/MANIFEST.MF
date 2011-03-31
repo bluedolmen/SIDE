@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco
 Bundle-SymbolicName: com.bluexml.side.Class.service.alfresco
-Bundle-Version: 1.0.31.v24063-20110329
+Bundle-Version: 1.0.32.v24185-20110331
 Bundle-Activator: com.bluexml.side.clazz.service.alfresco.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
