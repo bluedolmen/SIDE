@@ -34,6 +34,12 @@
 						select="my:tokenizeAssoName(@name,//classSet/@name | //aspectSet/@name)" />
 				</xsl:call-template>
 			</xsl:for-each>
+            <xsl:for-each select="constraintSet">
+                <xsl:call-template name="packages">
+                    <xsl:with-param name="items"
+                        select="my:tokenizePackageName(@name)" />
+                </xsl:call-template>
+            </xsl:for-each>
 		</clazz:Model>
 	</xsl:template>
 
