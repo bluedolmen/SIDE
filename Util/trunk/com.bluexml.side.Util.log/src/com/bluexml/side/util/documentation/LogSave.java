@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IContainer;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.ProcessingInstruction;
@@ -62,7 +63,7 @@ public class LogSave {
 		file.createNewFile();
 		fos = new FileWriterWithEncoding(file, "UTF-8");
 		toXml(log, fos);
-		IFileHelper.refreshFolder(folder);
+		IFileHelper.refreshFolder((IContainer)folder);
 		fos.close();
 	}
 
@@ -149,7 +150,7 @@ public class LogSave {
 	 * @throws Exception
 	 */
 	private static void addDocLink(Element rootNode, IFolder docFolder) throws Exception {
-		IFileHelper.refreshFolder(docFolder);
+		IFileHelper.refreshFolder((IContainer)docFolder);
 		List<IFile> toLink = IFileHelper.getAllFilesForFolder(docFolder);
 		Element rootDoc = new Element("documentation"); //$NON-NLS-1$
 		for (IFile xmlFile : toLink) {
