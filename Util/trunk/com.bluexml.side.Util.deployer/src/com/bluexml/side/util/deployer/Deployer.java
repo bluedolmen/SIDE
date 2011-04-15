@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 
@@ -223,10 +224,10 @@ public abstract class Deployer implements Checkable {
 		// Seek all .xml files into gen directory
 		IFolder source = IFileHelper.getIFolder(getTargetPath() + System.getProperty("file.separator") + getTechVersion()); //$NON-NLS-1$
 		if (source.exists()) {
-			IFileHelper.refreshFolder(source);
+			IFileHelper.refreshFolder((IContainer)source);
 			IFolder dest = IFileHelper.createFolder(logPath + System.getProperty("file.separator") + LogSave.LOG_STAMP_FOLDER + System.getProperty("file.separator")); //$NON-NLS-1$ //$NON-NLS-2$
 			if (dest.exists()) {
-				IFileHelper.refreshFolder(dest);
+				IFileHelper.refreshFolder((IContainer)dest);
 				List<IFile> toMove = IFileHelper.getAllFiles(source);
 				for (IFile xmlFile : toMove) {
 					if (xmlFile.getName().endsWith("-stamp.xml")) { //$NON-NLS-1$
