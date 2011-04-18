@@ -25,7 +25,7 @@ public class IsChildPageEditDialog  extends Dialog implements IDialogConstants {
 
 	private isChildPage isChildPage;
 	
-	private Map data;
+	private Map<String, Object> data;
 	
 	private static final int MIN_DIALOG_WIDTH = 500;
 
@@ -42,7 +42,7 @@ public class IsChildPageEditDialog  extends Dialog implements IDialogConstants {
 		isChildPage = p_isChildPage;
 	}
 	
-	public Map getData() {
+	public Map<String, Object> getData() {
 		return data;
 	}
 	
@@ -95,7 +95,7 @@ public class IsChildPageEditDialog  extends Dialog implements IDialogConstants {
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
-		data = new HashMap();
+		data = new HashMap<String, Object>();
 		try {
 			data.put(ISCHILDPAGE_Inherit, inherit.getSelection());
 			super.okPressed();

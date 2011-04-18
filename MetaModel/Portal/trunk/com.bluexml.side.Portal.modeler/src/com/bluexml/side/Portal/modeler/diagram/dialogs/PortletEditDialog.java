@@ -21,27 +21,27 @@ import org.eclipse.swt.widgets.Text;
 import com.bluexml.side.Portal.modeler.PortalPlugin;
 import com.bluexml.side.portal.Portlet;
 
-public class PortletEditDialog   extends Dialog implements IDialogConstants {
+public class PortletEditDialog extends Dialog implements IDialogConstants {
 
 	protected Portlet portlet;
-	
+
 	private static final int MIN_DIALOG_WIDTH = 500;
 
 	private static final int MIN_DIALOG_HEIGHT = 300;
-	
+
 	private Text pageName;
-	
-	protected Map data;
-	
-	public static final String PORTLET_Name = "page name";
-	
+
+	protected HashMap<String, Object> data;
+
+	public static final String PORTLET_Name = "portlet name";
+
 	public PortletEditDialog(Portlet p_portlet, Shell p_parentShell) {
 		super(p_parentShell);
 		setBlockOnOpen(true);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
-		portlet = p_portlet;		
+		portlet = p_portlet;
 	}
-	
+
 	protected Control createDialogArea(Composite parent) {
 		Composite dialogComposite = (Composite) super.createDialogArea(parent);
 		GridData dialogLayoutData = new GridData(GridData.FILL_BOTH);
@@ -52,17 +52,17 @@ public class PortletEditDialog   extends Dialog implements IDialogConstants {
 		createPageGroup(dialogComposite);
 
 		loadData();
-		
+
 		return dialogComposite;
 	}
-	
+
 	protected void createPageGroup(Composite parent) {
 		TabFolder tabFolder = new TabFolder(parent, SWT.TOP);
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		createGeneralTab(tabFolder);		
+		createGeneralTab(tabFolder);
 	}
-	
+
 	private void createGeneralTab(Composite parent) {
 		// Create tab item and add it composite that fills it
 		TabItem generalItem = new TabItem((TabFolder) parent, SWT.NONE);
@@ -72,42 +72,41 @@ public class PortletEditDialog   extends Dialog implements IDialogConstants {
 
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
+
 		Label propertyIdLbl = new Label(composite, SWT.NONE);
 		propertyIdLbl.setText("Name : ");
 		pageName = new Text(composite, SWT.BORDER);
-		pageName.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));				
+		pageName.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	}
-	
+
 	/**
 	 * Initialize the content of the widgets
 	 */
 	private void loadData() {
 		if (portlet.getName() != null) {
 			pageName.setText(portlet.getName());
-		}		
+		}
 	}
-	
-	public Map getData() {
-		return data;		
+
+	public Map<String, Object> getData() {
+		return data;
 	}
-	
+
 	/**
 	 * Save the values before the widgets are disposed
 	 * 
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
-		data = new HashMap();
+		data = new HashMap<String, Object>();
 		try {
-			data.put(PORTLET_Name, pageName.getText());				
+			data.put(PORTLET_Name, pageName.getText());
 			super.okPressed();
 		} catch (Exception e) {
 			// TODO change this with a validation listener that disable the ok
 			// button until the widgets are valid
 			PortalPlugin.log("Required fields", IStatus.WARNING);
-			MessageDialog.openWarning(getShell(), "Required parameters",
-							"Some parameters are not set.\nPlease, fill those fields before validating.");
+			MessageDialog.openWarning(getShell(), "Required parameters", "Some parameters are not set.\nPlease, fill those fields before validating.");
 		}
 	}
 }

@@ -31,7 +31,7 @@ public class HavePortletEditDialog  extends Dialog implements IDialogConstants {
 
 	private HavePortlet havePortlet;
 	
-	private Map data;
+	private Map<String, Object> data;
 	
 	private PositionViewer inputPosition;
 	
@@ -48,7 +48,7 @@ public class HavePortletEditDialog  extends Dialog implements IDialogConstants {
 		havePortlet = p_havePortlet;
 	}
 	
-	public Map getData() {
+	public Map<String, Object> getData() {
 		return data;
 	}
 	
@@ -112,7 +112,7 @@ public class HavePortletEditDialog  extends Dialog implements IDialogConstants {
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
-		data = new HashMap();
+		data = new HashMap<String, Object>();
 		try {
 			List<PositionObject> listPos = inputPosition.getData().getData();
 			for (PositionObject positionObject : listPos) {

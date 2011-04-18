@@ -50,7 +50,7 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 	
 	
 
-	private Map data;
+	private Map<String, Object> data;
 
 	private SingleObjectChooser typeChooser;
 
@@ -68,7 +68,7 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 		portletInternal = p_portletInternal;
 	}
 
-	public Map getData() {
+	public Map<String, Object> getData() {
 		return data;
 	}
 
@@ -224,7 +224,7 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
-		data = new HashMap();
+		data = new HashMap<String, Object>();
 		try {
 			InternalPortletType t = (InternalPortletType) typeChooser.getSelection();			
 			data.put(PORTLETINTERNAL_Type, t);

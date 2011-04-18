@@ -38,7 +38,7 @@ public class PortalLayoutEditDialog extends Dialog implements IDialogConstants{
 	
 	protected PortalLayout portalLayout;
 	
-	protected Map data;
+	protected Map<String, Object> data;
 
 	
 	
@@ -206,7 +206,7 @@ public class PortalLayoutEditDialog extends Dialog implements IDialogConstants{
 	 * 
 	 * @return a Map
 	 */
-	public Map getData() {
+	public Map<String, Object> getData() {
 		return data;		
 	}
 	
@@ -216,7 +216,7 @@ public class PortalLayoutEditDialog extends Dialog implements IDialogConstants{
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
-		data = new HashMap();
+		data = new HashMap<String, Object>();
 		try {
 			data.put(PAGELAYOUT_Name, portalLayoutName.getText());
 			data.put(PAGELAYOUT_Columns, inputColumns.getData());		

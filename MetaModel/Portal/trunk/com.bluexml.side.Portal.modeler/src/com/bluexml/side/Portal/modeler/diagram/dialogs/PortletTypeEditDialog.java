@@ -47,7 +47,7 @@ public class PortletTypeEditDialog  extends Dialog implements IDialogConstants{
 	
 	public static final String PORTLETYPE_Name = "portletType Name";
 	
-	private Map data;
+	private Map<String, Object> data;
 
 	private PortletTypeAttributeViewer inputAttributes;	
 
@@ -64,7 +64,7 @@ public class PortletTypeEditDialog  extends Dialog implements IDialogConstants{
 		portletType = p_portletType;			
 	}
 	
-	public Map getData() {
+	public Map<String, Object> getData() {
 		return data;		
 	}
 	
@@ -189,7 +189,7 @@ public class PortletTypeEditDialog  extends Dialog implements IDialogConstants{
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
-		data = new HashMap();
+		data = new HashMap<String, Object>();
 		try {
 			data.put(PORTLETYPE_ID, portletId.getText());
 			data.put(PORTLETYPE_Name, portletName.getText());

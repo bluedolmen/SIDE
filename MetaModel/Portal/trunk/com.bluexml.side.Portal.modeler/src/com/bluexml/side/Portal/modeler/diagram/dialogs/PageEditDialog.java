@@ -37,7 +37,7 @@ public class PageEditDialog extends Dialog implements IDialogConstants{
 	
 	protected Page page;
 	
-	protected Map data;
+	protected Map<String, Object> data;
 
 	private Text pageId;
 
@@ -144,7 +144,7 @@ public class PageEditDialog extends Dialog implements IDialogConstants{
 	 * 
 	 * @return a Map
 	 */
-	public Map getData() {
+	public Map<String, Object> getData() {
 		return data;		
 	}
 	
@@ -154,7 +154,7 @@ public class PageEditDialog extends Dialog implements IDialogConstants{
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
-		data = new HashMap();
+		data = new HashMap<String, Object>();
 		try {
 			data.put(PAGE_ID, pageId.getText());
 			data.put(PAGE_DESCRIPTION, pageDescription.getText());
