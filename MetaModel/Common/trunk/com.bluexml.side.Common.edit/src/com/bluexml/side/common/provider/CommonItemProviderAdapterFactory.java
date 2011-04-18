@@ -328,6 +328,52 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.Constraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConstraintItemProvider constraintItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.common.Constraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createConstraintAdapter() {
+		if (constraintItemProvider == null) {
+			constraintItemProvider = new ConstraintItemProvider(this);
+		}
+
+		return constraintItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.ConstraintParam} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConstraintParamItemProvider constraintParamItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.common.ConstraintParam}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createConstraintParamAdapter() {
+		if (constraintParamItemProvider == null) {
+			constraintParamItemProvider = new ConstraintParamItemProvider(this);
+		}
+
+		return constraintParamItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -437,6 +483,8 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
 		if (operationGroupItemProvider != null) operationGroupItemProvider.dispose();
 		if (metaInfoItemProvider != null) metaInfoItemProvider.dispose();
 		if (metaInfoGroupItemProvider != null) metaInfoGroupItemProvider.dispose();
+		if (constraintItemProvider != null) constraintItemProvider.dispose();
+		if (constraintParamItemProvider != null) constraintParamItemProvider.dispose();
 	}
 
 }

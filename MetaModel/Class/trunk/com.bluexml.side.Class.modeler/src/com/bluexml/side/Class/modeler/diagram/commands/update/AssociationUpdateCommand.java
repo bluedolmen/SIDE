@@ -103,6 +103,7 @@ public class AssociationUpdateCommand extends Command {
 			c.setConstraintType(null);
 			c.setValueSet(null);
 			c.setValueType(null);
+			
 			association.getMetainfo().add(c);
 		}
 	}

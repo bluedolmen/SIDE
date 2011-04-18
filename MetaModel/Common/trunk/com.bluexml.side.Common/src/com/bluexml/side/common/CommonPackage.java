@@ -125,13 +125,22 @@ public interface CommonPackage extends EPackage {
 	int MODEL_ELEMENT__METAINFO = 5;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT__CONSTRAINTS = 6;
+
+	/**
 	 * The number of structural features of the '<em>Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ELEMENT_FEATURE_COUNT = 6;
+	int MODEL_ELEMENT_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.impl.NamedModelElementImpl <em>Named Model Element</em>}' class.
@@ -196,6 +205,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_MODEL_ELEMENT__METAINFO = MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MODEL_ELEMENT__CONSTRAINTS = MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -278,6 +296,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMMENT__METAINFO = MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__CONSTRAINTS = MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -399,6 +426,15 @@ public interface CommonPackage extends EPackage {
 	int STEREOTYPE__METAINFO = NAMED_MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPE__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -479,6 +515,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int PACKAGE__METAINFO = NAMED_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -582,6 +627,15 @@ public interface CommonPackage extends EPackage {
 	int OPERATION_COMPONENT__METAINFO = NAMED_MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_COMPONENT__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -662,6 +716,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__METAINFO = OPERATION_COMPONENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__CONSTRAINTS = OPERATION_COMPONENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -791,6 +854,15 @@ public interface CommonPackage extends EPackage {
 	int PARAMETER__METAINFO = NAMED_MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -880,6 +952,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_GROUP__METAINFO = OPERATION_COMPONENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_GROUP__CONSTRAINTS = OPERATION_COMPONENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1056,13 +1137,22 @@ public interface CommonPackage extends EPackage {
 	int META_INFO_GROUP__METAINFO = META_DATA_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO_GROUP__CONSTRAINTS = META_DATA_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_GROUP__NAME = META_DATA_FEATURE_COUNT + 6;
+	int META_INFO_GROUP__NAME = META_DATA_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1071,7 +1161,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_GROUP__CHILDREN = META_DATA_FEATURE_COUNT + 7;
+	int META_INFO_GROUP__CHILDREN = META_DATA_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Meta Info Group</em>' class.
@@ -1080,7 +1170,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_GROUP_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 8;
+	int META_INFO_GROUP_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.impl.ContainerImpl <em>Container</em>}' class.
@@ -1102,6 +1192,215 @@ public interface CommonPackage extends EPackage {
 	int CONTAINER_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.common.impl.ConstraintImpl <em>Constraint</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.common.impl.ConstraintImpl
+	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getConstraint()
+	 * @generated
+	 */
+	int CONSTRAINT = 14;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__STEREOTYPES = NAMED_MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__TAGS = NAMED_MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__COMMENTS = NAMED_MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__DOCUMENTATION = NAMED_MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__DESCRIPTION = NAMED_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__METAINFO = NAMED_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__NAME = NAMED_MODEL_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__CONSTRAINT_TYPE = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__PARAMS = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_FEATURE_COUNT = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.common.impl.ConstraintParamImpl <em>Constraint Param</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.common.impl.ConstraintParamImpl
+	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getConstraintParam()
+	 * @generated
+	 */
+	int CONSTRAINT_PARAM = 15;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM__STEREOTYPES = NAMED_MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM__TAGS = NAMED_MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM__COMMENTS = NAMED_MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM__DOCUMENTATION = NAMED_MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM__DESCRIPTION = NAMED_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM__METAINFO = NAMED_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM__NAME = NAMED_MODEL_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM__VALUES = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Constraint Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM_FEATURE_COUNT = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.DataType <em>Data Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1109,7 +1408,7 @@ public interface CommonPackage extends EPackage {
 	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 14;
+	int DATA_TYPE = 16;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.Visibility <em>Visibility</em>}' enum.
@@ -1119,7 +1418,7 @@ public interface CommonPackage extends EPackage {
 	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getVisibility()
 	 * @generated
 	 */
-	int VISIBILITY = 15;
+	int VISIBILITY = 17;
 
 
 	/**
@@ -1197,6 +1496,17 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModelElement_Metainfo();
+
+	/**
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.common.ModelElement#getConstraints <em>Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Constraints</em>'.
+	 * @see com.bluexml.side.common.ModelElement#getConstraints()
+	 * @see #getModelElement()
+	 * @generated
+	 */
+	EReference getModelElement_Constraints();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.common.NamedModelElement <em>Named Model Element</em>}'.
@@ -1538,6 +1848,59 @@ public interface CommonPackage extends EPackage {
 	EClass getContainer();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.common.Constraint <em>Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constraint</em>'.
+	 * @see com.bluexml.side.common.Constraint
+	 * @generated
+	 */
+	EClass getConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.common.Constraint#getConstraintType <em>Constraint Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Constraint Type</em>'.
+	 * @see com.bluexml.side.common.Constraint#getConstraintType()
+	 * @see #getConstraint()
+	 * @generated
+	 */
+	EAttribute getConstraint_ConstraintType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.common.Constraint#getParams <em>Params</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Params</em>'.
+	 * @see com.bluexml.side.common.Constraint#getParams()
+	 * @see #getConstraint()
+	 * @generated
+	 */
+	EReference getConstraint_Params();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.common.ConstraintParam <em>Constraint Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constraint Param</em>'.
+	 * @see com.bluexml.side.common.ConstraintParam
+	 * @generated
+	 */
+	EClass getConstraintParam();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.common.ConstraintParam#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see com.bluexml.side.common.ConstraintParam#getValues()
+	 * @see #getConstraintParam()
+	 * @generated
+	 */
+	EAttribute getConstraintParam_Values();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.common.DataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1636,6 +1999,14 @@ public interface CommonPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODEL_ELEMENT__METAINFO = eINSTANCE.getModelElement_Metainfo();
+
+		/**
+		 * The meta object literal for the '<em><b>Constraints</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_ELEMENT__CONSTRAINTS = eINSTANCE.getModelElement_Constraints();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.impl.NamedModelElementImpl <em>Named Model Element</em>}' class.
@@ -1918,6 +2289,50 @@ public interface CommonPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CONTAINER = eINSTANCE.getContainer();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.common.impl.ConstraintImpl <em>Constraint</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.common.impl.ConstraintImpl
+		 * @see com.bluexml.side.common.impl.CommonPackageImpl#getConstraint()
+		 * @generated
+		 */
+		EClass CONSTRAINT = eINSTANCE.getConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Constraint Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTRAINT__CONSTRAINT_TYPE = eINSTANCE.getConstraint_ConstraintType();
+
+		/**
+		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINT__PARAMS = eINSTANCE.getConstraint_Params();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.common.impl.ConstraintParamImpl <em>Constraint Param</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.common.impl.ConstraintParamImpl
+		 * @see com.bluexml.side.common.impl.CommonPackageImpl#getConstraintParam()
+		 * @generated
+		 */
+		EClass CONSTRAINT_PARAM = eINSTANCE.getConstraintParam();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTRAINT_PARAM__VALUES = eINSTANCE.getConstraintParam_Values();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.DataType <em>Data Type</em>}' enum.

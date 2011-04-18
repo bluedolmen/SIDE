@@ -22,6 +22,7 @@ import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.Stereotype;
@@ -41,6 +42,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getMetainfo <em>Metainfo</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getConstraints <em>Constraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,6 +128,16 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 	 * @ordered
 	 */
 	protected EList<MetaInfo> metainfo;
+
+	/**
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> constraints;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -241,6 +253,18 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Constraint> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectResolvingEList<Constraint>(Constraint.class, this, CommonPackage.MODEL_ELEMENT__CONSTRAINTS);
+		}
+		return constraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -274,6 +298,8 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 				return getDescription();
 			case CommonPackage.MODEL_ELEMENT__METAINFO:
 				return getMetainfo();
+			case CommonPackage.MODEL_ELEMENT__CONSTRAINTS:
+				return getConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -309,6 +335,10 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 				getMetainfo().clear();
 				getMetainfo().addAll((Collection<? extends MetaInfo>)newValue);
 				return;
+			case CommonPackage.MODEL_ELEMENT__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends Constraint>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -339,6 +369,9 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 			case CommonPackage.MODEL_ELEMENT__METAINFO:
 				getMetainfo().clear();
 				return;
+			case CommonPackage.MODEL_ELEMENT__CONSTRAINTS:
+				getConstraints().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -363,6 +396,8 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CommonPackage.MODEL_ELEMENT__METAINFO:
 				return metainfo != null && !metainfo.isEmpty();
+			case CommonPackage.MODEL_ELEMENT__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

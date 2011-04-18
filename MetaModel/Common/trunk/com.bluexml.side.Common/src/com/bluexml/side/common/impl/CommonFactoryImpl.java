@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Constraint;
+import com.bluexml.side.common.ConstraintParam;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
@@ -83,6 +85,8 @@ public class CommonFactoryImpl extends EFactoryImpl implements CommonFactory {
 			case CommonPackage.OPERATION_GROUP: return createOperationGroup();
 			case CommonPackage.META_INFO: return createMetaInfo();
 			case CommonPackage.META_INFO_GROUP: return createMetaInfoGroup();
+			case CommonPackage.CONSTRAINT: return createConstraint();
+			case CommonPackage.CONSTRAINT_PARAM: return createConstraintParam();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -230,6 +234,26 @@ public class CommonFactoryImpl extends EFactoryImpl implements CommonFactory {
 	public MetaInfoGroup createMetaInfoGroup() {
 		MetaInfoGroupImpl metaInfoGroup = new MetaInfoGroupImpl();
 		return metaInfoGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constraint createConstraint() {
+		ConstraintImpl constraint = new ConstraintImpl();
+		return constraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstraintParam createConstraintParam() {
+		ConstraintParamImpl constraintParam = new ConstraintParamImpl();
+		return constraintParam;
 	}
 
 	/**

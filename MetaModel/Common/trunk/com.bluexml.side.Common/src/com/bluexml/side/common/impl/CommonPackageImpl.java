@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Constraint;
+import com.bluexml.side.common.ConstraintParam;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
@@ -138,6 +140,20 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * @generated
 	 */
 	private EClass containerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constraintParamEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -275,6 +291,15 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 */
 	public EReference getModelElement_Metainfo() {
 		return (EReference)modelElementEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelElement_Constraints() {
+		return (EReference)modelElementEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -570,6 +595,51 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getConstraint() {
+		return constraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConstraint_ConstraintType() {
+		return (EAttribute)constraintEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstraint_Params() {
+		return (EReference)constraintEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConstraintParam() {
+		return constraintParamEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConstraintParam_Values() {
+		return (EAttribute)constraintParamEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDataType() {
 		return dataTypeEEnum;
 	}
@@ -618,6 +688,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		createEAttribute(modelElementEClass, MODEL_ELEMENT__DOCUMENTATION);
 		createEAttribute(modelElementEClass, MODEL_ELEMENT__DESCRIPTION);
 		createEReference(modelElementEClass, MODEL_ELEMENT__METAINFO);
+		createEReference(modelElementEClass, MODEL_ELEMENT__CONSTRAINTS);
 
 		namedModelElementEClass = createEClass(NAMED_MODEL_ELEMENT);
 		createEAttribute(namedModelElementEClass, NAMED_MODEL_ELEMENT__NAME);
@@ -664,6 +735,13 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 
 		containerEClass = createEClass(CONTAINER);
 
+		constraintEClass = createEClass(CONSTRAINT);
+		createEAttribute(constraintEClass, CONSTRAINT__CONSTRAINT_TYPE);
+		createEReference(constraintEClass, CONSTRAINT__PARAMS);
+
+		constraintParamEClass = createEClass(CONSTRAINT_PARAM);
+		createEAttribute(constraintParamEClass, CONSTRAINT_PARAM__VALUES);
+
 		// Create enums
 		dataTypeEEnum = createEEnum(DATA_TYPE);
 		visibilityEEnum = createEEnum(VISIBILITY);
@@ -708,6 +786,8 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		metaInfoEClass.getESuperTypes().add(this.getMetaData());
 		metaInfoGroupEClass.getESuperTypes().add(this.getMetaData());
 		metaInfoGroupEClass.getESuperTypes().add(this.getNamedModelElement());
+		constraintEClass.getESuperTypes().add(this.getNamedModelElement());
+		constraintParamEClass.getESuperTypes().add(this.getNamedModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelElementEClass, ModelElement.class, "ModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -717,6 +797,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEAttribute(getModelElement_Documentation(), ecorePackage.getEString(), "documentation", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelElement_Description(), ecorePackage.getEString(), "description", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelElement_Metainfo(), this.getMetaInfo(), null, "metainfo", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelElement_Constraints(), this.getConstraint(), null, "constraints", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namedModelElementEClass, NamedModelElement.class, "NamedModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedModelElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -793,6 +874,13 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEClass(metaDataEClass, MetaData.class, "MetaData", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(containerEClass, com.bluexml.side.common.Container.class, "Container", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(constraintEClass, Constraint.class, "Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConstraint_ConstraintType(), ecorePackage.getEString(), "constraintType", null, 0, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConstraint_Params(), this.getConstraintParam(), null, "params", null, 0, -1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(constraintParamEClass, ConstraintParam.class, "ConstraintParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConstraintParam_Values(), ecorePackage.getEString(), "values", null, 0, -1, ConstraintParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(dataTypeEEnum, DataType.class, "DataType");

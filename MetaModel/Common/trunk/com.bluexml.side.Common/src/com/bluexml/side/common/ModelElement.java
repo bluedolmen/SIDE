@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.common.ModelElement#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link com.bluexml.side.common.ModelElement#getDescription <em>Description</em>}</li>
  *   <li>{@link com.bluexml.side.common.ModelElement#getMetainfo <em>Metainfo</em>}</li>
+ *   <li>{@link com.bluexml.side.common.ModelElement#getConstraints <em>Constraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,5 +159,21 @@ public interface ModelElement extends EObject {
 	 * @generated
 	 */
 	EList<MetaInfo> getMetainfo();
+
+	/**
+	 * Returns the value of the '<em><b>Constraints</b></em>' reference list.
+	 * The list contents are of type {@link com.bluexml.side.common.Constraint}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Constraints</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Constraints</em>' reference list.
+	 * @see com.bluexml.side.common.CommonPackage#getModelElement_Constraints()
+	 * @model
+	 * @generated
+	 */
+	EList<Constraint> getConstraints();
 
 } // ModelElement

@@ -280,6 +280,15 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getClassPackage_ConstraintSet() {
+		return (EReference)classPackageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getClazz() {
 		return clazzEClass;
 	}
@@ -671,6 +680,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEReference(classPackageEClass, CLASS_PACKAGE__ASSOCIATION_SET);
 		createEReference(classPackageEClass, CLASS_PACKAGE__ASPECT_SET);
 		createEReference(classPackageEClass, CLASS_PACKAGE__ENUMERATION_SET);
+		createEReference(classPackageEClass, CLASS_PACKAGE__CONSTRAINT_SET);
 
 		abstractClassEClass = createEClass(ABSTRACT_CLASS);
 		createEReference(abstractClassEClass, ABSTRACT_CLASS__ATTRIBUTES);
@@ -782,6 +792,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEReference(getClassPackage_AssociationSet(), this.getAssociation(), null, "associationSet", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassPackage_AspectSet(), this.getAspect(), null, "aspectSet", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassPackage_EnumerationSet(), this.getEnumeration(), null, "enumerationSet", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassPackage_ConstraintSet(), theCommonPackage.getConstraint(), null, "constraintSet", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(classPackageEClass, this.getClassPackage(), "getAllPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -798,6 +809,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		addEOperation(classPackageEClass, this.getClazz(), "getAllClassesFromEveryWhere", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(classPackageEClass, this.getAspect(), "getAllAspectsFromEveryWhere", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classPackageEClass, theCommonPackage.getConstraint(), "getAllConstraints", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(abstractClassEClass, AbstractClass.class, "AbstractClass", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractClass_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, AbstractClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1006,6 +1019,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "self.getAllClassesFromEveryWhere().aspects -> asSet()"
+		   });		
+		addAnnotation
+		  (classPackageEClass.getEOperations().get(8), 
+		   source, 
+		   new String[] {
+			 "body", "common::Constraint.allInstances()"
 		   });		
 		addAnnotation
 		  (abstractClassEClass, 
@@ -1310,7 +1329,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createInternalDocAnnotations() {
-		String source = "InternalDoc";																																																																													
+		String source = "InternalDoc";																																																																														
 		addAnnotation
 		  (classCommentEClass, 
 		   source, 
@@ -1332,7 +1351,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "PackageNameNull"
-		   });												
+		   });													
 		addAnnotation
 		  (abstractClassEClass, 
 		   source, 

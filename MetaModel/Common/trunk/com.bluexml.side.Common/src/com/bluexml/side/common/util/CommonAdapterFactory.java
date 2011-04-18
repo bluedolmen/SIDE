@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Constraint;
+import com.bluexml.side.common.ConstraintParam;
 import com.bluexml.side.common.Container;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
@@ -137,6 +139,14 @@ public class CommonAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseContainer(Container object) {
 				return createContainerAdapter();
+			}
+			@Override
+			public Adapter caseConstraint(Constraint object) {
+				return createConstraintAdapter();
+			}
+			@Override
+			public Adapter caseConstraintParam(ConstraintParam object) {
+				return createConstraintParamAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -351,6 +361,34 @@ public class CommonAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.Constraint <em>Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.Constraint
+	 * @generated
+	 */
+	public Adapter createConstraintAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.ConstraintParam <em>Constraint Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.ConstraintParam
+	 * @generated
+	 */
+	public Adapter createConstraintParamAdapter() {
 		return null;
 	}
 

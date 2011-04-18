@@ -127,6 +127,15 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_MODEL_ELEMENT__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_MODEL_ELEMENT__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -209,6 +218,15 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_PACKAGE__METAINFO = CommonPackage.PACKAGE__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PACKAGE__CONSTRAINTS = CommonPackage.PACKAGE__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -272,13 +290,22 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_PACKAGE__ENUMERATION_SET = CommonPackage.PACKAGE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Constraint Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PACKAGE__CONSTRAINT_SET = CommonPackage.PACKAGE_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Class Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_PACKAGE_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 4;
+	int CLASS_PACKAGE_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.TitledNamedClassModelElementImpl <em>Titled Named Class Model Element</em>}' class.
@@ -343,6 +370,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO = CommonPackage.NAMED_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__CONSTRAINTS = CommonPackage.NAMED_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -443,6 +479,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_CLASS__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASS__CONSTRAINTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -561,6 +606,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int CLAZZ__METAINFO = ABSTRACT_CLASS__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLAZZ__CONSTRAINTS = ABSTRACT_CLASS__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -717,6 +771,15 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__CONSTRAINTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -851,6 +914,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int ATTRIBUTE__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__CONSTRAINTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1005,6 +1077,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION__METAINFO = CommonPackage.NAMED_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__CONSTRAINTS = CommonPackage.NAMED_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1162,6 +1243,15 @@ public interface ClazzPackage extends EPackage {
 	int ASPECT__METAINFO = ABSTRACT_CLASS__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT__CONSTRAINTS = ABSTRACT_CLASS__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1280,6 +1370,15 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_COMMENT__METAINFO = CommonPackage.COMMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_COMMENT__CONSTRAINTS = CommonPackage.COMMENT__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1360,6 +1459,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSOCIATION_END__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__CONSTRAINTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1507,6 +1615,15 @@ public interface ClazzPackage extends EPackage {
 	int MODEL__METAINFO = CLASS_PACKAGE__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__CONSTRAINTS = CLASS_PACKAGE__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1568,6 +1685,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL__ENUMERATION_SET = CLASS_PACKAGE__ENUMERATION_SET;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__CONSTRAINT_SET = CLASS_PACKAGE__CONSTRAINT_SET;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -1672,6 +1798,17 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassPackage_EnumerationSet();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.clazz.ClassPackage#getConstraintSet <em>Constraint Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Constraint Set</em>'.
+	 * @see com.bluexml.side.clazz.ClassPackage#getConstraintSet()
+	 * @see #getClassPackage()
+	 * @generated
+	 */
+	EReference getClassPackage_ConstraintSet();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Clazz <em>Clazz</em>}'.
@@ -2182,6 +2319,14 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS_PACKAGE__ENUMERATION_SET = eINSTANCE.getClassPackage_EnumerationSet();
+
+		/**
+		 * The meta object literal for the '<em><b>Constraint Set</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_PACKAGE__CONSTRAINT_SET = eINSTANCE.getClassPackage_ConstraintSet();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.ClazzImpl <em>Clazz</em>}' class.

@@ -30,6 +30,7 @@ import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.impl.PackageImpl;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
@@ -44,6 +45,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getAssociationSet <em>Association Set</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getAspectSet <em>Aspect Set</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getEnumerationSet <em>Enumeration Set</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getConstraintSet <em>Constraint Set</em>}</li>
  * </ul>
  * </p>
  *
@@ -89,6 +91,16 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @ordered
 	 */
 	protected EList<Enumeration> enumerationSet;
+
+	/**
+	 * The cached value of the '{@link #getConstraintSet() <em>Constraint Set</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraintSet()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> constraintSet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -155,6 +167,18 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 			enumerationSet = new EObjectContainmentEList<Enumeration>(Enumeration.class, this, ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET);
 		}
 		return enumerationSet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Constraint> getConstraintSet() {
+		if (constraintSet == null) {
+			constraintSet = new EObjectContainmentEList<Constraint>(Constraint.class, this, ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET);
+		}
+		return constraintSet;
 	}
 
 	/**
@@ -452,6 +476,43 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Constraint> getAllConstraints() {
+		if (getAllConstraintsBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(8);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllConstraintsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllConstraintsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Constraint> result = (Collection<Constraint>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Constraint>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllConstraints <em>Get All Constraints</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllConstraints
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllConstraintsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -463,6 +524,8 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				return ((InternalEList<?>)getAspectSet()).basicRemove(otherEnd, msgs);
 			case ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET:
 				return ((InternalEList<?>)getEnumerationSet()).basicRemove(otherEnd, msgs);
+			case ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET:
+				return ((InternalEList<?>)getConstraintSet()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -483,6 +546,8 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				return getAspectSet();
 			case ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET:
 				return getEnumerationSet();
+			case ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET:
+				return getConstraintSet();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -512,6 +577,10 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				getEnumerationSet().clear();
 				getEnumerationSet().addAll((Collection<? extends Enumeration>)newValue);
 				return;
+			case ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET:
+				getConstraintSet().clear();
+				getConstraintSet().addAll((Collection<? extends Constraint>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -536,6 +605,9 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 			case ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET:
 				getEnumerationSet().clear();
 				return;
+			case ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET:
+				getConstraintSet().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -556,6 +628,8 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				return aspectSet != null && !aspectSet.isEmpty();
 			case ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET:
 				return enumerationSet != null && !enumerationSet.isEmpty();
+			case ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET:
+				return constraintSet != null && !constraintSet.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

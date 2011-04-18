@@ -60,6 +60,11 @@
         <details key="body" value="self.getAllClassesFromEveryWhere().aspects -> asSet()"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getAllConstraints" upperBound="-1" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//Constraint">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="common::Constraint.allInstances()"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classSet" upperBound="-1"
         eType="#//Clazz" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationSet" upperBound="-1"
@@ -68,6 +73,9 @@
         eType="#//Aspect" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="enumerationSet" upperBound="-1"
         eType="#//Enumeration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraintSet" upperBound="-1"
+        eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//Constraint"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//TitledNamedClassModelElement ../../com.bluexml.side.Common/model/Common.ecore#//Container">
     <eAnnotations source="http://www.bluexml.com/OCL">

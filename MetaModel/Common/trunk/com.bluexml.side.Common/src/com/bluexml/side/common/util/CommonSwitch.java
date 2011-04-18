@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Constraint;
+import com.bluexml.side.common.ConstraintParam;
 import com.bluexml.side.common.Container;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
@@ -201,6 +203,22 @@ public class CommonSwitch<T> {
 			case CommonPackage.CONTAINER: {
 				Container container = (Container)theEObject;
 				T result = caseContainer(container);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.CONSTRAINT: {
+				Constraint constraint = (Constraint)theEObject;
+				T result = caseConstraint(constraint);
+				if (result == null) result = caseNamedModelElement(constraint);
+				if (result == null) result = caseModelElement(constraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.CONSTRAINT_PARAM: {
+				ConstraintParam constraintParam = (ConstraintParam)theEObject;
+				T result = caseConstraintParam(constraintParam);
+				if (result == null) result = caseNamedModelElement(constraintParam);
+				if (result == null) result = caseModelElement(constraintParam);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -415,6 +433,36 @@ public class CommonSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainer(Container object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstraint(Constraint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constraint Param</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constraint Param</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstraintParam(ConstraintParam object) {
 		return null;
 	}
 
