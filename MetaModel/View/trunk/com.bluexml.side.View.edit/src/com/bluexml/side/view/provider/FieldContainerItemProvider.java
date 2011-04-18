@@ -27,6 +27,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.view.FieldContainer;
+import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 import com.bluexml.side.view.edit.ui.utils.model.ViewUtils;
 

@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.view.provider;
 
+import com.bluexml.side.common.CommonFactory;
 import java.util.Collection;
 import java.util.List;
 

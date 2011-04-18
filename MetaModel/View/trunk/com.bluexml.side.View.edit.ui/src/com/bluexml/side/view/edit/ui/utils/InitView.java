@@ -2,6 +2,7 @@ package com.bluexml.side.view.edit.ui.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -16,6 +17,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.ModelElement;
@@ -56,8 +58,8 @@ public class InitView {
 						av.getDisabled().removeAll(av.getDisabled());
 					}
 				}
-				if (av.getViewOf() instanceof Clazz) {
-					Clazz cl = (Clazz) av.getViewOf();
+				if (av.getViewOf() instanceof AbstractClass) {
+					AbstractClass cl = (AbstractClass) av.getViewOf();
 					Collection<FieldElement> c = getViewElementForClass(cl, av);
 					if (av instanceof FacetMap) {
 						askTypeOfList();
@@ -136,11 +138,17 @@ public class InitView {
 		}
 	}
 
-	private static Collection<FieldElement> getViewElementForClass(Clazz c, AbstractViewOf av) {
+	private static Collection<FieldElement> getViewElementForClass(AbstractClass c, AbstractViewOf av) {
 		Collection<FieldElement> list = new ArrayList<FieldElement>();
 		if (c != null) {
 			// Attributes :
-			for (Attribute a : c.getAllAttributes()) {
+			List<Attribute> atts = null;
+			if (c instanceof Clazz) {
+				atts = ((Clazz) c).getAllAttributes();
+			} else {
+				atts = c.getAllAttributesWithoutAspectsAttributes();
+			}
+			for (Attribute a : atts) {
 				FieldElement f = ClassUtils.getField(a, av);
 				list.add(f);
 			}

@@ -127,6 +127,15 @@ public interface ViewPackage extends EPackage {
 	int VIEW_COLLECTION__METAINFO = CommonPackage.PACKAGE__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_COLLECTION__CONSTRAINTS = CommonPackage.PACKAGE__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -282,13 +291,22 @@ public interface ViewPackage extends EPackage {
 	int FIELD_ELEMENT__METAINFO = STYLABLE_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_ELEMENT__CONSTRAINTS = STYLABLE_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT__NAME = STYLABLE_FEATURE_COUNT + 6;
+	int FIELD_ELEMENT__NAME = STYLABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Map To</b></em>' reference.
@@ -297,7 +315,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT__MAP_TO = STYLABLE_FEATURE_COUNT + 7;
+	int FIELD_ELEMENT__MAP_TO = STYLABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -306,7 +324,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT__PREFIX = STYLABLE_FEATURE_COUNT + 8;
+	int FIELD_ELEMENT__PREFIX = STYLABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
@@ -315,7 +333,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT__SUFFIX = STYLABLE_FEATURE_COUNT + 9;
+	int FIELD_ELEMENT__SUFFIX = STYLABLE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -324,7 +342,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT__HIDDEN = STYLABLE_FEATURE_COUNT + 10;
+	int FIELD_ELEMENT__HIDDEN = STYLABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Field Element</em>' class.
@@ -333,7 +351,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT_FEATURE_COUNT = STYLABLE_FEATURE_COUNT + 11;
+	int FIELD_ELEMENT_FEATURE_COUNT = STYLABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldContainerImpl <em>Field Container</em>}' class.
@@ -407,6 +425,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIELD_CONTAINER__METAINFO = FIELD_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_CONTAINER__CONSTRAINTS = FIELD_ELEMENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -552,6 +579,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_VIEW__METAINFO = FIELD_CONTAINER__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_VIEW__CONSTRAINTS = FIELD_CONTAINER__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1049,6 +1085,15 @@ public interface ViewPackage extends EPackage {
 	int ABSTRACT_VIEW_OF__METAINFO = ABSTRACT_VIEW__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_VIEW_OF__CONSTRAINTS = ABSTRACT_VIEW__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1191,6 +1236,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_DATA_TABLE__METAINFO = ABSTRACT_VIEW_OF__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__CONSTRAINTS = ABSTRACT_VIEW_OF__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1371,6 +1425,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int COL__METAINFO = FIELD_CONTAINER__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__CONSTRAINTS = FIELD_CONTAINER__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1625,6 +1688,15 @@ public interface ViewPackage extends EPackage {
 	int STYLING__METAINFO = CommonPackage.META_INFO_GROUP__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__CONSTRAINTS = CommonPackage.META_INFO_GROUP__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1749,6 +1821,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_LIST__METAINFO = ABSTRACT_DATA_TABLE__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_LIST__CONSTRAINTS = ABSTRACT_DATA_TABLE__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1976,6 +2057,15 @@ public interface ViewPackage extends EPackage {
 	int DATA_TABLE__METAINFO = ABSTRACT_DATA_TABLE__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__CONSTRAINTS = ABSTRACT_DATA_TABLE__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2174,6 +2264,15 @@ public interface ViewPackage extends EPackage {
 	int FACET_MAP__METAINFO = ABSTRACT_VIEW_OF__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__CONSTRAINTS = ABSTRACT_VIEW_OF__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2352,6 +2451,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TREE__METAINFO = ABSTRACT_VIEW_OF__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TREE__CONSTRAINTS = ABSTRACT_VIEW_OF__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2579,6 +2687,15 @@ public interface ViewPackage extends EPackage {
 	int COMPOSED_VIEW__METAINFO = ABSTRACT_VIEW__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__CONSTRAINTS = ABSTRACT_VIEW__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2712,6 +2829,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIELD__METAINFO = FIELD_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__CONSTRAINTS = FIELD_ELEMENT__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2856,6 +2982,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3011,6 +3146,15 @@ public interface ViewPackage extends EPackage {
 	int BOOLEAN_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3164,6 +3308,15 @@ public interface ViewPackage extends EPackage {
 	int PASSWORD_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3308,6 +3461,15 @@ public interface ViewPackage extends EPackage {
 	int FLOAT_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3450,6 +3612,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACTION_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3605,6 +3776,15 @@ public interface ViewPackage extends EPackage {
 	int DATE_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3747,6 +3927,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3893,6 +4082,15 @@ public interface ViewPackage extends EPackage {
 	int DATE_TIME_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4035,6 +4233,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int PHONE_NUMBER_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4181,6 +4388,15 @@ public interface ViewPackage extends EPackage {
 	int EMAIL_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4323,6 +4539,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTEGER_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4469,6 +4694,15 @@ public interface ViewPackage extends EPackage {
 	int FILE_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4611,6 +4845,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int SELECT_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELECT_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4766,6 +5009,15 @@ public interface ViewPackage extends EPackage {
 	int HTML_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HTML_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4910,6 +5162,15 @@ public interface ViewPackage extends EPackage {
 	int URL_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5052,6 +5313,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMAGE_FIELD__METAINFO = FILE_FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__CONSTRAINTS = FILE_FIELD__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5314,6 +5584,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIELD_GROUP__METAINFO = FIELD_CONTAINER__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__CONSTRAINTS = FIELD_CONTAINER__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

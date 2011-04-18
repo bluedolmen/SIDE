@@ -15,6 +15,7 @@ import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.view.*;
 import com.bluexml.side.view.AbstractDataTable;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.AbstractViewOf;

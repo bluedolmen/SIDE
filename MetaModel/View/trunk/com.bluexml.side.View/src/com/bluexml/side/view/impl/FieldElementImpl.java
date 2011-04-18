@@ -29,6 +29,7 @@ import org.eclipse.ocl.expressions.OCLExpression;
 
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
@@ -52,6 +53,7 @@ import com.bluexml.side.view.ViewPackage;
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getMetainfo <em>Metainfo</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getMapTo <em>Map To</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getPrefix <em>Prefix</em>}</li>
@@ -142,6 +144,16 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 	 * @ordered
 	 */
 	protected EList<MetaInfo> metainfo;
+
+	/**
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> constraints;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -340,6 +352,18 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 			metainfo = new EObjectContainmentEList<MetaInfo>(MetaInfo.class, this, ViewPackage.FIELD_ELEMENT__METAINFO);
 		}
 		return metainfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Constraint> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectResolvingEList<Constraint>(Constraint.class, this, ViewPackage.FIELD_ELEMENT__CONSTRAINTS);
+		}
+		return constraints;
 	}
 
 	/**
@@ -644,6 +668,8 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				return getDescription();
 			case ViewPackage.FIELD_ELEMENT__METAINFO:
 				return getMetainfo();
+			case ViewPackage.FIELD_ELEMENT__CONSTRAINTS:
+				return getConstraints();
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				return getName();
 			case ViewPackage.FIELD_ELEMENT__MAP_TO:
@@ -690,6 +716,10 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				getMetainfo().clear();
 				getMetainfo().addAll((Collection<? extends MetaInfo>)newValue);
 				return;
+			case ViewPackage.FIELD_ELEMENT__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends Constraint>)newValue);
+				return;
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				setName((String)newValue);
 				return;
@@ -735,6 +765,9 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 			case ViewPackage.FIELD_ELEMENT__METAINFO:
 				getMetainfo().clear();
 				return;
+			case ViewPackage.FIELD_ELEMENT__CONSTRAINTS:
+				getConstraints().clear();
+				return;
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -774,6 +807,8 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case ViewPackage.FIELD_ELEMENT__METAINFO:
 				return metainfo != null && !metainfo.isEmpty();
+			case ViewPackage.FIELD_ELEMENT__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ViewPackage.FIELD_ELEMENT__MAP_TO:
@@ -803,6 +838,7 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				case ViewPackage.FIELD_ELEMENT__DOCUMENTATION: return CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
 				case ViewPackage.FIELD_ELEMENT__DESCRIPTION: return CommonPackage.MODEL_ELEMENT__DESCRIPTION;
 				case ViewPackage.FIELD_ELEMENT__METAINFO: return CommonPackage.MODEL_ELEMENT__METAINFO;
+				case ViewPackage.FIELD_ELEMENT__CONSTRAINTS: return CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
 				default: return -1;
 			}
 		}
@@ -830,6 +866,7 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				case CommonPackage.MODEL_ELEMENT__DOCUMENTATION: return ViewPackage.FIELD_ELEMENT__DOCUMENTATION;
 				case CommonPackage.MODEL_ELEMENT__DESCRIPTION: return ViewPackage.FIELD_ELEMENT__DESCRIPTION;
 				case CommonPackage.MODEL_ELEMENT__METAINFO: return ViewPackage.FIELD_ELEMENT__METAINFO;
+				case CommonPackage.MODEL_ELEMENT__CONSTRAINTS: return ViewPackage.FIELD_ELEMENT__CONSTRAINTS;
 				default: return -1;
 			}
 		}

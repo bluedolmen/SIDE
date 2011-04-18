@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.view.impl;
 
+import com.bluexml.side.view.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
