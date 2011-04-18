@@ -1,0 +1,27 @@
+pas pri en charge :
+model/published
+./data-types
+./constraints [geneok, reverse todo]
+
+NS URI more than one by models, and mix everywhere (type ns1, properties ns2 ...)
+
+class
+./archive (true -> delete move node into archive, otherwise delete forever)
+./includedInSuperTypeQuery (3.4+)
+./overrides
+
+childAssociation
+./duplicate (allow more than one instance with same name)
+./propagateTimestamps
+
+property/
+./mandatory/@enforced (if true tested on repository level)
+./index (must set tokenized,stored,atomic)
+./constraints (revers)
+./protected (do not take account about this)
+
+
+// MM class has aspect doit être disponible pour les abstractClass
+
+FIX :
+enumeration ref

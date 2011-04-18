@@ -90,6 +90,23 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	        <parameter name="expression"><value>^(|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+)$</value></parameter>
 	        <parameter name="requiresMatch"><value>true</value></parameter>
 	    </constraint>
+	    
+	    <%for (getAllConstraints()){%>
+	    <constraint name="<%getPrefixedQualifiedName%>" type="<%constraintType%>">
+	        <%for (params){%>
+	        <parameter name="<%name%>">
+	        <%if (values.nSize() > 1){%>
+	        	<list>
+	        		<%constraints_values%>
+	        	</list>
+	        <%}else{%>
+	        	<%constraints_values%>
+	        <%}%>
+	        </parameter>
+	        <%}%>
+	    </constraint>
+	    <%}%>
+	    
 		<!-- STARTMMLOOP -->
 	    <%for (getAllEnumerations().nSort("name")) {%>		   
 	    <constraint name="<%getFolder()%>:nomenclature:<%getQualifiedName()%>" type="LIST">
@@ -118,3 +135,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	</aspects> 
 	
 </model>
+<%script type="common.ConstraintParam" name="constraints_values"%>
+<%for (values){%>
+<value><%current()%></value>
+<%}%>

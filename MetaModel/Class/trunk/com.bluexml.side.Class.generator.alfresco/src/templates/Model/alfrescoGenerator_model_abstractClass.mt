@@ -83,7 +83,8 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<%if (metainfo[key.equalsIgnoreCase("email")].nSize() > 0
 					 || valueList != null
 					 || metainfo[key.endsWith("-length")].nSize()>0
-					 || metainfo[key.equalsIgnoreCase("regular-expression")].nSize()>0){%>
+					 || metainfo[key.equalsIgnoreCase("regular-expression")].nSize()>0
+					 || constraints.nSize() > 0){%>
 					<constraints>
 					
 					<%if (metainfo[key.equalsIgnoreCase("email")].nSize()>0){%>
@@ -109,6 +110,11 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
                 		    <parameter name="requiresMatch"><value>true</value></parameter>
 		                 </constraint>
 					<%}%>
+					
+					<%for (constraints){%>
+					     <constraint ref="<%getPrefixedQName()%>" />
+					<%}%>
+					
 					</constraints>
 					<%}%>
 				</property>
