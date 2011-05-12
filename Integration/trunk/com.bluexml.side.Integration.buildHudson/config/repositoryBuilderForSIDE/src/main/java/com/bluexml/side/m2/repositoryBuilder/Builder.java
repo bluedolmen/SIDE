@@ -120,7 +120,7 @@ public class Builder {
 		} else if (option.equals("-patchPom")) {
 			List<ModuleConstraint> res = Builder.getModulesConstraint(rootPlugins);
 			// add dependency plugin used by SIDE
-			ModuleConstraint McForMavenDependeciesPlugins = new ModuleConstraint("org.apache.maven.plugins.maven-dependency-plugin", null, "maven-plugin", "2.0", "2.0");
+			ModuleConstraint McForMavenDependeciesPlugins = new ModuleConstraint("org.apache.maven.plugins.maven-dependency-plugin", null, "maven-plugin", "2.2", "2.2");
 			res.add(McForMavenDependeciesPlugins);
 			
 			File file = new File(filePath);
