@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
@@ -16,7 +17,6 @@ import org.apache.tools.ant.ProjectHelper;
 
 /**
  * Goal which touches a timestamp file.
- * 
  * 
  * @goal zip
  * @phase package
@@ -102,7 +102,7 @@ public class ZipPackage extends AbstractMojo {
 		project.addBuildListener(logger);
 
 		Properties props = getProject().getProperties();
-		getLog().info("Properties :"+getProject().getArtifact().getFile());
+		getLog().info("Properties :" + getProject().getArtifact().getFile());
 		for (Map.Entry<Object, Object> iterable_element : props.entrySet()) {
 			getLog().info(iterable_element.getKey() + " : " + iterable_element.getValue());
 
@@ -110,8 +110,8 @@ public class ZipPackage extends AbstractMojo {
 
 		project.setProperty("ant.file", getBuildFile().getAbsolutePath());
 		project.setUserProperty("module.version", getProject().getVersion());
-		project.setUserProperty("module.title", getProject().getName());
-		project.setUserProperty("module.description", getProject().getDescription());
+		project.setUserProperty("module.title", StringUtils.trimToEmpty(getProject().getName()));
+		project.setUserProperty("module.description", StringUtils.trimToEmpty(getProject().getDescription()));
 		project.setUserProperty("module.id", getProject().getArtifactId());
 		project.setUserProperty("baseDir", getProject().getBasedir().toString());
 		project.setUserProperty("finalName", getFinalName());
