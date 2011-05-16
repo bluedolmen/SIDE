@@ -9,6 +9,7 @@ import org.apache.maven.embedder.Configuration;
 import org.apache.maven.embedder.DefaultConfiguration;
 import org.apache.maven.embedder.MavenEmbedder;
 import org.apache.maven.execution.DefaultMavenExecutionRequest;
+import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionResult;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -26,7 +27,7 @@ public class MavenUtil {
 		archetypeCreateRequest.setGoals(goals);
 		archetypeCreateRequest.setInteractiveMode(false);
 		archetypeCreateRequest.setProperty("basedir", baseDir.getAbsolutePath().toString());
-
+		
 		// set active profile
 		if (profiles != null && !profiles.isEmpty()) {
 			archetypeCreateRequest.addActiveProfiles(profiles);
@@ -42,13 +43,14 @@ public class MavenUtil {
 			}
 		}
 		MavenEmbedder embedder = getEmbedder();
-		archetypeCreateRequest.setUpdateSnapshots(true);
+		archetypeCreateRequest.setUpdateSnapshots(false);
 
 		//System.out.println("Active profiles :"+archetypeCreateRequest.getActiveProfiles());
 		if (archetypeCreateRequest.getActiveProfiles().size() == 0) {
-			throw new Exception("No active profile found report this bug to SIDE developers team");
+			throw new Exception("No active profile founded, reports this bug to SIDE developers team");
 		}
 
+		System.out.println(getCommandFromMavenExecutionRequest(archetypeCreateRequest));
 		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
 		return result;
 	}
@@ -97,8 +99,6 @@ public class MavenUtil {
 		return embedder;
 	}
 
-	
-
 	/**
 	 * get the version number of the dependency in the given pom
 	 * 
@@ -123,5 +123,14 @@ public class MavenUtil {
 			}
 		}
 		throw new Exception("version number not found please report as bug");
+	}
+
+	public static String getCommandFromMavenExecutionRequest(MavenExecutionRequest req) {
+		String rt = "mvn " + req.getGoals().toString().replaceAll("[\\[\\]]", "").replace(",", " ");
+		for (Object key : req.getProperties().keySet()) {
+			rt += " -D" + key + "=" + req.getProperties().getProperty((String) key);
+		}
+
+		return rt;
 	}
 }
