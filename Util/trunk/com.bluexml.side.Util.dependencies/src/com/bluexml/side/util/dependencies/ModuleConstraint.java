@@ -100,7 +100,7 @@ public class ModuleConstraint {
 	}
 
 	public String toString() {
-		return this.artifactId + " :" + getVersionRange();
+		return this.groupId + ":" + this.artifactId + ":" + this.moduleType + ":" + getVersionRange();
 	}
 
 	public String getVersionRange() {
@@ -141,4 +141,13 @@ public class ModuleConstraint {
 	public ModuleVersion getResolvedVersion() {
 		return resolvedVersion;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean equal = true;
+		equal &= (obj instanceof ModuleConstraint);
+		equal &= obj.toString().equals(this.toString());
+		return equal;
+	}
+
 }

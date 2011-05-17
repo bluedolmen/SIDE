@@ -1,33 +1,98 @@
 package com.bluexml.side.util.dependencies;
 
 import java.io.File;
+import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
-import org.apache.maven.embedder.Configuration;
-import org.apache.maven.embedder.DefaultConfiguration;
-import org.apache.maven.embedder.MavenEmbedder;
+import org.apache.maven.DefaultMaven;
+import org.apache.maven.Maven;
+import org.apache.maven.cli.MavenCli;
 import org.apache.maven.execution.DefaultMavenExecutionRequest;
+import org.apache.maven.execution.DefaultMavenExecutionResult;
 import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionResult;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
 
-import com.bluexml.side.util.libs.eclipse.EclipseUtils;
-
 public class MavenUtil {
-	private MavenEmbedder embedder;
 
 	public MavenExecutionResult doMavenGoal(File baseDir, List<String> goals, Map<String, String> parameters, List<String> profiles, Boolean offline) throws Exception {
+		return doMavenGoalUsingMavenCli(baseDir, goals, parameters, profiles, offline);
+	}
+
+	private MavenExecutionResult doMavenGoalUsingMavenCli(File baseDir, List<String> goals, Map<String, String> parameters, List<String> profiles, Boolean offline) throws Exception {
+
+		// save the current classloader ... maven play with thread classloader Grrr
+		ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		//		System.err.println("before using maven :" + cl);
+		MavenCli mci = new MavenCli();
+		
+		String workingDirectory = baseDir.getAbsolutePath();
+		//TODO : do something to manage logging and error reporting
+		PrintStream stdout = System.out;
+		PrintStream stderr = System.err;
+
+		List<String> argsL = new ArrayList<String>();
+
+		argsL.addAll(goals);
+
+		// Additional parameters
+
+		// disable interactive mode
+		argsL.add("-B");
+
+		argsL.add("-e");
+
+		// offline
+		if (offline) {
+			argsL.add("-o");
+		}
+
+		// active profile parameter
+		if (profiles != null && profiles.size() > 0) {
+			String profileParam = "";
+			Iterator<String> iterator = profiles.iterator();
+			while (iterator.hasNext()) {
+				profileParam += iterator.next();
+
+				if (iterator.hasNext()) {
+					profileParam += ",";
+				}
+			}
+			argsL.add("-P " + profileParam);
+		}
+
+		// user Properties
+		for (Map.Entry<String, String> entry : parameters.entrySet()) {
+			argsL.add("-D" + entry.getKey() + "=" + entry.getValue());
+		}
+
+		String[] args = argsL.toArray(new String[argsL.size()]);
+		System.out.println("MavenUtil execute maven request :");
+		System.out.println("** args :" + argsL);
+		System.out.println("** working directory :" + workingDirectory);
+		mci.doMain(args, workingDirectory, stdout, stderr);
+
+		DefaultMavenExecutionResult defaultMavenExecutionResult = new DefaultMavenExecutionResult();
+		// restore classloader
+		//		System.err.println("after using maven :" + Thread.currentThread().getContextClassLoader());
+		Thread.currentThread().setContextClassLoader(cl);
+		return defaultMavenExecutionResult;
+	}
+
+	private MavenExecutionResult doMavenGoal_old(File baseDir, List<String> goals, Map<String, String> parameters, List<String> profiles, Boolean offline) throws Exception {
 		System.out.println(baseDir.getAbsolutePath());
 		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
+
 		archetypeCreateRequest.setBaseDirectory(baseDir);
 		archetypeCreateRequest.setGoals(goals);
 		archetypeCreateRequest.setInteractiveMode(false);
-		archetypeCreateRequest.setProperty("basedir", baseDir.getAbsolutePath().toString());
-		
 		// set active profile
 		if (profiles != null && !profiles.isEmpty()) {
 			archetypeCreateRequest.addActiveProfiles(profiles);
@@ -38,11 +103,14 @@ public class MavenUtil {
 		}
 		if (parameters != null) {
 			// manage additional parameters
+			Properties props = new Properties();
 			for (Map.Entry<String, String> param : parameters.entrySet()) {
-				archetypeCreateRequest.setProperty(param.getKey(), param.getValue());
+				props.setProperty(param.getKey(), param.getValue());
 			}
+			archetypeCreateRequest.setUserProperties(props);
 		}
-		MavenEmbedder embedder = getEmbedder();
+		Maven embedder = getEmbedder();
+
 		archetypeCreateRequest.setUpdateSnapshots(false);
 
 		//System.out.println("Active profiles :"+archetypeCreateRequest.getActiveProfiles());
@@ -83,18 +151,8 @@ public class MavenUtil {
 		return doMavenGoal(baseDir, Arrays.asList(goals), parameters, profilesList, offline);
 	}
 
-	public MavenEmbedder getEmbedder() throws Exception {
-		if (embedder == null) {
-			Configuration configuration;
-			configuration = new DefaultConfiguration();
-			// load user configuration file
-			// configuration.setUserSettingsFile( MavenEmbedder.DEFAULT_USER_SETTINGS_FILE );
-
-			ClassLoader cl = EclipseUtils.getContextFinderClassLoader();
-
-			configuration.setClassLoader(cl);
-			embedder = new MavenEmbedder(configuration);
-		}
+	public Maven getEmbedder() throws Exception {
+		Maven embedder = new DefaultMaven();
 
 		return embedder;
 	}
@@ -127,8 +185,8 @@ public class MavenUtil {
 
 	public static String getCommandFromMavenExecutionRequest(MavenExecutionRequest req) {
 		String rt = "mvn " + req.getGoals().toString().replaceAll("[\\[\\]]", "").replace(",", " ");
-		for (Object key : req.getProperties().keySet()) {
-			rt += " -D" + key + "=" + req.getProperties().getProperty((String) key);
+		for (Object key : req.getUserProperties().keySet()) {
+			rt += " -D" + key + "=" + req.getUserProperties().getProperty((String) key);
 		}
 
 		return rt;

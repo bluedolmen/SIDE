@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import org.apache.maven.embedder.MavenEmbedder;
+import org.apache.maven.execution.DefaultMavenExecutionRequest;
+import org.apache.maven.repository.RepositorySystem;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 
@@ -51,7 +52,7 @@ public class DependenciesDeployer {
 	}
 
 	private static void deployRepository(InputStream stream) throws Exception, IOException {
-		File repository = MavenEmbedder.defaultUserLocalRepository;
+		File repository = RepositorySystem.defaultUserLocalRepository;
 
 		if (!repository.exists()) {
 			boolean done = repository.mkdirs();

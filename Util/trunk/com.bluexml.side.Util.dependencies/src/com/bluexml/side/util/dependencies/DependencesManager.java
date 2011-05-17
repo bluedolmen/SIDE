@@ -16,6 +16,7 @@ public class DependencesManager {
 		for (ModuleConstraint mc : lmc) {
 			addEntry(contraints, mc.getTech_version(), mc);
 		}
+		System.err.println("display constraints :" + contraints);
 	}
 
 	/**
@@ -26,7 +27,8 @@ public class DependencesManager {
 	}
 
 	/**
-	 * @param generatorID the generatorID to set
+	 * @param generatorID
+	 *            the generatorID to set
 	 */
 	public void setGeneratorID(String generatorID) {
 		this.generatorID = generatorID;
@@ -34,9 +36,17 @@ public class DependencesManager {
 
 	private void addEntry(Map<String, List<ModuleConstraint>> tech_v_dep, String tech_v, ModuleConstraint mc) {
 		if (tech_v_dep.containsKey(tech_v)) {
-			tech_v_dep.get(tech_v).add(mc);
+			List<ModuleConstraint> list = tech_v_dep.get(tech_v);
+			if (!list.contains(mc)) {
+				System.err.println("add :" + mc);				
+				list.add(mc);
+			} else {
+				System.err.println("Avoid duplicate");
+			}
+
 		} else {
-			List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
+			ArrayList<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
+			System.err.println("add first:" + mc);
 			lmc.add(mc);
 			tech_v_dep.put(tech_v, lmc);
 		}
@@ -90,7 +100,7 @@ public class DependencesManager {
 		for (Map.Entry<String, List<ModuleConstraint>> mc : this.getContraints().entrySet()) {
 			// copy dependencies
 			MavenTmpProject mvp = new MavenTmpProject(workFolder, mc.getKey(), getConstraintsFor(mc.getKey()), offline);
-			mvp.copyAllDependencies(new File(generateFolder, mc.getKey()),generatorID);
+			mvp.copyAllDependencies(new File(generateFolder, mc.getKey()), generatorID);
 
 		}
 	}

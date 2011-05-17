@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.maven.execution.MavenExecutionResult;
 import org.jdom.Document;
