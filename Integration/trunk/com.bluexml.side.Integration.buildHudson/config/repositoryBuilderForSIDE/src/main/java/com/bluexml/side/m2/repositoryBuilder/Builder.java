@@ -123,10 +123,10 @@ public class Builder {
 			ModuleConstraint McForMavenDependeciesPlugins = new ModuleConstraint("org.apache.maven.plugins.maven-dependency-plugin", null, "maven-plugin", "2.2", "2.2");
 			res.add(McForMavenDependeciesPlugins);
 			// amp archetype
-			ModuleConstraint McForArchetype_amp = new ModuleConstraint("com.bluexml.side.Framework.maven.ampArchetypeForSide", null, "maven-archetype", "1.0", "1.0");
+			ModuleConstraint McForArchetype_amp = new ModuleConstraint("com.bluexml.side.Framework.maven.ampArchetypeForSide", null, "maven-archetype", "1.0.1", "1.0.1");
 			res.add(McForArchetype_amp);
 			// zip (share) archetype
-			ModuleConstraint McForArchetype_zip = new ModuleConstraint("com.bluexml.side.Framework.maven.warPatchArchetypeForSide", null, "maven-archetype", "1.0", "1.0");
+			ModuleConstraint McForArchetype_zip = new ModuleConstraint("com.bluexml.side.Framework.maven.warPatchArchetypeForSide", null, "maven-archetype", "1.0.1", "1.0.1");
 			res.add(McForArchetype_zip);
 			
 			
