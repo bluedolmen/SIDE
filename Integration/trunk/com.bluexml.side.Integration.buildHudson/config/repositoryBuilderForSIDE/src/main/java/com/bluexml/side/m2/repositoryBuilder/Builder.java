@@ -233,7 +233,7 @@ public class Builder {
 		for (File file : poms) {
 			fw.write("mvn dependency:go-offline -P public -f " + file.getAbsolutePath() + " -Dmaven.repo.local=$MAVENREPO\n");
 		}
-
+		fw.write("mvn archetype:crawl -P public -Dmaven.repo.local=$MAVENREPO\n");
 		// save close
 		fw.flush();
 		fw.close();
