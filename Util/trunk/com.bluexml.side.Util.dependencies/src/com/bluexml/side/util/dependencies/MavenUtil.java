@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.maven.DefaultMaven;
 import org.apache.maven.Maven;
 import org.apache.maven.cli.MavenCli;
@@ -26,30 +27,26 @@ public class MavenUtil {
 		return doMavenGoalUsingMavenCli(baseDir, goals, parameters, profiles, offline);
 	}
 
+	@SuppressWarnings("unchecked")
 	private MavenExecutionResult doMavenGoalUsingMavenCli(File baseDir, List<String> goals, Map<String, String> parameters, List<String> profiles, Boolean offline) throws Exception {
-
 		// save the current classloader ... maven play with thread classloader Grrr
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
-		//		System.err.println("before using maven :" + cl);
+
+		// Instantiate MavenClient
 		MavenCli mci = new MavenCli();
-		
+
 		String workingDirectory = baseDir.getAbsolutePath();
-		//TODO : do something to manage logging and error reporting
-		PrintStream stdout = System.out;
-		PrintStream stderr = System.err;
 
+		// build arguments list
 		List<String> argsL = new ArrayList<String>();
-
 		argsL.addAll(goals);
-
 		// Additional parameters
-
 		// disable interactive mode
 		argsL.add("-B");
-
+		// display stacktrace if error occur 
 		argsL.add("-e");
 
-		// offline
+		// offline mode activated
 		if (offline) {
 			argsL.add("-o");
 		}
@@ -72,17 +69,43 @@ public class MavenUtil {
 		for (Map.Entry<String, String> entry : parameters.entrySet()) {
 			argsL.add("-D" + entry.getKey() + "=" + entry.getValue());
 		}
-
+		
+		// define streams
+		File mvOutFile = new File(baseDir, "log.txt");
+		PrintStream stdout = new PrintStream(mvOutFile);
+		File mvOutErrFile = new File(baseDir, "log-err.txt");
+		PrintStream stderr = new PrintStream(mvOutErrFile);
+		
+		stdout.println("MavenUtil execute maven request :");
+		stdout.println("** args :" + getCommandFromMavenExecutionArgs(argsL));
+		stdout.println("** working directory :" + workingDirectory);
+		
 		String[] args = argsL.toArray(new String[argsL.size()]);
-		System.out.println("MavenUtil execute maven request :");
-		System.out.println("** args :" + argsL);
-		System.out.println("** working directory :" + workingDirectory);
+		// execute maven request
 		mci.doMain(args, workingDirectory, stdout, stderr);
 
+		// build a MavenEcecutionResult
 		DefaultMavenExecutionResult defaultMavenExecutionResult = new DefaultMavenExecutionResult();
+		
 		// restore classloader
-		//		System.err.println("after using maven :" + Thread.currentThread().getContextClassLoader());
 		Thread.currentThread().setContextClassLoader(cl);
+
+		// search in output for errors
+		Iterator<String> it = FileUtils.lineIterator(mvOutFile);
+		List<String> errorLines = new ArrayList<String>();
+		String errors = "";
+		while (it.hasNext()) {
+			String line = it.next();
+			if (line.startsWith("[ERROR]")) {
+				errorLines.add(line);
+				errors += line;
+				errors += "\n";
+			}
+		}
+		if (errorLines.size() > 0) {
+			defaultMavenExecutionResult.addException(new Exception(errors));
+		}
+
 		return defaultMavenExecutionResult;
 	}
 
@@ -189,6 +212,11 @@ public class MavenUtil {
 			rt += " -D" + key + "=" + req.getUserProperties().getProperty((String) key);
 		}
 
+		return rt;
+	}
+
+	public static String getCommandFromMavenExecutionArgs(List<String> args) {
+		String rt = "mvn " + args.toString().replaceAll("[\\[\\]]", "").replace(",", "");
 		return rt;
 	}
 }
