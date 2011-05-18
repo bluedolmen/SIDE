@@ -80,7 +80,9 @@ public class Builder {
 	}
 
 	public static void main(String[] args) {
-
+		if (args == null || args.length == 0) {
+			displayUsage();
+		}
 		File rootPlugins = getPluginRepo(args);
 		try {
 			switch (args.length) {
@@ -128,8 +130,7 @@ public class Builder {
 			// zip (share) archetype
 			ModuleConstraint McForArchetype_zip = new ModuleConstraint("com.bluexml.side.Framework.maven.warPatchArchetypeForSide", null, "jar", "1.0.1", "1.0.1");
 			res.add(McForArchetype_zip);
-			
-			
+
 			File file = new File(filePath);
 			if (!file.exists()) {
 				System.err.println("File do not exist :" + file);
@@ -141,7 +142,7 @@ public class Builder {
 				List<ModuleConstraint> res_ = new ArrayList<ModuleConstraint>();
 				res_.add(moduleConstraint);
 				writePomFile(destFile, res_);
-				System.out.println("pom Patched" + destFile);
+				System.out.println("pom Patched :" + destFile);
 				poms.add(destFile);
 			}
 			// write pom.sh script that call go-offline for each patched poms
@@ -196,6 +197,11 @@ public class Builder {
 			deps.addContent(dep);
 			System.out.println("added :" + moduleConstraint);
 		}
+
+		// change artifactId, so superpom can be resolved
+		Element artifactId = pom.getRootElement().getChild("artifactId");
+		artifactId.setText("sideOfflineRepository");
+
 		// save changes
 		org.jdom.output.XMLOutputter out = new XMLOutputter();
 		Format format = Format.getPrettyFormat();
