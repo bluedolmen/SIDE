@@ -18,20 +18,17 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
 	public void run(IAction action) {
 		if (selection instanceof IStructuredSelection) {
-			for (Iterator it = ((IStructuredSelection) selection).iterator(); it
-					.hasNext();) {
+			for (Iterator<?> it = ((IStructuredSelection) selection).iterator(); it.hasNext();) {
 				Object element = it.next();
 				IProject project = null;
 				if (element instanceof IProject) {
 					project = (IProject) element;
 				} else if (element instanceof IAdaptable) {
-					project = (IProject) ((IAdaptable) element)
-							.getAdapter(IProject.class);
+					project = (IProject) ((IAdaptable) element).getAdapter(IProject.class);
 				}
 				if (project != null) {
 					toggleNature(project);
@@ -42,9 +39,10 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction,
-	 *      org.eclipse.jface.viewers.ISelection)
+	 * @see
+	 * org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action
+	 * .IAction,
+	 * org.eclipse.jface.viewers.ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
 		this.selection = selection;
@@ -52,9 +50,10 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IObjectActionDelegate#setActivePart(org.eclipse.jface.action.IAction,
-	 *      org.eclipse.ui.IWorkbenchPart)
+	 * @see
+	 * org.eclipse.ui.IObjectActionDelegate#setActivePart(org.eclipse.jface.
+	 * action.IAction,
+	 * org.eclipse.ui.IWorkbenchPart)
 	 */
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 	}
@@ -69,10 +68,10 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 		if (!hasNature(project, SIDENature.NATURE_ID) && !hasNature(project, SIDENatureWithBuilder.NATURE_ID)) {
 			addNature(project, SIDENatureWithBuilder.NATURE_ID);
 		} else if (hasNature(project, SIDENature.NATURE_ID)) {
-			removeNature(project,SIDENature.NATURE_ID);
+			removeNature(project, SIDENature.NATURE_ID);
 			addNature(project, SIDENatureWithBuilder.NATURE_ID);
 		} else if (hasNature(project, SIDENatureWithBuilder.NATURE_ID)) {
-			removeNature(project,SIDENatureWithBuilder.NATURE_ID);
+			removeNature(project, SIDENatureWithBuilder.NATURE_ID);
 			addNature(project, SIDENature.NATURE_ID);
 		}
 	}
@@ -92,7 +91,7 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 		}
 		return found;
 	}
-	
+
 	private void removeNature(IProject project, String nature) {
 		try {
 			IProjectDescription description = project.getDescription();
@@ -103,8 +102,7 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 					// Remove the nature
 					String[] newNatures = new String[natures.length - 1];
 					System.arraycopy(natures, 0, newNatures, 0, i);
-					System.arraycopy(natures, i + 1, newNatures, i,
-							natures.length - i - 1);
+					System.arraycopy(natures, i + 1, newNatures, i, natures.length - i - 1);
 					description.setNatureIds(newNatures);
 					project.setDescription(description, null);
 					return;
@@ -113,7 +111,7 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 		} catch (CoreException e) {
 		}
 	}
-	
+
 	private void addNature(IProject project, String nature) {
 		try {
 			boolean found = false;
@@ -134,6 +132,6 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 				project.setDescription(description, null);
 			}
 		} catch (CoreException e) {
-		}	
+		}
 	}
 }
