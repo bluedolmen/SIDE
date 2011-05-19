@@ -45,6 +45,7 @@ public class MavenUtil {
 		argsL.add("-B");
 		// display stacktrace if error occur 
 		argsL.add("-e");
+		argsL.add("-X");
 
 		// offline mode activated
 		if (offline) {
@@ -71,6 +72,7 @@ public class MavenUtil {
 		}
 		
 		// define streams
+		// TODO use PrintStreamLogger to implement maven logging and error detection
 		File mvOutFile = new File(baseDir, "log.txt");
 		PrintStream stdout = new PrintStream(mvOutFile);
 		File mvOutErrFile = new File(baseDir, "log-err.txt");
