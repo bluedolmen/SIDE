@@ -2,4 +2,13 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="com_bluexml_side_framework_module_repository" name="Embeded Repository" schema="schema/com_bluexml_side_framework_module_repository.exsd"/>
+   <!--extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="com.bluexml.side.Application.ui.PreferencePage"
+            class="com.bluexml.side.util.dependencies.WorkbenchPreferencePage1"
+            id="com.bluexml.side.Util.dependencies.page1"
+            name="SIDE maven configuration">
+      </page>
+   </extension-->
 </plugin>
