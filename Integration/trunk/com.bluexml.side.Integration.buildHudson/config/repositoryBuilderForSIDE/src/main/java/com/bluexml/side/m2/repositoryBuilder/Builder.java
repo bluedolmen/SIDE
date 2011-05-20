@@ -128,14 +128,13 @@ public class Builder {
 			ModuleConstraint McForArchetype_amp = new ModuleConstraint("com.bluexml.side.Framework.maven.ampArchetypeForSide", null, "jar", "1.0.3", "1.0.3");
 			res.add(McForArchetype_amp);
 			ModuleConstraint McMojo_amp = new ModuleConstraint("com.bluexml.side.Integration.m2.ampMojo", null, "jar", "1.0.15", "1.0.15");
-			res.add(McMojo_amp);			
-						
+			res.add(McMojo_amp);
+
 			// zip (share) archetype
 			ModuleConstraint McForArchetype_zip = new ModuleConstraint("com.bluexml.side.Framework.maven.warPatchArchetypeForSide", null, "jar", "1.0.3", "1.0.3");
 			res.add(McForArchetype_zip);
 			ModuleConstraint McMojo_zip = new ModuleConstraint("com.bluexml.side.Integration.m2.zipPackage", null, "jar", "1.0.19", "1.0.19");
 			res.add(McMojo_zip);
-			
 
 			File file = new File(filePath);
 			if (!file.exists()) {
