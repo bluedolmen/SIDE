@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.yworks.com/xml/graphml" xmlns:y="http://www.yworks.com/xml/graphml">
+  
+  <xs:element name="PolyLineEdge">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="y:EdgeLabel"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EdgeLabel" type="xs:NCName"/>
+  <xs:element name="ShapeNode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="y:NodeLabel"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NodeLabel" type="xs:NMTOKEN"/>
+</xs:schema>

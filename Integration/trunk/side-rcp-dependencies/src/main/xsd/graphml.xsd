@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" targetNamespace="http://graphml.graphdrawing.org/gxmlns"
+	xmlns:gxmlns="http://graphml.graphdrawing.org/gxmlns" xmlns:y="http://www.yworks.com/xml/graphml">
+	<xs:import namespace="http://www.yworks.com/xml/graphml"
+		schemaLocation="y.xsd" />
+	<xs:element name="graphml">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="gxmlns:key" />
+				<xs:element ref="gxmlns:graph" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="key">
+		<xs:complexType>
+			<xs:attribute name="for" use="required" type="xs:NCName" />
+			<xs:attribute name="id" use="required" type="xs:NCName" />
+			<xs:attribute name="yfiles.type" use="required" type="xs:NCName" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="graph">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="gxmlns:edge" />
+				<xs:element ref="gxmlns:node" />
+			</xs:choice>
+			<xs:attribute name="edgedefault" use="required" type="xs:NCName" />
+			<xs:attribute name="id" use="required" type="xs:NCName" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="edge">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="gxmlns:dataT">
+					<xs:attribute name="source" use="required" type="xs:integer" />
+					<xs:attribute name="target" use="required" type="xs:integer" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="node">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="gxmlns:dataT">
+					<xs:attribute name="id" use="required" type="xs:integer" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="dataT">
+		<xs:sequence>
+			<xs:element ref="gxmlns:data" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="data">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="y:PolyLineEdge" />
+				<xs:element ref="y:ShapeNode" />
+			</xs:choice>
+			<xs:attribute name="key" use="required" type="xs:NCName" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
