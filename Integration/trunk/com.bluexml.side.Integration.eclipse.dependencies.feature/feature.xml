@@ -982,5 +982,25 @@
          version="1.1.0.v200806040011"
          unpack="false"/>
 
+	<plugin
+         id="org.eclipse.jdt"
+         download-size="0"
+         install-size="0"
+         version="3.5.1.v200909170800"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.jdt.launching.macosx"
+         download-size="0"
+         install-size="0"
+         version="3.2.0.v20090527"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.jdt.launching.ui.macosx"
+         download-size="0"
+         install-size="0"
+         version="1.0.0.v20090527"
+         unpack="false"/>
   
 </feature>
