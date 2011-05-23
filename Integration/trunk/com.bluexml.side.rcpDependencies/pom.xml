@@ -6,6 +6,11 @@
 	<version>0.0.1</version>
 	<name>rcpDependencies</name>
 	<description>project that scan product file and build all dependency graph</description>
+	<parent>
+		<groupId>org.bluexml</groupId>
+		<artifactId>superpom</artifactId>
+		<version>1.10</version>
+	</parent>
 	<dependencies>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -154,5 +159,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>	
+	</build>
 </project>
