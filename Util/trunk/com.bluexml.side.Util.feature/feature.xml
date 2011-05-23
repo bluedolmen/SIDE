@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Util.feature" label="SIDE Modeler Generator Deployer MDA Utilities" version="1.0.265.v25087-20110520" provider-name="BlueXML">
+<feature id="com.bluexml.side.Util.feature" label="SIDE Modeler Generator Deployer MDA Utilities" version="1.0.266.v25122-20110523" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature gathers common tools used by the SIDE modeler, generators and deployers.</description>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <requires>
@@ -45,7 +45,7 @@
   <plugin id="com.bluexml.side.Util.metaModel.validate" download-size="0" install-size="0" version="1.0.28.v18663-20100622" unpack="false" />
   <plugin id="com.bluexml.side.Util.model.merge" download-size="0" install-size="0" version="1.0.28.v18663-20100622" unpack="false" />
   <plugin id="com.bluexml.side.Util.security" download-size="0" install-size="0" version="1.0.41.v18663-20100622" unpack="false" />
-  <plugin id="com.bluexml.side.Util.dependencies" download-size="0" install-size="0" version="1.0.128.v25087-20110520" unpack="false" />
+  <plugin id="com.bluexml.side.Util.dependencies" download-size="0" install-size="0" version="1.0.129.v25122-20110523" unpack="false" />
   <plugin id="com.bluexml.side.Util.feedback" download-size="0" install-size="0" version="1.0.35.v19359-20100714" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.documentation" download-size="0" install-size="0" version="1.0.27.v20246-20100913" unpack="false" />
   <plugin id="com.bluexml.side.Util.componentMonitor" download-size="0" install-size="0" version="1.0.33.v24063-20110329" unpack="false" />
