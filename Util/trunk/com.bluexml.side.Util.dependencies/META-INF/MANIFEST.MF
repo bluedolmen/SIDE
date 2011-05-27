@@ -8,8 +8,8 @@ Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.libs,
  com.bluexml.side.Util.log,
- org.maven.ide.eclipse.maven_embedder,
- org.eclipse.ui
+ org.eclipse.ui,
+ com.bluexml.side.Util.maven2.embeded
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.util.dependencies
