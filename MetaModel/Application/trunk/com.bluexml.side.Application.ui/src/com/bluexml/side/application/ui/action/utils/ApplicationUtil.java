@@ -531,39 +531,58 @@ public class ApplicationUtil {
 				Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
 
 				// Obligatory dependences
-				Map<String, IConfigurationElement> dependencies_extObligatory = new HashMap<String, IConfigurationElement>();
+				List<String> dependencies_extObligatory = new ArrayList<String>();
 				// add generator/deployer dependencies to check
 				IConfigurationElement[] arrayOfdependencies_ext = extFrag.getChildren(APPLICATION_CONSTRAINTS);
 				for (IConfigurationElement configurationElement : arrayOfdependencies_ext) {
 					dependencies_ext.put(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement);
-					dependencies_extObligatory.put(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement);
+					dependencies_extObligatory.add(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID));
 				}
 
 				// check options
 				EList<Option> options = generatorConfiguration.getOptions();
-				List<String> options_ext = new ArrayList<String>();
+				Map<String, IConfigurationElement> options_ext = new HashMap<String, IConfigurationElement>();
+				Map<String, List<String>> options_dependenciesExt = new HashMap<String, List<String>>();
 				IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
 				for (IConfigurationElement configurationElement : arrayOfoptions_ext) {
-					options_ext.add(configurationElement.getAttribute("key"));
+					String attribute_optionId = configurationElement.getAttribute("key");
+					options_ext.put(attribute_optionId, configurationElement);
 
 					IConfigurationElement[] arrayOfConstraints_ext = configurationElement.getChildren(APPLICATION_CONSTRAINTS);
 					for (IConfigurationElement configurationElement2 : arrayOfConstraints_ext) {
 						// add to list of dependencies to check
-						dependencies_ext.put(configurationElement2.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement2);
+						String attribute_moduleId = configurationElement2.getAttribute(APPLICATION_CONSTRAINTS_MODULEID);
+						dependencies_ext.put(attribute_moduleId, configurationElement2);
+						if (!options_dependenciesExt.containsKey(attribute_optionId)) {
+							options_dependenciesExt.put(attribute_optionId, new ArrayList<String>());
+						}
+						options_dependenciesExt.get(attribute_optionId).add(attribute_moduleId);
 					}
 				}
 
 				List<Option> optionsToRemove = new ArrayList<Option>();
+				List<String> dependencies_extOptionals = new ArrayList<String>();
 				for (Option option : options) {
 					// check if defined
-					if (!options_ext.contains(option.getKey())) {
+					String optionId = option.getKey();
+					if (!options_ext.keySet().contains(optionId)) {
 						// remove this
 						optionsToRemove.add(option);
 						// System.out.println("toRemove !"+option);
 					} else {
-						// check option constraints
+						// build list of dependencies from selected options
+						List<String> modulesdependencies = options_dependenciesExt.get(optionId);
+						if (modulesdependencies != null) {
+							for (String moduleId : modulesdependencies) {
+								dependencies_extOptionals.add(moduleId);
+							}
+						} else {
+							// option not found ...
+						}
+
 					}
 				}
+
 				generatorConfiguration.getOptions().removeAll(optionsToRemove);
 
 				// check dependencies
@@ -588,9 +607,10 @@ public class ApplicationUtil {
 
 				// add new constraints
 				List<String> lnewConstraints = new ArrayList<String>();
-				Set<String> s = dependencies_extObligatory.keySet();
-				s.removeAll(updatedConstraints);
-				lnewConstraints.addAll(s);
+				lnewConstraints.addAll(dependencies_extObligatory);
+				lnewConstraints.addAll(dependencies_extOptionals);
+				lnewConstraints.removeAll(updatedConstraints);
+
 				for (String string : lnewConstraints) {
 					IConfigurationElement newConstraint_ext = dependencies_ext.get(string);
 					ModuleConstraint moduleConstraint = ApplicationFactory.eINSTANCE.createModuleConstraint();
