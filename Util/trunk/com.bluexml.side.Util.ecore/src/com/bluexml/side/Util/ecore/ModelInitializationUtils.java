@@ -3,10 +3,12 @@ package com.bluexml.side.Util.ecore;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
@@ -28,6 +30,7 @@ import org.topcased.modeler.diagrams.model.Diagrams;
 import org.topcased.modeler.diagrams.model.DiagramsFactory;
 import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.internal.ModelerPlugin;
+import org.topcased.modeler.tools.DiagramFileInitializer;
 import org.topcased.modeler.tools.Importer;
 import org.topcased.modeler.utils.Utils;
 
@@ -66,7 +69,7 @@ public class ModelInitializationUtils {
 		EList<EObject> l = inputResource.getContents();
 		return l;
 	}
-	
+
 	public static Resource createDiagramFile(EObject root, String diagramId, String name, IFile diagramFile) throws IOException {
 		// retrieve the Diagrams and the DiagramInterchange factory singletons
 		DiagramsFactory factory = DiagramsFactory.eINSTANCE;
@@ -139,7 +142,44 @@ public class ModelInitializationUtils {
 			Dimension insets = new Dimension(10, 10);
 			target.getContentPane().translateToAbsolute(insets);
 			importer.setLocation(target.getContentPane().getBounds().getTopLeft().translate(insets));
+			importer.setAutoLayout(true);
 		}
+	}
+
+	public static void openImportDiagram(EObject rootDiagramObject, String diagramId) throws Exception {
+		if (Thread.currentThread().equals(ModelerPlugin.getDefault().getWorkbench().getDisplay().getThread())) {
+
+			DiagramFileInitializer initializer = new DiagramFileInitializer();
+			//			initializer.createDiagram(rootDiagramObject, diagramId, true, new NullProgressMonitor());
+			initializer.createDiagram(rootDiagramObject, diagramId, "toto", true, new NullProgressMonitor());
+		} else {
+			System.err.println("ModelInitializationUtils.OpenImportDiagram() :" + "bad news ! this method must be run into user-ui thread");
+		}
+
+	}
+
+	public static boolean createDiagramFromExistingModel(final EObject rootDiagramObject, final String diagramId) {
+		Runnable op = new Runnable() {
+
+			public void run() {
+				DiagramFileInitializer initializer = new DiagramFileInitializer();
+				try {
+					initializer.createDiagram(rootDiagramObject, diagramId, true, new NullProgressMonitor());
+				} catch (Throwable ioe) {
+					System.err.println(ioe);
+				}
+				System.out.println("done");
+			}
+		};
+
+		try {
+			ModelerPlugin.getDefault().getWorkbench().getDisplay().syncExec(op);
+
+			return true;
+		} catch (Exception ie) {
+			System.err.println(ie);
+		}
+		return false;
 	}
 
 	private static Modeler openDiagram(Resource diagramResource, IFile file) {
@@ -147,6 +187,7 @@ public class ModelInitializationUtils {
 		if (file != null) {
 			// Open the newly created model
 			try {
+
 				IEditorPart part = IDE.openEditor(ModelerPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage(), file, true);
 				if (part instanceof Modeler) {
 					modeler = (Modeler) part;
