@@ -1897,6 +1897,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getFormElement_Style(), ecorePackage.getEString(), "style", null, 0, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFormElement_Xtension(), ecorePackage.getEString(), "Xtension", null, 0, -1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(formElementEClass, ecorePackage.getEString(), "getFullName", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(formCollectionEClass, FormCollection.class, "FormCollection", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFormCollection_Forms(), this.getFormContainer(), null, "forms", null, 0, -1, FormCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2153,7 +2155,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "noSpecialCharacters validRef"
-		   });																							
+		   });																								
 		addAnnotation
 		  (fieldEClass, 
 		   source, 
@@ -2207,7 +2209,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   new String[] {
 			 "noSpecialCharacters", "self.id.regexMatch(\'[\\w]*\') = true",
 			 "validRef", "if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.oclAsType(clazz::Clazz).getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif"
-		   });											
+		   });			
+		addAnnotation
+		  (formElementEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if self.getContainer().oclIsKindOf(FormElement) then\r\tlet parent : String = self.getContainer().oclAsType(FormElement).getFullName()\r\tin parent.concat(\'.\').concat(self.id)\relse\r\tif self.getContainer().oclIsKindOf(common::NamedModelElement) then\r\t\tself.id\r\telse\r\t\t\'\'\r\tendif\rendif\r"
+		   });										
 		addAnnotation
 		  (formGroupEClass.getEOperations().get(0), 
 		   source, 
@@ -2283,7 +2291,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																				
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																					
 		addAnnotation
 		  (getFormGroup_Presentation(), 
 		   source, 

@@ -14,6 +14,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The FormElement is an element of the form. It can be either a form group or a field. it is an abstract element and so does not directly appear in the Form modeler."/>
     </eAnnotations>
+    <eOperations name="getFullName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if self.getContainer().oclIsKindOf(FormElement) then&#xD;&#x9;let parent : String = self.getContainer().oclAsType(FormElement).getFullName()&#xD;&#x9;in parent.concat('.').concat(self.id)&#xD;else&#xD;&#x9;if self.getContainer().oclIsKindOf(common::NamedModelElement) then&#xD;&#x9;&#x9;self.id&#xD;&#x9;else&#xD;&#x9;&#x9;''&#xD;&#x9;endif&#xD;endif&#xD;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'label' attribute specifies the text associated to a form element. This text is displayed on or near the form element. However, if the form element is a static text, the label provides the text to be displayed.&#xA;Constraint/Limit: The internationalization convention may be used for the label's value; if the value of the label in the form model is of the form &quot;#label&quot;,  the token &quot;label&quot; is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '&lt;xforms_webapp>/WEB-INF/classes/messages.properties'."/>

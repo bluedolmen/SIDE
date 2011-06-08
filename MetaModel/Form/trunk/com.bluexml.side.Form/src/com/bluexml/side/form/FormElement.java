@@ -203,6 +203,15 @@ public interface FormElement extends ModelElement {
 	EList<String> getXtension();
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 *        annotation="http://www.bluexml.com/OCL body='if self.getContainer().oclIsKindOf(FormElement) then\r\tlet parent : String = self.getContainer().oclAsType(FormElement).getFullName()\r\tin parent.concat(\'.\').concat(self.id)\relse\r\tif self.getContainer().oclIsKindOf(common::NamedModelElement) then\r\t\tself.id\r\telse\r\t\t\'\'\r\tendif\rendif\r'"
+	 * @generated
+	 */
+	String getFullName();
+
+	/**
 	 * Returns the value of the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
