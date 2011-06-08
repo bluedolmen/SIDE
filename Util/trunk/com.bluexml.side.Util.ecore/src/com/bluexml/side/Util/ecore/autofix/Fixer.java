@@ -19,7 +19,10 @@ public class Fixer {
 	public Fixer(ProtectedStatement action, IFile model) {
 		this.action = action;
 		this.model = model;
-		this.modelFile = new File(model.getRawLocation().toOSString());
+		if (model != null) {
+			this.modelFile = new File(model.getRawLocation().toOSString());
+		}
+
 	}
 
 	public void registerFixer(AbstractFixer fixer) {
