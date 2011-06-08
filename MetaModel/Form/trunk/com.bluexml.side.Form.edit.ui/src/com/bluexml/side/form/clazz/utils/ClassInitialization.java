@@ -95,7 +95,7 @@ public class ClassInitialization {
 
 	private static int getIndexOfForm(String id, ClassFormCollection parent) {
 		for (FormElement item : parent.getForms()) {
-			if (item.getId().equals(id)) {
+			if (item.getId() != null && item.getId().equals(id)) {
 				return parent.getForms().indexOf(item);
 			}
 		}
