@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.variables.IStringVariableManager;
@@ -33,7 +32,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
-import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.eclipse.ui.externaltools.internal.ui.FileSelectionDialog;
 
 public class RessourcesSelection extends Dialog {
@@ -47,7 +45,7 @@ public class RessourcesSelection extends Dialog {
 	private WidgetListener fListener = new WidgetListener();
 	private String resourcePath = "";
 	private String locationLabel;
-	private String dataType = "";
+	private RESOURCE_TYPE dataType;
 
 	private List<ResourceSelectionListener> resourceSelectionListener = new ArrayList<ResourceSelectionListener>();
 
@@ -63,7 +61,7 @@ public class RessourcesSelection extends Dialog {
 		super(parent);
 	}
 
-	public void init(String locationLabel, String initialValue, String resource_type) {
+	public void init(String locationLabel, String initialValue, RESOURCE_TYPE resource_type) {
 		if (initialValue != null) {
 			this.initialValue = initialValue;
 		} else {
@@ -74,6 +72,10 @@ public class RessourcesSelection extends Dialog {
 		this.dataType = resource_type;
 		this.locationLabel = locationLabel;
 		this.resourcePath = initialValue;
+	}
+	
+	public void init(String locationLabel, String initialValue, String resource_type) {		
+		init(locationLabel, initialValue, RESOURCE_TYPE.getType(resource_type));
 	}
 
 	public Text getLocationField() {
@@ -160,22 +162,7 @@ public class RessourcesSelection extends Dialog {
 		return SWTFactory.createPushButton(parent, label, image);
 	}
 
-	/**
-	 * Prompts the user for a workspace location within the workspace and sets
-	 * the location as a String containing the workspace_loc variable or
-	 * <code>null</code> if no location was obtained from the user.
-	 */
-	protected void handleWorkspaceLocationButtonSelected_() {
-		ResourceSelectionDialog dialog;
-		dialog = new ResourceSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), StylingUtil.Messages.getString("SelectResources.5"));
-		dialog.open();
-		Object[] results = dialog.getResult();
-		if (results == null || results.length < 1) {
-			return;
-		}
-		IResource resource = (IResource) results[0];
-		locationField.setText(newVariableExpression("workspace_loc", resource.getFullPath().toString())); //$NON-NLS-1$
-	}
+	
 
 	@SuppressWarnings("restriction")
 	public static void handleWorkspaceLocationButtonSelected(Shell shell, Text locationField) {
@@ -343,8 +330,24 @@ public class RessourcesSelection extends Dialog {
 		dialog.open();
 		return dialog.getVariableExpression();
 	}
-
+	
 	public enum RESOURCE_TYPE {
-		RESOURCE_TYPE_DIRECTORY, RESOURCE_TYPE_FILE, RESOURCE_TYPE_STRING;
+		RESOURCE_TYPE_DIRECTORY("Directory"), RESOURCE_TYPE_FILE("File"), RESOURCE_TYPE_STRING("String");
+		String code;
+		RESOURCE_TYPE(String code) {
+			this.code=code;
+		}
+		public String toString() {
+			return code;
+		}
+		
+		public static RESOURCE_TYPE getType(String s) {
+			for(RESOURCE_TYPE t : values()) {
+				if (t.toString().endsWith(s)) {
+					return t;
+				}
+			}
+			return null;
+		}
 	}
 }
