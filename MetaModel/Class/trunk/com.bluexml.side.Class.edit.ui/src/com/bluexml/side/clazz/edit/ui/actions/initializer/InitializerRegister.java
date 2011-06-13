@@ -12,11 +12,12 @@ public class InitializerRegister {
 	Map<String, FormModelInitializer> formInitializer;
 	Map<String, PortalModelInitializer> portalInitializer;
 	Map<String, ViewModelInitializer> viewInitializer;
-
+	Map<String, ApplicationModelInitializer> applicationInitializer;
 	public InitializerRegister(IFile classModel, ClassPackage root, ASK_USER ask) throws Exception {
 		this.formInitializer = new HashMap<String, FormModelInitializer>();
 		this.portalInitializer = new HashMap<String, PortalModelInitializer>();
 		this.viewInitializer = new HashMap<String, ViewModelInitializer>();
+		this.applicationInitializer = new HashMap<String, ApplicationModelInitializer>();
 	}
 
 	/**
@@ -38,6 +39,14 @@ public class InitializerRegister {
 	 */
 	public Map<String, ViewModelInitializer> getViewInitializer() {
 		return viewInitializer;
+	}
+
+	
+	/**
+	 * @return the applicationInitializer
+	 */
+	public Map<String, ApplicationModelInitializer> getApplicationInitializer() {
+		return applicationInitializer;
 	}
 
 	public static InitializerRegister getDefaultInitializerRegister(IFile classModel, ClassPackage root, ASK_USER ask) throws Exception {

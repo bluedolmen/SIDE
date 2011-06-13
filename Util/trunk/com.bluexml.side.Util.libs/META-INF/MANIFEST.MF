@@ -11,7 +11,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.apache.ant,
  org.eclipse.emf.common,
- org.eclipse.emf.ecore
+ org.eclipse.emf.ecore,
+ org.eclipse.core.variables,
+ org.eclipse.debug.ui,
+ org.eclipse.ui.externaltools,
+ org.eclipse.ui.ide
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
@@ -42,6 +46,7 @@ Export-Package: com.Ostermiller.util;uses:="javax.swing",
    org.eclipse.core.runtime",
  com.bluexml.side.util.libs.ant,
  com.bluexml.side.util.libs.eclipse,
+ com.bluexml.side.util.libs.eclipse.wizards,
  com.bluexml.side.util.libs.ecore,
  com.bluexml.side.util.libs.httpRequest,
  com.bluexml.side.util.libs.md5,

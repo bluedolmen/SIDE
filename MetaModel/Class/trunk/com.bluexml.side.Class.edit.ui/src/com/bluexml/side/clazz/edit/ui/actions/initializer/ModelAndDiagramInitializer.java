@@ -4,12 +4,11 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
@@ -39,22 +38,21 @@ public abstract class ModelAndDiagramInitializer extends ModelInitializer {
 	}
 
 	protected void initializeDiagram() throws Exception {
-		IFile diagramFile = IFileHelper.getIFile(new File(newModelPath.toOSString() + "di")); //$NON-NLS-1$
+		final IFile diagramFile = IFileHelper.getIFile(new File(newModelPath.toOSString() + "di")); //$NON-NLS-1$
+		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 
-		ModelInitializationUtils.createDiagramFile(newRootObject, diagramTypeId, newModelPath.lastSegment() + "di", diagramFile); //$NON-NLS-1$
-		ModelInitializationUtils.openImportDiagram(newRootObject, diagramTypeId);
-		ModelInitializationUtils.createDiagramFromExistingModel(newRootObject, diagramTypeId);
-	}
+			public void run() {
+				try {
+					//					ModelInitializationUtils.createDiagramFile(newRootObject, diagramTypeId, newModelPath.lastSegment() + "di", diagramFile); //$NON-NLS-1$
+					ModelInitializationUtils.openImportDiagram(newRootObject, diagramTypeId);
+					//					ModelInitializationUtils.createDiagramFromExistingModel(newRootObject, diagramTypeId);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
-	/*
-	 * (non-Javadoc)
-	 * @seecom.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer#
-	 * initialize(org.eclipse.emf.edit.domain.EditingDomain)
-	 */
-	@Override
-	protected Command initialize(EditingDomain editingDomain) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+			}
+		});
+
 	}
 
 	/*
@@ -69,7 +67,6 @@ public abstract class ModelAndDiagramInitializer extends ModelInitializer {
 		page.closeEditor(editorPart, false);
 		// save initialized resource
 		saveNewModel();
-
 	}
 
 }

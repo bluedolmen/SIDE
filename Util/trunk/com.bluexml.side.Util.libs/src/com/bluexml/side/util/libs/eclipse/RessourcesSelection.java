@@ -1,4 +1,4 @@
-package com.bluexml.side.application.ui.dialogs;
+package com.bluexml.side.util.libs.eclipse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.internal.ui.SWTFactory;
+import org.eclipse.debug.ui.StringVariableSelectionDialog;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -35,13 +36,11 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.eclipse.ui.externaltools.internal.ui.FileSelectionDialog;
 
-import com.bluexml.side.application.ui.Activator;
-import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
+import com.bluexml.side.util.libs.Activator;
+import com.bluexml.side.util.libs.Messages;
 
 public class RessourcesSelection extends Dialog {
-	public static final String RESOURCE_TYPE_DIRECTORY = "Directory";
-	public static final String RESOURCE_TYPE_FILE = "File";
-	public static final String RESOURCE_TYPE_STRING = "String";
+	public static final Messages Messages = new Messages(Activator.PLUGIN_ID, "com.bluexml.side.util.libs.eclipse.messages");
 
 	private Text locationField;
 	private String initialValue = "";
@@ -120,16 +119,16 @@ public class RessourcesSelection extends Dialog {
 		buttonComposite.setLayoutData(gridData);
 		buttonComposite.setFont(parent.getFont());
 
-		if (!dataType.equals(RESOURCE_TYPE_STRING)) {
-			workspaceLocationButton = createPushButton(buttonComposite, Activator.Messages.getString("SelectResources.2"), null); //$NON-NLS-1$
+		if (!dataType.equals(RESOURCE_TYPE.RESOURCE_TYPE_STRING)) {
+			workspaceLocationButton = createPushButton(buttonComposite, Messages.getString("SelectResources.2"), null); //$NON-NLS-1$
 			workspaceLocationButton.addSelectionListener(fListener);
 			addControlAccessibleListener(workspaceLocationButton, group.getText() + " " + workspaceLocationButton.getText()); //$NON-NLS-1$
 
-			fileLocationButton = createPushButton(buttonComposite, Activator.Messages.getString("SelectResources.3"), null); //$NON-NLS-1$
+			fileLocationButton = createPushButton(buttonComposite, Messages.getString("SelectResources.3"), null); //$NON-NLS-1$
 			fileLocationButton.addSelectionListener(fListener);
 			addControlAccessibleListener(fileLocationButton, group.getText() + " " + fileLocationButton.getText()); //$NON-NLS-1$
 		}
-		variablesLocationButton = createPushButton(buttonComposite, Activator.Messages.getString("SelectResources.4"), null); //$NON-NLS-1$
+		variablesLocationButton = createPushButton(buttonComposite, Messages.getString("SelectResources.4"), null); //$NON-NLS-1$
 		variablesLocationButton.addSelectionListener(fListener);
 		addControlAccessibleListener(variablesLocationButton, group.getText() + " " + variablesLocationButton.getText()); //$NON-NLS-1$
 	}
@@ -171,7 +170,7 @@ public class RessourcesSelection extends Dialog {
 	 */
 	protected void handleWorkspaceLocationButtonSelected_() {
 		ResourceSelectionDialog dialog;
-		dialog = new ResourceSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), Activator.Messages.getString("SelectResources.5"));
+		dialog = new ResourceSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), Messages.getString("SelectResources.5"));
 		dialog.open();
 		Object[] results = dialog.getResult();
 		if (results == null || results.length < 1) {
@@ -182,9 +181,9 @@ public class RessourcesSelection extends Dialog {
 	}
 
 	@SuppressWarnings("restriction")
-	protected void handleWorkspaceLocationButtonSelected() {
+	public static void handleWorkspaceLocationButtonSelected(Shell shell, Text locationField) {
 		FileSelectionDialog dialog;
-		dialog = new FileSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), Activator.Messages.getString("SelectResources.5"));
+		dialog = new FileSelectionDialog(shell, ResourcesPlugin.getWorkspace().getRoot(), Messages.getString("SelectResources.5"));
 		dialog.open();
 		IStructuredSelection result = dialog.getResult();
 		if (result == null) {
@@ -201,10 +200,13 @@ public class RessourcesSelection extends Dialog {
 	 * Prompts the user for a working directory location within the workspace
 	 * and sets the working directory as a String containing the workspace_loc
 	 * variable or <code>null</code> if no location was obtained from the user.
+	 * 
+	 * @param locationField
+	 * @param shell
 	 */
-	private void handleWorkspaceDirectoryButtonSelected() {
+	public static void handleWorkspaceDirectoryButtonSelected(Shell shell, Text locationField) {
 		ContainerSelectionDialog containerDialog;
-		containerDialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), false, Activator.Messages.getString("SelectResources.6"));
+		containerDialog = new ContainerSelectionDialog(shell, ResourcesPlugin.getWorkspace().getRoot(), false, Messages.getString("SelectResources.6"));
 		containerDialog.open();
 		Object[] resource = containerDialog.getResult();
 		String text = null;
@@ -219,9 +221,12 @@ public class RessourcesSelection extends Dialog {
 	/**
 	 * Prompts the user to choose a location from the filesystem and
 	 * sets the location as the full path of the selected file.
+	 * 
+	 * @param locationField
+	 * @param shell
 	 */
-	protected void handleFileSystemLocationButtonSelected() {
-		FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
+	public static void handleFileSystemLocationButtonSelected(Shell shell, Text locationField) {
+		FileDialog fileDialog = new FileDialog(shell, SWT.NONE);
 		fileDialog.setFileName(locationField.getText());
 		String text = fileDialog.open();
 		if (text != null) {
@@ -232,9 +237,9 @@ public class RessourcesSelection extends Dialog {
 	/**
 	 * Prompts the user to choose a working directory from the filesystem.
 	 */
-	private void handleFileSystemDirecoryButtonSelected() {
-		DirectoryDialog dialog = new DirectoryDialog(getShell(), SWT.SAVE);
-		dialog.setMessage(Activator.Messages.getString("SelectResources.7"));
+	public static void handleFileSystemDirecoryButtonSelected(Shell shell, Text locationField) {
+		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE);
+		dialog.setMessage(Messages.getString("SelectResources.7"));
 		dialog.setFilterPath(locationField.getText());
 		String text = dialog.open();
 		if (text != null) {
@@ -248,7 +253,7 @@ public class RessourcesSelection extends Dialog {
 	 * in the given field.
 	 */
 	private void handleVariablesButtonSelected(Text textField) {
-		String variable = ApplicationUtil.getVariable(getShell());
+		String variable = getVariable(getShell());
 		if (variable != null) {
 			textField.insert(variable);
 		}
@@ -260,7 +265,7 @@ public class RessourcesSelection extends Dialog {
 	 * 
 	 * @see IStringVariableManager#generateVariableExpression(String, String)
 	 */
-	protected String newVariableExpression(String varName, String arg) {
+	protected static String newVariableExpression(String varName, String arg) {
 		return VariablesPlugin.getDefault().getStringVariableManager().generateVariableExpression(varName, arg);
 	}
 
@@ -302,16 +307,16 @@ public class RessourcesSelection extends Dialog {
 		public void widgetSelected(SelectionEvent e) {
 			Object source = e.getSource();
 			if (source == workspaceLocationButton) {
-				if (dataType.equals(RESOURCE_TYPE_DIRECTORY)) {
-					handleWorkspaceDirectoryButtonSelected();
+				if (dataType.equals(RESOURCE_TYPE.RESOURCE_TYPE_DIRECTORY)) {
+					handleWorkspaceDirectoryButtonSelected(getShell(), locationField);
 				} else {
-					handleWorkspaceLocationButtonSelected();
+					handleWorkspaceLocationButtonSelected(getShell(), locationField);
 				}
 			} else if (source == fileLocationButton) {
-				if (dataType.equals(RESOURCE_TYPE_DIRECTORY)) {
-					handleFileSystemDirecoryButtonSelected();
+				if (dataType.equals(RESOURCE_TYPE.RESOURCE_TYPE_DIRECTORY)) {
+					handleFileSystemDirecoryButtonSelected(getShell(), locationField);
 				} else {
-					handleFileSystemLocationButtonSelected();
+					handleFileSystemLocationButtonSelected(getShell(), locationField);
 				}
 			} else if (source == variablesLocationButton) {
 				handleVariablesButtonSelected(locationField);
@@ -336,4 +341,13 @@ public class RessourcesSelection extends Dialog {
 		super.okPressed();
 	}
 
+	public static String getVariable(Shell shell) {
+		StringVariableSelectionDialog dialog = new StringVariableSelectionDialog(shell);
+		dialog.open();
+		return dialog.getVariableExpression();
+	}
+
+	public enum RESOURCE_TYPE {
+		RESOURCE_TYPE_DIRECTORY, RESOURCE_TYPE_FILE, RESOURCE_TYPE_STRING;
+	}
 }

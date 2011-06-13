@@ -926,9 +926,5 @@ public class ApplicationUtil {
 		return manager.performStringSubstitution(exp);
 	}
 
-	public static String getVariable(Shell shell) {
-		StringVariableSelectionDialog dialog = new StringVariableSelectionDialog(shell);
-		dialog.open();
-		return dialog.getVariableExpression();
-	}
+	
 }

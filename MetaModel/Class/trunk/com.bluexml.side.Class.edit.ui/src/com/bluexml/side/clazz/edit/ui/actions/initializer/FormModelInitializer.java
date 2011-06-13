@@ -25,7 +25,7 @@ public class FormModelInitializer extends ModelInitializer {
 	@Override
 	protected Command initialize(EditingDomain editingDomain) {
 		ClassFormCollection createClassFormCollection = FormFactory.eINSTANCE.createClassFormCollection();
-		createClassFormCollection.setName(newModelPath.lastSegment().replace(newModelExt, ""));
+		createClassFormCollection.setName(getModelName());
 		newRootObject = createClassFormCollection;
 		CompoundCommand cc = new CompoundCommand();
 		for (Clazz c : root.getAllClasses()) {
@@ -38,7 +38,7 @@ public class FormModelInitializer extends ModelInitializer {
 			cc.append(cmd);
 
 		}
-		
+
 		return cc;
 	}
 

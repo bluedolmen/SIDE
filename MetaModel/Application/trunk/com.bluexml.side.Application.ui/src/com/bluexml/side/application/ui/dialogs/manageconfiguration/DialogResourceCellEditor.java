@@ -12,8 +12,8 @@ import org.eclipse.swt.widgets.Text;
 
 import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.table.GeneratorParameter;
-import com.bluexml.side.application.ui.dialogs.ResourceSelectionListener;
-import com.bluexml.side.application.ui.dialogs.RessourcesSelection;
+import com.bluexml.side.util.libs.eclipse.ResourceSelectionListener;
+import com.bluexml.side.util.libs.eclipse.RessourcesSelection;
 
 public class DialogResourceCellEditor extends CellEditor {
 	private RessourcesSelection resourceSelector;

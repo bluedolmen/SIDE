@@ -46,6 +46,8 @@ public abstract class ModelInitializer {
 	protected final String newModelExt;
 	protected final IPath newModelPath;
 
+	protected boolean initialized = false;
+
 	/**
 	 * @return the newModelPath
 	 */
@@ -111,9 +113,7 @@ public abstract class ModelInitializer {
 	public void initialize() throws Exception {
 		project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 		// get new Resource
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IWorkspaceRoot workspaceRoot = workspace.getRoot();
-		IFile newModelFile = (IFile) workspaceRoot.getFileForLocation(newModelPath);
+		final IFile newModelFile = getNewModelIFile();
 		boolean doWork = true;
 		boolean exists = newModelFile.exists();
 
@@ -136,18 +136,43 @@ public abstract class ModelInitializer {
 			options.put(XMLResource.OPTION_ENCODING, "UTF-8");
 			resource.save(options);
 
-			// open editor to initialize model
-			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(newModelPath.toFile().getName());
-			IEditorPart editorPart = page.openEditor(new FileEditorInput(newModelFile), desc.getId());
+			try {
+				PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 
-			// initialize model
-			IEditingDomainProvider editor = (IEditingDomainProvider) editorPart;
-			Command creationCommand = initialize(editor.getEditingDomain());
-			editor.getEditingDomain().getCommandStack().execute(creationCommand);
+					public void run() {
+						// open editor to initialize model
+						IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+						IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(newModelPath.toFile().getName());
+						IEditorPart editorPart;
+						try {
+							editorPart = page.openEditor(new FileEditorInput(newModelFile), desc.getId());
 
-			postInitialization(newModelFile, page, desc, editorPart);
+							// initialize model
+							IEditingDomainProvider editor = (IEditingDomainProvider) editorPart;
+
+							Command creationCommand = initialize(editor.getEditingDomain());
+
+							editor.getEditingDomain().getCommandStack().execute(creationCommand);
+							postInitialization(newModelFile, page, desc, editorPart);
+						} catch (Exception e) {
+							throw new RuntimeException(e);
+						}
+					}
+				});
+			} catch (Throwable e) {
+				initialized = false;
+				e.printStackTrace();
+				return;
+			}
+			initialized = true;
 		}
+	}
+
+	public IFile getNewModelIFile() {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceRoot workspaceRoot = workspace.getRoot();
+		IFile newModelFile = (IFile) workspaceRoot.getFileForLocation(newModelPath);
+		return newModelFile;
 	}
 
 	protected void postInitialization(IFile newModelFile, IWorkbenchPage page, IEditorDescriptor desc, IEditorPart editorPart) throws IOException, PartInitException {
@@ -157,6 +182,28 @@ public abstract class ModelInitializer {
 
 		// open editor
 		page.openEditor(new FileEditorInput(newModelFile), desc.getId());
+	}
+
+	public String getModelName() {
+		return getNewFileName().replace(newModelExt, "");
+	}
+
+	public String getNewFileName() {
+		return newModelPath.lastSegment();
+	}
+
+	/**
+	 * @return the newRootObject
+	 */
+	public EObject getNewRootObject() {
+		return newRootObject;
+	}
+
+	/**
+	 * @return the initialized
+	 */
+	public boolean isInitialized() {
+		return initialized;
 	}
 
 	public enum ASK_USER {

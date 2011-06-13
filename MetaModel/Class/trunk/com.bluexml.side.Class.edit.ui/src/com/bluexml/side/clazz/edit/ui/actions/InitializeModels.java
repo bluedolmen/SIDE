@@ -16,6 +16,7 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
+import com.bluexml.side.clazz.edit.ui.Messages;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer.ASK_USER;
@@ -54,7 +55,7 @@ public class InitializeModels implements IObjectActionDelegate {
 
 			boolean override = false;
 			if (exists) {
-				override = UIUtils.showConfirmation("Models exists !", "Models have already been created (or some of them). Do you want to overwrite them ?");
+				override = UIUtils.showConfirmation(Messages.InitializeModels_0, Messages.InitializeModels_1);
 			}
 
 			if (!exists || override) {

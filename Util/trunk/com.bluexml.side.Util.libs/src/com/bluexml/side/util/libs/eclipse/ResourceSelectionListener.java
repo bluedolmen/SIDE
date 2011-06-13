@@ -1,4 +1,4 @@
-package com.bluexml.side.application.ui.dialogs;
+package com.bluexml.side.util.libs.eclipse;
 
 public interface ResourceSelectionListener {
 

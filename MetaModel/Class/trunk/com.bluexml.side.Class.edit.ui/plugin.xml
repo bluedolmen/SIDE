@@ -10,7 +10,7 @@
             path="additions">
         <separator name="group1" />
       </menu>
-      <action class="com.bluexml.side.clazz.edit.ui.actions.InitializeModels" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Class.edit.ui.editor.initializeOtherModel" label="Initialize Other Model" menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1" />
+      <action class="com.bluexml.side.clazz.edit.ui.actions.InitializeModelsStartWizard" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Class.edit.ui.editor.initializeOtherModel" label="Initialize SIDE Models" menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1" />
       <!--
       <action class="com.bluexml.side.clazz.edit.ui.actions.InitializeFormModel" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Class.edit.ui.editor.newAction" label="Initialize Form Model" menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1" />
       <action class="com.bluexml.side.clazz.edit.ui.actions.InitializeViewModel" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Class.edit.ui.action1" label="Initialize View Model" menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1" /> -->
