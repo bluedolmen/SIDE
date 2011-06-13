@@ -21,9 +21,6 @@ import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
 import templates.Model.alfrescoGenerator_model_aspects
 import templates.Model.alfrescoGenerator_model_classes
-import templates.Model.alfrescoGenerator_model_imports
-import templates.Model.alfrescoGenerator_model_NS
-import templates.Model.alfrescoGenerator_model_constraints
 import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 import com.bluexml.side.clazz.service.alfresco.ClassServices
 import com.bluexml.side.clazz.service.alfresco.CommonServices
@@ -32,29 +29,17 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 
-<%script type="clazz.Model" name="validatedFilename"%>
-<%if (eContainer() == null) {%><%getConfModulePath()%>/model/<%name%>Model.xml<%}%>
-<%script type="clazz.Model" name="generator" file="<%validatedFilename%>"%>
-<?xml version='1.0' encoding='iso-8859-1'?>
 
-<model name="<%name%>:model" xmlns="http://www.alfresco.org/model/dictionary/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-	<!-- Definition of the model -->
-
-	<description><%name%></description>
-	<author>Alfresco Generator</author>
-	<version>1.0</version>
-	
-	<%model_imports%>
-	
-	<%model_ns%>
-	
-	<%model_constraints%>
-	
-	<types>
-		<%alfrescoGenerator_Classes()%>		
-	</types>
-	<aspects>
-		<%alfrescoGenerator_model_aspects()%>		
-	</aspects> 
-	
-</model>
+<%script type="clazz.Model" name="model_imports"%>
+	<!-- Imports are required to allow references to definitions in other models -->
+	<imports>
+		<!-- Import Alfresco Definitions -->
+		<import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+		<import uri="http://www.alfresco.org/model/application/1.0" prefix="app"/>
+		<import uri="http://www.alfresco.org/model/wcmmodel/1.0" prefix="wcm"/>
+      	<import uri="http://www.alfresco.org/model/forum/1.0" prefix="fm"/>
+      	<import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
+      	<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+      	<!-- Import BlueXML Definitions -->
+      	<import uri="http://www.bluexml.com/model/content/1.0" prefix="bxcm" />
+	</imports>

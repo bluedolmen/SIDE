@@ -6,22 +6,22 @@ model/published
 NS URI more than one by models, and mix everywhere (type ns1, properties ns2 ...)
 
 class
-./archive (true -> delete move node into archive, otherwise delete forever)
-./includedInSuperTypeQuery (3.4+)
-./overrides
+./archive (true -> delete move node into archive, otherwise delete forever) -> metadata
+./includedInSuperTypeQuery (3.4+) ->metadata
+./overrides (:s
 
 childAssociation
 ./duplicate (allow more than one instance with same name)
 ./propagateTimestamps
 
 property/
-./mandatory/@enforced (if true tested on repository level)
-./index (must set tokenized,stored,atomic)
-./constraints (revers)
+./mandatory/@enforced (if true tested on repository level) -> metadata ??
+./index (must set tokenized,stored,atomic) -> metadata
+./constraints (revers) -> commom.constraint
 ./protected (do not take account about this)
 
 
-// MM class has aspect doit être disponible pour les abstractClass
+== MM class has aspect link for abstractClass ==
 
 FIX :
 enumeration ref
