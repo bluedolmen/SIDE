@@ -19,13 +19,13 @@ public class InitializerPageWelcome extends AbstractFieldsPage {
 	@Override
 	protected void createFieldsControls(Composite composite) {
 		//		createRessourceControl(composite, label, id, type);
-		createRessourceControl(composite, "Alfresco Home", Fields.alfresco_home.toString(), RESOURCE_TYPE.RESOURCE_TYPE_DIRECTORY);
+		createResourceControl(composite, "Alfresco Home", Fields.alfresco_home.toString(), RESOURCE_TYPE.RESOURCE_TYPE_DIRECTORY);
 
 		ArrayList<String> allowedValues = new ArrayList<String>();
 		for (AlfrescoVersions alfV : AlfrescoVersions.values()) {
 			allowedValues.add(alfV.toString());
 		}
-		createArchetypeTypeControl(composite, "Alfresco Version", Fields.alfresco_version.toString(), allowedValues);
+		createComboControl(composite, "Alfresco Version", Fields.alfresco_version.toString(), allowedValues);
 
 		createBooleanFieldControl(composite, "Launch Generation ?", Fields.generate.toString(), false);
 	}
