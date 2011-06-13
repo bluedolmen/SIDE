@@ -36,11 +36,8 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.eclipse.ui.externaltools.internal.ui.FileSelectionDialog;
 
-import com.bluexml.side.util.libs.Activator;
-import com.bluexml.side.util.libs.Messages;
-
 public class RessourcesSelection extends Dialog {
-	public static final Messages Messages = new Messages(Activator.PLUGIN_ID, "com.bluexml.side.util.libs.eclipse.messages");
+	
 
 	private Text locationField;
 	private String initialValue = "";
@@ -120,15 +117,15 @@ public class RessourcesSelection extends Dialog {
 		buttonComposite.setFont(parent.getFont());
 
 		if (!dataType.equals(RESOURCE_TYPE.RESOURCE_TYPE_STRING)) {
-			workspaceLocationButton = createPushButton(buttonComposite, Messages.getString("SelectResources.2"), null); //$NON-NLS-1$
+			workspaceLocationButton = createPushButton(buttonComposite, StylingUtil.Messages.getString("SelectResources.2"), null); //$NON-NLS-1$
 			workspaceLocationButton.addSelectionListener(fListener);
 			addControlAccessibleListener(workspaceLocationButton, group.getText() + " " + workspaceLocationButton.getText()); //$NON-NLS-1$
 
-			fileLocationButton = createPushButton(buttonComposite, Messages.getString("SelectResources.3"), null); //$NON-NLS-1$
+			fileLocationButton = createPushButton(buttonComposite, StylingUtil.Messages.getString("SelectResources.3"), null); //$NON-NLS-1$
 			fileLocationButton.addSelectionListener(fListener);
 			addControlAccessibleListener(fileLocationButton, group.getText() + " " + fileLocationButton.getText()); //$NON-NLS-1$
 		}
-		variablesLocationButton = createPushButton(buttonComposite, Messages.getString("SelectResources.4"), null); //$NON-NLS-1$
+		variablesLocationButton = createPushButton(buttonComposite, StylingUtil.Messages.getString("SelectResources.4"), null); //$NON-NLS-1$
 		variablesLocationButton.addSelectionListener(fListener);
 		addControlAccessibleListener(variablesLocationButton, group.getText() + " " + variablesLocationButton.getText()); //$NON-NLS-1$
 	}
@@ -170,7 +167,7 @@ public class RessourcesSelection extends Dialog {
 	 */
 	protected void handleWorkspaceLocationButtonSelected_() {
 		ResourceSelectionDialog dialog;
-		dialog = new ResourceSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), Messages.getString("SelectResources.5"));
+		dialog = new ResourceSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), StylingUtil.Messages.getString("SelectResources.5"));
 		dialog.open();
 		Object[] results = dialog.getResult();
 		if (results == null || results.length < 1) {
@@ -183,7 +180,7 @@ public class RessourcesSelection extends Dialog {
 	@SuppressWarnings("restriction")
 	public static void handleWorkspaceLocationButtonSelected(Shell shell, Text locationField) {
 		FileSelectionDialog dialog;
-		dialog = new FileSelectionDialog(shell, ResourcesPlugin.getWorkspace().getRoot(), Messages.getString("SelectResources.5"));
+		dialog = new FileSelectionDialog(shell, ResourcesPlugin.getWorkspace().getRoot(), StylingUtil.Messages.getString("SelectResources.5"));
 		dialog.open();
 		IStructuredSelection result = dialog.getResult();
 		if (result == null) {
@@ -206,7 +203,7 @@ public class RessourcesSelection extends Dialog {
 	 */
 	public static void handleWorkspaceDirectoryButtonSelected(Shell shell, Text locationField) {
 		ContainerSelectionDialog containerDialog;
-		containerDialog = new ContainerSelectionDialog(shell, ResourcesPlugin.getWorkspace().getRoot(), false, Messages.getString("SelectResources.6"));
+		containerDialog = new ContainerSelectionDialog(shell, ResourcesPlugin.getWorkspace().getRoot(), false, StylingUtil.Messages.getString("SelectResources.6"));
 		containerDialog.open();
 		Object[] resource = containerDialog.getResult();
 		String text = null;
@@ -239,7 +236,7 @@ public class RessourcesSelection extends Dialog {
 	 */
 	public static void handleFileSystemDirecoryButtonSelected(Shell shell, Text locationField) {
 		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE);
-		dialog.setMessage(Messages.getString("SelectResources.7"));
+		dialog.setMessage(StylingUtil.Messages.getString("SelectResources.7"));
 		dialog.setFilterPath(locationField.getText());
 		String text = dialog.open();
 		if (text != null) {

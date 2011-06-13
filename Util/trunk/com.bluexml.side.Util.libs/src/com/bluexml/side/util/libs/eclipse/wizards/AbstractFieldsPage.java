@@ -13,7 +13,6 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -28,12 +27,10 @@ public abstract class AbstractFieldsPage extends WizardPage {
 
 	protected AbstractFieldsPage(String pageName) {
 		super(pageName);
-		// TODO Auto-generated constructor stub
 	}
 
 	public AbstractFieldsPage(String pageName, String title, ImageDescriptor titleImage) {
 		super(pageName, title, titleImage);
-		// TODO Auto-generated constructor stub
 	}
 
 	protected Map<String, String> values = new HashMap<String, String>();
@@ -44,9 +41,7 @@ public abstract class AbstractFieldsPage extends WizardPage {
 
 	public void createControl(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NULL);
-		GridLayout layout = new GridLayout();
-		layout.numColumns = 4;
-		composite.setLayout(layout);
+		composite.setLayout(StylingUtil.layout);
 		setControl(composite);
 
 		createFieldsControls(composite);
@@ -94,14 +89,13 @@ public abstract class AbstractFieldsPage extends WizardPage {
 	/**
 	 * @param composite
 	 */
-	protected void createArchetypeTypeControl(Composite composite, String label, final String id, List<String> allowedValues) {
+	protected void createComboControl(Composite composite, String label, final String id, List<String> allowedValues) {
 		values.put(id, null);
 		Label archetypeIdLabel = new Label(composite, SWT.NONE);
 		archetypeIdLabel.setText(label);
 		final Combo archetypeIdControl = new Combo(composite, SWT.BORDER | SWT.READ_ONLY);
 
 		// convert to String[]
-
 		String[] items = allowedValues.toArray(new String[allowedValues.size()]);
 
 		archetypeIdControl.setItems(items);
@@ -131,7 +125,7 @@ public abstract class AbstractFieldsPage extends WizardPage {
 		setPageComplete(values.size() > 0);
 	}
 
-	protected void createRessourceControl(Composite composite, final String label, final String id, RESOURCE_TYPE type) {
+	protected void createResourceControl(Composite composite, final String label, final String id, RESOURCE_TYPE type) {
 		final Text t = createTextFieldControl(composite, label, id);
 		GridData gd = StylingUtil.getNewLayoutData();
 		gd.horizontalSpan = StylingUtil.layout.numColumns - 2;
@@ -139,7 +133,7 @@ public abstract class AbstractFieldsPage extends WizardPage {
 
 		// add button and setup events
 		Button b = new Button(composite, SWT.PUSH);
-		b.setText("select");
+		b.setText(StylingUtil.Messages.getString("AbstractFieldsPage.0"));
 		SelectionListener listener_file;
 		if (type.equals(RESOURCE_TYPE.RESOURCE_TYPE_DIRECTORY)) {
 			listener_file = new SelectionListener() {
@@ -152,7 +146,7 @@ public abstract class AbstractFieldsPage extends WizardPage {
 				}
 
 				public void widgetDefaultSelected(SelectionEvent e) {
-					System.out.println("AbstractFieldsPage.createRessourceControl(...).new SelectionListener() {...}.widgetDefaultSelected()");
+					System.out.println("AbstractFieldsPage.createRessourceControl(...).new SelectionListener() {...}.widgetDefaultSelected()"); //$NON-NLS-1$
 				}
 			};
 		} else {

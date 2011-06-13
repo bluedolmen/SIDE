@@ -8,9 +8,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 
+import com.bluexml.side.util.libs.Activator;
+import com.bluexml.side.util.libs.Messages;
+
 public class StylingUtil {
-	static public GridLayout layout = getLayout();
-	static public Color color = new Color(Display.getCurrent(), 255, 255, 255);
+	public static final Messages Messages = new Messages(Activator.PLUGIN_ID, "com.bluexml.side.util.libs.eclipse.messages");
+	static final public GridLayout layout = getLayout();
+	static final public Color color = new Color(Display.getCurrent(), 255, 255, 255);
 
 	public static GridData getNewLayoutData() {
 		return new GridData(GridData.FILL_HORIZONTAL);
