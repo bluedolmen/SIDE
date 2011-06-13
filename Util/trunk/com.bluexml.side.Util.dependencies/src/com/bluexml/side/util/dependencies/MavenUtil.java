@@ -22,6 +22,7 @@ import org.jdom.Element;
 import org.jdom.Namespace;
 
 public class MavenUtil {
+	Boolean default_offline = false;
 
 	public MavenExecutionResult doMavenGoal(File baseDir, List<String> goals, Map<String, String> parameters, List<String> profiles, Boolean offline) throws Exception {
 		return doMavenGoalUsingMavenCli(baseDir, goals, parameters, profiles, offline);
@@ -29,6 +30,7 @@ public class MavenUtil {
 
 	@SuppressWarnings("unchecked")
 	private MavenExecutionResult doMavenGoalUsingMavenCli(File baseDir, List<String> goals, Map<String, String> parameters, List<String> profiles, Boolean offline) throws Exception {
+
 		// save the current classloader ... maven play with thread classloader Grrr
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
 
@@ -46,7 +48,9 @@ public class MavenUtil {
 		// display stacktrace if error occur 
 		argsL.add("-e");
 		argsL.add("-X");
-
+		if (offline == null) {
+			offline = false;
+		}
 		// offline mode activated
 		if (offline) {
 			argsL.add("-o");
@@ -67,8 +71,10 @@ public class MavenUtil {
 		}
 
 		// user Properties
-		for (Map.Entry<String, String> entry : parameters.entrySet()) {
-			argsL.add("-D" + entry.getKey() + "=" + entry.getValue());
+		if (parameters != null) {
+			for (Map.Entry<String, String> entry : parameters.entrySet()) {
+				argsL.add("-D" + entry.getKey() + "=" + entry.getValue());
+			}
 		}
 		
 		// define streams
@@ -77,18 +83,18 @@ public class MavenUtil {
 		PrintStream stdout = new PrintStream(mvOutFile);
 		File mvOutErrFile = new File(baseDir, "log-err.txt");
 		PrintStream stderr = new PrintStream(mvOutErrFile);
-		
+
 		stdout.println("MavenUtil execute maven request :");
 		stdout.println("** args :" + getCommandFromMavenExecutionArgs(argsL));
 		stdout.println("** working directory :" + workingDirectory);
-		
+
 		String[] args = argsL.toArray(new String[argsL.size()]);
 		// execute maven request
 		mci.doMain(args, workingDirectory, stdout, stderr);
 
 		// build a MavenEcecutionResult
 		DefaultMavenExecutionResult defaultMavenExecutionResult = new DefaultMavenExecutionResult();
-		
+
 		// restore classloader
 		Thread.currentThread().setContextClassLoader(cl);
 

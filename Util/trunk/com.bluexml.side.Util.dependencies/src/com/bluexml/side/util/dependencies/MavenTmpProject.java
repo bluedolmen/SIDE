@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.maven.execution.MavenExecutionResult;
 import org.jdom.Document;
@@ -23,7 +22,7 @@ public class MavenTmpProject {
 	private MavenUtil mavenUtil;
 
 	// String[] inline_profiles = new String[] { "public", "local" };
-	String[] inline_profiles = new String[] { "public" };
+	String[] online_profiles = new String[] { "public" };
 	String[] offline_profiles = new String[] { "offline" };
 	private static final String TARGET_ARTIFACT = "tmpProject_";
 	private Boolean offline = false;
@@ -124,7 +123,7 @@ public class MavenTmpProject {
 		createProject(artifactId);
 		HashMap<String, String> params = new HashMap<String, String>();
 
-		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:go-offline", params, inline_profiles, false);
+		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:go-offline", params, online_profiles, false);
 		if (result.getExceptions().size() > 0) {
 			System.err.println(this);
 			List<?> exceps = result.getExceptions();
