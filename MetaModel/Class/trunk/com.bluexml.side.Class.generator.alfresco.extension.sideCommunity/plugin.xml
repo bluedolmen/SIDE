@@ -18,7 +18,7 @@
             </option>
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/alfresco" documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.21" versionMax="1.0.21" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.27" versionMax="1.1.27" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.28" versionMax="1.1.28" />
           </generatorVersion>
         </technologyVersion>
       </technology>
