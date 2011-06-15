@@ -8,15 +8,15 @@ public class ModuleConstraint {
 	protected String artifactId = null;
 	protected String groupId = null;
 	protected String moduleType = null;
-	protected String tech_version = "";
+	protected String tech_version = ""; //$NON-NLS-1$
 	protected ModuleVersion versionMin = null;
 	protected ModuleVersion versionMax = null;
 	protected ModuleVersion resolvedVersion = null;
 
-	protected static String exclusiveMin = "(";
-	protected static String exclusiveMax = ")";
-	protected static String inclusiveMin = "[";
-	protected static String inclusiveMax = "]";
+	protected static String exclusiveMin = "("; //$NON-NLS-1$
+	protected static String exclusiveMax = ")"; //$NON-NLS-1$
+	protected static String inclusiveMin = "["; //$NON-NLS-1$
+	protected static String inclusiveMax = "]"; //$NON-NLS-1$
 
 	public String getTech_version() {
 		return tech_version;
@@ -78,9 +78,9 @@ public class ModuleConstraint {
 	 * @param id
 	 */
 	public void setGroupAndArtifactId(String id) {
-		this.groupId = id.substring(0, id.lastIndexOf("."));
+		this.groupId = id.substring(0, id.lastIndexOf(".")); //$NON-NLS-1$
 		// this.artifactId = id;
-		this.artifactId = id.substring(id.lastIndexOf(".") + 1);
+		this.artifactId = id.substring(id.lastIndexOf(".") + 1); //$NON-NLS-1$
 	}
 
 	public static Collection<ModuleVersion> getAllMin(Collection<ModuleConstraint> col) {
@@ -100,14 +100,14 @@ public class ModuleConstraint {
 	}
 
 	public String toString() {
-		return this.groupId + ":" + this.artifactId + ":" + this.moduleType + ":" + getVersionRange();
+		return this.groupId + ":" + this.artifactId + ":" + this.moduleType + ":" + getVersionRange(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	public String getVersionRange() {
-		String open = "";
-		String close = "";
-		String min = "";
-		String max = "";
+		String open = ""; //$NON-NLS-1$
+		String close = ""; //$NON-NLS-1$
+		String min = ""; //$NON-NLS-1$
+		String max = ""; //$NON-NLS-1$
 		if (versionMin != null) {
 			open = inclusiveMin;
 			min = versionMin.toString();
@@ -123,11 +123,11 @@ public class ModuleConstraint {
 		if (min.equals(max)) {
 			return min;
 		}
-		return open + min + "," + max + close;
+		return open + min + "," + max + close; //$NON-NLS-1$
 	}
 
 	public String getModuleId() {
-		return groupId + "." + artifactId;
+		return groupId + "." + artifactId; //$NON-NLS-1$
 	}
 
 	public boolean isLastVersion() {

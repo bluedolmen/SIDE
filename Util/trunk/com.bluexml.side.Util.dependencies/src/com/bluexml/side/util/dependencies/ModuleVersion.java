@@ -3,12 +3,12 @@ package com.bluexml.side.util.dependencies;
 import java.util.Collection;
 
 public class ModuleVersion {
-	static String separator = ".";
-	static String splitSeparator = "\\.";
+	static String separator = "."; //$NON-NLS-1$
+	static String splitSeparator = "\\."; //$NON-NLS-1$
 	Integer major = null;
 	Integer middle = null;
 	Integer minor = null;
-	String qualifier = "";
+	String qualifier = ""; //$NON-NLS-1$
 
 	public ModuleVersion() {
 
@@ -29,12 +29,12 @@ public class ModuleVersion {
 //				System.out.println("CASE1");
 				// version=1 ; version=1-SNAPSHOT
 				String p1 = v[0];
-				boolean isqualifier_0 = !p1.matches("^[\\d]*$");
+				boolean isqualifier_0 = !p1.matches("^[\\d]*$"); //$NON-NLS-1$
 				if (isqualifier_0) {
-					if (!p1.matches("^[^\\d]*$")) {
-						this.major = Integer.parseInt(p1.replaceAll("[^\\d]*$", ""));
+					if (!p1.matches("^[^\\d]*$")) { //$NON-NLS-1$
+						this.major = Integer.parseInt(p1.replaceAll("[^\\d]*$", "")); //$NON-NLS-1$ //$NON-NLS-2$
 					}
-					this.qualifier = p1.replaceAll("^[\\d]*", "");
+					this.qualifier = p1.replaceAll("^[\\d]*", ""); //$NON-NLS-1$ //$NON-NLS-2$
 				} else {
 					this.major = Integer.parseInt(v[0]);
 				}
@@ -45,12 +45,12 @@ public class ModuleVersion {
 				this.major = Integer.parseInt(v[0]);
 				// search for qualifier
 				String p2 = v[1];
-				boolean isqualifier_1 = !p2.matches("^[\\d]*$");
+				boolean isqualifier_1 = !p2.matches("^[\\d]*$"); //$NON-NLS-1$
 				if (isqualifier_1) {
-					if (!p2.matches("^[^\\d]*$")) {
-						this.middle = Integer.parseInt(p2.replaceAll("[^\\d]*$", ""));
+					if (!p2.matches("^[^\\d]*$")) { //$NON-NLS-1$
+						this.middle = Integer.parseInt(p2.replaceAll("[^\\d]*$", "")); //$NON-NLS-1$ //$NON-NLS-2$
 					}
-					this.qualifier = p2.replaceAll("^[\\d]*", "");
+					this.qualifier = p2.replaceAll("^[\\d]*", ""); //$NON-NLS-1$ //$NON-NLS-2$
 				} else {
 					this.middle = Integer.parseInt(v[1]);
 				}
@@ -62,12 +62,12 @@ public class ModuleVersion {
 				this.middle = Integer.parseInt(v[1]);
 				// search for qualifier
 				String p3 = v[2];
-				boolean isqualifier_2 = !p3.matches("^[\\d]*$");
+				boolean isqualifier_2 = !p3.matches("^[\\d]*$"); //$NON-NLS-1$
 				if (isqualifier_2) {
-					if (!p3.matches("^[^\\d]*$")) {
-						this.minor = Integer.parseInt(p3.replaceAll("[^\\d]*$", ""));
+					if (!p3.matches("^[^\\d]*$")) { //$NON-NLS-1$
+						this.minor = Integer.parseInt(p3.replaceAll("[^\\d]*$", "")); //$NON-NLS-1$ //$NON-NLS-2$
 					}
-					this.qualifier = p3.replaceAll("^[\\d]*", "");
+					this.qualifier = p3.replaceAll("^[\\d]*", ""); //$NON-NLS-1$ //$NON-NLS-2$
 				} else {
 					this.minor = Integer.parseInt(v[2]);
 				}
@@ -89,7 +89,7 @@ public class ModuleVersion {
 					this.minor = Integer.parseInt(v[2]);					
 					for (int i = 3; i < v.length; i++) {
 						this.qualifier += v[i];
-						this.qualifier +=".";
+						this.qualifier +="."; //$NON-NLS-1$
 					}
 					// remove last '.'
 					this.qualifier = this.qualifier.substring(0,this.qualifier.length()-1);
@@ -152,7 +152,7 @@ public class ModuleVersion {
 	}
 
 	public String toString() {
-		String version="";
+		String version=""; //$NON-NLS-1$
 		if (this.major !=null) {
 			version=this.major.toString();
 		}
@@ -165,7 +165,7 @@ public class ModuleVersion {
 			version+=this.minor.toString();
 		}
 		
-		if (!qualifier.equals("")) {
+		if (!qualifier.equals("")) { //$NON-NLS-1$
 			version+=qualifier;
 		}
 		return version;

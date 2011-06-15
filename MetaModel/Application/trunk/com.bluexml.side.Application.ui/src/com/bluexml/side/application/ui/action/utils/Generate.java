@@ -371,7 +371,7 @@ public class Generate extends WorkspaceJob {
 			if (!configurationParameters.containsKey(FM_dev) || !Boolean.parseBoolean(configurationParameters.get(FM_dev))) {
 				// update local repository from embedded archive
 				generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
-				DependenciesDeployer.deploy();
+				DependenciesDeployer.deploy(false);
 				generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
 			} else {
 				generalMonitor.addWarningText(Activator.Messages.getString("Framework module Dev mode"));

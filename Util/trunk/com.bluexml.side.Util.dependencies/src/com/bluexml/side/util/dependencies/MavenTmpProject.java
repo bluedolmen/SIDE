@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.maven.execution.MavenExecutionResult;
 import org.jdom.Document;
@@ -22,9 +23,9 @@ public class MavenTmpProject {
 	private MavenUtil mavenUtil;
 
 	// String[] inline_profiles = new String[] { "public", "local" };
-	String[] online_profiles = new String[] { "public" };
-	String[] offline_profiles = new String[] { "offline" };
-	private static final String TARGET_ARTIFACT = "tmpProject_";
+	String[] online_profiles = new String[] { "public" }; //$NON-NLS-1$
+	String[] offline_profiles = new String[] { "offline" }; //$NON-NLS-1$
+	private static final String TARGET_ARTIFACT = "tmpProject_"; //$NON-NLS-1$
 	private Boolean offline = false;
 	private List<ModuleConstraint> dm;
 	private static final SAXBuilder sxb = new SAXBuilder();
@@ -45,11 +46,11 @@ public class MavenTmpProject {
 	 * @return
 	 */
 	private Element buildPomDependency(Namespace n, ModuleConstraint mc) {
-		Element depends = new Element("dependency", n.getURI());
-		Element groupId = new Element("groupId", n.getURI()).setText(mc.getGroupId());
-		Element artifactId = new Element("artifactId", n.getURI()).setText(mc.getArtifactId());
-		Element version = new Element("version", n.getURI()).setText(mc.getVersionRange());
-		Element type = new Element("type", n.getURI()).setText(mc.getModuleType());
+		Element depends = new Element("dependency", n.getURI()); //$NON-NLS-1$
+		Element groupId = new Element("groupId", n.getURI()).setText(mc.getGroupId()); //$NON-NLS-1$
+		Element artifactId = new Element("artifactId", n.getURI()).setText(mc.getArtifactId()); //$NON-NLS-1$
+		Element version = new Element("version", n.getURI()).setText(mc.getVersionRange()); //$NON-NLS-1$
+		Element type = new Element("type", n.getURI()).setText(mc.getModuleType()); //$NON-NLS-1$
 
 		depends.addContent(groupId);
 		depends.addContent(artifactId);
@@ -65,8 +66,8 @@ public class MavenTmpProject {
 	 * @throws Exception
 	 */
 	private void createProject(String artifactId) throws Exception {
-		pomFile = new File(projectFolder, "pom.xml");
-		InputStream in = this.getClass().getResourceAsStream("model.pom.xml");
+		pomFile = new File(projectFolder, "pom.xml"); //$NON-NLS-1$
+		InputStream in = this.getClass().getResourceAsStream("model.pom.xml"); //$NON-NLS-1$
 		// copy the default pom to the tmpProject
 		FileHelper.writeStreamInFile(pomFile, in);
 
@@ -74,14 +75,14 @@ public class MavenTmpProject {
 		Document pom = sxb.build(pomFile);
 		Element project = pom.getRootElement();
 		Namespace n = project.getNamespace();
-		Element dependencies = project.getChild("dependencies", n);
+		Element dependencies = project.getChild("dependencies", n); //$NON-NLS-1$
 		for (ModuleConstraint mc : dm) {
 			Element depends = buildPomDependency(n, mc);
 			dependencies.addContent(depends);
 		}
 		
 		// setArtifactId
-		Element artifactIdE = project.getChild("artifactId", n);
+		Element artifactIdE = project.getChild("artifactId", n); //$NON-NLS-1$
 		artifactIdE.setText(artifactId);
 		
 		
@@ -92,10 +93,10 @@ public class MavenTmpProject {
 
 	public void copyAllDependencies(File whereTocopy,String artifactId) throws Exception {
 		createProject(artifactId);
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("outputDirectory", whereTocopy.getAbsolutePath());
-		params.put("excludeScope", "provided");
-		params.put("excludeTypes", "jar");
+		Map<String, String> params = DependenciesDeployer.getDefaultMavenPropertyMap();
+		params.put("outputDirectory", whereTocopy.getAbsolutePath()); //$NON-NLS-1$
+		params.put("excludeScope", "provided"); //$NON-NLS-1$ //$NON-NLS-2$
+		params.put("excludeTypes", "jar"); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		String[] profiles = offline_profiles;
 		boolean offline = true;
@@ -104,11 +105,11 @@ public class MavenTmpProject {
 		// } else {
 		// profiles = inline_profiles;
 		// }
-		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params, profiles, offline);
+		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params, profiles, offline); //$NON-NLS-1$
 		if (result.getExceptions().size() > 0) {
 			List<?> exceps = result.getExceptions();
-			System.err.println("Exception occured during maven process :\n" + exceps);
-			throw new Exception("Exception occured during maven process :\n" + exceps);
+			System.err.println(Messages.MavenTmpProject_18 + exceps);
+			throw new Exception(Messages.MavenTmpProject_18 + exceps);
 		}
 	}
 
@@ -121,14 +122,14 @@ public class MavenTmpProject {
 
 	public void goOffline(String artifactId) throws Exception {
 		createProject(artifactId);
-		HashMap<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = DependenciesDeployer.getDefaultMavenPropertyMap();
 
-		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:go-offline", params, online_profiles, false);
+		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:go-offline", params, online_profiles, false); //$NON-NLS-1$
 		if (result.getExceptions().size() > 0) {
 			System.err.println(this);
 			List<?> exceps = result.getExceptions();
-			System.err.println("Exception occured during maven process :" + exceps);
-			throw new Exception("Exception occured during maven process :" + exceps);
+			System.err.println(Messages.MavenTmpProject_18 + exceps);
+			throw new Exception(Messages.MavenTmpProject_18 + exceps);
 		}
 	}
 
@@ -141,12 +142,12 @@ public class MavenTmpProject {
 	}
 
 	public String toString() {
-		String result = "";
-		result += this.TARGET_ARTIFACT + "\n";
-		result += this.dm + "\n";
-		result += this.offline + "\n";
-		result += this.pomFile + "\n";
-		result += this.projectFolder + "\n";
+		String result = ""; //$NON-NLS-1$
+		result += this.TARGET_ARTIFACT + "\n"; //$NON-NLS-1$
+		result += this.dm + "\n"; //$NON-NLS-1$
+		result += this.offline + "\n"; //$NON-NLS-1$
+		result += this.pomFile + "\n"; //$NON-NLS-1$
+		result += this.projectFolder + "\n"; //$NON-NLS-1$
 		return result;
 	}
 }

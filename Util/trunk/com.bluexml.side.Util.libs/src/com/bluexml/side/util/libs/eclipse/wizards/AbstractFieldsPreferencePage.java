@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.wizard.WizardPage;
+import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 
 import com.bluexml.side.util.libs.eclipse.StylingUtil;
@@ -16,30 +16,17 @@ import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
 import com.bluexml.side.util.libs.eclipse.pages.CheckablePage;
 import com.bluexml.side.util.libs.eclipse.pages.PageControlsHelper;
 
-public abstract class AbstractFieldsPage extends WizardPage implements CheckablePage {
-	PageControlsHelper controlHelper;
+public abstract class AbstractFieldsPreferencePage extends PreferencePage implements CheckablePage {
+	PageControlsHelper controlHelper = new PageControlsHelper(this);
 	protected Map<String, String> values = new HashMap<String, String>();
 
-	protected AbstractFieldsPage(String pageName) {
-		super(pageName);
-		controlHelper = new PageControlsHelper(this);
-	}
-
-	public AbstractFieldsPage(String pageName, String title, ImageDescriptor titleImage) {
-		super(pageName, title, titleImage);
-	}
-
-	public String getFieldValue(String fieldId) {
-		return values.get(fieldId);
-	}
-
-	public void createControl(Composite parent) {
+	@Override
+	protected Control createContents(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NULL);
 		composite.setLayout(StylingUtil.layout);
-		setControl(composite);
-
+		
 		createFieldsControls(composite);
-		setPageComplete(false);
+		return composite;
 	}
 
 	/**
@@ -63,13 +50,7 @@ public abstract class AbstractFieldsPage extends WizardPage implements Checkable
 	}
 
 	public void checkPageComplite() {
-		for (String s : values.values()) {
-			if (s == null) {
-				setPageComplete(false);
-				return;
-			}
-		}
-		setPageComplete(values.size() > 0);
+
 	}
 
 	protected void createResourceControl(Composite composite, final String label, final String id, RESOURCE_TYPE type) {

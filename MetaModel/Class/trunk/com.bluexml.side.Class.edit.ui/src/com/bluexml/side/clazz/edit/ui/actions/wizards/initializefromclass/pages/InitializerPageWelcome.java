@@ -16,8 +16,7 @@ public class InitializerPageWelcome extends AbstractFieldsPage {
 		this.setDescription("This will take your Data Model and initialize other side Model including Application model");
 	}
 
-	@Override
-	protected void createFieldsControls(Composite composite) {
+	public void createFieldsControls(Composite composite) {
 		//		createRessourceControl(composite, label, id, type);
 		createResourceControl(composite, "Alfresco Home", Fields.alfresco_home.toString(), RESOURCE_TYPE.RESOURCE_TYPE_DIRECTORY);
 

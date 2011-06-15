@@ -16,7 +16,7 @@ public class DependencesManager {
 		for (ModuleConstraint mc : lmc) {
 			addEntry(contraints, mc.getTech_version(), mc);
 		}
-		System.err.println("display constraints :" + contraints);
+		System.err.println("display constraints :" + contraints); //$NON-NLS-1$
 	}
 
 	/**
@@ -38,15 +38,15 @@ public class DependencesManager {
 		if (tech_v_dep.containsKey(tech_v)) {
 			List<ModuleConstraint> list = tech_v_dep.get(tech_v);
 			if (!list.contains(mc)) {
-				System.err.println("add :" + mc);				
+				System.err.println("add :" + mc);				 //$NON-NLS-1$
 				list.add(mc);
 			} else {
-				System.err.println("Avoid duplicate");
+				System.err.println("Avoid duplicate"); //$NON-NLS-1$
 			}
 
 		} else {
 			ArrayList<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
-			System.err.println("add first:" + mc);
+			System.err.println("add first:" + mc); //$NON-NLS-1$
 			lmc.add(mc);
 			tech_v_dep.put(tech_v, lmc);
 		}
@@ -108,7 +108,7 @@ public class DependencesManager {
 	public void goOffline(File workFolder) throws Exception {
 		for (Map.Entry<String, List<ModuleConstraint>> mc : this.getContraints().entrySet()) {
 			// take care of offline mode
-			MavenTmpProject mvp_offline = new MavenTmpProject(workFolder, mc.getKey() + "_offline", getConstraintsFor(mc.getKey()), false);
+			MavenTmpProject mvp_offline = new MavenTmpProject(workFolder, mc.getKey() + "_offline", getConstraintsFor(mc.getKey()), false); //$NON-NLS-1$
 			mvp_offline.goOffline(generatorID);
 		}
 	}

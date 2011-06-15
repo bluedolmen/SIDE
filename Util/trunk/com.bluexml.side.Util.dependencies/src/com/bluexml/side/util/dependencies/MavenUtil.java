@@ -30,7 +30,6 @@ public class MavenUtil {
 
 	@SuppressWarnings("unchecked")
 	private MavenExecutionResult doMavenGoalUsingMavenCli(File baseDir, List<String> goals, Map<String, String> parameters, List<String> profiles, Boolean offline) throws Exception {
-
 		// save the current classloader ... maven play with thread classloader Grrr
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
 
@@ -44,49 +43,49 @@ public class MavenUtil {
 		argsL.addAll(goals);
 		// Additional parameters
 		// disable interactive mode
-		argsL.add("-B");
+		argsL.add("-B"); //$NON-NLS-1$
 		// display stacktrace if error occur 
-		argsL.add("-e");
-		argsL.add("-X");
+		argsL.add("-e"); //$NON-NLS-1$
+		argsL.add("-X"); //$NON-NLS-1$
 		if (offline == null) {
 			offline = false;
 		}
 		// offline mode activated
 		if (offline) {
-			argsL.add("-o");
+			argsL.add("-o"); //$NON-NLS-1$
 		}
 
 		// active profile parameter
 		if (profiles != null && profiles.size() > 0) {
-			String profileParam = "";
+			String profileParam = ""; //$NON-NLS-1$
 			Iterator<String> iterator = profiles.iterator();
 			while (iterator.hasNext()) {
 				profileParam += iterator.next();
 
 				if (iterator.hasNext()) {
-					profileParam += ",";
+					profileParam += ","; //$NON-NLS-1$
 				}
 			}
-			argsL.add("-P " + profileParam);
+			argsL.add("-P " + profileParam); //$NON-NLS-1$
 		}
 
 		// user Properties
 		if (parameters != null) {
 			for (Map.Entry<String, String> entry : parameters.entrySet()) {
-				argsL.add("-D" + entry.getKey() + "=" + entry.getValue());
+				argsL.add("-D" + entry.getKey() + "=" + entry.getValue()); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
-		
+
 		// define streams
 		// TODO use PrintStreamLogger to implement maven logging and error detection
-		File mvOutFile = new File(baseDir, "log.txt");
+		File mvOutFile = new File(baseDir, "log.txt"); //$NON-NLS-1$
 		PrintStream stdout = new PrintStream(mvOutFile);
-		File mvOutErrFile = new File(baseDir, "log-err.txt");
+		File mvOutErrFile = new File(baseDir, "log-err.txt"); //$NON-NLS-1$
 		PrintStream stderr = new PrintStream(mvOutErrFile);
 
-		stdout.println("MavenUtil execute maven request :");
-		stdout.println("** args :" + getCommandFromMavenExecutionArgs(argsL));
-		stdout.println("** working directory :" + workingDirectory);
+		stdout.println("MavenUtil execute maven request :"); //$NON-NLS-1$
+		stdout.println("** args :" + getCommandFromMavenExecutionArgs(argsL)); //$NON-NLS-1$
+		stdout.println("** working directory :" + workingDirectory); //$NON-NLS-1$
 
 		String[] args = argsL.toArray(new String[argsL.size()]);
 		// execute maven request
@@ -101,13 +100,13 @@ public class MavenUtil {
 		// search in output for errors
 		Iterator<String> it = FileUtils.lineIterator(mvOutFile);
 		List<String> errorLines = new ArrayList<String>();
-		String errors = "";
+		String errors = ""; //$NON-NLS-1$
 		while (it.hasNext()) {
 			String line = it.next();
-			if (line.startsWith("[ERROR]")) {
+			if (line.startsWith("[ERROR]")) { //$NON-NLS-1$
 				errorLines.add(line);
 				errors += line;
-				errors += "\n";
+				errors += "\n"; //$NON-NLS-1$
 			}
 		}
 		if (errorLines.size() > 0) {
@@ -146,7 +145,7 @@ public class MavenUtil {
 
 		//System.out.println("Active profiles :"+archetypeCreateRequest.getActiveProfiles());
 		if (archetypeCreateRequest.getActiveProfiles().size() == 0) {
-			throw new Exception("No active profile founded, reports this bug to SIDE developers team");
+			throw new Exception(Messages.MavenUtil_17);
 		}
 
 		System.out.println(getCommandFromMavenExecutionRequest(archetypeCreateRequest));
@@ -205,26 +204,26 @@ public class MavenUtil {
 		Element project = pom.getRootElement();
 		Namespace n = project.getNamespace();
 		// get the dependence version
-		List<Element> l = pom.getRootElement().getChild("dependencies", n).getChildren("dependency", n);
+		List<Element> l = pom.getRootElement().getChild("dependencies", n).getChildren("dependency", n); //$NON-NLS-1$ //$NON-NLS-2$
 		for (Element element : l) {
-			if (element.getChild("groupId", n).getText().equals(groupId) && element.getChild("artifactId", n).getText().equals(artifactId)) {
-				return element.getChild("version", n).getText();
+			if (element.getChild("groupId", n).getText().equals(groupId) && element.getChild("artifactId", n).getText().equals(artifactId)) { //$NON-NLS-1$ //$NON-NLS-2$
+				return element.getChild("version", n).getText(); //$NON-NLS-1$
 			}
 		}
-		throw new Exception("version number not found please report as bug");
+		throw new Exception(Messages.MavenUtil_23);
 	}
 
 	public static String getCommandFromMavenExecutionRequest(MavenExecutionRequest req) {
-		String rt = "mvn " + req.getGoals().toString().replaceAll("[\\[\\]]", "").replace(",", " ");
+		String rt = "mvn " + req.getGoals().toString().replaceAll("[\\[\\]]", "").replace(",", " "); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		for (Object key : req.getUserProperties().keySet()) {
-			rt += " -D" + key + "=" + req.getUserProperties().getProperty((String) key);
+			rt += " -D" + key + "=" + req.getUserProperties().getProperty((String) key); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		return rt;
 	}
 
 	public static String getCommandFromMavenExecutionArgs(List<String> args) {
-		String rt = "mvn " + args.toString().replaceAll("[\\[\\]]", "").replace(",", "");
+		String rt = "mvn " + args.toString().replaceAll("[\\[\\]]", "").replace(",", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		return rt;
 	}
 }
