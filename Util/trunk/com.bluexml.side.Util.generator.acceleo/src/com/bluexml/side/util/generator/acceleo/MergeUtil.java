@@ -61,4 +61,16 @@ public class MergeUtil {
 		}
 		return gb;
 	}
+	
+	public static String getRootNameForModel(IFile model,Map<String, List<IFile>> map) {		
+		for (Map.Entry<String, List<IFile>> iterable_element : map.entrySet()) {
+			String key = iterable_element.getKey();
+			for (IFile model_item : iterable_element.getValue()) {
+				if (model_item.equals(model)) {
+					return key;
+				}
+			}
+		}
+		return null;
+	}
 }
