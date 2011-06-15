@@ -1,773 +1,307 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<clazz:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:xmi="http://www.omg.org/XMI"
-             xmlns:clazz="http://www.kerblue.org/class/1.0"
-             xmlns:my="http://bluexml.com"
-             xmlns:math="java:java.lang.Math"
-             xmi:version="2.0"
-             xmi:id="0.31800307259326277"
-             name="dl"
-             namespace="http://www.alfresco.org/model/datalist/1.0">
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.8142983533176875"
-             documentation=""
-             description=""
-             name="dataList"
-             title="Data List container type"
-             aspects="">
-         <tags xmi:id="0.26580753109090616" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.4703105054027409" key="prefix" value="dl"/>
-         <generalizations xsi:type="clazz:Clazz" xmi:id="0.7137115681887864"
-                       href="cm.dt#0.15912493628385316"/>
-         <attributes xmi:id="0.2591049544440438" name="dataListItemType" visibility="Public"
-                  title="List Item Type"
-                  documentation=""
-                  typ="String"
-                  description="Determines which Data Dictionary type will be used when create new items within the Data List.">
-            <tags xmi:id="0.5506516746505657" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.6897684191038248" key="prefix" value="dl"/>
-         </attributes>
-      </classSet>
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.8410524556106989"
-             documentation=""
-             description=""
-             name="dataListItem"
-             title="Data List parent type"
-             aspects="">
-         <tags xmi:id="0.051974908002631715" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.6010792952475377" key="prefix" value="dl"/>
-         <generalizations xsi:type="clazz:Clazz" xmi:id="0.2843329813779456"
-                       href="cm.dt#0.3825822793890109"/>
-      </classSet>
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.20738638320563352"
-             documentation=""
-             description=""
-             name="todoList"
-             title="To Do List"
-             aspects=""
-             generalizations="0.8410524556106989">
-         <tags xmi:id="0.9731686447903579" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.136285146901589" key="prefix" value="dl"/>
-         <attributes xmi:id="0.3908737860998647" name="todoTitle" visibility="Public" title="Title"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.36313414340881467" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.993069393225238" key="prefix" value="dl"/>
-            <metainfo xmi:id="0.22259557892865423" key="required" value="True"/>
-         </attributes>
-         <attributes xmi:id="0.593810149447299" name="todoDueDate" visibility="Public"
-                  title="Due Date"
-                  documentation=""
-                  typ="DateTime"
-                  description="">
-            <tags xmi:id="0.46737308155620194" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.46245891341219714" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.29602386305125683" name="todoPriority" visibility="Public"
-                  title="Priority"
-                  documentation=""
-                  typ="int"
-                  description="">
-            <tags xmi:id="0.472383957966525" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.707432326115434" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.771098127147216" name="todoStatus" visibility="Public" title="Status"
-                  documentation=""
-                  typ="String"
-                  description=""
-                  valueList="190886.01409591077"
-                  initialValue="Not Started">
-            <tags xmi:id="0.21667522580954657" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.027812378536071547" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.5985585896198687" name="todoNotes" visibility="Public" title="Notes"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.3946864849621161" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.3534455204412872" key="prefix" value="dl"/>
-         </attributes>
-      </classSet>
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.7474534814092532"
-             documentation=""
-             description=""
-             name="simpletask"
-             title="Task List (Simple)"
-             generalizations="0.8410524556106989">
-         <tags xmi:id="0.3228380681580215" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.6465800206677703" key="prefix" value="dl"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.9531206539074193"
-               href="cm.dt#0.6508015603881048"/>
-         <attributes xmi:id="0.5089678562050923" name="simpletaskDueDate" visibility="Public"
-                  title="Due Date"
-                  documentation=""
-                  typ="Date"
-                  description="">
-            <tags xmi:id="0.5670613402905421" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.6144876156367554" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.9664714534975526" name="simpletaskPriority" visibility="Public"
-                  title="Priority"
-                  documentation=""
-                  typ="String"
-                  description=""
-                  valueList="982442.1015817407"
-                  initialValue="Normal">
-            <tags xmi:id="0.7690274732097447" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.892581507145418" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.27168962889124737" name="simpletaskStatus" visibility="Public"
-                  title="Status"
-                  documentation=""
-                  typ="String"
-                  description=""
-                  valueList="190886.01409591077"
-                  initialValue="Not Started">
-            <tags xmi:id="0.02405691894726092" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.7189211388668378" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.6249000127191157" name="simpletaskComments" visibility="Public"
-                  title="Comments"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.7234981672683435" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.9944835182586749" key="prefix" value="dl"/>
-         </attributes>
-      </classSet>
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.783313403191791"
-             documentation=""
-             description=""
-             name="task"
-             title="Task List (Advanced)"
-             generalizations="0.8410524556106989">
-         <tags xmi:id="0.3622761617430742" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.22301599886157664" key="prefix" value="dl"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.6534088137154835"
-               href="cm.dt#0.6508015603881048"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.3946646283658558"
-               href="cm.dt#0.5160120468029474"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.7423501072558153"
-               href="dl.dt#0.7300942350499905"/>
-         <attributes xmi:id="0.6587470769426258" name="taskPriority" visibility="Public"
-                  title="Priority"
-                  documentation=""
-                  typ="String"
-                  description=""
-                  valueList="982442.1015817407"
-                  initialValue="Normal">
-            <tags xmi:id="0.10299492650360564" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.27439238625123696" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.6749264501012378" name="taskStatus" visibility="Public"
-                  title="Status"
-                  documentation=""
-                  typ="String"
-                  description=""
-                  valueList="190886.01409591077"
-                  initialValue="Not Started">
-            <tags xmi:id="0.3606702490608875" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.8961244747762352" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.90598566333472" name="taskComments" visibility="Public"
-                  title="Comments"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.12871792762444323" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.20930414598167668" key="prefix" value="dl"/>
-         </attributes>
-      </classSet>
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.44608713970670444"
-             documentation=""
-             description=""
-             name="contact"
-             title="Contacts List"
-             aspects=""
-             generalizations="0.8410524556106989">
-         <tags xmi:id="0.8536326020540548" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.7232304536315826" key="prefix" value="dl"/>
-         <attributes xmi:id="0.3716552734793601" name="contactFirstName" visibility="Public"
-                  title="First Name"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.4015209295978356" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.4393835290064976" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.6792394545186687" name="contactLastName" visibility="Public"
-                  title="Last Name"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.6902637232872136" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.2291757418264423" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.57552997567387" name="contactEmail" visibility="Public"
-                  title="Email Address"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.25826498544376963" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.8564819806275917" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.28542140309307973" name="contactCompany" visibility="Public"
-                  title="Company"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.5603670305640895" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.6432273732874556" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.9794705374010622" name="contactJobTitle" visibility="Public"
-                  title="Job Title"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.8491695707832021" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.4828885071460326" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.9928055856763299" name="contactPhoneOffice" visibility="Public"
-                  title="Phone (Office)"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.7505314849824152" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.08897276739602922" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.9793893768128258" name="contactPhoneMobile" visibility="Public"
-                  title="Phone (Mobile)"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.724429872633783" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.05628823210172407" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.12477857641338674" name="contactNotes" visibility="Public"
-                  title="Notes"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.2457416054166015" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.16690823291942358" key="prefix" value="dl"/>
-         </attributes>
-      </classSet>
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.665608294400005"
-             documentation=""
-             description=""
-             name="issue"
-             title="Issues List"
-             generalizations="0.8410524556106989">
-         <tags xmi:id="0.6144229932603261" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.47981238381233493" key="prefix" value="dl"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.5425558772598031"
-               href="cm.dt#0.6508015603881048"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.04217923034958859"
-               href="cm.dt#0.5160120468029474"/>
-         <attributes xmi:id="0.2060802115670729" name="issueID" visibility="Public" title="Issue ID"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.09743917329165219" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.4779550394302028" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.9567185921212241" name="issueStatus" visibility="Public"
-                  title="Status"
-                  documentation=""
-                  typ="String"
-                  description=""
-                  valueList="190886.01409591077"
-                  initialValue="Not Started">
-            <tags xmi:id="0.015268394961003184" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.3905708514523102" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.8879799091361393" name="issuePriority" visibility="Public"
-                  title="Priority"
-                  documentation=""
-                  typ="String"
-                  description=""
-                  valueList="982442.1015817407"
-                  initialValue="Normal">
-            <tags xmi:id="0.8511188614335119" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.00864448817325214" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.7776303757782167" name="issueDueDate" visibility="Public"
-                  title="Due Date"
-                  documentation=""
-                  typ="Date"
-                  description="">
-            <tags xmi:id="0.12947970738694803" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.8413987478132954" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.8067030569189034" name="issueComments" visibility="Public"
-                  title="Comments"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.4338487709638368" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.7790206395466498" key="prefix" value="dl"/>
-         </attributes>
-      </classSet>
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.5022591738931531"
-             documentation=""
-             description=""
-             name="event"
-             title="Event"
-             generalizations="0.8410524556106989">
-         <tags xmi:id="0.14492807554228204" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.08429129581564587" key="prefix" value="dl"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.761712346399054"
-               href="cm.dt#0.6508015603881048"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.6849339509340681"
-               href="cm.dt#0.5160120468029474"/>
-         <attributes xmi:id="0.25211909029369506" name="eventLocation" visibility="Public"
-                  title="Location"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.6471537282046942" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.7560520627627368" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.5047746458741962" name="eventNote" visibility="Public" title="Notes"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.2386019273454284" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.08428355096485962" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.12785001509787475" name="eventStartDate" visibility="Public"
-                  title="Start Date"
-                  documentation=""
-                  typ="DateTime"
-                  description="">
-            <tags xmi:id="0.5002756176796083" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.22201333219497243" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.41359204127338156" name="eventEndDate" visibility="Public"
-                  title="End Date"
-                  documentation=""
-                  typ="DateTime"
-                  description="">
-            <tags xmi:id="0.8899682571041885" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.11235270094177918" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.005713307931757616" name="eventRegistrations" visibility="Public"
-                  title="Registrations"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.00982758267449868" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.9770897786757552" key="prefix" value="dl"/>
-         </attributes>
-      </classSet>
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.30774264439717913"
-             documentation=""
-             description=""
-             name="location"
-             title="Location"
-             generalizations="0.8410524556106989">
-         <tags xmi:id="0.37570388082791184" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.3306230934846015" key="prefix" value="dl"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.10024542323813768"
-               href="cm.dt#0.6508015603881048"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.3307108237172327"
-               href="cm.dt#0.5160120468029474"/>
-         <attributes xmi:id="0.3391573431192728" name="locationAddress1" visibility="Public"
-                  title="Address 1"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.031548695230670165" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.298885800558054" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.41232133236449153" name="locationAddress2" visibility="Public"
-                  title="Address 2"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.2668645665705385" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.02842660613821224" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.9482192942973365" name="locationAddress3" visibility="Public"
-                  title="Address 3"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.7635941600756164" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.5942970159847503" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.2653625438269317" name="locationZip" visibility="Public"
-                  title="Zip/Post Code"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.5000447517643926" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.3321937838349519" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.33460918372862214" name="locationState" visibility="Public"
-                  title="State/County"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.3033917341083263" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.16206551683408488" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.6118648032531254" name="locationCountry" visibility="Public"
-                  title="Country"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.16179028642145388" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.357333879771463" key="prefix" value="dl"/>
-         </attributes>
-      </classSet>
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.05367923179121836"
-             documentation=""
-             description=""
-             name="meetingAgenda"
-             title="Meeting Agenda"
-             generalizations="0.8410524556106989">
-         <tags xmi:id="0.2596495555752272" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.23330738874600465" key="prefix" value="dl"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.07739612117781647"
-               href="cm.dt#0.6508015603881048"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.11549549851991325"
-               href="cm.dt#0.5160120468029474"/>
-         <attributes xmi:id="0.3979937449088411" name="meetingAgendaRef" visibility="Public"
-                  title="Reference"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.23896496305356751" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.19725872706647352" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.1953414414412522" name="meetingAgendaTime" visibility="Public"
-                  title="Time (Mins)"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.2571659460442881" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.3863384060641636" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.15182367789501727" name="meetingAgendaOwner" visibility="Public"
-                  title="Owner"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.2852731111680038" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.24798721337957885" key="prefix" value="dl"/>
-         </attributes>
-      </classSet>
-      <classSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-             xmi:id="0.1630219456631845"
-             documentation=""
-             description=""
-             name="eventAgenda"
-             title="Event Agenda"
-             generalizations="0.8410524556106989">
-         <tags xmi:id="0.905500759855606" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.842118151370076" key="prefix" value="dl"/>
-         <aspects xsi:type="clazz:Aspect" xmi:id="0.6456878654549474"
-               href="cm.dt#0.5160120468029474"/>
-         <attributes xmi:id="0.7520643090389085" name="eventAgendaRef" visibility="Public"
-                  title="Reference"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.5258525238632845" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.48833339901937944" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.8127779479001439" name="eventAgendaStartTime" visibility="Public"
-                  title="Start Time"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.9193483838829807" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.48761332451263817" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.16046846088024558" name="eventAgendaEndTime" visibility="Public"
-                  title="End Timie"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.2921387781260021" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.04030344005334341" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.2985440036575532" name="eventAgendaSessionName" visibility="Public"
-                  title="Session Name"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.9492845949707952" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.16111343650155074" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.6882220632144053" name="eventAgendaPresenter" visibility="Public"
-                  title="Presenter"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.8012785091665944" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.4585854279860887" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.7531936738165764" name="eventAgendaAudience" visibility="Public"
-                  title="Audience"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.8675858638948609" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.4242644045430706" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.49907470644407115" name="eventAgendaNotes" visibility="Public"
-                  title="Notes"
-                  documentation=""
-                  typ="String"
-                  description="">
-            <tags xmi:id="0.2259717483159024" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.5431879308251668" key="prefix" value="dl"/>
-         </attributes>
-      </classSet>
-      <aspectSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-              xmlns:fo="http://www.w3.org/1999/XSL/Format"
-              xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-              xmi:id="0.7300942350499905"
-              name="gantt"
-              title="Gantt"
-              description=""
-              documentation="">
-         <tags xmi:id="0.32906292371854007" key="reversedURI"
-            value="http://www.alfresco.org/model/datalist/1.0"/>
-         <tags xmi:id="0.48234566920948396" key="prefix" value="dl"/>
-         <attributes xmi:id="0.5894715153928506" name="ganttStartDate" visibility="Public"
-                  title="Start Date"
-                  documentation=""
-                  typ="Date"
-                  description="">
-            <tags xmi:id="0.8409703224433505" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.4556038767172519" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.6365365037127475" name="ganttEndDate" visibility="Public"
-                  title="End Date"
-                  documentation=""
-                  typ="Date"
-                  description="">
-            <tags xmi:id="0.6643884670666196" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.7087406905089372" key="prefix" value="dl"/>
-         </attributes>
-         <attributes xmi:id="0.21764875444027088" name="ganttPercentComplete" visibility="Public"
-                  title="% Complete"
-                  documentation=""
-                  typ="int"
-                  description=""
-                  initialValue="0">
-            <tags xmi:id="0.557297233488108" key="reversedURI"
-               value="http://www.alfresco.org/model/datalist/1.0"/>
-            <tags xmi:id="0.7982128981319825" key="prefix" value="dl"/>
-            <metainfo xmi:id="0.7408890733645246" key="required" value="True"/>
-         </attributes>
-      </aspectSet>
-      <enumerationSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                   xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                   xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-                   xmi:id="190886.01409591077"
-                   name="status">
-         <literals xmi:id="391711.96751521365" name="Not Started"/>
-         <literals xmi:id="277012.65040749044" name="In Progress"/>
-         <literals xmi:id="550388.1984188723" name="Complete"/>
-         <literals xmi:id="963023.108861271" name="On Hold"/>
-      </enumerationSet>
-      <enumerationSet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                   xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                   xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-                   xmi:id="982442.1015817407"
-                   name="value">
-         <literals xmi:id="77717.52815983401" name="High"/>
-         <literals xmi:id="617238.3660794086" name="Normal"/>
-         <literals xmi:id="742604.1850074715" name="Low"/>
-      </enumerationSet>
-      <associationSet xmi:id="0.8425240768964335" name="assignee" title="Assignee" description=""
-                   associationType="Direct">
-         <firstEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-                xmi:id="0.2856314700199808"
-                name=""
-                title=""
-                cardMax="-1"
-                linkedClass="0.20738638320563352"/>
-         <secondEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                 xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-                 xmi:id="0.4035954637664234"
-                 name=""
-                 title=""
-                 navigable="true"
-                 cardMax="1">
-            <linkedClass xmi:id="0.29608961063613926" xsi:type="clazz:Clazz"
-                      href="cm.dt#0.6294607585955514"/>
-         </secondEnd>
-         <tags xmi:id="0.39606655441059546" key="simpleAssoName" value="true"/>
-      </associationSet>
-      <associationSet xmi:id="0.18012717901008057" name="attachments" title="Attachments"
-                   description=""
-                   associationType="Direct">
-         <firstEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-                xmi:id="0.8956647490445984"
-                name=""
-                title=""
-                cardMax="-1"
-                linkedClass="0.20738638320563352"/>
-         <secondEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                 xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-                 xmi:id="0.3163409585424398"
-                 name=""
-                 title=""
-                 navigable="true"
-                 cardMax="-1">
-            <linkedClass xmi:id="0.29661902955262753" xsi:type="clazz:Clazz"
-                      href="cm.dt#0.059489071624205025"/>
-         </secondEnd>
-         <tags xmi:id="0.07642497972481599" key="simpleAssoName" value="true"/>
-      </associationSet>
-      <associationSet xmi:id="0.6314008754420709" name="taskAssignee" title="Assignee" description=""
-                   associationType="Direct">
-         <firstEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-                xmi:id="0.6479781371096216"
-                name=""
-                title=""
-                cardMax="-1"
-                linkedClass="0.783313403191791"/>
-         <secondEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                 xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-                 xmi:id="0.14285555817748896"
-                 name=""
-                 title=""
-                 navigable="true"
-                 cardMax="-1">
-            <linkedClass xmi:id="0.7481106117638819" xsi:type="clazz:Clazz"
-                      href="cm.dt#0.6294607585955514"/>
-         </secondEnd>
-         <tags xmi:id="0.08042260001864054" key="simpleAssoName" value="true"/>
-      </associationSet>
-      <associationSet xmi:id="0.8371525227956387" name="issueAssignedTo" title="Assigned To"
-                   description=""
-                   associationType="Direct">
-         <firstEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-                xmi:id="0.9536280900811932"
-                name=""
-                title=""
-                cardMax="-1"
-                linkedClass="0.665608294400005"/>
-         <secondEnd xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                 xmlns:d="http://www.alfresco.org/model/dictionary/1.0"
-                 xmi:id="0.8832662594680326"
-                 name=""
-                 title=""
-                 navigable="true"
-                 cardMax="-1">
-            <linkedClass xmi:id="0.25334473289628057" xsi:type="clazz:Clazz"
-                      href="cm.dt#0.6294607585955514"/>
-         </secondEnd>
-         <tags xmi:id="0.8030121366739112" key="simpleAssoName" value="true"/>
-      </associationSet>
-   </clazz:Model>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="0.31800307259326277" name="dl" namespace="http://www.alfresco.org/model/datalist/1.0">
+  <classSet xmi:id="0.8142983533176875" documentation="" description="" name="dataList" title="Data List container type">
+    <tags xmi:id="0.26580753109090616" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.4703105054027409" key="prefix" value="dl"/>
+    <attributes xmi:id="0.2591049544440438" documentation="" description="Determines which Data Dictionary type will be used when create new items within the Data List." name="dataListItemType" title="List Item Type" visibility="Public">
+      <tags xmi:id="0.5506516746505657" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.6897684191038248" key="prefix" value="dl"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="cm.dt#0.15912493628385316"/>
+  </classSet>
+  <classSet xmi:id="0.8410524556106989" documentation="" description="" name="dataListItem" title="Data List parent type">
+    <tags xmi:id="0.051974908002631715" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.6010792952475377" key="prefix" value="dl"/>
+    <generalizations xsi:type="clazz:Clazz" href="cm.dt#0.3825822793890109"/>
+  </classSet>
+  <classSet xmi:id="0.20738638320563352" documentation="" description="" name="todoList" title="To Do List" generalizations="0.8410524556106989">
+    <tags xmi:id="0.9731686447903579" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.136285146901589" key="prefix" value="dl"/>
+    <attributes xmi:id="0.3908737860998647" documentation="" description="" name="todoTitle" title="Title" visibility="Public">
+      <tags xmi:id="0.36313414340881467" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.993069393225238" key="prefix" value="dl"/>
+      <metainfo xmi:id="0.22259557892865423" key="required" value="True"/>
+    </attributes>
+    <attributes xmi:id="0.593810149447299" documentation="" description="" name="todoDueDate" title="Due Date" typ="DateTime" visibility="Public">
+      <tags xmi:id="0.46737308155620194" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.46245891341219714" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.29602386305125683" documentation="" description="" name="todoPriority" title="Priority" typ="int" visibility="Public">
+      <tags xmi:id="0.472383957966525" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.707432326115434" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.771098127147216" documentation="" description="" name="todoStatus" title="Status" initialValue="Not Started" visibility="Public" valueList="190886.01409591077">
+      <tags xmi:id="0.21667522580954657" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.027812378536071547" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.5985585896198687" documentation="" description="" name="todoNotes" title="Notes" visibility="Public">
+      <tags xmi:id="0.3946864849621161" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.3534455204412872" key="prefix" value="dl"/>
+    </attributes>
+  </classSet>
+  <classSet xmi:id="0.7474534814092532" documentation="" description="" name="simpletask" title="Task List (Simple)" generalizations="0.8410524556106989">
+    <tags xmi:id="0.3228380681580215" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.6465800206677703" key="prefix" value="dl"/>
+    <attributes xmi:id="0.5089678562050923" documentation="" description="" name="simpletaskDueDate" title="Due Date" typ="Date" visibility="Public">
+      <tags xmi:id="0.5670613402905421" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.6144876156367554" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.9664714534975526" documentation="" description="" name="simpletaskPriority" title="Priority" initialValue="Normal" visibility="Public" valueList="982442.1015817407">
+      <tags xmi:id="0.7690274732097447" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.892581507145418" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.27168962889124737" documentation="" description="" name="simpletaskStatus" title="Status" initialValue="Not Started" visibility="Public" valueList="190886.01409591077">
+      <tags xmi:id="0.02405691894726092" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.7189211388668378" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.6249000127191157" documentation="" description="" name="simpletaskComments" title="Comments" visibility="Public">
+      <tags xmi:id="0.7234981672683435" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.9944835182586749" key="prefix" value="dl"/>
+    </attributes>
+    <aspects href="cm.dt#0.6508015603881048"/>
+  </classSet>
+  <classSet xmi:id="0.783313403191791" documentation="" description="" name="task" title="Task List (Advanced)" generalizations="0.8410524556106989">
+    <tags xmi:id="0.3622761617430742" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.22301599886157664" key="prefix" value="dl"/>
+    <attributes xmi:id="0.6587470769426258" documentation="" description="" name="taskPriority" title="Priority" initialValue="Normal" visibility="Public" valueList="982442.1015817407">
+      <tags xmi:id="0.10299492650360564" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.27439238625123696" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.6749264501012378" documentation="" description="" name="taskStatus" title="Status" initialValue="Not Started" visibility="Public" valueList="190886.01409591077">
+      <tags xmi:id="0.3606702490608875" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.8961244747762352" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.90598566333472" documentation="" description="" name="taskComments" title="Comments" visibility="Public">
+      <tags xmi:id="0.12871792762444323" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.20930414598167668" key="prefix" value="dl"/>
+    </attributes>
+    <aspects href="cm.dt#0.6508015603881048"/>
+    <aspects href="cm.dt#0.5160120468029474"/>
+    <aspects href="#0.7300942350499905"/>
+  </classSet>
+  <classSet xmi:id="0.44608713970670444" documentation="" description="" name="contact" title="Contacts List" generalizations="0.8410524556106989">
+    <tags xmi:id="0.8536326020540548" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.7232304536315826" key="prefix" value="dl"/>
+    <attributes xmi:id="0.3716552734793601" documentation="" description="" name="contactFirstName" title="First Name" visibility="Public">
+      <tags xmi:id="0.4015209295978356" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.4393835290064976" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.6792394545186687" documentation="" description="" name="contactLastName" title="Last Name" visibility="Public">
+      <tags xmi:id="0.6902637232872136" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.2291757418264423" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.57552997567387" documentation="" description="" name="contactEmail" title="Email Address" visibility="Public">
+      <tags xmi:id="0.25826498544376963" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.8564819806275917" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.28542140309307973" documentation="" description="" name="contactCompany" title="Company" visibility="Public">
+      <tags xmi:id="0.5603670305640895" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.6432273732874556" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.9794705374010622" documentation="" description="" name="contactJobTitle" title="Job Title" visibility="Public">
+      <tags xmi:id="0.8491695707832021" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.4828885071460326" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.9928055856763299" documentation="" description="" name="contactPhoneOffice" title="Phone (Office)" visibility="Public">
+      <tags xmi:id="0.7505314849824152" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.08897276739602922" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.9793893768128258" documentation="" description="" name="contactPhoneMobile" title="Phone (Mobile)" visibility="Public">
+      <tags xmi:id="0.724429872633783" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.05628823210172407" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.12477857641338674" documentation="" description="" name="contactNotes" title="Notes" visibility="Public">
+      <tags xmi:id="0.2457416054166015" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.16690823291942358" key="prefix" value="dl"/>
+    </attributes>
+  </classSet>
+  <classSet xmi:id="0.665608294400005" documentation="" description="" name="issue" title="Issues List" generalizations="0.8410524556106989">
+    <tags xmi:id="0.6144229932603261" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.47981238381233493" key="prefix" value="dl"/>
+    <attributes xmi:id="0.2060802115670729" documentation="" description="" name="issueID" title="Issue ID" visibility="Public">
+      <tags xmi:id="0.09743917329165219" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.4779550394302028" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.9567185921212241" documentation="" description="" name="issueStatus" title="Status" initialValue="Not Started" visibility="Public" valueList="190886.01409591077">
+      <tags xmi:id="0.015268394961003184" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.3905708514523102" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.8879799091361393" documentation="" description="" name="issuePriority" title="Priority" initialValue="Normal" visibility="Public" valueList="982442.1015817407">
+      <tags xmi:id="0.8511188614335119" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.00864448817325214" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.7776303757782167" documentation="" description="" name="issueDueDate" title="Due Date" typ="Date" visibility="Public">
+      <tags xmi:id="0.12947970738694803" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.8413987478132954" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.8067030569189034" documentation="" description="" name="issueComments" title="Comments" visibility="Public">
+      <tags xmi:id="0.4338487709638368" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.7790206395466498" key="prefix" value="dl"/>
+    </attributes>
+    <aspects href="cm.dt#0.6508015603881048"/>
+    <aspects href="cm.dt#0.5160120468029474"/>
+  </classSet>
+  <classSet xmi:id="0.5022591738931531" documentation="" description="" name="event" title="Event" generalizations="0.8410524556106989">
+    <tags xmi:id="0.14492807554228204" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.08429129581564587" key="prefix" value="dl"/>
+    <attributes xmi:id="0.25211909029369506" documentation="" description="" name="eventLocation" title="Location" visibility="Public">
+      <tags xmi:id="0.6471537282046942" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.7560520627627368" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.5047746458741962" documentation="" description="" name="eventNote" title="Notes" visibility="Public">
+      <tags xmi:id="0.2386019273454284" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.08428355096485962" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.12785001509787475" documentation="" description="" name="eventStartDate" title="Start Date" typ="DateTime" visibility="Public">
+      <tags xmi:id="0.5002756176796083" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.22201333219497243" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.41359204127338156" documentation="" description="" name="eventEndDate" title="End Date" typ="DateTime" visibility="Public">
+      <tags xmi:id="0.8899682571041885" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.11235270094177918" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.005713307931757616" documentation="" description="" name="eventRegistrations" title="Registrations" visibility="Public">
+      <tags xmi:id="0.00982758267449868" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.9770897786757552" key="prefix" value="dl"/>
+    </attributes>
+    <aspects href="cm.dt#0.6508015603881048"/>
+    <aspects href="cm.dt#0.5160120468029474"/>
+  </classSet>
+  <classSet xmi:id="0.30774264439717913" documentation="" description="" name="location" title="Location" generalizations="0.8410524556106989">
+    <tags xmi:id="0.37570388082791184" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.3306230934846015" key="prefix" value="dl"/>
+    <attributes xmi:id="0.3391573431192728" documentation="" description="" name="locationAddress1" title="Address 1" visibility="Public">
+      <tags xmi:id="0.031548695230670165" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.298885800558054" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.41232133236449153" documentation="" description="" name="locationAddress2" title="Address 2" visibility="Public">
+      <tags xmi:id="0.2668645665705385" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.02842660613821224" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.9482192942973365" documentation="" description="" name="locationAddress3" title="Address 3" visibility="Public">
+      <tags xmi:id="0.7635941600756164" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.5942970159847503" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.2653625438269317" documentation="" description="" name="locationZip" title="Zip/Post Code" visibility="Public">
+      <tags xmi:id="0.5000447517643926" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.3321937838349519" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.33460918372862214" documentation="" description="" name="locationState" title="State/County" visibility="Public">
+      <tags xmi:id="0.3033917341083263" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.16206551683408488" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.6118648032531254" documentation="" description="" name="locationCountry" title="Country" visibility="Public">
+      <tags xmi:id="0.16179028642145388" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.357333879771463" key="prefix" value="dl"/>
+    </attributes>
+    <aspects href="cm.dt#0.6508015603881048"/>
+    <aspects href="cm.dt#0.5160120468029474"/>
+  </classSet>
+  <classSet xmi:id="0.05367923179121836" documentation="" description="" name="meetingAgenda" title="Meeting Agenda" generalizations="0.8410524556106989">
+    <tags xmi:id="0.2596495555752272" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.23330738874600465" key="prefix" value="dl"/>
+    <attributes xmi:id="0.3979937449088411" documentation="" description="" name="meetingAgendaRef" title="Reference" visibility="Public">
+      <tags xmi:id="0.23896496305356751" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.19725872706647352" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.1953414414412522" documentation="" description="" name="meetingAgendaTime" title="Time (Mins)" visibility="Public">
+      <tags xmi:id="0.2571659460442881" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.3863384060641636" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.15182367789501727" documentation="" description="" name="meetingAgendaOwner" title="Owner" visibility="Public">
+      <tags xmi:id="0.2852731111680038" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.24798721337957885" key="prefix" value="dl"/>
+    </attributes>
+    <aspects href="cm.dt#0.6508015603881048"/>
+    <aspects href="cm.dt#0.5160120468029474"/>
+  </classSet>
+  <classSet xmi:id="0.1630219456631845" documentation="" description="" name="eventAgenda" title="Event Agenda" generalizations="0.8410524556106989">
+    <tags xmi:id="0.905500759855606" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.842118151370076" key="prefix" value="dl"/>
+    <attributes xmi:id="0.7520643090389085" documentation="" description="" name="eventAgendaRef" title="Reference" visibility="Public">
+      <tags xmi:id="0.5258525238632845" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.48833339901937944" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.8127779479001439" documentation="" description="" name="eventAgendaStartTime" title="Start Time" visibility="Public">
+      <tags xmi:id="0.9193483838829807" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.48761332451263817" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.16046846088024558" documentation="" description="" name="eventAgendaEndTime" title="End Timie" visibility="Public">
+      <tags xmi:id="0.2921387781260021" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.04030344005334341" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.2985440036575532" documentation="" description="" name="eventAgendaSessionName" title="Session Name" visibility="Public">
+      <tags xmi:id="0.9492845949707952" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.16111343650155074" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.6882220632144053" documentation="" description="" name="eventAgendaPresenter" title="Presenter" visibility="Public">
+      <tags xmi:id="0.8012785091665944" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.4585854279860887" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.7531936738165764" documentation="" description="" name="eventAgendaAudience" title="Audience" visibility="Public">
+      <tags xmi:id="0.8675858638948609" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.4242644045430706" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.49907470644407115" documentation="" description="" name="eventAgendaNotes" title="Notes" visibility="Public">
+      <tags xmi:id="0.2259717483159024" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.5431879308251668" key="prefix" value="dl"/>
+    </attributes>
+    <aspects href="cm.dt#0.5160120468029474"/>
+  </classSet>
+  <associationSet xmi:id="0.8425240768964335" description="" name="assignee" title="Assignee">
+    <tags xmi:id="0.39606655441059546" key="simpleAssoName" value="true"/>
+    <firstEnd xmi:id="0.2856314700199808" name="" title="" cardMax="-1" linkedClass="0.20738638320563352"/>
+    <secondEnd xmi:id="0.4035954637664234" name="" title="" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="cm.dt#0.6294607585955514"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="0.18012717901008057" description="" name="attachments" title="Attachments">
+    <tags xmi:id="0.07642497972481599" key="simpleAssoName" value="true"/>
+    <firstEnd xmi:id="0.8956647490445984" name="" title="" cardMax="-1" linkedClass="0.20738638320563352"/>
+    <secondEnd xmi:id="0.3163409585424398" name="" title="" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="cm.dt#0.059489071624205025"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="0.6314008754420709" description="" name="taskAssignee" title="Assignee">
+    <tags xmi:id="0.08042260001864054" key="simpleAssoName" value="true"/>
+    <firstEnd xmi:id="0.6479781371096216" name="" title="" cardMax="-1" linkedClass="0.783313403191791"/>
+    <secondEnd xmi:id="0.14285555817748896" name="" title="" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="cm.dt#0.6294607585955514"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="0.8371525227956387" description="" name="issueAssignedTo" title="Assigned To">
+    <tags xmi:id="0.8030121366739112" key="simpleAssoName" value="true"/>
+    <firstEnd xmi:id="0.9536280900811932" name="" title="" cardMax="-1" linkedClass="0.665608294400005"/>
+    <secondEnd xmi:id="0.8832662594680326" name="" title="" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="cm.dt#0.6294607585955514"/>
+    </secondEnd>
+  </associationSet>
+  <aspectSet xmi:id="0.7300942350499905" documentation="" description="" name="gantt" title="Gantt">
+    <tags xmi:id="0.32906292371854007" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+    <tags xmi:id="0.48234566920948396" key="prefix" value="dl"/>
+    <attributes xmi:id="0.5894715153928506" documentation="" description="" name="ganttStartDate" title="Start Date" typ="Date" visibility="Public">
+      <tags xmi:id="0.8409703224433505" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.4556038767172519" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.6365365037127475" documentation="" description="" name="ganttEndDate" title="End Date" typ="Date" visibility="Public">
+      <tags xmi:id="0.6643884670666196" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.7087406905089372" key="prefix" value="dl"/>
+    </attributes>
+    <attributes xmi:id="0.21764875444027088" documentation="" description="" name="ganttPercentComplete" title="% Complete" typ="int" initialValue="0" visibility="Public">
+      <tags xmi:id="0.557297233488108" key="reversedURI" value="http://www.alfresco.org/model/datalist/1.0"/>
+      <tags xmi:id="0.7982128981319825" key="prefix" value="dl"/>
+      <metainfo xmi:id="0.7408890733645246" key="required" value="True"/>
+    </attributes>
+  </aspectSet>
+  <enumerationSet xmi:id="190886.01409591077" name="status">
+    <literals xmi:id="391711.96751521365" name="Not Started"/>
+    <literals xmi:id="277012.65040749044" name="In Progress"/>
+    <literals xmi:id="550388.1984188723" name="Complete"/>
+    <literals xmi:id="963023.108861271" name="On Hold"/>
+  </enumerationSet>
+  <enumerationSet xmi:id="982442.1015817407" name="value">
+    <literals xmi:id="77717.52815983401" name="High"/>
+    <literals xmi:id="617238.3660794086" name="Normal"/>
+    <literals xmi:id="742604.1850074715" name="Low"/>
+  </enumerationSet>
+</clazz:Model>
