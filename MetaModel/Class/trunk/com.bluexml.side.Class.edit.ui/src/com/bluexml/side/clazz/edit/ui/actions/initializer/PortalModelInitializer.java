@@ -93,7 +93,7 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		String pageId = "documentlibrary";
 		int index = 0;
 		String initializerIndex = "";
-		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.VIEW);
+		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.VIEW, Visibility.PUBLIC);
 	}
 
 	private void createDocumentDetailsPage(Portal portal, PortalLayout layout, Column createColumn) throws Exception {
@@ -101,7 +101,7 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		String pageId = "document-details";
 		int index = 1;
 		String initializerIndex = "anotherFormCollection.form";
-		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM);
+		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE);
 	}
 
 	private Page createPage(PortalLayout layout, boolean generate, String id, Visibility visibility) {
@@ -121,8 +121,8 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		return ob;
 	}
 
-	private void create_page_internal_portlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, String initializerIndex, InternalPortletType type) throws Exception {
-		Page page = createPage(layout, false, pageId, Visibility.PUBLIC);
+	private void create_page_internal_portlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, String initializerIndex, InternalPortletType type, Visibility visibility) throws Exception {
+		Page page = createPage(layout, false, pageId, visibility);
 		// set HavePortlets
 		PortletInternal portletInternal = PortalFactory.eINSTANCE.createPortletInternal();
 		portletInternal.setType(type);
