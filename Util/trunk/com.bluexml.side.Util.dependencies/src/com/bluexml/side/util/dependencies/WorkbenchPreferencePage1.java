@@ -27,11 +27,9 @@ public class WorkbenchPreferencePage1 extends AbstractFieldsPreferencePage imple
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		setPreferenceStore(store);
 		String locationPreference = getLocationPreference();
-		if (StringUtils.trimToNull(locationPreference) == null) {
-			values.put(MAVEN_REPO_LOCATION, RepositorySystem.defaultUserLocalRepository.toString());
-		} else {
-			values.put(MAVEN_REPO_LOCATION, locationPreference);
-		}
+
+		values.put(MAVEN_REPO_LOCATION, locationPreference);
+
 	}
 
 	//	protected Control createContents(Composite parent) {
@@ -70,7 +68,12 @@ public class WorkbenchPreferencePage1 extends AbstractFieldsPreferencePage imple
 
 	public static String getLocationPreference() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		return store.getString(MAVEN_REPO_LOCATION);
+		String locationPreference = store.getString(MAVEN_REPO_LOCATION);
+
+		if (StringUtils.trimToNull(locationPreference) == null) {
+			locationPreference = RepositorySystem.defaultUserLocalRepository.toString();
+		}
+		return locationPreference;
 	}
 
 	public static String getLastRepoVersion(String repoId) {
