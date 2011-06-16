@@ -79,7 +79,7 @@ public class AttributeServices {
 				return "?long";
 			} else if (object.getTyp() == DataType.OBJECT) {
 				//return "?content";
-				return "?any";
+				return "?string";
 			} else if (object.getTyp() == DataType.SHORT) {
 				return "?int";
 			} else if (object.getTyp() == DataType.STRING) {
