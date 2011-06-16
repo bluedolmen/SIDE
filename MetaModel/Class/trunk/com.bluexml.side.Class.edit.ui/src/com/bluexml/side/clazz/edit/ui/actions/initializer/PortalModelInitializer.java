@@ -30,47 +30,47 @@ import com.bluexml.side.view.ViewCollection;
 
 public class PortalModelInitializer extends ModelAndDiagramInitializer {
 
-	private static final String PORTAL_EDITOR_ID = ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID");
+	private static final String PORTAL_EDITOR_ID = ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID"); //$NON-NLS-1$
 
 	public PortalModelInitializer(IFile classModel, ClassPackage root, InitializerRegister register, ASK_USER ask) throws IOException {
-		super(classModel, root, PORTAL_EDITOR_ID, "portal", "com.bluexml.side.Portal.modeler.diagram", register, ask, null);
+		super(classModel, root, PORTAL_EDITOR_ID, "portal", "com.bluexml.side.Portal.modeler.diagram", register, ask, null); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Override
 	protected Command initialize(EditingDomain editingDomain) throws Exception {
 		CompoundCommand cc = new CompoundCommand();
 		Portal portal = PortalFactory.eINSTANCE.createPortal();
-		portal.setName(newModelPath.lastSegment().replace(newModelExt, ""));
+		portal.setName(newModelPath.lastSegment().replace(newModelExt, "")); //$NON-NLS-1$
 
 		// create layout
 		PortalLayout layout = PortalFactory.eINSTANCE.createPortalLayout();
-		layout.setName("defaultLayout");
+		layout.setName("defaultLayout"); //$NON-NLS-1$
 		Column createColumn = PortalFactory.eINSTANCE.createColumn();
-		createColumn.setName("defaultColumn");
+		createColumn.setName("defaultColumn"); //$NON-NLS-1$
 		layout.getColumns().add(createColumn);
 
 		portal.getLayoutSet().add(layout);
 
 		// create pages
 		// blog-postlist
-		Page blogpostlist = createPage(layout, false, "blog-postlist", Visibility.PUBLIC);
+		Page blogpostlist = createPage(layout, false, "blog-postlist", Visibility.PUBLIC); //$NON-NLS-1$
 		blogpostlist.setPosition(0);
 
 		blogpostlist.getPortlets();
 		// discussions-topiclist
-		Page discussionstopiclist = createPage(layout, false, "discussions-topiclist", Visibility.PUBLIC);
+		Page discussionstopiclist = createPage(layout, false, "discussions-topiclist", Visibility.PUBLIC); //$NON-NLS-1$
 
 		// links
-		Page links = createPage(layout, false, "links", Visibility.PUBLIC);
+		Page links = createPage(layout, false, "links", Visibility.PUBLIC); //$NON-NLS-1$
 
 		// wiki-page
-		Page wikipage = createPage(layout, false, "wiki-page", Visibility.PUBLIC);
+		Page wikipage = createPage(layout, false, "wiki-page", Visibility.PUBLIC); //$NON-NLS-1$
 
 		// data-lists
-		Page datalists = createPage(layout, false, "data-lists", Visibility.PUBLIC);
+		Page datalists = createPage(layout, false, "data-lists", Visibility.PUBLIC); //$NON-NLS-1$
 
 		// calendar
-		Page calendar = createPage(layout, false, "calendar", Visibility.PUBLIC);
+		Page calendar = createPage(layout, false, "calendar", Visibility.PUBLIC); //$NON-NLS-1$
 
 		portal.getPageSet().add(calendar);
 		portal.getPageSet().add(datalists);
@@ -90,17 +90,17 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 
 	private void createDocumentLibraryPage(Portal portal, PortalLayout layout, Column createColumn) throws Exception {
 		/* documentlibrary */
-		String pageId = "documentlibrary";
+		String pageId = "documentlibrary"; //$NON-NLS-1$
 		int index = 0;
-		String initializerIndex = "";
+		String initializerIndex = ""; //$NON-NLS-1$
 		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.VIEW, Visibility.PUBLIC);
 	}
 
 	private void createDocumentDetailsPage(Portal portal, PortalLayout layout, Column createColumn) throws Exception {
 		/* documentlibrary */
-		String pageId = "document-details";
+		String pageId = "document-details"; //$NON-NLS-1$
 		int index = 1;
-		String initializerIndex = "anotherFormCollection.form";
+		String initializerIndex = "anotherFormCollection.form"; //$NON-NLS-1$
 		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE);
 	}
 

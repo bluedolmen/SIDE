@@ -16,10 +16,10 @@ import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.clazz.utils.ClassInitialization;
 
 public class FormModelInitializer extends ModelInitializer {
-	private static final String FORM_EDITOR_ID = ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID");
+	private static final String FORM_EDITOR_ID = ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID"); //$NON-NLS-1$
 
 	public FormModelInitializer(IFile classModel, ClassPackage root, InitializerRegister register, ASK_USER ask, String formModelFileName) throws IOException {
-		super(classModel, root, FORM_EDITOR_ID, "form", register, ask, formModelFileName);
+		super(classModel, root, FORM_EDITOR_ID, "form", register, ask, formModelFileName); //$NON-NLS-1$
 	}
 
 	@Override

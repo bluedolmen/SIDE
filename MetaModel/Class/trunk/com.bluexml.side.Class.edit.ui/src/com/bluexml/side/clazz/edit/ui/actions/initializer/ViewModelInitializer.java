@@ -18,22 +18,22 @@ import com.bluexml.side.view.edit.ui.utils.InitView;
 
 public class ViewModelInitializer extends ModelInitializer {
 
-	private static final String VIEW_EDITOR_ID = ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID");
+	private static final String VIEW_EDITOR_ID = ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID"); //$NON-NLS-1$
 
 	public ViewModelInitializer(IFile classModel, ClassPackage root, InitializerRegister register, ASK_USER ask, String formModelFileName) throws IOException {
-		super(classModel, root, VIEW_EDITOR_ID, "view", register, ask, formModelFileName);
+		super(classModel, root, VIEW_EDITOR_ID, "view", register, ask, formModelFileName); //$NON-NLS-1$
 	}
 
 	@Override
 	protected Command initialize(EditingDomain editingDomain) {
 		ViewCollection createViewCollection = ViewFactory.eINSTANCE.createViewCollection();
-		createViewCollection.setName(newModelPath.lastSegment().replace(newModelExt, ""));
+		createViewCollection.setName(newModelPath.lastSegment().replace(newModelExt, "")); //$NON-NLS-1$
 		newRootObject = createViewCollection;
 
 		CompoundCommand cc = new CompoundCommand();
 
-		createComposedView(editingDomain, cc, "groupedViewsDocLib");
-		createComposedView(editingDomain, cc, "groupedViewsDocDetails");
+		createComposedView(editingDomain, cc, "groupedViewsDocLib"); //$NON-NLS-1$
+		createComposedView(editingDomain, cc, "groupedViewsDocDetails"); //$NON-NLS-1$
 
 		return cc;
 	}

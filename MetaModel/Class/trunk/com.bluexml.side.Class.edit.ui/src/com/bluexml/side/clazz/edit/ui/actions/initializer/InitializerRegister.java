@@ -52,13 +52,13 @@ public class InitializerRegister {
 	public static InitializerRegister getDefaultInitializerRegister(IFile classModel, ClassPackage root, ASK_USER ask) throws Exception {
 		InitializerRegister register = new InitializerRegister(classModel, root, ask);
 
-		register.getViewInitializer().put("", new ViewModelInitializer(classModel, root, register, ask, null));
+		register.getViewInitializer().put("", new ViewModelInitializer(classModel, root, register, ask, null)); //$NON-NLS-1$
 
-		register.getFormInitializer().put("", new FormModelInitializer(classModel, root, register, ask, "default.form"));
+		register.getFormInitializer().put("", new FormModelInitializer(classModel, root, register, ask, "default.form")); //$NON-NLS-1$ //$NON-NLS-2$
 
-		register.getFormInitializer().put("anotherFormCollection.form", new FormModelInitializer(classModel, root, register, ask, "anotherFormCollection.form"));
+		register.getFormInitializer().put("anotherFormCollection.form", new FormModelInitializer(classModel, root, register, ask, "anotherFormCollection.form")); //$NON-NLS-1$ //$NON-NLS-2$
 
-		register.getPortalInitializer().put("", new PortalModelInitializer(classModel, root, register, ask));
+		register.getPortalInitializer().put("", new PortalModelInitializer(classModel, root, register, ask)); //$NON-NLS-1$
 
 		return register;
 	}

@@ -31,13 +31,14 @@ import org.eclipse.ui.part.FileEditorInput;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
+import com.bluexml.side.clazz.edit.ui.Messages;
 import com.bluexml.side.util.libs.eclipse.ProjectNatureHelper;
 import com.bluexml.side.util.libs.ui.UIUtils;
 
 public abstract class ModelInitializer {
-	public static final String NATURE_ID = "com.bluexml.side.integration.eclipse.nature";
-	public static final String NATURE_WithBuilder_ID = "com.bluexml.side.integration.eclipse.nature.activatedBuilder";
-	public static final String classExt = ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID");
+	public static final String NATURE_ID = "com.bluexml.side.integration.eclipse.nature"; //$NON-NLS-1$
+	public static final String NATURE_WithBuilder_ID = "com.bluexml.side.integration.eclipse.nature.activatedBuilder"; //$NON-NLS-1$
+	public static final String classExt = ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID"); //$NON-NLS-1$
 
 	protected final IFile classModel;
 	protected final ClassPackage root;
@@ -120,7 +121,7 @@ public abstract class ModelInitializer {
 		if (exists) {
 			if (ask.equals(ASK_USER.ASK)) {
 				// open warning dialog to ask user about overriding existing models
-				doWork = UIUtils.showConfirmation("Model " + newModelFile.getName() + " exists !", "Model have already been created. Do you want to overwrite it ?");
+				doWork = UIUtils.showConfirmation(Messages.ModelInitializer_3 + newModelFile.getName() + Messages.ModelInitializer_4, Messages.ModelInitializer_5);
 			} else if (ask.equals(ASK_USER.SKIP)) {
 				// do no ask user, just skip initializing
 				doWork = false;
@@ -133,7 +134,7 @@ public abstract class ModelInitializer {
 			URI fileURI = URI.createPlatformResourceURI(newModelFile.getFullPath().toString(), true);
 			Resource resource = resourceSet.createResource(fileURI);
 			Map<Object, Object> options = new HashMap<Object, Object>();
-			options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+			options.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
 			resource.save(options);
 
 			try {
@@ -185,7 +186,7 @@ public abstract class ModelInitializer {
 	}
 
 	public String getModelName() {
-		return getNewFileName().replace(newModelExt, "");
+		return getNewFileName().replace(newModelExt, ""); //$NON-NLS-1$
 	}
 
 	public String getNewFileName() {

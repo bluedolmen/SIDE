@@ -20,6 +20,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.Activator;
+import com.bluexml.side.clazz.edit.ui.Messages;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ApplicationModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer;
@@ -49,7 +50,7 @@ public class InitializerWizard extends Wizard implements IWorkbenchWizard {
 	public InitializerWizard(IFile classModel) {
 		this.classModel = classModel;
 		setNeedsProgressMonitor(true);
-		this.setWindowTitle("Initialize SIDE Models");
+		this.setWindowTitle(Messages.InitializerWizard_0);
 	}
 
 	/*
@@ -66,7 +67,7 @@ public class InitializerWizard extends Wizard implements IWorkbenchWizard {
 	@Override
 	public boolean performFinish() {
 		try {
-			System.out.println("InitializerWizard.performFinish()");
+			System.out.println("InitializerWizard.performFinish()"); //$NON-NLS-1$
 			InitializerPageWelcome page = (InitializerPageWelcome) getContainer().getCurrentPage();
 			final String alf_home = page.getFieldValue(InitializerPageWelcome.Fields.alfresco_home.toString());
 			final String alf_ver = page.getFieldValue(InitializerPageWelcome.Fields.alfresco_version.toString());
@@ -85,7 +86,7 @@ public class InitializerWizard extends Wizard implements IWorkbenchWizard {
 					System.out.println(current);
 					System.out.println(ui);
 
-					monitor.beginTask("Start initializing SIDE Models", -1);
+					monitor.beginTask(Messages.InitializerWizard_2, -1);
 					// initialize models
 					try {
 						//TODO use fork to run this job and use syncExec only for action than require to run in UI thread instead of do all the job in UI thread
@@ -102,12 +103,12 @@ public class InitializerWizard extends Wizard implements IWorkbenchWizard {
 
 			this.getContainer().run(true, true, runPro);
 
-			System.out.println("InitializerWizard.performFinish() DONE");
+			System.out.println("InitializerWizard.performFinish() DONE"); //$NON-NLS-1$
 		} catch (Exception e) {
 			e.printStackTrace();
 			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Alfresco Extension project creation fail !", e)); //$NON-NLS-1$
 		}
-		while (!ini.getApplicationInitializer().get("").isInitialized()) {
+		while (!ini.getApplicationInitializer().get("").isInitialized()) { //$NON-NLS-1$
 			try {
 				this.wait(1000);
 			} catch (InterruptedException e) {
@@ -126,7 +127,7 @@ public class InitializerWizard extends Wizard implements IWorkbenchWizard {
 
 		ApplicationModelInitializer applicationModelInit = new ApplicationModelInitializer(classModel, cp, initilizerRegister, ASK_USER.OVERRIDE, null, alf_ver, alf_home);
 		// add ApplicationInitializer to register
-		initilizerRegister.getApplicationInitializer().put("", applicationModelInit);
+		initilizerRegister.getApplicationInitializer().put("", applicationModelInit); //$NON-NLS-1$
 
 		return initilizerRegister;
 	}
