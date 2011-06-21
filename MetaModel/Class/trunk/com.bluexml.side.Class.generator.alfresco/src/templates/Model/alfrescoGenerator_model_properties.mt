@@ -30,31 +30,31 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 
 #Model's messages
-<%getFolder()%>_<%name%>model.title=BlueXML Custom Model
-<%getFolder()%>_<%name%>model.description=BlueXML Custom Model
+<%getFolder()%>_model.title=BlueXML Custom Model
+<%getFolder()%>_model.description=BlueXML Custom Model
 
 <%for (getAllClasses().nSort("name")){%>
 #Class' messages : <%getQualifiedName()%>
-<%getFolder()%>_<%current(1).name%>model.type.<%getFolder()%>_<%getQualifiedName()%>.title=<%getLabel()%>
-<%getFolder()%>_<%current(1).name%>model.type.<%getFolder()%>_<%getQualifiedName()%>.description=<%getDescriptionOrName()%>
+<%getFolder()%>_model.type.<%getFolder()%>_<%getQualifiedName()%>.title=<%getLabel()%>
+<%getFolder()%>_model.type.<%getFolder()%>_<%getQualifiedName()%>.description=<%getDescriptionOrName()%>
 	<%for (getSortedAttibutes()){%>
-<%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
-<%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
+<%getFolder()%>_model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
+<%getFolder()%>_model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
 	<%}%>
 	<%for (getSourceAssociationEnds()){%>
-<%getFolder()%>_<%current(2).name%>model.association.<%eContainer().getFolder()%>_<%current(1).getQualifiedName()%>_<%if (name != null){%><%name%><%}%>.title=<%getRoleOrTitleFromSource()%>
-<%--<%getFolder()%>_<%current(2).name%>model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>_search.title=<%getRoleOrTitle(current(1))%>--%>
-<%--<%getFolder()%>_<%current(2).name%>model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>_search_operator=Option <%getLabel()%>--%>
-<%getFolder()%>_<%current(2).name%>model.association.<%eContainer().getFolder()%>_<%current(1).getQualifiedName()%>_<%if (name != null){%><%name%><%}%>.description=<%eContainer().getDescriptionOrName()%>
+<%getFolder()%>_model.association.<%eContainer().getFolder()%>_<%current(1).getQualifiedName()%>_<%if (name != null){%><%name%><%}%>.title=<%getRoleOrTitleFromSource()%>
+<%--<%getFolder()%>_model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>_search.title=<%getRoleOrTitle(current(1))%>--%>
+<%--<%getFolder()%>_model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>_search_operator=Option <%getLabel()%>--%>
+<%getFolder()%>_model.association.<%eContainer().getFolder()%>_<%current(1).getQualifiedName()%>_<%if (name != null){%><%name%><%}%>.description=<%eContainer().getDescriptionOrName()%>
 	<%}%>	
 	
 <%}%>
 <%for (getAllAspects().nSort("name")){%>
 #Aspect's messages : <%getQualifiedName()%>
-<%getFolder()%>_<%current(1).name%>model.aspect.<%getFolder()%>_<%getQualifiedName()%>.title=<%getLabel()%>
-<%getFolder()%>_<%current(1).name%>model.aspect.<%getFolder()%>_<%getQualifiedName()%>.description=<%getDescriptionOrName()%>
+<%getFolder()%>_model.aspect.<%getFolder()%>_<%getQualifiedName()%>.title=<%getLabel()%>
+<%getFolder()%>_model.aspect.<%getFolder()%>_<%getQualifiedName()%>.description=<%getDescriptionOrName()%>
 	<%for (getSortedAttibutes()){%>
-<%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
-<%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
+<%getFolder()%>_model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
+<%getFolder()%>_model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
 	<%}%>
 <%}%>
