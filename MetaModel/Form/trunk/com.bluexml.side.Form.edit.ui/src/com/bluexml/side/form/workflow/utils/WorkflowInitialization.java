@@ -1,6 +1,7 @@
 package com.bluexml.side.form.workflow.utils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
@@ -12,10 +13,12 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;
+import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.WorkflowFormCollection;
+import com.bluexml.side.form.clazz.utils.ClassInitialization;
 import com.bluexml.side.util.libs.ui.UIUtils;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.Process;
@@ -84,30 +87,38 @@ public class WorkflowInitialization {
 
 		if (s instanceof UserTask) {
 			UserTask ut = (UserTask) s;
-			// For all attribute we get the field :
-			for (Attribute a : ut.getAttributes()) {
-				//if (a.getAllowedValues().size() == 0) { 
-				// @Amenel: ModelChoiceFields are not supported in workflow forms (yet). Fields with
-				// an allowed values list must remain a CharField since there's no class associated.
-				Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
-				if (f != null) {
-					fw.getChildren().add(f);
-				}
-				// } else {
-				// ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
-				// f.setId(a.getName());
-				// f.setRef(a);
-				// if (a.getTitle() != null && a.getTitle().length() > 0) {
-				// f.setLabel(a.getTitle());
-				// } else {
-				// f.setLabel(a.getName());
-				// }
-				// if (f != null) {
-				// fw.getChildren().add(f);
-				// }
-				// }
-			}
 
+			Clazz advancedTaskDefinition = ut.getAdvancedTaskDefinition();
+			if (advancedTaskDefinition != null) {
+				// use initialize from the Class definition instead to search attribute task
+				Collection<FormElement> createChildsForClass = ClassInitialization.createChildsForClass(advancedTaskDefinition);
+				fw.getChildren().addAll(createChildsForClass);
+			} else {
+
+				// For all attribute we get the field :
+				for (Attribute a : ut.getAttributes()) {
+					//if (a.getAllowedValues().size() == 0) { 
+					// @Amenel: ModelChoiceFields are not supported in workflow forms (yet). Fields with
+					// an allowed values list must remain a CharField since there's no class associated.
+					Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
+					if (f != null) {
+						fw.getChildren().add(f);
+					}
+					// } else {
+					// ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
+					// f.setId(a.getName());
+					// f.setRef(a);
+					// if (a.getTitle() != null && a.getTitle().length() > 0) {
+					// f.setLabel(a.getTitle());
+					// } else {
+					// f.setLabel(a.getName());
+					// }
+					// if (f != null) {
+					// fw.getChildren().add(f);
+					// }
+					// }
+				}
+			}
 			// For attached class :
 			if (((UserTask) s).getClazz().size() > 0) {
 				for (Clazz c : ((UserTask) s).getClazz()) {
@@ -141,7 +152,6 @@ public class WorkflowInitialization {
 			save.setId("wrkflw_save");
 			save.setLabel("save");
 			fw.getChildren().add(save);
-			
 
 		}
 		return fw;

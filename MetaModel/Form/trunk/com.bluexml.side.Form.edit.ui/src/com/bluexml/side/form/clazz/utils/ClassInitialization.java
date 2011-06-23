@@ -35,7 +35,7 @@ public class ClassInitialization {
 			}
 
 			if (doWork) {
-				Command initCmd = initializeAttributeFormClass(fc, domain);
+				Command initCmd = initializeFormClass(fc, domain);
 				if (initCmd.canExecute()) {
 					cc.append(initCmd);
 				}
@@ -58,7 +58,7 @@ public class ClassInitialization {
 	 * @param domain
 	 * @return
 	 */
-	private static Command initializeAttributeFormClass(FormClass fc, EditingDomain domain) {
+	private static Command initializeFormClass(FormClass fc, EditingDomain domain) {
 
 		CompoundCommand cc = new CompoundCommand();
 		try {
@@ -106,6 +106,12 @@ public class ClassInitialization {
 		fc.getDisabled().clear();
 		fc.getChildren().removeAll(fc.getChildren());
 		AbstractClass cl = fc.getReal_class();
+		Collection<FormElement> c = createChildsForClass(cl);
+
+		return c;
+	}
+
+	public static Collection<FormElement> createChildsForClass(AbstractClass cl) {
 		Collection<FormElement> c = new ArrayList<FormElement>();
 
 		if (cl != null) {
@@ -163,7 +169,6 @@ public class ClassInitialization {
 				}
 			}
 		}
-
 		return c;
 	}
 }
