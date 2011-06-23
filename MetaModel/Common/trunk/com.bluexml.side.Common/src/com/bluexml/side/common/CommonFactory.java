@@ -143,6 +143,15 @@ public interface CommonFactory extends EFactory {
 	ConstraintParam createConstraintParam();
 
 	/**
+	 * Returns a new object of class '<em>Name Space</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Name Space</em>'.
+	 * @generated
+	 */
+	NameSpace createNameSpace();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -7,6 +7,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: main elements of model inherits of ModelElement which allows to declare the description and the documentation attributes."/>
     </eAnnotations>
+    <eOperations name="getLogicalNameSpace" eType="#//NameSpace">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if not(self.namespace.oclIsUndefined()) then&#xD;&#x9;self.namespace&#xD;else&#xD;&#x9;if not(self.getContainer().oclIsUndefined()) and self.getContainer().oclIsKindOf(common::ModelElement) then&#xD;&#x9;&#x9;self.getContainer().oclAsType(common::ModelElement).getLogicalNameSpace()&#xD;&#x9;else&#xD;&#x9;&#x9;null&#xD;&#x9;endif&#xD;endif"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypes" upperBound="-1"
         eType="#//Stereotype"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" upperBound="-1" eType="#//Tag"
@@ -27,6 +32,7 @@
         eType="#//MetaInfo" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
         eType="#//Constraint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="#//NameSpace"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedModelElement" eSuperTypes="#//ModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -89,10 +95,17 @@
         <details key="body" value="if self.getContainer().oclIsUndefined() then&#xD;&#x9;self&#xD;else&#xD;&#x9;self.getContainer().oclAsType(Package).getRootPackage()&#xD;endif"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getAllNamespaces" upperBound="-1" eType="#//NameSpace">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="common::NameSpace.allInstances()"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypeSet" upperBound="-1"
         eType="#//Stereotype" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packageSet" upperBound="-1"
         eType="#//Package" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceSet" upperBound="-1"
+        eType="#//NameSpace" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//OperationComponent">
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -183,5 +196,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="ConstraintParam" eSuperTypes="#//NamedModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NameSpace">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="URI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

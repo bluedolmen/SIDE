@@ -66,6 +66,7 @@ public class MetaInfoGroupItemProvider
 			addDocumentationPropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
 			addConstraintsPropertyDescriptor(object);
+			addNamespacePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -177,6 +178,28 @@ public class MetaInfoGroupItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Namespace feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamespacePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ModelElement_namespace_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelElement_namespace_feature", "_UI_ModelElement_type"),
+				 CommonPackage.Literals.MODEL_ELEMENT__NAMESPACE,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

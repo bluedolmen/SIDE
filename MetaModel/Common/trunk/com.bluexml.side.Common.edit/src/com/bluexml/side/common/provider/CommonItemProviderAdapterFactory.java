@@ -374,6 +374,29 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.NameSpace} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NameSpaceItemProvider nameSpaceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.common.NameSpace}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNameSpaceAdapter() {
+		if (nameSpaceItemProvider == null) {
+			nameSpaceItemProvider = new NameSpaceItemProvider(this);
+		}
+
+		return nameSpaceItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -485,6 +508,7 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
 		if (metaInfoGroupItemProvider != null) metaInfoGroupItemProvider.dispose();
 		if (constraintItemProvider != null) constraintItemProvider.dispose();
 		if (constraintParamItemProvider != null) constraintParamItemProvider.dispose();
+		if (nameSpaceItemProvider != null) nameSpaceItemProvider.dispose();
 	}
 
 }

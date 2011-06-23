@@ -40,7 +40,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
             <parent><%getPrefixedQName()%></parent>			    
 			    <%}%>
 			<%}%>
-			<%if (generalizations.nSize() == 0 && !isReversed()){%>
+			<%if (generalizations.nSize() == 0){%>
 				<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0){%>
 			<parent>cm:folder</parent>
 			 	<%}else{%>
@@ -92,7 +92,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<%}%>
 					<%if (valueList) {%>
 						<%--<%if (!valueList.dynamic){%>--%>
-							<constraint ref="<%getFolder()%>:nomenclature:<%valueList.getQualifiedName()%>"/>
+							<constraint ref="<%valueList.service::getRootContainer().name%>:nomenclature:<%valueList.getQualifiedName()%>"/>
 						<%--<%}else{%>
 							<!--<constraint ref="<%getFolder()%>:Litteral"/>-->
 							<constraint ref="<%getFolder()%>:enumU:<%valueList.getQualifiedName()%>"/>

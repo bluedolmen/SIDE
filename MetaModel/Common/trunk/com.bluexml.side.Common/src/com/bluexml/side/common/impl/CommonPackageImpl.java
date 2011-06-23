@@ -27,6 +27,7 @@ import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Operation;
 import com.bluexml.side.common.OperationComponent;
@@ -154,6 +155,13 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * @generated
 	 */
 	private EClass constraintParamEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nameSpaceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -307,6 +315,15 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getModelElement_Namespace() {
+		return (EReference)modelElementEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getNamedModelElement() {
 		return namedModelElementEClass;
 	}
@@ -399,6 +416,15 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 */
 	public EReference getPackage_PackageSet() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPackage_NamespaceSet() {
+		return (EReference)packageEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -640,6 +666,33 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getNameSpace() {
+		return nameSpaceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNameSpace_Prefix() {
+		return (EAttribute)nameSpaceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNameSpace_URI() {
+		return (EAttribute)nameSpaceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDataType() {
 		return dataTypeEEnum;
 	}
@@ -689,6 +742,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		createEAttribute(modelElementEClass, MODEL_ELEMENT__DESCRIPTION);
 		createEReference(modelElementEClass, MODEL_ELEMENT__METAINFO);
 		createEReference(modelElementEClass, MODEL_ELEMENT__CONSTRAINTS);
+		createEReference(modelElementEClass, MODEL_ELEMENT__NAMESPACE);
 
 		namedModelElementEClass = createEClass(NAMED_MODEL_ELEMENT);
 		createEAttribute(namedModelElementEClass, NAMED_MODEL_ELEMENT__NAME);
@@ -705,6 +759,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		packageEClass = createEClass(PACKAGE);
 		createEReference(packageEClass, PACKAGE__STEREOTYPE_SET);
 		createEReference(packageEClass, PACKAGE__PACKAGE_SET);
+		createEReference(packageEClass, PACKAGE__NAMESPACE_SET);
 
 		operationEClass = createEClass(OPERATION);
 		createEAttribute(operationEClass, OPERATION__RETURN_TYPE);
@@ -741,6 +796,10 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 
 		constraintParamEClass = createEClass(CONSTRAINT_PARAM);
 		createEAttribute(constraintParamEClass, CONSTRAINT_PARAM__VALUES);
+
+		nameSpaceEClass = createEClass(NAME_SPACE);
+		createEAttribute(nameSpaceEClass, NAME_SPACE__PREFIX);
+		createEAttribute(nameSpaceEClass, NAME_SPACE__URI);
 
 		// Create enums
 		dataTypeEEnum = createEEnum(DATA_TYPE);
@@ -798,6 +857,9 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEAttribute(getModelElement_Description(), ecorePackage.getEString(), "description", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelElement_Metainfo(), this.getMetaInfo(), null, "metainfo", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelElement_Constraints(), this.getConstraint(), null, "constraints", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelElement_Namespace(), this.getNameSpace(), null, "namespace", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(modelElementEClass, this.getNameSpace(), "getLogicalNameSpace", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(namedModelElementEClass, NamedModelElement.class, "NamedModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedModelElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -826,11 +888,14 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEClass(packageEClass, com.bluexml.side.common.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPackage_StereotypeSet(), this.getStereotype(), null, "stereotypeSet", null, 0, -1, com.bluexml.side.common.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackage_PackageSet(), this.getPackage(), null, "packageSet", null, 0, -1, com.bluexml.side.common.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackage_NamespaceSet(), this.getNameSpace(), null, "namespaceSet", null, 0, -1, com.bluexml.side.common.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(packageEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getPackage(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(packageEClass, this.getPackage(), "getRootPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(packageEClass, this.getNameSpace(), "getAllNamespaces", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperation_ReturnType(), this.getDataType(), "returnType", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -882,6 +947,10 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEClass(constraintParamEClass, ConstraintParam.class, "ConstraintParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConstraintParam_Values(), ecorePackage.getEString(), "values", null, 0, -1, ConstraintParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(nameSpaceEClass, NameSpace.class, "NameSpace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNameSpace_Prefix(), ecorePackage.getEString(), "prefix", null, 0, 1, NameSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNameSpace_URI(), ecorePackage.getEString(), "URI", null, 0, 1, NameSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(dataTypeEEnum, DataType.class, "DataType");
 		addEEnumLiteral(dataTypeEEnum, DataType.BOOLEAN);
@@ -918,7 +987,13 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * @generated
 	 */
 	protected void createOCLAnnotations() {
-		String source = "http://www.bluexml.com/OCL";						
+		String source = "http://www.bluexml.com/OCL";			
+		addAnnotation
+		  (modelElementEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if not(self.namespace.oclIsUndefined()) then\r\tself.namespace\relse\r\tif not(self.getContainer().oclIsUndefined()) and self.getContainer().oclIsKindOf(common::ModelElement) then\r\t\tself.getContainer().oclAsType(common::ModelElement).getLogicalNameSpace()\r\telse\r\t\tnull\r\tendif\rendif"
+		   });					
 		addAnnotation
 		  (namedModelElementEClass.getEOperations().get(0), 
 		   source, 
@@ -960,6 +1035,12 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		   source, 
 		   new String[] {
 			 "body", "if self.getContainer().oclIsUndefined() then\r\tself\relse\r\tself.getContainer().oclAsType(Package).getRootPackage()\rendif"
+		   });		
+		addAnnotation
+		  (packageEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "body", "common::NameSpace.allInstances()"
 		   });		
 		addAnnotation
 		  (operationEClass.getEOperations().get(0), 

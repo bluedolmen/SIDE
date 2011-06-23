@@ -42,4 +42,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
       	<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
       	<!-- Import BlueXML Definitions -->
       	<import uri="http://www.bluexml.com/model/content/1.0" prefix="bxcm" />
+      	<%for (getNSL()[!isNativeModel()]) {%>
+      	<import uri="<%getNamespaceURI()%>" prefix="<%getPrefixe()%>" />
+      	<%}%>
 	</imports>

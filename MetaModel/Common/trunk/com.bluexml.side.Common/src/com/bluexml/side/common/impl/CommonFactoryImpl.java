@@ -22,6 +22,7 @@ import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Operation;
 import com.bluexml.side.common.OperationGroup;
@@ -87,6 +88,7 @@ public class CommonFactoryImpl extends EFactoryImpl implements CommonFactory {
 			case CommonPackage.META_INFO_GROUP: return createMetaInfoGroup();
 			case CommonPackage.CONSTRAINT: return createConstraint();
 			case CommonPackage.CONSTRAINT_PARAM: return createConstraintParam();
+			case CommonPackage.NAME_SPACE: return createNameSpace();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -254,6 +256,16 @@ public class CommonFactoryImpl extends EFactoryImpl implements CommonFactory {
 	public ConstraintParam createConstraintParam() {
 		ConstraintParamImpl constraintParam = new ConstraintParamImpl();
 		return constraintParam;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NameSpace createNameSpace() {
+		NameSpaceImpl nameSpace = new NameSpaceImpl();
+		return nameSpace;
 	}
 
 	/**

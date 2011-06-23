@@ -16,6 +16,7 @@
  ******************************************************************************/
 package com.bluexml.side.clazz.service.alfresco;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -27,8 +28,12 @@ import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.AssociationType;
+import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.clazz.Model;
+import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.Tag;
 
 public class AssociationServices {
@@ -222,174 +227,6 @@ public class AssociationServices {
 		return false;
 	}
 
-	/**
-	 * Return the associaton name.
-	 * 
-	 * @param a
-	 * @param e
-	 * @return
-	 */
-	public static String getAssociationName(Association a, ClassModelElement e) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// return getName(a, e, false);
-	}
-
-	public static String getQualifiedNameReverse(Association a, ClassModelElement e) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// return getName(a, e, true);
-	}
-
-	public static String getName(Association a, ClassModelElement e, boolean reverse) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// String associationName = "";
-		// if (e instanceof Clazz) {
-		// Clazz c = (Clazz) e;
-		// // Check if association is on this class or is inherited :
-		// if (a.getFirstEnd().getLinkedClass() == c ||
-		// a.getSecondEnd().getLinkedClass() == c) {
-		// associationName = constructAssociationName(a, c, reverse);
-		// } else {
-		// // We must find the parent class
-		// Collection<Clazz> s = c.getInheritedClasses();
-		// for (Clazz Clazz : s) {
-		// if (a.getFirstEnd().getLinkedClass() == Clazz ||
-		// a.getSecondEnd().getLinkedClass() == Clazz) {
-		// associationName = constructAssociationName(a, Clazz, reverse);
-		// }
-		// }
-		// }
-		// }
-		// return associationName;
-	}
-
-	/**
-	 * Construct normal association name
-	 * ClazzSource_AssociationName_[roleName_]ClazzTarget
-	 * 
-	 * @param a
-	 * @param c
-	 * @return
-	 */
-	public static String constructAssociationName(Association a, Clazz c, boolean reverse) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// String associationName = "";
-		//
-		// associationName = c.getFullName().replace(".", "_") + "_" +
-		// a.getName();
-		// if (a.getSecondEnd().getLinkedClass() == c && !reverse) {
-		// if (a.getSecondEnd().getName() != null &&
-		// !"".equalsIgnoreCase(a.getSecondEnd().getName())) {
-		// associationName += "_" + a.getSecondEnd().getName();
-		// }
-		// associationName += "_" + ((Clazz)
-		// a.getFirstEnd().getLinkedClass()).getFullName().replace(".", "_");
-		// } else {
-		// if (a.getFirstEnd().getName() != null &&
-		// !"".equalsIgnoreCase(a.getFirstEnd().getName())) {
-		// associationName += "_" + a.getFirstEnd().getName();
-		// }
-		// associationName += "_" + ((Clazz)
-		// a.getSecondEnd().getLinkedClass()).getFullName().replace(".", "_");
-		// }
-		//
-		// return associationName;
-	}
-
-	public String getNameForClassAssociationAC(Clazz c, Association assoc, Clazz a) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// return getNameForClassAssociationAC(c,assoc, a, false);
-	}
-
-	public String getNameForClassAssociationAC(Association assoc, Clazz c, Clazz a) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// return getNameForClassAssociationAC(c,assoc, a, false);
-	}
-
-	public String getNameForClassAssociationACReverse(Clazz c, Association assoc, Clazz a) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// return getNameForClassAssociationAC(c,assoc, a, true);
-	}
-
-	public String getNameForClassAssociationACReverse(Association assoc, Clazz c, Clazz a) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// return getNameForClassAssociationAC(c,assoc, a, true);
-	}
-
-	/**
-	 * Return the name for an association class (C) for the association A -> C
-	 * 
-	 * @param c
-	 * @param assoc
-	 * @param a
-	 * @return
-	 */
-	public String getNameForClassAssociationAC(Clazz c, Association assoc, Clazz a, boolean reverse) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// String associationName = "";
-		//
-		// associationName = a.getFullName().replace(".", "_") + "_" +
-		// assoc.getName();
-		//
-		// if (assoc.getSecondEnd().getName() != null &&
-		// !"".equalsIgnoreCase(assoc.getSecondEnd().getName()) && !reverse) {
-		// associationName += "_" + assoc.getSecondEnd().getName();
-		// } else {
-		// if (assoc.getFirstEnd().getName() != null &&
-		// !"".equalsIgnoreCase(assoc.getFirstEnd().getName())) {
-		// associationName += "_" + assoc.getFirstEnd().getName();
-		// }
-		// }
-		//
-		// associationName += "_" + c.getFullName().replace(".", "_");
-		//
-		// return associationName;
-	}
-
-	public String getNameForClassAssociationCB(Clazz c, Association assoc, Clazz b) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// return getNameForClassAssociationCB(assoc, c, b, false);
-	}
-
-	public String getNameForClassAssociationCB(Association assoc, Clazz c, Clazz b) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// return getNameForClassAssociationCB(assoc, c, b, false);
-	}
-
-	/**
-	 * Give the name for the association between C and B
-	 * 
-	 * @param assoc
-	 * @param c
-	 * @param b
-	 * @return
-	 */
-	public String getNameForClassAssociationCB(Association assoc, Clazz c, Clazz b, boolean reverse) {
-		throw new UnsupportedOperationException("This method has been deprecated since Alfresco version 3.x");
-		// String associationName = "";
-		//
-		// associationName = c.getFullName().replace(".", "_") + "_" +
-		// assoc.getName() + "_CA";
-		//
-		// if (assoc.getSecondEnd().getName() != null && !reverse &&
-		// !"".equalsIgnoreCase(assoc.getSecondEnd().getName())) {
-		// associationName += "_" + assoc.getSecondEnd().getName();
-		// } else if (assoc.getSecondEnd().getName() != null && reverse &&
-		// !"".equalsIgnoreCase(assoc.getSecondEnd().getName())) {
-		// associationName += "_" + assoc.getFirstEnd().getName();
-		// }
-		//
-		// associationName += "_" + b.getFullName().replace(".", "_");
-		//
-		// // When we have a class associated to itself with a class association
-		// to
-		// // itself too
-		// if (c == b) {
-		// associationName += "_" + assoc.getFirstEnd().getName();
-		// }
-		//
-		// return associationName;
-	}
-
 	public String getRoleOrTitle(Association a, ClassModelElement e) throws Exception {
 		return getRoleOrTitle(a, e, false);
 	}
@@ -500,7 +337,8 @@ public class AssociationServices {
 	 */
 	public static String getAssociationQName(Association a, AssociationEnd source) {
 		if (isSimpleAssoName(a)) {
-			// reversed element that require to do not use "src_assoname_target" pattern
+			// reversed element that require to do not use "src_assoname_target"
+			// pattern
 			return a.getName();
 		} else {
 			String srcfullName = source.getLinkedClass().getFullName();
@@ -534,4 +372,5 @@ public class AssociationServices {
 		}
 		return false;
 	}
+
 }

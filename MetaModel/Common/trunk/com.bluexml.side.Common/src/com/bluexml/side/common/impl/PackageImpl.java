@@ -9,6 +9,7 @@ package com.bluexml.side.common.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
@@ -24,6 +25,7 @@ import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
 
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
@@ -36,6 +38,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  * <ul>
  *   <li>{@link com.bluexml.side.common.impl.PackageImpl#getStereotypeSet <em>Stereotype Set</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.PackageImpl#getPackageSet <em>Package Set</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.PackageImpl#getNamespaceSet <em>Namespace Set</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,6 +64,16 @@ public class PackageImpl extends NamedModelElementImpl implements com.bluexml.si
 	 * @ordered
 	 */
 	protected EList<com.bluexml.side.common.Package> packageSet;
+
+	/**
+	 * The cached value of the '{@link #getNamespaceSet() <em>Namespace Set</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNamespaceSet()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<NameSpace> namespaceSet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,6 +116,18 @@ public class PackageImpl extends NamedModelElementImpl implements com.bluexml.si
 			packageSet = new EObjectContainmentEList<com.bluexml.side.common.Package>(com.bluexml.side.common.Package.class, this, CommonPackage.PACKAGE__PACKAGE_SET);
 		}
 		return packageSet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<NameSpace> getNamespaceSet() {
+		if (namespaceSet == null) {
+			namespaceSet = new EObjectContainmentEList<NameSpace>(NameSpace.class, this, CommonPackage.PACKAGE__NAMESPACE_SET);
+		}
+		return namespaceSet;
 	}
 
 	/**
@@ -184,6 +209,43 @@ public class PackageImpl extends NamedModelElementImpl implements com.bluexml.si
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<NameSpace> getAllNamespaces() {
+		if (getAllNamespacesBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.PACKAGE.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllNamespacesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllNamespacesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<NameSpace> result = (Collection<NameSpace>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<NameSpace>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllNamespaces <em>Get All Namespaces</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllNamespaces
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllNamespacesBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -191,6 +253,8 @@ public class PackageImpl extends NamedModelElementImpl implements com.bluexml.si
 				return ((InternalEList<?>)getStereotypeSet()).basicRemove(otherEnd, msgs);
 			case CommonPackage.PACKAGE__PACKAGE_SET:
 				return ((InternalEList<?>)getPackageSet()).basicRemove(otherEnd, msgs);
+			case CommonPackage.PACKAGE__NAMESPACE_SET:
+				return ((InternalEList<?>)getNamespaceSet()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -207,6 +271,8 @@ public class PackageImpl extends NamedModelElementImpl implements com.bluexml.si
 				return getStereotypeSet();
 			case CommonPackage.PACKAGE__PACKAGE_SET:
 				return getPackageSet();
+			case CommonPackage.PACKAGE__NAMESPACE_SET:
+				return getNamespaceSet();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -228,6 +294,10 @@ public class PackageImpl extends NamedModelElementImpl implements com.bluexml.si
 				getPackageSet().clear();
 				getPackageSet().addAll((Collection<? extends com.bluexml.side.common.Package>)newValue);
 				return;
+			case CommonPackage.PACKAGE__NAMESPACE_SET:
+				getNamespaceSet().clear();
+				getNamespaceSet().addAll((Collection<? extends NameSpace>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -246,6 +316,9 @@ public class PackageImpl extends NamedModelElementImpl implements com.bluexml.si
 			case CommonPackage.PACKAGE__PACKAGE_SET:
 				getPackageSet().clear();
 				return;
+			case CommonPackage.PACKAGE__NAMESPACE_SET:
+				getNamespaceSet().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -262,6 +335,8 @@ public class PackageImpl extends NamedModelElementImpl implements com.bluexml.si
 				return stereotypeSet != null && !stereotypeSet.isEmpty();
 			case CommonPackage.PACKAGE__PACKAGE_SET:
 				return packageSet != null && !packageSet.isEmpty();
+			case CommonPackage.PACKAGE__NAMESPACE_SET:
+				return namespaceSet != null && !namespaceSet.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

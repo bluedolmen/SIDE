@@ -136,6 +136,15 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_MODEL_ELEMENT__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_MODEL_ELEMENT__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -227,6 +236,15 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_PACKAGE__CONSTRAINTS = CommonPackage.PACKAGE__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PACKAGE__NAMESPACE = CommonPackage.PACKAGE__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -252,6 +270,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_PACKAGE__PACKAGE_SET = CommonPackage.PACKAGE__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PACKAGE__NAMESPACE_SET = CommonPackage.PACKAGE__NAMESPACE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Class Set</b></em>' containment reference list.
@@ -381,6 +408,15 @@ public interface ClazzPackage extends EPackage {
 	int TITLED_NAMED_CLASS_MODEL_ELEMENT__CONSTRAINTS = CommonPackage.NAMED_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__NAMESPACE = CommonPackage.NAMED_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -488,6 +524,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_CLASS__CONSTRAINTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASS__NAMESPACE = TITLED_NAMED_CLASS_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -615,6 +660,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int CLAZZ__CONSTRAINTS = ABSTRACT_CLASS__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLAZZ__NAMESPACE = ABSTRACT_CLASS__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -780,6 +834,15 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION__CONSTRAINTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__NAMESPACE = TITLED_NAMED_CLASS_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -923,6 +986,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int ATTRIBUTE__CONSTRAINTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__NAMESPACE = TITLED_NAMED_CLASS_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1086,6 +1158,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION__CONSTRAINTS = CommonPackage.NAMED_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__NAMESPACE = CommonPackage.NAMED_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1252,6 +1333,15 @@ public interface ClazzPackage extends EPackage {
 	int ASPECT__CONSTRAINTS = ABSTRACT_CLASS__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT__NAMESPACE = ABSTRACT_CLASS__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1379,6 +1469,15 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_COMMENT__CONSTRAINTS = CommonPackage.COMMENT__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_COMMENT__NAMESPACE = CommonPackage.COMMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1468,6 +1567,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSOCIATION_END__CONSTRAINTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__NAMESPACE = TITLED_NAMED_CLASS_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1624,6 +1732,15 @@ public interface ClazzPackage extends EPackage {
 	int MODEL__CONSTRAINTS = CLASS_PACKAGE__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__NAMESPACE = CLASS_PACKAGE__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1649,6 +1766,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL__PACKAGE_SET = CLASS_PACKAGE__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__NAMESPACE_SET = CLASS_PACKAGE__NAMESPACE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Class Set</b></em>' containment reference list.
@@ -1696,22 +1822,13 @@ public interface ClazzPackage extends EPackage {
 	int MODEL__CONSTRAINT_SET = CLASS_PACKAGE__CONSTRAINT_SET;
 
 	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__NAMESPACE = CLASS_PACKAGE_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_FEATURE_COUNT = CLASS_PACKAGE_FEATURE_COUNT + 1;
+	int MODEL_FEATURE_COUNT = CLASS_PACKAGE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}' enum.
@@ -2218,17 +2335,6 @@ public interface ClazzPackage extends EPackage {
 	EClass getModel();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Model#getNamespace <em>Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Namespace</em>'.
-	 * @see com.bluexml.side.clazz.Model#getNamespace()
-	 * @see #getModel()
-	 * @generated
-	 */
-	EAttribute getModel_Namespace();
-
-	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2653,14 +2759,6 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MODEL = eINSTANCE.getModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MODEL__NAMESPACE = eINSTANCE.getModel_Namespace();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}' enum.

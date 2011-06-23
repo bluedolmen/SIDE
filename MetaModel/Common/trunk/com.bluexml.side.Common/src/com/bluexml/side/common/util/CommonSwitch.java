@@ -20,6 +20,7 @@ import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Operation;
 import com.bluexml.side.common.OperationComponent;
@@ -219,6 +220,12 @@ public class CommonSwitch<T> {
 				T result = caseConstraintParam(constraintParam);
 				if (result == null) result = caseNamedModelElement(constraintParam);
 				if (result == null) result = caseModelElement(constraintParam);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.NAME_SPACE: {
+				NameSpace nameSpace = (NameSpace)theEObject;
+				T result = caseNameSpace(nameSpace);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -463,6 +470,21 @@ public class CommonSwitch<T> {
 	 * @generated
 	 */
 	public T caseConstraintParam(ConstraintParam object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Name Space</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Name Space</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNameSpace(NameSpace object) {
 		return null;
 	}
 

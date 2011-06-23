@@ -37,6 +37,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//ModelElement/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Common.ecore#//ModelElement/metainfo"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Common.ecore#//ModelElement/constraints"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Common.ecore#//ModelElement/namespace"/>
+      <genOperations ecoreOperation="Common.ecore#//ModelElement/getLogicalNameSpace"/>
     </genClasses>
     <genClasses ecoreClass="Common.ecore#//NamedModelElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//NamedModelElement/name"/>
@@ -62,10 +64,12 @@
     <genClasses ecoreClass="Common.ecore#//Package">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Common.ecore#//Package/stereotypeSet"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Common.ecore#//Package/packageSet"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Common.ecore#//Package/namespaceSet"/>
       <genOperations ecoreOperation="Common.ecore#//Package/equalsForMerge">
         <genParameters ecoreParameter="Common.ecore#//Package/equalsForMerge/other"/>
       </genOperations>
       <genOperations ecoreOperation="Common.ecore#//Package/getRootPackage"/>
+      <genOperations ecoreOperation="Common.ecore#//Package/getAllNamespaces"/>
     </genClasses>
     <genClasses ecoreClass="Common.ecore#//Operation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//Operation/returnType"/>
@@ -110,6 +114,10 @@
     </genClasses>
     <genClasses ecoreClass="Common.ecore#//ConstraintParam">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//ConstraintParam/values"/>
+    </genClasses>
+    <genClasses ecoreClass="Common.ecore#//NameSpace">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//NameSpace/prefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//NameSpace/URI"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

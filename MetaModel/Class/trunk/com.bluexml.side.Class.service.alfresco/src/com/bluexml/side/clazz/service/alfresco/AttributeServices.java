@@ -15,6 +15,7 @@
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  ******************************************************************************/
 package com.bluexml.side.clazz.service.alfresco;
+
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.clazz.Attribute;
@@ -54,8 +55,33 @@ public class AttributeServices {
 				return "d:datetime";
 			}
 		}
-		throw new Exception ("node must be an attribute");
+		throw new Exception("node must be an attribute");
 	}
+
+	public static DataType getPropertyType(String type) throws Exception {
+		if (type.equals("d:boolean")) {
+			return DataType.BOOLEAN;
+		} else if (type.equals("d:int")) {
+			return DataType.INT;
+		} else if (type.equals("d:text")) {
+			return DataType.STRING;
+		} else if (type.equals("d:date")) {
+			return DataType.DATE;
+		} else if (type.equals("d:datetime")) {
+			return DataType.DATE_TIME;
+		} else if (type.equals("d:double")) {
+			return DataType.DOUBLE;
+		} else if (type.equals("d:float")) {
+			return DataType.FLOAT;
+		} else if (type.equals("d:long")) {
+			return DataType.LONG;
+		} else {
+			System.out.println("Property type fall to default Object Type :" + type);
+			return DataType.OBJECT;
+		}
+		//		throw new Exception("Property Type not managed :" + type);
+	}
+
 	public String getFtlTypeConverter(EObject node) throws Exception {
 		if (node instanceof Attribute) {
 			Attribute object = (Attribute) node;
@@ -88,6 +114,6 @@ public class AttributeServices {
 				return "?datetime";
 			}
 		}
-		throw new Exception ("node must be an attribute");
+		throw new Exception("node must be an attribute");
 	}
 }

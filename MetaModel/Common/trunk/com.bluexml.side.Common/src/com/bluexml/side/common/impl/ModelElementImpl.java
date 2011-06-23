@@ -11,20 +11,27 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 
+import org.eclipse.ocl.expressions.OCLExpression;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.Tag;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
@@ -43,6 +50,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getMetainfo <em>Metainfo</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getNamespace <em>Namespace</em>}</li>
  * </ul>
  * </p>
  *
@@ -138,6 +146,16 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 	 * @ordered
 	 */
 	protected EList<Constraint> constraints;
+
+	/**
+	 * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNamespace()
+	 * @generated
+	 * @ordered
+	 */
+	protected NameSpace namespace;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -265,6 +283,79 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public NameSpace getNamespace() {
+		if (namespace != null && namespace.eIsProxy()) {
+			InternalEObject oldNamespace = (InternalEObject)namespace;
+			namespace = (NameSpace)eResolveProxy(oldNamespace);
+			if (namespace != oldNamespace) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CommonPackage.MODEL_ELEMENT__NAMESPACE, oldNamespace, namespace));
+			}
+		}
+		return namespace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NameSpace basicGetNamespace() {
+		return namespace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNamespace(NameSpace newNamespace) {
+		NameSpace oldNamespace = namespace;
+		namespace = newNamespace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.MODEL_ELEMENT__NAMESPACE, oldNamespace, namespace));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NameSpace getLogicalNameSpace() {
+		if (getLogicalNameSpaceBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.MODEL_ELEMENT.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getLogicalNameSpaceBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getLogicalNameSpaceBodyOCL);
+	
+		return (NameSpace) query.evaluate(this);
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getLogicalNameSpace <em>Get Logical Name Space</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLogicalNameSpace
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getLogicalNameSpaceBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -300,6 +391,9 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 				return getMetainfo();
 			case CommonPackage.MODEL_ELEMENT__CONSTRAINTS:
 				return getConstraints();
+			case CommonPackage.MODEL_ELEMENT__NAMESPACE:
+				if (resolve) return getNamespace();
+				return basicGetNamespace();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -339,6 +433,9 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 				getConstraints().clear();
 				getConstraints().addAll((Collection<? extends Constraint>)newValue);
 				return;
+			case CommonPackage.MODEL_ELEMENT__NAMESPACE:
+				setNamespace((NameSpace)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -372,6 +469,9 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 			case CommonPackage.MODEL_ELEMENT__CONSTRAINTS:
 				getConstraints().clear();
 				return;
+			case CommonPackage.MODEL_ELEMENT__NAMESPACE:
+				setNamespace((NameSpace)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -398,6 +498,8 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 				return metainfo != null && !metainfo.isEmpty();
 			case CommonPackage.MODEL_ELEMENT__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
+			case CommonPackage.MODEL_ELEMENT__NAMESPACE:
+				return namespace != null;
 		}
 		return super.eIsSet(featureID);
 	}

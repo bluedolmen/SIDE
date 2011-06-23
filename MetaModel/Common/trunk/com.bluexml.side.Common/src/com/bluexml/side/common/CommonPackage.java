@@ -134,13 +134,22 @@ public interface CommonPackage extends EPackage {
 	int MODEL_ELEMENT__CONSTRAINTS = 6;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT__NAMESPACE = 7;
+
+	/**
 	 * The number of structural features of the '<em>Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ELEMENT_FEATURE_COUNT = 7;
+	int MODEL_ELEMENT_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.impl.NamedModelElementImpl <em>Named Model Element</em>}' class.
@@ -214,6 +223,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_MODEL_ELEMENT__CONSTRAINTS = MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MODEL_ELEMENT__NAMESPACE = MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -305,6 +323,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMMENT__CONSTRAINTS = MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__NAMESPACE = MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -435,6 +462,15 @@ public interface CommonPackage extends EPackage {
 	int STEREOTYPE__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPE__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -526,6 +562,15 @@ public interface CommonPackage extends EPackage {
 	int PACKAGE__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -553,13 +598,22 @@ public interface CommonPackage extends EPackage {
 	int PACKAGE__PACKAGE_SET = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__NAMESPACE_SET = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_FEATURE_COUNT = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int PACKAGE_FEATURE_COUNT = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 
 	/**
@@ -634,6 +688,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_COMPONENT__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_COMPONENT__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -725,6 +788,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__CONSTRAINTS = OPERATION_COMPONENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__NAMESPACE = OPERATION_COMPONENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -863,6 +935,15 @@ public interface CommonPackage extends EPackage {
 	int PARAMETER__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -961,6 +1042,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_GROUP__CONSTRAINTS = OPERATION_COMPONENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_GROUP__NAMESPACE = OPERATION_COMPONENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1146,13 +1236,22 @@ public interface CommonPackage extends EPackage {
 	int META_INFO_GROUP__CONSTRAINTS = META_DATA_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO_GROUP__NAMESPACE = META_DATA_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_GROUP__NAME = META_DATA_FEATURE_COUNT + 7;
+	int META_INFO_GROUP__NAME = META_DATA_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1161,7 +1260,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_GROUP__CHILDREN = META_DATA_FEATURE_COUNT + 8;
+	int META_INFO_GROUP__CHILDREN = META_DATA_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Meta Info Group</em>' class.
@@ -1170,7 +1269,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_GROUP_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 9;
+	int META_INFO_GROUP_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.impl.ContainerImpl <em>Container</em>}' class.
@@ -1263,6 +1362,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1374,6 +1482,15 @@ public interface CommonPackage extends EPackage {
 	int CONSTRAINT_PARAM__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_PARAM__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1401,6 +1518,43 @@ public interface CommonPackage extends EPackage {
 	int CONSTRAINT_PARAM_FEATURE_COUNT = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.common.impl.NameSpaceImpl <em>Name Space</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.common.impl.NameSpaceImpl
+	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getNameSpace()
+	 * @generated
+	 */
+	int NAME_SPACE = 16;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_SPACE__PREFIX = 0;
+
+	/**
+	 * The feature id for the '<em><b>URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_SPACE__URI = 1;
+
+	/**
+	 * The number of structural features of the '<em>Name Space</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_SPACE_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.DataType <em>Data Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1408,7 +1562,7 @@ public interface CommonPackage extends EPackage {
 	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 16;
+	int DATA_TYPE = 17;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.Visibility <em>Visibility</em>}' enum.
@@ -1418,7 +1572,7 @@ public interface CommonPackage extends EPackage {
 	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getVisibility()
 	 * @generated
 	 */
-	int VISIBILITY = 17;
+	int VISIBILITY = 18;
 
 
 	/**
@@ -1507,6 +1661,17 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModelElement_Constraints();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.common.ModelElement#getNamespace <em>Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Namespace</em>'.
+	 * @see com.bluexml.side.common.ModelElement#getNamespace()
+	 * @see #getModelElement()
+	 * @generated
+	 */
+	EReference getModelElement_Namespace();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.common.NamedModelElement <em>Named Model Element</em>}'.
@@ -1623,6 +1788,17 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPackage_PackageSet();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.common.Package#getNamespaceSet <em>Namespace Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Namespace Set</em>'.
+	 * @see com.bluexml.side.common.Package#getNamespaceSet()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EReference getPackage_NamespaceSet();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.common.Operation <em>Operation</em>}'.
@@ -1901,6 +2077,38 @@ public interface CommonPackage extends EPackage {
 	EAttribute getConstraintParam_Values();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.common.NameSpace <em>Name Space</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Name Space</em>'.
+	 * @see com.bluexml.side.common.NameSpace
+	 * @generated
+	 */
+	EClass getNameSpace();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.common.NameSpace#getPrefix <em>Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Prefix</em>'.
+	 * @see com.bluexml.side.common.NameSpace#getPrefix()
+	 * @see #getNameSpace()
+	 * @generated
+	 */
+	EAttribute getNameSpace_Prefix();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.common.NameSpace#getURI <em>URI</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>URI</em>'.
+	 * @see com.bluexml.side.common.NameSpace#getURI()
+	 * @see #getNameSpace()
+	 * @generated
+	 */
+	EAttribute getNameSpace_URI();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.common.DataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2009,6 +2217,14 @@ public interface CommonPackage extends EPackage {
 		EReference MODEL_ELEMENT__CONSTRAINTS = eINSTANCE.getModelElement_Constraints();
 
 		/**
+		 * The meta object literal for the '<em><b>Namespace</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_ELEMENT__NAMESPACE = eINSTANCE.getModelElement_Namespace();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.impl.NamedModelElementImpl <em>Named Model Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2105,6 +2321,14 @@ public interface CommonPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PACKAGE__PACKAGE_SET = eINSTANCE.getPackage_PackageSet();
+
+		/**
+		 * The meta object literal for the '<em><b>Namespace Set</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE__NAMESPACE_SET = eINSTANCE.getPackage_NamespaceSet();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.impl.OperationImpl <em>Operation</em>}' class.
@@ -2333,6 +2557,32 @@ public interface CommonPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONSTRAINT_PARAM__VALUES = eINSTANCE.getConstraintParam_Values();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.common.impl.NameSpaceImpl <em>Name Space</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.common.impl.NameSpaceImpl
+		 * @see com.bluexml.side.common.impl.CommonPackageImpl#getNameSpace()
+		 * @generated
+		 */
+		EClass NAME_SPACE = eINSTANCE.getNameSpace();
+
+		/**
+		 * The meta object literal for the '<em><b>Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAME_SPACE__PREFIX = eINSTANCE.getNameSpace_Prefix();
+
+		/**
+		 * The meta object literal for the '<em><b>URI</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAME_SPACE__URI = eINSTANCE.getNameSpace_URI();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.DataType <em>Data Type</em>}' enum.

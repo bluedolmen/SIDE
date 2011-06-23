@@ -127,8 +127,6 @@
       <genOperations ecoreOperation="Class.ecore#//AssociationEnd/isMany"/>
       <genOperations ecoreOperation="Class.ecore#//AssociationEnd/getOpposite"/>
     </genClasses>
-    <genClasses ecoreClass="Class.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Model/namespace"/>
-    </genClasses>
+    <genClasses ecoreClass="Class.ecore#//Model"/>
   </genPackages>
 </genmodel:GenModel>

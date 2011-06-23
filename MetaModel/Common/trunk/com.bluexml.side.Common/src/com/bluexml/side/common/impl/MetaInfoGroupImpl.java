@@ -33,6 +33,7 @@ import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.Tag;
@@ -52,6 +53,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoGroupImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoGroupImpl#getMetainfo <em>Metainfo</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoGroupImpl#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.MetaInfoGroupImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoGroupImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoGroupImpl#getChildren <em>Children</em>}</li>
  * </ul>
@@ -141,6 +143,15 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 	 * @ordered
 	 */
 	protected EList<Constraint> constraints;
+	/**
+	 * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNamespace()
+	 * @generated
+	 * @ordered
+	 */
+	protected NameSpace namespace;
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -316,6 +327,44 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public NameSpace getNamespace() {
+		if (namespace != null && namespace.eIsProxy()) {
+			InternalEObject oldNamespace = (InternalEObject)namespace;
+			namespace = (NameSpace)eResolveProxy(oldNamespace);
+			if (namespace != oldNamespace) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CommonPackage.META_INFO_GROUP__NAMESPACE, oldNamespace, namespace));
+			}
+		}
+		return namespace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NameSpace basicGetNamespace() {
+		return namespace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNamespace(NameSpace newNamespace) {
+		NameSpace oldNamespace = namespace;
+		namespace = newNamespace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.META_INFO_GROUP__NAMESPACE, oldNamespace, namespace));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<MetaData> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentEList<MetaData>(MetaData.class, this, CommonPackage.META_INFO_GROUP__CHILDREN);
@@ -433,6 +482,41 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public NameSpace getLogicalNameSpace() {
+		if (getLogicalNameSpaceBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.MODEL_ELEMENT.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getLogicalNameSpaceBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getLogicalNameSpaceBodyOCL);
+	
+		return (NameSpace) query.evaluate(this);
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getLogicalNameSpace <em>Get Logical Name Space</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLogicalNameSpace
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getLogicalNameSpaceBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -470,6 +554,9 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 				return getMetainfo();
 			case CommonPackage.META_INFO_GROUP__CONSTRAINTS:
 				return getConstraints();
+			case CommonPackage.META_INFO_GROUP__NAMESPACE:
+				if (resolve) return getNamespace();
+				return basicGetNamespace();
 			case CommonPackage.META_INFO_GROUP__NAME:
 				return getName();
 			case CommonPackage.META_INFO_GROUP__CHILDREN:
@@ -513,6 +600,9 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 				getConstraints().clear();
 				getConstraints().addAll((Collection<? extends Constraint>)newValue);
 				return;
+			case CommonPackage.META_INFO_GROUP__NAMESPACE:
+				setNamespace((NameSpace)newValue);
+				return;
 			case CommonPackage.META_INFO_GROUP__NAME:
 				setName((String)newValue);
 				return;
@@ -553,6 +643,9 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 			case CommonPackage.META_INFO_GROUP__CONSTRAINTS:
 				getConstraints().clear();
 				return;
+			case CommonPackage.META_INFO_GROUP__NAMESPACE:
+				setNamespace((NameSpace)null);
+				return;
 			case CommonPackage.META_INFO_GROUP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -585,6 +678,8 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 				return metainfo != null && !metainfo.isEmpty();
 			case CommonPackage.META_INFO_GROUP__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
+			case CommonPackage.META_INFO_GROUP__NAMESPACE:
+				return namespace != null;
 			case CommonPackage.META_INFO_GROUP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case CommonPackage.META_INFO_GROUP__CHILDREN:
@@ -609,6 +704,7 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 				case CommonPackage.META_INFO_GROUP__DESCRIPTION: return CommonPackage.MODEL_ELEMENT__DESCRIPTION;
 				case CommonPackage.META_INFO_GROUP__METAINFO: return CommonPackage.MODEL_ELEMENT__METAINFO;
 				case CommonPackage.META_INFO_GROUP__CONSTRAINTS: return CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+				case CommonPackage.META_INFO_GROUP__NAMESPACE: return CommonPackage.MODEL_ELEMENT__NAMESPACE;
 				default: return -1;
 			}
 		}
@@ -637,6 +733,7 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 				case CommonPackage.MODEL_ELEMENT__DESCRIPTION: return CommonPackage.META_INFO_GROUP__DESCRIPTION;
 				case CommonPackage.MODEL_ELEMENT__METAINFO: return CommonPackage.META_INFO_GROUP__METAINFO;
 				case CommonPackage.MODEL_ELEMENT__CONSTRAINTS: return CommonPackage.META_INFO_GROUP__CONSTRAINTS;
+				case CommonPackage.MODEL_ELEMENT__NAMESPACE: return CommonPackage.META_INFO_GROUP__NAMESPACE;
 				default: return -1;
 			}
 		}

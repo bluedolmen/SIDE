@@ -33,8 +33,10 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<namespaces>
 		
 		<!-- STARTMMLOOP -->
-		<namespace uri="<%if (namespace != null && namespace != ""){%><%namespace%>" prefix="<%name%>" />
-		 <%}else{%>http://www.bluexml.com/model/content/<%name%>/1.0" prefix="<%name%>" />
+		<namespace uri="http://www.bluexml.com/model/content/<%name%>/1.0" prefix="<%name%>" />
+		 
+		 <%for (getAllNamespaces()){%>
+		 <namespace uri="<%URI%>" prefix="<%prefix%>" />
 		 <%}%>
 		 
 		<!-- ENDMMLOOP -->

@@ -7,36 +7,41 @@
 package com.bluexml.side.common.provider;
 
 
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.NameSpace;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EStructuralFeature;
+
+import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.bluexml.side.common.CommonFactory;
-import com.bluexml.side.common.CommonPackage;
-
 /**
- * This is the item provider adapter for a {@link com.bluexml.side.common.Package} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.common.NameSpace} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class PackageItemProvider
-	extends NamedModelElementItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+public class NameSpaceItemProvider
+	extends ItemProviderAdapter
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -44,7 +49,7 @@ public class PackageItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PackageItemProvider(AdapterFactory adapterFactory) {
+	public NameSpaceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -59,51 +64,65 @@ public class PackageItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addPrefixPropertyDescriptor(object);
+			addURIPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the Prefix feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(CommonPackage.Literals.PACKAGE__STEREOTYPE_SET);
-			childrenFeatures.add(CommonPackage.Literals.PACKAGE__PACKAGE_SET);
-			childrenFeatures.add(CommonPackage.Literals.PACKAGE__NAMESPACE_SET);
-		}
-		return childrenFeatures;
+	protected void addPrefixPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NameSpace_prefix_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NameSpace_prefix_feature", "_UI_NameSpace_type"),
+				 CommonPackage.Literals.NAME_SPACE__PREFIX,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
+	 * This adds a property descriptor for the URI feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+	protected void addURIPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NameSpace_URI_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NameSpace_URI_feature", "_UI_NameSpace_type"),
+				 CommonPackage.Literals.NAME_SPACE__URI,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This returns Package.gif.
+	 * This returns NameSpace.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Package"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/NameSpace"));
 	}
 
 	/**
@@ -114,10 +133,10 @@ public class PackageItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((com.bluexml.side.common.Package)object).getName();
+		String label = ((NameSpace)object).getPrefix();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Package_type") :
-			getString("_UI_Package_type") + " " + label;
+			getString("_UI_NameSpace_type") :
+			getString("_UI_NameSpace_type") + " " + label;
 	}
 
 	/**
@@ -131,11 +150,10 @@ public class PackageItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(com.bluexml.side.common.Package.class)) {
-			case CommonPackage.PACKAGE__STEREOTYPE_SET:
-			case CommonPackage.PACKAGE__PACKAGE_SET:
-			case CommonPackage.PACKAGE__NAMESPACE_SET:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+		switch (notification.getFeatureID(NameSpace.class)) {
+			case CommonPackage.NAME_SPACE__PREFIX:
+			case CommonPackage.NAME_SPACE__URI:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -151,21 +169,17 @@ public class PackageItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.PACKAGE__STEREOTYPE_SET,
-				 CommonFactory.eINSTANCE.createStereotype()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
-				 CommonFactory.eINSTANCE.createPackage()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.PACKAGE__NAMESPACE_SET,
-				 CommonFactory.eINSTANCE.createNameSpace()));
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return CommonEditPlugin.INSTANCE;
 	}
 
 }

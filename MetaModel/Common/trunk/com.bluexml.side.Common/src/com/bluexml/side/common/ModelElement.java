@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.common.ModelElement#getDescription <em>Description</em>}</li>
  *   <li>{@link com.bluexml.side.common.ModelElement#getMetainfo <em>Metainfo</em>}</li>
  *   <li>{@link com.bluexml.side.common.ModelElement#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link com.bluexml.side.common.ModelElement#getNamespace <em>Namespace</em>}</li>
  * </ul>
  * </p>
  *
@@ -175,5 +176,40 @@ public interface ModelElement extends EObject {
 	 * @generated
 	 */
 	EList<Constraint> getConstraints();
+
+	/**
+	 * Returns the value of the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Namespace</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Namespace</em>' reference.
+	 * @see #setNamespace(NameSpace)
+	 * @see com.bluexml.side.common.CommonPackage#getModelElement_Namespace()
+	 * @model
+	 * @generated
+	 */
+	NameSpace getNamespace();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.common.ModelElement#getNamespace <em>Namespace</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Namespace</em>' reference.
+	 * @see #getNamespace()
+	 * @generated
+	 */
+	void setNamespace(NameSpace value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='if not(self.namespace.oclIsUndefined()) then\r\tself.namespace\relse\r\tif not(self.getContainer().oclIsUndefined()) and self.getContainer().oclIsKindOf(common::ModelElement) then\r\t\tself.getContainer().oclAsType(common::ModelElement).getLogicalNameSpace()\r\telse\r\t\tnull\r\tendif\rendif'"
+	 * @generated
+	 */
+	NameSpace getLogicalNameSpace();
 
 } // ModelElement

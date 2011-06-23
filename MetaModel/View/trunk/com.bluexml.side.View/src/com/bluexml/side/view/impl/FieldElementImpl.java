@@ -32,6 +32,7 @@ import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.Tag;
@@ -54,6 +55,7 @@ import com.bluexml.side.view.ViewPackage;
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getMetainfo <em>Metainfo</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getMapTo <em>Map To</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getPrefix <em>Prefix</em>}</li>
@@ -154,6 +156,16 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 	 * @ordered
 	 */
 	protected EList<Constraint> constraints;
+
+	/**
+	 * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNamespace()
+	 * @generated
+	 * @ordered
+	 */
+	protected NameSpace namespace;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -385,6 +397,44 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.FIELD_ELEMENT__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NameSpace getNamespace() {
+		if (namespace != null && namespace.eIsProxy()) {
+			InternalEObject oldNamespace = (InternalEObject)namespace;
+			namespace = (NameSpace)eResolveProxy(oldNamespace);
+			if (namespace != oldNamespace) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ViewPackage.FIELD_ELEMENT__NAMESPACE, oldNamespace, namespace));
+			}
+		}
+		return namespace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NameSpace basicGetNamespace() {
+		return namespace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNamespace(NameSpace newNamespace) {
+		NameSpace oldNamespace = namespace;
+		namespace = newNamespace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.FIELD_ELEMENT__NAMESPACE, oldNamespace, namespace));
 	}
 
 	/**
@@ -635,6 +685,17 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public NameSpace getLogicalNameSpace() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -670,6 +731,9 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				return getMetainfo();
 			case ViewPackage.FIELD_ELEMENT__CONSTRAINTS:
 				return getConstraints();
+			case ViewPackage.FIELD_ELEMENT__NAMESPACE:
+				if (resolve) return getNamespace();
+				return basicGetNamespace();
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				return getName();
 			case ViewPackage.FIELD_ELEMENT__MAP_TO:
@@ -720,6 +784,9 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				getConstraints().clear();
 				getConstraints().addAll((Collection<? extends Constraint>)newValue);
 				return;
+			case ViewPackage.FIELD_ELEMENT__NAMESPACE:
+				setNamespace((NameSpace)newValue);
+				return;
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				setName((String)newValue);
 				return;
@@ -768,6 +835,9 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 			case ViewPackage.FIELD_ELEMENT__CONSTRAINTS:
 				getConstraints().clear();
 				return;
+			case ViewPackage.FIELD_ELEMENT__NAMESPACE:
+				setNamespace((NameSpace)null);
+				return;
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -809,6 +879,8 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				return metainfo != null && !metainfo.isEmpty();
 			case ViewPackage.FIELD_ELEMENT__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
+			case ViewPackage.FIELD_ELEMENT__NAMESPACE:
+				return namespace != null;
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ViewPackage.FIELD_ELEMENT__MAP_TO:
@@ -839,6 +911,7 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				case ViewPackage.FIELD_ELEMENT__DESCRIPTION: return CommonPackage.MODEL_ELEMENT__DESCRIPTION;
 				case ViewPackage.FIELD_ELEMENT__METAINFO: return CommonPackage.MODEL_ELEMENT__METAINFO;
 				case ViewPackage.FIELD_ELEMENT__CONSTRAINTS: return CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+				case ViewPackage.FIELD_ELEMENT__NAMESPACE: return CommonPackage.MODEL_ELEMENT__NAMESPACE;
 				default: return -1;
 			}
 		}
@@ -867,6 +940,7 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				case CommonPackage.MODEL_ELEMENT__DESCRIPTION: return ViewPackage.FIELD_ELEMENT__DESCRIPTION;
 				case CommonPackage.MODEL_ELEMENT__METAINFO: return ViewPackage.FIELD_ELEMENT__METAINFO;
 				case CommonPackage.MODEL_ELEMENT__CONSTRAINTS: return ViewPackage.FIELD_ELEMENT__CONSTRAINTS;
+				case CommonPackage.MODEL_ELEMENT__NAMESPACE: return ViewPackage.FIELD_ELEMENT__NAMESPACE;
 				default: return -1;
 			}
 		}

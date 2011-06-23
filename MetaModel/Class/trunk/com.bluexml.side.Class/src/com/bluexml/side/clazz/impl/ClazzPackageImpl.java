@@ -631,15 +631,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getModel_Namespace() {
-		return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getAssociationType() {
 		return associationTypeEEnum;
 	}
@@ -730,7 +721,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEReference(associationEndEClass, ASSOCIATION_END__LINKED_CLASS);
 
 		modelEClass = createEClass(MODEL);
-		createEAttribute(modelEClass, MODEL__NAMESPACE);
 
 		// Create enums
 		associationTypeEEnum = createEEnum(ASSOCIATION_TYPE);
@@ -938,7 +928,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		addEOperation(associationEndEClass, this.getAssociationEnd(), "getOpposite", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getModel_Namespace(), ecorePackage.getEString(), "namespace", "", 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(associationTypeEEnum, AssociationType.class, "AssociationType");
