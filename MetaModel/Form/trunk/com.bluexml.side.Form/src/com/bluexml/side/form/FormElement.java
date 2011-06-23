@@ -212,6 +212,18 @@ public interface FormElement extends ModelElement {
 	String getFullName();
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: to get the name of the FormContainer (FormClass or FormWorkflow)
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.id\relse\r self.label\rendif'"
+	 * @generated
+	 */
+	String getLabelOrName();
+
+	/**
 	 * Returns the value of the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>

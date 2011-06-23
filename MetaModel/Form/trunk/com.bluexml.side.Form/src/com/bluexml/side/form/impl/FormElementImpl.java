@@ -361,6 +361,41 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getLabelOrName() {
+		if (getLabelOrNameBodyOCL == null) {
+			EOperation eOperation = FormPackage.Literals.FORM_ELEMENT.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(FormPackage.Literals.FORM_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getLabelOrNameBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getLabelOrNameBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getLabelOrName <em>Get Label Or Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabelOrName
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getLabelOrNameBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isHidden() {
 		return hidden;
 	}

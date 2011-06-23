@@ -275,8 +275,9 @@ public interface GeneratorInterface {
 	 *            the aspect
 	 * @param attribute
 	 *            the attribute
+	 * @throws Exception 
 	 */
-	void addAttributeForAspect(Aspect aspect, Attribute attribute);
+	void addAttributeForAspect(Aspect aspect, Attribute attribute) throws Exception;
 
 	/**
 	 * Adds the attribute for class.
@@ -287,8 +288,9 @@ public interface GeneratorInterface {
 	 *            the attribute
 	 * @param owner
 	 *            the owner
+	 * @throws Exception 
 	 */
-	void addAttributeForClass(Clazz classe, Attribute attribute, AbstractClass owner);
+	void addAttributeForClass(Clazz classe, Attribute attribute, AbstractClass owner) throws Exception;
 
 	/**
 	 * Adds the id for class.
@@ -409,8 +411,9 @@ public interface GeneratorInterface {
 	 * 
 	 * @param form
 	 *            the form
+	 * @throws Exception 
 	 */
-	void beginForm(FormContainer form);
+	void beginForm(FormContainer form) throws Exception;
 
 	/**
 	 * End form.

@@ -155,7 +155,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * (com.
 	 * bluexml.side.clazz.Aspect, com.bluexml.side.clazz.Attribute)
 	 */
-	public void addAttributeForAspect(Aspect aspect, Attribute attribute) {
+	public void addAttributeForAspect(Aspect aspect, Attribute attribute) throws Exception {
 		AttributeType asAttributeType = processAttribute(aspect, attribute);
 		getAspectType(aspect).getAttribute().add(asAttributeType);
 	}
@@ -195,8 +195,9 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param attribute
 	 *            the attribute
 	 * @return the attribute type
+	 * @throws Exception 
 	 */
-	private AttributeType processAttribute(AbstractClass classe, Attribute attribute) {
+	private AttributeType processAttribute(AbstractClass classe, Attribute attribute) throws Exception {
 		String result;
 
 		AttributeType attributeType = objectFactory.createAttributeType();
@@ -259,7 +260,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * .side.clazz.Clazz, com.bluexml.side.clazz.Attribute,
 	 * com.bluexml.side.clazz.Clazz)
 	 */
-	public void addAttributeForClass(Clazz classe, Attribute attribute, AbstractClass owner) {
+	public void addAttributeForClass(Clazz classe, Attribute attribute, AbstractClass owner) throws Exception {
 		AttributeType asAttributeType = processAttribute(owner, attribute);
 		getClassType(classe).getAttribute().add(asAttributeType);
 	}
@@ -699,7 +700,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * com.bluexml.xforms.generator.GeneratorInterface#beginForm(com.bluexml
 	 * .side .form.Form)
 	 */
-	public void beginForm(FormContainer form) {
+	public void beginForm(FormContainer form) throws Exception {
 		FormContainer realContainer = form;
 
 		realContainer = (FormContainer) formGenerator.getRealObject(form); // #1225
@@ -847,8 +848,9 @@ public class MappingGenerator extends AbstractGenerator {
 	 *            the form element
 	 * @param formContainer
 	 *            either a FormClass or FormWorkflow object
+	 * @throws Exception 
 	 */
-	private void processFormElement(CanisterType canister, FormContainer formContainer, FormElement parent, FormElement formElement) {
+	private void processFormElement(CanisterType canister, FormContainer formContainer, FormElement parent, FormElement formElement) throws Exception {
 		if (formElement instanceof FormGroup) {
 			FormGroup formGroup = (FormGroup) formElement;
 			EList<FormElement> children = formGroup.getChildren();
@@ -913,8 +915,9 @@ public class MappingGenerator extends AbstractGenerator {
 	 *            the field
 	 * @param formClass
 	 *            the form class
+	 * @throws Exception 
 	 */
-	private void processField(CanisterType canister, FormContainer formContainer, Field field) {
+	private void processField(CanisterType canister, FormContainer formContainer, Field field) throws Exception {
 		FormFieldType formFieldType = objectFactory.createFormFieldType();
 		List<FormFieldType> fieldTypesList;
 
@@ -1067,8 +1070,9 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param classe
 	 * @param ref
 	 * @return
+	 * @throws Exception 
 	 */
-	private String getAlfrescoNameForAttribute(AbstractClass classe, ModelElement ref) {
+	private String getAlfrescoNameForAttribute(AbstractClass classe, ModelElement ref) throws Exception {
 		boolean noPrefix = false;
 
 		Attribute attribute = (Attribute) ref;

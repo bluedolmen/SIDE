@@ -136,6 +136,15 @@ public interface FormPackage extends EPackage {
 	int FORM_ELEMENT__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ELEMENT__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -481,6 +490,15 @@ public interface FormPackage extends EPackage {
 	int FORM_COLLECTION__CONSTRAINTS = CommonPackage.PACKAGE__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__NAMESPACE = CommonPackage.PACKAGE__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -506,6 +524,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORM_COLLECTION__PACKAGE_SET = CommonPackage.PACKAGE__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__NAMESPACE_SET = CommonPackage.PACKAGE__NAMESPACE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Forms</b></em>' containment reference list.
@@ -587,6 +614,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORM_GROUP__CONSTRAINTS = FORM_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_GROUP__NAMESPACE = FORM_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -831,6 +867,15 @@ public interface FormPackage extends EPackage {
 	int WORKFLOW_FORM_COLLECTION__CONSTRAINTS = FORM_COLLECTION__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__NAMESPACE = FORM_COLLECTION__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -856,6 +901,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int WORKFLOW_FORM_COLLECTION__PACKAGE_SET = FORM_COLLECTION__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__NAMESPACE_SET = FORM_COLLECTION__NAMESPACE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Forms</b></em>' containment reference list.
@@ -958,6 +1012,15 @@ public interface FormPackage extends EPackage {
 	int CLASS_FORM_COLLECTION__CONSTRAINTS = FORM_COLLECTION__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_FORM_COLLECTION__NAMESPACE = FORM_COLLECTION__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -983,6 +1046,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_FORM_COLLECTION__PACKAGE_SET = FORM_COLLECTION__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_FORM_COLLECTION__NAMESPACE_SET = FORM_COLLECTION__NAMESPACE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Forms</b></em>' containment reference list.
@@ -1064,6 +1136,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIELD__CONSTRAINTS = FORM_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__NAMESPACE = FORM_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1255,6 +1336,15 @@ public interface FormPackage extends EPackage {
 	int FORM_CONTAINER__CONSTRAINTS = FORM_GROUP__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__NAMESPACE = FORM_GROUP__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1427,6 +1517,15 @@ public interface FormPackage extends EPackage {
 	int FORM_WORKFLOW__CONSTRAINTS = FORM_CONTAINER__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__NAMESPACE = FORM_CONTAINER__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1596,6 +1695,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORM_CLASS__CONSTRAINTS = FORM_CONTAINER__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__NAMESPACE = FORM_CONTAINER__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1776,6 +1884,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1965,6 +2082,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHAR_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2172,6 +2298,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2388,6 +2523,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_TIME_FIELD__CONSTRAINTS = DATE_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__NAMESPACE = DATE_FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2616,6 +2760,15 @@ public interface FormPackage extends EPackage {
 	int NUMERICAL_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2803,6 +2956,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECIMAL_FIELD__CONSTRAINTS = NUMERICAL_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__NAMESPACE = NUMERICAL_FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3030,6 +3192,15 @@ public interface FormPackage extends EPackage {
 	int FLOAT_FIELD__CONSTRAINTS = NUMERICAL_FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__NAMESPACE = NUMERICAL_FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3237,6 +3408,15 @@ public interface FormPackage extends EPackage {
 	int INTEGER_FIELD__CONSTRAINTS = NUMERICAL_FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__NAMESPACE = NUMERICAL_FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3442,6 +3622,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_CHOICE_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3714,6 +3903,15 @@ public interface FormPackage extends EPackage {
 	int EMAIL_FIELD__CONSTRAINTS = CHAR_FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__NAMESPACE = CHAR_FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3921,6 +4119,15 @@ public interface FormPackage extends EPackage {
 	int FILE_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4119,6 +4326,15 @@ public interface FormPackage extends EPackage {
 	int IMAGE_FIELD__CONSTRAINTS = FILE_FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__NAMESPACE = FILE_FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4315,6 +4531,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_FIELD__CONSTRAINTS = DATE_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__NAMESPACE = DATE_FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -4533,6 +4758,15 @@ public interface FormPackage extends EPackage {
 	int URL_FIELD__CONSTRAINTS = CHAR_FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__NAMESPACE = CHAR_FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4747,6 +4981,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int PHONE_NUMBER_FIELD__CONSTRAINTS = CHAR_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__NAMESPACE = CHAR_FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -4965,6 +5208,15 @@ public interface FormPackage extends EPackage {
 	int FORM_ASPECT__CONSTRAINTS = FORM_GROUP__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ASPECT__NAMESPACE = FORM_GROUP__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5125,6 +5377,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE__CONSTRAINTS = MODEL_CHOICE_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__NAMESPACE = MODEL_CHOICE_FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -5397,6 +5658,15 @@ public interface FormPackage extends EPackage {
 	int CHOICE_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5620,6 +5890,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int REGEX_FIELD__CONSTRAINTS = CHAR_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__NAMESPACE = CHAR_FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -5856,6 +6135,15 @@ public interface FormPackage extends EPackage {
 	int PASSWORD_FIELD__CONSTRAINTS = CHAR_FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__NAMESPACE = CHAR_FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6063,6 +6351,15 @@ public interface FormPackage extends EPackage {
 	int VIRTUAL_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6261,6 +6558,15 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD__CONSTRAINTS = FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6457,6 +6763,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_FIELD__CONSTRAINTS = CHAR_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__NAMESPACE = CHAR_FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -6685,6 +7000,15 @@ public interface FormPackage extends EPackage {
 	int FORM_SEARCH__CONSTRAINTS = FORM_CONTAINER__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_SEARCH__NAMESPACE = FORM_CONTAINER__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6875,6 +7199,15 @@ public interface FormPackage extends EPackage {
 	int STATIC_TEXT__CONSTRAINTS = FORM_ELEMENT__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__NAMESPACE = FORM_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7020,6 +7353,15 @@ public interface FormPackage extends EPackage {
 	int SEARCH_FORM_COLLECTION__CONSTRAINTS = FORM_COLLECTION__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__NAMESPACE = FORM_COLLECTION__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7045,6 +7387,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEARCH_FORM_COLLECTION__PACKAGE_SET = FORM_COLLECTION__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM_COLLECTION__NAMESPACE_SET = FORM_COLLECTION__NAMESPACE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Forms</b></em>' containment reference list.
@@ -7136,6 +7487,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEARCH_FIELD__CONSTRAINTS = FORM_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FIELD__NAMESPACE = FORM_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -7281,6 +7641,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int NUMERICAL_SEARCH_FIELD__CONSTRAINTS = SEARCH_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_SEARCH_FIELD__NAMESPACE = SEARCH_FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -7446,6 +7815,15 @@ public interface FormPackage extends EPackage {
 	int CHAR_SEARCH_FIELD__CONSTRAINTS = SEARCH_FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_SEARCH_FIELD__NAMESPACE = SEARCH_FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7607,6 +7985,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_SEARCH_FIELD__CONSTRAINTS = SEARCH_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_SEARCH_FIELD__NAMESPACE = SEARCH_FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -7772,6 +8159,15 @@ public interface FormPackage extends EPackage {
 	int CHOICE_SEARCH_FIELD__CONSTRAINTS = SEARCH_FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_SEARCH_FIELD__NAMESPACE = SEARCH_FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7935,6 +8331,15 @@ public interface FormPackage extends EPackage {
 	int FILE_SEARCH_FIELD__CONSTRAINTS = SEARCH_FIELD__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SEARCH_FIELD__NAMESPACE = SEARCH_FIELD__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8096,6 +8501,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_SEARCH_FIELD__CONSTRAINTS = SEARCH_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_SEARCH_FIELD__NAMESPACE = SEARCH_FIELD__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.

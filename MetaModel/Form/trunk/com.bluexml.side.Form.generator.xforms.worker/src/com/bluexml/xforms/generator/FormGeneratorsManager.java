@@ -469,8 +469,9 @@ public class FormGeneratorsManager {
 	 * 
 	 * @param generators
 	 *            the generators
+	 * @throws Exception 
 	 */
-	public void generate(List<GeneratorInterface> generators) {
+	public void generate(List<GeneratorInterface> generators) throws Exception {
 		genLogger.setTaskName("Collecting data");
 		alfrescoNameStereotype = commonFactory.createStereotype();
 		alfrescoNameStereotype.setName(ALFRESCO_NAME_ASSOCIATION);
@@ -620,8 +621,9 @@ public class FormGeneratorsManager {
 	 * 
 	 * @param aspect
 	 *            the aspect
+	 * @throws Exception 
 	 */
-	private void processAspect(Aspect aspect) {
+	private void processAspect(Aspect aspect) throws Exception {
 		String completeName = ModelTools.getCompleteName(aspect);
 		genLogger.addText("Processing Aspect '" + completeName + "'");
 
@@ -797,8 +799,9 @@ public class FormGeneratorsManager {
 	 *            the classe
 	 * @param rendered
 	 *            the rendered
+	 * @throws Exception 
 	 */
-	private void processClasse(Clazz classe, boolean rendered) {
+	private void processClasse(Clazz classe, boolean rendered) throws Exception {
 		if (isDebugMode()) {
 			String className = getClassQualifiedName(classe);
 			genLogger.addText("Processing " + className);
@@ -825,8 +828,9 @@ public class FormGeneratorsManager {
 	 * 
 	 * @param form
 	 *            the form
+	 * @throws Exception 
 	 */
-	private void processForm(FormContainer form) {
+	private void processForm(FormContainer form) throws Exception {
 		currentForm = ModelTools.getCompleteName(form);
 		if (isDebugMode()) {
 			genLogger.addText("Processing " + currentForm);
@@ -837,8 +841,9 @@ public class FormGeneratorsManager {
 
 	/**
 	 * Process generator.
+	 * @throws Exception 
 	 */
-	private void processGenerator() {
+	private void processGenerator() throws Exception {
 		// logger = LogFactory.getLog(currentGenerator.getClass());
 		currentGenerator.setFormGenerator(this);
 

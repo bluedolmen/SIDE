@@ -1899,6 +1899,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 
 		addEOperation(formElementEClass, ecorePackage.getEString(), "getFullName", 1, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(formElementEClass, ecorePackage.getEString(), "getLabelOrName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(formCollectionEClass, FormCollection.class, "FormCollection", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFormCollection_Forms(), this.getFormContainer(), null, "forms", null, 0, -1, FormCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1936,8 +1938,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		addEOperation(fieldEClass, ecorePackage.getEString(), "getInitialProposedOperators", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(formContainerEClass, FormContainer.class, "FormContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		addEOperation(formContainerEClass, ecorePackage.getEString(), "getLabel", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(formWorkflowEClass, FormWorkflow.class, "FormWorkflow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFormWorkflow_DataForm(), this.getFormClass(), null, "DataForm", null, 0, 1, FormWorkflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2155,7 +2155,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "noSpecialCharacters validRef"
-		   });																								
+		   });																										
 		addAnnotation
 		  (fieldEClass, 
 		   source, 
@@ -2168,7 +2168,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "validName TwoFormsWithSameName"
-		   });								
+		   });						
 		addAnnotation
 		  (formWorkflowEClass, 
 		   source, 
@@ -2215,7 +2215,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "body", "if self.getContainer().oclIsKindOf(FormElement) then\r\tlet parent : String = self.getContainer().oclAsType(FormElement).getFullName()\r\tin parent.concat(\'.\').concat(self.id)\relse\r\tif self.getContainer().oclIsKindOf(common::NamedModelElement) then\r\t\tself.id\r\telse\r\t\t\'\'\r\tendif\rendif\r"
-		   });										
+		   });		
+		addAnnotation
+		  (formElementEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "body", "if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.id\relse\r self.label\rendif"
+		   });											
 		addAnnotation
 		  (formGroupEClass.getEOperations().get(0), 
 		   source, 
@@ -2251,12 +2257,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "TwoFormsWithSameName", "FormContainer.allInstances()->select(a | a.id = self.id and a <> self)->size() = 0"
-		   });			
-		addAnnotation
-		  (formContainerEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.name \relse\r self.label \rendif"
 		   });				
 		addAnnotation
 		  (formWorkflowEClass, 
@@ -2291,13 +2291,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																					
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																							
 		addAnnotation
 		  (getFormGroup_Presentation(), 
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																																											
+		   });																																																																																									
 	}
 
 	public FormFactory getFormsFactory() {

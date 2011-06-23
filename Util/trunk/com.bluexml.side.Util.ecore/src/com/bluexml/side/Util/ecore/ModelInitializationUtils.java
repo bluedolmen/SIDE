@@ -3,7 +3,6 @@ package com.bluexml.side.Util.ecore;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;

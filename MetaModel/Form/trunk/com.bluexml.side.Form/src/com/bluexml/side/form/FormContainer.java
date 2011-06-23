@@ -26,16 +26,4 @@ package com.bluexml.side.form;
  * @generated
  */
 public interface FormContainer extends FormGroup {
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Definition: to get the name of the FormContainer (FormClass or FormWorkflow)
-	 * <!-- end-model-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.name \relse\r self.label \rendif'"
-	 * @generated
-	 */
-	String getLabel();
 } // FormContainer

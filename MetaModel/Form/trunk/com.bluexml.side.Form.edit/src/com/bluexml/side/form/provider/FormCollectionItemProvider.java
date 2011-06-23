@@ -7,6 +7,8 @@
 package com.bluexml.side.form.provider;
 
 
+import com.bluexml.side.clazz.ClazzFactory;
+import com.bluexml.side.common.CommonPackage;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,7 +26,9 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.common.provider.PackageItemProvider;
 import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.workflow.WorkflowFactory;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.FormCollection} object.
