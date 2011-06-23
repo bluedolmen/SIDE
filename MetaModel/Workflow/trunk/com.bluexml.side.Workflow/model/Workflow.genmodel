@@ -63,6 +63,7 @@
     <genClasses ecoreClass="Workflow.ecore#//UserTask">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//UserTask/attributes"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//UserTask/clazz"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//UserTask/advancedTaskDefinition"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//EndState"/>
     <genClasses ecoreClass="Workflow.ecore#//Node">

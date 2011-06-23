@@ -577,6 +577,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getUserTask_AdvancedTaskDefinition() {
+		return (EReference)userTaskEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getProcessState() {
 		return processStateEClass;
 	}
@@ -1030,6 +1039,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		userTaskEClass = createEClass(USER_TASK);
 		createEReference(userTaskEClass, USER_TASK__ATTRIBUTES);
 		createEReference(userTaskEClass, USER_TASK__CLAZZ);
+		createEReference(userTaskEClass, USER_TASK__ADVANCED_TASK_DEFINITION);
 
 		endStateEClass = createEClass(END_STATE);
 
@@ -1187,6 +1197,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEClass(userTaskEClass, UserTask.class, "UserTask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUserTask_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, UserTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUserTask_Clazz(), theClazzPackage.getClazz(), null, "clazz", null, 0, -1, UserTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUserTask_AdvancedTaskDefinition(), theClazzPackage.getClazz(), null, "advancedTaskDefinition", null, 0, 1, UserTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(endStateEClass, EndState.class, "EndState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

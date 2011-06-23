@@ -128,6 +128,24 @@ public interface WorkflowPackage extends EPackage {
 	int WORKFLOW_MODEL_ELEMENT__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_MODEL_ELEMENT__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_MODEL_ELEMENT__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The number of structural features of the '<em>Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -201,6 +219,24 @@ public interface WorkflowPackage extends EPackage {
 	int PROCESS__METAINFO = CommonPackage.PACKAGE__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__CONSTRAINTS = CommonPackage.PACKAGE__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__NAMESPACE = CommonPackage.PACKAGE__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -226,6 +262,15 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROCESS__PACKAGE_SET = CommonPackage.PACKAGE__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__NAMESPACE_SET = CommonPackage.PACKAGE__NAMESPACE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Swimlane</b></em>' containment reference list.
@@ -418,6 +463,24 @@ public interface WorkflowPackage extends EPackage {
 	int SWIMLANE__METAINFO = WORKFLOW_MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWIMLANE__CONSTRAINTS = WORKFLOW_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWIMLANE__NAMESPACE = WORKFLOW_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -536,6 +599,24 @@ public interface WorkflowPackage extends EPackage {
 	int STATE__METAINFO = WORKFLOW_MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__CONSTRAINTS = WORKFLOW_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__NAMESPACE = WORKFLOW_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -643,6 +724,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSITION_TASK__METAINFO = STATE__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_TASK__CONSTRAINTS = STATE__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_TASK__NAMESPACE = STATE__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -763,6 +862,24 @@ public interface WorkflowPackage extends EPackage {
 	int USER_TASK__METAINFO = TRANSITION_TASK__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_TASK__CONSTRAINTS = TRANSITION_TASK__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_TASK__NAMESPACE = TRANSITION_TASK__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -826,13 +943,22 @@ public interface WorkflowPackage extends EPackage {
 	int USER_TASK__CLAZZ = TRANSITION_TASK_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Advanced Task Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_TASK__ADVANCED_TASK_DEFINITION = TRANSITION_TASK_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>User Task</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_TASK_FEATURE_COUNT = TRANSITION_TASK_FEATURE_COUNT + 2;
+	int USER_TASK_FEATURE_COUNT = TRANSITION_TASK_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.StartStateImpl <em>Start State</em>}' class.
@@ -899,6 +1025,24 @@ public interface WorkflowPackage extends EPackage {
 	int START_STATE__METAINFO = USER_TASK__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_STATE__CONSTRAINTS = USER_TASK__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_STATE__NAMESPACE = USER_TASK__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -960,6 +1104,15 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int START_STATE__CLAZZ = USER_TASK__CLAZZ;
+
+	/**
+	 * The feature id for the '<em><b>Advanced Task Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_STATE__ADVANCED_TASK_DEFINITION = USER_TASK__ADVANCED_TASK_DEFINITION;
 
 	/**
 	 * The feature id for the '<em><b>Initiator</b></em>' reference.
@@ -1064,6 +1217,24 @@ public interface WorkflowPackage extends EPackage {
 	int TASK_NODE__METAINFO = USER_TASK__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_NODE__CONSTRAINTS = USER_TASK__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_NODE__NAMESPACE = USER_TASK__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1125,6 +1296,15 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int TASK_NODE__CLAZZ = USER_TASK__CLAZZ;
+
+	/**
+	 * The feature id for the '<em><b>Advanced Task Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_NODE__ADVANCED_TASK_DEFINITION = USER_TASK__ADVANCED_TASK_DEFINITION;
 
 	/**
 	 * The feature id for the '<em><b>Timer</b></em>' containment reference list.
@@ -1206,6 +1386,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int END_STATE__METAINFO = STATE__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int END_STATE__CONSTRAINTS = STATE__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int END_STATE__NAMESPACE = STATE__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1305,6 +1503,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int NODE__METAINFO = TRANSITION_TASK__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__CONSTRAINTS = TRANSITION_TASK__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__NAMESPACE = TRANSITION_TASK__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1432,6 +1648,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROCESS_STATE__METAINFO = TRANSITION_TASK__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STATE__CONSTRAINTS = TRANSITION_TASK__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STATE__NAMESPACE = TRANSITION_TASK__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1570,6 +1804,24 @@ public interface WorkflowPackage extends EPackage {
 	int FORK__METAINFO = TRANSITION_TASK__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__CONSTRAINTS = TRANSITION_TASK__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__NAMESPACE = TRANSITION_TASK__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1688,6 +1940,24 @@ public interface WorkflowPackage extends EPackage {
 	int JOIN__METAINFO = TRANSITION_TASK__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN__CONSTRAINTS = TRANSITION_TASK__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN__NAMESPACE = TRANSITION_TASK__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1804,6 +2074,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECISION__METAINFO = TRANSITION_TASK__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION__CONSTRAINTS = TRANSITION_TASK__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION__NAMESPACE = TRANSITION_TASK__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1961,6 +2249,24 @@ public interface WorkflowPackage extends EPackage {
 	int ACTION__METAINFO = WORKFLOW_MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__CONSTRAINTS = WORKFLOW_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__NAMESPACE = WORKFLOW_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Java Class</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2096,6 +2402,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIMER__METAINFO = ACTION__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMER__CONSTRAINTS = ACTION__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMER__NAMESPACE = ACTION__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Java Class</b></em>' attribute.
@@ -2253,6 +2577,24 @@ public interface WorkflowPackage extends EPackage {
 	int TRANSITION__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2389,6 +2731,24 @@ public interface WorkflowPackage extends EPackage {
 	int ATTRIBUTE__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Typ</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2498,6 +2858,24 @@ public interface WorkflowPackage extends EPackage {
 	int WF_PACKAGE__METAINFO = CommonPackage.PACKAGE__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__CONSTRAINTS = CommonPackage.PACKAGE__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__NAMESPACE = CommonPackage.PACKAGE__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2523,6 +2901,15 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int WF_PACKAGE__PACKAGE_SET = CommonPackage.PACKAGE__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WF_PACKAGE__NAMESPACE_SET = CommonPackage.PACKAGE__NAMESPACE_SET;
 
 	/**
 	 * The number of structural features of the '<em>Wf Package</em>' class.
@@ -2886,6 +3273,17 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getUserTask_Clazz();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.workflow.UserTask#getAdvancedTaskDefinition <em>Advanced Task Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Advanced Task Definition</em>'.
+	 * @see com.bluexml.side.workflow.UserTask#getAdvancedTaskDefinition()
+	 * @see #getUserTask()
+	 * @generated
+	 */
+	EReference getUserTask_AdvancedTaskDefinition();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.ProcessState <em>Process State</em>}'.
@@ -3649,6 +4047,14 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference USER_TASK__CLAZZ = eINSTANCE.getUserTask_Clazz();
+
+		/**
+		 * The meta object literal for the '<em><b>Advanced Task Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference USER_TASK__ADVANCED_TASK_DEFINITION = eINSTANCE.getUserTask_AdvancedTaskDefinition();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.ProcessStateImpl <em>Process State</em>}' class.

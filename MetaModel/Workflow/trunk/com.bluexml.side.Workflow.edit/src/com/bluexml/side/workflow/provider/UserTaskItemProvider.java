@@ -62,6 +62,7 @@ public class UserTaskItemProvider
 			super.getPropertyDescriptors(object);
 
 			addClazzPropertyDescriptor(object);
+			addAdvancedTaskDefinitionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -80,6 +81,28 @@ public class UserTaskItemProvider
 				 getString("_UI_UserTask_clazz_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_UserTask_clazz_feature", "_UI_UserTask_type"),
 				 WorkflowPackage.Literals.USER_TASK__CLAZZ,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Advanced Task Definition feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAdvancedTaskDefinitionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_UserTask_advancedTaskDefinition_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_UserTask_advancedTaskDefinition_feature", "_UI_UserTask_type"),
+				 WorkflowPackage.Literals.USER_TASK__ADVANCED_TASK_DEFINITION,
 				 true,
 				 false,
 				 true,

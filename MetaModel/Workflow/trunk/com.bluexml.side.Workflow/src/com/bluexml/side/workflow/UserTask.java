@@ -20,6 +20,7 @@ import com.bluexml.side.clazz.Clazz;
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.UserTask#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.UserTask#getClazz <em>Clazz</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.UserTask#getAdvancedTaskDefinition <em>Advanced Task Definition</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,5 +60,31 @@ public interface UserTask extends TransitionTask {
 	 * @generated
 	 */
 	EList<Clazz> getClazz();
+
+	/**
+	 * Returns the value of the '<em><b>Advanced Task Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Advanced Task Definition</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Advanced Task Definition</em>' reference.
+	 * @see #setAdvancedTaskDefinition(Clazz)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getUserTask_AdvancedTaskDefinition()
+	 * @model
+	 * @generated
+	 */
+	Clazz getAdvancedTaskDefinition();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.UserTask#getAdvancedTaskDefinition <em>Advanced Task Definition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Advanced Task Definition</em>' reference.
+	 * @see #getAdvancedTaskDefinition()
+	 * @generated
+	 */
+	void setAdvancedTaskDefinition(Clazz value);
 		
 } // UserTask
