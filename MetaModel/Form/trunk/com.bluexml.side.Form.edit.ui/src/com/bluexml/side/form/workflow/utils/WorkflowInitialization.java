@@ -11,6 +11,9 @@ import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NameSpace;
+import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormElement;
@@ -92,7 +95,30 @@ public class WorkflowInitialization {
 			if (advancedTaskDefinition != null) {
 				// use initialize from the Class definition instead to search attribute task
 				Collection<FormElement> createChildsForClass = ClassInitialization.createChildsForClass(advancedTaskDefinition);
-				fw.getChildren().addAll(createChildsForClass);
+
+				// filter bpm element to only keep custom elements
+				Collection<FormElement> filtered = new ArrayList<FormElement>();
+				for (FormElement formElement : createChildsForClass) {
+					//					System.out.println("formElement :");
+					System.out.println(formElement);
+					if (formElement instanceof Field) {
+						Field f = (Field) formElement;
+						ModelElement ref = f.getRef();
+						System.out.println("Ref :");
+						System.out.println(((NamedModelElement) ref).getFullName());
+						NameSpace namespace = ref.getLogicalNameSpace();
+						String alfrescoURI = "http://www.alfresco.org/model";
+						if (namespace == null || !namespace.getURI().startsWith(alfrescoURI)) {
+							System.out.println("add :");
+							System.out.println(formElement);
+							filtered.add(formElement);
+						} else {
+							System.out.println("FormElement not added :" + formElement);
+						}
+
+					}
+				}
+				fw.getChildren().addAll(filtered);
 			} else {
 
 				// For all attribute we get the field :

@@ -307,13 +307,16 @@ public class FormElementItemProvider
 			if (object instanceof Field) {
 				Field f = (Field) object;
 				if (f.isMandatory() && InternalModification.getMoveToDisabled()) {
+					System.err.println("Can delete = false");
 					canDelete = false;
 				}
 			}
 		}
 
 		if (canDelete) {
-			return super.createRemoveCommand(domain, owner, feature, collection);
+			System.out.println("create removeCommand"+collection);
+			Command createRemoveCommand = super.createRemoveCommand(domain, owner, feature, collection);
+			return createRemoveCommand;
 		} else {
 			return UnexecutableCommand.INSTANCE;
 		}

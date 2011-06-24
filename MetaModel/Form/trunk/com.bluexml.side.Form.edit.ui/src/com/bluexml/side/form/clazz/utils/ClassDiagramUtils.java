@@ -11,12 +11,14 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
@@ -195,11 +197,15 @@ public class ClassDiagramUtils {
 	 */
 	public static String getAssociationName(Association ass, boolean useSource) {
 		String id = ass.getName();
-		if (useSource && ass.getFirstEnd().getName().length() > 0) {
-			id += ass.getFirstEnd().getName();
-		} else if (ass.getSecondEnd().getName().length() > 0) {
-			id += ass.getSecondEnd().getName();
+		AssociationEnd target;
+		if (useSource) {
+			target = ass.getFirstEnd();
+		} else {
+			target = ass.getSecondEnd();
 		}
+
+		id += StringUtils.trimToEmpty(target.getName());
+
 		return id;
 	}
 
