@@ -18,6 +18,7 @@ import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.WorkflowFormCollection;
@@ -99,23 +100,15 @@ public class WorkflowInitialization {
 				// filter bpm element to only keep custom elements
 				Collection<FormElement> filtered = new ArrayList<FormElement>();
 				for (FormElement formElement : createChildsForClass) {
-					//					System.out.println("formElement :");
-					System.out.println(formElement);
-					if (formElement instanceof Field) {
-						Field f = (Field) formElement;
-						ModelElement ref = f.getRef();
-						System.out.println("Ref :");
-						System.out.println(((NamedModelElement) ref).getFullName());
-						NameSpace namespace = ref.getLogicalNameSpace();
-						String alfrescoURI = "http://www.alfresco.org/model";
-						if (namespace == null || !namespace.getURI().startsWith(alfrescoURI)) {
-							System.out.println("add :");
-							System.out.println(formElement);
-							filtered.add(formElement);
-						} else {
-							System.out.println("FormElement not added :" + formElement);
-						}
-
+					ModelElement ref = formElement.getRef();
+					String fullName = ((NamedModelElement) ref).getFullName();					
+					NameSpace namespace = ref.getLogicalNameSpace();
+					String alfrescoURI = "http://www.alfresco.org/model";
+					if (namespace == null || !namespace.getURI().startsWith(alfrescoURI)) {						
+						filtered.add(formElement);
+						System.out.println("add Field for " + fullName);
+					} else {
+						System.out.println("FormElement not added :" + fullName);
 					}
 				}
 				fw.getChildren().addAll(filtered);
@@ -144,23 +137,25 @@ public class WorkflowInitialization {
 					// }
 					// }
 				}
-			}
-			// For attached class :
-			if (((UserTask) s).getClazz().size() > 0) {
-				for (Clazz c : ((UserTask) s).getClazz()) {
-					Field f = WorkflowDiagramUtils.getFieldForClazzLink(c);
-					if (f != null) {
-						fw.getChildren().add(f);
-					}
 
-					// Commented : add the form class instead of model choice field
-					/*
-					 * FormClass fc = FormFactory.eINSTANCE.createFormClass();
-					 * fc.setReal_class(c);
-					 * fc.getChildren().addAll(ClassInitialization.
-					 * getChildForFormClassFromClazz(fc));
-					 * fw.getChildren().add(fc);
-					 */
+				// For attached class :
+				if (((UserTask) s).getClazz().size() > 0) {
+					for (Clazz c : ((UserTask) s).getClazz()) {
+						Field f = WorkflowDiagramUtils.getFieldForClazzLink(c);
+						if (f != null) {
+							fw.getChildren().add(f);
+						}
+
+						// Commented : add the form class instead of model choice field
+						/*
+						 * FormClass fc =
+						 * FormFactory.eINSTANCE.createFormClass();
+						 * fc.setReal_class(c);
+						 * fc.getChildren().addAll(ClassInitialization.
+						 * getChildForFormClassFromClazz(fc));
+						 * fw.getChildren().add(fc);
+						 */
+					}
 				}
 			}
 
