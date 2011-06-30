@@ -147,7 +147,15 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		c.setKey("regular-expression");
 		c.setValueType(String.class);
 		allMetaInfos.add(c);
-
+		
+		c = fact.createMetaInfo();
+		c.setConstraintType(DataType.STRING);
+		c.setKey("regular-expression.match");
+		c.setDefaultValueBoolean(true);
+		c.setValueType(boolean.class);
+		allMetaInfos.add(c);
+		
+		
 		// field to describe the regular-expression
 		c = fact.createMetaInfo();
 		c.setConstraintType(DataType.STRING);
@@ -190,7 +198,15 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		c.setKey("required");
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
+		
+		c = fact.createMetaInfo();
+		c.setConstraintType(DataType.OBJECT);
+		c.setKey("mandatory.enforced");
+		c.setValueType(boolean.class);
+		allMetaInfos.add(c);
 
+		
+		
 		c = fact.createMetaInfo();
 		c.setConstraintType(DataType.OBJECT);
 		c.setKey("hidden");
@@ -223,6 +239,37 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		c.setDefaultValueBoolean(true);
 		allMetaInfos.add(c);
 
+		c = fact.createMetaInfo();
+		c.setConstraintType(DataType.OBJECT);
+		c.setKey("index.stored");
+		c.setValueType(boolean.class);
+		//c.setValue("true");
+		c.setDefaultValueBoolean(false);
+		allMetaInfos.add(c);
+
+		
+		c = fact.createMetaInfo();
+		c.setConstraintType(DataType.OBJECT);
+		c.setKey("index.atomic");
+		c.setValueType(boolean.class);
+		//c.setValue("true");
+		c.setDefaultValueBoolean(true);
+		allMetaInfos.add(c);
+
+
+		c = fact.createMetaInfo();
+		c.setConstraintType(DataType.OBJECT);
+		c.setKey("index.tokenised");
+		c.setValueType(String.class);
+		c.setValue("true");
+		
+		allMetaInfos.add(c);
+
+
+		
+		
+		
+		
 		c = fact.createMetaInfo();
 		c.setConstraintType(DataType.OBJECT);
 		c.setKey("multiple");

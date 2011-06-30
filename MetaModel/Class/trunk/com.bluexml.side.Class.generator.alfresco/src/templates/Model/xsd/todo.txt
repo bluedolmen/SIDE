@@ -1,9 +1,6 @@
-pas pri en charge :
+Alfresco concept without  :
 model/published
 ./data-types
-./constraints [geneok, reverse todo]
-
-NS URI more than one by models, and mix everywhere (type ns1, properties ns2 ...)
 
 class
 ./archive (true -> delete move node into archive, otherwise delete forever) -> metadata
@@ -11,17 +8,9 @@ class
 ./overrides (:s
 
 childAssociation
-./duplicate (allow more than one instance with same name)
-./propagateTimestamps
+./duplicate (allow more than one instance with same name) -> metadata
+./propagateTimestamps -> metadata
 
 property/
-./mandatory/@enforced (if true tested on repository level) -> metadata ??
-./index (must set tokenized,stored,atomic) -> metadata
-./constraints (revers) -> commom.constraint
-./protected (do not take account about this)
-
-
-== MM class has aspect link for abstractClass ==
-
-FIX :
-enumeration ref
+./mandatory/@enforced (if true tested on repository level) -> metadata
+./protected ??? (http://forums.alfresco.com/en/viewtopic.php?f=5&t=15033)

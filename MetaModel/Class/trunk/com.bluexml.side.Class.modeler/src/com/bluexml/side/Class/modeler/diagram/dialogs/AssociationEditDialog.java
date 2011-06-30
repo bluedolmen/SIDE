@@ -273,7 +273,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		createGeneralTabItem(tabFolder);
 		createFirstEndTabItem(tabFolder);
 		createSecondEndTabItem(tabFolder);
-//		createOptionsTabItem(tabFolder);
+		createOptionsTabItem(tabFolder);
 		createDocumentationTab(tabFolder);
 	}
 

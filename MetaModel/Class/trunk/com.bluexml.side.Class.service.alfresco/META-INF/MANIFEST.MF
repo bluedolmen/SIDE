@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Class,
  com.bluexml.side.Util.libs,
  fr.obeo.acceleo.gen,
- com.bluexml.side.Class.modeler
+ com.bluexml.side.Class.modeler,
+ com.bluexml.side.Util.metaModel.validate
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.clazz.service.alfresco

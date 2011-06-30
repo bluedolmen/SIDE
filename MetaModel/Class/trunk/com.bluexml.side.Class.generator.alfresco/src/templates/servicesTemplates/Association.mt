@@ -22,6 +22,6 @@ metamodel http://www.kerblue.org/class/1.0
 childAssocs<%}else{%>
 assocs<%}%>
 <%script type="clazz.Association" name="getAssociationType"%>
-<%if (associationType.toString().equalsIgnoreCase("composition")) {%>
+<%if (associationType.toString().equalsIgnoreCase("composition") || associationType.toString().equalsIgnoreCase("aggregation")) {%>
 child-association<%}else{%>
 association<%}%>

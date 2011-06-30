@@ -16,7 +16,6 @@
  ******************************************************************************/
 package com.bluexml.side.clazz.service.alfresco;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -28,12 +27,8 @@ import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.AssociationType;
-import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.Enumeration;
-import com.bluexml.side.clazz.Model;
-import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.Tag;
 
 public class AssociationServices {
@@ -321,7 +316,7 @@ public class AssociationServices {
 	}
 
 	public static String getPrefixedAssociationQName(Association a, AssociationEnd source) throws Exception {
-		return CommonServices.getPrefixe(a) + ":" + getAssociationQName(a, source);
+		return CommonServices.getPrefix(a) + ":" + getAssociationQName(a, source);
 	}
 
 	public static String getPrefixedURIAssociationQName(Association a, AssociationEnd source) throws Exception {

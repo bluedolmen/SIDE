@@ -84,7 +84,7 @@ public class ClassSynchronizationUtils {
 		Collection<FormElement> cToDel = new ArrayList<FormElement>();
 		for (AbstractClass abclazz : listClazz) {
 			// Attributes
-			for (Attribute att : abclazz.getAllAttributesWithoutAspectsAttributes()) {
+			for (Attribute att : abclazz.getAllAttributes()) {
 				getCommandForAttribute(domain, formChild, att, fc);
 			}
 
@@ -95,7 +95,7 @@ public class ClassSynchronizationUtils {
 					if (formChild.containsKey(asp.getName())) {
 						// Modification
 
-						for (Attribute att : asp.getAllAttributesWithoutAspectsAttributes()) {
+						for (Attribute att : asp.getAllAttributes()) {
 							getCommandForAttribute(domain, formChild, att, (FormGroup) formChild.get(asp.getName()));
 						}
 					} else {

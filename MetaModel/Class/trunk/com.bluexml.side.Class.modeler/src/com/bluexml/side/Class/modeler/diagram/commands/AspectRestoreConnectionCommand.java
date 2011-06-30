@@ -62,15 +62,6 @@ public class AspectRestoreConnectionCommand extends AbstractRestoreConnectionCom
 
 				EObject eObjectTgt = Utils.getElement(graphElementTgt);
 
-				if (eObjectTgt instanceof Clazz) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createhasAspectFromClazzToAspect(graphElementTgt, graphElementSrc);
-					}
-				}
-
 				if (eObjectTgt instanceof Aspect) {
 					if (autoRef) {
 						// autoRef not allowed
@@ -90,6 +81,13 @@ public class AspectRestoreConnectionCommand extends AbstractRestoreConnectionCom
 						createAssociationFromClazzToClazz_Associations(graphElementSrc, graphElementTgt);
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
 						createAssociationFromClazzToClazz_Associations(graphElementTgt, graphElementSrc);
+						try {
+							createhasAspectFromClazzToAspect(graphElementTgt, graphElementSrc);
+							createhasAspectFromClazzToAspect(graphElementSrc, graphElementTgt);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
 					}
 				}
 
@@ -162,9 +160,9 @@ public class AspectRestoreConnectionCommand extends AbstractRestoreConnectionCom
 	 * @generated
 	 */
 	private void createhasAspectFromClazzToAspect(GraphElement srcElt, GraphElement targetElt) {
-		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
-		Aspect targetObject = (Aspect) Utils.getElement(targetElt);
-
+		AbstractClass sourceObject = (AbstractClass) Utils.getElement(srcElt);
+		AbstractClass targetObject = (AbstractClass) Utils.getElement(targetElt);
+		
 		if (sourceObject.getAspects().contains(targetObject)) {
 			// check if the relation does not exists yet
 			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT).size() == 0) {

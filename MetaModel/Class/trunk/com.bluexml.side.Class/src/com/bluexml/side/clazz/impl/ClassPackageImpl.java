@@ -397,6 +397,7 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAbstractClassesBodyOCL;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -507,6 +508,80 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllConstraintsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AbstractClass> getAllAbstractClassesAndLinked() {
+		if (getAllAbstractClassesAndLinkedBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(9);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllAbstractClassesAndLinkedBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllAbstractClassesAndLinkedBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<AbstractClass> result = (Collection<AbstractClass>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<AbstractClass>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllAbstractClassesAndLinked <em>Get All Abstract Classes And Linked</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllAbstractClassesAndLinked
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllAbstractClassesAndLinkedBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AbstractClass> getAllAbstractClassesAndReferences() {
+		if (getAllAbstractClassesAndReferencesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(10);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllAbstractClassesAndReferencesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllAbstractClassesAndReferencesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<AbstractClass> result = (Collection<AbstractClass>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<AbstractClass>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllAbstractClassesAndReferences <em>Get All Abstract Classes And References</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllAbstractClassesAndReferences
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllAbstractClassesAndReferencesBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

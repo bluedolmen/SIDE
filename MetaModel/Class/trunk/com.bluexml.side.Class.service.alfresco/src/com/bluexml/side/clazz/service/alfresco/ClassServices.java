@@ -30,17 +30,6 @@ import com.bluexml.side.common.Stereotype;
 
 public class ClassServices {
 
-	// Returns True if the class has got additional aspects attributes
-	public static boolean definesAspects(Clazz cl) {
-		boolean hasAspects = false;
-		hasAspects = cl.getAspects().size() > 0;
-		if (hasAspects) {
-			return true;
-		}
-		return cl.getAllInheritedAttributes().size() != cl
-				.getAllInheritedClassAndAspectAttributes().size();
-	}
-
 	public List<Association> getAllAssociationsByClass(Clazz cl) {
 		List<Association> result = cl.getAllSourceAssociations();
 		result.addAll(cl.getAllTargetAssociations());
@@ -52,11 +41,7 @@ public class ClassServices {
 			if (obj instanceof MetaInfo) {
 				MetaInfo mi = (MetaInfo) obj;
 				if (mi.getKey().equalsIgnoreCase("visual-component")) {
-					return mi.getValue().equalsIgnoreCase(
-							VisualTypeComponent_Enum.HorizontalTab.toString())
-							|| mi.getValue().equalsIgnoreCase(
-									VisualTypeComponent_Enum.VerticalTab
-											.toString());
+					return mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.HorizontalTab.toString()) || mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.VerticalTab.toString());
 				}
 			}
 		}
@@ -68,8 +53,7 @@ public class ClassServices {
 			if (obj instanceof MetaInfo) {
 				MetaInfo mi = (MetaInfo) obj;
 				if (mi.getKey().equalsIgnoreCase("visual-component")) {
-					return mi.getValue().equalsIgnoreCase(
-							VisualTypeComponent_Enum.Separator.toString());
+					return mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.Separator.toString());
 				}
 			}
 		}
@@ -81,8 +65,7 @@ public class ClassServices {
 			if (obj instanceof MetaInfo) {
 				MetaInfo mi = (MetaInfo) obj;
 				if (mi.getKey().equalsIgnoreCase("visual-component")) {
-					return mi.getValue().equalsIgnoreCase(
-							VisualTypeComponent_Enum.VerticalTab.toString());
+					return mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.VerticalTab.toString());
 				}
 			}
 		}
@@ -128,15 +111,11 @@ public class ClassServices {
 						if (s.getName().equalsIgnoreCase("view")) {
 							String view = c.getValue();
 							if (view.contains("\n")) {
-								String firstLine = view.substring(0, view
-										.lastIndexOf("\n") - 1);
+								String firstLine = view.substring(0, view.lastIndexOf("\n") - 1);
 								if (firstLine.startsWith("@actionsFile@")) {
-									String othersLines = view
-											.substring(firstLine.length() + 2);
+									String othersLines = view.substring(firstLine.length() + 2);
 									if (othersLines.contains("\n")) {
-										String secondLine = othersLines
-												.substring(0, view
-														.lastIndexOf("\n") - 1);
+										String secondLine = othersLines.substring(0, view.lastIndexOf("\n") - 1);
 										resultLine = secondLine;
 									} else {
 										resultLine = othersLines;

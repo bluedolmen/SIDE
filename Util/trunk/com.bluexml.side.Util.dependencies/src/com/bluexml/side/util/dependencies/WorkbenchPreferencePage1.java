@@ -62,7 +62,7 @@ public class WorkbenchPreferencePage1 extends AbstractFieldsPreferencePage imple
 	public boolean performOk() {
 		IPreferenceStore store = getPreferenceStore();
 		// store the open view mode setting
-		store.setValue(MAVEN_REPO_LOCATION, values.get(MAVEN_REPO_LOCATION));
+		store.setValue(MAVEN_REPO_LOCATION, values.get(MAVEN_REPO_LOCATION).toString());
 		return true;
 	}
 

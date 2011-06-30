@@ -1132,7 +1132,7 @@ public class MappingGenerator extends AbstractGenerator {
 		}
 
 		// the field ref's container may be one of the class' aspects (include generalization between aspects)
-		for (Aspect aspect : classRef.getAllAspects()) {
+		for (Aspect aspect : classRef.getAllLinkedAspects()) {
 			Aspect realAspect = (Aspect) formGenerator.getRealObject(aspect);
 			if (realAspect.equals(realContainer)) {
 				return true;

@@ -18,7 +18,7 @@ import com.bluexml.side.util.libs.eclipse.pages.PageControlsHelper;
 
 public abstract class AbstractFieldsPreferencePage extends PreferencePage implements CheckablePage {
 	PageControlsHelper controlHelper = new PageControlsHelper(this);
-	protected Map<String, String> values = new HashMap<String, String>();
+	protected Map<String, Object> values = new HashMap<String, Object>();
 
 	@Override
 	protected Control createContents(Composite parent) {

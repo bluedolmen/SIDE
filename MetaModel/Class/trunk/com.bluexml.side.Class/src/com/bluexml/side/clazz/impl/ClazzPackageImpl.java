@@ -307,17 +307,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClazz_Aspects() {
-		return (EReference)clazzEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getClazz_Abstract() {
-		return (EAttribute)clazzEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)clazzEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -326,7 +317,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	public EAttribute getClazz_Deprecated() {
-		return (EAttribute)clazzEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)clazzEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -550,6 +541,15 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAbstractClass_Aspects() {
+		return (EReference)abstractClassEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTitledNamedClassModelElement() {
 		return titledNamedClassModelElementEClass;
 	}
@@ -676,10 +676,10 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		abstractClassEClass = createEClass(ABSTRACT_CLASS);
 		createEReference(abstractClassEClass, ABSTRACT_CLASS__ATTRIBUTES);
 		createEReference(abstractClassEClass, ABSTRACT_CLASS__GENERALIZATIONS);
+		createEReference(abstractClassEClass, ABSTRACT_CLASS__ASPECTS);
 
 		clazzEClass = createEClass(CLAZZ);
 		createEReference(clazzEClass, CLAZZ__OPERATIONS);
-		createEReference(clazzEClass, CLAZZ__ASPECTS);
 		createEAttribute(clazzEClass, CLAZZ__ABSTRACT);
 		createEAttribute(clazzEClass, CLAZZ__DEPRECATED);
 
@@ -802,9 +802,14 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		addEOperation(classPackageEClass, theCommonPackage.getConstraint(), "getAllConstraints", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(classPackageEClass, this.getAbstractClass(), "getAllAbstractClassesAndLinked", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classPackageEClass, this.getAbstractClass(), "getAllAbstractClassesAndReferences", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(abstractClassEClass, AbstractClass.class, "AbstractClass", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractClass_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, AbstractClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractClass_Generalizations(), this.getAbstractClass(), null, "generalizations", null, 0, -1, AbstractClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractClass_Aspects(), this.getAspect(), null, "aspects", null, 0, -1, AbstractClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(abstractClassEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAbstractClass(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -814,10 +819,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		addEOperation(abstractClassEClass, this.getClazz(), "getSubTypes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(abstractClassEClass, this.getAbstractClass(), "getAllSubTypes", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(abstractClassEClass, this.getAttribute(), "getAllInheritedAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(abstractClassEClass, this.getAttribute(), "getAllAttributesWithoutAspectsAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(abstractClassEClass, this.getAssociation(), "getSourceAssociations", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -837,35 +838,32 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		addEOperation(abstractClassEClass, this.getAssociation(), "getAllTargetAssociations", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(abstractClassEClass, this.getAbstractClass(), "getLinkedClasses", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(abstractClassEClass, this.getAbstractClass(), "getAssociatedClasses", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(abstractClassEClass, this.getAssociationEnd(), "getAllSourceAssociationEnds", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(abstractClassEClass, this.getAssociationEnd(), "getAllTargetAssociationEnds", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(abstractClassEClass, this.getAttribute(), "getAllAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractClassEClass, this.getAttribute(), "getClassAndAspectAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractClassEClass, this.getAttribute(), "getAspectAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractClassEClass, this.getAttribute(), "getAllInheritedClassAndAspectAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractClassEClass, this.getAspect(), "getAllInheritedAspects", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractClassEClass, this.getAbstractClass(), "getAllLinkedAbstractClass", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractClassEClass, this.getClazz(), "getAllLinkedClasses", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractClassEClass, this.getAspect(), "getAllLinkedAspects", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(clazzEClass, Clazz.class, "Clazz", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClazz_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, -1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClazz_Aspects(), this.getAspect(), null, "aspects", null, 0, -1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClazz_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClazz_Deprecated(), ecorePackage.getEBoolean(), "deprecated", null, 0, 1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(clazzEClass, this.getAttribute(), "getAllAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(clazzEClass, this.getAttribute(), "getClassAndAspectAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(clazzEClass, this.getAttribute(), "getAspectAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(clazzEClass, this.getAttribute(), "getAllInheritedClassAndAspectAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(clazzEClass, this.getAspect(), "getAllInheritedAspects", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(clazzEClass, this.getAssociation(), "getAllSourceAssociationsIncludingAspect", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(clazzEClass, this.getAssociation(), "getAllTargetAssociationsIncludingAspect", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(clazzEClass, this.getAspect(), "getAllAspects", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(clazzEClass, this.getAspect(), "getHasAspects", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(associationEClass, Association.class, "Association", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAssociation_AssociationType(), this.getAssociationType(), "associationType", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1001,19 +999,31 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (classPackageEClass.getEOperations().get(6), 
 		   source, 
 		   new String[] {
-			 "body", "Clazz.allInstances() -> asSet() -> union(Clazz.allInstances().getInheritedClasses() ->asSet().oclAsType(Clazz)) -> asSet()"
+			 "body", "getAllAbstractClassesAndReferences() -> select(x | x.oclIsTypeOf(Clazz))"
 		   });		
 		addAnnotation
 		  (classPackageEClass.getEOperations().get(7), 
 		   source, 
 		   new String[] {
-			 "body", "self.getAllClassesFromEveryWhere().aspects -> asSet()"
+			 "body", "getAllAbstractClassesAndReferences() -> select(x | x.oclIsTypeOf(Aspect))"
 		   });		
 		addAnnotation
 		  (classPackageEClass.getEOperations().get(8), 
 		   source, 
 		   new String[] {
 			 "body", "common::Constraint.allInstances()"
+		   });		
+		addAnnotation
+		  (classPackageEClass.getEOperations().get(9), 
+		   source, 
+		   new String[] {
+			 "body", "AbstractClass.allInstances().getAllLinkedAbstractClass()"
+		   });		
+		addAnnotation
+		  (classPackageEClass.getEOperations().get(10), 
+		   source, 
+		   new String[] {
+			 "body", "AbstractClass.allInstances().getAllLinkedAbstractClass() -> union(AbstractClass.allInstances().getAssociatedClasses())"
 		   });		
 		addAnnotation
 		  (abstractClassEClass, 
@@ -1052,155 +1062,134 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (abstractClassEClass.getEOperations().get(4), 
 		   source, 
 		   new String[] {
-			 "body", "self.getInheritedClasses() ->collect(c | c.attributes) -> flatten()",
-			 "description", "get inherited attributes (excluding aspects)"
-		   });		
-		addAnnotation
-		  (abstractClassEClass.getEOperations().get(5), 
-		   source, 
-		   new String[] {
-			 "body", "self.getAllInheritedAttributes()->union(self.attributes)"
-		   });		
-		addAnnotation
-		  (abstractClassEClass.getEOperations().get(6), 
-		   source, 
-		   new String[] {
 			 "body", "Association.allInstances() ->select(c:Association|self.isSource(c))",
 			 "description", "search association where this clazz is source"
 		   });		
 		addAnnotation
-		  (abstractClassEClass.getEOperations().get(7), 
+		  (abstractClassEClass.getEOperations().get(5), 
 		   source, 
 		   new String[] {
 			 "body", "(asso.firstEnd.linkedClass = self and asso.secondEnd.navigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.navigable)",
 			 "description", "search for class attributes, inherited one and finaly added to the class by aspect"
 		   });		
 		addAnnotation
-		  (abstractClassEClass.getEOperations().get(8), 
+		  (abstractClassEClass.getEOperations().get(6), 
 		   source, 
 		   new String[] {
 			 "body", "(asso.firstEnd.linkedClass = self and asso.firstEnd.navigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.navigable)",
 			 "description", "search for class attributes, inherited one and finaly added to the class by aspect"
 		   });		
 		addAnnotation
-		  (abstractClassEClass.getEOperations().get(9), 
+		  (abstractClassEClass.getEOperations().get(7), 
 		   source, 
 		   new String[] {
 			 "body", "Association.allInstances() ->select(c:Association|self.isTarget(c))",
 			 "description", "search association where this clazz is target"
 		   });		
 		addAnnotation
-		  (abstractClassEClass.getEOperations().get(10), 
+		  (abstractClassEClass.getEOperations().get(8), 
 		   source, 
 		   new String[] {
 			 "body", "AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and ae.linkedClass = self )",
 			 "description", "returns association ends where this clazz is source"
 		   });		
 		addAnnotation
-		  (abstractClassEClass.getEOperations().get(11), 
+		  (abstractClassEClass.getEOperations().get(9), 
 		   source, 
 		   new String[] {
 			 "body", "AssociationEnd.allInstances() -> select (ae | ae.navigable and ae.linkedClass = self)",
 			 "description", "returns association ends where this clazz is target"
 		   });		
 		addAnnotation
-		  (abstractClassEClass.getEOperations().get(12), 
+		  (abstractClassEClass.getEOperations().get(10), 
 		   source, 
 		   new String[] {
-			 "body", "self.getInheritedClasses() -> including(self) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getSourceAssociations()))",
+			 "body", "getAllLinkedAbstractClass().getSourceAssociations()",
 			 "description", "search association where this AbstractClass is source"
 		   });		
 		addAnnotation
-		  (abstractClassEClass.getEOperations().get(13), 
+		  (abstractClassEClass.getEOperations().get(11), 
 		   source, 
 		   new String[] {
-			 "body", "self.getInheritedClasses() -> including(self) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getTargetAssociations()))",
+			 "body", "getAllLinkedAbstractClass().getTargetAssociations()",
 			 "description", "search associations where this AbstractClass is source or one of inheritedClass"
 		   });		
 		addAnnotation
-		  (abstractClassEClass.getEOperations().get(14), 
+		  (abstractClassEClass.getEOperations().get(12), 
 		   source, 
 		   new String[] {
 			 "body", "self.getAllSourceAssociations().getTarget() ->asOrderedSet()"
 		   });		
 		addAnnotation
-		  (abstractClassEClass.getEOperations().get(15), 
+		  (abstractClassEClass.getEOperations().get(13), 
 		   source, 
 		   new String[] {
 			 "body", "AssociationEnd.allInstances() -> select (ae | ae.linkedClass.oclIsTypeOf(AbstractClass) and ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass.oclAsType(AbstractClass)) )",
 			 "description", "returns association ends where this clazz is source including inherited associations (association ends cannot link to aspects)"
 		   });		
 		addAnnotation
-		  (abstractClassEClass.getEOperations().get(16), 
+		  (abstractClassEClass.getEOperations().get(14), 
 		   source, 
 		   new String[] {
 			 "body", "AssociationEnd.allInstances() -> select (ae | ae.navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )",
 			 "description", "returns association ends where this clazz is target including inherited associations (association ends cannot link to aspects)"
 		   });		
 		addAnnotation
-		  (clazzEClass, 
+		  (abstractClassEClass.getEOperations().get(15), 
 		   source, 
 		   new String[] {
-			 "InheritanceCycle", "not self.generalizations ->closure(generalizations)->includes(self)"
-		   });				
-		addAnnotation
-		  (clazzEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "self.getAllInheritedClassAndAspectAttributes() -> union(self.getClassAndAspectAttributes())",
+			 "body", "getAllLinkedAbstractClass().attributes",
 			 "description", "search for class attributes, inherited one and finaly added to the class by aspect"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(1), 
+		  (abstractClassEClass.getEOperations().get(16), 
 		   source, 
 		   new String[] {
 			 "body", "self.attributes -> asSet() -> union(self.getAspectAttributes())"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(2), 
+		  (abstractClassEClass.getEOperations().get(17), 
 		   source, 
 		   new String[] {
-			 "body", "self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.getAllAttributesWithoutAspectsAttributes() ->asSet()))"
+			 "body", "self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.getAllAttributes() ->asSet()))"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(3), 
+		  (abstractClassEClass.getEOperations().get(18), 
 		   source, 
 		   new String[] {
 			 "body", "self.getInheritedClasses() ->asSet().oclAsType(Clazz) ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.getClassAndAspectAttributes() ->asSet()))",
 			 "description", "search attributes than is describe in inherited classes (with Aspects)"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(4), 
+		  (abstractClassEClass.getEOperations().get(19), 
 		   source, 
 		   new String[] {
-			 "body", "self.getInheritedClasses()->asSet().oclAsType(Clazz).aspects"
+			 "body", "self.getInheritedClasses().aspects"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(5), 
+		  (abstractClassEClass.getEOperations().get(20), 
 		   source, 
 		   new String[] {
-			 "body", "self.getInheritedClasses() -> including(self) -> union(self.getAllAspects()) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getSourceAssociations()))",
-			 "description", "search association where this AbstractClass is source"
+			 "body", "let selfAndInherited : Set(AbstractClass) = self.getInheritedClasses() -> including(self)\n\t\tin selfAndInherited -> union(selfAndInherited.aspects.getAllLinkedAbstractClass())"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(6), 
+		  (abstractClassEClass.getEOperations().get(21), 
 		   source, 
 		   new String[] {
-			 "body", "self.getInheritedClasses() -> including(self) -> union(self.getAllAspects()) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getTargetAssociations()))",
-			 "description", "search associations where this AbstractClass is source or one of inheritedClass"
+			 "body", "getAllLinkedAbstractClass() -> select(x | x.oclIsTypeOf(Clazz))"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(7), 
+		  (abstractClassEClass.getEOperations().get(22), 
 		   source, 
 		   new String[] {
-			 "body", "self.getHasAspects() -> union(self.getAllInheritedAspects())"
+			 "body", "getAllLinkedAbstractClass() -> select(x | x.oclIsTypeOf(Aspect))"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(8), 
+		  (clazzEClass, 
 		   source, 
 		   new String[] {
-			 "body", "self.aspects -> asSet() -> union(self.aspects.getInheritedClasses().oclAsType(Aspect) -> asSet()) ->asOrderedSet()"
-		   });				
+			 "InheritanceCycle", "not self.generalizations ->closure(generalizations)->includes(self)"
+		   });						
 		addAnnotation
 		  (associationEClass, 
 		   source, 
@@ -1318,7 +1307,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createInternalDocAnnotations() {
-		String source = "InternalDoc";																																																																														
+		String source = "InternalDoc";																																																																													
 		addAnnotation
 		  (classCommentEClass, 
 		   source, 
@@ -1340,19 +1329,19 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "PackageNameNull"
-		   });													
+		   });															
 		addAnnotation
 		  (abstractClassEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "TwoModelElementWithSameName NameNull noSpecialCharacters TwoAttributesSameName"
-		   });																				
+		   });																										
 		addAnnotation
 		  (clazzEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "ClassWithTwoAttributesSameName InheritanceCycle"
-		   });															
+		   });						
 		addAnnotation
 		  (associationEClass, 
 		   source, 

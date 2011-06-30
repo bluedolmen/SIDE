@@ -1,5 +1,6 @@
 package com.bluexml.side.Class.modeler.diagram.actions;
 
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.ui.actions.WorkbenchPartAction;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelection;
@@ -18,6 +19,7 @@ import com.bluexml.side.Class.modeler.diagram.commands.delete.DeleteLinkClassAsp
 import com.bluexml.side.Class.modeler.diagram.edit.AspectEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.ClazzEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.util.libs.ui.UIUtils;
@@ -47,13 +49,13 @@ public class DeleteLinkClassAspectAction extends WorkbenchPartAction implements 
 	}
 
 	public void run() {
-		Modeler modeler = (Modeler)getWorkbenchPart();
+		Modeler modeler = (Modeler) getWorkbenchPart();
 		ConfirmationDialog dialog = new ConfirmationDialog(ClazzPlugin.getActiveWorkbenchShell(), "Delete From Model", "Are you sure you want to delete these model elements ?", modeler.getPreferenceStore(), "deleteModelActionConfirm");
-        int result = dialog.open();
-        if(result != 0) {
-        	return;
-        }
-        
+		int result = dialog.open();
+		if (result != 0) {
+			return;
+		}
+
 		StructuredSelection ss = (StructuredSelection) this.selection;
 		for (Object o : ss.toList()) {
 			if (o instanceof hasAspectEditPart) {
@@ -62,11 +64,12 @@ public class DeleteLinkClassAspectAction extends WorkbenchPartAction implements 
 				GraphEdge eo = (GraphEdge) editPart.getModel();
 
 				//Get source and target edit part
-				ClazzEditPart cep = (ClazzEditPart) editPart.getSource();
+				EditPart cep = editPart.getSource();
+
 				AspectEditPart aep = (AspectEditPart) editPart.getTarget();
 
 				//Get source and target model element
-				Clazz c = (Clazz) Utils.getElement((GraphElement) cep.getModel());
+				AbstractClass c = (AbstractClass) Utils.getElement((GraphElement) cep.getModel());
 				Aspect a = (Aspect) Utils.getElement((GraphElement) aep.getModel());
 
 				DeleteLinkClassAspectCommand dlcac = new DeleteLinkClassAspectCommand(editPart, c, a, eo);

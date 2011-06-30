@@ -100,7 +100,7 @@ public class SearchInitialization {
 
 		if (cl != null) {
 
-			for (Attribute att : cl.getAllAttributesWithoutAspectsAttributes()) {
+			for (Attribute att : cl.getAllAttributes()) {
 				SearchField field = null;
 				field = getSearchFieldForAttribute(att);
 				if (field != null) {
@@ -110,7 +110,7 @@ public class SearchInitialization {
 			if (cl instanceof Clazz) {
 				Clazz clazz = (Clazz) cl;
 				// Aspects
-				for (Aspect aspect : clazz.getAllAspects()) {
+				for (Aspect aspect : clazz.getAllLinkedAspects()) {
 					FormAspect fa = FormFactory.eINSTANCE.createFormAspect();
 					fa.setRef(aspect);
 					fa.setId(aspect.getName());

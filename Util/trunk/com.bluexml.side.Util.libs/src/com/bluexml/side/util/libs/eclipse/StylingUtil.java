@@ -17,7 +17,9 @@ public class StylingUtil {
 	static final public Color color = new Color(Display.getCurrent(), 255, 255, 255);
 
 	public static GridData getNewLayoutData() {
-		return new GridData(GridData.FILL_HORIZONTAL);
+		GridData gridData = new GridData(SWT.FILL, SWT.FILL, false, false);
+		gridData = new GridData(GridData.FILL_HORIZONTAL);
+		return gridData;
 	}
 
 	static public void applyStyle(GridLayout gl, Text t) {
@@ -40,7 +42,7 @@ public class StylingUtil {
 		return textField;
 	}
 
-	static private GridLayout getLayout() {
+	static public GridLayout getLayout() {
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 4;
 		return layout;

@@ -14,8 +14,12 @@ public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoPackageGe
 	public static final String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";
 	public static final String CONFIGURATION_PARAMETER_ALFRESCO_URL = "alfresco.url";
 	public static final String CONFIGURATION_PARAMETER_ALFRESCOSHARE_URL = "alfresco.share.url";
-	
+
 	protected Properties moduleProperties;
+	public static final String MODULE_DESCRIPTION = "module.description";
+	public static final String MODULE_TITLE = "module.title";
+	public static final String MODULE_VERSION = "module.version";
+	public static final String MODULE_ID = "module.id";
 
 	public String getTEMP_FOLDER(String model) {
 		return getTEMP_FOLDER() + File.separator + model;

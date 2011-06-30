@@ -2,25 +2,27 @@ package com.bluexml.side.form.clazz.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
 import com.bluexml.side.clazz.AbstractClass;
-import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.form.ClassFormCollection;
 import com.bluexml.side.form.Field;
-import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.libs.ui.UIUtils;
 
@@ -106,69 +108,72 @@ public class ClassInitialization {
 		fc.getDisabled().clear();
 		fc.getChildren().removeAll(fc.getChildren());
 		AbstractClass cl = fc.getReal_class();
-		Collection<FormElement> c = createChildsForClass(cl);
+		Collection<FormElement> c = createChildsForClass(cl, false);
 
 		return c;
 	}
 
-	public static Collection<FormElement> createChildsForClass(AbstractClass cl) {
+	public static Collection<FormElement> createChildsForClass(AbstractClass abc, boolean groupRoot) {
 		Collection<FormElement> c = new ArrayList<FormElement>();
+		try {
+			if (abc != null) {
+				Map<String, AbstractClass> linkedL = new TreeMap<String, AbstractClass>();
+				EList<AbstractClass> allLinkedAbstractClass = abc.getAllLinkedAbstractClass();
+				for (AbstractClass abstractClass : allLinkedAbstractClass) {
+					linkedL.put(abstractClass.getName(), abstractClass);
+				}
 
-		if (cl != null) {
+				if (!groupRoot) {
+					createChildren(abc, c);
+					linkedL.remove(abc.getName());
+				}
+				// create a group for the classes items			
 
-			// Attributes
-
-			for (Attribute att : cl.getAllAttributesWithoutAspectsAttributes()) {
-				Field field = null;
-				field = ClassDiagramUtils.getFieldForAttribute(att);
-				if (field != null) {
-					c.add(field);
+				for (AbstractClass linked : linkedL.values()) {
+					FormGroup createFormGroup2 = initializeClassGroup(linked);
+					c.add(createFormGroup2);
 				}
 			}
-			if (cl instanceof Clazz) {
-				Clazz clazz = (Clazz) cl;
-
-				try {
-					// Aspects
-					for (Aspect asp : clazz.getAllAspects()) {
-						FormAspect fa = FormFactory.eINSTANCE.createFormAspect();
-						fa.setRef(asp);
-						fa.setId(asp.getName());
-						fa.setLabel(asp.getLabel());
-						Collection<Field> cf = new ArrayList<Field>();
-						for (Attribute att : asp.getAllAttributesWithoutAspectsAttributes()) {
-							Field field = ClassDiagramUtils.getFieldForAttribute(att);
-							if (field != null) {
-								cf.add(field);
-							}
-						}
-						// manage associations defined for aspects
-						for (Association ass : asp.getAllSourceAssociations()) {
-							cf.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass, asp));
-						}
-
-						if (cf.size() > 0 || fa.getChildren() != null) {
-							fa.getChildren().addAll(cf);
-						}
-						c.add(fa);
-					}
-					// Associations :
-					for (Association ass : clazz.getAllSourceAssociations()) {
-						c.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass, clazz));
-
-					}
-
-					// Operations :
-					for (OperationComponent op : clazz.getOperations()) {
-						Field field = ClassDiagramUtils.getFieldForOperation(op);
-						c.add(field);
-					}
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return c;
+	}
+
+	private static FormGroup initializeClassGroup(AbstractClass abc) {
+		FormGroup createFormGroup = FormFactory.eINSTANCE.createFormGroup();
+		createFormGroup.setRef(abc);
+		createFormGroup.setId(abc.getName());
+		createFormGroup.setLabel(abc.getLabel());
+		EList<FormElement> children = createFormGroup.getChildren();
+
+		createChildren(abc, children);
+		return createFormGroup;
+	}
+
+	private static void createChildren(AbstractClass abc, Collection<FormElement> children) {
+		// Attributes
+		for (Attribute att : abc.getAttributes()) {
+			Field field = null;
+			field = ClassDiagramUtils.getFieldForAttribute(att);
+			if (field != null) {
+
+				children.add(field);
+			}
+		}
+
+		// Associations :
+		for (Association ass : abc.getSourceAssociations()) {
+			children.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass, abc));
+		}
+		if (abc instanceof Clazz) {
+			Clazz cl = (Clazz) abc;
+			// Operations :
+			for (OperationComponent op : cl.getOperations()) {
+				Field field = ClassDiagramUtils.getFieldForOperation(op);
+				children.add(field);
+			}
+
+		}
 	}
 }

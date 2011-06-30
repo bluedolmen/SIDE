@@ -5,16 +5,16 @@ import org.topcased.modeler.commands.DeleteGraphElementCommand;
 import org.topcased.modeler.di.model.GraphEdge;
 
 import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
-import com.bluexml.side.clazz.Clazz;
 
 public class DeleteLinkClassAspectCommand extends Command {
-	Clazz clazz;
+	AbstractClass clazz;
 	Aspect aspect;
 	GraphEdge eo;
 	DeleteGraphElementCommand cmd;
 	
-	public DeleteLinkClassAspectCommand(hasAspectEditPart editPart,Clazz clazz, Aspect aspect, GraphEdge eo) {
+	public DeleteLinkClassAspectCommand(hasAspectEditPart editPart,AbstractClass clazz, Aspect aspect, GraphEdge eo) {
 		this.aspect = aspect;
 		this.clazz = clazz;
 		this.eo = eo;

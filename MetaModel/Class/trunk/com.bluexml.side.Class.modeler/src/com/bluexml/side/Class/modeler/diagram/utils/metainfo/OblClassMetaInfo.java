@@ -16,6 +16,10 @@ package com.bluexml.side.Class.modeler.diagram.utils.metainfo;
 
 import java.util.ArrayList;
 
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.impl.CommonFactoryImpl;
+
 
 
 public class OblClassMetaInfo extends OblTypeMetaInfo {
@@ -23,18 +27,20 @@ public class OblClassMetaInfo extends OblTypeMetaInfo {
 	public void initAllMetaInfo() {
 		allMetaInfos = new ArrayList<Object>();
 //
-//		CommonFactory fact = CommonFactoryImpl.init();
-//		MetaInfo c;
+		CommonFactory fact = CommonFactoryImpl.init();
+		MetaInfo c;
 
-//		c = fact.createMetaInfo();
-//		c.setKey("simplifyCreation");
-//		c.setValueType(boolean.class);
-//		allMetaInfos.add(c);
+		c = fact.createMetaInfo();
+		c.setKey("archive");
+		c.setDefaultValueBoolean(true);
+		c.setValueType(boolean.class);
+		allMetaInfos.add(c);
 		
-//		c = fact.createMetaInfo();
-//		c.setKey("treeNode");
-//		c.setValueType(boolean.class);
-//		allMetaInfos.add(c);
+		c = fact.createMetaInfo();
+		c.setKey("includedInSuperTypeQuery");
+		c.setDefaultValueBoolean(false);
+		c.setValueType(boolean.class);
+		allMetaInfos.add(c);
 
 //		c = fact.createMetaInfo();
 //		c.setKey("isContainer");

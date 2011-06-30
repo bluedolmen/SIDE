@@ -20,6 +20,7 @@ import com.bluexml.side.common.Container;
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.AbstractClass#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.AbstractClass#getGeneralizations <em>Generalizations</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.AbstractClass#getAspects <em>Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +64,22 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	EList<AbstractClass> getGeneralizations();
 
 	/**
+	 * Returns the value of the '<em><b>Aspects</b></em>' reference list.
+	 * The list contents are of type {@link com.bluexml.side.clazz.Aspect}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Aspects</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Aspects</em>' reference list.
+	 * @see com.bluexml.side.clazz.ClazzPackage#getAbstractClass_Aspects()
+	 * @model
+	 * @generated
+	 */
+	EList<Aspect> getAspects();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.bluexml.com/OCL body='self.name = other.name and self.title = other.title'"
@@ -87,15 +104,6 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	 * @generated
 	 */
 	EList<AbstractClass> getAllSubTypes();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() ->collect(c | c.attributes) -> flatten()' description='get inherited attributes (excluding aspects)'"
-	 * @generated
-	 */
-	EList<Attribute> getAllInheritedAttributes();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -164,7 +172,7 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() -> including(self) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getSourceAssociations()))' description='search association where this AbstractClass is source'"
+	 *        annotation="http://www.bluexml.com/OCL body='getAllLinkedAbstractClass().getSourceAssociations()' description='search association where this AbstractClass is source'"
 	 * @generated
 	 */
 	EList<Association> getAllSourceAssociations();
@@ -173,7 +181,7 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() -> including(self) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getTargetAssociations()))' description='search associations where this AbstractClass is source or one of inheritedClass'"
+	 *        annotation="http://www.bluexml.com/OCL body='getAllLinkedAbstractClass().getTargetAssociations()' description='search associations where this AbstractClass is source or one of inheritedClass'"
 	 * @generated
 	 */
 	EList<Association> getAllTargetAssociations();
@@ -185,7 +193,7 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	 *        annotation="http://www.bluexml.com/OCL body='self.getAllSourceAssociations().getTarget() ->asOrderedSet()'"
 	 * @generated
 	 */
-	EList<AbstractClass> getLinkedClasses();
+	EList<AbstractClass> getAssociatedClasses();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -209,9 +217,72 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getAllInheritedAttributes()->union(self.attributes)'"
+	 *        annotation="http://www.bluexml.com/OCL body='getAllLinkedAbstractClass().attributes' description='search for class attributes, inherited one and finaly added to the class by aspect'"
 	 * @generated
 	 */
-	EList<Attribute> getAllAttributesWithoutAspectsAttributes();
+	EList<Attribute> getAllAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.attributes -> asSet() -> union(self.getAspectAttributes())'"
+	 * @generated
+	 */
+	EList<Attribute> getClassAndAspectAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.getAllAttributes() ->asSet()))'"
+	 * @generated
+	 */
+	EList<Attribute> getAspectAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() ->asSet().oclAsType(Clazz) ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.getClassAndAspectAttributes() ->asSet()))' description='search attributes than is describe in inherited classes (with Aspects)'"
+	 * @generated
+	 */
+	EList<Attribute> getAllInheritedClassAndAspectAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses().aspects'"
+	 * @generated
+	 */
+	EList<Aspect> getAllInheritedAspects();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='getAllLinkedAbstractClass() -> select(x | x.oclIsTypeOf(Aspect))'"
+	 * @generated
+	 */
+	EList<Aspect> getAllLinkedAspects();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='let selfAndInherited : Set(AbstractClass) = self.getInheritedClasses() -> including(self)\n\t\tin selfAndInherited -> union(selfAndInherited.aspects.getAllLinkedAbstractClass())'"
+	 * @generated
+	 */
+	EList<AbstractClass> getAllLinkedAbstractClass();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='getAllLinkedAbstractClass() -> select(x | x.oclIsTypeOf(Clazz))'"
+	 * @generated
+	 */
+	EList<Clazz> getAllLinkedClasses();
 		
 } // AbstractClass

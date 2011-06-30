@@ -16,19 +16,30 @@ package com.bluexml.side.Class.modeler.diagram.utils.metainfo;
 
 import java.util.ArrayList;
 
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.impl.CommonFactoryImpl;
+
 
 public class OblAssociationMetaInfo extends OblTypeMetaInfo {
 
 	public void initAllMetaInfo() {
 		allMetaInfos = new ArrayList<Object>();
 //
-//		CommonFactory fact = CommonFactoryImpl.init();
-//		MetaInfo c;
+		CommonFactory fact = CommonFactoryImpl.init();
+		MetaInfo c;
 
-//		c = fact.createMetaInfo();
-//		c.setKey("asList");
-//		c.setValueType(boolean.class);
-//		allMetaInfos.add(c);
+		c = fact.createMetaInfo();
+		c.setKey("duplicate");
+		c.setValueType(boolean.class);
+		c.setDefaultValueBoolean(false);
+		allMetaInfos.add(c);
+		
+		c = fact.createMetaInfo();
+		c.setKey("propagateTimestamps");
+		c.setDefaultValueBoolean(false);
+		c.setValueType(boolean.class);
+		allMetaInfos.add(c);
 	}
 
 }

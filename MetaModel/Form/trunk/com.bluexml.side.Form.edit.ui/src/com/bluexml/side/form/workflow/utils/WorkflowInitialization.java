@@ -95,7 +95,7 @@ public class WorkflowInitialization {
 			Clazz advancedTaskDefinition = ut.getAdvancedTaskDefinition();
 			if (advancedTaskDefinition != null) {
 				// use initialize from the Class definition instead to search attribute task
-				Collection<FormElement> createChildsForClass = ClassInitialization.createChildsForClass(advancedTaskDefinition);
+				Collection<FormElement> createChildsForClass = ClassInitialization.createChildsForClass(advancedTaskDefinition,false);
 
 				// filter bpm element to only keep custom elements
 				Collection<FormElement> filtered = new ArrayList<FormElement>();

@@ -52,17 +52,27 @@
     </eOperations>
     <eOperations name="getAllClassesFromEveryWhere" upperBound="-1" eType="#//Clazz">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="Clazz.allInstances() -> asSet() -> union(Clazz.allInstances().getInheritedClasses() ->asSet().oclAsType(Clazz)) -> asSet()"/>
+        <details key="body" value="getAllAbstractClassesAndReferences() -> select(x | x.oclIsTypeOf(Clazz))"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllAspectsFromEveryWhere" upperBound="-1" eType="#//Aspect">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getAllClassesFromEveryWhere().aspects -> asSet()"/>
+        <details key="body" value="getAllAbstractClassesAndReferences() -> select(x | x.oclIsTypeOf(Aspect))"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllConstraints" upperBound="-1" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//Constraint">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="common::Constraint.allInstances()"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllAbstractClassesAndLinked" upperBound="-1" eType="#//AbstractClass">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="AbstractClass.allInstances().getAllLinkedAbstractClass()"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllAbstractClassesAndReferences" upperBound="-1" eType="#//AbstractClass">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="AbstractClass.allInstances().getAllLinkedAbstractClass() -> union(AbstractClass.allInstances().getAssociatedClasses())"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classSet" upperBound="-1"
@@ -108,17 +118,6 @@
         <details key="body" value="AbstractClass.allInstances() ->select(e:AbstractClass|e.getInheritedClasses() ->includes(self) )"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getAllInheritedAttributes" upperBound="-1" eType="#//Attribute">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getInheritedClasses() ->collect(c | c.attributes) -> flatten()"/>
-        <details key="description" value="get inherited attributes (excluding aspects)"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getAllAttributesWithoutAspectsAttributes" upperBound="-1" eType="#//Attribute">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getAllInheritedAttributes()->union(self.attributes)"/>
-      </eAnnotations>
-    </eOperations>
     <eOperations name="getSourceAssociations" upperBound="-1" eType="#//Association">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="Association.allInstances() ->select(c:Association|self.isSource(c))"/>
@@ -159,17 +158,17 @@
     </eOperations>
     <eOperations name="getAllSourceAssociations" upperBound="-1" eType="#//Association">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getInheritedClasses() -> including(self) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getSourceAssociations()))"/>
+        <details key="body" value="getAllLinkedAbstractClass().getSourceAssociations()"/>
         <details key="description" value="search association where this AbstractClass is source"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllTargetAssociations" upperBound="-1" eType="#//Association">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getInheritedClasses() -> including(self) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getTargetAssociations()))"/>
+        <details key="body" value="getAllLinkedAbstractClass().getTargetAssociations()"/>
         <details key="description" value="search associations where this AbstractClass is source or one of inheritedClass"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getLinkedClasses" upperBound="-1" eType="#//AbstractClass">
+    <eOperations name="getAssociatedClasses" upperBound="-1" eType="#//AbstractClass">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.getAllSourceAssociations().getTarget() ->asOrderedSet()"/>
       </eAnnotations>
@@ -186,10 +185,54 @@
         <details key="description" value="returns association ends where this clazz is target including inherited associations (association ends cannot link to aspects)"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getAllAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="getAllLinkedAbstractClass().attributes"/>
+        <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getClassAndAspectAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.attributes -> asSet() -> union(self.getAspectAttributes())"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAspectAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.getAllAttributes() ->asSet()))"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllInheritedClassAndAspectAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.getInheritedClasses() ->asSet().oclAsType(Clazz) ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.getClassAndAspectAttributes() ->asSet()))"/>
+        <details key="description" value="search attributes than is describe in inherited classes (with Aspects)"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllInheritedAspects" upperBound="-1" eType="#//Aspect">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.getInheritedClasses().aspects"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllLinkedAbstractClass" upperBound="-1" eType="#//AbstractClass">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="let selfAndInherited : Set(AbstractClass) = self.getInheritedClasses() -> including(self)&#xA;&#x9;&#x9;in selfAndInherited -> union(selfAndInherited.aspects.getAllLinkedAbstractClass())"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllLinkedClasses" upperBound="-1" eType="#//Clazz">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="getAllLinkedAbstractClass() -> select(x | x.oclIsTypeOf(Clazz))"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllLinkedAspects" upperBound="-1" eType="#//Aspect">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="getAllLinkedAbstractClass() -> select(x | x.oclIsTypeOf(Aspect))"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//Attribute" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generalizations" upperBound="-1"
         eType="#//AbstractClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aspects" upperBound="-1"
+        eType="#//Aspect"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Clazz" eSuperTypes="#//AbstractClass">
     <eAnnotations source="http://www.bluexml.com/OCL">
@@ -201,60 +244,9 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: a class or data defines a category of instance of objects which shares exactly the same set of attributes. In ECM applications, a class relates to a content type.  SIDE Data model describes data structure for persistence through class and attributes and keeps notation close to UML class diagram to reduce learning curve.&#xD;&#xA;Constraints: the fully qualified name of a class is compose of the successive names of the containing package and the attribute name of the class. This fully qualified name must be unique in your application. For instance, 'org.bluexml.library.mediaVideo' identifies the class mediaVideo contains in the 'library' package, itself contains in the 'bluexml' package, itself contains in the 'org' package.&#xD;&#xA;Example: in an Alfresco application the predefined 'cm:content' is modelized as a class."/>
     </eAnnotations>
-    <eOperations name="getAllAttributes" upperBound="-1" eType="#//Attribute">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getAllInheritedClassAndAspectAttributes() -> union(self.getClassAndAspectAttributes())"/>
-        <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getClassAndAspectAttributes" upperBound="-1" eType="#//Attribute">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.attributes -> asSet() -> union(self.getAspectAttributes())"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getAspectAttributes" upperBound="-1" eType="#//Attribute">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.getAllAttributesWithoutAspectsAttributes() ->asSet()))"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getAllInheritedClassAndAspectAttributes" upperBound="-1" eType="#//Attribute">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getInheritedClasses() ->asSet().oclAsType(Clazz) ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.getClassAndAspectAttributes() ->asSet()))"/>
-        <details key="description" value="search attributes than is describe in inherited classes (with Aspects)"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getAllInheritedAspects" upperBound="-1" eType="#//Aspect">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getInheritedClasses()->asSet().oclAsType(Clazz).aspects"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getAllSourceAssociationsIncludingAspect" upperBound="-1" eType="#//Association">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getInheritedClasses() -> including(self) -> union(self.getAllAspects()) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getSourceAssociations()))"/>
-        <details key="description" value="search association where this AbstractClass is source"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getAllTargetAssociationsIncludingAspect" upperBound="-1" eType="#//Association">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getInheritedClasses() -> including(self) -> union(self.getAllAspects()) ->iterate(e:AbstractClass;result:Set(Association)=Set{}|result->union(e.getTargetAssociations()))"/>
-        <details key="description" value="search associations where this AbstractClass is source or one of inheritedClass"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getAllAspects" upperBound="-1" eType="#//Aspect">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getHasAspects() -> union(self.getAllInheritedAspects())"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getHasAspects" upperBound="-1" eType="#//Aspect">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.aspects -> asSet() -> union(self.aspects.getInheritedClasses().oclAsType(Aspect) -> asSet()) ->asOrderedSet()"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="aspects" upperBound="-1"
-        eType="#//Aspect"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: this attribute indicates if the class is abstract; an abstract class cannot be instanciated but serve to define an object of more general level. For example, in the library, an abstract class 'media' may be defined to group all the kind of medias; the class 'mediaVideo' inherits of media to specialise 'media' as the media on video support.&#xD;&#xA;Constraint: during modeling, think to class and abstract class as real life objects, class being a specialisation of abstract class like the class 'novel' inherits of the abstracts class 'book'."/>

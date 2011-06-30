@@ -47,18 +47,15 @@ import com.bluexml.side.common.Stereotype;
 
 public class MetaInfoHelper {
 
-	public static void drawConstraintGroup(Composite composite,
-			MetaInfoGroup group, Map drawConstraint, EObject object) {
+	public static void drawConstraintGroup(Composite composite, MetaInfoGroup group, Map drawConstraint, EObject object) {
 		if (group != null) {
 			if (group.getChildren().size() > 0) {
-				Group constraintGroup = createConstraintsGroup(composite, group
-						.getName());
+				Group constraintGroup = createConstraintsGroup(composite, group.getName());
 
 				for (Object o : group.getChildren()) {
 					if (o instanceof MetaInfo) {
 						MetaInfo c = (MetaInfo) o;
-						drawConstraint(constraintGroup, c, drawConstraint,
-								object);
+						drawConstraint(constraintGroup, c, drawConstraint, object);
 					}
 				}
 			}
@@ -76,8 +73,7 @@ public class MetaInfoHelper {
 		return group;
 	}
 
-	public static void drawConstraint(Composite composite, MetaInfo co,
-			Map drawConstraints, EObject element) {
+	public static void drawConstraint(Composite composite, MetaInfo co, Map drawConstraints, EObject element) {
 
 		Label lb = new Label(composite, SWT.NONE);
 		lb.setText(co.getKey() + " : ");
@@ -113,8 +109,7 @@ public class MetaInfoHelper {
 			chooser.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent e) {
 					// Enable the type selection
-					text.setEnabled(chooser.indexOf("Yes") == chooser
-							.getSelectionIndex());
+					text.setEnabled(chooser.indexOf("Yes") == chooser.getSelectionIndex());
 				}
 			});
 
@@ -127,8 +122,7 @@ public class MetaInfoHelper {
 
 			if (co.getValueSet() != null) {
 				if (co.getValueSet() instanceof Collection) {
-					String[] items = new String[((Collection) co.getValueSet())
-							.size()];
+					String[] items = new String[((Collection) co.getValueSet()).size()];
 					int i = 0;
 					for (Object o : ((Collection) co.getValueSet())) {
 						items[i] = o.toString();
@@ -144,9 +138,7 @@ public class MetaInfoHelper {
 			Combo chooser = new Combo(composite, SWT.READ_ONLY);
 			chooser.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-			Collection<EObject> reachableStereotypes = ItemPropertyDescriptor
-					.getReachableObjectsOfType(element, CommonPackage.eINSTANCE
-							.getStereotype());
+			Collection<EObject> reachableStereotypes = ItemPropertyDescriptor.getReachableObjectsOfType(element, CommonPackage.eINSTANCE.getStereotype());
 
 			Collection<String> items = new ArrayList<String>();
 			items.add("");
@@ -178,9 +170,7 @@ public class MetaInfoHelper {
 			Combo chooser = new Combo(composite, SWT.READ_ONLY);
 			chooser.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-			Collection<EObject> reachableEnumeration = ItemPropertyDescriptor
-					.getReachableObjectsOfType(element, ClazzPackage.eINSTANCE
-							.getEnumeration());
+			Collection<EObject> reachableEnumeration = ItemPropertyDescriptor.getReachableObjectsOfType(element, ClazzPackage.eINSTANCE.getEnumeration());
 
 			Collection<String> items = new ArrayList<String>();
 			items.add("");
@@ -206,6 +196,11 @@ public class MetaInfoHelper {
 			Text text = new Text(composite, SWT.BORDER);
 			text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 			text.setEnabled(co.getValueType() != null);
+			String defaultString = co.getValue();
+			if (defaultString != null) {
+				text.setText(defaultString);
+			}
+
 			value = text;
 		}
 
@@ -222,27 +217,24 @@ public class MetaInfoHelper {
 				Object obj = drawConstraints.get(mi);
 				if (obj instanceof Text) {
 					Text t = (Text) obj;
-					if (t.getText().length()>0) {
+					if (t.getText().length() > 0) {
 						dataConstraints.add(key, t.getText());
 					}
 				} else if (obj instanceof Combo) {
 					Combo soc = (Combo) obj;
 					if (soc.getItem(soc.getSelectionIndex()).equalsIgnoreCase("Yes")) {
 						dataConstraints.add(key, "True");
-					}
-					else if (soc.getItem(soc.getSelectionIndex()).equalsIgnoreCase("No") && mi.getDefaultValueBoolean()) {
+					} else if (soc.getItem(soc.getSelectionIndex()).equalsIgnoreCase("No") && mi.getDefaultValueBoolean()) {
 						dataConstraints.add(key, "False");
 					} else if (!soc.getItem(soc.getSelectionIndex()).equalsIgnoreCase("No") && !soc.getItem(soc.getSelectionIndex()).equalsIgnoreCase("Yes")) {
-						dataConstraints.add(key, soc.getItem(soc
-								.getSelectionIndex()));
+						dataConstraints.add(key, soc.getItem(soc.getSelectionIndex()));
 					}
 				} else if (obj instanceof booleanWithParameter) {
 					booleanWithParameter b = (booleanWithParameter) obj;
 					Combo c = (Combo) b.getCombo();
 					Text t = (Text) b.getText();
 
-					if (c.getItem(c.getSelectionIndex())
-							.equalsIgnoreCase("Yes")) {
+					if (c.getItem(c.getSelectionIndex()).equalsIgnoreCase("Yes")) {
 						dataConstraints.add(key, t.getText());
 					}
 				}
@@ -292,8 +284,7 @@ public class MetaInfoHelper {
 				for (Object k : drawConstraints.keySet()) {
 					String key = (String) k;
 					if (key.equals(c.getKey())) {
-						if ((c.getValueType() != null)
-								&& (c.getValue() != null)) {
+						if ((c.getValueType() != null) && (c.getValue() != null)) {
 							Object comp = drawConstraints.get(key);
 							if (comp instanceof Text) {
 								Text t = (Text) comp;
@@ -324,7 +315,6 @@ public class MetaInfoHelper {
 			if (result == null) {
 				result = (new OblAttributeMetaInfo()).getMetaInfo(key);
 			}
-			
 
 			if (result != null) {
 				result.setValue(s.getName());
@@ -332,8 +322,7 @@ public class MetaInfoHelper {
 		} else {
 			int i = 0;
 			String key = s.getName();
-			while ((i < key.length())
-					&& !(key.charAt(i) >= 48 && key.charAt(i) <= 57)) {
+			while ((i < key.length()) && !(key.charAt(i) >= 48 && key.charAt(i) <= 57)) {
 				i++;
 			}
 			key = key.substring(0, i);
@@ -341,7 +330,6 @@ public class MetaInfoHelper {
 			if (result == null) {
 				result = (new OblAttributeMetaInfo()).getMetaInfo(key);
 			}
-			
 
 			if (result != null) {
 				result.setValue(s.getName());

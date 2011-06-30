@@ -18,6 +18,7 @@ import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.util.metaModel.validate.OCLextension.OCLEvaluator;
 
 public class CommonServices {
 	public static String getNamedModelElementQName(NamedModelElement node) throws Exception {
@@ -45,14 +46,14 @@ public class CommonServices {
 	}
 
 	public static String getPrefixedQName(NamedModelElement node, String separator) throws Exception {
-		return getPrefixe(node) + separator + CommonServices.getNamedModelElementQName(node);
+		return getPrefix(node) + separator + CommonServices.getNamedModelElementQName(node);
 	}
 
 	public static String getPrefixedQName(NamedModelElement node) throws Exception {
 		return getPrefixedQName(node, ":");
 	}
 
-	public static String getPrefixe(EObject node) throws Exception {
+	public static String getPrefix(EObject node) throws Exception {
 		if (node instanceof ModelElement) {
 			ModelElement namedElement = (ModelElement) node;
 			NameSpace ns = namedElement.getLogicalNameSpace();
@@ -86,7 +87,7 @@ public class CommonServices {
 			}
 		}
 		// return default URI
-		return "http://www.bluexml.com/model/content/" + getPrefixe(node) + "/1.0";
+		return "http://www.bluexml.com/model/content/" + getPrefix(node) + "/1.0";
 	}
 
 	public static String getPrefixedNamespaceQName(NamedModelElement node) throws Exception {
@@ -101,7 +102,7 @@ public class CommonServices {
 		List<EObject> fl = getAllExternalReference(node);
 
 		for (EObject eObject : fl) {
-			String prefix = CommonServices.getPrefixe(eObject);
+			String prefix = CommonServices.getPrefix(eObject);
 			if (!prel.contains(prefix)) {
 				l.add(eObject);
 				prel.add(prefix);
@@ -112,7 +113,7 @@ public class CommonServices {
 	}
 
 	public static List<EObject> getAllExternalReference(Model model) throws Exception {
-		String prefix = CommonServices.getPrefixe(model);
+		String prefix = CommonServices.getPrefix(model);
 		List<EObject> linkedEObject = new ArrayList<EObject>();
 		EList<AbstractClass> allAbstractClasses = model.getAllAbstractClasses();
 		for (AbstractClass abstractClass : allAbstractClasses) {
@@ -172,10 +173,16 @@ public class CommonServices {
 	}
 
 	private static void addExternalEObject(String prefix, List<EObject> linkedEObject, EObject abstractClass2) throws Exception {
-		String refPrefix = CommonServices.getPrefixe(abstractClass2);
+		String refPrefix = CommonServices.getPrefix(abstractClass2);
 		if (!refPrefix.equals(prefix)) {
 			System.out.println("# is External : " + prefix + " != " + refPrefix);
 			linkedEObject.add(abstractClass2);
 		}
+	}
+	
+	public static Object OCLEval(EObject context, String body) throws Exception {
+		OCLEvaluator evaluator = new OCLEvaluator();
+		return evaluator.eval(context, body);
+		
 	}
 }

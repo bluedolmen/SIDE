@@ -59,7 +59,6 @@ public class InitializerWizard extends Wizard implements IWorkbenchWizard {
 	 */
 	@Override
 	public void addPages() {
-		// TODO Auto-generated method stub
 		super.addPages();
 		addPage(new InitializerPageWelcome());
 	}
@@ -69,9 +68,9 @@ public class InitializerWizard extends Wizard implements IWorkbenchWizard {
 		try {
 			System.out.println("InitializerWizard.performFinish()"); //$NON-NLS-1$
 			InitializerPageWelcome page = (InitializerPageWelcome) getContainer().getCurrentPage();
-			final String alf_home = page.getFieldValue(InitializerPageWelcome.Fields.alfresco_home.toString());
-			final String alf_ver = page.getFieldValue(InitializerPageWelcome.Fields.alfresco_version.toString());
-			side_gene = Boolean.parseBoolean(page.getFieldValue(InitializerPageWelcome.Fields.generate.toString()));
+			final String alf_home = page.getFieldValueString(InitializerPageWelcome.Fields.alfresco_home.toString());
+			final String alf_ver = page.getFieldValueString(InitializerPageWelcome.Fields.alfresco_version.toString());
+			side_gene = Boolean.parseBoolean(page.getFieldValueString(InitializerPageWelcome.Fields.generate.toString()));
 
 			this.ini = getInitializerRegister(alf_home, alf_ver);
 

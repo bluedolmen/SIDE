@@ -2,8 +2,11 @@ package com.bluexml.side.util.libs.eclipse;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.variables.IStringVariableManager;
@@ -13,6 +16,7 @@ import org.eclipse.debug.ui.StringVariableSelectionDialog;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.AccessibleAdapter;
 import org.eclipse.swt.accessibility.AccessibleEvent;
@@ -27,15 +31,18 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.externaltools.internal.ui.FileSelectionDialog;
+import org.eclipse.ui.model.BaseWorkbenchContentProvider;
+import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 public class RessourcesSelection extends Dialog {
-	
 
 	private Text locationField;
 	private String initialValue = "";
@@ -73,8 +80,8 @@ public class RessourcesSelection extends Dialog {
 		this.locationLabel = locationLabel;
 		this.resourcePath = initialValue;
 	}
-	
-	public void init(String locationLabel, String initialValue, String resource_type) {		
+
+	public void init(String locationLabel, String initialValue, String resource_type) {
 		init(locationLabel, initialValue, RESOURCE_TYPE.getType(resource_type));
 	}
 
@@ -162,8 +169,6 @@ public class RessourcesSelection extends Dialog {
 		return SWTFactory.createPushButton(parent, label, image);
 	}
 
-	
-
 	@SuppressWarnings("restriction")
 	public static void handleWorkspaceLocationButtonSelected(Shell shell, Text locationField) {
 		FileSelectionDialog dialog;
@@ -218,6 +223,36 @@ public class RessourcesSelection extends Dialog {
 		}
 	}
 
+	public static Map<String, IResource> handleWorkspaceMultiIResourceSelection(String title, String message, ViewerFilter filter, Object root) {
+		Map<String, IResource> selection = new TreeMap<String, IResource>();
+
+		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display.getDefault().getActiveShell(), new WorkbenchLabelProvider(), new BaseWorkbenchContentProvider());
+		ets.setBlockOnOpen(true);
+		ets.setAllowMultiple(true);
+		ets.setTitle(title);
+		ets.setMessage(message);
+		
+		ets.setInput(root);
+		ets.setHelpAvailable(false);
+		ets.addFilter(filter);
+
+		if (ElementTreeSelectionDialog.OK == ets.open()) {
+			Object[] result = ets.getResult();
+			for (Object o : result) {
+				IResource file = (IResource) o;
+				String filePath = file.getFullPath().toPortableString();
+				String fileName = file.getName();
+
+				if (filePath != null) {
+					selection.put(fileName, file);
+
+				}
+			}
+		}
+		
+		return selection;
+	}
+
 	/**
 	 * Prompts the user to choose a working directory from the filesystem.
 	 */
@@ -225,6 +260,7 @@ public class RessourcesSelection extends Dialog {
 		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE);
 		dialog.setMessage(StylingUtil.Messages.getString("SelectResources.7"));
 		dialog.setFilterPath(locationField.getText());
+
 		String text = dialog.open();
 		if (text != null) {
 			locationField.setText(text);
@@ -330,19 +366,21 @@ public class RessourcesSelection extends Dialog {
 		dialog.open();
 		return dialog.getVariableExpression();
 	}
-	
+
 	public enum RESOURCE_TYPE {
-		RESOURCE_TYPE_DIRECTORY("Directory"), RESOURCE_TYPE_FILE("File"), RESOURCE_TYPE_STRING("String");
+		RESOURCE_TYPE_DIRECTORY("Directory"), RESOURCE_TYPE_FILE("File"), RESOURCE_TYPE_STRING("String"), RESOURCE_TYPE_IFILE("IFile"), RESOURCE_TYPE_IFILES("IFiles");
 		String code;
+
 		RESOURCE_TYPE(String code) {
-			this.code=code;
+			this.code = code;
 		}
+
 		public String toString() {
 			return code;
 		}
-		
+
 		public static RESOURCE_TYPE getType(String s) {
-			for(RESOURCE_TYPE t : values()) {
+			for (RESOURCE_TYPE t : values()) {
 				if (t.toString().endsWith(s)) {
 					return t;
 				}

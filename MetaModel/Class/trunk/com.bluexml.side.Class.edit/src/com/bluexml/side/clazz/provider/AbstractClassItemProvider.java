@@ -63,6 +63,7 @@ public class AbstractClassItemProvider
 			super.getPropertyDescriptors(object);
 
 			addGeneralizationsPropertyDescriptor(object);
+			addAspectsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -81,6 +82,28 @@ public class AbstractClassItemProvider
 				 getString("_UI_AbstractClass_generalizations_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractClass_generalizations_feature", "_UI_AbstractClass_type"),
 				 ClazzPackage.Literals.ABSTRACT_CLASS__GENERALIZATIONS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Aspects feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAspectsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AbstractClass_aspects_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractClass_aspects_feature", "_UI_AbstractClass_type"),
+				 ClazzPackage.Literals.ABSTRACT_CLASS__ASPECTS,
 				 true,
 				 false,
 				 true,

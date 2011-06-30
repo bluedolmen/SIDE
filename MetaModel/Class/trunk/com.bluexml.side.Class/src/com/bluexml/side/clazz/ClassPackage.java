@@ -174,7 +174,7 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances() -> asSet() -> union(Clazz.allInstances().getInheritedClasses() ->asSet().oclAsType(Clazz)) -> asSet()'"
+	 *        annotation="http://www.bluexml.com/OCL body='getAllAbstractClassesAndReferences() -> select(x | x.oclIsTypeOf(Clazz))'"
 	 * @generated
 	 */
 	EList<Clazz> getAllClassesFromEveryWhere();
@@ -183,7 +183,7 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getAllClassesFromEveryWhere().aspects -> asSet()'"
+	 *        annotation="http://www.bluexml.com/OCL body='getAllAbstractClassesAndReferences() -> select(x | x.oclIsTypeOf(Aspect))'"
 	 * @generated
 	 */
 	EList<Aspect> getAllAspectsFromEveryWhere();
@@ -196,5 +196,23 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	EList<Constraint> getAllConstraints();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='AbstractClass.allInstances().getAllLinkedAbstractClass()'"
+	 * @generated
+	 */
+	EList<AbstractClass> getAllAbstractClassesAndLinked();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='AbstractClass.allInstances().getAllLinkedAbstractClass() -> union(AbstractClass.allInstances().getAssociatedClasses())'"
+	 * @generated
+	 */
+	EList<AbstractClass> getAllAbstractClassesAndReferences();
 		
 } // ClassPackage

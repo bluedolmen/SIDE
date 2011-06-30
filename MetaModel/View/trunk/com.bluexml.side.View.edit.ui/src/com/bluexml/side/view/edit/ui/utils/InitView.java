@@ -1,8 +1,9 @@
 package com.bluexml.side.view.edit.ui.utils;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -19,7 +20,6 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.util.libs.ui.UIUtils;
 import com.bluexml.side.view.AbstractViewOf;
@@ -139,21 +139,19 @@ public class InitView {
 	}
 
 	private static Collection<FieldElement> getViewElementForClass(AbstractClass c, AbstractViewOf av) {
-		Collection<FieldElement> list = new ArrayList<FieldElement>();
+		Map<String, FieldElement> list = new TreeMap<String, FieldElement>();
 		if (c != null) {
 			// Attributes :
 			List<Attribute> atts = null;
-			if (c instanceof Clazz) {
-				atts = ((Clazz) c).getAllAttributes();
-			} else {
-				atts = c.getAllAttributesWithoutAspectsAttributes();
-			}
+
+			atts = c.getAllAttributes();
+
 			for (Attribute a : atts) {
 				FieldElement f = ClassUtils.getField(a, av);
-				list.add(f);
+				list.put(f.getName(), f);
 			}
 		}
-		return list;
+		return list.values();
 	}
 
 }

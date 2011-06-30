@@ -7,6 +7,7 @@ import java.util.Map;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
@@ -18,7 +19,7 @@ import com.bluexml.side.util.libs.eclipse.pages.PageControlsHelper;
 
 public abstract class AbstractFieldsPage extends WizardPage implements CheckablePage {
 	PageControlsHelper controlHelper;
-	protected Map<String, String> values = new HashMap<String, String>();
+	protected Map<String, Object> values = new HashMap<String, Object>();
 
 	protected AbstractFieldsPage(String pageName) {
 		super(pageName);
@@ -29,13 +30,23 @@ public abstract class AbstractFieldsPage extends WizardPage implements Checkable
 		super(pageName, title, titleImage);
 	}
 
-	public String getFieldValue(String fieldId) {
+	public Object getFieldValue(String fieldId) {
 		return values.get(fieldId);
+	}
+
+	public String getFieldValueString(String fieldId) {
+		Object object = values.get(fieldId);
+		if (object != null) {
+			return object.toString();
+		}
+		return null;
 	}
 
 	public void createControl(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NULL);
+		composite.setLayout(new GridLayout());
 		composite.setLayout(StylingUtil.layout);
+		
 		setControl(composite);
 
 		createFieldsControls(composite);
@@ -63,7 +74,7 @@ public abstract class AbstractFieldsPage extends WizardPage implements Checkable
 	}
 
 	public void checkPageComplite() {
-		for (String s : values.values()) {
+		for (Object s : values.values()) {
 			if (s == null) {
 				setPageComplete(false);
 				return;
@@ -74,5 +85,9 @@ public abstract class AbstractFieldsPage extends WizardPage implements Checkable
 
 	protected void createResourceControl(Composite composite, final String label, final String id, RESOURCE_TYPE type) {
 		controlHelper.createResourceControl(composite, label, id, type, values);
+	}
+
+	protected void createResourcesControl(Composite composite, final String label, final String id, RESOURCE_TYPE type, Object root, String fileExtFilter) {
+		controlHelper.createResourcesControl(composite, label, id, type, values, root, fileExtFilter);
 	}
 }

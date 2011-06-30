@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -121,16 +122,16 @@ public class FileHelper {
 
 	public static boolean deleteFile(File f, boolean failonError) throws Exception {
 		boolean status = true;
-		if (f.isDirectory()) {			
+		if (f.isDirectory()) {
 			File[] fl = f.listFiles();
 			for (int i = 0; i < fl.length; i++) {
 				status &= deleteFile(fl[i], failonError);
-			}			
+			}
 		}
 		if (f.exists() && f.canWrite()) {
 			return f.delete() && status;
 		} else if (failonError) {
-			throw new Exception("file can't be deleted: "+f);
+			throw new Exception("file can't be deleted: " + f);
 		}
 		return false;
 	}
@@ -149,6 +150,18 @@ public class FileHelper {
 			allFiles.add(folder);
 		} else {
 			for (File f : folder.listFiles()) {
+				allFiles.addAll(listAll(f));
+			}
+		}
+		return allFiles;
+	}
+
+	public static List<File> listAll(File folder, FilenameFilter filter) {
+		List<File> allFiles = new ArrayList<File>();
+		if (folder.isFile()) {
+			allFiles.add(folder);
+		} else {
+			for (File f : folder.listFiles(filter)) {
 				allFiles.addAll(listAll(f));
 			}
 		}

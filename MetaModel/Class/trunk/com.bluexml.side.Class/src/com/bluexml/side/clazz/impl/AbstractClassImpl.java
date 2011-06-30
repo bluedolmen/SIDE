@@ -26,6 +26,7 @@ import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
 
 import com.bluexml.side.clazz.AbstractClass;
+import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.Attribute;
@@ -42,6 +43,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.impl.AbstractClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AbstractClassImpl#getGeneralizations <em>Generalizations</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.AbstractClassImpl#getAspects <em>Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,6 +69,16 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @ordered
 	 */
 	protected EList<AbstractClass> generalizations;
+
+	/**
+	 * The cached value of the '{@link #getAspects() <em>Aspects</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAspects()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Aspect> aspects;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -109,6 +121,18 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 			generalizations = new EObjectResolvingEList<AbstractClass>(AbstractClass.class, this, ClazzPackage.ABSTRACT_CLASS__GENERALIZATIONS);
 		}
 		return generalizations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Aspect> getAspects() {
+		if (aspects == null) {
+			aspects = new EObjectResolvingEList<Aspect>(Aspect.class, this, ClazzPackage.ABSTRACT_CLASS__ASPECTS);
+		}
+		return aspects;
 	}
 
 	/**
@@ -228,46 +252,9 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Attribute> getAllInheritedAttributes() {
-		if (getAllInheritedAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(4);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getAllInheritedAttributesBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllInheritedAttributesBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Attribute>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllInheritedAttributes <em>Get All Inherited Attributes</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAllInheritedAttributes
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getAllInheritedAttributesBodyOCL;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Association> getSourceAssociations() {
 		if (getSourceAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(6);
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(4);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -304,7 +291,7 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 */
 	public boolean isSource(Association asso) {
 		if (isSourceBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(7);
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(5);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -343,7 +330,7 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 */
 	public boolean isTarget(Association asso) {
 		if (isTargetBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(8);
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(6);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -382,7 +369,7 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 */
 	public EList<Association> getTargetAssociations() {
 		if (getTargetAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(9);
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(7);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -419,7 +406,7 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 */
 	public EList<AssociationEnd> getSourceAssociationEnds() {
 		if (getSourceAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(10);
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(8);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -456,7 +443,7 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 */
 	public EList<AssociationEnd> getTargetAssociationEnds() {
 		if (getTargetAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(11);
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(9);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -530,7 +517,7 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 */
 	public EList<Association> getAllSourceAssociations() {
 		if (getAllSourceAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(12);
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(10);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -567,7 +554,7 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 */
 	public EList<Association> getAllTargetAssociations() {
 		if (getAllTargetAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(13);
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(11);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -602,22 +589,22 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractClass> getLinkedClasses() {
-		if (getLinkedClassesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(14);
+	public EList<AbstractClass> getAssociatedClasses() {
+		if (getAssociatedClassesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(12);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String body = ocl.getDetails().get("body");
 			
 			try {
-				getLinkedClassesBodyOCL = helper.createQuery(body);
+				getAssociatedClassesBodyOCL = helper.createQuery(body);
 			} catch (ParserException e) {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getLinkedClassesBodyOCL);
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAssociatedClassesBodyOCL);
 	
 		@SuppressWarnings("unchecked")
 		Collection<AbstractClass> result = (Collection<AbstractClass>) query.evaluate(this);
@@ -626,13 +613,13 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * The parsed OCL expression for the body of the '{@link #getLinkedClasses <em>Get Linked Classes</em>}' operation.
+	 * The parsed OCL expression for the body of the '{@link #getAssociatedClasses <em>Get Associated Classes</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLinkedClasses
+	 * @see #getAssociatedClasses
 	 * @generated
 	 */
-	private static OCLExpression<EClassifier> getLinkedClassesBodyOCL;
+	private static OCLExpression<EClassifier> getAssociatedClassesBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -641,7 +628,7 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 */
 	public EList<AssociationEnd> getAllSourceAssociationEnds() {
 		if (getAllSourceAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(15);
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(13);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -678,7 +665,7 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 */
 	public EList<AssociationEnd> getAllTargetAssociationEnds() {
 		if (getAllTargetAssociationEndsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(16);
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(14);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -713,22 +700,22 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Attribute> getAllAttributesWithoutAspectsAttributes() {
-		if (getAllAttributesWithoutAspectsAttributesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(5);
+	public EList<Attribute> getAllAttributes() {
+		if (getAllAttributesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(15);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String body = ocl.getDetails().get("body");
 			
 			try {
-				getAllAttributesWithoutAspectsAttributesBodyOCL = helper.createQuery(body);
+				getAllAttributesBodyOCL = helper.createQuery(body);
 			} catch (ParserException e) {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllAttributesWithoutAspectsAttributesBodyOCL);
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllAttributesBodyOCL);
 	
 		@SuppressWarnings("unchecked")
 		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
@@ -737,13 +724,272 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllAttributesWithoutAspectsAttributes <em>Get All Attributes Without Aspects Attributes</em>}' operation.
+	 * The parsed OCL expression for the body of the '{@link #getAllAttributes <em>Get All Attributes</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAllAttributesWithoutAspectsAttributes
+	 * @see #getAllAttributes
 	 * @generated
 	 */
-	private static OCLExpression<EClassifier> getAllAttributesWithoutAspectsAttributesBodyOCL;
+	private static OCLExpression<EClassifier> getAllAttributesBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Attribute> getClassAndAspectAttributes() {
+		if (getClassAndAspectAttributesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(16);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getClassAndAspectAttributesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getClassAndAspectAttributesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Attribute>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getClassAndAspectAttributes <em>Get Class And Aspect Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassAndAspectAttributes
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getClassAndAspectAttributesBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Attribute> getAspectAttributes() {
+		if (getAspectAttributesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(17);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAspectAttributesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAspectAttributesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Attribute>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAspectAttributes <em>Get Aspect Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAspectAttributes
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAspectAttributesBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Attribute> getAllInheritedClassAndAspectAttributes() {
+		if (getAllInheritedClassAndAspectAttributesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(18);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllInheritedClassAndAspectAttributesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllInheritedClassAndAspectAttributesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Attribute>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllInheritedClassAndAspectAttributes <em>Get All Inherited Class And Aspect Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllInheritedClassAndAspectAttributes
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllInheritedClassAndAspectAttributesBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Aspect> getAllInheritedAspects() {
+		if (getAllInheritedAspectsBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(19);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllInheritedAspectsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllInheritedAspectsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Aspect> result = (Collection<Aspect>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Aspect>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllInheritedAspects <em>Get All Inherited Aspects</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllInheritedAspects
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllInheritedAspectsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Aspect> getAllLinkedAspects() {
+		if (getAllLinkedAspectsBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(22);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllLinkedAspectsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllLinkedAspectsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Aspect> result = (Collection<Aspect>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Aspect>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllLinkedAspects <em>Get All Linked Aspects</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllLinkedAspects
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllLinkedAspectsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AbstractClass> getAllLinkedAbstractClass() {
+		if (getAllLinkedAbstractClassBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(20);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllLinkedAbstractClassBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllLinkedAbstractClassBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<AbstractClass> result = (Collection<AbstractClass>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<AbstractClass>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllLinkedAbstractClass <em>Get All Linked Abstract Class</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllLinkedAbstractClass
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllLinkedAbstractClassBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Clazz> getAllLinkedClasses() {
+		if (getAllLinkedClassesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(21);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllLinkedClassesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllLinkedClassesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllLinkedClasses <em>Get All Linked Classes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllLinkedClasses
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllLinkedClassesBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -771,6 +1017,8 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 				return getAttributes();
 			case ClazzPackage.ABSTRACT_CLASS__GENERALIZATIONS:
 				return getGeneralizations();
+			case ClazzPackage.ABSTRACT_CLASS__ASPECTS:
+				return getAspects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -792,6 +1040,10 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 				getGeneralizations().clear();
 				getGeneralizations().addAll((Collection<? extends AbstractClass>)newValue);
 				return;
+			case ClazzPackage.ABSTRACT_CLASS__ASPECTS:
+				getAspects().clear();
+				getAspects().addAll((Collection<? extends Aspect>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -810,6 +1062,9 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 			case ClazzPackage.ABSTRACT_CLASS__GENERALIZATIONS:
 				getGeneralizations().clear();
 				return;
+			case ClazzPackage.ABSTRACT_CLASS__ASPECTS:
+				getAspects().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -826,6 +1081,8 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 				return attributes != null && !attributes.isEmpty();
 			case ClazzPackage.ABSTRACT_CLASS__GENERALIZATIONS:
 				return generalizations != null && !generalizations.isEmpty();
+			case ClazzPackage.ABSTRACT_CLASS__ASPECTS:
+				return aspects != null && !aspects.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

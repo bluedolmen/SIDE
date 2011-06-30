@@ -47,6 +47,13 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<parent>bxcm:content</parent>
 				<%}%>
 			<%}%>
+			
+			<archive><%if (metainfo[key.equalsIgnoreCase("archive")].nSize()>0){%>true<%}else{%>false<%}%></archive>
+			
+			
+			
+			
+			
 			<%if (attributes.nSize() > 0){%>
 			<!-- Properties -->
 			<properties>
@@ -60,7 +67,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<%}%>
 					<type><%getPropertyType()%></type>
 					<%if (metainfo[key.equalsIgnoreCase("required")].nSize()>0){%>
-					<mandatory>true</mandatory>
+					<mandatory <%if (metainfo[key.equalsIgnoreCase("enforced")].nSize()>0){%>enforced="true"<%}%>>true</mandatory>
 					<%}%>
 					<%if (metainfo[key.equalsIgnoreCase("multiple")].nSize()>0){%>
 					<multiple>true</multiple>
@@ -72,9 +79,9 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<%if (metainfo[key.equalsIgnoreCase("propertySearched")].nSize() > 0 && metainfo[key.equalsIgnoreCase("propertySearched")].nFirst().value.equalsIgnoreCase("true")
 						|| unique){%>
 		              <index enabled="true">
-		                 <atomic>true</atomic>
-		                 <stored>false</stored>
-		                 <tokenised>false</tokenised>
+		              	 <atomic><%if (metainfo[key.equalsIgnoreCase("index.atomic")].nSize()>0){%>true<%}else{%>false<%}%></atomic>
+		              	 <stored><%if (metainfo[key.equalsIgnoreCase("index.stored")].nSize()>0){%>true<%}else{%>false<%}%></stored>
+		              	 <tokenised><%if (metainfo[key.equalsIgnoreCase("index.tokenised")].nSize()>0){%><%metainfo[key.equalsIgnoreCase("index.tokenised")].nFirst().value%><%}%></tokenised>
 		              </index>
 		            <%}else{%>					
 					  <index enabled="false"/>
@@ -107,7 +114,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<%if (metainfo[key.equalsIgnoreCase("regular-expression")].nSize()>0) {%>
 		                 <constraint type="REGEX">
         		            <parameter name="expression"><value><%metainfo[key.equalsIgnoreCase("regular-expression")].nFirst().value%></value></parameter>
-                		    <parameter name="requiresMatch"><value>true</value></parameter>
+                		    <parameter name="requiresMatch"><value><%if (metainfo[key.equalsIgnoreCase("regular-expression.match")].nSize()>0){%>true<%}else{%>false<%}%></value></parameter>
 		                 </constraint>
 					<%}%>
 					
@@ -130,7 +137,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<title><%getRoleOrTitleFromSource()%></title>
 					<source>
 						<%if (name != null && name != ""){%>
-						<role><%getPrefixe()%>:<%name%></role>
+						<role><%getPrefix()%>:<%name%></role>
 						<%}%>
 						<mandatory><%if (isMandatory()){%>true<%}else{%>false<%}%></mandatory>
 						<many><%if (isMany()){%>true<%}else{%>false<%}%></many>						
@@ -138,11 +145,17 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<target>
 						<class><%getOpposite().linkedClass.getPrefixedQName()%></class>
 						<%if (getOpposite().name != null && getOpposite().name != ""){%>
-						<role><%getPrefixe()%>:<%getOpposite().name%></role>
+						<role><%getPrefix()%>:<%getOpposite().name%></role>
 						<%}%>
 						<mandatory><%if (getOpposite().isMandatory()){%>true<%}else{%>false<%}%></mandatory>
 						<many><%if (getOpposite().isMany()){%>true<%}else{%>false<%}%></many>						
 					</target>
+					<%if (eContainer().getAssociationType().equalsIgnoreCase("child-association")){%>
+					<duplicate><%if (metainfo[key.equalsIgnoreCase("duplicate")].nSize()>0){%>true<%}else{%>false<%}%></duplicate>
+					<propagateTimestamps><%if (metainfo[key.equalsIgnoreCase("propagateTimestamps")].nSize()>0){%>true<%}else{%>false<%}%></propagateTimestamps>
+					<%}%>
+					
+					
 				</<%eContainer().getAssociationType()%>>							
 			<%}%>
 			</associations>			

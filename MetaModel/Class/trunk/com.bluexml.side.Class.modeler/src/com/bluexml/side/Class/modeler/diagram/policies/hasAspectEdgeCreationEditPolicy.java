@@ -55,11 +55,11 @@ public class hasAspectEdgeCreationEditPolicy extends AbstractEdgeCreationEditPol
 
 	/**
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkSource(org.topcased.modeler.di.model.GraphElement)
-	 * @generated
+	 * @_generated
 	 */
 	protected boolean checkSource(GraphElement source) {
 		EObject object = Utils.getElement(source);
-		if (object instanceof com.bluexml.side.clazz.Clazz) {
+		if (object instanceof com.bluexml.side.clazz.AbstractClass) {
 			return true;
 		}
 		return false;
@@ -73,7 +73,7 @@ public class hasAspectEdgeCreationEditPolicy extends AbstractEdgeCreationEditPol
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Aspect) {
+		if (sourceObject instanceof com.bluexml.side.clazz.AbstractClass && targetObject instanceof com.bluexml.side.clazz.Aspect) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
@@ -97,7 +97,7 @@ public class hasAspectEdgeCreationEditPolicy extends AbstractEdgeCreationEditPol
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Aspect) {
+		if (sourceObject instanceof com.bluexml.side.clazz.AbstractClass && targetObject instanceof com.bluexml.side.clazz.Aspect) {
 			return new SourceTargetData(false, false, SourceTargetData.NONE, null, null, null, null, null, "aspects", null, null);
 		}
 		return null;

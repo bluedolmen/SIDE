@@ -159,7 +159,7 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 //		createViewTab(tabFolder);
 //		createLayoutTab(tabFolder);
 //		createAspectOrganizationTabItem(tabFolder);
-//		createOptionsTab(tabFolder);
+		createOptionsTab(tabFolder);
 		createDocumentationTab(tabFolder);
 	}
 
