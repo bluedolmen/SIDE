@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: com.bluexml.side.Class
 Bundle-SymbolicName: com.bluexml.side.Class; singleton:=true
-Bundle-Version: 1.0.67.v25818-20110624
+Bundle-Version: 1.0.68.v25952-20110701
 Bundle-ClassPath: .
 Bundle-Vendor: www.bluexml.com
 Bundle-Localization: plugin
