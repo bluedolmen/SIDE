@@ -44,7 +44,6 @@ public abstract class AbstractFieldsPage extends WizardPage implements Checkable
 
 	public void createControl(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NULL);
-		composite.setLayout(new GridLayout());
 		composite.setLayout(StylingUtil.layout);
 		
 		setControl(composite);
@@ -87,7 +86,7 @@ public abstract class AbstractFieldsPage extends WizardPage implements Checkable
 		controlHelper.createResourceControl(composite, label, id, type, values);
 	}
 
-	protected void createResourcesControl(Composite composite, final String label, final String id, RESOURCE_TYPE type, Object root, String fileExtFilter) {
-		controlHelper.createResourcesControl(composite, label, id, type, values, root, fileExtFilter);
+	protected Composite createResourcesControl(Composite composite, final String label, final String id, RESOURCE_TYPE type, Object root, String fileExtFilter) {
+		return controlHelper.createResourcesControl(composite, label, id, type, values, root, fileExtFilter);
 	}
 }

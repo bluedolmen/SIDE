@@ -63,6 +63,7 @@ public class PageControlsHelper {
 
 	public Button createBooleanFieldControl(Composite composite, final String label, final String id, boolean initialValue, final Map<String, Object> values) {
 		values.put(id, Boolean.toString(initialValue));
+
 		Label artifactIdLabel = new Label(composite, SWT.NONE);
 		artifactIdLabel.setText(label);
 		final Button button = new Button(composite, SWT.CHECK);
@@ -73,6 +74,12 @@ public class PageControlsHelper {
 				page.checkPageComplite();
 			}
 		});
+		GridData newLayoutData = StylingUtil.getNewLayoutData();
+		newLayoutData.horizontalSpan = 3;
+		button.setBackground(StylingUtil.getColor(100, 50, 50));
+
+		button.setLayoutData(newLayoutData);
+
 		return button;
 	}
 
@@ -84,6 +91,7 @@ public class PageControlsHelper {
 		if (!values.containsKey(id)) {
 			values.put(id, null);
 		}
+
 		Label archetypeIdLabel = new Label(composite, SWT.NONE);
 		archetypeIdLabel.setText(label);
 		final Combo archetypeIdControl = new Combo(composite, SWT.BORDER | SWT.READ_ONLY);
@@ -112,10 +120,7 @@ public class PageControlsHelper {
 		});
 	}
 
-	
 	public void createResourceControl(final Composite composite, final String label, final String id, RESOURCE_TYPE type, final Map<String, Object> values) {
-//		final Composite composite_2 = new Composite(composite, SWT.NONE);
-//		composite_2.setLayout(StylingUtil.getLayout());
 		final Text t = createTextFieldControl(composite, label, id, values);
 		GridData gd = StylingUtil.getNewLayoutData();
 		gd.horizontalSpan = 2;
@@ -152,38 +157,41 @@ public class PageControlsHelper {
 
 		}
 		b.addSelectionListener(listener_file);
-//		Label l = new Label(composite, SWT.NONE);
+		//		Label l = new Label(composite, SWT.NONE);
 	}
-	
-	public void createResourcesControl(final Composite composite, final String label, final String id, RESOURCE_TYPE type, final Map<String, Object> values, final Object root, final String fileExtFilter) {
+
+	public Composite createResourcesControl(final Composite composite, final String label, final String id, RESOURCE_TYPE type, final Map<String, Object> values, final Object root, final String fileExtFilter) {
 		if (!values.containsKey(id)) {
 			values.put(id, null);
 		}
-		Composite composite_2 = new Composite(composite, SWT.NONE);
-		//		composite_2.setSize(771, 65);
-		composite_2.setLayout(new GridLayout(4, false));
+		Composite resourcesControl = new Composite(composite, SWT.NONE);
+		resourcesControl.setLayout(new GridLayout(4, false));
+		// presume composite use Styling.layout so set GridData
+		GridData newLayoutData = StylingUtil.getNewLayoutData();
+		newLayoutData.horizontalSpan = 4;
+		resourcesControl.setLayoutData(newLayoutData);
 
-		final org.eclipse.swt.widgets.List modelList = new org.eclipse.swt.widgets.List(composite_2, SWT.BORDER | SWT.V_SCROLL);
+		final org.eclipse.swt.widgets.List modelList = new org.eclipse.swt.widgets.List(resourcesControl, SWT.BORDER | SWT.V_SCROLL);
 		GridData gd_list = new GridData(SWT.FILL, SWT.TOP, true, false, 1, 2);
 		gd_list.heightHint = 100;
 		gd_list.minimumWidth = 100;
 		modelList.setLayoutData(gd_list);
 
-		Button btnAdd = new Button(composite_2, SWT.NONE);
+		Button btnAdd = new Button(resourcesControl, SWT.NONE);
 		btnAdd.setText("add");
 
-		Composite composite_3 = new Composite(composite_2, SWT.NONE);
+		Composite composite_3 = new Composite(resourcesControl, SWT.NONE);
 		composite_3.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
 
-		Composite composite_1 = new Composite(composite_2, SWT.NONE);
+		Composite composite_1 = new Composite(resourcesControl, SWT.NONE);
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 2));
 
-		Button btnRemove = new Button(composite_2, SWT.NONE);
+		Button btnRemove = new Button(resourcesControl, SWT.NONE);
 		btnRemove.setText("remove");
 
-		new Label(composite_2, SWT.NONE);
-		new Label(composite_2, SWT.NONE);
-		new Label(composite_2, SWT.NONE);
+		new Label(resourcesControl, SWT.NONE);
+		new Label(resourcesControl, SWT.NONE);
+		new Label(resourcesControl, SWT.NONE);
 
 		SelectionListener listener = new SelectionListener() {
 			public void widgetSelected(SelectionEvent e) {
@@ -195,7 +203,7 @@ public class PageControlsHelper {
 						if (element instanceof org.eclipse.core.resources.IFile) {
 							IFile file = (IFile) element;
 							String fext = file.getFileExtension();
-							if (fext.equals(fileExtFilter)) {
+							if (fileExtFilter == null || fext.equals(fileExtFilter)) {
 								return true;
 							}
 						} else {
@@ -245,8 +253,7 @@ public class PageControlsHelper {
 		};
 		btnAdd.addSelectionListener(listener);
 		btnRemove.addSelectionListener(listener2);
-
+		return resourcesControl;
 	}
 
-	
 }

@@ -7,7 +7,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -32,32 +31,7 @@ public class WorkbenchPreferencePage1 extends AbstractFieldsPreferencePage imple
 
 	}
 
-	//	protected Control createContents(Composite parent) {
-	//		Composite composite = createComposite(parent);
-	//		createFieldsControls(composite);
-	//		return composite;
-	//	}
-
-	/**
-	 * Creates the composite which will contain all the preference controls for
-	 * this page.
-	 * 
-	 * @param parent
-	 *            the parent composite
-	 * @return the composite for this page
-	 */
-	protected Composite createComposite(Composite parent) {
-		Composite composite = new Composite(parent, SWT.NONE);
-		GridData data = new GridData(GridData.FILL_BOTH);
-		composite.setLayoutData(data);
-		composite.setFont(parent.getFont());
-		GridLayout layout = new GridLayout();
-		layout.marginWidth = 0;
-		layout.marginHeight = 0;
-		layout.verticalSpacing = 10;
-		composite.setLayout(layout);
-		return composite;
-	}
+	
 
 	public boolean performOk() {
 		IPreferenceStore store = getPreferenceStore();

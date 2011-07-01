@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.eclipse.swt.widgets.Composite;
 
 import com.bluexml.side.clazz.edit.ui.Messages;
+import com.bluexml.side.util.libs.eclipse.StylingUtil;
 import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
 import com.bluexml.side.util.libs.eclipse.wizards.AbstractFieldsPage;
 
@@ -18,7 +19,7 @@ public class InitializerPageWelcome extends AbstractFieldsPage {
 	}
 
 	public void createFieldsControls(Composite composite) {
-		//		createRessourceControl(composite, label, id, type);
+		
 		createResourceControl(composite, Messages.InitializerPageWelcome_2, Fields.alfresco_home.toString(), RESOURCE_TYPE.RESOURCE_TYPE_DIRECTORY);
 
 		ArrayList<String> allowedValues = new ArrayList<String>();

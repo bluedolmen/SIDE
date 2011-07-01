@@ -17,8 +17,7 @@ public class StylingUtil {
 	static final public Color color = new Color(Display.getCurrent(), 255, 255, 255);
 
 	public static GridData getNewLayoutData() {
-		GridData gridData = new GridData(SWT.FILL, SWT.FILL, false, false);
-		gridData = new GridData(GridData.FILL_HORIZONTAL);
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		return gridData;
 	}
 
@@ -42,9 +41,19 @@ public class StylingUtil {
 		return textField;
 	}
 
-	static public GridLayout getLayout() {
+	static private GridLayout getLayout() {
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 4;
 		return layout;
+	}
+
+	public static Composite getDefaultComposite(Composite composite) {
+		Composite textFieldControl = new Composite(composite, SWT.NONE);
+		textFieldControl.setLayout(StylingUtil.layout);
+		return textFieldControl;
+	}
+	
+	public static Color getColor(int r,int g,int b) {
+		return new Color(Display.getCurrent(), r, g, b);
 	}
 }

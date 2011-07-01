@@ -225,7 +225,10 @@ public class RessourcesSelection extends Dialog {
 
 	public static Map<String, IResource> handleWorkspaceMultiIResourceSelection(String title, String message, ViewerFilter filter, Object root) {
 		Map<String, IResource> selection = new TreeMap<String, IResource>();
-
+		if (root == null) {
+			root = ResourcesPlugin.getWorkspace().getRoot();
+		}
+		
 		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display.getDefault().getActiveShell(), new WorkbenchLabelProvider(), new BaseWorkbenchContentProvider());
 		ets.setBlockOnOpen(true);
 		ets.setAllowMultiple(true);
@@ -249,7 +252,7 @@ public class RessourcesSelection extends Dialog {
 				}
 			}
 		}
-		
+
 		return selection;
 	}
 
