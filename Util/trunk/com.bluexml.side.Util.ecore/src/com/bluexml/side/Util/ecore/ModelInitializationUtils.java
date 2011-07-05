@@ -19,7 +19,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.GraphicalViewer;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
 import org.topcased.modeler.di.model.Diagram;
@@ -32,6 +36,9 @@ import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.tools.DiagramFileInitializer;
 import org.topcased.modeler.tools.Importer;
 import org.topcased.modeler.utils.Utils;
+
+import com.bluexml.side.util.libs.eclipse.EclipseUtils;
+import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class ModelInitializationUtils {
 
@@ -63,13 +70,16 @@ public class ModelInitializationUtils {
 	 */
 	public static EList<EObject> openModel(IFile model) throws IOException {
 		ResourceSetImpl set = new ResourceSetImpl();
-		Resource inputResource = set.createResource(URI.createFileURI(model.getRawLocation().toFile().getCanonicalPath()));
+//		String canonicalPath = model.getRawLocation().toFile().getCanonicalPath();
+//		URI createFileURI = URI.createFileURI(canonicalPath);
+		URI uri = URI.createPlatformResourceURI(model.getFullPath().toString(), true);
+		Resource inputResource = set.createResource(uri);
 		inputResource.load(null);
 		EList<EObject> l = inputResource.getContents();
 		return l;
 	}
 
-	public static Resource createDiagramFile(EObject root, String diagramId, String name, IFile diagramFile) throws IOException {
+	public static Resource createDiagramFile(final EObject root, String diagramId, String name, final IFile diagramFile) throws IOException {
 		// retrieve the Diagrams and the DiagramInterchange factory singletons
 		DiagramsFactory factory = DiagramsFactory.eINSTANCE;
 		DiagramInterchangeFactory diFactory = DiagramInterchangeFactory.eINSTANCE;
@@ -95,13 +105,19 @@ public class ModelInitializationUtils {
 
 		// create the diagram file and add the created model into
 		URI fileURI = URI.createPlatformResourceURI(URI.decode(diagramFile.getFullPath().toString()), false);
-		Resource resource = rsrcSet.createResource(fileURI);
+		final Resource resource = rsrcSet.createResource(fileURI);
 		resource.getContents().add(diagrams);
 
 		// Save the resource contents to the file system.
 		resource.save(Collections.EMPTY_MAP);
 
-		importObjects(resource, root, diagramFile);
+		Display display = UIUtils.getDisplay();
+		// import objects
+		display.syncExec(new Runnable() {
+			public void run() {
+				importObjects(resource, root, diagramFile);
+			}
+		});
 
 		return resource;
 	}
@@ -187,7 +203,11 @@ public class ModelInitializationUtils {
 			// Open the newly created model
 			try {
 
-				IEditorPart part = IDE.openEditor(ModelerPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage(), file, true);
+				ModelerPlugin default1 = ModelerPlugin.getDefault();
+				IWorkbench workbench = default1.getWorkbench();
+				IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+				IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+				IEditorPart part = IDE.openEditor(activePage, file, true);
 				if (part instanceof Modeler) {
 					modeler = (Modeler) part;
 				}

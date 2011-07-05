@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Reverse
+Bundle-Name: Reverse From Alfresco content models
 Bundle-SymbolicName: com.bluexml.side.Class.alfresco.reverse;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: com.bluexml.side.clazz.alfresco.reverse.Activator

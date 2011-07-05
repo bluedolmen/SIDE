@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,53 +66,79 @@ public class FileHelper {
 				copyFiles(src1, dest1, override, report);
 			}
 		} else {
+			String srcname = src.getName();
 			// This was not a directory, so lets just copy the file
-			FileInputStream fin = null;
-			FileOutputStream fout = null;
-			byte[] buffer = new byte[4096]; // Buffer 4K at a time (you can
-			// change this).
-			int bytesRead;
-			try {
-				// open the files for input and output
-				fin = new FileInputStream(src);
+			FileInputStream fin = new FileInputStream(src);
+			copyStreamToFile(fin, srcname, dest, override, report);
+		}
+	}
 
-				// dest can be a file or a folder
-				if (dest.isDirectory()) {
-					// copy the file as child of dest
-					// compute the new filePath
-					dest = new File(dest.getAbsolutePath() + File.separator + src.getName());
-				}
+	public static void copyStreamToFile(InputStream input, String srcFilename, File dest, boolean override, StringWriter report) throws IOException {
+		FileOutputStream fout = null;
+		byte[] buffer = new byte[4096]; // Buffer 4K at a time (you can
+		// change this).
+		int bytesRead;
 
-				if (!dest.exists() || override) {
-					// create parents before create the file if needed
-					dest.getParentFile().mkdirs();
-					// dest do not exist or override is allowed
-					// while bytesRead indicates a successful read, lets
-					// write...
-					fout = new FileOutputStream(dest);
-					while ((bytesRead = fin.read(buffer)) >= 0) {
-						fout.write(buffer, 0, bytesRead);
-					}
-				}
+		try {
+			// open the files for input and output
 
-			} catch (IOException e) { // Error copying file...
-				IOException wrapper = new IOException("copyFiles: Unable to copy file: " + src.getAbsolutePath() + "to" + dest.getAbsolutePath() + ".");
-				wrapper.initCause(e);
-				wrapper.setStackTrace(e.getStackTrace());
-				throw wrapper;
-			} finally { // Ensure that the files are closed (if they were open).
-				if (fin != null) {
-					fin.close();
-				}
-				if (fout != null) {
-					fout.close();
+			// dest can be a file or a folder
+			if (dest.isDirectory()) {
+				// copy the file as child of dest
+				// compute the new filePath
+
+				dest = new File(dest.getAbsolutePath() + File.separator + srcFilename);
+			}
+
+			if (!dest.exists() || override) {
+				// create parents before create the file if needed
+				dest.getParentFile().mkdirs();
+				// dest do not exist or override is allowed
+				// while bytesRead indicates a successful read, lets
+				// write...
+				fout = new FileOutputStream(dest);
+				while ((bytesRead = input.read(buffer)) >= 0) {
+					fout.write(buffer, 0, bytesRead);
 				}
 			}
-			// report action to writer
-			if (report != null) {
-				report.write(dest.toString());
+
+		} catch (IOException e) { // Error copying file...
+			IOException wrapper = new IOException("copyFiles: Unable to copy file: " + srcFilename + "to" + dest.getAbsolutePath() + ".");
+			wrapper.initCause(e);
+			wrapper.setStackTrace(e.getStackTrace());
+			throw wrapper;
+		} finally { // Ensure that the files are closed (if they were open).
+			if (input != null) {
+				input.close();
+			}
+			if (fout != null) {
+				fout.close();
 			}
 		}
+		// report action to writer
+		if (report != null) {
+			report.write(dest.toString());
+		}
+	}
+
+	public static File getFileFromCP(Class<?> context, String path) throws URISyntaxException {
+		URL resource = context.getClassLoader().getResource(path);
+		//		URL resource = context.getResource(path);
+		System.out.println("URL :" + resource);
+		InputStream resourceAsStream = context.getResourceAsStream(path);
+		System.out.println("Stream :" + resourceAsStream);
+		if (resourceAsStream != null) {
+			try {
+				resourceAsStream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		URI uri = resource.toURI();
+		File f = new File(uri);
+		return f;
 	}
 
 	public static void copyFiles(File src, File dest, boolean override) throws IOException {

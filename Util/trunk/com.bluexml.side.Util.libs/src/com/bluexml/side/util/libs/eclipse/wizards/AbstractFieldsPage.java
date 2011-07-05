@@ -7,7 +7,6 @@ import java.util.Map;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
@@ -33,11 +32,20 @@ public abstract class AbstractFieldsPage extends WizardPage implements Checkable
 	public Object getFieldValue(String fieldId) {
 		return values.get(fieldId);
 	}
+	
 
 	public String getFieldValueString(String fieldId) {
 		Object object = values.get(fieldId);
 		if (object != null) {
 			return object.toString();
+		}
+		return null;
+	}
+	
+	public Boolean getFieldValueBoolean(String fieldId) {
+		Object object = values.get(fieldId);
+		if (object != null) {
+			return Boolean.parseBoolean(object.toString());
 		}
 		return null;
 	}

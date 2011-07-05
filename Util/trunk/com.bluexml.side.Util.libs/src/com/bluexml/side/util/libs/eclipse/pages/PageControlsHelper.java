@@ -64,8 +64,6 @@ public class PageControlsHelper {
 	public Button createBooleanFieldControl(Composite composite, final String label, final String id, boolean initialValue, final Map<String, Object> values) {
 		values.put(id, Boolean.toString(initialValue));
 
-		Label artifactIdLabel = new Label(composite, SWT.NONE);
-		artifactIdLabel.setText(label);
 		final Button button = new Button(composite, SWT.CHECK);
 		button.setSelection(initialValue);
 		button.addSelectionListener(new SelectionAdapter() {
@@ -74,12 +72,12 @@ public class PageControlsHelper {
 				page.checkPageComplite();
 			}
 		});
+
 		GridData newLayoutData = StylingUtil.getNewLayoutData();
 		newLayoutData.horizontalSpan = 3;
-		button.setBackground(StylingUtil.getColor(100, 50, 50));
-
-		button.setLayoutData(newLayoutData);
-
+		Label artifactIdLabel = new Label(composite, SWT.NONE);
+		artifactIdLabel.setText(label);
+		artifactIdLabel.setLayoutData(newLayoutData);
 		return button;
 	}
 
@@ -170,6 +168,12 @@ public class PageControlsHelper {
 		GridData newLayoutData = StylingUtil.getNewLayoutData();
 		newLayoutData.horizontalSpan = 4;
 		resourcesControl.setLayoutData(newLayoutData);
+
+		Label labelL = new Label(resourcesControl, SWT.NONE);
+		GridData layoutData = new GridData();
+		layoutData.horizontalSpan = 4;
+		labelL.setLayoutData(layoutData);
+		labelL.setText(label);
 
 		final org.eclipse.swt.widgets.List modelList = new org.eclipse.swt.widgets.List(resourcesControl, SWT.BORDER | SWT.V_SCROLL);
 		GridData gd_list = new GridData(SWT.FILL, SWT.TOP, true, false, 1, 2);
