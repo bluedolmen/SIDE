@@ -76,7 +76,7 @@ public class AttributeServices {
 		} else if (type.equals("d:long")) {
 			return DataType.LONG;
 		} else {
-			System.out.println("Property type fall to default Object Type :" + type);
+			System.err.println("Property type fall to default Object Type :" + type);
 			return DataType.OBJECT;
 		}
 		//		throw new Exception("Property Type not managed :" + type);
