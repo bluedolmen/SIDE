@@ -169,12 +169,12 @@ public class ReverseScheduler {
 
 	public void displayTree() {
 		for (Map.Entry<Integer, List<Model>> ent : tree.entrySet()) {
-			// System.out.println(ent.getKey());
-			// System.out.println("->");
+			 System.out.println(ent.getKey());
+			 System.out.println("->");
 			for (Model model : ent.getValue()) {
-				// System.out.print(model.getName() + ", ");
+				 System.out.print(model.getName() + ", ");
 			}
-			// System.out.println();
+			 System.out.println();
 		}
 
 	}
