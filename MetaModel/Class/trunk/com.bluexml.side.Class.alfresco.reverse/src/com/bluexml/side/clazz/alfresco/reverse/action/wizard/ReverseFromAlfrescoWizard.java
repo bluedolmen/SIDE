@@ -96,7 +96,7 @@ public class ReverseFromAlfrescoWizard extends Wizard implements IWorkbenchWizar
 					current = STATE.started;
 					monitor.beginTask("reversing", -1);
 					try {
-						Reverser.executeReverse(files, sideModelRepo, sideModels);
+						Reverser.executeReverse(files, sideModelRepo, sideModels, true);
 					} catch (Exception e) {
 						throw new InvocationTargetException(e, "Error while executing reverse");
 					}

@@ -15,12 +15,12 @@ import com.bluexml.side.alfresco.binding.Model;
 
 public class Reverser {
 
-	public static void executeReverse(Collection<File> alfrescoModels, File sideModelRepo, List<IFile> sideModels) throws Exception {
-		ReverseScheduler rs = new ReverseScheduler(alfrescoModels);
+	public static void executeReverse(Collection<File> alfrescoModels, File sideModelRepo, List<IFile> sideModels, boolean verbose) throws Exception {
+		ReverseScheduler rs = new ReverseScheduler(alfrescoModels, verbose);
 		rs.schedule();
 		Map<Integer, List<Model>> tree = rs.getTree();
 		// reverse according to scheduled order (import dependencies tree)
-		ReverseModel rm = new ReverseModel();
+		ReverseModel rm = new ReverseModel(verbose);
 		// load and register EObject from existing SIDE models
 		rm.loadSIDEModels(sideModels);
 		for (Map.Entry<Integer, List<Model>> ent : tree.entrySet()) {
@@ -29,10 +29,8 @@ public class Reverser {
 				File file = new File(sideModelRepo, ReverseHelper.extractLocalNameFromAlfQName(model.getName()) + ".dt");
 				file.getParentFile().mkdirs();
 				file.createNewFile();
+				System.out.println("save model :" + file);
 				ModelInitializationUtils.saveModel(file, sideO);
-				//				System.out.println("Reverse ok for " + model.getName());
-				//				System.out.println("Register x :");
-				//				rm.getRegister().printX();
 			}
 		}
 
@@ -44,9 +42,8 @@ public class Reverser {
 				Class c = (Class) object;
 				errorRepport.add(c.getName());
 			}
-			//			throw new Exception("Fail to reverse Overrides for :" + errorRepport);
+
 			System.err.println("Fail to reverse Overrides for :" + errorRepport);
 		}
-		System.out.println("EObjects types :" + rm.getRegister().getTypes());
 	}
 }

@@ -58,6 +58,11 @@ public class ReverseModel {
 	private static final String CONSTRAINTS_REGEX = "REGEX";
 	Register register = new Register();
 	List<Object> notReverted = new ArrayList<Object>();
+	boolean verbose = false;
+
+	public ReverseModel(boolean verbose) {
+		this.verbose = verbose;
+	}
 
 	/**
 	 * @return the notReverted
@@ -81,7 +86,7 @@ public class ReverseModel {
 				if (eObject instanceof Model) {
 					loadExternalSIDEModels((Model) eObject);
 				}
-			}			
+			}
 		}
 	}
 
@@ -89,49 +94,41 @@ public class ReverseModel {
 	 * use case : user have some custom alfresco dataModel to revert
 	 * 
 	 * @param m
+	 * @throws Exception
 	 */
-	public void loadExternalSIDEModels(Model m) {
-		// scan existing side model and load to register, so references can be resolved without revert from generated alfresco model 
-		// so 
-		try {
-			
-			List<NamedModelElement> namedElements = new ArrayList<NamedModelElement>();
-			
-			namedElements.add(m);
-			
-			// AbstractClasses
-			EList<AbstractClass> allAbstractClasses = m.getAllAbstractClasses();
-			namedElements.addAll(allAbstractClasses);
-			
-			// Associations
-			EList<com.bluexml.side.clazz.Association> allAssociations = m.getAllAssociations();
-			namedElements.addAll(allAssociations);
-			
-			// Constraints
-			EList<com.bluexml.side.common.Constraint> allConstraints = m.getAllConstraints();
-			namedElements.addAll(allConstraints);
-			
-			// Enumerations
-			EList<Enumeration> allEnumerations = m.getAllEnumerations();
-			namedElements.addAll(allEnumerations);
-			
-			
-			for (NamedModelElement abstractClass : namedElements) {
-				String prefixedQName = CommonServices.getPrefixedQName(abstractClass);
-				register.recordNewEObject(abstractClass, prefixedQName);
-			}
-			
-			
-			
-			EList<NameSpace> allNamespaces = m.getAllNamespaces();
-			for (NameSpace nameSpace : allNamespaces) {
-				register.addNewNS(nameSpace);
-			}
-			
-						
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void loadExternalSIDEModels(Model m) throws Exception {
+		// scan existing side model and load to register, so references can be resolved
+
+		List<NamedModelElement> namedElements = new ArrayList<NamedModelElement>();
+
+		namedElements.add(m);
+
+		// AbstractClasses
+		EList<AbstractClass> allAbstractClasses = m.getAllAbstractClasses();
+		namedElements.addAll(allAbstractClasses);
+
+		// Associations
+		EList<com.bluexml.side.clazz.Association> allAssociations = m.getAllAssociations();
+		namedElements.addAll(allAssociations);
+
+		// Constraints
+		EList<com.bluexml.side.common.Constraint> allConstraints = m.getAllConstraints();
+		namedElements.addAll(allConstraints);
+
+		// Enumerations
+		EList<Enumeration> allEnumerations = m.getAllEnumerations();
+		namedElements.addAll(allEnumerations);
+
+		// records all NamedModelElement
+		for (NamedModelElement abstractClass : namedElements) {
+			String prefixedQName = CommonServices.getPrefixedQName(abstractClass);
+			register.recordNewEObject(abstractClass, prefixedQName);
+		}
+
+		// records all NameSpace Object
+		EList<NameSpace> allNamespaces = m.getAllNamespaces();
+		for (NameSpace nameSpace : allNamespaces) {
+			register.addNewNS(nameSpace);
 		}
 
 	}
@@ -242,11 +239,13 @@ public class ReverseModel {
 		//TODO <overrides>
 		Overrides overrides = type.getOverrides();
 		if (overrides != null) {
-			System.out.println("WARN Override found for :" + type.getName());
 			notReverted.add(type);
-			List<PropertyOverride> properties = overrides.getProperty();
-			for (PropertyOverride propertyOverride : properties) {
-				System.out.println("Property :" + propertyOverride.getName());
+			if (verbose) {
+				System.out.println("WARN Override found for :" + type.getName());
+				List<PropertyOverride> properties = overrides.getProperty();
+				for (PropertyOverride propertyOverride : properties) {
+					System.out.println("* Property :" + propertyOverride.getName());
+				}
 			}
 		}
 
@@ -612,7 +611,7 @@ public class ReverseModel {
 				return createNewClazz(model, alf_modelObject, alfModel);
 			}
 		} else if (oc != null && oa != null) {
-			// System.err.println("Oupse found a Type AND an Aspect for QName :" + qname);
+			System.err.println("Error found a Type AND an Aspect for QName :" + qname);
 			return null;
 		} else if (oc != null) {
 			return oc;
@@ -636,6 +635,6 @@ public class ReverseModel {
 				return type2;
 			}
 		}
-		throw new Exception("Fail to found Type object for " + qname);
+		throw new Exception("Fail to found Type object for " + qname + " please add missing models");
 	}
 }

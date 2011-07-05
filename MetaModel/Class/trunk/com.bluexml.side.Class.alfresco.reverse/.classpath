@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="alfresco/alf3.4.d/src"/>
+	<classpathentry kind="src" output="bin-ant" path="src-ant"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

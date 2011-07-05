@@ -37,20 +37,14 @@ public class ReverseScheduler {
 		return tree;
 	}
 
-	/**
-	 * @param tree
-	 *            the tree to set
-	 */
-	public void setTree(Map<Integer, List<Model>> tree) {
-		this.tree = tree;
-	}
+	boolean verbose = false;
 
 	public static void main(String[] args) {
 		File alfrescoModelRepository = new File("/Users/davidabad/workspaces/Workspace2.0/S-IDE/Extension/MetaModel/Class/trunk/Alfresco/Reverse/src/models/Alfresco/3.2r2");
 		ReverseScheduler rev;
 		try {
 			List<File> listAll = FileHelper.listAll(alfrescoModelRepository);
-			rev = new ReverseScheduler(listAll);
+			rev = new ReverseScheduler(listAll, true);
 			rev.schedule();
 			// System.out.println(rev.tree);
 		} catch (Exception e) {
@@ -60,11 +54,13 @@ public class ReverseScheduler {
 
 	}
 
-	public ReverseScheduler(Collection<File> listAll) throws Exception {
-		System.out.println("ReverseScheduler.ReverseScheduler()");
+	public ReverseScheduler(Collection<File> listAll, boolean verbose) throws Exception {
+		if (verbose)
+			System.out.println("ReverseScheduler.ReverseScheduler()");
 		for (File file : listAll) {
 			if (FileHelper.getFileExt(file).equals("xml")) {
-				System.out.println("open :" + file.getName());
+				if (verbose)
+					System.out.println("open :" + file.getName());
 				JAXBContext jaxbContext = JAXBContext.newInstance("com.bluexml.side.alfresco.binding", ReverseHelper.class.getClassLoader());
 
 				Unmarshaller unm = jaxbContext.createUnmarshaller();
@@ -80,7 +76,8 @@ public class ReverseScheduler {
 				}
 			}
 		}
-		System.out.println("ReverseScheduler.ReverseScheduler() end");
+		if (verbose)
+			System.out.println("ReverseScheduler.ReverseScheduler() end");
 
 	}
 
@@ -140,7 +137,8 @@ public class ReverseScheduler {
 			// System.out.println("imports :" + displayModels(resolveToModel));
 
 			if (list.containsAll(resolveToModel)) {
-				System.out.println("model : " + alfModel.getName() + " match for level " + i);
+				if (verbose)
+					System.out.println("model : " + alfModel.getName() + " match for level " + i);
 				colh.addToMap(tree, i, alfModel, true);
 				scheduled.add(alfModel);
 			} else {
@@ -152,7 +150,7 @@ public class ReverseScheduler {
 		//		displayTree();
 	}
 
-	public List<Model> resolveToModel(List<Import> imports) {
+	protected List<Model> resolveToModel(List<Import> imports) {
 		List<Model> models = new ArrayList<Model>();
 		for (Import import1 : imports) {
 			String uri = import1.getUri();
@@ -169,17 +167,17 @@ public class ReverseScheduler {
 
 	public void displayTree() {
 		for (Map.Entry<Integer, List<Model>> ent : tree.entrySet()) {
-			 System.out.println(ent.getKey());
-			 System.out.println("->");
+			System.out.println(ent.getKey());
+			System.out.println("->");
 			for (Model model : ent.getValue()) {
-				 System.out.print(model.getName() + ", ");
+				System.out.print(model.getName() + ", ");
 			}
-			 System.out.println();
+			System.out.println();
 		}
 
 	}
 
-	public String displayModels(List<Model> ent) {
+	protected String displayModels(List<Model> ent) {
 		String rt = "";
 		rt += "[";
 		for (Model model : ent) {

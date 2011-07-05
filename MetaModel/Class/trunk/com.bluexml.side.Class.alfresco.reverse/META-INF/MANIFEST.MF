@@ -11,7 +11,9 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Class,
  com.bluexml.side.Class.service.alfresco,
  com.bluexml.side.Util.ecore,
- com.bluexml.side.Util.libs
+ com.bluexml.side.Util.libs,
+ org.apache.ant,
+ org.eclipse.ant.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.clazz.alfresco.reverse,

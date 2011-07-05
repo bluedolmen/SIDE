@@ -25,5 +25,15 @@
          </action>
       </objectContribution>
    </extension>
+   <extension
+         point="org.eclipse.ant.core.antTasks">
+      <antTask
+            class="com.bluexml.side.clazz.alfresco.reverse.ant.AntReverseTask"
+            eclipseRuntime="true"
+            headless="true"
+            library="lib/sideAntTasks.jar"
+            name="side.reverse">
+      </antTask>
+   </extension>
 
 </plugin>
