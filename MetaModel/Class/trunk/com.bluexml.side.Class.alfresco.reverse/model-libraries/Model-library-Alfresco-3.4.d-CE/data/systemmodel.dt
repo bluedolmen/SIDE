@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tx5xwKPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="systemmodel">
+  <namespaceSet xmi:id="_tx5xwaPHEeCglqLRxGNZtA" prefix="sys" URI="http://www.alfresco.org/model/system/1.0"/>
+  <namespaceSet xmi:id="_tx5xwqPHEeCglqLRxGNZtA" prefix="reg" URI="http://www.alfresco.org/system/registry/1.0"/>
+  <namespaceSet xmi:id="_tx5xw6PHEeCglqLRxGNZtA" prefix="module" URI="http://www.alfresco.org/system/modules/1.0"/>
+  <classSet xmi:id="_tx5xxKPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="base" title="Base" aspects="_tx5x4qPHEeCglqLRxGNZtA"/>
+  <classSet xmi:id="_tx5xxaPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="descriptor" title="Descriptor" generalizations="_tx5xxKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tx5xxqPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="name">
+      <metainfo xmi:id="_tx5xx6PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5xyKPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tx5xyaPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="versionMajor">
+      <metainfo xmi:id="_tx5xyqPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5xy6PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tx5xzKPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="versionMinor">
+      <metainfo xmi:id="_tx5xzaPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5xzqPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tx5xz6PHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="versionRevision">
+      <metainfo xmi:id="_tx5x0KPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5x0aPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tx5x0qPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="versionLabel"/>
+    <attributes xmi:id="_tx5x06PHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="versionBuild"/>
+    <attributes xmi:id="_tx5x1KPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="versionSchema" typ="int">
+      <metainfo xmi:id="_tx5x1aPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5x1qPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tx5x16PHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="versionEdition" typ="Object"/>
+    <attributes xmi:id="_tx5x2KPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="versionProperties" typ="Object"/>
+  </classSet>
+  <classSet xmi:id="_tx5x2aPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="container" title="Container" generalizations="_tx5xxKPHEeCglqLRxGNZtA"/>
+  <classSet xmi:id="_tx5x2qPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="store_root" title="Store Root" generalizations="_tx5x2aPHEeCglqLRxGNZtA" aspects="_tx5x76PHEeCglqLRxGNZtA"/>
+  <classSet xmi:id="_tx5x26PHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="reference" title="Reference" generalizations="_tx5xxKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tx5x3KPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="reference" typ="Object">
+      <metainfo xmi:id="_tx5x3aPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5x3qPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+  </classSet>
+  <associationSet xmi:id="_tx5x36PHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="children" associationType="Aggregation">
+    <firstEnd xmi:id="_tx5x4KPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tx5x2aPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tx5x4aPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tx5xxKPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <aspectSet xmi:id="_tx5x4qPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="referenceable" title="Referenceable">
+    <attributes xmi:id="_tx5x46PHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="store-protocol">
+      <metainfo xmi:id="_tx5x5KPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5x5aPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tx5x5qPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="store-identifier">
+      <metainfo xmi:id="_tx5x56PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5x6KPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tx5x6aPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="node-uuid">
+      <metainfo xmi:id="_tx5x6qPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5x66PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tx5x7KPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="node-dbid" typ="long">
+      <metainfo xmi:id="_tx5x7aPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5x7qPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tx5x76PHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="aspect_root" title="Root"/>
+  <aspectSet xmi:id="_tx5x8KPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="incomplete" title="Incomplete"/>
+  <aspectSet xmi:id="_tx5x8aPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="temporary" title="Temporary"/>
+  <aspectSet xmi:id="_tx5x8qPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="noContent" title="NoContent"/>
+  <aspectSet xmi:id="_tx5x86PHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="archived" title="Archived">
+    <attributes xmi:id="_tx5x9KPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="archivedOriginalParentAssoc" typ="Object">
+      <metainfo xmi:id="_tx5x9aPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tx5x9qPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="archivedBy">
+      <metainfo xmi:id="_tx5x96PHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tx5x-KPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="archivedDate" typ="DateTime">
+      <metainfo xmi:id="_tx5x-aPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx5x-qPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx5x-6PHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tx5x_KPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tx5x_aPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="archivedOriginalOwner">
+      <metainfo xmi:id="_tx5x_qPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tx5x_6PHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="archived-assocs">
+    <attributes xmi:id="_tx5yAKPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="archivedParentAssocs" typ="Object"/>
+    <attributes xmi:id="_tx5yAaPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="archivedChildAssocs" typ="Object"/>
+    <attributes xmi:id="_tx5yAqPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="archivedSourceAssocs" typ="Object"/>
+    <attributes xmi:id="_tx5yA6PHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="archivedTargetAssocs" typ="Object"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tx5yBKPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="localized" title="Translation">
+    <attributes xmi:id="_tx5yBaPHEeCglqLRxGNZtA" namespace="_tx5xwaPHEeCglqLRxGNZtA" name="locale" title="Locale" typ="Object">
+      <metainfo xmi:id="_tx5yBqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+</clazz:Model>

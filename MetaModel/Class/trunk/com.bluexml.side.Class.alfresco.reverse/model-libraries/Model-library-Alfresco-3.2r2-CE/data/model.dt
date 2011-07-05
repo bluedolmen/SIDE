@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_aW1KEKZBEeCY34yq-QsV1A" namespace="_aW1KEaZBEeCY34yq-QsV1A" name="model">
+  <namespaceSet xmi:id="_aW1KEaZBEeCY34yq-QsV1A" prefix="cmiscustom" URI="http://www.alfresco.org/model/cmis/custom"/>
+  <classSet xmi:id="_aW1KEqZBEeCY34yq-QsV1A" namespace="_aW1KEaZBEeCY34yq-QsV1A" name="folder" title="Custom Folder">
+    <attributes xmi:id="_aW1KE6ZBEeCY34yq-QsV1A" namespace="_aW1KEaZBEeCY34yq-QsV1A" name="folderprop_string" title="Custom Folder Property (string)"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuuaZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <classSet xmi:id="_aW1KFKZBEeCY34yq-QsV1A" namespace="_aW1KEaZBEeCY34yq-QsV1A" name="document" title="Custom Document">
+    <attributes xmi:id="_aW1KFaZBEeCY34yq-QsV1A" namespace="_aW1KEaZBEeCY34yq-QsV1A" name="docprop_string" title="Custom Document Property (string)"/>
+    <attributes xmi:id="_aW1KFqZBEeCY34yq-QsV1A" namespace="_aW1KEaZBEeCY34yq-QsV1A" name="docprop_boolean_multi" title="Custom Document Property (multi-valued boolean)" typ="boolean"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuu6ZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <associationSet xmi:id="_aW1KF6ZBEeCY34yq-QsV1A" namespace="_aW1KEaZBEeCY34yq-QsV1A" name="assoc">
+    <firstEnd xmi:id="_aW1KGKZBEeCY34yq-QsV1A" linkedClass="_aW1KFKZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aW1KGaZBEeCY34yq-QsV1A" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuu6ZBEeCY34yq-QsV1A"/>
+    </secondEnd>
+  </associationSet>
+</clazz:Model>

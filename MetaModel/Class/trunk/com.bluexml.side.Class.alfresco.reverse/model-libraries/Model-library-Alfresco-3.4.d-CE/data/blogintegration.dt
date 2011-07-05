@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tyUBcKPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="blogintegration">
+  <namespaceSet xmi:id="_tyUBcaPHEeCglqLRxGNZtA" prefix="blg" URI="http://www.alfresco.org/model/blogintegration/1.0"/>
+  <associationSet xmi:id="_tyUBcqPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="blogDetails" title="Blog details">
+    <firstEnd xmi:id="_tyUBc6PHEeCglqLRxGNZtA" name="blg:posts" cardMax="-1" linkedClass="_tyUBfaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyUBdKPHEeCglqLRxGNZtA" name="blg:blogDetails" cardMin="1" navigable="true" linkedClass="_tyUBdaPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <aspectSet xmi:id="_tyUBdaPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="blogDetails" title="Blog Details">
+    <attributes xmi:id="_tyUBdqPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="blogImplementation" title="Blog Type"/>
+    <attributes xmi:id="_tyUBd6PHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="id" title="Blog Identifier"/>
+    <attributes xmi:id="_tyUBeKPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="name" title="Blog Name"/>
+    <attributes xmi:id="_tyUBeaPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="description" title="Blog Description"/>
+    <attributes xmi:id="_tyUBeqPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="url" title="Blog URL"/>
+    <attributes xmi:id="_tyUBe6PHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="userName" title="Blog User Name"/>
+    <attributes xmi:id="_tyUBfKPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="password" title="Blog User Password"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyUBfaPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="blogPost" title="Blog Post">
+    <attributes xmi:id="_tyUBfqPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="postId" title="Blog post identifier">
+      <metainfo xmi:id="_tyUBf6PHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyUBgKPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="published" title="Blog published" typ="boolean">
+      <metainfo xmi:id="_tyUBgaPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyUBgqPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="link" title="Blog post link">
+      <metainfo xmi:id="_tyUBg6PHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyUBhKPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="posted" title="Date posted" typ="Date">
+      <metainfo xmi:id="_tyUBhaPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyUBhqPHEeCglqLRxGNZtA" namespace="_tyUBcaPHEeCglqLRxGNZtA" name="lastUpdate" title="Date last updated" typ="Date">
+      <metainfo xmi:id="_tyUBh6PHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+</clazz:Model>

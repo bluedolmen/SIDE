@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tyQXEKPHEeCglqLRxGNZtA" namespace="_tyQXEaPHEeCglqLRxGNZtA" name="emailserverModel">
+  <namespaceSet xmi:id="_tyQXEaPHEeCglqLRxGNZtA" prefix="emailserver" URI="http://www.alfresco.org/model/emailserver/1.0"/>
+  <associationSet xmi:id="_tyQXEqPHEeCglqLRxGNZtA" namespace="_tyQXEaPHEeCglqLRxGNZtA" name="attachment" title="Attachment">
+    <firstEnd xmi:id="_tyQXE6PHEeCglqLRxGNZtA" cardMin="1" cardMax="-1" linkedClass="_tyQXGKPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyQXFKPHEeCglqLRxGNZtA" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <aspectSet xmi:id="_tyQXFaPHEeCglqLRxGNZtA" namespace="_tyQXEaPHEeCglqLRxGNZtA" name="emailed" title="Emailed">
+    <generalizations xsi:type="clazz:Aspect" href="contentmodel.dt#_tyFYtKPHEeCglqLRxGNZtA"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyQXFqPHEeCglqLRxGNZtA" namespace="_tyQXEaPHEeCglqLRxGNZtA" name="aliasable" title="Email Alias">
+    <attributes xmi:id="_tyQXF6PHEeCglqLRxGNZtA" namespace="_tyQXEaPHEeCglqLRxGNZtA" name="alias" title="Alias"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyQXGKPHEeCglqLRxGNZtA" namespace="_tyQXEaPHEeCglqLRxGNZtA" name="attached" title="Attached"/>
+  <constraintSet xmi:id="_tyQXGaPHEeCglqLRxGNZtA" namespace="_tyQXEaPHEeCglqLRxGNZtA" name="alias" constraintType="REGEX">
+    <params xmi:id="_tyQXGqPHEeCglqLRxGNZtA" name="expression">
+      <values>[a-zA-Z0-9.\-]*</values>
+    </params>
+    <params xmi:id="_tyQXG6PHEeCglqLRxGNZtA" name="requiresMatch">
+      <values>true</values>
+    </params>
+  </constraintSet>
+</clazz:Model>

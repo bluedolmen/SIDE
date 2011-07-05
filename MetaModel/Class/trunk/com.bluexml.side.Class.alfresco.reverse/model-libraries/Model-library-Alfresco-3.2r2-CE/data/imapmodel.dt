@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_aW2_QKZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="imapmodel">
+  <namespaceSet xmi:id="_aW2_QaZBEeCY34yq-QsV1A" prefix="imap" URI="http://www.alfresco.org/model/imap/1.0"/>
+  <classSet xmi:id="_aW2_QqZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="imapFolder" title="IMAP Folder">
+    <attributes xmi:id="_aW2_Q6ZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="nonSubscribed" typ="boolean"/>
+    <attributes xmi:id="_aW2_RKZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="selectable" typ="boolean">
+      <metainfo xmi:id="_aW2_RaZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuuaZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <classSet xmi:id="_aW2_RqZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="imapAttach" title="Attachment to the IMAP message">
+    <attributes xmi:id="_aW2_R6ZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="attachID"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuu6ZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <classSet xmi:id="_aW2_SKZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="imapBody" title="Body of the IMAP message">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuu6ZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <associationSet xmi:id="_aW2_SaZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="attachment" title="Attachment">
+    <firstEnd xmi:id="_aW2_SqZBEeCY34yq-QsV1A" linkedClass="_aW2_T6ZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aW2_S6ZBEeCY34yq-QsV1A" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnusqZBEeCY34yq-QsV1A"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_aW2_TKZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="attachmentsFolder" title="Attachments Folder">
+    <firstEnd xmi:id="_aW2_TaZBEeCY34yq-QsV1A" linkedClass="_aW2_T6ZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aW2_TqZBEeCY34yq-QsV1A" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnusqZBEeCY34yq-QsV1A"/>
+    </secondEnd>
+  </associationSet>
+  <aspectSet xmi:id="_aW2_T6ZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="imapContent" title="IMAP File" generalizations="_aW2_WKZBEeCY34yq-QsV1A">
+    <attributes xmi:id="_aW2_UKZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="messageFrom"/>
+    <attributes xmi:id="_aW2_UaZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="messageTo"/>
+    <attributes xmi:id="_aW2_UqZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="messageCc"/>
+    <attributes xmi:id="_aW2_U6ZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="messageSubject"/>
+    <attributes xmi:id="_aW2_VKZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="messageId"/>
+    <attributes xmi:id="_aW2_VaZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="threadIndex"/>
+    <attributes xmi:id="_aW2_VqZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="dateReceived" title="Date Received" typ="DateTime"/>
+    <attributes xmi:id="_aW2_V6ZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="dateSent" title="Date Sent" typ="DateTime"/>
+  </aspectSet>
+  <aspectSet xmi:id="_aW2_WKZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="flaggable">
+    <attributes xmi:id="_aW2_WaZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="flagAnswered" typ="boolean"/>
+    <attributes xmi:id="_aW2_WqZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="flagDeleted" typ="boolean"/>
+    <attributes xmi:id="_aW2_W6ZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="flagDraft" typ="boolean"/>
+    <attributes xmi:id="_aW2_XKZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="flagSeen" typ="boolean"/>
+    <attributes xmi:id="_aW2_XaZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="flagRecent" typ="boolean"/>
+    <attributes xmi:id="_aW2_XqZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="flagFlagged" typ="boolean"/>
+  </aspectSet>
+  <aspectSet xmi:id="_aW2_X6ZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="nonSubscribed"/>
+  <aspectSet xmi:id="_aW2_YKZBEeCY34yq-QsV1A" namespace="_aW2_QaZBEeCY34yq-QsV1A" name="nonselectable"/>
+</clazz:Model>

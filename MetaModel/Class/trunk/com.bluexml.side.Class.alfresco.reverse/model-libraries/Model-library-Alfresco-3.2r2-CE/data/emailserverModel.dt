@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_aW5bgKZBEeCY34yq-QsV1A" namespace="_aW5bgaZBEeCY34yq-QsV1A" name="emailserverModel">
+  <namespaceSet xmi:id="_aW5bgaZBEeCY34yq-QsV1A" prefix="emailserver" URI="http://www.alfresco.org/model/emailserver/1.0"/>
+  <aspectSet xmi:id="_aW5bgqZBEeCY34yq-QsV1A" namespace="_aW5bgaZBEeCY34yq-QsV1A" name="emailed" title="Emailed">
+    <generalizations xsi:type="clazz:Aspect" href="contentmodel.dt#_aWpkFaZBEeCY34yq-QsV1A"/>
+  </aspectSet>
+  <aspectSet xmi:id="_aW5bg6ZBEeCY34yq-QsV1A" namespace="_aW5bgaZBEeCY34yq-QsV1A" name="aliasable" title="Email Alias">
+    <attributes xmi:id="_aW5bhKZBEeCY34yq-QsV1A" namespace="_aW5bgaZBEeCY34yq-QsV1A" name="alias" title="Alias"/>
+  </aspectSet>
+  <constraintSet xmi:id="_aW5bhaZBEeCY34yq-QsV1A" namespace="_aW5bgaZBEeCY34yq-QsV1A" name="alias" constraintType="REGEX">
+    <params xmi:id="_aW5bhqZBEeCY34yq-QsV1A" name="expression">
+      <values>[a-zA-Z0-9.\-]*</values>
+    </params>
+    <params xmi:id="_aW5bh6ZBEeCY34yq-QsV1A" name="requiresMatch">
+      <values>true</values>
+    </params>
+  </constraintSet>
+</clazz:Model>

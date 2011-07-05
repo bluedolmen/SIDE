@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_aWhBAKZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="jcrmodel">
+  <namespaceSet xmi:id="_aWhBAaZBEeCY34yq-QsV1A" prefix="jcr" URI="http://www.jcp.org/jcr/1.0"/>
+  <namespaceSet xmi:id="_aWhBAqZBEeCY34yq-QsV1A" prefix="nt" URI="http://www.jcp.org/jcr/nt/1.0"/>
+  <namespaceSet xmi:id="_aWhBA6ZBEeCY34yq-QsV1A" prefix="mix" URI="http://www.jcp.org/jcr/mix/1.0"/>
+  <namespaceSet xmi:id="_aWhBBKZBEeCY34yq-QsV1A" prefix="sv" URI="http://www.jcp.org/jcr/sv/1.0"/>
+  <namespaceSet xmi:id="_aWhBBaZBEeCY34yq-QsV1A" prefix="xml" URI="http://www.w3.org/XML/1998/namespace"/>
+  <classSet xmi:id="_aWhBBqZBEeCY34yq-QsV1A" namespace="_aWhBAqZBEeCY34yq-QsV1A" name="base">
+    <attributes xmi:id="_aWhBB6ZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="primaryType" typ="Object">
+      <metainfo xmi:id="_aWhBCKZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWhBCaZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_aWhBCqZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="mixinTypes" typ="Object"/>
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_aWd9sKZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <classSet xmi:id="_aWhBC6ZBEeCY34yq-QsV1A" namespace="_aWhBAqZBEeCY34yq-QsV1A" name="hierarchyNode" generalizations="_aWhBBqZBEeCY34yq-QsV1A">
+    <attributes xmi:id="_aWhBDKZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="created" typ="Date"/>
+  </classSet>
+  <classSet xmi:id="_aWhBDaZBEeCY34yq-QsV1A" namespace="_aWhBAqZBEeCY34yq-QsV1A" name="file" generalizations="_aWhBC6ZBEeCY34yq-QsV1A"/>
+  <classSet xmi:id="_aWhBDqZBEeCY34yq-QsV1A" namespace="_aWhBAqZBEeCY34yq-QsV1A" name="folder" generalizations="_aWhBC6ZBEeCY34yq-QsV1A"/>
+  <classSet xmi:id="_aWhBD6ZBEeCY34yq-QsV1A" namespace="_aWhBAqZBEeCY34yq-QsV1A" name="resource" generalizations="_aWhBBqZBEeCY34yq-QsV1A" aspects="_aWhBIKZBEeCY34yq-QsV1A">
+    <attributes xmi:id="_aWhBEKZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="encoding"/>
+    <attributes xmi:id="_aWhBEaZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="mimeType">
+      <metainfo xmi:id="_aWhBEqZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+    <attributes xmi:id="_aWhBE6ZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="data" typ="Object">
+      <metainfo xmi:id="_aWhBFKZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWhBFaZBEeCY34yq-QsV1A" key="propertySearched"/>
+      <metainfo xmi:id="_aWhBFqZBEeCY34yq-QsV1A" key="index.atomic"/>
+      <metainfo xmi:id="_aWhBF6ZBEeCY34yq-QsV1A" key="index.tokenised" value="true"/>
+    </attributes>
+    <attributes xmi:id="_aWhBGKZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="lastModified" typ="Date">
+      <metainfo xmi:id="_aWhBGaZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+  </classSet>
+  <associationSet xmi:id="_aWhBGqZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="content" associationType="Aggregation">
+    <firstEnd xmi:id="_aWhBG6ZBEeCY34yq-QsV1A" cardMax="-1" linkedClass="_aWhBDaZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aWhBHKZBEeCY34yq-QsV1A" cardMin="1" navigable="true" linkedClass="_aWhBBqZBEeCY34yq-QsV1A"/>
+  </associationSet>
+  <associationSet xmi:id="_aWhBHaZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="contains" associationType="Aggregation">
+    <firstEnd xmi:id="_aWhBHqZBEeCY34yq-QsV1A" cardMax="-1" linkedClass="_aWhBDqZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aWhBH6ZBEeCY34yq-QsV1A" cardMax="-1" navigable="true" linkedClass="_aWhBC6ZBEeCY34yq-QsV1A"/>
+  </associationSet>
+  <aspectSet xmi:id="_aWhBIKZBEeCY34yq-QsV1A" namespace="_aWhBA6ZBEeCY34yq-QsV1A" name="referenceable">
+    <attributes xmi:id="_aWhBIaZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="uuid">
+      <metainfo xmi:id="_aWhBIqZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_aWhBI6ZBEeCY34yq-QsV1A" namespace="_aWhBA6ZBEeCY34yq-QsV1A" name="lockable">
+    <attributes xmi:id="_aWhBJKZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="lockOwner"/>
+    <attributes xmi:id="_aWhBJaZBEeCY34yq-QsV1A" namespace="_aWhBAaZBEeCY34yq-QsV1A" name="lockIsDeep" typ="boolean"/>
+  </aspectSet>
+</clazz:Model>

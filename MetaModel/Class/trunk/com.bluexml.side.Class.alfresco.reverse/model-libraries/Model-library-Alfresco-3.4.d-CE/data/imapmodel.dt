@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tyPwAKPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="imapmodel">
+  <namespaceSet xmi:id="_tyPwAaPHEeCglqLRxGNZtA" prefix="imap" URI="http://www.alfresco.org/model/imap/1.0"/>
+  <classSet xmi:id="_tyPwAqPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="imapFolder" title="IMAP Folder">
+    <attributes xmi:id="_tyPwA6PHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="nonSubscribed" typ="boolean"/>
+    <attributes xmi:id="_tyPwBKPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="selectable" typ="boolean">
+      <metainfo xmi:id="_tyPwBaPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw66PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyPwBqPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="imapAttach" title="Attachment to the IMAP message">
+    <attributes xmi:id="_tyPwB6PHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="attachID"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyPwCKPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="imapBody" title="Body of the IMAP message">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <associationSet xmi:id="_tyPwCaPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="attachment" title="Attachment">
+    <firstEnd xmi:id="_tyPwCqPHEeCglqLRxGNZtA" linkedClass="_tyPwD6PHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyPwC6PHEeCglqLRxGNZtA" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw5KPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_tyPwDKPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="attachmentsFolder" title="Attachments Folder">
+    <firstEnd xmi:id="_tyPwDaPHEeCglqLRxGNZtA" linkedClass="_tyPwD6PHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyPwDqPHEeCglqLRxGNZtA" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw5KPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <aspectSet xmi:id="_tyPwD6PHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="imapContent" title="IMAP File" generalizations="_tyPwGKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyPwEKPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="messageFrom"/>
+    <attributes xmi:id="_tyPwEaPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="messageTo"/>
+    <attributes xmi:id="_tyPwEqPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="messageCc"/>
+    <attributes xmi:id="_tyPwE6PHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="messageSubject"/>
+    <attributes xmi:id="_tyPwFKPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="messageId"/>
+    <attributes xmi:id="_tyPwFaPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="threadIndex"/>
+    <attributes xmi:id="_tyPwFqPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="dateReceived" title="Date Received" typ="DateTime"/>
+    <attributes xmi:id="_tyPwF6PHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="dateSent" title="Date Sent" typ="DateTime"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyPwGKPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="flaggable">
+    <attributes xmi:id="_tyPwGaPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="flagAnswered" typ="boolean"/>
+    <attributes xmi:id="_tyPwGqPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="flagDeleted" typ="boolean"/>
+    <attributes xmi:id="_tyPwG6PHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="flagDraft" typ="boolean"/>
+    <attributes xmi:id="_tyPwHKPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="flagSeen" typ="boolean"/>
+    <attributes xmi:id="_tyPwHaPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="flagRecent" typ="boolean"/>
+    <attributes xmi:id="_tyPwHqPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="flagFlagged" typ="boolean"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyPwH6PHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="nonSubscribed"/>
+  <aspectSet xmi:id="_tyPwIKPHEeCglqLRxGNZtA" namespace="_tyPwAaPHEeCglqLRxGNZtA" name="nonselectable"/>
+</clazz:Model>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="com.bluexml.side.Class.edit.ui.contribution1"
+            objectClass="org.eclipse.core.resources.IFolder">
+         <menu
+               icon="icons/side_16.gif"
+               id="com.bluexml.side.Class.edit.ui.editor.menu1"
+               label="SIDE"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="com.bluexml.side.clazz.alfresco.reverse.action.ReverseAction"
+               enablesFor="1"
+               icon="icons/reverse.png"
+               id="com.bluexml.side.Class.edit.ui.editor.reverse"
+               label="Reverse Alfresco Model to SIDE Models"
+               menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

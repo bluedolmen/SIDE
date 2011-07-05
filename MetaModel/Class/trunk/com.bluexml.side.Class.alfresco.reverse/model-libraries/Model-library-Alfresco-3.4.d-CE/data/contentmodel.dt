@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tyEw4KPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="contentmodel">
+  <namespaceSet xmi:id="_tyEw4aPHEeCglqLRxGNZtA" prefix="cm" URI="http://www.alfresco.org/model/content/1.0"/>
+  <namespaceSet xmi:id="_tyEw4qPHEeCglqLRxGNZtA" prefix="rn" URI="http://www.alfresco.org/model/rendition/1.0"/>
+  <namespaceSet xmi:id="_tyEw46PHEeCglqLRxGNZtA" prefix="exif" URI="http://www.alfresco.org/model/exif/1.0"/>
+  <classSet xmi:id="_tyEw5KPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="cmobject" title="Object" aspects="_tyFYOaPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyEw5aPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="name" title="Name">
+      <metainfo xmi:id="_tyEw5qPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyEw56PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyEw6KPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyEw6aPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyEw6qPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyEw66PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="folder" title="Folder" generalizations="_tyEw5KPHEeCglqLRxGNZtA">
+    <metainfo xmi:id="_tyEw7KPHEeCglqLRxGNZtA" key="archive"/>
+  </classSet>
+  <classSet xmi:id="_tyEw7aPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="content" title="Content" generalizations="_tyEw5KPHEeCglqLRxGNZtA">
+    <metainfo xmi:id="_tyEw7qPHEeCglqLRxGNZtA" key="archive"/>
+    <attributes xmi:id="_tyEw76PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="content" typ="Object">
+      <metainfo xmi:id="_tyEw8KPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyEw8aPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyEw8qPHEeCglqLRxGNZtA" key="index.tokenised" value="true"/>
+    </attributes>
+  </classSet>
+  <classSet xmi:id="_tyEw86PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="dictionaryModel" title="Dictionary Model" generalizations="_tyEw7aPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyEw9KPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="modelName" title="Model name" typ="Object"/>
+    <attributes xmi:id="_tyEw9aPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="modelDescription" title="Description"/>
+    <attributes xmi:id="_tyEw9qPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="modelAuthor" title="Author"/>
+    <attributes xmi:id="_tyEw96PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="modelPublishedDate" title="Published Date" typ="Date"/>
+    <attributes xmi:id="_tyEw-KPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="modelVersion" title="Version"/>
+    <attributes xmi:id="_tyEw-aPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="modelActive" title="Model Active" typ="boolean"/>
+  </classSet>
+  <classSet xmi:id="_tyEw-qPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="link" title="Link Object" generalizations="_tyEw5KPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyEw-6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="destination" title="Link Destination" typ="Object">
+      <metainfo xmi:id="_tyEw_KPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </classSet>
+  <classSet xmi:id="_tyEw_aPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="savedquery" title="Saved Query" generalizations="_tyEw7aPHEeCglqLRxGNZtA"/>
+  <classSet xmi:id="_tyEw_qPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="systemfolder" title="System Folder" generalizations="_tyEw66PHEeCglqLRxGNZtA"/>
+  <classSet xmi:id="_tyEw_6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="authority" title="Alfresco Authority Abstract Type">
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyExAKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="person" title="Person" generalizations="_tyEw_6PHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyExAaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="userName">
+      <metainfo xmi:id="_tyExAqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyExA6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="homeFolder" typ="Object">
+      <metainfo xmi:id="_tyExBKPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyExBaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="firstName">
+      <metainfo xmi:id="_tyExBqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyExB6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="lastName">
+      <metainfo xmi:id="_tyExCKPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyExCaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="middleName"/>
+    <attributes xmi:id="_tyExCqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="email"/>
+    <attributes xmi:id="_tyExC6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="organizationId"/>
+    <attributes xmi:id="_tyExDKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="homeFolderProvider"/>
+    <attributes xmi:id="_tyExDaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="defaultHomeFolderPath"/>
+    <attributes xmi:id="_tyExDqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="presenceProvider"/>
+    <attributes xmi:id="_tyExD6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="presenceUsername"/>
+    <attributes xmi:id="_tyExEKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="organization"/>
+    <attributes xmi:id="_tyExEaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="jobtitle"/>
+    <attributes xmi:id="_tyExEqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="location"/>
+    <attributes xmi:id="_tyExE6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="persondescription" typ="Object"/>
+    <attributes xmi:id="_tyExFKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="telephone"/>
+    <attributes xmi:id="_tyExFaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="mobile"/>
+    <attributes xmi:id="_tyExFqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="companyaddress1"/>
+    <attributes xmi:id="_tyExF6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="companyaddress2"/>
+    <attributes xmi:id="_tyExGKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="companyaddress3"/>
+    <attributes xmi:id="_tyExGaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="companypostcode"/>
+    <attributes xmi:id="_tyExGqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="companytelephone"/>
+    <attributes xmi:id="_tyExG6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="companyfax"/>
+    <attributes xmi:id="_tyExHKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="companyemail"/>
+    <attributes xmi:id="_tyExHaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="skype"/>
+    <attributes xmi:id="_tyExHqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="instantmsg"/>
+    <attributes xmi:id="_tyExH6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="userStatus"/>
+    <attributes xmi:id="_tyExIKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="userStatusTime" typ="DateTime"/>
+    <attributes xmi:id="_tyExIaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="googleusername"/>
+    <attributes xmi:id="_tyExIqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="sizeCurrent" typ="long">
+      <metainfo xmi:id="_tyExI6PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyExJKPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyExJaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="sizeQuota" typ="long"/>
+  </classSet>
+  <classSet xmi:id="_tyExJqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="authorityContainer" title="Alfresco Authority Type" generalizations="_tyEw_6PHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyExJ6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="authorityName"/>
+    <attributes xmi:id="_tyExKKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="authorityDisplayName"/>
+  </classSet>
+  <classSet xmi:id="_tyExKaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="zone" title="Alfresco Authentication Zone Type" generalizations="_tyEw5KPHEeCglqLRxGNZtA"/>
+  <classSet xmi:id="_tyExKqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="category_root" title="Category Root" generalizations="_tyEw5KPHEeCglqLRxGNZtA">
+    <aspects href="systemmodel.dt#_tx5x76PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyExK6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="category" title="Category" generalizations="_tyEw5KPHEeCglqLRxGNZtA"/>
+  <classSet xmi:id="_tyExLKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="mlRoot" title="Multilingual Root">
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5x2aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyExLaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="mlContainer" title="Multilingual Container">
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5x2aPHEeCglqLRxGNZtA"/>
+    <aspects href="#_tyFYUKPHEeCglqLRxGNZtA"/>
+    <aspects href="#_tyFYVqPHEeCglqLRxGNZtA"/>
+    <aspects href="systemmodel.dt#_tx5yBKPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyExLqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="rating" title="Rating">
+    <attributes xmi:id="_tyExL6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="ratingScore" title="Rating" typ="float">
+      <metainfo xmi:id="_tyExMKPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyExMaPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyExMqPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyExM6PHEeCglqLRxGNZtA" key="index.stored"/>
+      <metainfo xmi:id="_tyExNKPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tyExNaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="ratingScheme" title="Rating Scheme">
+      <metainfo xmi:id="_tyExNqPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyFX8KPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFX8aPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFX8qPHEeCglqLRxGNZtA" key="index.stored"/>
+      <metainfo xmi:id="_tyFX86PHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tyFX9KPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="ratedAt" title="Rated at" typ="DateTime">
+      <metainfo xmi:id="_tyFX9aPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyFX9qPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFX96PHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFX-KPHEeCglqLRxGNZtA" key="index.stored"/>
+      <metainfo xmi:id="_tyFX-aPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+  </classSet>
+  <classSet xmi:id="_tyFX-qPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="thumbnail" title="Thumbnail" generalizations="_tyEw7aPHEeCglqLRxGNZtA">
+    <metainfo xmi:id="_tyFX-6PHEeCglqLRxGNZtA" key="archive"/>
+    <attributes xmi:id="_tyFX_KPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="thumbnailName" title="Thumbnail Name"/>
+    <attributes xmi:id="_tyFX_aPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="contentPropertyName" title="Thumbnailed Content Property Name" typ="Object">
+      <metainfo xmi:id="_tyFX_qPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </classSet>
+  <associationSet xmi:id="_tyFX_6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="contains" associationType="Aggregation">
+    <metainfo xmi:id="_tyFYAKPHEeCglqLRxGNZtA" key="propagateTimestamps"/>
+    <firstEnd xmi:id="_tyFYAaPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyEw66PHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYAqPHEeCglqLRxGNZtA" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_tyFYA6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="avatar">
+    <firstEnd xmi:id="_tyFYBKPHEeCglqLRxGNZtA" name="cm:avatarOf" linkedClass="_tyExAKPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYBaPHEeCglqLRxGNZtA" name="cm:hasAvatar" navigable="true" linkedClass="_tyEw7aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYBqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="member" associationType="Aggregation">
+    <firstEnd xmi:id="_tyFYB6PHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyExJqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYCKPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyEw_6PHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYCaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="inZone" associationType="Aggregation">
+    <firstEnd xmi:id="_tyFYCqPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyExKaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYC6PHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyEw_6PHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYDKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="categories" associationType="Aggregation">
+    <firstEnd xmi:id="_tyFYDaPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyExKqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYDqPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyExK6PHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYD6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="subcategories" associationType="Aggregation">
+    <firstEnd xmi:id="_tyFYEKPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyExK6PHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYEaPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyExK6PHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYEqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="mlContainer" associationType="Aggregation">
+    <firstEnd xmi:id="_tyFYE6PHEeCglqLRxGNZtA" linkedClass="_tyExLKPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYFKPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyExLaPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYFaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="mlChild" associationType="Aggregation">
+    <firstEnd xmi:id="_tyFYFqPHEeCglqLRxGNZtA" linkedClass="_tyExLaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYF6PHEeCglqLRxGNZtA" cardMin="1" cardMax="-1" navigable="true" linkedClass="_tyFYWKPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYGKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="formats" title="Formats">
+    <firstEnd xmi:id="_tyFYGaPHEeCglqLRxGNZtA" name="cm:formatOf" linkedClass="_tyFYYqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYGqPHEeCglqLRxGNZtA" name="cm:hasFormat" cardMax="-1" navigable="true" linkedClass="_tyEw7aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYG6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="basis">
+    <firstEnd xmi:id="_tyFYHKPHEeCglqLRxGNZtA" name="cm:basedOn" cardMax="-1" linkedClass="_tyFYgaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYHaPHEeCglqLRxGNZtA" name="cm:hasBasis" cardMax="-1" navigable="true" linkedClass="_tyEw7aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYHqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="parts">
+    <firstEnd xmi:id="_tyFYH6PHEeCglqLRxGNZtA" name="cm:partOf" cardMax="-1" linkedClass="_tyFYgqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYIKPHEeCglqLRxGNZtA" name="cm:hasPart" cardMax="-1" navigable="true" linkedClass="_tyEw7aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYIaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="references">
+    <firstEnd xmi:id="_tyFYIqPHEeCglqLRxGNZtA" name="cm:referencedBy" cardMax="-1" linkedClass="_tyFYg6PHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYI6PHEeCglqLRxGNZtA" name="cm:references" cardMax="-1" navigable="true" linkedClass="_tyEw7aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYJKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="replaces">
+    <firstEnd xmi:id="_tyFYJaPHEeCglqLRxGNZtA" name="cm:replacedBy" cardMax="-1" linkedClass="_tyFYhKPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYJqPHEeCglqLRxGNZtA" name="cm:replaces" cardMax="-1" navigable="true" linkedClass="_tyEw7aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYJ6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="subscribedBy">
+    <firstEnd xmi:id="_tyFYKKPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyFYoqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYKaPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyExAKPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYKqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="ratings" associationType="Aggregation">
+    <firstEnd xmi:id="_tyFYK6PHEeCglqLRxGNZtA" linkedClass="_tyFYsqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYLKPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyExLqPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYLaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="attachments">
+    <firstEnd xmi:id="_tyFYLqPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyFYs6PHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYL6PHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyEw5KPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYMKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="preferenceImage" associationType="Aggregation">
+    <firstEnd xmi:id="_tyFYMaPHEeCglqLRxGNZtA" linkedClass="_tyFYxKPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYMqPHEeCglqLRxGNZtA" navigable="true" linkedClass="_tyEw7aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYM6PHEeCglqLRxGNZtA" namespace="_tyEw4qPHEeCglqLRxGNZtA" name="rendition" associationType="Aggregation">
+    <firstEnd xmi:id="_tyFYNKPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyFY1aPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYNaPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyEw7aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyFYNqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="translations" title="Translations">
+    <firstEnd xmi:id="_tyFYN6PHEeCglqLRxGNZtA" name="cm:translationOf" linkedClass="_tyF_EaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyFYOKPHEeCglqLRxGNZtA" name="cm:hasTranslation" cardMax="-1" navigable="true" linkedClass="_tyEw7aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <aspectSet xmi:id="_tyFYOaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="auditable" title="Auditable">
+    <attributes xmi:id="_tyFYOqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="created" title="Created" typ="DateTime">
+      <metainfo xmi:id="_tyFYO6PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyFYPKPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyFYPaPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYPqPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYP6PHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyFYQKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="creator" title="Creator">
+      <metainfo xmi:id="_tyFYQaPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyFYQqPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyFYQ6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="modified" title="Modified" typ="DateTime">
+      <metainfo xmi:id="_tyFYRKPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyFYRaPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyFYRqPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYR6PHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYSKPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyFYSaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="modifier" title="Modifier">
+      <metainfo xmi:id="_tyFYSqPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyFYS6PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyFYTKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="accessed" title="Accessed" typ="DateTime">
+      <metainfo xmi:id="_tyFYTaPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYTqPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYT6PHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYUKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="versionable" title="Versionable">
+    <attributes xmi:id="_tyFYUaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="versionLabel" title="Version Label"/>
+    <attributes xmi:id="_tyFYUqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="versionType" title="Version Type"/>
+    <attributes xmi:id="_tyFYU6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="initialVersion" title="Initial Version" typ="boolean"/>
+    <attributes xmi:id="_tyFYVKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="autoVersion" title="Auto Version" typ="boolean"/>
+    <attributes xmi:id="_tyFYVaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="autoVersionOnUpdateProps" title="Auto Version - on update properties only" typ="boolean"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYVqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="author" title="Author">
+    <attributes xmi:id="_tyFYV6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="author" title="Author"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYWKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="mlDocument" title="Multilingual Document">
+    <aspects href="systemmodel.dt#_tx5yBKPHEeCglqLRxGNZtA"/>
+    <aspects href="#_tyFYUKPHEeCglqLRxGNZtA"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYWaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="titled" title="Titled">
+    <attributes xmi:id="_tyFYWqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="title" title="Title" typ="Object">
+      <metainfo xmi:id="_tyFYW6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYXKPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYXaPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyFYXqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="description" title="Description" typ="Object">
+      <metainfo xmi:id="_tyFYX6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYYKPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYYaPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYYqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="transformable" title="Transformable"/>
+  <aspectSet xmi:id="_tyFYY6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="templatable" title="Templatable">
+    <attributes xmi:id="_tyFYZKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="template" title="Template" typ="Object"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYZaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="webscriptable" title="Webscriptable">
+    <attributes xmi:id="_tyFYZqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="webscript" title="Webscript"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYZ6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="projectsummary" title="Project Summary">
+    <attributes xmi:id="_tyFYaKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="summaryWebscript" title="Project Summary Webscript"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYaaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="complianceable" title="Complianceable" aspects="_tyFYOaPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyFYaqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="removeAfter" title="Remove After" typ="DateTime">
+      <metainfo xmi:id="_tyFYa6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYbKPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYbaPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYbqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="ownable" title="Ownable">
+    <attributes xmi:id="_tyFYb6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="owner" title="Owner"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYcKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="dublincore" title="Dublin Core" generalizations="_tyFYWaPHEeCglqLRxGNZtA" aspects="_tyFYOaPHEeCglqLRxGNZtA _tyFYVqPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyFYcaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="publisher" title="Publisher">
+      <metainfo xmi:id="_tyFYcqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyFYc6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="contributor" title="Contributor">
+      <metainfo xmi:id="_tyFYdKPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyFYdaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="type" title="Type">
+      <metainfo xmi:id="_tyFYdqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyFYd6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="identifier" title="Identifier">
+      <metainfo xmi:id="_tyFYeKPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyFYeaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="dcsource" title="Source">
+      <metainfo xmi:id="_tyFYeqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyFYe6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="coverage" title="Coverage">
+      <metainfo xmi:id="_tyFYfKPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyFYfaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="rights" title="Rights">
+      <metainfo xmi:id="_tyFYfqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyFYf6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="subject" title="Subject">
+      <metainfo xmi:id="_tyFYgKPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYgaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="basable" title="Basable"/>
+  <aspectSet xmi:id="_tyFYgqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="partable" title="Partable"/>
+  <aspectSet xmi:id="_tyFYg6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="referencing" title="Referencing"/>
+  <aspectSet xmi:id="_tyFYhKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="replaceable" title="Replacable"/>
+  <aspectSet xmi:id="_tyFYhaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="effectivity" title="Effectivity">
+    <attributes xmi:id="_tyFYhqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="from" title="Effective From" typ="DateTime">
+      <metainfo xmi:id="_tyFYh6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYiKPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYiaPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyFYiqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="to" title="Effective To" typ="DateTime">
+      <metainfo xmi:id="_tyFYi6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYjKPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYjaPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYjqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="summarizable" title="Summarizable">
+    <attributes xmi:id="_tyFYj6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="summary" title="Summary"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYkKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="countable" title="Countable">
+    <attributes xmi:id="_tyFYkaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="hits" typ="int"/>
+    <attributes xmi:id="_tyFYkqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="counter" typ="int"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYk6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="copiedfrom" title="Copied From">
+    <attributes xmi:id="_tyFYlKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="source" typ="Object">
+      <metainfo xmi:id="_tyFYlaPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyFYlqPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYl6PHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYmKPHEeCglqLRxGNZtA" key="index.tokenised" value="true"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYmaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="workingcopy" title="Working Copy">
+    <attributes xmi:id="_tyFYmqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="workingCopyOwner">
+      <metainfo xmi:id="_tyFYm6PHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyFYnKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="workingCopyMode"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYnaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="lockable" title="Lockable">
+    <attributes xmi:id="_tyFYnqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="lockOwner"/>
+    <attributes xmi:id="_tyFYn6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="lockType"/>
+    <attributes xmi:id="_tyFYoKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="expiryDate" typ="Date"/>
+    <attributes xmi:id="_tyFYoaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="lockIsDeep" typ="boolean"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYoqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="subscribable"/>
+  <aspectSet xmi:id="_tyFYo6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="classifiable" title="Classifiable"/>
+  <aspectSet xmi:id="_tyFYpKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="generalclassifiable" title="General Classifiable" generalizations="_tyFYo6PHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyFYpaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="categories" title="Categories" typ="Object">
+      <metainfo xmi:id="_tyFYpqPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYp6PHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYqKPHEeCglqLRxGNZtA" key="index.stored"/>
+      <metainfo xmi:id="_tyFYqaPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYqqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="taggable" title="Taggable" generalizations="_tyFYo6PHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyFYq6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="taggable" title="Tags" typ="Object">
+      <metainfo xmi:id="_tyFYrKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYraPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYrqPHEeCglqLRxGNZtA" key="index.stored"/>
+      <metainfo xmi:id="_tyFYr6PHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYsKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="tagscope" title="Tag Scope">
+    <attributes xmi:id="_tyFYsaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="tagScopeCache" title="Tags" typ="Object"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYsqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="rateable" title="Rateable"/>
+  <aspectSet xmi:id="_tyFYs6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="attachable" title="Attachable"/>
+  <aspectSet xmi:id="_tyFYtKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="emailed" title="Emailed">
+    <attributes xmi:id="_tyFYtaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="originator" title="Originator"/>
+    <attributes xmi:id="_tyFYtqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="addressee" title="Addressee"/>
+    <attributes xmi:id="_tyFYt6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="addressees" title="Addressees"/>
+    <attributes xmi:id="_tyFYuKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="subjectline" title="Subject"/>
+    <attributes xmi:id="_tyFYuaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="sentdate" title="Sent Date" typ="DateTime">
+      <metainfo xmi:id="_tyFYuqPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYu6PHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYvKPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYvaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="referencesnode" title="References Node">
+    <attributes xmi:id="_tyFYvqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="noderef" title="Node Reference" typ="Object">
+      <metainfo xmi:id="_tyFYv6PHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYwKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="mlEmptyTranslation" title="Empty Translation" aspects="_tyFYWKPHEeCglqLRxGNZtA"/>
+  <aspectSet xmi:id="_tyFYwaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="storeSelector" title="ContentStore Selector">
+    <attributes xmi:id="_tyFYwqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="storeName" title="Store Name">
+      <metainfo xmi:id="_tyFYw6PHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYxKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="preferences" title="Preferences">
+    <attributes xmi:id="_tyFYxaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="preferenceValues" typ="Object"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYxqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="syndication" title="Content syndication">
+    <attributes xmi:id="_tyFYx6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="published" title="Published" typ="DateTime">
+      <metainfo xmi:id="_tyFYyKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYyaPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYyqPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyFYy6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="updated" title="Updated" typ="DateTime">
+      <metainfo xmi:id="_tyFYzKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyFYzaPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyFYzqPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFYz6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="geographic" title="Geographic">
+    <attributes xmi:id="_tyFY0KPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="latitude" title="Latitude" typ="double"/>
+    <attributes xmi:id="_tyFY0aPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="longitude" title="Longitude" typ="double"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyFY0qPHEeCglqLRxGNZtA" namespace="_tyEw4qPHEeCglqLRxGNZtA" name="rendition" title="Rendition"/>
+  <aspectSet xmi:id="_tyFY06PHEeCglqLRxGNZtA" namespace="_tyEw4qPHEeCglqLRxGNZtA" name="hiddenRendition" title="Hidden Rendition" generalizations="_tyFY0qPHEeCglqLRxGNZtA"/>
+  <aspectSet xmi:id="_tyFY1KPHEeCglqLRxGNZtA" namespace="_tyEw4qPHEeCglqLRxGNZtA" name="visibleRendition" title="Visible Rendition" generalizations="_tyFY0qPHEeCglqLRxGNZtA"/>
+  <aspectSet xmi:id="_tyFY1aPHEeCglqLRxGNZtA" namespace="_tyEw4qPHEeCglqLRxGNZtA" name="renditioned" title="Renditioned"/>
+  <aspectSet xmi:id="_tyFY1qPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="exif" title="EXIF">
+    <attributes xmi:id="_tyF_AKPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="dateTimeOriginal" title="Date and Time" typ="DateTime"/>
+    <attributes xmi:id="_tyF_AaPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="pixelXDimension" title="Image Width" typ="int"/>
+    <attributes xmi:id="_tyF_AqPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="pixelYDimension" title="Image Height" typ="int"/>
+    <attributes xmi:id="_tyF_A6PHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="exposureTime" title="Exposure Time" typ="double"/>
+    <attributes xmi:id="_tyF_BKPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="fNumber" title="F Number" typ="double"/>
+    <attributes xmi:id="_tyF_BaPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="flash" title="Flash Activated" typ="boolean"/>
+    <attributes xmi:id="_tyF_BqPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="focalLength" title="Focal Length" typ="double"/>
+    <attributes xmi:id="_tyF_B6PHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="isoSpeedRatings" title="ISO Speed"/>
+    <attributes xmi:id="_tyF_CKPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="manufacturer" title="Camera Manufacturer"/>
+    <attributes xmi:id="_tyF_CaPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="model" title="Camera Model"/>
+    <attributes xmi:id="_tyF_CqPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="software" title="Camera Software"/>
+    <attributes xmi:id="_tyF_C6PHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="orientation" title="Orientation" typ="int"/>
+    <attributes xmi:id="_tyF_DKPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="xResolution" title="Horizontal Resolution" typ="double"/>
+    <attributes xmi:id="_tyF_DaPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="yResolution" title="Vertical Resolution" typ="double"/>
+    <attributes xmi:id="_tyF_DqPHEeCglqLRxGNZtA" namespace="_tyEw46PHEeCglqLRxGNZtA" name="resolutionUnit" title="Resolution Unit"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyF_D6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="localizable" title="Localizable">
+    <attributes xmi:id="_tyF_EKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="locale" title="Locale" typ="Object"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyF_EaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="translatable" title="Translatable" generalizations="_tyF_D6PHEeCglqLRxGNZtA"/>
+  <aspectSet xmi:id="_tyF_EqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="thumbnailed" title="Thumbnailed" generalizations="_tyFY1aPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyF_E6PHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="automaticUpdate" title="Automatic Update" typ="boolean">
+      <metainfo xmi:id="_tyF_FKPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+  <constraintSet xmi:id="_tyF_FaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="filename" constraintType="REGEX">
+    <params xmi:id="_tyF_FqPHEeCglqLRxGNZtA" name="expression">
+      <values>(.*[\&quot;\*\\\>\&lt;\?\/\:\|]+.*)|(.*[\.]?.*[\.]+$)|(.*[ ]+$)</values>
+    </params>
+    <params xmi:id="_tyF_F6PHEeCglqLRxGNZtA" name="requiresMatch">
+      <values>false</values>
+    </params>
+  </constraintSet>
+  <constraintSet xmi:id="_tyF_GKPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="userNameConstraint" constraintType="org.alfresco.repo.dictionary.constraint.UserNameConstraint"/>
+  <constraintSet xmi:id="_tyF_GaPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="authorityNameConstraint" constraintType="org.alfresco.repo.dictionary.constraint.AuthorityNameConstraint"/>
+  <constraintSet xmi:id="_tyF_GqPHEeCglqLRxGNZtA" namespace="_tyEw4aPHEeCglqLRxGNZtA" name="storeSelectorConstraint" constraintType="REGISTERED">
+    <params xmi:id="_tyF_G6PHEeCglqLRxGNZtA" name="registeredName">
+      <values>defaultStoreSelector</values>
+    </params>
+  </constraintSet>
+</clazz:Model>

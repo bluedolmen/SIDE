@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_aW6poKZBEeCY34yq-QsV1A" namespace="_aW6poaZBEeCY34yq-QsV1A" name="siteModel">
+  <namespaceSet xmi:id="_aW6poaZBEeCY34yq-QsV1A" prefix="st" URI="http://www.alfresco.org/model/site/1.0"/>
+  <namespaceSet xmi:id="_aW6poqZBEeCY34yq-QsV1A" prefix="stcp" URI="http://www.alfresco.org/model/sitecustomproperty/1.0"/>
+  <classSet xmi:id="_aW6po6ZBEeCY34yq-QsV1A" namespace="_aW6poaZBEeCY34yq-QsV1A" name="site" title="Site">
+    <attributes xmi:id="_aW6ppKZBEeCY34yq-QsV1A" namespace="_aW6poaZBEeCY34yq-QsV1A" name="sitePreset" title="Site Preset"/>
+    <attributes xmi:id="_aW6ppaZBEeCY34yq-QsV1A" namespace="_aW6poaZBEeCY34yq-QsV1A" name="siteVisibility" title="Site Visibility"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuuaZBEeCY34yq-QsV1A"/>
+    <aspects href="contentmodel.dt#_aWo89qZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <classSet xmi:id="_aW6ppqZBEeCY34yq-QsV1A" namespace="_aW6poaZBEeCY34yq-QsV1A" name="sites" title="Sites">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuuaZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <aspectSet xmi:id="_aW6pp6ZBEeCY34yq-QsV1A" namespace="_aW6poaZBEeCY34yq-QsV1A" name="siteContainer" title="Site Container">
+    <attributes xmi:id="_aW7QsKZBEeCY34yq-QsV1A" namespace="_aW6poaZBEeCY34yq-QsV1A" name="componentId" title="Component Id"/>
+  </aspectSet>
+  <aspectSet xmi:id="_aW7QsaZBEeCY34yq-QsV1A" namespace="_aW6poaZBEeCY34yq-QsV1A" name="customSiteProperties" title="Custom Site Properties">
+    <attributes xmi:id="_aW7QsqZBEeCY34yq-QsV1A" namespace="_aW6poqZBEeCY34yq-QsV1A" name="additionalInformation" title="Additional Site Information"/>
+  </aspectSet>
+</clazz:Model>

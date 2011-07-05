@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tyTaYKPHEeCglqLRxGNZtA" namespace="_tyTaYaPHEeCglqLRxGNZtA" name="linksmodel">
+  <namespaceSet xmi:id="_tyTaYaPHEeCglqLRxGNZtA" prefix="lnk" URI="http://www.alfresco.org/model/linksmodel/1.0"/>
+  <classSet xmi:id="_tyTaYqPHEeCglqLRxGNZtA" namespace="_tyTaYaPHEeCglqLRxGNZtA" name="link">
+    <attributes xmi:id="_tyTaY6PHEeCglqLRxGNZtA" namespace="_tyTaYaPHEeCglqLRxGNZtA" name="title" title="Link Title"/>
+    <attributes xmi:id="_tyTaZKPHEeCglqLRxGNZtA" namespace="_tyTaYaPHEeCglqLRxGNZtA" name="url" title="Link URL"/>
+    <attributes xmi:id="_tyTaZaPHEeCglqLRxGNZtA" namespace="_tyTaYaPHEeCglqLRxGNZtA" name="description" title="Link Description"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <aspectSet xmi:id="_tyTaZqPHEeCglqLRxGNZtA" namespace="_tyTaYaPHEeCglqLRxGNZtA" name="internal" title="Internal Link">
+    <attributes xmi:id="_tyTaZ6PHEeCglqLRxGNZtA" namespace="_tyTaYaPHEeCglqLRxGNZtA" name="isInternal" title="Is Internal">
+      <metainfo xmi:id="_tyTaaKPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+</clazz:Model>

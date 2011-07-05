@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tyMssKPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="datalistmodel">
+  <namespaceSet xmi:id="_tyMssaPHEeCglqLRxGNZtA" prefix="dl" URI="http://www.alfresco.org/model/datalist/1.0"/>
+  <classSet xmi:id="_tyMssqPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="dataList" title="Data List container type">
+    <attributes xmi:id="_tyMss6PHEeCglqLRxGNZtA" description="Determines which Data Dictionary type will be used when create new items within the Data List." namespace="_tyMssaPHEeCglqLRxGNZtA" name="dataListItemType" title="List Item Type"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw66PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyMstKPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="dataListItem" title="Data List parent type">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyMstaPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="todoList" title="To Do List" generalizations="_tyMstKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyMstqPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="todoTitle" title="Title">
+      <metainfo xmi:id="_tyMst6PHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyMsuKPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="todoDueDate" title="Due Date" typ="DateTime"/>
+    <attributes xmi:id="_tyMsuaPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="todoPriority" title="Priority" typ="int"/>
+    <attributes xmi:id="_tyMsuqPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="todoStatus" title="Status"/>
+    <attributes xmi:id="_tyMsu6PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="todoNotes" title="Notes"/>
+  </classSet>
+  <classSet xmi:id="_tyMsvKPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="simpletask" title="Task List (Simple)" generalizations="_tyMstKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyMsvaPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="simpletaskDueDate" title="Due Date" typ="Date"/>
+    <attributes xmi:id="_tyMsvqPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="simpletaskPriority" title="Priority"/>
+    <attributes xmi:id="_tyMsv6PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="simpletaskStatus" title="Status"/>
+    <attributes xmi:id="_tyMswKPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="simpletaskComments" title="Comments"/>
+    <aspects href="contentmodel.dt#_tyFYWaPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyMswaPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="task" title="Task List (Advanced)" generalizations="_tyMstKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyMswqPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="taskPriority" title="Priority"/>
+    <attributes xmi:id="_tyMsw6PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="taskStatus" title="Status"/>
+    <attributes xmi:id="_tyMsxKPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="taskComments" title="Comments"/>
+    <aspects href="contentmodel.dt#_tyFYWaPHEeCglqLRxGNZtA"/>
+    <aspects href="contentmodel.dt#_tyFYs6PHEeCglqLRxGNZtA"/>
+    <aspects href="#_tyMs-aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyMsxaPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="contact" title="Contacts List" generalizations="_tyMstKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyMsxqPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="contactFirstName" title="First Name"/>
+    <attributes xmi:id="_tyMsx6PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="contactLastName" title="Last Name"/>
+    <attributes xmi:id="_tyMsyKPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="contactEmail" title="Email Address"/>
+    <attributes xmi:id="_tyMsyaPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="contactCompany" title="Company"/>
+    <attributes xmi:id="_tyMsyqPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="contactJobTitle" title="Job Title"/>
+    <attributes xmi:id="_tyMsy6PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="contactPhoneOffice" title="Phone (Office)"/>
+    <attributes xmi:id="_tyMszKPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="contactPhoneMobile" title="Phone (Mobile)"/>
+    <attributes xmi:id="_tyMszaPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="contactNotes" title="Notes"/>
+  </classSet>
+  <classSet xmi:id="_tyMszqPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="issue" title="Issues List" generalizations="_tyMstKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyMsz6PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="issueID" title="Issue ID"/>
+    <attributes xmi:id="_tyMs0KPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="issueStatus" title="Status"/>
+    <attributes xmi:id="_tyMs0aPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="issuePriority" title="Priority"/>
+    <attributes xmi:id="_tyMs0qPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="issueDueDate" title="Due Date" typ="Date"/>
+    <attributes xmi:id="_tyMs06PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="issueComments" title="Comments"/>
+    <aspects href="contentmodel.dt#_tyFYWaPHEeCglqLRxGNZtA"/>
+    <aspects href="contentmodel.dt#_tyFYs6PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyMs1KPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="event" title="Event" generalizations="_tyMstKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyMs1aPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventLocation" title="Location"/>
+    <attributes xmi:id="_tyMs1qPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventNote" title="Notes"/>
+    <attributes xmi:id="_tyMs16PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventStartDate" title="Start Date" typ="DateTime"/>
+    <attributes xmi:id="_tyMs2KPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventEndDate" title="End Date" typ="DateTime"/>
+    <attributes xmi:id="_tyMs2aPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventRegistrations" title="Registrations"/>
+    <aspects href="contentmodel.dt#_tyFYWaPHEeCglqLRxGNZtA"/>
+    <aspects href="contentmodel.dt#_tyFYs6PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyMs2qPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="location" title="Location" generalizations="_tyMstKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyMs26PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="locationAddress1" title="Address 1"/>
+    <attributes xmi:id="_tyMs3KPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="locationAddress2" title="Address 2"/>
+    <attributes xmi:id="_tyMs3aPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="locationAddress3" title="Address 3"/>
+    <attributes xmi:id="_tyMs3qPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="locationZip" title="Zip/Post Code"/>
+    <attributes xmi:id="_tyMs36PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="locationState" title="State/County"/>
+    <attributes xmi:id="_tyMs4KPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="locationCountry" title="Country"/>
+    <aspects href="contentmodel.dt#_tyFYWaPHEeCglqLRxGNZtA"/>
+    <aspects href="contentmodel.dt#_tyFYs6PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyMs4aPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="meetingAgenda" title="Meeting Agenda" generalizations="_tyMstKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyMs4qPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="meetingAgendaRef" title="Reference"/>
+    <attributes xmi:id="_tyMs46PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="meetingAgendaTime" title="Time (Mins)"/>
+    <attributes xmi:id="_tyMs5KPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="meetingAgendaOwner" title="Owner"/>
+    <aspects href="contentmodel.dt#_tyFYWaPHEeCglqLRxGNZtA"/>
+    <aspects href="contentmodel.dt#_tyFYs6PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyMs5aPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventAgenda" title="Event Agenda" generalizations="_tyMstKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyMs5qPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventAgendaRef" title="Reference"/>
+    <attributes xmi:id="_tyMs56PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventAgendaStartTime" title="Start Time"/>
+    <attributes xmi:id="_tyMs6KPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventAgendaEndTime" title="End Timie"/>
+    <attributes xmi:id="_tyMs6aPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventAgendaSessionName" title="Session Name"/>
+    <attributes xmi:id="_tyMs6qPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventAgendaPresenter" title="Presenter"/>
+    <attributes xmi:id="_tyMs66PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventAgendaAudience" title="Audience"/>
+    <attributes xmi:id="_tyMs7KPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="eventAgendaNotes" title="Notes"/>
+    <aspects href="contentmodel.dt#_tyFYs6PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <associationSet xmi:id="_tyMs7aPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="assignee" title="Assignee">
+    <firstEnd xmi:id="_tyMs7qPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyMstaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyMs76PHEeCglqLRxGNZtA" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyExAKPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_tyMs8KPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="attachments" title="Attachments">
+    <firstEnd xmi:id="_tyMs8aPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyMstaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyMs8qPHEeCglqLRxGNZtA" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw5KPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_tyMs86PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="taskAssignee" title="Assignee">
+    <firstEnd xmi:id="_tyMs9KPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyMswaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyMs9aPHEeCglqLRxGNZtA" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyExAKPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_tyMs9qPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="issueAssignedTo" title="Assigned To">
+    <firstEnd xmi:id="_tyMs96PHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyMszqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyMs-KPHEeCglqLRxGNZtA" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyExAKPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <aspectSet xmi:id="_tyMs-aPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="gantt" title="Gantt">
+    <attributes xmi:id="_tyMs-qPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="ganttStartDate" title="Start Date" typ="Date"/>
+    <attributes xmi:id="_tyMs-6PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="ganttEndDate" title="End Date" typ="Date"/>
+    <attributes xmi:id="_tyMs_KPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="ganttPercentComplete" title="% Complete" typ="int">
+      <metainfo xmi:id="_tyMs_aPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+  <enumerationSet xmi:id="_tyMs_qPHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="task_status">
+    <literals xmi:id="_tyMs_6PHEeCglqLRxGNZtA" value="Not Started" name="Not Started"/>
+    <literals xmi:id="_tyMtAKPHEeCglqLRxGNZtA" value="In Progress" name="In Progress"/>
+    <literals xmi:id="_tyMtAaPHEeCglqLRxGNZtA" value="Complete" name="Complete"/>
+    <literals xmi:id="_tyMtAqPHEeCglqLRxGNZtA" value="On Hold" name="On Hold"/>
+  </enumerationSet>
+  <enumerationSet xmi:id="_tyMtA6PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="priority_value">
+    <literals xmi:id="_tyMtBKPHEeCglqLRxGNZtA" value="High" name="High"/>
+    <literals xmi:id="_tyMtBaPHEeCglqLRxGNZtA" value="Normal" name="Normal"/>
+    <literals xmi:id="_tyMtBqPHEeCglqLRxGNZtA" value="Low" name="Low"/>
+  </enumerationSet>
+  <constraintSet xmi:id="_tyMtB6PHEeCglqLRxGNZtA" namespace="_tyMssaPHEeCglqLRxGNZtA" name="percentage" constraintType="MINMAX">
+    <params xmi:id="_tyMtCKPHEeCglqLRxGNZtA" name="minValue">
+      <values>0</values>
+    </params>
+    <params xmi:id="_tyMtCaPHEeCglqLRxGNZtA" name="maxValue">
+      <values>100</values>
+    </params>
+  </constraintSet>
+</clazz:Model>

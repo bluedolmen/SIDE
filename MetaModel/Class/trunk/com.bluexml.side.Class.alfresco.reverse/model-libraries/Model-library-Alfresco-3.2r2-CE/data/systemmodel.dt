@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_aWdWoKZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="systemmodel">
+  <namespaceSet xmi:id="_aWdWoaZBEeCY34yq-QsV1A" prefix="sys" URI="http://www.alfresco.org/model/system/1.0"/>
+  <namespaceSet xmi:id="_aWdWoqZBEeCY34yq-QsV1A" prefix="reg" URI="http://www.alfresco.org/system/registry/1.0"/>
+  <namespaceSet xmi:id="_aWdWo6ZBEeCY34yq-QsV1A" prefix="module" URI="http://www.alfresco.org/system/modules/1.0"/>
+  <classSet xmi:id="_aWd9sKZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="base" title="Base" aspects="_aWd9zqZBEeCY34yq-QsV1A"/>
+  <classSet xmi:id="_aWd9saZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="descriptor" title="Descriptor" generalizations="_aWd9sKZBEeCY34yq-QsV1A">
+    <attributes xmi:id="_aWd9sqZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="name">
+      <metainfo xmi:id="_aWd9s6ZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd9tKZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_aWd9taZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="versionMajor">
+      <metainfo xmi:id="_aWd9tqZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd9t6ZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_aWd9uKZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="versionMinor">
+      <metainfo xmi:id="_aWd9uaZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd9uqZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_aWd9u6ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="versionRevision">
+      <metainfo xmi:id="_aWd9vKZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd9vaZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_aWd9vqZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="versionLabel"/>
+    <attributes xmi:id="_aWd9v6ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="versionBuild"/>
+    <attributes xmi:id="_aWd9wKZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="versionSchema" typ="int">
+      <metainfo xmi:id="_aWd9waZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd9wqZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_aWd9w6ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="versionEdition" typ="Object"/>
+    <attributes xmi:id="_aWd9xKZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="versionProperties" typ="Object"/>
+  </classSet>
+  <classSet xmi:id="_aWd9xaZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="container" title="Container" generalizations="_aWd9sKZBEeCY34yq-QsV1A"/>
+  <classSet xmi:id="_aWd9xqZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="store_root" title="Store Root" generalizations="_aWd9xaZBEeCY34yq-QsV1A" aspects="_aWd926ZBEeCY34yq-QsV1A"/>
+  <classSet xmi:id="_aWd9x6ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="reference" title="Reference" generalizations="_aWd9sKZBEeCY34yq-QsV1A">
+    <attributes xmi:id="_aWd9yKZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="reference" typ="Object">
+      <metainfo xmi:id="_aWd9yaZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd9yqZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+  </classSet>
+  <associationSet xmi:id="_aWd9y6ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="children" associationType="Aggregation">
+    <firstEnd xmi:id="_aWd9zKZBEeCY34yq-QsV1A" cardMax="-1" linkedClass="_aWd9xaZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aWd9zaZBEeCY34yq-QsV1A" cardMax="-1" navigable="true" linkedClass="_aWd9sKZBEeCY34yq-QsV1A"/>
+  </associationSet>
+  <aspectSet xmi:id="_aWd9zqZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="referenceable" title="Referenceable">
+    <attributes xmi:id="_aWd9z6ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="store-protocol">
+      <metainfo xmi:id="_aWd90KZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd90aZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_aWd90qZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="store-identifier">
+      <metainfo xmi:id="_aWd906ZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd91KZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_aWd91aZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="node-uuid">
+      <metainfo xmi:id="_aWd91qZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd916ZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_aWd92KZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="node-dbid" typ="long">
+      <metainfo xmi:id="_aWd92aZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd92qZBEeCY34yq-QsV1A" key="mandatory.enforced"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_aWd926ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="aspect_root" title="Root"/>
+  <aspectSet xmi:id="_aWd93KZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="incomplete" title="Incomplete"/>
+  <aspectSet xmi:id="_aWd93aZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="temporary" title="Temporary"/>
+  <aspectSet xmi:id="_aWd93qZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="archived" title="Archived">
+    <attributes xmi:id="_aWd936ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="archivedOriginalParentAssoc" typ="Object">
+      <metainfo xmi:id="_aWd94KZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+    <attributes xmi:id="_aWd94aZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="archivedBy">
+      <metainfo xmi:id="_aWd94qZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+    <attributes xmi:id="_aWd946ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="archivedDate" typ="DateTime">
+      <metainfo xmi:id="_aWd95KZBEeCY34yq-QsV1A" key="required"/>
+      <metainfo xmi:id="_aWd95aZBEeCY34yq-QsV1A" key="propertySearched"/>
+      <metainfo xmi:id="_aWd95qZBEeCY34yq-QsV1A" key="index.atomic"/>
+      <metainfo xmi:id="_aWd956ZBEeCY34yq-QsV1A" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_aWd96KZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="archivedOriginalOwner">
+      <metainfo xmi:id="_aWd96aZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_aWd96qZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="archived-assocs">
+    <attributes xmi:id="_aWd966ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="archivedParentAssocs" typ="Object"/>
+    <attributes xmi:id="_aWd97KZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="archivedChildAssocs" typ="Object"/>
+    <attributes xmi:id="_aWd97aZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="archivedSourceAssocs" typ="Object"/>
+    <attributes xmi:id="_aWd97qZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="archivedTargetAssocs" typ="Object"/>
+  </aspectSet>
+  <aspectSet xmi:id="_aWd976ZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="localized" title="Translation">
+    <attributes xmi:id="_aWd98KZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="locale" title="Locale" typ="Object">
+      <metainfo xmi:id="_aWd98aZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_aWd98qZBEeCY34yq-QsV1A" namespace="_aWdWoaZBEeCY34yq-QsV1A" name="indexChildren" title="Cascade Index Children"/>
+</clazz:Model>

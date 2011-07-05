@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_aW40cKZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="CalendarEventModel">
+  <namespaceSet xmi:id="_aW40caZBEeCY34yq-QsV1A" prefix="ia" URI="http://www.alfresco.org/model/calendar"/>
+  <classSet xmi:id="_aW40cqZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="calendarEvent" title="Calendar Event">
+    <attributes xmi:id="_aW40c6ZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="whatEvent"/>
+    <attributes xmi:id="_aW40dKZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="fromDate" typ="DateTime">
+      <metainfo xmi:id="_aW40daZBEeCY34yq-QsV1A" key="propertySearched"/>
+      <metainfo xmi:id="_aW40dqZBEeCY34yq-QsV1A" key="index.atomic"/>
+      <metainfo xmi:id="_aW40d6ZBEeCY34yq-QsV1A" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_aW40eKZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="toDate" typ="DateTime">
+      <metainfo xmi:id="_aW40eaZBEeCY34yq-QsV1A" key="propertySearched"/>
+      <metainfo xmi:id="_aW40eqZBEeCY34yq-QsV1A" key="index.atomic"/>
+      <metainfo xmi:id="_aW40e6ZBEeCY34yq-QsV1A" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_aW40fKZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="whereEvent"/>
+    <attributes xmi:id="_aW40faZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="descriptionEvent"/>
+    <attributes xmi:id="_aW40fqZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="colorEvent"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuu6ZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <classSet xmi:id="_aW40f6ZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="calendar" title="Calendar Space">
+    <attributes xmi:id="_aW40gKZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="whatEventDefault"/>
+    <attributes xmi:id="_aW40gaZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="fromDateDefault" typ="DateTime">
+      <metainfo xmi:id="_aW40gqZBEeCY34yq-QsV1A" key="propertySearched"/>
+      <metainfo xmi:id="_aW40g6ZBEeCY34yq-QsV1A" key="index.atomic"/>
+      <metainfo xmi:id="_aW40hKZBEeCY34yq-QsV1A" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_aW40haZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="toDateDefault" typ="DateTime">
+      <metainfo xmi:id="_aW40hqZBEeCY34yq-QsV1A" key="propertySearched"/>
+      <metainfo xmi:id="_aW40h6ZBEeCY34yq-QsV1A" key="index.atomic"/>
+      <metainfo xmi:id="_aW40iKZBEeCY34yq-QsV1A" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_aW40iaZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="whereEventDefault"/>
+    <attributes xmi:id="_aW40iqZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="colorEventDefault"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuuaZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <associationSet xmi:id="_aW40i6ZBEeCY34yq-QsV1A" namespace="_aW40caZBEeCY34yq-QsV1A" name="subscribedCalendarList">
+    <firstEnd xmi:id="_aW40jKZBEeCY34yq-QsV1A" cardMax="-1" linkedClass="_aW40f6ZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aW40jaZBEeCY34yq-QsV1A" cardMax="-1" navigable="true" linkedClass="_aW40f6ZBEeCY34yq-QsV1A"/>
+  </associationSet>
+</clazz:Model>

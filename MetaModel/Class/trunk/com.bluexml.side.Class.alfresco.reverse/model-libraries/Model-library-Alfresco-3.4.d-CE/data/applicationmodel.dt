@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tyXEwKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="applicationmodel">
+  <namespaceSet xmi:id="_tyXEwaPHEeCglqLRxGNZtA" prefix="wca" URI="http://www.alfresco.org/model/wcmappmodel/1.0"/>
+  <classSet xmi:id="_tyXEwqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="webfolder" title="WCM Web Project Folder">
+    <attributes xmi:id="_tyXEw6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="avmstore" title="AVM Store Root">
+      <metainfo xmi:id="_tyXExKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyXExaPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyXExqPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tyXEx6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="defaultwebapp" title="Default Webapp"/>
+    <attributes xmi:id="_tyXEyKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployto" title="Deploy To"/>
+    <attributes xmi:id="_tyXEyaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="selecteddeployto" title="Servers Selected For Deployment"/>
+    <attributes xmi:id="_tyXEyqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="selecteddeployversion" title="Snapshot Version Selected For Deployment" typ="int"/>
+    <attributes xmi:id="_tyXEy6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="issource" title="Used as a template website" typ="boolean"/>
+    <attributes xmi:id="_tyXEzKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="previewprovidername" title="Preview Provider"/>
+    <generalizations xsi:type="clazz:Clazz" href="wcmmodel.dt#_tyUoiaPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyXEzaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="webuser" title="Website User Information">
+    <attributes xmi:id="_tyXEzqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="username">
+      <metainfo xmi:id="_tyXEz6PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXE0KPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXE0aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="role">
+      <metainfo xmi:id="_tyXE0qPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXE06PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyXE1KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="webform" title="Website Web Form">
+    <attributes xmi:id="_tyXE1aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="formname">
+      <metainfo xmi:id="_tyXE1qPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXE16PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyXE2KPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyXE2aPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyXE2qPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+    <aspects href="contentmodel.dt#_tyFYWaPHEeCglqLRxGNZtA"/>
+    <aspects href="#_tyXr5aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyXE26PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="webformtemplate" title="Website Web Form Template" aspects="_tyXr5aPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyXE3KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="baserenderingenginetemplatename">
+      <metainfo xmi:id="_tyXE3aPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXE3qPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyXE36PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="workflowdefaults" title="Workflow Defaults">
+    <attributes xmi:id="_tyXE4KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="workflowname">
+      <metainfo xmi:id="_tyXE4aPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXE4qPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXE46PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="workflowdefaultproperties" typ="Object"/>
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyXE5KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="webworkflowdefaults" title="Web Workflow Defaults" generalizations="_tyXE36PHEeCglqLRxGNZtA" aspects="_tyXr56PHEeCglqLRxGNZtA"/>
+  <classSet xmi:id="_tyXE5aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploymentreport" title="Website Deployment Report">
+    <attributes xmi:id="_tyXE5qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployserver" title="Server Deployed To">
+      <metainfo xmi:id="_tyXE56PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXE6KPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXE6aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployversion" title="Snapshot Version Deployed" typ="int">
+      <metainfo xmi:id="_tyXE6qPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXE66PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXE7KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploystarttime" title="Time Deploy Started" typ="DateTime">
+      <metainfo xmi:id="_tyXE7aPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXE7qPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyXE76PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyXE8KPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyXE8aPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyXE8qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployendtime" title="Time Deploy Finished" typ="DateTime">
+      <metainfo xmi:id="_tyXE86PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXE9KPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyXE9aPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyXE9qPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyXE96PHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyXE-KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploysuccessful" title="Deployment Successful" typ="boolean"/>
+    <attributes xmi:id="_tyXE-aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployfailedreason" title="Failure Reason"/>
+    <attributes xmi:id="_tyXE-qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployservernameused" title="Server Display Name"/>
+    <attributes xmi:id="_tyXE-6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployserverusernameused" title="Username Used"/>
+    <attributes xmi:id="_tyXE_KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployservertargetused" title="Target Used"/>
+    <attributes xmi:id="_tyXE_aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploysourcepathused" title="Source Path Used"/>
+    <attributes xmi:id="_tyXE_qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployexcludesused" title="Excludes Used"/>
+    <attributes xmi:id="_tyXE_6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployserverurlused" title="Source Path Used"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyXFAKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploymentserver" title="Website Deployment Server">
+    <attributes xmi:id="_tyXFAaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploytype" title="Deployment Type"/>
+    <attributes xmi:id="_tyXFAqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployservertype" title="Deployment Server Type"/>
+    <attributes xmi:id="_tyXFA6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployserverhost" title="Host">
+      <metainfo xmi:id="_tyXFBKPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXFBaPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyXFBqPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyXFB6PHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyXFCKPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tyXFCaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployserverport" title="Port" typ="int"/>
+    <attributes xmi:id="_tyXFCqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployservername" title="Display Name"/>
+    <attributes xmi:id="_tyXFC6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployservergroup" title="Display Name"/>
+    <attributes xmi:id="_tyXFDKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name=" deployserveradaptername" title="Deployment Server Adapter Name"/>
+    <attributes xmi:id="_tyXFDaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployserverusername" title="Username"/>
+    <attributes xmi:id="_tyXFDqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployserverpassword" title="Password"/>
+    <attributes xmi:id="_tyXFD6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployserverurl" title="Runtime URL"/>
+    <attributes xmi:id="_tyXFEKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployservertarget" title="Deploy Target"/>
+    <attributes xmi:id="_tyXFEaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploysourcepath" title="Source Path"/>
+    <attributes xmi:id="_tyXFEqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployexcludes" title="Excludes"/>
+    <attributes xmi:id="_tyXFE6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployserverallocatedto" title="Allocated To">
+      <metainfo xmi:id="_tyXFFKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyXFFaPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyXFFqPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tyXFF6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployonapproval" title="Deploy On Approval" typ="boolean"/>
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyXFGKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploymentattempt" title="Website Deployment Attempt">
+    <attributes xmi:id="_tyXFGaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployattemptid" title="Deploy Attempt ID">
+      <metainfo xmi:id="_tyXFGqPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXFG6PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyXFHKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyXFHaPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyXFHqPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tyXFH6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployattempttype" title="Attempt Type"/>
+    <attributes xmi:id="_tyXFIKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployattemptstore" title="Attempt Type">
+      <metainfo xmi:id="_tyXFIaPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXFIqPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyXFI6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyXFJKPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyXFJaPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tyXFJqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployattemptversion" title="Snapshot Version Deployed" typ="int">
+      <metainfo xmi:id="_tyXFJ6PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXFKKPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXFKaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployattemptservers" title="Servers Deployed To">
+      <metainfo xmi:id="_tyXFKqPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXFK6PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXFLKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployattempttime" title="Time Of Deploy Attempt" typ="DateTime">
+      <metainfo xmi:id="_tyXFLaPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXFLqPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyXFL6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyXFMKPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyXFMaPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyXFMqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="renditionproperties" title="Properties for renditions" aspects="_tyXr5aPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyXFM6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="mimetypeforrendition" title="Mimetype for generated assets">
+      <metainfo xmi:id="_tyXFNKPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXFNaPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyXFNqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="formfolder" title="XForms Capture Form Folder">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw66PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <associationSet xmi:id="_tyXFN6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="webuser" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXFOKPHEeCglqLRxGNZtA" linkedClass="_tyXEwqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXFOaPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyXEzaPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXFOqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="webform" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXFO6PHEeCglqLRxGNZtA" linkedClass="_tyXEwqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXFPKPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyXE1KPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXFPaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="webformtemplate" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXFPqPHEeCglqLRxGNZtA" linkedClass="_tyXE1KPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXFP6PHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyXE26PHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXFQKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="workflowdefaults" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXFQaPHEeCglqLRxGNZtA" linkedClass="_tyXE1KPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXFQqPHEeCglqLRxGNZtA" navigable="true" linkedClass="_tyXE36PHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXFQ6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="webworkflowdefaults" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXFRKPHEeCglqLRxGNZtA" linkedClass="_tyXEwqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXFRaPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyXE5KPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXr0KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploymentreport" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXr0aPHEeCglqLRxGNZtA" linkedClass="_tyXEwqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXr0qPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyXE5aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXr06PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploymentserver" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXr1KPHEeCglqLRxGNZtA" linkedClass="_tyXEwqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXr1aPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyXFAKPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXr1qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploymentattempt" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXr16PHEeCglqLRxGNZtA" linkedClass="_tyXEwqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXr2KPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyXFGKPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXr2aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploymentreports" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXr2qPHEeCglqLRxGNZtA" linkedClass="_tyXFGKPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXr26PHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyXE5aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXr3KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="renderingenginetemplates" title="Form Data Renderers">
+    <firstEnd xmi:id="_tyXr3aPHEeCglqLRxGNZtA" name="wca:capture" linkedClass="_tyXr6qPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXr3qPHEeCglqLRxGNZtA" name="wca:presentation" cardMax="-1" navigable="true" linkedClass="_tyXr8aPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXr36PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="renditionproperties" title="Rendition Properties" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXr4KPHEeCglqLRxGNZtA" name="wca:capture" linkedClass="_tyXr8aPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXr4aPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyXFMqPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyXr4qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="formworkflowdefaults" associationType="Aggregation">
+    <firstEnd xmi:id="_tyXr46PHEeCglqLRxGNZtA" linkedClass="_tyXr6qPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyXr5KPHEeCglqLRxGNZtA" navigable="true" linkedClass="_tyXE36PHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <aspectSet xmi:id="_tyXr5aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="outputpathpattern" title="Output Path Pattern">
+    <attributes xmi:id="_tyXr5qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="outputpathpattern"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyXr56PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="filenamepattern" title="Filename Pattern">
+    <attributes xmi:id="_tyXr6KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="filenamepattern"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyXr6aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="webapp" title="Webapp"/>
+  <aspectSet xmi:id="_tyXr6qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="form" title="XForms Form">
+    <attributes xmi:id="_tyXr66PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="xmlschemarootelementname" title="Schema Root Element Name">
+      <metainfo xmi:id="_tyXr7KPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXr7aPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXr7qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="xmlschema" title="Schema" typ="Object">
+      <metainfo xmi:id="_tyXr76PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXr8KPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyXr8aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="renderingenginetemplate" title="A Rendering Engine">
+    <attributes xmi:id="_tyXr8qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="parentrenderingenginename" title="Type">
+      <metainfo xmi:id="_tyXr86PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXr9KPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXr9aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="formsource" title="Form Source" typ="Object">
+      <metainfo xmi:id="_tyXr9qPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXr96PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyXr-KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="forminstancedata" title="XML file generated by a form">
+    <attributes xmi:id="_tyXr-aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="parentformname" title="Form that generated this asset">
+      <metainfo xmi:id="_tyXr-qPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXr-6PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXr_KPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="originalparentpath" title="The original parent path when this form instance data was created - used for regenerating accurately."/>
+    <attributes xmi:id="_tyXr_aPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="renditions" title="Renditions of this form instance data"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyXr_qPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="rendition" title="Output file generated by a rendering engine template">
+    <attributes xmi:id="_tyXr_6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="parentrenderingenginetemplate" title="Form data renderer that generated this asset" typ="Object">
+      <metainfo xmi:id="_tyXsAKPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXsAaPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXsAqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="parentrenditionproperties" title="Rendition properties used for this rendition" typ="Object">
+      <metainfo xmi:id="_tyXsA6PHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXsBKPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyXsBaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="primaryforminstancedata" title="Primary XML Asset used to generate this asset">
+      <metainfo xmi:id="_tyXsBqPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXsB6PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyXsCKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="expires" title="Content that has or can expire">
+    <attributes xmi:id="_tyXsCaPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="expirationDate" title="Expiration Date" typ="DateTime">
+      <metainfo xmi:id="_tyXsCqPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXsC6PHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+      <metainfo xmi:id="_tyXsDKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyXsDaPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyXsDqPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tyXsD6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployed" title="Has this content been deployed from wcm">
+    <attributes xmi:id="_tyXsEKPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="guid" title="WCM unique version">
+      <metainfo xmi:id="_tyXsEaPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyXsEqPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+  </aspectSet>
+  <enumerationSet xmi:id="_tyXsE6PHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deploytypes">
+    <literals xmi:id="_tyXsFKPHEeCglqLRxGNZtA" value="alfresco" name="alfresco"/>
+    <literals xmi:id="_tyXsFaPHEeCglqLRxGNZtA" value="file" name="file"/>
+  </enumerationSet>
+  <enumerationSet xmi:id="_tyXsFqPHEeCglqLRxGNZtA" namespace="_tyXEwaPHEeCglqLRxGNZtA" name="deployservertypes">
+    <literals xmi:id="_tyXsF6PHEeCglqLRxGNZtA" value="live" name="live"/>
+    <literals xmi:id="_tyXsGKPHEeCglqLRxGNZtA" value="test" name="test"/>
+  </enumerationSet>
+</clazz:Model>

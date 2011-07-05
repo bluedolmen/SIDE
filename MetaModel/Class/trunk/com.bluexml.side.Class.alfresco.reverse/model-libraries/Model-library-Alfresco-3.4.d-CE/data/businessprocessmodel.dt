@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tyRlMKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="businessprocessmodel">
+  <namespaceSet xmi:id="_tyRlMaPHEeCglqLRxGNZtA" prefix="bpm" URI="http://www.alfresco.org/model/bpm/1.0"/>
+  <classSet xmi:id="_tyRlMqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="package" title="Package Folder">
+    <metainfo xmi:id="_tyRlM6PHEeCglqLRxGNZtA" key="archive"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw_qPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyRlNKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="task">
+    <attributes xmi:id="_tyRlNaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="taskId" typ="long">
+      <metainfo xmi:id="_tyRlNqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyRlN6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="description"/>
+    <attributes xmi:id="_tyRlOKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="startDate" typ="Date"/>
+    <attributes xmi:id="_tyRlOaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="completionDate" typ="Date"/>
+    <attributes xmi:id="_tyRlOqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="dueDate" typ="Date"/>
+    <attributes xmi:id="_tyRlO6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="status">
+      <metainfo xmi:id="_tyRlPKPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyRlPaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="priority" typ="int">
+      <metainfo xmi:id="_tyRlPqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyRlP6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="percentComplete" typ="int">
+      <metainfo xmi:id="_tyRlQKPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyRlQaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="comment"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+    <aspects href="contentmodel.dt#_tyFYbqPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyRlQqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="workflowTask" generalizations="_tyRlNKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyRlQ6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="context" typ="Object"/>
+    <attributes xmi:id="_tyRlRKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="outcome"/>
+    <attributes xmi:id="_tyRlRaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="completedItems" typ="Object"/>
+    <attributes xmi:id="_tyRlRqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="packageActionGroup"/>
+    <attributes xmi:id="_tyRlR6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="packageItemActionGroup"/>
+    <attributes xmi:id="_tyRlSKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="hiddenTransitions"/>
+    <attributes xmi:id="_tyRlSaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="reassignable" typ="boolean"/>
+  </classSet>
+  <classSet xmi:id="_tyRlSqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="startTask" generalizations="_tyRlQqPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyRlS6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="workflowDescription"/>
+    <attributes xmi:id="_tyRlTKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="workflowDueDate" typ="Date"/>
+    <attributes xmi:id="_tyRlTaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="workflowPriority" typ="int"/>
+  </classSet>
+  <classSet xmi:id="_tyRlTqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="workflowDefinition" title="Workflow Process Definition">
+    <attributes xmi:id="_tyRlT6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="definitionName" title="Workflow Name"/>
+    <attributes xmi:id="_tyRlUKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="engineId" title="Workflow Engine Id">
+      <metainfo xmi:id="_tyRlUaPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tyRlUqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="definitionDeployed" title="Workflow Deployed" typ="boolean"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <associationSet xmi:id="_tyRlU6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="packageContains" associationType="Aggregation">
+    <metainfo xmi:id="_tyRlVKPHEeCglqLRxGNZtA" key="duplicate"/>
+    <metainfo xmi:id="_tyRlVaPHEeCglqLRxGNZtA" key="propagateTimestamps"/>
+    <firstEnd xmi:id="_tyRlVqPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyRlMqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyRlV6PHEeCglqLRxGNZtA" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_tyRlWKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="pooledActors">
+    <firstEnd xmi:id="_tyRlWaPHEeCglqLRxGNZtA" linkedClass="_tyRlNKPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyRlWqPHEeCglqLRxGNZtA" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_tyRlW6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="package">
+    <firstEnd xmi:id="_tyRlXKPHEeCglqLRxGNZtA" linkedClass="_tyRlQqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyRlXaPHEeCglqLRxGNZtA" cardMin="1" navigable="true" linkedClass="_tyRlaqPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyRlXqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="assignee">
+    <firstEnd xmi:id="_tyRlX6PHEeCglqLRxGNZtA" linkedClass="_tyRlb6PHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyRlYKPHEeCglqLRxGNZtA" cardMin="1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyExAKPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_tyRlYaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="assignees">
+    <firstEnd xmi:id="_tyRlYqPHEeCglqLRxGNZtA" linkedClass="_tyRlcKPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyRlY6PHEeCglqLRxGNZtA" cardMin="1" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyExAKPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_tyRlZKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="groupAssignee">
+    <firstEnd xmi:id="_tyRlZaPHEeCglqLRxGNZtA" linkedClass="_tyRlcaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyRlZqPHEeCglqLRxGNZtA" cardMin="1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyExJqPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_tyRlZ6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="groupAssignees">
+    <firstEnd xmi:id="_tyRlaKPHEeCglqLRxGNZtA" linkedClass="_tyRlcqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyRlaaPHEeCglqLRxGNZtA" cardMin="1" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_tyExJqPHEeCglqLRxGNZtA"/>
+    </secondEnd>
+  </associationSet>
+  <aspectSet xmi:id="_tyRlaqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="workflowPackage">
+    <attributes xmi:id="_tyRla6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="isSystemPackage" typ="boolean"/>
+    <attributes xmi:id="_tyRlbKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="workflowDefinitionId"/>
+    <attributes xmi:id="_tyRlbaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="workflowDefinitionName"/>
+    <attributes xmi:id="_tyRlbqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="workflowInstanceId"/>
+  </aspectSet>
+  <aspectSet xmi:id="_tyRlb6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="assignee"/>
+  <aspectSet xmi:id="_tyRlcKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="assignees"/>
+  <aspectSet xmi:id="_tyRlcaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="groupAssignee"/>
+  <aspectSet xmi:id="_tyRlcqPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="groupAssignees"/>
+  <enumerationSet xmi:id="_tyRlc6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="allowedPriority">
+    <literals xmi:id="_tyRldKPHEeCglqLRxGNZtA" value="1" name="1"/>
+    <literals xmi:id="_tyRldaPHEeCglqLRxGNZtA" value="2" name="2"/>
+    <literals xmi:id="_tyRldqPHEeCglqLRxGNZtA" value="3" name="3"/>
+  </enumerationSet>
+  <enumerationSet xmi:id="_tyRld6PHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="allowedStatus">
+    <literals xmi:id="_tyRleKPHEeCglqLRxGNZtA" value="Not Yet Started" name="Not Yet Started"/>
+    <literals xmi:id="_tyRleaPHEeCglqLRxGNZtA" value="In Progress" name="In Progress"/>
+    <literals xmi:id="_tyRleqPHEeCglqLRxGNZtA" value="On Hold" name="On Hold"/>
+    <literals xmi:id="_tyRle6PHEeCglqLRxGNZtA" value="Cancelled" name="Cancelled"/>
+    <literals xmi:id="_tyRlfKPHEeCglqLRxGNZtA" value="Completed" name="Completed"/>
+  </enumerationSet>
+  <constraintSet xmi:id="_tyRlfaPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="percentage" constraintType="MINMAX">
+    <params xmi:id="_tyRlfqPHEeCglqLRxGNZtA" name="minValue">
+      <values>0</values>
+    </params>
+    <params xmi:id="_tyRlf6PHEeCglqLRxGNZtA" name="maxValue">
+      <values>100</values>
+    </params>
+  </constraintSet>
+  <constraintSet xmi:id="_tyRlgKPHEeCglqLRxGNZtA" namespace="_tyRlMaPHEeCglqLRxGNZtA" name="allowedDescriptionLength" constraintType="LENGTH">
+    <params xmi:id="_tyRlgaPHEeCglqLRxGNZtA" name="minLength">
+      <values>0</values>
+    </params>
+    <params xmi:id="_tyRlgqPHEeCglqLRxGNZtA" name="maxLength">
+      <values>250</values>
+    </params>
+  </constraintSet>
+</clazz:Model>

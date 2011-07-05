@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tySzUKPHEeCglqLRxGNZtA" namespace="_tySzUaPHEeCglqLRxGNZtA" name="forummodel">
+  <namespaceSet xmi:id="_tySzUaPHEeCglqLRxGNZtA" prefix="fm" URI="http://www.alfresco.org/model/forum/1.0"/>
+  <classSet xmi:id="_tySzUqPHEeCglqLRxGNZtA" namespace="_tySzUaPHEeCglqLRxGNZtA" name="forums">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw66PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tySzU6PHEeCglqLRxGNZtA" namespace="_tySzUaPHEeCglqLRxGNZtA" name="forum">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw66PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tySzVKPHEeCglqLRxGNZtA" namespace="_tySzUaPHEeCglqLRxGNZtA" name="topic">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw66PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tySzVaPHEeCglqLRxGNZtA" namespace="_tySzUaPHEeCglqLRxGNZtA" name="post">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <associationSet xmi:id="_tySzVqPHEeCglqLRxGNZtA" namespace="_tySzUaPHEeCglqLRxGNZtA" name="discussion" associationType="Aggregation">
+    <firstEnd xmi:id="_tySzV6PHEeCglqLRxGNZtA" linkedClass="_tySzWaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tySzWKPHEeCglqLRxGNZtA" cardMin="1" navigable="true" linkedClass="_tySzU6PHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <aspectSet xmi:id="_tySzWaPHEeCglqLRxGNZtA" namespace="_tySzUaPHEeCglqLRxGNZtA" name="discussable"/>
+</clazz:Model>

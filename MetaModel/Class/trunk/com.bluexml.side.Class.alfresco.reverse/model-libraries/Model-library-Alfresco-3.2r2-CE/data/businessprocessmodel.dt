@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_aW9F4KZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="businessprocessmodel">
+  <namespaceSet xmi:id="_aW9F4aZBEeCY34yq-QsV1A" prefix="bpm" URI="http://www.alfresco.org/model/bpm/1.0"/>
+  <classSet xmi:id="_aW9F4qZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="task">
+    <attributes xmi:id="_aW9F46ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="taskId" typ="long">
+      <metainfo xmi:id="_aW9F5KZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+    <attributes xmi:id="_aW9F5aZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="description"/>
+    <attributes xmi:id="_aW9F5qZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="startDate" typ="Date"/>
+    <attributes xmi:id="_aW9F56ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="completionDate" typ="Date"/>
+    <attributes xmi:id="_aW9F6KZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="dueDate" typ="Date"/>
+    <attributes xmi:id="_aW9F6aZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="status">
+      <metainfo xmi:id="_aW9F6qZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+    <attributes xmi:id="_aW9F66ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="priority" typ="int">
+      <metainfo xmi:id="_aW9F7KZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+    <attributes xmi:id="_aW9F7aZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="percentComplete" typ="int">
+      <metainfo xmi:id="_aW9F7qZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+    <attributes xmi:id="_aW9F76ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="comment"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuu6ZBEeCY34yq-QsV1A"/>
+    <aspects href="contentmodel.dt#_aWo9C6ZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <classSet xmi:id="_aW9F8KZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="workflowTask" generalizations="_aW9F4qZBEeCY34yq-QsV1A">
+    <attributes xmi:id="_aW9F8aZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="context" typ="Object"/>
+    <attributes xmi:id="_aW9F8qZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="outcome"/>
+    <attributes xmi:id="_aW9F86ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="completedItems" typ="Object"/>
+    <attributes xmi:id="_aW9F9KZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="packageActionGroup"/>
+    <attributes xmi:id="_aW9F9aZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="packageItemActionGroup"/>
+    <attributes xmi:id="_aW9F9qZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="hiddenTransitions"/>
+  </classSet>
+  <classSet xmi:id="_aW9F96ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="startTask" generalizations="_aW9F8KZBEeCY34yq-QsV1A">
+    <attributes xmi:id="_aW9F-KZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="workflowDescription"/>
+    <attributes xmi:id="_aW9F-aZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="workflowDueDate" typ="Date"/>
+    <attributes xmi:id="_aW9F-qZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="workflowPriority" typ="int"/>
+  </classSet>
+  <classSet xmi:id="_aW9F-6ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="workflowDefinition" title="Workflow Process Definition">
+    <attributes xmi:id="_aW9F_KZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="definitionName" title="Workflow Name"/>
+    <attributes xmi:id="_aW9F_aZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="engineId" title="Workflow Engine Id">
+      <metainfo xmi:id="_aW9F_qZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+    <attributes xmi:id="_aW9F_6ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="definitionDeployed" title="Workflow Deployed" typ="boolean"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuu6ZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <associationSet xmi:id="_aW9GAKZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="pooledActors">
+    <firstEnd xmi:id="_aW9GAaZBEeCY34yq-QsV1A" linkedClass="_aW9F4qZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aW9GAqZBEeCY34yq-QsV1A" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="systemmodel.dt#_aWd9sKZBEeCY34yq-QsV1A"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_aW9GA6ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="package">
+    <firstEnd xmi:id="_aW9GBKZBEeCY34yq-QsV1A" linkedClass="_aW9F8KZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aW9GBaZBEeCY34yq-QsV1A" cardMin="1" navigable="true" linkedClass="_aW9GEqZBEeCY34yq-QsV1A"/>
+  </associationSet>
+  <associationSet xmi:id="_aW9GBqZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="assignee">
+    <firstEnd xmi:id="_aW9GB6ZBEeCY34yq-QsV1A" linkedClass="_aW9GF6ZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aW9GCKZBEeCY34yq-QsV1A" cardMin="1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuzqZBEeCY34yq-QsV1A"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_aW9GCaZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="assignees">
+    <firstEnd xmi:id="_aW9GCqZBEeCY34yq-QsV1A" linkedClass="_aW9GGKZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aW9GC6ZBEeCY34yq-QsV1A" cardMin="1" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuzqZBEeCY34yq-QsV1A"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_aW9GDKZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="groupAssignee">
+    <firstEnd xmi:id="_aW9GDaZBEeCY34yq-QsV1A" linkedClass="_aW9GGaZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aW9GDqZBEeCY34yq-QsV1A" cardMin="1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_aWoVyKZBEeCY34yq-QsV1A"/>
+    </secondEnd>
+  </associationSet>
+  <associationSet xmi:id="_aW9GD6ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="groupAssignees">
+    <firstEnd xmi:id="_aW9GEKZBEeCY34yq-QsV1A" linkedClass="_aW9GGqZBEeCY34yq-QsV1A"/>
+    <secondEnd xmi:id="_aW9GEaZBEeCY34yq-QsV1A" cardMin="1" cardMax="-1" navigable="true">
+      <linkedClass xsi:type="clazz:Clazz" href="contentmodel.dt#_aWoVyKZBEeCY34yq-QsV1A"/>
+    </secondEnd>
+  </associationSet>
+  <aspectSet xmi:id="_aW9GEqZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="workflowPackage">
+    <attributes xmi:id="_aW9GE6ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="isSystemPackage" typ="boolean"/>
+    <attributes xmi:id="_aW9GFKZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="workflowDefinitionId"/>
+    <attributes xmi:id="_aW9GFaZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="workflowDefinitionName"/>
+    <attributes xmi:id="_aW9GFqZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="workflowInstanceId"/>
+  </aspectSet>
+  <aspectSet xmi:id="_aW9GF6ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="assignee"/>
+  <aspectSet xmi:id="_aW9GGKZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="assignees"/>
+  <aspectSet xmi:id="_aW9GGaZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="groupAssignee"/>
+  <aspectSet xmi:id="_aW9GGqZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="groupAssignees"/>
+  <enumerationSet xmi:id="_aW9GG6ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="allowedPriority">
+    <literals xmi:id="_aW9GHKZBEeCY34yq-QsV1A" value="1" name="1"/>
+    <literals xmi:id="_aW9GHaZBEeCY34yq-QsV1A" value="2" name="2"/>
+    <literals xmi:id="_aW9GHqZBEeCY34yq-QsV1A" value="3" name="3"/>
+  </enumerationSet>
+  <enumerationSet xmi:id="_aW9GH6ZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="allowedStatus">
+    <literals xmi:id="_aW9GIKZBEeCY34yq-QsV1A" value="Not Yet Started" name="Not Yet Started"/>
+    <literals xmi:id="_aW9GIaZBEeCY34yq-QsV1A" value="In Progress" name="In Progress"/>
+    <literals xmi:id="_aW9GIqZBEeCY34yq-QsV1A" value="On Hold" name="On Hold"/>
+    <literals xmi:id="_aW9GI6ZBEeCY34yq-QsV1A" value="Cancelled" name="Cancelled"/>
+    <literals xmi:id="_aW9GJKZBEeCY34yq-QsV1A" value="Completed" name="Completed"/>
+  </enumerationSet>
+  <constraintSet xmi:id="_aW9GJaZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="percentage" constraintType="MINMAX">
+    <params xmi:id="_aW9GJqZBEeCY34yq-QsV1A" name="minValue">
+      <values>0</values>
+    </params>
+    <params xmi:id="_aW9GJ6ZBEeCY34yq-QsV1A" name="maxValue">
+      <values>100</values>
+    </params>
+  </constraintSet>
+  <constraintSet xmi:id="_aW9GKKZBEeCY34yq-QsV1A" namespace="_aW9F4aZBEeCY34yq-QsV1A" name="allowedDescriptionLength" constraintType="LENGTH">
+    <params xmi:id="_aW9GKaZBEeCY34yq-QsV1A" name="minLength">
+      <values>0</values>
+    </params>
+    <params xmi:id="_aW9GKqZBEeCY34yq-QsV1A" name="maxLength">
+      <values>250</values>
+    </params>
+  </constraintSet>
+</clazz:Model>

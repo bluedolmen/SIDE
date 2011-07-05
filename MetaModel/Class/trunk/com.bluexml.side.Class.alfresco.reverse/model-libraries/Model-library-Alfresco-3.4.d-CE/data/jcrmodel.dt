@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tx8OAKPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="jcrmodel">
+  <namespaceSet xmi:id="_tx8OAaPHEeCglqLRxGNZtA" prefix="jcr" URI="http://www.jcp.org/jcr/1.0"/>
+  <namespaceSet xmi:id="_tx8OAqPHEeCglqLRxGNZtA" prefix="nt" URI="http://www.jcp.org/jcr/nt/1.0"/>
+  <namespaceSet xmi:id="_tx8OA6PHEeCglqLRxGNZtA" prefix="mix" URI="http://www.jcp.org/jcr/mix/1.0"/>
+  <namespaceSet xmi:id="_tx8OBKPHEeCglqLRxGNZtA" prefix="sv" URI="http://www.jcp.org/jcr/sv/1.0"/>
+  <namespaceSet xmi:id="_tx8OBaPHEeCglqLRxGNZtA" prefix="xml" URI="http://www.w3.org/XML/1998/namespace"/>
+  <classSet xmi:id="_tx8OBqPHEeCglqLRxGNZtA" namespace="_tx8OAqPHEeCglqLRxGNZtA" name="base">
+    <attributes xmi:id="_tx8OB6PHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="primaryType" typ="Object">
+      <metainfo xmi:id="_tx8OCKPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx8OCaPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tx8OCqPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="mixinTypes" typ="Object"/>
+    <generalizations xsi:type="clazz:Clazz" href="systemmodel.dt#_tx5xxKPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tx8OC6PHEeCglqLRxGNZtA" namespace="_tx8OAqPHEeCglqLRxGNZtA" name="hierarchyNode" generalizations="_tx8OBqPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tx8ODKPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="created" typ="Date"/>
+  </classSet>
+  <classSet xmi:id="_tx8ODaPHEeCglqLRxGNZtA" namespace="_tx8OAqPHEeCglqLRxGNZtA" name="file" generalizations="_tx8OC6PHEeCglqLRxGNZtA"/>
+  <classSet xmi:id="_tx8ODqPHEeCglqLRxGNZtA" namespace="_tx8OAqPHEeCglqLRxGNZtA" name="folder" generalizations="_tx8OC6PHEeCglqLRxGNZtA"/>
+  <classSet xmi:id="_tx8OD6PHEeCglqLRxGNZtA" namespace="_tx8OAqPHEeCglqLRxGNZtA" name="resource" generalizations="_tx8OBqPHEeCglqLRxGNZtA" aspects="_tx81GKPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tx8OEKPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="encoding"/>
+    <attributes xmi:id="_tx8OEaPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="mimeType">
+      <metainfo xmi:id="_tx8OEqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+    <attributes xmi:id="_tx8OE6PHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="data" typ="Object">
+      <metainfo xmi:id="_tx8OFKPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tx8OFaPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx8OFqPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tx8OF6PHEeCglqLRxGNZtA" key="index.tokenised" value="true"/>
+    </attributes>
+    <attributes xmi:id="_tx81EKPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="lastModified" typ="Date">
+      <metainfo xmi:id="_tx81EaPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </classSet>
+  <associationSet xmi:id="_tx81EqPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="content" associationType="Aggregation">
+    <firstEnd xmi:id="_tx81E6PHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tx8ODaPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tx81FKPHEeCglqLRxGNZtA" cardMin="1" navigable="true" linkedClass="_tx8OBqPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tx81FaPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="contains" associationType="Aggregation">
+    <firstEnd xmi:id="_tx81FqPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tx8ODqPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tx81F6PHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tx8OC6PHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <aspectSet xmi:id="_tx81GKPHEeCglqLRxGNZtA" namespace="_tx8OA6PHEeCglqLRxGNZtA" name="referenceable">
+    <attributes xmi:id="_tx81GaPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="uuid">
+      <metainfo xmi:id="_tx81GqPHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+  <aspectSet xmi:id="_tx81G6PHEeCglqLRxGNZtA" namespace="_tx8OA6PHEeCglqLRxGNZtA" name="lockable">
+    <attributes xmi:id="_tx81HKPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="lockOwner"/>
+    <attributes xmi:id="_tx81HaPHEeCglqLRxGNZtA" namespace="_tx8OAaPHEeCglqLRxGNZtA" name="lockIsDeep" typ="boolean"/>
+  </aspectSet>
+</clazz:Model>

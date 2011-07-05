@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tyOh4KPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="CalendarEventModel">
+  <namespaceSet xmi:id="_tyOh4aPHEeCglqLRxGNZtA" prefix="ia" URI="http://www.alfresco.org/model/calendar"/>
+  <classSet xmi:id="_tyOh4qPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="ignoreEvent" title="Separate Recurring Event">
+    <attributes xmi:id="_tyOh46PHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="date" typ="DateTime"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyOh5KPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="calendarEvent" title="Calendar Event">
+    <attributes xmi:id="_tyOh5aPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="whatEvent"/>
+    <attributes xmi:id="_tyOh5qPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="fromDate" typ="DateTime">
+      <metainfo xmi:id="_tyOh56PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyOh6KPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyOh6aPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyOh6qPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="toDate" typ="DateTime">
+      <metainfo xmi:id="_tyOh66PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyOh7KPHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyOh7aPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyOh7qPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="whereEvent"/>
+    <attributes xmi:id="_tyOh76PHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="descriptionEvent"/>
+    <attributes xmi:id="_tyOh8KPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="colorEvent"/>
+    <attributes xmi:id="_tyOh8aPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="recurrenceRule"/>
+    <attributes xmi:id="_tyOh8qPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="recurrenceLastMeeting" typ="DateTime"/>
+    <attributes xmi:id="_tyOh86PHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="isOutlook" typ="boolean"/>
+    <attributes xmi:id="_tyOh9KPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="outlookUID" title="Outlook UID">
+      <metainfo xmi:id="_tyOh9aPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyOh9qPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw7aPHEeCglqLRxGNZtA"/>
+  </classSet>
+  <classSet xmi:id="_tyOh96PHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="calendar" title="Calendar Space">
+    <attributes xmi:id="_tyOh-KPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="whatEventDefault"/>
+    <attributes xmi:id="_tyOh-aPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="fromDateDefault" typ="DateTime">
+      <metainfo xmi:id="_tyOh-qPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyOh-6PHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyOh_KPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyOh_aPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="toDateDefault" typ="DateTime">
+      <metainfo xmi:id="_tyOh_qPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tyOh_6PHEeCglqLRxGNZtA" key="index.atomic"/>
+      <metainfo xmi:id="_tyOiAKPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+    <attributes xmi:id="_tyOiAaPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="whereEventDefault"/>
+    <attributes xmi:id="_tyOiAqPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="colorEventDefault"/>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_tyEw66PHEeCglqLRxGNZtA"/>
+  </classSet>
+  <associationSet xmi:id="_tyOiA6PHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="ignoreEventList" associationType="Aggregation">
+    <firstEnd xmi:id="_tyOiBKPHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyOh5KPHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyOiBaPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyOh4qPHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <associationSet xmi:id="_tyOiBqPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="subscribedCalendarList">
+    <firstEnd xmi:id="_tyOiB6PHEeCglqLRxGNZtA" cardMax="-1" linkedClass="_tyOh96PHEeCglqLRxGNZtA"/>
+    <secondEnd xmi:id="_tyOiCKPHEeCglqLRxGNZtA" cardMax="-1" navigable="true" linkedClass="_tyOh96PHEeCglqLRxGNZtA"/>
+  </associationSet>
+  <aspectSet xmi:id="_tyOiCaPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="docFoldered" title="Doc folder">
+    <attributes xmi:id="_tyOiCqPHEeCglqLRxGNZtA" namespace="_tyOh4aPHEeCglqLRxGNZtA" name="docFolder" title="DocFolder">
+      <metainfo xmi:id="_tyOiC6PHEeCglqLRxGNZtA" key="required"/>
+    </attributes>
+  </aspectSet>
+</clazz:Model>

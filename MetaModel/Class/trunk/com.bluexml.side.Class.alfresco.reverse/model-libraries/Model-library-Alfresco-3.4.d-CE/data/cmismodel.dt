@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_tx_4YKPHEeCglqLRxGNZtA" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="cmismodel">
+  <namespaceSet xmi:id="_tx_4YaPHEeCglqLRxGNZtA" prefix="cmis" URI="http://www.alfresco.org/model/cmis/1.0/cs01"/>
+  <classSet xmi:id="_tx_4YqPHEeCglqLRxGNZtA" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="object">
+    <attributes xmi:id="_tx_4Y6PHEeCglqLRxGNZtA" description="The unique object id (a node ref)" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="objectId" title="Object Id" typ="Object">
+      <metainfo xmi:id="_tx_4ZKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4ZaPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tx_4ZqPHEeCglqLRxGNZtA" description="Id of the object&#x2019;s type" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="objectTypeId" title="Object Type Id" typ="Object">
+      <metainfo xmi:id="_tx_4Z6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4aKPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tx_4aaPHEeCglqLRxGNZtA" description="Id of the base object type for the object" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="baseTypeId" title="Base Type Id" typ="Object">
+      <metainfo xmi:id="_tx_4aqPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4a6PHEeCglqLRxGNZtA" key="index.tokenised" value="true"/>
+    </attributes>
+    <attributes xmi:id="_tx_4bKPHEeCglqLRxGNZtA" description="The authority who created this object" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="createdBy" title="Created by">
+      <metainfo xmi:id="_tx_4baPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4bqPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tx_4b6PHEeCglqLRxGNZtA" description="The object creation date" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="creationDate" title="Creation Date" typ="DateTime">
+      <metainfo xmi:id="_tx_4cKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4caPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tx_4cqPHEeCglqLRxGNZtA" description="The authority who last modified this object" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="lastModifiedBy" title="Last Modified By">
+      <metainfo xmi:id="_tx_4c6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4dKPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tx_4daPHEeCglqLRxGNZtA" description="The date this object was last modified" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="lastModificationDate" title="Last Modified Date" typ="DateTime">
+      <metainfo xmi:id="_tx_4dqPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4d6PHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tx_4eKPHEeCglqLRxGNZtA" description="Change Token" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="changeToken" title="Change token"/>
+  </classSet>
+  <classSet xmi:id="_tx_4eaPHEeCglqLRxGNZtA" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="filesystemobject" generalizations="_tx_4YqPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tx_4eqPHEeCglqLRxGNZtA" description="Name" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="name" title="Name">
+      <metainfo xmi:id="_tx_4e6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4fKPHEeCglqLRxGNZtA" key="index.tokenised" value="both"/>
+    </attributes>
+  </classSet>
+  <classSet xmi:id="_tx_4faPHEeCglqLRxGNZtA" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="document" title="Document" generalizations="_tx_4eaPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tx_4fqPHEeCglqLRxGNZtA" description="Is the document immutable?" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="isImmutable" title="Is Immutable" typ="boolean"/>
+    <attributes xmi:id="_tx_4f6PHEeCglqLRxGNZtA" description="Is this the latest version of the document?" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="isLatestVersion" title="Is Latest Version" typ="boolean"/>
+    <attributes xmi:id="_tx_4gKPHEeCglqLRxGNZtA" description="Is this a major version of the document?" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="isMajorVersion" title="Is Major Version" typ="boolean"/>
+    <attributes xmi:id="_tx_4gaPHEeCglqLRxGNZtA" description="Is this the latest major version of the document?" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="isLatestMajorVersion" title="Is Latest Major Version" typ="boolean"/>
+    <attributes xmi:id="_tx_4gqPHEeCglqLRxGNZtA" description="The version label" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="versionLabel" title="Version Label"/>
+    <attributes xmi:id="_tx_4g6PHEeCglqLRxGNZtA" description="The version series id" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="versionSeriesId" title="Version series id" typ="Object"/>
+    <attributes xmi:id="_tx_4hKPHEeCglqLRxGNZtA" description="Is the version series checked out?" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="isVersionSeriesCheckedOut" title="Is Version Series Checked Out" typ="boolean"/>
+    <attributes xmi:id="_tx_4haPHEeCglqLRxGNZtA" description="The authority who checked out this document version series" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="versionSeriesCheckedOutBy" title="Version Series Checked Out By"/>
+    <attributes xmi:id="_tx_4hqPHEeCglqLRxGNZtA" description="The checked out version series id" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="versionSeriesCheckedOutId" title="Version Series Checked Out Id" typ="Object"/>
+    <attributes xmi:id="_tx_4h6PHEeCglqLRxGNZtA" description="The checkin comment" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="checkinComment" title="Checkin Comment"/>
+    <attributes xmi:id="_tx_4iKPHEeCglqLRxGNZtA" description="The length of the content stream" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="contentStreamLength" title="Content Stream Length" typ="long">
+      <metainfo xmi:id="_tx_4iaPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4iqPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tx_4i6PHEeCglqLRxGNZtA" description="The content stream MIME type" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="contentStreamMimeType" title="Content Stream MIME Type">
+      <metainfo xmi:id="_tx_4jKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4jaPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tx_4jqPHEeCglqLRxGNZtA" description="The content stream filename" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="contentStreamFileName" title="Content Stream Filename">
+      <metainfo xmi:id="_tx_4j6PHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4kKPHEeCglqLRxGNZtA" key="index.tokenised" value="true"/>
+    </attributes>
+    <attributes xmi:id="_tx_4kaPHEeCglqLRxGNZtA" description="Id of the stream" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="contentStreamId" title="Content Stream Id" typ="Object"/>
+  </classSet>
+  <classSet xmi:id="_tx_4kqPHEeCglqLRxGNZtA" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="folder" title="Folder" generalizations="_tx_4eaPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tx_4k6PHEeCglqLRxGNZtA" description="The parent id of the folder" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="parentId" title="Parent Id" typ="Object">
+      <metainfo xmi:id="_tx_4lKPHEeCglqLRxGNZtA" key="propertySearched"/>
+      <metainfo xmi:id="_tx_4laPHEeCglqLRxGNZtA" key="index.tokenised" value="false"/>
+    </attributes>
+    <attributes xmi:id="_tx_4lqPHEeCglqLRxGNZtA" description="The fully qualified path to this folder/description" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="path" title="Path"/>
+    <attributes xmi:id="_tx_4l6PHEeCglqLRxGNZtA" description="The allowed child object type ids" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="allowedChildObjectTypeIds" title="Allowed Child Object Types Ids" typ="Object"/>
+  </classSet>
+  <classSet xmi:id="_tx_4mKPHEeCglqLRxGNZtA" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="relationship" title="Relationship" generalizations="_tx_4eaPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyAfcKPHEeCglqLRxGNZtA" description="The source id for the relationship" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="sourceId" title="Source Id" typ="Object">
+      <metainfo xmi:id="_tyAfcaPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyAfcqPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+    <attributes xmi:id="_tyAfc6PHEeCglqLRxGNZtA" description="The target id for the relationship" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="targetId" title="Target Id" typ="Object">
+      <metainfo xmi:id="_tyAfdKPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyAfdaPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+  </classSet>
+  <classSet xmi:id="_tyAfdqPHEeCglqLRxGNZtA" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="policy" title="Policy" generalizations="_tx_4YqPHEeCglqLRxGNZtA">
+    <attributes xmi:id="_tyAfd6PHEeCglqLRxGNZtA" description="The policy text" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="policyText" title="Policy Text">
+      <metainfo xmi:id="_tyAfeKPHEeCglqLRxGNZtA" key="required"/>
+      <metainfo xmi:id="_tyAfeaPHEeCglqLRxGNZtA" key="mandatory.enforced"/>
+    </attributes>
+  </classSet>
+  <enumerationSet xmi:id="_tyAfeqPHEeCglqLRxGNZtA" namespace="_tx_4YaPHEeCglqLRxGNZtA" name="allowedValuesForContentStreamAllowed">
+    <literals xmi:id="_tyAfe6PHEeCglqLRxGNZtA" value="notallowed" name="notallowed"/>
+    <literals xmi:id="_tyAffKPHEeCglqLRxGNZtA" value="allowed" name="allowed"/>
+    <literals xmi:id="_tyAffaPHEeCglqLRxGNZtA" value="required" name="required"/>
+  </enumerationSet>
+</clazz:Model>

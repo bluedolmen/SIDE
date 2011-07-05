@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_aW1xIKZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="wcmmodel">
+  <namespaceSet xmi:id="_aW1xIaZBEeCY34yq-QsV1A" prefix="wcm" URI="http://www.alfresco.org/model/wcmmodel/1.0"/>
+  <classSet xmi:id="_aW1xIqZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="avmcontent" title="AVM Content">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuu6ZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <classSet xmi:id="_aW1xI6ZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="avmplaincontent" title="AVM Plain content" generalizations="_aW1xIqZBEeCY34yq-QsV1A"/>
+  <classSet xmi:id="_aW2YMKZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="avmlayeredcontent" title="AVM Layered Content">
+    <attributes xmi:id="_aW2YMaZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="avmfileindirection" title="File Layer Indirection" typ="Object">
+      <metainfo xmi:id="_aW2YMqZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuu6ZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <classSet xmi:id="_aW2YM6ZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="avmfolder" title="AVM Folder">
+    <generalizations xsi:type="clazz:Clazz" href="contentmodel.dt#_aWnuuaZBEeCY34yq-QsV1A"/>
+  </classSet>
+  <classSet xmi:id="_aW2YNKZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="avmplainfolder" title="AVM Plain Folder" generalizations="_aW2YM6ZBEeCY34yq-QsV1A"/>
+  <classSet xmi:id="_aW2YNaZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="avmlayeredfolder" title="AVM Layered Folder" generalizations="_aW2YM6ZBEeCY34yq-QsV1A">
+    <attributes xmi:id="_aW2YNqZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="avmdirindirection" title="Directory Layer Indirection" typ="Object">
+      <metainfo xmi:id="_aW2YN6ZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+  </classSet>
+  <aspectSet xmi:id="_aW2YOKZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="reverted" title="Contains a reference to the node that this node was reverted from.">
+    <attributes xmi:id="_aW2YOaZBEeCY34yq-QsV1A" namespace="_aW1xIaZBEeCY34yq-QsV1A" name="revertedid" title="The id of the node this was reverted from." typ="long">
+      <metainfo xmi:id="_aW2YOqZBEeCY34yq-QsV1A" key="required"/>
+    </attributes>
+  </aspectSet>
+</clazz:Model>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_aW6CkKZBEeCY34yq-QsV1A" namespace="_aW6CkaZBEeCY34yq-QsV1A" name="customModel">
+  <namespaceSet xmi:id="_aW6CkaZBEeCY34yq-QsV1A" prefix="custom" URI="custom.model"/>
+</clazz:Model>
