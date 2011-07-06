@@ -1166,18 +1166,18 @@ public class XFormsWork implements RunAsWork<String> {
 						created.put(nodeId, result.toString());
 					}
 				} else if (StringUtils.equals(element.getTagName(), "delete")) {
-					dataLayer.delete(element.getTextContent());
+					dataLayer.delete(element.getTextContent().trim());
 				} else if (StringUtils.equals(element.getTagName(), "requester")) {
-					if (StringUtils.equals(element.getTextContent(), "XFormsController") == true) {
+					if (StringUtils.equals(element.getTextContent().trim(), "XFormsController") == true) {
 						// NOTHING YET
 					}
 				} else if (StringUtils.equals(element.getTagName(), "attach")) {
-					String target = DOMUtil.getChild(element, "targetNode").getTextContent();
-					String filename = DOMUtil.getChild(element, "fileName").getTextContent();
-					String filepath = DOMUtil.getChild(element, "filePath").getTextContent();
-					String mimetype = DOMUtil.getChild(element, "mimeType").getTextContent();
-					String contentType = DOMUtil.getChild(element, "contentType").getTextContent();
-					String appendStr = DOMUtil.getChild(element, "appendSuffix").getTextContent();
+					String target = DOMUtil.getChild(element, "targetNode").getTextContent().trim();
+					String filename = DOMUtil.getChild(element, "fileName").getTextContent().trim();
+					String filepath = DOMUtil.getChild(element, "filePath").getTextContent().trim();
+					String mimetype = DOMUtil.getChild(element, "mimeType").getTextContent().trim();
+					String contentType = DOMUtil.getChild(element, "contentType").getTextContent().trim();
+					String appendStr = DOMUtil.getChild(element, "appendSuffix").getTextContent().trim();
 					boolean shouldAppendSuffix = !(StringUtils.equals(appendStr, "false"));
 
 					// we must ensure the receiver is a valid id

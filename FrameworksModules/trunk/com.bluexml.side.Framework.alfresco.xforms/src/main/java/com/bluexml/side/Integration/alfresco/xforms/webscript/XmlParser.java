@@ -78,7 +78,7 @@ public class XmlParser {
 					association.setAction(AssociationBean.Actions.valueOf(action));
 				}
 				if (target != null) {
-					String targetRef = target.getTextContent();
+					String targetRef = target.getTextContent().trim();
 					String targetQualifiedName = getQualifiedName(target);
 					association.setTargetQualifiedName(targetQualifiedName);
 					association.setTargetId(targetRef);
