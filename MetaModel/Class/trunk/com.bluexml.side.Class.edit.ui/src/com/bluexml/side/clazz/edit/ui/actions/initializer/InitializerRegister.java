@@ -92,7 +92,7 @@ public class InitializerRegister {
 
 		initilizerRegister = InitializerRegister.getDefaultInitializerRegister(classModel, cp, ASK_USER.OVERRIDE);
 
-		ApplicationModelInitializer applicationModelInit = new ApplicationModelInitializer(classModel, cp, initilizerRegister, ASK_USER.OVERRIDE, null, alf_ver, alf_home);
+		ApplicationModelInitializer applicationModelInit = new ApplicationModelInitializer(classModel, cp, initilizerRegister, ASK_USER.OVERRIDE, classModel.getProject().getName(), alf_ver, alf_home);
 		// add ApplicationInitializer to register
 		initilizerRegister.getApplicationInitializer().put("", applicationModelInit); //$NON-NLS-1$
 

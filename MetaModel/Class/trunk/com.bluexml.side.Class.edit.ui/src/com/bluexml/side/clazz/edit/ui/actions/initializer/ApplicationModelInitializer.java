@@ -57,7 +57,8 @@ public class ApplicationModelInitializer extends ModelInitializer {
 
 	private void createConfiguration(Application app) {
 		Configuration conf = FACTORY.createConfiguration();
-		conf.setName(getModelName());
+		// beware, ant build file use project name as default configuration so use project name as configuration here
+		conf.setName(classModel.getProject().getName());
 		createConfigurationParameter(conf, "Directory", "CATALINA_HOME", alfrescoHome); //$NON-NLS-1$ //$NON-NLS-2$
 		String projectName = classModel.getProject().getName();
 
