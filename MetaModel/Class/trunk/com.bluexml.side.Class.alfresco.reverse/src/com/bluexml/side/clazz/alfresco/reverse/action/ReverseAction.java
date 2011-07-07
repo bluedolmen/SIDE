@@ -1,6 +1,5 @@
 package com.bluexml.side.clazz.alfresco.reverse.action;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -22,21 +21,18 @@ public class ReverseAction implements IObjectActionDelegate {
 
 	}
 
-	@Override
 	public void run(IAction action) {
 		IFolder alfrescoXML = (IFolder) _selection.getFirstElement();
-		
-		
-		
+
 		ReverseFromAlfrescoWizard wizard = new ReverseFromAlfrescoWizard(alfrescoXML);
 		WizardDialog wd = new WizardDialog(currentShell, wizard);
 
 		wd.open();
 	}
 
-	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		_selection = (IStructuredSelection) selection;
 
 	}
+
 }

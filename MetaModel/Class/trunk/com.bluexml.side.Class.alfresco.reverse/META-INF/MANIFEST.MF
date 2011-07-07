@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.libs,
  org.apache.ant,
  org.eclipse.ant.core
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.clazz.alfresco.reverse,
  com.bluexml.side.clazz.alfresco.reverse.action,
