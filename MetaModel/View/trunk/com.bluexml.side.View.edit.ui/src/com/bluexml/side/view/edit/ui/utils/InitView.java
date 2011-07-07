@@ -34,6 +34,38 @@ public class InitView {
 
 	public static int kindOfList = 0;
 
+	public static void headlessInit(AbstractViewOf av) {
+		// clear existing
+		av.getChildren().clear();
+		av.getDisabled().clear();
+		if (av.getViewOf() instanceof AbstractClass) {
+			AbstractClass cl = (AbstractClass) av.getViewOf();
+			Collection<FieldElement> c = getViewElementForClass(cl, av);
+			if (av instanceof FacetMap) {
+				askTypeOfList();
+				if (kindOfList != 0) {
+					AbstractViewOf subList = null;
+					if (kindOfList == 1) {
+						subList = ViewFactory.eINSTANCE.createDataTable();
+					} else {
+						subList = ViewFactory.eINSTANCE.createDataList();
+					}
+					subList.setViewOf(av.getViewOf());
+					subList.setMapTo((ModelElement) av.getViewOf());
+					headlessInit(subList);
+					c.add(subList);
+				}
+			}
+			if (c.size() > 0) {
+				av.getChildren().addAll(c);
+				av.setName(cl.getName() + "_" + ViewUtils.getTypeAsString(av));
+			} else {
+				System.out.println("warning view without attributes");				
+			}
+		}
+	}
+	
+	
 	public static Command init(AbstractViewOf av, EditingDomain domain) {
 		kindOfList = 0;
 		CompoundCommand cmd = new CompoundCommand();

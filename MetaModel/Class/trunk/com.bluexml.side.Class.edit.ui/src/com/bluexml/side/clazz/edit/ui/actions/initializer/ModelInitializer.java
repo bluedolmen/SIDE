@@ -30,7 +30,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
-import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.Messages;
 import com.bluexml.side.util.libs.eclipse.ProjectNatureHelper;
 import com.bluexml.side.util.libs.ui.UIUtils;
@@ -38,10 +37,9 @@ import com.bluexml.side.util.libs.ui.UIUtils;
 public abstract class ModelInitializer {
 	public static final String NATURE_ID = "com.bluexml.side.integration.eclipse.nature"; //$NON-NLS-1$
 	public static final String NATURE_WithBuilder_ID = "com.bluexml.side.integration.eclipse.nature.activatedBuilder"; //$NON-NLS-1$
-	public static final String classExt = ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID"); //$NON-NLS-1$
 
 	protected final IFile classModel;
-	protected final ClassPackage root;
+	protected final EObject root;
 
 	protected final IProject project;
 	protected final String newModelExt;
@@ -62,9 +60,10 @@ public abstract class ModelInitializer {
 
 	protected EObject newRootObject;
 	protected ASK_USER ask;
+	protected String inputModelExt;
 
 	public ModelInitializer(IFile classModel, String newModelExt, String modelTypeSegment, InitializerRegister register, ASK_USER ask, String formModelFileName) throws IOException {
-		this(classModel, (ClassPackage) ModelInitializationUtils.openModel(classModel).get(0), newModelExt, modelTypeSegment, register, ask, formModelFileName);
+		this(classModel, ModelInitializationUtils.openModel(classModel).get(0), newModelExt, modelTypeSegment, register, ask, formModelFileName);
 	}
 
 	private void setHeadless() {
@@ -77,11 +76,12 @@ public abstract class ModelInitializer {
 			// no display available force headless mode
 			headless = true;
 		}
-		headless=true;
+		headless = true;
 	}
 
-	public ModelInitializer(IFile classModel, ClassPackage root, String newModelExt, String modelTypeSegment, InitializerRegister register, ASK_USER ask, String formModelFileName) throws IOException {
+	public ModelInitializer(IFile classModel, EObject root, String newModelExt, String modelTypeSegment, InitializerRegister register, ASK_USER ask, String formModelFileName) throws IOException {
 		this.classModel = classModel;
+		this.inputModelExt = "." + classModel.getFullPath().getFileExtension();
 		this.root = root;
 		this.newModelExt = newModelExt;
 		this.modelTypeSegment = modelTypeSegment;
@@ -95,6 +95,8 @@ public abstract class ModelInitializer {
 	protected abstract Command initialize(EditingDomain editingDomain) throws Exception;
 
 	protected abstract void headLessInitialize() throws Exception;
+
+	protected abstract void createRootObject();
 
 	protected IPath getNewModelPath(IFile classModel, String formModelFileName) {
 		IProject project = classModel.getProject();
@@ -111,7 +113,7 @@ public abstract class ModelInitializer {
 		// get new Model path
 		if (formModelFileName == null) {
 			formModelFileName = classModel.getFullPath().lastSegment();
-			formModelFileName = formModelFileName.replaceAll(classExt, newModelExt);
+			formModelFileName = formModelFileName.replaceAll(inputModelExt, newModelExt);
 		}
 		return newModelParentPath.append(formModelFileName);
 	}
@@ -145,6 +147,8 @@ public abstract class ModelInitializer {
 			Map<Object, Object> options = new HashMap<Object, Object>();
 			options.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
 			resource.save(options);
+
+			createRootObject();
 			if (headless) {
 				headLessInitialize();
 				saveNewModel();

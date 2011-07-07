@@ -76,5 +76,5 @@ public class AntInitializerTask extends Task {
 			throw new BuildException(e);
 		}
 	}
-
+	
 }

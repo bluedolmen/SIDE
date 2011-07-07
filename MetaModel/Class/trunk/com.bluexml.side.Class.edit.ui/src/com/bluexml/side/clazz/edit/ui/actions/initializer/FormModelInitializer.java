@@ -24,8 +24,7 @@ public class FormModelInitializer extends ModelInitializer {
 
 	@Override
 	protected void headLessInitialize() throws Exception {
-		setRootObject();
-		for (Clazz c : root.getAllClasses()) {
+		for (Clazz c : ((ClassPackage) root).getAllClasses()) {
 			FormClass fc = createFormClass(c);
 			ClassInitialization.headLessInitializeClass(fc);
 		}
@@ -34,9 +33,8 @@ public class FormModelInitializer extends ModelInitializer {
 	@Override
 	protected Command initialize(EditingDomain editingDomain) {
 		CompoundCommand cc = new CompoundCommand();
-		setRootObject();
 
-		for (Clazz c : root.getAllClasses()) {
+		for (Clazz c : ((ClassPackage) root).getAllClasses()) {
 			FormClass fc = createFormClass(c);
 			Command cmd = ClassInitialization.initializeClass(fc, editingDomain);
 			cc.append(cmd);
@@ -53,7 +51,8 @@ public class FormModelInitializer extends ModelInitializer {
 		return fc;
 	}
 
-	private void setRootObject() {
+	@Override
+	protected void createRootObject() {
 		ClassFormCollection createClassFormCollection = FormFactory.eINSTANCE.createClassFormCollection();
 		createClassFormCollection.setName(getModelName());
 		newRootObject = createClassFormCollection;

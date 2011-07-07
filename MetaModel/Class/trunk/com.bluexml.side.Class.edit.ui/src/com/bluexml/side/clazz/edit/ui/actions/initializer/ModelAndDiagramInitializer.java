@@ -1,6 +1,5 @@
 package com.bluexml.side.clazz.edit.ui.actions.initializer;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.resources.IFile;
@@ -12,7 +11,6 @@ import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
-import com.bluexml.side.util.libs.IFileHelper;
 
 public abstract class ModelAndDiagramInitializer extends ModelInitializer {
 	protected String diagramTypeId;
@@ -40,7 +38,7 @@ public abstract class ModelAndDiagramInitializer extends ModelInitializer {
 	}
 
 	protected void initializeDiagram() throws Exception {
-		final IFile diagramFile = IFileHelper.getIFile(new File(newModelPath.toOSString() + "di")); //$NON-NLS-1$
+//		final IFile diagramFile = IFileHelper.getIFile(new File(newModelPath.toOSString() + "di")); //$NON-NLS-1$
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 
 			public void run() {

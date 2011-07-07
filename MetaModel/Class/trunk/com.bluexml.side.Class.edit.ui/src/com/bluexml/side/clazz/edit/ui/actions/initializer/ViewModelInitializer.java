@@ -28,7 +28,6 @@ public class ViewModelInitializer extends ModelInitializer {
 
 	@Override
 	protected void headLessInitialize() throws Exception {
-		createRootObject();
 		headLessCreateComposedView(GROUPED_VIEWS_DOC_LIB);
 		headLessCreateComposedView(GROUPED_VIEWS_DOC_DETAILS);
 	}
@@ -36,15 +35,13 @@ public class ViewModelInitializer extends ModelInitializer {
 	@Override
 	protected Command initialize(EditingDomain editingDomain) {
 		CompoundCommand cc = new CompoundCommand();
-		
-		createRootObject();
 		createComposedView(editingDomain, cc, GROUPED_VIEWS_DOC_LIB); //$NON-NLS-1$
 		createComposedView(editingDomain, cc, GROUPED_VIEWS_DOC_DETAILS); //$NON-NLS-1$
-
 		return cc;
 	}
 
-	private void createRootObject() {
+	@Override
+	protected void createRootObject() {
 		ViewCollection createViewCollection = ViewFactory.eINSTANCE.createViewCollection();
 		createViewCollection.setName(newModelPath.lastSegment().replace(newModelExt, "")); //$NON-NLS-1$
 		newRootObject = createViewCollection;
@@ -55,7 +52,7 @@ public class ViewModelInitializer extends ModelInitializer {
 		((ViewCollection) newRootObject).getComposedViews().add(cv);
 		cv.setName(value);
 
-		for (Clazz c : root.getAllClasses()) {
+		for (Clazz c : ((ClassPackage) root).getAllClasses()) {
 			AbstractViewOf dataList = createView(ViewFactory.eINSTANCE.createDataList(), c);
 			cv.getChildren().add(dataList);
 			cc.append(InitView.init(dataList, editingDomain));
@@ -67,7 +64,7 @@ public class ViewModelInitializer extends ModelInitializer {
 		((ViewCollection) newRootObject).getComposedViews().add(cv);
 		cv.setName(value);
 
-		for (Clazz c : root.getAllClasses()) {
+		for (Clazz c : ((ClassPackage) root).getAllClasses()) {
 			AbstractViewOf dataList = createView(ViewFactory.eINSTANCE.createDataList(), c);
 			cv.getChildren().add(dataList);
 			InitView.headlessInit(dataList);

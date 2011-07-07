@@ -37,7 +37,6 @@ import org.topcased.modeler.tools.DiagramFileInitializer;
 import org.topcased.modeler.tools.Importer;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.side.util.libs.eclipse.EclipseUtils;
 import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class ModelInitializationUtils {
@@ -166,7 +165,7 @@ public class ModelInitializationUtils {
 
 			DiagramFileInitializer initializer = new DiagramFileInitializer();
 			//			initializer.createDiagram(rootDiagramObject, diagramId, true, new NullProgressMonitor());
-			initializer.createDiagram(rootDiagramObject, diagramId, "toto", true, new NullProgressMonitor());
+			initializer.createDiagram(rootDiagramObject, diagramId, "main", true, new NullProgressMonitor());
 		} else {
 			System.err.println("ModelInitializationUtils.OpenImportDiagram() :" + "bad news ! this method must be run into user-ui thread");
 		}

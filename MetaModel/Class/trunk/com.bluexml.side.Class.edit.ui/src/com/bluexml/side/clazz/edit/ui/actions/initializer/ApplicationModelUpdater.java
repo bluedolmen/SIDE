@@ -23,13 +23,13 @@ import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.actions.wizards.initializefromclass.pages.InitializerPageWelcome.AlfrescoVersions;
 import com.bluexml.side.util.libs.IFileHelper;
 
-public class ApplicationModelInitializer extends ModelInitializer {
+public class ApplicationModelUpdater extends ModelInitializer {
 	private static ApplicationFactory FACTORY = ApplicationFactory.eINSTANCE;
 	private static final String APPLICATION_EDITOR_ID = "com.bluexml.side.application.presentation.ApplicationEditorID"; //$NON-NLS-1$
 	private String alfrescoHome;
 	private String alfrescoVersion;
 
-	public ApplicationModelInitializer(IFile classModel, ClassPackage root, InitializerRegister register, ASK_USER ask, String fileName, String alfrescoVersion, String alfrescoHome) throws IOException {
+	public ApplicationModelUpdater(IFile classModel, ClassPackage root, InitializerRegister register, ASK_USER ask, String fileName, String alfrescoVersion, String alfrescoHome) throws IOException {
 		super(classModel, root, ModelInitializationUtils.getExtensionForExtensionId(APPLICATION_EDITOR_ID), "application", register, ask, fileName); //$NON-NLS-1$
 		this.alfrescoVersion = alfrescoVersion;
 		this.alfrescoHome = alfrescoHome;

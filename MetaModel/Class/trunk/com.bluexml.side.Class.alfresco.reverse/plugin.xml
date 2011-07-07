@@ -32,7 +32,7 @@
             eclipseRuntime="true"
             headless="true"
             library="lib/sideAntTasks.jar"
-            name="side.reverse">
+            name="side.reverse.alfresco.model">
       </antTask>
    </extension>
 

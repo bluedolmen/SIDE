@@ -18,7 +18,6 @@ import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormFactory;
-import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.WorkflowFormCollection;
@@ -31,6 +30,25 @@ import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.UserTask;
 
 public class WorkflowInitialization {
+	
+	
+	public static void headLessInitialize(WorkflowFormCollection fc) {
+		Process p = fc.getLinked_process();
+		List<State> l = new ArrayList<State>();
+		l.add(p.getStartstate());
+		l.addAll(p.getTasknode());
+
+		// List of Form
+		List<FormWorkflow> lf = new ArrayList<FormWorkflow>();
+
+		// For each task we create a form
+		for (State s : l) {
+			FormWorkflow fw = createTaskForForm(p, s);
+			fw.setRef(s);
+			lf.add(fw);			
+		}
+		fc.getForms().addAll(lf);		
+	}
 
 	/**
 	 * Launch initialization from a Workflow Form Collection

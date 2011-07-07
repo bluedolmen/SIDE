@@ -38,8 +38,6 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 
 	@Override
 	protected void headLessInitialize() throws Exception {
-		Portal portal = PortalFactory.eINSTANCE.createPortal();
-		portal.setName(newModelPath.lastSegment().replace(newModelExt, "")); //$NON-NLS-1$
 
 		// create layout
 		PortalLayout layout = PortalFactory.eINSTANCE.createPortalLayout();
@@ -48,6 +46,7 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		createColumn.setName("defaultColumn"); //$NON-NLS-1$
 		layout.getColumns().add(createColumn);
 
+		Portal portal = (Portal) newRootObject;
 		portal.getLayoutSet().add(layout);
 
 		// create pages
@@ -82,9 +81,6 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		createDocumentLibraryPage(portal, layout, createColumn);
 
 		createDocumentDetailsPage(portal, layout, createColumn);
-
-		newRootObject = portal;
-
 	}
 
 	@Override
@@ -95,7 +91,6 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 	}
 
 	private void createDocumentLibraryPage(Portal portal, PortalLayout layout, Column createColumn) throws Exception {
-		/* documentlibrary */
 		String pageId = "documentlibrary"; //$NON-NLS-1$
 		int index = 0;
 		String initializerIndex = ""; //$NON-NLS-1$
@@ -103,7 +98,6 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 	}
 
 	private void createDocumentDetailsPage(Portal portal, PortalLayout layout, Column createColumn) throws Exception {
-		/* documentlibrary */
 		String pageId = "document-details"; //$NON-NLS-1$
 		int index = 1;
 		String initializerIndex = "anotherFormCollection.form"; //$NON-NLS-1$
@@ -178,6 +172,13 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		EList<EObject> viewRoot = ModelInitializationUtils.openModel(model);
 		ob = ((FormCollection) viewRoot.get(0));
 		return ob;
+	}
+
+	@Override
+	protected void createRootObject() {
+		Portal portal = PortalFactory.eINSTANCE.createPortal();
+		portal.setName(newModelPath.lastSegment().replace(newModelExt, "")); //$NON-NLS-1$
+		newRootObject = portal;
 	}
 
 }
