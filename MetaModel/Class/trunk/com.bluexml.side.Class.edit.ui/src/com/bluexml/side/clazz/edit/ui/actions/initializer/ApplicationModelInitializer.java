@@ -36,13 +36,9 @@ public class ApplicationModelInitializer extends ModelInitializer {
 	}
 
 	@Override
-	protected Command initialize(EditingDomain editingDomain) throws Exception {
-		CompoundCommand cc = new CompoundCommand();
-		Application app = null;
-		// search for existing application model
-
+	protected void headLessInitialize() throws Exception {
 		// create new application
-		app = FACTORY.createApplication();
+		Application app = FACTORY.createApplication();
 		app.setName(getModelName());
 
 		// create models elements
@@ -52,6 +48,13 @@ public class ApplicationModelInitializer extends ModelInitializer {
 		createConfiguration(app);
 
 		newRootObject = app;
+
+	}
+
+	@Override
+	protected Command initialize(EditingDomain editingDomain) throws Exception {
+		CompoundCommand cc = new CompoundCommand();
+		headLessInitialize();
 		return cc;
 	}
 
@@ -142,15 +145,15 @@ public class ApplicationModelInitializer extends ModelInitializer {
 		init.addAll(register.getFormInitializer().values());
 		init.addAll(register.getPortalInitializer().values());
 		init.addAll(register.getViewInitializer().values());
-		
-		for (ModelInitializer modelInitializer : init) {			
+
+		for (ModelInitializer modelInitializer : init) {
 			IFile modelF = IFileHelper.getIFile(new File(modelInitializer.newModelPath.toOSString()));
 			Model model = FACTORY.createModel();
 			model.setFile(modelF.getFullPath().toString());
 			model.setName(modelInitializer.getNewFileName());
 			app.getElements().add(model);
 		}
-		
+
 		// add classModel
 		IFile modelF = classModel;
 		Model model = FACTORY.createModel();

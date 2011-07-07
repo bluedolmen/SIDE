@@ -37,8 +37,7 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 	}
 
 	@Override
-	protected Command initialize(EditingDomain editingDomain) throws Exception {
-		CompoundCommand cc = new CompoundCommand();
+	protected void headLessInitialize() throws Exception {
 		Portal portal = PortalFactory.eINSTANCE.createPortal();
 		portal.setName(newModelPath.lastSegment().replace(newModelExt, "")); //$NON-NLS-1$
 
@@ -85,6 +84,13 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		createDocumentDetailsPage(portal, layout, createColumn);
 
 		newRootObject = portal;
+
+	}
+
+	@Override
+	protected Command initialize(EditingDomain editingDomain) throws Exception {
+		CompoundCommand cc = new CompoundCommand();
+		headLessInitialize();
 		return cc;
 	}
 
@@ -173,4 +179,5 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		ob = ((FormCollection) viewRoot.get(0));
 		return ob;
 	}
+
 }

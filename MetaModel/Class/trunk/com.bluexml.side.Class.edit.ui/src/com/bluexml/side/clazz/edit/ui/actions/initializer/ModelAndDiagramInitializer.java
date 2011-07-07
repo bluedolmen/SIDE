@@ -34,7 +34,9 @@ public abstract class ModelAndDiagramInitializer extends ModelInitializer {
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
-		this.initializeDiagram();
+		if (!headless) {
+			this.initializeDiagram();
+		}
 	}
 
 	protected void initializeDiagram() throws Exception {

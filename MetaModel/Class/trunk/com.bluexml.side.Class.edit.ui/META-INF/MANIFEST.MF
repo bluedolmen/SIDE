@@ -15,7 +15,9 @@ Require-Bundle: org.eclipse.gmf.runtime.emf.core,
  com.bluexml.side.Util.libs,
  com.bluexml.side.Portal,
  com.bluexml.side.Application,
- com.bluexml.side.Application.ui
+ com.bluexml.side.Application.ui,
+ org.apache.ant,
+ org.eclipse.ant.core
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.clazz.edit.ui,

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.swt.widgets.Composite;
 
 import com.bluexml.side.clazz.edit.ui.Messages;
-import com.bluexml.side.util.libs.eclipse.StylingUtil;
 import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
 import com.bluexml.side.util.libs.eclipse.wizards.AbstractFieldsPage;
 
@@ -43,6 +42,7 @@ public class InitializerPageWelcome extends AbstractFieldsPage {
 			this.label = label;
 		}
 
+		@Override
 		public String toString() {
 			return label;
 		}

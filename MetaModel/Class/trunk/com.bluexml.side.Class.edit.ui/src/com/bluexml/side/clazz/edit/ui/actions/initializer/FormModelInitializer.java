@@ -23,23 +23,40 @@ public class FormModelInitializer extends ModelInitializer {
 	}
 
 	@Override
-	protected Command initialize(EditingDomain editingDomain) {
-		ClassFormCollection createClassFormCollection = FormFactory.eINSTANCE.createClassFormCollection();
-		createClassFormCollection.setName(getModelName());
-		newRootObject = createClassFormCollection;
-		CompoundCommand cc = new CompoundCommand();
+	protected void headLessInitialize() throws Exception {
+		setRootObject();
 		for (Clazz c : root.getAllClasses()) {
-			FormClass fc = FormFactory.eINSTANCE.createFormClass();
-			fc.setReal_class(c);
-			// set parent before initialize because initialize need it
-			((ClassFormCollection) newRootObject).getForms().add(fc);
+			FormClass fc = createFormClass(c);
+			ClassInitialization.headLessInitializeClass(fc);
+		}
+	}
 
+	@Override
+	protected Command initialize(EditingDomain editingDomain) {
+		CompoundCommand cc = new CompoundCommand();
+		setRootObject();
+
+		for (Clazz c : root.getAllClasses()) {
+			FormClass fc = createFormClass(c);
 			Command cmd = ClassInitialization.initializeClass(fc, editingDomain);
 			cc.append(cmd);
-
 		}
 
 		return cc;
+	}
+
+	private FormClass createFormClass(Clazz c) {
+		FormClass fc = FormFactory.eINSTANCE.createFormClass();
+		fc.setReal_class(c);
+		// set parent before initialize because initialize need it
+		((ClassFormCollection) newRootObject).getForms().add(fc);
+		return fc;
+	}
+
+	private void setRootObject() {
+		ClassFormCollection createClassFormCollection = FormFactory.eINSTANCE.createClassFormCollection();
+		createClassFormCollection.setName(getModelName());
+		newRootObject = createClassFormCollection;
 	}
 
 }

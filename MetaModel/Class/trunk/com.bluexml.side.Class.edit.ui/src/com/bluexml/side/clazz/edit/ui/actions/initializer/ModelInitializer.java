@@ -13,7 +13,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,6 +21,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -48,6 +48,7 @@ public abstract class ModelInitializer {
 	protected final IPath newModelPath;
 
 	protected boolean initialized = false;
+	protected boolean headless = false;
 
 	/**
 	 * @return the newModelPath
@@ -63,15 +64,20 @@ public abstract class ModelInitializer {
 	protected ASK_USER ask;
 
 	public ModelInitializer(IFile classModel, String newModelExt, String modelTypeSegment, InitializerRegister register, ASK_USER ask, String formModelFileName) throws IOException {
-		this.classModel = classModel;
-		EList<?> l = ModelInitializationUtils.openModel(classModel);
-		root = (ClassPackage) l.get(0);
-		this.newModelExt = newModelExt;
-		this.modelTypeSegment = modelTypeSegment;
-		this.project = classModel.getProject();
-		this.newModelPath = getNewModelPath(classModel, formModelFileName);
-		this.register = register;
-		this.ask = ask;
+		this(classModel, (ClassPackage) ModelInitializationUtils.openModel(classModel).get(0), newModelExt, modelTypeSegment, register, ask, formModelFileName);
+	}
+
+	private void setHeadless() {
+		try {
+			Display display = UIUtils.getDisplay();
+			if (display == null) {
+				headless = true;
+			}
+		} catch (Exception e) {
+			// no display available force headless mode
+			headless = true;
+		}
+		headless=true;
 	}
 
 	public ModelInitializer(IFile classModel, ClassPackage root, String newModelExt, String modelTypeSegment, InitializerRegister register, ASK_USER ask, String formModelFileName) throws IOException {
@@ -83,9 +89,12 @@ public abstract class ModelInitializer {
 		this.newModelPath = getNewModelPath(classModel, formModelFileName);
 		this.register = register;
 		this.ask = ask;
+		setHeadless();
 	}
 
 	protected abstract Command initialize(EditingDomain editingDomain) throws Exception;
+
+	protected abstract void headLessInitialize() throws Exception;
 
 	protected IPath getNewModelPath(IFile classModel, String formModelFileName) {
 		IProject project = classModel.getProject();
@@ -118,7 +127,7 @@ public abstract class ModelInitializer {
 		boolean doWork = true;
 		boolean exists = newModelFile.exists();
 
-		if (exists) {
+		if (exists && !headless) {
 			if (ask.equals(ASK_USER.ASK)) {
 				// open warning dialog to ask user about overriding existing models
 				doWork = UIUtils.showConfirmation(Messages.ModelInitializer_3 + newModelFile.getName() + Messages.ModelInitializer_4, Messages.ModelInitializer_5);
@@ -136,36 +145,41 @@ public abstract class ModelInitializer {
 			Map<Object, Object> options = new HashMap<Object, Object>();
 			options.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
 			resource.save(options);
+			if (headless) {
+				headLessInitialize();
+				saveNewModel();
+				initialized = true;
+			} else {
+				try {
+					PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 
-			try {
-				PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+						public void run() {
+							// open editor to initialize model
+							IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+							IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(newModelPath.toFile().getName());
+							IEditorPart editorPart;
+							try {
+								editorPart = page.openEditor(new FileEditorInput(newModelFile), desc.getId());
 
-					public void run() {
-						// open editor to initialize model
-						IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-						IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(newModelPath.toFile().getName());
-						IEditorPart editorPart;
-						try {
-							editorPart = page.openEditor(new FileEditorInput(newModelFile), desc.getId());
+								// initialize model
+								IEditingDomainProvider editor = (IEditingDomainProvider) editorPart;
 
-							// initialize model
-							IEditingDomainProvider editor = (IEditingDomainProvider) editorPart;
+								Command creationCommand = initialize(editor.getEditingDomain());
 
-							Command creationCommand = initialize(editor.getEditingDomain());
-
-							editor.getEditingDomain().getCommandStack().execute(creationCommand);
-							postInitialization(newModelFile, page, desc, editorPart);
-						} catch (Exception e) {
-							throw new RuntimeException(e);
+								editor.getEditingDomain().getCommandStack().execute(creationCommand);
+								postInitialization(newModelFile, page, desc, editorPart);
+							} catch (Exception e) {
+								throw new RuntimeException(e);
+							}
 						}
-					}
-				});
-			} catch (Throwable e) {
-				initialized = false;
-				e.printStackTrace();
-				return;
+					});
+				} catch (Throwable e) {
+					initialized = false;
+					e.printStackTrace();
+					return;
+				}
+				initialized = true;
 			}
-			initialized = true;
 		}
 	}
 

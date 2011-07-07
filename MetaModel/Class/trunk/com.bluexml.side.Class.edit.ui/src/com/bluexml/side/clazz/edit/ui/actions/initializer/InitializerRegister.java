@@ -1,10 +1,14 @@
 package com.bluexml.side.clazz.edit.ui.actions.initializer;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.EList;
 
+import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer.ASK_USER;
 
@@ -61,5 +65,39 @@ public class InitializerRegister {
 		register.getPortalInitializer().put("", new PortalModelInitializer(classModel, root, register, ask)); //$NON-NLS-1$
 
 		return register;
+	}
+	
+	public static InitializerRegister getInitializerRegister(IFile classModel, String alf_home, String alf_ver) throws Exception {
+		InitializerRegister initilizerRegister = null;
+		ClassPackage cp = openModel(classModel);
+
+		initilizerRegister = InitializerRegister.getDefaultInitializerRegister(classModel, cp, ASK_USER.OVERRIDE);
+
+		ApplicationModelInitializer applicationModelInit = new ApplicationModelInitializer(classModel, cp, initilizerRegister, ASK_USER.OVERRIDE, null, alf_ver, alf_home);
+		// add ApplicationInitializer to register
+		initilizerRegister.getApplicationInitializer().put("", applicationModelInit); //$NON-NLS-1$
+
+		return initilizerRegister;
+	}
+
+	public void initialize() throws Exception, CoreException {
+		for (ModelInitializer initializer : this.getViewInitializer().values()) {
+			initializer.initialize();
+		}
+		for (ModelInitializer initializer : this.getFormInitializer().values()) {
+			initializer.initialize();
+		}
+		for (ModelInitializer initializer : this.getPortalInitializer().values()) {
+			initializer.initialize();
+		}
+		for (ModelInitializer initializer : this.getApplicationInitializer().values()) {
+			initializer.initialize();
+		}
+
+	}
+
+	private static ClassPackage openModel(IFile classModel) throws IOException {
+		EList<?> l = ModelInitializationUtils.openModel(classModel);
+		return (ClassPackage) l.get(0);
 	}
 }
