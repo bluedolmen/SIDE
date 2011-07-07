@@ -91,7 +91,6 @@ public class ReverseFromAlfrescoWizard extends Wizard implements IWorkbenchWizar
 			final Collection<File> files = map.values();
 			RunnableWithProgress myRunnable = new RunnableWithProgress() {
 
-				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					current = STATE.started;
 					monitor.beginTask("reversing", -1);
@@ -119,7 +118,6 @@ public class ReverseFromAlfrescoWizard extends Wizard implements IWorkbenchWizar
 		return true;
 	}
 
-	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		System.out.println("init");
 		System.out.println(selection);

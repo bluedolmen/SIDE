@@ -20,7 +20,6 @@ public class WelcomePage extends AlfrescoModelBaseVersionChooser {
 
 	}
 
-	@Override
 	public void createFieldsControls(Composite composite) {
 		File file = null;
 		if (alfrescoXML != null) {
