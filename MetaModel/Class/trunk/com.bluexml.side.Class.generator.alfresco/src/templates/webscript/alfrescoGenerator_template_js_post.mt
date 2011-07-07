@@ -38,7 +38,7 @@ if (argsM["nodeRef"] != null) {
     model.records = search.luceneSearch(lucene);
 }
 
-<%for (getLinkedClasses()){%>
+<%for (getAllLinkedClasses()){%>
 <%if (getFolder() == current(1).getRootContainer().name){%>
 if (myNode != null) {
   model.<%getQualifiedName()%>_list = myNode.childrenByXPath("./*[subtypeOf('<%getFolder()%>:<%getQualifiedName()%>')]");

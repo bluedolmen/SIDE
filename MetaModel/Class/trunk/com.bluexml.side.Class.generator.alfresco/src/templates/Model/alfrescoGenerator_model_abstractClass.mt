@@ -81,7 +81,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		              <index enabled="true">
 		              	 <atomic><%if (metainfo[key.equalsIgnoreCase("index.atomic")].nSize()>0){%>true<%}else{%>false<%}%></atomic>
 		              	 <stored><%if (metainfo[key.equalsIgnoreCase("index.stored")].nSize()>0){%>true<%}else{%>false<%}%></stored>
-		              	 <tokenised><%if (metainfo[key.equalsIgnoreCase("index.tokenised")].nSize()>0){%><%metainfo[key.equalsIgnoreCase("index.tokenised")].nFirst().value%><%}%></tokenised>
+		              	 <tokenised><%if (metainfo[key.equalsIgnoreCase("index.tokenised")].nSize()>0){%><%metainfo[key.equalsIgnoreCase("index.tokenised")].nFirst().value%><%}else{%>false<%}%></tokenised>
 		              </index>
 		            <%}else{%>					
 					  <index enabled="false"/>

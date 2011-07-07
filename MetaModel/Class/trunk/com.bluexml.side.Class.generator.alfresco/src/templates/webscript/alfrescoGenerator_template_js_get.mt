@@ -40,13 +40,13 @@ if (argsM["nodeRef"] != null) {
 }
 
 if (myNode != null) {
-<%for (getLinkedClasses().nSort("name")){%>
+<%for (getAllLinkedClasses().nSort("name")){%>
 <%if (getFolder() == current(1).getRootContainer().name){%>
   model.<%getQualifiedName()%>_list = myNode.childrenByXPath("./*[subtypeOf('<%getFolder()%>:<%getQualifiedName()%>')]");
 <%}%>
 <%}%>
 } else {
-<%for (getLinkedClasses().nSort("name")){%>
+<%for (getAllLinkedClasses().nSort("name")){%>
 <%if (getFolder() == current(1).getRootContainer().name){%>
   var lucene="TYPE:\"{<%getNameSpace()%>}<%getQualifiedName()%>\"";
   model.<%getQualifiedName()%>_list = search.luceneSearch(lucene);
