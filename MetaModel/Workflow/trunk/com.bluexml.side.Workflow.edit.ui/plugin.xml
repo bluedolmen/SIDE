@@ -3,7 +3,11 @@
 <plugin>
   <extension point="org.eclipse.ui.popupMenus">
     <objectContribution id="com.bluexml.side.Workflow.editor.contribution1" nameFilter="*.workflow" objectClass="org.eclipse.core.resources.IFile">
-      <menu id="com.bluexml.side.Workflow.editor.menu1" label="SIDE" path="additions">
+      <menu
+            icon="icons/side_16.gif"
+            id="com.bluexml.side.Workflow.editor.menu1"
+            label="SIDE"
+            path="additions">
         <separator name="group1" />
       </menu>
       <action class="com.bluexml.side.workflow.edit.ui.actions.InitializeFormModel" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Workflow.editor.newAction" label="Initialize form model" menubarPath="com.bluexml.side.Workflow.editor.menu1/group1" />
