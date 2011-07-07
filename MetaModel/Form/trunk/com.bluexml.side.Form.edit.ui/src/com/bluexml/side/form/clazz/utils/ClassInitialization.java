@@ -29,6 +29,7 @@ import com.bluexml.side.util.libs.ui.UIUtils;
 public class ClassInitialization {
 
 	public static Command initializeClass(FormClass fc, EditingDomain domain) {
+
 		CompoundCommand cc = new CompoundCommand();
 		if (fc.getReal_class() != null) {
 			boolean doWork = true;
@@ -53,6 +54,18 @@ public class ClassInitialization {
 		return cc;
 	}
 
+	public static void headLessInitializeClass(FormClass fc) {
+		// update FormClass properties
+		String label = null;
+		String name = null;
+		updateLabelAndName(name, label, fc);
+		fc.setId(name);
+		fc.setLabel(label);
+		// add all children
+		Collection<FormElement> c = getChildForFormClassFromClazz(fc);
+		fc.getChildren().addAll(c);
+	}
+
 	/**
 	 * Will rerturn a compoundCommand with setcommand if needed.
 	 * 
@@ -65,22 +78,10 @@ public class ClassInitialization {
 		CompoundCommand cc = new CompoundCommand();
 		try {
 			if (fc.getReal_class() != null) {
-				AbstractClass c = fc.getReal_class();
-				String name = c.getName();
-				String label = (c.getLabel().length() > 0 ? c.getLabel() : c.getName());
 
-				// need to search if exist another form with default value, if yes must increments label and id, to avoid validation fault
-
-				ClassFormCollection parent = (ClassFormCollection) fc.eContainer();
-
-				int index_g = getIndexOfForm(name, parent);
-				int i = 0;
-				while (index_g != -1) {
-					i++;
-					name += i;
-					label += " " + i;
-					index_g = getIndexOfForm(name, parent);
-				}
+				String label = null;
+				String name = null;
+				updateLabelAndName(name, label, fc);
 
 				if (fc.getLabel() == null || fc.getLabel().length() == 0) {
 					cc.append(SetCommand.create(domain, fc, FormPackage.eINSTANCE.getFormElement_Label(), label));
@@ -95,6 +96,23 @@ public class ClassInitialization {
 		return cc;
 	}
 
+	private static void updateLabelAndName(String name, String label, FormClass fc) {
+		// need to search if exist another form with default value, if yes must increments label and id, to avoid validation fault
+		AbstractClass c = fc.getReal_class();
+		name = c.getName();
+		label = c.getLabel();
+		ClassFormCollection parent = (ClassFormCollection) fc.eContainer();
+
+		int index_g = getIndexOfForm(name, parent);
+		int i = 0;
+		while (index_g != -1) {
+			i++;
+			name += i;
+			label += " " + i;
+			index_g = getIndexOfForm(name, parent);
+		}
+	}
+
 	private static int getIndexOfForm(String id, ClassFormCollection parent) {
 		for (FormElement item : parent.getForms()) {
 			if (item.getId() != null && item.getId().equals(id)) {
@@ -104,7 +122,7 @@ public class ClassInitialization {
 		return -1;
 	}
 
-	public static Collection<FormElement> getChildForFormClassFromClazz(FormClass fc) {
+	private static Collection<FormElement> getChildForFormClassFromClazz(FormClass fc) {
 		fc.getDisabled().clear();
 		fc.getChildren().removeAll(fc.getChildren());
 		AbstractClass cl = fc.getReal_class();
@@ -173,7 +191,6 @@ public class ClassInitialization {
 				Field field = ClassDiagramUtils.getFieldForOperation(op);
 				children.add(field);
 			}
-
 		}
 	}
 }

@@ -2,6 +2,7 @@ package com.bluexml.side.form.clazz;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
