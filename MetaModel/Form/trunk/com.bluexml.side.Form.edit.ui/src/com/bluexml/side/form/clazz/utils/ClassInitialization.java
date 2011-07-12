@@ -56,9 +56,9 @@ public class ClassInitialization {
 
 	public static void headLessInitializeClass(FormClass fc) {
 		// update FormClass properties
-		String label = null;
-		String name = null;
-		updateLabelAndName(name, label, fc);
+		String[] updateLabelAndName = updateLabelAndName(fc);
+		String label = updateLabelAndName[0];
+		String name = updateLabelAndName[1];
 		fc.setId(name);
 		fc.setLabel(label);
 		// add all children
@@ -78,10 +78,9 @@ public class ClassInitialization {
 		CompoundCommand cc = new CompoundCommand();
 		try {
 			if (fc.getReal_class() != null) {
-
-				String label = null;
-				String name = null;
-				updateLabelAndName(name, label, fc);
+				String[] updateLabelAndName = updateLabelAndName(fc);
+				String label = updateLabelAndName[0];
+				String name = updateLabelAndName[1];
 
 				if (fc.getLabel() == null || fc.getLabel().length() == 0) {
 					cc.append(SetCommand.create(domain, fc, FormPackage.eINSTANCE.getFormElement_Label(), label));
@@ -96,7 +95,8 @@ public class ClassInitialization {
 		return cc;
 	}
 
-	private static void updateLabelAndName(String name, String label, FormClass fc) {
+	private static String[] updateLabelAndName(FormClass fc) {
+		String name, label;
 		// need to search if exist another form with default value, if yes must increments label and id, to avoid validation fault
 		AbstractClass c = fc.getReal_class();
 		name = c.getName();
@@ -111,6 +111,7 @@ public class ClassInitialization {
 			label += " " + i;
 			index_g = getIndexOfForm(name, parent);
 		}
+		return new String[] { name, label };
 	}
 
 	private static int getIndexOfForm(String id, ClassFormCollection parent) {

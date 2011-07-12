@@ -62,7 +62,7 @@ public class ModelInitializationUtils {
 		outputResource.save(os, null);
 		os.close();
 	}
-	
+
 	public static void saveModel(IFile model, EObject rootObject) throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		URI fileURI = URI.createPlatformResourceURI(model.getFullPath().toString(), true);
@@ -82,8 +82,8 @@ public class ModelInitializationUtils {
 	 */
 	public static EList<EObject> openModel(IFile model) throws IOException {
 		ResourceSetImpl set = new ResourceSetImpl();
-//		String canonicalPath = model.getRawLocation().toFile().getCanonicalPath();
-//		URI createFileURI = URI.createFileURI(canonicalPath);
+		//		String canonicalPath = model.getRawLocation().toFile().getCanonicalPath();
+		//		URI createFileURI = URI.createFileURI(canonicalPath);
 		URI uri = URI.createPlatformResourceURI(model.getFullPath().toString(), true);
 		Resource inputResource = set.createResource(uri);
 		inputResource.load(null);
@@ -173,25 +173,13 @@ public class ModelInitializationUtils {
 		}
 	}
 
-	public static void openImportDiagram(EObject rootDiagramObject, String diagramId) throws Exception {
-		if (Thread.currentThread().equals(UIUtils.getDisplay().getThread())) {
-
-			DiagramFileInitializer initializer = new DiagramFileInitializer();
-			//			initializer.createDiagram(rootDiagramObject, diagramId, true, new NullProgressMonitor());
-			initializer.createDiagram(rootDiagramObject, diagramId, "main", true, new NullProgressMonitor());
-		} else {
-			System.err.println("ModelInitializationUtils.OpenImportDiagram() :" + "bad news ! this method must be run into user-ui thread");
-		}
-
-	}
-
 	public static boolean createDiagramFromExistingModel(final EObject rootDiagramObject, final String diagramId) {
 		Runnable op = new Runnable() {
 
 			public void run() {
 				DiagramFileInitializer initializer = new DiagramFileInitializer();
 				try {
-					initializer.createDiagram(rootDiagramObject, diagramId, true, new NullProgressMonitor());
+					initializer.createDiagram(rootDiagramObject, diagramId, "main", true, new NullProgressMonitor());
 				} catch (Throwable ioe) {
 					System.err.println(ioe);
 				}
@@ -200,9 +188,7 @@ public class ModelInitializationUtils {
 		};
 
 		try {
-			
 			UIUtils.getDisplay().syncExec(op);
-
 			return true;
 		} catch (Exception ie) {
 			System.err.println(ie);

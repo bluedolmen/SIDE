@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.edit.command.AddCommand;
@@ -30,24 +31,30 @@ import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.UserTask;
 
 public class WorkflowInitialization {
-	
-	
+
 	public static void headLessInitialize(WorkflowFormCollection fc) {
 		Process p = fc.getLinked_process();
-		List<State> l = new ArrayList<State>();
-		l.add(p.getStartstate());
-		l.addAll(p.getTasknode());
+		if (p != null) {
+			// fix update fc.name
+			if (StringUtils.trimToNull(fc.getName()) == null) {
+				fc.setName(p.getName());
+			}
+			List<State> l = new ArrayList<State>();
+			l.add(p.getStartstate());
+			l.addAll(p.getTasknode());
 
-		// List of Form
-		List<FormWorkflow> lf = new ArrayList<FormWorkflow>();
+			// List of Form
+			List<FormWorkflow> lf = new ArrayList<FormWorkflow>();
 
-		// For each task we create a form
-		for (State s : l) {
-			FormWorkflow fw = createTaskForForm(p, s);
-			fw.setRef(s);
-			lf.add(fw);			
+			// For each task we create a form
+			for (State s : l) {
+				FormWorkflow fw = createTaskForForm(p, s);
+				fw.setRef(s);
+				lf.add(fw);
+			}
+			fc.getForms().addAll(lf);
 		}
-		fc.getForms().addAll(lf);		
+
 	}
 
 	/**
@@ -61,6 +68,11 @@ public class WorkflowInitialization {
 		CompoundCommand cmd = null;
 		Process p = fc.getLinked_process();
 		if (p != null) {
+			// fix update fc.name
+			if (StringUtils.trimToNull(fc.getName()) == null) {
+				fc.setName(p.getName());
+			}
+
 			boolean doWork = true;
 			if (fc.getForms().size() > 0) {
 				doWork = UIUtils.showConfirmation("Workflow already set", "This Workflow Form Collection has already been set. Do you want to overwrite it?");
@@ -113,16 +125,16 @@ public class WorkflowInitialization {
 			Clazz advancedTaskDefinition = ut.getAdvancedTaskDefinition();
 			if (advancedTaskDefinition != null) {
 				// use initialize from the Class definition instead to search attribute task
-				Collection<FormElement> createChildsForClass = ClassInitialization.createChildsForClass(advancedTaskDefinition,false);
+				Collection<FormElement> createChildsForClass = ClassInitialization.createChildsForClass(advancedTaskDefinition, false);
 
 				// filter bpm element to only keep custom elements
 				Collection<FormElement> filtered = new ArrayList<FormElement>();
 				for (FormElement formElement : createChildsForClass) {
 					ModelElement ref = formElement.getRef();
-					String fullName = ((NamedModelElement) ref).getFullName();					
+					String fullName = ((NamedModelElement) ref).getFullName();
 					NameSpace namespace = ref.getLogicalNameSpace();
 					String alfrescoURI = "http://www.alfresco.org/model";
-					if (namespace == null || !namespace.getURI().startsWith(alfrescoURI)) {						
+					if (namespace == null || !namespace.getURI().startsWith(alfrescoURI)) {
 						filtered.add(formElement);
 						System.out.println("add Field for " + fullName);
 					} else {

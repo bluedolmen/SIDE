@@ -124,7 +124,7 @@ public abstract class ModelCreator {
 		saveNewModel();
 
 		// open editor
-		page.openEditor(new FileEditorInput(newModelFile), desc.getId());
+//		page.openEditor(new FileEditorInput(newModelFile), desc.getId());
 	}
 
 	public String getModelName() {

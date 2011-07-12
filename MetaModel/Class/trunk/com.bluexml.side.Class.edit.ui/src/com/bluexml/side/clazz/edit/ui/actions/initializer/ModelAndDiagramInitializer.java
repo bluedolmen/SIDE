@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
@@ -38,28 +37,10 @@ public abstract class ModelAndDiagramInitializer extends ModelInitializer {
 			if (rootDiagram == null) {
 				rootDiagram = newRootObject;
 			}
-			this.initializeDiagram();
+			ModelInitializationUtils.createDiagramFromExistingModel(rootDiagram, diagramTypeId);
+			diagramInitialized = true;
 		}
-	}
-
-	protected void initializeDiagram() throws Exception {
-		//		final IFile diagramFile = IFileHelper.getIFile(new File(newModelPath.toOSString() + "di")); //$NON-NLS-1$
-		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
-
-			public void run() {
-				try {
-					//					ModelInitializationUtils.createDiagramFile(newRootObject, diagramTypeId, newModelPath.lastSegment() + "di", diagramFile); //$NON-NLS-1$
-					ModelInitializationUtils.openImportDiagram(rootDiagram, diagramTypeId);
-					//					ModelInitializationUtils.createDiagramFromExistingModel(newRootObject, diagramTypeId);
-				} catch (Exception e) {
-					e.printStackTrace();
-					throw new RuntimeException("error while opening diagram", e);
-				}
-
-			}
-		});
-		diagramInitialized = true;
-	}
+	}	
 
 	/*
 	 * (non-Javadoc)
