@@ -65,7 +65,9 @@ public class InitializerRegister {
 
 		register.recordInitializer("", new ViewModelInitializer(classModel, root, register, ask, null)); //$NON-NLS-1$
 
-		register.recordInitializer("", new FormModelInitializer(classModel, root, register, ask, "default.form")); //$NON-NLS-1$ //$NON-NLS-2$
+		register.recordInitializer("", new FormModelInitializer(classModel, root, register, ask, "default.form")); //$NON-NLS-1$
+		
+		register.recordInitializer("", new FormSearchModelInitializer(classModel, root, register, ask, "search.form")); //$NON-NLS-1$
 
 		register.recordInitializer("anotherFormCollection.form", new FormModelInitializer(classModel, root, register, ask, "anotherFormCollection.form")); //$NON-NLS-1$ //$NON-NLS-2$
 

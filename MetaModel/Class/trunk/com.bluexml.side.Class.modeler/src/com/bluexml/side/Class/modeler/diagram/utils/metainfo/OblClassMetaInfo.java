@@ -38,7 +38,7 @@ public class OblClassMetaInfo extends OblTypeMetaInfo {
 		
 		c = fact.createMetaInfo();
 		c.setKey("includedInSuperTypeQuery");
-		c.setDefaultValueBoolean(false);
+		c.setDefaultValueBoolean(true);
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
 

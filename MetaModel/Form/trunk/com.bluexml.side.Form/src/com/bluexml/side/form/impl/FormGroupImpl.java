@@ -269,6 +269,43 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<FormElement> getAllKindFields() {
+		if (getAllKindFieldsBodyOCL == null) {
+			EOperation eOperation = FormPackage.Literals.FORM_GROUP.getEOperations().get(3);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(FormPackage.Literals.FORM_GROUP, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllKindFieldsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllKindFieldsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<FormElement> result = (Collection<FormElement>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<FormElement>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllKindFields <em>Get All Kind Fields</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllKindFields
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllKindFieldsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {

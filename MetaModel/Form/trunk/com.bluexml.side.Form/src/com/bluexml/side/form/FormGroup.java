@@ -139,4 +139,16 @@ public interface FormGroup extends FormElement {
 	 */
 	EList<FormGroup> getAllSubGroups();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: to get the list of the fields of the FormGroup.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getFields().oclAsType(FormElement) -> union(self.getSearchFields().oclAsType(FormElement))'"
+	 * @generated
+	 */
+	EList<FormElement> getAllKindFields();
+
 } // FormGroup

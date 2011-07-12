@@ -65,6 +65,7 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		return result;
 	}
 
+	@Override
 	public void initAllMetaInfo() {
 		allMetaInfos = new ArrayList<Object>();
 
@@ -261,14 +262,8 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		c.setConstraintType(DataType.OBJECT);
 		c.setKey("index.tokenised");
 		c.setValueType(String.class);
-		c.setValue("true");
-		
+		c.setValue("true");		
 		allMetaInfos.add(c);
-
-
-		
-		
-		
 		
 		c = fact.createMetaInfo();
 		c.setConstraintType(DataType.OBJECT);

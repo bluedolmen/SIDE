@@ -1915,6 +1915,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 
 		addEOperation(formGroupEClass, this.getFormGroup(), "getAllSubGroups", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(formGroupEClass, this.getFormElement(), "getAllKindFields", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(workflowFormCollectionEClass, WorkflowFormCollection.class, "WorkflowFormCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getWorkflowFormCollection_Linked_process(), theWorkflowPackage.getProcess(), null, "linked_process", null, 0, 1, WorkflowFormCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2155,7 +2157,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "noSpecialCharacters validRef"
-		   });																										
+		   });																												
 		addAnnotation
 		  (fieldEClass, 
 		   source, 
@@ -2239,6 +2241,12 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "body", "self.children->select(oclIsKindOf(FormGroup)).oclAsType(FormGroup)->union(self.children->select(oclIsKindOf(FormGroup)).oclAsType(FormGroup).getAllSubGroups().oclAsType(FormGroup)).oclAsType(FormGroup)"
+		   });			
+		addAnnotation
+		  (formGroupEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] {
+			 "body", "self.getFields().oclAsType(FormElement) -> union(self.getSearchFields().oclAsType(FormElement))"
 		   });							
 		addAnnotation
 		  (fieldEClass, 
@@ -2291,7 +2299,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																							
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																									
 		addAnnotation
 		  (getFormGroup_Presentation(), 
 		   source, 

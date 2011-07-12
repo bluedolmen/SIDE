@@ -136,6 +136,8 @@ public class ApplicationCreator extends ModelCreator {
 			createGeneratorConfiguration(conf, "com.bluexml.side.Portal.generator.alfresco3.4d", options_portal); //$NON-NLS-1$
 			createGeneratorConfiguration(conf, "com.bluexml.side.View.generator.alfresco 34d", null); //$NON-NLS-1$
 			createGeneratorConfiguration(conf, "com.bluexml.side.Form.generator.alfresco34d", null); //$NON-NLS-1$
+			createGeneratorConfiguration(conf, "com.bluexml.side.Workflow.generator.alfresco34d", null); //$NON-NLS-1$
+			
 		} else if (alfrescoVersion.equals(ModelLibrary.Libraries.ALFRESCO_32R2_CE.toString())) {
 			//TODO add side component for 3.2R2 and make a fork to create 3.2R2 Portal model
 			System.err.println("3.2R2 NOT YET IMPLEMENTED"); //$NON-NLS-1$

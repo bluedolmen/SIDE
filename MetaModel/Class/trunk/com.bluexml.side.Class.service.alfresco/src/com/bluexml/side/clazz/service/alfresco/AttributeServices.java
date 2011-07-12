@@ -58,6 +58,46 @@ public class AttributeServices {
 		throw new Exception("node must be an attribute");
 	}
 
+	public String getShareSearchFormControl(Attribute object) throws Exception {
+		String numberRange = "/org/alfresco/components/form/controls/numberrange.ftl";
+		String dateRange = "/org/alfresco/components/form/controls/daterange.ftl";
+		String minetype = "/org/alfresco/components/form/controls/mimetype.ftl";
+		String selectMany = "/org/alfresco/components/form/controls/selectmany.ftl";
+		if (object.getValueList() != null) {
+			return selectMany;
+		}
+		if (object.getTyp() == DataType.BOOLEAN) {
+			return "";
+		} else if (object.getTyp() == DataType.BYTE) {
+			return numberRange;
+		} else if (object.getTyp() == DataType.CHAR) {
+			return "";
+		} else if (object.getTyp() == DataType.DATE) {
+			return dateRange;
+		} else if (object.getTyp() == DataType.DATE_TIME) {
+			return dateRange;
+		} else if (object.getTyp() == DataType.DOUBLE) {
+			return numberRange;
+		} else if (object.getTyp() == DataType.FLOAT) {
+			return numberRange;
+		} else if (object.getTyp() == DataType.INT) {
+			return numberRange;
+		} else if (object.getTyp() == DataType.LONG) {
+			return numberRange;
+		} else if (object.getTyp() == DataType.OBJECT) {
+			//return "d:content";
+			return "";
+		} else if (object.getTyp() == DataType.SHORT) {
+			return numberRange;
+		} else if (object.getTyp() == DataType.STRING) {
+			return "";
+		} else if (object.getTyp() == DataType.TIME) {
+			return dateRange;
+		}
+
+		throw new Exception("no controle found for " + object);
+	}
+
 	public static DataType getPropertyType(String type) throws Exception {
 		if (type.equals("d:boolean")) {
 			return DataType.BOOLEAN;
