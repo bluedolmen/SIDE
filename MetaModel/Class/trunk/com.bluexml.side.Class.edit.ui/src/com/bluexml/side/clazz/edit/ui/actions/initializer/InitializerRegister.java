@@ -1,6 +1,7 @@
 package com.bluexml.side.clazz.edit.ui.actions.initializer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,7 +15,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
+import com.bluexml.side.application.Application;
 import com.bluexml.side.application.Model;
+import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator.ASK_USER;
 import com.bluexml.side.util.libs.IFileHelper;
@@ -93,6 +96,28 @@ public class InitializerRegister {
 		return initilizerRegister;
 	}
 
+	public static InitializerRegister getInitializerRegister(IFile applicationModel) throws Exception {
+		Application app = (Application) openModel(applicationModel);
+
+		// search for  dt models and workflow models
+		List<Model> dts = new ArrayList<Model>();
+		List<Model> wks = new ArrayList<Model>();
+
+		EList<ModelElement> elements = app.getElements();
+		for (ModelElement modelElement : elements) {
+			if (modelElement instanceof Model) {
+				Model model = (Model) modelElement;
+				String replaceFirst = model.getFile().replaceFirst("/.*(\\..*)", "$1");
+				if (replaceFirst.equals(".dt")) {
+					dts.add(model);
+				} else if (replaceFirst.equals(".workflow")) {
+					wks.add(model);
+				}
+			}
+		}
+		return InitializerRegister.getInitializerRegister(dts, wks);
+	}
+
 	public static InitializerRegister getInitializerRegister(List<Model> dts, List<Model> wks) throws Exception {
 		InitializerRegister initilizerRegister = new InitializerRegister();
 		// create initializers
@@ -120,10 +145,8 @@ public class InitializerRegister {
 		// so we execute each ModelCreator
 		Set<ModelCreator> allInitializer = getAllInitializer();
 		for (ModelCreator modelInitializer : allInitializer) {
-			// TODO beware circle dependencies ...
 			modelInitializer.initialize();
 		}
-		// TODO another way more secure to avoid circle is to build a execution tree (so no circle) and execute initialize() walking along the tree
 	}
 
 	private static EObject openModel(IFile classModel) throws IOException {

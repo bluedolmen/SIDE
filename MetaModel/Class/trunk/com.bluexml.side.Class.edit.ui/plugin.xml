@@ -49,5 +49,15 @@
            name="side.initialize.workflowForm">
      </antTask>
   </extension>
+  <extension
+        point="org.eclipse.ant.core.antTasks">
+     <antTask
+           class="com.bluexml.side.clazz.edit.ui.actions.initializer.InitializeFromApplication"
+           eclipseRuntime="true"
+           headless="true"
+           library="lib/sideAntTasks.jar"
+           name="side.initialize.application">
+     </antTask>
+  </extension>
 </plugin>
 

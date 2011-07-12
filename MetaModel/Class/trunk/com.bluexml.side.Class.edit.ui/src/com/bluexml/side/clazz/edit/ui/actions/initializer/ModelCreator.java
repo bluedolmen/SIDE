@@ -255,6 +255,7 @@ public abstract class ModelCreator {
 								editingDomain.getCommandStack().execute(creationCommand);
 								postInitialization(newModelFile, page, desc, editorPart);
 							} catch (Exception e) {
+								e.printStackTrace();
 								throw new RuntimeException(e);
 							}
 						}

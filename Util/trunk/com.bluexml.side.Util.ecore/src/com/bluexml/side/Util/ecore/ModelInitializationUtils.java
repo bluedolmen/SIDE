@@ -181,9 +181,8 @@ public class ModelInitializationUtils {
 				try {
 					initializer.createDiagram(rootDiagramObject, diagramId, "main", true, new NullProgressMonitor());
 				} catch (Throwable ioe) {
-					System.err.println(ioe);
+					ioe.printStackTrace();
 				}
-				System.out.println("done");
 			}
 		};
 
@@ -191,7 +190,7 @@ public class ModelInitializationUtils {
 			UIUtils.getDisplay().syncExec(op);
 			return true;
 		} catch (Exception ie) {
-			System.err.println(ie);
+			ie.printStackTrace();
 		}
 		return false;
 	}

@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.URI;
 public class IFileHelper {
 
 	/**
-	 * Return the IFile with the with the given project relative path.
+	 * Return the IFile with the with the given workspace relative path.
 	 * 
 	 * @param path
 	 * @return

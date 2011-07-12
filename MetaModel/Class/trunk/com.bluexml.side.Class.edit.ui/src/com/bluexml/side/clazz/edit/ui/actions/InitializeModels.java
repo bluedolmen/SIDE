@@ -34,26 +34,8 @@ public class InitializeModels implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 		IFile applicationModel = (IFile) _selection.getFirstElement();
-		try {
-			Application app = (Application) openModel(applicationModel);
-
-			// search for  dt models and workflow models
-			List<Model> dts = new ArrayList<Model>();
-			List<Model> wks = new ArrayList<Model>();
-
-			EList<ModelElement> elements = app.getElements();
-			for (ModelElement modelElement : elements) {
-				if (modelElement instanceof Model) {
-					Model model = (Model) modelElement;
-					String replaceFirst = model.getFile().replaceFirst("/.*(\\..*)", "$1");
-					if (replaceFirst.equals(".dt")) {
-						dts.add(model);
-					} else if (replaceFirst.equals(".workflow")) {
-						wks.add(model);
-					}
-				}
-			}
-			InitializerRegister initializerRegister = InitializerRegister.getInitializerRegister(dts, wks);
+		try {			
+			InitializerRegister initializerRegister = InitializerRegister.getInitializerRegister(applicationModel);
 			initializerRegister.initialize();
 
 			applicationModel.getProject().refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
