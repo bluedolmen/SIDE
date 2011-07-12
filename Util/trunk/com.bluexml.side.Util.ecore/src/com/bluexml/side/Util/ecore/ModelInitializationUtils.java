@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -17,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.swt.widgets.Display;
@@ -58,6 +61,16 @@ public class ModelInitializationUtils {
 		outputResource.getContents().add(rootObject);
 		outputResource.save(os, null);
 		os.close();
+	}
+	
+	public static void saveModel(IFile model, EObject rootObject) throws Exception {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		URI fileURI = URI.createPlatformResourceURI(model.getFullPath().toString(), true);
+		Resource resource = resourceSet.createResource(fileURI);
+		Map<Object, Object> options = new HashMap<Object, Object>();
+		options.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$	
+		resource.getContents().add(rootObject);
+		resource.save(options);
 	}
 
 	/**
@@ -161,7 +174,7 @@ public class ModelInitializationUtils {
 	}
 
 	public static void openImportDiagram(EObject rootDiagramObject, String diagramId) throws Exception {
-		if (Thread.currentThread().equals(ModelerPlugin.getDefault().getWorkbench().getDisplay().getThread())) {
+		if (Thread.currentThread().equals(UIUtils.getDisplay().getThread())) {
 
 			DiagramFileInitializer initializer = new DiagramFileInitializer();
 			//			initializer.createDiagram(rootDiagramObject, diagramId, true, new NullProgressMonitor());
@@ -187,7 +200,8 @@ public class ModelInitializationUtils {
 		};
 
 		try {
-			ModelerPlugin.getDefault().getWorkbench().getDisplay().syncExec(op);
+			
+			UIUtils.getDisplay().syncExec(op);
 
 			return true;
 		} catch (Exception ie) {
