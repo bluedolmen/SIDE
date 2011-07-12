@@ -24,6 +24,7 @@ public class ViewModelInitializer extends ModelInitializer {
 
 	public ViewModelInitializer(IFile classModel, ClassPackage root, InitializerRegister register, ASK_USER ask, String formModelFileName) throws IOException {
 		super(classModel, root, VIEW_EDITOR_ID, "view", register, ask, formModelFileName); //$NON-NLS-1$
+		
 	}
 
 	@Override
@@ -75,5 +76,6 @@ public class ViewModelInitializer extends ModelInitializer {
 		v.setViewOf(c);
 		return v;
 	}
+
 
 }

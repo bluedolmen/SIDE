@@ -14,6 +14,7 @@ import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ui.action.GeneratePopUp;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ApplicationModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator;
 import com.bluexml.side.clazz.edit.ui.actions.wizards.initializefromclass.InitializerWizard;
 import com.bluexml.side.clazz.edit.ui.actions.wizards.initializefromclass.InitializerWizardDialog;
 
@@ -42,7 +43,7 @@ public class InitializeModelsStartWizard implements IObjectActionDelegate {
 				final GeneratePopUp generationPopUp;
 				Shell activeShell = Display.getDefault().getActiveShell();
 
-				ApplicationModelInitializer applicationModelInitializer = ini.getApplicationInitializer().get(""); //$NON-NLS-1$
+				ModelCreator applicationModelInitializer = ini.getInitializers(ApplicationModelInitializer.class).get(""); //$NON-NLS-1$
 				IFile file = applicationModelInitializer.getNewModelIFile();
 				Application newRootObject = (Application) applicationModelInitializer.getNewRootObject();
 				generationPopUp = new GeneratePopUp(activeShell, file, newRootObject, newRootObject.getConfiguration(applicationModelInitializer.getModelName()));

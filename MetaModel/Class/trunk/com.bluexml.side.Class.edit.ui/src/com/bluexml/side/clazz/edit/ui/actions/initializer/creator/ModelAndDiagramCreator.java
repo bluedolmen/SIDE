@@ -1,8 +1,9 @@
-package com.bluexml.side.clazz.edit.ui.actions.initializer;
+package com.bluexml.side.clazz.edit.ui.actions.initializer.creator;
 
 import java.io.IOException;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorPart;
@@ -10,19 +11,15 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
-import com.bluexml.side.clazz.ClassPackage;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator;
 
-public abstract class ModelAndDiagramInitializer extends ModelInitializer {
+public abstract class ModelAndDiagramCreator extends ModelCreator {
 	protected String diagramTypeId;
 	protected EObject rootDiagram;
-	protected boolean diagramInitialized = false;
 
-	public ModelAndDiagramInitializer(IFile classModel, String newModelExt, String modelTypeSegment, InitializerRegister register, ASK_USER ask, String formModelFileName) throws IOException {
-		super(classModel, newModelExt, modelTypeSegment, register, ask, formModelFileName);
-	}
-
-	public ModelAndDiagramInitializer(IFile classModel, ClassPackage root, String newModelExt, String modelTypeSegment, String diagramTypeId, InitializerRegister register, ASK_USER ask, String formModelFileName) throws IOException {
-		super(classModel, root, newModelExt, modelTypeSegment, register, ask, formModelFileName);
+	public ModelAndDiagramCreator(IProject project, String newModelExt, String modelTypeSegment, InitializerRegister register, ASK_USER ask, String formModelFileName, String diagramTypeId) throws IOException {
+		super(project, newModelExt, modelTypeSegment, register, ask, formModelFileName);
 		this.diagramTypeId = diagramTypeId;
 	}
 
@@ -34,7 +31,7 @@ public abstract class ModelAndDiagramInitializer extends ModelInitializer {
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
-		if (!headless && !diagramInitialized) {
+		if (!headless) {
 			if (rootDiagram == null) {
 				rootDiagram = newRootObject;
 			}
@@ -53,12 +50,11 @@ public abstract class ModelAndDiagramInitializer extends ModelInitializer {
 					//					ModelInitializationUtils.createDiagramFromExistingModel(newRootObject, diagramTypeId);
 				} catch (Exception e) {
 					e.printStackTrace();
-					throw new RuntimeException("error while opening diagram", e);
 				}
 
 			}
 		});
-		diagramInitialized = true;
+
 	}
 
 	/*
@@ -74,5 +70,4 @@ public abstract class ModelAndDiagramInitializer extends ModelInitializer {
 		// save initialized resource
 		saveNewModel();
 	}
-
 }

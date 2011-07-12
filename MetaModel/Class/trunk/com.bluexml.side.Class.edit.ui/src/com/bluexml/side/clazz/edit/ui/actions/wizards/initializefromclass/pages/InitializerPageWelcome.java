@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Composite;
 
+import com.bluexml.side.clazz.alfresco.reverse.library.ModelLibrary;
 import com.bluexml.side.clazz.edit.ui.Messages;
 import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
 import com.bluexml.side.util.libs.eclipse.wizards.AbstractFieldsPage;
@@ -22,7 +23,7 @@ public class InitializerPageWelcome extends AbstractFieldsPage {
 		createResourceControl(composite, Messages.InitializerPageWelcome_2, Fields.alfresco_home.toString(), RESOURCE_TYPE.RESOURCE_TYPE_DIRECTORY);
 
 		ArrayList<String> allowedValues = new ArrayList<String>();
-		for (AlfrescoVersions alfV : AlfrescoVersions.values()) {
+		for (ModelLibrary.Libraries alfV : ModelLibrary.Libraries.values()) {
 			allowedValues.add(alfV.toString());
 		}
 		createComboControl(composite, Messages.InitializerPageWelcome_3, Fields.alfresco_version.toString(), allowedValues);
@@ -34,17 +35,5 @@ public class InitializerPageWelcome extends AbstractFieldsPage {
 		alfresco_home, alfresco_version, generate
 	}
 
-	public enum AlfrescoVersions {
-		COMMUNITY_32R2(Messages.InitializerPageWelcome_5), COMMUNITY_34D(Messages.InitializerPageWelcome_6);
-		String label;
-
-		private AlfrescoVersions(String label) {
-			this.label = label;
-		}
-
-		@Override
-		public String toString() {
-			return label;
-		}
-	}
+	
 }

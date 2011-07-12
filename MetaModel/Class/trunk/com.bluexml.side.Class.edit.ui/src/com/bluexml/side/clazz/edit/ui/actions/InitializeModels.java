@@ -1,13 +1,14 @@
 package com.bluexml.side.clazz.edit.ui.actions;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -15,12 +16,10 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
-import com.bluexml.side.clazz.ClassPackage;
-import com.bluexml.side.clazz.edit.ui.Messages;
+import com.bluexml.side.application.Application;
+import com.bluexml.side.application.Model;
+import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
-import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer;
-import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer.ASK_USER;
-import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class InitializeModels implements IObjectActionDelegate {
 
@@ -30,47 +29,34 @@ public class InitializeModels implements IObjectActionDelegate {
 
 	}
 
+	/**
+	 * action that create/replace/update Models from dt and workflow models
+	 */
 	public void run(IAction action) {
-		IFile classModel = (IFile) _selection.getFirstElement();
+		IFile applicationModel = (IFile) _selection.getFirstElement();
 		try {
-			ClassPackage cp = openModel(classModel);
+			Application app = (Application) openModel(applicationModel);
 
-			InitializerRegister initilizerList = InitializerRegister.getDefaultInitializerRegister(classModel, cp, ASK_USER.OVERRIDE);
+			// search for  dt models and workflow models
+			List<Model> dts = new ArrayList<Model>();
+			List<Model> wks = new ArrayList<Model>();
 
-			// search for existing files
-			boolean exists = false;
-
-			for (ModelInitializer initializer : initilizerList.getViewInitializer().values()) {
-				IPath path = initializer.getNewModelPath();
-				exists |= ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(path).exists();
-			}
-			for (ModelInitializer initializer : initilizerList.getFormInitializer().values()) {
-				IPath path = initializer.getNewModelPath();
-				exists |= ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(path).exists();
-			}
-			for (ModelInitializer initializer : initilizerList.getPortalInitializer().values()) {
-				IPath path = initializer.getNewModelPath();
-				exists |= ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(path).exists();
-			}
-
-			boolean override = false;
-			if (exists) {
-				override = UIUtils.showConfirmation(Messages.InitializeModels_0, Messages.InitializeModels_1);
-			}
-
-			if (!exists || override) {
-				for (ModelInitializer initializer : initilizerList.getViewInitializer().values()) {
-					initializer.initialize();
+			EList<ModelElement> elements = app.getElements();
+			for (ModelElement modelElement : elements) {
+				if (modelElement instanceof Model) {
+					Model model = (Model) modelElement;
+					String replaceFirst = model.getFile().replaceFirst("/.*(\\..*)", "$1");
+					if (replaceFirst.equals(".dt")) {
+						dts.add(model);
+					} else if (replaceFirst.equals(".workflow")) {
+						wks.add(model);
+					}
 				}
-				for (ModelInitializer initializer : initilizerList.getFormInitializer().values()) {
-					initializer.initialize();
-				}
-				for (ModelInitializer initializer : initilizerList.getPortalInitializer().values()) {
-					initializer.initialize();
-				}
-
 			}
-			classModel.getProject().refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+			InitializerRegister initializerRegister = InitializerRegister.getInitializerRegister(dts, wks);
+			initializerRegister.initialize();
+
+			applicationModel.getProject().refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,9 +68,9 @@ public class InitializeModels implements IObjectActionDelegate {
 		_selection = (IStructuredSelection) selection;
 	}
 
-	public static ClassPackage openModel(IFile classModel) throws IOException {
-		EList<?> l = ModelInitializationUtils.openModel(classModel);
-		return (ClassPackage) l.get(0);
+	public static EObject openModel(IFile classModel) throws IOException {
+		EList<EObject> l = ModelInitializationUtils.openModel(classModel);
+		return l.get(0);
 	}
 
 }

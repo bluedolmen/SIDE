@@ -16,8 +16,9 @@ import org.eclipse.ui.IWorkbenchPart;
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
-import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer;
-import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer.ASK_USER;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.ViewModelInitializer;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator.ASK_USER;
 
 public class InitializeViewModel implements IObjectActionDelegate {
 
@@ -33,7 +34,7 @@ public class InitializeViewModel implements IObjectActionDelegate {
 
 			InitializerRegister initilizerList = InitializerRegister.getDefaultInitializerRegister(classModel, cp, ASK_USER.ASK);
 
-			for (ModelInitializer initializer : initilizerList.getViewInitializer().values()) {
+			for (ModelCreator initializer : initilizerList.getInitializers(ViewModelInitializer.class).values()) {
 				initializer.initialize();
 			}
 

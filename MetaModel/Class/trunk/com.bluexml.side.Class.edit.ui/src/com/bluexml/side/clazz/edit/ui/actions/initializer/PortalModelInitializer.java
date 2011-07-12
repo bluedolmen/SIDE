@@ -1,9 +1,9 @@
 package com.bluexml.side.clazz.edit.ui.actions.initializer;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.util.EList;
@@ -30,10 +30,13 @@ import com.bluexml.side.view.ViewCollection;
 
 public class PortalModelInitializer extends ModelAndDiagramInitializer {
 
+	private static final String PORTAL_DIAGRAM_ID = "com.bluexml.side.Portal.modeler.diagram";
 	private static final String PORTAL_EDITOR_ID = ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID"); //$NON-NLS-1$
 
 	public PortalModelInitializer(IFile classModel, ClassPackage root, InitializerRegister register, ASK_USER ask) throws IOException {
-		super(classModel, root, PORTAL_EDITOR_ID, "portal", "com.bluexml.side.Portal.modeler.diagram", register, ask, null); //$NON-NLS-1$ //$NON-NLS-2$
+		super(classModel, root, PORTAL_EDITOR_ID, "portal", PORTAL_DIAGRAM_ID, register, ask, null); //$NON-NLS-1$ //$NON-NLS-2$
+		dependencies.add(FormModelInitializer.class);
+		dependencies.add(ViewModelInitializer.class);
 	}
 
 	@Override
@@ -154,15 +157,15 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 	}
 
 	private void setForm(int objectIndex, String initializerIndex, PortletInternal portletInternal) throws Exception {
-		String path = register.getFormInitializer().get(initializerIndex).newModelPath.toOSString();
-		IFile iFile = IFileHelper.getIFile(new File(path));
+		IPath newModelPath2 = register.getInitializers(FormModelInitializer.class).get(initializerIndex).newModelPath;
+		IFile iFile = IFileHelper.getIFile(newModelPath2);
 		FormCollection form = getFirstExtrenalFormCollection(iFile, objectIndex);
 		portletInternal.setForm(form);
 	}
 
 	private void setView(int index, String initializerIndex, PortletInternal views) throws Exception {
-		String path = register.getViewInitializer().get(initializerIndex).newModelPath.toOSString();
-		IFile iFile = IFileHelper.getIFile(new File(path));
+		IPath newModelPath2 = register.getInitializers(ViewModelInitializer.class).get(initializerIndex).newModelPath;
+		IFile iFile = IFileHelper.getIFile(newModelPath2);
 		ComposedView view = getFirstExtrenalComposedView(iFile, index);
 		views.setView(view);
 	}

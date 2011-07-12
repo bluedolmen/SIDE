@@ -1,8 +1,12 @@
 package com.bluexml.side.clazz.edit.ui.actions.initializer;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -10,70 +14,59 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
+import com.bluexml.side.application.Model;
 import com.bluexml.side.clazz.ClassPackage;
-import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer.ASK_USER;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator.ASK_USER;
+import com.bluexml.side.util.libs.IFileHelper;
 
 public class InitializerRegister {
-	Map<String, FormModelInitializer> formInitializer;
-	Map<String, PortalModelInitializer> portalInitializer;
-	Map<String, ViewModelInitializer> viewInitializer;
-	Map<String, ApplicationModelInitializer> applicationInitializer;
-	Map<String, FormWorkflowModelInitializer> formWorkflowModelInitializer;
 
-	public InitializerRegister() throws Exception {
-		this.formInitializer = new HashMap<String, FormModelInitializer>();
-		this.portalInitializer = new HashMap<String, PortalModelInitializer>();
-		this.viewInitializer = new HashMap<String, ViewModelInitializer>();
-		this.applicationInitializer = new HashMap<String, ApplicationModelInitializer>();
-		this.formWorkflowModelInitializer = new HashMap<String, FormWorkflowModelInitializer>();
+	Map<Class<? extends ModelCreator>, Map<String, ModelCreator>> registermap;
 
+	public void recordInitializer(String key, ModelCreator init) {
+		Class<? extends ModelCreator> class1 = init.getClass();
+		Map<String, ModelCreator> map;
+		if (registermap.containsKey(class1)) {
+			map = registermap.get(class1);
+		} else {
+			map = new HashMap<String, ModelCreator>();
+			registermap.put(class1, map);
+		}
+		map.put(key, init);
 	}
 
-	/**
-	 * @return the formWorkflowModelInitializer
-	 */
-	public Map<String, FormWorkflowModelInitializer> getFormWorkflowModelInitializer() {
-		return formWorkflowModelInitializer;
+	public Set<ModelCreator> getAllInitializer() {
+		Set<ModelCreator> x = new HashSet<ModelCreator>();
+		Collection<Map<String, ModelCreator>> values = registermap.values();
+		for (Map<String, ModelCreator> map : values) {
+			x.addAll(map.values());
+		}
+		return x;
 	}
 
-	/**
-	 * @return the formInitializer
-	 */
-	public Map<String, FormModelInitializer> getFormInitializer() {
-		return formInitializer;
+	public Map<String, ModelCreator> getInitializers(Class<? extends ModelCreator> c) {
+		return registermap.get(c);
 	}
 
-	/**
-	 * @return the portalInitializer
-	 */
-	public Map<String, PortalModelInitializer> getPortalInitializer() {
-		return portalInitializer;
-	}
-
-	/**
-	 * @return the viewInitializer
-	 */
-	public Map<String, ViewModelInitializer> getViewInitializer() {
-		return viewInitializer;
-	}
-
-	/**
-	 * @return the applicationInitializer
-	 */
-	public Map<String, ApplicationModelInitializer> getApplicationInitializer() {
-		return applicationInitializer;
+	public InitializerRegister() {
+		this.registermap = new HashMap<Class<? extends ModelCreator>, Map<String, ModelCreator>>();
 	}
 
 	public static InitializerRegister getDefaultInitializerRegister(IFile classModel, ClassPackage root, ASK_USER ask) throws Exception {
 		InitializerRegister register = new InitializerRegister();
+		getInitializerForClassModel(register, classModel, root, ask);
+		return register;
+	}
 
-		register.getViewInitializer().put("", new ViewModelInitializer(classModel, root, register, ask, null)); //$NON-NLS-1$
+	public static InitializerRegister getInitializerForClassModel(InitializerRegister register, IFile classModel, ClassPackage root, ASK_USER ask) throws Exception {
 
-		register.getFormInitializer().put("", new FormModelInitializer(classModel, root, register, ask, "default.form")); //$NON-NLS-1$ //$NON-NLS-2$
+		register.recordInitializer("", new ViewModelInitializer(classModel, root, register, ask, null)); //$NON-NLS-1$
 
-		register.getFormInitializer().put("anotherFormCollection.form", new FormModelInitializer(classModel, root, register, ask, "anotherFormCollection.form")); //$NON-NLS-1$ //$NON-NLS-2$
+		register.recordInitializer("", new FormModelInitializer(classModel, root, register, ask, "default.form")); //$NON-NLS-1$ //$NON-NLS-2$
 
-		register.getPortalInitializer().put("", new PortalModelInitializer(classModel, root, register, ask)); //$NON-NLS-1$
+		register.recordInitializer("anotherFormCollection.form", new FormModelInitializer(classModel, root, register, ask, "anotherFormCollection.form")); //$NON-NLS-1$ //$NON-NLS-2$
+
+		register.recordInitializer("", new PortalModelInitializer(classModel, root, register, ASK_USER.SKIP)); //$NON-NLS-1$
 
 		return register;
 	}
@@ -81,8 +74,8 @@ public class InitializerRegister {
 	public static InitializerRegister getFormWorkFlowInitializerRegister(IFile classModel, ASK_USER ask) throws Exception {
 		InitializerRegister register = new InitializerRegister();
 
-		register.getFormWorkflowModelInitializer().put("", new FormWorkflowModelInitializer(classModel, register, ask, null));
-		
+		register.recordInitializer("", new FormWorkflowModelInitializer(classModel, register, ask, null));
+
 		return register;
 	}
 
@@ -92,30 +85,45 @@ public class InitializerRegister {
 
 		initilizerRegister = InitializerRegister.getDefaultInitializerRegister(classModel, cp, ASK_USER.OVERRIDE);
 
-		ApplicationModelInitializer applicationModelInit = new ApplicationModelInitializer(classModel, cp, initilizerRegister, ASK_USER.OVERRIDE, classModel.getProject().getName(), alf_ver, alf_home);
+		ModelInitializer applicationModelInit = new ApplicationModelInitializer(classModel, cp, initilizerRegister, ASK_USER.OVERRIDE, null, alf_ver, alf_home);
+
 		// add ApplicationInitializer to register
-		initilizerRegister.getApplicationInitializer().put("", applicationModelInit); //$NON-NLS-1$
+		initilizerRegister.recordInitializer("", applicationModelInit); //$NON-NLS-1$
 
 		return initilizerRegister;
 	}
 
-	public void initialize() throws Exception, CoreException {
-		for (ModelInitializer initializer : this.getViewInitializer().values()) {
-			initializer.initialize();
-		}
-		for (ModelInitializer initializer : this.getFormInitializer().values()) {
-			initializer.initialize();
-		}
-		for (ModelInitializer initializer : this.getPortalInitializer().values()) {
-			initializer.initialize();
-		}
-		for (ModelInitializer initializer : this.getApplicationInitializer().values()) {
-			initializer.initialize();
-		}
-		for (ModelInitializer initializer : this.getFormWorkflowModelInitializer().values()) {
-			initializer.initialize();
+	public static InitializerRegister getInitializerRegister(List<Model> dts, List<Model> wks) throws Exception {
+		InitializerRegister initilizerRegister = new InitializerRegister();
+		// create initializers
+
+		for (Model modelElement : wks) {
+			String file = modelElement.getFile();
+			IFile iFile = IFileHelper.getIFile(file);
+			initilizerRegister.recordInitializer("", new FormWorkflowModelInitializer(iFile, initilizerRegister, ASK_USER.UPDATE, null));
 		}
 
+		for (Model modelElement : dts) {
+			String file = modelElement.getFile();
+			IFile iFile = IFileHelper.getIFile(file);
+			System.out.println("converted to IFile :" + iFile);
+			ClassPackage cp = (ClassPackage) openModel(iFile);
+			getInitializerForClassModel(initilizerRegister, iFile, cp, ASK_USER.OVERRIDE);
+			ModelInitializer applicationModelInit = new ApplicationModelInitializer(iFile, cp, initilizerRegister, ASK_USER.UPDATE, null, null, null);
+			initilizerRegister.recordInitializer("", applicationModelInit); //$NON-NLS-1$
+		}
+		return initilizerRegister;
+	}
+
+	public void initialize() throws Exception, CoreException {
+		// ModelCreator use a cascading initialization that use this register
+		// so we execute each ModelCreator
+		Set<ModelCreator> allInitializer = getAllInitializer();
+		for (ModelCreator modelInitializer : allInitializer) {
+			// TODO beware circle dependencies ...
+			modelInitializer.initialize();
+		}
+		// TODO another way more secure to avoid circle is to build a execution tree (so no circle) and execute initialize() walking along the tree
 	}
 
 	private static EObject openModel(IFile classModel) throws IOException {

@@ -6,13 +6,13 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.eclipse.core.resources.IFile;
 
-import com.bluexml.side.clazz.edit.ui.actions.wizards.initializefromclass.pages.InitializerPageWelcome.AlfrescoVersions;
+import com.bluexml.side.clazz.alfresco.reverse.library.ModelLibrary;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public class AntInitializerTask extends Task {
 	File tomcatHome;
 	String classModelPath;
-	AlfrescoVersions alfrescoVersion;
+	ModelLibrary.Libraries alfrescoVersion;
 
 	/**
 	 * @return the tomcatHome
@@ -47,7 +47,7 @@ public class AntInitializerTask extends Task {
 	/**
 	 * @return the alfrescoVersion
 	 */
-	public AlfrescoVersions getAlfrescoVersion() {
+	public ModelLibrary.Libraries getAlfrescoVersion() {
 		return alfrescoVersion;
 	}
 
@@ -55,7 +55,7 @@ public class AntInitializerTask extends Task {
 	 * @param alfrescoVersion
 	 *            the alfrescoVersion to set
 	 */
-	public void setAlfrescoVersion(AlfrescoVersions alfrescoVersion) {
+	public void setAlfrescoVersion(ModelLibrary.Libraries alfrescoVersion) {
 		this.alfrescoVersion = alfrescoVersion;
 	}
 
@@ -76,5 +76,5 @@ public class AntInitializerTask extends Task {
 			throw new BuildException(e);
 		}
 	}
-	
+
 }

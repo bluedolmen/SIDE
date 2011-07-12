@@ -15,9 +15,10 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.FormModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
-import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer;
-import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelInitializer.ASK_USER;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator.ASK_USER;
 
 public class InitializeFormModel implements IObjectActionDelegate {
 
@@ -33,7 +34,7 @@ public class InitializeFormModel implements IObjectActionDelegate {
 
 			InitializerRegister initilizerList = InitializerRegister.getDefaultInitializerRegister(classModel, cp, ASK_USER.ASK);
 
-			for (ModelInitializer initializer : initilizerList.getFormInitializer().values()) {
+			for (ModelCreator initializer : initilizerList.getInitializers(FormModelInitializer.class).values()) {
 				initializer.initialize();
 			}
 

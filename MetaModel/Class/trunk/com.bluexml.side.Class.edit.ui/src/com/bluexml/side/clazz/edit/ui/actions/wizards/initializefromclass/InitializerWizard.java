@@ -16,6 +16,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 
 import com.bluexml.side.clazz.edit.ui.Activator;
 import com.bluexml.side.clazz.edit.ui.Messages;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.ApplicationModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
 import com.bluexml.side.clazz.edit.ui.actions.wizards.initializefromclass.pages.InitializerPageWelcome;
 
@@ -93,7 +94,7 @@ public class InitializerWizard extends Wizard implements IWorkbenchWizard {
 			e.printStackTrace();
 			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Alfresco Extension project creation fail !", e)); //$NON-NLS-1$
 		}
-		while (!ini.getApplicationInitializer().get("").isInitialized()) { //$NON-NLS-1$
+		while (!ini.getInitializers(ApplicationModelInitializer.class).get("").isInitialized()) { //$NON-NLS-1$
 			try {
 				this.wait(1000);
 			} catch (InterruptedException e) {

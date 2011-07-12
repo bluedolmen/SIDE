@@ -14,9 +14,9 @@ public class Messages extends NLS {
 	public static String InitializerPageWelcome_6;
 	public static String InitializerWizard_0;
 	public static String InitializerWizard_2;
-	public static String ModelInitializer_3;
-	public static String ModelInitializer_4;
-	public static String ModelInitializer_5;
+	public static String ModelCreator_3;
+	public static String ModelCreator_4;
+	public static String ModelCreator_5;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
