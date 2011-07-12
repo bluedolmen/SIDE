@@ -11,7 +11,23 @@ import com.bluexml.side.util.libs.IFileHelper;
 
 public class AntInitializerTask extends Task {
 	File tomcatHome;
-	String classModelPath;
+	String model;
+
+	/**
+	 * @return the model
+	 */
+	public String getModel() {
+		return model;
+	}
+
+	/**
+	 * @param model
+	 *            the model to set
+	 */
+	public void setModel(String model) {
+		this.model = model;
+	}
+
 	ModelLibrary.Libraries alfrescoVersion;
 
 	/**
@@ -27,21 +43,6 @@ public class AntInitializerTask extends Task {
 	 */
 	public void setTomcatHome(File tomcatHome) {
 		this.tomcatHome = tomcatHome;
-	}
-
-	/**
-	 * @return the classModelPath
-	 */
-	public String getClassModelPath() {
-		return classModelPath;
-	}
-
-	/**
-	 * @param classModelPath
-	 *            the classModelPath to set
-	 */
-	public void setClassModelPath(String classModelPath) {
-		this.classModelPath = classModelPath;
 	}
 
 	/**
@@ -69,7 +70,7 @@ public class AntInitializerTask extends Task {
 			throw new BuildException("Bad tomcat home, please to give the absolute path");
 		}
 		try {
-			IFile classModelIfile = IFileHelper.getIFile(classModelPath);
+			IFile classModelIfile = IFileHelper.getIFile(model);
 			InitializerRegister initializerRegister = InitializerRegister.getInitializerRegister(classModelIfile, tomcatHome.getAbsolutePath(), alfrescoVersion.toString());
 			initializerRegister.initialize();
 		} catch (Exception e) {

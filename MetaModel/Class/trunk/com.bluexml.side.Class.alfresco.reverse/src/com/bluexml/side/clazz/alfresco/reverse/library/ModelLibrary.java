@@ -15,7 +15,7 @@ public class ModelLibrary {
 	private static final String LIBRARY_PATH = "/com/bluexml/side/clazz/alfresco/reverse/library/";
 
 	public enum Libraries {
-		ALFRESCO_34D_CE("Alfresco 3.4.d CE", "Model-library-Alfresco-3.4.d-CE", "alfresco34d.zip"), ALFRESCO_33R2_CE("Alfresco 3.2r2 CE", "Model-library-Alfresco-3.2r2-CE", "alfresco32r2.zip");
+		ALFRESCO_34D_CE("Alfresco 3.4.d CE", "Model-library-Alfresco-3.4.d-CE", "alfresco34d.zip"), ALFRESCO_32R2_CE("Alfresco 3.2r2 CE", "Model-library-Alfresco-3.2r2-CE", "alfresco32r2.zip");
 		String label = "";
 		String projectId = "";
 		String archiveName = "";
