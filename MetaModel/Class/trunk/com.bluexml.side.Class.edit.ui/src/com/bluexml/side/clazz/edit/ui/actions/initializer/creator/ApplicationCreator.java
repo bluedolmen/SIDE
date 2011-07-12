@@ -185,12 +185,13 @@ public class ApplicationCreator extends ModelCreator {
 		initializedModels.addAll(externals);
 
 		Set<ModelCreator> allInitializer = register.getAllInitializer();
-		// we do not want to include .application ... in application model
-		allInitializer.remove(this);
 
 		for (ModelCreator modelInitializer : allInitializer) {
 			IFile iFile = IFileHelper.getIFile(modelInitializer.getNewModelPath());
-			initializedModels.add(iFile);
+			if (!iFile.getName().endsWith(newModelExt)) {
+				// do not include application models
+				initializedModels.add(iFile);	
+			}			
 		}
 
 		// only create new Models entry
