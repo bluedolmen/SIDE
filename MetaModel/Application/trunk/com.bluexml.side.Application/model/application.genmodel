@@ -10,10 +10,15 @@
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="application.ecore#//StaticConfigurationParameters">
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsclean"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsdocumentation"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/UPDATE_DEPENDENCIES"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/FM_dev"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionslogPath"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsdestinationPath"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionSkipValidation"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationOptionOfflineMode"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationOptionGenerate"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationOptionComplete"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationOptionResolveDependencies"/>
     </genEnums>
     <genClasses image="false" ecoreClass="application.ecore#//ModelElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModelElement/name"/>

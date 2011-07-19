@@ -17,6 +17,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -24,11 +25,13 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
+import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.Model;
+import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
@@ -42,6 +45,7 @@ import com.bluexml.side.util.componentmonitor.headless.LabelHeadLess;
 import com.bluexml.side.util.componentmonitor.headless.StyledTextHeadless;
 import com.bluexml.side.util.componentmonitor.headless.progressBarHeadLess;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
+import com.bluexml.side.util.libs.IFileHelper;
 
 public class ApplicationStarter implements IApplication {
 	public static final String CONFIGURATION_KEY = "configuration";
@@ -98,8 +102,18 @@ public class ApplicationStarter implements IApplication {
 		return EXIT_OK;
 	}
 
+	public static Generate getGenerate(IFile application, String confName) {
+		Map<String, Object> conf = loadConfiguration(application, confName);
+		return getGenerate(conf);
+	}
+
 	public static Generate getGenerate(File application, String confName) {
 		Map<String, Object> conf = loadConfiguration(application, confName);
+		return getGenerate(conf);
+
+	}
+
+	private static Generate getGenerate(Map<String, Object> conf) {
 		Configuration configuration = (Configuration) conf.get(CONFIGURATION_KEY);
 
 		// instantiate general monitor
@@ -117,26 +131,27 @@ public class ApplicationStarter implements IApplication {
 				break;
 			}
 		}
-		
+
 		Monitor generalMonitor = new Monitor(styletext, progressBar, label, otherLogPath, configuration.getName(), fileName);
 
 		ComponentMonitor componentMonitor = new ComponentMonitor(styletext, progressBar2, null, label2, generalMonitor, null, LogType.GENERATION, generalMonitor.getConsoleLog(), fileName);
 
 		Generate gen = new Generate(configuration, (List<Model>) conf.get(MODELS_KEY), generalMonitor, componentMonitor);
+		gen.setHeadless(true);
+		gen.setUser(false);
+		gen.setSystem(true);
 		return gen;
-
 	}
 
-	
 	public static Monitor getHeadlessMonitor(String generatorLog, String configurationName, String fileName) {
 		ProgressBarInterface progressBar = new progressBarHeadLess();
-		LabelInterface label = new LabelHeadLess();		
+		LabelInterface label = new LabelHeadLess();
 		StyledTextInterface styletext = new StyledTextHeadless();
 		Monitor generalMonitor = new Monitor(styletext, progressBar, label, generatorLog, configurationName, fileName);
 		return generalMonitor;
 	}
-	
-	public static ComponentMonitor getHeadlessComponantMonitor(Monitor generalMonitor,String generatorLog, String configurationName, String fileName) {		
+
+	public static ComponentMonitor getHeadlessComponantMonitor(Monitor generalMonitor, String generatorLog, String configurationName, String fileName) {
 		ProgressBarInterface progressBar2 = new progressBarHeadLess();
 		LabelInterface label2 = new LabelHeadLess();
 		StyledTextInterface styletext = new StyledTextHeadless();
@@ -148,14 +163,11 @@ public class ApplicationStarter implements IApplication {
 		ComponentMonitor componentMonitor = new ComponentMonitor(styletext, progressBar2, null, label2, generalMonitor, null, LogType.GENERATION, generalMonitor.getConsoleLog(), fileName);
 		return componentMonitor;
 	}
-	
+
 	protected void generate(File fileAP) {
 		Generate gen = getGenerate(fileAP, arguments[1]);
 		try {
 			System.out.println("created, let's run");
-			gen.setHeadless(true);
-			gen.setUser(false);
-			gen.setSystem(true);
 			// don't use job scheduler, but invoke the main method
 			gen.run_(new NullProgressMonitor());
 
@@ -168,94 +180,25 @@ public class ApplicationStarter implements IApplication {
 	}
 
 	public static Map<String, Object> loadConfiguration(File filePath, String name) {
-		Map<String, Object> extractedConfiguration = new HashMap<String, Object>();
-
-		System.out.println("Start Generate with filePath= " + filePath + " & Name: " + name);
-
 		// Create the IFile
-		IFile file = null;
-		try {
-			// IWorkspace ws = ResourcesPlugin.getWorkspace();
-			// IProject project= ws.getRoot().getProject("StandAlone");
-			// if (!project.exists())
-			// project.create(null);
-			// if (!project.isOpen())
-			// project.open(null);
-			// IPath location = new Path(filePath.getAbsolutePath());
+		IFile file = IFileHelper.getIFile(filePath);
+		return loadConfiguration(file, name);
 
-			// file = project.getFile(location.lastSegment());
+	}
 
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			System.out.println("workspace: " + workspace);
-			IPath location = Path.fromOSString(filePath.getAbsolutePath());
-			System.out.println("location: " + location);
-			file = workspace.getRoot().getFileForLocation(location);
-			if (file == null)
-				file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath()));
-			System.out.println("file: " + file);
-
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-
-		System.out.println("getWorkspace: " + ResourcesPlugin.getWorkspace());
-		System.out.println("getRoot: " + ResourcesPlugin.getWorkspace().getRoot().exists() + " -> " + ResourcesPlugin.getWorkspace().getRoot());
-		System.out.println("getPath: " + ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath())));
-		if (file == null)
-			file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath()));
-		if (file == null)
-			System.out.println("\tfile is null ");
+	/**
+	 * @param file
+	 * @param name
+	 *            , if null return the first configuration
+	 * @return
+	 */
+	public static Map<String, Object> loadConfiguration(IFile file, String name) {
+		Map<String, Object> extractedConfiguration = new HashMap<String, Object>();
 
 		System.out.println("\tfile.exists(): " + file.exists());
 
-		URI uri = null;
-		System.out.println("\tURI");
 		try {
-
-			System.out.println("\tgetRawLocation: " + file.getRawLocation());
-			System.out.println("\ttoFile: " + file.getRawLocation().toFile());
-			System.out.println("\tpath: " + file.getRawLocation().toFile().getPath());
-
-			String absolutePath = file.getRawLocation().toFile().getAbsolutePath();
-			System.out.println("\tabsolutePath: " + absolutePath);
-
-			uri = URI.createFileURI(new File(absolutePath).getAbsolutePath());
-
-			System.out.println("URI: " + uri);
-
-		} catch (Exception e) {
-			System.out.println("Exception : " + e.getClass());
-		}
-
-		// System.out.println("\tXMI");
-		XMIResource resource = new XMIResourceImpl(uri);
-		// System.out.println("\tFILE INPUT");
-
-		FileInputStream fi = null;
-		try {
-			fi = new FileInputStream(file.getRawLocation().toFile());
-		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-
-		System.out.println("\tMAP");
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put(ApplicationPackage.eINSTANCE.getNsURI(), ApplicationPackage.eINSTANCE);
-		map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
-
-		System.out.println("\tLOAD");
-		try {
-			resource.load(fi, map);
-		} catch (IOException e) {
-			System.out.println("Exception  " + e.getMessage());
-			e.printStackTrace();
-		} catch (Exception e1) {
-			System.out.println("Exception  " + e1.getMessage());
-			e1.printStackTrace();
-		}
-
-		try {
-			Application application = (Application) resource.getContents().get(0);
+			Application application = (Application) ModelInitializationUtils.openModel(file).get(0);
 			System.out.println("\tupdateApplicationFile : ");
 			ApplicationUtil.updateApplicationFromExtensionPoint(application, file);
 			System.out.println("\tapplication: " + application);
@@ -264,12 +207,22 @@ public class ApplicationStarter implements IApplication {
 			List<Model> models = ApplicationUtil.getModels(application);
 			System.out.println("\tmodels: " + models);
 			extractedConfiguration.put(MODELS_KEY, models);
-			
+			Configuration configuration = null;
 			if (name != null) {
-				Configuration configuration = application.getConfiguration(name);
-				System.out.println("\tconfiguration: " + configuration);
-				extractedConfiguration.put(CONFIGURATION_KEY, configuration);
+				configuration = application.getConfiguration(name);
+			} else {
+				// get the first configuration if no configuration name provided
+				EList<ModelElement> elements = application.getElements();
+				for (ModelElement modelElement : elements) {
+					if (modelElement instanceof Configuration) {
+						configuration = (Configuration) modelElement;
+						break;
+					}
+				}
 			}
+
+			System.out.println("\tconfiguration: " + configuration);
+			extractedConfiguration.put(CONFIGURATION_KEY, configuration);
 
 		} catch (java.lang.NullPointerException e) {
 			System.out.println("NullPointerException  " + e.getMessage());

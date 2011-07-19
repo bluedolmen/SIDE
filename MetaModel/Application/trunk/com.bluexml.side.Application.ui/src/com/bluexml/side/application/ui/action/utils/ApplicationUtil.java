@@ -747,8 +747,12 @@ public class ApplicationUtil {
 				confParamsToRemove.add(configurationParameters);
 			}
 		}
-
 		//		config.getParameters().removeAll(confParamsToRemove);
+		
+		// manage static parameters, if configurationPrameter do not exists create it with default value
+		ApplicationDialog.addStaticParameters(config);
+
+
 
 	}
 

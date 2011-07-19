@@ -112,6 +112,7 @@ public abstract class WarDeployer extends Deployer {
 		initWarToPatch(new File(getTomcatHome()));
 	}
 
+	@Override
 	protected void deployProcess(java.io.File fileToDeploy) throws Exception {
 		boolean succes = true;
 		// copy all files in the package into the WAR

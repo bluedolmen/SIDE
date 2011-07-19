@@ -91,7 +91,31 @@ public enum StaticConfigurationParameters implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GENERATION_OPTION_OFFLINE_MODE(7, "generationOptionOfflineMode", "generation.option.offlineMode");
+	GENERATION_OPTION_OFFLINE_MODE(7, "generationOptionOfflineMode", "generation.option.offlineMode"), /**
+	 * The '<em><b>Generation Option Generate</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GENERATION_OPTION_GENERATE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	GENERATION_OPTION_GENERATE(8, "generationOptionGenerate", "generation.option.generate"), /**
+	 * The '<em><b>Generation Option Complete</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GENERATION_OPTION_COMPLETE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	GENERATION_OPTION_COMPLETE(9, "generationOptionComplete", "generation.option.complete"), /**
+	 * The '<em><b>Generation Option Resolve Dependencies</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GENERATION_OPTION_RESOLVE_DEPENDENCIES_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	GENERATION_OPTION_RESOLVE_DEPENDENCIES(10, "generationOptionResolveDependencies", "generation.option.resolve.dependencies");
 
 	/**
 	 * The '<em><b>Generationoptionsclean</b></em>' literal value.
@@ -214,6 +238,51 @@ public enum StaticConfigurationParameters implements Enumerator {
 	public static final int GENERATION_OPTION_OFFLINE_MODE_VALUE = 7;
 
 	/**
+	 * The '<em><b>Generation Option Generate</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Generation Option Generate</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #GENERATION_OPTION_GENERATE
+	 * @model name="generationOptionGenerate" literal="generation.option.generate"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GENERATION_OPTION_GENERATE_VALUE = 8;
+
+	/**
+	 * The '<em><b>Generation Option Complete</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Generation Option Complete</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #GENERATION_OPTION_COMPLETE
+	 * @model name="generationOptionComplete" literal="generation.option.complete"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GENERATION_OPTION_COMPLETE_VALUE = 9;
+
+	/**
+	 * The '<em><b>Generation Option Resolve Dependencies</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Generation Option Resolve Dependencies</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #GENERATION_OPTION_RESOLVE_DEPENDENCIES
+	 * @model name="generationOptionResolveDependencies" literal="generation.option.resolve.dependencies"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GENERATION_OPTION_RESOLVE_DEPENDENCIES_VALUE = 10;
+
+	/**
 	 * An array of all the '<em><b>Static Configuration Parameters</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -229,6 +298,9 @@ public enum StaticConfigurationParameters implements Enumerator {
 			GENERATIONOPTIONSDESTINATION_PATH,
 			GENERATIONOPTION_SKIP_VALIDATION,
 			GENERATION_OPTION_OFFLINE_MODE,
+			GENERATION_OPTION_GENERATE,
+			GENERATION_OPTION_COMPLETE,
+			GENERATION_OPTION_RESOLVE_DEPENDENCIES,
 		};
 
 	/**
@@ -287,6 +359,9 @@ public enum StaticConfigurationParameters implements Enumerator {
 			case GENERATIONOPTIONSDESTINATION_PATH_VALUE: return GENERATIONOPTIONSDESTINATION_PATH;
 			case GENERATIONOPTION_SKIP_VALIDATION_VALUE: return GENERATIONOPTION_SKIP_VALIDATION;
 			case GENERATION_OPTION_OFFLINE_MODE_VALUE: return GENERATION_OPTION_OFFLINE_MODE;
+			case GENERATION_OPTION_GENERATE_VALUE: return GENERATION_OPTION_GENERATE;
+			case GENERATION_OPTION_COMPLETE_VALUE: return GENERATION_OPTION_COMPLETE;
+			case GENERATION_OPTION_RESOLVE_DEPENDENCIES_VALUE: return GENERATION_OPTION_RESOLVE_DEPENDENCIES;
 		}
 		return null;
 	}

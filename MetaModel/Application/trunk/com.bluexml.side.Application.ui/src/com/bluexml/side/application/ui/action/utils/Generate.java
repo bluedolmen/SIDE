@@ -90,6 +90,10 @@ public class Generate extends WorkspaceJob {
 	private boolean doDocumentation;
 	private boolean skipValidation;
 	private boolean doClean;
+	private boolean doGenerate;
+	private boolean doCompletion;
+	private boolean doResolveDep;
+
 	public List<Throwable> errors = new ArrayList<Throwable>();
 	public List<String> warns = new ArrayList<String>();
 
@@ -119,6 +123,7 @@ public class Generate extends WorkspaceJob {
 
 	protected Action getCompletedAction() {
 		return new Action("Open Report") {
+			@Override
 			public void run() {
 				ApplicationUtil.browseTo("file://" + IFileHelper.getIFolder(logPath).getRawLocation().toFile().getAbsolutePath() + fileSeparator + LogSave.LOG_HTML_FILE_NAME); //$NON-NLS-1$
 			}
@@ -289,6 +294,9 @@ public class Generate extends WorkspaceJob {
 		doDocumentation = getDoDocumentation(configurationParameters);
 		skipValidation = getSkipValidation(configurationParameters);
 		doClean = getCleanOption(configurationParameters);
+		doGenerate = isDoGenerate(configurationParameters);
+		doCompletion = isDoCompletion(configurationParameters);
+		doResolveDep = isDoResolveDep(configurationParameters);
 	}
 
 	/**
@@ -332,6 +340,28 @@ public class Generate extends WorkspaceJob {
 
 	protected boolean isOfflineMode(Map<String, String> configurationParameters) {
 		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_OFFLINE));
+	}
+
+	/**
+	 * @return the doGenerate
+	 */
+	protected boolean isDoGenerate(Map<String, String> configurationParameters) {
+		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_GENERATE));
+
+	}
+
+	/**
+	 * @return the doCompletion
+	 */
+	protected boolean isDoCompletion(Map<String, String> configurationParameters) {
+		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_COMPLETE));
+	}
+
+	/**
+	 * @return the doResolveDep
+	 */
+	protected boolean isDoResolveDep(Map<String, String> configurationParameters) {
+		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_RESOLVE_DEPENDENCIES));
 	}
 
 	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws MustBeStopped, Exception {
@@ -464,7 +494,7 @@ public class Generate extends WorkspaceJob {
 		boolean error = false;
 		for (GeneratorConfiguration elem : configuration.getGeneratorConfigurations()) {
 			checkUserRequest();
-			error = launchGenerationConfiguration(configuration, modelsInfo, configurationParameters, generationParameters, error, elem);
+			error = launchGenerationConfiguration(modelsInfo, configurationParameters, generationParameters, error, elem);
 		}
 		return error;
 	}
@@ -479,8 +509,7 @@ public class Generate extends WorkspaceJob {
 	 * @return
 	 * @throws Exception
 	 */
-	private boolean launchGenerationConfiguration(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters, boolean error, GeneratorConfiguration elem)
-			throws Exception {
+	private boolean launchGenerationConfiguration(final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters, boolean error, GeneratorConfiguration elem) throws Exception {
 		//		AbstractGenerator generator = null;
 		String name = elem.getGeneratorName();
 
@@ -519,8 +548,11 @@ public class Generate extends WorkspaceJob {
 						}
 						// Generate
 						try {
+
 							this.componentMonitor.beginTask(Activator.Messages.getString("Generate.33", name)); //$NON-NLS-1$
-							generator.generate(modelsInfo, elem.getId_metamodel());
+							if (doGenerate) {
+								generator.generate(modelsInfo, elem.getId_metamodel());
+							}
 
 							this.componentMonitor.taskDone(Activator.Messages.getString("Generate.34")); //$NON-NLS-1$
 						} catch (Exception e) {
@@ -532,7 +564,12 @@ public class Generate extends WorkspaceJob {
 
 						// Complete
 						try {
-							generator.complete(null);
+							if (doCompletion) {
+								generator.complete(null);
+							}
+							if (doResolveDep) {
+								generator.addDependences();
+							}
 						} catch (Exception e) {
 							error = true;
 							throw new Exception(Activator.Messages.getString("Generate.61", e.getMessage()), e);
@@ -897,4 +934,43 @@ public class Generate extends WorkspaceJob {
 		return run_(monitor);
 	}
 
+	public static void executeGenerate(Generate gen, GeneratorConfiguration elem, HashMap<String, List<IFile>> modelsInfo, boolean dogenerate, boolean docomplete, boolean docopydependencies) throws Exception {
+		Map<String, String> configurationParameters = new HashMap<String, String>();
+		Map<String, String> generationParameters = new HashMap<String, String>();
+
+		gen.setParameters(configurationParameters, generationParameters);
+
+		// We get the option for this generator
+		Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
+		for (Option option : elem.getOptions()) {
+			generatorOptions.put(option.getKey(), true);
+		}
+
+		AbstractGenerator generator = gen.getGenerator(configurationParameters, generationParameters, elem, generatorOptions);
+		String idMetamodel = elem.getId_metamodel();
+		boolean shouldGenerate = generator.shouldGenerate(modelsInfo, idMetamodel);
+		String fileName = "gen_" + generator.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+		generator.getMonitor().initialize(0, configurationParameters, LogType.GENERATION, fileName);
+		if (shouldGenerate) {
+			// the main action generate files
+			if (dogenerate) {
+				generator.generate(modelsInfo, idMetamodel);
+			}
+
+			if (docomplete) {
+				// typical complete implementation build a package with generated files
+				generator.complete(modelsInfo);
+			}
+
+			if (docopydependencies) {
+				// add resources to match with package dependencies
+				generator.addDependences();
+			}
+
+			generator.createStampFile();
+
+			//		gen.saveSideReportAndFeedBack();
+			gen.refreshFolders();
+		}
+	}
 }

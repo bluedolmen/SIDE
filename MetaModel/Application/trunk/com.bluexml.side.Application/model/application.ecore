@@ -55,6 +55,9 @@
     <eLiterals name="generationoptionsdestinationPath" value="5" literal="generation.options.destinationPath"/>
     <eLiterals name="generationoptionSkipValidation" value="6" literal="generation.option.Skip.Validation"/>
     <eLiterals name="generationOptionOfflineMode" value="7" literal="generation.option.offlineMode"/>
+    <eLiterals name="generationOptionGenerate" value="8" literal="generation.option.generate"/>
+    <eLiterals name="generationOptionComplete" value="9" literal="generation.option.complete"/>
+    <eLiterals name="generationOptionResolveDependencies" value="10" literal="generation.option.resolve.dependencies"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeployerConfiguration" eSuperTypes="#//ComponantConfiguration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deployerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

@@ -24,7 +24,7 @@ public interface IGenerator {
 	 *            the list of technical parameters, shared by all generators.
 	 * @throws Exception
 	 */
-	public void initialize(Map<String, String> generationParameters, Map<String, Boolean> generatorOptions, Map<String, String> configurationParameters, DependencesManager dm,ComponentMonitor monitor) throws Exception;
+	public void initialize(Map<String, String> generationParameters, Map<String, Boolean> generatorOptions, Map<String, String> configurationParameters, DependencesManager dm, ComponentMonitor monitor) throws Exception;
 
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel);
 
@@ -46,4 +46,9 @@ public interface IGenerator {
 	 */
 	public Collection<IFile> complete(Map<String, List<IFile>> models) throws Exception;
 
+	/**
+	 * This method get dependencies and put them into the right folder
+	 * @throws Exception
+	 */
+	public void addDependences() throws Exception;
 }

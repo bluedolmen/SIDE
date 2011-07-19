@@ -12,9 +12,9 @@ import com.bluexml.side.util.libs.IFileHelper;
 public abstract class AbstractAcceleoPackageGenerator extends AbstractAcceleoGenerator {
 
 	abstract public Collection<IFile> buildPackages(String modelId) throws Exception;
-	
+
 	public Collection<IFile> complete(Map<String, List<IFile>> models) throws Exception {
-		if (models != null && (groupedModels == null ||groupedModels.size() == 0)) {
+		if (models != null && (groupedModels == null || groupedModels.size() == 0)) {
 			groupedModels = models;
 		}
 		for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
@@ -29,10 +29,7 @@ public abstract class AbstractAcceleoPackageGenerator extends AbstractAcceleoGen
 		for (IFile f : generatedFiles) {
 			monitor.getLog().addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
 		}
-		
-		// add resources to match with package dependencies
-		addDependences();
-		
+
 		return generatedFiles;
 	}
 

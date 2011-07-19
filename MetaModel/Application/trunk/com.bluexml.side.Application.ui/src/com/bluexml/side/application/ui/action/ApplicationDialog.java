@@ -113,8 +113,8 @@ import com.bluexml.side.application.ui.dialogs.manageconfiguration.DialogResourc
 @SuppressWarnings("restriction")
 public class ApplicationDialog extends Dialog {
 
-	private static final String GENERATION_DEFAULT_PATH = "build" + File.separator + "generated";
-	private static final String GENERATION_DEFAULT_LOG_PATH = "build" + File.separator + "logs";
+	private static final String GENERATION_DEFAULT_PATH = "build" + File.separator + "generated"; //$NON-NLS-1$ //$NON-NLS-2$
+	private static final String GENERATION_DEFAULT_LOG_PATH = "build" + File.separator + "logs"; //$NON-NLS-1$ //$NON-NLS-2$
 	private Group optionsGroup;
 	private static final int APPLY_ID = IDialogConstants.CLIENT_ID + 2;
 	private static final int GEN_ID = IDialogConstants.CLIENT_ID + 1;
@@ -140,8 +140,7 @@ public class ApplicationDialog extends Dialog {
 	private String columnNameLabel = Activator.Messages.getString("ApplicationDialog.1"); //$NON-NLS-1$
 	private GeneratorParameterDataStructure dataStructure;
 	private TableViewer generatorParametersViewer;
-	private Button documentationButton;
-	private Button skipValidationButton;
+
 	private Text destinationText;
 	private Text logText;
 	private org.eclipse.swt.widgets.List modelList;
@@ -154,6 +153,11 @@ public class ApplicationDialog extends Dialog {
 	private TabItem deployementTabItem;
 	private Table modelPropertiesTable;
 	private Button cleanButton;
+	private Button documentationButton;
+	private Button skipValidationButton;
+	private Button generateButton;
+	private Button completeButton;
+	private Button resolveDepButton;
 	//	private Button offlineMode;
 	private TabItem modelsTabItem;
 
@@ -163,10 +167,13 @@ public class ApplicationDialog extends Dialog {
 	public static String KEY_LOGPATH = StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral();
 	public static String KEY_GENPATH = StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral();
 	public static String KEY_OFFLINE = StaticConfigurationParameters.GENERATION_OPTION_OFFLINE_MODE.getLiteral();
+	public static String KEY_GENERATE = StaticConfigurationParameters.GENERATION_OPTION_GENERATE.getLiteral();
+	public static String KEY_COMPLETE = StaticConfigurationParameters.GENERATION_OPTION_COMPLETE.getLiteral();
+	public static String KEY_RESOLVE_DEPENDENCIES = StaticConfigurationParameters.GENERATION_OPTION_RESOLVE_DEPENDENCIES.getLiteral();
 	public static String FORCE_UPDATE = StaticConfigurationParameters.UPDATE_DEPENDENCIES.getLiteral();
 	public static String MODULE_DEV_MODE = StaticConfigurationParameters.FM_DEV.getLiteral();
 
-	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_DOCUMENTATION, KEY_DOCLEAN, KEY_OFFLINE, FORCE_UPDATE, MODULE_DEV_MODE);
+	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_DOCUMENTATION, KEY_DOCLEAN, KEY_OFFLINE, FORCE_UPDATE, MODULE_DEV_MODE, KEY_GENERATE, KEY_COMPLETE, KEY_RESOLVE_DEPENDENCIES);
 
 	/**
 	 * Create the dialog
@@ -199,6 +206,30 @@ public class ApplicationDialog extends Dialog {
 		genParamConfByGenerator = new HashMap<String, List<String>>();
 		deployParamConfByGenerator = new HashMap<String, List<String>>();
 
+	}
+
+	/**
+	 * Create the static parameters (used for conf init)
+	 * 
+	 * @param config
+	 */
+	private void addAllStaticParameters(Configuration config) {
+		addStaticParameters(config);
+
+		String projectPath = "/" + model.getProject().getName() + "/"; //$NON-NLS-1$ //$NON-NLS-2$
+		addStaticParam(KEY_LOGPATH, projectPath + GENERATION_DEFAULT_LOG_PATH, config); //$NON-NLS-1$
+		addStaticParam(KEY_GENPATH, projectPath + GENERATION_DEFAULT_PATH, config); //$NON-NLS-1$
+
+	}
+
+	public static void addStaticParameters(Configuration config) {
+		addStaticParam(KEY_DOCUMENTATION, "false", config); //$NON-NLS-1$
+		addStaticParam(KEY_SKIPVALIDATION, "false", config); //$NON-NLS-1$
+		addStaticParam(KEY_DOCLEAN, "true", config); //$NON-NLS-1$
+		addStaticParam(KEY_GENERATE, "true", config); //$NON-NLS-1$
+		addStaticParam(KEY_COMPLETE, "true", config); //$NON-NLS-1$
+		addStaticParam(KEY_RESOLVE_DEPENDENCIES, "true", config); //$NON-NLS-1$
+		addStaticParam(KEY_OFFLINE, "false", config); //$NON-NLS-1$
 	}
 
 	public void refreshConfiguration() {
@@ -361,11 +392,31 @@ public class ApplicationDialog extends Dialog {
 		ConfigurationParameters doClean = ApplicationUtil.getConfigurationParmeterByKey(KEY_DOCLEAN);
 		if (doClean != null) {
 			cleanButton.setSelection(Boolean.parseBoolean(doClean.getValue()));
+		} else {
+			cleanButton.setSelection(true);
 		}
 
 		ConfigurationParameters updatePathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENPATH);
 		if (updatePathParam != null) {
 			destinationText.setText(updatePathParam.getValue());
+		}
+		ConfigurationParameters generate = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENERATE);
+		if (generate != null) {
+			generateButton.setSelection(Boolean.parseBoolean(generate.getValue()));
+		} else {
+			generateButton.setSelection(true);
+		}
+		ConfigurationParameters complete = ApplicationUtil.getConfigurationParmeterByKey(KEY_COMPLETE);
+		if (complete != null) {
+			completeButton.setSelection(Boolean.parseBoolean(complete.getValue()));
+		} else {
+			completeButton.setSelection(true);
+		}
+		ConfigurationParameters resove = ApplicationUtil.getConfigurationParmeterByKey(KEY_RESOLVE_DEPENDENCIES);
+		if (resove != null) {
+			resolveDepButton.setSelection(Boolean.parseBoolean(resove.getValue()));
+		} else {
+			resolveDepButton.setSelection(true);
 		}
 
 		//		ConfigurationParameters offline = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
@@ -409,7 +460,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 		for (GeneratorParameter genParam : neededParam.values()) {
-//			genParam.setValue(""); //$NON-NLS-1$
+			//			genParam.setValue(""); //$NON-NLS-1$
 			dataStructure.addGeneratorParameter(genParam);
 		}
 
@@ -451,7 +502,7 @@ public class ApplicationDialog extends Dialog {
 		}
 		for (GeneratorParameter genParam : neededParam.values()) {
 			if (genParam != null) {
-//				genParam.setValue(""); //$NON-NLS-1$
+				//				genParam.setValue(""); //$NON-NLS-1$
 				dataStructure.addGeneratorParameter(genParam);
 			}
 		}
@@ -491,7 +542,7 @@ public class ApplicationDialog extends Dialog {
 				genParam.setValue(confParam.getValue());
 			}
 		}
- 
+
 		// Update
 		if (generatorParametersViewer == null) {
 			createTableViewer();
@@ -608,7 +659,7 @@ public class ApplicationDialog extends Dialog {
 						for (Option opt : ce.getOptions()) {
 							o.setEnabled(true);
 							ComponantConfiguration parent = (ComponantConfiguration) opt.eContainer();
-							String idOpt = parent.getId() + "_" + opt.getKey();
+							String idOpt = parent.getId() + "_" + opt.getKey(); //$NON-NLS-1$
 
 							if (idOpt.equals(o.getId())) {
 								o.setChecked(true);
@@ -1002,6 +1053,61 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 
+		generateButton = new Button(composite_1, SWT.CHECK);
+		generateButton.setEnabled(false);
+		generateButton.setToolTipText(Activator.Messages.getString("ApplicationDialog.c7")); //$NON-NLS-1$
+		generateButton.setText(Activator.Messages.getString("ApplicationDialog.c8")); //$NON-NLS-1$
+		generateButton.setBounds(10, 137, 159, 16);
+		generateButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(final SelectionEvent e) {
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENERATE);
+				Button b = (Button) e.getSource();
+				if (param != null) {
+					param.setValue(Boolean.toString(b.getSelection()));
+				} else {
+					addStaticParam(KEY_GENERATE, Boolean.toString(b.getSelection()));
+				}
+				ApplicationDialog.modificationMade();
+			}
+		});
+
+		completeButton = new Button(composite_1, SWT.CHECK);
+		completeButton.setToolTipText(Activator.Messages.getString("ApplicationDialog.c9")); //$NON-NLS-1$
+		completeButton.setText(Activator.Messages.getString("ApplicationDialog.c10")); //$NON-NLS-1$
+		completeButton.setBounds(160, 137, 159, 16);
+		completeButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(final SelectionEvent e) {
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_COMPLETE);
+				Button b = (Button) e.getSource();
+				if (param != null) {
+					param.setValue(Boolean.toString(b.getSelection()));
+				} else {
+					addStaticParam(KEY_COMPLETE, Boolean.toString(b.getSelection()));
+				}
+				ApplicationDialog.modificationMade();
+			}
+		});
+
+		resolveDepButton = new Button(composite_1, SWT.CHECK);
+		resolveDepButton.setToolTipText(Activator.Messages.getString("ApplicationDialog.c11")); //$NON-NLS-1$
+		resolveDepButton.setText(Activator.Messages.getString("ApplicationDialog.c12")); //$NON-NLS-1$
+		resolveDepButton.setBounds(297, 137, 159, 16);
+		resolveDepButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(final SelectionEvent e) {
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_RESOLVE_DEPENDENCIES);
+				Button b = (Button) e.getSource();
+				if (param != null) {
+					param.setValue(Boolean.toString(b.getSelection()));
+				} else {
+					addStaticParam(KEY_RESOLVE_DEPENDENCIES, Boolean.toString(b.getSelection()));
+				}
+				ApplicationDialog.modificationMade();
+			}
+		});
+
 		//		offlineMode = new Button(composite_1, SWT.CHECK);
 		//		offlineMode.setToolTipText(Activator.Messages.getString("ApplicationDialog.53")); //$NON-NLS-1$
 		//		offlineMode.setText(Activator.Messages.getString("ApplicationDialog.52")); //$NON-NLS-1$
@@ -1243,7 +1349,7 @@ public class ApplicationDialog extends Dialog {
 		config.setName(newName);
 		configurationList.add(newName);
 		configurationList.select(configurationList.getItemCount() - 1);
-		addStaticParameters(config);
+		addAllStaticParameters(config);
 		application.getElements().add(config);
 		modificationMade();
 		tabFolder.setEnabled(true);
@@ -1256,7 +1362,7 @@ public class ApplicationDialog extends Dialog {
 		int i = 0;
 
 		String newName = config_.getName();
-		String old = config_.getName().replaceFirst(" \\([0-9]*\\)", "");
+		String old = config_.getName().replaceFirst(" \\([0-9]*\\)", ""); //$NON-NLS-1$ //$NON-NLS-2$
 
 		while (application.getConfiguration(newName) != null) {
 			i++;
@@ -1268,28 +1374,12 @@ public class ApplicationDialog extends Dialog {
 		config.setName(newName);
 		configurationList.add(newName);
 		configurationList.select(configurationList.getItemCount() - 1);
-		addStaticParameters(config);
+		addAllStaticParameters(config);
 		application.getElements().add(config);
 		modificationMade();
 		tabFolder.setEnabled(true);
 		errorMsg.setText(""); //$NON-NLS-1$
 		refreshConfiguration();
-	}
-
-	/**
-	 * Create the static parameters (used for conf init)
-	 * 
-	 * @param config
-	 */
-	private void addStaticParameters(Configuration config) {
-		addStaticParam(KEY_DOCUMENTATION, "false", config); //$NON-NLS-1$
-		addStaticParam(KEY_SKIPVALIDATION, "false", config); //$NON-NLS-1$
-		addStaticParam(KEY_DOCLEAN, "true", config); //$NON-NLS-1$
-
-		String projectPath = "/" + model.getProject().getName() + "/";
-		addStaticParam(KEY_LOGPATH, projectPath + GENERATION_DEFAULT_LOG_PATH, config); //$NON-NLS-1$
-		addStaticParam(KEY_GENPATH, projectPath + GENERATION_DEFAULT_PATH, config); //$NON-NLS-1$
-		addStaticParam(KEY_OFFLINE, "false", config); //$NON-NLS-1$
 	}
 
 	/**
@@ -1316,7 +1406,7 @@ public class ApplicationDialog extends Dialog {
 	 * @param value
 	 * @param config
 	 */
-	protected void addStaticParam(String key, String value, Configuration config) {
+	protected static void addStaticParam(String key, String value, Configuration config) {
 		boolean exist = false;
 		for (ConfigurationParameters p : config.getParameters())
 			if (p.getKey() != null && p.getKey().equals(key))
@@ -1526,12 +1616,12 @@ public class ApplicationDialog extends Dialog {
 			Shell shell = getParentShell();
 			Application applicationModel = ApplicationDialog.application;
 			IFile applicationFile = this.model;
-//			final GeneratePopUp generationPopUp = new GeneratePopUp(shell, conf);
+			//			final GeneratePopUp generationPopUp = new GeneratePopUp(shell, conf);
 			final GeneratePopUp generationPopUp = new GeneratePopUp(shell, applicationFile, applicationModel, conf);
 			ApplicationDialog.this.close();
 			generationPopUp.launch();
-//			GeneratePopUp.launch(conf, generationPopUp, application_, model_);
-			
+			//			GeneratePopUp.launch(conf, generationPopUp, application_, model_);
+
 			return;
 		}
 

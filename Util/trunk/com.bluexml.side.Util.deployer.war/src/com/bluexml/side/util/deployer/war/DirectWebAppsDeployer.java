@@ -2,17 +2,21 @@ package com.bluexml.side.util.deployer.war;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+
 import com.bluexml.side.util.componentmonitor.MonitorWriter;
-import com.bluexml.side.util.libs.FileExtensionFilter;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.zip.TrueZipHelper;
 
 public abstract class DirectWebAppsDeployer extends WarDeployer {
+	boolean cleanned = false;
+
 	public DirectWebAppsDeployer(String cleanKey, String webappName, String webappKeyName, String packageExt) {
 		super(cleanKey, null, webappName, webappKeyName);
 		this.packageExt = packageExt;
@@ -55,27 +59,70 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		if (!result) {
 			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.10")); //$NON-NLS-1$
 		}
+		cleanned = true;
 		monitor.taskDone(Activator.Messages.getString("DirectWebAppsDeployer.2")); //$NON-NLS-1$
 	}
 
 	public FileFilter getFileFilter() {
-		return new FileExtensionFilter(packageExt);
+		FileFilter incrementalFileFilter = new FileFilter() {
+
+			public boolean accept(File pathname) {
+				try {
+					String fileExt = FileHelper.getFileExt(pathname);
+					if (fileExt.equals(packageExt)) {
+						// test if package is newer than the deployed webapp
+						if (cleanned) {
+							return true;
+						} else {
+							// incremental allowed
+							long module = pathname.lastModified();
+							File deployedWebbAppFolder = getDeployedWebbAppFolder();
+							long webapp = deployedWebbAppFolder.lastModified();
+
+							if (module > webapp) {
+								System.out.println("module is newer ");
+								// module must be deployed
+								return true;
+							} else {
+								System.out.println("module skipped by incremental deployer :" + pathname);
+								Date dateModule = new Date(module);
+								Date dateWebapp = new Date(webapp);
+								System.out.println("module :" + pathname+"["+dateModule+"]");
+								System.out.println("webapp :" + deployedWebbAppFolder+"["+dateWebapp+"]");								
+								
+							}
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				return false;
+			}
+		};
+
+		return incrementalFileFilter;
 	}
 
 	@Override
 	protected void deployProcess(File fileToDeploy) throws Exception {
-		if (!getDeployedWebbAppFolder().exists()) {
+		System.out.println("DirectWebAppsDeployer.deployProcess() :" + this);
+		FileFilter fileFilter = getFileFilter();
+		File deployedWebbAppFolder = getDeployedWebbAppFolder();
+		if (!deployedWebbAppFolder.exists()) {
 			this.clean(fileToDeploy);
 		}
 		if (fileToDeploy.exists() && fileToDeploy.isDirectory()) {
-			for (File f : fileToDeploy.listFiles(getFileFilter())) {
+			for (File f : fileToDeploy.listFiles(fileFilter)) {
 				deployFile(f);
 			}
-		} else if (fileToDeploy.exists() && fileToDeploy.isFile()) {
+		} else if (fileToDeploy.exists() && fileToDeploy.isFile() && fileFilter.accept(fileToDeploy)) {
 			deployFile(fileToDeploy);
 		} else {
 			monitor.addWarningTextAndLog(Activator.Messages.getString("WarDeployer.5"), "");
 		}
+		// deploy process is done, we need to mark the deployed webapp
+		FileUtils.touch(deployedWebbAppFolder);
 	}
 
 	private void deployFile(File f) throws Exception {
@@ -139,6 +186,5 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 			}
 		}
 	}
-
 
 }
