@@ -15,7 +15,7 @@
     <resource>src/main/webapp/scripts/demoamp.js</resource>
     <resource>build.properties</resource>
     <resource>build.xml</resource>
-    <resource filtered="false">lib/maven-ant-tasks-2.0.10.jar</resource>
+    <resource filtered="false">lib/maven-ant-tasks-2.1.3.jar</resource>
     <resource>module.properties</resource>
     <resource>README.txt</resource>
     <resource>TODO.txt</resource>
