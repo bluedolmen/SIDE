@@ -10,7 +10,7 @@ public class AlfrescoDeployer extends AbstractMultiDeployer {
 		super("com.bluexml.side.deployerDirect.alfresco.clean","com.bluexml.side.deployer.alfresco.logChanges");
 
 
-		AlfrescoAmpDirectDeployer ampDep = new AlfrescoAmpDirectDeployer();
+		AlfrescoAmpDirectDeployer ampDep = new AlfrescoHotDeployer();
 		addDeployer(ampDep);
 
 		AlfrescoShareDirectDeployer shareDep = new AlfrescoShareDirectDeployer();

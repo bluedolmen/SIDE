@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
-import org.eclipse.debug.ui.StringVariableSelectionDialog;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -31,7 +30,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
@@ -205,9 +203,9 @@ public class ApplicationUtil {
 	 * @throws IOException
 	 * @throws IOException
 	 */
-	public static Map<String, List<IFile>> getAssociatedMetaModel(List<Model> models) throws Exception {
+	public static Map<String, List<IFile>> getAssociatedMetaModel(List<String> models) throws Exception {
 		Map<String, List<IFile>> result = new HashMap<String, List<IFile>>();
-		for (Model model : models) {
+		for (String model : models) {
 
 			IFile file = getIFileForModel(model);
 
@@ -234,7 +232,7 @@ public class ApplicationUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	public static EPackage getMetaModelForModel(Model model) throws Exception {
+	public static EPackage getMetaModelForModel(String model) throws Exception {
 		Resource loadedModel = getResourceForModel(model);
 		EPackage metaModel = getMetaModelEpackage(loadedModel);
 		return metaModel;
@@ -248,7 +246,7 @@ public class ApplicationUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	public static Resource getResourceForModel(Model model) throws Exception {
+	public static Resource getResourceForModel(String model) throws Exception {
 		final ResourceSet rs = getRessourceSetForModel(model);
 		IFile file = getIFileForModel(model);
 		Resource loadedModel;
@@ -283,9 +281,9 @@ public class ApplicationUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	public static IFile getIFileForModel(Model model) throws IOException {
+	public static IFile getIFileForModel(String model) throws IOException {
 		System.out.println(model);
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(model.getFile()));
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(model));
 		if (!file.exists()) {
 			throw new IOException(System.getProperty("line.separator") + "File " + file.getName() + " doesn't exist.");
 		}
@@ -299,12 +297,12 @@ public class ApplicationUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	public static ResourceSet getRessourceSetForModel(Model model) throws IOException {
+	public static ResourceSet getRessourceSetForModel(String model) throws IOException {
 		Resource modelResource = null;
 		try {
-			modelResource = EResourceUtils.createResource(model.getFile());
+			modelResource = EResourceUtils.createResource(model);
 		} catch (IOException e) {
-			throw new IOException(System.getProperty("line.separator") + "Error for file/model " + model.getName());
+			throw new IOException(System.getProperty("line.separator") + "Error for file/model " + model);
 		}
 		ResourceSet rs = modelResource.getResourceSet();
 		return rs;
@@ -487,6 +485,15 @@ public class ApplicationUtil {
 		}
 		// save changes
 		saveData(model, appModel);
+	}
+
+	public static List<String> getModelsPathFromApplication(Application application) {
+		List<String> s = new ArrayList<String>();
+		List<Model> models = getModels(application);
+		for (Model model : models) {
+			s.add(model.getFile());
+		}
+		return s;
 	}
 
 	/**
@@ -748,11 +755,9 @@ public class ApplicationUtil {
 			}
 		}
 		//		config.getParameters().removeAll(confParamsToRemove);
-		
+
 		// manage static parameters, if configurationPrameter do not exists create it with default value
 		ApplicationDialog.addStaticParameters(config);
-
-
 
 	}
 
@@ -930,5 +935,4 @@ public class ApplicationUtil {
 		return manager.performStringSubstitution(exp);
 	}
 
-	
 }

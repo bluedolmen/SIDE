@@ -24,7 +24,6 @@ import org.eclipse.ui.forms.widgets.FormText;
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
-import com.bluexml.side.application.Model;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.SWTResourceManager;
@@ -253,51 +252,56 @@ public class GeneratePopUp extends Dialog {
 		Display currentDisp = ApplicationUtil.getDisplay();
 		currentDisp.syncExec(new Runnable() {
 			public void run() {
-				List<Model> models;
-				models = ApplicationUtil.getModels((Application) configuration.eContainer());
+				List<String> models;
+				models = ApplicationUtil.getModelsPathFromApplication((Application) configuration.eContainer());
+				try {
+					// set job to run
+					final Generate gen = new Generate(configuration, models, GeneratePopUp.this.getGeneralMonitor(), GeneratePopUp.this.getComponentMonitor());
 
-				// set job to run
-				final Generate gen = new Generate(configuration, models, GeneratePopUp.this.getGeneralMonitor(), GeneratePopUp.this.getComponentMonitor());
-				// when job's done dialog must display link to open report html page...
-				gen.addJobChangeListener(new IJobChangeListener() {
-					public void sleeping(IJobChangeEvent event) {
-					}
-
-					public void scheduled(IJobChangeEvent event) {
-					}
-
-					public void running(IJobChangeEvent event) {
-					}
-
-					public void done(IJobChangeEvent event) {
-						// display link only if not disposed yet
-						if (GeneratePopUp.this != null && GeneratePopUp.this.getShell() != null) {
-							GeneratePopUp.this.displayLink();
-						} else {
-//							System.err.println("GeneratePopup closed");
+					// when job's done dialog must display link to open report html page...
+					gen.addJobChangeListener(new IJobChangeListener() {
+						public void sleeping(IJobChangeEvent event) {
 						}
-						
-					}
 
-					public void awake(IJobChangeEvent event) {
-					}
-
-					public void aboutToRun(IJobChangeEvent event) {
-					}
-				});
-
-				// manage cancel
-				GeneratePopUp.this.addDialogEventListener(new IDialogEventListener() {
-					public void addButtonPressedListener(int buttonId) {
-						if (buttonId == IDialogConstants.CANCEL_ID) {
-							gen.cancel();
-							GeneratePopUp.this.displayLink();
+						public void scheduled(IJobChangeEvent event) {
 						}
-					}
-				});
 
-				// schedule side job
-				gen.schedule();
+						public void running(IJobChangeEvent event) {
+						}
+
+						public void done(IJobChangeEvent event) {
+							// display link only if not disposed yet
+							if (GeneratePopUp.this != null && GeneratePopUp.this.getShell() != null) {
+								GeneratePopUp.this.displayLink();
+							} else {
+								//							System.err.println("GeneratePopup closed");
+							}
+
+						}
+
+						public void awake(IJobChangeEvent event) {
+						}
+
+						public void aboutToRun(IJobChangeEvent event) {
+						}
+					});
+
+					// manage cancel
+					GeneratePopUp.this.addDialogEventListener(new IDialogEventListener() {
+						public void addButtonPressedListener(int buttonId) {
+							if (buttonId == IDialogConstants.CANCEL_ID) {
+								gen.cancel();
+								GeneratePopUp.this.displayLink();
+							}
+						}
+					});
+
+					// schedule side job
+					gen.schedule();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}

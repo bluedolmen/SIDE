@@ -102,18 +102,25 @@ public class ApplicationStarter implements IApplication {
 		return EXIT_OK;
 	}
 
-	public static Generate getGenerate(IFile application, String confName) {
+	public static Generate getHeadlessGenerate(IFile application, String confName) throws Exception {
 		Map<String, Object> conf = loadConfiguration(application, confName);
 		return getGenerate(conf);
 	}
 
-	public static Generate getGenerate(File application, String confName) {
+	public static Generate getHeadlessGenerate(IFile application, String confName, List<String> replaceAll) throws Exception {
+		Map<String, Object> conf = loadConfiguration(application, confName);
+		// override the model list
+		conf.put(MODELS_KEY, replaceAll);
+		return getGenerate(conf);
+	}
+
+	public static Generate getHeadlessGenerate(File application, String confName) throws Exception {
 		Map<String, Object> conf = loadConfiguration(application, confName);
 		return getGenerate(conf);
 
 	}
 
-	private static Generate getGenerate(Map<String, Object> conf) {
+	private static Generate getGenerate(Map<String, Object> conf) throws Exception {
 		Configuration configuration = (Configuration) conf.get(CONFIGURATION_KEY);
 
 		// instantiate general monitor
@@ -136,7 +143,7 @@ public class ApplicationStarter implements IApplication {
 
 		ComponentMonitor componentMonitor = new ComponentMonitor(styletext, progressBar2, null, label2, generalMonitor, null, LogType.GENERATION, generalMonitor.getConsoleLog(), fileName);
 
-		Generate gen = new Generate(configuration, (List<Model>) conf.get(MODELS_KEY), generalMonitor, componentMonitor);
+		Generate gen = new Generate(configuration, (List<String>) conf.get(MODELS_KEY), generalMonitor, componentMonitor);
 		gen.setHeadless(true);
 		gen.setUser(false);
 		gen.setSystem(true);
@@ -164,8 +171,8 @@ public class ApplicationStarter implements IApplication {
 		return componentMonitor;
 	}
 
-	protected void generate(File fileAP) {
-		Generate gen = getGenerate(fileAP, arguments[1]);
+	protected void generate(File fileAP) throws Exception {
+		Generate gen = getHeadlessGenerate(fileAP, arguments[1]);
 		try {
 			System.out.println("created, let's run");
 			// don't use job scheduler, but invoke the main method
@@ -204,7 +211,8 @@ public class ApplicationStarter implements IApplication {
 			System.out.println("\tapplication: " + application);
 
 			System.out.println("\tstaticParameters: " + ApplicationDialog.staticFieldsName);
-			List<Model> models = ApplicationUtil.getModels(application);
+			List<String> models = ApplicationUtil.getModelsPathFromApplication(application);
+			
 			System.out.println("\tmodels: " + models);
 			extractedConfiguration.put(MODELS_KEY, models);
 			Configuration configuration = null;

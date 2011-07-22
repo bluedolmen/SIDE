@@ -43,6 +43,20 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	protected static Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
 	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
 
+	/**
+	 * @return the generationParameters
+	 */
+	public static Map<String, String> getGenerationParameters() {
+		return generationParameters;
+	}
+
+	/**
+	 * @return the configurationParameters
+	 */
+	public static Map<String, String> getConfigurationParameters() {
+		return configurationParameters;
+	}
+
 	protected ComponentMonitor monitor;
 	protected String id;
 	public String TEMP_FOLDER = "tmp";

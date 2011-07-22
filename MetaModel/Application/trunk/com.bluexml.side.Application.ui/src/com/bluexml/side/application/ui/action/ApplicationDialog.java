@@ -290,13 +290,13 @@ public class ApplicationDialog extends Dialog {
 				modelPropertiesTable.removeAll();
 				EPackage metaModel = null;
 				try {
-					metaModel = ApplicationUtil.getMetaModelForModel(m);
+					metaModel = ApplicationUtil.getMetaModelForModel(m.getFile());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				IFile file = null;
 				try {
-					file = ApplicationUtil.getIFileForModel(m);
+					file = ApplicationUtil.getIFileForModel(m.getFile());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

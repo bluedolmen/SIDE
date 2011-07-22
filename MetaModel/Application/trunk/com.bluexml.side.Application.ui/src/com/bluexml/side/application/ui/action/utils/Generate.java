@@ -27,7 +27,6 @@ import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.GeneratorConfiguration;
-import com.bluexml.side.application.Model;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
@@ -51,13 +50,13 @@ import com.bluexml.side.util.libs.IFileHelper;
 public class Generate extends WorkspaceJob {
 	final ComponentMonitor componentMonitor;
 	Configuration configuration;
-	List<Model> models;
+	List<String> models = new ArrayList<String>();
 
 	public Configuration getConfiguration() {
 		return configuration;
 	}
 
-	public List<Model> getModels() {
+	public List<String> getModels() {
 		return models;
 	}
 
@@ -94,19 +93,75 @@ public class Generate extends WorkspaceJob {
 	private boolean doCompletion;
 	private boolean doResolveDep;
 
+	/**
+	 * @param doDocumentation
+	 *            the doDocumentation to set
+	 */
+	public void setDoDocumentation(boolean doDocumentation) {
+		this.doDocumentation = doDocumentation;
+	}
+
+	/**
+	 * @param doClean
+	 *            the doClean to set
+	 */
+	public void setDoClean(boolean doClean) {
+		this.doClean = doClean;
+	}
+
+	/**
+	 * @param doGenerate
+	 *            the doGenerate to set
+	 */
+	public void setDoGenerate(boolean doGenerate) {
+		this.doGenerate = doGenerate;
+	}
+
+	/**
+	 * @param doCompletion
+	 *            the doCompletion to set
+	 */
+	public void setDoCompletion(boolean doCompletion) {
+		this.doCompletion = doCompletion;
+	}
+
+	/**
+	 * @param doResolveDep
+	 *            the doResolveDep to set
+	 */
+	public void setDoResolveDep(boolean doResolveDep) {
+		this.doResolveDep = doResolveDep;
+	}
+
 	public List<Throwable> errors = new ArrayList<Throwable>();
 	public List<String> warns = new ArrayList<String>();
+	private HashMap<String, List<IFile>> modelsInfo;
+	Map<String, String> configurationParameters = new HashMap<String, String>();
+	Map<String, String> generationParameters = new HashMap<String, String>();
 
 	public void setHeadless(boolean headless) {
 		this.headless = headless;
 	}
 
-	public Generate(Configuration configuration, List<Model> models, Monitor generalMonitor, ComponentMonitor componentMonitor) {
+	public Generate(Configuration configuration, List<String> models, Monitor generalMonitor, ComponentMonitor componentMonitor) throws Exception {
 		super("SIDE Generation Process : " + configuration.getName());
 		this.generalMonitor = generalMonitor;
 		this.componentMonitor = componentMonitor;
 		this.configuration = configuration;
+
 		this.models = models;
+		try {
+			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
+		} catch (Exception e) {
+
+			generalMonitor.addErrorText(Activator.Messages.getString("Generate.4") + e.getMessage()); //$NON-NLS-1$
+			e.printStackTrace();
+		}
+
+		// First we seek the generator parameters, and separate fields
+		// of dynamic fields
+
+		setParameters();
 		// setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY,
 		// Boolean.TRUE);
 		setProperty(IProgressConstants.KEEPONE_PROPERTY, Boolean.TRUE);
@@ -187,25 +242,10 @@ public class Generate extends WorkspaceJob {
 				}
 			});
 
-			// First we seek the generator parameters, and separate fields
-			// of dynamic fields
-			Map<String, String> configurationParameters = new HashMap<String, String>();
-			Map<String, String> generationParameters = new HashMap<String, String>();
-			setParameters(configurationParameters, generationParameters);
 			// compute total of general step
 			int nbTask = computetotalTaskNb(configuration);
 			generalMonitor.setMaxTaskNb(nbTask);
 			monitor.beginTask("", nbTask);
-			// Secondly we get the meta-model associated to a model
-			HashMap<String, List<IFile>> modelsInfo = null;
-
-			try {
-				modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
-			} catch (Exception e) {
-
-				generalMonitor.addErrorText(Activator.Messages.getString("Generate.4") + e.getMessage()); //$NON-NLS-1$
-				e.printStackTrace();
-			}
 
 			// Validation :
 			generalMonitor.addText(Activator.Messages.getString("Generate.5")); //$NON-NLS-1$
@@ -244,7 +284,7 @@ public class Generate extends WorkspaceJob {
 				generalMonitor.addWarningText(Activator.Messages.getString("Generate.14") + genPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
-			generate(configuration, modelsInfo, configurationParameters, generationParameters);
+			generate();
 
 		} catch (MustBeStopped e1) {
 			generalMonitor.addErrorText(e1.getMessage());
@@ -267,7 +307,7 @@ public class Generate extends WorkspaceJob {
 	 * @param generationParameters
 	 * @throws Exception
 	 */
-	public void setParameters(Map<String, String> configurationParameters, Map<String, String> generationParameters) throws Exception {
+	private void setParameters() throws Exception {
 		// load parameters from configuration
 		for (ConfigurationParameters param : configuration.getParameters()) {
 			if (ApplicationDialog.staticFieldsName.contains(param.getKey())) {
@@ -364,7 +404,7 @@ public class Generate extends WorkspaceJob {
 		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_RESOLVE_DEPENDENCIES));
 	}
 
-	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws MustBeStopped, Exception {
+	private void generate() throws MustBeStopped, Exception {
 
 		// Clean if needed :
 		if (doClean && checkFolders(modelsInfo)) {
@@ -412,12 +452,12 @@ public class Generate extends WorkspaceJob {
 		boolean error = false;
 		// generate
 		generalMonitor.subTask(Activator.Messages.getString("Generate.48")); //$NON-NLS-1$
-		error &= generate_(configuration, modelsInfo, configurationParameters, generationParameters);
+		error &= generate_(configuration);
 		generalMonitor.taskDone(null); //$NON-NLS-1$
 		checkUserRequest();
 		// deploy
 		generalMonitor.subTask(Activator.Messages.getString("Generate.49")); //$NON-NLS-1$
-		error &= deploy_(configuration, modelsInfo, configurationParameters, generationParameters);
+		error &= deploy_(configuration, configurationParameters, generationParameters);
 		generalMonitor.taskDone(null); //$NON-NLS-1$
 		checkUserRequest();
 		if (!error) {
@@ -488,13 +528,13 @@ public class Generate extends WorkspaceJob {
 		return null;
 	}
 
-	public boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws MustBeStopped, Exception {
+	public boolean generate_(final Configuration configuration) throws MustBeStopped, Exception {
 
 		// For all generator version we will call generation method
 		boolean error = false;
 		for (GeneratorConfiguration elem : configuration.getGeneratorConfigurations()) {
 			checkUserRequest();
-			error = launchGenerationConfiguration(modelsInfo, configurationParameters, generationParameters, error, elem);
+			error = launchGenerationConfiguration(error, elem);
 		}
 		return error;
 	}
@@ -509,7 +549,7 @@ public class Generate extends WorkspaceJob {
 	 * @return
 	 * @throws Exception
 	 */
-	private boolean launchGenerationConfiguration(final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters, boolean error, GeneratorConfiguration elem) throws Exception {
+	public boolean launchGenerationConfiguration(boolean error, GeneratorConfiguration elem) throws Exception {
 		//		AbstractGenerator generator = null;
 		String name = elem.getGeneratorName();
 
@@ -521,7 +561,7 @@ public class Generate extends WorkspaceJob {
 			generatorOptions.put(option.getKey(), true);
 		}
 
-		AbstractGenerator generator = getGenerator(configurationParameters, generationParameters, elem, generatorOptions);
+		AbstractGenerator generator = getGenerator(elem, generatorOptions);
 
 		if (generator != null && ((generator.isDocumentationGenerator() && doDocumentation) || !generator.isDocumentationGenerator())) {
 			// We generate only if there is meta-model available for
@@ -623,7 +663,14 @@ public class Generate extends WorkspaceJob {
 	 * @return
 	 * @throws Exception
 	 */
-	public AbstractGenerator getGenerator(final Map<String, String> configurationParameters, final Map<String, String> generationParameters, GeneratorConfiguration elem, Map<String, Boolean> generatorOptions) throws Exception {
+	public AbstractGenerator getGenerator(GeneratorConfiguration elem, Map<String, Boolean> generatorOptions) throws Exception {
+		// copy parameter from SIDE process and build generator specific parameters
+		final Map<String, String> configurationParameters = new HashMap<String, String>();
+		configurationParameters.putAll(this.configurationParameters);
+
+		final Map<String, String> generationParameters = new HashMap<String, String>();
+		generationParameters.putAll(this.generationParameters);
+
 		configurationParameters.put("technologyVersion", elem.getId_techno_version()); //$NON-NLS-1$
 		configurationParameters.put("generatorName", elem.getGeneratorName()); //$NON-NLS-1$
 		configurationParameters.put("generatorId", elem.getId()); //$NON-NLS-1$
@@ -679,7 +726,7 @@ public class Generate extends WorkspaceJob {
 		return generator;
 	}
 
-	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws MustBeStopped, Exception {
+	private boolean deploy_(final Configuration configuration, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws MustBeStopped, Exception {
 		boolean error = false;
 
 		List<DeployerConfiguration> ldeployers = configuration.getDeployerConfigurations();
@@ -694,15 +741,15 @@ public class Generate extends WorkspaceJob {
 
 		// Call shared deployers
 		for (DeployerConfiguration depConf : sharedDeployers) {
-			error &= launchDeployer(depConf, configuration, configurationParameters, generationParameters);
+			error &= launchDeployer(depConf, configuration);
 		}
 		// Call others deployers
 		for (DeployerConfiguration depConf : ldeployers) {
-			error &= launchDeployer(depConf, configuration, configurationParameters, generationParameters);
+			error &= launchDeployer(depConf, configuration);
 		}
 		// Re-call shared deployers
 		for (DeployerConfiguration depConf : sharedDeployers) {
-			error &= launchDeployer(depConf, configuration, configurationParameters, generationParameters);
+			error &= launchDeployer(depConf, configuration);
 		}
 
 		return error;
@@ -726,12 +773,12 @@ public class Generate extends WorkspaceJob {
 		return null;
 	}
 
-	private boolean launchDeployer(DeployerConfiguration depConf, Configuration configuration, Map<String, String> configurationParameters, Map<String, String> generationParameters) throws MustBeStopped, Exception {
+	public boolean launchDeployer(DeployerConfiguration depConf, Configuration configuration) throws MustBeStopped, Exception {
 
 		checkUserRequest();
 		boolean error = false;
 
-		Deployer deployer = getDeployer(depConf, configuration, configurationParameters, generationParameters);
+		Deployer deployer = getDeployer(depConf, configuration);
 		boolean showEndMessage = false;
 		if ((deployer.isDocumentationDeployer() && doDocumentation) || !deployer.isDocumentationDeployer()) {
 
@@ -789,7 +836,13 @@ public class Generate extends WorkspaceJob {
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
-	public Deployer getDeployer(DeployerConfiguration depConf, Configuration configuration, Map<String, String> configurationParameters, Map<String, String> generationParameters) throws Exception {
+	public Deployer getDeployer(DeployerConfiguration depConf, Configuration configuration) throws Exception {
+		final Map<String, String> configurationParameters = new HashMap<String, String>();
+		configurationParameters.putAll(this.configurationParameters);
+
+		final Map<String, String> generationParameters = new HashMap<String, String>();
+		generationParameters.putAll(this.generationParameters);
+
 		configurationParameters.put("technologyVersion", depConf.getId_techno_version()); //$NON-NLS-1$
 		configurationParameters.put("deployerName", depConf.getDeployerName()); //$NON-NLS-1$
 		configurationParameters.put("deployerId", depConf.getId()); //$NON-NLS-1$
@@ -924,53 +977,9 @@ public class Generate extends WorkspaceJob {
 		}
 	}
 
-	// @Override
-	// protected IStatus run(IProgressMonitor monitor) {
-	// return run_(monitor);
-	// }
-
 	@Override
 	public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 		return run_(monitor);
 	}
 
-	public static void executeGenerate(Generate gen, GeneratorConfiguration elem, HashMap<String, List<IFile>> modelsInfo, boolean dogenerate, boolean docomplete, boolean docopydependencies) throws Exception {
-		Map<String, String> configurationParameters = new HashMap<String, String>();
-		Map<String, String> generationParameters = new HashMap<String, String>();
-
-		gen.setParameters(configurationParameters, generationParameters);
-
-		// We get the option for this generator
-		Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
-		for (Option option : elem.getOptions()) {
-			generatorOptions.put(option.getKey(), true);
-		}
-
-		AbstractGenerator generator = gen.getGenerator(configurationParameters, generationParameters, elem, generatorOptions);
-		String idMetamodel = elem.getId_metamodel();
-		boolean shouldGenerate = generator.shouldGenerate(modelsInfo, idMetamodel);
-		String fileName = "gen_" + generator.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
-		generator.getMonitor().initialize(0, configurationParameters, LogType.GENERATION, fileName);
-		if (shouldGenerate) {
-			// the main action generate files
-			if (dogenerate) {
-				generator.generate(modelsInfo, idMetamodel);
-			}
-
-			if (docomplete) {
-				// typical complete implementation build a package with generated files
-				generator.complete(modelsInfo);
-			}
-
-			if (docopydependencies) {
-				// add resources to match with package dependencies
-				generator.addDependences();
-			}
-
-			generator.createStampFile();
-
-			//		gen.saveSideReportAndFeedBack();
-			gen.refreshFolders();
-		}
-	}
 }

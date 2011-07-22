@@ -2,6 +2,7 @@ package com.bluexml.side.util.deployer.war;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import com.bluexml.side.util.libs.zip.TrueZipHelper;
 
 public abstract class DirectWebAppsDeployer extends WarDeployer {
 	boolean cleanned = false;
+	protected List<String> deployedFiles = new ArrayList<String>();
 
 	public DirectWebAppsDeployer(String cleanKey, String webappName, String webappKeyName, String packageExt) {
 		super(cleanKey, null, webappName, webappKeyName);
@@ -26,6 +28,8 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 	protected TrueZipHelper tzh = null;
 	protected File wkdir = null;
 	protected String packageExt = null;
+	protected boolean incremental = true;
+	protected boolean hotdeploy = true;
 
 	public File getWorkingDir() throws Exception {
 		if (wkdir == null) {
@@ -71,7 +75,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 					String fileExt = FileHelper.getFileExt(pathname);
 					if (fileExt.equals(packageExt)) {
 						// test if package is newer than the deployed webapp
-						if (cleanned) {
+						if (cleanned || !incremental) {
 							return true;
 						} else {
 							// incremental allowed
@@ -87,9 +91,8 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 								System.out.println("module skipped by incremental deployer :" + pathname);
 								Date dateModule = new Date(module);
 								Date dateWebapp = new Date(webapp);
-								System.out.println("module :" + pathname+"["+dateModule+"]");
-								System.out.println("webapp :" + deployedWebbAppFolder+"["+dateWebapp+"]");								
-								
+								System.out.println("module :" + pathname + "[" + dateModule + "]");
+								System.out.println("webapp :" + deployedWebbAppFolder + "[" + dateWebapp + "]");
 							}
 						}
 					}
@@ -114,18 +117,23 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		}
 		if (fileToDeploy.exists() && fileToDeploy.isDirectory()) {
 			for (File f : fileToDeploy.listFiles(fileFilter)) {
-				deployFile(f);
+				deployedFiles.addAll(deployFile(f).getList());
 			}
 		} else if (fileToDeploy.exists() && fileToDeploy.isFile() && fileFilter.accept(fileToDeploy)) {
-			deployFile(fileToDeploy);
+			deployedFiles.addAll(deployFile(fileToDeploy).getList());
 		} else {
 			monitor.addWarningTextAndLog(Activator.Messages.getString("WarDeployer.5"), "");
 		}
 		// deploy process is done, we need to mark the deployed webapp
 		FileUtils.touch(deployedWebbAppFolder);
+
+		if (hotdeploy) {
+			// we touch web.xml too to let tomcat reload the webapp, some webapps should not be restarted
+			FileUtils.touch(getWebAppXMLFile());
+		}
 	}
 
-	private void deployFile(File f) throws Exception {
+	private MonitorWriter deployFile(File f) throws Exception {
 		monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7", f.getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 		File explodedPackage = new File(getWorkingDir(), f.getName().replaceAll("\\." + packageExt, "")); //$NON-NLS-1$ //$NON-NLS-2$
 
@@ -136,7 +144,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		Map<String, File> map = createMapper(explodedPackage);
 		List<File> fileList = FileHelper.listAll(explodedPackage);
 
-		dispatchFiles(fileList, map);
+		return dispatchFiles(fileList, map);
 	}
 
 	@Override
@@ -171,7 +179,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		return dir;
 	}
 
-	protected void dispatchFiles(List<File> files, Map<String, File> mapper) throws Exception {
+	protected MonitorWriter dispatchFiles(List<File> files, Map<String, File> mapper) throws Exception {
 		MonitorWriter mw = new MonitorWriter(monitor, Activator.Messages.getString("DirectWebAppsDeployer.3"), ""); //$NON-NLS-1$ //$NON-NLS-2$
 		for (File f : files) {
 			for (Map.Entry<String, File> ent : mapper.entrySet()) {
@@ -185,6 +193,11 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 				}
 			}
 		}
+		return mw;
 	}
 
+	public File getWebAppXMLFile() {
+		String path = "/WEB-INF/web.xml".replaceAll("/", File.separator);
+		return new File(getDeployedWebbAppFolder().getAbsolutePath() + path);
+	}
 }
