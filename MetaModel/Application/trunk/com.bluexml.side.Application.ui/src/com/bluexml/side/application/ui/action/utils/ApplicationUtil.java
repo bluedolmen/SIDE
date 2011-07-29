@@ -551,11 +551,17 @@ public class ApplicationUtil {
 				Map<String, IConfigurationElement> options_ext = new HashMap<String, IConfigurationElement>();
 				Map<String, List<String>> options_dependenciesExt = new HashMap<String, List<String>>();
 				IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
-				for (IConfigurationElement configurationElement : arrayOfoptions_ext) {
-					String attribute_optionId = configurationElement.getAttribute("key");
-					options_ext.put(attribute_optionId, configurationElement);
+				Map<String, IConfigurationElement> optionsExtMandatory = new HashMap<String, IConfigurationElement>();
+				for (IConfigurationElement optionExt : arrayOfoptions_ext) {
+					String attribute_optionId = optionExt.getAttribute("key");
+					options_ext.put(attribute_optionId, optionExt);
 
-					IConfigurationElement[] arrayOfConstraints_ext = configurationElement.getChildren(APPLICATION_CONSTRAINTS);
+					String attributeHidden = optionExt.getAttribute("hidden");
+					String attributeIsDefault = optionExt.getAttribute("defaultOption");
+					if ((attributeHidden != null && attributeHidden.equals("true")) && (attributeIsDefault != null && attributeIsDefault.equals("true"))) {
+						optionsExtMandatory.put(attribute_optionId, optionExt);
+					}
+					IConfigurationElement[] arrayOfConstraints_ext = optionExt.getChildren(APPLICATION_CONSTRAINTS);
 					for (IConfigurationElement configurationElement2 : arrayOfConstraints_ext) {
 						// add to list of dependencies to check
 						String attribute_moduleId = configurationElement2.getAttribute(APPLICATION_CONSTRAINTS_MODULEID);
@@ -567,7 +573,10 @@ public class ApplicationUtil {
 					}
 				}
 
+				// manage hidden and byDefault option that need to be added
 				List<Option> optionsToRemove = new ArrayList<Option>();
+				List<Option> optionsToCreate = new ArrayList<Option>();
+
 				List<String> dependencies_extOptionals = new ArrayList<String>();
 				for (Option option : options) {
 					// check if defined
@@ -586,11 +595,19 @@ public class ApplicationUtil {
 						} else {
 							// option not found ...
 						}
+					}
 
+					if (!optionsExtMandatory.containsKey((optionId))) {
+						// option must be created
+						Option op = ApplicationFactory.eINSTANCE.createOption();
+						op.setKey(optionId);
+						optionsToCreate.add(op);
 					}
 				}
 
 				generatorConfiguration.getOptions().removeAll(optionsToRemove);
+				// add missing mandatory options
+				generatorConfiguration.getOptions().addAll(optionsToCreate);
 
 				// check dependencies
 				EList<ModuleConstraint> mcs = generatorConfiguration.getModuleContraints();
@@ -671,10 +688,17 @@ public class ApplicationUtil {
 				EList<Option> options = deployerConfiguration.getOptions();
 				List<String> options_ext = new ArrayList<String>();
 				IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
-				for (IConfigurationElement configurationElement : arrayOfoptions_ext) {
-					options_ext.add(configurationElement.getAttribute("key"));
+				Map<String, IConfigurationElement> optionsExtMandatory = new HashMap<String, IConfigurationElement>();
+				for (IConfigurationElement optionExt : arrayOfoptions_ext) {
+					String attribute_optionId = optionExt.getAttribute("key");
+					options_ext.add(attribute_optionId);
 
-					IConfigurationElement[] arrayOfConstraints_ext = configurationElement.getChildren(APPLICATION_CONSTRAINTS);
+					String attributeHidden = optionExt.getAttribute("hidden");
+					String attributeIsDefault = optionExt.getAttribute("defaultOption");
+					if ((attributeHidden != null && attributeHidden.equals("true")) && (attributeIsDefault != null && attributeIsDefault.equals("true"))) {
+						optionsExtMandatory.put(attribute_optionId, optionExt);
+					}
+					IConfigurationElement[] arrayOfConstraints_ext = optionExt.getChildren(APPLICATION_CONSTRAINTS);
 					for (IConfigurationElement configurationElement2 : arrayOfConstraints_ext) {
 						// add to list of dependencies to check
 						dependencies_ext.put(configurationElement2.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement2);
@@ -682,17 +706,27 @@ public class ApplicationUtil {
 				}
 
 				List<Option> optionsToRemove = new ArrayList<Option>();
+				List<Option> optionsToCreate = new ArrayList<Option>();
 				for (Option option : options) {
 					// check if defined
-					if (!options_ext.contains(option.getKey())) {
+					String optionId = option.getKey();
+					if (!options_ext.contains(optionId)) {
 						// remove this
 						optionsToRemove.add(option);
 						// System.out.println("toRemove !"+option);
 					} else {
 						// check option constraints
 					}
+
+					if (!optionsExtMandatory.containsKey((optionId))) {
+						// option must be created
+						Option op = ApplicationFactory.eINSTANCE.createOption();
+						op.setKey(optionId);
+						optionsToCreate.add(op);
+					}
 				}
 				deployerConfiguration.getOptions().removeAll(optionsToRemove);
+				deployerConfiguration.getOptions().addAll(optionsToCreate);
 
 				// check dependencies
 				EList<ModuleConstraint> mcs = deployerConfiguration.getModuleContraints();

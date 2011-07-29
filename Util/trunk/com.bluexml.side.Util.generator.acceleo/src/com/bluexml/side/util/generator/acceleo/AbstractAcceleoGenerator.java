@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -29,7 +31,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import com.bluexml.side.util.generator.AbstractGenerator;
-import com.bluexml.side.util.generator.ConflitResolverHelper;
 import com.bluexml.side.util.generator.GeneratorException;
 import com.bluexml.side.util.generator.acceleo.chain.CustomCChain;
 import com.bluexml.side.util.libs.FileHelper;
@@ -54,11 +55,12 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	protected String mergedFilePath = "mergedFile"; //$NON-NLS-1$
 	protected Map<String, List<IFile>> groupedModels = null;
 	protected List<IFile> generatedFiles;
-	ConflitResolverHelper cresolver;
+
 	protected final String projectName = ".side_generation"; //$NON-NLS-1$
 	private static final String DEFAULT_ENCODING = "ISO-8859-1"; //$NON-NLS-1$
 	private String fileEncoding = System.getProperty("file.encoding"); //$NON-NLS-1$
 	protected String versionProperty = null;
+	protected final static String MAIN_OPTION = "generator.main";
 
 	/**
 	 * use to give an version number to this generation package
@@ -76,7 +78,43 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 	};
 
-	abstract protected List<String> getTemplates();
+	protected final List<String> getTemplates() {
+		List<String> alltemplates = new ArrayList<String>();
+
+		if (getGeneratorOptionValue(MAIN_OPTION)) {
+			List<String> mainTemplates = getMainTemplates();
+			if (mainTemplates != null) {
+				alltemplates.addAll(mainTemplates);
+			}
+		}
+		List<String> optionalTemplates = getOptionalTemplates();
+		if (optionalTemplates != null) {
+			alltemplates.addAll(optionalTemplates);
+		}
+
+		// apply templates substitution
+		Map<String, String> overrideTemplates = getTemplatesSubstitution();
+		if (overrideTemplates != null) {
+			Set<Entry<String, String>> entrySet = overrideTemplates.entrySet();
+			for (Entry<String, String> entry : entrySet) {
+				alltemplates.remove(entry.getKey());
+				alltemplates.add(entry.getValue());
+			}
+		}
+
+		return alltemplates;
+	}
+
+	abstract protected List<String> getOptionalTemplates();
+
+	abstract protected List<String> getMainTemplates();
+
+	/**
+	 * method to build a substitution map
+	 * 
+	 * @return
+	 */
+	abstract protected Map<String, String> getTemplatesSubstitution();
 
 	abstract protected String getMetamodelURI();
 
@@ -139,6 +177,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public Collection<IFile> generate(IFile model) throws Exception {
 		AcceleoClassLoader.setPreferredClassLoader(this.getClass().getClassLoader());
 		// System.out.println("Generate IFile model");
@@ -338,22 +377,10 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 	}
 
-	public ConflitResolverHelper getCresolver() {
-		if (cresolver == null) {
-			cresolver = new ConflitResolverHelper(getTargetPath(), getTemporaryFolder());
-		}
-		return cresolver;
-	}
-
-	protected List<IFile> searchForConflict() {
-		return getCresolver().searchForConflict(generatedFiles);
-	}
-
-
 	public static String getProperty(String key, String defaultValue) throws FileNotFoundException, IOException {
-		String result =getGenerationParameter(key);
-		if ( result== null || result.equals("")) {
-			result=defaultValue;
+		String result = getGenerationParameter(key);
+		if (result == null || result.equals("")) {
+			result = defaultValue;
 		}
 		return result;
 	}

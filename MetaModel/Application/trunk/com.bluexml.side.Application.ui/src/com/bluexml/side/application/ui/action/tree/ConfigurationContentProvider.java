@@ -37,8 +37,8 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 
 	private List<TreeNode> toCheck = new ArrayList<TreeNode>();
 
-	public ConfigurationContentProvider(Class<?> p_neededRootClass, List<?> p_ommitedObject, TreeView p_tv, Map<String, GeneratorParameter> p_configurationParameters,
-			Map<String, GeneratorParameter> p_deployerParameters, Map<String, List<String>> p_genParamConfByGenerator, Map<String, List<String>> p_deployParamConfByGenerator) {
+	public ConfigurationContentProvider(Class<?> p_neededRootClass, List<?> p_ommitedObject, TreeView p_tv, Map<String, GeneratorParameter> p_configurationParameters, Map<String, GeneratorParameter> p_deployerParameters, Map<String, List<String>> p_genParamConfByGenerator,
+			Map<String, List<String>> p_deployParamConfByGenerator) {
 		configurationParameters = p_configurationParameters;
 		deployerParameters = p_deployerParameters;
 		genParamConfByGenerator = p_genParamConfByGenerator;
@@ -157,7 +157,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		// printTree();
 		// Now we hide branches of the tree without generator or deployer leaf
 		cleanupTree(rootSet);
-//		printTree();
+		//		printTree();
 
 	}
 
@@ -224,7 +224,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		// Scan for technology
 		if (!omitedObject.contains(Technology.class) && config.getName().equalsIgnoreCase("technology")) {
 			Technology t = new Technology(config, (Metamodel) parent, root);
-//			String fullId = t.getFullId();
+			//			String fullId = t.getFullId();
 			if (!technologySet.containsKey(t) || (rootSet != technologySet && parent != technologySet.get(t).getParent())) {
 				technologySet.put(t, t);
 				// System.err.println("\t\t + Add techno " + fullId);
@@ -238,7 +238,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		// Scan for technology version
 		if (!omitedObject.contains(TechnologyVersion.class) && config.getName().equalsIgnoreCase("technologyVersion")) {
 			TechnologyVersion tv = new TechnologyVersion(config, (Technology) parent, root);
-//			String fullId = tv.getFullId();
+			//			String fullId = tv.getFullId();
 			if (!technologyVersionSet.containsKey(tv) || (rootSet != technologyVersionSet && parent != technologyVersionSet.get(tv).getParent())) {
 				technologyVersionSet.put(tv, tv);
 				// System.err.println("\t\t\t + Add technoVersion " + fullId);
@@ -257,7 +257,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 					gv.setToHidde(true);
 					toCheck.add(gv);
 				}
-//				String fullId = gv.getFullId() + " desc:" + gv.getDescription();
+				//				String fullId = gv.getFullId() + " desc:" + gv.getDescription();
 				if (!generatorSet.containsKey(gv) || (rootSet != technologyVersionSet && parent != generatorSet.get(gv).getParent())) {
 					generatorSet.put(gv, gv);
 					// System.err.println("\t\t\t\t + Add Generator " + fullId);
@@ -273,15 +273,17 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		if (!omitedObject.contains(Deployer.class) && config.getName().equalsIgnoreCase("deployerVersion")) {
 			if (config.getAttribute("hidden") == null || !config.getAttribute("hidden").equals("hidden")) {
 				Deployer dv = new Deployer(config, (TechnologyVersion) parent, root);
-				if (config.getAttribute("hidden") != null && config.getAttribute("hidden").equals("hidden and used by default")) {
-					dv.setToHidde(true);
-					toCheck.add(dv);
-				}
+				
 				// String fullId = dv.getFullId();
 				if (!deployerSet.containsKey(dv) || (rootSet != deployerSet && parent != deployerSet.get(dv).getParent())) {
 					deployerSet.put(dv, dv);
 				} else {
 					dv = deployerSet.get(dv);
+				}
+				
+				if (config.getAttribute("hidden") != null && config.getAttribute("hidden").equals("hidden and used by default")) {
+					dv.setToHidde(true);
+					toCheck.add(dv);
 				}
 				futurParent = dv;
 			}
@@ -290,6 +292,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		// Scan for generator or deployer option
 		if (!omitedObject.contains(OptionComponant.class) && config.getName().equalsIgnoreCase("option")) {
 			OptionComponant opt = null;
+
 			if (parent instanceof Generator) {
 				opt = new OptionGenerator(config, (Generator) parent, root);
 				// String fullid = opt.getFullId();
@@ -307,6 +310,12 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 					opt = optDeployerSet.get(opt.getLabel() + opt.getId());
 				}
 			}
+			if (config.getAttribute("hidden") == null || config.getAttribute("hidden").equals("false")) {
+				// visible
+			} else {
+				opt.setToHidde(true);
+			}
+
 			futurParent = opt;
 		}
 
@@ -370,8 +379,6 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		return toCheck;
 	}
 
-	
-
 	public void dispose() {
 	}
 
@@ -383,19 +390,19 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		for (TreeNode mm : metamodelSet.values()) {
 			printTree_(mm, 0);
 		}
-//		System.err.println("Tech");
-//		for (TreeNode mm : technologySet.values()) {
-//			printTree_(mm, 0);
-//		}
-//		System.err.println("technologyVersion");
-//		for (TreeNode mm : technologyVersionSet.values()) {
-//			printTree_(mm, 0);
-//		}
-//
-//		System.err.println("generator");
-//		for (TreeNode mm : generatorSet.values()) {
-//			printTree_(mm, 0);
-//		}
+		//		System.err.println("Tech");
+		//		for (TreeNode mm : technologySet.values()) {
+		//			printTree_(mm, 0);
+		//		}
+		//		System.err.println("technologyVersion");
+		//		for (TreeNode mm : technologyVersionSet.values()) {
+		//			printTree_(mm, 0);
+		//		}
+		//
+		//		System.err.println("generator");
+		//		for (TreeNode mm : generatorSet.values()) {
+		//			printTree_(mm, 0);
+		//		}
 
 	}
 

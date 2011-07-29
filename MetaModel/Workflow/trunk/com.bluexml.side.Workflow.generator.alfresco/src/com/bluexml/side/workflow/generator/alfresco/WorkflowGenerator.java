@@ -1,7 +1,9 @@
 package com.bluexml.side.workflow.generator.alfresco;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.emf.ecore.EObject;
@@ -14,22 +16,13 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 	public static String ALFRESCO_URL_KEY = "alfresco.url";
 	XMLConflictResolver xmlresolver = null;
 
-	public XMLConflictResolver getXmlresolver() {
-		if (xmlresolver == null) {
-			xmlresolver = new XMLConflictResolver(this.getCresolver());
-		}
-		return xmlresolver;
-	}
-
-	protected Properties moduleProperties;
-
 	@Override
 	protected String getMetamodelURI() {
 		return "http://www.kerblue.org/workflow/1.0";
 	}
 
 	@Override
-	protected List<String> getTemplates() {
+	protected List<String> getMainTemplates() {
 		// Compute services
 		String alfrescoUrl = generationParameters.get(ALFRESCO_URL_KEY);
 		if (alfrescoUrl != null && alfrescoUrl.length() > 0) {
@@ -48,6 +41,7 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 		return result;
 	}
 
+	@Override
 	public Properties buildModuleProperties(String rootPackage) {
 		Properties props = new Properties();
 		props.put("module.id", "SIDE_WorkflowExtension_" + rootPackage);
@@ -58,6 +52,7 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 		return props;
 	}
 
+	@Override
 	public String getVersioNumber() {
 		return getGenerationParameter("com.bluexml.side.Workflow.generator.alfresco.module.version");
 	}
@@ -71,8 +66,19 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 	 * 
 	 * @return true if the generator can be used.
 	 */
+	@Override
 	public boolean check() {
 		return true;
+	}
+
+	@Override
+	protected List<String> getOptionalTemplates() {
+		return new ArrayList<String>();
+	}
+
+	@Override
+	protected Map<String, String> getTemplatesSubstitution() {
+		return new HashMap<String, String>();
 	}
 
 }

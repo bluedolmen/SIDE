@@ -16,6 +16,7 @@ public class Generator extends ImplNode {
 		super(elt, tv, root);		
 	}
 
+	@Override
 	public void updateApplication() {
 		if (!ApplicationDialog.loadingTree) {
 			ApplicationDialog.modificationMade();

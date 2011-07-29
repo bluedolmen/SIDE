@@ -21,18 +21,25 @@ import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
 abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 
 	protected static String PLUGIN_ID = "com.bluexml.side.Requirements.generator";
-	
-	abstract protected Map<String,String> getInputModels(String keyGenerator);
-	abstract protected Map<String,String> getOutputModels(String keyGenerator);
+
+	abstract protected Map<String, String> getInputModels(String keyGenerator);
+
+	abstract protected Map<String, String> getOutputModels(String keyGenerator);
+
 	abstract protected String getASMFile(String keyGenerator);
+
 	abstract protected String getTargetMetamodel(String keyGenerator);
+
 	abstract protected List<String> getANTScripts(String keyGenerator);
+
 	abstract protected Set<String> getTransformation();
+
 	abstract protected List<String> getTemplates(String keyGenerator);
+
 	abstract protected String getTargetModelName(String keyGenerator);
-	
+
 	static private String current_keyGenerator;
-	
+
 	@Override
 	public Collection<IFile> generate(IFile model) throws Exception {
 		Collection<IFile> result = null;
@@ -42,10 +49,10 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
 	private Collection<IFile> execute(IFile model) throws Exception {
 		Collection<IFile> result = new HashSet<IFile>();
 		for (String keyGenerator : getTransformation()) {
@@ -62,7 +69,7 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 				//By default
 				String _metamodelFile = "/com.bluexml.side.Requirements/model/requirements.ecore";
 				String _modelFile = model.getRawLocation().toString();
-				
+
 				t.addInputModel(_modelName, _metamodelName, _modelFile, _metamodelFile);
 			}
 
@@ -74,7 +81,7 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 				//By default
 				String _metamodelFile = "/com.bluexml.side.Requirements.generator/" + getTargetMetamodel(keyGenerator);
 				String _modelFile = targetPath.append(getTargetModelName(keyGenerator)).toString();
-				
+
 				t.addOutputModel(_modelName, _metamodelName, _modelFile, _metamodelFile);
 			}
 			t.setContributor(Activator.getDefault().getBundle().getSymbolicName());
@@ -92,9 +99,9 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 				if (omodel.exists())
 					result.addAll(super.generate(omodel));
 			}
-			
+
 			postGeneration();
-			
+
 			// Execute ANT scripts
 			ExecuteANTScript a = new ExecuteANTScript();
 			a.setContributor(PLUGIN_ID);
@@ -108,12 +115,39 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 		}
 		return result;
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * @seecom.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator#
+	 * getMainTemplates()
+	 */
 	@Override
-	final protected List<String> getTemplates() {
+	protected List<String> getMainTemplates() {
 		return getTemplates(current_keyGenerator);
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * @seecom.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator#
+	 * getOptionalTemplates()
+	 */
+	@Override
+	protected List<String> getOptionalTemplates() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seecom.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator#
+	 * getTemplatesSubstitution()
+	 */
+	@Override
+	protected Map<String, String> getTemplatesSubstitution() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	protected void computeServices() throws CoreException {
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IFolder targetFolder = myWorkspaceRoot.getFolder(new Path(getTemporaryFolder()));
@@ -124,19 +158,19 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 					if (getExtensionsForServices().contains(ext)) {
 						String url = f.getAbsolutePath();
 						url = url.replaceAll(" ", "%20");
-						monitor.getLog().addServiceLog("Generated document",f.getName(), url);
+						monitor.getLog().addServiceLog("Generated document", f.getName(), url);
 					}
 				}
 			}
 		}
 	}
-	
+
 	protected Collection<String> getExtensionsForServices() {
 		return Collections.emptySet();
 	}
-	
+
 	protected void postGeneration() {
 		//By default, nothing to do
 	}
-	
+
 }

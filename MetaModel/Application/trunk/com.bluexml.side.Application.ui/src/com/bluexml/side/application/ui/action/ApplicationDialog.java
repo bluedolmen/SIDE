@@ -1825,11 +1825,15 @@ public class ApplicationDialog extends Dialog {
 					// Inverse
 					el.setChecked(!(el.isChecked()));
 					if (el.isChecked()) {
-						// Enable all sub elements
-						enableAllSubElements(item);
-						checkDefaultOptions(el, tv);
-
-						ConstraintsChecker.applyConstraints(tv, item, el);
+						
+						int action = ConstraintsChecker.applyConstraints(tv, item, el);
+						if (action == SWT.YES || action == -1) {
+							enableAllSubElements(item);
+							checkDefaultOptions(el, tv);
+						} else if (action == SWT.NO) {
+							// uncheck to return to previous state
+							el.setChecked(false);
+						}
 					} else {
 						// Enable all sub elements
 						disableAllSubElements(item);

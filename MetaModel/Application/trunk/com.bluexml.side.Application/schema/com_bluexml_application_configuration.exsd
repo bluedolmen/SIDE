@@ -259,6 +259,13 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="hidden" type="boolean" use="default" value="false">
+            <annotation>
+               <documentation>
+                  set to true to hide this option in UI, false by default
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 
@@ -307,7 +314,7 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                </restriction>
             </simpleType>
          </attribute>
-         <attribute name="defaultValue" type="string" use="default" value="">
+         <attribute name="hidden" type="boolean">
             <annotation>
                <documentation>
                   this attribute define a default value used by SIDE components if application model do not contains a value for this configurationParameter

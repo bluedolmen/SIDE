@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.emf.ecore.EObject;
@@ -22,11 +23,10 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	protected static String GENERATOR_OPTIONS_FACETMAP = "com.bluexml.side.Portal.generator.alfresco.facetmap";
 	protected static String GENERATOR_OPTIONS_XFORMS = "com.bluexml.side.Portal.generator.alfresco.xforms";
 
-	
 	public PortalAlfrescoGenerator() {
 		versionProperty = "com.bluexml.side.Portal.generator.alfresco.module.version"; //$NON-NLS-1$
 	}
-	
+
 	@Override
 	public Properties buildModuleProperties(String modelId) {
 		Date now = new Date();
@@ -39,6 +39,7 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		return props;
 	}
 
+	@Override
 	public boolean check() {
 		return true;
 	}
@@ -49,26 +50,8 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	@Override
-	protected List<String> getTemplates() {
-		
-		List<String> result = getCommonsTemplates();
-
-		// shared resources
-		// includes of GENERATOR_OPTIONS_FORMS and GENERATOR_OPTIONS_FACETMAP
-		// options
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/shared/web-framework-config-custom.mt");
-		return result;
-	}
-
-	protected List<String> getCommonsTemplates() {
+	protected List<String> getMainTemplates() {
 		List<String> result = new ArrayList<String>();
-		if (getGeneratorOptionValue(GENERATOR_OPTIONS_DOCLIST)) {
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/documentLibrary/DocumentLibraryPortletView.ftl.mt");
-		}
-		// if (getGeneratorOptionValue(GENERATOR_OPTIONS_FORMS)) {
-		// see web-framework-config-custom.mt
-		// }
-
 		// general templates, pages, navigation component
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/presets.mt");
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/page.mt");
@@ -82,6 +65,20 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/messages-context.mt");
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/messages.mt");
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/create-site.get.properties.mt");
+
+		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/shared/web-framework-config-custom.mt");
+		return result;
+	}
+
+	@Override
+	protected List<String> getOptionalTemplates() {
+		List<String> result = new ArrayList<String>();
+		if (getGeneratorOptionValue(GENERATOR_OPTIONS_DOCLIST)) {
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/documentLibrary/DocumentLibraryPortletView.ftl.mt");
+		}
+		// if (getGeneratorOptionValue(GENERATOR_OPTIONS_FORMS)) {
+		// see web-framework-config-custom.mt
+		// }
 
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_FACETMAP)) {
 			// result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/web-framework-config-custom.mt");
@@ -135,5 +132,11 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 	public String getFacetMapURL(EObject o) {
 		return getGenerationParameter(GENERATOR_PARAM_FACETMAPURL);
+	}
+
+	@Override
+	protected Map<String, String> getTemplatesSubstitution() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

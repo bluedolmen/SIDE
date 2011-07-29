@@ -11,8 +11,8 @@ public class ViewDocumentationGenerator extends DocumentationGenerator {
 	}
 
 	@Override
-	protected List<String> getTemplates() {
-		List<String> templates = getDefaultTemplates();
+	protected List<String> getMainTemplates() {
+		List<String> templates = super.getMainTemplates();
 		templates.add("/com.bluexml.side.View.generator.documentation/templates/content.mt"); //$NON-NLS-1$
 		return templates;
 	}

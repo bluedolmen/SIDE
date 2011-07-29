@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
@@ -33,7 +34,6 @@ import com.bluexml.side.util.libs.IFileHelper;
 
 /**
  * @author <a href="mailto:pbertrand@bluexml.com"> Pierre BERTRAND </a>
- * 
  */
 public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 
@@ -50,7 +50,6 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator
 	 * #getMetamodelURI()
@@ -60,15 +59,8 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 		return MMUri;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator
-	 * #getTemplates()
-	 */
 	@Override
-	protected List<String> getTemplates() {
+	protected List<String> getMainTemplates() {
 		List<String> templates = new ArrayList<String>();
 		// common
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-propertyfile-generation.mt"); //$NON-NLS-1$
@@ -89,9 +81,9 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.bluexml.side.application.security.Checkable#check()
 	 */
+	@Override
 	public boolean check() {
 		return true;
 	}
@@ -122,5 +114,17 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 		props.put("module.title", Activator.Messages.getString("ClassAlfrescoGenerator_7")); //$NON-NLS-1$
 		props.put("module.description", Activator.Messages.getString("ClassAlfrescoGenerator_8") + sdf.format(now)); //$NON-NLS-1$
 		return props;
+	}
+
+	@Override
+	protected List<String> getOptionalTemplates() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Map<String, String> getTemplatesSubstitution() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

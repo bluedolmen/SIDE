@@ -30,7 +30,8 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 		DocumentationServices.clearAll();
 	}
 
-	protected List<String> getDefaultTemplates() {
+	@Override
+	protected List<String> getMainTemplates() {
 		List<String> templates = new ArrayList<String>();
 		templates.add("/com.bluexml.side.Util.generator.documentation/templates/manifest.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.Util.generator.documentation/templates/meta.mt"); //$NON-NLS-1$
@@ -40,6 +41,18 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 		return templates;
 	}
 
+	@Override
+	protected List<String> getOptionalTemplates() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Map<String, String> getTemplatesSubstitution() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public Collection<IFile> complete(Map<String, List<IFile>> models) throws Exception {
 		for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
 			String rootName = l.getKey();

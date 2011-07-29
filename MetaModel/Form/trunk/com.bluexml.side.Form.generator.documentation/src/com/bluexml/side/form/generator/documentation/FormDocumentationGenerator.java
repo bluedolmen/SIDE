@@ -27,18 +27,12 @@ public class FormDocumentationGenerator extends DocumentationGenerator {
 	}
 
 	@Override
-	protected List<String> getTemplates() {
-		List<String> templates = getDefaultTemplates();
-		templates.add("/com.bluexml.side.Form.generator.documentation/templates/content.mt"); //$NON-NLS-1$
-		return templates;
-	}
-
-	public Collection<IFile> generate(IFile model) throws Exception {	
+	public Collection<IFile> generate(IFile model) throws Exception {
 		OutlineViewService.setDoAll(true);
-		
+
 		RefreshOutlineAction action = new RefreshOutlineAction();
 		IFile out = action.doGeneration(URI.createURI(model.getFullPath().toString()));
-		
+
 		String pathName = getTargetPath() + File.separator + getTEMP_FOLDER() + File.separator + model.getName().replaceAll("\\.", "-") + File.separator + "doc" + File.separator + "html";
 		IPath path = new Path(pathName);
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(path.segment(0));
@@ -46,17 +40,17 @@ public class FormDocumentationGenerator extends DocumentationGenerator {
 
 		if (!folder.exists())
 			createFolder(folder);
-		
+
 		if (out.exists())
 			out.move(folder.getFullPath().append(out.getFullPath().lastSegment()), true, new NullProgressMonitor());
-		
+
 		action.doClean();
-		
+
 		DocumentationServices.addOutlineRelativePath("html/output.html");
 		OutlineViewService.setDoAll(false);
 		return super.generate(model);
 	}
-	
+
 	private void createFolder(IFolder folder) throws CoreException {
 		if (!folder.exists()) {
 			if (!folder.getParent().exists()) {
@@ -66,8 +60,16 @@ public class FormDocumentationGenerator extends DocumentationGenerator {
 					createFolder(_f);
 				}
 			}
-			
+
 			folder.create(true, true, new NullProgressMonitor());
 		}
 	}
+
+	@Override
+	protected List<String> getMainTemplates() {
+		List<String> templates = super.getMainTemplates();
+		templates.add("/com.bluexml.side.Form.generator.documentation/templates/content.mt"); //$NON-NLS-1$
+		return templates;
+	}
+
 }

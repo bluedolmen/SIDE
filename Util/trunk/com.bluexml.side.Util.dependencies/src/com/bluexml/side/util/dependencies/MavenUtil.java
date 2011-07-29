@@ -84,9 +84,11 @@ public class MavenUtil {
 		PrintStream stderr = new PrintStream(mvOutErrFile);
 
 		stdout.println("MavenUtil execute maven request :"); //$NON-NLS-1$
-		stdout.println("** args :" + getCommandFromMavenExecutionArgs(argsL)); //$NON-NLS-1$
+		String commandFromMavenExecutionArgs = getCommandFromMavenExecutionArgs(argsL);
+		stdout.println("** args :" + commandFromMavenExecutionArgs); //$NON-NLS-1$
 		stdout.println("** working directory :" + workingDirectory); //$NON-NLS-1$
-
+		System.out.println("MavenUtil.doMavenGoalUsingMavenCli() dir :" + workingDirectory);
+		System.out.println("MavenUtil.doMavenGoalUsingMavenCli() > " + commandFromMavenExecutionArgs);
 		String[] args = argsL.toArray(new String[argsL.size()]);
 		// execute maven request
 		mci.doMain(args, workingDirectory, stdout, stderr);
