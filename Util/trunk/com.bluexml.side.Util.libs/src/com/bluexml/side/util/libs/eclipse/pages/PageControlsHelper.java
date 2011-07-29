@@ -67,6 +67,7 @@ public class PageControlsHelper {
 		final Button button = new Button(composite, SWT.CHECK);
 		button.setSelection(initialValue);
 		button.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(final SelectionEvent e) {
 				values.put(id, Boolean.toString(button.getSelection()));
 				page.checkPageComplite();
@@ -85,7 +86,8 @@ public class PageControlsHelper {
 	 * @param composite
 	 * @param values
 	 */
-	public void createComboControl(Composite composite, String label, final String id, List<String> allowedValues, final Map<String, Object> values) {
+	public Object[] createComboControl(Composite composite, String label, final String id, List<String> allowedValues, final Map<String, Object> values) {
+
 		if (!values.containsKey(id)) {
 			values.put(id, null);
 		}
@@ -95,16 +97,11 @@ public class PageControlsHelper {
 		final Combo archetypeIdControl = new Combo(composite, SWT.BORDER | SWT.READ_ONLY);
 
 		// convert to String[]
-		String[] items = allowedValues.toArray(new String[allowedValues.size()]);
+		initializeCombo(id, allowedValues, values, archetypeIdControl);
 
-		archetypeIdControl.setItems(items);
 		GridData newLayoutData = StylingUtil.getNewLayoutData();
 		newLayoutData.horizontalSpan = 3;
 		archetypeIdControl.setLayoutData(newLayoutData);
-		Object string = values.get(id);
-		if (string != null) {
-			archetypeIdControl.select(allowedValues.indexOf(string));
-		}
 		archetypeIdControl.addSelectionListener(new SelectionListener() {
 
 			public void widgetSelected(SelectionEvent e) {
@@ -116,6 +113,16 @@ public class PageControlsHelper {
 
 			}
 		});
+		return new Object[] { archetypeIdLabel, archetypeIdControl };
+	}
+
+	public static void initializeCombo(final String id, List<String> allowedValues, final Map<String, Object> values, final Combo archetypeIdControl) {
+		String[] items = allowedValues.toArray(new String[allowedValues.size()]);
+		archetypeIdControl.setItems(items);
+		Object string = values.get(id);
+		if (string != null) {
+			archetypeIdControl.select(allowedValues.indexOf(string));
+		}
 	}
 
 	public void createResourceControl(final Composite composite, final String label, final String id, RESOURCE_TYPE type, final Map<String, Object> values) {
@@ -149,6 +156,19 @@ public class PageControlsHelper {
 				}
 
 				public void widgetDefaultSelected(SelectionEvent e) {
+				}
+			};
+		} else if (type.equals(RESOURCE_TYPE.RESOURCE_TYPE_IFILE)) {
+			listener_file = new SelectionListener() {
+
+				public void widgetSelected(SelectionEvent e) {
+					RessourcesSelection.handleWorkspaceLocationButtonSelected(composite.getShell(), t);
+
+				}
+
+				public void widgetDefaultSelected(SelectionEvent e) {
+					// TODO Auto-generated method stub
+
 				}
 			};
 		} else {

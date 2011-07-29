@@ -1,6 +1,8 @@
 package com.bluexml.side.application.ui.menu;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,9 +36,9 @@ import com.bluexml.side.application.ui.action.GeneratePopUp;
 
 public class DynamicMenuAction extends CompoundContributionItem implements IObjectActionDelegate, IMenuCreator {
 
-	private Menu menu;
-	private StructuredSelection selection;
-	private Application application;
+	protected Menu menu;
+	protected StructuredSelection selection;
+	protected Application application;
 
 	public void dispose() {
 		// System.err.println("dispose");
@@ -58,18 +60,8 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 		menu = new Menu(parent);
 
 		try {
-			if (selection != null && selection.getFirstElement() != null && selection.getFirstElement() instanceof IFile) {
-				final IFile file = (IFile) selection.getFirstElement();
-				URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
-				XMIResource resource = new XMIResourceImpl(uri);
-
-				FileInputStream fi = new FileInputStream(file.getRawLocation().toFile());
-				Map<Object, Object> map = new HashMap<Object, Object>();
-				map.put(ApplicationPackage.eINSTANCE.getNsURI(), ApplicationPackage.eINSTANCE);
-				map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
-				resource.load(fi, map);
-
-				application = (Application) resource.getContents().get(0);
+			if (selection != null && selection.getFirstElement() != null) {
+				final IFile file = setApplication();
 
 				for (ModelElement me : application.getElements()) {
 					if (me instanceof Configuration) {
@@ -94,6 +86,25 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 		}
 
 		return menu;
+	}
+
+	protected IFile setApplication() throws FileNotFoundException, IOException {
+		if (selection.getFirstElement() instanceof IFile) {
+			final IFile file = (IFile) selection.getFirstElement();
+			URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
+			XMIResource resource = new XMIResourceImpl(uri);
+
+			FileInputStream fi = new FileInputStream(file.getRawLocation().toFile());
+			Map<Object, Object> map = new HashMap<Object, Object>();
+			map.put(ApplicationPackage.eINSTANCE.getNsURI(), ApplicationPackage.eINSTANCE);
+			map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
+			resource.load(fi, map);
+
+			application = (Application) resource.getContents().get(0);
+
+			return file;
+		}
+		return null;
 	}
 
 	public boolean isDynamic() {

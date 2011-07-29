@@ -104,23 +104,25 @@ public class ApplicationStarter implements IApplication {
 
 	public static Generate getHeadlessGenerate(IFile application, String confName) throws Exception {
 		Map<String, Object> conf = loadConfiguration(application, confName);
-		return getGenerate(conf);
+		return getHeadLessGenerate(conf);
 	}
 
 	public static Generate getHeadlessGenerate(IFile application, String confName, List<String> replaceAll) throws Exception {
 		Map<String, Object> conf = loadConfiguration(application, confName);
-		// override the model list
-		conf.put(MODELS_KEY, replaceAll);
-		return getGenerate(conf);
+		if (replaceAll != null) {
+			// override the model list
+			conf.put(MODELS_KEY, replaceAll);
+		}
+		return getHeadLessGenerate(conf);
 	}
 
 	public static Generate getHeadlessGenerate(File application, String confName) throws Exception {
 		Map<String, Object> conf = loadConfiguration(application, confName);
-		return getGenerate(conf);
+		return getHeadLessGenerate(conf);
 
 	}
 
-	private static Generate getGenerate(Map<String, Object> conf) throws Exception {
+	public static Generate getHeadLessGenerate(Map<String, Object> conf) throws Exception {
 		Configuration configuration = (Configuration) conf.get(CONFIGURATION_KEY);
 
 		// instantiate general monitor
@@ -212,7 +214,7 @@ public class ApplicationStarter implements IApplication {
 
 			System.out.println("\tstaticParameters: " + ApplicationDialog.staticFieldsName);
 			List<String> models = ApplicationUtil.getModelsPathFromApplication(application);
-			
+
 			System.out.println("\tmodels: " + models);
 			extractedConfiguration.put(MODELS_KEY, models);
 			Configuration configuration = null;

@@ -18,7 +18,7 @@ public class CreateGenerationConfiguration implements IObjectActionDelegate {
 
 	protected static List<String> inUse = new ArrayList<String>();
 
-	private ISelection selection;
+	protected ISelection selection;
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 	}

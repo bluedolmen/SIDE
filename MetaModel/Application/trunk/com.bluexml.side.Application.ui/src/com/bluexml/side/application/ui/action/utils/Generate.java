@@ -22,6 +22,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.progress.IProgressConstants;
 import org.osgi.framework.Bundle;
 
+import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
@@ -148,7 +149,9 @@ public class Generate extends WorkspaceJob {
 		this.generalMonitor = generalMonitor;
 		this.componentMonitor = componentMonitor;
 		this.configuration = configuration;
-
+		if (models == null) {
+			models = ApplicationUtil.getModelsPathFromApplication((Application) configuration.eContainer());
+		}
 		this.models = models;
 		try {
 			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);

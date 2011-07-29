@@ -40,7 +40,7 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
             </list>
         </property>
     </bean>
-    
+    <!--
     <bean id="<%getModuleIdService(name)%>_configBootstrap" class="org.alfresco.web.config.WebClientConfigBootstrap" init-method="init">
       <property name="configs">
         <list>
@@ -48,7 +48,24 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
         </list>
       </property>
    </bean>
-    
-    
+    -->
+   <bean id="<%getModuleIdService(name)%>_configBootstrap"
+		class="com.bluexml.side.Framework.alfresco.hotdeployer.WebClientRepoBootstrap"
+		init-method="init">
+		<constructor-arg >
+			<ref
+				bean="<%getModuleIdService(name)%>_webClientConfigSource" />
+		</constructor-arg>
+	</bean>
+	<bean
+		id="<%getModuleIdService(name)%>_webClientConfigSource"
+		parent="repoUrlConfigSource">
+		<constructor-arg>
+			<list>
+				<value>classpath:<%getModulePath()%>/web-client-config-custom.xml</value>
+				<value>workspace://SpacesStore/${spaces.company_home.childname}/${spaces.dictionary.childname}/app:webclient_extension/cm:<%getModuleIdService(name)%>_web-client-config-custom.xml</value>
+			</list>
+		</constructor-arg>
+	</bean> 
     <!-- http://wiki.alfresco.com/wiki/Security_and_Authentication#The_default_permission_model_and_simple_extensions -->
 </beans>

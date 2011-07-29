@@ -150,7 +150,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 	@Override
 	protected void preProcess(File fileToDeploy) throws Exception {
 		File out = IFileHelper.getFile(IFileHelper.getIFolder(getTargetPath()));
-		this.wkdir = new File(out, this.toString());
+		this.wkdir = new File(out, "deployer_" + getClass().getName());
 		if (getWorkingDir().exists()) {
 			monitor.getLog().addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("DirectWebAppsDeployer.17", getWorkingDir().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			FileHelper.deleteFile(getWorkingDir(), false);
