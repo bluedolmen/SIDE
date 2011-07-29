@@ -22,9 +22,9 @@ import com.bluexml.side.util.libs.CollectionHelper;
 import com.bluexml.side.util.libs.FileHelper;
 
 public class ReverseScheduler {
-	CollectionHelper<Integer, Model> colh = new CollectionHelper<Integer, Model>();
 
 	Map<Integer, List<Model>> tree = new TreeMap<Integer, List<Model>>();
+	CollectionHelper<Integer, Model> colh = new CollectionHelper<Integer, Model>(tree);
 	Set<Model> models = new HashSet<Model>();
 	Set<Model> scheduled = new HashSet<Model>();
 
@@ -88,11 +88,11 @@ public class ReverseScheduler {
 			if (importsE != null) {
 				List<Import> imports = importsE.getImport();
 				if (imports.size() == 0) {
-					colh.addToMap(tree, 0, model, true);
+					colh.addToMap(0, model, true);
 					scheduled.add(model);
 				}
 			} else {
-				colh.addToMap(tree, 0, model, true);
+				colh.addToMap(0, model, true);
 				scheduled.add(model);
 			}
 		}
@@ -139,7 +139,7 @@ public class ReverseScheduler {
 			if (list.containsAll(resolveToModel)) {
 				if (verbose)
 					System.out.println("model : " + alfModel.getName() + " match for level " + i);
-				colh.addToMap(tree, i, alfModel, true);
+				colh.addToMap(i, alfModel, true);
 				scheduled.add(alfModel);
 			} else {
 				// model do not match with current level
