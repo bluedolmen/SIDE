@@ -7,16 +7,15 @@ import com.bluexml.side.util.deployer.AbstractMultiDeployer;
 public class AlfrescoDeployer extends AbstractMultiDeployer {
 
 	public AlfrescoDeployer() {
-		super("com.bluexml.side.deployerDirect.alfresco.clean","com.bluexml.side.deployer.alfresco.logChanges");
+		super("com.bluexml.side.deployerDirect.alfresco.clean", "com.bluexml.side.deployer.alfresco.logChanges");
 
-
-		AlfrescoAmpDirectDeployer ampDep = new AlfrescoHotDeployer();
+		AlfrescoAmpDirectDeployer ampDep = new AlfrescoAmpDirectDeployer();
 		addDeployer(ampDep);
 
 		AlfrescoShareDirectDeployer shareDep = new AlfrescoShareDirectDeployer();
 		addDeployer(shareDep);
 	}
-	
+
 	@Override
 	protected void clean(File fileToDeploy) throws Exception {
 		// TODO Auto-generated method stub
@@ -39,7 +38,5 @@ public class AlfrescoDeployer extends AbstractMultiDeployer {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
-	
 
 }
