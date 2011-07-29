@@ -24,7 +24,8 @@ public class MetaModelDocumentationGenerator extends DocumentationGenerator {
 
 	}
 
-	protected List<String> getTemplates() {
+	@Override
+	protected List<String> getMainTemplates() {
 		List<String> templates = new ArrayList<String>();
 		templates.add("/com.bluexml.side.Integration.standAlone.metamodel.documentation/templates/content.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.Integration.standAlone.metamodel.documentation/templates/manifest.mt"); //$NON-NLS-1$
