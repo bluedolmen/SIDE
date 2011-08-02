@@ -13,11 +13,12 @@ import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 public class Generator extends ImplNode {
 
 	public Generator(IConfigurationElement elt, TechnologyVersion tv, TreeView root) {
-		super(elt, tv, root);		
+		super(elt, tv, root);
 	}
 
 	@Override
 	public void updateApplication() {
+		System.out.println("Generator.updateApplication()");
 		if (!ApplicationDialog.loadingTree) {
 			ApplicationDialog.modificationMade();
 			Configuration config = ApplicationDialog.getCurrentConfiguration();
@@ -28,6 +29,7 @@ public class Generator extends ImplNode {
 				// Add the new element
 				if (isChecked() && isEnabled()) {
 					GeneratorConfiguration elt = ApplicationFactory.eINSTANCE.createGeneratorConfiguration();
+					System.out.println("Generator.updateApplication() " + getId());
 					elt.setId(getId());
 					elt.setId_techno_version(parent.getId());
 					elt.setImpl_class(getLaunchClass());
@@ -54,10 +56,17 @@ public class Generator extends ImplNode {
 
 					// Launch options
 					for (TreeNode tn : options) {
+						System.out.println("Generator.updateApplication() option :" + tn);
 						OptionComponant o = (OptionComponant) tn;
+						String key = o.getKey();
+						if (key.endsWith("main")) {
+							System.out.println(key);
+							System.out.println("checked " + o.isChecked());
+							System.out.println("enabled " + o.isEnabled());
+						}
 						if (o.isChecked() && o.isEnabled()) {
 							Option opt = ApplicationFactory.eINSTANCE.createOption();
-							opt.setKey(o.getKey());
+							opt.setKey(key);
 							elt.getOptions().add(opt);
 
 							for (com.bluexml.side.util.dependencies.ModuleConstraint module : o.getIntegrationModules()) {
@@ -80,11 +89,6 @@ public class Generator extends ImplNode {
 				}
 			}
 		}
-	}
-
-	@Override
-	public void addChildren(TreeNode child) {
-		options.add(child);
 	}
 
 }

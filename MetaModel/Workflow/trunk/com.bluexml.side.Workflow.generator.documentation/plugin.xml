@@ -7,6 +7,13 @@
         <technologyVersion id="opendocument1_2" version="OpenDocument 1.2">
           <generatorVersion class="com.bluexml.side.workflow.generator.documentation.WorkflowDocumentationGenerator" hidden="hidden and used by default" id="com.bluexml.side.Workflow.generator.documentation" version="SIDE Workflow Documentation Generator">
             <option defaultOption="true" documentation="if enabled generator add model screenShoot" key="doc.gen.screenshoot" label="includes screen shoots" />
+            <option
+                  defaultOption="true"
+                  documentation="this must be hidden"
+                  hidden="true"
+                  key="generator.main"
+                  label="main generation">
+            </option>
           </generatorVersion>
         </technologyVersion>
       </technology>

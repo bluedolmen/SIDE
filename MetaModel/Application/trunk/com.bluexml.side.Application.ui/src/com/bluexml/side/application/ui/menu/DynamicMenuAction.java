@@ -40,6 +40,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 	protected StructuredSelection selection;
 	protected Application application;
 
+	@Override
 	public void dispose() {
 		// System.err.println("dispose");
 		if (menu != null) {
@@ -69,6 +70,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 						MenuItem item = new MenuItem(menu, SWT.RADIO);
 						item.setText(configuration.getName());
 						item.addSelectionListener(new SelectionAdapter() {
+							@Override
 							public void widgetSelected(SelectionEvent e) {
 								final GeneratePopUp generationPopUp;
 								Shell activeShell = Display.getDefault().getActiveShell();
@@ -107,6 +109,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 		return null;
 	}
 
+	@Override
 	public boolean isDynamic() {
 		return true;
 	}

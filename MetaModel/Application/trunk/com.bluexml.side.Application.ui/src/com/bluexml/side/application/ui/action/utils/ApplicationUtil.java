@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -552,6 +553,7 @@ public class ApplicationUtil {
 				Map<String, List<String>> options_dependenciesExt = new HashMap<String, List<String>>();
 				IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
 				Map<String, IConfigurationElement> optionsExtMandatory = new HashMap<String, IConfigurationElement>();
+
 				for (IConfigurationElement optionExt : arrayOfoptions_ext) {
 					String attribute_optionId = optionExt.getAttribute("key");
 					options_ext.put(attribute_optionId, optionExt);
@@ -597,16 +599,37 @@ public class ApplicationUtil {
 						}
 					}
 
-					if (!optionsExtMandatory.containsKey((optionId))) {
+//					if (!optionsExtMandatory.containsKey((optionId))) {
+//						// option must be created
+//						Option op = ApplicationFactory.eINSTANCE.createOption();
+//						op.setKey(optionId);
+//						optionsToCreate.add(op);
+//					}
+				}
+
+				EList<Option> options2 = generatorConfiguration.getOptions();
+
+				options2.removeAll(optionsToRemove);
+
+				// add missing mandatory options
+				Set<Entry<String, IConfigurationElement>> entrySet = optionsExtMandatory.entrySet();
+				for (Entry<String, IConfigurationElement> entry : entrySet) {
+					String optionId = entry.getKey();
+					boolean ok = false;
+					for (Option option : options2) {
+						if (option.getKey().equals(optionId)) {
+							ok = true;
+							break;
+						}
+					}
+					if (!ok) {
 						// option must be created
 						Option op = ApplicationFactory.eINSTANCE.createOption();
 						op.setKey(optionId);
-						optionsToCreate.add(op);
+						optionsToCreate.add(op);						
 					}
 				}
 
-				generatorConfiguration.getOptions().removeAll(optionsToRemove);
-				// add missing mandatory options
 				generatorConfiguration.getOptions().addAll(optionsToCreate);
 
 				// check dependencies
@@ -718,14 +741,38 @@ public class ApplicationUtil {
 						// check option constraints
 					}
 
-					if (!optionsExtMandatory.containsKey((optionId))) {
+//					if (!optionsExtMandatory.containsKey((optionId))) {
+//						// option must be created
+//						Option op = ApplicationFactory.eINSTANCE.createOption();
+//						op.setKey(optionId);
+//						optionsToCreate.add(op);
+//					}
+				}
+				EList<Option> options2 = deployerConfiguration.getOptions();
+				options2.removeAll(optionsToRemove);
+				
+				
+				// add missing mandatory options
+				Set<Entry<String, IConfigurationElement>> entrySet = optionsExtMandatory.entrySet();
+				for (Entry<String, IConfigurationElement> entry : entrySet) {
+					String optionId = entry.getKey();
+					boolean ok = false;
+					for (Option option : options2) {
+						if (option.getKey().equals(optionId)) {
+							ok = true;
+							break;
+						}
+					}
+					if (!ok) {
 						// option must be created
 						Option op = ApplicationFactory.eINSTANCE.createOption();
 						op.setKey(optionId);
-						optionsToCreate.add(op);
+						optionsToCreate.add(op);						
 					}
 				}
-				deployerConfiguration.getOptions().removeAll(optionsToRemove);
+				
+				
+				
 				deployerConfiguration.getOptions().addAll(optionsToCreate);
 
 				// check dependencies

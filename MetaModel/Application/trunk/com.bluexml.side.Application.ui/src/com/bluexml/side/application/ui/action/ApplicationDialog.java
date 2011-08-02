@@ -1825,7 +1825,7 @@ public class ApplicationDialog extends Dialog {
 					// Inverse
 					el.setChecked(!(el.isChecked()));
 					if (el.isChecked()) {
-						
+
 						int action = ConstraintsChecker.applyConstraints(tv, item, el);
 						if (action == SWT.YES || action == -1) {
 							enableAllSubElements(item);
@@ -1855,7 +1855,9 @@ public class ApplicationDialog extends Dialog {
 		 * @param item
 		 */
 		protected void enableAllSubElements(TreeItem item) {
+			System.out.println("ApplicationDialog.ElementTreeListener.enableAllSubElements()");
 			for (TreeItem ti : item.getItems()) {
+				System.out.println("ApplicationDialog.ElementTreeListener.enableAllSubElements() " + ti);
 				TreeElement el = (TreeElement) ti.getData();
 				// Check the validity if the component
 				if (el instanceof ImplNode) {
@@ -1918,6 +1920,10 @@ public class ApplicationDialog extends Dialog {
 				OptionComponant optionComponant = (OptionComponant) treeNode;
 				if (optionComponant.isDefault() && ApplicationUtil.checkElementOptionValidity(optionComponant)) {
 					treeNode.setChecked(true);
+					if (optionComponant.isToHidde()) {
+						// option is hidden so enable it
+						treeNode.setEnabled(true);
+					}
 					tv.update(treeNode, null);
 				}
 			}

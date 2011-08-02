@@ -16,6 +16,13 @@
               <optionRef optionId="com.bluexml.side.Portal.generator.alfresco.facetmap" />
             </mustBeChecked>
             <moduleDependence moduleId="com.bluexml.side.Framework.facetMap.alfrescoConnector" moduleType="zip" technologyVersion="Facetmap_2.x" versionMax="1.0.25" versionMin="1.0.25" />
+            <option
+                  defaultOption="true"
+                  documentation="this must be hidden"
+                  hidden="true"
+                  key="generator.main"
+                  label="main generation">
+            </option>
           </generatorVersion>
         </technologyVersion>
       </technology>

@@ -10,7 +10,6 @@ public abstract class OptionComponant extends TreeNode implements Comparable<Opt
 
 	private String key;
 	private String label;
-	private String description;
 
 	/*
 	 * (non-Javadoc)
@@ -78,10 +77,12 @@ public abstract class OptionComponant extends TreeNode implements Comparable<Opt
 		this.label = label;
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	@Override
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -98,6 +99,7 @@ public abstract class OptionComponant extends TreeNode implements Comparable<Opt
 		((ImplNode) parent).updateApplication();
 	}
 
+	@Override
 	public Set<TreeNode> getChildren() {
 		return new TreeSet<TreeNode>();
 	}

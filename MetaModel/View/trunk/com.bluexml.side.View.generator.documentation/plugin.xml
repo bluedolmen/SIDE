@@ -5,7 +5,19 @@
     <metamodel id="http://www.kerblue.org/view/1.0" name="KSR300 View" url="http://www.kerblue.org/v2/ksr300-view">
       <technology description="Generate documentation (in opendocument) for the models of the metamodel." id="opendocument" name="OpenDocument" url="http://www.odfalliance.org/">
         <technologyVersion id="opendocument1_2" version="OpenDocument 1.2">
-          <generatorVersion class="com.bluexml.side.view.generator.documentation.ViewDocumentationGenerator" hidden="hidden and used by default" id="com.bluexml.side.View.generator.documentation" version="SIDE View Documentation Generator" />
+          <generatorVersion
+                class="com.bluexml.side.view.generator.documentation.ViewDocumentationGenerator"
+                hidden="hidden and used by default"
+                id="com.bluexml.side.View.generator.documentation"
+                version="SIDE View Documentation Generator">
+             <option
+                   defaultOption="true"
+                   documentation="this must be hidden"
+                   hidden="true"
+                   key="generator.main"
+                   label="main generation">
+             </option>
+          </generatorVersion>
         </technologyVersion>
       </technology>
     </metamodel>

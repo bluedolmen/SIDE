@@ -1,9 +1,6 @@
 package com.bluexml.side.integration.standalone;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,25 +9,15 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.application.Application;
-import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
-import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
@@ -102,13 +89,13 @@ public class ApplicationStarter implements IApplication {
 		return EXIT_OK;
 	}
 
-	public static Generate getHeadlessGenerate(IFile application, String confName) throws Exception {
-		Map<String, Object> conf = loadConfiguration(application, confName);
+	public static Generate getHeadlessGenerate(IFile application, String confName, boolean updateApplication) throws Exception {
+		Map<String, Object> conf = loadConfiguration(application, confName, updateApplication);
 		return getHeadLessGenerate(conf);
 	}
 
-	public static Generate getHeadlessGenerate(IFile application, String confName, List<String> replaceAll) throws Exception {
-		Map<String, Object> conf = loadConfiguration(application, confName);
+	public static Generate getHeadlessGenerate(IFile application, String confName, boolean updateApplication, List<String> replaceAll) throws Exception {
+		Map<String, Object> conf = loadConfiguration(application, confName, updateApplication);
 		if (replaceAll != null) {
 			// override the model list
 			conf.put(MODELS_KEY, replaceAll);
@@ -116,8 +103,8 @@ public class ApplicationStarter implements IApplication {
 		return getHeadLessGenerate(conf);
 	}
 
-	public static Generate getHeadlessGenerate(File application, String confName) throws Exception {
-		Map<String, Object> conf = loadConfiguration(application, confName);
+	public static Generate getHeadlessGenerate(File application, String confName, boolean updateApplication) throws Exception {
+		Map<String, Object> conf = loadConfiguration(application, confName, updateApplication);
 		return getHeadLessGenerate(conf);
 
 	}
@@ -174,7 +161,7 @@ public class ApplicationStarter implements IApplication {
 	}
 
 	protected void generate(File fileAP) throws Exception {
-		Generate gen = getHeadlessGenerate(fileAP, arguments[1]);
+		Generate gen = getHeadlessGenerate(fileAP, arguments[1], true);
 		try {
 			System.out.println("created, let's run");
 			// don't use job scheduler, but invoke the main method
@@ -188,10 +175,10 @@ public class ApplicationStarter implements IApplication {
 
 	}
 
-	public static Map<String, Object> loadConfiguration(File filePath, String name) {
+	public static Map<String, Object> loadConfiguration(File filePath, String name, boolean updateApplication) {
 		// Create the IFile
 		IFile file = IFileHelper.getIFile(filePath);
-		return loadConfiguration(file, name);
+		return loadConfiguration(file, name, updateApplication);
 
 	}
 
@@ -201,17 +188,18 @@ public class ApplicationStarter implements IApplication {
 	 *            , if null return the first configuration
 	 * @return
 	 */
-	public static Map<String, Object> loadConfiguration(IFile file, String name) {
+	public static Map<String, Object> loadConfiguration(IFile file, String name, boolean updateApplication) {
 		Map<String, Object> extractedConfiguration = new HashMap<String, Object>();
 
 		System.out.println("\tfile.exists(): " + file.exists());
 
 		try {
 			Application application = (Application) ModelInitializationUtils.openModel(file).get(0);
-			System.out.println("\tupdateApplicationFile : ");
-			ApplicationUtil.updateApplicationFromExtensionPoint(application, file);
-			System.out.println("\tapplication: " + application);
-
+			if (updateApplication) {
+				System.out.println("\tupdateApplicationFile : ");
+				ApplicationUtil.updateApplicationFromExtensionPoint(application, file);
+				System.out.println("\tapplication: " + application);
+			}
 			System.out.println("\tstaticParameters: " + ApplicationDialog.staticFieldsName);
 			List<String> models = ApplicationUtil.getModelsPathFromApplication(application);
 

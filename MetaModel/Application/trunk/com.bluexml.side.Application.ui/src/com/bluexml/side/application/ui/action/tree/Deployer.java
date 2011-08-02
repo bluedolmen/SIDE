@@ -13,7 +13,7 @@ import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 public class Deployer extends ImplNode {
 
 	private boolean shared;
-	
+
 	public Deployer(IConfigurationElement elt, TechnologyVersion tv, TreeView root) {
 		super(elt, tv, root);
 		// set additional attibutes
@@ -40,7 +40,7 @@ public class Deployer extends ImplNode {
 					elt.setTechnologyName(((Technology) parent.getParent()).getLabel());
 					elt.setTechnologyVersionName(((TechnologyVersion) parent).getVersion());
 					elt.setDeployerName(this.getVersion());
-					
+
 					for (com.bluexml.side.util.dependencies.ModuleConstraint module : integrationModules) {
 						ModuleConstraint mc = ApplicationFactory.eINSTANCE.createModuleConstraint();
 						mc.setModuleId(module.getModuleId());
@@ -54,16 +54,16 @@ public class Deployer extends ImplNode {
 						mc.setTechnologyVersion(module.getTech_version());
 						elt.getModuleContraints().add(mc);
 					}
-					
+
 					// Launch options
 					for (TreeNode tn : options) {
 						OptionComponant o = (OptionComponant) tn;
 						if (o.isChecked() && o.isEnabled()) {
 							Option opt = ApplicationFactory.eINSTANCE.createOption();
 							opt.setKey(o.getKey());
-							
+
 							elt.getOptions().add(opt);
-							
+
 							for (com.bluexml.side.util.dependencies.ModuleConstraint module : o.getIntegrationModules()) {
 								ModuleConstraint mc = ApplicationFactory.eINSTANCE.createModuleConstraint();
 								mc.setModuleId(module.getModuleId());
@@ -77,7 +77,7 @@ public class Deployer extends ImplNode {
 								mc.setTechnologyVersion(module.getTech_version());
 								elt.getModuleContraints().add(mc);
 							}
-							
+
 						}
 					}
 
@@ -85,11 +85,6 @@ public class Deployer extends ImplNode {
 				}
 			}
 		}
-	}
-
-	@Override
-	public void addChildren(TreeNode child) {
-		options.add(child);
 	}
 
 }

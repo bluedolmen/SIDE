@@ -11,6 +11,13 @@
             <option key="com.bluexml.side.Requirements.generator.mindmap.freemind.goalList" label="List of goals" />
             <option key="com.bluexml.side.Requirements.generator.mindmap.freemind.entityListByAgent" label="List of entities by agent" />
             <option key="com.bluexml.side.Requirements.generator.mindmap.freemind.goalListByAgent" label="List of goals by agent" />
+            <option
+                  defaultOption="true"
+                  documentation="this must be hidden"
+                  hidden="true"
+                  key="generator.main"
+                  label="main generation">
+            </option>
           </generatorVersion>
         </technologyVersion>
       </technology>
@@ -19,17 +26,46 @@
           <generatorVersion class="com.bluexml.side.requirements.generator.AnalysisGenerator" id="com.bluexml.side.Requirements.generator.excel" version="Analysis Document Generator">
             <option key="com.bluexml.side.Requirements.generator.office.excel.riskAnalysis" label="Risk" />
             <option key="com.bluexml.side.Requirements.generator.office.excel.diagnostic" label="Diagnostic" />
+            <option
+                  defaultOption="true"
+                  documentation="this must be hidden"
+                  hidden="true"
+                  key="generator.main"
+                  label="main generation">
+            </option>
           </generatorVersion>
         </technologyVersion>
       </technology>
       <technology id="webproject" name="Web Project">
         <technologyVersion id="webproject_1_0" version="Web Project 1.0">
-          <generatorVersion class="com.bluexml.side.requirements.generator.WebProjectGenerator" id="com.bluexml.side.Requirements.generator.webproject" version="PHP Web Project" />
+          <generatorVersion
+                class="com.bluexml.side.requirements.generator.WebProjectGenerator"
+                id="com.bluexml.side.Requirements.generator.webproject"
+                version="PHP Web Project">
+             <option
+                   defaultOption="true"
+                   documentation="this must be hidden"
+                   hidden="true"
+                   key="generator.main"
+                   label="main generation">
+             </option>
+          </generatorVersion>
         </technologyVersion>
       </technology>
       <technology id="opendocument" name="Open Document">
         <technologyVersion id="opendocument_writer" version="Open Document Writer">
-          <generatorVersion class="com.bluexml.side.requirements.generator.DocumentationGenerator" id="com.bluexml.side.Requirements.generator.doc" version="Documentation Generator" />
+          <generatorVersion
+                class="com.bluexml.side.requirements.generator.DocumentationGenerator"
+                id="com.bluexml.side.Requirements.generator.doc"
+                version="Documentation Generator">
+             <option
+                   defaultOption="true"
+                   documentation="this must be hidden"
+                   hidden="true"
+                   key="generator.main"
+                   label="main generation">
+             </option>
+          </generatorVersion>
         </technologyVersion>
       </technology>
     </metamodel>
@@ -48,6 +84,13 @@
                 id="com.bluexml.side.Requirements.deployer.freemind"
                 shared="false"
                 version="freemind deployer">
+             <option
+                   defaultOption="true"
+                   documentation="this must be hidden"
+                   hidden="true"
+                   key="generator.main"
+                   label="main generation">
+             </option>
           </deployerVersion>
        </technologyVersion>
     </technology>
@@ -63,6 +106,13 @@
                 id="com.bluexml.side.Requirements.deployer.excel"
                 shared="false"
                 version="excel deployer">
+             <option
+                   defaultOption="true"
+                   documentation="this must be hidden"
+                   hidden="true"
+                   key="generator.main"
+                   label="main generation">
+             </option>
           </deployerVersion>
        </technologyVersion>
     </technology>
@@ -78,6 +128,13 @@
                 id="com.bluexml.side.Requirements.deployer.webproject"
                 shared="false"
                 version="webproject deployer">
+             <option
+                   defaultOption="true"
+                   documentation="this must be hidden"
+                   hidden="true"
+                   key="generator.main"
+                   label="main generation">
+             </option>
           </deployerVersion>
        </technologyVersion>
     </technology>
@@ -93,6 +150,13 @@
                 id="com.bluexml.side.Requirements.deployer.doc"
                 shared="false"
                 version="doc deployer">
+             <option
+                   defaultOption="true"
+                   documentation="this must be hidden"
+                   hidden="true"
+                   key="generator.main"
+                   label="main generation">
+             </option>
           </deployerVersion>
        </technologyVersion>
     </technology>

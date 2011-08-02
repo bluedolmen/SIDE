@@ -34,6 +34,7 @@ public class AlfrescoHotDeployer extends AbstractMultiDeployer {
 
 	}
 
+	@Override
 	public boolean check() {
 		// TODO Auto-generated method stub
 		return true;
