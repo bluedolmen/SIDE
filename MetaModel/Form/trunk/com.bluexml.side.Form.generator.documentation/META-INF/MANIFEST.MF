@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Form Model Documentation Generator
 Bundle-SymbolicName: com.bluexml.side.Form.generator.documentation;singleton:=true
-Bundle-Version: 1.0.28.v19922-20100827
+Bundle-Version: 1.0.29.v26433-20110802
 Bundle-Activator: com.bluexml.side.form.generator.documentation.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
