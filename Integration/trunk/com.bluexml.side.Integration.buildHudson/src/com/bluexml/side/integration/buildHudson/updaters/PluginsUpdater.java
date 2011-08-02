@@ -99,6 +99,7 @@ public class PluginsUpdater {
 	private void fixPluginsVersion() throws Exception {
 		logger.debug("PluginsUpdater.fixPluginsVersion()");
 		for (String plugin : plugins2update) {
+			logger.debug("PluginsUpdater.fixPluginsVersion() \tplugin :" + plugin);
 			// fix plugin verion
 			updateVersion(plugin);
 			// fix module dependencies

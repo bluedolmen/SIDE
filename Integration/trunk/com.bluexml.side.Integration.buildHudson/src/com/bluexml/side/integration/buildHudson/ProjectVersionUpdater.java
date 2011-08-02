@@ -147,10 +147,12 @@ public class ProjectVersionUpdater {
 		List<String> features2UpdateList = new ArrayList<String>();
 
 		List<String> projects = new ArrayList<String>();
-		projects.addAll(bu.getProjects("project"));
+		List<String> coreProjects = bu.getProjects("project");
+		projects.addAll(coreProjects);
 		if (isEnterpriseBuild()) {
 			// add Enterprise projects
-			projects.addAll(bu.getProjects("project.enterprise"));
+			List<String> enterpriseProjects = bu.getProjects("project.enterprise");
+			projects.addAll(enterpriseProjects);
 		}
 		for (int i = 0; i < projects.size(); i++) {
 			if (projects.get(i).length() > 0) {
@@ -177,6 +179,20 @@ public class ProjectVersionUpdater {
 			projectPoms2Update.addAll(projetPomsList);
 			// all Eclipse projects
 			projectList.addAll(projectRealList);
+
+			// beware to remove community projects when building RCP Enterprise
+			if (isEnterpriseBuild()) {
+				// need to remove from project to update all Core projects (because this part must be readonly for Enterprise)
+				projectList.removeAll(coreProjects);
+				List<String> toRemove = new ArrayList<String>();
+				for (String pom : projectPoms2Update) {
+					if (pom.contains("/" + SIDE_Core + "/")) {
+						toRemove.add(pom);
+					}
+				}
+				projectPoms2Update.removeAll(toRemove);
+			}
+
 		} else {
 			// read svn log to list modified projects
 			bu.readSvnLog(projetPomsList, projectPoms2Update, projectList);
