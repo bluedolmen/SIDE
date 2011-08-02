@@ -123,7 +123,6 @@ public class PluginsUpdater {
 	/**
 	 * Update the version number of the modules in the files feature.xml
 	 * 
-	 * 
 	 * @param projectName
 	 * @throws Exception
 	 * @throws
@@ -133,9 +132,9 @@ public class PluginsUpdater {
 		boolean modifie = false;
 		Document document = plugin;
 		URI path = new URI(document.getBaseURI());
-		File fileFeaturePath = new File(path.getPath());
+		File filePluginPath = new File(path.getPath());
 		Element racine = document.getRootElement();
-
+		logger.debug("\tplugin :" + filePluginPath);
 		XPath xpa = XPath.newInstance("/plugin//moduleDependence");
 		List<?> plugins = xpa.selectNodes(racine);
 
@@ -156,7 +155,7 @@ public class PluginsUpdater {
 
 		if (applyChanges && modifie) {
 			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-			sortie.output(document, new FileOutputStream(fileFeaturePath));
+			sortie.output(document, new FileOutputStream(filePluginPath));
 		}
 
 		return modifie;
@@ -203,9 +202,9 @@ public class PluginsUpdater {
 				// version
 				// si on ne force pas la mise a jour du numéro de
 				// version
-				
+
 				String newVersion = bu.update(number, pattern);
-				
+
 				ligne += " " + newVersion;
 				pluginsNewVersion.put(pluginId, newVersion);
 				pluginsVersions.put(pluginId, newVersion);
