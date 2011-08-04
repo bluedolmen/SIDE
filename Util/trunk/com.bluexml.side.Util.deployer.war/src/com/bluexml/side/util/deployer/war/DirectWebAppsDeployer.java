@@ -125,8 +125,8 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 			monitor.addWarningTextAndLog(Activator.Messages.getString("WarDeployer.5"), "");
 		}
 		// deploy process is done, we need to mark the deployed webapp
-		System.out.println("DirectWebAppsDeployer.deployProcess() touch " + deployedWebbAppFolder);
-		FileUtils.touch(deployedWebbAppFolder);
+//		System.out.println("DirectWebAppsDeployer.deployProcess() touch " + deployedWebbAppFolder);
+//		FileUtils.touch(deployedWebbAppFolder);
 
 		if (hotdeploy) {
 			System.out.println("DirectWebAppsDeployer.deployProcess() touch " + getWebAppXMLFile());
