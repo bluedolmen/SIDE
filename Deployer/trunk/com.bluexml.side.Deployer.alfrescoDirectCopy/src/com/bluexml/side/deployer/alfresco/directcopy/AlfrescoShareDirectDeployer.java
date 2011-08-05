@@ -15,7 +15,10 @@ public class AlfrescoShareDirectDeployer extends DirectWebAppsDeployer {
 		try {
 			super.deploy();
 		} catch (Exception e) {
-			monitor.addWarningTextAndLog(Activator.Messages.getString("AlfrescoShareDirectDeployer.1"), null);
+			e.printStackTrace();
+			String string = Activator.Messages.getString("AlfrescoShareDirectDeployer.1") + "\n";
+			string += e.getStackTrace();
+			monitor.addWarningTextAndLog(string, null);
 		}
 	}
 
