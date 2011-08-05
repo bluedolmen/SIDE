@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
 import com.bluexml.side.util.componentmonitor.MonitorWriter;
 import com.bluexml.side.util.libs.FileHelper;
@@ -125,8 +126,8 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 			monitor.addWarningTextAndLog(Activator.Messages.getString("WarDeployer.5"), "");
 		}
 		// deploy process is done, we need to mark the deployed webapp
-//		System.out.println("DirectWebAppsDeployer.deployProcess() touch " + deployedWebbAppFolder);
-//		FileUtils.touch(deployedWebbAppFolder);
+		//		System.out.println("DirectWebAppsDeployer.deployProcess() touch " + deployedWebbAppFolder);
+		//		FileUtils.touch(deployedWebbAppFolder);
 
 		if (hotdeploy) {
 			System.out.println("DirectWebAppsDeployer.deployProcess() touch " + getWebAppXMLFile());
@@ -199,7 +200,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 	}
 
 	public File getWebAppXMLFile() {
-		String path = "/WEB-INF/web.xml".replaceAll("/", File.separator);
+		String path = FilenameUtils.separatorsToSystem("/WEB-INF/web.xml");
 		return new File(getDeployedWebbAppFolder().getAbsolutePath() + path);
 	}
 }
