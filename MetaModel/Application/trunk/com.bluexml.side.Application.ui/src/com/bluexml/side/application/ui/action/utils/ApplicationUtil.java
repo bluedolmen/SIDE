@@ -397,7 +397,7 @@ public class ApplicationUtil {
 			ImplNode iN = ((ImplNode) el);
 			Class<Checkable> gen;
 			if (Platform.getBundle(iN.getContributorId()) != null) {
-				gen = Platform.getBundle(iN.getContributorId()).loadClass(iN.getLaunchClass());
+				gen = (Class<Checkable>) Platform.getBundle(iN.getContributorId()).loadClass(iN.getLaunchClass());
 				Checkable gener = gen.newInstance();
 				return gener.check();
 			} else {
@@ -431,7 +431,7 @@ public class ApplicationUtil {
 			ImplNode iN = (ImplNode) option.getParent();
 			Class<Checkable> gen;
 			if (Platform.getBundle(iN.getContributorId()) != null) {
-				gen = Platform.getBundle(iN.getContributorId()).loadClass(iN.getLaunchClass());
+				gen = (Class<Checkable>) Platform.getBundle(iN.getContributorId()).loadClass(iN.getLaunchClass());
 				Checkable gener = gen.newInstance();
 				return gener.check() && gener.checkOption(optionID);
 			} else {
