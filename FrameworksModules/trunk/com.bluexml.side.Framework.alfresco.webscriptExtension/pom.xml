@@ -161,6 +161,12 @@
       <version>5.0.3</version>
     </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
+    <dependency>
+    	<groupId>rhino</groupId>
+    	<artifactId>js</artifactId>
+    	<version>1.6R7</version>
+    	<scope>provided</scope>
+    </dependency>
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering
 -->
