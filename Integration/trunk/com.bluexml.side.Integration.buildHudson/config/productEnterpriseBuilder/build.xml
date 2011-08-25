@@ -89,8 +89,7 @@
 		<delete file="${logFile}" failonerror="false" />
 		<record name="${logFile}" loglevel="debug" action="start" />
 		<java fork="true" failonerror="true" jar="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
-			<jvmarg value="-Xms512m" />
-			<jvmarg value="-Xmx512m" />
+			<jvmarg line="${build.jvm.options}" />
 			<arg value="-application" />
 			<arg value="org.eclipse.ant.core.antRunner" />
 			<arg value="-buildfile" />

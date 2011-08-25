@@ -1,0 +1,3 @@
+JOP=-Xms64m -Xmx512m -XX:MaxPermSize=256m
+
+java $JOP -classpath /Volumes/Data/migrationIndigo/eclipseCarbon37/eclipse37SIDE/plugins/org.eclipse.equinox.launcher_1.2.0.v20110502.jar -jar /Volumes/Data/migrationIndigo/eclipseCarbon37/eclipse37SIDE/plugins/org.eclipse.equinox.launcher_1.2.0.v20110502.jar -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dtimestamp=007 -Dworkspace=/Volumes/Data/migrationIndigo/workspace
