@@ -16,10 +16,18 @@
                   documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploye the 2 new Facet navigation components (menu and results list)."
                   key="alfresco.share.url" defaultValue="http://localhost:8080/share"
                   label="Alfresco share URL"/>
+            <option
+                  defaultOption="true"
+                  documentation="this must be hidden"
+                  hidden="true"
+                  key="generator.main"
+                  label="main generation">
+            </option>
           </generatorVersion>
         </technologyVersion>
       </technology>
     </metamodel>
   </extension>
 </plugin>
+
 
