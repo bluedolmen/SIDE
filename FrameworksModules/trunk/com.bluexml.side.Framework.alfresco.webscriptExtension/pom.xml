@@ -30,7 +30,7 @@
   In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
-  <version>1.0.18</version>
+  <version>1.0.19</version>
   <description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -162,10 +162,10 @@
     </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
     <dependency>
-    	<groupId>rhino</groupId>
-    	<artifactId>js</artifactId>
-    	<version>1.6R7</version>
-    	<scope>provided</scope>
+      <groupId>rhino</groupId>
+      <artifactId>js</artifactId>
+      <version>1.6R7</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering
