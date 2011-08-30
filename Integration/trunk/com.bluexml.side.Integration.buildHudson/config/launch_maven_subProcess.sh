@@ -22,7 +22,7 @@ perl -pi -le 'print "<modules>" if $. == 12' pom.xml
 perl -pi -le 'print "</modules>" if $. == 13' pom.xml
 for s in `ls -d */ `; do
     repertoire=$s
-	name=`perl -e '"'$repertoire'"=~/([a-zA-Z0-9.]*)/; print $1';`
+	name=`perl -e '"'$repertoire'"=~/([a-zA-Z0-9._]*)/; print $1';`
   	res="<module>$name</module>"
   	echo $repertoire $name $res
 	perl -pi -le 'print "'$res'" if $. == 13' pom.xml
