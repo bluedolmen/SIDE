@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Alfresco Generator Utilities
 Bundle-SymbolicName: com.bluexml.side.Util.generator.alfresco
-Bundle-Version: 1.0.47.v26433-20110802
+Bundle-Version: 1.0.48.v27381-20110831
 Bundle-Activator: com.bluexml.side.util.generator.alfresco.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
