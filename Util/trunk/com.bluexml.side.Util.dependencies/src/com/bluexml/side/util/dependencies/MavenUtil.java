@@ -114,7 +114,9 @@ public class MavenUtil {
 		if (errorLines.size() > 0) {
 			defaultMavenExecutionResult.addException(new Exception(errors));
 		}
-
+		// close output streams
+		stdout.close();
+		stderr.close();
 		return defaultMavenExecutionResult;
 	}
 
