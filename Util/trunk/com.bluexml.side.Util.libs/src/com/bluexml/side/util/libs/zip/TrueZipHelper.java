@@ -59,10 +59,13 @@ public class TrueZipHelper {
 
 		File.update();
 		if (!result) {
-			System.out.println("Source:"+srcF);
-			System.out.println("Dest:"+destF);
+			String message = "Error while extract files";
+			System.err.println(message);
+			System.err.println("Source:" + srcF);
+			System.err.println("Dest:" + destF);			
+			throw new Exception(message);
 		}
-		
+
 		// mandatory call see TrueZip doc
 		return result;
 	}
