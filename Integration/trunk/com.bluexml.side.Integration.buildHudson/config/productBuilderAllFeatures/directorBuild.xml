@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     1 sept. 2011 17:47:03                                                        
+
+     directorBuilder    
+     ant script to build SIDE product using existing p2 repository
+                   
+     davidabad                                                                
+     ====================================================================== -->
+<project name="directorBuilder" default="listProduct">
+	<description>
+            ant script to build SIDE product using existing p2 repository
+    </description>
+	<property file="build.${user.name}.properties" />
+	<property name="buildDirectory" value="${builder}/buildDirectory" />
+	<property name="pluginPath" value="${moreplugins}${path.separator}${sideSources}${path.separator}${deltapack}" />
+	
+
+	<target name="listProduct" depends="depends" description="ant script to build SIDE product using existing p2 repository">
+		<echo message="launcher path :${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
+		</echo>
+		<delete file="${logFile}-director.log" failonerror="false" />
+		<record name="${logFile}-director.log" loglevel="debug" action="start" />
+		<java fork="true" failonerror="true" jar="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
+			<jvmarg line="${build.jvm.options}" />
+			<arg value="-application" />
+			<arg value="org.eclipse.equinox.p2.director" />
+			<arg line="-repository file://${pdep2repo}" />
+			<arg line="-profile profile" />
+			<!--<arg line="-repository http://download.eclipse.org/eclipse/updates/3.5" />-->
+
+			<arg line="-listInstalledRoots" />
+			<classpath>
+				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			</classpath>
+		</java>
+		<record name="${logFile}-director.log" action="stop" />
+	</target>
+
+	<!-- ================================= 
+          target: generateProductMeta              
+         ================================= -->
+	<target name="generateProductMeta" depends="depends" description="description">
+		<echo message="add products metadata to p2 repository">
+		</echo>
+
+		<addProductMeta configos="macosx.carbon.x86" p2repo="${p2.metadata.repo}" productfile="${product_labs}" />
+		<addProductMeta configos="linux.gtk.x86" p2repo="${p2.metadata.repo}" productfile="${product_labs}" />
+		<addProductMeta configos="win32.win32.x86" p2repo="${p2.metadata.repo}" productfile="${product_labs}" />
+
+		<addProductMeta configos="macosx.carbon.x86" p2repo="${p2.metadata.repo}" productfile="${product_enterprise}" />
+
+	</target>
+
+	<!-- ================================= 
+          target: publishProducts              
+         ================================= -->
+	<target name="publishProducts" depends="" description="create full executable products">
+		<buildSIDEProduct destination="${distros}/SIDE-Labs-macosx" repo="${p2.metadata.repo}" productid="sideProduct" p2.os="macosx" p2.ws="carbon" p2.arch="x86" />
+		<buildSIDEProduct destination="${distros}/SIDE-Labs-win32" repo="${p2.metadata.repo}" productid="sideProduct" p2.os="win32" p2.ws="win32" p2.arch="x86" />
+		<buildSIDEProduct destination="${distros}/SIDE-Labs-linux" repo="${p2.metadata.repo}" productid="sideProduct" p2.os="linux" p2.ws="gtk" p2.arch="x86" />
+
+		<buildSIDEProduct destination="${distros}/SIDE-Alfresco-macosx" repo="${p2.metadata.repo}" productid="sideEnterprise" p2.os="macosx" p2.ws="carbon" p2.arch="x86" />
+	</target>
+
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: addProductMeta          
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="addProductMeta">
+		<attribute name="configOS" default="macosx.carbon.x86" />
+		<attribute name="productFile" default="" />
+		<attribute name="p2Repo" default="" />
+		<sequential>
+			<echo message="launcher path :${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			<echo message="application : org.eclipse.equinox.p2.publisher.ProductPublisher" />
+			<echo message="* configOS : @{configOS}" />
+			<echo message="* productFile : @{productFile}" />
+			<echo message="* p2Repo : @{p2Repo}" />
+			<echo message="${deltapack}/features/org.eclipse.equinox.executable_3.5.0.v20110530-7P7NFUFFLWUl76mart"></echo>
+
+			<delete file="${logFile}-director.log" failonerror="false" />
+			<record name="${logFile}-director.log" loglevel="debug" action="start" />
+			<java fork="true" failonerror="true" jar="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
+				<jvmarg line="${build.jvm.options}" />
+				<arg line="-application org.eclipse.equinox.p2.publisher.ProductPublisher" />
+				<arg line="-metadataRepository @{p2Repo}" />
+				<arg line="-artifactRepository @{p2Repo}" />
+				<arg line="-productFile @{productFile}" />
+				<arg line="-append" />
+				<arg line="-executables ${deltapack}/features/org.eclipse.equinox.executable_3.5.0.v20110530-7P7NFUFFLWUl76mart" />
+				<arg line="-flavor tooling" />
+				<arg line="-configs @{configOS}" />
+				<classpath>
+					<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+				</classpath>
+			</java>
+		</sequential>
+	</macrodef>
+
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: buildSIDEProduct          
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="buildSIDEProduct">
+		<attribute name="repo" default="${p2.metadata.repo}" />
+		<attribute name="productID" default="" />
+		<attribute name="destination" default="${distros}/prototype" />
+		<attribute name="p2.os" default="macosx" />
+		<attribute name="p2.ws" default="carbon" />
+		<attribute name="p2.arch" default="x86" />
+
+		<sequential>
+
+			<echo message="launcher path :${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			<echo message="application : org.eclipse.equinox.p2.director (installIU)" />
+			<echo message="* repo : @{repo}" />
+			<echo message="* productID : @{productID}" />
+			<echo message="* destination : @{destination}" />
+			<echo message="* config : @{p2.os},@{p2.ws},@{p2.arch}" />
+
+			<delete file="${logFile}-director.log" failonerror="false" />
+			<record name="${logFile}-director.log" loglevel="debug" action="start" />
+			<java fork="true" failonerror="true" jar="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
+				<jvmarg line="${build.jvm.options}" />
+				<arg value="-application" />
+				<arg value="org.eclipse.equinox.p2.director" />
+				<arg line="-repository @{repo}" />
+				<!--<arg line="-repository http://download.eclipse.org/eclipse/updates/3.5" />-->
+
+				<arg line="-installIU @{productID}" />
+				<arg line="-destination @{destination}" />
+				<arg line="-profile @{productID}" />
+				<arg line="-profileProperties org.eclipse.update.install.features=true" />
+				<arg line="-bundlepool @{destination}" />
+				<arg line="-p2.os @{p2.os}" />
+				<arg line="-p2.ws @{p2.ws}" />
+				<arg line="-p2.arch @{p2.arch}" />
+				<arg line="-roaming" />
+				<classpath>
+					<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+				</classpath>
+			</java>
+			<record name="${logFile}-director.log" action="stop" />
+		</sequential>
+	</macrodef>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="depends">
+	</target>
+	<target name="pde-build2" description="call this target to execute main task using Eclipse antRunner">
+
+	</target>
+</project>
