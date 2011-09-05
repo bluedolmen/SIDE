@@ -66,7 +66,6 @@ public class Utils {
 
 	/**
 	 * Méthode qui ouvre le fichier de proprerties
-	 * 
 	 */
 	public static Properties openProperties(String fichier) {
 		String[] filePart = fichier.split("\\.");
@@ -505,8 +504,8 @@ public class Utils {
 
 	/**
 	 * Cette méthode analyse le fichier de log (il changera en fonction de
-	 * l'utilisation de Hudson ou non) et regarde si des updates ont été fait et
-	 * ainsi, changer le numéro de version du projet concerné
+	 * l'utilisation de Hudson ou non) et regarde si des updates ont été fait
+	 * et ainsi, changer le numéro de version du projet concerné
 	 */
 	public static void traitementUpdate() {
 
@@ -940,12 +939,15 @@ public class Utils {
 
 	public static void updateProduct() {
 		String brandingPath = "";
+		String fileName = null;
 		if (SourceSVNName.equals(Application.SIDE_Enterprise)) {
 			brandingPath = Utils.getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding.enterprise");
+			fileName = "sideEnterprise.product";
 		} else {
 			brandingPath = Utils.getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding");
+			fileName = "side.product";
 		}
-		File product = new File(brandingPath + "/side.product");
+		File product = new File(brandingPath + File.separator + fileName);
 		File plugin_featureRepo = new File(Utils.getBuildDirectory());
 		boolean sideProductChanges = Utils.updateProduct(product, plugin_featureRepo);
 		if (sideProductChanges) {
@@ -1039,7 +1041,6 @@ public class Utils {
 
 	/**
 	 * Update the version number of the modules in the files pom.xml
-	 * 
 	 * 
 	 * @param projectName
 	 */
@@ -1169,7 +1170,6 @@ public class Utils {
 
 	/**
 	 * Update the version number of the modules in the files feature.xml
-	 * 
 	 * 
 	 * @param projectName
 	 */
@@ -1701,9 +1701,8 @@ public class Utils {
 
 	/**
 	 * Met a jour le site.xml en fonction des features. Si une feature n'est pas
-	 * présente dans le site.xml, elle est ajoutée et placée dans la catégorie
-	 * 'other' (retourné par la méthode getNewCategory() )
-	 * 
+	 * présente dans le site.xml, elle est ajoutée et placée dans la
+	 * catégorie 'other' (retourné par la méthode getNewCategory() )
 	 */
 	public static void updateSiteXml() {
 
@@ -1815,10 +1814,8 @@ public class Utils {
 	}
 
 	/**
-	 * 
 	 * Traitement final: Copie de l'update site dans le repertoire final Copie
 	 * des logs dans le repertoire final Suppression de workingcopy
-	 * 
 	 */
 	public static void finalTraitement() {
 		String buildNumber = "";
@@ -1938,7 +1935,6 @@ public class Utils {
 			 * System.out.println("\t- Working dir Suppression" );
 			 * FileHelper.deleteFile(new File(getBuildDirectory()));
 			 * System.out.println("\t\t. " + getBuildDirectory() + " DONE");
-			 * 
 			 * FileHelper.deleteFile(new File(getBuildPath() + File.separator +
 			 * "doc")); System.out.println("\t\t. " + getBuildPath() +
 			 * File.separator + "doc DONE");
@@ -1953,14 +1949,12 @@ public class Utils {
 			 * File(Utils.getBuildPath() + File.separator +
 			 * "buildAuto.product")); FileHelper.deleteFile(new
 			 * File(Utils.getBuildPath() + File.separator + "jarBuilder.xml"));
-			 * 
 			 * // suppression des fichiers de logs if
 			 * (Application.EnterpriseRelease){ FileHelper.deleteFile(new
 			 * File(getBuildPath() + File.separator + "logbuildSVNbuild.txt"));
 			 * // FileHelper.deleteFile(new File(getBuildPath() + File.separator
 			 * // + "logbuildSVNsvnCommit.txt")); } FileHelper.deleteFile(new
 			 * File(getBuildPath() + File.separator + "logbuildbuild.txt"));
-			 * 
 			 * FileHelper.deleteFile(new File(getBuildPath() + File.separator +
 			 * "logjarBuilderjarBuilder.txt"));
 			 */

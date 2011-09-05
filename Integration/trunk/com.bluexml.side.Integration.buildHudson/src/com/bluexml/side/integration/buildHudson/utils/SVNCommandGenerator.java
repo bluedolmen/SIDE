@@ -92,7 +92,7 @@ public class SVNCommandGenerator {
 					out += "\t\t\t\t<include name=\"plugin.xml\" />\n";
 					if (pluginId.contains("branding")) {
 						// product
-						out += "\t\t\t\t<include name=\"side.product\" />\n";
+						out += "\t\t\t\t<include name=\"*.product\" />\n";
 						out += "\t\t\t\t<include name=\"category.xml\" />\n";
 					}
 					out += "\t\t\t</fileset>\n";

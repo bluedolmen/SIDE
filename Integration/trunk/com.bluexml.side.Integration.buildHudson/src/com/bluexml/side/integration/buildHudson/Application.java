@@ -779,7 +779,7 @@ public class Application {
 							out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + "\">\n";
 							out += "\t\t\t\t<include name=\"plugin.xml\" />\n";
 							if (projects[i].endsWith("branding")) {
-								out += "\t\t\t\t<include name=\"side.product\" />\n";
+								out += "\t\t\t\t<include name=\"*.product\" />\n";
 							}
 							out += "\t\t\t</fileset>\n";
 						}
