@@ -143,37 +143,37 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 
 	private IFile createFileForModel(String extension) throws CoreException {
 		IFolder folder = newProject.getFolder(DEFAULT_MODELS_DIR);
-		if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID")))
+		if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.clazz.presentation.ClazzEditorID")))
 			folder = folder.getFolder("data");
-		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID")))
+		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.form.presentation.formEditorID")))
 			folder = folder.getFolder("form");
-		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID")))
+		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.portal.presentation.PortalEditorID")))
 			folder = folder.getFolder("portal");
-		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.requirements.presentation.RequirementsEditorID")))
+		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.requirements.presentation.RequirementsEditorID")))
 			folder = folder.getFolder("requirement");
-		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID")))
+		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.view.presentation.ViewEditorID")))
 			folder = folder.getFolder("view");
-		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.workflow.presentation.WorkflowEditorID")))
+		else if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.workflow.presentation.WorkflowEditorID")))
 			folder = folder.getFolder("workflow");
 		return folder.getFile(optionsPage.getModelNameValue() + extension);
 	}
 
 	private void createInitialFormModel() throws CoreException, IOException {
-		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.form.presentation.formEditorID")); //$NON-NLS-1$
 		ClassFormCollection formCollection = FormFactory.eINSTANCE.createClassFormCollection();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)formCollection);
 		createdModels.add(file);
 	}
 
 	private void createInitialViewModel() throws CoreException, IOException {
-		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.view.presentation.ViewEditorID")); //$NON-NLS-1$
 		ViewCollection viewCollection = ViewFactory.eINSTANCE.createViewCollection();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)viewCollection);
 		createdModels.add(file);
 	}
 
 	private void createInitialWorkflowModel() throws CoreException, IOException {
-		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.workflow.presentation.WorkflowEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.workflow.presentation.WorkflowEditorID")); //$NON-NLS-1$
 		com.bluexml.side.workflow.Process process = WorkflowFactory.eINSTANCE.createProcess();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)process);
 		createdModels.add(file);
@@ -181,7 +181,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	}
 
 	private void createInitialRequirementModel() throws CoreException, IOException {
-		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.requirements.presentation.RequirementsEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.requirements.presentation.RequirementsEditorID")); //$NON-NLS-1$
 		RequirementsDefinition definition = RequirementsFactory.eINSTANCE.createRequirementsDefinition();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)definition);
 		createdModels.add(file);
@@ -189,7 +189,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	}
 
 	private void createInitialPortalModel() throws CoreException, IOException {
-		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.portal.presentation.PortalEditorID")); //$NON-NLS-1$
 		Portal portal = PortalFactory.eINSTANCE.createPortal();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)portal);
 		createdModels.add(file);
@@ -198,7 +198,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	}
 
 	private void createInitialDataModel() throws IOException, CoreException {
-		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.clazz.presentation.ClazzEditorID")); //$NON-NLS-1$
 		createdModels.add(file);
 		com.bluexml.side.clazz.Model model =  ClazzFactory.eINSTANCE.createModel();
 		model.setName(optionsPage.getModelNameValue());
@@ -256,17 +256,17 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 			model.setName(f.getName());
 			
 			String path = "/" + newProject.getName() + "/" + DEFAULT_MODELS_DIR + "/";
-			if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID")))
+			if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.clazz.presentation.ClazzEditorID")))
 				path = path.concat("data");
-			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID")))
+			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.form.presentation.formEditorID")))
 				path = path.concat("form");
-			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID")))
+			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.portal.presentation.PortalEditorID")))
 				path = path.concat("portal");
-			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.requirements.presentation.RequirementsEditorID")))
+			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.requirements.presentation.RequirementsEditorID")))
 				path = path.concat("requirement");
-			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID")))
+			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.view.presentation.ViewEditorID")))
 				path = path.concat("view");
-			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.workflow.presentation.WorkflowEditorID")))
+			else if (".".concat(f.getFileExtension()).equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.workflow.presentation.WorkflowEditorID")))
 				path = path.concat("workflow");
 			path = path.concat("/"+ f.getName());
 			
