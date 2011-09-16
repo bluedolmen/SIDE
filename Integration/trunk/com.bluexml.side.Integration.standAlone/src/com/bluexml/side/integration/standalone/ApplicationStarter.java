@@ -47,12 +47,13 @@ public class ApplicationStarter implements IApplication {
 		
 		for (File applicationModelFile : applicationModelFiles) {
 			
-			Application applicationModel = GenerateModelHelper.findApplication(applicationModelFile, true);
+			Application applicationModel = GenerateModelHelper.getApplication(applicationModelFile, true);
 			if (applicationModel == null) {
 				LOGGER.warning(String.format("Ignoring the application model file '%s' which is not a valid application model.", applicationModelFile.getPath()));
 			}
 
-			ApplicationModelGenerateGenerationJob job = new ApplicationModelGenerateGenerationJob(applicationModel, configurationName);
+			ApplicationModelGenerateGenerationJob job = new ApplicationModelGenerateGenerationJob(applicationModel);
+			job.setConfigurationName(configurationName);
 			job.generate();
 		}		
 		

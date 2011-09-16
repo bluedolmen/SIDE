@@ -42,7 +42,7 @@ public final class GenerateModelHelper {
 	 * @param updateApplication
 	 * @return
 	 */
-	public static Application findApplication(File applicationFile, boolean updateApplication) {
+	public static Application getApplication(File applicationFile, boolean updateApplication) {
 		if (applicationFile == null) {
 			throw new IllegalArgumentException("The provided application file cannot be null");
 		}
@@ -50,7 +50,7 @@ public final class GenerateModelHelper {
 		IFile applicationModelIFile = IFileHelper.getIFile(applicationFile);
 		
 		if (applicationModelIFile != null) {
-			return findApplication(applicationModelIFile, updateApplication);
+			return getApplication(applicationModelIFile, updateApplication);
 		} else {
 			LOGGER.fine(String.format("Cannot get the application-model file '%s' since it does not locate in the current workspace.", applicationFile.getAbsolutePath()));
 		}
@@ -66,13 +66,13 @@ public final class GenerateModelHelper {
 	 * @param updateApplication
 	 * @return
 	 */
-	public static Application findApplication(IFile applicationIFile, boolean updateApplication) {
+	public static Application getApplication(IFile applicationIFile, boolean updateApplication) {
 		
 		Application application = ModelInitializationUtils.getCheckedEObject(applicationIFile, Application.class);
 		
 		// Try to update application file if possible
 		if (updateApplication) {
-			LOGGER.fine("Trying to update application file");
+			LOGGER.finest("Trying to update application file");
 			try {
 				ApplicationUtil.updateApplicationFromExtensionPoint(application, applicationIFile);
 			} catch (Exception e) {
@@ -135,7 +135,7 @@ public final class GenerateModelHelper {
 		IFile applicationModelIFile = findApplicationIFile(project);
 		
 		if (applicationModelIFile == null) return null;
-		else return findApplication(applicationModelIFile, updateApplication);		
+		else return getApplication(applicationModelIFile, updateApplication);		
 	}
 
 	

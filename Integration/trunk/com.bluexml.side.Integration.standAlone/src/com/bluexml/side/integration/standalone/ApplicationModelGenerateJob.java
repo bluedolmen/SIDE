@@ -33,10 +33,6 @@ public abstract class ApplicationModelGenerateJob extends ApplicationModelJob {
 	public ApplicationModelGenerateJob(Application applicationModel) {
 		super(applicationModel);
 	}
-
-	public ApplicationModelGenerateJob(Application applicationModel, String configurationName) {
-		super(applicationModel, configurationName);
-	}
 	
 	protected final Generate getHeadlessGenerate() throws Exception {
 		

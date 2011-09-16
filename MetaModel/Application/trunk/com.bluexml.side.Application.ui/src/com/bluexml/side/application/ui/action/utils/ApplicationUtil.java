@@ -97,7 +97,8 @@ public class ApplicationUtil {
 	/**
 	 * Return the configuration corresponding to the given key in the current
 	 * configuration. Return null if not found.
-	 * 
+	 *
+	 * @see ApplicationDialog#getCurrentConfiguration()
 	 * @param key
 	 * @return
 	 */
@@ -132,6 +133,46 @@ public class ApplicationUtil {
 		return result;
 	}
 
+	/**
+	 * Return the list of configurations of a given {@link Application}
+	 * 
+	 * @param application
+	 * @return a {@link List} configuration
+	 */
+	public static List<Configuration> getConfigurations(Application application) {
+		List<Configuration> configurations = new ArrayList<Configuration>();
+		
+		for (ModelElement modelElement : application.getElements()) {
+			if (modelElement instanceof Configuration) {
+				Configuration configuration = (Configuration) modelElement;
+				configurations.add(configuration);
+			}
+		}
+		
+		return configurations;
+	}
+	
+	/**
+	 * Returns the first available {@link Configuration} in the
+	 * {@link Application}, null if none exists yet
+	 * 
+	 * @param application an {@link Application} model
+	 * @return the first available {@link Configuration}
+	 */
+	public static Configuration getFirstConfiguration(Application application) {
+		Configuration configuration = null;
+		
+		for (ModelElement modelElement : application.getElements()) {
+			if (modelElement instanceof Configuration) {
+				configuration = (Configuration) modelElement;
+				break;
+			}
+		}
+		
+		return configuration;
+	}
+	
+	
 	/**
 	 * Delete the given generator from the given configuration
 	 * 

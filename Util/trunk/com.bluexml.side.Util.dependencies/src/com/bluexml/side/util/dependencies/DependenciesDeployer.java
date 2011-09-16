@@ -3,6 +3,7 @@ package com.bluexml.side.util.dependencies;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,11 @@ public class DependenciesDeployer {
 					Class<?> c = ExtensionPointUtils.getGeneratorInstance(bundle, className);
 					System.out.println("DependenciesDeployer.deploy() get Stream from :" + path); //$NON-NLS-1$
 					InputStream stream = c.getResourceAsStream(path);
+					
+					Bundle eclipseBundle = Platform.getBundle(bundle);
+					URL resourceURL = eclipseBundle.getResource(path);
+					stream = resourceURL.openStream();
+
 
 					deployRepository(stream);
 

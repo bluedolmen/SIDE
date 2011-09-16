@@ -19,13 +19,9 @@ public class ApplicationModelGenerateGenerationJob extends ApplicationModelGener
 	
 	
 	public ApplicationModelGenerateGenerationJob(Application applicationModel) {
-		this(applicationModel, null);
+		super(applicationModel);
 	}
 	
-	public ApplicationModelGenerateGenerationJob(Application applicationModel, String configurationName) {
-		super(applicationModel, configurationName);
-	}
-
 	/**
 	 * Performs the generation job.
 	 * 
