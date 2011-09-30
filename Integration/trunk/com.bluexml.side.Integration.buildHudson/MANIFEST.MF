@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: com.bluexml.side.integration.buildHudson.Application
-Class-Path: lib/ant-launcher.jar lib/jdom.jar lib/svnant.jar lib/tools.jar lib/ant.jar lib/svnClientAdapter.jar lib/svnjavahl.jar
-
-
-
