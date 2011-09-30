@@ -14,7 +14,7 @@
 	<property file="build.${user.name}.properties" />
 	<property name="buildDirectory" value="${builder}/buildDirectory" />
 	<property name="pluginPath" value="${moreplugins}${path.separator}${sideSources}${path.separator}${deltapack}" />
-	
+
 
 	<target name="listProduct" depends="depends" description="ant script to build SIDE product using existing p2 repository">
 		<echo message="launcher path :${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
@@ -44,12 +44,34 @@
 		<echo message="add products metadata to p2 repository">
 		</echo>
 
-		<addProductMeta configos="macosx.carbon.x86" p2repo="${p2.metadata.repo}" productfile="${product_labs}" />
+		<!--<addProductMeta configos="macosx.carbon.x86" p2repo="${p2.metadata.repo}" productfile="${product_labs}" />-->
+
+		<p2.publish.product metadataRepository="file://${pdep2repo}" artifactRepository="file://${pdep2repo}" publishArtifacts="true" compress="true" flavor="tooling" executables="${deltapack}/features/org.eclipse.equinox.executable_3.5.0.v20110530-7P7NFUFFLWUl76mart" productFile="${product_labs}">
+			<config ws="gtk" os="linux" arch="x86" />
+		</p2.publish.product>
+
+		<p2.generator config="${eclipse.base}/macosx.carbon.x86/${collectingFolder}"
+			append="${p2.append}" flavor="${p2.flavor}"
+			compress="${p2.compress}" metadataRepository="${p2.metadata.repo}"
+			artifactRepository="${p2.artifact.repo}" metadataRepositoryName="${p2.metadata.repo.name}"
+			artifactRepositoryName="${p2.artifact.repo.name}"
+			launcherConfig="macosx_carbon_x86" p2OS="macosx" publishArtifacts="${p2.publish.artifacts}"
+			mode="incremental" exe="${eclipse.base}/macosx.carbon.x86/${collectingFolder}/${launcherName}"
+			productFile="${product_labs}" />
+		<!--
 		<addProductMeta configos="linux.gtk.x86" p2repo="${p2.metadata.repo}" productfile="${product_labs}" />
 		<addProductMeta configos="win32.win32.x86" p2repo="${p2.metadata.repo}" productfile="${product_labs}" />
 
 		<addProductMeta configos="macosx.carbon.x86" p2repo="${p2.metadata.repo}" productfile="${product_enterprise}" />
+		-->
+		<!--<executeEclipseAnt buildfile="buildEclipsePDE.xml" />-->
+	</target>
 
+	<!-- ================================= 
+          target: TEST              
+         ================================= -->
+	<target name="TEST" depends="" description="TEST">
+		<executeEclipseAnt buildfile="directorBuild.xml" targets="generateProductMeta" />
 	</target>
 
 	<!-- ================================= 
@@ -57,10 +79,12 @@
          ================================= -->
 	<target name="publishProducts" depends="" description="create full executable products">
 		<buildSIDEProduct destination="${distros}/SIDE-Labs-macosx" repo="${p2.metadata.repo}" productid="sideProduct" p2.os="macosx" p2.ws="carbon" p2.arch="x86" />
+		<!--
 		<buildSIDEProduct destination="${distros}/SIDE-Labs-win32" repo="${p2.metadata.repo}" productid="sideProduct" p2.os="win32" p2.ws="win32" p2.arch="x86" />
 		<buildSIDEProduct destination="${distros}/SIDE-Labs-linux" repo="${p2.metadata.repo}" productid="sideProduct" p2.os="linux" p2.ws="gtk" p2.arch="x86" />
 
 		<buildSIDEProduct destination="${distros}/SIDE-Alfresco-macosx" repo="${p2.metadata.repo}" productid="sideEnterprise" p2.os="macosx" p2.ws="carbon" p2.arch="x86" />
+		-->
 	</target>
 
 
@@ -77,7 +101,8 @@
 			<echo message="* configOS : @{configOS}" />
 			<echo message="* productFile : @{productFile}" />
 			<echo message="* p2Repo : @{p2Repo}" />
-			<echo message="${deltapack}/features/org.eclipse.equinox.executable_3.5.0.v20110530-7P7NFUFFLWUl76mart"></echo>
+			<echo message="${deltapack}/features/org.eclipse.equinox.executable_3.5.0.v20110530-7P7NFUFFLWUl76mart">
+			</echo>
 
 			<delete file="${logFile}-director.log" failonerror="false" />
 			<record name="${logFile}-director.log" loglevel="debug" action="start" />
@@ -87,6 +112,7 @@
 				<arg line="-metadataRepository @{p2Repo}" />
 				<arg line="-artifactRepository @{p2Repo}" />
 				<arg line="-productFile @{productFile}" />
+				<arg line="-publishArtifacts" />
 				<arg line="-append" />
 				<arg line="-executables ${deltapack}/features/org.eclipse.equinox.executable_3.5.0.v20110530-7P7NFUFFLWUl76mart" />
 				<arg line="-flavor tooling" />
@@ -145,12 +171,42 @@
 		</sequential>
 	</macrodef>
 
+
+	<!-- = = = = = = = = = = = = = = = = =
+	          macrodef: executeEclipsAnt          
+	         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="executeEclipseAnt">
+		<attribute name="baseLocation" default="${baseLocation}" />
+		<attribute name="equinoxLauncherPluginVersion" default="${equinoxLauncherPluginVersion}" />
+		<attribute name="logFile" default="${logFile}" />
+		<attribute name="buildFile" default="build.xml" />
+		<attribute name="build.jvm.options" default="${build.jvm.options}" />
+		<attribute name="targets" default="" />
+		<sequential>
+			<echo message="launcher path :@{baseLocation}/plugins/org.eclipse.equinox.launcher_@{equinoxLauncherPluginVersion}.jar">
+			</echo>
+			<delete file="@{logFile}" failonerror="false" />
+			<record name="@{logFile}" loglevel="debug" action="start" />
+			<java fork="true" failonerror="true" jar="@{baseLocation}/plugins/org.eclipse.equinox.launcher_@{equinoxLauncherPluginVersion}.jar">
+				<jvmarg line="@{build.jvm.options}" />
+				<arg value="-application" />
+				<arg value="org.eclipse.ant.core.antRunner" />
+				<arg value="-buildfile" />
+				<arg value="@{buildFile}" />
+
+				<arg value="@{targets}" />
+				<classpath>
+					<pathelement location="@{baseLocation}/plugins/org.eclipse.equinox.launcher_@{equinoxLauncherPluginVersion}.jar" />
+				</classpath>
+			</java>
+			<record name="@{logFile}" action="stop" />
+		</sequential>
+	</macrodef>
+
 	<!-- - - - - - - - - - - - - - - - - - 
           target: depends                      
          - - - - - - - - - - - - - - - - - -->
 	<target name="depends">
 	</target>
-	<target name="pde-build2" description="call this target to execute main task using Eclipse antRunner">
 
-	</target>
 </project>
