@@ -21,10 +21,18 @@ public class CategoryUpdater {
 	}
 
 	public boolean updateCategory() throws Exception {
+		return updateCategory(bu.getCategoryFile());
+	}
+	
+	public boolean updateCategory(String pluginId) throws Exception {
+		return updateCategory(bu.getCategoryFile(pluginId));
+	}
+
+	public boolean updateCategory(File catf) throws Exception {
 		logger.debug("CategoryUpdater.updateCategory() start");
 		boolean changes = false;
 		// load file
-		File catf = bu.getCategoryFile();
+		//File catf = bu.getCategoryFile();
 		Document catxml = BuilderUtils.buildJdomDocument(catf);
 		// search features references to update
 		XPath xpa = XPath.newInstance("/site/feature");

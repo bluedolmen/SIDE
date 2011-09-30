@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -42,9 +43,7 @@ public class BuilderUtils {
 	private String sourceSVNName;
 	private boolean useRepositoryCopy;
 
-	public BuilderUtils(Properties buildProperties, String workspace,
-			String build_number, String revisionNumber,
-			boolean useRepositoryCopy) {
+	public BuilderUtils(Properties buildProperties, String workspace, String build_number, String revisionNumber, boolean useRepositoryCopy) {
 		this.buildProperties = buildProperties;
 		this.workspace = workspace;
 		this.build_number = build_number;
@@ -71,8 +70,7 @@ public class BuilderUtils {
 	 *            nom du script
 	 * @throws Exception
 	 */
-	public static void launchShScript(String scriptFilePath, String baseDir,
-			String[] args) throws Exception {
+	public static void launchShScript(String scriptFilePath, String baseDir, String[] args) throws Exception {
 
 		Runtime r = Runtime.getRuntime();
 		Process p;
@@ -110,8 +108,7 @@ public class BuilderUtils {
 			} catch (InterruptedException e) {
 				System.err.println(e); // "Can'tHappen"
 			}
-			System.err
-					.println("Process done, exit status was " + p.exitValue());
+			System.err.println("Process done, exit status was " + p.exitValue());
 
 			if (p.exitValue() != 0) {
 				System.exit(1);
@@ -125,8 +122,7 @@ public class BuilderUtils {
 	/**
 	 * Créer le fichier build.xml pour chaque projet
 	 */
-	public static void createFile(String corps, String folderName,
-			String fileName) {
+	public static void createFile(String corps, String folderName, String fileName) {
 		File file = new File(folderName + File.separator + fileName);
 		PrintWriter writer = null;
 		try {
@@ -146,7 +142,6 @@ public class BuilderUtils {
 
 	/**
 	 * Méthode qui ouvre le fichier de proprerties
-	 * 
 	 */
 	public static Properties openProperties(String fichier) {
 		String[] filePart = fichier.split("\\.");
@@ -199,8 +194,7 @@ public class BuilderUtils {
 		if (!useRepositoryCopy) {
 			throw new Exception("RepositoryCopy is disable, do not use it !");
 		}
-		String pathproject = getBuildPath() + File.separator
-				+ ProjectVersionUpdater.repositoryCopy;
+		String pathproject = getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy;
 		return pathproject;
 	}
 
@@ -208,8 +202,7 @@ public class BuilderUtils {
 	 * Return the Build Path: /home/stager/buildAuto/Ankle
 	 */
 	public String getBuildPath() {
-		return getBuildProperties().getProperty(buildDir) + File.separator
-				+ getCodeName();
+		return getBuildProperties().getProperty(buildDir) + File.separator + getCodeName();
 	}
 
 	/**
@@ -265,8 +258,7 @@ public class BuilderUtils {
 		// logger.debug("BuilderUtils.findFile() baseDir:"+f+" fileName:"+s);
 		List<String> listefichierpom = new ArrayList<String>();
 		boolean stopfind = false;
-		if (f.getName().equals(s) && !(f.getPath().indexOf("src") > -1)
-				&& !(f.getPath().indexOf("config") > -1)) {
+		if (f.getName().equals(s) && !(f.getPath().indexOf("src") > -1) && !(f.getPath().indexOf("config") > -1)) {
 			listefichierpom.add(f.getPath());
 			stopfind = true;
 		}
@@ -291,9 +283,7 @@ public class BuilderUtils {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public void readSvnLog(List<String> listeProjetPomsAll,
-			List<String> listeProjetPomsModif, List<String> listeProjetModif)
-			throws FileNotFoundException, IOException {
+	public void readSvnLog(List<String> listeProjetPomsAll, List<String> listeProjetPomsModif, List<String> listeProjetModif) throws FileNotFoundException, IOException {
 		String ligne;
 		String modif;
 		// this file contains only svn command output
@@ -310,28 +300,21 @@ public class BuilderUtils {
 			if (!"".equals(ligne)) {
 
 				if (ligne.indexOf("At revision") != -1) {
-					String revisionNumber = ligne.substring(
-							"At revision".length(), ligne.length()).trim();
+					String revisionNumber = ligne.substring("At revision".length(), ligne.length()).trim();
 					logger.debug("Updated at rev :" + revisionNumber);
 				}
 
-				if ((ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U'
-						|| ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ')
-						&& (ligne.charAt(1) == ' ' || ligne.charAt(1) == 'U'
-								|| ligne.charAt(1) == 'A' || ligne.charAt(1) == 'D')) {
+				if ((ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ') && (ligne.charAt(1) == ' ' || ligne.charAt(1) == 'U' || ligne.charAt(1) == 'A' || ligne.charAt(1) == 'D')) {
 
-					if (ligne.indexOf("Integration") > -1
-							|| ligne.indexOf("FrameworksModules") > -1) {
+					if (ligne.indexOf("Integration") > -1 || ligne.indexOf("FrameworksModules") > -1) {
 						for (String id : listeProjetPomsAll) {
 							String valeurf = id;
-							String[] tab = valeurf.split("/" + sourceSVNName
-									+ "/");
+							String[] tab = valeurf.split("/" + sourceSVNName + "/");
 							String[] tab2 = tab[1].split("/pom.xml");
 							if (ligne.indexOf(tab2[0]) > -1) {
 								if (!listeProjetPomsModif.contains(id)) {
 									listeProjetPomsModif.add(id);
-									logger.debug("found an updated maven project : "
-											+ id);
+									logger.debug("found an updated maven project : " + id);
 								}
 							}
 						}
@@ -345,8 +328,7 @@ public class BuilderUtils {
 						String id = proj[i];
 						if (!listeProjetModif.contains(id)) {
 							listeProjetModif.add(id);
-							logger.debug("found an updated eclipse project (plugin or feature): "
-									+ id);
+							logger.debug("found an updated eclipse project (plugin or feature): " + id);
 						}
 					}
 				}
@@ -360,10 +342,8 @@ public class BuilderUtils {
 	public String getPathToLog() {
 		String path = "";
 
-		path = workspace.substring(0, workspace.length()
-				- ProjectVersionUpdater.workspaceFolderName.length());
-		path = path + "builds" + File.separator + build_number + File.separator
-				+ ProjectVersionUpdater.svnLog;
+		path = workspace.substring(0, workspace.length() - ProjectVersionUpdater.workspaceFolderName.length());
+		path = path + "builds" + File.separator + build_number + File.separator + ProjectVersionUpdater.svnLog;
 
 		return path;
 	}
@@ -382,8 +362,7 @@ public class BuilderUtils {
 			if (new File(to).exists()) {
 				FileHelper.deleteFile(new File(to));
 			}
-			new File(getBuildPath() + File.separator
-					+ ProjectVersionUpdater.repositoryCopy).mkdir();
+			new File(getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy).mkdir();
 			logger.debug("From " + from + " to " + to);
 			FileHelper.copyFiles(new File(from), new File(to), true);
 		} catch (IOException e) {
@@ -393,8 +372,7 @@ public class BuilderUtils {
 	}
 
 	public String[] getNumVersionPattern() {
-		String[] pattern = getBuildProperties().getProperty(number_pattern)
-				.split("\\.");
+		String[] pattern = getBuildProperties().getProperty(number_pattern).split("\\.");
 		return pattern;
 	}
 
@@ -407,8 +385,7 @@ public class BuilderUtils {
 	public String getPathToLocalCopy(String projectName) throws Exception {
 		String path = "";
 		if (useRepositoryCopy) {
-			path = getBuildPath() + File.separator
-					+ ProjectVersionUpdater.repositoryCopy;
+			path = getBuildPath() + File.separator + ProjectVersionUpdater.repositoryCopy;
 		} else {
 			path = workspace;
 		}
@@ -445,11 +422,10 @@ public class BuilderUtils {
 		if ((property != null) && (property.length() > 0)) {
 			String[] projects = property.split(",");
 			for (int i = 0; i < projects.length; i++) {
-				if (projects[i].split("&")[1].equals(projectName)) {
+				String string = projects[i].split("&")[1];
+				if (string.equals(projectName)) {
 					path = projects[i].split("&")[0];
-					return ProjectVersionUpdater.SIDE_Core + File.separator
-							+ path + File.separator + "trunk" + File.separator
-							+ projectName;
+					return ProjectVersionUpdater.SIDE_Core + File.separator + path + File.separator + "trunk" + File.separator + projectName;
 				}
 			}
 		}
@@ -469,9 +445,7 @@ public class BuilderUtils {
 			for (int i = 0; i < projects.length; i++) {
 				if (projects[i].split("&")[1].equals(projectName)) {
 					path = projects[i].split("&")[0];
-					return ProjectVersionUpdater.SIDE_Enterprise
-							+ File.separator + path + File.separator + "trunk"
-							+ File.separator + projectName;
+					return ProjectVersionUpdater.SIDE_Enterprise + File.separator + path + File.separator + "trunk" + File.separator + projectName;
 				}
 			}
 		}
@@ -488,8 +462,7 @@ public class BuilderUtils {
 	 */
 	public boolean getForceNumberVersion() {
 		boolean booleanValue = false;
-		String value = getBuildProperties().getProperty(forceNumberVersion)
-				.trim();
+		String value = getBuildProperties().getProperty(forceNumberVersion).trim();
 		if (value != null && !value.equals("")) {
 			booleanValue = Boolean.parseBoolean(value);
 		}
@@ -521,14 +494,12 @@ public class BuilderUtils {
 				else {
 					if (pattern[i].equals("u")) {
 						change = true;
-						number[i] = String
-								.valueOf(Integer.valueOf(number[i]) + 1);
+						number[i] = String.valueOf(Integer.valueOf(number[i]) + 1);
 					}
 				}
 			}
 		}
-		return number[0] + "." + number[1] + "." + number[2] + ".v"
-				+ revisionNumber + "-" + getDate();
+		return number[0] + "." + number[1] + "." + number[2] + ".v" + revisionNumber + "-" + getDate();
 	}
 
 	/**
@@ -547,8 +518,7 @@ public class BuilderUtils {
 	public void copyToRepository() throws Exception {
 		String to = workspace;
 		String from = getRepositoryCopyPath();
-		logger.info("BuilderUtils.copyToRepository() start " + from + " to "
-				+ to);
+		logger.info("BuilderUtils.copyToRepository() start " + from + " to " + to);
 		FileHelper.copyFiles(new File(from), new File(to), true);
 	}
 
@@ -559,8 +529,7 @@ public class BuilderUtils {
 		return doc;
 	}
 
-	public static void saveXMLFile(File xml, Document dom)
-			throws FileNotFoundException, IOException {
+	public static void saveXMLFile(File xml, Document dom) throws FileNotFoundException, IOException {
 		org.jdom.output.XMLOutputter out = new XMLOutputter();
 		Format format = Format.getPrettyFormat();
 		out.setFormat(format);
@@ -570,29 +539,42 @@ public class BuilderUtils {
 	}
 
 	public File getProductFile() throws Exception {
-		String brandingPath = "";
-		String fileName = null;
 		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
-			brandingPath = getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding.enterprise");
-			fileName = "sideEnterprise.product";
+			return getProductFile("com.bluexml.side.Integration.eclipse.branding.enterprise");
 		} else {
-			brandingPath = getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding");
-			fileName = "side.product";
+			return getProductFile("com.bluexml.side.Integration.eclipse.branding");
 		}
+	}
 
-		return new File(brandingPath + File.separator + fileName);
+	public File getProductFile(String pluginId) throws Exception {
+		String brandingPath = getPathToLocalCopy(pluginId);
+		File pluginRoot = new File(brandingPath);
+		File[] prodcuts = pluginRoot.listFiles(new FilenameFilter() {
+
+			public boolean accept(File dir, String name) {
+				return name.endsWith("product");
+			}
+		});
+		if (prodcuts.length > 0) {
+			return prodcuts[0];
+		} else {
+			throw new Exception("no .product found at :" + pluginRoot.getAbsolutePath());
+		}
 
 	}
 
-	public File getCategoryFile() throws Exception {
-		String brandingPath = "";
-		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
-			brandingPath = getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding.enterprise");
-		} else {
-			brandingPath = getPathToLocalCopy("com.bluexml.side.Integration.eclipse.branding");
-		}
+	public File getCategoryFile(String pluginId) throws Exception {
+		String brandingPath = getPathToLocalCopy(pluginId);
 		File product = new File(brandingPath + "/category.xml");
 		return product;
+	}
+
+	public File getCategoryFile() throws Exception {
+		if (sourceSVNName.equals(ProjectVersionUpdater.SIDE_Enterprise)) {
+			return getCategoryFile("com.bluexml.side.Integration.eclipse.branding.enterprise");
+		} else {
+			return getCategoryFile("com.bluexml.side.Integration.eclipse.branding");
+		}
 	}
 
 }

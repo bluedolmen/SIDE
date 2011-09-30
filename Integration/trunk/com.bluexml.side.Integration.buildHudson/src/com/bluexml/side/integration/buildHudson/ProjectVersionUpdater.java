@@ -1,6 +1,7 @@
 package com.bluexml.side.integration.buildHudson;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -146,6 +147,9 @@ public class ProjectVersionUpdater {
 		List<String> featuresList = new ArrayList<String>();
 		List<String> features2UpdateList = new ArrayList<String>();
 
+		List<String> productsList = new ArrayList<String>();
+		List<String> products2UpdateList = new ArrayList<String>();
+
 		List<String> projects = new ArrayList<String>();
 		List<String> coreProjects = bu.getProjects("project");
 		projects.addAll(coreProjects);
@@ -220,15 +224,36 @@ public class ProjectVersionUpdater {
 				pluginsList.add(projects.get(i));
 			}
 		}
+
+		// list modified products
+		for (String element : projectList) {
+			if (projectRealList.contains(element)) {
+				// on met tous les plugins modifiés dans un tableau
+				if (element.indexOf("branding") != -1) {
+					products2UpdateList.add(element);
+				}
+			}
+		}
+
+		// list all products
+		for (int i = 0; i < projects.size(); i++) {
+			if (projects.get(i).indexOf("branding") != -1) {
+				productsList.add(projects.get(i));
+			}
+		}
+
 		// lists initializing done.
 
 		System.out.println(" Found :");
-		System.out.println(" plugins :" + pluginsList.size());
+		System.out.println(" Products :" + productsList.size());
 		System.out.println(" Features :" + featuresList.size());
+		System.out.println(" Plugins :" + pluginsList.size());
 		System.out.println(" poms :" + projetPomsList.size());
-		System.out.println(" project updated (svn) :");
-		System.out.println(" plugins :" + plugins2UpdateList.size());
+		System.out.println("");
+		System.out.println(" To update :");
+		System.out.println(" Products :" + products2UpdateList.size());
 		System.out.println(" Features :" + features2UpdateList);
+		System.out.println(" Plugins :" + plugins2UpdateList.size());
 		System.out.println(" poms :" + projectPoms2Update.size());
 
 		if (featuresList.size() == 0 || pluginsList.size() == 0 || projetPomsList.size() == 0) {
@@ -255,14 +280,13 @@ public class ProjectVersionUpdater {
 		if (mpu.getPomsNewsVersion().size() > 0) {
 			// maven2 project updated, so must update plugin that contains
 			// dependencies
-			String dependenciesPluginId = "";
-			if (isEnterpriseBuild()) {
-				dependenciesPluginId = "com.bluexml.side.Util.dependencies.repository.enterprise";
-			} else {
-				dependenciesPluginId = "com.bluexml.side.Util.dependencies.repository";
-			}
-			if (!plugins2UpdateList.contains(dependenciesPluginId)) {
-				plugins2UpdateList.add(dependenciesPluginId);
+
+			// since we build all artifacts without products distinction we need to manage all dependencies repositories
+			List<String> depRepos = getRepositoriesExtensions();
+			for (String id : depRepos) {
+				if (!plugins2UpdateList.contains(id)) {
+					plugins2UpdateList.add(id);
+				}
 			}
 		}
 
@@ -272,14 +296,12 @@ public class ProjectVersionUpdater {
 			 * in update : t0 side.product updated and commited t1 scan svnlog
 			 * branding is changed, marked for update ...
 			 */
-			String brandingPluginId = "";
-			if (isEnterpriseBuild()) {
-				brandingPluginId = "com.bluexml.side.Integration.eclipse.branding.enterprise";
-			} else {
-				brandingPluginId = "com.bluexml.side.Integration.eclipse.branding";
-			}
-			if (!plugins2UpdateList.contains(brandingPluginId)) {
-				plugins2UpdateList.add(brandingPluginId);
+
+			// get all products and add the container to update list
+			for (String brandingPluginId : productsList) {
+				if (!plugins2UpdateList.contains(brandingPluginId)) {
+					plugins2UpdateList.add(brandingPluginId);
+				}
 			}
 		}
 
@@ -313,20 +335,38 @@ public class ProjectVersionUpdater {
 
 		// launch product updater
 		ProductUpdater produ = new ProductUpdater(fu, bu, forceProductUpdate);
-		boolean sideProductChanges = produ.updateProduct();
-		if (sideProductChanges) {
-			System.out.println("- side.product updated " + produ.getNewVersion());
-		} else {
-			System.out.println("- side.product no changes " + produ.getNewVersion());
+		//		boolean sideProductChanges = produ.updateProduct();
+
+		// update all product files
+
+		List<String> updatedproducts = new ArrayList<String>();
+		for (String prodId : productsList) {
+			if (produ.updateProduct(prodId)) {
+				updatedproducts.add(prodId);
+			}
+		}
+		System.out.println("- side.product updated " + updatedproducts.size());
+		for (String updatedProduct : updatedproducts) {
+			System.out.println(" *" + updatedProduct);
 		}
 
 		CategoryUpdater catUp = new CategoryUpdater(fu, bu);
-		boolean categoryChanges = catUp.updateCategory();
-		if (categoryChanges) {
-			System.out.println("- category.xml updated");
-		} else {
-			System.out.println("- category.xml no changes");
+
+		List<String> updatedCategories = new ArrayList<String>();
+		for (String prodId : productsList) {
+			try {
+				if (catUp.updateCategory(prodId)) {
+					updatedCategories.add(prodId);
+				}
+			} catch (FileNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
 		}
+		System.out.println("- category.xml updated " + updatedCategories.size());
+		for (String updatedcat : updatedCategories) {
+			System.out.println(" *" + updatedcat);
+		}
+
 		// project version update done.
 
 		if (useRepositoryCopy && !skipCopyToRepo) {
@@ -344,10 +384,17 @@ public class ProjectVersionUpdater {
 		System.out.println("\t- Updated Maven2 projects :" + mpu.getPomsNewsVersion().size() + " / " + projetPomsList.size());
 		System.out.println("\t- Updated Plugins :" + pu.getPluginsNewVersion().size() + " / " + pluginsList.size());
 		System.out.println("\t- Updated Features :" + fu.getFeaturesNewsVersion().size() + " / " + featuresList.size());
-		System.out.println("\t- side.product updated ?" + sideProductChanges);
-		System.out.println("\t- category.xml updated ?" + categoryChanges);
+		System.out.println("\t- side.product updated ?" + updatedproducts);
+		System.out.println("\t- category.xml updated ?" + updatedCategories);
 		System.out.println("====================================");
 
+	}
+
+	private List<String> getRepositoriesExtensions() {
+		List<String> depRepos = new ArrayList<String>();
+		depRepos.add("com.bluexml.side.Util.dependencies.repository.enterprise");
+		depRepos.add("com.bluexml.side.Util.dependencies.repository");
+		return depRepos;
 	}
 
 	public String getUsedWorkspace() {

@@ -30,6 +30,16 @@ public class ProductUpdater {
 
 	public boolean updateProduct() throws Exception {
 		File product = bu.getProductFile();
+		return updateProduct(product);
+	}
+
+	public boolean updateProduct(String pluginId) throws Exception {
+		File product = bu.getProductFile(pluginId);
+		return updateProduct(product);
+	}
+
+	public boolean updateProduct(File product) throws Exception {
+		logger.debug("product updater :" + product);
 		boolean changes = false;
 		Document productDoc = BuilderUtils.buildJdomDocument(product);
 		// search for features reference to update
@@ -48,6 +58,7 @@ public class ProductUpdater {
 				if (!version.equals(versionFromFile)) {
 					// update feature reference
 					el.setAttribute("version", versionFromFile);
+					logger.debug("update feature reference : " + featureId + " " + version + " ->" + versionFromFile);
 					// mark as updated
 					changes = true;
 				}
@@ -60,7 +71,8 @@ public class ProductUpdater {
 			newVersion = MavenProjectUpdater.updatepom(version.getValue().split("\\."), pattern);
 
 			version.setValue(newVersion);
-			logger.debug("sideProduct version :" + oldVersion + " -> " + newVersion);
+
+			logger.debug("product version :" + oldVersion + " -> " + newVersion);
 			// save changes
 			BuilderUtils.saveXMLFile(product, productDoc);
 		} else {
