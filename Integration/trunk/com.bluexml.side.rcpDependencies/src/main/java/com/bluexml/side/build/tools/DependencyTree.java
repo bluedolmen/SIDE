@@ -20,17 +20,19 @@ import edu.uci.ics.jung.graph.Graph;
 public class DependencyTree {
 
 	File product;
+	File propertiesFile;
 	List<File> repo;
 
-	public DependencyTree(File productFile, List<File> repo) {
-		product = productFile;
+	public DependencyTree(File productFile, List<File> repo, File propertiesFile) {
+		this.product = productFile;
 		this.repo = repo;
+		this.propertiesFile = propertiesFile;
 	}
 
 	public static void main(String[] args) {
 
 		if (args.length < 2) {
-			System.out.println("Usage : <.product> <projects repository>");
+			System.out.println("Usage : <.product> <projects repository> [<propetiesFile>]");
 			System.out.println("");
 			System.exit(-1);
 		} else {
@@ -58,12 +60,20 @@ public class DependencyTree {
 
 				List<File> repos = new ArrayList<File>();
 				for (int c = 1; c < args.length; c++) {
-
 					File repo = new File(args[c]);
-					repos.add(repo);
-				}
+					if (repo.isDirectory()) {
+						repos.add(repo);
+					} else {
+						break;
+					}
 
-				DependencyTree dt = new DependencyTree(productFile, repos);
+				}
+				String lastParam = args[args.length - 1];
+				File lastPAramFile = new File(lastParam);
+				if (lastPAramFile.isDirectory()) {
+					lastPAramFile = null;
+				}
+				DependencyTree dt = new DependencyTree(productFile, repos, lastPAramFile);
 				try {
 					dt.doIt();
 
@@ -79,11 +89,7 @@ public class DependencyTree {
 	public void doIt() throws Exception {
 		// create component registers
 
-		// create ProductReader
-		ProductReader pr = new ProductReader(product, new ComponantsRegisters(repo));
-		// read product and all associated resources
-		Product p = pr.read();
-		ComponantsRegisters compReg = pr.getUtil();
+		ComponantsRegisters compReg = getComponantsRegisters();
 		// print out
 		compReg.print();
 
@@ -101,6 +107,15 @@ public class DependencyTree {
 
 		DisplayGraph.display(g);
 
+	}
+
+	public ComponantsRegisters getComponantsRegisters() throws Exception {
+		// create ProductReader
+		ProductReader pr = new ProductReader(product, new ComponantsRegisters(repo,propertiesFile));
+		// read product and all associated resources
+		pr.read();
+		ComponantsRegisters compReg = pr.getUtil();
+		return compReg;
 	}
 
 }

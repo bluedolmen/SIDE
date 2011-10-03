@@ -61,9 +61,8 @@ public class Utils {
 		return set;
 	}
 
-	private static HashMap<String, String> initMap() throws Exception {
+	private static HashMap<String, String> initMap(File confFile) throws Exception {
 		HashMap<String, String> componants = new HashMap<String, String>();
-		File confFile = new File("/Users/davidabad/Workspace2.0/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/config/build.webadmin.build_RCP_Enterprise.properties");
 		Properties p = new Properties();
 		p.load(new FileInputStream(confFile));
 
@@ -73,29 +72,35 @@ public class Utils {
 		for (String string : cc) {
 			fillMap(componants, string);
 		}
-		String enterpriseProjects = p.getProperty("project.enterprise");
-		String[] ce = enterpriseProjects.replace("\n", "").split(",");
-
-		for (String string : ce) {
-			fillMap(componants, string);
+		String enterpriseProjects = p.getProperty("project.enterprise", "");
+		if (!enterpriseProjects.equals("")) {
+			String[] ce = enterpriseProjects.replace("\n", "").split(",");
+			for (String string : ce) {
+				fillMap(componants, string);
+			}
 		}
+
 		return componants;
 	}
 
-	public static File searchProjectForlerFromConf(String id, List<File> repos) throws Exception {
+	public static File searchProjectForlerFromConf(String id, List<File> repos, File props) throws Exception {
 		File project = null;
-		HashMap<String, String> componants = initMap();
-		String path = componants.get(id);
+		if (props != null && props.exists()) {
+			HashMap<String, String> componants = initMap(props);
+			String path = componants.get(id);
 
-		if (path == null) {
-			path = "FrameworksModules";
-		}
-		for (File file : repos) {
-			File project_ = new File(file, (path + "/trunk/" + id).replace("/", File.separator));
-			logger.debug("Project Path :" + project);
-			if (project_.exists()) {
-				project = project_;
-				break;
+			if (path == null) {
+				path = "FrameworksModules";
+			}
+			for (File file : repos) {
+				File project_ = new File(file, (path + "/trunk/" + id).replace("/", File.separator));
+				logger.debug("Project Path :" + project_);
+				if (project_.exists()) {
+					project = project_;
+					break;
+				} else {
+					logger.debug(project_ + " not found ...");
+				}
 			}
 		}
 

@@ -17,7 +17,7 @@ import com.bluexml.side.build.tools.componants.Plugin;
 public class ComponantsRegisters {
 	Logger logger = Logger.getLogger(this.getClass());
 	List<File> repositoryLocation;
-
+	private File propertiesFile;
 	Map<String, Feature> featuresRegister = new TreeMap<String, Feature>();
 
 	Map<String, Plugin> pluginsRegister = new TreeMap<String, Plugin>();
@@ -28,8 +28,37 @@ public class ComponantsRegisters {
 
 	Map<Componant, Set<Componant>> tree = new TreeMap<Componant, Set<Componant>>();
 
-	public ComponantsRegisters(List<File> repo) {
+	public Logger getLogger() {
+		return logger;
+	}
+
+	public List<File> getRepositoryLocation() {
+		return repositoryLocation;
+	}
+
+	public Map<String, Feature> getFeaturesRegister() {
+		return featuresRegister;
+	}
+
+	public Map<String, Plugin> getPluginsRegister() {
+		return pluginsRegister;
+	}
+
+	public Map<String, Option> getOptionRegister() {
+		return optionRegister;
+	}
+
+	public Map<String, Module> getModulesRegister() {
+		return modulesRegister;
+	}
+
+	public Map<Componant, Set<Componant>> getTree() {
+		return tree;
+	}
+
+	public ComponantsRegisters(List<File> repo, File propertiesFile) {
 		this.repositoryLocation = repo;
+		this.propertiesFile = propertiesFile;
 	}
 
 	/**
@@ -46,7 +75,7 @@ public class ComponantsRegisters {
 
 		// use buildConfiguration to search features and plugins
 
-		path = Utils.searchProjectForlerFromConf(id, repositoryLocation);
+		path = Utils.searchProjectForlerFromConf(id, repositoryLocation, propertiesFile);
 		// if not found try to search in file system
 		if (path == null) {
 			logger.warn("Bundle " + id + " not found try to locate from file system");
@@ -73,10 +102,6 @@ public class ComponantsRegisters {
 		System.out.println("Options :" + optionRegister);
 		System.out.println("Modules :" + modulesRegister);
 
-	}
-
-	public Map<Componant, Set<Componant>> getTree() {
-		return tree;
 	}
 
 	public Feature getFeature(String id) throws Exception {
