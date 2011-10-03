@@ -47,6 +47,11 @@
     	<type>pom</type>
     	<scope>compile</scope>
     </dependency>
+    <dependency>
+    	<groupId>com.bluexml.side</groupId>
+    	<artifactId>com.bluexml.side.rcpDependencies</artifactId>
+    	<version>0.0.3</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -57,8 +62,7 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2-beta-4</version>
+        <artifactId>maven-assembly-plugin</artifactId>        
         <configuration>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
