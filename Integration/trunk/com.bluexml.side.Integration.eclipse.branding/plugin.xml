@@ -79,4 +79,13 @@
             name="SIDE Modeling">
       </perspective>
    </extension>
+      <extension
+            point="com.bluexml.side.Util.dependencies.com_bluexml_side_framework_module_repository">
+         <repository
+               activator="com.bluexml.side.Integration.eclipse.branding.Activator"
+               pluginId="com.bluexml.side.Integration.eclipse.branding.labs"
+               repositoryName="com.bluexml.side.Integration.eclipse.branding.labs.repository"
+               repositoryPath="/com/bluexml/side/Integration/eclipse/branding/labs/repository/m2repositoryForSIDE.zip">
+         </repository>
+      </extension>
 </plugin>

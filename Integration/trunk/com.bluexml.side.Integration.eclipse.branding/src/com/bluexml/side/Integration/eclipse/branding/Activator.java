@@ -12,7 +12,7 @@ import com.bluexml.side.util.libs.Messages;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.bluexml.side.Integration.eclipse.branding"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.bluexml.side.Integration.eclipse.branding.labs"; //$NON-NLS-1$
 
 	public static final Messages Messages = new Messages(PLUGIN_ID, "com.bluexml.side.Integration.eclipse.branding.itl.messages"); //$NON-NLS-1$
 
