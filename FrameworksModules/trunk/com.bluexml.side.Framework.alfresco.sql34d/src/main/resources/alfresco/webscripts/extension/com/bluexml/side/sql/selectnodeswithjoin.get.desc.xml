@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+    <shortname>SQL Search Service / Select Nodes with join capability</shortname>
+    <description>This webscript is used to query the SQL replicate database retrieving a list of nodes that satisfies the given SQL constraint. This webscript supports the join with other types</description>
+    <url>/sql/selectnodeswithjoin?type={type}&amp;join={joins?}&amp;where={where?}</url>
+    <format default="xml">argument</format>
+    <authentication>user</authentication>
+    <transaction>none</transaction>
+</webscript>
