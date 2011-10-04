@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     10 sept. 2010 10:24:51                                                        
+
+     antLbiBuilder    
+     jar builder for antLib
+                   
+     davidabad                                                                
+     ====================================================================== -->
+<project name="antLbiBuilder" default="default">
+	<description>
+            jar builder for antLib
+    </description>
+
+	<!-- ================================= 
+          target: default              
+         ================================= -->
+	<target name="default" depends="depends" description="jar builder for antLib">
+		<jar jarfile="${basedir}/lib/sideAntTasks.jar" basedir="${basedir}/bin-ant">			
+		</jar>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="depends">
+	</target>
+
+</project>

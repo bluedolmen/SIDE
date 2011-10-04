@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Model" path="/abs/src/models/application/my.application"/>
+    <files xsi:type="chain:Folder" path="/com.bluexml.side.Util.antRunner/src/com/bluexml/side/util/antrunner/templates"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Util.antRunner/src/com/bluexml/side/util/antrunner/templates/default.log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.bluexml.com/application/1.0/"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Util.antRunner/src/com/bluexml/side/util/antrunner/templates/build.xml.mt"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="build.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>
