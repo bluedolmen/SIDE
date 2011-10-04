@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XForms Generator sideEnterprise
+Bundle-SymbolicName: com.bluexml.side.Form.generator.xforms.worker.extension.sideEnterprise;singleton:=true
+Bundle-Version: 1.0.34.v27290-20110826
+Bundle-Activator: com.bluexml.side.form.generator.xforms.worker.extension.sideenterprise.Activator
+Bundle-Vendor: BlueXml
+Require-Bundle: org.eclipse.core.runtime,
+ com.bluexml.side.Application,
+ com.bluexml.side.Form.generator.xforms.worker
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
