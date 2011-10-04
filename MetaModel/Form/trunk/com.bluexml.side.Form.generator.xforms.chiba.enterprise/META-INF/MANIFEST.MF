@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SIDE Chiba XForms Generator for Alfresco Enterprise
+Bundle-SymbolicName: com.bluexml.side.Form.generator.xforms.chiba.enterprise;singleton:=true
+Bundle-Version: 1.0.26.v27111-20110825
+Bundle-Vendor: BlueXML
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.generator,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ com.bluexml.side.Class,
+ com.bluexml.side.Form,
+ com.bluexml.side.Util.security,
+ com.bluexml.side.Util.dependencies,
+ com.bluexml.side.Util.componentMonitor,
+ com.bluexml.side.Workflow,
+ com.bluexml.side.Util.ecore,
+ org.eclipse.emf.ecore.xmi,
+ com.bluexml.side.Util.log,
+ com.bluexml.side.Form.generator.xforms.worker,
+ com.bluexml.side.Util.security.enterprise
+Bundle-ClassPath: .
+Export-Package: com.bluexml.side.forms.generator.alfresco.chiba.enterprise
+Import-Package: javax.activation,
+ org.apache.xml.serialize
