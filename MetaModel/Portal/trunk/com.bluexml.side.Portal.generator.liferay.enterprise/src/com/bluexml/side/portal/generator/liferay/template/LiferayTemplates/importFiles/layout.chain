@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Model" path="/com.bluexml.side.Portal.generator.liferay/models/DefaultName.portal"/>
+    <files xsi:type="chain:Folder" path="/com.bluexml.side.Portal.generator.liferay/gene"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Portal.generator.liferay/gene/log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/portal/1.0"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.liferay/src/com/bluexml/side/portal/generator/liferay/template/LiferayTemplates/importFiles/manifest.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.liferay/src/com/bluexml/side/portal/generator/liferay/template/LiferayTemplates/importFiles/groups/layout.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.liferay/src/com/bluexml/side/portal/generator/liferay/template/LiferayTemplates/importFiles/groups/portlets.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.liferay/src/com/bluexml/side/portal/generator/liferay/template/LiferayTemplates/importFiles/groups/portlets_preference.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.liferay/src/com/bluexml/side/portal/generator/liferay/template/LiferayTemplates/importFiles/groups/comments.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.liferay/src/com/bluexml/side/portal/generator/liferay/template/LiferayTemplates/importFiles/groups/ratings.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.liferay/src/com/bluexml/side/portal/generator/liferay/template/LiferayTemplates/importFiles/groups/tags.xml.mt"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="portlet.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.6" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="comments.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.8" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="ratings.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.9" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="tags.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.10" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="portlet Preference" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.7" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="manifest.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="layout.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>

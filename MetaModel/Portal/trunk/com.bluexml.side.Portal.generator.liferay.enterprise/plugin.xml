@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <metamodel
+            description="Check this to generate portal models on leading frameworks.&lt;br&gt; This Portal Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce class models and various generators to instantiate these models on leading frameworks."
+            id="http://www.kerblue.org/portal/1.0"
+            name="KSR200 Portal"
+            url="http://www.kerblue.org/portal/1.0">
+         <technology
+               id="liferay.portal"
+               name="Liferay Portal">
+            <technologyVersion
+                  id="liferay.portal_5.1.1"
+                  version="Liferay 5.1.1">
+               <generatorVersion
+                     class="com.bluexml.side.portal.generator.liferay.LiferayGenerator"
+                     hidden="visible"
+                     id="com.bluexml.side.Portal.generator.liferay.generator.enterprise"
+                     version="Liferay Protal Generator">
+                  <configurationParameter
+                        dataType="String"
+                        key="alfresco.url" defaultValue="http://localhost:8080/alfresco"
+                        label="Alfresco URL">
+                  </configurationParameter>
+                  <configurationParameter
+                        dataType="String"
+                        defaultValue="http://localhost:8080/xforms"
+                        documentation="Set the address to the webapp context, e.g. http://localhost:8080/xforms.&lt;br/&gt;This option is accessory as it is used for providing service URLs. If not given, default values will be used."
+                        key="com.bluexml.side.Form.generator.xforms.chiba.webappContext"
+                        label="XForm Webapp URL">
+                  </configurationParameter>
+                  <configurationParameter
+                        dataType="String"
+                        key="liferay.theme"
+                        label="Liferay Theme">
+                  </configurationParameter>
+                  <configurationParameter
+                        dataType="String"
+                        key="liferay.colorSchemeId"
+                        label="Liferay Color Scheme ID">
+                  </configurationParameter>
+                  <option
+                        defaultOption="true"
+                        documentation="this must be hidden"
+                        hidden="true"
+                        key="generator.main"
+                        label="main generation">
+                  </option>
+               </generatorVersion>
+            </technologyVersion>
+         </technology>
+      </metamodel>
+   </extension>
+
+</plugin>
