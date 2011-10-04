@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature id="com.bluexml.side.Deployer.alfresco.enterprise333.feature" label="SIDE Alfresco 3.3.3 Enterprise Deployer" version="1.0.3.v27290-20110826" provider-name="BLUEXML">
+  <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <plugin id="com.bluexml.side.Deployer.alfresco.enterprise333" download-size="0" install-size="0" version="1.0.3.v27290-20110826" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy.enterprise333" download-size="0" install-size="0" version="1.0.3.v27290-20110826" unpack="false" />
+</feature>
+
