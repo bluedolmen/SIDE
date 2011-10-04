@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Model" path="/TestUsingCMContent/src/models/data/test.dt"/>
+    <files xsi:type="chain:Folder" path="/fromcm.model"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/model/model.log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/class/1.0"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/model/eclipseClassPath.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/model/eclipseproject.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/model/modelJavaObjectModel.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/model/modelJavaObjectModelEnum.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/model/modelQNames.java.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/model/pom.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/model/readmeModel.mt"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="eclipseClassPath" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="eclipseproject" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="modelJavaObjectModel" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.6" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="modelJavaObjectModelEnum" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.7" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="modelQNames.java" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.8" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="pom.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.9" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="readmeModel" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.10" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>

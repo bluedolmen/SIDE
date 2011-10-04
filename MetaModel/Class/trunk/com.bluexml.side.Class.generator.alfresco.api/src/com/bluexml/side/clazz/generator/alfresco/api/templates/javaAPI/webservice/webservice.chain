@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Model" path="/TestUsingCMContent/src/models/data/test.dt"/>
+    <files xsi:type="chain:Folder" path="/fromcm.webServices"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/webservice.log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/class/1.0"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/AbstractAspectFactory.java.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/AbstractClassFactory.java.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/JunitTestCase.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/JunitTestCaseAspects.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/JunitTestSuite.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/eclipseWebServicesClassPath.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/eclipseprojectWebServicesAPI.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/javaAPI.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/javaAPI_Aspect.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/javaAPI_Class.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/pom.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/webservice/readmeWebservice.mt"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="AbstractAspectFactory.java" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="AbstractClassFactory.java" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="JunitTestCase" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.6" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="JunitTestCaseAspects" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.7" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="JunitTestSuite" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.8" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="eclipseWebServicesClassPath" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.9" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="eclipseprojectWebServicesAPI" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.10" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="javaAPI" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.11" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="javaAPI_Aspect" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.12" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="javaAPI_Class" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.13" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="pom.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.14" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="readmeWebservice" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.15" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>

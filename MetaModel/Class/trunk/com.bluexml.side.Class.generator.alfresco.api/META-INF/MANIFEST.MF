@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Class Generator Alfresco API
+Bundle-SymbolicName: com.bluexml.side.Class.generator.alfresco.api;singleton:=true
+Bundle-Version: 1.0.14.v27759-20110916
+Bundle-Activator: com.bluexml.side.clazz.generator.alfresco.api.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.core.runtime,
+ com.bluexml.side.Util.generator.alfresco;bundle-version="1.0.43",
+ com.bluexml.side.Util.generator;bundle-version="1.0.65",
+ com.bluexml.side.Util.generator.acceleo;bundle-version="1.0.49",
+ org.eclipse.core.resources;bundle-version="3.5.1",
+ com.bluexml.side.Util.componentMonitor;bundle-version="1.0.32",
+ com.bluexml.side.Util.libs;bundle-version="1.0.73",
+ com.bluexml.side.Util.log;bundle-version="1.0.34",
+ com.bluexml.side.Util.security;bundle-version="1.0.41",
+ com.bluexml.side.Util.dependencies;bundle-version="1.0.120",
+ com.bluexml.side.Class.generator.alfresco;bundle-version="1.0.177",
+ com.bluexml.side.Class;bundle-version="1.0.59",
+ com.bluexml.side.Class.service.alfresco;bundle-version="1.0.25"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: com.bluexml.side.clazz.generator.alfresco.api
+Bundle-ClassPath: .,
+ lib/joda-time-1.2.1.jar

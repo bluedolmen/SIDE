@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Model" path="/TestUsingCMContent/src/models/data/test.dt"/>
+    <files xsi:type="chain:Folder" path="/fromcm.embedded"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/embedded.log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/class/1.0"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/webscript/AbstractFactoryAdpater.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/webscript/FactoryAdapterRegistry.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/webscript/alfrescoModuleContext.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/webscript/webScriptAPI_Aspect.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/webscript/webScriptAPI_Class.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/AbstractAspectFactory.java.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/AbstractClassFactory.java.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/FactoryRegistry.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/eclipseEmbeddedClassPath.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/eclipseprojectEmbeddedAPI.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/javaAPI.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/javaAPI_Aspect.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/javaAPI_Class.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/module.properties.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/pom.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/readme.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/webscript/example/model-frais-crud.get.desc.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/webscript/example/model-frais-crud.get.js.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/webscript/example/model-frais-crud.get.json.ftl.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/webscript/example/Aspect-model-frais-crud.get.desc.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/javaAPI/embedded/webscript/example/Aspect-model-frais-crud.get.js.mt"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="AbstractFactoryAdpater" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="FactoryAdapterRegistry" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="alfrescoModuleContext" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.6" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="webScriptAPI_Aspect" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.7" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="webScriptAPI_Class" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.8" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="AbstractAspectFactory.java" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.9" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="AbstractClassFactory.java" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.10" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="FactoryRegistry" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.11" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="eclipseEmbeddedClassPath" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.12" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="eclipseprojectEmbeddedAPI" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.13" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="javaAPI" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.14" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="javaAPI_Aspect" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.15" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="javaAPI_Class" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.16" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="module.properties" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.17" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="pom.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.18" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="readme" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.19" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="model-frais-crud.get.desc.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.20" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="model-frais-crud.get.js" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.21" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="model-frais-crud.get.json.ftl" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.22" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Aspect-model-frais-crud.get.desc.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.23" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Aspect-model-frais-crud.get.js" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.24" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>

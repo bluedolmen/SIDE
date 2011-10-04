@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Model" path="/abs/src/models/data/absenceManagement.dt"/>
+    <files xsi:type="chain:Folder" path="/abs/build/generated"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/default.log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/class/1.0"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/dataModel/template-json-editable-grid-1-html.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/dataModel/template-json-editable-grid-1-js.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/dataModel/template-json-editable-grid-2-html.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/dataModel/template-json-editable-grid-2-js.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/dataModel/template-json-grouping-html.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/dataModel/template-json-grouping-js.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/dataModel/template-json-paging-html.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/dataModel/template-json-paging-js.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/dataModel/template-json-simple-grid-html.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/dataModel/template-json-simple-grid-js.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco.api/src/com/bluexml/side/clazz/generator/alfresco/api/templates/extJS/template-tree-data-json.mt"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="template-json-editable-grid-1-html" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-json-editable-grid-1-js" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-json-editable-grid-2-html" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.6" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-json-editable-grid-2-js" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.7" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-json-grouping-html" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.8" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-json-grouping-js" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.9" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-json-paging-html" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.10" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-json-paging-js" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.11" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-json-simple-grid-html" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.12" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-json-simple-grid-js" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.13" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="template-tree-data-json" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.14" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>
