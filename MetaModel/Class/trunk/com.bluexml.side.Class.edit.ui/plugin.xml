@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension point="org.eclipse.ui.popupMenus">
+    <objectContribution id="com.bluexml.side.Class.edit.ui.contribution1" nameFilter="*.dt" objectClass="org.eclipse.core.resources.IFile">
+      <menu
+            icon="icons/side_16.gif"
+            id="com.bluexml.side.Class.edit.ui.editor.menu1"
+            label="SIDE"
+            path="additions">
+        <separator name="group1" />
+      </menu>
+      <action class="com.bluexml.side.clazz.edit.ui.actions.InitializeModelsStartWizard" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Class.edit.ui.editor.initializeOtherModel" label="Initialize SIDE Models" menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1" />
+      <!--
+      <action class="com.bluexml.side.clazz.edit.ui.actions.InitializeFormModel" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Class.edit.ui.editor.newAction" label="Initialize Form Model" menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1" />
+      <action class="com.bluexml.side.clazz.edit.ui.actions.InitializeViewModel" enablesFor="1" icon="icons/menu/initializeFormModel.png" id="com.bluexml.side.Class.edit.ui.action1" label="Initialize View Model" menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1" /> -->
+    </objectContribution>
+    <objectContribution
+          id="com.bluexml.side.Class.edit.ui.contribution2"
+          nameFilter="*.application"
+          objectClass="org.eclipse.core.resources.IFile">
+       <action
+             class="com.bluexml.side.clazz.edit.ui.actions.InitializeModels"
+             enablesFor="1"
+             icon="icons/menu/initializeFormModel.png"
+             id="com.bluexml.side.Class.edit.ui.action1"
+             label="Initialize SIDE Models"
+             menubarPath="com.bluexml.side/application">
+       </action>
+    </objectContribution>
+    <objectContribution
+          id="com.bluexml.side.Workflow.editor.contribution1"
+          nameFilter="*.workflow"
+          objectClass="org.eclipse.core.resources.IFile">
+       <menu
+             icon="icons/side_16.gif"
+             id="com.bluexml.side.Workflow.editor.menu1"
+             label="SIDE"
+             path="additions">
+          <separator
+                name="group1">
+          </separator>
+       </menu>
+       <action
+             class="com.bluexml.side.clazz.edit.ui.actions.InitializeFormWorkflowModel"
+             enablesFor="1"
+             icon="icons/menu/initializeFormModel.png"
+             id="com.bluexml.side.Workflow.editor.newAction"
+             label="Initialize form model"
+             menubarPath="com.bluexml.side.Workflow.editor.menu1/group1">
+       </action>
+    </objectContribution>
+  </extension>
+  <extension
+        point="org.eclipse.ant.core.antTasks">
+     <antTask
+           class="com.bluexml.side.clazz.edit.ui.actions.initializer.AntInitializerTask"
+           eclipseRuntime="true"
+           headless="true"
+           library="lib/sideAntTasks.jar"
+           name="side.initialize.all">
+     </antTask>
+  </extension>
+  <extension
+        point="org.eclipse.ant.core.antTasks">
+     <antTask
+           class="com.bluexml.side.clazz.edit.ui.actions.initializer.InitializeFormWorkflow"
+           eclipseRuntime="true"
+           headless="true"
+           library="lib/sideAntTasks.jar"
+           name="side.initialize.workflowForm">
+     </antTask>
+  </extension>
+  <extension
+        point="org.eclipse.ant.core.antTasks">
+     <antTask
+           class="com.bluexml.side.clazz.edit.ui.actions.initializer.InitializeFromApplication"
+           eclipseRuntime="true"
+           headless="true"
+           library="lib/sideAntTasks.jar"
+           name="side.initialize.application">
+     </antTask>
+  </extension>
+</plugin>
+
