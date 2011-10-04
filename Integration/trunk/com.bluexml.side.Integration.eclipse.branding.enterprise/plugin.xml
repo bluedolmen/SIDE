@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ui.ide.workbench"
+            name="SIDE Enterprise">
+         <property
+               name="windowImages"
+               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
+         </property>
+         <property
+               name="aboutText"
+               value="SIDE by http://www.bluexml.com">
+         </property>
+         <property
+               name="aboutImage"
+               value="icons/about.gif">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="FFFFFF">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="5,275,445,15">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="11,252,445,20">
+         </property>
+         <property
+               name="appName"
+               value="SIDE Enterprise">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+      </product>
+   </extension>
+   
+   <extension
+         id="wizard"
+         name="SIDE project"
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="com.bluexml.side.modeler.category.ID"
+            class="com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newSideProject.Wizard"
+            finalPerspective="com.bluexml.side.Integration.eclipse.branding.perspective"
+            hasPages="true"
+            icon="icons/newProject.png"
+            id="com.bluexml.side.Integration.eclipse.branding.wizard"
+            name="SIDE Project"
+            project="true">
+      </wizard>
+      <category
+            id="com.bluexml.side.modeler.category.ID"
+            name="SIDE">
+      </category>
+      <category
+            id="com.bluexml.side.Intregation.eclipse.branding.category.example"
+            name="SIDE Example Project"
+            parentCategory="com.bluexml.side.modeler.category.ID">
+      </category>
+   </extension>
+   
+      <extension
+         id="perspective"
+         name="SIDE Perpective"
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.bluexml.side.Integration.eclipse.branding.enterprise.Perspective"
+            icon="icons/perspective_icon.png"
+            id="com.bluexml.side.Integration.eclipse.branding.enterprise.perspective"
+            name="SIDE Modeling">
+      </perspective>
+   </extension>
+      <extension
+            point="org.eclipse.ui.popupMenus">
+         <objectContribution
+               adaptable="true"
+               id="com.bluexml.side.Integration.eclipse.builder.contribution1"
+               nameFilter="*"
+               objectClass="org.eclipse.core.resources.IProject">
+            <action
+                  class="com.bluexml.side.Integration.eclipse.branding.enterprise.actions.NewAlfrescoModuleAction"
+                  enablesFor="+"
+                  id="com.bluexml.side.Integration.eclipse.branding.enterprise.newAlfrescoModule"
+                  label="Create new Alfresco Module Project"
+                  menubarPath="com.bluexml.side/project">
+            </action>
+         </objectContribution>
+      </extension>
+      <extension
+            point="com.bluexml.side.Util.dependencies.com_bluexml_side_framework_module_repository">
+         <repository
+               activator="com.bluexml.side.Integration.eclipse.branding.enterprise.Activator"
+               pluginId="com.bluexml.side.Integration.eclipse.branding.enterprise"
+               repositoryName="com.bluexml.side.Integration.eclipse.branding.enterprise.repository"
+               repositoryPath="/com/bluexml/side/Integration/eclipse/branding/enterprise/repository/m2repositoryForSIDE.zip">
+         </repository>
+      </extension>
+</plugin>
