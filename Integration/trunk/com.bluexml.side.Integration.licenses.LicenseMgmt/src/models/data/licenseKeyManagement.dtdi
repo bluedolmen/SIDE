@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_SJYTZlLZEd-i6vpttZrofQ"/>
+  <diagrams position="0,0" size="100,100" name="licenseKeyManagement.dtdi" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Class.modeler.diagram">
+      <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_SJYTZlLZEd-i6vpttZrofQ"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="54,70" size="163,145">
+      <anchorage graphEdge="//@diagrams.0/@contained.4"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_1QuQkFLZEd-i6vpttZrofQ"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_1QuQkFLZEd-i6vpttZrofQ"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_I6iv0FLaEd-i6vpttZrofQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_JOOg0FLaEd-i6vpttZrofQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_Jh0yQFLaEd-i6vpttZrofQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_J9RYIFLaEd-i6vpttZrofQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_rCTl8VwHEd-dfIgB_h9Owg"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_1QuQkFLZEd-i6vpttZrofQ"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_1QuQkFLZEd-i6vpttZrofQ"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="88,222" size="-1,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_xPPCQFwHEd-dfIgB_h9Owg"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_xPPCQFwHEd-dfIgB_h9Owg"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_wGrYYGNSEd-_bfTjU4gzow"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_wGrYYWNSEd-_bfTjU4gzow"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="514,68" size="178,176">
+      <anchorage graphEdge="//@diagrams.0/@contained.4"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_LrKPoGMoEd-_bfTjU4gzow"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_LrKPoGMoEd-_bfTjU4gzow"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_QQ7g4GMoEd-_bfTjU4gzow"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_QmVwMGMoEd-_bfTjU4gzow"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_SlEGsGMoEd-_bfTjU4gzow"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_vwQOgGMoEd-_bfTjU4gzow"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_wGdIAGMoEd-_bfTjU4gzow"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_LrKPoGMoEd-_bfTjU4gzow"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_LrKPoGMoEd-_bfTjU4gzow"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="549,435" size="-1,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_8LYScGMoEd-_bfTjU4gzow"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_8LYScGMoEd-_bfTjU4gzow"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_WIyCEGNJEd-_bfTjU4gzow"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_WIyCEWNJEd-_bfTjU4gzow"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_KfIE4GMpEd-_bfTjU4gzow"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="464,249" size="-1,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_e8wmsGMpEd-_bfTjU4gzow"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_e8wmsGMpEd-_bfTjU4gzow"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_ICzGwG15Ed-vEaearzKnog"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_ICzGwW15Ed-vEaearzKnog"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_ICzGwm15Ed-vEaearzKnog"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_ICzGw215Ed-vEaearzKnog"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_ICzGxG15Ed-vEaearzKnog"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_ICzGxW15Ed-vEaearzKnog"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_ICzGxm15Ed-vEaearzKnog"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="file:/C:/Projects/Alfresco/licenseKeyManagement/src/models/data/licenseKeyManagement.dt#_ICzGx215Ed-vEaearzKnog"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>
