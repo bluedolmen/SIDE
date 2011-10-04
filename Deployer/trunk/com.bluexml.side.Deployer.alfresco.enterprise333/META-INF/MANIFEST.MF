@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SIDE Alfresco 3.3.3 Enterprise Deployer
+Bundle-SymbolicName: com.bluexml.side.Deployer.alfresco.enterprise333;singleton:=true
+Bundle-Version: 1.0.3.v27290-20110826
+Bundle-Activator: com.bluexml.side.deployer.alfresco.enterprise333.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: com.bluexml.side.Application,
+ com.bluexml.side.Deployer.alfresco,
+ com.bluexml.side.Util.componentMonitor,
+ com.bluexml.side.Util.deployer,
+ com.bluexml.side.Util.deployer.war,
+ com.bluexml.side.Util.generator,
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.log,
+ com.bluexml.side.Util.security,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ com.bluexml.side.Deployer.alfresco.enterprise
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
