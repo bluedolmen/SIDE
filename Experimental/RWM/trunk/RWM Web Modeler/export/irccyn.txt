@@ -1,1 +1,0 @@
--Dhttp.proxyHost=cache.irccyn.ec-nantes.fr -Dhttp.proxyPort=3128

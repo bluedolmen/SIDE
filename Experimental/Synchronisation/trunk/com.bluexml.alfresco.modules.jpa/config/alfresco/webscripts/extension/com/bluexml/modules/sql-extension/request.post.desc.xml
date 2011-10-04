@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<webscript>
-    <shortname>SQL Search Service</shortname>
-    <url>/sql/search</url>
-    <format default="xml">any</format>
-    <authentication>none</authentication>
-    <transaction>none</transaction>
-</webscript>
