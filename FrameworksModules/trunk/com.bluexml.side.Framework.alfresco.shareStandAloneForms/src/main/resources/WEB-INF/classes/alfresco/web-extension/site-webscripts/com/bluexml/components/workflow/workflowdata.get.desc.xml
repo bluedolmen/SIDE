@@ -1,0 +1,5 @@
+<webscript>
+  <shortname>workflowdata</shortname>
+  <description>used to display workflow form</description>
+  <url>/components/workflow/workflowdata</url>
+</webscript>

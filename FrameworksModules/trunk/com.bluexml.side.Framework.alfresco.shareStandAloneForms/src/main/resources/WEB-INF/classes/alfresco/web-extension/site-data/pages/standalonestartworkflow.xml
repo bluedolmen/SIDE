@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<page>
+   	<title>publish</title>
+   	<title-id>page.publish.title</title-id>
+   	<description>SIDE Generated Portal Page</description>
+   	<description-id>page.publish.description</description-id>
+   	<template-instance>standalonestartworkflow</template-instance>
+   	<authentication>user</authentication>
+</page>
