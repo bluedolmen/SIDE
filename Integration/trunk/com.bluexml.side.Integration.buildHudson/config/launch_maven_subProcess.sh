@@ -29,15 +29,12 @@ if [ -f delete_folder.pl ]; then
 	done
 	echo "superpom patched"
 	echo "Maven deploy start"
-	mvn clean deploy -e -P public > log_maven.log
+	mvn clean deploy -e -P public | tee log_maven.log
 	echo "Maven deploy done"
-	
-	sleep 5m
-	
-	tail -100 log_maven.log
-	
+
 	if grep "BUILD SUCCESSFUL" log_maven.log ; then
 		echo "Maven deploy success"
+		sleep 1m
 	else
 	
 		if grep "ERROR" log_maven.log ; then	
