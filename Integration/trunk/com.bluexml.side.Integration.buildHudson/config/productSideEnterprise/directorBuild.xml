@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     1 sept. 2011 17:47:03                                                        
+
+     directorBuilder    
+     ant script to build SIDE product using existing p2 repository
+                   
+     davidabad                                                                
+     ====================================================================== -->
+<project name="directorBuilder" default="">
+	<description>
+            ant script to build SIDE product using existing p2 repository
+    </description>
+
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: installIU          
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="installIU">
+		<attribute name="repo" default="${p2.metadata.repo}" />
+		<attribute name="productID" default="" />		
+		<sequential>
+			<echo message="launcher path :${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			<echo message="application : org.eclipse.equinox.p2.director (installIU)" />
+			<echo message="* repo : @{repo}" />
+			<echo message="* productID : @{productID}" />
+			
+			<delete file="${logFile}-director.log" failonerror="false" />
+			<record name="${logFile}-director.log" loglevel="debug" action="start" />
+			<java fork="true" failonerror="true" jar="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
+				<jvmarg line="${build.jvm.options}" />
+				<arg value="-application" />
+				<arg value="org.eclipse.equinox.p2.director" />
+				<arg line="-repository @{repo}" />
+				<arg line="-installIU @{productID}" />
+				<classpath>
+					<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+				</classpath>
+			</java>
+			<record name="${logFile}-director.log" action="stop" />
+		</sequential>
+	</macrodef>
+
+
+	<!-- = = = = = = = = = = = = = = = = =
+	          macrodef: executeEclipsAnt          
+	         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="executeEclipseAnt">
+		<attribute name="baseLocation" default="${baseLocation}" />
+		<attribute name="equinoxLauncherPluginVersion" default="${equinoxLauncherPluginVersion}" />
+		<attribute name="logFile" default="${logFile}" />
+		<attribute name="buildFile" default="build.xml" />
+		<attribute name="build.jvm.options" default="${build.jvm.options}" />
+		<attribute name="targets" default="" />
+		<sequential>
+			<echo message="launcher path :@{baseLocation}/plugins/org.eclipse.equinox.launcher_@{equinoxLauncherPluginVersion}.jar">
+			</echo>
+			<delete file="@{logFile}" failonerror="false" />
+			<record name="@{logFile}" loglevel="debug" action="start" />
+			<java fork="true" failonerror="true" jar="@{baseLocation}/plugins/org.eclipse.equinox.launcher_@{equinoxLauncherPluginVersion}.jar">
+				<jvmarg line="@{build.jvm.options}" />
+				<arg value="-application" />
+				<arg value="org.eclipse.ant.core.antRunner" />
+				<arg value="-buildfile" />
+				<arg value="@{buildFile}" />
+
+				<arg value="@{targets}" />
+				<classpath>
+					<pathelement location="@{baseLocation}/plugins/org.eclipse.equinox.launcher_@{equinoxLauncherPluginVersion}.jar" />
+				</classpath>
+			</java>
+			<record name="@{logFile}" action="stop" />
+		</sequential>
+	</macrodef>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="depends">
+	</target>
+
+</project>
