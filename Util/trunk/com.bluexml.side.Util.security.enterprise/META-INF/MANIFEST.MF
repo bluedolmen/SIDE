@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SIDE Enterprise Security Utilities
+Bundle-Version: 1.0.11.v26580-20110802
+Bundle-Activator: com.bluexml.side.util.security.Activator
+Bundle-Vendor: BlueXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.bluexml.side.Util.libs,
+ org.eclipse.ui.forms,
+ com.bluexml.side.Util.security
+Bundle-ActivationPolicy: lazy
+Bundle-SymbolicName: com.bluexml.side.Util.security.enterprise;singleton:=true
+Export-Package: com.bluexml.side.util.security,
+ com.bluexml.side.util.security.preferences
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
