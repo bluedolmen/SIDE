@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Alfresco Enterprise Deployer
+Bundle-SymbolicName: com.bluexml.side.Deployer.alfrescoDirectCopy.enterprise;singleton:=true
+Bundle-Version: 1.0.3.v27290-20110826
+Bundle-Activator: com.bluexml.side.deployer.alfrescodirectcopy.enterprise.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.core.runtime,
+ com.bluexml.side.Application,
+ com.bluexml.side.Util.deployer,
+ com.bluexml.side.Util.security,
+ com.bluexml.side.Util.deployer.war,
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.componentMonitor,
+ com.bluexml.side.Deployer.alfrescoDirectCopy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
