@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension id="com.bluexml.side.integration.eclipse.builder" name="SIDE Builder" point="org.eclipse.core.resources.builders">
+    <builder
+          callOnEmptyDelta="true"
+          hasNature="true"
+          isConfigurable="true">
+      <run
+            class="com.bluexml.side.integration.eclipse.builder.SIDEBuilder">
+         <parameter
+               name="com.bluexml.side.Integration.eclipse.builder.applicationFile"
+               value=".application">
+         </parameter>
+         <parameter
+               name="com.bluexml.side.Integration.eclipse.builder.configurationName"
+               value="incremental">
+         </parameter>
+      </run>
+    </builder>
+  </extension>
+  <extension id="com.bluexml.side.integration.eclipse.nature" name="SIDE Nature" point="org.eclipse.core.resources.natures">
+    <runtime>
+      <run class="com.bluexml.side.integration.eclipse.builder.nature.SIDENature" />
+    </runtime>
+  </extension>
+  <extension id="com.bluexml.side.integration.eclipse.nature.activatedBuilder" name="SIDE Nature with builder" point="org.eclipse.core.resources.natures">
+    <runtime>
+      <run class="com.bluexml.side.integration.eclipse.builder.nature.SIDENatureWithBuilder" />
+    </runtime>
+    <builder id="com.bluexml.side.integration.eclipse.builder" />
+  </extension>
+  <extension point="org.eclipse.ui.popupMenus">
+    <objectContribution adaptable="true" id="com.bluexml.side.Integration.eclipse.builder.contribution1" nameFilter="*" objectClass="org.eclipse.core.resources.IProject">
+      <action
+            class="com.bluexml.side.integration.eclipse.builder.actions.ToggleNatureAction"
+            enablesFor="+"
+            icon="icon/project_icon_activated_builder.png"
+            id="com.bluexml.side.Integration.eclipse.builder.addRemoveNatureAction"
+            label="Activate/Deactivate SIDE builder"
+            menubarPath="com.bluexml.side/project"/>
+      <menu icon="icon/side_16.gif" id="com.bluexml.side" label="SIDE" path="additions">
+        <separator name="project" />
+      </menu>
+      <action
+            class="com.bluexml.side.integration.eclipse.builder.actions.ActionManageProjectConfiguration"
+            enablesFor="1"
+            icon="icon/manage.png"
+            id="com.bluexml.side.Integration.eclipse.builder.createGeneration"
+            label="Manage Configuration"
+            menubarPath="com.bluexml.side/application">
+      </action>
+      <action
+            class="com.bluexml.side.integration.eclipse.builder.actions.ActionShortcutGeneration"
+            enablesFor="+"
+            icon="icon/launch.png"
+            id="com.bluexml.side.Integration.eclipse.builder.generate"
+            label="Launch Generation"
+            menubarPath="com.bluexml.side/application"
+            style="pulldown">
+      </action>
+      <action
+            class="com.bluexml.side.integration.eclipse.builder.actions.ActionInitializeModels"
+            enablesFor="1"
+            icon="icon/initializeFormModel.png"
+            id="com.bluexml.side.Class.edit.ui.action1"
+            label="Initialize SIDE Models"
+            menubarPath="com.bluexml.side/application">
+      </action>
+    </objectContribution>
+  </extension>
+  <extension id="sideProblem" name="SIDE Problem" point="org.eclipse.core.resources.markers">
+    <super type="org.eclipse.core.resources.problemmarker" />
+    <persistent value="true" />
+  </extension>
+    <extension
+        point="org.eclipse.ui.ide.projectNatureImages">
+     <image
+           icon="icon/project_icon.png"
+           id="com.bluexml.side.integration.eclipse.nature.icon"
+           natureId="com.bluexml.side.integration.eclipse.nature">
+     </image>
+     <image
+           icon="icon/project_icon_activated_builder.png"
+           id="com.bluexml.side.integration.eclipse.nature.activatedBuilder.icon"
+           natureId="com.bluexml.side.integration.eclipse.nature.activatedBuilder">
+     </image>
+  </extension>
+    <extension
+          id="com.bluexml.side.builder.propertyPage"
+          name="SIDE property page"
+          point="org.eclipse.ui.propertyPages">
+       <page
+             class="com.bluexml.side.integration.eclipse.builder.settings.SIDEBuilderPropertyPage"
+             id="test.projectpropertypage.properties.samplePropertyPage"
+             name="SIDE Project Builder"
+             nameFilter="*">
+          <enabledWhen>
+             <instanceof
+                   value="org.eclipse.core.resources.IProject">
+             </instanceof>
+          </enabledWhen>
+       </page>
+    </extension>
+</plugin>
+
