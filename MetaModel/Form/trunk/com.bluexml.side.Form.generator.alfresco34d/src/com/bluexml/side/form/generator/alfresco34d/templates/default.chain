@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Model" path="/test-scapeler/src/models/form/scapeler-details.form"/>
+    <files xsi:type="chain:Folder" path="/com.bluexml.side.Form.generator.alfresco34d/src/com/bluexml/side/form/generator/alfresco34d/templates"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Form.generator.alfresco34d/src/com/bluexml/side/form/generator/alfresco34d/templates/default.log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/form/1.0"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Form.generator.alfresco34d/src/com/bluexml/side/form/generator/alfresco34d/templates/fdk-context.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Form.generator.alfresco34d/src/com/bluexml/side/form/generator/alfresco34d/templates/formGenerator.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Form.generator.alfresco34d/src/com/bluexml/side/form/generator/alfresco34d/templates/messages.properties.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Form.generator.alfresco34d/src/com/bluexml/side/form/generator/alfresco34d/templates/services/form.mt"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="fdk-context.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="formGenerator" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="messages.properties" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.6" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="form" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.7" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>
