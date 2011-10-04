@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SIDE FacetMap View Generator For alfresco Enterprise
+Bundle-SymbolicName: com.bluexml.side.View.generator.facetmap.enterprise;singleton:=true
+Bundle-Version: 1.0.26.v27111-20110825
+Bundle-Activator: com.bluexml.side.view.generator.facetmap.enterprise.Activator
+Bundle-Vendor: BlueXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.bluexml.side.Application,
+ com.bluexml.side.Util.security,
+ com.bluexml.side.Util.generator,
+ com.bluexml.side.Util.generator.acceleo,
+ org.eclipse.core.resources,
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.log,
+ com.bluexml.side.View,
+ com.bluexml.side.Util.dependencies,
+ com.bluexml.side.Util.componentMonitor,
+ com.bluexml.side.Util.generator.alfresco,
+ com.bluexml.side.Class.service.alfresco,
+ com.bluexml.side.View.generator.facetmap,
+ com.bluexml.side.Util.security.enterprise
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: com.bluexml.side.view.generator.facetmap.enterprise
