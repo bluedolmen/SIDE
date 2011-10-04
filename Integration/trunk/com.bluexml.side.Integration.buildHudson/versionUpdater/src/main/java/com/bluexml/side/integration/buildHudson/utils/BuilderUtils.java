@@ -202,14 +202,7 @@ public class BuilderUtils {
 	 * Return the Build Path: /home/stager/buildAuto/Ankle
 	 */
 	public String getBuildPath() {
-		return getBuildProperties().getProperty(buildDir) + File.separator + getCodeName();
-	}
-
-	/**
-	 * Retourne le nom de code: Ankle
-	 */
-	public String getCodeName() {
-		return getBuildProperties().getProperty(codeName);
+		return getBuildProperties().getProperty(buildDir);
 	}
 
 	/**
