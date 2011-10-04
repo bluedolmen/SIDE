@@ -1,0 +1,2 @@
+Portal generator must manage pages that use form component to set them with right formId component property
+like it's done for document-details
