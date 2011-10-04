@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <technology
+            id="demo-webapplication"
+            name="demo">
+         <technologyVersion
+               id="side-demo"
+               version="demo extJS">
+            <deployerVersion
+                  class="com.bluexml.side.deployer.demoapplication.DemoDeployer"
+                  hidden="visible"
+                  id="com.bluexml.side.Deployer.demoWebApplication"
+                  shared="false"
+                  version="Deployer demo webapp">
+               <option
+                     defaultOption="false"
+                     key="com.bluexml.side.Deployer.demoWebApplication.clean"
+                     label="clean">
+               </option>
+               <configurationParameter
+                     dataType="String"
+                     defaultValue="side-demo"
+                     documentation="give the file name of the demo web application default is side-demo"
+                     key="demo.webapplication.name"
+                     label="demo war name">
+               </configurationParameter>
+            </deployerVersion>
+         </technologyVersion>
+      </technology>
+   </extension>
+
+</plugin>
