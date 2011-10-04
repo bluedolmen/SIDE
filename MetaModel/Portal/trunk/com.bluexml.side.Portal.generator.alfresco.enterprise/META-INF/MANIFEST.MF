@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Alfresco Enterprise Portal generator
+Bundle-SymbolicName: com.bluexml.side.Portal.generator.alfresco.enterprise;singleton:=true
+Bundle-Version: 1.0.27.v27111-20110825
+Bundle-Activator: com.bluexml.side.portal.generator.alfresco.enterprise.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ com.bluexml.side.Application,
+ com.bluexml.side.Util.generator,
+ com.bluexml.side.Util.generator.acceleo,
+ com.bluexml.side.Util.security,
+ com.bluexml.side.Util.generator.alfresco,
+ com.bluexml.side.Portal,
+ com.bluexml.side.Util.dependencies,
+ com.bluexml.side.Util.componentMonitor,
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Class.service.alfresco,
+ com.bluexml.side.Portal.generator.alfresco,
+ com.bluexml.side.Util.security.enterprise
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: com.bluexml.side.portal.generator.alfresco.enterprise
