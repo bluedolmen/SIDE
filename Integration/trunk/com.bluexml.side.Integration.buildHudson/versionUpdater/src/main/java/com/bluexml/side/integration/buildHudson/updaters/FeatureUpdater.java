@@ -27,6 +27,10 @@ public class FeatureUpdater {
 	Map<String, String> featuresNewsVersion = new HashMap<String, String>();
 	Map<String, String> featuresVersions = new HashMap<String, String>();
 
+	public List<String> getFeatureUpdated() {
+		return featureUpdated;
+	}
+
 	public Map<String, String> getFeaturesNewsVersion() {
 		return featuresNewsVersion;
 	}

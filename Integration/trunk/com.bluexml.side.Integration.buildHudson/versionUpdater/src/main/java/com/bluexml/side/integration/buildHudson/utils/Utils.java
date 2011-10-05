@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -2306,4 +2307,7 @@ public class Utils {
 		return repositoryCopy;
 	}
 
+	public static void writeListInFile(File output,List<String> list) throws IOException {
+		FileUtils.writeLines(output, list);
+	}
 }

@@ -15,6 +15,7 @@ import com.bluexml.side.integration.buildHudson.updaters.PluginsUpdater;
 import com.bluexml.side.integration.buildHudson.updaters.ProductUpdater;
 import com.bluexml.side.integration.buildHudson.utils.BuilderUtils;
 import com.bluexml.side.integration.buildHudson.utils.SVNCommandGenerator;
+import com.bluexml.side.integration.buildHudson.utils.Utils;
 
 public class ProjectVersionUpdater {
 
@@ -186,7 +187,8 @@ public class ProjectVersionUpdater {
 
 			// beware to remove community projects when building RCP Enterprise
 			if (isEnterpriseBuild()) {
-				// need to remove from project to update all Core projects (because this part must be readonly for Enterprise)
+				// need to remove from project to update all Core projects
+				// (because this part must be readonly for Enterprise)
 				projectList.removeAll(coreProjects);
 				List<String> toRemove = new ArrayList<String>();
 				for (String pom : projectPoms2Update) {
@@ -281,7 +283,8 @@ public class ProjectVersionUpdater {
 			// maven2 project updated, so must update plugin that contains
 			// dependencies
 
-			// since we build all artifacts without products distinction we need to manage all dependencies repositories
+			// since we build all artifacts without products distinction we need
+			// to manage all dependencies repositories
 			List<String> depRepos = getRepositoriesExtensions();
 			for (String id : depRepos) {
 				if (!plugins2UpdateList.contains(id)) {
@@ -335,7 +338,7 @@ public class ProjectVersionUpdater {
 
 		// launch product updater
 		ProductUpdater produ = new ProductUpdater(fu, bu, forceProductUpdate);
-		//		boolean sideProductChanges = produ.updateProduct();
+		// boolean sideProductChanges = produ.updateProduct();
 
 		// update all product files
 
@@ -388,11 +391,16 @@ public class ProjectVersionUpdater {
 		System.out.println("\t- category.xml updated ?" + updatedCategories);
 		System.out.println("====================================");
 
+		// write list of updated artifacts
+		Utils.writeListInFile(new File(this.workspace + File.separator + "work" + File.separator + "updatedMavenProjects.txt"), mpu.getPomUpdated());
+		Utils.writeListInFile(new File(this.workspace + File.separator + "work" + File.separator + "updatedPlugins.txt"), pu.getPluginsUpdated());
+		Utils.writeListInFile(new File(this.workspace + File.separator + "work" + File.separator + "updatedFeatures.txt"), fu.getFeatureUpdated());
+		Utils.writeListInFile(new File(this.workspace + File.separator + "work" + File.separator + "updatedProducts.txt"), updatedproducts);
 	}
 
 	private List<String> getRepositoriesExtensions() {
 		List<String> depRepos = new ArrayList<String>();
-		//TODO must be removed to manage the new build process
+		// TODO must be removed to manage the new build process
 		if (isEnterpriseBuild()) {
 			depRepos.add("com.bluexml.side.Util.dependencies.repository.enterprise");
 		}

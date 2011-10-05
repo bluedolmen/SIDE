@@ -35,6 +35,12 @@ public class MavenProjectUpdater {
 		return pomsNewsVersion;
 	}
 
+	
+	public List<String> getPomUpdated() {
+		return pomUpdated;
+	}
+
+
 	// all project with version (updated or not)
 	Map<String, String> pomsVersions = new HashMap<String, String>();
 

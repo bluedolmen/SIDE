@@ -36,6 +36,10 @@ public class PluginsUpdater {
 	Map<String, String> pluginsNewVersion = new HashMap<String, String>();
 	Map<String, String> pluginsVersions = new HashMap<String, String>();
 
+	public List<String> getPluginsUpdated() {
+		return pluginsUpdated;
+	}
+
 	public Map<String, String> getPluginsNewVersion() {
 		return pluginsNewVersion;
 	}
