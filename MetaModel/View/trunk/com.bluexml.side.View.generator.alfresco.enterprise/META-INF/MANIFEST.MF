@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: View Generator For Alfresco Enterprise
 Bundle-SymbolicName: com.bluexml.side.View.generator.alfresco.enterprise;singleton:=true
-Bundle-Version: 1.0.20.v28158-20111005
+Bundle-Version: 1.0.21.v28467-20111005
 Bundle-Activator: com.bluexml.side.view.generator.alfresco.enterprise.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
