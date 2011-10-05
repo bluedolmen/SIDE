@@ -6,14 +6,14 @@ if [ $# -eq 2 ]; then
   WORKING_DIR=$2
 else
   echo "Usage: launch_maven.sh WORKSPACE WORKING_DIR"
-  echo "       with WORKSPACE =  workspace path of the buildHuson project"
+  echo "       with WORKSPACE =  the working directory -> workspace/work "
   echo "       with WORKING_DIR =  maven projects location"
   exit -2
 fi
 
 if [ -f delete_folder.pl ]; then
-	cp delete_folder.pl $WORKSPACE/work/$WORKING_DIR
-	cd $WORKSPACE/work/$WORKING_DIR
+	cp delete_folder.pl $WORKSPACE/$WORKING_DIR
+	cd $WORKSPACE/$WORKING_DIR
 	perl delete_folder.pl pom.xml
 	cp $WORKSPACE/superpom/pom.xml .
 	
