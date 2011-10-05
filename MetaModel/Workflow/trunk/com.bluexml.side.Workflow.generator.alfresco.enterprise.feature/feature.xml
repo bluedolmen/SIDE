@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Workflow.generator.alfresco.enterprise.feature" label="SIDE Alfresco Enterprise Wokflow Generator" version="1.0.20.v27111-20110825" provider-name="BlueXML">
+<feature id="com.bluexml.side.Workflow.generator.alfresco.enterprise.feature" label="SIDE Alfresco Enterprise Wokflow Generator" version="1.0.21.v28158-20111005" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of workflow models on jBPM and Alfresco for ECM-based business process.</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -28,6 +28,6 @@
     <import plugin="com.bluexml.side.Util.security.enterprise" />
     <import plugin="com.bluexml.side.Workflow.generator.alfresco" />
   </requires>
-  <plugin id="com.bluexml.side.Workflow.generator.alfresco.enterprise" download-size="0" install-size="0" version="1.0.20.v27111-20110825" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.generator.alfresco.enterprise" download-size="0" install-size="0" version="1.0.21.v28158-20111005" unpack="false" />
 </feature>
 
