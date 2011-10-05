@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side.Framework.facetMap</groupId>
   <artifactId>alfrescoConnectorEnterprise</artifactId>
-  <version>1.0.24</version>
+  <version>1.0.25</version>
   <packaging>zip</packaging>
   <name>com.bluexml.side.Framework.facetMap.alfrescoConnectorEnterprise</name>
   <parent>
@@ -53,14 +53,14 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.facetMap</groupId>
       <artifactId>multiMapEnterprise</artifactId>
-      <version>1.0.5</version>
+      <version>1.0.6</version>
       <classifier>classes</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.bluexml.side.Framework.facetMap</groupId>
       <artifactId>multiMapEnterprise</artifactId>
-      <version>1.0.5</version>
+      <version>1.0.6</version>
       <type>zip</type>
       <scope>compile</scope>
     </dependency>
