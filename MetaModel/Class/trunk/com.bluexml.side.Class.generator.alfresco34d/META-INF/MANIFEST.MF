@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco 3.4.b Data Generator
 Bundle-SymbolicName: com.bluexml.side.Class.generator.alfresco34d;singleton:=true
-Bundle-Version: 1.0.20.v27111-20110825
+Bundle-Version: 1.0.21.v28158-20111005
 Bundle-Activator: com.bluexml.side.clazz.generator.alfresco34d.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
