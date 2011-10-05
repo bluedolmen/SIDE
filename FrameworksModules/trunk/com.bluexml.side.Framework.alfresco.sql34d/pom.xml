@@ -29,7 +29,7 @@
 		below as the AMP module version. Instead we use the
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
-  <version>1.0.6</version>
+  <version>1.0.7</version>
   <description>This module provides a replicate relational database that enables users to perform SQL queries with joins</description>
   <properties>
     <!--
