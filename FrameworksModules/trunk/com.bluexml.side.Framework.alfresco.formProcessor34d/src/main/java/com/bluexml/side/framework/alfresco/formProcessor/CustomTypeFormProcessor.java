@@ -16,9 +16,9 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 	private static Log logger = LogFactory.getLog(CustomTypeFormProcessor.class);
 
 	public CustomTypeFormProcessor() {
-		propertyNamePattern = Pattern.compile(FormFieldConstants.PROP_DATA_PREFIX + "(.*){1}?_(.*){1}?");
-		transientPropertyPattern = Pattern.compile(FormFieldConstants.PROP_DATA_PREFIX + "(.*){1}?");
-		associationNamePattern = Pattern.compile(FormFieldConstants.ASSOC_DATA_PREFIX + "(.*){1}?_(.*){1}?(_[a-zA-Z]+)");
+		propertyNamePattern = Pattern.compile(FormFieldConstants.PROP_DATA_PREFIX + "([^_]*){1}?_(.*){1}?");
+		transientPropertyPattern = Pattern.compile(FormFieldConstants.PROP_DATA_PREFIX + "([^_]*){1}?");
+		associationNamePattern = Pattern.compile(FormFieldConstants.ASSOC_DATA_PREFIX + "([^_]*){1}?_(.*){1}?(_[a-zA-Z]+)");
 		logger.info("[X] Custom Type Processor loaded ...[X]");
 	}
 
