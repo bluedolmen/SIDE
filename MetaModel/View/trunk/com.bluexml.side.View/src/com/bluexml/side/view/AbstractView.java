@@ -25,7 +25,7 @@ public interface AbstractView extends FieldContainer {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL description='Get all the fields of the AbstractView, excluding the FieldContainers' body='if (self.oclIsKindOf(AbstractDataTable)) then\r\tself.oclAsType(AbstractDataTable).getCols()->children->select(oclIsKindOf(Field))->asSequence()->union(self.getDirectChildFields()->asSequence()).oclAsType(Field)  \relse self.getDirectChildFields().oclAsType(Field) endif'"
+	 *        annotation="http://www.bluexml.com/OCL description='Get all the fields of the AbstractView, excluding the FieldContainers' body='if (self.oclIsKindOf(AbstractDataTable)) then\r\tself.oclAsType(AbstractDataTable).getCols().children->select(oclIsKindOf(Field))->asSequence()->union(self.getDirectChildFields()->asSequence()).oclAsType(Field)  \relse self.getDirectChildFields().oclAsType(Field) endif'"
 	 * @generated
 	 */
 	EList<Field> getFields();

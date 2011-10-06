@@ -1829,7 +1829,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "description", "Get all the fields of the AbstractView, excluding the FieldContainers",
-			 "body", "if (self.oclIsKindOf(AbstractDataTable)) then\r\tself.oclAsType(AbstractDataTable).getCols()->children->select(oclIsKindOf(Field))->asSequence()->union(self.getDirectChildFields()->asSequence()).oclAsType(Field)  \relse self.getDirectChildFields().oclAsType(Field) endif"
+			 "body", "if (self.oclIsKindOf(AbstractDataTable)) then\r\tself.oclAsType(AbstractDataTable).getCols().children->select(oclIsKindOf(Field))->asSequence()->union(self.getDirectChildFields()->asSequence()).oclAsType(Field)  \relse self.getDirectChildFields().oclAsType(Field) endif"
 		   });		
 		addAnnotation
 		  (abstractViewEClass.getEOperations().get(1), 

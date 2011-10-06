@@ -73,7 +73,7 @@
     <eOperations name="getFields" upperBound="-1" eType="#//Field">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="description" value="Get all the fields of the AbstractView, excluding the FieldContainers"/>
-        <details key="body" value="if (self.oclIsKindOf(AbstractDataTable)) then&#xD;&#x9;self.oclAsType(AbstractDataTable).getCols()->children->select(oclIsKindOf(Field))->asSequence()->union(self.getDirectChildFields()->asSequence()).oclAsType(Field)  &#xD;else self.getDirectChildFields().oclAsType(Field) endif"/>
+        <details key="body" value="if (self.oclIsKindOf(AbstractDataTable)) then&#xD;&#x9;self.oclAsType(AbstractDataTable).getCols().children->select(oclIsKindOf(Field))->asSequence()->union(self.getDirectChildFields()->asSequence()).oclAsType(Field)  &#xD;else self.getDirectChildFields().oclAsType(Field) endif"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getDirectChildFields" upperBound="-1" eType="#//Field">
