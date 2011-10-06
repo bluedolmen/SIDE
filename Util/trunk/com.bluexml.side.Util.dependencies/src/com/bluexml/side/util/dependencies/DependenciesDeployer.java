@@ -36,17 +36,17 @@ public class DependenciesDeployer {
 			String nodeName = APPLICATION_CONSTRAINTS;
 			List<IConfigurationElement> matchs = ExtensionPointUtils.getIConfigurationElementsByName(config_exp, nodeName);
 			for (IConfigurationElement configurationElement : matchs) {
-				String moduleId = configurationElement.getAttribute(REPOSITORY);
+				String repoId = configurationElement.getAttribute(REPOSITORY);
 				String path = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_PATH);
 				String className = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_ACTIVATOR);
 				String bundle = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_PLUID);
 
-				System.out.println("deploy repository :" + moduleId); //$NON-NLS-1$
+				System.out.println("deploy repository :" + repoId); //$NON-NLS-1$
 				System.out.println("deploy className :" + className); //$NON-NLS-1$
 
 				Bundle plugin = Platform.getBundle(bundle);
 				String version = plugin.getVersion().toString();
-				String lastversion = getVersionRepository(moduleId);
+				String lastversion = getVersionRepository(repoId);
 
 				if (force || !version.equals(lastversion)) {
 					System.out.println("local repository must be updated :"); //$NON-NLS-1$
@@ -55,16 +55,15 @@ public class DependenciesDeployer {
 					Class<?> c = ExtensionPointUtils.getGeneratorInstance(bundle, className);
 					System.out.println("DependenciesDeployer.deploy() get Stream from :" + path); //$NON-NLS-1$
 					InputStream stream = c.getResourceAsStream(path);
-					
+
 					Bundle eclipseBundle = Platform.getBundle(bundle);
 					URL resourceURL = eclipseBundle.getResource(path);
 					stream = resourceURL.openStream();
 
-
 					deployRepository(stream);
 
 					// record updated repo
-					WorkbenchPreferencePage1.setRepoVersion(bundle, version);
+					WorkbenchPreferencePage1.setRepoVersion(repoId, version);
 				} else {
 					// nothing to do repository is up to date
 					System.out.println("repository is up to date bundle version :" + version); //$NON-NLS-1$
@@ -89,9 +88,13 @@ public class DependenciesDeployer {
 		File tmpZip = File.createTempFile("side_repo", ".zip"); //$NON-NLS-1$ //$NON-NLS-2$
 		tmpZip.deleteOnExit();
 		FileHelper.writeStreamInFile(tmpZip, stream);
-		System.out.println("file to unzip :" + tmpZip + ":" + tmpZip.length() + " b"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		TrueZipHelper tzh = new TrueZipHelper("zip"); //$NON-NLS-1$
-		tzh.copyFiles(tmpZip, repository, true);
+		long length = tmpZip.length();
+		System.out.println("file to unzip :" + tmpZip + ":" + length + " b"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if (length > 0) {
+			TrueZipHelper tzh = new TrueZipHelper("zip"); //$NON-NLS-1$
+			tzh.copyFiles(tmpZip, repository, true);
+		}
+
 	}
 
 	private static String getVersionRepository(String repoId) {
