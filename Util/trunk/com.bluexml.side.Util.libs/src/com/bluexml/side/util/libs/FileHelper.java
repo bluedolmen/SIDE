@@ -259,8 +259,7 @@ public class FileHelper {
 
 	public static void writeStreamInFile(File f, InputStream in) throws Exception {
 		FileOutputStream fout = null;
-		byte[] buffer = new byte[4096]; // Buffer 4K at a time (you can
-		// change this).
+		byte[] buffer = new byte[4096]; // Buffer 4K at a time
 		int bytesRead;
 
 		fout = new FileOutputStream(f);
