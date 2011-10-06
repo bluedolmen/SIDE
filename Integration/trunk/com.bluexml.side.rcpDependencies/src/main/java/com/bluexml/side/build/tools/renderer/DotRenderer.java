@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.log4j.Logger;
+
 import com.bluexml.side.build.tools.componants.Componant;
 import com.bluexml.side.build.tools.componants.Constraint;
 import com.bluexml.side.build.tools.componants.Extension;
@@ -16,6 +18,7 @@ import com.bluexml.side.build.tools.componants.Technology;
 import com.bluexml.side.build.tools.componants.TechnologyVersion;
 
 public class DotRenderer {
+	static Logger logger = Logger.getLogger(DotRenderer.class);
 	public static final String separator = "##";
 	Writer w;
 	
@@ -144,7 +147,7 @@ public class DotRenderer {
 		String color = type2Color.get(key);
 		if (color == null) {
 			color = "red";
-			System.out.println("DotRenderer.getLinkColor() use default, " + key + " not found");
+			logger.debug("DotRenderer.getLinkColor() use default, " + key + " not found");
 		}
 		return color;
 	}

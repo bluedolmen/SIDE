@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.bluexml.side.build.tools.componants.Componant;
-import com.bluexml.side.build.tools.componants.Product;
 import com.bluexml.side.build.tools.graph.DisplayGraph;
 import com.bluexml.side.build.tools.graph.JungConverter;
 import com.bluexml.side.build.tools.reader.ComponantsRegisters;

@@ -15,7 +15,7 @@ import com.bluexml.side.build.tools.componants.Option;
 import com.bluexml.side.build.tools.componants.Plugin;
 
 public class ComponantsRegisters {
-	Logger logger = Logger.getLogger(this.getClass());
+	static Logger logger = Logger.getLogger(ComponantsRegisters.class);
 	List<File> repositoryLocation;
 	private File propertiesFile;
 	Map<String, Feature> featuresRegister = new TreeMap<String, Feature>();
@@ -96,11 +96,11 @@ public class ComponantsRegisters {
 	}
 
 	public void print() {
-		System.out.println("Registers");
-		System.out.println("Features :" + featuresRegister);
-		System.out.println("Plugins :" + pluginsRegister);
-		System.out.println("Options :" + optionRegister);
-		System.out.println("Modules :" + modulesRegister);
+		logger.debug("Registers");
+		logger.debug("Features :" + featuresRegister);
+		logger.debug("Plugins :" + pluginsRegister);
+		logger.debug("Options :" + optionRegister);
+		logger.debug("Modules :" + modulesRegister);
 
 	}
 

@@ -45,7 +45,7 @@ public class JungConverter {
 		g.addEdge("Edge-B", 2, 3);
 		// Let's see what we have. Note the nice output from the 
 		// SparseMultigraph<V,E> toString() method 
-		System.out.println("The graph g = " + g.toString());
+		logger.debug("The graph g = " + g.toString());
 		// Note that we can use the same nodes and edges in two different graphs. 
 		Graph<Integer, String> g2 = new SparseMultigraph<Integer, String>();
 		g2.addVertex((Integer) 1);
@@ -55,7 +55,7 @@ public class JungConverter {
 		g2.addEdge("Edge-B", 2, 3, EdgeType.DIRECTED);
 		g2.addEdge("Edge-C", 3, 2, EdgeType.DIRECTED);
 		g2.addEdge("Edge-P", 2, 3); // A parallel edge 
-		System.out.println("The graph g2 = " + g2.toString());
+		logger.debug("The graph g2 = " + g2.toString());
 
 		DirectedSparseMultigraph<MyNode, MyLink> g3 = new DirectedSparseMultigraph<MyNode, MyLink>();
 		// Create some MyNode objects to use as vertices
@@ -73,7 +73,7 @@ public class JungConverter {
 		g3.addEdge(new MyLink(2.0, 48), n4, n2); // In a directed graph the 
 		g3.addEdge(new MyLink(2.0, 48), n3, n1); // first node is the source 
 		g3.addEdge(new MyLink(10.0, 48), n2, n5);// and the second the destination
-		System.out.println("The graph g3 = " + g3.toString());
+		logger.debug("The graph g3 = " + g3.toString());
 
 		//SimpleGraphView sgv = new SimpleGraphView(); //We create our graph in here 
 		// The Layout<V, E> is parameterized by the vertex and edge types 
