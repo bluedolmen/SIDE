@@ -33,9 +33,9 @@
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">
-      <directory>lib</directory>
+      <directory></directory>
       <includes>
-        <include>maven-ant-tasks-2.1.3.jar</include>
+        <include>lib/maven-ant-tasks-2.1.3.jar</include>
       </includes>
     </fileSet>
   </fileSets>
