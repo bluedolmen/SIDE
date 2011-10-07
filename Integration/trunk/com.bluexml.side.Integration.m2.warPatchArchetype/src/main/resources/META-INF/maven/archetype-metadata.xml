@@ -33,7 +33,7 @@
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">
-      <directory></directory>
+      <directory>lib</directory>
       <includes>
         <include>maven-ant-tasks-2.0.10.jar</include>
       </includes>
