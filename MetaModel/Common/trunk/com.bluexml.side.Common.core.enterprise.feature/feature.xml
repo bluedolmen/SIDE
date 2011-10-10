@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.enterprise.feature" label="SIDE Enterprise Core Components" version="1.0.471.v28931-20111010" provider-name="BlueXML">
+<feature id="com.bluexml.side.Common.core.enterprise.feature" label="SIDE Enterprise Core Components" version="1.0.472.v28943-20111010" provider-name="BlueXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <includes id="com.bluexml.side.Common.core.feature" version="1.0.303.v28858-20111007" />
+  <includes id="com.bluexml.side.Common.core.feature" version="1.0.304.v28943-20111010" />
   <includes id="com.bluexml.side.Util.antRunner.feature" version="1.0.28.v28836-20111006" />
   <requires>
     <import plugin="org.eclipse.ui" />
@@ -12,8 +12,8 @@
     <import plugin="org.eclipse.ui.forms" />
     <import plugin="com.bluexml.side.Util.security" />
   </requires>
-  <plugin id="com.bluexml.side.Util.security.enterprise" download-size="0" install-size="0" version="1.0.13.v28467-20111005" unpack="false" />
-  <plugin id="com.bluexml.side.Integration.eclipse.branding.enterprise" download-size="0" install-size="0" version="1.0.472.v28931-20111010" unpack="false" />
+  <plugin id="com.bluexml.side.Util.security.enterprise" download-size="0" install-size="0" version="1.0.14.v28943-20111010" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding.enterprise" download-size="0" install-size="0" version="1.0.473.v28943-20111010" unpack="false" />
   <plugin id="com.bluexml.side.Integration.standAlone.enterprise" download-size="0" install-size="0" version="1.0.6.v28467-20111005" unpack="false" />
   <plugin id="com.bluexml.side.Integration.eclipse.builder" download-size="0" install-size="0" version="1.0.53.v28467-20111005" unpack="false" />
   <plugin id="com.bluexml.side.Class.alfresco.reverse" download-size="0" install-size="0" version="1.0.2.v28467-20111005" unpack="false" />
