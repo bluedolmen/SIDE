@@ -31,7 +31,7 @@
 				<include name="**/**" />
 			</fileset>
 		</copy>
-		<delete failonerror="false">
+		<delete quiet="true" verbose="true">
 			<fileset dir="${webapps.home}/alfresco/WEB-INF/lib">
 				<include name="${moduleId}-*.jar" />
 			</fileset>

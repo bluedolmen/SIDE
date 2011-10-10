@@ -7,7 +7,7 @@
    <properties>
       <itemKind>workflow</itemKind>
       <itemId>{itemId}</itemId>
-      <submitType>json</submitType>
+      <submitType>{submitType}</submitType>
       <showCaption>true</showCaption>
       <formUI>true</formUI>
       <showCancelButton>true</showCancelButton>

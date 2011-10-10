@@ -9,7 +9,7 @@
 		<itemKind>type</itemKind>
 		<itemId>{itemId}</itemId>
 		<mode>create</mode>
-		<submitType>json</submitType>
+		<submitType>{submitType}</submitType>
 		<showCaption>true</showCaption>
 		<showCancelButton>true</showCancelButton>
 		<editInline>true</editInline>

@@ -8,7 +8,7 @@
 		<itemKind>node</itemKind>
 		<itemId>{nodeRef}</itemId>
 		<mode>edit</mode>
-		<submitType>json</submitType>
+		<submitType>{submitType}</submitType>
 		<showCaption>true</showCaption>
 		<showCancelButton>true</showCancelButton>
 	</properties>
