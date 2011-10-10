@@ -28,6 +28,7 @@ Require-Bundle: com.bluexml.side.Application,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.ui,
  com.bluexml.side.Common,
- com.bluexml.side.Class
+ com.bluexml.side.Class,
+ com.bluexml.side.Util.security.enterprise
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

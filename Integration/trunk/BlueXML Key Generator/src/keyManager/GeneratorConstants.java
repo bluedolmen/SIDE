@@ -46,4 +46,6 @@ public interface GeneratorConstants {
 	public static int INDEX_ID = 2;
 	public static int INDEX_ID_MACH = 3;
 	public static int NB_CHAMPS_CLE = 4;
+	
+	public static String CODE_ALL = "CODE_ALL_FEATURES"; 
 }

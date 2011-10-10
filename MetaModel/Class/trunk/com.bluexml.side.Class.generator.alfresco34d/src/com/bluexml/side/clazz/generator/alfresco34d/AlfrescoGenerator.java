@@ -2,7 +2,20 @@ package com.bluexml.side.clazz.generator.alfresco34d;
 
 import java.util.List;
 
+import com.bluexml.side.util.security.SecurityHelper;
+import com.bluexml.side.util.security.preferences.SidePreferences;
+
 public class AlfrescoGenerator extends com.bluexml.side.clazz.generator.alfresco.extension.sideenterprise.AlfrescoGenerator {
+	@Override
+	public String getComponentKey() {
+		return "CODE_GED_G_C_ALFRESCO_34D";
+	}
+	
+	@Override
+	public boolean check() {
+		return SecurityHelper.check(getComponentKey(), SidePreferences.getKey());
+	}
+	
 
 	/*
 	 * (non-Javadoc)

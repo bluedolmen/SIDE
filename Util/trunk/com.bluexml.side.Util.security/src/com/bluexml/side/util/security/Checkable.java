@@ -14,4 +14,6 @@ public interface Checkable {
 	public abstract boolean check();
 	
 	public abstract boolean checkOption(String optionID);
+	
+	public abstract String getComponentKey();
 }

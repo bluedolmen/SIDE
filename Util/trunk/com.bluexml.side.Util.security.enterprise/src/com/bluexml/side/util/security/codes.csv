@@ -1,0 +1,24 @@
+CODE_GED_G_C_ALFRESCO_3,1,Content Model Generator (Alfresco 3.2 Enterprise),ClazzModelFile.gif
+CODE_GED_G_W_ALFRESCO_3,2,Workflow generator (Alfresco 3.2 Enterprise),WorkflowModelFile.gif
+CODE_GED_G_P_ALFRESCO_SHARE_30,4,Portal generator (Alfresco 3.2 Enterprise),PortalModelFile.gif
+CODE_GED_G_P_LIFERAY_511,8,Portal generator (Liferay),PortalModelFile.gif
+CODE_GED_G_F_CHIBA,16,Form generator (Chiba),formModelFile.gif
+CODE_GED_G_C_FACETMAP_2,32,View generator (Facetmap 2.X),ViewModelFile.gif
+CODE_PROTOTYPE,64,SIDE Prototype,ClazzModelFile.gif
+CODE_GED_G_V_ALFRESCO_3,128,View generator (Alfresco 3.2 Enterprise),ViewModelFile.gif
+CODE_GED_G_C_REPORT,256,Report generator,ClazzModelFile.gif
+CODE_GED_G_C_ALFRESCO_Community_3,512,Content Model Generator (Alfresco 3.2r2 Community),ClazzModelFile.gif
+CODE_OPT_com.bluexml.side.Class.generator.alfresco.enterprise_com.bluexml.side.Class.generator.alfresco.randomDataGenerator,1024,Content Model Generator (Alfresco 3.2 Enterprise)/Alfresco Random Content Model Generator,options.gif
+CODE_OPT_com.bluexml.side.Class.generator.alfresco.enterprise_alfresco.webscript.report,2048,Content Model Generator (Alfresco 3.2 Enterprise)/Alfresco Report Webscripts,options.gif
+CODE_OPT_com.bluexml.side.Class.generator.alfresco.enterprise_com.bluexml.side.Class.generator.alfresco.sql,4096,Content Model Generator (Alfresco 3.2 Enterprise)/Alfresco SQL,options.gif
+CODE_OPT_com.bluexml.side.Class.generator.alfresco.enterprise_alfresco.unicity,8192,Content Model Generator (Alfresco 3.2 Enterprise)/Content Uniqueness,options.gif
+CODE_OPT_com.bluexml.side.Class.generator.alfresco.enterprise_com.bluexml.side.Class.generator.alfresco.enterprise.webserviceJavaAPI,16384,Content Model Generator (Alfresco 3.2 Enterprise)/Java webservice API,options.gif
+CODE_OPT_com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise_com.bluexml.side.Class.generator.alfresco.randomDataGenerator,32768,Content Model Generator (Alfresco 3.2r2 Community)/Alfresco Random Content Model Generator,options.gif
+CODE_OPT_com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise_alfresco.webscript.report,65536,Content Model Generator (Alfresco 3.2r2 Community)/Alfresco Report Webscripts,options.gif
+CODE_OPT_com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise_com.bluexml.side.Class.generator.alfresco.sql,131072,Content Model Generator (Alfresco 3.2r2 Community)/Alfresco SQL,options.gif
+CODE_OPT_com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise_alfresco.unicity,262144,Content Model Generator (Alfresco 3.2r2 Community)/Content Uniqueness,options.gif
+CODE_OPT_com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise_com.bluexml.side.Class.generator.alfresco.webserviceJavaAPI,524288,Content Model Generator (Alfresco 3.2r2 Community)/Java webservice API,options.gif
+CODE_OPT_com.bluexml.side.Portal.generator.alfresco.extension.sideEnterprise_com.bluexml.side.Portal.generator.alfresco.xforms,1048576,Portal generator (Alfresco 3.2r2 Community)/XForms Integration,options.gif
+CODE_OPT_com.bluexml.side.Portal.generator.alfresco.enterprise_com.bluexml.side.Portal.generator.alfresco.xforms,2097152,Portal generator (Alfresco 3.2 Enterprise)/XForms Integration,options.gif
+CODE_GED_G_C_ALFRESCO_34D,4194304,Content Model Generator (Alfresco 3.4.d Community),ClazzModelFile.gif
+CODE_GED_G_W_ALFRESCO_34D,8388608,Workflow generator (Alfresco 3.4.d Community),WorkflowModelFile.gif

@@ -244,5 +244,10 @@ public abstract class Deployer implements Checkable {
 	public boolean checkOption(String optionID) {
 		return true;
 	}
+
+	public String getComponentKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

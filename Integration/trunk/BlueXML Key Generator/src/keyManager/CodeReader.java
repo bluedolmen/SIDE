@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -80,7 +81,7 @@ public class CodeReader implements GeneratorConstants {
 
 		// calculation of the codes
 		for (int i = 0; i < codes.length; i++) {
-			String code = codes[i];
+			String code = codes[i].trim();
 			Integer code2 = getCode(code);
 			if (code2 != null) {
 				result += code2;
@@ -94,6 +95,10 @@ public class CodeReader implements GeneratorConstants {
 
 	public static Integer getCode(String code) {
 		return codeTable.get(code);
+	}
+	
+	public static Collection<String> getCodeKeys() {
+		return codeTable.keySet();
 	}
 
 }

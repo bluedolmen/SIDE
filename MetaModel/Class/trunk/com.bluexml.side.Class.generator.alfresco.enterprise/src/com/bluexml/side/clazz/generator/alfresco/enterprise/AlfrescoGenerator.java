@@ -16,7 +16,10 @@ import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class AlfrescoGenerator extends Generator {
-	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_3"; //$NON-NLS-1$
+	@Override
+	public String getComponentKey() {
+		return "CODE_GED_G_C_ALFRESCO_3";
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -25,7 +28,7 @@ public class AlfrescoGenerator extends Generator {
 	 */
 	@Override
 	public boolean check() {
-		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
+		return SecurityHelper.check(getComponentKey(), SidePreferences.getKey());
 	}
 
 	public boolean checkOption(String optionID) {

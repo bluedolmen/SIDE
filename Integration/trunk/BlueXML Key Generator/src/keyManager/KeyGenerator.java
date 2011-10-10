@@ -23,6 +23,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.crypto.BadPaddingException;
@@ -81,7 +82,6 @@ public class KeyGenerator implements GeneratorConstants {
 	}
 
 	/**
-	 * 
 	 * @param codes
 	 *            Codes in binary of the components who are activated
 	 * @param date
@@ -139,7 +139,6 @@ public class KeyGenerator implements GeneratorConstants {
 	}
 
 	/**
-	 * 
 	 * @param codes
 	 *            Codes in String separated with comas
 	 * @param delay
@@ -151,6 +150,11 @@ public class KeyGenerator implements GeneratorConstants {
 	 * @return
 	 */
 	public static String generateKey(String codesComp, Integer delay, String idCompte, String iDMach) {
+		if (codesComp.equals(GeneratorConstants.CODE_ALL)) {
+			// need to get all codes			
+			Collection<String> codeKeys = CodeReader.getCodeKeys();			
+			codesComp = codeKeys.toString().replaceAll("\\[([^\\]]*)\\]", "$1");
+		}
 		Integer codeComposants = CodeReader.getCodes(codesComp);
 		try {
 			return generateKey(codeComposants, delay, idCompte, iDMach);
