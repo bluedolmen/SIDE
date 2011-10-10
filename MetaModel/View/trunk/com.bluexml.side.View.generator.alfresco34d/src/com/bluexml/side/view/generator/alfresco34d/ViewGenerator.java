@@ -2,8 +2,21 @@ package com.bluexml.side.view.generator.alfresco34d;
 
 import java.util.Map;
 
+import com.bluexml.side.util.security.SecurityHelper;
+import com.bluexml.side.util.security.preferences.SidePreferences;
+
 public class ViewGenerator extends com.bluexml.side.view.generator.alfresco.extension.sideenterprise.ViewGenerator {
 
+	@Override
+	public String getComponentKey() {
+		return "CODE_GED_G_V_ALFRESCO_34D";
+	}
+	
+	@Override
+	public boolean check() {
+		return SecurityHelper.check(getComponentKey(), SidePreferences.getKey());
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @seecom.bluexml.side.view.generator.alfresco.ViewAlfrescoGenerator#
