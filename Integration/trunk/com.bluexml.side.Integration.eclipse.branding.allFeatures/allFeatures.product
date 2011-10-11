@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
-<product name="SIDE Products Builder" uid="SIDEAllFeatures" id="com.bluexml.side.Integration.eclipse.allFeatures.side_product_builder" application="org.eclipse.ui.ide.workbench" version="1.0.13" useFeatures="true" includeLaunchers="true">
+<product name="SIDE Products Builder" uid="SIDEAllFeatures" id="com.bluexml.side.Integration.eclipse.allFeatures.side_product_builder" application="org.eclipse.ui.ide.workbench" version="1.0.14" useFeatures="true" includeLaunchers="true">
   <configIni use="default" />
   <launcherArgs>
     <vmArgs>-d32</vmArgs>
@@ -20,10 +20,10 @@
     <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.0" />
     <feature id="org.eclipse.m2e.feature" version="1.0.0.20110607-2117" />
     <feature id="com.bluexml.side.Common.core.feature" version="1.0.304.v28943-20111010" />
-    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.472.v28943-20111010" />
-    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.647.v28943-20111010" />
-    <feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.473.v28943-20111010" />
-    <feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" version="1.0.13.v28943-20111010" />
+    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.473.v28981-20111011" />
+    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.648.v28981-20111011" />
+    <feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.474.v28981-20111011" />
+    <feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" version="1.0.14.v28981-20111011" />
   </features>
 </product>
 
