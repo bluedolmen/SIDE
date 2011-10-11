@@ -1,4 +1,4 @@
-<#include "common/editorparams.inc.ftl" />
+<#include "/org/alfresco/components/form/controls/common/editorparams.inc.ftl" />
 
 <#if field.control.params.rows??><#assign rows=field.control.params.rows><#else><#assign rows=8></#if>
 <#if field.control.params.columns??><#assign columns=field.control.params.columns><#else><#assign columns=60></#if>
@@ -13,7 +13,7 @@
    <script type="text/javascript">//<![CDATA[
    (function()
    {
-      new Alfresco.Upload("${fieldHtmlId}").setOptions(
+      new SIDE.Upload("${fieldHtmlId}").setOptions(
       {
          <#if form.mode == "view" || (field.disabled && !(field.control.params.forceEditable?? && field.control.params.forceEditable == "true"))>disabled: true,</#if>
          currentValue: "${field.value?js_string}",
@@ -45,9 +45,8 @@
    </#if>
    
    <label for="${fieldHtmlId}">${field.label?html}:<#if field.mandatory><span class="mandatory-indicator">${msg("form.required.fields.marker")}</span></#if></label>
-   <#if field.value != ''>
-   <div>Use Element control ... <div>
-   <div>${field.value}</div>
+   <#if form.mode == "edit">   
+   <div>${msg("form.control.content.edit")}</div>
    </#if>
    <input type="file" id="${fieldHtmlId}" name="${field.name}"/>
    

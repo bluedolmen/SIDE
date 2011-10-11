@@ -13,4 +13,12 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="formExtensionResourceBundle" class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
+      <property name="resourceBundles">
+         <list>
+            <value>alfresco.web-extension.formExtension.controls</value>
+         </list>
+      </property>
+   </bean>
 </beans>
