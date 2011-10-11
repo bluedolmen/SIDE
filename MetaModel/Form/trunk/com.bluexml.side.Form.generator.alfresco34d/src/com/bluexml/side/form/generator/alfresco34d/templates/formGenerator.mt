@@ -108,9 +108,14 @@ label-id="<%getFieldLabelId("")%>"
  <%if (description != null && description != ""){%>
  description-id="<%getFieldLabelId("description.")%>"
  <%}%>
+ >
+ 
+ <%if (filter("FileField") && ref.getPrefixedQName() == "cm:content"){%>
+ <control template="controls/upload.ftl">
+ </control>
+ <%}%>
  
  <%if (isSearchForm && ref.filter("clazz.Attribute") != null){%>
- >
  <%for (ref.filter("clazz.Attribute")){%>
  <%if (getShareSearchFormControl() != ""){%>
  <control template="<%getShareSearchFormControl()%>" >
@@ -122,10 +127,9 @@ label-id="<%getFieldLabelId("")%>"
  </control>
  <%}%> 
  <%}%>
- </field>
- <%}else{%>
- />
  <%}%>
+ 
+ </field>
  
 
 
