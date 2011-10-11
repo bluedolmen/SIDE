@@ -5,9 +5,13 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Enumeration;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 public class ZipManager {
@@ -109,20 +113,90 @@ public class ZipManager {
 	}
 
 	private static String buildZipPath(File file, String rootPath) {
-		String entryFilePath=file.getPath().replaceAll("\\\\", "/");
+		String entryFilePath = file.getPath().replaceAll("\\\\", "/");
 		if (rootPath.equals("")) {
 			return entryFilePath;
-		} else {			
-			String pathToRemove =rootPath.replaceAll("\\\\", "/") + "/";			
-			entryFilePath=entryFilePath.replaceFirst(pathToRemove, "");
-			return entryFilePath; 
+		} else {
+			String pathToRemove = rootPath.replaceAll("\\\\", "/") + "/";
+			entryFilePath = entryFilePath.replaceFirst(pathToRemove, "");
+			return entryFilePath;
 		}
 	}
-	
-	public static void main(String[] args) throws Exception {
-		File files = new File(args[1]);
-		File zip = new File(args[0]);		
-		ZipManager.zip(files, zip, false);
+
+	public static void main(String[] args) {
+		try {
+			File files = new File(args[1]);
+			File zip = new File(args[0]);
+
+			// Zip
+			ZipManager.zip(files, zip, false);
+
+			// unzip
+
+			File dest = new File(files.getParentFile(), "unzipped");
+			dest.mkdirs();
+			ZipManager.unzip(zip, dest, true, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void unzip(File file, File destinationFolder, boolean override, boolean verbose) throws ZipException, IOException {
+		if (verbose) {
+			System.out.println("zipFile :" + file);
+			System.out.println("destinationFolder :" + destinationFolder);
+		}
+		destinationFolder.mkdirs();
+		if (file.exists() && destinationFolder.exists() && destinationFolder.isDirectory()) {
+
+			int BUFFER = 2048;
+
+			ZipFile zip = new ZipFile(file);
+
+			Enumeration<? extends ZipEntry> zipFileEntries = zip.entries();
+
+			// Process each entry
+			while (zipFileEntries.hasMoreElements()) {
+				// grab a zip file entry
+				ZipEntry entry = (ZipEntry) zipFileEntries.nextElement();
+
+				// beware of entry created with windows file separator ??
+				String currentEntry = entry.getName().replaceAll("\\\\", "/");
+
+				File destFile = new File(destinationFolder, currentEntry);
+				File destinationParent = destFile.getParentFile();
+
+				// create the parent directory structure if needed
+				boolean mkd = destinationParent.mkdirs();
+
+				if (!entry.isDirectory() && (!destFile.exists() || (destFile.exists() && override))) {
+					if (verbose) {
+						System.out.println("unzip : " + entry.getName() + " to " + destFile);
+					}
+					BufferedInputStream is = new BufferedInputStream(zip.getInputStream(entry));
+					int currentByte;
+					// establish buffer for writing file
+					byte data[] = new byte[BUFFER];
+
+					// write the current file to disk
+					FileOutputStream fos = new FileOutputStream(destFile);
+					BufferedOutputStream dest = new BufferedOutputStream(fos, BUFFER);
+
+					// read and write until last byte is encountered
+					while ((currentByte = is.read(data, 0, BUFFER)) != -1) {
+						dest.write(data, 0, currentByte);
+					}
+					dest.flush();
+					dest.close();
+					is.close();
+				}
+
+			}
+
+		} else {
+			throw new IOException("some files do not exists");
+		}
 	}
 
 }

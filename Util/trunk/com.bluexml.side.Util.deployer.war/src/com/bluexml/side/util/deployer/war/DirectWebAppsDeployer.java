@@ -15,6 +15,7 @@ import com.bluexml.side.util.componentmonitor.MonitorWriter;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.zip.TrueZipHelper;
+import com.bluexml.side.util.libs.zip.ZipManager;
 
 public abstract class DirectWebAppsDeployer extends WarDeployer {
 	boolean cleanned = false;
@@ -52,12 +53,15 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		// unzip .war or .org if exist
 		if (getBackupWarFile().exists()) {
 			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("DirectWebAppsDeployer.4", getWarToPatchFile().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
-			TrueZipHelper tzh2 = new TrueZipHelper(backupWarExt);
-			result = tzh2.copyFiles(getBackupWarFile(), getDeployedWebbAppFolder(), true);
+
+			ZipManager.unzip(getBackupWarFile(), getDeployedWebbAppFolder(), true, true);
+			//			TrueZipHelper tzh2 = new TrueZipHelper(backupWarExt);
+			//			result = tzh2.copyFiles(getBackupWarFile(), getDeployedWebbAppFolder(), true);
 		} else if (getWarToPatchFile().exists()) {
 			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.5"), Activator.Messages.getString("DirectWebAppsDeployer.4", getWarToPatchFile().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
-			TrueZipHelper tzh2 = new TrueZipHelper(warToPatchExt);
-			result = tzh2.copyFiles(getWarToPatchFile(), getDeployedWebbAppFolder(), true);
+			ZipManager.unzip(getWarToPatchFile(), getDeployedWebbAppFolder(), true, true);
+			//			TrueZipHelper tzh2 = new TrueZipHelper(warToPatchExt);
+			//			result = tzh2.copyFiles(getWarToPatchFile(), getDeployedWebbAppFolder(), true);
 		} else {
 			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.7") + getWarToPatchFile().getAbsolutePath() + Activator.Messages.getString("DirectWebAppsDeployer.9")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
