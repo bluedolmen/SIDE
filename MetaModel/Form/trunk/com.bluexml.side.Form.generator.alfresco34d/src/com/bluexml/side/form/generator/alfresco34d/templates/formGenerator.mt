@@ -111,7 +111,7 @@ label-id="<%getFieldLabelId("")%>"
  >
  
  <%if (filter("FileField") && ref.getPrefixedQName() == "cm:content"){%>
- <control template="controls/upload.ftl">
+ <control template="/side/controls/upload.ftl">
  </control>
  <%}%>
  
