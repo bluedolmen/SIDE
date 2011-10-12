@@ -31,7 +31,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 	protected File wkdir = null;
 	protected String packageExt = null;
 	protected boolean incremental = true;
-	protected boolean webappReloading = true;
+	protected boolean webappReloading = false;
 
 	public File getWorkingDir() throws Exception {
 		if (wkdir == null) {
