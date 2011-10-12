@@ -16,6 +16,7 @@ import org.osgi.framework.Bundle;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.eclipse.ExtensionPointUtils;
 import com.bluexml.side.util.libs.zip.TrueZipHelper;
+import com.bluexml.side.util.libs.zip.ZipManager;
 
 public class DependenciesDeployer {
 
@@ -91,8 +92,10 @@ public class DependenciesDeployer {
 		long length = tmpZip.length();
 		System.out.println("file to unzip :" + tmpZip + ":" + length + " b"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		if (length > 0) {
-			TrueZipHelper tzh = new TrueZipHelper("zip"); //$NON-NLS-1$
-			tzh.copyFiles(tmpZip, repository, true);
+			ZipManager.unzip(tmpZip, repository, true, true);
+			
+//			TrueZipHelper tzh = new TrueZipHelper("zip"); //$NON-NLS-1$
+//			tzh.copyFiles(tmpZip, repository, true);
 		}
 
 	}
