@@ -18,7 +18,7 @@ public class AlfrescoAmpDirectDeployer extends DirectWebAppsDeployer {
 
 	public AlfrescoAmpDirectDeployer() {
 		super(null, "alfresco", "deployer.webappName.alfresco", "amp"); //$NON-NLS-1$ $NON-NLS-1$ $NON-NLS-1$
-		hotdeploy = false; // alfresco webapp can't be reloaded
+		webappReloading = false; // alfresco webapp can't be reloaded
 	}
 
 	@Override
