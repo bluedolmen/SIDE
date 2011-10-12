@@ -31,7 +31,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 	protected File wkdir = null;
 	protected String packageExt = null;
 	protected boolean incremental = true;
-	protected boolean hotdeploy = true;
+	protected boolean webappReloading = true;
 
 	public File getWorkingDir() throws Exception {
 		if (wkdir == null) {
@@ -85,7 +85,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 						} else {
 							// incremental allowed
 							long module = pathname.lastModified();
-							File deployedWebbAppFolder = getDeployedWebbAppFolder();
+							File deployedWebbAppFolder = getIncrementalLastDeployedFlag();
 							long webapp = deployedWebbAppFolder.lastModified();
 
 							if (module > webapp) {
@@ -129,11 +129,13 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		} else {
 			monitor.addWarningTextAndLog(Activator.Messages.getString("WarDeployer.5"), "");
 		}
-		// deploy process is done, we need to mark the deployed webapp
-		//		System.out.println("DirectWebAppsDeployer.deployProcess() touch " + deployedWebbAppFolder);
-		//		FileUtils.touch(deployedWebbAppFolder);
+		
+		// deploy process is done, we need to mark the deployed webapp		
+		File incrementalLastDeploeydFlag = getIncrementalLastDeployedFlag();
+		System.out.println("DirectWebAppsDeployer.deployProcess() touch " + incrementalLastDeploeydFlag);
+		FileUtils.touch(incrementalLastDeploeydFlag);
 
-		if (hotdeploy) {
+		if (webappReloading) {
 			System.out.println("DirectWebAppsDeployer.deployProcess() touch " + getWebAppXMLFile());
 			// we touch web.xml too to let tomcat reload the webapp, some webapps should not be restarted
 			FileUtils.touch(getWebAppXMLFile());
@@ -205,6 +207,11 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 
 	public File getWebAppXMLFile() {
 		String path = FilenameUtils.separatorsToSystem("/WEB-INF/web.xml");
+		return new File(getDeployedWebbAppFolder().getAbsolutePath() + path);
+	}
+	
+	public File getIncrementalLastDeployedFlag() {
+		String path = FilenameUtils.separatorsToSystem("/META-INF/lastDeployed.txt");
 		return new File(getDeployedWebbAppFolder().getAbsolutePath() + path);
 	}
 }
