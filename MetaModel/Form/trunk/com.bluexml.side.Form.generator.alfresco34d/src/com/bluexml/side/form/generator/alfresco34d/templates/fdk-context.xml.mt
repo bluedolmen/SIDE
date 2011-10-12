@@ -24,15 +24,21 @@ import com.bluexml.side.form.generator.alfresco34d.FormGenerator
    </bean>
 
    <!-- Provide <%getRootPackage().name%> form config -->
-   <bean id="<%getRootPackage().name%>FormsClientConfig" class="org.springframework.extensions.config.ConfigBootstrap" 
-         init-method="register">
-      <property name="configService" ref="web.config" />
-      <property name="configs">
-         <list>
-            <value>classpath:alfresco/web-extension/<%getModuleIdService(getRootPackage().name)%>/share-forms-config.xml</value>
-            <value>classpath:alfresco/web-extension/<%getModuleIdService(getRootPackage().name)%>/share-forms-config-custom.xml</value>
-         </list>
-      </property>
-   </bean>
+	<bean id="<%getRootPackage().name%>FormsURLConfig"
+		class="org.springframework.extensions.config.source.UrlConfigSource">
+		<constructor-arg>
+			<list>
+				<value>webapp:WEB-INF/classes/alfresco/web-extension/<%getModuleIdService(getRootPackage().name)%>/share-forms-config.xml</value>
+				<value>webapp:WEB-INF/classes/alfresco/web-extension/<%getModuleIdService(getRootPackage().name)%>/share-forms-config-custom.xml</value>
+			</list>
+		</constructor-arg>
+	</bean>
 
+	<!-- Provide default form config -->
+	<bean id="<%getRootPackage().name%>FormsClientConfig"
+		class="com.bluexml.side.Framework.alfresco.share.formExtension.MyConfigBootStrap"
+		init-method="register">
+		<property name="configService" ref="web.config" />
+		<property name="urlConfigSource" ref="<%getRootPackage().name%>FormsURLConfig" />
+	</bean>
 </beans>
