@@ -44,6 +44,8 @@ public class AlfrescoAmpHotDeployer extends AlfrescoAmpDirectDeployer {
 	private static final String ALFRESCO_ADMIN_LOGIN = "alfresco.admin.login";
 	public static final String CONFIGURATION_PARAMETER_ALFRESCO_URL = "alfresco.url";
 
+	// options
+	public static final String OPTION_HOT_DEPLOY = "com.bluexml.side.hotDeployment";
 	// alfresco services URLs
 	private static final String SERVICE_RESET_ON_SUBMIT_REFRESH_WEB_SCRIPTS = "/service/?reset=on&submit=Refresh%20Web%20Scripts";
 	private static final String SERVICE_SIDE_WORKFLOWHOTDEPLOY_FILEPATH = "/service/side/workflowhotdeploy?filepath=";
@@ -55,42 +57,57 @@ public class AlfrescoAmpHotDeployer extends AlfrescoAmpDirectDeployer {
 	public static final String messagesRepoPath = "/app:company_home/app:dictionary/app:messages";
 	public static final String webclientRepoPath = "/app:company_home/app:dictionary/app:webclient_extension";
 
+	private String getAdminPassWord() {
+		return getGenerationParameters().get(ALFRESCO_ADMIN_PWD);
+	}
+
+	private String getAdminLogin() {
+		return getGenerationParameters().get(ALFRESCO_ADMIN_LOGIN);
+	}
+
+	protected boolean doHotDeploy() {
+		return options != null && options.contains(OPTION_HOT_DEPLOY);
+	}
+	
 	@Override
 	protected void postProcess(File fileToDeploy) {
 		// implements hot deployment
+		if (doHotDeploy()) {
 
-		try {
-			AuthenticationUtils.startSession(getAdminLogin(), getAdminPassWord());
+			try {
+				AuthenticationUtils.startSession(getAdminLogin(), getAdminPassWord());
 
-			reloadDataTypeDefinition(); // upload
+				reloadDataTypeDefinition(); // upload
 
-			reloadWorkflowDefinition();
+				reloadWorkflowDefinition();
 
-			reloadWebScripts();
+				reloadWebScripts();
 
-			reloadMessagesBundles();
+				reloadMessagesBundles();
 
-			reloadWebConfig();
+				reloadWebConfig();
 
-		} catch (AuthenticationFault e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (AuthenticationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			} catch (AuthenticationFault e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AuthenticationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			AuthenticationUtils.endSession();
+
 		}
-
-		AuthenticationUtils.endSession();
-
 	}
 
 	private void reloadWebConfig() throws AuthenticationException, Exception {
+		System.out.println("AlfrescoAmpHotDeployer.reloadWebConfig()");
 		String regex = ".*/module/([^/]*)/web-client-config-custom.xml";
 
 		// search for messages
@@ -124,6 +141,7 @@ public class AlfrescoAmpHotDeployer extends AlfrescoAmpDirectDeployer {
 	}
 
 	private void reloadMessagesBundles() throws AuthenticationException, Exception {
+		System.out.println("AlfrescoAmpHotDeployer.reloadMessagesBundles()");
 		String regex = ".*WEB-INF/classes/(.*/module/[^/]*/[model|bpm])/.*properties";
 
 		// search for messages
@@ -177,6 +195,7 @@ public class AlfrescoAmpHotDeployer extends AlfrescoAmpDirectDeployer {
 	}
 
 	private void reloadDataTypeDefinition() throws IOException {
+		System.out.println("AlfrescoAmpHotDeployer.reloadDataTypeDefinition()");
 		List<String> list = new ArrayList<String>();
 		// search for processDefinition files
 		for (String string : deployedFiles) {
@@ -251,13 +270,7 @@ public class AlfrescoAmpHotDeployer extends AlfrescoAmpDirectDeployer {
 
 	}
 
-	private String getAdminPassWord() {
-		return getGenerationParameters().get(ALFRESCO_ADMIN_PWD);
-	}
-
-	private String getAdminLogin() {
-		return getGenerationParameters().get(ALFRESCO_ADMIN_LOGIN);
-	}
+	
 
 	private void reloadWorkflowDefinition() throws AuthenticationException, Exception {
 		// get the list of workflow process definition (search in deployed files)
@@ -325,5 +338,4 @@ public class AlfrescoAmpHotDeployer extends AlfrescoAmpDirectDeployer {
 		System.out.println(executeRequest);
 	}
 
-	
 }

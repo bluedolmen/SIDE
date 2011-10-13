@@ -18,6 +18,9 @@ public class AlfrescoHotDeployerHelper {
 		// Execute the request
 		HttpResponse response;
 
+		System.out.println("AlfrescoHotDeployerHelper.executeRequest() request:" + post);
+		System.out.println("AlfrescoHotDeployerHelper.executeRequest() URI :" + post.getURI());
+		
 		response = httpclient.execute(post);
 
 		// Examine the response status

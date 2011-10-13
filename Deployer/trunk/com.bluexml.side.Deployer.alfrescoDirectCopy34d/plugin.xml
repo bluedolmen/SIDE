@@ -49,6 +49,20 @@
                      key="alfresco.admin.pwd"
                      label="Alfresco Admin password">
                </configurationParameter>
+               <configurationParameter
+                     dataType="String"
+                     defaultValue="http://localhost:8080/share"
+                     documentation="Set this value to the URL of the Alfresco share instance on which you want to generate and deploy"
+                     key="share.url"
+                     label="Alfresco Share URL">
+               </configurationParameter>
+               <option
+                     defaultOption="false"
+                     documentation="select this option to allow deployment process to do the best to load changes whitout restart the web application"
+                     hidden="false"
+                     key="com.bluexml.side.hotDeployment"
+                     label="hot deployment">
+               </option>
             </deployerVersion>
          </technologyVersion>
       </technology>
