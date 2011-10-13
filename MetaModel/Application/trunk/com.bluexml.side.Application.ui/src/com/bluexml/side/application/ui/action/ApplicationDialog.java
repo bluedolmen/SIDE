@@ -1057,7 +1057,7 @@ public class ApplicationDialog extends Dialog {
 		generateButton.setEnabled(false);
 		generateButton.setToolTipText(Activator.Messages.getString("ApplicationDialog.c7")); //$NON-NLS-1$
 		generateButton.setText(Activator.Messages.getString("ApplicationDialog.c8")); //$NON-NLS-1$
-		generateButton.setBounds(10, 137, 159, 16);
+		generateButton.setBounds(10, 137, 130, 16);
 		generateButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
@@ -1075,7 +1075,7 @@ public class ApplicationDialog extends Dialog {
 		completeButton = new Button(composite_1, SWT.CHECK);
 		completeButton.setToolTipText(Activator.Messages.getString("ApplicationDialog.c9")); //$NON-NLS-1$
 		completeButton.setText(Activator.Messages.getString("ApplicationDialog.c10")); //$NON-NLS-1$
-		completeButton.setBounds(160, 137, 159, 16);
+		completeButton.setBounds(160, 137, 130, 16);
 		completeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
