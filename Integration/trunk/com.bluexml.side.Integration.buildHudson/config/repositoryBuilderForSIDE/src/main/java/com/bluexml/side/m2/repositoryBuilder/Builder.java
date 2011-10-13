@@ -34,6 +34,7 @@ public class Builder {
 		System.out.println("               - <pluginsSRCHome> : directory containing Eclipse plugins");
 		System.out.println("               - pom file path");
 		System.out.println("               - [product file path] to use to search modules following product/feature/plugin/ext");
+		System.out.println("               - [*.properties] to use to search project in SVN tree");
 		System.out.println("          * makeDot :");
 		System.out.println("               - <pluginsSRCHome> : directory containing Eclipse plugins");
 		System.out.println("               - dot file path to output");
