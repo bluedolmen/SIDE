@@ -199,7 +199,7 @@ public class IncrementalBuilderHelper {
 					EList<ConfigurationParameters> parameters = currentConfiguration.getParameters();
 					incrementalConf.getParameters().addAll(EcoreUtil.copyAll(parameters));
 					disableGenerationClean(incrementalConf);
-					
+
 					/**
 					 * Changed parameters -> include all related generator OK
 					 */
@@ -296,11 +296,19 @@ public class IncrementalBuilderHelper {
 						configuration.getGeneratorConfigurations().clear();
 						for (ComponantConfiguration comp : configuration.getDeployerConfigurations()) {
 							// unselect clean
-							comp.getOptions().clear();
+							List<Option> toremove = new ArrayList<Option>();
+
+							for (Option op : comp.getOptions()) {
+								if (op.getKey().endsWith("clean")) {
+									toremove.add(op);
+								}
+							}
+							comp.getOptions().removeAll(toremove);
 						}
+
 						// disable clean generation option if exists
 						disableGenerationClean(configuration);
-						
+
 						IFile onlyDeployersAppModelFile = saveApplicationModel(ONLY_DEPLOYERS_APPLICATION, onlyDeployers);
 						generateChangedModels(onlyDeployersAppModelFile, confName, complete, new ArrayList<String>());
 					}
