@@ -29,6 +29,12 @@
                      documentation="Check this option if you want to completely remove previous deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time."
                      key="com.bluexml.side.Deployer.alfrescoDirectCopy34d.clean"
                      label="clean">
+                  <mustBeUnchecked
+                        pluginId="com.bluexml.side.Deployer.alfrescoDirectCopy34d">
+                     <optionRef
+                           optionId="com.bluexml.side.hotDeployment">
+                     </optionRef>
+                  </mustBeUnchecked>
                </option>
                <configurationParameter
                      dataType="String"
@@ -62,6 +68,12 @@
                      hidden="false"
                      key="com.bluexml.side.hotDeployment"
                      label="hot deployment">
+                  <mustBeUnchecked
+                        pluginId="com.bluexml.side.Deployer.alfrescoDirectCopy34d">
+                     <optionRef
+                           optionId="com.bluexml.side.Deployer.alfrescoDirectCopy34d.clean">
+                     </optionRef>
+                  </mustBeUnchecked>
                </option>
             </deployerVersion>
          </technologyVersion>
