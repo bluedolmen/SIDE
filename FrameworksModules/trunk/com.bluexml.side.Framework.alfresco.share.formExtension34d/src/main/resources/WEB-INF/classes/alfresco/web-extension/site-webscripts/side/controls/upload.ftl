@@ -45,9 +45,9 @@
    </#if>
    
    <label for="${fieldHtmlId}">${field.label?html}:<#if field.mandatory><span class="mandatory-indicator">${msg("form.required.fields.marker")}</span></#if></label>
-   <#if form.mode == "edit">   
+   <#--if form.mode == "edit">   
    <div>${msg("form.control.content.edit")}</div>
-   </#if>
+   </#if-->
    <input type="file" id="${fieldHtmlId}" name="${field.name}"/>
    
    
