@@ -98,8 +98,7 @@ public class IncrementalBuilderHelper {
 		Configuration configuration = onlyDeployers.getConfiguration(confName);
 
 		for (ComponantConfiguration comp : configuration.getDeployerConfigurations()) {
-			// unselect clean
-			comp.getOptions().clear();
+			unselectDeployerCleanOption(comp);
 		}
 		disableGenerationClean(configuration);
 		deleteBuilderApplicationModels();
@@ -295,15 +294,7 @@ public class IncrementalBuilderHelper {
 						Configuration configuration = onlyDeployers.getConfiguration(confName);
 						configuration.getGeneratorConfigurations().clear();
 						for (ComponantConfiguration comp : configuration.getDeployerConfigurations()) {
-							// unselect clean
-							List<Option> toremove = new ArrayList<Option>();
-
-							for (Option op : comp.getOptions()) {
-								if (op.getKey().endsWith("clean")) {
-									toremove.add(op);
-								}
-							}
-							comp.getOptions().removeAll(toremove);
+							unselectDeployerCleanOption(comp);
 						}
 
 						// disable clean generation option if exists
@@ -358,6 +349,18 @@ public class IncrementalBuilderHelper {
 			Activator.getDefault().getLog().log(new Status(Status.WARNING, Activator.PLUGIN_ID, "SIDE Builder Fail, missing project configuration, please to set SIDE project properties"));
 		}
 
+	}
+
+	private void unselectDeployerCleanOption(ComponantConfiguration comp) {
+		// unselect clean
+		List<Option> toremove = new ArrayList<Option>();
+
+		for (Option op : comp.getOptions()) {
+			if (op.getKey().endsWith("clean")) {
+				toremove.add(op);
+			}
+		}
+		comp.getOptions().removeAll(toremove);
 	}
 
 	private void disableGenerationClean(Configuration configuration) {
