@@ -53,9 +53,13 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <forms>
 	<form<%if (service::getRootContainer().name.toLowerCase() != "default"){%> id="<%getFormId()%>"<%}%>>
 	<%if (presentation.toString() == "tabbed" || presentation.toString() == "auto"){%>
+	 <%if (isSearchForm) {%>
+	 	<edit-form template="/side/templates/search-form.ftl" />
+	 <%}else{%>
 		<edit-form template="/fdk/templates/tab-edit-form.ftl" />
 		<create-form template="/fdk/templates/tab-edit-form.ftl" />
 		<view-form template="/fdk/templates/tab-edit-form.ftl" />
+	 <%}%>
 	<%}%>
 	
 		<field-visibility>
