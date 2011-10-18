@@ -46,7 +46,7 @@ public class MavenUtil {
 		argsL.add("-B"); //$NON-NLS-1$
 		// display stacktrace if error occur 
 		argsL.add("-e"); //$NON-NLS-1$
-		argsL.add("-X"); //$NON-NLS-1$
+//		argsL.add("-X"); //$NON-NLS-1$
 		if (offline == null) {
 			offline = false;
 		}
