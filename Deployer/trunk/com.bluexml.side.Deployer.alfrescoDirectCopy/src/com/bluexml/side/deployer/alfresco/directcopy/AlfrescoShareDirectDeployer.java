@@ -46,7 +46,8 @@ public class AlfrescoShareDirectDeployer extends DirectWebAppsDeployer {
 
 	@Override
 	protected void postProcess(File fileToDeploy) throws Exception {
-		if (doHotDeploy()) {			
+		System.out.println("AlfrescoShareDirectDeployer.postProcess() hotdeploy ?:" + doHotDeploy());
+		if (doHotDeploy()) {
 			reloadWebScripts();
 		}
 	}
@@ -61,7 +62,7 @@ public class AlfrescoShareDirectDeployer extends DirectWebAppsDeployer {
 
 	private void reloadWebScripts() throws AuthenticationException, Exception {
 		System.out.println("AlfrescoShareDirectDeployer.reloadWebScripts()");
-		
+
 		String alfrescoURL = getGenerationParameters().get(CONFIGURATION_PARAMETER_SHARE_URL);
 
 		HttpClient httpclient = new DefaultHttpClient();
