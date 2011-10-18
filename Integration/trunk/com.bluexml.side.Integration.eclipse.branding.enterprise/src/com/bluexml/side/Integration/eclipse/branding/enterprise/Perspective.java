@@ -23,6 +23,7 @@ public class Perspective implements IPerspectiveFactory {
 				0.75f, IPageLayout.ID_EDITOR_AREA);
 
 		addView(layout, left, IPageLayout.ID_RES_NAV);
+		addView(layout, right, "com.bluexml.view.SIDELabsHTMLView");
 		addView(layout, right, IPageLayout.ID_OUTLINE);
 
 		addView(layout, bottom, IPageLayout.ID_PROP_SHEET);

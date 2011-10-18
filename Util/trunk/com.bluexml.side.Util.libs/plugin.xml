@@ -4,6 +4,7 @@
   <extension point="org.eclipse.ui.views">
     <category id="com.bluexml.side" name="SIDE" />
     <view category="com.bluexml.side" class="com.bluexml.side.util.libs.view.OutlineHTMLView" icon="icons/outlineView.gif" id="com.bluexml.view.OutlineHTMLView" name="SIDE Outline" />
+    <view category="com.bluexml.side" class="com.bluexml.side.util.libs.view.SIDELabsHTMLView" icon="icons/outlineView.gif" id="com.bluexml.view.SIDELabsHTMLView" name="SIDE-Labs Planet" />
   </extension>
 </plugin>
 
