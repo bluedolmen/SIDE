@@ -648,14 +648,18 @@ function getSearchResults(params)
           formJson = jsonUtils.toObject(formData);
       
       
-      
+      var repoSearch = params.repo;
+      var searchPath = getSearchPath(formJson);      
+      if (searchPath != null) {
+    	  repoSearch = true;
+      }
       
       
       formQuery = buildFormQuery(formJson);
       
       
       
-      if (formQuery.length !== 0 || ftsQuery.length !== 0)
+      if (formQuery.length !== 0 || ftsQuery.length !== 0 || repoSearch)
       {
          // extract data type for this search - advanced search query is type
 			// specific
@@ -665,11 +669,11 @@ function getSearchResults(params)
       }
    }
    
-   if (ftsQuery.length !== 0)
+   if (ftsQuery.length !== 0 || repoSearch)
    {
       // we processed the search terms, so suffix the PATH query
       var path = null;
-      if (!params.repo)
+      if (!repoSearch)
       {
          path = SITES_SPACE_QNAME_PATH;
          if (params.siteId !== null && params.siteId.length > 0)
@@ -688,6 +692,11 @@ function getSearchResults(params)
          {
             path += "*/";
          }
+      } else if (searchPath != undefined && searchPath != ''){    	  
+    	  path = searchPath;
+    	  if (getSearchSubdirectories(formJson)) {
+    		  path += "/";
+    	  }
       }
       
       if (path !== null)
@@ -961,6 +970,7 @@ function getFormFieldIdFor(formFields, id) {
 	}
 	return formId;
 }
+
 function getOperatorId(f) {
 	var id = f;
 	if (f.match("-range$") == "-range") {
@@ -972,4 +982,22 @@ function getOperatorId(f) {
 		}
 	}
 	return "operator-" + id;
+}
+
+function getSearchPath(formJson) {
+	var pathFieldId="path_added";
+	var searchPath = formJson[pathFieldId];
+	if (searchPath != null && searchPath != undefined && searchPath != '') {
+		return search.findNode(searchPath).qnamePath;
+	}
+	return null;
+}
+
+function getSearchSubdirectories(formJson) {
+	var f=formJson["path_subdirectories"];	
+	var sub = f != undefined && f == 'on';
+	if (logger.isLoggingEnabled()) {
+		logger.log("search in subdirectories :" + sub);
+	}
+	return sub;
 }
