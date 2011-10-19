@@ -32,10 +32,13 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleException;
 import org.sideLabs.referential.references.Model;
 import org.sideLabs.referential.references.ModelsDocument;
 import org.sideLabs.referential.references.Reference;
@@ -45,17 +48,66 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
+import com.bluexml.side.Util.ecore.QuietModelModification.QuiteModelModificationListener;
 import com.bluexml.side.application.ui.action.MustBeStopped;
 import com.bluexml.side.integration.eclipse.builder.incremental.IncrementalBuilderHelper;
 
 public class SIDEBuilder extends IncrementalProjectBuilder {
-	private static boolean activated = true;
+	private boolean activated = true;
 	private SIDEBuilderChecker checker;
+
+	public SIDEBuilder() {
+		String string = com.bluexml.side.application.ui.Activator.PLUGIN_ID;
+		System.out.println(string + " Activator state :");
+		Bundle bundle = Platform.getBundle(string);
+		int state = bundle.getState();
+		if (state == Bundle.UNINSTALLED) {
+			System.out.println("UNINSTALLED");
+		} else if (state == Bundle.INSTALLED) {
+			System.out.println("INSTALLED");
+		} else if (state == Bundle.RESOLVED) {
+			System.out.println("RESOLVED, try to start it");
+			try {
+				bundle.start();
+			} catch (BundleException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (state == Bundle.STARTING) {
+			System.out.println("STARTING");
+		} else if (state == Bundle.STOPPING) {
+			System.out.println("STOPPING");
+		} else if (state == Bundle.ACTIVE) {
+			System.out.println("ACTIVE");
+		}
+
+		com.bluexml.side.application.ui.Activator default1 = com.bluexml.side.application.ui.Activator.getDefault();
+
+		QuiteModelModificationListener l = new QuiteModelModificationListener() {
+
+			public void beforeAction() {
+				System.out.println("builder instance :" + SIDEBuilder.this);
+				SIDEBuilder.this.activated = false;
+
+			}
+
+			public void afterAction() {
+				System.out.println("builder instance :" + SIDEBuilder.this);
+				SIDEBuilder.this.activated = true;
+
+				//					SIDEBuilder.this.getProject().refreshLocal(-1, new NullProgressMonitor());
+
+			}
+		};
+
+		default1.getQuietModifs().addListener(l);
+
+	}
 
 	/**
 	 * @return the activated
 	 */
-	public static boolean isActivated() {
+	public boolean isActivated() {
 		return activated;
 	}
 
@@ -63,9 +115,9 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 	 * @param activated
 	 *            the activated to set
 	 */
-	public static void setActivated(boolean activated) {
+	public void setActivated(boolean activated) {
 		System.out.println("SIDEBuilder.setActivated() new value :" + activated);
-		SIDEBuilder.activated = activated;
+		this.activated = activated;
 	}
 
 	public static final String BUILDER_ID = "com.bluexml.side.integration.eclipse.builder";
@@ -146,7 +198,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 
 		// only execute project full SIDE process
 		IncrementalBuilderHelper inc = new IncrementalBuilderHelper(getProject());
-		
+
 		try {
 			inc.executeSIDEProjectProcess();
 		} catch (Exception e) {
@@ -176,7 +228,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		// get model list from checker and run incremental generation
 		List<IFile> models = checker.getModels();
 		IncrementalBuilderHelper inc = new IncrementalBuilderHelper(getProject());
-		
+
 		try {
 			if (models.size() == 1) {
 				inc.generateChangedModels(true, models.get(0));

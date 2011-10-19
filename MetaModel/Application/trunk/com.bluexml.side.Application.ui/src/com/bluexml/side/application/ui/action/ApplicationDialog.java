@@ -238,6 +238,7 @@ public class ApplicationDialog extends Dialog {
 			String name = configurationList.getItem(configurationList.getSelectionIndex());
 			Configuration configuration = application.getConfiguration(name);
 			try {
+
 				ApplicationUtil.updateConfigurationFromExtensionPoint(configuration);
 				// apply updates
 				saveData();
@@ -801,6 +802,7 @@ public class ApplicationDialog extends Dialog {
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
+		com.bluexml.side.application.ui.Activator.getDefault().getQuietModifs().notifyBeforeModelModif();
 		columnNames = new String[2];
 		columnNames[0] = columnNameLabel;
 		columnNames[1] = columnNameValue;
@@ -1595,13 +1597,14 @@ public class ApplicationDialog extends Dialog {
 					saveData();
 				}
 			}
+			com.bluexml.side.application.ui.Activator.getDefault().getQuietModifs().notifyAfterModelModif();
 			getShell().close();
 			close();
 		}
 		if (buttonId == APPLY_ID) {
 			Display.getCurrent().getActiveShell().setCursor(new Cursor(Display.getCurrent(), SWT.CURSOR_WAIT));
 			saveData();
-			Display.getCurrent().getActiveShell().setCursor(new Cursor(Display.getCurrent(), SWT.CURSOR_ARROW));
+			Display.getCurrent().getActiveShell().setCursor(new Cursor(Display.getCurrent(), SWT.CURSOR_ARROW));			
 		}
 		if (buttonId == GEN_ID) {
 			if (applicationModified) {
@@ -1618,7 +1621,7 @@ public class ApplicationDialog extends Dialog {
 			IFile applicationFile = this.model;
 			//			final GeneratePopUp generationPopUp = new GeneratePopUp(shell, conf);
 			final GeneratePopUp generationPopUp = new GeneratePopUp(shell, applicationFile, applicationModel, conf);
-			ApplicationDialog.this.close();
+			this.close();
 			generationPopUp.launch();
 			//			GeneratePopUp.launch(conf, generationPopUp, application_, model_);
 

@@ -241,6 +241,7 @@ public class GeneratePopUp extends Dialog {
 		 * update .application with plugin extensions
 		 */
 		try {
+			com.bluexml.side.application.ui.Activator.getDefault().getQuietModifs().notifyBeforeModelModif();
 			ApplicationUtil.updateApplicationFromExtensionPoint(applicationModel, applicationFile);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -276,7 +277,7 @@ public class GeneratePopUp extends Dialog {
 							} else {
 								//							System.err.println("GeneratePopup closed");
 							}
-
+							com.bluexml.side.application.ui.Activator.getDefault().getQuietModifs().notifyAfterModelModif();
 						}
 
 						public void awake(IJobChangeEvent event) {
