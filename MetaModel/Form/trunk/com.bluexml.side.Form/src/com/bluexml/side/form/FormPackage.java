@@ -8602,6 +8602,169 @@ public interface FormPackage extends EPackage {
 	int BOOLEAN_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.ModelChoiceSearchFieldImpl <em>Model Choice Search Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.ModelChoiceSearchFieldImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceSearchField()
+	 * @generated
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD = 43;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__STEREOTYPES = SEARCH_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__TAGS = SEARCH_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__COMMENTS = SEARCH_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__DOCUMENTATION = SEARCH_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__DESCRIPTION = SEARCH_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__METAINFO = SEARCH_FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__CONSTRAINTS = SEARCH_FIELD__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__NAMESPACE = SEARCH_FIELD__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__LABEL = SEARCH_FIELD__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__ID = SEARCH_FIELD__ID;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__HIDDEN = SEARCH_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__HELP_TEXT = SEARCH_FIELD__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__REF = SEARCH_FIELD__REF;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__STYLE = SEARCH_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Xtension</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__XTENSION = SEARCH_FIELD__XTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Real class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__REAL_CLASS = SEARCH_FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Model Choice Search Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8609,7 +8772,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormGroupPresentationType()
 	 * @generated
 	 */
-	int FORM_GROUP_PRESENTATION_TYPE = 43;
+	int FORM_GROUP_PRESENTATION_TYPE = 44;
 
 
 	/**
@@ -8620,7 +8783,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getTextWidgetType()
 	 * @generated
 	 */
-	int TEXT_WIDGET_TYPE = 44;
+	int TEXT_WIDGET_TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceWidgetType <em>Choice Widget Type</em>}' enum.
@@ -8630,7 +8793,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceWidgetType()
 	 * @generated
 	 */
-	int CHOICE_WIDGET_TYPE = 45;
+	int CHOICE_WIDGET_TYPE = 46;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ModelChoiceWidgetType <em>Model Choice Widget Type</em>}' enum.
@@ -8640,7 +8803,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceWidgetType()
 	 * @generated
 	 */
-	int MODEL_CHOICE_WIDGET_TYPE = 46;
+	int MODEL_CHOICE_WIDGET_TYPE = 47;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.CharFieldSearchOperators <em>Char Field Search Operators</em>}' enum.
@@ -8650,7 +8813,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharFieldSearchOperators()
 	 * @generated
 	 */
-	int CHAR_FIELD_SEARCH_OPERATORS = 47;
+	int CHAR_FIELD_SEARCH_OPERATORS = 48;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.NumericalFieldSearchOperators <em>Numerical Field Search Operators</em>}' enum.
@@ -8660,7 +8823,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericalFieldSearchOperators()
 	 * @generated
 	 */
-	int NUMERICAL_FIELD_SEARCH_OPERATORS = 48;
+	int NUMERICAL_FIELD_SEARCH_OPERATORS = 49;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceFieldSearchOperators <em>Choice Field Search Operators</em>}' enum.
@@ -8670,7 +8833,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceFieldSearchOperators()
 	 * @generated
 	 */
-	int CHOICE_FIELD_SEARCH_OPERATORS = 49;
+	int CHOICE_FIELD_SEARCH_OPERATORS = 50;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FileFieldSearchOperators <em>File Field Search Operators</em>}' enum.
@@ -8680,7 +8843,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileFieldSearchOperators()
 	 * @generated
 	 */
-	int FILE_FIELD_SEARCH_OPERATORS = 50;
+	int FILE_FIELD_SEARCH_OPERATORS = 51;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.CombinationOperators <em>Combination Operators</em>}' enum.
@@ -8690,7 +8853,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCombinationOperators()
 	 * @generated
 	 */
-	int COMBINATION_OPERATORS = 51;
+	int COMBINATION_OPERATORS = 52;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.DateFieldSearchOperators <em>Date Field Search Operators</em>}' enum.
@@ -8700,7 +8863,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateFieldSearchOperators()
 	 * @generated
 	 */
-	int DATE_FIELD_SEARCH_OPERATORS = 52;
+	int DATE_FIELD_SEARCH_OPERATORS = 53;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.BooleanFieldSearchOperators <em>Boolean Field Search Operators</em>}' enum.
@@ -8710,7 +8873,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getBooleanFieldSearchOperators()
 	 * @generated
 	 */
-	int BOOLEAN_FIELD_SEARCH_OPERATORS = 53;
+	int BOOLEAN_FIELD_SEARCH_OPERATORS = 54;
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.FormElement <em>Element</em>}'.
@@ -9807,6 +9970,16 @@ public interface FormPackage extends EPackage {
 	EAttribute getBooleanSearchField_DefaultOperator();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.ModelChoiceSearchField <em>Model Choice Search Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Choice Search Field</em>'.
+	 * @see com.bluexml.side.form.ModelChoiceSearchField
+	 * @generated
+	 */
+	EClass getModelChoiceSearchField();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.WorkflowFormCollection <em>Workflow Form Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10901,6 +11074,16 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR = eINSTANCE.getBooleanSearchField_DefaultOperator();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ModelChoiceSearchFieldImpl <em>Model Choice Search Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.ModelChoiceSearchFieldImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceSearchField()
+		 * @generated
+		 */
+		EClass MODEL_CHOICE_SEARCH_FIELD = eINSTANCE.getModelChoiceSearchField();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.WorkflowFormCollectionImpl <em>Workflow Form Collection</em>}' class.

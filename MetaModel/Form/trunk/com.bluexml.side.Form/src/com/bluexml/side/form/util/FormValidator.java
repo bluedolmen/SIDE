@@ -307,6 +307,8 @@ public class FormValidator extends EObjectValidator {
 				return validateFileSearchField((FileSearchField)value, diagnostics, context);
 			case FormPackage.BOOLEAN_SEARCH_FIELD:
 				return validateBooleanSearchField((BooleanSearchField)value, diagnostics, context);
+			case FormPackage.MODEL_CHOICE_SEARCH_FIELD:
+				return validateModelChoiceSearchField((ModelChoiceSearchField)value, diagnostics, context);
 			case FormPackage.FORM_GROUP_PRESENTATION_TYPE:
 				return validateFormGroupPresentationType((FormGroupPresentationType)value, diagnostics, context);
 			case FormPackage.TEXT_WIDGET_TYPE:
@@ -340,9 +342,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFormElement(FormElement formElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(formElement, diagnostics, context);
+		boolean result = validate_NoCircularContainment(formElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(formElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(formElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(formElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(formElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(formElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(formElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formElement, diagnostics, context);
@@ -448,9 +452,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFormGroup(FormGroup formGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(formGroup, diagnostics, context);
+		boolean result = validate_NoCircularContainment(formGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(formGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(formGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(formGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(formGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(formGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(formGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formGroup, diagnostics, context);
@@ -466,9 +472,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateField(Field field, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(field, diagnostics, context);
+		boolean result = validate_NoCircularContainment(field, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(field, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(field, diagnostics, context);
@@ -524,9 +532,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateBooleanField(BooleanField booleanField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(booleanField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(booleanField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(booleanField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(booleanField, diagnostics, context);
@@ -543,9 +553,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCharField(CharField charField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(charField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(charField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(charField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(charField, diagnostics, context);
@@ -602,9 +614,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDateField(DateField dateField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(dateField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(dateField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(dateField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateField, diagnostics, context);
@@ -621,9 +635,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDateTimeField(DateTimeField dateTimeField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(dateTimeField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(dateTimeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(dateTimeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateTimeField, diagnostics, context);
@@ -640,9 +656,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDecimalField(DecimalField decimalField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(decimalField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(decimalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(decimalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(decimalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(decimalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(decimalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(decimalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(decimalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(decimalField, diagnostics, context);
@@ -659,9 +677,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFloatField(FloatField floatField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(floatField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(floatField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(floatField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(floatField, diagnostics, context);
@@ -678,9 +698,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateIntegerField(IntegerField integerField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(integerField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(integerField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(integerField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(integerField, diagnostics, context);
@@ -697,9 +719,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateModelChoiceField(ModelChoiceField modelChoiceField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(modelChoiceField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(modelChoiceField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(modelChoiceField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(modelChoiceField, diagnostics, context);
@@ -717,9 +741,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEmailField(EmailField emailField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(emailField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(emailField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(emailField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(emailField, diagnostics, context);
@@ -737,9 +763,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFileField(FileField fileField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(fileField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(fileField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(fileField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fileField, diagnostics, context);
@@ -756,9 +784,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateImageField(ImageField imageField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(imageField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(imageField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(imageField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(imageField, diagnostics, context);
@@ -775,9 +805,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTimeField(TimeField timeField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(timeField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(timeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(timeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(timeField, diagnostics, context);
@@ -794,9 +826,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateURLField(URLField urlField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(urlField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(urlField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(urlField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(urlField, diagnostics, context);
@@ -814,9 +848,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePhoneNumberField(PhoneNumberField phoneNumberField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(phoneNumberField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(phoneNumberField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(phoneNumberField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(phoneNumberField, diagnostics, context);
@@ -834,9 +870,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFormAspect(FormAspect formAspect, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(formAspect, diagnostics, context);
+		boolean result = validate_NoCircularContainment(formAspect, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(formAspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(formAspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(formAspect, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(formAspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(formAspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(formAspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formAspect, diagnostics, context);
@@ -852,9 +890,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFormClass(FormClass formClass, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(formClass, diagnostics, context);
+		boolean result = validate_NoCircularContainment(formClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(formClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formClass, diagnostics, context);
@@ -873,9 +913,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateReference(Reference reference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(reference, diagnostics, context);
+		boolean result = validate_NoCircularContainment(reference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(reference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(reference, diagnostics, context);
@@ -902,9 +944,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateChoiceField(ChoiceField choiceField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(choiceField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(choiceField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(choiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(choiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(choiceField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(choiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(choiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(choiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(choiceField, diagnostics, context);
@@ -921,9 +965,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateRegexField(RegexField regexField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(regexField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(regexField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(regexField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(regexField, diagnostics, context);
@@ -941,9 +987,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateClassReference(ClassReference classReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(classReference, diagnostics, context);
+		boolean result = validate_NoCircularContainment(classReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(classReference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(classReference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(classReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(classReference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(classReference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(classReference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classReference, diagnostics, context);
@@ -997,9 +1045,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePasswordField(PasswordField passwordField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(passwordField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(passwordField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(passwordField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(passwordField, diagnostics, context);
@@ -1017,9 +1067,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateVirtualField(VirtualField virtualField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(virtualField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(virtualField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(virtualField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(virtualField, diagnostics, context);
@@ -1076,9 +1128,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateActionField(ActionField actionField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(actionField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(actionField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(actionField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(actionField, diagnostics, context);
@@ -1095,9 +1149,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTextField(TextField textField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(textField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(textField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(textField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(textField, diagnostics, context);
@@ -1115,9 +1171,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFormSearch(FormSearch formSearch, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(formSearch, diagnostics, context);
+		boolean result = validate_NoCircularContainment(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(formSearch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formSearch, diagnostics, context);
@@ -1136,9 +1194,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateNumericalField(NumericalField numericalField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(numericalField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(numericalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(numericalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(numericalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(numericalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(numericalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(numericalField, diagnostics, context);
@@ -1155,9 +1215,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateStaticText(StaticText staticText, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(staticText, diagnostics, context);
+		boolean result = validate_NoCircularContainment(staticText, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(staticText, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(staticText, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(staticText, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(staticText, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(staticText, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(staticText, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(staticText, diagnostics, context);
@@ -1182,9 +1244,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateSearchField(SearchField searchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(searchField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(searchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(searchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(searchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(searchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(searchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(searchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(searchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(searchField, diagnostics, context);
@@ -1200,9 +1264,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateNumericalSearchField(NumericalSearchField numericalSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(numericalSearchField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(numericalSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(numericalSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(numericalSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(numericalSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(numericalSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(numericalSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(numericalSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(numericalSearchField, diagnostics, context);
@@ -1218,9 +1284,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCharSearchField(CharSearchField charSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(charSearchField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(charSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(charSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(charSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(charSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(charSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(charSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(charSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(charSearchField, diagnostics, context);
@@ -1236,9 +1304,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDateSearchField(DateSearchField dateSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(dateSearchField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(dateSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(dateSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(dateSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(dateSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(dateSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(dateSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(dateSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateSearchField, diagnostics, context);
@@ -1254,9 +1324,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateChoiceSearchField(ChoiceSearchField choiceSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(choiceSearchField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(choiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(choiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(choiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(choiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(choiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(choiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(choiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(choiceSearchField, diagnostics, context);
@@ -1272,9 +1344,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFileSearchField(FileSearchField fileSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(fileSearchField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(fileSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(fileSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(fileSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(fileSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(fileSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(fileSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(fileSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fileSearchField, diagnostics, context);
@@ -1290,15 +1364,38 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateBooleanSearchField(BooleanSearchField booleanSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(booleanSearchField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(booleanSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(booleanSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(booleanSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(booleanSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(booleanSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(booleanSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(booleanSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(booleanSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(booleanSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(booleanSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_validRef(booleanSearchField, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateModelChoiceSearchField(ModelChoiceSearchField modelChoiceSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_NoCircularContainment(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_validRef(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(modelChoiceSearchField, diagnostics, context);
 		return result;
 	}
 
@@ -1326,9 +1423,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFormWorkflow(FormWorkflow formWorkflow, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(formWorkflow, diagnostics, context);
+		boolean result = validate_NoCircularContainment(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formWorkflow, diagnostics, context);
@@ -1386,9 +1485,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFormContainer(FormContainer formContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(formContainer, diagnostics, context);
+		boolean result = validate_NoCircularContainment(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formContainer, diagnostics, context);

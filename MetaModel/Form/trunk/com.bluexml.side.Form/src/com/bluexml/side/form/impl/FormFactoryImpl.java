@@ -148,6 +148,7 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 			case FormPackage.CHOICE_SEARCH_FIELD: return createChoiceSearchField();
 			case FormPackage.FILE_SEARCH_FIELD: return createFileSearchField();
 			case FormPackage.BOOLEAN_SEARCH_FIELD: return createBooleanSearchField();
+			case FormPackage.MODEL_CHOICE_SEARCH_FIELD: return createModelChoiceSearchField();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -571,6 +572,16 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	public BooleanSearchField createBooleanSearchField() {
 		BooleanSearchFieldImpl booleanSearchField = new BooleanSearchFieldImpl();
 		return booleanSearchField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelChoiceSearchField createModelChoiceSearchField() {
+		ModelChoiceSearchFieldImpl modelChoiceSearchField = new ModelChoiceSearchFieldImpl();
+		return modelChoiceSearchField;
 	}
 
 	/**

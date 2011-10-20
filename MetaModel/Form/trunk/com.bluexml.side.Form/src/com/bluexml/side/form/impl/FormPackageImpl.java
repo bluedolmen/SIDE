@@ -56,6 +56,7 @@ import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ImageField;
 import com.bluexml.side.form.IntegerField;
 import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.ModelChoiceSearchField;
 import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.side.form.NumericalField;
 import com.bluexml.side.form.NumericalFieldSearchOperators;
@@ -355,6 +356,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	private EClass booleanSearchFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelChoiceSearchFieldEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1466,6 +1474,15 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getModelChoiceSearchField() {
+		return modelChoiceSearchFieldEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getWorkflowFormCollection() {
 		return workflowFormCollectionEClass;
 	}
@@ -1794,6 +1811,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEAttribute(booleanSearchFieldEClass, BOOLEAN_SEARCH_FIELD__OPERATORS);
 		createEAttribute(booleanSearchFieldEClass, BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR);
 
+		modelChoiceSearchFieldEClass = createEClass(MODEL_CHOICE_SEARCH_FIELD);
+
 		// Create enums
 		formGroupPresentationTypeEEnum = createEEnum(FORM_GROUP_PRESENTATION_TYPE);
 		textWidgetTypeEEnum = createEEnum(TEXT_WIDGET_TYPE);
@@ -1886,6 +1905,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		choiceSearchFieldEClass.getESuperTypes().add(this.getSearchField());
 		fileSearchFieldEClass.getESuperTypes().add(this.getSearchField());
 		booleanSearchFieldEClass.getESuperTypes().add(this.getSearchField());
+		modelChoiceSearchFieldEClass.getESuperTypes().add(this.getSearchField());
+		modelChoiceSearchFieldEClass.getESuperTypes().add(this.getClassReference());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(formElementEClass, FormElement.class, "FormElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2060,6 +2081,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEClass(booleanSearchFieldEClass, BooleanSearchField.class, "BooleanSearchField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBooleanSearchField_Operators(), this.getBooleanFieldSearchOperators(), "operators", null, 0, -1, BooleanSearchField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBooleanSearchField_DefaultOperator(), this.getBooleanFieldSearchOperators(), "defaultOperator", null, 0, 1, BooleanSearchField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelChoiceSearchFieldEClass, ModelChoiceSearchField.class, "ModelChoiceSearchField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(formGroupPresentationTypeEEnum, FormGroupPresentationType.class, "FormGroupPresentationType");

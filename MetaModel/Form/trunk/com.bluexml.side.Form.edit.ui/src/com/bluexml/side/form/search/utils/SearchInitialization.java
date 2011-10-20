@@ -17,6 +17,7 @@ import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
 import com.bluexml.side.clazz.AbstractClass;
+import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.form.FormElement;
@@ -129,6 +130,7 @@ public class SearchInitialization {
 		}
 		return cc;
 	}
+
 	public static Collection<FormElement> createChildsForClass(AbstractClass abc, boolean groupRoot) {
 		Collection<FormElement> c = new ArrayList<FormElement>();
 		try {
@@ -155,6 +157,7 @@ public class SearchInitialization {
 		}
 		return c;
 	}
+
 	private static FormGroup initializeClassGroup(AbstractClass abc) {
 		FormGroup createFormGroup = FormFactory.eINSTANCE.createFormGroup();
 		createFormGroup.setRef(abc);
@@ -165,6 +168,7 @@ public class SearchInitialization {
 		createChildren(abc, children);
 		return createFormGroup;
 	}
+
 	private static void createChildren(AbstractClass abc, Collection<FormElement> children) {
 		// Attributes
 		for (Attribute att : abc.getAttributes()) {
@@ -174,8 +178,21 @@ public class SearchInitialization {
 				children.add(field);
 			}
 		}
+
+		// Associations :
+		for (Association ass : abc.getSourceAssociations()) {
+			children.add(ClassDiagramUtils.transformAssociationIntoModelChoiceSearchField(ass, abc));
+		}
+//		if (abc instanceof Clazz) {
+//			Clazz cl = (Clazz) abc;
+//			// Operations :
+//			for (OperationComponent op : cl.getOperations()) {
+//				Field field = ClassDiagramUtils.getFieldForOperation(op);
+//				children.add(field);
+//			}
+//		}
 	}
-	
+
 	private static Collection<FormElement> getSearchChildrenFromClazz(FormSearch form) {
 		form.getDisabled().clear();
 		form.getChildren().removeAll(form.getChildren()); // <-- this is MANDATORY !
@@ -183,8 +200,6 @@ public class SearchInitialization {
 		Collection<FormElement> c = createChildsForClass(cl, false);
 		return c;
 	}
-	
-	
 
 	/**
 	 * Provides a search field of the type that corresponds to the type of the

@@ -31,9 +31,11 @@ import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ChoiceField;
+import com.bluexml.side.form.ChoiceSearchField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.ModelChoiceSearchField;
 
 public class ClassDiagramUtils {
 
@@ -183,6 +185,54 @@ public class ClassDiagramUtils {
 		} else {
 			f.setMin_bound(Integer.parseInt(ass.getSecondEnd().getCardMin()));
 			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
+		}
+
+		return f;
+	}
+	
+	public static ModelChoiceSearchField transformAssociationIntoModelChoiceSearchField(Association ass, AbstractClass srcClazz) {
+		ModelChoiceSearchField f = FormFactory.eINSTANCE.createModelChoiceSearchField();
+		// we needs to get the target type
+
+		// if useSource = true, FirstEnd is used as destination (target) 
+		boolean useSource = false;
+		AbstractClass first_linkedClass = ass.getFirstEnd().getLinkedClass();
+		AbstractClass second_linkedClass = ass.getSecondEnd().getLinkedClass();
+
+		EList<AbstractClass> descendants = first_linkedClass.getAllSubTypes();
+		boolean equals = first_linkedClass.equals(srcClazz);
+		boolean contains = descendants.contains(srcClazz);
+		if (!(contains || equals)) {
+			useSource = true;
+		}
+
+		String id = getAssociationName(ass, useSource);
+
+		f.setId(id);
+		f.setRef(ass);
+
+		if (ass.getTitle() != null && ass.getTitle().length() > 0) {
+			f.setLabel(ass.getTitle());
+		} else {
+			f.setLabel(ass.getName());
+		}
+		if (useSource) {
+			AbstractClass linkedClass = first_linkedClass;
+			
+			f.setReal_class(linkedClass);
+//			f.setFormat_pattern(getViewForClass(linkedClass));
+		} else {
+			AbstractClass linkedClass = second_linkedClass;
+			f.setReal_class(linkedClass);
+//			f.setFormat_pattern(getViewForClass(linkedClass));
+		}
+
+		if (useSource) {
+//			f.setMin_bound(Integer.parseInt(ass.getFirstEnd().getCardMin()));
+//			f.setMax_bound(Integer.parseInt(ass.getFirstEnd().getCardMax()));
+		} else {
+//			f.setMin_bound(Integer.parseInt(ass.getSecondEnd().getCardMin()));
+//			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
 		}
 
 		return f;

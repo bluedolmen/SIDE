@@ -168,10 +168,6 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_B3PtBJuPEd68JO4ATwwBpA"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_B3QUEJuPEd68JO4ATwwBpA" type="5002">
-      <children xmi:type="notation:Node" xmi:id="_B3Q7IJuPEd68JO4ATwwBpA" type="2002">
-        <element xmi:type="ecore:EOperation" href="Forms.ecore#//FormContainer/getLabel"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_B3Q7IZuPEd68JO4ATwwBpA"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_B3QUEZuPEd68JO4ATwwBpA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_B3QUEpuPEd68JO4ATwwBpA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_B3QUE5uPEd68JO4ATwwBpA"/>

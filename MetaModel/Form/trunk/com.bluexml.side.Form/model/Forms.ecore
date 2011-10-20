@@ -650,4 +650,5 @@
     <eLiterals name="is" value="1" literal="is"/>
     <eLiterals name="isNot" value="2" literal="isNot"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelChoiceSearchField" eSuperTypes="#//SearchField #//ClassReference"/>
 </ecore:EPackage>

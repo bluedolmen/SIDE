@@ -880,6 +880,29 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.ModelChoiceSearchField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ModelChoiceSearchFieldItemProvider modelChoiceSearchFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.ModelChoiceSearchField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createModelChoiceSearchFieldAdapter() {
+		if (modelChoiceSearchFieldItemProvider == null) {
+			modelChoiceSearchFieldItemProvider = new ModelChoiceSearchFieldItemProvider(this);
+		}
+
+		return modelChoiceSearchFieldItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.WorkflowFormCollection} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1085,6 +1108,7 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 		if (choiceSearchFieldItemProvider != null) choiceSearchFieldItemProvider.dispose();
 		if (fileSearchFieldItemProvider != null) fileSearchFieldItemProvider.dispose();
 		if (booleanSearchFieldItemProvider != null) booleanSearchFieldItemProvider.dispose();
+		if (modelChoiceSearchFieldItemProvider != null) modelChoiceSearchFieldItemProvider.dispose();
 	}
 
 }
