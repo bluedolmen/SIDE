@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-  <feature url="features/com.bluexml.side.Common.forAlfresco.enterprise.feature_1.0.481.v29221-20111019.jar" id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.481.v29221-20111019">
+  <feature url="features/com.bluexml.side.Common.forAlfresco.enterprise.feature_1.0.482.v29270-20111020.jar" id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.482.v29270-20111020">
     <category name="SIDE" />
   </feature>
-  <feature url="features/com.bluexml.side.Common.core.enterprise.feature_1.0.480.v29221-20111019.jar" id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.480.v29221-20111019">
+  <feature url="features/com.bluexml.side.Common.core.enterprise.feature_1.0.481.v29270-20111020.jar" id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.481.v29270-20111020">
     <category name="SIDE" />
   </feature>
   <category-def name="SIDE" label="SIDE" />
