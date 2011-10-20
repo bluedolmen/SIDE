@@ -804,8 +804,8 @@ function buildFormQuery(formJson) {
 			var op = formJson[operatorId];
 			if (operators[op] != null || operators[op] != undefined) {
 				operators[op].push(p);
-			} else if (p.indexOf("prop_") === 0) {
-				operators[defaultOperator].push(fieldId);
+			} else if (p.indexOf("prop_") === 0 || p.indexOf("assoc_") === 0) {
+				operators[defaultOperator].push(p);
 				if (logger.isLoggingEnabled()) {
 					logger.log("search.lib.js use default operator for :" + p);
 				}
@@ -894,6 +894,9 @@ function makeQueryFor(formJson, p, operator, first) {
 					// encoding
 					formQuery += (first ? '' : ' ' + operator + ' ') + 'cm:content.' + propName + ':"' + propValue + '"';
 				}
+			} else if (p.indexOf("assoc_") === 0) {
+				var propName = p.substring(6,p.indexOf('_added')) + "search";
+				formQuery += (first ? '' : ' ' + operator + ' ') + propName + ':"' + propValue + '"';	
 			}
 		}
 
@@ -980,6 +983,8 @@ function getOperatorId(f) {
 		} else {
 			id = f.substring(0, f.indexOf("-range"));
 		}
+	} else if (f.indexOf("assoc_") === 0) {
+		id = f.substring(0, f.indexOf("_added"));
 	}
 	return "operator-" + id;
 }
