@@ -58,9 +58,11 @@ public class IncrementalBuilderHelper {
 	private static final String INCREMENTAL_APPLICATION = "incremental.application";
 	private static final String WHITOUT_DEPLOYERS_APPLICATION = "whitoutDeployers.application";
 	private static final String MULTI_MODELS_CHANGES_APPLICATION = "multiModelsChanges.application";
+	private static final String DEPLOYER_HOT_DEPLOYMENT_OPTION_KEY = "com.bluexml.side.hotDeployment";
 	private static final String[] builderModels = new String[] { ONLY_DEPLOYERS_APPLICATION, INCREMENTAL_APPLICATION, WHITOUT_DEPLOYERS_APPLICATION, MULTI_MODELS_CHANGES_APPLICATION };
 	IProject project;
 	SIDEBuilderConfiguration sideConf = null;
+	private boolean forcehotdeploy = true;
 
 	/**
 	 * @return the sideConf
@@ -197,6 +199,7 @@ public class IncrementalBuilderHelper {
 					 */
 					EList<ConfigurationParameters> parameters = currentConfiguration.getParameters();
 					incrementalConf.getParameters().addAll(EcoreUtil.copyAll(parameters));
+
 					disableGenerationClean(incrementalConf);
 
 					/**
@@ -355,12 +358,24 @@ public class IncrementalBuilderHelper {
 		// unselect clean
 		List<Option> toremove = new ArrayList<Option>();
 
-		for (Option op : comp.getOptions()) {
+		EList<Option> options = comp.getOptions();
+		boolean hotdeploy = false;
+		for (Option op : options) {
 			if (op.getKey().endsWith("clean")) {
 				toremove.add(op);
 			}
+			if (op.getKey().equals(DEPLOYER_HOT_DEPLOYMENT_OPTION_KEY)) {
+				hotdeploy = true;
+			}
 		}
-		comp.getOptions().removeAll(toremove);
+		options.removeAll(toremove);
+
+		if (forcehotdeploy && !hotdeploy) {
+			Option option = ApplicationFactory.eINSTANCE.createOption();
+			// add the hot deployment option
+			option.setKey(DEPLOYER_HOT_DEPLOYMENT_OPTION_KEY);
+			options.add(option);
+		}
 	}
 
 	private void disableGenerationClean(Configuration configuration) {
