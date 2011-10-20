@@ -33,18 +33,6 @@ public class AlfrescoShareDirectDeployer extends DirectWebAppsDeployer {
 	}
 
 	@Override
-	public void deploy() throws Exception {
-		try {
-			super.deploy();
-		} catch (Exception e) {
-			e.printStackTrace();
-			String string = Activator.Messages.getString("AlfrescoShareDirectDeployer.1") + "\n";
-			string += e.getStackTrace();
-			monitor.addWarningTextAndLog(string, null);
-		}
-	}
-
-	@Override
 	protected void postProcess(File fileToDeploy) throws Exception {
 		System.out.println("AlfrescoShareDirectDeployer.postProcess() hotdeploy ?:" + doHotDeploy());
 		if (doHotDeploy()) {
