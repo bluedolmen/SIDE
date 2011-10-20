@@ -14,7 +14,7 @@ import com.bluexml.side.util.generator.XMLConflictResolver;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
 
 public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
-
+	protected static final String ALFRESCO_SEARCH_ASSOCIATION = "alfresco.model.association.searchable";
 	/*
 	 * final fields used in generation too
 	 */
@@ -35,7 +35,6 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public ClassAlfrescoGenerator() {
 		versionProperty = "com.bluexml.side.Class.generator.alfresco.module.version"; //$NON-NLS-1$
 	}
-
 
 	public static String MMUri = "http://www.kerblue.org/class/1.0"; //$NON-NLS-1$
 
@@ -191,4 +190,19 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		return Collections.emptyMap();
 	}
 
+	/**
+	 * this method is used to activated a generation part that can be used in
+	 * conjunction with alfresco policy module that
+	 * synchronize association modification with a technical property (not
+	 * implemented for alfresco &lt; 3.4d)
+	 * 
+	 * @param o
+	 * @return
+	 */
+	public boolean IsSearchInAssociation(EObject o) {
+		System.out.println("AlfrescoGenerator.IsSearchInAssociation()");
+		boolean generatorOptionValue = getGeneratorOptionValue(ALFRESCO_SEARCH_ASSOCIATION);
+		System.out.println("generatorOptionValue :" + generatorOptionValue);
+		return generatorOptionValue;
+	}
 }

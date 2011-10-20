@@ -40,6 +40,14 @@ public class OblAssociationMetaInfo extends OblTypeMetaInfo {
 		c.setDefaultValueBoolean(false);
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
+		
+		c = fact.createMetaInfo();
+		c.setKey("searchable");
+		c.setDefaultValueBoolean(false);
+		c.setValueType(boolean.class);
+		allMetaInfos.add(c);
+		
+		
 	}
 
 }

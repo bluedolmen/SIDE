@@ -22,6 +22,7 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
+import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 %>
 
 <%script type="clazz.AbstractClass" name="alfrescoGenerator_abstractClass_title" %>
@@ -125,6 +126,9 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<%}%>
 	</property>
 	<%}%>
+	<%if (IsSearchInAssociation()){%>
+	<%generate_searchFieldForAssociation()%>
+	<%}%>
 </properties>
 <%}%>
 
@@ -166,3 +170,21 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<%alfrescoGenerator_abstractClass_archive()%>
 			<%alfrescoGenerator_abstractClass_properties()%>
 			<%alfrescoGenerator_abstractClass_associations()%>
+
+<%script type="clazz.AbstractClass" name="generate_searchFieldForAssociation" %>
+<%if (getSourceAssociationEnds().nSize() > 0){%>
+<!-- properties to store seachable associations target-->
+<%for (getSourceAssociationEnds()){%>	
+<%if (eContainer().filter("Association").metainfo[key.equalsIgnoreCase("searchable")].nSize()>0){%>
+<property name="<%eContainer().getPrefixedAssociationQName(current("AssociationEnd"))%>search">
+	<type>d:text</type>
+	<multiple>true</multiple>
+	<index enabled="true">
+  	 	<atomic>true</atomic>
+  	 	<stored>false</stored>
+  		<tokenised>true</tokenised>
+	</index>
+</property>
+<%}%>
+<%}%>
+<%}%>
