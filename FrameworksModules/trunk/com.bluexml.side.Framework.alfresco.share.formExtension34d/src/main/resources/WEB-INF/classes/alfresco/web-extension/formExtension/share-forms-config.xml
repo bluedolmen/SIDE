@@ -17,6 +17,7 @@
 				<js src="/yui/slider/slider-min.js" />
 				<js src="/fdk/accordion/accordion-min.js" />
 				<js src="/side/components/form/upload-min.js" />
+				<js src="/side/components/object-finder/object-finder.js" />
 			</dependencies>
 		</forms>
 	</config>

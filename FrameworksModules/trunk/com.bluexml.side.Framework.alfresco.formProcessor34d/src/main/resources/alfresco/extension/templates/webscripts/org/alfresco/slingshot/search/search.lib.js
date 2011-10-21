@@ -896,10 +896,18 @@ function makeQueryFor(formJson, p, operator, first) {
 				}
 			} else if (p.indexOf("assoc_") === 0) {
 				var propName = p.substring(6,p.indexOf('_added')) + "search";
-				formQuery += (first ? '' : ' ' + operator + ' ') + propName + ':"' + propValue + '"';	
+				if (propValue.indexOf(',') != -1) {
+					var values = propValue.split(','); 
+					formQuery += (first ? '' : ' ' + operator + ' ');
+					for (var c = 0; c < values.length; c++) {
+						var value = values[c];
+						formQuery += propName + ':"' + values[c] + '"'+ (c == values.length - 1 ? '' : ' ' + operator + ' ');						
+					}
+				} else {
+					formQuery += (first ? '' : ' ' + operator + ' ') + propName + ':"' + propValue + '"';
+				}	
 			}
 		}
-
 	}
 	return formQuery;
 }
