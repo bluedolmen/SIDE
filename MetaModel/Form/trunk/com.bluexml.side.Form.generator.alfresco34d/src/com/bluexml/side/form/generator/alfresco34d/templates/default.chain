@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
   <repository>
-    <files xsi:type="chain:Model" path="/test-scapeler/src/models/form/scapeler-details.form"/>
+    <files xsi:type="chain:Model" path="/dataListTest/src/models/form/default.form"/>
     <files xsi:type="chain:Folder" path="/com.bluexml.side.Form.generator.alfresco34d/src/com/bluexml/side/form/generator/alfresco34d/templates"/>
     <files xsi:type="chain:Log" path="/com.bluexml.side.Form.generator.alfresco34d/src/com/bluexml/side/form/generator/alfresco34d/templates/default.log.txt"/>
     <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/form/1.0"/>

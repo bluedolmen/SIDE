@@ -119,7 +119,7 @@ label-id="<%getFieldLabelId("")%>"
  </control>
  <%}%>
  
- <%if (isSearchForm && ref.filter("clazz.Attribute") != null){%>
+ <%if (isSearchForm){%>
  <%for (ref.filter("clazz.Attribute")){%>
  <%if (getShareSearchFormControl() != ""){%>
  <control template="<%getShareSearchFormControl()%>" >
@@ -131,8 +131,42 @@ label-id="<%getFieldLabelId("")%>"
  </control>
  <%}%> 
  <%}%>
+ <%}else{%>
+ 
  <%}%>
  
+ <%for (filter("ModelChoiceField")){%>
+ 	<%if (widget.toString() == "Search"){%>
+ <control template="/side/controls/association-search.ftl" >
+ 	<control-param name="compactMode">true</control-param>
+ </control>
+ 	<%}%>
+ 	<%if (widget.toString() == "Select"){%>
+ 	<%-- TODO--%> 
+ 	<%}%>
+ 	<%if (widget.toString() == "Inline"){%>
+ 	<%-- TODO--%> 
+ 	<%}%>
+ 	<%if (widget.toString() == "ItemSelector"){%>
+ 	<!-- default widget (itemSelector) -->
+ 	<%}%>
+ <%}%>
+ <%for (filter("ModelChoiceSearchField")){%>
+ 	<%if (widget.toString() == "Search"){%>
+ <control template="/side/controls/association-search.ftl" >
+ 	<control-param name="compactMode">true</control-param>
+ </control>
+ 	<%}%>
+ 	<%if (widget.toString() == "Select"){%>
+ 	<%-- TODO--%> 
+ 	<%}%>
+ 	<%if (widget.toString() == "Inline"){%>
+ 	<%-- TODO--%> 
+ 	<%}%>
+ 	<%if (widget.toString() == "ItemSelector"){%>
+ 	<!-- default widget (itemSelector) -->
+ 	<%}%>
+ <%}%>
  </field>
  
 
