@@ -563,6 +563,11 @@
         <details key="documentation" value="This option allows selecting the associated items using an extended widget (the &quot;item selector&quot;) consisting of a selection list and additional actions that are not available in the other widgets. The items displayed in the list always exist."/>
       </eAnnotations>
     </eLiterals>
+    <eLiterals name="Search" value="3" literal="Search">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This option allows selecting the associated items using an extended widget (the &quot;item selector&quot;) consisting of a selection list with a search field to filter available items"/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormSearch" eSuperTypes="#//FormContainer #//ClassReference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinationOperator" eType="#//CombinationOperators"/>
@@ -650,5 +655,11 @@
     <eLiterals name="is" value="1" literal="is"/>
     <eLiterals name="isNot" value="2" literal="isNot"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ModelChoiceSearchField" eSuperTypes="#//SearchField #//ClassReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelChoiceSearchField" eSuperTypes="#//SearchField #//ClassReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="widget" eType="#//ModelChoiceWidgetType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'widget' attributes provides the layout for model choice field."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
 </ecore:EPackage>

@@ -8756,13 +8756,22 @@ public interface FormPackage extends EPackage {
 	int MODEL_CHOICE_SEARCH_FIELD__REAL_CLASS = SEARCH_FIELD_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Widget</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_SEARCH_FIELD__WIDGET = SEARCH_FIELD_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Model Choice Search Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 1;
+	int MODEL_CHOICE_SEARCH_FIELD_FEATURE_COUNT = SEARCH_FIELD_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}' enum.
@@ -9980,6 +9989,17 @@ public interface FormPackage extends EPackage {
 	EClass getModelChoiceSearchField();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ModelChoiceSearchField#getWidget <em>Widget</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Widget</em>'.
+	 * @see com.bluexml.side.form.ModelChoiceSearchField#getWidget()
+	 * @see #getModelChoiceSearchField()
+	 * @generated
+	 */
+	EAttribute getModelChoiceSearchField_Widget();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.WorkflowFormCollection <em>Workflow Form Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11084,6 +11104,14 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MODEL_CHOICE_SEARCH_FIELD = eINSTANCE.getModelChoiceSearchField();
+
+		/**
+		 * The meta object literal for the '<em><b>Widget</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL_CHOICE_SEARCH_FIELD__WIDGET = eINSTANCE.getModelChoiceSearchField_Widget();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.WorkflowFormCollectionImpl <em>Workflow Form Collection</em>}' class.

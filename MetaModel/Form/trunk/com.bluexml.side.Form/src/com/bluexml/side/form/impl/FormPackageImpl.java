@@ -1483,6 +1483,15 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getModelChoiceSearchField_Widget() {
+		return (EAttribute)modelChoiceSearchFieldEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getWorkflowFormCollection() {
 		return workflowFormCollectionEClass;
 	}
@@ -1812,6 +1821,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEAttribute(booleanSearchFieldEClass, BOOLEAN_SEARCH_FIELD__DEFAULT_OPERATOR);
 
 		modelChoiceSearchFieldEClass = createEClass(MODEL_CHOICE_SEARCH_FIELD);
+		createEAttribute(modelChoiceSearchFieldEClass, MODEL_CHOICE_SEARCH_FIELD__WIDGET);
 
 		// Create enums
 		formGroupPresentationTypeEEnum = createEEnum(FORM_GROUP_PRESENTATION_TYPE);
@@ -2083,6 +2093,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getBooleanSearchField_DefaultOperator(), this.getBooleanFieldSearchOperators(), "defaultOperator", null, 0, 1, BooleanSearchField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelChoiceSearchFieldEClass, ModelChoiceSearchField.class, "ModelChoiceSearchField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getModelChoiceSearchField_Widget(), this.getModelChoiceWidgetType(), "widget", null, 0, 1, ModelChoiceSearchField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(formGroupPresentationTypeEEnum, FormGroupPresentationType.class, "FormGroupPresentationType");
@@ -2105,6 +2116,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.SELECT);
 		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.INLINE);
 		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.ITEM_SELECTOR);
+		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.SEARCH);
 
 		initEEnum(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.class, "CharFieldSearchOperators");
 		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.CONTAINS);
@@ -2217,7 +2229,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "NoLinkForVirtualField"
-		   });																				
+		   });																						
 	}
 
 	/**
@@ -2312,7 +2324,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "NoLinkForVirtualField", "not self.link.oclIsUndefined()"
-		   });																			
+		   });																					
 	}
 
 	/**
@@ -2328,7 +2340,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																																									
+		   });																																																																																											
 	}
 
 	public FormFactory getFormsFactory() {

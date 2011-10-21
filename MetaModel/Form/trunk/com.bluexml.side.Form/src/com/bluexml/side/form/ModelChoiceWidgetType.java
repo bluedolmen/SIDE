@@ -51,7 +51,15 @@ public enum ModelChoiceWidgetType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ITEM_SELECTOR(2, "ItemSelector", "ItemSelector");
+	ITEM_SELECTOR(2, "ItemSelector", "ItemSelector"), /**
+	 * The '<em><b>Search</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SEARCH_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SEARCH(3, "Search", "Search");
 
 	/**
 	 * The '<em><b>Select</b></em>' literal value.
@@ -100,6 +108,20 @@ public enum ModelChoiceWidgetType implements Enumerator {
 	public static final int ITEM_SELECTOR_VALUE = 2;
 
 	/**
+	 * The '<em><b>Search</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This option allows selecting the associated items using an extended widget (the "item selector") consisting of a selection list with a search field to filter available items
+	 * <!-- end-model-doc -->
+	 * @see #SEARCH
+	 * @model name="Search"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SEARCH_VALUE = 3;
+
+	/**
 	 * An array of all the '<em><b>Model Choice Widget Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,6 +132,7 @@ public enum ModelChoiceWidgetType implements Enumerator {
 			SELECT,
 			INLINE,
 			ITEM_SELECTOR,
+			SEARCH,
 		};
 
 	/**
@@ -163,6 +186,7 @@ public enum ModelChoiceWidgetType implements Enumerator {
 			case SELECT_VALUE: return SELECT;
 			case INLINE_VALUE: return INLINE;
 			case ITEM_SELECTOR_VALUE: return ITEM_SELECTOR;
+			case SEARCH_VALUE: return SEARCH;
 		}
 		return null;
 	}

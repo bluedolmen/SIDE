@@ -12,6 +12,7 @@ import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.ModelChoiceSearchField;
 
+import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -31,6 +32,7 @@ import org.eclipse.ocl.ecore.OCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceSearchFieldImpl#getReal_class <em>Real class</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ModelChoiceSearchFieldImpl#getWidget <em>Widget</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,6 +48,25 @@ public class ModelChoiceSearchFieldImpl extends SearchFieldImpl implements Model
 	 * @ordered
 	 */
 	protected AbstractClass real_class;
+
+	/**
+	 * The default value of the '{@link #getWidget() <em>Widget</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWidget()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ModelChoiceWidgetType WIDGET_EDEFAULT = ModelChoiceWidgetType.SELECT;
+	/**
+	 * The cached value of the '{@link #getWidget() <em>Widget</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWidget()
+	 * @generated
+	 * @ordered
+	 */
+	protected ModelChoiceWidgetType widget = WIDGET_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -109,12 +130,35 @@ public class ModelChoiceSearchFieldImpl extends SearchFieldImpl implements Model
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ModelChoiceWidgetType getWidget() {
+		return widget;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWidget(ModelChoiceWidgetType newWidget) {
+		ModelChoiceWidgetType oldWidget = widget;
+		widget = newWidget == null ? WIDGET_EDEFAULT : newWidget;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_SEARCH_FIELD__WIDGET, oldWidget, widget));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.MODEL_CHOICE_SEARCH_FIELD__REAL_CLASS:
 				if (resolve) return getReal_class();
 				return basicGetReal_class();
+			case FormPackage.MODEL_CHOICE_SEARCH_FIELD__WIDGET:
+				return getWidget();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -129,6 +173,9 @@ public class ModelChoiceSearchFieldImpl extends SearchFieldImpl implements Model
 		switch (featureID) {
 			case FormPackage.MODEL_CHOICE_SEARCH_FIELD__REAL_CLASS:
 				setReal_class((AbstractClass)newValue);
+				return;
+			case FormPackage.MODEL_CHOICE_SEARCH_FIELD__WIDGET:
+				setWidget((ModelChoiceWidgetType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -145,6 +192,9 @@ public class ModelChoiceSearchFieldImpl extends SearchFieldImpl implements Model
 			case FormPackage.MODEL_CHOICE_SEARCH_FIELD__REAL_CLASS:
 				setReal_class((AbstractClass)null);
 				return;
+			case FormPackage.MODEL_CHOICE_SEARCH_FIELD__WIDGET:
+				setWidget(WIDGET_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -159,6 +209,8 @@ public class ModelChoiceSearchFieldImpl extends SearchFieldImpl implements Model
 		switch (featureID) {
 			case FormPackage.MODEL_CHOICE_SEARCH_FIELD__REAL_CLASS:
 				return real_class != null;
+			case FormPackage.MODEL_CHOICE_SEARCH_FIELD__WIDGET:
+				return widget != WIDGET_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -193,6 +245,22 @@ public class ModelChoiceSearchFieldImpl extends SearchFieldImpl implements Model
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (widget: ");
+		result.append(widget);
+		result.append(')');
+		return result.toString();
 	}
 
 		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
