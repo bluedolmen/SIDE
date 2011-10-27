@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Application UI
 Bundle-SymbolicName: com.bluexml.side.Application.ui;singleton:=true
-Bundle-Version: 1.0.168.v29395-20111026
+Bundle-Version: 1.0.169.v29431-20111027
 Bundle-Activator: com.bluexml.side.application.ui.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
