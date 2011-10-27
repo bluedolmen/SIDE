@@ -23,6 +23,8 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.ModelChoiceSearchField} object.
@@ -60,6 +62,7 @@ public class ModelChoiceSearchFieldItemProvider
 			super.getPropertyDescriptors(object);
 
 			addReal_classPropertyDescriptor(object);
+			addWidgetPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -82,6 +85,28 @@ public class ModelChoiceSearchFieldItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Widget feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addWidgetPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ModelChoiceSearchField_widget_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceSearchField_widget_feature", "_UI_ModelChoiceSearchField_type"),
+				 FormPackage.Literals.MODEL_CHOICE_SEARCH_FIELD__WIDGET,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -121,6 +146,12 @@ public class ModelChoiceSearchFieldItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(ModelChoiceSearchField.class)) {
+			case FormPackage.MODEL_CHOICE_SEARCH_FIELD__WIDGET:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
