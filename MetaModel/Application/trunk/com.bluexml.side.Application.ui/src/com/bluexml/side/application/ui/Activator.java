@@ -1,7 +1,10 @@
 package com.bluexml.side.application.ui;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 
 import com.bluexml.side.Util.ecore.QuietModelModification;
 import com.bluexml.side.util.libs.Messages;
@@ -55,6 +58,31 @@ public class Activator extends AbstractUIPlugin {
 	 * @return the shared instance
 	 */
 	public static Activator getDefault() {
+		
+		System.out.println(PLUGIN_ID + " Activator state :");
+		Bundle bundle = Platform.getBundle(PLUGIN_ID);
+		int state = bundle.getState();
+		if (state == Bundle.UNINSTALLED) {
+			System.out.println("UNINSTALLED");
+		} else if (state == Bundle.INSTALLED) {
+			System.out.println("INSTALLED");
+		} else if (state == Bundle.RESOLVED) {
+			System.out.println("RESOLVED, try to start it");
+			try {
+				bundle.start();
+			} catch (BundleException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (state == Bundle.STARTING) {
+			System.out.println("STARTING");
+		} else if (state == Bundle.STOPPING) {
+			System.out.println("STOPPING");
+		} else if (state == Bundle.ACTIVE) {
+			System.out.println("ACTIVE");
+		}
+		
+		
 		return plugin;
 	}
 

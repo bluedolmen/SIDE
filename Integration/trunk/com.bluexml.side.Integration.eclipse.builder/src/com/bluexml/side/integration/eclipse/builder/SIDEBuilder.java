@@ -57,30 +57,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 	private SIDEBuilderChecker checker;
 
 	public SIDEBuilder() {
-		String string = com.bluexml.side.application.ui.Activator.PLUGIN_ID;
-		System.out.println(string + " Activator state :");
-		Bundle bundle = Platform.getBundle(string);
-		int state = bundle.getState();
-		if (state == Bundle.UNINSTALLED) {
-			System.out.println("UNINSTALLED");
-		} else if (state == Bundle.INSTALLED) {
-			System.out.println("INSTALLED");
-		} else if (state == Bundle.RESOLVED) {
-			System.out.println("RESOLVED, try to start it");
-			try {
-				bundle.start();
-			} catch (BundleException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else if (state == Bundle.STARTING) {
-			System.out.println("STARTING");
-		} else if (state == Bundle.STOPPING) {
-			System.out.println("STOPPING");
-		} else if (state == Bundle.ACTIVE) {
-			System.out.println("ACTIVE");
-		}
-
+		
 		com.bluexml.side.application.ui.Activator default1 = com.bluexml.side.application.ui.Activator.getDefault();
 
 		QuiteModelModificationListener l = new QuiteModelModificationListener() {
