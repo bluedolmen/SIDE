@@ -7,7 +7,7 @@
          point="org.eclipse.core.runtime.applications">
       <application>
          <run
-               class="com.bluexml.side.integration.eclipse.branding.allfeatures.Application">
+               class="com.bluexml.side.integration.eclipse.branding.allFeatures.Application">
          </run>
       </application>
    </extension>
@@ -15,7 +15,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             name="RCP Perspective"
-            class="com.bluexml.side.integration.eclipse.branding.allfeatures.Perspective"
+            class="com.bluexml.side.integration.eclipse.branding.allFeatures.Perspective"
             id="com.bluexml.side.Integration.eclipse.allFeatures.perspective">
       </perspective>
    </extension>
