@@ -5,7 +5,6 @@ Bundle-SymbolicName: com.bluexml.side.Class.modeler; singleton:=true
 Bundle-Version: 1.0.72.v29270-20111020
 Bundle-Activator: com.bluexml.side.Class.modeler.ClazzPlugin
 Bundle-Vendor: BlueXML
-Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.edit,
  org.eclipse.ui.ide,

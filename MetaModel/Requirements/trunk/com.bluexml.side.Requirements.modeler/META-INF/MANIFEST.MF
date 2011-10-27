@@ -5,7 +5,6 @@ Bundle-SymbolicName: com.bluexml.side.Requirements.modeler; singleton:=true
 Bundle-Version: 1.0.58.v28467-20111005
 Bundle-Activator: com.bluexml.side.Requirements.modeler.RequirementsPlugin
 Bundle-Vendor: BlueXML
-Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.edit,
  org.eclipse.emf.edit.ui,
@@ -23,5 +22,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.compare.match,
  org.eclipse.emf.compare,
  com.bluexml.side.Requirements.editor
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
