@@ -179,10 +179,8 @@ public class CommonServices {
 			linkedEObject.add(abstractClass2);
 		}
 	}
-	
+
 	public static Object OCLEval(EObject context, String body) throws Exception {
-		OCLEvaluator evaluator = new OCLEvaluator();
-		return evaluator.eval(context, body);
-		
+		return OCLEvaluator.eval(context, body);
 	}
 }

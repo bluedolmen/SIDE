@@ -22,9 +22,10 @@ import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator.ASK_USER;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.metaModel.validate.OCLextension.OCLEvaluator;
 
 public class InitializerRegister {
-	
+
 	public static final String DEFAULT_INITIALIZER_KEY = ""; // $NON-NLS-1$
 	public static final String DEFAULT_ANOTHER_FORM_COLLECTION = "anotherFormCollection.form"; // $NON-NLS-1$
 	private static final String DATA_MODEL_EXTENSION = ModelInitializationUtils.getExtensionForEditorId(SIDEEditorUtils.DATA_MODEL_EDITOR_ID);
@@ -72,7 +73,7 @@ public class InitializerRegister {
 		register.recordInitializer(DEFAULT_INITIALIZER_KEY, new ViewModelInitializer(classModel, root, register, ask, null));
 
 		register.recordInitializer(DEFAULT_INITIALIZER_KEY, new FormModelInitializer(classModel, root, register, ask, "default.form")); //$NON-NLS-1$
-		
+
 		register.recordInitializer(DEFAULT_INITIALIZER_KEY, new FormSearchModelInitializer(classModel, root, register, ask, "search.form")); //$NON-NLS-1$
 
 		register.recordInitializer(DEFAULT_ANOTHER_FORM_COLLECTION, new FormModelInitializer(classModel, root, register, ask, DEFAULT_ANOTHER_FORM_COLLECTION));
@@ -99,9 +100,12 @@ public class InitializerRegister {
 	 * <p>
 	 * This method is used to initialize default models from a given class-model
 	 * 
-	 * @param classModel The class-model as an {@link IFile}
-	 * @param alf_home the path to the home of Alfresco 
-	 * @param alf_ver the version of Alfresco alf_home is targeting
+	 * @param classModel
+	 *            The class-model as an {@link IFile}
+	 * @param alf_home
+	 *            the path to the home of Alfresco
+	 * @param alf_ver
+	 *            the version of Alfresco alf_home is targeting
 	 * @return the {@link InitializerRegister}
 	 * @throws Exception
 	 */
@@ -176,16 +180,16 @@ public class InitializerRegister {
 		EList<EObject> l = ModelInitializationUtils.openModel(classModel);
 		return l.get(0);
 	}
-	
+
 	public boolean isInitialized() {
 		Set<ModelCreator> allInitializer = getAllInitializer();
-		
+
 		for (ModelCreator modelCreator : allInitializer) {
 			if (!modelCreator.isInitialized()) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 }

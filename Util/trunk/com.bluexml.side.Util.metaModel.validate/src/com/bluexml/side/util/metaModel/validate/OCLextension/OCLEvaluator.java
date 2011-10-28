@@ -12,16 +12,10 @@ import org.eclipse.ocl.ecore.OCLExpression;
 public class OCLEvaluator {
 	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
-	public <T> EList<T> eval(Object context, String body) throws Exception {
+	public static <T> EList<T> eval(Object context, String body) throws Exception {
 		OCL.Helper helper = OCL_ENV.createOCLHelper();
-		
-//		EClass CLASS_PACKAGE = null;
-//		EOperation eOperation = CLASS_PACKAGE.getEOperations().get(10);
-		
-//		helper.setOperationContext((EClassifier) CLASS_PACKAGE, eOperation);
 
-		
-
+		helper.setInstanceContext(context);
 		OCLExpression queryOCLExpression = helper.createQuery(body);
 
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(queryOCLExpression);

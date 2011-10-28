@@ -88,18 +88,18 @@ public class InitializerWizard extends Wizard implements IWorkbenchWizard {
 
 			this.getContainer().run(true, true, runPro);
 
+			while (!ini.isInitialized()) { //$NON-NLS-1$
+				try {
+					this.wait(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Alfresco Extension project creation fail !", e)); //$NON-NLS-1$
+					return false;
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Alfresco Extension project creation fail !", e)); //$NON-NLS-1$
-		}
-		while (!ini.isInitialized()) { //$NON-NLS-1$
-			try {
-				this.wait(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Alfresco Extension project creation fail !", e)); //$NON-NLS-1$
-				return false;
-			}
 		}
 		System.out.println("InitializerWizard.performFinish() DONE"); //$NON-NLS-1$
 		return true;
