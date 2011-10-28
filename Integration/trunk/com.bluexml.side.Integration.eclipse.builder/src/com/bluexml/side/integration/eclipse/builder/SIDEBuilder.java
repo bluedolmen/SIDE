@@ -48,7 +48,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
-import com.bluexml.side.Util.ecore.QuietModelModification.QuiteModelModificationListener;
+import com.bluexml.side.Util.ecore.QuietModelModification.QuietModelModificationListener;
 import com.bluexml.side.application.ui.action.MustBeStopped;
 import com.bluexml.side.integration.eclipse.builder.incremental.IncrementalBuilderHelper;
 
@@ -60,7 +60,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		
 		com.bluexml.side.application.ui.Activator default1 = com.bluexml.side.application.ui.Activator.getDefault();
 
-		QuiteModelModificationListener l = new QuiteModelModificationListener() {
+		QuietModelModificationListener l = new QuietModelModificationListener() {
 
 			public void beforeAction() {
 				System.out.println("builder instance :" + SIDEBuilder.this);

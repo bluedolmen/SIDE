@@ -14,9 +14,9 @@ import java.util.List;
  * @author davidabad
  */
 public class QuietModelModification {
-	private List<QuiteModelModificationListener> listeners = new ArrayList<QuiteModelModificationListener>();
+	private List<QuietModelModificationListener> listeners = new ArrayList<QuietModelModificationListener>();
 
-	public void addListener(QuiteModelModificationListener l) {
+	public void addListener(QuietModelModificationListener l) {
 		listeners.add(l);
 	}
 
@@ -39,23 +39,23 @@ public class QuietModelModification {
 	 */
 	public void notifyBeforeModelModif() {
 		
-		for (QuiteModelModificationListener l : listeners) {
+		for (QuietModelModificationListener l : listeners) {
 			l.beforeAction();
 		}
-		System.out.println("QuiteModelModification.notifyBeforeModelModif()");
+		System.out.println("QuietModelModification.notifyBeforeModelModif()");
 	}
 
 	/**
 	 * notify all listener about the AfterModification event
 	 */
 	public void notifyAfterModelModif() {
-		for (QuiteModelModificationListener l : listeners) {
+		for (QuietModelModificationListener l : listeners) {
 			l.afterAction();
 		}
-		System.out.println("QuiteModelModification.notifyAfterModelModif()");
+		System.out.println("QuietModelModification.notifyAfterModelModif()");
 	}
 
-	public interface QuiteModelModificationListener {
+	public interface QuietModelModificationListener {
 
 		public void beforeAction();
 
