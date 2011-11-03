@@ -1,7 +1,7 @@
 /**
  * SIDE root namespace.
  * 
- * @namespace SIDE X
+ * @namespace SIDE
  */
 // Ensure Alfresco root object exists
 if (typeof SIDE == "undefined" || !SIDE)
@@ -12,7 +12,7 @@ if (typeof SIDE == "undefined" || !SIDE)
 /**
  * ObjectFinder component.
  * 
- * @namespace Alfresco
+ * @namespace SIDE
  * @class SIDE.ObjectFinder
  */
 (function()
