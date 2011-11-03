@@ -894,8 +894,8 @@ function makeQueryFor(formJson, p, operator, first) {
 					// encoding
 					formQuery += (first ? '' : ' ' + operator + ' ') + 'cm:content.' + propName + ':"' + propValue + '"';
 				}
-			} else if (p.indexOf("assoc_") === 0) {
-				var propName = p.substring(6,p.indexOf('_added')) + "search";
+			} else if (p.indexOf("assoc_") === 0 && p.match("_added$") == "_added") {
+				var propName = p.substring(6, p.indexOf('_added')) + "search";
 				if (propValue.indexOf(',') != -1) {
 					var values = propValue.split(','); 
 					formQuery += (first ? '' : ' ' + operator + ' ');
