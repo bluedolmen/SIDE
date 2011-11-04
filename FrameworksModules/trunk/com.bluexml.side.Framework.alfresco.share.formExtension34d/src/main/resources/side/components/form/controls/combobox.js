@@ -3,11 +3,39 @@
  * 
  * @namespace SIDE
  */
-// Ensure Alfresco root object exists
+// Ensure SIDE root object exists
 if (typeof SIDE == "undefined" || !SIDE) {
 	var SIDE = {};
 }
+if (console == undefined) {
+	// create a fake console object to avoid error (console is provided by
+	// firebug)
+	var console = {
+		log : function(msg) {
+		}
+	};
+}
 
+// This prototype is provided by the Mozilla foundation and
+// is distributed under the MIT license.
+// http://www.ibiblio.org/pub/Linux/LICENSES/mit.license
+
+if (!Array.prototype.indexOf) {
+	Array.prototype.indexOf = function(elt /* , from */) {
+		var len = this.length;
+
+		var from = Number(arguments[1]) || 0;
+		from = (from < 0) ? Math.ceil(from) : Math.floor(from);
+		if (from < 0)
+			from += len;
+
+		for (; from < len; from++) {
+			if (from in this && this[from] === elt)
+				return from;
+		}
+		return -1;
+	};
+}
 /**
  * ComboBox component.
  * 
@@ -22,13 +50,19 @@ if (typeof SIDE == "undefined" || !SIDE) {
 		this.addedFieldHtmlId = htmlId + "-added";
 		this.removedFieldHtmlId = htmlId + "-removed";
 		this.DSSelectWidget = null;
-		this.initialValue = null;
+		this.initialValue = "";
 		if (initialValue) {
 			this.initialValue = initialValue;
+			console.log("field :" + htmlId + " initialValue :" + initialValue);
 		}
+
 	};
 
 	YAHOO.extend(SIDE.ComboBox, Alfresco.component.Base, {
+
+		log : function(msg) {
+			console.log("[SIDE.ComboBox] " + msg);
+		},
 		/**
 		 * Object container for initialization options
 		 * 
@@ -52,8 +86,50 @@ if (typeof SIDE == "undefined" || !SIDE) {
 			};
 
 			if (this.options.multipleSelectMode) {
-				
-				return null;
+				// cardinality n-n
+				var multiselect = new SIDE.MyDSMultiSelectField({
+					name : "-",
+					datasource : myDataSource,
+					valueKey : "nodeRef",
+					labelKey : "name",
+					parentEl : this.htmlid
+				}, this.initialValue);
+				var me = this;
+				multiselect.updatedEvt.subscribe(function(e, params) {
+					var values = params[0];
+					var toAdd = [];
+					var toremove = [];
+					var initialValues = null;
+					if (me.initialValue) {
+						initialValues = me.initialValue.split(",");
+					}
+					if (initialValues) {
+						// compute real nodes to remove
+						for ( var c = 0; c < initialValues.length; c++) {
+							var oneValue = initialValues[c];
+							// search this value in the new list
+							if (values.indexOf(oneValue) == -1) {
+								toremove.push(oneValue);
+							}
+						}
+						// compute real nodes to add
+						for ( var c = 0; c < values.length; c++) {
+							var oneValue = values[c];
+							// search this value in the initial list
+							if (initialValues.indexOf(oneValue) == -1) {
+								toAdd.push(oneValue);
+							}
+						}
+					} else {
+						toAdd = values;
+					}
+
+					me.log("values changed to add :" + toAdd.toString());
+					me.log("values changed to remove :" + toremove.toString());
+					YAHOO.util.Dom.get(me.addedFieldHtmlId).value = toAdd.toString();
+					YAHOO.util.Dom.get(me.removedFieldHtmlId).value = toremove.toString();
+				});
+				return multiselect;
 			} else {
 				// cardinality n-1
 				var DSSelectWidget = new SIDE.MyDSSelectField({
@@ -66,16 +142,35 @@ if (typeof SIDE == "undefined" || !SIDE) {
 
 				var me = this;
 				DSSelectWidget.updatedEvt.subscribe(function(e, params) {
+					me.log("updatedEvt :" + e);
+					me.log("state :" + params[1].previousState);
 					var value = params[0];
-//					console.log("before value change :" + this.getValue());
-					var addedField = YAHOO.util.Dom.get(me.addedFieldHtmlId);
-					
-					// set selected value into hidden field to add association
-					var previousValue = addedField.value;
-					addedField.value = value;
-					
-					// set association to remove
-					YAHOO.util.Dom.get(me.removedFieldHtmlId).value = previousValue;
+					me.log("value :" + value);
+					if (params[1].previousState == 'valid') {
+						me.log("value changed to :" + value.toString());
+						me.log("initialValue :" + me.initialValue);
+						if (value != me.initialValue) {
+							// real change
+
+							// user create or replace association
+							// set selected value into hidden field to add
+							// association
+							me.log("value changed Add :" + value.toString());
+							YAHOO.util.Dom.get(me.addedFieldHtmlId).value = value;
+
+							if (me.initialValue != "") {
+								// set association to remove
+								me.log("value changed Remove :" + me.initialValue.toString());
+								YAHOO.util.Dom.get(me.removedFieldHtmlId).value = me.initialValue;
+							}
+						} else {
+							me.log("cancel change ...");
+							// cancel change
+							YAHOO.util.Dom.get(me.addedFieldHtmlId).value = "";
+							YAHOO.util.Dom.get(me.removedFieldHtmlId).value = "";
+						}
+					}
+
 				});
 				return DSSelectWidget;
 			}
@@ -88,16 +183,14 @@ if (typeof SIDE == "undefined" || !SIDE) {
 		 */
 		onReady : function ComboBox_onReady() {
 			this.DSSelectWidget = this.load();
-
-			console.log(this.initialValue);
 			if (this.initialValue) {
 				this.setValue(this.initialValue);
 			}
 		},
 		setValue : function ComboBox_setValue(value) {
-//			console.log("before setValue :" + this.getValue());
+			this.log("before setValue :" + this.getValue());
 			this.DSSelectWidget.setValue(value);
-//			console.log("after setValue :" + this.getValue());
+			this.log("after setValue :" + this.getValue());
 		},
 		getValue : function ComboBox_setValue() {
 			return this.DSSelectWidget.getValue();

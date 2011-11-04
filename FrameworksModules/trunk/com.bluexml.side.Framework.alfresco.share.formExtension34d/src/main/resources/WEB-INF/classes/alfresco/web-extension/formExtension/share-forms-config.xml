@@ -25,6 +25,7 @@
 				<js src="/yui/utilities/utilities.js" />
 				<js src="/inputex/inputex-min.js" />
 				<js src="/side/components/form/controls/MyDSSelectField.js" />
+				<js src="/side/components/form/controls/MyDSMultiSelectField.js" />
 				<js src="/side/components/form/controls/combobox.js" />
 				
 

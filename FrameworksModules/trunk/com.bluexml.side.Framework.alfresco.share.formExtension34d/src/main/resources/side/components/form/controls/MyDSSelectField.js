@@ -3,9 +3,17 @@
  * 
  * @namespace SIDE
  */
-// Ensure Alfresco root object exists
+// Ensure SIDE root object exists
 if (typeof SIDE == "undefined" || !SIDE) {
 	var SIDE = {};
+}
+if (console == undefined) {
+	// create a fake console object to avoid error (console is provided by
+	// firebug)
+	var console = {
+		log : function(msg) {
+		}
+	};
 }
 
 (function() {
@@ -31,10 +39,13 @@ if (typeof SIDE == "undefined" || !SIDE) {
 	SIDE.MyDSSelectField = function(options, initialValue) {
 		SIDE.MyDSSelectField.superclass.constructor.call(this, options);
 		this.initialValue = initialValue;
+		this.log("DSS initial value :" + initialValue);
 	};
 
 	YAHOO.lang.extend(SIDE.MyDSSelectField, inputEx.DSSelectField, {
-
+		log : function(msg) {
+			console.log("[SIDE.MyDSSelectField] " + msg);
+		},
 		/**
 		 * Callback for request success
 		 */
@@ -43,16 +54,19 @@ if (typeof SIDE == "undefined" || !SIDE) {
 			this.addChoice({
 				value : '',
 				label : '',
-				position: 0
+				position : 0,
+				selected : false
 			});
-			console.log("dataloaded");
+			this.log("dataloaded");
 			if (this.initialValue) {
-//				console.log("dataloaded init old:" + this.getValue());
+				this.log("dataloaded init old: (value setted by populateSelect)" + this.getValue());
 				this.setValue(this.initialValue);
-//				console.log("dataloaded init new:" + this.getValue());
+				this.log("dataloaded init new:" + this.getValue());
 			} else {
 				this.setValue('');
 			}
+			this.log("force previousState to 'valid'");
+			this.previousState = 'valid';
 		}
 	});
 
