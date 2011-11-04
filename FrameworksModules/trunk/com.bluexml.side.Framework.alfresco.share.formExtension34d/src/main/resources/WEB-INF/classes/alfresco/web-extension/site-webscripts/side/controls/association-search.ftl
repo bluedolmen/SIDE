@@ -13,7 +13,7 @@
       targetLinkTemplate: "${url.context}/page/site/${page.url.templateArgs.site!""}/document-details?nodeRef={nodeRef}",
    </#if>
       itemType: "${field.endpointType}",
-      multipleSelectMode: ${field.endpointMany?string},
+      multipleSelectMode: <#if field.control.params.multipleSelectMode>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
       itemFamily: "search"
    });
 })();
