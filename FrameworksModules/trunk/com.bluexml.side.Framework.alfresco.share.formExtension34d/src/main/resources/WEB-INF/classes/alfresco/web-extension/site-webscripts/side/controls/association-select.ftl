@@ -13,21 +13,21 @@
 
 (function()
 {
-   combo = new SIDE.ComboBox("${controlId}", "${fieldHtmlId}",${value});
+   var combo = new SIDE.ComboBox("${controlId}", "${fieldHtmlId}",${value});
    
    combo.setOptions(
    {
      itemType: "${field.endpointType}",
-     multipleSelectMode: ${field.endpointMany?string},
-     filterTerm : "*",
-	 maxResults : -1
+     multipleSelectMode: <#if field.control.params.multipleSelectMode>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
+     filterTerm : <#if field.control.params.filterTerm??>"${field.control.params.filterTerm}"<#else>"*"</#if>,
+	 maxResults : <#if field.control.params.maxResults??>${field.control.params.maxResults}<#else>-1</#if>
    });
    
-   /*
+   
    combo.setMessages(
       ${messages}
    );
-   */
+   
 })();
 
 //]]></script>
