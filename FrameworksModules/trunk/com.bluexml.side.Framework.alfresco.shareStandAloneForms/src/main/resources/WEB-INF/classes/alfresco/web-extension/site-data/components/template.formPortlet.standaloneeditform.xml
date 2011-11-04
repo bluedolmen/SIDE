@@ -3,7 +3,7 @@
 	<scope>template</scope>
 	<region-id>formPortlet</region-id>
 	<source-id>standaloneeditform</source-id>
-	<url>/components/form?formId={formId}</url>
+	<url>/components/form?formId={formId}&amp;redirect={redirect}</url>
 	<properties>
 		<itemKind>node</itemKind>
 		<itemId>{nodeRef}</itemId>
