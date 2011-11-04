@@ -61,8 +61,8 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 			<set id=""
 				 label-id="form.set.label.<%getPrefixedQualifiedName()%>" />
 			<set id="<%getPrefixedQualifiedName()%>"
-				 <%getXtension("appearance")%>
-				 <%getXtension("template")%>
+				 <%getXtensionAsXMLAttribute("appearance")%>
+				 <%getXtensionAsXMLAttribute("template")%>
 				 parent="" />
 		<%}%>
 			<%generate_appearanceForClass(getPrefixedQualifiedName())%>
@@ -105,8 +105,8 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 <%-- generate sets --%>
 <%for (getAllSubGroups()){%>
 <set id="<%getPrefixedQualifiedName()%>"
-	 <%getXtension("appearance")%>
-	 <%getXtension("template")%>
+	 <%getXtensionAsXMLAttribute("appearance")%>
+	 <%getXtensionAsXMLAttribute("template")%>
 	 label-id="<%getGroupLabelId()%>"
 	 <%if (eContainer().filter("FormClass")){%><%}else{%> parent="<%eContainer().filter("FormGroup").getPrefixedQualifiedName()%>"<%}%> />
 
@@ -115,18 +115,28 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%}%>						
 <%}%>
 
-<%-- 
-	args(0) : queryString
-	args(1) : expected parameter name
-	returns the value of the expected parameter stored in the query string
-<%script type="FormElement" name="compute_appearance" post="trim()" %>
+<%-- getXtensionAsXMLAttribute :
+	 args(0) : expected parameter name
+	 returns the value of the expected parameter stored in Xtension
 --%>
-<%script type="FormElement" name="getXtension" post="trim()" %>
-	<%for (Xtension.toLowerCase().split("&")) {%>
-		<%if (toString().startsWith(args(0))) {%>
-			<%args(0)%>="<%toString().substring(toString().indexOf("=") + 1, toString().length())%>"
-		<%}%>
+<%script type="FormElement" name="getXtensionAsXMLAttribute" post="trim()" %>
+<%for (Xtension) {%>
+	<%if (toLowerCase().startsWith(args(0).toLowerCase())) {%>
+		<%args(0)%>="<%toString().substring(toString().indexOf("=") + 1, toString().length())%>"
 	<%}%>
+<%}%>
+
+<%-- getXtensionAsControlParam :
+	 args(0) : expected parameter name
+	 returns the value of the expected parameter stored in Xtension and create control-param element
+--%>
+<%script type="FormElement" name="getXtensionAsControlParam" post="trim()" %>
+<%for (Xtension) {%>
+	<%if (toLowerCase().startsWith(args(0).toLowerCase())) {%>
+		<control-param name="<%args(0)%>"><%toString().substring(toString().indexOf("=") + 1, toString().length())%></control-param>
+	<%}%>
+<%}%>
+
 
 <%-- Why doesn't this work? --%>
 <%--
@@ -170,38 +180,71 @@ label-id="<%getFieldLabelId("")%>"
  <%}%>
  
  <%for (filter("ModelChoiceField")){%>
+ <!--extension><%Xtension%></extension-->
  	<%if (widget.toString() == "Search"){%>
  <control template="/side/controls/association-search.ftl" >
- 	<control-param name="compactMode">true</control-param>
+ <%getControlParamsForPicker()%>
  </control>
  	<%}%>
  	<%if (widget.toString() == "Select"){%>
- 	<%-- TODO--%> 
+ <control template="/side/controls/association-select.ftl" >
+ <%getXtensionAsControlParam("multipleSelectMode")%>
+ <%getXtensionAsControlParam("filterTerm")%>
+ <%getXtensionAsControlParam("maxResults")%> 		
+ </control>
  	<%}%>
  	<%if (widget.toString() == "Inline"){%>
  	<%-- TODO--%> 
  	<%}%>
  	<%if (widget.toString() == "ItemSelector"){%>
  	<!-- default widget (itemSelector) -->
+ 	<%if (Xtension.nSize() > 0){%>
+ 	<control>
+ 	<%getControlParamsForPicker()%>
+ 	</control>
+ 	<%}%>
+ 	
  	<%}%>
  <%}%>
  <%for (filter("ModelChoiceSearchField")){%>
  	<%if (widget.toString() == "Search"){%>
  <control template="/side/controls/association-search.ftl" >
- 	<control-param name="compactMode">true</control-param>
+ <%getControlParamsForPicker()%>
+ 	<control-param name="multipleSelectMode">true</control-param>
  </control>
  	<%}%>
  	<%if (widget.toString() == "Select"){%>
- 	<%-- TODO--%> 
+ <control template="/side/controls/association-select.ftl" >
+ 	<control-param name="multipleSelectMode">true</control-param>
+ <%getXtensionAsControlParam("filterTerm")%>
+ <%getXtensionAsControlParam("maxResults")%>
+ </control>
  	<%}%>
  	<%if (widget.toString() == "Inline"){%>
  	<%-- TODO--%> 
  	<%}%>
  	<%if (widget.toString() == "ItemSelector"){%>
  	<!-- default widget (itemSelector) -->
+ 	<%if (Xtension.nSize() > 0){%>
+ 	<control>
+ 		<control-param name="multipleSelectMode">true</control-param>
+ 	<%getControlParamsForPicker()%> 	
+ 	</control>
+ 	<%}%>
  	<%}%>
  <%}%>
  </field>
+
+<%script type="ModelChoiceField" name="getControlParamsForPicker" post="trim()" %>
+ <%getXtensionAsControlParam("compactMode")%>
+ <%getXtensionAsControlParam("forceEditable")%>
+ <%getXtensionAsControlParam("startLocation")%>
+ <%getXtensionAsControlParam("selectedValueContextProperty")%>
+ <%getXtensionAsControlParam("valueType")%>
+ <%getXtensionAsControlParam("selectActionLabel")%> 
+ <%getXtensionAsControlParam("multipleSelectMode")%>
+ <%getXtensionAsControlParam("showTargetLink")%>
+ <%getXtensionAsControlParam("displayMode")%>
  
 <%script type="FormElement" name="getFieldLabelId" post="trim()" %>
 form.field.label.<%args(0)%><%getPrefixedQualifiedName()%>
