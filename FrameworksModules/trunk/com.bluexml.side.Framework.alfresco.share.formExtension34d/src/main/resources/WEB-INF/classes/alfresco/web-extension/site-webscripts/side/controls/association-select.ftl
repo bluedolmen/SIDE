@@ -18,7 +18,7 @@
    combo.setOptions(
    {
      itemType: "${field.endpointType}",
-     multipleSelectMode: <#if field.control.params.multipleSelectMode>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
+     multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
      filterTerm : <#if field.control.params.filterTerm??>"${field.control.params.filterTerm}"<#else>"*"</#if>,
 	 maxResults : <#if field.control.params.maxResults??>${field.control.params.maxResults}<#else>-1</#if>
    });
