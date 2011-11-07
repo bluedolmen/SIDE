@@ -1,0 +1,3 @@
+<%@ jet package="com.bluexml.side.Util.MetaModel.validate.templates.model" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.* org.eclipse.emf.ecore.*" class="Class" version="$Id$" %>
+<% final String oclNsURI = "http://www.bluexml.com/OCL"; %>
+<%@ include file="Class.javajet"%>

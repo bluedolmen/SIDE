@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/0.10" xmi:id="_t4YC8d5hEd2gI7TdoTmi-g" name="Requirements modeler" projectName="com.bluexml.side.Requirements.modeler" pluginVersion="1.0.0" provider="blueXML">
+  <genModel href="requirements.genmodel#/"/>
+</editorconfigurator:EditorConfiguration>

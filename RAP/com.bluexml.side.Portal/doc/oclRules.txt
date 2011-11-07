@@ -1,0 +1,25 @@
+Page :
+must be linked to layout
+
+Layout :
+at least one zone
+
+HavePortlet :
+linked with one Page 			: associationPage
+linked with one Portelt			: associationPortlet
+linked to Layout information 	: positionGroup
+
+Portlet :
+must have one of GeneratedPortel or  : isPortletInternal or isInstanceOfPortletType
+must have a name : name
+
+Portlet Type (generic portlet):
+must have a name : name
+must have an id : id
+must have instanceable value : instanceable
+
+InstanciatePortletType (link portlet and PortletType) :
+must have Portlet : portletType
+if PortletType have attributes this element must have attibute instance :
+self.instances.instanceOf ->includesAll(self.portletType.haveAttribute)
+

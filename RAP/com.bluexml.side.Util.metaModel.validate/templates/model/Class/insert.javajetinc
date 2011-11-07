@@ -1,0 +1,4 @@
+<%if (isImplementation) {%>
+		private static final String OCL_ANNOTATION_SOURCE = "<%=oclNsURI%>";<%=genModel.getNonNLS()%>
+		private static final <%=genModel.getImportedName("org.eclipse.ocl.ecore.OCL")%> OCL_ENV = <%=genModel.getImportedName("com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL")%>.newInstance();
+<%}%>		
