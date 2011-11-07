@@ -303,9 +303,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateClassPackage(ClassPackage classPackage, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(classPackage, diagnostics, context);
+		boolean result = validate_NoCircularContainment(classPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(classPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classPackage, diagnostics, context);
@@ -359,9 +361,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateClazz(Clazz clazz, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(clazz, diagnostics, context);
+		boolean result = validate_NoCircularContainment(clazz, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(clazz, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(clazz, diagnostics, context);
@@ -446,9 +450,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAssociation(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(association, diagnostics, context);
+		boolean result = validate_NoCircularContainment(association, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(association, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(association, diagnostics, context);
@@ -876,9 +882,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAttribute(Attribute attribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(attribute, diagnostics, context);
+		boolean result = validate_NoCircularContainment(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(attribute, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(attribute, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(attribute, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(attribute, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(attribute, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(attribute, diagnostics, context);
@@ -972,9 +980,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEnumeration(Enumeration enumeration, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(enumeration, diagnostics, context);
+		boolean result = validate_NoCircularContainment(enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(enumeration, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(enumeration, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(enumeration, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(enumeration, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(enumeration, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(enumeration, diagnostics, context);
@@ -1028,9 +1038,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEnumerationLiteral(EnumerationLiteral enumerationLiteral, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(enumerationLiteral, diagnostics, context);
+		boolean result = validate_NoCircularContainment(enumerationLiteral, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(enumerationLiteral, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(enumerationLiteral, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(enumerationLiteral, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(enumerationLiteral, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(enumerationLiteral, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(enumerationLiteral, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(enumerationLiteral, diagnostics, context);
@@ -1084,9 +1096,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAspect(Aspect aspect, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(aspect, diagnostics, context);
+		boolean result = validate_NoCircularContainment(aspect, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(aspect, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(aspect, diagnostics, context);
@@ -1104,9 +1118,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAbstractClass(AbstractClass abstractClass, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(abstractClass, diagnostics, context);
+		boolean result = validate_NoCircularContainment(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(abstractClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(abstractClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(abstractClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(abstractClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(abstractClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractClass, diagnostics, context);
@@ -1298,9 +1314,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAssociationEnd(AssociationEnd associationEnd, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(associationEnd, diagnostics, context);
+		boolean result = validate_NoCircularContainment(associationEnd, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(associationEnd, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(associationEnd, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(associationEnd, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(associationEnd, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(associationEnd, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(associationEnd, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(associationEnd, diagnostics, context);
@@ -1341,9 +1359,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateModel(Model model, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(model, diagnostics, context);
+		boolean result = validate_NoCircularContainment(model, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(model, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(model, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(model, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(model, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(model, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(model, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(model, diagnostics, context);

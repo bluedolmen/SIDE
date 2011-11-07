@@ -27,8 +27,9 @@ import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Association End</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Association End</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -42,11 +43,11 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class AssociationEndImpl extends TitledNamedClassModelElementImpl
-		implements AssociationEnd {
+public class AssociationEndImpl extends TitledNamedClassModelElementImpl implements AssociationEnd {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -55,7 +56,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -64,7 +66,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 
 	/**
 	 * The default value of the '{@link #getCardMin() <em>Card Min</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCardMin()
 	 * @generated
 	 * @ordered
@@ -73,7 +76,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 
 	/**
 	 * The cached value of the '{@link #getCardMin() <em>Card Min</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCardMin()
 	 * @generated
 	 * @ordered
@@ -82,7 +86,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 
 	/**
 	 * The default value of the '{@link #getCardMax() <em>Card Max</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCardMax()
 	 * @generated
 	 * @ordered
@@ -91,7 +96,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 
 	/**
 	 * The cached value of the '{@link #getCardMax() <em>Card Max</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCardMax()
 	 * @generated
 	 * @ordered
@@ -100,7 +106,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 
 	/**
 	 * The default value of the '{@link #isNavigable() <em>Navigable</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isNavigable()
 	 * @generated
 	 * @ordered
@@ -109,7 +116,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 
 	/**
 	 * The cached value of the '{@link #isNavigable() <em>Navigable</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isNavigable()
 	 * @generated
 	 * @ordered
@@ -118,7 +126,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 
 	/**
 	 * The cached value of the '{@link #getLinkedClass() <em>Linked Class</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLinkedClass()
 	 * @generated
 	 * @ordered
@@ -126,7 +135,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	protected AbstractClass linkedClass;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected AssociationEndImpl() {
@@ -134,7 +144,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -143,7 +154,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getValue() {
@@ -151,7 +163,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setValue(String newValue) {
@@ -162,7 +175,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getCardMin() {
@@ -170,7 +184,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCardMin(String newCardMin) {
@@ -181,7 +196,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getCardMax() {
@@ -189,7 +205,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCardMax(String newCardMax) {
@@ -200,7 +217,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isNavigable() {
@@ -208,7 +226,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setNavigable(boolean newNavigable) {
@@ -219,7 +238,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public AbstractClass getLinkedClass() {
@@ -235,7 +255,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public AbstractClass basicGetLinkedClass() {
@@ -243,7 +264,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setLinkedClass(AbstractClass newLinkedClass) {
@@ -254,7 +276,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isMandatory() {
@@ -280,15 +303,15 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 
 	/**
 	 * The parsed OCL expression for the body of the '{@link #isMandatory <em>Is Mandatory</em>}' operation.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isMandatory
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> isMandatoryBodyOCL;
-
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isMany() {
@@ -313,17 +336,16 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * The parsed OCL expression for the body of the '{@link #isMany
-	 * <em>Is Many</em>}' operation. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The parsed OCL expression for the body of the '{@link #isMany <em>Is Many</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isMany
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> isManyBodyOCL;
-
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public AssociationEnd getOpposite() {
@@ -349,15 +371,15 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 
 	/**
 	 * The parsed OCL expression for the body of the '{@link #getOpposite <em>Get Opposite</em>}' operation.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getOpposite
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getOppositeBodyOCL;
-
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -379,7 +401,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -405,7 +428,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -431,7 +455,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -452,7 +477,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -467,7 +493,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -482,7 +509,8 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -502,15 +530,6 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl
 		return result.toString();
 	}
 
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
-
-	public void setLinkedClass(Clazz value) {
-		AbstractClass oldLinkedClass = linkedClass;
-		linkedClass = value;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClazzPackage.ASSOCIATION_END__LINKED_CLASS, oldLinkedClass,
-					linkedClass));
-	}
-} // AssociationEndImpl
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
+} //AssociationEndImpl

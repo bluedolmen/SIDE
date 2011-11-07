@@ -47,10 +47,6 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * The default value is <code>"String"</code>.
 	 * The literals are from the enumeration {@link com.bluexml.side.common.DataType}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Typ</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: the type of a class property allows to define its format; the supported property types are boolean, byte, char, double, float, int, long, short, String, Date, Object.
@@ -79,10 +75,6 @@ public interface Attribute extends TitledNamedClassModelElement {
 	/**
 	 * Returns the value of the '<em><b>Initial Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Initial Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: this attribute allows to set up an initial value to the class property at creation of an object.
@@ -110,10 +102,6 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * The default value is <code>"Private"</code>.
 	 * The literals are from the enumeration {@link com.bluexml.side.common.Visibility}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: this attribute indicates the scope of the class property the possible values are:
@@ -171,10 +159,6 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * Returns the value of the '<em><b>Unique</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Unique</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: if true, this attribute inidcates that the class property is part of the unique constraint of the class. This means that the set of values of all the unique property must be unique through all the instances of the class.

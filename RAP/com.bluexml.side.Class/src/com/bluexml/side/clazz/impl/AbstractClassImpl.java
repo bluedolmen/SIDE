@@ -209,7 +209,42 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getInheritedClassesBodyOCL;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Clazz> getSubTypes() {
+		if (getSubTypesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getSubTypesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getSubTypesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
+	
+	}
 
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getSubTypes <em>Get Sub Types</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubTypes
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getSubTypesBodyOCL;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -246,7 +281,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllSubTypesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -283,7 +317,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getSourceAssociationsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -322,7 +355,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> isSourceBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -361,7 +393,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> isTargetBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -398,7 +429,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getTargetAssociationsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -435,7 +465,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getSourceAssociationEndsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -472,44 +501,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getTargetAssociationEndsBodyOCL;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Clazz> getSubTypes() {
-		if (getSubTypesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(2);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getSubTypesBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getSubTypesBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getSubTypes <em>Get Sub Types</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubTypes
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getSubTypesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -546,7 +537,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllSourceAssociationsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -583,7 +573,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllTargetAssociationsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -620,7 +609,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAssociatedClassesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -657,7 +645,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllSourceAssociationEndsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -694,7 +681,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllTargetAssociationEndsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -731,7 +717,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAttributesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -768,7 +753,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getClassAndAspectAttributesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -805,7 +789,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAspectAttributesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -842,7 +825,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllInheritedClassAndAspectAttributesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -879,44 +861,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllInheritedAspectsBodyOCL;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Aspect> getAllLinkedAspects() {
-		if (getAllLinkedAspectsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(22);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getAllLinkedAspectsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllLinkedAspectsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Aspect> result = (Collection<Aspect>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Aspect>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllLinkedAspects <em>Get All Linked Aspects</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAllLinkedAspects
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getAllLinkedAspectsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -953,7 +897,6 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllLinkedAbstractClassBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -990,7 +933,42 @@ public abstract class AbstractClassImpl extends TitledNamedClassModelElementImpl
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllLinkedClassesBodyOCL;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Aspect> getAllLinkedAspects() {
+		if (getAllLinkedAspectsBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CLASS.getEOperations().get(22);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CLASS, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllLinkedAspectsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllLinkedAspectsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Aspect> result = (Collection<Aspect>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Aspect>(result.size(), result.toArray());
+	
+	}
 
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllLinkedAspects <em>Get All Linked Aspects</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllLinkedAspects
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllLinkedAspectsBodyOCL;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

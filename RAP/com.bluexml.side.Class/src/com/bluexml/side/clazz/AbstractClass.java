@@ -100,6 +100,15 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='AbstractClass.allInstances() ->select(e:AbstractClass|e.generalizations() ->includes(self) )'"
+	 * @generated
+	 */
+	EList<Clazz> getSubTypes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
 	 *        annotation="http://www.bluexml.com/OCL body='AbstractClass.allInstances() ->select(e:AbstractClass|e.getInheritedClasses() ->includes(self) )'"
 	 * @generated
 	 */
@@ -158,15 +167,6 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	 * @generated
 	 */
 	EList<AssociationEnd> getTargetAssociationEnds();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='AbstractClass.allInstances() ->select(e:AbstractClass|e.generalizations() ->includes(self) )'"
-	 * @generated
-	 */
-	EList<Clazz> getSubTypes();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -262,15 +262,6 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='getAllLinkedAbstractClass() -> select(x | x.oclIsTypeOf(Aspect))'"
-	 * @generated
-	 */
-	EList<Aspect> getAllLinkedAspects();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
 	 *        annotation="http://www.bluexml.com/OCL body='let selfAndInherited : Set(AbstractClass) = self.getInheritedClasses() -> including(self)\n\t\tin selfAndInherited -> union(selfAndInherited.aspects.getAllLinkedAbstractClass())'"
 	 * @generated
 	 */
@@ -284,5 +275,14 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	 * @generated
 	 */
 	EList<Clazz> getAllLinkedClasses();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='getAllLinkedAbstractClass() -> select(x | x.oclIsTypeOf(Aspect))'"
+	 * @generated
+	 */
+	EList<Aspect> getAllLinkedAspects();
 		
 } // AbstractClass

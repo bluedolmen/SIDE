@@ -397,7 +397,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAbstractClassesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -434,7 +433,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllClassesFromEveryWhereBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -471,7 +469,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAspectsFromEveryWhereBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -508,7 +505,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllConstraintsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -545,7 +541,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAbstractClassesAndLinkedBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -582,7 +577,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAbstractClassesAndReferencesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

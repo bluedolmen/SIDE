@@ -37,10 +37,6 @@ public interface Association extends TitledNamedClassModelElement {
 	 * Returns the value of the '<em><b>Association Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link com.bluexml.side.clazz.AssociationType}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Association Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: an association may be of various type according to the relationship which must be established between two types of data:

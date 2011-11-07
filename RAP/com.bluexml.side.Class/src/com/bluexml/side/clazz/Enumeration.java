@@ -58,10 +58,6 @@ public interface Enumeration extends NamedModelElement {
 	 * Returns the value of the '<em><b>Dynamic</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dynamic</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: if false, this attribute indicates that the values of the enumeration are predefined and fixed: they are defined during modeling. If true, this attribute indicates that the set of values of the enumeration may be extended at application runtime.

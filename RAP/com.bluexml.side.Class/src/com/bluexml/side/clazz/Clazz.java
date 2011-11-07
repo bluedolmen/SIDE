@@ -55,10 +55,6 @@ public interface Clazz extends AbstractClass {
 	/**
 	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: this attribute indicates if the class is abstract; an abstract class cannot be instanciated but serve to define an object of more general level. For example, in the library, an abstract class 'media' may be defined to group all the kind of medias; the class 'mediaVideo' inherits of media to specialise 'media' as the media on video support.
@@ -85,10 +81,6 @@ public interface Clazz extends AbstractClass {
 	/**
 	 * Returns the value of the '<em><b>Deprecated</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Deprecated</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: set this attribute to true if the class is no more used in new version of the model but is only kept to ensure compatibility with previous models.

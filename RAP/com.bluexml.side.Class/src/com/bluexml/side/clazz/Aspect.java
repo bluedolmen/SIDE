@@ -6,8 +6,6 @@
  */
 package com.bluexml.side.clazz;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Aspect</b></em>'.

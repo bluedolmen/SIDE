@@ -37,10 +37,6 @@ public interface AssociationEnd extends TitledNamedClassModelElement, Comment {
 	 * Returns the value of the '<em><b>Card Min</b></em>' attribute.
 	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Card Min</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: the minimum number (minimum cardinality) of instances of the targeted class which participate to the association.
@@ -69,10 +65,6 @@ public interface AssociationEnd extends TitledNamedClassModelElement, Comment {
 	 * Returns the value of the '<em><b>Card Max</b></em>' attribute.
 	 * The default value is <code>"1"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Card Max</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: the maximum number (maximum cardinality) of instances of the targeted class which participate to the association.
@@ -100,10 +92,6 @@ public interface AssociationEnd extends TitledNamedClassModelElement, Comment {
 	/**
 	 * Returns the value of the '<em><b>Navigable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Navigable</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: if false, this boolean indicates that the association is not navigable ie it is not possible to pass through the association.
@@ -152,9 +140,6 @@ public interface AssociationEnd extends TitledNamedClassModelElement, Comment {
 	 * @generated
 	 */
 	void setLinkedClass(AbstractClass value);
-	
-	//Add to be conformed with previous versions
-	void setLinkedClass(Clazz value);
 
 	/**
 	 * <!-- begin-user-doc -->
