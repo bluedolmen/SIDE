@@ -240,9 +240,11 @@ public class RequirementsValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateGoal(Goal goal, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(goal, diagnostics, context);
+		boolean result = validate_NoCircularContainment(goal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(goal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(goal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(goal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(goal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(goal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(goal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(goal, diagnostics, context);

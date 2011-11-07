@@ -63,6 +63,9 @@ import org.eclipse.ui.part.ISetSelectionTarget;
 import com.bluexml.side.requirements.RequirementsFactory;
 import com.bluexml.side.requirements.RequirementsPackage;
 import com.bluexml.side.requirements.provider.RequirementsEditPlugin;
+import java.io.File;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.swt.widgets.Text;
 
 
 /**
@@ -105,14 +108,6 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	protected RequirementsFactory requirementsFactory = requirementsPackage.getRequirementsFactory();
-
-	/**
-	 * This is the file creation page.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RequirementsModelWizardNewFileCreationPage newFileCreationPage;
 
 	/**
 	 * This is the initial object creation page.
@@ -176,7 +171,7 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 					}
 				}
 			}
-			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
+			Collections.sort(initialObjectNames, java.text.Collator.getInstance());
 		}
 		return initialObjectNames;
 	}
@@ -202,24 +197,27 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		try {
-			// Remember the file.
+			// Get the URI of the model file.
 			//
-			final IFile modelFile = getModelFile();
-
+			final URI fileURI = getModelURI();
+			if (new File(fileURI.toFileString()).exists()) {
+				if (!MessageDialog.openQuestion
+						(getShell(),
+						 RequirementsEditorPlugin.INSTANCE.getString("_UI_Question_title"),
+						 RequirementsEditorPlugin.INSTANCE.getString("_WARN_FileConflict", new String []{ fileURI.toFileString() }))) {
+					initialObjectCreationPage.selectFileField();
+					return false;
+				}
+			}
+			
 			// Do the work within an operation.
 			//
-			WorkspaceModifyOperation operation =
-				new WorkspaceModifyOperation() {
-					@Override
-					protected void execute(IProgressMonitor progressMonitor) {
+			IRunnableWithProgress operation = new IRunnableWithProgress() {
+				public void run(IProgressMonitor progressMonitor) {
 						try {
 							// Create a resource set
 							//
 							ResourceSet resourceSet = new ResourceSetImpl();
-
-							// Get the URI of the model file.
-							//
-							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString(), true);
 
 							// Create a resource for this file.
 							//
@@ -249,85 +247,11 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 
 			getContainer().run(false, false, operation);
 
-			// Select the new file resource in the current view.
-			//
-			IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
-			IWorkbenchPage page = workbenchWindow.getActivePage();
-			final IWorkbenchPart activePart = page.getActivePart();
-			if (activePart instanceof ISetSelectionTarget) {
-				final ISelection targetSelection = new StructuredSelection(modelFile);
-				getShell().getDisplay().asyncExec
-					(new Runnable() {
-						 public void run() {
-							 ((ISetSelectionTarget)activePart).selectReveal(targetSelection);
-						 }
-					 });
-			}
-
-			// Open an editor on the new file.
-			//
-			try {
-				page.openEditor
-					(new FileEditorInput(modelFile),
-					 workbench.getEditorRegistry().getDefaultEditor(modelFile.getFullPath().toString()).getId());
-			}
-			catch (PartInitException exception) {
-				MessageDialog.openError(workbenchWindow.getShell(), RequirementsEditorPlugin.INSTANCE.getString("_UI_OpenEditorError_label"), exception.getMessage());
-				return false;
-			}
-
-			return true;
+			return RequirementsEditorAdvisor.openEditor(workbench, fileURI);			
 		}
 		catch (Exception exception) {
 			RequirementsEditorPlugin.INSTANCE.log(exception);
 			return false;
-		}
-	}
-
-	/**
-	 * This is the one page of the wizard.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public class RequirementsModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
-		/**
-		 * Pass in the selection.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public RequirementsModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
-			super(pageId, selection);
-		}
-
-		/**
-		 * The framework calls this to see if the file is correct.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		@Override
-		protected boolean validatePage() {
-			if (super.validatePage()) {
-				String extension = new Path(getFileName()).getFileExtension();
-				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
-					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
-					setErrorMessage(RequirementsEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
-					return false;
-				}
-				return true;
-			}
-			return false;
-		}
-
-		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public IFile getModelFile() {
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(getContainerFullPath().append(getFileName()));
 		}
 	}
 
@@ -338,6 +262,13 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public class RequirementsModelWizardInitialObjectCreationPage extends WizardPage {
+		/**
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		protected Text fileField;
+
 		/**
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -387,6 +318,40 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 				data.horizontalAlignment = GridData.FILL;
 				composite.setLayoutData(data);
 			}
+			
+			Label resourceURILabel = new Label(composite, SWT.LEFT);
+			{
+				resourceURILabel.setText(RequirementsEditorPlugin.INSTANCE.getString("_UI_File_label"));
+
+				GridData data = new GridData();
+				data.horizontalAlignment = GridData.FILL;
+				resourceURILabel.setLayoutData(data);
+			}
+
+			Composite fileComposite = new Composite(composite, SWT.NONE);
+			{
+				GridData data = new GridData();
+				data.horizontalAlignment = GridData.END;
+				fileComposite.setLayoutData(data);
+
+				GridLayout layout = new GridLayout();
+				data.horizontalAlignment = GridData.FILL;
+				layout.marginHeight = 0;
+				layout.marginWidth = 0;
+				layout.numColumns = 2;
+				fileComposite.setLayout(layout);
+			}
+
+			fileField = new Text(fileComposite, SWT.BORDER);
+			{
+				GridData data = new GridData();
+				data.horizontalAlignment = GridData.FILL;
+				data.grabExcessHorizontalSpace = true;
+				data.horizontalSpan = 1;
+				fileField.setLayoutData(data);
+			}
+
+			fileField.addModifyListener(validator);
 
 			Label containerLabel = new Label(composite, SWT.LEFT);
 			{
@@ -459,6 +424,20 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		protected boolean validatePage() {
+			URI fileURI = getFileURI();
+			if (fileURI == null || fileURI.isEmpty()) {
+				setErrorMessage(null);
+				return false;
+			}
+
+			String extension = fileURI.fileExtension();
+			if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
+				String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
+				setErrorMessage(RequirementsEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
+				return false;
+			}
+
+			setErrorMessage(null);
 			return getInitialObjectName() != null && getEncodings().contains(encodingField.getText());
 		}
 
@@ -471,14 +450,9 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 		public void setVisible(boolean visible) {
 			super.setVisible(visible);
 			if (visible) {
-				if (initialObjectField.getItemCount() == 1) {
-					initialObjectField.clearSelection();
-					encodingField.setFocus();
-				}
-				else {
-					encodingField.clearSelection();
-					initialObjectField.setFocus();
-				}
+				initialObjectField.clearSelection();
+				encodingField.clearSelection();
+				fileField.setFocus();
 			}
 		}
 
@@ -505,6 +479,33 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 		 */
 		public String getEncoding() {
 			return encodingField.getText();
+		}
+
+		/**
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public URI getFileURI() {
+			try {
+				return URI.createFileURI(fileField.getText());
+			}
+			catch (Exception exception) {
+				// Ignore
+			}
+			return null;
+		}
+
+		/**
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public void selectFileField() {
+				initialObjectField.clearSelection();
+				encodingField.clearSelection();
+				fileField.selectAll();
+				fileField.setFocus();
 		}
 
 		/**
@@ -547,47 +548,6 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 	 */
 		@Override
 	public void addPages() {
-		// Create a page, set the title, and the initial model file name.
-		//
-		newFileCreationPage = new RequirementsModelWizardNewFileCreationPage("Whatever", selection);
-		newFileCreationPage.setTitle(RequirementsEditorPlugin.INSTANCE.getString("_UI_RequirementsModelWizard_label"));
-		newFileCreationPage.setDescription(RequirementsEditorPlugin.INSTANCE.getString("_UI_RequirementsModelWizard_description"));
-		newFileCreationPage.setFileName(RequirementsEditorPlugin.INSTANCE.getString("_UI_RequirementsEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
-		addPage(newFileCreationPage);
-
-		// Try and get the resource selection to determine a current directory for the file dialog.
-		//
-		if (selection != null && !selection.isEmpty()) {
-			// Get the resource...
-			//
-			Object selectedElement = selection.iterator().next();
-			if (selectedElement instanceof IResource) {
-				// Get the resource parent, if its a file.
-				//
-				IResource selectedResource = (IResource)selectedElement;
-				if (selectedResource.getType() == IResource.FILE) {
-					selectedResource = selectedResource.getParent();
-				}
-
-				// This gives us a directory...
-				//
-				if (selectedResource instanceof IFolder || selectedResource instanceof IProject) {
-					// Set this for the container.
-					//
-					newFileCreationPage.setContainerFullPath(selectedResource.getFullPath());
-
-					// Make up a unique new name here.
-					//
-					String defaultModelBaseFilename = RequirementsEditorPlugin.INSTANCE.getString("_UI_RequirementsEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
-					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
-					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
-						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;
-					}
-					newFileCreationPage.setFileName(modelFilename);
-				}
-			}
-		}
 		initialObjectCreationPage = new RequirementsModelWizardInitialObjectCreationPage("Whatever2");
 		initialObjectCreationPage.setTitle(RequirementsEditorPlugin.INSTANCE.getString("_UI_RequirementsModelWizard_label"));
 		initialObjectCreationPage.setDescription(RequirementsEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
@@ -595,13 +555,13 @@ public class RequirementsModelWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * Get the file from the page.
+	 * Get the URI from the page.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IFile getModelFile() {
-		return newFileCreationPage.getModelFile();
+	public URI getModelURI() {
+		return initialObjectCreationPage.getFileURI();
 	}
 
 }

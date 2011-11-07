@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal.util;
 
+import com.bluexml.side.portal.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -229,9 +230,11 @@ public class PortalValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePortal(Portal portal, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(portal, diagnostics, context);
+		boolean result = validate_NoCircularContainment(portal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(portal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(portal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(portal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(portal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(portal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(portal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(portal, diagnostics, context);
@@ -312,9 +315,11 @@ public class PortalValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePortlet(Portlet portlet, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(portlet, diagnostics, context);
+		boolean result = validate_NoCircularContainment(portlet, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(portlet, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(portlet, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(portlet, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(portlet, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(portlet, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(portlet, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(portlet, diagnostics, context);
@@ -367,9 +372,11 @@ public class PortalValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePortletType(PortletType portletType, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(portletType, diagnostics, context);
+		boolean result = validate_NoCircularContainment(portletType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(portletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(portletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(portletType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(portletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(portletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(portletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(portletType, diagnostics, context);
@@ -462,9 +469,11 @@ public class PortalValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePortletInternal(PortletInternal portletInternal, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(portletInternal, diagnostics, context);
+		boolean result = validate_NoCircularContainment(portletInternal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(portletInternal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(portletInternal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(portletInternal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(portletInternal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(portletInternal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(portletInternal, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(portletInternal, diagnostics, context);
@@ -544,9 +553,11 @@ public class PortalValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateHavePortlet(HavePortlet havePortlet, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(havePortlet, diagnostics, context);
+		boolean result = validate_NoCircularContainment(havePortlet, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(havePortlet, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(havePortlet, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(havePortlet, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(havePortlet, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(havePortlet, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(havePortlet, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(havePortlet, diagnostics, context);
@@ -608,9 +619,11 @@ public class PortalValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateInstanciatePortletType(InstanciatePortletType instanciatePortletType, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(instanciatePortletType, diagnostics, context);
+		boolean result = validate_NoCircularContainment(instanciatePortletType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(instanciatePortletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(instanciatePortletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(instanciatePortletType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(instanciatePortletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(instanciatePortletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(instanciatePortletType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(instanciatePortletType, diagnostics, context);

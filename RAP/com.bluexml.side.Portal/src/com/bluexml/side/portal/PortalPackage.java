@@ -127,6 +127,24 @@ public interface PortalPackage extends EPackage {
 	int PORTAL_MODEL_ELEMENT__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_MODEL_ELEMENT__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_MODEL_ELEMENT__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The number of structural features of the '<em>Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,6 +218,24 @@ public interface PortalPackage extends EPackage {
 	int PORTAL__METAINFO = CommonPackage.PACKAGE__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL__CONSTRAINTS = CommonPackage.PACKAGE__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL__NAMESPACE = CommonPackage.PACKAGE__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -225,6 +261,15 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTAL__PACKAGE_SET = CommonPackage.PACKAGE__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL__NAMESPACE_SET = CommonPackage.PACKAGE__NAMESPACE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Page Set</b></em>' containment reference list.
@@ -343,6 +388,24 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PAGE__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__CONSTRAINTS = PORTAL_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__NAMESPACE = PORTAL_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>ID</b></em>' attribute.
@@ -488,6 +551,24 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTAL_LAYOUT__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_LAYOUT__CONSTRAINTS = PORTAL_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_LAYOUT__NAMESPACE = PORTAL_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -636,6 +717,24 @@ public interface PortalPackage extends EPackage {
 	int PORTLET__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET__CONSTRAINTS = PORTAL_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET__NAMESPACE = PORTAL_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -734,6 +833,24 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTLET_TYPE__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_TYPE__CONSTRAINTS = PORTAL_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_TYPE__NAMESPACE = PORTAL_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -843,6 +960,24 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTLET_INTERNAL__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_INTERNAL__CONSTRAINTS = PORTAL_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_INTERNAL__NAMESPACE = PORTAL_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.

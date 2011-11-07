@@ -686,10 +686,34 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 	 * @generated
 	 */
 	public NameSpace getLogicalNameSpace() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getLogicalNameSpaceBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.MODEL_ELEMENT.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getLogicalNameSpaceBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getLogicalNameSpaceBodyOCL);
+	
+		return (NameSpace) query.evaluate(this);
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getLogicalNameSpace <em>Get Logical Name Space</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLogicalNameSpace
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getLogicalNameSpaceBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

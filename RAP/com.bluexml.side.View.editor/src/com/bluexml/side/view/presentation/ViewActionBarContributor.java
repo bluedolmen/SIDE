@@ -8,6 +8,7 @@ package com.bluexml.side.view.presentation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import org.eclipse.emf.common.ui.action.WorkbenchWindowActionDelegate;
 import java.util.List;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
@@ -37,8 +38,10 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
@@ -71,6 +74,27 @@ import com.bluexml.side.view.edit.ui.utils.FieldTransformation;
  * @generated
  */
 public class ViewActionBarContributor extends EditingDomainActionBarContributor implements ISelectionChangedListener {
+
+	/**
+	 * Action to create objects from the View model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static class NewAction extends WorkbenchWindowActionDelegate {
+		/**
+		 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public void run(IAction action) {
+			ViewModelWizard wizard = new ViewModelWizard();
+			wizard.init(getWindow().getWorkbench(), StructuredSelection.EMPTY);
+			WizardDialog wizardDialog = new WizardDialog(getWindow().getShell(), wizard);
+			wizardDialog.open();
+		}
+	}
 
 	protected InitializeView initializeView = new InitializeView();
 	protected MergeCols mergeCol = new MergeCols();

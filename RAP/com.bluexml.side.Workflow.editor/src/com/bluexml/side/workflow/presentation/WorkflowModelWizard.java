@@ -63,6 +63,9 @@ import org.eclipse.ui.part.ISetSelectionTarget;
 import com.bluexml.side.workflow.WorkflowFactory;
 import com.bluexml.side.workflow.WorkflowPackage;
 import com.bluexml.side.workflow.provider.WorkflowEditPlugin;
+import java.io.File;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.swt.widgets.Text;
 
 
 /**
@@ -105,14 +108,6 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	protected WorkflowFactory workflowFactory = workflowPackage.getWorkflowFactory();
-
-	/**
-	 * This is the file creation page.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected WorkflowModelWizardNewFileCreationPage newFileCreationPage;
 
 	/**
 	 * This is the initial object creation page.
@@ -203,24 +198,27 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		try {
-			// Remember the file.
+			// Get the URI of the model file.
 			//
-			final IFile modelFile = getModelFile();
-
+			final URI fileURI = getModelURI();
+			if (new File(fileURI.toFileString()).exists()) {
+				if (!MessageDialog.openQuestion
+						(getShell(),
+						 WorkflowEditorPlugin.INSTANCE.getString("_UI_Question_title"),
+						 WorkflowEditorPlugin.INSTANCE.getString("_WARN_FileConflict", new String []{ fileURI.toFileString() }))) {
+					initialObjectCreationPage.selectFileField();
+					return false;
+				}
+			}
+			
 			// Do the work within an operation.
 			//
-			WorkspaceModifyOperation operation =
-				new WorkspaceModifyOperation() {
-					@Override
-					protected void execute(IProgressMonitor progressMonitor) {
+			IRunnableWithProgress operation = new IRunnableWithProgress() {
+				public void run(IProgressMonitor progressMonitor) {
 						try {
 							// Create a resource set
 							//
 							ResourceSet resourceSet = new ResourceSetImpl();
-
-							// Get the URI of the model file.
-							//
-							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString(), true);
 
 							// Create a resource for this file.
 							//
@@ -250,85 +248,11 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 
 			getContainer().run(false, false, operation);
 
-			// Select the new file resource in the current view.
-			//
-			IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
-			IWorkbenchPage page = workbenchWindow.getActivePage();
-			final IWorkbenchPart activePart = page.getActivePart();
-			if (activePart instanceof ISetSelectionTarget) {
-				final ISelection targetSelection = new StructuredSelection(modelFile);
-				getShell().getDisplay().asyncExec
-					(new Runnable() {
-						 public void run() {
-							 ((ISetSelectionTarget)activePart).selectReveal(targetSelection);
-						 }
-					 });
-			}
-
-			// Open an editor on the new file.
-			//
-			try {
-				page.openEditor
-					(new FileEditorInput(modelFile),
-					 workbench.getEditorRegistry().getDefaultEditor(modelFile.getFullPath().toString()).getId());
-			}
-			catch (PartInitException exception) {
-				MessageDialog.openError(workbenchWindow.getShell(), WorkflowEditorPlugin.INSTANCE.getString("_UI_OpenEditorError_label"), exception.getMessage());
-				return false;
-			}
-
-			return true;
+			return WorkflowEditorAdvisor.openEditor(workbench, fileURI);			
 		}
 		catch (Exception exception) {
 			WorkflowEditorPlugin.INSTANCE.log(exception);
 			return false;
-		}
-	}
-
-	/**
-	 * This is the one page of the wizard.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public class WorkflowModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
-		/**
-		 * Pass in the selection.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public WorkflowModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
-			super(pageId, selection);
-		}
-
-		/**
-		 * The framework calls this to see if the file is correct.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-	@Override
-		protected boolean validatePage() {
-			if (super.validatePage()) {
-				String extension = new Path(getFileName()).getFileExtension();
-				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
-					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
-					setErrorMessage(WorkflowEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
-					return false;
-				}
-				return true;
-			}
-			return false;
-		}
-
-		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public IFile getModelFile() {
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(getContainerFullPath().append(getFileName()));
 		}
 	}
 
@@ -339,6 +263,13 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public class WorkflowModelWizardInitialObjectCreationPage extends WizardPage {
+		/**
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		protected Text fileField;
+
 		/**
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -388,6 +319,40 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 				data.horizontalAlignment = GridData.FILL;
 				composite.setLayoutData(data);
 			}
+			
+			Label resourceURILabel = new Label(composite, SWT.LEFT);
+			{
+				resourceURILabel.setText(WorkflowEditorPlugin.INSTANCE.getString("_UI_File_label"));
+
+				GridData data = new GridData();
+				data.horizontalAlignment = GridData.FILL;
+				resourceURILabel.setLayoutData(data);
+			}
+
+			Composite fileComposite = new Composite(composite, SWT.NONE);
+			{
+				GridData data = new GridData();
+				data.horizontalAlignment = GridData.END;
+				fileComposite.setLayoutData(data);
+
+				GridLayout layout = new GridLayout();
+				data.horizontalAlignment = GridData.FILL;
+				layout.marginHeight = 0;
+				layout.marginWidth = 0;
+				layout.numColumns = 2;
+				fileComposite.setLayout(layout);
+			}
+
+			fileField = new Text(fileComposite, SWT.BORDER);
+			{
+				GridData data = new GridData();
+				data.horizontalAlignment = GridData.FILL;
+				data.grabExcessHorizontalSpace = true;
+				data.horizontalSpan = 1;
+				fileField.setLayoutData(data);
+			}
+
+			fileField.addModifyListener(validator);
 
 			Label containerLabel = new Label(composite, SWT.LEFT);
 			{
@@ -460,6 +425,20 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		protected boolean validatePage() {
+			URI fileURI = getFileURI();
+			if (fileURI == null || fileURI.isEmpty()) {
+				setErrorMessage(null);
+				return false;
+			}
+
+			String extension = fileURI.fileExtension();
+			if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
+				String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
+				setErrorMessage(WorkflowEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
+				return false;
+			}
+
+			setErrorMessage(null);
 			return getInitialObjectName() != null && getEncodings().contains(encodingField.getText());
 		}
 
@@ -472,14 +451,9 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 		public void setVisible(boolean visible) {
 			super.setVisible(visible);
 			if (visible) {
-				if (initialObjectField.getItemCount() == 1) {
-					initialObjectField.clearSelection();
-					encodingField.setFocus();
-				}
-				else {
-					encodingField.clearSelection();
-					initialObjectField.setFocus();
-				}
+				initialObjectField.clearSelection();
+				encodingField.clearSelection();
+				fileField.setFocus();
 			}
 		}
 
@@ -506,6 +480,33 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 		 */
 		public String getEncoding() {
 			return encodingField.getText();
+		}
+
+		/**
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public URI getFileURI() {
+			try {
+				return URI.createFileURI(fileField.getText());
+			}
+			catch (Exception exception) {
+				// Ignore
+			}
+			return null;
+		}
+
+		/**
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public void selectFileField() {
+				initialObjectField.clearSelection();
+				encodingField.clearSelection();
+				fileField.selectAll();
+				fileField.setFocus();
 		}
 
 		/**
@@ -548,47 +549,6 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 	 */
 		@Override
 	public void addPages() {
-		// Create a page, set the title, and the initial model file name.
-		//
-		newFileCreationPage = new WorkflowModelWizardNewFileCreationPage("Whatever", selection);
-		newFileCreationPage.setTitle(WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowModelWizard_label"));
-		newFileCreationPage.setDescription(WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowModelWizard_description"));
-		newFileCreationPage.setFileName(WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
-		addPage(newFileCreationPage);
-
-		// Try and get the resource selection to determine a current directory for the file dialog.
-		//
-		if (selection != null && !selection.isEmpty()) {
-			// Get the resource...
-			//
-			Object selectedElement = selection.iterator().next();
-			if (selectedElement instanceof IResource) {
-				// Get the resource parent, if its a file.
-				//
-				IResource selectedResource = (IResource)selectedElement;
-				if (selectedResource.getType() == IResource.FILE) {
-					selectedResource = selectedResource.getParent();
-				}
-
-				// This gives us a directory...
-				//
-				if (selectedResource instanceof IFolder || selectedResource instanceof IProject) {
-					// Set this for the container.
-					//
-					newFileCreationPage.setContainerFullPath(selectedResource.getFullPath());
-
-					// Make up a unique new name here.
-					//
-					String defaultModelBaseFilename = WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
-					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
-					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
-						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;
-					}
-					newFileCreationPage.setFileName(modelFilename);
-				}
-			}
-		}
 		initialObjectCreationPage = new WorkflowModelWizardInitialObjectCreationPage("Whatever2");
 		initialObjectCreationPage.setTitle(WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowModelWizard_label"));
 		initialObjectCreationPage.setDescription(WorkflowEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
@@ -596,13 +556,13 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * Get the file from the page.
+	 * Get the URI from the page.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IFile getModelFile() {
-		return newFileCreationPage.getModelFile();
+	public URI getModelURI() {
+		return initialObjectCreationPage.getFileURI();
 	}
 
 }

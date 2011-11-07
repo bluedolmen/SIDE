@@ -60,7 +60,7 @@ public enum AnnotationStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	WONTFIX(3, "Wontfix", "Won't fix"),
+	WONTFIX(3, "Wontfix", "Won\'t fix"),
 
 	/**
 	 * The '<em><b>Duplicate</b></em>' literal object.
@@ -136,7 +136,7 @@ public enum AnnotationStatus implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #WONTFIX
-	 * @model name="Wontfix" literal="Won't fix"
+	 * @model name="Wontfix" literal="Won\'t fix"
 	 * @generated
 	 * @ordered
 	 */

@@ -339,9 +339,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateProcess(com.bluexml.side.workflow.Process process, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(process, diagnostics, context);
+		boolean result = validate_NoCircularContainment(process, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(process, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(process, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(process, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(process, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(process, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(process, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(process, diagnostics, context);
@@ -475,9 +477,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateSwimlane(Swimlane swimlane, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(swimlane, diagnostics, context);
+		boolean result = validate_NoCircularContainment(swimlane, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(swimlane, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(swimlane, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(swimlane, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(swimlane, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(swimlane, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(swimlane, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(swimlane, diagnostics, context);
@@ -651,9 +655,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateStartState(StartState startState, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(startState, diagnostics, context);
+		boolean result = validate_NoCircularContainment(startState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(startState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(startState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(startState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(startState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(startState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(startState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(startState, diagnostics, context);
@@ -670,9 +676,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEndState(EndState endState, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(endState, diagnostics, context);
+		boolean result = validate_NoCircularContainment(endState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(endState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(endState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(endState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(endState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(endState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(endState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(endState, diagnostics, context);
@@ -689,9 +697,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateNode(Node node, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(node, diagnostics, context);
+		boolean result = validate_NoCircularContainment(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(node, diagnostics, context);
@@ -708,9 +718,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTaskNode(TaskNode taskNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(taskNode, diagnostics, context);
+		boolean result = validate_NoCircularContainment(taskNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(taskNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(taskNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(taskNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(taskNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(taskNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(taskNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(taskNode, diagnostics, context);
@@ -807,9 +819,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateUserTask(UserTask userTask, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(userTask, diagnostics, context);
+		boolean result = validate_NoCircularContainment(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(userTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(userTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(userTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(userTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(userTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(userTask, diagnostics, context);
@@ -826,9 +840,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateProcessState(ProcessState processState, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(processState, diagnostics, context);
+		boolean result = validate_NoCircularContainment(processState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(processState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(processState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(processState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(processState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(processState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(processState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(processState, diagnostics, context);
@@ -845,9 +861,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFork(Fork fork, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(fork, diagnostics, context);
+		boolean result = validate_NoCircularContainment(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(fork, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(fork, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(fork, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(fork, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(fork, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fork, diagnostics, context);
@@ -904,9 +922,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateJoin(Join join, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(join, diagnostics, context);
+		boolean result = validate_NoCircularContainment(join, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(join, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(join, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(join, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(join, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(join, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(join, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(join, diagnostics, context);
@@ -923,9 +943,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDecision(Decision decision, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(decision, diagnostics, context);
+		boolean result = validate_NoCircularContainment(decision, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(decision, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(decision, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(decision, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(decision, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(decision, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(decision, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(decision, diagnostics, context);
@@ -1018,9 +1040,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateVariable(Variable variable, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(variable, diagnostics, context);
+		boolean result = validate_NoCircularContainment(variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(variable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(variable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(variable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(variable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(variable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(variable, diagnostics, context);
@@ -1074,9 +1098,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTransition(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(transition, diagnostics, context);
+		boolean result = validate_NoCircularContainment(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(transition, diagnostics, context);
@@ -1250,9 +1276,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateState(State state, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(state, diagnostics, context);
+		boolean result = validate_NoCircularContainment(state, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(state, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(state, diagnostics, context);
@@ -1386,9 +1414,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAttribute(Attribute attribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(attribute, diagnostics, context);
+		boolean result = validate_NoCircularContainment(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(attribute, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(attribute, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(attribute, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(attribute, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(attribute, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(attribute, diagnostics, context);
@@ -1442,9 +1472,11 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTransitionTask(TransitionTask transitionTask, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(transitionTask, diagnostics, context);
+		boolean result = validate_NoCircularContainment(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(transitionTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(transitionTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(transitionTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(transitionTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(transitionTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(transitionTask, diagnostics, context);

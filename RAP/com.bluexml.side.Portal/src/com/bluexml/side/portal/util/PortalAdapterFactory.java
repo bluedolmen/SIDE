@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.portal.*;
 import com.bluexml.side.portal.AbstractPortletAttributes;
 import com.bluexml.side.portal.Column;
 import com.bluexml.side.portal.Group;
