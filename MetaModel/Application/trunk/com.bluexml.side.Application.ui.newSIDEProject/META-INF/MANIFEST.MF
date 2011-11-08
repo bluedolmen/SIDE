@@ -20,3 +20,6 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.View
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Export-Package: com.bluexml.side.application.ui.newsideproject,
+ com.bluexml.side.application.ui.newsideproject.newSideProject,
+ com.bluexml.side.application.ui.newsideproject.newSideProject.project
