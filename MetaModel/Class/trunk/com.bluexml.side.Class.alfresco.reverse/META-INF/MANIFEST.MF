@@ -13,12 +13,12 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.ecore,
  com.bluexml.side.Util.libs,
  org.apache.ant,
- org.eclipse.ant.core
+ org.eclipse.ant.core,
+ com.bluexml.side.Class.alfresco.models.library
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.clazz.alfresco.reverse,
  com.bluexml.side.clazz.alfresco.reverse.action,
  com.bluexml.side.clazz.alfresco.reverse.action.wizard,
  com.bluexml.side.clazz.alfresco.reverse.action.wizard.pages,
- com.bluexml.side.clazz.alfresco.reverse.library,
  com.bluexml.side.clazz.alfresco.reverse.reverser

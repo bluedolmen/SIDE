@@ -19,9 +19,9 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
+import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary;
+import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary.Libraries;
 import com.bluexml.side.clazz.alfresco.reverse.action.wizard.pages.WelcomePage;
-import com.bluexml.side.clazz.alfresco.reverse.library.ModelLibrary;
-import com.bluexml.side.clazz.alfresco.reverse.library.ModelLibrary.Libraries;
 import com.bluexml.side.clazz.alfresco.reverse.reverser.Reverser;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.eclipse.RunnableWithProgress;
