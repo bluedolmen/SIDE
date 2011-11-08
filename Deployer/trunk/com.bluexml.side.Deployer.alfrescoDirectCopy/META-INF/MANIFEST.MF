@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Alfresco Deployer DirectCopy
 Bundle-SymbolicName: com.bluexml.side.Deployer.alfrescoDirectCopy;singleton:=true
-Bundle-Version: 1.0.47.v29270-20111020
+Bundle-Version: 1.0.48.v29723-20111108
 Bundle-Activator: com.bluexml.side.deployer.alfresco.directcopy.Activator
 Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
