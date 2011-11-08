@@ -1,0 +1,5 @@
+#set( $D = '$' )
+#
+#Mon Aug 01 16:33:34 CEST 2011
+applicationIPath=${D}{workspace_loc\:/${velocity_projectName}/src/models/application/${velocity_projectName}.application}
+activeConfiguration=${velocity_projectName}
