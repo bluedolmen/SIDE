@@ -29,7 +29,9 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
  com.bluexml.side.Integration.standAlone;bundle-version="1.0.44",
  com.bluexml.side.Class;bundle-version="1.0.69",
  com.bluexml.side.Integration.eclipse.branding.enterprise;bundle-version="1.0.443",
- com.bluexml.side.Class.alfresco.reverse;bundle-version="1.0.0"
+ com.bluexml.side.Class.alfresco.reverse;bundle-version="1.0.0",
+ com.bluexml.side.Application.ui.newSIDEProject,
+ com.bluexml.side.Class.alfresco.models.library
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/jcommander-1.19-SNAPSHOT.jar,

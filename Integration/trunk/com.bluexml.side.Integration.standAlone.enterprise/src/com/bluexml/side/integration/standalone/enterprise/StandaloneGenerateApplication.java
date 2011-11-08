@@ -34,9 +34,6 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.beust.jcommander.internal.Lists;
-import com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newSideProject.NewSIDEProjectCreator;
-import com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newSideProject.NewSIDEProjectCreator.CreateFields;
-import com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newSideProject.NewSIDEProjectCreator.CreateOptions;
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.Util.ecore.SIDEEditorUtils;
 import com.bluexml.side.application.Application;
@@ -46,16 +43,18 @@ import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
+import com.bluexml.side.application.ui.newsideproject.newSideProject.NewSIDEProjectCreator;
+import com.bluexml.side.application.ui.newsideproject.newSideProject.NewSIDEProjectCreator.CreateFields;
+import com.bluexml.side.application.ui.newsideproject.newSideProject.NewSIDEProjectCreator.CreateOptions;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Model;
-import com.bluexml.side.clazz.alfresco.reverse.library.ModelLibrary;
-import com.bluexml.side.clazz.alfresco.reverse.library.ModelLibrary.Libraries;
+import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary;
+import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary.Libraries;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
 import com.bluexml.side.integration.standalone.ApplicationModelGenerateGenerationJob;
 import com.bluexml.side.integration.standalone.ApplicationModelJob;
 import com.bluexml.side.integration.standalone.GenerateModelHelper;
 import com.bluexml.side.util.libs.IFileHelper;
-
 /**
  * This class is meant to provide a standalone (headless) generation application
  * using command-line arguments.
