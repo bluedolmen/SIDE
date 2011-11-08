@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Composite;
 
-import com.bluexml.side.clazz.alfresco.reverse.library.ModelLibrary;
+import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary;
 import com.bluexml.side.clazz.edit.ui.Messages;
 import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
 import com.bluexml.side.util.libs.eclipse.wizards.AbstractFieldsPage;

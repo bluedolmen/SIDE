@@ -22,7 +22,7 @@ import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
-import com.bluexml.side.clazz.alfresco.reverse.library.ModelLibrary;
+import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.FormModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.FormWorkflowModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;

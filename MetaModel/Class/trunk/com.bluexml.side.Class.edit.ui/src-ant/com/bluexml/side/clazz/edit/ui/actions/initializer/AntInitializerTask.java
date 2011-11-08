@@ -6,7 +6,7 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.eclipse.core.resources.IFile;
 
-import com.bluexml.side.clazz.alfresco.reverse.library.ModelLibrary;
+import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public class AntInitializerTask extends Task {
