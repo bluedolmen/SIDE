@@ -1,15 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco34d.feature" label="SIDE Alfresco community 3.4.b support" version="1.0.57.v29643-20111107" provider-name="BLUEXML">
-  <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
-  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
-  <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <includes id="com.bluexml.side.Class.generator.alfresco34d.feature" version="1.0.31.v29597-20111104" />
-  <includes id="com.bluexml.side.Deployer.alfresco34d.feature" version="1.0.10.v29180-20111019" />
-  <includes id="com.bluexml.side.Workflow.generator.alfresco34d.feature" version="1.0.14.v28943-20111010" />
-  <includes id="com.bluexml.side.Form.generator.xforms.chiba34d.feature" version="1.0.10.v28467-20111005" />
-  <includes id="com.bluexml.side.Portal.generator.alfresco34d.feature" version="1.0.28.v29553-20111103" />
-  <includes id="com.bluexml.side.View.generator.alfresco34d.feature" version="1.0.9.v29469-20111028" />
-  <includes id="com.bluexml.side.View.generator.facetmap34d.feature" version="1.0.9.v28467-20111005" />
-  <includes id="com.bluexml.side.Form.generator.alfresco34d.feature" version="1.0.29.v29643-20111107" />
-</feature>
+<feature
+      id="com.bluexml.side.Common.forAlfresco34d.feature"
+      label="SIDE Alfresco community 3.4.b support"
+      version="1.0.57.v29643-20111107"
+      provider-name="BLUEXML"
+      plugin="com.bluexml.side.Integration.eclipse.branding.labs">
 
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="com.bluexml.side.Class.generator.alfresco34d.feature"
+         version="1.0.31.v29597-20111104"/>
+
+   <includes
+         id="com.bluexml.side.Deployer.alfresco34d.feature"
+         version="1.0.10.v29180-20111019"/>
+
+   <includes
+         id="com.bluexml.side.Workflow.generator.alfresco34d.feature"
+         version="1.0.14.v28943-20111010"/>
+
+   <includes
+         id="com.bluexml.side.Form.generator.xforms.chiba34d.feature"
+         version="1.0.10.v28467-20111005"/>
+
+   <includes
+         id="com.bluexml.side.Portal.generator.alfresco34d.feature"
+         version="1.0.28.v29553-20111103"/>
+
+   <includes
+         id="com.bluexml.side.View.generator.alfresco34d.feature"
+         version="1.0.9.v29469-20111028"/>
+
+   <includes
+         id="com.bluexml.side.View.generator.facetmap34d.feature"
+         version="1.0.9.v28467-20111005"/>
+
+   <includes
+         id="com.bluexml.side.Form.generator.alfresco34d.feature"
+         version="1.0.29.v29643-20111107"/>
+
+   <plugin
+         id="com.bluexml.side.Integration.eclipse.branding.labs"
+         download-size="0"
+         install-size="0"
+         version="1.0.590.v29643-20111107"
+         unpack="false"/>
+
+</feature>

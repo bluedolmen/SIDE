@@ -80,11 +80,16 @@ public class ComponantsRegisters {
 		if (path == null) {
 			logger.warn("Bundle " + id + " not found try to locate from file system");
 			for (File f : repositoryLocation) {
+				logger.warn("search in :" + f);
 				path = Utils.find(id, f);
 				if (path != null) {
 					break;
 				}
 			}
+			if (path == null) {
+				logger.error("bundle not found in FS");
+			}
+			
 		} else {
 			logger.debug("••• Bundle " + id + " founded from build configuration");
 		}

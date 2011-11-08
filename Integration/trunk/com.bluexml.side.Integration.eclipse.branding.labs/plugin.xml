@@ -43,7 +43,7 @@
       </product>
    </extension>
    
-   <extension
+   <!--extension
          id="wizard"
          name="SIDE project"
          point="org.eclipse.ui.newWizards">
@@ -66,7 +66,7 @@
             name="SIDE Example Project"
             parentCategory="com.bluexml.side.modeler.category.ID">
       </category>
-   </extension>
+   </extension-->
    
       <extension
          id="perspective"

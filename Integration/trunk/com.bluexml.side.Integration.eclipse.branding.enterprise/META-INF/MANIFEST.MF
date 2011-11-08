@@ -26,4 +26,3 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.ui.actions,
  org.eclipse.ui.dialogs
-Export-Package: com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newSideProject;x-friends:="com.bluexml.side.Integration.standAlone.enterprise"
