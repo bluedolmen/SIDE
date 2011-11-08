@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco models Library
 Bundle-SymbolicName: com.bluexml.side.Class.alfresco.models.library
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1.v29723-20111108
 Bundle-Activator: com.bluexml.side.clazz.alfresco.models.library.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
