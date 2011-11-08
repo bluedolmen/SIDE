@@ -235,7 +235,7 @@ label-id="<%getFieldLabelId("")%>"
  <%}%>
  </field>
 
-<%script type="ModelChoiceField" name="getControlParamsForPicker" post="trim()" %>
+<%script type="FormElement" name="getControlParamsForPicker" post="trim()" %>
  <%getXtensionAsControlParam("compactMode")%>
  <%getXtensionAsControlParam("forceEditable")%>
  <%getXtensionAsControlParam("startLocation")%>
@@ -245,6 +245,7 @@ label-id="<%getFieldLabelId("")%>"
  <%getXtensionAsControlParam("multipleSelectMode")%>
  <%getXtensionAsControlParam("showTargetLink")%>
  <%getXtensionAsControlParam("displayMode")%>
+ 
  
 <%script type="FormElement" name="getFieldLabelId" post="trim()" %>
 form.field.label.<%args(0)%><%getPrefixedQualifiedName()%>
