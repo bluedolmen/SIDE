@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Data Modeler
 Bundle-SymbolicName: com.bluexml.side.Class.modeler; singleton:=true
-Bundle-Version: 1.0.73.v29431-20111027
+Bundle-Version: 1.0.74.v29723-20111108
 Bundle-Activator: com.bluexml.side.Class.modeler.ClazzPlugin
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
