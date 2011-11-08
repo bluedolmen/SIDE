@@ -1,11 +1,22 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: NewSIDEProject
-Bundle-SymbolicName: com.bluexml.side.Application.ui.newSIDEProject
+Bundle-Name: New SIDE project wizard
+Bundle-SymbolicName: com.bluexml.side.Application.ui.newSIDEProject;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: com.bluexml.side.application.ui.newsideproject.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ com.bluexml.side.Class.alfresco.models.library,
+ com.bluexml.side.Util.libs,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide,
+ com.bluexml.side.Requirements,
+ com.bluexml.side.Class.edit.ui,
+ com.bluexml.side.Util.ecore,
+ com.bluexml.side.Portal,
+ com.bluexml.side.Form,
+ com.bluexml.side.Integration.eclipse.builder,
+ com.bluexml.side.View
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
