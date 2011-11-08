@@ -1,41 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Portal.generator.alfresco34d.sideenterprise.feature"
-      label="Feature"
-      version="1.0.0"
-      provider-name="BLUEXML">
-
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
-   </description>
-
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
-
-   <plugin
-         id="com.bluexml.side.Portal.generator.alfresco"
-         download-size="0"
-         install-size="0"
-         version="1.0.68.v28467-20111005"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Portal.generator.alfresco34d"
-         download-size="0"
-         install-size="0"
-         version="1.0.28.v29553-20111103"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Portal.generator.alfresco34d.ext.enterprise"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
+<feature id="com.bluexml.side.Portal.generator.alfresco34d.sideenterprise.feature" label="Feature" version="1.0.1.v29723-20111108" provider-name="BLUEXML">
+  <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <plugin id="com.bluexml.side.Portal.generator.alfresco" download-size="0" install-size="0" version="1.0.69.v29723-20111108" unpack="false" />
+  <plugin id="com.bluexml.side.Portal.generator.alfresco34d" download-size="0" install-size="0" version="1.0.29.v29723-20111108" unpack="false" />
+  <plugin id="com.bluexml.side.Portal.generator.alfresco34d.ext.enterprise" download-size="0" install-size="0" version="1.0.1.v29723-20111108" unpack="false" />
 </feature>
+
