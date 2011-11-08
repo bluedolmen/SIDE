@@ -39,18 +39,18 @@
          version="1.0.9.v28467-20111005"/>
 
    <includes
-         id="com.bluexml.side.Form.generator.alfresco34d.feature"
-         version="1.0.28.v29597-20111104"/>
-
-   <includes
          id="com.bluexml.side.Class.generator.alfresco34d.sideenterprise.feature"
          version="1.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Portal.generator.alfresco34d.sideenterprise.feature"
+         version="0.0.0"/>
 
    <plugin
          id="com.bluexml.side.Integration.eclipse.branding.labs"
          download-size="0"
          install-size="0"
-         version="1.0.589.v29628-20111106"
+         version="1.0.590.v29643-20111107"
          unpack="false"/>
 
 </feature>
