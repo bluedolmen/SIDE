@@ -11,11 +11,11 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 	<config evaluator="<%computeEvaluator()%>" condition="<%computeformWorkflowCondition()%>">
 		<forms>
             <form>
-            	<%generateFormDefinition()%>
+            	<%--generateFormDefinition()--%>
             </form>
             <%if (ref.filter("workflow.StartState") == null){%>
             <form id="workflow-details">
-            	<%generateFormDefinition()%>
+            	<%--generateFormDefinition()--%>
             </form>
             <%}%>
         </forms>

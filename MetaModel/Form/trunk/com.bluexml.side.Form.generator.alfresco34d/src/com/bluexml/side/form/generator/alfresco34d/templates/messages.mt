@@ -3,9 +3,9 @@ metamodel http://www.kerblue.org/form/1.0
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.form.generator.alfresco34d.FormGenerator
 import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator
+import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-util
 import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 %>
-
   
 <%script type="form.FormCollection" name="fileName"%>
 <%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>/<%getModuleIdService(getRootPackage().name)%>/<%getRootPackage().name%>.properties<%}%>
