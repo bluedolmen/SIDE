@@ -56,7 +56,7 @@ public class FeatureReader {
 			} else {
 				File pluginFolder = util.getProjectFolder(pluginId);
 				if (pluginFolder != null) {
-					logger.debug("Read plugin from file "+pluginId);
+					logger.debug("Read plugin from file " + pluginId);
 					PluginReader pr = new PluginReader(util);
 					p = pr.read(pluginFolder);
 					side = true;

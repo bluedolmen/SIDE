@@ -88,6 +88,8 @@ public class ComponantsRegisters {
 			}
 			if (path == null) {
 				logger.error("bundle not found in FS");
+			} else {
+				logger.warn("bundle found in FS");
 			}
 			
 		} else {
