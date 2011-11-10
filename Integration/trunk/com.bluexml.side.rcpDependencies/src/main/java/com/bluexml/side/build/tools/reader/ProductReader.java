@@ -2,6 +2,7 @@ package com.bluexml.side.build.tools.reader;
 
 import java.io.File;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.jdom.Document;
@@ -11,19 +12,20 @@ import org.jdom.xpath.XPath;
 import com.bluexml.side.build.tools.componants.Feature;
 import com.bluexml.side.build.tools.componants.Product;
 
-public class ProductReader {
+public class ProductReader extends Reader {
 	Logger logger = Logger.getLogger(this.getClass());
 	File productFile;
 	boolean addAll = false;
-	ComponantsRegisters util;
 
-	public ComponantsRegisters getUtil() {
-		return util;
+	public ComponantsRegisters getRegistries() {
+		return registries;
 	}
 
-	public ProductReader(File proFile, ComponantsRegisters util) {
+	public ProductReader(File proFile, ComponantsRegisters registries, Properties props) {
+		super(registries, props);
 		this.productFile = proFile;
-		this.util = util;
+
+		addAll = getBooleanPropertyValueFor("addAll", addAll);
 	}
 
 	public Product read() throws Exception {
@@ -41,16 +43,16 @@ public class ProductReader {
 		product.setVersion(root.getAttributeValue("version"));
 
 		// set feature list
-		FeatureReader fr = new FeatureReader(util);
+		FeatureReader fr = new FeatureReader(registries, props);
 		XPath xpa = XPath.newInstance("//product/features/feature");
 		List<?> lmd = xpa.selectNodes(root);
 		for (Object object : lmd) {
 			Element el = (Element) object;
 			String featureId = el.getAttributeValue("id");
-			
-			Feature f = util.getFeature(featureId);
+
+			Feature f = registries.getFeature(featureId);
 			if (f == null) {
-				File featureFolder = util.getProjectFolder(featureId);
+				File featureFolder = registries.getProjectFolder(featureId);
 				boolean side = false;
 				if (featureFolder != null) {
 					f = fr.read(featureFolder);
@@ -62,15 +64,14 @@ public class ProductReader {
 					f.setVersion(el.getAttributeValue("version"));
 				}
 				if (side || addAll) {
-					util.featuresRegister.put(featureId, f);
-					Utils.add(util.tree, product, f);
+					registries.featuresRegister.put(featureId, f);
+					Utils.add(registries.tree, product, f);
 					product.getFeatures().add(f);
 				}
 			} else {
 				product.getFeatures().add(f);
 			}
-			
-			
+
 		}
 		return product;
 	}

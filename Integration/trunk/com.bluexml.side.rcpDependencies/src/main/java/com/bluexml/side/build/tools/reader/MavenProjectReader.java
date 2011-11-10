@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -31,12 +32,13 @@ import com.bluexml.side.build.tools.reader.graphml.Graphml;
 import com.bluexml.side.build.tools.reader.graphml.Node;
 
 @SuppressWarnings("restriction")
-public class MavenProjectReader {
+public class MavenProjectReader extends Reader {
 	Logger logger = Logger.getLogger(this.getClass());
-	ComponantsRegisters registries;
+	boolean addAll = false;
 
-	public MavenProjectReader(ComponantsRegisters registries) {
-		this.registries = registries;
+	public MavenProjectReader(ComponantsRegisters registries, Properties props) {
+		super(registries, props);
+		addAll = getBooleanPropertyValueFor("addAll", addAll);
 	}
 
 	public Module read(File project) throws Exception {
@@ -145,28 +147,31 @@ public class MavenProjectReader {
 				Module target = map.get(edgeo.getTarget());
 				String label = edgeo.getData().getPolyLineEdge().getEdgeLabel();
 
-				src.getDependencies().add(target);
+				if (addAll || target.getGroupId().contains("bluexml")) {
+					src.getDependencies().add(target);
 
-				logger.debug("add edges :" + src + " -(" + label + ")-> " + target);
+					logger.debug("add edges :" + src + " -(" + label + ")-> " + target);
 
-				// beware src and target object instance must be unique
-				// search if src and target
-				Module fromres = registries.modulesRegister.get(src.getModuleID());
-				if (fromres != null) {
-					src = fromres;
-				} else {
-					logger.debug("add new module in registry :" + src.getModuleID());
-					registries.modulesRegister.put(src.getModuleID(), src);
+					// beware src and target object instance must be unique
+					// search if src and target
+					Module fromres = registries.modulesRegister.get(src.getModuleID());
+					if (fromres != null) {
+						src = fromres;
+					} else {
+						logger.debug("add new module in registry :" + src.getModuleID());
+						registries.modulesRegister.put(src.getModuleID(), src);
+					}
+					Module fromresT = registries.modulesRegister.get(target.getModuleID());
+					if (fromresT != null) {
+						target = fromresT;
+					} else {
+						logger.debug("add new module in registry :" + target.getModuleID());
+						registries.modulesRegister.put(target.getModuleID(), target);
+					}
+
+					Utils.add(registries.tree, src, target);
+
 				}
-				Module fromresT = registries.modulesRegister.get(target.getModuleID());
-				if (fromresT != null) {
-					target = fromresT;
-				} else {
-					logger.debug("add new module in registry :" + target.getModuleID());
-					registries.modulesRegister.put(target.getModuleID(), target);
-				}
-
-				Utils.add(registries.tree, src, target);
 
 			}
 		}

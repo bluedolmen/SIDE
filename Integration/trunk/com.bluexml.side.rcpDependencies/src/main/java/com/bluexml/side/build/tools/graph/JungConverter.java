@@ -115,7 +115,7 @@ public class JungConverter {
 	/**
 	 * @param g
 	 */
-	private static void printGraphStats(Graph<Componant, String> g, String message) {
+	public static void printGraphStats(Graph<Componant, String> g, String message) {
 		logger.info(message);
 		logger.info("graph :" + g);
 		logger.info("Edges :" + g.getEdgeCount());

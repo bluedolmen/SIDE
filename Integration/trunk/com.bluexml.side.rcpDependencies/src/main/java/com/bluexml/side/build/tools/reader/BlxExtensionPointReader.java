@@ -3,6 +3,7 @@ package com.bluexml.side.build.tools.reader;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.jdom.Document;
@@ -20,13 +21,15 @@ import com.bluexml.side.build.tools.componants.Plugin;
 import com.bluexml.side.build.tools.componants.Technology;
 import com.bluexml.side.build.tools.componants.TechnologyVersion;
 
-public class BlxExtensionPointReader {
+public class BlxExtensionPointReader extends Reader {
 	Logger logger = Logger.getLogger(this.getClass());
-	ComponantsRegisters registries;
-	boolean deepDependencies = false;
 
-	public BlxExtensionPointReader(ComponantsRegisters regitries) {
-		this.registries = regitries;
+	boolean addAll = false;
+
+	public BlxExtensionPointReader(ComponantsRegisters registries, Properties props) {
+		super(registries, props);
+
+		addAll = getBooleanPropertyValueFor("addAll", addAll);
 	}
 
 	public List<Extension> read(File filePluginXML, String bundle) throws Exception {
@@ -169,13 +172,13 @@ public class BlxExtensionPointReader {
 			Module module = registries.modulesRegister.get(moduleId);
 			if (module == null) {
 				File pom = registries.getProjectFolder(moduleId);
-				
-				if (pom.exists() && deepDependencies) {
+
+				if (pom.exists() && addAll) {
 					// use maven to get all dependencies
-					MavenProjectReader mpr = new MavenProjectReader(registries);
+					MavenProjectReader mpr = new MavenProjectReader(registries, props);
 					module = mpr.read(pom);
 				} else {
-					logger.error("pom resource not found, add module without read pom (no dependencies added):" + moduleId);
+					logger.error("add module without read pom (no dependencies added):" + moduleId);
 					module = new Module();
 					module.setModuleID(moduleId);
 					module.setType(moduleE.getAttributeValue("moduleType"));
@@ -219,23 +222,22 @@ public class BlxExtensionPointReader {
 	private Option getOption(String bundle, String optionRef, Constraint cons) throws Exception {
 		Plugin p = registries.pluginsRegister.get(bundle);
 		Option op = null;
-		
+
 		if (p == null) {
 			logger.debug("Plugin not yet registered so search in repository for bundle :" + bundle);
 			// we must read the plugin definition
 			File pluginFolder = registries.getProjectFolder(bundle);
 			if (pluginFolder != null) {
-//				PluginReader pr = new PluginReader(registries);
-//				p = pr.read(pluginFolder);
+				//				PluginReader pr = new PluginReader(registries);
+				//				p = pr.read(pluginFolder);
 			} else {
 				logger.error("Plugin not found for bundle :" + bundle);
 			}
 		}
 
 		// this plugin is recorded its options should be recorded too
-//		cons.setBundle(p);
-		
-		
+		//		cons.setBundle(p);
+
 		op = registries.optionRegister.get(bundle + "_" + optionRef);
 
 		return op;

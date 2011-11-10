@@ -3,14 +3,14 @@ package com.bluexml.side.build.tools.componants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Plugin extends Componant{
+public class Plugin extends Componant {
 
 	String id;
 	String version;
 	String name;
-	List<Plugin> dependecies= new ArrayList<Plugin>();
-	
-	List<Extension> extensions= new ArrayList<Extension>();
+	List<Plugin> dependecies = new ArrayList<Plugin>();
+
+	List<Extension> extensions = new ArrayList<Extension>();
 
 	public String getId() {
 		return id;
@@ -51,9 +51,9 @@ public class Plugin extends Componant{
 	public void setExtensions(List<Extension> extensions) {
 		this.extensions = extensions;
 	}
-	
+
 	public String toString() {
 		return id + "(" + version + ")";
 	}
-	
+
 }

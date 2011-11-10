@@ -64,7 +64,8 @@ public class Utils {
 	private static HashMap<String, String> initMap(File confFile) throws Exception {
 		HashMap<String, String> componants = new HashMap<String, String>();
 		Properties p = new Properties();
-		p.load(new FileInputStream(confFile));
+		FileInputStream fileInputStream = new FileInputStream(confFile);
+		p.load(fileInputStream);
 
 		String communityProjects = p.getProperty("project");
 		String[] cc = communityProjects.replace("\n", "").split(",");
@@ -79,7 +80,7 @@ public class Utils {
 				fillMap(componants, string);
 			}
 		}
-
+		fileInputStream.close();
 		return componants;
 	}
 

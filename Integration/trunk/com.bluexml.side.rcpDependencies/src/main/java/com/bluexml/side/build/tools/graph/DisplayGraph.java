@@ -14,6 +14,8 @@ import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.FRLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.SpringLayout2;
+import edu.uci.ics.jung.algorithms.layout.TreeLayout;
+import edu.uci.ics.jung.graph.DelegateForest;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.Context;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
@@ -28,8 +30,8 @@ public class DisplayGraph {
 		CircleLayout<Componant, String> layout = new CircleLayout<Componant, String>(g);
 		render(layout);
 
-				FRLayout<Componant, String> layout3 = new FRLayout<Componant, String>(g);
-				render(layout3);
+		FRLayout<Componant, String> layout3 = new FRLayout<Componant, String>(g);
+		render(layout3);
 		//
 		//		FRLayout2<Componant, String> layout4 = new FRLayout2<Componant, String>(g);
 		//		render(layout4);
@@ -51,11 +53,19 @@ public class DisplayGraph {
 
 		//		StaticLayout<Componant, String> layout9 = new StaticLayout<Componant, String>(g);
 		//		render(layout9);
+
+		TreeLayout<Componant, String> treeL = new TreeLayout<Componant, String>(convertGraphToTree(g), 200, 50);
+		render(treeL);
 	}
 
 	private static void render(Layout<Componant, String> layout) {
 		logger.info("rendering ...");
-		layout.setSize(new Dimension(900, 900)); // sets the initial size of the
+		try {
+			layout.setSize(new Dimension(900, 900)); // sets the initial size of the	
+		} catch (UnsupportedOperationException e) {
+
+		}
+
 		// The BasicVisualizationServer<V,E> is parameterized by the edge types
 		BasicVisualizationServer<Componant, String> vv = new BasicVisualizationServer<Componant, String>(layout);
 		vv.setPreferredSize(new Dimension(1000, 1000)); // Sets the viewing area
@@ -63,10 +73,10 @@ public class DisplayGraph {
 		vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
 		vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
 		
-		VertexDisplayPredicate vertexDisplayPredicate = new VertexDisplayPredicate("bluexml");
-		VertexDisplayPredicateComplex vertexDisplayPredicateComplex = new VertexDisplayPredicateComplex(new String[]{"Class"}, new String[]{});
-		
-		vv.getRenderContext().setVertexIncludePredicate(vertexDisplayPredicateComplex);
+
+		//		VertexDisplayPredicateComplex vertexDisplayPredicateComplex = new VertexDisplayPredicateComplex(new String[] { "Class" }, new String[] {});
+		//
+		//		vv.getRenderContext().setVertexIncludePredicate(vertexDisplayPredicateComplex);
 
 		VertexLabelAsShapeRenderer<Componant, String> vlasr = new VertexLabelAsShapeRenderer<Componant, String>(vv.getRenderContext());
 		vv.getRenderContext().setVertexShapeTransformer(vlasr);
@@ -145,4 +155,15 @@ public class DisplayGraph {
 		}
 	}
 
+	public static DelegateForest<Componant, String> convertGraphToTree(Graph<Componant, String> graph) {
+		DelegateForest<Componant, String> mTree = new DelegateForest<Componant, String>();
+
+		for (Componant n : graph.getVertices()) {
+			mTree.addVertex(n);
+		}
+		for (String e : graph.getEdges()) {
+			mTree.addEdge(e, graph.getSource(e), graph.getDest(e));
+		}
+		return mTree;
+	}
 }
