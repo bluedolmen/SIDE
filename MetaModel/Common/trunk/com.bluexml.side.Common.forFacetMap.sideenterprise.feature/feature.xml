@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.bluexml.side.Common.forFacetMap.sideenterprise.feature"
+      label="SIDE Generator For FacetMap"
+      version="1.0.0"
+      provider-name="BLUEXML">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="com.bluexml.side.Deployer.facetMap.feature"
+         version="1.0.34.v28467-20111005"/>
+
+   <includes
+         id="com.bluexml.side.View.generator.facetmap.feature"
+         version="1.0.84.v29723-20111108"/>
+
+</feature>
