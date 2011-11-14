@@ -22,7 +22,6 @@ import com.bluexml.side.build.tools.componants.Technology;
 import com.bluexml.side.build.tools.componants.TechnologyVersion;
 
 import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.graph.util.Pair;
 
 public class DotRenderer {
 	static Logger logger = Logger.getLogger(DotRenderer.class);

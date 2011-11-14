@@ -56,7 +56,7 @@ public class FeatureReader extends Reader {
 				String pluginId = courant.getAttributeValue("id");
 				String pluginVersion = courant.getAttributeValue("version");
 				Plugin p;
-				boolean side = false;
+				boolean side = true;
 
 				if (registries.pluginsRegister.containsKey(pluginId)) {
 					logger.debug("get plugin from regitry :" + pluginId);
@@ -68,8 +68,8 @@ public class FeatureReader extends Reader {
 						logger.debug("Read plugin from file " + pluginId);
 						PluginReader pr = new PluginReader(registries, props);
 						p = pr.read(pluginFolder);
-						side = true;
 					} else {
+						side = false;
 						logger.debug("plugin project not found, create plugin object with reference");
 						p = new Plugin();
 						p.setId(pluginId);

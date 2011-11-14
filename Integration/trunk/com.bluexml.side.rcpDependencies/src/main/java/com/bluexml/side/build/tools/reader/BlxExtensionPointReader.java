@@ -214,6 +214,7 @@ public class BlxExtensionPointReader extends Reader {
 			conf.getConstraints().add(cons);
 			Utils.add(registries.tree, conf, cons);
 		} else {
+			registries.anomaly.addInvalideCheckRef(bundle + ";" + optionRef);
 			throw new Exception("Check Constraints Ref not found for bundle" + bundle + " ref:" + optionRef);
 		}
 

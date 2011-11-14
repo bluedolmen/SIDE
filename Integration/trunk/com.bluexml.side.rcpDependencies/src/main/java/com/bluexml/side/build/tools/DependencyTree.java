@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -28,6 +29,7 @@ public class DependencyTree {
 	File propertiesFile;
 	List<File> repo;
 	private String configType = "";
+	ComponantsRegisters compReg;
 
 	public DependencyTree(File productFile, List<File> repo, File propertiesFile) {
 		this.product = productFile;
@@ -120,7 +122,7 @@ public class DependencyTree {
 	public void doIt() throws Exception {
 		// create component registers
 
-		ComponantsRegisters compReg = getComponantsRegisters();
+		compReg = getComponantsRegisters();
 		// print out
 		compReg.print();
 		// get tree
@@ -146,8 +148,8 @@ public class DependencyTree {
 			filtered = gf.getFilteredVertex(property, true, false);
 		}
 
-		JungConverter.saveGraph(filtered, new File("graph.graphml"));
-		JungConverter.saveGraph(filtered, new File("graph.xml"));
+		JungConverter.saveGraph(g, new File("graph.xml"));
+		JungConverter.saveGraph(filtered, new File("graph-filtered.xml"));
 
 		// save filtered graph as dot file
 		FileWriter filteredDot = new FileWriter(new File("graph-filtered.dot"));
@@ -156,7 +158,44 @@ public class DependencyTree {
 		filteredDot.flush();
 		filteredDot.close();
 
+		validate(g);
+
 		//		DisplayGraph.display(filtered);
+
+		// sumary
+
+		List<String> list = compReg.getAnomaly().notTree;
+		logger.warn("Annomaly summary :");
+		logger.warn("componant with more than one parent :");
+		for (String string : list) {
+			logger.warn(string);
+		}
+		logger.warn("invalide check constraints :");
+		List<String> list2 = compReg.getAnomaly().invalideCheckRef;
+		for (String string : list2) {
+			logger.warn(string);
+		}
+	}
+
+	public void validate(Graph<Componant, String> g) {
+		// search if the graph is a tree (only one parent per vertex)
+		Collection<Componant> vertices = g.getVertices();
+		List<String> havemoreTHanOnePArent = new ArrayList<String>();
+		for (Componant componant : vertices) {
+
+			int inDegree = g.inDegree(componant);
+			Collection<String> incidentEdges = g.getIncidentEdges(componant);
+			//			boolean 
+			if (inDegree > 1) {
+				havemoreTHanOnePArent.add(componant.toString());
+			}
+		}
+
+		if (havemoreTHanOnePArent.size() > 0) {
+			logger.warn("graph is not a tree following vertex have more than one parent :");
+			logger.warn(havemoreTHanOnePArent);
+			compReg.getAnomaly().notTree.addAll(havemoreTHanOnePArent);
+		}
 
 	}
 

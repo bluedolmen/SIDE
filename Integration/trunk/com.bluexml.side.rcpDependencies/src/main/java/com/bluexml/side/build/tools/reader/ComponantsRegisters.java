@@ -8,6 +8,7 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
+import com.bluexml.side.build.tools.Anomaly;
 import com.bluexml.side.build.tools.componants.Componant;
 import com.bluexml.side.build.tools.componants.Feature;
 import com.bluexml.side.build.tools.componants.Module;
@@ -27,6 +28,12 @@ public class ComponantsRegisters {
 	Map<String, Module> modulesRegister = new TreeMap<String, Module>();
 
 	Map<Componant, Set<Componant>> tree = new TreeMap<Componant, Set<Componant>>();
+
+	Anomaly anomaly = new Anomaly();
+
+	public Anomaly getAnomaly() {
+		return anomaly;
+	}
 
 	public Logger getLogger() {
 		return logger;
@@ -91,7 +98,7 @@ public class ComponantsRegisters {
 			} else {
 				logger.warn("bundle found in FS");
 			}
-			
+
 		} else {
 			logger.debug("••• Bundle " + id + " founded from build configuration");
 		}
