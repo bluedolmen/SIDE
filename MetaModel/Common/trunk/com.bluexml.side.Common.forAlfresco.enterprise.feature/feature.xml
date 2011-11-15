@@ -42,15 +42,7 @@
          version="0.0.0"/>
 
    <includes
-         id="com.bluexml.side.Common.forAlfresco333E.feature"
-         version="0.0.0"/>
-
-   <includes
          id="com.bluexml.side.Common.forAlfresco333E.sideenterprise.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.bluexml.side.Common.forAlfresco34d.feature"
          version="0.0.0"/>
 
    <includes
