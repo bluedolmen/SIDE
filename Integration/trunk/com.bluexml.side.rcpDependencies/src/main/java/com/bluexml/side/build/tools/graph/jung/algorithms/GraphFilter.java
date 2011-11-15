@@ -56,8 +56,9 @@ public class GraphFilter {
 					vertexPatern = vertexPatern.toLowerCase();
 				}
 				boolean matches = string.matches(vertexPatern);
-				if (logger.isDebugEnabled() && matches) {
+				if (matches) {
 					logger.debug("vertex match " + vertexPatern + " :" + string);
+					object.setFilterMatch(true);
 				}
 				return matches;
 			}

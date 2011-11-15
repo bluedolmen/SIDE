@@ -17,6 +17,7 @@ import com.bluexml.side.build.tools.componants.Componant;
 
 public class Utils {
 	static Logger logger = Logger.getLogger(Utils.class);
+	static HashMap<String, String> componants;
 
 	public static Document buildJdomDocument(File xmlFile) throws Exception {
 		logger.debug("Load XML document :" + xmlFile);
@@ -61,7 +62,10 @@ public class Utils {
 		return set;
 	}
 
-	private static HashMap<String, String> initMap(File confFile) throws Exception {
+	public static HashMap<String, String> initMap(File confFile) throws Exception {
+		if (componants != null) {
+			return componants;
+		}
 		HashMap<String, String> componants = new HashMap<String, String>();
 		Properties p = new Properties();
 		FileInputStream fileInputStream = new FileInputStream(confFile);

@@ -31,7 +31,8 @@ public class DotRenderer {
 	Map<Componant, Integer> node2id = new TreeMap<Componant, Integer>();
 	Map<String, String> type2Color = new HashMap<String, String>();
 	Map<String, String> type2Shape = new HashMap<String, String>();
-
+	String matchesColor = "purple";
+	String matchesShape = "ellipse";
 	private Map<Componant, Set<Componant>> parentChildren = new TreeMap<Componant, Set<Componant>>();
 
 	boolean displayNull = false;
@@ -111,6 +112,9 @@ public class DotRenderer {
 		if (color == null) {
 			color = "red";
 		}
+		if (node.isFilterMatch()) {
+			color = matchesColor;
+		}
 		return color;
 	}
 
@@ -120,6 +124,10 @@ public class DotRenderer {
 		if (shape == null) {
 			shape = "none";
 		}
+		if (node.isFilterMatch()) {
+			shape = matchesShape;
+		}
+
 		return shape;
 	}
 

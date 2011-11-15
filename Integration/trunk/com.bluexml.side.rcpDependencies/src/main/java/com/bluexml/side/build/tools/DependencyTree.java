@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -14,11 +15,15 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.bluexml.side.build.tools.componants.Componant;
+import com.bluexml.side.build.tools.componants.Feature;
+import com.bluexml.side.build.tools.componants.Plugin;
+import com.bluexml.side.build.tools.componants.Product;
 import com.bluexml.side.build.tools.graph.DisplayGraph;
 import com.bluexml.side.build.tools.graph.JungConverter;
 import com.bluexml.side.build.tools.graph.jung.algorithms.GraphFilter;
 import com.bluexml.side.build.tools.reader.ComponantsRegisters;
 import com.bluexml.side.build.tools.reader.ProductReader;
+import com.bluexml.side.build.tools.reader.Utils;
 import com.bluexml.side.build.tools.renderer.DotRenderer;
 
 import edu.uci.ics.jung.graph.Graph;
@@ -133,6 +138,8 @@ public class DependencyTree {
 		logger.debug("Properties File :" + propertiesFile);
 		logger.debug("profile :" + profile);
 
+		validateConfigurationFile();
+
 		compReg = getComponantsRegisters();
 		// print out
 		compReg.print();
@@ -176,7 +183,7 @@ public class DependencyTree {
 		// sumary
 
 		List<String> list = compReg.getAnomaly().notTree;
-		logger.warn("Annomaly summary :");
+		logger.warn("*** Anomaly summary ***");
 		logger.warn("componant with more than one parent :");
 		for (String string : list) {
 			logger.warn(string);
@@ -191,28 +198,43 @@ public class DependencyTree {
 		for (String string : list3) {
 			logger.warn(string);
 		}
+
+		logger.warn("Invalide Bundle in conf file :");
+		List<String> list4 = compReg.getAnomaly().invalideEntryInConf;
+		for (String string : list4) {
+			logger.warn(string);
+		}
 	}
 
+	/**
+	 * do some advanced validation on the graph :
+	 * <ul>
+	 * <li>sub graph with Product->Feature, Feature->Feature, Feature -> Plugin
+	 * should be a tree</li>
+	 * <ul>
+	 * 
+	 * @param g
+	 */
 	public void validate(Graph<Componant, String> g) {
 		// search if the graph is a tree (only one parent per vertex)
 		Collection<Componant> vertices = g.getVertices();
-		List<String> havemoreTHanOnePArent = new ArrayList<String>();
-		for (Componant componant : vertices) {
 
-			int inDegree = g.inDegree(componant);
-			Collection<String> incidentEdges = g.getIncidentEdges(componant);
-			//			boolean 
-			if (inDegree > 1) {
-				havemoreTHanOnePArent.add(componant.toString());
+		for (Componant componant : vertices) {
+			// destination of the edge can be Feature or Plugin
+			if (componant instanceof Feature || componant instanceof Plugin) {
+				int count = 0;
+				Collection<String> incidentEdges = g.getIncidentEdges(componant);
+				for (String string : incidentEdges) {
+					Componant source = g.getSource(string);
+					if (source instanceof Feature || source instanceof Product) {
+						count++;
+					}
+				}
+				if (count > 1) {
+					compReg.getAnomaly().notTree.add(componant.toString());
+				}
 			}
 		}
-
-		if (havemoreTHanOnePArent.size() > 0) {
-			logger.warn("graph is not a tree following vertex have more than one parent :");
-			logger.warn(havemoreTHanOnePArent);
-			compReg.getAnomaly().notTree.addAll(havemoreTHanOnePArent);
-		}
-
 	}
 
 	public ComponantsRegisters getComponantsRegisters() throws Exception {
@@ -222,6 +244,21 @@ public class DependencyTree {
 		pr.read();
 		ComponantsRegisters compReg = pr.getRegistries();
 		return compReg;
+	}
+
+	public void validateConfigurationFile() throws Exception {
+		HashMap<String, String> initMap = Utils.initMap(propertiesFile);
+		Set<String> keySet = initMap.keySet();
+		for (String string : keySet) {
+			File searchProjectForlerFromConf = Utils.searchProjectForlerFromConf(string, repo, propertiesFile);
+			if (searchProjectForlerFromConf == null || !searchProjectForlerFromConf.exists()) {
+				String message = initMap.get(string) + "&" + string;
+				logger.warn("invalide entry in properties file :" + message);
+				logger.warn("The file do not exists :" + searchProjectForlerFromConf);
+				compReg.getAnomaly().addInvalideEntryInConf(message);
+			}
+		}
+
 	}
 
 }
