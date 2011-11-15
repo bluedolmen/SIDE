@@ -370,7 +370,7 @@
       <feature id="org.eclipse.platform" version="3.7.0.v20110530-9gF7UHNFFt4cwE-pkZDJ7oz-mj4OSEIlu9SEv0f"/>
       <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.0"/>
       <feature id="org.eclipse.m2e.feature" version="1.0.0.20110607-2117"/>
-      <feature id="com.bluexml.side.Common.core.feature" version="1.0.319.v30085-20111109"/>
+      <feature id="com.bluexml.side.Common.core.labs.feature" version="1.0.319.v30085-20111109"/>
       <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.66.v30138-20111114"/>
    </features>
 
