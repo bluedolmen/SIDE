@@ -14,8 +14,6 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 <%script type="form.FormCollection" name="fileName"%>
 <%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>/<%getModuleIdService(getRootPackage().name)%>/share-forms-config.xml<%}%>
 
-<%script type="FormElement" name="debug" post="trim()"%>
-true
 <%script type="form.FormCollection" name="generate" file="<%fileName()%>" %>
 <alfresco-config>
 	<!-- Forms from SIDE <%current("FormCollection").name%> model -->
@@ -136,11 +134,13 @@ true
 	<%}%>
 >
 
-<%if ("<%debug()%>" == "true"){%>
-	Type = 
-	<%eClass().toString()%>
-	.
-<%}%>	
+<%if (Xtension[toString().startsWith("template")].nSize() > 0) {%>
+<control <%getXtensionAsXMLAttribute("template")%>>
+	<%for (Xtension[!toString().startsWith("template")]){%>
+	<%current("FormElement").getXtensionAsControlParam(toString().substring(0, toString().indexOf("=")))%>
+	<%}%>
+</control>
+<%}else{%>
 	<%if (filter("BooleanField")){%>
 		<%getCheckBoxControl()%>
 	<%}else if (filter("TextField")){%>
@@ -195,4 +195,9 @@ true
 		<%getModelChoiceFieldControl("multiple")%>
 	<%}%>
 --%>
+<%}%>
+
+
+
+
 </field>
