@@ -1,41 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
-
-<product name="SIDE Products Builder" uid="SIDEAllFeatures" id="com.bluexml.side.Integration.eclipse.branding.allFeatures.side_product_builder" application="org.eclipse.ui.ide.workbench" version="1.0.50" useFeatures="true" includeLaunchers="true">
-
-   <configIni use="default">
-   </configIni>
-
-   <launcherArgs>
-      <vmArgs>-d32</vmArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
-   </launcherArgs>
-
-   <launcher name="all">
-      <solaris/>
-      <win useIco="false">
-         <bmp/>
-      </win>
-   </launcher>
-
-   <vm>
-   </vm>
-
-   <plugins>
-   </plugins>
-
-   <features>
-      <feature id="org.eclipse.platform" version="3.7.0.v20110530-9gF7UHNFFt4cwE-pkZDJ7oz-mj4OSEIlu9SEv0f"/>
-      <feature id="org.eclipse.pde" version="3.7.0.v20110504-0800-7b7qFVpFEx2XnmYtj_9RfO7"/>
-      <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.0"/>
-      <feature id="org.eclipse.m2e.feature" version="1.0.0.20110607-2117"/>
-      <feature id="com.bluexml.side.Common.core.labs.feature" version="1.0.319.v30085-20111109"/>
-      <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.66.v30138-20111114"/>
-      <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.684.v30138-20111114"/>
-      <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.509.v30138-20111114"/>
-      <feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.510.v30138-20111114"/>
-      <feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" version="1.0.50.v30138-20111114"/>
-   </features>
-
-
+<product name="SIDE Products Builder" uid="SIDEAllFeatures" id="com.bluexml.side.Integration.eclipse.branding.allFeatures.side_product_builder" application="org.eclipse.ui.ide.workbench" version="1.0.51" useFeatures="true" includeLaunchers="true">
+  <configIni use="default" />
+  <launcherArgs>
+    <vmArgs>-d32</vmArgs>
+    <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+  </launcherArgs>
+  <launcher name="all">
+    <solaris />
+    <win useIco="false">
+      <bmp />
+    </win>
+  </launcher>
+  <vm />
+  <plugins />
+  <features>
+    <feature id="org.eclipse.platform" version="3.7.0.v20110530-9gF7UHNFFt4cwE-pkZDJ7oz-mj4OSEIlu9SEv0f" />
+    <feature id="org.eclipse.pde" version="3.7.0.v20110504-0800-7b7qFVpFEx2XnmYtj_9RfO7" />
+    <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.0" />
+    <feature id="org.eclipse.m2e.feature" version="1.0.0.20110607-2117" />
+    <feature id="com.bluexml.side.Common.core.labs.feature" version="1.0.320.v30173-20111115" />
+    <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.67.v30173-20111115" />
+    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.685.v30173-20111115" />
+    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.510.v30173-20111115" />
+    <feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.511.v30173-20111115" />
+    <feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" version="1.0.51.v30173-20111115" />
+  </features>
 </product>
+
