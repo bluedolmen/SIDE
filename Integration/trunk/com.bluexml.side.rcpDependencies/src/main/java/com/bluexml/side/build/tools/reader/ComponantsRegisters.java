@@ -86,6 +86,7 @@ public class ComponantsRegisters {
 		// if not found try to search in file system
 		if (path == null) {
 			logger.warn("Bundle " + id + " not found try to locate from file system");
+			getAnomaly().addBundleNotFoundInConf(id);
 			for (File f : repositoryLocation) {
 				logger.warn("search in :" + f);
 				path = Utils.find(id, f);

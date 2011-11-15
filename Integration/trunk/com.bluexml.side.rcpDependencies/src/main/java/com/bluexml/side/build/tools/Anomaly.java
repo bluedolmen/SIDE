@@ -8,6 +8,8 @@ public class Anomaly {
 	List<String> notTree = new ArrayList<String>();
 
 	List<String> invalideCheckRef = new ArrayList<String>();
+	
+	List<String> bundleNotFoundInConf = new ArrayList<String>();
 
 	public void addNotTree(String notTree) {
 		this.notTree.add(notTree);
@@ -17,4 +19,8 @@ public class Anomaly {
 		this.invalideCheckRef.add(invalideCheckRef);
 	}
 
+	public void addBundleNotFoundInConf(String notTree) {
+		this.bundleNotFoundInConf.add(notTree);
+	}
+	
 }

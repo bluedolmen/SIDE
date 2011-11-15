@@ -28,19 +28,20 @@ public class DependencyTree {
 	File product;
 	File propertiesFile;
 	List<File> repo;
-	private String configType = "";
+	private String profile = "";
 	ComponantsRegisters compReg;
 
-	public DependencyTree(File productFile, List<File> repo, File propertiesFile) {
+	public DependencyTree(File productFile, List<File> repo, File propertiesFile, String profile) {
 		this.product = productFile;
 		this.repo = repo;
 		this.propertiesFile = propertiesFile;
+		this.profile = profile;
 	}
 
 	public static void main(String[] args) {
 
-		if (args.length < 2) {
-			System.out.println("Usage : <.product> <projects repository> [<propetiesFile>]");
+		if (args.length < 3) {
+			System.out.println("Usage : <.product> [<projects repository>]+ <propetiesFile> [-profile <profile>]");
 			System.out.println("");
 			System.exit(-1);
 		} else {
@@ -58,7 +59,12 @@ public class DependencyTree {
 				}
 
 			} else {
-
+				String profile = "";
+				int indice = 0;
+				if (args[args.length - 2].equals("-profile")) {
+					indice = 2;
+					profile = args[args.length - 1];
+				}
 				// 
 				String product = args[0];
 				File productFile = new File(product);
@@ -67,7 +73,7 @@ public class DependencyTree {
 				}
 
 				List<File> repos = new ArrayList<File>();
-				for (int c = 1; c < args.length; c++) {
+				for (int c = 1; c < args.length - indice; c++) {
 					File repo = new File(args[c]);
 					if (repo.isDirectory()) {
 						repos.add(repo);
@@ -76,12 +82,13 @@ public class DependencyTree {
 					}
 
 				}
-				String lastParam = args[args.length - 1];
+				String lastParam = args[args.length - (1 + indice)];
 				File lastPAramFile = new File(lastParam);
 				if (lastPAramFile.isDirectory()) {
 					lastPAramFile = null;
 				}
-				DependencyTree dt = new DependencyTree(productFile, repos, lastPAramFile);
+
+				DependencyTree dt = new DependencyTree(productFile, repos, lastPAramFile, profile);
 				try {
 					dt.doIt();
 
@@ -121,6 +128,10 @@ public class DependencyTree {
 
 	public void doIt() throws Exception {
 		// create component registers
+		logger.debug("product :" + product);
+		logger.debug("source repository :" + repo);
+		logger.debug("Properties File :" + propertiesFile);
+		logger.debug("profile :" + profile);
 
 		compReg = getComponantsRegisters();
 		// print out
@@ -143,7 +154,7 @@ public class DependencyTree {
 
 		Graph<Componant, String> filtered = g;
 
-		String property = getProperties(configType).getProperty("render.jung.filter", "");
+		String property = getProperties(profile).getProperty("render.jung.filter", "");
 		if (!property.equals("")) {
 			filtered = gf.getFilteredVertex(property, true, false);
 		}
@@ -175,6 +186,11 @@ public class DependencyTree {
 		for (String string : list2) {
 			logger.warn(string);
 		}
+		logger.warn("Bundle not found in conf file :");
+		List<String> list3 = compReg.getAnomaly().bundleNotFoundInConf;
+		for (String string : list3) {
+			logger.warn(string);
+		}
 	}
 
 	public void validate(Graph<Componant, String> g) {
@@ -201,7 +217,7 @@ public class DependencyTree {
 
 	public ComponantsRegisters getComponantsRegisters() throws Exception {
 		// create ProductReader
-		ProductReader pr = new ProductReader(product, new ComponantsRegisters(repo, propertiesFile), getProperties(configType));
+		ProductReader pr = new ProductReader(product, new ComponantsRegisters(repo, propertiesFile), getProperties(profile));
 		// read product and all associated resources
 		pr.read();
 		ComponantsRegisters compReg = pr.getRegistries();
