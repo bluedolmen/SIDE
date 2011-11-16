@@ -14,6 +14,8 @@
 				<css src="/yui/assets/skins/sam/skin.css" />
 				<css src="/inputex/inputex-min.css" />
 
+				<css src="/side/components/form/controls/selectbox.css" />
+				
 				<js src="/yui/tabview/tabview-min.js" />
 				<js src="/yui/animation/animation-min.js" />
 				<js src="/yui/datasource/datasource-min.js" />
@@ -21,13 +23,19 @@
 				<js src="/yui/slider/slider-min.js" />
 				<js src="/fdk/accordion/accordion-min.js" />
 				<js src="/side/components/form/upload-min.js" />
-
+				<js src="/yui/event-delegate/event-delegate-min.js" />
 				<js src="/yui/utilities/utilities.js" />
-				<js src="/inputex/inputex-min.js" />
+				<!-- js src="/inputex/inputex-min.js" /> -->
+				<js src="/inputex/inputex.js" />
 				<js src="/side/components/form/controls/MyDSSelectField-min.js" />
 				<js src="/side/components/form/controls/MyDSMultiSelectField-min.js" />
 				<js src="/side/components/form/controls/combobox-min.js" />
+
+				<js src="/side/components/form/controls/MyDSRadioFields.js" />
+				<js src="/side/components/form/controls/MyDSCheckFields.js" />
 				
+				<js src="/side/components/form/controls/selectbox.js" />
+
 
 				<js src="/side/components/object-finder/object-finder.js" />
 
