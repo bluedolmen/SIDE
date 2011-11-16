@@ -174,27 +174,12 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 			</control>
 			<%}%> 
 		<%}%>
- <%--
-		<control <%if (getShareSearchFormControl() != ""){%>template="<%getShareSearchFormControl()%>"<%}%>>
-			<control-param name="forceEditable">true</control-param>
-		</control>
---%>
-	<%}else if(filter("ModelChoiceField")){%>
+		<%if (filter("ModelChoiceField")){%>
 		 <%getModelChoiceFieldControl("")%>
-	<%}else if(filter("ModelChoiceSearchField")){%>
+		<%}else if(filter("ModelChoiceSearchField")){%>
 		<%getModelChoiceFieldControl("multiple")%>
+		<%}%>
 	<%}%>
-
-<%--
-	<%getFileFieldControl()%> 
-	<%getSearchFormControl()%>
-	<%for (filter("ModelChoiceField")){%>
-		 <%getModelChoiceFieldControl("")%>
-	<%}%>
-	<%for (filter("ModelChoiceSearchField")){%>
-		<%getModelChoiceFieldControl("multiple")%>
-	<%}%>
---%>
 <%}%>
 
 

@@ -210,7 +210,8 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 	both intherits FormElement
 --%>
 <%script type="FormElement" name="getModelChoiceFieldControl"%>
-<!--extension><%Xtension%></extension-->
+<!--<extension><%Xtension%></extension>-->
+<!-- widget :<%widget.toString()%> -->
 <%if (widget.toString() == "Search"){%>
 	<control template="/side/controls/association-search.ftl" >
 		<%if (args(0) == "multiple"){%>
@@ -218,34 +219,29 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%}%>
 		<%getPickerControlParams()%>
 	</control>
-<%}else{%>
-	<%if (widget.toString() == "Select"){%>
-		<control template="/side/controls/association-select.ftl" >
-			<%if (args(0) == "multiple"){%>
-			 	<control-param name="multipleSelectMode">true</control-param>		
-			<%}else{%>
-				<%getXtensionAsControlParam("multipleSelectMode")%>
-			<%}%>
-			<%getXtensionAsControlParam("filterTerm")%>
-			<%getXtensionAsControlParam("maxResults")%> 		
-		</control>
-	<%}else{%>
-		<%if (widget.toString() == "Inline"){%>
-	 	<%-- TODO--%> 
+<%}else if (widget.toString() == "Select"){%>
+	<control template="/side/controls/association-select.ftl" >
+		<%if (args(0) == "multiple"){%>
+		 	<control-param name="multipleSelectMode">true</control-param>		
 		<%}else{%>
-			<%if (widget.toString() == "ItemSelector"){%>
-				<!-- default widget (itemSelector) -->
-				<%if (Xtension.nSize() > 0){%>
-					<control>
-						<%if (args(0) == "multiple"){%>
-						 	<control-param name="multipleSelectMode">true</control-param>		
-						<%}%>
-						<%getPickerControlParams()%>
-					</control>
-				<%}%>
-			<%}%>	
+			<%getXtensionAsControlParam("multipleSelectMode")%>
 		<%}%>
+		<%getXtensionAsControlParam("filterTerm")%>
+		<%getXtensionAsControlParam("maxResults")%> 		
+	</control>
+<%}else if (widget.toString() == "Inline"){%>
+	 	<%-- TODO--%> 
+<%}else if (widget.toString() == "ItemSelector"){%>
+	<!-- default widget (itemSelector) -->
+	<%if (Xtension.nSize() > 0){%>
+	<control>
+		<%if (args(0) == "multiple"){%>
+		 	<control-param name="multipleSelectMode">true</control-param>		
+		<%}%>
+		<%getPickerControlParams()%>
+	</control>
 	<%}%>
+
 <%}%>
 
 <%script type="ModelChoiceField" name="getPickerControlParams"%>
