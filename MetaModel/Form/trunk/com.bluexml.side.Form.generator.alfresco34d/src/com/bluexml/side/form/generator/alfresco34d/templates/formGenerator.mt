@@ -161,7 +161,9 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%}else if (filter("NumericalField")){%>
 		<%getNumberControl()%>
 	<%}else if (filter("FileField") && ref.getPrefixedQName() == "cm:content"){%>
-		<%getFileFieldControl()%> 
+		<%getFileFieldControl()%>
+	<%}else if (filter("ModelChoiceField")){%>
+		 <%getModelChoiceFieldControl("")%>
 	<%}else if (isSearchForm){%>
 		<%for (ref.filter("clazz.Attribute")){%>
 			<%if (getShareSearchFormControl() != ""){%>
@@ -174,9 +176,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 			</control>
 			<%}%> 
 		<%}%>
-		<%if (filter("ModelChoiceField")){%>
-		 <%getModelChoiceFieldControl("")%>
-		<%}else if(filter("ModelChoiceSearchField")){%>
+		<%if (filter("ModelChoiceSearchField")){%>
 		<%getModelChoiceFieldControl("multiple")%>
 		<%}%>
 	<%}%>
