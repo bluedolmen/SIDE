@@ -73,12 +73,13 @@ if (!Array.prototype.indexOf) {
 			itemType : "",
 			multipleSelectMode : false,
 			filterTerm : "*",
+			advancedQuery : "",
 			maxResults : -1
 		},
 		load : function() {
 
 			var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType + "&searchTerm=" + this.options.filterTerm
-					+ "&size=" + this.options.maxResults);
+					+ "&size=" + this.options.maxResults + "&advancedQuery=" + this.options.advancedQuery);
 			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 			myDataSource.responseSchema = {
 				fields : [ "nodeRef", "name", "title" ],

@@ -191,6 +191,7 @@ if (console == undefined) {
 				this.setValue(valuesList);
 				this.log("dataloaded init new:" + this.getValue());
 			} else {
+				this.log("dataloaded force to empty value");
 				// so select list must display the empty string item
 				this.el.selectedIndex = 0;
 			}

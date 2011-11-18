@@ -37,14 +37,14 @@ if (!Array.prototype.indexOf) {
 	};
 }
 /**
- * SelectBox component.
+ * Autocomplite component.
  * 
  * @namespace SIDE
- * @class SIDE.SelectBox
+ * @class SIDE.Autocomplite
  */
 (function() {
-	SIDE.SelectBox = function(htmlId, currentValueHtmlId, initialValue) {
-		SIDE.SelectBox.superclass.constructor.call(this, "SIDE.SelectBox", htmlId, [ "button", "menu", "container", "resize", "datasource", "datatable" ]);
+	SIDE.Autocomplite = function(htmlId, currentValueHtmlId, initialValue) {
+		SIDE.Autocomplite.superclass.constructor.call(this, "SIDE.Autocomplite", htmlId, [ "button", "menu", "container", "resize", "datasource", "datatable" ]);
 		this.htmlid = htmlId;
 		this.currentValueHtmlId = currentValueHtmlId;
 		this.addedFieldHtmlId = htmlId + "-added";
@@ -58,10 +58,10 @@ if (!Array.prototype.indexOf) {
 
 	};
 
-	YAHOO.extend(SIDE.SelectBox, Alfresco.component.Base, {
+	YAHOO.extend(SIDE.Autocomplite, Alfresco.component.Base, {
 
 		log : function(msg) {
-			console.log("[SIDE.SelectBox] " + msg);
+			console.log("[SIDE.Autocomplite] " + msg);
 		},
 		/**
 		 * Object container for initialization options
@@ -73,35 +73,53 @@ if (!Array.prototype.indexOf) {
 			itemType : "",
 			multipleSelectMode : false,
 			filterTerm : "*",
-			advancedQuery : "",
 			maxResults : -1
 		},
 		load : function() {
 
-			var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType + "&searchTerm=" + this.options.filterTerm
-					+ "&size=" + this.options.maxResults + "&advancedQuery=" + this.options.advancedQuery);
+			var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType
+			// + "&searchTerm=" + this.options.filterTerm
+			+ "&size=" + this.options.maxResults);
 			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 			myDataSource.responseSchema = {
 				fields : [ "nodeRef", "name", "title" ],
 				resultsList : "data.items"
 			};
+			myDataSource.scriptQueryParam = "&searchTerm";
 
 			if (this.options.multipleSelectMode) {
-				this.log("multiseelct allowed");
 				// cardinality n-n
-				var multiselect = new SIDE.MyDSCheckFields({
+				var mymultiautocomplete = inputEx({
 					name : "-",
+					type : "mymultiautocomplete",
+					parentEl : this.htmlid,
 					datasource : myDataSource,
-					valueKey : "nodeRef",
-					labelKey : "name",
-					parentEl : this.htmlid
-				}, this.initialValue);
-				var me = this;
+												
+					// Format the hidden value (value returned by the form)
+					returnValue : function(oResultItem) {
+						return oResultItem[0];
+					},
+					returnLabel : function(oResultItem) {
+						return oResultItem[1];
+					},
 
-				multiselect.updatedEvt.subscribe(function(e, params) {
-					me.log("multiselect updated Call");
+					autoComp : {
+						queryQuestionMark : false,
+						forceSelection : true,
+						minQueryLength : 2,
+						maxResultsDisplayed : 50,
+						formatResult : function(oResultItem, sQuery) {
+							var sMarkup = oResultItem[1];
+							return sMarkup;
+						}
+					}
+				});
+				
+				
+				
+				var me = this;
+				mymultiautocomplete.updatedEvt.subscribe(function(e, params) {
 					var values = params[0];
-					me.log("multiselect values :" + values);
 					var toAdd = [];
 					var toremove = [];
 					var initialValues = null;
@@ -134,19 +152,37 @@ if (!Array.prototype.indexOf) {
 					YAHOO.util.Dom.get(me.addedFieldHtmlId).value = toAdd.toString();
 					YAHOO.util.Dom.get(me.removedFieldHtmlId).value = toremove.toString();
 				});
-				return multiselect;
+				return mymultiautocomplete;
 			} else {
 				// cardinality n-1
-				var DSSelectWidget = new SIDE.MyDSRadioFields({
-					name : "-" + this.htmlid,
-					datasource : myDataSource,
-					valueKey : "nodeRef",
-					labelKey : "name",
-					parentEl : this.htmlid
-				}, this.initialValue);
 
+				var myautocomplete = inputEx({
+					name : "-",
+					type : "myautocomplete",
+					parentEl : this.htmlid,
+					datasource : myDataSource,
+					typeInvite :"enter target name",
+					// Format the hidden value (value returned by the form)
+					returnValue : function(oResultItem) {
+						return oResultItem[0];
+					},
+					returnLabel : function(oResultItem) {
+						return oResultItem[1];
+					},
+
+					autoComp : {
+						queryQuestionMark : false,
+						forceSelection : true,
+						minQueryLength : 2,
+						maxResultsDisplayed : 50,
+						formatResult : function(oResultItem, sQuery) {
+							var sMarkup = oResultItem[1];
+							return sMarkup;
+						}
+					}
+				});
 				var me = this;
-				DSSelectWidget.updatedEvt.subscribe(function(e, params) {
+				myautocomplete.updatedEvt.subscribe(function(e, params) {
 					me.log("updatedEvt :" + e);
 					me.log("state :" + params[1].previousState);
 					var value = params[0];
@@ -177,7 +213,7 @@ if (!Array.prototype.indexOf) {
 					}
 
 				});
-				return DSSelectWidget;
+				return myautocomplete;
 			}
 
 		},
@@ -186,18 +222,18 @@ if (!Array.prototype.indexOf) {
 		 * 
 		 * @method onReady
 		 */
-		onReady : function SelectBox_onReady() {
+		onReady : function Autocomplite_onReady() {
 			this.DSSelectWidget = this.load();
 			if (this.initialValue) {
 				this.setValue(this.initialValue);
 			}
 		},
-		setValue : function SelectBox_setValue(value) {
+		setValue : function Autocomplite_setValue(value) {
 			this.log("before setValue :" + this.getValue());
 			this.DSSelectWidget.setValue(value);
 			this.log("after setValue :" + this.getValue());
 		},
-		getValue : function SelectBox_setValue() {
+		getValue : function Autocomplite_setValue() {
 			return this.DSSelectWidget.getValue();
 		}
 	});

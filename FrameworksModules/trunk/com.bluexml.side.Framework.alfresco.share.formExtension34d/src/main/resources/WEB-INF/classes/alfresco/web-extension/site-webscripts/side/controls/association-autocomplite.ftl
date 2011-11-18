@@ -13,19 +13,19 @@
 
 (function()
 {
-   var selectBox = new SIDE.SelectBox("${controlId}", "${fieldHtmlId}",${value});
+   var autocomplite = new SIDE.Autocomplite("${controlId}", "${fieldHtmlId}",${value});
    
-   selectBox.setOptions(
+   autocomplite.setOptions(
    {
+   	 initialValueLabel : "${field?string}",
      itemType: "${field.endpointType}",
      multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
      filterTerm : <#if field.control.params.filterTerm??>"${field.control.params.filterTerm}"<#else>"*"</#if>,
-     advancedQuery :<#if field.control.params.advancedQuery??>"${field.control.params.advancedQuery?url}"<#else>""</#if>,
 	 maxResults : <#if field.control.params.maxResults??>${field.control.params.maxResults}<#else>-1</#if>
    });
    
    
-   selectBox.setMessages(
+   autocomplite.setMessages(
       ${messages}
    );
    

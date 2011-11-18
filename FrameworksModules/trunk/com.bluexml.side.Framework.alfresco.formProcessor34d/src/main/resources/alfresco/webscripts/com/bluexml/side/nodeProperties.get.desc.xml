@@ -1,0 +1,8 @@
+<webscript>
+	<shortname>Get All Properties for a node</shortname>
+	<description>This webscript return all properties for the given nodeRef
+	</description>
+	<url>/side/api/getproperties?nodeRef={nodeRef}</url>
+	<format default="json" />
+	<authentication>user</authentication>
+</webscript>

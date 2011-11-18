@@ -5,6 +5,7 @@ function main()
    var argsFilterType = args['filterType'],
       argsSelectableType = args['selectableType'],
       argsSearchTerm = args['searchTerm'],
+      argsAdvancedQuery = args['advancedQuery'],
       argsMaxResults = args['size'],
       argsXPath = args['xpath'],
       pathElements = url.service.split("/"),
@@ -21,6 +22,7 @@ function main()
       logger.log("argsSelectableType = " + argsSelectableType);
       logger.log("argsFilterType = " + argsFilterType);
       logger.log("argsSearchTerm = " + argsSearchTerm);
+      logger.log("argsAdvancedQuery = " + argsAdvancedQuery);      
       logger.log("argsMaxResults = " + argsMaxResults);
       logger.log("argsXPath = " + argsXPath);
    }
@@ -239,12 +241,35 @@ function main()
     	  if (nodeRef != 'null://null/null') {
     		  path = "PATH:\"" + nodeRef + "\"";
     	  }
+    	  
     	  var query = type ;
     	  if (path != null) {
     		  query += " AND " + path;
     	  }
-    	  if (argsSearchTerm != undefined && argsSearchTerm != '') {
-    		  query += " AND " + "@cm\\:name:*" + argsSearchTerm+"*";
+    	  
+    	  var advancedQuery = argsAdvancedQuery && argsAdvancedQuery != "";
+    	  
+    	  if (!advancedQuery && argsSearchTerm != undefined && argsSearchTerm != '') {
+    		  query += " AND " + "@cm\\:name:*" + argsSearchTerm + "*";
+    	  }
+    	  
+    	  if (advancedQuery) {
+    		  query += " AND ";
+    		  var queryArray = argsAdvancedQuery.split(' ');
+    		  
+			  for (var x=0; x<queryArray.length; x++) {
+				  var q_part = " ";
+			      var v = queryArray[x];	
+			      if (v.indexOf(":") != -1) {
+			         var part= v.split("=");
+			         var key=part[0];
+			         var value=part[1];
+			         q_part += "@" + key.replace(":","\\:") + ":" + value;
+			      } else {
+			    	 q_part += " " + v + " ";
+			      }
+			      query += q_part;			      
+			  }			  
     	  }
     	  if (logger.isLoggingEnabled()) {
     	      logger.log("pickerchildren.get.js : query :" + query);
