@@ -57,7 +57,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 	private SIDEBuilderChecker checker;
 
 	public SIDEBuilder() {
-		
+
 		com.bluexml.side.application.ui.Activator default1 = com.bluexml.side.application.ui.Activator.getDefault();
 
 		QuietModelModificationListener l = new QuietModelModificationListener() {
@@ -109,28 +109,33 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		System.out.println("SIDEBuilder.build() BUILD START ...");
 		Date date = new Date();
+		String kindString = "";
 		if (isActivated()) {
 			checker = new SIDEBuilderChecker();
 			IFolder folder = getProject().getFolder(SIDEBuilderConstants.metadataFolder);
 			SIDEBuilderUtil.prepareFolder(folder);
 
 			if (kind == FULL_BUILD) {
+				kindString = "FULL_BUILD";
 				System.out.println("SIDEBuilder.build() KIND : FULL BUILD");
 				//				fullBuild(monitor);
 				fullBuildAndExecuteSIDEProcess(monitor);
 			} else {
 				IResourceDelta delta = getDelta(getProject());
 				if (delta == null) {
+					kindString = "FULL_BUILD";
 					System.out.println("SIDEBuilder.build() DELTA EMPTY : FULL BUILD");
 					fullBuild(monitor);
 				} else {
 					List<IResourceDelta> movedModels = getMovedModels(delta);
 					if (movedModels.size() > 0) {
+						kindString = "FULL_BUILD";
 						System.out.println("SIDEBuilder.build() MODEL MOVED : FULL BUILD");
 						manageDifferences(delta, movedModels);
 						SIDEBuilderUtil.deleteEmptyFolders(folder);
 						fullBuild(monitor);
 					} else {
+						kindString = "INCREMENTAL";
 						System.out.println("SIDEBuilder.build() INCREMENTAL");
 						incrementalBuild(delta, monitor);
 					}
@@ -152,7 +157,7 @@ public class SIDEBuilder extends IncrementalProjectBuilder {
 		//		String format = new SimpleDateFormat("HH:mm:ss,SSS").format(date3);
 		//		System.out.println("done in :" + format);
 		System.out.println("done in :" + l + " ms");
-		System.out.println("SIDEBuilder.build() BUILD ENDED");
+		System.out.println("SIDEBuilder.build() BUILD " + kindString + " ENDED");
 		getProject().refreshLocal(-1, monitor);
 		return null;
 	}
