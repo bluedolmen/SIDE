@@ -12,16 +12,20 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 	 returns the value of the expected parameter stored in Xtension
 --%>
 <%script type="FormElement" name="getXtensionAsXMLAttribute" post="trim()" %>
-<%for (Xtension[toLowerCase().startsWith(args(0).toLowerCase())]) {%>
+<%for (Xtension) {%>
+	<%if (toLowerCase().startsWith(args(0).toLowerCase())){%>
 		<%args(0)%>="<%toString().substring(toString().indexOf("=") + 1, toString().length())%>"
+	<%}%>
 <%}%>
 <%-- getXtensionAsControlParam :
 	 args(0) : expected parameter name
 	 returns the value of the expected parameter stored in Xtension and create control-param element
 --%>
 <%script type="FormElement" name="getXtensionAsControlParam" post="trim()" %>
-<%for (Xtension[toLowerCase().startsWith(args(0).toLowerCase())]) {%>
+<%for (Xtension) {%>
+	<%if (toLowerCase().startsWith(args(0).toLowerCase())){%>
 		<control-param name="<%args(0)%>"><%toString().substring(toString().indexOf("=") + 1, toString().length())%></control-param>
+	<%}%>
 <%}%>
 
 <%-- Why doesn't this work? --%>

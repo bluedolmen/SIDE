@@ -227,6 +227,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 			<%getXtensionAsControlParam("multipleSelectMode")%>
 		<%}%>
 		<%getXtensionAsControlParam("filterTerm")%>
+		<%getXtensionAsControlParam("advancedQuery")%>
 		<%getXtensionAsControlParam("maxResults")%> 		
 	</control>
 <%}else if (widget.toString() == "Inline"){%>
