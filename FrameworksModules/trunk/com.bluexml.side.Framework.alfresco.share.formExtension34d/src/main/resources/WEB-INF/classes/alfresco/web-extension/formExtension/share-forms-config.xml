@@ -15,7 +15,7 @@
 				<css src="/inputex/inputex-min.css" />
 
 				<css src="/side/components/form/controls/selectbox.css" />
-				<css src="/side/components/form/controls/autocomplite.css" />
+				<css src="/side/components/form/controls/autocomplete.css" />
 				
 				<js src="/yui/tabview/tabview-min.js" />
 				<js src="/yui/animation/animation-min.js" />
@@ -31,8 +31,8 @@
 				<js src="/side/components/form/controls/MyDSSelectField.js" />
 				<js src="/side/components/form/controls/MyDSMultiSelectField.js" />
 				
-				<js src="/side/components/form/controls/MyMultiAutoCompliteField.js" />
-				<js src="/side/components/form/controls/MyAutoCompliteField.js" />
+				<js src="/side/components/form/controls/MyMultiAutoCompleteField.js" />
+				<js src="/side/components/form/controls/MyAutoCompleteField.js" />
 				
 				<js src="/side/components/form/controls/combobox.js" />
 
@@ -40,7 +40,7 @@
 				<js src="/side/components/form/controls/MyDSCheckFields.js" />
 
 				<js src="/side/components/form/controls/selectbox.js" />
-				<js src="/side/components/form/controls/autocomplite.js" />
+				<js src="/side/components/form/controls/autocomplete.js" />
 
 
 

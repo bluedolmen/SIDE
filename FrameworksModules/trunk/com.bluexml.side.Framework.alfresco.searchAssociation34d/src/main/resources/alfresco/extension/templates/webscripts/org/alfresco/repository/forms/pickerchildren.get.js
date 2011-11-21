@@ -249,7 +249,7 @@ function main()
     	  
     	  var advancedQuery = argsAdvancedQuery && argsAdvancedQuery != "";
     	  
-    	  if (!advancedQuery && argsSearchTerm != undefined && argsSearchTerm != '') {
+    	  if (argsSearchTerm != undefined && argsSearchTerm != '') {
     		  query += " AND " + "@cm\\:name:*" + argsSearchTerm + "*";
     	  }
     	  

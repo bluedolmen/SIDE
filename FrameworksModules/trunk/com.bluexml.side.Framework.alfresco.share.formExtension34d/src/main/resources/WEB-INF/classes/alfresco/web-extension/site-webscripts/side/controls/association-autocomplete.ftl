@@ -13,9 +13,9 @@
 
 (function()
 {
-   var autocomplite = new SIDE.Autocomplite("${controlId}", "${fieldHtmlId}",${value});
+   var autocomplete = new SIDE.Autocomplete("${controlId}", "${fieldHtmlId}",${value});
    
-   autocomplite.setOptions(
+   autocomplete.setOptions(
    {
    	 initialValueLabel : "${field?string}",
      itemType: "${field.endpointType}",
@@ -25,7 +25,7 @@
    });
    
    
-   autocomplite.setMessages(
+   autocomplete.setMessages(
       ${messages}
    );
    

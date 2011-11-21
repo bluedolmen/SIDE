@@ -37,14 +37,14 @@ if (!Array.prototype.indexOf) {
 	};
 }
 /**
- * Autocomplite component.
+ * Autocomplete component.
  * 
  * @namespace SIDE
- * @class SIDE.Autocomplite
+ * @class SIDE.Autocomplete
  */
 (function() {
-	SIDE.Autocomplite = function(htmlId, currentValueHtmlId, initialValue) {
-		SIDE.Autocomplite.superclass.constructor.call(this, "SIDE.Autocomplite", htmlId, [ "button", "menu", "container", "resize", "datasource", "datatable" ]);
+	SIDE.Autocomplete = function(htmlId, currentValueHtmlId, initialValue) {
+		SIDE.Autocomplete.superclass.constructor.call(this, "SIDE.Autocomplete", htmlId, [ "button", "menu", "container", "resize", "datasource", "datatable" ]);
 		this.htmlid = htmlId;
 		this.currentValueHtmlId = currentValueHtmlId;
 		this.addedFieldHtmlId = htmlId + "-added";
@@ -58,10 +58,10 @@ if (!Array.prototype.indexOf) {
 
 	};
 
-	YAHOO.extend(SIDE.Autocomplite, Alfresco.component.Base, {
+	YAHOO.extend(SIDE.Autocomplete, Alfresco.component.Base, {
 
 		log : function(msg) {
-			console.log("[SIDE.Autocomplite] " + msg);
+			console.log("[SIDE.Autocomplete] " + msg);
 		},
 		/**
 		 * Object container for initialization options
@@ -76,25 +76,49 @@ if (!Array.prototype.indexOf) {
 			maxResults : -1
 		},
 		load : function() {
+			var me = this;
+			var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType + "&size=" + this.options.maxResults;
+			// url += "&advancedQuery=NOT cm:name=toto"
+			var myDataSource = new YAHOO.util.XHRDataSource(url);
 
-			var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType
-			// + "&searchTerm=" + this.options.filterTerm
-			+ "&size=" + this.options.maxResults);
 			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 			myDataSource.responseSchema = {
 				fields : [ "nodeRef", "name", "title" ],
 				resultsList : "data.items"
 			};
-			myDataSource.scriptQueryParam = "&searchTerm";
 
 			if (this.options.multipleSelectMode) {
 				// cardinality n-n
+
+				// compute query to remove from result selected items
+				var gen_req = function(sQuery) {
+					var notClause = "&advancedQuery=NOT ( ";
+					var values = null;
+					if (me.options.multipleSelectMode) {
+						values = me.getValue();
+					} else {
+						values = [ me.getValue() ];
+					}
+					for ( var x = 0; x < values.length; x++) {
+						var val = values[x];
+						notClause += "sys:node-uuid=" + val.substring("workspace://SpacesStore/".length);
+
+						if (x != values.length - 1) {
+							notClause += " OR ";
+						}
+					}
+					notClause += " )";
+					me.log("sQuery :" + sQuery);
+					me.log(" notClause :" + notClause);
+					return notClause + "&searchTerm=" + sQuery;
+				};
+
 				var mymultiautocomplete = inputEx({
 					name : "-",
 					type : "mymultiautocomplete",
 					parentEl : this.htmlid,
 					datasource : myDataSource,
-												
+
 					// Format the hidden value (value returned by the form)
 					returnValue : function(oResultItem) {
 						return oResultItem[0];
@@ -102,7 +126,7 @@ if (!Array.prototype.indexOf) {
 					returnLabel : function(oResultItem) {
 						return oResultItem[1];
 					},
-
+					generateRequest : gen_req,
 					autoComp : {
 						queryQuestionMark : false,
 						forceSelection : true,
@@ -114,10 +138,7 @@ if (!Array.prototype.indexOf) {
 						}
 					}
 				});
-				
-				
-				
-				var me = this;
+
 				mymultiautocomplete.updatedEvt.subscribe(function(e, params) {
 					var values = params[0];
 					var toAdd = [];
@@ -155,13 +176,15 @@ if (!Array.prototype.indexOf) {
 				return mymultiautocomplete;
 			} else {
 				// cardinality n-1
+				// tell to myDataSource.generateRequest to use searchTerm as query parameter to filter
+				myDataSource.scriptQueryParam = "&searchTerm";
 
 				var myautocomplete = inputEx({
 					name : "-",
 					type : "myautocomplete",
 					parentEl : this.htmlid,
 					datasource : myDataSource,
-					typeInvite :"enter target name",
+					typeInvite : "enter target name",
 					// Format the hidden value (value returned by the form)
 					returnValue : function(oResultItem) {
 						return oResultItem[0];
@@ -222,18 +245,58 @@ if (!Array.prototype.indexOf) {
 		 * 
 		 * @method onReady
 		 */
-		onReady : function Autocomplite_onReady() {
+		onReady : function Autocomplete_onReady() {
 			this.DSSelectWidget = this.load();
 			if (this.initialValue) {
 				this.setValue(this.initialValue);
 			}
 		},
-		setValue : function Autocomplite_setValue(value) {
+		setValue : function Autocomplete_setValue(value) {
 			this.log("before setValue :" + this.getValue());
-			this.DSSelectWidget.setValue(value);
-			this.log("after setValue :" + this.getValue());
+			var values = value.split(",");
+			if (values.length > 0) {
+				var me = this;
+				var onSuccess = function ObjectFinder__loadSelectedItems_onSuccess(response) {
+					var items = response.json.data.items, item;
+					this.selectedItems = {};
+					var oDatas = [];
+					for ( var i = 0, il = items.length; i < il; i++) {
+						item = items[i];
+						oDatas.push([ item.nodeRef, item.name ]);
+					}
+
+					if (me.options.multipleSelectMode) {
+						me.DSSelectWidget.setValuesAndLabels(oDatas);
+					} else {
+						me.DSSelectWidget.setValueAndLabel(oDatas[0]);
+					}
+
+				};
+				var onFailure = function ObjectFinder__loadSelectedItems_onFailure(response) {
+
+				};
+				// call service to get nodes properties
+				Alfresco.util.Ajax.jsonRequest({
+					url : Alfresco.constants.PROXY_URI + "api/forms/picker/items",
+					method : "POST",
+					dataObj : {
+						items : values,
+						itemValueType : "nodeRef"
+					},
+					successCallback : {
+						fn : onSuccess,
+						scope : this
+					},
+					failureCallback : {
+						fn : onFailure,
+						scope : this
+					}
+				});
+			}
+
 		},
-		getValue : function Autocomplite_setValue() {
+
+		getValue : function Autocomplete_setValue() {
 			return this.DSSelectWidget.getValue();
 		}
 	});

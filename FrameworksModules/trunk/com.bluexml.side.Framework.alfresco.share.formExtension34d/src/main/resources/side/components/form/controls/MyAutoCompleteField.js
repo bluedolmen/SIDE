@@ -51,12 +51,9 @@ if (console == undefined) {
 		 *            fire the updatedEvt or not (default is true, pass false to
 		 *            NOT send the event)
 		 */
-		setValue : function(aData, sendUpdatedEvt) {
-			this.log("setValue :" + aData);
-			var value = lang.isFunction(this.options.returnValue) ? this.options.returnValue(aData) : aData[0];
-			var label = lang.isFunction(this.options.returnLabel) ? this.options.returnLabel(aData) : value;
+		setValue : function(value, sendUpdatedEvt) {
+			this.log("setValue :" + value);
 			this.hiddenEl.value = value || "";
-			this.el.value = label || "";
 			// set corresponding style
 			this.setClassFromState();
 
@@ -65,6 +62,7 @@ if (console == undefined) {
 				this.fireUpdatedEvt();
 			}
 		},
+
 		/**
 		 * itemSelect handler
 		 * 
@@ -76,8 +74,17 @@ if (console == undefined) {
 		itemSelectHandler : function(sType, aArgs) {
 			this.log("itemSelectHandler :" + sType + " " + aArgs[2]);
 			var aData = aArgs[2];
-			this.setValue(aData);
+			this.setValueAndLabel(aData);
 		},
+
+		setValueAndLabel : function(aData) {
+			var value = lang.isFunction(this.options.returnValue) ? this.options.returnValue(aData) : aData[0];
+			var label = lang.isFunction(this.options.returnLabel) ? this.options.returnLabel(aData) : value;
+
+			this.el.value = label || "";
+			this.setValue(value);
+		},
+
 		/**
 		 * onChange event handler
 		 * 
@@ -92,12 +99,12 @@ if (console == undefined) {
 		onBlur : function(e) {
 			this.log("onBlur " + e);
 			if (this.hiddenEl.value != this.el.value && this.el.value != this.options.typeInvite)
-//				this.el.value = this.hiddenEl.value;
-			if (this.el.value == '' && this.options.typeInvite) {
-				Dom.addClass(this.divEl, "inputEx-typeInvite");
-				if (this.el.value == '')
-					this.el.value = this.options.typeInvite;
-			}
+				// this.el.value = this.hiddenEl.value;
+				if (this.el.value == '' && this.options.typeInvite) {
+					Dom.addClass(this.divEl, "inputEx-typeInvite");
+					if (this.el.value == '')
+						this.el.value = this.options.typeInvite;
+				}
 		}
 	});
 
