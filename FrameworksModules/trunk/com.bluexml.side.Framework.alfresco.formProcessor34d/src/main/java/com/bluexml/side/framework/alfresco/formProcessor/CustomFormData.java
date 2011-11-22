@@ -1,15 +1,18 @@
 package com.bluexml.side.framework.alfresco.formProcessor;
 
 import org.alfresco.repo.forms.FormData;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.springframework.extensions.webscripts.servlet.FormData.FormField;
 
 public class CustomFormData extends FormData {
+	private static Log logger = LogFactory.getLog(CustomFormData.class);
 
 	@Override
 	public void addFieldData(FormField field) {
 		FieldData fieldData = new FieldData(field);
-        this.data.put(fieldData.getName(), fieldData);
+		this.data.put(fieldData.getName(), fieldData);
 	}
 
 	class FieldData extends org.alfresco.repo.forms.FormData.FieldData {
@@ -25,8 +28,9 @@ public class CustomFormData extends FormData {
 			super(field);
 
 			if (isFile) {
+				logger.debug("isFile");
 				mimetype = field.getMimetype();
-				is = field.getInputStream();
+				logger.debug("mineType :" + this.mimetype);
 			}
 		}
 

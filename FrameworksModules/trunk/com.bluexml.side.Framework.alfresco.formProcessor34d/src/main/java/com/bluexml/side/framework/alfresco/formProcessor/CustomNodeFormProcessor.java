@@ -40,17 +40,21 @@ public class CustomNodeFormProcessor extends NodeFormProcessor {
 					InputStream inputStream = cfd.getInputStream();
 
 					ContentWriter writer = this.contentService.getWriter(nodeRef, ContentModel.PROP_CONTENT, true);
-					writer.setMimetype(cfd.getMimetype());
-
+					String mimetype = cfd.getMimetype();
+					
+					logger.debug("write content in :" + nodeRef);
+					logger.debug("mimeType :" + mimetype);
+					logger.debug("encoding :" + writer.getEncoding());
+					
+					writer.setMimetype(mimetype);
 					writer.putContent(inputStream);
 					try {
 						inputStream.close();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						logger.error("trying to close inputStream fail", e);
 					}
 				} else {
-					// multi file upload not implemented
+					// TODO multi file upload not implemented yet
 				}
 				fileFieldCount++;
 			}
