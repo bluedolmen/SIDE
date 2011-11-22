@@ -92,22 +92,28 @@ if (!Array.prototype.indexOf) {
 
 				// compute query to remove from result selected items
 				var gen_req = function(sQuery) {
-					var notClause = "&advancedQuery=NOT ( ";
+					var notClause = "";
+
 					var values = null;
 					if (me.options.multipleSelectMode) {
 						values = me.getValue();
 					} else {
 						values = [ me.getValue() ];
 					}
-					for ( var x = 0; x < values.length; x++) {
-						var val = values[x];
-						notClause += "sys:node-uuid=" + val.substring("workspace://SpacesStore/".length);
 
-						if (x != values.length - 1) {
-							notClause += " OR ";
+					if (values.length > 0) {
+						notClause = "&advancedQuery=NOT ( ";
+						for ( var x = 0; x < values.length; x++) {
+							var val = values[x];
+							notClause += "sys:node-uuid=" + val.substring("workspace://SpacesStore/".length);
+
+							if (x != values.length - 1) {
+								notClause += " OR ";
+							}
 						}
+						notClause += " )";
 					}
-					notClause += " )";
+
 					me.log("sQuery :" + sQuery);
 					me.log(" notClause :" + notClause);
 					return notClause + "&searchTerm=" + sQuery;
@@ -176,7 +182,8 @@ if (!Array.prototype.indexOf) {
 				return mymultiautocomplete;
 			} else {
 				// cardinality n-1
-				// tell to myDataSource.generateRequest to use searchTerm as query parameter to filter
+				// tell to myDataSource.generateRequest to use searchTerm as
+				// query parameter to filter
 				myDataSource.scriptQueryParam = "&searchTerm";
 
 				var myautocomplete = inputEx({
