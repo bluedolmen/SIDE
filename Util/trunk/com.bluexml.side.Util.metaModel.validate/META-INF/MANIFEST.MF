@@ -11,6 +11,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ocl.ecore,
  com.bluexml.side.Util.ecore,
  com.bluexml.side.Util.model.merge
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.util.metaModel.validate;uses:="org.osgi.framework,org.eclipse.ui.plugin",
  com.bluexml.side.util.metaModel.validate.OCLextension;uses:="org.eclipse.ocl.ecore,org.eclipse.ocl,org.eclipse.emf.ecore"
