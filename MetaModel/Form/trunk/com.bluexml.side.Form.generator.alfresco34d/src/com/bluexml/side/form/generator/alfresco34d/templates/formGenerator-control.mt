@@ -245,7 +245,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 
 <%}%>
 
-<%script type="ModelChoiceField" name="getPickerControlParams"%>
+<%script type="FormElement" name="getPickerControlParams"%>
 <%getXtensionAsControlParam("compactMode")%>
 <%getXtensionAsControlParam("forceEditable")%>
 <%getXtensionAsControlParam("startLocation")%>
