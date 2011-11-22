@@ -1,5 +1,6 @@
 package com.bluexml.side.util.metaModel.validate.OCLextension;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -19,9 +20,15 @@ public class OCLEvaluator {
 		OCLExpression queryOCLExpression = helper.createQuery(body);
 
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(queryOCLExpression);
+		Collection<T> result = null;
+		Object evaluate = query.evaluate(context);
+		if (evaluate instanceof Collection<?>) {
+			result = (Collection<T>) evaluate;
+		} else {
+			result = new ArrayList<T>();
+			result.add((T) evaluate);
+		}
 
-		@SuppressWarnings("unchecked")
-		Collection<T> result = (Collection<T>) query.evaluate(context);
 		return new BasicEList.UnmodifiableEList<T>(result.size(), result.toArray());
 	}
 }
