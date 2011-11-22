@@ -43,7 +43,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FieldElement" abstract="true" eSuperTypes="#//Stylable ../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
+      <details key="noSpecialCharacters" value="self.name.regexMatch('[\\w]*') = true"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="noSpecialCharacters"/>

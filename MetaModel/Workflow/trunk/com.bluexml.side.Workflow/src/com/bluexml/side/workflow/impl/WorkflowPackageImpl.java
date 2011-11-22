@@ -1314,7 +1314,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   new String[] {
 			 "ActorNameMustBeUnique", "self.getContainer().oclAsType(Process).swimlane -> select(n|n.name = self.name and n <> self )->size()=0",
 			 "MustManageAtLeastOneTask", "(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))",
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w]*\') = true",
 			 "ActoridOrPooledactor", "not((self.pooledactors  -> isEmpty() or self.pooledactors =\'\') and\n(self.actorid -> isEmpty() or self.actorid=\'\'))"
 		   });				
 		addAnnotation
@@ -1354,14 +1354,14 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   new String[] {
 			 "NoTransitionWithSameName", "Transition.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
 			 "SourceAndTargetMustBeSet", "not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()",
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w]*\') = true",
 			 "titleMustNotBeNull", "if (self.getContainer().oclIsKindOf(UserTask)) then\n\tif (self.title = null or self.title.size() = 0) then\n\t\tfalse\n\telse\n\t\ttrue\n\tendif\nelse \n\ttrue\nendif"
 		   });														
 		addAnnotation
 		  (stateEClass, 
 		   source, 
 		   new String[] {
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w]*\') = true",
 			 "NoStateWithSameName", "State.allInstances()->select(s | s.getContainer() = self.getContainer())-> select(n|n.name = self.name and n <> self )->size()=0",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'"
 		   });			

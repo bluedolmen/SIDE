@@ -35,7 +35,7 @@ import com.bluexml.side.common.ModelElement;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getTransition()
- * @model annotation="http://www.bluexml.com/OCL NoTransitionWithSameName='Transition.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0' SourceAndTargetMustBeSet='not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true' titleMustNotBeNull='if (self.getContainer().oclIsKindOf(UserTask)) then\n\tif (self.title = null or self.title.size() = 0) then\n\t\tfalse\n\telse\n\t\ttrue\n\tendif\nelse \n\ttrue\nendif'"
+ * @model annotation="http://www.bluexml.com/OCL NoTransitionWithSameName='Transition.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0' SourceAndTargetMustBeSet='not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()' noSpecialCharacters='self.name.regexMatch(\'[\\\\w]*\') = true' titleMustNotBeNull='if (self.getContainer().oclIsKindOf(UserTask)) then\n\tif (self.title = null or self.title.size() = 0) then\n\t\tfalse\n\telse\n\t\ttrue\n\tendif\nelse \n\ttrue\nendif'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters titleMustNotBeNull'"
  * @generated
  */

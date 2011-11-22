@@ -293,9 +293,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateViewCollection(ViewCollection viewCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(viewCollection, diagnostics, context);
+		boolean result = validate_NoCircularContainment(viewCollection, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(viewCollection, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(viewCollection, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(viewCollection, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(viewCollection, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(viewCollection, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(viewCollection, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(viewCollection, diagnostics, context);
@@ -349,9 +351,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFieldContainer(FieldContainer fieldContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(fieldContainer, diagnostics, context);
+		boolean result = validate_NoCircularContainment(fieldContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(fieldContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(fieldContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(fieldContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(fieldContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(fieldContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(fieldContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fieldContainer, diagnostics, context);
@@ -366,9 +370,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFieldElement(FieldElement fieldElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(fieldElement, diagnostics, context);
+		boolean result = validate_NoCircularContainment(fieldElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(fieldElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(fieldElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(fieldElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(fieldElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(fieldElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(fieldElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fieldElement, diagnostics, context);
@@ -422,9 +428,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAbstractView(AbstractView abstractView, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(abstractView, diagnostics, context);
+		boolean result = validate_NoCircularContainment(abstractView, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(abstractView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(abstractView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(abstractView, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(abstractView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(abstractView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(abstractView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractView, diagnostics, context);
@@ -479,9 +487,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAbstractDataTable(AbstractDataTable abstractDataTable, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(abstractDataTable, diagnostics, context);
+		boolean result = validate_NoCircularContainment(abstractDataTable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(abstractDataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(abstractDataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(abstractDataTable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(abstractDataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(abstractDataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(abstractDataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractDataTable, diagnostics, context);
@@ -497,9 +507,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCol(Col col, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(col, diagnostics, context);
+		boolean result = validate_NoCircularContainment(col, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(col, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(col, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(col, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(col, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(col, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(col, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(col, diagnostics, context);
@@ -559,9 +571,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDataList(DataList dataList, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(dataList, diagnostics, context);
+		boolean result = validate_NoCircularContainment(dataList, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(dataList, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(dataList, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(dataList, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(dataList, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(dataList, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(dataList, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dataList, diagnostics, context);
@@ -577,9 +591,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDataTable(DataTable dataTable, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(dataTable, diagnostics, context);
+		boolean result = validate_NoCircularContainment(dataTable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(dataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(dataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(dataTable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(dataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(dataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(dataTable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dataTable, diagnostics, context);
@@ -595,9 +611,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFacetMap(FacetMap facetMap, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(facetMap, diagnostics, context);
+		boolean result = validate_NoCircularContainment(facetMap, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(facetMap, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(facetMap, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(facetMap, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(facetMap, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(facetMap, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(facetMap, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(facetMap, diagnostics, context);
@@ -613,9 +631,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTree(Tree tree, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(tree, diagnostics, context);
+		boolean result = validate_NoCircularContainment(tree, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(tree, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(tree, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(tree, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(tree, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(tree, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(tree, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(tree, diagnostics, context);
@@ -631,9 +651,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateComposedView(ComposedView composedView, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(composedView, diagnostics, context);
+		boolean result = validate_NoCircularContainment(composedView, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(composedView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(composedView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(composedView, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(composedView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(composedView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(composedView, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(composedView, diagnostics, context);
@@ -649,9 +671,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateField(Field field, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(field, diagnostics, context);
+		boolean result = validate_NoCircularContainment(field, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(field, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(field, diagnostics, context);
@@ -706,9 +730,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTextField(TextField textField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(textField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(textField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(textField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(textField, diagnostics, context);
@@ -724,9 +750,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePasswordField(PasswordField passwordField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(passwordField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(passwordField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(passwordField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(passwordField, diagnostics, context);
@@ -742,9 +770,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateBooleanField(BooleanField booleanField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(booleanField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(booleanField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(booleanField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(booleanField, diagnostics, context);
@@ -760,9 +790,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFloatField(FloatField floatField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(floatField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(floatField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(floatField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(floatField, diagnostics, context);
@@ -778,9 +810,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateActionField(ActionField actionField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(actionField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(actionField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(actionField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(actionField, diagnostics, context);
@@ -796,9 +830,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDateField(DateField dateField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(dateField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(dateField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(dateField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateField, diagnostics, context);
@@ -814,9 +850,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTimeField(TimeField timeField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(timeField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(timeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(timeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(timeField, diagnostics, context);
@@ -832,9 +870,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDateTimeField(DateTimeField dateTimeField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(dateTimeField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(dateTimeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(dateTimeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateTimeField, diagnostics, context);
@@ -850,9 +890,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePhoneNumberField(PhoneNumberField phoneNumberField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(phoneNumberField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(phoneNumberField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(phoneNumberField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(phoneNumberField, diagnostics, context);
@@ -868,9 +910,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEmailField(EmailField emailField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(emailField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(emailField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(emailField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(emailField, diagnostics, context);
@@ -886,9 +930,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateIntegerField(IntegerField integerField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(integerField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(integerField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(integerField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(integerField, diagnostics, context);
@@ -904,9 +950,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFileField(FileField fileField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(fileField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(fileField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(fileField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fileField, diagnostics, context);
@@ -922,9 +970,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateSelectField(SelectField selectField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(selectField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(selectField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(selectField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(selectField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(selectField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(selectField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(selectField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(selectField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(selectField, diagnostics, context);
@@ -940,9 +990,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateHtmlField(HtmlField htmlField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(htmlField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(htmlField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(htmlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(htmlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(htmlField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(htmlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(htmlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(htmlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(htmlField, diagnostics, context);
@@ -958,9 +1010,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateURLField(URLField urlField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(urlField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(urlField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(urlField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(urlField, diagnostics, context);
@@ -976,9 +1030,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateImageField(ImageField imageField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(imageField, diagnostics, context);
+		boolean result = validate_NoCircularContainment(imageField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(imageField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(imageField, diagnostics, context);
@@ -1048,9 +1104,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFieldGroup(FieldGroup fieldGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(fieldGroup, diagnostics, context);
+		boolean result = validate_NoCircularContainment(fieldGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(fieldGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(fieldGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(fieldGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(fieldGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(fieldGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(fieldGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fieldGroup, diagnostics, context);
@@ -1065,9 +1123,11 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAbstractViewOf(AbstractViewOf abstractViewOf, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(abstractViewOf, diagnostics, context);
+		boolean result = validate_NoCircularContainment(abstractViewOf, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(abstractViewOf, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(abstractViewOf, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(abstractViewOf, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(abstractViewOf, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(abstractViewOf, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(abstractViewOf, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractViewOf, diagnostics, context);

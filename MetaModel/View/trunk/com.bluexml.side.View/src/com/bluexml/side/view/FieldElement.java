@@ -28,7 +28,7 @@ import com.bluexml.side.common.NamedModelElement;
  *
  * @see com.bluexml.side.view.ViewPackage#getFieldElement()
  * @model abstract="true"
- *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true'"
+ *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.name.regexMatch(\'[\\\\w]*\') = true'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='noSpecialCharacters'"
  * @generated
  */
