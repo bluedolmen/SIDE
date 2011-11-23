@@ -1,115 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-<plugin
->
-   <extension
-         id="product"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="org.eclipse.ui.ide.workbench"
-            name="SIDE Enterprise">
-         <property
-               name="windowImages"
-               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
-         </property>
-         <property
-               name="aboutText"
-               value="SIDE by http://www.bluexml.com">
-         </property>
-         <property
-               name="aboutImage"
-               value="icons/about.gif">
-         </property>
-         <property
-               name="startupForegroundColor"
-               value="FFFFFF">
-         </property>
-         <property
-               name="startupProgressRect"
-               value="5,275,445,15">
-         </property>
-         <property
-               name="startupMessageRect"
-               value="11,252,445,20">
-         </property>
-         <property
-               name="appName"
-               value="SIDE Enterprise">
-         </property>
-         <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
-         </property>
-      </product>
-   </extension>
-   
-   
-   
-      <extension
-         id="perspective"
-         name="SIDE Perpective"
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            class="com.bluexml.side.Integration.eclipse.branding.enterprise.Perspective"
-            icon="icons/perspective_icon.png"
-            id="com.bluexml.side.Integration.eclipse.branding.enterprise.perspective"
-            name="SIDE Modeling">
-      </perspective>
-   </extension>
-      <extension
-            point="org.eclipse.ui.popupMenus">
-         <objectContribution
-               adaptable="true"
-               id="com.bluexml.side.Integration.eclipse.builder.contribution1"
-               nameFilter="*"
-               objectClass="org.eclipse.core.resources.IProject">
-            <action
-                  class="com.bluexml.side.Integration.eclipse.branding.enterprise.actions.NewAlfrescoModuleAction"
-                  enablesFor="+"
-                  id="com.bluexml.side.Integration.eclipse.branding.enterprise.newAlfrescoModule"
-                  label="Create new Alfresco Module Project"
-                  menubarPath="com.bluexml.side/project">
-            </action>
-         </objectContribution>
-      </extension>
-      <extension
-            point="com.bluexml.side.Util.dependencies.com_bluexml_side_framework_module_repository">
-         <repository
-               activator="com.bluexml.side.Integration.eclipse.branding.enterprise.Activator"
-               pluginId="com.bluexml.side.Integration.eclipse.branding.enterprise"
-               repositoryName="com.bluexml.side.Integration.eclipse.branding.enterprise.repository"
-               repositoryPath="/com/bluexml/side/Integration/eclipse/branding/enterprise/repository/m2repositoryForSIDE.zip">
-         </repository>
-      </extension>
-      <extension
-            point="com.bluexml.side.Application.com_bluexml_application_configuration">
-         <moduleDependence
-               moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide"
-               moduleType="jar"
-               technologyVersion="internal"
-               versionMax="1.0.0"
-               versionMin="1.0.0">
-         </moduleDependence>
-         <moduleDependence
-               moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide"
-               moduleType="jar"
-               technologyVersion="internal"
-               versionMax="1.0.0"
-               versionMin="1.0.0">
-         </moduleDependence>
-         <moduleDependence
-               moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_34dCE"
-               moduleType="jar"
-               technologyVersion="internal"
-               versionMax="1.0.0"
-               versionMin="1.0.0">
-         </moduleDependence>
-         <moduleDependence
-               moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_34dCE"
-               moduleType="jar"
-               technologyVersion="internal"
-               versionMax="1.0.0"
-               versionMin="1.0.0">
-         </moduleDependence>
-      </extension>
+<plugin>
+  <extension id="product" point="org.eclipse.core.runtime.products">
+    <product application="org.eclipse.ui.ide.workbench" name="SIDE Enterprise">
+      <property name="windowImages" value="icons/alt_window_16.gif,icons/alt_window_32.gif" />
+      <property name="aboutText" value="SIDE by http://www.bluexml.com" />
+      <property name="aboutImage" value="icons/about.gif" />
+      <property name="startupForegroundColor" value="FFFFFF" />
+      <property name="startupProgressRect" value="5,275,445,15" />
+      <property name="startupMessageRect" value="11,252,445,20" />
+      <property name="appName" value="SIDE Enterprise" />
+      <property name="preferenceCustomization" value="plugin_customization.ini" />
+    </product>
+  </extension>
+  <extension id="perspective" name="SIDE Perpective" point="org.eclipse.ui.perspectives">
+    <perspective class="com.bluexml.side.Integration.eclipse.branding.enterprise.Perspective" icon="icons/perspective_icon.png" id="com.bluexml.side.Integration.eclipse.branding.enterprise.perspective" name="SIDE Modeling" />
+  </extension>
+  <extension point="org.eclipse.ui.popupMenus">
+    <objectContribution adaptable="true" id="com.bluexml.side.Integration.eclipse.builder.contribution1" nameFilter="*" objectClass="org.eclipse.core.resources.IProject">
+      <action class="com.bluexml.side.Integration.eclipse.branding.enterprise.actions.NewAlfrescoModuleAction" enablesFor="+" id="com.bluexml.side.Integration.eclipse.branding.enterprise.newAlfrescoModule" label="Create new Alfresco Module Project" menubarPath="com.bluexml.side/project" />
+    </objectContribution>
+  </extension>
+  <extension point="com.bluexml.side.Util.dependencies.com_bluexml_side_framework_module_repository">
+    <repository activator="com.bluexml.side.Integration.eclipse.branding.enterprise.Activator" pluginId="com.bluexml.side.Integration.eclipse.branding.enterprise" repositoryName="com.bluexml.side.Integration.eclipse.branding.enterprise.repository" repositoryPath="/com/bluexml/side/Integration/eclipse/branding/enterprise/repository/m2repositoryForSIDE.zip" />
+  </extension>
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <moduleDependence moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.12" versionMin="1.0.12" />
+    <moduleDependence moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.13" versionMin="1.0.13" />
+    <moduleDependence moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.4" versionMin="1.0.4" />
+    <moduleDependence moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.4" versionMin="1.0.4" />
+  </extension>
 </plugin>
+
