@@ -227,7 +227,7 @@ public class Builder {
 
 		List<File> repos = new ArrayList<File>();
 		repos.add(sources);
-		DependencyTree dtree = new DependencyTree(product, repos, properties);
+		DependencyTree dtree = new DependencyTree(product, repos, properties, "hudson");
 		ComponantsRegisters componantsRegisters = dtree.getComponantsRegisters();
 		Map<String, Module> modulesRegister = componantsRegisters.getModulesRegister();
 		Collection<Module> values = modulesRegister.values();
