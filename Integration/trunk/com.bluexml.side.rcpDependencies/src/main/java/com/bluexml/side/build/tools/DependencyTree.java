@@ -32,16 +32,18 @@ import edu.uci.ics.jung.graph.Graph;
 public class DependencyTree {
 	static Logger logger = Logger.getLogger(DependencyTree.class);
 	File product;
-	File propertiesFile;
+	File propertiesFileProjectsLocations;
+	Properties graphCollectorConfiguration;
 	List<File> repo;
 	private String profile = "";
 	ComponantsRegisters compReg;
 
-	public DependencyTree(File productFile, List<File> repo, File propertiesFile, String profile) {
+	public DependencyTree(File productFile, List<File> repo, File propertiesFile, String profile) throws Exception {
 		this.product = productFile;
 		this.repo = repo;
-		this.propertiesFile = propertiesFile;
+		this.propertiesFileProjectsLocations = propertiesFile;
 		this.profile = profile;
+		this.graphCollectorConfiguration = getProperties(profile);
 	}
 
 	public static void main(String[] args) {
@@ -93,9 +95,9 @@ public class DependencyTree {
 				if (lastPAramFile.isDirectory()) {
 					lastPAramFile = null;
 				}
-
-				DependencyTree dt = new DependencyTree(productFile, repos, lastPAramFile, profile);
 				try {
+					DependencyTree dt = new DependencyTree(productFile, repos, lastPAramFile, profile);
+
 					dt.doIt();
 
 				} catch (Exception e) {
@@ -134,14 +136,12 @@ public class DependencyTree {
 		// create component registers
 		logger.debug("product :" + product);
 		logger.debug("source repository :" + repo);
-		logger.debug("Properties File :" + propertiesFile);
+		logger.debug("Properties File :" + propertiesFileProjectsLocations);
 		logger.debug("profile :" + profile);
 
 		validateConfigurationFile();
 
-		Properties properties = getProperties(profile);
-
-		compReg = getComponantsRegisters(properties);
+		compReg = getComponantsRegisters();
 		// print out
 		compReg.print();
 		// get tree
@@ -159,7 +159,7 @@ public class DependencyTree {
 		Graph<Componant, String> g = JungConverter.convert(tree);
 		JungConverter.saveGraph(g, new File("graph.xml"));
 
-		filterGraphAndSave(properties, g, "graph-filtered");
+		filterGraphAndSave(graphCollectorConfiguration, g, "graph-filtered");
 
 		validate(g);
 
@@ -304,9 +304,13 @@ public class DependencyTree {
 		}
 	}
 
-	public ComponantsRegisters getComponantsRegisters(Properties props) throws Exception {
+	public ComponantsRegisters getComponantsRegisters() throws Exception {
+		if (this.compReg != null) {
+			return this.compReg;
+		}
+		
 		// create ProductReader
-		ProductReader pr = new ProductReader(product, new ComponantsRegisters(repo, propertiesFile), props);
+		ProductReader pr = new ProductReader(product, new ComponantsRegisters(repo, propertiesFileProjectsLocations), this.graphCollectorConfiguration);
 		// read product and all associated resources
 		pr.read();
 		ComponantsRegisters compReg = pr.getRegistries();
@@ -314,10 +318,10 @@ public class DependencyTree {
 	}
 
 	public void validateConfigurationFile() throws Exception {
-		HashMap<String, String> initMap = Utils.initMap(propertiesFile);
+		HashMap<String, String> initMap = Utils.initMap(propertiesFileProjectsLocations);
 		Set<String> keySet = initMap.keySet();
 		for (String string : keySet) {
-			File searchProjectForlerFromConf = Utils.searchProjectForlerFromConf(string, repo, propertiesFile);
+			File searchProjectForlerFromConf = Utils.searchProjectForlderFromConf(string, repo, propertiesFileProjectsLocations);
 			if (searchProjectForlerFromConf == null || !searchProjectForlerFromConf.exists()) {
 				String message = initMap.get(string) + "&" + string;
 				logger.warn("invalide entry in properties file :" + message);

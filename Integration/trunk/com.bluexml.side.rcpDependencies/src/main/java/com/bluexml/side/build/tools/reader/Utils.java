@@ -88,7 +88,7 @@ public class Utils {
 		return componants;
 	}
 
-	public static File searchProjectForlerFromConf(String id, List<File> repos, File props) throws Exception {
+	public static File searchProjectForlderFromConf(String id, List<File> repos, File props) throws Exception {
 		File project = null;
 		if (props != null && props.exists()) {
 			HashMap<String, String> componants = initMap(props);
