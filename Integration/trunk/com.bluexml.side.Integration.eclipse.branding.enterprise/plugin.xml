@@ -81,4 +81,35 @@
                repositoryPath="/com/bluexml/side/Integration/eclipse/branding/enterprise/repository/m2repositoryForSIDE.zip">
          </repository>
       </extension>
+      <extension
+            point="com.bluexml.side.Application.com_bluexml_application_configuration">
+         <moduleDependence
+               moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide"
+               moduleType="jar"
+               technologyVersion="internal"
+               versionMax="1.0.0"
+               versionMin="1.0.0">
+         </moduleDependence>
+         <moduleDependence
+               moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide"
+               moduleType="jar"
+               technologyVersion="internal"
+               versionMax="1.0.0"
+               versionMin="1.0.0">
+         </moduleDependence>
+         <moduleDependence
+               moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_34dCE"
+               moduleType="jar"
+               technologyVersion="internal"
+               versionMax="1.0.0"
+               versionMin="1.0.0">
+         </moduleDependence>
+         <moduleDependence
+               moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_34dCE"
+               moduleType="jar"
+               technologyVersion="internal"
+               versionMax="1.0.0"
+               versionMin="1.0.0">
+         </moduleDependence>
+      </extension>
 </plugin>

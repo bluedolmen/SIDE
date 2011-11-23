@@ -6,6 +6,8 @@ import java.util.List;
 public class Anomaly {
 
 	List<String> notTree = new ArrayList<String>();
+	
+	List<String> missingPluginsInFeatures = new ArrayList<String>();
 
 	List<String> invalideCheckRef = new ArrayList<String>();
 	
@@ -29,6 +31,8 @@ public class Anomaly {
 		this.invalideEntryInConf.add(notTree);
 	}
 	
-	
+	public void addMissingPluginsInFeatures(String notTree) {
+		this.missingPluginsInFeatures.add(notTree);
+	}
 	
 }

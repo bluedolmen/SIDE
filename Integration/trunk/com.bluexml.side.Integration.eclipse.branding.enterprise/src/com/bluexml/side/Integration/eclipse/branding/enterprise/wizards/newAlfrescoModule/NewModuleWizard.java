@@ -39,7 +39,7 @@ public class NewModuleWizard extends Wizard implements IWorkbenchWizard {
 		HashMap<String, String> archetype_amp = new HashMap<String, String>();
 		archetype_amp.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
 		archetype_amp.put("archetypeArtifactId", "ampArchetypeForSide");
-		archetype_amp.put("archetypeVersion", "1.0.5");
+		archetype_amp.put("archetypeVersion", "1.0.12");
 		archetype_amp.put("interactive", "false");
 		// archetype_amp.put("archetypeRepository", ARCHETYPE_REPO);
 		archetypes.put(ModuleType.AMP_32R2CE.label, archetype_amp);
@@ -47,7 +47,7 @@ public class NewModuleWizard extends Wizard implements IWorkbenchWizard {
 		HashMap<String, String> archetype_share = new HashMap<String, String>();
 		archetype_share.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
 		archetype_share.put("archetypeArtifactId", "warPatchArchetypeForSide");
-		archetype_share.put("archetypeVersion", "1.0.5");
+		archetype_share.put("archetypeVersion", "1.0.13");
 		archetype_share.put("webapp-name", "share");
 		archetype_share.put("interactive", "false");
 		// archetype_share.put("archetypeRepository", ARCHETYPE_REPO);		
@@ -57,7 +57,7 @@ public class NewModuleWizard extends Wizard implements IWorkbenchWizard {
 		HashMap<String, String> archetype_amp_34dCE = new HashMap<String, String>();
 		archetype_amp_34dCE.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
 		archetype_amp_34dCE.put("archetypeArtifactId", "ampArchetypeForSide_34dCE");
-		archetype_amp_34dCE.put("archetypeVersion", "1.0.0");
+		archetype_amp_34dCE.put("archetypeVersion", "1.0.4");
 		archetype_amp_34dCE.put("interactive", "false");
 		// archetype_amp.put("archetypeRepository", ARCHETYPE_REPO);
 		archetypes.put(ModuleType.AMP_34dCE.label, archetype_amp_34dCE);
@@ -65,7 +65,7 @@ public class NewModuleWizard extends Wizard implements IWorkbenchWizard {
 		HashMap<String, String> archetype_share_34dCE = new HashMap<String, String>();
 		archetype_share_34dCE.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
 		archetype_share_34dCE.put("archetypeArtifactId", "warPatchArchetypeForSide_34dCE");
-		archetype_share_34dCE.put("archetypeVersion", "1.0.0");
+		archetype_share_34dCE.put("archetypeVersion", "1.0.4");
 		archetype_share_34dCE.put("webapp-name", "share");
 		archetype_share_34dCE.put("interactive", "false");
 		// archetype_share.put("archetypeRepository", ARCHETYPE_REPO);		

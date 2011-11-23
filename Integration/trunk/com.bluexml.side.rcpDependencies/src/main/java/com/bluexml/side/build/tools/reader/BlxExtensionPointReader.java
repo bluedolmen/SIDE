@@ -12,7 +12,6 @@ import org.jdom.xpath.XPath;
 
 import com.bluexml.side.build.tools.componants.Configuration;
 import com.bluexml.side.build.tools.componants.Constraint;
-import com.bluexml.side.build.tools.componants.Extension;
 import com.bluexml.side.build.tools.componants.Generator;
 import com.bluexml.side.build.tools.componants.MetaModel;
 import com.bluexml.side.build.tools.componants.Module;
@@ -32,8 +31,8 @@ public class BlxExtensionPointReader extends Reader {
 		addAll = getBooleanPropertyValueFor("addAll", addAll);
 	}
 
-	public List<Extension> read(File filePluginXML, String bundle) throws Exception {
-		List<Extension> lext = new ArrayList<Extension>();
+	public List<Configuration> read(File filePluginXML, String bundle) throws Exception {
+		List<Configuration> lext = new ArrayList<Configuration>();
 		// get XML doc
 		Document pluginXML = Utils.buildJdomDocument(filePluginXML);
 
@@ -46,6 +45,14 @@ public class BlxExtensionPointReader extends Reader {
 			if (extXML.getAttributeValue("point").equals("com.bluexml.side.Application.com_bluexml_application_configuration")) {
 				// SIDE Ext
 				logger.debug("Extension found, extracting data");
+				
+				// some maven module can be declared on plugins directly (archetype for exemples)
+				Configuration conf = new Configuration();				
+				readModuleConstraints(extXML, conf);
+				if (conf.getModules().size() >0) {
+					lext.add(conf);
+				}
+								
 				List<?> lmm = extXML.getChildren("metamodel");
 				for (Object object2 : lmm) {
 					Element metaE = (Element) object2;
@@ -102,7 +109,7 @@ public class BlxExtensionPointReader extends Reader {
 								logger.debug("Generator : " + gene.getId());
 
 								// configuration
-								getConf(geneE, gene);
+								readModuleConstraints(geneE, gene);
 
 								List<?> lop = geneE.getChildren("option");
 								for (Object object6 : lop) {
@@ -124,7 +131,7 @@ public class BlxExtensionPointReader extends Reader {
 									}
 
 									// configuration
-									getConf(optionE, op);
+									readModuleConstraints(optionE, op);
 
 									logger.debug("Option :" + op.getFullKey());
 
@@ -146,7 +153,7 @@ public class BlxExtensionPointReader extends Reader {
 		return lext;
 	}
 
-	private Configuration getConf(Element context, Configuration conf) throws Exception {
+	private Configuration readModuleConstraints(Element context, Configuration conf) throws Exception {
 		logger.debug("START");
 		// get constraints
 		try {

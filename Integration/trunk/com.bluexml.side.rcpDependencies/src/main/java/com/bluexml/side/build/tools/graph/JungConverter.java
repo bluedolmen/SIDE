@@ -120,6 +120,8 @@ public class JungConverter {
 		logger.info("graph :" + g);
 		logger.info("Edges :" + g.getEdgeCount());
 		logger.info("Vertex :" + g.getVertexCount());
+		logger.info("getVertices :" + g.getVertices().toArray()[0].getClass());
+		logger.info("getEdges :" + g.getEdges().toArray()[0].getClass());
 	}
 
 	public static Graph<Componant, String> convert(File graphml) throws ParserConfigurationException, SAXException, IOException {
@@ -133,6 +135,7 @@ public class JungConverter {
 	}
 
 	public static void saveGraph(Graph<Componant, String> g, File file) throws IOException {
+		logger.debug("Save Graph");
 		GraphMLWriter<Componant, String> gw = new GraphMLWriter<Componant, String>();
 		gw.setEdgeIDs(new Transformer<String, String>() {
 

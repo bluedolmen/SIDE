@@ -3,6 +3,7 @@ package com.bluexml.side.build.tools;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -106,7 +107,7 @@ public class DependencyTree {
 
 	}
 
-	protected Properties getProperties(String type) throws Exception {
+	protected static Properties getProperties(String type) throws Exception {
 		String configurationFileName = "config.properties";
 		if (type != null && !type.equals("")) {
 			configurationFileName = "config-" + type + ".properties";
@@ -117,9 +118,7 @@ public class DependencyTree {
 			res = new FileInputStream(confFile);
 		} else {
 			// try to get resource from classPath
-
-			res = this.getClass().getResourceAsStream("/" + configurationFileName);
-
+			res = DependencyTree.class.getResourceAsStream("/" + configurationFileName);
 		}
 		Properties p = new Properties();
 		if (res != null) {
@@ -140,7 +139,9 @@ public class DependencyTree {
 
 		validateConfigurationFile();
 
-		compReg = getComponantsRegisters();
+		Properties properties = getProperties(profile);
+
+		compReg = getComponantsRegisters(properties);
 		// print out
 		compReg.print();
 		// get tree
@@ -156,25 +157,9 @@ public class DependencyTree {
 
 		// jung rendering and save as graphml
 		Graph<Componant, String> g = JungConverter.convert(tree);
-
-		GraphFilter gf = new GraphFilter(g);
-
-		Graph<Componant, String> filtered = g;
-
-		String property = getProperties(profile).getProperty("render.jung.filter", "");
-		if (!property.equals("")) {
-			filtered = gf.getFilteredVertex(property, true, false);
-		}
-
 		JungConverter.saveGraph(g, new File("graph.xml"));
-		JungConverter.saveGraph(filtered, new File("graph-filtered.xml"));
 
-		// save filtered graph as dot file
-		FileWriter filteredDot = new FileWriter(new File("graph-filtered.dot"));
-		Map<Componant, Set<Componant>> convertJungGraphToDot = DotRenderer.convertJungGraphToDot(filtered);
-		new DotRenderer(filteredDot, convertJungGraphToDot).render();
-		filteredDot.flush();
-		filteredDot.close();
+		filterGraphAndSave(properties, g, "graph-filtered");
 
 		validate(g);
 
@@ -204,6 +189,47 @@ public class DependencyTree {
 		for (String string : list4) {
 			logger.warn(string);
 		}
+
+		logger.warn("Missing required plugin in features");
+		List<String> list5 = compReg.getAnomaly().missingPluginsInFeatures;
+		for (String string : list5) {
+			logger.warn(string);
+		}
+	}
+
+	public static void filterGraphAndSave(Properties properties, Graph<Componant, String> g, String outputFileName) throws IOException, Exception {
+		Graph<Componant, String> filtered = filterGraph(properties, g);
+
+		JungConverter.saveGraph(filtered, new File(outputFileName + ".xml"));
+
+		// save filtered graph as dot file
+		FileWriter filteredDot = new FileWriter(new File(outputFileName + ".dot"));
+		Map<Componant, Set<Componant>> convertJungGraphToDot = DotRenderer.convertJungGraphToDot(filtered);
+		new DotRenderer(filteredDot, convertJungGraphToDot).render();
+		filteredDot.flush();
+		filteredDot.close();
+	}
+
+	public static Graph<Componant, String> filterGraph(Properties properties, Graph<Componant, String> g) {
+		String edgesfilter = getEdgesFilters(properties);
+		String vertexNameFilter = getVertexFilters(properties);
+		String vertexTypeFilter = getVertexTypeFilters(properties);
+		GraphFilter gf = new GraphFilter(g, edgesfilter, vertexNameFilter, vertexTypeFilter, true, false);
+
+		Graph<Componant, String> filtered = gf.filter();
+		return filtered;
+	}
+
+	public static String getVertexFilters(Properties properties) {
+		return properties.getProperty("render.jung.filter", "");
+	}
+
+	public static String getVertexTypeFilters(Properties properties) {
+		return properties.getProperty("render.jung.filter.vertexType", "");
+	}
+
+	public static String getEdgesFilters(Properties properties) {
+		return properties.getProperty("render.jung.filter.edgesType", "");
 	}
 
 	/**
@@ -218,7 +244,7 @@ public class DependencyTree {
 	public void validate(Graph<Componant, String> g) {
 		// search if the graph is a tree (only one parent per vertex)
 		Collection<Componant> vertices = g.getVertices();
-
+		logger.debug("Search for Tree validation fault :");
 		for (Componant componant : vertices) {
 			// destination of the edge can be Feature or Plugin
 			if (componant instanceof Feature || componant instanceof Plugin) {
@@ -235,11 +261,52 @@ public class DependencyTree {
 				}
 			}
 		}
+
+		logger.debug("Search for missing required bundles :");
+
+		// all Plugin -> Plugin dest must be in a feature
+		for (Componant componant : vertices) {
+			// destination of the edge must be Plugin
+			if (componant instanceof Plugin) {
+				Collection<String> outEdges = g.getOutEdges(componant);
+				for (String string : outEdges) {
+					Componant dest = g.getDest(string);
+					if (dest instanceof Plugin) {
+						// search in Features -> Plugin
+						boolean ok = false;
+						logger.trace("search ref in Feature for :" + dest);
+						for (Componant componant1 : vertices) {
+							if (componant1 instanceof Feature) {
+
+								// get Feature -> plugin
+								logger.trace("search ref in  :" + componant1);
+								Collection<String> outEdges2 = g.getOutEdges(componant1);
+								for (String string2 : outEdges2) {
+									Componant dest2 = g.getDest(string2);
+									Componant source = g.getSource(string2);
+									logger.trace("Test :" + source + " -> " + dest2);
+									if (dest2.equals(dest)) {
+										// the dest of Plugin -> Plugin exists in Feature -> Plugin ok !
+										ok = true;
+										logger.debug("required bundle " + dest2 + " founded in :" + componant1);
+										break;
+									}
+								}
+							}
+						}
+						if (!ok) {
+							logger.debug("Missing bundle in features :" + dest);
+							compReg.getAnomaly().addMissingPluginsInFeatures(dest.toString());
+						}
+					}
+				}
+			}
+		}
 	}
 
-	public ComponantsRegisters getComponantsRegisters() throws Exception {
+	public ComponantsRegisters getComponantsRegisters(Properties props) throws Exception {
 		// create ProductReader
-		ProductReader pr = new ProductReader(product, new ComponantsRegisters(repo, propertiesFile), getProperties(profile));
+		ProductReader pr = new ProductReader(product, new ComponantsRegisters(repo, propertiesFile), props);
 		// read product and all associated resources
 		pr.read();
 		ComponantsRegisters compReg = pr.getRegistries();

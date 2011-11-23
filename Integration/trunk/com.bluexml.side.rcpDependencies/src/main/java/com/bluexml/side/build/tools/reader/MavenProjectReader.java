@@ -80,7 +80,7 @@ public class MavenProjectReader extends Reader {
 	 */
 	private Module loadFromGraphML(File project) throws IOException, JAXBException, PropertyException {
 		Module root = null;
-		File graphmlfile = new File("graphml.xml");
+		File graphmlfile = new File("graphml-mavenTree.xml");
 		List<String> argss = new ArrayList<String>();
 
 		argss.add("mvn"); //$NON-NLS-1$
@@ -183,7 +183,7 @@ public class MavenProjectReader extends Reader {
 			//			MavenProjectReader mpr = new MavenProjectReader(null);
 			//			mpr.read(new File("/Users/davidabad/Workspace2.0/side-rcp-dependencies"));
 
-			edu.uci.ics.jung.graph.Graph<Componant, String> g = JungConverter.convert(new File("graphml.xml"));
+			edu.uci.ics.jung.graph.Graph<Componant, String> g = JungConverter.convert(new File("graphml-mavenTree.xml"));
 			DisplayGraph.display(g);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

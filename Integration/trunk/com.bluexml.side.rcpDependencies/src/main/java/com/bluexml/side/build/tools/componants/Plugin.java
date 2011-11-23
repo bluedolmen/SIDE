@@ -10,7 +10,7 @@ public class Plugin extends Componant {
 	String name;
 	List<Plugin> dependecies = new ArrayList<Plugin>();
 
-	List<Extension> extensions = new ArrayList<Extension>();
+	List<Configuration> extensions = new ArrayList<Configuration>();
 
 	public String getId() {
 		return id;
@@ -44,11 +44,11 @@ public class Plugin extends Componant {
 		this.dependecies = dependecies;
 	}
 
-	public List<Extension> getExtensions() {
+	public List<Configuration> getExtensions() {
 		return extensions;
 	}
 
-	public void setExtensions(List<Extension> extensions) {
+	public void setExtensions(List<Configuration> extensions) {
 		this.extensions = extensions;
 	}
 
