@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Alfresco tooling
+Bundle-SymbolicName: com.bluexml.side.Util.framework.tools;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.util.alfresco.tools.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.bluexml.side.Util.libs,
+ org.eclipse.core.resources
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: com.bluexml.side.util.alfresco.tools
