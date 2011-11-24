@@ -2244,7 +2244,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		  (formElementEClass, 
 		   source, 
 		   new String[] {
-			 "noSpecialCharacters", "self.id.regexMatch(\'[\\\\w]*\') = true",
+			 "noSpecialCharacters", "self.id.regexMatch(\'[\\\\w-]*\') = true",
 			 "validRef", "if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.oclAsType(clazz::Clazz).getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif"
 		   });			
 		addAnnotation

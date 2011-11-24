@@ -1204,7 +1204,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "ClassCantBeReferencedbyTwoSameNameAssociation", "if (self.getSource()->first().oclIsTypeOf(Aspect)) then\n\tAssociation.allInstances()->select(a | a.getSource() = self.getSource())->asSet()->select(a:Association|a.name = self.name)->size() = 1\nelse\n\tif (not (self.getSource().generalizations ->closure(generalizations)->intersection(self.getSource()) ->size() >0)) then\n\t\tself.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1\n\telse\n\t\t0 = 1\n\tendif\nendif",
 			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )",
 			 "twoWayNavigation", "(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name <> \'\' and self.secondEnd.name <> \'\')",
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w\\(\\),]*\') = true"
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w\\(\\),]*\') = true"
 		   });				
 		addAnnotation
 		  (associationEClass.getEOperations().get(0), 
@@ -1244,7 +1244,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w]*\') = true"
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w-]*\') = true"
 		   });								
 		addAnnotation
 		  (enumerationEClass, 
@@ -1257,7 +1257,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w]*\') = true"
 		   });						
 		addAnnotation
 		  (aspectEClass.getEOperations().get(0), 

@@ -1809,7 +1809,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		  (fieldElementEClass, 
 		   source, 
 		   new String[] {
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w]*\') = true"
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w-]*\') = true"
 		   });			
 		addAnnotation
 		  (fieldElementEClass.getEOperations().get(0), 
