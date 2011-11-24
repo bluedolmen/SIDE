@@ -3,10 +3,12 @@ package com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newAlfr
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.maven.execution.MavenExecutionResult;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -21,6 +23,7 @@ import com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newAlfre
 import com.bluexml.side.util.dependencies.MavenUtil;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.eclipse.EclipseUtils;
+import com.bluexml.side.util.libs.eclipse.ExtensionPointUtils;
 
 public class NewModuleWizard extends Wizard implements IWorkbenchWizard {
 	// private static final String ARCHETYPE_REPO = "public";
@@ -35,41 +38,59 @@ public class NewModuleWizard extends Wizard implements IWorkbenchWizard {
 
 		// archetypes used to create new maven project to extends alfresco
 
-		// 3.2r2
-		HashMap<String, String> archetype_amp = new HashMap<String, String>();
-		archetype_amp.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
-		archetype_amp.put("archetypeArtifactId", "ampArchetypeForSide");
-		archetype_amp.put("archetypeVersion", "1.0.12");
-		archetype_amp.put("interactive", "false");
-		// archetype_amp.put("archetypeRepository", ARCHETYPE_REPO);
-		archetypes.put(ModuleType.AMP_32R2CE.label, archetype_amp);
+		// get module list from extension point
+		String nodeName = "moduleDependence";
+		List<IConfigurationElement> configurationElements = ExtensionPointUtils.getConfigurationElements(com.bluexml.side.util.alfresco.tools.Activator.EXTENSION_POINT_TOOLING, nodeName);
 
-		HashMap<String, String> archetype_share = new HashMap<String, String>();
-		archetype_share.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
-		archetype_share.put("archetypeArtifactId", "warPatchArchetypeForSide");
-		archetype_share.put("archetypeVersion", "1.0.13");
-		archetype_share.put("webapp-name", "share");
-		archetype_share.put("interactive", "false");
-		// archetype_share.put("archetypeRepository", ARCHETYPE_REPO);		
-		archetypes.put(ModuleType.SHARE_32R2CE.label, archetype_share);
+		for (IConfigurationElement iConfigurationElement : configurationElements) {
+			String moduleId = iConfigurationElement.getAttribute("moduleId");
+			String versionMax = iConfigurationElement.getAttribute("versionMax");
+			String label = iConfigurationElement.getAttribute("label");
 
-		// 3.4.d CE
-		HashMap<String, String> archetype_amp_34dCE = new HashMap<String, String>();
-		archetype_amp_34dCE.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
-		archetype_amp_34dCE.put("archetypeArtifactId", "ampArchetypeForSide_34dCE");
-		archetype_amp_34dCE.put("archetypeVersion", "1.0.4");
-		archetype_amp_34dCE.put("interactive", "false");
-		// archetype_amp.put("archetypeRepository", ARCHETYPE_REPO);
-		archetypes.put(ModuleType.AMP_34dCE.label, archetype_amp_34dCE);
+			System.out.println("NewModuleWizard.NewModuleWizard() modulId :" + moduleId);
+			HashMap<String, String> archetypeDef = new HashMap<String, String>();
+			int lastIndexOf = moduleId.lastIndexOf(".");
+			archetypeDef.put("archetypeGroupId", moduleId.substring(0, lastIndexOf));
+			archetypeDef.put("archetypeArtifactId", moduleId.substring(lastIndexOf));
+			archetypeDef.put("archetypeVersion", versionMax);
+			archetypeDef.put("interactive", "false");
+			archetypeDef.put("webapp-name", "share");
+			// archetype_amp.put("archetypeRepository", ARCHETYPE_REPO);
+			archetypes.put(label, archetypeDef);
+		}
 
-		HashMap<String, String> archetype_share_34dCE = new HashMap<String, String>();
-		archetype_share_34dCE.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
-		archetype_share_34dCE.put("archetypeArtifactId", "warPatchArchetypeForSide_34dCE");
-		archetype_share_34dCE.put("archetypeVersion", "1.0.4");
-		archetype_share_34dCE.put("webapp-name", "share");
-		archetype_share_34dCE.put("interactive", "false");
-		// archetype_share.put("archetypeRepository", ARCHETYPE_REPO);		
-		archetypes.put(ModuleType.SHARE_34dCE.label, archetype_share_34dCE);
+		//		// 3.2r2
+		//		HashMap<String, String> archetype_amp = new HashMap<String, String>();
+		//		archetype_amp.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
+		//		archetype_amp.put("archetypeArtifactId", "ampArchetypeForSide");
+		//		archetype_amp.put("archetypeVersion", "1.0.12");
+		//		archetype_amp.put("interactive", "false");
+		//		// archetype_amp.put("archetypeRepository", ARCHETYPE_REPO);
+		//		archetypes.put(ModuleType.AMP_32R2CE.label, archetype_amp);
+		//		HashMap<String, String> archetype_share = new HashMap<String, String>();
+		//		archetype_share.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
+		//		archetype_share.put("archetypeArtifactId", "warPatchArchetypeForSide");
+		//		archetype_share.put("archetypeVersion", "1.0.13");
+		//		archetype_share.put("webapp-name", "share");
+		//		archetype_share.put("interactive", "false");
+		//		// archetype_share.put("archetypeRepository", ARCHETYPE_REPO);
+		//		archetypes.put(ModuleType.SHARE_32R2CE.label, archetype_share);
+		//		// 3.4.d CE
+		//		HashMap<String, String> archetype_amp_34dCE = new HashMap<String, String>();
+		//		archetype_amp_34dCE.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
+		//		archetype_amp_34dCE.put("archetypeArtifactId", "ampArchetypeForSide_34dCE");
+		//		archetype_amp_34dCE.put("archetypeVersion", "1.0.4");
+		//		archetype_amp_34dCE.put("interactive", "false");
+		//		// archetype_amp.put("archetypeRepository", ARCHETYPE_REPO);
+		//		archetypes.put(ModuleType.AMP_34dCE.label, archetype_amp_34dCE);
+		//		HashMap<String, String> archetype_share_34dCE = new HashMap<String, String>();
+		//		archetype_share_34dCE.put("archetypeGroupId", "com.bluexml.side.Framework.maven");
+		//		archetype_share_34dCE.put("archetypeArtifactId", "warPatchArchetypeForSide_34dCE");
+		//		archetype_share_34dCE.put("archetypeVersion", "1.0.4");
+		//		archetype_share_34dCE.put("webapp-name", "share");
+		//		archetype_share_34dCE.put("interactive", "false");
+		//		// archetype_share.put("archetypeRepository", ARCHETYPE_REPO);
+		//		archetypes.put(ModuleType.SHARE_34dCE.label, archetype_share_34dCE);
 
 	}
 
@@ -167,11 +188,11 @@ public class NewModuleWizard extends Wizard implements IWorkbenchWizard {
 		addPage(new GeneralProjectInformationsPage());
 	}
 
-	public enum ModuleType {
+	public enum ModuleType_ {
 		AMP_32R2CE("Alfresco Extension 3.2r2 CE"), SHARE_32R2CE("Alfresco Share Extension 3.2r2 CE"), AMP_34dCE("Alfresco Extension 3.4.d CE"), SHARE_34dCE("Alfresco Share Extension 3.4.d CE");
 		String label;
 
-		ModuleType(String label) {
+		ModuleType_(String label) {
 			this.label = label;
 		}
 

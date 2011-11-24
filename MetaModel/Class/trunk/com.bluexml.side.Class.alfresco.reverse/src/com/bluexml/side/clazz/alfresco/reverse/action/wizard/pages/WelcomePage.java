@@ -5,7 +5,7 @@ import java.io.File;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.swt.widgets.Composite;
 
-import com.bluexml.side.clazz.alfresco.models.library.AlfrescoModelBaseVersionChooser;
+import com.bluexml.side.util.alfresco.tools.AlfrescoModelBaseVersionChooser;
 import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
 
 public class WelcomePage extends AlfrescoModelBaseVersionChooser {

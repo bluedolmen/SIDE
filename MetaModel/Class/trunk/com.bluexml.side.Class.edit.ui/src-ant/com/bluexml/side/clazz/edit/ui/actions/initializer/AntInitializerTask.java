@@ -6,7 +6,6 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.eclipse.core.resources.IFile;
 
-import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public class AntInitializerTask extends Task {
@@ -28,7 +27,7 @@ public class AntInitializerTask extends Task {
 		this.model = model;
 	}
 
-	ModelLibrary.Libraries alfrescoVersion;
+	String alfrescoVersion;
 
 	/**
 	 * @return the tomcatHome
@@ -48,7 +47,7 @@ public class AntInitializerTask extends Task {
 	/**
 	 * @return the alfrescoVersion
 	 */
-	public ModelLibrary.Libraries getAlfrescoVersion() {
+	public String getAlfrescoVersion() {
 		return alfrescoVersion;
 	}
 
@@ -56,7 +55,7 @@ public class AntInitializerTask extends Task {
 	 * @param alfrescoVersion
 	 *            the alfrescoVersion to set
 	 */
-	public void setAlfrescoVersion(ModelLibrary.Libraries alfrescoVersion) {
+	public void setAlfrescoVersion(String alfrescoVersion) {
 		this.alfrescoVersion = alfrescoVersion;
 	}
 
@@ -71,7 +70,7 @@ public class AntInitializerTask extends Task {
 		}
 		try {
 			IFile classModelIfile = IFileHelper.getIFile(model);
-			InitializerRegister initializerRegister = InitializerRegister.getInitializerRegisterFromClassModel(classModelIfile, tomcatHome.getAbsolutePath(), alfrescoVersion.toString());
+			InitializerRegister initializerRegister = InitializerRegister.getInitializerRegisterFromClassModel(classModelIfile, tomcatHome.getAbsolutePath(), alfrescoVersion);
 			initializerRegister.initialize();
 		} catch (Exception e) {
 			throw new BuildException(e);

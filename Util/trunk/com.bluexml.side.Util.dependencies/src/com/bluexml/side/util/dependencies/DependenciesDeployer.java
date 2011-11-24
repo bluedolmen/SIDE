@@ -15,7 +15,6 @@ import org.osgi.framework.Bundle;
 
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.eclipse.ExtensionPointUtils;
-import com.bluexml.side.util.libs.zip.TrueZipHelper;
 import com.bluexml.side.util.libs.zip.ZipManager;
 
 public class DependenciesDeployer {

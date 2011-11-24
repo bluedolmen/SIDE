@@ -66,31 +66,5 @@ public class ModelLibrary {
 		
 	}
 
-	public static IProject importLibrary(String libraryId) throws Exception {
-		Libraries lib = Libraries.getLibFromLabel(libraryId);
-		String archiveName = lib.archiveName;
-		String projectId = lib.projectId;
-		String root = LIBRARY_PATH + archiveName;
-		URI workspace = ResourcesPlugin.getWorkspace().getRoot().getLocationURI();
-		File wkspaceFile = new File(workspace);
-		File projectFile = new File(wkspaceFile, projectId);
-
-		boolean exists = projectFile.exists();
-		System.out.println(projectFile);
-		System.out.println("exists ? " + exists);
-
-		if (!exists) {
-			// extract
-			System.out.println("extract library into current workspace");
-			File tmpZip = File.createTempFile("side_lib_" + archiveName, ".zip"); //$NON-NLS-1$ //$NON-NLS-2$
-			tmpZip.deleteOnExit();
-			FileHelper.writeStreamInFile(tmpZip, ModelLibrary.class.getResourceAsStream(root));
-			System.out.println("file to unzip :" + tmpZip + ":" + tmpZip.length() + " b"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			TrueZipHelper tzh = new TrueZipHelper("zip"); //$NON-NLS-1$
-			tzh.copyFiles(tmpZip, wkspaceFile, true);
-		}
-
-		return EclipseUtils.importEclipseProject(projectFile);
-
-	}
+	
 }

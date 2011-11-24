@@ -1,10 +1,12 @@
 package com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newAlfrescoModule.pages;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.swt.widgets.Composite;
 
-import com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newAlfrescoModule.NewModuleWizard.ModuleType;
+import com.bluexml.side.util.alfresco.tools.ToolingUtils;
 import com.bluexml.side.util.libs.eclipse.wizards.AbstractFieldsPage;
 
 public class GeneralProjectInformationsPage extends AbstractFieldsPage {
@@ -39,8 +41,11 @@ public class GeneralProjectInformationsPage extends AbstractFieldsPage {
 	public void createFieldsControls(Composite composite) {
 
 		ArrayList<String> allowedValues = new ArrayList<String>();
-		for (ModuleType alfV : ModuleType.values()) {
-			allowedValues.add(alfV.toString());
+		List<IConfigurationElement> allToolingModuleExtensions = ToolingUtils.getAllToolingModuleExtensions();
+		
+		for (IConfigurationElement iConfigurationElement : allToolingModuleExtensions) {
+			String label = iConfigurationElement.getAttribute("label");
+			allowedValues.add(label);
 		}
 		
 		createComboControl(composite, "archetypeId", Fields.archetypeId.toString(), allowedValues);

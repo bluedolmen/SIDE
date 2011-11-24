@@ -1,5 +1,6 @@
 package com.bluexml.side.util.libs.eclipse;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -84,5 +85,20 @@ public class ExtensionPointUtils {
 
 		}
 		return gen;
+	}
+
+	public static InputStream getStreamForBundleResource(String bundle, String className, String resourcePath) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		return getGeneratorInstance(bundle, className).getResourceAsStream(resourcePath);
+	}
+
+	public static List<IConfigurationElement> getConfigurationElements(String extensionPointId, String nodeName) {
+		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(extensionPointId);
+		List<IConfigurationElement> confs = new ArrayList<IConfigurationElement>();
+
+		for (IConfigurationElement config_exp : contributions) {
+			List<IConfigurationElement> configurationElements = ExtensionPointUtils.getIConfigurationElementsByName(config_exp, nodeName);
+			confs.addAll(configurationElements);
+		}
+		return confs;
 	}
 }

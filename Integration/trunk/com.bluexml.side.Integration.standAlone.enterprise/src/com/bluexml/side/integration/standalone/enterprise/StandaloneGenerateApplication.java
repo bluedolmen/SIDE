@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,6 +18,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -48,13 +48,13 @@ import com.bluexml.side.application.ui.newsideproject.newSideProject.NewSIDEProj
 import com.bluexml.side.application.ui.newsideproject.newSideProject.NewSIDEProjectCreator.CreateOptions;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Model;
-import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary;
-import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary.Libraries;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
 import com.bluexml.side.integration.standalone.ApplicationModelGenerateGenerationJob;
 import com.bluexml.side.integration.standalone.ApplicationModelJob;
 import com.bluexml.side.integration.standalone.GenerateModelHelper;
+import com.bluexml.side.util.alfresco.tools.ToolingUtils;
 import com.bluexml.side.util.libs.IFileHelper;
+
 /**
  * This class is meant to provide a standalone (headless) generation application
  * using command-line arguments.
@@ -69,49 +69,49 @@ import com.bluexml.side.util.libs.IFileHelper;
  * </ul>
  * 
  * @author pajot-b
- * 
  */
 public class StandaloneGenerateApplication implements IApplication {
-	
+
 	public static final String DATA_DIRNAME = ModelInitializationUtils.getDirectoryNameForEditorId(SIDEEditorUtils.DATA_MODEL_EDITOR_ID);
 	public static final String DATA_EXTENSION_NAME = ModelInitializationUtils.getExtensionNameForEditorId(SIDEEditorUtils.DATA_MODEL_EDITOR_ID);
-	
+
 	private final static Logger LOGGER = Logger.getLogger(StandaloneGenerateApplication.class.getName());
 	private final static IProgressMonitor PROGRESS_MONITOR = new NullProgressMonitor();
-		
+
 	private long startTime;
 	private CommandLineParser commandLineParser;
 
 	public Object start(IApplicationContext context) throws Exception {
 
-		if (!parseArguments(context)) return EXIT_OK;
-		
+		if (!parseArguments(context))
+			return EXIT_OK;
+
 		int exitCode = EXIT_OK;
 
 		initLogging();
 
-		LOGGER.fine("Starting standalone generation process");		
+		LOGGER.fine("Starting standalone generation process");
 		startTime = System.currentTimeMillis();
-		
+
 		try {
 			switchProcessOnInputType();
 		} catch (ManagedErrorException e) {
 			LOGGER.severe(e.getLocalizedMessage());
-			exitCode = -1; 
+			exitCode = -1;
 		}
-		
+
 		double timeInSec = (System.currentTimeMillis() - startTime) / 1000.;
 		LOGGER.fine(String.format("Ending standalone generation process. Processed in %s sec.", new DecimalFormat("#.###").format(timeInSec)));
 
 		return exitCode;
 	}
-		
+
 	private boolean parseArguments(IApplicationContext context) {
 		String[] arguments = (String[]) context.getArguments().get("application.args"); // $NON-NLS-1$
 
 		commandLineParser = new CommandLineParser();
 		JCommander jc = new JCommander(commandLineParser);
-		
+
 		StringBuilder output = new StringBuilder();
 
 		try {
@@ -126,26 +126,26 @@ public class StandaloneGenerateApplication implements IApplication {
 			outputUsage(jc, output);
 			return false;
 		}
-		
+
 		commandLineParser.checkParameters();
-		
+
 		return true;
 	}
-	
+
 	private static void outputUsage(JCommander jc, StringBuilder output) {
 		jc.usage(output);
-		LOGGER.info(output.toString());		
+		LOGGER.info(output.toString());
 	}
-	
+
 	private void initLogging() {
 		Level logLevel = Level.INFO;
 		if (commandLineParser.debug) {
 			logLevel = Level.FINEST;
-		} else if (commandLineParser.verbose){
+		} else if (commandLineParser.verbose) {
 			logLevel = Level.FINE;
 		}
-		
-		GenerateModelHelper.initLogger(logLevel);	
+
+		GenerateModelHelper.initLogger(logLevel);
 	}
 
 	/**
@@ -156,17 +156,17 @@ public class StandaloneGenerateApplication implements IApplication {
 	private void switchProcessOnInputType() throws Exception {
 		String modelFilePath = commandLineParser.parameters.get(0);
 		File modelFile = new File(modelFilePath);
-		
+
 		if (!modelFile.exists()) {
 			throw new FileNotFoundException(String.format("The file '%s' cannot be found", modelFilePath));
 		}
-		
+
 		if (modelFile.isDirectory()) {
 			modelFile = getModelFromDirectory();
 		}
 
 		IFile modelIFile = IFileHelper.getIFile(modelFile.getAbsoluteFile());
-		
+
 		if (modelIFile == null) {
 			// The file is outside the workspace.
 			// This file has to be a data-model file
@@ -175,12 +175,12 @@ public class StandaloneGenerateApplication implements IApplication {
 			return;
 
 		} else {
-		
+
 			EObject eObject = ModelInitializationUtils.getCheckedEObject(modelIFile, EObject.class);
-					
+
 			if (eObject != null) {
 				EClass eClass = eObject.eClass();
-				
+
 				// Switch on file content
 				if (ApplicationPackage.Literals.APPLICATION.equals(eClass)) {
 					processApplicationModelIFile(modelIFile);
@@ -191,13 +191,13 @@ public class StandaloneGenerateApplication implements IApplication {
 					throw new ManagedErrorException(message);
 				}
 			}
-			
+
 		}
-			
+
 		throw new ManagedErrorException(String.format("Do not know what to do with file location '%s'", modelFilePath));
 
 	}
-	
+
 	/**
 	 * If we get a directory as input, then try to find either application files
 	 * or data files. If one of both can be found, then launch the associated
@@ -210,32 +210,32 @@ public class StandaloneGenerateApplication implements IApplication {
 	 * @throws Exception
 	 */
 	private File getModelFromDirectory() throws Exception {
-		
+
 		String directoryPath = commandLineParser.parameters.get(0);
 		LOGGER.finer(String.format("Processing path '%s' as a directory", directoryPath));
-		
+
 		try {
-			List<File> applicationFiles = GenerateModelHelper.retrieveModelFiles(directoryPath,GenerateModelHelper.APPLICATION_EXTENSION_NAME);
+			List<File> applicationFiles = GenerateModelHelper.retrieveModelFiles(directoryPath, GenerateModelHelper.APPLICATION_EXTENSION_NAME);
 			List<File> dataFiles = GenerateModelHelper.retrieveModelFiles(directoryPath, DATA_EXTENSION_NAME);
-			
-			if (!applicationFiles.isEmpty() && ! dataFiles.isEmpty()) {
+
+			if (!applicationFiles.isEmpty() && !dataFiles.isEmpty()) {
 				String message = String.format("The provided directory '%s' contains both application and data models, please provide the full location of the file", directoryPath);
 				throw new ManagedErrorException(message);
 			}
-			
+
 			if (!applicationFiles.isEmpty()) {
 				return applicationFiles.get(0);
 			} else if (!applicationFiles.isEmpty()) {
 				return dataFiles.get(0);
 			}
-			
+
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e); // this is an unexpected and unlikely exception at this stage 
 		}
-		
+
 		return null;
 	}
-	
+
 	/**
 	 * When a data model (class model) is provided, the processing consist in
 	 * generating the application model (file) with the default behavior and to
@@ -257,9 +257,9 @@ public class StandaloneGenerateApplication implements IApplication {
 		IProject newProject = createNewProject(dataModelFile);
 		IFile dataModelIFile = copyDataModelFileIntoProject(dataModelFile, newProject);
 		initializeDefaultModels(dataModelIFile);
-		
+
 		IFile applicationModelFile = GenerateModelHelper.findApplicationIFile(newProject);
-		
+
 		if (applicationModelFile == null) {
 			throw new ManagedErrorException("Problem while generating the new project. The application-model file cannot be generated.");
 		}
@@ -267,12 +267,11 @@ public class StandaloneGenerateApplication implements IApplication {
 		if (!commandLineParser.keepDeployment) {
 			removeDeploymentPhasesInApplicationModelIFile(applicationModelFile);
 		}
-		
+
 		if (commandLineParser.doGenerate) {
 			processApplicationModelIFile(applicationModelFile);
 		}
 	}
-
 
 	/**
 	 * Create a new {@link IProject} given a data-model File
@@ -281,14 +280,14 @@ public class StandaloneGenerateApplication implements IApplication {
 	 * deducing it from the data-model file (name).
 	 * 
 	 * @param dataModelFile
-	 * @return 
+	 * @return
 	 * @throws ManagedErrorException
 	 */
 	private IProject createNewProject(File dataModelFile) throws ManagedErrorException {
-		
-		String projectName = getNewProjectName(dataModelFile);		
+
+		String projectName = getNewProjectName(dataModelFile);
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		
+
 		if (project.exists()) {
 			if (commandLineParser.force) {
 				try {
@@ -303,16 +302,16 @@ public class StandaloneGenerateApplication implements IApplication {
 				throw new ManagedErrorException(message);
 			}
 		}
-		
+
 		CreateOptions createOptions = new CreateOptions();
 		// TODO : Remove or change the BASE_MODEL_NAME value which is artificial
 		// when the SIDE Project creation will be managed normally w.r.t. this
 		// value
-		createOptions.setValue(CreateFields.BASE_MODEL_NAME, projectName); 
+		createOptions.setValue(CreateFields.BASE_MODEL_NAME, projectName);
 		createOptions.setValue(CreateFields.BASE_DATA_MODEL_PACKAGES, null);
 		createOptions.setValue(CreateFields.ALFRESCO_HOME, commandLineParser.alfrescoHome);
 		createOptions.setValue(CreateFields.TECHNOLOGY, commandLineParser.alfrescoVersion);
-		
+
 		NewSIDEProjectCreator sideProjectCreator = new NewSIDEProjectCreator(project, createOptions, null);
 		IWorkspaceRunnable runnable = sideProjectCreator.createWorkspaceRunnable();
 
@@ -322,7 +321,7 @@ public class StandaloneGenerateApplication implements IApplication {
 			final String message = String.format("Cannot create the project '%s' in the current workspace due to an unepected core exception '%s'", projectName, e.getLocalizedMessage());
 			throw new ManagedErrorException(message);
 		}
-		
+
 		return project;
 	}
 
@@ -331,26 +330,26 @@ public class StandaloneGenerateApplication implements IApplication {
 	 * 
 	 * @param dataModelFile
 	 * @return a project name
-	 * @throws ManagedErrorException 
+	 * @throws ManagedErrorException
 	 */
 	private String getNewProjectName(File dataModelFile) throws ManagedErrorException {
-		
+
 		String projectName = commandLineParser.projectName;
-		
+
 		if (projectName == null) {
 			// Deduce a project name from the data-model filename
 			final String dataModelFilename = dataModelFile.getName();
 			final IPath dataModelFilenameAsPath = new Path(dataModelFilename);
 			final String fileExtension = dataModelFilenameAsPath.getFileExtension();
-			
+
 			if (!DATA_EXTENSION_NAME.equals(fileExtension)) {
 				final String message = String.format("The extension '%s' was expected, but the provided data-model file has extension '%s'.", DATA_EXTENSION_NAME, fileExtension);
 				throw new ManagedErrorException(message);
 			}
-			
+
 			projectName = dataModelFilenameAsPath.removeFileExtension().lastSegment();
 		}
-		
+
 		if (projectName == null) {
 			final String message = "Cannot get a valid project name. Please provide one on the command line with the appropriate option.";
 			throw new ManagedErrorException(message);
@@ -358,7 +357,7 @@ public class StandaloneGenerateApplication implements IApplication {
 
 		return projectName;
 	}
-	
+
 	/**
 	 * Copy the given data-model {@link File} into the project as a new
 	 * {@link IFile}.
@@ -368,25 +367,25 @@ public class StandaloneGenerateApplication implements IApplication {
 	 * @return the new created (copied) data-model {@link IFile}
 	 * @throws ManagedErrorException
 	 */
-	private static IFile copyDataModelFileIntoProject(File dataModelFile, IProject project) throws ManagedErrorException{
-		
+	private static IFile copyDataModelFileIntoProject(File dataModelFile, IProject project) throws ManagedErrorException {
+
 		LOGGER.finer(String.format("Copying data-model file '%s' into project '%s'", dataModelFile.getPath(), project.getLocation()));
-		
+
 		IFolder dataModelsFolder = ModelInitializationUtils.getIFolderForEditorId(project, SIDEEditorUtils.DATA_MODEL_EDITOR_ID);
-		
+
 		IFile newIFile = null;
-		
+
 		if (dataModelsFolder != null) {
 			final String fileName = dataModelFile.getName();
 			newIFile = dataModelsFolder.getFile(fileName);
-			
+
 			InputStream inputFileStream = null;
 			try {
 				inputFileStream = new BufferedInputStream(new FileInputStream(dataModelFile));
 			} catch (FileNotFoundException e) {
 				throw new RuntimeException(e); // This is a major problem at this stage
 			}
-			
+
 			try {
 				newIFile.create(inputFileStream, true, PROGRESS_MONITOR);
 			} catch (CoreException e) {
@@ -402,8 +401,7 @@ public class StandaloneGenerateApplication implements IApplication {
 				}
 
 			}
-			
-			
+
 		} else {
 			final String message = "Cannot find the expected data-models folder in the project " + project.getName();
 			throw new ManagedErrorException(message);
@@ -412,7 +410,7 @@ public class StandaloneGenerateApplication implements IApplication {
 		return newIFile;
 
 	}
-		
+
 	/**
 	 * Initialize other models using the now in-workspace dataModelIFile.
 	 * <p>
@@ -426,17 +424,17 @@ public class StandaloneGenerateApplication implements IApplication {
 	 * @throws Exception
 	 */
 	private void initializeDefaultModels(IFile dataModelIFile) throws Exception {
-		
-		LOGGER.finer(String.format("Initializing default model files from data-model '%s'", dataModelIFile.getName()));		
-		
+
+		LOGGER.finer(String.format("Initializing default model files from data-model '%s'", dataModelIFile.getName()));
+
 		// WARNING! alfrescoHome and alfrescoVersion seems to be not used correctly here
 		String alfrescoHome = commandLineParser.alfrescoHome;
-		String alfrescoVersion = commandLineParser.alfrescoVersion.name();
+		String alfrescoVersion = commandLineParser.alfrescoVersion;
 		InitializerRegister initializerRegister = InitializerRegister.getInitializerRegisterFromClassModel(dataModelIFile, alfrescoHome, alfrescoVersion);
 		initializerRegister.initialize();
-		
+
 	}
-	
+
 	/**
 	 * Processing on application model files consist in generating the material
 	 * w.r.t. to the provided configuration.
@@ -448,7 +446,7 @@ public class StandaloneGenerateApplication implements IApplication {
 	 * @throws Exception
 	 */
 	private void processApplicationModelIFile(IFile applicationModelIFile) throws Exception {
-				
+
 		Application applicationModel = GenerateModelHelper.getApplication(applicationModelIFile, true);
 		if (applicationModel == null) {
 			LOGGER.severe(String.format("Ignoring the application model file '%s' which is not a valid application model.", applicationModelIFile.getLocation()));
@@ -456,35 +454,37 @@ public class StandaloneGenerateApplication implements IApplication {
 
 		String configurationName = commandLineParser.configuration;
 		Configuration configuration = applicationModel.getConfiguration(configurationName);
-		
+
 		if (configuration == null) {
 			configuration = ApplicationUtil.getFirstConfiguration(applicationModel);
 		}
 
 		modifyRuntimeConfigurationParameters(configuration);
-		
+
 		ApplicationModelGenerateGenerationJob job = new ApplicationModelGenerateGenerationJob(applicationModel);
-		if (configuration != null) job.setConfigurationProvider(new ApplicationModelJob.StaticConfigurationProvider(configuration));
+		if (configuration != null)
+			job.setConfigurationProvider(new ApplicationModelJob.StaticConfigurationProvider(configuration));
 		job.generate();
-		
+
 	}
-	
+
 	private void modifyRuntimeConfigurationParameters(Configuration configuration) {
-		if (configuration == null) return;
+		if (configuration == null)
+			return;
 
 		setConfigurationParameter(configuration, StaticConfigurationParameters.GENERATIONOPTION_SKIP_VALIDATION, Boolean.toString(commandLineParser.skipValidation));
 		setConfigurationParameter(configuration, StaticConfigurationParameters.GENERATIONOPTIONSCLEAN, Boolean.toString(!commandLineParser.doNotClean));
 		setConfigurationParameter(configuration, StaticConfigurationParameters.GENERATION_OPTION_COMPLETE, Boolean.toString(!commandLineParser.doNotPackage));
-		
+
 	}
-	
+
 	private static void setConfigurationParameter(Configuration configuration, StaticConfigurationParameters configurationParameter, String value) {
-		
+
 		boolean found = false;
-		
+
 		for (ConfigurationParameters configuredParameter : configuration.getParameters()) {
 			if (configurationParameter.equals(configuredParameter)) {
-				String configuredValue = configuredParameter.getValue(); 
+				String configuredValue = configuredParameter.getValue();
 				if (configuredValue != null && !configuredValue.equals(value)) {
 					configuredParameter.setValue(value);
 				}
@@ -492,16 +492,16 @@ public class StandaloneGenerateApplication implements IApplication {
 				break;
 			}
 		}
-		
+
 		if (!found) {
 			ConfigurationParameters newConfigurationParameter = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 			newConfigurationParameter.setDataType(configurationParameter.getLiteral());
 			newConfigurationParameter.setValue(value);
 			configuration.getParameters().add(newConfigurationParameter);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Remove all the deployment configurations from the target
 	 * application-model {@link IFile}.
@@ -513,30 +513,30 @@ public class StandaloneGenerateApplication implements IApplication {
 	private static void removeDeploymentPhasesInApplicationModelIFile(IFile applicationModelFile) {
 
 		Application applicationModel = GenerateModelHelper.getApplication(applicationModelFile, false);
-		
+
 		for (Configuration configuration : ApplicationUtil.getConfigurations(applicationModel)) {
 			removeDeploymentPhasesInConfiguration(configuration);
 		}
-		
+
 		ApplicationUtil.saveData(applicationModelFile, applicationModel);
 	}
-	
+
 	private static void removeDeploymentPhasesInConfiguration(Configuration configuration) {
 		LOGGER.finer(String.format("Removing deployment phase from configuration", configuration.getName()));
 		configuration.getDeployerConfigurations().clear();
 	}
-		
+
 	public void stop() {
 	}
-	
+
 	private static class ManagedErrorException extends Exception {
 		private static final long serialVersionUID = 1L;
-		
+
 		private ManagedErrorException(String message) {
 			super(message);
 		}
 	}
-	
+
 	public static class CommandLineParser {
 		@Parameter
 		public List<String> parameters = Lists.newArrayList();
@@ -547,7 +547,7 @@ public class StandaloneGenerateApplication implements IApplication {
 		@Parameter(names = { "-v", "--verbose" }, description = "Verbose logging")
 		public boolean verbose = false;
 
-		@Parameter(names = { "-d", "-debug"}, description = "Debug mode")
+		@Parameter(names = { "-d", "-debug" }, description = "Debug mode")
 		public boolean debug = false;
 
 		@Parameter(names = { "-f", "--force" }, description = "Force operation")
@@ -563,14 +563,14 @@ public class StandaloneGenerateApplication implements IApplication {
 		public String alfrescoHome = null;
 
 		@Parameter(names = { "-av", "--alfresco-version" }, description = "The version of the alfresco installation which is targeted (default is ALFRESCO_34D_CE)", converter = LibrariesStringConverter.class)
-		public Libraries alfrescoVersion = Libraries.ALFRESCO_34D_CE;
+		public String alfrescoVersion = "ALFRESCO_34D_CE";
 
 		@Parameter(names = { "-gen", "--generate" }, description = "Generate the Alfresco material (for data-model files)")
 		public boolean doGenerate = false;
-		
+
 		@Parameter(names = { "-kdep", "--keep-deployment" }, description = "Do not remove deployment phase when generating the application file from the data-model file")
 		public boolean keepDeployment = false;
-		
+
 		@Parameter(names = { "-sv", "--skip-validation" }, description = "Skip validation of model(s)")
 		public boolean skipValidation = false;
 
@@ -579,29 +579,29 @@ public class StandaloneGenerateApplication implements IApplication {
 
 		@Parameter(names = { "-dnp", "--do-not-package" }, description = "Do not package the generated material")
 		public boolean doNotPackage = false;
-		
+
 		private void checkParameters() {
-			
+
 			if (alfrescoHome != null && alfrescoVersion == null) {
 				throw new ParameterException("Both or neither of the alfresco parameters should be provided.");
 			}
-			
+
 		}
-		
+
 		public static class NonEmptyStringValidator implements IParameterValidator {
-	
+
 			public void validate(String name, String value) throws ParameterException {
 				if (value.isEmpty()) {
 					final String message = String.format("The parameter '%s' has to be a non-empty", name);
 					throw new ParameterException(message);
 				}
-				
+
 			}
-			
+
 		}
-		
+
 		public static class PathExists implements IParameterValidator {
-	
+
 			public void validate(String name, String value) throws ParameterException {
 				File target = new File(value);
 				if (!target.exists() || !target.isDirectory()) {
@@ -609,38 +609,37 @@ public class StandaloneGenerateApplication implements IApplication {
 					throw new ParameterException(message);
 				}
 			}
-			
+
 		}
-		
-		public static class LibrariesStringConverter implements IStringConverter<Libraries> {
-	
-			public Libraries convert(String value) {
-				List<Libraries> acceptedValues = Arrays.asList(ModelLibrary.Libraries.values());
-				
-				for (Libraries library : acceptedValues) {
-					if (library.name().equals(value)) return library;
+
+		public static class LibrariesStringConverter implements IStringConverter<IConfigurationElement> {
+
+			public IConfigurationElement convert(String value) {
+				List<IConfigurationElement> acceptedValues = ToolingUtils.getAllToolingModelLibraryExtensions();
+
+				for (IConfigurationElement library : acceptedValues) {
+					if (library.getAttribute("id").equals(value))
+						return library;
 				}
-	
+
 				// NOT FOUND
 				StringBuilder acceptedValuesString = new StringBuilder();
-				Iterator<Libraries> it = acceptedValues.iterator();
+				Iterator<IConfigurationElement> it = acceptedValues.iterator();
 				while (it.hasNext()) {
-					Libraries library = it.next();
-					acceptedValuesString.append(library.name());
-					
+					IConfigurationElement library = it.next();
+					acceptedValuesString.append(library.getAttribute("id"));
+
 					if (it.hasNext()) {
 						acceptedValuesString.append(',');
 					}
 				}
-				
+
 				final String message = String.format("The alfresco version only supports values in [%s]", acceptedValuesString.toString());
-				throw new ParameterException(message);				
+				throw new ParameterException(message);
 			}
-			
-		}		
+
+		}
 
 	}
-	
-	
 
 }

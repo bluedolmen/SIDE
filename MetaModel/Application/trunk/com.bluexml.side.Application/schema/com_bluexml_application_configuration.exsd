@@ -22,6 +22,7 @@
             <element ref="technology"/>
             <element ref="technologyVersion"/>
             <element ref="generatorVersion"/>
+            <element ref="moduleDependence" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -314,7 +315,7 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                </restriction>
             </simpleType>
          </attribute>
-         <attribute name="defaultValue" type="string" use="default" value="">
+         <attribute name="defaultValue" type="string">
             <annotation>
                <documentation>
                   this attribute define a default value used by SIDE components if application model do not contains a value for this configurationParameter
@@ -470,6 +471,8 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                   </enumeration>
                   <enumeration value="zip">
                   </enumeration>
+                  <enumeration value="jar">
+                  </enumeration>
                </restriction>
             </simpleType>
          </attribute>
@@ -478,6 +481,16 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                <documentation>
                   
                </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="label" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>

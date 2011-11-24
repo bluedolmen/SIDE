@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -19,10 +20,9 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
-import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary;
-import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary.Libraries;
 import com.bluexml.side.clazz.alfresco.reverse.action.wizard.pages.WelcomePage;
 import com.bluexml.side.clazz.alfresco.reverse.reverser.Reverser;
+import com.bluexml.side.util.alfresco.tools.ToolingUtils;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.eclipse.RunnableWithProgress;
 import com.bluexml.side.util.libs.eclipse.RunnableWithState;
@@ -54,11 +54,11 @@ public class ReverseFromAlfrescoWizard extends Wizard implements IWorkbenchWizar
 				// reverse may use some SIDE models (reversed)
 
 				// import library
-				ModelLibrary.importLibrary(libraryId);
+				ToolingUtils.importLibrary(libraryId);
 
 				// models can be acceded in current workspace
-				Libraries libFromLabel = ModelLibrary.Libraries.getLibFromLabel(libraryId);
-				String projectId = libFromLabel.getProjectId();
+				IConfigurationElement libFromLabel = ToolingUtils.getModelLibraryFromLabel(libraryId);
+				String projectId = libFromLabel.getAttribute(ToolingUtils.MODEL_LIBRARY_PROJECT_ID);
 				IFolder iFolder = IFileHelper.getIFolder("/" + projectId + "/data");
 				sideModels.addAll(IFileHelper.getAllFiles(iFolder));
 

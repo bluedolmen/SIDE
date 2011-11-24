@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.util.EList;
@@ -22,14 +23,15 @@ import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
-import com.bluexml.side.clazz.alfresco.models.library.ModelLibrary;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.FormModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.FormWorkflowModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.PortalModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ViewModelInitializer;
+import com.bluexml.side.util.alfresco.tools.ToolingUtils;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.eclipse.ExtensionPointUtils;
 
 public class ApplicationCreator extends ModelCreator {
 	private static ApplicationFactory FACTORY = ApplicationFactory.eINSTANCE;
@@ -92,9 +94,7 @@ public class ApplicationCreator extends ModelCreator {
 
 		createConfigurationParameters(conf, projectName);
 
-		createGeneratorsConfigurations(conf);
-
-		createDeployersConfigurations(conf);
+		createDefaultComponents(conf);
 
 		app.getElements().add(conf);
 	}
@@ -109,50 +109,37 @@ public class ApplicationCreator extends ModelCreator {
 		createConfigurationParameter(conf, "", "generation.options.clean", "true"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
-	private void createDeployersConfigurations(Configuration conf) {
-		if (alfrescoVersion == null) {
-			System.out.println("no deployer configuration because of unknown alfresco version");
-		} else if (alfrescoVersion.equals(ModelLibrary.Libraries.ALFRESCO_34D_CE.toString())) {
-			List<String> options = new ArrayList<String>();
-			options.add("com.bluexml.side.Deployer.alfrescoDirectCopy34d.clean"); //$NON-NLS-1$
-			createDeployerConfiguration(conf, "com.bluexml.side.Deployer.alfrescoDirectCopy34d", options); //$NON-NLS-1$
+	private void createDefaultComponents(Configuration conf) {
+		if (alfrescoVersion != null) {
+			List<IConfigurationElement> allToolingModelLibraryExtensions = ToolingUtils.getAllToolingModelLibraryExtensions();
 
-		} else if (alfrescoVersion.equals(ModelLibrary.Libraries.ALFRESCO_32R2_CE.toString())) {
-			//TODO add side component for 3.2R2 and make a fork to create 3.2R2 Portal model
-			System.err.println("3.2R2 NOT YET IMPLEMENTED"); //$NON-NLS-1$
+			for (IConfigurationElement iConfigurationElement : allToolingModelLibraryExtensions) {
+				String label = iConfigurationElement.getAttribute("label");
+				if (alfrescoVersion.equals(label)) {
+					// ok get generators
+					List<IConfigurationElement> gene = ExtensionPointUtils.getIConfigurationElementsByName(iConfigurationElement, "generatorVersion");
+					for (IConfigurationElement iConfigurationElement2 : gene) {
+						List<String> options = getOptionsList(iConfigurationElement2);
+						createGeneratorConfiguration(conf, iConfigurationElement2.getAttribute("id"), options); //$NON-NLS-1$
+					}
+					// ok add deployers
+					List<IConfigurationElement> dep = ExtensionPointUtils.getIConfigurationElementsByName(iConfigurationElement, "deployerVersion");
+					for (IConfigurationElement iConfigurationElement2 : dep) {
+						List<String> options = getOptionsList(iConfigurationElement2);
+						createDeployerConfiguration(conf, iConfigurationElement2.getAttribute("id"), options); //$NON-NLS-1$
+					}
+				}
+			}
 		}
 	}
 
-	private void createGeneratorsConfigurations(Configuration conf) {
-		if (alfrescoVersion == null) {
-			System.out.println("no generator configuration because of unknown alfresco version");
-		} else if (alfrescoVersion.equals(ModelLibrary.Libraries.ALFRESCO_34D_CE.toString())) {
-			List<String> options_class = new ArrayList<String>();
-			options_class.add("alfresco.share.extension"); //$NON-NLS-1$
-			createGeneratorConfiguration(conf, "com.bluexml.side.Class.generator.alfresco34d", options_class); //$NON-NLS-1$
-			List<String> options_portal = new ArrayList<String>();
-			options_portal.add("com.bluexml.side.Portal.generator.alfresco.forms"); //$NON-NLS-1$
-			options_portal.add("com.bluexml.side.Portal.generator.alfresco.doclist"); //$NON-NLS-1$
-			createGeneratorConfiguration(conf, "com.bluexml.side.Portal.generator.alfresco3.4d", options_portal); //$NON-NLS-1$
-			createGeneratorConfiguration(conf, "com.bluexml.side.View.generator.alfresco 34d", null); //$NON-NLS-1$
-			createGeneratorConfiguration(conf, "com.bluexml.side.Form.generator.alfresco34d", null); //$NON-NLS-1$
-			createGeneratorConfiguration(conf, "com.bluexml.side.Workflow.generator.alfresco34d", null); //$NON-NLS-1$
-			
-		} else if (alfrescoVersion.equals(ModelLibrary.Libraries.ALFRESCO_32R2_CE.toString())) {
-			List<String> options_class = new ArrayList<String>();
-			options_class.add("alfresco.share.extension"); //$NON-NLS-1$
-			options_class.add("alfresco.webscripts.common");
-			createGeneratorConfiguration(conf, "com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise", options_class); //$NON-NLS-1$
-			List<String> options_portal = new ArrayList<String>();
-			options_portal.add("com.bluexml.side.Portal.generator.alfresco.forms"); //$NON-NLS-1$
-			options_portal.add("com.bluexml.side.Portal.generator.alfresco.doclist"); //$NON-NLS-1$
-			options_portal.add("com.bluexml.side.Portal.generator.alfresco.xforms");
-			createGeneratorConfiguration(conf, "com.bluexml.side.Portal.generator.alfresco.extension.sideEnterprise", options_portal); //$NON-NLS-1$
-			createGeneratorConfiguration(conf, "com.bluexml.side.View.generator.alfresco.extension.sideEnterprise", null); //$NON-NLS-1$
-			createGeneratorConfiguration(conf, "com.bluexml.side.Form.generator.xforms.worker.extension.sideEnterprise", null); //$NON-NLS-1$
-			createGeneratorConfiguration(conf, "com.bluexml.side.Workflow.generator.alfresco", null); //$NON-NLS-1$
-			
+	public List<String> getOptionsList(IConfigurationElement iConfigurationElement2) {
+		List<String> options = new ArrayList<String>();
+		List<IConfigurationElement> depOp = ExtensionPointUtils.getIConfigurationElementsByName(iConfigurationElement2, "option");
+		for (IConfigurationElement confop : depOp) {
+			options.add(confop.getAttribute("key")); //$NON-NLS-1$	
 		}
+		return options;
 	}
 
 	private void createGeneratorConfiguration(Configuration conf, String sideComponentId, List<String> options) {
@@ -203,8 +190,8 @@ public class ApplicationCreator extends ModelCreator {
 			IFile iFile = IFileHelper.getIFile(modelInitializer.getNewModelPath());
 			if (!iFile.getName().endsWith(newModelExt)) {
 				// do not include application models
-				initializedModels.add(iFile);	
-			}			
+				initializedModels.add(iFile);
+			}
 		}
 
 		// only create new Models entry

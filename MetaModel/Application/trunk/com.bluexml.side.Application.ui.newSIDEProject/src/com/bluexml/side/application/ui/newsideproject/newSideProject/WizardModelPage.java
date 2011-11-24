@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Label;
 import com.bluexml.side.application.ui.newsideproject.Activator;
 import com.bluexml.side.application.ui.newsideproject.newSideProject.NewSIDEProjectCreator.CreateFields;
 import com.bluexml.side.application.ui.newsideproject.newSideProject.NewSIDEProjectCreator.CreateOptions;
-import com.bluexml.side.clazz.alfresco.models.library.AlfrescoModelBaseVersionChooser;
+import com.bluexml.side.util.alfresco.tools.AlfrescoModelBaseVersionChooser;
 import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
 import com.bluexml.side.util.libs.eclipse.StylingUtil;
 
