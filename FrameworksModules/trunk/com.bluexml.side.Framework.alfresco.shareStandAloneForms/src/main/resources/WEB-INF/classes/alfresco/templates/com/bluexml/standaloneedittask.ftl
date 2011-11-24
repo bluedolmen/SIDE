@@ -1,5 +1,9 @@
 <#include "../../org/alfresco/include/alfresco-template.ftl" />
+<#include "standalone-header.ftl" />
+
 <@templateHeader>
+   <@addStandaloneTemplateHeader/>
+   
    <#if page.url.args.nodeRef??>
    <@script type="text/javascript" src="${page.url.context}/res/templates/document-details/document-details.js"></@script>
    </#if>

@@ -1,27 +1,14 @@
 <#include "../../org/alfresco/include/alfresco-template.ftl" />
+<#include "standalone-header.ftl" />
+
 <@templateHeader>
-  <@link rel="stylesheet" type="text/css" href="${url.context}/templates/publish/publish.css" />
+	<@addStandaloneTemplateHeader/>
 </@>
 
 <@templateBody>
-   <div id="alf-hd">
-      
-   </div>
-   <div id="bd">
-      <div class="share-form">
-      
-         					<!-- use default share components-->
-         				<@region 
-         						scope="template" 
-         						id="formPortlet"
-         					 	protected=true />
-         				
-      </div>
-   </div>
+	<@addStandaloneTemplateBody/>
 </@>
 
 <@templateFooter>
-   <div id="alf-ft">
-
-   </div>
+	<@addStandaloneTemplateFooter/>
 </@>

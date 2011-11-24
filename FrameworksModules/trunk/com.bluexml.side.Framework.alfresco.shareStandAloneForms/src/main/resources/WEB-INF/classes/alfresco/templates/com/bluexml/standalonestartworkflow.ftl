@@ -1,6 +1,8 @@
 <#include "../../org/alfresco/include/alfresco-template.ftl" />
+<#include "standalone-header.ftl" />
+
 <@templateHeader>
-  <@link rel="stylesheet" type="text/css" href="${url.context}/templates/publish/publish.css" />
+	<@addStandaloneTemplateHeader/>
 </@>
 
 <@templateBody>
@@ -27,7 +29,5 @@
 </@>
 
 <@templateFooter>
-   <div id="alf-ft">
-
-   </div>
+	<@addStandaloneTemplateFooter/>
 </@>

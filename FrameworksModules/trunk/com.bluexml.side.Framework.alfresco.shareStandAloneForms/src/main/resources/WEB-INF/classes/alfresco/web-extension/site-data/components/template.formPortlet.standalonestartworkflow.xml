@@ -3,7 +3,7 @@
    <scope>template</scope>
    <region-id>formPortlet</region-id>
    <source-id>standalonestartworkflow</source-id>
-   <url>/components/form?formId={formId}</url>
+   <url>/components/form?formId={formId}&amp;css={css}&amp;js={js}</url>
    <properties>
       <itemKind>workflow</itemKind>
       <itemId>{itemId}</itemId>
