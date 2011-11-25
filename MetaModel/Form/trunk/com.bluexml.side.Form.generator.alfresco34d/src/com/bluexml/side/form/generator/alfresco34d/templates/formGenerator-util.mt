@@ -7,6 +7,27 @@ import com.bluexml.side.form.generator.alfresco34d.FormGenerator
 import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 %>
 
+<%-- getGenericAsValue :
+	 args(0) : query string
+	 args(1) : expected parameter name
+	 returns the value of the expected parameter stored in a Generic Text
+	 field encoded like a query
+--%>
+<%script type="FormCollection" name="getGenericFieldAsText" post="trim()" %>
+<%for (args(0).split("&")){%>
+<%if (toString().indexOf(args(1)) != -1) {%>
+<%toString().substring(toString().indexOf("=") + 1, toString().length())%>
+<%}%>
+<%}%>
+
+<%-- getXtensionAsXMLAttribute :
+	 args(0) : expected parameter name
+	 returns the value of the expected parameter stored in Xtension
+--%>
+<%script type="FormElement" name="getBehaviour" post="trim()" %>
+<%getXtensionAsControlParam("preRule")%>
+<%getXtensionAsControlParam("postRule")%>
+
 <%-- getXtensionAsXMLAttribute :
 	 args(0) : expected parameter name
 	 returns the value of the expected parameter stored in Xtension

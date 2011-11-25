@@ -21,6 +21,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("startLocation")%>
 		<%getXtensionAsControlParam("startLocationParams")%>
 		<%getXtensionAsControlParam("allowNavigationToContentChildren")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -29,6 +30,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 	<control template="/org/alfresco/components/form/controls/authority.ftl">
 		<%getXtensionAsControlParam("forceEditable")%>
 		<%getXtensionAsControlParam("compactMode")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -39,6 +41,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("compactMode")%>
 		<%getXtensionAsControlParam("parentNodeRef")%>
 		<%getXtensionAsControlParam("showSubCategoriesOption")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -48,6 +51,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("styleClass")%>
 		<%getXtensionAsControlParam("style")%>
 		<%getXtensionAsControlParam("forceEditable")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -66,6 +70,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("richMimeTypes")%>
 		<%getXtensionAsControlParam("forceEditor")%>
 		<%getXtensionAsControlParam("forceEditable")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -74,6 +79,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 	<control template="/org/alfresco/components/form/controls/date.ftl">
 		<%getXtensionAsControlParam("showTime")%>
 		<%getXtensionAsControlParam("forceEditable")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -83,6 +89,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("styleClass")%>
 		<%getXtensionAsControlParam("style")%>
 		<%getXtensionAsControlParam("property")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -90,12 +97,14 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%if (filter("TextField")){%>
 	<control template="/org/alfresco/components/form/controls/hidden.ftl">
 		<%getXtensionAsControlParam("contextProperty")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
 <%script type="FormElement" name="getInfoControl"%>
 <%if (filter("TextField")){%>
 	<control template="/org/alfresco/components/form/controls/info.ftl">
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -105,6 +114,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("styleClass")%>
 		<%getXtensionAsControlParam("style")%>
 		<%getXtensionAsControlParam("property")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -116,6 +126,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("maxLength")%>
 		<%getXtensionAsControlParam("size")%>
 		<%getXtensionAsControlParam("forceEditable")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -123,6 +134,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%if (filter("TextField")){%>
 	<control template="/org/alfresco/components/form/controls/period.ftl">
 		<%getXtensionAsControlParam("forceEditable")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -134,6 +146,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("editorHeight")%>
 		<%getXtensionAsControlParam("editorWidth")%>
 		<%getXtensionAsControlParam("forceEditable")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -145,6 +158,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("options")%>
 		<%getXtensionAsControlParam("size")%>
 		<%getXtensionAsControlParam("forceEditable")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -156,6 +170,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("options")%>
 		<%getXtensionAsControlParam("size")%>
 		<%getXtensionAsControlParam("forceEditable")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -163,6 +178,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%if (filter("TextField")){%>
 	<control template="/org/alfresco/components/form/controls/size.ftl">
 		<%getXtensionAsControlParam("property")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
@@ -175,11 +191,12 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("columns")%>
 		<%getXtensionAsControlParam("activateLinks")%>
 		<%getXtensionAsControlParam("forceEditable")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
 <%script type="FormElement" name="getTextFieldControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("CharField")){%>
 	<control template="/org/alfresco/components/form/controls/textfield.ftl">
 		<%getXtensionAsControlParam("styleClass")%>
 		<%getXtensionAsControlParam("style")%>
@@ -187,15 +204,14 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("size")%>
 		<%getXtensionAsControlParam("activateLinks")%>
 		<%getXtensionAsControlParam("forceEditable")%>
-
-		<%getXtensionAsControlParam("preRule")%>
-		<%getXtensionAsControlParam("postRule")%>
+		<%getBehaviour()%>
 	</control>
 <%}%>
 
 <%script type="FormElement" name="getFileFieldControl"%>
 <%if (filter("FileField") && ref.getPrefixedQName() == "cm:content"){%>
 	<control template="/side/controls/upload.ftl">
+		<%getBehaviour()%>	
 	</control>
 <%}%>
 
@@ -218,6 +234,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		 	<control-param name="multipleSelectMode">true</control-param>		
 		<%}%>
 		<%getPickerControlParams()%>
+		<%getBehaviour()%>
 	</control>
 <%}else if (widget.toString() == "Select"){%>
 	<control template="/side/controls/association-select.ftl" >
@@ -229,6 +246,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("filterTerm")%>
 		<%getXtensionAsControlParam("advancedQuery")%>
 		<%getXtensionAsControlParam("maxResults")%> 		
+		<%getBehaviour()%>
 	</control>
 <%}else if (widget.toString() == "Inline"){%>
 	 	<%-- TODO--%> 
@@ -240,6 +258,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		 	<control-param name="multipleSelectMode">true</control-param>		
 		<%}%>
 		<%getPickerControlParams()%>
+		<%getBehaviour()%>
 	</control>
 	<%}%>
 

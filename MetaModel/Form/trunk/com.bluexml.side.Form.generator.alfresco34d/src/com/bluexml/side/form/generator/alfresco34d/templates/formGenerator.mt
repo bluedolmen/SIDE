@@ -7,17 +7,17 @@ import com.bluexml.side.form.generator.alfresco34d.FormGenerator
 import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-util
 import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-control
 import com.bluexml.side.form.generator.alfresco34d.templates.services.form
-%>
-<%--
 import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workflow
---%>
+%>
+
 <%script type="form.FormCollection" name="fileName"%>
 <%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>/<%getModuleIdService(getRootPackage().name)%>/share-forms-config.xml<%}%>
 
 <%script type="form.FormCollection" name="generate" file="<%fileName()%>" %>
 <alfresco-config>
 	<!-- Forms from SIDE <%current("FormCollection").name%> model -->
-	
+	<%generateGlobalConfig%>
+
 	<!-- Input Forms -->
 	<%generateInputForms%>
 	
@@ -25,9 +25,25 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%generateSearchForms()%>
 	
 	<!-- Form Workflows -->
-	<%--generateWorkflowForms()--%>
+	<%generateWorkflowForms()%>
 </alfresco-config>
 
+<%script type="form.FormCollection" name="generateGlobalConfig"%>
+	<%if (current("FormCollection").documentation != ""){%>
+		<config>
+	      <forms>
+				<dependencies>
+					<%if (current("FormCollection").documentation.indexOf("css") != -1){%>
+						<css src="<%getGenericFieldAsText(current("FormCollection").documentation, "css")%>" />
+					<%}%>
+					<%if (current("FormCollection").documentation.indexOf("js") != -1){%>
+						<js src="<%getGenericFieldAsText(current("FormCollection").documentation, "js")%>" />
+					<%}%>
+				</dependencies>
+			</forms>
+		</config>
+	<%}%>
+		
 <%script type="form.FormCollection" name="generateInputForms"%>
 <%for (forms.filter("FormClass")){%>
 	<!-- SIDE <%id%> Form -->
@@ -104,7 +120,9 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 <%for (children.filter("FormElement")[ref.filter("clazz.Attribute") || ref.filter("clazz.Association")]){%>
 <%generate_appearance_field(args(0))%>
 <%}%>
+<%generate_set()%>
 
+<%script type="FormContainer" name="generate_set"%>
 <%-- generate sets --%>
 <%for (getAllSubGroups()){%>
 <set id="<%getPrefixedQualifiedName()%>"
@@ -144,6 +162,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%if (filter("BooleanField")){%>
 		<%getCheckBoxControl()%>
 	<%}else if (filter("TextField")){%>
+		<%-- Be careful: TextField for SIDE is ContentField|RichText|TextArea for Alfresco --%>
 		<%for (filter("TextField")) {%>
 			<%if (widget.toLowerCase() == "richtext") {%>
 				<%getRichTextControl()%>
@@ -153,7 +172,8 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 			<%}%>
 		<%}%>
 	<%}else if (filter("CharField")){%>
-		<%getContentControl()%>
+		<%-- Be careful: TextField for Alfresco is CharField for SIDE --%>
+		<%getTextFieldControl()%>
 	<%}else if (filter("DateField")){%>
 		<%getDateControl()%>
 	<%}else if (filter("HiddenField")){%>
@@ -181,8 +201,4 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 		<%}%>
 	<%}%>
 <%}%>
-
-
-
-
 </field>
