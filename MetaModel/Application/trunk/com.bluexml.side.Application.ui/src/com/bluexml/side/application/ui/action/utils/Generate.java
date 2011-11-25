@@ -632,6 +632,7 @@ public class Generate extends WorkspaceJob {
 					this.componentMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.44", elem.getId()), null, null); //$NON-NLS-1$ //$NON-NLS-2$
 					error = true;
 					this.componentMonitor.skipTasks(NB_GENERATION_STEP);
+					throw new Exception(Activator.Messages.getString("Generate.44", elem.getId()));
 				}
 			} else {
 				if (!generator.isDocumentationGenerator()) {
