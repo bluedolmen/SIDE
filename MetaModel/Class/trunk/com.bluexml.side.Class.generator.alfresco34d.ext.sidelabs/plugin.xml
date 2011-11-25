@@ -10,7 +10,7 @@
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Class.generator.alfresco.module.version" label="Class Module version" />
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/alfresco" documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
             <option defaultOption="true" key="alfresco.share.extension" label="Alfresco Share Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareStandAloneForms" moduleType="zip" technologyVersion="alfresco_3.4d" versionMax="1.0.12" versionMin="1.0.12" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareStandAloneForms" moduleType="zip" technologyVersion="alfresco_3.4d" versionMax="1.0.13" versionMin="1.0.13" />
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.upload34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.9" versionMin="1.0.9" />
             </option>
             <option key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
