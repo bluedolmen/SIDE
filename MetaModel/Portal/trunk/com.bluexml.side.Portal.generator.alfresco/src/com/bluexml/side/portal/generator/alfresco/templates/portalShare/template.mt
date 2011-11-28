@@ -14,33 +14,41 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%script type="Page" name="alfrescoGenerator" file="<%createTemplates%>" post="trim()"%>
 <%ID.toLowerCase().nPut("templates_name")%>
 <%parent().name.nPut("site_name")%>
-<#include "../../org/alfresco/include/alfresco-template.ftl" />
-<@templateHeader>
-  <@link rel="stylesheet" type="text/css" href="${url.context}/templates/<%nGet("templates_name")%>/<%nGet("templates_name")%>.css" />
+<%if (metainfo[key == "rawFtlFilePath"]){%>
+<%getFileContent(metainfo[key == "rawFtlFilePath"].value)%>
+<%-- load external files content and add it here --%>
+<%}else{%>
+<%for (useLayout.columns){%>
+<%generateLayout()%>
+<%}%>
+<%}%>
+<%script type="Column" name="generateLayout_sub"%>
+<%current("Page").view(current())%>
+<%for (subColumns){%>
+<%generateLayout()%>
+<%}%>
+<%script type="Column" name="generateLayout"%>
+<%if (metainfo[key == "tag"]){%>
+<%if (metainfo[key == "tag"].value != null){%>
+<%if (metainfo[key == "tag"].value.startsWith("@")){%>
+<<%metainfo[key == "tag"].value%>>
+<%generateLayout_sub()%>
 </@>
-
-<@templateBody>
-   <div id="alf-hd">
-      <@region id="header" scope="global" protected=true />
-	  <@region id="title" scope="template" protected=true />
-	  <@region id="navigation" scope="template" protected=true />
-   </div>
-   <div id="bd">
-      <div class="yui-t1">
-         <div id="yui-main">
-         	<%view()%>         
-         </div>
-      </div>
-   </div>
-</@>
-
-<@templateFooter>
-   <div id="alf-ft">
-      <@region id="footer" scope="global" protected=true />
-   </div>
-</@>
+<%}else{%>
+<<%metainfo[key == "tag"].value%><%for (metainfo){%> <%key%>="<%value%>"<%}%>>
+<%generateLayout_sub()%>
+</<%metainfo[key == "tag"].value%>>
+<%}%>
+<%}else{%>
+<%generateLayout_sub()%>
+<%}%>
+<%}else{%>
+<div id="<%name%>"<%for (metainfo){%> <%key%>="<%value%>"<%}%>>
+<%generateLayout_sub()%>
+</div>
+<%}%>
 <%script type="Page" name="view"%>
-<%for (portlets){%>
+<%for (portlets[positionGroup.onColumn == args(0).filter("Column")]){%>
 	<%if (associationPortlet != null && associationPage != null){%>
 		<%for (associationPortlet){%>
 			<%if (isPortletInternal != null && (isPortletInternal.view != null || isPortletInternal.form != null)){%>
@@ -56,15 +64,18 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 						<%}%>
 					<%}%>
 				<%}%>
+			<%}else if (metainfo[key == "rawContentFilePath"]){%>
+			<%-- load external files content and add it here --%>
+<%getFileContent(metainfo[key == "rawContentFilePath"].value)%>
 			<%}else{%>
-				<!-- use default share components-->
+				<%-- use default share components --%>
 			<@region 
 				<%for (isInstanceOfPortletType.instances){%>
 					<%if (instanceOf.name == "scope"){%>
 					<%instanceOf.name%>="<%value%>" 
 					<%}%>
 				<%}%>
-					id="<%name%>"
+					id=<%if (name.indexOf("\"") == -1){%>"<%name%>"<%}else{%><%name%><%}%>
 				 	protected=true />
 			<%}%>
 		<%}%>

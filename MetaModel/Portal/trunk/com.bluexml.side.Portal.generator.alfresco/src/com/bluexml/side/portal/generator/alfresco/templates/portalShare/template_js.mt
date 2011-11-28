@@ -1,6 +1,7 @@
 <%
 metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
+import com.bluexml.side.util.libs.ecore.EcoreHelper
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 %>
 
@@ -13,6 +14,9 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%script type="Page" name="alfrescoGenerator" file="<%createTemplates%>" post="trim()"%>
 <%ID.toLowerCase().nPut("templates_name")%>
 <%parent().name.nPut("site_name")%>
+<%if (metainfo[key == "rawJsFilePath"]){%>
+<%getFileContent(metainfo[key == "rawJsFilePath"].value)%>
+<%}else{%>
 script: {
 	var connector = remote.connect("alfresco");
 
@@ -30,3 +34,4 @@ script: {
 	model.siteID = siteID;
 
 }
+<%}%>
