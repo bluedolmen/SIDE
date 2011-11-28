@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.portal;
 
+import com.bluexml.side.common.NamedModelElement;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,9 +18,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.portal.Column#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Column#getWidth <em>Width</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Column#getUnit <em>Unit</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.Column#getSubColumns <em>Sub Columns</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,33 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Column extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see com.bluexml.side.portal.PortalPackage#getColumn_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.portal.Column#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
+public interface Column extends NamedModelElement {
 	/**
 	 * Returns the value of the '<em><b>Width</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -107,5 +83,21 @@ public interface Column extends EObject {
 	 * @generated
 	 */
 	void setUnit(widthUnit value);
+
+	/**
+	 * Returns the value of the '<em><b>Sub Columns</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.portal.Column}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sub Columns</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sub Columns</em>' containment reference list.
+	 * @see com.bluexml.side.portal.PortalPackage#getColumn_SubColumns()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Column> getSubColumns();
 
 } // Column

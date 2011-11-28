@@ -127,6 +127,24 @@ public interface PortalPackage extends EPackage {
 	int PORTAL_MODEL_ELEMENT__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_MODEL_ELEMENT__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_MODEL_ELEMENT__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The number of structural features of the '<em>Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,6 +218,24 @@ public interface PortalPackage extends EPackage {
 	int PORTAL__METAINFO = CommonPackage.PACKAGE__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL__CONSTRAINTS = CommonPackage.PACKAGE__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL__NAMESPACE = CommonPackage.PACKAGE__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -225,6 +261,15 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTAL__PACKAGE_SET = CommonPackage.PACKAGE__PACKAGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL__NAMESPACE_SET = CommonPackage.PACKAGE__NAMESPACE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Page Set</b></em>' containment reference list.
@@ -343,6 +388,24 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PAGE__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__CONSTRAINTS = PORTAL_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__NAMESPACE = PORTAL_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>ID</b></em>' attribute.
@@ -490,6 +553,24 @@ public interface PortalPackage extends EPackage {
 	int PORTAL_LAYOUT__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_LAYOUT__CONSTRAINTS = PORTAL_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_LAYOUT__NAMESPACE = PORTAL_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -536,13 +617,85 @@ public interface PortalPackage extends EPackage {
 	int COLUMN = 4;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__STEREOTYPES = CommonPackage.NAMED_MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__TAGS = CommonPackage.NAMED_MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__COMMENTS = CommonPackage.NAMED_MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__DOCUMENTATION = CommonPackage.NAMED_MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__DESCRIPTION = CommonPackage.NAMED_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__METAINFO = CommonPackage.NAMED_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__CONSTRAINTS = CommonPackage.NAMED_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__NAMESPACE = CommonPackage.NAMED_MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN__NAME = 0;
+	int COLUMN__NAME = CommonPackage.NAMED_MODEL_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Width</b></em>' attribute.
@@ -551,7 +704,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN__WIDTH = 1;
+	int COLUMN__WIDTH = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' attribute.
@@ -560,7 +713,16 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN__UNIT = 2;
+	int COLUMN__UNIT = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Sub Columns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__SUB_COLUMNS = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Column</em>' class.
@@ -569,7 +731,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_FEATURE_COUNT = 3;
+	int COLUMN_FEATURE_COUNT = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.impl.PortletImpl <em>Portlet</em>}' class.
@@ -634,6 +796,24 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTLET__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET__CONSTRAINTS = PORTAL_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET__NAMESPACE = PORTAL_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -734,6 +914,24 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTLET_TYPE__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_TYPE__CONSTRAINTS = PORTAL_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_TYPE__NAMESPACE = PORTAL_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -843,6 +1041,24 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTLET_INTERNAL__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_INTERNAL__CONSTRAINTS = PORTAL_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_INTERNAL__NAMESPACE = PORTAL_MODEL_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1452,17 +1668,6 @@ public interface PortalPackage extends EPackage {
 	EClass getColumn();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.portal.Column#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.portal.Column#getName()
-	 * @see #getColumn()
-	 * @generated
-	 */
-	EAttribute getColumn_Name();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.portal.Column#getWidth <em>Width</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1483,6 +1688,17 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getColumn_Unit();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.portal.Column#getSubColumns <em>Sub Columns</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Sub Columns</em>'.
+	 * @see com.bluexml.side.portal.Column#getSubColumns()
+	 * @see #getColumn()
+	 * @generated
+	 */
+	EReference getColumn_SubColumns();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.portal.Portlet <em>Portlet</em>}'.
@@ -2133,14 +2349,6 @@ public interface PortalPackage extends EPackage {
 		EClass COLUMN = eINSTANCE.getColumn();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COLUMN__NAME = eINSTANCE.getColumn_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2155,6 +2363,14 @@ public interface PortalPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLUMN__UNIT = eINSTANCE.getColumn_Unit();
+
+		/**
+		 * The meta object literal for the '<em><b>Sub Columns</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COLUMN__SUB_COLUMNS = eINSTANCE.getColumn_SubColumns();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.portal.impl.PortletImpl <em>Portlet</em>}' class.

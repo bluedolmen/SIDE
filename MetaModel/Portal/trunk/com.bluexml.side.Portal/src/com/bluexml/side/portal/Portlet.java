@@ -22,7 +22,7 @@ package com.bluexml.side.portal;
  * </p>
  *
  * @see com.bluexml.side.portal.PortalPackage#getPortlet()
- * @model annotation="http://www.bluexml.com/OCL haveType='not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined())'"
+ * @model annotation="http://www.bluexml.com/OCL haveType='not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and metainfo->size() = 0)'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='haveType'"
  * @generated
  */

@@ -19,18 +19,20 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
-import com.bluexml.side.portal.PortalPackage;
+import com.bluexml.side.common.CommonPackage;
 
 /**
- * This is the item provider adpater for a {@link com.bluexml.side.portal.Column} object.
- *
+ * This is the item provider adpater for a
+ * {@link com.bluexml.side.portal.Column} object.
+ * 
  * @generated
  */
 public class ColumnModelerProvider extends ItemProviderAdapter implements ILabelFeatureProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
-	 *
-	 * @param adapterFactory the adapter factory
+	 * 
+	 * @param adapterFactory
+	 *            the adapter factory
 	 * @generated
 	 */
 	public ColumnModelerProvider(AdapterFactory adapterFactory) {
@@ -39,9 +41,9 @@ public class ColumnModelerProvider extends ItemProviderAdapter implements ILabel
 
 	/**
 	 * @see org.topcased.modeler.providers.ILabelFeatureProvider#getLabelFeature(java.lang.Object)
-	 * @generated
+	 * @generated NOT
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return PortalPackage.eINSTANCE.getColumn_Name();
+		return CommonPackage.eINSTANCE.getNamedModelElement_Name();
 	}
 }

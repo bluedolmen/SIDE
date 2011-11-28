@@ -7,6 +7,7 @@
 package com.bluexml.side.portal.provider;
 
 
+import com.bluexml.side.portal.InternalPortletType;
 import java.util.Collection;
 import java.util.List;
 

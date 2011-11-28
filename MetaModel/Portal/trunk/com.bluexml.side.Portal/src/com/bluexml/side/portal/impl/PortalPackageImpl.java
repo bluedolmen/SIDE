@@ -448,7 +448,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getColumn_Name() {
+	public EAttribute getColumn_Width() {
 		return (EAttribute)columnEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -457,7 +457,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getColumn_Width() {
+	public EAttribute getColumn_Unit() {
 		return (EAttribute)columnEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -466,8 +466,8 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getColumn_Unit() {
-		return (EAttribute)columnEClass.getEStructuralFeatures().get(2);
+	public EReference getColumn_SubColumns() {
+		return (EReference)columnEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -901,9 +901,9 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		createEAttribute(portalLayoutEClass, PORTAL_LAYOUT__COLUMN_MODE);
 
 		columnEClass = createEClass(COLUMN);
-		createEAttribute(columnEClass, COLUMN__NAME);
 		createEAttribute(columnEClass, COLUMN__WIDTH);
 		createEAttribute(columnEClass, COLUMN__UNIT);
+		createEReference(columnEClass, COLUMN__SUB_COLUMNS);
 
 		portletEClass = createEClass(PORTLET);
 		createEAttribute(portletEClass, PORTLET__NAME);
@@ -998,6 +998,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		portalEClass.getESuperTypes().add(theCommonPackage.getPackage());
 		pageEClass.getESuperTypes().add(this.getPortalModelElement());
 		portalLayoutEClass.getESuperTypes().add(this.getPortalModelElement());
+		columnEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
 		portletEClass.getESuperTypes().add(this.getPortalModelElement());
 		portletTypeEClass.getESuperTypes().add(this.getPortalModelElement());
 		portletInternalEClass.getESuperTypes().add(this.getPortalModelElement());
@@ -1029,9 +1030,9 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		initEAttribute(getPortalLayout_ColumnMode(), ecorePackage.getEBoolean(), "columnMode", "true", 0, 1, PortalLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(columnEClass, Column.class, "Column", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getColumn_Name(), ecorePackage.getEString(), "name", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getColumn_Width(), ecorePackage.getEInt(), "width", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getColumn_Unit(), this.getwidthUnit(), "unit", null, 0, 1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getColumn_SubColumns(), this.getColumn(), null, "subColumns", null, 0, -1, Column.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portletEClass, Portlet.class, "Portlet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPortlet_Name(), ecorePackage.getEString(), "name", null, 0, 1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1128,7 +1129,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		  (portletEClass, 
 		   source, 
 		   new String[] {
-			 "haveType", "not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined())"
+			 "haveType", "not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and metainfo->size() = 0)"
 		   });			
 		addAnnotation
 		  (portletTypeEClass, 

@@ -49,9 +49,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//PortalLayout/columnMode"/>
     </genClasses>
     <genClasses ecoreClass="Portal.ecore#//Column">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Column/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Column/width"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Column/unit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Portal.ecore#//Column/subColumns"/>
     </genClasses>
     <genClasses ecoreClass="Portal.ecore#//Portlet">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Portlet/name"/>

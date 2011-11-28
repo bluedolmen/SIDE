@@ -6,16 +6,23 @@
  */
 package com.bluexml.side.portal.impl;
 
+import com.bluexml.side.common.impl.NamedModelElementImpl;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.portal.Column;
 import com.bluexml.side.portal.PortalPackage;
 import com.bluexml.side.portal.widthUnit;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,35 +31,15 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.portal.impl.ColumnImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.ColumnImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.ColumnImpl#getUnit <em>Unit</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.impl.ColumnImpl#getSubColumns <em>Sub Columns</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ColumnImpl extends EObjectImpl implements Column {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class ColumnImpl extends NamedModelElementImpl implements Column {
 	/**
 	 * The default value of the '{@link #getWidth() <em>Width</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -94,6 +81,16 @@ public class ColumnImpl extends EObjectImpl implements Column {
 	protected widthUnit unit = UNIT_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getSubColumns() <em>Sub Columns</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubColumns()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Column> subColumns;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -110,27 +107,6 @@ public class ColumnImpl extends EObjectImpl implements Column {
 	@Override
 	protected EClass eStaticClass() {
 		return PortalPackage.Literals.COLUMN;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.COLUMN__NAME, oldName, name));
 	}
 
 	/**
@@ -180,15 +156,41 @@ public class ColumnImpl extends EObjectImpl implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Column> getSubColumns() {
+		if (subColumns == null) {
+			subColumns = new EObjectContainmentEList<Column>(Column.class, this, PortalPackage.COLUMN__SUB_COLUMNS);
+		}
+		return subColumns;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case PortalPackage.COLUMN__SUB_COLUMNS:
+				return ((InternalEList<?>)getSubColumns()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case PortalPackage.COLUMN__NAME:
-				return getName();
 			case PortalPackage.COLUMN__WIDTH:
 				return getWidth();
 			case PortalPackage.COLUMN__UNIT:
 				return getUnit();
+			case PortalPackage.COLUMN__SUB_COLUMNS:
+				return getSubColumns();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -198,17 +200,19 @@ public class ColumnImpl extends EObjectImpl implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case PortalPackage.COLUMN__NAME:
-				setName((String)newValue);
-				return;
 			case PortalPackage.COLUMN__WIDTH:
 				setWidth((Integer)newValue);
 				return;
 			case PortalPackage.COLUMN__UNIT:
 				setUnit((widthUnit)newValue);
+				return;
+			case PortalPackage.COLUMN__SUB_COLUMNS:
+				getSubColumns().clear();
+				getSubColumns().addAll((Collection<? extends Column>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -222,14 +226,14 @@ public class ColumnImpl extends EObjectImpl implements Column {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case PortalPackage.COLUMN__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case PortalPackage.COLUMN__WIDTH:
 				setWidth(WIDTH_EDEFAULT);
 				return;
 			case PortalPackage.COLUMN__UNIT:
 				setUnit(UNIT_EDEFAULT);
+				return;
+			case PortalPackage.COLUMN__SUB_COLUMNS:
+				getSubColumns().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -243,12 +247,12 @@ public class ColumnImpl extends EObjectImpl implements Column {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case PortalPackage.COLUMN__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PortalPackage.COLUMN__WIDTH:
 				return width != WIDTH_EDEFAULT;
 			case PortalPackage.COLUMN__UNIT:
 				return unit != UNIT_EDEFAULT;
+			case PortalPackage.COLUMN__SUB_COLUMNS:
+				return subColumns != null && !subColumns.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -263,9 +267,7 @@ public class ColumnImpl extends EObjectImpl implements Column {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", width: ");
+		result.append(" (width: ");
 		result.append(width);
 		result.append(", unit: ");
 		result.append(unit);
