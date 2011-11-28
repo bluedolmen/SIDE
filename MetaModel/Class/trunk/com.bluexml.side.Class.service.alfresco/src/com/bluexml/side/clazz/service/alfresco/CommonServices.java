@@ -71,7 +71,7 @@ public class CommonServices {
 			// ensure retro compatibility
 			prefix = ((ClassPackage) root).getName();
 		} else {
-			//			prefix="Missing_RootPackage";
+			// prefix="Missing_RootPackage";
 			throw new Exception("Missing RootPackage object !!" + node);
 		}
 
@@ -183,4 +183,5 @@ public class CommonServices {
 	public static Object OCLEval(EObject context, String body) throws Exception {
 		return OCLEvaluator.eval(context, body);
 	}
+
 }
