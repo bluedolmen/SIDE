@@ -35,13 +35,23 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getCategoryControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field") && ref.getPrefixedQName() == "cm:categories"){%>
 	<control template="/org/alfresco/components/form/controls/category.ftl">
 		<%getXtensionAsControlParam("forceEditable")%>
 		<%getXtensionAsControlParam("compactMode")%>
 		<%getXtensionAsControlParam("parentNodeRef")%>
 		<%getXtensionAsControlParam("showSubCategoriesOption")%>
 		<%getBehaviour()%>
+	</control>
+<%}%>
+
+<%script type="FormElement" name="getTagControl"%>
+<%if (filter("Field") && ref.getPrefixedQName() == "cm:taggable"){%>
+	<control template="/org/alfresco/components/form/controls/category.ftl">		
+	     <control-param name="compactMode">true</control-param>
+	     <control-param name="params">aspect=cm:taggable</control-param>
+	     <control-param name="createNewItemUri">/api/tag/workspace/SpacesStore</control-param>
+	     <control-param name="createNewItemIcon">tag</control-param>        
 	</control>
 <%}%>
 

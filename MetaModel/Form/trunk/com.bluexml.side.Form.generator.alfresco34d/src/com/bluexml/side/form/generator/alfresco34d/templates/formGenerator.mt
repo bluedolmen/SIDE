@@ -159,7 +159,15 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%}%>
 </control>
 <%}else{%>
-	<%if (filter("BooleanField")){%>
+	<%if (filter("CharField") && ref.getPrefixedQName() == "cm:content"){%>
+		<%getContentControl()%>
+	<%}else if (filter("CharField") && ref.getPrefixedQName() == "cm:taggable"){%>
+		<%getTagControl()%>
+	<%}else if (filter("CharField") && ref.getPrefixedQName() == "cm:categories"){%>
+		<%getCategoryControl()%>
+	<%}else if (filter("FileField") && ref.getPrefixedQName() == "cm:content"){%>
+		<%getFileFieldControl()%>	
+	<%}else if (filter("BooleanField")){%>
 		<%getCheckBoxControl()%>
 	<%}else if (filter("TextField")){%>
 		<%-- Be careful: TextField for SIDE is ContentField|RichText|TextArea for Alfresco --%>
@@ -179,9 +187,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%}else if (filter("HiddenField")){%>
 		<%getHiddenControl()%>
 	<%}else if (filter("NumericalField")){%>
-		<%getNumberControl()%>
-	<%}else if (filter("FileField") && ref.getPrefixedQName() == "cm:content"){%>
-		<%getFileFieldControl()%>
+		<%getNumberControl()%>	
 	<%}else if (filter("ModelChoiceField")){%>
 		 <%getModelChoiceFieldControl("")%>
 	<%}else if (isSearchForm){%>
