@@ -75,13 +75,17 @@
    </div>
 </#macro>   
 
-<#macro renderRule fieldHtmlId rule>
+<#macro renderRule objectId rule>
       <script language="javascript" type="text/javascript">
+      	try {
       	  <#if (rule?index_of("(") != -1)>
       	  ${rule}
       	  <#else>
-      	  ${rule}('${fieldHtmlId}');
+      	  ${rule}('${objectId}');
       	  </#if>
+        } catch (e) {
+      		SIDE.custom.Logger.log("${objectId} - rule '${rule}' has thrown an exception"); 
+        }
       </script>
 </#macro>
 
@@ -105,12 +109,14 @@
       		<@renderRule fieldHtmlId field.control.params.postRule/>
 	  </#if>
    </#if>
+   <#-- SIDE post generic rule-->
+   <@renderRule fieldHtmlId "SIDE.custom.Controller.on"/>
 </#macro>
 
 <#macro renderSet set>
    <#-- SIDE Id -->
    <#if (set.id != "")>
-	   <div id="${set.id}" class="set">
+	   <div id="${set.id?replace('.', '_')}" class="set">
    <#else>
    	   <div class="set">
    </#if>
