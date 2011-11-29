@@ -34,6 +34,9 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
+import com.bluexml.side.clazz.service.alfresco.CommonServices;
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.editor.views.service.OutlineViewService;
 import com.bluexml.side.util.libs.view.OutlineHTMLView;
@@ -85,39 +88,37 @@ public class RefreshOutlineAction extends Action implements ISelectionChangedLis
 		return selectedObject != null;
 	}
 
-	/**
-	 * public boolean updateSelection(IStructuredSelection selection) { fileURI = null; for
-	 * (Iterator<?> objects = selection.iterator(); objects.hasNext();) { Object object =
-	 * objects.next(); if (object instanceof XMIResource) { fileURI = ((XMIResource)
-	 * object).getURI(); } else { return false; } }
-	 * 
-	 * return (fileURI != null); }
-	 */
-
 	@Override
 	public void run() {
 		super.run();
 		try {
 			doAction(fileURI);
 		} catch (Exception e) {
-			MessageDialog.openError(null, e.getMessage(),
-					"Error during outline generation, see log for details.");
+			MessageDialog.openError(null, e.getMessage(), "Error during outline generation, see log for details.");
 			EcorePlugin.INSTANCE.log(e);
 		}
 	}
 
 	private static final IGenFilter genFilter = new IGenFilter() {
-		public boolean filter(java.io.File script, IFile targetFile, EObject object)
-				throws CoreException {
+		public boolean filter(java.io.File script, IFile targetFile, EObject object) throws CoreException {
 			return true;
 		}
 	};
 
 	@SuppressWarnings("deprecation")
-	private void doAction(URI uri) throws CoreException, FactoryException, IOException {
+	private void doAction(URI uri) throws Exception {
 		if (uri != null) {
-			if (selectedObject != null)
-				OutlineViewService.setNameOfSelectedForm(((FormContainer) selectedObject).getId());
+			if (selectedObject != null) {
+				FormContainer selectedObject2 = (FormContainer) selectedObject;
+				OutlineViewService.setNameOfSelectedForm(selectedObject2.getId());
+
+				ModelElement ref = selectedObject2.getFields().get(0).getRef();
+				if (ref instanceof NamedModelElement) {
+					NamedModelElement el = (NamedModelElement) ref;
+					String prefixedQName = CommonServices.getPrefixedQName(el);
+					//TODO : use the prefixed QName as standalone form parameter
+				}
+			}
 
 			IFile output_file = doGeneration(uri);
 			InputStream is = output_file.getContents();
@@ -128,9 +129,7 @@ public class RefreshOutlineAction extends Action implements ISelectionChangedLis
 			while (dis.available() != 0) {
 				content += dis.readLine();
 			}
-			OutlineHTMLView v = (OutlineHTMLView) PlatformUI.getWorkbench()
-					.getActiveWorkbenchWindow().getActivePage().showView(
-							"com.bluexml.view.OutlineHTMLView");
+			OutlineHTMLView v = (OutlineHTMLView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("com.bluexml.view.OutlineHTMLView");
 			v.setContent(content);
 
 			try {
@@ -153,8 +152,7 @@ public class RefreshOutlineAction extends Action implements ISelectionChangedLis
 
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
-				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-						.saveAllEditors(true);
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().saveAllEditors(true);
 			}
 		});
 		// References to files in the project
@@ -199,9 +197,7 @@ public class RefreshOutlineAction extends Action implements ISelectionChangedLis
 		// Log
 		Log log = ChainFactory.eINSTANCE.createLog();
 		EFactory.eAdd(repository, "files", log);
-		EFactory.eSet(log, "path", modelPath.getFullPath().removeLastSegments(1).append(
-				modelPath.getFullPath().removeFileExtension().lastSegment() + ".log.txt")
-				.toString());
+		EFactory.eSet(log, "path", modelPath.getFullPath().removeLastSegments(1).append(modelPath.getFullPath().removeFileExtension().lastSegment() + ".log.txt").toString());
 
 		// Metamodel file
 		EmfMetamodel pim = ChainFactory.eINSTANCE.createEmfMetamodel();
@@ -210,8 +206,7 @@ public class RefreshOutlineAction extends Action implements ISelectionChangedLis
 
 		List<String> templates = new ArrayList<String>();
 
-		templates
-				.add("/com.bluexml.side.Form.edit.ui/com/bluexml/side/form/editor/views/default.mt");
+		templates.add("/com.bluexml.side.Form.edit.ui/com/bluexml/side/form/editor/views/default.mt");
 
 		for (String templateFile : templates) {
 			// Generator
@@ -234,8 +229,7 @@ public class RefreshOutlineAction extends Action implements ISelectionChangedLis
 		IFile fchain = tmpProject.getFile("form.chain");
 		URI chainURI = Resources.createPlatformResourceURI(fchain.getFullPath().toString());
 		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
-				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 		Resource chainResource = resourceSet.createResource(chainURI);
 		chainResource.getContents().add(chain);
 		chain.setFile(fchain);

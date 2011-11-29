@@ -14,7 +14,8 @@ Require-Bundle: fr.obeo.acceleo.chain,
  com.bluexml.side.Util.libs,
  com.bluexml.side.Workflow.editor,
  org.topcased.modeler,
- com.bluexml.side.Class.editor
+ com.bluexml.side.Class.editor,
+ com.bluexml.side.Class.service.alfresco
 Export-Package: com.bluexml.side.form.clazz,
  com.bluexml.side.form.clazz.utils,
  com.bluexml.side.form.common,

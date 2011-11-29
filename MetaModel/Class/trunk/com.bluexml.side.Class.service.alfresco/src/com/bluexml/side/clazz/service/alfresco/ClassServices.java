@@ -20,12 +20,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
-import com.bluexml.side.Class.modeler.diagram.utils.metainfo.value.VisualTypeComponent_Enum;
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.Comment;
-import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.Stereotype;
 
 public class ClassServices {
@@ -36,41 +34,6 @@ public class ClassServices {
 		return result;
 	}
 
-	public static boolean useTabComponent(Clazz c) {
-		for (Object obj : c.getMetainfo()) {
-			if (obj instanceof MetaInfo) {
-				MetaInfo mi = (MetaInfo) obj;
-				if (mi.getKey().equalsIgnoreCase("visual-component")) {
-					return mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.HorizontalTab.toString()) || mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.VerticalTab.toString());
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean useSeperatorComponent(Clazz c) {
-		for (Object obj : c.getMetainfo()) {
-			if (obj instanceof MetaInfo) {
-				MetaInfo mi = (MetaInfo) obj;
-				if (mi.getKey().equalsIgnoreCase("visual-component")) {
-					return mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.Separator.toString());
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean useVerticalTabComponent(Clazz c) {
-		for (Object obj : c.getMetainfo()) {
-			if (obj instanceof MetaInfo) {
-				MetaInfo mi = (MetaInfo) obj;
-				if (mi.getKey().equalsIgnoreCase("visual-component")) {
-					return mi.getValue().equalsIgnoreCase(VisualTypeComponent_Enum.VerticalTab.toString());
-				}
-			}
-		}
-		return false;
-	}
 
 	public static boolean hasLabel(Clazz cl) {
 		EList<?> list = cl.getComments();
