@@ -84,7 +84,7 @@
       	  ${rule}('${objectId}');
       	  </#if>
         } catch (e) {
-      		SIDE.custom.Logger.log("${objectId} - rule '${rule}' has thrown an exception"); 
+      		//SIDE.custom.Logger.log("${objectId} - rule '${rule}' has thrown an exception"); 
         }
       </script>
 </#macro>
