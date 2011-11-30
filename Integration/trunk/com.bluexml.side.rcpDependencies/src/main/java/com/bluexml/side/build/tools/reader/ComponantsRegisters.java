@@ -74,7 +74,7 @@ public class ComponantsRegisters {
 	 * @return
 	 * @throws Exception
 	 */
-	public File getProjectFolder(String id) throws Exception {
+	public File getProjectFolder(String id,String from) throws Exception {
 		if (!id.contains("bluexml")) {
 			return null;
 		}
@@ -86,7 +86,7 @@ public class ComponantsRegisters {
 		// if not found try to search in file system
 		if (path == null) {
 			logger.warn("Bundle " + id + " not found try to locate from file system");
-			getAnomaly().addBundleNotFoundInConf(id);
+			getAnomaly().addBundleNotFoundInConf(new String[]{id,from});
 			for (File f : repositoryLocation) {
 				logger.warn("search in :" + f);
 				path = Utils.find(id, f);
@@ -97,7 +97,7 @@ public class ComponantsRegisters {
 			if (path == null) {
 				logger.error("bundle not found in FS");
 			} else {
-				logger.warn("bundle found in FS");
+				logger.warn("bundle found in FS");				
 			}
 
 		} else {

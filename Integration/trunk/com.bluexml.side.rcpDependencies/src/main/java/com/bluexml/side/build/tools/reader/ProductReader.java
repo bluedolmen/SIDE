@@ -37,7 +37,8 @@ public class ProductReader extends Reader {
 		// get properties
 		Element root = doc.getRootElement();
 		product = new Product();
-		product.setId(root.getAttributeValue("id"));
+		String id = root.getAttributeValue("id");
+		product.setId(id);
 		product.setUid(root.getAttributeValue("uid"));
 		product.setName(root.getAttributeValue("name"));
 		product.setVersion(root.getAttributeValue("version"));
@@ -52,7 +53,7 @@ public class ProductReader extends Reader {
 
 			Feature f = registries.getFeature(featureId);
 			if (f == null) {
-				File featureFolder = registries.getProjectFolder(featureId);
+				File featureFolder = registries.getProjectFolder(featureId, id);
 				boolean side = false;
 				if (featureFolder != null) {
 					f = fr.read(featureFolder);

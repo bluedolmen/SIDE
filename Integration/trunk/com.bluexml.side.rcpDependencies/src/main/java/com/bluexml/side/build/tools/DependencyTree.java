@@ -179,9 +179,9 @@ public class DependencyTree {
 			logger.warn(string);
 		}
 		logger.warn("Bundle not found in conf file :");
-		List<String> list3 = compReg.getAnomaly().bundleNotFoundInConf;
-		for (String string : list3) {
-			logger.warn(string);
+		List<String[]> list3 = compReg.getAnomaly().bundleNotFoundInConf;
+		for (String[] string : list3) {
+			logger.warn(string[0]+" from "+string[1]);
 		}
 
 		logger.warn("Invalide Bundle in conf file :");

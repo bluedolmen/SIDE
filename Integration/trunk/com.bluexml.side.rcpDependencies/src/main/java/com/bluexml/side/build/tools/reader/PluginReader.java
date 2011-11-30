@@ -12,7 +12,6 @@ import org.apache.commons.collections15.CollectionUtils;
 import org.apache.log4j.Logger;
 
 import com.bluexml.side.build.tools.componants.Configuration;
-import com.bluexml.side.build.tools.componants.Extension;
 import com.bluexml.side.build.tools.componants.Plugin;
 
 public class PluginReader extends Reader {
@@ -133,7 +132,7 @@ public class PluginReader extends Reader {
 				} else {
 					// need to read from plugin definition if source are available
 					logger.debug("requeried Bundle " + reqId + " is not in register, try to read from FS");
-					File featureFolder = registries.getProjectFolder(reqId);
+					File featureFolder = registries.getProjectFolder(reqId, id);
 					if (featureFolder != null) {
 						reqP = read(featureFolder);
 					} else {

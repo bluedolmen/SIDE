@@ -45,14 +45,14 @@ public class BlxExtensionPointReader extends Reader {
 			if (extXML.getAttributeValue("point").equals("com.bluexml.side.Application.com_bluexml_application_configuration")) {
 				// SIDE Ext
 				logger.debug("Extension found, extracting data");
-				
+
 				// some maven module can be declared on plugins directly (archetype for exemples)
-				Configuration conf = new Configuration();				
+				Configuration conf = new Configuration();
 				readModuleConstraints(extXML, conf);
-				if (conf.getModules().size() >0) {
+				if (conf.getModules().size() > 0) {
 					lext.add(conf);
 				}
-								
+
 				List<?> lmm = extXML.getChildren("metamodel");
 				for (Object object2 : lmm) {
 					Element metaE = (Element) object2;
@@ -178,7 +178,7 @@ public class BlxExtensionPointReader extends Reader {
 			// get module
 			Module module = registries.modulesRegister.get(moduleId);
 			if (module == null) {
-				File pom = registries.getProjectFolder(moduleId);
+				File pom = registries.getProjectFolder(moduleId, context.toString());
 
 				if (pom.exists() && addAll) {
 					// use maven to get all dependencies
@@ -234,7 +234,7 @@ public class BlxExtensionPointReader extends Reader {
 		if (p == null) {
 			logger.debug("Plugin not yet registered so search in repository for bundle :" + bundle);
 			// we must read the plugin definition
-			File pluginFolder = registries.getProjectFolder(bundle);
+			File pluginFolder = registries.getProjectFolder(bundle, cons.toString());
 			if (pluginFolder != null) {
 				//				PluginReader pr = new PluginReader(registries);
 				//				p = pr.read(pluginFolder);

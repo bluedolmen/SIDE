@@ -120,8 +120,7 @@ public class JungConverter {
 		logger.info("graph :" + g);
 		logger.info("Edges :" + g.getEdgeCount());
 		logger.info("Vertex :" + g.getVertexCount());
-		logger.info("getVertices :" + g.getVertices().toArray()[0].getClass());
-		logger.info("getEdges :" + g.getEdges().toArray()[0].getClass());
+		
 	}
 
 	public static Graph<Componant, String> convert(File graphml) throws ParserConfigurationException, SAXException, IOException {

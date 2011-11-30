@@ -63,14 +63,14 @@ public class FeatureReader extends Reader {
 					// search if this plugin have been previously read (from another feature)
 					p = registries.pluginsRegister.get(pluginId);
 				} else {
-					File pluginFolder = registries.getProjectFolder(pluginId);
+					File pluginFolder = registries.getProjectFolder(pluginId, id);
 					if (pluginFolder != null) {
 						logger.debug("Read plugin from file " + pluginId);
 						PluginReader pr = new PluginReader(registries, props);
 						p = pr.read(pluginFolder);
 					} else {
 						side = false;
-						logger.debug("plugin project not found, create plugin object with reference");
+						logger.warn(id + " : plugin project not found, create plugin object with reference");
 						p = new Plugin();
 						p.setId(pluginId);
 						p.setVersion(pluginVersion);
@@ -97,7 +97,7 @@ public class FeatureReader extends Reader {
 				Feature f = registries.featuresRegister.get(inculdedFeatureId);
 
 				if (f == null) {
-					File featureFolder = registries.getProjectFolder(inculdedFeatureId);
+					File featureFolder = registries.getProjectFolder(inculdedFeatureId, id);
 					if (featureFolder != null) {
 						f = read(featureFolder);
 					} else {
