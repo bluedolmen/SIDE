@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.bluexml.side.Portal.edit; singleton:=true
-Bundle-Version: 1.0.44.v30566-20111128
+Bundle-Version: 1.0.45.v30608-20111130
 Bundle-ClassPath: .
 Bundle-Activator: com.bluexml.side.portal.provider.PortalEditPlugin$Implementation
 Bundle-Vendor: %providerName
