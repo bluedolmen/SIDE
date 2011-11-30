@@ -1,7 +1,7 @@
 <project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.side.Framework.alfresco.shareDoclistcommunity3.4.d" default="patchWebapps">
 	<property file="${user.home}/build.properties" />
 	<property file="build.${user.name}.properties" />
-	<path id="maven-ant-tasks.classpath" path="maven-ant-tasks-2.0.10.jar" />
+	<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
 	<typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant" classpathref="maven-ant-tasks.classpath" />
 	<artifact:pom id="mypom" file="pom.xml" />
 	<property name="moduleId" value="${mypom.artifactId}" />
@@ -21,11 +21,14 @@
 		<echo message="==========" />
 		<echo message="patch the web application webapps.home=${webapps.home}" />
 
-		<copy todir="${webapps.home}/${webappName}" overwrite="true" failonerror="false" verbose="true">
-			<fileset dir="target/${moduleId}-${mypom.version}" id="id">
-				<include name="**/**" />
+		<delete verbose="true" quiet="true">
+			<fileset dir="${webapps.home}/${webappName}/WEB-INF/lib">
+				<include name="${moduleId}-*.jar" />
 			</fileset>
-		</copy>
+		</delete>
+
+		<unzip dest="${webapps.home}/${webappName}" overwrite="true" src="target/${moduleId}-${mypom.version}.zip">
+		</unzip>
 
 		<echo message="==========" />
 		<!--
@@ -51,8 +54,8 @@
 	</target>
 
 	<target name="maven_deploy" depends="" description="do mvn deploy">
-		<maven basedir="${basedir}" options="" goal="clean" resultproperty="maven.build.result" />
-		<maven basedir="${basedir}" options="" goal="deploy" resultproperty="maven.build.result" />
+		<maven basedir="${basedir}" options="-P public" goal="clean" resultproperty="maven.build.result" />
+		<maven basedir="${basedir}" options="-P public" goal="deploy" resultproperty="maven.build.result" />
 		<!--
 			<artifact:mvn pom="pom.xml" mavenHome="${maven.home}">
 				<arg value="clean" />

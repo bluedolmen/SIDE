@@ -1,0 +1,5 @@
+<webscript>
+  <shortname>sesamvitaleFilter</shortname>
+  <description>custom filter to display publication ressources</description>
+  <url>/components/sesamvitaleFilter1</url>
+</webscript>

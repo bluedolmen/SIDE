@@ -63,6 +63,7 @@ if (!Array.prototype.indexOf) {
 		log : function(msg) {
 			console.log("[SIDE.ComboBox] " + msg);
 		},
+
 		/**
 		 * Object container for initialization options
 		 * 
@@ -76,15 +77,29 @@ if (!Array.prototype.indexOf) {
 			advancedQuery : "",
 			maxResults : -1
 		},
+		setOptions : function(options) {
+			this.log("setOptions :" + options);
+			SIDE.ComboBox.superclass.setOptions.call(this, options);
+			if (options.getDataSource) {
+				this.options.getDataSource = options.getDataSource;
+			} else {
+				var me = this;
+				this.options.getDataSource = function _getDataSource() {
+					var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&searchTerm="
+							+ me.options.filterTerm + "&size=" + me.options.maxResults + "&advancedQuery=" + me.options.advancedQuery);
+					myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+					myDataSource.responseSchema = {
+						fields : [ "nodeRef", "name", "title" ],
+						resultsList : "data.items"
+					};
+					return myDataSource;
+				};
+			}
+		},
+
 		load : function() {
 
-			var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType + "&searchTerm=" + this.options.filterTerm
-					+ "&size=" + this.options.maxResults + "&advancedQuery=" + this.options.advancedQuery);
-			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
-			myDataSource.responseSchema = {
-				fields : [ "nodeRef", "name", "title" ],
-				resultsList : "data.items"
-			};
+			var myDataSource = this.options.getDataSource();
 
 			if (this.options.multipleSelectMode) {
 				// cardinality n-n

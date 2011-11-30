@@ -22,6 +22,7 @@
      filterTerm : <#if field.control.params.filterTerm??>"${field.control.params.filterTerm}"<#else>"*"</#if>,
      advancedQuery :<#if field.control.params.advancedQuery??>"${field.control.params.advancedQuery?url}"<#else>""</#if>,
 	 maxResults : <#if field.control.params.maxResults??>${field.control.params.maxResults}<#else>-1</#if>
+	 <#if field.control.params.getDataSource??>, getDataSource :${field.control.params.getDataSource}</#if>
    });
    
    
