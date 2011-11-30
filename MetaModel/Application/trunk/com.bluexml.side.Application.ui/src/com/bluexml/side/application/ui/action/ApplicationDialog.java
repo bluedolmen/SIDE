@@ -108,7 +108,8 @@ import com.bluexml.side.application.ui.action.tree.TreeView;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
 import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
-import com.bluexml.side.application.ui.dialogs.manageconfiguration.DialogResourceCellEditor;
+import com.bluexml.side.util.libs.eclipse.DialogResourceCellEditor;
+import com.bluexml.side.util.libs.ecore.ResourceTableCellData;
 
 @SuppressWarnings("restriction")
 public class ApplicationDialog extends Dialog {
@@ -537,7 +538,7 @@ public class ApplicationDialog extends Dialog {
 	private void configureGeneratorOptions(Configuration configuration) {
 		Configuration conf = getCurrentConfiguration();
 		for (ConfigurationParameters confParam : conf.getParameters()) {
-			GeneratorParameter genParam = dataStructure.getParamMatching(confParam.getKey());
+			ResourceTableCellData genParam = dataStructure.getParamMatching(confParam.getKey());
 			if (genParam != null) {
 				genParam.setValue(confParam.getValue());
 			}

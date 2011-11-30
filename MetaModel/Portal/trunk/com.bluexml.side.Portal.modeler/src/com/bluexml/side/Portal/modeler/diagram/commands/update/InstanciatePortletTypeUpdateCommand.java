@@ -48,7 +48,7 @@ public class InstanciatePortletTypeUpdateCommand extends Command {
 			while (iterator.hasNext()) {
 				InstancesObject inst = iterator.next();	
 				
-				PortletAttribute attribute = getAttribute(inst.getAttributeName());
+				PortletAttribute attribute = getAttribute(inst.getKey());
 				if (attribute != null) {
 					PortletAttributeInstance instance = PortalFactory.eINSTANCE.createPortletAttributeInstance();	
 					instance.setValue(inst.getValue());

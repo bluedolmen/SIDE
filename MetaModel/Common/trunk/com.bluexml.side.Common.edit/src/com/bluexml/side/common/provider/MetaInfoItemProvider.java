@@ -65,6 +65,7 @@ public class MetaInfoItemProvider
 			addValueTypePropertyDescriptor(object);
 			addConstraintTypePropertyDescriptor(object);
 			addValueSetPropertyDescriptor(object);
+			addMultilineValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -180,6 +181,28 @@ public class MetaInfoItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Multiline Value feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMultilineValuePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_MetaInfo_multilineValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_MetaInfo_multilineValue_feature", "_UI_MetaInfo_type"),
+				 CommonPackage.Literals.META_INFO__MULTILINE_VALUE,
+				 true,
+				 true,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns MetaInfo.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -188,6 +211,16 @@ public class MetaInfoItemProvider
 	@Override
 	public Object getImage(Object object) {
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/MetaInfo"));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected boolean shouldComposeCreationImage() {
+		return true;
 	}
 
 	/**
@@ -221,6 +254,7 @@ public class MetaInfoItemProvider
 			case CommonPackage.META_INFO__VALUE_TYPE:
 			case CommonPackage.META_INFO__CONSTRAINT_TYPE:
 			case CommonPackage.META_INFO__VALUE_SET:
+			case CommonPackage.META_INFO__MULTILINE_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

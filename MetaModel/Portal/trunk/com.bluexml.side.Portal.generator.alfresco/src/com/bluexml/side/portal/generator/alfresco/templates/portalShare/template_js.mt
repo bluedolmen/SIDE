@@ -33,5 +33,8 @@ script: {
 	var siteID =page.url.templateArgs.site;
 	model.siteID = siteID;
 
+	/*
+	var componentPropertyConf = unescape(args.conf);
+	*/
 }
 <%}%>

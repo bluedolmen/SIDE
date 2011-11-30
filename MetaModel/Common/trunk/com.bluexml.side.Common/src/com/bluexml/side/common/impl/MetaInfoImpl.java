@@ -36,6 +36,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getValueType <em>Value Type</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getConstraintType <em>Constraint Type</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getValueSet <em>Value Set</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getMultilineValue <em>Multiline Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,6 +134,26 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	 * @ordered
 	 */
 	protected Object valueSet = VALUE_SET_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMultilineValue() <em>Multiline Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMultilineValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MULTILINE_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMultilineValue() <em>Multiline Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMultilineValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String multilineValue = MULTILINE_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -263,6 +284,27 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getMultilineValue() {
+		return multilineValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMultilineValue(String newMultilineValue) {
+		String oldMultilineValue = multilineValue;
+		multilineValue = newMultilineValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.META_INFO__MULTILINE_VALUE, oldMultilineValue, multilineValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean equalsForMerge(MetaInfo other) {
 		if (equalsForMergeBodyOCL == null) {
 			EOperation eOperation = CommonPackage.Literals.META_INFO.getEOperations().get(0);
@@ -314,6 +356,8 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 				return getConstraintType();
 			case CommonPackage.META_INFO__VALUE_SET:
 				return getValueSet();
+			case CommonPackage.META_INFO__MULTILINE_VALUE:
+				return getMultilineValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -340,6 +384,9 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 				return;
 			case CommonPackage.META_INFO__VALUE_SET:
 				setValueSet(newValue);
+				return;
+			case CommonPackage.META_INFO__MULTILINE_VALUE:
+				setMultilineValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -368,6 +415,9 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 			case CommonPackage.META_INFO__VALUE_SET:
 				setValueSet(VALUE_SET_EDEFAULT);
 				return;
+			case CommonPackage.META_INFO__MULTILINE_VALUE:
+				setMultilineValue(MULTILINE_VALUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -390,6 +440,8 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 				return constraintType != CONSTRAINT_TYPE_EDEFAULT;
 			case CommonPackage.META_INFO__VALUE_SET:
 				return VALUE_SET_EDEFAULT == null ? valueSet != null : !VALUE_SET_EDEFAULT.equals(valueSet);
+			case CommonPackage.META_INFO__MULTILINE_VALUE:
+				return MULTILINE_VALUE_EDEFAULT == null ? multilineValue != null : !MULTILINE_VALUE_EDEFAULT.equals(multilineValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -414,6 +466,8 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 		result.append(constraintType);
 		result.append(", valueSet: ");
 		result.append(valueSet);
+		result.append(", multilineValue: ");
+		result.append(multilineValue);
 		result.append(')');
 		return result.toString();
 	}

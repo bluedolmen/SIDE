@@ -44,10 +44,19 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 --%>
 <%script type="FormElement" name="getXtensionAsControlParam" post="trim()" %>
 <%for (Xtension) {%>
+<!--xtension : <%current()%> -->
+<!--arg      :<%args(0).toLowerCase()%> -->
+<!-- test : <%toString().toLowerCase().startsWith(args(0).toLowerCase())%> -->
 	<%if (toLowerCase().startsWith(args(0).toLowerCase())){%>
 		<control-param name="<%args(0)%>"><%toString().substring(toString().indexOf("=") + 1, toString().length())%></control-param>
 	<%}%>
 <%}%>
+<%for (metainfo){%>
+<%if (key.toLowerCase() == args(0).toLowerCase()){%>
+<control-param name="<%args(0)%>"><![CDATA[<%if (value != null && value != ""){%><%value%><%}else if (multilineValue != null && multilineValue != ""){%><%multilineValue%><%}%>]]></control-param>
+<%}%>
+<%}%>
+
 
 <%-- Why doesn't this work? --%>
 <%--

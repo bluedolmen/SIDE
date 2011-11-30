@@ -128,12 +128,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="onLayout" eType="#//PortalLayout"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PortletTypeAttributeType">
-    <eLiterals name="String" literal="string"/>
+    <eLiterals name="String" literal="String"/>
     <eLiterals name="int" value="1"/>
     <eLiterals name="boolean" value="2"/>
     <eLiterals name="double" value="3"/>
     <eLiterals name="Date" value="4"/>
     <eLiterals name="DateTime" value="5"/>
+    <eLiterals name="multiline" value="6" literal="multiline"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstanciatePortletType">
     <eAnnotations source="http://www.bluexml.com/OCL">

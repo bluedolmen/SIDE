@@ -99,6 +99,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//MetaInfo/valueType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//MetaInfo/constraintType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//MetaInfo/valueSet"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute Common.ecore#//MetaInfo/multilineValue"/>
       <genOperations ecoreOperation="Common.ecore#//MetaInfo/equalsForMerge">
         <genParameters ecoreParameter="Common.ecore#//MetaInfo/equalsForMerge/other"/>
       </genOperations>

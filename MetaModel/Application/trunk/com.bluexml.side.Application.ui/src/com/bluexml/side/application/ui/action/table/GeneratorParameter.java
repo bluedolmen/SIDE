@@ -2,7 +2,9 @@ package com.bluexml.side.application.ui.action.table;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 
-public class GeneratorParameter implements Comparable<GeneratorParameter> {
+import com.bluexml.side.util.libs.ecore.ResourceTableCellData;
+
+public class GeneratorParameter implements Comparable<GeneratorParameter>, ResourceTableCellData {
 	private String key;
 	private String value;
 	private String label;
@@ -40,26 +42,44 @@ public class GeneratorParameter implements Comparable<GeneratorParameter> {
 		this.documentation = documentation;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#getKey()
+	 */
 	public String getKey() {
 		return key;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#setKey(java.lang.String)
+	 */
 	public void setKey(String key) {
 		this.key = key;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#getValue()
+	 */
 	public String getValue() {
 		return value;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#setValue(java.lang.String)
+	 */
 	public void setValue(String value) {
 		this.value = value;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#getLabel()
+	 */
 	public String getLabel() {
 		return label;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#setLabel(java.lang.String)
+	 */
 	public void setLabel(String label) {
 		this.label = label;
 	}

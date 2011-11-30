@@ -585,6 +585,15 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMetaInfo_MultilineValue() {
+		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMetaInfoGroup() {
 		return metaInfoGroupEClass;
 	}
@@ -782,6 +791,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		createEAttribute(metaInfoEClass, META_INFO__VALUE_TYPE);
 		createEAttribute(metaInfoEClass, META_INFO__CONSTRAINT_TYPE);
 		createEAttribute(metaInfoEClass, META_INFO__VALUE_SET);
+		createEAttribute(metaInfoEClass, META_INFO__MULTILINE_VALUE);
 
 		metaInfoGroupEClass = createEClass(META_INFO_GROUP);
 		createEReference(metaInfoGroupEClass, META_INFO_GROUP__CHILDREN);
@@ -929,6 +939,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEAttribute(getMetaInfo_ValueType(), g1, "valueType", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetaInfo_ConstraintType(), this.getDataType(), "constraintType", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetaInfo_ValueSet(), ecorePackage.getEJavaObject(), "valueSet", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetaInfo_MultilineValue(), ecorePackage.getEString(), "multilineValue", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(metaInfoEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getMetaInfo(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);

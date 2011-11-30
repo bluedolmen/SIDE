@@ -11,6 +11,7 @@ import com.bluexml.side.application.ApplicationFactory;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
+import com.bluexml.side.util.libs.ecore.ResourceTableCellData;
 
 public class GeneratorParameterCellModifier implements ICellModifier {
 
@@ -79,7 +80,7 @@ public class GeneratorParameterCellModifier implements ICellModifier {
 
 	private void updateApplication(TableItem item) {
 		if (item.getData() instanceof GeneratorParameter) {
-			GeneratorParameter modifiedParam = (GeneratorParameter) item.getData();
+			ResourceTableCellData modifiedParam = (ResourceTableCellData) item.getData();
 			Configuration config = ApplicationDialog.getCurrentConfiguration();
 			if (config != null) {
 				// Search generator parameter

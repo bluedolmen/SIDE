@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 
+import com.bluexml.side.util.libs.ecore.ResourceTableCellData;
+
 public class GeneratorParameterDataStructure {
 
 	List<GeneratorParameter> data = new ArrayList<GeneratorParameter>();
@@ -32,7 +34,7 @@ public class GeneratorParameterDataStructure {
 	public String getLabel(Object element) {
 		String result = "";
 		if (element instanceof GeneratorParameter) {
-			GeneratorParameter genParam = (GeneratorParameter) element;
+			ResourceTableCellData genParam = (ResourceTableCellData) element;
 			result = genParam.getLabel();
 		}
 		return result;
@@ -41,7 +43,7 @@ public class GeneratorParameterDataStructure {
 	public String getValue(Object element) {
 		String result = "";
 		if (element instanceof GeneratorParameter) {
-			GeneratorParameter genParam = (GeneratorParameter) element;
+			ResourceTableCellData genParam = (ResourceTableCellData) element;
 			result = genParam.getValue();
 		}
 		return result;
@@ -49,14 +51,14 @@ public class GeneratorParameterDataStructure {
 
 	public void setLabel(Object element, String value) {
 		if (element instanceof GeneratorParameter) {
-			GeneratorParameter genParam = (GeneratorParameter) element;
+			ResourceTableCellData genParam = (ResourceTableCellData) element;
 			genParam.setKey(value);
 		}
 	}
 
 	public void setValue(Object element, String value) {
 		if (element instanceof GeneratorParameter) {
-			GeneratorParameter genParam = (GeneratorParameter) element;
+			ResourceTableCellData genParam = (ResourceTableCellData) element;
 			genParam.setValue(value);
 		}
 	}
@@ -67,8 +69,8 @@ public class GeneratorParameterDataStructure {
 	 * @param key
 	 * @return
 	 */
-	public GeneratorParameter getParamMatching(String key) {
-		GeneratorParameter result = null;
+	public ResourceTableCellData getParamMatching(String key) {
+		ResourceTableCellData result = null;
 		int i = 0;
 		int size = data.size();
 		while (i < size && result == null) {

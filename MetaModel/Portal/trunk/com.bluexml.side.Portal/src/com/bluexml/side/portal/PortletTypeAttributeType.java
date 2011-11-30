@@ -30,7 +30,7 @@ public enum PortletTypeAttributeType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	STRING(0, "String", "string"),
+	STRING(0, "String", "String"),
 
 	/**
 	 * The '<em><b>Int</b></em>' literal object.
@@ -80,7 +80,15 @@ public enum PortletTypeAttributeType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DATE_TIME(5, "DateTime", "DateTime");
+	DATE_TIME(5, "DateTime", "DateTime"), /**
+	 * The '<em><b>Multiline</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MULTILINE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MULTILINE(6, "multiline", "multiline");
 
 	/**
 	 * The '<em><b>String</b></em>' literal value.
@@ -91,7 +99,7 @@ public enum PortletTypeAttributeType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #STRING
-	 * @model name="String" literal="string"
+	 * @model name="String"
 	 * @generated
 	 * @ordered
 	 */
@@ -173,6 +181,21 @@ public enum PortletTypeAttributeType implements Enumerator {
 	public static final int DATE_TIME_VALUE = 5;
 
 	/**
+	 * The '<em><b>Multiline</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Multiline</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #MULTILINE
+	 * @model name="multiline"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MULTILINE_VALUE = 6;
+
+	/**
 	 * An array of all the '<em><b>Portlet Type Attribute Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -186,6 +209,7 @@ public enum PortletTypeAttributeType implements Enumerator {
 			DOUBLE,
 			DATE,
 			DATE_TIME,
+			MULTILINE,
 		};
 
 	/**
@@ -242,6 +266,7 @@ public enum PortletTypeAttributeType implements Enumerator {
 			case DOUBLE_VALUE: return DOUBLE;
 			case DATE_VALUE: return DATE;
 			case DATE_TIME_VALUE: return DATE_TIME;
+			case MULTILINE_VALUE: return MULTILINE;
 		}
 		return null;
 	}

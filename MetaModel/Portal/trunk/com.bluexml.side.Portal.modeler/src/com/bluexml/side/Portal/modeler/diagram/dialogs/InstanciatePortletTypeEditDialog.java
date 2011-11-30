@@ -158,7 +158,7 @@ public class InstanciatePortletTypeEditDialog extends Dialog implements IDialogC
 	 */
 	protected void removeInstance() {
 		// We can remove only multivalued field
-		if (dynAttributesNames.contains(((InstancesObject) inputInstances.getSelection()).getAttributeName())) {
+		if (dynAttributesNames.contains(((InstancesObject) inputInstances.getSelection()).getKey())) {
 			inputInstances.remove();
 			inputInstances.refresh();
 		}

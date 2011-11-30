@@ -13,7 +13,6 @@ import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.internal.ui.SWTFactory;
 import org.eclipse.debug.ui.StringVariableSelectionDialog;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -42,7 +41,7 @@ import org.eclipse.ui.externaltools.internal.ui.FileSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
-public class RessourcesSelection extends Dialog {
+public class RessourcesSelection extends AbstractDialogCellEditor {
 
 	private Text locationField;
 	private String initialValue = "";
@@ -64,6 +63,10 @@ public class RessourcesSelection extends Dialog {
 		return resourcePath;
 	}
 
+	protected boolean isResizable() {
+		return true;
+	}
+
 	public RessourcesSelection(Shell parent) {
 		super(parent);
 	}
@@ -79,6 +82,7 @@ public class RessourcesSelection extends Dialog {
 		this.dataType = resource_type;
 		this.locationLabel = locationLabel;
 		this.resourcePath = initialValue;
+
 	}
 
 	public void init(String locationLabel, String initialValue, String resource_type) {
@@ -106,11 +110,27 @@ public class RessourcesSelection extends Dialog {
 		group.setLayout(layout);
 		group.setLayoutData(gridData);
 
-		locationField = new Text(group, SWT.BORDER);
+		int style = SWT.BORDER;
+		if (dataType.equals(RESOURCE_TYPE.RESOURCE_TYPE_STRING_MULTILINE)) {
+			style = SWT.MULTI | SWT.BORDER;
+		}
+		locationField = new Text(group, style);
 
 		locationField.setText(initialValue);
-		gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.widthHint = IDialogConstants.ENTRY_FIELD_WIDTH;
+		if (dataType.equals(RESOURCE_TYPE.RESOURCE_TYPE_STRING_MULTILINE)) {
+			gridData = new GridData(GridData.FILL_HORIZONTAL);
+			int lineCount = locationField.getLineCount();
+			int lineHeight = locationField.getLineHeight();
+
+			int i = (lineCount + 10) * lineHeight;
+			gridData.heightHint = i;
+			locationField.setSize(100, i);
+			gridData.widthHint = IDialogConstants.ENTRY_FIELD_WIDTH * 2;
+		} else {
+			gridData = new GridData(GridData.FILL_HORIZONTAL);
+			gridData.widthHint = IDialogConstants.ENTRY_FIELD_WIDTH;
+		}
+
 		locationField.setLayoutData(gridData);
 		locationField.addModifyListener(fListener);
 		addControlAccessibleListener(locationField, group.getText());
@@ -120,12 +140,12 @@ public class RessourcesSelection extends Dialog {
 		layout.marginHeight = 0;
 		layout.marginWidth = 0;
 		layout.numColumns = 3;
-		gridData = new GridData(GridData.HORIZONTAL_ALIGN_END);
+		gridData = new GridData(GridData.FILL_BOTH);
 		buttonComposite.setLayout(layout);
 		buttonComposite.setLayoutData(gridData);
 		buttonComposite.setFont(parent.getFont());
 
-		if (!dataType.equals(RESOURCE_TYPE.RESOURCE_TYPE_STRING)) {
+		if (!(dataType.equals(RESOURCE_TYPE.RESOURCE_TYPE_STRING) || dataType.equals(RESOURCE_TYPE.RESOURCE_TYPE_STRING_MULTILINE))) {
 			workspaceLocationButton = createPushButton(buttonComposite, StylingUtil.Messages.getString("SelectResources.2"), null); //$NON-NLS-1$
 			workspaceLocationButton.addSelectionListener(fListener);
 			addControlAccessibleListener(workspaceLocationButton, group.getText() + " " + workspaceLocationButton.getText()); //$NON-NLS-1$
@@ -135,8 +155,14 @@ public class RessourcesSelection extends Dialog {
 			addControlAccessibleListener(fileLocationButton, group.getText() + " " + fileLocationButton.getText()); //$NON-NLS-1$
 		}
 		variablesLocationButton = createPushButton(buttonComposite, StylingUtil.Messages.getString("SelectResources.4"), null); //$NON-NLS-1$
-		variablesLocationButton.addSelectionListener(fListener);
-		addControlAccessibleListener(variablesLocationButton, group.getText() + " " + variablesLocationButton.getText()); //$NON-NLS-1$
+		
+		if (!dataType.equals(RESOURCE_TYPE.RESOURCE_TYPE_STRING_MULTILINE)) {			
+			variablesLocationButton.addSelectionListener(fListener);
+			addControlAccessibleListener(variablesLocationButton, group.getText() + " " + variablesLocationButton.getText()); //$NON-NLS-1$
+		} else {
+			variablesLocationButton.setVisible(false);
+		}
+		
 	}
 
 	private String getLocationLabel() {
@@ -228,13 +254,13 @@ public class RessourcesSelection extends Dialog {
 		if (root == null) {
 			root = ResourcesPlugin.getWorkspace().getRoot();
 		}
-		
+
 		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display.getDefault().getActiveShell(), new WorkbenchLabelProvider(), new BaseWorkbenchContentProvider());
 		ets.setBlockOnOpen(true);
 		ets.setAllowMultiple(true);
 		ets.setTitle(title);
 		ets.setMessage(message);
-		
+
 		ets.setInput(root);
 		ets.setHelpAvailable(false);
 		ets.addFilter(filter);
@@ -306,6 +332,7 @@ public class RessourcesSelection extends Dialog {
 
 	@Override
 	protected Control createDialogArea(Composite parent) {
+
 		Composite mainComposite = new Composite(parent, SWT.NONE);
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 1;
@@ -371,7 +398,7 @@ public class RessourcesSelection extends Dialog {
 	}
 
 	public enum RESOURCE_TYPE {
-		RESOURCE_TYPE_DIRECTORY("Directory"), RESOURCE_TYPE_FILE("File"), RESOURCE_TYPE_STRING("String"), RESOURCE_TYPE_IFILE("IFile"), RESOURCE_TYPE_IFILES("IFiles");
+		RESOURCE_TYPE_DIRECTORY("Directory"), RESOURCE_TYPE_FILE("File"), RESOURCE_TYPE_STRING("String"), RESOURCE_TYPE_STRING_MULTILINE("multiline"), RESOURCE_TYPE_IFILE("IFile"), RESOURCE_TYPE_IFILES("IFiles");
 		String code;
 
 		RESOURCE_TYPE(String code) {

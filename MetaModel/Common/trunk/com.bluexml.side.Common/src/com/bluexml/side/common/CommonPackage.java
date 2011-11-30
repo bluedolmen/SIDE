@@ -1154,13 +1154,22 @@ public interface CommonPackage extends EPackage {
 	int META_INFO__VALUE_SET = META_DATA_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Multiline Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO__MULTILINE_VALUE = META_DATA_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Meta Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 5;
+	int META_INFO_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.impl.MetaInfoGroupImpl <em>Meta Info Group</em>}' class.
@@ -1983,6 +1992,17 @@ public interface CommonPackage extends EPackage {
 	EAttribute getMetaInfo_ValueSet();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.common.MetaInfo#getMultilineValue <em>Multiline Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Multiline Value</em>'.
+	 * @see com.bluexml.side.common.MetaInfo#getMultilineValue()
+	 * @see #getMetaInfo()
+	 * @generated
+	 */
+	EAttribute getMetaInfo_MultilineValue();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.common.MetaInfoGroup <em>Meta Info Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2475,6 +2495,14 @@ public interface CommonPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute META_INFO__VALUE_SET = eINSTANCE.getMetaInfo_ValueSet();
+
+		/**
+		 * The meta object literal for the '<em><b>Multiline Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute META_INFO__MULTILINE_VALUE = eINSTANCE.getMetaInfo_MultilineValue();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.impl.MetaInfoGroupImpl <em>Meta Info Group</em>}' class.

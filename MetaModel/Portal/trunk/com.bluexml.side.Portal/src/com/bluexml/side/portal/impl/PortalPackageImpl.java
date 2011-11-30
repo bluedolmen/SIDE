@@ -1100,6 +1100,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		addEEnumLiteral(portletTypeAttributeTypeEEnum, PortletTypeAttributeType.DOUBLE);
 		addEEnumLiteral(portletTypeAttributeTypeEEnum, PortletTypeAttributeType.DATE);
 		addEEnumLiteral(portletTypeAttributeTypeEEnum, PortletTypeAttributeType.DATE_TIME);
+		addEEnumLiteral(portletTypeAttributeTypeEEnum, PortletTypeAttributeType.MULTILINE);
 
 		// Create resource
 		createResource(eNS_URI);

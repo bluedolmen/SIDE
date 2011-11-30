@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.bluexml.side.Portal.modeler.diagram.dialogs.dataStructure.InstancesDataStructure;
 import com.bluexml.side.Portal.modeler.diagram.dialogs.dataStructure.InstancesDataStructure.InstancesObject;
+import com.bluexml.side.util.libs.eclipse.DialogResourceCellEditor;
 
 public class InstancesViewer {
 	private static final int ATTRIBUTENAME_WIDTH = 150;
@@ -60,8 +61,13 @@ public class InstancesViewer {
         editors[0] = attributeEditor;   
         
         TextCellEditor valueEditor = new TextCellEditor(table);
-        ((Text) valueEditor.getControl()).setTextLimit(250);         
-        editors[1] = valueEditor;
+        ((Text) valueEditor.getControl()).setTextLimit(250);
+        
+        DialogResourceCellEditor ceditor = new DialogResourceCellEditor(table);
+        
+//        editors[1] = valueEditor;
+        
+        editors[1] = ceditor;
         
         tableViewer.setCellEditors(editors);
 		tableViewer.setContentProvider(new InstancesContentProvider());
@@ -166,7 +172,7 @@ public class InstancesViewer {
 			String result = "";
 			switch (columnIndex) {
 			case 0:
-				result = ((InstancesObject)element).getAttributeName();
+				result = ((InstancesObject)element).getKey();
 				break;
 			case 1:
 				result = ((InstancesObject)element).getValue();
