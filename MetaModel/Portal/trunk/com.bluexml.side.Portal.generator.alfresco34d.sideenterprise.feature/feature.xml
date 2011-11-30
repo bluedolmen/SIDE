@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Portal.generator.alfresco34d.sideenterprise.feature" label="Feature" version="1.0.7.v30566-20111128" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Portal.generator.alfresco34d.sideenterprise.feature" label="Feature" version="1.0.8.v30608-20111130" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <plugin id="com.bluexml.side.Portal.generator.alfresco" download-size="0" install-size="0" version="1.0.70.v30566-20111128" unpack="false" />
+  <plugin id="com.bluexml.side.Portal.generator.alfresco" download-size="0" install-size="0" version="1.0.71.v30608-20111130" unpack="false" />
   <plugin id="com.bluexml.side.Portal.generator.alfresco34d" download-size="0" install-size="0" version="1.0.31.v30085-20111109" unpack="false" />
-  <plugin id="com.bluexml.side.Portal.generator.alfresco34d.ext.enterprise" download-size="0" install-size="0" version="1.0.4.v30360-20111122" unpack="false" />
+  <plugin id="com.bluexml.side.Portal.generator.alfresco34d.ext.enterprise" download-size="0" install-size="0" version="1.0.5.v30608-20111130" unpack="false" />
 </feature>
 
