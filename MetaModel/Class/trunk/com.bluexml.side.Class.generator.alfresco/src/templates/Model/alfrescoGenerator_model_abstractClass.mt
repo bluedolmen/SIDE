@@ -54,7 +54,6 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 <archive><%if (metainfo[key.equalsIgnoreCase("archive")].nSize()>0){%>true<%}else{%>false<%}%></archive>
 
 <%script type="clazz.AbstractClass" name="alfrescoGenerator_abstractClass_properties" %>
-<%if (attributes.nSize() > 0){%>
 <!-- Properties -->
 <properties>
 	<%for (getSortedAttibutes()){%>
@@ -126,11 +125,11 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 		<%}%>
 	</property>
 	<%}%>
-	<%if (IsSearchInAssociation()){%>
+	<!-- Properties for search association <%IsSearchInAssociation()%>-->
+	<%if (IsSearchInAssociation()){%>	
 	<%generate_searchFieldForAssociation()%>
 	<%}%>
 </properties>
-<%}%>
 
 <%script type="clazz.AbstractClass" name="alfrescoGenerator_abstractClass_associations" %>
 <%if (getSourceAssociationEnds().nSize() > 0){%>
@@ -172,6 +171,7 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 			<%alfrescoGenerator_abstractClass_associations()%>
 
 <%script type="clazz.AbstractClass" name="generate_searchFieldForAssociation" %>
+<!-- generate_searchFieldForAssociation -->
 <%if (getSourceAssociationEnds().nSize() > 0){%>
 <!-- properties to store seachable associations target-->
 <%for (getSourceAssociationEnds()){%>	
