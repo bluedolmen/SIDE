@@ -253,10 +253,13 @@ if (!Array.prototype.indexOf) {
 		 * @method onReady
 		 */
 		onReady : function Autocomplete_onReady() {
+            YAHOO.Bubbling.fire("/side-labs/onReady/" + this.currentValueHtmlId, this);
+
 			this.DSSelectWidget = this.load();
 			if (this.initialValue) {
 				this.setValue(this.initialValue);
 			}
+			
 		},
 		setValue : function Autocomplete_setValue(value) {
 			this.log("before setValue :" + this.getValue());
