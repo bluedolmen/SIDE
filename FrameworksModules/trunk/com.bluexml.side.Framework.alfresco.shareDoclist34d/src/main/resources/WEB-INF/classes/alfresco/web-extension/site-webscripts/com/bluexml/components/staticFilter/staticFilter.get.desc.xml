@@ -1,0 +1,5 @@
+<webscript>
+  <shortname>staticFilter</shortname>
+  <description>this is a component that displays filters, each instance have his own configuration</description>
+  <url>/components/staticFilter</url>
+</webscript>
