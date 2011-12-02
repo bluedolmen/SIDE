@@ -188,11 +188,13 @@ if (!Array.prototype.indexOf) {
 		 */
 		onReady : function SelectBox_onReady() {
             YAHOO.Bubbling.fire("/side-labs/onReady/" + this.currentValueHtmlId, this);
-
 			this.DSSelectWidget = this.load();
-			if (this.initialValue) {
+            YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
+
+            if (this.initialValue) {
 				this.setValue(this.initialValue);
 			}
+            YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
 		},
 		setValue : function SelectBox_setValue(value) {
 			this.log("before setValue :" + this.getValue());
