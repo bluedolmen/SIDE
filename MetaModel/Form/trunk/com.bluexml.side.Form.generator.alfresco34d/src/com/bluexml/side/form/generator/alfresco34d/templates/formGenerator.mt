@@ -129,7 +129,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	 <%getXtensionAsXMLAttribute("appearance")%>
 	 <%getXtensionAsXMLAttribute("template")%>
 	 label-id="<%getGroupLabelId()%>"
-	 <%if (eContainer().filter("FormClass")){%><%}else{%> parent="<%eContainer().filter("FormGroup").getPrefixedQualifiedName()%>"<%}%> />
+	 <%if (eContainer().filter("FormClass") || eContainer().filter("FormSearch") ){%><%}else{%> parent="<%eContainer().filter("FormGroup").getPrefixedQualifiedName()%>"<%}%> />
 
 	<%for (children.filter("FormElement")[ref.filter("clazz.Attribute") || ref.filter("clazz.Association")]){%>
 		<%generate_appearance_field("")%>
@@ -191,7 +191,25 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%}else if (filter("ModelChoiceField")){%>
 		 <%getModelChoiceFieldControl("")%>
 	<%}else if (isSearchForm){%>
-		<%for (ref.filter("clazz.Attribute")){%>
+		<%for (filter("DateField")){%>
+			<%if (Xtension[toString().startsWith("template")].nSize() > 0) {%>
+			<control <%getXtensionAsXMLAttribute("template")%>>
+				<%for (Xtension[!toString().startsWith("template")]){%>
+				<%current("FormElement").getXtensionAsControlParam(toString().substring(0, toString().indexOf("=")))%>
+				<%}%>
+				<control-param name="forceEditable">true</control-param>
+			</control>
+			<%}else{%>
+			<control template="/org/alfresco/components/form/controls/daterange.ftl">
+				<%for (Xtension[!toString().startsWith("template")]){%>
+				<%current("FormElement").getXtensionAsControlParam(toString().substring(0, toString().indexOf("=")))%>
+				<%}%>
+				<control-param name="forceEditable">true</control-param>
+			</control>
+			<%}%>
+		<%}%>
+
+		<%--for (ref.filter("clazz.Attribute")){%>
 			<%if (getShareSearchFormControl() != ""){%>
 			<control template="<%getShareSearchFormControl()%>" >
 				<control-param name="forceEditable">true</control-param>
@@ -201,7 +219,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 				<control-param name="forceEditable">true</control-param>
 			</control>
 			<%}%> 
-		<%}%>
+		<%}--%>
 		<%if (filter("ModelChoiceSearchField")){%>
 		<%getModelChoiceFieldControl("multiple")%>
 		<%}%>
