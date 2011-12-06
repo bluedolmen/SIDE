@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco32r2CE.sideenterprise.feature" label="SIDE Generators For Alfresco 3.2r2 CE" version="1.0.10.v30763-20111205" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco32r2CE.sideenterprise.feature" label="SIDE Generators For Alfresco 3.2r2 CE" version="1.0.11.v30788-20111206" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <includes id="com.bluexml.side.Class.generator.alfresco.sideEnterprise.feature" version="1.0.444.v30668-20111201" />
   <includes id="com.bluexml.side.Form.generator.xforms.sideEnterprise.feature" version="1.0.54.v29723-20111108" />
-  <includes id="com.bluexml.side.Portal.generator.alfresco.sideEnterprise.feature" version="1.0.40.v30668-20111201" />
+  <includes id="com.bluexml.side.Portal.generator.alfresco.sideEnterprise.feature" version="1.0.41.v30788-20111206" />
   <includes id="com.bluexml.side.View.generator.alfresco.sideEnterprise.feature" version="1.0.15.v29723-20111108" />
   <includes id="com.bluexml.side.Deployer.alfresco.feature" version="1.0.53.v29723-20111108" />
   <includes id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature" version="1.0.52.v30763-20111205" />
