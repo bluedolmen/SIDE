@@ -10,14 +10,17 @@
       <#else>
       <@renderOperator id=fieldHtmlId name=field.name />
       </#if>
-      <#include "${field.control.template}" />
+
+	  <#-- SIDE -->      
+      <#--renderField field/-->
+      <@customizedRenderField field=field/>      
+      
+      <#--include "${field.control.template}" /-->
    </#if>
 </#macro>
 
-
-
 <#macro renderOperator id operators=[['OR','form.control.search.operator.OR',true],['AND','form.control.search.operator.AND',false],['NOT','form.control.search.operator.NOT',false]] name=id onchange="">
-<select name="operator-${name}" id="operator-${id}" onchange="${onchange}">
+<select name="operator-${name}" id="operator-${id}" class="default-search-operator" onchange="${onchange}">
 	<#list operators as op>
 	<option value="${op[0]}" id="${op[0]}"<#if op[2]> selected="true"</#if>>${msg(op[1])}</option>
 	</#list>

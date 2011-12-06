@@ -1,3 +1,5 @@
+<#include "/org/alfresco/components/form/custom-form.lib.ftl"/>
+
 <#macro renderFormsRuntime formId>
    <script type="text/javascript">//<![CDATA[
       new Alfresco.FormUI("${formId}", "${args.htmlid?js_string}").setOptions(
@@ -72,52 +74,30 @@
       <#if form.showCancelButton?? && form.showCancelButton>
          <input id="${formId}-cancel" type="button" value="${msg("form.button.cancel.label")}" />
       </#if>
+	   <@postGenericButtonRule formId args.htmlid/>   
    </div>
 </#macro>   
 
-<#macro renderRule objectId rule>
-      <script language="javascript" type="text/javascript">
-      	try {
-      	  <#if (rule?index_of("(") != -1)>
-      	  ${rule}
-      	  <#else>
-      	  ${rule}('${objectId}');
-      	  </#if>
-        } catch (e) {
-      		//SIDE.custom.Logger.log("${objectId} - rule '${rule}' has thrown an exception"); 
-        }
-      </script>
-</#macro>
-
-<#macro renderField field>
-   <#assign fieldHtmlId=args.htmlid?js_string + "_" + field.id >
-
-   <#if (field.control?exists)>
-      <#-- SIDE pre rule-->
-      <#if (field.control.params.preRule?exists)>
-      		<@renderRule fieldHtmlId field.control.params.preRule/>
-	  </#if>
-   </#if>
-
+<#macro customizedRenderField field>
+   <@preRule field args.htmlid/>
    <#if field.control?? && field.control.template?exists>
       <#include "${field.control.template}" />
    </#if>
-   
-   <#if (field.control?exists)>
-      <#-- SIDE post rule-->
-      <#if (field.control.params.postRule?exists)>
-      		<@renderRule fieldHtmlId field.control.params.postRule/>
-	  </#if>
-   </#if>
-   <#-- SIDE post generic rule-->
-   <@renderRule fieldHtmlId "SIDE.custom.Controller.on"/>
+   <@postRule field args.htmlid/>   
+   <@postGenericRule field args.htmlid/>   
+</#macro>
+
+<#macro renderField field>
+	<@customizedRenderField field/>
 </#macro>
 
 <#macro renderSet set>
    <#-- SIDE Id -->
    <#if (set.id != "")>
+       <@renderRule "${args.htmlid}-${set.id}-pre" "SIDE.custom.Controller.onSet"/>
 	   <div id="${set.id?replace('.', '_')}" class="set">
    <#else>
+       <@renderRule "${args.htmlid}-main-set-pre" "SIDE.custom.Controller.onSet"/>
    	   <div class="set">
    </#if>
    </#-- SIDE -->
@@ -161,7 +141,12 @@
       </#if>
    </#if>
    </div>
-</#macro>
+   
+   <#if (set.id != "")>
+       <@renderRule "${args.htmlid}-${set.id}-post" "SIDE.custom.Controller.onSet"/>
+   <#else>
+       <@renderRule "${args.htmlid}-main-set-post" "SIDE.custom.Controller.onSet"/>
+   </#if></#macro>
 
 <#macro renderFieldHelp field>
    <#if field.help?? && field.help?length &gt; 0>
