@@ -90,7 +90,7 @@ function main()
        
        status.redirect = true;
        status.code = 301;
-       status.location = redirect;
+       status.location = redirect + "?nodeRef=" + persistedObject.toString();
     }
     
     model.persistedObject = persistedObject.toString();
