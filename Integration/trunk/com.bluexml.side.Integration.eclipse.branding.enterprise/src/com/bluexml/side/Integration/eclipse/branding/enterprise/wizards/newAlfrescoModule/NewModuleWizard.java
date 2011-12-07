@@ -51,7 +51,7 @@ public class NewModuleWizard extends Wizard implements IWorkbenchWizard {
 			HashMap<String, String> archetypeDef = new HashMap<String, String>();
 			int lastIndexOf = moduleId.lastIndexOf(".");
 			archetypeDef.put("archetypeGroupId", moduleId.substring(0, lastIndexOf));
-			archetypeDef.put("archetypeArtifactId", moduleId.substring(lastIndexOf));
+			archetypeDef.put("archetypeArtifactId", moduleId.substring(lastIndexOf + 1));
 			archetypeDef.put("archetypeVersion", versionMax);
 			archetypeDef.put("interactive", "false");
 			archetypeDef.put("webapp-name", "share");
