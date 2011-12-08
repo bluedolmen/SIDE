@@ -859,56 +859,75 @@
          id="org.topcased.draw2d"
          download-size="0"
          install-size="0"
-         version="2.5.0.201102071538"
+         version="2.5.0.201110131418"
          unpack="false"/>
 
    <plugin
          id="org.topcased.facilities"
          download-size="0"
          install-size="0"
-         version="2.6.1.201102071538"
+         version="2.6.1.201110131418"
          unpack="false"/>
 
    <plugin
          id="org.topcased.modeler"
          download-size="0"
          install-size="0"
-         version="3.1.13.201102071538-patched"
+         version="3.1.14.201110131418-patched"
          unpack="false"/>
 
    <plugin
          id="org.topcased.modeler.di"
          download-size="0"
          install-size="0"
-         version="3.0.1.201102071538"
+         version="3.0.1.201110131418"
          unpack="false"/>
 
    <plugin
          id="org.topcased.modeler.diagrams"
          download-size="0"
          install-size="0"
-         version="2.5.1.201102071538"
+         version="2.5.1.201110131418"
          unpack="false"/>
 
    <plugin
          id="org.topcased.modeler.export"
          download-size="0"
          install-size="0"
-         version="2.5.1.201102071538"
+         version="2.5.1.201110131418"
          unpack="false"/>
 
    <plugin
          id="org.topcased.modeler.graphconf"
          download-size="0"
          install-size="0"
-         version="2.5.1.201102071538"
+         version="2.5.1.201110131418"
+         unpack="false"/>
+
+   <plugin
+         id="org.topcased.richtext"
+         download-size="0"
+         install-size="0"
+         version="1.5.1.201110131418"/>
+
+   <plugin
+         id="org.topcased.richtext.common"
+         download-size="0"
+         install-size="0"
+         version="1.5.1.201110131418"/>
+
+   <plugin
+         id="org.topcased.richtext.common.ui"
+         download-size="0"
+         install-size="0"
+         version="1.5.1.201110131418"
          unpack="false"/>
 
    <plugin
          id="org.topcased.tabbedproperties"
          download-size="0"
          install-size="0"
-         version="2.5.3.201102071538"
+         version="2.5.4.201110131418"
          unpack="false"/>
 
    <plugin
@@ -975,25 +994,6 @@
          install-size="0"
          version="1.0.100.v20110509"
          unpack="false"/>
-
-   <plugin
-         id="org.topcased.richtext"
-         download-size="0"
-         install-size="0"
-         version="1.5.1.201102071538"/>
-
-   <plugin
-         id="org.topcased.richtext.common.ui"
-         download-size="0"
-         install-size="0"
-         version="1.5.1.201102071538"
-         unpack="false"/>
-
-   <plugin
-         id="org.topcased.richtext.common"
-         download-size="0"
-         install-size="0"
-         version="1.5.1.201102071538"/>
 
    <plugin
          id="org.eclipse.ant.launching"
