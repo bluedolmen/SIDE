@@ -6,7 +6,20 @@
 </@>
 
 <@templateBody>
-	<@addStandaloneTemplateBody/>
+   <div id="alf-hd">
+      
+   </div>
+   <div id="bd">
+      <div class="share-form">
+      
+         					<!-- use default share components-->
+         				<@region 
+         						scope="template" 
+         						id="standaloneSearchFormPortlet"
+         					 	protected=true />
+         				
+      </div>
+   </div>
 </@>
 
 <@templateFooter>
