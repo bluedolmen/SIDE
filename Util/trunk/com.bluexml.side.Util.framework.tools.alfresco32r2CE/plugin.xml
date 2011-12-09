@@ -3,7 +3,7 @@
 <plugin>
   <extension point="com.bluexml.side.util.framework.tooling">
     <modelLibrary activator="com.bluexml.side.util.framework.tools.alfresco32r2ce.Activator" archivePath="/com/bluexml/side/util/framework/tools/alfresco32r2ce/models/alfresco32r2.zip" id="ALFRESCO_32R2_CE" label="Alfresco Models 3.2r2 CE" pluginId="com.bluexml.side.Util.framework.tools.alfresco32r2CE" projectId="Model-library-Alfresco-3.2r2-CE">
-      <moduleDependence label="Alfresco Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.14" versionMin="1.0.14" />
+      <moduleDependence label="Alfresco Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.15" versionMin="1.0.15" />
       <moduleDependence label="Alfresco Share Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.13" versionMin="1.0.13" />
       <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco32r2ce.Activator" hidden="visible" id="com.bluexml.side.Class.generator.alfresco" version="com.bluexml.side.Util.framework.tools.alfresco32r2CE.generatorVersion6">
         <option defaultOption="false" hidden="false" key="alfresco.share.extension" label="alfresco.share.extension" />
