@@ -1191,4 +1191,11 @@
          version="1.6.1.v20100831-0715"
          unpack="false"/>
 
+   <plugin
+         id="org.topcased.ui"
+         download-size="0"
+         install-size="0"
+         version="5.1.0.201110131418"
+         unpack="false"/>
+
 </feature>
