@@ -163,12 +163,17 @@ public class FeatureUpdater {
 			for (Object object : listPlugins) {
 				Element courant = (Element) object;
 				String pluginId = courant.getAttributeValue("id");
-				String newVersionNumber = pu.getPluginVersion(pluginId);
-				String oldVersionNumber = courant.getAttributeValue("version");
-				if (!oldVersionNumber.equals(newVersionNumber)) {
-					courant.setAttribute("version", newVersionNumber);
-					// on indique que le numéro de feature doit changer
-					logger.debug("\t\tFeatureUpdater.updateMarkedFeatures() update plugin ref " + pluginId + ":" + oldVersionNumber + " -> " + newVersionNumber);
+				if (bu.getProjects().contains(pluginId)) {
+					String newVersionNumber = pu.getPluginVersion(pluginId);
+					String oldVersionNumber = courant.getAttributeValue("version");
+					if (!oldVersionNumber.equals(newVersionNumber)) {
+						courant.setAttribute("version", newVersionNumber);
+						// on indique que le numéro de feature doit changer
+						logger.debug("\t\tFeatureUpdater.updateMarkedFeatures() update plugin ref " + pluginId + ":" + oldVersionNumber + " -> " + newVersionNumber);
+					}
+				} else {
+					logger.debug("unable to check version plugin not managed :" + pluginId);
+					logger.debug("Mainly caused by feature that include binary plugins (com.bluexml.side.Integration.eclipse.dependencies.feature)");
 				}
 			}
 
