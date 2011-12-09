@@ -1198,4 +1198,11 @@
          version="5.1.0.201110131418"
          unpack="false"/>
 
+   <plugin
+         id="org.topcased.core"
+         download-size="0"
+         install-size="0"
+         version="2.7.0.201110131418"
+         unpack="false"/>
+
 </feature>
