@@ -14,8 +14,8 @@
       
          					<!-- use default share components-->
          				<@region 
-         						scope="template" 
-         						id="standaloneSearchFormPortlet"
+         						scope="page" 
+         						id="standalonesearch"
          					 	protected=true />
          				
       </div>
