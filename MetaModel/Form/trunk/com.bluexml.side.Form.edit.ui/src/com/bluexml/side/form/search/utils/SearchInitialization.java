@@ -82,7 +82,7 @@ public class SearchInitialization {
 		return cmd;
 	}
 
-	private static void initializeFormProperties(FormSearch form) {
+	public static void initializeFormProperties(FormSearch form) {
 		// get the attached model element
 		AbstractClass realClass = form.getReal_class();
 		if (realClass != null) {
@@ -212,7 +212,7 @@ public class SearchInitialization {
 	 * @param att
 	 * @return
 	 */
-	private static SearchField getSearchFieldForAttribute(Attribute att) {
+	public static SearchField getSearchFieldForAttribute(Attribute att) {
 		SearchField field = null;
 		if (att != null) {
 			Map<String, String> metaInfoMap = ClassDiagramUtils.InitializeMetaInfo(att.getMetainfo());

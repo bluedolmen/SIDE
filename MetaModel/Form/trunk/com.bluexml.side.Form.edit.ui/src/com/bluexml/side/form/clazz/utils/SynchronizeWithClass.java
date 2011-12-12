@@ -36,10 +36,12 @@ import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.SearchFormCollection;
 import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.form.common.utils.InternalModification;
+import com.bluexml.side.form.search.utils.SearchInitialization;
 import com.bluexml.side.util.libs.ecore.EcoreHelper;
 
 public class SynchronizeWithClass {
@@ -81,10 +83,12 @@ public class SynchronizeWithClass {
 				if (fc instanceof ClassFormCollection) {
 					formContainer = FormFactory.eINSTANCE.createFormClass();
 					setFormContainer(abstractClass, formContainer);
-
+					formContainer.setId(abstractClass.getName());
+					formContainer.setLabel(abstractClass.getLabel());
 				} else if (fc instanceof SearchFormCollection) {
 					formContainer = FormFactory.eINSTANCE.createFormSearch();
 					setFormContainer(abstractClass, formContainer);
+					SearchInitialization.initializeFormProperties((FormSearch) formContainer);
 				} else if (fc instanceof WorkflowFormCollection) {
 					formContainer = FormFactory.eINSTANCE.createFormWorkflow();
 				}
@@ -95,7 +99,6 @@ public class SynchronizeWithClass {
 					cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormCollection_Forms(), formContainer));
 				}
 				if (formContainer instanceof ClassReference) {
-
 					synchronizeFormContainer(formContainer);
 				}
 			}
@@ -103,9 +106,7 @@ public class SynchronizeWithClass {
 		InternalModification.moveToDisabled();
 	}
 
-	public void setFormContainer(AbstractClass abstractClass, FormContainer formContainer) {
-		formContainer.setId(abstractClass.getName());
-		formContainer.setLabel(abstractClass.getLabel());
+	public void setFormContainer(AbstractClass abstractClass, FormContainer formContainer) {		
 		ClassReference cref = (ClassReference) formContainer;
 		cref.setReal_class(abstractClass);
 	}
@@ -118,14 +119,15 @@ public class SynchronizeWithClass {
 	}
 
 	void synchronizeFormContainer(FormContainer o) {
-		if (o instanceof FormClass) {
-			synchronize_formClass((FormClass) o);
+		if (o instanceof FormClass || o instanceof FormSearch) {
+			synchronize_formClass(o);
 		}
 	}
 
-	void synchronize_formClass(FormClass o) {
+	void synchronize_formClass(FormContainer o) {
 		List<FormElement> allchildren = new ArrayList<FormElement>();
 		allchildren.addAll(o.getFields());
+		allchildren.addAll(o.getSearchFields());
 		allchildren.addAll(o.getDisabled());
 
 		addMissing(o, allchildren);
@@ -168,7 +170,7 @@ public class SynchronizeWithClass {
 		return CollectionUtils.subtract(all, existing);
 	}
 
-	void update(FormClass o, List<FormElement> allchildren) {
+	void update(FormContainer o, List<FormElement> allchildren) {
 		// update id
 		for (FormElement formElement : allchildren) {
 			ModelElement ref = formElement.getRef();
@@ -281,14 +283,15 @@ public class SynchronizeWithClass {
 		domain.getCommandStack().execute(removeCommands);
 	}
 
-	void addMissing(FormClass o, List<FormElement> allchildren) {
+	void addMissing(FormContainer o, List<FormElement> allchildren) {
 
 		addMissingAttributes(o, allchildren);
 
 		addMissingAssociations(o, allchildren);
+
 	}
 
-	void addMissingAssociations(FormClass o, List<FormElement> children) {
+	void addMissingAssociations(FormContainer o, List<FormElement> children) {
 		List<Association> allAssociations = null;
 		if (o instanceof ClassReference) {
 			// get the attached class
@@ -313,7 +316,13 @@ public class SynchronizeWithClass {
 			// now we have the attribute missing list
 			// initialize missing Field
 			for (Association ass : missAtt) {
-				Field fieldForAssociation = ClassDiagramUtils.getModelChoiceFieldForAssociation(ass, real_class);
+
+				FormElement fieldForAssociation = null;
+				if (o instanceof FormClass) {
+					fieldForAssociation = ClassDiagramUtils.getModelChoiceFieldForAssociation(ass, real_class);
+				} else if (o instanceof FormSearch) {
+					fieldForAssociation = ClassDiagramUtils.transformAssociationIntoModelChoiceSearchField(ass, real_class);
+				}
 				// get where to add the field
 				FormGroup parent = o;
 				// mybe a group exist with ref to the attribute container
@@ -339,7 +348,7 @@ public class SynchronizeWithClass {
 		}
 	}
 
-	void addMissingAttributes(FormGroup o, List<FormElement> children) {
+	void addMissingAttributes(FormContainer o, List<FormElement> children) {
 		List<Attribute> allAttributes = null;
 		if (o instanceof ClassReference) {
 			// get the attached class
@@ -365,7 +374,14 @@ public class SynchronizeWithClass {
 		// now we have the attribute missing list
 		// initialize missing Field
 		for (Attribute attribute : missAtt) {
-			Field fieldForAttribute = ClassDiagramUtils.getFieldForAttribute(attribute);
+			// Field or searchField
+			FormElement fieldForAttribute = null;
+			if (o instanceof FormSearch) {
+				fieldForAttribute = SearchInitialization.getSearchFieldForAttribute(attribute);
+			} else if (o instanceof FormClass) {
+				fieldForAttribute = ClassDiagramUtils.getFieldForAttribute(attribute);
+			}
+
 			// get where to add the field
 			FormGroup parent = null;
 			// mybe a group exist with ref to the attribute container
