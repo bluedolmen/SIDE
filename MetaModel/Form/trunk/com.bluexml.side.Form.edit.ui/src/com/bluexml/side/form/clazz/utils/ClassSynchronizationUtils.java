@@ -36,6 +36,8 @@ public class ClassSynchronizationUtils {
 
 	protected static CompoundCommand cc;
 
+	
+
 	public static Command synchronizeClass(FormClass fc, EditingDomain domain) {
 		cc = new CompoundCommand();
 		InternalModification.dontMoveToDisabled();
@@ -112,7 +114,7 @@ public class ClassSynchronizationUtils {
 						}
 						// manage associations defined for aspects
 						for (Association ass : asp.getAllSourceAssociations()) {
-							cf.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass, asp));
+							cf.add(ClassDiagramUtils.getModelChoiceFieldForAssociation(ass, asp));
 						}
 						fa.getChildren().addAll(cf);
 						cToAdd.add(fa);
@@ -134,7 +136,6 @@ public class ClassSynchronizationUtils {
 				getCommandsForAssociation(fc, domain, formChild, abclazz, ass);
 			}
 
-			
 		}
 		if (cToAdd.size() > 0) {
 			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), cToAdd));
@@ -155,7 +156,7 @@ public class ClassSynchronizationUtils {
 
 		// Add
 		if ((associationId.length() > 0) && !formChild.containsKey(associationId)) {
-			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass, clazz)));
+			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.getModelChoiceFieldForAssociation(ass, clazz)));
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField) formChild.get(associationId);
@@ -174,7 +175,7 @@ public class ClassSynchronizationUtils {
 
 		// Add
 		if ((associationId.length() > 0) && !formChild.containsKey(associationId)) {
-			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass, clazz)));
+			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.getModelChoiceFieldForAssociation(ass, clazz)));
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField) formChild.get(associationId);

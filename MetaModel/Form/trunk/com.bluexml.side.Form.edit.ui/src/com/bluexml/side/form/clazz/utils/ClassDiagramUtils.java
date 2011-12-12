@@ -143,7 +143,7 @@ public class ClassDiagramUtils {
 	 * @param useSource
 	 * @return
 	 */
-	public static ModelChoiceField transformAssociationIntoModelChoiceField(Association ass, AbstractClass srcClazz) {
+	public static ModelChoiceField getModelChoiceFieldForAssociation(Association ass, AbstractClass srcClazz) {
 		ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
 		// we needs to get the target type
 

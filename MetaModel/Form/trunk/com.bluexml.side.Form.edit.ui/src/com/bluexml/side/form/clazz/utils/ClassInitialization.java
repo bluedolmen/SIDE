@@ -95,7 +95,7 @@ public class ClassInitialization {
 		return cc;
 	}
 
-	private static String[] updateLabelAndName(FormClass fc) {
+	public static String[] updateLabelAndName(FormClass fc) {
 		String name, label;
 		// need to search if exist another form with default value, if yes must increments label and id, to avoid validation fault
 		AbstractClass c = fc.getReal_class();
@@ -160,13 +160,18 @@ public class ClassInitialization {
 	}
 
 	private static FormGroup initializeClassGroup(AbstractClass abc) {
+		FormGroup createFormGroup = createGroup(abc);
+		EList<FormElement> children = createFormGroup.getChildren();
+
+		createChildren(abc, children);
+		return createFormGroup;
+	}
+
+	public static FormGroup createGroup(AbstractClass abc) {
 		FormGroup createFormGroup = FormFactory.eINSTANCE.createFormGroup();
 		createFormGroup.setRef(abc);
 		createFormGroup.setId(abc.getName());
 		createFormGroup.setLabel(abc.getLabel());
-		EList<FormElement> children = createFormGroup.getChildren();
-
-		createChildren(abc, children);
 		return createFormGroup;
 	}
 
@@ -183,7 +188,7 @@ public class ClassInitialization {
 
 		// Associations :
 		for (Association ass : abc.getSourceAssociations()) {
-			children.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass, abc));
+			children.add(ClassDiagramUtils.getModelChoiceFieldForAssociation(ass, abc));
 		}
 		if (abc instanceof Clazz) {
 			Clazz cl = (Clazz) abc;
