@@ -4,6 +4,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.form.generator.alfresco34d.templates.services.form
+import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-util
 %>
 
 <%script type="form.FormCollection" name="generateWorkflowForms"%>
@@ -11,16 +12,79 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 	<config evaluator="<%computeEvaluator()%>" condition="<%computeformWorkflowCondition()%>">
 		<forms>
             <form>
-            	<%--generateFormDefinition()--%>
+            	<%generateFormDefinition()%>
             </form>
             <%if (ref.filter("workflow.StartState") == null){%>
             <form id="workflow-details">
-            	<%--generateFormDefinition()--%>
+            	<%generateFormDefinition()%>
             </form>
             <%}%>
         </forms>
 	</config>
 <%}%>
+
+<%script type="FormWorkflow" name="generateFormDefinition"%>
+<%if (presentation.toString() == "tabbed" || presentation.toString() == "auto"){%>
+<edit-form template="/fdk/templates/tab-edit-form.ftl" />
+<create-form template="/fdk/templates/tab-edit-form.ftl" />
+<view-form template="/fdk/templates/tab-edit-form.ftl" />
+<%}%>        	
+<field-visibility>
+	<%getDefaultWorkflowFields()%>
+<%if (ref.filter("workflow.UserTask").advancedTaskDefinition != null){%>
+<%generate_visibilityForClass()%>
+<%}else{%>	
+<%for (getFields().ref.filter("workflow.Attribute")){%>
+	<show id="wfbx<%service::getRootContainer().filter("workflow.Process").name%>:<%name%>" />
+<%}%>
+<%}%>
+</field-visibility>
+	
+<appearance>
+	
+<%if (ref.filter("workflow.UserTask").advancedTaskDefinition != null){%>
+
+	<%if (children.filter("Field")[ref.filter("clazz.Attribute") || ref.filter("clazz.Association")].nSize() > 0){%>
+	<set id="" label-id="form.set.label.<%getPrefixedQualifiedName()%>" />
+	<set id="<%getPrefixedQualifiedName()%>" appearance="" parent="" />
+	<%}%>
+<%generate_appearanceForClass(getPrefixedQualifiedName())%>
+<%getDefaultWorkflowAppearance()%>
+
+<%}else{%>
+	<set id="" label-id="<%getGroupLabelId()%>" />
+	<%if (getFields()[ref.filter("workflow.Attribute")]){%>
+	<set id="<%ref.eContainer().filter("workflow.Process").name%>" appearance="" parent="" />
+	<%}%>
+	
+	<%for (getAllSubGroups()){%>
+		<set id="<%getFullName()%>" label-id="<%getGroupLabelId()%>"
+		 appearance="<%if (eContainer().filter("FormWorkflow")){%><%}else{%>title<%}%>"
+		  <%if (eContainer().filter("FormWorkflow")){%><%}else{%>parent="<%eContainer().filter("FormGroup").getFullName()%>"<%}%> />
+		<%for (children.filter("Field")){%>
+				 <field id="wfbx<%getFieldId(":")%>"
+				 set="<%current("FormGroup").getFullName()%>" 
+				 label-id="<%getFieldLabelId("")%>"
+				 <%if (current("Field").help_text != null && current("Field").help_text != ""){%>
+				 help-id="<%getFieldLabelId("help.")%>"
+				 <%}%>
+				 <%if (current("Field").description != null && current("Field").description != ""){%>
+				 description-id="<%getFieldLabelId("description.")%>"
+				 <%}%>
+				 />			
+		<%}%>
+	<%}%>
+	
+	<%if (children){%>
+		<%-- custom fields must be added to dedicated set --%>
+		<%for (children[ref.filter("workflow.Attribute")]){%>
+			<field id="wfbx<%getFieldId(":")%>" set="<%ref.filter("workflow.Attribute").service::getRootContainer().filter("workflow.Process").name%>" />
+		<%}%>
+	<%}%>
+	
+	<%getDefaultWorkflowAppearance()%>
+<%}%>
+</appearance>
 
 <%script type="FormWorkflow" name="computeEvaluator" post="trim()" %>
 <%if (ref.filter("workflow.StartState")){%>
