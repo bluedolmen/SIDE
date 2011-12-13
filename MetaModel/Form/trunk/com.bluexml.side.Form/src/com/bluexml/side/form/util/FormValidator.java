@@ -132,20 +132,20 @@ public class FormValidator extends EObjectValidator {
 	private static Constraint formElement_noSpecialCharactersInvOCL;
 
 	/**
-	 * The parsed OCL expression for the definition of the '<em>validRef</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint formElement_validRefInvOCL;
-
-	/**
 	 * The parsed OCL expression for the definition of the '<em>mandatoryHiddenAndNoDefaultValue</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private static Constraint field_mandatoryHiddenAndNoDefaultValueInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>validRef</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint field_validRefInvOCL;
 
 	/**
 	 * The parsed OCL expression for the definition of the '<em>TwoFormsWithSameName</em>' invariant constraint.
@@ -352,7 +352,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formElement, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(formElement, diagnostics, context);
 		return result;
 	}
 
@@ -395,45 +394,6 @@ public class FormValidator extends EObjectValidator {
 		return true;
 	}
 
-	/**
-	 * Validates the validRef constraint of '<em>Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateFormElement_validRef(FormElement formElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (formElement_validRefInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(FormPackage.Literals.FORM_ELEMENT);
-
-			EAnnotation ocl = FormPackage.Literals.FORM_ELEMENT.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("validRef");
-
-			try {
-				formElement_validRefInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(formElement_validRefInvOCL);
-
-		if (!query.check(formElement)) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						((doThrowError( FormPackage.Literals.FORM_ELEMENT.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"validRef")? Diagnostic.ERROR : Diagnostic.WARNING),
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "validRef", getObjectLabel(formElement, context) }),
-						 new Object[] { formElement }));
-			}
-			return false;
-		}
-		return true;
-	}
-
 	private boolean doThrowError(EAnnotation ecore, String ruleName) {
 		String warningList = ecore.getDetails().get("warning");
 		boolean throwError = true;
@@ -462,7 +422,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formGroup, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formGroup, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(formGroup, diagnostics, context);
 		return result;
 	}
 
@@ -482,8 +441,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(field, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(field, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(field, diagnostics, context);
 		return result;
 	}
 
@@ -527,6 +486,45 @@ public class FormValidator extends EObjectValidator {
 	}
 
 	/**
+	 * Validates the validRef constraint of '<em>Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateField_validRef(Field field, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (field_validRefInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(FormPackage.Literals.FIELD);
+
+			EAnnotation ocl = FormPackage.Literals.FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("validRef");
+
+			try {
+				field_validRefInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(field_validRefInvOCL);
+
+		if (!query.check(field)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( FormPackage.Literals.FIELD.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"validRef")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "validRef", getObjectLabel(field, context) }),
+						 new Object[] { field }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -542,8 +540,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(booleanField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(booleanField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(booleanField, diagnostics, context);
 		return result;
 	}
 
@@ -563,8 +561,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(charField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(charField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(charField, diagnostics, context);
 		return result;
 	}
@@ -624,8 +622,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(dateField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(dateField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(dateField, diagnostics, context);
 		return result;
 	}
 
@@ -645,8 +643,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(dateTimeField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(dateTimeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(dateTimeField, diagnostics, context);
 		return result;
 	}
 
@@ -666,8 +664,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(decimalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(decimalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(decimalField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(decimalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(decimalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(decimalField, diagnostics, context);
 		return result;
 	}
 
@@ -687,8 +685,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(floatField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(floatField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(floatField, diagnostics, context);
 		return result;
 	}
 
@@ -708,8 +706,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(integerField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(integerField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(integerField, diagnostics, context);
 		return result;
 	}
 
@@ -729,8 +727,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(modelChoiceField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(modelChoiceField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(modelChoiceField, diagnostics, context);
 		return result;
 	}
@@ -751,8 +749,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(emailField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(emailField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(emailField, diagnostics, context);
 		return result;
 	}
@@ -773,8 +771,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(fileField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(fileField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(fileField, diagnostics, context);
 		return result;
 	}
 
@@ -794,8 +792,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(imageField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(imageField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(imageField, diagnostics, context);
 		return result;
 	}
 
@@ -815,8 +813,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(timeField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(timeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(timeField, diagnostics, context);
 		return result;
 	}
 
@@ -836,8 +834,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(urlField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(urlField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(urlField, diagnostics, context);
 		return result;
 	}
@@ -858,8 +856,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(phoneNumberField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(phoneNumberField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(phoneNumberField, diagnostics, context);
 		return result;
 	}
@@ -880,7 +878,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formAspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formAspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formAspect, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(formAspect, diagnostics, context);
 		return result;
 	}
 
@@ -900,7 +897,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_TwoFormsWithSameName(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(formClass, diagnostics, context);
@@ -923,8 +919,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(reference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(reference, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(reference, diagnostics, context);
 		return result;
 	}
@@ -954,8 +950,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(choiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(choiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(choiceField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(choiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(choiceField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(choiceField, diagnostics, context);
 		return result;
 	}
 
@@ -975,8 +971,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(regexField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(regexField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(regexField, diagnostics, context);
 		return result;
 	}
@@ -1055,8 +1051,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(passwordField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(passwordField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(passwordField, diagnostics, context);
 		return result;
 	}
@@ -1077,8 +1073,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(virtualField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(virtualField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVirtualField_NoLinkForVirtualField(virtualField, diagnostics, context);
 		return result;
 	}
@@ -1138,8 +1134,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(actionField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(actionField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(actionField, diagnostics, context);
 		return result;
 	}
 
@@ -1159,8 +1155,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(textField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(textField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(textField, diagnostics, context);
 		return result;
 	}
@@ -1181,7 +1177,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formSearch, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_TwoFormsWithSameName(formSearch, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(formSearch, diagnostics, context);
@@ -1204,8 +1199,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(numericalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(numericalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(numericalField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(numericalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_validRef(numericalField, diagnostics, context);
 		return result;
 	}
 
@@ -1225,7 +1220,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(staticText, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(staticText, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(staticText, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(staticText, diagnostics, context);
 		return result;
 	}
 
@@ -1254,7 +1248,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(searchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(searchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(searchField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(searchField, diagnostics, context);
 		return result;
 	}
 
@@ -1274,7 +1267,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(numericalSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(numericalSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(numericalSearchField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(numericalSearchField, diagnostics, context);
 		return result;
 	}
 
@@ -1294,7 +1286,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(charSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(charSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(charSearchField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(charSearchField, diagnostics, context);
 		return result;
 	}
 
@@ -1314,7 +1305,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(dateSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(dateSearchField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(dateSearchField, diagnostics, context);
 		return result;
 	}
 
@@ -1334,7 +1324,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(choiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(choiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(choiceSearchField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(choiceSearchField, diagnostics, context);
 		return result;
 	}
 
@@ -1354,7 +1343,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fileSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(fileSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(fileSearchField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(fileSearchField, diagnostics, context);
 		return result;
 	}
 
@@ -1374,7 +1362,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(booleanSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(booleanSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(booleanSearchField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(booleanSearchField, diagnostics, context);
 		return result;
 	}
 
@@ -1394,7 +1381,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(modelChoiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(modelChoiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(modelChoiceSearchField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(modelChoiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(modelChoiceSearchField, diagnostics, context);
 		return result;
 	}
@@ -1433,7 +1419,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formWorkflow, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_TwoFormsWithSameName(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormWorkflow_ClassMustMatchWithProcessContentType(formWorkflow, diagnostics, context);
@@ -1495,7 +1480,6 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formContainer, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_validRef(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_TwoFormsWithSameName(formContainer, diagnostics, context);
 		return result;

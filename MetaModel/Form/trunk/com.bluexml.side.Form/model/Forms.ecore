@@ -5,11 +5,10 @@
     nsURI="http://www.kerblue.org/form/1.0" nsPrefix="form">
   <eClassifiers xsi:type="ecore:EClass" name="FormElement" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="noSpecialCharacters validRef"/>
+      <details key="constraints" value="noSpecialCharacters"/>
     </eAnnotations>
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="noSpecialCharacters" value="self.id.regexMatch('[\\w-]*') = true"/>
-      <details key="validRef" value="if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then&#xD;&#x9;self.getContainer().oclAsType(FormClass).real_class.oclAsType(clazz::Clazz).getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))&#xD;else&#xD;true&#xD;endif"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The FormElement is an element of the form. It can be either a form group or a field. it is an abstract element and so does not directly appear in the Form modeler."/>
@@ -130,10 +129,11 @@
     </eAnnotations>
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="mandatoryHiddenAndNoDefaultValue" value="self.initial.oclIsUndefined() or self.initial = '' implies self.mandatory = false or self.hidden = false"/>
+      <details key="validRef" value="if not(self.ref.oclIsUndefined()) then&#xD;&#x9;if (self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(ClassReference)) then&#xD;&#x9;&#x9;self.getContainer().oclAsType(ClassReference).real_class.oclAsType(clazz::AbstractClass).getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))&#xD;&#x9;else&#xD;&#x9;&#x9;if (self.ref.oclIsKindOf(clazz::Association) and self.getContainer().oclIsKindOf(ClassReference)) then&#xD;&#x9;&#x9;&#x9;self.getContainer().oclAsType(ClassReference).real_class.oclAsType(clazz::AbstractClass).getAllSourceAssociations()->includes(self.ref.oclAsType(clazz::Association))&#xD;&#x9;&#x9;else&#x9;&#xD;&#x9;&#x9;&#x9;true&#xD;&#x9;&#x9;endif&#xD;&#x9;endif&#xD;else &#xD;false&#xD;endif"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="warning" value="mandatoryHiddenAndNoDefaultValue"/>
-      <details key="constraints" value="mandatoryHiddenAndNoDefaultValue"/>
+      <details key="constraints" value="mandatoryHiddenAndNoDefaultValue validRef"/>
     </eAnnotations>
     <eOperations name="getLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.bluexml.com/OCL">

@@ -2191,14 +2191,14 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		  (formElementEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "noSpecialCharacters validRef"
+			 "constraints", "noSpecialCharacters"
 		   });																												
 		addAnnotation
 		  (fieldEClass, 
 		   source, 
 		   new String[] {
 			 "warning", "mandatoryHiddenAndNoDefaultValue",
-			 "constraints", "mandatoryHiddenAndNoDefaultValue"
+			 "constraints", "mandatoryHiddenAndNoDefaultValue validRef"
 		   });								
 		addAnnotation
 		  (formContainerEClass, 
@@ -2244,8 +2244,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		  (formElementEClass, 
 		   source, 
 		   new String[] {
-			 "noSpecialCharacters", "self.id.regexMatch(\'[\\\\w-]*\') = true",
-			 "validRef", "if (not(self.ref.oclIsUndefined()) and self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(FormClass)) then\r\tself.getContainer().oclAsType(FormClass).real_class.oclAsType(clazz::Clazz).getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))\relse\rtrue\rendif"
+			 "noSpecialCharacters", "self.id.regexMatch(\'[\\\\w-]*\') = true"
 		   });			
 		addAnnotation
 		  (formElementEClass.getEOperations().get(0), 
@@ -2287,7 +2286,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		  (fieldEClass, 
 		   source, 
 		   new String[] {
-			 "mandatoryHiddenAndNoDefaultValue", "self.initial.oclIsUndefined() or self.initial = \'\' implies self.mandatory = false or self.hidden = false"
+			 "mandatoryHiddenAndNoDefaultValue", "self.initial.oclIsUndefined() or self.initial = \'\' implies self.mandatory = false or self.hidden = false",
+			 "validRef", "if not(self.ref.oclIsUndefined()) then\r\tif (self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(ClassReference)) then\r\t\tself.getContainer().oclAsType(ClassReference).real_class.oclAsType(clazz::AbstractClass).getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))\r\telse\r\t\tif (self.ref.oclIsKindOf(clazz::Association) and self.getContainer().oclIsKindOf(ClassReference)) then\r\t\t\tself.getContainer().oclAsType(ClassReference).real_class.oclAsType(clazz::AbstractClass).getAllSourceAssociations()->includes(self.ref.oclAsType(clazz::Association))\r\t\telse\t\r\t\t\ttrue\r\t\tendif\r\tendif\relse \rfalse\rendif"
 		   });			
 		addAnnotation
 		  (fieldEClass.getEOperations().get(0), 

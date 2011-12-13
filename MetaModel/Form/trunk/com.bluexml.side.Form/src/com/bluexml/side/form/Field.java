@@ -36,8 +36,8 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see com.bluexml.side.form.FormPackage#getField()
  * @model abstract="true"
- *        annotation="http://www.bluexml.com/OCL mandatoryHiddenAndNoDefaultValue='self.initial.oclIsUndefined() or self.initial = \'\' implies self.mandatory = false or self.hidden = false'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore warning='mandatoryHiddenAndNoDefaultValue' constraints='mandatoryHiddenAndNoDefaultValue'"
+ *        annotation="http://www.bluexml.com/OCL mandatoryHiddenAndNoDefaultValue='self.initial.oclIsUndefined() or self.initial = \'\' implies self.mandatory = false or self.hidden = false' validRef='if not(self.ref.oclIsUndefined()) then\r\tif (self.ref.oclIsKindOf(clazz::Attribute) and self.getContainer().oclIsKindOf(ClassReference)) then\r\t\tself.getContainer().oclAsType(ClassReference).real_class.oclAsType(clazz::AbstractClass).getAllAttributes()->includes(self.ref.oclAsType(clazz::Attribute))\r\telse\r\t\tif (self.ref.oclIsKindOf(clazz::Association) and self.getContainer().oclIsKindOf(ClassReference)) then\r\t\t\tself.getContainer().oclAsType(ClassReference).real_class.oclAsType(clazz::AbstractClass).getAllSourceAssociations()->includes(self.ref.oclAsType(clazz::Association))\r\t\telse\t\r\t\t\ttrue\r\t\tendif\r\tendif\relse \rfalse\rendif'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore warning='mandatoryHiddenAndNoDefaultValue' constraints='mandatoryHiddenAndNoDefaultValue validRef'"
  * @generated
  */
 public interface Field extends FormElement {
