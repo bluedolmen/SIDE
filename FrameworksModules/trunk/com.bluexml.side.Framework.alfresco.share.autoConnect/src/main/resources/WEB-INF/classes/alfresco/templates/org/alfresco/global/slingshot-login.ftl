@@ -1,7 +1,7 @@
 <#include "../include/alfresco-template.ftl" />
 <@templateHeader>
    <@link rel="stylesheet" type="text/css" href="${url.context}/res/themes/${theme}/login.css" />
-	<script type="text/javascript" src="http://localhost:8880/resources/common/js/jquery/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="${url.context}/side-labs/3rd-party/js/jquery/jquery-1.6.2.min.js"></script>
 	<script type="text/javascript" src="${url.context}/side-labs/js/SIDE/security/AutoConnect.js"></script>
 </@>
 <#if (! url.args["auto"]??)>
