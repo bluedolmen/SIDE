@@ -95,6 +95,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 <%if (isSearchForm) {%>
  	<edit-form template="/side/templates/search-form.ftl" />
 <%}else if (args(0) == "tabbed" || args(0) == "auto"){%>
+<%--<%if (args(0) == "tabbed" || args(0) == "auto"){%>-->
 	<edit-form template="/fdk/templates/tab-edit-form.ftl" />
 	<create-form template="/fdk/templates/tab-edit-form.ftl" />
 	<view-form template="/fdk/templates/tab-edit-form.ftl" />
