@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Class.generator.alfresco34d.feature" label="SIDE Alfresco 3.4b Community Generator" version="1.0.38.v30911-20111210" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Class.generator.alfresco34d.feature" label="SIDE Alfresco 3.4b Community Generator" version="1.0.39.v30975-20111213" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <plugin id="com.bluexml.side.Class.generator.alfresco34d" download-size="0" install-size="0" version="1.0.32.v29723-20111108" unpack="false" />
   <plugin id="com.bluexml.side.Class.generator.alfresco34d.ext.sidelabs" download-size="0" install-size="0" version="1.0.6.v30911-20111210" unpack="false" />
-  <plugin id="com.bluexml.side.Class.generator.alfresco" download-size="0" install-size="0" version="1.0.625.v30668-20111201" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.alfresco" download-size="0" install-size="0" version="1.0.626.v30975-20111213" unpack="false" />
 </feature>
 
