@@ -2,6 +2,8 @@ package com.bluexml.side.util.libs.ecore;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.core.resources.IFile;
@@ -29,6 +31,43 @@ public class EcoreHelper {
 			result = false;
 		}
 		return result;
+	}
+
+	public static List<EObject> getValidationErrors(EObject eo) {
+		List<EObject> errors = new ArrayList<EObject>();
+		Diagnostician diag = new Diagnostician();
+		BasicDiagnostic diagnostics = diag.createDefaultDiagnostic(eo);
+		diag.validate(eo, diagnostics);
+
+		if (diagnostics.getSeverity() == Diagnostic.ERROR) {
+			List<Diagnostic> children = getAllDiag(diagnostics);
+			for (Diagnostic diagnostic : children) {
+				
+				System.out.println("data of " + diagnostic);
+				int code = diagnostic.getCode();
+				System.out.println("Code :"+code);
+				System.out.println("Source :"+diagnostic.getSource());
+				
+				List<?> data = diagnostic.getData();
+				for (Object object : data) {
+					System.out.println("EcoreHelper.getValidationErrors() " + object);
+					if (object instanceof EObject && code == Diagnostic.ERROR) {
+						errors.add((EObject) object);
+					}
+				}
+			}
+		}
+		return errors;
+	}
+
+	public static List<Diagnostic> getAllDiag(Diagnostic diagnostics) {
+		List<Diagnostic> l = new ArrayList<Diagnostic>();
+		l.add(diagnostics);
+		List<Diagnostic> children = diagnostics.getChildren();
+		for (Diagnostic diagnostic : children) {
+			l.addAll(getAllDiag(diagnostic));
+		}
+		return l;
 	}
 
 	public static String getFileContent(EObject o, String filePath) {
