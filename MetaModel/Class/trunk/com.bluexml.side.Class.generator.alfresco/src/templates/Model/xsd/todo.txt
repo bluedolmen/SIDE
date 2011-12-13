@@ -7,9 +7,14 @@ class
 ./includedInSuperTypeQuery (3.4+) ->metadata
 ./overrides (:s
 
+association :
+./mandatory/@enforced (NOT Implemented in Alfresco)
+
+
 childAssociation
 ./duplicate (allow more than one instance with same name) -> metadata
 ./propagateTimestamps -> metadata
+./mandatory/@enforced (NOT Implemented in Alfresco)
 
 property/
 ./mandatory/@enforced (if true tested on repository level) -> metadata
