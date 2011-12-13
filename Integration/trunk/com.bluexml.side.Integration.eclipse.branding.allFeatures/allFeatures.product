@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
-<product name="SIDE Products Builder" uid="SIDEAllFeatures" id="com.bluexml.side.Integration.eclipse.branding.allFeatures.side_product_builder" application="org.eclipse.ui.ide.workbench" version="1.0.79" useFeatures="true" includeLaunchers="true">
+<product name="SIDE Products Builder" uid="SIDEAllFeatures" id="com.bluexml.side.Integration.eclipse.branding.allFeatures.side_product_builder" application="org.eclipse.ui.ide.workbench" version="1.0.80" useFeatures="true" includeLaunchers="true">
   <configIni use="default" />
   <launcherArgs>
     <vmArgs>-d32</vmArgs>
@@ -19,12 +19,12 @@
     <feature id="org.eclipse.pde" version="3.7.0.v20110504-0800-7b7qFVpFEx2XnmYtj_9RfO7" />
     <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.1.v30856-20111209" />
     <feature id="org.eclipse.m2e.feature" version="1.0.0.20110607-2117" />
-    <feature id="com.bluexml.side.Common.core.labs.feature" version="1.0.329.v30856-20111209" />
-    <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.95.v30933-20111211" />
-    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.713.v30933-20111211" />
-    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.538.v30933-20111211" />
+    <feature id="com.bluexml.side.Common.core.labs.feature" version="1.0.330.v30953-20111213" />
+    <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.96.v30953-20111213" />
+    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.714.v30953-20111213" />
+    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.539.v30953-20111213" />
     <feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.527.v30911-20111210" />
-    <feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" version="1.0.79.v30933-20111211" />
+    <feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" version="1.0.80.v30953-20111213" />
   </features>
 </product>
 
