@@ -186,10 +186,14 @@ public class ClassDiagramUtils {
 			f.setMin_bound(Integer.parseInt(ass.getSecondEnd().getCardMin()));
 			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
 		}
-
+		if (useSource) {
+			f.setMandatory(ass.getFirstEnd().isMandatory());
+		} else {
+			f.setMandatory(ass.getSecondEnd().isMandatory());
+		}
 		return f;
 	}
-	
+
 	public static ModelChoiceSearchField transformAssociationIntoModelChoiceSearchField(Association ass, AbstractClass srcClazz) {
 		ModelChoiceSearchField f = FormFactory.eINSTANCE.createModelChoiceSearchField();
 		// we needs to get the target type
@@ -218,21 +222,21 @@ public class ClassDiagramUtils {
 		}
 		if (useSource) {
 			AbstractClass linkedClass = first_linkedClass;
-			
+
 			f.setReal_class(linkedClass);
-//			f.setFormat_pattern(getViewForClass(linkedClass));
+			//			f.setFormat_pattern(getViewForClass(linkedClass));
 		} else {
 			AbstractClass linkedClass = second_linkedClass;
 			f.setReal_class(linkedClass);
-//			f.setFormat_pattern(getViewForClass(linkedClass));
+			//			f.setFormat_pattern(getViewForClass(linkedClass));
 		}
 
 		if (useSource) {
-//			f.setMin_bound(Integer.parseInt(ass.getFirstEnd().getCardMin()));
-//			f.setMax_bound(Integer.parseInt(ass.getFirstEnd().getCardMax()));
+			//			f.setMin_bound(Integer.parseInt(ass.getFirstEnd().getCardMin()));
+			//			f.setMax_bound(Integer.parseInt(ass.getFirstEnd().getCardMax()));
 		} else {
-//			f.setMin_bound(Integer.parseInt(ass.getSecondEnd().getCardMin()));
-//			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
+			//			f.setMin_bound(Integer.parseInt(ass.getSecondEnd().getCardMin()));
+			//			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
 		}
 
 		return f;
