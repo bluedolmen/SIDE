@@ -72,6 +72,7 @@ if (!Array.prototype.indexOf) {
 		options : {
 			itemType : "",
 			multipleSelectMode : false,
+			mandatory : false,
 			filterTerm : "*",
 			maxResults : -1
 		},
@@ -122,6 +123,7 @@ if (!Array.prototype.indexOf) {
 				var mymultiautocomplete = inputEx({
 					name : "-",
 					type : "mymultiautocomplete",
+					typeInvite : "enter target name",
 					parentEl : this.htmlid,
 					datasource : myDataSource,
 
@@ -178,6 +180,10 @@ if (!Array.prototype.indexOf) {
 					me.log("values changed to remove :" + toremove.toString());
 					YAHOO.util.Dom.get(me.addedFieldHtmlId).value = toAdd.toString();
 					YAHOO.util.Dom.get(me.removedFieldHtmlId).value = toremove.toString();
+					YAHOO.util.Dom.get(me.currentValueHtmlId).value = values.toString();
+					if (me.options.mandatory) {
+						YAHOO.Bubbling.fire("mandatoryControlValueUpdated", me);
+					}
 				});
 				return mymultiautocomplete;
 			} else {
@@ -217,7 +223,7 @@ if (!Array.prototype.indexOf) {
 					me.log("state :" + params[1].previousState);
 					var value = params[0];
 					me.log("value :" + value);
-					if (params[1].previousState == 'valid') {
+					if (params[1].previousState == 'valid' || params[1].previousState == null && value == '') {
 						me.log("value changed to :" + value.toString());
 						me.log("initialValue :" + me.initialValue);
 						if (value != me.initialValue) {
@@ -239,6 +245,10 @@ if (!Array.prototype.indexOf) {
 							// cancel change
 							YAHOO.util.Dom.get(me.addedFieldHtmlId).value = "";
 							YAHOO.util.Dom.get(me.removedFieldHtmlId).value = "";
+						}
+						YAHOO.util.Dom.get(me.currentValueHtmlId).value = value.toString();
+						if (me.options.mandatory) {
+							YAHOO.Bubbling.fire("mandatoryControlValueUpdated", me);
 						}
 					}
 

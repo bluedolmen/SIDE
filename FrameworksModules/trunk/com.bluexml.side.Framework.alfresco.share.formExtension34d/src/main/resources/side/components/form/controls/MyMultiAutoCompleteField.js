@@ -18,12 +18,14 @@ if (console == undefined) {
 
 (function() {
 
-	var Event = YAHOO.util.Event, lang = YAHOO.lang;
+	var Event = YAHOO.util.Event, lang = YAHOO.lang, Dom = YAHOO.util.Dom;
 
 	SIDE.MyMultiAutoCompleteField = function(options, initialValue) {
 		SIDE.MyMultiAutoCompleteField.superclass.constructor.call(this, options);
 
 		this.log("DSS initial value :" + initialValue);
+		Dom.addClass(this.divEl, "inputEx-typeInvite");
+		this.el.value = this.options.typeInvite;
 	};
 
 	YAHOO.lang.extend(SIDE.MyMultiAutoCompleteField, inputEx.MultiAutoComplete, {

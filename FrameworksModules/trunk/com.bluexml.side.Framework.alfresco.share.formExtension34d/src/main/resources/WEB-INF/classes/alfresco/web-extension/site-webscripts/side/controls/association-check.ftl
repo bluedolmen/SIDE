@@ -19,6 +19,13 @@
    {
      itemType: "${field.endpointType}",
      multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
+     <#if field.control.params.mandatory??>
+     mandatory: ${field.control.params.mandatory?string},
+     <#elseif field.mandatory??>
+     mandatory: ${field.mandatory?string},
+     <#elseif field.endpointMandatory??>
+     mandatory: ${field.endpointMandatory?string},
+     </#if>
      filterTerm : <#if field.control.params.filterTerm??>"${field.control.params.filterTerm}"<#else>"*"</#if>,
      advancedQuery :<#if field.control.params.advancedQuery??>"${field.control.params.advancedQuery?url}"<#else>""</#if>,
 	 maxResults : <#if field.control.params.maxResults??>${field.control.params.maxResults}<#else>-1</#if>
@@ -48,6 +55,7 @@
       
       <div id="${controlId}">
          <#if field.disabled == false>
+         <input type="hidden" id="${fieldHtmlId}" name="-" value="${field.value?html}" />
          <input type="hidden" id="${controlId}-added" name="${field.name}_added" />
          <input type="hidden" id="${controlId}-removed" name="${field.name}_removed" />
          

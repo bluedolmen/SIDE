@@ -73,6 +73,7 @@ if (!Array.prototype.indexOf) {
 		options : {
 			itemType : "",
 			multipleSelectMode : false,
+			mandatory : false,
 			filterTerm : "*",
 			advancedQuery : "",
 			maxResults : -1
@@ -141,9 +142,14 @@ if (!Array.prototype.indexOf) {
 					}
 
 					me.log("values changed to add :" + toAdd.toString());
-					me.log("values changed to remove :" + toremove.toString());
+					me.log("values changed to remove :" + toremove.toString());					
 					YAHOO.util.Dom.get(me.addedFieldHtmlId).value = toAdd.toString();
 					YAHOO.util.Dom.get(me.removedFieldHtmlId).value = toremove.toString();
+					
+					YAHOO.util.Dom.get(me.currentValueHtmlId).value = values.toString();
+					if (me.options.mandatory) {
+						YAHOO.Bubbling.fire("mandatoryControlValueUpdated", me);
+					}
 				});
 				return multiselect;
 			} else {
@@ -167,7 +173,7 @@ if (!Array.prototype.indexOf) {
 						me.log("initialValue :" + me.initialValue);
 						if (value != me.initialValue) {
 							// real change
-
+							
 							// user create or replace association
 							// set selected value into hidden field to add
 							// association
@@ -181,12 +187,15 @@ if (!Array.prototype.indexOf) {
 							}
 						} else {
 							me.log("cancel change ...");
-							// cancel change
+							// cancel change							
 							YAHOO.util.Dom.get(me.addedFieldHtmlId).value = "";
 							YAHOO.util.Dom.get(me.removedFieldHtmlId).value = "";
 						}
 					}
-
+					YAHOO.util.Dom.get(me.currentValueHtmlId).value = value.toString();
+					if (me.options.mandatory) {
+						YAHOO.Bubbling.fire("mandatoryControlValueUpdated", me);
+					}
 				});
 				return DSSelectWidget;
 			}
@@ -198,14 +207,16 @@ if (!Array.prototype.indexOf) {
 		 * @method onReady
 		 */
 		onReady : function ComboBox_onReady() {
-            YAHOO.Bubbling.fire("/side-labs/onReady/" + this.currentValueHtmlId, this);
+			YAHOO.Bubbling.fire("/side-labs/onReady/" + this.currentValueHtmlId, this);
 			this.DSSelectWidget = this.load();
-            YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
-
-            if (this.initialValue) {
+			YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
+			if (this.options.mandatory) {
+				YAHOO.Bubbling.fire("mandatoryControlValueUpdated", this);
+			}
+			if (this.initialValue) {
 				this.setValue(this.initialValue);
 			}
-            YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
+			YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
 		},
 		setValue : function ComboBox_setValue(value) {
 			this.log("before setValue :" + this.getValue());

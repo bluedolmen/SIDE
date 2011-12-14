@@ -98,13 +98,19 @@ if (console == undefined) {
 		},
 		onBlur : function(e) {
 			this.log("onBlur " + e);
-			if (this.hiddenEl.value != this.el.value && this.el.value != this.options.typeInvite)
+			this.log("onBlur hidden " + this.hiddenEl.value);
+			this.log("onBlur el.value " + this.el.value);
+			if (this.hiddenEl.value != this.el.value && this.el.value != this.options.typeInvite) {
 				// this.el.value = this.hiddenEl.value;
 				if (this.el.value == '' && this.options.typeInvite) {
 					Dom.addClass(this.divEl, "inputEx-typeInvite");
-					if (this.el.value == '')
-						this.el.value = this.options.typeInvite;
+					this.el.value = this.options.typeInvite;
+					this.setValue("", true);
 				}
+			} else if (e == 'textboxBlur' && this.el.value == '') {
+				Dom.addClass(this.divEl, "inputEx-typeInvite");
+				this.el.value = this.options.typeInvite;
+			}
 		}
 	});
 

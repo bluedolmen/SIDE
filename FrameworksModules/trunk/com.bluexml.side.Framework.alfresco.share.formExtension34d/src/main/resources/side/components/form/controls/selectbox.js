@@ -72,6 +72,7 @@ if (!Array.prototype.indexOf) {
 		options : {
 			itemType : "",
 			multipleSelectMode : false,
+			mandatory : false,
 			filterTerm : "*",
 			advancedQuery : "",
 			maxResults : -1
@@ -133,6 +134,10 @@ if (!Array.prototype.indexOf) {
 					me.log("values changed to remove :" + toremove.toString());
 					YAHOO.util.Dom.get(me.addedFieldHtmlId).value = toAdd.toString();
 					YAHOO.util.Dom.get(me.removedFieldHtmlId).value = toremove.toString();
+					YAHOO.util.Dom.get(me.currentValueHtmlId).value = values.toString();
+					if (me.options.mandatory) {
+						YAHOO.Bubbling.fire("mandatoryControlValueUpdated", me);
+					}
 				});
 				return multiselect;
 			} else {
@@ -140,6 +145,7 @@ if (!Array.prototype.indexOf) {
 				var DSSelectWidget = new SIDE.MyDSRadioFields({
 					name : "-" + this.htmlid,
 					datasource : myDataSource,
+					mandatory : this.options.mandatory,
 					valueKey : "nodeRef",
 					labelKey : "name",
 					parentEl : this.htmlid
@@ -175,6 +181,10 @@ if (!Array.prototype.indexOf) {
 							YAHOO.util.Dom.get(me.removedFieldHtmlId).value = "";
 						}
 					}
+					YAHOO.util.Dom.get(me.currentValueHtmlId).value = value.toString();
+					if (me.options.mandatory) {
+						YAHOO.Bubbling.fire("mandatoryControlValueUpdated", me);
+					}
 
 				});
 				return DSSelectWidget;
@@ -187,14 +197,14 @@ if (!Array.prototype.indexOf) {
 		 * @method onReady
 		 */
 		onReady : function SelectBox_onReady() {
-            YAHOO.Bubbling.fire("/side-labs/onReady/" + this.currentValueHtmlId, this);
+			YAHOO.Bubbling.fire("/side-labs/onReady/" + this.currentValueHtmlId, this);
 			this.DSSelectWidget = this.load();
-            YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
+			YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
 
-            if (this.initialValue) {
+			if (this.initialValue) {
 				this.setValue(this.initialValue);
 			}
-            YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
+			YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
 		},
 		setValue : function SelectBox_setValue(value) {
 			this.log("before setValue :" + this.getValue());
