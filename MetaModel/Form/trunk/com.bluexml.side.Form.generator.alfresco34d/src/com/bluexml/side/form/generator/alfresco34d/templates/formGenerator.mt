@@ -146,11 +146,15 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	set="<%if (eContainer().filter("FormContainer")){%><%args(0)%><%}else{%><%current("FormGroup").getPrefixedQualifiedName()%><%}%>"
 	label-id="<%getFieldLabelId("")%>"
 	<%if (help_text != null && help_text != ""){%>
-		help-id="<%getFieldLabelId("help.")%>"
+	help-id="<%getFieldLabelId("help.")%>"
 	<%}%>
 	<%if (description != null && description != ""){%>
-		description-id="<%getFieldLabelId("description.")%>"
+	description-id="<%getFieldLabelId("description.")%>"
 	<%}%>
+	<%if (filter("Field")){%>
+	mandatory="<%filter("Field").mandatory%>"
+	<%}%>
+	
 >
 
 <%if (Xtension[toString().startsWith("template")].nSize() > 0) {%>
