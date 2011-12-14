@@ -38,6 +38,7 @@ import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.ModelChoiceSearchField;
 import com.bluexml.side.form.SearchFormCollection;
 import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.form.common.utils.InternalModification;
@@ -106,7 +107,7 @@ public class SynchronizeWithClass {
 		InternalModification.moveToDisabled();
 	}
 
-	public void setFormContainer(AbstractClass abstractClass, FormContainer formContainer) {		
+	public void setFormContainer(AbstractClass abstractClass, FormContainer formContainer) {
 		ClassReference cref = (ClassReference) formContainer;
 		cref.setReal_class(abstractClass);
 	}
@@ -159,7 +160,6 @@ public class SynchronizeWithClass {
 				Model rootContainer = (Model) rootContainer2;
 				lm.add(rootContainer);
 			}
-
 		}
 
 		for (Model package1 : lm) {
@@ -170,15 +170,27 @@ public class SynchronizeWithClass {
 		return CollectionUtils.subtract(all, existing);
 	}
 
-	void update(FormContainer o, List<FormElement> allchildren) {
+	void update(FormContainer formContainer, List<FormElement> allchildren) {
 		// update id
+		if (updateId) {
+			if (formContainer instanceof FormSearch) {
+				SearchInitialization.initializeFormProperties((FormSearch) formContainer);
+			} else if (formContainer instanceof ClassReference) {
+				ClassReference cref = (ClassReference) formContainer;
+				AbstractClass abstractClass = cref.getReal_class();
+				if (!abstractClass.getName().equals(formContainer.getId())) {
+					formContainer.setId(abstractClass.getName());
+				}
+			}
+		}
+
 		for (FormElement formElement : allchildren) {
 			ModelElement ref = formElement.getRef();
 			if (ref instanceof NamedModelElement) {
 				NamedModelElement nme = (NamedModelElement) ref;
 				String name = nme.getName();
 
-				if (updateId) {
+				if (updateId && !name.equals(formElement.getId())) {
 					if (headless) {
 						formElement.setId(name);
 					} else {
@@ -204,7 +216,12 @@ public class SynchronizeWithClass {
 			if (ref instanceof Attribute) {
 				Attribute att = (Attribute) ref;
 
-				Field fieldForAttribute = ClassDiagramUtils.getFieldForAttribute(att);
+				FormElement fieldForAttribute = null;
+				if (formContainer instanceof FormSearch) {
+					fieldForAttribute = SearchInitialization.getSearchFieldForAttribute(att);
+				} else if (formContainer instanceof FormClass) {
+					fieldForAttribute = ClassDiagramUtils.getFieldForAttribute(att);
+				}
 
 				if (!fieldForAttribute.getClass().isInstance(formElement)) {
 					// mismatch so we replace the Field
@@ -234,17 +251,19 @@ public class SynchronizeWithClass {
 				}
 			} else if (ref instanceof Association) {
 				Association ass = (Association) ref;
-				ModelChoiceField mcf = (ModelChoiceField) formElement;
-				int parseInt = Integer.parseInt(ass.getSecondEnd().getCardMax());
-				// at least bounds must be compatible with constraints in the dt model
-				boolean b = (((ModelChoiceField) mcf).getMax_bound() > parseInt) && (parseInt != -1);
-				if (headless) {
-					if (b) {
-						mcf.setMax_bound(parseInt);
-					}
-				} else {
-					if (b) {
-						cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), parseInt));
+				if (formElement instanceof ModelChoiceField) {
+					ModelChoiceField mcf = (ModelChoiceField) formElement;
+					int parseInt = Integer.parseInt(ass.getSecondEnd().getCardMax());
+					// at least bounds must be compatible with constraints in the dt model
+					boolean b = (((ModelChoiceField) mcf).getMax_bound() > parseInt) && (parseInt != -1);
+					if (headless) {
+						if (b) {
+							mcf.setMax_bound(parseInt);
+						}
+					} else {
+						if (b) {
+							cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), parseInt));
+						}
 					}
 				}
 			}
