@@ -34,10 +34,10 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	      <forms>
 				<dependencies>
 					<%if (current("FormCollection").documentation.indexOf("css") != -1){%>
-						<css src="<%getGenericFieldAsText(current("FormCollection").documentation, "css")%>" />
+						<%getGlobalDependencies(current("FormCollection").documentation, "css")%>
 					<%}%>
 					<%if (current("FormCollection").documentation.indexOf("js") != -1){%>
-						<js src="<%getGenericFieldAsText(current("FormCollection").documentation, "js")%>" />
+						<%getGlobalDependencies(current("FormCollection").documentation, "js")%>
 					<%}%>
 				</dependencies>
 			</forms>

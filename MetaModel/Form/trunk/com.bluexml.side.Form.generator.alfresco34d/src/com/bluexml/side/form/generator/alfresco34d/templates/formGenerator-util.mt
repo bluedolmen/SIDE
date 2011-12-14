@@ -7,16 +7,30 @@ import com.bluexml.side.form.generator.alfresco34d.FormGenerator
 import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 %>
 
-<%-- getGenericAsValue :
+<%-- getGenericFieldAsText :
 	 args(0) : query string
 	 args(1) : expected parameter name
 	 returns the value of the expected parameter stored in a Generic Text
 	 field encoded like a query
+	 @deprecated - not used anymore because of the use of getGlobalDependencies
 --%>
 <%script type="FormCollection" name="getGenericFieldAsText" post="trim()" %>
 <%for (args(0).split("&")){%>
 <%if (toString().indexOf(args(1)) != -1) {%>
 <%toString().substring(toString().indexOf("=") + 1, toString().length())%>
+<%}%>
+<%}%>
+
+<%-- getGlobalDependencies :
+	 args(0) : query string
+	 args(1) : expected parameter name
+	 returns the value of the expected parameter stored in a Generic Text
+	 field encoded like a query
+--%>
+<%script type="FormCollection" name="getGlobalDependencies" post="trim()" %>
+<%for (args(0).split("&")){%>
+<%if (toString().indexOf(args(1)) != -1) {%>
+<<%args(1)%> src="<%toString().substring(toString().indexOf("=") + 1, toString().length())%>" />
 <%}%>
 <%}%>
 
@@ -44,9 +58,9 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 --%>
 <%script type="FormElement" name="getXtensionAsControlParam" post="trim()" %>
 <%for (Xtension) {%>
-<!--xtension : <%current()%> -->
+<%--xtension : <%current()%> -->
 <!--arg      :<%args(0).toLowerCase()%> -->
-<!-- test : <%toString().toLowerCase().startsWith(args(0).toLowerCase())%> -->
+<!-- test : <%toString().toLowerCase().startsWith(args(0).toLowerCase())%> --%>
 	<%if (toLowerCase().startsWith(args(0).toLowerCase())){%>
 		<control-param name="<%args(0)%>"><%toString().substring(toString().indexOf("=") + 1, toString().length())%></control-param>
 	<%}%>
