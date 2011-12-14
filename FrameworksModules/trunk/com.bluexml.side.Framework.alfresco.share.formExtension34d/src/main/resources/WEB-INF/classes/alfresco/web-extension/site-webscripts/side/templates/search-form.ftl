@@ -5,7 +5,7 @@
 </#if>
 
 <@formLib.renderFormContainer formId=formId>
-   <!--div id="${formId}-tabview" class="yui-navset"-->
+   <#--div id="${formId}-tabview" class="yui-navset"-->
    <div id="${formId}">
    
    	<div id="search-parameters">
@@ -34,18 +34,20 @@
       <div class="yui-content">
          <#list form.structure as item>
             <#if item.kind == "set">
-               <!--div id="tab_${item_index}"-->
+               <#--div id="tab_${item_index}"-->
                   <@formLib.renderSet set=item />
-               <!--/div-->      
+               <#--/div-->      
             </#if>
          </#list>
       </div>
    </div>
 </@>
 
+<#--
 <script type="text/javascript">//<![CDATA[
 (function() 
 {
    new YAHOO.widget.TabView('${formId}-tabview');
 })();
 //]]></script>
+-->
