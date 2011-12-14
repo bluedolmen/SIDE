@@ -19,9 +19,7 @@
    {
      itemType: "${field.endpointType}",
      multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
-     <#if field.control.params.mandatory??>
-     mandatory: ${field.control.params.mandatory?string},
-     <#elseif field.mandatory??>
+     <#if field.mandatory??>
      mandatory: ${field.mandatory?string},
      <#elseif field.endpointMandatory??>
      mandatory: ${field.endpointMandatory?string},
