@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" label="SIDE Alfresco community 3.4.b support" version="1.0.28.v30997-20111213" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" label="SIDE Alfresco community 3.4.b support" version="1.0.29.v31017-20111214" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -9,7 +9,7 @@
   <includes id="com.bluexml.side.View.generator.facetmap34d.feature" version="1.0.10.v29723-20111108" />
   <includes id="com.bluexml.side.Class.generator.alfresco34d.sideenterprise.feature" version="1.0.6.v30911-20111210" />
   <includes id="com.bluexml.side.Portal.generator.alfresco34d.sideenterprise.feature" version="1.0.11.v30856-20111209" />
-  <includes id="com.bluexml.side.Form.generator.alfresco34d.feature" version="1.0.48.v30997-20111213" />
+  <includes id="com.bluexml.side.Form.generator.alfresco34d.feature" version="1.0.49.v31017-20111214" />
   <plugin id="com.bluexml.side.Util.framework.tools.alfresco34dCE" download-size="0" install-size="0" version="1.0.3.v30856-20111209" unpack="false" />
 </feature>
 
