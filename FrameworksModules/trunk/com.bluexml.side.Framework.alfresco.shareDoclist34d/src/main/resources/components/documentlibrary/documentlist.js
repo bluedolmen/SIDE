@@ -847,6 +847,7 @@
                title = record.title,
                type = record.type,
                isLink = record.isLink,
+               isFolder = record.isFolder,
                extn = name.substring(name.lastIndexOf("."));
 
             if (scope.options.simpleView)
@@ -858,7 +859,7 @@
                Dom.setStyle(elCell, "width", oColumn.width + "px");
                Dom.setStyle(elCell.parentNode, "width", oColumn.width + "px");
 
-               if (type == "folder")
+               if (isFolder)
                {
                   elCell.innerHTML = '<span class="folder-small">' + (isLink ? '<span class="link"></span>' : '') + Alfresco.DocumentList.generateFileFolderLinkMarkup(scope, oRecord) + '<img src="' + Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/folder-32.png" /></a>';
                }
@@ -880,7 +881,7 @@
                Dom.setStyle(elCell, "width", oColumn.width + "px");
                Dom.setStyle(elCell.parentNode, "width", oColumn.width + "px");
 
-               if (type == "folder")
+               if (isFolder)
                {
                   elCell.innerHTML = '<span class="folder">' + (isLink ? '<span class="link"></span>' : '') + Alfresco.DocumentList.generateFileFolderLinkMarkup(scope, oRecord) + '<img src="' + Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/folder-48.png" /></a>';
                }
