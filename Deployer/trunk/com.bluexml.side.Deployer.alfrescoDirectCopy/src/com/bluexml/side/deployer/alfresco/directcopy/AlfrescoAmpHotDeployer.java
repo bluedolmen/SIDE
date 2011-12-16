@@ -286,7 +286,7 @@ public class AlfrescoAmpHotDeployer extends AlfrescoAmpDirectDeployer {
 		String alfrescoURL = getGenerationParameters().get(CONFIGURATION_PARAMETER_ALFRESCO_URL) + SERVICE_SIDE_WORKFLOWHOTDEPLOY_FILEPATH;
 		for (String string : list) {
 			// comput the url
-			String serializedDoc = callReloadService(alfrescoURL + string);
+			String serializedDoc = callReloadService(alfrescoURL + new File(string).toURI());
 			// search for error
 			Document buildJdomDocument = XmlHelper.buildJdomDocument(serializedDoc);
 			Element rootElement = buildJdomDocument.getRootElement();
