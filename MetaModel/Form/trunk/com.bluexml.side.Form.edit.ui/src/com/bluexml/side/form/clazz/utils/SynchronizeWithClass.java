@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.util.EList;
@@ -28,7 +27,6 @@ import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.form.ClassFormCollection;
 import com.bluexml.side.form.ClassReference;
-import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormContainer;
@@ -37,12 +35,13 @@ import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.FormSearch;
+import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ModelChoiceField;
-import com.bluexml.side.form.ModelChoiceSearchField;
 import com.bluexml.side.form.SearchFormCollection;
 import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.form.common.utils.InternalModification;
 import com.bluexml.side.form.search.utils.SearchInitialization;
+import com.bluexml.side.form.workflow.utils.WorkflowInitialization;
 import com.bluexml.side.util.libs.ecore.EcoreHelper;
 
 public class SynchronizeWithClass {
@@ -173,15 +172,11 @@ public class SynchronizeWithClass {
 	void update(FormContainer formContainer, List<FormElement> allchildren) {
 		// update id
 		if (updateId) {
-			if (formContainer instanceof FormSearch) {
-				SearchInitialization.initializeFormProperties((FormSearch) formContainer);
-			} else if (formContainer instanceof ClassReference) {
-				ClassReference cref = (ClassReference) formContainer;
-				AbstractClass abstractClass = cref.getReal_class();
-				if (!abstractClass.getName().equals(formContainer.getId())) {
-					formContainer.setId(abstractClass.getName());
-				}
-			}
+			updateFormContainerId(formContainer);
+		}
+
+		if (updateLabel) {
+			updateLabel(formContainer, ((TitledNamedClassModelElement) formContainer.getRef()).getLabel());
 		}
 
 		for (FormElement formElement : allchildren) {
@@ -191,24 +186,11 @@ public class SynchronizeWithClass {
 				String name = nme.getName();
 
 				if (updateId && !name.equals(formElement.getId())) {
-					if (headless) {
-						formElement.setId(name);
-					} else {
-						cc.append(SetCommand.create(domain, formElement, FormPackage.eINSTANCE.getFormElement_Id(), name));
-					}
+					updateId(formElement, name);
 				}
 
 				if (updateLabel && ref instanceof TitledNamedClassModelElement) {
-					TitledNamedClassModelElement tme = (TitledNamedClassModelElement) ref;
-					String title = tme.getTitle();
-					if (StringUtils.trimToNull(title) == null) {
-						title = name;
-					}
-					if (headless) {
-						formElement.setLabel(title);
-					} else {
-						cc.append(SetCommand.create(domain, formElement, FormPackage.eINSTANCE.getFormElement_Label(), title));
-					}
+					updateLabel(formContainer, ((TitledNamedClassModelElement) ref).getLabel());
 				}
 			}
 
@@ -216,56 +198,109 @@ public class SynchronizeWithClass {
 			if (ref instanceof Attribute) {
 				Attribute att = (Attribute) ref;
 
-				FormElement fieldForAttribute = null;
-				if (formContainer instanceof FormSearch) {
-					fieldForAttribute = SearchInitialization.getSearchFieldForAttribute(att);
-				} else if (formContainer instanceof FormClass) {
-					fieldForAttribute = ClassDiagramUtils.getFieldForAttribute(att);
-				}
-
-				if (!fieldForAttribute.getClass().isInstance(formElement)) {
-					// mismatch so we replace the Field
-					FormGroup eContainer = (FormGroup) formElement.eContainer();
-					boolean contains = eContainer.getChildren().contains(formElement);
-
-					if (headless) {
-						EList<FormElement> children = null;
-						if (contains) {
-							children = eContainer.getChildren();
-						} else {
-							children = eContainer.getDisabled();
-						}
-						// add the new Field
-						children.add(fieldForAttribute);
-						// remove
-						children.remove(formElement);
-					} else {
-						if (contains) {
-							cc.append(AddCommand.create(domain, eContainer, FormPackage.eINSTANCE.getFormGroup_Children(), fieldForAttribute));
-						} else {
-							cc.append(AddCommand.create(domain, eContainer, FormPackage.eINSTANCE.getFormGroup_Disabled(), fieldForAttribute));
-						}
-						Command rmCmd = RemoveCommand.create(domain, formElement);
-						cc.append(rmCmd);
-					}
-				}
+				updateAttributeFields(formContainer, formElement, att);
 			} else if (ref instanceof Association) {
+
 				Association ass = (Association) ref;
 				if (formElement instanceof ModelChoiceField) {
 					ModelChoiceField mcf = (ModelChoiceField) formElement;
-					int parseInt = Integer.parseInt(ass.getSecondEnd().getCardMax());
-					// at least bounds must be compatible with constraints in the dt model
-					boolean b = (((ModelChoiceField) mcf).getMax_bound() > parseInt) && (parseInt != -1);
-					if (headless) {
-						if (b) {
-							mcf.setMax_bound(parseInt);
-						}
-					} else {
-						if (b) {
-							cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), parseInt));
-						}
-					}
+					ClassReference cref = (ClassReference) formContainer;
+					AbstractClass srcClazz = cref.getReal_class();
+					updateModelChoiceField(srcClazz, ass, mcf);
 				}
+			}
+		}
+	}
+
+	public void updateFormContainerId(FormContainer formContainer) {
+		if (formContainer instanceof FormSearch) {
+			SearchInitialization.initializeFormProperties((FormSearch) formContainer);
+			updateId(formContainer, formContainer.getId());
+		} else if (formContainer instanceof ClassReference) {
+			ClassReference cref = (ClassReference) formContainer;
+			AbstractClass abstractClass = cref.getReal_class();
+			if (!abstractClass.getName().equals(formContainer.getId())) {
+				updateId(formContainer, abstractClass.getName());
+			}
+		}
+	}
+
+	public void updateModelChoiceField(AbstractClass srcClazz, Association ass, ModelChoiceField mcf) {
+
+		ModelChoiceField modelChoiceFieldForAssociation = ClassDiagramUtils.getModelChoiceFieldForAssociation(ass, srcClazz);
+
+		int parseInt = modelChoiceFieldForAssociation.getMax_bound();
+		// at least bounds must be compatible with constraints in the dt model
+		boolean b = (((ModelChoiceField) mcf).getMax_bound() > parseInt) && (parseInt != -1);
+		if (headless) {
+			if (b) {
+				mcf.setMax_bound(parseInt);
+			}
+		} else {
+			if (b) {
+				cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), parseInt));
+			}
+		}
+		// maybe the name or Label have been changed must be based on target name/Label if exists
+		String id = modelChoiceFieldForAssociation.getId();
+		if (updateId && !id.equals(mcf.getId())) {
+			updateId(mcf, id);
+
+		}
+		String label = modelChoiceFieldForAssociation.getLabel();
+		if (updateLabel && !label.equals(mcf.getLabel())) {
+			updateLabel(mcf, label);
+		}
+	}
+
+	public void updateId(FormElement fw, String computeFormWorkflowId) {
+		if (headless) {
+			fw.setId(computeFormWorkflowId);
+		} else {
+			cc.append(SetCommand.create(domain, fw, FormPackage.eINSTANCE.getFormElement_Id(), computeFormWorkflowId));
+		}
+	}
+
+	public void updateLabel(FormElement fw, String name) {
+		if (headless) {
+			fw.setLabel(name);
+		} else {
+			cc.append(SetCommand.create(domain, fw, FormPackage.eINSTANCE.getFormElement_Label(), name));
+		}
+	}
+
+	public void updateAttributeFields(FormContainer formContainer, FormElement formElement, Attribute att) {
+		FormElement fieldForAttribute = null;
+		if (formContainer instanceof FormSearch) {
+			fieldForAttribute = SearchInitialization.getSearchFieldForAttribute(att);
+		} else if (formContainer instanceof FormClass || formContainer instanceof FormWorkflow) {
+			fieldForAttribute = ClassDiagramUtils.getFieldForAttribute(att);
+		}
+
+		if (!fieldForAttribute.getClass().isInstance(formElement)) {
+			// mismatch so we replace the Field
+			FormGroup eContainer = (FormGroup) formElement.eContainer();
+			boolean contains = eContainer.getChildren().contains(formElement);
+
+			if (headless) {
+				EList<FormElement> children = null;
+				if (contains) {
+					children = eContainer.getChildren();
+				} else {
+					children = eContainer.getDisabled();
+				}
+				// add the new Field
+				children.add(fieldForAttribute);
+				// remove
+				children.remove(formElement);
+			} else {
+				if (contains) {
+					cc.append(AddCommand.create(domain, eContainer, FormPackage.eINSTANCE.getFormGroup_Children(), fieldForAttribute));
+				} else {
+					cc.append(AddCommand.create(domain, eContainer, FormPackage.eINSTANCE.getFormGroup_Disabled(), fieldForAttribute));
+				}
+				Command rmCmd = RemoveCommand.create(domain, formElement);
+				cc.append(rmCmd);
 			}
 		}
 	}
@@ -299,82 +334,111 @@ public class SynchronizeWithClass {
 				}
 			}
 		}
-		domain.getCommandStack().execute(removeCommands);
+		if (!headless) {
+			domain.getCommandStack().execute(removeCommands);
+		}
 	}
 
 	void addMissing(FormContainer o, List<FormElement> allchildren) {
 
-		addMissingAttributes(o, allchildren);
-
-		addMissingAssociations(o, allchildren);
-
-	}
-
-	void addMissingAssociations(FormContainer o, List<FormElement> children) {
-		List<Association> allAssociations = null;
 		if (o instanceof ClassReference) {
 			// get the attached class
 			ClassReference cr = (ClassReference) o;
 			AbstractClass real_class = cr.getReal_class();
-			allAssociations = real_class.getAllSourceAssociations();
 
-			// get FormElement that miss
-			ArrayList<Association> missAtt = new ArrayList<Association>();
+			addMissing(o, allchildren, real_class, null);
+		}
 
-			if (allAssociations != null) {
-				missAtt.addAll(allAssociations);
+	}
+
+	public void addMissing(FormContainer o, List<FormElement> allchildren, AbstractClass real_class, String filterNS) {
+		Set<FormGroup> groups = new HashSet<FormGroup>();
+		synchronizeMissingAttributes(o, allchildren, real_class, groups, filterNS);
+		synchronizeMissingAssociations(o, allchildren, real_class, groups, filterNS);
+	}
+
+	public void synchronizeMissingAssociations(FormContainer o, List<FormElement> children, AbstractClass real_class, Set<FormGroup> groups, String filterNS) {
+
+		List<Association> allAssociations = real_class.getAllSourceAssociations();
+
+		// get FormElement that miss
+		ArrayList<Association> missAtt = new ArrayList<Association>();
+
+		if (allAssociations != null) {
+			missAtt.addAll(allAssociations);
+		}
+
+		for (FormElement formElement : children) {
+			ModelElement ref = formElement.getRef();
+			if (ref != null && ref instanceof Association) {
+				// linked element is attribute so remove this attribute from the missing list
+				missAtt.remove(ref);
+			}
+		}
+
+		EList<FormGroup> allSubGroups = o.getAllSubGroups();
+		groups.addAll(allSubGroups);
+
+		// now we have the attribute missing list
+		// initialize missing Field
+		for (Association ass : missAtt) {
+
+			FormElement fieldForAssociation = null;
+			if (o instanceof FormClass || o instanceof FormWorkflow) {
+				fieldForAssociation = ClassDiagramUtils.getModelChoiceFieldForAssociation(ass, real_class);
+			} else if (o instanceof FormSearch) {
+				fieldForAssociation = ClassDiagramUtils.transformAssociationIntoModelChoiceSearchField(ass, real_class);
 			}
 
-			for (FormElement formElement : children) {
-				ModelElement ref = formElement.getRef();
-				if (ref != null && ref instanceof Association) {
-					// linked element is attribute so remove this attribute from the missing list
-					missAtt.remove(ref);
-				}
-			}
-			// now we have the attribute missing list
-			// initialize missing Field
-			for (Association ass : missAtt) {
+			if (WorkflowInitialization.filterFormElement(filterNS, fieldForAssociation)) {
 
-				FormElement fieldForAssociation = null;
-				if (o instanceof FormClass) {
-					fieldForAssociation = ClassDiagramUtils.getModelChoiceFieldForAssociation(ass, real_class);
-				} else if (o instanceof FormSearch) {
-					fieldForAssociation = ClassDiagramUtils.transformAssociationIntoModelChoiceSearchField(ass, real_class);
-				}
 				// get where to add the field
-				FormGroup parent = o;
+				FormGroup parent = null;
 				// mybe a group exist with ref to the attribute container
-				EObject eContainer = ass.eContainer();
+
 				// search for matching group
-				EList<FormGroup> allSubGroups = o.getAllSubGroups();
-				for (FormGroup formGroup : allSubGroups) {
+
+				for (FormGroup formGroup : groups) {
 					ModelElement ref = formGroup.getRef();
-					if (ref != null && ref.equals(eContainer)) {
+					if (ref instanceof AbstractClass && ((AbstractClass) ref).getSourceAssociations().contains(ass)) {
 						// matching group founded
 						parent = formGroup;
 						break;
 					}
 				}
-				// add new Field to the parent
-				if (headless) {
-					parent.getChildren().add(fieldForAssociation);
-				} else {
-					cc.append(AddCommand.create(domain, parent, FormPackage.eINSTANCE.getFormGroup_Children(), fieldForAssociation));
+
+				if (createMissingGroup && parent == null && !real_class.getSourceAssociations().contains(ass)) {
+					AbstractClass source = null;
+					EList<AbstractClass> sources = ass.getSource();
+					if (sources.size() == 1) {
+						source = sources.get(0);
+					} else {
+						EList<AbstractClass> allLinkedAbstractClass = real_class.getAllLinkedAbstractClass();
+						boolean contains = allLinkedAbstractClass.contains(sources.get(0));
+						if (contains) {
+							source = sources.get(0);
+						} else {
+							source = sources.get(1);
+						}
+					}
+					parent = ClassInitialization.createGroup(source);
+					addChild(o, parent);
 				}
+
+				// add new Field to the parent
+				if (parent == null) {
+					parent = o;
+				}
+				addChild(parent, fieldForAssociation);
 
 			}
 		}
+
 	}
 
-	void addMissingAttributes(FormContainer o, List<FormElement> children) {
-		List<Attribute> allAttributes = null;
-		if (o instanceof ClassReference) {
-			// get the attached class
-			ClassReference cr = (ClassReference) o;
-			AbstractClass real_class = cr.getReal_class();
-			allAttributes = real_class.getAllAttributes();
-		}
+	public void synchronizeMissingAttributes(FormContainer o, List<FormElement> children, AbstractClass real_class, Set<FormGroup> groups, String filterNS) {
+
+		List<Attribute> allAttributes = real_class.getAllAttributes();
 
 		// get FormElement that miss
 		ArrayList<Attribute> missAtt = new ArrayList<Attribute>();
@@ -390,6 +454,10 @@ public class SynchronizeWithClass {
 				missAtt.remove(ref);
 			}
 		}
+
+		EList<FormGroup> allSubGroups = o.getAllSubGroups();
+		groups.addAll(allSubGroups);
+
 		// now we have the attribute missing list
 		// initialize missing Field
 		for (Attribute attribute : missAtt) {
@@ -397,43 +465,54 @@ public class SynchronizeWithClass {
 			FormElement fieldForAttribute = null;
 			if (o instanceof FormSearch) {
 				fieldForAttribute = SearchInitialization.getSearchFieldForAttribute(attribute);
-			} else if (o instanceof FormClass) {
+			} else if (o instanceof FormClass || o instanceof FormWorkflow) {
 				fieldForAttribute = ClassDiagramUtils.getFieldForAttribute(attribute);
 			}
+			if (WorkflowInitialization.filterFormElement(filterNS, fieldForAttribute)) {
 
-			// get where to add the field
-			FormGroup parent = null;
-			// mybe a group exist with ref to the attribute container
-			AbstractClass eContainer = (AbstractClass) attribute.eContainer();
-			// search for matching group
-			EList<FormGroup> allSubGroups = o.getAllSubGroups();
-			for (FormGroup formGroup : allSubGroups) {
-				ModelElement ref = formGroup.getRef();
-				if (ref != null && ref.equals(eContainer)) {
-					// matching group founded
-					parent = formGroup;
-					break;
+				// get where to add the field
+				FormGroup parent = null;
+				// mybe a group exist with ref to the attribute container
+				AbstractClass eContainer = (AbstractClass) attribute.eContainer();
+				// search for matching group
+
+				for (FormGroup formGroup : groups) {
+					ModelElement ref = formGroup.getRef();
+					if (ref != null && ref.equals(eContainer)) {
+						// matching group founded
+						parent = formGroup;
+						break;
+					}
 				}
-			}
-			if (createMissingGroup && parent == null) {
-				parent = ClassInitialization.createGroup(eContainer);
-				o.getChildren().add(parent);
-			}
-			if (parent == null) {
-				parent = o;
-			}
+				if (createMissingGroup && parent == null && !real_class.equals(attribute.eContainer())) {
+					parent = ClassInitialization.createGroup(eContainer);
+					groups.add(parent);
+					addChild(o, parent);
+				}
+				if (parent == null) {
+					parent = o;
+				}
 
-			// add new Field to the parent
-			if (headless) {
-				parent.getChildren().add(fieldForAttribute);
-			} else {
-				cc.append(AddCommand.create(domain, parent, FormPackage.eINSTANCE.getFormGroup_Children(), fieldForAttribute));
+				// add new Field to the parent
+				addChild(parent, fieldForAttribute);
+
 			}
 		}
+
 	}
 
 	public CompoundCommand getCc() {
 		return cc;
 	}
 
+	public void addChild(FormGroup fw, FormElement f) {
+		if (headless) {
+			fw.getChildren().add(f);
+		} else {
+			Command create = AddCommand.create(domain, fw, FormPackage.eINSTANCE.getFormGroup_Children(), f);
+			boolean canExecute = create.canExecute();
+			System.out.println("SynchronizeWorkflowFormWithClass.addChild() canExecute :" + fw.getId() + "->" + f + canExecute);
+			cc.append(create);
+		}
+	}
 }

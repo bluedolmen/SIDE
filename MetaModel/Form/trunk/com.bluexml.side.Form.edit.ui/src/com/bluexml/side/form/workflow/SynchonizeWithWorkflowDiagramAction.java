@@ -1,8 +1,11 @@
 package com.bluexml.side.form.workflow;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -14,7 +17,7 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.WorkflowFormCollection;
-import com.bluexml.side.form.workflow.utils.WorkflowSynchronizationUtils;
+import com.bluexml.side.form.workflow.utils.SynchronizeWorkflowFormWithClass;
 
 public class SynchonizeWithWorkflowDiagramAction extends Action implements ISelectionChangedListener {
 	protected EObject selectedObject;
@@ -50,9 +53,35 @@ public class SynchonizeWithWorkflowDiagramAction extends Action implements ISele
 
 	private void doAction(FormCollection fc) {
 		if (fc instanceof WorkflowFormCollection) {
-			Command c = WorkflowSynchronizationUtils.synchronizeProcess((WorkflowFormCollection) fc, domain);
+			SynchronizeWorkflowFormWithClass sw = new SynchronizeWorkflowFormWithClass(domain);
+			sw.synchronize(fc);
+			CompoundCommand c = sw.getCc();
+			List<Command> invalideCommands = getInvalideCommands(c);
+			System.out.println("INVALIDE command :" + invalideCommands.size());
+
+			//			Command c = WorkflowSynchronizationUtils.synchronizeProcess((WorkflowFormCollection) fc, domain);
 			domain.getCommandStack().execute(c);
 		}
+	}
+
+	public static List<Command> getInvalideCommands(CompoundCommand cc) {
+		List<Command> commandList = new ArrayList<Command>();
+		if (cc.getCommandList().size() == 0) {
+			commandList.add(cc);
+		}
+		for (Command command : cc.getCommandList()) {
+			if (command instanceof CompoundCommand) {
+				commandList.addAll(getInvalideCommands((CompoundCommand) command));
+			} else {
+				if (command.canExecute()) {
+					System.out.println("command can execute :" + command);
+				} else {
+					System.out.println("command invalide ! :" + command);
+					commandList.add(command);
+				}
+			}
+		}
+		return commandList;
 	}
 
 	@Override

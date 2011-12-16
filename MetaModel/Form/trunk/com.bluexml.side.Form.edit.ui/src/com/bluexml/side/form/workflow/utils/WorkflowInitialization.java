@@ -48,7 +48,7 @@ public class WorkflowInitialization {
 
 			// For each task we create a form
 			for (State s : l) {
-				FormWorkflow fw = createTaskForForm(p, s);
+				FormWorkflow fw = createTaskForForm(s);
 				fw.setRef(s);
 				lf.add(fw);
 			}
@@ -94,8 +94,8 @@ public class WorkflowInitialization {
 
 				// For each task we create a form
 				for (State s : l) {
-					FormWorkflow fw = createTaskForForm(p, s);
-					fw.setRef(s);
+					FormWorkflow fw = createTaskForForm(s);
+
 					lf.add(fw);
 				}
 				cmd.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormCollection_Forms(), lf));
@@ -109,13 +109,12 @@ public class WorkflowInitialization {
 	/**
 	 * Return a form a Task
 	 * 
-	 * @param p
 	 * @param s
 	 * @return
 	 */
-	public static FormWorkflow createTaskForForm(Process p, State s) {
+	public static FormWorkflow createTaskForForm(State s) {
 		FormWorkflow fw = FormFactory.eINSTANCE.createFormWorkflow();
-		fw.setId(p.getName() + "_" + s.getName());
+		fw.setId(computeFormWorkflowId(s));
 		fw.setLabel(s.getName());
 		fw.setRef(s);
 
@@ -127,46 +126,14 @@ public class WorkflowInitialization {
 				// use initialize from the Class definition instead to search attribute task
 				Collection<FormElement> createChildsForClass = ClassInitialization.createChildsForClass(advancedTaskDefinition, false);
 
-				// filter bpm element to only keep custom elements
-				Collection<FormElement> filtered = new ArrayList<FormElement>();
-				for (FormElement formElement : createChildsForClass) {
-					ModelElement ref = formElement.getRef();
-					String fullName = ((NamedModelElement) ref).getFullName();
-					NameSpace namespace = ref.getLogicalNameSpace();
-					String alfrescoURI = "http://www.alfresco.org/model";
-					if (namespace == null || !namespace.getURI().startsWith(alfrescoURI)) {
-						filtered.add(formElement);
-						System.out.println("add Field for " + fullName);
-					} else {
-						System.out.println("FormElement not added :" + fullName);
-					}
-				}
+				// filter bpm element to only keep custom elements mandatory fields are created by Share Form Generator ... very bad
+				// TODO : remove share specific need here and let generator do his job
+				Collection<FormElement> filtered = filterAttributes(createChildsForClass, "http://www.alfresco.org/model");
 				fw.getChildren().addAll(filtered);
 			} else {
 
 				// For all attribute we get the field :
-				for (Attribute a : ut.getAttributes()) {
-					//if (a.getAllowedValues().size() == 0) { 
-					// @Amenel: ModelChoiceFields are not supported in workflow forms (yet). Fields with
-					// an allowed values list must remain a CharField since there's no class associated.
-					Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
-					if (f != null) {
-						fw.getChildren().add(f);
-					}
-					// } else {
-					// ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
-					// f.setId(a.getName());
-					// f.setRef(a);
-					// if (a.getTitle() != null && a.getTitle().length() > 0) {
-					// f.setLabel(a.getTitle());
-					// } else {
-					// f.setLabel(a.getName());
-					// }
-					// if (f != null) {
-					// fw.getChildren().add(f);
-					// }
-					// }
-				}
+				createAttributeFields(fw, ut);
 
 				// For attached class :
 				if (((UserTask) s).getClazz().size() > 0) {
@@ -190,21 +157,85 @@ public class WorkflowInitialization {
 			}
 
 			// Same for Transition
-			for (Transition t : ut.getTransition()) {
-				ActionField af = WorkflowDiagramUtils.getOperationForTransition(t);
-				if (af != null) {
-					fw.getChildren().add(af);
-				}
-			}
+			createTransitionsFields(fw, ut);
 
 			// add save button bug #1787
-
-			ActionField save = FormFactory.eINSTANCE.createActionField();
-			save.setId("wrkflw_save");
-			save.setLabel("save");
-			fw.getChildren().add(save);
+			// TODO the save action is Share Form specific ... need to manage this on Generation part
+			createSaveShareAction(fw);
 
 		}
 		return fw;
+	}
+
+	public static Collection<FormElement> filterAttributes(Collection<FormElement> createChildsForClass, String filterURI) {
+		Collection<FormElement> filtered = new ArrayList<FormElement>();
+		for (FormElement formElement : createChildsForClass) {
+			boolean filterFormElement = filterFormElement(filterURI, formElement);
+			if (filterFormElement) {
+				filtered.add(formElement);
+			}
+		}
+		return filtered;
+	}
+
+	public static boolean filterFormElement(String filterURI, FormElement formElement) {
+		ModelElement ref = formElement.getRef();
+		String fullName = ((NamedModelElement) ref).getFullName();
+		NameSpace namespace = ref.getLogicalNameSpace();
+
+		if (filterURI == null || namespace == null || !namespace.getURI().startsWith(filterURI)) {
+			System.out.println("add Field for " + fullName);
+			return true;
+		} else {
+			System.out.println("FormElement not added :" + fullName);
+			return false;
+		}
+	}
+
+	public static String computeFormWorkflowId(State s) {
+		Process p = (Process) s.eContainer();
+		return p.getName() + "_" + s.getName();
+	}
+
+	public static void createSaveShareAction(FormWorkflow fw) {
+		ActionField save = FormFactory.eINSTANCE.createActionField();
+		save.setId("wrkflw_save");
+		save.setLabel("save");
+		save.setRef(fw.getRef());
+		fw.getChildren().add(save);
+	}
+
+	public static void createTransitionsFields(FormWorkflow fw, UserTask ut) {
+		for (Transition t : ut.getTransition()) {
+			ActionField af = WorkflowDiagramUtils.getOperationForTransition(t);
+			if (af != null) {
+				fw.getChildren().add(af);
+			}
+		}
+	}
+
+	public static void createAttributeFields(FormWorkflow fw, UserTask ut) {
+		for (Attribute a : ut.getAttributes()) {
+			//if (a.getAllowedValues().size() == 0) { 
+			// @Amenel: ModelChoiceFields are not supported in workflow forms (yet). Fields with
+			// an allowed values list must remain a CharField since there's no class associated.
+			Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
+			if (f != null) {
+				fw.getChildren().add(f);
+			}
+			// } else {
+			// ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
+			// f.setId(a.getName());
+			// f.setRef(a);
+			// if (a.getTitle() != null && a.getTitle().length() > 0) {
+			// f.setLabel(a.getTitle());
+			// } else {
+			// f.setLabel(a.getName());
+			// }
+			// if (f != null) {
+			// fw.getChildren().add(f);
+			// }
+			// }
+		}
 	}
 }

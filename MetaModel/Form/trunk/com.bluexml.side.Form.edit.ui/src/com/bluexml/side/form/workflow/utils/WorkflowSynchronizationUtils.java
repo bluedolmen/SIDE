@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
@@ -77,8 +78,9 @@ public class WorkflowSynchronizationUtils {
 		// We manage all task delete
 		for (FormContainer f : fc.getForms()) {
 			String key = "";
-			if (f.getId() != null && f.getId().length() > p.getName().length() + 1)
+			if (f.getId() != null && f.getId().length() > p.getName().length() + 1) {
 				key = f.getId().substring(p.getName().length() + 1);
+			}
 			if (!taskList.contains(key)) {
 				Command cmd = RemoveCommand.create(domain, f);
 				if (cmd.canExecute()) {
@@ -107,49 +109,57 @@ public class WorkflowSynchronizationUtils {
 		String key = p.getName() + "_" + st.getName();
 		if (formList.containsKey(key)) {
 			FormWorkflow f = formList.get(key);
-			// If yes, we check for modification
 			c = new CompoundCommand();
-			ArrayList<String> attList = new ArrayList<String>();
-			for (Attribute a : st.getAttributes()) {
-				Command attCmd = synchronizeAttribute(a, f);
-				if (attCmd != null && attCmd.canExecute()) {
-					cc.append(attCmd);
-				}
-				attList.add(a.getName());
-			}
-			// Same with transition :
-			for (Transition t : st.getTransition()) {
-				Command tranCmd = synchronizeTransition(t, f);
-				if (tranCmd != null && tranCmd.canExecute()) {
-					cc.append(tranCmd);
-				}
-				attList.add(t.getName());
-			}
+			// If yes, we check for modification
+			Clazz advancedTaskDefinition = st.getAdvancedTaskDefinition();
+			if (advancedTaskDefinition != null) {
+				// get Attributes from Class
+				EList<com.bluexml.side.clazz.Attribute> allAttributes = advancedTaskDefinition.getAllAttributes();
 
-			// Same with class link :
-			for (Clazz cl : st.getClazz()) {
-				Command clCmd = synchronizeClazzLink(cl, f);
-				if (clCmd != null && clCmd.canExecute()) {
-					cc.append(clCmd);
+			} else {
+
+				ArrayList<String> attList = new ArrayList<String>();
+				for (Attribute a : st.getAttributes()) {
+					Command attCmd = synchronizeAttribute(a, f);
+					if (attCmd != null && attCmd.canExecute()) {
+						cc.append(attCmd);
+					}
+					attList.add(a.getName());
 				}
-				attList.add(cl.getName());
-			}
+				// Same with transition :
+				for (Transition t : st.getTransition()) {
+					Command tranCmd = synchronizeTransition(t, f);
+					if (tranCmd != null && tranCmd.canExecute()) {
+						cc.append(tranCmd);
+					}
+					attList.add(t.getName());
+				}
 
-			// We decide to keep all attributes contained by user task
-			for (FormElement fe : f.getFields()) {
-				boolean deleteIfnoRefExceptIfSave = (fe.getRef() == null) && (fe instanceof Field) && (!fe.getId().equals("wrkflw_save"));
-				
-				if (deleteIfnoRefExceptIfSave || ((fe.getRef() instanceof Attribute) && !(((State) ((Attribute) fe.getRef()).eContainer()).eContainer().equals(p)))) {
+				// Same with class link :
+				for (Clazz cl : st.getClazz()) {
+					Command clCmd = synchronizeClazzLink(cl, f);
+					if (clCmd != null && clCmd.canExecute()) {
+						cc.append(clCmd);
+					}
+					attList.add(cl.getName());
+				}
 
-					Command cmd = DeleteCommand.create(domain, fe);
-					if (cmd.canExecute()) {
-						cc.append(cmd);
+				// We decide to keep all attributes contained by user task
+				for (FormElement fe : f.getFields()) {
+					boolean deleteIfnoRefExceptIfSave = (fe.getRef() == null) && (fe instanceof Field) && (!fe.getId().equals("wrkflw_save"));
+
+					if (deleteIfnoRefExceptIfSave || ((fe.getRef() instanceof Attribute) && !(((State) ((Attribute) fe.getRef()).eContainer()).eContainer().equals(p)))) {
+
+						Command cmd = DeleteCommand.create(domain, fe);
+						if (cmd.canExecute()) {
+							cc.append(cmd);
+						}
 					}
 				}
 			}
 		} else {
 			// If no, we add it
-			FormWorkflow fw = WorkflowInitialization.createTaskForForm(p, st);
+			FormWorkflow fw = WorkflowInitialization.createTaskForForm(st);
 			c = AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormCollection_Forms(), fw);
 		}
 		return c;
@@ -169,13 +179,16 @@ public class WorkflowSynchronizationUtils {
 		}
 		// Does the attribute exists in form?
 		FormElement formElement = null;
-		for (FormElement fe : f.getFields())
-			if (fe.getRef() != null && fe.getRef().equals(a))
+		for (FormElement fe : f.getFields()) {
+			if (fe.getRef() != null && fe.getRef().equals(a)) {
 				formElement = fe;
+			}
+		}
 		if (formElement != null) {
 			//Change id
-			if (formElement.getId() != null && !(formElement.getId().equals(a.getName())))
+			if (formElement.getId() != null && !(formElement.getId().equals(a.getName()))) {
 				c = SetCommand.create(domain, formElement, FormPackage.eINSTANCE.getFormElement_Id(), a.getName());
+			}
 		} else {
 			Field fi = WorkflowDiagramUtils.getFieldForAttribute(a);
 			c = AddCommand.create(domain, f, FormPackage.eINSTANCE.getFormGroup_Children(), fi);
