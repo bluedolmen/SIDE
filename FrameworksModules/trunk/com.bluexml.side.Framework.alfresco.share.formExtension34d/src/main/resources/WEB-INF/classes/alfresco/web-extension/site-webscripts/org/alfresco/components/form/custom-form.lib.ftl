@@ -1,14 +1,16 @@
 <#macro renderRule objectId rule>
-      <script language="javascript" type="text/javascript">
-      	try {
-      	  <#if (rule?index_of("(") != -1)>
-      	  ${rule}
-      	  <#else>
-      	  ${rule}('${objectId}');
-      	  </#if>
-        } catch (e) {
-      		//SIDE.custom.Logger.log("${objectId} - rule '${rule}' has thrown an exception"); 
-        }
+    <script language="javascript" type="text/javascript">
+		YAHOO.util.Event.onAvailable('${objectId}', function() {
+	      	try {
+	      	<#if (rule?index_of("(") != -1)>
+	      		${rule}
+	      	<#else>
+	      		${rule}('${objectId}');
+	      	</#if>
+	        } catch (e) {
+	      		//SIDE.custom.Logger.log("${objectId} - rule '${rule}' has thrown an exception"); 
+	        }
+        }, this);
       </script>
 </#macro>
 
