@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.alfresco.repo.content.MimetypeMap;
@@ -35,14 +37,20 @@ public class WorkflowHotDeployWebScript extends AbstractWebScript {
 
 		logger.debug("workflowhot deployer called for :" + parameter);
 
-		File file = new File(parameter);
+		File file = null;
+		try {
+			file = new File(new URI(parameter));
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			throw new IOException("Error when trying to parse String to URI :" + parameter);
+		}
 
 		FileInputStream fis = new FileInputStream(file);
 
 		String result = "";
 		String workflowName = null;
 		// need to open the XMLDocument to read process name
-		
+
 		if (workflowName != null) {
 			// undeploy all instance and workflow definition for the given workflow name
 			List<WorkflowDefinition> defs = workflowService.getAllDefinitionsByName(workflowName);
@@ -64,7 +72,8 @@ public class WorkflowHotDeployWebScript extends AbstractWebScript {
 		byte[] bytes = response.getBytes("UTF-8");
 		logger.debug("result :" + response);
 		outputStream.write(bytes);
-
+		outputStream.close();
+		fis.close();
 	}
 
 	private String deploy(FileInputStream fis, String result) {
