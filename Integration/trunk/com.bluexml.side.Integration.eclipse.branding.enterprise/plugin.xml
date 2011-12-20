@@ -26,9 +26,9 @@
   </extension>
   <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
     <moduleDependence label="Alfresco Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.15" versionMin="1.0.15" />
-    <moduleDependence label="Alfresco Share Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.15" versionMin="1.0.15" />
+    <moduleDependence label="Alfresco Share Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.16" versionMin="1.0.16" />
     <moduleDependence label="Alfresco Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.7" versionMin="1.0.7" />
-    <moduleDependence label="Alfresco Share Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.6" versionMin="1.0.6" />
+    <moduleDependence label="Alfresco Share Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.7" versionMin="1.0.7" />
   </extension>
 </plugin>
 
