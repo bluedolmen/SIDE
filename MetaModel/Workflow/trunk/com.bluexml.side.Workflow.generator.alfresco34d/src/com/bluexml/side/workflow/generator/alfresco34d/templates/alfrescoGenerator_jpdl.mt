@@ -41,7 +41,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
   			<%}%>
   			
   			<%if (pooledactors != null){%>
-	  			<%if (actorid.startsWith("#{")){%>
+	  			<%if (pooledactors.startsWith("#{")){%>
 	  		<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
   				<pooledactors><%pooledactors%></pooledactors>
         	</assignment>
