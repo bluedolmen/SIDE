@@ -35,7 +35,9 @@
 <#list config.global.forms.dependencies.js as jsFile>
 <#if (jsFile?starts_with("http"))>
 <script type="text/javascript" src="${jsFile}"></script>
-<#else/>
+<#elseif (jsFile?starts_with("//"))>
+<script type="text/javascript" src="${jsFile.replace("//","/")}"></script>
+<#else>
 <script type="text/javascript" src="${page.url.context}/res${jsFile}"></script>
 </#if>
 </#list>
