@@ -55,6 +55,7 @@ if (!Array.prototype.indexOf) {
 			this.initialValue = initialValue;
 			console.log("field :" + htmlId + " initialValue :" + initialValue);
 		}
+		YAHOO.Bubbling.on("/side-labs/onCreateNewItem/" + this.currentValueHtmlId, this.reloadBehavior, this);
 
 	};
 
@@ -231,13 +232,34 @@ if (!Array.prototype.indexOf) {
 			return this.DSSelectWidget.getValue();
 		},
 		/**
-		 * reload the list can make selection changes : mode
+		 * reload the list and can make selection changes : mode
 		 * :[add|replace|keep|cancel] use keep to only reload the list cancel
 		 * restore values to initial values
+		 * This can be used to manage case like : create a new item, refresh the list and select the new item
 		 */
 		reload : function ComboBox_addNew(mode, addNodesToSelection) {
 			this.log("mode :" + mode + " addNodesToSelection :" + addNodesToSelection);
 			this.DSSelectWidget.reload(mode, addNodesToSelection);
+		},
+		/**
+		 * this method is used to define a behavior on event fired to reload the widget.
+		 */
+		reloadBehavior : function ComboBox_reloadBehavior(event, obj, scope) {
+			this.log("event :" + event);
+			this.log("obj :" + obj);
+			this.log("scope :" + scope);
+			var context = obj[1];
+			this.log("obj[1] :" + context);
+			this.reload(context.mode, context.values);
+		},
+		/**
+		 * example how to call reload and set parameters
+		 */
+		fireReload : function ComboBox_fireReload() {
+			YAHOO.Bubbling.fire("/side-labs/onCreateNewItem/" + this.currentValueHtmlId, {
+				mode : "add",
+				values : [ "workspace://SpacesStore/7eca31e0-7b33-4f73-b3d3-86e1d9e6fbb2" ]
+			});
 		}
 	});
 })();
