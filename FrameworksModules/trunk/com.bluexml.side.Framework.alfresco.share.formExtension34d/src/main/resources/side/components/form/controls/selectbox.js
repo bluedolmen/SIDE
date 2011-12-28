@@ -88,7 +88,7 @@ if (!Array.prototype.indexOf) {
 			};
 
 			if (this.options.multipleSelectMode) {
-				this.log("multiseelct allowed");
+				this.log("multiselect allowed");
 				// cardinality n-n
 				var multiselect = new SIDE.MyDSCheckFields({
 					name : "-",
@@ -205,6 +205,10 @@ if (!Array.prototype.indexOf) {
 				this.setValue(this.initialValue);
 			}
 			YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
+
+			// add widget reference on html element
+			var el = document.getElementById(this.currentValueHtmlId);
+			el.widget = this;
 		},
 		setValue : function SelectBox_setValue(value) {
 			this.log("before setValue :" + this.getValue());
@@ -213,6 +217,16 @@ if (!Array.prototype.indexOf) {
 		},
 		getValue : function SelectBox_setValue() {
 			return this.DSSelectWidget.getValue();
+		},
+		/**
+		 * reload the list can make selection changes : mode
+		 * :[reset|cancel|keep] reset remove all selection cancel restore
+		 * selection from repository addNodesToSelection array : used to add an
+		 * item to the selection (after apply the mode)
+		 */
+		reload : function ComboBox_addNew(mode, addNodesToSelection) {
+			this.log("mode :" + mode + " addNodesToSelection :" + addNodesToSelection);
+			this.DSSelectWidget.reload(mode, addNodesToSelection);
 		}
 	});
 })();

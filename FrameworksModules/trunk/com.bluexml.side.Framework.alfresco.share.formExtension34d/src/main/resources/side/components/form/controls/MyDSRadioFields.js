@@ -63,7 +63,26 @@ if (console == undefined) {
 			this.options.datasource = options.datasource;
 
 		},
+		/**
+		 * Send the datasource request for reload and preserve selected value
+		 */
+		reload : function(mode, addedValue) {
+			// modes ::[add|replace|keep|cancel]
+			var newValue = '';
+			if (mode == "add" || mode == "replace") {
+				newValue = addedValue[0];
+			} else if (mode == "keep") {
+				newValue = this.getValue();
+			} else if (mode == "cancel" && this.initialValue) {
+				newValue = this.initialValue;
+			}
 
+			this.reloadData = {
+				added : newValue,
+				mode : mode ? mode : 'keep'
+			};
+			this.sendDataRequest(null);
+		},
 		/**
 		 * Build a select tag with options
 		 */
@@ -97,10 +116,11 @@ if (console == undefined) {
 			this.log("populate start");
 			this.log("populate remove previous");
 			// remove previous <option>s nodes
-			/*
-			 * while (this.el.childNodes.length > 0) {
-			 * this.el.removeChild(this.el.childNodes[0]); }
-			 */
+			while (this.choicesList.length > 0) {
+				this.removeChoice({
+					value : this.choicesList[0].value
+				});
+			}
 			this.log("populate add new options");
 			// add new options
 			for (i = 0, length = items.length; i < length; i += 1) {
@@ -124,7 +144,6 @@ if (console == undefined) {
 		 */
 		onDatasourceSuccess : function(oRequest, oParsedResponse, oPayload) {
 			this.populateSelect(oParsedResponse.results);
-
 			if (!this.options.mandatory) {
 				this.addChoice({
 					value : '',
@@ -133,15 +152,17 @@ if (console == undefined) {
 					selected : false
 				});
 			}
-
-			this.log("dataloaded");
-			if (this.initialValue) {
-				this.log("dataloaded init old: (value setted by populateSelect)" + this.getValue());
-				this.setValue(this.initialValue);
-				this.log("dataloaded init new:" + this.getValue());
-			} else {
-				this.setValue('');
+			var value = '';
+			if (this.reloadData) {
+				value = this.reloadData.added;
+				this.reloadData = null;
+			} else if (this.initialValue) {
+				value = this.initialValue;
 			}
+
+			this.log("dataloaded init old: (value setted by populateSelect)" + this.getValue());
+			this.setValue(value);
+			this.log("dataloaded init new:" + this.getValue());
 			this.log("force previousState to 'valid'");
 			this.previousState = 'valid';
 		}

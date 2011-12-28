@@ -16,6 +16,27 @@ if (console == undefined) {
 	};
 }
 
+// This prototype is provided by the Mozilla foundation and
+// is distributed under the MIT license.
+// http://www.ibiblio.org/pub/Linux/LICENSES/mit.license
+
+if (!Array.prototype.indexOf) {
+	Array.prototype.indexOf = function(elt /* , from */) {
+		var len = this.length;
+
+		var from = Number(arguments[1]) || 0;
+		from = (from < 0) ? Math.ceil(from) : Math.floor(from);
+		if (from < 0)
+			from += len;
+
+		for (; from < len; from++) {
+			if (from in this && this[from] === elt)
+				return from;
+		}
+		return -1;
+	};
+}
+
 (function() {
 
 	var Event = YAHOO.util.Event, lang = YAHOO.lang;
@@ -111,11 +132,15 @@ if (console == undefined) {
 			this.log("populate start");
 			this.log("populate remove previous");
 			// remove previous <option>s nodes
-			/*
-			 * while (this.el.childNodes.length > 0) {
-			 * this.el.removeChild(this.el.childNodes[0]); }
-			 */
+			while (this.choicesList.length > 0) {
+				this.removeChoice({
+					value : this.choicesList[0].value
+				});
+			}
+
 			this.log("populate add new options");
+			// clear checkBoxList
+			this.checkFields = [];
 			// add new options
 			for (i = 0, length = items.length; i < length; i += 1) {
 				this.addChoice({
@@ -137,19 +162,27 @@ if (console == undefined) {
 		 * Callback for request success
 		 */
 		onDatasourceSuccess : function(oRequest, oParsedResponse, oPayload) {
-			this.populateSelect(oParsedResponse.results);
 
+			this.populateSelect(oParsedResponse.results);
 			this.log("dataloaded");
-			if (this.initialValue) {
-				this.log("dataloaded init old: (value setted by populateSelect)" + this.getValue());
-				this.setValue(this.initialValue);
-				this.log("dataloaded init new:" + this.getValue());
-			} else {
-				this.setValue('');
+			var values = [];
+
+			if (this.reloadData) {
+				values = this.reloadData.added;
+				this.reloadData = null;
+			} else if (this.initialValue) {
+				values = this.initialValue.split(",");
 			}
+
+			this.log("dataloaded init old: (value setted by populateSelect)" + this.getValue());
+			this.log("dataloaded init value to set " + values);
+			this.setValue(values);
+			this.log("dataloaded init new:" + this.getValue());
+
 			this.log("force previousState to 'valid'");
 			this.previousState = 'valid';
 		},
+
 		/**
 		 * choice methods
 		 */
@@ -181,10 +214,8 @@ if (console == undefined) {
 				me.log("new value :" + values.toString());
 				me.setValue(values.toString(), true);
 			});
-			this.log("createChoiceNode out");
 			this.checkFields.push(check);
 			return div;
-
 		},
 
 		removeChoiceNode : function(node) {
@@ -262,7 +293,21 @@ if (console == undefined) {
 		 *            NOT send the event)
 		 */
 		setValue : function(value, sendUpdatedEvt) {
-			this.value = value.split(',');
+			if (typeof value == 'string') {
+				this.value = value.split(',');
+			} else {
+				this.value = value;
+			}
+
+			for ( var c = 0; c < this.choicesList.length; c++) {
+				var item = this.choicesList[c];
+				var checkBox = this.getCheckBoxForChoiseNode(item);
+				var value2set = '';
+				if (this.value.indexOf(item.value) != -1) {
+					value2set = item.value;
+				}
+				checkBox.setValue(value2set, false);
+			}
 
 			if (sendUpdatedEvt !== false) {
 				// fire update event
@@ -271,13 +316,48 @@ if (console == undefined) {
 
 		},
 		/**
+		 * 
+		 */
+		getCheckBoxForChoiseNode : function(node) {
+			var value = node.value;
+			for ( var c = 0; c < this.checkFields.length; c++) {
+				var checkBox = this.checkFields[c];
+				if (checkBox.checkedValue == value) {
+					return checkBox;
+				}
+			}
+			return null;
+		},
+		/**
 		 * Return the value of the input
 		 * 
 		 * @return {Any} value of the field
 		 */
 		getValue : function() {
 			return this.value;
-		}
+		},
+		/**
+		 * Send the datasource request for reload
+		 */
+		reload : function(mode, addedValues) {
+			var newValue = [];
+			if (mode == "add") {
+				newValue = newValue.concat(this.getValue());
+				newValue = newValue.concat(addedValues);
+			} else if (mode == "replace") {
+				newValue = addedValues;
+			} else if (mode == "keep") {
+				newValue = this.getValue();
+			} else if (mode == "cancel" && this.initialValue) {
+				newValue = this.initialValue.split(',');
+			}
+
+			this.reloadData = {
+				added : newValue,
+				mode : mode
+			};
+			this.sendDataRequest();
+		},
 	});
 
 	lang.augmentObject(SIDE.MyDSCheckFields.prototype, inputEx.mixin.choice);

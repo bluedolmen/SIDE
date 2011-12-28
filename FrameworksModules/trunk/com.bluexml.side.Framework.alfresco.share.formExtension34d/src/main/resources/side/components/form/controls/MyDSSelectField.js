@@ -47,6 +47,26 @@ if (console == undefined) {
 			console.log("[SIDE.MyDSSelectField] " + msg);
 		},
 		/**
+		 * Send the datasource request for reload and preserve selected value
+		 */
+		reload : function(mode, addedValue) {
+			// modes ::[add|replace|keep|cancel]
+			var newValue = '';
+			if (mode == "add" || mode == "replace") {
+				newValue = addedValue[0];
+			} else if (mode == "keep") {
+				newValue = this.getValue();
+			} else if (mode == "cancel" && this.initialValue) {
+				newValue = this.initialValue;
+			}
+
+			this.reloadData = {
+				added : newValue,
+				mode : mode ? mode : 'keep'
+			};
+			this.sendDataRequest(null);
+		},
+		/**
 		 * Callback for request success
 		 */
 		onDatasourceSuccess : function(oRequest, oParsedResponse, oPayload) {
@@ -58,13 +78,18 @@ if (console == undefined) {
 				selected : false
 			});
 			this.log("dataloaded");
-			if (this.initialValue) {
-				this.log("dataloaded init old: (value setted by populateSelect)" + this.getValue());
-				this.setValue(this.initialValue);
-				this.log("dataloaded init new:" + this.getValue());
-			} else {
-				this.setValue('');
+
+			var value = '';
+			if (this.reloadData) {
+				value = this.reloadData.added;
+				this.reloadData = null;
+			} else if (this.initialValue) {
+				value = this.initialValue;
 			}
+
+			this.log("dataloaded init old: (value setted by populateSelect)" + this.getValue());
+			this.setValue(value);
+			this.log("dataloaded init new:" + this.getValue());
 			this.log("force previousState to 'valid'");
 			this.previousState = 'valid';
 		}

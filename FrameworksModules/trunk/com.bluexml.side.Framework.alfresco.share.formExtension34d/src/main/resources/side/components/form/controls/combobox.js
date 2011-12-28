@@ -142,10 +142,10 @@ if (!Array.prototype.indexOf) {
 					}
 
 					me.log("values changed to add :" + toAdd.toString());
-					me.log("values changed to remove :" + toremove.toString());					
+					me.log("values changed to remove :" + toremove.toString());
 					YAHOO.util.Dom.get(me.addedFieldHtmlId).value = toAdd.toString();
 					YAHOO.util.Dom.get(me.removedFieldHtmlId).value = toremove.toString();
-					
+
 					YAHOO.util.Dom.get(me.currentValueHtmlId).value = values.toString();
 					if (me.options.mandatory) {
 						YAHOO.Bubbling.fire("mandatoryControlValueUpdated", me);
@@ -173,7 +173,7 @@ if (!Array.prototype.indexOf) {
 						me.log("initialValue :" + me.initialValue);
 						if (value != me.initialValue) {
 							// real change
-							
+
 							// user create or replace association
 							// set selected value into hidden field to add
 							// association
@@ -187,7 +187,7 @@ if (!Array.prototype.indexOf) {
 							}
 						} else {
 							me.log("cancel change ...");
-							// cancel change							
+							// cancel change
 							YAHOO.util.Dom.get(me.addedFieldHtmlId).value = "";
 							YAHOO.util.Dom.get(me.removedFieldHtmlId).value = "";
 						}
@@ -217,6 +217,10 @@ if (!Array.prototype.indexOf) {
 				this.setValue(this.initialValue);
 			}
 			YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
+			// add widget reference on html element
+			var el = document.getElementById(this.currentValueHtmlId);
+			el.widget = this;
+
 		},
 		setValue : function ComboBox_setValue(value) {
 			this.log("before setValue :" + this.getValue());
@@ -225,6 +229,15 @@ if (!Array.prototype.indexOf) {
 		},
 		getValue : function ComboBox_setValue() {
 			return this.DSSelectWidget.getValue();
+		},
+		/**
+		 * reload the list can make selection changes : mode
+		 * :[add|replace|keep|cancel] use keep to only reload the list cancel
+		 * restore values to initial values
+		 */
+		reload : function ComboBox_addNew(mode, addNodesToSelection) {
+			this.log("mode :" + mode + " addNodesToSelection :" + addNodesToSelection);
+			this.DSSelectWidget.reload(mode, addNodesToSelection);
 		}
 	});
 })();

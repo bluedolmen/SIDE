@@ -175,26 +175,52 @@ if (console == undefined) {
 			return this.ddlist.getValue();
 		},
 		/**
+		 * Send the datasource request for reload
+		 */
+		reload : function(mode, addedValues) {
+			var newValue = [];
+			if (mode == "add") {
+				newValue = newValue.concat(this.getValue());
+				newValue = newValue.concat(addedValues);
+			} else if (mode == "replace") {
+				newValue = addedValues;
+			} else if (mode == "keep") {
+				newValue = this.getValue();
+			} else if (mode == "cancel" && this.initialValue) {
+				newValue = this.initialValue.split(',');
+			}
+
+			this.reloadData = {
+				added : newValue,
+				mode : mode
+			};
+			this.sendDataRequest();
+		},
+		/**
 		 * Callback for request success
 		 */
 		onDatasourceSuccess : function(oRequest, oParsedResponse, oPayload) {
+			this.choicesList = [];
 			this.populateSelect(oParsedResponse.results);
 			this.addChoice({
 				value : '',
 				label : '',
 				position : 0
 			});
+			this.el.selectedIndex = 0;
 			this.log("dataloaded");
-			if (this.initialValue) {
-				var valuesList = this.initialValue.split(",");
-				this.log("dataloaded init old:" + this.getValue());
-				this.setValue(valuesList);
-				this.log("dataloaded init new:" + this.getValue());
-			} else {
-				this.log("dataloaded force to empty value");
-				// so select list must display the empty string item
-				this.el.selectedIndex = 0;
+
+			var values = [];
+
+			if (this.reloadData) {
+				values = this.reloadData.added;
+				this.reloadData = null;
+			} else if (this.initialValue) {
+				values = this.initialValue.split(",");
 			}
+			this.log("dataloaded init old:" + this.getValue());
+			this.setValue(values);
+			this.log("dataloaded init new:" + this.getValue());
 		}
 
 	});

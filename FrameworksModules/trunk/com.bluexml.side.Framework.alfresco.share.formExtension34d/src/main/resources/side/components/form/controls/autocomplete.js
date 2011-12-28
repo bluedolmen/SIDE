@@ -263,14 +263,18 @@ if (!Array.prototype.indexOf) {
 		 * @method onReady
 		 */
 		onReady : function Autocomplete_onReady() {
-            YAHOO.Bubbling.fire("/side-labs/onReady/" + this.currentValueHtmlId, this);
+			YAHOO.Bubbling.fire("/side-labs/onReady/" + this.currentValueHtmlId, this);
 			this.DSSelectWidget = this.load();
-            YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
+			YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
 
-            if (this.initialValue) {
+			if (this.initialValue) {
 				this.setValue(this.initialValue);
 			}
-            YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
+			YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
+
+			// add widget reference on html element
+			var el = document.getElementById(this.currentValueHtmlId);
+			el.widget = this;
 		},
 		setValue : function Autocomplete_setValue(value) {
 			this.log("before setValue :" + this.getValue());
@@ -319,6 +323,34 @@ if (!Array.prototype.indexOf) {
 
 		getValue : function Autocomplete_setValue() {
 			return this.DSSelectWidget.getValue();
+		},
+		/**
+		 * reload the list can make selection changes : mode
+		 * :[add|replace|keep|cancel] use keep to only reload the list cancel
+		 * restore values to initial values
+		 */
+		reload : function Autocomplete_addNew(mode, addNodesToSelection) {
+			this.log("mode :" + mode + " addNodesToSelection :" + addNodesToSelection);
+			var newValues = [];
+
+			var values = this.getValue();
+			if (mode === 'add') {
+				// add the given values to selectList
+				if (this.options.multipleSelectMode) {
+					newValues = newValues.concat(values);
+				}
+				newValues = newValues.concat(addNodesToSelection);
+				this.log("mode add");
+			} else if (mode === 'replace' && addNodesToSelection != null) {
+				newValues = newValues.concat(addNodesToSelection);
+				this.log("mode replace");
+			} else if (mode === 'cancel' && this.initialValue != null) {
+				var initArray = this.initialValue.split(',');
+				newValues = newValues.concat(initArray);
+				this.log("mode cancel");
+			}
+
+			this.setValue(newValues.toString());
 		}
 	});
 })();
