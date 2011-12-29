@@ -171,8 +171,11 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%}%>
 
 <%script type="Action" name="generate_action"%>
-<%if (javaClass != null && javaClass != "" || script != null && script.expression != ""){%>
-<action <%if (javaClass != null && javaClass != ""){%>class="<%javaClass.replaceAll("\"","")%>"<%}%>>
+<%if (javaClass != null && javaClass != "") {%>
+<action class="<%javaClass.replaceAll("\"","")%>">
+<%if (expression != null && expression != ""){%>
+<%expression%>
+<%}else{%>
 <%for (script[expression != ""]) {%>
 	<script>
 	<%for (variable){%>
@@ -182,6 +185,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 		<%expression%>
 		</expression>
 	</script>
+<%}%>
 <%}%>
 </action>
 <%}%>
