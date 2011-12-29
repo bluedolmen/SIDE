@@ -31,6 +31,6 @@ public class ActionModelerProvider extends WorkflowModelElementModelerProvider
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return WorkflowPackage.eINSTANCE.getAction_JavaClass();
+		return WorkflowPackage.eINSTANCE.getAction_Name();
 	}
 }
