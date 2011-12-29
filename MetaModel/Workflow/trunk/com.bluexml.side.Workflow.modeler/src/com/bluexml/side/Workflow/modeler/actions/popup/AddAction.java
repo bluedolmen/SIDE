@@ -40,16 +40,15 @@ public class AddAction extends WorkbenchPartAction {
 	private String javaClass;
 	private ImageDescriptor icon;
 
-	public AddAction(IWorkbenchPart part, String _name, String _code,
-			ImageDescriptor _icon, String _javaClass) {
+	public AddAction(IWorkbenchPart part, String _name, String _code, ImageDescriptor _icon, String _javaClass) {
 		super(part);
 		name = _name;
 		code = _code;
 		icon = _icon;
 		javaClass = _javaClass;
 
-		setText(name); //$NON-NLS-1$
-		setImageDescriptor(icon); //$NON-NLS-1$
+		setText(name);
+		setImageDescriptor(icon);
 	}
 
 	@Override
@@ -65,10 +64,11 @@ public class AddAction extends WorkbenchPartAction {
 	@Override
 	public void run() {
 		Action a = WorkflowFactory.eINSTANCE.createAction();
-		if (javaClass == null || javaClass.trim().length() == 0)
+		if (javaClass == null || javaClass.trim().length() == 0) {
 			a.setJavaClass("org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
-		else
+		} else {
 			a.setJavaClass(javaClass);
+		}
 		Script s = WorkflowFactory.eINSTANCE.createScript();
 		s.setExpression(code);
 		a.getScript().add(s);
@@ -76,28 +76,21 @@ public class AddAction extends WorkbenchPartAction {
 		if (selectedObject instanceof Transition) {
 			Transition transition = (Transition) selectedObject;
 
-			Command cmd = AddCommand.create(
-					((WorkflowEditor) getWorkbenchPart()).getEditingDomain(),
-					transition, WorkflowPackage.TRANSITION__ACTION, a);
-			((WorkflowEditor) getWorkbenchPart()).getEditingDomain()
-					.getCommandStack().execute(cmd);
+			Command cmd = AddCommand.create(((WorkflowEditor) getWorkbenchPart()).getEditingDomain(), transition, WorkflowPackage.TRANSITION__ACTION, a);
+			((WorkflowEditor) getWorkbenchPart()).getEditingDomain().getCommandStack().execute(cmd);
 
 			WorkflowEditor editor = (WorkflowEditor) getWorkbenchPart();
-			ICreationUtils factory = editor.getActiveConfiguration()
-					.getCreationUtils();
+			ICreationUtils factory = editor.getActiveConfiguration().getCreationUtils();
 			GraphElement graphElement = factory.createGraphElement(a);
-			GraphElement transitionGraphElement = Utils.getGraphElement(editor
-					.getActiveDiagram(), transition);
+			GraphElement transitionGraphElement = Utils.getGraphElement(editor.getActiveDiagram(), transition);
 			if (transitionGraphElement instanceof GraphEdge) {
 				GraphEdge edge = (GraphEdge) transitionGraphElement;
 				Point position = computePosition(edge.getAnchor());
 				graphElement.setPosition(position);
 
 				editor.getActiveDiagram().getContained().add(graphElement);
-				EditPart ep = (EditPart) getViewer(editor)
-						.getEditPartRegistry().get(graphElement);
-				ActionRestoreConnectionCommand restoreCmd = new ActionRestoreConnectionCommand(
-						ep);
+				EditPart ep = (EditPart) getViewer(editor).getEditPartRegistry().get(graphElement);
+				ActionRestoreConnectionCommand restoreCmd = new ActionRestoreConnectionCommand(ep);
 				restoreCmd.execute();
 			}
 			editor.gotoEObject(a);
@@ -106,11 +99,8 @@ public class AddAction extends WorkbenchPartAction {
 			Event e = WorkflowFactory.eINSTANCE.createEvent();
 			e.getAction().add(a);
 
-			Command cmd = AddCommand.create(
-					((WorkflowEditor) getWorkbenchPart()).getEditingDomain(),
-					state, WorkflowPackage.EVENT__ACTION, e);
-			((WorkflowEditor) getWorkbenchPart()).getEditingDomain()
-					.getCommandStack().execute(cmd);
+			Command cmd = AddCommand.create(((WorkflowEditor) getWorkbenchPart()).getEditingDomain(), state, WorkflowPackage.EVENT__ACTION, e);
+			((WorkflowEditor) getWorkbenchPart()).getEditingDomain().getCommandStack().execute(cmd);
 
 			WorkflowEditor editor = (WorkflowEditor) getWorkbenchPart();
 			editor.refreshActiveDiagram();
@@ -129,25 +119,32 @@ public class AddAction extends WorkbenchPartAction {
 		int ymin = -1, ymax = -1;
 
 		for (GraphConnector graphConnector : anchor) {
-			Point connectionPoint = graphConnector.getGraphElement()
-					.getPosition();
-			if (xmin == -1)
+			Point connectionPoint = graphConnector.getGraphElement().getPosition();
+			if (xmin == -1) {
 				xmin = connectionPoint.x;
-			if (ymin == -1)
+			}
+			if (ymin == -1) {
 				ymin = connectionPoint.y;
-			if (xmax == -1)
+			}
+			if (xmax == -1) {
 				xmax = connectionPoint.x;
-			if (ymax == -1)
+			}
+			if (ymax == -1) {
 				ymax = connectionPoint.y;
+			}
 
-			if (connectionPoint.x < xmin)
+			if (connectionPoint.x < xmin) {
 				xmin = connectionPoint.x;
-			if (connectionPoint.x > xmax)
+			}
+			if (connectionPoint.x > xmax) {
 				xmax = connectionPoint.x;
-			if (connectionPoint.y < ymin)
+			}
+			if (connectionPoint.y < ymin) {
 				ymin = connectionPoint.y;
-			if (connectionPoint.y > ymax)
+			}
+			if (connectionPoint.y > ymax) {
 				ymax = connectionPoint.y;
+			}
 		}
 
 		p.x = xmin + ((xmax - xmin) / 2);
@@ -156,6 +153,7 @@ public class AddAction extends WorkbenchPartAction {
 		return p;
 	}
 
+	@Override
 	protected void init() {
 		setId(ID + "." + nbOfActions);
 		nbOfActions++;
@@ -169,14 +167,12 @@ public class AddAction extends WorkbenchPartAction {
 
 		selectedObject = null;
 		if (selection.getFirstElement() instanceof EMFGraphEdgeEditPart) {
-			EMFGraphEdgeEditPart editPart = (EMFGraphEdgeEditPart) selection
-					.getFirstElement();
+			EMFGraphEdgeEditPart editPart = (EMFGraphEdgeEditPart) selection.getFirstElement();
 			if (editPart.getEObject() instanceof Transition) {
 				selectedObject = editPart.getEObject();
 			}
 		} else if (selection.getFirstElement() instanceof EMFGraphNodeEditPart) {
-			EMFGraphNodeEditPart editPart = (EMFGraphNodeEditPart) selection
-					.getFirstElement();
+			EMFGraphNodeEditPart editPart = (EMFGraphNodeEditPart) selection.getFirstElement();
 			if (editPart.getEObject() instanceof State) {
 				selectedObject = editPart.getEObject();
 			}

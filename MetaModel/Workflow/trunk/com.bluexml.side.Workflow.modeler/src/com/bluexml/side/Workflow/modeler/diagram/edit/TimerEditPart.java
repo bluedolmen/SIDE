@@ -44,14 +44,15 @@ import com.bluexml.side.workflow.Timer;
 
 /**
  * The Timer object controller
- *
+ * 
  * @generated
  */
 public class TimerEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 *
-	 * @param obj the graph node
+	 * 
+	 * @param obj
+	 *            the graph node
 	 * @generated
 	 */
 	public TimerEditPart(GraphNode obj) {
@@ -60,34 +61,25 @@ public class TimerEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 *
+	 * 
 	 * @generated
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(WfEditPolicyConstants.HASTIMER_EDITPOLICY,
-				new hasTimerEdgeCreationEditPolicy());
+		installEditPolicy(WfEditPolicyConstants.HASTIMER_EDITPOLICY, new hasTimerEdgeCreationEditPolicy());
 
-		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
-				new RestoreEditPolicy() {
-					protected Command getRestoreConnectionsCommand(
-							RestoreConnectionsRequest request) {
-						return new TimerRestoreConnectionCommand(getHost());
-					}
-				});
+		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY, new RestoreEditPolicy() {
+			protected Command getRestoreConnectionsCommand(RestoreConnectionsRequest request) {
+				return new TimerRestoreConnectionCommand(getHost());
+			}
+		});
 
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				new ResizableEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY, new ResizableEditPolicy());
 
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
 	}
 
 	/**
@@ -104,8 +96,7 @@ public class TimerEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.TIMER_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore().getString(WfDiagramPreferenceConstants.TIMER_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -117,8 +108,7 @@ public class TimerEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.TIMER_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore().getString(WfDiagramPreferenceConstants.TIMER_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -130,25 +120,22 @@ public class TimerEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.TIMER_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(WfDiagramPreferenceConstants.TIMER_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
 		return null;
 
 	}
-	
+
 	@Override
 	public void performRequest(Request request) {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			Timer timer = (Timer) Utils.getElement(getGraphNode());
 
-			ActionEditDialog dlg = new ActionEditDialog(timer, ModelerPlugin
-					.getActiveWorkbenchShell());
+			ActionEditDialog dlg = new ActionEditDialog(timer, ModelerPlugin.getActiveWorkbenchShell());
 			if (dlg.open() == Window.OK) {
-				ActionUpdateCommand command = new ActionUpdateCommand(timer,
-						dlg.getData());
+				ActionUpdateCommand command = new ActionUpdateCommand(timer, dlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();
 			}
@@ -157,11 +144,11 @@ public class TimerEditPart extends EMFGraphNodeEditPart {
 
 		}
 	}
-	
-	@Override
-	protected void refreshHeaderLabel() {
-		Timer timer = (Timer) Utils.getElement(getGraphNode());
-		getLabel().setText(timer.getDuedate());
-	}
+
+//	@Override
+//	protected void refreshHeaderLabel() {
+//		Timer timer = (Timer) Utils.getElement(getGraphNode());
+//		getLabel().setText(timer.getDuedate());
+//	}
 
 }

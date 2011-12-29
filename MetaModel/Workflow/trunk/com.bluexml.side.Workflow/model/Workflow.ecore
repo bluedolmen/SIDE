@@ -213,6 +213,7 @@
         <details key="documentation" value="Definition: The attribute 'duedate' specifies the duration of a 'Timer'.&#xD;&#xD;Constraint/limit: The syntax of the attribute 'Timer' follow the jpdl syntax (http://docs.jboss.org/jbpm/v3/userguide/businesscalendar.html#duration): quantity [business] unit.&#xD;&#xD;Example:&#xD;- 1 year.&#xD;- 1 week.&#xD;- 1 month.&#xD;- 1 hour.&#xD;- 1 min.&#xD;- 1 second."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable">
     <eAnnotations source="http://www.bluexml.com/OCL">

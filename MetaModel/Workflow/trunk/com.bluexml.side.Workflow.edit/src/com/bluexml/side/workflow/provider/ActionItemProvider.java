@@ -64,6 +64,7 @@ public class ActionItemProvider
 
 			addJavaClassPropertyDescriptor(object);
 			addExpressionPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -106,6 +107,28 @@ public class ActionItemProvider
 				 WorkflowPackage.Literals.ACTION__EXPRESSION,
 				 true,
 				 true,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Action_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Action_name_feature", "_UI_Action_type"),
+				 WorkflowPackage.Literals.ACTION__NAME,
+				 true,
+				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
@@ -161,7 +184,7 @@ public class ActionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = crop(((Action)object).getDocumentation());
+		String label = ((Action)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Action_type") :
 			getString("_UI_Action_type") + " " + label;
@@ -181,6 +204,7 @@ public class ActionItemProvider
 		switch (notification.getFeatureID(Action.class)) {
 			case WorkflowPackage.ACTION__JAVA_CLASS:
 			case WorkflowPackage.ACTION__EXPRESSION:
+			case WorkflowPackage.ACTION__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case WorkflowPackage.ACTION__SCRIPT:

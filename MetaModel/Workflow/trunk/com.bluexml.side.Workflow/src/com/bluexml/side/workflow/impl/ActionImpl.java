@@ -33,6 +33,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *   <li>{@link com.bluexml.side.workflow.impl.ActionImpl#getJavaClass <em>Java Class</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ActionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ActionImpl#getScript <em>Script</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.ActionImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -88,6 +89,26 @@ public class ActionImpl extends WorkflowModelElementImpl implements Action {
 	 * @ordered
 	 */
 	protected EList<Script> script;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -167,6 +188,27 @@ public class ActionImpl extends WorkflowModelElementImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.ACTION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -190,6 +232,8 @@ public class ActionImpl extends WorkflowModelElementImpl implements Action {
 				return getExpression();
 			case WorkflowPackage.ACTION__SCRIPT:
 				return getScript();
+			case WorkflowPackage.ACTION__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -213,6 +257,9 @@ public class ActionImpl extends WorkflowModelElementImpl implements Action {
 				getScript().clear();
 				getScript().addAll((Collection<? extends Script>)newValue);
 				return;
+			case WorkflowPackage.ACTION__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -234,6 +281,9 @@ public class ActionImpl extends WorkflowModelElementImpl implements Action {
 			case WorkflowPackage.ACTION__SCRIPT:
 				getScript().clear();
 				return;
+			case WorkflowPackage.ACTION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -252,6 +302,8 @@ public class ActionImpl extends WorkflowModelElementImpl implements Action {
 				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
 			case WorkflowPackage.ACTION__SCRIPT:
 				return script != null && !script.isEmpty();
+			case WorkflowPackage.ACTION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -270,6 +322,8 @@ public class ActionImpl extends WorkflowModelElementImpl implements Action {
 		result.append(javaClass);
 		result.append(", expression: ");
 		result.append(expression);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

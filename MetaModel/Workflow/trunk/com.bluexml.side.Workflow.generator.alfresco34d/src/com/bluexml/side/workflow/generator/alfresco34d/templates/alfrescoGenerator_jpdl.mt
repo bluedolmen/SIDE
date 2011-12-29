@@ -28,35 +28,18 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 
 <process-definition name="wfbx<%name%>:<%name%>">
 <%for (swimlane) {%>
+<%if (metainfo[key.equalsIgnoreCase("jbpm.generate.as.assignment")].nSize() == 0){%>
   	<swimlane name="<%name%>">
-  		<%if (current("Process").startstate.initiator != current() || name.toLowerCase() != "initiator") {%>
-  			<%if (actorid != null){%>
-  				<%if (actorid.startsWith("#{")){%>
-  			<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
-				<actor><%actorid%></actor>
-			</assignment>
-  				<%}else{%>
-  			<assignment actor-id="<%actorid%>"/>
-  				<%}%>
-  			<%}%>
-  			
-  			<%if (pooledactors != null){%>
-	  			<%if (pooledactors.startsWith("#{")){%>
-	  		<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
-  				<pooledactors><%pooledactors%></pooledactors>
-        	</assignment>
-	  			<%}else{%>
-	  		<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
-  				<pooledactors>#{people.getGroup('GROUP_<%pooledactors%>')}</pooledactors>
-        	</assignment>	
-	  			<%}%>  			
-  			<%}%>
-  		<%}%>
+  		<%generateAssignment()%>
   	</swimlane>
+<%}%>
 <%}%>
 <%for (startstate){%>
 	  <start-state name="<%name%>">
-	  	<task name="<%getDataTypeQName()%>" swimlane="<%initiator.name%>">
+	  	<task name="<%getDataTypeQName()%>"<%if (initiator.metainfo[key.equalsIgnoreCase("jbpm.generate.as.assignment")].nSize() == 0){%> swimlane="<%initiator.name%>"<%}%>>
+	  	<%if (initiator.metainfo[key.equalsIgnoreCase("jbpm.generate.as.assignment")].nSize() == 1){%>
+	  	<%initiator.generateAssignment()%>
+	  	<%}%>
 			<%for (event){%>
 			<event type="<%type%>">
 				<%for (action){%>
@@ -64,22 +47,27 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 				<%}%>
 			</event>
 			<%}%>
-	  	</task>	  	
+		<%generate_transition_timers()%>
+	  	</task>
 	  	<%generate_transition()%>
 	  </start-state>
 <%}%>
 <%for (tasknode){%>
 	<task-node name="<%name%>">
-		<task name="<%getDataTypeQName()%>" swimlane="<%swimlane.name%>">
-		<%for (event){%>
-		<event type="<%type%>">
-			<%for (action){%>
-			<%generate_action()%>
+		<task name="<%getDataTypeQName()%>"<%if (swimlane.metainfo[key.equalsIgnoreCase("jbpm.generate.as.assignment")].nSize() == 0){%> swimlane="<%swimlane.name%>"<%}%>>
+	  	<%if (swimlane.metainfo[key.equalsIgnoreCase("jbpm.generate.as.assignment")].nSize() == 1){%>
+	  	<%swimlane.generateAssignment()%>
+	  	<%}%>
+			<%for (event){%>
+			<event type="<%type%>">
+				<%for (action){%>
+				<%generate_action()%>
+				<%}%>
+			</event>
 			<%}%>
-		</event>
-		<%}%>
+		<%generate_transition_timers()%>
 		</task>
-	<%generate_transition()%>	
+	<%generate_transition()%>
 	</task-node>
 <%}%>
 <%for (node){%>
@@ -91,22 +79,22 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 			<%}%>
 		</event>
 		<%}%>
-	  	<%generate_transition()%>
+	  	<%generate_transition_and_timer()%>
 	</node>
 <%}%>
 <%for (join){%>
 	<join name="<%name%>">
-		<%generate_transition()%>
+		<%generate_transition_and_timer()%>
 	</join>
 <%}%>
 <%for (fork){%>
 	<fork name="<%name%>">
-		<%generate_transition()%>
+		<%generate_transition_and_timer()%>
 	</fork>
 <%}%>
 <%for (decision){%>
 	<decision name="<%name%>">
-		<%generate_transition()%>
+		<%generate_transition_and_timer()%>
 	</decision>
 <%}%>
 <%for (processstate){%>
@@ -116,7 +104,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 		<%for (variable){%>
 		<variable name="<%name%>" access="<%access%>" mapped-name="<%mappedName%>" />
 		<%}%>		
-		<%generate_transition()%>		
+		<%generate_transition_and_timer()%>		
 	</process-state>
 <%}%>
 <%for (endstate){%>
@@ -133,9 +121,11 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 </process-definition>
 
 
-<%script type="TransitionTask" name="generate_transition"%>
+<%script type="TransitionTask" name="generate_transition_and_timer"%>
 <%generate_transition_timers()%>
+<%generate_transition()%>
 
+<%script type="TransitionTask" name="generate_transition"%>
 <%for (transition.sort("condition").nReverse()){%>
 <transition name="<%name%>" to="<%to.name%>">
 	<%for (action) {%>
@@ -143,18 +133,38 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 	<%}%>
   	<%if (condition != null && condition.length()>0){%>
   	<condition><%condition%></condition>
-  	<%}%>
-  	<%for (timer){%>
-  	<create-timer name="<%current("Transition").name%>_timer_<%i()%>" >
-	</create-timer>
-  	<%}%>
+  	<%}%>  	
 </transition>
+<%}%>
+
+<%script type="Swimlane" name="generateAssignment"%>
+<%if (current("Process").startstate.initiator != current() || name.toLowerCase() != "initiator") {%>
+	<%if (actorid != null){%>
+		<%if (actorid.startsWith("#{")){%>
+	<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
+		<actor><%actorid%></actor>
+	</assignment>
+  		<%}else{%>
+  	<assignment actor-id="<%actorid%>"/>
+  		<%}%>
+  	<%}%>  			
+  	<%if (pooledactors != null){%>
+  		<%if (pooledactors.startsWith("#{")){%>
+	<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
+		<pooledactors><%pooledactors%></pooledactors>
+	</assignment>
+  		<%}else{%>
+	<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
+		<pooledactors>#{people.getGroup('GROUP_<%pooledactors%>')}</pooledactors>
+    </assignment>	
+  		<%}%>  			
+  	<%}%>
 <%}%>
 
 <%script type="TransitionTask" name="generate_transition_timers"%>
 <%for (transition){%>
 <%for (timer){%>
-<timer name="<%current("Transition").name%>_timer_<%i()%>" duedate="<%duedate%>" transition="<%current("Transition").name%>">
+<timer name="<%if (name != null && name != "") {%><%name%><%}else{%><%current("Transition").name%>_timer_<%i()%><%}%>" duedate="<%duedate%>" transition="<%current("Transition").name%>">
 <%generate_action()%>
 </timer>
 <%}%>

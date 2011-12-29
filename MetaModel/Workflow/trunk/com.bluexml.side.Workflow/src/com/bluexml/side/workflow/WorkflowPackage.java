@@ -2294,13 +2294,22 @@ public interface WorkflowPackage extends EPackage {
 	int ACTION__SCRIPT = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__NAME = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Action</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FEATURE_COUNT = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int ACTION_FEATURE_COUNT = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ScriptImpl <em>Script</em>}' class.
@@ -2447,6 +2456,15 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIMER__SCRIPT = ACTION__SCRIPT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMER__NAME = ACTION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Duedate</b></em>' attribute.
@@ -3423,6 +3441,17 @@ public interface WorkflowPackage extends EPackage {
 	EReference getAction_Script();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Action#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.bluexml.side.workflow.Action#getName()
+	 * @see #getAction()
+	 * @generated
+	 */
+	EAttribute getAction_Name();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Script <em>Script</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4171,6 +4200,14 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTION__SCRIPT = eINSTANCE.getAction_Script();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION__NAME = eINSTANCE.getAction_Name();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.ScriptImpl <em>Script</em>}' class.

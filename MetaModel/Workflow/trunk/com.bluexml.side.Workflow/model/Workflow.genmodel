@@ -84,6 +84,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Action/javaClass"/>
       <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute Workflow.ecore#//Action/expression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Action/script"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Action/name"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Script">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Script/variable"/>

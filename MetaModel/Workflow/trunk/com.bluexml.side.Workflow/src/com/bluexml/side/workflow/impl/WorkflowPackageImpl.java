@@ -703,6 +703,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAction_Name() {
+		return (EAttribute)actionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getScript() {
 		return scriptEClass;
 	}
@@ -1064,6 +1073,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		createEAttribute(actionEClass, ACTION__JAVA_CLASS);
 		createEAttribute(actionEClass, ACTION__EXPRESSION);
 		createEReference(actionEClass, ACTION__SCRIPT);
+		createEAttribute(actionEClass, ACTION__NAME);
 
 		scriptEClass = createEClass(SCRIPT);
 		createEReference(scriptEClass, SCRIPT__VARIABLE);
@@ -1222,6 +1232,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEAttribute(getAction_JavaClass(), ecorePackage.getEString(), "javaClass", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getAction_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getAction_Script(), this.getScript(), null, "script", null, 0, -1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getAction_Name(), ecorePackage.getEString(), "name", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scriptEClass, Script.class, "Script", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScript_Variable(), this.getVariable(), null, "variable", null, 0, -1, Script.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
