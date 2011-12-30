@@ -225,7 +225,6 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 		scriptButton.setSelection(script);
 		scriptButton.addSelectionListener(new SelectionListener() {
 
-			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (scriptButton.getSelection()) {
 					script = true;
@@ -240,7 +239,6 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 
 			}
 
-			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
 
