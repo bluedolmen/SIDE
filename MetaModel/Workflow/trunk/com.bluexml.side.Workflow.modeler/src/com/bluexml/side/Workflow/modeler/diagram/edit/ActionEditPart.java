@@ -14,6 +14,7 @@
  ******************************************************************************/
 package com.bluexml.side.Workflow.modeler.diagram.edit;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -67,22 +68,17 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(WfEditPolicyConstants.ACTIONS_EDITPOLICY,
-				new actionsEdgeCreationEditPolicy());
+		installEditPolicy(WfEditPolicyConstants.ACTIONS_EDITPOLICY, new actionsEdgeCreationEditPolicy());
 
-		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
-				new RestoreEditPolicy() {
-					protected Command getRestoreConnectionsCommand(
-							RestoreConnectionsRequest request) {
-						return new ActionRestoreConnectionCommand(getHost());
-					}
-				});
+		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY, new RestoreEditPolicy() {
+			protected Command getRestoreConnectionsCommand(RestoreConnectionsRequest request) {
+				return new ActionRestoreConnectionCommand(getHost());
+			}
+		});
 
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				new ResizableEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY, new ResizableEditPolicy());
 
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
 	}
 
 	/**
@@ -99,8 +95,7 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.ACTION_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore().getString(WfDiagramPreferenceConstants.ACTION_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -112,8 +107,7 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.ACTION_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore().getString(WfDiagramPreferenceConstants.ACTION_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -125,8 +119,7 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.ACTION_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(WfDiagramPreferenceConstants.ACTION_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -139,11 +132,9 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			Action action = (Action) Utils.getElement(getGraphNode());
 
-			ActionEditDialog dlg = new ActionEditDialog(action, ModelerPlugin
-					.getActiveWorkbenchShell());
+			ActionEditDialog dlg = new ActionEditDialog(action, ModelerPlugin.getActiveWorkbenchShell());
 			if (dlg.open() == Window.OK) {
-				ActionUpdateCommand command = new ActionUpdateCommand(action,
-						dlg.getData());
+				ActionUpdateCommand command = new ActionUpdateCommand(action, dlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();
 			}
@@ -156,9 +147,12 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	@Override
 	protected void refreshHeaderLabel() {
 		Action action = (Action) Utils.getElement(getGraphNode());
-		if (action.getScript().size() > 0)
+		if (StringUtils.trimToNull(action.getExpression()) != null) {
+			getLabel().setText(action.getExpression());
+		} else if (action.getScript().size() > 0) {
 			getLabel().setText(action.getScript().get(0).getExpression());
-		else
+		} else {
 			super.refreshHeaderLabel();
+		}
 	}
 }

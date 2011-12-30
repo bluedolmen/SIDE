@@ -16,9 +16,12 @@
  ******************************************************************************/
 package com.bluexml.side.Workflow.modeler.diagram.dialogs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.Dialog;
@@ -27,6 +30,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -48,9 +52,11 @@ import com.bluexml.side.workflow.Script;
  * Updating task parameters
  */
 public class ActionEditDialog extends Dialog implements IDialogConstants {
-	
+
 	public static final String ACTION_SCRIPT = "action script";
-	
+
+	public static final String ACTION_SCRIPT_TXT = "action script txt";
+
 	public static final String ACTION_JAVA_CLASS = "action java class";
 
 	public static final String ACTION_VARIABLE = "action variables";
@@ -59,17 +65,30 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 
 	private static final int MIN_DIALOG_HEIGHT = 300;
 
-
 	private VariableViewer inputParameters;
-	
+
 	/** Current edited property */
 	private Action action;
 
 	protected HashMap<String, Object> data;
 
+	TabFolder tabFolder;
+
+	TabItem secondItem;
+
 	private Text scriptTxt;
-	
+
 	private Combo javaClass;
+
+	private List<String> defaultsJavaClasses = new ArrayList<String>();
+
+	private Button scriptButton;
+
+	boolean script = true;
+
+	String expression = null;
+
+	String javaClassTxt = null;
 
 	/**
 	 * Create the dialog for a given task
@@ -79,6 +98,10 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 		setBlockOnOpen(true);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 		this.action = action;
+
+		defaultsJavaClasses.add("org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
+
+		loadData();
 	}
 
 	/**
@@ -86,6 +109,7 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 	 * 
 	 * @see org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets.Shell)
 	 */
+	@Override
 	protected void configureShell(Shell newShell) {
 		newShell.setText("Action");
 		newShell.setMinimumSize(MIN_DIALOG_WIDTH, MIN_DIALOG_HEIGHT);
@@ -98,6 +122,7 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 	 * 
 	 * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected Control createDialogArea(Composite parent) {
 		// Dialog
 		Composite dialogComposite = (Composite) super.createDialogArea(parent);
@@ -107,8 +132,6 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 		dialogComposite.setLayoutData(dialogLayoutData);
 
 		createTaskGroup(dialogComposite);
-
-		loadData();
 
 		return dialogComposite;
 	}
@@ -120,16 +143,18 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 	 *            the parent Composite
 	 */
 	protected void createTaskGroup(Composite parent) {
-		TabFolder tabFolder = new TabFolder(parent, SWT.TOP);
+		tabFolder = new TabFolder(parent, SWT.TOP);
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		createScriptTab(tabFolder);
-		createAttributesTabItem(tabFolder);
+		if (script) {
+			createAttributesTabItem(tabFolder);
+		}
 	}
-	
+
 	private void createAttributesTabItem(TabFolder parent) {
-		TabItem secondItem = new TabItem(parent, SWT.NONE);
-		secondItem.setText("Variables");
+		secondItem = new TabItem(parent, SWT.NONE);
+		secondItem.setText("Script Variables");
 		Composite composite = new Composite(parent, SWT.NONE);
 		secondItem.setControl(composite);
 
@@ -140,24 +165,23 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 		new Label(composite, SWT.NONE).setText("Input parameters");
 
 		Script s = null;
-		if (action.getScript().size() > 0)
+		if (action.getScript().size() > 0) {
 			s = action.getScript().get(0);
-		
-		if (s != null)
-			inputParameters = new VariableViewer(composite,
-				new VariableDataStructure(s.getVariable()), false);
-		else
-			inputParameters = new VariableViewer(composite,
-					new VariableDataStructure(), false);
+		}
+		if (s != null) {
+			inputParameters = new VariableViewer(composite, new VariableDataStructure(s.getVariable()), false);
+		} else {
+			inputParameters = new VariableViewer(composite, new VariableDataStructure(), false);
+		}
 
 		Button add = new Button(composite, SWT.PUSH | SWT.CENTER);
 		add.setText("Add");
 
-		GridData gd = new GridData(GridData.GRAB_HORIZONTAL
-				| GridData.HORIZONTAL_ALIGN_END);
+		GridData gd = new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_END);
 		gd.widthHint = 80;
 		add.setLayoutData(gd);
 		add.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				inputParameters.addParameter();
 			}
@@ -165,12 +189,12 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 
 		Button delete = new Button(composite, SWT.PUSH | SWT.CENTER);
 		delete.setText("Delete");
-		gd = new GridData(GridData.GRAB_HORIZONTAL
-				| GridData.HORIZONTAL_ALIGN_BEGINNING);
+		gd = new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_BEGINNING);
 		gd.widthHint = 80;
 		delete.setLayoutData(gd);
 
 		delete.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				inputParameters.removeParameter();
 			}
@@ -179,26 +203,56 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 
 	protected TabItem createScriptTab(TabFolder parent) {
 		// Create tab item and add it composite that fills it
-		TabItem scriptItem = new TabItem((TabFolder) parent, SWT.NONE);
-		scriptItem.setText("Script");
+		final TabItem scriptItem = new TabItem(parent, SWT.NONE);
+		scriptItem.setText("General");
 		Composite composite = new Composite(parent, SWT.NONE);
 		scriptItem.setControl(composite);
 
 		composite.setLayout(new GridLayout(1, false));
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		if (inEnterpriseVersion()) {
 			javaClass = new Combo(composite, SWT.NULL);
-			javaClass.setItems(new String[] { "org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript" });
+
+			javaClass.setItems(defaultsJavaClasses.toArray(new String[] {}));
+			javaClass.setText(javaClassTxt);
+
 		}
 
-		scriptTxt = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL
-				| SWT.BORDER);
+		scriptButton = new Button(composite, SWT.CHECK);
+		scriptButton.setText("script ?");
+		scriptButton.setSelection(script);
+		scriptButton.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (scriptButton.getSelection()) {
+					script = true;
+					createAttributesTabItem(tabFolder);
+				} else {
+					script = false;
+					if (secondItem != null) {
+						secondItem.dispose();
+						secondItem = null;
+					}
+				}
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		scriptTxt = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
 		scriptTxt.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
+		if (StringUtils.trimToNull(expression) != null) {
+			scriptTxt.setText(expression);
+		}
 		return scriptItem;
 	}
-	
+
 	private boolean inEnterpriseVersion() {
 		Bundle b = Platform.getBundle("com.bluexml.side.Integration.eclipse.builder");
 		return (b != null);
@@ -208,16 +262,28 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 	 * Initialize the content of the widgets
 	 */
 	protected void loadData() {
-		Script s = null;
-		if (action.getScript().size() > 0)
-			s = action.getScript().get(0);
-		if (s != null && s.getExpression() != null)
-			scriptTxt.setText(s.getExpression());
-		if (inEnterpriseVersion()) {
-			javaClass.setText("org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
-			if (action.getJavaClass() != null && action.getJavaClass().length() > 0)
-				javaClass.setText(action.getJavaClass().replaceAll("\"", ""));
+
+		String expression = action.getExpression();
+		if (StringUtils.trimToNull(expression) == null) {
+			Script s = null;
+			if (action.getScript().size() > 0) {
+				s = action.getScript().get(0);
+			}
+			if (s != null && s.getExpression() != null) {
+				this.expression = s.getExpression();
+			}
+
+		} else {
+			this.expression = expression;
+			script = false;
 		}
+		if (inEnterpriseVersion()) {
+			javaClassTxt = defaultsJavaClasses.get(0);
+			if (action.getJavaClass() != null && action.getJavaClass().length() > 0) {
+				javaClassTxt = action.getJavaClass().replaceAll("\"", "");
+			}
+		}
+
 	}
 
 	/**
@@ -225,21 +291,25 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 	 * 
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
+	@Override
 	protected void okPressed() {
-		data = new HashMap<String,Object>();
+		data = new HashMap<String, Object>();
 		try {
-			data.put(ACTION_SCRIPT, scriptTxt.getText());
-			if (inEnterpriseVersion())
+
+			data.put(ACTION_SCRIPT_TXT, scriptTxt.getText());
+			if (inEnterpriseVersion()) {
 				data.put(ACTION_JAVA_CLASS, javaClass.getText());
-			else
-				data.put(ACTION_JAVA_CLASS, "org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
-			data.put(ACTION_VARIABLE, inputParameters.getData());
+			} else {
+				data.put(ACTION_JAVA_CLASS, defaultsJavaClasses.get(0));
+			}
+			data.put(ACTION_SCRIPT, script);
+			if (script) {
+				data.put(ACTION_VARIABLE, inputParameters.getData());
+			}
 			super.okPressed();
 		} catch (Exception e) {
 			WorkflowPlugin.log("Required fields", IStatus.WARNING);
-			MessageDialog
-					.openWarning(getShell(), "Required parameters",
-							"Some parameters are not set.\nPlease, fill those fields before validating.");
+			MessageDialog.openWarning(getShell(), "Required parameters", "Some parameters are not set.\nPlease, fill those fields before validating.");
 		}
 	}
 
@@ -248,7 +318,7 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 	 * 
 	 * @return a Map
 	 */
-	public Map<String,Object> getData() {
+	public Map<String, Object> getData() {
 		return data;
 	}
 

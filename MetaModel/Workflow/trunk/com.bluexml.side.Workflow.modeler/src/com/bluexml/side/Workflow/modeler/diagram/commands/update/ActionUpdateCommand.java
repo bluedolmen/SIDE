@@ -41,13 +41,13 @@ public class ActionUpdateCommand extends Command {
 
 	/** Map containing new association data */
 	protected Map<String, Object> newAssociationData;
-	
+
 	/**
 	 * Create a command for updating parameters on a given task
 	 */
-	public ActionUpdateCommand(Action action, Map<String,Object> data) {
+	public ActionUpdateCommand(Action action, Map<String, Object> data) {
 		this.action = action;
-		this.newAssociationData = data;
+		newAssociationData = data;
 	}
 
 	/**
@@ -55,6 +55,7 @@ public class ActionUpdateCommand extends Command {
 	 * 
 	 * @see org.eclipse.gef.commands.Command#execute()
 	 */
+	@Override
 	public void execute() {
 		redo();
 	}
@@ -64,30 +65,38 @@ public class ActionUpdateCommand extends Command {
 	 * 
 	 * @see org.eclipse.gef.commands.Command#redo()
 	 */
+	@Override
 	public void redo() {
-		Script s = null;
-		if (action.getScript().size() == 0)
-			action.getScript().add(WorkflowFactory.eINSTANCE.createScript());
-		s = action.getScript().get(0);
-		s.setExpression((String) newAssociationData
-				.get(ActionEditDialog.ACTION_SCRIPT));
-		action.setJavaClass((String) newAssociationData
-				.get(ActionEditDialog.ACTION_JAVA_CLASS));
-		
-		// Perform update for variable
-		VariableDataStructure variables = (VariableDataStructure) newAssociationData.get(ActionEditDialog.ACTION_VARIABLE);
-		List<Object> newVariables = new ArrayList<Object>();
-		Iterator<Object> iterator = (Iterator<Object>) variables.getData().iterator();
-		while (iterator.hasNext()) {
-			Object object = iterator.next();
-			String name = variables.getDisplayName(object);
-			String access = variables.getDisplayAccess(object);
-			Variable var = WorkflowFactory.eINSTANCE.createVariable();
-			var.setName(name);
-			var.setAccess(access);
-			newVariables.add(var);
+		boolean script = (Boolean) newAssociationData.get(ActionEditDialog.ACTION_SCRIPT);
+		if (script) {
+			Script s = null;
+			if (action.getScript().size() == 0) {
+				action.getScript().add(WorkflowFactory.eINSTANCE.createScript());
+			}
+			s = action.getScript().get(0);
+			s.setExpression((String) newAssociationData.get(ActionEditDialog.ACTION_SCRIPT_TXT));
+			// Perform update for variable
+			VariableDataStructure variables = (VariableDataStructure) newAssociationData.get(ActionEditDialog.ACTION_VARIABLE);
+			List<Object> newVariables = new ArrayList<Object>();
+			Iterator<Object> iterator = (Iterator<Object>) variables.getData().iterator();
+			while (iterator.hasNext()) {
+				Object object = iterator.next();
+				String name = variables.getDisplayName(object);
+				String access = variables.getDisplayAccess(object);
+				Variable var = WorkflowFactory.eINSTANCE.createVariable();
+				var.setName(name);
+				var.setAccess(access);
+				newVariables.add(var);
+			}
+			s.getVariable().clear();
+			s.getVariable().addAll((Collection<? extends Variable>) newVariables);
+			action.setExpression(null);
+		} else {
+			action.setExpression((String) newAssociationData.get(ActionEditDialog.ACTION_SCRIPT_TXT));
+			action.getScript().clear();
 		}
-		s.getVariable().clear();
-		s.getVariable().addAll((Collection<? extends Variable>) newVariables);
+
+		action.setJavaClass((String) newAssociationData.get(ActionEditDialog.ACTION_JAVA_CLASS));
+
 	}
 }
