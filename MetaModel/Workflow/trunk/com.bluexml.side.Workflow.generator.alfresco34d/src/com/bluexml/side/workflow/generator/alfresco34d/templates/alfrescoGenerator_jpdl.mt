@@ -171,8 +171,9 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%}%>
 
 <%script type="Action" name="generate_action"%>
-<%if (javaClass != null && javaClass != "") {%>
+<%if (javaClass != null && javaClass != "" && javaClass != "org.jboss.beanshell") {%>
 <action class="<%javaClass.replaceAll("\"","")%>">
+<%}%>
 <%if (expression != null && expression != ""){%>
 <%expression%>
 <%}else{%>
@@ -187,6 +188,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 	</script>
 <%}%>
 <%}%>
+<%if (javaClass != null && javaClass != "" && javaClass != "org.jboss.beanshell") {%>
 </action>
 <%}%>
 <%script type="UserTask" name="getDataTypeQName" post="trim()" %>
