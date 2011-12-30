@@ -71,14 +71,17 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 	</task-node>
 <%}%>
 <%for (node){%>
-	<node name="<%name%>">
-		<%for (event){%>
+	<node name="<%name%>">	
+	<%for (action){%>
+		<%generate_action()%>
+	<%}%>
+	<%for (event){%>
 		<event type="<%type%>">
-			<%for (action){%>
+		<%for (action){%>
 			<%generate_action()%>
-			<%}%>
-		</event>
 		<%}%>
+		</event>
+	<%}%>
 	  	<%generate_transition_and_timer()%>
 	</node>
 <%}%>
