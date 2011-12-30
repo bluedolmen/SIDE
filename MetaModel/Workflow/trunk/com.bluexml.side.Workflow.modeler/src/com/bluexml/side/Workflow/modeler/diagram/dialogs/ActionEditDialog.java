@@ -100,6 +100,7 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 		this.action = action;
 
 		defaultsJavaClasses.add("org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
+		defaultsJavaClasses.add("org.jboss.beanshell");
 
 		loadData();
 	}
