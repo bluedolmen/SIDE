@@ -14,8 +14,10 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%script type="Page" name="alfrescoGenerator" file="<%createTemplates%>" post="trim()"%>
 <%ID.toLowerCase().nPut("templates_name")%>
 <%parent().name.nPut("site_name")%>
-<%if (metainfo[key == "rawJsFilePath"]){%>
-<%getFileContent(metainfo[key == "rawJsFilePath"].value)%>
+<%if (metainfo[key == "rawContentJsFilePath"]){%>
+<%getFileContent(metainfo[key == "rawContentJsFilePath"].value)%>
+<%}else if (metainfo[key == "rawContentJs"]){%>
+<%metainfo[key == "rawContentJs"]%>
 <%}else{%>
 script: {
 	var connector = remote.connect("alfresco");
